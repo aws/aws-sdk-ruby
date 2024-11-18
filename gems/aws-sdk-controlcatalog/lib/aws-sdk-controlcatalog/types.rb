@@ -124,6 +124,53 @@ module Aws::ControlCatalog
       include Aws::Structure
     end
 
+    # Four types of control parameters are supported.
+    #
+    # * **AllowedRegions**: List of Amazon Web Services Regions exempted
+    #   from the control. Each string is expected to be an Amazon Web
+    #   Services Region code. This parameter is mandatory for the **OU
+    #   Region deny** control, **CT.MULTISERVICE.PV.1**.
+    #
+    #   Example: `["us-east-1","us-west-2"]`
+    #
+    # * **ExemptedActions**: List of Amazon Web Services IAM actions
+    #   exempted from the control. Each string is expected to be an IAM
+    #   action.
+    #
+    #   Example:
+    #   `["logs:DescribeLogGroups","logs:StartQuery","logs:GetQueryResults"]`
+    #
+    # * **ExemptedPrincipalArns**: List of Amazon Web Services IAM principal
+    #   ARNs exempted from the control. Each string is expected to be an IAM
+    #   principal that follows the pattern
+    #   `^arn:(aws|aws-us-gov):(iam|sts)::.+:.+$`
+    #
+    #   Example:
+    #   `["arn:aws:iam::*:role/ReadOnly","arn:aws:sts::*:assumed-role/ReadOnly/*"]`
+    #
+    # * **ExemptedResourceArns**: List of resource ARNs exempted from the
+    #   control. Each string is expected to be a resource ARN.
+    #
+    #   Example: `["arn:aws:s3:::my-bucket-name"]`
+    #
+    # @!attribute [rw] name
+    #   The parameter name. This name is the parameter `key` when you call [
+    #   `EnableControl` ][1] or [ `UpdateEnabledControl` ][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_EnableControl.html
+    #   [2]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_UpdateEnabledControl.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controlcatalog-2018-05-10/ControlParameter AWS API Documentation
+    #
+    class ControlParameter < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Overview of information about a control.
     #
     # @!attribute [rw] arn
@@ -203,11 +250,11 @@ module Aws::ControlCatalog
     #
     #   *Global format*
     #
-    #   `arn:\{PARTITION\}:controlcatalog:::control/\{CONTROL_CATALOG_OPAQUE_ID\}`
+    #   `arn:{PARTITION}:controlcatalog:::control/{CONTROL_CATALOG_OPAQUE_ID}`
     #
     #   *Or Regional format*
     #
-    #   `arn:\{PARTITION\}:controltower:\{REGION\}::control/\{CONTROL_TOWER_OPAQUE_ID\}`
+    #   `arn:{PARTITION}:controltower:{REGION}::control/{CONTROL_TOWER_OPAQUE_ID}`
     #
     #   Here is a more general pattern that covers Amazon Web Services
     #   Control Tower and Control Catalog ARNs:
@@ -237,13 +284,14 @@ module Aws::ControlCatalog
     #
     # @!attribute [rw] behavior
     #   A term that identifies the control's functional behavior. One of
-    #   `Preventive`, `Deteictive`, `Proactive`
+    #   `Preventive`, `Detective`, `Proactive`
     #   @return [String]
     #
     # @!attribute [rw] region_configuration
     #   Returns information about the control, including the scope of the
     #   control, if enabled, and the Regions in which the control currently
-    #   is available for deployment.
+    #   is available for deployment. For more information about scope, see
+    #   [Global services][1].
     #
     #   If you are applying controls through an Amazon Web Services Control
     #   Tower landing zone environment, remember that the values returned in
@@ -255,7 +303,22 @@ module Aws::ControlCatalog
     #   `REGIONAL` scope, even though you may not intend to deploy the
     #   control in Region `D`, because you do not govern it through your
     #   landing zone.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/global-services.html
     #   @return [Types::RegionConfiguration]
+    #
+    # @!attribute [rw] implementation
+    #   Returns information about the control, as an `ImplementationDetails`
+    #   object that shows the underlying implementation type for a control.
+    #   @return [Types::ImplementationDetails]
+    #
+    # @!attribute [rw] parameters
+    #   Returns an array of `ControlParameter` objects that specify the
+    #   parameters a control supports. An empty list is returned for
+    #   controls that don’t support parameters.
+    #   @return [Array<Types::ControlParameter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controlcatalog-2018-05-10/GetControlResponse AWS API Documentation
     #
@@ -264,7 +327,49 @@ module Aws::ControlCatalog
       :name,
       :description,
       :behavior,
-      :region_configuration)
+      :region_configuration,
+      :implementation,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that describes the implementation type for a control.
+    #
+    # Our `ImplementationDetails` `Type` format has three required segments:
+    #
+    # * `SERVICE-PROVIDER::SERVICE-NAME::RESOURCE-NAME`
+    #
+    # ^
+    #
+    # For example, `AWS::Config::ConfigRule` **or**
+    # `AWS::SecurityHub::SecurityControl` resources have the format with
+    # three required segments.
+    #
+    # Our `ImplementationDetails` `Type` format has an optional fourth
+    # segment, which is present for applicable implementation types. The
+    # format is as follows:
+    #
+    # * `SERVICE-PROVIDER::SERVICE-NAME::RESOURCE-NAME::RESOURCE-TYPE-DESCRIPTION`
+    #
+    # ^
+    #
+    # For example, `AWS::Organizations::Policy::SERVICE_CONTROL_POLICY`
+    # **or** `AWS::CloudFormation::Type::HOOK` have the format with four
+    # segments.
+    #
+    # Although the format is similar, the values for the `Type` field do not
+    # match any Amazon Web Services CloudFormation values, and we do not use
+    # CloudFormation to implement these controls.
+    #
+    # @!attribute [rw] type
+    #   A string that describes a control's implementation type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controlcatalog-2018-05-10/ImplementationDetails AWS API Documentation
+    #
+    class ImplementationDetails < Struct.new(
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -512,7 +617,8 @@ module Aws::ControlCatalog
 
     # Returns information about the control, including the scope of the
     # control, if enabled, and the Regions in which the control currently is
-    # available for deployment.
+    # available for deployment. For more information about scope, see
+    # [Global services][1].
     #
     # If you are applying controls through an Amazon Web Services Control
     # Tower landing zone environment, remember that the values returned in
@@ -523,6 +629,10 @@ module Aws::ControlCatalog
     # `DeployableRegions` of `A`, `B`, `C`, and `D` for a control with
     # `REGIONAL` scope, even though you may not intend to deploy the control
     # in Region `D`, because you do not govern it through your landing zone.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/global-services.html
     #
     # @!attribute [rw] scope
     #   The coverage of the control, if deployed. Scope is an enumerated

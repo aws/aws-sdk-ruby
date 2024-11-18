@@ -697,7 +697,7 @@ module Aws::PaymentCryptography
       :wrapped_key_cryptogram,
       :import_token,
       :wrapping_spec)
-      SENSITIVE = []
+      SENSITIVE = [:wrapped_key_cryptogram]
       include Aws::Structure
     end
 
@@ -890,7 +890,7 @@ module Aws::PaymentCryptography
       :wrapped_key_block,
       :key_block_format,
       :random_nonce)
-      SENSITIVE = [:signing_key_certificate]
+      SENSITIVE = [:signing_key_certificate, :wrapped_key_block]
       include Aws::Structure
     end
 
@@ -1219,6 +1219,10 @@ module Aws::PaymentCryptography
       include Aws::Structure
     end
 
+    # @!attribute [rw] key_arn
+    #   The `keyARN` for which you want to list all aliases.
+    #   @return [String]
+    #
     # @!attribute [rw] next_token
     #   Use this parameter in a subsequent request after you receive a
     #   response with truncated results. Set it to the value of `NextToken`
@@ -1239,6 +1243,7 @@ module Aws::PaymentCryptography
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ListAliasesInput AWS API Documentation
     #
     class ListAliasesInput < Struct.new(
+      :key_arn,
       :next_token,
       :max_results)
       SENSITIVE = []

@@ -37,8 +37,30 @@ module Aws::Outposts
       SENSITIVE: []
     end
 
+    class AssetInstance
+      attr_accessor instance_id: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor asset_id: ::String
+      attr_accessor account_id: ::String
+      attr_accessor aws_service_name: ("AWS" | "EC2" | "ELASTICACHE" | "ELB" | "RDS" | "ROUTE53")
+      SENSITIVE: []
+    end
+
+    class AssetInstanceTypeCapacity
+      attr_accessor instance_type: ::String
+      attr_accessor count: ::Integer
+      SENSITIVE: []
+    end
+
     class AssetLocation
       attr_accessor rack_elevation: ::Float
+      SENSITIVE: []
+    end
+
+    class BlockingInstance
+      attr_accessor instance_id: ::String
+      attr_accessor account_id: ::String
+      attr_accessor aws_service_name: ("AWS" | "EC2" | "ELASTICACHE" | "ELB" | "RDS" | "ROUTE53")
       SENSITIVE: []
     end
 
@@ -61,7 +83,7 @@ module Aws::Outposts
 
     class CapacityTaskFailure
       attr_accessor reason: ::String
-      attr_accessor type: ("UNSUPPORTED_CAPACITY_CONFIGURATION")
+      attr_accessor type: ("UNSUPPORTED_CAPACITY_CONFIGURATION" | "UNEXPECTED_ASSET_STATE" | "BLOCKING_INSTANCES_NOT_EVACUATED" | "INTERNAL_SERVER_ERROR" | "RESOURCE_NOT_FOUND")
       SENSITIVE: []
     end
 
@@ -69,7 +91,7 @@ module Aws::Outposts
       attr_accessor capacity_task_id: ::String
       attr_accessor outpost_id: ::String
       attr_accessor order_id: ::String
-      attr_accessor capacity_task_status: ("REQUESTED" | "IN_PROGRESS" | "FAILED" | "COMPLETED" | "CANCELLED")
+      attr_accessor capacity_task_status: ("REQUESTED" | "IN_PROGRESS" | "FAILED" | "COMPLETED" | "WAITING_FOR_EVACUATION" | "CANCELLATION_IN_PROGRESS" | "CANCELLED")
       attr_accessor creation_date: ::Time
       attr_accessor completion_date: ::Time
       attr_accessor last_modified_date: ::Time
@@ -91,6 +113,8 @@ module Aws::Outposts
       attr_accessor host_id: ::String
       attr_accessor state: ("ACTIVE" | "ISOLATED" | "RETIRING")
       attr_accessor instance_families: ::Array[::String]
+      attr_accessor instance_type_capacities: ::Array[Types::AssetInstanceTypeCapacity]
+      attr_accessor max_vcpus: ::Integer
       SENSITIVE: []
     end
 
@@ -115,7 +139,7 @@ module Aws::Outposts
       attr_accessor outpost_identifier: ::String
       attr_accessor line_items: ::Array[Types::LineItemRequest]
       attr_accessor payment_option: ("ALL_UPFRONT" | "NO_UPFRONT" | "PARTIAL_UPFRONT")
-      attr_accessor payment_term: ("THREE_YEARS" | "ONE_YEAR")
+      attr_accessor payment_term: ("THREE_YEARS" | "ONE_YEAR" | "FIVE_YEARS")
       SENSITIVE: []
     end
 
@@ -190,12 +214,14 @@ module Aws::Outposts
       attr_accessor outpost_id: ::String
       attr_accessor order_id: ::String
       attr_accessor requested_instance_pools: ::Array[Types::InstanceTypeCapacity]
+      attr_accessor instances_to_exclude: Types::InstancesToExclude
       attr_accessor dry_run: bool
-      attr_accessor capacity_task_status: ("REQUESTED" | "IN_PROGRESS" | "FAILED" | "COMPLETED" | "CANCELLED")
+      attr_accessor capacity_task_status: ("REQUESTED" | "IN_PROGRESS" | "FAILED" | "COMPLETED" | "WAITING_FOR_EVACUATION" | "CANCELLATION_IN_PROGRESS" | "CANCELLED")
       attr_accessor failed: Types::CapacityTaskFailure
       attr_accessor creation_date: ::Time
       attr_accessor completion_date: ::Time
       attr_accessor last_modified_date: ::Time
+      attr_accessor task_action_on_blocking_instances: ("WAIT_FOR_EVACUATION" | "FAIL_TASK")
       SENSITIVE: []
     end
 
@@ -304,6 +330,13 @@ module Aws::Outposts
       SENSITIVE: []
     end
 
+    class InstancesToExclude
+      attr_accessor instances: ::Array[::String]
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor services: ::Array[("AWS" | "EC2" | "ELASTICACHE" | "ELB" | "RDS" | "ROUTE53")]
+      SENSITIVE: []
+    end
+
     class InternalServerException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -333,6 +366,23 @@ module Aws::Outposts
       SENSITIVE: []
     end
 
+    class ListAssetInstancesInput
+      attr_accessor outpost_identifier: ::String
+      attr_accessor asset_id_filter: ::Array[::String]
+      attr_accessor instance_type_filter: ::Array[::String]
+      attr_accessor account_id_filter: ::Array[::String]
+      attr_accessor aws_service_filter: ::Array[("AWS" | "EC2" | "ELASTICACHE" | "ELB" | "RDS" | "ROUTE53")]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssetInstancesOutput
+      attr_accessor asset_instances: ::Array[Types::AssetInstance]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListAssetsInput
       attr_accessor outpost_identifier: ::String
       attr_accessor host_id_filter: ::Array[::String]
@@ -348,11 +398,25 @@ module Aws::Outposts
       SENSITIVE: []
     end
 
+    class ListBlockingInstancesForCapacityTaskInput
+      attr_accessor outpost_identifier: ::String
+      attr_accessor capacity_task_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBlockingInstancesForCapacityTaskOutput
+      attr_accessor blocking_instances: ::Array[Types::BlockingInstance]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListCapacityTasksInput
       attr_accessor outpost_identifier_filter: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
-      attr_accessor capacity_task_status_filter: ::Array[("REQUESTED" | "IN_PROGRESS" | "FAILED" | "COMPLETED" | "CANCELLED")]
+      attr_accessor capacity_task_status_filter: ::Array[("REQUESTED" | "IN_PROGRESS" | "FAILED" | "COMPLETED" | "WAITING_FOR_EVACUATION" | "CANCELLATION_IN_PROGRESS" | "CANCELLED")]
       SENSITIVE: []
     end
 
@@ -443,7 +507,7 @@ module Aws::Outposts
       attr_accessor payment_option: ("ALL_UPFRONT" | "NO_UPFRONT" | "PARTIAL_UPFRONT")
       attr_accessor order_submission_date: ::Time
       attr_accessor order_fulfilled_date: ::Time
-      attr_accessor payment_term: ("THREE_YEARS" | "ONE_YEAR")
+      attr_accessor payment_term: ("THREE_YEARS" | "ONE_YEAR" | "FIVE_YEARS")
       attr_accessor order_type: ("OUTPOST" | "REPLACEMENT")
       SENSITIVE: []
     end
@@ -518,7 +582,9 @@ module Aws::Outposts
       attr_accessor outpost_identifier: ::String
       attr_accessor order_id: ::String
       attr_accessor instance_pools: ::Array[Types::InstanceTypeCapacity]
+      attr_accessor instances_to_exclude: Types::InstancesToExclude
       attr_accessor dry_run: bool
+      attr_accessor task_action_on_blocking_instances: ("WAIT_FOR_EVACUATION" | "FAIL_TASK")
       SENSITIVE: []
     end
 
@@ -527,12 +593,14 @@ module Aws::Outposts
       attr_accessor outpost_id: ::String
       attr_accessor order_id: ::String
       attr_accessor requested_instance_pools: ::Array[Types::InstanceTypeCapacity]
+      attr_accessor instances_to_exclude: Types::InstancesToExclude
       attr_accessor dry_run: bool
-      attr_accessor capacity_task_status: ("REQUESTED" | "IN_PROGRESS" | "FAILED" | "COMPLETED" | "CANCELLED")
+      attr_accessor capacity_task_status: ("REQUESTED" | "IN_PROGRESS" | "FAILED" | "COMPLETED" | "WAITING_FOR_EVACUATION" | "CANCELLATION_IN_PROGRESS" | "CANCELLED")
       attr_accessor failed: Types::CapacityTaskFailure
       attr_accessor creation_date: ::Time
       attr_accessor completion_date: ::Time
       attr_accessor last_modified_date: ::Time
+      attr_accessor task_action_on_blocking_instances: ("WAIT_FOR_EVACUATION" | "FAIL_TASK")
       SENSITIVE: []
     end
 

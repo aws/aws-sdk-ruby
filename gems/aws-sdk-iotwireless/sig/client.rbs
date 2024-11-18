@@ -252,7 +252,8 @@ module Aws
                                ],
                                ?redundancy_percent: ::Integer,
                                ?fragment_size_bytes: ::Integer,
-                               ?fragment_interval_ms: ::Integer
+                               ?fragment_interval_ms: ::Integer,
+                               ?descriptor: ::String
                              ) -> _CreateFuotaTaskResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFuotaTaskResponseSuccess
 
@@ -268,7 +269,11 @@ module Aws
                                     ?client_request_token: ::String,
                                     lo_ra_wan: {
                                       rf_region: ("EU868" | "US915" | "AU915" | "AS923-1" | "AS923-2" | "AS923-3" | "AS923-4" | "EU433" | "CN470" | "CN779" | "RU864" | "KR920" | "IN865")?,
-                                      dl_class: ("ClassB" | "ClassC")?
+                                      dl_class: ("ClassB" | "ClassC")?,
+                                      participating_gateways: {
+                                        gateway_list: Array[::String]?,
+                                        transmission_interval: ::Integer?
+                                      }?
                                     },
                                     ?tags: Array[
                                       {
@@ -732,6 +737,7 @@ module Aws
         def redundancy_percent: () -> ::Integer
         def fragment_size_bytes: () -> ::Integer
         def fragment_interval_ms: () -> ::Integer
+        def descriptor: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#get_fuota_task-instance_method
       def get_fuota_task: (
@@ -744,6 +750,7 @@ module Aws
         def default_log_level: () -> ("INFO" | "ERROR" | "DISABLED")
         def wireless_gateway_log_options: () -> ::Array[Types::WirelessGatewayLogOption]
         def wireless_device_log_options: () -> ::Array[Types::WirelessDeviceLogOption]
+        def fuota_task_log_options: () -> ::Array[Types::FuotaTaskLogOption]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#get_log_levels_by_resource_types-instance_method
       def get_log_levels_by_resource_types: (
@@ -1025,7 +1032,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#get_resource_event_configuration-instance_method
       def get_resource_event_configuration: (
                                               identifier: ::String,
-                                              identifier_type: ("PartnerAccountId" | "DevEui" | "GatewayEui" | "WirelessDeviceId" | "WirelessGatewayId"),
+                                              identifier_type: ("PartnerAccountId" | "DevEui" | "FuotaTaskId" | "GatewayEui" | "WirelessDeviceId" | "WirelessGatewayId"),
                                               ?partner_type: ("Sidewalk")
                                             ) -> _GetResourceEventConfigurationResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourceEventConfigurationResponseSuccess
@@ -1255,7 +1262,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#list_event_configurations-instance_method
       def list_event_configurations: (
-                                       resource_type: ("SidewalkAccount" | "WirelessDevice" | "WirelessGateway"),
+                                       resource_type: ("FuotaTask" | "SidewalkAccount" | "WirelessDevice" | "WirelessGateway"),
                                        ?max_results: ::Integer,
                                        ?next_token: ::String
                                      ) -> _ListEventConfigurationsResponseSuccess
@@ -1720,7 +1727,8 @@ module Aws
                                ?firmware_update_role: ::String,
                                ?redundancy_percent: ::Integer,
                                ?fragment_size_bytes: ::Integer,
-                               ?fragment_interval_ms: ::Integer
+                               ?fragment_interval_ms: ::Integer,
+                               ?descriptor: ::String
                              ) -> _UpdateFuotaTaskResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFuotaTaskResponseSuccess
 
@@ -1730,6 +1738,18 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#update_log_levels_by_resource_types-instance_method
       def update_log_levels_by_resource_types: (
                                                  ?default_log_level: ("INFO" | "ERROR" | "DISABLED"),
+                                                 ?fuota_task_log_options: Array[
+                                                   {
+                                                     type: ("LoRaWAN"),
+                                                     log_level: ("INFO" | "ERROR" | "DISABLED"),
+                                                     events: Array[
+                                                       {
+                                                         event: ("Fuota"),
+                                                         log_level: ("INFO" | "ERROR" | "DISABLED")
+                                                       },
+                                                     ]?
+                                                   },
+                                                 ],
                                                  ?wireless_device_log_options: Array[
                                                    {
                                                      type: ("Sidewalk" | "LoRaWAN"),
@@ -1778,7 +1798,11 @@ module Aws
                                     ?description: ::String,
                                     ?lo_ra_wan: {
                                       rf_region: ("EU868" | "US915" | "AU915" | "AS923-1" | "AS923-2" | "AS923-3" | "AS923-4" | "EU433" | "CN470" | "CN779" | "RU864" | "KR920" | "IN865")?,
-                                      dl_class: ("ClassB" | "ClassC")?
+                                      dl_class: ("ClassB" | "ClassC")?,
+                                      participating_gateways: {
+                                        gateway_list: Array[::String]?,
+                                        transmission_interval: ::Integer?
+                                      }?
                                     }
                                   ) -> _UpdateMulticastGroupResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMulticastGroupResponseSuccess
@@ -1834,7 +1858,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#update_resource_event_configuration-instance_method
       def update_resource_event_configuration: (
                                                  identifier: ::String,
-                                                 identifier_type: ("PartnerAccountId" | "DevEui" | "GatewayEui" | "WirelessDeviceId" | "WirelessGatewayId"),
+                                                 identifier_type: ("PartnerAccountId" | "DevEui" | "FuotaTaskId" | "GatewayEui" | "WirelessDeviceId" | "WirelessGatewayId"),
                                                  ?partner_type: ("Sidewalk"),
                                                  ?device_registration_state: {
                                                    sidewalk: {

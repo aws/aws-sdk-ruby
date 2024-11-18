@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.107.0 (2024-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.106.0 (2024-11-15)
+------------------
+
+* Feature - Adds support for adding related Entity information to metrics ingested through PutMetricData.
+
+1.105.0 (2024-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.104.0 (2024-10-18)
 ------------------
 

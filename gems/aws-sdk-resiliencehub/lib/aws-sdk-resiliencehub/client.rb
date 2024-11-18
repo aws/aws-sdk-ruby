@@ -3892,7 +3892,6 @@ module Aws::ResilienceHub
     #          </note>
     #
     #         Type: String
-    #
     #     * <i> <code>type</code> </i>
     #
     #       The type of resource.
@@ -3917,11 +3916,10 @@ module Aws::ResilienceHub
     #
     #        Key: `"failover-regions"`
     #
-    #        Value: `"[\{"region":"<REGION>",
-    #       "accounts":[\{"id":"<ACCOUNT_ID>"\}]\}]"`
+    #        Value: `"[{"region":"<REGION>",
+    #       "accounts":[{"id":"<ACCOUNT_ID>"}]}]"`
     #
     #        </note>
-    #
     #   * <b> <code>appComponents</code> </b>
     #
     #     List of Application Components that this resource belongs to. If an
@@ -3965,11 +3963,10 @@ module Aws::ResilienceHub
     #
     #        Key: `"failover-regions"`
     #
-    #        Value: `"[\{"region":"<REGION>",
-    #       "accounts":[\{"id":"<ACCOUNT_ID>"\}]\}]"`
+    #        Value: `"[{"region":"<REGION>",
+    #       "accounts":[{"id":"<ACCOUNT_ID>"}]}]"`
     #
     #        </note>
-    #
     #   * <b> <code>excludedResources</code> </b>
     #
     #     The list of logical resource identifiers to be excluded from the
@@ -4039,7 +4036,6 @@ module Aws::ResilienceHub
     #          </note>
     #
     #         Type: String
-    #
     #   * <b> <code>version</code> </b>
     #
     #     Resilience Hub application version.
@@ -4056,8 +4052,8 @@ module Aws::ResilienceHub
     #
     #      Key: `"failover-regions"`
     #
-    #      Value: `"[\{"region":"<REGION>",
-    #     "accounts":[\{"id":"<ACCOUNT_ID>"\}]\}]"`
+    #      Value: `"[{"region":"<REGION>",
+    #     "accounts":[{"id":"<ACCOUNT_ID>"}]}]"`
     #
     #      </note>
     #
@@ -4601,8 +4597,7 @@ module Aws::ResilienceHub
     #
     #    Key: `"failover-regions"`
     #
-    #    Value: `"[\{"region":"<REGION>",
-    #   "accounts":[\{"id":"<ACCOUNT_ID>"\}]\}]"`
+    #    Value: `"[{"region":"<REGION>", "accounts":[{"id":"<ACCOUNT_ID>"}]}]"`
     #
     #    </note>
     #
@@ -4959,7 +4954,7 @@ module Aws::ResilienceHub
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-resiliencehub'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

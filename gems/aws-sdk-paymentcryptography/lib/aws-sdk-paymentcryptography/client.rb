@@ -653,7 +653,7 @@ module Aws::PaymentCryptography
     #     tags: [
     #       {
     #         key: "TagKey", # required
-    #         value: "TagValue",
+    #         value: "TagValue", # required
     #       },
     #     ],
     #   })
@@ -1720,7 +1720,7 @@ module Aws::PaymentCryptography
     #     tags: [
     #       {
     #         key: "TagKey", # required
-    #         value: "TagValue",
+    #         value: "TagValue", # required
     #       },
     #     ],
     #   })
@@ -1762,8 +1762,8 @@ module Aws::PaymentCryptography
     end
 
     # Lists the aliases for all keys in the caller's Amazon Web Services
-    # account and Amazon Web Services Region. You can filter the list of
-    # aliases. For more information, see [Using aliases][1] in the *Amazon
+    # account and Amazon Web Services Region. You can filter the aliases by
+    # `keyARN`. For more information, see [Using aliases][1] in the *Amazon
     # Web Services Payment Cryptography User Guide*.
     #
     # This is a paginated operation, which means that each response might
@@ -1794,6 +1794,9 @@ module Aws::PaymentCryptography
     # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetAlias.html
     # [5]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_UpdateAlias.html
     #
+    # @option params [String] :key_arn
+    #   The `keyARN` for which you want to list all aliases.
+    #
     # @option params [String] :next_token
     #   Use this parameter in a subsequent request after you receive a
     #   response with truncated results. Set it to the value of `NextToken`
@@ -1818,6 +1821,7 @@ module Aws::PaymentCryptography
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_aliases({
+    #     key_arn: "KeyArn",
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -2275,7 +2279,7 @@ module Aws::PaymentCryptography
     #     tags: [ # required
     #       {
     #         key: "TagKey", # required
-    #         value: "TagValue",
+    #         value: "TagValue", # required
     #       },
     #     ],
     #   })
@@ -2420,7 +2424,7 @@ module Aws::PaymentCryptography
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-paymentcryptography'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

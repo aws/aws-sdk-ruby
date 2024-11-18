@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2024-11-08)
+------------------
+
+* Feature - Adds S3 path option to pass group member list for PutGroup API.
+
 1.21.0 (2024-10-24)
 ------------------
 

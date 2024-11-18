@@ -592,6 +592,7 @@ module Aws::RDS
     #     serverless_v2_scaling_configuration: {
     #       min_capacity: 1.0,
     #       max_capacity: 1.0,
+    #       seconds_until_auto_pause: 1,
     #     },
     #     network_type: "String",
     #     rds_custom_cluster_configuration: {
@@ -1054,8 +1055,8 @@ module Aws::RDS
     #   support for that engine version. For more information, see the
     #   following sections:
     #
-    #   * Amazon Aurora (PostgreSQL only) - [Using Amazon RDS Extended
-    #     Support][1] in the *Amazon Aurora User Guide*
+    #   * Amazon Aurora - [Using Amazon RDS Extended Support][1] in the
+    #     *Amazon Aurora User Guide*
     #
     #   * Amazon RDS - [Using Amazon RDS Extended Support][2] in the *Amazon
     #     RDS User Guide*

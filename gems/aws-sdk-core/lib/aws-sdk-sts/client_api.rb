@@ -20,6 +20,8 @@ module Aws::STS
     AssumeRoleWithSAMLResponse = Shapes::StructureShape.new(name: 'AssumeRoleWithSAMLResponse')
     AssumeRoleWithWebIdentityRequest = Shapes::StructureShape.new(name: 'AssumeRoleWithWebIdentityRequest')
     AssumeRoleWithWebIdentityResponse = Shapes::StructureShape.new(name: 'AssumeRoleWithWebIdentityResponse')
+    AssumeRootRequest = Shapes::StructureShape.new(name: 'AssumeRootRequest')
+    AssumeRootResponse = Shapes::StructureShape.new(name: 'AssumeRootResponse')
     AssumedRoleUser = Shapes::StructureShape.new(name: 'AssumedRoleUser')
     Audience = Shapes::StringShape.new(name: 'Audience')
     Credentials = Shapes::StructureShape.new(name: 'Credentials')
@@ -47,10 +49,12 @@ module Aws::STS
     ProvidedContext = Shapes::StructureShape.new(name: 'ProvidedContext')
     ProvidedContextsListType = Shapes::ListShape.new(name: 'ProvidedContextsListType')
     RegionDisabledException = Shapes::StructureShape.new(name: 'RegionDisabledException', error: {"code"=>"RegionDisabledException", "httpStatusCode"=>403, "senderFault"=>true})
+    RootDurationSecondsType = Shapes::IntegerShape.new(name: 'RootDurationSecondsType')
     SAMLAssertionType = Shapes::StringShape.new(name: 'SAMLAssertionType')
     Subject = Shapes::StringShape.new(name: 'Subject')
     SubjectType = Shapes::StringShape.new(name: 'SubjectType')
     Tag = Shapes::StructureShape.new(name: 'Tag')
+    TargetPrincipalType = Shapes::StringShape.new(name: 'TargetPrincipalType')
     accessKeyIdType = Shapes::StringShape.new(name: 'accessKeyIdType')
     accessKeySecretType = Shapes::StringShape.new(name: 'accessKeySecretType')
     accountType = Shapes::StringShape.new(name: 'accountType')
@@ -147,6 +151,15 @@ module Aws::STS
     AssumeRoleWithWebIdentityResponse.add_member(:audience, Shapes::ShapeRef.new(shape: Audience, location_name: "Audience"))
     AssumeRoleWithWebIdentityResponse.add_member(:source_identity, Shapes::ShapeRef.new(shape: sourceIdentityType, location_name: "SourceIdentity"))
     AssumeRoleWithWebIdentityResponse.struct_class = Types::AssumeRoleWithWebIdentityResponse
+
+    AssumeRootRequest.add_member(:target_principal, Shapes::ShapeRef.new(shape: TargetPrincipalType, required: true, location_name: "TargetPrincipal"))
+    AssumeRootRequest.add_member(:task_policy_arn, Shapes::ShapeRef.new(shape: PolicyDescriptorType, required: true, location_name: "TaskPolicyArn"))
+    AssumeRootRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: RootDurationSecondsType, location_name: "DurationSeconds"))
+    AssumeRootRequest.struct_class = Types::AssumeRootRequest
+
+    AssumeRootResponse.add_member(:credentials, Shapes::ShapeRef.new(shape: Credentials, location_name: "Credentials"))
+    AssumeRootResponse.add_member(:source_identity, Shapes::ShapeRef.new(shape: sourceIdentityType, location_name: "SourceIdentity"))
+    AssumeRootResponse.struct_class = Types::AssumeRootResponse
 
     AssumedRoleUser.add_member(:assumed_role_id, Shapes::ShapeRef.new(shape: assumedRoleIdType, required: true, location_name: "AssumedRoleId"))
     AssumedRoleUser.add_member(:arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "Arn"))
@@ -306,6 +319,16 @@ module Aws::STS
         o.errors << Shapes::ShapeRef.new(shape: InvalidIdentityTokenException)
         o.errors << Shapes::ShapeRef.new(shape: ExpiredTokenException)
         o.errors << Shapes::ShapeRef.new(shape: RegionDisabledException)
+      end)
+
+      api.add_operation(:assume_root, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssumeRoot"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssumeRootRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssumeRootResponse)
+        o.errors << Shapes::ShapeRef.new(shape: RegionDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: ExpiredTokenException)
       end)
 
       api.add_operation(:decode_authorization_message, Seahorse::Model::Operation.new.tap do |o|

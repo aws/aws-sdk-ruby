@@ -859,6 +859,14 @@ module Aws::Batch
     #         launch_template_id: "String",
     #         launch_template_name: "String",
     #         version: "String",
+    #         overrides: [
+    #           {
+    #             launch_template_id: "String",
+    #             launch_template_name: "String",
+    #             version: "String",
+    #             target_instance_types: ["String"],
+    #           },
+    #         ],
     #       },
     #       ec2_configuration: [
     #         {
@@ -1413,6 +1421,12 @@ module Aws::Batch
     #   resp.compute_environments[0].compute_resources.launch_template.launch_template_id #=> String
     #   resp.compute_environments[0].compute_resources.launch_template.launch_template_name #=> String
     #   resp.compute_environments[0].compute_resources.launch_template.version #=> String
+    #   resp.compute_environments[0].compute_resources.launch_template.overrides #=> Array
+    #   resp.compute_environments[0].compute_resources.launch_template.overrides[0].launch_template_id #=> String
+    #   resp.compute_environments[0].compute_resources.launch_template.overrides[0].launch_template_name #=> String
+    #   resp.compute_environments[0].compute_resources.launch_template.overrides[0].version #=> String
+    #   resp.compute_environments[0].compute_resources.launch_template.overrides[0].target_instance_types #=> Array
+    #   resp.compute_environments[0].compute_resources.launch_template.overrides[0].target_instance_types[0] #=> String
     #   resp.compute_environments[0].compute_resources.ec2_configuration #=> Array
     #   resp.compute_environments[0].compute_resources.ec2_configuration[0].image_type #=> String
     #   resp.compute_environments[0].compute_resources.ec2_configuration[0].image_id_override #=> String
@@ -1442,10 +1456,9 @@ module Aws::Batch
     # @option params [Array<String>] :job_definitions
     #   A list of up to 100 job definitions. Each entry in the list can either
     #   be an ARN in the format
-    #   `arn:aws:batch:$\{Region\}:$\{Account\}:job-definition/$\{JobDefinitionName\}:$\{Revision\}`
-    #   or a short version using the form
-    #   `$\{JobDefinitionName\}:$\{Revision\}`. This parameter can't be used
-    #   with other parameters.
+    #   `arn:aws:batch:${Region}:${Account}:job-definition/${JobDefinitionName}:${Revision}`
+    #   or a short version using the form `${JobDefinitionName}:${Revision}`.
+    #   This parameter can't be used with other parameters.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results returned by `DescribeJobDefinitions` in
@@ -2827,7 +2840,7 @@ module Aws::Batch
     #     the job definition that's used doesn't affect the sort order. When
     #     the `JOB_DEFINITION` filter is used and the ARN is used (which is in
     #     the form
-    #     `arn:$\{Partition\}:batch:$\{Region\}:$\{Account\}:job-definition/$\{JobDefinitionName\}:$\{Revision\}`),
+    #     `arn:${Partition}:batch:${Region}:${Account}:job-definition/${JobDefinitionName}:${Revision}`),
     #     the results include jobs that used the specified revision of the job
     #     definition. Asterisk (*) isn't supported when the ARN is used.
     #
@@ -4723,6 +4736,14 @@ module Aws::Batch
     #         launch_template_id: "String",
     #         launch_template_name: "String",
     #         version: "String",
+    #         overrides: [
+    #           {
+    #             launch_template_id: "String",
+    #             launch_template_name: "String",
+    #             version: "String",
+    #             target_instance_types: ["String"],
+    #           },
+    #         ],
     #       },
     #       ec2_configuration: [
     #         {
@@ -4920,7 +4941,7 @@ module Aws::Batch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.103.0'
+      context[:gem_version] = '1.105.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

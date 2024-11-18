@@ -67,6 +67,36 @@ module Aws::ApplicationSignals
       include Aws::Structure
     end
 
+    # This object defines the length of the look-back window used to
+    # calculate one burn rate metric for this SLO. The burn rate measures
+    # how fast the service is consuming the error budget, relative to the
+    # attainment goal of the SLO. A burn rate of exactly 1 indicates that
+    # the SLO goal will be met exactly.
+    #
+    # For example, if you specify 60 as the number of minutes in the
+    # look-back window, the burn rate is calculated as the following:
+    #
+    # *burn rate = error rate over the look-back window / (1 - attainment
+    # goal percentage)*
+    #
+    # For more information about burn rates, see [Calculate burn rates][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-ServiceLevelObjectives.html#CloudWatch-ServiceLevelObjectives-burn
+    #
+    # @!attribute [rw] look_back_window_minutes
+    #   The number of minutes to use as the look-back window.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/BurnRateConfiguration AWS API Documentation
+    #
+    class BurnRateConfiguration < Struct.new(
+      :look_back_window_minutes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # If the interval for this service level objective is a calendar
     # interval, this structure contains the interval specifications.
     #
@@ -157,6 +187,12 @@ module Aws::ApplicationSignals
     #   values.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] burn_rate_configurations
+    #   Use this array to create *burn rates* for this SLO. Each burn rate
+    #   is a metric that indicates how fast the service is consuming the
+    #   error budget, relative to the attainment goal of the SLO.
+    #   @return [Array<Types::BurnRateConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/CreateServiceLevelObjectiveInput AWS API Documentation
     #
     class CreateServiceLevelObjectiveInput < Struct.new(
@@ -165,7 +201,8 @@ module Aws::ApplicationSignals
       :sli_config,
       :request_based_sli_config,
       :goal,
-      :tags)
+      :tags,
+      :burn_rate_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1905,6 +1942,13 @@ module Aws::ApplicationSignals
     #   threshold.
     #   @return [Types::Goal]
     #
+    # @!attribute [rw] burn_rate_configurations
+    #   Each object in this array defines the length of the look-back window
+    #   used to calculate one burn rate metric for this SLO. The burn rate
+    #   measures how fast the service is consuming the error budget,
+    #   relative to the attainment goal of the SLO.
+    #   @return [Array<Types::BurnRateConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/ServiceLevelObjective AWS API Documentation
     #
     class ServiceLevelObjective < Struct.new(
@@ -1916,7 +1960,8 @@ module Aws::ApplicationSignals
       :sli,
       :request_based_sli,
       :evaluation_type,
-      :goal)
+      :goal,
+      :burn_rate_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2401,6 +2446,12 @@ module Aws::ApplicationSignals
     #   attainment threshold.
     #   @return [Types::Goal]
     #
+    # @!attribute [rw] burn_rate_configurations
+    #   Use this array to create *burn rates* for this SLO. Each burn rate
+    #   is a metric that indicates how fast the service is consuming the
+    #   error budget, relative to the attainment goal of the SLO.
+    #   @return [Array<Types::BurnRateConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/UpdateServiceLevelObjectiveInput AWS API Documentation
     #
     class UpdateServiceLevelObjectiveInput < Struct.new(
@@ -2408,7 +2459,8 @@ module Aws::ApplicationSignals
       :description,
       :sli_config,
       :request_based_sli_config,
-      :goal)
+      :goal,
+      :burn_rate_configurations)
       SENSITIVE = []
       include Aws::Structure
     end

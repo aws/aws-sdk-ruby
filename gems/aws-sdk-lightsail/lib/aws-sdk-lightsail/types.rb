@@ -2643,7 +2643,6 @@ module Aws::Lightsail
     #       being evaluated.
     #
     #     * `ACTIVATING_DEPLOYMENT` - Your deployment is being activated.
-    #
     #   * The following state codes are possible if your container service
     #     is in a `PENDING` state:
     #

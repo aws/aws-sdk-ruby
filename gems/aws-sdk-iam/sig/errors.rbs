@@ -11,6 +11,10 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
+      class AccountNotManagementOrDelegatedAdministratorException < ::Aws::Errors::ServiceError
+      end
+      class CallerIsNotManagementAccountException < ::Aws::Errors::ServiceError
+      end
       class ConcurrentModificationException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
@@ -71,6 +75,10 @@ module Aws
       class OpenIdIdpCommunicationErrorException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class OrganizationNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class OrganizationNotInAllFeaturesModeException < ::Aws::Errors::ServiceError
+      end
       class PasswordPolicyViolationException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
@@ -82,6 +90,8 @@ module Aws
       end
       class ReportGenerationLimitExceededException < ::Aws::Errors::ServiceError
         def message: () -> ::String
+      end
+      class ServiceAccessNotEnabledException < ::Aws::Errors::ServiceError
       end
       class ServiceFailureException < ::Aws::Errors::ServiceError
         def message: () -> ::String

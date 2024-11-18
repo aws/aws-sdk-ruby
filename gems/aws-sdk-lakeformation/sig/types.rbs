@@ -83,8 +83,8 @@ module Aws::LakeFormation
       attr_accessor id: ::String
       attr_accessor principal: Types::DataLakePrincipal
       attr_accessor resource: Types::Resource
-      attr_accessor permissions: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]
-      attr_accessor permissions_with_grant_option: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]
+      attr_accessor permissions: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION")]
+      attr_accessor permissions_with_grant_option: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION")]
       SENSITIVE: []
     end
 
@@ -142,6 +142,17 @@ module Aws::LakeFormation
     end
 
     class CreateDataCellsFilterResponse < Aws::EmptyStructure
+    end
+
+    class CreateLFTagExpressionRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor catalog_id: ::String
+      attr_accessor expression: ::Array[Types::LFTag]
+      SENSITIVE: []
+    end
+
+    class CreateLFTagExpressionResponse < Aws::EmptyStructure
     end
 
     class CreateLFTagRequest
@@ -236,6 +247,15 @@ module Aws::LakeFormation
     end
 
     class DeleteDataCellsFilterResponse < Aws::EmptyStructure
+    end
+
+    class DeleteLFTagExpressionRequest
+      attr_accessor name: ::String
+      attr_accessor catalog_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLFTagExpressionResponse < Aws::EmptyStructure
     end
 
     class DeleteLFTagRequest
@@ -420,6 +440,20 @@ module Aws::LakeFormation
       SENSITIVE: []
     end
 
+    class GetLFTagExpressionRequest
+      attr_accessor name: ::String
+      attr_accessor catalog_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetLFTagExpressionResponse
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor catalog_id: ::String
+      attr_accessor expression: ::Array[Types::LFTag]
+      SENSITIVE: []
+    end
+
     class GetLFTagRequest
       attr_accessor catalog_id: ::String
       attr_accessor tag_key: ::String
@@ -491,7 +525,7 @@ module Aws::LakeFormation
     class GetTemporaryGluePartitionCredentialsRequest
       attr_accessor table_arn: ::String
       attr_accessor partition: Types::PartitionValueList
-      attr_accessor permissions: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]
+      attr_accessor permissions: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION")]
       attr_accessor duration_seconds: ::Integer
       attr_accessor audit_context: Types::AuditContext
       attr_accessor supported_permission_types: ::Array[("COLUMN_PERMISSION" | "CELL_FILTER_PERMISSION" | "NESTED_PERMISSION" | "NESTED_CELL_PERMISSION")]
@@ -508,7 +542,7 @@ module Aws::LakeFormation
 
     class GetTemporaryGlueTableCredentialsRequest
       attr_accessor table_arn: ::String
-      attr_accessor permissions: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]
+      attr_accessor permissions: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION")]
       attr_accessor duration_seconds: ::Integer
       attr_accessor audit_context: Types::AuditContext
       attr_accessor supported_permission_types: ::Array[("COLUMN_PERMISSION" | "CELL_FILTER_PERMISSION" | "NESTED_PERMISSION" | "NESTED_CELL_PERMISSION")]
@@ -561,8 +595,8 @@ module Aws::LakeFormation
       attr_accessor catalog_id: ::String
       attr_accessor principal: Types::DataLakePrincipal
       attr_accessor resource: Types::Resource
-      attr_accessor permissions: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]
-      attr_accessor permissions_with_grant_option: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]
+      attr_accessor permissions: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION")]
+      attr_accessor permissions_with_grant_option: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION")]
       SENSITIVE: []
     end
 
@@ -591,6 +625,20 @@ module Aws::LakeFormation
       SENSITIVE: []
     end
 
+    class LFTagExpression
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor catalog_id: ::String
+      attr_accessor expression: ::Array[Types::LFTag]
+      SENSITIVE: []
+    end
+
+    class LFTagExpressionResource
+      attr_accessor catalog_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
     class LFTagKeyResource
       attr_accessor catalog_id: ::String
       attr_accessor tag_key: ::String
@@ -609,6 +657,7 @@ module Aws::LakeFormation
       attr_accessor catalog_id: ::String
       attr_accessor resource_type: ("DATABASE" | "TABLE")
       attr_accessor expression: ::Array[Types::LFTag]
+      attr_accessor expression_name: ::String
       SENSITIVE: []
     end
 
@@ -629,6 +678,19 @@ module Aws::LakeFormation
 
     class ListDataCellsFilterResponse
       attr_accessor data_cells_filters: ::Array[Types::DataCellsFilter]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLFTagExpressionsRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLFTagExpressionsResponse
+      attr_accessor lf_tag_expressions: ::Array[Types::LFTagExpression]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -664,7 +726,7 @@ module Aws::LakeFormation
     class ListPermissionsRequest
       attr_accessor catalog_id: ::String
       attr_accessor principal: Types::DataLakePrincipal
-      attr_accessor resource_type: ("CATALOG" | "DATABASE" | "TABLE" | "DATA_LOCATION" | "LF_TAG" | "LF_TAG_POLICY" | "LF_TAG_POLICY_DATABASE" | "LF_TAG_POLICY_TABLE")
+      attr_accessor resource_type: ("CATALOG" | "DATABASE" | "TABLE" | "DATA_LOCATION" | "LF_TAG" | "LF_TAG_POLICY" | "LF_TAG_POLICY_DATABASE" | "LF_TAG_POLICY_TABLE" | "LF_NAMED_TAG_EXPRESSION")
       attr_accessor resource: Types::Resource
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
@@ -752,15 +814,15 @@ module Aws::LakeFormation
 
     class PrincipalPermissions
       attr_accessor principal: Types::DataLakePrincipal
-      attr_accessor permissions: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]
+      attr_accessor permissions: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION")]
       SENSITIVE: []
     end
 
     class PrincipalResourcePermissions
       attr_accessor principal: Types::DataLakePrincipal
       attr_accessor resource: Types::Resource
-      attr_accessor permissions: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]
-      attr_accessor permissions_with_grant_option: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]
+      attr_accessor permissions: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION")]
+      attr_accessor permissions_with_grant_option: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION")]
       attr_accessor additional_details: Types::DetailsMap
       attr_accessor last_updated: ::Time
       attr_accessor last_updated_by: ::String
@@ -827,6 +889,7 @@ module Aws::LakeFormation
       attr_accessor data_cells_filter: Types::DataCellsFilterResource
       attr_accessor lf_tag: Types::LFTagKeyResource
       attr_accessor lf_tag_policy: Types::LFTagPolicyResource
+      attr_accessor lf_tag_expression: Types::LFTagExpressionResource
       SENSITIVE: []
     end
 
@@ -853,8 +916,8 @@ module Aws::LakeFormation
       attr_accessor catalog_id: ::String
       attr_accessor principal: Types::DataLakePrincipal
       attr_accessor resource: Types::Resource
-      attr_accessor permissions: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]
-      attr_accessor permissions_with_grant_option: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]
+      attr_accessor permissions: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION")]
+      attr_accessor permissions_with_grant_option: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION")]
       SENSITIVE: []
     end
 
@@ -1005,6 +1068,17 @@ module Aws::LakeFormation
     end
 
     class UpdateDataCellsFilterResponse < Aws::EmptyStructure
+    end
+
+    class UpdateLFTagExpressionRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor catalog_id: ::String
+      attr_accessor expression: ::Array[Types::LFTag]
+      SENSITIVE: []
+    end
+
+    class UpdateLFTagExpressionResponse < Aws::EmptyStructure
     end
 
     class UpdateLFTagRequest

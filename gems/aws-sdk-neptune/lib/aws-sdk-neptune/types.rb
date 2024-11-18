@@ -7970,7 +7970,7 @@ module Aws::Neptune
     #   `aws:` or `rds:`. The string can only contain the set of Unicode
     #   letters, digits, white-space, '\_', '.', '/', '=', '+',
     #   '-' (Java regex:
-    #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]*)$").
+    #   "^(\[\\\\p\{L}\\\\p\{Z}\\\\p\{N}\_.:/=+\\\\-\]*)$").
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -7979,7 +7979,7 @@ module Aws::Neptune
     #   with `aws:` or `rds:`. The string can only contain the set of
     #   Unicode letters, digits, white-space, '\_', '.', '/', '=',
     #   '+', '-' (Java regex:
-    #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]*)$").
+    #   "^(\[\\\\p\{L}\\\\p\{Z}\\\\p\{N}\_.:/=+\\\\-\]*)$").
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/Tag AWS API Documentation

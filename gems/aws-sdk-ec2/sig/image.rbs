@@ -81,6 +81,12 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#last_launched_time-instance_method
       def last_launched_time: () -> ::String
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#source_image_id-instance_method
+      def source_image_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#source_image_region-instance_method
+      def source_image_region: () -> ::String
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#image_location-instance_method
       def image_location: () -> ::String
 

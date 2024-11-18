@@ -1886,6 +1886,7 @@ module Aws::Inspector2
 
     PackageFilter.add_member(:architecture, Shapes::ShapeRef.new(shape: StringFilter, location_name: "architecture"))
     PackageFilter.add_member(:epoch, Shapes::ShapeRef.new(shape: NumberFilter, location_name: "epoch"))
+    PackageFilter.add_member(:file_path, Shapes::ShapeRef.new(shape: StringFilter, location_name: "filePath"))
     PackageFilter.add_member(:name, Shapes::ShapeRef.new(shape: StringFilter, location_name: "name"))
     PackageFilter.add_member(:release, Shapes::ShapeRef.new(shape: StringFilter, location_name: "release"))
     PackageFilter.add_member(:source_lambda_layer_arn, Shapes::ShapeRef.new(shape: StringFilter, location_name: "sourceLambdaLayerArn"))

@@ -901,6 +901,25 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The application theme.
+    #
+    # @!attribute [rw] brand_color_palette
+    #   The color palette.
+    #   @return [Types::BrandColorPalette]
+    #
+    # @!attribute [rw] brand_element_style
+    #   The element style.
+    #   @return [Types::BrandElementStyle]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ApplicationTheme AWS API Documentation
+    #
+    class ApplicationTheme < Struct.new(
+      :brand_color_palette,
+      :brand_element_style)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The arc axis configuration of a `GaugeChartVisual`.
     #
     # @!attribute [rw] range
@@ -3504,6 +3523,202 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The color palette.
+    #
+    # @!attribute [rw] primary
+    #   The primary color.
+    #   @return [Types::Palette]
+    #
+    # @!attribute [rw] secondary
+    #   The secondary color.
+    #   @return [Types::Palette]
+    #
+    # @!attribute [rw] accent
+    #   The color that is used for accent elements.
+    #   @return [Types::Palette]
+    #
+    # @!attribute [rw] measure
+    #   The color that is used for measure elements.
+    #   @return [Types::Palette]
+    #
+    # @!attribute [rw] dimension
+    #   The color that is used for dimension elements.
+    #   @return [Types::Palette]
+    #
+    # @!attribute [rw] success
+    #   The color that is used for success elements.
+    #   @return [Types::Palette]
+    #
+    # @!attribute [rw] info
+    #   The color that is used for info elements.
+    #   @return [Types::Palette]
+    #
+    # @!attribute [rw] warning
+    #   The color that is used for warning elements.
+    #   @return [Types::Palette]
+    #
+    # @!attribute [rw] danger
+    #   The color that is used for danger elements.
+    #   @return [Types::Palette]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BrandColorPalette AWS API Documentation
+    #
+    class BrandColorPalette < Struct.new(
+      :primary,
+      :secondary,
+      :accent,
+      :measure,
+      :dimension,
+      :success,
+      :info,
+      :warning,
+      :danger)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The definition of the brand.
+    #
+    # @!attribute [rw] brand_name
+    #   The name of the brand.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the brand.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_theme
+    #   The application theme of the brand.
+    #   @return [Types::ApplicationTheme]
+    #
+    # @!attribute [rw] logo_configuration
+    #   The logo configuration of the brand.
+    #   @return [Types::LogoConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BrandDefinition AWS API Documentation
+    #
+    class BrandDefinition < Struct.new(
+      :brand_name,
+      :description,
+      :application_theme,
+      :logo_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of the brand.
+    #
+    # @!attribute [rw] brand_id
+    #   The ID of the Amazon QuickSight brand.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the brand.
+    #   @return [String]
+    #
+    # @!attribute [rw] brand_status
+    #   The status of the brand.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The time that the brand was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The last time the brand was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] version_id
+    #   The ID of the version.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_status
+    #   The status of the version.
+    #   @return [String]
+    #
+    # @!attribute [rw] errors
+    #   A list of errors that occurred during the most recent brand
+    #   operation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] logo
+    #   The logo details.
+    #   @return [Types::Logo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BrandDetail AWS API Documentation
+    #
+    class BrandDetail < Struct.new(
+      :brand_id,
+      :arn,
+      :brand_status,
+      :created_time,
+      :last_updated_time,
+      :version_id,
+      :version_status,
+      :errors,
+      :logo)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The element style.
+    #
+    # @!attribute [rw] navbar_style
+    #   The navigation bar style.
+    #   @return [Types::NavbarStyle]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BrandElementStyle AWS API Documentation
+    #
+    class BrandElementStyle < Struct.new(
+      :navbar_style)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of the brand.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the brand.
+    #   @return [String]
+    #
+    # @!attribute [rw] brand_id
+    #   The ID of the Amazon QuickSight brand.
+    #   @return [String]
+    #
+    # @!attribute [rw] brand_name
+    #   The name of the brand.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the brand.
+    #   @return [String]
+    #
+    # @!attribute [rw] brand_status
+    #   The status of the brand.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The time that the brand was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time when the brand was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BrandSummary AWS API Documentation
+    #
+    class BrandSummary < Struct.new(
+      :arn,
+      :brand_id,
+      :brand_name,
+      :description,
+      :brand_status,
+      :created_time,
+      :last_updated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A calculated column for a dataset.
     #
     # @!attribute [rw] column_name
@@ -3619,6 +3834,100 @@ module Aws::QuickSight
       :ingestion_id,
       :request_id,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A set of actions that correspond to Amazon QuickSight permissions.
+    #
+    # @!attribute [rw] export_to_csv
+    #   The ability to export to CSV files.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_to_excel
+    #   The ability to export to Excel files.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_themes
+    #   The ability to export to Create and Update themes.
+    #   @return [String]
+    #
+    # @!attribute [rw] add_or_run_anomaly_detection_for_analyses
+    #   The ability to add or run anomaly detection.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_analyses
+    #   The ability to share analyses.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_datasets
+    #   The ability to create and update datasets.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_datasets
+    #   The ability to share datasets.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscribe_dashboard_email_reports
+    #   The ability to subscribe to email reports.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_dashboard_email_reports
+    #   The ability to create and update email reports.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_dashboards
+    #   The ability to share dashboards.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_threshold_alerts
+    #   The ability to create and update threshold alerts.
+    #   @return [String]
+    #
+    # @!attribute [rw] rename_shared_folders
+    #   The ability to rename shared folders.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_shared_folders
+    #   The ability to create shared folders.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_data_sources
+    #   The ability to create and update data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_data_sources
+    #   The ability to share data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] view_account_spice_capacity
+    #   The ability to view account SPICE capacity.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_spice_dataset
+    #   The ability to create a SPICE dataset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Capabilities AWS API Documentation
+    #
+    class Capabilities < Struct.new(
+      :export_to_csv,
+      :export_to_excel,
+      :create_and_update_themes,
+      :add_or_run_anomaly_detection_for_analyses,
+      :share_analyses,
+      :create_and_update_datasets,
+      :share_datasets,
+      :subscribe_dashboard_email_reports,
+      :create_and_update_dashboard_email_reports,
+      :share_dashboards,
+      :create_and_update_threshold_alerts,
+      :rename_shared_folders,
+      :create_shared_folders,
+      :create_and_update_data_sources,
+      :share_data_sources,
+      :view_account_spice_capacity,
+      :create_spice_dataset)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4951,12 +5260,12 @@ module Aws::QuickSight
     #
     #   For example, you can add a default theme by setting
     #   `AccountCustomization` to the midnight theme:
-    #   `"AccountCustomization": \{ "DefaultTheme":
-    #   "arn:aws:quicksight::aws:theme/MIDNIGHT" \}`. Or, you can add a
-    #   custom theme by specifying `"AccountCustomization": \{
+    #   `"AccountCustomization": { "DefaultTheme":
+    #   "arn:aws:quicksight::aws:theme/MIDNIGHT" }`. Or, you can add a
+    #   custom theme by specifying `"AccountCustomization": {
     #   "DefaultTheme":
     #   "arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639"
-    #   \}`.
+    #   }`.
     #   @return [Types::AccountCustomization]
     #
     # @!attribute [rw] tags
@@ -5387,6 +5696,55 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that owns the brand.
+    #   @return [String]
+    #
+    # @!attribute [rw] brand_id
+    #   The ID of the Amazon QuickSight brand.
+    #   @return [String]
+    #
+    # @!attribute [rw] brand_definition
+    #   The definition of the brand.
+    #   @return [Types::BrandDefinition]
+    #
+    # @!attribute [rw] tags
+    #   A map of the key-value pairs that are assigned to the brand.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateBrandRequest AWS API Documentation
+    #
+    class CreateBrandRequest < Struct.new(
+      :aws_account_id,
+      :brand_id,
+      :brand_definition,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] brand_detail
+    #   The details of the brand.
+    #   @return [Types::BrandDetail]
+    #
+    # @!attribute [rw] brand_definition
+    #   The definition of the brand.
+    #   @return [Types::BrandDefinition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateBrandResponse AWS API Documentation
+    #
+    class CreateBrandResponse < Struct.new(
+      :request_id,
+      :brand_detail,
+      :brand_definition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A transform operation that creates calculated columns. Columns created
     # in one such operation form a lexical closure.
     #
@@ -5398,6 +5756,56 @@ module Aws::QuickSight
     #
     class CreateColumnsOperation < Struct.new(
       :columns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that you want to create
+    #   the custom permissions profile in.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_permissions_name
+    #   The name of the custom permissions profile that you want to create.
+    #   @return [String]
+    #
+    # @!attribute [rw] capabilities
+    #   A set of actions to include in the custom permissions profile.
+    #   @return [Types::Capabilities]
+    #
+    # @!attribute [rw] tags
+    #   The tags to associate with the custom permissions profile.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateCustomPermissionsRequest AWS API Documentation
+    #
+    class CreateCustomPermissionsRequest < Struct.new(
+      :aws_account_id,
+      :custom_permissions_name,
+      :capabilities,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the custom permissions profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateCustomPermissionsResponse AWS API Documentation
+    #
+    class CreateCustomPermissionsResponse < Struct.new(
+      :status,
+      :arn,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7381,6 +7789,30 @@ module Aws::QuickSight
       :decimal_values,
       :date_time_values)
       SENSITIVE = [:string_values, :integer_values, :decimal_values, :date_time_values]
+      include Aws::Structure
+    end
+
+    # The custom permissions profile.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the custom permissions profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_permissions_name
+    #   The name of the custom permissions profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] capabilities
+    #   A set of actions in the custom permissions profile.
+    #   @return [Types::Capabilities]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CustomPermissions AWS API Documentation
+    #
+    class CustomPermissions < Struct.new(
+      :arn,
+      :custom_permissions_name,
+      :capabilities)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10221,6 +10653,100 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that owns the brand
+    #   assignment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteBrandAssignmentRequest AWS API Documentation
+    #
+    class DeleteBrandAssignmentRequest < Struct.new(
+      :aws_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteBrandAssignmentResponse AWS API Documentation
+    #
+    class DeleteBrandAssignmentResponse < Struct.new(
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that owns the brand.
+    #   @return [String]
+    #
+    # @!attribute [rw] brand_id
+    #   The ID of the Amazon QuickSight brand.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteBrandRequest AWS API Documentation
+    #
+    class DeleteBrandRequest < Struct.new(
+      :aws_account_id,
+      :brand_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteBrandResponse AWS API Documentation
+    #
+    class DeleteBrandResponse < Struct.new(
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the custom
+    #   permissions profile that you want to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_permissions_name
+    #   The name of the custom permissions profile that you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteCustomPermissionsRequest AWS API Documentation
+    #
+    class DeleteCustomPermissionsRequest < Struct.new(
+      :aws_account_id,
+      :custom_permissions_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the custom permissions profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteCustomPermissionsResponse AWS API Documentation
+    #
+    class DeleteCustomPermissionsResponse < Struct.new(
+      :status,
+      :arn,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
     #   The ID of the Amazon Web Services account that contains the
     #   dashboard that you're deleting.
     #   @return [String]
@@ -11191,6 +11717,47 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] user_name
+    #   The username of the user that you want to remove custom permissions
+    #   from.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the custom
+    #   permission configuration that you want to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace that the user belongs to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteUserCustomPermissionRequest AWS API Documentation
+    #
+    class DeleteUserCustomPermissionRequest < Struct.new(
+      :user_name,
+      :aws_account_id,
+      :namespace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteUserCustomPermissionResponse AWS API Documentation
+    #
+    class DeleteUserCustomPermissionResponse < Struct.new(
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_name
     #   The name of the user that you want to delete.
     #   @return [String]
     #
@@ -11664,7 +12231,7 @@ module Aws::QuickSight
     #   `DescribeAssetBundleExportJob` again for a fresh URL if needed.
     #
     #   The downloaded asset bundle is a zip file named
-    #   `assetbundle-\{jobId\}.qs`. The file has a `.qs` extension.
+    #   `assetbundle-{jobId}.qs`. The file has a `.qs` extension.
     #
     #   This URL can't be used in a `StartAssetBundleImportJob` API call
     #   and should only be used for download purposes.
@@ -11912,6 +12479,160 @@ module Aws::QuickSight
       :override_tags,
       :override_validation_strategy,
       :warnings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that owns the brand
+    #   assignment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeBrandAssignmentRequest AWS API Documentation
+    #
+    class DescribeBrandAssignmentRequest < Struct.new(
+      :aws_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] brand_arn
+    #   The Amazon Resource Name (ARN) of the brand.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeBrandAssignmentResponse AWS API Documentation
+    #
+    class DescribeBrandAssignmentResponse < Struct.new(
+      :request_id,
+      :brand_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that owns the brand.
+    #   @return [String]
+    #
+    # @!attribute [rw] brand_id
+    #   The ID of the Amazon QuickSight brand.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeBrandPublishedVersionRequest AWS API Documentation
+    #
+    class DescribeBrandPublishedVersionRequest < Struct.new(
+      :aws_account_id,
+      :brand_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] brand_detail
+    #   The details of the brand.
+    #   @return [Types::BrandDetail]
+    #
+    # @!attribute [rw] brand_definition
+    #   The definition of the brand.
+    #   @return [Types::BrandDefinition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeBrandPublishedVersionResponse AWS API Documentation
+    #
+    class DescribeBrandPublishedVersionResponse < Struct.new(
+      :request_id,
+      :brand_detail,
+      :brand_definition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that owns the brand.
+    #   @return [String]
+    #
+    # @!attribute [rw] brand_id
+    #   The ID of the Amazon QuickSight brand.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The ID of the specific version. The default value is the latest
+    #   version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeBrandRequest AWS API Documentation
+    #
+    class DescribeBrandRequest < Struct.new(
+      :aws_account_id,
+      :brand_id,
+      :version_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] brand_detail
+    #   The details of the brand.
+    #   @return [Types::BrandDetail]
+    #
+    # @!attribute [rw] brand_definition
+    #   The definition of the brand.
+    #   @return [Types::BrandDefinition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeBrandResponse AWS API Documentation
+    #
+    class DescribeBrandResponse < Struct.new(
+      :request_id,
+      :brand_detail,
+      :brand_definition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the custom
+    #   permissions profile that you want described.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_permissions_name
+    #   The name of the custom permissions profile to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeCustomPermissionsRequest AWS API Documentation
+    #
+    class DescribeCustomPermissionsRequest < Struct.new(
+      :aws_account_id,
+      :custom_permissions_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] custom_permissions
+    #   The custom permissions profile.
+    #   @return [Types::CustomPermissions]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeCustomPermissionsResponse AWS API Documentation
+    #
+    class DescribeCustomPermissionsResponse < Struct.new(
+      :status,
+      :custom_permissions,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17890,6 +18611,106 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The logo image.
+    #
+    # @!attribute [rw] source
+    #   The source of the logo image.
+    #   @return [Types::ImageSource]
+    #
+    # @!attribute [rw] generated_image_url
+    #   The URL that points to the generated logo image.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Image AWS API Documentation
+    #
+    class Image < Struct.new(
+      :source,
+      :generated_image_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The logo image configuration.
+    #
+    # @!attribute [rw] source
+    #   The source of the image.
+    #   @return [Types::ImageSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ImageConfiguration AWS API Documentation
+    #
+    class ImageConfiguration < Struct.new(
+      :source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The image set.
+    #
+    # @!attribute [rw] original
+    #   The original image.
+    #   @return [Types::Image]
+    #
+    # @!attribute [rw] height_64
+    #   The image with the height set to 64 pixels.
+    #   @return [Types::Image]
+    #
+    # @!attribute [rw] height_32
+    #   The image with the height set to 32 pixels.
+    #   @return [Types::Image]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ImageSet AWS API Documentation
+    #
+    class ImageSet < Struct.new(
+      :original,
+      :height_64,
+      :height_32)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The image set configuration.
+    #
+    # @!attribute [rw] original
+    #   The original image.
+    #   @return [Types::ImageConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ImageSetConfiguration AWS API Documentation
+    #
+    class ImageSetConfiguration < Struct.new(
+      :original)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The source of the image.
+    #
+    # @note ImageSource is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ImageSource is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ImageSource corresponding to the set member.
+    #
+    # @!attribute [rw] public_url
+    #   The public URL that points to the source image.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_uri
+    #   The Amazon S3 URI that points to the source image.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ImageSource AWS API Documentation
+    #
+    class ImageSource < Struct.new(
+      :public_url,
+      :s3_uri,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class PublicUrl < ImageSource; end
+      class S3Uri < ImageSource; end
+      class Unknown < ImageSource; end
+    end
+
     # The incremental refresh configuration for a dataset.
     #
     # @!attribute [rw] lookback_window
@@ -18246,6 +19067,19 @@ module Aws::QuickSight
     class InternalFailureException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An internal service exception.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/InternalServerException AWS API Documentation
+    #
+    class InternalServerException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19483,6 +20317,49 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that owns the brands that
+    #   you want to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned in a single request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListBrandsRequest AWS API Documentation
+    #
+    class ListBrandsRequest < Struct.new(
+      :aws_account_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] brands
+    #   A list of all brands in your Amazon Web Services account. This
+    #   structure provides basic information about each brand.
+    #   @return [Array<Types::BrandSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListBrandsResponse AWS API Documentation
+    #
+    class ListBrandsResponse < Struct.new(
+      :next_token,
+      :brands)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The display options of a control.
     #
     # @!attribute [rw] search_options
@@ -19538,6 +20415,58 @@ module Aws::QuickSight
     #
     class ListControlSelectAllOptions < Struct.new(
       :visibility)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the custom
+    #   permissions profiles that you want to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListCustomPermissionsRequest AWS API Documentation
+    #
+    class ListCustomPermissionsRequest < Struct.new(
+      :aws_account_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] custom_permissions_list
+    #   A list of custom permissions profiles.
+    #   @return [Array<Types::CustomPermissions>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListCustomPermissionsResponse AWS API Documentation
+    #
+    class ListCustomPermissionsResponse < Struct.new(
+      :status,
+      :custom_permissions_list,
+      :next_token,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21238,6 +22167,82 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The logo configuration.
+    #
+    # @!attribute [rw] alt_text
+    #   The alt text for the logo.
+    #   @return [String]
+    #
+    # @!attribute [rw] logo_set
+    #   A set of configured logos.
+    #   @return [Types::LogoSet]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Logo AWS API Documentation
+    #
+    class Logo < Struct.new(
+      :alt_text,
+      :logo_set)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The logo configuration.
+    #
+    # @!attribute [rw] alt_text
+    #   The alt text for the logo.
+    #   @return [String]
+    #
+    # @!attribute [rw] logo_set
+    #   A set of configured logos.
+    #   @return [Types::LogoSetConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/LogoConfiguration AWS API Documentation
+    #
+    class LogoConfiguration < Struct.new(
+      :alt_text,
+      :logo_set)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A set of logos.
+    #
+    # @!attribute [rw] primary
+    #   The primary logo.
+    #   @return [Types::ImageSet]
+    #
+    # @!attribute [rw] favicon
+    #   The favicon logo.
+    #   @return [Types::ImageSet]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/LogoSet AWS API Documentation
+    #
+    class LogoSet < Struct.new(
+      :primary,
+      :favicon)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The logo set configuration.
+    #
+    # @!attribute [rw] primary
+    #   The primary logo.
+    #   @return [Types::ImageSetConfiguration]
+    #
+    # @!attribute [rw] favicon
+    #   The favicon logo.
+    #   @return [Types::ImageSetConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/LogoSetConfiguration AWS API Documentation
+    #
+    class LogoSetConfiguration < Struct.new(
+      :primary,
+      :favicon)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The text format for a subtitle.
     #
     # This is a union type structure. For this structure to be valid, only
@@ -21687,6 +22692,25 @@ module Aws::QuickSight
       :creation_status,
       :identity_store,
       :namespace_error)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The navigation bar style.
+    #
+    # @!attribute [rw] global_navbar
+    #   The global navigation bar style.
+    #   @return [Types::Palette]
+    #
+    # @!attribute [rw] contextual_navbar
+    #   The contextual navigation bar style.
+    #   @return [Types::Palette]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/NavbarStyle AWS API Documentation
+    #
+    class NavbarStyle < Struct.new(
+      :global_navbar,
+      :contextual_navbar)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22245,6 +23269,38 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # An object that contains information needed to create a data source
+    # connection that uses OAuth client credentials. This option is
+    # available for data source connections that are made with Snowflake and
+    # Starburst.
+    #
+    # @!attribute [rw] token_provider_url
+    #   The token endpoint URL of the identity provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] o_auth_scope
+    #   The OAuth scope.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_provider_vpc_connection_properties
+    #   VPC connection properties.
+    #   @return [Types::VpcConnectionProperties]
+    #
+    # @!attribute [rw] identity_provider_resource_uri
+    #   The resource uri of the identity provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/OAuthParameters AWS API Documentation
+    #
+    class OAuthParameters < Struct.new(
+      :token_provider_url,
+      :o_auth_scope,
+      :identity_provider_vpc_connection_properties,
+      :identity_provider_resource_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The parameters for Oracle.
     #
     # @!attribute [rw] host
@@ -22338,6 +23394,25 @@ module Aws::QuickSight
     class PaginationConfiguration < Struct.new(
       :page_size,
       :page_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The color palette.
+    #
+    # @!attribute [rw] foreground
+    #   The foreground color.
+    #   @return [String]
+    #
+    # @!attribute [rw] background
+    #   The background color.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Palette AWS API Documentation
+    #
+    class Palette < Struct.new(
+      :foreground,
+      :background)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26311,9 +27386,9 @@ module Aws::QuickSight
     #
     # @!attribute [rw] filters
     #   The filters to apply to the search. Currently, you can search only
-    #   by user name, for example, `"Filters": [ \{ "Name":
+    #   by user name, for example, `"Filters": [ { "Name":
     #   "QUICKSIGHT_USER", "Operator": "StringEquals", "Value":
-    #   "arn:aws:quicksight:us-east-1:1:user/default/UserName1" \} ]`
+    #   "arn:aws:quicksight:us-east-1:1:user/default/UserName1" } ]`
     #   @return [Array<Types::DashboardSearchFilter>]
     #
     # @!attribute [rw] next_token
@@ -26480,9 +27555,9 @@ module Aws::QuickSight
     #
     # @!attribute [rw] filters
     #   The filters to apply to the search. Currently, you can search only
-    #   by the parent folder ARN. For example, `"Filters": [ \{ "Name":
+    #   by the parent folder ARN. For example, `"Filters": [ { "Name":
     #   "PARENT_FOLDER_ARN", "Operator": "StringEquals", "Value":
-    #   "arn:aws:quicksight:us-east-1:1:folder/folderId" \} ]`.
+    #   "arn:aws:quicksight:us-east-1:1:folder/folderId" } ]`.
     #   @return [Array<Types::FolderSearchFilter>]
     #
     # @!attribute [rw] next_token
@@ -27800,12 +28875,29 @@ module Aws::QuickSight
     #   Warehouse.
     #   @return [String]
     #
+    # @!attribute [rw] authentication_type
+    #   The authentication type that you want to use for your connection.
+    #   This parameter accepts OAuth and non-OAuth authentication types.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_access_control_role
+    #   The database access control role.
+    #   @return [String]
+    #
+    # @!attribute [rw] o_auth_parameters
+    #   An object that contains information needed to create a data source
+    #   connection between an Amazon QuickSight account and Snowflake.
+    #   @return [Types::OAuthParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SnowflakeParameters AWS API Documentation
     #
     class SnowflakeParameters < Struct.new(
       :host,
       :database,
-      :warehouse)
+      :warehouse,
+      :authentication_type,
+      :database_access_control_role,
+      :o_auth_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27916,13 +29008,30 @@ module Aws::QuickSight
     #   The product type for the Starburst data source.
     #   @return [String]
     #
+    # @!attribute [rw] database_access_control_role
+    #   The database access control role.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_type
+    #   The authentication type that you want to use for your connection.
+    #   This parameter accepts OAuth and non-OAuth authentication types.
+    #   @return [String]
+    #
+    # @!attribute [rw] o_auth_parameters
+    #   An object that contains information needed to create a data source
+    #   connection between an Amazon QuickSight account and Starburst.
+    #   @return [Types::OAuthParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/StarburstParameters AWS API Documentation
     #
     class StarburstParameters < Struct.new(
       :host,
       :port,
       :catalog,
-      :product_type)
+      :product_type,
+      :database_access_control_role,
+      :authentication_type,
+      :o_auth_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -32537,6 +33646,169 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that owns the brand
+    #   assignment.
+    #   @return [String]
+    #
+    # @!attribute [rw] brand_arn
+    #   The Amazon Resource Name (ARN) of the brand.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateBrandAssignmentRequest AWS API Documentation
+    #
+    class UpdateBrandAssignmentRequest < Struct.new(
+      :aws_account_id,
+      :brand_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] brand_arn
+    #   The Amazon Resource Name (ARN) of the brand.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateBrandAssignmentResponse AWS API Documentation
+    #
+    class UpdateBrandAssignmentResponse < Struct.new(
+      :request_id,
+      :brand_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that owns the brand.
+    #   @return [String]
+    #
+    # @!attribute [rw] brand_id
+    #   The ID of the Amazon QuickSight brand.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The ID of the published version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateBrandPublishedVersionRequest AWS API Documentation
+    #
+    class UpdateBrandPublishedVersionRequest < Struct.new(
+      :aws_account_id,
+      :brand_id,
+      :version_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The ID of the published version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateBrandPublishedVersionResponse AWS API Documentation
+    #
+    class UpdateBrandPublishedVersionResponse < Struct.new(
+      :request_id,
+      :version_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that owns the brand.
+    #   @return [String]
+    #
+    # @!attribute [rw] brand_id
+    #   The ID of the Amazon QuickSight brand.
+    #   @return [String]
+    #
+    # @!attribute [rw] brand_definition
+    #   The definition of the brand.
+    #   @return [Types::BrandDefinition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateBrandRequest AWS API Documentation
+    #
+    class UpdateBrandRequest < Struct.new(
+      :aws_account_id,
+      :brand_id,
+      :brand_definition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] brand_detail
+    #   The details of the brand.
+    #   @return [Types::BrandDetail]
+    #
+    # @!attribute [rw] brand_definition
+    #   The definition of the brand.
+    #   @return [Types::BrandDefinition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateBrandResponse AWS API Documentation
+    #
+    class UpdateBrandResponse < Struct.new(
+      :request_id,
+      :brand_detail,
+      :brand_definition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the custom
+    #   permissions profile that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_permissions_name
+    #   The name of the custom permissions profile that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] capabilities
+    #   A set of actions to include in the custom permissions profile.
+    #   @return [Types::Capabilities]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateCustomPermissionsRequest AWS API Documentation
+    #
+    class UpdateCustomPermissionsRequest < Struct.new(
+      :aws_account_id,
+      :custom_permissions_name,
+      :capabilities)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the custom permissions profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateCustomPermissionsResponse AWS API Documentation
+    #
+    class UpdateCustomPermissionsResponse < Struct.new(
+      :status,
+      :arn,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
     #   The ID of the Amazon Web Services account that contains the
     #   dashboard whose links you want to update.
     #   @return [String]
@@ -34374,6 +35646,52 @@ module Aws::QuickSight
       :topic_id,
       :arn,
       :refresh_arn,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_name
+    #   The username of the user that you want to update custom permissions
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the custom
+    #   permission configuration that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace that the user belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_permissions_name
+    #   The name of the custom permissions that you want to update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateUserCustomPermissionRequest AWS API Documentation
+    #
+    class UpdateUserCustomPermissionRequest < Struct.new(
+      :user_name,
+      :aws_account_id,
+      :namespace,
+      :custom_permissions_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateUserCustomPermissionResponse AWS API Documentation
+    #
+    class UpdateUserCustomPermissionResponse < Struct.new(
       :request_id,
       :status)
       SENSITIVE = []

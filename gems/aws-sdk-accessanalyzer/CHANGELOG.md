@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2024-11-14)
+------------------
+
+* Feature - Expand analyzer configuration capabilities for unused access analyzers. Unused access analyzer configurations now support the ability to exclude accounts and resource tags from analysis providing more granular control over the scope of analysis.
+
+1.63.0 (2024-11-13)
+------------------
+
+* Feature - This release adds support for policy validation and external access findings for resource control policies (RCP). IAM Access Analyzer helps you author functional and secure RCPs and awareness that a RCP may restrict external access. Updated service API, documentation, and paginators.
+
+1.62.0 (2024-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.61.0 (2024-10-18)
 ------------------
 

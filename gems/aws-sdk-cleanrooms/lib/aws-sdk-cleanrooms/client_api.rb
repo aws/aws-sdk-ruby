@@ -165,6 +165,8 @@ module Aws::CleanRooms
     CreateMembershipOutput = Shapes::StructureShape.new(name: 'CreateMembershipOutput')
     CreatePrivacyBudgetTemplateInput = Shapes::StructureShape.new(name: 'CreatePrivacyBudgetTemplateInput')
     CreatePrivacyBudgetTemplateOutput = Shapes::StructureShape.new(name: 'CreatePrivacyBudgetTemplateOutput')
+    CustomMLMemberAbilities = Shapes::ListShape.new(name: 'CustomMLMemberAbilities')
+    CustomMLMemberAbility = Shapes::StringShape.new(name: 'CustomMLMemberAbility')
     DataEncryptionMetadata = Shapes::StructureShape.new(name: 'DataEncryptionMetadata')
     DeleteAnalysisTemplateInput = Shapes::StructureShape.new(name: 'DeleteAnalysisTemplateInput')
     DeleteAnalysisTemplateOutput = Shapes::StructureShape.new(name: 'DeleteAnalysisTemplateOutput')
@@ -326,6 +328,8 @@ module Aws::CleanRooms
     ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
     ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    MLMemberAbilities = Shapes::StructureShape.new(name: 'MLMemberAbilities')
+    MLPaymentConfig = Shapes::StructureShape.new(name: 'MLPaymentConfig')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MemberAbilities = Shapes::ListShape.new(name: 'MemberAbilities')
     MemberAbility = Shapes::StringShape.new(name: 'MemberAbility')
@@ -337,6 +341,9 @@ module Aws::CleanRooms
     Membership = Shapes::StructureShape.new(name: 'Membership')
     MembershipArn = Shapes::StringShape.new(name: 'MembershipArn')
     MembershipIdentifier = Shapes::StringShape.new(name: 'MembershipIdentifier')
+    MembershipMLPaymentConfig = Shapes::StructureShape.new(name: 'MembershipMLPaymentConfig')
+    MembershipModelInferencePaymentConfig = Shapes::StructureShape.new(name: 'MembershipModelInferencePaymentConfig')
+    MembershipModelTrainingPaymentConfig = Shapes::StructureShape.new(name: 'MembershipModelTrainingPaymentConfig')
     MembershipPaymentConfiguration = Shapes::StructureShape.new(name: 'MembershipPaymentConfiguration')
     MembershipProtectedQueryOutputConfiguration = Shapes::UnionShape.new(name: 'MembershipProtectedQueryOutputConfiguration')
     MembershipProtectedQueryResultConfiguration = Shapes::StructureShape.new(name: 'MembershipProtectedQueryResultConfiguration')
@@ -345,6 +352,8 @@ module Aws::CleanRooms
     MembershipStatus = Shapes::StringShape.new(name: 'MembershipStatus')
     MembershipSummary = Shapes::StructureShape.new(name: 'MembershipSummary')
     MembershipSummaryList = Shapes::ListShape.new(name: 'MembershipSummaryList')
+    ModelInferencePaymentConfig = Shapes::StructureShape.new(name: 'ModelInferencePaymentConfig')
+    ModelTrainingPaymentConfig = Shapes::StructureShape.new(name: 'ModelTrainingPaymentConfig')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     ParameterMap = Shapes::MapShape.new(name: 'ParameterMap')
     ParameterName = Shapes::StringShape.new(name: 'ParameterName')
@@ -1014,6 +1023,7 @@ module Aws::CleanRooms
     CreateCollaborationInput.add_member(:name, Shapes::ShapeRef.new(shape: CollaborationName, required: true, location_name: "name"))
     CreateCollaborationInput.add_member(:description, Shapes::ShapeRef.new(shape: CollaborationDescription, required: true, location_name: "description"))
     CreateCollaborationInput.add_member(:creator_member_abilities, Shapes::ShapeRef.new(shape: MemberAbilities, required: true, location_name: "creatorMemberAbilities"))
+    CreateCollaborationInput.add_member(:creator_ml_member_abilities, Shapes::ShapeRef.new(shape: MLMemberAbilities, location_name: "creatorMLMemberAbilities"))
     CreateCollaborationInput.add_member(:creator_display_name, Shapes::ShapeRef.new(shape: DisplayName, required: true, location_name: "creatorDisplayName"))
     CreateCollaborationInput.add_member(:data_encryption_metadata, Shapes::ShapeRef.new(shape: DataEncryptionMetadata, location_name: "dataEncryptionMetadata"))
     CreateCollaborationInput.add_member(:query_log_status, Shapes::ShapeRef.new(shape: CollaborationQueryLogStatus, required: true, location_name: "queryLogStatus"))
@@ -1116,6 +1126,8 @@ module Aws::CleanRooms
 
     CreatePrivacyBudgetTemplateOutput.add_member(:privacy_budget_template, Shapes::ShapeRef.new(shape: PrivacyBudgetTemplate, required: true, location_name: "privacyBudgetTemplate"))
     CreatePrivacyBudgetTemplateOutput.struct_class = Types::CreatePrivacyBudgetTemplateOutput
+
+    CustomMLMemberAbilities.member = Shapes::ShapeRef.new(shape: CustomMLMemberAbility)
 
     DataEncryptionMetadata.add_member(:allow_cleartext, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "allowCleartext"))
     DataEncryptionMetadata.add_member(:allow_duplicates, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "allowDuplicates"))
@@ -1650,12 +1662,20 @@ module Aws::CleanRooms
     ListTagsForResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "tags"))
     ListTagsForResourceOutput.struct_class = Types::ListTagsForResourceOutput
 
+    MLMemberAbilities.add_member(:custom_ml_member_abilities, Shapes::ShapeRef.new(shape: CustomMLMemberAbilities, required: true, location_name: "customMLMemberAbilities"))
+    MLMemberAbilities.struct_class = Types::MLMemberAbilities
+
+    MLPaymentConfig.add_member(:model_training, Shapes::ShapeRef.new(shape: ModelTrainingPaymentConfig, location_name: "modelTraining"))
+    MLPaymentConfig.add_member(:model_inference, Shapes::ShapeRef.new(shape: ModelInferencePaymentConfig, location_name: "modelInference"))
+    MLPaymentConfig.struct_class = Types::MLPaymentConfig
+
     MemberAbilities.member = Shapes::ShapeRef.new(shape: MemberAbility)
 
     MemberList.member = Shapes::ShapeRef.new(shape: MemberSpecification)
 
     MemberSpecification.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
     MemberSpecification.add_member(:member_abilities, Shapes::ShapeRef.new(shape: MemberAbilities, required: true, location_name: "memberAbilities"))
+    MemberSpecification.add_member(:ml_member_abilities, Shapes::ShapeRef.new(shape: MLMemberAbilities, location_name: "mlMemberAbilities"))
     MemberSpecification.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, required: true, location_name: "displayName"))
     MemberSpecification.add_member(:payment_configuration, Shapes::ShapeRef.new(shape: PaymentConfiguration, location_name: "paymentConfiguration"))
     MemberSpecification.struct_class = Types::MemberSpecification
@@ -1664,6 +1684,7 @@ module Aws::CleanRooms
     MemberSummary.add_member(:status, Shapes::ShapeRef.new(shape: MemberStatus, required: true, location_name: "status"))
     MemberSummary.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, required: true, location_name: "displayName"))
     MemberSummary.add_member(:abilities, Shapes::ShapeRef.new(shape: MemberAbilities, required: true, location_name: "abilities"))
+    MemberSummary.add_member(:ml_abilities, Shapes::ShapeRef.new(shape: MLMemberAbilities, location_name: "mlAbilities"))
     MemberSummary.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
     MemberSummary.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
     MemberSummary.add_member(:membership_id, Shapes::ShapeRef.new(shape: UUID, location_name: "membershipId"))
@@ -1684,12 +1705,24 @@ module Aws::CleanRooms
     Membership.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
     Membership.add_member(:status, Shapes::ShapeRef.new(shape: MembershipStatus, required: true, location_name: "status"))
     Membership.add_member(:member_abilities, Shapes::ShapeRef.new(shape: MemberAbilities, required: true, location_name: "memberAbilities"))
+    Membership.add_member(:ml_member_abilities, Shapes::ShapeRef.new(shape: MLMemberAbilities, location_name: "mlMemberAbilities"))
     Membership.add_member(:query_log_status, Shapes::ShapeRef.new(shape: MembershipQueryLogStatus, required: true, location_name: "queryLogStatus"))
     Membership.add_member(:default_result_configuration, Shapes::ShapeRef.new(shape: MembershipProtectedQueryResultConfiguration, location_name: "defaultResultConfiguration"))
     Membership.add_member(:payment_configuration, Shapes::ShapeRef.new(shape: MembershipPaymentConfiguration, required: true, location_name: "paymentConfiguration"))
     Membership.struct_class = Types::Membership
 
+    MembershipMLPaymentConfig.add_member(:model_training, Shapes::ShapeRef.new(shape: MembershipModelTrainingPaymentConfig, location_name: "modelTraining"))
+    MembershipMLPaymentConfig.add_member(:model_inference, Shapes::ShapeRef.new(shape: MembershipModelInferencePaymentConfig, location_name: "modelInference"))
+    MembershipMLPaymentConfig.struct_class = Types::MembershipMLPaymentConfig
+
+    MembershipModelInferencePaymentConfig.add_member(:is_responsible, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isResponsible"))
+    MembershipModelInferencePaymentConfig.struct_class = Types::MembershipModelInferencePaymentConfig
+
+    MembershipModelTrainingPaymentConfig.add_member(:is_responsible, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isResponsible"))
+    MembershipModelTrainingPaymentConfig.struct_class = Types::MembershipModelTrainingPaymentConfig
+
     MembershipPaymentConfiguration.add_member(:query_compute, Shapes::ShapeRef.new(shape: MembershipQueryComputePaymentConfig, required: true, location_name: "queryCompute"))
+    MembershipPaymentConfiguration.add_member(:machine_learning, Shapes::ShapeRef.new(shape: MembershipMLPaymentConfig, location_name: "machineLearning"))
     MembershipPaymentConfiguration.struct_class = Types::MembershipPaymentConfiguration
 
     MembershipProtectedQueryOutputConfiguration.add_member(:s3, Shapes::ShapeRef.new(shape: ProtectedQueryS3OutputConfiguration, location_name: "s3"))
@@ -1716,15 +1749,23 @@ module Aws::CleanRooms
     MembershipSummary.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
     MembershipSummary.add_member(:status, Shapes::ShapeRef.new(shape: MembershipStatus, required: true, location_name: "status"))
     MembershipSummary.add_member(:member_abilities, Shapes::ShapeRef.new(shape: MemberAbilities, required: true, location_name: "memberAbilities"))
+    MembershipSummary.add_member(:ml_member_abilities, Shapes::ShapeRef.new(shape: MLMemberAbilities, location_name: "mlMemberAbilities"))
     MembershipSummary.add_member(:payment_configuration, Shapes::ShapeRef.new(shape: MembershipPaymentConfiguration, required: true, location_name: "paymentConfiguration"))
     MembershipSummary.struct_class = Types::MembershipSummary
 
     MembershipSummaryList.member = Shapes::ShapeRef.new(shape: MembershipSummary)
 
+    ModelInferencePaymentConfig.add_member(:is_responsible, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isResponsible"))
+    ModelInferencePaymentConfig.struct_class = Types::ModelInferencePaymentConfig
+
+    ModelTrainingPaymentConfig.add_member(:is_responsible, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isResponsible"))
+    ModelTrainingPaymentConfig.struct_class = Types::ModelTrainingPaymentConfig
+
     ParameterMap.key = Shapes::ShapeRef.new(shape: ParameterName)
     ParameterMap.value = Shapes::ShapeRef.new(shape: ParameterValue)
 
     PaymentConfiguration.add_member(:query_compute, Shapes::ShapeRef.new(shape: QueryComputePaymentConfig, required: true, location_name: "queryCompute"))
+    PaymentConfiguration.add_member(:machine_learning, Shapes::ShapeRef.new(shape: MLPaymentConfig, location_name: "machineLearning"))
     PaymentConfiguration.struct_class = Types::PaymentConfiguration
 
     PopulateIdMappingTableInput.add_member(:id_mapping_table_identifier, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "idMappingTableIdentifier"))

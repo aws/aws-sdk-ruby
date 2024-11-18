@@ -52,6 +52,31 @@ module Aws::QApps
       SENSITIVE: []
     end
 
+    class BatchCreateCategoryInput
+      attr_accessor instance_id: ::String
+      attr_accessor categories: ::Array[Types::BatchCreateCategoryInputCategory]
+      SENSITIVE: []
+    end
+
+    class BatchCreateCategoryInputCategory
+      attr_accessor id: ::String
+      attr_accessor title: ::String
+      attr_accessor color: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDeleteCategoryInput
+      attr_accessor instance_id: ::String
+      attr_accessor categories: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchUpdateCategoryInput
+      attr_accessor instance_id: ::String
+      attr_accessor categories: ::Array[Types::CategoryInput]
+      SENSITIVE: []
+    end
+
     class Card
       attr_accessor text_input: Types::TextInputCard
       attr_accessor q_query: Types::QQueryCard
@@ -107,6 +132,15 @@ module Aws::QApps
     class Category
       attr_accessor id: ::String
       attr_accessor title: ::String
+      attr_accessor color: ::String
+      attr_accessor app_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class CategoryInput
+      attr_accessor id: ::String
+      attr_accessor title: ::String
+      attr_accessor color: ::String
       SENSITIVE: []
     end
 
@@ -343,6 +377,16 @@ module Aws::QApps
       attr_accessor is_rated_by_user: bool
       attr_accessor user_count: ::Integer
       attr_accessor is_verified: bool
+      SENSITIVE: []
+    end
+
+    class ListCategoriesInput
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListCategoriesOutput
+      attr_accessor categories: ::Array[Types::Category]
       SENSITIVE: []
     end
 

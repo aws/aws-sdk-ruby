@@ -306,6 +306,17 @@ module Aws::RDS
       data[:supports_integrations]
     end
 
+    # Specifies any Aurora Serverless v2 properties or limits that differ
+    # between Aurora engine versions. You can test the values of this
+    # attribute when deciding which Aurora version to use in a new or
+    # upgraded DB cluster. You can also retrieve the version of an existing
+    # DB cluster and check whether that version supports certain Aurora
+    # Serverless v2 features before you attempt to use those features.
+    # @return [Types::ServerlessV2FeaturesSupport]
+    def serverless_v2_features_support
+      data[:serverless_v2_features_support]
+    end
+
     # @!endgroup
 
     # @return [Client]

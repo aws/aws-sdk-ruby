@@ -1929,11 +1929,10 @@ module Aws::LookoutforVision
     #   the GreengrassConfiguration$CompilerOptions field. For example, you
     #   can use the following compiler options for CPU:
     #
-    #   * `mcpu`: CPU micro-architecture. For example, `\{'mcpu':
-    #     'skylake-avx512'\}`
+    #   * `mcpu`: CPU micro-architecture. For example, `{'mcpu':
+    #     'skylake-avx512'}`
     #
-    #   * `mattr`: CPU flags. For example, `\{'mattr': ['+neon',
-    #     '+vfpv4']\}`
+    #   * `mattr`: CPU flags. For example, `{'mattr': ['+neon', '+vfpv4']}`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/TargetPlatform AWS API Documentation

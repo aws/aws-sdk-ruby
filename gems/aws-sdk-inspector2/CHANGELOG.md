@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2024-11-11)
+------------------
+
+* Feature - Adds support for filePath filter.
+
 1.43.0 (2024-10-18)
 ------------------
 

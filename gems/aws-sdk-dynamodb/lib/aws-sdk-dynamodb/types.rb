@@ -132,13 +132,13 @@ module Aws::DynamoDB
     # @!attribute [rw] m
     #   An attribute of type Map. For example:
     #
-    #   `"M": \{"Name": \{"S": "Joe"\}, "Age": \{"N": "35"\}\}`
+    #   `"M": {"Name": {"S": "Joe"}, "Age": {"N": "35"}}`
     #   @return [Hash<String,Types::AttributeValue>]
     #
     # @!attribute [rw] l
     #   An attribute of type List. For example:
     #
-    #   `"L": [ \{"S": "Cookies"\} , \{"S": "Coffee"\}, \{"N": "3.14159"\}]`
+    #   `"L": [ {"S": "Cookies"} , {"S": "Coffee"}, {"N": "3.14159"}]`
     #   @return [Array<Types::AttributeValue>]
     #
     # @!attribute [rw] null
@@ -258,7 +258,6 @@ module Aws::DynamoDB
     #       if the existing data type is a set of strings, the `Value` must
     #       also be a set of strings. The same holds true for number sets
     #       and binary sets.
-    #
     #     This action is only valid for an existing attribute whose data
     #     type is number or is a set. Do not use `ADD` for any other data
     #     types.
@@ -760,7 +759,6 @@ module Aws::DynamoDB
     #
     #     * To prevent special characters in an attribute name from being
     #       misinterpreted in an expression.
-    #
     #     Use the **#** character in an expression to dereference an
     #     attribute name. For example, consider the following attribute
     #     name:
@@ -768,24 +766,21 @@ module Aws::DynamoDB
     #     * `Percentile`
     #
     #     ^
-    #
     #     The name of this attribute conflicts with a reserved word, so it
     #     cannot be used directly in an expression. (For the complete list
     #     of reserved words, see [Reserved Words][1] in the *Amazon DynamoDB
     #     Developer Guide*). To work around this, you could specify the
     #     following for `ExpressionAttributeNames`:
     #
-    #     * `\{"#P":"Percentile"\}`
+    #     * `{"#P":"Percentile"}`
     #
     #     ^
-    #
     #     You could then use this substitution in an expression, as in this
     #     example:
     #
     #     * `#P = :val`
     #
     #     ^
-    #
     #     <note markdown="1"> Tokens that begin with the **\:** character are *expression
     #     attribute values*, which are placeholders for the actual value at
     #     runtime.
@@ -1013,7 +1008,6 @@ module Aws::DynamoDB
     #       values for *both* the partition key and the sort key.
     #
     #     ^
-    #
     #   * `PutRequest` - Perform a `PutItem` operation on the specified
     #     item. The item to be put is identified by an `Item` subelement:
     #
@@ -1089,7 +1083,6 @@ module Aws::DynamoDB
     #       attribute name and an attribute value.
     #
     #     ^
-    #
     #   * `PutRequest` - Perform a `PutItem` operation on the specified
     #     item. The item to be put is identified by an `Item` subelement:
     #
@@ -1301,9 +1294,9 @@ module Aws::DynamoDB
     #     of type String, Number, Binary, String Set, Number Set, or Binary
     #     Set. If an item contains an `AttributeValue` element of a
     #     different type than the one provided in the request, the value
-    #     does not match. For example, `\{"S":"6"\}` does not equal
-    #     `\{"N":"6"\}`. Also, `\{"N":"6"\}` does not equal `\{"NS":["6",
-    #     "2", "1"]\}`.
+    #     does not match. For example, `{"S":"6"}` does not equal
+    #     `{"N":"6"}`. Also, `{"N":"6"}` does not equal `{"NS":["6", "2",
+    #     "1"]}`.
     #
     #
     #
@@ -1314,8 +1307,8 @@ module Aws::DynamoDB
     #     String, Number, Binary, String Set, Number Set, or Binary Set. If
     #     an item contains an `AttributeValue` of a different type than the
     #     one provided in the request, the value does not match. For
-    #     example, `\{"S":"6"\}` does not equal `\{"N":"6"\}`. Also,
-    #     `\{"N":"6"\}` does not equal `\{"NS":["6", "2", "1"]\}`.
+    #     example, `{"S":"6"}` does not equal `{"N":"6"}`. Also, `{"N":"6"}`
+    #     does not equal `{"NS":["6", "2", "1"]}`.
     #
     #
     #
@@ -1325,8 +1318,8 @@ module Aws::DynamoDB
     #     of type String, Number, or Binary (not a set type). If an item
     #     contains an `AttributeValue` element of a different type than the
     #     one provided in the request, the value does not match. For
-    #     example, `\{"S":"6"\}` does not equal `\{"N":"6"\}`. Also,
-    #     `\{"N":"6"\}` does not compare to `\{"NS":["6", "2", "1"]\}`.
+    #     example, `{"S":"6"}` does not equal `{"N":"6"}`. Also, `{"N":"6"}`
+    #     does not compare to `{"NS":["6", "2", "1"]}`.
     #
     #
     #
@@ -1335,9 +1328,9 @@ module Aws::DynamoDB
     #     `AttributeValueList` can contain only one `AttributeValue` of type
     #     String, Number, or Binary (not a set type). If an item contains an
     #     `AttributeValue` element of a different type than the one provided
-    #     in the request, the value does not match. For example,
-    #     `\{"S":"6"\}` does not equal `\{"N":"6"\}`. Also, `\{"N":"6"\}`
-    #     does not compare to `\{"NS":["6", "2", "1"]\}`.
+    #     in the request, the value does not match. For example, `{"S":"6"}`
+    #     does not equal `{"N":"6"}`. Also, `{"N":"6"}` does not compare to
+    #     `{"NS":["6", "2", "1"]}`.
     #
     #
     #
@@ -1347,8 +1340,8 @@ module Aws::DynamoDB
     #     of type String, Number, or Binary (not a set type). If an item
     #     contains an `AttributeValue` element of a different type than the
     #     one provided in the request, the value does not match. For
-    #     example, `\{"S":"6"\}` does not equal `\{"N":"6"\}`. Also,
-    #     `\{"N":"6"\}` does not compare to `\{"NS":["6", "2", "1"]\}`.
+    #     example, `{"S":"6"}` does not equal `{"N":"6"}`. Also, `{"N":"6"}`
+    #     does not compare to `{"NS":["6", "2", "1"]}`.
     #
     #
     #
@@ -1358,8 +1351,8 @@ module Aws::DynamoDB
     #     of type String, Number, or Binary (not a set type). If an item
     #     contains an `AttributeValue` element of a different type than the
     #     one provided in the request, the value does not match. For
-    #     example, `\{"S":"6"\}` does not equal `\{"N":"6"\}`. Also,
-    #     `\{"N":"6"\}` does not compare to `\{"NS":["6", "2", "1"]\}`.
+    #     example, `{"S":"6"}` does not equal `{"N":"6"}`. Also, `{"N":"6"}`
+    #     does not compare to `{"NS":["6", "2", "1"]}`.
     #
     #
     #
@@ -1444,9 +1437,9 @@ module Aws::DynamoDB
     #     equal to, the first element and less than, or equal to, the second
     #     element. If an item contains an `AttributeValue` element of a
     #     different type than the one provided in the request, the value
-    #     does not match. For example, `\{"S":"6"\}` does not compare to
-    #     `\{"N":"6"\}`. Also, `\{"N":"6"\}` does not compare to
-    #     `\{"NS":["6", "2", "1"]\}`
+    #     does not match. For example, `{"S":"6"}` does not compare to
+    #     `{"N":"6"}`. Also, `{"N":"6"}` does not compare to `{"NS":["6",
+    #     "2", "1"]}`
     #
     #   For usage examples of `AttributeValueList` and `ComparisonOperator`,
     #   see [Legacy Conditional Parameters][1] in the *Amazon DynamoDB
@@ -1732,6 +1725,11 @@ module Aws::DynamoDB
     #   `MaxReadRequestUnits`, `MaxWriteRequestUnits`, or both.
     #   @return [Types::OnDemandThroughput]
     #
+    # @!attribute [rw] warm_throughput
+    #   Represents the warm throughput value (in read units per second and
+    #   write units per second) when creating a secondary index.
+    #   @return [Types::WarmThroughput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateGlobalSecondaryIndexAction AWS API Documentation
     #
     class CreateGlobalSecondaryIndexAction < Struct.new(
@@ -1739,7 +1737,8 @@ module Aws::DynamoDB
       :key_schema,
       :projection,
       :provisioned_throughput,
-      :on_demand_throughput)
+      :on_demand_throughput,
+      :warm_throughput)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1926,7 +1925,6 @@ module Aws::DynamoDB
     #
     #       * `ALL` - All of the table attributes are projected into the
     #         index.
-    #
     #     * `NonKeyAttributes` - A list of one or more non-key attribute
     #       names that are projected into the secondary index. The total
     #       count of attributes provided in `NonKeyAttributes`, summed
@@ -1965,14 +1963,12 @@ module Aws::DynamoDB
     #
     #       * `ALL` - All of the table attributes are projected into the
     #         index.
-    #
     #     * `NonKeyAttributes` - A list of one or more non-key attribute
     #       names that are projected into the secondary index. The total
     #       count of attributes provided in `NonKeyAttributes`, summed
     #       across all of the secondary indexes, must not exceed 100. If you
     #       project the same attribute into two different indexes, this
     #       counts as two distinct attributes when determining the total.
-    #
     #   * `ProvisionedThroughput` - The provisioned throughput settings for
     #     the global secondary index, consisting of read and write capacity
     #     units.
@@ -2061,6 +2057,11 @@ module Aws::DynamoDB
     #   disabled (false) on the table.
     #   @return [Boolean]
     #
+    # @!attribute [rw] warm_throughput
+    #   Represents the warm throughput (in read units per second and write
+    #   units per second) for creating a table.
+    #   @return [Types::WarmThroughput]
+    #
     # @!attribute [rw] resource_policy
     #   An Amazon Web Services resource-based policy document in JSON format
     #   that will be attached to the table.
@@ -2106,6 +2107,7 @@ module Aws::DynamoDB
       :tags,
       :table_class,
       :deletion_protection_enabled,
+      :warm_throughput,
       :resource_policy,
       :on_demand_throughput)
       SENSITIVE = []
@@ -2374,7 +2376,7 @@ module Aws::DynamoDB
     #   Developer Guide*). To work around this, you could specify the
     #   following for `ExpressionAttributeNames`:
     #
-    #   * `\{"#P":"Percentile"\}`
+    #   * `{"#P":"Percentile"}`
     #
     #   ^
     #
@@ -2413,8 +2415,8 @@ module Aws::DynamoDB
     #   You would first need to specify `ExpressionAttributeValues` as
     #   follows:
     #
-    #   `\{ ":avail":\{"S":"Available"\}, ":back":\{"S":"Backordered"\},
-    #   ":disc":\{"S":"Discontinued"\} \}`
+    #   `{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"},
+    #   ":disc":{"S":"Discontinued"} }`
     #
     #   You could then use these values in an expression, such as this:
     #
@@ -3336,9 +3338,9 @@ module Aws::DynamoDB
     #     of type String, Number, Binary, String Set, Number Set, or Binary
     #     Set. If an item contains an `AttributeValue` element of a
     #     different type than the one provided in the request, the value
-    #     does not match. For example, `\{"S":"6"\}` does not equal
-    #     `\{"N":"6"\}`. Also, `\{"N":"6"\}` does not equal `\{"NS":["6",
-    #     "2", "1"]\}`.
+    #     does not match. For example, `{"S":"6"}` does not equal
+    #     `{"N":"6"}`. Also, `{"N":"6"}` does not equal `{"NS":["6", "2",
+    #     "1"]}`.
     #
     #
     #
@@ -3349,8 +3351,8 @@ module Aws::DynamoDB
     #     String, Number, Binary, String Set, Number Set, or Binary Set. If
     #     an item contains an `AttributeValue` of a different type than the
     #     one provided in the request, the value does not match. For
-    #     example, `\{"S":"6"\}` does not equal `\{"N":"6"\}`. Also,
-    #     `\{"N":"6"\}` does not equal `\{"NS":["6", "2", "1"]\}`.
+    #     example, `{"S":"6"}` does not equal `{"N":"6"}`. Also, `{"N":"6"}`
+    #     does not equal `{"NS":["6", "2", "1"]}`.
     #
     #
     #
@@ -3360,8 +3362,8 @@ module Aws::DynamoDB
     #     of type String, Number, or Binary (not a set type). If an item
     #     contains an `AttributeValue` element of a different type than the
     #     one provided in the request, the value does not match. For
-    #     example, `\{"S":"6"\}` does not equal `\{"N":"6"\}`. Also,
-    #     `\{"N":"6"\}` does not compare to `\{"NS":["6", "2", "1"]\}`.
+    #     example, `{"S":"6"}` does not equal `{"N":"6"}`. Also, `{"N":"6"}`
+    #     does not compare to `{"NS":["6", "2", "1"]}`.
     #
     #
     #
@@ -3370,9 +3372,9 @@ module Aws::DynamoDB
     #     `AttributeValueList` can contain only one `AttributeValue` of type
     #     String, Number, or Binary (not a set type). If an item contains an
     #     `AttributeValue` element of a different type than the one provided
-    #     in the request, the value does not match. For example,
-    #     `\{"S":"6"\}` does not equal `\{"N":"6"\}`. Also, `\{"N":"6"\}`
-    #     does not compare to `\{"NS":["6", "2", "1"]\}`.
+    #     in the request, the value does not match. For example, `{"S":"6"}`
+    #     does not equal `{"N":"6"}`. Also, `{"N":"6"}` does not compare to
+    #     `{"NS":["6", "2", "1"]}`.
     #
     #
     #
@@ -3382,8 +3384,8 @@ module Aws::DynamoDB
     #     of type String, Number, or Binary (not a set type). If an item
     #     contains an `AttributeValue` element of a different type than the
     #     one provided in the request, the value does not match. For
-    #     example, `\{"S":"6"\}` does not equal `\{"N":"6"\}`. Also,
-    #     `\{"N":"6"\}` does not compare to `\{"NS":["6", "2", "1"]\}`.
+    #     example, `{"S":"6"}` does not equal `{"N":"6"}`. Also, `{"N":"6"}`
+    #     does not compare to `{"NS":["6", "2", "1"]}`.
     #
     #
     #
@@ -3393,8 +3395,8 @@ module Aws::DynamoDB
     #     of type String, Number, or Binary (not a set type). If an item
     #     contains an `AttributeValue` element of a different type than the
     #     one provided in the request, the value does not match. For
-    #     example, `\{"S":"6"\}` does not equal `\{"N":"6"\}`. Also,
-    #     `\{"N":"6"\}` does not compare to `\{"NS":["6", "2", "1"]\}`.
+    #     example, `{"S":"6"}` does not equal `{"N":"6"}`. Also, `{"N":"6"}`
+    #     does not compare to `{"NS":["6", "2", "1"]}`.
     #
     #
     #
@@ -3479,9 +3481,9 @@ module Aws::DynamoDB
     #     equal to, the first element and less than, or equal to, the second
     #     element. If an item contains an `AttributeValue` element of a
     #     different type than the one provided in the request, the value
-    #     does not match. For example, `\{"S":"6"\}` does not compare to
-    #     `\{"N":"6"\}`. Also, `\{"N":"6"\}` does not compare to
-    #     `\{"NS":["6", "2", "1"]\}`
+    #     does not match. For example, `{"S":"6"}` does not compare to
+    #     `{"N":"6"}`. Also, `{"N":"6"}` does not compare to `{"NS":["6",
+    #     "2", "1"]}`
     #   @return [String]
     #
     # @!attribute [rw] attribute_value_list
@@ -3967,7 +3969,7 @@ module Aws::DynamoDB
     #   Developer Guide*). To work around this, you could specify the
     #   following for `ExpressionAttributeNames`:
     #
-    #   * `\{"#P":"Percentile"\}`
+    #   * `{"#P":"Percentile"}`
     #
     #   ^
     #
@@ -4125,6 +4127,13 @@ module Aws::DynamoDB
     #   `MaxReadRequestUnits`, `MaxWriteRequestUnits`, or both.
     #   @return [Types::OnDemandThroughput]
     #
+    # @!attribute [rw] warm_throughput
+    #   Represents the warm throughput value (in read units per second and
+    #   write units per second) for the specified secondary index. If you
+    #   use this parameter, you must specify `ReadUnitsPerSecond`,
+    #   `WriteUnitsPerSecond`, or both.
+    #   @return [Types::WarmThroughput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GlobalSecondaryIndex AWS API Documentation
     #
     class GlobalSecondaryIndex < Struct.new(
@@ -4132,7 +4141,8 @@ module Aws::DynamoDB
       :key_schema,
       :projection,
       :provisioned_throughput,
-      :on_demand_throughput)
+      :on_demand_throughput,
+      :warm_throughput)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4261,6 +4271,11 @@ module Aws::DynamoDB
     #   `MaxReadRequestUnits`, `MaxWriteRequestUnits`, or both.
     #   @return [Types::OnDemandThroughput]
     #
+    # @!attribute [rw] warm_throughput
+    #   Represents the warm throughput value (in read units per second and
+    #   write units per second) for the specified secondary index.
+    #   @return [Types::GlobalSecondaryIndexWarmThroughputDescription]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GlobalSecondaryIndexDescription AWS API Documentation
     #
     class GlobalSecondaryIndexDescription < Struct.new(
@@ -4273,7 +4288,8 @@ module Aws::DynamoDB
       :index_size_bytes,
       :item_count,
       :index_arn,
-      :on_demand_throughput)
+      :on_demand_throughput,
+      :warm_throughput)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4376,6 +4392,35 @@ module Aws::DynamoDB
       :update,
       :create,
       :delete)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The description of the warm throughput value on a global secondary
+    # index.
+    #
+    # @!attribute [rw] read_units_per_second
+    #   Represents warm throughput read units per second value for a global
+    #   secondary index.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] write_units_per_second
+    #   Represents warm throughput write units per second value for a global
+    #   secondary index.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   Represents the warm throughput status being created or updated on a
+    #   global secondary index. The status can only be `UPDATING` or
+    #   `ACTIVE`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GlobalSecondaryIndexWarmThroughputDescription AWS API Documentation
+    #
+    class GlobalSecondaryIndexWarmThroughputDescription < Struct.new(
+      :read_units_per_second,
+      :write_units_per_second,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5066,7 +5111,7 @@ module Aws::DynamoDB
     #   Developer Guide*). To work around this, you could specify the
     #   following for `ExpressionAttributeNames`:
     #
-    #   * `\{"#P":"Percentile"\}`
+    #   * `{"#P":"Percentile"}`
     #
     #   ^
     #
@@ -6259,7 +6304,7 @@ module Aws::DynamoDB
     #   Developer Guide*). To work around this, you could specify the
     #   following for `ExpressionAttributeNames`:
     #
-    #   * `\{"#P":"Percentile"\}`
+    #   * `{"#P":"Percentile"}`
     #
     #   ^
     #
@@ -6298,8 +6343,8 @@ module Aws::DynamoDB
     #   You would first need to specify `ExpressionAttributeValues` as
     #   follows:
     #
-    #   `\{ ":avail":\{"S":"Available"\}, ":back":\{"S":"Backordered"\},
-    #   ":disc":\{"S":"Discontinued"\} \}`
+    #   `{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"},
+    #   ":disc":{"S":"Discontinued"} }`
     #
     #   You could then use these values in an expression, such as this:
     #
@@ -6836,7 +6881,7 @@ module Aws::DynamoDB
     #   Developer Guide*). To work around this, you could specify the
     #   following for `ExpressionAttributeNames`:
     #
-    #   * `\{"#P":"Percentile"\}`
+    #   * `{"#P":"Percentile"}`
     #
     #   ^
     #
@@ -6875,8 +6920,8 @@ module Aws::DynamoDB
     #   You would first need to specify `ExpressionAttributeValues` as
     #   follows:
     #
-    #   `\{ ":avail":\{"S":"Available"\}, ":back":\{"S":"Backordered"\},
-    #   ":disc":\{"S":"Discontinued"\} \}`
+    #   `{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"},
+    #   ":disc":{"S":"Discontinued"} }`
     #
     #   You could then use these values in an expression, such as this:
     #
@@ -7148,6 +7193,10 @@ module Aws::DynamoDB
     #   specified replica table.
     #   @return [Types::OnDemandThroughputOverride]
     #
+    # @!attribute [rw] warm_throughput
+    #   Represents the warm throughput value for this replica.
+    #   @return [Types::TableWarmThroughputDescription]
+    #
     # @!attribute [rw] global_secondary_indexes
     #   Replica-specific global secondary index settings.
     #   @return [Array<Types::ReplicaGlobalSecondaryIndexDescription>]
@@ -7172,6 +7221,7 @@ module Aws::DynamoDB
       :kms_master_key_id,
       :provisioned_throughput_override,
       :on_demand_throughput_override,
+      :warm_throughput,
       :global_secondary_indexes,
       :replica_inaccessible_date_time,
       :replica_table_class_summary)
@@ -7283,12 +7333,18 @@ module Aws::DynamoDB
     #   secondary index in the specified replica table.
     #   @return [Types::OnDemandThroughputOverride]
     #
+    # @!attribute [rw] warm_throughput
+    #   Represents the warm throughput of the global secondary index for
+    #   this replica.
+    #   @return [Types::GlobalSecondaryIndexWarmThroughputDescription]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicaGlobalSecondaryIndexDescription AWS API Documentation
     #
     class ReplicaGlobalSecondaryIndexDescription < Struct.new(
       :index_name,
       :provisioned_throughput_override,
-      :on_demand_throughput_override)
+      :on_demand_throughput_override,
+      :warm_throughput)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8174,7 +8230,7 @@ module Aws::DynamoDB
     #   Developer Guide*). To work around this, you could specify the
     #   following for `ExpressionAttributeNames`:
     #
-    #   * `\{"#P":"Percentile"\}`
+    #   * `{"#P":"Percentile"}`
     #
     #   ^
     #
@@ -8213,8 +8269,8 @@ module Aws::DynamoDB
     #   You would first need to specify `ExpressionAttributeValues` as
     #   follows:
     #
-    #   `\{ ":avail":\{"S":"Available"\}, ":back":\{"S":"Backordered"\},
-    #   ":disc":\{"S":"Discontinued"\} \}`
+    #   `{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"},
+    #   ":disc":{"S":"Discontinued"} }`
     #
     #   You could then use these values in an expression, such as this:
     #
@@ -8646,7 +8702,6 @@ module Aws::DynamoDB
     #     * `HASH` - partition key
     #
     #     * `RANGE` - sort key
-    #
     #     <note markdown="1"> The partition key of an item is also known as its *hash
     #     attribute*. The term "hash attribute" derives from DynamoDB's
     #     usage of an internal hash function to evenly distribute data items
@@ -8762,14 +8817,12 @@ module Aws::DynamoDB
     #
     #       * `ALL` - All of the table attributes are projected into the
     #         index.
-    #
     #     * `NonKeyAttributes` - A list of one or more non-key attribute
     #       names that are projected into the secondary index. The total
     #       count of attributes provided in `NonKeyAttributes`, summed
     #       across all of the secondary indexes, must not exceed 100. If you
     #       project the same attribute into two different indexes, this
     #       counts as two distinct attributes when determining the total.
-    #
     #   * `IndexSizeBytes` - Represents the total size of the index, in
     #     bytes. DynamoDB updates this value approximately every six hours.
     #     Recent changes might not be reflected in this value.
@@ -8815,7 +8868,6 @@ module Aws::DynamoDB
     #     * `DELETING` - The index is being deleted.
     #
     #     * `ACTIVE` - The index is ready for use.
-    #
     #   * `ItemCount` - The number of items in the global secondary index.
     #     DynamoDB updates this value approximately every six hours. Recent
     #     changes might not be reflected in this value.
@@ -8842,14 +8894,12 @@ module Aws::DynamoDB
     #
     #       * `ALL` - All of the table attributes are projected into the
     #         index.
-    #
     #     * `NonKeyAttributes` - A list of one or more non-key attribute
     #       names that are projected into the secondary index. The total
     #       count of attributes provided in `NonKeyAttributes`, summed
     #       across all of the secondary indexes, must not exceed 100. If you
     #       project the same attribute into two different indexes, this
     #       counts as two distinct attributes when determining the total.
-    #
     #   * `ProvisionedThroughput` - The provisioned throughput settings for
     #     the global secondary index, consisting of read and write capacity
     #     units, along with data about increases and decreases.
@@ -8923,6 +8973,10 @@ module Aws::DynamoDB
     #   `MaxReadRequestUnits`, `MaxWriteRequestUnits`, or both.
     #   @return [Types::OnDemandThroughput]
     #
+    # @!attribute [rw] warm_throughput
+    #   Describes the warm throughput value of the base table.
+    #   @return [Types::TableWarmThroughputDescription]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TableDescription AWS API Documentation
     #
     class TableDescription < Struct.new(
@@ -8949,7 +9003,8 @@ module Aws::DynamoDB
       :archival_summary,
       :table_class_summary,
       :deletion_protection_enabled,
-      :on_demand_throughput)
+      :on_demand_throughput,
+      :warm_throughput)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8979,6 +9034,33 @@ module Aws::DynamoDB
     #
     class TableNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the warm throughput value (in read units per second and
+    # write units per second) of the base table.
+    #
+    # @!attribute [rw] read_units_per_second
+    #   Represents the base table's warm throughput value in read units per
+    #   second.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] write_units_per_second
+    #   Represents the base table's warm throughput value in write units
+    #   per second.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   Represents warm throughput value of the base table..
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TableWarmThroughputDescription AWS API Documentation
+    #
+    class TableWarmThroughputDescription < Struct.new(
+      :read_units_per_second,
+      :write_units_per_second,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9330,25 +9412,21 @@ module Aws::DynamoDB
     #   * Code: `None`
     #
     #   * Message: `null`
-    #
     # * Conditional Check Failed:
     #
     #   * Code: `ConditionalCheckFailed`
     #
     #   * Message: The conditional request failed.
-    #
     # * Item Collection Size Limit Exceeded:
     #
     #   * Code: `ItemCollectionSizeLimitExceeded`
     #
     #   * Message: Collection size exceeded.
-    #
     # * Transaction Conflict:
     #
     #   * Code: `TransactionConflict`
     #
     #   * Message: Transaction is ongoing for the item.
-    #
     # * Provisioned Throughput Exceeded:
     #
     #   * Code: `ProvisionedThroughputExceeded`
@@ -9373,7 +9451,6 @@ module Aws::DynamoDB
     #       is on a provisioned GSI.
     #
     #        </note>
-    #
     # * Throttling Error:
     #
     #   * Code: `ThrottlingError`
@@ -9399,7 +9476,6 @@ module Aws::DynamoDB
     #       On-Demand GSI as DynamoDB is automatically scaling the GSI.
     #
     #        </note>
-    #
     # * Validation Error:
     #
     #   * Code: `ValidationError`
@@ -9695,12 +9771,18 @@ module Aws::DynamoDB
     #   `MaxReadRequestUnits`, `MaxWriteRequestUnits`, or both.
     #   @return [Types::OnDemandThroughput]
     #
+    # @!attribute [rw] warm_throughput
+    #   Represents the warm throughput value of the new provisioned
+    #   throughput settings to be applied to a global secondary index.
+    #   @return [Types::WarmThroughput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateGlobalSecondaryIndexAction AWS API Documentation
     #
     class UpdateGlobalSecondaryIndexAction < Struct.new(
       :index_name,
       :provisioned_throughput,
-      :on_demand_throughput)
+      :on_demand_throughput,
+      :warm_throughput)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9936,7 +10018,6 @@ module Aws::DynamoDB
     #       new element added to it. You can append the new element to the
     #       start or the end of the list by reversing the order of the
     #       operands.
-    #
     #     These function names are case-sensitive.
     #
     #   * `REMOVE` - Removes one or more attributes from an item.
@@ -9977,7 +10058,6 @@ module Aws::DynamoDB
     #       Both sets must have the same primitive data type. For example,
     #       if the existing data type is a set of strings, the `Value` must
     #       also be a set of strings.
-    #
     #     The `ADD` action only supports Number and set data types. In
     #     addition, `ADD` can only be used on top-level attributes, not
     #     nested attributes.
@@ -10056,7 +10136,7 @@ module Aws::DynamoDB
     #   Developer Guide*.) To work around this, you could specify the
     #   following for `ExpressionAttributeNames`:
     #
-    #   * `\{"#P":"Percentile"\}`
+    #   * `{"#P":"Percentile"}`
     #
     #   ^
     #
@@ -10096,8 +10176,8 @@ module Aws::DynamoDB
     #   You would first need to specify `ExpressionAttributeValues` as
     #   follows:
     #
-    #   `\{ ":avail":\{"S":"Available"\}, ":back":\{"S":"Backordered"\},
-    #   ":disc":\{"S":"Discontinued"\} \}`
+    #   `{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"},
+    #   ":disc":{"S":"Discontinued"} }`
     #
     #   You could then use these values in an expression, such as this:
     #
@@ -10415,6 +10495,11 @@ module Aws::DynamoDB
     #   must specify `MaxReadRequestUnits`, `MaxWriteRequestUnits`, or both.
     #   @return [Types::OnDemandThroughput]
     #
+    # @!attribute [rw] warm_throughput
+    #   Represents the warm throughput (in read units per second and write
+    #   units per second) for updating a table.
+    #   @return [Types::WarmThroughput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTableInput AWS API Documentation
     #
     class UpdateTableInput < Struct.new(
@@ -10428,7 +10513,8 @@ module Aws::DynamoDB
       :replica_updates,
       :table_class,
       :deletion_protection_enabled,
-      :on_demand_throughput)
+      :on_demand_throughput,
+      :warm_throughput)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10520,6 +10606,30 @@ module Aws::DynamoDB
     #
     class UpdateTimeToLiveOutput < Struct.new(
       :time_to_live_specification)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides visibility into the number of read and write operations your
+    # table or secondary index can instantaneously support. The settings can
+    # be modified using the `UpdateTable` operation to meet the throughput
+    # requirements of an upcoming peak event.
+    #
+    # @!attribute [rw] read_units_per_second
+    #   Represents the number of read operations your base table can
+    #   instantaneously support.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] write_units_per_second
+    #   Represents the number of write operations your base table can
+    #   instantaneously support.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/WarmThroughput AWS API Documentation
+    #
+    class WarmThroughput < Struct.new(
+      :read_units_per_second,
+      :write_units_per_second)
       SENSITIVE = []
       include Aws::Structure
     end

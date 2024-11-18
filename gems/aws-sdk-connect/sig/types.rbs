@@ -596,6 +596,12 @@ module Aws::Connect
       attr_accessor description: ::String
       attr_accessor content: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor is_default: bool
+      attr_accessor flow_content_sha_256: ::String
+      attr_accessor version: ::Integer
+      attr_accessor version_description: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
       SENSITIVE: []
     end
 
@@ -658,6 +664,13 @@ module Aws::Connect
       attr_accessor contact_flow_type: ("CONTACT_FLOW" | "CUSTOMER_QUEUE" | "CUSTOMER_HOLD" | "CUSTOMER_WHISPER" | "AGENT_HOLD" | "AGENT_WHISPER" | "OUTBOUND_WHISPER" | "AGENT_TRANSFER" | "QUEUE_TRANSFER")
       attr_accessor contact_flow_state: ("ACTIVE" | "ARCHIVED")
       attr_accessor contact_flow_status: ("PUBLISHED" | "SAVED")
+      SENSITIVE: []
+    end
+
+    class ContactFlowVersionSummary
+      attr_accessor arn: ::String
+      attr_accessor version_description: ::String
+      attr_accessor version: ::Integer
       SENSITIVE: []
     end
 
@@ -767,6 +780,23 @@ module Aws::Connect
     class CreateContactFlowResponse
       attr_accessor contact_flow_id: ::String
       attr_accessor contact_flow_arn: ::String
+      attr_accessor flow_content_sha_256: ::String
+      SENSITIVE: []
+    end
+
+    class CreateContactFlowVersionRequest
+      attr_accessor instance_id: ::String
+      attr_accessor description: ::String
+      attr_accessor contact_flow_id: ::String
+      attr_accessor flow_content_sha_256: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
+    class CreateContactFlowVersionResponse
+      attr_accessor contact_flow_arn: ::String
+      attr_accessor version: ::Integer
       SENSITIVE: []
     end
 
@@ -821,7 +851,7 @@ module Aws::Connect
 
     class CreateIntegrationAssociationRequest
       attr_accessor instance_id: ::String
-      attr_accessor integration_type: ("EVENT" | "VOICE_ID" | "PINPOINT_APP" | "WISDOM_ASSISTANT" | "WISDOM_KNOWLEDGE_BASE" | "WISDOM_QUICK_RESPONSES" | "CASES_DOMAIN" | "APPLICATION" | "FILE_SCANNER")
+      attr_accessor integration_type: ("EVENT" | "VOICE_ID" | "PINPOINT_APP" | "WISDOM_ASSISTANT" | "WISDOM_KNOWLEDGE_BASE" | "WISDOM_QUICK_RESPONSES" | "Q_MESSAGE_TEMPLATES" | "CASES_DOMAIN" | "APPLICATION" | "FILE_SCANNER")
       attr_accessor integration_arn: ::String
       attr_accessor source_application_url: ::String
       attr_accessor source_application_name: ::String
@@ -2537,7 +2567,7 @@ module Aws::Connect
       attr_accessor integration_association_id: ::String
       attr_accessor integration_association_arn: ::String
       attr_accessor instance_id: ::String
-      attr_accessor integration_type: ("EVENT" | "VOICE_ID" | "PINPOINT_APP" | "WISDOM_ASSISTANT" | "WISDOM_KNOWLEDGE_BASE" | "WISDOM_QUICK_RESPONSES" | "CASES_DOMAIN" | "APPLICATION" | "FILE_SCANNER")
+      attr_accessor integration_type: ("EVENT" | "VOICE_ID" | "PINPOINT_APP" | "WISDOM_ASSISTANT" | "WISDOM_KNOWLEDGE_BASE" | "WISDOM_QUICK_RESPONSES" | "Q_MESSAGE_TEMPLATES" | "CASES_DOMAIN" | "APPLICATION" | "FILE_SCANNER")
       attr_accessor integration_arn: ::String
       attr_accessor source_application_url: ::String
       attr_accessor source_application_name: ::String
@@ -2733,6 +2763,20 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class ListContactFlowVersionsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_flow_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListContactFlowVersionsResponse
+      attr_accessor contact_flow_version_summary_list: ::Array[Types::ContactFlowVersionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListContactFlowsRequest
       attr_accessor instance_id: ::String
       attr_accessor contact_flow_types: ::Array[("CONTACT_FLOW" | "CUSTOMER_QUEUE" | "CUSTOMER_HOLD" | "CUSTOMER_WHISPER" | "AGENT_HOLD" | "AGENT_WHISPER" | "OUTBOUND_WHISPER" | "AGENT_TRANSFER" | "QUEUE_TRANSFER")]
@@ -2870,7 +2914,7 @@ module Aws::Connect
 
     class ListIntegrationAssociationsRequest
       attr_accessor instance_id: ::String
-      attr_accessor integration_type: ("EVENT" | "VOICE_ID" | "PINPOINT_APP" | "WISDOM_ASSISTANT" | "WISDOM_KNOWLEDGE_BASE" | "WISDOM_QUICK_RESPONSES" | "CASES_DOMAIN" | "APPLICATION" | "FILE_SCANNER")
+      attr_accessor integration_type: ("EVENT" | "VOICE_ID" | "PINPOINT_APP" | "WISDOM_ASSISTANT" | "WISDOM_KNOWLEDGE_BASE" | "WISDOM_QUICK_RESPONSES" | "Q_MESSAGE_TEMPLATES" | "CASES_DOMAIN" | "APPLICATION" | "FILE_SCANNER")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       attr_accessor integration_arn: ::String

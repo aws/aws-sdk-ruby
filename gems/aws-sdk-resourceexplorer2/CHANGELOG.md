@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2024-11-07)
+------------------
+
+* Feature - Add GetManagedView, ListManagedViews APIs.
+
 1.29.0 (2024-10-18)
 ------------------
 

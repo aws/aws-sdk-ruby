@@ -54,6 +54,7 @@ module Aws::Synthetics
       attr_accessor runtime_version: ::String
       attr_accessor vpc_config: Types::VpcConfigOutput
       attr_accessor visual_reference: Types::VisualReferenceOutput
+      attr_accessor provisioned_resource_cleanup: ("AUTOMATIC" | "OFF")
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor artifact_config: Types::ArtifactConfigOutput
       SENSITIVE: []
@@ -161,6 +162,7 @@ module Aws::Synthetics
       attr_accessor runtime_version: ::String
       attr_accessor vpc_config: Types::VpcConfigInput
       attr_accessor resources_to_replicate_tags: ::Array[("lambda-function")]
+      attr_accessor provisioned_resource_cleanup: ("AUTOMATIC" | "OFF")
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor artifact_config: Types::ArtifactConfigInput
       SENSITIVE: []
@@ -440,6 +442,7 @@ module Aws::Synthetics
       attr_accessor visual_reference: Types::VisualReferenceInput
       attr_accessor artifact_s3_location: ::String
       attr_accessor artifact_config: Types::ArtifactConfigInput
+      attr_accessor provisioned_resource_cleanup: ("AUTOMATIC" | "OFF")
       SENSITIVE: []
     end
 

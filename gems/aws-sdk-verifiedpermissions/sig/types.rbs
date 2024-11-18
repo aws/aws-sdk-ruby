@@ -26,8 +26,10 @@ module Aws::VerifiedPermissions
       attr_accessor string: ::String
       attr_accessor set: ::Array[Types::AttributeValue]
       attr_accessor record: ::Hash[::String, Types::AttributeValue]
+      attr_accessor ipaddr: ::String
+      attr_accessor decimal: ::String
       attr_accessor unknown: untyped
-      SENSITIVE: [:boolean, :long, :string]
+      SENSITIVE: [:boolean, :long, :string, :ipaddr, :decimal]
 
       class Boolean < AttributeValue
       end
@@ -41,8 +43,47 @@ module Aws::VerifiedPermissions
       end
       class Record < AttributeValue
       end
+      class Ipaddr < AttributeValue
+      end
+      class Decimal < AttributeValue
+      end
       class Unknown < AttributeValue
       end
+    end
+
+    class BatchGetPolicyErrorItem
+      attr_accessor code: ("POLICY_STORE_NOT_FOUND" | "POLICY_NOT_FOUND")
+      attr_accessor policy_store_id: ::String
+      attr_accessor policy_id: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetPolicyInput
+      attr_accessor requests: ::Array[Types::BatchGetPolicyInputItem]
+      SENSITIVE: []
+    end
+
+    class BatchGetPolicyInputItem
+      attr_accessor policy_store_id: ::String
+      attr_accessor policy_id: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetPolicyOutput
+      attr_accessor results: ::Array[Types::BatchGetPolicyOutputItem]
+      attr_accessor errors: ::Array[Types::BatchGetPolicyErrorItem]
+      SENSITIVE: []
+    end
+
+    class BatchGetPolicyOutputItem
+      attr_accessor policy_store_id: ::String
+      attr_accessor policy_id: ::String
+      attr_accessor policy_type: ("STATIC" | "TEMPLATE_LINKED")
+      attr_accessor definition: Types::PolicyDefinitionDetail
+      attr_accessor created_date: ::Time
+      attr_accessor last_updated_date: ::Time
+      SENSITIVE: []
     end
 
     class BatchIsAuthorizedInput

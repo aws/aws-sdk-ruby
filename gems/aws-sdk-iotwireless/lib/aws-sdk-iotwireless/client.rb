@@ -900,6 +900,11 @@ module Aws::IoTWireless
     #
     #    </note>
     #
+    # @option params [String] :descriptor
+    #   The Descriptor specifies some metadata about the File being
+    #   transferred using FUOTA e.g. the software version. It is sent
+    #   transparently to the device. It is a binary field encoded in base64
+    #
     # @return [Types::CreateFuotaTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFuotaTaskResponse#arn #arn} => String
@@ -925,6 +930,7 @@ module Aws::IoTWireless
     #     redundancy_percent: 1,
     #     fragment_size_bytes: 1,
     #     fragment_interval_ms: 1,
+    #     descriptor: "FileDescriptor",
     #   })
     #
     # @example Response structure
@@ -986,6 +992,10 @@ module Aws::IoTWireless
     #     lo_ra_wan: { # required
     #       rf_region: "EU868", # accepts EU868, US915, AU915, AS923-1, AS923-2, AS923-3, AS923-4, EU433, CN470, CN779, RU864, KR920, IN865
     #       dl_class: "ClassB", # accepts ClassB, ClassC
+    #       participating_gateways: {
+    #         gateway_list: ["WirelessGatewayId"],
+    #         transmission_interval: 1,
+    #       },
     #     },
     #     tags: [
     #       {
@@ -2096,6 +2106,7 @@ module Aws::IoTWireless
     #   * {Types::GetFuotaTaskResponse#redundancy_percent #redundancy_percent} => Integer
     #   * {Types::GetFuotaTaskResponse#fragment_size_bytes #fragment_size_bytes} => Integer
     #   * {Types::GetFuotaTaskResponse#fragment_interval_ms #fragment_interval_ms} => Integer
+    #   * {Types::GetFuotaTaskResponse#descriptor #descriptor} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2118,6 +2129,7 @@ module Aws::IoTWireless
     #   resp.redundancy_percent #=> Integer
     #   resp.fragment_size_bytes #=> Integer
     #   resp.fragment_interval_ms #=> Integer
+    #   resp.descriptor #=> String
     #
     # @overload get_fuota_task(params = {})
     # @param [Hash] params ({})
@@ -2135,6 +2147,7 @@ module Aws::IoTWireless
     #   * {Types::GetLogLevelsByResourceTypesResponse#default_log_level #default_log_level} => String
     #   * {Types::GetLogLevelsByResourceTypesResponse#wireless_gateway_log_options #wireless_gateway_log_options} => Array&lt;Types::WirelessGatewayLogOption&gt;
     #   * {Types::GetLogLevelsByResourceTypesResponse#wireless_device_log_options #wireless_device_log_options} => Array&lt;Types::WirelessDeviceLogOption&gt;
+    #   * {Types::GetLogLevelsByResourceTypesResponse#fuota_task_log_options #fuota_task_log_options} => Array&lt;Types::FuotaTaskLogOption&gt;
     #
     # @example Response structure
     #
@@ -2151,6 +2164,12 @@ module Aws::IoTWireless
     #   resp.wireless_device_log_options[0].events #=> Array
     #   resp.wireless_device_log_options[0].events[0].event #=> String, one of "Join", "Rejoin", "Uplink_Data", "Downlink_Data", "Registration"
     #   resp.wireless_device_log_options[0].events[0].log_level #=> String, one of "INFO", "ERROR", "DISABLED"
+    #   resp.fuota_task_log_options #=> Array
+    #   resp.fuota_task_log_options[0].type #=> String, one of "LoRaWAN"
+    #   resp.fuota_task_log_options[0].log_level #=> String, one of "INFO", "ERROR", "DISABLED"
+    #   resp.fuota_task_log_options[0].events #=> Array
+    #   resp.fuota_task_log_options[0].events[0].event #=> String, one of "Fuota"
+    #   resp.fuota_task_log_options[0].events[0].log_level #=> String, one of "INFO", "ERROR", "DISABLED"
     #
     # @overload get_log_levels_by_resource_types(params = {})
     # @param [Hash] params ({})
@@ -2268,6 +2287,9 @@ module Aws::IoTWireless
     #   resp.lo_ra_wan.dl_class #=> String, one of "ClassB", "ClassC"
     #   resp.lo_ra_wan.number_of_devices_requested #=> Integer
     #   resp.lo_ra_wan.number_of_devices_in_group #=> Integer
+    #   resp.lo_ra_wan.participating_gateways.gateway_list #=> Array
+    #   resp.lo_ra_wan.participating_gateways.gateway_list[0] #=> String
+    #   resp.lo_ra_wan.participating_gateways.transmission_interval #=> Integer
     #   resp.created_at #=> Time
     #
     # @overload get_multicast_group(params = {})
@@ -2694,7 +2716,7 @@ module Aws::IoTWireless
     #
     #   resp = client.get_resource_event_configuration({
     #     identifier: "Identifier", # required
-    #     identifier_type: "PartnerAccountId", # required, accepts PartnerAccountId, DevEui, GatewayEui, WirelessDeviceId, WirelessGatewayId
+    #     identifier_type: "PartnerAccountId", # required, accepts PartnerAccountId, DevEui, FuotaTaskId, GatewayEui, WirelessDeviceId, WirelessGatewayId
     #     partner_type: "Sidewalk", # accepts Sidewalk
     #   })
     #
@@ -2719,8 +2741,8 @@ module Aws::IoTWireless
     end
 
     # Fetches the log-level override, if any, for a given resource-ID and
-    # resource-type. It can be used for a wireless device or a wireless
-    # gateway.
+    # resource-type. It can be used for a wireless device, wireless gateway
+    # or fuota task.
     #
     # @option params [required, String] :resource_identifier
     #   The identifier of the resource. For a Wireless Device, it is the
@@ -2728,8 +2750,8 @@ module Aws::IoTWireless
     #   ID.
     #
     # @option params [required, String] :resource_type
-    #   The type of the resource, which can be `WirelessDevice` or
-    #   `WirelessGateway`.
+    #   The type of the resource, which can be `WirelessDevice`,
+    #   `WirelessGateway` or `FuotaTask`.
     #
     # @return [Types::GetResourceLogLevelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3440,7 +3462,7 @@ module Aws::IoTWireless
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_event_configurations({
-    #     resource_type: "SidewalkAccount", # required, accepts SidewalkAccount, WirelessDevice, WirelessGateway
+    #     resource_type: "FuotaTask", # required, accepts FuotaTask, SidewalkAccount, WirelessDevice, WirelessGateway
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -3450,7 +3472,7 @@ module Aws::IoTWireless
     #   resp.next_token #=> String
     #   resp.event_configurations_list #=> Array
     #   resp.event_configurations_list[0].identifier #=> String
-    #   resp.event_configurations_list[0].identifier_type #=> String, one of "PartnerAccountId", "DevEui", "GatewayEui", "WirelessDeviceId", "WirelessGatewayId"
+    #   resp.event_configurations_list[0].identifier_type #=> String, one of "PartnerAccountId", "DevEui", "FuotaTaskId", "GatewayEui", "WirelessDeviceId", "WirelessGatewayId"
     #   resp.event_configurations_list[0].partner_type #=> String, one of "Sidewalk"
     #   resp.event_configurations_list[0].events.device_registration_state.sidewalk.amazon_id_event_topic #=> String, one of "Enabled", "Disabled"
     #   resp.event_configurations_list[0].events.device_registration_state.wireless_device_id_event_topic #=> String, one of "Enabled", "Disabled"
@@ -4130,8 +4152,8 @@ module Aws::IoTWireless
     #   ID.
     #
     # @option params [required, String] :resource_type
-    #   The type of the resource, which can be `WirelessDevice` or
-    #   `WirelessGateway`.
+    #   The type of the resource, which can be `WirelessDevice`,
+    #   `WirelessGateway`, or `FuotaTask`.
     #
     # @option params [required, String] :log_level
     #   The log level for a log message. The log levels can be disabled, or
@@ -4155,8 +4177,8 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
-    # Removes the log-level overrides for all resources; both wireless
-    # devices and wireless gateways.
+    # Removes the log-level overrides for all resources; wireless devices,
+    # wireless gateways, and fuota tasks.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4168,8 +4190,8 @@ module Aws::IoTWireless
     end
 
     # Removes the log-level override, if any, for a specific resource-ID and
-    # resource-type. It can be used for a wireless device or a wireless
-    # gateway.
+    # resource-type. It can be used for a wireless device, a wireless
+    # gateway, or a fuota task.
     #
     # @option params [required, String] :resource_identifier
     #   The identifier of the resource. For a Wireless Device, it is the
@@ -4177,8 +4199,8 @@ module Aws::IoTWireless
     #   ID.
     #
     # @option params [required, String] :resource_type
-    #   The type of the resource, which can be `WirelessDevice` or
-    #   `WirelessGateway`.
+    #   The type of the resource, which can be `WirelessDevice`,
+    #   `WirelessGateway`, or `FuotaTask`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4779,6 +4801,11 @@ module Aws::IoTWireless
     #
     #    </note>
     #
+    # @option params [String] :descriptor
+    #   The Descriptor specifies some metadata about the File being
+    #   transferred using FUOTA e.g. the software version. It is sent
+    #   transparently to the device. It is a binary field encoded in base64
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -4795,6 +4822,7 @@ module Aws::IoTWireless
     #     redundancy_percent: 1,
     #     fragment_size_bytes: 1,
     #     fragment_interval_ms: 1,
+    #     descriptor: "FileDescriptor",
     #   })
     #
     # @overload update_fuota_task(params = {})
@@ -4814,6 +4842,9 @@ module Aws::IoTWireless
     #   set to `ERROR` to display less verbose logs containing only error
     #   information, or to `INFO` for more detailed logs.
     #
+    # @option params [Array<Types::FuotaTaskLogOption>] :fuota_task_log_options
+    #   The list of fuota task log options.
+    #
     # @option params [Array<Types::WirelessDeviceLogOption>] :wireless_device_log_options
     #   The list of wireless device log options.
     #
@@ -4826,6 +4857,18 @@ module Aws::IoTWireless
     #
     #   resp = client.update_log_levels_by_resource_types({
     #     default_log_level: "INFO", # accepts INFO, ERROR, DISABLED
+    #     fuota_task_log_options: [
+    #       {
+    #         type: "LoRaWAN", # required, accepts LoRaWAN
+    #         log_level: "INFO", # required, accepts INFO, ERROR, DISABLED
+    #         events: [
+    #           {
+    #             event: "Fuota", # required, accepts Fuota
+    #             log_level: "INFO", # required, accepts INFO, ERROR, DISABLED
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     wireless_device_log_options: [
     #       {
     #         type: "Sidewalk", # required, accepts Sidewalk, LoRaWAN
@@ -4906,6 +4949,10 @@ module Aws::IoTWireless
     #     lo_ra_wan: {
     #       rf_region: "EU868", # accepts EU868, US915, AU915, AS923-1, AS923-2, AS923-3, AS923-4, EU433, CN470, CN779, RU864, KR920, IN865
     #       dl_class: "ClassB", # accepts ClassB, ClassC
+    #       participating_gateways: {
+    #         gateway_list: ["WirelessGatewayId"],
+    #         transmission_interval: 1,
+    #       },
     #     },
     #   })
     #
@@ -5085,7 +5132,7 @@ module Aws::IoTWireless
     #
     #   resp = client.update_resource_event_configuration({
     #     identifier: "Identifier", # required
-    #     identifier_type: "PartnerAccountId", # required, accepts PartnerAccountId, DevEui, GatewayEui, WirelessDeviceId, WirelessGatewayId
+    #     identifier_type: "PartnerAccountId", # required, accepts PartnerAccountId, DevEui, FuotaTaskId, GatewayEui, WirelessDeviceId, WirelessGatewayId
     #     partner_type: "Sidewalk", # accepts Sidewalk
     #     device_registration_state: {
     #       sidewalk: {
@@ -5321,7 +5368,7 @@ module Aws::IoTWireless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iotwireless'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

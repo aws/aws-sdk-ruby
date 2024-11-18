@@ -8,9 +8,21 @@
 module Aws::Deadline
   module Types
 
+    class AcceleratorCapabilities
+      attr_accessor selections: ::Array[Types::AcceleratorSelection]
+      attr_accessor count: Types::AcceleratorCountRange
+      SENSITIVE: []
+    end
+
     class AcceleratorCountRange
       attr_accessor min: ::Integer
       attr_accessor max: ::Integer
+      SENSITIVE: []
+    end
+
+    class AcceleratorSelection
+      attr_accessor name: ("t4" | "a10g" | "l4" | "l40s")
+      attr_accessor runtime: ::String
       SENSITIVE: []
     end
 
@@ -2041,6 +2053,7 @@ module Aws::Deadline
       attr_accessor os_family: ("WINDOWS" | "LINUX")
       attr_accessor cpu_architecture_type: ("x86_64" | "arm64")
       attr_accessor root_ebs_volume: Types::Ec2EbsVolume
+      attr_accessor accelerator_capabilities: Types::AcceleratorCapabilities
       attr_accessor allowed_instance_types: ::Array[::String]
       attr_accessor excluded_instance_types: ::Array[::String]
       attr_accessor custom_amounts: ::Array[Types::FleetAmountCapability]

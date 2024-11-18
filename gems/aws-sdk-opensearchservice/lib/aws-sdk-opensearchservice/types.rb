@@ -495,11 +495,23 @@ module Aws::OpenSearchService
     #   Name of the domain to associate the package with.
     #   @return [String]
     #
+    # @!attribute [rw] prerequisite_package_id_list
+    #   A list of package IDs that must be associated with the domain before
+    #   the package specified in the request can be associated.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] association_configuration
+    #   The configuration for associating a package with an Amazon
+    #   OpenSearch Service domain.
+    #   @return [Types::PackageAssociationConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AssociatePackageRequest AWS API Documentation
     #
     class AssociatePackageRequest < Struct.new(
       :package_id,
-      :domain_name)
+      :domain_name,
+      :prerequisite_package_id_list,
+      :association_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -515,6 +527,39 @@ module Aws::OpenSearchService
     #
     class AssociatePackageResponse < Struct.new(
       :domain_package_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] package_list
+    #   A list of packages and their prerequisites to be associated with a
+    #   domain.
+    #   @return [Array<Types::PackageDetailsForAssociation>]
+    #
+    # @!attribute [rw] domain_name
+    #   The name of an OpenSearch Service domain. Domain names are unique
+    #   across the domains owned by an account within an Amazon Web Services
+    #   Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AssociatePackagesRequest AWS API Documentation
+    #
+    class AssociatePackagesRequest < Struct.new(
+      :package_list,
+      :domain_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_package_details_list
+    #   List of information about packages that are associated with a
+    #   domain.
+    #   @return [Array<Types::DomainPackageDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AssociatePackagesResponse AWS API Documentation
+    #
+    class AssociatePackagesResponse < Struct.new(
+      :domain_package_details_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -644,7 +689,7 @@ module Aws::OpenSearchService
     #
     # @!attribute [rw] duration
     #   The duration of the maintenance schedule. For example, `"Duration":
-    #   \{"Value": 2, "Unit": "HOURS"\}`.
+    #   {"Value": 2, "Unit": "HOURS"}`.
     #   @return [Types::Duration]
     #
     # @!attribute [rw] cron_expression_for_recurrence
@@ -1776,13 +1821,36 @@ module Aws::OpenSearchService
     #   The Amazon S3 location from which to import the package.
     #   @return [Types::PackageSource]
     #
+    # @!attribute [rw] package_configuration
+    #   The configuration parameters for the package being created.
+    #   @return [Types::PackageConfiguration]
+    #
+    # @!attribute [rw] engine_version
+    #   The version of the Amazon OpenSearch Service engine for which is
+    #   compatible with the package. This can only be specified for package
+    #   type `ZIP-PLUGIN`
+    #   @return [String]
+    #
+    # @!attribute [rw] package_vending_options
+    #   The vending options for the package being created. They determine if
+    #   the package can be vended to other users.
+    #   @return [Types::PackageVendingOptions]
+    #
+    # @!attribute [rw] package_encryption_options
+    #   The encryption parameters for the package being created.
+    #   @return [Types::PackageEncryptionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreatePackageRequest AWS API Documentation
     #
     class CreatePackageRequest < Struct.new(
       :package_name,
       :package_type,
       :package_description,
-      :package_source)
+      :package_source,
+      :package_configuration,
+      :engine_version,
+      :package_vending_options,
+      :package_encryption_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2908,6 +2976,38 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # @!attribute [rw] package_list
+    #   A list of package IDs to be dissociated from a domain.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] domain_name
+    #   The name of an OpenSearch Service domain. Domain names are unique
+    #   across the domains owned by an account within an Amazon Web Services
+    #   Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DissociatePackagesRequest AWS API Documentation
+    #
+    class DissociatePackagesRequest < Struct.new(
+      :package_list,
+      :domain_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_package_details_list
+    #   A list of package details for the packages that were dissociated
+    #   from the domain.
+    #   @return [Array<Types::DomainPackageDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DissociatePackagesResponse AWS API Documentation
+    #
+    class DissociatePackagesResponse < Struct.new(
+      :domain_package_details_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Container for the configuration of an OpenSearch Service domain.
     #
     # @!attribute [rw] engine_version
@@ -3272,6 +3372,11 @@ module Aws::OpenSearchService
     #   The current version of the package.
     #   @return [String]
     #
+    # @!attribute [rw] prerequisite_package_id_list
+    #   A list of package IDs that must be associated with the domain before
+    #   or with the package can be associated.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] reference_path
     #   The relative path of the package on the OpenSearch Service cluster
     #   nodes. This is `synonym_path` when the package is for synonym files.
@@ -3281,6 +3386,11 @@ module Aws::OpenSearchService
     #   Additional information if the package is in an error state. Null
     #   otherwise.
     #   @return [Types::ErrorDetails]
+    #
+    # @!attribute [rw] association_configuration
+    #   The configuration for associating a package with an Amazon
+    #   OpenSearch Service domain.
+    #   @return [Types::PackageAssociationConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DomainPackageDetails AWS API Documentation
     #
@@ -3292,8 +3402,10 @@ module Aws::OpenSearchService
       :domain_name,
       :domain_package_status,
       :package_version,
+      :prerequisite_package_id_list,
       :reference_path,
-      :error_details)
+      :error_details,
+      :association_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4566,6 +4678,26 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # The configuration parameters to enable access to the key store
+    # required by the package.
+    #
+    # @!attribute [rw] key_access_role_arn
+    #   Role ARN to access the KeyStore Key
+    #   @return [String]
+    #
+    # @!attribute [rw] key_store_access_enabled
+    #   This indicates whether Key Store access is enabled
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/KeyStoreAccessOption AWS API Documentation
+    #
+    class KeyStoreAccessOption < Struct.new(
+      :key_access_role_arn,
+      :key_store_access_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An exception for trying to create more than the allowed number of
     # resources or sub-resources.
     #
@@ -5283,7 +5415,7 @@ module Aws::OpenSearchService
     #     "c5.large.search".
     #
     #   * `STRINGIFIED_JSON`: Contain content in JSON format, such as
-    #     \\\{"Enabled":"True"\\}".
+    #     \{"Enabled":"True"}".
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ModifyingProperties AWS API Documentation
@@ -5629,6 +5761,51 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # The configuration for associating a package with a domain.
+    #
+    # @!attribute [rw] key_store_access_option
+    #   The configuration parameters to enable accessing the key store
+    #   required by the package.
+    #   @return [Types::KeyStoreAccessOption]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/PackageAssociationConfiguration AWS API Documentation
+    #
+    class PackageAssociationConfiguration < Struct.new(
+      :key_store_access_option)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration parameters for a package.
+    #
+    # @!attribute [rw] license_requirement
+    #   The license requirements for the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] license_filepath
+    #   The relative file path for the license associated with the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_requirement
+    #   The configuration requirements for the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] requires_restart_for_configuration_update
+    #   This indicates whether a B/G deployment is required for updating the
+    #   configuration that the plugin is prerequisite for.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/PackageConfiguration AWS API Documentation
+    #
+    class PackageConfiguration < Struct.new(
+      :license_requirement,
+      :license_filepath,
+      :configuration_requirement,
+      :requires_restart_for_configuration_update)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Basic information about a package.
     #
     # @!attribute [rw] package_id
@@ -5681,6 +5858,29 @@ module Aws::OpenSearchService
     #   about plugin properties.
     #   @return [Types::PluginProperties]
     #
+    # @!attribute [rw] available_package_configuration
+    #   This represents the available configuration parameters for the
+    #   package.
+    #   @return [Types::PackageConfiguration]
+    #
+    # @!attribute [rw] allow_listed_user_list
+    #   A list of users who are allowed to view and associate the package.
+    #   This field is only visible to the owner of a package.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] package_owner
+    #   The owner of the package who is allowed to create/update a package
+    #   and add users to the package scope.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_vending_options
+    #   Package Vending Options for a package.
+    #   @return [Types::PackageVendingOptions]
+    #
+    # @!attribute [rw] package_encryption_options
+    #   Package Encryption Options for a package.
+    #   @return [Types::PackageEncryptionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/PackageDetails AWS API Documentation
     #
     class PackageDetails < Struct.new(
@@ -5694,7 +5894,57 @@ module Aws::OpenSearchService
       :available_package_version,
       :error_details,
       :engine_version,
-      :available_plugin_properties)
+      :available_plugin_properties,
+      :available_package_configuration,
+      :allow_listed_user_list,
+      :package_owner,
+      :package_vending_options,
+      :package_encryption_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details of a package that is associated with a domain.
+    #
+    # @!attribute [rw] package_id
+    #   Internal ID of the package that you want to associate with a domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] prerequisite_package_id_list
+    #   List of package IDs that must be associated with the domain with or
+    #   before the package can be associated.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] association_configuration
+    #   The configuration parameters for associating the package with a
+    #   domain.
+    #   @return [Types::PackageAssociationConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/PackageDetailsForAssociation AWS API Documentation
+    #
+    class PackageDetailsForAssociation < Struct.new(
+      :package_id,
+      :prerequisite_package_id_list,
+      :association_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Encryption options for a package.
+    #
+    # @!attribute [rw] kms_key_identifier
+    #   KMS key ID for encrypting the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_enabled
+    #   This indicates whether encryption is enabled for the package.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/PackageEncryptionOptions AWS API Documentation
+    #
+    class PackageEncryptionOptions < Struct.new(
+      :kms_key_identifier,
+      :encryption_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5718,6 +5968,22 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # The vending options for a package to determine if the package can be
+    # used by other users.
+    #
+    # @!attribute [rw] vending_enabled
+    #   This indicates whether vending is enabled for the package to
+    #   determine if package can be used by other users.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/PackageVendingOptions AWS API Documentation
+    #
+    class PackageVendingOptions < Struct.new(
+      :vending_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about a package version.
     #
     # @!attribute [rw] package_version
@@ -5737,13 +6003,18 @@ module Aws::OpenSearchService
     #   `ZIP-PLUGIN` package.
     #   @return [Types::PluginProperties]
     #
+    # @!attribute [rw] package_configuration
+    #   The configuration details for a specific version of a package.
+    #   @return [Types::PackageConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/PackageVersionHistory AWS API Documentation
     #
     class PackageVersionHistory < Struct.new(
       :package_version,
       :commit_message,
       :created_at,
-      :plugin_properties)
+      :plugin_properties,
+      :package_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6958,13 +7229,23 @@ module Aws::OpenSearchService
     #   `GetPackageVersionHistoryResponse`.
     #   @return [String]
     #
+    # @!attribute [rw] package_configuration
+    #   The updated configuration details for a package.
+    #   @return [Types::PackageConfiguration]
+    #
+    # @!attribute [rw] package_encryption_options
+    #   Encryption options for a package.
+    #   @return [Types::PackageEncryptionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdatePackageRequest AWS API Documentation
     #
     class UpdatePackageRequest < Struct.new(
       :package_id,
       :package_source,
       :package_description,
-      :commit_message)
+      :commit_message,
+      :package_configuration,
+      :package_encryption_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6979,6 +7260,51 @@ module Aws::OpenSearchService
     #
     class UpdatePackageResponse < Struct.new(
       :package_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] package_id
+    #   ID of the package whose scope is being updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation
+    #   The operation to perform on the package scope (e.g.,
+    #   add/remove/override users).
+    #   @return [String]
+    #
+    # @!attribute [rw] package_user_list
+    #   List of users to be added or removed from the package scope.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdatePackageScopeRequest AWS API Documentation
+    #
+    class UpdatePackageScopeRequest < Struct.new(
+      :package_id,
+      :operation,
+      :package_user_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] package_id
+    #   ID of the package whose scope was updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation
+    #   The operation that was performed on the package scope.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_user_list
+    #   List of users who have access to the package after the scope update.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdatePackageScopeResponse AWS API Documentation
+    #
+    class UpdatePackageScopeResponse < Struct.new(
+      :package_id,
+      :operation,
+      :package_user_list)
       SENSITIVE = []
       include Aws::Structure
     end

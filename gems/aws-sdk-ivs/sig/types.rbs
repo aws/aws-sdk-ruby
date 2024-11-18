@@ -18,6 +18,7 @@ module Aws::IVS
       attr_accessor codec: ::String
       attr_accessor sample_rate: ::Integer
       attr_accessor target_bitrate: ::Integer
+      attr_accessor track: ::String
       SENSITIVE: []
     end
 
@@ -78,9 +79,11 @@ module Aws::IVS
     class Channel
       attr_accessor arn: ::String
       attr_accessor authorized: bool
+      attr_accessor container_format: ("TS" | "FRAGMENTED_MP4")
       attr_accessor ingest_endpoint: ::String
       attr_accessor insecure_ingest: bool
       attr_accessor latency_mode: ("NORMAL" | "LOW")
+      attr_accessor multitrack_input_configuration: Types::MultitrackInputConfiguration
       attr_accessor name: ::String
       attr_accessor playback_restriction_policy_arn: ::String
       attr_accessor playback_url: ::String
@@ -118,8 +121,10 @@ module Aws::IVS
 
     class CreateChannelRequest
       attr_accessor authorized: bool
+      attr_accessor container_format: ("TS" | "FRAGMENTED_MP4")
       attr_accessor insecure_ingest: bool
       attr_accessor latency_mode: ("NORMAL" | "LOW")
+      attr_accessor multitrack_input_configuration: Types::MultitrackInputConfiguration
       attr_accessor name: ::String
       attr_accessor playback_restriction_policy_arn: ::String
       attr_accessor preset: ("HIGHER_BANDWIDTH_DELIVERY" | "CONSTRAINED_BANDWIDTH_DELIVERY")
@@ -297,6 +302,12 @@ module Aws::IVS
       SENSITIVE: []
     end
 
+    class IngestConfigurations
+      attr_accessor audio_configurations: ::Array[Types::AudioConfiguration]
+      attr_accessor video_configurations: ::Array[Types::VideoConfiguration]
+      SENSITIVE: []
+    end
+
     class InternalServerException
       attr_accessor exception_message: ::String
       SENSITIVE: []
@@ -399,6 +410,13 @@ module Aws::IVS
 
     class ListTagsForResourceResponse
       attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class MultitrackInputConfiguration
+      attr_accessor enabled: bool
+      attr_accessor maximum_resolution: ("SD" | "HD" | "FULL_HD")
+      attr_accessor policy: ("ALLOW" | "REQUIRE")
       SENSITIVE: []
     end
 
@@ -557,6 +575,7 @@ module Aws::IVS
       attr_accessor channel: Types::Channel
       attr_accessor end_time: ::Time
       attr_accessor ingest_configuration: Types::IngestConfiguration
+      attr_accessor ingest_configurations: Types::IngestConfigurations
       attr_accessor recording_configuration: Types::RecordingConfiguration
       attr_accessor start_time: ::Time
       attr_accessor stream_id: ::String
@@ -621,8 +640,10 @@ module Aws::IVS
     class UpdateChannelRequest
       attr_accessor arn: ::String
       attr_accessor authorized: bool
+      attr_accessor container_format: ("TS" | "FRAGMENTED_MP4")
       attr_accessor insecure_ingest: bool
       attr_accessor latency_mode: ("NORMAL" | "LOW")
+      attr_accessor multitrack_input_configuration: Types::MultitrackInputConfiguration
       attr_accessor name: ::String
       attr_accessor playback_restriction_policy_arn: ::String
       attr_accessor preset: ("HIGHER_BANDWIDTH_DELIVERY" | "CONSTRAINED_BANDWIDTH_DELIVERY")
@@ -660,8 +681,11 @@ module Aws::IVS
       attr_accessor avc_profile: ::String
       attr_accessor codec: ::String
       attr_accessor encoder: ::String
+      attr_accessor level: ::String
+      attr_accessor profile: ::String
       attr_accessor target_bitrate: ::Integer
       attr_accessor target_framerate: ::Integer
+      attr_accessor track: ::String
       attr_accessor video_height: ::Integer
       attr_accessor video_width: ::Integer
       SENSITIVE: []

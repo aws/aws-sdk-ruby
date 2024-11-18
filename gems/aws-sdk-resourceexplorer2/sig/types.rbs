@@ -117,6 +117,16 @@ module Aws::ResourceExplorer2
       SENSITIVE: [:tags]
     end
 
+    class GetManagedViewInput
+      attr_accessor managed_view_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetManagedViewOutput
+      attr_accessor managed_view: Types::ManagedView
+      SENSITIVE: []
+    end
+
     class GetViewInput
       attr_accessor view_arn: ::String
       SENSITIVE: []
@@ -172,6 +182,19 @@ module Aws::ResourceExplorer2
       SENSITIVE: []
     end
 
+    class ListManagedViewsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor service_principal: ::String
+      SENSITIVE: []
+    end
+
+    class ListManagedViewsOutput
+      attr_accessor managed_views: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListResourcesInput
       attr_accessor filters: Types::SearchFilter
       attr_accessor max_results: ::Integer
@@ -219,6 +242,20 @@ module Aws::ResourceExplorer2
       attr_accessor next_token: ::String
       attr_accessor views: ::Array[::String]
       SENSITIVE: []
+    end
+
+    class ManagedView
+      attr_accessor filters: Types::SearchFilter
+      attr_accessor included_properties: ::Array[Types::IncludedProperty]
+      attr_accessor last_updated_at: ::Time
+      attr_accessor managed_view_arn: ::String
+      attr_accessor managed_view_name: ::String
+      attr_accessor owner: ::String
+      attr_accessor resource_policy: ::String
+      attr_accessor scope: ::String
+      attr_accessor trusted_service: ::String
+      attr_accessor version: ::String
+      SENSITIVE: [:filters]
     end
 
     class MemberIndex

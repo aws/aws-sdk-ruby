@@ -194,7 +194,7 @@ module Aws::Organizations
       attr_accessor content: ::String
       attr_accessor description: ::String
       attr_accessor name: ::String
-      attr_accessor type: ("SERVICE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY")
+      attr_accessor type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY")
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
@@ -337,7 +337,7 @@ module Aws::Organizations
 
     class DisablePolicyTypeRequest
       attr_accessor root_id: ::String
-      attr_accessor policy_type: ("SERVICE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY")
+      attr_accessor policy_type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY")
       SENSITIVE: []
     end
 
@@ -399,7 +399,7 @@ module Aws::Organizations
 
     class EnablePolicyTypeRequest
       attr_accessor root_id: ::String
-      attr_accessor policy_type: ("SERVICE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY")
+      attr_accessor policy_type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY")
       SENSITIVE: []
     end
 
@@ -473,7 +473,7 @@ module Aws::Organizations
 
     class InvalidInputException
       attr_accessor message: ::String
-      attr_accessor reason: ("INVALID_PARTY_TYPE_TARGET" | "INVALID_SYNTAX_ORGANIZATION_ARN" | "INVALID_SYNTAX_POLICY_ID" | "INVALID_ENUM" | "INVALID_ENUM_POLICY_TYPE" | "INVALID_LIST_MEMBER" | "MAX_LENGTH_EXCEEDED" | "MAX_VALUE_EXCEEDED" | "MIN_LENGTH_EXCEEDED" | "MIN_VALUE_EXCEEDED" | "IMMUTABLE_POLICY" | "INVALID_PATTERN" | "INVALID_PATTERN_TARGET_ID" | "INPUT_REQUIRED" | "INVALID_NEXT_TOKEN" | "MAX_LIMIT_EXCEEDED_FILTER" | "MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS" | "INVALID_FULL_NAME_TARGET" | "UNRECOGNIZED_SERVICE_PRINCIPAL" | "INVALID_ROLE_NAME" | "INVALID_SYSTEM_TAGS_PARAMETER" | "DUPLICATE_TAG_KEY" | "TARGET_NOT_SUPPORTED" | "INVALID_EMAIL_ADDRESS_TARGET" | "INVALID_RESOURCE_POLICY_JSON" | "UNSUPPORTED_ACTION_IN_RESOURCE_POLICY" | "UNSUPPORTED_POLICY_TYPE_IN_RESOURCE_POLICY" | "UNSUPPORTED_RESOURCE_IN_RESOURCE_POLICY")
+      attr_accessor reason: ("INVALID_PARTY_TYPE_TARGET" | "INVALID_SYNTAX_ORGANIZATION_ARN" | "INVALID_SYNTAX_POLICY_ID" | "INVALID_ENUM" | "INVALID_ENUM_POLICY_TYPE" | "INVALID_LIST_MEMBER" | "MAX_LENGTH_EXCEEDED" | "MAX_VALUE_EXCEEDED" | "MIN_LENGTH_EXCEEDED" | "MIN_VALUE_EXCEEDED" | "IMMUTABLE_POLICY" | "INVALID_PATTERN" | "INVALID_PATTERN_TARGET_ID" | "INPUT_REQUIRED" | "INVALID_NEXT_TOKEN" | "MAX_LIMIT_EXCEEDED_FILTER" | "MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS" | "INVALID_FULL_NAME_TARGET" | "UNRECOGNIZED_SERVICE_PRINCIPAL" | "INVALID_ROLE_NAME" | "INVALID_SYSTEM_TAGS_PARAMETER" | "DUPLICATE_TAG_KEY" | "TARGET_NOT_SUPPORTED" | "INVALID_EMAIL_ADDRESS_TARGET" | "INVALID_RESOURCE_POLICY_JSON" | "INVALID_PRINCIPAL" | "UNSUPPORTED_ACTION_IN_RESOURCE_POLICY" | "UNSUPPORTED_POLICY_TYPE_IN_RESOURCE_POLICY" | "UNSUPPORTED_RESOURCE_IN_RESOURCE_POLICY" | "NON_DETACHABLE_POLICY")
       SENSITIVE: []
     end
 
@@ -633,7 +633,7 @@ module Aws::Organizations
 
     class ListPoliciesForTargetRequest
       attr_accessor target_id: ::String
-      attr_accessor filter: ("SERVICE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY")
+      attr_accessor filter: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       SENSITIVE: []
@@ -646,7 +646,7 @@ module Aws::Organizations
     end
 
     class ListPoliciesRequest
-      attr_accessor filter: ("SERVICE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY")
+      attr_accessor filter: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       SENSITIVE: []
@@ -787,7 +787,7 @@ module Aws::Organizations
       attr_accessor arn: ::String
       attr_accessor name: ::String
       attr_accessor description: ::String
-      attr_accessor type: ("SERVICE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY")
+      attr_accessor type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY")
       attr_accessor aws_managed: bool
       SENSITIVE: []
     end
@@ -816,7 +816,7 @@ module Aws::Organizations
     end
 
     class PolicyTypeSummary
-      attr_accessor type: ("SERVICE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY")
+      attr_accessor type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY")
       attr_accessor status: ("ENABLED" | "PENDING_ENABLE" | "PENDING_DISABLE")
       SENSITIVE: []
     end

@@ -238,7 +238,6 @@ module Aws::ManagedBlockchain
     #     * `ETHEREUM_GOERLI`
     #
     #     * `POLYGON_MUMBAI`
-    #
     #     However, your existing `Accessor` tokens with these `networkType`
     #     values will remain unchanged.
     #

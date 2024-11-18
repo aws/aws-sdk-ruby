@@ -24,7 +24,8 @@ module Aws::IVS
 
     # Object specifying a stream’s audio configuration, as set up by the
     # broadcaster (usually in an encoder). This is part of the
-    # IngestConfiguration object and used for monitoring stream health.
+    # IngestConfigurations object and the deprecated IngestConfiguration
+    # object. It is used for monitoring stream health.
     #
     # @!attribute [rw] channels
     #   Number of audio channels.
@@ -43,13 +44,19 @@ module Aws::IVS
     #   the encoder.
     #   @return [Integer]
     #
+    # @!attribute [rw] track
+    #   Name of the audio track (if the stream has an audio track). If
+    #   multitrack is not enabled, this is track0 (the sole track).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/AudioConfiguration AWS API Documentation
     #
     class AudioConfiguration < Struct.new(
       :channels,
       :codec,
       :sample_rate,
-      :target_bitrate)
+      :target_bitrate,
+      :track)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -229,6 +236,14 @@ module Aws::IVS
     #   Default: `false`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] container_format
+    #   Indicates which content-packaging format is used (MPEG-TS or fMP4).
+    #   If `multitrackInputConfiguration` is specified and `enabled` is
+    #   `true`, then `containerFormat` is required and must be set to
+    #   `FRAGMENTED_MP4`. Otherwise, `containerFormat` may be set to `TS` or
+    #   `FRAGMENTED_MP4`. Default: `TS`.
+    #   @return [String]
+    #
     # @!attribute [rw] ingest_endpoint
     #   Channel ingest endpoint, part of the definition of an ingest server,
     #   used when you set up streaming software.
@@ -243,6 +258,11 @@ module Aws::IVS
     #   video up to Full HD. Use `LOW` for near-real-time interaction with
     #   viewers. Default: `LOW`.
     #   @return [String]
+    #
+    # @!attribute [rw] multitrack_input_configuration
+    #   Object specifying multitrack input configuration. Default: no
+    #   multitrack input configuration is specified.
+    #   @return [Types::MultitrackInputConfiguration]
     #
     # @!attribute [rw] name
     #   Channel name.
@@ -306,9 +326,11 @@ module Aws::IVS
     class Channel < Struct.new(
       :arn,
       :authorized,
+      :container_format,
       :ingest_endpoint,
       :insecure_ingest,
       :latency_mode,
+      :multitrack_input_configuration,
       :name,
       :playback_restriction_policy_arn,
       :playback_url,
@@ -436,6 +458,14 @@ module Aws::IVS
     #   Default: `false`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] container_format
+    #   Indicates which content-packaging format is used (MPEG-TS or fMP4).
+    #   If `multitrackInputConfiguration` is specified and `enabled` is
+    #   `true`, then `containerFormat` is required and must be set to
+    #   `FRAGMENTED_MP4`. Otherwise, `containerFormat` may be set to `TS` or
+    #   `FRAGMENTED_MP4`. Default: `TS`.
+    #   @return [String]
+    #
     # @!attribute [rw] insecure_ingest
     #   Whether the channel allows insecure RTMP and SRT ingest. Default:
     #   `false`.
@@ -446,6 +476,11 @@ module Aws::IVS
     #   video up to Full HD. Use `LOW` for near-real-time interaction with
     #   viewers. Default: `LOW`.
     #   @return [String]
+    #
+    # @!attribute [rw] multitrack_input_configuration
+    #   Object specifying multitrack input configuration. Default: no
+    #   multitrack input configuration is specified.
+    #   @return [Types::MultitrackInputConfiguration]
     #
     # @!attribute [rw] name
     #   Channel name.
@@ -499,8 +534,10 @@ module Aws::IVS
     #
     class CreateChannelRequest < Struct.new(
       :authorized,
+      :container_format,
       :insecure_ingest,
       :latency_mode,
+      :multitrack_input_configuration,
       :name,
       :playback_restriction_policy_arn,
       :preset,
@@ -1002,6 +1039,14 @@ module Aws::IVS
     # Object specifying the ingest configuration set up by the broadcaster,
     # usually in an encoder.
     #
+    # **Note:** IngestConfiguration is deprecated in favor of
+    # IngestConfigurations but retained to ensure backward compatibility. If
+    # multitrack is not enabled, IngestConfiguration and
+    # IngestConfigurations contain the same data, namely information about
+    # track0 (the sole track). If multitrack is enabled, IngestConfiguration
+    # contains data for only the first track (track0) and
+    # IngestConfigurations contains data for all tracks.
+    #
     # @!attribute [rw] audio
     #   Encoder settings for audio.
     #   @return [Types::AudioConfiguration]
@@ -1015,6 +1060,33 @@ module Aws::IVS
     class IngestConfiguration < Struct.new(
       :audio,
       :video)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Object specifying the ingest configuration set up by the broadcaster,
+    # usually in an encoder.
+    #
+    # **Note:** Use IngestConfigurations instead of IngestConfiguration
+    # (which is deprecated). If multitrack is not enabled,
+    # IngestConfiguration and IngestConfigurations contain the same data,
+    # namely information about track0 (the sole track). If multitrack is
+    # enabled, IngestConfiguration contains data for only the first track
+    # (track0) and IngestConfigurations contains data for all tracks.
+    #
+    # @!attribute [rw] audio_configurations
+    #   Encoder settings for audio.
+    #   @return [Array<Types::AudioConfiguration>]
+    #
+    # @!attribute [rw] video_configurations
+    #   Encoder settings for video
+    #   @return [Array<Types::VideoConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/IngestConfigurations AWS API Documentation
+    #
+    class IngestConfigurations < Struct.new(
+      :audio_configurations,
+      :video_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1338,6 +1410,37 @@ module Aws::IVS
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A complex type that specifies multitrack input configuration.
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether multitrack input is enabled. Can be set to `true`
+    #   only if channel type is `STANDARD`. Setting `enabled` to `true` with
+    #   any other channel type will cause an exception. If `true`, then
+    #   `policy`, `maximumResolution`, and `containerFormat` are required,
+    #   and `containerFormat` must be set to `FRAGMENTED_MP4`. Default:
+    #   `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] maximum_resolution
+    #   Maximum resolution for multitrack input. Required if `enabled` is
+    #   `true`.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   Indicates whether multitrack input is allowed or required. Required
+    #   if `enabled` is `true`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/MultitrackInputConfiguration AWS API Documentation
+    #
+    class MultitrackInputConfiguration < Struct.new(
+      :enabled,
+      :maximum_resolution,
+      :policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1884,8 +1987,36 @@ module Aws::IVS
     #
     # @!attribute [rw] code
     #   Provides additional details about the stream event. There are
-    #   several values; note that the long descriptions are provided in the
-    #   IVS console but not delivered through the IVS API or EventBridge:
+    #   several values; the long descriptions are provided in the IVS
+    #   console but not delivered through the IVS API or EventBridge.
+    #   Multitrack-related codes are used only for certain Session Ended
+    #   events.
+    #
+    #   * `MultitrackInputNotAllowed` — The broadcast client attempted to
+    #     connect with multitrack input, but multitrack input was not
+    #     enabled on the channel. Check your broadcast software settings or
+    #     set `MultitrackInputConfiguration.Policy` to `ALLOW` or `REQUIRE`.
+    #
+    #   * `MultitrackInputRequired` — The broadcast client attempted to
+    #     connect with single-track video, but multitrack input is required
+    #     on this channel. Enable multitrack video in your broadcast
+    #     software or configure the channel’s
+    #     `MultitrackInputConfiguration.Policy` to `ALLOW`.
+    #
+    #   * `InvalidGetClientConfigurationStreamKey` — The broadcast client
+    #     attempted to connect with an invalid, expired, or corrupt stream
+    #     key.
+    #
+    #   * `GetClientConfigurationStreamKeyRequired` — The broadcast client
+    #     attempted to stream multitrack video without providing an
+    #     authenticated stream key from GetClientConfiguration.
+    #
+    #   * `InvalidMultitrackInputTrackCount` — The multitrack input stream
+    #     contained an invalid number of tracks.
+    #
+    #   * `InvalidMultitrackInputVideoTrackMediaProperties` — The multitrack
+    #     input stream contained one or more tracks with an invalid codec,
+    #     resolution, bitrate, or framerate.
     #
     #   * `StreamTakeoverMediaMismatch` — The broadcast client attempted to
     #     take over with different media properties (e.g., codec,
@@ -1896,7 +2027,7 @@ module Aws::IVS
     #     than the original stream's value or a value outside the allowed
     #     range of 1 to 2,147,483,647.
     #
-    #   * `StreamTakeoverLimitBreached` — The broadcast client reached the
+    #     `StreamTakeoverLimitBreached` — The broadcast client reached the
     #     maximum allowed takeover attempts for this stream.
     #   @return [String]
     #
@@ -2024,8 +2155,22 @@ module Aws::IVS
     #   @return [Time]
     #
     # @!attribute [rw] ingest_configuration
-    #   The properties of the incoming RTMP stream for the stream.
+    #   The properties of the incoming RTMP stream.
+    #
+    #   **Note:** `ingestConfiguration` is deprecated in favor of
+    #   `ingestConfigurations` but retained to ensure backward
+    #   compatibility. If multitrack is not enabled, `ingestConfiguration`
+    #   and `ingestConfigurations` contain the same data, namely information
+    #   about track0 (the sole track). If multitrack is enabled,
+    #   `ingestConfiguration` contains data for only the first track
+    #   (track0) and `ingestConfigurations` contains data for all tracks.
     #   @return [Types::IngestConfiguration]
+    #
+    # @!attribute [rw] ingest_configurations
+    #   The properties of the incoming RTMP stream. If multitrack is
+    #   enabled, `ingestConfigurations` contains data for all tracks;
+    #   otherwise, it contains data only for track0 (the sole track).
+    #   @return [Types::IngestConfigurations]
     #
     # @!attribute [rw] recording_configuration
     #   The properties of recording the live stream.
@@ -2058,6 +2203,7 @@ module Aws::IVS
       :channel,
       :end_time,
       :ingest_configuration,
+      :ingest_configurations,
       :recording_configuration,
       :start_time,
       :stream_id,
@@ -2236,7 +2382,8 @@ module Aws::IVS
     #   configurable (and required) only if `recordingMode` is `INTERVAL`.
     #   Default: 60.
     #
-    #   **Important:** For the `BASIC` channel type, setting a value for
+    #   **Important:** For the `BASIC` channel type, or the `STANDARD`
+    #   channel type with multitrack input, setting a value for
     #   `targetIntervalSeconds` does not guarantee that thumbnails are
     #   generated at the specified interval. For thumbnails to be generated
     #   at the `targetIntervalSeconds` interval, the `IDR/Keyframe` value
@@ -2300,6 +2447,14 @@ module Aws::IVS
     #   Whether the channel is private (enabled for playback authorization).
     #   @return [Boolean]
     #
+    # @!attribute [rw] container_format
+    #   Indicates which content-packaging format is used (MPEG-TS or fMP4).
+    #   If `multitrackInputConfiguration` is specified and `enabled` is
+    #   `true`, then `containerFormat` is required and must be set to
+    #   `FRAGMENTED_MP4`. Otherwise, `containerFormat` may be set to `TS` or
+    #   `FRAGMENTED_MP4`. Default: `TS`.
+    #   @return [String]
+    #
     # @!attribute [rw] insecure_ingest
     #   Whether the channel allows insecure RTMP and SRT ingest. Default:
     #   `false`.
@@ -2310,6 +2465,11 @@ module Aws::IVS
     #   video up to Full HD. Use `LOW` for near-real-time interaction with
     #   viewers.
     #   @return [String]
+    #
+    # @!attribute [rw] multitrack_input_configuration
+    #   Object specifying multitrack input configuration. Default: no
+    #   multitrack input configuration is specified.
+    #   @return [Types::MultitrackInputConfiguration]
     #
     # @!attribute [rw] name
     #   Channel name.
@@ -2351,8 +2511,10 @@ module Aws::IVS
     class UpdateChannelRequest < Struct.new(
       :arn,
       :authorized,
+      :container_format,
       :insecure_ingest,
       :latency_mode,
+      :multitrack_input_configuration,
       :name,
       :playback_restriction_policy_arn,
       :preset,
@@ -2448,7 +2610,8 @@ module Aws::IVS
 
     # Object specifying a stream’s video configuration, as set up by the
     # broadcaster (usually in an encoder). This is part of the
-    # IngestConfiguration object and used for monitoring stream health.
+    # IngestConfigurations object and the deprecated IngestConfiguration
+    # object. It is used for monitoring stream health.
     #
     # @!attribute [rw] avc_level
     #   Indicates the degree of required decoder performance for a profile.
@@ -2469,6 +2632,18 @@ module Aws::IVS
     #   Software or hardware used to encode the video.
     #   @return [String]
     #
+    # @!attribute [rw] level
+    #   Indicates the degree of required decoder performance for a profile.
+    #   Normally this is set automatically by the encoder. When an AVC codec
+    #   is used, this field has the same value as `avcLevel`.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile
+    #   Indicates to the decoder the requirements for decoding the stream.
+    #   When an AVC codec is used, this field has the same value as
+    #   `avcProfile`.
+    #   @return [String]
+    #
     # @!attribute [rw] target_bitrate
     #   The expected ingest bitrate (bits per second). This is configured in
     #   the encoder.
@@ -2477,6 +2652,11 @@ module Aws::IVS
     # @!attribute [rw] target_framerate
     #   The expected ingest framerate. This is configured in the encoder.
     #   @return [Integer]
+    #
+    # @!attribute [rw] track
+    #   Name of the video track. If multitrack is not enabled, this is
+    #   track0 (the sole track).
+    #   @return [String]
     #
     # @!attribute [rw] video_height
     #   Video-resolution height in pixels.
@@ -2493,8 +2673,11 @@ module Aws::IVS
       :avc_profile,
       :codec,
       :encoder,
+      :level,
+      :profile,
       :target_bitrate,
       :target_framerate,
+      :track,
       :video_height,
       :video_width)
       SENSITIVE = []

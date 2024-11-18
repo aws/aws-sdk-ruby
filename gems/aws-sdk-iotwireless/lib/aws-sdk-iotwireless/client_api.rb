@@ -210,6 +210,7 @@ module Aws::IoTWireless
     FPorts = Shapes::StructureShape.new(name: 'FPorts')
     FactoryPresetFreqsList = Shapes::ListShape.new(name: 'FactoryPresetFreqsList')
     FactorySupport = Shapes::BooleanShape.new(name: 'FactorySupport')
+    FileDescriptor = Shapes::StringShape.new(name: 'FileDescriptor')
     Fingerprint = Shapes::StringShape.new(name: 'Fingerprint')
     FirmwareUpdateImage = Shapes::StringShape.new(name: 'FirmwareUpdateImage')
     FirmwareUpdateRole = Shapes::StringShape.new(name: 'FirmwareUpdateRole')
@@ -218,14 +219,21 @@ module Aws::IoTWireless
     FuotaDeviceStatus = Shapes::StringShape.new(name: 'FuotaDeviceStatus')
     FuotaTask = Shapes::StructureShape.new(name: 'FuotaTask')
     FuotaTaskArn = Shapes::StringShape.new(name: 'FuotaTaskArn')
+    FuotaTaskEvent = Shapes::StringShape.new(name: 'FuotaTaskEvent')
+    FuotaTaskEventLogOption = Shapes::StructureShape.new(name: 'FuotaTaskEventLogOption')
+    FuotaTaskEventLogOptionList = Shapes::ListShape.new(name: 'FuotaTaskEventLogOptionList')
     FuotaTaskId = Shapes::StringShape.new(name: 'FuotaTaskId')
     FuotaTaskList = Shapes::ListShape.new(name: 'FuotaTaskList')
+    FuotaTaskLogOption = Shapes::StructureShape.new(name: 'FuotaTaskLogOption')
+    FuotaTaskLogOptionList = Shapes::ListShape.new(name: 'FuotaTaskLogOptionList')
     FuotaTaskName = Shapes::StringShape.new(name: 'FuotaTaskName')
     FuotaTaskStatus = Shapes::StringShape.new(name: 'FuotaTaskStatus')
+    FuotaTaskType = Shapes::StringShape.new(name: 'FuotaTaskType')
     GPST = Shapes::FloatShape.new(name: 'GPST')
     GatewayEui = Shapes::StringShape.new(name: 'GatewayEui')
     GatewayList = Shapes::ListShape.new(name: 'GatewayList')
     GatewayListItem = Shapes::StructureShape.new(name: 'GatewayListItem')
+    GatewayListMulticast = Shapes::ListShape.new(name: 'GatewayListMulticast')
     GatewayMaxEirp = Shapes::FloatShape.new(name: 'GatewayMaxEirp')
     GenAppKey = Shapes::StringShape.new(name: 'GenAppKey')
     GeoJsonPayload = Shapes::BlobShape.new(name: 'GeoJsonPayload')
@@ -455,6 +463,7 @@ module Aws::IoTWireless
     PSC = Shapes::IntegerShape.new(name: 'PSC')
     PackageVersion = Shapes::StringShape.new(name: 'PackageVersion')
     ParticipatingGateways = Shapes::StructureShape.new(name: 'ParticipatingGateways')
+    ParticipatingGatewaysMulticast = Shapes::StructureShape.new(name: 'ParticipatingGatewaysMulticast')
     PartnerAccountArn = Shapes::StringShape.new(name: 'PartnerAccountArn')
     PartnerAccountId = Shapes::StringShape.new(name: 'PartnerAccountId')
     PartnerType = Shapes::StringShape.new(name: 'PartnerType')
@@ -610,6 +619,7 @@ module Aws::IoTWireless
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     TraceContent = Shapes::StructureShape.new(name: 'TraceContent')
     TransmissionInterval = Shapes::IntegerShape.new(name: 'TransmissionInterval')
+    TransmissionIntervalMulticast = Shapes::IntegerShape.new(name: 'TransmissionIntervalMulticast')
     TransmitMode = Shapes::IntegerShape.new(name: 'TransmitMode')
     UARFCN = Shapes::IntegerShape.new(name: 'UARFCN')
     UARFCNDL = Shapes::IntegerShape.new(name: 'UARFCNDL')
@@ -868,6 +878,7 @@ module Aws::IoTWireless
     CreateFuotaTaskRequest.add_member(:redundancy_percent, Shapes::ShapeRef.new(shape: RedundancyPercent, location_name: "RedundancyPercent"))
     CreateFuotaTaskRequest.add_member(:fragment_size_bytes, Shapes::ShapeRef.new(shape: FragmentSizeBytes, location_name: "FragmentSizeBytes"))
     CreateFuotaTaskRequest.add_member(:fragment_interval_ms, Shapes::ShapeRef.new(shape: FragmentIntervalMS, location_name: "FragmentIntervalMS"))
+    CreateFuotaTaskRequest.add_member(:descriptor, Shapes::ShapeRef.new(shape: FileDescriptor, location_name: "Descriptor"))
     CreateFuotaTaskRequest.struct_class = Types::CreateFuotaTaskRequest
 
     CreateFuotaTaskResponse.add_member(:arn, Shapes::ShapeRef.new(shape: FuotaTaskArn, location_name: "Arn"))
@@ -1141,13 +1152,28 @@ module Aws::IoTWireless
     FuotaTask.add_member(:name, Shapes::ShapeRef.new(shape: FuotaTaskName, location_name: "Name"))
     FuotaTask.struct_class = Types::FuotaTask
 
+    FuotaTaskEventLogOption.add_member(:event, Shapes::ShapeRef.new(shape: FuotaTaskEvent, required: true, location_name: "Event"))
+    FuotaTaskEventLogOption.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, required: true, location_name: "LogLevel"))
+    FuotaTaskEventLogOption.struct_class = Types::FuotaTaskEventLogOption
+
+    FuotaTaskEventLogOptionList.member = Shapes::ShapeRef.new(shape: FuotaTaskEventLogOption)
+
     FuotaTaskList.member = Shapes::ShapeRef.new(shape: FuotaTask)
+
+    FuotaTaskLogOption.add_member(:type, Shapes::ShapeRef.new(shape: FuotaTaskType, required: true, location_name: "Type"))
+    FuotaTaskLogOption.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, required: true, location_name: "LogLevel"))
+    FuotaTaskLogOption.add_member(:events, Shapes::ShapeRef.new(shape: FuotaTaskEventLogOptionList, location_name: "Events"))
+    FuotaTaskLogOption.struct_class = Types::FuotaTaskLogOption
+
+    FuotaTaskLogOptionList.member = Shapes::ShapeRef.new(shape: FuotaTaskLogOption)
 
     GatewayList.member = Shapes::ShapeRef.new(shape: GatewayListItem)
 
     GatewayListItem.add_member(:gateway_id, Shapes::ShapeRef.new(shape: WirelessGatewayId, required: true, location_name: "GatewayId"))
     GatewayListItem.add_member(:downlink_frequency, Shapes::ShapeRef.new(shape: DownlinkFrequency, required: true, location_name: "DownlinkFrequency"))
     GatewayListItem.struct_class = Types::GatewayListItem
+
+    GatewayListMulticast.member = Shapes::ShapeRef.new(shape: WirelessGatewayId)
 
     GetDestinationRequest.add_member(:name, Shapes::ShapeRef.new(shape: DestinationName, required: true, location: "uri", location_name: "Name"))
     GetDestinationRequest.struct_class = Types::GetDestinationRequest
@@ -1194,6 +1220,7 @@ module Aws::IoTWireless
     GetFuotaTaskResponse.add_member(:redundancy_percent, Shapes::ShapeRef.new(shape: RedundancyPercent, location_name: "RedundancyPercent"))
     GetFuotaTaskResponse.add_member(:fragment_size_bytes, Shapes::ShapeRef.new(shape: FragmentSizeBytes, location_name: "FragmentSizeBytes"))
     GetFuotaTaskResponse.add_member(:fragment_interval_ms, Shapes::ShapeRef.new(shape: FragmentIntervalMS, location_name: "FragmentIntervalMS"))
+    GetFuotaTaskResponse.add_member(:descriptor, Shapes::ShapeRef.new(shape: FileDescriptor, location_name: "Descriptor"))
     GetFuotaTaskResponse.struct_class = Types::GetFuotaTaskResponse
 
     GetLogLevelsByResourceTypesRequest.struct_class = Types::GetLogLevelsByResourceTypesRequest
@@ -1201,6 +1228,7 @@ module Aws::IoTWireless
     GetLogLevelsByResourceTypesResponse.add_member(:default_log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "DefaultLogLevel"))
     GetLogLevelsByResourceTypesResponse.add_member(:wireless_gateway_log_options, Shapes::ShapeRef.new(shape: WirelessGatewayLogOptionList, location_name: "WirelessGatewayLogOptions"))
     GetLogLevelsByResourceTypesResponse.add_member(:wireless_device_log_options, Shapes::ShapeRef.new(shape: WirelessDeviceLogOptionList, location_name: "WirelessDeviceLogOptions"))
+    GetLogLevelsByResourceTypesResponse.add_member(:fuota_task_log_options, Shapes::ShapeRef.new(shape: FuotaTaskLogOptionList, location_name: "FuotaTaskLogOptions"))
     GetLogLevelsByResourceTypesResponse.struct_class = Types::GetLogLevelsByResourceTypesResponse
 
     GetMetricConfigurationRequest.struct_class = Types::GetMetricConfigurationRequest
@@ -1747,12 +1775,14 @@ module Aws::IoTWireless
 
     LoRaWANMulticast.add_member(:rf_region, Shapes::ShapeRef.new(shape: SupportedRfRegion, location_name: "RfRegion"))
     LoRaWANMulticast.add_member(:dl_class, Shapes::ShapeRef.new(shape: DlClass, location_name: "DlClass"))
+    LoRaWANMulticast.add_member(:participating_gateways, Shapes::ShapeRef.new(shape: ParticipatingGatewaysMulticast, location_name: "ParticipatingGateways"))
     LoRaWANMulticast.struct_class = Types::LoRaWANMulticast
 
     LoRaWANMulticastGet.add_member(:rf_region, Shapes::ShapeRef.new(shape: SupportedRfRegion, location_name: "RfRegion"))
     LoRaWANMulticastGet.add_member(:dl_class, Shapes::ShapeRef.new(shape: DlClass, location_name: "DlClass"))
     LoRaWANMulticastGet.add_member(:number_of_devices_requested, Shapes::ShapeRef.new(shape: NumberOfDevicesRequested, location_name: "NumberOfDevicesRequested"))
     LoRaWANMulticastGet.add_member(:number_of_devices_in_group, Shapes::ShapeRef.new(shape: NumberOfDevicesInGroup, location_name: "NumberOfDevicesInGroup"))
+    LoRaWANMulticastGet.add_member(:participating_gateways, Shapes::ShapeRef.new(shape: ParticipatingGatewaysMulticast, location_name: "ParticipatingGateways"))
     LoRaWANMulticastGet.struct_class = Types::LoRaWANMulticastGet
 
     LoRaWANMulticastMetadata.add_member(:f_port, Shapes::ShapeRef.new(shape: FPort, location_name: "FPort"))
@@ -1892,6 +1922,10 @@ module Aws::IoTWireless
     ParticipatingGateways.add_member(:gateway_list, Shapes::ShapeRef.new(shape: GatewayList, required: true, location_name: "GatewayList"))
     ParticipatingGateways.add_member(:transmission_interval, Shapes::ShapeRef.new(shape: TransmissionInterval, required: true, location_name: "TransmissionInterval"))
     ParticipatingGateways.struct_class = Types::ParticipatingGateways
+
+    ParticipatingGatewaysMulticast.add_member(:gateway_list, Shapes::ShapeRef.new(shape: GatewayListMulticast, location_name: "GatewayList"))
+    ParticipatingGatewaysMulticast.add_member(:transmission_interval, Shapes::ShapeRef.new(shape: TransmissionIntervalMulticast, location_name: "TransmissionInterval"))
+    ParticipatingGatewaysMulticast.struct_class = Types::ParticipatingGatewaysMulticast
 
     PositionConfigurationItem.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: PositionResourceIdentifier, location_name: "ResourceIdentifier"))
     PositionConfigurationItem.add_member(:resource_type, Shapes::ShapeRef.new(shape: PositionResourceType, location_name: "ResourceType"))
@@ -2248,11 +2282,13 @@ module Aws::IoTWireless
     UpdateFuotaTaskRequest.add_member(:redundancy_percent, Shapes::ShapeRef.new(shape: RedundancyPercent, location_name: "RedundancyPercent"))
     UpdateFuotaTaskRequest.add_member(:fragment_size_bytes, Shapes::ShapeRef.new(shape: FragmentSizeBytes, location_name: "FragmentSizeBytes"))
     UpdateFuotaTaskRequest.add_member(:fragment_interval_ms, Shapes::ShapeRef.new(shape: FragmentIntervalMS, location_name: "FragmentIntervalMS"))
+    UpdateFuotaTaskRequest.add_member(:descriptor, Shapes::ShapeRef.new(shape: FileDescriptor, location_name: "Descriptor"))
     UpdateFuotaTaskRequest.struct_class = Types::UpdateFuotaTaskRequest
 
     UpdateFuotaTaskResponse.struct_class = Types::UpdateFuotaTaskResponse
 
     UpdateLogLevelsByResourceTypesRequest.add_member(:default_log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "DefaultLogLevel"))
+    UpdateLogLevelsByResourceTypesRequest.add_member(:fuota_task_log_options, Shapes::ShapeRef.new(shape: FuotaTaskLogOptionList, location_name: "FuotaTaskLogOptions"))
     UpdateLogLevelsByResourceTypesRequest.add_member(:wireless_device_log_options, Shapes::ShapeRef.new(shape: WirelessDeviceLogOptionList, location_name: "WirelessDeviceLogOptions"))
     UpdateLogLevelsByResourceTypesRequest.add_member(:wireless_gateway_log_options, Shapes::ShapeRef.new(shape: WirelessGatewayLogOptionList, location_name: "WirelessGatewayLogOptions"))
     UpdateLogLevelsByResourceTypesRequest.struct_class = Types::UpdateLogLevelsByResourceTypesRequest

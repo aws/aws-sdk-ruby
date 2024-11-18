@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.121.0 (2024-11-08)
+------------------
+
+* Feature - Adds new error code `Ec2InstanceTypeDoesNotExist` for Amazon EKS managed node groups
+
 1.120.0 (2024-10-21)
 ------------------
 

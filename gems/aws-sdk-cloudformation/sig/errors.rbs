@@ -24,6 +24,8 @@ module Aws
       end
       class GeneratedTemplateNotFoundException < ::Aws::Errors::ServiceError
       end
+      class HookResultNotFoundException < ::Aws::Errors::ServiceError
+      end
       class InsufficientCapabilitiesException < ::Aws::Errors::ServiceError
       end
       class InvalidChangeSetStatusException < ::Aws::Errors::ServiceError

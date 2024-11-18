@@ -1259,6 +1259,16 @@ module Aws::BedrockAgentRuntime
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-test.html
     #
+    # @option params [Boolean] :enable_trace
+    #   Specifies whether to return the trace for the flow or not. Traces
+    #   track inputs and outputs for nodes in the flow. For more information,
+    #   see [Track each step in your prompt flow by viewing its trace in
+    #   Amazon Bedrock][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html
+    #
     # @option params [required, String] :flow_alias_identifier
     #   The unique identifier of the flow alias.
     #
@@ -1334,6 +1344,9 @@ module Aws::BedrockAgentRuntime
     #       handler.on_flow_output_event_event do |event|
     #         event # => Aws::BedrockAgentRuntime::Types::flowOutputEvent
     #       end
+    #       handler.on_flow_trace_event_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::flowTraceEvent
+    #       end
     #       handler.on_internal_server_exception_event do |event|
     #         event # => Aws::BedrockAgentRuntime::Types::internalServerException
     #       end
@@ -1373,6 +1386,9 @@ module Aws::BedrockAgentRuntime
     #       end
     #       stream.on_flow_output_event_event do |event|
     #         event # => Aws::BedrockAgentRuntime::Types::flowOutputEvent
+    #       end
+    #       stream.on_flow_trace_event_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::flowTraceEvent
     #       end
     #       stream.on_internal_server_exception_event do |event|
     #         event # => Aws::BedrockAgentRuntime::Types::internalServerException
@@ -1414,6 +1430,9 @@ module Aws::BedrockAgentRuntime
     #       handler.on_flow_output_event_event do |event|
     #         event # => Aws::BedrockAgentRuntime::Types::flowOutputEvent
     #       end
+    #       handler.on_flow_trace_event_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::flowTraceEvent
+    #       end
     #       handler.on_internal_server_exception_event do |event|
     #         event # => Aws::BedrockAgentRuntime::Types::internalServerException
     #       end
@@ -1449,6 +1468,7 @@ module Aws::BedrockAgentRuntime
     # @example Request syntax with placeholder values
     #
     #   resp = client.invoke_flow({
+    #     enable_trace: false,
     #     flow_alias_identifier: "FlowAliasIdentifier", # required
     #     flow_identifier: "FlowIdentifier", # required
     #     inputs: [ # required
@@ -1467,7 +1487,7 @@ module Aws::BedrockAgentRuntime
     #
     #   All events are available at resp.response_stream:
     #   resp.response_stream #=> Enumerator
-    #   resp.response_stream.event_types #=> [:access_denied_exception, :bad_gateway_exception, :conflict_exception, :dependency_failed_exception, :flow_completion_event, :flow_output_event, :internal_server_exception, :resource_not_found_exception, :service_quota_exceeded_exception, :throttling_exception, :validation_exception]
+    #   resp.response_stream.event_types #=> [:access_denied_exception, :bad_gateway_exception, :conflict_exception, :dependency_failed_exception, :flow_completion_event, :flow_output_event, :flow_trace_event, :internal_server_exception, :resource_not_found_exception, :service_quota_exceeded_exception, :throttling_exception, :validation_exception]
     #
     #   For :access_denied_exception event available at #on_access_denied_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
@@ -1489,6 +1509,20 @@ module Aws::BedrockAgentRuntime
     #   For :flow_output_event event available at #on_flow_output_event_event callback and response eventstream enumerator:
     #   event.node_name #=> String
     #   event.node_type #=> String, one of "FlowInputNode", "FlowOutputNode", "LambdaFunctionNode", "KnowledgeBaseNode", "PromptNode", "ConditionNode", "LexNode"
+    #
+    #   For :flow_trace_event event available at #on_flow_trace_event_event callback and response eventstream enumerator:
+    #   event.trace.condition_node_result_trace.node_name #=> String
+    #   event.trace.condition_node_result_trace.satisfied_conditions #=> Array
+    #   event.trace.condition_node_result_trace.satisfied_conditions[0].condition_name #=> String
+    #   event.trace.condition_node_result_trace.timestamp #=> Time
+    #   event.trace.node_input_trace.fields #=> Array
+    #   event.trace.node_input_trace.fields[0].node_input_name #=> String
+    #   event.trace.node_input_trace.node_name #=> String
+    #   event.trace.node_input_trace.timestamp #=> Time
+    #   event.trace.node_output_trace.fields #=> Array
+    #   event.trace.node_output_trace.fields[0].node_output_name #=> String
+    #   event.trace.node_output_trace.node_name #=> String
+    #   event.trace.node_output_trace.timestamp #=> Time
     #
     #   For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
@@ -1920,7 +1954,7 @@ module Aws::BedrockAgentRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentruntime'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

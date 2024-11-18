@@ -364,10 +364,10 @@ module Aws::GeoMaps
     #   Takes in a string to draw geometries on the image. The input is a
     #   valid GeoJSON collection object.
     #
-    #   Example: `\{"type":"FeatureCollection","features":
-    #   [\{"type":"Feature","geometry":\{"type":"MultiPoint","coordinates":
-    #   [[-90.076345,51.504107],[-0.074451,51.506892]]\},"properties":
-    #   \{"color":"#00DD00"\}\}]\}`
+    #   Example: `{"type":"FeatureCollection","features":
+    #   [{"type":"Feature","geometry":{"type":"MultiPoint","coordinates":
+    #   [[-90.076345,51.504107],[-0.074451,51.506892]]},"properties":
+    #   {"color":"#00DD00"}}]}`
     #   @return [String]
     #
     # @!attribute [rw] height

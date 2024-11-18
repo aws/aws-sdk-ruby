@@ -87,6 +87,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#on_demand_throughput-instance_method
       def on_demand_throughput: () -> Types::OnDemandThroughput
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#warm_throughput-instance_method
+      def warm_throughput: () -> Types::TableWarmThroughputDescription
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#load-instance_method
@@ -230,6 +233,10 @@ module Aws
                           on_demand_throughput: {
                             max_read_request_units: ::Integer?,
                             max_write_request_units: ::Integer?
+                          }?,
+                          warm_throughput: {
+                            read_units_per_second: ::Integer?,
+                            write_units_per_second: ::Integer?
                           }?
                         }?,
                         create: {
@@ -251,6 +258,10 @@ module Aws
                           on_demand_throughput: {
                             max_read_request_units: ::Integer?,
                             max_write_request_units: ::Integer?
+                          }?,
+                          warm_throughput: {
+                            read_units_per_second: ::Integer?,
+                            write_units_per_second: ::Integer?
                           }?
                         }?,
                         delete: {
@@ -323,6 +334,10 @@ module Aws
                     ?on_demand_throughput: {
                       max_read_request_units: ::Integer?,
                       max_write_request_units: ::Integer?
+                    },
+                    ?warm_throughput: {
+                      read_units_per_second: ::Integer?,
+                      write_units_per_second: ::Integer?
                     }
                   ) -> Table
                 | (?Hash[Symbol, untyped]) -> Table

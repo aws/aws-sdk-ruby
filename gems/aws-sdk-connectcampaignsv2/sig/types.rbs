@@ -1,0 +1,724 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ConnectCampaignsV2
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      attr_accessor x_amz_error_type: ::String
+      SENSITIVE: []
+    end
+
+    class AgentlessConfig < Aws::EmptyStructure
+    end
+
+    class AnswerMachineDetectionConfig
+      attr_accessor enable_answer_machine_detection: bool
+      attr_accessor await_answer_machine_prompt: bool
+      SENSITIVE: []
+    end
+
+    class Campaign
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor connect_instance_id: ::String
+      attr_accessor channel_subtype_config: Types::ChannelSubtypeConfig
+      attr_accessor source: Types::Source
+      attr_accessor connect_campaign_flow_arn: ::String
+      attr_accessor schedule: Types::Schedule
+      attr_accessor communication_time_config: Types::CommunicationTimeConfig
+      attr_accessor communication_limits_override: Types::CommunicationLimitsConfig
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CampaignFilters
+      attr_accessor instance_id_filter: Types::InstanceIdFilter
+      SENSITIVE: []
+    end
+
+    class CampaignSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor connect_instance_id: ::String
+      attr_accessor channel_subtypes: ::Array[("TELEPHONY" | "SMS" | "EMAIL")]
+      attr_accessor schedule: Types::Schedule
+      attr_accessor connect_campaign_flow_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ChannelSubtypeConfig
+      attr_accessor telephony: Types::TelephonyChannelSubtypeConfig
+      attr_accessor sms: Types::SmsChannelSubtypeConfig
+      attr_accessor email: Types::EmailChannelSubtypeConfig
+      SENSITIVE: []
+    end
+
+    class ChannelSubtypeParameters
+      attr_accessor telephony: Types::TelephonyChannelSubtypeParameters
+      attr_accessor sms: Types::SmsChannelSubtypeParameters
+      attr_accessor email: Types::EmailChannelSubtypeParameters
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Telephony < ChannelSubtypeParameters
+      end
+      class Sms < ChannelSubtypeParameters
+      end
+      class Email < ChannelSubtypeParameters
+      end
+      class Unknown < ChannelSubtypeParameters
+      end
+    end
+
+    class CommunicationLimit
+      attr_accessor max_count_per_recipient: ::Integer
+      attr_accessor frequency: ::Integer
+      attr_accessor unit: ("DAY")
+      SENSITIVE: []
+    end
+
+    class CommunicationLimits
+      attr_accessor communication_limits_list: ::Array[Types::CommunicationLimit]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CommunicationLimitsList < CommunicationLimits
+      end
+      class Unknown < CommunicationLimits
+      end
+    end
+
+    class CommunicationLimitsConfig
+      attr_accessor all_channel_subtypes: Types::CommunicationLimits
+      SENSITIVE: []
+    end
+
+    class CommunicationTimeConfig
+      attr_accessor local_time_zone_config: Types::LocalTimeZoneConfig
+      attr_accessor telephony: Types::TimeWindow
+      attr_accessor sms: Types::TimeWindow
+      attr_accessor email: Types::TimeWindow
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor x_amz_error_type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCampaignRequest
+      attr_accessor name: ::String
+      attr_accessor connect_instance_id: ::String
+      attr_accessor channel_subtype_config: Types::ChannelSubtypeConfig
+      attr_accessor source: Types::Source
+      attr_accessor connect_campaign_flow_arn: ::String
+      attr_accessor schedule: Types::Schedule
+      attr_accessor communication_time_config: Types::CommunicationTimeConfig
+      attr_accessor communication_limits_override: Types::CommunicationLimitsConfig
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateCampaignResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CustomerProfilesIntegrationConfig
+      attr_accessor domain_arn: ::String
+      attr_accessor object_type_names: ::Hash[("Campaign-Email" | "Campaign-SMS" | "Campaign-Telephony" | "Campaign-Orchestration"), ::String]
+      SENSITIVE: []
+    end
+
+    class CustomerProfilesIntegrationIdentifier
+      attr_accessor domain_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CustomerProfilesIntegrationSummary
+      attr_accessor domain_arn: ::String
+      attr_accessor object_type_names: ::Hash[("Campaign-Email" | "Campaign-SMS" | "Campaign-Telephony" | "Campaign-Orchestration"), ::String]
+      SENSITIVE: []
+    end
+
+    class DeleteCampaignChannelSubtypeConfigRequest
+      attr_accessor id: ::String
+      attr_accessor channel_subtype: ("TELEPHONY" | "SMS" | "EMAIL")
+      SENSITIVE: []
+    end
+
+    class DeleteCampaignCommunicationLimitsRequest
+      attr_accessor id: ::String
+      attr_accessor config: ("ALL_CHANNEL_SUBTYPES")
+      SENSITIVE: []
+    end
+
+    class DeleteCampaignCommunicationTimeRequest
+      attr_accessor id: ::String
+      attr_accessor config: ("TELEPHONY" | "SMS" | "EMAIL")
+      SENSITIVE: []
+    end
+
+    class DeleteCampaignRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConnectInstanceConfigRequest
+      attr_accessor connect_instance_id: ::String
+      attr_accessor campaign_deletion_policy: ("RETAIN_ALL" | "DELETE_ALL")
+      SENSITIVE: []
+    end
+
+    class DeleteConnectInstanceIntegrationRequest
+      attr_accessor connect_instance_id: ::String
+      attr_accessor integration_identifier: Types::IntegrationIdentifier
+      SENSITIVE: []
+    end
+
+    class DeleteInstanceOnboardingJobRequest
+      attr_accessor connect_instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCampaignRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCampaignResponse
+      attr_accessor campaign: Types::Campaign
+      SENSITIVE: []
+    end
+
+    class EmailChannelSubtypeConfig
+      attr_accessor capacity: ::Float
+      attr_accessor outbound_mode: Types::EmailOutboundMode
+      attr_accessor default_outbound_config: Types::EmailOutboundConfig
+      SENSITIVE: []
+    end
+
+    class EmailChannelSubtypeParameters
+      attr_accessor destination_email_address: ::String
+      attr_accessor connect_source_email_address: ::String
+      attr_accessor template_arn: ::String
+      attr_accessor template_parameters: ::Hash[::String, ::String]
+      SENSITIVE: [:destination_email_address, :connect_source_email_address, :template_parameters]
+    end
+
+    class EmailOutboundConfig
+      attr_accessor connect_source_email_address: ::String
+      attr_accessor source_email_address_display_name: ::String
+      attr_accessor wisdom_template_arn: ::String
+      SENSITIVE: [:connect_source_email_address, :source_email_address_display_name]
+    end
+
+    class EmailOutboundMode
+      attr_accessor agentless: Types::AgentlessConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Agentless < EmailOutboundMode
+      end
+      class Unknown < EmailOutboundMode
+      end
+    end
+
+    class EncryptionConfig
+      attr_accessor enabled: bool
+      attr_accessor encryption_type: ("KMS")
+      attr_accessor key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class FailedCampaignStateResponse
+      attr_accessor campaign_id: ::String
+      attr_accessor failure_code: ("ResourceNotFound" | "UnknownError")
+      SENSITIVE: []
+    end
+
+    class FailedRequest
+      attr_accessor client_token: ::String
+      attr_accessor id: ::String
+      attr_accessor failure_code: ("InvalidInput" | "RequestThrottled" | "UnknownError" | "BufferLimitExceeded")
+      SENSITIVE: []
+    end
+
+    class GetCampaignStateBatchRequest
+      attr_accessor campaign_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetCampaignStateBatchResponse
+      attr_accessor successful_requests: ::Array[Types::SuccessfulCampaignStateResponse]
+      attr_accessor failed_requests: ::Array[Types::FailedCampaignStateResponse]
+      SENSITIVE: []
+    end
+
+    class GetCampaignStateRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCampaignStateResponse
+      attr_accessor state: ("Initialized" | "Running" | "Paused" | "Stopped" | "Failed" | "Completed")
+      SENSITIVE: []
+    end
+
+    class GetConnectInstanceConfigRequest
+      attr_accessor connect_instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetConnectInstanceConfigResponse
+      attr_accessor connect_instance_config: Types::InstanceConfig
+      SENSITIVE: []
+    end
+
+    class GetInstanceOnboardingJobStatusRequest
+      attr_accessor connect_instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetInstanceOnboardingJobStatusResponse
+      attr_accessor connect_instance_onboarding_job_status: Types::InstanceOnboardingJobStatus
+      SENSITIVE: []
+    end
+
+    class InstanceConfig
+      attr_accessor connect_instance_id: ::String
+      attr_accessor service_linked_role_arn: ::String
+      attr_accessor encryption_config: Types::EncryptionConfig
+      SENSITIVE: []
+    end
+
+    class InstanceIdFilter
+      attr_accessor value: ::String
+      attr_accessor operator: ("Eq")
+      SENSITIVE: []
+    end
+
+    class InstanceOnboardingJobStatus
+      attr_accessor connect_instance_id: ::String
+      attr_accessor status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor failure_code: ("EVENT_BRIDGE_ACCESS_DENIED" | "EVENT_BRIDGE_MANAGED_RULE_LIMIT_EXCEEDED" | "IAM_ACCESS_DENIED" | "KMS_ACCESS_DENIED" | "KMS_KEY_NOT_FOUND" | "INTERNAL_FAILURE")
+      SENSITIVE: []
+    end
+
+    class IntegrationConfig
+      attr_accessor customer_profiles: Types::CustomerProfilesIntegrationConfig
+      attr_accessor q_connect: Types::QConnectIntegrationConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CustomerProfiles < IntegrationConfig
+      end
+      class QConnect < IntegrationConfig
+      end
+      class Unknown < IntegrationConfig
+      end
+    end
+
+    class IntegrationIdentifier
+      attr_accessor customer_profiles: Types::CustomerProfilesIntegrationIdentifier
+      attr_accessor q_connect: Types::QConnectIntegrationIdentifier
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CustomerProfiles < IntegrationIdentifier
+      end
+      class QConnect < IntegrationIdentifier
+      end
+      class Unknown < IntegrationIdentifier
+      end
+    end
+
+    class IntegrationSummary
+      attr_accessor customer_profiles: Types::CustomerProfilesIntegrationSummary
+      attr_accessor q_connect: Types::QConnectIntegrationSummary
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CustomerProfiles < IntegrationSummary
+      end
+      class QConnect < IntegrationSummary
+      end
+      class Unknown < IntegrationSummary
+      end
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor x_amz_error_type: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidCampaignStateException
+      attr_accessor state: ("Initialized" | "Running" | "Paused" | "Stopped" | "Failed" | "Completed")
+      attr_accessor message: ::String
+      attr_accessor x_amz_error_type: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidStateException
+      attr_accessor message: ::String
+      attr_accessor x_amz_error_type: ::String
+      SENSITIVE: []
+    end
+
+    class ListCampaignsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: Types::CampaignFilters
+      SENSITIVE: []
+    end
+
+    class ListCampaignsResponse
+      attr_accessor next_token: ::String
+      attr_accessor campaign_summary_list: ::Array[Types::CampaignSummary]
+      SENSITIVE: []
+    end
+
+    class ListConnectInstanceIntegrationsRequest
+      attr_accessor connect_instance_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConnectInstanceIntegrationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor integration_summary_list: ::Array[Types::IntegrationSummary]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class LocalTimeZoneConfig
+      attr_accessor default_time_zone: ::String
+      attr_accessor local_time_zone_detection: ::Array[("ZIP_CODE" | "AREA_CODE")]
+      SENSITIVE: []
+    end
+
+    class OpenHours
+      attr_accessor daily_hours: ::Hash[("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY"), ::Array[Types::TimeRange]]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class DailyHours < OpenHours
+      end
+      class Unknown < OpenHours
+      end
+    end
+
+    class OutboundRequest
+      attr_accessor client_token: ::String
+      attr_accessor expiration_time: ::Time
+      attr_accessor channel_subtype_parameters: Types::ChannelSubtypeParameters
+      SENSITIVE: []
+    end
+
+    class PauseCampaignRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class PredictiveConfig
+      attr_accessor bandwidth_allocation: ::Float
+      SENSITIVE: []
+    end
+
+    class ProgressiveConfig
+      attr_accessor bandwidth_allocation: ::Float
+      SENSITIVE: []
+    end
+
+    class PutConnectInstanceIntegrationRequest
+      attr_accessor connect_instance_id: ::String
+      attr_accessor integration_config: Types::IntegrationConfig
+      SENSITIVE: []
+    end
+
+    class PutOutboundRequestBatchRequest
+      attr_accessor id: ::String
+      attr_accessor outbound_requests: ::Array[Types::OutboundRequest]
+      SENSITIVE: []
+    end
+
+    class PutOutboundRequestBatchResponse
+      attr_accessor successful_requests: ::Array[Types::SuccessfulRequest]
+      attr_accessor failed_requests: ::Array[Types::FailedRequest]
+      SENSITIVE: []
+    end
+
+    class QConnectIntegrationConfig
+      attr_accessor knowledge_base_arn: ::String
+      SENSITIVE: []
+    end
+
+    class QConnectIntegrationIdentifier
+      attr_accessor knowledge_base_arn: ::String
+      SENSITIVE: []
+    end
+
+    class QConnectIntegrationSummary
+      attr_accessor knowledge_base_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor x_amz_error_type: ::String
+      SENSITIVE: []
+    end
+
+    class RestrictedPeriod
+      attr_accessor name: ::String
+      attr_accessor start_date: ::String
+      attr_accessor end_date: ::String
+      SENSITIVE: []
+    end
+
+    class RestrictedPeriods
+      attr_accessor restricted_period_list: ::Array[Types::RestrictedPeriod]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class RestrictedPeriodList < RestrictedPeriods
+      end
+      class Unknown < RestrictedPeriods
+      end
+    end
+
+    class ResumeCampaignRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class Schedule
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor refresh_frequency: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor x_amz_error_type: ::String
+      SENSITIVE: []
+    end
+
+    class SmsChannelSubtypeConfig
+      attr_accessor capacity: ::Float
+      attr_accessor outbound_mode: Types::SmsOutboundMode
+      attr_accessor default_outbound_config: Types::SmsOutboundConfig
+      SENSITIVE: []
+    end
+
+    class SmsChannelSubtypeParameters
+      attr_accessor destination_phone_number: ::String
+      attr_accessor connect_source_phone_number_arn: ::String
+      attr_accessor template_arn: ::String
+      attr_accessor template_parameters: ::Hash[::String, ::String]
+      SENSITIVE: [:destination_phone_number, :template_parameters]
+    end
+
+    class SmsOutboundConfig
+      attr_accessor connect_source_phone_number_arn: ::String
+      attr_accessor wisdom_template_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SmsOutboundMode
+      attr_accessor agentless: Types::AgentlessConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Agentless < SmsOutboundMode
+      end
+      class Unknown < SmsOutboundMode
+      end
+    end
+
+    class Source
+      attr_accessor customer_profiles_segment_arn: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CustomerProfilesSegmentArn < Source
+      end
+      class Unknown < Source
+      end
+    end
+
+    class StartCampaignRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class StartInstanceOnboardingJobRequest
+      attr_accessor connect_instance_id: ::String
+      attr_accessor encryption_config: Types::EncryptionConfig
+      SENSITIVE: []
+    end
+
+    class StartInstanceOnboardingJobResponse
+      attr_accessor connect_instance_onboarding_job_status: Types::InstanceOnboardingJobStatus
+      SENSITIVE: []
+    end
+
+    class StopCampaignRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class SuccessfulCampaignStateResponse
+      attr_accessor campaign_id: ::String
+      attr_accessor state: ("Initialized" | "Running" | "Paused" | "Stopped" | "Failed" | "Completed")
+      SENSITIVE: []
+    end
+
+    class SuccessfulRequest
+      attr_accessor client_token: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TelephonyChannelSubtypeConfig
+      attr_accessor capacity: ::Float
+      attr_accessor connect_queue_id: ::String
+      attr_accessor outbound_mode: Types::TelephonyOutboundMode
+      attr_accessor default_outbound_config: Types::TelephonyOutboundConfig
+      SENSITIVE: []
+    end
+
+    class TelephonyChannelSubtypeParameters
+      attr_accessor destination_phone_number: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor connect_source_phone_number: ::String
+      attr_accessor answer_machine_detection_config: Types::AnswerMachineDetectionConfig
+      SENSITIVE: [:destination_phone_number, :attributes]
+    end
+
+    class TelephonyOutboundConfig
+      attr_accessor connect_contact_flow_id: ::String
+      attr_accessor connect_source_phone_number: ::String
+      attr_accessor answer_machine_detection_config: Types::AnswerMachineDetectionConfig
+      SENSITIVE: []
+    end
+
+    class TelephonyOutboundMode
+      attr_accessor progressive: Types::ProgressiveConfig
+      attr_accessor predictive: Types::PredictiveConfig
+      attr_accessor agentless: Types::AgentlessConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Progressive < TelephonyOutboundMode
+      end
+      class Predictive < TelephonyOutboundMode
+      end
+      class Agentless < TelephonyOutboundMode
+      end
+      class Unknown < TelephonyOutboundMode
+      end
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor x_amz_error_type: ::String
+      SENSITIVE: []
+    end
+
+    class TimeRange
+      attr_accessor start_time: ::String
+      attr_accessor end_time: ::String
+      SENSITIVE: []
+    end
+
+    class TimeWindow
+      attr_accessor open_hours: Types::OpenHours
+      attr_accessor restricted_periods: Types::RestrictedPeriods
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateCampaignChannelSubtypeConfigRequest
+      attr_accessor id: ::String
+      attr_accessor channel_subtype_config: Types::ChannelSubtypeConfig
+      SENSITIVE: []
+    end
+
+    class UpdateCampaignCommunicationLimitsRequest
+      attr_accessor id: ::String
+      attr_accessor communication_limits_override: Types::CommunicationLimitsConfig
+      SENSITIVE: []
+    end
+
+    class UpdateCampaignCommunicationTimeRequest
+      attr_accessor id: ::String
+      attr_accessor communication_time_config: Types::CommunicationTimeConfig
+      SENSITIVE: []
+    end
+
+    class UpdateCampaignFlowAssociationRequest
+      attr_accessor id: ::String
+      attr_accessor connect_campaign_flow_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCampaignNameRequest
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCampaignScheduleRequest
+      attr_accessor id: ::String
+      attr_accessor schedule: Types::Schedule
+      SENSITIVE: []
+    end
+
+    class UpdateCampaignSourceRequest
+      attr_accessor id: ::String
+      attr_accessor source: Types::Source
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor x_amz_error_type: ::String
+      SENSITIVE: []
+    end
+  end
+end

@@ -53,9 +53,9 @@ module Aws::FreeTier
     # You can filter to match exactly for `REGION==us-east-1 OR
     # REGION==us-west-1`.
     #
-    # The corresponding `Expression` appears like the following: `\{
-    # "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1", "us-west-1"
-    # ], "MatchOptions": ["EQUALS"] \} \}`
+    # The corresponding `Expression` appears like the following: `{
+    # "Dimensions": { "Key": "REGION", "Values": [ "us-east-1", "us-west-1"
+    # ], "MatchOptions": ["EQUALS"] } }`
     #
     # As shown in the previous example, lists of dimension values are
     # combined with `OR` when you apply the filter.
@@ -70,13 +70,12 @@ module Aws::FreeTier
     # (SERVICE CONTAINS AWSLambda)) AND (USAGE_TYPE !CONTAINS
     # DataTransfer)`.
     #
-    # The corresponding `Expression` appears like the following: `\{ "And":
-    # [ \{"Or": [ \{"Dimensions": \{ "Key": "REGION", "Values": [
-    # "us-east-1", "us-west-1" ], "MatchOptions": ["EQUALS"] \}\},
-    # \{"Dimensions": \{ "Key": "SERVICE", "Values": ["AWSLambda"],
-    # "MatchOptions": ["CONTAINS"] \} \} ]\}, \{"Not": \{"Dimensions": \{
-    # "Key": "USAGE_TYPE", "Values": ["DataTransfer"], "MatchOptions":
-    # ["CONTAINS"] \}\}\} ] \}`
+    # The corresponding `Expression` appears like the following: `{ "And": [
+    # {"Or": [ {"Dimensions": { "Key": "REGION", "Values": [ "us-east-1",
+    # "us-west-1" ], "MatchOptions": ["EQUALS"] }}, {"Dimensions": { "Key":
+    # "SERVICE", "Values": ["AWSLambda"], "MatchOptions": ["CONTAINS"] } }
+    # ]}, {"Not": {"Dimensions": { "Key": "USAGE_TYPE", "Values":
+    # ["DataTransfer"], "MatchOptions": ["CONTAINS"] }}} ] }`
     #
     # In the following **Contents**, you must specify exactly one of the
     # following root operators.

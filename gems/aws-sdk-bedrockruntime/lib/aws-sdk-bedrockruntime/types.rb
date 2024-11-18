@@ -24,7 +24,7 @@ module Aws::BedrockRuntime
     end
 
     # The model must request at least one tool (no text is generated). For
-    # example, `\{"any" : \{\}\}`.
+    # example, `{"any" : {}}`.
     #
     # @api private
     #
@@ -92,7 +92,7 @@ module Aws::BedrockRuntime
     end
 
     # The Model automatically decides if a tool should be called or whether
-    # to generate text instead. For example, `\{"auto" : \{\}\}`.
+    # to generate text instead. For example, `{"auto" : {}}`.
     #
     # @api private
     #
@@ -315,10 +315,9 @@ module Aws::BedrockRuntime
     end
 
     # @!attribute [rw] model_id
-    #   The identifier for the model that you want to call.
-    #
-    #   The `modelId` to provide depends on the type of model or throughput
-    #   that you use:
+    #   Specifies the model or throughput with which to run inference, or
+    #   the prompt resource to use in inference. The value depends on the
+    #   resource that you use:
     #
     #   * If you use a base model, specify the model ID or its ARN. For a
     #     list of model IDs for base models, see [Amazon Bedrock base model
@@ -338,6 +337,9 @@ module Aws::BedrockRuntime
     #     For more information, see [Use a custom model in Amazon
     #     Bedrock][4] in the Amazon Bedrock User Guide.
     #
+    #   * To include a prompt that was defined in Prompt management, specify
+    #     the ARN of the prompt version to use.
+    #
     #   The Converse API doesn't support [imported models][5].
     #
     #
@@ -354,13 +356,15 @@ module Aws::BedrockRuntime
     #   @return [Array<Types::Message>]
     #
     # @!attribute [rw] system
-    #   A system prompt to pass to the model.
+    #   A prompt that provides instructions or context to the model about
+    #   the task it should perform, or the persona it should adopt during
+    #   the conversation.
     #   @return [Array<Types::SystemContentBlock>]
     #
     # @!attribute [rw] inference_config
-    #   Inference parameters to pass to the model. `Converse` supports a
-    #   base set of inference parameters. If you need to pass additional
-    #   parameters that the model supports, use the
+    #   Inference parameters to pass to the model. `Converse` and
+    #   `ConverseStream` support a base set of inference parameters. If you
+    #   need to pass additional parameters that the model supports, use the
     #   `additionalModelRequestFields` request field.
     #   @return [Types::InferenceConfiguration]
     #
@@ -376,35 +380,47 @@ module Aws::BedrockRuntime
     #
     # @!attribute [rw] guardrail_config
     #   Configuration information for a guardrail that you want to use in
-    #   the request.
+    #   the request. If you include `guardContent` blocks in the `content`
+    #   field in the `messages` field, the guardrail operates only on those
+    #   messages. If you include no `guardContent` blocks, the guardrail
+    #   operates on all messages in the request body and in any included
+    #   prompt resource.
     #   @return [Types::GuardrailConfiguration]
     #
     # @!attribute [rw] additional_model_request_fields
     #   Additional inference parameters that the model supports, beyond the
-    #   base set of inference parameters that `Converse` supports in the
-    #   `inferenceConfig` field. For more information, see [Model
-    #   parameters][1].
+    #   base set of inference parameters that `Converse` and
+    #   `ConverseStream` support in the `inferenceConfig` field. For more
+    #   information, see [Model parameters][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
+    # @!attribute [rw] prompt_variables
+    #   Contains a map of variables in a prompt from Prompt management to
+    #   objects containing the values to fill in for them when running model
+    #   invocation. This field is ignored if you don't specify a prompt
+    #   resource in the `modelId` field.
+    #   @return [Hash<String,Types::PromptVariableValues>]
+    #
     # @!attribute [rw] additional_model_response_field_paths
     #   Additional model parameters field paths to return in the response.
-    #   `Converse` returns the requested fields as a JSON Pointer object in
-    #   the `additionalModelResponseFields` field. The following is example
-    #   JSON for `additionalModelResponseFieldPaths`.
+    #   `Converse` and `ConverseStream` return the requested fields as a
+    #   JSON Pointer object in the `additionalModelResponseFields` field.
+    #   The following is example JSON for
+    #   `additionalModelResponseFieldPaths`.
     #
     #   `[ "/stop_sequence" ]`
     #
     #   For information about the JSON Pointer syntax, see the [Internet
     #   Engineering Task Force (IETF)][1] documentation.
     #
-    #   `Converse` rejects an empty JSON Pointer or incorrectly structured
-    #   JSON Pointer with a `400` error code. if the JSON Pointer is valid,
-    #   but the requested field is not in the model response, it is ignored
-    #   by `Converse`.
+    #   `Converse` and `ConverseStream` reject an empty JSON Pointer or
+    #   incorrectly structured JSON Pointer with a `400` error code. if the
+    #   JSON Pointer is valid, but the requested field is not in the model
+    #   response, it is ignored by `Converse`.
     #
     #
     #
@@ -421,8 +437,9 @@ module Aws::BedrockRuntime
       :tool_config,
       :guardrail_config,
       :additional_model_request_fields,
+      :prompt_variables,
       :additional_model_response_field_paths)
-      SENSITIVE = []
+      SENSITIVE = [:prompt_variables]
       include Aws::Structure
     end
 
@@ -511,10 +528,9 @@ module Aws::BedrockRuntime
     end
 
     # @!attribute [rw] model_id
-    #   The ID for the model.
-    #
-    #   The `modelId` to provide depends on the type of model or throughput
-    #   that you use:
+    #   Specifies the model or throughput with which to run inference, or
+    #   the prompt resource to use in inference. The value depends on the
+    #   resource that you use:
     #
     #   * If you use a base model, specify the model ID or its ARN. For a
     #     list of model IDs for base models, see [Amazon Bedrock base model
@@ -534,6 +550,9 @@ module Aws::BedrockRuntime
     #     For more information, see [Use a custom model in Amazon
     #     Bedrock][4] in the Amazon Bedrock User Guide.
     #
+    #   * To include a prompt that was defined in Prompt management, specify
+    #     the ARN of the prompt version to use.
+    #
     #   The Converse API doesn't support [imported models][5].
     #
     #
@@ -550,13 +569,15 @@ module Aws::BedrockRuntime
     #   @return [Array<Types::Message>]
     #
     # @!attribute [rw] system
-    #   A system prompt to send to the model.
+    #   A prompt that provides instructions or context to the model about
+    #   the task it should perform, or the persona it should adopt during
+    #   the conversation.
     #   @return [Array<Types::SystemContentBlock>]
     #
     # @!attribute [rw] inference_config
-    #   Inference parameters to pass to the model. `ConverseStream` supports
-    #   a base set of inference parameters. If you need to pass additional
-    #   parameters that the model supports, use the
+    #   Inference parameters to pass to the model. `Converse` and
+    #   `ConverseStream` support a base set of inference parameters. If you
+    #   need to pass additional parameters that the model supports, use the
     #   `additionalModelRequestFields` request field.
     #   @return [Types::InferenceConfiguration]
     #
@@ -571,30 +592,47 @@ module Aws::BedrockRuntime
     #
     # @!attribute [rw] guardrail_config
     #   Configuration information for a guardrail that you want to use in
-    #   the request.
+    #   the request. If you include `guardContent` blocks in the `content`
+    #   field in the `messages` field, the guardrail operates only on those
+    #   messages. If you include no `guardContent` blocks, the guardrail
+    #   operates on all messages in the request body and in any included
+    #   prompt resource.
     #   @return [Types::GuardrailStreamConfiguration]
     #
     # @!attribute [rw] additional_model_request_fields
     #   Additional inference parameters that the model supports, beyond the
-    #   base set of inference parameters that `ConverseStream` supports in
-    #   the `inferenceConfig` field.
+    #   base set of inference parameters that `Converse` and
+    #   `ConverseStream` support in the `inferenceConfig` field. For more
+    #   information, see [Model parameters][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
     #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @!attribute [rw] prompt_variables
+    #   Contains a map of variables in a prompt from Prompt management to
+    #   objects containing the values to fill in for them when running model
+    #   invocation. This field is ignored if you don't specify a prompt
+    #   resource in the `modelId` field.
+    #   @return [Hash<String,Types::PromptVariableValues>]
     #
     # @!attribute [rw] additional_model_response_field_paths
     #   Additional model parameters field paths to return in the response.
-    #   `ConverseStream` returns the requested fields as a JSON Pointer
-    #   object in the `additionalModelResponseFields` field. The following
-    #   is example JSON for `additionalModelResponseFieldPaths`.
+    #   `Converse` and `ConverseStream` return the requested fields as a
+    #   JSON Pointer object in the `additionalModelResponseFields` field.
+    #   The following is example JSON for
+    #   `additionalModelResponseFieldPaths`.
     #
     #   `[ "/stop_sequence" ]`
     #
     #   For information about the JSON Pointer syntax, see the [Internet
     #   Engineering Task Force (IETF)][1] documentation.
     #
-    #   `ConverseStream` rejects an empty JSON Pointer or incorrectly
-    #   structured JSON Pointer with a `400` error code. if the JSON Pointer
-    #   is valid, but the requested field is not in the model response, it
-    #   is ignored by `ConverseStream`.
+    #   `Converse` and `ConverseStream` reject an empty JSON Pointer or
+    #   incorrectly structured JSON Pointer with a `400` error code. if the
+    #   JSON Pointer is valid, but the requested field is not in the model
+    #   response, it is ignored by `Converse`.
     #
     #
     #
@@ -611,8 +649,9 @@ module Aws::BedrockRuntime
       :tool_config,
       :guardrail_config,
       :additional_model_request_fields,
+      :prompt_variables,
       :additional_model_response_field_paths)
-      SENSITIVE = []
+      SENSITIVE = [:prompt_variables]
       include Aws::Structure
     end
 
@@ -1854,6 +1893,34 @@ module Aws::BedrockRuntime
       include Aws::Structure
     end
 
+    # Contains a map of variables in a prompt from Prompt management to an
+    # object containing the values to fill in for them when running model
+    # invocation. For more information, see [How Prompt management
+    # works][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-how.html
+    #
+    # @note PromptVariableValues is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] text
+    #   The text value that the variable maps to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/PromptVariableValues AWS API Documentation
+    #
+    class PromptVariableValues < Struct.new(
+      :text,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Text < PromptVariableValues; end
+      class Unknown < PromptVariableValues; end
+    end
+
     # The specified resource ARN was not found. Check the ARN and try your
     # request again.
     #
@@ -1901,8 +1968,8 @@ module Aws::BedrockRuntime
       include Aws::Structure
     end
 
-    # The model must request a specific tool. For example, `\{"tool" :
-    # \{"name" : "Your tool name"\}\}`.
+    # The model must request a specific tool. For example, `{"tool" :
+    # {"name" : "Your tool name"}}`.
     #
     # <note markdown="1"> This field is only supported by Anthropic Claude 3 models.
     #

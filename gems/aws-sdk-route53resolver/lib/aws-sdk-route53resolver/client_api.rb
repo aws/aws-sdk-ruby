@@ -32,6 +32,7 @@ module Aws::Route53Resolver
     BlockOverrideTtl = Shapes::IntegerShape.new(name: 'BlockOverrideTtl')
     BlockResponse = Shapes::StringShape.new(name: 'BlockResponse')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    ConfidenceThreshold = Shapes::StringShape.new(name: 'ConfidenceThreshold')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     Count = Shapes::IntegerShape.new(name: 'Count')
     CreateFirewallDomainListRequest = Shapes::StructureShape.new(name: 'CreateFirewallDomainListRequest')
@@ -72,6 +73,7 @@ module Aws::Route53Resolver
     DisassociateResolverQueryLogConfigResponse = Shapes::StructureShape.new(name: 'DisassociateResolverQueryLogConfigResponse')
     DisassociateResolverRuleRequest = Shapes::StructureShape.new(name: 'DisassociateResolverRuleRequest')
     DisassociateResolverRuleResponse = Shapes::StructureShape.new(name: 'DisassociateResolverRuleResponse')
+    DnsThreatProtection = Shapes::StringShape.new(name: 'DnsThreatProtection')
     DomainListFileUrl = Shapes::StringShape.new(name: 'DomainListFileUrl')
     DomainName = Shapes::StringShape.new(name: 'DomainName')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
@@ -349,7 +351,7 @@ module Aws::Route53Resolver
 
     CreateFirewallRuleRequest.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: CreatorRequestId, required: true, location_name: "CreatorRequestId", metadata: {"idempotencyToken"=>true}))
     CreateFirewallRuleRequest.add_member(:firewall_rule_group_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "FirewallRuleGroupId"))
-    CreateFirewallRuleRequest.add_member(:firewall_domain_list_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "FirewallDomainListId"))
+    CreateFirewallRuleRequest.add_member(:firewall_domain_list_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "FirewallDomainListId", metadata: {"box"=>true}))
     CreateFirewallRuleRequest.add_member(:priority, Shapes::ShapeRef.new(shape: Priority, required: true, location_name: "Priority"))
     CreateFirewallRuleRequest.add_member(:action, Shapes::ShapeRef.new(shape: Action, required: true, location_name: "Action"))
     CreateFirewallRuleRequest.add_member(:block_response, Shapes::ShapeRef.new(shape: BlockResponse, location_name: "BlockResponse", metadata: {"box"=>true}))
@@ -359,6 +361,8 @@ module Aws::Route53Resolver
     CreateFirewallRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
     CreateFirewallRuleRequest.add_member(:firewall_domain_redirection_action, Shapes::ShapeRef.new(shape: FirewallDomainRedirectionAction, location_name: "FirewallDomainRedirectionAction", metadata: {"box"=>true}))
     CreateFirewallRuleRequest.add_member(:qtype, Shapes::ShapeRef.new(shape: Qtype, location_name: "Qtype", metadata: {"box"=>true}))
+    CreateFirewallRuleRequest.add_member(:dns_threat_protection, Shapes::ShapeRef.new(shape: DnsThreatProtection, location_name: "DnsThreatProtection", metadata: {"box"=>true}))
+    CreateFirewallRuleRequest.add_member(:confidence_threshold, Shapes::ShapeRef.new(shape: ConfidenceThreshold, location_name: "ConfidenceThreshold", metadata: {"box"=>true}))
     CreateFirewallRuleRequest.struct_class = Types::CreateFirewallRuleRequest
 
     CreateFirewallRuleResponse.add_member(:firewall_rule, Shapes::ShapeRef.new(shape: FirewallRule, location_name: "FirewallRule"))
@@ -424,7 +428,8 @@ module Aws::Route53Resolver
     DeleteFirewallRuleGroupResponse.struct_class = Types::DeleteFirewallRuleGroupResponse
 
     DeleteFirewallRuleRequest.add_member(:firewall_rule_group_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "FirewallRuleGroupId"))
-    DeleteFirewallRuleRequest.add_member(:firewall_domain_list_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "FirewallDomainListId"))
+    DeleteFirewallRuleRequest.add_member(:firewall_domain_list_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "FirewallDomainListId", metadata: {"box"=>true}))
+    DeleteFirewallRuleRequest.add_member(:firewall_threat_protection_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "FirewallThreatProtectionId", metadata: {"box"=>true}))
     DeleteFirewallRuleRequest.add_member(:qtype, Shapes::ShapeRef.new(shape: Qtype, location_name: "Qtype"))
     DeleteFirewallRuleRequest.struct_class = Types::DeleteFirewallRuleRequest
 
@@ -523,6 +528,7 @@ module Aws::Route53Resolver
 
     FirewallRule.add_member(:firewall_rule_group_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "FirewallRuleGroupId"))
     FirewallRule.add_member(:firewall_domain_list_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "FirewallDomainListId"))
+    FirewallRule.add_member(:firewall_threat_protection_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "FirewallThreatProtectionId"))
     FirewallRule.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     FirewallRule.add_member(:priority, Shapes::ShapeRef.new(shape: Priority, location_name: "Priority"))
     FirewallRule.add_member(:action, Shapes::ShapeRef.new(shape: Action, location_name: "Action"))
@@ -535,6 +541,8 @@ module Aws::Route53Resolver
     FirewallRule.add_member(:modification_time, Shapes::ShapeRef.new(shape: Rfc3339TimeString, location_name: "ModificationTime"))
     FirewallRule.add_member(:firewall_domain_redirection_action, Shapes::ShapeRef.new(shape: FirewallDomainRedirectionAction, location_name: "FirewallDomainRedirectionAction"))
     FirewallRule.add_member(:qtype, Shapes::ShapeRef.new(shape: Qtype, location_name: "Qtype"))
+    FirewallRule.add_member(:dns_threat_protection, Shapes::ShapeRef.new(shape: DnsThreatProtection, location_name: "DnsThreatProtection"))
+    FirewallRule.add_member(:confidence_threshold, Shapes::ShapeRef.new(shape: ConfidenceThreshold, location_name: "ConfidenceThreshold"))
     FirewallRule.struct_class = Types::FirewallRule
 
     FirewallRuleGroup.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "Id"))
@@ -1101,7 +1109,8 @@ module Aws::Route53Resolver
     UpdateFirewallRuleGroupAssociationResponse.struct_class = Types::UpdateFirewallRuleGroupAssociationResponse
 
     UpdateFirewallRuleRequest.add_member(:firewall_rule_group_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "FirewallRuleGroupId"))
-    UpdateFirewallRuleRequest.add_member(:firewall_domain_list_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "FirewallDomainListId"))
+    UpdateFirewallRuleRequest.add_member(:firewall_domain_list_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "FirewallDomainListId", metadata: {"box"=>true}))
+    UpdateFirewallRuleRequest.add_member(:firewall_threat_protection_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "FirewallThreatProtectionId", metadata: {"box"=>true}))
     UpdateFirewallRuleRequest.add_member(:priority, Shapes::ShapeRef.new(shape: Priority, location_name: "Priority", metadata: {"box"=>true}))
     UpdateFirewallRuleRequest.add_member(:action, Shapes::ShapeRef.new(shape: Action, location_name: "Action", metadata: {"box"=>true}))
     UpdateFirewallRuleRequest.add_member(:block_response, Shapes::ShapeRef.new(shape: BlockResponse, location_name: "BlockResponse", metadata: {"box"=>true}))
@@ -1111,6 +1120,8 @@ module Aws::Route53Resolver
     UpdateFirewallRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name", metadata: {"box"=>true}))
     UpdateFirewallRuleRequest.add_member(:firewall_domain_redirection_action, Shapes::ShapeRef.new(shape: FirewallDomainRedirectionAction, location_name: "FirewallDomainRedirectionAction", metadata: {"box"=>true}))
     UpdateFirewallRuleRequest.add_member(:qtype, Shapes::ShapeRef.new(shape: Qtype, location_name: "Qtype"))
+    UpdateFirewallRuleRequest.add_member(:dns_threat_protection, Shapes::ShapeRef.new(shape: DnsThreatProtection, location_name: "DnsThreatProtection", metadata: {"box"=>true}))
+    UpdateFirewallRuleRequest.add_member(:confidence_threshold, Shapes::ShapeRef.new(shape: ConfidenceThreshold, location_name: "ConfidenceThreshold", metadata: {"box"=>true}))
     UpdateFirewallRuleRequest.struct_class = Types::UpdateFirewallRuleRequest
 
     UpdateFirewallRuleResponse.add_member(:firewall_rule, Shapes::ShapeRef.new(shape: FirewallRule, location_name: "FirewallRule"))
@@ -1373,6 +1384,7 @@ module Aws::Route53Resolver
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 

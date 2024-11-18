@@ -2227,6 +2227,11 @@ module Aws::Redshift
       SENSITIVE: []
     end
 
+    class ReadWriteAccess
+      attr_accessor authorization: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
     class RebootClusterMessage
       attr_accessor cluster_identifier: ::String
       SENSITIVE: []
@@ -2577,6 +2582,17 @@ module Aws::Redshift
       SENSITIVE: []
     end
 
+    class S3AccessGrantsScopeUnion
+      attr_accessor read_write_access: Types::ReadWriteAccess
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ReadWriteAccess < S3AccessGrantsScopeUnion
+      end
+      class Unknown < S3AccessGrantsScopeUnion
+      end
+    end
+
     class SNSInvalidTopicFault < Aws::EmptyStructure
     end
 
@@ -2641,10 +2657,13 @@ module Aws::Redshift
 
     class ServiceIntegrationsUnion
       attr_accessor lake_formation: ::Array[Types::LakeFormationScopeUnion]
+      attr_accessor s3_access_grants: ::Array[Types::S3AccessGrantsScopeUnion]
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class LakeFormation < ServiceIntegrationsUnion
+      end
+      class S3AccessGrants < ServiceIntegrationsUnion
       end
       class Unknown < ServiceIntegrationsUnion
       end

@@ -108,7 +108,7 @@ module Aws
                             },
                           ],
                           payment_option: ("ALL_UPFRONT" | "NO_UPFRONT" | "PARTIAL_UPFRONT"),
-                          ?payment_term: ("THREE_YEARS" | "ONE_YEAR")
+                          ?payment_term: ("THREE_YEARS" | "ONE_YEAR" | "FIVE_YEARS")
                         ) -> _CreateOrderResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOrderResponseSuccess
 
@@ -202,12 +202,14 @@ module Aws
         def outpost_id: () -> ::String
         def order_id: () -> ::String
         def requested_instance_pools: () -> ::Array[Types::InstanceTypeCapacity]
+        def instances_to_exclude: () -> Types::InstancesToExclude
         def dry_run: () -> bool
-        def capacity_task_status: () -> ("REQUESTED" | "IN_PROGRESS" | "FAILED" | "COMPLETED" | "CANCELLED")
+        def capacity_task_status: () -> ("REQUESTED" | "IN_PROGRESS" | "FAILED" | "COMPLETED" | "WAITING_FOR_EVACUATION" | "CANCELLATION_IN_PROGRESS" | "CANCELLED")
         def failed: () -> Types::CapacityTaskFailure
         def creation_date: () -> ::Time
         def completion_date: () -> ::Time
         def last_modified_date: () -> ::Time
+        def task_action_on_blocking_instances: () -> ("WAIT_FOR_EVACUATION" | "FAIL_TASK")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#get_capacity_task-instance_method
       def get_capacity_task: (
@@ -280,7 +282,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#get_outpost_supported_instance_types-instance_method
       def get_outpost_supported_instance_types: (
                                                   outpost_identifier: ::String,
-                                                  order_id: ::String,
+                                                  ?order_id: ::String,
                                                   ?max_results: ::Integer,
                                                   ?next_token: ::String
                                                 ) -> _GetOutpostSupportedInstanceTypesResponseSuccess
@@ -309,6 +311,23 @@ module Aws
                             ) -> _GetSiteAddressResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSiteAddressResponseSuccess
 
+      interface _ListAssetInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssetInstancesOutput]
+        def asset_instances: () -> ::Array[Types::AssetInstance]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#list_asset_instances-instance_method
+      def list_asset_instances: (
+                                  outpost_identifier: ::String,
+                                  ?asset_id_filter: Array[::String],
+                                  ?instance_type_filter: Array[::String],
+                                  ?account_id_filter: Array[::String],
+                                  ?aws_service_filter: Array[("AWS" | "EC2" | "ELASTICACHE" | "ELB" | "RDS" | "ROUTE53")],
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListAssetInstancesResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssetInstancesResponseSuccess
+
       interface _ListAssetsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAssetsOutput]
         def assets: () -> ::Array[Types::AssetInfo]
@@ -324,6 +343,20 @@ module Aws
                        ) -> _ListAssetsResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssetsResponseSuccess
 
+      interface _ListBlockingInstancesForCapacityTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBlockingInstancesForCapacityTaskOutput]
+        def blocking_instances: () -> ::Array[Types::BlockingInstance]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#list_blocking_instances_for_capacity_task-instance_method
+      def list_blocking_instances_for_capacity_task: (
+                                                       outpost_identifier: ::String,
+                                                       capacity_task_id: ::String,
+                                                       ?max_results: ::Integer,
+                                                       ?next_token: ::String
+                                                     ) -> _ListBlockingInstancesForCapacityTaskResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBlockingInstancesForCapacityTaskResponseSuccess
+
       interface _ListCapacityTasksResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListCapacityTasksOutput]
         def capacity_tasks: () -> ::Array[Types::CapacityTaskSummary]
@@ -334,7 +367,7 @@ module Aws
                                  ?outpost_identifier_filter: ::String,
                                  ?max_results: ::Integer,
                                  ?next_token: ::String,
-                                 ?capacity_task_status_filter: Array[("REQUESTED" | "IN_PROGRESS" | "FAILED" | "COMPLETED" | "CANCELLED")]
+                                 ?capacity_task_status_filter: Array[("REQUESTED" | "IN_PROGRESS" | "FAILED" | "COMPLETED" | "WAITING_FOR_EVACUATION" | "CANCELLATION_IN_PROGRESS" | "CANCELLED")]
                                ) -> _ListCapacityTasksResponseSuccess
                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCapacityTasksResponseSuccess
 
@@ -412,24 +445,32 @@ module Aws
         def outpost_id: () -> ::String
         def order_id: () -> ::String
         def requested_instance_pools: () -> ::Array[Types::InstanceTypeCapacity]
+        def instances_to_exclude: () -> Types::InstancesToExclude
         def dry_run: () -> bool
-        def capacity_task_status: () -> ("REQUESTED" | "IN_PROGRESS" | "FAILED" | "COMPLETED" | "CANCELLED")
+        def capacity_task_status: () -> ("REQUESTED" | "IN_PROGRESS" | "FAILED" | "COMPLETED" | "WAITING_FOR_EVACUATION" | "CANCELLATION_IN_PROGRESS" | "CANCELLED")
         def failed: () -> Types::CapacityTaskFailure
         def creation_date: () -> ::Time
         def completion_date: () -> ::Time
         def last_modified_date: () -> ::Time
+        def task_action_on_blocking_instances: () -> ("WAIT_FOR_EVACUATION" | "FAIL_TASK")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#start_capacity_task-instance_method
       def start_capacity_task: (
                                  outpost_identifier: ::String,
-                                 order_id: ::String,
+                                 ?order_id: ::String,
                                  instance_pools: Array[
                                    {
                                      instance_type: ::String,
                                      count: ::Integer
                                    },
                                  ],
-                                 ?dry_run: bool
+                                 ?instances_to_exclude: {
+                                   instances: Array[::String]?,
+                                   account_ids: Array[::String]?,
+                                   services: Array[("AWS" | "EC2" | "ELASTICACHE" | "ELB" | "RDS" | "ROUTE53")]?
+                                 },
+                                 ?dry_run: bool,
+                                 ?task_action_on_blocking_instances: ("WAIT_FOR_EVACUATION" | "FAIL_TASK")
                                ) -> _StartCapacityTaskResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartCapacityTaskResponseSuccess
 

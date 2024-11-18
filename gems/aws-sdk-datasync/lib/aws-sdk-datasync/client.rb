@@ -1909,9 +1909,10 @@ module Aws::DataSync
     #   Specifies one of the following task modes for your data transfer:
     #
     #   * `ENHANCED` - Transfer virtually unlimited numbers of objects with
-    #     enhanced metrics, more detailed logs, and higher performance than
-    #     Basic mode. Currently available for transfers between Amazon S3
-    #     locations.
+    #     higher performance than Basic mode. Enhanced mode tasks optimize the
+    #     data transfer process by listing, preparing, transferring, and
+    #     verifying data in parallel. Enhanced mode is currently available for
+    #     transfers between Amazon S3 locations.
     #
     #     <note markdown="1"> To create an Enhanced mode task, the IAM role that you use to call
     #     the `CreateTask` operation must have the
@@ -1920,8 +1921,11 @@ module Aws::DataSync
     #      </note>
     #
     #   * `BASIC` (default) - Transfer files or objects between Amazon Web
-    #     Services storage and on-premises, edge, or other cloud storage.
-    #     DataSync [quotas][1] apply.
+    #     Services storage and all other supported DataSync locations. Basic
+    #     mode tasks are subject to [quotas][1] on the number of files,
+    #     objects, and directories in a dataset. Basic mode sequentially
+    #     prepares, transfers, and verifies data, making it slower than
+    #     Enhanced mode for most workloads.
     #
     #   For more information, see [Understanding task mode differences][2].
     #
@@ -3084,14 +3088,14 @@ module Aws::DataSync
     # <note markdown="1"> Some `DescribeTaskExecution` response elements are only relevant to a
     # specific task mode. For information, see [Understanding task mode
     # differences][1] and [Understanding data transfer performance
-    # metrics][2].
+    # counters][2].
     #
     #  </note>
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html#task-mode-differences
-    # [2]: https://docs.aws.amazon.com/datasync/latest/userguide/transfer-performance-metrics.html
+    # [2]: https://docs.aws.amazon.com/datasync/latest/userguide/transfer-performance-counters.html
     #
     # @option params [required, String] :task_execution_arn
     #   Specifies the Amazon Resource Name (ARN) of the task execution that
@@ -4770,7 +4774,7 @@ module Aws::DataSync
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.91.0'
+      context[:gem_version] = '1.93.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

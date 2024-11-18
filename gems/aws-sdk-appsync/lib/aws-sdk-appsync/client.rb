@@ -3654,7 +3654,7 @@ module Aws::AppSync
     #
     # You can create a list of environmental variables by adding it to the
     # `environmentVariables` payload as a list in the format
-    # `\{"key1":"value1","key2":"value2", …\}`. Note that each call of the
+    # `{"key1":"value1","key2":"value2", …}`. Note that each call of the
     # `PutGraphqlApiEnvironmentVariables` action will result in the
     # overwriting of the existing environmental variable list of that API.
     # This means the existing environmental variables will be lost. To avoid
@@ -3684,7 +3684,7 @@ module Aws::AppSync
     #
     #   You can create a list of environmental variables by adding it to the
     #   `environmentVariables` payload as a list in the format
-    #   `\{"key1":"value1","key2":"value2", …\}`. Note that each call of the
+    #   `{"key1":"value1","key2":"value2", …}`. Note that each call of the
     #   `PutGraphqlApiEnvironmentVariables` action will result in the
     #   overwriting of the existing environmental variable list of that API.
     #   This means the existing environmental variables will be lost. To avoid
@@ -4980,7 +4980,7 @@ module Aws::AppSync
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.91.0'
+      context[:gem_version] = '1.93.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

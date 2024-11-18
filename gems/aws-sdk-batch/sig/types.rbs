@@ -785,6 +785,15 @@ module Aws::Batch
       attr_accessor launch_template_id: ::String
       attr_accessor launch_template_name: ::String
       attr_accessor version: ::String
+      attr_accessor overrides: ::Array[Types::LaunchTemplateSpecificationOverride]
+      SENSITIVE: []
+    end
+
+    class LaunchTemplateSpecificationOverride
+      attr_accessor launch_template_id: ::String
+      attr_accessor launch_template_name: ::String
+      attr_accessor version: ::String
+      attr_accessor target_instance_types: ::Array[::String]
       SENSITIVE: []
     end
 

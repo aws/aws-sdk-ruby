@@ -863,7 +863,7 @@ module Aws::ControlTower
     #   resp.control_operation.enabled_control_identifier #=> String
     #   resp.control_operation.end_time #=> Time
     #   resp.control_operation.operation_identifier #=> String
-    #   resp.control_operation.operation_type #=> String, one of "ENABLE_CONTROL", "DISABLE_CONTROL", "UPDATE_ENABLED_CONTROL"
+    #   resp.control_operation.operation_type #=> String, one of "ENABLE_CONTROL", "DISABLE_CONTROL", "UPDATE_ENABLED_CONTROL", "RESET_ENABLED_CONTROL"
     #   resp.control_operation.start_time #=> Time
     #   resp.control_operation.status #=> String, one of "SUCCEEDED", "FAILED", "IN_PROGRESS"
     #   resp.control_operation.status_message #=> String
@@ -1097,7 +1097,7 @@ module Aws::ControlTower
     #   resp = client.list_control_operations({
     #     filter: {
     #       control_identifiers: ["ControlIdentifier"],
-    #       control_operation_types: ["ENABLE_CONTROL"], # accepts ENABLE_CONTROL, DISABLE_CONTROL, UPDATE_ENABLED_CONTROL
+    #       control_operation_types: ["ENABLE_CONTROL"], # accepts ENABLE_CONTROL, DISABLE_CONTROL, UPDATE_ENABLED_CONTROL, RESET_ENABLED_CONTROL
     #       enabled_control_identifiers: ["Arn"],
     #       statuses: ["SUCCEEDED"], # accepts SUCCEEDED, FAILED, IN_PROGRESS
     #       target_identifiers: ["TargetIdentifier"],
@@ -1113,7 +1113,7 @@ module Aws::ControlTower
     #   resp.control_operations[0].enabled_control_identifier #=> String
     #   resp.control_operations[0].end_time #=> Time
     #   resp.control_operations[0].operation_identifier #=> String
-    #   resp.control_operations[0].operation_type #=> String, one of "ENABLE_CONTROL", "DISABLE_CONTROL", "UPDATE_ENABLED_CONTROL"
+    #   resp.control_operations[0].operation_type #=> String, one of "ENABLE_CONTROL", "DISABLE_CONTROL", "UPDATE_ENABLED_CONTROL", "RESET_ENABLED_CONTROL"
     #   resp.control_operations[0].start_time #=> Time
     #   resp.control_operations[0].status #=> String, one of "SUCCEEDED", "FAILED", "IN_PROGRESS"
     #   resp.control_operations[0].status_message #=> String
@@ -1415,6 +1415,34 @@ module Aws::ControlTower
       req.send_request(options)
     end
 
+    # Resets an enabled control.
+    #
+    # @option params [required, String] :enabled_control_identifier
+    #   The ARN of the enabled control to be reset.
+    #
+    # @return [Types::ResetEnabledControlOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ResetEnabledControlOutput#operation_identifier #operation_identifier} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reset_enabled_control({
+    #     enabled_control_identifier: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operation_identifier #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ResetEnabledControl AWS API Documentation
+    #
+    # @overload reset_enabled_control(params = {})
+    # @param [Hash] params ({})
+    def reset_enabled_control(params = {}, options = {})
+      req = build_request(:reset_enabled_control, params)
+      req.send_request(options)
+    end
+
     # This API call resets a landing zone. It starts an asynchronous
     # operation that resets the landing zone to the parameters specified in
     # the original configuration, which you specified in the manifest file.
@@ -1573,11 +1601,12 @@ module Aws::ControlTower
     # Web Services Control Tower updates the control to match any valid
     # parameters that you supply.
     #
-    # If the `DriftSummary` status for the control shows as DRIFTED, you
+    # If the `DriftSummary` status for the control shows as `DRIFTED`, you
     # cannot call this API. Instead, you can update the control by calling
-    # `DisableControl` and again calling `EnableControl`, or you can run an
-    # extending governance operation. For usage examples, see the [
-    # *Controls Reference Guide* ][1].
+    # the `ResetEnabledControl` API. Alternatively, you can call
+    # `DisableControl` and then call `EnableControl` again. Also, you can
+    # run an extending governance operation to repair drift. For usage
+    # examples, see the [ *Controls Reference Guide* ][1].
     #
     #
     #
@@ -1691,7 +1720,7 @@ module Aws::ControlTower
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-controltower'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

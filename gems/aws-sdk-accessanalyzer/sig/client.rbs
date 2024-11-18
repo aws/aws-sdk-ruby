@@ -264,7 +264,17 @@ module Aws
                              ?client_token: ::String,
                              ?configuration: {
                                unused_access: {
-                                 unused_access_age: ::Integer?
+                                 unused_access_age: ::Integer?,
+                                 analysis_rule: {
+                                   exclusions: Array[
+                                     {
+                                       account_ids: Array[::String]?,
+                                       resource_tags: Array[
+                                         Hash[::String, ::String],
+                                       ]?
+                                     },
+                                   ]?
+                                 }?
                                }?
                              }
                            ) -> _CreateAnalyzerResponseSuccess
@@ -386,7 +396,7 @@ module Aws
         def id: () -> ::String
         def next_token: () -> ::String
         def resource: () -> ::String
-        def resource_type: () -> ("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket" | "AWS::DynamoDB::Table" | "AWS::DynamoDB::Stream")
+        def resource_type: () -> ("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket" | "AWS::DynamoDB::Table" | "AWS::DynamoDB::Stream" | "AWS::IAM::User")
         def resource_owner_account: () -> ::String
         def status: () -> ("ACTIVE" | "ARCHIVED" | "RESOLVED")
         def updated_at: () -> ::Time
@@ -456,7 +466,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#list_analyzed_resources-instance_method
       def list_analyzed_resources: (
                                      analyzer_arn: ::String,
-                                     ?resource_type: ("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket" | "AWS::DynamoDB::Table" | "AWS::DynamoDB::Stream"),
+                                     ?resource_type: ("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket" | "AWS::DynamoDB::Table" | "AWS::DynamoDB::Stream" | "AWS::IAM::User"),
                                      ?next_token: ::String,
                                      ?max_results: ::Integer
                                    ) -> _ListAnalyzedResourcesResponseSuccess
@@ -610,6 +620,31 @@ module Aws
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
 
+      interface _UpdateAnalyzerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAnalyzerResponse]
+        def configuration: () -> Types::AnalyzerConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#update_analyzer-instance_method
+      def update_analyzer: (
+                             analyzer_name: ::String,
+                             ?configuration: {
+                               unused_access: {
+                                 unused_access_age: ::Integer?,
+                                 analysis_rule: {
+                                   exclusions: Array[
+                                     {
+                                       account_ids: Array[::String]?,
+                                       resource_tags: Array[
+                                         Hash[::String, ::String],
+                                       ]?
+                                     },
+                                   ]?
+                                 }?
+                               }?
+                             }
+                           ) -> _UpdateAnalyzerResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAnalyzerResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#update_archive_rule-instance_method
       def update_archive_rule: (
                                  analyzer_name: ::String,
@@ -645,7 +680,7 @@ module Aws
                              ?max_results: ::Integer,
                              ?next_token: ::String,
                              policy_document: ::String,
-                             policy_type: ("IDENTITY_POLICY" | "RESOURCE_POLICY" | "SERVICE_CONTROL_POLICY"),
+                             policy_type: ("IDENTITY_POLICY" | "RESOURCE_POLICY" | "SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY"),
                              ?validate_policy_resource_type: ("AWS::S3::Bucket" | "AWS::S3::AccessPoint" | "AWS::S3::MultiRegionAccessPoint" | "AWS::S3ObjectLambda::AccessPoint" | "AWS::IAM::AssumeRolePolicyDocument" | "AWS::DynamoDB::Table")
                            ) -> _ValidatePolicyResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ValidatePolicyResponseSuccess

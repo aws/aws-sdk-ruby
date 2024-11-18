@@ -174,11 +174,11 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#create_login_profile-instance_method
       def create_login_profile: (
-                                  user_name: ::String,
-                                  password: ::String,
+                                  ?user_name: ::String,
+                                  ?password: ::String,
                                   ?password_reset_required: bool
                                 ) -> _CreateLoginProfileResponseSuccess
-                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLoginProfileResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLoginProfileResponseSuccess
 
       interface _CreateOpenIDConnectProviderResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateOpenIDConnectProviderResponse]
@@ -329,7 +329,7 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#deactivate_mfa_device-instance_method
       def deactivate_mfa_device: (
-                                   user_name: ::String,
+                                   ?user_name: ::String,
                                    serial_number: ::String
                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -372,9 +372,9 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#delete_login_profile-instance_method
       def delete_login_profile: (
-                                  user_name: ::String
+                                  ?user_name: ::String
                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
-                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#delete_open_id_connect_provider-instance_method
       def delete_open_id_connect_provider: (
@@ -503,6 +503,26 @@ module Aws
                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _DisableOrganizationsRootCredentialsManagementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisableOrganizationsRootCredentialsManagementResponse]
+        def organization_id: () -> ::String
+        def enabled_features: () -> ::Array[("RootCredentialsManagement" | "RootSessions")]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#disable_organizations_root_credentials_management-instance_method
+      def disable_organizations_root_credentials_management: (
+                                                             ) -> _DisableOrganizationsRootCredentialsManagementResponseSuccess
+                                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableOrganizationsRootCredentialsManagementResponseSuccess
+
+      interface _DisableOrganizationsRootSessionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisableOrganizationsRootSessionsResponse]
+        def organization_id: () -> ::String
+        def enabled_features: () -> ::Array[("RootCredentialsManagement" | "RootSessions")]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#disable_organizations_root_sessions-instance_method
+      def disable_organizations_root_sessions: (
+                                               ) -> _DisableOrganizationsRootSessionsResponseSuccess
+                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableOrganizationsRootSessionsResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#enable_mfa_device-instance_method
       def enable_mfa_device: (
                                user_name: ::String,
@@ -511,6 +531,26 @@ module Aws
                                authentication_code_2: ::String
                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _EnableOrganizationsRootCredentialsManagementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableOrganizationsRootCredentialsManagementResponse]
+        def organization_id: () -> ::String
+        def enabled_features: () -> ::Array[("RootCredentialsManagement" | "RootSessions")]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#enable_organizations_root_credentials_management-instance_method
+      def enable_organizations_root_credentials_management: (
+                                                            ) -> _EnableOrganizationsRootCredentialsManagementResponseSuccess
+                                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableOrganizationsRootCredentialsManagementResponseSuccess
+
+      interface _EnableOrganizationsRootSessionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableOrganizationsRootSessionsResponse]
+        def organization_id: () -> ::String
+        def enabled_features: () -> ::Array[("RootCredentialsManagement" | "RootSessions")]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#enable_organizations_root_sessions-instance_method
+      def enable_organizations_root_sessions: (
+                                              ) -> _EnableOrganizationsRootSessionsResponseSuccess
+                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableOrganizationsRootSessionsResponseSuccess
 
       interface _GenerateCredentialReportResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GenerateCredentialReportResponse]
@@ -581,7 +621,7 @@ module Aws
 
       interface _GetAccountSummaryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountSummaryResponse]
-        def summary_map: () -> ::Hash[("Users" | "UsersQuota" | "Groups" | "GroupsQuota" | "ServerCertificates" | "ServerCertificatesQuota" | "UserPolicySizeQuota" | "GroupPolicySizeQuota" | "GroupsPerUserQuota" | "SigningCertificatesPerUserQuota" | "AccessKeysPerUserQuota" | "MFADevices" | "MFADevicesInUse" | "AccountMFAEnabled" | "AccountAccessKeysPresent" | "AccountSigningCertificatesPresent" | "AttachedPoliciesPerGroupQuota" | "AttachedPoliciesPerRoleQuota" | "AttachedPoliciesPerUserQuota" | "Policies" | "PoliciesQuota" | "PolicySizeQuota" | "PolicyVersionsInUse" | "PolicyVersionsInUseQuota" | "VersionsPerPolicyQuota" | "GlobalEndpointTokenVersion"), ::Integer]
+        def summary_map: () -> ::Hash[("Users" | "UsersQuota" | "Groups" | "GroupsQuota" | "ServerCertificates" | "ServerCertificatesQuota" | "UserPolicySizeQuota" | "GroupPolicySizeQuota" | "GroupsPerUserQuota" | "SigningCertificatesPerUserQuota" | "AccessKeysPerUserQuota" | "MFADevices" | "MFADevicesInUse" | "AccountMFAEnabled" | "AccountAccessKeysPresent" | "AccountPasswordPresent" | "AccountSigningCertificatesPresent" | "AttachedPoliciesPerGroupQuota" | "AttachedPoliciesPerRoleQuota" | "AttachedPoliciesPerUserQuota" | "Policies" | "PoliciesQuota" | "PolicySizeQuota" | "PolicyVersionsInUse" | "PolicyVersionsInUseQuota" | "VersionsPerPolicyQuota" | "GlobalEndpointTokenVersion"), ::Integer]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_account_summary-instance_method
       def get_account_summary: () -> _GetAccountSummaryResponseSuccess
@@ -662,9 +702,9 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_login_profile-instance_method
       def get_login_profile: (
-                               user_name: ::String
+                               ?user_name: ::String
                              ) -> _GetLoginProfileResponseSuccess
-                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLoginProfileResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLoginProfileResponseSuccess
 
       interface _GetMFADeviceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetMFADeviceResponse]
@@ -1089,6 +1129,16 @@ module Aws
       def list_open_id_connect_providers: (
                                           ) -> _ListOpenIDConnectProvidersResponseSuccess
                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOpenIDConnectProvidersResponseSuccess
+
+      interface _ListOrganizationsFeaturesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOrganizationsFeaturesResponse]
+        def organization_id: () -> ::String
+        def enabled_features: () -> ::Array[("RootCredentialsManagement" | "RootSessions")]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_organizations_features-instance_method
+      def list_organizations_features: (
+                                       ) -> _ListOrganizationsFeaturesResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOrganizationsFeaturesResponseSuccess
 
       interface _ListPoliciesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListPoliciesResponse]

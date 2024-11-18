@@ -1543,7 +1543,6 @@ module Aws::DeviceFarm
     #     * INSTANCE\_LABELS: The label of the device instance.
     #
     #     * FLEET\_TYPE: The fleet type. Valid values are PUBLIC or PRIVATE.
-    #
     #   * **Operator**
     #
     #     The filter operator.
@@ -1560,7 +1559,6 @@ module Aws::DeviceFarm
     #     * The LESS\_THAN, GREATER\_THAN, LESS\_THAN\_OR\_EQUALS, and
     #       GREATER\_THAN\_OR\_EQUALS operators are also available for the
     #       OS\_VERSION attribute.
-    #
     #   * **Values**
     #
     #     An array of one or more filter values.
@@ -1571,7 +1569,6 @@ module Aws::DeviceFarm
     #       more than one element.
     #
     #     * The other operators require an array with a single element.
-    #
     #     **Attribute Values**
     #
     #     * The PLATFORM attribute can be set to ANDROID or IOS.
@@ -2769,7 +2766,6 @@ module Aws::DeviceFarm
     #     * INSTANCE\_LABELS: The label of the device instance.
     #
     #     * FLEET\_TYPE: The fleet type. Valid values are PUBLIC or PRIVATE.
-    #
     #   * Operator: The filter operator.
     #
     #     * The EQUALS operator is available for every attribute except
@@ -2784,7 +2780,6 @@ module Aws::DeviceFarm
     #     * The LESS\_THAN, GREATER\_THAN, LESS\_THAN\_OR\_EQUALS, and
     #       GREATER\_THAN\_OR\_EQUALS operators are also available for the
     #       OS\_VERSION attribute.
-    #
     #   * Values: An array of one or more filter values.
     #
     #     * The IN and NOT\_IN operators take a values array that has one or

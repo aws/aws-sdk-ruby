@@ -34703,6 +34703,140 @@ module Aws
                            ) -> _CreateAnalysisResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAnalysisResponseSuccess
 
+      interface _CreateBrandResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBrandResponse]
+        def request_id: () -> ::String
+        def brand_detail: () -> Types::BrandDetail
+        def brand_definition: () -> Types::BrandDefinition
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#create_brand-instance_method
+      def create_brand: (
+                          aws_account_id: ::String,
+                          brand_id: ::String,
+                          ?brand_definition: {
+                            brand_name: ::String,
+                            description: ::String?,
+                            application_theme: {
+                              brand_color_palette: {
+                                primary: {
+                                  foreground: ::String?,
+                                  background: ::String?
+                                }?,
+                                secondary: {
+                                  foreground: ::String?,
+                                  background: ::String?
+                                }?,
+                                accent: {
+                                  foreground: ::String?,
+                                  background: ::String?
+                                }?,
+                                measure: {
+                                  foreground: ::String?,
+                                  background: ::String?
+                                }?,
+                                dimension: {
+                                  foreground: ::String?,
+                                  background: ::String?
+                                }?,
+                                success: {
+                                  foreground: ::String?,
+                                  background: ::String?
+                                }?,
+                                info: {
+                                  foreground: ::String?,
+                                  background: ::String?
+                                }?,
+                                warning: {
+                                  foreground: ::String?,
+                                  background: ::String?
+                                }?,
+                                danger: {
+                                  foreground: ::String?,
+                                  background: ::String?
+                                }?
+                              }?,
+                              brand_element_style: {
+                                navbar_style: {
+                                  global_navbar: {
+                                    foreground: ::String?,
+                                    background: ::String?
+                                  }?,
+                                  contextual_navbar: {
+                                    foreground: ::String?,
+                                    background: ::String?
+                                  }?
+                                }?
+                              }?
+                            }?,
+                            logo_configuration: {
+                              alt_text: ::String,
+                              logo_set: {
+                                primary: {
+                                  original: {
+                                    source: {
+                                      public_url: ::String?,
+                                      s3_uri: ::String?
+                                    }?
+                                  }
+                                },
+                                favicon: {
+                                  original: {
+                                    source: {
+                                      public_url: ::String?,
+                                      s3_uri: ::String?
+                                    }?
+                                  }
+                                }?
+                              }
+                            }?
+                          },
+                          ?tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _CreateBrandResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBrandResponseSuccess
+
+      interface _CreateCustomPermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCustomPermissionsResponse]
+        def status: () -> ::Integer
+        def arn: () -> ::String
+        def request_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#create_custom_permissions-instance_method
+      def create_custom_permissions: (
+                                       aws_account_id: ::String,
+                                       custom_permissions_name: ::String,
+                                       ?capabilities: {
+                                         export_to_csv: ("DENY")?,
+                                         export_to_excel: ("DENY")?,
+                                         create_and_update_themes: ("DENY")?,
+                                         add_or_run_anomaly_detection_for_analyses: ("DENY")?,
+                                         share_analyses: ("DENY")?,
+                                         create_and_update_datasets: ("DENY")?,
+                                         share_datasets: ("DENY")?,
+                                         subscribe_dashboard_email_reports: ("DENY")?,
+                                         create_and_update_dashboard_email_reports: ("DENY")?,
+                                         share_dashboards: ("DENY")?,
+                                         create_and_update_threshold_alerts: ("DENY")?,
+                                         rename_shared_folders: ("DENY")?,
+                                         create_shared_folders: ("DENY")?,
+                                         create_and_update_data_sources: ("DENY")?,
+                                         share_data_sources: ("DENY")?,
+                                         view_account_spice_capacity: ("DENY")?,
+                                         create_spice_dataset: ("DENY")?
+                                       },
+                                       ?tags: Array[
+                                         {
+                                           key: ::String,
+                                           value: ::String
+                                         },
+                                       ]
+                                     ) -> _CreateCustomPermissionsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCustomPermissionsResponseSuccess
+
       interface _CreateDashboardResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateDashboardResponse]
         def arn: () -> ::String
@@ -68853,7 +68987,17 @@ module Aws
                                   snowflake_parameters: {
                                     host: ::String,
                                     database: ::String,
-                                    warehouse: ::String
+                                    warehouse: ::String,
+                                    authentication_type: ("PASSWORD" | "TOKEN" | "X509")?,
+                                    database_access_control_role: ::String?,
+                                    o_auth_parameters: {
+                                      token_provider_url: ::String,
+                                      o_auth_scope: ::String?,
+                                      identity_provider_vpc_connection_properties: {
+                                        vpc_connection_arn: ::String
+                                      }?,
+                                      identity_provider_resource_uri: ::String?
+                                    }?
                                   }?,
                                   spark_parameters: {
                                     host: ::String,
@@ -68889,7 +69033,17 @@ module Aws
                                     host: ::String,
                                     port: ::Integer,
                                     catalog: ::String,
-                                    product_type: ("GALAXY" | "ENTERPRISE")?
+                                    product_type: ("GALAXY" | "ENTERPRISE")?,
+                                    database_access_control_role: ::String?,
+                                    authentication_type: ("PASSWORD" | "TOKEN" | "X509")?,
+                                    o_auth_parameters: {
+                                      token_provider_url: ::String,
+                                      o_auth_scope: ::String?,
+                                      identity_provider_vpc_connection_properties: {
+                                        vpc_connection_arn: ::String
+                                      }?,
+                                      identity_provider_resource_uri: ::String?
+                                    }?
                                   }?,
                                   trino_parameters: {
                                     host: ::String,
@@ -68987,7 +69141,17 @@ module Aws
                                         snowflake_parameters: {
                                           host: ::String,
                                           database: ::String,
-                                          warehouse: ::String
+                                          warehouse: ::String,
+                                          authentication_type: ("PASSWORD" | "TOKEN" | "X509")?,
+                                          database_access_control_role: ::String?,
+                                          o_auth_parameters: {
+                                            token_provider_url: ::String,
+                                            o_auth_scope: ::String?,
+                                            identity_provider_vpc_connection_properties: {
+                                              vpc_connection_arn: ::String
+                                            }?,
+                                            identity_provider_resource_uri: ::String?
+                                          }?
                                         }?,
                                         spark_parameters: {
                                           host: ::String,
@@ -69023,7 +69187,17 @@ module Aws
                                           host: ::String,
                                           port: ::Integer,
                                           catalog: ::String,
-                                          product_type: ("GALAXY" | "ENTERPRISE")?
+                                          product_type: ("GALAXY" | "ENTERPRISE")?,
+                                          database_access_control_role: ::String?,
+                                          authentication_type: ("PASSWORD" | "TOKEN" | "X509")?,
+                                          o_auth_parameters: {
+                                            token_provider_url: ::String,
+                                            o_auth_scope: ::String?,
+                                            identity_provider_vpc_connection_properties: {
+                                              vpc_connection_arn: ::String
+                                            }?,
+                                            identity_provider_resource_uri: ::String?
+                                          }?
                                         }?,
                                         trino_parameters: {
                                           host: ::String,
@@ -103454,6 +103628,40 @@ module Aws
                            ) -> _DeleteAnalysisResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAnalysisResponseSuccess
 
+      interface _DeleteBrandResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBrandResponse]
+        def request_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#delete_brand-instance_method
+      def delete_brand: (
+                          aws_account_id: ::String,
+                          brand_id: ::String
+                        ) -> _DeleteBrandResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBrandResponseSuccess
+
+      interface _DeleteBrandAssignmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBrandAssignmentResponse]
+        def request_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#delete_brand_assignment-instance_method
+      def delete_brand_assignment: (
+                                     aws_account_id: ::String
+                                   ) -> _DeleteBrandAssignmentResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBrandAssignmentResponseSuccess
+
+      interface _DeleteCustomPermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCustomPermissionsResponse]
+        def status: () -> ::Integer
+        def arn: () -> ::String
+        def request_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#delete_custom_permissions-instance_method
+      def delete_custom_permissions: (
+                                       aws_account_id: ::String,
+                                       custom_permissions_name: ::String
+                                     ) -> _DeleteCustomPermissionsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCustomPermissionsResponseSuccess
+
       interface _DeleteDashboardResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDashboardResponse]
         def status: () -> ::Integer
@@ -103762,6 +103970,19 @@ module Aws
                                        ) -> _DeleteUserByPrincipalIdResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteUserByPrincipalIdResponseSuccess
 
+      interface _DeleteUserCustomPermissionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteUserCustomPermissionResponse]
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#delete_user_custom_permission-instance_method
+      def delete_user_custom_permission: (
+                                           user_name: ::String,
+                                           aws_account_id: ::String,
+                                           namespace: ::String
+                                         ) -> _DeleteUserCustomPermissionResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteUserCustomPermissionResponseSuccess
+
       interface _DeleteVPCConnectionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVPCConnectionResponse]
         def arn: () -> ::String
@@ -103919,6 +104140,57 @@ module Aws
                                               asset_bundle_import_job_id: ::String
                                             ) -> _DescribeAssetBundleImportJobResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAssetBundleImportJobResponseSuccess
+
+      interface _DescribeBrandResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBrandResponse]
+        def request_id: () -> ::String
+        def brand_detail: () -> Types::BrandDetail
+        def brand_definition: () -> Types::BrandDefinition
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#describe_brand-instance_method
+      def describe_brand: (
+                            aws_account_id: ::String,
+                            brand_id: ::String,
+                            ?version_id: ::String
+                          ) -> _DescribeBrandResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBrandResponseSuccess
+
+      interface _DescribeBrandAssignmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBrandAssignmentResponse]
+        def request_id: () -> ::String
+        def brand_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#describe_brand_assignment-instance_method
+      def describe_brand_assignment: (
+                                       aws_account_id: ::String
+                                     ) -> _DescribeBrandAssignmentResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBrandAssignmentResponseSuccess
+
+      interface _DescribeBrandPublishedVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBrandPublishedVersionResponse]
+        def request_id: () -> ::String
+        def brand_detail: () -> Types::BrandDetail
+        def brand_definition: () -> Types::BrandDefinition
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#describe_brand_published_version-instance_method
+      def describe_brand_published_version: (
+                                              aws_account_id: ::String,
+                                              brand_id: ::String
+                                            ) -> _DescribeBrandPublishedVersionResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBrandPublishedVersionResponseSuccess
+
+      interface _DescribeCustomPermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCustomPermissionsResponse]
+        def status: () -> ::Integer
+        def custom_permissions: () -> Types::CustomPermissions
+        def request_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#describe_custom_permissions-instance_method
+      def describe_custom_permissions: (
+                                         aws_account_id: ::String,
+                                         custom_permissions_name: ::String
+                                       ) -> _DescribeCustomPermissionsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCustomPermissionsResponseSuccess
 
       interface _DescribeDashboardResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDashboardResponse]
@@ -104653,6 +104925,34 @@ module Aws
                                            ?max_results: ::Integer
                                          ) -> _ListAssetBundleImportJobsResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssetBundleImportJobsResponseSuccess
+
+      interface _ListBrandsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBrandsResponse]
+        def next_token: () -> ::String
+        def brands: () -> ::Array[Types::BrandSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#list_brands-instance_method
+      def list_brands: (
+                         aws_account_id: ::String,
+                         ?max_results: ::Integer,
+                         ?next_token: ::String
+                       ) -> _ListBrandsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBrandsResponseSuccess
+
+      interface _ListCustomPermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCustomPermissionsResponse]
+        def status: () -> ::Integer
+        def custom_permissions_list: () -> ::Array[Types::CustomPermissions]
+        def next_token: () -> ::String
+        def request_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#list_custom_permissions-instance_method
+      def list_custom_permissions: (
+                                     aws_account_id: ::String,
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListCustomPermissionsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCustomPermissionsResponseSuccess
 
       interface _ListDashboardVersionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDashboardVersionsResponse]
@@ -105505,7 +105805,17 @@ module Aws
                                                    snowflake_parameters: {
                                                      host: ::String,
                                                      database: ::String,
-                                                     warehouse: ::String
+                                                     warehouse: ::String,
+                                                     authentication_type: ("PASSWORD" | "TOKEN" | "X509")?,
+                                                     database_access_control_role: ::String?,
+                                                     o_auth_parameters: {
+                                                       token_provider_url: ::String,
+                                                       o_auth_scope: ::String?,
+                                                       identity_provider_vpc_connection_properties: {
+                                                         vpc_connection_arn: ::String
+                                                       }?,
+                                                       identity_provider_resource_uri: ::String?
+                                                     }?
                                                    }?,
                                                    spark_parameters: {
                                                      host: ::String,
@@ -105541,7 +105851,17 @@ module Aws
                                                      host: ::String,
                                                      port: ::Integer,
                                                      catalog: ::String,
-                                                     product_type: ("GALAXY" | "ENTERPRISE")?
+                                                     product_type: ("GALAXY" | "ENTERPRISE")?,
+                                                     database_access_control_role: ::String?,
+                                                     authentication_type: ("PASSWORD" | "TOKEN" | "X509")?,
+                                                     o_auth_parameters: {
+                                                       token_provider_url: ::String,
+                                                       o_auth_scope: ::String?,
+                                                       identity_provider_vpc_connection_properties: {
+                                                         vpc_connection_arn: ::String
+                                                       }?,
+                                                       identity_provider_resource_uri: ::String?
+                                                     }?
                                                    }?,
                                                    trino_parameters: {
                                                      host: ::String,
@@ -139700,6 +140020,153 @@ module Aws
                                          ]
                                        ) -> _UpdateAnalysisPermissionsResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAnalysisPermissionsResponseSuccess
+
+      interface _UpdateBrandResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBrandResponse]
+        def request_id: () -> ::String
+        def brand_detail: () -> Types::BrandDetail
+        def brand_definition: () -> Types::BrandDefinition
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#update_brand-instance_method
+      def update_brand: (
+                          aws_account_id: ::String,
+                          brand_id: ::String,
+                          ?brand_definition: {
+                            brand_name: ::String,
+                            description: ::String?,
+                            application_theme: {
+                              brand_color_palette: {
+                                primary: {
+                                  foreground: ::String?,
+                                  background: ::String?
+                                }?,
+                                secondary: {
+                                  foreground: ::String?,
+                                  background: ::String?
+                                }?,
+                                accent: {
+                                  foreground: ::String?,
+                                  background: ::String?
+                                }?,
+                                measure: {
+                                  foreground: ::String?,
+                                  background: ::String?
+                                }?,
+                                dimension: {
+                                  foreground: ::String?,
+                                  background: ::String?
+                                }?,
+                                success: {
+                                  foreground: ::String?,
+                                  background: ::String?
+                                }?,
+                                info: {
+                                  foreground: ::String?,
+                                  background: ::String?
+                                }?,
+                                warning: {
+                                  foreground: ::String?,
+                                  background: ::String?
+                                }?,
+                                danger: {
+                                  foreground: ::String?,
+                                  background: ::String?
+                                }?
+                              }?,
+                              brand_element_style: {
+                                navbar_style: {
+                                  global_navbar: {
+                                    foreground: ::String?,
+                                    background: ::String?
+                                  }?,
+                                  contextual_navbar: {
+                                    foreground: ::String?,
+                                    background: ::String?
+                                  }?
+                                }?
+                              }?
+                            }?,
+                            logo_configuration: {
+                              alt_text: ::String,
+                              logo_set: {
+                                primary: {
+                                  original: {
+                                    source: {
+                                      public_url: ::String?,
+                                      s3_uri: ::String?
+                                    }?
+                                  }
+                                },
+                                favicon: {
+                                  original: {
+                                    source: {
+                                      public_url: ::String?,
+                                      s3_uri: ::String?
+                                    }?
+                                  }
+                                }?
+                              }
+                            }?
+                          }
+                        ) -> _UpdateBrandResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBrandResponseSuccess
+
+      interface _UpdateBrandAssignmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBrandAssignmentResponse]
+        def request_id: () -> ::String
+        def brand_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#update_brand_assignment-instance_method
+      def update_brand_assignment: (
+                                     aws_account_id: ::String,
+                                     brand_arn: ::String
+                                   ) -> _UpdateBrandAssignmentResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBrandAssignmentResponseSuccess
+
+      interface _UpdateBrandPublishedVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBrandPublishedVersionResponse]
+        def request_id: () -> ::String
+        def version_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#update_brand_published_version-instance_method
+      def update_brand_published_version: (
+                                            aws_account_id: ::String,
+                                            brand_id: ::String,
+                                            version_id: ::String
+                                          ) -> _UpdateBrandPublishedVersionResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBrandPublishedVersionResponseSuccess
+
+      interface _UpdateCustomPermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCustomPermissionsResponse]
+        def status: () -> ::Integer
+        def arn: () -> ::String
+        def request_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#update_custom_permissions-instance_method
+      def update_custom_permissions: (
+                                       aws_account_id: ::String,
+                                       custom_permissions_name: ::String,
+                                       ?capabilities: {
+                                         export_to_csv: ("DENY")?,
+                                         export_to_excel: ("DENY")?,
+                                         create_and_update_themes: ("DENY")?,
+                                         add_or_run_anomaly_detection_for_analyses: ("DENY")?,
+                                         share_analyses: ("DENY")?,
+                                         create_and_update_datasets: ("DENY")?,
+                                         share_datasets: ("DENY")?,
+                                         subscribe_dashboard_email_reports: ("DENY")?,
+                                         create_and_update_dashboard_email_reports: ("DENY")?,
+                                         share_dashboards: ("DENY")?,
+                                         create_and_update_threshold_alerts: ("DENY")?,
+                                         rename_shared_folders: ("DENY")?,
+                                         create_shared_folders: ("DENY")?,
+                                         create_and_update_data_sources: ("DENY")?,
+                                         share_data_sources: ("DENY")?,
+                                         view_account_spice_capacity: ("DENY")?,
+                                         create_spice_dataset: ("DENY")?
+                                       }
+                                     ) -> _UpdateCustomPermissionsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCustomPermissionsResponseSuccess
 
       interface _UpdateDashboardResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDashboardResponse]
@@ -173911,7 +174378,17 @@ module Aws
                                   snowflake_parameters: {
                                     host: ::String,
                                     database: ::String,
-                                    warehouse: ::String
+                                    warehouse: ::String,
+                                    authentication_type: ("PASSWORD" | "TOKEN" | "X509")?,
+                                    database_access_control_role: ::String?,
+                                    o_auth_parameters: {
+                                      token_provider_url: ::String,
+                                      o_auth_scope: ::String?,
+                                      identity_provider_vpc_connection_properties: {
+                                        vpc_connection_arn: ::String
+                                      }?,
+                                      identity_provider_resource_uri: ::String?
+                                    }?
                                   }?,
                                   spark_parameters: {
                                     host: ::String,
@@ -173947,7 +174424,17 @@ module Aws
                                     host: ::String,
                                     port: ::Integer,
                                     catalog: ::String,
-                                    product_type: ("GALAXY" | "ENTERPRISE")?
+                                    product_type: ("GALAXY" | "ENTERPRISE")?,
+                                    database_access_control_role: ::String?,
+                                    authentication_type: ("PASSWORD" | "TOKEN" | "X509")?,
+                                    o_auth_parameters: {
+                                      token_provider_url: ::String,
+                                      o_auth_scope: ::String?,
+                                      identity_provider_vpc_connection_properties: {
+                                        vpc_connection_arn: ::String
+                                      }?,
+                                      identity_provider_resource_uri: ::String?
+                                    }?
                                   }?,
                                   trino_parameters: {
                                     host: ::String,
@@ -174045,7 +174532,17 @@ module Aws
                                         snowflake_parameters: {
                                           host: ::String,
                                           database: ::String,
-                                          warehouse: ::String
+                                          warehouse: ::String,
+                                          authentication_type: ("PASSWORD" | "TOKEN" | "X509")?,
+                                          database_access_control_role: ::String?,
+                                          o_auth_parameters: {
+                                            token_provider_url: ::String,
+                                            o_auth_scope: ::String?,
+                                            identity_provider_vpc_connection_properties: {
+                                              vpc_connection_arn: ::String
+                                            }?,
+                                            identity_provider_resource_uri: ::String?
+                                          }?
                                         }?,
                                         spark_parameters: {
                                           host: ::String,
@@ -174081,7 +174578,17 @@ module Aws
                                           host: ::String,
                                           port: ::Integer,
                                           catalog: ::String,
-                                          product_type: ("GALAXY" | "ENTERPRISE")?
+                                          product_type: ("GALAXY" | "ENTERPRISE")?,
+                                          database_access_control_role: ::String?,
+                                          authentication_type: ("PASSWORD" | "TOKEN" | "X509")?,
+                                          o_auth_parameters: {
+                                            token_provider_url: ::String,
+                                            o_auth_scope: ::String?,
+                                            identity_provider_vpc_connection_properties: {
+                                              vpc_connection_arn: ::String
+                                            }?,
+                                            identity_provider_resource_uri: ::String?
+                                          }?
                                         }?,
                                         trino_parameters: {
                                           host: ::String,
@@ -208553,6 +209060,20 @@ module Aws
                          ?external_login_id: ::String
                        ) -> _UpdateUserResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateUserResponseSuccess
+
+      interface _UpdateUserCustomPermissionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateUserCustomPermissionResponse]
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#update_user_custom_permission-instance_method
+      def update_user_custom_permission: (
+                                           user_name: ::String,
+                                           aws_account_id: ::String,
+                                           namespace: ::String,
+                                           custom_permissions_name: ::String
+                                         ) -> _UpdateUserCustomPermissionResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateUserCustomPermissionResponseSuccess
 
       interface _UpdateVPCConnectionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateVPCConnectionResponse]

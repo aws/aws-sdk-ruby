@@ -92,6 +92,7 @@ module Aws::CloudControlApi
 
     class GetResourceRequestStatusOutput
       attr_accessor progress_event: Types::ProgressEvent
+      attr_accessor hooks_progress_event: ::Array[Types::HookProgressEvent]
       SENSITIVE: []
     end
 
@@ -102,6 +103,18 @@ module Aws::CloudControlApi
 
     class HandlerInternalFailureException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class HookProgressEvent
+      attr_accessor hook_type_name: ::String
+      attr_accessor hook_type_version_id: ::String
+      attr_accessor hook_type_arn: ::String
+      attr_accessor invocation_point: ::String
+      attr_accessor hook_status: ::String
+      attr_accessor hook_event_time: ::Time
+      attr_accessor hook_status_message: ::String
+      attr_accessor failure_mode: ::String
       SENSITIVE: []
     end
 
@@ -169,12 +182,13 @@ module Aws::CloudControlApi
       attr_accessor type_name: ::String
       attr_accessor identifier: ::String
       attr_accessor request_token: ::String
+      attr_accessor hooks_request_token: ::String
       attr_accessor operation: ("CREATE" | "DELETE" | "UPDATE")
       attr_accessor operation_status: ("PENDING" | "IN_PROGRESS" | "SUCCESS" | "FAILED" | "CANCEL_IN_PROGRESS" | "CANCEL_COMPLETE")
       attr_accessor event_time: ::Time
       attr_accessor resource_model: ::String
       attr_accessor status_message: ::String
-      attr_accessor error_code: ("NotUpdatable" | "InvalidRequest" | "AccessDenied" | "InvalidCredentials" | "AlreadyExists" | "NotFound" | "ResourceConflict" | "Throttling" | "ServiceLimitExceeded" | "NotStabilized" | "GeneralServiceException" | "ServiceInternalError" | "ServiceTimeout" | "NetworkFailure" | "InternalFailure")
+      attr_accessor error_code: ("NotUpdatable" | "InvalidRequest" | "AccessDenied" | "UnauthorizedTaggingOperation" | "InvalidCredentials" | "AlreadyExists" | "NotFound" | "ResourceConflict" | "Throttling" | "ServiceLimitExceeded" | "NotStabilized" | "GeneralServiceException" | "ServiceInternalError" | "ServiceTimeout" | "NetworkFailure" | "InternalFailure")
       attr_accessor retry_after: ::Time
       SENSITIVE: [:resource_model]
     end

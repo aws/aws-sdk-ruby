@@ -158,6 +158,8 @@ module Aws::Batch
     KeyValuesPair = Shapes::StructureShape.new(name: 'KeyValuesPair')
     KubernetesVersion = Shapes::StringShape.new(name: 'KubernetesVersion')
     LaunchTemplateSpecification = Shapes::StructureShape.new(name: 'LaunchTemplateSpecification')
+    LaunchTemplateSpecificationOverride = Shapes::StructureShape.new(name: 'LaunchTemplateSpecificationOverride')
+    LaunchTemplateSpecificationOverrideList = Shapes::ListShape.new(name: 'LaunchTemplateSpecificationOverrideList')
     LinuxParameters = Shapes::StructureShape.new(name: 'LinuxParameters')
     ListAttemptEcsTaskDetails = Shapes::ListShape.new(name: 'ListAttemptEcsTaskDetails')
     ListAttemptTaskContainerDetails = Shapes::ListShape.new(name: 'ListAttemptTaskContainerDetails')
@@ -908,7 +910,16 @@ module Aws::Batch
     LaunchTemplateSpecification.add_member(:launch_template_id, Shapes::ShapeRef.new(shape: String, location_name: "launchTemplateId"))
     LaunchTemplateSpecification.add_member(:launch_template_name, Shapes::ShapeRef.new(shape: String, location_name: "launchTemplateName"))
     LaunchTemplateSpecification.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
+    LaunchTemplateSpecification.add_member(:overrides, Shapes::ShapeRef.new(shape: LaunchTemplateSpecificationOverrideList, location_name: "overrides"))
     LaunchTemplateSpecification.struct_class = Types::LaunchTemplateSpecification
+
+    LaunchTemplateSpecificationOverride.add_member(:launch_template_id, Shapes::ShapeRef.new(shape: String, location_name: "launchTemplateId"))
+    LaunchTemplateSpecificationOverride.add_member(:launch_template_name, Shapes::ShapeRef.new(shape: String, location_name: "launchTemplateName"))
+    LaunchTemplateSpecificationOverride.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
+    LaunchTemplateSpecificationOverride.add_member(:target_instance_types, Shapes::ShapeRef.new(shape: StringList, location_name: "targetInstanceTypes"))
+    LaunchTemplateSpecificationOverride.struct_class = Types::LaunchTemplateSpecificationOverride
+
+    LaunchTemplateSpecificationOverrideList.member = Shapes::ShapeRef.new(shape: LaunchTemplateSpecificationOverride)
 
     LinuxParameters.add_member(:devices, Shapes::ShapeRef.new(shape: DevicesList, location_name: "devices"))
     LinuxParameters.add_member(:init_process_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "initProcessEnabled"))

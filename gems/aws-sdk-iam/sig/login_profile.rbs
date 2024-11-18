@@ -38,7 +38,7 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/LoginProfile.html#create-instance_method
       def create: (
-                    password: ::String,
+                    ?password: ::String,
                     ?password_reset_required: bool
                   ) -> LoginProfile
                 | (?Hash[Symbol, untyped]) -> LoginProfile

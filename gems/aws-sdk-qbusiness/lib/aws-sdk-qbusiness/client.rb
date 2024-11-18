@@ -928,11 +928,17 @@ module Aws::QBusiness
     # You must use the Amazon Q Business console to assign subscription
     # tiers to users.
     #
+    #  A Amazon Q Apps service linked role will be created if it's absent in
+    # the Amazon Web Services account when the QAppsConfiguration is enabled
+    # in the request. For more information, see [ Using service-linked roles
+    # for Q Apps ][2]
+    #
     #  </note>
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/tiers.html#user-sub-tiers
+    # [2]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/using-service-linked-roles-qapps.html
     #
     # @option params [required, String] :display_name
     #   A name for the Amazon Q Business application.
@@ -3314,6 +3320,12 @@ module Aws::QBusiness
     #   generating Amazon Q Business chat results only from document a user
     #   has access to.
     #
+    # @option params [String] :role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that has access to the
+    #   S3 file that contains your list of users that belong to a group.The
+    #   Amazon Resource Name (ARN) of an IAM role that has access to the S3
+    #   file that contains your list of users that belong to a group.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3337,7 +3349,12 @@ module Aws::QBusiness
     #           type: "INDEX", # accepts INDEX, DATASOURCE
     #         },
     #       ],
+    #       s3_path_for_group_members: {
+    #         bucket: "S3BucketName", # required
+    #         key: "S3ObjectKey", # required
+    #       },
     #     },
+    #     role_arn: "RoleArn",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/PutGroup AWS API Documentation
@@ -3487,6 +3504,17 @@ module Aws::QBusiness
     end
 
     # Updates an existing Amazon Q Business application.
+    #
+    # <note markdown="1"> A Amazon Q Apps service-linked role will be created if it's absent in
+    # the Amazon Web Services account when the QAppsConfiguration is enabled
+    # in the request. For more information, see [ Using service-linked roles
+    # for Q Apps ][1]
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/using-service-linked-roles-qapps.html
     #
     # @option params [required, String] :application_id
     #   The identifier of the Amazon Q Business application.
@@ -4186,7 +4214,7 @@ module Aws::QBusiness
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-qbusiness'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

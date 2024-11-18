@@ -33,17 +33,14 @@ module Aws::AppConfig
     end
 
     # An action defines the tasks that the extension performs during the
-    # AppConfig workflow. Each action includes an action point such as
-    # `ON_CREATE_HOSTED_CONFIGURATION`, `PRE_DEPLOYMENT`, or
-    # `ON_DEPLOYMENT`. Each action also includes a name, a URI to an Lambda
-    # function, and an Amazon Resource Name (ARN) for an Identity and Access
-    # Management assume role. You specify the name, URI, and ARN for each
-    # *action point* defined in the extension. You can specify the following
-    # actions for an extension:
+    # AppConfig workflow. Each action includes an action point, as shown in
+    # the following list:
     #
     # * `PRE_CREATE_HOSTED_CONFIGURATION_VERSION`
     #
     # * `PRE_START_DEPLOYMENT`
+    #
+    # * `AT_DEPLOYMENT_TICK`
     #
     # * `ON_DEPLOYMENT_START`
     #
@@ -54,6 +51,11 @@ module Aws::AppConfig
     # * `ON_DEPLOYMENT_COMPLETE`
     #
     # * `ON_DEPLOYMENT_ROLLED_BACK`
+    #
+    # Each action also includes a name, a URI to an Lambda function, and an
+    # Amazon Resource Name (ARN) for an Identity and Access Management
+    # assume role. You specify the name, URI, and ARN for each *action
+    # point* defined in the extension.
     #
     # @!attribute [rw] name
     #   The action name.
@@ -491,7 +493,7 @@ module Aws::AppConfig
     #
     #   * For an Amazon S3 object, specify the URI in the following format:
     #     `s3://<bucket>/<objectKey> `. Here is an example:
-    #     `s3://my-bucket/my-app/us-east-1/my-config.json`
+    #     `s3://amzn-s3-demo-bucket/my-app/us-east-1/my-config.json`
     #
     #   * For an SSM document, specify either the document name in the
     #     format `ssm-document://<document name>` or the Amazon Resource
@@ -2193,9 +2195,10 @@ module Aws::AppConfig
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of items to return for this call. The call also
-    #   returns a token that you can specify in a subsequent call to get the
-    #   next set of results.
+    #   The maximum number of items to return for this call. If `MaxResults`
+    #   is not provided in the call, AppConfig returns the maximum of 50.
+    #   The call also returns a token that you can specify in a subsequent
+    #   call to get the next set of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token

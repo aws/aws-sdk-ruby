@@ -770,6 +770,17 @@ module Aws::CleanRooms
     # @option params [required, Array<String>] :creator_member_abilities
     #   The abilities granted to the collaboration creator.
     #
+    # @option params [Types::MLMemberAbilities] :creator_ml_member_abilities
+    #   The ML abilities granted to the collaboration creator.
+    #
+    #   Custom ML modeling is in beta release and is subject to change. For
+    #   beta terms and conditions, see *Betas and Previews* in the [Amazon Web
+    #   Services Service Terms][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/service-terms/
+    #
     # @option params [required, String] :creator_display_name
     #   The display name of the collaboration creator.
     #
@@ -809,10 +820,21 @@ module Aws::CleanRooms
     #       {
     #         account_id: "AccountId", # required
     #         member_abilities: ["CAN_QUERY"], # required, accepts CAN_QUERY, CAN_RECEIVE_RESULTS
+    #         ml_member_abilities: {
+    #           custom_ml_member_abilities: ["CAN_RECEIVE_MODEL_OUTPUT"], # required, accepts CAN_RECEIVE_MODEL_OUTPUT, CAN_RECEIVE_INFERENCE_OUTPUT
+    #         },
     #         display_name: "DisplayName", # required
     #         payment_configuration: {
     #           query_compute: { # required
     #             is_responsible: false, # required
+    #           },
+    #           machine_learning: {
+    #             model_training: {
+    #               is_responsible: false, # required
+    #             },
+    #             model_inference: {
+    #               is_responsible: false, # required
+    #             },
     #           },
     #         },
     #       },
@@ -820,6 +842,9 @@ module Aws::CleanRooms
     #     name: "CollaborationName", # required
     #     description: "CollaborationDescription", # required
     #     creator_member_abilities: ["CAN_QUERY"], # required, accepts CAN_QUERY, CAN_RECEIVE_RESULTS
+    #     creator_ml_member_abilities: {
+    #       custom_ml_member_abilities: ["CAN_RECEIVE_MODEL_OUTPUT"], # required, accepts CAN_RECEIVE_MODEL_OUTPUT, CAN_RECEIVE_INFERENCE_OUTPUT
+    #     },
     #     creator_display_name: "DisplayName", # required
     #     data_encryption_metadata: {
     #       allow_cleartext: false, # required
@@ -834,6 +859,14 @@ module Aws::CleanRooms
     #     creator_payment_configuration: {
     #       query_compute: { # required
     #         is_responsible: false, # required
+    #       },
+    #       machine_learning: {
+    #         model_training: {
+    #           is_responsible: false, # required
+    #         },
+    #         model_inference: {
+    #           is_responsible: false, # required
+    #         },
     #       },
     #     },
     #     analytics_engine: "SPARK", # accepts SPARK, CLEAN_ROOMS_SQL
@@ -1490,6 +1523,14 @@ module Aws::CleanRooms
     #       query_compute: { # required
     #         is_responsible: false, # required
     #       },
+    #       machine_learning: {
+    #         model_training: {
+    #           is_responsible: false, # required
+    #         },
+    #         model_inference: {
+    #           is_responsible: false, # required
+    #         },
+    #       },
     #     },
     #   })
     #
@@ -1507,6 +1548,8 @@ module Aws::CleanRooms
     #   resp.membership.status #=> String, one of "ACTIVE", "REMOVED", "COLLABORATION_DELETED"
     #   resp.membership.member_abilities #=> Array
     #   resp.membership.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS"
+    #   resp.membership.ml_member_abilities.custom_ml_member_abilities #=> Array
+    #   resp.membership.ml_member_abilities.custom_ml_member_abilities[0] #=> String, one of "CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"
     #   resp.membership.query_log_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.membership.default_result_configuration.output_configuration.s3.result_format #=> String, one of "CSV", "PARQUET"
     #   resp.membership.default_result_configuration.output_configuration.s3.bucket #=> String
@@ -1514,6 +1557,8 @@ module Aws::CleanRooms
     #   resp.membership.default_result_configuration.output_configuration.s3.single_file_output #=> Boolean
     #   resp.membership.default_result_configuration.role_arn #=> String
     #   resp.membership.payment_configuration.query_compute.is_responsible #=> Boolean
+    #   resp.membership.payment_configuration.machine_learning.model_training.is_responsible #=> Boolean
+    #   resp.membership.payment_configuration.machine_learning.model_inference.is_responsible #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateMembership AWS API Documentation
     #
@@ -2597,6 +2642,8 @@ module Aws::CleanRooms
     #   resp.membership.status #=> String, one of "ACTIVE", "REMOVED", "COLLABORATION_DELETED"
     #   resp.membership.member_abilities #=> Array
     #   resp.membership.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS"
+    #   resp.membership.ml_member_abilities.custom_ml_member_abilities #=> Array
+    #   resp.membership.ml_member_abilities.custom_ml_member_abilities[0] #=> String, one of "CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"
     #   resp.membership.query_log_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.membership.default_result_configuration.output_configuration.s3.result_format #=> String, one of "CSV", "PARQUET"
     #   resp.membership.default_result_configuration.output_configuration.s3.bucket #=> String
@@ -2604,6 +2651,8 @@ module Aws::CleanRooms
     #   resp.membership.default_result_configuration.output_configuration.s3.single_file_output #=> Boolean
     #   resp.membership.default_result_configuration.role_arn #=> String
     #   resp.membership.payment_configuration.query_compute.is_responsible #=> Boolean
+    #   resp.membership.payment_configuration.machine_learning.model_training.is_responsible #=> Boolean
+    #   resp.membership.payment_configuration.machine_learning.model_inference.is_responsible #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetMembership AWS API Documentation
     #
@@ -3552,11 +3601,15 @@ module Aws::CleanRooms
     #   resp.member_summaries[0].display_name #=> String
     #   resp.member_summaries[0].abilities #=> Array
     #   resp.member_summaries[0].abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS"
+    #   resp.member_summaries[0].ml_abilities.custom_ml_member_abilities #=> Array
+    #   resp.member_summaries[0].ml_abilities.custom_ml_member_abilities[0] #=> String, one of "CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"
     #   resp.member_summaries[0].create_time #=> Time
     #   resp.member_summaries[0].update_time #=> Time
     #   resp.member_summaries[0].membership_id #=> String
     #   resp.member_summaries[0].membership_arn #=> String
     #   resp.member_summaries[0].payment_configuration.query_compute.is_responsible #=> Boolean
+    #   resp.member_summaries[0].payment_configuration.machine_learning.model_training.is_responsible #=> Boolean
+    #   resp.member_summaries[0].payment_configuration.machine_learning.model_inference.is_responsible #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListMembers AWS API Documentation
     #
@@ -3612,7 +3665,11 @@ module Aws::CleanRooms
     #   resp.membership_summaries[0].status #=> String, one of "ACTIVE", "REMOVED", "COLLABORATION_DELETED"
     #   resp.membership_summaries[0].member_abilities #=> Array
     #   resp.membership_summaries[0].member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS"
+    #   resp.membership_summaries[0].ml_member_abilities.custom_ml_member_abilities #=> Array
+    #   resp.membership_summaries[0].ml_member_abilities.custom_ml_member_abilities[0] #=> String, one of "CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"
     #   resp.membership_summaries[0].payment_configuration.query_compute.is_responsible #=> Boolean
+    #   resp.membership_summaries[0].payment_configuration.machine_learning.model_training.is_responsible #=> Boolean
+    #   resp.membership_summaries[0].payment_configuration.machine_learning.model_inference.is_responsible #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListMemberships AWS API Documentation
     #
@@ -4746,6 +4803,8 @@ module Aws::CleanRooms
     #   resp.membership.status #=> String, one of "ACTIVE", "REMOVED", "COLLABORATION_DELETED"
     #   resp.membership.member_abilities #=> Array
     #   resp.membership.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS"
+    #   resp.membership.ml_member_abilities.custom_ml_member_abilities #=> Array
+    #   resp.membership.ml_member_abilities.custom_ml_member_abilities[0] #=> String, one of "CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"
     #   resp.membership.query_log_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.membership.default_result_configuration.output_configuration.s3.result_format #=> String, one of "CSV", "PARQUET"
     #   resp.membership.default_result_configuration.output_configuration.s3.bucket #=> String
@@ -4753,6 +4812,8 @@ module Aws::CleanRooms
     #   resp.membership.default_result_configuration.output_configuration.s3.single_file_output #=> Boolean
     #   resp.membership.default_result_configuration.role_arn #=> String
     #   resp.membership.payment_configuration.query_compute.is_responsible #=> Boolean
+    #   resp.membership.payment_configuration.machine_learning.model_training.is_responsible #=> Boolean
+    #   resp.membership.payment_configuration.machine_learning.model_inference.is_responsible #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateMembership AWS API Documentation
     #
@@ -4906,7 +4967,7 @@ module Aws::CleanRooms
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cleanrooms'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -576,7 +576,7 @@ module Aws::AppConfig
     #
     #   * For an Amazon S3 object, specify the URI in the following format:
     #     `s3://<bucket>/<objectKey> `. Here is an example:
-    #     `s3://my-bucket/my-app/us-east-1/my-config.json`
+    #     `s3://amzn-s3-demo-bucket/my-app/us-east-1/my-config.json`
     #
     #   * For an SSM document, specify either the document name in the format
     #     `ssm-document://<document name>` or the Amazon Resource Name (ARN).
@@ -2779,9 +2779,10 @@ module Aws::AppConfig
     #   The configuration profile ID.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return for this call. The call also
-    #   returns a token that you can specify in a subsequent call to get the
-    #   next set of results.
+    #   The maximum number of items to return for this call. If `MaxResults`
+    #   is not provided in the call, AppConfig returns the maximum of 50. The
+    #   call also returns a token that you can specify in a subsequent call to
+    #   get the next set of results.
     #
     # @option params [String] :next_token
     #   A token to start the list. Use this token to get the next set of
@@ -3877,7 +3878,7 @@ module Aws::AppConfig
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appconfig'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

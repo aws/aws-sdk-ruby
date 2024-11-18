@@ -2996,7 +2996,8 @@
       "type":"structure",
       "members":{
         "memberGroups":{"shape":"MemberGroups"},
-        "memberUsers":{"shape":"MemberUsers"}
+        "memberUsers":{"shape":"MemberUsers"},
+        "s3PathForGroupMembers":{"shape":"S3"}
       }
     },
     "GroupName":{
@@ -4088,7 +4089,8 @@
         "groupName":{"shape":"GroupName"},
         "dataSourceId":{"shape":"DataSourceId"},
         "type":{"shape":"MembershipType"},
-        "groupMembers":{"shape":"GroupMembers"}
+        "groupMembers":{"shape":"GroupMembers"},
+        "roleArn":{"shape":"RoleArn"}
       }
     },
     "PutGroupResponse":{

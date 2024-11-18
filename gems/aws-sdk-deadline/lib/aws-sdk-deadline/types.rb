@@ -10,14 +10,43 @@
 module Aws::Deadline
   module Types
 
+    # Provides information about the GPU accelerators and drivers for the
+    # instance types in a fleet. If you include the
+    # `acceleratorCapabilities` property in the
+    # [ServiceManagedEc2InstanceCapabilities][1] object, all of the Amazon
+    # EC2 instances will have at least one accelerator.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/deadline-cloud/latest/APIReference/API_ServiceManagedEc2InstanceCapabilities
+    #
+    # @!attribute [rw] selections
+    #   A list of objects that contain the GPU name of the accelerator and
+    #   driver for the instance types that support the accelerator.
+    #   @return [Array<Types::AcceleratorSelection>]
+    #
+    # @!attribute [rw] count
+    #   The number of GPUs on each worker. The default is 1.
+    #   @return [Types::AcceleratorCountRange]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/AcceleratorCapabilities AWS API Documentation
+    #
+    class AcceleratorCapabilities < Struct.new(
+      :selections,
+      :count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The range for the GPU fleet acceleration.
     #
     # @!attribute [rw] min
-    #   The minimum GPU for the accelerator.
+    #   The minimum number of GPUs for the accelerator. If you set the value
+    #   to 0, a worker will still have 1 GPU.
     #   @return [Integer]
     #
     # @!attribute [rw] max
-    #   The maximum GPU for the accelerator.
+    #   The maximum number of GPUs for the accelerator.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/AcceleratorCountRange AWS API Documentation
@@ -25,6 +54,26 @@ module Aws::Deadline
     class AcceleratorCountRange < Struct.new(
       :min,
       :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Values that you can use to select a particular Amazon EC2 instance
+    # type.
+    #
+    # @!attribute [rw] name
+    #   The name of the GPU accelerator.
+    #   @return [String]
+    #
+    # @!attribute [rw] runtime
+    #   The driver version that the GPU accelerator uses.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/AcceleratorSelection AWS API Documentation
+    #
+    class AcceleratorSelection < Struct.new(
+      :name,
+      :runtime)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7219,6 +7268,17 @@ module Aws::Deadline
     #   The root EBS volume.
     #   @return [Types::Ec2EbsVolume]
     #
+    # @!attribute [rw] accelerator_capabilities
+    #   The GPU accelerator capabilities required for the Amazon EC2
+    #   instances. If you include the `acceleratorCapabilities` property in
+    #   the [ServiceManagedEc2InstanceCapabilities][1] object, all of the
+    #   Amazon EC2 instances will have at least one accelerator.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/deadline-cloud/latest/APIReference/API_ServiceManagedEc2InstanceCapabilities
+    #   @return [Types::AcceleratorCapabilities]
+    #
     # @!attribute [rw] allowed_instance_types
     #   The allowable Amazon EC2 instance types.
     #   @return [Array<String>]
@@ -7245,6 +7305,7 @@ module Aws::Deadline
       :os_family,
       :cpu_architecture_type,
       :root_ebs_volume,
+      :accelerator_capabilities,
       :allowed_instance_types,
       :excluded_instance_types,
       :custom_amounts,

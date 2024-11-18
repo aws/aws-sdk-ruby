@@ -226,6 +226,7 @@ module Aws::IoTWireless
       attr_accessor redundancy_percent: ::Integer
       attr_accessor fragment_size_bytes: ::Integer
       attr_accessor fragment_interval_ms: ::Integer
+      attr_accessor descriptor: ::String
       SENSITIVE: []
     end
 
@@ -563,7 +564,7 @@ module Aws::IoTWireless
 
     class EventConfigurationItem
       attr_accessor identifier: ::String
-      attr_accessor identifier_type: ("PartnerAccountId" | "DevEui" | "GatewayEui" | "WirelessDeviceId" | "WirelessGatewayId")
+      attr_accessor identifier_type: ("PartnerAccountId" | "DevEui" | "FuotaTaskId" | "GatewayEui" | "WirelessDeviceId" | "WirelessGatewayId")
       attr_accessor partner_type: ("Sidewalk")
       attr_accessor events: Types::EventNotificationItemConfigurations
       SENSITIVE: []
@@ -591,6 +592,19 @@ module Aws::IoTWireless
       attr_accessor id: ::String
       attr_accessor arn: ::String
       attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class FuotaTaskEventLogOption
+      attr_accessor event: ("Fuota")
+      attr_accessor log_level: ("INFO" | "ERROR" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class FuotaTaskLogOption
+      attr_accessor type: ("LoRaWAN")
+      attr_accessor log_level: ("INFO" | "ERROR" | "DISABLED")
+      attr_accessor events: ::Array[Types::FuotaTaskEventLogOption]
       SENSITIVE: []
     end
 
@@ -659,6 +673,7 @@ module Aws::IoTWireless
       attr_accessor redundancy_percent: ::Integer
       attr_accessor fragment_size_bytes: ::Integer
       attr_accessor fragment_interval_ms: ::Integer
+      attr_accessor descriptor: ::String
       SENSITIVE: []
     end
 
@@ -669,6 +684,7 @@ module Aws::IoTWireless
       attr_accessor default_log_level: ("INFO" | "ERROR" | "DISABLED")
       attr_accessor wireless_gateway_log_options: ::Array[Types::WirelessGatewayLogOption]
       attr_accessor wireless_device_log_options: ::Array[Types::WirelessDeviceLogOption]
+      attr_accessor fuota_task_log_options: ::Array[Types::FuotaTaskLogOption]
       SENSITIVE: []
     end
 
@@ -788,7 +804,7 @@ module Aws::IoTWireless
 
     class GetResourceEventConfigurationRequest
       attr_accessor identifier: ::String
-      attr_accessor identifier_type: ("PartnerAccountId" | "DevEui" | "GatewayEui" | "WirelessDeviceId" | "WirelessGatewayId")
+      attr_accessor identifier_type: ("PartnerAccountId" | "DevEui" | "FuotaTaskId" | "GatewayEui" | "WirelessDeviceId" | "WirelessGatewayId")
       attr_accessor partner_type: ("Sidewalk")
       SENSITIVE: []
     end
@@ -1097,7 +1113,7 @@ module Aws::IoTWireless
     end
 
     class ListEventConfigurationsRequest
-      attr_accessor resource_type: ("SidewalkAccount" | "WirelessDevice" | "WirelessGateway")
+      attr_accessor resource_type: ("FuotaTask" | "SidewalkAccount" | "WirelessDevice" | "WirelessGateway")
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       SENSITIVE: []
@@ -1412,6 +1428,7 @@ module Aws::IoTWireless
     class LoRaWANMulticast
       attr_accessor rf_region: ("EU868" | "US915" | "AU915" | "AS923-1" | "AS923-2" | "AS923-3" | "AS923-4" | "EU433" | "CN470" | "CN779" | "RU864" | "KR920" | "IN865")
       attr_accessor dl_class: ("ClassB" | "ClassC")
+      attr_accessor participating_gateways: Types::ParticipatingGatewaysMulticast
       SENSITIVE: []
     end
 
@@ -1420,6 +1437,7 @@ module Aws::IoTWireless
       attr_accessor dl_class: ("ClassB" | "ClassC")
       attr_accessor number_of_devices_requested: ::Integer
       attr_accessor number_of_devices_in_group: ::Integer
+      attr_accessor participating_gateways: Types::ParticipatingGatewaysMulticast
       SENSITIVE: []
     end
 
@@ -1581,6 +1599,12 @@ module Aws::IoTWireless
     class ParticipatingGateways
       attr_accessor downlink_mode: ("SEQUENTIAL" | "CONCURRENT" | "USING_UPLINK_GATEWAY")
       attr_accessor gateway_list: ::Array[Types::GatewayListItem]
+      attr_accessor transmission_interval: ::Integer
+      SENSITIVE: []
+    end
+
+    class ParticipatingGatewaysMulticast
+      attr_accessor gateway_list: ::Array[::String]
       attr_accessor transmission_interval: ::Integer
       SENSITIVE: []
     end
@@ -2053,6 +2077,7 @@ module Aws::IoTWireless
       attr_accessor redundancy_percent: ::Integer
       attr_accessor fragment_size_bytes: ::Integer
       attr_accessor fragment_interval_ms: ::Integer
+      attr_accessor descriptor: ::String
       SENSITIVE: []
     end
 
@@ -2061,6 +2086,7 @@ module Aws::IoTWireless
 
     class UpdateLogLevelsByResourceTypesRequest
       attr_accessor default_log_level: ("INFO" | "ERROR" | "DISABLED")
+      attr_accessor fuota_task_log_options: ::Array[Types::FuotaTaskLogOption]
       attr_accessor wireless_device_log_options: ::Array[Types::WirelessDeviceLogOption]
       attr_accessor wireless_gateway_log_options: ::Array[Types::WirelessGatewayLogOption]
       SENSITIVE: []
@@ -2126,7 +2152,7 @@ module Aws::IoTWireless
 
     class UpdateResourceEventConfigurationRequest
       attr_accessor identifier: ::String
-      attr_accessor identifier_type: ("PartnerAccountId" | "DevEui" | "GatewayEui" | "WirelessDeviceId" | "WirelessGatewayId")
+      attr_accessor identifier_type: ("PartnerAccountId" | "DevEui" | "FuotaTaskId" | "GatewayEui" | "WirelessDeviceId" | "WirelessGatewayId")
       attr_accessor partner_type: ("Sidewalk")
       attr_accessor device_registration_state: Types::DeviceRegistrationStateEventConfiguration
       attr_accessor proximity: Types::ProximityEventConfiguration

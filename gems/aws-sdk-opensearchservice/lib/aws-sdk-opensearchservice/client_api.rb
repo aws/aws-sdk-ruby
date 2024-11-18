@@ -49,6 +49,8 @@ module Aws::OpenSearchService
     ApplicationSummary = Shapes::StructureShape.new(name: 'ApplicationSummary')
     AssociatePackageRequest = Shapes::StructureShape.new(name: 'AssociatePackageRequest')
     AssociatePackageResponse = Shapes::StructureShape.new(name: 'AssociatePackageResponse')
+    AssociatePackagesRequest = Shapes::StructureShape.new(name: 'AssociatePackagesRequest')
+    AssociatePackagesResponse = Shapes::StructureShape.new(name: 'AssociatePackagesResponse')
     AuthorizeVpcEndpointAccessRequest = Shapes::StructureShape.new(name: 'AuthorizeVpcEndpointAccessRequest')
     AuthorizeVpcEndpointAccessResponse = Shapes::StructureShape.new(name: 'AuthorizeVpcEndpointAccessResponse')
     AuthorizedPrincipal = Shapes::StructureShape.new(name: 'AuthorizedPrincipal')
@@ -181,6 +183,8 @@ module Aws::OpenSearchService
     DisabledOperationException = Shapes::StructureShape.new(name: 'DisabledOperationException')
     DissociatePackageRequest = Shapes::StructureShape.new(name: 'DissociatePackageRequest')
     DissociatePackageResponse = Shapes::StructureShape.new(name: 'DissociatePackageResponse')
+    DissociatePackagesRequest = Shapes::StructureShape.new(name: 'DissociatePackagesRequest')
+    DissociatePackagesResponse = Shapes::StructureShape.new(name: 'DissociatePackagesResponse')
     DomainArn = Shapes::StringShape.new(name: 'DomainArn')
     DomainConfig = Shapes::StructureShape.new(name: 'DomainConfig')
     DomainEndpointOptions = Shapes::StructureShape.new(name: 'DomainEndpointOptions')
@@ -277,8 +281,10 @@ module Aws::OpenSearchService
     Issues = Shapes::ListShape.new(name: 'Issues')
     JWTOptionsInput = Shapes::StructureShape.new(name: 'JWTOptionsInput')
     JWTOptionsOutput = Shapes::StructureShape.new(name: 'JWTOptionsOutput')
+    KeyStoreAccessOption = Shapes::StructureShape.new(name: 'KeyStoreAccessOption')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LastUpdated = Shapes::TimestampShape.new(name: 'LastUpdated')
+    LicenseFilepath = Shapes::StringShape.new(name: 'LicenseFilepath')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     LimitName = Shapes::StringShape.new(name: 'LimitName')
     LimitValue = Shapes::StringShape.new(name: 'LimitValue')
@@ -358,14 +364,25 @@ module Aws::OpenSearchService
     OutboundConnections = Shapes::ListShape.new(name: 'OutboundConnections')
     OverallChangeStatus = Shapes::StringShape.new(name: 'OverallChangeStatus')
     OwnerId = Shapes::StringShape.new(name: 'OwnerId')
+    PackageAssociationConfiguration = Shapes::StructureShape.new(name: 'PackageAssociationConfiguration')
+    PackageConfiguration = Shapes::StructureShape.new(name: 'PackageConfiguration')
     PackageDescription = Shapes::StringShape.new(name: 'PackageDescription')
     PackageDetails = Shapes::StructureShape.new(name: 'PackageDetails')
+    PackageDetailsForAssociation = Shapes::StructureShape.new(name: 'PackageDetailsForAssociation')
+    PackageDetailsForAssociationList = Shapes::ListShape.new(name: 'PackageDetailsForAssociationList')
     PackageDetailsList = Shapes::ListShape.new(name: 'PackageDetailsList')
+    PackageEncryptionOptions = Shapes::StructureShape.new(name: 'PackageEncryptionOptions')
     PackageID = Shapes::StringShape.new(name: 'PackageID')
+    PackageIDList = Shapes::ListShape.new(name: 'PackageIDList')
     PackageName = Shapes::StringShape.new(name: 'PackageName')
+    PackageOwner = Shapes::StringShape.new(name: 'PackageOwner')
+    PackageScopeOperationEnum = Shapes::StringShape.new(name: 'PackageScopeOperationEnum')
     PackageSource = Shapes::StructureShape.new(name: 'PackageSource')
     PackageStatus = Shapes::StringShape.new(name: 'PackageStatus')
     PackageType = Shapes::StringShape.new(name: 'PackageType')
+    PackageUser = Shapes::StringShape.new(name: 'PackageUser')
+    PackageUserList = Shapes::ListShape.new(name: 'PackageUserList')
+    PackageVendingOptions = Shapes::StructureShape.new(name: 'PackageVendingOptions')
     PackageVersion = Shapes::StringShape.new(name: 'PackageVersion')
     PackageVersionHistory = Shapes::StructureShape.new(name: 'PackageVersionHistory')
     PackageVersionHistoryList = Shapes::ListShape.new(name: 'PackageVersionHistoryList')
@@ -388,6 +405,7 @@ module Aws::OpenSearchService
     RejectInboundConnectionResponse = Shapes::StructureShape.new(name: 'RejectInboundConnectionResponse')
     RemoveTagsRequest = Shapes::StructureShape.new(name: 'RemoveTagsRequest')
     RequestId = Shapes::StringShape.new(name: 'RequestId')
+    RequirementLevel = Shapes::StringShape.new(name: 'RequirementLevel')
     ReservationToken = Shapes::StringShape.new(name: 'ReservationToken')
     ReservedInstance = Shapes::StructureShape.new(name: 'ReservedInstance')
     ReservedInstanceList = Shapes::ListShape.new(name: 'ReservedInstanceList')
@@ -463,6 +481,8 @@ module Aws::OpenSearchService
     UpdateDomainConfigResponse = Shapes::StructureShape.new(name: 'UpdateDomainConfigResponse')
     UpdatePackageRequest = Shapes::StructureShape.new(name: 'UpdatePackageRequest')
     UpdatePackageResponse = Shapes::StructureShape.new(name: 'UpdatePackageResponse')
+    UpdatePackageScopeRequest = Shapes::StructureShape.new(name: 'UpdatePackageScopeRequest')
+    UpdatePackageScopeResponse = Shapes::StructureShape.new(name: 'UpdatePackageScopeResponse')
     UpdateScheduledActionRequest = Shapes::StructureShape.new(name: 'UpdateScheduledActionRequest')
     UpdateScheduledActionResponse = Shapes::StructureShape.new(name: 'UpdateScheduledActionResponse')
     UpdateTimestamp = Shapes::TimestampShape.new(name: 'UpdateTimestamp')
@@ -599,10 +619,19 @@ module Aws::OpenSearchService
 
     AssociatePackageRequest.add_member(:package_id, Shapes::ShapeRef.new(shape: PackageID, required: true, location: "uri", location_name: "PackageID"))
     AssociatePackageRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    AssociatePackageRequest.add_member(:prerequisite_package_id_list, Shapes::ShapeRef.new(shape: PackageIDList, location_name: "PrerequisitePackageIDList"))
+    AssociatePackageRequest.add_member(:association_configuration, Shapes::ShapeRef.new(shape: PackageAssociationConfiguration, location_name: "AssociationConfiguration"))
     AssociatePackageRequest.struct_class = Types::AssociatePackageRequest
 
     AssociatePackageResponse.add_member(:domain_package_details, Shapes::ShapeRef.new(shape: DomainPackageDetails, location_name: "DomainPackageDetails"))
     AssociatePackageResponse.struct_class = Types::AssociatePackageResponse
+
+    AssociatePackagesRequest.add_member(:package_list, Shapes::ShapeRef.new(shape: PackageDetailsForAssociationList, required: true, location_name: "PackageList"))
+    AssociatePackagesRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
+    AssociatePackagesRequest.struct_class = Types::AssociatePackagesRequest
+
+    AssociatePackagesResponse.add_member(:domain_package_details_list, Shapes::ShapeRef.new(shape: DomainPackageDetailsList, location_name: "DomainPackageDetailsList"))
+    AssociatePackagesResponse.struct_class = Types::AssociatePackagesResponse
 
     AuthorizeVpcEndpointAccessRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
     AuthorizeVpcEndpointAccessRequest.add_member(:account, Shapes::ShapeRef.new(shape: AWSAccount, location_name: "Account"))
@@ -835,6 +864,10 @@ module Aws::OpenSearchService
     CreatePackageRequest.add_member(:package_type, Shapes::ShapeRef.new(shape: PackageType, required: true, location_name: "PackageType"))
     CreatePackageRequest.add_member(:package_description, Shapes::ShapeRef.new(shape: PackageDescription, location_name: "PackageDescription"))
     CreatePackageRequest.add_member(:package_source, Shapes::ShapeRef.new(shape: PackageSource, required: true, location_name: "PackageSource"))
+    CreatePackageRequest.add_member(:package_configuration, Shapes::ShapeRef.new(shape: PackageConfiguration, location_name: "PackageConfiguration"))
+    CreatePackageRequest.add_member(:engine_version, Shapes::ShapeRef.new(shape: EngineVersion, location_name: "EngineVersion"))
+    CreatePackageRequest.add_member(:package_vending_options, Shapes::ShapeRef.new(shape: PackageVendingOptions, location_name: "PackageVendingOptions"))
+    CreatePackageRequest.add_member(:package_encryption_options, Shapes::ShapeRef.new(shape: PackageEncryptionOptions, location_name: "PackageEncryptionOptions"))
     CreatePackageRequest.struct_class = Types::CreatePackageRequest
 
     CreatePackageResponse.add_member(:package_details, Shapes::ShapeRef.new(shape: PackageDetails, location_name: "PackageDetails"))
@@ -1060,6 +1093,13 @@ module Aws::OpenSearchService
     DissociatePackageResponse.add_member(:domain_package_details, Shapes::ShapeRef.new(shape: DomainPackageDetails, location_name: "DomainPackageDetails"))
     DissociatePackageResponse.struct_class = Types::DissociatePackageResponse
 
+    DissociatePackagesRequest.add_member(:package_list, Shapes::ShapeRef.new(shape: PackageIDList, required: true, location_name: "PackageList"))
+    DissociatePackagesRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
+    DissociatePackagesRequest.struct_class = Types::DissociatePackagesRequest
+
+    DissociatePackagesResponse.add_member(:domain_package_details_list, Shapes::ShapeRef.new(shape: DomainPackageDetailsList, location_name: "DomainPackageDetailsList"))
+    DissociatePackagesResponse.struct_class = Types::DissociatePackagesResponse
+
     DomainConfig.add_member(:engine_version, Shapes::ShapeRef.new(shape: VersionStatus, location_name: "EngineVersion"))
     DomainConfig.add_member(:cluster_config, Shapes::ShapeRef.new(shape: ClusterConfigStatus, location_name: "ClusterConfig"))
     DomainConfig.add_member(:ebs_options, Shapes::ShapeRef.new(shape: EBSOptionsStatus, location_name: "EBSOptions"))
@@ -1136,8 +1176,10 @@ module Aws::OpenSearchService
     DomainPackageDetails.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName"))
     DomainPackageDetails.add_member(:domain_package_status, Shapes::ShapeRef.new(shape: DomainPackageStatus, location_name: "DomainPackageStatus"))
     DomainPackageDetails.add_member(:package_version, Shapes::ShapeRef.new(shape: PackageVersion, location_name: "PackageVersion"))
+    DomainPackageDetails.add_member(:prerequisite_package_id_list, Shapes::ShapeRef.new(shape: PackageIDList, location_name: "PrerequisitePackageIDList"))
     DomainPackageDetails.add_member(:reference_path, Shapes::ShapeRef.new(shape: ReferencePath, location_name: "ReferencePath"))
     DomainPackageDetails.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "ErrorDetails"))
+    DomainPackageDetails.add_member(:association_configuration, Shapes::ShapeRef.new(shape: PackageAssociationConfiguration, location_name: "AssociationConfiguration"))
     DomainPackageDetails.struct_class = Types::DomainPackageDetails
 
     DomainPackageDetailsList.member = Shapes::ShapeRef.new(shape: DomainPackageDetails)
@@ -1391,6 +1433,10 @@ module Aws::OpenSearchService
     JWTOptionsOutput.add_member(:public_key, Shapes::ShapeRef.new(shape: String, location_name: "PublicKey"))
     JWTOptionsOutput.struct_class = Types::JWTOptionsOutput
 
+    KeyStoreAccessOption.add_member(:key_access_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "KeyAccessRoleArn"))
+    KeyStoreAccessOption.add_member(:key_store_access_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "KeyStoreAccessEnabled"))
+    KeyStoreAccessOption.struct_class = Types::KeyStoreAccessOption
+
     LimitExceededException.struct_class = Types::LimitExceededException
 
     LimitValueList.member = Shapes::ShapeRef.new(shape: LimitValue)
@@ -1593,6 +1639,15 @@ module Aws::OpenSearchService
 
     OutboundConnections.member = Shapes::ShapeRef.new(shape: OutboundConnection)
 
+    PackageAssociationConfiguration.add_member(:key_store_access_option, Shapes::ShapeRef.new(shape: KeyStoreAccessOption, location_name: "KeyStoreAccessOption"))
+    PackageAssociationConfiguration.struct_class = Types::PackageAssociationConfiguration
+
+    PackageConfiguration.add_member(:license_requirement, Shapes::ShapeRef.new(shape: RequirementLevel, required: true, location_name: "LicenseRequirement"))
+    PackageConfiguration.add_member(:license_filepath, Shapes::ShapeRef.new(shape: LicenseFilepath, location_name: "LicenseFilepath"))
+    PackageConfiguration.add_member(:configuration_requirement, Shapes::ShapeRef.new(shape: RequirementLevel, required: true, location_name: "ConfigurationRequirement"))
+    PackageConfiguration.add_member(:requires_restart_for_configuration_update, Shapes::ShapeRef.new(shape: Boolean, location_name: "RequiresRestartForConfigurationUpdate"))
+    PackageConfiguration.struct_class = Types::PackageConfiguration
+
     PackageDetails.add_member(:package_id, Shapes::ShapeRef.new(shape: PackageID, location_name: "PackageID"))
     PackageDetails.add_member(:package_name, Shapes::ShapeRef.new(shape: PackageName, location_name: "PackageName"))
     PackageDetails.add_member(:package_type, Shapes::ShapeRef.new(shape: PackageType, location_name: "PackageType"))
@@ -1604,18 +1659,42 @@ module Aws::OpenSearchService
     PackageDetails.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "ErrorDetails"))
     PackageDetails.add_member(:engine_version, Shapes::ShapeRef.new(shape: EngineVersion, location_name: "EngineVersion"))
     PackageDetails.add_member(:available_plugin_properties, Shapes::ShapeRef.new(shape: PluginProperties, location_name: "AvailablePluginProperties"))
+    PackageDetails.add_member(:available_package_configuration, Shapes::ShapeRef.new(shape: PackageConfiguration, location_name: "AvailablePackageConfiguration"))
+    PackageDetails.add_member(:allow_listed_user_list, Shapes::ShapeRef.new(shape: PackageUserList, location_name: "AllowListedUserList"))
+    PackageDetails.add_member(:package_owner, Shapes::ShapeRef.new(shape: PackageOwner, location_name: "PackageOwner"))
+    PackageDetails.add_member(:package_vending_options, Shapes::ShapeRef.new(shape: PackageVendingOptions, location_name: "PackageVendingOptions"))
+    PackageDetails.add_member(:package_encryption_options, Shapes::ShapeRef.new(shape: PackageEncryptionOptions, location_name: "PackageEncryptionOptions"))
     PackageDetails.struct_class = Types::PackageDetails
 
+    PackageDetailsForAssociation.add_member(:package_id, Shapes::ShapeRef.new(shape: PackageID, required: true, location_name: "PackageID"))
+    PackageDetailsForAssociation.add_member(:prerequisite_package_id_list, Shapes::ShapeRef.new(shape: PackageIDList, location_name: "PrerequisitePackageIDList"))
+    PackageDetailsForAssociation.add_member(:association_configuration, Shapes::ShapeRef.new(shape: PackageAssociationConfiguration, location_name: "AssociationConfiguration"))
+    PackageDetailsForAssociation.struct_class = Types::PackageDetailsForAssociation
+
+    PackageDetailsForAssociationList.member = Shapes::ShapeRef.new(shape: PackageDetailsForAssociation)
+
     PackageDetailsList.member = Shapes::ShapeRef.new(shape: PackageDetails)
+
+    PackageEncryptionOptions.add_member(:kms_key_identifier, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyIdentifier"))
+    PackageEncryptionOptions.add_member(:encryption_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "EncryptionEnabled"))
+    PackageEncryptionOptions.struct_class = Types::PackageEncryptionOptions
+
+    PackageIDList.member = Shapes::ShapeRef.new(shape: PackageID)
 
     PackageSource.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: S3BucketName, location_name: "S3BucketName"))
     PackageSource.add_member(:s3_key, Shapes::ShapeRef.new(shape: S3Key, location_name: "S3Key"))
     PackageSource.struct_class = Types::PackageSource
 
+    PackageUserList.member = Shapes::ShapeRef.new(shape: PackageUser)
+
+    PackageVendingOptions.add_member(:vending_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "VendingEnabled"))
+    PackageVendingOptions.struct_class = Types::PackageVendingOptions
+
     PackageVersionHistory.add_member(:package_version, Shapes::ShapeRef.new(shape: PackageVersion, location_name: "PackageVersion"))
     PackageVersionHistory.add_member(:commit_message, Shapes::ShapeRef.new(shape: CommitMessage, location_name: "CommitMessage"))
     PackageVersionHistory.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "CreatedAt"))
     PackageVersionHistory.add_member(:plugin_properties, Shapes::ShapeRef.new(shape: PluginProperties, location_name: "PluginProperties"))
+    PackageVersionHistory.add_member(:package_configuration, Shapes::ShapeRef.new(shape: PackageConfiguration, location_name: "PackageConfiguration"))
     PackageVersionHistory.struct_class = Types::PackageVersionHistory
 
     PackageVersionHistoryList.member = Shapes::ShapeRef.new(shape: PackageVersionHistory)
@@ -1858,10 +1937,22 @@ module Aws::OpenSearchService
     UpdatePackageRequest.add_member(:package_source, Shapes::ShapeRef.new(shape: PackageSource, required: true, location_name: "PackageSource"))
     UpdatePackageRequest.add_member(:package_description, Shapes::ShapeRef.new(shape: PackageDescription, location_name: "PackageDescription"))
     UpdatePackageRequest.add_member(:commit_message, Shapes::ShapeRef.new(shape: CommitMessage, location_name: "CommitMessage"))
+    UpdatePackageRequest.add_member(:package_configuration, Shapes::ShapeRef.new(shape: PackageConfiguration, location_name: "PackageConfiguration"))
+    UpdatePackageRequest.add_member(:package_encryption_options, Shapes::ShapeRef.new(shape: PackageEncryptionOptions, location_name: "PackageEncryptionOptions"))
     UpdatePackageRequest.struct_class = Types::UpdatePackageRequest
 
     UpdatePackageResponse.add_member(:package_details, Shapes::ShapeRef.new(shape: PackageDetails, location_name: "PackageDetails"))
     UpdatePackageResponse.struct_class = Types::UpdatePackageResponse
+
+    UpdatePackageScopeRequest.add_member(:package_id, Shapes::ShapeRef.new(shape: PackageID, required: true, location_name: "PackageID"))
+    UpdatePackageScopeRequest.add_member(:operation, Shapes::ShapeRef.new(shape: PackageScopeOperationEnum, required: true, location_name: "Operation"))
+    UpdatePackageScopeRequest.add_member(:package_user_list, Shapes::ShapeRef.new(shape: PackageUserList, required: true, location_name: "PackageUserList"))
+    UpdatePackageScopeRequest.struct_class = Types::UpdatePackageScopeRequest
+
+    UpdatePackageScopeResponse.add_member(:package_id, Shapes::ShapeRef.new(shape: PackageID, location_name: "PackageID"))
+    UpdatePackageScopeResponse.add_member(:operation, Shapes::ShapeRef.new(shape: PackageScopeOperationEnum, location_name: "Operation"))
+    UpdatePackageScopeResponse.add_member(:package_user_list, Shapes::ShapeRef.new(shape: PackageUserList, location_name: "PackageUserList"))
+    UpdatePackageScopeResponse.struct_class = Types::UpdatePackageScopeResponse
 
     UpdateScheduledActionRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
     UpdateScheduledActionRequest.add_member(:action_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ActionID"))
@@ -2042,6 +2133,20 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:associate_packages, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociatePackages"
+        o.http_method = "POST"
+        o.http_request_uri = "/2021-01-01/packages/associateMultiple"
+        o.input = Shapes::ShapeRef.new(shape: AssociatePackagesRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociatePackagesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
       end)
 
       api.add_operation(:authorize_vpc_endpoint_access, Seahorse::Model::Operation.new.tap do |o|
@@ -2470,6 +2575,20 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:dissociate_packages, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DissociatePackages"
+        o.http_method = "POST"
+        o.http_request_uri = "/2021-01-01/packages/dissociateMultiple"
+        o.input = Shapes::ShapeRef.new(shape: DissociatePackagesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DissociatePackagesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
       end)
 
       api.add_operation(:get_application, Seahorse::Model::Operation.new.tap do |o|
@@ -2908,6 +3027,19 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:update_package_scope, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdatePackageScope"
+        o.http_method = "POST"
+        o.http_request_uri = "/2021-01-01/packages/updateScope"
+        o.input = Shapes::ShapeRef.new(shape: UpdatePackageScopeRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdatePackageScopeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
       end)
 
       api.add_operation(:update_scheduled_action, Seahorse::Model::Operation.new.tap do |o|

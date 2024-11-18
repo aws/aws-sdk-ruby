@@ -221,6 +221,37 @@ module Aws::FIS
       include Aws::Structure
     end
 
+    # Specifies the configuration for experiment reports.
+    #
+    # @!attribute [rw] outputs
+    #   The output destinations of the experiment report.
+    #   @return [Types::ExperimentTemplateReportConfigurationOutputsInput]
+    #
+    # @!attribute [rw] data_sources
+    #   The data sources for the experiment report.
+    #   @return [Types::ExperimentTemplateReportConfigurationDataSourcesInput]
+    #
+    # @!attribute [rw] pre_experiment_duration
+    #   The duration before the experiment start time for the data sources
+    #   to include in the report.
+    #   @return [String]
+    #
+    # @!attribute [rw] post_experiment_duration
+    #   The duration after the experiment end time for the data sources to
+    #   include in the report.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/CreateExperimentTemplateReportConfigurationInput AWS API Documentation
+    #
+    class CreateExperimentTemplateReportConfigurationInput < Struct.new(
+      :outputs,
+      :data_sources,
+      :pre_experiment_duration,
+      :post_experiment_duration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
@@ -262,6 +293,10 @@ module Aws::FIS
     #   The experiment options for the experiment template.
     #   @return [Types::CreateExperimentTemplateExperimentOptionsInput]
     #
+    # @!attribute [rw] experiment_report_configuration
+    #   The experiment report configuration for the experiment template.
+    #   @return [Types::CreateExperimentTemplateReportConfigurationInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/CreateExperimentTemplateRequest AWS API Documentation
     #
     class CreateExperimentTemplateRequest < Struct.new(
@@ -273,7 +308,8 @@ module Aws::FIS
       :role_arn,
       :tags,
       :log_configuration,
-      :experiment_options)
+      :experiment_options,
+      :experiment_report_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -540,6 +576,14 @@ module Aws::FIS
     #   The count of target account configurations for the experiment.
     #   @return [Integer]
     #
+    # @!attribute [rw] experiment_report_configuration
+    #   The experiment report configuration for the experiment.
+    #   @return [Types::ExperimentReportConfiguration]
+    #
+    # @!attribute [rw] experiment_report
+    #   The experiment report for the experiment.
+    #   @return [Types::ExperimentReport]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/Experiment AWS API Documentation
     #
     class Experiment < Struct.new(
@@ -557,7 +601,9 @@ module Aws::FIS
       :tags,
       :log_configuration,
       :experiment_options,
-      :target_account_configurations_count)
+      :target_account_configurations_count,
+      :experiment_report_configuration,
+      :experiment_report)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -717,6 +763,186 @@ module Aws::FIS
       :account_targeting,
       :empty_target_resolution_mode,
       :actions_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the experiment report.
+    #
+    # @!attribute [rw] state
+    #   The state of the experiment report.
+    #   @return [Types::ExperimentReportState]
+    #
+    # @!attribute [rw] s3_reports
+    #   The S3 destination of the experiment report.
+    #   @return [Array<Types::ExperimentReportS3Report>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentReport AWS API Documentation
+    #
+    class ExperimentReport < Struct.new(
+      :state,
+      :s3_reports)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the report configuration for the experiment. For more
+    # information, see [Experiment report configurations for AWS FIS][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fis/latest/userguide/experiment-report-configuration
+    #
+    # @!attribute [rw] outputs
+    #   The output destinations of the experiment report.
+    #   @return [Types::ExperimentReportConfigurationOutputs]
+    #
+    # @!attribute [rw] data_sources
+    #   The data sources for the experiment report.
+    #   @return [Types::ExperimentReportConfigurationDataSources]
+    #
+    # @!attribute [rw] pre_experiment_duration
+    #   The duration before the experiment start time for the data sources
+    #   to include in the report.
+    #   @return [String]
+    #
+    # @!attribute [rw] post_experiment_duration
+    #   The duration after the experiment end time for the data sources to
+    #   include in the report.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentReportConfiguration AWS API Documentation
+    #
+    class ExperimentReportConfiguration < Struct.new(
+      :outputs,
+      :data_sources,
+      :pre_experiment_duration,
+      :post_experiment_duration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the CloudWatch dashboard to include in the experiment
+    # report. The dashboard widgets will be captured as snapshot graphs
+    # within the report.
+    #
+    # @!attribute [rw] dashboard_identifier
+    #   The Amazon Resource Name (ARN) of the CloudWatch dashboard to
+    #   include in the experiment report.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentReportConfigurationCloudWatchDashboard AWS API Documentation
+    #
+    class ExperimentReportConfigurationCloudWatchDashboard < Struct.new(
+      :dashboard_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the data sources for the experiment report.
+    #
+    # @!attribute [rw] cloud_watch_dashboards
+    #   The CloudWatch dashboards to include as data sources in the
+    #   experiment report.
+    #   @return [Array<Types::ExperimentReportConfigurationCloudWatchDashboard>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentReportConfigurationDataSources AWS API Documentation
+    #
+    class ExperimentReportConfigurationDataSources < Struct.new(
+      :cloud_watch_dashboards)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the output destinations of the experiment report.
+    #
+    # @!attribute [rw] s3_configuration
+    #   The S3 destination for the experiment report.
+    #   @return [Types::ExperimentReportConfigurationOutputsS3Configuration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentReportConfigurationOutputs AWS API Documentation
+    #
+    class ExperimentReportConfigurationOutputs < Struct.new(
+      :s3_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the S3 destination for the experiment report.
+    #
+    # @!attribute [rw] bucket_name
+    #   The name of the S3 bucket where the experiment report will be
+    #   stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   The prefix of the S3 bucket where the experiment report will be
+    #   stored.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentReportConfigurationOutputsS3Configuration AWS API Documentation
+    #
+    class ExperimentReportConfigurationOutputsS3Configuration < Struct.new(
+      :bucket_name,
+      :prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the error when experiment report generation has failed.
+    #
+    # @!attribute [rw] code
+    #   The error code for the failed experiment report generation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentReportError AWS API Documentation
+    #
+    class ExperimentReportError < Struct.new(
+      :code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the S3 destination for the report.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the generated report.
+    #   @return [String]
+    #
+    # @!attribute [rw] report_type
+    #   The report type for the experiment report.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentReportS3Report AWS API Documentation
+    #
+    class ExperimentReportS3Report < Struct.new(
+      :arn,
+      :report_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the state of the experiment report generation.
+    #
+    # @!attribute [rw] status
+    #   The state of the experiment report generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason for the state of the experiment report generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   The error information of the experiment when the experiment report
+    #   generation has failed.
+    #   @return [Types::ExperimentReportError]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentReportState AWS API Documentation
+    #
+    class ExperimentReportState < Struct.new(
+      :status,
+      :reason,
+      :error)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -993,6 +1219,10 @@ module Aws::FIS
     #   template.
     #   @return [Integer]
     #
+    # @!attribute [rw] experiment_report_configuration
+    #   Describes the report configuration for the experiment template.
+    #   @return [Types::ExperimentTemplateReportConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentTemplate AWS API Documentation
     #
     class ExperimentTemplate < Struct.new(
@@ -1008,7 +1238,8 @@ module Aws::FIS
       :tags,
       :log_configuration,
       :experiment_options,
-      :target_account_configurations_count)
+      :target_account_configurations_count,
+      :experiment_report_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1119,6 +1350,116 @@ module Aws::FIS
       :cloud_watch_logs_configuration,
       :s3_configuration,
       :log_schema_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the experiment report configuration. For more information,
+    # see [Experiment report configurations for AWS FIS][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fis/latest/userguide/experiment-report-configuration
+    #
+    # @!attribute [rw] outputs
+    #   Describes the output destinations of the experiment report.
+    #   @return [Types::ExperimentTemplateReportConfigurationOutputs]
+    #
+    # @!attribute [rw] data_sources
+    #   The data sources for the experiment report.
+    #   @return [Types::ExperimentTemplateReportConfigurationDataSources]
+    #
+    # @!attribute [rw] pre_experiment_duration
+    #   The duration before the experiment start time for the data sources
+    #   to include in the report.
+    #   @return [String]
+    #
+    # @!attribute [rw] post_experiment_duration
+    #   The duration after the experiment end time for the data sources to
+    #   include in the report.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentTemplateReportConfiguration AWS API Documentation
+    #
+    class ExperimentTemplateReportConfiguration < Struct.new(
+      :outputs,
+      :data_sources,
+      :pre_experiment_duration,
+      :post_experiment_duration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The CloudWatch dashboards to include as data sources in the experiment
+    # report.
+    #
+    # @!attribute [rw] dashboard_identifier
+    #   The Amazon Resource Name (ARN) of the CloudWatch dashboard to
+    #   include in the experiment report.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentTemplateReportConfigurationCloudWatchDashboard AWS API Documentation
+    #
+    class ExperimentTemplateReportConfigurationCloudWatchDashboard < Struct.new(
+      :dashboard_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the data sources for the experiment report.
+    #
+    # @!attribute [rw] cloud_watch_dashboards
+    #   The CloudWatch dashboards to include as data sources in the
+    #   experiment report.
+    #   @return [Array<Types::ExperimentTemplateReportConfigurationCloudWatchDashboard>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentTemplateReportConfigurationDataSources AWS API Documentation
+    #
+    class ExperimentTemplateReportConfigurationDataSources < Struct.new(
+      :cloud_watch_dashboards)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the data sources for the experiment report.
+    #
+    # @!attribute [rw] cloud_watch_dashboards
+    #   The CloudWatch dashboards to include as data sources in the
+    #   experiment report.
+    #   @return [Array<Types::ReportConfigurationCloudWatchDashboardInput>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentTemplateReportConfigurationDataSourcesInput AWS API Documentation
+    #
+    class ExperimentTemplateReportConfigurationDataSourcesInput < Struct.new(
+      :cloud_watch_dashboards)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The output destinations of the experiment report.
+    #
+    # @!attribute [rw] s3_configuration
+    #   The S3 destination for the experiment report.
+    #   @return [Types::ReportConfigurationS3Output]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentTemplateReportConfigurationOutputs AWS API Documentation
+    #
+    class ExperimentTemplateReportConfigurationOutputs < Struct.new(
+      :s3_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the outputs for the experiment templates.
+    #
+    # @!attribute [rw] s3_configuration
+    #   The S3 destination for the experiment report.
+    #   @return [Types::ReportConfigurationS3OutputInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentTemplateReportConfigurationOutputsInput AWS API Documentation
+    #
+    class ExperimentTemplateReportConfigurationOutputsInput < Struct.new(
+      :s3_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1786,6 +2127,63 @@ module Aws::FIS
       include Aws::Structure
     end
 
+    # Specifies the CloudWatch dashboard for the experiment report.
+    #
+    # @!attribute [rw] dashboard_identifier
+    #   The Amazon Resource Name (ARN) of the CloudWatch dashboard to
+    #   include in the experiment report.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ReportConfigurationCloudWatchDashboardInput AWS API Documentation
+    #
+    class ReportConfigurationCloudWatchDashboardInput < Struct.new(
+      :dashboard_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the S3 destination for the experiment report.
+    #
+    # @!attribute [rw] bucket_name
+    #   The name of the S3 bucket where the experiment report will be
+    #   stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   The prefix of the S3 bucket where the experiment report will be
+    #   stored.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ReportConfigurationS3Output AWS API Documentation
+    #
+    class ReportConfigurationS3Output < Struct.new(
+      :bucket_name,
+      :prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the S3 destination for the experiment report.
+    #
+    # @!attribute [rw] bucket_name
+    #   The name of the S3 bucket where the experiment report will be
+    #   stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   The prefix of the S3 bucket where the experiment report will be
+    #   stored.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ReportConfigurationS3OutputInput AWS API Documentation
+    #
+    class ReportConfigurationS3OutputInput < Struct.new(
+      :bucket_name,
+      :prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a resolved target.
     #
     # @!attribute [rw] resource_type
@@ -2189,6 +2587,37 @@ module Aws::FIS
       include Aws::Structure
     end
 
+    # Specifies the input for the experiment report configuration.
+    #
+    # @!attribute [rw] outputs
+    #   Describes the output destinations of the experiment report.
+    #   @return [Types::ExperimentTemplateReportConfigurationOutputsInput]
+    #
+    # @!attribute [rw] data_sources
+    #   The data sources for the experiment report.
+    #   @return [Types::ExperimentTemplateReportConfigurationDataSourcesInput]
+    #
+    # @!attribute [rw] pre_experiment_duration
+    #   The duration before the experiment start time for the data sources
+    #   to include in the report.
+    #   @return [String]
+    #
+    # @!attribute [rw] post_experiment_duration
+    #   The duration after the experiment end time for the data sources to
+    #   include in the report.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/UpdateExperimentTemplateReportConfigurationInput AWS API Documentation
+    #
+    class UpdateExperimentTemplateReportConfigurationInput < Struct.new(
+      :outputs,
+      :data_sources,
+      :pre_experiment_duration,
+      :post_experiment_duration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] id
     #   The ID of the experiment template.
     #   @return [String]
@@ -2222,6 +2651,10 @@ module Aws::FIS
     #   The experiment options for the experiment template.
     #   @return [Types::UpdateExperimentTemplateExperimentOptionsInput]
     #
+    # @!attribute [rw] experiment_report_configuration
+    #   The experiment report configuration for the experiment template.
+    #   @return [Types::UpdateExperimentTemplateReportConfigurationInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/UpdateExperimentTemplateRequest AWS API Documentation
     #
     class UpdateExperimentTemplateRequest < Struct.new(
@@ -2232,7 +2665,8 @@ module Aws::FIS
       :actions,
       :role_arn,
       :log_configuration,
-      :experiment_options)
+      :experiment_options,
+      :experiment_report_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

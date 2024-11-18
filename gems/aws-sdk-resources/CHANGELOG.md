@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+3.214.0 (2024-11-15)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-connectcampaignsv2` gem.
+
+3.213.0 (2024-11-14)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-partnercentralselling` gem.
+
+3.212.0 (2024-11-13)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-billing` gem.
+
 3.211.0 (2024-10-30)
 ------------------
 

@@ -92,7 +92,7 @@ module Aws::IoTDataPlane
     #   that represents two user properties. Note that it will be
     #   base64-encoded:
     #
-    #   `[\{"deviceName": "alpha"\}, \{"deviceCnt": "45"\}]`
+    #   `[{"deviceName": "alpha"}, {"deviceCnt": "45"}]`
     #   @return [String]
     #
     class GetRetainedMessageResponse < Struct.new(
@@ -287,7 +287,7 @@ module Aws::IoTDataPlane
     #   which represents two User Properties. Note that it needs to be
     #   base64-encoded:
     #
-    #   `[\{"deviceName": "alpha"\}, \{"deviceCnt": "45"\}]`
+    #   `[{"deviceName": "alpha"}, {"deviceCnt": "45"}]`
     #   @return [String]
     #
     # @!attribute [rw] payload_format_indicator

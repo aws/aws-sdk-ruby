@@ -8667,7 +8667,7 @@ module Aws::Kendra
     #
     #   * ***/*.png*—All .png files in all directories.
     #
-    #   * ***/*.\\\{png, ico, md\\}*—All .png, .ico or .md files in all
+    #   * ***/*.\{png, ico, md}*—All .png, .ico or .md files in all
     #     directories.
     #
     #   * */myapp/src/**/*.ts*—All .ts files inside src directory (and
@@ -8705,7 +8705,7 @@ module Aws::Kendra
     #
     #   * ***/*.png*—All .png files in all directories.
     #
-    #   * ***/*.\\\{png, ico, md\\}*—All .png, .ico or .md files in all
+    #   * ***/*.\{png, ico, md}*—All .png, .ico or .md files in all
     #     directories.
     #
     #   * */myapp/src/**/*.ts*—All .ts files inside src directory (and
@@ -9227,7 +9227,7 @@ module Aws::Kendra
     # @!attribute [rw] host_url
     #   The ServiceNow instance that the data source connects to. The host
     #   endpoint should look like the following:
-    #   *\\\{instance\\}.service-now.com.*
+    #   *\{instance}.service-now.com.*
     #   @return [String]
     #
     # @!attribute [rw] secret_arn

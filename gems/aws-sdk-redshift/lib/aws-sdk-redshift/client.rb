@@ -2738,6 +2738,13 @@ module Aws::Redshift
     #             },
     #           },
     #         ],
+    #         s3_access_grants: [
+    #           {
+    #             read_write_access: {
+    #               authorization: "Enabled", # required, accepts Enabled, Disabled
+    #             },
+    #           },
+    #         ],
     #       },
     #     ],
     #   })
@@ -2759,6 +2766,8 @@ module Aws::Redshift
     #   resp.redshift_idc_application.service_integrations #=> Array
     #   resp.redshift_idc_application.service_integrations[0].lake_formation #=> Array
     #   resp.redshift_idc_application.service_integrations[0].lake_formation[0].lake_formation_query.authorization #=> String, one of "Enabled", "Disabled"
+    #   resp.redshift_idc_application.service_integrations[0].s3_access_grants #=> Array
+    #   resp.redshift_idc_application.service_integrations[0].s3_access_grants[0].read_write_access.authorization #=> String, one of "Enabled", "Disabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateRedshiftIdcApplication AWS API Documentation
     #
@@ -6602,6 +6611,8 @@ module Aws::Redshift
     #   resp.redshift_idc_applications[0].service_integrations #=> Array
     #   resp.redshift_idc_applications[0].service_integrations[0].lake_formation #=> Array
     #   resp.redshift_idc_applications[0].service_integrations[0].lake_formation[0].lake_formation_query.authorization #=> String, one of "Enabled", "Disabled"
+    #   resp.redshift_idc_applications[0].service_integrations[0].s3_access_grants #=> Array
+    #   resp.redshift_idc_applications[0].service_integrations[0].s3_access_grants[0].read_write_access.authorization #=> String, one of "Enabled", "Disabled"
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeRedshiftIdcApplications AWS API Documentation
@@ -10349,6 +10360,13 @@ module Aws::Redshift
     #             },
     #           },
     #         ],
+    #         s3_access_grants: [
+    #           {
+    #             read_write_access: {
+    #               authorization: "Enabled", # required, accepts Enabled, Disabled
+    #             },
+    #           },
+    #         ],
     #       },
     #     ],
     #   })
@@ -10370,6 +10388,8 @@ module Aws::Redshift
     #   resp.redshift_idc_application.service_integrations #=> Array
     #   resp.redshift_idc_application.service_integrations[0].lake_formation #=> Array
     #   resp.redshift_idc_application.service_integrations[0].lake_formation[0].lake_formation_query.authorization #=> String, one of "Enabled", "Disabled"
+    #   resp.redshift_idc_application.service_integrations[0].s3_access_grants #=> Array
+    #   resp.redshift_idc_application.service_integrations[0].s3_access_grants[0].read_write_access.authorization #=> String, one of "Enabled", "Disabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyRedshiftIdcApplication AWS API Documentation
     #
@@ -11340,7 +11360,6 @@ module Aws::Redshift
     #   * ra3.4xlarge
     #
     #   * ra3.16xlarge
-    #
     # * The type of nodes that you add must match the node type for the
     #   cluster.
     #
@@ -12735,7 +12754,7 @@ module Aws::Redshift
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.129.0'
+      context[:gem_version] = '1.132.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

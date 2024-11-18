@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2024-11-13)
+------------------
+
+* Feature - Add new query type Routing_Suggestions regarding querying interface
+
 1.31.0 (2024-10-18)
 ------------------
 

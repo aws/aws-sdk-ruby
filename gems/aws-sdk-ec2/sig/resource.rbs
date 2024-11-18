@@ -232,6 +232,9 @@ module Aws
                               },
                               ?disable_api_stop: bool,
                               ?enable_primary_ipv_6: bool,
+                              ?operator: {
+                                principal: ::String?
+                              },
                               ?dry_run: bool,
                               ?disable_api_termination: bool,
                               ?instance_initiated_shutdown_behavior: ("stop" | "terminate"),
@@ -413,6 +416,9 @@ module Aws
                                         udp_stream_timeout: ::Integer?,
                                         udp_timeout: ::Integer?
                                       },
+                                      ?operator: {
+                                        principal: ::String?
+                                      },
                                       subnet_id: ::String,
                                       ?description: ::String,
                                       ?private_ip_address: ::String,
@@ -593,6 +599,9 @@ module Aws
                            ?multi_attach_enabled: bool,
                            ?throughput: ::Integer,
                            ?client_token: ::String,
+                           ?operator: {
+                             principal: ::String?
+                           },
                            ?dry_run: bool
                          ) -> Volume
                        | (?Hash[Symbol, untyped]) -> Volume

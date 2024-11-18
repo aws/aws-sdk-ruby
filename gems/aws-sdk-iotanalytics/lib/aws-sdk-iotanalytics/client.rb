@@ -453,8 +453,8 @@ module Aws::IoTAnalytics
     #   The name of the channel where the messages are sent.
     #
     # @option params [required, Array<Types::Message>] :messages
-    #   The list of messages to be sent. Each message has the format: \\\{
-    #   "messageId": "string", "payload": "string"\\}.
+    #   The list of messages to be sent. Each message has the format: \{
+    #   "messageId": "string", "payload": "string"}.
     #
     #   The field names of message payloads (data) that you send to IoT
     #   Analytics:
@@ -474,9 +474,9 @@ module Aws::IoTAnalytics
     #   * Are case insensitive. (Fields named foo and FOO in the same payload
     #     are considered duplicates.)
     #
-    #   For example, \\\{"temp\_01": 29\\} or \\\{"\_temp\_01": 29\\} are
-    #   valid, but \\\{"temp-01": 29\\}, \\\{"01\_temp": 29\\} or
-    #   \\\{"\_\_temp\_01": 29\\} are invalid in message payloads.
+    #   For example, \{"temp\_01": 29} or \{"\_temp\_01": 29} are valid,
+    #   but \{"temp-01": 29}, \{"01\_temp": 29} or \{"\_\_temp\_01": 29}
+    #   are invalid in message payloads.
     #
     # @return [Types::BatchPutMessageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -943,8 +943,8 @@ module Aws::IoTAnalytics
     #   a `channel` and a `datastore` activity. Each entry in the list must
     #   contain only one activity. For example:
     #
-    #   `pipelineActivities = [ \{ "channel": \{ ... \} \}, \{ "lambda": \{
-    #   ... \} \}, ... ]`
+    #   `pipelineActivities = [ { "channel": { ... } }, { "lambda": { ... } },
+    #   ... ]`
     #
     # @option params [Array<Types::Tag>] :tags
     #   Metadata which can be used to manage the pipeline.
@@ -2263,8 +2263,8 @@ module Aws::IoTAnalytics
     #   a `channel` and a `datastore` activity. Each entry in the list must
     #   contain only one activity. For example:
     #
-    #   `pipelineActivities = [ \{ "channel": \{ ... \} \}, \{ "lambda": \{
-    #   ... \} \}, ... ]`
+    #   `pipelineActivities = [ { "channel": { ... } }, { "lambda": { ... } },
+    #   ... ]`
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2360,7 +2360,7 @@ module Aws::IoTAnalytics
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iotanalytics'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

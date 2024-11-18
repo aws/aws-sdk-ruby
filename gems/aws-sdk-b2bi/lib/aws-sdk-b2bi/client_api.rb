@@ -55,6 +55,11 @@ module Aws::B2bi
     FileLocation = Shapes::StringShape.new(name: 'FileLocation')
     FormatOptions = Shapes::UnionShape.new(name: 'FormatOptions')
     FromFormat = Shapes::StringShape.new(name: 'FromFormat')
+    GenerateMappingInputFileContent = Shapes::StringShape.new(name: 'GenerateMappingInputFileContent')
+    GenerateMappingOutputFileContent = Shapes::StringShape.new(name: 'GenerateMappingOutputFileContent')
+    GenerateMappingRequest = Shapes::StructureShape.new(name: 'GenerateMappingRequest')
+    GenerateMappingResponse = Shapes::StructureShape.new(name: 'GenerateMappingResponse')
+    GenerateMappingResponseMappingAccuracyFloat = Shapes::FloatShape.new(name: 'GenerateMappingResponseMappingAccuracyFloat')
     GetCapabilityRequest = Shapes::StructureShape.new(name: 'GetCapabilityRequest')
     GetCapabilityResponse = Shapes::StructureShape.new(name: 'GetCapabilityResponse')
     GetPartnershipRequest = Shapes::StructureShape.new(name: 'GetPartnershipRequest')
@@ -336,6 +341,15 @@ module Aws::B2bi
     FormatOptions.add_member_subclass(:x12, Types::FormatOptions::X12)
     FormatOptions.add_member_subclass(:unknown, Types::FormatOptions::Unknown)
     FormatOptions.struct_class = Types::FormatOptions
+
+    GenerateMappingRequest.add_member(:input_file_content, Shapes::ShapeRef.new(shape: GenerateMappingInputFileContent, required: true, location_name: "inputFileContent"))
+    GenerateMappingRequest.add_member(:output_file_content, Shapes::ShapeRef.new(shape: GenerateMappingOutputFileContent, required: true, location_name: "outputFileContent"))
+    GenerateMappingRequest.add_member(:mapping_type, Shapes::ShapeRef.new(shape: MappingType, required: true, location_name: "mappingType"))
+    GenerateMappingRequest.struct_class = Types::GenerateMappingRequest
+
+    GenerateMappingResponse.add_member(:mapping_template, Shapes::ShapeRef.new(shape: String, required: true, location_name: "mappingTemplate"))
+    GenerateMappingResponse.add_member(:mapping_accuracy, Shapes::ShapeRef.new(shape: GenerateMappingResponseMappingAccuracyFloat, location_name: "mappingAccuracy"))
+    GenerateMappingResponse.struct_class = Types::GenerateMappingResponse
 
     GetCapabilityRequest.add_member(:capability_id, Shapes::ShapeRef.new(shape: CapabilityId, required: true, location_name: "capabilityId"))
     GetCapabilityRequest.struct_class = Types::GetCapabilityRequest
@@ -878,6 +892,18 @@ module Aws::B2bi
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:generate_mapping, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GenerateMapping"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GenerateMappingRequest)
+        o.output = Shapes::ShapeRef.new(shape: GenerateMappingResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 

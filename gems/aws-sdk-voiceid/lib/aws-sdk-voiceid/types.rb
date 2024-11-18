@@ -2095,8 +2095,8 @@ module Aws::VoiceID
     end
 
     # The tags used to organize, track, or control access for this resource.
-    # For example, \\\{ "tags": \\\{"key1":"value1",
-    # "key2":"value2"\\} \\}.
+    # For example, \{ "tags": \{"key1":"value1", "key2":"value2"}
+    # }.
     #
     # @!attribute [rw] key
     #   The first part of a key:value pair that forms a tag associated with

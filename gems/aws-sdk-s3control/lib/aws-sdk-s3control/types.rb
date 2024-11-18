@@ -93,8 +93,8 @@ module Aws::S3Control
     #   if one exists.
     #
     #   <note markdown="1"> This element is empty if this access point is an Amazon S3 on
-    #   Outposts access point that is used by other Amazon Web
-    #   Servicesservices.
+    #   Outposts access point that is used by other Amazon Web Services
+    #   services.
     #
     #    </note>
     #   @return [Types::VpcConfiguration]
@@ -2766,8 +2766,8 @@ module Aws::S3Control
     #   specified access point.
     #
     #   <note markdown="1"> This element is empty if this access point is an Amazon S3 on
-    #   Outposts access point that is used by other Amazon Web
-    #   Servicesservices.
+    #   Outposts access point that is used by other Amazon Web Services
+    #   services.
     #
     #    </note>
     #   @return [Types::VpcConfiguration]
@@ -5967,7 +5967,8 @@ module Aws::S3Control
     #   Specifies whether Amazon S3 should restrict public bucket policies
     #   for buckets in this account. Setting this element to `TRUE`
     #   restricts access to buckets with public policies to only Amazon Web
-    #   Servicesservice principals and authorized users within this account.
+    #   Services service principals and authorized users within this
+    #   account.
     #
     #   Enabling this setting doesn't affect previously stored bucket
     #   policies, except that public and cross-account access within any

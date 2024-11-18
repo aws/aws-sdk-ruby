@@ -2815,20 +2815,17 @@ module Aws::ElasticBeanstalk
     #       `contains` \| `in` \| `not_in`
     #
     #     ^
-    #
     #   * `Attribute = LifecycleState`:
     #
     #     * `Operator`: `=` \| `!=` \| `in` \| `not_in`
     #
     #     * `Values`: `beta` \| `supported` \| `deprecated` \| `retired`
-    #
     #   * `Attribute = PlatformName`:
     #
     #     * `Operator`: `=` \| `!=` \| `begins_with` \| `ends_with` \|
     #       `contains` \| `in` \| `not_in`
     #
     #     ^
-    #
     #   * `Attribute = TierType`:
     #
     #     * `Operator`: `=` \| `!=`

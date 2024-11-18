@@ -26,6 +26,9 @@ module Aws::ApplicationSignals
     BatchGetServiceLevelObjectiveBudgetReportOutput = Shapes::StructureShape.new(name: 'BatchGetServiceLevelObjectiveBudgetReportOutput')
     BudgetRequestsRemaining = Shapes::IntegerShape.new(name: 'BudgetRequestsRemaining')
     BudgetSecondsRemaining = Shapes::IntegerShape.new(name: 'BudgetSecondsRemaining')
+    BurnRateConfiguration = Shapes::StructureShape.new(name: 'BurnRateConfiguration')
+    BurnRateConfigurations = Shapes::ListShape.new(name: 'BurnRateConfigurations')
+    BurnRateLookBackWindowMinutes = Shapes::IntegerShape.new(name: 'BurnRateLookBackWindowMinutes')
     CalendarInterval = Shapes::StructureShape.new(name: 'CalendarInterval')
     CalendarIntervalDuration = Shapes::IntegerShape.new(name: 'CalendarIntervalDuration')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
@@ -171,6 +174,11 @@ module Aws::ApplicationSignals
     BatchGetServiceLevelObjectiveBudgetReportOutput.add_member(:errors, Shapes::ShapeRef.new(shape: ServiceLevelObjectiveBudgetReportErrors, required: true, location_name: "Errors"))
     BatchGetServiceLevelObjectiveBudgetReportOutput.struct_class = Types::BatchGetServiceLevelObjectiveBudgetReportOutput
 
+    BurnRateConfiguration.add_member(:look_back_window_minutes, Shapes::ShapeRef.new(shape: BurnRateLookBackWindowMinutes, required: true, location_name: "LookBackWindowMinutes"))
+    BurnRateConfiguration.struct_class = Types::BurnRateConfiguration
+
+    BurnRateConfigurations.member = Shapes::ShapeRef.new(shape: BurnRateConfiguration)
+
     CalendarInterval.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTime"))
     CalendarInterval.add_member(:duration_unit, Shapes::ShapeRef.new(shape: DurationUnit, required: true, location_name: "DurationUnit"))
     CalendarInterval.add_member(:duration, Shapes::ShapeRef.new(shape: CalendarIntervalDuration, required: true, location_name: "Duration"))
@@ -185,6 +193,7 @@ module Aws::ApplicationSignals
     CreateServiceLevelObjectiveInput.add_member(:request_based_sli_config, Shapes::ShapeRef.new(shape: RequestBasedServiceLevelIndicatorConfig, location_name: "RequestBasedSliConfig"))
     CreateServiceLevelObjectiveInput.add_member(:goal, Shapes::ShapeRef.new(shape: Goal, location_name: "Goal"))
     CreateServiceLevelObjectiveInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateServiceLevelObjectiveInput.add_member(:burn_rate_configurations, Shapes::ShapeRef.new(shape: BurnRateConfigurations, location_name: "BurnRateConfigurations"))
     CreateServiceLevelObjectiveInput.struct_class = Types::CreateServiceLevelObjectiveInput
 
     CreateServiceLevelObjectiveOutput.add_member(:slo, Shapes::ShapeRef.new(shape: ServiceLevelObjective, required: true, location_name: "Slo"))
@@ -426,6 +435,7 @@ module Aws::ApplicationSignals
     ServiceLevelObjective.add_member(:request_based_sli, Shapes::ShapeRef.new(shape: RequestBasedServiceLevelIndicator, location_name: "RequestBasedSli"))
     ServiceLevelObjective.add_member(:evaluation_type, Shapes::ShapeRef.new(shape: EvaluationType, location_name: "EvaluationType"))
     ServiceLevelObjective.add_member(:goal, Shapes::ShapeRef.new(shape: Goal, required: true, location_name: "Goal"))
+    ServiceLevelObjective.add_member(:burn_rate_configurations, Shapes::ShapeRef.new(shape: BurnRateConfigurations, location_name: "BurnRateConfigurations"))
     ServiceLevelObjective.struct_class = Types::ServiceLevelObjective
 
     ServiceLevelObjectiveBudgetReport.add_member(:arn, Shapes::ShapeRef.new(shape: ServiceLevelObjectiveArn, required: true, location_name: "Arn"))
@@ -511,6 +521,7 @@ module Aws::ApplicationSignals
     UpdateServiceLevelObjectiveInput.add_member(:sli_config, Shapes::ShapeRef.new(shape: ServiceLevelIndicatorConfig, location_name: "SliConfig"))
     UpdateServiceLevelObjectiveInput.add_member(:request_based_sli_config, Shapes::ShapeRef.new(shape: RequestBasedServiceLevelIndicatorConfig, location_name: "RequestBasedSliConfig"))
     UpdateServiceLevelObjectiveInput.add_member(:goal, Shapes::ShapeRef.new(shape: Goal, location_name: "Goal"))
+    UpdateServiceLevelObjectiveInput.add_member(:burn_rate_configurations, Shapes::ShapeRef.new(shape: BurnRateConfigurations, location_name: "BurnRateConfigurations"))
     UpdateServiceLevelObjectiveInput.struct_class = Types::UpdateServiceLevelObjectiveInput
 
     UpdateServiceLevelObjectiveOutput.add_member(:slo, Shapes::ShapeRef.new(shape: ServiceLevelObjective, required: true, location_name: "Slo"))

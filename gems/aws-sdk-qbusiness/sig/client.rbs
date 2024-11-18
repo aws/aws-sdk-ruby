@@ -1122,8 +1122,13 @@ module Aws
                              user_id: ::String,
                              type: ("INDEX" | "DATASOURCE")?
                            },
-                         ]?
-                       }
+                         ]?,
+                         s3_path_for_group_members: {
+                           bucket: ::String,
+                           key: ::String
+                         }?
+                       },
+                       ?role_arn: ::String
                      ) -> _PutGroupResponseSuccess
                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutGroupResponseSuccess
 

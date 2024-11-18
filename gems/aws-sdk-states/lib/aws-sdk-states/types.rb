@@ -82,7 +82,7 @@ module Aws::States
     #
     #   * white space
     #
-    #   * brackets `< > \{ \} [ ]`
+    #   * brackets `< > { } [ ]`
     #
     #   * wildcard characters `? *`
     #
@@ -309,7 +309,7 @@ module Aws::States
     #
     #   * white space
     #
-    #   * brackets `< > \{ \} [ ]`
+    #   * brackets `< > { } [ ]`
     #
     #   * wildcard characters `? *`
     #
@@ -428,7 +428,7 @@ module Aws::States
     #
     #   * white space
     #
-    #   * brackets `< > \{ \} [ ]`
+    #   * brackets `< > { } [ ]`
     #
     #   * wildcard characters `? *`
     #
@@ -640,7 +640,7 @@ module Aws::States
     #
     #   * white space
     #
-    #   * brackets `< > \{ \} [ ]`
+    #   * brackets `< > { } [ ]`
     #
     #   * wildcard characters `? *`
     #
@@ -707,7 +707,7 @@ module Aws::States
     #
     #   * white space
     #
-    #   * brackets `< > \{ \} [ ]`
+    #   * brackets `< > { } [ ]`
     #
     #   * wildcard characters `? *`
     #
@@ -853,7 +853,6 @@ module Aws::States
     #     * `Execution has exceeded the max execution time`.
     #
     #     * `Execution redrivable period exceeded`.
-    #
     #   * For a Distributed Map that includes child workflows of type
     #     `EXPRESS`, `redriveStatusReason` is only returned if the child
     #     workflows are not redrivable. This happens when the child workflow
@@ -1186,7 +1185,7 @@ module Aws::States
     #
     #   * white space
     #
-    #   * brackets `< > \{ \} [ ]`
+    #   * brackets `< > { } [ ]`
     #
     #   * wildcard characters `? *`
     #
@@ -1207,7 +1206,7 @@ module Aws::States
     #   [Amazon States Language][1].
     #
     #   If called with `includedData = METADATA_ONLY`, the returned
-    #   definition will be `\{\}`.
+    #   definition will be `{}`.
     #
     #
     #
@@ -1435,7 +1434,7 @@ module Aws::States
     #
     #   * white space
     #
-    #   * brackets `< > \{ \} [ ]`
+    #   * brackets `< > { } [ ]`
     #
     #   * wildcard characters `? *`
     #
@@ -3459,7 +3458,7 @@ module Aws::States
     #
     #   * white space
     #
-    #   * brackets `< > \{ \} [ ]`
+    #   * brackets `< > { } [ ]`
     #
     #   * wildcard characters `? *`
     #
@@ -3479,10 +3478,10 @@ module Aws::States
     #   The string that contains the JSON input data for the execution, for
     #   example:
     #
-    #   `"input": "\{"first_name" : "test"\}"`
+    #   `"input": "{"first_name" : "test"}"`
     #
     #   <note markdown="1"> If you don't include any JSON input data, you still must include
-    #   the two braces, for example: `"input": "\{\}"`
+    #   the two braces, for example: `"input": "{}"`
     #
     #    </note>
     #
@@ -3535,10 +3534,10 @@ module Aws::States
     #   The string that contains the JSON input data for the execution, for
     #   example:
     #
-    #   `"input": "\{"first_name" : "test"\}"`
+    #   `"input": "{"first_name" : "test"}"`
     #
     #   <note markdown="1"> If you don't include any JSON input data, you still must include
-    #   the two braces, for example: `"input": "\{\}"`
+    #   the two braces, for example: `"input": "{}"`
     #
     #    </note>
     #
@@ -3692,7 +3691,7 @@ module Aws::States
     #
     #   * white space
     #
-    #   * brackets `< > \{ \} [ ]`
+    #   * brackets `< > { } [ ]`
     #
     #   * wildcard characters `? *`
     #
@@ -3812,7 +3811,7 @@ module Aws::States
     #
     #   * white space
     #
-    #   * brackets `< > \{ \} [ ]`
+    #   * brackets `< > { } [ ]`
     #
     #   * wildcard characters `? *`
     #

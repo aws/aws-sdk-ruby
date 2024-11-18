@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2024-11-14)
+------------------
+
+* Feature - Adds support for select GPU accelerated instance types when creating new service-managed fleets.
+
 1.16.0 (2024-10-18)
 ------------------
 

@@ -447,6 +447,61 @@ module Aws::CleanRoomsML
 
     # @!group API Operations
 
+    # Submits a request to cancel the trained model job.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The membership ID of the trained model job that you want to cancel.
+    #
+    # @option params [required, String] :trained_model_arn
+    #   The Amazon Resource Name (ARN) of the trained model job that you want
+    #   to cancel.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_trained_model({
+    #     membership_identifier: "UUID", # required
+    #     trained_model_arn: "TrainedModelArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/CancelTrainedModel AWS API Documentation
+    #
+    # @overload cancel_trained_model(params = {})
+    # @param [Hash] params ({})
+    def cancel_trained_model(params = {}, options = {})
+      req = build_request(:cancel_trained_model, params)
+      req.send_request(options)
+    end
+
+    # Submits a request to cancel a trained model inference job.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The membership ID of the trained model inference job that you want to
+    #   cancel.
+    #
+    # @option params [required, String] :trained_model_inference_job_arn
+    #   The Amazon Resource Name (ARN) of the trained model inference job that
+    #   you want to cancel.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_trained_model_inference_job({
+    #     membership_identifier: "UUID", # required
+    #     trained_model_inference_job_arn: "TrainedModelInferenceJobArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/CancelTrainedModelInferenceJob AWS API Documentation
+    #
+    # @overload cancel_trained_model_inference_job(params = {})
+    # @param [Hash] params ({})
+    def cancel_trained_model_inference_job(params = {}, options = {})
+      req = build_request(:cancel_trained_model_inference_job, params)
+      req.send_request(options)
+    end
+
     # Defines the information necessary to create an audience model. An
     # audience model is a machine learning model that Clean Rooms ML trains
     # to measure similarity between users. Clean Rooms ML manages training
@@ -663,6 +718,452 @@ module Aws::CleanRoomsML
       req.send_request(options)
     end
 
+    # Creates a configured model algorithm using a container image stored in
+    # an ECR repository.
+    #
+    # @option params [required, String] :name
+    #   The name of the configured model algorithm.
+    #
+    # @option params [String] :description
+    #   The description of the configured model algorithm.
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of the role that is used to access the
+    #   repository.
+    #
+    # @option params [Types::ContainerConfig] :training_container_config
+    #   Configuration information for the training container, including
+    #   entrypoints and arguments.
+    #
+    # @option params [Types::InferenceContainerConfig] :inference_container_config
+    #   Configuration information for the inference container that is used
+    #   when you run an inference job on a configured model algorithm.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The optional metadata that you apply to the resource to help you
+    #   categorize and organize them. Each tag consists of a key and an
+    #   optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50.
+    #
+    #   * For each resource, each tag key must be unique, and each tag key can
+    #     have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8.
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8.
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case sensitive.
+    #
+    #   * Do not use aws:, AWS:, or any upper or lowercase combination of such
+    #     as a prefix for keys as it is reserved for AWS use. You cannot edit
+    #     or delete tag keys with this prefix. Values can have this prefix. If
+    #     a tag value has aws as its prefix but the key does not, then Clean
+    #     Rooms ML considers it to be a user tag and will count against the
+    #     limit of 50 tags. Tags with only the key prefix of aws do not count
+    #     against your tags per resource limit.
+    #
+    # @option params [String] :kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key. This key is used to
+    #   encrypt and decrypt customer-owned data in the configured ML model
+    #   algorithm and associated data.
+    #
+    # @return [Types::CreateConfiguredModelAlgorithmResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateConfiguredModelAlgorithmResponse#configured_model_algorithm_arn #configured_model_algorithm_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_configured_model_algorithm({
+    #     name: "NameString", # required
+    #     description: "ResourceDescription",
+    #     role_arn: "IamRoleArn", # required
+    #     training_container_config: {
+    #       image_uri: "AlgorithmImage", # required
+    #       entrypoint: ["ContainerEntrypointString"],
+    #       arguments: ["ContainerArgument"],
+    #       metric_definitions: [
+    #         {
+    #           name: "MetricName", # required
+    #           regex: "MetricRegex", # required
+    #         },
+    #       ],
+    #     },
+    #     inference_container_config: {
+    #       image_uri: "AlgorithmImage", # required
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     kms_key_arn: "KmsKeyArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configured_model_algorithm_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/CreateConfiguredModelAlgorithm AWS API Documentation
+    #
+    # @overload create_configured_model_algorithm(params = {})
+    # @param [Hash] params ({})
+    def create_configured_model_algorithm(params = {}, options = {})
+      req = build_request(:create_configured_model_algorithm, params)
+      req.send_request(options)
+    end
+
+    # Associates a configured model algorithm to a collaboration for use by
+    # any member of the collaboration.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The membership ID of the member who is associating this configured
+    #   model algorithm.
+    #
+    # @option params [required, String] :configured_model_algorithm_arn
+    #   The Amazon Resource Name (ARN) of the configured model algorithm that
+    #   you want to associate.
+    #
+    # @option params [required, String] :name
+    #   The name of the configured model algorithm association.
+    #
+    # @option params [String] :description
+    #   The description of the configured model algorithm association.
+    #
+    # @option params [Types::PrivacyConfiguration] :privacy_configuration
+    #   Specifies the privacy configuration information for the configured
+    #   model algorithm association. This information includes the maximum
+    #   data size that can be exported.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The optional metadata that you apply to the resource to help you
+    #   categorize and organize them. Each tag consists of a key and an
+    #   optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50.
+    #
+    #   * For each resource, each tag key must be unique, and each tag key can
+    #     have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8.
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8.
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case sensitive.
+    #
+    #   * Do not use aws:, AWS:, or any upper or lowercase combination of such
+    #     as a prefix for keys as it is reserved for AWS use. You cannot edit
+    #     or delete tag keys with this prefix. Values can have this prefix. If
+    #     a tag value has aws as its prefix but the key does not, then Clean
+    #     Rooms ML considers it to be a user tag and will count against the
+    #     limit of 50 tags. Tags with only the key prefix of aws do not count
+    #     against your tags per resource limit.
+    #
+    # @return [Types::CreateConfiguredModelAlgorithmAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateConfiguredModelAlgorithmAssociationResponse#configured_model_algorithm_association_arn #configured_model_algorithm_association_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_configured_model_algorithm_association({
+    #     membership_identifier: "UUID", # required
+    #     configured_model_algorithm_arn: "ConfiguredModelAlgorithmArn", # required
+    #     name: "NameString", # required
+    #     description: "ResourceDescription",
+    #     privacy_configuration: {
+    #       policies: { # required
+    #         trained_models: {
+    #           container_logs: [
+    #             {
+    #               allowed_account_ids: ["String"], # required
+    #               filter_pattern: "LogsConfigurationPolicyFilterPatternString",
+    #             },
+    #           ],
+    #           container_metrics: {
+    #             noise_level: "HIGH", # required, accepts HIGH, MEDIUM, LOW, NONE
+    #           },
+    #         },
+    #         trained_model_exports: {
+    #           max_size: { # required
+    #             unit: "GB", # required, accepts GB
+    #             value: 1.0, # required
+    #           },
+    #           files_to_export: ["MODEL"], # required, accepts MODEL, OUTPUT
+    #         },
+    #         trained_model_inference_jobs: {
+    #           container_logs: [
+    #             {
+    #               allowed_account_ids: ["String"], # required
+    #               filter_pattern: "LogsConfigurationPolicyFilterPatternString",
+    #             },
+    #           ],
+    #           max_output_size: {
+    #             unit: "GB", # required, accepts GB
+    #             value: 1.0, # required
+    #           },
+    #         },
+    #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configured_model_algorithm_association_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/CreateConfiguredModelAlgorithmAssociation AWS API Documentation
+    #
+    # @overload create_configured_model_algorithm_association(params = {})
+    # @param [Hash] params ({})
+    def create_configured_model_algorithm_association(params = {}, options = {})
+      req = build_request(:create_configured_model_algorithm_association, params)
+      req.send_request(options)
+    end
+
+    # Provides the information to create an ML input channel. An ML input
+    # channel is the result of a query that can be used for ML modeling.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The membership ID of the member that is creating the ML input channel.
+    #
+    # @option params [required, Array<String>] :configured_model_algorithm_associations
+    #   The associated configured model algorithms that are necessary to
+    #   create this ML input channel.
+    #
+    # @option params [required, Types::InputChannel] :input_channel
+    #   The input data that is used to create this ML input channel.
+    #
+    # @option params [required, String] :name
+    #   The name of the ML input channel.
+    #
+    # @option params [required, Integer] :retention_in_days
+    #   The number of days that the data in the ML input channel is retained.
+    #
+    # @option params [String] :description
+    #   The description of the ML input channel.
+    #
+    # @option params [String] :kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key that is used to access
+    #   the input channel.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The optional metadata that you apply to the resource to help you
+    #   categorize and organize them. Each tag consists of a key and an
+    #   optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50.
+    #
+    #   * For each resource, each tag key must be unique, and each tag key can
+    #     have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8.
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8.
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case sensitive.
+    #
+    #   * Do not use aws:, AWS:, or any upper or lowercase combination of such
+    #     as a prefix for keys as it is reserved for AWS use. You cannot edit
+    #     or delete tag keys with this prefix. Values can have this prefix. If
+    #     a tag value has aws as its prefix but the key does not, then Clean
+    #     Rooms ML considers it to be a user tag and will count against the
+    #     limit of 50 tags. Tags with only the key prefix of aws do not count
+    #     against your tags per resource limit.
+    #
+    # @return [Types::CreateMLInputChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateMLInputChannelResponse#ml_input_channel_arn #ml_input_channel_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_ml_input_channel({
+    #     membership_identifier: "UUID", # required
+    #     configured_model_algorithm_associations: ["ConfiguredModelAlgorithmAssociationArn"], # required
+    #     input_channel: { # required
+    #       data_source: { # required
+    #         protected_query_input_parameters: {
+    #           sql_parameters: { # required
+    #             query_string: "ProtectedQuerySQLParametersQueryStringString",
+    #             analysis_template_arn: "AnalysisTemplateArn",
+    #             parameters: {
+    #               "ParameterKey" => "ParameterValue",
+    #             },
+    #           },
+    #           compute_configuration: {
+    #             worker: {
+    #               type: "CR.1X", # accepts CR.1X, CR.4X
+    #               number: 1,
+    #             },
+    #           },
+    #         },
+    #       },
+    #       role_arn: "IamRoleArn", # required
+    #     },
+    #     name: "NameString", # required
+    #     retention_in_days: 1, # required
+    #     description: "ResourceDescription",
+    #     kms_key_arn: "KmsKeyArn",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ml_input_channel_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/CreateMLInputChannel AWS API Documentation
+    #
+    # @overload create_ml_input_channel(params = {})
+    # @param [Hash] params ({})
+    def create_ml_input_channel(params = {}, options = {})
+      req = build_request(:create_ml_input_channel, params)
+      req.send_request(options)
+    end
+
+    # Creates a trained model from an associated configured model algorithm
+    # using data from any member of the collaboration.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The membership ID of the member that is creating the trained model.
+    #
+    # @option params [required, String] :name
+    #   The name of the trained model.
+    #
+    # @option params [required, String] :configured_model_algorithm_association_arn
+    #   The associated configured model algorithm used to train this model.
+    #
+    # @option params [Hash<String,String>] :hyperparameters
+    #   Algorithm-specific parameters that influence the quality of the model.
+    #   You set hyperparameters before you start the learning process.
+    #
+    # @option params [Hash<String,String>] :environment
+    #   The environment variables to set in the Docker container.
+    #
+    # @option params [required, Types::ResourceConfig] :resource_config
+    #   Information about the EC2 resources that are used to train this model.
+    #
+    # @option params [Types::StoppingCondition] :stopping_condition
+    #   The criteria that is used to stop model training.
+    #
+    # @option params [required, Array<Types::ModelTrainingDataChannel>] :data_channels
+    #   Defines the data channels that are used as input for the trained model
+    #   request.
+    #
+    # @option params [String] :description
+    #   The description of the trained model.
+    #
+    # @option params [String] :kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key. This key is used to
+    #   encrypt and decrypt customer-owned data in the trained ML model and
+    #   the associated data.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The optional metadata that you apply to the resource to help you
+    #   categorize and organize them. Each tag consists of a key and an
+    #   optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50.
+    #
+    #   * For each resource, each tag key must be unique, and each tag key can
+    #     have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8.
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8.
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case sensitive.
+    #
+    #   * Do not use aws:, AWS:, or any upper or lowercase combination of such
+    #     as a prefix for keys as it is reserved for AWS use. You cannot edit
+    #     or delete tag keys with this prefix. Values can have this prefix. If
+    #     a tag value has aws as its prefix but the key does not, then Clean
+    #     Rooms ML considers it to be a user tag and will count against the
+    #     limit of 50 tags. Tags with only the key prefix of aws do not count
+    #     against your tags per resource limit.
+    #
+    # @return [Types::CreateTrainedModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTrainedModelResponse#trained_model_arn #trained_model_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_trained_model({
+    #     membership_identifier: "UUID", # required
+    #     name: "NameString", # required
+    #     configured_model_algorithm_association_arn: "ConfiguredModelAlgorithmAssociationArn", # required
+    #     hyperparameters: {
+    #       "HyperParametersKeyString" => "HyperParametersValueString",
+    #     },
+    #     environment: {
+    #       "EnvironmentKeyString" => "EnvironmentValueString",
+    #     },
+    #     resource_config: { # required
+    #       instance_count: 1,
+    #       instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.p4de.24xlarge, ml.p5.48xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge, ml.m6i.large, ml.m6i.xlarge, ml.m6i.2xlarge, ml.m6i.4xlarge, ml.m6i.8xlarge, ml.m6i.12xlarge, ml.m6i.16xlarge, ml.m6i.24xlarge, ml.m6i.32xlarge, ml.c6i.xlarge, ml.c6i.2xlarge, ml.c6i.8xlarge, ml.c6i.4xlarge, ml.c6i.12xlarge, ml.c6i.16xlarge, ml.c6i.24xlarge, ml.c6i.32xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.8xlarge, ml.r5d.12xlarge, ml.r5d.16xlarge, ml.r5d.24xlarge, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #       volume_size_in_gb: 1, # required
+    #     },
+    #     stopping_condition: {
+    #       max_runtime_in_seconds: 1,
+    #     },
+    #     data_channels: [ # required
+    #       {
+    #         ml_input_channel_arn: "MLInputChannelArn", # required
+    #         channel_name: "ModelTrainingDataChannelName", # required
+    #       },
+    #     ],
+    #     description: "ResourceDescription",
+    #     kms_key_arn: "KmsKeyArn",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.trained_model_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/CreateTrainedModel AWS API Documentation
+    #
+    # @overload create_trained_model(params = {})
+    # @param [Hash] params ({})
+    def create_trained_model(params = {}, options = {})
+      req = build_request(:create_trained_model, params)
+      req.send_request(options)
+    end
+
     # Defines the information necessary to create a training dataset. In
     # Clean Rooms ML, the `TrainingDataset` is metadata that points to a
     # Glue table, which is read only during `AudienceModel` creation.
@@ -865,6 +1366,136 @@ module Aws::CleanRoomsML
       req.send_request(options)
     end
 
+    # Deletes a configured model algorithm.
+    #
+    # @option params [required, String] :configured_model_algorithm_arn
+    #   The Amazon Resource Name (ARN) of the configured model algorithm that
+    #   you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_configured_model_algorithm({
+    #     configured_model_algorithm_arn: "ConfiguredModelAlgorithmArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/DeleteConfiguredModelAlgorithm AWS API Documentation
+    #
+    # @overload delete_configured_model_algorithm(params = {})
+    # @param [Hash] params ({})
+    def delete_configured_model_algorithm(params = {}, options = {})
+      req = build_request(:delete_configured_model_algorithm, params)
+      req.send_request(options)
+    end
+
+    # Deletes a configured model algorithm association.
+    #
+    # @option params [required, String] :configured_model_algorithm_association_arn
+    #   The Amazon Resource Name (ARN) of the configured model algorithm
+    #   association that you want to delete.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The membership ID of the member that is deleting the configured model
+    #   algorithm association.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_configured_model_algorithm_association({
+    #     configured_model_algorithm_association_arn: "ConfiguredModelAlgorithmAssociationArn", # required
+    #     membership_identifier: "UUID", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/DeleteConfiguredModelAlgorithmAssociation AWS API Documentation
+    #
+    # @overload delete_configured_model_algorithm_association(params = {})
+    # @param [Hash] params ({})
+    def delete_configured_model_algorithm_association(params = {}, options = {})
+      req = build_request(:delete_configured_model_algorithm_association, params)
+      req.send_request(options)
+    end
+
+    # Deletes a ML modeling configuration.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The membership ID of the of the member that is deleting the ML
+    #   modeling configuration.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_ml_configuration({
+    #     membership_identifier: "UUID", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/DeleteMLConfiguration AWS API Documentation
+    #
+    # @overload delete_ml_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_ml_configuration(params = {}, options = {})
+      req = build_request(:delete_ml_configuration, params)
+      req.send_request(options)
+    end
+
+    # Provides the information necessary to delete an ML input channel.
+    #
+    # @option params [required, String] :ml_input_channel_arn
+    #   The Amazon Resource Name (ARN) of the ML input channel that you want
+    #   to delete.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The membership ID of the membership that contains the ML input channel
+    #   you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_ml_input_channel_data({
+    #     ml_input_channel_arn: "MLInputChannelArn", # required
+    #     membership_identifier: "UUID", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/DeleteMLInputChannelData AWS API Documentation
+    #
+    # @overload delete_ml_input_channel_data(params = {})
+    # @param [Hash] params ({})
+    def delete_ml_input_channel_data(params = {}, options = {})
+      req = build_request(:delete_ml_input_channel_data, params)
+      req.send_request(options)
+    end
+
+    # Deletes the output of a trained model.
+    #
+    # @option params [required, String] :trained_model_arn
+    #   The Amazon Resource Name (ARN) of the trained model whose output you
+    #   want to delete.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The membership ID of the member that is deleting the trained model
+    #   output.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_trained_model_output({
+    #     trained_model_arn: "TrainedModelArn", # required
+    #     membership_identifier: "UUID", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/DeleteTrainedModelOutput AWS API Documentation
+    #
+    # @overload delete_trained_model_output(params = {})
+    # @param [Hash] params ({})
+    def delete_trained_model_output(params = {}, options = {})
+      req = build_request(:delete_trained_model_output, params)
+      req.send_request(options)
+    end
+
     # Specifies a training dataset that you want to delete. You can't
     # delete a training dataset if there are any audience models that depend
     # on the training dataset. In Clean Rooms ML, the `TrainingDataset` is
@@ -1013,6 +1644,206 @@ module Aws::CleanRoomsML
       req.send_request(options)
     end
 
+    # Returns information about the configured model algorithm association
+    # in a collaboration.
+    #
+    # @option params [required, String] :configured_model_algorithm_association_arn
+    #   The Amazon Resource Name (ARN) of the configured model algorithm
+    #   association that you want to return information about.
+    #
+    # @option params [required, String] :collaboration_identifier
+    #   The collaboration ID for the collaboration that contains the
+    #   configured model algorithm association that you want to return
+    #   information about.
+    #
+    # @return [Types::GetCollaborationConfiguredModelAlgorithmAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCollaborationConfiguredModelAlgorithmAssociationResponse#create_time #create_time} => Time
+    #   * {Types::GetCollaborationConfiguredModelAlgorithmAssociationResponse#update_time #update_time} => Time
+    #   * {Types::GetCollaborationConfiguredModelAlgorithmAssociationResponse#configured_model_algorithm_association_arn #configured_model_algorithm_association_arn} => String
+    #   * {Types::GetCollaborationConfiguredModelAlgorithmAssociationResponse#membership_identifier #membership_identifier} => String
+    #   * {Types::GetCollaborationConfiguredModelAlgorithmAssociationResponse#collaboration_identifier #collaboration_identifier} => String
+    #   * {Types::GetCollaborationConfiguredModelAlgorithmAssociationResponse#configured_model_algorithm_arn #configured_model_algorithm_arn} => String
+    #   * {Types::GetCollaborationConfiguredModelAlgorithmAssociationResponse#name #name} => String
+    #   * {Types::GetCollaborationConfiguredModelAlgorithmAssociationResponse#description #description} => String
+    #   * {Types::GetCollaborationConfiguredModelAlgorithmAssociationResponse#creator_account_id #creator_account_id} => String
+    #   * {Types::GetCollaborationConfiguredModelAlgorithmAssociationResponse#privacy_configuration #privacy_configuration} => Types::PrivacyConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_collaboration_configured_model_algorithm_association({
+    #     configured_model_algorithm_association_arn: "ConfiguredModelAlgorithmAssociationArn", # required
+    #     collaboration_identifier: "UUID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.create_time #=> Time
+    #   resp.update_time #=> Time
+    #   resp.configured_model_algorithm_association_arn #=> String
+    #   resp.membership_identifier #=> String
+    #   resp.collaboration_identifier #=> String
+    #   resp.configured_model_algorithm_arn #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.creator_account_id #=> String
+    #   resp.privacy_configuration.policies.trained_models.container_logs #=> Array
+    #   resp.privacy_configuration.policies.trained_models.container_logs[0].allowed_account_ids #=> Array
+    #   resp.privacy_configuration.policies.trained_models.container_logs[0].allowed_account_ids[0] #=> String
+    #   resp.privacy_configuration.policies.trained_models.container_logs[0].filter_pattern #=> String
+    #   resp.privacy_configuration.policies.trained_models.container_metrics.noise_level #=> String, one of "HIGH", "MEDIUM", "LOW", "NONE"
+    #   resp.privacy_configuration.policies.trained_model_exports.max_size.unit #=> String, one of "GB"
+    #   resp.privacy_configuration.policies.trained_model_exports.max_size.value #=> Float
+    #   resp.privacy_configuration.policies.trained_model_exports.files_to_export #=> Array
+    #   resp.privacy_configuration.policies.trained_model_exports.files_to_export[0] #=> String, one of "MODEL", "OUTPUT"
+    #   resp.privacy_configuration.policies.trained_model_inference_jobs.container_logs #=> Array
+    #   resp.privacy_configuration.policies.trained_model_inference_jobs.container_logs[0].allowed_account_ids #=> Array
+    #   resp.privacy_configuration.policies.trained_model_inference_jobs.container_logs[0].allowed_account_ids[0] #=> String
+    #   resp.privacy_configuration.policies.trained_model_inference_jobs.container_logs[0].filter_pattern #=> String
+    #   resp.privacy_configuration.policies.trained_model_inference_jobs.max_output_size.unit #=> String, one of "GB"
+    #   resp.privacy_configuration.policies.trained_model_inference_jobs.max_output_size.value #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetCollaborationConfiguredModelAlgorithmAssociation AWS API Documentation
+    #
+    # @overload get_collaboration_configured_model_algorithm_association(params = {})
+    # @param [Hash] params ({})
+    def get_collaboration_configured_model_algorithm_association(params = {}, options = {})
+      req = build_request(:get_collaboration_configured_model_algorithm_association, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a specific ML input channel in a
+    # collaboration.
+    #
+    # @option params [required, String] :ml_input_channel_arn
+    #   The Amazon Resource Name (ARN) of the ML input channel that you want
+    #   to get.
+    #
+    # @option params [required, String] :collaboration_identifier
+    #   The collaboration ID of the collaboration that contains the ML input
+    #   channel that you want to get.
+    #
+    # @return [Types::GetCollaborationMLInputChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCollaborationMLInputChannelResponse#create_time #create_time} => Time
+    #   * {Types::GetCollaborationMLInputChannelResponse#update_time #update_time} => Time
+    #   * {Types::GetCollaborationMLInputChannelResponse#creator_account_id #creator_account_id} => String
+    #   * {Types::GetCollaborationMLInputChannelResponse#membership_identifier #membership_identifier} => String
+    #   * {Types::GetCollaborationMLInputChannelResponse#collaboration_identifier #collaboration_identifier} => String
+    #   * {Types::GetCollaborationMLInputChannelResponse#ml_input_channel_arn #ml_input_channel_arn} => String
+    #   * {Types::GetCollaborationMLInputChannelResponse#name #name} => String
+    #   * {Types::GetCollaborationMLInputChannelResponse#configured_model_algorithm_associations #configured_model_algorithm_associations} => Array&lt;String&gt;
+    #   * {Types::GetCollaborationMLInputChannelResponse#status #status} => String
+    #   * {Types::GetCollaborationMLInputChannelResponse#status_details #status_details} => Types::StatusDetails
+    #   * {Types::GetCollaborationMLInputChannelResponse#retention_in_days #retention_in_days} => Integer
+    #   * {Types::GetCollaborationMLInputChannelResponse#number_of_records #number_of_records} => Integer
+    #   * {Types::GetCollaborationMLInputChannelResponse#description #description} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_collaboration_ml_input_channel({
+    #     ml_input_channel_arn: "MLInputChannelArn", # required
+    #     collaboration_identifier: "UUID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.create_time #=> Time
+    #   resp.update_time #=> Time
+    #   resp.creator_account_id #=> String
+    #   resp.membership_identifier #=> String
+    #   resp.collaboration_identifier #=> String
+    #   resp.ml_input_channel_arn #=> String
+    #   resp.name #=> String
+    #   resp.configured_model_algorithm_associations #=> Array
+    #   resp.configured_model_algorithm_associations[0] #=> String
+    #   resp.status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_PENDING", "DELETE_IN_PROGRESS", "DELETE_FAILED", "INACTIVE"
+    #   resp.status_details.status_code #=> String
+    #   resp.status_details.message #=> String
+    #   resp.retention_in_days #=> Integer
+    #   resp.number_of_records #=> Integer
+    #   resp.description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetCollaborationMLInputChannel AWS API Documentation
+    #
+    # @overload get_collaboration_ml_input_channel(params = {})
+    # @param [Hash] params ({})
+    def get_collaboration_ml_input_channel(params = {}, options = {})
+      req = build_request(:get_collaboration_ml_input_channel, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a trained model in a collaboration.
+    #
+    # @option params [required, String] :trained_model_arn
+    #   The Amazon Resource Name (ARN) of the trained model that you want to
+    #   return information about.
+    #
+    # @option params [required, String] :collaboration_identifier
+    #   The collaboration ID that contains the trained model that you want to
+    #   return information about.
+    #
+    # @return [Types::GetCollaborationTrainedModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCollaborationTrainedModelResponse#membership_identifier #membership_identifier} => String
+    #   * {Types::GetCollaborationTrainedModelResponse#collaboration_identifier #collaboration_identifier} => String
+    #   * {Types::GetCollaborationTrainedModelResponse#trained_model_arn #trained_model_arn} => String
+    #   * {Types::GetCollaborationTrainedModelResponse#name #name} => String
+    #   * {Types::GetCollaborationTrainedModelResponse#description #description} => String
+    #   * {Types::GetCollaborationTrainedModelResponse#status #status} => String
+    #   * {Types::GetCollaborationTrainedModelResponse#status_details #status_details} => Types::StatusDetails
+    #   * {Types::GetCollaborationTrainedModelResponse#configured_model_algorithm_association_arn #configured_model_algorithm_association_arn} => String
+    #   * {Types::GetCollaborationTrainedModelResponse#resource_config #resource_config} => Types::ResourceConfig
+    #   * {Types::GetCollaborationTrainedModelResponse#stopping_condition #stopping_condition} => Types::StoppingCondition
+    #   * {Types::GetCollaborationTrainedModelResponse#metrics_status #metrics_status} => String
+    #   * {Types::GetCollaborationTrainedModelResponse#metrics_status_details #metrics_status_details} => String
+    #   * {Types::GetCollaborationTrainedModelResponse#logs_status #logs_status} => String
+    #   * {Types::GetCollaborationTrainedModelResponse#logs_status_details #logs_status_details} => String
+    #   * {Types::GetCollaborationTrainedModelResponse#training_container_image_digest #training_container_image_digest} => String
+    #   * {Types::GetCollaborationTrainedModelResponse#create_time #create_time} => Time
+    #   * {Types::GetCollaborationTrainedModelResponse#update_time #update_time} => Time
+    #   * {Types::GetCollaborationTrainedModelResponse#creator_account_id #creator_account_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_collaboration_trained_model({
+    #     trained_model_arn: "TrainedModelArn", # required
+    #     collaboration_identifier: "UUID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.membership_identifier #=> String
+    #   resp.collaboration_identifier #=> String
+    #   resp.trained_model_arn #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_PENDING", "DELETE_IN_PROGRESS", "DELETE_FAILED", "INACTIVE", "CANCEL_PENDING", "CANCEL_IN_PROGRESS", "CANCEL_FAILED"
+    #   resp.status_details.status_code #=> String
+    #   resp.status_details.message #=> String
+    #   resp.configured_model_algorithm_association_arn #=> String
+    #   resp.resource_config.instance_count #=> Integer
+    #   resp.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.p4de.24xlarge", "ml.p5.48xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge", "ml.m6i.large", "ml.m6i.xlarge", "ml.m6i.2xlarge", "ml.m6i.4xlarge", "ml.m6i.8xlarge", "ml.m6i.12xlarge", "ml.m6i.16xlarge", "ml.m6i.24xlarge", "ml.m6i.32xlarge", "ml.c6i.xlarge", "ml.c6i.2xlarge", "ml.c6i.8xlarge", "ml.c6i.4xlarge", "ml.c6i.12xlarge", "ml.c6i.16xlarge", "ml.c6i.24xlarge", "ml.c6i.32xlarge", "ml.r5d.large", "ml.r5d.xlarge", "ml.r5d.2xlarge", "ml.r5d.4xlarge", "ml.r5d.8xlarge", "ml.r5d.12xlarge", "ml.r5d.16xlarge", "ml.r5d.24xlarge", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge"
+    #   resp.resource_config.volume_size_in_gb #=> Integer
+    #   resp.stopping_condition.max_runtime_in_seconds #=> Integer
+    #   resp.metrics_status #=> String, one of "PUBLISH_SUCCEEDED", "PUBLISH_FAILED"
+    #   resp.metrics_status_details #=> String
+    #   resp.logs_status #=> String, one of "PUBLISH_SUCCEEDED", "PUBLISH_FAILED"
+    #   resp.logs_status_details #=> String
+    #   resp.training_container_image_digest #=> String
+    #   resp.create_time #=> Time
+    #   resp.update_time #=> Time
+    #   resp.creator_account_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetCollaborationTrainedModel AWS API Documentation
+    #
+    # @overload get_collaboration_trained_model(params = {})
+    # @param [Hash] params ({})
+    def get_collaboration_trained_model(params = {}, options = {})
+      req = build_request(:get_collaboration_trained_model, params)
+      req.send_request(options)
+    end
+
     # Returns information about a specified configured audience model.
     #
     # @option params [required, String] :configured_audience_model_arn
@@ -1101,6 +1932,407 @@ module Aws::CleanRoomsML
     # @param [Hash] params ({})
     def get_configured_audience_model_policy(params = {}, options = {})
       req = build_request(:get_configured_audience_model_policy, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a configured model algorithm.
+    #
+    # @option params [required, String] :configured_model_algorithm_arn
+    #   The Amazon Resource Name (ARN) of the configured model algorithm that
+    #   you want to return information about.
+    #
+    # @return [Types::GetConfiguredModelAlgorithmResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetConfiguredModelAlgorithmResponse#create_time #create_time} => Time
+    #   * {Types::GetConfiguredModelAlgorithmResponse#update_time #update_time} => Time
+    #   * {Types::GetConfiguredModelAlgorithmResponse#configured_model_algorithm_arn #configured_model_algorithm_arn} => String
+    #   * {Types::GetConfiguredModelAlgorithmResponse#name #name} => String
+    #   * {Types::GetConfiguredModelAlgorithmResponse#training_container_config #training_container_config} => Types::ContainerConfig
+    #   * {Types::GetConfiguredModelAlgorithmResponse#inference_container_config #inference_container_config} => Types::InferenceContainerConfig
+    #   * {Types::GetConfiguredModelAlgorithmResponse#role_arn #role_arn} => String
+    #   * {Types::GetConfiguredModelAlgorithmResponse#description #description} => String
+    #   * {Types::GetConfiguredModelAlgorithmResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetConfiguredModelAlgorithmResponse#kms_key_arn #kms_key_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_configured_model_algorithm({
+    #     configured_model_algorithm_arn: "ConfiguredModelAlgorithmArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.create_time #=> Time
+    #   resp.update_time #=> Time
+    #   resp.configured_model_algorithm_arn #=> String
+    #   resp.name #=> String
+    #   resp.training_container_config.image_uri #=> String
+    #   resp.training_container_config.entrypoint #=> Array
+    #   resp.training_container_config.entrypoint[0] #=> String
+    #   resp.training_container_config.arguments #=> Array
+    #   resp.training_container_config.arguments[0] #=> String
+    #   resp.training_container_config.metric_definitions #=> Array
+    #   resp.training_container_config.metric_definitions[0].name #=> String
+    #   resp.training_container_config.metric_definitions[0].regex #=> String
+    #   resp.inference_container_config.image_uri #=> String
+    #   resp.role_arn #=> String
+    #   resp.description #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.kms_key_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetConfiguredModelAlgorithm AWS API Documentation
+    #
+    # @overload get_configured_model_algorithm(params = {})
+    # @param [Hash] params ({})
+    def get_configured_model_algorithm(params = {}, options = {})
+      req = build_request(:get_configured_model_algorithm, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a configured model algorithm association.
+    #
+    # @option params [required, String] :configured_model_algorithm_association_arn
+    #   The Amazon Resource Name (ARN) of the configured model algorithm
+    #   association that you want to return information about.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The membership ID of the member that created the configured model
+    #   algorithm association.
+    #
+    # @return [Types::GetConfiguredModelAlgorithmAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetConfiguredModelAlgorithmAssociationResponse#create_time #create_time} => Time
+    #   * {Types::GetConfiguredModelAlgorithmAssociationResponse#update_time #update_time} => Time
+    #   * {Types::GetConfiguredModelAlgorithmAssociationResponse#configured_model_algorithm_association_arn #configured_model_algorithm_association_arn} => String
+    #   * {Types::GetConfiguredModelAlgorithmAssociationResponse#membership_identifier #membership_identifier} => String
+    #   * {Types::GetConfiguredModelAlgorithmAssociationResponse#collaboration_identifier #collaboration_identifier} => String
+    #   * {Types::GetConfiguredModelAlgorithmAssociationResponse#configured_model_algorithm_arn #configured_model_algorithm_arn} => String
+    #   * {Types::GetConfiguredModelAlgorithmAssociationResponse#name #name} => String
+    #   * {Types::GetConfiguredModelAlgorithmAssociationResponse#privacy_configuration #privacy_configuration} => Types::PrivacyConfiguration
+    #   * {Types::GetConfiguredModelAlgorithmAssociationResponse#description #description} => String
+    #   * {Types::GetConfiguredModelAlgorithmAssociationResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_configured_model_algorithm_association({
+    #     configured_model_algorithm_association_arn: "ConfiguredModelAlgorithmAssociationArn", # required
+    #     membership_identifier: "UUID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.create_time #=> Time
+    #   resp.update_time #=> Time
+    #   resp.configured_model_algorithm_association_arn #=> String
+    #   resp.membership_identifier #=> String
+    #   resp.collaboration_identifier #=> String
+    #   resp.configured_model_algorithm_arn #=> String
+    #   resp.name #=> String
+    #   resp.privacy_configuration.policies.trained_models.container_logs #=> Array
+    #   resp.privacy_configuration.policies.trained_models.container_logs[0].allowed_account_ids #=> Array
+    #   resp.privacy_configuration.policies.trained_models.container_logs[0].allowed_account_ids[0] #=> String
+    #   resp.privacy_configuration.policies.trained_models.container_logs[0].filter_pattern #=> String
+    #   resp.privacy_configuration.policies.trained_models.container_metrics.noise_level #=> String, one of "HIGH", "MEDIUM", "LOW", "NONE"
+    #   resp.privacy_configuration.policies.trained_model_exports.max_size.unit #=> String, one of "GB"
+    #   resp.privacy_configuration.policies.trained_model_exports.max_size.value #=> Float
+    #   resp.privacy_configuration.policies.trained_model_exports.files_to_export #=> Array
+    #   resp.privacy_configuration.policies.trained_model_exports.files_to_export[0] #=> String, one of "MODEL", "OUTPUT"
+    #   resp.privacy_configuration.policies.trained_model_inference_jobs.container_logs #=> Array
+    #   resp.privacy_configuration.policies.trained_model_inference_jobs.container_logs[0].allowed_account_ids #=> Array
+    #   resp.privacy_configuration.policies.trained_model_inference_jobs.container_logs[0].allowed_account_ids[0] #=> String
+    #   resp.privacy_configuration.policies.trained_model_inference_jobs.container_logs[0].filter_pattern #=> String
+    #   resp.privacy_configuration.policies.trained_model_inference_jobs.max_output_size.unit #=> String, one of "GB"
+    #   resp.privacy_configuration.policies.trained_model_inference_jobs.max_output_size.value #=> Float
+    #   resp.description #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetConfiguredModelAlgorithmAssociation AWS API Documentation
+    #
+    # @overload get_configured_model_algorithm_association(params = {})
+    # @param [Hash] params ({})
+    def get_configured_model_algorithm_association(params = {}, options = {})
+      req = build_request(:get_configured_model_algorithm_association, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a specific ML configuration.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The membership ID of the member that owns the ML configuration you
+    #   want to return information about.
+    #
+    # @return [Types::GetMLConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMLConfigurationResponse#membership_identifier #membership_identifier} => String
+    #   * {Types::GetMLConfigurationResponse#default_output_location #default_output_location} => Types::MLOutputConfiguration
+    #   * {Types::GetMLConfigurationResponse#create_time #create_time} => Time
+    #   * {Types::GetMLConfigurationResponse#update_time #update_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_ml_configuration({
+    #     membership_identifier: "UUID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.membership_identifier #=> String
+    #   resp.default_output_location.destination.s3_destination.s3_uri #=> String
+    #   resp.default_output_location.role_arn #=> String
+    #   resp.create_time #=> Time
+    #   resp.update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetMLConfiguration AWS API Documentation
+    #
+    # @overload get_ml_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_ml_configuration(params = {}, options = {})
+      req = build_request(:get_ml_configuration, params)
+      req.send_request(options)
+    end
+
+    # Returns information about an ML input channel.
+    #
+    # @option params [required, String] :ml_input_channel_arn
+    #   The Amazon Resource Name (ARN) of the ML input channel that you want
+    #   to get.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The membership ID of the membership that contains the ML input channel
+    #   that you want to get.
+    #
+    # @return [Types::GetMLInputChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMLInputChannelResponse#create_time #create_time} => Time
+    #   * {Types::GetMLInputChannelResponse#update_time #update_time} => Time
+    #   * {Types::GetMLInputChannelResponse#membership_identifier #membership_identifier} => String
+    #   * {Types::GetMLInputChannelResponse#collaboration_identifier #collaboration_identifier} => String
+    #   * {Types::GetMLInputChannelResponse#input_channel #input_channel} => Types::InputChannel
+    #   * {Types::GetMLInputChannelResponse#protected_query_identifier #protected_query_identifier} => String
+    #   * {Types::GetMLInputChannelResponse#ml_input_channel_arn #ml_input_channel_arn} => String
+    #   * {Types::GetMLInputChannelResponse#name #name} => String
+    #   * {Types::GetMLInputChannelResponse#configured_model_algorithm_associations #configured_model_algorithm_associations} => Array&lt;String&gt;
+    #   * {Types::GetMLInputChannelResponse#status #status} => String
+    #   * {Types::GetMLInputChannelResponse#status_details #status_details} => Types::StatusDetails
+    #   * {Types::GetMLInputChannelResponse#retention_in_days #retention_in_days} => Integer
+    #   * {Types::GetMLInputChannelResponse#number_of_records #number_of_records} => Integer
+    #   * {Types::GetMLInputChannelResponse#number_of_files #number_of_files} => Float
+    #   * {Types::GetMLInputChannelResponse#size_in_gb #size_in_gb} => Float
+    #   * {Types::GetMLInputChannelResponse#description #description} => String
+    #   * {Types::GetMLInputChannelResponse#kms_key_arn #kms_key_arn} => String
+    #   * {Types::GetMLInputChannelResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_ml_input_channel({
+    #     ml_input_channel_arn: "MLInputChannelArn", # required
+    #     membership_identifier: "UUID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.create_time #=> Time
+    #   resp.update_time #=> Time
+    #   resp.membership_identifier #=> String
+    #   resp.collaboration_identifier #=> String
+    #   resp.input_channel.data_source.protected_query_input_parameters.sql_parameters.query_string #=> String
+    #   resp.input_channel.data_source.protected_query_input_parameters.sql_parameters.analysis_template_arn #=> String
+    #   resp.input_channel.data_source.protected_query_input_parameters.sql_parameters.parameters #=> Hash
+    #   resp.input_channel.data_source.protected_query_input_parameters.sql_parameters.parameters["ParameterKey"] #=> String
+    #   resp.input_channel.data_source.protected_query_input_parameters.compute_configuration.worker.type #=> String, one of "CR.1X", "CR.4X"
+    #   resp.input_channel.data_source.protected_query_input_parameters.compute_configuration.worker.number #=> Integer
+    #   resp.input_channel.role_arn #=> String
+    #   resp.protected_query_identifier #=> String
+    #   resp.ml_input_channel_arn #=> String
+    #   resp.name #=> String
+    #   resp.configured_model_algorithm_associations #=> Array
+    #   resp.configured_model_algorithm_associations[0] #=> String
+    #   resp.status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_PENDING", "DELETE_IN_PROGRESS", "DELETE_FAILED", "INACTIVE"
+    #   resp.status_details.status_code #=> String
+    #   resp.status_details.message #=> String
+    #   resp.retention_in_days #=> Integer
+    #   resp.number_of_records #=> Integer
+    #   resp.number_of_files #=> Float
+    #   resp.size_in_gb #=> Float
+    #   resp.description #=> String
+    #   resp.kms_key_arn #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetMLInputChannel AWS API Documentation
+    #
+    # @overload get_ml_input_channel(params = {})
+    # @param [Hash] params ({})
+    def get_ml_input_channel(params = {}, options = {})
+      req = build_request(:get_ml_input_channel, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a trained model.
+    #
+    # @option params [required, String] :trained_model_arn
+    #   The Amazon Resource Name (ARN) of the trained model that you are
+    #   interested in.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The membership ID of the member that created the trained model that
+    #   you are interested in.
+    #
+    # @return [Types::GetTrainedModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTrainedModelResponse#membership_identifier #membership_identifier} => String
+    #   * {Types::GetTrainedModelResponse#collaboration_identifier #collaboration_identifier} => String
+    #   * {Types::GetTrainedModelResponse#trained_model_arn #trained_model_arn} => String
+    #   * {Types::GetTrainedModelResponse#name #name} => String
+    #   * {Types::GetTrainedModelResponse#description #description} => String
+    #   * {Types::GetTrainedModelResponse#status #status} => String
+    #   * {Types::GetTrainedModelResponse#status_details #status_details} => Types::StatusDetails
+    #   * {Types::GetTrainedModelResponse#configured_model_algorithm_association_arn #configured_model_algorithm_association_arn} => String
+    #   * {Types::GetTrainedModelResponse#resource_config #resource_config} => Types::ResourceConfig
+    #   * {Types::GetTrainedModelResponse#stopping_condition #stopping_condition} => Types::StoppingCondition
+    #   * {Types::GetTrainedModelResponse#metrics_status #metrics_status} => String
+    #   * {Types::GetTrainedModelResponse#metrics_status_details #metrics_status_details} => String
+    #   * {Types::GetTrainedModelResponse#logs_status #logs_status} => String
+    #   * {Types::GetTrainedModelResponse#logs_status_details #logs_status_details} => String
+    #   * {Types::GetTrainedModelResponse#training_container_image_digest #training_container_image_digest} => String
+    #   * {Types::GetTrainedModelResponse#create_time #create_time} => Time
+    #   * {Types::GetTrainedModelResponse#update_time #update_time} => Time
+    #   * {Types::GetTrainedModelResponse#hyperparameters #hyperparameters} => Hash&lt;String,String&gt;
+    #   * {Types::GetTrainedModelResponse#environment #environment} => Hash&lt;String,String&gt;
+    #   * {Types::GetTrainedModelResponse#kms_key_arn #kms_key_arn} => String
+    #   * {Types::GetTrainedModelResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetTrainedModelResponse#data_channels #data_channels} => Array&lt;Types::ModelTrainingDataChannel&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_trained_model({
+    #     trained_model_arn: "TrainedModelArn", # required
+    #     membership_identifier: "UUID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.membership_identifier #=> String
+    #   resp.collaboration_identifier #=> String
+    #   resp.trained_model_arn #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_PENDING", "DELETE_IN_PROGRESS", "DELETE_FAILED", "INACTIVE", "CANCEL_PENDING", "CANCEL_IN_PROGRESS", "CANCEL_FAILED"
+    #   resp.status_details.status_code #=> String
+    #   resp.status_details.message #=> String
+    #   resp.configured_model_algorithm_association_arn #=> String
+    #   resp.resource_config.instance_count #=> Integer
+    #   resp.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.p4de.24xlarge", "ml.p5.48xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge", "ml.m6i.large", "ml.m6i.xlarge", "ml.m6i.2xlarge", "ml.m6i.4xlarge", "ml.m6i.8xlarge", "ml.m6i.12xlarge", "ml.m6i.16xlarge", "ml.m6i.24xlarge", "ml.m6i.32xlarge", "ml.c6i.xlarge", "ml.c6i.2xlarge", "ml.c6i.8xlarge", "ml.c6i.4xlarge", "ml.c6i.12xlarge", "ml.c6i.16xlarge", "ml.c6i.24xlarge", "ml.c6i.32xlarge", "ml.r5d.large", "ml.r5d.xlarge", "ml.r5d.2xlarge", "ml.r5d.4xlarge", "ml.r5d.8xlarge", "ml.r5d.12xlarge", "ml.r5d.16xlarge", "ml.r5d.24xlarge", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge"
+    #   resp.resource_config.volume_size_in_gb #=> Integer
+    #   resp.stopping_condition.max_runtime_in_seconds #=> Integer
+    #   resp.metrics_status #=> String, one of "PUBLISH_SUCCEEDED", "PUBLISH_FAILED"
+    #   resp.metrics_status_details #=> String
+    #   resp.logs_status #=> String, one of "PUBLISH_SUCCEEDED", "PUBLISH_FAILED"
+    #   resp.logs_status_details #=> String
+    #   resp.training_container_image_digest #=> String
+    #   resp.create_time #=> Time
+    #   resp.update_time #=> Time
+    #   resp.hyperparameters #=> Hash
+    #   resp.hyperparameters["HyperParametersKeyString"] #=> String
+    #   resp.environment #=> Hash
+    #   resp.environment["EnvironmentKeyString"] #=> String
+    #   resp.kms_key_arn #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.data_channels #=> Array
+    #   resp.data_channels[0].ml_input_channel_arn #=> String
+    #   resp.data_channels[0].channel_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetTrainedModel AWS API Documentation
+    #
+    # @overload get_trained_model(params = {})
+    # @param [Hash] params ({})
+    def get_trained_model(params = {}, options = {})
+      req = build_request(:get_trained_model, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a trained model inference job.
+    #
+    # @option params [required, String] :membership_identifier
+    #   Provides the membership ID of the membership that contains the trained
+    #   model inference job that you are interested in.
+    #
+    # @option params [required, String] :trained_model_inference_job_arn
+    #   Provides the Amazon Resource Name (ARN) of the trained model inference
+    #   job that you are interested in.
+    #
+    # @return [Types::GetTrainedModelInferenceJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTrainedModelInferenceJobResponse#create_time #create_time} => Time
+    #   * {Types::GetTrainedModelInferenceJobResponse#update_time #update_time} => Time
+    #   * {Types::GetTrainedModelInferenceJobResponse#trained_model_inference_job_arn #trained_model_inference_job_arn} => String
+    #   * {Types::GetTrainedModelInferenceJobResponse#configured_model_algorithm_association_arn #configured_model_algorithm_association_arn} => String
+    #   * {Types::GetTrainedModelInferenceJobResponse#name #name} => String
+    #   * {Types::GetTrainedModelInferenceJobResponse#status #status} => String
+    #   * {Types::GetTrainedModelInferenceJobResponse#trained_model_arn #trained_model_arn} => String
+    #   * {Types::GetTrainedModelInferenceJobResponse#resource_config #resource_config} => Types::InferenceResourceConfig
+    #   * {Types::GetTrainedModelInferenceJobResponse#output_configuration #output_configuration} => Types::InferenceOutputConfiguration
+    #   * {Types::GetTrainedModelInferenceJobResponse#membership_identifier #membership_identifier} => String
+    #   * {Types::GetTrainedModelInferenceJobResponse#data_source #data_source} => Types::ModelInferenceDataSource
+    #   * {Types::GetTrainedModelInferenceJobResponse#container_execution_parameters #container_execution_parameters} => Types::InferenceContainerExecutionParameters
+    #   * {Types::GetTrainedModelInferenceJobResponse#status_details #status_details} => Types::StatusDetails
+    #   * {Types::GetTrainedModelInferenceJobResponse#description #description} => String
+    #   * {Types::GetTrainedModelInferenceJobResponse#inference_container_image_digest #inference_container_image_digest} => String
+    #   * {Types::GetTrainedModelInferenceJobResponse#environment #environment} => Hash&lt;String,String&gt;
+    #   * {Types::GetTrainedModelInferenceJobResponse#kms_key_arn #kms_key_arn} => String
+    #   * {Types::GetTrainedModelInferenceJobResponse#metrics_status #metrics_status} => String
+    #   * {Types::GetTrainedModelInferenceJobResponse#metrics_status_details #metrics_status_details} => String
+    #   * {Types::GetTrainedModelInferenceJobResponse#logs_status #logs_status} => String
+    #   * {Types::GetTrainedModelInferenceJobResponse#logs_status_details #logs_status_details} => String
+    #   * {Types::GetTrainedModelInferenceJobResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_trained_model_inference_job({
+    #     membership_identifier: "UUID", # required
+    #     trained_model_inference_job_arn: "TrainedModelInferenceJobArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.create_time #=> Time
+    #   resp.update_time #=> Time
+    #   resp.trained_model_inference_job_arn #=> String
+    #   resp.configured_model_algorithm_association_arn #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "CANCEL_PENDING", "CANCEL_IN_PROGRESS", "CANCEL_FAILED", "INACTIVE"
+    #   resp.trained_model_arn #=> String
+    #   resp.resource_config.instance_type #=> String, one of "ml.r7i.48xlarge", "ml.r6i.16xlarge", "ml.m6i.xlarge", "ml.m5.4xlarge", "ml.p2.xlarge", "ml.m4.16xlarge", "ml.r7i.16xlarge", "ml.m7i.xlarge", "ml.m6i.12xlarge", "ml.r7i.8xlarge", "ml.r7i.large", "ml.m7i.12xlarge", "ml.m6i.24xlarge", "ml.m7i.24xlarge", "ml.r6i.8xlarge", "ml.r6i.large", "ml.g5.2xlarge", "ml.m5.large", "ml.p3.16xlarge", "ml.m7i.48xlarge", "ml.m6i.16xlarge", "ml.p2.16xlarge", "ml.g5.4xlarge", "ml.m7i.16xlarge", "ml.c4.2xlarge", "ml.c5.2xlarge", "ml.c6i.32xlarge", "ml.c4.4xlarge", "ml.g5.8xlarge", "ml.c6i.xlarge", "ml.c5.4xlarge", "ml.g4dn.xlarge", "ml.c7i.xlarge", "ml.c6i.12xlarge", "ml.g4dn.12xlarge", "ml.c7i.12xlarge", "ml.c6i.24xlarge", "ml.g4dn.2xlarge", "ml.c7i.24xlarge", "ml.c7i.2xlarge", "ml.c4.8xlarge", "ml.c6i.2xlarge", "ml.g4dn.4xlarge", "ml.c7i.48xlarge", "ml.c7i.4xlarge", "ml.c6i.16xlarge", "ml.c5.9xlarge", "ml.g4dn.16xlarge", "ml.c7i.16xlarge", "ml.c6i.4xlarge", "ml.c5.xlarge", "ml.c4.xlarge", "ml.g4dn.8xlarge", "ml.c7i.8xlarge", "ml.c7i.large", "ml.g5.xlarge", "ml.c6i.8xlarge", "ml.c6i.large", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.m7i.2xlarge", "ml.c5.18xlarge", "ml.g5.48xlarge", "ml.m6i.2xlarge", "ml.g5.16xlarge", "ml.m7i.4xlarge", "ml.p3.2xlarge", "ml.r6i.32xlarge", "ml.m6i.4xlarge", "ml.m5.xlarge", "ml.m4.10xlarge", "ml.r6i.xlarge", "ml.m5.12xlarge", "ml.m4.xlarge", "ml.r7i.2xlarge", "ml.r7i.xlarge", "ml.r6i.12xlarge", "ml.m5.24xlarge", "ml.r7i.12xlarge", "ml.m7i.8xlarge", "ml.m7i.large", "ml.r6i.24xlarge", "ml.r6i.2xlarge", "ml.m4.2xlarge", "ml.r7i.24xlarge", "ml.r7i.4xlarge", "ml.m6i.8xlarge", "ml.m6i.large", "ml.m5.2xlarge", "ml.p2.8xlarge", "ml.r6i.4xlarge", "ml.m6i.32xlarge", "ml.p3.8xlarge", "ml.m4.4xlarge"
+    #   resp.resource_config.instance_count #=> Integer
+    #   resp.output_configuration.accept #=> String
+    #   resp.output_configuration.members #=> Array
+    #   resp.output_configuration.members[0].account_id #=> String
+    #   resp.membership_identifier #=> String
+    #   resp.data_source.ml_input_channel_arn #=> String
+    #   resp.container_execution_parameters.max_payload_in_mb #=> Integer
+    #   resp.status_details.status_code #=> String
+    #   resp.status_details.message #=> String
+    #   resp.description #=> String
+    #   resp.inference_container_image_digest #=> String
+    #   resp.environment #=> Hash
+    #   resp.environment["InferenceEnvironmentMapKeyString"] #=> String
+    #   resp.kms_key_arn #=> String
+    #   resp.metrics_status #=> String, one of "PUBLISH_SUCCEEDED", "PUBLISH_FAILED"
+    #   resp.metrics_status_details #=> String
+    #   resp.logs_status #=> String, one of "PUBLISH_SUCCEEDED", "PUBLISH_FAILED"
+    #   resp.logs_status_details #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetTrainedModelInferenceJob AWS API Documentation
+    #
+    # @overload get_trained_model_inference_job(params = {})
+    # @param [Hash] params ({})
+    def get_trained_model_inference_job(params = {}, options = {})
+      req = build_request(:get_trained_model_inference_job, params)
       req.send_request(options)
     end
 
@@ -1311,6 +2543,290 @@ module Aws::CleanRoomsML
       req.send_request(options)
     end
 
+    # Returns a list of the configured model algorithm associations in a
+    # collaboration.
+    #
+    # @option params [String] :next_token
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of the results that is returned per call.
+    #
+    # @option params [required, String] :collaboration_identifier
+    #   The collaboration ID of the collaboration that contains the configured
+    #   model algorithm associations that you are interested in.
+    #
+    # @return [Types::ListCollaborationConfiguredModelAlgorithmAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCollaborationConfiguredModelAlgorithmAssociationsResponse#next_token #next_token} => String
+    #   * {Types::ListCollaborationConfiguredModelAlgorithmAssociationsResponse#collaboration_configured_model_algorithm_associations #collaboration_configured_model_algorithm_associations} => Array&lt;Types::CollaborationConfiguredModelAlgorithmAssociationSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_collaboration_configured_model_algorithm_associations({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     collaboration_identifier: "UUID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.collaboration_configured_model_algorithm_associations #=> Array
+    #   resp.collaboration_configured_model_algorithm_associations[0].create_time #=> Time
+    #   resp.collaboration_configured_model_algorithm_associations[0].update_time #=> Time
+    #   resp.collaboration_configured_model_algorithm_associations[0].configured_model_algorithm_association_arn #=> String
+    #   resp.collaboration_configured_model_algorithm_associations[0].name #=> String
+    #   resp.collaboration_configured_model_algorithm_associations[0].description #=> String
+    #   resp.collaboration_configured_model_algorithm_associations[0].membership_identifier #=> String
+    #   resp.collaboration_configured_model_algorithm_associations[0].collaboration_identifier #=> String
+    #   resp.collaboration_configured_model_algorithm_associations[0].configured_model_algorithm_arn #=> String
+    #   resp.collaboration_configured_model_algorithm_associations[0].creator_account_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListCollaborationConfiguredModelAlgorithmAssociations AWS API Documentation
+    #
+    # @overload list_collaboration_configured_model_algorithm_associations(params = {})
+    # @param [Hash] params ({})
+    def list_collaboration_configured_model_algorithm_associations(params = {}, options = {})
+      req = build_request(:list_collaboration_configured_model_algorithm_associations, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of the ML input channels in a collaboration.
+    #
+    # @option params [String] :next_token
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [required, String] :collaboration_identifier
+    #   The collaboration ID of the collaboration that contains the ML input
+    #   channels that you want to list.
+    #
+    # @return [Types::ListCollaborationMLInputChannelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCollaborationMLInputChannelsResponse#next_token #next_token} => String
+    #   * {Types::ListCollaborationMLInputChannelsResponse#collaboration_ml_input_channels_list #collaboration_ml_input_channels_list} => Array&lt;Types::CollaborationMLInputChannelSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_collaboration_ml_input_channels({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     collaboration_identifier: "UUID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.collaboration_ml_input_channels_list #=> Array
+    #   resp.collaboration_ml_input_channels_list[0].create_time #=> Time
+    #   resp.collaboration_ml_input_channels_list[0].update_time #=> Time
+    #   resp.collaboration_ml_input_channels_list[0].membership_identifier #=> String
+    #   resp.collaboration_ml_input_channels_list[0].collaboration_identifier #=> String
+    #   resp.collaboration_ml_input_channels_list[0].name #=> String
+    #   resp.collaboration_ml_input_channels_list[0].configured_model_algorithm_associations #=> Array
+    #   resp.collaboration_ml_input_channels_list[0].configured_model_algorithm_associations[0] #=> String
+    #   resp.collaboration_ml_input_channels_list[0].ml_input_channel_arn #=> String
+    #   resp.collaboration_ml_input_channels_list[0].status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_PENDING", "DELETE_IN_PROGRESS", "DELETE_FAILED", "INACTIVE"
+    #   resp.collaboration_ml_input_channels_list[0].creator_account_id #=> String
+    #   resp.collaboration_ml_input_channels_list[0].description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListCollaborationMLInputChannels AWS API Documentation
+    #
+    # @overload list_collaboration_ml_input_channels(params = {})
+    # @param [Hash] params ({})
+    def list_collaboration_ml_input_channels(params = {}, options = {})
+      req = build_request(:list_collaboration_ml_input_channels, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of the export jobs for a trained model in a
+    # collaboration.
+    #
+    # @option params [String] :next_token
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of the results that is returned per call.
+    #
+    # @option params [required, String] :collaboration_identifier
+    #   The collaboration ID of the collaboration that contains the trained
+    #   model export jobs that you are interested in.
+    #
+    # @option params [required, String] :trained_model_arn
+    #   The Amazon Resource Name (ARN) of the trained model that was used to
+    #   create the export jobs that you are interested in.
+    #
+    # @return [Types::ListCollaborationTrainedModelExportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCollaborationTrainedModelExportJobsResponse#next_token #next_token} => String
+    #   * {Types::ListCollaborationTrainedModelExportJobsResponse#collaboration_trained_model_export_jobs #collaboration_trained_model_export_jobs} => Array&lt;Types::CollaborationTrainedModelExportJobSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_collaboration_trained_model_export_jobs({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     collaboration_identifier: "UUID", # required
+    #     trained_model_arn: "TrainedModelArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.collaboration_trained_model_export_jobs #=> Array
+    #   resp.collaboration_trained_model_export_jobs[0].create_time #=> Time
+    #   resp.collaboration_trained_model_export_jobs[0].update_time #=> Time
+    #   resp.collaboration_trained_model_export_jobs[0].name #=> String
+    #   resp.collaboration_trained_model_export_jobs[0].output_configuration.members #=> Array
+    #   resp.collaboration_trained_model_export_jobs[0].output_configuration.members[0].account_id #=> String
+    #   resp.collaboration_trained_model_export_jobs[0].status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE"
+    #   resp.collaboration_trained_model_export_jobs[0].status_details.status_code #=> String
+    #   resp.collaboration_trained_model_export_jobs[0].status_details.message #=> String
+    #   resp.collaboration_trained_model_export_jobs[0].description #=> String
+    #   resp.collaboration_trained_model_export_jobs[0].creator_account_id #=> String
+    #   resp.collaboration_trained_model_export_jobs[0].trained_model_arn #=> String
+    #   resp.collaboration_trained_model_export_jobs[0].membership_identifier #=> String
+    #   resp.collaboration_trained_model_export_jobs[0].collaboration_identifier #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListCollaborationTrainedModelExportJobs AWS API Documentation
+    #
+    # @overload list_collaboration_trained_model_export_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_collaboration_trained_model_export_jobs(params = {}, options = {})
+      req = build_request(:list_collaboration_trained_model_export_jobs, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of trained model inference jobs in a specified
+    # collaboration.
+    #
+    # @option params [String] :next_token
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of the results that is returned per call.
+    #
+    # @option params [required, String] :collaboration_identifier
+    #   The collaboration ID of the collaboration that contains the trained
+    #   model inference jobs that you are interested in.
+    #
+    # @option params [String] :trained_model_arn
+    #   The Amazon Resource Name (ARN) of the trained model that was used to
+    #   create the trained model inference jobs that you are interested in.
+    #
+    # @return [Types::ListCollaborationTrainedModelInferenceJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCollaborationTrainedModelInferenceJobsResponse#next_token #next_token} => String
+    #   * {Types::ListCollaborationTrainedModelInferenceJobsResponse#collaboration_trained_model_inference_jobs #collaboration_trained_model_inference_jobs} => Array&lt;Types::CollaborationTrainedModelInferenceJobSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_collaboration_trained_model_inference_jobs({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     collaboration_identifier: "UUID", # required
+    #     trained_model_arn: "TrainedModelArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.collaboration_trained_model_inference_jobs #=> Array
+    #   resp.collaboration_trained_model_inference_jobs[0].trained_model_inference_job_arn #=> String
+    #   resp.collaboration_trained_model_inference_jobs[0].configured_model_algorithm_association_arn #=> String
+    #   resp.collaboration_trained_model_inference_jobs[0].membership_identifier #=> String
+    #   resp.collaboration_trained_model_inference_jobs[0].trained_model_arn #=> String
+    #   resp.collaboration_trained_model_inference_jobs[0].collaboration_identifier #=> String
+    #   resp.collaboration_trained_model_inference_jobs[0].status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "CANCEL_PENDING", "CANCEL_IN_PROGRESS", "CANCEL_FAILED", "INACTIVE"
+    #   resp.collaboration_trained_model_inference_jobs[0].output_configuration.accept #=> String
+    #   resp.collaboration_trained_model_inference_jobs[0].output_configuration.members #=> Array
+    #   resp.collaboration_trained_model_inference_jobs[0].output_configuration.members[0].account_id #=> String
+    #   resp.collaboration_trained_model_inference_jobs[0].name #=> String
+    #   resp.collaboration_trained_model_inference_jobs[0].description #=> String
+    #   resp.collaboration_trained_model_inference_jobs[0].metrics_status #=> String, one of "PUBLISH_SUCCEEDED", "PUBLISH_FAILED"
+    #   resp.collaboration_trained_model_inference_jobs[0].metrics_status_details #=> String
+    #   resp.collaboration_trained_model_inference_jobs[0].logs_status #=> String, one of "PUBLISH_SUCCEEDED", "PUBLISH_FAILED"
+    #   resp.collaboration_trained_model_inference_jobs[0].logs_status_details #=> String
+    #   resp.collaboration_trained_model_inference_jobs[0].create_time #=> Time
+    #   resp.collaboration_trained_model_inference_jobs[0].update_time #=> Time
+    #   resp.collaboration_trained_model_inference_jobs[0].creator_account_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListCollaborationTrainedModelInferenceJobs AWS API Documentation
+    #
+    # @overload list_collaboration_trained_model_inference_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_collaboration_trained_model_inference_jobs(params = {}, options = {})
+      req = build_request(:list_collaboration_trained_model_inference_jobs, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of the trained models in a collaboration.
+    #
+    # @option params [String] :next_token
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of the results that is returned per call.
+    #
+    # @option params [required, String] :collaboration_identifier
+    #   The collaboration ID of the collaboration that contains the trained
+    #   models you are interested in.
+    #
+    # @return [Types::ListCollaborationTrainedModelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCollaborationTrainedModelsResponse#next_token #next_token} => String
+    #   * {Types::ListCollaborationTrainedModelsResponse#collaboration_trained_models #collaboration_trained_models} => Array&lt;Types::CollaborationTrainedModelSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_collaboration_trained_models({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     collaboration_identifier: "UUID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.collaboration_trained_models #=> Array
+    #   resp.collaboration_trained_models[0].create_time #=> Time
+    #   resp.collaboration_trained_models[0].update_time #=> Time
+    #   resp.collaboration_trained_models[0].trained_model_arn #=> String
+    #   resp.collaboration_trained_models[0].name #=> String
+    #   resp.collaboration_trained_models[0].description #=> String
+    #   resp.collaboration_trained_models[0].membership_identifier #=> String
+    #   resp.collaboration_trained_models[0].collaboration_identifier #=> String
+    #   resp.collaboration_trained_models[0].status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_PENDING", "DELETE_IN_PROGRESS", "DELETE_FAILED", "INACTIVE", "CANCEL_PENDING", "CANCEL_IN_PROGRESS", "CANCEL_FAILED"
+    #   resp.collaboration_trained_models[0].configured_model_algorithm_association_arn #=> String
+    #   resp.collaboration_trained_models[0].creator_account_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListCollaborationTrainedModels AWS API Documentation
+    #
+    # @overload list_collaboration_trained_models(params = {})
+    # @param [Hash] params ({})
+    def list_collaboration_trained_models(params = {}, options = {})
+      req = build_request(:list_collaboration_trained_models, params)
+      req.send_request(options)
+    end
+
     # Returns a list of the configured audience models.
     #
     # @option params [String] :next_token
@@ -1357,6 +2873,151 @@ module Aws::CleanRoomsML
       req.send_request(options)
     end
 
+    # Returns a list of configured model algorithm associations.
+    #
+    # @option params [String] :next_token
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of the results that is returned per call.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The membership ID of the member that created the configured model
+    #   algorithm associations you are interested in.
+    #
+    # @return [Types::ListConfiguredModelAlgorithmAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListConfiguredModelAlgorithmAssociationsResponse#next_token #next_token} => String
+    #   * {Types::ListConfiguredModelAlgorithmAssociationsResponse#configured_model_algorithm_associations #configured_model_algorithm_associations} => Array&lt;Types::ConfiguredModelAlgorithmAssociationSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_configured_model_algorithm_associations({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     membership_identifier: "UUID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.configured_model_algorithm_associations #=> Array
+    #   resp.configured_model_algorithm_associations[0].create_time #=> Time
+    #   resp.configured_model_algorithm_associations[0].update_time #=> Time
+    #   resp.configured_model_algorithm_associations[0].configured_model_algorithm_association_arn #=> String
+    #   resp.configured_model_algorithm_associations[0].configured_model_algorithm_arn #=> String
+    #   resp.configured_model_algorithm_associations[0].name #=> String
+    #   resp.configured_model_algorithm_associations[0].description #=> String
+    #   resp.configured_model_algorithm_associations[0].membership_identifier #=> String
+    #   resp.configured_model_algorithm_associations[0].collaboration_identifier #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListConfiguredModelAlgorithmAssociations AWS API Documentation
+    #
+    # @overload list_configured_model_algorithm_associations(params = {})
+    # @param [Hash] params ({})
+    def list_configured_model_algorithm_associations(params = {}, options = {})
+      req = build_request(:list_configured_model_algorithm_associations, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of configured model algorithms.
+    #
+    # @option params [String] :next_token
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of the results that is returned per call.
+    #
+    # @return [Types::ListConfiguredModelAlgorithmsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListConfiguredModelAlgorithmsResponse#next_token #next_token} => String
+    #   * {Types::ListConfiguredModelAlgorithmsResponse#configured_model_algorithms #configured_model_algorithms} => Array&lt;Types::ConfiguredModelAlgorithmSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_configured_model_algorithms({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.configured_model_algorithms #=> Array
+    #   resp.configured_model_algorithms[0].create_time #=> Time
+    #   resp.configured_model_algorithms[0].update_time #=> Time
+    #   resp.configured_model_algorithms[0].configured_model_algorithm_arn #=> String
+    #   resp.configured_model_algorithms[0].name #=> String
+    #   resp.configured_model_algorithms[0].description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListConfiguredModelAlgorithms AWS API Documentation
+    #
+    # @overload list_configured_model_algorithms(params = {})
+    # @param [Hash] params ({})
+    def list_configured_model_algorithms(params = {}, options = {})
+      req = build_request(:list_configured_model_algorithms, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of ML input channels.
+    #
+    # @option params [String] :next_token
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of ML input channels to return.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The membership ID of the membership that contains the ML input
+    #   channels that you want to list.
+    #
+    # @return [Types::ListMLInputChannelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMLInputChannelsResponse#next_token #next_token} => String
+    #   * {Types::ListMLInputChannelsResponse#ml_input_channels_list #ml_input_channels_list} => Array&lt;Types::MLInputChannelSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_ml_input_channels({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     membership_identifier: "UUID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.ml_input_channels_list #=> Array
+    #   resp.ml_input_channels_list[0].create_time #=> Time
+    #   resp.ml_input_channels_list[0].update_time #=> Time
+    #   resp.ml_input_channels_list[0].membership_identifier #=> String
+    #   resp.ml_input_channels_list[0].collaboration_identifier #=> String
+    #   resp.ml_input_channels_list[0].name #=> String
+    #   resp.ml_input_channels_list[0].configured_model_algorithm_associations #=> Array
+    #   resp.ml_input_channels_list[0].configured_model_algorithm_associations[0] #=> String
+    #   resp.ml_input_channels_list[0].protected_query_identifier #=> String
+    #   resp.ml_input_channels_list[0].ml_input_channel_arn #=> String
+    #   resp.ml_input_channels_list[0].status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_PENDING", "DELETE_IN_PROGRESS", "DELETE_FAILED", "INACTIVE"
+    #   resp.ml_input_channels_list[0].description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListMLInputChannels AWS API Documentation
+    #
+    # @overload list_ml_input_channels(params = {})
+    # @param [Hash] params ({})
+    def list_ml_input_channels(params = {}, options = {})
+      req = build_request(:list_ml_input_channels, params)
+      req.send_request(options)
+    end
+
     # Returns a list of tags for a provided resource.
     #
     # @option params [required, String] :resource_arn
@@ -1384,6 +3045,121 @@ module Aws::CleanRoomsML
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of trained model inference jobs that match the request
+    # parameters.
+    #
+    # @option params [String] :next_token
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of the results that is returned per call.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The membership
+    #
+    # @option params [String] :trained_model_arn
+    #   The Amazon Resource Name (ARN) of a trained model that was used to
+    #   create the trained model inference jobs that you are interested in.
+    #
+    # @return [Types::ListTrainedModelInferenceJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTrainedModelInferenceJobsResponse#next_token #next_token} => String
+    #   * {Types::ListTrainedModelInferenceJobsResponse#trained_model_inference_jobs #trained_model_inference_jobs} => Array&lt;Types::TrainedModelInferenceJobSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_trained_model_inference_jobs({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     membership_identifier: "UUID", # required
+    #     trained_model_arn: "TrainedModelArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.trained_model_inference_jobs #=> Array
+    #   resp.trained_model_inference_jobs[0].trained_model_inference_job_arn #=> String
+    #   resp.trained_model_inference_jobs[0].configured_model_algorithm_association_arn #=> String
+    #   resp.trained_model_inference_jobs[0].membership_identifier #=> String
+    #   resp.trained_model_inference_jobs[0].trained_model_arn #=> String
+    #   resp.trained_model_inference_jobs[0].collaboration_identifier #=> String
+    #   resp.trained_model_inference_jobs[0].status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "CANCEL_PENDING", "CANCEL_IN_PROGRESS", "CANCEL_FAILED", "INACTIVE"
+    #   resp.trained_model_inference_jobs[0].output_configuration.accept #=> String
+    #   resp.trained_model_inference_jobs[0].output_configuration.members #=> Array
+    #   resp.trained_model_inference_jobs[0].output_configuration.members[0].account_id #=> String
+    #   resp.trained_model_inference_jobs[0].name #=> String
+    #   resp.trained_model_inference_jobs[0].description #=> String
+    #   resp.trained_model_inference_jobs[0].metrics_status #=> String, one of "PUBLISH_SUCCEEDED", "PUBLISH_FAILED"
+    #   resp.trained_model_inference_jobs[0].metrics_status_details #=> String
+    #   resp.trained_model_inference_jobs[0].logs_status #=> String, one of "PUBLISH_SUCCEEDED", "PUBLISH_FAILED"
+    #   resp.trained_model_inference_jobs[0].logs_status_details #=> String
+    #   resp.trained_model_inference_jobs[0].create_time #=> Time
+    #   resp.trained_model_inference_jobs[0].update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListTrainedModelInferenceJobs AWS API Documentation
+    #
+    # @overload list_trained_model_inference_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_trained_model_inference_jobs(params = {}, options = {})
+      req = build_request(:list_trained_model_inference_jobs, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of trained models.
+    #
+    # @option params [String] :next_token
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of the results that is returned per call.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The membership ID of the member that created the trained models you
+    #   are interested in.
+    #
+    # @return [Types::ListTrainedModelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTrainedModelsResponse#next_token #next_token} => String
+    #   * {Types::ListTrainedModelsResponse#trained_models #trained_models} => Array&lt;Types::TrainedModelSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_trained_models({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     membership_identifier: "UUID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.trained_models #=> Array
+    #   resp.trained_models[0].create_time #=> Time
+    #   resp.trained_models[0].update_time #=> Time
+    #   resp.trained_models[0].trained_model_arn #=> String
+    #   resp.trained_models[0].name #=> String
+    #   resp.trained_models[0].description #=> String
+    #   resp.trained_models[0].membership_identifier #=> String
+    #   resp.trained_models[0].collaboration_identifier #=> String
+    #   resp.trained_models[0].status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_PENDING", "DELETE_IN_PROGRESS", "DELETE_FAILED", "INACTIVE", "CANCEL_PENDING", "CANCEL_IN_PROGRESS", "CANCEL_FAILED"
+    #   resp.trained_models[0].configured_model_algorithm_association_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListTrainedModels AWS API Documentation
+    #
+    # @overload list_trained_models(params = {})
+    # @param [Hash] params ({})
+    def list_trained_models(params = {}, options = {})
+      req = build_request(:list_trained_models, params)
       req.send_request(options)
     end
 
@@ -1471,6 +3247,40 @@ module Aws::CleanRoomsML
     # @param [Hash] params ({})
     def put_configured_audience_model_policy(params = {}, options = {})
       req = build_request(:put_configured_audience_model_policy, params)
+      req.send_request(options)
+    end
+
+    # Assigns information about an ML configuration.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The membership ID of the member that is being configured.
+    #
+    # @option params [required, Types::MLOutputConfiguration] :default_output_location
+    #   The default Amazon S3 location where ML output is stored for the
+    #   specified member.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_ml_configuration({
+    #     membership_identifier: "UUID", # required
+    #     default_output_location: { # required
+    #       destination: {
+    #         s3_destination: { # required
+    #           s3_uri: "S3Path", # required
+    #         },
+    #       },
+    #       role_arn: "IamRoleArn", # required
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/PutMLConfiguration AWS API Documentation
+    #
+    # @overload put_ml_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_ml_configuration(params = {}, options = {})
+      req = build_request(:put_ml_configuration, params)
       req.send_request(options)
     end
 
@@ -1609,6 +3419,181 @@ module Aws::CleanRoomsML
     # @param [Hash] params ({})
     def start_audience_generation_job(params = {}, options = {})
       req = build_request(:start_audience_generation_job, params)
+      req.send_request(options)
+    end
+
+    # Provides the information necessary to start a trained model export
+    # job.
+    #
+    # @option params [required, String] :name
+    #   The name of the trained model export job.
+    #
+    # @option params [required, String] :trained_model_arn
+    #   The Amazon Resource Name (ARN) of the trained model that you want to
+    #   export.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The membership ID of the member that is receiving the exported trained
+    #   model artifacts.
+    #
+    # @option params [required, Types::TrainedModelExportOutputConfiguration] :output_configuration
+    #   The output configuration information for the trained model export job.
+    #
+    # @option params [String] :description
+    #   The description of the trained model export job.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_trained_model_export_job({
+    #     name: "NameString", # required
+    #     trained_model_arn: "TrainedModelArn", # required
+    #     membership_identifier: "UUID", # required
+    #     output_configuration: { # required
+    #       members: [ # required
+    #         {
+    #           account_id: "AccountId", # required
+    #         },
+    #       ],
+    #     },
+    #     description: "ResourceDescription",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/StartTrainedModelExportJob AWS API Documentation
+    #
+    # @overload start_trained_model_export_job(params = {})
+    # @param [Hash] params ({})
+    def start_trained_model_export_job(params = {}, options = {})
+      req = build_request(:start_trained_model_export_job, params)
+      req.send_request(options)
+    end
+
+    # Defines the information necessary to begin a trained model inference
+    # job.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The membership ID of the membership that contains the trained model
+    #   inference job.
+    #
+    # @option params [required, String] :name
+    #   The name of the trained model inference job.
+    #
+    # @option params [required, String] :trained_model_arn
+    #   The Amazon Resource Name (ARN) of the trained model that is used for
+    #   this trained model inference job.
+    #
+    # @option params [String] :configured_model_algorithm_association_arn
+    #   The Amazon Resource Name (ARN) of the configured model algorithm
+    #   association that is used for this trained model inference job.
+    #
+    # @option params [required, Types::InferenceResourceConfig] :resource_config
+    #   Defines the resource configuration for the trained model inference
+    #   job.
+    #
+    # @option params [required, Types::InferenceOutputConfiguration] :output_configuration
+    #   Defines the output configuration information for the trained model
+    #   inference job.
+    #
+    # @option params [required, Types::ModelInferenceDataSource] :data_source
+    #   Defines he data source that is used for the trained model inference
+    #   job.
+    #
+    # @option params [String] :description
+    #   The description of the trained model inference job.
+    #
+    # @option params [Types::InferenceContainerExecutionParameters] :container_execution_parameters
+    #   The execution parameters for the container.
+    #
+    # @option params [Hash<String,String>] :environment
+    #   The environment variables to set in the Docker container.
+    #
+    # @option params [String] :kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key. This key is used to
+    #   encrypt and decrypt customer-owned data in the ML inference job and
+    #   associated data.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The optional metadata that you apply to the resource to help you
+    #   categorize and organize them. Each tag consists of a key and an
+    #   optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50.
+    #
+    #   * For each resource, each tag key must be unique, and each tag key can
+    #     have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8.
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8.
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case sensitive.
+    #
+    #   * Do not use aws:, AWS:, or any upper or lowercase combination of such
+    #     as a prefix for keys as it is reserved for AWS use. You cannot edit
+    #     or delete tag keys with this prefix. Values can have this prefix. If
+    #     a tag value has aws as its prefix but the key does not, then Clean
+    #     Rooms ML considers it to be a user tag and will count against the
+    #     limit of 50 tags. Tags with only the key prefix of aws do not count
+    #     against your tags per resource limit.
+    #
+    # @return [Types::StartTrainedModelInferenceJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartTrainedModelInferenceJobResponse#trained_model_inference_job_arn #trained_model_inference_job_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_trained_model_inference_job({
+    #     membership_identifier: "UUID", # required
+    #     name: "NameString", # required
+    #     trained_model_arn: "TrainedModelArn", # required
+    #     configured_model_algorithm_association_arn: "ConfiguredModelAlgorithmAssociationArn",
+    #     resource_config: { # required
+    #       instance_type: "ml.r7i.48xlarge", # required, accepts ml.r7i.48xlarge, ml.r6i.16xlarge, ml.m6i.xlarge, ml.m5.4xlarge, ml.p2.xlarge, ml.m4.16xlarge, ml.r7i.16xlarge, ml.m7i.xlarge, ml.m6i.12xlarge, ml.r7i.8xlarge, ml.r7i.large, ml.m7i.12xlarge, ml.m6i.24xlarge, ml.m7i.24xlarge, ml.r6i.8xlarge, ml.r6i.large, ml.g5.2xlarge, ml.m5.large, ml.p3.16xlarge, ml.m7i.48xlarge, ml.m6i.16xlarge, ml.p2.16xlarge, ml.g5.4xlarge, ml.m7i.16xlarge, ml.c4.2xlarge, ml.c5.2xlarge, ml.c6i.32xlarge, ml.c4.4xlarge, ml.g5.8xlarge, ml.c6i.xlarge, ml.c5.4xlarge, ml.g4dn.xlarge, ml.c7i.xlarge, ml.c6i.12xlarge, ml.g4dn.12xlarge, ml.c7i.12xlarge, ml.c6i.24xlarge, ml.g4dn.2xlarge, ml.c7i.24xlarge, ml.c7i.2xlarge, ml.c4.8xlarge, ml.c6i.2xlarge, ml.g4dn.4xlarge, ml.c7i.48xlarge, ml.c7i.4xlarge, ml.c6i.16xlarge, ml.c5.9xlarge, ml.g4dn.16xlarge, ml.c7i.16xlarge, ml.c6i.4xlarge, ml.c5.xlarge, ml.c4.xlarge, ml.g4dn.8xlarge, ml.c7i.8xlarge, ml.c7i.large, ml.g5.xlarge, ml.c6i.8xlarge, ml.c6i.large, ml.g5.12xlarge, ml.g5.24xlarge, ml.m7i.2xlarge, ml.c5.18xlarge, ml.g5.48xlarge, ml.m6i.2xlarge, ml.g5.16xlarge, ml.m7i.4xlarge, ml.p3.2xlarge, ml.r6i.32xlarge, ml.m6i.4xlarge, ml.m5.xlarge, ml.m4.10xlarge, ml.r6i.xlarge, ml.m5.12xlarge, ml.m4.xlarge, ml.r7i.2xlarge, ml.r7i.xlarge, ml.r6i.12xlarge, ml.m5.24xlarge, ml.r7i.12xlarge, ml.m7i.8xlarge, ml.m7i.large, ml.r6i.24xlarge, ml.r6i.2xlarge, ml.m4.2xlarge, ml.r7i.24xlarge, ml.r7i.4xlarge, ml.m6i.8xlarge, ml.m6i.large, ml.m5.2xlarge, ml.p2.8xlarge, ml.r6i.4xlarge, ml.m6i.32xlarge, ml.p3.8xlarge, ml.m4.4xlarge
+    #       instance_count: 1,
+    #     },
+    #     output_configuration: { # required
+    #       accept: "InferenceOutputConfigurationAcceptString",
+    #       members: [ # required
+    #         {
+    #           account_id: "AccountId", # required
+    #         },
+    #       ],
+    #     },
+    #     data_source: { # required
+    #       ml_input_channel_arn: "MLInputChannelArn", # required
+    #     },
+    #     description: "ResourceDescription",
+    #     container_execution_parameters: {
+    #       max_payload_in_mb: 1,
+    #     },
+    #     environment: {
+    #       "InferenceEnvironmentMapKeyString" => "InferenceEnvironmentMapValueString",
+    #     },
+    #     kms_key_arn: "KmsKeyArn",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.trained_model_inference_job_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/StartTrainedModelInferenceJob AWS API Documentation
+    #
+    # @overload start_trained_model_inference_job(params = {})
+    # @param [Hash] params ({})
+    def start_trained_model_inference_job(params = {}, options = {})
+      req = build_request(:start_trained_model_inference_job, params)
       req.send_request(options)
     end
 
@@ -1782,7 +3767,7 @@ module Aws::CleanRoomsML
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cleanroomsml'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

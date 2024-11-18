@@ -502,6 +502,9 @@ module Aws::FIS
     # @option params [Types::CreateExperimentTemplateExperimentOptionsInput] :experiment_options
     #   The experiment options for the experiment template.
     #
+    # @option params [Types::CreateExperimentTemplateReportConfigurationInput] :experiment_report_configuration
+    #   The experiment report configuration for the experiment template.
+    #
     # @return [Types::CreateExperimentTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateExperimentTemplateResponse#experiment_template #experiment_template} => Types::ExperimentTemplate
@@ -567,6 +570,23 @@ module Aws::FIS
     #       account_targeting: "single-account", # accepts single-account, multi-account
     #       empty_target_resolution_mode: "fail", # accepts fail, skip
     #     },
+    #     experiment_report_configuration: {
+    #       outputs: {
+    #         s3_configuration: {
+    #           bucket_name: "S3BucketName",
+    #           prefix: "S3ObjectKey",
+    #         },
+    #       },
+    #       data_sources: {
+    #         cloud_watch_dashboards: [
+    #           {
+    #             dashboard_identifier: "ReportConfigurationCloudWatchDashboardIdentifier",
+    #           },
+    #         ],
+    #       },
+    #       pre_experiment_duration: "ReportConfigurationDuration",
+    #       post_experiment_duration: "ReportConfigurationDuration",
+    #     },
     #   })
     #
     # @example Response structure
@@ -611,6 +631,12 @@ module Aws::FIS
     #   resp.experiment_template.experiment_options.account_targeting #=> String, one of "single-account", "multi-account"
     #   resp.experiment_template.experiment_options.empty_target_resolution_mode #=> String, one of "fail", "skip"
     #   resp.experiment_template.target_account_configurations_count #=> Integer
+    #   resp.experiment_template.experiment_report_configuration.outputs.s3_configuration.bucket_name #=> String
+    #   resp.experiment_template.experiment_report_configuration.outputs.s3_configuration.prefix #=> String
+    #   resp.experiment_template.experiment_report_configuration.data_sources.cloud_watch_dashboards #=> Array
+    #   resp.experiment_template.experiment_report_configuration.data_sources.cloud_watch_dashboards[0].dashboard_identifier #=> String
+    #   resp.experiment_template.experiment_report_configuration.pre_experiment_duration #=> String
+    #   resp.experiment_template.experiment_report_configuration.post_experiment_duration #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/CreateExperimentTemplate AWS API Documentation
     #
@@ -736,6 +762,12 @@ module Aws::FIS
     #   resp.experiment_template.experiment_options.account_targeting #=> String, one of "single-account", "multi-account"
     #   resp.experiment_template.experiment_options.empty_target_resolution_mode #=> String, one of "fail", "skip"
     #   resp.experiment_template.target_account_configurations_count #=> Integer
+    #   resp.experiment_template.experiment_report_configuration.outputs.s3_configuration.bucket_name #=> String
+    #   resp.experiment_template.experiment_report_configuration.outputs.s3_configuration.prefix #=> String
+    #   resp.experiment_template.experiment_report_configuration.data_sources.cloud_watch_dashboards #=> Array
+    #   resp.experiment_template.experiment_report_configuration.data_sources.cloud_watch_dashboards[0].dashboard_identifier #=> String
+    #   resp.experiment_template.experiment_report_configuration.pre_experiment_duration #=> String
+    #   resp.experiment_template.experiment_report_configuration.post_experiment_duration #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/DeleteExperimentTemplate AWS API Documentation
     #
@@ -886,6 +918,18 @@ module Aws::FIS
     #   resp.experiment.experiment_options.empty_target_resolution_mode #=> String, one of "fail", "skip"
     #   resp.experiment.experiment_options.actions_mode #=> String, one of "skip-all", "run-all"
     #   resp.experiment.target_account_configurations_count #=> Integer
+    #   resp.experiment.experiment_report_configuration.outputs.s3_configuration.bucket_name #=> String
+    #   resp.experiment.experiment_report_configuration.outputs.s3_configuration.prefix #=> String
+    #   resp.experiment.experiment_report_configuration.data_sources.cloud_watch_dashboards #=> Array
+    #   resp.experiment.experiment_report_configuration.data_sources.cloud_watch_dashboards[0].dashboard_identifier #=> String
+    #   resp.experiment.experiment_report_configuration.pre_experiment_duration #=> String
+    #   resp.experiment.experiment_report_configuration.post_experiment_duration #=> String
+    #   resp.experiment.experiment_report.state.status #=> String, one of "pending", "running", "completed", "cancelled", "failed"
+    #   resp.experiment.experiment_report.state.reason #=> String
+    #   resp.experiment.experiment_report.state.error.code #=> String
+    #   resp.experiment.experiment_report.s3_reports #=> Array
+    #   resp.experiment.experiment_report.s3_reports[0].arn #=> String
+    #   resp.experiment.experiment_report.s3_reports[0].report_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/GetExperiment AWS API Documentation
     #
@@ -988,6 +1032,12 @@ module Aws::FIS
     #   resp.experiment_template.experiment_options.account_targeting #=> String, one of "single-account", "multi-account"
     #   resp.experiment_template.experiment_options.empty_target_resolution_mode #=> String, one of "fail", "skip"
     #   resp.experiment_template.target_account_configurations_count #=> Integer
+    #   resp.experiment_template.experiment_report_configuration.outputs.s3_configuration.bucket_name #=> String
+    #   resp.experiment_template.experiment_report_configuration.outputs.s3_configuration.prefix #=> String
+    #   resp.experiment_template.experiment_report_configuration.data_sources.cloud_watch_dashboards #=> Array
+    #   resp.experiment_template.experiment_report_configuration.data_sources.cloud_watch_dashboards[0].dashboard_identifier #=> String
+    #   resp.experiment_template.experiment_report_configuration.pre_experiment_duration #=> String
+    #   resp.experiment_template.experiment_report_configuration.post_experiment_duration #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/GetExperimentTemplate AWS API Documentation
     #
@@ -1532,6 +1582,18 @@ module Aws::FIS
     #   resp.experiment.experiment_options.empty_target_resolution_mode #=> String, one of "fail", "skip"
     #   resp.experiment.experiment_options.actions_mode #=> String, one of "skip-all", "run-all"
     #   resp.experiment.target_account_configurations_count #=> Integer
+    #   resp.experiment.experiment_report_configuration.outputs.s3_configuration.bucket_name #=> String
+    #   resp.experiment.experiment_report_configuration.outputs.s3_configuration.prefix #=> String
+    #   resp.experiment.experiment_report_configuration.data_sources.cloud_watch_dashboards #=> Array
+    #   resp.experiment.experiment_report_configuration.data_sources.cloud_watch_dashboards[0].dashboard_identifier #=> String
+    #   resp.experiment.experiment_report_configuration.pre_experiment_duration #=> String
+    #   resp.experiment.experiment_report_configuration.post_experiment_duration #=> String
+    #   resp.experiment.experiment_report.state.status #=> String, one of "pending", "running", "completed", "cancelled", "failed"
+    #   resp.experiment.experiment_report.state.reason #=> String
+    #   resp.experiment.experiment_report.state.error.code #=> String
+    #   resp.experiment.experiment_report.s3_reports #=> Array
+    #   resp.experiment.experiment_report.s3_reports[0].arn #=> String
+    #   resp.experiment.experiment_report.s3_reports[0].report_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/StartExperiment AWS API Documentation
     #
@@ -1610,6 +1672,18 @@ module Aws::FIS
     #   resp.experiment.experiment_options.empty_target_resolution_mode #=> String, one of "fail", "skip"
     #   resp.experiment.experiment_options.actions_mode #=> String, one of "skip-all", "run-all"
     #   resp.experiment.target_account_configurations_count #=> Integer
+    #   resp.experiment.experiment_report_configuration.outputs.s3_configuration.bucket_name #=> String
+    #   resp.experiment.experiment_report_configuration.outputs.s3_configuration.prefix #=> String
+    #   resp.experiment.experiment_report_configuration.data_sources.cloud_watch_dashboards #=> Array
+    #   resp.experiment.experiment_report_configuration.data_sources.cloud_watch_dashboards[0].dashboard_identifier #=> String
+    #   resp.experiment.experiment_report_configuration.pre_experiment_duration #=> String
+    #   resp.experiment.experiment_report_configuration.post_experiment_duration #=> String
+    #   resp.experiment.experiment_report.state.status #=> String, one of "pending", "running", "completed", "cancelled", "failed"
+    #   resp.experiment.experiment_report.state.reason #=> String
+    #   resp.experiment.experiment_report.state.error.code #=> String
+    #   resp.experiment.experiment_report.s3_reports #=> Array
+    #   resp.experiment.experiment_report.s3_reports[0].arn #=> String
+    #   resp.experiment.experiment_report.s3_reports[0].report_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/StopExperiment AWS API Documentation
     #
@@ -1701,6 +1775,9 @@ module Aws::FIS
     # @option params [Types::UpdateExperimentTemplateExperimentOptionsInput] :experiment_options
     #   The experiment options for the experiment template.
     #
+    # @option params [Types::UpdateExperimentTemplateReportConfigurationInput] :experiment_report_configuration
+    #   The experiment report configuration for the experiment template.
+    #
     # @return [Types::UpdateExperimentTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateExperimentTemplateResponse#experiment_template #experiment_template} => Types::ExperimentTemplate
@@ -1762,6 +1839,23 @@ module Aws::FIS
     #     experiment_options: {
     #       empty_target_resolution_mode: "fail", # accepts fail, skip
     #     },
+    #     experiment_report_configuration: {
+    #       outputs: {
+    #         s3_configuration: {
+    #           bucket_name: "S3BucketName",
+    #           prefix: "S3ObjectKey",
+    #         },
+    #       },
+    #       data_sources: {
+    #         cloud_watch_dashboards: [
+    #           {
+    #             dashboard_identifier: "ReportConfigurationCloudWatchDashboardIdentifier",
+    #           },
+    #         ],
+    #       },
+    #       pre_experiment_duration: "ReportConfigurationDuration",
+    #       post_experiment_duration: "ReportConfigurationDuration",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1806,6 +1900,12 @@ module Aws::FIS
     #   resp.experiment_template.experiment_options.account_targeting #=> String, one of "single-account", "multi-account"
     #   resp.experiment_template.experiment_options.empty_target_resolution_mode #=> String, one of "fail", "skip"
     #   resp.experiment_template.target_account_configurations_count #=> Integer
+    #   resp.experiment_template.experiment_report_configuration.outputs.s3_configuration.bucket_name #=> String
+    #   resp.experiment_template.experiment_report_configuration.outputs.s3_configuration.prefix #=> String
+    #   resp.experiment_template.experiment_report_configuration.data_sources.cloud_watch_dashboards #=> Array
+    #   resp.experiment_template.experiment_report_configuration.data_sources.cloud_watch_dashboards[0].dashboard_identifier #=> String
+    #   resp.experiment_template.experiment_report_configuration.pre_experiment_duration #=> String
+    #   resp.experiment_template.experiment_report_configuration.post_experiment_duration #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/UpdateExperimentTemplate AWS API Documentation
     #
@@ -1915,7 +2015,7 @@ module Aws::FIS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-fis'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

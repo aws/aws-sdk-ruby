@@ -132,6 +132,8 @@ module Aws::ControlTower
     RegionName = Shapes::StringShape.new(name: 'RegionName')
     ResetEnabledBaselineInput = Shapes::StructureShape.new(name: 'ResetEnabledBaselineInput')
     ResetEnabledBaselineOutput = Shapes::StructureShape.new(name: 'ResetEnabledBaselineOutput')
+    ResetEnabledControlInput = Shapes::StructureShape.new(name: 'ResetEnabledControlInput')
+    ResetEnabledControlOutput = Shapes::StructureShape.new(name: 'ResetEnabledControlOutput')
     ResetLandingZoneInput = Shapes::StructureShape.new(name: 'ResetLandingZoneInput')
     ResetLandingZoneOutput = Shapes::StructureShape.new(name: 'ResetLandingZoneOutput')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -504,6 +506,12 @@ module Aws::ControlTower
 
     ResetEnabledBaselineOutput.add_member(:operation_identifier, Shapes::ShapeRef.new(shape: OperationIdentifier, required: true, location_name: "operationIdentifier"))
     ResetEnabledBaselineOutput.struct_class = Types::ResetEnabledBaselineOutput
+
+    ResetEnabledControlInput.add_member(:enabled_control_identifier, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "enabledControlIdentifier"))
+    ResetEnabledControlInput.struct_class = Types::ResetEnabledControlInput
+
+    ResetEnabledControlOutput.add_member(:operation_identifier, Shapes::ShapeRef.new(shape: OperationIdentifier, required: true, location_name: "operationIdentifier"))
+    ResetEnabledControlOutput.struct_class = Types::ResetEnabledControlOutput
 
     ResetLandingZoneInput.add_member(:landing_zone_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "landingZoneIdentifier"))
     ResetLandingZoneInput.struct_class = Types::ResetLandingZoneInput
@@ -894,6 +902,21 @@ module Aws::ControlTower
         o.http_request_uri = "/reset-enabled-baseline"
         o.input = Shapes::ShapeRef.new(shape: ResetEnabledBaselineInput)
         o.output = Shapes::ShapeRef.new(shape: ResetEnabledBaselineOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:reset_enabled_control, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ResetEnabledControl"
+        o.http_method = "POST"
+        o.http_request_uri = "/reset-enabled-control"
+        o.input = Shapes::ShapeRef.new(shape: ResetEnabledControlInput)
+        o.output = Shapes::ShapeRef.new(shape: ResetEnabledControlOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)

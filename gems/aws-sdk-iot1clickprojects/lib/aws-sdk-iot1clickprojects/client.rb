@@ -532,8 +532,8 @@ module Aws::IoT1ClickProjects
     #
     # @option params [Hash<String,String>] :tags
     #   Optional tags (metadata key/value pairs) to be associated with the
-    #   project. For example, `\{ \{"key1": "value1", "key2": "value2"\} \}`.
-    #   For more information, see [AWS Tagging Strategies][1].
+    #   project. For example, `{ {"key1": "value1", "key2": "value2"} }`. For
+    #   more information, see [AWS Tagging Strategies][1].
     #
     #
     #
@@ -1030,7 +1030,7 @@ module Aws::IoT1ClickProjects
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iot1clickprojects'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

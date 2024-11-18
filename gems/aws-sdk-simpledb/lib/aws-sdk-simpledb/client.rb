@@ -499,20 +499,20 @@ module Aws::SimpleDB
     # `Item.0.Attribute.1.Value`, and so on.
     #
     # Attributes are uniquely identified within an item by their name/value
-    # combination. For example, a single item can have the attributes `\{
-    # "first_name", "first_value" \}` and `\{ "first_name", "second_value"
-    # \}`. However, it cannot have two attribute instances where both the
+    # combination. For example, a single item can have the attributes `{
+    # "first_name", "first_value" }` and `{ "first_name", "second_value" }`.
+    # However, it cannot have two attribute instances where both the
     # `Item.X.Attribute.Y.Name` and `Item.X.Attribute.Y.Value` are the same.
     #
     # Optionally, the requester can supply the `Replace` parameter for each
     # individual value. Setting this value to `true` will cause the new
     # attribute values to replace the existing attribute values. For
-    # example, if an item `I` has the attributes `\{ 'a', '1' \}, \{ 'b',
-    # '2'\}` and `\{ 'b', '3' \}` and the requester does a
-    # BatchPutAttributes of `\{'I', 'b', '4' \}` with the Replace parameter
-    # set to true, the final attributes of the item will be `\{ 'a', '1' \}`
-    # and `\{ 'b', '4' \}`, replacing the previous values of the 'b'
-    # attribute with the new value.
+    # example, if an item `I` has the attributes `{ 'a', '1' }, { 'b', '2'}`
+    # and `{ 'b', '3' }` and the requester does a BatchPutAttributes of
+    # `{'I', 'b', '4' }` with the Replace parameter set to true, the final
+    # attributes of the item will be `{ 'a', '1' }` and `{ 'b', '4' }`,
+    # replacing the previous values of the 'b' attribute with the new
+    # value.
     #
     # This operation is vulnerable to exceeding the maximum URL size when
     # making a REST request using the HTTP GET method. This operation does
@@ -819,20 +819,20 @@ module Aws::SimpleDB
     # `Attribute.1.Name` and `Attribute.1.Value`, and so on.
     #
     # Attributes are uniquely identified in an item by their name/value
-    # combination. For example, a single item can have the attributes `\{
-    # "first_name", "first_value" \}` and `\{ "first_name", second_value"
-    # \}`. However, it cannot have two attribute instances where both the
+    # combination. For example, a single item can have the attributes `{
+    # "first_name", "first_value" }` and `{ "first_name", second_value" }`.
+    # However, it cannot have two attribute instances where both the
     # `Attribute.X.Name` and `Attribute.X.Value` are the same.
     #
     # Optionally, the requestor can supply the `Replace` parameter for each
     # individual attribute. Setting this value to `true` causes the new
     # attribute value to replace the existing attribute value(s). For
-    # example, if an item has the attributes `\{ 'a', '1' \}`, `\{ 'b',
-    # '2'\}` and `\{ 'b', '3' \}` and the requestor calls `PutAttributes`
-    # using the attributes `\{ 'b', '4' \}` with the `Replace` parameter set
-    # to true, the final attributes of the item are changed to `\{ 'a', '1'
-    # \}` and `\{ 'b', '4' \}`, which replaces the previous values of the
-    # 'b' attribute with the new value.
+    # example, if an item has the attributes `{ 'a', '1' }`, `{ 'b', '2'}`
+    # and `{ 'b', '3' }` and the requestor calls `PutAttributes` using the
+    # attributes `{ 'b', '4' }` with the `Replace` parameter set to true,
+    # the final attributes of the item are changed to `{ 'a', '1' }` and `{
+    # 'b', '4' }`, which replaces the previous values of the 'b' attribute
+    # with the new value.
     #
     # You cannot specify an empty string as an attribute name.
     #
@@ -964,7 +964,7 @@ module Aws::SimpleDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-simpledb'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

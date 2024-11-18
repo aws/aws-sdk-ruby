@@ -1098,6 +1098,7 @@ module Aws::RDS
       attr_accessor supported_ca_certificate_identifiers: ::Array[::String]
       attr_accessor supports_local_write_forwarding: bool
       attr_accessor supports_integrations: bool
+      attr_accessor serverless_v2_features_support: Types::ServerlessV2FeaturesSupport
       SENSITIVE: []
     end
 
@@ -1259,6 +1260,9 @@ module Aws::RDS
     end
 
     class DBInstanceNotFoundFault < Aws::EmptyStructure
+    end
+
+    class DBInstanceNotReadyFault < Aws::EmptyStructure
     end
 
     class DBInstanceRole
@@ -3987,15 +3991,23 @@ module Aws::RDS
       SENSITIVE: []
     end
 
+    class ServerlessV2FeaturesSupport
+      attr_accessor min_capacity: ::Float
+      attr_accessor max_capacity: ::Float
+      SENSITIVE: []
+    end
+
     class ServerlessV2ScalingConfiguration
       attr_accessor min_capacity: ::Float
       attr_accessor max_capacity: ::Float
+      attr_accessor seconds_until_auto_pause: ::Integer
       SENSITIVE: []
     end
 
     class ServerlessV2ScalingConfigurationInfo
       attr_accessor min_capacity: ::Float
       attr_accessor max_capacity: ::Float
+      attr_accessor seconds_until_auto_pause: ::Integer
       SENSITIVE: []
     end
 

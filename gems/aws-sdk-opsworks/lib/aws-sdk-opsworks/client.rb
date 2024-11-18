@@ -820,7 +820,7 @@ module Aws::OpsWorks
     #   override the corresponding default stack configuration JSON values.
     #   The string should be in the following format:
     #
-    #   `"\{"key1": "value1", "key2": "value2",...\}"`
+    #   `"{"key1": "value1", "key2": "value2",...}"`
     #
     #   For more information about custom JSON, see [Use Custom JSON to Modify
     #   the Stack Configuration Attributes][1]
@@ -1171,7 +1171,7 @@ module Aws::OpsWorks
     #   parameter to override some corresponding default stack configuration
     #   JSON values. The string should be in the following format:
     #
-    #   `"\{"key1": "value1", "key2": "value2",...\}"`
+    #   `"{"key1": "value1", "key2": "value2",...}"`
     #
     #   For more information about custom JSON, see [Use Custom JSON to Modify
     #   the Stack Configuration Attributes][1] and [Overriding Attributes With
@@ -1872,7 +1872,7 @@ module Aws::OpsWorks
     #   values or to pass data to recipes. The string should be in the
     #   following format:
     #
-    #   `"\{"key1": "value1", "key2": "value2",...\}"`
+    #   `"{"key1": "value1", "key2": "value2",...}"`
     #
     #   For more information about custom JSON, see [Use Custom JSON to Modify
     #   the Stack Configuration Attributes][1].
@@ -5517,7 +5517,7 @@ module Aws::OpsWorks
     #   override the corresponding default stack configuration JSON values or
     #   to pass data to recipes. The string should be in the following format:
     #
-    #   `"\{"key1": "value1", "key2": "value2",...\}"`
+    #   `"{"key1": "value1", "key2": "value2",...}"`
     #
     #   For more information about custom JSON, see [Use Custom JSON to Modify
     #   the Stack Configuration Attributes][1].
@@ -5790,7 +5790,7 @@ module Aws::OpsWorks
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-opsworks'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

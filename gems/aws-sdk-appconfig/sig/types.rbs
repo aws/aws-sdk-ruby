@@ -166,7 +166,7 @@ module Aws::AppConfig
     class CreateExtensionRequest
       attr_accessor name: ::String
       attr_accessor description: ::String
-      attr_accessor actions: ::Hash[("PRE_CREATE_HOSTED_CONFIGURATION_VERSION" | "PRE_START_DEPLOYMENT" | "ON_DEPLOYMENT_START" | "ON_DEPLOYMENT_STEP" | "ON_DEPLOYMENT_BAKING" | "ON_DEPLOYMENT_COMPLETE" | "ON_DEPLOYMENT_ROLLED_BACK"), ::Array[Types::Action]]
+      attr_accessor actions: ::Hash[("PRE_CREATE_HOSTED_CONFIGURATION_VERSION" | "PRE_START_DEPLOYMENT" | "AT_DEPLOYMENT_TICK" | "ON_DEPLOYMENT_START" | "ON_DEPLOYMENT_STEP" | "ON_DEPLOYMENT_BAKING" | "ON_DEPLOYMENT_COMPLETE" | "ON_DEPLOYMENT_ROLLED_BACK"), ::Array[Types::Action]]
       attr_accessor parameters: ::Hash[::String, Types::Parameter]
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor latest_version_number: ::Integer
@@ -329,7 +329,7 @@ module Aws::AppConfig
       attr_accessor version_number: ::Integer
       attr_accessor arn: ::String
       attr_accessor description: ::String
-      attr_accessor actions: ::Hash[("PRE_CREATE_HOSTED_CONFIGURATION_VERSION" | "PRE_START_DEPLOYMENT" | "ON_DEPLOYMENT_START" | "ON_DEPLOYMENT_STEP" | "ON_DEPLOYMENT_BAKING" | "ON_DEPLOYMENT_COMPLETE" | "ON_DEPLOYMENT_ROLLED_BACK"), ::Array[Types::Action]]
+      attr_accessor actions: ::Hash[("PRE_CREATE_HOSTED_CONFIGURATION_VERSION" | "PRE_START_DEPLOYMENT" | "AT_DEPLOYMENT_TICK" | "ON_DEPLOYMENT_START" | "ON_DEPLOYMENT_STEP" | "ON_DEPLOYMENT_BAKING" | "ON_DEPLOYMENT_COMPLETE" | "ON_DEPLOYMENT_ROLLED_BACK"), ::Array[Types::Action]]
       attr_accessor parameters: ::Hash[::String, Types::Parameter]
       SENSITIVE: []
     end
@@ -657,7 +657,7 @@ module Aws::AppConfig
     class UpdateExtensionRequest
       attr_accessor extension_identifier: ::String
       attr_accessor description: ::String
-      attr_accessor actions: ::Hash[("PRE_CREATE_HOSTED_CONFIGURATION_VERSION" | "PRE_START_DEPLOYMENT" | "ON_DEPLOYMENT_START" | "ON_DEPLOYMENT_STEP" | "ON_DEPLOYMENT_BAKING" | "ON_DEPLOYMENT_COMPLETE" | "ON_DEPLOYMENT_ROLLED_BACK"), ::Array[Types::Action]]
+      attr_accessor actions: ::Hash[("PRE_CREATE_HOSTED_CONFIGURATION_VERSION" | "PRE_START_DEPLOYMENT" | "AT_DEPLOYMENT_TICK" | "ON_DEPLOYMENT_START" | "ON_DEPLOYMENT_STEP" | "ON_DEPLOYMENT_BAKING" | "ON_DEPLOYMENT_COMPLETE" | "ON_DEPLOYMENT_ROLLED_BACK"), ::Array[Types::Action]]
       attr_accessor parameters: ::Hash[::String, Types::Parameter]
       attr_accessor version_number: ::Integer
       SENSITIVE: []

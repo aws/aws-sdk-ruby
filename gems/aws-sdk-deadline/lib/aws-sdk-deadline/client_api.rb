@@ -14,7 +14,12 @@ module Aws::Deadline
 
     include Seahorse::Model
 
+    AcceleratorCapabilities = Shapes::StructureShape.new(name: 'AcceleratorCapabilities')
     AcceleratorCountRange = Shapes::StructureShape.new(name: 'AcceleratorCountRange')
+    AcceleratorName = Shapes::StringShape.new(name: 'AcceleratorName')
+    AcceleratorRuntime = Shapes::StringShape.new(name: 'AcceleratorRuntime')
+    AcceleratorSelection = Shapes::StructureShape.new(name: 'AcceleratorSelection')
+    AcceleratorSelections = Shapes::ListShape.new(name: 'AcceleratorSelections')
     AcceleratorTotalMemoryMiBRange = Shapes::StructureShape.new(name: 'AcceleratorTotalMemoryMiBRange')
     AcceleratorType = Shapes::StringShape.new(name: 'AcceleratorType')
     AcceleratorTypes = Shapes::ListShape.new(name: 'AcceleratorTypes')
@@ -610,9 +615,19 @@ module Aws::Deadline
     WorkerSummaries = Shapes::ListShape.new(name: 'WorkerSummaries')
     WorkerSummary = Shapes::StructureShape.new(name: 'WorkerSummary')
 
+    AcceleratorCapabilities.add_member(:selections, Shapes::ShapeRef.new(shape: AcceleratorSelections, required: true, location_name: "selections"))
+    AcceleratorCapabilities.add_member(:count, Shapes::ShapeRef.new(shape: AcceleratorCountRange, location_name: "count"))
+    AcceleratorCapabilities.struct_class = Types::AcceleratorCapabilities
+
     AcceleratorCountRange.add_member(:min, Shapes::ShapeRef.new(shape: MinZeroMaxInteger, required: true, location_name: "min"))
     AcceleratorCountRange.add_member(:max, Shapes::ShapeRef.new(shape: MinZeroMaxInteger, location_name: "max"))
     AcceleratorCountRange.struct_class = Types::AcceleratorCountRange
+
+    AcceleratorSelection.add_member(:name, Shapes::ShapeRef.new(shape: AcceleratorName, required: true, location_name: "name"))
+    AcceleratorSelection.add_member(:runtime, Shapes::ShapeRef.new(shape: AcceleratorRuntime, location_name: "runtime"))
+    AcceleratorSelection.struct_class = Types::AcceleratorSelection
+
+    AcceleratorSelections.member = Shapes::ShapeRef.new(shape: AcceleratorSelection)
 
     AcceleratorTotalMemoryMiBRange.add_member(:min, Shapes::ShapeRef.new(shape: MinZeroMaxInteger, required: true, location_name: "min"))
     AcceleratorTotalMemoryMiBRange.add_member(:max, Shapes::ShapeRef.new(shape: MinZeroMaxInteger, location_name: "max"))
@@ -2224,6 +2239,7 @@ module Aws::Deadline
     ServiceManagedEc2InstanceCapabilities.add_member(:os_family, Shapes::ShapeRef.new(shape: ServiceManagedFleetOperatingSystemFamily, required: true, location_name: "osFamily"))
     ServiceManagedEc2InstanceCapabilities.add_member(:cpu_architecture_type, Shapes::ShapeRef.new(shape: CpuArchitectureType, required: true, location_name: "cpuArchitectureType"))
     ServiceManagedEc2InstanceCapabilities.add_member(:root_ebs_volume, Shapes::ShapeRef.new(shape: Ec2EbsVolume, location_name: "rootEbsVolume"))
+    ServiceManagedEc2InstanceCapabilities.add_member(:accelerator_capabilities, Shapes::ShapeRef.new(shape: AcceleratorCapabilities, location_name: "acceleratorCapabilities"))
     ServiceManagedEc2InstanceCapabilities.add_member(:allowed_instance_types, Shapes::ShapeRef.new(shape: InstanceTypes, location_name: "allowedInstanceTypes"))
     ServiceManagedEc2InstanceCapabilities.add_member(:excluded_instance_types, Shapes::ShapeRef.new(shape: InstanceTypes, location_name: "excludedInstanceTypes"))
     ServiceManagedEc2InstanceCapabilities.add_member(:custom_amounts, Shapes::ShapeRef.new(shape: CustomFleetAmountCapabilities, location_name: "customAmounts"))

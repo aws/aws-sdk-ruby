@@ -495,7 +495,7 @@ module Aws::ForecastQueryService
     #   example, to get the forecast for `client_21` in the electricity usage
     #   dataset, specify the following:
     #
-    #   `\{"item_id" : "client_21"\}`
+    #   `{"item_id" : "client_21"}`
     #
     #   To get the full forecast, use the [CreateForecastExportJob][1]
     #   operation.
@@ -561,7 +561,7 @@ module Aws::ForecastQueryService
     #   example, to get the forecast for `client_21` in the electricity usage
     #   dataset, specify the following:
     #
-    #   `\{"item_id" : "client_21"\}`
+    #   `{"item_id" : "client_21"}`
     #
     #   To get the full what-if forecast, use the [CreateForecastExportJob][1]
     #   operation.
@@ -625,7 +625,7 @@ module Aws::ForecastQueryService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-forecastqueryservice'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

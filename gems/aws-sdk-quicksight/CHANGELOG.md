@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.137.0 (2024-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.136.0 (2024-11-14)
+------------------
+
+* Feature - This release adds APIs for Custom Permissions management in QuickSight, and APIs to support QuickSight Branding.
+
+1.135.0 (2024-11-07)
+------------------
+
+* Feature - Add Client Credentials based OAuth support for Snowflake and Starburst
+
+1.134.0 (2024-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.133.0 (2024-10-18)
 ------------------
 

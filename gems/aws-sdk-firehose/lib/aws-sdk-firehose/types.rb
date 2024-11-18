@@ -24,7 +24,7 @@ module Aws::Firehose
     #   delivering it to the destination. The default value is 5.
     #
     #   We recommend setting this parameter to a value greater than the
-    #   amount of data you typically ingest into the delivery stream in 10
+    #   amount of data you typically ingest into the Firehose stream in 10
     #   seconds. For example, if you typically ingest data at 1 MB/sec, the
     #   value should be 10 MB or higher.
     #   @return [Integer]
@@ -86,7 +86,7 @@ module Aws::Firehose
     #   @return [Types::ProcessingConfiguration]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   Describes the Amazon CloudWatch logging options for your delivery
+    #   Describes the Amazon CloudWatch logging options for your Firehose
     #   stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
@@ -150,7 +150,7 @@ module Aws::Firehose
     #   @return [Types::ProcessingConfiguration]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   Describes the Amazon CloudWatch logging options for your delivery
+    #   Describes the Amazon CloudWatch logging options for your Firehose
     #   stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
@@ -213,7 +213,7 @@ module Aws::Firehose
     #   @return [Types::ProcessingConfiguration]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   Describes the Amazon CloudWatch logging options for your delivery
+    #   Describes the Amazon CloudWatch logging options for your Firehose
     #   stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
@@ -266,7 +266,7 @@ module Aws::Firehose
     #   delivering it to the destination. The default value is 5.
     #
     #   We recommend setting this parameter to a value greater than the
-    #   amount of data you typically ingest into the delivery stream in 10
+    #   amount of data you typically ingest into the Firehose stream in 10
     #   seconds. For example, if you typically ingest data at 1 MB/sec, the
     #   value should be 10 MB or higher.
     #   @return [Integer]
@@ -347,7 +347,7 @@ module Aws::Firehose
     #   @return [Types::ProcessingConfiguration]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   Describes the Amazon CloudWatch logging options for your delivery
+    #   Describes the Amazon CloudWatch logging options for your Firehose
     #   stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
@@ -435,7 +435,7 @@ module Aws::Firehose
     #   @return [Types::ProcessingConfiguration]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   Describes the Amazon CloudWatch logging options for your delivery
+    #   Describes the Amazon CloudWatch logging options for your Firehose
     #   stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
@@ -501,9 +501,9 @@ module Aws::Firehose
     #   returns an error during runtime.
     #
     #   If you upgrade Elasticsearch from 6.x to 7.x and don’t update your
-    #   delivery stream, Firehose still delivers data to Elasticsearch with
+    #   Firehose stream, Firehose still delivers data to Elasticsearch with
     #   the old index name and type name. If you want to update your
-    #   delivery stream with a new index name, provide an empty string for
+    #   Firehose stream with a new index name, provide an empty string for
     #   TypeName.
     #   @return [String]
     #
@@ -532,7 +532,7 @@ module Aws::Firehose
     #   @return [Types::ProcessingConfiguration]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   Describes the Amazon CloudWatch logging options for your delivery
+    #   Describes the Amazon CloudWatch logging options for your Firehose
     #   stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
@@ -613,7 +613,7 @@ module Aws::Firehose
     #   also specify a value for `IntervalInSeconds`, and vice versa.
     #
     #   We recommend setting this parameter to a value greater than the
-    #   amount of data you typically ingest into the delivery stream in 10
+    #   amount of data you typically ingest into the Firehose stream in 10
     #   seconds. For example, if you typically ingest data at 1 MiB/sec, the
     #   value should be 10 MiB or higher.
     #   @return [Integer]
@@ -637,25 +637,26 @@ module Aws::Firehose
     # Describes the containers where the destination Apache Iceberg Tables
     # are persisted.
     #
-    # Amazon Data Firehose is in preview release and is subject to change.
-    #
     # @!attribute [rw] catalog_arn
-    #   Specifies the Glue catalog ARN indentifier of the destination Apache
+    #   Specifies the Glue catalog ARN identifier of the destination Apache
     #   Iceberg Tables. You must specify the ARN in the format
     #   `arn:aws:glue:region:account-id:catalog`.
+    #   @return [String]
     #
+    # @!attribute [rw] warehouse_location
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/CatalogConfiguration AWS API Documentation
     #
     class CatalogConfiguration < Struct.new(
-      :catalog_arn)
+      :catalog_arn,
+      :warehouse_location)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Describes the Amazon CloudWatch logging options for your delivery
+    # Describes the Amazon CloudWatch logging options for your Firehose
     # stream.
     #
     # @!attribute [rw] enabled
@@ -749,25 +750,25 @@ module Aws::Firehose
     end
 
     # @!attribute [rw] delivery_stream_name
-    #   The name of the delivery stream. This name must be unique per Amazon
+    #   The name of the Firehose stream. This name must be unique per Amazon
     #   Web Services account in the same Amazon Web Services Region. If the
-    #   delivery streams are in different accounts or different Regions, you
-    #   can have multiple delivery streams with the same name.
+    #   Firehose streams are in different accounts or different Regions, you
+    #   can have multiple Firehose streams with the same name.
     #   @return [String]
     #
     # @!attribute [rw] delivery_stream_type
-    #   The delivery stream type. This parameter can be one of the following
+    #   The Firehose stream type. This parameter can be one of the following
     #   values:
     #
-    #   * `DirectPut`: Provider applications access the delivery stream
+    #   * `DirectPut`: Provider applications access the Firehose stream
     #     directly.
     #
-    #   * `KinesisStreamAsSource`: The delivery stream uses a Kinesis data
+    #   * `KinesisStreamAsSource`: The Firehose stream uses a Kinesis data
     #     stream as a source.
     #   @return [String]
     #
     # @!attribute [rw] kinesis_stream_source_configuration
-    #   When a Kinesis data stream is used as the source for the delivery
+    #   When a Kinesis data stream is used as the source for the Firehose
     #   stream, a KinesisStreamSourceConfiguration containing the Kinesis
     #   data stream Amazon Resource Name (ARN) and the role ARN for the
     #   source stream.
@@ -811,21 +812,21 @@ module Aws::Firehose
     #   @return [Types::HttpEndpointDestinationConfiguration]
     #
     # @!attribute [rw] tags
-    #   A set of tags to assign to the delivery stream. A tag is a key-value
+    #   A set of tags to assign to the Firehose stream. A tag is a key-value
     #   pair that you can define and assign to Amazon Web Services
     #   resources. Tags are metadata. For example, you can add friendly
     #   names and descriptions or other types of information that can help
-    #   you distinguish the delivery stream. For more information about
+    #   you distinguish the Firehose stream. For more information about
     #   tags, see [Using Cost Allocation Tags][1] in the Amazon Web Services
     #   Billing and Cost Management User Guide.
     #
-    #   You can specify up to 50 tags when creating a delivery stream.
+    #   You can specify up to 50 tags when creating a Firehose stream.
     #
     #   If you specify tags in the `CreateDeliveryStream` action, Amazon
     #   Data Firehose performs an additional authorization on the
     #   `firehose:TagDeliveryStream` action to verify if users have
     #   permissions to create tags. If you do not provide this permission,
-    #   requests to create new Firehose delivery streams with IAM resource
+    #   requests to create new Firehose Firehose streams with IAM resource
     #   tags will fail with an `AccessDeniedException` such as following.
     #
     #   **AccessDeniedException**
@@ -859,9 +860,11 @@ module Aws::Firehose
     #
     # @!attribute [rw] iceberg_destination_configuration
     #   Configure Apache Iceberg Tables destination.
-    #
-    #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Types::IcebergDestinationConfiguration]
+    #
+    # @!attribute [rw] database_source_configuration
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Types::DatabaseSourceConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/CreateDeliveryStreamInput AWS API Documentation
     #
@@ -881,13 +884,14 @@ module Aws::Firehose
       :amazon_open_search_serverless_destination_configuration,
       :msk_source_configuration,
       :snowflake_destination_configuration,
-      :iceberg_destination_configuration)
+      :iceberg_destination_configuration,
+      :database_source_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] delivery_stream_arn
-    #   The ARN of the delivery stream.
+    #   The ARN of the Firehose stream.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/CreateDeliveryStreamOutput AWS API Documentation
@@ -944,12 +948,272 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # Amazon Data Firehose is in preview release and is subject to change.
+    #
+    # @!attribute [rw] include
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclude
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DatabaseColumnList AWS API Documentation
+    #
+    class DatabaseColumnList < Struct.new(
+      :include,
+      :exclude)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Amazon Data Firehose is in preview release and is subject to change.
+    #
+    # @!attribute [rw] include
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclude
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DatabaseList AWS API Documentation
+    #
+    class DatabaseList < Struct.new(
+      :include,
+      :exclude)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Amazon Data Firehose is in preview release and is subject to change.
+    #
+    # @!attribute [rw] id
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [String]
+    #
+    # @!attribute [rw] table
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_timestamp
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Time]
+    #
+    # @!attribute [rw] requested_by
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_description
+    #   Provides details in case one of the following operations fails due
+    #   to an error related to KMS: CreateDeliveryStream,
+    #   DeleteDeliveryStream, StartDeliveryStreamEncryption,
+    #   StopDeliveryStreamEncryption.
+    #   @return [Types::FailureDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DatabaseSnapshotInfo AWS API Documentation
+    #
+    class DatabaseSnapshotInfo < Struct.new(
+      :id,
+      :table,
+      :request_timestamp,
+      :requested_by,
+      :status,
+      :failure_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Amazon Data Firehose is in preview release and is subject to change.
+    #
+    # @!attribute [rw] secrets_manager_configuration
+    #   The structure that defines how Firehose accesses the secret.
+    #   @return [Types::SecretsManagerConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DatabaseSourceAuthenticationConfiguration AWS API Documentation
+    #
+    class DatabaseSourceAuthenticationConfiguration < Struct.new(
+      :secrets_manager_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Amazon Data Firehose is in preview release and is subject to change.
+    #
+    # @!attribute [rw] type
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ssl_mode
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [String]
+    #
+    # @!attribute [rw] databases
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Types::DatabaseList]
+    #
+    # @!attribute [rw] tables
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Types::DatabaseTableList]
+    #
+    # @!attribute [rw] columns
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Types::DatabaseColumnList]
+    #
+    # @!attribute [rw] surrogate_keys
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] snapshot_watermark_table
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_source_authentication_configuration
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Types::DatabaseSourceAuthenticationConfiguration]
+    #
+    # @!attribute [rw] database_source_vpc_configuration
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Types::DatabaseSourceVPCConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DatabaseSourceConfiguration AWS API Documentation
+    #
+    class DatabaseSourceConfiguration < Struct.new(
+      :type,
+      :endpoint,
+      :port,
+      :ssl_mode,
+      :databases,
+      :tables,
+      :columns,
+      :surrogate_keys,
+      :snapshot_watermark_table,
+      :database_source_authentication_configuration,
+      :database_source_vpc_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Amazon Data Firehose is in preview release and is subject to change.
+    #
+    # @!attribute [rw] type
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ssl_mode
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [String]
+    #
+    # @!attribute [rw] databases
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Types::DatabaseList]
+    #
+    # @!attribute [rw] tables
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Types::DatabaseTableList]
+    #
+    # @!attribute [rw] columns
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Types::DatabaseColumnList]
+    #
+    # @!attribute [rw] surrogate_keys
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] snapshot_watermark_table
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_info
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Array<Types::DatabaseSnapshotInfo>]
+    #
+    # @!attribute [rw] database_source_authentication_configuration
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Types::DatabaseSourceAuthenticationConfiguration]
+    #
+    # @!attribute [rw] database_source_vpc_configuration
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Types::DatabaseSourceVPCConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DatabaseSourceDescription AWS API Documentation
+    #
+    class DatabaseSourceDescription < Struct.new(
+      :type,
+      :endpoint,
+      :port,
+      :ssl_mode,
+      :databases,
+      :tables,
+      :columns,
+      :surrogate_keys,
+      :snapshot_watermark_table,
+      :snapshot_info,
+      :database_source_authentication_configuration,
+      :database_source_vpc_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Amazon Data Firehose is in preview release and is subject to change.
+    #
+    # @!attribute [rw] vpc_endpoint_service_name
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DatabaseSourceVPCConfiguration AWS API Documentation
+    #
+    class DatabaseSourceVPCConfiguration < Struct.new(
+      :vpc_endpoint_service_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Amazon Data Firehose is in preview release and is subject to change.
+    #
+    # @!attribute [rw] include
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclude
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DatabaseTableList AWS API Documentation
+    #
+    class DatabaseTableList < Struct.new(
+      :include,
+      :exclude)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] delivery_stream_name
-    #   The name of the delivery stream.
+    #   The name of the Firehose stream.
     #   @return [String]
     #
     # @!attribute [rw] allow_force_delete
-    #   Set this to true if you want to delete the delivery stream even if
+    #   Set this to true if you want to delete the Firehose stream even if
     #   Firehose is unable to retire the grant for the CMK. Firehose might
     #   be unable to retire the grant due to a customer error, such as when
     #   the CMK or the grant are in an invalid state. If you force deletion,
@@ -978,14 +1242,14 @@ module Aws::Firehose
     #
     class DeleteDeliveryStreamOutput < Aws::EmptyStructure; end
 
-    # Contains information about a delivery stream.
+    # Contains information about a Firehose stream.
     #
     # @!attribute [rw] delivery_stream_name
-    #   The name of the delivery stream.
+    #   The name of the Firehose stream.
     #   @return [String]
     #
     # @!attribute [rw] delivery_stream_arn
-    #   The Amazon Resource Name (ARN) of the delivery stream. For more
+    #   The Amazon Resource Name (ARN) of the Firehose stream. For more
     #   information, see [Amazon Resource Names (ARNs) and Amazon Web
     #   Services Service Namespaces][1].
     #
@@ -995,7 +1259,7 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] delivery_stream_status
-    #   The status of the delivery stream. If the status of a delivery
+    #   The status of the Firehose stream. If the status of a Firehose
     #   stream is `CREATING_FAILED`, this status doesn't change, and you
     #   can't invoke `CreateDeliveryStream` again on it. However, you can
     #   invoke the DeleteDeliveryStream operation to delete it.
@@ -1009,33 +1273,33 @@ module Aws::Firehose
     #   @return [Types::FailureDescription]
     #
     # @!attribute [rw] delivery_stream_encryption_configuration
-    #   Indicates the server-side encryption (SSE) status for the delivery
+    #   Indicates the server-side encryption (SSE) status for the Firehose
     #   stream.
     #   @return [Types::DeliveryStreamEncryptionConfiguration]
     #
     # @!attribute [rw] delivery_stream_type
-    #   The delivery stream type. This can be one of the following values:
+    #   The Firehose stream type. This can be one of the following values:
     #
-    #   * `DirectPut`: Provider applications access the delivery stream
+    #   * `DirectPut`: Provider applications access the Firehose stream
     #     directly.
     #
-    #   * `KinesisStreamAsSource`: The delivery stream uses a Kinesis data
+    #   * `KinesisStreamAsSource`: The Firehose stream uses a Kinesis data
     #     stream as a source.
     #   @return [String]
     #
     # @!attribute [rw] version_id
-    #   Each time the destination is updated for a delivery stream, the
+    #   Each time the destination is updated for a Firehose stream, the
     #   version ID is changed, and the current version ID is required when
     #   updating the destination. This is so that the service knows it is
     #   applying the changes to the correct version of the delivery stream.
     #   @return [String]
     #
     # @!attribute [rw] create_timestamp
-    #   The date and time that the delivery stream was created.
+    #   The date and time that the Firehose stream was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_update_timestamp
-    #   The date and time that the delivery stream was last updated.
+    #   The date and time that the Firehose stream was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] source
@@ -1095,7 +1359,7 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   This is the server-side encryption (SSE) status for the delivery
+    #   This is the server-side encryption (SSE) status for the Firehose
     #   stream. For a full description of the different values of this
     #   status, see StartDeliveryStreamEncryption and
     #   StopDeliveryStreamEncryption. If this status is `ENABLING_FAILED` or
@@ -1143,15 +1407,15 @@ module Aws::Firehose
     #   decryption. Firehose manages that grant.
     #
     #   When you invoke StartDeliveryStreamEncryption to change the CMK for
-    #   a delivery stream that is encrypted with a customer managed CMK,
+    #   a Firehose stream that is encrypted with a customer managed CMK,
     #   Firehose schedules the grant it had on the old CMK for retirement.
     #
     #   You can use a CMK of type CUSTOMER\_MANAGED\_CMK to encrypt up to
-    #   500 delivery streams. If a CreateDeliveryStream or
+    #   500 Firehose streams. If a CreateDeliveryStream or
     #   StartDeliveryStreamEncryption operation exceeds this limit, Firehose
     #   throws a `LimitExceededException`.
     #
-    #   To encrypt your delivery stream, use symmetric CMKs. Firehose
+    #   To encrypt your Firehose stream, use symmetric CMKs. Firehose
     #   doesn't support asymmetric CMKs. For information about symmetric
     #   and asymmetric CMKs, see [About Symmetric and Asymmetric CMKs][3] in
     #   the Amazon Web Services Key Management Service developer guide.
@@ -1173,17 +1437,17 @@ module Aws::Firehose
     end
 
     # @!attribute [rw] delivery_stream_name
-    #   The name of the delivery stream.
+    #   The name of the Firehose stream.
     #   @return [String]
     #
     # @!attribute [rw] limit
     #   The limit on the number of destinations to return. You can have one
-    #   destination per delivery stream.
+    #   destination per Firehose stream.
     #   @return [Integer]
     #
     # @!attribute [rw] exclusive_start_destination_id
     #   The ID of the destination to start returning the destination
-    #   information. Firehose supports one destination per delivery stream.
+    #   information. Firehose supports one destination per Firehose stream.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DescribeDeliveryStreamInput AWS API Documentation
@@ -1197,7 +1461,7 @@ module Aws::Firehose
     end
 
     # @!attribute [rw] delivery_stream_description
-    #   Information about the delivery stream.
+    #   Information about the Firehose stream.
     #   @return [Types::DeliveryStreamDescription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DescribeDeliveryStreamOutput AWS API Documentation
@@ -1245,7 +1509,7 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # Describes the destination for a delivery stream.
+    # Describes the destination for a Firehose stream.
     #
     # @!attribute [rw] destination_id
     #   The ID of the destination.
@@ -1290,8 +1554,6 @@ module Aws::Firehose
     #
     # @!attribute [rw] iceberg_destination_description
     #   Describes a destination in Apache Iceberg Tables.
-    #
-    #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Types::IcebergDestinationDescription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DestinationDescription AWS API Documentation
@@ -1314,34 +1576,28 @@ module Aws::Firehose
 
     # Describes the configuration of a destination in Apache Iceberg Tables.
     #
-    # Amazon Data Firehose is in preview release and is subject to change.
-    #
     # @!attribute [rw] destination_table_name
     #   Specifies the name of the Apache Iceberg Table.
-    #
-    #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [String]
     #
     # @!attribute [rw] destination_database_name
     #   The name of the Apache Iceberg database.
-    #
-    #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [String]
     #
     # @!attribute [rw] unique_keys
     #   A list of unique keys for a given Apache Iceberg table. Firehose
-    #   will use these for running Create/Update/Delete operations on the
-    #   given Iceberg table.
-    #
-    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   will use these for running Create, Update, or Delete operations on
+    #   the given Iceberg table.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] partition_spec
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Types::PartitionSpec]
     #
     # @!attribute [rw] s3_error_output_prefix
     #   The table specific S3 error output prefix. All the errors that
     #   occurred while delivering to this table will be prefixed with this
     #   value in S3 destination.
-    #
-    #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DestinationTableConfiguration AWS API Documentation
@@ -1350,6 +1606,7 @@ module Aws::Firehose
       :destination_table_name,
       :destination_database_name,
       :unique_keys,
+      :partition_spec,
       :s3_error_output_prefix)
       SENSITIVE = []
       include Aws::Structure
@@ -1397,7 +1654,7 @@ module Aws::Firehose
     #
     # @!attribute [rw] enabled
     #   Specifies that the dynamic partitioning is enabled for this Firehose
-    #   delivery stream.
+    #   Firehose stream.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DynamicPartitioningConfiguration AWS API Documentation
@@ -1423,7 +1680,7 @@ module Aws::Firehose
     #   delivering it to the destination. The default value is 5.
     #
     #   We recommend setting this parameter to a value greater than the
-    #   amount of data you typically ingest into the delivery stream in 10
+    #   amount of data you typically ingest into the Firehose stream in 10
     #   seconds. For example, if you typically ingest data at 1 MB/sec, the
     #   value should be 10 MB or higher.
     #   @return [Integer]
@@ -1516,7 +1773,7 @@ module Aws::Firehose
     #   information, see [Amazon S3 Backup for the Amazon ES
     #   Destination][1]. Default value is `FailedDocumentsOnly`.
     #
-    #   You can't change this backup mode after you create the delivery
+    #   You can't change this backup mode after you create the Firehose
     #   stream.
     #
     #
@@ -1533,7 +1790,7 @@ module Aws::Firehose
     #   @return [Types::ProcessingConfiguration]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   The Amazon CloudWatch logging options for your delivery stream.
+    #   The Amazon CloudWatch logging options for your Firehose stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
     # @!attribute [rw] vpc_configuration
@@ -1713,9 +1970,9 @@ module Aws::Firehose
     #   error during runtime.
     #
     #   If you upgrade Elasticsearch from 6.x to 7.x and don’t update your
-    #   delivery stream, Firehose still delivers data to Elasticsearch with
+    #   Firehose stream, Firehose still delivers data to Elasticsearch with
     #   the old index name and type name. If you want to update your
-    #   delivery stream with a new index name, provide an empty string for
+    #   Firehose stream with a new index name, provide an empty string for
     #   `TypeName`.
     #   @return [String]
     #
@@ -1749,7 +2006,7 @@ module Aws::Firehose
     #   @return [Types::ProcessingConfiguration]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   The CloudWatch logging options for your delivery stream.
+    #   The CloudWatch logging options for your Firehose stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
     # @!attribute [rw] document_id_options
@@ -1873,7 +2130,7 @@ module Aws::Firehose
     #   @return [Types::EncryptionConfiguration]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   The Amazon CloudWatch logging options for your delivery stream.
+    #   The Amazon CloudWatch logging options for your Firehose stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
     # @!attribute [rw] processing_configuration
@@ -1881,9 +2138,9 @@ module Aws::Firehose
     #   @return [Types::ProcessingConfiguration]
     #
     # @!attribute [rw] s3_backup_mode
-    #   The Amazon S3 backup mode. After you create a delivery stream, you
+    #   The Amazon S3 backup mode. After you create a Firehose stream, you
     #   can update it to enable Amazon S3 backup if it is disabled. If
-    #   backup is enabled, you can't update the delivery stream to disable
+    #   backup is enabled, you can't update the Firehose stream to disable
     #   it.
     #   @return [String]
     #
@@ -1992,7 +2249,7 @@ module Aws::Firehose
     #   @return [Types::EncryptionConfiguration]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   The Amazon CloudWatch logging options for your delivery stream.
+    #   The Amazon CloudWatch logging options for your Firehose stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
     # @!attribute [rw] processing_configuration
@@ -2108,7 +2365,7 @@ module Aws::Firehose
     #   @return [Types::EncryptionConfiguration]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   The Amazon CloudWatch logging options for your delivery stream.
+    #   The Amazon CloudWatch logging options for your Firehose stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
     # @!attribute [rw] processing_configuration
@@ -2116,8 +2373,8 @@ module Aws::Firehose
     #   @return [Types::ProcessingConfiguration]
     #
     # @!attribute [rw] s3_backup_mode
-    #   You can update a delivery stream to enable Amazon S3 backup if it is
-    #   disabled. If backup is enabled, you can't update the delivery
+    #   You can update a Firehose stream to enable Amazon S3 backup if it is
+    #   disabled. If backup is enabled, you can't update the Firehose
     #   stream to disable it.
     #   @return [String]
     #
@@ -2230,7 +2487,7 @@ module Aws::Firehose
     #   delivering it to the destination. The default value is 5.
     #
     #   We recommend setting this parameter to a value greater than the
-    #   amount of data you typically ingest into the delivery stream in 10
+    #   amount of data you typically ingest into the Firehose stream in 10
     #   seconds. For example, if you typically ingest data at 1 MB/sec, the
     #   value should be 10 MB or higher.
     #   @return [Integer]
@@ -2339,7 +2596,7 @@ module Aws::Firehose
     #   @return [Types::HttpEndpointBufferingHints]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   Describes the Amazon CloudWatch logging options for your delivery
+    #   Describes the Amazon CloudWatch logging options for your Firehose
     #   stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
@@ -2414,7 +2671,7 @@ module Aws::Firehose
     #   @return [Types::HttpEndpointBufferingHints]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   Describes the Amazon CloudWatch logging options for your delivery
+    #   Describes the Amazon CloudWatch logging options for your Firehose
     #   stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
@@ -2489,7 +2746,7 @@ module Aws::Firehose
     #   @return [Types::HttpEndpointBufferingHints]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   Describes the Amazon CloudWatch logging options for your delivery
+    #   Describes the Amazon CloudWatch logging options for your Firehose
     #   stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
@@ -2597,14 +2854,20 @@ module Aws::Firehose
 
     # Specifies the destination configure settings for Apache Iceberg Table.
     #
-    # Amazon Data Firehose is in preview release and is subject to change.
-    #
     # @!attribute [rw] destination_table_configuration_list
     #   Provides a list of `DestinationTableConfigurations` which Firehose
-    #   uses to deliver data to Apache Iceberg tables.
-    #
-    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   uses to deliver data to Apache Iceberg Tables. Firehose will write
+    #   data with insert if table specific configuration is not provided
+    #   here.
     #   @return [Array<Types::DestinationTableConfiguration>]
+    #
+    # @!attribute [rw] schema_evolution_configuration
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Types::SchemaEvolutionConfiguration]
+    #
+    # @!attribute [rw] table_creation_configuration
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Types::TableCreationConfiguration]
     #
     # @!attribute [rw] buffering_hints
     #   Describes hints for the buffering to perform before delivering data
@@ -2616,7 +2879,7 @@ module Aws::Firehose
     #   @return [Types::BufferingHints]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   Describes the Amazon CloudWatch logging options for your delivery
+    #   Describes the Amazon CloudWatch logging options for your Firehose
     #   stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
@@ -2625,28 +2888,23 @@ module Aws::Firehose
     #   @return [Types::ProcessingConfiguration]
     #
     # @!attribute [rw] s3_backup_mode
-    #   Describes how Firehose will backup records. Currently,Firehose only
-    #   supports `FailedDataOnly` for preview.
-    #
-    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   Describes how Firehose will backup records. Currently,S3 backup only
+    #   supports `FailedDataOnly`.
     #   @return [String]
     #
     # @!attribute [rw] retry_options
-    #   The retry behavior in case Firehose is unable to deliver data to an
-    #   Amazon S3 prefix.
+    #   The retry behavior in case Firehose is unable to deliver data to a
+    #   destination.
     #   @return [Types::RetryOptions]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the Apache Iceberg tables role.
-    #
-    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   The Amazon Resource Name (ARN) of the IAM role to be assumed by
+    #   Firehose for calling Apache Iceberg Tables.
     #   @return [String]
     #
     # @!attribute [rw] catalog_configuration
     #   Configuration describing where the destination Apache Iceberg Tables
     #   are persisted.
-    #
-    #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Types::CatalogConfiguration]
     #
     # @!attribute [rw] s3_configuration
@@ -2657,6 +2915,8 @@ module Aws::Firehose
     #
     class IcebergDestinationConfiguration < Struct.new(
       :destination_table_configuration_list,
+      :schema_evolution_configuration,
+      :table_creation_configuration,
       :buffering_hints,
       :cloud_watch_logging_options,
       :processing_configuration,
@@ -2671,14 +2931,20 @@ module Aws::Firehose
 
     # Describes a destination in Apache Iceberg Tables.
     #
-    # Amazon Data Firehose is in preview release and is subject to change.
-    #
     # @!attribute [rw] destination_table_configuration_list
     #   Provides a list of `DestinationTableConfigurations` which Firehose
-    #   uses to deliver data to Apache Iceberg tables.
-    #
-    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   uses to deliver data to Apache Iceberg Tables. Firehose will write
+    #   data with insert if table specific configuration is not provided
+    #   here.
     #   @return [Array<Types::DestinationTableConfiguration>]
+    #
+    # @!attribute [rw] schema_evolution_configuration
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Types::SchemaEvolutionConfiguration]
+    #
+    # @!attribute [rw] table_creation_configuration
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Types::TableCreationConfiguration]
     #
     # @!attribute [rw] buffering_hints
     #   Describes hints for the buffering to perform before delivering data
@@ -2690,7 +2956,7 @@ module Aws::Firehose
     #   @return [Types::BufferingHints]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   Describes the Amazon CloudWatch logging options for your delivery
+    #   Describes the Amazon CloudWatch logging options for your Firehose
     #   stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
@@ -2700,27 +2966,22 @@ module Aws::Firehose
     #
     # @!attribute [rw] s3_backup_mode
     #   Describes how Firehose will backup records. Currently,Firehose only
-    #   supports `FailedDataOnly` for preview.
-    #
-    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   supports `FailedDataOnly`.
     #   @return [String]
     #
     # @!attribute [rw] retry_options
-    #   The retry behavior in case Firehose is unable to deliver data to an
-    #   Amazon S3 prefix.
+    #   The retry behavior in case Firehose is unable to deliver data to a
+    #   destination.
     #   @return [Types::RetryOptions]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the Apache Iceberg Tables role.
-    #
-    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   The Amazon Resource Name (ARN) of the IAM role to be assumed by
+    #   Firehose for calling Apache Iceberg Tables.
     #   @return [String]
     #
     # @!attribute [rw] catalog_configuration
     #   Configuration describing where the destination Iceberg tables are
     #   persisted.
-    #
-    #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Types::CatalogConfiguration]
     #
     # @!attribute [rw] s3_destination_description
@@ -2731,6 +2992,8 @@ module Aws::Firehose
     #
     class IcebergDestinationDescription < Struct.new(
       :destination_table_configuration_list,
+      :schema_evolution_configuration,
+      :table_creation_configuration,
       :buffering_hints,
       :cloud_watch_logging_options,
       :processing_configuration,
@@ -2745,14 +3008,20 @@ module Aws::Firehose
 
     # Describes an update for a destination in Apache Iceberg Tables.
     #
-    # Amazon Data Firehose is in preview release and is subject to change.
-    #
     # @!attribute [rw] destination_table_configuration_list
     #   Provides a list of `DestinationTableConfigurations` which Firehose
-    #   uses to deliver data to Apache Iceberg tables.
-    #
-    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   uses to deliver data to Apache Iceberg Tables. Firehose will write
+    #   data with insert if table specific configuration is not provided
+    #   here.
     #   @return [Array<Types::DestinationTableConfiguration>]
+    #
+    # @!attribute [rw] schema_evolution_configuration
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Types::SchemaEvolutionConfiguration]
+    #
+    # @!attribute [rw] table_creation_configuration
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Types::TableCreationConfiguration]
     #
     # @!attribute [rw] buffering_hints
     #   Describes hints for the buffering to perform before delivering data
@@ -2764,7 +3033,7 @@ module Aws::Firehose
     #   @return [Types::BufferingHints]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   Describes the Amazon CloudWatch logging options for your delivery
+    #   Describes the Amazon CloudWatch logging options for your Firehose
     #   stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
@@ -2774,27 +3043,22 @@ module Aws::Firehose
     #
     # @!attribute [rw] s3_backup_mode
     #   Describes how Firehose will backup records. Currently,Firehose only
-    #   supports `FailedDataOnly` for preview.
-    #
-    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   supports `FailedDataOnly`.
     #   @return [String]
     #
     # @!attribute [rw] retry_options
-    #   The retry behavior in case Firehose is unable to deliver data to an
-    #   Amazon S3 prefix.
+    #   The retry behavior in case Firehose is unable to deliver data to a
+    #   destination.
     #   @return [Types::RetryOptions]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the Apache Iceberg Tables role.
-    #
-    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   The Amazon Resource Name (ARN) of the IAM role to be assumed by
+    #   Firehose for calling Apache Iceberg Tables.
     #   @return [String]
     #
     # @!attribute [rw] catalog_configuration
     #   Configuration describing where the destination Iceberg tables are
     #   persisted.
-    #
-    #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Types::CatalogConfiguration]
     #
     # @!attribute [rw] s3_configuration
@@ -2805,6 +3069,8 @@ module Aws::Firehose
     #
     class IcebergDestinationUpdate < Struct.new(
       :destination_table_configuration_list,
+      :schema_evolution_configuration,
+      :table_creation_configuration,
       :buffering_hints,
       :cloud_watch_logging_options,
       :processing_configuration,
@@ -2850,7 +3116,7 @@ module Aws::Firehose
     end
 
     # Firehose throws this exception when an attempt to put records or to
-    # start or stop delivery stream encryption fails. This happens when the
+    # start or stop Firehose stream encryption fails. This happens when the
     # KMS service throws one of the following exception types:
     # `AccessDeniedException`, `InvalidStateException`, `DisabledException`,
     # or `NotFoundException`.
@@ -2910,7 +3176,7 @@ module Aws::Firehose
     end
 
     # The stream and role Amazon Resource Names (ARNs) for a Kinesis data
-    # stream used as the source for a delivery stream.
+    # stream used as the source for a Firehose stream.
     #
     # @!attribute [rw] kinesis_stream_arn
     #   The ARN of the source Kinesis data stream. For more information, see
@@ -2941,7 +3207,7 @@ module Aws::Firehose
     end
 
     # Details about a Kinesis data stream used as the source for a Firehose
-    # delivery stream.
+    # Firehose stream.
     #
     # @!attribute [rw] kinesis_stream_arn
     #   The Amazon Resource Name (ARN) of the source Kinesis data stream.
@@ -2993,26 +3259,26 @@ module Aws::Firehose
     end
 
     # @!attribute [rw] limit
-    #   The maximum number of delivery streams to list. The default value is
+    #   The maximum number of Firehose streams to list. The default value is
     #   10.
     #   @return [Integer]
     #
     # @!attribute [rw] delivery_stream_type
-    #   The delivery stream type. This can be one of the following values:
+    #   The Firehose stream type. This can be one of the following values:
     #
-    #   * `DirectPut`: Provider applications access the delivery stream
+    #   * `DirectPut`: Provider applications access the Firehose stream
     #     directly.
     #
-    #   * `KinesisStreamAsSource`: The delivery stream uses a Kinesis data
+    #   * `KinesisStreamAsSource`: The Firehose stream uses a Kinesis data
     #     stream as a source.
     #
-    #   This parameter is optional. If this parameter is omitted, delivery
+    #   This parameter is optional. If this parameter is omitted, Firehose
     #   streams of all types are returned.
     #   @return [String]
     #
     # @!attribute [rw] exclusive_start_delivery_stream_name
-    #   The list of delivery streams returned by this call to
-    #   `ListDeliveryStreams` will start with the delivery stream whose name
+    #   The list of Firehose streams returned by this call to
+    #   `ListDeliveryStreams` will start with the Firehose stream whose name
     #   comes alphabetically immediately after the name you specify in
     #   `ExclusiveStartDeliveryStreamName`.
     #   @return [String]
@@ -3028,11 +3294,11 @@ module Aws::Firehose
     end
 
     # @!attribute [rw] delivery_stream_names
-    #   The names of the delivery streams.
+    #   The names of the Firehose streams.
     #   @return [Array<String>]
     #
     # @!attribute [rw] has_more_delivery_streams
-    #   Indicates whether there are more delivery streams available to list.
+    #   Indicates whether there are more Firehose streams available to list.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ListDeliveryStreamsOutput AWS API Documentation
@@ -3045,7 +3311,7 @@ module Aws::Firehose
     end
 
     # @!attribute [rw] delivery_stream_name
-    #   The name of the delivery stream whose tags you want to list.
+    #   The name of the Firehose stream whose tags you want to list.
     #   @return [String]
     #
     # @!attribute [rw] exclusive_start_tag_key
@@ -3056,7 +3322,7 @@ module Aws::Firehose
     #
     # @!attribute [rw] limit
     #   The number of tags to return. If this number is less than the total
-    #   number of tags associated with the delivery stream, `HasMoreTags` is
+    #   number of tags associated with the Firehose stream, `HasMoreTags` is
     #   set to `true` in the response. To list additional tags, set
     #   `ExclusiveStartTagKey` to the last key in the response.
     #   @return [Integer]
@@ -3129,7 +3395,7 @@ module Aws::Firehose
     end
 
     # Details about the Amazon MSK cluster used as the source for a Firehose
-    # delivery stream.
+    # Firehose stream.
     #
     # @!attribute [rw] msk_cluster_arn
     #   The ARN of the Amazon MSK cluster.
@@ -3196,8 +3462,8 @@ module Aws::Firehose
     #   Maps column names to JSON keys that aren't identical to the column
     #   names. This is useful when the JSON contains keys that are Hive
     #   keywords. For example, `timestamp` is a Hive keyword. If you have a
-    #   JSON key named `timestamp`, set this parameter to `\{"ts":
-    #   "timestamp"\}` to map this key to a column named `ts`.
+    #   JSON key named `timestamp`, set this parameter to `{"ts":
+    #   "timestamp"}` to map this key to a column named `ts`.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/OpenXJsonSerDe AWS API Documentation
@@ -3376,6 +3642,34 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # Amazon Data Firehose is in preview release and is subject to change.
+    #
+    # @!attribute [rw] source_name
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/PartitionField AWS API Documentation
+    #
+    class PartitionField < Struct.new(
+      :source_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Amazon Data Firehose is in preview release and is subject to change.
+    #
+    # @!attribute [rw] identity
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Array<Types::PartitionField>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/PartitionSpec AWS API Documentation
+    #
+    class PartitionSpec < Struct.new(
+      :identity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a data processing configuration.
     #
     # @!attribute [rw] enabled
@@ -3446,7 +3740,7 @@ module Aws::Firehose
     end
 
     # @!attribute [rw] delivery_stream_name
-    #   The name of the delivery stream.
+    #   The name of the Firehose stream.
     #   @return [String]
     #
     # @!attribute [rw] records
@@ -3490,9 +3784,9 @@ module Aws::Firehose
     end
 
     # Contains the result for an individual record from a PutRecordBatch
-    # request. If the record is successfully added to your delivery stream,
+    # request. If the record is successfully added to your Firehose stream,
     # it receives a record ID. If the record fails to be added to your
-    # delivery stream, the result includes an error code and an error
+    # Firehose stream, the result includes an error code and an error
     # message.
     #
     # @!attribute [rw] record_id
@@ -3518,7 +3812,7 @@ module Aws::Firehose
     end
 
     # @!attribute [rw] delivery_stream_name
-    #   The name of the delivery stream.
+    #   The name of the Firehose stream.
     #   @return [String]
     #
     # @!attribute [rw] record
@@ -3552,7 +3846,7 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # The unit of data in a delivery stream.
+    # The unit of data in a Firehose stream.
     #
     # @!attribute [rw] data
     #   The data blob, which is base64-encoded when the blob is serialized.
@@ -3617,9 +3911,9 @@ module Aws::Firehose
     #   @return [Types::ProcessingConfiguration]
     #
     # @!attribute [rw] s3_backup_mode
-    #   The Amazon S3 backup mode. After you create a delivery stream, you
+    #   The Amazon S3 backup mode. After you create a Firehose stream, you
     #   can update it to enable Amazon S3 backup if it is disabled. If
-    #   backup is enabled, you can't update the delivery stream to disable
+    #   backup is enabled, you can't update the Firehose stream to disable
     #   it.
     #   @return [String]
     #
@@ -3628,7 +3922,7 @@ module Aws::Firehose
     #   @return [Types::S3DestinationConfiguration]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   The CloudWatch logging options for your delivery stream.
+    #   The CloudWatch logging options for your Firehose stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
     # @!attribute [rw] secrets_manager_configuration
@@ -3701,7 +3995,7 @@ module Aws::Firehose
     #   @return [Types::S3DestinationDescription]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   The Amazon CloudWatch logging options for your delivery stream.
+    #   The Amazon CloudWatch logging options for your Firehose stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
     # @!attribute [rw] secrets_manager_configuration
@@ -3774,8 +4068,8 @@ module Aws::Firehose
     #   @return [Types::ProcessingConfiguration]
     #
     # @!attribute [rw] s3_backup_mode
-    #   You can update a delivery stream to enable Amazon S3 backup if it is
-    #   disabled. If backup is enabled, you can't update the delivery
+    #   You can update a Firehose stream to enable Amazon S3 backup if it is
+    #   disabled. If backup is enabled, you can't update the Firehose
     #   stream to disable it.
     #   @return [String]
     #
@@ -3784,7 +4078,7 @@ module Aws::Firehose
     #   @return [Types::S3DestinationUpdate]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   The Amazon CloudWatch logging options for your delivery stream.
+    #   The Amazon CloudWatch logging options for your Firehose stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
     # @!attribute [rw] secrets_manager_configuration
@@ -3858,12 +4152,12 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # The retry behavior in case Firehose is unable to deliver data to an
-    # Amazon S3 prefix.
+    # The retry behavior in case Firehose is unable to deliver data to a
+    # destination.
     #
     # @!attribute [rw] duration_in_seconds
     #   The period of time during which Firehose retries to deliver data to
-    #   the specified Amazon S3 prefix.
+    #   the specified destination.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/RetryOptions AWS API Documentation
@@ -3936,7 +4230,7 @@ module Aws::Firehose
     #   @return [Types::EncryptionConfiguration]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   The CloudWatch logging options for your delivery stream.
+    #   The CloudWatch logging options for your Firehose stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/S3DestinationConfiguration AWS API Documentation
@@ -4012,7 +4306,7 @@ module Aws::Firehose
     #   @return [Types::EncryptionConfiguration]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   The Amazon CloudWatch logging options for your delivery stream.
+    #   The Amazon CloudWatch logging options for your Firehose stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/S3DestinationDescription AWS API Documentation
@@ -4092,7 +4386,7 @@ module Aws::Firehose
     #   @return [Types::EncryptionConfiguration]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   The CloudWatch logging options for your delivery stream.
+    #   The CloudWatch logging options for your Firehose stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/S3DestinationUpdate AWS API Documentation
@@ -4172,12 +4466,26 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # Amazon Data Firehose is in preview release and is subject to change.
+    #
+    # @!attribute [rw] enabled
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SchemaEvolutionConfiguration AWS API Documentation
+    #
+    class SchemaEvolutionConfiguration < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The structure that defines how Firehose accesses the secret.
     #
     # @!attribute [rw] secret_arn
     #   The ARN of the secret that stores your credentials. It must be in
     #   the same region as the Firehose stream and the role. The secret ARN
-    #   can reside in a different account than the delivery stream and role
+    #   can reside in a different account than the Firehose stream and role
     #   as Firehose supports cross-account secret access. This parameter is
     #   required when **Enabled** is set to `True`.
     #   @return [String]
@@ -4191,8 +4499,8 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] enabled
-    #   Specifies whether you want to use the the secrets manager feature.
-    #   When set as `True` the secrets manager configuration overwrites the
+    #   Specifies whether you want to use the secrets manager feature. When
+    #   set as `True` the secrets manager configuration overwrites the
     #   existing secrets in the destination configuration. When it's set to
     #   `False` Firehose falls back to the credentials in the destination
     #   configuration.
@@ -4246,7 +4554,7 @@ module Aws::Firehose
     end
 
     # The service is unavailable. Back off and retry the operation. If you
-    # continue to see the exception, throughput limits for the delivery
+    # continue to see the exception, throughput limits for the Firehose
     # stream may have been exceeded. For more information about limits and
     # how to request an increase, see [Amazon Firehose Limits][1].
     #
@@ -4272,7 +4580,7 @@ module Aws::Firehose
     #
     # @!attribute [rw] size_in_m_bs
     #   Buffer incoming data to the specified size, in MBs, before
-    #   delivering it to the destination. The default value is 1.
+    #   delivering it to the destination. The default value is 128.
     #   @return [Integer]
     #
     # @!attribute [rw] interval_in_seconds
@@ -4369,7 +4677,7 @@ module Aws::Firehose
     #   @return [Types::SnowflakeVpcConfiguration]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   Describes the Amazon CloudWatch logging options for your delivery
+    #   Describes the Amazon CloudWatch logging options for your Firehose
     #   stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
@@ -4491,7 +4799,7 @@ module Aws::Firehose
     #   @return [Types::SnowflakeVpcConfiguration]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   Describes the Amazon CloudWatch logging options for your delivery
+    #   Describes the Amazon CloudWatch logging options for your Firehose
     #   stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
@@ -4621,7 +4929,7 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   Describes the Amazon CloudWatch logging options for your delivery
+    #   Describes the Amazon CloudWatch logging options for your Firehose
     #   stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
@@ -4655,7 +4963,8 @@ module Aws::Firehose
     #   @return [Types::SnowflakeRetryOptions]
     #
     # @!attribute [rw] s3_backup_mode
-    #   Choose an S3 backup mode
+    #   Choose an S3 backup mode. Once you set the mode as `AllData`, you
+    #   can not change it to `FailedDataOnly`.
     #   @return [String]
     #
     # @!attribute [rw] s3_update
@@ -4769,7 +5078,7 @@ module Aws::Firehose
     end
 
     # Details about a Kinesis data stream used as the source for a Firehose
-    # delivery stream.
+    # Firehose stream.
     #
     # @!attribute [rw] kinesis_stream_source_description
     #   The KinesisStreamSourceDescription value for the source Kinesis data
@@ -4781,11 +5090,16 @@ module Aws::Firehose
     #   as the source for a delivery stream.
     #   @return [Types::MSKSourceDescription]
     #
+    # @!attribute [rw] database_source_description
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Types::DatabaseSourceDescription]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SourceDescription AWS API Documentation
     #
     class SourceDescription < Struct.new(
       :kinesis_stream_source_description,
-      :msk_source_description)
+      :msk_source_description,
+      :database_source_description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4864,7 +5178,7 @@ module Aws::Firehose
     #   @return [Types::ProcessingConfiguration]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   The Amazon CloudWatch logging options for your delivery stream.
+    #   The Amazon CloudWatch logging options for your Firehose stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
     # @!attribute [rw] buffering_hints
@@ -4941,7 +5255,7 @@ module Aws::Firehose
     #   @return [Types::ProcessingConfiguration]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   The Amazon CloudWatch logging options for your delivery stream.
+    #   The Amazon CloudWatch logging options for your Firehose stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
     # @!attribute [rw] buffering_hints
@@ -5022,7 +5336,7 @@ module Aws::Firehose
     #   @return [Types::ProcessingConfiguration]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   The Amazon CloudWatch logging options for your delivery stream.
+    #   The Amazon CloudWatch logging options for your Firehose stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
     # @!attribute [rw] buffering_hints
@@ -5072,7 +5386,7 @@ module Aws::Firehose
     end
 
     # @!attribute [rw] delivery_stream_name
-    #   The name of the delivery stream for which you want to enable
+    #   The name of the Firehose stream for which you want to enable
     #   server-side encryption (SSE).
     #   @return [String]
     #
@@ -5095,7 +5409,7 @@ module Aws::Firehose
     class StartDeliveryStreamEncryptionOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] delivery_stream_name
-    #   The name of the delivery stream for which you want to disable
+    #   The name of the Firehose stream for which you want to disable
     #   server-side encryption (SSE).
     #   @return [String]
     #
@@ -5111,7 +5425,21 @@ module Aws::Firehose
     #
     class StopDeliveryStreamEncryptionOutput < Aws::EmptyStructure; end
 
-    # Metadata that you can assign to a delivery stream, consisting of a
+    # Amazon Data Firehose is in preview release and is subject to change.
+    #
+    # @!attribute [rw] enabled
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/TableCreationConfiguration AWS API Documentation
+    #
+    class TableCreationConfiguration < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Metadata that you can assign to a Firehose stream, consisting of a
     # key-value pair.
     #
     # @!attribute [rw] key
@@ -5136,7 +5464,7 @@ module Aws::Firehose
     end
 
     # @!attribute [rw] delivery_stream_name
-    #   The name of the delivery stream to which you want to add the tags.
+    #   The name of the Firehose stream to which you want to add the tags.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -5157,7 +5485,7 @@ module Aws::Firehose
     class TagDeliveryStreamOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] delivery_stream_name
-    #   The name of the delivery stream.
+    #   The name of the Firehose stream.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -5179,7 +5507,7 @@ module Aws::Firehose
     class UntagDeliveryStreamOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] delivery_stream_name
-    #   The name of the delivery stream.
+    #   The name of the Firehose stream.
     #   @return [String]
     #
     # @!attribute [rw] current_delivery_stream_version_id
@@ -5235,8 +5563,6 @@ module Aws::Firehose
     #
     # @!attribute [rw] iceberg_destination_update
     #   Describes an update for a destination in Apache Iceberg Tables.
-    #
-    #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Types::IcebergDestinationUpdate]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/UpdateDestinationInput AWS API Documentation
@@ -5280,7 +5606,7 @@ module Aws::Firehose
     #   Firehose to scale up the number of ENIs to match throughput, ensure
     #   that you have sufficient quota. To help you calculate the quota you
     #   need, assume that Firehose can create up to three ENIs for this
-    #   delivery stream for each of the subnets specified here. For more
+    #   Firehose stream for each of the subnets specified here. For more
     #   information about ENI quota, see [Network Interfaces ][1] in the
     #   Amazon VPC Quotas topic.
     #
@@ -5290,7 +5616,7 @@ module Aws::Firehose
     #   @return [Array<String>]
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the IAM role that you want the delivery stream to use to
+    #   The ARN of the IAM role that you want the Firehose stream to use to
     #   create endpoints in the destination VPC. You can use your existing
     #   Firehose delivery role or you can specify a new role. In either
     #   case, make sure that the role trusts the Firehose service principal
@@ -5365,7 +5691,7 @@ module Aws::Firehose
     #   Firehose to scale up the number of ENIs to match throughput, ensure
     #   that you have sufficient quota. To help you calculate the quota you
     #   need, assume that Firehose can create up to three ENIs for this
-    #   delivery stream for each of the subnets specified here. For more
+    #   Firehose stream for each of the subnets specified here. For more
     #   information about ENI quota, see [Network Interfaces ][1] in the
     #   Amazon VPC Quotas topic.
     #
@@ -5375,7 +5701,7 @@ module Aws::Firehose
     #   @return [Array<String>]
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the IAM role that the delivery stream uses to create
+    #   The ARN of the IAM role that the Firehose stream uses to create
     #   endpoints in the destination VPC. You can use your existing Firehose
     #   delivery role or you can specify a new role. In either case, make
     #   sure that the role trusts the Firehose service principal and that it
@@ -5397,7 +5723,7 @@ module Aws::Firehose
     #
     #   * `ec2:DeleteNetworkInterface`
     #
-    #   If you revoke these permissions after you create the delivery
+    #   If you revoke these permissions after you create the Firehose
     #   stream, Firehose can't scale out by creating more ENIs when
     #   necessary. You might therefore see a degradation in performance.
     #   @return [String]
@@ -5410,7 +5736,7 @@ module Aws::Firehose
     #   outbound HTTPS traffic to the Amazon ES domain's security group.
     #   Also ensure that the Amazon ES domain's security group allows HTTPS
     #   traffic from the security groups specified here. If you use the same
-    #   security group for both your delivery stream and the Amazon ES
+    #   security group for both your Firehose stream and the Amazon ES
     #   domain, make sure the security group inbound rule allows HTTPS
     #   traffic. For more information about security group rules, see
     #   [Security group rules][1] in the Amazon VPC documentation.

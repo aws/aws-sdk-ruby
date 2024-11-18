@@ -2445,7 +2445,6 @@ module Aws::ElasticLoadBalancingV2
     #     * If the value is `remove`, the Application Load Balancer removes
     #       the `X-Forwarded-For` header in the HTTP request before it sends
     #       it to targets.
-    #
     #   * `routing.http2.enabled` - Indicates whether HTTP/2 is enabled. The
     #     possible values are `true` and `false`. The default is `true`.
     #     Elastic Load Balancing requires that message header names contain
@@ -3022,39 +3021,39 @@ module Aws::ElasticLoadBalancingV2
     #
     # You can reuse URI components using the following reserved keywords:
     #
-    # * \#\\\{protocol\\}
+    # * \#\{protocol}
     #
-    # * \#\\\{host\\}
+    # * \#\{host}
     #
-    # * \#\\\{port\\}
+    # * \#\{port}
     #
-    # * \#\\\{path\\} (the leading "/" is removed)
+    # * \#\{path} (the leading "/" is removed)
     #
-    # * \#\\\{query\\}
+    # * \#\{query}
     #
-    # For example, you can change the path to "/new/#\\\{path\\}", the
-    # hostname to "example.#\\\{host\\}", or the query to
-    # "#\\\{query\\}&amp;value=xyz".
+    # For example, you can change the path to "/new/#\{path}", the
+    # hostname to "example.#\{host}", or the query to
+    # "#\{query}&amp;value=xyz".
     #
     # @!attribute [rw] protocol
-    #   The protocol. You can specify HTTP, HTTPS, or #\\\{protocol\\}. You
-    #   can redirect HTTP to HTTP, HTTP to HTTPS, and HTTPS to HTTPS. You
-    #   can't redirect HTTPS to HTTP.
+    #   The protocol. You can specify HTTP, HTTPS, or #\{protocol}. You can
+    #   redirect HTTP to HTTP, HTTP to HTTPS, and HTTPS to HTTPS. You can't
+    #   redirect HTTPS to HTTP.
     #   @return [String]
     #
     # @!attribute [rw] port
-    #   The port. You can specify a value from 1 to 65535 or #\\\{port\\}.
+    #   The port. You can specify a value from 1 to 65535 or #\{port}.
     #   @return [String]
     #
     # @!attribute [rw] host
     #   The hostname. This component is not percent-encoded. The hostname
-    #   can contain #\\\{host\\}.
+    #   can contain #\{host}.
     #   @return [String]
     #
     # @!attribute [rw] path
     #   The absolute path, starting with the leading "/". This component
-    #   is not percent-encoded. The path can contain #\\\{host\\},
-    #   #\\\{path\\}, and #\\\{port\\}.
+    #   is not percent-encoded. The path can contain #\{host}, #\{path}, and
+    #   #\{port}.
     #   @return [String]
     #
     # @!attribute [rw] query

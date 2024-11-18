@@ -209,6 +209,7 @@ module Aws::DynamoDB
     GlobalSecondaryIndexList = Shapes::ListShape.new(name: 'GlobalSecondaryIndexList')
     GlobalSecondaryIndexUpdate = Shapes::StructureShape.new(name: 'GlobalSecondaryIndexUpdate')
     GlobalSecondaryIndexUpdateList = Shapes::ListShape.new(name: 'GlobalSecondaryIndexUpdateList')
+    GlobalSecondaryIndexWarmThroughputDescription = Shapes::StructureShape.new(name: 'GlobalSecondaryIndexWarmThroughputDescription')
     GlobalSecondaryIndexes = Shapes::ListShape.new(name: 'GlobalSecondaryIndexes')
     GlobalTable = Shapes::StructureShape.new(name: 'GlobalTable')
     GlobalTableAlreadyExistsException = Shapes::StructureShape.new(name: 'GlobalTableAlreadyExistsException')
@@ -432,6 +433,7 @@ module Aws::DynamoDB
     TableNameList = Shapes::ListShape.new(name: 'TableNameList')
     TableNotFoundException = Shapes::StructureShape.new(name: 'TableNotFoundException')
     TableStatus = Shapes::StringShape.new(name: 'TableStatus')
+    TableWarmThroughputDescription = Shapes::StructureShape.new(name: 'TableWarmThroughputDescription')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagKeyString = Shapes::StringShape.new(name: 'TagKeyString')
@@ -480,6 +482,7 @@ module Aws::DynamoDB
     UpdateTableReplicaAutoScalingOutput = Shapes::StructureShape.new(name: 'UpdateTableReplicaAutoScalingOutput')
     UpdateTimeToLiveInput = Shapes::StructureShape.new(name: 'UpdateTimeToLiveInput')
     UpdateTimeToLiveOutput = Shapes::StructureShape.new(name: 'UpdateTimeToLiveOutput')
+    WarmThroughput = Shapes::StructureShape.new(name: 'WarmThroughput')
     WriteRequest = Shapes::StructureShape.new(name: 'WriteRequest')
     WriteRequests = Shapes::ListShape.new(name: 'WriteRequests')
 
@@ -715,6 +718,7 @@ module Aws::DynamoDB
     CreateGlobalSecondaryIndexAction.add_member(:projection, Shapes::ShapeRef.new(shape: Projection, required: true, location_name: "Projection"))
     CreateGlobalSecondaryIndexAction.add_member(:provisioned_throughput, Shapes::ShapeRef.new(shape: ProvisionedThroughput, location_name: "ProvisionedThroughput"))
     CreateGlobalSecondaryIndexAction.add_member(:on_demand_throughput, Shapes::ShapeRef.new(shape: OnDemandThroughput, location_name: "OnDemandThroughput"))
+    CreateGlobalSecondaryIndexAction.add_member(:warm_throughput, Shapes::ShapeRef.new(shape: WarmThroughput, location_name: "WarmThroughput"))
     CreateGlobalSecondaryIndexAction.struct_class = Types::CreateGlobalSecondaryIndexAction
 
     CreateGlobalTableInput.add_member(:global_table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "GlobalTableName"))
@@ -747,6 +751,7 @@ module Aws::DynamoDB
     CreateTableInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateTableInput.add_member(:table_class, Shapes::ShapeRef.new(shape: TableClass, location_name: "TableClass"))
     CreateTableInput.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: DeletionProtectionEnabled, location_name: "DeletionProtectionEnabled"))
+    CreateTableInput.add_member(:warm_throughput, Shapes::ShapeRef.new(shape: WarmThroughput, location_name: "WarmThroughput"))
     CreateTableInput.add_member(:resource_policy, Shapes::ShapeRef.new(shape: ResourcePolicy, location_name: "ResourcePolicy"))
     CreateTableInput.add_member(:on_demand_throughput, Shapes::ShapeRef.new(shape: OnDemandThroughput, location_name: "OnDemandThroughput"))
     CreateTableInput.struct_class = Types::CreateTableInput
@@ -1045,6 +1050,7 @@ module Aws::DynamoDB
     GlobalSecondaryIndex.add_member(:projection, Shapes::ShapeRef.new(shape: Projection, required: true, location_name: "Projection"))
     GlobalSecondaryIndex.add_member(:provisioned_throughput, Shapes::ShapeRef.new(shape: ProvisionedThroughput, location_name: "ProvisionedThroughput"))
     GlobalSecondaryIndex.add_member(:on_demand_throughput, Shapes::ShapeRef.new(shape: OnDemandThroughput, location_name: "OnDemandThroughput"))
+    GlobalSecondaryIndex.add_member(:warm_throughput, Shapes::ShapeRef.new(shape: WarmThroughput, location_name: "WarmThroughput"))
     GlobalSecondaryIndex.struct_class = Types::GlobalSecondaryIndex
 
     GlobalSecondaryIndexAutoScalingUpdate.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "IndexName"))
@@ -1063,6 +1069,7 @@ module Aws::DynamoDB
     GlobalSecondaryIndexDescription.add_member(:item_count, Shapes::ShapeRef.new(shape: LongObject, location_name: "ItemCount"))
     GlobalSecondaryIndexDescription.add_member(:index_arn, Shapes::ShapeRef.new(shape: String, location_name: "IndexArn"))
     GlobalSecondaryIndexDescription.add_member(:on_demand_throughput, Shapes::ShapeRef.new(shape: OnDemandThroughput, location_name: "OnDemandThroughput"))
+    GlobalSecondaryIndexDescription.add_member(:warm_throughput, Shapes::ShapeRef.new(shape: GlobalSecondaryIndexWarmThroughputDescription, location_name: "WarmThroughput"))
     GlobalSecondaryIndexDescription.struct_class = Types::GlobalSecondaryIndexDescription
 
     GlobalSecondaryIndexDescriptionList.member = Shapes::ShapeRef.new(shape: GlobalSecondaryIndexDescription)
@@ -1082,6 +1089,11 @@ module Aws::DynamoDB
     GlobalSecondaryIndexUpdate.struct_class = Types::GlobalSecondaryIndexUpdate
 
     GlobalSecondaryIndexUpdateList.member = Shapes::ShapeRef.new(shape: GlobalSecondaryIndexUpdate)
+
+    GlobalSecondaryIndexWarmThroughputDescription.add_member(:read_units_per_second, Shapes::ShapeRef.new(shape: PositiveLongObject, location_name: "ReadUnitsPerSecond"))
+    GlobalSecondaryIndexWarmThroughputDescription.add_member(:write_units_per_second, Shapes::ShapeRef.new(shape: PositiveLongObject, location_name: "WriteUnitsPerSecond"))
+    GlobalSecondaryIndexWarmThroughputDescription.add_member(:status, Shapes::ShapeRef.new(shape: IndexStatus, location_name: "Status"))
+    GlobalSecondaryIndexWarmThroughputDescription.struct_class = Types::GlobalSecondaryIndexWarmThroughputDescription
 
     GlobalSecondaryIndexes.member = Shapes::ShapeRef.new(shape: GlobalSecondaryIndexInfo)
 
@@ -1499,6 +1511,7 @@ module Aws::DynamoDB
     ReplicaDescription.add_member(:kms_master_key_id, Shapes::ShapeRef.new(shape: KMSMasterKeyId, location_name: "KMSMasterKeyId"))
     ReplicaDescription.add_member(:provisioned_throughput_override, Shapes::ShapeRef.new(shape: ProvisionedThroughputOverride, location_name: "ProvisionedThroughputOverride"))
     ReplicaDescription.add_member(:on_demand_throughput_override, Shapes::ShapeRef.new(shape: OnDemandThroughputOverride, location_name: "OnDemandThroughputOverride"))
+    ReplicaDescription.add_member(:warm_throughput, Shapes::ShapeRef.new(shape: TableWarmThroughputDescription, location_name: "WarmThroughput"))
     ReplicaDescription.add_member(:global_secondary_indexes, Shapes::ShapeRef.new(shape: ReplicaGlobalSecondaryIndexDescriptionList, location_name: "GlobalSecondaryIndexes"))
     ReplicaDescription.add_member(:replica_inaccessible_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "ReplicaInaccessibleDateTime"))
     ReplicaDescription.add_member(:replica_table_class_summary, Shapes::ShapeRef.new(shape: TableClassSummary, location_name: "ReplicaTableClassSummary"))
@@ -1528,6 +1541,7 @@ module Aws::DynamoDB
     ReplicaGlobalSecondaryIndexDescription.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "IndexName"))
     ReplicaGlobalSecondaryIndexDescription.add_member(:provisioned_throughput_override, Shapes::ShapeRef.new(shape: ProvisionedThroughputOverride, location_name: "ProvisionedThroughputOverride"))
     ReplicaGlobalSecondaryIndexDescription.add_member(:on_demand_throughput_override, Shapes::ShapeRef.new(shape: OnDemandThroughputOverride, location_name: "OnDemandThroughputOverride"))
+    ReplicaGlobalSecondaryIndexDescription.add_member(:warm_throughput, Shapes::ShapeRef.new(shape: GlobalSecondaryIndexWarmThroughputDescription, location_name: "WarmThroughput"))
     ReplicaGlobalSecondaryIndexDescription.struct_class = Types::ReplicaGlobalSecondaryIndexDescription
 
     ReplicaGlobalSecondaryIndexDescriptionList.member = Shapes::ShapeRef.new(shape: ReplicaGlobalSecondaryIndexDescription)
@@ -1750,6 +1764,7 @@ module Aws::DynamoDB
     TableDescription.add_member(:table_class_summary, Shapes::ShapeRef.new(shape: TableClassSummary, location_name: "TableClassSummary"))
     TableDescription.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: DeletionProtectionEnabled, location_name: "DeletionProtectionEnabled"))
     TableDescription.add_member(:on_demand_throughput, Shapes::ShapeRef.new(shape: OnDemandThroughput, location_name: "OnDemandThroughput"))
+    TableDescription.add_member(:warm_throughput, Shapes::ShapeRef.new(shape: TableWarmThroughputDescription, location_name: "WarmThroughput"))
     TableDescription.struct_class = Types::TableDescription
 
     TableInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
@@ -1759,6 +1774,11 @@ module Aws::DynamoDB
 
     TableNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     TableNotFoundException.struct_class = Types::TableNotFoundException
+
+    TableWarmThroughputDescription.add_member(:read_units_per_second, Shapes::ShapeRef.new(shape: PositiveLongObject, location_name: "ReadUnitsPerSecond"))
+    TableWarmThroughputDescription.add_member(:write_units_per_second, Shapes::ShapeRef.new(shape: PositiveLongObject, location_name: "WriteUnitsPerSecond"))
+    TableWarmThroughputDescription.add_member(:status, Shapes::ShapeRef.new(shape: TableStatus, location_name: "Status"))
+    TableWarmThroughputDescription.struct_class = Types::TableWarmThroughputDescription
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKeyString, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValueString, required: true, location_name: "Value"))
@@ -1854,6 +1874,7 @@ module Aws::DynamoDB
     UpdateGlobalSecondaryIndexAction.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, required: true, location_name: "IndexName"))
     UpdateGlobalSecondaryIndexAction.add_member(:provisioned_throughput, Shapes::ShapeRef.new(shape: ProvisionedThroughput, location_name: "ProvisionedThroughput"))
     UpdateGlobalSecondaryIndexAction.add_member(:on_demand_throughput, Shapes::ShapeRef.new(shape: OnDemandThroughput, location_name: "OnDemandThroughput"))
+    UpdateGlobalSecondaryIndexAction.add_member(:warm_throughput, Shapes::ShapeRef.new(shape: WarmThroughput, location_name: "WarmThroughput"))
     UpdateGlobalSecondaryIndexAction.struct_class = Types::UpdateGlobalSecondaryIndexAction
 
     UpdateGlobalTableInput.add_member(:global_table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "GlobalTableName"))
@@ -1928,6 +1949,7 @@ module Aws::DynamoDB
     UpdateTableInput.add_member(:table_class, Shapes::ShapeRef.new(shape: TableClass, location_name: "TableClass"))
     UpdateTableInput.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: DeletionProtectionEnabled, location_name: "DeletionProtectionEnabled"))
     UpdateTableInput.add_member(:on_demand_throughput, Shapes::ShapeRef.new(shape: OnDemandThroughput, location_name: "OnDemandThroughput"))
+    UpdateTableInput.add_member(:warm_throughput, Shapes::ShapeRef.new(shape: WarmThroughput, location_name: "WarmThroughput"))
     UpdateTableInput.struct_class = Types::UpdateTableInput
 
     UpdateTableOutput.add_member(:table_description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "TableDescription"))
@@ -1948,6 +1970,10 @@ module Aws::DynamoDB
 
     UpdateTimeToLiveOutput.add_member(:time_to_live_specification, Shapes::ShapeRef.new(shape: TimeToLiveSpecification, location_name: "TimeToLiveSpecification"))
     UpdateTimeToLiveOutput.struct_class = Types::UpdateTimeToLiveOutput
+
+    WarmThroughput.add_member(:read_units_per_second, Shapes::ShapeRef.new(shape: LongObject, location_name: "ReadUnitsPerSecond"))
+    WarmThroughput.add_member(:write_units_per_second, Shapes::ShapeRef.new(shape: LongObject, location_name: "WriteUnitsPerSecond"))
+    WarmThroughput.struct_class = Types::WarmThroughput
 
     WriteRequest.add_member(:put_request, Shapes::ShapeRef.new(shape: PutRequest, location_name: "PutRequest"))
     WriteRequest.add_member(:delete_request, Shapes::ShapeRef.new(shape: DeleteRequest, location_name: "DeleteRequest"))

@@ -17,16 +17,10 @@ end
 # expect: delay, available_capacity, retries, calculated_rate,
 #   measured_tx_rate, fill_rate
 def handle_with_retry(test_cases)
-  # Apply delay expectations first
-  test_cases.each do |test_case|
-    if test_case[:expect][:delay]
-      expect(Kernel).to receive(:sleep).with(test_case[:expect][:delay])
-    end
-  end
-
   i = 0
   handle do |_context|
-    apply_expectations(test_cases[i - 1]) if i > 0
+    apply_delay(test_cases[i])
+    apply_expectations(test_cases[i - 1]) if i.positive?
 
     # Setup the next response
     setup_next_response(test_cases[i])
@@ -38,7 +32,7 @@ def handle_with_retry(test_cases)
 
   expect(i).to(
     eq(test_cases.size),
-    "Wrong number of retries. Handler was called #{i} times but "\
+    "Wrong number of retries. Handler was called #{i} times but " \
     "#{test_cases.size} test cases were defined."
   )
 
@@ -46,7 +40,22 @@ def handle_with_retry(test_cases)
   apply_expectations(test_cases[i - 1])
 end
 
-# apply the expectations from a test case
+# Reset the request context for a subsequent call
+def reset_request
+  resp.context.retries = 0
+  resp.context.metadata[:retries] = {}
+end
+
+# apply a delay to the current test case
+# See handle_with_retry for test case definition
+def apply_delay(test_case)
+  expected = test_case[:expect]
+  return unless expected[:delay]
+
+  expect(Kernel).to receive(:sleep).with(expected[:delay])
+end
+
+# apply the expectations from a previous test case
 # See handle_with_retry for test case definition
 def apply_expectations(test_case)
   expected = test_case[:expect]
@@ -95,6 +104,8 @@ def apply_expectations(test_case)
   end
 end
 
+# setup the next response for the handler
+# See handle_with_retry for test case definition
 def setup_next_response(test_case)
   response = test_case[:response]
   resp.context.http_response.status_code = response[:status_code]

@@ -1207,21 +1207,24 @@ module Aws::Organizations
     #
     #   * [SERVICE\_CONTROL\_POLICY][1]
     #
-    #   * [BACKUP\_POLICY][2]
+    #   * [RESOURCE\_CONTROL\_POLICY][2]
     #
-    #   * [TAG\_POLICY][3]
+    #   * [BACKUP\_POLICY][3]
     #
-    #   * [CHATBOT\_POLICY][4]
+    #   * [TAG\_POLICY][4]
     #
-    #   * [AISERVICES\_OPT\_OUT\_POLICY][5]
+    #   * [CHATBOT\_POLICY][5]
+    #
+    #   * [AISERVICES\_OPT\_OUT\_POLICY][6]
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
-    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
-    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
-    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
-    #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_rcps.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
+    #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1794,21 +1797,24 @@ module Aws::Organizations
     #
     #   * [SERVICE\_CONTROL\_POLICY][1]
     #
-    #   * [BACKUP\_POLICY][2]
+    #   * [RESOURCE\_CONTROL\_POLICY][2]
     #
-    #   * [TAG\_POLICY][3]
+    #   * [BACKUP\_POLICY][3]
     #
-    #   * [CHATBOT\_POLICY][4]
+    #   * [TAG\_POLICY][4]
     #
-    #   * [AISERVICES\_OPT\_OUT\_POLICY][5]
+    #   * [CHATBOT\_POLICY][5]
+    #
+    #   * [AISERVICES\_OPT\_OUT\_POLICY][6]
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
-    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
-    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
-    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
-    #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_rcps.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
+    #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisablePolicyTypeRequest AWS API Documentation
@@ -2003,21 +2009,24 @@ module Aws::Organizations
     #
     #   * [SERVICE\_CONTROL\_POLICY][1]
     #
-    #   * [BACKUP\_POLICY][2]
+    #   * [RESOURCE\_CONTROL\_POLICY][2]
     #
-    #   * [TAG\_POLICY][3]
+    #   * [BACKUP\_POLICY][3]
     #
-    #   * [CHATBOT\_POLICY][4]
+    #   * [TAG\_POLICY][4]
     #
-    #   * [AISERVICES\_OPT\_OUT\_POLICY][5]
+    #   * [CHATBOT\_POLICY][5]
+    #
+    #   * [AISERVICES\_OPT\_OUT\_POLICY][6]
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
-    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
-    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
-    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
-    #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_rcps.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
+    #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnablePolicyTypeRequest AWS API Documentation
@@ -2464,6 +2473,9 @@ module Aws::Organizations
     # * INVALID\_PATTERN\_TARGET\_ID: You specified a policy target ID that
     #   doesn't match the required pattern.
     #
+    # * INVALID\_PRINCIPAL: You specified an invalid principal element in
+    #   the policy.
+    #
     # * INVALID\_ROLE\_NAME: You provided a role name that isn't valid. A
     #   role name can't begin with the reserved prefix `AWSServiceRoleFor`.
     #
@@ -2495,6 +2507,9 @@ module Aws::Organizations
     # * MOVING\_ACCOUNT\_BETWEEN\_DIFFERENT\_ROOTS: You can move an account
     #   only between entities in the same root.
     #
+    # * NON\_DETACHABLE\_POLICY: You can't detach this Amazon Web Services
+    #   Managed Policy.
+    #
     # * TARGET\_NOT\_SUPPORTED: You can't perform the specified operation
     #   on that target entity.
     #
@@ -2521,7 +2536,7 @@ module Aws::Organizations
     #   to invite to join your organization. This is a JSON object that
     #   contains the following elements:
     #
-    #   `\{ "Type": "ACCOUNT", "Id": "< account id number >" \}`
+    #   `{ "Type": "ACCOUNT", "Id": "< account id number >" }`
     #
     #   If you use the CLI, you can submit this as a single string, similar
     #   to the following example:
@@ -3311,21 +3326,24 @@ module Aws::Organizations
     #
     #   * [SERVICE\_CONTROL\_POLICY][1]
     #
-    #   * [BACKUP\_POLICY][2]
+    #   * [RESOURCE\_CONTROL\_POLICY][2]
     #
-    #   * [TAG\_POLICY][3]
+    #   * [BACKUP\_POLICY][3]
     #
-    #   * [CHATBOT\_POLICY][4]
+    #   * [TAG\_POLICY][4]
     #
-    #   * [AISERVICES\_OPT\_OUT\_POLICY][5]
+    #   * [CHATBOT\_POLICY][5]
+    #
+    #   * [AISERVICES\_OPT\_OUT\_POLICY][6]
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
-    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
-    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
-    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
-    #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_rcps.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
+    #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3387,21 +3405,24 @@ module Aws::Organizations
     #
     #   * [SERVICE\_CONTROL\_POLICY][1]
     #
-    #   * [BACKUP\_POLICY][2]
+    #   * [RESOURCE\_CONTROL\_POLICY][2]
     #
-    #   * [TAG\_POLICY][3]
+    #   * [BACKUP\_POLICY][3]
     #
-    #   * [CHATBOT\_POLICY][4]
+    #   * [TAG\_POLICY][4]
     #
-    #   * [AISERVICES\_OPT\_OUT\_POLICY][5]
+    #   * [CHATBOT\_POLICY][5]
+    #
+    #   * [AISERVICES\_OPT\_OUT\_POLICY][6]
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
-    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
-    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
-    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
-    #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_rcps.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+    #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
+    #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
     #   @return [String]
     #
     # @!attribute [rw] next_token

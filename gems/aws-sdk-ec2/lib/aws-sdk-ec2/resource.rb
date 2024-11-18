@@ -212,6 +212,9 @@ module Aws::EC2
     #     },
     #     disable_api_stop: false,
     #     enable_primary_ipv_6: false,
+    #     operator: {
+    #       principal: "String",
+    #     },
     #     dry_run: false,
     #     disable_api_termination: false,
     #     instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
@@ -544,6 +547,8 @@ module Aws::EC2
     #   attached to your instance and you enable a primary IPv6 address, the
     #   first IPv6 GUA address associated with the ENI becomes the primary
     #   IPv6 address.
+    # @option options [Types::OperatorRequest] :operator
+    #   Reserved for internal use.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
@@ -887,6 +892,9 @@ module Aws::EC2
     #       udp_stream_timeout: 1,
     #       udp_timeout: 1,
     #     },
+    #     operator: {
+    #       principal: "String",
+    #     },
     #     subnet_id: "SubnetId", # required
     #     description: "String",
     #     private_ip_address: "String",
@@ -971,6 +979,8 @@ module Aws::EC2
     #   the primary IPv6 address.
     # @option options [Types::ConnectionTrackingSpecificationRequest] :connection_tracking_specification
     #   A connection tracking specification for the network interface.
+    # @option options [Types::OperatorRequest] :operator
+    #   Reserved for internal use.
     # @option options [required, String] :subnet_id
     #   The ID of the subnet to associate with the network interface.
     # @option options [String] :description
@@ -1162,14 +1172,14 @@ module Aws::EC2
     #   Constraints: Up to 255 characters in length
     #
     #   Valid characters: a-z, A-Z, 0-9, spaces, and
-    #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
+    #   .\_-:/()#,@\[\]+=&amp;;\{}!$*
     # @option options [required, String] :group_name
     #   The name of the security group.
     #
     #   Constraints: Up to 255 characters in length. Cannot start with `sg-`.
     #
     #   Valid characters: a-z, A-Z, 0-9, spaces, and
-    #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
+    #   .\_-:/()#,@\[\]+=&amp;;\{}!$*
     # @option options [String] :vpc_id
     #   The ID of the VPC. Required for a nondefault VPC.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
@@ -1449,6 +1459,9 @@ module Aws::EC2
     #     multi_attach_enabled: false,
     #     throughput: 1,
     #     client_token: "String",
+    #     operator: {
+    #       principal: "String",
+    #     },
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -1597,6 +1610,8 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
+    # @option options [Types::OperatorRequest] :operator
+    #   Reserved for internal use.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -1840,8 +1855,7 @@ module Aws::EC2
     # @option options [required, String] :key_name
     #   A unique name for the key pair.
     # @option options [required, String, StringIO, File] :public_key_material
-    #   The public key. For API calls, the text must be base64-encoded. For
-    #   command line tools, base64 encoding is performed for you.
+    #   The public key.
     # @return [KeyPairInfo]
     def import_key_pair(options = {})
       resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
@@ -2261,9 +2275,9 @@ module Aws::EC2
     # @option options [Array<String>] :owners
     #   Scopes the results to images with the specified owners. You can
     #   specify a combination of Amazon Web Services account IDs, `self`,
-    #   `amazon`, and `aws-marketplace`. If you omit this parameter, the
-    #   results include all images for which you have launch permissions,
-    #   regardless of ownership.
+    #   `amazon`, `aws-backup-vault`, and `aws-marketplace`. If you omit this
+    #   parameter, the results include all images for which you have launch
+    #   permissions, regardless of ownership.
     # @option options [Boolean] :include_deprecated
     #   Specifies whether to include deprecated AMIs.
     #
@@ -2333,11 +2347,11 @@ module Aws::EC2
     #
     #   * `name` - The name of the AMI (provided during image creation).
     #
-    #   * `owner-alias` - The owner alias (`amazon` \| `aws-marketplace`). The
-    #     valid aliases are defined in an Amazon-maintained list. This is not
-    #     the Amazon Web Services account alias that can be set using the IAM
-    #     console. We recommend that you use the **Owner** request parameter
-    #     instead of this filter.
+    #   * `owner-alias` - The owner alias (`amazon` \| `aws-backup-vault` \|
+    #     `aws-marketplace`). The valid aliases are defined in an
+    #     Amazon-maintained list. This is not the Amazon Web Services account
+    #     alias that can be set using the IAM console. We recommend that you
+    #     use the **Owner** request parameter instead of this filter.
     #
     #   * `owner-id` - The Amazon Web Services account ID of the owner. We
     #     recommend that you use the **Owner** request parameter instead of

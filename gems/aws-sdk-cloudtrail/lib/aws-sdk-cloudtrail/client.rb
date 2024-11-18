@@ -1185,6 +1185,7 @@ module Aws::CloudTrail
     #   * {Types::DescribeQueryResponse#error_message #error_message} => String
     #   * {Types::DescribeQueryResponse#delivery_s3_uri #delivery_s3_uri} => String
     #   * {Types::DescribeQueryResponse#delivery_status #delivery_status} => String
+    #   * {Types::DescribeQueryResponse#prompt #prompt} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1207,6 +1208,7 @@ module Aws::CloudTrail
     #   resp.error_message #=> String
     #   resp.delivery_s3_uri #=> String
     #   resp.delivery_status #=> String, one of "SUCCESS", "FAILED", "FAILED_SIGNING_FILE", "PENDING", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "ACCESS_DENIED_SIGNING_FILE", "CANCELLED", "UNKNOWN"
+    #   resp.prompt #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DescribeQuery AWS API Documentation
     #
@@ -1392,6 +1394,71 @@ module Aws::CloudTrail
     # @param [Hash] params ({})
     def enable_federation(params = {}, options = {})
       req = build_request(:enable_federation, params)
+      req.send_request(options)
+    end
+
+    # Generates a query from a natural language prompt. This operation uses
+    # generative artificial intelligence (generative AI) to produce a
+    # ready-to-use SQL query from the prompt.
+    #
+    # The prompt can be a question or a statement about the event data in
+    # your event data store. For example, you can enter prompts like "What
+    # are my top errors in the past month?" and “Give me a list of users
+    # that used SNS.”
+    #
+    # The prompt must be in English. For information about limitations,
+    # permissions, and supported Regions, see [Create CloudTrail Lake
+    # queries from natural language prompts][1] in the <i>CloudTrail </i>
+    # user guide.
+    #
+    # <note markdown="1"> Do not include any personally identifying, confidential, or sensitive
+    # information in your prompts.
+    #
+    #  This feature uses generative AI large language models (LLMs); we
+    # recommend double-checking the LLM response.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/lake-query-generator.html
+    #
+    # @option params [required, Array<String>] :event_data_stores
+    #   The ARN (or ID suffix of the ARN) of the event data store that you
+    #   want to query. You can only specify one event data store.
+    #
+    # @option params [required, String] :prompt
+    #   The prompt that you want to use to generate the query. The prompt must
+    #   be in English. For example prompts, see [Example prompts][1] in the
+    #   <i>CloudTrail </i> user guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/lake-query-generator.html#lake-query-generator-examples
+    #
+    # @return [Types::GenerateQueryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GenerateQueryResponse#query_statement #query_statement} => String
+    #   * {Types::GenerateQueryResponse#query_alias #query_alias} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.generate_query({
+    #     event_data_stores: ["EventDataStoreArn"], # required
+    #     prompt: "Prompt", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.query_statement #=> String
+    #   resp.query_alias #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GenerateQuery AWS API Documentation
+    #
+    # @overload generate_query(params = {})
+    # @param [Hash] params ({})
+    def generate_query(params = {}, options = {})
+      req = build_request(:generate_query, params)
       req.send_request(options)
     end
 
@@ -3958,7 +4025,7 @@ module Aws::CloudTrail
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.93.0'
+      context[:gem_version] = '1.95.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

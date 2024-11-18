@@ -715,6 +715,11 @@ module Aws::ApplicationSignals
     #   use them to scope user permissions by granting a user permission to
     #   access or change only resources with certain tag values.
     #
+    # @option params [Array<Types::BurnRateConfiguration>] :burn_rate_configurations
+    #   Use this array to create *burn rates* for this SLO. Each burn rate is
+    #   a metric that indicates how fast the service is consuming the error
+    #   budget, relative to the attainment goal of the SLO.
+    #
     # @return [Types::CreateServiceLevelObjectiveOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateServiceLevelObjectiveOutput#slo #slo} => Types::ServiceLevelObjective
@@ -871,6 +876,11 @@ module Aws::ApplicationSignals
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     burn_rate_configurations: [
+    #       {
+    #         look_back_window_minutes: 1, # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -960,6 +970,8 @@ module Aws::ApplicationSignals
     #   resp.slo.goal.interval.calendar_interval.duration #=> Integer
     #   resp.slo.goal.attainment_goal #=> Float
     #   resp.slo.goal.warning_threshold #=> Float
+    #   resp.slo.burn_rate_configurations #=> Array
+    #   resp.slo.burn_rate_configurations[0].look_back_window_minutes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/CreateServiceLevelObjective AWS API Documentation
     #
@@ -1189,6 +1201,8 @@ module Aws::ApplicationSignals
     #   resp.slo.goal.interval.calendar_interval.duration #=> Integer
     #   resp.slo.goal.attainment_goal #=> Float
     #   resp.slo.goal.warning_threshold #=> Float
+    #   resp.slo.burn_rate_configurations #=> Array
+    #   resp.slo.burn_rate_configurations[0].look_back_window_minutes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/GetServiceLevelObjective AWS API Documentation
     #
@@ -1844,6 +1858,11 @@ module Aws::ApplicationSignals
     #   the SLO. This includes the time period for evaluation and the
     #   attainment threshold.
     #
+    # @option params [Array<Types::BurnRateConfiguration>] :burn_rate_configurations
+    #   Use this array to create *burn rates* for this SLO. Each burn rate is
+    #   a metric that indicates how fast the service is consuming the error
+    #   budget, relative to the attainment goal of the SLO.
+    #
     # @return [Types::UpdateServiceLevelObjectiveOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateServiceLevelObjectiveOutput#slo #slo} => Types::ServiceLevelObjective
@@ -1994,6 +2013,11 @@ module Aws::ApplicationSignals
     #       attainment_goal: 1.0,
     #       warning_threshold: 1.0,
     #     },
+    #     burn_rate_configurations: [
+    #       {
+    #         look_back_window_minutes: 1, # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2083,6 +2107,8 @@ module Aws::ApplicationSignals
     #   resp.slo.goal.interval.calendar_interval.duration #=> Integer
     #   resp.slo.goal.attainment_goal #=> Float
     #   resp.slo.goal.warning_threshold #=> Float
+    #   resp.slo.burn_rate_configurations #=> Array
+    #   resp.slo.burn_rate_configurations[0].look_back_window_minutes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/UpdateServiceLevelObjective AWS API Documentation
     #
@@ -2111,7 +2137,7 @@ module Aws::ApplicationSignals
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-applicationsignals'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

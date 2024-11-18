@@ -321,6 +321,11 @@
       "refs": {
       }
     },
+    "DBInstanceNotReadyFault": {
+      "base": "<p>An attempt to download or examine log files didn't succeed because an Aurora Serverless v2 instance was paused.</p>",
+      "refs": {
+      }
+    },
     "DBLogFileNotFoundFault": {
       "base": "<p> <code>LogFileName</code> doesn't refer to an existing DB log file.</p>",
       "refs": {

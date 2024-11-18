@@ -27,7 +27,7 @@ module AwsSdkCodeGenerator
           text.lines.map do |line|
             line = line.rstrip
             if line == ''
-              "#"
+              '#'
             else
               "##{gap}#{line}"
             end
@@ -117,10 +117,6 @@ module AwsSdkCodeGenerator
         #   while building a service.
         if html
           html = "<p>#{html}</p>" unless html.match(/<\w+>/)
-
-          # unescaped curly braces cause YARD errors, they are interpreted
-          # as code links.
-          html = html.gsub('{', "\\{").gsub('}', "\\}")
 
           # Kramdown generates invalid markup when there are attributes
           # on the code tag, have to reduce these down to get the proper markdown.

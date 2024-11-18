@@ -99,6 +99,16 @@ module Aws::CloudTrail
     #
     # * `readOnly`
     #
+    # The following additional fields are available for event data stores:
+    #
+    # * `eventName`
+    #
+    # * `eventType`
+    #
+    # * `sessionCredentialFromConsole`
+    #
+    # * `userIdentity.arn`
+    #
     # **Supported CloudTrail event record fields for data events**
     #
     # * `eventCategory` (required)
@@ -110,6 +120,16 @@ module Aws::CloudTrail
     # * `eventName`
     #
     # * `resources.ARN`
+    #
+    # The following additional fields are available for event data stores:
+    #
+    # * `eventSource`
+    #
+    # * `eventType`
+    #
+    # * `sessionCredentialFromConsole`
+    #
+    # * `userIdentity.arn`
     #
     # **Supported CloudTrail event record fields for network activity
     # events**
@@ -170,11 +190,16 @@ module Aws::CloudTrail
     #   filtering is not supported.
     #
     #   For CloudTrail management events, supported fields include
-    #   `eventCategory` (required), `eventSource`, and `readOnly`.
+    #   `eventCategory` (required), `eventSource`, and `readOnly`. The
+    #   following additional fields are available for event data stores:
+    #   `eventName`, `eventType`, `sessionCredentialFromConsole`, and
+    #   `userIdentity.arn`.
     #
     #   For CloudTrail data events, supported fields include `eventCategory`
     #   (required), `resources.type` (required), `eventName`, `readOnly`,
-    #   and `resources.ARN`.
+    #   and `resources.ARN`. The following additional fields are available
+    #   for event data stores: `eventSource`, `eventType`,
+    #   `sessionCredentialFromConsole`, and `userIdentity.arn`.
     #
     #   For CloudTrail network activity events, supported fields include
     #   `eventCategory` (required), `eventSource` (required), `eventName`,
@@ -192,12 +217,17 @@ module Aws::CloudTrail
     #     only `write` events.
     #
     #   * <b> <code>eventSource</code> </b> - This field is only used for
-    #     management events and network activity events.
+    #     management events, data events (for event data stores only), and
+    #     network activity events.
     #
-    #     For management events, this is an optional field that can be set
-    #     to `NotEquals` `kms.amazonaws.com` to exclude KMS management
-    #     events, or `NotEquals` `rdsdata.amazonaws.com` to exclude RDS
-    #     management events.
+    #     For management events for trails, this is an optional field that
+    #     can be set to `NotEquals` `kms.amazonaws.com` to exclude KMS
+    #     management events, or `NotEquals` `rdsdata.amazonaws.com` to
+    #     exclude RDS management events.
+    #
+    #     For management and data events for event data stores, you can use
+    #     it to include or exclude any event source and can use any
+    #     operator.
     #
     #     For network activity events, this is a required field that only
     #     uses the `Equals` operator. Set this field to the event source for
@@ -214,12 +244,12 @@ module Aws::CloudTrail
     #     * `kms.amazonaws.com`
     #
     #     * `secretsmanager.amazonaws.com`
-    #
     #   * <b> <code>eventName</code> </b> - This is an optional field that
-    #     is only used for data events and network activity events. You can
-    #     use any operator with `eventName`. You can use it to ﬁlter in or
-    #     ﬁlter out specific events. You can have multiple values for this
-    #     ﬁeld, separated by commas.
+    #     is only used for data events, management events (for event data
+    #     stores only), and network activity events. You can use any
+    #     operator with `eventName`. You can use it to ﬁlter in or ﬁlter out
+    #     specific events. You can have multiple values for this ﬁeld,
+    #     separated by commas.
     #
     #   * <b> <code>eventCategory</code> </b> - This field is required and
     #     must be set to `Equals`.
@@ -231,7 +261,6 @@ module Aws::CloudTrail
     #
     #     * For CloudTrail network activity events, the value must be
     #       `NetworkActivity`.
-    #
     #     The following are used only for event data stores:
     #
     #     * For CloudTrail Insights events, the value must be `Insight`.
@@ -241,8 +270,13 @@ module Aws::CloudTrail
     #
     #     * For Audit Manager evidence, the value must be `Evidence`.
     #
-    #     * For non-Amazon Web Services events, the value must be
+    #     * For events outside of Amazon Web Services, the value must be
     #       `ActivityAuditLog`.
+    #   * <b> <code>eventType</code> </b> - This is an optional field
+    #     available only for event data stores, which is used to filter
+    #     management and data events on the event type. For information
+    #     about available event types, see [CloudTrail record contents][1]
+    #     in the *CloudTrail user guide*.
     #
     #   * <b> <code>errorCode</code> </b> - This ﬁeld is only used to filter
     #     CloudTrail network activity events and is optional. This is the
@@ -250,161 +284,19 @@ module Aws::CloudTrail
     #     `VpceAccessDenied`. `errorCode` can only use the `Equals`
     #     operator.
     #
+    #   * <b> <code>sessionCredentialFromConsole</code> </b> - This is an
+    #     optional field available only for event data stores, which is used
+    #     to filter management and data events based on whether the events
+    #     originated from an Amazon Web Services Management Console session.
+    #     `sessionCredentialFromConsole` can only use the `Equals` and
+    #     `NotEquals` operators.
+    #
     #   * <b> <code>resources.type</code> </b> - This ﬁeld is required for
     #     CloudTrail data events. `resources.type` can only use the `Equals`
     #     operator.
     #
-    #     The value can be one of the following:
-    #
-    #     * `AWS::AppConfig::Configuration`
-    #
-    #     * `AWS::B2BI::Transformer`
-    #
-    #     * `AWS::Bedrock::AgentAlias`
-    #
-    #     * `AWS::Bedrock::FlowAlias`
-    #
-    #     * `AWS::Bedrock::Guardrail`
-    #
-    #     * `AWS::Bedrock::KnowledgeBase`
-    #
-    #     * `AWS::Cassandra::Table`
-    #
-    #     * `AWS::CloudFront::KeyValueStore`
-    #
-    #     * `AWS::CloudTrail::Channel`
-    #
-    #     * `AWS::CloudWatch::Metric`
-    #
-    #     * `AWS::CodeWhisperer::Customization`
-    #
-    #     * `AWS::CodeWhisperer::Profile`
-    #
-    #     * `AWS::Cognito::IdentityPool`
-    #
-    #     * `AWS::DynamoDB::Stream`
-    #
-    #     * `AWS::DynamoDB::Table`
-    #
-    #     * `AWS::EC2::Snapshot`
-    #
-    #     * `AWS::EMRWAL::Workspace`
-    #
-    #     * `AWS::FinSpace::Environment`
-    #
-    #     * `AWS::Glue::Table`
-    #
-    #     * `AWS::GreengrassV2::ComponentVersion`
-    #
-    #     * `AWS::GreengrassV2::Deployment`
-    #
-    #     * `AWS::GuardDuty::Detector`
-    #
-    #     * `AWS::IoT::Certificate`
-    #
-    #     * `AWS::IoT::Thing`
-    #
-    #     * `AWS::IoTSiteWise::Asset`
-    #
-    #     * `AWS::IoTSiteWise::TimeSeries`
-    #
-    #     * `AWS::IoTTwinMaker::Entity`
-    #
-    #     * `AWS::IoTTwinMaker::Workspace`
-    #
-    #     * `AWS::KendraRanking::ExecutionPlan`
-    #
-    #     * `AWS::Kinesis::Stream`
-    #
-    #     * `AWS::Kinesis::StreamConsumer`
-    #
-    #     * `AWS::KinesisVideo::Stream`
-    #
-    #     * `AWS::Lambda::Function`
-    #
-    #     * `AWS::MachineLearning::MlModel`
-    #
-    #     * `AWS::ManagedBlockchain::Network`
-    #
-    #     * `AWS::ManagedBlockchain::Node`
-    #
-    #     * `AWS::MedicalImaging::Datastore`
-    #
-    #     * `AWS::NeptuneGraph::Graph`
-    #
-    #     * `AWS::One::UKey`
-    #
-    #     * `AWS::One::User`
-    #
-    #     * `AWS::PaymentCryptography::Alias`
-    #
-    #     * `AWS::PaymentCryptography::Key`
-    #
-    #     * `AWS::PCAConnectorAD::Connector`
-    #
-    #     * `AWS::PCAConnectorSCEP::Connector`
-    #
-    #     * `AWS::QApps:QApp`
-    #
-    #     * `AWS::QBusiness::Application`
-    #
-    #     * `AWS::QBusiness::DataSource`
-    #
-    #     * `AWS::QBusiness::Index`
-    #
-    #     * `AWS::QBusiness::WebExperience`
-    #
-    #     * `AWS::RDS::DBCluster`
-    #
-    #     * `AWS::RUM::AppMonitor`
-    #
-    #     * `AWS::S3::AccessPoint`
-    #
-    #     * `AWS::S3::Object`
-    #
-    #     * `AWS::S3Express::Object`
-    #
-    #     * `AWS::S3ObjectLambda::AccessPoint`
-    #
-    #     * `AWS::S3Outposts::Object`
-    #
-    #     * `AWS::SageMaker::Endpoint`
-    #
-    #     * `AWS::SageMaker::ExperimentTrialComponent`
-    #
-    #     * `AWS::SageMaker::FeatureGroup`
-    #
-    #     * `AWS::ServiceDiscovery::Namespace `
-    #
-    #     * `AWS::ServiceDiscovery::Service`
-    #
-    #     * `AWS::SCN::Instance`
-    #
-    #     * `AWS::SNS::PlatformEndpoint`
-    #
-    #     * `AWS::SNS::Topic`
-    #
-    #     * `AWS::SQS::Queue`
-    #
-    #     * `AWS::SSM::ManagedNode`
-    #
-    #     * `AWS::SSMMessages::ControlChannel`
-    #
-    #     * `AWS::StepFunctions::StateMachine`
-    #
-    #     * `AWS::SWF::Domain`
-    #
-    #     * `AWS::ThinClient::Device`
-    #
-    #     * `AWS::ThinClient::Environment`
-    #
-    #     * `AWS::Timestream::Database`
-    #
-    #     * `AWS::Timestream::Table`
-    #
-    #     * `AWS::VerifiedPermissions::PolicyStore`
-    #
-    #     * `AWS::XRay::Trace`
+    #     For a list of available resource types for data events, see [Data
+    #     events][2] in the *CloudTrail User Guide*.
     #
     #     You can have only one `resources.type` ﬁeld per selector. To log
     #     events on more than one resource type, add another selector.
@@ -419,13 +311,20 @@ module Aws::CloudTrail
     #     matching value.
     #
     #     For information about filtering data events on the `resources.ARN`
-    #     field, see [Filtering data events by resources.ARN][1] in the
+    #     field, see [Filtering data events by resources.ARN][3] in the
     #     *CloudTrail User Guide*.
     #
     #     <note markdown="1"> You can't use the `resources.ARN` field to filter resource types
     #     that do not have ARNs.
     #
     #      </note>
+    #
+    #   * <b> <code>userIdentity.arn</code> </b> - This is an optional field
+    #     available only for event data stores, which is used to filter
+    #     management and data events on the userIdentity ARN. You can use
+    #     any operator with `userIdentity.arn`. For more information on the
+    #     userIdentity element, see [CloudTrail userIdentity element][4] in
+    #     the *CloudTrail User Guide*.
     #
     #   * <b> <code>vpcEndpointId</code> </b> - This ﬁeld is only used to
     #     filter CloudTrail network activity events and is optional. This
@@ -434,7 +333,10 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/filtering-data-events.html#filtering-data-events-resourcearn
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-event-reference-record-contents.html#ct-event-type
+    #   [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html#logging-data-events
+    #   [3]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/filtering-data-events.html#filtering-data-events-resourcearn
+    #   [4]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-event-reference-user-identity.html
     #   @return [String]
     #
     # @!attribute [rw] equals
@@ -1284,12 +1186,11 @@ module Aws::CloudTrail
     #   * `AWS::S3::Object`
     #
     #   Additional resource types are available through *advanced* event
-    #   selectors. For more information about these additional resource
-    #   types, see [AdvancedFieldSelector][1].
+    #   selectors. For more information, see [AdvancedEventSelector][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedFieldSelector.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedEventSelector.html
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -1514,6 +1415,16 @@ module Aws::CloudTrail
     #   The delivery status.
     #   @return [String]
     #
+    # @!attribute [rw] prompt
+    #   The prompt used for a generated query. For information about
+    #   generated queries, see [Create CloudTrail Lake queries from natural
+    #   language prompts][1] in the <i>CloudTrail </i> user guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/lake-query-generator.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DescribeQueryResponse AWS API Documentation
     #
     class DescribeQueryResponse < Struct.new(
@@ -1523,7 +1434,8 @@ module Aws::CloudTrail
       :query_statistics,
       :error_message,
       :delivery_s3_uri,
-      :delivery_status)
+      :delivery_status,
+      :prompt)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1969,6 +1881,56 @@ module Aws::CloudTrail
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] event_data_stores
+    #   The ARN (or ID suffix of the ARN) of the event data store that you
+    #   want to query. You can only specify one event data store.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] prompt
+    #   The prompt that you want to use to generate the query. The prompt
+    #   must be in English. For example prompts, see [Example prompts][1] in
+    #   the <i>CloudTrail </i> user guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/lake-query-generator.html#lake-query-generator-examples
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GenerateQueryRequest AWS API Documentation
+    #
+    class GenerateQueryRequest < Struct.new(
+      :event_data_stores,
+      :prompt)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] query_statement
+    #   The SQL query statement generated from the prompt.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_alias
+    #   An alias that identifies the prompt. When you run the `StartQuery`
+    #   operation, you can pass in either the `QueryAlias` or
+    #   `QueryStatement` parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GenerateQueryResponse AWS API Documentation
+    #
+    class GenerateQueryResponse < Struct.new(
+      :query_statement,
+      :query_alias)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This exception is thrown when a valid query could not be generated for
+    # the provided prompt.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GenerateResponseException AWS API Documentation
+    #
+    class GenerateResponseException < Aws::EmptyStructure; end
 
     # @!attribute [rw] channel
     #   The ARN or `UUID` of a channel.

@@ -411,6 +411,10 @@ module Aws
                                  iterator: {
                                  }?,
                                  knowledge_base: {
+                                   guardrail_configuration: {
+                                     guardrail_identifier: ::String?,
+                                     guardrail_version: ::String?
+                                   }?,
                                    knowledge_base_id: ::String,
                                    model_id: ::String?
                                  }?,
@@ -424,6 +428,10 @@ module Aws
                                  output: {
                                  }?,
                                  prompt: {
+                                   guardrail_configuration: {
+                                     guardrail_identifier: ::String?,
+                                     guardrail_version: ::String?
+                                   }?,
                                    source_configuration: {
                                      inline: {
                                        additional_model_request_fields: {
@@ -438,6 +446,51 @@ module Aws
                                        }?,
                                        model_id: ::String,
                                        template_configuration: {
+                                         chat: {
+                                           input_variables: Array[
+                                             {
+                                               name: ::String?
+                                             },
+                                           ]?,
+                                           messages: Array[
+                                             {
+                                               content: Array[
+                                                 {
+                                                   text: ::String?
+                                                 },
+                                               ],
+                                               role: ("user" | "assistant")
+                                             },
+                                           ],
+                                           system: Array[
+                                             {
+                                               text: ::String?
+                                             },
+                                           ]?,
+                                           tool_configuration: {
+                                             tool_choice: {
+                                               any: {
+                                               }?,
+                                               auto: {
+                                               }?,
+                                               tool: {
+                                                 name: ::String
+                                               }?
+                                             }?,
+                                             tools: Array[
+                                               {
+                                                 tool_spec: {
+                                                   description: ::String?,
+                                                   input_schema: {
+                                                     json: {
+                                                     }?
+                                                   },
+                                                   name: ::String
+                                                 }?
+                                               },
+                                             ]
+                                           }?
+                                         }?,
                                          text: {
                                            input_variables: Array[
                                              {
@@ -447,7 +500,7 @@ module Aws
                                            text: ::String
                                          }?
                                        },
-                                       template_type: ("TEXT")
+                                       template_type: ("TEXT" | "CHAT")
                                      }?,
                                      resource: {
                                        prompt_arn: ::String
@@ -647,6 +700,11 @@ module Aws
                              {
                                additional_model_request_fields: {
                                }?,
+                               gen_ai_resource: {
+                                 agent: {
+                                   agent_identifier: ::String
+                                 }?
+                               }?,
                                inference_configuration: {
                                  text: {
                                    max_tokens: ::Integer?,
@@ -664,6 +722,51 @@ module Aws
                                model_id: ::String?,
                                name: ::String,
                                template_configuration: {
+                                 chat: {
+                                   input_variables: Array[
+                                     {
+                                       name: ::String?
+                                     },
+                                   ]?,
+                                   messages: Array[
+                                     {
+                                       content: Array[
+                                         {
+                                           text: ::String?
+                                         },
+                                       ],
+                                       role: ("user" | "assistant")
+                                     },
+                                   ],
+                                   system: Array[
+                                     {
+                                       text: ::String?
+                                     },
+                                   ]?,
+                                   tool_configuration: {
+                                     tool_choice: {
+                                       any: {
+                                       }?,
+                                       auto: {
+                                       }?,
+                                       tool: {
+                                         name: ::String
+                                       }?
+                                     }?,
+                                     tools: Array[
+                                       {
+                                         tool_spec: {
+                                           description: ::String?,
+                                           input_schema: {
+                                             json: {
+                                             }?
+                                           },
+                                           name: ::String
+                                         }?
+                                       },
+                                     ]
+                                   }?
+                                 }?,
                                  text: {
                                    input_variables: Array[
                                      {
@@ -673,7 +776,7 @@ module Aws
                                    text: ::String
                                  }?
                                },
-                               template_type: ("TEXT")
+                               template_type: ("TEXT" | "CHAT")
                              },
                            ]
                          ) -> _CreatePromptResponseSuccess
@@ -1582,6 +1685,10 @@ module Aws
                                  iterator: {
                                  }?,
                                  knowledge_base: {
+                                   guardrail_configuration: {
+                                     guardrail_identifier: ::String?,
+                                     guardrail_version: ::String?
+                                   }?,
                                    knowledge_base_id: ::String,
                                    model_id: ::String?
                                  }?,
@@ -1595,6 +1702,10 @@ module Aws
                                  output: {
                                  }?,
                                  prompt: {
+                                   guardrail_configuration: {
+                                     guardrail_identifier: ::String?,
+                                     guardrail_version: ::String?
+                                   }?,
                                    source_configuration: {
                                      inline: {
                                        additional_model_request_fields: {
@@ -1609,6 +1720,51 @@ module Aws
                                        }?,
                                        model_id: ::String,
                                        template_configuration: {
+                                         chat: {
+                                           input_variables: Array[
+                                             {
+                                               name: ::String?
+                                             },
+                                           ]?,
+                                           messages: Array[
+                                             {
+                                               content: Array[
+                                                 {
+                                                   text: ::String?
+                                                 },
+                                               ],
+                                               role: ("user" | "assistant")
+                                             },
+                                           ],
+                                           system: Array[
+                                             {
+                                               text: ::String?
+                                             },
+                                           ]?,
+                                           tool_configuration: {
+                                             tool_choice: {
+                                               any: {
+                                               }?,
+                                               auto: {
+                                               }?,
+                                               tool: {
+                                                 name: ::String
+                                               }?
+                                             }?,
+                                             tools: Array[
+                                               {
+                                                 tool_spec: {
+                                                   description: ::String?,
+                                                   input_schema: {
+                                                     json: {
+                                                     }?
+                                                   },
+                                                   name: ::String
+                                                 }?
+                                               },
+                                             ]
+                                           }?
+                                         }?,
                                          text: {
                                            input_variables: Array[
                                              {
@@ -1618,7 +1774,7 @@ module Aws
                                            text: ::String
                                          }?
                                        },
-                                       template_type: ("TEXT")
+                                       template_type: ("TEXT" | "CHAT")
                                      }?,
                                      resource: {
                                        prompt_arn: ::String
@@ -1794,6 +1950,11 @@ module Aws
                              {
                                additional_model_request_fields: {
                                }?,
+                               gen_ai_resource: {
+                                 agent: {
+                                   agent_identifier: ::String
+                                 }?
+                               }?,
                                inference_configuration: {
                                  text: {
                                    max_tokens: ::Integer?,
@@ -1811,6 +1972,51 @@ module Aws
                                model_id: ::String?,
                                name: ::String,
                                template_configuration: {
+                                 chat: {
+                                   input_variables: Array[
+                                     {
+                                       name: ::String?
+                                     },
+                                   ]?,
+                                   messages: Array[
+                                     {
+                                       content: Array[
+                                         {
+                                           text: ::String?
+                                         },
+                                       ],
+                                       role: ("user" | "assistant")
+                                     },
+                                   ],
+                                   system: Array[
+                                     {
+                                       text: ::String?
+                                     },
+                                   ]?,
+                                   tool_configuration: {
+                                     tool_choice: {
+                                       any: {
+                                       }?,
+                                       auto: {
+                                       }?,
+                                       tool: {
+                                         name: ::String
+                                       }?
+                                     }?,
+                                     tools: Array[
+                                       {
+                                         tool_spec: {
+                                           description: ::String?,
+                                           input_schema: {
+                                             json: {
+                                             }?
+                                           },
+                                           name: ::String
+                                         }?
+                                       },
+                                     ]
+                                   }?
+                                 }?,
                                  text: {
                                    input_variables: Array[
                                      {
@@ -1820,11 +2026,188 @@ module Aws
                                    text: ::String
                                  }?
                                },
-                               template_type: ("TEXT")
+                               template_type: ("TEXT" | "CHAT")
                              },
                            ]
                          ) -> _UpdatePromptResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePromptResponseSuccess
+
+      interface _ValidateFlowDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ValidateFlowDefinitionResponse]
+        def validations: () -> ::Array[Types::FlowValidation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#validate_flow_definition-instance_method
+      def validate_flow_definition: (
+                                      definition: {
+                                        connections: Array[
+                                          {
+                                            configuration: {
+                                              conditional: {
+                                                condition: ::String
+                                              }?,
+                                              data: {
+                                                source_output: ::String,
+                                                target_input: ::String
+                                              }?
+                                            }?,
+                                            name: ::String,
+                                            source: ::String,
+                                            target: ::String,
+                                            type: ("Data" | "Conditional")
+                                          },
+                                        ]?,
+                                        nodes: Array[
+                                          {
+                                            configuration: {
+                                              agent: {
+                                                agent_alias_arn: ::String
+                                              }?,
+                                              collector: {
+                                              }?,
+                                              condition: {
+                                                conditions: Array[
+                                                  {
+                                                    expression: ::String?,
+                                                    name: ::String
+                                                  },
+                                                ]
+                                              }?,
+                                              input: {
+                                              }?,
+                                              iterator: {
+                                              }?,
+                                              knowledge_base: {
+                                                guardrail_configuration: {
+                                                  guardrail_identifier: ::String?,
+                                                  guardrail_version: ::String?
+                                                }?,
+                                                knowledge_base_id: ::String,
+                                                model_id: ::String?
+                                              }?,
+                                              lambda_function: {
+                                                lambda_arn: ::String
+                                              }?,
+                                              lex: {
+                                                bot_alias_arn: ::String,
+                                                locale_id: ::String
+                                              }?,
+                                              output: {
+                                              }?,
+                                              prompt: {
+                                                guardrail_configuration: {
+                                                  guardrail_identifier: ::String?,
+                                                  guardrail_version: ::String?
+                                                }?,
+                                                source_configuration: {
+                                                  inline: {
+                                                    additional_model_request_fields: {
+                                                    }?,
+                                                    inference_configuration: {
+                                                      text: {
+                                                        max_tokens: ::Integer?,
+                                                        stop_sequences: Array[::String]?,
+                                                        temperature: ::Float?,
+                                                        top_p: ::Float?
+                                                      }?
+                                                    }?,
+                                                    model_id: ::String,
+                                                    template_configuration: {
+                                                      chat: {
+                                                        input_variables: Array[
+                                                          {
+                                                            name: ::String?
+                                                          },
+                                                        ]?,
+                                                        messages: Array[
+                                                          {
+                                                            content: Array[
+                                                              {
+                                                                text: ::String?
+                                                              },
+                                                            ],
+                                                            role: ("user" | "assistant")
+                                                          },
+                                                        ],
+                                                        system: Array[
+                                                          {
+                                                            text: ::String?
+                                                          },
+                                                        ]?,
+                                                        tool_configuration: {
+                                                          tool_choice: {
+                                                            any: {
+                                                            }?,
+                                                            auto: {
+                                                            }?,
+                                                            tool: {
+                                                              name: ::String
+                                                            }?
+                                                          }?,
+                                                          tools: Array[
+                                                            {
+                                                              tool_spec: {
+                                                                description: ::String?,
+                                                                input_schema: {
+                                                                  json: {
+                                                                  }?
+                                                                },
+                                                                name: ::String
+                                                              }?
+                                                            },
+                                                          ]
+                                                        }?
+                                                      }?,
+                                                      text: {
+                                                        input_variables: Array[
+                                                          {
+                                                            name: ::String?
+                                                          },
+                                                        ]?,
+                                                        text: ::String
+                                                      }?
+                                                    },
+                                                    template_type: ("TEXT" | "CHAT")
+                                                  }?,
+                                                  resource: {
+                                                    prompt_arn: ::String
+                                                  }?
+                                                }
+                                              }?,
+                                              retrieval: {
+                                                service_configuration: {
+                                                  s3: {
+                                                    bucket_name: ::String
+                                                  }?
+                                                }
+                                              }?,
+                                              storage: {
+                                                service_configuration: {
+                                                  s3: {
+                                                    bucket_name: ::String
+                                                  }?
+                                                }
+                                              }?
+                                            }?,
+                                            inputs: Array[
+                                              {
+                                                expression: ::String,
+                                                name: ::String,
+                                                type: ("String" | "Number" | "Boolean" | "Object" | "Array")
+                                              },
+                                            ]?,
+                                            name: ::String,
+                                            outputs: Array[
+                                              {
+                                                name: ::String,
+                                                type: ("String" | "Number" | "Boolean" | "Object" | "Array")
+                                              },
+                                            ]?,
+                                            type: ("Input" | "Output" | "KnowledgeBase" | "Condition" | "Lex" | "Prompt" | "LambdaFunction" | "Storage" | "Agent" | "Retrieval" | "Iterator" | "Collector")
+                                          },
+                                        ]?
+                                      }
+                                    ) -> _ValidateFlowDefinitionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ValidateFlowDefinitionResponseSuccess
     end
   end
 end

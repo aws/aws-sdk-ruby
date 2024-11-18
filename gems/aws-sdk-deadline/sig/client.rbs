@@ -349,6 +349,18 @@ module Aws
                                   iops: ::Integer?,
                                   throughput_mi_b: ::Integer?
                                 }?,
+                                accelerator_capabilities: {
+                                  selections: Array[
+                                    {
+                                      name: ("t4" | "a10g" | "l4" | "l40s"),
+                                      runtime: ::String?
+                                    },
+                                  ],
+                                  count: {
+                                    min: ::Integer,
+                                    max: ::Integer?
+                                  }?
+                                }?,
                                 allowed_instance_types: Array[::String]?,
                                 excluded_instance_types: Array[::String]?,
                                 custom_amounts: Array[
@@ -1837,6 +1849,18 @@ module Aws
                                   size_gi_b: ::Integer?,
                                   iops: ::Integer?,
                                   throughput_mi_b: ::Integer?
+                                }?,
+                                accelerator_capabilities: {
+                                  selections: Array[
+                                    {
+                                      name: ("t4" | "a10g" | "l4" | "l40s"),
+                                      runtime: ::String?
+                                    },
+                                  ],
+                                  count: {
+                                    min: ::Integer,
+                                    max: ::Integer?
+                                  }?
                                 }?,
                                 allowed_instance_types: Array[::String]?,
                                 excluded_instance_types: Array[::String]?,

@@ -959,14 +959,14 @@ module Aws::QLDB
     #   The location of the block that you want to request. An address is an
     #   Amazon Ion structure that has two fields: `strandId` and `sequenceNo`.
     #
-    #   For example: `\{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14\}`.
+    #   For example: `{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14}`.
     #
     # @option params [Types::ValueHolder] :digest_tip_address
     #   The latest block location covered by the digest for which to request a
     #   proof. An address is an Amazon Ion structure that has two fields:
     #   `strandId` and `sequenceNo`.
     #
-    #   For example: `\{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49\}`.
+    #   For example: `{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49}`.
     #
     # @return [Types::GetBlockResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1043,7 +1043,7 @@ module Aws::QLDB
     #   is an Amazon Ion structure that has two fields: `strandId` and
     #   `sequenceNo`.
     #
-    #   For example: `\{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14\}`.
+    #   For example: `{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14}`.
     #
     # @option params [required, String] :document_id
     #   The UUID (represented in Base62-encoded text) of the document to be
@@ -1054,7 +1054,7 @@ module Aws::QLDB
     #   proof. An address is an Amazon Ion structure that has two fields:
     #   `strandId` and `sequenceNo`.
     #
-    #   For example: `\{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49\}`.
+    #   For example: `{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49}`.
     #
     # @return [Types::GetRevisionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1725,7 +1725,7 @@ module Aws::QLDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-qldb'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

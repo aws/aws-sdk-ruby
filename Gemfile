@@ -3,7 +3,6 @@
 source 'https://rubygems.org'
 
 gem 'rake', require: false
-
 # SDK feature dependencies
 gem 'aws-crt' if ENV['CRT']
 gem 'http-2'
@@ -15,7 +14,7 @@ if defined?(JRUBY_VERSION)
 end
 
 # protocol parsers
-gem 'json'
+gem 'json', '>= 2.4.0', '<= 2.7.6' # due to load_file support and we use it for specs
 gem 'nokogiri', '>= 1.6.8.1'
 gem 'oga'
 gem 'rexml'

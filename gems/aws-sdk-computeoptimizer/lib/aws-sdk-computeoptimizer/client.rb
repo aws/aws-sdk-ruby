@@ -2574,7 +2574,7 @@ module Aws::ComputeOptimizer
     #
     #   The following is the format of the ARN:
     #
-    #   `arn:aws:rds:\{region\}:\{accountId\}:db:\{resourceName\}`
+    #   `arn:aws:rds:{region}:{accountId}:db:{resourceName}`
     #
     # @option params [required, String] :stat
     #   The statistic of the projected metrics.
@@ -2647,11 +2647,11 @@ module Aws::ComputeOptimizer
     #
     #   The following is the format of the ARN:
     #
-    #   `arn:aws:rds:\{region\}:\{accountId\}:db:\{resourceName\}`
+    #   `arn:aws:rds:{region}:{accountId}:db:{resourceName}`
     #
     #   The following is the format of a DB Cluster ARN:
     #
-    #   `arn:aws:rds:\{region\}:\{accountId\}:cluster:\{resourceName\}`
+    #   `arn:aws:rds:{region}:{accountId}:cluster:{resourceName}`
     #
     # @option params [String] :next_token
     #   The token to advance to the next page of Amazon RDS recommendations.
@@ -3273,7 +3273,7 @@ module Aws::ComputeOptimizer
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-computeoptimizer'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

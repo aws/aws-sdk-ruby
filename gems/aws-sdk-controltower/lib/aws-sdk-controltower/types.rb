@@ -1562,6 +1562,30 @@ module Aws::ControlTower
       include Aws::Structure
     end
 
+    # @!attribute [rw] enabled_control_identifier
+    #   The ARN of the enabled control to be reset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ResetEnabledControlInput AWS API Documentation
+    #
+    class ResetEnabledControlInput < Struct.new(
+      :enabled_control_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operation_identifier
+    #   The operation identifier for this `ResetEnabledControl` operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ResetEnabledControlOutput AWS API Documentation
+    #
+    class ResetEnabledControlOutput < Struct.new(
+      :operation_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] landing_zone_identifier
     #   The unique identifier of the landing zone.
     #   @return [String]

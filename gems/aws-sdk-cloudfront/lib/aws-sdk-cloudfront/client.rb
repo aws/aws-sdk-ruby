@@ -6825,8 +6825,6 @@ module Aws::CloudFront
     #   # The following command retrieves a list of KeyValueStores with READY status.
     #
     #   resp = client.list_key_value_stores({
-    #     marker: "", 
-    #     max_items: 100, 
     #     status: "READY", 
     #   })
     #
@@ -6879,8 +6877,8 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # Gets the list of CloudFront origin access controls in this Amazon Web
-    # Services account.
+    # Gets the list of CloudFront origin access controls (OACs) in this
+    # Amazon Web Services account.
     #
     # You can optionally specify the maximum number of items to receive in
     # the response. If the total number of items in the list exceeds the
@@ -6888,6 +6886,12 @@ module Aws::CloudFront
     # paginated. To get the next page of items, send another request that
     # specifies the `NextMarker` value from the current response as the
     # `Marker` value in the next request.
+    #
+    # <note markdown="1"> If you're not using origin access controls for your Amazon Web
+    # Services account, the `ListOriginAccessControls` operation doesn't
+    # return the `Items` element in the response.
+    #
+    #  </note>
     #
     # @option params [String] :marker
     #   Use this field when paginating results to indicate where to begin in
@@ -7030,6 +7034,8 @@ module Aws::CloudFront
     # @return [Types::ListPublicKeysResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListPublicKeysResult#public_key_list #public_key_list} => Types::PublicKeyList
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -7777,15 +7783,14 @@ module Aws::CloudFront
     #     response. Note the following important requirements and
     #     restrictions:
     #
-    #     * You must rename the `ETag` field to `IfMatch`, leaving the value
-    #       unchanged. (Set the value of `IfMatch` to the value of `ETag`,
-    #       then remove the `ETag` field.)
+    #     * You must copy the `ETag` field value from the response. (You'll
+    #       use it for the `IfMatch` parameter in your request.) Then,
+    #       remove the `ETag` field from the distribution configuration.
     #
     #     * You can't change the value of `CallerReference`.
-    #
-    # 3.  Submit an `UpdateDistribution` request, providing the distribution
-    #     configuration. The new configuration replaces the existing
-    #     configuration. The values that you specify in an
+    # 3.  Submit an `UpdateDistribution` request, providing the updated
+    #     distribution configuration. The new configuration replaces the
+    #     existing configuration. The values that you specify in an
     #     `UpdateDistribution` request are not merged into your existing
     #     configuration. Make sure to include all fields: the ones that you
     #     modified and also the ones that you didn't.
@@ -9484,7 +9489,7 @@ module Aws::CloudFront
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.103.0'
+      context[:gem_version] = '1.105.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -45,8 +45,10 @@ module Aws::BedrockAgent
     AgentVersion = Shapes::StructureShape.new(name: 'AgentVersion')
     AgentVersionSummaries = Shapes::ListShape.new(name: 'AgentVersionSummaries')
     AgentVersionSummary = Shapes::StructureShape.new(name: 'AgentVersionSummary')
+    AnyToolChoice = Shapes::StructureShape.new(name: 'AnyToolChoice')
     AssociateAgentKnowledgeBaseRequest = Shapes::StructureShape.new(name: 'AssociateAgentKnowledgeBaseRequest')
     AssociateAgentKnowledgeBaseResponse = Shapes::StructureShape.new(name: 'AssociateAgentKnowledgeBaseResponse')
+    AutoToolChoice = Shapes::StructureShape.new(name: 'AutoToolChoice')
     BasePromptTemplate = Shapes::StringShape.new(name: 'BasePromptTemplate')
     BedrockEmbeddingModelArn = Shapes::StringShape.new(name: 'BedrockEmbeddingModelArn')
     BedrockEmbeddingModelConfiguration = Shapes::StructureShape.new(name: 'BedrockEmbeddingModelConfiguration')
@@ -54,6 +56,7 @@ module Aws::BedrockAgent
     BedrockModelArn = Shapes::StringShape.new(name: 'BedrockModelArn')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BucketOwnerAccountId = Shapes::StringShape.new(name: 'BucketOwnerAccountId')
+    ChatPromptTemplateConfiguration = Shapes::StructureShape.new(name: 'ChatPromptTemplateConfiguration')
     ChunkingConfiguration = Shapes::StructureShape.new(name: 'ChunkingConfiguration')
     ChunkingStrategy = Shapes::StringShape.new(name: 'ChunkingStrategy')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
@@ -66,6 +69,9 @@ module Aws::BedrockAgent
     ConfluenceDataSourceConfiguration = Shapes::StructureShape.new(name: 'ConfluenceDataSourceConfiguration')
     ConfluenceHostType = Shapes::StringShape.new(name: 'ConfluenceHostType')
     ConfluenceSourceConfiguration = Shapes::StructureShape.new(name: 'ConfluenceSourceConfiguration')
+    ContentBlock = Shapes::UnionShape.new(name: 'ContentBlock')
+    ContentBlocks = Shapes::ListShape.new(name: 'ContentBlocks')
+    ConversationRole = Shapes::StringShape.new(name: 'ConversationRole')
     CrawlFilterConfiguration = Shapes::StructureShape.new(name: 'CrawlFilterConfiguration')
     CrawlFilterConfigurationType = Shapes::StringShape.new(name: 'CrawlFilterConfigurationType')
     CreateAgentActionGroupRequest = Shapes::StructureShape.new(name: 'CreateAgentActionGroupRequest')
@@ -91,6 +97,7 @@ module Aws::BedrockAgent
     CreationMode = Shapes::StringShape.new(name: 'CreationMode')
     CustomControlMethod = Shapes::StringShape.new(name: 'CustomControlMethod')
     CustomTransformationConfiguration = Shapes::StructureShape.new(name: 'CustomTransformationConfiguration')
+    CyclicConnectionFlowValidationDetails = Shapes::StructureShape.new(name: 'CyclicConnectionFlowValidationDetails')
     DataDeletionPolicy = Shapes::StringShape.new(name: 'DataDeletionPolicy')
     DataSource = Shapes::StructureShape.new(name: 'DataSource')
     DataSourceConfiguration = Shapes::StructureShape.new(name: 'DataSourceConfiguration')
@@ -125,8 +132,11 @@ module Aws::BedrockAgent
     DisassociateAgentKnowledgeBaseResponse = Shapes::StructureShape.new(name: 'DisassociateAgentKnowledgeBaseResponse')
     Document = Shapes::DocumentShape.new(name: 'Document', document: true)
     DraftVersion = Shapes::StringShape.new(name: 'DraftVersion')
+    DuplicateConditionExpressionFlowValidationDetails = Shapes::StructureShape.new(name: 'DuplicateConditionExpressionFlowValidationDetails')
+    DuplicateConnectionsFlowValidationDetails = Shapes::StructureShape.new(name: 'DuplicateConnectionsFlowValidationDetails')
     EmbeddingModelConfiguration = Shapes::StructureShape.new(name: 'EmbeddingModelConfiguration')
     EnabledMemoryTypes = Shapes::ListShape.new(name: 'EnabledMemoryTypes')
+    ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
     FailureReasons = Shapes::ListShape.new(name: 'FailureReasons')
     FieldName = Shapes::StringShape.new(name: 'FieldName')
@@ -178,7 +188,9 @@ module Aws::BedrockAgent
     FlowSummaries = Shapes::ListShape.new(name: 'FlowSummaries')
     FlowSummary = Shapes::StructureShape.new(name: 'FlowSummary')
     FlowValidation = Shapes::StructureShape.new(name: 'FlowValidation')
+    FlowValidationDetails = Shapes::UnionShape.new(name: 'FlowValidationDetails')
     FlowValidationSeverity = Shapes::StringShape.new(name: 'FlowValidationSeverity')
+    FlowValidationType = Shapes::StringShape.new(name: 'FlowValidationType')
     FlowValidations = Shapes::ListShape.new(name: 'FlowValidations')
     FlowVersionSummaries = Shapes::ListShape.new(name: 'FlowVersionSummaries')
     FlowVersionSummary = Shapes::StructureShape.new(name: 'FlowVersionSummary')
@@ -220,6 +232,7 @@ module Aws::BedrockAgent
     HierarchicalChunkingLevelConfigurations = Shapes::ListShape.new(name: 'HierarchicalChunkingLevelConfigurations')
     HttpsUrl = Shapes::StringShape.new(name: 'HttpsUrl')
     Id = Shapes::StringShape.new(name: 'Id')
+    IncompatibleConnectionDataTypeFlowValidationDetails = Shapes::StructureShape.new(name: 'IncompatibleConnectionDataTypeFlowValidationDetails')
     InferenceConfiguration = Shapes::StructureShape.new(name: 'InferenceConfiguration')
     IngestionJob = Shapes::StructureShape.new(name: 'IngestionJob')
     IngestionJobFilter = Shapes::StructureShape.new(name: 'IngestionJobFilter')
@@ -284,11 +297,24 @@ module Aws::BedrockAgent
     ListPromptsResponse = Shapes::StructureShape.new(name: 'ListPromptsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    MalformedConditionExpressionFlowValidationDetails = Shapes::StructureShape.new(name: 'MalformedConditionExpressionFlowValidationDetails')
+    MalformedNodeInputExpressionFlowValidationDetails = Shapes::StructureShape.new(name: 'MalformedNodeInputExpressionFlowValidationDetails')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaximumLength = Shapes::IntegerShape.new(name: 'MaximumLength')
     MemoryConfiguration = Shapes::StructureShape.new(name: 'MemoryConfiguration')
     MemoryType = Shapes::StringShape.new(name: 'MemoryType')
+    Message = Shapes::StructureShape.new(name: 'Message')
+    Messages = Shapes::ListShape.new(name: 'Messages')
     Microsoft365TenantId = Shapes::StringShape.new(name: 'Microsoft365TenantId')
+    MismatchedNodeInputTypeFlowValidationDetails = Shapes::StructureShape.new(name: 'MismatchedNodeInputTypeFlowValidationDetails')
+    MismatchedNodeOutputTypeFlowValidationDetails = Shapes::StructureShape.new(name: 'MismatchedNodeOutputTypeFlowValidationDetails')
+    MissingConnectionConfigurationFlowValidationDetails = Shapes::StructureShape.new(name: 'MissingConnectionConfigurationFlowValidationDetails')
+    MissingDefaultConditionFlowValidationDetails = Shapes::StructureShape.new(name: 'MissingDefaultConditionFlowValidationDetails')
+    MissingEndingNodesFlowValidationDetails = Shapes::StructureShape.new(name: 'MissingEndingNodesFlowValidationDetails')
+    MissingNodeConfigurationFlowValidationDetails = Shapes::StructureShape.new(name: 'MissingNodeConfigurationFlowValidationDetails')
+    MissingNodeInputFlowValidationDetails = Shapes::StructureShape.new(name: 'MissingNodeInputFlowValidationDetails')
+    MissingNodeOutputFlowValidationDetails = Shapes::StructureShape.new(name: 'MissingNodeOutputFlowValidationDetails')
+    MissingStartingNodesFlowValidationDetails = Shapes::StructureShape.new(name: 'MissingStartingNodesFlowValidationDetails')
     ModelIdentifier = Shapes::StringShape.new(name: 'ModelIdentifier')
     MongoDbAtlasCollectionName = Shapes::StringShape.new(name: 'MongoDbAtlasCollectionName')
     MongoDbAtlasConfiguration = Shapes::StructureShape.new(name: 'MongoDbAtlasConfiguration')
@@ -297,9 +323,11 @@ module Aws::BedrockAgent
     MongoDbAtlasEndpointServiceName = Shapes::StringShape.new(name: 'MongoDbAtlasEndpointServiceName')
     MongoDbAtlasFieldMapping = Shapes::StructureShape.new(name: 'MongoDbAtlasFieldMapping')
     MongoDbAtlasIndexName = Shapes::StringShape.new(name: 'MongoDbAtlasIndexName')
+    MultipleNodeInputConnectionsFlowValidationDetails = Shapes::StructureShape.new(name: 'MultipleNodeInputConnectionsFlowValidationDetails')
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NonBlankString = Shapes::StringShape.new(name: 'NonBlankString')
+    NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NumericalVersion = Shapes::StringShape.new(name: 'NumericalVersion')
     OpenSearchServerlessCollectionArn = Shapes::StringShape.new(name: 'OpenSearchServerlessCollectionArn')
     OpenSearchServerlessConfiguration = Shapes::StructureShape.new(name: 'OpenSearchServerlessConfiguration')
@@ -326,6 +354,7 @@ module Aws::BedrockAgent
     PrepareFlowRequest = Shapes::StructureShape.new(name: 'PrepareFlowRequest')
     PrepareFlowResponse = Shapes::StructureShape.new(name: 'PrepareFlowResponse')
     PrimitiveLong = Shapes::IntegerShape.new(name: 'PrimitiveLong')
+    PromptAgentResource = Shapes::StructureShape.new(name: 'PromptAgentResource')
     PromptArn = Shapes::StringShape.new(name: 'PromptArn')
     PromptConfiguration = Shapes::StructureShape.new(name: 'PromptConfiguration')
     PromptConfigurations = Shapes::ListShape.new(name: 'PromptConfigurations')
@@ -334,6 +363,7 @@ module Aws::BedrockAgent
     PromptFlowNodeInlineConfiguration = Shapes::StructureShape.new(name: 'PromptFlowNodeInlineConfiguration')
     PromptFlowNodeResourceConfiguration = Shapes::StructureShape.new(name: 'PromptFlowNodeResourceConfiguration')
     PromptFlowNodeSourceConfiguration = Shapes::UnionShape.new(name: 'PromptFlowNodeSourceConfiguration')
+    PromptGenAiResource = Shapes::UnionShape.new(name: 'PromptGenAiResource')
     PromptId = Shapes::StringShape.new(name: 'PromptId')
     PromptIdentifier = Shapes::StringShape.new(name: 'PromptIdentifier')
     PromptInferenceConfiguration = Shapes::UnionShape.new(name: 'PromptInferenceConfiguration')
@@ -405,6 +435,7 @@ module Aws::BedrockAgent
     SharePointSiteUrls = Shapes::ListShape.new(name: 'SharePointSiteUrls')
     SharePointSourceConfiguration = Shapes::StructureShape.new(name: 'SharePointSourceConfiguration')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
+    SpecificToolChoice = Shapes::StructureShape.new(name: 'SpecificToolChoice')
     StartIngestionJobRequest = Shapes::StructureShape.new(name: 'StartIngestionJobRequest')
     StartIngestionJobResponse = Shapes::StructureShape.new(name: 'StartIngestionJobResponse')
     StepType = Shapes::StringShape.new(name: 'StepType')
@@ -417,6 +448,8 @@ module Aws::BedrockAgent
     StorageFlowNodeS3Configuration = Shapes::StructureShape.new(name: 'StorageFlowNodeS3Configuration')
     StorageFlowNodeServiceConfiguration = Shapes::UnionShape.new(name: 'StorageFlowNodeServiceConfiguration')
     String = Shapes::StringShape.new(name: 'String')
+    SystemContentBlock = Shapes::UnionShape.new(name: 'SystemContentBlock')
+    SystemContentBlocks = Shapes::ListShape.new(name: 'SystemContentBlocks')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
@@ -428,6 +461,13 @@ module Aws::BedrockAgent
     TextPrompt = Shapes::StringShape.new(name: 'TextPrompt')
     TextPromptTemplateConfiguration = Shapes::StructureShape.new(name: 'TextPromptTemplateConfiguration')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    Tool = Shapes::UnionShape.new(name: 'Tool')
+    ToolChoice = Shapes::UnionShape.new(name: 'ToolChoice')
+    ToolConfiguration = Shapes::StructureShape.new(name: 'ToolConfiguration')
+    ToolConfigurationToolsList = Shapes::ListShape.new(name: 'ToolConfigurationToolsList')
+    ToolInputSchema = Shapes::UnionShape.new(name: 'ToolInputSchema')
+    ToolName = Shapes::StringShape.new(name: 'ToolName')
+    ToolSpecification = Shapes::StructureShape.new(name: 'ToolSpecification')
     TopK = Shapes::IntegerShape.new(name: 'TopK')
     TopP = Shapes::FloatShape.new(name: 'TopP')
     Transformation = Shapes::StructureShape.new(name: 'Transformation')
@@ -435,6 +475,15 @@ module Aws::BedrockAgent
     TransformationLambdaConfiguration = Shapes::StructureShape.new(name: 'TransformationLambdaConfiguration')
     Transformations = Shapes::ListShape.new(name: 'Transformations')
     Type = Shapes::StringShape.new(name: 'Type')
+    UnfulfilledNodeInputFlowValidationDetails = Shapes::StructureShape.new(name: 'UnfulfilledNodeInputFlowValidationDetails')
+    UnknownConnectionConditionFlowValidationDetails = Shapes::StructureShape.new(name: 'UnknownConnectionConditionFlowValidationDetails')
+    UnknownConnectionSourceFlowValidationDetails = Shapes::StructureShape.new(name: 'UnknownConnectionSourceFlowValidationDetails')
+    UnknownConnectionSourceOutputFlowValidationDetails = Shapes::StructureShape.new(name: 'UnknownConnectionSourceOutputFlowValidationDetails')
+    UnknownConnectionTargetFlowValidationDetails = Shapes::StructureShape.new(name: 'UnknownConnectionTargetFlowValidationDetails')
+    UnknownConnectionTargetInputFlowValidationDetails = Shapes::StructureShape.new(name: 'UnknownConnectionTargetInputFlowValidationDetails')
+    UnreachableNodeFlowValidationDetails = Shapes::StructureShape.new(name: 'UnreachableNodeFlowValidationDetails')
+    UnsatisfiedConnectionConditionsFlowValidationDetails = Shapes::StructureShape.new(name: 'UnsatisfiedConnectionConditionsFlowValidationDetails')
+    UnspecifiedFlowValidationDetails = Shapes::StructureShape.new(name: 'UnspecifiedFlowValidationDetails')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateAgentActionGroupRequest = Shapes::StructureShape.new(name: 'UpdateAgentActionGroupRequest')
@@ -457,6 +506,8 @@ module Aws::BedrockAgent
     UpdatePromptResponse = Shapes::StructureShape.new(name: 'UpdatePromptResponse')
     Url = Shapes::StringShape.new(name: 'Url')
     UrlConfiguration = Shapes::StructureShape.new(name: 'UrlConfiguration')
+    ValidateFlowDefinitionRequest = Shapes::StructureShape.new(name: 'ValidateFlowDefinitionRequest')
+    ValidateFlowDefinitionResponse = Shapes::StructureShape.new(name: 'ValidateFlowDefinitionResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
@@ -635,6 +686,8 @@ module Aws::BedrockAgent
     AgentVersionSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     AgentVersionSummary.struct_class = Types::AgentVersionSummary
 
+    AnyToolChoice.struct_class = Types::AnyToolChoice
+
     AssociateAgentKnowledgeBaseRequest.add_member(:agent_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "agentId"))
     AssociateAgentKnowledgeBaseRequest.add_member(:agent_version, Shapes::ShapeRef.new(shape: DraftVersion, required: true, location: "uri", location_name: "agentVersion"))
     AssociateAgentKnowledgeBaseRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, required: true, location_name: "description"))
@@ -645,12 +698,20 @@ module Aws::BedrockAgent
     AssociateAgentKnowledgeBaseResponse.add_member(:agent_knowledge_base, Shapes::ShapeRef.new(shape: AgentKnowledgeBase, required: true, location_name: "agentKnowledgeBase"))
     AssociateAgentKnowledgeBaseResponse.struct_class = Types::AssociateAgentKnowledgeBaseResponse
 
+    AutoToolChoice.struct_class = Types::AutoToolChoice
+
     BedrockEmbeddingModelConfiguration.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "dimensions"))
     BedrockEmbeddingModelConfiguration.struct_class = Types::BedrockEmbeddingModelConfiguration
 
     BedrockFoundationModelConfiguration.add_member(:model_arn, Shapes::ShapeRef.new(shape: BedrockModelArn, required: true, location_name: "modelArn"))
     BedrockFoundationModelConfiguration.add_member(:parsing_prompt, Shapes::ShapeRef.new(shape: ParsingPrompt, location_name: "parsingPrompt"))
     BedrockFoundationModelConfiguration.struct_class = Types::BedrockFoundationModelConfiguration
+
+    ChatPromptTemplateConfiguration.add_member(:input_variables, Shapes::ShapeRef.new(shape: PromptInputVariablesList, location_name: "inputVariables"))
+    ChatPromptTemplateConfiguration.add_member(:messages, Shapes::ShapeRef.new(shape: Messages, required: true, location_name: "messages"))
+    ChatPromptTemplateConfiguration.add_member(:system, Shapes::ShapeRef.new(shape: SystemContentBlocks, location_name: "system"))
+    ChatPromptTemplateConfiguration.add_member(:tool_configuration, Shapes::ShapeRef.new(shape: ToolConfiguration, location_name: "toolConfiguration"))
+    ChatPromptTemplateConfiguration.struct_class = Types::ChatPromptTemplateConfiguration
 
     ChunkingConfiguration.add_member(:chunking_strategy, Shapes::ShapeRef.new(shape: ChunkingStrategy, required: true, location_name: "chunkingStrategy"))
     ChunkingConfiguration.add_member(:fixed_size_chunking_configuration, Shapes::ShapeRef.new(shape: FixedSizeChunkingConfiguration, location_name: "fixedSizeChunkingConfiguration"))
@@ -678,6 +739,14 @@ module Aws::BedrockAgent
     ConfluenceSourceConfiguration.add_member(:host_type, Shapes::ShapeRef.new(shape: ConfluenceHostType, required: true, location_name: "hostType"))
     ConfluenceSourceConfiguration.add_member(:host_url, Shapes::ShapeRef.new(shape: HttpsUrl, required: true, location_name: "hostUrl"))
     ConfluenceSourceConfiguration.struct_class = Types::ConfluenceSourceConfiguration
+
+    ContentBlock.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "text"))
+    ContentBlock.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ContentBlock.add_member_subclass(:text, Types::ContentBlock::Text)
+    ContentBlock.add_member_subclass(:unknown, Types::ContentBlock::Unknown)
+    ContentBlock.struct_class = Types::ContentBlock
+
+    ContentBlocks.member = Shapes::ShapeRef.new(shape: ContentBlock)
 
     CrawlFilterConfiguration.add_member(:pattern_object_filter, Shapes::ShapeRef.new(shape: PatternObjectFilterConfiguration, location_name: "patternObjectFilter"))
     CrawlFilterConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: CrawlFilterConfigurationType, required: true, location_name: "type"))
@@ -851,6 +920,9 @@ module Aws::BedrockAgent
     CustomTransformationConfiguration.add_member(:transformations, Shapes::ShapeRef.new(shape: Transformations, required: true, location_name: "transformations"))
     CustomTransformationConfiguration.struct_class = Types::CustomTransformationConfiguration
 
+    CyclicConnectionFlowValidationDetails.add_member(:connection, Shapes::ShapeRef.new(shape: FlowConnectionName, required: true, location_name: "connection"))
+    CyclicConnectionFlowValidationDetails.struct_class = Types::CyclicConnectionFlowValidationDetails
+
     DataSource.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     DataSource.add_member(:data_deletion_policy, Shapes::ShapeRef.new(shape: DataDeletionPolicy, location_name: "dataDeletionPolicy"))
     DataSource.add_member(:data_source_configuration, Shapes::ShapeRef.new(shape: DataSourceConfiguration, required: true, location_name: "dataSourceConfiguration"))
@@ -972,6 +1044,14 @@ module Aws::BedrockAgent
     DisassociateAgentKnowledgeBaseRequest.struct_class = Types::DisassociateAgentKnowledgeBaseRequest
 
     DisassociateAgentKnowledgeBaseResponse.struct_class = Types::DisassociateAgentKnowledgeBaseResponse
+
+    DuplicateConditionExpressionFlowValidationDetails.add_member(:expression, Shapes::ShapeRef.new(shape: FlowConditionExpression, required: true, location_name: "expression"))
+    DuplicateConditionExpressionFlowValidationDetails.add_member(:node, Shapes::ShapeRef.new(shape: FlowNodeName, required: true, location_name: "node"))
+    DuplicateConditionExpressionFlowValidationDetails.struct_class = Types::DuplicateConditionExpressionFlowValidationDetails
+
+    DuplicateConnectionsFlowValidationDetails.add_member(:source, Shapes::ShapeRef.new(shape: FlowNodeName, required: true, location_name: "source"))
+    DuplicateConnectionsFlowValidationDetails.add_member(:target, Shapes::ShapeRef.new(shape: FlowNodeName, required: true, location_name: "target"))
+    DuplicateConnectionsFlowValidationDetails.struct_class = Types::DuplicateConnectionsFlowValidationDetails
 
     EmbeddingModelConfiguration.add_member(:bedrock_embedding_model_configuration, Shapes::ShapeRef.new(shape: BedrockEmbeddingModelConfiguration, location_name: "bedrockEmbeddingModelConfiguration"))
     EmbeddingModelConfiguration.struct_class = Types::EmbeddingModelConfiguration
@@ -1099,9 +1179,65 @@ module Aws::BedrockAgent
     FlowSummary.add_member(:version, Shapes::ShapeRef.new(shape: DraftVersion, required: true, location_name: "version"))
     FlowSummary.struct_class = Types::FlowSummary
 
+    FlowValidation.add_member(:details, Shapes::ShapeRef.new(shape: FlowValidationDetails, location_name: "details"))
     FlowValidation.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, required: true, location_name: "message"))
     FlowValidation.add_member(:severity, Shapes::ShapeRef.new(shape: FlowValidationSeverity, required: true, location_name: "severity"))
+    FlowValidation.add_member(:type, Shapes::ShapeRef.new(shape: FlowValidationType, location_name: "type"))
     FlowValidation.struct_class = Types::FlowValidation
+
+    FlowValidationDetails.add_member(:cyclic_connection, Shapes::ShapeRef.new(shape: CyclicConnectionFlowValidationDetails, location_name: "cyclicConnection"))
+    FlowValidationDetails.add_member(:duplicate_condition_expression, Shapes::ShapeRef.new(shape: DuplicateConditionExpressionFlowValidationDetails, location_name: "duplicateConditionExpression"))
+    FlowValidationDetails.add_member(:duplicate_connections, Shapes::ShapeRef.new(shape: DuplicateConnectionsFlowValidationDetails, location_name: "duplicateConnections"))
+    FlowValidationDetails.add_member(:incompatible_connection_data_type, Shapes::ShapeRef.new(shape: IncompatibleConnectionDataTypeFlowValidationDetails, location_name: "incompatibleConnectionDataType"))
+    FlowValidationDetails.add_member(:malformed_condition_expression, Shapes::ShapeRef.new(shape: MalformedConditionExpressionFlowValidationDetails, location_name: "malformedConditionExpression"))
+    FlowValidationDetails.add_member(:malformed_node_input_expression, Shapes::ShapeRef.new(shape: MalformedNodeInputExpressionFlowValidationDetails, location_name: "malformedNodeInputExpression"))
+    FlowValidationDetails.add_member(:mismatched_node_input_type, Shapes::ShapeRef.new(shape: MismatchedNodeInputTypeFlowValidationDetails, location_name: "mismatchedNodeInputType"))
+    FlowValidationDetails.add_member(:mismatched_node_output_type, Shapes::ShapeRef.new(shape: MismatchedNodeOutputTypeFlowValidationDetails, location_name: "mismatchedNodeOutputType"))
+    FlowValidationDetails.add_member(:missing_connection_configuration, Shapes::ShapeRef.new(shape: MissingConnectionConfigurationFlowValidationDetails, location_name: "missingConnectionConfiguration"))
+    FlowValidationDetails.add_member(:missing_default_condition, Shapes::ShapeRef.new(shape: MissingDefaultConditionFlowValidationDetails, location_name: "missingDefaultCondition"))
+    FlowValidationDetails.add_member(:missing_ending_nodes, Shapes::ShapeRef.new(shape: MissingEndingNodesFlowValidationDetails, location_name: "missingEndingNodes"))
+    FlowValidationDetails.add_member(:missing_node_configuration, Shapes::ShapeRef.new(shape: MissingNodeConfigurationFlowValidationDetails, location_name: "missingNodeConfiguration"))
+    FlowValidationDetails.add_member(:missing_node_input, Shapes::ShapeRef.new(shape: MissingNodeInputFlowValidationDetails, location_name: "missingNodeInput"))
+    FlowValidationDetails.add_member(:missing_node_output, Shapes::ShapeRef.new(shape: MissingNodeOutputFlowValidationDetails, location_name: "missingNodeOutput"))
+    FlowValidationDetails.add_member(:missing_starting_nodes, Shapes::ShapeRef.new(shape: MissingStartingNodesFlowValidationDetails, location_name: "missingStartingNodes"))
+    FlowValidationDetails.add_member(:multiple_node_input_connections, Shapes::ShapeRef.new(shape: MultipleNodeInputConnectionsFlowValidationDetails, location_name: "multipleNodeInputConnections"))
+    FlowValidationDetails.add_member(:unfulfilled_node_input, Shapes::ShapeRef.new(shape: UnfulfilledNodeInputFlowValidationDetails, location_name: "unfulfilledNodeInput"))
+    FlowValidationDetails.add_member(:unknown_connection_condition, Shapes::ShapeRef.new(shape: UnknownConnectionConditionFlowValidationDetails, location_name: "unknownConnectionCondition"))
+    FlowValidationDetails.add_member(:unknown_connection_source, Shapes::ShapeRef.new(shape: UnknownConnectionSourceFlowValidationDetails, location_name: "unknownConnectionSource"))
+    FlowValidationDetails.add_member(:unknown_connection_source_output, Shapes::ShapeRef.new(shape: UnknownConnectionSourceOutputFlowValidationDetails, location_name: "unknownConnectionSourceOutput"))
+    FlowValidationDetails.add_member(:unknown_connection_target, Shapes::ShapeRef.new(shape: UnknownConnectionTargetFlowValidationDetails, location_name: "unknownConnectionTarget"))
+    FlowValidationDetails.add_member(:unknown_connection_target_input, Shapes::ShapeRef.new(shape: UnknownConnectionTargetInputFlowValidationDetails, location_name: "unknownConnectionTargetInput"))
+    FlowValidationDetails.add_member(:unreachable_node, Shapes::ShapeRef.new(shape: UnreachableNodeFlowValidationDetails, location_name: "unreachableNode"))
+    FlowValidationDetails.add_member(:unsatisfied_connection_conditions, Shapes::ShapeRef.new(shape: UnsatisfiedConnectionConditionsFlowValidationDetails, location_name: "unsatisfiedConnectionConditions"))
+    FlowValidationDetails.add_member(:unspecified, Shapes::ShapeRef.new(shape: UnspecifiedFlowValidationDetails, location_name: "unspecified"))
+    FlowValidationDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    FlowValidationDetails.add_member_subclass(:cyclic_connection, Types::FlowValidationDetails::CyclicConnection)
+    FlowValidationDetails.add_member_subclass(:duplicate_condition_expression, Types::FlowValidationDetails::DuplicateConditionExpression)
+    FlowValidationDetails.add_member_subclass(:duplicate_connections, Types::FlowValidationDetails::DuplicateConnections)
+    FlowValidationDetails.add_member_subclass(:incompatible_connection_data_type, Types::FlowValidationDetails::IncompatibleConnectionDataType)
+    FlowValidationDetails.add_member_subclass(:malformed_condition_expression, Types::FlowValidationDetails::MalformedConditionExpression)
+    FlowValidationDetails.add_member_subclass(:malformed_node_input_expression, Types::FlowValidationDetails::MalformedNodeInputExpression)
+    FlowValidationDetails.add_member_subclass(:mismatched_node_input_type, Types::FlowValidationDetails::MismatchedNodeInputType)
+    FlowValidationDetails.add_member_subclass(:mismatched_node_output_type, Types::FlowValidationDetails::MismatchedNodeOutputType)
+    FlowValidationDetails.add_member_subclass(:missing_connection_configuration, Types::FlowValidationDetails::MissingConnectionConfiguration)
+    FlowValidationDetails.add_member_subclass(:missing_default_condition, Types::FlowValidationDetails::MissingDefaultCondition)
+    FlowValidationDetails.add_member_subclass(:missing_ending_nodes, Types::FlowValidationDetails::MissingEndingNodes)
+    FlowValidationDetails.add_member_subclass(:missing_node_configuration, Types::FlowValidationDetails::MissingNodeConfiguration)
+    FlowValidationDetails.add_member_subclass(:missing_node_input, Types::FlowValidationDetails::MissingNodeInput)
+    FlowValidationDetails.add_member_subclass(:missing_node_output, Types::FlowValidationDetails::MissingNodeOutput)
+    FlowValidationDetails.add_member_subclass(:missing_starting_nodes, Types::FlowValidationDetails::MissingStartingNodes)
+    FlowValidationDetails.add_member_subclass(:multiple_node_input_connections, Types::FlowValidationDetails::MultipleNodeInputConnections)
+    FlowValidationDetails.add_member_subclass(:unfulfilled_node_input, Types::FlowValidationDetails::UnfulfilledNodeInput)
+    FlowValidationDetails.add_member_subclass(:unknown_connection_condition, Types::FlowValidationDetails::UnknownConnectionCondition)
+    FlowValidationDetails.add_member_subclass(:unknown_connection_source, Types::FlowValidationDetails::UnknownConnectionSource)
+    FlowValidationDetails.add_member_subclass(:unknown_connection_source_output, Types::FlowValidationDetails::UnknownConnectionSourceOutput)
+    FlowValidationDetails.add_member_subclass(:unknown_connection_target, Types::FlowValidationDetails::UnknownConnectionTarget)
+    FlowValidationDetails.add_member_subclass(:unknown_connection_target_input, Types::FlowValidationDetails::UnknownConnectionTargetInput)
+    FlowValidationDetails.add_member_subclass(:unreachable_node, Types::FlowValidationDetails::UnreachableNode)
+    FlowValidationDetails.add_member_subclass(:unsatisfied_connection_conditions, Types::FlowValidationDetails::UnsatisfiedConnectionConditions)
+    FlowValidationDetails.add_member_subclass(:unspecified, Types::FlowValidationDetails::Unspecified)
+    FlowValidationDetails.add_member_subclass(:unknown, Types::FlowValidationDetails::Unknown)
+    FlowValidationDetails.struct_class = Types::FlowValidationDetails
 
     FlowValidations.member = Shapes::ShapeRef.new(shape: FlowValidation)
 
@@ -1261,6 +1397,9 @@ module Aws::BedrockAgent
 
     HierarchicalChunkingLevelConfigurations.member = Shapes::ShapeRef.new(shape: HierarchicalChunkingLevelConfiguration)
 
+    IncompatibleConnectionDataTypeFlowValidationDetails.add_member(:connection, Shapes::ShapeRef.new(shape: FlowConnectionName, required: true, location_name: "connection"))
+    IncompatibleConnectionDataTypeFlowValidationDetails.struct_class = Types::IncompatibleConnectionDataTypeFlowValidationDetails
+
     InferenceConfiguration.add_member(:maximum_length, Shapes::ShapeRef.new(shape: MaximumLength, location_name: "maximumLength"))
     InferenceConfiguration.add_member(:stop_sequences, Shapes::ShapeRef.new(shape: StopSequences, location_name: "stopSequences"))
     InferenceConfiguration.add_member(:temperature, Shapes::ShapeRef.new(shape: Temperature, location_name: "temperature"))
@@ -1340,6 +1479,7 @@ module Aws::BedrockAgent
     KnowledgeBaseConfiguration.add_member(:vector_knowledge_base_configuration, Shapes::ShapeRef.new(shape: VectorKnowledgeBaseConfiguration, location_name: "vectorKnowledgeBaseConfiguration"))
     KnowledgeBaseConfiguration.struct_class = Types::KnowledgeBaseConfiguration
 
+    KnowledgeBaseFlowNodeConfiguration.add_member(:guardrail_configuration, Shapes::ShapeRef.new(shape: GuardrailConfiguration, location_name: "guardrailConfiguration"))
     KnowledgeBaseFlowNodeConfiguration.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: KnowledgeBaseId, required: true, location_name: "knowledgeBaseId"))
     KnowledgeBaseFlowNodeConfiguration.add_member(:model_id, Shapes::ShapeRef.new(shape: KnowledgeBaseModelIdentifier, location_name: "modelId"))
     KnowledgeBaseFlowNodeConfiguration.struct_class = Types::KnowledgeBaseFlowNodeConfiguration
@@ -1476,9 +1616,56 @@ module Aws::BedrockAgent
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    MalformedConditionExpressionFlowValidationDetails.add_member(:cause, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "cause"))
+    MalformedConditionExpressionFlowValidationDetails.add_member(:condition, Shapes::ShapeRef.new(shape: FlowConditionName, required: true, location_name: "condition"))
+    MalformedConditionExpressionFlowValidationDetails.add_member(:node, Shapes::ShapeRef.new(shape: FlowNodeName, required: true, location_name: "node"))
+    MalformedConditionExpressionFlowValidationDetails.struct_class = Types::MalformedConditionExpressionFlowValidationDetails
+
+    MalformedNodeInputExpressionFlowValidationDetails.add_member(:cause, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "cause"))
+    MalformedNodeInputExpressionFlowValidationDetails.add_member(:input, Shapes::ShapeRef.new(shape: FlowNodeInputName, required: true, location_name: "input"))
+    MalformedNodeInputExpressionFlowValidationDetails.add_member(:node, Shapes::ShapeRef.new(shape: FlowNodeName, required: true, location_name: "node"))
+    MalformedNodeInputExpressionFlowValidationDetails.struct_class = Types::MalformedNodeInputExpressionFlowValidationDetails
+
     MemoryConfiguration.add_member(:enabled_memory_types, Shapes::ShapeRef.new(shape: EnabledMemoryTypes, required: true, location_name: "enabledMemoryTypes"))
     MemoryConfiguration.add_member(:storage_days, Shapes::ShapeRef.new(shape: StorageDays, location_name: "storageDays"))
     MemoryConfiguration.struct_class = Types::MemoryConfiguration
+
+    Message.add_member(:content, Shapes::ShapeRef.new(shape: ContentBlocks, required: true, location_name: "content"))
+    Message.add_member(:role, Shapes::ShapeRef.new(shape: ConversationRole, required: true, location_name: "role"))
+    Message.struct_class = Types::Message
+
+    Messages.member = Shapes::ShapeRef.new(shape: Message)
+
+    MismatchedNodeInputTypeFlowValidationDetails.add_member(:expected_type, Shapes::ShapeRef.new(shape: FlowNodeIODataType, required: true, location_name: "expectedType"))
+    MismatchedNodeInputTypeFlowValidationDetails.add_member(:input, Shapes::ShapeRef.new(shape: FlowNodeInputName, required: true, location_name: "input"))
+    MismatchedNodeInputTypeFlowValidationDetails.add_member(:node, Shapes::ShapeRef.new(shape: FlowNodeName, required: true, location_name: "node"))
+    MismatchedNodeInputTypeFlowValidationDetails.struct_class = Types::MismatchedNodeInputTypeFlowValidationDetails
+
+    MismatchedNodeOutputTypeFlowValidationDetails.add_member(:expected_type, Shapes::ShapeRef.new(shape: FlowNodeIODataType, required: true, location_name: "expectedType"))
+    MismatchedNodeOutputTypeFlowValidationDetails.add_member(:node, Shapes::ShapeRef.new(shape: FlowNodeName, required: true, location_name: "node"))
+    MismatchedNodeOutputTypeFlowValidationDetails.add_member(:output, Shapes::ShapeRef.new(shape: FlowNodeOutputName, required: true, location_name: "output"))
+    MismatchedNodeOutputTypeFlowValidationDetails.struct_class = Types::MismatchedNodeOutputTypeFlowValidationDetails
+
+    MissingConnectionConfigurationFlowValidationDetails.add_member(:connection, Shapes::ShapeRef.new(shape: FlowConnectionName, required: true, location_name: "connection"))
+    MissingConnectionConfigurationFlowValidationDetails.struct_class = Types::MissingConnectionConfigurationFlowValidationDetails
+
+    MissingDefaultConditionFlowValidationDetails.add_member(:node, Shapes::ShapeRef.new(shape: FlowNodeName, required: true, location_name: "node"))
+    MissingDefaultConditionFlowValidationDetails.struct_class = Types::MissingDefaultConditionFlowValidationDetails
+
+    MissingEndingNodesFlowValidationDetails.struct_class = Types::MissingEndingNodesFlowValidationDetails
+
+    MissingNodeConfigurationFlowValidationDetails.add_member(:node, Shapes::ShapeRef.new(shape: FlowNodeName, required: true, location_name: "node"))
+    MissingNodeConfigurationFlowValidationDetails.struct_class = Types::MissingNodeConfigurationFlowValidationDetails
+
+    MissingNodeInputFlowValidationDetails.add_member(:input, Shapes::ShapeRef.new(shape: FlowNodeInputName, required: true, location_name: "input"))
+    MissingNodeInputFlowValidationDetails.add_member(:node, Shapes::ShapeRef.new(shape: FlowNodeName, required: true, location_name: "node"))
+    MissingNodeInputFlowValidationDetails.struct_class = Types::MissingNodeInputFlowValidationDetails
+
+    MissingNodeOutputFlowValidationDetails.add_member(:node, Shapes::ShapeRef.new(shape: FlowNodeName, required: true, location_name: "node"))
+    MissingNodeOutputFlowValidationDetails.add_member(:output, Shapes::ShapeRef.new(shape: FlowNodeOutputName, required: true, location_name: "output"))
+    MissingNodeOutputFlowValidationDetails.struct_class = Types::MissingNodeOutputFlowValidationDetails
+
+    MissingStartingNodesFlowValidationDetails.struct_class = Types::MissingStartingNodesFlowValidationDetails
 
     MongoDbAtlasConfiguration.add_member(:collection_name, Shapes::ShapeRef.new(shape: MongoDbAtlasCollectionName, required: true, location_name: "collectionName"))
     MongoDbAtlasConfiguration.add_member(:credentials_secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "credentialsSecretArn"))
@@ -1493,6 +1680,10 @@ module Aws::BedrockAgent
     MongoDbAtlasFieldMapping.add_member(:text_field, Shapes::ShapeRef.new(shape: FieldName, required: true, location_name: "textField"))
     MongoDbAtlasFieldMapping.add_member(:vector_field, Shapes::ShapeRef.new(shape: FieldName, required: true, location_name: "vectorField"))
     MongoDbAtlasFieldMapping.struct_class = Types::MongoDbAtlasFieldMapping
+
+    MultipleNodeInputConnectionsFlowValidationDetails.add_member(:input, Shapes::ShapeRef.new(shape: FlowNodeInputName, required: true, location_name: "input"))
+    MultipleNodeInputConnectionsFlowValidationDetails.add_member(:node, Shapes::ShapeRef.new(shape: FlowNodeName, required: true, location_name: "node"))
+    MultipleNodeInputConnectionsFlowValidationDetails.struct_class = Types::MultipleNodeInputConnectionsFlowValidationDetails
 
     OpenSearchServerlessConfiguration.add_member(:collection_arn, Shapes::ShapeRef.new(shape: OpenSearchServerlessCollectionArn, required: true, location_name: "collectionArn"))
     OpenSearchServerlessConfiguration.add_member(:field_mapping, Shapes::ShapeRef.new(shape: OpenSearchServerlessFieldMapping, required: true, location_name: "fieldMapping"))
@@ -1557,6 +1748,9 @@ module Aws::BedrockAgent
     PrepareFlowResponse.add_member(:status, Shapes::ShapeRef.new(shape: FlowStatus, required: true, location_name: "status"))
     PrepareFlowResponse.struct_class = Types::PrepareFlowResponse
 
+    PromptAgentResource.add_member(:agent_identifier, Shapes::ShapeRef.new(shape: AgentAliasArn, required: true, location_name: "agentIdentifier"))
+    PromptAgentResource.struct_class = Types::PromptAgentResource
+
     PromptConfiguration.add_member(:base_prompt_template, Shapes::ShapeRef.new(shape: BasePromptTemplate, location_name: "basePromptTemplate"))
     PromptConfiguration.add_member(:inference_configuration, Shapes::ShapeRef.new(shape: InferenceConfiguration, location_name: "inferenceConfiguration"))
     PromptConfiguration.add_member(:parser_mode, Shapes::ShapeRef.new(shape: CreationMode, location_name: "parserMode"))
@@ -1567,6 +1761,7 @@ module Aws::BedrockAgent
 
     PromptConfigurations.member = Shapes::ShapeRef.new(shape: PromptConfiguration)
 
+    PromptFlowNodeConfiguration.add_member(:guardrail_configuration, Shapes::ShapeRef.new(shape: GuardrailConfiguration, location_name: "guardrailConfiguration"))
     PromptFlowNodeConfiguration.add_member(:source_configuration, Shapes::ShapeRef.new(shape: PromptFlowNodeSourceConfiguration, required: true, location_name: "sourceConfiguration"))
     PromptFlowNodeConfiguration.struct_class = Types::PromptFlowNodeConfiguration
 
@@ -1587,6 +1782,12 @@ module Aws::BedrockAgent
     PromptFlowNodeSourceConfiguration.add_member_subclass(:resource, Types::PromptFlowNodeSourceConfiguration::Resource)
     PromptFlowNodeSourceConfiguration.add_member_subclass(:unknown, Types::PromptFlowNodeSourceConfiguration::Unknown)
     PromptFlowNodeSourceConfiguration.struct_class = Types::PromptFlowNodeSourceConfiguration
+
+    PromptGenAiResource.add_member(:agent, Shapes::ShapeRef.new(shape: PromptAgentResource, location_name: "agent"))
+    PromptGenAiResource.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    PromptGenAiResource.add_member_subclass(:agent, Types::PromptGenAiResource::Agent)
+    PromptGenAiResource.add_member_subclass(:unknown, Types::PromptGenAiResource::Unknown)
+    PromptGenAiResource.struct_class = Types::PromptGenAiResource
 
     PromptInferenceConfiguration.add_member(:text, Shapes::ShapeRef.new(shape: PromptModelInferenceConfiguration, location_name: "text"))
     PromptInferenceConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -1626,13 +1827,16 @@ module Aws::BedrockAgent
     PromptSummary.add_member(:version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "version"))
     PromptSummary.struct_class = Types::PromptSummary
 
+    PromptTemplateConfiguration.add_member(:chat, Shapes::ShapeRef.new(shape: ChatPromptTemplateConfiguration, location_name: "chat"))
     PromptTemplateConfiguration.add_member(:text, Shapes::ShapeRef.new(shape: TextPromptTemplateConfiguration, location_name: "text"))
     PromptTemplateConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    PromptTemplateConfiguration.add_member_subclass(:chat, Types::PromptTemplateConfiguration::Chat)
     PromptTemplateConfiguration.add_member_subclass(:text, Types::PromptTemplateConfiguration::Text)
     PromptTemplateConfiguration.add_member_subclass(:unknown, Types::PromptTemplateConfiguration::Unknown)
     PromptTemplateConfiguration.struct_class = Types::PromptTemplateConfiguration
 
     PromptVariant.add_member(:additional_model_request_fields, Shapes::ShapeRef.new(shape: Document, location_name: "additionalModelRequestFields"))
+    PromptVariant.add_member(:gen_ai_resource, Shapes::ShapeRef.new(shape: PromptGenAiResource, location_name: "genAiResource"))
     PromptVariant.add_member(:inference_configuration, Shapes::ShapeRef.new(shape: PromptInferenceConfiguration, location_name: "inferenceConfiguration"))
     PromptVariant.add_member(:metadata, Shapes::ShapeRef.new(shape: PromptMetadataList, location_name: "metadata"))
     PromptVariant.add_member(:model_id, Shapes::ShapeRef.new(shape: PromptModelIdentifier, location_name: "modelId"))
@@ -1743,6 +1947,9 @@ module Aws::BedrockAgent
     SharePointSourceConfiguration.add_member(:tenant_id, Shapes::ShapeRef.new(shape: Microsoft365TenantId, location_name: "tenantId"))
     SharePointSourceConfiguration.struct_class = Types::SharePointSourceConfiguration
 
+    SpecificToolChoice.add_member(:name, Shapes::ShapeRef.new(shape: ToolName, required: true, location_name: "name"))
+    SpecificToolChoice.struct_class = Types::SpecificToolChoice
+
     StartIngestionJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     StartIngestionJobRequest.add_member(:data_source_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "dataSourceId"))
     StartIngestionJobRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
@@ -1782,6 +1989,14 @@ module Aws::BedrockAgent
     StorageFlowNodeServiceConfiguration.add_member_subclass(:unknown, Types::StorageFlowNodeServiceConfiguration::Unknown)
     StorageFlowNodeServiceConfiguration.struct_class = Types::StorageFlowNodeServiceConfiguration
 
+    SystemContentBlock.add_member(:text, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "text"))
+    SystemContentBlock.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    SystemContentBlock.add_member_subclass(:text, Types::SystemContentBlock::Text)
+    SystemContentBlock.add_member_subclass(:unknown, Types::SystemContentBlock::Unknown)
+    SystemContentBlock.struct_class = Types::SystemContentBlock
+
+    SystemContentBlocks.member = Shapes::ShapeRef.new(shape: SystemContentBlock)
+
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
     TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TaggableResourcesArn, required: true, location: "uri", location_name: "resourceArn"))
@@ -1800,6 +2015,39 @@ module Aws::BedrockAgent
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
+    Tool.add_member(:tool_spec, Shapes::ShapeRef.new(shape: ToolSpecification, location_name: "toolSpec"))
+    Tool.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    Tool.add_member_subclass(:tool_spec, Types::Tool::ToolSpec)
+    Tool.add_member_subclass(:unknown, Types::Tool::Unknown)
+    Tool.struct_class = Types::Tool
+
+    ToolChoice.add_member(:any, Shapes::ShapeRef.new(shape: AnyToolChoice, location_name: "any"))
+    ToolChoice.add_member(:auto, Shapes::ShapeRef.new(shape: AutoToolChoice, location_name: "auto"))
+    ToolChoice.add_member(:tool, Shapes::ShapeRef.new(shape: SpecificToolChoice, location_name: "tool"))
+    ToolChoice.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ToolChoice.add_member_subclass(:any, Types::ToolChoice::Any)
+    ToolChoice.add_member_subclass(:auto, Types::ToolChoice::Auto)
+    ToolChoice.add_member_subclass(:tool, Types::ToolChoice::Tool)
+    ToolChoice.add_member_subclass(:unknown, Types::ToolChoice::Unknown)
+    ToolChoice.struct_class = Types::ToolChoice
+
+    ToolConfiguration.add_member(:tool_choice, Shapes::ShapeRef.new(shape: ToolChoice, location_name: "toolChoice"))
+    ToolConfiguration.add_member(:tools, Shapes::ShapeRef.new(shape: ToolConfigurationToolsList, required: true, location_name: "tools"))
+    ToolConfiguration.struct_class = Types::ToolConfiguration
+
+    ToolConfigurationToolsList.member = Shapes::ShapeRef.new(shape: Tool)
+
+    ToolInputSchema.add_member(:json, Shapes::ShapeRef.new(shape: Document, location_name: "json"))
+    ToolInputSchema.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ToolInputSchema.add_member_subclass(:json, Types::ToolInputSchema::Json)
+    ToolInputSchema.add_member_subclass(:unknown, Types::ToolInputSchema::Unknown)
+    ToolInputSchema.struct_class = Types::ToolInputSchema
+
+    ToolSpecification.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
+    ToolSpecification.add_member(:input_schema, Shapes::ShapeRef.new(shape: ToolInputSchema, required: true, location_name: "inputSchema"))
+    ToolSpecification.add_member(:name, Shapes::ShapeRef.new(shape: ToolName, required: true, location_name: "name"))
+    ToolSpecification.struct_class = Types::ToolSpecification
+
     Transformation.add_member(:step_to_apply, Shapes::ShapeRef.new(shape: StepType, required: true, location_name: "stepToApply"))
     Transformation.add_member(:transformation_function, Shapes::ShapeRef.new(shape: TransformationFunction, required: true, location_name: "transformationFunction"))
     Transformation.struct_class = Types::Transformation
@@ -1811,6 +2059,33 @@ module Aws::BedrockAgent
     TransformationLambdaConfiguration.struct_class = Types::TransformationLambdaConfiguration
 
     Transformations.member = Shapes::ShapeRef.new(shape: Transformation)
+
+    UnfulfilledNodeInputFlowValidationDetails.add_member(:input, Shapes::ShapeRef.new(shape: FlowNodeInputName, required: true, location_name: "input"))
+    UnfulfilledNodeInputFlowValidationDetails.add_member(:node, Shapes::ShapeRef.new(shape: FlowNodeName, required: true, location_name: "node"))
+    UnfulfilledNodeInputFlowValidationDetails.struct_class = Types::UnfulfilledNodeInputFlowValidationDetails
+
+    UnknownConnectionConditionFlowValidationDetails.add_member(:connection, Shapes::ShapeRef.new(shape: FlowConnectionName, required: true, location_name: "connection"))
+    UnknownConnectionConditionFlowValidationDetails.struct_class = Types::UnknownConnectionConditionFlowValidationDetails
+
+    UnknownConnectionSourceFlowValidationDetails.add_member(:connection, Shapes::ShapeRef.new(shape: FlowConnectionName, required: true, location_name: "connection"))
+    UnknownConnectionSourceFlowValidationDetails.struct_class = Types::UnknownConnectionSourceFlowValidationDetails
+
+    UnknownConnectionSourceOutputFlowValidationDetails.add_member(:connection, Shapes::ShapeRef.new(shape: FlowConnectionName, required: true, location_name: "connection"))
+    UnknownConnectionSourceOutputFlowValidationDetails.struct_class = Types::UnknownConnectionSourceOutputFlowValidationDetails
+
+    UnknownConnectionTargetFlowValidationDetails.add_member(:connection, Shapes::ShapeRef.new(shape: FlowConnectionName, required: true, location_name: "connection"))
+    UnknownConnectionTargetFlowValidationDetails.struct_class = Types::UnknownConnectionTargetFlowValidationDetails
+
+    UnknownConnectionTargetInputFlowValidationDetails.add_member(:connection, Shapes::ShapeRef.new(shape: FlowConnectionName, required: true, location_name: "connection"))
+    UnknownConnectionTargetInputFlowValidationDetails.struct_class = Types::UnknownConnectionTargetInputFlowValidationDetails
+
+    UnreachableNodeFlowValidationDetails.add_member(:node, Shapes::ShapeRef.new(shape: FlowNodeName, required: true, location_name: "node"))
+    UnreachableNodeFlowValidationDetails.struct_class = Types::UnreachableNodeFlowValidationDetails
+
+    UnsatisfiedConnectionConditionsFlowValidationDetails.add_member(:connection, Shapes::ShapeRef.new(shape: FlowConnectionName, required: true, location_name: "connection"))
+    UnsatisfiedConnectionConditionsFlowValidationDetails.struct_class = Types::UnsatisfiedConnectionConditionsFlowValidationDetails
+
+    UnspecifiedFlowValidationDetails.struct_class = Types::UnspecifiedFlowValidationDetails
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TaggableResourcesArn, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
@@ -1953,6 +2228,12 @@ module Aws::BedrockAgent
 
     UrlConfiguration.add_member(:seed_urls, Shapes::ShapeRef.new(shape: SeedUrls, location_name: "seedUrls"))
     UrlConfiguration.struct_class = Types::UrlConfiguration
+
+    ValidateFlowDefinitionRequest.add_member(:definition, Shapes::ShapeRef.new(shape: FlowDefinition, required: true, location_name: "definition"))
+    ValidateFlowDefinitionRequest.struct_class = Types::ValidateFlowDefinitionRequest
+
+    ValidateFlowDefinitionResponse.add_member(:validations, Shapes::ShapeRef.new(shape: FlowValidations, required: true, location_name: "validations"))
+    ValidateFlowDefinitionResponse.struct_class = Types::ValidateFlowDefinitionResponse
 
     ValidationException.add_member(:field_list, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "fieldList"))
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
@@ -2933,6 +3214,18 @@ module Aws::BedrockAgent
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:validate_flow_definition, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ValidateFlowDefinition"
+        o.http_method = "POST"
+        o.http_request_uri = "/flows/validate-definition"
+        o.input = Shapes::ShapeRef.new(shape: ValidateFlowDefinitionRequest)
+        o.output = Shapes::ShapeRef.new(shape: ValidateFlowDefinitionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
     end
 

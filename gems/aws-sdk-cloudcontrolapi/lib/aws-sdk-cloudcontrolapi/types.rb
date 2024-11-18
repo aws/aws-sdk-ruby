@@ -444,10 +444,16 @@ module Aws::CloudControlApi
     #   Represents the current status of the resource operation request.
     #   @return [Types::ProgressEvent]
     #
+    # @!attribute [rw] hooks_progress_event
+    #   Lists Hook invocations for the specified target in the request. This
+    #   is a list since the same target can invoke multiple Hooks.
+    #   @return [Array<Types::HookProgressEvent>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudcontrol-2021-09-30/GetResourceRequestStatusOutput AWS API Documentation
     #
     class GetResourceRequestStatusOutput < Struct.new(
-      :progress_event)
+      :progress_event,
+      :hooks_progress_event)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -476,6 +482,85 @@ module Aws::CloudControlApi
     #
     class HandlerInternalFailureException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the current status of applicable Hooks for a resource
+    # operation request. It contains list of Hook invocation information for
+    # the resource specified in the request since the same target can invoke
+    # multiple Hooks. For more information, see [Managing resource operation
+    # requests with Amazon Web Services Cloud Control API ][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html
+    #
+    # @!attribute [rw] hook_type_name
+    #   The type name of the Hook being invoked.
+    #   @return [String]
+    #
+    # @!attribute [rw] hook_type_version_id
+    #   The type version of the Hook being invoked.
+    #   @return [String]
+    #
+    # @!attribute [rw] hook_type_arn
+    #   The ARN of the Hook being invoked.
+    #   @return [String]
+    #
+    # @!attribute [rw] invocation_point
+    #   States whether the Hook is invoked before or after resource
+    #   provisioning.
+    #   @return [String]
+    #
+    # @!attribute [rw] hook_status
+    #   The status of the Hook invocation. The following are potential
+    #   statuses:
+    #
+    #   * `HOOK_PENDING`: The Hook was added to the invocation plan, but not
+    #     yet invoked.
+    #
+    #   * `HOOK_IN_PROGRESS`: The Hook was invoked, but hasn't completed.
+    #
+    #   * `HOOK_COMPLETE_SUCCEEDED`: The Hook invocation is complete with a
+    #     successful result.
+    #
+    #   * `HOOK_COMPLETE_FAILED`: The Hook invocation is complete with a
+    #     failed result.
+    #
+    #   * `HOOK_FAILED`: The Hook invocation didn't complete successfully.
+    #   @return [String]
+    #
+    # @!attribute [rw] hook_event_time
+    #   The time that the Hook invocation request initiated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] hook_status_message
+    #   The message explaining the current Hook status.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_mode
+    #   The failure mode of the invocation. The following are the potential
+    #   statuses:
+    #
+    #   * `FAIL`: This will fail the Hook invocation and the request
+    #     associated with it.
+    #
+    #   * `WARN`: This will fail the Hook invocation, but not the request
+    #     associated with it.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudcontrol-2021-09-30/HookProgressEvent AWS API Documentation
+    #
+    class HookProgressEvent < Struct.new(
+      :hook_type_name,
+      :hook_type_version_id,
+      :hook_type_arn,
+      :invocation_point,
+      :hook_status,
+      :hook_event_time,
+      :hook_status_message,
+      :failure_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -738,6 +823,10 @@ module Aws::CloudControlApi
     #   [1]: https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html
     #   @return [String]
     #
+    # @!attribute [rw] hooks_request_token
+    #   The unique token representing the Hooks operation for the request.
+    #   @return [String]
+    #
     # @!attribute [rw] operation
     #   The resource operation type.
     #   @return [String]
@@ -795,6 +884,7 @@ module Aws::CloudControlApi
       :type_name,
       :identifier,
       :request_token,
+      :hooks_request_token,
       :operation,
       :operation_status,
       :event_time,

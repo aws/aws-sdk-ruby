@@ -1,0 +1,66 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Billing
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ActiveTimeRange
+      attr_accessor active_after_inclusive: ::Time
+      attr_accessor active_before_inclusive: ::Time
+      SENSITIVE: []
+    end
+
+    class BillingViewListElement
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor owner_account_id: ::String
+      attr_accessor billing_view_type: ("PRIMARY" | "BILLING_GROUP")
+      SENSITIVE: [:name]
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListBillingViewsRequest
+      attr_accessor active_time_range: Types::ActiveTimeRange
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBillingViewsResponse
+      attr_accessor billing_views: ::Array[Types::BillingViewListElement]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("unknownOperation" | "cannotParse" | "fieldValidationFailed" | "other")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

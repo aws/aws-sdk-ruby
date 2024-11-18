@@ -129,6 +129,9 @@
   "BedrockRuntime": {
     "models": "bedrock-runtime/2023-09-30"
   },
+  "Billing": {
+    "models": "billing/2023-09-07"
+  },
   "BillingConductor": {
     "models": "billingconductor/2021-07-30"
   },
@@ -289,6 +292,9 @@
   },
   "ConnectCampaignService": {
     "models": "connectcampaigns/2021-01-30"
+  },
+  "ConnectCampaignsV2": {
+    "models": "connectcampaignsv2/2024-04-23"
   },
   "ConnectCases": {
     "models": "connectcases/2022-10-03"
@@ -868,6 +874,9 @@
   },
   "Panorama": {
     "models": "panorama/2019-07-24"
+  },
+  "PartnerCentralSelling": {
+    "models": "partnercentral-selling/2022-07-26"
   },
   "PaymentCryptography": {
     "models": "payment-cryptography/2021-09-14"

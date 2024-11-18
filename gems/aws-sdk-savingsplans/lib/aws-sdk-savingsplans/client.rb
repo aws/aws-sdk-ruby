@@ -927,8 +927,8 @@ module Aws::SavingsPlans
     #   The Amazon Resource Name (ARN) of the resource.
     #
     # @option params [required, Hash<String,String>] :tags
-    #   One or more tags. For example, \\\{ "tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   One or more tags. For example, \{ "tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -994,7 +994,7 @@ module Aws::SavingsPlans
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-savingsplans'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

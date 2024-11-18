@@ -198,7 +198,7 @@ module Aws::PaymentCryptography
       attr_accessor wrapped_key_cryptogram: ::String
       attr_accessor import_token: ::String
       attr_accessor wrapping_spec: ("RSA_OAEP_SHA_256" | "RSA_OAEP_SHA_512")
-      SENSITIVE: []
+      SENSITIVE: [:wrapped_key_cryptogram]
     end
 
     class ImportKeyInput
@@ -250,7 +250,7 @@ module Aws::PaymentCryptography
       attr_accessor wrapped_key_block: ::String
       attr_accessor key_block_format: ("X9_TR34_2012")
       attr_accessor random_nonce: ::String
-      SENSITIVE: [:signing_key_certificate]
+      SENSITIVE: [:signing_key_certificate, :wrapped_key_block]
     end
 
     class InternalServerException
@@ -315,6 +315,7 @@ module Aws::PaymentCryptography
     end
 
     class ListAliasesInput
+      attr_accessor key_arn: ::String
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       SENSITIVE: []

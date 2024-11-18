@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2024-11-12)
+------------------
+
+* Feature - This release adds support for generating experiment reports with the experiment report configuration
+
 1.43.0 (2024-10-18)
 ------------------
 

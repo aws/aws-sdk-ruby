@@ -484,12 +484,13 @@ module Aws::CloudControlApi
     #   resp.progress_event.type_name #=> String
     #   resp.progress_event.identifier #=> String
     #   resp.progress_event.request_token #=> String
+    #   resp.progress_event.hooks_request_token #=> String
     #   resp.progress_event.operation #=> String, one of "CREATE", "DELETE", "UPDATE"
     #   resp.progress_event.operation_status #=> String, one of "PENDING", "IN_PROGRESS", "SUCCESS", "FAILED", "CANCEL_IN_PROGRESS", "CANCEL_COMPLETE"
     #   resp.progress_event.event_time #=> Time
     #   resp.progress_event.resource_model #=> String
     #   resp.progress_event.status_message #=> String
-    #   resp.progress_event.error_code #=> String, one of "NotUpdatable", "InvalidRequest", "AccessDenied", "InvalidCredentials", "AlreadyExists", "NotFound", "ResourceConflict", "Throttling", "ServiceLimitExceeded", "NotStabilized", "GeneralServiceException", "ServiceInternalError", "ServiceTimeout", "NetworkFailure", "InternalFailure"
+    #   resp.progress_event.error_code #=> String, one of "NotUpdatable", "InvalidRequest", "AccessDenied", "UnauthorizedTaggingOperation", "InvalidCredentials", "AlreadyExists", "NotFound", "ResourceConflict", "Throttling", "ServiceLimitExceeded", "NotStabilized", "GeneralServiceException", "ServiceInternalError", "ServiceTimeout", "NetworkFailure", "InternalFailure"
     #   resp.progress_event.retry_after #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudcontrol-2021-09-30/CancelResourceRequest AWS API Documentation
@@ -611,12 +612,13 @@ module Aws::CloudControlApi
     #   resp.progress_event.type_name #=> String
     #   resp.progress_event.identifier #=> String
     #   resp.progress_event.request_token #=> String
+    #   resp.progress_event.hooks_request_token #=> String
     #   resp.progress_event.operation #=> String, one of "CREATE", "DELETE", "UPDATE"
     #   resp.progress_event.operation_status #=> String, one of "PENDING", "IN_PROGRESS", "SUCCESS", "FAILED", "CANCEL_IN_PROGRESS", "CANCEL_COMPLETE"
     #   resp.progress_event.event_time #=> Time
     #   resp.progress_event.resource_model #=> String
     #   resp.progress_event.status_message #=> String
-    #   resp.progress_event.error_code #=> String, one of "NotUpdatable", "InvalidRequest", "AccessDenied", "InvalidCredentials", "AlreadyExists", "NotFound", "ResourceConflict", "Throttling", "ServiceLimitExceeded", "NotStabilized", "GeneralServiceException", "ServiceInternalError", "ServiceTimeout", "NetworkFailure", "InternalFailure"
+    #   resp.progress_event.error_code #=> String, one of "NotUpdatable", "InvalidRequest", "AccessDenied", "UnauthorizedTaggingOperation", "InvalidCredentials", "AlreadyExists", "NotFound", "ResourceConflict", "Throttling", "ServiceLimitExceeded", "NotStabilized", "GeneralServiceException", "ServiceInternalError", "ServiceTimeout", "NetworkFailure", "InternalFailure"
     #   resp.progress_event.retry_after #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudcontrol-2021-09-30/CreateResource AWS API Documentation
@@ -731,12 +733,13 @@ module Aws::CloudControlApi
     #   resp.progress_event.type_name #=> String
     #   resp.progress_event.identifier #=> String
     #   resp.progress_event.request_token #=> String
+    #   resp.progress_event.hooks_request_token #=> String
     #   resp.progress_event.operation #=> String, one of "CREATE", "DELETE", "UPDATE"
     #   resp.progress_event.operation_status #=> String, one of "PENDING", "IN_PROGRESS", "SUCCESS", "FAILED", "CANCEL_IN_PROGRESS", "CANCEL_COMPLETE"
     #   resp.progress_event.event_time #=> Time
     #   resp.progress_event.resource_model #=> String
     #   resp.progress_event.status_message #=> String
-    #   resp.progress_event.error_code #=> String, one of "NotUpdatable", "InvalidRequest", "AccessDenied", "InvalidCredentials", "AlreadyExists", "NotFound", "ResourceConflict", "Throttling", "ServiceLimitExceeded", "NotStabilized", "GeneralServiceException", "ServiceInternalError", "ServiceTimeout", "NetworkFailure", "InternalFailure"
+    #   resp.progress_event.error_code #=> String, one of "NotUpdatable", "InvalidRequest", "AccessDenied", "UnauthorizedTaggingOperation", "InvalidCredentials", "AlreadyExists", "NotFound", "ResourceConflict", "Throttling", "ServiceLimitExceeded", "NotStabilized", "GeneralServiceException", "ServiceInternalError", "ServiceTimeout", "NetworkFailure", "InternalFailure"
     #   resp.progress_event.retry_after #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudcontrol-2021-09-30/DeleteResource AWS API Documentation
@@ -854,6 +857,7 @@ module Aws::CloudControlApi
     # @return [Types::GetResourceRequestStatusOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetResourceRequestStatusOutput#progress_event #progress_event} => Types::ProgressEvent
+    #   * {Types::GetResourceRequestStatusOutput#hooks_progress_event #hooks_progress_event} => Array&lt;Types::HookProgressEvent&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -866,13 +870,23 @@ module Aws::CloudControlApi
     #   resp.progress_event.type_name #=> String
     #   resp.progress_event.identifier #=> String
     #   resp.progress_event.request_token #=> String
+    #   resp.progress_event.hooks_request_token #=> String
     #   resp.progress_event.operation #=> String, one of "CREATE", "DELETE", "UPDATE"
     #   resp.progress_event.operation_status #=> String, one of "PENDING", "IN_PROGRESS", "SUCCESS", "FAILED", "CANCEL_IN_PROGRESS", "CANCEL_COMPLETE"
     #   resp.progress_event.event_time #=> Time
     #   resp.progress_event.resource_model #=> String
     #   resp.progress_event.status_message #=> String
-    #   resp.progress_event.error_code #=> String, one of "NotUpdatable", "InvalidRequest", "AccessDenied", "InvalidCredentials", "AlreadyExists", "NotFound", "ResourceConflict", "Throttling", "ServiceLimitExceeded", "NotStabilized", "GeneralServiceException", "ServiceInternalError", "ServiceTimeout", "NetworkFailure", "InternalFailure"
+    #   resp.progress_event.error_code #=> String, one of "NotUpdatable", "InvalidRequest", "AccessDenied", "UnauthorizedTaggingOperation", "InvalidCredentials", "AlreadyExists", "NotFound", "ResourceConflict", "Throttling", "ServiceLimitExceeded", "NotStabilized", "GeneralServiceException", "ServiceInternalError", "ServiceTimeout", "NetworkFailure", "InternalFailure"
     #   resp.progress_event.retry_after #=> Time
+    #   resp.hooks_progress_event #=> Array
+    #   resp.hooks_progress_event[0].hook_type_name #=> String
+    #   resp.hooks_progress_event[0].hook_type_version_id #=> String
+    #   resp.hooks_progress_event[0].hook_type_arn #=> String
+    #   resp.hooks_progress_event[0].invocation_point #=> String
+    #   resp.hooks_progress_event[0].hook_status #=> String
+    #   resp.hooks_progress_event[0].hook_event_time #=> Time
+    #   resp.hooks_progress_event[0].hook_status_message #=> String
+    #   resp.hooks_progress_event[0].failure_mode #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -944,12 +958,13 @@ module Aws::CloudControlApi
     #   resp.resource_request_status_summaries[0].type_name #=> String
     #   resp.resource_request_status_summaries[0].identifier #=> String
     #   resp.resource_request_status_summaries[0].request_token #=> String
+    #   resp.resource_request_status_summaries[0].hooks_request_token #=> String
     #   resp.resource_request_status_summaries[0].operation #=> String, one of "CREATE", "DELETE", "UPDATE"
     #   resp.resource_request_status_summaries[0].operation_status #=> String, one of "PENDING", "IN_PROGRESS", "SUCCESS", "FAILED", "CANCEL_IN_PROGRESS", "CANCEL_COMPLETE"
     #   resp.resource_request_status_summaries[0].event_time #=> Time
     #   resp.resource_request_status_summaries[0].resource_model #=> String
     #   resp.resource_request_status_summaries[0].status_message #=> String
-    #   resp.resource_request_status_summaries[0].error_code #=> String, one of "NotUpdatable", "InvalidRequest", "AccessDenied", "InvalidCredentials", "AlreadyExists", "NotFound", "ResourceConflict", "Throttling", "ServiceLimitExceeded", "NotStabilized", "GeneralServiceException", "ServiceInternalError", "ServiceTimeout", "NetworkFailure", "InternalFailure"
+    #   resp.resource_request_status_summaries[0].error_code #=> String, one of "NotUpdatable", "InvalidRequest", "AccessDenied", "UnauthorizedTaggingOperation", "InvalidCredentials", "AlreadyExists", "NotFound", "ResourceConflict", "Throttling", "ServiceLimitExceeded", "NotStabilized", "GeneralServiceException", "ServiceInternalError", "ServiceTimeout", "NetworkFailure", "InternalFailure"
     #   resp.resource_request_status_summaries[0].retry_after #=> Time
     #   resp.next_token #=> String
     #
@@ -1177,12 +1192,13 @@ module Aws::CloudControlApi
     #   resp.progress_event.type_name #=> String
     #   resp.progress_event.identifier #=> String
     #   resp.progress_event.request_token #=> String
+    #   resp.progress_event.hooks_request_token #=> String
     #   resp.progress_event.operation #=> String, one of "CREATE", "DELETE", "UPDATE"
     #   resp.progress_event.operation_status #=> String, one of "PENDING", "IN_PROGRESS", "SUCCESS", "FAILED", "CANCEL_IN_PROGRESS", "CANCEL_COMPLETE"
     #   resp.progress_event.event_time #=> Time
     #   resp.progress_event.resource_model #=> String
     #   resp.progress_event.status_message #=> String
-    #   resp.progress_event.error_code #=> String, one of "NotUpdatable", "InvalidRequest", "AccessDenied", "InvalidCredentials", "AlreadyExists", "NotFound", "ResourceConflict", "Throttling", "ServiceLimitExceeded", "NotStabilized", "GeneralServiceException", "ServiceInternalError", "ServiceTimeout", "NetworkFailure", "InternalFailure"
+    #   resp.progress_event.error_code #=> String, one of "NotUpdatable", "InvalidRequest", "AccessDenied", "UnauthorizedTaggingOperation", "InvalidCredentials", "AlreadyExists", "NotFound", "ResourceConflict", "Throttling", "ServiceLimitExceeded", "NotStabilized", "GeneralServiceException", "ServiceInternalError", "ServiceTimeout", "NetworkFailure", "InternalFailure"
     #   resp.progress_event.retry_after #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudcontrol-2021-09-30/UpdateResource AWS API Documentation
@@ -1212,7 +1228,7 @@ module Aws::CloudControlApi
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudcontrolapi'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

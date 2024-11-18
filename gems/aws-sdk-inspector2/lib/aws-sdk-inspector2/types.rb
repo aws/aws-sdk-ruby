@@ -12,9 +12,6 @@ module Aws::Inspector2
 
     # You do not have sufficient access to perform this action.
     #
-    # For `Enable`, you receive this error if you attempt to use a feature
-    # in an unsupported Amazon Web Services Region.
-    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -1973,7 +1970,7 @@ module Aws::Inspector2
     #
     # @!attribute [rw] scan_mode
     #   The filter to search for Amazon EC2 instance coverage by scan mode.
-    #   Valid values are `EC2_SSM_AGENT_BASED` and `EC2_HYBRID`.
+    #   Valid values are `EC2_SSM_AGENT_BASED` and `EC2_AGENTLESS`.
     #   @return [Array<Types::CoverageStringFilter>]
     #
     # @!attribute [rw] scan_status_code
@@ -4204,7 +4201,7 @@ module Aws::Inspector2
     #
     # @!attribute [rw] s3_destination
     #   Contains details of the Amazon S3 bucket and KMS key used to export
-    #   findings.
+    #   findings
     #   @return [Types::Destination]
     #
     # @!attribute [rw] status
@@ -5626,6 +5623,11 @@ module Aws::Inspector2
     #   An object that contains details on the package epoch to filter on.
     #   @return [Types::NumberFilter]
     #
+    # @!attribute [rw] file_path
+    #   An object that contains details on the package file path to filter
+    #   on.
+    #   @return [Types::StringFilter]
+    #
     # @!attribute [rw] name
     #   An object that contains details on the name of the package to filter
     #   on.
@@ -5653,6 +5655,7 @@ module Aws::Inspector2
     class PackageFilter < Struct.new(
       :architecture,
       :epoch,
+      :file_path,
       :name,
       :release,
       :source_lambda_layer_arn,

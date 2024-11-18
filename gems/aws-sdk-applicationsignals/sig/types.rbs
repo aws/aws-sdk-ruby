@@ -26,6 +26,11 @@ module Aws::ApplicationSignals
       SENSITIVE: []
     end
 
+    class BurnRateConfiguration
+      attr_accessor look_back_window_minutes: ::Integer
+      SENSITIVE: []
+    end
+
     class CalendarInterval
       attr_accessor start_time: ::Time
       attr_accessor duration_unit: ("MINUTE" | "HOUR" | "DAY" | "MONTH")
@@ -45,6 +50,7 @@ module Aws::ApplicationSignals
       attr_accessor request_based_sli_config: Types::RequestBasedServiceLevelIndicatorConfig
       attr_accessor goal: Types::Goal
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor burn_rate_configurations: ::Array[Types::BurnRateConfiguration]
       SENSITIVE: []
     end
 
@@ -363,6 +369,7 @@ module Aws::ApplicationSignals
       attr_accessor request_based_sli: Types::RequestBasedServiceLevelIndicator
       attr_accessor evaluation_type: ("PeriodBased" | "RequestBased")
       attr_accessor goal: Types::Goal
+      attr_accessor burn_rate_configurations: ::Array[Types::BurnRateConfiguration]
       SENSITIVE: []
     end
 
@@ -458,6 +465,7 @@ module Aws::ApplicationSignals
       attr_accessor sli_config: Types::ServiceLevelIndicatorConfig
       attr_accessor request_based_sli_config: Types::RequestBasedServiceLevelIndicatorConfig
       attr_accessor goal: Types::Goal
+      attr_accessor burn_rate_configurations: ::Array[Types::BurnRateConfiguration]
       SENSITIVE: []
     end
 

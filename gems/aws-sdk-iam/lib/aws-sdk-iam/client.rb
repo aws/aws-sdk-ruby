@@ -1269,23 +1269,32 @@ module Aws::IAM
     #
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html
     #
-    # @option params [required, String] :user_name
+    # @option params [String] :user_name
     #   The name of the IAM user to create a password for. The user must
     #   already exist.
     #
-    #   This parameter allows (through its [regex pattern][1]) a string of
+    #   This parameter is optional. If no user name is included, it defaults
+    #   to the principal making the request. When you make this request with
+    #   root user credentials, you must use an [AssumeRoot][1] session to omit
+    #   the user name.
+    #
+    #   This parameter allows (through its [regex pattern][2]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-
     #
     #
     #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   [1]: https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoot.html
+    #   [2]: http://wikipedia.org/wiki/regex
     #
-    # @option params [required, String] :password
+    # @option params [String] :password
     #   The new password for the user.
     #
-    #   The [regex pattern][1] that is used to validate this parameter is a
+    #   This parameter must be omitted when you make the request with an
+    #   [AssumeRoot][1] session. It is required in all other cases.
+    #
+    #   The [regex pattern][2] that is used to validate this parameter is a
     #   string of characters. That string can include almost any printable
     #   ASCII character from the space (`\u0020`) through the end of the ASCII
     #   character range (`\u00FF`). You can also include the tab (`\u0009`),
@@ -1297,7 +1306,8 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   [1]: https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoot.html
+    #   [2]: http://wikipedia.org/wiki/regex
     #
     # @option params [Boolean] :password_reset_required
     #   Specifies whether the user is required to set a new password on next
@@ -1331,8 +1341,8 @@ module Aws::IAM
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_login_profile({
-    #     user_name: "userNameType", # required
-    #     password: "passwordType", # required
+    #     user_name: "userNameType",
+    #     password: "passwordType",
     #     password_reset_required: false,
     #   })
     #
@@ -2519,17 +2529,23 @@ module Aws::IAM
     #
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html
     #
-    # @option params [required, String] :user_name
+    # @option params [String] :user_name
     #   The name of the user whose MFA device you want to deactivate.
     #
-    #   This parameter allows (through its [regex pattern][1]) a string of
+    #   This parameter is optional. If no user name is included, it defaults
+    #   to the principal making the request. When you make this request with
+    #   root user credentials, you must use an [AssumeRoot][1] session to omit
+    #   the user name.
+    #
+    #   This parameter allows (through its [regex pattern][2]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-
     #
     #
     #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   [1]: https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoot.html
+    #   [2]: http://wikipedia.org/wiki/regex
     #
     # @option params [required, String] :serial_number
     #   The serial number that uniquely identifies the MFA device. For virtual
@@ -2549,7 +2565,7 @@ module Aws::IAM
     # @example Request syntax with placeholder values
     #
     #   resp = client.deactivate_mfa_device({
-    #     user_name: "existingUserNameType", # required
+    #     user_name: "existingUserNameType",
     #     serial_number: "serialNumberType", # required
     #   })
     #
@@ -2861,17 +2877,23 @@ module Aws::IAM
     #
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_admin-change-user.html
     #
-    # @option params [required, String] :user_name
+    # @option params [String] :user_name
     #   The name of the user whose password you want to delete.
     #
-    #   This parameter allows (through its [regex pattern][1]) a string of
+    #   This parameter is optional. If no user name is included, it defaults
+    #   to the principal making the request. When you make this request with
+    #   root user credentials, you must use an [AssumeRoot][1] session to omit
+    #   the user name.
+    #
+    #   This parameter allows (through its [regex pattern][2]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-
     #
     #
     #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   [1]: https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoot.html
+    #   [2]: http://wikipedia.org/wiki/regex
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2887,7 +2909,7 @@ module Aws::IAM
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_login_profile({
-    #     user_name: "userNameType", # required
+    #     user_name: "userNameType",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteLoginProfile AWS API Documentation
@@ -3860,6 +3882,91 @@ module Aws::IAM
       req.send_request(options)
     end
 
+    # Disables the management of privileged root user credentials across
+    # member accounts in your organization. When you disable this feature,
+    # the management account and the delegated admininstrator for IAM can no
+    # longer manage root user credentials for member accounts in your
+    # organization.
+    #
+    # @return [Types::DisableOrganizationsRootCredentialsManagementResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisableOrganizationsRootCredentialsManagementResponse#organization_id #organization_id} => String
+    #   * {Types::DisableOrganizationsRootCredentialsManagementResponse#enabled_features #enabled_features} => Array&lt;String&gt;
+    #
+    #
+    # @example Example: To disable the RootCredentialsManagement feature in your organization
+    #
+    #   # The following command disables the management of privileged root user credentials across member accounts in your
+    #   # organization.
+    #
+    #   resp = client.disable_organizations_root_credentials_management({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     enabled_features: [
+    #       "RootSessions", 
+    #     ], 
+    #     organization_id: "o-aa111bb222", 
+    #   }
+    #
+    # @example Response structure
+    #
+    #   resp.organization_id #=> String
+    #   resp.enabled_features #=> Array
+    #   resp.enabled_features[0] #=> String, one of "RootCredentialsManagement", "RootSessions"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DisableOrganizationsRootCredentialsManagement AWS API Documentation
+    #
+    # @overload disable_organizations_root_credentials_management(params = {})
+    # @param [Hash] params ({})
+    def disable_organizations_root_credentials_management(params = {}, options = {})
+      req = build_request(:disable_organizations_root_credentials_management, params)
+      req.send_request(options)
+    end
+
+    # Disables root user sessions for privileged tasks across member
+    # accounts in your organization. When you disable this feature, the
+    # management account and the delegated admininstrator for IAM can no
+    # longer perform privileged tasks on member accounts in your
+    # organization.
+    #
+    # @return [Types::DisableOrganizationsRootSessionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisableOrganizationsRootSessionsResponse#organization_id #organization_id} => String
+    #   * {Types::DisableOrganizationsRootSessionsResponse#enabled_features #enabled_features} => Array&lt;String&gt;
+    #
+    #
+    # @example Example: To disable the RootSessions feature in your organization
+    #
+    #   # The following command disables root user sessions for privileged tasks across member accounts in your organization.
+    #
+    #   resp = client.disable_organizations_root_sessions({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     enabled_features: [
+    #       "RootCredentialsManagement", 
+    #     ], 
+    #     organization_id: "o-aa111bb222", 
+    #   }
+    #
+    # @example Response structure
+    #
+    #   resp.organization_id #=> String
+    #   resp.enabled_features #=> Array
+    #   resp.enabled_features[0] #=> String, one of "RootCredentialsManagement", "RootSessions"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DisableOrganizationsRootSessions AWS API Documentation
+    #
+    # @overload disable_organizations_root_sessions(params = {})
+    # @param [Hash] params ({})
+    def disable_organizations_root_sessions(params = {}, options = {})
+      req = build_request(:disable_organizations_root_sessions, params)
+      req.send_request(options)
+    end
+
     # Enables the specified MFA device and associates it with the specified
     # IAM user. When enabled, the MFA device is required for every
     # subsequent login by the IAM user associated with the device.
@@ -3938,6 +4045,124 @@ module Aws::IAM
     # @param [Hash] params ({})
     def enable_mfa_device(params = {}, options = {})
       req = build_request(:enable_mfa_device, params)
+      req.send_request(options)
+    end
+
+    # Enables the management of privileged root user credentials across
+    # member accounts in your organization. When you enable root credentials
+    # management for [centralized root access][1], the management account
+    # and the delegated admininstrator for IAM can manage root user
+    # credentials for member accounts in your organization.
+    #
+    # Before you enable centralized root access, you must have an account
+    # configured with the following settings:
+    #
+    # * You must manage your Amazon Web Services accounts in
+    #   [Organizations][2].
+    #
+    # * Enable trusted access for Identity and Access Management in
+    #   Organizations. For details, see [IAM and Organizations][3] in the
+    #   *Organizations User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html#id_root-user-access-management
+    # [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html
+    # [3]: https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-ra.html
+    #
+    # @return [Types::EnableOrganizationsRootCredentialsManagementResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EnableOrganizationsRootCredentialsManagementResponse#organization_id #organization_id} => String
+    #   * {Types::EnableOrganizationsRootCredentialsManagementResponse#enabled_features #enabled_features} => Array&lt;String&gt;
+    #
+    #
+    # @example Example: To enable the RootCredentialsManagement feature in your organization
+    #
+    #   # The following command enables the management of privileged root user credentials across member accounts in your
+    #   # organization.
+    #
+    #   resp = client.enable_organizations_root_credentials_management({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     enabled_features: [
+    #       "RootCredentialsManagement", 
+    #     ], 
+    #     organization_id: "o-aa111bb222", 
+    #   }
+    #
+    # @example Response structure
+    #
+    #   resp.organization_id #=> String
+    #   resp.enabled_features #=> Array
+    #   resp.enabled_features[0] #=> String, one of "RootCredentialsManagement", "RootSessions"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EnableOrganizationsRootCredentialsManagement AWS API Documentation
+    #
+    # @overload enable_organizations_root_credentials_management(params = {})
+    # @param [Hash] params ({})
+    def enable_organizations_root_credentials_management(params = {}, options = {})
+      req = build_request(:enable_organizations_root_credentials_management, params)
+      req.send_request(options)
+    end
+
+    # Allows the management account or delegated administrator to perform
+    # privileged tasks on member accounts in your organization. For more
+    # information, see [Centrally manage root access for member accounts][1]
+    # in the *Identity and Access Management User Guide*.
+    #
+    # Before you enable this feature, you must have an account configured
+    # with the following settings:
+    #
+    # * You must manage your Amazon Web Services accounts in
+    #   [Organizations][2].
+    #
+    # * Enable trusted access for Identity and Access Management in
+    #   Organizations. For details, see [IAM and Organizations][3] in the
+    #   *Organizations User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html#id_root-user-access-management
+    # [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html
+    # [3]: https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-ra.html
+    #
+    # @return [Types::EnableOrganizationsRootSessionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EnableOrganizationsRootSessionsResponse#organization_id #organization_id} => String
+    #   * {Types::EnableOrganizationsRootSessionsResponse#enabled_features #enabled_features} => Array&lt;String&gt;
+    #
+    #
+    # @example Example: To enable the RootSessions feature in your organization
+    #
+    #   # The following command allows the management account or delegated administrator to perform privileged tasks on member
+    #   # accounts in your organization.
+    #
+    #   resp = client.enable_organizations_root_sessions({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     enabled_features: [
+    #       "RootCredentialsManagement", 
+    #       "RootSessions", 
+    #     ], 
+    #     organization_id: "o-aa111bb222", 
+    #   }
+    #
+    # @example Response structure
+    #
+    #   resp.organization_id #=> String
+    #   resp.enabled_features #=> Array
+    #   resp.enabled_features[0] #=> String, one of "RootCredentialsManagement", "RootSessions"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EnableOrganizationsRootSessions AWS API Documentation
+    #
+    # @overload enable_organizations_root_sessions(params = {})
+    # @param [Hash] params ({})
+    def enable_organizations_root_sessions(params = {}, options = {})
+      req = build_request(:enable_organizations_root_sessions, params)
       req.send_request(options)
     end
 
@@ -5066,17 +5291,23 @@ module Aws::IAM
     # you create a password for the user to access the Amazon Web Services
     # Management Console.
     #
-    # @option params [required, String] :user_name
+    # @option params [String] :user_name
     #   The name of the user whose login profile you want to retrieve.
     #
-    #   This parameter allows (through its [regex pattern][1]) a string of
+    #   This parameter is optional. If no user name is included, it defaults
+    #   to the principal making the request. When you make this request with
+    #   root user credentials, you must use an [AssumeRoot][1] session to omit
+    #   the user name.
+    #
+    #   This parameter allows (through its [regex pattern][2]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-
     #
     #
     #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   [1]: https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoot.html
+    #   [2]: http://wikipedia.org/wiki/regex
     #
     # @return [Types::GetLoginProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5102,7 +5333,7 @@ module Aws::IAM
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_login_profile({
-    #     user_name: "userNameType", # required
+    #     user_name: "userNameType",
     #   })
     #
     # @example Response structure
@@ -6494,12 +6725,12 @@ module Aws::IAM
     # Lists the account alias associated with the Amazon Web Services
     # account (Note: you can have only one). For information about using an
     # Amazon Web Services account alias, see [Creating, deleting, and
-    # listing an Amazon Web Services account alias][1] in the *IAM User
-    # Guide*.
+    # listing an Amazon Web Services account alias][1] in the *Amazon Web
+    # Services Sign-In User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html#CreateAccountAlias
+    # [1]: https://docs.aws.amazon.com/signin/latest/userguide/CreateAccountAlias.html
     #
     # @option params [String] :marker
     #   Use this parameter only when paginating results and only after you
@@ -7804,6 +8035,50 @@ module Aws::IAM
     # @param [Hash] params ({})
     def list_open_id_connect_providers(params = {}, options = {})
       req = build_request(:list_open_id_connect_providers, params)
+      req.send_request(options)
+    end
+
+    # Lists the centralized root access features enabled for your
+    # organization. For more information, see [Centrally manage root access
+    # for member accounts][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html#id_root-user-access-management
+    #
+    # @return [Types::ListOrganizationsFeaturesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListOrganizationsFeaturesResponse#organization_id #organization_id} => String
+    #   * {Types::ListOrganizationsFeaturesResponse#enabled_features #enabled_features} => Array&lt;String&gt;
+    #
+    #
+    # @example Example: To list the centralized root access features enabled for your organization
+    #
+    #   # he following command lists the centralized root access features enabled for your organization.
+    #
+    #   resp = client.list_organizations_features({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     enabled_features: [
+    #       "RootCredentialsManagement", 
+    #     ], 
+    #     organization_id: "o-aa111bb222", 
+    #   }
+    #
+    # @example Response structure
+    #
+    #   resp.organization_id #=> String
+    #   resp.enabled_features #=> Array
+    #   resp.enabled_features[0] #=> String, one of "RootCredentialsManagement", "RootSessions"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListOrganizationsFeatures AWS API Documentation
+    #
+    # @overload list_organizations_features(params = {})
+    # @param [Hash] params ({})
+    def list_organizations_features(params = {}, options = {})
+      req = build_request(:list_organizations_features, params)
       req.send_request(options)
     end
 
@@ -12176,7 +12451,7 @@ module Aws::IAM
     #   Specifies whether IAM user passwords must contain at least one of the
     #   following non-alphanumeric characters:
     #
-    #   ! @ # $ % ^ &amp; * ( ) \_ + - = \[ \] \\\{ \\} \| '
+    #   ! @ # $ % ^ &amp; * ( ) \_ + - = \[ \] \{ } \| '
     #
     #   If you do not specify a value for this parameter, then the operation
     #   uses the default value of `false`. The result is that passwords do not
@@ -13537,7 +13812,7 @@ module Aws::IAM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.112.0'
+      context[:gem_version] = '1.114.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

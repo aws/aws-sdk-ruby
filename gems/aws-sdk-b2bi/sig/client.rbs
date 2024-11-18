@@ -326,6 +326,19 @@ module Aws
                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _GenerateMappingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GenerateMappingResponse]
+        def mapping_template: () -> ::String
+        def mapping_accuracy: () -> ::Float
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/B2bi/Client.html#generate_mapping-instance_method
+      def generate_mapping: (
+                              input_file_content: ::String,
+                              output_file_content: ::String,
+                              mapping_type: ("JSONATA" | "XSLT")
+                            ) -> _GenerateMappingResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GenerateMappingResponseSuccess
+
       interface _GetCapabilityResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetCapabilityResponse]
         def capability_id: () -> ::String

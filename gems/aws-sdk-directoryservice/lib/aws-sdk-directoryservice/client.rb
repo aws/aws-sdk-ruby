@@ -956,7 +956,7 @@ module Aws::DirectoryService
     #   The regex pattern for this string is made up of the following
     #   conditions:
     #
-    #   * Length (?=^.\\\{8,64\\}$) – Must be between 8 and 64 characters
+    #   * Length (?=^.\{8,64}$) – Must be between 8 and 64 characters
     #
     #   ^
     #
@@ -3539,7 +3539,7 @@ module Aws::DirectoryService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-directoryservice'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.79.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

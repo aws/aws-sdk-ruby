@@ -503,7 +503,7 @@ module Aws::GlobalAccelerator
     # * **DEPROVISIONED** — The address range is deprovisioned from Global
     #   Accelerator.
     #
-    # * <b>FAILED\_PROVISION </b> — The request to provision the address
+    # * <b>FAILED_PROVISION </b> — The request to provision the address
     #   range from Global Accelerator was not successful. Please make sure
     #   that you provide all of the correct information, and try again. If
     #   the request fails a second time, contact Amazon Web Services
@@ -521,7 +521,7 @@ module Aws::GlobalAccelerator
     #   again. If the request fails a second time, contact Amazon Web
     #   Services support.
     #
-    # * <b>FAILED\_DEPROVISION </b> — The request to deprovision the address
+    # * <b>FAILED_DEPROVISION </b> — The request to deprovision the address
     #   range from Global Accelerator was not successful. Please make sure
     #   that you provide all of the correct information, and try again. If
     #   the request fails a second time, contact Amazon Web Services

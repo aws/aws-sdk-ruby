@@ -482,6 +482,10 @@ module Aws
                                    lower_inclusive: ::Float?,
                                    upper_inclusive: ::Float?
                                  }?,
+                                 file_path: {
+                                   comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                   value: ::String
+                                 }?,
                                  name: {
                                    comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
                                    value: ::String
@@ -774,6 +778,10 @@ module Aws
                                           epoch: {
                                             lower_inclusive: ::Float?,
                                             upper_inclusive: ::Float?
+                                          }?,
+                                          file_path: {
+                                            comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                            value: ::String
                                           }?,
                                           name: {
                                             comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
@@ -2078,6 +2086,10 @@ module Aws
                                    lower_inclusive: ::Float?,
                                    upper_inclusive: ::Float?
                                  }?,
+                                 file_path: {
+                                   comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                   value: ::String
+                                 }?,
                                  name: {
                                    comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
                                    value: ::String
@@ -2606,6 +2618,10 @@ module Aws
                                  epoch: {
                                    lower_inclusive: ::Float?,
                                    upper_inclusive: ::Float?
+                                 }?,
+                                 file_path: {
+                                   comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                   value: ::String
                                  }?,
                                  name: {
                                    comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),

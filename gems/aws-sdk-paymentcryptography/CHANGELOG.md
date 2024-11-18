@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2024-11-12)
+------------------
+
+* Feature - Updated ListAliases API with KeyArn filter.
+
 1.27.0 (2024-10-23)
 ------------------
 

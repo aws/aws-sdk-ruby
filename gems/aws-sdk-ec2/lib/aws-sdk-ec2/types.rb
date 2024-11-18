@@ -6933,7 +6933,7 @@ module Aws::EC2
     #
     # @!attribute [rw] source_capacity_reservation_id
     #   The ID of the Capacity Reservation from which you want to split the
-    #   available capacity.
+    #   capacity.
     #   @return [String]
     #
     # @!attribute [rw] instance_count
@@ -8312,7 +8312,7 @@ module Aws::EC2
     #   VPC User Guide* or [Transit Gateway Flow Log records][2] in the
     #   *Amazon Web Services Transit Gateway Guide*.
     #
-    #   Specify the fields using the `$\{field-id\}` format, separated by
+    #   Specify the fields using the `${field-id}` format, separated by
     #   spaces.
     #
     #
@@ -9298,6 +9298,10 @@ module Aws::EC2
     #   The information for the launch template.
     #   @return [Types::RequestLaunchTemplateData]
     #
+    # @!attribute [rw] operator
+    #   Reserved for internal use.
+    #   @return [Types::OperatorRequest]
+    #
     # @!attribute [rw] tag_specifications
     #   The tags to apply to the launch template on creation. To tag the
     #   launch template, the resource type must be `launch-template`.
@@ -9319,6 +9323,7 @@ module Aws::EC2
       :launch_template_name,
       :version_description,
       :launch_template_data,
+      :operator,
       :tag_specifications)
       SENSITIVE = []
       include Aws::Structure
@@ -10243,6 +10248,10 @@ module Aws::EC2
     #   A connection tracking specification for the network interface.
     #   @return [Types::ConnectionTrackingSpecificationRequest]
     #
+    # @!attribute [rw] operator
+    #   Reserved for internal use.
+    #   @return [Types::OperatorRequest]
+    #
     # @!attribute [rw] subnet_id
     #   The ID of the subnet to associate with the network interface.
     #   @return [String]
@@ -10324,6 +10333,7 @@ module Aws::EC2
       :client_token,
       :enable_primary_ipv_6,
       :connection_tracking_specification,
+      :operator,
       :subnet_id,
       :description,
       :private_ip_address,
@@ -10835,7 +10845,7 @@ module Aws::EC2
     #   Constraints: Up to 255 characters in length
     #
     #   Valid characters: a-z, A-Z, 0-9, spaces, and
-    #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
+    #   .\_-:/()#,@\[\]+=&amp;;\{}!$*
     #   @return [String]
     #
     # @!attribute [rw] group_name
@@ -10845,7 +10855,7 @@ module Aws::EC2
     #   `sg-`.
     #
     #   Valid characters: a-z, A-Z, 0-9, spaces, and
-    #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
+    #   .\_-:/()#,@\[\]+=&amp;;\{}!$*
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -12977,6 +12987,10 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
+    # @!attribute [rw] operator
+    #   Reserved for internal use.
+    #   @return [Types::OperatorRequest]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -12999,6 +13013,7 @@ module Aws::EC2
       :multi_attach_enabled,
       :throughput,
       :client_token,
+      :operator,
       :dry_run)
       SENSITIVE = []
       include Aws::Structure
@@ -17489,7 +17504,6 @@ module Aws::EC2
     #     * `dedicated` - The Capacity Reservation is created on
     #       single-tenant hardware that is dedicated to a single Amazon Web
     #       Services account.
-    #
     #   * `outpost-arn` - The Amazon Resource Name (ARN) of the Outpost on
     #     which the Capacity Reservation was created.
     #
@@ -17513,7 +17527,6 @@ module Aws::EC2
     #       request might fail due to invalid request parameters, capacity
     #       constraints, or instance limit constraints. Failed requests are
     #       retained for 60 minutes.
-    #
     #   * `start-date` - The date and time at which the Capacity Reservation
     #     was started.
     #
@@ -17532,7 +17545,6 @@ module Aws::EC2
     #
     #     * `limited` - The Capacity Reservation expires automatically at a
     #       specified date and time.
-    #
     #   * `instance-match-criteria` - Indicates the type of instance
     #     launches that the Capacity Reservation accepts. The options
     #     include:
@@ -17548,7 +17560,6 @@ module Aws::EC2
     #       Availability Zone), and explicitly target the Capacity
     #       Reservation. This ensures that only permitted instances can use
     #       the reserved capacity.
-    #
     #   * `placement-group-arn` - The ARN of the cluster placement group in
     #     which the Capacity Reservation was created.
     #   @return [Array<Types::Filter>]
@@ -19757,9 +19768,9 @@ module Aws::EC2
     # @!attribute [rw] owners
     #   Scopes the results to images with the specified owners. You can
     #   specify a combination of Amazon Web Services account IDs, `self`,
-    #   `amazon`, and `aws-marketplace`. If you omit this parameter, the
-    #   results include all images for which you have launch permissions,
-    #   regardless of ownership.
+    #   `amazon`, `aws-backup-vault`, and `aws-marketplace`. If you omit
+    #   this parameter, the results include all images for which you have
+    #   launch permissions, regardless of ownership.
     #   @return [Array<String>]
     #
     # @!attribute [rw] include_deprecated
@@ -19855,11 +19866,12 @@ module Aws::EC2
     #
     #   * `name` - The name of the AMI (provided during image creation).
     #
-    #   * `owner-alias` - The owner alias (`amazon` \| `aws-marketplace`).
-    #     The valid aliases are defined in an Amazon-maintained list. This
-    #     is not the Amazon Web Services account alias that can be set using
-    #     the IAM console. We recommend that you use the **Owner** request
-    #     parameter instead of this filter.
+    #   * `owner-alias` - The owner alias (`amazon` \| `aws-backup-vault` \|
+    #     `aws-marketplace`). The valid aliases are defined in an
+    #     Amazon-maintained list. This is not the Amazon Web Services
+    #     account alias that can be set using the IAM console. We recommend
+    #     that you use the **Owner** request parameter instead of this
+    #     filter.
     #
     #   * `owner-id` - The Amazon Web Services account ID of the owner. We
     #     recommend that you use the **Owner** request parameter instead of
@@ -31183,6 +31195,10 @@ module Aws::EC2
     #   Fargate tasks.
     #   @return [String]
     #
+    # @!attribute [rw] operator
+    #   The entity that manages the EBS volume.
+    #   @return [Types::OperatorResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EbsInstanceBlockDevice AWS API Documentation
     #
     class EbsInstanceBlockDevice < Struct.new(
@@ -31191,7 +31207,8 @@ module Aws::EC2
       :status,
       :volume_id,
       :associated_resource,
-      :volume_owner_id)
+      :volume_owner_id,
+      :operator)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -38382,7 +38399,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] image_owner_alias
-    #   The owner alias (`amazon` \| `aws-marketplace`).
+    #   The owner alias (`amazon` \| `aws-backup-vault` \|
+    #   `aws-marketplace`).
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -38484,6 +38502,36 @@ module Aws::EC2
     #   [1]: http://www.iso.org/iso/iso8601
     #   @return [String]
     #
+    # @!attribute [rw] source_image_id
+    #   The ID of the source AMI from which the AMI was created.
+    #
+    #   The ID only appears if the AMI was created using CreateImage,
+    #   CopyImage, or CreateRestoreImageTask. The ID does not appear if the
+    #   AMI was created using any other API. For some older AMIs, the ID
+    #   might not be available. For more information, see [Identify the
+    #   source AMI used to create a new AMI][1] in the *Amazon EC2 User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/identify-source-ami-used-to-create-new-ami.html
+    #   @return [String]
+    #
+    # @!attribute [rw] source_image_region
+    #   The Region of the source AMI.
+    #
+    #   The Region only appears if the AMI was created using CreateImage,
+    #   CopyImage, or CreateRestoreImageTask. The Region does not appear if
+    #   the AMI was created using any other API. For some older AMIs, the
+    #   Region might not be available. For more information, see [Identify
+    #   the source AMI used to create a new AMI][1] in the *Amazon EC2 User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/identify-source-ami-used-to-create-new-ami.html
+    #   @return [String]
+    #
     # @!attribute [rw] image_id
     #   The ID of the AMI.
     #   @return [String]
@@ -38562,6 +38610,8 @@ module Aws::EC2
       :source_instance_id,
       :deregistration_protection,
       :last_launched_time,
+      :source_image_id,
+      :source_image_region,
       :image_id,
       :image_location,
       :state,
@@ -38754,7 +38804,7 @@ module Aws::EC2
     # @!attribute [rw] image_owner_alias
     #   The alias of the AMI owner.
     #
-    #   Valid values: `amazon` \| `aws-marketplace`
+    #   Valid values: `amazon` \| `aws-backup-vault` \| `aws-marketplace`
     #   @return [String]
     #
     # @!attribute [rw] creation_date
@@ -39465,8 +39515,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] public_key_material
-    #   The public key. For API calls, the text must be base64-encoded. For
-    #   command line tools, base64 encoding is performed for you.
+    #   The public key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportKeyPairRequest AWS API Documentation
@@ -40034,6 +40083,10 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html
     #   @return [String]
     #
+    # @!attribute [rw] operator
+    #   The entity that manages the instance.
+    #   @return [Types::OperatorResponse]
+    #
     # @!attribute [rw] instance_id
     #   The ID of the instance.
     #   @return [String]
@@ -40090,7 +40143,9 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] launch_time
-    #   The time the instance was launched.
+    #   The time that the instance was last launched. To determine the time
+    #   that instance was first launched, see the attachment time for the
+    #   primary network interface.
     #   @return [Time]
     #
     # @!attribute [rw] placement
@@ -40174,6 +40229,7 @@ module Aws::EC2
       :tpm_support,
       :maintenance_options,
       :current_instance_boot_mode,
+      :operator,
       :instance_id,
       :image_id,
       :state,
@@ -40783,6 +40839,10 @@ module Aws::EC2
     #   Information about the AMI used to launch the instance.
     #   @return [Types::ImageMetadata]
     #
+    # @!attribute [rw] operator
+    #   The entity that manages the instance.
+    #   @return [Types::OperatorResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceImageMetadata AWS API Documentation
     #
     class InstanceImageMetadata < Struct.new(
@@ -40794,7 +40854,8 @@ module Aws::EC2
       :state,
       :owner_id,
       :tags,
-      :image_metadata)
+      :image_metadata,
+      :operator)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -41219,6 +41280,10 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts
     #   @return [Types::ConnectionTrackingSpecificationResponse]
     #
+    # @!attribute [rw] operator
+    #   The entity that manages the network interface.
+    #   @return [Types::OperatorResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceNetworkInterface AWS API Documentation
     #
     class InstanceNetworkInterface < Struct.new(
@@ -41240,7 +41305,8 @@ module Aws::EC2
       :interface_type,
       :ipv_4_prefixes,
       :ipv_6_prefixes,
-      :connection_tracking_configuration)
+      :connection_tracking_configuration,
+      :operator)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -42656,6 +42722,10 @@ module Aws::EC2
     #   The Amazon Resource Name (ARN) of the Outpost.
     #   @return [String]
     #
+    # @!attribute [rw] operator
+    #   The entity that manages the instance.
+    #   @return [Types::OperatorResponse]
+    #
     # @!attribute [rw] events
     #   Any scheduled events associated with the instance.
     #   @return [Array<Types::InstanceStatusEvent>]
@@ -42691,6 +42761,7 @@ module Aws::EC2
     class InstanceStatus < Struct.new(
       :availability_zone,
       :outpost_arn,
+      :operator,
       :events,
       :instance_id,
       :instance_state,
@@ -43262,7 +43333,7 @@ module Aws::EC2
     #   address range.
     #
     #   Constraints: Up to 255 characters in length. Allowed characters are
-    #   a-z, A-Z, 0-9, spaces, and .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
+    #   a-z, A-Z, 0-9, spaces, and .\_-:/()#,@\[\]+=&amp;;\{}!$*
     #   @return [String]
     #
     # @!attribute [rw] cidr_ip
@@ -43792,7 +43863,6 @@ module Aws::EC2
     #     * You have opted-out of the IPAM home Region.
     #
     #     * Account you are using as your IPAM account has been suspended.
-    #
     #   * `throttling-failure` - IPAM account is already using the allotted
     #     transactions per second and IPAM is receiving a throttling error
     #     when assuming the Amazon Web Services IAM SLR.
@@ -44928,7 +44998,7 @@ module Aws::EC2
     #   address range.
     #
     #   Constraints: Up to 255 characters in length. Allowed characters are
-    #   a-z, A-Z, 0-9, spaces, and .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
+    #   a-z, A-Z, 0-9, spaces, and .\_-:/()#,@\[\]+=&amp;;\{}!$*
     #   @return [String]
     #
     # @!attribute [rw] cidr_ipv_6
@@ -45256,6 +45326,10 @@ module Aws::EC2
     #   The tags for the launch template.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] operator
+    #   The entity that manages the launch template.
+    #   @return [Types::OperatorResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplate AWS API Documentation
     #
     class LaunchTemplate < Struct.new(
@@ -45265,7 +45339,8 @@ module Aws::EC2
       :created_by,
       :default_version_number,
       :latest_version_number,
-      :tags)
+      :tags,
+      :operator)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -46969,6 +47044,10 @@ module Aws::EC2
     #   Information about the launch template.
     #   @return [Types::ResponseLaunchTemplateData]
     #
+    # @!attribute [rw] operator
+    #   The entity that manages the launch template.
+    #   @return [Types::OperatorResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateVersion AWS API Documentation
     #
     class LaunchTemplateVersion < Struct.new(
@@ -46979,7 +47058,8 @@ module Aws::EC2
       :create_time,
       :created_by,
       :default_version,
-      :launch_template_data)
+      :launch_template_data,
+      :operator)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -47608,7 +47688,6 @@ module Aws::EC2
     #
     #     * The snapshot is unlocked by a user with the appropriate
     #       permissions.
-    #
     #     Users with the appropriate IAM permissions can unlock the
     #     snapshot, increase or decrease the lock duration, and change the
     #     lock mode to `compliance` at any time.
@@ -53861,6 +53940,10 @@ module Aws::EC2
     #   interface.
     #   @return [String]
     #
+    # @!attribute [rw] operator
+    #   The entity that manages the network interface.
+    #   @return [Types::OperatorResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInterface AWS API Documentation
     #
     class NetworkInterface < Struct.new(
@@ -53890,7 +53973,8 @@ module Aws::EC2
       :vpc_id,
       :deny_all_igw_traffic,
       :ipv_6_native,
-      :ipv_6_address)
+      :ipv_6_address,
+      :operator)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -54495,6 +54579,41 @@ module Aws::EC2
       :single_availability_zone,
       :min_target_capacity,
       :max_total_price)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The entity that manages the resource.
+    #
+    # @!attribute [rw] principal
+    #   The entity that manages the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/OperatorRequest AWS API Documentation
+    #
+    class OperatorRequest < Struct.new(
+      :principal)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes whether the resource is managed by an entity and, if so,
+    # describes the entity that manages it.
+    #
+    # @!attribute [rw] managed
+    #   If `true`, the resource is managed by an entity.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] principal
+    #   If `managed` is `true`, then the principal is returned. The
+    #   principal is the entity that manages the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/OperatorResponse AWS API Documentation
+    #
+    class OperatorResponse < Struct.new(
+      :managed,
+      :principal)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -55387,7 +55506,7 @@ module Aws::EC2
     #   prefix list ID.
     #
     #   Constraints: Up to 255 characters in length. Allowed characters are
-    #   a-z, A-Z, 0-9, spaces, and .\_-:/()#,@\[\]+=;\\\{\\}!$*
+    #   a-z, A-Z, 0-9, spaces, and .\_-:/()#,@\[\]+=;\{}!$*
     #   @return [String]
     #
     # @!attribute [rw] prefix_list_id
@@ -58214,6 +58333,10 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-stop-protection.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] operator
+    #   The entity that manages the launch template.
+    #   @return [Types::OperatorRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestLaunchTemplateData AWS API Documentation
     #
     class RequestLaunchTemplateData < Struct.new(
@@ -58247,7 +58370,8 @@ module Aws::EC2
       :instance_requirements,
       :private_dns_name_options,
       :maintenance_options,
-      :disable_api_stop)
+      :disable_api_stop,
+      :operator)
       SENSITIVE = [:user_data]
       include Aws::Structure
     end
@@ -59609,6 +59733,10 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-stop-protection.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] operator
+    #   The entity that manages the launch template.
+    #   @return [Types::OperatorResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResponseLaunchTemplateData AWS API Documentation
     #
     class ResponseLaunchTemplateData < Struct.new(
@@ -59642,7 +59770,8 @@ module Aws::EC2
       :instance_requirements,
       :private_dns_name_options,
       :maintenance_options,
-      :disable_api_stop)
+      :disable_api_stop,
+      :operator)
       SENSITIVE = [:user_data]
       include Aws::Structure
     end
@@ -59931,7 +60060,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] revoke_all_groups
-    #   Indicates whether access should be revoked for all clients.
+    #   Indicates whether access should be revoked for all groups for a
+    #   single `TargetNetworkCidr` that earlier authorized ingress for all
+    #   groups using `AuthorizeAllGroups`. This does not impact other
+    #   authorization rules that allowed ingress to the same
+    #   `TargetNetworkCidr` with a specific `AccessGroupId`.
     #   @return [Boolean]
     #
     # @!attribute [rw] dry_run
@@ -60842,6 +60975,10 @@ module Aws::EC2
     #   ENI becomes the primary IPv6 address.
     #   @return [Boolean]
     #
+    # @!attribute [rw] operator
+    #   Reserved for internal use.
+    #   @return [Types::OperatorRequest]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
@@ -60963,6 +61100,7 @@ module Aws::EC2
       :maintenance_options,
       :disable_api_stop,
       :enable_primary_ipv_6,
+      :operator,
       :dry_run,
       :disable_api_termination,
       :instance_initiated_shutdown_behavior,
@@ -68245,7 +68383,7 @@ module Aws::EC2
     #   ID group pair.
     #
     #   Constraints: Up to 255 characters in length. Allowed characters are
-    #   a-z, A-Z, 0-9, spaces, and .\_-:/()#,@\[\]+=;\\\{\\}!$*
+    #   a-z, A-Z, 0-9, spaces, and .\_-:/()#,@\[\]+=;\{}!$*
     #   @return [String]
     #
     # @!attribute [rw] user_id
@@ -69213,6 +69351,10 @@ module Aws::EC2
     #   Reserved for future use.
     #   @return [String]
     #
+    # @!attribute [rw] operator
+    #   The entity that manages the volume.
+    #   @return [Types::OperatorResponse]
+    #
     # @!attribute [rw] volume_id
     #   The ID of the volume.
     #   @return [String]
@@ -69265,6 +69407,7 @@ module Aws::EC2
       :multi_attach_enabled,
       :throughput,
       :sse_type,
+      :operator,
       :volume_id,
       :size,
       :snapshot_id,

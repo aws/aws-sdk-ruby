@@ -161,7 +161,7 @@ module Aws
       def create_firewall_rule: (
                                   creator_request_id: ::String,
                                   firewall_rule_group_id: ::String,
-                                  firewall_domain_list_id: ::String,
+                                  ?firewall_domain_list_id: ::String,
                                   priority: ::Integer,
                                   action: ("ALLOW" | "BLOCK" | "ALERT"),
                                   ?block_response: ("NODATA" | "NXDOMAIN" | "OVERRIDE"),
@@ -170,7 +170,9 @@ module Aws
                                   ?block_override_ttl: ::Integer,
                                   name: ::String,
                                   ?firewall_domain_redirection_action: ("INSPECT_REDIRECTION_DOMAIN" | "TRUST_REDIRECTION_DOMAIN"),
-                                  ?qtype: ::String
+                                  ?qtype: ::String,
+                                  ?dns_threat_protection: ("DGA" | "DNS_TUNNELING"),
+                                  ?confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")
                                 ) -> _CreateFirewallRuleResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFirewallRuleResponseSuccess
 
@@ -305,7 +307,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#delete_firewall_rule-instance_method
       def delete_firewall_rule: (
                                   firewall_rule_group_id: ::String,
-                                  firewall_domain_list_id: ::String,
+                                  ?firewall_domain_list_id: ::String,
+                                  ?firewall_threat_protection_id: ::String,
                                   ?qtype: ::String
                                 ) -> _DeleteFirewallRuleResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFirewallRuleResponseSuccess
@@ -915,7 +918,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#update_firewall_rule-instance_method
       def update_firewall_rule: (
                                   firewall_rule_group_id: ::String,
-                                  firewall_domain_list_id: ::String,
+                                  ?firewall_domain_list_id: ::String,
+                                  ?firewall_threat_protection_id: ::String,
                                   ?priority: ::Integer,
                                   ?action: ("ALLOW" | "BLOCK" | "ALERT"),
                                   ?block_response: ("NODATA" | "NXDOMAIN" | "OVERRIDE"),
@@ -924,7 +928,9 @@ module Aws
                                   ?block_override_ttl: ::Integer,
                                   ?name: ::String,
                                   ?firewall_domain_redirection_action: ("INSPECT_REDIRECTION_DOMAIN" | "TRUST_REDIRECTION_DOMAIN"),
-                                  ?qtype: ::String
+                                  ?qtype: ::String,
+                                  ?dns_threat_protection: ("DGA" | "DNS_TUNNELING"),
+                                  ?confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")
                                 ) -> _UpdateFirewallRuleResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFirewallRuleResponseSuccess
 

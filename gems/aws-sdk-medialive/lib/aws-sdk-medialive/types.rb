@@ -6838,9 +6838,8 @@ module Aws::MediaLive
     #
     # @!attribute [rw] mediaconnect_settings
     #   To attach this device to a MediaConnect flow, specify these
-    #   parameters. To detach an existing flow, enter \\\{\\} for the value
-    #   of mediaconnectSettings. Only UHD devices can specify this
-    #   parameter.
+    #   parameters. To detach an existing flow, enter \{} for the value of
+    #   mediaconnectSettings. Only UHD devices can specify this parameter.
     #   @return [Types::InputDeviceMediaConnectConfigurableSettings]
     #
     # @!attribute [rw] audio_channel_pairs

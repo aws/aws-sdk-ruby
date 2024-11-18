@@ -38,13 +38,14 @@ module Aws::AccessAnalyzer
       attr_accessor condition: ::Hash[::String, ::String]
       attr_accessor resource: ::String
       attr_accessor is_public: bool
-      attr_accessor resource_type: ("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket" | "AWS::DynamoDB::Table" | "AWS::DynamoDB::Stream")
+      attr_accessor resource_type: ("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket" | "AWS::DynamoDB::Table" | "AWS::DynamoDB::Stream" | "AWS::IAM::User")
       attr_accessor created_at: ::Time
       attr_accessor change_type: ("CHANGED" | "NEW" | "UNCHANGED")
       attr_accessor status: ("ACTIVE" | "ARCHIVED" | "RESOLVED")
       attr_accessor resource_owner_account: ::String
       attr_accessor error: ::String
       attr_accessor sources: ::Array[Types::FindingSource]
+      attr_accessor resource_control_policy_restriction: ("APPLICABLE" | "FAILED_TO_EVALUATE_RCP" | "NOT_APPLICABLE")
       SENSITIVE: []
     end
 
@@ -76,9 +77,20 @@ module Aws::AccessAnalyzer
       end
     end
 
+    class AnalysisRule
+      attr_accessor exclusions: ::Array[Types::AnalysisRuleCriteria]
+      SENSITIVE: []
+    end
+
+    class AnalysisRuleCriteria
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor resource_tags: ::Array[::Hash[::String, ::String]]
+      SENSITIVE: []
+    end
+
     class AnalyzedResource
       attr_accessor resource_arn: ::String
-      attr_accessor resource_type: ("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket" | "AWS::DynamoDB::Table" | "AWS::DynamoDB::Stream")
+      attr_accessor resource_type: ("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket" | "AWS::DynamoDB::Table" | "AWS::DynamoDB::Stream" | "AWS::IAM::User")
       attr_accessor created_at: ::Time
       attr_accessor analyzed_at: ::Time
       attr_accessor updated_at: ::Time
@@ -94,7 +106,7 @@ module Aws::AccessAnalyzer
     class AnalyzedResourceSummary
       attr_accessor resource_arn: ::String
       attr_accessor resource_owner_account: ::String
-      attr_accessor resource_type: ("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket" | "AWS::DynamoDB::Table" | "AWS::DynamoDB::Stream")
+      attr_accessor resource_type: ("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket" | "AWS::DynamoDB::Table" | "AWS::DynamoDB::Stream" | "AWS::IAM::User")
       SENSITIVE: []
     end
 
@@ -348,6 +360,7 @@ module Aws::AccessAnalyzer
       attr_accessor is_public: bool
       attr_accessor principal: ::Hash[::String, ::String]
       attr_accessor sources: ::Array[Types::FindingSource]
+      attr_accessor resource_control_policy_restriction: ("APPLICABLE" | "FAILED_TO_EVALUATE_RCP" | "NOT_APPLICABLE")
       SENSITIVE: []
     end
 
@@ -357,7 +370,7 @@ module Aws::AccessAnalyzer
       attr_accessor action: ::Array[::String]
       attr_accessor resource: ::String
       attr_accessor is_public: bool
-      attr_accessor resource_type: ("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket" | "AWS::DynamoDB::Table" | "AWS::DynamoDB::Stream")
+      attr_accessor resource_type: ("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket" | "AWS::DynamoDB::Table" | "AWS::DynamoDB::Stream" | "AWS::IAM::User")
       attr_accessor condition: ::Hash[::String, ::String]
       attr_accessor created_at: ::Time
       attr_accessor analyzed_at: ::Time
@@ -366,6 +379,7 @@ module Aws::AccessAnalyzer
       attr_accessor resource_owner_account: ::String
       attr_accessor error: ::String
       attr_accessor sources: ::Array[Types::FindingSource]
+      attr_accessor resource_control_policy_restriction: ("APPLICABLE" | "FAILED_TO_EVALUATE_RCP" | "NOT_APPLICABLE")
       SENSITIVE: []
     end
 
@@ -410,7 +424,7 @@ module Aws::AccessAnalyzer
       attr_accessor action: ::Array[::String]
       attr_accessor resource: ::String
       attr_accessor is_public: bool
-      attr_accessor resource_type: ("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket" | "AWS::DynamoDB::Table" | "AWS::DynamoDB::Stream")
+      attr_accessor resource_type: ("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket" | "AWS::DynamoDB::Table" | "AWS::DynamoDB::Stream" | "AWS::IAM::User")
       attr_accessor condition: ::Hash[::String, ::String]
       attr_accessor created_at: ::Time
       attr_accessor analyzed_at: ::Time
@@ -419,6 +433,7 @@ module Aws::AccessAnalyzer
       attr_accessor resource_owner_account: ::String
       attr_accessor error: ::String
       attr_accessor sources: ::Array[Types::FindingSource]
+      attr_accessor resource_control_policy_restriction: ("APPLICABLE" | "FAILED_TO_EVALUATE_RCP" | "NOT_APPLICABLE")
       SENSITIVE: []
     end
 
@@ -428,7 +443,7 @@ module Aws::AccessAnalyzer
       attr_accessor error: ::String
       attr_accessor id: ::String
       attr_accessor resource: ::String
-      attr_accessor resource_type: ("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket" | "AWS::DynamoDB::Table" | "AWS::DynamoDB::Stream")
+      attr_accessor resource_type: ("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket" | "AWS::DynamoDB::Table" | "AWS::DynamoDB::Stream" | "AWS::IAM::User")
       attr_accessor resource_owner_account: ::String
       attr_accessor status: ("ACTIVE" | "ARCHIVED" | "RESOLVED")
       attr_accessor updated_at: ::Time
@@ -549,7 +564,7 @@ module Aws::AccessAnalyzer
       attr_accessor id: ::String
       attr_accessor next_token: ::String
       attr_accessor resource: ::String
-      attr_accessor resource_type: ("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket" | "AWS::DynamoDB::Table" | "AWS::DynamoDB::Stream")
+      attr_accessor resource_type: ("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket" | "AWS::DynamoDB::Table" | "AWS::DynamoDB::Stream" | "AWS::IAM::User")
       attr_accessor resource_owner_account: ::String
       attr_accessor status: ("ACTIVE" | "ARCHIVED" | "RESOLVED")
       attr_accessor updated_at: ::Time
@@ -662,7 +677,7 @@ module Aws::AccessAnalyzer
 
     class ListAnalyzedResourcesRequest
       attr_accessor analyzer_arn: ::String
-      attr_accessor resource_type: ("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket" | "AWS::DynamoDB::Table" | "AWS::DynamoDB::Stream")
+      attr_accessor resource_type: ("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket" | "AWS::DynamoDB::Table" | "AWS::DynamoDB::Stream" | "AWS::IAM::User")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       SENSITIVE: []
@@ -1021,6 +1036,7 @@ module Aws::AccessAnalyzer
 
     class UnusedAccessConfiguration
       attr_accessor unused_access_age: ::Integer
+      attr_accessor analysis_rule: Types::AnalysisRule
       SENSITIVE: []
     end
 
@@ -1061,6 +1077,17 @@ module Aws::AccessAnalyzer
       SENSITIVE: []
     end
 
+    class UpdateAnalyzerRequest
+      attr_accessor analyzer_name: ::String
+      attr_accessor configuration: Types::AnalyzerConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateAnalyzerResponse
+      attr_accessor configuration: Types::AnalyzerConfiguration
+      SENSITIVE: []
+    end
+
     class UpdateArchiveRuleRequest
       attr_accessor analyzer_name: ::String
       attr_accessor rule_name: ::String
@@ -1092,7 +1119,7 @@ module Aws::AccessAnalyzer
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       attr_accessor policy_document: ::String
-      attr_accessor policy_type: ("IDENTITY_POLICY" | "RESOURCE_POLICY" | "SERVICE_CONTROL_POLICY")
+      attr_accessor policy_type: ("IDENTITY_POLICY" | "RESOURCE_POLICY" | "SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY")
       attr_accessor validate_policy_resource_type: ("AWS::S3::Bucket" | "AWS::S3::AccessPoint" | "AWS::S3::MultiRegionAccessPoint" | "AWS::S3ObjectLambda::AccessPoint" | "AWS::IAM::AssumeRolePolicyDocument" | "AWS::DynamoDB::Table")
       SENSITIVE: []
     end

@@ -121,8 +121,14 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#create_channel-instance_method
       def create_channel: (
                             ?authorized: bool,
+                            ?container_format: ("TS" | "FRAGMENTED_MP4"),
                             ?insecure_ingest: bool,
                             ?latency_mode: ("NORMAL" | "LOW"),
+                            ?multitrack_input_configuration: {
+                              enabled: bool?,
+                              maximum_resolution: ("SD" | "HD" | "FULL_HD")?,
+                              policy: ("ALLOW" | "REQUIRE")?
+                            },
                             ?name: ::String,
                             ?playback_restriction_policy_arn: ::String,
                             ?preset: ("HIGHER_BANDWIDTH_DELIVERY" | "CONSTRAINED_BANDWIDTH_DELIVERY"),
@@ -457,8 +463,14 @@ module Aws
       def update_channel: (
                             arn: ::String,
                             ?authorized: bool,
+                            ?container_format: ("TS" | "FRAGMENTED_MP4"),
                             ?insecure_ingest: bool,
                             ?latency_mode: ("NORMAL" | "LOW"),
+                            ?multitrack_input_configuration: {
+                              enabled: bool?,
+                              maximum_resolution: ("SD" | "HD" | "FULL_HD")?,
+                              policy: ("ALLOW" | "REQUIRE")?
+                            },
                             ?name: ::String,
                             ?playback_restriction_policy_arn: ::String,
                             ?preset: ("HIGHER_BANDWIDTH_DELIVERY" | "CONSTRAINED_BANDWIDTH_DELIVERY"),

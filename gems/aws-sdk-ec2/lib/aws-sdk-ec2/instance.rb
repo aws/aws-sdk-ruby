@@ -306,6 +306,12 @@ module Aws::EC2
       data[:current_instance_boot_mode]
     end
 
+    # The entity that manages the instance.
+    # @return [Types::OperatorResponse]
+    def operator
+      data[:operator]
+    end
+
     # The ID of the AMI used to launch the instance.
     # @return [String]
     def image_id
@@ -373,7 +379,9 @@ module Aws::EC2
       data[:instance_type]
     end
 
-    # The time the instance was launched.
+    # The time that the instance was last launched. To determine the time
+    # that instance was first launched, see the attachment time for the
+    # primary network interface.
     # @return [Time]
     def launch_time
       data[:launch_time]

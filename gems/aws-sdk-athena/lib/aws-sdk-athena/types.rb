@@ -639,7 +639,6 @@ module Aws::Athena
     #       Lambda function.
     #
     #       `function=lambda_arn `
-    #
     #   * The `GLUE` type takes a catalog ID parameter and is required. The
     #     ` catalog_id ` is the account ID of the Amazon Web Services
     #     account to which the Glue Data Catalog belongs.
@@ -956,7 +955,6 @@ module Aws::Athena
     #       Lambda function.
     #
     #       `function=lambda_arn `
-    #
     #   * The `GLUE` type takes a catalog ID parameter and is required. The
     #     ` catalog_id ` is the account ID of the Amazon Web Services
     #     account to which the Glue catalog belongs.

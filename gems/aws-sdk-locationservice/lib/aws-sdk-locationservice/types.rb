@@ -54,7 +54,6 @@ module Aws::LocationService
     #     * `geo:GetMap*` - Allows all actions needed for map rendering.
     #
     #     ^
-    #
     #   * **Place actions**
     #
     #     * `geo:SearchPlaceIndexForText` - Allows geocoding.
@@ -65,7 +64,6 @@ module Aws::LocationService
     #       suggestions from text.
     #
     #     * `GetPlace` - Allows finding a place by place ID.
-    #
     #   * **Route actions**
     #
     #     * `geo:CalculateRoute` - Allows point to point routing.
@@ -1835,7 +1833,7 @@ module Aws::LocationService
     #   a key-value pair helps manage, identify, search, and filter your
     #   resources by labelling them.
     #
-    #   * For example: \\\{ `"tag1" : "value1"`, `"tag2" : "value2"`\\}
+    #   * For example: \{ `"tag1" : "value1"`, `"tag2" : "value2"`}
     #
     #   ^
     #
@@ -4711,7 +4709,7 @@ module Aws::LocationService
     #   Tags that have been applied to the specified resource. Tags are
     #   mapped from the tag key to the tag value: `"TagKey" : "TagValue"`.
     #
-    #   * Format example: `\{"tag1" : "value1", "tag2" : "value2"\} `
+    #   * Format example: `{"tag1" : "value1", "tag2" : "value2"} `
     #
     #   ^
     #   @return [Hash<String,String>]

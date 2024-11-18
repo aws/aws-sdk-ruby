@@ -1382,9 +1382,10 @@ module Aws::DataSync
     #   Specifies one of the following task modes for your data transfer:
     #
     #   * `ENHANCED` - Transfer virtually unlimited numbers of objects with
-    #     enhanced metrics, more detailed logs, and higher performance than
-    #     Basic mode. Currently available for transfers between Amazon S3
-    #     locations.
+    #     higher performance than Basic mode. Enhanced mode tasks optimize
+    #     the data transfer process by listing, preparing, transferring, and
+    #     verifying data in parallel. Enhanced mode is currently available
+    #     for transfers between Amazon S3 locations.
     #
     #     <note markdown="1"> To create an Enhanced mode task, the IAM role that you use to call
     #     the `CreateTask` operation must have the
@@ -1393,8 +1394,11 @@ module Aws::DataSync
     #      </note>
     #
     #   * `BASIC` (default) - Transfer files or objects between Amazon Web
-    #     Services storage and on-premises, edge, or other cloud storage.
-    #     DataSync [quotas][1] apply.
+    #     Services storage and all other supported DataSync locations. Basic
+    #     mode tasks are subject to [quotas][1] on the number of files,
+    #     objects, and directories in a dataset. Basic mode sequentially
+    #     prepares, transfers, and verifies data, making it slower than
+    #     Enhanced mode for most workloads.
     #
     #   For more information, see [Understanding task mode differences][2].
     #
@@ -2704,9 +2708,8 @@ module Aws::DataSync
     #
     # @!attribute [rw] estimated_files_to_transfer
     #   The number of files, objects, and directories that DataSync expects
-    #   to transfer over the network. This value is calculated during the
-    #   task execution's `PREPARING` [step][1] before the `TRANSFERRING`
-    #   step.
+    #   to transfer over the network. This value is calculated while
+    #   DataSync [prepares][1] the transfer.
     #
     #   How this gets calculated depends primarily on your task’s [transfer
     #   mode][2] configuration:
@@ -2725,7 +2728,6 @@ module Aws::DataSync
     #     * **(Basic task mode only)** The number of items that DataSync
     #       expects to delete (if [PreserveDeletedFiles][4] is set to
     #       `REMOVE`).
-    #
     #   * If `TranserMode` is set to `ALL` - The calculation is based only
     #     on the items that DataSync finds at the source location.
     #
@@ -2745,8 +2747,8 @@ module Aws::DataSync
     # @!attribute [rw] files_transferred
     #   The number of files, objects, and directories that DataSync actually
     #   transfers over the network. This value is updated periodically
-    #   during the task execution's `TRANSFERRING` [step][1] when something
-    #   is read from the source and sent over the network.
+    #   during your task execution when something is read from the source
+    #   and sent over the network.
     #
     #   If DataSync fails to transfer something, this value can be less than
     #   `EstimatedFilesToTransfer`. In some cases, this value can also be
@@ -2754,10 +2756,6 @@ module Aws::DataSync
     #   implementation-specific for some location types, so don't use it as
     #   an exact indication of what's transferring or to monitor your task
     #   execution.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#understand-task-execution-statuses
     #   @return [Integer]
     #
     # @!attribute [rw] bytes_written
@@ -2781,14 +2779,9 @@ module Aws::DataSync
     #   is typically less than [BytesTransferred][1] unless the data isn't
     #   compressible.
     #
-    #   <note markdown="1"> Not currently supported with [Enhanced mode tasks][2].
-    #
-    #    </note>
-    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-BytesTransferred
-    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
     #   @return [Integer]
     #
     # @!attribute [rw] result
@@ -2807,9 +2800,9 @@ module Aws::DataSync
     #
     # @!attribute [rw] files_deleted
     #   The number of files, objects, and directories that DataSync actually
-    #   deletes in your destination location. If you don't [configure your
-    #   task][1] to delete data in the destination that isn't in the
-    #   source, the value is always `0`.
+    #   deletes in your destination location. If you don't configure your
+    #   task to [delete data in the destination that isn't in the
+    #   source][1], the value is always `0`.
     #
     #
     #
@@ -2847,9 +2840,9 @@ module Aws::DataSync
     #
     # @!attribute [rw] estimated_files_to_delete
     #   The number of files, objects, and directories that DataSync expects
-    #   to delete in your destination location. If you don't [configure
-    #   your task][1] to delete data in the destination that isn't in the
-    #   source, the value is always `0`.
+    #   to delete in your destination location. If you don't configure your
+    #   task to [delete data in the destination that isn't in the
+    #   source][1], the value is always `0`.
     #
     #
     #
@@ -2873,7 +2866,7 @@ module Aws::DataSync
     #
     #    </note>
     #
-    #   This metric isn't applicable if you configure your task to
+    #   This counter isn't applicable if you configure your task to
     #   [transfer all data][2]. In that scenario, DataSync copies everything
     #   from the source to the destination without comparing differences
     #   between the locations.
@@ -4646,7 +4639,6 @@ module Aws::DataSync
     #
     #       DataSync won't copy NTFS system access control lists (SACLs)
     #       with this option.
-    #
     #   * `OWNER_DACL_SACL` - For each copied object, DataSync copies the
     #     following metadata:
     #
@@ -4664,7 +4656,6 @@ module Aws::DataSync
     #       see required permissions for [SMB][2], [FSx for Windows File
     #       Server][3], or [FSx for ONTAP][4] (depending on the type of
     #       location in your transfer).
-    #
     #   * `NONE` - None of the SMB security descriptor components are
     #     copied. Destination objects are owned by the user that was
     #     provided for accessing the destination location. DACLs and SACLs
@@ -5567,7 +5558,7 @@ module Aws::DataSync
     #
     # @!attribute [rw] at_destination_for_delete
     #   The number of objects that DataSync finds at your destination
-    #   location. This metric is only applicable if you [configure your
+    #   location. This counter is only applicable if you [configure your
     #   task][1] to delete data in the destination that isn't in the
     #   source.
     #

@@ -268,6 +268,10 @@ module Aws::PinpointSMSVoiceV2
     #   The default sender ID used by the ConfigurationSet.
     #   @return [String]
     #
+    # @!attribute [rw] default_message_feedback_enabled
+    #   True if message feedback is enabled.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] created_timestamp
     #   The time when the ConfigurationSet was created, in [UNIX epoch
     #   time][1] format.
@@ -289,6 +293,7 @@ module Aws::PinpointSMSVoiceV2
       :event_destinations,
       :default_message_type,
       :default_sender_id,
+      :default_message_feedback_enabled,
       :created_timestamp,
       :protect_configuration_id)
       SENSITIVE = []
@@ -962,27 +967,30 @@ module Aws::PinpointSMSVoiceV2
     # @!attribute [rw] registration_status
     #   The status of the registration.
     #
+    #   * `CLOSED`: The phone number or sender ID has been deleted and you
+    #     must also delete the registration for the number.
+    #
     #   * `CREATED`: Your registration is created but not submitted.
     #
-    #   * `SUBMITTED`: Your registration has been submitted and is awaiting
-    #     review.
+    #   * `COMPLETE`: Your registration has been approved and your
+    #     origination identity has been created.
     #
-    #   * `REVIEWING`: Your registration has been accepted and is being
-    #     reviewed.
+    #   * `DELETED`: The registration has been deleted.
     #
     #   * `PROVISIONING`: Your registration has been approved and your
     #     origination identity is being created.
     #
-    #   * `COMPLETE`: Your registration has been approved and and your
-    #     origination identity has been created.
+    #   * `REQUIRES_AUTHENTICATION`: You need to complete email
+    #     authentication.
     #
     #   * `REQUIRES_UPDATES`: You must fix your registration and resubmit
     #     it.
     #
-    #   * `CLOSED`: The phone number or sender ID has been deleted and you
-    #     must also delete the registration for the number.
+    #   * `REVIEWING`: Your registration has been accepted and is being
+    #     reviewed.
     #
-    #   * `DELETED`: The registration has been deleted.
+    #   * `SUBMITTED`: Your registration has been submitted and is awaiting
+    #     review.
     #   @return [String]
     #
     # @!attribute [rw] current_version_number
@@ -1050,26 +1058,29 @@ module Aws::PinpointSMSVoiceV2
     # @!attribute [rw] registration_version_status
     #   The status of the registration.
     #
-    #   * `DRAFT`: The initial status of a registration version after it’s
-    #     created.
-    #
-    #   * `SUBMITTED`: Your registration has been submitted.
-    #
-    #   * `REVIEWING`: Your registration has been accepted and is being
-    #     reviewed.
-    #
     #   * `APPROVED`: Your registration has been approved.
-    #
-    #   * `DISCARDED`: You've abandon this version of their registration to
-    #     start over with a new version.
-    #
-    #   * `DENIED`: You must fix your registration and resubmit it.
-    #
-    #   * `REVOKED`: Your previously approved registration has been revoked.
     #
     #   * `ARCHIVED`: Your previously approved registration version moves
     #     into this status when a more recently submitted version is
     #     approved.
+    #
+    #   * `DENIED`: You must fix your registration and resubmit it.
+    #
+    #   * `DISCARDED`: You've abandon this version of their registration to
+    #     start over with a new version.
+    #
+    #   * `DRAFT`: The initial status of a registration version after it’s
+    #     created.
+    #
+    #   * `REQUIRES_AUTHENTICATION`: You need to complete email
+    #     authentication.
+    #
+    #   * `REVIEWING`: Your registration has been accepted and is being
+    #     reviewed.
+    #
+    #   * `REVOKED`: Your previously approved registration has been revoked.
+    #
+    #   * `SUBMITTED`: Your registration has been submitted.
     #   @return [String]
     #
     # @!attribute [rw] registration_version_status_history
@@ -1225,6 +1236,11 @@ module Aws::PinpointSMSVoiceV2
     #   The default Sender ID of the configuration set that was deleted.
     #   @return [String]
     #
+    # @!attribute [rw] default_message_feedback_enabled
+    #   True if the configuration set has message feedback enabled. By
+    #   default this is set to false.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] created_timestamp
     #   The time that the deleted configuration set was created in [UNIX
     #   epoch time][1] format.
@@ -1242,6 +1258,7 @@ module Aws::PinpointSMSVoiceV2
       :event_destinations,
       :default_message_type,
       :default_sender_id,
+      :default_message_feedback_enabled,
       :created_timestamp)
       SENSITIVE = []
       include Aws::Structure
@@ -1689,6 +1706,75 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_phone_number
+    #   The destination phone number in E.164 format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteProtectConfigurationRuleSetNumberOverrideRequest AWS API Documentation
+    #
+    class DeleteProtectConfigurationRuleSetNumberOverrideRequest < Struct.new(
+      :protect_configuration_id,
+      :destination_phone_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] protect_configuration_arn
+    #   The Amazon Resource Name (ARN) of the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_phone_number
+    #   The destination phone number in E.164 format.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time when the rule was created, in [UNIX epoch time][1] format.
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @!attribute [rw] action
+    #   The action associated with the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] iso_country_code
+    #   The two-character code, in ISO 3166-1 alpha-2 format, for the
+    #   country or region.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration_timestamp
+    #   The time when the resource-based policy was created, in [UNIX epoch
+    #   time][1] format.
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteProtectConfigurationRuleSetNumberOverrideResult AWS API Documentation
+    #
+    class DeleteProtectConfigurationRuleSetNumberOverrideResult < Struct.new(
+      :protect_configuration_arn,
+      :protect_configuration_id,
+      :destination_phone_number,
+      :created_timestamp,
+      :action,
+      :iso_country_code,
+      :expiration_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] registration_attachment_id
     #   The unique identifier for the registration attachment.
     #   @return [String]
@@ -1834,27 +1920,30 @@ module Aws::PinpointSMSVoiceV2
     # @!attribute [rw] registration_status
     #   The status of the registration.
     #
+    #   * `CLOSED`: The phone number or sender ID has been deleted and you
+    #     must also delete the registration for the number.
+    #
     #   * `CREATED`: Your registration is created but not submitted.
     #
-    #   * `SUBMITTED`: Your registration has been submitted and is awaiting
-    #     review.
+    #   * `COMPLETE`: Your registration has been approved and your
+    #     origination identity has been created.
     #
-    #   * `REVIEWING`: Your registration has been accepted and is being
-    #     reviewed.
+    #   * `DELETED`: The registration has been deleted.
     #
     #   * `PROVISIONING`: Your registration has been approved and your
     #     origination identity is being created.
     #
-    #   * `COMPLETE`: Your registration has been approved and and your
-    #     origination identity has been created.
+    #   * `REQUIRES_AUTHENTICATION`: You need to complete email
+    #     authentication.
     #
     #   * `REQUIRES_UPDATES`: You must fix your registration and resubmit
     #     it.
     #
-    #   * `CLOSED`: The phone number or sender ID has been deleted and you
-    #     must also delete the registration for the number.
+    #   * `REVIEWING`: Your registration has been accepted and is being
+    #     reviewed.
     #
-    #   * `DELETED`: The registration has been deleted.
+    #   * `SUBMITTED`: Your registration has been submitted and is awaiting
+    #     review.
     #   @return [String]
     #
     # @!attribute [rw] current_version_number
@@ -2984,7 +3073,7 @@ module Aws::PinpointSMSVoiceV2
     end
 
     # @!attribute [rw] verified_destination_number_ids
-    #   An array of VerifiedDestinationNumberid to retreive.
+    #   An array of VerifiedDestinationNumberid to retrieve.
     #   @return [Array<String>]
     #
     # @!attribute [rw] destination_phone_numbers
@@ -3186,26 +3275,29 @@ module Aws::PinpointSMSVoiceV2
     # @!attribute [rw] registration_version_status
     #   The status of the registration version.
     #
-    #   * `DRAFT`: The initial status of a registration version after it’s
-    #     created.
-    #
-    #   * `SUBMITTED`: Your registration has been submitted.
-    #
-    #   * `REVIEWING`: Your registration has been accepted and is being
-    #     reviewed.
-    #
     #   * `APPROVED`: Your registration has been approved.
-    #
-    #   * `DISCARDED`: You've abandon this version of their registration to
-    #     start over with a new version.
-    #
-    #   * `DENIED`: You must fix your registration and resubmit it.
-    #
-    #   * `REVOKED`: Your previously approved registration has been revoked.
     #
     #   * `ARCHIVED`: Your previously approved registration version moves
     #     into this status when a more recently submitted version is
     #     approved.
+    #
+    #   * `DENIED`: You must fix your registration and resubmit it.
+    #
+    #   * `DISCARDED`: You've abandon this version of their registration to
+    #     start over with a new version.
+    #
+    #   * `DRAFT`: The initial status of a registration version after it’s
+    #     created.
+    #
+    #   * `REQUIRES_AUTHENTICATION`: You need to complete email
+    #     authentication.
+    #
+    #   * `REVIEWING`: Your registration has been accepted and is being
+    #     reviewed.
+    #
+    #   * `REVOKED`: Your previously approved registration has been revoked.
+    #
+    #   * `SUBMITTED`: Your registration has been submitted.
     #   @return [String]
     #
     # @!attribute [rw] registration_version_status_history
@@ -3516,6 +3608,63 @@ module Aws::PinpointSMSVoiceV2
       :pool_arn,
       :pool_id,
       :origination_identities,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   An array of ProtectConfigurationRuleSetNumberOverrideFilterItem
+    #   objects to filter the results.
+    #   @return [Array<Types::ProtectConfigurationRuleSetNumberOverrideFilterItem>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results. You
+    #   don't need to supply a value for this field in the initial request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per each request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/ListProtectConfigurationRuleSetNumberOverridesRequest AWS API Documentation
+    #
+    class ListProtectConfigurationRuleSetNumberOverridesRequest < Struct.new(
+      :protect_configuration_id,
+      :filters,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] protect_configuration_arn
+    #   The Amazon Resource Name (ARN) of the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_set_number_overrides
+    #   An array of RuleSetNumberOverrides objects.
+    #   @return [Array<Types::ProtectConfigurationRuleSetNumberOverride>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results. You
+    #   don't need to supply a value for this field in the initial request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/ListProtectConfigurationRuleSetNumberOverridesResult AWS API Documentation
+    #
+    class ListProtectConfigurationRuleSetNumberOverridesResult < Struct.new(
+      :protect_configuration_arn,
+      :protect_configuration_id,
+      :rule_set_number_overrides,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -4077,6 +4226,67 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
+    # Provides details on a RuleSetNumberOverride.
+    #
+    # @!attribute [rw] destination_phone_number
+    #   The destination phone number in E.164 format.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time when the rule was created, in [UNIX epoch time][1] format.
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @!attribute [rw] action
+    #   The action for the rule to perform of either blocking or allowing
+    #   messages to the destination phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] iso_country_code
+    #   The two-character code, in ISO 3166-1 alpha-2 format, for the
+    #   country or region.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration_timestamp
+    #   The time the rule will expire at. If `ExpirationTimestamp` is not
+    #   set then the rule will not expire.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/ProtectConfigurationRuleSetNumberOverride AWS API Documentation
+    #
+    class ProtectConfigurationRuleSetNumberOverride < Struct.new(
+      :destination_phone_number,
+      :created_timestamp,
+      :action,
+      :iso_country_code,
+      :expiration_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The information for a protect configuration rule set number override
+    # that meets a specified criteria.
+    #
+    # @!attribute [rw] name
+    #   The name of the attribute to filter on.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   An array values to filter for.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/ProtectConfigurationRuleSetNumberOverrideFilterItem AWS API Documentation
+    #
+    class ProtectConfigurationRuleSetNumberOverrideFilterItem < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] origination_identity
     #   The origination identity to use such as a PhoneNumberId,
     #   PhoneNumberArn, SenderId or SenderIdArn. You can use
@@ -4149,6 +4359,40 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] message_id
+    #   The unique identifier for the message.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_feedback_status
+    #   Set the message feedback to be either `RECEIVED` or `FAILED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/PutMessageFeedbackRequest AWS API Documentation
+    #
+    class PutMessageFeedbackRequest < Struct.new(
+      :message_id,
+      :message_feedback_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message_id
+    #   The unique identifier for the message.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_feedback_status
+    #   The current status of the message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/PutMessageFeedbackResult AWS API Documentation
+    #
+    class PutMessageFeedbackResult < Struct.new(
+      :message_id,
+      :message_feedback_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] opt_out_list_name
     #   The OptOutListName or OptOutListArn to add the phone number to.
     #
@@ -4203,6 +4447,93 @@ module Aws::PinpointSMSVoiceV2
       :opted_out_number,
       :opted_out_timestamp,
       :end_user_opted_out)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you don't specify a client token, a
+    #   randomly generated token is used for the request to ensure
+    #   idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_phone_number
+    #   The destination phone number in E.164 format.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The action for the rule to either block or allow messages to the
+    #   destination phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration_timestamp
+    #   The time the rule will expire at. If `ExpirationTimestamp` is not
+    #   set then the rule does not expire.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/PutProtectConfigurationRuleSetNumberOverrideRequest AWS API Documentation
+    #
+    class PutProtectConfigurationRuleSetNumberOverrideRequest < Struct.new(
+      :client_token,
+      :protect_configuration_id,
+      :destination_phone_number,
+      :action,
+      :expiration_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] protect_configuration_arn
+    #   The Amazon Resource Name (ARN) of the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_phone_number
+    #   The destination phone number in E.164 format.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time when the rule was created, in [UNIX epoch time][1] format.
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @!attribute [rw] action
+    #   The action for the rule to take.
+    #   @return [String]
+    #
+    # @!attribute [rw] iso_country_code
+    #   The two-character code, in ISO 3166-1 alpha-2 format, for the
+    #   country or region.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration_timestamp
+    #   The time the rule will expire at.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/PutProtectConfigurationRuleSetNumberOverrideResult AWS API Documentation
+    #
+    class PutProtectConfigurationRuleSetNumberOverrideResult < Struct.new(
+      :protect_configuration_arn,
+      :protect_configuration_id,
+      :destination_phone_number,
+      :created_timestamp,
+      :action,
+      :iso_country_code,
+      :expiration_timestamp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4656,27 +4987,30 @@ module Aws::PinpointSMSVoiceV2
     # @!attribute [rw] registration_status
     #   The status of the registration.
     #
+    #   * `CLOSED`: The phone number or sender ID has been deleted and you
+    #     must also delete the registration for the number.
+    #
     #   * `CREATED`: Your registration is created but not submitted.
     #
-    #   * `SUBMITTED`: Your registration has been submitted and is awaiting
-    #     review.
+    #   * `COMPLETE`: Your registration has been approved and your
+    #     origination identity has been created.
     #
-    #   * `REVIEWING`: Your registration has been accepted and is being
-    #     reviewed.
+    #   * `DELETED`: The registration has been deleted.
     #
     #   * `PROVISIONING`: Your registration has been approved and your
     #     origination identity is being created.
     #
-    #   * `COMPLETE`: Your registration has been approved and and your
-    #     origination identity has been created.
+    #   * `REQUIRES_AUTHENTICATION`: You need to complete email
+    #     authentication.
     #
     #   * `REQUIRES_UPDATES`: You must fix your registration and resubmit
     #     it.
     #
-    #   * `CLOSED`: The phone number or sender ID has been deleted and you
-    #     must also delete the registration for the number.
+    #   * `REVIEWING`: Your registration has been accepted and is being
+    #     reviewed.
     #
-    #   * `DELETED`: The registration has been deleted.
+    #   * `SUBMITTED`: Your registration has been submitted and is awaiting
+    #     review.
     #   @return [String]
     #
     # @!attribute [rw] current_version_number
@@ -4882,26 +5216,29 @@ module Aws::PinpointSMSVoiceV2
     # @!attribute [rw] registration_version_status
     #   The status of the registration.
     #
-    #   * `DRAFT`: The initial status of a registration version after it’s
-    #     created.
-    #
-    #   * `SUBMITTED`: Your registration has been submitted.
-    #
-    #   * `REVIEWING`: Your registration has been accepted and is being
-    #     reviewed.
-    #
     #   * `APPROVED`: Your registration has been approved.
-    #
-    #   * `DISCARDED`: You've abandon this version of their registration to
-    #     start over with a new version.
-    #
-    #   * `DENIED`: You must fix your registration and resubmit it.
-    #
-    #   * `REVOKED`: Your previously approved registration has been revoked.
     #
     #   * `ARCHIVED`: Your previously approved registration version moves
     #     into this status when a more recently submitted version is
     #     approved.
+    #
+    #   * `DENIED`: You must fix your registration and resubmit it.
+    #
+    #   * `DISCARDED`: You've abandon this version of their registration to
+    #     start over with a new version.
+    #
+    #   * `DRAFT`: The initial status of a registration version after it’s
+    #     created.
+    #
+    #   * `REQUIRES_AUTHENTICATION`: You need to complete email
+    #     authentication.
+    #
+    #   * `REVIEWING`: Your registration has been accepted and is being
+    #     reviewed.
+    #
+    #   * `REVOKED`: Your previously approved registration has been revoked.
+    #
+    #   * `SUBMITTED`: Your registration has been submitted.
     #   @return [String]
     #
     # @!attribute [rw] registration_version_status_history
@@ -4948,6 +5285,15 @@ module Aws::PinpointSMSVoiceV2
     # @!attribute [rw] reviewing_timestamp
     #   The time when the registration was in the reviewing state, in [UNIX
     #   epoch time][1] format.
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @!attribute [rw] requires_authentication_timestamp
+    #   The time when the registration was in the requires authentication
+    #   state, in [UNIX epoch time][1] format.
     #
     #
     #
@@ -5005,6 +5351,7 @@ module Aws::PinpointSMSVoiceV2
       :draft_timestamp,
       :submitted_timestamp,
       :reviewing_timestamp,
+      :requires_authentication_timestamp,
       :approved_timestamp,
       :discarded_timestamp,
       :denied_timestamp,
@@ -5681,7 +6028,8 @@ module Aws::PinpointSMSVoiceV2
     #   @return [String]
     #
     # @!attribute [rw] time_to_live
-    #   How long the text message is valid for. By default this is 72 hours.
+    #   How long the media message is valid for. By default this is 72
+    #   hours.
     #   @return [Integer]
     #
     # @!attribute [rw] context
@@ -5698,6 +6046,12 @@ module Aws::PinpointSMSVoiceV2
     #   The unique identifier of the protect configuration to use.
     #   @return [String]
     #
+    # @!attribute [rw] message_feedback_enabled
+    #   Set to true to enable message feedback for the message. When a user
+    #   receives the message you need to update the message status using
+    #   PutMessageFeedback.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SendMediaMessageRequest AWS API Documentation
     #
     class SendMediaMessageRequest < Struct.new(
@@ -5710,7 +6064,8 @@ module Aws::PinpointSMSVoiceV2
       :time_to_live,
       :context,
       :dry_run,
-      :protect_configuration_id)
+      :protect_configuration_id,
+      :message_feedback_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5821,6 +6176,12 @@ module Aws::PinpointSMSVoiceV2
     #   The unique identifier for the protect configuration.
     #   @return [String]
     #
+    # @!attribute [rw] message_feedback_enabled
+    #   Set to true to enable message feedback for the message. When a user
+    #   receives the message you need to update the message status using
+    #   PutMessageFeedback.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SendTextMessageRequest AWS API Documentation
     #
     class SendTextMessageRequest < Struct.new(
@@ -5835,7 +6196,8 @@ module Aws::PinpointSMSVoiceV2
       :context,
       :destination_country_parameters,
       :dry_run,
-      :protect_configuration_id)
+      :protect_configuration_id,
+      :message_feedback_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5920,6 +6282,12 @@ module Aws::PinpointSMSVoiceV2
     #   The unique identifier for the protect configuration.
     #   @return [String]
     #
+    # @!attribute [rw] message_feedback_enabled
+    #   Set to true to enable message feedback for the message. When a user
+    #   receives the message you need to update the message status using
+    #   PutMessageFeedback.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SendVoiceMessageRequest AWS API Documentation
     #
     class SendVoiceMessageRequest < Struct.new(
@@ -5933,7 +6301,8 @@ module Aws::PinpointSMSVoiceV2
       :time_to_live,
       :context,
       :dry_run,
-      :protect_configuration_id)
+      :protect_configuration_id,
+      :message_feedback_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6093,6 +6462,46 @@ module Aws::PinpointSMSVoiceV2
     class SetAccountDefaultProtectConfigurationResult < Struct.new(
       :default_protect_configuration_arn,
       :default_protect_configuration_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configuration_set_name
+    #   The name of the configuration set to use. This can be either the
+    #   ConfigurationSetName or ConfigurationSetArn.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_feedback_enabled
+    #   Set to true to enable message feedback.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SetDefaultMessageFeedbackEnabledRequest AWS API Documentation
+    #
+    class SetDefaultMessageFeedbackEnabledRequest < Struct.new(
+      :configuration_set_name,
+      :message_feedback_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configuration_set_arn
+    #   The arn of the configuration set.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_set_name
+    #   The name of the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_feedback_enabled
+    #   True if message feedback is enabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SetDefaultMessageFeedbackEnabledResult AWS API Documentation
+    #
+    class SetDefaultMessageFeedbackEnabledResult < Struct.new(
+      :configuration_set_arn,
+      :configuration_set_name,
+      :message_feedback_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6342,26 +6751,29 @@ module Aws::PinpointSMSVoiceV2
     # @!attribute [rw] registration_version_status
     #   The status of the registration version.
     #
-    #   * `DRAFT`: The initial status of a registration version after it’s
-    #     created.
-    #
-    #   * `SUBMITTED`: Your registration has been submitted.
-    #
-    #   * `REVIEWING`: Your registration has been accepted and is being
-    #     reviewed.
-    #
     #   * `APPROVED`: Your registration has been approved.
-    #
-    #   * `DISCARDED`: You've abandon this version of their registration to
-    #     start over with a new version.
-    #
-    #   * `DENIED`: You must fix your registration and resubmit it.
-    #
-    #   * `REVOKED`: Your previously approved registration has been revoked.
     #
     #   * `ARCHIVED`: Your previously approved registration version moves
     #     into this status when a more recently submitted version is
     #     approved.
+    #
+    #   * `DENIED`: You must fix your registration and resubmit it.
+    #
+    #   * `DISCARDED`: You've abandon this version of their registration to
+    #     start over with a new version.
+    #
+    #   * `DRAFT`: The initial status of a registration version after it’s
+    #     created.
+    #
+    #   * `REQUIRES_AUTHENTICATION`: You need to complete email
+    #     authentication.
+    #
+    #   * `REVIEWING`: Your registration has been accepted and is being
+    #     reviewed.
+    #
+    #   * `REVOKED`: Your previously approved registration has been revoked.
+    #
+    #   * `SUBMITTED`: Your registration has been submitted.
     #   @return [String]
     #
     # @!attribute [rw] registration_version_status_history

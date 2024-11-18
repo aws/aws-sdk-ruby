@@ -222,7 +222,7 @@ module Aws::Inspector2
       attr_accessor last_modified_at: ::Time
       attr_accessor layers: ::Array[::String]
       attr_accessor package_type: ("IMAGE" | "ZIP")
-      attr_accessor runtime: ("NODEJS" | "NODEJS_12_X" | "NODEJS_14_X" | "NODEJS_16_X" | "JAVA_8" | "JAVA_8_AL2" | "JAVA_11" | "PYTHON_3_7" | "PYTHON_3_8" | "PYTHON_3_9" | "UNSUPPORTED" | "NODEJS_18_X" | "GO_1_X" | "JAVA_17" | "PYTHON_3_10")
+      attr_accessor runtime: ("NODEJS" | "NODEJS_12_X" | "NODEJS_14_X" | "NODEJS_16_X" | "JAVA_8" | "JAVA_8_AL2" | "JAVA_11" | "PYTHON_3_7" | "PYTHON_3_8" | "PYTHON_3_9" | "UNSUPPORTED" | "NODEJS_18_X" | "GO_1_X" | "JAVA_17" | "PYTHON_3_10" | "PYTHON_3_11" | "DOTNETCORE_3_1" | "DOTNET_6" | "DOTNET_7" | "RUBY_2_7" | "RUBY_3_2")
       attr_accessor version: ::String
       attr_accessor vpc_config: Types::LambdaVpcConfig
       SENSITIVE: []
@@ -1239,7 +1239,7 @@ module Aws::Inspector2
       attr_accessor function_name: ::String
       attr_accessor function_tags: ::Hash[::String, ::String]
       attr_accessor layers: ::Array[::String]
-      attr_accessor runtime: ("NODEJS" | "NODEJS_12_X" | "NODEJS_14_X" | "NODEJS_16_X" | "JAVA_8" | "JAVA_8_AL2" | "JAVA_11" | "PYTHON_3_7" | "PYTHON_3_8" | "PYTHON_3_9" | "UNSUPPORTED" | "NODEJS_18_X" | "GO_1_X" | "JAVA_17" | "PYTHON_3_10")
+      attr_accessor runtime: ("NODEJS" | "NODEJS_12_X" | "NODEJS_14_X" | "NODEJS_16_X" | "JAVA_8" | "JAVA_8_AL2" | "JAVA_11" | "PYTHON_3_7" | "PYTHON_3_8" | "PYTHON_3_9" | "UNSUPPORTED" | "NODEJS_18_X" | "GO_1_X" | "JAVA_17" | "PYTHON_3_10" | "PYTHON_3_11" | "DOTNETCORE_3_1" | "DOTNET_6" | "DOTNET_7" | "RUBY_2_7" | "RUBY_3_2")
       SENSITIVE: []
     end
 
@@ -1556,6 +1556,7 @@ module Aws::Inspector2
     class PackageFilter
       attr_accessor architecture: Types::StringFilter
       attr_accessor epoch: Types::NumberFilter
+      attr_accessor file_path: Types::StringFilter
       attr_accessor name: Types::StringFilter
       attr_accessor release: Types::StringFilter
       attr_accessor source_lambda_layer_arn: Types::StringFilter
@@ -2057,7 +2058,7 @@ module Aws::Inspector2
       attr_accessor file_path: ::String
       attr_accessor fixed_in_version: ::String
       attr_accessor name: ::String
-      attr_accessor package_manager: ("BUNDLER" | "CARGO" | "COMPOSER" | "NPM" | "NUGET" | "PIPENV" | "POETRY" | "YARN" | "GOBINARY" | "GOMOD" | "JAR" | "OS" | "PIP" | "PYTHONPKG" | "NODEPKG" | "POM" | "GEMSPEC")
+      attr_accessor package_manager: ("BUNDLER" | "CARGO" | "COMPOSER" | "NPM" | "NUGET" | "PIPENV" | "POETRY" | "YARN" | "GOBINARY" | "GOMOD" | "JAR" | "OS" | "PIP" | "PYTHONPKG" | "NODEPKG" | "POM" | "GEMSPEC" | "DOTNET_CORE")
       attr_accessor release: ::String
       attr_accessor remediation: ::String
       attr_accessor source_lambda_layer_arn: ::String

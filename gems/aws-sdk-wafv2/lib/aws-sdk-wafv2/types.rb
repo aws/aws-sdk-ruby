@@ -263,9 +263,9 @@ module Aws::WAFV2
     #     Internet Engineering Task Force (IETF) documentation [JavaScript
     #     Object Notation (JSON) Pointer][1].
     #
-    #     For example, for the JSON payload `\{ "form": \{
+    #     For example, for the JSON payload `{ "form": {
     #     "primaryaddressline1": "THE_ADDRESS1", "primaryaddressline2":
-    #     "THE_ADDRESS2", "primaryaddressline3": "THE_ADDRESS3" \} \}`, the
+    #     "THE_ADDRESS2", "primaryaddressline3": "THE_ADDRESS3" } }`, the
     #     address field idenfiers are `/form/primaryaddressline1`,
     #     `/form/primaryaddressline2`, and `/form/primaryaddressline3`.
     #
@@ -297,7 +297,7 @@ module Aws::WAFV2
     # This is used in the FieldToMatch specification for some web request
     # component types.
     #
-    # JSON specification: `"All": \{\}`
+    # JSON specification: `"All": {}`
     #
     # @api private
     #
@@ -310,7 +310,7 @@ module Aws::WAFV2
     # This is used in the FieldToMatch specification for some web request
     # component types.
     #
-    # JSON specification: `"AllQueryArguments": \{\}`
+    # JSON specification: `"AllQueryArguments": {}`
     #
     # @api private
     #
@@ -444,8 +444,8 @@ module Aws::WAFV2
     #
     #    </note>
     #
-    #   Example JSON: ` \{ "API_GATEWAY": "KB_48", "APP_RUNNER_SERVICE":
-    #   "KB_32" \}`
+    #   Example JSON: ` { "API_GATEWAY": "KB_48", "APP_RUNNER_SERVICE":
+    #   "KB_32" }`
     #
     #   For Application Load Balancer and AppSync, the limit is fixed at 8
     #   KB (8,192 bytes).
@@ -788,7 +788,6 @@ module Aws::WAFV2
     #   * If the request contains an `Accept` header with a value of
     #     `text/html`, the response includes a JavaScript page interstitial
     #     with a challenge script.
-    #
     #   Challenges run silent browser interrogations in the background, and
     #   don't generally affect the end user experience.
     #
@@ -946,8 +945,8 @@ module Aws::WAFV2
     # You must specify exactly one setting: either `All`, `IncludedCookies`,
     # or `ExcludedCookies`.
     #
-    # Example JSON: `"MatchPattern": \{ "IncludedCookies": [
-    # "session-id-time", "session-id" ] \}`
+    # Example JSON: `"MatchPattern": { "IncludedCookies": [
+    # "session-id-time", "session-id" ] }`
     #
     # @!attribute [rw] all
     #   Inspect all cookies.
@@ -980,8 +979,8 @@ module Aws::WAFV2
     # This is used to indicate the web request component to inspect, in the
     # FieldToMatch specification.
     #
-    # Example JSON: `"Cookies": \{ "MatchPattern": \{ "All": \{\} \},
-    # "MatchScope": "KEY", "OversizeHandling": "MATCH" \}`
+    # Example JSON: `"Cookies": { "MatchPattern": { "All": {} },
+    # "MatchScope": "KEY", "OversizeHandling": "MATCH" }`
     #
     # @!attribute [rw] match_pattern
     #   The filter to use to identify the subset of cookies to inspect in a
@@ -990,8 +989,8 @@ module Aws::WAFV2
     #   You must specify exactly one setting: either `All`,
     #   `IncludedCookies`, or `ExcludedCookies`.
     #
-    #   Example JSON: `"MatchPattern": \{ "IncludedCookies": [
-    #   "session-id-time", "session-id" ] \}`
+    #   Example JSON: `"MatchPattern": { "IncludedCookies": [
+    #   "session-id-time", "session-id" ] }`
     #   @return [Types::CookieMatchPattern]
     #
     # @!attribute [rw] match_scope
@@ -1477,8 +1476,8 @@ module Aws::WAFV2
     #   accepts the resource's host domain plus all domains in the token
     #   domain list, including their prefixed subdomains.
     #
-    #   Example JSON: `"TokenDomains": \{ "mywebsite.com",
-    #   "myotherwebsite.com" \}`
+    #   Example JSON: `"TokenDomains": { "mywebsite.com",
+    #   "myotherwebsite.com" }`
     #
     #   Public suffixes aren't allowed. For example, you can't use
     #   `gov.au` or `co.uk` as token domains.
@@ -2334,9 +2333,8 @@ module Aws::WAFV2
     #     Engineering Task Force (IETF) documentation [JavaScript Object
     #     Notation (JSON) Pointer][1].
     #
-    #     For example, for the JSON payload `\{ "form": \{ "email":
-    #     "THE_EMAIL" \} \}`, the email field specification is
-    #     `/form/email`.
+    #     For example, for the JSON payload `{ "form": { "email":
+    #     "THE_EMAIL" } }`, the email field specification is `/form/email`.
     #
     #   * For form encoded payload types, use the HTML form names.
     #
@@ -2389,11 +2387,11 @@ module Aws::WAFV2
     #
     #   Example JSON for a `QueryString` field to match:
     #
-    #   ` "FieldToMatch": \{ "QueryString": \{\} \}`
+    #   ` "FieldToMatch": { "QueryString": {} }`
     #
     #   Example JSON for a `Method` field to match specification:
     #
-    #   ` "FieldToMatch": \{ "Method": \{ "Name": "DELETE" \} \}`
+    #   ` "FieldToMatch": { "Method": { "Name": "DELETE" } }`
     #
     # * In a logging configuration, this is used in the `RedactedFields`
     #   property to specify a field to redact from the logging records. For
@@ -2418,7 +2416,7 @@ module Aws::WAFV2
     #   for example, `User-Agent` or `Referer`. This setting isn't case
     #   sensitive.
     #
-    #   Example JSON: `"SingleHeader": \{ "Name": "haystack" \}`
+    #   Example JSON: `"SingleHeader": { "Name": "haystack" }`
     #
     #   Alternately, you can filter and inspect all headers with the
     #   `Headers` `FieldToMatch` setting.
@@ -2429,7 +2427,7 @@ module Aws::WAFV2
     #   argument to inspect, such as *UserName* or *SalesRegion*. The name
     #   can be up to 30 characters long and isn't case sensitive.
     #
-    #   Example JSON: `"SingleQueryArgument": \{ "Name": "myArgument" \}`
+    #   Example JSON: `"SingleQueryArgument": { "Name": "myArgument" }`
     #   @return [Types::SingleQueryArgument]
     #
     # @!attribute [rw] all_query_arguments
@@ -3628,8 +3626,8 @@ module Aws::WAFV2
     # You must specify exactly one setting: either `All`, `IncludedHeaders`,
     # or `ExcludedHeaders`.
     #
-    # Example JSON: `"MatchPattern": \{ "ExcludedHeaders": [
-    # "KeyToExclude1", "KeyToExclude2" ] \}`
+    # Example JSON: `"MatchPattern": { "ExcludedHeaders": [ "KeyToExclude1",
+    # "KeyToExclude2" ] }`
     #
     # @!attribute [rw] all
     #   Inspect all headers.
@@ -3699,8 +3697,8 @@ module Aws::WAFV2
     # If you want to inspect just the value of a single header, use the
     # `SingleHeader` `FieldToMatch` setting instead.
     #
-    # Example JSON: `"Headers": \{ "MatchPattern": \{ "All": \{\} \},
-    # "MatchScope": "KEY", "OversizeHandling": "MATCH" \}`
+    # Example JSON: `"Headers": { "MatchPattern": { "All": {} },
+    # "MatchScope": "KEY", "OversizeHandling": "MATCH" }`
     #
     # @!attribute [rw] match_pattern
     #   The filter to use to identify the subset of headers to inspect in a
@@ -3709,8 +3707,8 @@ module Aws::WAFV2
     #   You must specify exactly one setting: either `All`,
     #   `IncludedHeaders`, or `ExcludedHeaders`.
     #
-    #   Example JSON: `"MatchPattern": \{ "ExcludedHeaders": [
-    #   "KeyToExclude1", "KeyToExclude2" ] \}`
+    #   Example JSON: `"MatchPattern": { "ExcludedHeaders": [
+    #   "KeyToExclude1", "KeyToExclude2" ] }`
     #   @return [Types::HeaderMatchPattern]
     #
     # @!attribute [rw] match_scope
@@ -4081,8 +4079,8 @@ module Aws::WAFV2
     # inspects only the parts of the JSON that result from the matches that
     # you indicate.
     #
-    # Example JSON: `"JsonBody": \{ "MatchPattern": \{ "All": \{\} \},
-    # "MatchScope": "ALL" \}`
+    # Example JSON: `"JsonBody": { "MatchPattern": { "All": {} },
+    # "MatchScope": "ALL" }`
     #
     # For additional information about this request component option, see
     # [JSON body][1] in the *WAF Developer Guide*.
@@ -5856,7 +5854,7 @@ module Aws::WAFV2
     # This is used in the FieldToMatch specification for some web request
     # component types.
     #
-    # JSON specification: `"Method": \{\}`
+    # JSON specification: `"Method": {}`
     #
     # @api private
     #
@@ -5911,7 +5909,7 @@ module Aws::WAFV2
     # This is used in the context of other settings, for example to specify
     # values for RuleAction and web ACL DefaultAction.
     #
-    # JSON specification: `"None": \{\}`
+    # JSON specification: `"None": {}`
     #
     # @api private
     #
@@ -6009,8 +6007,8 @@ module Aws::WAFV2
     #     Engineering Task Force (IETF) documentation [JavaScript Object
     #     Notation (JSON) Pointer][1].
     #
-    #     For example, for the JSON payload `\{ "form": \{ "password":
-    #     "THE_PASSWORD" \} \}`, the password field specification is
+    #     For example, for the JSON payload `{ "form": { "password":
+    #     "THE_PASSWORD" } }`, the password field specification is
     #     `/form/password`.
     #
     #   * For form encoded payload types, use the HTML form names.
@@ -6047,9 +6045,9 @@ module Aws::WAFV2
     #     Internet Engineering Task Force (IETF) documentation [JavaScript
     #     Object Notation (JSON) Pointer][1].
     #
-    #     For example, for the JSON payload `\{ "form": \{
+    #     For example, for the JSON payload `{ "form": {
     #     "primaryphoneline1": "THE_PHONE1", "primaryphoneline2":
-    #     "THE_PHONE2", "primaryphoneline3": "THE_PHONE3" \} \}`, the phone
+    #     "THE_PHONE2", "primaryphoneline3": "THE_PHONE3" } }`, the phone
     #     number field identifiers are `/form/primaryphoneline1`,
     #     `/form/primaryphoneline2`, and `/form/primaryphoneline3`.
     #
@@ -6230,7 +6228,7 @@ module Aws::WAFV2
     # This is used in the FieldToMatch specification for some web request
     # component types.
     #
-    # JSON specification: `"QueryString": \{\}`
+    # JSON specification: `"QueryString": {}`
     #
     # @api private
     #
@@ -6279,7 +6277,6 @@ module Aws::WAFV2
     #   * IP address 10.1.1.1: count 3
     #
     #   * IP address 127.0.0.0: count 1
-    #
     # * If the aggregation criteria is HTTP method, then each individual
     #   HTTP method is an aggregation instance. The aggregation instances
     #   and request counts for our example would be the following:
@@ -6287,7 +6284,6 @@ module Aws::WAFV2
     #   * HTTP method POST: count 2
     #
     #   * HTTP method GET: count 2
-    #
     # * If the aggregation criteria is IP address and HTTP method, then each
     #   IP address and each HTTP method would contribute to the combined
     #   aggregation instance. The aggregation instances and request counts
@@ -6645,7 +6641,7 @@ module Aws::WAFV2
     # `RateBasedStatementCustomKey`. The JSON specification for using the
     # forwarded IP address doesn't explicitly use this data type.
     #
-    # JSON specification: `"ForwardedIP": \{\}`
+    # JSON specification: `"ForwardedIP": {}`
     #
     # When you use this specification, you must also configure the forwarded
     # IP address in the rate-based statement's `ForwardedIPConfig`.
@@ -6661,7 +6657,7 @@ module Aws::WAFV2
     # aggregation instance. If you use just the HTTP method as your custom
     # key, then each method fully defines an aggregation instance.
     #
-    # JSON specification: `"RateLimitHTTPMethod": \{\}`
+    # JSON specification: `"RateLimitHTTPMethod": {}`
     #
     # @api private
     #
@@ -6709,7 +6705,7 @@ module Aws::WAFV2
     # along with the IP address. To aggregate on only the IP address, in
     # your rate-based statement's `AggregateKeyType`, specify `IP`.
     #
-    # JSON specification: `"RateLimitIP": \{\}`
+    # JSON specification: `"RateLimitIP": {}`
     #
     # @api private
     #
@@ -7037,8 +7033,8 @@ module Aws::WAFV2
     #
     #  </note>
     #
-    # Example JSON: ` \{ "API_GATEWAY": "KB_48", "APP_RUNNER_SERVICE":
-    # "KB_32" \}`
+    # Example JSON: ` { "API_GATEWAY": "KB_48", "APP_RUNNER_SERVICE":
+    # "KB_32" }`
     #
     # For Application Load Balancer and AppSync, the limit is fixed at 8 KB
     # (8,192 bytes).
@@ -7094,8 +7090,8 @@ module Aws::WAFV2
     #     Engineering Task Force (IETF) documentation [JavaScript Object
     #     Notation (JSON) Pointer][1].
     #
-    #     For example, for the JSON payload `\{ "form": \{ "username":
-    #     "THE_USERNAME" \} \}`, the username field specification is
+    #     For example, for the JSON payload `{ "form": { "username":
+    #     "THE_USERNAME" } }`, the username field specification is
     #     `/form/username`.
     #
     #   * For form encoded payload types, use the HTML form names.
@@ -7119,8 +7115,8 @@ module Aws::WAFV2
     #     Engineering Task Force (IETF) documentation [JavaScript Object
     #     Notation (JSON) Pointer][1].
     #
-    #     For example, for the JSON payload `\{ "form": \{ "password":
-    #     "THE_PASSWORD" \} \}`, the password field specification is
+    #     For example, for the JSON payload `{ "form": { "password":
+    #     "THE_PASSWORD" } }`, the password field specification is
     #     `/form/password`.
     #
     #   * For form encoded payload types, use the HTML form names.
@@ -7170,8 +7166,8 @@ module Aws::WAFV2
     #     Engineering Task Force (IETF) documentation [JavaScript Object
     #     Notation (JSON) Pointer][1].
     #
-    #     For example, for the JSON payload `\{ "form": \{ "username":
-    #     "THE_USERNAME" \} \}`, the username field specification is
+    #     For example, for the JSON payload `{ "form": { "username":
+    #     "THE_USERNAME" } }`, the username field specification is
     #     `/form/username`.
     #
     #   * For form encoded payload types, use the HTML form names.
@@ -7195,8 +7191,8 @@ module Aws::WAFV2
     #     Engineering Task Force (IETF) documentation [JavaScript Object
     #     Notation (JSON) Pointer][1].
     #
-    #     For example, for the JSON payload `\{ "form": \{ "password":
-    #     "THE_PASSWORD" \} \}`, the password field specification is
+    #     For example, for the JSON payload `{ "form": { "password":
+    #     "THE_PASSWORD" } }`, the password field specification is
     #     `/form/password`.
     #
     #   * For form encoded payload types, use the HTML form names.
@@ -7220,9 +7216,8 @@ module Aws::WAFV2
     #     Engineering Task Force (IETF) documentation [JavaScript Object
     #     Notation (JSON) Pointer][1].
     #
-    #     For example, for the JSON payload `\{ "form": \{ "email":
-    #     "THE_EMAIL" \} \}`, the email field specification is
-    #     `/form/email`.
+    #     For example, for the JSON payload `{ "form": { "email":
+    #     "THE_EMAIL" } }`, the email field specification is `/form/email`.
     #
     #   * For form encoded payload types, use the HTML form names.
     #
@@ -7249,9 +7244,9 @@ module Aws::WAFV2
     #     Internet Engineering Task Force (IETF) documentation [JavaScript
     #     Object Notation (JSON) Pointer][1].
     #
-    #     For example, for the JSON payload `\{ "form": \{
+    #     For example, for the JSON payload `{ "form": {
     #     "primaryphoneline1": "THE_PHONE1", "primaryphoneline2":
-    #     "THE_PHONE2", "primaryphoneline3": "THE_PHONE3" \} \}`, the phone
+    #     "THE_PHONE2", "primaryphoneline3": "THE_PHONE3" } }`, the phone
     #     number field identifiers are `/form/primaryphoneline1`,
     #     `/form/primaryphoneline2`, and `/form/primaryphoneline3`.
     #
@@ -7282,9 +7277,9 @@ module Aws::WAFV2
     #     Internet Engineering Task Force (IETF) documentation [JavaScript
     #     Object Notation (JSON) Pointer][1].
     #
-    #     For example, for the JSON payload `\{ "form": \{
+    #     For example, for the JSON payload `{ "form": {
     #     "primaryaddressline1": "THE_ADDRESS1", "primaryaddressline2":
-    #     "THE_ADDRESS2", "primaryaddressline3": "THE_ADDRESS3" \} \}`, the
+    #     "THE_ADDRESS2", "primaryaddressline3": "THE_ADDRESS3" } }`, the
     #     address field idenfiers are `/form/primaryaddressline1`,
     #     `/form/primaryaddressline2`, and `/form/primaryaddressline3`.
     #
@@ -8079,7 +8074,7 @@ module Aws::WAFV2
     # This is used to indicate the web request component to inspect, in the
     # FieldToMatch specification.
     #
-    # Example JSON: `"SingleHeader": \{ "Name": "haystack" \}`
+    # Example JSON: `"SingleHeader": { "Name": "haystack" }`
     #
     # @!attribute [rw] name
     #   The name of the query header to inspect.
@@ -8099,7 +8094,7 @@ module Aws::WAFV2
     # This is used to indicate the web request component to inspect, in the
     # FieldToMatch specification.
     #
-    # Example JSON: `"SingleQueryArgument": \{ "Name": "myArgument" \}`
+    # Example JSON: `"SingleQueryArgument": { "Name": "myArgument" }`
     #
     # @!attribute [rw] name
     #   The name of the query argument to inspect.
@@ -8385,7 +8380,6 @@ module Aws::WAFV2
     #     * IP address 10.1.1.1: count 3
     #
     #     * IP address 127.0.0.0: count 1
-    #
     #   * If the aggregation criteria is HTTP method, then each individual
     #     HTTP method is an aggregation instance. The aggregation instances
     #     and request counts for our example would be the following:
@@ -8393,7 +8387,6 @@ module Aws::WAFV2
     #     * HTTP method POST: count 2
     #
     #     * HTTP method GET: count 2
-    #
     #   * If the aggregation criteria is IP address and HTTP method, then
     #     each IP address and each HTTP method would contribute to the
     #     combined aggregation instance. The aggregation instances and
@@ -9207,8 +9200,8 @@ module Aws::WAFV2
     #   accepts the resource's host domain plus all domains in the token
     #   domain list, including their prefixed subdomains.
     #
-    #   Example JSON: `"TokenDomains": \{ "mywebsite.com",
-    #   "myotherwebsite.com" \}`
+    #   Example JSON: `"TokenDomains": { "mywebsite.com",
+    #   "myotherwebsite.com" }`
     #
     #   Public suffixes aren't allowed. For example, you can't use
     #   `gov.au` or `co.uk` as token domains.
@@ -9279,7 +9272,7 @@ module Aws::WAFV2
     # This is used in the FieldToMatch specification for some web request
     # component types.
     #
-    # JSON specification: `"UriPath": \{\}`
+    # JSON specification: `"UriPath": {}`
     #
     # @api private
     #
@@ -9303,8 +9296,8 @@ module Aws::WAFV2
     #     Engineering Task Force (IETF) documentation [JavaScript Object
     #     Notation (JSON) Pointer][1].
     #
-    #     For example, for the JSON payload `\{ "form": \{ "username":
-    #     "THE_USERNAME" \} \}`, the username field specification is
+    #     For example, for the JSON payload `{ "form": { "username":
+    #     "THE_USERNAME" } }`, the username field specification is
     #     `/form/username`.
     #
     #   * For form encoded payload types, use the HTML form names.

@@ -8261,9 +8261,9 @@ module Aws::MediaConvert
     #   specifying these values, you also need to set up your cloud TIC
     #   server. These settings apply to every output in your job. The
     #   MediaConvert implementation is currently with the following Nielsen
-    #   versions: Nielsen Watermark SDK Version 5.2.1 Nielsen NLM Watermark
-    #   Engine Version 1.2.7 Nielsen Watermark Authenticator \[SID\_TIC\]
-    #   Version \[5.0.0\]
+    #   versions: Nielsen Watermark SDK Version 6.0.13 Nielsen NLM Watermark
+    #   Engine Version 1.3.3 Nielsen Watermark Authenticator \[SID\_TIC\]
+    #   Version \[7.0.0\]
     #   @return [Types::NielsenNonLinearWatermarkSettings]
     #
     # @!attribute [rw] output_groups
@@ -8480,9 +8480,9 @@ module Aws::MediaConvert
     #   specifying these values, you also need to set up your cloud TIC
     #   server. These settings apply to every output in your job. The
     #   MediaConvert implementation is currently with the following Nielsen
-    #   versions: Nielsen Watermark SDK Version 5.2.1 Nielsen NLM Watermark
-    #   Engine Version 1.2.7 Nielsen Watermark Authenticator \[SID\_TIC\]
-    #   Version \[5.0.0\]
+    #   versions: Nielsen Watermark SDK Version 6.0.13 Nielsen NLM Watermark
+    #   Engine Version 1.3.3 Nielsen Watermark Authenticator \[SID\_TIC\]
+    #   Version \[7.0.0\]
     #   @return [Types::NielsenNonLinearWatermarkSettings]
     #
     # @!attribute [rw] output_groups
@@ -10610,9 +10610,9 @@ module Aws::MediaConvert
     # specifying these values, you also need to set up your cloud TIC
     # server. These settings apply to every output in your job. The
     # MediaConvert implementation is currently with the following Nielsen
-    # versions: Nielsen Watermark SDK Version 5.2.1 Nielsen NLM Watermark
-    # Engine Version 1.2.7 Nielsen Watermark Authenticator \[SID\_TIC\]
-    # Version \[5.0.0\]
+    # versions: Nielsen Watermark SDK Version 6.0.13 Nielsen NLM Watermark
+    # Engine Version 1.3.3 Nielsen Watermark Authenticator \[SID\_TIC\]
+    # Version \[7.0.0\]
     #
     # @!attribute [rw] active_watermark_process
     #   Choose the type of Nielsen watermarks that you want in your outputs.

@@ -248,6 +248,7 @@ module Aws::CloudTrail
       attr_accessor error_message: ::String
       attr_accessor delivery_s3_uri: ::String
       attr_accessor delivery_status: ("SUCCESS" | "FAILED" | "FAILED_SIGNING_FILE" | "PENDING" | "RESOURCE_NOT_FOUND" | "ACCESS_DENIED" | "ACCESS_DENIED_SIGNING_FILE" | "CANCELLED" | "UNKNOWN")
+      attr_accessor prompt: ::String
       SENSITIVE: []
     end
 
@@ -346,6 +347,21 @@ module Aws::CloudTrail
       attr_accessor data_resources: ::Array[Types::DataResource]
       attr_accessor exclude_management_event_sources: ::Array[::String]
       SENSITIVE: []
+    end
+
+    class GenerateQueryRequest
+      attr_accessor event_data_stores: ::Array[::String]
+      attr_accessor prompt: ::String
+      SENSITIVE: []
+    end
+
+    class GenerateQueryResponse
+      attr_accessor query_statement: ::String
+      attr_accessor query_alias: ::String
+      SENSITIVE: []
+    end
+
+    class GenerateResponseException < Aws::EmptyStructure
     end
 
     class GetChannelRequest

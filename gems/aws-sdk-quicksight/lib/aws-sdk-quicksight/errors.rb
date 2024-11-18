@@ -34,6 +34,7 @@ module Aws::QuickSight
   # * {DomainNotWhitelistedException}
   # * {IdentityTypeNotSupportedException}
   # * {InternalFailureException}
+  # * {InternalServerException}
   # * {InvalidNextTokenException}
   # * {InvalidParameterValueException}
   # * {InvalidRequestException}
@@ -191,6 +192,21 @@ module Aws::QuickSight
       # @return [String]
       def request_id
         @data[:request_id]
+      end
+    end
+
+    class InternalServerException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::QuickSight::Types::InternalServerException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 

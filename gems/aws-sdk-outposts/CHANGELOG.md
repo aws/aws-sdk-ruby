@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2024-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.73.0 (2024-11-15)
+------------------
+
+* Feature - You can now purchase AWS Outposts rack or server capacity for a 5-year term with one of  the following payment options: All Upfront, Partial Upfront, and No Upfront.
+
+1.72.0 (2024-11-11)
+------------------
+
+* Feature - This release updates StartCapacityTask to allow an active Outpost to be modified. It also adds a new API to list all running EC2 instances on the Outpost.
+
 1.71.0 (2024-10-18)
 ------------------
 

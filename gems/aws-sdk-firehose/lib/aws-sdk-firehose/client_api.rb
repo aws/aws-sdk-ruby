@@ -62,6 +62,25 @@ module Aws::Firehose
     DataFormatConversionConfiguration = Shapes::StructureShape.new(name: 'DataFormatConversionConfiguration')
     DataTableColumns = Shapes::StringShape.new(name: 'DataTableColumns')
     DataTableName = Shapes::StringShape.new(name: 'DataTableName')
+    DatabaseColumnIncludeOrExcludeList = Shapes::ListShape.new(name: 'DatabaseColumnIncludeOrExcludeList')
+    DatabaseColumnList = Shapes::StructureShape.new(name: 'DatabaseColumnList')
+    DatabaseColumnName = Shapes::StringShape.new(name: 'DatabaseColumnName')
+    DatabaseEndpoint = Shapes::StringShape.new(name: 'DatabaseEndpoint')
+    DatabaseIncludeOrExcludeList = Shapes::ListShape.new(name: 'DatabaseIncludeOrExcludeList')
+    DatabaseList = Shapes::StructureShape.new(name: 'DatabaseList')
+    DatabaseName = Shapes::StringShape.new(name: 'DatabaseName')
+    DatabasePort = Shapes::IntegerShape.new(name: 'DatabasePort')
+    DatabaseSnapshotInfo = Shapes::StructureShape.new(name: 'DatabaseSnapshotInfo')
+    DatabaseSnapshotInfoList = Shapes::ListShape.new(name: 'DatabaseSnapshotInfoList')
+    DatabaseSourceAuthenticationConfiguration = Shapes::StructureShape.new(name: 'DatabaseSourceAuthenticationConfiguration')
+    DatabaseSourceConfiguration = Shapes::StructureShape.new(name: 'DatabaseSourceConfiguration')
+    DatabaseSourceDescription = Shapes::StructureShape.new(name: 'DatabaseSourceDescription')
+    DatabaseSourceVPCConfiguration = Shapes::StructureShape.new(name: 'DatabaseSourceVPCConfiguration')
+    DatabaseSurrogateKeyList = Shapes::ListShape.new(name: 'DatabaseSurrogateKeyList')
+    DatabaseTableIncludeOrExcludeList = Shapes::ListShape.new(name: 'DatabaseTableIncludeOrExcludeList')
+    DatabaseTableList = Shapes::StructureShape.new(name: 'DatabaseTableList')
+    DatabaseTableName = Shapes::StringShape.new(name: 'DatabaseTableName')
+    DatabaseType = Shapes::StringShape.new(name: 'DatabaseType')
     DefaultDocumentIdFormat = Shapes::StringShape.new(name: 'DefaultDocumentIdFormat')
     DeleteDeliveryStreamInput = Shapes::StructureShape.new(name: 'DeleteDeliveryStreamInput')
     DeleteDeliveryStreamOutput = Shapes::StructureShape.new(name: 'DeleteDeliveryStreamOutput')
@@ -180,6 +199,9 @@ module Aws::Firehose
     ParquetPageSizeBytes = Shapes::IntegerShape.new(name: 'ParquetPageSizeBytes')
     ParquetSerDe = Shapes::StructureShape.new(name: 'ParquetSerDe')
     ParquetWriterVersion = Shapes::StringShape.new(name: 'ParquetWriterVersion')
+    PartitionField = Shapes::StructureShape.new(name: 'PartitionField')
+    PartitionFields = Shapes::ListShape.new(name: 'PartitionFields')
+    PartitionSpec = Shapes::StructureShape.new(name: 'PartitionSpec')
     Password = Shapes::StringShape.new(name: 'Password')
     Prefix = Shapes::StringShape.new(name: 'Prefix')
     ProcessingConfiguration = Shapes::StructureShape.new(name: 'ProcessingConfiguration')
@@ -216,13 +238,17 @@ module Aws::Firehose
     S3DestinationConfiguration = Shapes::StructureShape.new(name: 'S3DestinationConfiguration')
     S3DestinationDescription = Shapes::StructureShape.new(name: 'S3DestinationDescription')
     S3DestinationUpdate = Shapes::StructureShape.new(name: 'S3DestinationUpdate')
+    SSLMode = Shapes::StringShape.new(name: 'SSLMode')
     SchemaConfiguration = Shapes::StructureShape.new(name: 'SchemaConfiguration')
+    SchemaEvolutionConfiguration = Shapes::StructureShape.new(name: 'SchemaEvolutionConfiguration')
     SecretARN = Shapes::StringShape.new(name: 'SecretARN')
     SecretsManagerConfiguration = Shapes::StructureShape.new(name: 'SecretsManagerConfiguration')
     SecurityGroupIdList = Shapes::ListShape.new(name: 'SecurityGroupIdList')
     Serializer = Shapes::StructureShape.new(name: 'Serializer')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SizeInMBs = Shapes::IntegerShape.new(name: 'SizeInMBs')
+    SnapshotRequestedBy = Shapes::StringShape.new(name: 'SnapshotRequestedBy')
+    SnapshotStatus = Shapes::StringShape.new(name: 'SnapshotStatus')
     SnowflakeAccountUrl = Shapes::StringShape.new(name: 'SnowflakeAccountUrl')
     SnowflakeBufferingHints = Shapes::StructureShape.new(name: 'SnowflakeBufferingHints')
     SnowflakeBufferingIntervalInSeconds = Shapes::IntegerShape.new(name: 'SnowflakeBufferingIntervalInSeconds')
@@ -260,7 +286,9 @@ module Aws::Firehose
     StartDeliveryStreamEncryptionOutput = Shapes::StructureShape.new(name: 'StartDeliveryStreamEncryptionOutput')
     StopDeliveryStreamEncryptionInput = Shapes::StructureShape.new(name: 'StopDeliveryStreamEncryptionInput')
     StopDeliveryStreamEncryptionOutput = Shapes::StructureShape.new(name: 'StopDeliveryStreamEncryptionOutput')
+    StringWithLettersDigitsUnderscoresDots = Shapes::StringShape.new(name: 'StringWithLettersDigitsUnderscoresDots')
     SubnetIdList = Shapes::ListShape.new(name: 'SubnetIdList')
+    TableCreationConfiguration = Shapes::StructureShape.new(name: 'TableCreationConfiguration')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagDeliveryStreamInput = Shapes::StructureShape.new(name: 'TagDeliveryStreamInput')
     TagDeliveryStreamInputTagList = Shapes::ListShape.new(name: 'TagDeliveryStreamInputTagList')
@@ -277,6 +305,8 @@ module Aws::Firehose
     Username = Shapes::StringShape.new(name: 'Username')
     VpcConfiguration = Shapes::StructureShape.new(name: 'VpcConfiguration')
     VpcConfigurationDescription = Shapes::StructureShape.new(name: 'VpcConfigurationDescription')
+    VpcEndpointServiceName = Shapes::StringShape.new(name: 'VpcEndpointServiceName')
+    WarehouseLocation = Shapes::StringShape.new(name: 'WarehouseLocation')
 
     AmazonOpenSearchServerlessBufferingHints.add_member(:interval_in_seconds, Shapes::ShapeRef.new(shape: AmazonOpenSearchServerlessBufferingIntervalInSeconds, location_name: "IntervalInSeconds"))
     AmazonOpenSearchServerlessBufferingHints.add_member(:size_in_m_bs, Shapes::ShapeRef.new(shape: AmazonOpenSearchServerlessBufferingSizeInMBs, location_name: "SizeInMBs"))
@@ -381,6 +411,7 @@ module Aws::Firehose
     BufferingHints.struct_class = Types::BufferingHints
 
     CatalogConfiguration.add_member(:catalog_arn, Shapes::ShapeRef.new(shape: GlueDataCatalogARN, location_name: "CatalogARN"))
+    CatalogConfiguration.add_member(:warehouse_location, Shapes::ShapeRef.new(shape: WarehouseLocation, location_name: "WarehouseLocation"))
     CatalogConfiguration.struct_class = Types::CatalogConfiguration
 
     CloudWatchLoggingOptions.add_member(:enabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "Enabled"))
@@ -415,6 +446,7 @@ module Aws::Firehose
     CreateDeliveryStreamInput.add_member(:msk_source_configuration, Shapes::ShapeRef.new(shape: MSKSourceConfiguration, location_name: "MSKSourceConfiguration"))
     CreateDeliveryStreamInput.add_member(:snowflake_destination_configuration, Shapes::ShapeRef.new(shape: SnowflakeDestinationConfiguration, location_name: "SnowflakeDestinationConfiguration"))
     CreateDeliveryStreamInput.add_member(:iceberg_destination_configuration, Shapes::ShapeRef.new(shape: IcebergDestinationConfiguration, location_name: "IcebergDestinationConfiguration"))
+    CreateDeliveryStreamInput.add_member(:database_source_configuration, Shapes::ShapeRef.new(shape: DatabaseSourceConfiguration, location_name: "DatabaseSourceConfiguration"))
     CreateDeliveryStreamInput.struct_class = Types::CreateDeliveryStreamInput
 
     CreateDeliveryStreamOutput.add_member(:delivery_stream_arn, Shapes::ShapeRef.new(shape: DeliveryStreamARN, location_name: "DeliveryStreamARN"))
@@ -425,6 +457,69 @@ module Aws::Firehose
     DataFormatConversionConfiguration.add_member(:output_format_configuration, Shapes::ShapeRef.new(shape: OutputFormatConfiguration, location_name: "OutputFormatConfiguration"))
     DataFormatConversionConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "Enabled"))
     DataFormatConversionConfiguration.struct_class = Types::DataFormatConversionConfiguration
+
+    DatabaseColumnIncludeOrExcludeList.member = Shapes::ShapeRef.new(shape: DatabaseColumnName)
+
+    DatabaseColumnList.add_member(:include, Shapes::ShapeRef.new(shape: DatabaseColumnIncludeOrExcludeList, location_name: "Include"))
+    DatabaseColumnList.add_member(:exclude, Shapes::ShapeRef.new(shape: DatabaseColumnIncludeOrExcludeList, location_name: "Exclude"))
+    DatabaseColumnList.struct_class = Types::DatabaseColumnList
+
+    DatabaseIncludeOrExcludeList.member = Shapes::ShapeRef.new(shape: DatabaseName)
+
+    DatabaseList.add_member(:include, Shapes::ShapeRef.new(shape: DatabaseIncludeOrExcludeList, location_name: "Include"))
+    DatabaseList.add_member(:exclude, Shapes::ShapeRef.new(shape: DatabaseIncludeOrExcludeList, location_name: "Exclude"))
+    DatabaseList.struct_class = Types::DatabaseList
+
+    DatabaseSnapshotInfo.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyStringWithoutWhitespace, required: true, location_name: "Id"))
+    DatabaseSnapshotInfo.add_member(:table, Shapes::ShapeRef.new(shape: DatabaseTableName, required: true, location_name: "Table"))
+    DatabaseSnapshotInfo.add_member(:request_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "RequestTimestamp"))
+    DatabaseSnapshotInfo.add_member(:requested_by, Shapes::ShapeRef.new(shape: SnapshotRequestedBy, required: true, location_name: "RequestedBy"))
+    DatabaseSnapshotInfo.add_member(:status, Shapes::ShapeRef.new(shape: SnapshotStatus, required: true, location_name: "Status"))
+    DatabaseSnapshotInfo.add_member(:failure_description, Shapes::ShapeRef.new(shape: FailureDescription, location_name: "FailureDescription"))
+    DatabaseSnapshotInfo.struct_class = Types::DatabaseSnapshotInfo
+
+    DatabaseSnapshotInfoList.member = Shapes::ShapeRef.new(shape: DatabaseSnapshotInfo)
+
+    DatabaseSourceAuthenticationConfiguration.add_member(:secrets_manager_configuration, Shapes::ShapeRef.new(shape: SecretsManagerConfiguration, required: true, location_name: "SecretsManagerConfiguration"))
+    DatabaseSourceAuthenticationConfiguration.struct_class = Types::DatabaseSourceAuthenticationConfiguration
+
+    DatabaseSourceConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: DatabaseType, required: true, location_name: "Type"))
+    DatabaseSourceConfiguration.add_member(:endpoint, Shapes::ShapeRef.new(shape: DatabaseEndpoint, required: true, location_name: "Endpoint"))
+    DatabaseSourceConfiguration.add_member(:port, Shapes::ShapeRef.new(shape: DatabasePort, required: true, location_name: "Port"))
+    DatabaseSourceConfiguration.add_member(:ssl_mode, Shapes::ShapeRef.new(shape: SSLMode, location_name: "SSLMode"))
+    DatabaseSourceConfiguration.add_member(:databases, Shapes::ShapeRef.new(shape: DatabaseList, required: true, location_name: "Databases"))
+    DatabaseSourceConfiguration.add_member(:tables, Shapes::ShapeRef.new(shape: DatabaseTableList, required: true, location_name: "Tables"))
+    DatabaseSourceConfiguration.add_member(:columns, Shapes::ShapeRef.new(shape: DatabaseColumnList, location_name: "Columns"))
+    DatabaseSourceConfiguration.add_member(:surrogate_keys, Shapes::ShapeRef.new(shape: DatabaseSurrogateKeyList, location_name: "SurrogateKeys"))
+    DatabaseSourceConfiguration.add_member(:snapshot_watermark_table, Shapes::ShapeRef.new(shape: DatabaseTableName, required: true, location_name: "SnapshotWatermarkTable"))
+    DatabaseSourceConfiguration.add_member(:database_source_authentication_configuration, Shapes::ShapeRef.new(shape: DatabaseSourceAuthenticationConfiguration, required: true, location_name: "DatabaseSourceAuthenticationConfiguration"))
+    DatabaseSourceConfiguration.add_member(:database_source_vpc_configuration, Shapes::ShapeRef.new(shape: DatabaseSourceVPCConfiguration, required: true, location_name: "DatabaseSourceVPCConfiguration"))
+    DatabaseSourceConfiguration.struct_class = Types::DatabaseSourceConfiguration
+
+    DatabaseSourceDescription.add_member(:type, Shapes::ShapeRef.new(shape: DatabaseType, location_name: "Type"))
+    DatabaseSourceDescription.add_member(:endpoint, Shapes::ShapeRef.new(shape: DatabaseEndpoint, location_name: "Endpoint"))
+    DatabaseSourceDescription.add_member(:port, Shapes::ShapeRef.new(shape: DatabasePort, location_name: "Port"))
+    DatabaseSourceDescription.add_member(:ssl_mode, Shapes::ShapeRef.new(shape: SSLMode, location_name: "SSLMode"))
+    DatabaseSourceDescription.add_member(:databases, Shapes::ShapeRef.new(shape: DatabaseList, location_name: "Databases"))
+    DatabaseSourceDescription.add_member(:tables, Shapes::ShapeRef.new(shape: DatabaseTableList, location_name: "Tables"))
+    DatabaseSourceDescription.add_member(:columns, Shapes::ShapeRef.new(shape: DatabaseColumnList, location_name: "Columns"))
+    DatabaseSourceDescription.add_member(:surrogate_keys, Shapes::ShapeRef.new(shape: DatabaseColumnIncludeOrExcludeList, location_name: "SurrogateKeys"))
+    DatabaseSourceDescription.add_member(:snapshot_watermark_table, Shapes::ShapeRef.new(shape: DatabaseTableName, location_name: "SnapshotWatermarkTable"))
+    DatabaseSourceDescription.add_member(:snapshot_info, Shapes::ShapeRef.new(shape: DatabaseSnapshotInfoList, location_name: "SnapshotInfo"))
+    DatabaseSourceDescription.add_member(:database_source_authentication_configuration, Shapes::ShapeRef.new(shape: DatabaseSourceAuthenticationConfiguration, location_name: "DatabaseSourceAuthenticationConfiguration"))
+    DatabaseSourceDescription.add_member(:database_source_vpc_configuration, Shapes::ShapeRef.new(shape: DatabaseSourceVPCConfiguration, location_name: "DatabaseSourceVPCConfiguration"))
+    DatabaseSourceDescription.struct_class = Types::DatabaseSourceDescription
+
+    DatabaseSourceVPCConfiguration.add_member(:vpc_endpoint_service_name, Shapes::ShapeRef.new(shape: VpcEndpointServiceName, required: true, location_name: "VpcEndpointServiceName"))
+    DatabaseSourceVPCConfiguration.struct_class = Types::DatabaseSourceVPCConfiguration
+
+    DatabaseSurrogateKeyList.member = Shapes::ShapeRef.new(shape: NonEmptyStringWithoutWhitespace)
+
+    DatabaseTableIncludeOrExcludeList.member = Shapes::ShapeRef.new(shape: DatabaseTableName)
+
+    DatabaseTableList.add_member(:include, Shapes::ShapeRef.new(shape: DatabaseTableIncludeOrExcludeList, location_name: "Include"))
+    DatabaseTableList.add_member(:exclude, Shapes::ShapeRef.new(shape: DatabaseTableIncludeOrExcludeList, location_name: "Exclude"))
+    DatabaseTableList.struct_class = Types::DatabaseTableList
 
     DeleteDeliveryStreamInput.add_member(:delivery_stream_name, Shapes::ShapeRef.new(shape: DeliveryStreamName, required: true, location_name: "DeliveryStreamName"))
     DeleteDeliveryStreamInput.add_member(:allow_force_delete, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "AllowForceDelete"))
@@ -485,9 +580,10 @@ module Aws::Firehose
 
     DestinationDescriptionList.member = Shapes::ShapeRef.new(shape: DestinationDescription)
 
-    DestinationTableConfiguration.add_member(:destination_table_name, Shapes::ShapeRef.new(shape: NonEmptyStringWithoutWhitespace, required: true, location_name: "DestinationTableName"))
-    DestinationTableConfiguration.add_member(:destination_database_name, Shapes::ShapeRef.new(shape: NonEmptyStringWithoutWhitespace, required: true, location_name: "DestinationDatabaseName"))
+    DestinationTableConfiguration.add_member(:destination_table_name, Shapes::ShapeRef.new(shape: StringWithLettersDigitsUnderscoresDots, required: true, location_name: "DestinationTableName"))
+    DestinationTableConfiguration.add_member(:destination_database_name, Shapes::ShapeRef.new(shape: StringWithLettersDigitsUnderscoresDots, required: true, location_name: "DestinationDatabaseName"))
     DestinationTableConfiguration.add_member(:unique_keys, Shapes::ShapeRef.new(shape: ListOfNonEmptyStringsWithoutWhitespace, location_name: "UniqueKeys"))
+    DestinationTableConfiguration.add_member(:partition_spec, Shapes::ShapeRef.new(shape: PartitionSpec, location_name: "PartitionSpec"))
     DestinationTableConfiguration.add_member(:s3_error_output_prefix, Shapes::ShapeRef.new(shape: ErrorOutputPrefix, location_name: "S3ErrorOutputPrefix"))
     DestinationTableConfiguration.struct_class = Types::DestinationTableConfiguration
 
@@ -678,6 +774,8 @@ module Aws::Firehose
     HttpEndpointRetryOptions.struct_class = Types::HttpEndpointRetryOptions
 
     IcebergDestinationConfiguration.add_member(:destination_table_configuration_list, Shapes::ShapeRef.new(shape: DestinationTableConfigurationList, location_name: "DestinationTableConfigurationList"))
+    IcebergDestinationConfiguration.add_member(:schema_evolution_configuration, Shapes::ShapeRef.new(shape: SchemaEvolutionConfiguration, location_name: "SchemaEvolutionConfiguration"))
+    IcebergDestinationConfiguration.add_member(:table_creation_configuration, Shapes::ShapeRef.new(shape: TableCreationConfiguration, location_name: "TableCreationConfiguration"))
     IcebergDestinationConfiguration.add_member(:buffering_hints, Shapes::ShapeRef.new(shape: BufferingHints, location_name: "BufferingHints"))
     IcebergDestinationConfiguration.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
     IcebergDestinationConfiguration.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
@@ -689,6 +787,8 @@ module Aws::Firehose
     IcebergDestinationConfiguration.struct_class = Types::IcebergDestinationConfiguration
 
     IcebergDestinationDescription.add_member(:destination_table_configuration_list, Shapes::ShapeRef.new(shape: DestinationTableConfigurationList, location_name: "DestinationTableConfigurationList"))
+    IcebergDestinationDescription.add_member(:schema_evolution_configuration, Shapes::ShapeRef.new(shape: SchemaEvolutionConfiguration, location_name: "SchemaEvolutionConfiguration"))
+    IcebergDestinationDescription.add_member(:table_creation_configuration, Shapes::ShapeRef.new(shape: TableCreationConfiguration, location_name: "TableCreationConfiguration"))
     IcebergDestinationDescription.add_member(:buffering_hints, Shapes::ShapeRef.new(shape: BufferingHints, location_name: "BufferingHints"))
     IcebergDestinationDescription.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
     IcebergDestinationDescription.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
@@ -700,6 +800,8 @@ module Aws::Firehose
     IcebergDestinationDescription.struct_class = Types::IcebergDestinationDescription
 
     IcebergDestinationUpdate.add_member(:destination_table_configuration_list, Shapes::ShapeRef.new(shape: DestinationTableConfigurationList, location_name: "DestinationTableConfigurationList"))
+    IcebergDestinationUpdate.add_member(:schema_evolution_configuration, Shapes::ShapeRef.new(shape: SchemaEvolutionConfiguration, location_name: "SchemaEvolutionConfiguration"))
+    IcebergDestinationUpdate.add_member(:table_creation_configuration, Shapes::ShapeRef.new(shape: TableCreationConfiguration, location_name: "TableCreationConfiguration"))
     IcebergDestinationUpdate.add_member(:buffering_hints, Shapes::ShapeRef.new(shape: BufferingHints, location_name: "BufferingHints"))
     IcebergDestinationUpdate.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
     IcebergDestinationUpdate.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
@@ -803,6 +905,14 @@ module Aws::Firehose
     ParquetSerDe.add_member(:max_padding_bytes, Shapes::ShapeRef.new(shape: NonNegativeIntegerObject, location_name: "MaxPaddingBytes"))
     ParquetSerDe.add_member(:writer_version, Shapes::ShapeRef.new(shape: ParquetWriterVersion, location_name: "WriterVersion"))
     ParquetSerDe.struct_class = Types::ParquetSerDe
+
+    PartitionField.add_member(:source_name, Shapes::ShapeRef.new(shape: NonEmptyStringWithoutWhitespace, required: true, location_name: "SourceName"))
+    PartitionField.struct_class = Types::PartitionField
+
+    PartitionFields.member = Shapes::ShapeRef.new(shape: PartitionField)
+
+    PartitionSpec.add_member(:identity, Shapes::ShapeRef.new(shape: PartitionFields, location_name: "Identity"))
+    PartitionSpec.struct_class = Types::PartitionSpec
 
     ProcessingConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "Enabled"))
     ProcessingConfiguration.add_member(:processors, Shapes::ShapeRef.new(shape: ProcessorList, location_name: "Processors"))
@@ -940,6 +1050,9 @@ module Aws::Firehose
     SchemaConfiguration.add_member(:version_id, Shapes::ShapeRef.new(shape: NonEmptyStringWithoutWhitespace, location_name: "VersionId"))
     SchemaConfiguration.struct_class = Types::SchemaConfiguration
 
+    SchemaEvolutionConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "Enabled"))
+    SchemaEvolutionConfiguration.struct_class = Types::SchemaEvolutionConfiguration
+
     SecretsManagerConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretARN, location_name: "SecretARN"))
     SecretsManagerConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
     SecretsManagerConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "Enabled"))
@@ -1033,6 +1146,7 @@ module Aws::Firehose
 
     SourceDescription.add_member(:kinesis_stream_source_description, Shapes::ShapeRef.new(shape: KinesisStreamSourceDescription, location_name: "KinesisStreamSourceDescription"))
     SourceDescription.add_member(:msk_source_description, Shapes::ShapeRef.new(shape: MSKSourceDescription, location_name: "MSKSourceDescription"))
+    SourceDescription.add_member(:database_source_description, Shapes::ShapeRef.new(shape: DatabaseSourceDescription, location_name: "DatabaseSourceDescription"))
     SourceDescription.struct_class = Types::SourceDescription
 
     SplunkBufferingHints.add_member(:interval_in_seconds, Shapes::ShapeRef.new(shape: SplunkBufferingIntervalInSeconds, location_name: "IntervalInSeconds"))
@@ -1093,6 +1207,9 @@ module Aws::Firehose
     StopDeliveryStreamEncryptionOutput.struct_class = Types::StopDeliveryStreamEncryptionOutput
 
     SubnetIdList.member = Shapes::ShapeRef.new(shape: NonEmptyStringWithoutWhitespace)
+
+    TableCreationConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "Enabled"))
+    TableCreationConfiguration.struct_class = Types::TableCreationConfiguration
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))

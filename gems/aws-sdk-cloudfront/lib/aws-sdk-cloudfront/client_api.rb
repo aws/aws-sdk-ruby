@@ -3164,6 +3164,7 @@ module Aws::CloudFront
         "serviceFullName" => "Amazon CloudFront",
         "serviceId" => "CloudFront",
         "signatureVersion" => "v4",
+        "signingName" => "cloudfront",
         "uid" => "cloudfront-2020-05-31",
       }
 
@@ -3173,11 +3174,11 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/distribution/{TargetDistributionId}/associate-alias"
         o.input = Shapes::ShapeRef.new(shape: AssociateAliasRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchDistribution)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionCNAMEs)
         o.errors << Shapes::ShapeRef.new(shape: IllegalUpdate)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
       end)
 
       api.add_operation(:copy_distribution, Seahorse::Model::Operation.new.tap do |o|
@@ -3191,70 +3192,70 @@ module Aws::CloudFront
           }
         )
         o.output = Shapes::ShapeRef.new(shape: CopyDistributionResult)
-        o.errors << Shapes::ShapeRef.new(shape: CNAMEAlreadyExists)
-        o.errors << Shapes::ShapeRef.new(shape: DistributionAlreadyExists)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidOrigin)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginAccessIdentity)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginAccessControl)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchDistribution)
-        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyTrustedSigners)
-        o.errors << Shapes::ShapeRef.new(shape: TrustedSignerDoesNotExist)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidViewerCertificate)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidMinimumProtocolVersion)
-        o.errors << Shapes::ShapeRef.new(shape: MissingBody)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionCNAMEs)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributions)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDefaultRootObject)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRelativePath)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidErrorCode)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidResponseCode)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequiredProtocol)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchOrigin)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyOrigins)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyOriginGroupsPerDistribution)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyCacheBehaviors)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyCookieNamesInWhiteList)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidForwardCookies)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyHeadersInForwardedValues)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidHeadersForS3Origin)
-        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyCertificates)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidLocationCode)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidGeoRestrictionParameter)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidProtocolSettings)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidTTLOrder)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidWebACLId)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyOriginCustomHeaders)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyQueryStringParameters)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidQueryStringParameters)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithLambdaAssociations)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithSingleFunctionARN)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyLambdaFunctionAssociations)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidLambdaFunctionAssociation)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithFunctionAssociations)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyFunctionAssociations)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidFunctionAssociation)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginReadTimeout)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginKeepaliveTimeout)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchFieldLevelEncryptionConfig)
-        o.errors << Shapes::ShapeRef.new(shape: IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToFieldLevelEncryptionConfig)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchCachePolicy)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToCachePolicy)
         o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToOriginAccessControl)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchResponseHeadersPolicy)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToResponseHeadersPolicy)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginRequestPolicy)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToOriginRequestPolicy)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToKeyGroup)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDefaultRootObject)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidQueryStringParameters)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTrustedSigners)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyCookieNamesInWhiteList)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchFieldLevelEncryptionConfig)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidErrorCode)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidProtocolSettings)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyFunctionAssociations)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyOriginCustomHeaders)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOrigin)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidForwardCookies)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidMinimumProtocolVersion)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchCachePolicy)
         o.errors << Shapes::ShapeRef.new(shape: TooManyKeyGroupsAssociatedToDistribution)
-        o.errors << Shapes::ShapeRef.new(shape: TrustedKeyGroupDoesNotExist)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchRealtimeLogConfig)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToCachePolicy)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequiredProtocol)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithFunctionAssociations)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyOriginGroupsPerDistribution)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributions)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTTLOrder)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginKeepaliveTimeout)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginReadTimeout)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginAccessControl)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidHeadersForS3Origin)
+        o.errors << Shapes::ShapeRef.new(shape: TrustedSignerDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidWebACLId)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithSingleFunctionARN)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRelativePath)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyLambdaFunctionAssociations)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchDistribution)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginRequestPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToFieldLevelEncryptionConfig)
+        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLocationCode)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginAccessIdentity)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionCNAMEs)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToOriginRequestPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyQueryStringParameters)
         o.errors << Shapes::ShapeRef.new(shape: RealtimeLogConfigOwnerMismatch)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+        o.errors << Shapes::ShapeRef.new(shape: MissingBody)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyHeadersInForwardedValues)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLambdaFunctionAssociation)
+        o.errors << Shapes::ShapeRef.new(shape: CNAMEAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyCertificates)
+        o.errors << Shapes::ShapeRef.new(shape: TrustedKeyGroupDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToResponseHeadersPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchResponseHeadersPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchRealtimeLogConfig)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResponseCode)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGeoRestrictionParameter)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyOrigins)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidViewerCertificate)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidFunctionAssociation)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithLambdaAssociations)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToKeyGroup)
+        o.errors << Shapes::ShapeRef.new(shape: DistributionAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchOrigin)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyCacheBehaviors)
       end)
 
       api.add_operation(:create_cache_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -3264,12 +3265,12 @@ module Aws::CloudFront
         o.input = Shapes::ShapeRef.new(shape: CreateCachePolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateCachePolicyResult)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
-        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
-        o.errors << Shapes::ShapeRef.new(shape: CachePolicyAlreadyExists)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyCachePolicies)
         o.errors << Shapes::ShapeRef.new(shape: TooManyHeadersInCachePolicy)
+        o.errors << Shapes::ShapeRef.new(shape: CachePolicyAlreadyExists)
         o.errors << Shapes::ShapeRef.new(shape: TooManyCookiesInCachePolicy)
+        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyCachePolicies)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: TooManyQueryStringsInCachePolicy)
       end)
 
@@ -3279,11 +3280,11 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/origin-access-identity/cloudfront"
         o.input = Shapes::ShapeRef.new(shape: CreateCloudFrontOriginAccessIdentityRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateCloudFrontOriginAccessIdentityResult)
-        o.errors << Shapes::ShapeRef.new(shape: CloudFrontOriginAccessIdentityAlreadyExists)
         o.errors << Shapes::ShapeRef.new(shape: MissingBody)
         o.errors << Shapes::ShapeRef.new(shape: TooManyCloudFrontOriginAccessIdentities)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: CloudFrontOriginAccessIdentityAlreadyExists)
       end)
 
       api.add_operation(:create_continuous_deployment_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -3293,11 +3294,11 @@ module Aws::CloudFront
         o.input = Shapes::ShapeRef.new(shape: CreateContinuousDeploymentPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateContinuousDeploymentPolicyResult)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
-        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
-        o.errors << Shapes::ShapeRef.new(shape: ContinuousDeploymentPolicyAlreadyExists)
         o.errors << Shapes::ShapeRef.new(shape: TooManyContinuousDeploymentPolicies)
         o.errors << Shapes::ShapeRef.new(shape: StagingDistributionInUse)
+        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
+        o.errors << Shapes::ShapeRef.new(shape: ContinuousDeploymentPolicyAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
       end)
 
       api.add_operation(:create_distribution, Seahorse::Model::Operation.new.tap do |o|
@@ -3306,71 +3307,71 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/distribution"
         o.input = Shapes::ShapeRef.new(shape: CreateDistributionRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateDistributionResult)
-        o.errors << Shapes::ShapeRef.new(shape: CNAMEAlreadyExists)
-        o.errors << Shapes::ShapeRef.new(shape: DistributionAlreadyExists)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidOrigin)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginAccessIdentity)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginAccessControl)
-        o.errors << Shapes::ShapeRef.new(shape: IllegalOriginAccessConfiguration)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToOriginAccessControl)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyTrustedSigners)
-        o.errors << Shapes::ShapeRef.new(shape: TrustedSignerDoesNotExist)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidViewerCertificate)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidMinimumProtocolVersion)
-        o.errors << Shapes::ShapeRef.new(shape: MissingBody)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionCNAMEs)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributions)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToOriginAccessControl)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDefaultRootObject)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRelativePath)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidErrorCode)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidResponseCode)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequiredProtocol)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchOrigin)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyOrigins)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyOriginGroupsPerDistribution)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyCacheBehaviors)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyCookieNamesInWhiteList)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidForwardCookies)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyHeadersInForwardedValues)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidHeadersForS3Origin)
-        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyCertificates)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidLocationCode)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidGeoRestrictionParameter)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidProtocolSettings)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidTTLOrder)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidWebACLId)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyOriginCustomHeaders)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyQueryStringParameters)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDomainNameForOriginAccessControl)
         o.errors << Shapes::ShapeRef.new(shape: InvalidQueryStringParameters)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithLambdaAssociations)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithSingleFunctionARN)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyLambdaFunctionAssociations)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidLambdaFunctionAssociation)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithFunctionAssociations)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyFunctionAssociations)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidFunctionAssociation)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginReadTimeout)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginKeepaliveTimeout)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTrustedSigners)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyCookieNamesInWhiteList)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchFieldLevelEncryptionConfig)
-        o.errors << Shapes::ShapeRef.new(shape: IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToFieldLevelEncryptionConfig)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidErrorCode)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalOriginAccessConfiguration)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidProtocolSettings)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyFunctionAssociations)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyOriginCustomHeaders)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOrigin)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidForwardCookies)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidMinimumProtocolVersion)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchCachePolicy)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToCachePolicy)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchResponseHeadersPolicy)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToResponseHeadersPolicy)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginRequestPolicy)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToOriginRequestPolicy)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToKeyGroup)
         o.errors << Shapes::ShapeRef.new(shape: TooManyKeyGroupsAssociatedToDistribution)
-        o.errors << Shapes::ShapeRef.new(shape: TrustedKeyGroupDoesNotExist)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchRealtimeLogConfig)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToCachePolicy)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequiredProtocol)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithFunctionAssociations)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyOriginGroupsPerDistribution)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributions)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTTLOrder)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginKeepaliveTimeout)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginReadTimeout)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginAccessControl)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidHeadersForS3Origin)
+        o.errors << Shapes::ShapeRef.new(shape: TrustedSignerDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidWebACLId)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithSingleFunctionARN)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRelativePath)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyLambdaFunctionAssociations)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginRequestPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToFieldLevelEncryptionConfig)
+        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLocationCode)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginAccessIdentity)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionCNAMEs)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchContinuousDeploymentPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToOriginRequestPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyQueryStringParameters)
         o.errors << Shapes::ShapeRef.new(shape: RealtimeLogConfigOwnerMismatch)
         o.errors << Shapes::ShapeRef.new(shape: ContinuousDeploymentPolicyInUse)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchContinuousDeploymentPolicy)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDomainNameForOriginAccessControl)
+        o.errors << Shapes::ShapeRef.new(shape: MissingBody)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyHeadersInForwardedValues)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLambdaFunctionAssociation)
+        o.errors << Shapes::ShapeRef.new(shape: CNAMEAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyCertificates)
+        o.errors << Shapes::ShapeRef.new(shape: TrustedKeyGroupDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToResponseHeadersPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchResponseHeadersPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchRealtimeLogConfig)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResponseCode)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGeoRestrictionParameter)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyOrigins)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidViewerCertificate)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidFunctionAssociation)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithLambdaAssociations)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToKeyGroup)
+        o.errors << Shapes::ShapeRef.new(shape: DistributionAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchOrigin)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyCacheBehaviors)
       end)
 
       api.add_operation(:create_distribution_with_tags, Seahorse::Model::Operation.new.tap do |o|
@@ -3379,72 +3380,72 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/distribution?WithTags"
         o.input = Shapes::ShapeRef.new(shape: CreateDistributionWithTagsRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateDistributionWithTagsResult)
-        o.errors << Shapes::ShapeRef.new(shape: CNAMEAlreadyExists)
-        o.errors << Shapes::ShapeRef.new(shape: DistributionAlreadyExists)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidOrigin)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginAccessIdentity)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginAccessControl)
-        o.errors << Shapes::ShapeRef.new(shape: IllegalOriginAccessConfiguration)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyTrustedSigners)
-        o.errors << Shapes::ShapeRef.new(shape: TrustedSignerDoesNotExist)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidViewerCertificate)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidMinimumProtocolVersion)
-        o.errors << Shapes::ShapeRef.new(shape: MissingBody)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionCNAMEs)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributions)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDefaultRootObject)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRelativePath)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidErrorCode)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidResponseCode)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequiredProtocol)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchOrigin)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyOrigins)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyOriginGroupsPerDistribution)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyCacheBehaviors)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyCookieNamesInWhiteList)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidForwardCookies)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyHeadersInForwardedValues)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidHeadersForS3Origin)
-        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyCertificates)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidLocationCode)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidGeoRestrictionParameter)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidProtocolSettings)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidTTLOrder)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidWebACLId)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyOriginCustomHeaders)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidTagging)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyQueryStringParameters)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidQueryStringParameters)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithLambdaAssociations)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithSingleFunctionARN)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyLambdaFunctionAssociations)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidLambdaFunctionAssociation)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithFunctionAssociations)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyFunctionAssociations)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidFunctionAssociation)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginReadTimeout)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginKeepaliveTimeout)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchFieldLevelEncryptionConfig)
-        o.errors << Shapes::ShapeRef.new(shape: IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToFieldLevelEncryptionConfig)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchCachePolicy)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToCachePolicy)
         o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToOriginAccessControl)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchResponseHeadersPolicy)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToResponseHeadersPolicy)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginRequestPolicy)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToOriginRequestPolicy)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToKeyGroup)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDefaultRootObject)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDomainNameForOriginAccessControl)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidQueryStringParameters)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTrustedSigners)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyCookieNamesInWhiteList)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchFieldLevelEncryptionConfig)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidErrorCode)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalOriginAccessConfiguration)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidProtocolSettings)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyFunctionAssociations)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyOriginCustomHeaders)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOrigin)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidForwardCookies)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidMinimumProtocolVersion)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchCachePolicy)
         o.errors << Shapes::ShapeRef.new(shape: TooManyKeyGroupsAssociatedToDistribution)
-        o.errors << Shapes::ShapeRef.new(shape: TrustedKeyGroupDoesNotExist)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchRealtimeLogConfig)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToCachePolicy)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequiredProtocol)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithFunctionAssociations)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyOriginGroupsPerDistribution)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributions)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTTLOrder)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginKeepaliveTimeout)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginReadTimeout)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginAccessControl)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidHeadersForS3Origin)
+        o.errors << Shapes::ShapeRef.new(shape: TrustedSignerDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidWebACLId)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithSingleFunctionARN)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRelativePath)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyLambdaFunctionAssociations)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginRequestPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToFieldLevelEncryptionConfig)
+        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLocationCode)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginAccessIdentity)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagging)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionCNAMEs)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchContinuousDeploymentPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToOriginRequestPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyQueryStringParameters)
         o.errors << Shapes::ShapeRef.new(shape: RealtimeLogConfigOwnerMismatch)
         o.errors << Shapes::ShapeRef.new(shape: ContinuousDeploymentPolicyInUse)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchContinuousDeploymentPolicy)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDomainNameForOriginAccessControl)
+        o.errors << Shapes::ShapeRef.new(shape: MissingBody)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyHeadersInForwardedValues)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLambdaFunctionAssociation)
+        o.errors << Shapes::ShapeRef.new(shape: CNAMEAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyCertificates)
+        o.errors << Shapes::ShapeRef.new(shape: TrustedKeyGroupDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToResponseHeadersPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchResponseHeadersPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchRealtimeLogConfig)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResponseCode)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGeoRestrictionParameter)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyOrigins)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidViewerCertificate)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidFunctionAssociation)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithLambdaAssociations)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToKeyGroup)
+        o.errors << Shapes::ShapeRef.new(shape: DistributionAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchOrigin)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyCacheBehaviors)
       end)
 
       api.add_operation(:create_field_level_encryption_config, Seahorse::Model::Operation.new.tap do |o|
@@ -3453,14 +3454,14 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/field-level-encryption"
         o.input = Shapes::ShapeRef.new(shape: CreateFieldLevelEncryptionConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateFieldLevelEncryptionConfigResult)
-        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchFieldLevelEncryptionProfile)
-        o.errors << Shapes::ShapeRef.new(shape: FieldLevelEncryptionConfigAlreadyExists)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyFieldLevelEncryptionConfigs)
+        o.errors << Shapes::ShapeRef.new(shape: QueryArgProfileEmpty)
         o.errors << Shapes::ShapeRef.new(shape: TooManyFieldLevelEncryptionQueryArgProfiles)
         o.errors << Shapes::ShapeRef.new(shape: TooManyFieldLevelEncryptionContentTypeProfiles)
-        o.errors << Shapes::ShapeRef.new(shape: QueryArgProfileEmpty)
+        o.errors << Shapes::ShapeRef.new(shape: FieldLevelEncryptionConfigAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyFieldLevelEncryptionConfigs)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchFieldLevelEncryptionProfile)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
       end)
 
       api.add_operation(:create_field_level_encryption_profile, Seahorse::Model::Operation.new.tap do |o|
@@ -3469,14 +3470,14 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/field-level-encryption-profile"
         o.input = Shapes::ShapeRef.new(shape: CreateFieldLevelEncryptionProfileRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateFieldLevelEncryptionProfileResult)
-        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchPublicKey)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyFieldLevelEncryptionFieldPatterns)
         o.errors << Shapes::ShapeRef.new(shape: FieldLevelEncryptionProfileAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchPublicKey)
         o.errors << Shapes::ShapeRef.new(shape: FieldLevelEncryptionProfileSizeExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
         o.errors << Shapes::ShapeRef.new(shape: TooManyFieldLevelEncryptionProfiles)
         o.errors << Shapes::ShapeRef.new(shape: TooManyFieldLevelEncryptionEncryptionEntities)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyFieldLevelEncryptionFieldPatterns)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
       end)
 
       api.add_operation(:create_function, Seahorse::Model::Operation.new.tap do |o|
@@ -3490,11 +3491,11 @@ module Aws::CloudFront
           }
         )
         o.output = Shapes::ShapeRef.new(shape: CreateFunctionResult)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyFunctions)
         o.errors << Shapes::ShapeRef.new(shape: FunctionAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
         o.errors << Shapes::ShapeRef.new(shape: FunctionSizeLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
-        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyFunctions)
       end)
 
       api.add_operation(:create_invalidation, Seahorse::Model::Operation.new.tap do |o|
@@ -3503,13 +3504,13 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/distribution/{DistributionId}/invalidation"
         o.input = Shapes::ShapeRef.new(shape: CreateInvalidationRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateInvalidationResult)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
-        o.errors << Shapes::ShapeRef.new(shape: MissingBody)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchDistribution)
-        o.errors << Shapes::ShapeRef.new(shape: BatchTooLarge)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
         o.errors << Shapes::ShapeRef.new(shape: TooManyInvalidationsInProgress)
+        o.errors << Shapes::ShapeRef.new(shape: MissingBody)
         o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: BatchTooLarge)
       end)
 
       api.add_operation(:create_key_group, Seahorse::Model::Operation.new.tap do |o|
@@ -3518,16 +3519,16 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/key-group"
         o.input = Shapes::ShapeRef.new(shape: CreateKeyGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateKeyGroupResult)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyPublicKeysInKeyGroup)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyKeyGroups)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: KeyGroupAlreadyExists)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyKeyGroups)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyPublicKeysInKeyGroup)
       end)
 
       api.add_operation(:create_key_value_store, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateKeyValueStore2020_05_31"
         o.http_method = "POST"
-        o.http_request_uri = "/2020-05-31/key-value-store/"
+        o.http_request_uri = "/2020-05-31/key-value-store"
         o.input = Shapes::ShapeRef.new(shape: CreateKeyValueStoreRequest,
           location_name: "CreateKeyValueStoreRequest",
           metadata: {
@@ -3536,21 +3537,21 @@ module Aws::CloudFront
         )
         o.output = Shapes::ShapeRef.new(shape: CreateKeyValueStoreResult)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
-        o.errors << Shapes::ShapeRef.new(shape: EntityLimitExceeded)
-        o.errors << Shapes::ShapeRef.new(shape: EntityAlreadyExists)
-        o.errors << Shapes::ShapeRef.new(shape: EntitySizeLimitExceeded)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        o.errors << Shapes::ShapeRef.new(shape: EntityAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: EntityLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: EntitySizeLimitExceeded)
       end)
 
       api.add_operation(:create_monitoring_subscription, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateMonitoringSubscription2020_05_31"
         o.http_method = "POST"
-        o.http_request_uri = "/2020-05-31/distributions/{DistributionId}/monitoring-subscription/"
+        o.http_request_uri = "/2020-05-31/distributions/{DistributionId}/monitoring-subscription"
         o.input = Shapes::ShapeRef.new(shape: CreateMonitoringSubscriptionRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateMonitoringSubscriptionResult)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchDistribution)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
         o.errors << Shapes::ShapeRef.new(shape: MonitoringSubscriptionAlreadyExists)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
       end)
@@ -3573,13 +3574,13 @@ module Aws::CloudFront
         o.input = Shapes::ShapeRef.new(shape: CreateOriginRequestPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateOriginRequestPolicyResult)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
-        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
-        o.errors << Shapes::ShapeRef.new(shape: OriginRequestPolicyAlreadyExists)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyOriginRequestPolicies)
         o.errors << Shapes::ShapeRef.new(shape: TooManyHeadersInOriginRequestPolicy)
         o.errors << Shapes::ShapeRef.new(shape: TooManyCookiesInOriginRequestPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
+        o.errors << Shapes::ShapeRef.new(shape: OriginRequestPolicyAlreadyExists)
         o.errors << Shapes::ShapeRef.new(shape: TooManyQueryStringsInOriginRequestPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyOriginRequestPolicies)
       end)
 
       api.add_operation(:create_public_key, Seahorse::Model::Operation.new.tap do |o|
@@ -3588,9 +3589,9 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/public-key"
         o.input = Shapes::ShapeRef.new(shape: CreatePublicKeyRequest)
         o.output = Shapes::ShapeRef.new(shape: CreatePublicKeyResult)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyPublicKeys)
         o.errors << Shapes::ShapeRef.new(shape: PublicKeyAlreadyExists)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyPublicKeys)
       end)
 
       api.add_operation(:create_realtime_log_config, Seahorse::Model::Operation.new.tap do |o|
@@ -3604,10 +3605,10 @@ module Aws::CloudFront
           }
         )
         o.output = Shapes::ShapeRef.new(shape: CreateRealtimeLogConfigResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
         o.errors << Shapes::ShapeRef.new(shape: RealtimeLogConfigAlreadyExists)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRealtimeLogConfigs)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
       end)
 
       api.add_operation(:create_response_headers_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -3617,13 +3618,13 @@ module Aws::CloudFront
         o.input = Shapes::ShapeRef.new(shape: CreateResponseHeadersPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateResponseHeadersPolicyResult)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
-        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
-        o.errors << Shapes::ShapeRef.new(shape: ResponseHeadersPolicyAlreadyExists)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyResponseHeadersPolicies)
         o.errors << Shapes::ShapeRef.new(shape: TooManyCustomHeadersInResponseHeadersPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: ResponseHeadersPolicyAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
         o.errors << Shapes::ShapeRef.new(shape: TooLongCSPInResponseHeadersPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRemoveHeadersInResponseHeadersPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyResponseHeadersPolicies)
       end)
 
       api.add_operation(:create_streaming_distribution, Seahorse::Model::Operation.new.tap do |o|
@@ -3632,19 +3633,19 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/streaming-distribution"
         o.input = Shapes::ShapeRef.new(shape: CreateStreamingDistributionRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateStreamingDistributionResult)
-        o.errors << Shapes::ShapeRef.new(shape: CNAMEAlreadyExists)
-        o.errors << Shapes::ShapeRef.new(shape: StreamingDistributionAlreadyExists)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidOrigin)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginAccessIdentity)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginAccessControl)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: StreamingDistributionAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginAccessIdentity)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTrustedSigners)
-        o.errors << Shapes::ShapeRef.new(shape: TrustedSignerDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginAccessControl)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyStreamingDistributions)
         o.errors << Shapes::ShapeRef.new(shape: MissingBody)
         o.errors << Shapes::ShapeRef.new(shape: TooManyStreamingDistributionCNAMEs)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyStreamingDistributions)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
-        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
+        o.errors << Shapes::ShapeRef.new(shape: TrustedSignerDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: CNAMEAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOrigin)
       end)
 
       api.add_operation(:create_streaming_distribution_with_tags, Seahorse::Model::Operation.new.tap do |o|
@@ -3653,20 +3654,20 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/streaming-distribution?WithTags"
         o.input = Shapes::ShapeRef.new(shape: CreateStreamingDistributionWithTagsRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateStreamingDistributionWithTagsResult)
-        o.errors << Shapes::ShapeRef.new(shape: CNAMEAlreadyExists)
-        o.errors << Shapes::ShapeRef.new(shape: StreamingDistributionAlreadyExists)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidOrigin)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginAccessIdentity)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginAccessControl)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: StreamingDistributionAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginAccessIdentity)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagging)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTrustedSigners)
-        o.errors << Shapes::ShapeRef.new(shape: TrustedSignerDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginAccessControl)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyStreamingDistributions)
         o.errors << Shapes::ShapeRef.new(shape: MissingBody)
         o.errors << Shapes::ShapeRef.new(shape: TooManyStreamingDistributionCNAMEs)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyStreamingDistributions)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
-        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidTagging)
+        o.errors << Shapes::ShapeRef.new(shape: TrustedSignerDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: CNAMEAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOrigin)
       end)
 
       api.add_operation(:delete_cache_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -3675,12 +3676,12 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/cache-policy/{Id}"
         o.input = Shapes::ShapeRef.new(shape: DeleteCachePolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchCachePolicy)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
         o.errors << Shapes::ShapeRef.new(shape: IllegalDelete)
         o.errors << Shapes::ShapeRef.new(shape: CachePolicyInUse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
       end)
 
       api.add_operation(:delete_cloud_front_origin_access_identity, Seahorse::Model::Operation.new.tap do |o|
@@ -3689,10 +3690,10 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/origin-access-identity/cloudfront/{Id}"
         o.input = Shapes::ShapeRef.new(shape: DeleteCloudFrontOriginAccessIdentityRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
         o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchCloudFrontOriginAccessIdentity)
-        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
         o.errors << Shapes::ShapeRef.new(shape: CloudFrontOriginAccessIdentityInUse)
       end)
 
@@ -3702,12 +3703,12 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/continuous-deployment-policy/{Id}"
         o.input = Shapes::ShapeRef.new(shape: DeleteContinuousDeploymentPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
-        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
         o.errors << Shapes::ShapeRef.new(shape: ContinuousDeploymentPolicyInUse)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchContinuousDeploymentPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
       end)
 
       api.add_operation(:delete_distribution, Seahorse::Model::Operation.new.tap do |o|
@@ -3716,11 +3717,11 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/distribution/{Id}"
         o.input = Shapes::ShapeRef.new(shape: DeleteDistributionRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchDistribution)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
         o.errors << Shapes::ShapeRef.new(shape: DistributionNotDisabled)
         o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchDistribution)
-        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
       end)
 
       api.add_operation(:delete_field_level_encryption_config, Seahorse::Model::Operation.new.tap do |o|
@@ -3729,11 +3730,11 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/field-level-encryption/{Id}"
         o.input = Shapes::ShapeRef.new(shape: DeleteFieldLevelEncryptionConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchFieldLevelEncryptionConfig)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
         o.errors << Shapes::ShapeRef.new(shape: FieldLevelEncryptionConfigInUse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchFieldLevelEncryptionConfig)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
       end)
 
       api.add_operation(:delete_field_level_encryption_profile, Seahorse::Model::Operation.new.tap do |o|
@@ -3742,11 +3743,11 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/field-level-encryption-profile/{Id}"
         o.input = Shapes::ShapeRef.new(shape: DeleteFieldLevelEncryptionProfileRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchFieldLevelEncryptionProfile)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchFieldLevelEncryptionProfile)
         o.errors << Shapes::ShapeRef.new(shape: FieldLevelEncryptionProfileInUse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
       end)
 
       api.add_operation(:delete_function, Seahorse::Model::Operation.new.tap do |o|
@@ -3755,11 +3756,11 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/function/{Name}"
         o.input = Shapes::ShapeRef.new(shape: DeleteFunctionRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchFunctionExists)
-        o.errors << Shapes::ShapeRef.new(shape: FunctionInUse)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        o.errors << Shapes::ShapeRef.new(shape: FunctionInUse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchFunctionExists)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
       end)
 
       api.add_operation(:delete_key_group, Seahorse::Model::Operation.new.tap do |o|
@@ -3768,10 +3769,10 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/key-group/{Id}"
         o.input = Shapes::ShapeRef.new(shape: DeleteKeyGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchResource)
-        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchResource)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
       end)
 
       api.add_operation(:delete_key_value_store, Seahorse::Model::Operation.new.tap do |o|
@@ -3780,24 +3781,24 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/key-value-store/{Name}"
         o.input = Shapes::ShapeRef.new(shape: DeleteKeyValueStoreRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
-        o.errors << Shapes::ShapeRef.new(shape: EntityNotFound)
         o.errors << Shapes::ShapeRef.new(shape: CannotDeleteEntityWhileInUse)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
       end)
 
       api.add_operation(:delete_monitoring_subscription, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteMonitoringSubscription2020_05_31"
         o.http_method = "DELETE"
-        o.http_request_uri = "/2020-05-31/distributions/{DistributionId}/monitoring-subscription/"
+        o.http_request_uri = "/2020-05-31/distributions/{DistributionId}/monitoring-subscription"
         o.input = Shapes::ShapeRef.new(shape: DeleteMonitoringSubscriptionRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteMonitoringSubscriptionResult)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchDistribution)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchMonitoringSubscription)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchMonitoringSubscription)
       end)
 
       api.add_operation(:delete_origin_access_control, Seahorse::Model::Operation.new.tap do |o|
@@ -3806,11 +3807,11 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/origin-access-control/{Id}"
         o.input = Shapes::ShapeRef.new(shape: DeleteOriginAccessControlRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginAccessControl)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
         o.errors << Shapes::ShapeRef.new(shape: OriginAccessControlInUse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginAccessControl)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
       end)
 
       api.add_operation(:delete_origin_request_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -3819,11 +3820,11 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/origin-request-policy/{Id}"
         o.input = Shapes::ShapeRef.new(shape: DeleteOriginRequestPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginRequestPolicy)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
         o.errors << Shapes::ShapeRef.new(shape: IllegalDelete)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginRequestPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
         o.errors << Shapes::ShapeRef.new(shape: OriginRequestPolicyInUse)
       end)
 
@@ -3833,17 +3834,17 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/public-key/{Id}"
         o.input = Shapes::ShapeRef.new(shape: DeletePublicKeyRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchPublicKey)
         o.errors << Shapes::ShapeRef.new(shape: PublicKeyInUse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchPublicKey)
-        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
       end)
 
       api.add_operation(:delete_realtime_log_config, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteRealtimeLogConfig2020_05_31"
         o.http_method = "POST"
-        o.http_request_uri = "/2020-05-31/delete-realtime-log-config/"
+        o.http_request_uri = "/2020-05-31/delete-realtime-log-config"
         o.input = Shapes::ShapeRef.new(shape: DeleteRealtimeLogConfigRequest,
           location_name: "DeleteRealtimeLogConfigRequest",
           metadata: {
@@ -3851,10 +3852,10 @@ module Aws::CloudFront
           }
         )
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchRealtimeLogConfig)
-        o.errors << Shapes::ShapeRef.new(shape: RealtimeLogConfigInUse)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: RealtimeLogConfigInUse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchRealtimeLogConfig)
       end)
 
       api.add_operation(:delete_response_headers_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -3863,12 +3864,12 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/response-headers-policy/{Id}"
         o.input = Shapes::ShapeRef.new(shape: DeleteResponseHeadersPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchResponseHeadersPolicy)
-        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
-        o.errors << Shapes::ShapeRef.new(shape: IllegalDelete)
         o.errors << Shapes::ShapeRef.new(shape: ResponseHeadersPolicyInUse)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalDelete)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchResponseHeadersPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
       end)
 
       api.add_operation(:delete_streaming_distribution, Seahorse::Model::Operation.new.tap do |o|
@@ -3877,11 +3878,11 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/streaming-distribution/{Id}"
         o.input = Shapes::ShapeRef.new(shape: DeleteStreamingDistributionRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
         o.errors << Shapes::ShapeRef.new(shape: StreamingDistributionNotDisabled)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchStreamingDistribution)
-        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
       end)
 
       api.add_operation(:describe_function, Seahorse::Model::Operation.new.tap do |o|
@@ -3890,8 +3891,8 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/function/{Name}/describe"
         o.input = Shapes::ShapeRef.new(shape: DescribeFunctionRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeFunctionResult)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchFunctionExists)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchFunctionExists)
       end)
 
       api.add_operation(:describe_key_value_store, Seahorse::Model::Operation.new.tap do |o|
@@ -3900,10 +3901,10 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/key-value-store/{Name}"
         o.input = Shapes::ShapeRef.new(shape: DescribeKeyValueStoreRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeKeyValueStoreResult)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
       end)
 
       api.add_operation(:get_cache_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -3912,8 +3913,8 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/cache-policy/{Id}"
         o.input = Shapes::ShapeRef.new(shape: GetCachePolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: GetCachePolicyResult)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchCachePolicy)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
       end)
 
       api.add_operation(:get_cache_policy_config, Seahorse::Model::Operation.new.tap do |o|
@@ -3922,8 +3923,8 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/cache-policy/{Id}/config"
         o.input = Shapes::ShapeRef.new(shape: GetCachePolicyConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: GetCachePolicyConfigResult)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchCachePolicy)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
       end)
 
       api.add_operation(:get_cloud_front_origin_access_identity, Seahorse::Model::Operation.new.tap do |o|
@@ -3932,8 +3933,8 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/origin-access-identity/cloudfront/{Id}"
         o.input = Shapes::ShapeRef.new(shape: GetCloudFrontOriginAccessIdentityRequest)
         o.output = Shapes::ShapeRef.new(shape: GetCloudFrontOriginAccessIdentityResult)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchCloudFrontOriginAccessIdentity)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchCloudFrontOriginAccessIdentity)
       end)
 
       api.add_operation(:get_cloud_front_origin_access_identity_config, Seahorse::Model::Operation.new.tap do |o|
@@ -3942,8 +3943,8 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/origin-access-identity/cloudfront/{Id}/config"
         o.input = Shapes::ShapeRef.new(shape: GetCloudFrontOriginAccessIdentityConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: GetCloudFrontOriginAccessIdentityConfigResult)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchCloudFrontOriginAccessIdentity)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchCloudFrontOriginAccessIdentity)
       end)
 
       api.add_operation(:get_continuous_deployment_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -4032,8 +4033,8 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/function/{Name}"
         o.input = Shapes::ShapeRef.new(shape: GetFunctionRequest)
         o.output = Shapes::ShapeRef.new(shape: GetFunctionResult)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchFunctionExists)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchFunctionExists)
       end)
 
       api.add_operation(:get_invalidation, Seahorse::Model::Operation.new.tap do |o|
@@ -4042,9 +4043,9 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/distribution/{DistributionId}/invalidation/{Id}"
         o.input = Shapes::ShapeRef.new(shape: GetInvalidationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetInvalidationResult)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchInvalidation)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchDistribution)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchInvalidation)
       end)
 
       api.add_operation(:get_key_group, Seahorse::Model::Operation.new.tap do |o|
@@ -4068,13 +4069,13 @@ module Aws::CloudFront
       api.add_operation(:get_monitoring_subscription, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetMonitoringSubscription2020_05_31"
         o.http_method = "GET"
-        o.http_request_uri = "/2020-05-31/distributions/{DistributionId}/monitoring-subscription/"
+        o.http_request_uri = "/2020-05-31/distributions/{DistributionId}/monitoring-subscription"
         o.input = Shapes::ShapeRef.new(shape: GetMonitoringSubscriptionRequest)
         o.output = Shapes::ShapeRef.new(shape: GetMonitoringSubscriptionResult)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchDistribution)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchMonitoringSubscription)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchMonitoringSubscription)
       end)
 
       api.add_operation(:get_origin_access_control, Seahorse::Model::Operation.new.tap do |o|
@@ -4083,8 +4084,8 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/origin-access-control/{Id}"
         o.input = Shapes::ShapeRef.new(shape: GetOriginAccessControlRequest)
         o.output = Shapes::ShapeRef.new(shape: GetOriginAccessControlResult)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginAccessControl)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginAccessControl)
       end)
 
       api.add_operation(:get_origin_access_control_config, Seahorse::Model::Operation.new.tap do |o|
@@ -4093,8 +4094,8 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/origin-access-control/{Id}/config"
         o.input = Shapes::ShapeRef.new(shape: GetOriginAccessControlConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: GetOriginAccessControlConfigResult)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginAccessControl)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginAccessControl)
       end)
 
       api.add_operation(:get_origin_request_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -4140,7 +4141,7 @@ module Aws::CloudFront
       api.add_operation(:get_realtime_log_config, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetRealtimeLogConfig2020_05_31"
         o.http_method = "POST"
-        o.http_request_uri = "/2020-05-31/get-realtime-log-config/"
+        o.http_request_uri = "/2020-05-31/get-realtime-log-config"
         o.input = Shapes::ShapeRef.new(shape: GetRealtimeLogConfigRequest,
           location_name: "GetRealtimeLogConfigRequest",
           metadata: {
@@ -4148,9 +4149,9 @@ module Aws::CloudFront
           }
         )
         o.output = Shapes::ShapeRef.new(shape: GetRealtimeLogConfigResult)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchRealtimeLogConfig)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchRealtimeLogConfig)
       end)
 
       api.add_operation(:get_response_headers_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -4179,8 +4180,8 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/streaming-distribution/{Id}"
         o.input = Shapes::ShapeRef.new(shape: GetStreamingDistributionRequest)
         o.output = Shapes::ShapeRef.new(shape: GetStreamingDistributionResult)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchStreamingDistribution)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchStreamingDistribution)
       end)
 
       api.add_operation(:get_streaming_distribution_config, Seahorse::Model::Operation.new.tap do |o|
@@ -4189,8 +4190,8 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/streaming-distribution/{Id}/config"
         o.input = Shapes::ShapeRef.new(shape: GetStreamingDistributionConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: GetStreamingDistributionConfigResult)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchStreamingDistribution)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchStreamingDistribution)
       end)
 
       api.add_operation(:list_cache_policies, Seahorse::Model::Operation.new.tap do |o|
@@ -4199,8 +4200,8 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/cache-policy"
         o.input = Shapes::ShapeRef.new(shape: ListCachePoliciesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListCachePoliciesResult)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchCachePolicy)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
       end)
 
@@ -4212,7 +4213,6 @@ module Aws::CloudFront
         o.output = Shapes::ShapeRef.new(shape: ListCloudFrontOriginAccessIdentitiesResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o[:pager] = Aws::Pager.new(
-          more_results: "cloud_front_origin_access_identity_list.is_truncated",
           limit_key: "max_items",
           tokens: {
             "cloud_front_origin_access_identity_list.next_marker" => "marker"
@@ -4226,8 +4226,8 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/conflicting-alias"
         o.input = Shapes::ShapeRef.new(shape: ListConflictingAliasesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListConflictingAliasesResult)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchDistribution)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
       end)
 
       api.add_operation(:list_continuous_deployment_policies, Seahorse::Model::Operation.new.tap do |o|
@@ -4236,8 +4236,8 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/continuous-deployment-policy"
         o.input = Shapes::ShapeRef.new(shape: ListContinuousDeploymentPoliciesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListContinuousDeploymentPoliciesResult)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchContinuousDeploymentPolicy)
       end)
 
@@ -4249,7 +4249,6 @@ module Aws::CloudFront
         o.output = Shapes::ShapeRef.new(shape: ListDistributionsResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o[:pager] = Aws::Pager.new(
-          more_results: "distribution_list.is_truncated",
           limit_key: "max_items",
           tokens: {
             "distribution_list.next_marker" => "marker"
@@ -4264,8 +4263,8 @@ module Aws::CloudFront
         o.input = Shapes::ShapeRef.new(shape: ListDistributionsByCachePolicyIdRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDistributionsByCachePolicyIdResult)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchCachePolicy)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
       end)
 
       api.add_operation(:list_distributions_by_key_group, Seahorse::Model::Operation.new.tap do |o|
@@ -4274,8 +4273,8 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/distributionsByKeyGroupId/{KeyGroupId}"
         o.input = Shapes::ShapeRef.new(shape: ListDistributionsByKeyGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDistributionsByKeyGroupResult)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchResource)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchResource)
       end)
 
       api.add_operation(:list_distributions_by_origin_request_policy_id, Seahorse::Model::Operation.new.tap do |o|
@@ -4284,15 +4283,15 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/distributionsByOriginRequestPolicyId/{OriginRequestPolicyId}"
         o.input = Shapes::ShapeRef.new(shape: ListDistributionsByOriginRequestPolicyIdRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDistributionsByOriginRequestPolicyIdResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginRequestPolicy)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
       end)
 
       api.add_operation(:list_distributions_by_realtime_log_config, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListDistributionsByRealtimeLogConfig2020_05_31"
         o.http_method = "POST"
-        o.http_request_uri = "/2020-05-31/distributionsByRealtimeLogConfig/"
+        o.http_request_uri = "/2020-05-31/distributionsByRealtimeLogConfig"
         o.input = Shapes::ShapeRef.new(shape: ListDistributionsByRealtimeLogConfigRequest,
           location_name: "ListDistributionsByRealtimeLogConfigRequest",
           metadata: {
@@ -4309,9 +4308,9 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/distributionsByResponseHeadersPolicyId/{ResponseHeadersPolicyId}"
         o.input = Shapes::ShapeRef.new(shape: ListDistributionsByResponseHeadersPolicyIdRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDistributionsByResponseHeadersPolicyIdResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchResponseHeadersPolicy)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
       end)
 
       api.add_operation(:list_distributions_by_web_acl_id, Seahorse::Model::Operation.new.tap do |o|
@@ -4320,8 +4319,8 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/distributionsByWebACLId/{WebACLId}"
         o.input = Shapes::ShapeRef.new(shape: ListDistributionsByWebACLIdRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDistributionsByWebACLIdResult)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: InvalidWebACLId)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
       end)
 
       api.add_operation(:list_field_level_encryption_configs, Seahorse::Model::Operation.new.tap do |o|
@@ -4348,8 +4347,8 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/function"
         o.input = Shapes::ShapeRef.new(shape: ListFunctionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListFunctionsResult)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
       end)
 
       api.add_operation(:list_invalidations, Seahorse::Model::Operation.new.tap do |o|
@@ -4358,11 +4357,10 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/distribution/{DistributionId}/invalidation"
         o.input = Shapes::ShapeRef.new(shape: ListInvalidationsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListInvalidationsResult)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchDistribution)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o[:pager] = Aws::Pager.new(
-          more_results: "invalidation_list.is_truncated",
           limit_key: "max_items",
           tokens: {
             "invalidation_list.next_marker" => "marker"
@@ -4386,8 +4384,8 @@ module Aws::CloudFront
         o.input = Shapes::ShapeRef.new(shape: ListKeyValueStoresRequest)
         o.output = Shapes::ShapeRef.new(shape: ListKeyValueStoresResult)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_items",
           tokens: {
@@ -4423,6 +4421,12 @@ module Aws::CloudFront
         o.input = Shapes::ShapeRef.new(shape: ListPublicKeysRequest)
         o.output = Shapes::ShapeRef.new(shape: ListPublicKeysResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_items",
+          tokens: {
+            "public_key_list.next_marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:list_realtime_log_configs, Seahorse::Model::Operation.new.tap do |o|
@@ -4431,8 +4435,8 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/realtime-log-config"
         o.input = Shapes::ShapeRef.new(shape: ListRealtimeLogConfigsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListRealtimeLogConfigsResult)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchRealtimeLogConfig)
       end)
 
@@ -4455,7 +4459,6 @@ module Aws::CloudFront
         o.output = Shapes::ShapeRef.new(shape: ListStreamingDistributionsResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o[:pager] = Aws::Pager.new(
-          more_results: "streaming_distribution_list.is_truncated",
           limit_key: "max_items",
           tokens: {
             "streaming_distribution_list.next_marker" => "marker"
@@ -4470,8 +4473,8 @@ module Aws::CloudFront
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResult)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagging)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchResource)
       end)
 
@@ -4481,11 +4484,11 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/function/{Name}/publish"
         o.input = Shapes::ShapeRef.new(shape: PublishFunctionRequest)
         o.output = Shapes::ShapeRef.new(shape: PublishFunctionResult)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchFunctionExists)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchFunctionExists)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -4495,8 +4498,8 @@ module Aws::CloudFront
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagging)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchResource)
       end)
 
@@ -4511,11 +4514,11 @@ module Aws::CloudFront
           }
         )
         o.output = Shapes::ShapeRef.new(shape: TestFunctionResult)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchFunctionExists)
         o.errors << Shapes::ShapeRef.new(shape: TestFunctionFailed)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchFunctionExists)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -4525,8 +4528,8 @@ module Aws::CloudFront
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagging)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchResource)
       end)
 
@@ -4536,17 +4539,17 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/cache-policy/{Id}"
         o.input = Shapes::ShapeRef.new(shape: UpdateCachePolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateCachePolicyResult)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
-        o.errors << Shapes::ShapeRef.new(shape: IllegalUpdate)
-        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchCachePolicy)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
-        o.errors << Shapes::ShapeRef.new(shape: CachePolicyAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
         o.errors << Shapes::ShapeRef.new(shape: TooManyHeadersInCachePolicy)
+        o.errors << Shapes::ShapeRef.new(shape: CachePolicyAlreadyExists)
         o.errors << Shapes::ShapeRef.new(shape: TooManyCookiesInCachePolicy)
+        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalUpdate)
         o.errors << Shapes::ShapeRef.new(shape: TooManyQueryStringsInCachePolicy)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
       end)
 
       api.add_operation(:update_cloud_front_origin_access_identity, Seahorse::Model::Operation.new.tap do |o|
@@ -4555,14 +4558,14 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/origin-access-identity/cloudfront/{Id}/config"
         o.input = Shapes::ShapeRef.new(shape: UpdateCloudFrontOriginAccessIdentityRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateCloudFrontOriginAccessIdentityResult)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: MissingBody)
+        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: IllegalUpdate)
         o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
-        o.errors << Shapes::ShapeRef.new(shape: MissingBody)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchCloudFrontOriginAccessIdentity)
-        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
-        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
       end)
 
       api.add_operation(:update_continuous_deployment_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -4571,13 +4574,13 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/continuous-deployment-policy/{Id}"
         o.input = Shapes::ShapeRef.new(shape: UpdateContinuousDeploymentPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateContinuousDeploymentPolicyResult)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
-        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
         o.errors << Shapes::ShapeRef.new(shape: StagingDistributionInUse)
+        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchContinuousDeploymentPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
       end)
 
       api.add_operation(:update_distribution, Seahorse::Model::Operation.new.tap do |o|
@@ -4587,71 +4590,71 @@ module Aws::CloudFront
         o.input = Shapes::ShapeRef.new(shape: UpdateDistributionRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateDistributionResult)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
-        o.errors << Shapes::ShapeRef.new(shape: CNAMEAlreadyExists)
-        o.errors << Shapes::ShapeRef.new(shape: IllegalUpdate)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
-        o.errors << Shapes::ShapeRef.new(shape: MissingBody)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchDistribution)
-        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionCNAMEs)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDefaultRootObject)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRelativePath)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidErrorCode)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidResponseCode)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginAccessIdentity)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginAccessControl)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyTrustedSigners)
-        o.errors << Shapes::ShapeRef.new(shape: TrustedSignerDoesNotExist)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidViewerCertificate)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidMinimumProtocolVersion)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequiredProtocol)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchOrigin)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyOrigins)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyOriginGroupsPerDistribution)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyCacheBehaviors)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyCookieNamesInWhiteList)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidForwardCookies)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyHeadersInForwardedValues)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidHeadersForS3Origin)
-        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyCertificates)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidLocationCode)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidGeoRestrictionParameter)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidTTLOrder)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidWebACLId)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyOriginCustomHeaders)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyQueryStringParameters)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidQueryStringParameters)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithLambdaAssociations)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithSingleFunctionARN)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyLambdaFunctionAssociations)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidLambdaFunctionAssociation)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithFunctionAssociations)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyFunctionAssociations)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidFunctionAssociation)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginReadTimeout)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginKeepaliveTimeout)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchFieldLevelEncryptionConfig)
-        o.errors << Shapes::ShapeRef.new(shape: IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToFieldLevelEncryptionConfig)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchCachePolicy)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToCachePolicy)
         o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToOriginAccessControl)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchResponseHeadersPolicy)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToResponseHeadersPolicy)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginRequestPolicy)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToOriginRequestPolicy)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToKeyGroup)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyKeyGroupsAssociatedToDistribution)
-        o.errors << Shapes::ShapeRef.new(shape: TrustedKeyGroupDoesNotExist)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchRealtimeLogConfig)
-        o.errors << Shapes::ShapeRef.new(shape: RealtimeLogConfigOwnerMismatch)
-        o.errors << Shapes::ShapeRef.new(shape: ContinuousDeploymentPolicyInUse)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchContinuousDeploymentPolicy)
-        o.errors << Shapes::ShapeRef.new(shape: StagingDistributionInUse)
-        o.errors << Shapes::ShapeRef.new(shape: IllegalOriginAccessConfiguration)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDefaultRootObject)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDomainNameForOriginAccessControl)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidQueryStringParameters)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTrustedSigners)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyCookieNamesInWhiteList)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchFieldLevelEncryptionConfig)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidErrorCode)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalOriginAccessConfiguration)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyFunctionAssociations)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyOriginCustomHeaders)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidForwardCookies)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidMinimumProtocolVersion)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchCachePolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyKeyGroupsAssociatedToDistribution)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToCachePolicy)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequiredProtocol)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithFunctionAssociations)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyOriginGroupsPerDistribution)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTTLOrder)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginKeepaliveTimeout)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginReadTimeout)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalUpdate)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginAccessControl)
+        o.errors << Shapes::ShapeRef.new(shape: StagingDistributionInUse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidHeadersForS3Origin)
+        o.errors << Shapes::ShapeRef.new(shape: TrustedSignerDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidWebACLId)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithSingleFunctionARN)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRelativePath)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyLambdaFunctionAssociations)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchDistribution)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginRequestPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToFieldLevelEncryptionConfig)
+        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLocationCode)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginAccessIdentity)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionCNAMEs)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchContinuousDeploymentPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToOriginRequestPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyQueryStringParameters)
+        o.errors << Shapes::ShapeRef.new(shape: RealtimeLogConfigOwnerMismatch)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+        o.errors << Shapes::ShapeRef.new(shape: ContinuousDeploymentPolicyInUse)
+        o.errors << Shapes::ShapeRef.new(shape: MissingBody)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyHeadersInForwardedValues)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLambdaFunctionAssociation)
+        o.errors << Shapes::ShapeRef.new(shape: CNAMEAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyCertificates)
+        o.errors << Shapes::ShapeRef.new(shape: TrustedKeyGroupDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToResponseHeadersPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchResponseHeadersPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchRealtimeLogConfig)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResponseCode)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGeoRestrictionParameter)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyOrigins)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidViewerCertificate)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidFunctionAssociation)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithLambdaAssociations)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToKeyGroup)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchOrigin)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyCacheBehaviors)
       end)
 
       api.add_operation(:update_distribution_with_staging_config, Seahorse::Model::Operation.new.tap do |o|
@@ -4661,66 +4664,66 @@ module Aws::CloudFront
         o.input = Shapes::ShapeRef.new(shape: UpdateDistributionWithStagingConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateDistributionWithStagingConfigResult)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
-        o.errors << Shapes::ShapeRef.new(shape: CNAMEAlreadyExists)
-        o.errors << Shapes::ShapeRef.new(shape: IllegalUpdate)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
-        o.errors << Shapes::ShapeRef.new(shape: MissingBody)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchDistribution)
-        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionCNAMEs)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDefaultRootObject)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRelativePath)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidErrorCode)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidResponseCode)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginAccessIdentity)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginAccessControl)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyTrustedSigners)
-        o.errors << Shapes::ShapeRef.new(shape: TrustedSignerDoesNotExist)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidViewerCertificate)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidMinimumProtocolVersion)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequiredProtocol)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchOrigin)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyOrigins)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyOriginGroupsPerDistribution)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyCacheBehaviors)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyCookieNamesInWhiteList)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidForwardCookies)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyHeadersInForwardedValues)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidHeadersForS3Origin)
-        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyCertificates)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidLocationCode)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidGeoRestrictionParameter)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidTTLOrder)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidWebACLId)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyOriginCustomHeaders)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyQueryStringParameters)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidQueryStringParameters)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithLambdaAssociations)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithSingleFunctionARN)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyLambdaFunctionAssociations)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidLambdaFunctionAssociation)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithFunctionAssociations)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyFunctionAssociations)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidFunctionAssociation)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginReadTimeout)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginKeepaliveTimeout)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchFieldLevelEncryptionConfig)
-        o.errors << Shapes::ShapeRef.new(shape: IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToFieldLevelEncryptionConfig)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchCachePolicy)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToCachePolicy)
         o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToOriginAccessControl)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchResponseHeadersPolicy)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToResponseHeadersPolicy)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginRequestPolicy)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToOriginRequestPolicy)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToKeyGroup)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDefaultRootObject)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidQueryStringParameters)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTrustedSigners)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyCookieNamesInWhiteList)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchFieldLevelEncryptionConfig)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidErrorCode)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyFunctionAssociations)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyOriginCustomHeaders)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidForwardCookies)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidMinimumProtocolVersion)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchCachePolicy)
         o.errors << Shapes::ShapeRef.new(shape: TooManyKeyGroupsAssociatedToDistribution)
-        o.errors << Shapes::ShapeRef.new(shape: TrustedKeyGroupDoesNotExist)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchRealtimeLogConfig)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToCachePolicy)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequiredProtocol)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithFunctionAssociations)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyOriginGroupsPerDistribution)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTTLOrder)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginKeepaliveTimeout)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginReadTimeout)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalUpdate)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginAccessControl)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidHeadersForS3Origin)
+        o.errors << Shapes::ShapeRef.new(shape: TrustedSignerDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidWebACLId)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithSingleFunctionARN)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRelativePath)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyLambdaFunctionAssociations)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchDistribution)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginRequestPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToFieldLevelEncryptionConfig)
+        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLocationCode)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginAccessIdentity)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionCNAMEs)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToOriginRequestPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyQueryStringParameters)
         o.errors << Shapes::ShapeRef.new(shape: RealtimeLogConfigOwnerMismatch)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+        o.errors << Shapes::ShapeRef.new(shape: MissingBody)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyHeadersInForwardedValues)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLambdaFunctionAssociation)
+        o.errors << Shapes::ShapeRef.new(shape: CNAMEAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyCertificates)
+        o.errors << Shapes::ShapeRef.new(shape: TrustedKeyGroupDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToResponseHeadersPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchResponseHeadersPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchRealtimeLogConfig)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResponseCode)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGeoRestrictionParameter)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyOrigins)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidViewerCertificate)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidFunctionAssociation)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithLambdaAssociations)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToKeyGroup)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchOrigin)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyCacheBehaviors)
       end)
 
       api.add_operation(:update_field_level_encryption_config, Seahorse::Model::Operation.new.tap do |o|
@@ -4729,17 +4732,17 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/field-level-encryption/{Id}/config"
         o.input = Shapes::ShapeRef.new(shape: UpdateFieldLevelEncryptionConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateFieldLevelEncryptionConfigResult)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
-        o.errors << Shapes::ShapeRef.new(shape: IllegalUpdate)
-        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchFieldLevelEncryptionProfile)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchFieldLevelEncryptionConfig)
-        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyFieldLevelEncryptionQueryArgProfiles)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyFieldLevelEncryptionContentTypeProfiles)
         o.errors << Shapes::ShapeRef.new(shape: QueryArgProfileEmpty)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyFieldLevelEncryptionQueryArgProfiles)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchFieldLevelEncryptionConfig)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyFieldLevelEncryptionContentTypeProfiles)
+        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchFieldLevelEncryptionProfile)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalUpdate)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
       end)
 
       api.add_operation(:update_field_level_encryption_profile, Seahorse::Model::Operation.new.tap do |o|
@@ -4748,18 +4751,18 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/field-level-encryption-profile/{Id}/config"
         o.input = Shapes::ShapeRef.new(shape: UpdateFieldLevelEncryptionProfileRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateFieldLevelEncryptionProfileResult)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyFieldLevelEncryptionFieldPatterns)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
         o.errors << Shapes::ShapeRef.new(shape: FieldLevelEncryptionProfileAlreadyExists)
-        o.errors << Shapes::ShapeRef.new(shape: IllegalUpdate)
-        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchPublicKey)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchFieldLevelEncryptionProfile)
-        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
         o.errors << Shapes::ShapeRef.new(shape: FieldLevelEncryptionProfileSizeExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchFieldLevelEncryptionProfile)
         o.errors << Shapes::ShapeRef.new(shape: TooManyFieldLevelEncryptionEncryptionEntities)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyFieldLevelEncryptionFieldPatterns)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalUpdate)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
       end)
 
       api.add_operation(:update_function, Seahorse::Model::Operation.new.tap do |o|
@@ -4773,12 +4776,12 @@ module Aws::CloudFront
           }
         )
         o.output = Shapes::ShapeRef.new(shape: UpdateFunctionResult)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchFunctionExists)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
-        o.errors << Shapes::ShapeRef.new(shape: FunctionSizeLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        o.errors << Shapes::ShapeRef.new(shape: FunctionSizeLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchFunctionExists)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
       end)
 
       api.add_operation(:update_key_group, Seahorse::Model::Operation.new.tap do |o|
@@ -4787,12 +4790,12 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/key-group/{Id}"
         o.input = Shapes::ShapeRef.new(shape: UpdateKeyGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateKeyGroupResult)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchResource)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
-        o.errors << Shapes::ShapeRef.new(shape: KeyGroupAlreadyExists)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: TooManyPublicKeysInKeyGroup)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchResource)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
+        o.errors << Shapes::ShapeRef.new(shape: KeyGroupAlreadyExists)
       end)
 
       api.add_operation(:update_key_value_store, Seahorse::Model::Operation.new.tap do |o|
@@ -4806,12 +4809,12 @@ module Aws::CloudFront
           }
         )
         o.output = Shapes::ShapeRef.new(shape: UpdateKeyValueStoreResult)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
-        o.errors << Shapes::ShapeRef.new(shape: EntityNotFound)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
       end)
 
       api.add_operation(:update_origin_access_control, Seahorse::Model::Operation.new.tap do |o|
@@ -4820,13 +4823,13 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/origin-access-control/{Id}/config"
         o.input = Shapes::ShapeRef.new(shape: UpdateOriginAccessControlRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateOriginAccessControlResult)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+        o.errors << Shapes::ShapeRef.new(shape: OriginAccessControlAlreadyExists)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginAccessControl)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: IllegalUpdate)
         o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
-        o.errors << Shapes::ShapeRef.new(shape: OriginAccessControlAlreadyExists)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginAccessControl)
-        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
       end)
 
       api.add_operation(:update_origin_request_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -4835,17 +4838,17 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/origin-request-policy/{Id}"
         o.input = Shapes::ShapeRef.new(shape: UpdateOriginRequestPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateOriginRequestPolicyResult)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
-        o.errors << Shapes::ShapeRef.new(shape: IllegalUpdate)
-        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginRequestPolicy)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
-        o.errors << Shapes::ShapeRef.new(shape: OriginRequestPolicyAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
         o.errors << Shapes::ShapeRef.new(shape: TooManyHeadersInOriginRequestPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginRequestPolicy)
         o.errors << Shapes::ShapeRef.new(shape: TooManyCookiesInOriginRequestPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
+        o.errors << Shapes::ShapeRef.new(shape: OriginRequestPolicyAlreadyExists)
         o.errors << Shapes::ShapeRef.new(shape: TooManyQueryStringsInOriginRequestPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalUpdate)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
       end)
 
       api.add_operation(:update_public_key, Seahorse::Model::Operation.new.tap do |o|
@@ -4854,19 +4857,19 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/public-key/{Id}/config"
         o.input = Shapes::ShapeRef.new(shape: UpdatePublicKeyRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdatePublicKeyResult)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchPublicKey)
         o.errors << Shapes::ShapeRef.new(shape: CannotChangeImmutablePublicKeyFields)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
         o.errors << Shapes::ShapeRef.new(shape: IllegalUpdate)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchPublicKey)
-        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
       end)
 
       api.add_operation(:update_realtime_log_config, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateRealtimeLogConfig2020_05_31"
         o.http_method = "PUT"
-        o.http_request_uri = "/2020-05-31/realtime-log-config/"
+        o.http_request_uri = "/2020-05-31/realtime-log-config"
         o.input = Shapes::ShapeRef.new(shape: UpdateRealtimeLogConfigRequest,
           location_name: "UpdateRealtimeLogConfigRequest",
           metadata: {
@@ -4874,9 +4877,9 @@ module Aws::CloudFront
           }
         )
         o.output = Shapes::ShapeRef.new(shape: UpdateRealtimeLogConfigResult)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchRealtimeLogConfig)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchRealtimeLogConfig)
       end)
 
       api.add_operation(:update_response_headers_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -4885,17 +4888,17 @@ module Aws::CloudFront
         o.http_request_uri = "/2020-05-31/response-headers-policy/{Id}"
         o.input = Shapes::ShapeRef.new(shape: UpdateResponseHeadersPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateResponseHeadersPolicyResult)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
-        o.errors << Shapes::ShapeRef.new(shape: IllegalUpdate)
-        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchResponseHeadersPolicy)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
-        o.errors << Shapes::ShapeRef.new(shape: ResponseHeadersPolicyAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
         o.errors << Shapes::ShapeRef.new(shape: TooManyCustomHeadersInResponseHeadersPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: ResponseHeadersPolicyAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
         o.errors << Shapes::ShapeRef.new(shape: TooLongCSPInResponseHeadersPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchResponseHeadersPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRemoveHeadersInResponseHeadersPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalUpdate)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
       end)
 
       api.add_operation(:update_streaming_distribution, Seahorse::Model::Operation.new.tap do |o|
@@ -4905,19 +4908,19 @@ module Aws::CloudFront
         o.input = Shapes::ShapeRef.new(shape: UpdateStreamingDistributionRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateStreamingDistributionResult)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
-        o.errors << Shapes::ShapeRef.new(shape: CNAMEAlreadyExists)
-        o.errors << Shapes::ShapeRef.new(shape: IllegalUpdate)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
-        o.errors << Shapes::ShapeRef.new(shape: MissingBody)
-        o.errors << Shapes::ShapeRef.new(shape: NoSuchStreamingDistribution)
-        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyStreamingDistributionCNAMEs)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginAccessIdentity)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginAccessControl)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyTrustedSigners)
-        o.errors << Shapes::ShapeRef.new(shape: TrustedSignerDoesNotExist)
         o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginAccessIdentity)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalUpdate)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTrustedSigners)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOriginAccessControl)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+        o.errors << Shapes::ShapeRef.new(shape: MissingBody)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyStreamingDistributionCNAMEs)
+        o.errors << Shapes::ShapeRef.new(shape: TrustedSignerDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: CNAMEAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchStreamingDistribution)
       end)
     end
 

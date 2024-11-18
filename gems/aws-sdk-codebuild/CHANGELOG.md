@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.138.0 (2024-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.137.0 (2024-11-12)
+------------------
+
+* Feature - AWS CodeBuild now supports non-containerized Linux and Windows builds on Reserved Capacity.
+
+1.136.0 (2024-11-06)
+------------------
+
+* Feature - AWS CodeBuild now adds additional compute types for reserved capacity fleet.
+
 1.135.0 (2024-10-25)
 ------------------
 

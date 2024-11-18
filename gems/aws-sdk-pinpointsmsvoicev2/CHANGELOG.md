@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2024-11-15)
+------------------
+
+* Feature - Use rule overrides to always allow or always block messages to specific phone numbers. Use message feedback to monitor if a customer interacts with your message.
+
+1.30.0 (2024-11-08)
+------------------
+
+* Feature - Added the RequiresAuthenticationTimestamp field to the RegistrationVersionStatusHistory data type.
+
 1.29.0 (2024-10-18)
 ------------------
 

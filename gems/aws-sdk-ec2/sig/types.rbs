@@ -1228,12 +1228,12 @@ module Aws::EC2
     end
 
     class CapacityReservationOptions
-      attr_accessor usage_strategy: ("use-capacity-reservations-first" | "use-capacity-reservations-only" | "none")
+      attr_accessor usage_strategy: ("use-capacity-reservations-first")
       SENSITIVE: []
     end
 
     class CapacityReservationOptionsRequest
-      attr_accessor usage_strategy: ("use-capacity-reservations-first" | "use-capacity-reservations-only" | "none")
+      attr_accessor usage_strategy: ("use-capacity-reservations-first")
       SENSITIVE: []
     end
 
@@ -2109,6 +2109,7 @@ module Aws::EC2
       attr_accessor launch_template_name: ::String
       attr_accessor version_description: ::String
       attr_accessor launch_template_data: Types::RequestLaunchTemplateData
+      attr_accessor operator: Types::OperatorRequest
       attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       SENSITIVE: []
     end
@@ -2314,6 +2315,7 @@ module Aws::EC2
       attr_accessor client_token: ::String
       attr_accessor enable_primary_ipv_6: bool
       attr_accessor connection_tracking_specification: Types::ConnectionTrackingSpecificationRequest
+      attr_accessor operator: Types::OperatorRequest
       attr_accessor subnet_id: ::String
       attr_accessor description: ::String
       attr_accessor private_ip_address: ::String
@@ -2931,6 +2933,7 @@ module Aws::EC2
       attr_accessor multi_attach_enabled: bool
       attr_accessor throughput: ::Integer
       attr_accessor client_token: ::String
+      attr_accessor operator: Types::OperatorRequest
       attr_accessor dry_run: bool
       SENSITIVE: []
     end
@@ -6926,6 +6929,7 @@ module Aws::EC2
       attr_accessor volume_id: ::String
       attr_accessor associated_resource: ::String
       attr_accessor volume_owner_id: ::String
+      attr_accessor operator: Types::OperatorResponse
       SENSITIVE: []
     end
 
@@ -8642,6 +8646,8 @@ module Aws::EC2
       attr_accessor source_instance_id: ::String
       attr_accessor deregistration_protection: ::String
       attr_accessor last_launched_time: ::String
+      attr_accessor source_image_id: ::String
+      attr_accessor source_image_region: ::String
       attr_accessor image_id: ::String
       attr_accessor image_location: ::String
       attr_accessor state: ("pending" | "available" | "invalid" | "deregistered" | "transient" | "failed" | "error" | "disabled")
@@ -8962,6 +8968,7 @@ module Aws::EC2
       attr_accessor tpm_support: ::String
       attr_accessor maintenance_options: Types::InstanceMaintenanceOptions
       attr_accessor current_instance_boot_mode: ("legacy-bios" | "uefi")
+      attr_accessor operator: Types::OperatorResponse
       attr_accessor instance_id: ::String
       attr_accessor image_id: ::String
       attr_accessor state: Types::InstanceState
@@ -9132,6 +9139,7 @@ module Aws::EC2
       attr_accessor owner_id: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor image_metadata: Types::ImageMetadata
+      attr_accessor operator: Types::OperatorResponse
       SENSITIVE: []
     end
 
@@ -9225,6 +9233,7 @@ module Aws::EC2
       attr_accessor ipv_4_prefixes: ::Array[Types::InstanceIpv4Prefix]
       attr_accessor ipv_6_prefixes: ::Array[Types::InstanceIpv6Prefix]
       attr_accessor connection_tracking_configuration: Types::ConnectionTrackingSpecificationResponse
+      attr_accessor operator: Types::OperatorResponse
       SENSITIVE: []
     end
 
@@ -9368,6 +9377,7 @@ module Aws::EC2
     class InstanceStatus
       attr_accessor availability_zone: ::String
       attr_accessor outpost_arn: ::String
+      attr_accessor operator: Types::OperatorResponse
       attr_accessor events: ::Array[Types::InstanceStatusEvent]
       attr_accessor instance_id: ::String
       attr_accessor instance_state: Types::InstanceState
@@ -9908,6 +9918,7 @@ module Aws::EC2
       attr_accessor default_version_number: ::Integer
       attr_accessor latest_version_number: ::Integer
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor operator: Types::OperatorResponse
       SENSITIVE: []
     end
 
@@ -10244,6 +10255,7 @@ module Aws::EC2
       attr_accessor created_by: ::String
       attr_accessor default_version: bool
       attr_accessor launch_template_data: Types::ResponseLaunchTemplateData
+      attr_accessor operator: Types::OperatorResponse
       SENSITIVE: []
     end
 
@@ -11803,6 +11815,7 @@ module Aws::EC2
       attr_accessor deny_all_igw_traffic: bool
       attr_accessor ipv_6_native: bool
       attr_accessor ipv_6_address: ::String
+      attr_accessor operator: Types::OperatorResponse
       SENSITIVE: []
     end
 
@@ -11942,6 +11955,17 @@ module Aws::EC2
       attr_accessor single_availability_zone: bool
       attr_accessor min_target_capacity: ::Integer
       attr_accessor max_total_price: ::String
+      SENSITIVE: []
+    end
+
+    class OperatorRequest
+      attr_accessor principal: ::String
+      SENSITIVE: []
+    end
+
+    class OperatorResponse
+      attr_accessor managed: bool
+      attr_accessor principal: ::String
       SENSITIVE: []
     end
 
@@ -12820,6 +12844,7 @@ module Aws::EC2
       attr_accessor private_dns_name_options: Types::LaunchTemplatePrivateDnsNameOptionsRequest
       attr_accessor maintenance_options: Types::LaunchTemplateInstanceMaintenanceOptionsRequest
       attr_accessor disable_api_stop: bool
+      attr_accessor operator: Types::OperatorRequest
       SENSITIVE: [:user_data]
     end
 
@@ -13115,6 +13140,7 @@ module Aws::EC2
       attr_accessor private_dns_name_options: Types::LaunchTemplatePrivateDnsNameOptions
       attr_accessor maintenance_options: Types::LaunchTemplateInstanceMaintenanceOptions
       attr_accessor disable_api_stop: bool
+      attr_accessor operator: Types::OperatorResponse
       SENSITIVE: [:user_data]
     end
 
@@ -13366,6 +13392,7 @@ module Aws::EC2
       attr_accessor maintenance_options: Types::InstanceMaintenanceOptionsRequest
       attr_accessor disable_api_stop: bool
       attr_accessor enable_primary_ipv_6: bool
+      attr_accessor operator: Types::OperatorRequest
       attr_accessor dry_run: bool
       attr_accessor disable_api_termination: bool
       attr_accessor instance_initiated_shutdown_behavior: ("stop" | "terminate")
@@ -15196,6 +15223,7 @@ module Aws::EC2
       attr_accessor multi_attach_enabled: bool
       attr_accessor throughput: ::Integer
       attr_accessor sse_type: ("sse-ebs" | "sse-kms" | "none")
+      attr_accessor operator: Types::OperatorResponse
       attr_accessor volume_id: ::String
       attr_accessor size: ::Integer
       attr_accessor snapshot_id: ::String

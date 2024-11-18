@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.132.0 (2024-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.131.0 (2024-11-14)
+------------------
+
+* Feature - Adds support for Amazon Redshift S3AccessGrants
+
+1.130.0 (2024-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.129.0 (2024-10-30)
 ------------------
 

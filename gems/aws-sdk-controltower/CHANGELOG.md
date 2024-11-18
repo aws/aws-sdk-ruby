@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2024-11-12)
+------------------
+
+* Feature - Added ResetEnabledControl API.
+
 1.34.0 (2024-10-18)
 ------------------
 

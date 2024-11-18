@@ -3,6 +3,26 @@ Unreleased Changes
 
 * Feature - Default to using `CRC32` checksum validation for S3 uploads and downloads.
 
+1.172.0 (2024-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.171.0 (2024-11-14)
+------------------
+
+* Feature - This release updates the ListBuckets API Reference documentation in support of the new 10,000 general purpose bucket default quota on all AWS accounts. To increase your bucket quota from 10,000 to up to 1 million buckets, simply request a quota increase via Service Quotas.
+
+1.170.1 (2024-11-11)
+------------------
+
+* Issue - Tighten regex used to check for S3 200 errors.
+
+1.170.0 (2024-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.169.0 (2024-10-18)
 ------------------
 

@@ -27,6 +27,13 @@ module Aws::QApps
     AssociateQAppWithUserInput = Shapes::StructureShape.new(name: 'AssociateQAppWithUserInput')
     AttributeFilter = Shapes::StructureShape.new(name: 'AttributeFilter')
     AttributeFilters = Shapes::ListShape.new(name: 'AttributeFilters')
+    BatchCreateCategoryInput = Shapes::StructureShape.new(name: 'BatchCreateCategoryInput')
+    BatchCreateCategoryInputCategory = Shapes::StructureShape.new(name: 'BatchCreateCategoryInputCategory')
+    BatchCreateCategoryInputCategoryColorString = Shapes::StringShape.new(name: 'BatchCreateCategoryInputCategoryColorString')
+    BatchCreateCategoryInputCategoryList = Shapes::ListShape.new(name: 'BatchCreateCategoryInputCategoryList')
+    BatchCreateCategoryInputCategoryTitleString = Shapes::StringShape.new(name: 'BatchCreateCategoryInputCategoryTitleString')
+    BatchDeleteCategoryInput = Shapes::StructureShape.new(name: 'BatchDeleteCategoryInput')
+    BatchUpdateCategoryInput = Shapes::StructureShape.new(name: 'BatchUpdateCategoryInput')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     Card = Shapes::UnionShape.new(name: 'Card')
     CardInput = Shapes::UnionShape.new(name: 'CardInput')
@@ -39,9 +46,14 @@ module Aws::QApps
     CardValue = Shapes::StructureShape.new(name: 'CardValue')
     CardValueList = Shapes::ListShape.new(name: 'CardValueList')
     CardValueValueString = Shapes::StringShape.new(name: 'CardValueValueString')
+    CategoriesList = Shapes::ListShape.new(name: 'CategoriesList')
     Category = Shapes::StructureShape.new(name: 'Category')
     CategoryIdList = Shapes::ListShape.new(name: 'CategoryIdList')
+    CategoryInput = Shapes::StructureShape.new(name: 'CategoryInput')
+    CategoryInputColorString = Shapes::StringShape.new(name: 'CategoryInputColorString')
+    CategoryInputTitleString = Shapes::StringShape.new(name: 'CategoryInputTitleString')
     CategoryList = Shapes::ListShape.new(name: 'CategoryList')
+    CategoryListInput = Shapes::ListShape.new(name: 'CategoryListInput')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContentTooLargeException = Shapes::StructureShape.new(name: 'ContentTooLargeException')
     ConversationMessage = Shapes::StructureShape.new(name: 'ConversationMessage')
@@ -51,6 +63,7 @@ module Aws::QApps
     CreateQAppInput = Shapes::StructureShape.new(name: 'CreateQAppInput')
     CreateQAppOutput = Shapes::StructureShape.new(name: 'CreateQAppOutput')
     Default = Shapes::StringShape.new(name: 'Default')
+    DeleteCategoryInputList = Shapes::ListShape.new(name: 'DeleteCategoryInputList')
     DeleteLibraryItemInput = Shapes::StructureShape.new(name: 'DeleteLibraryItemInput')
     DeleteQAppInput = Shapes::StructureShape.new(name: 'DeleteQAppInput')
     DependencyList = Shapes::ListShape.new(name: 'DependencyList')
@@ -82,6 +95,8 @@ module Aws::QApps
     LibraryItemList = Shapes::ListShape.new(name: 'LibraryItemList')
     LibraryItemMember = Shapes::StructureShape.new(name: 'LibraryItemMember')
     LibraryItemStatus = Shapes::StringShape.new(name: 'LibraryItemStatus')
+    ListCategoriesInput = Shapes::StructureShape.new(name: 'ListCategoriesInput')
+    ListCategoriesOutput = Shapes::StructureShape.new(name: 'ListCategoriesOutput')
     ListLibraryItemsInput = Shapes::StructureShape.new(name: 'ListLibraryItemsInput')
     ListLibraryItemsOutput = Shapes::StructureShape.new(name: 'ListLibraryItemsOutput')
     ListQAppsInput = Shapes::StructureShape.new(name: 'ListQAppsInput')
@@ -177,6 +192,25 @@ module Aws::QApps
 
     AttributeFilters.member = Shapes::ShapeRef.new(shape: AttributeFilter)
 
+    BatchCreateCategoryInput.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "header", location_name: "instance-id"))
+    BatchCreateCategoryInput.add_member(:categories, Shapes::ShapeRef.new(shape: BatchCreateCategoryInputCategoryList, required: true, location_name: "categories"))
+    BatchCreateCategoryInput.struct_class = Types::BatchCreateCategoryInput
+
+    BatchCreateCategoryInputCategory.add_member(:id, Shapes::ShapeRef.new(shape: UUID, location_name: "id"))
+    BatchCreateCategoryInputCategory.add_member(:title, Shapes::ShapeRef.new(shape: BatchCreateCategoryInputCategoryTitleString, required: true, location_name: "title"))
+    BatchCreateCategoryInputCategory.add_member(:color, Shapes::ShapeRef.new(shape: BatchCreateCategoryInputCategoryColorString, location_name: "color"))
+    BatchCreateCategoryInputCategory.struct_class = Types::BatchCreateCategoryInputCategory
+
+    BatchCreateCategoryInputCategoryList.member = Shapes::ShapeRef.new(shape: BatchCreateCategoryInputCategory)
+
+    BatchDeleteCategoryInput.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "header", location_name: "instance-id"))
+    BatchDeleteCategoryInput.add_member(:categories, Shapes::ShapeRef.new(shape: DeleteCategoryInputList, required: true, location_name: "categories"))
+    BatchDeleteCategoryInput.struct_class = Types::BatchDeleteCategoryInput
+
+    BatchUpdateCategoryInput.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "header", location_name: "instance-id"))
+    BatchUpdateCategoryInput.add_member(:categories, Shapes::ShapeRef.new(shape: CategoryListInput, required: true, location_name: "categories"))
+    BatchUpdateCategoryInput.struct_class = Types::BatchUpdateCategoryInput
+
     Card.add_member(:text_input, Shapes::ShapeRef.new(shape: TextInputCard, location_name: "textInput"))
     Card.add_member(:q_query, Shapes::ShapeRef.new(shape: QQueryCard, location_name: "qQuery"))
     Card.add_member(:q_plugin, Shapes::ShapeRef.new(shape: QPluginCard, location_name: "qPlugin"))
@@ -218,13 +252,24 @@ module Aws::QApps
 
     CardValueList.member = Shapes::ShapeRef.new(shape: CardValue)
 
+    CategoriesList.member = Shapes::ShapeRef.new(shape: Category)
+
     Category.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "id"))
     Category.add_member(:title, Shapes::ShapeRef.new(shape: String, required: true, location_name: "title"))
+    Category.add_member(:color, Shapes::ShapeRef.new(shape: String, location_name: "color"))
+    Category.add_member(:app_count, Shapes::ShapeRef.new(shape: Integer, location_name: "appCount"))
     Category.struct_class = Types::Category
 
     CategoryIdList.member = Shapes::ShapeRef.new(shape: UUID)
 
+    CategoryInput.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "id"))
+    CategoryInput.add_member(:title, Shapes::ShapeRef.new(shape: CategoryInputTitleString, required: true, location_name: "title"))
+    CategoryInput.add_member(:color, Shapes::ShapeRef.new(shape: CategoryInputColorString, location_name: "color"))
+    CategoryInput.struct_class = Types::CategoryInput
+
     CategoryList.member = Shapes::ShapeRef.new(shape: Category)
+
+    CategoryListInput.member = Shapes::ShapeRef.new(shape: CategoryInput)
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ConflictException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceId"))
@@ -276,6 +321,8 @@ module Aws::QApps
     CreateQAppOutput.add_member(:updated_by, Shapes::ShapeRef.new(shape: String, required: true, location_name: "updatedBy"))
     CreateQAppOutput.add_member(:required_capabilities, Shapes::ShapeRef.new(shape: AppRequiredCapabilities, location_name: "requiredCapabilities"))
     CreateQAppOutput.struct_class = Types::CreateQAppOutput
+
+    DeleteCategoryInputList.member = Shapes::ShapeRef.new(shape: UUID)
 
     DeleteLibraryItemInput.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "header", location_name: "instance-id"))
     DeleteLibraryItemInput.add_member(:library_item_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "libraryItemId"))
@@ -411,6 +458,12 @@ module Aws::QApps
     LibraryItemMember.add_member(:user_count, Shapes::ShapeRef.new(shape: Integer, location_name: "userCount"))
     LibraryItemMember.add_member(:is_verified, Shapes::ShapeRef.new(shape: Boolean, location_name: "isVerified"))
     LibraryItemMember.struct_class = Types::LibraryItemMember
+
+    ListCategoriesInput.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "header", location_name: "instance-id"))
+    ListCategoriesInput.struct_class = Types::ListCategoriesInput
+
+    ListCategoriesOutput.add_member(:categories, Shapes::ShapeRef.new(shape: CategoriesList, location_name: "categories"))
+    ListCategoriesOutput.struct_class = Types::ListCategoriesOutput
 
     ListLibraryItemsInput.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "header", location_name: "instance-id"))
     ListLibraryItemsInput.add_member(:limit, Shapes::ShapeRef.new(shape: PageLimit, location: "querystring", location_name: "limit"))
@@ -685,6 +738,51 @@ module Aws::QApps
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:batch_create_category, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchCreateCategory"
+        o.http_method = "POST"
+        o.http_request_uri = "/catalog.createCategories"
+        o.input = Shapes::ShapeRef.new(shape: BatchCreateCategoryInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:batch_delete_category, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchDeleteCategory"
+        o.http_method = "POST"
+        o.http_request_uri = "/catalog.deleteCategories"
+        o.input = Shapes::ShapeRef.new(shape: BatchDeleteCategoryInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:batch_update_category, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchUpdateCategory"
+        o.http_method = "POST"
+        o.http_request_uri = "/catalog.updateCategories"
+        o.input = Shapes::ShapeRef.new(shape: BatchUpdateCategoryInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:create_library_item, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateLibraryItem"
         o.http_method = "POST"
@@ -831,6 +929,20 @@ module Aws::QApps
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ContentTooLargeException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:list_categories, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCategories"
+        o.http_method = "GET"
+        o.http_request_uri = "/catalog.listCategories"
+        o.input = Shapes::ShapeRef.new(shape: ListCategoriesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListCategoriesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 

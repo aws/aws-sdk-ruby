@@ -342,6 +342,7 @@ module Aws::PaymentCryptography
 
     KeySummaryList.member = Shapes::ShapeRef.new(shape: KeySummary)
 
+    ListAliasesInput.add_member(:key_arn, Shapes::ShapeRef.new(shape: KeyArn, location_name: "KeyArn"))
     ListAliasesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListAliasesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListAliasesInput.struct_class = Types::ListAliasesInput
@@ -403,7 +404,7 @@ module Aws::PaymentCryptography
     StopKeyUsageOutput.struct_class = Types::StopKeyUsageOutput
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
-    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
     Tag.struct_class = Types::Tag
 
     TagKeys.member = Shapes::ShapeRef.new(shape: TagKey)

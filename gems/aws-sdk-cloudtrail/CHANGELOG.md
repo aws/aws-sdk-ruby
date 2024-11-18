@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.95.0 (2024-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.94.0 (2024-11-13)
+------------------
+
+* Feature - This release adds a new API GenerateQuery that generates a query from a natural language prompt about the event data in your event data store. This operation uses generative artificial intelligence (generative AI) to produce a ready-to-use SQL query from the prompt.
+
 1.93.0 (2024-10-18)
 ------------------
 

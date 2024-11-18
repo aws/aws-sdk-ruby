@@ -117,6 +117,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#supports_integrations-instance_method
       def supports_integrations: () -> bool
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#serverless_v2_features_support-instance_method
+      def serverless_v2_features_support: () -> Types::ServerlessV2FeaturesSupport
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#load-instance_method

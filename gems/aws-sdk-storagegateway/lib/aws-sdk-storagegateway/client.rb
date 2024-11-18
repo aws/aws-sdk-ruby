@@ -1559,11 +1559,11 @@ module Aws::StorageGateway
     #   The following example sets `NotificationPolicy` on with
     #   `SettlingTimeInSeconds` set to 60.
     #
-    #   `\{"Upload": \{"SettlingTimeInSeconds": 60\}\}`
+    #   `{"Upload": {"SettlingTimeInSeconds": 60}}`
     #
     #   The following example sets `NotificationPolicy` off.
     #
-    #   `\{\}`
+    #   `{}`
     #
     # @option params [String] :vpc_endpoint_dns_name
     #   Specifies the DNS name for the VPC endpoint that the NFS file share
@@ -1897,11 +1897,11 @@ module Aws::StorageGateway
     #   The following example sets `NotificationPolicy` on with
     #   `SettlingTimeInSeconds` set to 60.
     #
-    #   `\{"Upload": \{"SettlingTimeInSeconds": 60\}\}`
+    #   `{"Upload": {"SettlingTimeInSeconds": 60}}`
     #
     #   The following example sets `NotificationPolicy` off.
     #
-    #   `\{\}`
+    #   `{}`
     #
     # @option params [String] :vpc_endpoint_dns_name
     #   Specifies the DNS name for the VPC endpoint that the SMB file share
@@ -6961,11 +6961,11 @@ module Aws::StorageGateway
     #   The following example sets `NotificationPolicy` on with
     #   `SettlingTimeInSeconds` set to 60.
     #
-    #   `\{"Upload": \{"SettlingTimeInSeconds": 60\}\}`
+    #   `{"Upload": {"SettlingTimeInSeconds": 60}}`
     #
     #   The following example sets `NotificationPolicy` off.
     #
-    #   `\{\}`
+    #   `{}`
     #
     # @option params [String] :audit_destination_arn
     #   The Amazon Resource Name (ARN) of the storage used for audit logs.
@@ -7212,11 +7212,11 @@ module Aws::StorageGateway
     #   The following example sets `NotificationPolicy` on with
     #   `SettlingTimeInSeconds` set to 60.
     #
-    #   `\{"Upload": \{"SettlingTimeInSeconds": 60\}\}`
+    #   `{"Upload": {"SettlingTimeInSeconds": 60}}`
     #
     #   The following example sets `NotificationPolicy` off.
     #
-    #   `\{\}`
+    #   `{}`
     #
     # @option params [Boolean] :oplocks_enabled
     #   Specifies whether opportunistic locking is enabled for the SMB file
@@ -7580,7 +7580,7 @@ module Aws::StorageGateway
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.100.0'
+      context[:gem_version] = '1.101.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

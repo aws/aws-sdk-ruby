@@ -3157,7 +3157,6 @@ module Aws::DeviceFarm
     #     * INSTANCE\_LABELS: The label of the device instance.
     #
     #     * FLEET\_TYPE: The fleet type. Valid values are PUBLIC or PRIVATE.
-    #
     #   * Operator: The filter operator.
     #
     #     * The EQUALS operator is available for every attribute except
@@ -3172,7 +3171,6 @@ module Aws::DeviceFarm
     #     * The LESS\_THAN, GREATER\_THAN, LESS\_THAN\_OR\_EQUALS, and
     #       GREATER\_THAN\_OR\_EQUALS operators are also available for the
     #       OS\_VERSION attribute.
-    #
     #   * Values: An array of one or more filter values.
     #
     #     * The IN and NOT\_IN operators take a values array that has one or
@@ -6156,7 +6154,7 @@ module Aws::DeviceFarm
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-devicefarm'
-      context[:gem_version] = '1.80.0'
+      context[:gem_version] = '1.81.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

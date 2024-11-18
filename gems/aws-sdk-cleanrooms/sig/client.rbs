@@ -150,17 +150,31 @@ module Aws
                                     {
                                       account_id: ::String,
                                       member_abilities: Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS")],
+                                      ml_member_abilities: {
+                                        custom_ml_member_abilities: Array[("CAN_RECEIVE_MODEL_OUTPUT" | "CAN_RECEIVE_INFERENCE_OUTPUT")]
+                                      }?,
                                       display_name: ::String,
                                       payment_configuration: {
                                         query_compute: {
                                           is_responsible: bool
-                                        }
+                                        },
+                                        machine_learning: {
+                                          model_training: {
+                                            is_responsible: bool
+                                          }?,
+                                          model_inference: {
+                                            is_responsible: bool
+                                          }?
+                                        }?
                                       }?
                                     },
                                   ],
                                   name: ::String,
                                   description: ::String,
                                   creator_member_abilities: Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS")],
+                                  ?creator_ml_member_abilities: {
+                                    custom_ml_member_abilities: Array[("CAN_RECEIVE_MODEL_OUTPUT" | "CAN_RECEIVE_INFERENCE_OUTPUT")]
+                                  },
                                   creator_display_name: ::String,
                                   ?data_encryption_metadata: {
                                     allow_cleartext: bool,
@@ -173,7 +187,15 @@ module Aws
                                   ?creator_payment_configuration: {
                                     query_compute: {
                                       is_responsible: bool
-                                    }
+                                    },
+                                    machine_learning: {
+                                      model_training: {
+                                        is_responsible: bool
+                                      }?,
+                                      model_inference: {
+                                        is_responsible: bool
+                                      }?
+                                    }?
                                   },
                                   ?analytics_engine: ("SPARK" | "CLEAN_ROOMS_SQL")
                                 ) -> _CreateCollaborationResponseSuccess
@@ -373,7 +395,15 @@ module Aws
                                ?payment_configuration: {
                                  query_compute: {
                                    is_responsible: bool
-                                 }
+                                 },
+                                 machine_learning: {
+                                   model_training: {
+                                     is_responsible: bool
+                                   }?,
+                                   model_inference: {
+                                     is_responsible: bool
+                                   }?
+                                 }?
                                }
                              ) -> _CreateMembershipResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMembershipResponseSuccess

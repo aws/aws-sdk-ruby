@@ -438,7 +438,7 @@ module Aws::Shield
     #
     # This is only used in the context of the `ResponseAction` setting.
     #
-    # JSON specification: `"Block": \{\}`
+    # JSON specification: `"Block": {}`
     #
     # @api private
     #
@@ -475,7 +475,7 @@ module Aws::Shield
     #
     # This is only used in the context of the `ResponseAction` setting.
     #
-    # JSON specification: `"Count": \{\}`
+    # JSON specification: `"Count": {}`
     #
     # @api private
     #

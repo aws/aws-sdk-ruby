@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2024-11-14)
+------------------
+
+* Feature - New FuotaTask resource type to enable logging for your FUOTA tasks. A ParticipatingGatewaysforMulticast parameter to choose the list of gateways to receive the multicast downlink message and the transmission interval between them. Descriptor field which will be sent to devices during FUOTA transfer.
+
 1.60.0 (2024-10-18)
 ------------------
 

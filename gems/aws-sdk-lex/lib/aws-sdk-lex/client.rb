@@ -608,7 +608,6 @@ module Aws::Lex
     #
     #   * `x-amz-lex-slots` header set to a map of slots configured for the
     #     intent with their current values
-    #
     # * If the message is a confirmation prompt, the
     #   `x-amz-lex-dialog-state` header is set to `Confirmation` and the
     #   `x-amz-lex-slot-to-elicit` header is omitted.
@@ -713,14 +712,12 @@ module Aws::Lex
     #
     #     * audio/lpcm; sample-rate=8000; sample-size-bits=16;
     #       channel-count=1; is-big-endian=false
-    #
     #   * Opus format
     #
     #     * audio/x-cbr-opus-with-preamble; preamble-size=0; bit-rate=256000;
     #       frame-size-milliseconds=4
     #
     #     ^
-    #
     #   * Text format
     #
     #     * text/plain; charset=utf-8
@@ -885,7 +882,6 @@ module Aws::Lex
     #
     #   * `slots` set to a map of slots, configured for the intent, with
     #     currently known values
-    #
     # * If the message is a confirmation prompt, the `dialogState` is set to
     #   ConfirmIntent and `SlotToElicit` is set to null.
     #
@@ -1253,7 +1249,7 @@ module Aws::Lex
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lex'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

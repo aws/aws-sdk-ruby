@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.144.0 (2024-11-13)
+------------------
+
+* Feature - This release adds support for ARN inputs in the Kantar credentials secrets name field and the MSPR field to the manifests for PlayReady DRM protected outputs.
+
 1.143.0 (2024-10-18)
 ------------------
 

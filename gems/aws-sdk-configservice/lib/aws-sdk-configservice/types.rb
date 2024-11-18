@@ -4933,7 +4933,6 @@ module Aws::ConfigService
     #   * Setting the `allSupported` field of [RecordingGroup][1] to `true`,
     #     but also setting the `useOnly` field of [RecordingStrategy][2] to
     #     `EXCLUSION_BY_RESOURCE_TYPES`.
-    #
     # * Every parameter is either null, false, or empty.
     #
     # * You have reached the limit of the number of resource types you can

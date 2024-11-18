@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2024-11-11)
+------------------
+
+* Feature - Adds Support for new AssociatePackages and DissociatePackages API in Amazon OpenSearch Service that allows association and dissociation operations to be carried out on multiple packages at the same time.
+
+1.60.0 (2024-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.59.0 (2024-10-30)
 ------------------
 

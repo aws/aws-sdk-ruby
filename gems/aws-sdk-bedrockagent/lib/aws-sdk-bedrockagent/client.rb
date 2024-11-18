@@ -524,7 +524,6 @@ module Aws::BedrockAgent
     #     seconds for which the agent should maintain session information.
     #     After this time expires, the subsequent `InvokeAgent` request
     #     begins a new session.
-    #
     # * To enable your agent to retain conversational context across
     #   multiple sessions, include a `memoryConfiguration` object. For more
     #   information, see [Configure memory][1].
@@ -1408,6 +1407,10 @@ module Aws::BedrockAgent
     #             iterator: {
     #             },
     #             knowledge_base: {
+    #               guardrail_configuration: {
+    #                 guardrail_identifier: "GuardrailIdentifier",
+    #                 guardrail_version: "GuardrailVersion",
+    #               },
     #               knowledge_base_id: "KnowledgeBaseId", # required
     #               model_id: "KnowledgeBaseModelIdentifier",
     #             },
@@ -1421,6 +1424,10 @@ module Aws::BedrockAgent
     #             output: {
     #             },
     #             prompt: {
+    #               guardrail_configuration: {
+    #                 guardrail_identifier: "GuardrailIdentifier",
+    #                 guardrail_version: "GuardrailVersion",
+    #               },
     #               source_configuration: { # required
     #                 inline: {
     #                   additional_model_request_fields: {
@@ -1435,6 +1442,51 @@ module Aws::BedrockAgent
     #                   },
     #                   model_id: "PromptModelIdentifier", # required
     #                   template_configuration: { # required
+    #                     chat: {
+    #                       input_variables: [
+    #                         {
+    #                           name: "PromptInputVariableName",
+    #                         },
+    #                       ],
+    #                       messages: [ # required
+    #                         {
+    #                           content: [ # required
+    #                             {
+    #                               text: "String",
+    #                             },
+    #                           ],
+    #                           role: "user", # required, accepts user, assistant
+    #                         },
+    #                       ],
+    #                       system: [
+    #                         {
+    #                           text: "NonEmptyString",
+    #                         },
+    #                       ],
+    #                       tool_configuration: {
+    #                         tool_choice: {
+    #                           any: {
+    #                           },
+    #                           auto: {
+    #                           },
+    #                           tool: {
+    #                             name: "ToolName", # required
+    #                           },
+    #                         },
+    #                         tools: [ # required
+    #                           {
+    #                             tool_spec: {
+    #                               description: "NonEmptyString",
+    #                               input_schema: { # required
+    #                                 json: {
+    #                                 },
+    #                               },
+    #                               name: "ToolName", # required
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
     #                     text: {
     #                       input_variables: [
     #                         {
@@ -1444,7 +1496,7 @@ module Aws::BedrockAgent
     #                       text: "TextPrompt", # required
     #                     },
     #                   },
-    #                   template_type: "TEXT", # required, accepts TEXT
+    #                   template_type: "TEXT", # required, accepts TEXT, CHAT
     #                 },
     #                 resource: {
     #                   prompt_arn: "PromptArn", # required
@@ -1510,21 +1562,37 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.condition.conditions #=> Array
     #   resp.definition.nodes[0].configuration.condition.conditions[0].expression #=> String
     #   resp.definition.nodes[0].configuration.condition.conditions[0].name #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.guardrail_configuration.guardrail_identifier #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.guardrail_configuration.guardrail_version #=> String
     #   resp.definition.nodes[0].configuration.knowledge_base.knowledge_base_id #=> String
     #   resp.definition.nodes[0].configuration.knowledge_base.model_id #=> String
     #   resp.definition.nodes[0].configuration.lambda_function.lambda_arn #=> String
     #   resp.definition.nodes[0].configuration.lex.bot_alias_arn #=> String
     #   resp.definition.nodes[0].configuration.lex.locale_id #=> String
+    #   resp.definition.nodes[0].configuration.prompt.guardrail_configuration.guardrail_identifier #=> String
+    #   resp.definition.nodes[0].configuration.prompt.guardrail_configuration.guardrail_version #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.max_tokens #=> Integer
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences #=> Array
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences[0] #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.temperature #=> Float
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.top_p #=> Float
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.model_id #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.input_variables #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.input_variables[0].name #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages[0].content #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages[0].content[0].text #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages[0].role #=> String, one of "user", "assistant"
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.system #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.system[0].text #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tool_choice.tool.name #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].tool_spec.description #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].tool_spec.name #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables #=> Array
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables[0].name #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.text #=> String
-    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_type #=> String, one of "TEXT"
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_type #=> String, one of "TEXT", "CHAT"
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.resource.prompt_arn #=> String
     #   resp.definition.nodes[0].configuration.retrieval.service_configuration.s3.bucket_name #=> String
     #   resp.definition.nodes[0].configuration.storage.service_configuration.s3.bucket_name #=> String
@@ -1710,21 +1778,37 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.condition.conditions #=> Array
     #   resp.definition.nodes[0].configuration.condition.conditions[0].expression #=> String
     #   resp.definition.nodes[0].configuration.condition.conditions[0].name #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.guardrail_configuration.guardrail_identifier #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.guardrail_configuration.guardrail_version #=> String
     #   resp.definition.nodes[0].configuration.knowledge_base.knowledge_base_id #=> String
     #   resp.definition.nodes[0].configuration.knowledge_base.model_id #=> String
     #   resp.definition.nodes[0].configuration.lambda_function.lambda_arn #=> String
     #   resp.definition.nodes[0].configuration.lex.bot_alias_arn #=> String
     #   resp.definition.nodes[0].configuration.lex.locale_id #=> String
+    #   resp.definition.nodes[0].configuration.prompt.guardrail_configuration.guardrail_identifier #=> String
+    #   resp.definition.nodes[0].configuration.prompt.guardrail_configuration.guardrail_version #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.max_tokens #=> Integer
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences #=> Array
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences[0] #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.temperature #=> Float
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.top_p #=> Float
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.model_id #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.input_variables #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.input_variables[0].name #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages[0].content #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages[0].content[0].text #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages[0].role #=> String, one of "user", "assistant"
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.system #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.system[0].text #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tool_choice.tool.name #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].tool_spec.description #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].tool_spec.name #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables #=> Array
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables[0].name #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.text #=> String
-    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_type #=> String, one of "TEXT"
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_type #=> String, one of "TEXT", "CHAT"
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.resource.prompt_arn #=> String
     #   resp.definition.nodes[0].configuration.retrieval.service_configuration.s3.bucket_name #=> String
     #   resp.definition.nodes[0].configuration.storage.service_configuration.s3.bucket_name #=> String
@@ -2058,6 +2142,11 @@ module Aws::BedrockAgent
     #       {
     #         additional_model_request_fields: {
     #         },
+    #         gen_ai_resource: {
+    #           agent: {
+    #             agent_identifier: "AgentAliasArn", # required
+    #           },
+    #         },
     #         inference_configuration: {
     #           text: {
     #             max_tokens: 1,
@@ -2075,6 +2164,51 @@ module Aws::BedrockAgent
     #         model_id: "PromptModelIdentifier",
     #         name: "PromptVariantName", # required
     #         template_configuration: { # required
+    #           chat: {
+    #             input_variables: [
+    #               {
+    #                 name: "PromptInputVariableName",
+    #               },
+    #             ],
+    #             messages: [ # required
+    #               {
+    #                 content: [ # required
+    #                   {
+    #                     text: "String",
+    #                   },
+    #                 ],
+    #                 role: "user", # required, accepts user, assistant
+    #               },
+    #             ],
+    #             system: [
+    #               {
+    #                 text: "NonEmptyString",
+    #               },
+    #             ],
+    #             tool_configuration: {
+    #               tool_choice: {
+    #                 any: {
+    #                 },
+    #                 auto: {
+    #                 },
+    #                 tool: {
+    #                   name: "ToolName", # required
+    #                 },
+    #               },
+    #               tools: [ # required
+    #                 {
+    #                   tool_spec: {
+    #                     description: "NonEmptyString",
+    #                     input_schema: { # required
+    #                       json: {
+    #                       },
+    #                     },
+    #                     name: "ToolName", # required
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           },
     #           text: {
     #             input_variables: [
     #               {
@@ -2084,7 +2218,7 @@ module Aws::BedrockAgent
     #             text: "TextPrompt", # required
     #           },
     #         },
-    #         template_type: "TEXT", # required, accepts TEXT
+    #         template_type: "TEXT", # required, accepts TEXT, CHAT
     #       },
     #     ],
     #   })
@@ -2100,6 +2234,7 @@ module Aws::BedrockAgent
     #   resp.name #=> String
     #   resp.updated_at #=> Time
     #   resp.variants #=> Array
+    #   resp.variants[0].gen_ai_resource.agent.agent_identifier #=> String
     #   resp.variants[0].inference_configuration.text.max_tokens #=> Integer
     #   resp.variants[0].inference_configuration.text.stop_sequences #=> Array
     #   resp.variants[0].inference_configuration.text.stop_sequences[0] #=> String
@@ -2110,10 +2245,22 @@ module Aws::BedrockAgent
     #   resp.variants[0].metadata[0].value #=> String
     #   resp.variants[0].model_id #=> String
     #   resp.variants[0].name #=> String
+    #   resp.variants[0].template_configuration.chat.input_variables #=> Array
+    #   resp.variants[0].template_configuration.chat.input_variables[0].name #=> String
+    #   resp.variants[0].template_configuration.chat.messages #=> Array
+    #   resp.variants[0].template_configuration.chat.messages[0].content #=> Array
+    #   resp.variants[0].template_configuration.chat.messages[0].content[0].text #=> String
+    #   resp.variants[0].template_configuration.chat.messages[0].role #=> String, one of "user", "assistant"
+    #   resp.variants[0].template_configuration.chat.system #=> Array
+    #   resp.variants[0].template_configuration.chat.system[0].text #=> String
+    #   resp.variants[0].template_configuration.chat.tool_configuration.tool_choice.tool.name #=> String
+    #   resp.variants[0].template_configuration.chat.tool_configuration.tools #=> Array
+    #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].tool_spec.description #=> String
+    #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].tool_spec.name #=> String
     #   resp.variants[0].template_configuration.text.input_variables #=> Array
     #   resp.variants[0].template_configuration.text.input_variables[0].name #=> String
     #   resp.variants[0].template_configuration.text.text #=> String
-    #   resp.variants[0].template_type #=> String, one of "TEXT"
+    #   resp.variants[0].template_type #=> String, one of "TEXT", "CHAT"
     #   resp.version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreatePrompt AWS API Documentation
@@ -2196,6 +2343,7 @@ module Aws::BedrockAgent
     #   resp.name #=> String
     #   resp.updated_at #=> Time
     #   resp.variants #=> Array
+    #   resp.variants[0].gen_ai_resource.agent.agent_identifier #=> String
     #   resp.variants[0].inference_configuration.text.max_tokens #=> Integer
     #   resp.variants[0].inference_configuration.text.stop_sequences #=> Array
     #   resp.variants[0].inference_configuration.text.stop_sequences[0] #=> String
@@ -2206,10 +2354,22 @@ module Aws::BedrockAgent
     #   resp.variants[0].metadata[0].value #=> String
     #   resp.variants[0].model_id #=> String
     #   resp.variants[0].name #=> String
+    #   resp.variants[0].template_configuration.chat.input_variables #=> Array
+    #   resp.variants[0].template_configuration.chat.input_variables[0].name #=> String
+    #   resp.variants[0].template_configuration.chat.messages #=> Array
+    #   resp.variants[0].template_configuration.chat.messages[0].content #=> Array
+    #   resp.variants[0].template_configuration.chat.messages[0].content[0].text #=> String
+    #   resp.variants[0].template_configuration.chat.messages[0].role #=> String, one of "user", "assistant"
+    #   resp.variants[0].template_configuration.chat.system #=> Array
+    #   resp.variants[0].template_configuration.chat.system[0].text #=> String
+    #   resp.variants[0].template_configuration.chat.tool_configuration.tool_choice.tool.name #=> String
+    #   resp.variants[0].template_configuration.chat.tool_configuration.tools #=> Array
+    #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].tool_spec.description #=> String
+    #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].tool_spec.name #=> String
     #   resp.variants[0].template_configuration.text.input_variables #=> Array
     #   resp.variants[0].template_configuration.text.input_variables[0].name #=> String
     #   resp.variants[0].template_configuration.text.text #=> String
-    #   resp.variants[0].template_type #=> String, one of "TEXT"
+    #   resp.variants[0].template_type #=> String, one of "TEXT", "CHAT"
     #   resp.version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreatePromptVersion AWS API Documentation
@@ -3068,21 +3228,37 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.condition.conditions #=> Array
     #   resp.definition.nodes[0].configuration.condition.conditions[0].expression #=> String
     #   resp.definition.nodes[0].configuration.condition.conditions[0].name #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.guardrail_configuration.guardrail_identifier #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.guardrail_configuration.guardrail_version #=> String
     #   resp.definition.nodes[0].configuration.knowledge_base.knowledge_base_id #=> String
     #   resp.definition.nodes[0].configuration.knowledge_base.model_id #=> String
     #   resp.definition.nodes[0].configuration.lambda_function.lambda_arn #=> String
     #   resp.definition.nodes[0].configuration.lex.bot_alias_arn #=> String
     #   resp.definition.nodes[0].configuration.lex.locale_id #=> String
+    #   resp.definition.nodes[0].configuration.prompt.guardrail_configuration.guardrail_identifier #=> String
+    #   resp.definition.nodes[0].configuration.prompt.guardrail_configuration.guardrail_version #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.max_tokens #=> Integer
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences #=> Array
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences[0] #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.temperature #=> Float
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.top_p #=> Float
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.model_id #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.input_variables #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.input_variables[0].name #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages[0].content #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages[0].content[0].text #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages[0].role #=> String, one of "user", "assistant"
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.system #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.system[0].text #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tool_choice.tool.name #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].tool_spec.description #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].tool_spec.name #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables #=> Array
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables[0].name #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.text #=> String
-    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_type #=> String, one of "TEXT"
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_type #=> String, one of "TEXT", "CHAT"
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.resource.prompt_arn #=> String
     #   resp.definition.nodes[0].configuration.retrieval.service_configuration.s3.bucket_name #=> String
     #   resp.definition.nodes[0].configuration.storage.service_configuration.s3.bucket_name #=> String
@@ -3102,8 +3278,45 @@ module Aws::BedrockAgent
     #   resp.status #=> String, one of "Failed", "Prepared", "Preparing", "NotPrepared"
     #   resp.updated_at #=> Time
     #   resp.validations #=> Array
+    #   resp.validations[0].details.cyclic_connection.connection #=> String
+    #   resp.validations[0].details.duplicate_condition_expression.expression #=> String
+    #   resp.validations[0].details.duplicate_condition_expression.node #=> String
+    #   resp.validations[0].details.duplicate_connections.source #=> String
+    #   resp.validations[0].details.duplicate_connections.target #=> String
+    #   resp.validations[0].details.incompatible_connection_data_type.connection #=> String
+    #   resp.validations[0].details.malformed_condition_expression.cause #=> String
+    #   resp.validations[0].details.malformed_condition_expression.condition #=> String
+    #   resp.validations[0].details.malformed_condition_expression.node #=> String
+    #   resp.validations[0].details.malformed_node_input_expression.cause #=> String
+    #   resp.validations[0].details.malformed_node_input_expression.input #=> String
+    #   resp.validations[0].details.malformed_node_input_expression.node #=> String
+    #   resp.validations[0].details.mismatched_node_input_type.expected_type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
+    #   resp.validations[0].details.mismatched_node_input_type.input #=> String
+    #   resp.validations[0].details.mismatched_node_input_type.node #=> String
+    #   resp.validations[0].details.mismatched_node_output_type.expected_type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
+    #   resp.validations[0].details.mismatched_node_output_type.node #=> String
+    #   resp.validations[0].details.mismatched_node_output_type.output #=> String
+    #   resp.validations[0].details.missing_connection_configuration.connection #=> String
+    #   resp.validations[0].details.missing_default_condition.node #=> String
+    #   resp.validations[0].details.missing_node_configuration.node #=> String
+    #   resp.validations[0].details.missing_node_input.input #=> String
+    #   resp.validations[0].details.missing_node_input.node #=> String
+    #   resp.validations[0].details.missing_node_output.node #=> String
+    #   resp.validations[0].details.missing_node_output.output #=> String
+    #   resp.validations[0].details.multiple_node_input_connections.input #=> String
+    #   resp.validations[0].details.multiple_node_input_connections.node #=> String
+    #   resp.validations[0].details.unfulfilled_node_input.input #=> String
+    #   resp.validations[0].details.unfulfilled_node_input.node #=> String
+    #   resp.validations[0].details.unknown_connection_condition.connection #=> String
+    #   resp.validations[0].details.unknown_connection_source.connection #=> String
+    #   resp.validations[0].details.unknown_connection_source_output.connection #=> String
+    #   resp.validations[0].details.unknown_connection_target.connection #=> String
+    #   resp.validations[0].details.unknown_connection_target_input.connection #=> String
+    #   resp.validations[0].details.unreachable_node.node #=> String
+    #   resp.validations[0].details.unsatisfied_connection_conditions.connection #=> String
     #   resp.validations[0].message #=> String
     #   resp.validations[0].severity #=> String, one of "Warning", "Error"
+    #   resp.validations[0].type #=> String, one of "CyclicConnection", "DuplicateConnections", "DuplicateConditionExpression", "UnreachableNode", "UnknownConnectionSource", "UnknownConnectionSourceOutput", "UnknownConnectionTarget", "UnknownConnectionTargetInput", "UnknownConnectionCondition", "MalformedConditionExpression", "MalformedNodeInputExpression", "MismatchedNodeInputType", "MismatchedNodeOutputType", "IncompatibleConnectionDataType", "MissingConnectionConfiguration", "MissingDefaultCondition", "MissingEndingNodes", "MissingNodeConfiguration", "MissingNodeInput", "MissingNodeOutput", "MissingStartingNodes", "MultipleNodeInputConnections", "UnfulfilledNodeInput", "UnsatisfiedConnectionConditions", "Unspecified"
     #   resp.version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetFlow AWS API Documentation
@@ -3219,21 +3432,37 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.condition.conditions #=> Array
     #   resp.definition.nodes[0].configuration.condition.conditions[0].expression #=> String
     #   resp.definition.nodes[0].configuration.condition.conditions[0].name #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.guardrail_configuration.guardrail_identifier #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.guardrail_configuration.guardrail_version #=> String
     #   resp.definition.nodes[0].configuration.knowledge_base.knowledge_base_id #=> String
     #   resp.definition.nodes[0].configuration.knowledge_base.model_id #=> String
     #   resp.definition.nodes[0].configuration.lambda_function.lambda_arn #=> String
     #   resp.definition.nodes[0].configuration.lex.bot_alias_arn #=> String
     #   resp.definition.nodes[0].configuration.lex.locale_id #=> String
+    #   resp.definition.nodes[0].configuration.prompt.guardrail_configuration.guardrail_identifier #=> String
+    #   resp.definition.nodes[0].configuration.prompt.guardrail_configuration.guardrail_version #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.max_tokens #=> Integer
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences #=> Array
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences[0] #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.temperature #=> Float
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.top_p #=> Float
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.model_id #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.input_variables #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.input_variables[0].name #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages[0].content #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages[0].content[0].text #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages[0].role #=> String, one of "user", "assistant"
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.system #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.system[0].text #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tool_choice.tool.name #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].tool_spec.description #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].tool_spec.name #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables #=> Array
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables[0].name #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.text #=> String
-    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_type #=> String, one of "TEXT"
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_type #=> String, one of "TEXT", "CHAT"
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.resource.prompt_arn #=> String
     #   resp.definition.nodes[0].configuration.retrieval.service_configuration.s3.bucket_name #=> String
     #   resp.definition.nodes[0].configuration.storage.service_configuration.s3.bucket_name #=> String
@@ -3444,6 +3673,7 @@ module Aws::BedrockAgent
     #   resp.name #=> String
     #   resp.updated_at #=> Time
     #   resp.variants #=> Array
+    #   resp.variants[0].gen_ai_resource.agent.agent_identifier #=> String
     #   resp.variants[0].inference_configuration.text.max_tokens #=> Integer
     #   resp.variants[0].inference_configuration.text.stop_sequences #=> Array
     #   resp.variants[0].inference_configuration.text.stop_sequences[0] #=> String
@@ -3454,10 +3684,22 @@ module Aws::BedrockAgent
     #   resp.variants[0].metadata[0].value #=> String
     #   resp.variants[0].model_id #=> String
     #   resp.variants[0].name #=> String
+    #   resp.variants[0].template_configuration.chat.input_variables #=> Array
+    #   resp.variants[0].template_configuration.chat.input_variables[0].name #=> String
+    #   resp.variants[0].template_configuration.chat.messages #=> Array
+    #   resp.variants[0].template_configuration.chat.messages[0].content #=> Array
+    #   resp.variants[0].template_configuration.chat.messages[0].content[0].text #=> String
+    #   resp.variants[0].template_configuration.chat.messages[0].role #=> String, one of "user", "assistant"
+    #   resp.variants[0].template_configuration.chat.system #=> Array
+    #   resp.variants[0].template_configuration.chat.system[0].text #=> String
+    #   resp.variants[0].template_configuration.chat.tool_configuration.tool_choice.tool.name #=> String
+    #   resp.variants[0].template_configuration.chat.tool_configuration.tools #=> Array
+    #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].tool_spec.description #=> String
+    #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].tool_spec.name #=> String
     #   resp.variants[0].template_configuration.text.input_variables #=> Array
     #   resp.variants[0].template_configuration.text.input_variables[0].name #=> String
     #   resp.variants[0].template_configuration.text.text #=> String
-    #   resp.variants[0].template_type #=> String, one of "TEXT"
+    #   resp.variants[0].template_type #=> String, one of "TEXT", "CHAT"
     #   resp.version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetPrompt AWS API Documentation
@@ -5256,6 +5498,10 @@ module Aws::BedrockAgent
     #             iterator: {
     #             },
     #             knowledge_base: {
+    #               guardrail_configuration: {
+    #                 guardrail_identifier: "GuardrailIdentifier",
+    #                 guardrail_version: "GuardrailVersion",
+    #               },
     #               knowledge_base_id: "KnowledgeBaseId", # required
     #               model_id: "KnowledgeBaseModelIdentifier",
     #             },
@@ -5269,6 +5515,10 @@ module Aws::BedrockAgent
     #             output: {
     #             },
     #             prompt: {
+    #               guardrail_configuration: {
+    #                 guardrail_identifier: "GuardrailIdentifier",
+    #                 guardrail_version: "GuardrailVersion",
+    #               },
     #               source_configuration: { # required
     #                 inline: {
     #                   additional_model_request_fields: {
@@ -5283,6 +5533,51 @@ module Aws::BedrockAgent
     #                   },
     #                   model_id: "PromptModelIdentifier", # required
     #                   template_configuration: { # required
+    #                     chat: {
+    #                       input_variables: [
+    #                         {
+    #                           name: "PromptInputVariableName",
+    #                         },
+    #                       ],
+    #                       messages: [ # required
+    #                         {
+    #                           content: [ # required
+    #                             {
+    #                               text: "String",
+    #                             },
+    #                           ],
+    #                           role: "user", # required, accepts user, assistant
+    #                         },
+    #                       ],
+    #                       system: [
+    #                         {
+    #                           text: "NonEmptyString",
+    #                         },
+    #                       ],
+    #                       tool_configuration: {
+    #                         tool_choice: {
+    #                           any: {
+    #                           },
+    #                           auto: {
+    #                           },
+    #                           tool: {
+    #                             name: "ToolName", # required
+    #                           },
+    #                         },
+    #                         tools: [ # required
+    #                           {
+    #                             tool_spec: {
+    #                               description: "NonEmptyString",
+    #                               input_schema: { # required
+    #                                 json: {
+    #                                 },
+    #                               },
+    #                               name: "ToolName", # required
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
     #                     text: {
     #                       input_variables: [
     #                         {
@@ -5292,7 +5587,7 @@ module Aws::BedrockAgent
     #                       text: "TextPrompt", # required
     #                     },
     #                   },
-    #                   template_type: "TEXT", # required, accepts TEXT
+    #                   template_type: "TEXT", # required, accepts TEXT, CHAT
     #                 },
     #                 resource: {
     #                   prompt_arn: "PromptArn", # required
@@ -5356,21 +5651,37 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.condition.conditions #=> Array
     #   resp.definition.nodes[0].configuration.condition.conditions[0].expression #=> String
     #   resp.definition.nodes[0].configuration.condition.conditions[0].name #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.guardrail_configuration.guardrail_identifier #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.guardrail_configuration.guardrail_version #=> String
     #   resp.definition.nodes[0].configuration.knowledge_base.knowledge_base_id #=> String
     #   resp.definition.nodes[0].configuration.knowledge_base.model_id #=> String
     #   resp.definition.nodes[0].configuration.lambda_function.lambda_arn #=> String
     #   resp.definition.nodes[0].configuration.lex.bot_alias_arn #=> String
     #   resp.definition.nodes[0].configuration.lex.locale_id #=> String
+    #   resp.definition.nodes[0].configuration.prompt.guardrail_configuration.guardrail_identifier #=> String
+    #   resp.definition.nodes[0].configuration.prompt.guardrail_configuration.guardrail_version #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.max_tokens #=> Integer
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences #=> Array
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences[0] #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.temperature #=> Float
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.top_p #=> Float
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.model_id #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.input_variables #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.input_variables[0].name #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages[0].content #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages[0].content[0].text #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages[0].role #=> String, one of "user", "assistant"
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.system #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.system[0].text #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tool_choice.tool.name #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].tool_spec.description #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].tool_spec.name #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables #=> Array
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables[0].name #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.text #=> String
-    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_type #=> String, one of "TEXT"
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_type #=> String, one of "TEXT", "CHAT"
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.resource.prompt_arn #=> String
     #   resp.definition.nodes[0].configuration.retrieval.service_configuration.s3.bucket_name #=> String
     #   resp.definition.nodes[0].configuration.storage.service_configuration.s3.bucket_name #=> String
@@ -5711,6 +6022,11 @@ module Aws::BedrockAgent
     #       {
     #         additional_model_request_fields: {
     #         },
+    #         gen_ai_resource: {
+    #           agent: {
+    #             agent_identifier: "AgentAliasArn", # required
+    #           },
+    #         },
     #         inference_configuration: {
     #           text: {
     #             max_tokens: 1,
@@ -5728,6 +6044,51 @@ module Aws::BedrockAgent
     #         model_id: "PromptModelIdentifier",
     #         name: "PromptVariantName", # required
     #         template_configuration: { # required
+    #           chat: {
+    #             input_variables: [
+    #               {
+    #                 name: "PromptInputVariableName",
+    #               },
+    #             ],
+    #             messages: [ # required
+    #               {
+    #                 content: [ # required
+    #                   {
+    #                     text: "String",
+    #                   },
+    #                 ],
+    #                 role: "user", # required, accepts user, assistant
+    #               },
+    #             ],
+    #             system: [
+    #               {
+    #                 text: "NonEmptyString",
+    #               },
+    #             ],
+    #             tool_configuration: {
+    #               tool_choice: {
+    #                 any: {
+    #                 },
+    #                 auto: {
+    #                 },
+    #                 tool: {
+    #                   name: "ToolName", # required
+    #                 },
+    #               },
+    #               tools: [ # required
+    #                 {
+    #                   tool_spec: {
+    #                     description: "NonEmptyString",
+    #                     input_schema: { # required
+    #                       json: {
+    #                       },
+    #                     },
+    #                     name: "ToolName", # required
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           },
     #           text: {
     #             input_variables: [
     #               {
@@ -5737,7 +6098,7 @@ module Aws::BedrockAgent
     #             text: "TextPrompt", # required
     #           },
     #         },
-    #         template_type: "TEXT", # required, accepts TEXT
+    #         template_type: "TEXT", # required, accepts TEXT, CHAT
     #       },
     #     ],
     #   })
@@ -5753,6 +6114,7 @@ module Aws::BedrockAgent
     #   resp.name #=> String
     #   resp.updated_at #=> Time
     #   resp.variants #=> Array
+    #   resp.variants[0].gen_ai_resource.agent.agent_identifier #=> String
     #   resp.variants[0].inference_configuration.text.max_tokens #=> Integer
     #   resp.variants[0].inference_configuration.text.stop_sequences #=> Array
     #   resp.variants[0].inference_configuration.text.stop_sequences[0] #=> String
@@ -5763,10 +6125,22 @@ module Aws::BedrockAgent
     #   resp.variants[0].metadata[0].value #=> String
     #   resp.variants[0].model_id #=> String
     #   resp.variants[0].name #=> String
+    #   resp.variants[0].template_configuration.chat.input_variables #=> Array
+    #   resp.variants[0].template_configuration.chat.input_variables[0].name #=> String
+    #   resp.variants[0].template_configuration.chat.messages #=> Array
+    #   resp.variants[0].template_configuration.chat.messages[0].content #=> Array
+    #   resp.variants[0].template_configuration.chat.messages[0].content[0].text #=> String
+    #   resp.variants[0].template_configuration.chat.messages[0].role #=> String, one of "user", "assistant"
+    #   resp.variants[0].template_configuration.chat.system #=> Array
+    #   resp.variants[0].template_configuration.chat.system[0].text #=> String
+    #   resp.variants[0].template_configuration.chat.tool_configuration.tool_choice.tool.name #=> String
+    #   resp.variants[0].template_configuration.chat.tool_configuration.tools #=> Array
+    #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].tool_spec.description #=> String
+    #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].tool_spec.name #=> String
     #   resp.variants[0].template_configuration.text.input_variables #=> Array
     #   resp.variants[0].template_configuration.text.input_variables[0].name #=> String
     #   resp.variants[0].template_configuration.text.text #=> String
-    #   resp.variants[0].template_type #=> String, one of "TEXT"
+    #   resp.variants[0].template_type #=> String, one of "TEXT", "CHAT"
     #   resp.version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdatePrompt AWS API Documentation
@@ -5775,6 +6149,240 @@ module Aws::BedrockAgent
     # @param [Hash] params ({})
     def update_prompt(params = {}, options = {})
       req = build_request(:update_prompt, params)
+      req.send_request(options)
+    end
+
+    # Validates the definition of a flow.
+    #
+    # @option params [required, Types::FlowDefinition] :definition
+    #   The definition of a flow to validate.
+    #
+    # @return [Types::ValidateFlowDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ValidateFlowDefinitionResponse#validations #validations} => Array&lt;Types::FlowValidation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.validate_flow_definition({
+    #     definition: { # required
+    #       connections: [
+    #         {
+    #           configuration: {
+    #             conditional: {
+    #               condition: "FlowConditionName", # required
+    #             },
+    #             data: {
+    #               source_output: "FlowNodeOutputName", # required
+    #               target_input: "FlowNodeInputName", # required
+    #             },
+    #           },
+    #           name: "FlowConnectionName", # required
+    #           source: "FlowNodeName", # required
+    #           target: "FlowNodeName", # required
+    #           type: "Data", # required, accepts Data, Conditional
+    #         },
+    #       ],
+    #       nodes: [
+    #         {
+    #           configuration: {
+    #             agent: {
+    #               agent_alias_arn: "AgentAliasArn", # required
+    #             },
+    #             collector: {
+    #             },
+    #             condition: {
+    #               conditions: [ # required
+    #                 {
+    #                   expression: "FlowConditionExpression",
+    #                   name: "FlowConditionName", # required
+    #                 },
+    #               ],
+    #             },
+    #             input: {
+    #             },
+    #             iterator: {
+    #             },
+    #             knowledge_base: {
+    #               guardrail_configuration: {
+    #                 guardrail_identifier: "GuardrailIdentifier",
+    #                 guardrail_version: "GuardrailVersion",
+    #               },
+    #               knowledge_base_id: "KnowledgeBaseId", # required
+    #               model_id: "KnowledgeBaseModelIdentifier",
+    #             },
+    #             lambda_function: {
+    #               lambda_arn: "LambdaArn", # required
+    #             },
+    #             lex: {
+    #               bot_alias_arn: "LexBotAliasArn", # required
+    #               locale_id: "LexBotLocaleId", # required
+    #             },
+    #             output: {
+    #             },
+    #             prompt: {
+    #               guardrail_configuration: {
+    #                 guardrail_identifier: "GuardrailIdentifier",
+    #                 guardrail_version: "GuardrailVersion",
+    #               },
+    #               source_configuration: { # required
+    #                 inline: {
+    #                   additional_model_request_fields: {
+    #                   },
+    #                   inference_configuration: {
+    #                     text: {
+    #                       max_tokens: 1,
+    #                       stop_sequences: ["String"],
+    #                       temperature: 1.0,
+    #                       top_p: 1.0,
+    #                     },
+    #                   },
+    #                   model_id: "PromptModelIdentifier", # required
+    #                   template_configuration: { # required
+    #                     chat: {
+    #                       input_variables: [
+    #                         {
+    #                           name: "PromptInputVariableName",
+    #                         },
+    #                       ],
+    #                       messages: [ # required
+    #                         {
+    #                           content: [ # required
+    #                             {
+    #                               text: "String",
+    #                             },
+    #                           ],
+    #                           role: "user", # required, accepts user, assistant
+    #                         },
+    #                       ],
+    #                       system: [
+    #                         {
+    #                           text: "NonEmptyString",
+    #                         },
+    #                       ],
+    #                       tool_configuration: {
+    #                         tool_choice: {
+    #                           any: {
+    #                           },
+    #                           auto: {
+    #                           },
+    #                           tool: {
+    #                             name: "ToolName", # required
+    #                           },
+    #                         },
+    #                         tools: [ # required
+    #                           {
+    #                             tool_spec: {
+    #                               description: "NonEmptyString",
+    #                               input_schema: { # required
+    #                                 json: {
+    #                                 },
+    #                               },
+    #                               name: "ToolName", # required
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     text: {
+    #                       input_variables: [
+    #                         {
+    #                           name: "PromptInputVariableName",
+    #                         },
+    #                       ],
+    #                       text: "TextPrompt", # required
+    #                     },
+    #                   },
+    #                   template_type: "TEXT", # required, accepts TEXT, CHAT
+    #                 },
+    #                 resource: {
+    #                   prompt_arn: "PromptArn", # required
+    #                 },
+    #               },
+    #             },
+    #             retrieval: {
+    #               service_configuration: { # required
+    #                 s3: {
+    #                   bucket_name: "S3BucketName", # required
+    #                 },
+    #               },
+    #             },
+    #             storage: {
+    #               service_configuration: { # required
+    #                 s3: {
+    #                   bucket_name: "S3BucketName", # required
+    #                 },
+    #               },
+    #             },
+    #           },
+    #           inputs: [
+    #             {
+    #               expression: "FlowNodeInputExpression", # required
+    #               name: "FlowNodeInputName", # required
+    #               type: "String", # required, accepts String, Number, Boolean, Object, Array
+    #             },
+    #           ],
+    #           name: "FlowNodeName", # required
+    #           outputs: [
+    #             {
+    #               name: "FlowNodeOutputName", # required
+    #               type: "String", # required, accepts String, Number, Boolean, Object, Array
+    #             },
+    #           ],
+    #           type: "Input", # required, accepts Input, Output, KnowledgeBase, Condition, Lex, Prompt, LambdaFunction, Storage, Agent, Retrieval, Iterator, Collector
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.validations #=> Array
+    #   resp.validations[0].details.cyclic_connection.connection #=> String
+    #   resp.validations[0].details.duplicate_condition_expression.expression #=> String
+    #   resp.validations[0].details.duplicate_condition_expression.node #=> String
+    #   resp.validations[0].details.duplicate_connections.source #=> String
+    #   resp.validations[0].details.duplicate_connections.target #=> String
+    #   resp.validations[0].details.incompatible_connection_data_type.connection #=> String
+    #   resp.validations[0].details.malformed_condition_expression.cause #=> String
+    #   resp.validations[0].details.malformed_condition_expression.condition #=> String
+    #   resp.validations[0].details.malformed_condition_expression.node #=> String
+    #   resp.validations[0].details.malformed_node_input_expression.cause #=> String
+    #   resp.validations[0].details.malformed_node_input_expression.input #=> String
+    #   resp.validations[0].details.malformed_node_input_expression.node #=> String
+    #   resp.validations[0].details.mismatched_node_input_type.expected_type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
+    #   resp.validations[0].details.mismatched_node_input_type.input #=> String
+    #   resp.validations[0].details.mismatched_node_input_type.node #=> String
+    #   resp.validations[0].details.mismatched_node_output_type.expected_type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
+    #   resp.validations[0].details.mismatched_node_output_type.node #=> String
+    #   resp.validations[0].details.mismatched_node_output_type.output #=> String
+    #   resp.validations[0].details.missing_connection_configuration.connection #=> String
+    #   resp.validations[0].details.missing_default_condition.node #=> String
+    #   resp.validations[0].details.missing_node_configuration.node #=> String
+    #   resp.validations[0].details.missing_node_input.input #=> String
+    #   resp.validations[0].details.missing_node_input.node #=> String
+    #   resp.validations[0].details.missing_node_output.node #=> String
+    #   resp.validations[0].details.missing_node_output.output #=> String
+    #   resp.validations[0].details.multiple_node_input_connections.input #=> String
+    #   resp.validations[0].details.multiple_node_input_connections.node #=> String
+    #   resp.validations[0].details.unfulfilled_node_input.input #=> String
+    #   resp.validations[0].details.unfulfilled_node_input.node #=> String
+    #   resp.validations[0].details.unknown_connection_condition.connection #=> String
+    #   resp.validations[0].details.unknown_connection_source.connection #=> String
+    #   resp.validations[0].details.unknown_connection_source_output.connection #=> String
+    #   resp.validations[0].details.unknown_connection_target.connection #=> String
+    #   resp.validations[0].details.unknown_connection_target_input.connection #=> String
+    #   resp.validations[0].details.unreachable_node.node #=> String
+    #   resp.validations[0].details.unsatisfied_connection_conditions.connection #=> String
+    #   resp.validations[0].message #=> String
+    #   resp.validations[0].severity #=> String, one of "Warning", "Error"
+    #   resp.validations[0].type #=> String, one of "CyclicConnection", "DuplicateConnections", "DuplicateConditionExpression", "UnreachableNode", "UnknownConnectionSource", "UnknownConnectionSourceOutput", "UnknownConnectionTarget", "UnknownConnectionTargetInput", "UnknownConnectionCondition", "MalformedConditionExpression", "MalformedNodeInputExpression", "MismatchedNodeInputType", "MismatchedNodeOutputType", "IncompatibleConnectionDataType", "MissingConnectionConfiguration", "MissingDefaultCondition", "MissingEndingNodes", "MissingNodeConfiguration", "MissingNodeInput", "MissingNodeOutput", "MissingStartingNodes", "MultipleNodeInputConnections", "UnfulfilledNodeInput", "UnsatisfiedConnectionConditions", "Unspecified"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ValidateFlowDefinition AWS API Documentation
+    #
+    # @overload validate_flow_definition(params = {})
+    # @param [Hash] params ({})
+    def validate_flow_definition(params = {}, options = {})
+      req = build_request(:validate_flow_definition, params)
       req.send_request(options)
     end
 
@@ -5796,7 +6404,7 @@ module Aws::BedrockAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagent'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

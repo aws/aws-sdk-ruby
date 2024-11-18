@@ -911,13 +911,11 @@ module Aws::Snowball
     #   * Description: Snowcone
     #
     #
-    #
     # * Device type: **SNC1\_HDD**
     #
     #   * Capacity: T8
     #
     #   * Description: Snowcone
-    #
     #
     #
     # * Device type: **EDGE\_S**
@@ -928,13 +926,11 @@ module Aws::Snowball
     #     only
     #
     #
-    #
     # * Device type: **EDGE\_CG**
     #
     #   * Capacity: T42
     #
     #   * Description: Snowball Edge Compute Optimized with GPU
-    #
     #
     #
     # * Device type: **EDGE\_C**
@@ -944,13 +940,11 @@ module Aws::Snowball
     #   * Description: Snowball Edge Compute Optimized without GPU
     #
     #
-    #
     # * Device type: **EDGE**
     #
     #   * Capacity: T100
     #
     #   * Description: Snowball Edge Storage Optimized with EC2 Compute
-    #
     #   <note markdown="1"> This device is replaced with T98.
     #
     #    </note>
@@ -969,7 +963,6 @@ module Aws::Snowball
     #      </note>
     #
     #
-    #
     # * Device type: **STANDARD**
     #
     #   * Capacity: T80
@@ -982,13 +975,11 @@ module Aws::Snowball
     #      </note>
     #
     #
-    #
     # * Snow Family device type: **RACK\_5U\_C**
     #
     #   * Capacity: T13
     #
     #   * Description: Snowblade.
-    #
     # * Device type: **V3\_5S**
     #
     #   * Capacity: T240
@@ -2954,7 +2945,7 @@ module Aws::Snowball
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-snowball'
-      context[:gem_version] = '1.80.0'
+      context[:gem_version] = '1.81.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -238,6 +238,11 @@ module Aws
                                                 key: ::String,
                                                 value: ::String
                                               },
+                                            ],
+                                            ?burn_rate_configurations: Array[
+                                              {
+                                                look_back_window_minutes: ::Integer
+                                              },
                                             ]
                                           ) -> _CreateServiceLevelObjectiveResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateServiceLevelObjectiveResponseSuccess
@@ -544,7 +549,12 @@ module Aws
                                               }?,
                                               attainment_goal: ::Float?,
                                               warning_threshold: ::Float?
-                                            }
+                                            },
+                                            ?burn_rate_configurations: Array[
+                                              {
+                                                look_back_window_minutes: ::Integer
+                                              },
+                                            ]
                                           ) -> _UpdateServiceLevelObjectiveResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateServiceLevelObjectiveResponseSuccess
     end

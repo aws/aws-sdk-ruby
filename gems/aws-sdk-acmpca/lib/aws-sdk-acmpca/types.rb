@@ -689,14 +689,12 @@ module Aws::ACMPCA
     #     * **X509v3 CRL Reason Code**: Reason the certificate was revoked.
     #
     #     ^
-    #
     # * **CRL Extensions**: Optional extensions for the CRL.
     #
     #   * **X509v3 Authority Key Identifier**: Identifies the public key
     #     associated with the private key used to sign the certificate.
     #
     #   * **X509v3 CRL Number:**: Decimal sequence number for the CRL.
-    #
     # * **Signature Algorithm**: Algorithm used by your private CA to sign
     #   the CRL.
     #

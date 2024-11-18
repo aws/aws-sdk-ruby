@@ -1862,7 +1862,7 @@ module Aws::SNS
     #   This parameter applies only to FIFO (first-in-first-out) topics. The
     #   `MessageDeduplicationId` can contain up to 128 alphanumeric characters
     #   `(a-z, A-Z, 0-9)` and punctuation ``
-    #   (!"#$%&'()*+,-./:;<=>?@[\]^_`\{|\}~) ``.
+    #   (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~) ``.
     #
     #   Every message must have a unique `MessageDeduplicationId`, which is a
     #   token used for deduplication of sent messages. If a message with a
@@ -1877,7 +1877,7 @@ module Aws::SNS
     # @option params [String] :message_group_id
     #   This parameter applies only to FIFO (first-in-first-out) topics. The
     #   `MessageGroupId` can contain up to 128 alphanumeric characters `(a-z,
-    #   A-Z, 0-9)` and punctuation `` (!"#$%&'()*+,-./:;<=>?@[\]^_`\{|\}~) ``.
+    #   A-Z, 0-9)` and punctuation `` (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~) ``.
     #
     #   The `MessageGroupId` is a tag that specifies that a message belongs to
     #   a specific message group. Messages that belong to the same message
@@ -2388,7 +2388,6 @@ module Aws::SNS
     #       message attributes.
     #
     #     * `MessageBody` – The filter is applied on the message body.
-    #
     #   * `RawMessageDelivery` – When set to `true`, enables raw message
     #     delivery to Amazon SQS or HTTP/S endpoints. This eliminates the need
     #     for the endpoints to process JSON formatting, which is otherwise
@@ -2410,7 +2409,6 @@ module Aws::SNS
     #     * Permission to write to the Firehose delivery stream
     #
     #     * Amazon SNS listed as a trusted entity
-    #
     #     Specifying a valid ARN for this attribute is required for Firehose
     #     delivery stream subscriptions. For more information, see [Fanout to
     #     Firehose delivery streams][1] in the *Amazon SNS Developer Guide*.
@@ -2491,7 +2489,6 @@ module Aws::SNS
     #     * `HTTPFailureFeedbackRoleArn` – Indicates failed message delivery
     #       status for an Amazon SNS topic that is subscribed to an HTTP
     #       endpoint.
-    #
     #   * Amazon Kinesis Data Firehose
     #
     #     * `FirehoseSuccessFeedbackRoleArn` – Indicates successful message
@@ -2505,7 +2502,6 @@ module Aws::SNS
     #     * `FirehoseFailureFeedbackRoleArn` – Indicates failed message
     #       delivery status for an Amazon SNS topic that is subscribed to an
     #       Amazon Kinesis Data Firehose endpoint.
-    #
     #   * Lambda
     #
     #     * `LambdaSuccessFeedbackRoleArn` – Indicates successful message
@@ -2519,7 +2515,6 @@ module Aws::SNS
     #     * `LambdaFailureFeedbackRoleArn` – Indicates failed message delivery
     #       status for an Amazon SNS topic that is subscribed to an Lambda
     #       endpoint.
-    #
     #   * Platform application endpoint
     #
     #     * `ApplicationSuccessFeedbackRoleArn` – Indicates successful message
@@ -2533,7 +2528,6 @@ module Aws::SNS
     #     * `ApplicationFailureFeedbackRoleArn` – Indicates failed message
     #       delivery status for an Amazon SNS topic that is subscribed to an
     #       Amazon Web Services application endpoint.
-    #
     #     <note markdown="1"> In addition to being able to configure topic attributes for message
     #     delivery status of notification messages sent to Amazon SNS
     #     application endpoints, you can also configure application attributes
@@ -2717,7 +2711,6 @@ module Aws::SNS
     #       message attributes.
     #
     #     * `MessageBody` – The filter is applied on the message body.
-    #
     #   * `RawMessageDelivery` – When set to `true`, enables raw message
     #     delivery to Amazon SQS or HTTP/S endpoints. This eliminates the need
     #     for the endpoints to process JSON formatting, which is otherwise
@@ -2739,7 +2732,6 @@ module Aws::SNS
     #     * Permission to write to the Firehose delivery stream
     #
     #     * Amazon SNS listed as a trusted entity
-    #
     #     Specifying a valid ARN for this attribute is required for Firehose
     #     delivery stream subscriptions. For more information, see [Fanout to
     #     Firehose delivery streams][1] in the *Amazon SNS Developer Guide*.
@@ -2995,7 +2987,7 @@ module Aws::SNS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sns'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

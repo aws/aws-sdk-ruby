@@ -82,6 +82,8 @@ module Aws
         def description: () -> ::String
         def behavior: () -> ("PREVENTIVE" | "PROACTIVE" | "DETECTIVE")
         def region_configuration: () -> Types::RegionConfiguration
+        def implementation: () -> Types::ImplementationDetails
+        def parameters: () -> ::Array[Types::ControlParameter]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlCatalog/Client.html#get_control-instance_method
       def get_control: (

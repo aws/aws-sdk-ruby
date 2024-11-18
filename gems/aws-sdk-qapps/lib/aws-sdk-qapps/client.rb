@@ -523,6 +523,164 @@ module Aws::QApps
       req.send_request(options)
     end
 
+    # Creates Categories for the Amazon Q Business application environment
+    # instance. Web experience users use Categories to tag and filter
+    # library items. For more information, see [Custom labels for Amazon Q
+    # Apps][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/qapps-custom-labels.html
+    #
+    # @option params [required, String] :instance_id
+    #   The unique identifier of the Amazon Q Business application environment
+    #   instance.
+    #
+    # @option params [required, Array<Types::BatchCreateCategoryInputCategory>] :categories
+    #   The list of category objects to be created
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Creates the categories for the library
+    #
+    #   resp = client.batch_create_category({
+    #     categories: [
+    #       {
+    #         id: "549abfe0-f5c4-45a2-bb9b-c05987a49c6d", 
+    #         title: "HR", 
+    #       }, 
+    #       {
+    #         id: "18cbebaa-196a-4aa5-a840-88d548e07f8f", 
+    #         title: "Marketing", 
+    #       }, 
+    #     ], 
+    #     instance_id: "0b95c9c4-89cc-4aa8-9aae-aa91cbec699f", 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_create_category({
+    #     instance_id: "InstanceId", # required
+    #     categories: [ # required
+    #       {
+    #         id: "UUID",
+    #         title: "BatchCreateCategoryInputCategoryTitleString", # required
+    #         color: "BatchCreateCategoryInputCategoryColorString",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qapps-2023-11-27/BatchCreateCategory AWS API Documentation
+    #
+    # @overload batch_create_category(params = {})
+    # @param [Hash] params ({})
+    def batch_create_category(params = {}, options = {})
+      req = build_request(:batch_create_category, params)
+      req.send_request(options)
+    end
+
+    # Deletes Categories for the Amazon Q Business application environment
+    # instance. Web experience users use Categories to tag and filter
+    # library items. For more information, see [Custom labels for Amazon Q
+    # Apps][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/qapps-custom-labels.html
+    #
+    # @option params [required, String] :instance_id
+    #   The unique identifier of the Amazon Q Business application environment
+    #   instance.
+    #
+    # @option params [required, Array<String>] :categories
+    #   The list of IDs of the categories to be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Deletes the categories in the library
+    #
+    #   resp = client.batch_delete_category({
+    #     categories: [
+    #       "9c871ed4-1c41-4065-aefe-321cd4b61cf8", 
+    #     ], 
+    #     instance_id: "0b95c9c4-89cc-4aa8-9aae-aa91cbec699f", 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_delete_category({
+    #     instance_id: "InstanceId", # required
+    #     categories: ["UUID"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qapps-2023-11-27/BatchDeleteCategory AWS API Documentation
+    #
+    # @overload batch_delete_category(params = {})
+    # @param [Hash] params ({})
+    def batch_delete_category(params = {}, options = {})
+      req = build_request(:batch_delete_category, params)
+      req.send_request(options)
+    end
+
+    # Updates Categories for the Amazon Q Business application environment
+    # instance. Web experience users use Categories to tag and filter
+    # library items. For more information, see [Custom labels for Amazon Q
+    # Apps][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/qapps-custom-labels.html
+    #
+    # @option params [required, String] :instance_id
+    #   The unique identifier of the Amazon Q Business application environment
+    #   instance.
+    #
+    # @option params [required, Array<Types::CategoryInput>] :categories
+    #   The list of categories to be updated with their new values.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Updates the categories in the library
+    #
+    #   resp = client.batch_update_category({
+    #     categories: [
+    #       {
+    #         id: "549abfe0-f5c4-45a2-bb9b-c05987a49c6d", 
+    #         title: "HR Management", 
+    #       }, 
+    #       {
+    #         id: "18cbebaa-196a-4aa5-a840-88d548e07f8f", 
+    #         title: "Sales", 
+    #       }, 
+    #     ], 
+    #     instance_id: "0b95c9c4-89cc-4aa8-9aae-aa91cbec699f", 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_update_category({
+    #     instance_id: "InstanceId", # required
+    #     categories: [ # required
+    #       {
+    #         id: "UUID", # required
+    #         title: "CategoryInputTitleString", # required
+    #         color: "CategoryInputColorString",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qapps-2023-11-27/BatchUpdateCategory AWS API Documentation
+    #
+    # @overload batch_update_category(params = {})
+    # @param [Hash] params ({})
+    def batch_update_category(params = {}, options = {})
+      req = build_request(:batch_update_category, params)
+      req.send_request(options)
+    end
+
     # Creates a new library item for an Amazon Q App, allowing it to be
     # discovered and used by other allowed users.
     #
@@ -1063,6 +1221,8 @@ module Aws::QApps
     #   resp.categories #=> Array
     #   resp.categories[0].id #=> String
     #   resp.categories[0].title #=> String
+    #   resp.categories[0].color #=> String
+    #   resp.categories[0].app_count #=> Integer
     #   resp.status #=> String
     #   resp.created_at #=> Time
     #   resp.created_by #=> String
@@ -1297,11 +1457,11 @@ module Aws::QApps
     #     card_status: {
     #       "1e6caeac-b481-45ff-a082-8b9a4a0b72e8" => {
     #         current_state: "COMPLETED", 
-    #         current_value: "Earth's circumference is 24,901 miles", 
+    #         current_value: "Based on the responses, the most popular color is red, with 1 vote from the user \"user1\".", 
     #       }, 
     #       "6fb5b404-3b7b-48a4-8a8b-56406922a606" => {
     #         current_state: "COMPLETED", 
-    #         current_value: "What is the circumference of Earth?", 
+    #         current_value: "", 
     #       }, 
     #     }, 
     #     session_arn: "arn:aws:qapps:us-west-2:0123456789012:application/a929ecd6-5765-4ec7-bd3e-2ca90098b18e/qapp/65e7dce7-226a-47f9-b689-22850becef89/session/1fca878e-64c5-4dc4-b1d9-c93effed4e82", 
@@ -1428,6 +1588,70 @@ module Aws::QApps
       req.send_request(options)
     end
 
+    # Lists the categories of a Amazon Q Business application environment
+    # instance. For more information, see [Custom labels for Amazon Q
+    # Apps][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/qapps-custom-labels.html
+    #
+    # @option params [required, String] :instance_id
+    #   The unique identifier of the Amazon Q Business application environment
+    #   instance.
+    #
+    # @return [Types::ListCategoriesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCategoriesOutput#categories #categories} => Array&lt;Types::Category&gt;
+    #
+    #
+    # @example Example: List categories available for the library items in this instance
+    #
+    #   resp = client.list_categories({
+    #     instance_id: "0b95c9c4-89cc-4aa8-9aae-aa91cbec699f", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     categories: [
+    #       {
+    #         app_count: 10, 
+    #         color: "#FF6600", 
+    #         id: "549abfe0-f5c4-45a2-bb9b-c05987a49c6d", 
+    #         title: "HR", 
+    #       }, 
+    #       {
+    #         app_count: 11, 
+    #         color: "#FFFF00", 
+    #         id: "18cbebaa-196a-4aa5-a840-88d548e07f8f", 
+    #         title: "Marketing", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_categories({
+    #     instance_id: "InstanceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.categories #=> Array
+    #   resp.categories[0].id #=> String
+    #   resp.categories[0].title #=> String
+    #   resp.categories[0].color #=> String
+    #   resp.categories[0].app_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qapps-2023-11-27/ListCategories AWS API Documentation
+    #
+    # @overload list_categories(params = {})
+    # @param [Hash] params ({})
+    def list_categories(params = {}, options = {})
+      req = build_request(:list_categories, params)
+      req.send_request(options)
+    end
+
     # Lists the library items for Amazon Q Apps that are published and
     # available for users in your Amazon Web Services account.
     #
@@ -1548,6 +1772,8 @@ module Aws::QApps
     #   resp.library_items[0].categories #=> Array
     #   resp.library_items[0].categories[0].id #=> String
     #   resp.library_items[0].categories[0].title #=> String
+    #   resp.library_items[0].categories[0].color #=> String
+    #   resp.library_items[0].categories[0].app_count #=> Integer
     #   resp.library_items[0].status #=> String
     #   resp.library_items[0].created_at #=> Time
     #   resp.library_items[0].created_by #=> String
@@ -2137,6 +2363,8 @@ module Aws::QApps
     #   resp.categories #=> Array
     #   resp.categories[0].id #=> String
     #   resp.categories[0].title #=> String
+    #   resp.categories[0].color #=> String
+    #   resp.categories[0].app_count #=> Integer
     #   resp.status #=> String
     #   resp.created_at #=> Time
     #   resp.created_by #=> String
@@ -2505,7 +2733,7 @@ module Aws::QApps
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-qapps'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

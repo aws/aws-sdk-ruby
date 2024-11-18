@@ -95,6 +95,12 @@ module Aws::EC2
       data[:sse_type]
     end
 
+    # The entity that manages the volume.
+    # @return [Types::OperatorResponse]
+    def operator
+      data[:operator]
+    end
+
     # The size of the volume, in GiBs.
     # @return [Integer]
     def size

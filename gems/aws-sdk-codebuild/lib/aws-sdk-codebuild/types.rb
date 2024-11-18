@@ -1438,6 +1438,38 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # Contains compute attributes. These attributes only need be specified
+    # when your project's or fleet's `computeType` is set to
+    # `ATTRIBUTE_BASED_COMPUTE`.
+    #
+    # @!attribute [rw] v_cpu
+    #   The number of vCPUs of the instance type included in your fleet.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] memory
+    #   The amount of memory of the instance type included in your fleet.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] disk
+    #   The amount of disk space of the instance type included in your
+    #   fleet.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] machine_type
+    #   The machine type of the instance type included in your fleet.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ComputeConfiguration AWS API Documentation
+    #
+    class ComputeConfiguration < Struct.new(
+      :v_cpu,
+      :memory,
+      :disk,
+      :machine_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of the compute fleet.
     #   @return [String]
@@ -1456,9 +1488,21 @@ module Aws::CodeBuild
     #     Pacific (Singapore), Asia Pacific (Sydney), EU (Frankfurt), and
     #     South America (São Paulo).
     #
+    #   * The environment type `ARM_EC2` is available only in regions US
+    #     East (N. Virginia), US East (Ohio), US West (Oregon), EU
+    #     (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific
+    #     (Singapore), Asia Pacific (Sydney), South America (São Paulo), and
+    #     Asia Pacific (Mumbai).
+    #
     #   * The environment type `LINUX_CONTAINER` is available only in
     #     regions US East (N. Virginia), US East (Ohio), US West (Oregon),
     #     EU (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific
+    #     (Singapore), Asia Pacific (Sydney), South America (São Paulo), and
+    #     Asia Pacific (Mumbai).
+    #
+    #   * The environment type `LINUX_EC2` is available only in regions US
+    #     East (N. Virginia), US East (Ohio), US West (Oregon), EU
+    #     (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific
     #     (Singapore), Asia Pacific (Sydney), South America (São Paulo), and
     #     Asia Pacific (Mumbai).
     #
@@ -1474,6 +1518,12 @@ module Aws::CodeBuild
     #   * The environment type `MAC_ARM` is available for Large fleets only
     #     in regions US East (N. Virginia), US East (Ohio), US West
     #     (Oregon), and Asia Pacific (Sydney).
+    #
+    #   * The environment type `WINDOWS_EC2` is available only in regions US
+    #     East (N. Virginia), US East (Ohio), US West (Oregon), EU
+    #     (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific
+    #     (Singapore), Asia Pacific (Sydney), South America (São Paulo), and
+    #     Asia Pacific (Mumbai).
     #
     #   * The environment type `WINDOWS_SERVER_2019_CONTAINER` is available
     #     only in regions US East (N. Virginia), US East (Ohio), US West
@@ -1498,51 +1548,88 @@ module Aws::CodeBuild
     #   Information about the compute resources the compute fleet uses.
     #   Available values include:
     #
-    #   * `BUILD_GENERAL1_SMALL`: Use up to 3 GB memory and 2 vCPUs for
+    #   * `ATTRIBUTE_BASED_COMPUTE`: Specify the amount of vCPUs, memory,
+    #     disk space, and the type of machine.
+    #
+    #     <note markdown="1"> If you use `ATTRIBUTE_BASED_COMPUTE`, you must define your
+    #     attributes by using `computeConfiguration`. CodeBuild will select
+    #     the cheapest instance that satisfies your specified attributes.
+    #     For more information, see [Reserved capacity environment types][1]
+    #     in the *CodeBuild User Guide*.
+    #
+    #      </note>
+    #
+    #   * `BUILD_GENERAL1_SMALL`: Use up to 4 GiB memory and 2 vCPUs for
     #     builds.
     #
-    #   * `BUILD_GENERAL1_MEDIUM`: Use up to 7 GB memory and 4 vCPUs for
+    #   * `BUILD_GENERAL1_MEDIUM`: Use up to 8 GiB memory and 4 vCPUs for
     #     builds.
     #
-    #   * `BUILD_GENERAL1_LARGE`: Use up to 16 GB memory and 8 vCPUs for
+    #   * `BUILD_GENERAL1_LARGE`: Use up to 16 GiB memory and 8 vCPUs for
     #     builds, depending on your environment type.
     #
-    #   * `BUILD_GENERAL1_XLARGE`: Use up to 70 GB memory and 36 vCPUs for
+    #   * `BUILD_GENERAL1_XLARGE`: Use up to 72 GiB memory and 36 vCPUs for
     #     builds, depending on your environment type.
     #
-    #   * `BUILD_GENERAL1_2XLARGE`: Use up to 145 GB memory, 72 vCPUs, and
+    #   * `BUILD_GENERAL1_2XLARGE`: Use up to 144 GiB memory, 72 vCPUs, and
     #     824 GB of SSD storage for builds. This compute type supports
     #     Docker images up to 100 GB uncompressed.
     #
+    #   * `BUILD_LAMBDA_1GB`: Use up to 1 GiB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_2GB`: Use up to 2 GiB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_4GB`: Use up to 4 GiB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_8GB`: Use up to 8 GiB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_10GB`: Use up to 10 GiB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
     #   If you use `BUILD_GENERAL1_SMALL`:
     #
-    #   * For environment type `LINUX_CONTAINER`, you can use up to 3 GB
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 4 GiB
     #     memory and 2 vCPUs for builds.
     #
     #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 16
-    #     GB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
+    #     GiB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
     #
-    #   * For environment type `ARM_CONTAINER`, you can use up to 4 GB
+    #   * For environment type `ARM_CONTAINER`, you can use up to 4 GiB
     #     memory and 2 vCPUs on ARM-based processors for builds.
     #
     #   If you use `BUILD_GENERAL1_LARGE`:
     #
-    #   * For environment type `LINUX_CONTAINER`, you can use up to 15 GB
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 16 GiB
     #     memory and 8 vCPUs for builds.
     #
     #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 255
-    #     GB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.
+    #     GiB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.
     #
-    #   * For environment type `ARM_CONTAINER`, you can use up to 16 GB
+    #   * For environment type `ARM_CONTAINER`, you can use up to 16 GiB
     #     memory and 8 vCPUs on ARM-based processors for builds.
     #
-    #   For more information, see [Build environment compute types][1] in
-    #   the *CodeBuild User Guide.*
+    #   For more information, see [On-demand environment types][2] in the
+    #   *CodeBuild User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment-reserved-capacity.types
+    #   [2]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment.types
     #   @return [String]
+    #
+    # @!attribute [rw] compute_configuration
+    #   The compute configuration of the compute fleet. This is only
+    #   required if `computeType` is set to `ATTRIBUTE_BASED_COMPUTE`.
+    #   @return [Types::ComputeConfiguration]
     #
     # @!attribute [rw] scaling_configuration
     #   The scaling configuration of the compute fleet.
@@ -1608,6 +1695,7 @@ module Aws::CodeBuild
       :base_capacity,
       :environment_type,
       :compute_type,
+      :compute_configuration,
       :scaling_configuration,
       :overflow_behavior,
       :vpc_config,
@@ -2481,9 +2569,21 @@ module Aws::CodeBuild
     #     Pacific (Singapore), Asia Pacific (Sydney), EU (Frankfurt), and
     #     South America (São Paulo).
     #
+    #   * The environment type `ARM_EC2` is available only in regions US
+    #     East (N. Virginia), US East (Ohio), US West (Oregon), EU
+    #     (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific
+    #     (Singapore), Asia Pacific (Sydney), South America (São Paulo), and
+    #     Asia Pacific (Mumbai).
+    #
     #   * The environment type `LINUX_CONTAINER` is available only in
     #     regions US East (N. Virginia), US East (Ohio), US West (Oregon),
     #     EU (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific
+    #     (Singapore), Asia Pacific (Sydney), South America (São Paulo), and
+    #     Asia Pacific (Mumbai).
+    #
+    #   * The environment type `LINUX_EC2` is available only in regions US
+    #     East (N. Virginia), US East (Ohio), US West (Oregon), EU
+    #     (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific
     #     (Singapore), Asia Pacific (Sydney), South America (São Paulo), and
     #     Asia Pacific (Mumbai).
     #
@@ -2499,6 +2599,12 @@ module Aws::CodeBuild
     #   * The environment type `MAC_ARM` is available for Large fleets only
     #     in regions US East (N. Virginia), US East (Ohio), US West
     #     (Oregon), and Asia Pacific (Sydney).
+    #
+    #   * The environment type `WINDOWS_EC2` is available only in regions US
+    #     East (N. Virginia), US East (Ohio), US West (Oregon), EU
+    #     (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific
+    #     (Singapore), Asia Pacific (Sydney), South America (São Paulo), and
+    #     Asia Pacific (Mumbai).
     #
     #   * The environment type `WINDOWS_SERVER_2019_CONTAINER` is available
     #     only in regions US East (N. Virginia), US East (Ohio), US West
@@ -2523,51 +2629,88 @@ module Aws::CodeBuild
     #   Information about the compute resources the compute fleet uses.
     #   Available values include:
     #
-    #   * `BUILD_GENERAL1_SMALL`: Use up to 3 GB memory and 2 vCPUs for
+    #   * `ATTRIBUTE_BASED_COMPUTE`: Specify the amount of vCPUs, memory,
+    #     disk space, and the type of machine.
+    #
+    #     <note markdown="1"> If you use `ATTRIBUTE_BASED_COMPUTE`, you must define your
+    #     attributes by using `computeConfiguration`. CodeBuild will select
+    #     the cheapest instance that satisfies your specified attributes.
+    #     For more information, see [Reserved capacity environment types][1]
+    #     in the *CodeBuild User Guide*.
+    #
+    #      </note>
+    #
+    #   * `BUILD_GENERAL1_SMALL`: Use up to 4 GiB memory and 2 vCPUs for
     #     builds.
     #
-    #   * `BUILD_GENERAL1_MEDIUM`: Use up to 7 GB memory and 4 vCPUs for
+    #   * `BUILD_GENERAL1_MEDIUM`: Use up to 8 GiB memory and 4 vCPUs for
     #     builds.
     #
-    #   * `BUILD_GENERAL1_LARGE`: Use up to 16 GB memory and 8 vCPUs for
+    #   * `BUILD_GENERAL1_LARGE`: Use up to 16 GiB memory and 8 vCPUs for
     #     builds, depending on your environment type.
     #
-    #   * `BUILD_GENERAL1_XLARGE`: Use up to 70 GB memory and 36 vCPUs for
+    #   * `BUILD_GENERAL1_XLARGE`: Use up to 72 GiB memory and 36 vCPUs for
     #     builds, depending on your environment type.
     #
-    #   * `BUILD_GENERAL1_2XLARGE`: Use up to 145 GB memory, 72 vCPUs, and
+    #   * `BUILD_GENERAL1_2XLARGE`: Use up to 144 GiB memory, 72 vCPUs, and
     #     824 GB of SSD storage for builds. This compute type supports
     #     Docker images up to 100 GB uncompressed.
     #
+    #   * `BUILD_LAMBDA_1GB`: Use up to 1 GiB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_2GB`: Use up to 2 GiB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_4GB`: Use up to 4 GiB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_8GB`: Use up to 8 GiB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_10GB`: Use up to 10 GiB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
     #   If you use `BUILD_GENERAL1_SMALL`:
     #
-    #   * For environment type `LINUX_CONTAINER`, you can use up to 3 GB
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 4 GiB
     #     memory and 2 vCPUs for builds.
     #
     #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 16
-    #     GB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
+    #     GiB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
     #
-    #   * For environment type `ARM_CONTAINER`, you can use up to 4 GB
+    #   * For environment type `ARM_CONTAINER`, you can use up to 4 GiB
     #     memory and 2 vCPUs on ARM-based processors for builds.
     #
     #   If you use `BUILD_GENERAL1_LARGE`:
     #
-    #   * For environment type `LINUX_CONTAINER`, you can use up to 15 GB
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 16 GiB
     #     memory and 8 vCPUs for builds.
     #
     #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 255
-    #     GB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.
+    #     GiB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.
     #
-    #   * For environment type `ARM_CONTAINER`, you can use up to 16 GB
+    #   * For environment type `ARM_CONTAINER`, you can use up to 16 GiB
     #     memory and 8 vCPUs on ARM-based processors for builds.
     #
-    #   For more information, see [Build environment compute types][1] in
-    #   the *CodeBuild User Guide.*
+    #   For more information, see [On-demand environment types][2] in the
+    #   *CodeBuild User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment-reserved-capacity.types
+    #   [2]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment.types
     #   @return [String]
+    #
+    # @!attribute [rw] compute_configuration
+    #   The compute configuration of the compute fleet. This is only
+    #   required if `computeType` is set to `ATTRIBUTE_BASED_COMPUTE`.
+    #   @return [Types::ComputeConfiguration]
     #
     # @!attribute [rw] scaling_configuration
     #   The scaling configuration of the compute fleet.
@@ -2638,6 +2781,7 @@ module Aws::CodeBuild
       :base_capacity,
       :environment_type,
       :compute_type,
+      :compute_configuration,
       :scaling_configuration,
       :overflow_behavior,
       :vpc_config,
@@ -3715,7 +3859,7 @@ module Aws::CodeBuild
     # @!attribute [rw] cloud_watch_logs_arn
     #   The ARN of the CloudWatch Logs stream for a build execution. Its
     #   format is
-    #   `arn:$\{Partition\}:logs:$\{Region\}:$\{Account\}:log-group:$\{LogGroupName\}:log-stream:$\{LogStreamName\}`.
+    #   `arn:${Partition}:logs:${Region}:${Account}:log-group:${LogGroupName}:log-stream:${LogStreamName}`.
     #   The CloudWatch Logs stream is created during the PROVISIONING phase
     #   of a build and the ARN will not be valid until it is created. For
     #   more information, see [Resources Defined by CloudWatch Logs][1].
@@ -3727,7 +3871,7 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] s3_logs_arn
     #   The ARN of S3 logs for a build project. Its format is
-    #   `arn:$\{Partition\}:s3:::$\{BucketName\}/$\{ObjectName\}`. For more
+    #   `arn:${Partition}:s3:::${BucketName}/${ObjectName}`. For more
     #   information, see [Resources Defined by Amazon S3][1].
     #
     #
@@ -4478,76 +4622,88 @@ module Aws::CodeBuild
     #   Information about the compute resources the build project uses.
     #   Available values include:
     #
-    #   * `BUILD_GENERAL1_SMALL`: Use up to 3 GB memory and 2 vCPUs for
+    #   * `ATTRIBUTE_BASED_COMPUTE`: Specify the amount of vCPUs, memory,
+    #     disk space, and the type of machine.
+    #
+    #     <note markdown="1"> If you use `ATTRIBUTE_BASED_COMPUTE`, you must define your
+    #     attributes by using `computeConfiguration`. CodeBuild will select
+    #     the cheapest instance that satisfies your specified attributes.
+    #     For more information, see [Reserved capacity environment types][1]
+    #     in the *CodeBuild User Guide*.
+    #
+    #      </note>
+    #
+    #   * `BUILD_GENERAL1_SMALL`: Use up to 4 GiB memory and 2 vCPUs for
     #     builds.
     #
-    #   * `BUILD_GENERAL1_MEDIUM`: Use up to 7 GB memory and 4 vCPUs for
+    #   * `BUILD_GENERAL1_MEDIUM`: Use up to 8 GiB memory and 4 vCPUs for
     #     builds.
     #
-    #   * `BUILD_GENERAL1_LARGE`: Use up to 16 GB memory and 8 vCPUs for
+    #   * `BUILD_GENERAL1_LARGE`: Use up to 16 GiB memory and 8 vCPUs for
     #     builds, depending on your environment type.
     #
-    #   * `BUILD_GENERAL1_XLARGE`: Use up to 70 GB memory and 36 vCPUs for
+    #   * `BUILD_GENERAL1_XLARGE`: Use up to 72 GiB memory and 36 vCPUs for
     #     builds, depending on your environment type.
     #
-    #   * `BUILD_GENERAL1_2XLARGE`: Use up to 145 GB memory, 72 vCPUs, and
+    #   * `BUILD_GENERAL1_2XLARGE`: Use up to 144 GiB memory, 72 vCPUs, and
     #     824 GB of SSD storage for builds. This compute type supports
     #     Docker images up to 100 GB uncompressed.
     #
-    #   * `BUILD_LAMBDA_1GB`: Use up to 1 GB memory for builds. Only
+    #   * `BUILD_LAMBDA_1GB`: Use up to 1 GiB memory for builds. Only
     #     available for environment type `LINUX_LAMBDA_CONTAINER` and
     #     `ARM_LAMBDA_CONTAINER`.
     #
-    #   * `BUILD_LAMBDA_2GB`: Use up to 2 GB memory for builds. Only
+    #   * `BUILD_LAMBDA_2GB`: Use up to 2 GiB memory for builds. Only
     #     available for environment type `LINUX_LAMBDA_CONTAINER` and
     #     `ARM_LAMBDA_CONTAINER`.
     #
-    #   * `BUILD_LAMBDA_4GB`: Use up to 4 GB memory for builds. Only
+    #   * `BUILD_LAMBDA_4GB`: Use up to 4 GiB memory for builds. Only
     #     available for environment type `LINUX_LAMBDA_CONTAINER` and
     #     `ARM_LAMBDA_CONTAINER`.
     #
-    #   * `BUILD_LAMBDA_8GB`: Use up to 8 GB memory for builds. Only
+    #   * `BUILD_LAMBDA_8GB`: Use up to 8 GiB memory for builds. Only
     #     available for environment type `LINUX_LAMBDA_CONTAINER` and
     #     `ARM_LAMBDA_CONTAINER`.
     #
-    #   * `BUILD_LAMBDA_10GB`: Use up to 10 GB memory for builds. Only
+    #   * `BUILD_LAMBDA_10GB`: Use up to 10 GiB memory for builds. Only
     #     available for environment type `LINUX_LAMBDA_CONTAINER` and
     #     `ARM_LAMBDA_CONTAINER`.
     #
     #   If you use `BUILD_GENERAL1_SMALL`:
     #
-    #   * For environment type `LINUX_CONTAINER`, you can use up to 3 GB
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 4 GiB
     #     memory and 2 vCPUs for builds.
     #
     #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 16
-    #     GB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
+    #     GiB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
     #
-    #   * For environment type `ARM_CONTAINER`, you can use up to 4 GB
+    #   * For environment type `ARM_CONTAINER`, you can use up to 4 GiB
     #     memory and 2 vCPUs on ARM-based processors for builds.
     #
     #   If you use `BUILD_GENERAL1_LARGE`:
     #
-    #   * For environment type `LINUX_CONTAINER`, you can use up to 15 GB
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 16 GiB
     #     memory and 8 vCPUs for builds.
     #
     #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 255
-    #     GB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.
+    #     GiB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.
     #
-    #   * For environment type `ARM_CONTAINER`, you can use up to 16 GB
+    #   * For environment type `ARM_CONTAINER`, you can use up to 16 GiB
     #     memory and 8 vCPUs on ARM-based processors for builds.
     #
-    #   <note markdown="1"> If you're using compute fleets during project creation,
-    #   `computeType` will be ignored.
-    #
-    #    </note>
-    #
-    #   For more information, see [Build Environment Compute Types][1] in
-    #   the *CodeBuild User Guide.*
+    #   For more information, see [On-demand environment types][2] in the
+    #   *CodeBuild User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment-reserved-capacity.types
+    #   [2]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment.types
     #   @return [String]
+    #
+    # @!attribute [rw] compute_configuration
+    #   The compute configuration of the build project. This is only
+    #   required if `computeType` is set to `ATTRIBUTE_BASED_COMPUTE`.
+    #   @return [Types::ComputeConfiguration]
     #
     # @!attribute [rw] fleet
     #   A ProjectFleet object to use for this build project.
@@ -4621,6 +4777,7 @@ module Aws::CodeBuild
       :type,
       :image,
       :compute_type,
+      :compute_configuration,
       :fleet,
       :environment_variables,
       :privileged_mode,
@@ -4765,7 +4922,6 @@ module Aws::CodeBuild
     #
     #     * The path to the folder that contains the source code (for
     #       example, `<bucket-name>/<path-to-source-code>/<folder>/`).
-    #
     #   * For source code in a GitHub repository, the HTTPS clone URL to the
     #     repository that contains the source and the buildspec file. You
     #     must connect your Amazon Web Services account to your GitHub
@@ -6539,9 +6695,21 @@ module Aws::CodeBuild
     #     Pacific (Singapore), Asia Pacific (Sydney), EU (Frankfurt), and
     #     South America (São Paulo).
     #
+    #   * The environment type `ARM_EC2` is available only in regions US
+    #     East (N. Virginia), US East (Ohio), US West (Oregon), EU
+    #     (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific
+    #     (Singapore), Asia Pacific (Sydney), South America (São Paulo), and
+    #     Asia Pacific (Mumbai).
+    #
     #   * The environment type `LINUX_CONTAINER` is available only in
     #     regions US East (N. Virginia), US East (Ohio), US West (Oregon),
     #     EU (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific
+    #     (Singapore), Asia Pacific (Sydney), South America (São Paulo), and
+    #     Asia Pacific (Mumbai).
+    #
+    #   * The environment type `LINUX_EC2` is available only in regions US
+    #     East (N. Virginia), US East (Ohio), US West (Oregon), EU
+    #     (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific
     #     (Singapore), Asia Pacific (Sydney), South America (São Paulo), and
     #     Asia Pacific (Mumbai).
     #
@@ -6557,6 +6725,12 @@ module Aws::CodeBuild
     #   * The environment type `MAC_ARM` is available for Large fleets only
     #     in regions US East (N. Virginia), US East (Ohio), US West
     #     (Oregon), and Asia Pacific (Sydney).
+    #
+    #   * The environment type `WINDOWS_EC2` is available only in regions US
+    #     East (N. Virginia), US East (Ohio), US West (Oregon), EU
+    #     (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific
+    #     (Singapore), Asia Pacific (Sydney), South America (São Paulo), and
+    #     Asia Pacific (Mumbai).
     #
     #   * The environment type `WINDOWS_SERVER_2019_CONTAINER` is available
     #     only in regions US East (N. Virginia), US East (Ohio), US West
@@ -6581,51 +6755,88 @@ module Aws::CodeBuild
     #   Information about the compute resources the compute fleet uses.
     #   Available values include:
     #
-    #   * `BUILD_GENERAL1_SMALL`: Use up to 3 GB memory and 2 vCPUs for
+    #   * `ATTRIBUTE_BASED_COMPUTE`: Specify the amount of vCPUs, memory,
+    #     disk space, and the type of machine.
+    #
+    #     <note markdown="1"> If you use `ATTRIBUTE_BASED_COMPUTE`, you must define your
+    #     attributes by using `computeConfiguration`. CodeBuild will select
+    #     the cheapest instance that satisfies your specified attributes.
+    #     For more information, see [Reserved capacity environment types][1]
+    #     in the *CodeBuild User Guide*.
+    #
+    #      </note>
+    #
+    #   * `BUILD_GENERAL1_SMALL`: Use up to 4 GiB memory and 2 vCPUs for
     #     builds.
     #
-    #   * `BUILD_GENERAL1_MEDIUM`: Use up to 7 GB memory and 4 vCPUs for
+    #   * `BUILD_GENERAL1_MEDIUM`: Use up to 8 GiB memory and 4 vCPUs for
     #     builds.
     #
-    #   * `BUILD_GENERAL1_LARGE`: Use up to 16 GB memory and 8 vCPUs for
+    #   * `BUILD_GENERAL1_LARGE`: Use up to 16 GiB memory and 8 vCPUs for
     #     builds, depending on your environment type.
     #
-    #   * `BUILD_GENERAL1_XLARGE`: Use up to 70 GB memory and 36 vCPUs for
+    #   * `BUILD_GENERAL1_XLARGE`: Use up to 72 GiB memory and 36 vCPUs for
     #     builds, depending on your environment type.
     #
-    #   * `BUILD_GENERAL1_2XLARGE`: Use up to 145 GB memory, 72 vCPUs, and
+    #   * `BUILD_GENERAL1_2XLARGE`: Use up to 144 GiB memory, 72 vCPUs, and
     #     824 GB of SSD storage for builds. This compute type supports
     #     Docker images up to 100 GB uncompressed.
     #
+    #   * `BUILD_LAMBDA_1GB`: Use up to 1 GiB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_2GB`: Use up to 2 GiB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_4GB`: Use up to 4 GiB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_8GB`: Use up to 8 GiB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_10GB`: Use up to 10 GiB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
     #   If you use `BUILD_GENERAL1_SMALL`:
     #
-    #   * For environment type `LINUX_CONTAINER`, you can use up to 3 GB
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 4 GiB
     #     memory and 2 vCPUs for builds.
     #
     #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 16
-    #     GB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
+    #     GiB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
     #
-    #   * For environment type `ARM_CONTAINER`, you can use up to 4 GB
+    #   * For environment type `ARM_CONTAINER`, you can use up to 4 GiB
     #     memory and 2 vCPUs on ARM-based processors for builds.
     #
     #   If you use `BUILD_GENERAL1_LARGE`:
     #
-    #   * For environment type `LINUX_CONTAINER`, you can use up to 15 GB
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 16 GiB
     #     memory and 8 vCPUs for builds.
     #
     #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 255
-    #     GB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.
+    #     GiB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.
     #
-    #   * For environment type `ARM_CONTAINER`, you can use up to 16 GB
+    #   * For environment type `ARM_CONTAINER`, you can use up to 16 GiB
     #     memory and 8 vCPUs on ARM-based processors for builds.
     #
-    #   For more information, see [Build environment compute types][1] in
-    #   the *CodeBuild User Guide.*
+    #   For more information, see [On-demand environment types][2] in the
+    #   *CodeBuild User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment-reserved-capacity.types
+    #   [2]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment.types
     #   @return [String]
+    #
+    # @!attribute [rw] compute_configuration
+    #   The compute configuration of the compute fleet. This is only
+    #   required if `computeType` is set to `ATTRIBUTE_BASED_COMPUTE`.
+    #   @return [Types::ComputeConfiguration]
     #
     # @!attribute [rw] scaling_configuration
     #   The scaling configuration of the compute fleet.
@@ -6691,6 +6902,7 @@ module Aws::CodeBuild
       :base_capacity,
       :environment_type,
       :compute_type,
+      :compute_configuration,
       :scaling_configuration,
       :overflow_behavior,
       :vpc_config,
@@ -7215,7 +7427,6 @@ module Aws::CodeBuild
     #       `PRERELEASED` work with GitHub only.
     #
     #        </note>
-    #
     #   * ACTOR\_ACCOUNT\_ID
     #
     #     * A webhook event triggers a build when a GitHub, GitHub
@@ -7223,7 +7434,6 @@ module Aws::CodeBuild
     #       expression `pattern`.
     #
     #     ^
-    #
     #   * HEAD\_REF
     #
     #     * A webhook event triggers a build when the head reference matches
@@ -7235,7 +7445,6 @@ module Aws::CodeBuild
     #       request events.
     #
     #        </note>
-    #
     #   * BASE\_REF
     #
     #     * A webhook event triggers a build when the base reference matches
@@ -7245,7 +7454,6 @@ module Aws::CodeBuild
     #       <note markdown="1"> Works with pull request events only.
     #
     #        </note>
-    #
     #   * FILE\_PATH
     #
     #     * A webhook triggers a build when the path of a changed file
@@ -7256,7 +7464,6 @@ module Aws::CodeBuild
     #       not work with GitHub Enterprise pull request events.
     #
     #        </note>
-    #
     #   * COMMIT\_MESSAGE
     #
     #     * A webhook triggers a build when the head commit message matches
@@ -7267,7 +7474,6 @@ module Aws::CodeBuild
     #       not work with GitHub Enterprise pull request events.
     #
     #        </note>
-    #
     #   * TAG\_NAME
     #
     #     * A webhook triggers a build when the tag name of the release
@@ -7276,7 +7482,6 @@ module Aws::CodeBuild
     #       <note markdown="1"> Works with `RELEASED` and `PRERELEASED` events only.
     #
     #        </note>
-    #
     #   * RELEASE\_NAME
     #
     #     * A webhook triggers a build when the release name matches the
@@ -7285,7 +7490,6 @@ module Aws::CodeBuild
     #       <note markdown="1"> Works with `RELEASED` and `PRERELEASED` events only.
     #
     #        </note>
-    #
     #   * REPOSITORY\_NAME
     #
     #     * A webhook triggers a build when the repository name matches the
@@ -7294,7 +7498,6 @@ module Aws::CodeBuild
     #       <note markdown="1"> Works with GitHub global or organization webhooks only.
     #
     #        </note>
-    #
     #   * WORKFLOW\_NAME
     #
     #     * A webhook triggers a build when the workflow name matches the

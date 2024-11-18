@@ -124,6 +124,23 @@ module Aws
                                         ?experiment_options: {
                                           account_targeting: ("single-account" | "multi-account")?,
                                           empty_target_resolution_mode: ("fail" | "skip")?
+                                        },
+                                        ?experiment_report_configuration: {
+                                          outputs: {
+                                            s3_configuration: {
+                                              bucket_name: ::String?,
+                                              prefix: ::String?
+                                            }?
+                                          }?,
+                                          data_sources: {
+                                            cloud_watch_dashboards: Array[
+                                              {
+                                                dashboard_identifier: ::String?
+                                              },
+                                            ]?
+                                          }?,
+                                          pre_experiment_duration: ::String?,
+                                          post_experiment_duration: ::String?
                                         }
                                       ) -> _CreateExperimentTemplateResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateExperimentTemplateResponseSuccess
@@ -425,6 +442,23 @@ module Aws
                                         },
                                         ?experiment_options: {
                                           empty_target_resolution_mode: ("fail" | "skip")?
+                                        },
+                                        ?experiment_report_configuration: {
+                                          outputs: {
+                                            s3_configuration: {
+                                              bucket_name: ::String?,
+                                              prefix: ::String?
+                                            }?
+                                          }?,
+                                          data_sources: {
+                                            cloud_watch_dashboards: Array[
+                                              {
+                                                dashboard_identifier: ::String?
+                                              },
+                                            ]?
+                                          }?,
+                                          pre_experiment_duration: ::String?,
+                                          post_experiment_duration: ::String?
                                         }
                                       ) -> _UpdateExperimentTemplateResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateExperimentTemplateResponseSuccess

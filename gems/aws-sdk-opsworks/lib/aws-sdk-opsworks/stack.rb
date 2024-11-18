@@ -130,7 +130,7 @@ module Aws::OpsWorks
     # values or to pass data to recipes. The string should be in the
     # following format:
     #
-    # `"\{"key1": "value1", "key2": "value2",...\}"`
+    # `"{"key1": "value1", "key2": "value2",...}"`
     #
     # For more information on custom JSON, see [Use Custom JSON to Modify
     # the Stack Configuration Attributes][1].

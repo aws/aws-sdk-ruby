@@ -214,6 +214,12 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class ApplicationTheme
+      attr_accessor brand_color_palette: Types::BrandColorPalette
+      attr_accessor brand_element_style: Types::BrandElementStyle
+      SENSITIVE: []
+    end
+
     class ArcAxisConfiguration
       attr_accessor range: Types::ArcAxisDisplayRange
       attr_accessor reserve_range: ::Integer
@@ -897,6 +903,56 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class BrandColorPalette
+      attr_accessor primary: Types::Palette
+      attr_accessor secondary: Types::Palette
+      attr_accessor accent: Types::Palette
+      attr_accessor measure: Types::Palette
+      attr_accessor dimension: Types::Palette
+      attr_accessor success: Types::Palette
+      attr_accessor info: Types::Palette
+      attr_accessor warning: Types::Palette
+      attr_accessor danger: Types::Palette
+      SENSITIVE: []
+    end
+
+    class BrandDefinition
+      attr_accessor brand_name: ::String
+      attr_accessor description: ::String
+      attr_accessor application_theme: Types::ApplicationTheme
+      attr_accessor logo_configuration: Types::LogoConfiguration
+      SENSITIVE: []
+    end
+
+    class BrandDetail
+      attr_accessor brand_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor brand_status: ("CREATE_IN_PROGRESS" | "CREATE_SUCCEEDED" | "CREATE_FAILED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
+      attr_accessor created_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor version_id: ::String
+      attr_accessor version_status: ("CREATE_IN_PROGRESS" | "CREATE_SUCCEEDED" | "CREATE_FAILED")
+      attr_accessor errors: ::Array[::String]
+      attr_accessor logo: Types::Logo
+      SENSITIVE: []
+    end
+
+    class BrandElementStyle
+      attr_accessor navbar_style: Types::NavbarStyle
+      SENSITIVE: []
+    end
+
+    class BrandSummary
+      attr_accessor arn: ::String
+      attr_accessor brand_id: ::String
+      attr_accessor brand_name: ::String
+      attr_accessor description: ::String
+      attr_accessor brand_status: ("CREATE_IN_PROGRESS" | "CREATE_SUCCEEDED" | "CREATE_FAILED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
+      attr_accessor created_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      SENSITIVE: []
+    end
+
     class CalculatedColumn
       attr_accessor column_name: ::String
       attr_accessor column_id: ::String
@@ -929,6 +985,27 @@ module Aws::QuickSight
       attr_accessor ingestion_id: ::String
       attr_accessor request_id: ::String
       attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class Capabilities
+      attr_accessor export_to_csv: ("DENY")
+      attr_accessor export_to_excel: ("DENY")
+      attr_accessor create_and_update_themes: ("DENY")
+      attr_accessor add_or_run_anomaly_detection_for_analyses: ("DENY")
+      attr_accessor share_analyses: ("DENY")
+      attr_accessor create_and_update_datasets: ("DENY")
+      attr_accessor share_datasets: ("DENY")
+      attr_accessor subscribe_dashboard_email_reports: ("DENY")
+      attr_accessor create_and_update_dashboard_email_reports: ("DENY")
+      attr_accessor share_dashboards: ("DENY")
+      attr_accessor create_and_update_threshold_alerts: ("DENY")
+      attr_accessor rename_shared_folders: ("DENY")
+      attr_accessor create_shared_folders: ("DENY")
+      attr_accessor create_and_update_data_sources: ("DENY")
+      attr_accessor share_data_sources: ("DENY")
+      attr_accessor view_account_spice_capacity: ("DENY")
+      attr_accessor create_spice_dataset: ("DENY")
       SENSITIVE: []
     end
 
@@ -1359,8 +1436,38 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class CreateBrandRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor brand_id: ::String
+      attr_accessor brand_definition: Types::BrandDefinition
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateBrandResponse
+      attr_accessor request_id: ::String
+      attr_accessor brand_detail: Types::BrandDetail
+      attr_accessor brand_definition: Types::BrandDefinition
+      SENSITIVE: []
+    end
+
     class CreateColumnsOperation
       attr_accessor columns: ::Array[Types::CalculatedColumn]
+      SENSITIVE: []
+    end
+
+    class CreateCustomPermissionsRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor custom_permissions_name: ::String
+      attr_accessor capabilities: Types::Capabilities
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateCustomPermissionsResponse
+      attr_accessor status: ::Integer
+      attr_accessor arn: ::String
+      attr_accessor request_id: ::String
       SENSITIVE: []
     end
 
@@ -1833,6 +1940,13 @@ module Aws::QuickSight
       attr_accessor integer_values: ::Array[::Integer]
       attr_accessor decimal_values: ::Array[::Float]
       attr_accessor date_time_values: ::Array[::Time]
+      SENSITIVE: []
+    end
+
+    class CustomPermissions
+      attr_accessor arn: ::String
+      attr_accessor custom_permissions_name: ::String
+      attr_accessor capabilities: Types::Capabilities
       SENSITIVE: []
     end
 
@@ -2526,6 +2640,40 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class DeleteBrandAssignmentRequest
+      attr_accessor aws_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBrandAssignmentResponse
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBrandRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor brand_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBrandResponse
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCustomPermissionsRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor custom_permissions_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCustomPermissionsResponse
+      attr_accessor status: ::Integer
+      attr_accessor arn: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
     class DeleteDashboardRequest
       attr_accessor aws_account_id: ::String
       attr_accessor dashboard_id: ::String
@@ -2821,6 +2969,19 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class DeleteUserCustomPermissionRequest
+      attr_accessor user_name: ::String
+      attr_accessor aws_account_id: ::String
+      attr_accessor namespace: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteUserCustomPermissionResponse
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
     class DeleteUserRequest
       attr_accessor user_name: ::String
       attr_accessor aws_account_id: ::String
@@ -2989,6 +3150,57 @@ module Aws::QuickSight
       attr_accessor override_tags: Types::AssetBundleImportJobOverrideTags
       attr_accessor override_validation_strategy: Types::AssetBundleImportJobOverrideValidationStrategy
       attr_accessor warnings: ::Array[Types::AssetBundleImportJobWarning]
+      SENSITIVE: []
+    end
+
+    class DescribeBrandAssignmentRequest
+      attr_accessor aws_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBrandAssignmentResponse
+      attr_accessor request_id: ::String
+      attr_accessor brand_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBrandPublishedVersionRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor brand_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBrandPublishedVersionResponse
+      attr_accessor request_id: ::String
+      attr_accessor brand_detail: Types::BrandDetail
+      attr_accessor brand_definition: Types::BrandDefinition
+      SENSITIVE: []
+    end
+
+    class DescribeBrandRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor brand_id: ::String
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBrandResponse
+      attr_accessor request_id: ::String
+      attr_accessor brand_detail: Types::BrandDetail
+      attr_accessor brand_definition: Types::BrandDefinition
+      SENSITIVE: []
+    end
+
+    class DescribeCustomPermissionsRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor custom_permissions_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCustomPermissionsResponse
+      attr_accessor status: ::Integer
+      attr_accessor custom_permissions: Types::CustomPermissions
+      attr_accessor request_id: ::String
       SENSITIVE: []
     end
 
@@ -4539,6 +4751,43 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class Image
+      attr_accessor source: Types::ImageSource
+      attr_accessor generated_image_url: ::String
+      SENSITIVE: []
+    end
+
+    class ImageConfiguration
+      attr_accessor source: Types::ImageSource
+      SENSITIVE: []
+    end
+
+    class ImageSet
+      attr_accessor original: Types::Image
+      attr_accessor height_64: Types::Image
+      attr_accessor height_32: Types::Image
+      SENSITIVE: []
+    end
+
+    class ImageSetConfiguration
+      attr_accessor original: Types::ImageConfiguration
+      SENSITIVE: []
+    end
+
+    class ImageSource
+      attr_accessor public_url: ::String
+      attr_accessor s3_uri: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class PublicUrl < ImageSource
+      end
+      class S3Uri < ImageSource
+      end
+      class Unknown < ImageSource
+      end
+    end
+
     class IncrementalRefresh
       attr_accessor lookback_window: Types::LookbackWindow
       SENSITIVE: []
@@ -4631,6 +4880,11 @@ module Aws::QuickSight
     class InternalFailureException
       attr_accessor message: ::String
       attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -4959,6 +5213,19 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class ListBrandsRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBrandsResponse
+      attr_accessor next_token: ::String
+      attr_accessor brands: ::Array[Types::BrandSummary]
+      SENSITIVE: []
+    end
+
     class ListControlDisplayOptions
       attr_accessor search_options: Types::ListControlSearchOptions
       attr_accessor select_all_options: Types::ListControlSelectAllOptions
@@ -4974,6 +5241,21 @@ module Aws::QuickSight
 
     class ListControlSelectAllOptions
       attr_accessor visibility: ("HIDDEN" | "VISIBLE")
+      SENSITIVE: []
+    end
+
+    class ListCustomPermissionsRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomPermissionsResponse
+      attr_accessor status: ::Integer
+      attr_accessor custom_permissions_list: ::Array[Types::CustomPermissions]
+      attr_accessor next_token: ::String
+      attr_accessor request_id: ::String
       SENSITIVE: []
     end
 
@@ -5452,6 +5734,30 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class Logo
+      attr_accessor alt_text: ::String
+      attr_accessor logo_set: Types::LogoSet
+      SENSITIVE: []
+    end
+
+    class LogoConfiguration
+      attr_accessor alt_text: ::String
+      attr_accessor logo_set: Types::LogoSetConfiguration
+      SENSITIVE: []
+    end
+
+    class LogoSet
+      attr_accessor primary: Types::ImageSet
+      attr_accessor favicon: Types::ImageSet
+      SENSITIVE: []
+    end
+
+    class LogoSetConfiguration
+      attr_accessor primary: Types::ImageSetConfiguration
+      attr_accessor favicon: Types::ImageSetConfiguration
+      SENSITIVE: []
+    end
+
     class LongFormatText
       attr_accessor plain_text: ::String
       attr_accessor rich_text: ::String
@@ -5576,6 +5882,12 @@ module Aws::QuickSight
       attr_accessor creation_status: ("CREATED" | "CREATING" | "DELETING" | "RETRYABLE_FAILURE" | "NON_RETRYABLE_FAILURE")
       attr_accessor identity_store: ("QUICKSIGHT")
       attr_accessor namespace_error: Types::NamespaceError
+      SENSITIVE: []
+    end
+
+    class NavbarStyle
+      attr_accessor global_navbar: Types::Palette
+      attr_accessor contextual_navbar: Types::Palette
       SENSITIVE: []
     end
 
@@ -5716,6 +6028,14 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class OAuthParameters
+      attr_accessor token_provider_url: ::String
+      attr_accessor o_auth_scope: ::String
+      attr_accessor identity_provider_vpc_connection_properties: Types::VpcConnectionProperties
+      attr_accessor identity_provider_resource_uri: ::String
+      SENSITIVE: []
+    end
+
     class OracleParameters
       attr_accessor host: ::String
       attr_accessor port: ::Integer
@@ -5741,6 +6061,12 @@ module Aws::QuickSight
     class PaginationConfiguration
       attr_accessor page_size: ::Integer
       attr_accessor page_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class Palette
+      attr_accessor foreground: ::String
+      attr_accessor background: ::String
       SENSITIVE: []
     end
 
@@ -7099,6 +7425,9 @@ module Aws::QuickSight
       attr_accessor host: ::String
       attr_accessor database: ::String
       attr_accessor warehouse: ::String
+      attr_accessor authentication_type: ("PASSWORD" | "TOKEN" | "X509")
+      attr_accessor database_access_control_role: ::String
+      attr_accessor o_auth_parameters: Types::OAuthParameters
       SENSITIVE: []
     end
 
@@ -7133,6 +7462,9 @@ module Aws::QuickSight
       attr_accessor port: ::Integer
       attr_accessor catalog: ::String
       attr_accessor product_type: ("GALAXY" | "ENTERPRISE")
+      attr_accessor database_access_control_role: ::String
+      attr_accessor authentication_type: ("PASSWORD" | "TOKEN" | "X509")
+      attr_accessor o_auth_parameters: Types::OAuthParameters
       SENSITIVE: []
     end
 
@@ -8303,6 +8635,59 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class UpdateBrandAssignmentRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor brand_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateBrandAssignmentResponse
+      attr_accessor request_id: ::String
+      attr_accessor brand_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateBrandPublishedVersionRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor brand_id: ::String
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateBrandPublishedVersionResponse
+      attr_accessor request_id: ::String
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateBrandRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor brand_id: ::String
+      attr_accessor brand_definition: Types::BrandDefinition
+      SENSITIVE: []
+    end
+
+    class UpdateBrandResponse
+      attr_accessor request_id: ::String
+      attr_accessor brand_detail: Types::BrandDetail
+      attr_accessor brand_definition: Types::BrandDefinition
+      SENSITIVE: []
+    end
+
+    class UpdateCustomPermissionsRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor custom_permissions_name: ::String
+      attr_accessor capabilities: Types::Capabilities
+      SENSITIVE: []
+    end
+
+    class UpdateCustomPermissionsResponse
+      attr_accessor status: ::Integer
+      attr_accessor arn: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
     class UpdateDashboardLinksRequest
       attr_accessor aws_account_id: ::String
       attr_accessor dashboard_id: ::String
@@ -8782,6 +9167,20 @@ module Aws::QuickSight
       attr_accessor topic_id: ::String
       attr_accessor arn: ::String
       attr_accessor refresh_arn: ::String
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateUserCustomPermissionRequest
+      attr_accessor user_name: ::String
+      attr_accessor aws_account_id: ::String
+      attr_accessor namespace: ::String
+      attr_accessor custom_permissions_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateUserCustomPermissionResponse
       attr_accessor request_id: ::String
       attr_accessor status: ::Integer
       SENSITIVE: []

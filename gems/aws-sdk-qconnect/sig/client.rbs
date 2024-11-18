@@ -75,6 +75,20 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _ActivateMessageTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ActivateMessageTemplateResponse]
+        def message_template_arn: () -> ::String
+        def message_template_id: () -> ::String
+        def version_number: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#activate_message_template-instance_method
+      def activate_message_template: (
+                                       knowledge_base_id: ::String,
+                                       message_template_id: ::String,
+                                       version_number: ::Integer
+                                     ) -> _ActivateMessageTemplateResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ActivateMessageTemplateResponseSuccess
+
       interface _CreateAIAgentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateAIAgentResponse]
         def ai_agent: () -> Types::AIAgentData
@@ -372,6 +386,155 @@ module Aws
                                  ) -> _CreateKnowledgeBaseResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateKnowledgeBaseResponseSuccess
 
+      interface _CreateMessageTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMessageTemplateResponse]
+        def message_template: () -> Types::MessageTemplateData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#create_message_template-instance_method
+      def create_message_template: (
+                                     channel_subtype: ("EMAIL" | "SMS"),
+                                     ?client_token: ::String,
+                                     content: {
+                                       email: {
+                                         body: {
+                                           html: {
+                                             content: ::String?
+                                           }?,
+                                           plain_text: {
+                                             content: ::String?
+                                           }?
+                                         }?,
+                                         headers: Array[
+                                           {
+                                             name: ::String?,
+                                             value: ::String?
+                                           },
+                                         ]?,
+                                         subject: ::String?
+                                       }?,
+                                       sms: {
+                                         body: {
+                                           plain_text: {
+                                             content: ::String?
+                                           }?
+                                         }?
+                                       }?
+                                     },
+                                     ?default_attributes: {
+                                       agent_attributes: {
+                                         first_name: ::String?,
+                                         last_name: ::String?
+                                       }?,
+                                       custom_attributes: Hash[::String, ::String]?,
+                                       customer_profile_attributes: {
+                                         account_number: ::String?,
+                                         additional_information: ::String?,
+                                         address1: ::String?,
+                                         address2: ::String?,
+                                         address3: ::String?,
+                                         address4: ::String?,
+                                         billing_address_1: ::String?,
+                                         billing_address_2: ::String?,
+                                         billing_address_3: ::String?,
+                                         billing_address_4: ::String?,
+                                         billing_city: ::String?,
+                                         billing_country: ::String?,
+                                         billing_county: ::String?,
+                                         billing_postal_code: ::String?,
+                                         billing_province: ::String?,
+                                         billing_state: ::String?,
+                                         birth_date: ::String?,
+                                         business_email_address: ::String?,
+                                         business_name: ::String?,
+                                         business_phone_number: ::String?,
+                                         city: ::String?,
+                                         country: ::String?,
+                                         county: ::String?,
+                                         custom: Hash[::String, ::String]?,
+                                         email_address: ::String?,
+                                         first_name: ::String?,
+                                         gender: ::String?,
+                                         home_phone_number: ::String?,
+                                         last_name: ::String?,
+                                         mailing_address_1: ::String?,
+                                         mailing_address_2: ::String?,
+                                         mailing_address_3: ::String?,
+                                         mailing_address_4: ::String?,
+                                         mailing_city: ::String?,
+                                         mailing_country: ::String?,
+                                         mailing_county: ::String?,
+                                         mailing_postal_code: ::String?,
+                                         mailing_province: ::String?,
+                                         mailing_state: ::String?,
+                                         middle_name: ::String?,
+                                         mobile_phone_number: ::String?,
+                                         party_type: ::String?,
+                                         phone_number: ::String?,
+                                         postal_code: ::String?,
+                                         profile_arn: ::String?,
+                                         profile_id: ::String?,
+                                         province: ::String?,
+                                         shipping_address_1: ::String?,
+                                         shipping_address_2: ::String?,
+                                         shipping_address_3: ::String?,
+                                         shipping_address_4: ::String?,
+                                         shipping_city: ::String?,
+                                         shipping_country: ::String?,
+                                         shipping_county: ::String?,
+                                         shipping_postal_code: ::String?,
+                                         shipping_province: ::String?,
+                                         shipping_state: ::String?,
+                                         state: ::String?
+                                       }?,
+                                       system_attributes: {
+                                         customer_endpoint: {
+                                           address: ::String?
+                                         }?,
+                                         name: ::String?,
+                                         system_endpoint: {
+                                           address: ::String?
+                                         }?
+                                       }?
+                                     },
+                                     ?description: ::String,
+                                     ?grouping_configuration: {
+                                       criteria: ::String?,
+                                       values: Array[::String]?
+                                     },
+                                     knowledge_base_id: ::String,
+                                     ?language: ::String,
+                                     name: ::String,
+                                     ?tags: Hash[::String, ::String]
+                                   ) -> _CreateMessageTemplateResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMessageTemplateResponseSuccess
+
+      interface _CreateMessageTemplateAttachmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMessageTemplateAttachmentResponse]
+        def attachment: () -> Types::MessageTemplateAttachment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#create_message_template_attachment-instance_method
+      def create_message_template_attachment: (
+                                                body: ::String,
+                                                ?client_token: ::String,
+                                                content_disposition: ("ATTACHMENT"),
+                                                knowledge_base_id: ::String,
+                                                message_template_id: ::String,
+                                                name: ::String
+                                              ) -> _CreateMessageTemplateAttachmentResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMessageTemplateAttachmentResponseSuccess
+
+      interface _CreateMessageTemplateVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMessageTemplateVersionResponse]
+        def message_template: () -> Types::ExtendedMessageTemplateData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#create_message_template_version-instance_method
+      def create_message_template_version: (
+                                             knowledge_base_id: ::String,
+                                             ?message_template_content_sha_256: ::String,
+                                             message_template_id: ::String
+                                           ) -> _CreateMessageTemplateVersionResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMessageTemplateVersionResponseSuccess
+
       interface _CreateQuickResponseResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateQuickResponseResponse]
         def quick_response: () -> Types::QuickResponseData
@@ -440,6 +603,20 @@ module Aws
                             ?tags: Hash[::String, ::String]
                           ) -> _CreateSessionResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSessionResponseSuccess
+
+      interface _DeactivateMessageTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeactivateMessageTemplateResponse]
+        def message_template_arn: () -> ::String
+        def message_template_id: () -> ::String
+        def version_number: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#deactivate_message_template-instance_method
+      def deactivate_message_template: (
+                                         knowledge_base_id: ::String,
+                                         message_template_id: ::String,
+                                         version_number: ::Integer
+                                       ) -> _DeactivateMessageTemplateResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeactivateMessageTemplateResponseSuccess
 
       interface _DeleteAIAgentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAIAgentResponse]
@@ -541,6 +718,27 @@ module Aws
                                    knowledge_base_id: ::String
                                  ) -> _DeleteKnowledgeBaseResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteKnowledgeBaseResponseSuccess
+
+      interface _DeleteMessageTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMessageTemplateResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#delete_message_template-instance_method
+      def delete_message_template: (
+                                     knowledge_base_id: ::String,
+                                     message_template_id: ::String
+                                   ) -> _DeleteMessageTemplateResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMessageTemplateResponseSuccess
+
+      interface _DeleteMessageTemplateAttachmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMessageTemplateAttachmentResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#delete_message_template_attachment-instance_method
+      def delete_message_template_attachment: (
+                                                attachment_id: ::String,
+                                                knowledge_base_id: ::String,
+                                                message_template_id: ::String
+                                              ) -> _DeleteMessageTemplateAttachmentResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMessageTemplateAttachmentResponseSuccess
 
       interface _DeleteQuickResponseResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteQuickResponseResponse]
@@ -651,6 +849,17 @@ module Aws
                                 knowledge_base_id: ::String
                               ) -> _GetKnowledgeBaseResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetKnowledgeBaseResponseSuccess
+
+      interface _GetMessageTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMessageTemplateResponse]
+        def message_template: () -> Types::ExtendedMessageTemplateData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#get_message_template-instance_method
+      def get_message_template: (
+                                  knowledge_base_id: ::String,
+                                  message_template_id: ::String
+                                ) -> _GetMessageTemplateResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMessageTemplateResponseSuccess
 
       interface _GetQuickResponseResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetQuickResponseResponse]
@@ -823,6 +1032,33 @@ module Aws
                                 ) -> _ListKnowledgeBasesResponseSuccess
                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListKnowledgeBasesResponseSuccess
 
+      interface _ListMessageTemplateVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMessageTemplateVersionsResponse]
+        def message_template_version_summaries: () -> ::Array[Types::MessageTemplateVersionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#list_message_template_versions-instance_method
+      def list_message_template_versions: (
+                                            knowledge_base_id: ::String,
+                                            ?max_results: ::Integer,
+                                            message_template_id: ::String,
+                                            ?next_token: ::String
+                                          ) -> _ListMessageTemplateVersionsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMessageTemplateVersionsResponseSuccess
+
+      interface _ListMessageTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMessageTemplatesResponse]
+        def message_template_summaries: () -> ::Array[Types::MessageTemplateSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#list_message_templates-instance_method
+      def list_message_templates: (
+                                    knowledge_base_id: ::String,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListMessageTemplatesResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMessageTemplatesResponseSuccess
+
       interface _ListQuickResponsesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListQuickResponsesResponse]
         def next_token: () -> ::String
@@ -932,6 +1168,95 @@ module Aws
                                               ) -> _RemoveKnowledgeBaseTemplateUriResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveKnowledgeBaseTemplateUriResponseSuccess
 
+      interface _RenderMessageTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RenderMessageTemplateResponse]
+        def attachments: () -> ::Array[Types::MessageTemplateAttachment]
+        def attributes_not_interpolated: () -> ::Array[::String]
+        def content: () -> Types::MessageTemplateContentProvider
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#render_message_template-instance_method
+      def render_message_template: (
+                                     attributes: {
+                                       agent_attributes: {
+                                         first_name: ::String?,
+                                         last_name: ::String?
+                                       }?,
+                                       custom_attributes: Hash[::String, ::String]?,
+                                       customer_profile_attributes: {
+                                         account_number: ::String?,
+                                         additional_information: ::String?,
+                                         address1: ::String?,
+                                         address2: ::String?,
+                                         address3: ::String?,
+                                         address4: ::String?,
+                                         billing_address_1: ::String?,
+                                         billing_address_2: ::String?,
+                                         billing_address_3: ::String?,
+                                         billing_address_4: ::String?,
+                                         billing_city: ::String?,
+                                         billing_country: ::String?,
+                                         billing_county: ::String?,
+                                         billing_postal_code: ::String?,
+                                         billing_province: ::String?,
+                                         billing_state: ::String?,
+                                         birth_date: ::String?,
+                                         business_email_address: ::String?,
+                                         business_name: ::String?,
+                                         business_phone_number: ::String?,
+                                         city: ::String?,
+                                         country: ::String?,
+                                         county: ::String?,
+                                         custom: Hash[::String, ::String]?,
+                                         email_address: ::String?,
+                                         first_name: ::String?,
+                                         gender: ::String?,
+                                         home_phone_number: ::String?,
+                                         last_name: ::String?,
+                                         mailing_address_1: ::String?,
+                                         mailing_address_2: ::String?,
+                                         mailing_address_3: ::String?,
+                                         mailing_address_4: ::String?,
+                                         mailing_city: ::String?,
+                                         mailing_country: ::String?,
+                                         mailing_county: ::String?,
+                                         mailing_postal_code: ::String?,
+                                         mailing_province: ::String?,
+                                         mailing_state: ::String?,
+                                         middle_name: ::String?,
+                                         mobile_phone_number: ::String?,
+                                         party_type: ::String?,
+                                         phone_number: ::String?,
+                                         postal_code: ::String?,
+                                         profile_arn: ::String?,
+                                         profile_id: ::String?,
+                                         province: ::String?,
+                                         shipping_address_1: ::String?,
+                                         shipping_address_2: ::String?,
+                                         shipping_address_3: ::String?,
+                                         shipping_address_4: ::String?,
+                                         shipping_city: ::String?,
+                                         shipping_country: ::String?,
+                                         shipping_county: ::String?,
+                                         shipping_postal_code: ::String?,
+                                         shipping_province: ::String?,
+                                         shipping_state: ::String?,
+                                         state: ::String?
+                                       }?,
+                                       system_attributes: {
+                                         customer_endpoint: {
+                                           address: ::String?
+                                         }?,
+                                         name: ::String?,
+                                         system_endpoint: {
+                                           address: ::String?
+                                         }?
+                                       }?
+                                     },
+                                     knowledge_base_id: ::String,
+                                     message_template_id: ::String
+                                   ) -> _RenderMessageTemplateResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RenderMessageTemplateResponseSuccess
+
       interface _SearchContentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SearchContentResponse]
         def content_summaries: () -> ::Array[Types::ContentSummary]
@@ -953,6 +1278,42 @@ module Aws
                             }
                           ) -> _SearchContentResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchContentResponseSuccess
+
+      interface _SearchMessageTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchMessageTemplatesResponse]
+        def next_token: () -> ::String
+        def results: () -> ::Array[Types::MessageTemplateSearchResultData]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#search_message_templates-instance_method
+      def search_message_templates: (
+                                      knowledge_base_id: ::String,
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String,
+                                      search_expression: {
+                                        filters: Array[
+                                          {
+                                            include_no_existence: bool?,
+                                            name: ::String,
+                                            operator: ("EQUALS" | "PREFIX"),
+                                            values: Array[::String]?
+                                          },
+                                        ]?,
+                                        order_on_field: {
+                                          name: ::String,
+                                          order: ("ASC" | "DESC")?
+                                        }?,
+                                        queries: Array[
+                                          {
+                                            allow_fuzziness: bool?,
+                                            name: ::String,
+                                            operator: ("CONTAINS" | "CONTAINS_AND_PREFIX"),
+                                            priority: ("HIGH" | "MEDIUM" | "LOW")?,
+                                            values: Array[::String]
+                                          },
+                                        ]?
+                                      }
+                                    ) -> _SearchMessageTemplatesResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchMessageTemplatesResponseSuccess
 
       interface _SearchQuickResponsesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SearchQuickResponsesResponse]
@@ -1230,6 +1591,137 @@ module Aws
                                                 template_uri: ::String
                                               ) -> _UpdateKnowledgeBaseTemplateUriResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateKnowledgeBaseTemplateUriResponseSuccess
+
+      interface _UpdateMessageTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMessageTemplateResponse]
+        def message_template: () -> Types::MessageTemplateData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#update_message_template-instance_method
+      def update_message_template: (
+                                     ?content: {
+                                       email: {
+                                         body: {
+                                           html: {
+                                             content: ::String?
+                                           }?,
+                                           plain_text: {
+                                             content: ::String?
+                                           }?
+                                         }?,
+                                         headers: Array[
+                                           {
+                                             name: ::String?,
+                                             value: ::String?
+                                           },
+                                         ]?,
+                                         subject: ::String?
+                                       }?,
+                                       sms: {
+                                         body: {
+                                           plain_text: {
+                                             content: ::String?
+                                           }?
+                                         }?
+                                       }?
+                                     },
+                                     ?default_attributes: {
+                                       agent_attributes: {
+                                         first_name: ::String?,
+                                         last_name: ::String?
+                                       }?,
+                                       custom_attributes: Hash[::String, ::String]?,
+                                       customer_profile_attributes: {
+                                         account_number: ::String?,
+                                         additional_information: ::String?,
+                                         address1: ::String?,
+                                         address2: ::String?,
+                                         address3: ::String?,
+                                         address4: ::String?,
+                                         billing_address_1: ::String?,
+                                         billing_address_2: ::String?,
+                                         billing_address_3: ::String?,
+                                         billing_address_4: ::String?,
+                                         billing_city: ::String?,
+                                         billing_country: ::String?,
+                                         billing_county: ::String?,
+                                         billing_postal_code: ::String?,
+                                         billing_province: ::String?,
+                                         billing_state: ::String?,
+                                         birth_date: ::String?,
+                                         business_email_address: ::String?,
+                                         business_name: ::String?,
+                                         business_phone_number: ::String?,
+                                         city: ::String?,
+                                         country: ::String?,
+                                         county: ::String?,
+                                         custom: Hash[::String, ::String]?,
+                                         email_address: ::String?,
+                                         first_name: ::String?,
+                                         gender: ::String?,
+                                         home_phone_number: ::String?,
+                                         last_name: ::String?,
+                                         mailing_address_1: ::String?,
+                                         mailing_address_2: ::String?,
+                                         mailing_address_3: ::String?,
+                                         mailing_address_4: ::String?,
+                                         mailing_city: ::String?,
+                                         mailing_country: ::String?,
+                                         mailing_county: ::String?,
+                                         mailing_postal_code: ::String?,
+                                         mailing_province: ::String?,
+                                         mailing_state: ::String?,
+                                         middle_name: ::String?,
+                                         mobile_phone_number: ::String?,
+                                         party_type: ::String?,
+                                         phone_number: ::String?,
+                                         postal_code: ::String?,
+                                         profile_arn: ::String?,
+                                         profile_id: ::String?,
+                                         province: ::String?,
+                                         shipping_address_1: ::String?,
+                                         shipping_address_2: ::String?,
+                                         shipping_address_3: ::String?,
+                                         shipping_address_4: ::String?,
+                                         shipping_city: ::String?,
+                                         shipping_country: ::String?,
+                                         shipping_county: ::String?,
+                                         shipping_postal_code: ::String?,
+                                         shipping_province: ::String?,
+                                         shipping_state: ::String?,
+                                         state: ::String?
+                                       }?,
+                                       system_attributes: {
+                                         customer_endpoint: {
+                                           address: ::String?
+                                         }?,
+                                         name: ::String?,
+                                         system_endpoint: {
+                                           address: ::String?
+                                         }?
+                                       }?
+                                     },
+                                     knowledge_base_id: ::String,
+                                     ?language: ::String,
+                                     message_template_id: ::String
+                                   ) -> _UpdateMessageTemplateResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMessageTemplateResponseSuccess
+
+      interface _UpdateMessageTemplateMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMessageTemplateMetadataResponse]
+        def message_template: () -> Types::MessageTemplateData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#update_message_template_metadata-instance_method
+      def update_message_template_metadata: (
+                                              ?description: ::String,
+                                              ?grouping_configuration: {
+                                                criteria: ::String?,
+                                                values: Array[::String]?
+                                              },
+                                              knowledge_base_id: ::String,
+                                              message_template_id: ::String,
+                                              ?name: ::String
+                                            ) -> _UpdateMessageTemplateMetadataResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMessageTemplateMetadataResponseSuccess
 
       interface _UpdateQuickResponseResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateQuickResponseResponse]

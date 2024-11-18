@@ -1396,11 +1396,11 @@ module Aws::QuickSight
     #
     #   For example, you can add a default theme by setting
     #   `AccountCustomization` to the midnight theme: `"AccountCustomization":
-    #   \{ "DefaultTheme": "arn:aws:quicksight::aws:theme/MIDNIGHT" \}`. Or,
-    #   you can add a custom theme by specifying `"AccountCustomization": \{
+    #   { "DefaultTheme": "arn:aws:quicksight::aws:theme/MIDNIGHT" }`. Or, you
+    #   can add a custom theme by specifying `"AccountCustomization": {
     #   "DefaultTheme":
     #   "arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639"
-    #   \}`.
+    #   }`.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of the tags that you want to attach to this resource.
@@ -1804,6 +1804,254 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def create_analysis(params = {}, options = {})
       req = build_request(:create_analysis, params)
+      req.send_request(options)
+    end
+
+    # Creates an Amazon QuickSight brand.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that owns the brand.
+    #
+    # @option params [required, String] :brand_id
+    #   The ID of the Amazon QuickSight brand.
+    #
+    # @option params [Types::BrandDefinition] :brand_definition
+    #   The definition of the brand.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A map of the key-value pairs that are assigned to the brand.
+    #
+    # @return [Types::CreateBrandResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateBrandResponse#request_id #request_id} => String
+    #   * {Types::CreateBrandResponse#brand_detail #brand_detail} => Types::BrandDetail
+    #   * {Types::CreateBrandResponse#brand_definition #brand_definition} => Types::BrandDefinition
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_brand({
+    #     aws_account_id: "AwsAccountId", # required
+    #     brand_id: "ShortRestrictiveResourceId", # required
+    #     brand_definition: {
+    #       brand_name: "Name", # required
+    #       description: "Description",
+    #       application_theme: {
+    #         brand_color_palette: {
+    #           primary: {
+    #             foreground: "HexColor",
+    #             background: "HexColor",
+    #           },
+    #           secondary: {
+    #             foreground: "HexColor",
+    #             background: "HexColor",
+    #           },
+    #           accent: {
+    #             foreground: "HexColor",
+    #             background: "HexColor",
+    #           },
+    #           measure: {
+    #             foreground: "HexColor",
+    #             background: "HexColor",
+    #           },
+    #           dimension: {
+    #             foreground: "HexColor",
+    #             background: "HexColor",
+    #           },
+    #           success: {
+    #             foreground: "HexColor",
+    #             background: "HexColor",
+    #           },
+    #           info: {
+    #             foreground: "HexColor",
+    #             background: "HexColor",
+    #           },
+    #           warning: {
+    #             foreground: "HexColor",
+    #             background: "HexColor",
+    #           },
+    #           danger: {
+    #             foreground: "HexColor",
+    #             background: "HexColor",
+    #           },
+    #         },
+    #         brand_element_style: {
+    #           navbar_style: {
+    #             global_navbar: {
+    #               foreground: "HexColor",
+    #               background: "HexColor",
+    #             },
+    #             contextual_navbar: {
+    #               foreground: "HexColor",
+    #               background: "HexColor",
+    #             },
+    #           },
+    #         },
+    #       },
+    #       logo_configuration: {
+    #         alt_text: "String", # required
+    #         logo_set: { # required
+    #           primary: { # required
+    #             original: { # required
+    #               source: {
+    #                 public_url: "String",
+    #                 s3_uri: "String",
+    #               },
+    #             },
+    #           },
+    #           favicon: {
+    #             original: { # required
+    #               source: {
+    #                 public_url: "String",
+    #                 s3_uri: "String",
+    #               },
+    #             },
+    #           },
+    #         },
+    #       },
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.brand_detail.brand_id #=> String
+    #   resp.brand_detail.arn #=> String
+    #   resp.brand_detail.brand_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_SUCCEEDED", "CREATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_FAILED"
+    #   resp.brand_detail.created_time #=> Time
+    #   resp.brand_detail.last_updated_time #=> Time
+    #   resp.brand_detail.version_id #=> String
+    #   resp.brand_detail.version_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_SUCCEEDED", "CREATE_FAILED"
+    #   resp.brand_detail.errors #=> Array
+    #   resp.brand_detail.errors[0] #=> String
+    #   resp.brand_detail.logo.alt_text #=> String
+    #   resp.brand_detail.logo.logo_set.primary.original.source.public_url #=> String
+    #   resp.brand_detail.logo.logo_set.primary.original.source.s3_uri #=> String
+    #   resp.brand_detail.logo.logo_set.primary.original.generated_image_url #=> String
+    #   resp.brand_detail.logo.logo_set.primary.height_64.source.public_url #=> String
+    #   resp.brand_detail.logo.logo_set.primary.height_64.source.s3_uri #=> String
+    #   resp.brand_detail.logo.logo_set.primary.height_64.generated_image_url #=> String
+    #   resp.brand_detail.logo.logo_set.primary.height_32.source.public_url #=> String
+    #   resp.brand_detail.logo.logo_set.primary.height_32.source.s3_uri #=> String
+    #   resp.brand_detail.logo.logo_set.primary.height_32.generated_image_url #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.original.source.public_url #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.original.source.s3_uri #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.original.generated_image_url #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.height_64.source.public_url #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.height_64.source.s3_uri #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.height_64.generated_image_url #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.height_32.source.public_url #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.height_32.source.s3_uri #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.height_32.generated_image_url #=> String
+    #   resp.brand_definition.brand_name #=> String
+    #   resp.brand_definition.description #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.primary.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.primary.background #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.secondary.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.secondary.background #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.accent.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.accent.background #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.measure.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.measure.background #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.dimension.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.dimension.background #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.success.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.success.background #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.info.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.info.background #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.warning.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.warning.background #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.danger.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.danger.background #=> String
+    #   resp.brand_definition.application_theme.brand_element_style.navbar_style.global_navbar.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_element_style.navbar_style.global_navbar.background #=> String
+    #   resp.brand_definition.application_theme.brand_element_style.navbar_style.contextual_navbar.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_element_style.navbar_style.contextual_navbar.background #=> String
+    #   resp.brand_definition.logo_configuration.alt_text #=> String
+    #   resp.brand_definition.logo_configuration.logo_set.primary.original.source.public_url #=> String
+    #   resp.brand_definition.logo_configuration.logo_set.primary.original.source.s3_uri #=> String
+    #   resp.brand_definition.logo_configuration.logo_set.favicon.original.source.public_url #=> String
+    #   resp.brand_definition.logo_configuration.logo_set.favicon.original.source.s3_uri #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateBrand AWS API Documentation
+    #
+    # @overload create_brand(params = {})
+    # @param [Hash] params ({})
+    def create_brand(params = {}, options = {})
+      req = build_request(:create_brand, params)
+      req.send_request(options)
+    end
+
+    # Creates a custom permissions profile.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that you want to create the
+    #   custom permissions profile in.
+    #
+    # @option params [required, String] :custom_permissions_name
+    #   The name of the custom permissions profile that you want to create.
+    #
+    # @option params [Types::Capabilities] :capabilities
+    #   A set of actions to include in the custom permissions profile.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to associate with the custom permissions profile.
+    #
+    # @return [Types::CreateCustomPermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCustomPermissionsResponse#status #status} => Integer
+    #   * {Types::CreateCustomPermissionsResponse#arn #arn} => String
+    #   * {Types::CreateCustomPermissionsResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_custom_permissions({
+    #     aws_account_id: "AwsAccountId", # required
+    #     custom_permissions_name: "CustomPermissionsName", # required
+    #     capabilities: {
+    #       export_to_csv: "DENY", # accepts DENY
+    #       export_to_excel: "DENY", # accepts DENY
+    #       create_and_update_themes: "DENY", # accepts DENY
+    #       add_or_run_anomaly_detection_for_analyses: "DENY", # accepts DENY
+    #       share_analyses: "DENY", # accepts DENY
+    #       create_and_update_datasets: "DENY", # accepts DENY
+    #       share_datasets: "DENY", # accepts DENY
+    #       subscribe_dashboard_email_reports: "DENY", # accepts DENY
+    #       create_and_update_dashboard_email_reports: "DENY", # accepts DENY
+    #       share_dashboards: "DENY", # accepts DENY
+    #       create_and_update_threshold_alerts: "DENY", # accepts DENY
+    #       rename_shared_folders: "DENY", # accepts DENY
+    #       create_shared_folders: "DENY", # accepts DENY
+    #       create_and_update_data_sources: "DENY", # accepts DENY
+    #       share_data_sources: "DENY", # accepts DENY
+    #       view_account_spice_capacity: "DENY", # accepts DENY
+    #       create_spice_dataset: "DENY", # accepts DENY
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.arn #=> String
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateCustomPermissions AWS API Documentation
+    #
+    # @overload create_custom_permissions(params = {})
+    # @param [Hash] params ({})
+    def create_custom_permissions(params = {}, options = {})
+      req = build_request(:create_custom_permissions, params)
       req.send_request(options)
     end
 
@@ -2400,6 +2648,16 @@ module Aws::QuickSight
     #         host: "Host", # required
     #         database: "Database", # required
     #         warehouse: "Warehouse", # required
+    #         authentication_type: "PASSWORD", # accepts PASSWORD, TOKEN, X509
+    #         database_access_control_role: "DatabaseAccessControlRole",
+    #         o_auth_parameters: {
+    #           token_provider_url: "TokenProviderUrl", # required
+    #           o_auth_scope: "OAuthScope",
+    #           identity_provider_vpc_connection_properties: {
+    #             vpc_connection_arn: "Arn", # required
+    #           },
+    #           identity_provider_resource_uri: "IdentityProviderResourceUri",
+    #         },
     #       },
     #       spark_parameters: {
     #         host: "Host", # required
@@ -2436,6 +2694,16 @@ module Aws::QuickSight
     #         port: 1, # required
     #         catalog: "Catalog", # required
     #         product_type: "GALAXY", # accepts GALAXY, ENTERPRISE
+    #         database_access_control_role: "DatabaseAccessControlRole",
+    #         authentication_type: "PASSWORD", # accepts PASSWORD, TOKEN, X509
+    #         o_auth_parameters: {
+    #           token_provider_url: "TokenProviderUrl", # required
+    #           o_auth_scope: "OAuthScope",
+    #           identity_provider_vpc_connection_properties: {
+    #             vpc_connection_arn: "Arn", # required
+    #           },
+    #           identity_provider_resource_uri: "IdentityProviderResourceUri",
+    #         },
     #       },
     #       trino_parameters: {
     #         host: "Host", # required
@@ -2534,6 +2802,16 @@ module Aws::QuickSight
     #               host: "Host", # required
     #               database: "Database", # required
     #               warehouse: "Warehouse", # required
+    #               authentication_type: "PASSWORD", # accepts PASSWORD, TOKEN, X509
+    #               database_access_control_role: "DatabaseAccessControlRole",
+    #               o_auth_parameters: {
+    #                 token_provider_url: "TokenProviderUrl", # required
+    #                 o_auth_scope: "OAuthScope",
+    #                 identity_provider_vpc_connection_properties: {
+    #                   vpc_connection_arn: "Arn", # required
+    #                 },
+    #                 identity_provider_resource_uri: "IdentityProviderResourceUri",
+    #               },
     #             },
     #             spark_parameters: {
     #               host: "Host", # required
@@ -2570,6 +2848,16 @@ module Aws::QuickSight
     #               port: 1, # required
     #               catalog: "Catalog", # required
     #               product_type: "GALAXY", # accepts GALAXY, ENTERPRISE
+    #               database_access_control_role: "DatabaseAccessControlRole",
+    #               authentication_type: "PASSWORD", # accepts PASSWORD, TOKEN, X509
+    #               o_auth_parameters: {
+    #                 token_provider_url: "TokenProviderUrl", # required
+    #                 o_auth_scope: "OAuthScope",
+    #                 identity_provider_vpc_connection_properties: {
+    #                   vpc_connection_arn: "Arn", # required
+    #                 },
+    #                 identity_provider_resource_uri: "IdentityProviderResourceUri",
+    #               },
     #             },
     #             trino_parameters: {
     #               host: "Host", # required
@@ -4070,6 +4358,104 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Deletes an Amazon QuickSight brand.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that owns the brand.
+    #
+    # @option params [required, String] :brand_id
+    #   The ID of the Amazon QuickSight brand.
+    #
+    # @return [Types::DeleteBrandResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteBrandResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_brand({
+    #     aws_account_id: "AwsAccountId", # required
+    #     brand_id: "ShortRestrictiveResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteBrand AWS API Documentation
+    #
+    # @overload delete_brand(params = {})
+    # @param [Hash] params ({})
+    def delete_brand(params = {}, options = {})
+      req = build_request(:delete_brand, params)
+      req.send_request(options)
+    end
+
+    # Deletes a brand assignment.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that owns the brand
+    #   assignment.
+    #
+    # @return [Types::DeleteBrandAssignmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteBrandAssignmentResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_brand_assignment({
+    #     aws_account_id: "AwsAccountId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteBrandAssignment AWS API Documentation
+    #
+    # @overload delete_brand_assignment(params = {})
+    # @param [Hash] params ({})
+    def delete_brand_assignment(params = {}, options = {})
+      req = build_request(:delete_brand_assignment, params)
+      req.send_request(options)
+    end
+
+    # Deletes a custom permissions profile.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the custom
+    #   permissions profile that you want to delete.
+    #
+    # @option params [required, String] :custom_permissions_name
+    #   The name of the custom permissions profile that you want to delete.
+    #
+    # @return [Types::DeleteCustomPermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteCustomPermissionsResponse#status #status} => Integer
+    #   * {Types::DeleteCustomPermissionsResponse#arn #arn} => String
+    #   * {Types::DeleteCustomPermissionsResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_custom_permissions({
+    #     aws_account_id: "AwsAccountId", # required
+    #     custom_permissions_name: "CustomPermissionsName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.arn #=> String
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteCustomPermissions AWS API Documentation
+    #
+    # @overload delete_custom_permissions(params = {})
+    # @param [Hash] params ({})
+    def delete_custom_permissions(params = {}, options = {})
+      req = build_request(:delete_custom_permissions, params)
+      req.send_request(options)
+    end
+
     # Deletes a dashboard.
     #
     # @option params [required, String] :aws_account_id
@@ -4997,6 +5383,46 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Deletes a custom permissions profile from a user.
+    #
+    # @option params [required, String] :user_name
+    #   The username of the user that you want to remove custom permissions
+    #   from.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the custom
+    #   permission configuration that you want to delete.
+    #
+    # @option params [required, String] :namespace
+    #   The namespace that the user belongs to.
+    #
+    # @return [Types::DeleteUserCustomPermissionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteUserCustomPermissionResponse#request_id #request_id} => String
+    #   * {Types::DeleteUserCustomPermissionResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_user_custom_permission({
+    #     user_name: "UserName", # required
+    #     aws_account_id: "AwsAccountId", # required
+    #     namespace: "Namespace", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteUserCustomPermission AWS API Documentation
+    #
+    # @overload delete_user_custom_permission(params = {})
+    # @param [Hash] params ({})
+    def delete_user_custom_permission(params = {}, options = {})
+      req = build_request(:delete_user_custom_permission, params)
+      req.send_request(options)
+    end
+
     # Deletes a VPC connection.
     #
     # @option params [required, String] :aws_account_id
@@ -5078,7 +5504,6 @@ module Aws::QuickSight
     #   * Run `aws configure` to change your default Amazon Web Services
     #     Region. Use Enter to key the same settings for your keys. For more
     #     information, see [Configuring the CLI][3].
-    #
     # * `Namespace` - A QuickSight namespace is a partition that contains
     #   users and assets (data sources, datasets, dashboards, and so on). To
     #   access assets that are in a specific namespace, users and groups
@@ -5621,6 +6046,12 @@ module Aws::QuickSight
     #   resp.override_parameters.data_sources[0].data_source_parameters.snowflake_parameters.host #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.snowflake_parameters.database #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.snowflake_parameters.warehouse #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.snowflake_parameters.authentication_type #=> String, one of "PASSWORD", "TOKEN", "X509"
+    #   resp.override_parameters.data_sources[0].data_source_parameters.snowflake_parameters.database_access_control_role #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.snowflake_parameters.o_auth_parameters.token_provider_url #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.snowflake_parameters.o_auth_parameters.o_auth_scope #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.snowflake_parameters.o_auth_parameters.identity_provider_vpc_connection_properties.vpc_connection_arn #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.snowflake_parameters.o_auth_parameters.identity_provider_resource_uri #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.spark_parameters.host #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.spark_parameters.port #=> Integer
     #   resp.override_parameters.data_sources[0].data_source_parameters.sql_server_parameters.host #=> String
@@ -5641,6 +6072,12 @@ module Aws::QuickSight
     #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.port #=> Integer
     #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.catalog #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.product_type #=> String, one of "GALAXY", "ENTERPRISE"
+    #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.database_access_control_role #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.authentication_type #=> String, one of "PASSWORD", "TOKEN", "X509"
+    #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.o_auth_parameters.token_provider_url #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.o_auth_parameters.o_auth_scope #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.o_auth_parameters.identity_provider_vpc_connection_properties.vpc_connection_arn #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.o_auth_parameters.identity_provider_resource_uri #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.trino_parameters.host #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.trino_parameters.port #=> Integer
     #   resp.override_parameters.data_sources[0].data_source_parameters.trino_parameters.catalog #=> String
@@ -5769,6 +6206,279 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def describe_asset_bundle_import_job(params = {}, options = {})
       req = build_request(:describe_asset_bundle_import_job, params)
+      req.send_request(options)
+    end
+
+    # Describes a brand.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that owns the brand.
+    #
+    # @option params [required, String] :brand_id
+    #   The ID of the Amazon QuickSight brand.
+    #
+    # @option params [String] :version_id
+    #   The ID of the specific version. The default value is the latest
+    #   version.
+    #
+    # @return [Types::DescribeBrandResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeBrandResponse#request_id #request_id} => String
+    #   * {Types::DescribeBrandResponse#brand_detail #brand_detail} => Types::BrandDetail
+    #   * {Types::DescribeBrandResponse#brand_definition #brand_definition} => Types::BrandDefinition
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_brand({
+    #     aws_account_id: "AwsAccountId", # required
+    #     brand_id: "ShortRestrictiveResourceId", # required
+    #     version_id: "ShortRestrictiveResourceId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.brand_detail.brand_id #=> String
+    #   resp.brand_detail.arn #=> String
+    #   resp.brand_detail.brand_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_SUCCEEDED", "CREATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_FAILED"
+    #   resp.brand_detail.created_time #=> Time
+    #   resp.brand_detail.last_updated_time #=> Time
+    #   resp.brand_detail.version_id #=> String
+    #   resp.brand_detail.version_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_SUCCEEDED", "CREATE_FAILED"
+    #   resp.brand_detail.errors #=> Array
+    #   resp.brand_detail.errors[0] #=> String
+    #   resp.brand_detail.logo.alt_text #=> String
+    #   resp.brand_detail.logo.logo_set.primary.original.source.public_url #=> String
+    #   resp.brand_detail.logo.logo_set.primary.original.source.s3_uri #=> String
+    #   resp.brand_detail.logo.logo_set.primary.original.generated_image_url #=> String
+    #   resp.brand_detail.logo.logo_set.primary.height_64.source.public_url #=> String
+    #   resp.brand_detail.logo.logo_set.primary.height_64.source.s3_uri #=> String
+    #   resp.brand_detail.logo.logo_set.primary.height_64.generated_image_url #=> String
+    #   resp.brand_detail.logo.logo_set.primary.height_32.source.public_url #=> String
+    #   resp.brand_detail.logo.logo_set.primary.height_32.source.s3_uri #=> String
+    #   resp.brand_detail.logo.logo_set.primary.height_32.generated_image_url #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.original.source.public_url #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.original.source.s3_uri #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.original.generated_image_url #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.height_64.source.public_url #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.height_64.source.s3_uri #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.height_64.generated_image_url #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.height_32.source.public_url #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.height_32.source.s3_uri #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.height_32.generated_image_url #=> String
+    #   resp.brand_definition.brand_name #=> String
+    #   resp.brand_definition.description #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.primary.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.primary.background #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.secondary.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.secondary.background #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.accent.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.accent.background #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.measure.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.measure.background #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.dimension.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.dimension.background #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.success.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.success.background #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.info.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.info.background #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.warning.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.warning.background #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.danger.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.danger.background #=> String
+    #   resp.brand_definition.application_theme.brand_element_style.navbar_style.global_navbar.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_element_style.navbar_style.global_navbar.background #=> String
+    #   resp.brand_definition.application_theme.brand_element_style.navbar_style.contextual_navbar.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_element_style.navbar_style.contextual_navbar.background #=> String
+    #   resp.brand_definition.logo_configuration.alt_text #=> String
+    #   resp.brand_definition.logo_configuration.logo_set.primary.original.source.public_url #=> String
+    #   resp.brand_definition.logo_configuration.logo_set.primary.original.source.s3_uri #=> String
+    #   resp.brand_definition.logo_configuration.logo_set.favicon.original.source.public_url #=> String
+    #   resp.brand_definition.logo_configuration.logo_set.favicon.original.source.s3_uri #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeBrand AWS API Documentation
+    #
+    # @overload describe_brand(params = {})
+    # @param [Hash] params ({})
+    def describe_brand(params = {}, options = {})
+      req = build_request(:describe_brand, params)
+      req.send_request(options)
+    end
+
+    # Describes a brand assignment.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that owns the brand
+    #   assignment.
+    #
+    # @return [Types::DescribeBrandAssignmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeBrandAssignmentResponse#request_id #request_id} => String
+    #   * {Types::DescribeBrandAssignmentResponse#brand_arn #brand_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_brand_assignment({
+    #     aws_account_id: "AwsAccountId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.brand_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeBrandAssignment AWS API Documentation
+    #
+    # @overload describe_brand_assignment(params = {})
+    # @param [Hash] params ({})
+    def describe_brand_assignment(params = {}, options = {})
+      req = build_request(:describe_brand_assignment, params)
+      req.send_request(options)
+    end
+
+    # Describes the published version of the brand.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that owns the brand.
+    #
+    # @option params [required, String] :brand_id
+    #   The ID of the Amazon QuickSight brand.
+    #
+    # @return [Types::DescribeBrandPublishedVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeBrandPublishedVersionResponse#request_id #request_id} => String
+    #   * {Types::DescribeBrandPublishedVersionResponse#brand_detail #brand_detail} => Types::BrandDetail
+    #   * {Types::DescribeBrandPublishedVersionResponse#brand_definition #brand_definition} => Types::BrandDefinition
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_brand_published_version({
+    #     aws_account_id: "AwsAccountId", # required
+    #     brand_id: "ShortRestrictiveResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.brand_detail.brand_id #=> String
+    #   resp.brand_detail.arn #=> String
+    #   resp.brand_detail.brand_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_SUCCEEDED", "CREATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_FAILED"
+    #   resp.brand_detail.created_time #=> Time
+    #   resp.brand_detail.last_updated_time #=> Time
+    #   resp.brand_detail.version_id #=> String
+    #   resp.brand_detail.version_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_SUCCEEDED", "CREATE_FAILED"
+    #   resp.brand_detail.errors #=> Array
+    #   resp.brand_detail.errors[0] #=> String
+    #   resp.brand_detail.logo.alt_text #=> String
+    #   resp.brand_detail.logo.logo_set.primary.original.source.public_url #=> String
+    #   resp.brand_detail.logo.logo_set.primary.original.source.s3_uri #=> String
+    #   resp.brand_detail.logo.logo_set.primary.original.generated_image_url #=> String
+    #   resp.brand_detail.logo.logo_set.primary.height_64.source.public_url #=> String
+    #   resp.brand_detail.logo.logo_set.primary.height_64.source.s3_uri #=> String
+    #   resp.brand_detail.logo.logo_set.primary.height_64.generated_image_url #=> String
+    #   resp.brand_detail.logo.logo_set.primary.height_32.source.public_url #=> String
+    #   resp.brand_detail.logo.logo_set.primary.height_32.source.s3_uri #=> String
+    #   resp.brand_detail.logo.logo_set.primary.height_32.generated_image_url #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.original.source.public_url #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.original.source.s3_uri #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.original.generated_image_url #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.height_64.source.public_url #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.height_64.source.s3_uri #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.height_64.generated_image_url #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.height_32.source.public_url #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.height_32.source.s3_uri #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.height_32.generated_image_url #=> String
+    #   resp.brand_definition.brand_name #=> String
+    #   resp.brand_definition.description #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.primary.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.primary.background #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.secondary.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.secondary.background #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.accent.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.accent.background #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.measure.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.measure.background #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.dimension.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.dimension.background #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.success.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.success.background #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.info.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.info.background #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.warning.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.warning.background #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.danger.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.danger.background #=> String
+    #   resp.brand_definition.application_theme.brand_element_style.navbar_style.global_navbar.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_element_style.navbar_style.global_navbar.background #=> String
+    #   resp.brand_definition.application_theme.brand_element_style.navbar_style.contextual_navbar.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_element_style.navbar_style.contextual_navbar.background #=> String
+    #   resp.brand_definition.logo_configuration.alt_text #=> String
+    #   resp.brand_definition.logo_configuration.logo_set.primary.original.source.public_url #=> String
+    #   resp.brand_definition.logo_configuration.logo_set.primary.original.source.s3_uri #=> String
+    #   resp.brand_definition.logo_configuration.logo_set.favicon.original.source.public_url #=> String
+    #   resp.brand_definition.logo_configuration.logo_set.favicon.original.source.s3_uri #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeBrandPublishedVersion AWS API Documentation
+    #
+    # @overload describe_brand_published_version(params = {})
+    # @param [Hash] params ({})
+    def describe_brand_published_version(params = {}, options = {})
+      req = build_request(:describe_brand_published_version, params)
+      req.send_request(options)
+    end
+
+    # Describes a custom permissions profile.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the custom
+    #   permissions profile that you want described.
+    #
+    # @option params [required, String] :custom_permissions_name
+    #   The name of the custom permissions profile to describe.
+    #
+    # @return [Types::DescribeCustomPermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeCustomPermissionsResponse#status #status} => Integer
+    #   * {Types::DescribeCustomPermissionsResponse#custom_permissions #custom_permissions} => Types::CustomPermissions
+    #   * {Types::DescribeCustomPermissionsResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_custom_permissions({
+    #     aws_account_id: "AwsAccountId", # required
+    #     custom_permissions_name: "CustomPermissionsName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.custom_permissions.arn #=> String
+    #   resp.custom_permissions.custom_permissions_name #=> String
+    #   resp.custom_permissions.capabilities.export_to_csv #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.export_to_excel #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_themes #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.add_or_run_anomaly_detection_for_analyses #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_analyses #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_datasets #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_datasets #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.subscribe_dashboard_email_reports #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_dashboard_email_reports #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_dashboards #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_threshold_alerts #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.rename_shared_folders #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_shared_folders #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_data_sources #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_data_sources #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.view_account_spice_capacity #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_spice_dataset #=> String, one of "DENY"
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeCustomPermissions AWS API Documentation
+    #
+    # @overload describe_custom_permissions(params = {})
+    # @param [Hash] params ({})
+    def describe_custom_permissions(params = {}, options = {})
+      req = build_request(:describe_custom_permissions, params)
       req.send_request(options)
     end
 
@@ -6444,6 +7154,12 @@ module Aws::QuickSight
     #   resp.data_source.data_source_parameters.snowflake_parameters.host #=> String
     #   resp.data_source.data_source_parameters.snowflake_parameters.database #=> String
     #   resp.data_source.data_source_parameters.snowflake_parameters.warehouse #=> String
+    #   resp.data_source.data_source_parameters.snowflake_parameters.authentication_type #=> String, one of "PASSWORD", "TOKEN", "X509"
+    #   resp.data_source.data_source_parameters.snowflake_parameters.database_access_control_role #=> String
+    #   resp.data_source.data_source_parameters.snowflake_parameters.o_auth_parameters.token_provider_url #=> String
+    #   resp.data_source.data_source_parameters.snowflake_parameters.o_auth_parameters.o_auth_scope #=> String
+    #   resp.data_source.data_source_parameters.snowflake_parameters.o_auth_parameters.identity_provider_vpc_connection_properties.vpc_connection_arn #=> String
+    #   resp.data_source.data_source_parameters.snowflake_parameters.o_auth_parameters.identity_provider_resource_uri #=> String
     #   resp.data_source.data_source_parameters.spark_parameters.host #=> String
     #   resp.data_source.data_source_parameters.spark_parameters.port #=> Integer
     #   resp.data_source.data_source_parameters.sql_server_parameters.host #=> String
@@ -6464,6 +7180,12 @@ module Aws::QuickSight
     #   resp.data_source.data_source_parameters.starburst_parameters.port #=> Integer
     #   resp.data_source.data_source_parameters.starburst_parameters.catalog #=> String
     #   resp.data_source.data_source_parameters.starburst_parameters.product_type #=> String, one of "GALAXY", "ENTERPRISE"
+    #   resp.data_source.data_source_parameters.starburst_parameters.database_access_control_role #=> String
+    #   resp.data_source.data_source_parameters.starburst_parameters.authentication_type #=> String, one of "PASSWORD", "TOKEN", "X509"
+    #   resp.data_source.data_source_parameters.starburst_parameters.o_auth_parameters.token_provider_url #=> String
+    #   resp.data_source.data_source_parameters.starburst_parameters.o_auth_parameters.o_auth_scope #=> String
+    #   resp.data_source.data_source_parameters.starburst_parameters.o_auth_parameters.identity_provider_vpc_connection_properties.vpc_connection_arn #=> String
+    #   resp.data_source.data_source_parameters.starburst_parameters.o_auth_parameters.identity_provider_resource_uri #=> String
     #   resp.data_source.data_source_parameters.trino_parameters.host #=> String
     #   resp.data_source.data_source_parameters.trino_parameters.port #=> Integer
     #   resp.data_source.data_source_parameters.trino_parameters.catalog #=> String
@@ -6515,6 +7237,12 @@ module Aws::QuickSight
     #   resp.data_source.alternate_data_source_parameters[0].snowflake_parameters.host #=> String
     #   resp.data_source.alternate_data_source_parameters[0].snowflake_parameters.database #=> String
     #   resp.data_source.alternate_data_source_parameters[0].snowflake_parameters.warehouse #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].snowflake_parameters.authentication_type #=> String, one of "PASSWORD", "TOKEN", "X509"
+    #   resp.data_source.alternate_data_source_parameters[0].snowflake_parameters.database_access_control_role #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].snowflake_parameters.o_auth_parameters.token_provider_url #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].snowflake_parameters.o_auth_parameters.o_auth_scope #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].snowflake_parameters.o_auth_parameters.identity_provider_vpc_connection_properties.vpc_connection_arn #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].snowflake_parameters.o_auth_parameters.identity_provider_resource_uri #=> String
     #   resp.data_source.alternate_data_source_parameters[0].spark_parameters.host #=> String
     #   resp.data_source.alternate_data_source_parameters[0].spark_parameters.port #=> Integer
     #   resp.data_source.alternate_data_source_parameters[0].sql_server_parameters.host #=> String
@@ -6535,6 +7263,12 @@ module Aws::QuickSight
     #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.port #=> Integer
     #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.catalog #=> String
     #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.product_type #=> String, one of "GALAXY", "ENTERPRISE"
+    #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.database_access_control_role #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.authentication_type #=> String, one of "PASSWORD", "TOKEN", "X509"
+    #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.o_auth_parameters.token_provider_url #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.o_auth_parameters.o_auth_scope #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.o_auth_parameters.identity_provider_vpc_connection_properties.vpc_connection_arn #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.o_auth_parameters.identity_provider_resource_uri #=> String
     #   resp.data_source.alternate_data_source_parameters[0].trino_parameters.host #=> String
     #   resp.data_source.alternate_data_source_parameters[0].trino_parameters.port #=> Integer
     #   resp.data_source.alternate_data_source_parameters[0].trino_parameters.catalog #=> String
@@ -8750,6 +9484,120 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Lists all brands in an Amazon QuickSight account.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that owns the brands that
+    #   you want to list.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned in a single request.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #
+    # @return [Types::ListBrandsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBrandsResponse#next_token #next_token} => String
+    #   * {Types::ListBrandsResponse#brands #brands} => Array&lt;Types::BrandSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_brands({
+    #     aws_account_id: "AwsAccountId", # required
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.brands #=> Array
+    #   resp.brands[0].arn #=> String
+    #   resp.brands[0].brand_id #=> String
+    #   resp.brands[0].brand_name #=> String
+    #   resp.brands[0].description #=> String
+    #   resp.brands[0].brand_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_SUCCEEDED", "CREATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_FAILED"
+    #   resp.brands[0].created_time #=> Time
+    #   resp.brands[0].last_updated_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListBrands AWS API Documentation
+    #
+    # @overload list_brands(params = {})
+    # @param [Hash] params ({})
+    def list_brands(params = {}, options = {})
+      req = build_request(:list_brands, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of all the custom permissions profiles.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the custom
+    #   permissions profiles that you want to list.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #
+    # @return [Types::ListCustomPermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCustomPermissionsResponse#status #status} => Integer
+    #   * {Types::ListCustomPermissionsResponse#custom_permissions_list #custom_permissions_list} => Array&lt;Types::CustomPermissions&gt;
+    #   * {Types::ListCustomPermissionsResponse#next_token #next_token} => String
+    #   * {Types::ListCustomPermissionsResponse#request_id #request_id} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_custom_permissions({
+    #     aws_account_id: "AwsAccountId", # required
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.custom_permissions_list #=> Array
+    #   resp.custom_permissions_list[0].arn #=> String
+    #   resp.custom_permissions_list[0].custom_permissions_name #=> String
+    #   resp.custom_permissions_list[0].capabilities.export_to_csv #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.export_to_excel #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_themes #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.add_or_run_anomaly_detection_for_analyses #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_analyses #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_datasets #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_datasets #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.subscribe_dashboard_email_reports #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_dashboard_email_reports #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_dashboards #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_threshold_alerts #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.rename_shared_folders #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_shared_folders #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_data_sources #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_data_sources #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.view_account_spice_capacity #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_spice_dataset #=> String, one of "DENY"
+    #   resp.next_token #=> String
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListCustomPermissions AWS API Documentation
+    #
+    # @overload list_custom_permissions(params = {})
+    # @param [Hash] params ({})
+    def list_custom_permissions(params = {}, options = {})
+      req = build_request(:list_custom_permissions, params)
+      req.send_request(options)
+    end
+
     # Lists all the versions of the dashboards in the Amazon QuickSight
     # subscription.
     #
@@ -9007,6 +9855,12 @@ module Aws::QuickSight
     #   resp.data_sources[0].data_source_parameters.snowflake_parameters.host #=> String
     #   resp.data_sources[0].data_source_parameters.snowflake_parameters.database #=> String
     #   resp.data_sources[0].data_source_parameters.snowflake_parameters.warehouse #=> String
+    #   resp.data_sources[0].data_source_parameters.snowflake_parameters.authentication_type #=> String, one of "PASSWORD", "TOKEN", "X509"
+    #   resp.data_sources[0].data_source_parameters.snowflake_parameters.database_access_control_role #=> String
+    #   resp.data_sources[0].data_source_parameters.snowflake_parameters.o_auth_parameters.token_provider_url #=> String
+    #   resp.data_sources[0].data_source_parameters.snowflake_parameters.o_auth_parameters.o_auth_scope #=> String
+    #   resp.data_sources[0].data_source_parameters.snowflake_parameters.o_auth_parameters.identity_provider_vpc_connection_properties.vpc_connection_arn #=> String
+    #   resp.data_sources[0].data_source_parameters.snowflake_parameters.o_auth_parameters.identity_provider_resource_uri #=> String
     #   resp.data_sources[0].data_source_parameters.spark_parameters.host #=> String
     #   resp.data_sources[0].data_source_parameters.spark_parameters.port #=> Integer
     #   resp.data_sources[0].data_source_parameters.sql_server_parameters.host #=> String
@@ -9027,6 +9881,12 @@ module Aws::QuickSight
     #   resp.data_sources[0].data_source_parameters.starburst_parameters.port #=> Integer
     #   resp.data_sources[0].data_source_parameters.starburst_parameters.catalog #=> String
     #   resp.data_sources[0].data_source_parameters.starburst_parameters.product_type #=> String, one of "GALAXY", "ENTERPRISE"
+    #   resp.data_sources[0].data_source_parameters.starburst_parameters.database_access_control_role #=> String
+    #   resp.data_sources[0].data_source_parameters.starburst_parameters.authentication_type #=> String, one of "PASSWORD", "TOKEN", "X509"
+    #   resp.data_sources[0].data_source_parameters.starburst_parameters.o_auth_parameters.token_provider_url #=> String
+    #   resp.data_sources[0].data_source_parameters.starburst_parameters.o_auth_parameters.o_auth_scope #=> String
+    #   resp.data_sources[0].data_source_parameters.starburst_parameters.o_auth_parameters.identity_provider_vpc_connection_properties.vpc_connection_arn #=> String
+    #   resp.data_sources[0].data_source_parameters.starburst_parameters.o_auth_parameters.identity_provider_resource_uri #=> String
     #   resp.data_sources[0].data_source_parameters.trino_parameters.host #=> String
     #   resp.data_sources[0].data_source_parameters.trino_parameters.port #=> Integer
     #   resp.data_sources[0].data_source_parameters.trino_parameters.catalog #=> String
@@ -9078,6 +9938,12 @@ module Aws::QuickSight
     #   resp.data_sources[0].alternate_data_source_parameters[0].snowflake_parameters.host #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].snowflake_parameters.database #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].snowflake_parameters.warehouse #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].snowflake_parameters.authentication_type #=> String, one of "PASSWORD", "TOKEN", "X509"
+    #   resp.data_sources[0].alternate_data_source_parameters[0].snowflake_parameters.database_access_control_role #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].snowflake_parameters.o_auth_parameters.token_provider_url #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].snowflake_parameters.o_auth_parameters.o_auth_scope #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].snowflake_parameters.o_auth_parameters.identity_provider_vpc_connection_properties.vpc_connection_arn #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].snowflake_parameters.o_auth_parameters.identity_provider_resource_uri #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].spark_parameters.host #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].spark_parameters.port #=> Integer
     #   resp.data_sources[0].alternate_data_source_parameters[0].sql_server_parameters.host #=> String
@@ -9098,6 +9964,12 @@ module Aws::QuickSight
     #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.port #=> Integer
     #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.catalog #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.product_type #=> String, one of "GALAXY", "ENTERPRISE"
+    #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.database_access_control_role #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.authentication_type #=> String, one of "PASSWORD", "TOKEN", "X509"
+    #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.o_auth_parameters.token_provider_url #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.o_auth_parameters.o_auth_scope #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.o_auth_parameters.identity_provider_vpc_connection_properties.vpc_connection_arn #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.o_auth_parameters.identity_provider_resource_uri #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].trino_parameters.host #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].trino_parameters.port #=> Integer
     #   resp.data_sources[0].alternate_data_source_parameters[0].trino_parameters.catalog #=> String
@@ -11283,9 +12155,9 @@ module Aws::QuickSight
     #
     # @option params [required, Array<Types::DashboardSearchFilter>] :filters
     #   The filters to apply to the search. Currently, you can search only by
-    #   user name, for example, `"Filters": [ \{ "Name": "QUICKSIGHT_USER",
+    #   user name, for example, `"Filters": [ { "Name": "QUICKSIGHT_USER",
     #   "Operator": "StringEquals", "Value":
-    #   "arn:aws:quicksight:us-east-1:1:user/default/UserName1" \} ]`
+    #   "arn:aws:quicksight:us-east-1:1:user/default/UserName1" } ]`
     #
     # @option params [String] :next_token
     #   The token for the next set of results, or null if there are no more
@@ -11477,9 +12349,9 @@ module Aws::QuickSight
     #
     # @option params [required, Array<Types::FolderSearchFilter>] :filters
     #   The filters to apply to the search. Currently, you can search only by
-    #   the parent folder ARN. For example, `"Filters": [ \{ "Name":
+    #   the parent folder ARN. For example, `"Filters": [ { "Name":
     #   "PARENT_FOLDER_ARN", "Operator": "StringEquals", "Value":
-    #   "arn:aws:quicksight:us-east-1:1:folder/folderId" \} ]`.
+    #   "arn:aws:quicksight:us-east-1:1:folder/folderId" } ]`.
     #
     # @option params [String] :next_token
     #   The token for the next set of results, or null if there are no more
@@ -11959,6 +12831,16 @@ module Aws::QuickSight
     #               host: "Host", # required
     #               database: "Database", # required
     #               warehouse: "Warehouse", # required
+    #               authentication_type: "PASSWORD", # accepts PASSWORD, TOKEN, X509
+    #               database_access_control_role: "DatabaseAccessControlRole",
+    #               o_auth_parameters: {
+    #                 token_provider_url: "TokenProviderUrl", # required
+    #                 o_auth_scope: "OAuthScope",
+    #                 identity_provider_vpc_connection_properties: {
+    #                   vpc_connection_arn: "Arn", # required
+    #                 },
+    #                 identity_provider_resource_uri: "IdentityProviderResourceUri",
+    #               },
     #             },
     #             spark_parameters: {
     #               host: "Host", # required
@@ -11995,6 +12877,16 @@ module Aws::QuickSight
     #               port: 1, # required
     #               catalog: "Catalog", # required
     #               product_type: "GALAXY", # accepts GALAXY, ENTERPRISE
+    #               database_access_control_role: "DatabaseAccessControlRole",
+    #               authentication_type: "PASSWORD", # accepts PASSWORD, TOKEN, X509
+    #               o_auth_parameters: {
+    #                 token_provider_url: "TokenProviderUrl", # required
+    #                 o_auth_scope: "OAuthScope",
+    #                 identity_provider_vpc_connection_properties: {
+    #                   vpc_connection_arn: "Arn", # required
+    #                 },
+    #                 identity_provider_resource_uri: "IdentityProviderResourceUri",
+    #               },
     #             },
     #             trino_parameters: {
     #               host: "Host", # required
@@ -12828,6 +13720,309 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Updates a brand.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that owns the brand.
+    #
+    # @option params [required, String] :brand_id
+    #   The ID of the Amazon QuickSight brand.
+    #
+    # @option params [Types::BrandDefinition] :brand_definition
+    #   The definition of the brand.
+    #
+    # @return [Types::UpdateBrandResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateBrandResponse#request_id #request_id} => String
+    #   * {Types::UpdateBrandResponse#brand_detail #brand_detail} => Types::BrandDetail
+    #   * {Types::UpdateBrandResponse#brand_definition #brand_definition} => Types::BrandDefinition
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_brand({
+    #     aws_account_id: "AwsAccountId", # required
+    #     brand_id: "ShortRestrictiveResourceId", # required
+    #     brand_definition: {
+    #       brand_name: "Name", # required
+    #       description: "Description",
+    #       application_theme: {
+    #         brand_color_palette: {
+    #           primary: {
+    #             foreground: "HexColor",
+    #             background: "HexColor",
+    #           },
+    #           secondary: {
+    #             foreground: "HexColor",
+    #             background: "HexColor",
+    #           },
+    #           accent: {
+    #             foreground: "HexColor",
+    #             background: "HexColor",
+    #           },
+    #           measure: {
+    #             foreground: "HexColor",
+    #             background: "HexColor",
+    #           },
+    #           dimension: {
+    #             foreground: "HexColor",
+    #             background: "HexColor",
+    #           },
+    #           success: {
+    #             foreground: "HexColor",
+    #             background: "HexColor",
+    #           },
+    #           info: {
+    #             foreground: "HexColor",
+    #             background: "HexColor",
+    #           },
+    #           warning: {
+    #             foreground: "HexColor",
+    #             background: "HexColor",
+    #           },
+    #           danger: {
+    #             foreground: "HexColor",
+    #             background: "HexColor",
+    #           },
+    #         },
+    #         brand_element_style: {
+    #           navbar_style: {
+    #             global_navbar: {
+    #               foreground: "HexColor",
+    #               background: "HexColor",
+    #             },
+    #             contextual_navbar: {
+    #               foreground: "HexColor",
+    #               background: "HexColor",
+    #             },
+    #           },
+    #         },
+    #       },
+    #       logo_configuration: {
+    #         alt_text: "String", # required
+    #         logo_set: { # required
+    #           primary: { # required
+    #             original: { # required
+    #               source: {
+    #                 public_url: "String",
+    #                 s3_uri: "String",
+    #               },
+    #             },
+    #           },
+    #           favicon: {
+    #             original: { # required
+    #               source: {
+    #                 public_url: "String",
+    #                 s3_uri: "String",
+    #               },
+    #             },
+    #           },
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.brand_detail.brand_id #=> String
+    #   resp.brand_detail.arn #=> String
+    #   resp.brand_detail.brand_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_SUCCEEDED", "CREATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_FAILED"
+    #   resp.brand_detail.created_time #=> Time
+    #   resp.brand_detail.last_updated_time #=> Time
+    #   resp.brand_detail.version_id #=> String
+    #   resp.brand_detail.version_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_SUCCEEDED", "CREATE_FAILED"
+    #   resp.brand_detail.errors #=> Array
+    #   resp.brand_detail.errors[0] #=> String
+    #   resp.brand_detail.logo.alt_text #=> String
+    #   resp.brand_detail.logo.logo_set.primary.original.source.public_url #=> String
+    #   resp.brand_detail.logo.logo_set.primary.original.source.s3_uri #=> String
+    #   resp.brand_detail.logo.logo_set.primary.original.generated_image_url #=> String
+    #   resp.brand_detail.logo.logo_set.primary.height_64.source.public_url #=> String
+    #   resp.brand_detail.logo.logo_set.primary.height_64.source.s3_uri #=> String
+    #   resp.brand_detail.logo.logo_set.primary.height_64.generated_image_url #=> String
+    #   resp.brand_detail.logo.logo_set.primary.height_32.source.public_url #=> String
+    #   resp.brand_detail.logo.logo_set.primary.height_32.source.s3_uri #=> String
+    #   resp.brand_detail.logo.logo_set.primary.height_32.generated_image_url #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.original.source.public_url #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.original.source.s3_uri #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.original.generated_image_url #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.height_64.source.public_url #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.height_64.source.s3_uri #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.height_64.generated_image_url #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.height_32.source.public_url #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.height_32.source.s3_uri #=> String
+    #   resp.brand_detail.logo.logo_set.favicon.height_32.generated_image_url #=> String
+    #   resp.brand_definition.brand_name #=> String
+    #   resp.brand_definition.description #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.primary.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.primary.background #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.secondary.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.secondary.background #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.accent.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.accent.background #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.measure.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.measure.background #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.dimension.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.dimension.background #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.success.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.success.background #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.info.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.info.background #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.warning.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.warning.background #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.danger.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_color_palette.danger.background #=> String
+    #   resp.brand_definition.application_theme.brand_element_style.navbar_style.global_navbar.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_element_style.navbar_style.global_navbar.background #=> String
+    #   resp.brand_definition.application_theme.brand_element_style.navbar_style.contextual_navbar.foreground #=> String
+    #   resp.brand_definition.application_theme.brand_element_style.navbar_style.contextual_navbar.background #=> String
+    #   resp.brand_definition.logo_configuration.alt_text #=> String
+    #   resp.brand_definition.logo_configuration.logo_set.primary.original.source.public_url #=> String
+    #   resp.brand_definition.logo_configuration.logo_set.primary.original.source.s3_uri #=> String
+    #   resp.brand_definition.logo_configuration.logo_set.favicon.original.source.public_url #=> String
+    #   resp.brand_definition.logo_configuration.logo_set.favicon.original.source.s3_uri #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateBrand AWS API Documentation
+    #
+    # @overload update_brand(params = {})
+    # @param [Hash] params ({})
+    def update_brand(params = {}, options = {})
+      req = build_request(:update_brand, params)
+      req.send_request(options)
+    end
+
+    # Updates a brand assignment.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that owns the brand
+    #   assignment.
+    #
+    # @option params [required, String] :brand_arn
+    #   The Amazon Resource Name (ARN) of the brand.
+    #
+    # @return [Types::UpdateBrandAssignmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateBrandAssignmentResponse#request_id #request_id} => String
+    #   * {Types::UpdateBrandAssignmentResponse#brand_arn #brand_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_brand_assignment({
+    #     aws_account_id: "AwsAccountId", # required
+    #     brand_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.brand_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateBrandAssignment AWS API Documentation
+    #
+    # @overload update_brand_assignment(params = {})
+    # @param [Hash] params ({})
+    def update_brand_assignment(params = {}, options = {})
+      req = build_request(:update_brand_assignment, params)
+      req.send_request(options)
+    end
+
+    # Updates the published version of a brand.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that owns the brand.
+    #
+    # @option params [required, String] :brand_id
+    #   The ID of the Amazon QuickSight brand.
+    #
+    # @option params [required, String] :version_id
+    #   The ID of the published version.
+    #
+    # @return [Types::UpdateBrandPublishedVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateBrandPublishedVersionResponse#request_id #request_id} => String
+    #   * {Types::UpdateBrandPublishedVersionResponse#version_id #version_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_brand_published_version({
+    #     aws_account_id: "AwsAccountId", # required
+    #     brand_id: "ShortRestrictiveResourceId", # required
+    #     version_id: "ShortRestrictiveResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.version_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateBrandPublishedVersion AWS API Documentation
+    #
+    # @overload update_brand_published_version(params = {})
+    # @param [Hash] params ({})
+    def update_brand_published_version(params = {}, options = {})
+      req = build_request(:update_brand_published_version, params)
+      req.send_request(options)
+    end
+
+    # Updates a custom permissions profile.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the custom
+    #   permissions profile that you want to update.
+    #
+    # @option params [required, String] :custom_permissions_name
+    #   The name of the custom permissions profile that you want to update.
+    #
+    # @option params [Types::Capabilities] :capabilities
+    #   A set of actions to include in the custom permissions profile.
+    #
+    # @return [Types::UpdateCustomPermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCustomPermissionsResponse#status #status} => Integer
+    #   * {Types::UpdateCustomPermissionsResponse#arn #arn} => String
+    #   * {Types::UpdateCustomPermissionsResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_custom_permissions({
+    #     aws_account_id: "AwsAccountId", # required
+    #     custom_permissions_name: "CustomPermissionsName", # required
+    #     capabilities: {
+    #       export_to_csv: "DENY", # accepts DENY
+    #       export_to_excel: "DENY", # accepts DENY
+    #       create_and_update_themes: "DENY", # accepts DENY
+    #       add_or_run_anomaly_detection_for_analyses: "DENY", # accepts DENY
+    #       share_analyses: "DENY", # accepts DENY
+    #       create_and_update_datasets: "DENY", # accepts DENY
+    #       share_datasets: "DENY", # accepts DENY
+    #       subscribe_dashboard_email_reports: "DENY", # accepts DENY
+    #       create_and_update_dashboard_email_reports: "DENY", # accepts DENY
+    #       share_dashboards: "DENY", # accepts DENY
+    #       create_and_update_threshold_alerts: "DENY", # accepts DENY
+    #       rename_shared_folders: "DENY", # accepts DENY
+    #       create_shared_folders: "DENY", # accepts DENY
+    #       create_and_update_data_sources: "DENY", # accepts DENY
+    #       share_data_sources: "DENY", # accepts DENY
+    #       view_account_spice_capacity: "DENY", # accepts DENY
+    #       create_spice_dataset: "DENY", # accepts DENY
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.arn #=> String
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateCustomPermissions AWS API Documentation
+    #
+    # @overload update_custom_permissions(params = {})
+    # @param [Hash] params ({})
+    def update_custom_permissions(params = {}, options = {})
+      req = build_request(:update_custom_permissions, params)
+      req.send_request(options)
+    end
+
     # Updates a dashboard in an Amazon Web Services account.
     #
     # <note markdown="1"> Updating a Dashboard creates a new dashboard version but does not
@@ -13583,6 +14778,16 @@ module Aws::QuickSight
     #         host: "Host", # required
     #         database: "Database", # required
     #         warehouse: "Warehouse", # required
+    #         authentication_type: "PASSWORD", # accepts PASSWORD, TOKEN, X509
+    #         database_access_control_role: "DatabaseAccessControlRole",
+    #         o_auth_parameters: {
+    #           token_provider_url: "TokenProviderUrl", # required
+    #           o_auth_scope: "OAuthScope",
+    #           identity_provider_vpc_connection_properties: {
+    #             vpc_connection_arn: "Arn", # required
+    #           },
+    #           identity_provider_resource_uri: "IdentityProviderResourceUri",
+    #         },
     #       },
     #       spark_parameters: {
     #         host: "Host", # required
@@ -13619,6 +14824,16 @@ module Aws::QuickSight
     #         port: 1, # required
     #         catalog: "Catalog", # required
     #         product_type: "GALAXY", # accepts GALAXY, ENTERPRISE
+    #         database_access_control_role: "DatabaseAccessControlRole",
+    #         authentication_type: "PASSWORD", # accepts PASSWORD, TOKEN, X509
+    #         o_auth_parameters: {
+    #           token_provider_url: "TokenProviderUrl", # required
+    #           o_auth_scope: "OAuthScope",
+    #           identity_provider_vpc_connection_properties: {
+    #             vpc_connection_arn: "Arn", # required
+    #           },
+    #           identity_provider_resource_uri: "IdentityProviderResourceUri",
+    #         },
     #       },
     #       trino_parameters: {
     #         host: "Host", # required
@@ -13717,6 +14932,16 @@ module Aws::QuickSight
     #               host: "Host", # required
     #               database: "Database", # required
     #               warehouse: "Warehouse", # required
+    #               authentication_type: "PASSWORD", # accepts PASSWORD, TOKEN, X509
+    #               database_access_control_role: "DatabaseAccessControlRole",
+    #               o_auth_parameters: {
+    #                 token_provider_url: "TokenProviderUrl", # required
+    #                 o_auth_scope: "OAuthScope",
+    #                 identity_provider_vpc_connection_properties: {
+    #                   vpc_connection_arn: "Arn", # required
+    #                 },
+    #                 identity_provider_resource_uri: "IdentityProviderResourceUri",
+    #               },
     #             },
     #             spark_parameters: {
     #               host: "Host", # required
@@ -13753,6 +14978,16 @@ module Aws::QuickSight
     #               port: 1, # required
     #               catalog: "Catalog", # required
     #               product_type: "GALAXY", # accepts GALAXY, ENTERPRISE
+    #               database_access_control_role: "DatabaseAccessControlRole",
+    #               authentication_type: "PASSWORD", # accepts PASSWORD, TOKEN, X509
+    #               o_auth_parameters: {
+    #                 token_provider_url: "TokenProviderUrl", # required
+    #                 o_auth_scope: "OAuthScope",
+    #                 identity_provider_vpc_connection_properties: {
+    #                   vpc_connection_arn: "Arn", # required
+    #                 },
+    #                 identity_provider_resource_uri: "IdentityProviderResourceUri",
+    #               },
     #             },
     #             trino_parameters: {
     #               host: "Host", # required
@@ -14836,7 +16071,6 @@ module Aws::QuickSight
     #   * `"quicksight:ListThemeAliases"`
     #
     #   * `"quicksight:ListThemeVersions"`
-    #
     # * Owner
     #
     #   * `"quicksight:DescribeTheme"`
@@ -14860,7 +16094,6 @@ module Aws::QuickSight
     #   * `"quicksight:UpdateThemePermissions"`
     #
     #   * `"quicksight:DescribeThemePermissions"`
-    #
     # * To specify no permissions, omit the permissions list.
     #
     # @option params [required, String] :aws_account_id
@@ -15465,6 +16698,50 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Updates a custom permissions profile for a user.
+    #
+    # @option params [required, String] :user_name
+    #   The username of the user that you want to update custom permissions
+    #   for.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the custom
+    #   permission configuration that you want to update.
+    #
+    # @option params [required, String] :namespace
+    #   The namespace that the user belongs to.
+    #
+    # @option params [required, String] :custom_permissions_name
+    #   The name of the custom permissions that you want to update.
+    #
+    # @return [Types::UpdateUserCustomPermissionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateUserCustomPermissionResponse#request_id #request_id} => String
+    #   * {Types::UpdateUserCustomPermissionResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_user_custom_permission({
+    #     user_name: "UserName", # required
+    #     aws_account_id: "AwsAccountId", # required
+    #     namespace: "Namespace", # required
+    #     custom_permissions_name: "CustomPermissionsName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateUserCustomPermission AWS API Documentation
+    #
+    # @overload update_user_custom_permission(params = {})
+    # @param [Hash] params ({})
+    def update_user_custom_permission(params = {}, options = {})
+      req = build_request(:update_user_custom_permission, params)
+      req.send_request(options)
+    end
+
     # Updates a VPC connection.
     #
     # @option params [required, String] :aws_account_id
@@ -15549,7 +16826,7 @@ module Aws::QuickSight
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.133.0'
+      context[:gem_version] = '1.137.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

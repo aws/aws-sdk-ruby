@@ -1901,9 +1901,9 @@ module Aws::MQ
     # @!attribute [rw] role_search_matching
     #   The LDAP search filter used to find roles within the roleBase. The
     #   distinguished name of the user matched by userSearchMatching is
-    #   substituted into the \\\{0\\} placeholder in the search filter. The
-    #   client's username is substituted into the \\\{1\\} placeholder. For
-    #   example, if you set this option to (member=uid=\\\{1\\})for the user
+    #   substituted into the \{0} placeholder in the search filter. The
+    #   client's username is substituted into the \{1} placeholder. For
+    #   example, if you set this option to (member=uid=\{1})for the user
     #   janedoe, the search filter becomes (member=uid=janedoe) after string
     #   substitution. It matches all role entries that have a member
     #   attribute equal to uid=janedoe under the subtree selected by the
@@ -1943,12 +1943,12 @@ module Aws::MQ
     #
     # @!attribute [rw] user_search_matching
     #   The LDAP search filter used to find users within the userBase. The
-    #   client's username is substituted into the \\\{0\\} placeholder in
-    #   the search filter. For example, if this option is set to
-    #   (uid=\\\{0\\}) and the received username is janedoe, the search
-    #   filter becomes (uid=janedoe) after string substitution. It will
-    #   result in matching an entry like uid=janedoe, ou=Users,ou=corp,
-    #   dc=corp, dc=example, dc=com.
+    #   client's username is substituted into the \{0} placeholder in the
+    #   search filter. For example, if this option is set to (uid=\{0}) and
+    #   the received username is janedoe, the search filter becomes
+    #   (uid=janedoe) after string substitution. It will result in matching
+    #   an entry like uid=janedoe, ou=Users,ou=corp, dc=corp, dc=example,
+    #   dc=com.
     #   @return [String]
     #
     # @!attribute [rw] user_search_subtree
@@ -1996,9 +1996,9 @@ module Aws::MQ
     # @!attribute [rw] role_search_matching
     #   The LDAP search filter used to find roles within the roleBase. The
     #   distinguished name of the user matched by userSearchMatching is
-    #   substituted into the \\\{0\\} placeholder in the search filter. The
-    #   client's username is substituted into the \\\{1\\} placeholder. For
-    #   example, if you set this option to (member=uid=\\\{1\\})for the user
+    #   substituted into the \{0} placeholder in the search filter. The
+    #   client's username is substituted into the \{1} placeholder. For
+    #   example, if you set this option to (member=uid=\{1})for the user
     #   janedoe, the search filter becomes (member=uid=janedoe) after string
     #   substitution. It matches all role entries that have a member
     #   attribute equal to uid=janedoe under the subtree selected by the
@@ -2032,12 +2032,12 @@ module Aws::MQ
     #
     # @!attribute [rw] user_search_matching
     #   The LDAP search filter used to find users within the userBase. The
-    #   client's username is substituted into the \\\{0\\} placeholder in
-    #   the search filter. For example, if this option is set to
-    #   (uid=\\\{0\\}) and the received username is janedoe, the search
-    #   filter becomes (uid=janedoe) after string substitution. It will
-    #   result in matching an entry like uid=janedoe, ou=Users,ou=corp,
-    #   dc=corp, dc=example, dc=com.
+    #   client's username is substituted into the \{0} placeholder in the
+    #   search filter. For example, if this option is set to (uid=\{0}) and
+    #   the received username is janedoe, the search filter becomes
+    #   (uid=janedoe) after string substitution. It will result in matching
+    #   an entry like uid=janedoe, ou=Users,ou=corp, dc=corp, dc=example,
+    #   dc=com.
     #   @return [String]
     #
     # @!attribute [rw] user_search_subtree

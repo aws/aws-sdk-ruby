@@ -249,6 +249,18 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # The request was rejected because the account making the request is not
+    # the management account or delegated administrator account for
+    # [centralized root access][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html#id_root-user-access-management
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AccountNotManagementOrDelegatedAdministratorException AWS API Documentation
+    #
+    class AccountNotManagementOrDelegatedAdministratorException < Aws::EmptyStructure; end
+
     # @!attribute [rw] open_id_connect_provider_arn
     #   The Amazon Resource Name (ARN) of the IAM OpenID Connect (OIDC)
     #   provider resource to add the client ID to. You can get a list of
@@ -513,6 +525,13 @@ module Aws::IAM
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # The request was rejected because the account making the request is not
+    # the management account for the organization.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CallerIsNotManagementAccountException AWS API Documentation
+    #
+    class CallerIsNotManagementAccountException < Aws::EmptyStructure; end
 
     # @!attribute [rw] old_password
     #   The IAM user's current password.
@@ -783,20 +802,29 @@ module Aws::IAM
     #   The name of the IAM user to create a password for. The user must
     #   already exist.
     #
-    #   This parameter allows (through its [regex pattern][1]) a string of
+    #   This parameter is optional. If no user name is included, it defaults
+    #   to the principal making the request. When you make this request with
+    #   root user credentials, you must use an [AssumeRoot][1] session to
+    #   omit the user name.
+    #
+    #   This parameter allows (through its [regex pattern][2]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
     #
     #
     #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   [1]: https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoot.html
+    #   [2]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
     # @!attribute [rw] password
     #   The new password for the user.
     #
-    #   The [regex pattern][1] that is used to validate this parameter is a
+    #   This parameter must be omitted when you make the request with an
+    #   [AssumeRoot][1] session. It is required in all other cases.
+    #
+    #   The [regex pattern][2] that is used to validate this parameter is a
     #   string of characters. That string can include almost any printable
     #   ASCII character from the space (`\u0020`) through the end of the
     #   ASCII character range (`\u00FF`). You can also include the tab
@@ -808,7 +836,8 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   [1]: https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoot.html
+    #   [2]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
     # @!attribute [rw] password_reset_required
@@ -1731,14 +1760,20 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user whose MFA device you want to deactivate.
     #
-    #   This parameter allows (through its [regex pattern][1]) a string of
+    #   This parameter is optional. If no user name is included, it defaults
+    #   to the principal making the request. When you make this request with
+    #   root user credentials, you must use an [AssumeRoot][1] session to
+    #   omit the user name.
+    #
+    #   This parameter allows (through its [regex pattern][2]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
     #
     #
     #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   [1]: https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoot.html
+    #   [2]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
     # @!attribute [rw] serial_number
@@ -1916,14 +1951,20 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user whose password you want to delete.
     #
-    #   This parameter allows (through its [regex pattern][1]) a string of
+    #   This parameter is optional. If no user name is included, it defaults
+    #   to the principal making the request. When you make this request with
+    #   root user credentials, you must use an [AssumeRoot][1] session to
+    #   omit the user name.
+    #
+    #   This parameter allows (through its [regex pattern][2]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
     #
     #
     #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   [1]: https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoot.html
+    #   [2]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteLoginProfileRequest AWS API Documentation
@@ -2463,6 +2504,54 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DisableOrganizationsRootCredentialsManagementRequest AWS API Documentation
+    #
+    class DisableOrganizationsRootCredentialsManagementRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] organization_id
+    #   The unique identifier (ID) of an organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled_features
+    #   The features enabled for centralized root access for member accounts
+    #   in your organization.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DisableOrganizationsRootCredentialsManagementResponse AWS API Documentation
+    #
+    class DisableOrganizationsRootCredentialsManagementResponse < Struct.new(
+      :organization_id,
+      :enabled_features)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DisableOrganizationsRootSessionsRequest AWS API Documentation
+    #
+    class DisableOrganizationsRootSessionsRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] organization_id
+    #   The unique identifier (ID) of an organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled_features
+    #   The features you have enabled for centralized root access of member
+    #   accounts in your organization.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DisableOrganizationsRootSessionsResponse AWS API Documentation
+    #
+    class DisableOrganizationsRootSessionsResponse < Struct.new(
+      :organization_id,
+      :enabled_features)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request was rejected because the same certificate is associated
     # with an IAM user in the account.
     #
@@ -2559,6 +2648,52 @@ module Aws::IAM
       :serial_number,
       :authentication_code_1,
       :authentication_code_2)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EnableOrganizationsRootCredentialsManagementRequest AWS API Documentation
+    #
+    class EnableOrganizationsRootCredentialsManagementRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] organization_id
+    #   The unique identifier (ID) of an organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled_features
+    #   The features you have enabled for centralized root access.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EnableOrganizationsRootCredentialsManagementResponse AWS API Documentation
+    #
+    class EnableOrganizationsRootCredentialsManagementResponse < Struct.new(
+      :organization_id,
+      :enabled_features)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EnableOrganizationsRootSessionsRequest AWS API Documentation
+    #
+    class EnableOrganizationsRootSessionsRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] organization_id
+    #   The unique identifier (ID) of an organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled_features
+    #   The features you have enabled for centralized root access.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EnableOrganizationsRootSessionsResponse AWS API Documentation
+    #
+    class EnableOrganizationsRootSessionsResponse < Struct.new(
+      :organization_id,
+      :enabled_features)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3366,14 +3501,20 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user whose login profile you want to retrieve.
     #
-    #   This parameter allows (through its [regex pattern][1]) a string of
+    #   This parameter is optional. If no user name is included, it defaults
+    #   to the principal making the request. When you make this request with
+    #   root user credentials, you must use an [AssumeRoot][1] session to
+    #   omit the user name.
+    #
+    #   This parameter allows (through its [regex pattern][2]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
     #   characters: \_+=,.@-
     #
     #
     #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   [1]: https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoot.html
+    #   [2]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetLoginProfileRequest AWS API Documentation
@@ -5953,6 +6094,30 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListOrganizationsFeaturesRequest AWS API Documentation
+    #
+    class ListOrganizationsFeaturesRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] organization_id
+    #   The unique identifier (ID) of an organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled_features
+    #   Specifies the features that are currently available in your
+    #   organization.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListOrganizationsFeaturesResponse AWS API Documentation
+    #
+    class ListOrganizationsFeaturesResponse < Struct.new(
+      :organization_id,
+      :enabled_features)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains details about the permissions policies that are attached to
     # the specified identity (user, group, or role).
     #
@@ -7590,6 +7755,25 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # The request was rejected because no organization is associated with
+    # your account.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/OrganizationNotFoundException AWS API Documentation
+    #
+    class OrganizationNotFoundException < Aws::EmptyStructure; end
+
+    # The request was rejected because your organization does not have All
+    # features enabled. For more information, see [Available feature
+    # sets][1] in the *Organizations User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#feature-set
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/OrganizationNotInAllFeaturesModeException AWS API Documentation
+    #
+    class OrganizationNotInAllFeaturesModeException < Aws::EmptyStructure; end
+
     # Contains information about the effect that Organizations has on a
     # policy simulation.
     #
@@ -7620,7 +7804,7 @@ module Aws::IAM
     #   Specifies whether IAM user passwords must contain at least one of
     #   the following symbols:
     #
-    #   ! @ # $ % ^ &amp; * ( ) \_ + - = \[ \] \\\{ \\} \| '
+    #   ! @ # $ % ^ &amp; * ( ) \_ + - = \[ \] \{ } \| '
     #   @return [Boolean]
     #
     # @!attribute [rw] require_numbers
@@ -9220,6 +9404,14 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # The request was rejected because trusted access is not enabled for IAM
+    # in Organizations. For details, see IAM and Organizations in the
+    # *Organizations User Guide*.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ServiceAccessNotEnabledException AWS API Documentation
+    #
+    class ServiceAccessNotEnabledException < Aws::EmptyStructure; end
+
     # The request processing has failed because of an unknown error,
     # exception or failure.
     #
@@ -10783,7 +10975,7 @@ module Aws::IAM
     #   Specifies whether IAM user passwords must contain at least one of
     #   the following non-alphanumeric characters:
     #
-    #   ! @ # $ % ^ &amp; * ( ) \_ + - = \[ \] \\\{ \\} \| '
+    #   ! @ # $ % ^ &amp; * ( ) \_ + - = \[ \] \{ } \| '
     #
     #   If you do not specify a value for this parameter, then the operation
     #   uses the default value of `false`. The result is that passwords do

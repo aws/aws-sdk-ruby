@@ -744,7 +744,6 @@ module Aws::WorkSpacesWeb
     #     * `client_secret`
     #
     #     * `authorize_scopes`
-    #
     #   * For Facebook:
     #
     #     * `client_id`
@@ -754,7 +753,6 @@ module Aws::WorkSpacesWeb
     #     * `authorize_scopes`
     #
     #     * `api_version`
-    #
     #   * For Sign in with Apple:
     #
     #     * `client_id`
@@ -766,7 +764,6 @@ module Aws::WorkSpacesWeb
     #     * `private_key`
     #
     #     * `authorize_scopes`
-    #
     #   * For OIDC providers:
     #
     #     * `client_id`
@@ -790,7 +787,6 @@ module Aws::WorkSpacesWeb
     #
     #     * `jwks_uri` *if not available from discovery URL specified by
     #       `oidc_issuer` key*
-    #
     #   * For SAML providers:
     #
     #     * `MetadataFile` OR `MetadataURL`
@@ -2693,7 +2689,6 @@ module Aws::WorkSpacesWeb
     #     * `client_secret`
     #
     #     * `authorize_scopes`
-    #
     #   * For Facebook:
     #
     #     * `client_id`
@@ -2703,7 +2698,6 @@ module Aws::WorkSpacesWeb
     #     * `authorize_scopes`
     #
     #     * `api_version`
-    #
     #   * For Sign in with Apple:
     #
     #     * `client_id`
@@ -2715,7 +2709,6 @@ module Aws::WorkSpacesWeb
     #     * `private_key`
     #
     #     * `authorize_scopes`
-    #
     #   * For OIDC providers:
     #
     #     * `client_id`
@@ -2739,7 +2732,6 @@ module Aws::WorkSpacesWeb
     #
     #     * `jwks_uri` *if not available from discovery URL specified by
     #       `oidc_issuer` key*
-    #
     #   * For SAML providers:
     #
     #     * `MetadataFile` OR `MetadataURL`
@@ -3245,7 +3237,7 @@ module Aws::WorkSpacesWeb
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-workspacesweb'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

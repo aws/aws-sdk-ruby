@@ -704,9 +704,9 @@ module Aws::Batch
     #   Key-value pair tags to be applied to Amazon EC2 resources that are
     #   launched in the compute environment. For Batch, these take the form
     #   of `"String1": "String2"`, where `String1` is the tag key and
-    #   `String2` is the tag value-for example, `\{ "Name": "Batch Instance
-    #   - C4OnDemand" \}`. This is helpful for recognizing your Batch
-    #   instances in the Amazon EC2 console. Updating these tags requires an
+    #   `String2` is the tag value-for example, `{ "Name": "Batch Instance -
+    #   C4OnDemand" }`. This is helpful for recognizing your Batch instances
+    #   in the Amazon EC2 console. Updating these tags requires an
     #   infrastructure update to the compute environment. For more
     #   information, see [Updating compute environments][1] in the *Batch
     #   User Guide*. These tags aren't seen when using the Batch
@@ -1100,10 +1100,10 @@ module Aws::Batch
     #   Key-value pair tags to be applied to Amazon EC2 resources that are
     #   launched in the compute environment. For Batch, these take the form
     #   of `"String1": "String2"`, where `String1` is the tag key and
-    #   `String2` is the tag value-for example, `\{ "Name": "Batch Instance
-    #   - C4OnDemand" \}`. This is helpful for recognizing your Batch
-    #   instances in the Amazon EC2 console. These tags aren't seen when
-    #   using the Batch `ListTagsForResource` API operation.
+    #   `String2` is the tag value-for example, `{ "Name": "Batch Instance -
+    #   C4OnDemand" }`. This is helpful for recognizing your Batch instances
+    #   in the Amazon EC2 console. These tags aren't seen when using the
+    #   Batch `ListTagsForResource` API operation.
     #
     #   When updating a compute environment, changing this setting requires
     #   an infrastructure update of the compute environment. For more
@@ -2574,10 +2574,10 @@ module Aws::Batch
     # @!attribute [rw] job_definitions
     #   A list of up to 100 job definitions. Each entry in the list can
     #   either be an ARN in the format
-    #   `arn:aws:batch:$\{Region\}:$\{Account\}:job-definition/$\{JobDefinitionName\}:$\{Revision\}`
+    #   `arn:aws:batch:${Region}:${Account}:job-definition/${JobDefinitionName}:${Revision}`
     #   or a short version using the form
-    #   `$\{JobDefinitionName\}:$\{Revision\}`. This parameter can't be
-    #   used with other parameters.
+    #   `${JobDefinitionName}:${Revision}`. This parameter can't be used
+    #   with other parameters.
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
@@ -5442,17 +5442,17 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The version number of the launch template, `$Latest`, or `$Default`.
+    #   The version number of the launch template, `$Default`, or `$Latest`.
     #
-    #   If the value is `$Latest`, the latest version of the launch template
-    #   is used. If the value is `$Default`, the default version of the
-    #   launch template is used.
+    #   If the value is `$Default`, the default version of the launch
+    #   template is used. If the value is `$Latest`, the latest version of
+    #   the launch template is used.
     #
     #   If the AMI ID that's used in a compute environment is from the
     #   launch template, the AMI isn't changed when the compute environment
     #   is updated. It's only changed if the `updateToLatestImageVersion`
     #   parameter for the compute environment is set to `true`. During an
-    #   infrastructure update, if either `$Latest` or `$Default` is
+    #   infrastructure update, if either `$Default` or `$Latest` is
     #   specified, Batch re-evaluates the launch template version, and it
     #   might use a different version of the launch template. This is the
     #   case even if the launch template isn't specified in the update.
@@ -5461,19 +5461,156 @@ module Aws::Batch
     #   more information, see [Updating compute environments][1] in the
     #   *Batch User Guide*.
     #
-    #   Default: `$Default`.
+    #   Default: `$Default`
+    #
+    #   Latest: `$Latest`
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
     #   @return [String]
     #
+    # @!attribute [rw] overrides
+    #   A launch template to use in place of the default launch template.
+    #   You must specify either the launch template ID or launch template
+    #   name in the request, but not both.
+    #
+    #   You can specify up to ten (10) launch template overrides that are
+    #   associated to unique instance types or families for each compute
+    #   environment.
+    #
+    #   <note markdown="1"> To unset all override templates for a compute environment, you can
+    #   pass an empty array to the [UpdateComputeEnvironment.overrides][1]
+    #   parameter, or not include the `overrides` parameter when submitting
+    #   the `UpdateComputeEnvironment` API operation.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/APIReference/API_UpdateComputeEnvironment.html
+    #   @return [Array<Types::LaunchTemplateSpecificationOverride>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/LaunchTemplateSpecification AWS API Documentation
     #
     class LaunchTemplateSpecification < Struct.new(
       :launch_template_id,
       :launch_template_name,
-      :version)
+      :version,
+      :overrides)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents a launch template to use in place of the
+    # default launch template. You must specify either the launch template
+    # ID or launch template name in the request, but not both.
+    #
+    # If security groups are specified using both the `securityGroupIds`
+    # parameter of `CreateComputeEnvironment` and the launch template, the
+    # values in the `securityGroupIds` parameter of
+    # `CreateComputeEnvironment` will be used.
+    #
+    # You can define up to ten (10) overrides for each compute environment.
+    #
+    # <note markdown="1"> This object isn't applicable to jobs that are running on Fargate
+    # resources.
+    #
+    #  </note>
+    #
+    # <note markdown="1"> To unset all override templates for a compute environment, you can
+    # pass an empty array to the [UpdateComputeEnvironment.overrides][1]
+    # parameter, or not include the `overrides` parameter when submitting
+    # the `UpdateComputeEnvironment` API operation.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/batch/latest/APIReference/API_UpdateComputeEnvironment.html
+    #
+    # @!attribute [rw] launch_template_id
+    #   The ID of the launch template.
+    #
+    #   **Note:** If you specify the `launchTemplateId` you can't specify
+    #   the `launchTemplateName` as well.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_template_name
+    #   The name of the launch template.
+    #
+    #   **Note:** If you specify the `launchTemplateName` you can't specify
+    #   the `launchTemplateId` as well.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version number of the launch template, `$Default`, or `$Latest`.
+    #
+    #   If the value is `$Default`, the default version of the launch
+    #   template is used. If the value is `$Latest`, the latest version of
+    #   the launch template is used.
+    #
+    #   If the AMI ID that's used in a compute environment is from the
+    #   launch template, the AMI isn't changed when the compute environment
+    #   is updated. It's only changed if the `updateToLatestImageVersion`
+    #   parameter for the compute environment is set to `true`. During an
+    #   infrastructure update, if either `$Default` or `$Latest` is
+    #   specified, Batch re-evaluates the launch template version, and it
+    #   might use a different version of the launch template. This is the
+    #   case even if the launch template isn't specified in the update.
+    #   When updating a compute environment, changing the launch template
+    #   requires an infrastructure update of the compute environment. For
+    #   more information, see [Updating compute environments][1] in the
+    #   *Batch User Guide*.
+    #
+    #   Default: `$Default`
+    #
+    #   Latest: `$Latest`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
+    #   @return [String]
+    #
+    # @!attribute [rw] target_instance_types
+    #   The instance type or family that this this override launch template
+    #   should be applied to.
+    #
+    #   This parameter is required when defining a launch template override.
+    #
+    #   Information included in this parameter must meet the following
+    #   requirements:
+    #
+    #   * Must be a valid Amazon EC2 instance type or family.
+    #
+    #   * `optimal` isn't allowed.
+    #
+    #   * `targetInstanceTypes` can target only instance types and families
+    #     that are included within the [ `ComputeResource.instanceTypes`
+    #     ][1] set. `targetInstanceTypes` doesn't need to include all of
+    #     the instances from the `instanceType` set, but at least a subset.
+    #     For example, if `ComputeResource.instanceTypes` includes `[m5,
+    #     g5]`, `targetInstanceTypes` can include `[m5.2xlarge]` and
+    #     `[m5.large]` but not `[c5.large]`.
+    #
+    #   * `targetInstanceTypes` included within the same launch template
+    #     override or across launch template overrides can't overlap for
+    #     the same compute environment. For example, you can't define one
+    #     launch template override to target an instance family and another
+    #     define an instance type within this same family.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/APIReference/API_ComputeResource.html#Batch-Type-ComputeResource-instanceTypes
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/LaunchTemplateSpecificationOverride AWS API Documentation
+    #
+    class LaunchTemplateSpecificationOverride < Struct.new(
+      :launch_template_id,
+      :launch_template_name,
+      :version,
+      :target_instance_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5716,7 +5853,7 @@ module Aws::Batch
     #     version of the job definition that's used doesn't affect the
     #     sort order. When the `JOB_DEFINITION` filter is used and the ARN
     #     is used (which is in the form
-    #     `arn:$\{Partition\}:batch:$\{Region\}:$\{Account\}:job-definition/$\{JobDefinitionName\}:$\{Revision\}`),
+    #     `arn:${Partition}:batch:${Region}:${Account}:job-definition/${JobDefinitionName}:${Revision}`),
     #     the results include jobs that used the specified revision of the
     #     job definition. Asterisk (*) isn't supported when the ARN is
     #     used.
@@ -7290,7 +7427,7 @@ module Aws::Batch
     #   greater on your container instance. To check the Docker Remote API
     #   version on your container instance, log in to your container
     #   instance and run the following command: sudo docker version
-    #   `--format '\{\{.Server.APIVersion\}\}'`
+    #   `--format '{{.Server.APIVersion}}'`
     #
     #   <note markdown="1"> The Amazon ECS container agent running on a container instance must
     #   register the logging drivers available on that instance with the
@@ -7406,7 +7543,7 @@ module Aws::Batch
     #   greater on your container instance. To check the Docker Remote API
     #   version on your container instance, log in to your container
     #   instance and run the following command: sudo docker version
-    #   `--format '\{\{.Server.APIVersion\}\}'`
+    #   `--format '{{.Server.APIVersion}}'`
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers.
     #
@@ -7670,7 +7807,7 @@ module Aws::Batch
     #   greater on your container instance. To check the Docker Remote API
     #   version on your container instance, log in to your container
     #   instance and run the following command: sudo docker version
-    #   `--format '\{\{.Server.APIVersion\}\}'`
+    #   `--format '{{.Server.APIVersion}}'`
     #
     #   <note markdown="1"> The Amazon ECS container agent running on a container instance must
     #   register the logging drivers available on that instance with the
@@ -7787,7 +7924,7 @@ module Aws::Batch
     #   greater on your container instance. To check the Docker Remote API
     #   version on your container instance, log in to your container
     #   instance and run the following command: sudo docker version
-    #   `--format '\{\{.Server.APIVersion\}\}'`
+    #   `--format '{{.Server.APIVersion}}'`
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers.
     #

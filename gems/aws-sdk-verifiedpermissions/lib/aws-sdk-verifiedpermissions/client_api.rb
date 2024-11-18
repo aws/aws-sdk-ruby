@@ -22,6 +22,15 @@ module Aws::VerifiedPermissions
     AttributeValue = Shapes::UnionShape.new(name: 'AttributeValue')
     Audience = Shapes::StringShape.new(name: 'Audience')
     Audiences = Shapes::ListShape.new(name: 'Audiences')
+    BatchGetPolicyErrorCode = Shapes::StringShape.new(name: 'BatchGetPolicyErrorCode')
+    BatchGetPolicyErrorItem = Shapes::StructureShape.new(name: 'BatchGetPolicyErrorItem')
+    BatchGetPolicyErrorList = Shapes::ListShape.new(name: 'BatchGetPolicyErrorList')
+    BatchGetPolicyInput = Shapes::StructureShape.new(name: 'BatchGetPolicyInput')
+    BatchGetPolicyInputItem = Shapes::StructureShape.new(name: 'BatchGetPolicyInputItem')
+    BatchGetPolicyInputList = Shapes::ListShape.new(name: 'BatchGetPolicyInputList')
+    BatchGetPolicyOutput = Shapes::StructureShape.new(name: 'BatchGetPolicyOutput')
+    BatchGetPolicyOutputItem = Shapes::StructureShape.new(name: 'BatchGetPolicyOutputItem')
+    BatchGetPolicyOutputList = Shapes::ListShape.new(name: 'BatchGetPolicyOutputList')
     BatchIsAuthorizedInput = Shapes::StructureShape.new(name: 'BatchIsAuthorizedInput')
     BatchIsAuthorizedInputItem = Shapes::StructureShape.new(name: 'BatchIsAuthorizedInputItem')
     BatchIsAuthorizedInputList = Shapes::ListShape.new(name: 'BatchIsAuthorizedInputList')
@@ -59,6 +68,7 @@ module Aws::VerifiedPermissions
     CreatePolicyStoreOutput = Shapes::StructureShape.new(name: 'CreatePolicyStoreOutput')
     CreatePolicyTemplateInput = Shapes::StructureShape.new(name: 'CreatePolicyTemplateInput')
     CreatePolicyTemplateOutput = Shapes::StructureShape.new(name: 'CreatePolicyTemplateOutput')
+    Decimal = Shapes::StringShape.new(name: 'Decimal')
     Decision = Shapes::StringShape.new(name: 'Decision')
     DeleteIdentitySourceInput = Shapes::StructureShape.new(name: 'DeleteIdentitySourceInput')
     DeleteIdentitySourceOutput = Shapes::StructureShape.new(name: 'DeleteIdentitySourceOutput')
@@ -102,6 +112,7 @@ module Aws::VerifiedPermissions
     IdentitySourceItemDetails = Shapes::StructureShape.new(name: 'IdentitySourceItemDetails')
     IdentitySources = Shapes::ListShape.new(name: 'IdentitySources')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    IpAddr = Shapes::StringShape.new(name: 'IpAddr')
     IsAuthorizedInput = Shapes::StructureShape.new(name: 'IsAuthorizedInput')
     IsAuthorizedOutput = Shapes::StructureShape.new(name: 'IsAuthorizedOutput')
     IsAuthorizedWithTokenInput = Shapes::StructureShape.new(name: 'IsAuthorizedWithTokenInput')
@@ -221,6 +232,8 @@ module Aws::VerifiedPermissions
     AttributeValue.add_member(:string, Shapes::ShapeRef.new(shape: StringAttribute, location_name: "string"))
     AttributeValue.add_member(:set, Shapes::ShapeRef.new(shape: SetAttribute, location_name: "set"))
     AttributeValue.add_member(:record, Shapes::ShapeRef.new(shape: RecordAttribute, location_name: "record"))
+    AttributeValue.add_member(:ipaddr, Shapes::ShapeRef.new(shape: IpAddr, location_name: "ipaddr"))
+    AttributeValue.add_member(:decimal, Shapes::ShapeRef.new(shape: Decimal, location_name: "decimal"))
     AttributeValue.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     AttributeValue.add_member_subclass(:boolean, Types::AttributeValue::Boolean)
     AttributeValue.add_member_subclass(:entity_identifier, Types::AttributeValue::EntityIdentifier)
@@ -228,10 +241,43 @@ module Aws::VerifiedPermissions
     AttributeValue.add_member_subclass(:string, Types::AttributeValue::String)
     AttributeValue.add_member_subclass(:set, Types::AttributeValue::Set)
     AttributeValue.add_member_subclass(:record, Types::AttributeValue::Record)
+    AttributeValue.add_member_subclass(:ipaddr, Types::AttributeValue::Ipaddr)
+    AttributeValue.add_member_subclass(:decimal, Types::AttributeValue::Decimal)
     AttributeValue.add_member_subclass(:unknown, Types::AttributeValue::Unknown)
     AttributeValue.struct_class = Types::AttributeValue
 
     Audiences.member = Shapes::ShapeRef.new(shape: Audience)
+
+    BatchGetPolicyErrorItem.add_member(:code, Shapes::ShapeRef.new(shape: BatchGetPolicyErrorCode, required: true, location_name: "code"))
+    BatchGetPolicyErrorItem.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "policyStoreId"))
+    BatchGetPolicyErrorItem.add_member(:policy_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "policyId"))
+    BatchGetPolicyErrorItem.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    BatchGetPolicyErrorItem.struct_class = Types::BatchGetPolicyErrorItem
+
+    BatchGetPolicyErrorList.member = Shapes::ShapeRef.new(shape: BatchGetPolicyErrorItem)
+
+    BatchGetPolicyInput.add_member(:requests, Shapes::ShapeRef.new(shape: BatchGetPolicyInputList, required: true, location_name: "requests"))
+    BatchGetPolicyInput.struct_class = Types::BatchGetPolicyInput
+
+    BatchGetPolicyInputItem.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
+    BatchGetPolicyInputItem.add_member(:policy_id, Shapes::ShapeRef.new(shape: PolicyId, required: true, location_name: "policyId"))
+    BatchGetPolicyInputItem.struct_class = Types::BatchGetPolicyInputItem
+
+    BatchGetPolicyInputList.member = Shapes::ShapeRef.new(shape: BatchGetPolicyInputItem)
+
+    BatchGetPolicyOutput.add_member(:results, Shapes::ShapeRef.new(shape: BatchGetPolicyOutputList, required: true, location_name: "results"))
+    BatchGetPolicyOutput.add_member(:errors, Shapes::ShapeRef.new(shape: BatchGetPolicyErrorList, required: true, location_name: "errors"))
+    BatchGetPolicyOutput.struct_class = Types::BatchGetPolicyOutput
+
+    BatchGetPolicyOutputItem.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
+    BatchGetPolicyOutputItem.add_member(:policy_id, Shapes::ShapeRef.new(shape: PolicyId, required: true, location_name: "policyId"))
+    BatchGetPolicyOutputItem.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyType, required: true, location_name: "policyType"))
+    BatchGetPolicyOutputItem.add_member(:definition, Shapes::ShapeRef.new(shape: PolicyDefinitionDetail, required: true, location_name: "definition"))
+    BatchGetPolicyOutputItem.add_member(:created_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "createdDate"))
+    BatchGetPolicyOutputItem.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "lastUpdatedDate"))
+    BatchGetPolicyOutputItem.struct_class = Types::BatchGetPolicyOutputItem
+
+    BatchGetPolicyOutputList.member = Shapes::ShapeRef.new(shape: BatchGetPolicyOutputItem)
 
     BatchIsAuthorizedInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
     BatchIsAuthorizedInput.add_member(:entities, Shapes::ShapeRef.new(shape: EntitiesDefinition, location_name: "entities"))
@@ -968,6 +1014,18 @@ module Aws::VerifiedPermissions
         "targetPrefix" => "VerifiedPermissions",
         "uid" => "verifiedpermissions-2021-12-01",
       }
+
+      api.add_operation(:batch_get_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetPolicyInput)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetPolicyOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
 
       api.add_operation(:batch_is_authorized, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BatchIsAuthorized"

@@ -115,7 +115,7 @@ module Aws
                         ?tags: Array[
                           {
                             key: ::String,
-                            value: ::String?
+                            value: ::String
                           },
                         ]
                       ) -> _CreateKeyResponseSuccess
@@ -353,7 +353,7 @@ module Aws
                         ?tags: Array[
                           {
                             key: ::String,
-                            value: ::String?
+                            value: ::String
                           },
                         ]
                       ) -> _ImportKeyResponseSuccess
@@ -366,6 +366,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PaymentCryptography/Client.html#list_aliases-instance_method
       def list_aliases: (
+                          ?key_arn: ::String,
                           ?next_token: ::String,
                           ?max_results: ::Integer
                         ) -> _ListAliasesResponseSuccess
@@ -436,7 +437,7 @@ module Aws
                           tags: Array[
                             {
                               key: ::String,
-                              value: ::String?
+                              value: ::String
                             },
                           ]
                         ) -> _TagResourceResponseSuccess

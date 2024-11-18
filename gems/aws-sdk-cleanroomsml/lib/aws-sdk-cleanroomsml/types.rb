@@ -101,9 +101,9 @@ module Aws::CleanRoomsML
     #   generating audience is stored. A valid data source is a JSON line
     #   file in the following format:
     #
-    #   `\{"user_id": "111111"\}`
+    #   `{"user_id": "111111"}`
     #
-    #   `\{"user_id": "222222"\}`
+    #   `{"user_id": "222222"}`
     #
     #   `...`
     #   @return [Types::S3ConfigMap]
@@ -306,6 +306,394 @@ module Aws::CleanRoomsML
       include Aws::Structure
     end
 
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the trained model inference job that you want
+    #   to cancel.
+    #   @return [String]
+    #
+    # @!attribute [rw] trained_model_inference_job_arn
+    #   The Amazon Resource Name (ARN) of the trained model inference job
+    #   that you want to cancel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/CancelTrainedModelInferenceJobRequest AWS API Documentation
+    #
+    class CancelTrainedModelInferenceJobRequest < Struct.new(
+      :membership_identifier,
+      :trained_model_inference_job_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the trained model job that you want to cancel.
+    #   @return [String]
+    #
+    # @!attribute [rw] trained_model_arn
+    #   The Amazon Resource Name (ARN) of the trained model job that you
+    #   want to cancel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/CancelTrainedModelRequest AWS API Documentation
+    #
+    class CancelTrainedModelRequest < Struct.new(
+      :membership_identifier,
+      :trained_model_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides summary information about a configured model algorithm in a
+    # collaboration.
+    #
+    # @!attribute [rw] create_time
+    #   The time at which the configured model algorithm association was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the configured model algorithm
+    #   association was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] configured_model_algorithm_association_arn
+    #   The Amazon Resource Name (ARN) of the configured model algorithm
+    #   association.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the configured model algorithm association.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the configured model algorithm association.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the member that created the configured model
+    #   algorithm association.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_identifier
+    #   The collaboration ID of the collaboration that contains the
+    #   configured model algorithm association.
+    #   @return [String]
+    #
+    # @!attribute [rw] configured_model_algorithm_arn
+    #   The Amazon Resource Name (ARN) of the configured model algorithm
+    #   that is associated to the collaboration.
+    #   @return [String]
+    #
+    # @!attribute [rw] creator_account_id
+    #   The account ID of the member that created the configured model
+    #   algorithm association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/CollaborationConfiguredModelAlgorithmAssociationSummary AWS API Documentation
+    #
+    class CollaborationConfiguredModelAlgorithmAssociationSummary < Struct.new(
+      :create_time,
+      :update_time,
+      :configured_model_algorithm_association_arn,
+      :name,
+      :description,
+      :membership_identifier,
+      :collaboration_identifier,
+      :configured_model_algorithm_arn,
+      :creator_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides summary information about an ML input channel in a
+    # collaboration.
+    #
+    # @!attribute [rw] create_time
+    #   The time at which the ML input channel was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the ML input channel was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the membership that contains the ML input
+    #   channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_identifier
+    #   The collaboration ID of the collaboration that contains the ML input
+    #   channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the ML input channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] configured_model_algorithm_associations
+    #   The associated configured model algorithms used to create the ML
+    #   input channel.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ml_input_channel_arn
+    #   The Amazon Resource Name (ARN) of the ML input channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the ML input channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] creator_account_id
+    #   The account ID of the member who created the ML input channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the ML input channel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/CollaborationMLInputChannelSummary AWS API Documentation
+    #
+    class CollaborationMLInputChannelSummary < Struct.new(
+      :create_time,
+      :update_time,
+      :membership_identifier,
+      :collaboration_identifier,
+      :name,
+      :configured_model_algorithm_associations,
+      :ml_input_channel_arn,
+      :status,
+      :creator_account_id,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides summary information about a trained model export job in a
+    # collaboration.
+    #
+    # @!attribute [rw] create_time
+    #   The time at which the trained model export job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the trained model export job was
+    #   updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   The name of the trained model export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_configuration
+    #   Information about the output of the trained model export job.
+    #   @return [Types::TrainedModelExportOutputConfiguration]
+    #
+    # @!attribute [rw] status
+    #   The status of the trained model.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_details
+    #   Details about the status of a resource.
+    #   @return [Types::StatusDetails]
+    #
+    # @!attribute [rw] description
+    #   The description of the trained model.
+    #   @return [String]
+    #
+    # @!attribute [rw] creator_account_id
+    #   The account ID of the member that created the trained model.
+    #   @return [String]
+    #
+    # @!attribute [rw] trained_model_arn
+    #   The Amazon Resource Name (ARN) of the trained model that is being
+    #   exported.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the member that created the trained model
+    #   export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_identifier
+    #   The collaboration ID of the collaboration that contains the trained
+    #   model export job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/CollaborationTrainedModelExportJobSummary AWS API Documentation
+    #
+    class CollaborationTrainedModelExportJobSummary < Struct.new(
+      :create_time,
+      :update_time,
+      :name,
+      :output_configuration,
+      :status,
+      :status_details,
+      :description,
+      :creator_account_id,
+      :trained_model_arn,
+      :membership_identifier,
+      :collaboration_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides summary information about a trained model inference job in a
+    # collaboration.
+    #
+    # @!attribute [rw] trained_model_inference_job_arn
+    #   The Amazon Resource Name (ARN) of the trained model inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] configured_model_algorithm_association_arn
+    #   The Amazon Resource Name (ARN) of the configured model algorithm
+    #   association that is used for the trained model inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the membership that contains the trained model
+    #   inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] trained_model_arn
+    #   The Amazon Resource Name (ARN) of the trained model that is used for
+    #   the trained model inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_identifier
+    #   The collaboration ID of the collaboration that contains the trained
+    #   model inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the trained model inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_configuration
+    #   Returns output configuration information for the trained model
+    #   inference job.
+    #   @return [Types::InferenceOutputConfiguration]
+    #
+    # @!attribute [rw] name
+    #   The name of the trained model inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the trained model inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] metrics_status
+    #   the trained model inference job metrics status.
+    #   @return [String]
+    #
+    # @!attribute [rw] metrics_status_details
+    #   Details about the metrics status for trained model inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] logs_status
+    #   The trained model inference job logs status.
+    #   @return [String]
+    #
+    # @!attribute [rw] logs_status_details
+    #   Details about the logs status for the trained model inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time at which the trained model inference job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the trained model inference job was
+    #   updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creator_account_id
+    #   The account ID that created the trained model inference job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/CollaborationTrainedModelInferenceJobSummary AWS API Documentation
+    #
+    class CollaborationTrainedModelInferenceJobSummary < Struct.new(
+      :trained_model_inference_job_arn,
+      :configured_model_algorithm_association_arn,
+      :membership_identifier,
+      :trained_model_arn,
+      :collaboration_identifier,
+      :status,
+      :output_configuration,
+      :name,
+      :description,
+      :metrics_status,
+      :metrics_status_details,
+      :logs_status,
+      :logs_status_details,
+      :create_time,
+      :update_time,
+      :creator_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides summary information about a trained model in a collaboration.
+    #
+    # @!attribute [rw] create_time
+    #   The time at which the trained model was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the trained model was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] trained_model_arn
+    #   The Amazon Resource Name (ARN) of the trained model.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the trained model.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the trained model.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the member that created the trained model.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_identifier
+    #   The collaboration ID of the collaboration that contains the trained
+    #   model.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the trained model.
+    #   @return [String]
+    #
+    # @!attribute [rw] configured_model_algorithm_association_arn
+    #   The Amazon Resource Name (ARN) of the configured model algorithm
+    #   association that is used for this trained model.
+    #   @return [String]
+    #
+    # @!attribute [rw] creator_account_id
+    #   The account ID of the member that created the trained model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/CollaborationTrainedModelSummary AWS API Documentation
+    #
+    class CollaborationTrainedModelSummary < Struct.new(
+      :create_time,
+      :update_time,
+      :trained_model_arn,
+      :name,
+      :description,
+      :membership_identifier,
+      :collaboration_identifier,
+      :status,
+      :configured_model_algorithm_association_arn,
+      :creator_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Metadata for a column.
     #
     # @!attribute [rw] column_name
@@ -323,6 +711,30 @@ module Aws::CleanRoomsML
       :column_types)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Provides configuration information for the instances that will perform
+    # the compute work.
+    #
+    # @note ComputeConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ComputeConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ComputeConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] worker
+    #   The worker instances that will perform the compute work.
+    #   @return [Types::WorkerComputeConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ComputeConfiguration AWS API Documentation
+    #
+    class ComputeConfiguration < Struct.new(
+      :worker,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Worker < ComputeConfiguration; end
+      class Unknown < ComputeConfiguration; end
     end
 
     # Configuration information necessary for the configure audience model
@@ -398,6 +810,97 @@ module Aws::CleanRoomsML
       include Aws::Structure
     end
 
+    # Provides summary information about the configured model algorithm
+    # association.
+    #
+    # @!attribute [rw] create_time
+    #   The time at which the configured model algorithm association was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the configured model algorithm
+    #   association was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] configured_model_algorithm_association_arn
+    #   The Amazon Resource Name (ARN) of the configured model algorithm
+    #   association.
+    #   @return [String]
+    #
+    # @!attribute [rw] configured_model_algorithm_arn
+    #   The Amazon Resource Name (ARN) of the configured model algorithm
+    #   that is being associated.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the configured model algorithm association.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the configured model algorithm association.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the member that created the configured model
+    #   algorithm association.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_identifier
+    #   The collaboration ID of the collaboration that contains the
+    #   configured model algorithm association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ConfiguredModelAlgorithmAssociationSummary AWS API Documentation
+    #
+    class ConfiguredModelAlgorithmAssociationSummary < Struct.new(
+      :create_time,
+      :update_time,
+      :configured_model_algorithm_association_arn,
+      :configured_model_algorithm_arn,
+      :name,
+      :description,
+      :membership_identifier,
+      :collaboration_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides summary information about a configured model algorithm.
+    #
+    # @!attribute [rw] create_time
+    #   The time at which the configured model algorithm was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the configured model algorithm was
+    #   updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] configured_model_algorithm_arn
+    #   The Amazon Resource Name (ARN) of the configured model algorithm.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the configured model algorithm.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the configured model algorithm.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ConfiguredModelAlgorithmSummary AWS API Documentation
+    #
+    class ConfiguredModelAlgorithmSummary < Struct.new(
+      :create_time,
+      :update_time,
+      :configured_model_algorithm_arn,
+      :name,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You can't complete this action because another resource depends on
     # this resource.
     #
@@ -408,6 +911,63 @@ module Aws::CleanRoomsML
     #
     class ConflictException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides configuration information for the dockerized container where
+    # the model algorithm is stored.
+    #
+    # @!attribute [rw] image_uri
+    #   The registry path of the docker image that contains the algorithm.
+    #   Clean Rooms ML supports both `registry/repository[:tag]` and
+    #   `registry/repositry[@digest]` image path formats. For more
+    #   information about using images in Clean Rooms ML, see the [Sagemaker
+    #   API reference][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AlgorithmSpecification.html#sagemaker-Type-AlgorithmSpecification-TrainingImage
+    #   @return [String]
+    #
+    # @!attribute [rw] entrypoint
+    #   The entrypoint script for a Docker container used to run a training
+    #   job. This script takes precedence over the default train processing
+    #   instructions. See How Amazon SageMaker Runs Your Training Image for
+    #   additional information. For more information, see [How Sagemaker
+    #   runs your training image][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-training-algo-dockerfile.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] arguments
+    #   The arguments for a container used to run a training job. See How
+    #   Amazon SageMaker Runs Your Training Image for additional
+    #   information. For more information, see [How Sagemaker runs your
+    #   training image][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-training-algo-dockerfile.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] metric_definitions
+    #   A list of metric definition objects. Each object specifies the
+    #   metric name and regular expressions used to parse algorithm logs.
+    #   Amazon Web Services Clean Rooms ML publishes each metric to all
+    #   members' Amazon CloudWatch using IAM role configured in
+    #   PutMLConfiguration.
+    #   @return [Array<Types::MetricDefinition>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ContainerConfig AWS API Documentation
+    #
+    class ContainerConfig < Struct.new(
+      :image_uri,
+      :entrypoint,
+      :arguments,
+      :metric_definitions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -615,6 +1175,378 @@ module Aws::CleanRoomsML
       include Aws::Structure
     end
 
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the member who is associating this configured
+    #   model algorithm.
+    #   @return [String]
+    #
+    # @!attribute [rw] configured_model_algorithm_arn
+    #   The Amazon Resource Name (ARN) of the configured model algorithm
+    #   that you want to associate.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the configured model algorithm association.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the configured model algorithm association.
+    #   @return [String]
+    #
+    # @!attribute [rw] privacy_configuration
+    #   Specifies the privacy configuration information for the configured
+    #   model algorithm association. This information includes the maximum
+    #   data size that can be exported.
+    #   @return [Types::PrivacyConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   The optional metadata that you apply to the resource to help you
+    #   categorize and organize them. Each tag consists of a key and an
+    #   optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50.
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8.
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8.
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case sensitive.
+    #
+    #   * Do not use aws:, AWS:, or any upper or lowercase combination of
+    #     such as a prefix for keys as it is reserved for AWS use. You
+    #     cannot edit or delete tag keys with this prefix. Values can have
+    #     this prefix. If a tag value has aws as its prefix but the key does
+    #     not, then Clean Rooms ML considers it to be a user tag and will
+    #     count against the limit of 50 tags. Tags with only the key prefix
+    #     of aws do not count against your tags per resource limit.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/CreateConfiguredModelAlgorithmAssociationRequest AWS API Documentation
+    #
+    class CreateConfiguredModelAlgorithmAssociationRequest < Struct.new(
+      :membership_identifier,
+      :configured_model_algorithm_arn,
+      :name,
+      :description,
+      :privacy_configuration,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configured_model_algorithm_association_arn
+    #   The Amazon Resource Name (ARN) of the configured model algorithm
+    #   association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/CreateConfiguredModelAlgorithmAssociationResponse AWS API Documentation
+    #
+    class CreateConfiguredModelAlgorithmAssociationResponse < Struct.new(
+      :configured_model_algorithm_association_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the configured model algorithm.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the configured model algorithm.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the role that is used to access
+    #   the repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] training_container_config
+    #   Configuration information for the training container, including
+    #   entrypoints and arguments.
+    #   @return [Types::ContainerConfig]
+    #
+    # @!attribute [rw] inference_container_config
+    #   Configuration information for the inference container that is used
+    #   when you run an inference job on a configured model algorithm.
+    #   @return [Types::InferenceContainerConfig]
+    #
+    # @!attribute [rw] tags
+    #   The optional metadata that you apply to the resource to help you
+    #   categorize and organize them. Each tag consists of a key and an
+    #   optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50.
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8.
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8.
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case sensitive.
+    #
+    #   * Do not use aws:, AWS:, or any upper or lowercase combination of
+    #     such as a prefix for keys as it is reserved for AWS use. You
+    #     cannot edit or delete tag keys with this prefix. Values can have
+    #     this prefix. If a tag value has aws as its prefix but the key does
+    #     not, then Clean Rooms ML considers it to be a user tag and will
+    #     count against the limit of 50 tags. Tags with only the key prefix
+    #     of aws do not count against your tags per resource limit.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key. This key is used to
+    #   encrypt and decrypt customer-owned data in the configured ML model
+    #   algorithm and associated data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/CreateConfiguredModelAlgorithmRequest AWS API Documentation
+    #
+    class CreateConfiguredModelAlgorithmRequest < Struct.new(
+      :name,
+      :description,
+      :role_arn,
+      :training_container_config,
+      :inference_container_config,
+      :tags,
+      :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configured_model_algorithm_arn
+    #   The Amazon Resource Name (ARN) of the configured model algorithm.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/CreateConfiguredModelAlgorithmResponse AWS API Documentation
+    #
+    class CreateConfiguredModelAlgorithmResponse < Struct.new(
+      :configured_model_algorithm_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the member that is creating the ML input
+    #   channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] configured_model_algorithm_associations
+    #   The associated configured model algorithms that are necessary to
+    #   create this ML input channel.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] input_channel
+    #   The input data that is used to create this ML input channel.
+    #   @return [Types::InputChannel]
+    #
+    # @!attribute [rw] name
+    #   The name of the ML input channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] retention_in_days
+    #   The number of days that the data in the ML input channel is
+    #   retained.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   The description of the ML input channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key that is used to access
+    #   the input channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The optional metadata that you apply to the resource to help you
+    #   categorize and organize them. Each tag consists of a key and an
+    #   optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50.
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8.
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8.
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case sensitive.
+    #
+    #   * Do not use aws:, AWS:, or any upper or lowercase combination of
+    #     such as a prefix for keys as it is reserved for AWS use. You
+    #     cannot edit or delete tag keys with this prefix. Values can have
+    #     this prefix. If a tag value has aws as its prefix but the key does
+    #     not, then Clean Rooms ML considers it to be a user tag and will
+    #     count against the limit of 50 tags. Tags with only the key prefix
+    #     of aws do not count against your tags per resource limit.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/CreateMLInputChannelRequest AWS API Documentation
+    #
+    class CreateMLInputChannelRequest < Struct.new(
+      :membership_identifier,
+      :configured_model_algorithm_associations,
+      :input_channel,
+      :name,
+      :retention_in_days,
+      :description,
+      :kms_key_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ml_input_channel_arn
+    #   The Amazon Resource Name (ARN) of the ML input channel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/CreateMLInputChannelResponse AWS API Documentation
+    #
+    class CreateMLInputChannelResponse < Struct.new(
+      :ml_input_channel_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the member that is creating the trained model.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the trained model.
+    #   @return [String]
+    #
+    # @!attribute [rw] configured_model_algorithm_association_arn
+    #   The associated configured model algorithm used to train this model.
+    #   @return [String]
+    #
+    # @!attribute [rw] hyperparameters
+    #   Algorithm-specific parameters that influence the quality of the
+    #   model. You set hyperparameters before you start the learning
+    #   process.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] environment
+    #   The environment variables to set in the Docker container.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] resource_config
+    #   Information about the EC2 resources that are used to train this
+    #   model.
+    #   @return [Types::ResourceConfig]
+    #
+    # @!attribute [rw] stopping_condition
+    #   The criteria that is used to stop model training.
+    #   @return [Types::StoppingCondition]
+    #
+    # @!attribute [rw] data_channels
+    #   Defines the data channels that are used as input for the trained
+    #   model request.
+    #   @return [Array<Types::ModelTrainingDataChannel>]
+    #
+    # @!attribute [rw] description
+    #   The description of the trained model.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key. This key is used to
+    #   encrypt and decrypt customer-owned data in the trained ML model and
+    #   the associated data.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The optional metadata that you apply to the resource to help you
+    #   categorize and organize them. Each tag consists of a key and an
+    #   optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50.
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8.
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8.
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case sensitive.
+    #
+    #   * Do not use aws:, AWS:, or any upper or lowercase combination of
+    #     such as a prefix for keys as it is reserved for AWS use. You
+    #     cannot edit or delete tag keys with this prefix. Values can have
+    #     this prefix. If a tag value has aws as its prefix but the key does
+    #     not, then Clean Rooms ML considers it to be a user tag and will
+    #     count against the limit of 50 tags. Tags with only the key prefix
+    #     of aws do not count against your tags per resource limit.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/CreateTrainedModelRequest AWS API Documentation
+    #
+    class CreateTrainedModelRequest < Struct.new(
+      :membership_identifier,
+      :name,
+      :configured_model_algorithm_association_arn,
+      :hyperparameters,
+      :environment,
+      :resource_config,
+      :stopping_condition,
+      :data_channels,
+      :description,
+      :kms_key_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trained_model_arn
+    #   The Amazon Resource Name (ARN) of the trained model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/CreateTrainedModelResponse AWS API Documentation
+    #
+    class CreateTrainedModelResponse < Struct.new(
+      :trained_model_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of the training dataset. This name must be unique in your
     #   account and region.
@@ -805,6 +1737,89 @@ module Aws::CleanRoomsML
       include Aws::Structure
     end
 
+    # @!attribute [rw] configured_model_algorithm_association_arn
+    #   The Amazon Resource Name (ARN) of the configured model algorithm
+    #   association that you want to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the member that is deleting the configured
+    #   model algorithm association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/DeleteConfiguredModelAlgorithmAssociationRequest AWS API Documentation
+    #
+    class DeleteConfiguredModelAlgorithmAssociationRequest < Struct.new(
+      :configured_model_algorithm_association_arn,
+      :membership_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configured_model_algorithm_arn
+    #   The Amazon Resource Name (ARN) of the configured model algorithm
+    #   that you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/DeleteConfiguredModelAlgorithmRequest AWS API Documentation
+    #
+    class DeleteConfiguredModelAlgorithmRequest < Struct.new(
+      :configured_model_algorithm_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the of the member that is deleting the ML
+    #   modeling configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/DeleteMLConfigurationRequest AWS API Documentation
+    #
+    class DeleteMLConfigurationRequest < Struct.new(
+      :membership_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ml_input_channel_arn
+    #   The Amazon Resource Name (ARN) of the ML input channel that you want
+    #   to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the membership that contains the ML input
+    #   channel you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/DeleteMLInputChannelDataRequest AWS API Documentation
+    #
+    class DeleteMLInputChannelDataRequest < Struct.new(
+      :ml_input_channel_arn,
+      :membership_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trained_model_arn
+    #   The Amazon Resource Name (ARN) of the trained model whose output you
+    #   want to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the member that is deleting the trained model
+    #   output.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/DeleteTrainedModelOutputRequest AWS API Documentation
+    #
+    class DeleteTrainedModelOutputRequest < Struct.new(
+      :trained_model_arn,
+      :membership_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] training_dataset_arn
     #   The Amazon Resource Name (ARN) of the training dataset that you want
     #   to delete.
@@ -814,6 +1829,20 @@ module Aws::CleanRoomsML
     #
     class DeleteTrainingDatasetRequest < Struct.new(
       :training_dataset_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon S3 location where the exported model artifacts are stored.
+    #
+    # @!attribute [rw] s3_destination
+    #   Provides information about an Amazon S3 bucket and path.
+    #   @return [Types::S3ConfigMap]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/Destination AWS API Documentation
+    #
+    class Destination < Struct.new(
+      :s3_destination)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1007,6 +2036,303 @@ module Aws::CleanRoomsML
       include Aws::Structure
     end
 
+    # @!attribute [rw] configured_model_algorithm_association_arn
+    #   The Amazon Resource Name (ARN) of the configured model algorithm
+    #   association that you want to return information about.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_identifier
+    #   The collaboration ID for the collaboration that contains the
+    #   configured model algorithm association that you want to return
+    #   information about.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetCollaborationConfiguredModelAlgorithmAssociationRequest AWS API Documentation
+    #
+    class GetCollaborationConfiguredModelAlgorithmAssociationRequest < Struct.new(
+      :configured_model_algorithm_association_arn,
+      :collaboration_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] create_time
+    #   The time at which the configured model algorithm association was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the configured model algorithm
+    #   association was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] configured_model_algorithm_association_arn
+    #   The Amazon Resource Name (ARN) of the configured model algorithm
+    #   association.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the member that created the configured model
+    #   algorithm association.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_identifier
+    #   The collaboration ID of the collaboration that contains the
+    #   configured model algorithm association.
+    #   @return [String]
+    #
+    # @!attribute [rw] configured_model_algorithm_arn
+    #   The Amazon Resource Name (ARN) of the configured model algorithm
+    #   association.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the configured model algorithm association.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the configured model algorithm association.
+    #   @return [String]
+    #
+    # @!attribute [rw] creator_account_id
+    #   The account ID of the member that created the configured model
+    #   algorithm association.
+    #   @return [String]
+    #
+    # @!attribute [rw] privacy_configuration
+    #   Information about the privacy configuration for a configured model
+    #   algorithm association.
+    #   @return [Types::PrivacyConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetCollaborationConfiguredModelAlgorithmAssociationResponse AWS API Documentation
+    #
+    class GetCollaborationConfiguredModelAlgorithmAssociationResponse < Struct.new(
+      :create_time,
+      :update_time,
+      :configured_model_algorithm_association_arn,
+      :membership_identifier,
+      :collaboration_identifier,
+      :configured_model_algorithm_arn,
+      :name,
+      :description,
+      :creator_account_id,
+      :privacy_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ml_input_channel_arn
+    #   The Amazon Resource Name (ARN) of the ML input channel that you want
+    #   to get.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_identifier
+    #   The collaboration ID of the collaboration that contains the ML input
+    #   channel that you want to get.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetCollaborationMLInputChannelRequest AWS API Documentation
+    #
+    class GetCollaborationMLInputChannelRequest < Struct.new(
+      :ml_input_channel_arn,
+      :collaboration_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] create_time
+    #   The time at which the ML input channel was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the ML input channel was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creator_account_id
+    #   The account ID of the member who created the ML input channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the membership that contains the ML input
+    #   channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_identifier
+    #   The collaboration ID of the collaboration that contains the ML input
+    #   channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] ml_input_channel_arn
+    #   The Amazon Resource Name (ARN) of the ML input channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the ML input channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] configured_model_algorithm_associations
+    #   The configured model algorithm associations that were used to create
+    #   the ML input channel.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] status
+    #   The status of the ML input channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_details
+    #   Details about the status of a resource.
+    #   @return [Types::StatusDetails]
+    #
+    # @!attribute [rw] retention_in_days
+    #   The number of days to retain the data for the ML input channel.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_records
+    #   The number of records in the ML input channel.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   The description of the ML input channel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetCollaborationMLInputChannelResponse AWS API Documentation
+    #
+    class GetCollaborationMLInputChannelResponse < Struct.new(
+      :create_time,
+      :update_time,
+      :creator_account_id,
+      :membership_identifier,
+      :collaboration_identifier,
+      :ml_input_channel_arn,
+      :name,
+      :configured_model_algorithm_associations,
+      :status,
+      :status_details,
+      :retention_in_days,
+      :number_of_records,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trained_model_arn
+    #   The Amazon Resource Name (ARN) of the trained model that you want to
+    #   return information about.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_identifier
+    #   The collaboration ID that contains the trained model that you want
+    #   to return information about.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetCollaborationTrainedModelRequest AWS API Documentation
+    #
+    class GetCollaborationTrainedModelRequest < Struct.new(
+      :trained_model_arn,
+      :collaboration_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the member that created the trained model.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_identifier
+    #   The collaboration ID of the collaboration that contains the trained
+    #   model.
+    #   @return [String]
+    #
+    # @!attribute [rw] trained_model_arn
+    #   The Amazon Resource Name (ARN) of the trained model.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the trained model.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the trained model.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the trained model.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_details
+    #   Details about the status of a resource.
+    #   @return [Types::StatusDetails]
+    #
+    # @!attribute [rw] configured_model_algorithm_association_arn
+    #   The Amazon Resource Name (ARN) of the configured model algorithm
+    #   association that was used to create this trained model.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_config
+    #   The EC2 resource configuration that was used to train this model.
+    #   @return [Types::ResourceConfig]
+    #
+    # @!attribute [rw] stopping_condition
+    #   The stopping condition that determined when model training ended.
+    #   @return [Types::StoppingCondition]
+    #
+    # @!attribute [rw] metrics_status
+    #   The status of the model metrics.
+    #   @return [String]
+    #
+    # @!attribute [rw] metrics_status_details
+    #   Details about the status information for the model metrics.
+    #   @return [String]
+    #
+    # @!attribute [rw] logs_status
+    #   Status information for the logs.
+    #   @return [String]
+    #
+    # @!attribute [rw] logs_status_details
+    #   Details about the status information for the logs.
+    #   @return [String]
+    #
+    # @!attribute [rw] training_container_image_digest
+    #   Information about the training container image.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time at which the trained model was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the trained model was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creator_account_id
+    #   The account ID of the member that created the trained model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetCollaborationTrainedModelResponse AWS API Documentation
+    #
+    class GetCollaborationTrainedModelResponse < Struct.new(
+      :membership_identifier,
+      :collaboration_identifier,
+      :trained_model_arn,
+      :name,
+      :description,
+      :status,
+      :status_details,
+      :configured_model_algorithm_association_arn,
+      :resource_config,
+      :stopping_condition,
+      :metrics_status,
+      :metrics_status_details,
+      :logs_status,
+      :logs_status_details,
+      :training_container_image_digest,
+      :create_time,
+      :update_time,
+      :creator_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] configured_audience_model_arn
     #   The Amazon Resource Name (ARN) of the configured audience model that
     #   you are interested in.
@@ -1139,6 +2465,757 @@ module Aws::CleanRoomsML
       include Aws::Structure
     end
 
+    # @!attribute [rw] configured_model_algorithm_association_arn
+    #   The Amazon Resource Name (ARN) of the configured model algorithm
+    #   association that you want to return information about.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the member that created the configured model
+    #   algorithm association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetConfiguredModelAlgorithmAssociationRequest AWS API Documentation
+    #
+    class GetConfiguredModelAlgorithmAssociationRequest < Struct.new(
+      :configured_model_algorithm_association_arn,
+      :membership_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] create_time
+    #   The time at which the configured model algorithm association was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the configured model algorithm
+    #   association was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] configured_model_algorithm_association_arn
+    #   The Amazon Resource Name (ARN) of the configured model algorithm
+    #   association.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the member that created the configured model
+    #   algorithm association.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_identifier
+    #   The collaboration ID of the collaboration that contains the
+    #   configured model algorithm association.
+    #   @return [String]
+    #
+    # @!attribute [rw] configured_model_algorithm_arn
+    #   The Amazon Resource Name (ARN) of the configured model algorithm
+    #   that was associated to the collaboration.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the configured model algorithm association.
+    #   @return [String]
+    #
+    # @!attribute [rw] privacy_configuration
+    #   The privacy configuration information for the configured model
+    #   algorithm association.
+    #   @return [Types::PrivacyConfiguration]
+    #
+    # @!attribute [rw] description
+    #   The description of the configured model algorithm association.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The optional metadata that you applied to the resource to help you
+    #   categorize and organize them. Each tag consists of a key and an
+    #   optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50.
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8.
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8.
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case sensitive.
+    #
+    #   * Do not use aws:, AWS:, or any upper or lowercase combination of
+    #     such as a prefix for keys as it is reserved for AWS use. You
+    #     cannot edit or delete tag keys with this prefix. Values can have
+    #     this prefix. If a tag value has aws as its prefix but the key does
+    #     not, then Clean Rooms ML considers it to be a user tag and will
+    #     count against the limit of 50 tags. Tags with only the key prefix
+    #     of aws do not count against your tags per resource limit.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetConfiguredModelAlgorithmAssociationResponse AWS API Documentation
+    #
+    class GetConfiguredModelAlgorithmAssociationResponse < Struct.new(
+      :create_time,
+      :update_time,
+      :configured_model_algorithm_association_arn,
+      :membership_identifier,
+      :collaboration_identifier,
+      :configured_model_algorithm_arn,
+      :name,
+      :privacy_configuration,
+      :description,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configured_model_algorithm_arn
+    #   The Amazon Resource Name (ARN) of the configured model algorithm
+    #   that you want to return information about.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetConfiguredModelAlgorithmRequest AWS API Documentation
+    #
+    class GetConfiguredModelAlgorithmRequest < Struct.new(
+      :configured_model_algorithm_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] create_time
+    #   The time at which the configured model algorithm was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the configured model algorithm was
+    #   updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] configured_model_algorithm_arn
+    #   The Amazon Resource Name (ARN) of the configured model algorithm.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the configured model algorithm.
+    #   @return [String]
+    #
+    # @!attribute [rw] training_container_config
+    #   The configuration information of the training container for the
+    #   configured model algorithm.
+    #   @return [Types::ContainerConfig]
+    #
+    # @!attribute [rw] inference_container_config
+    #   Configuration information for the inference container.
+    #   @return [Types::InferenceContainerConfig]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the service role that was used to
+    #   create the configured model algorithm.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the configured model algorithm.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The optional metadata that you applied to the resource to help you
+    #   categorize and organize them. Each tag consists of a key and an
+    #   optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50.
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8.
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8.
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case sensitive.
+    #
+    #   * Do not use aws:, AWS:, or any upper or lowercase combination of
+    #     such as a prefix for keys as it is reserved for AWS use. You
+    #     cannot edit or delete tag keys with this prefix. Values can have
+    #     this prefix. If a tag value has aws as its prefix but the key does
+    #     not, then Clean Rooms ML considers it to be a user tag and will
+    #     count against the limit of 50 tags. Tags with only the key prefix
+    #     of aws do not count against your tags per resource limit.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key. This key is used to
+    #   encrypt and decrypt customer-owned data in the configured ML model
+    #   and associated data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetConfiguredModelAlgorithmResponse AWS API Documentation
+    #
+    class GetConfiguredModelAlgorithmResponse < Struct.new(
+      :create_time,
+      :update_time,
+      :configured_model_algorithm_arn,
+      :name,
+      :training_container_config,
+      :inference_container_config,
+      :role_arn,
+      :description,
+      :tags,
+      :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the member that owns the ML configuration you
+    #   want to return information about.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetMLConfigurationRequest AWS API Documentation
+    #
+    class GetMLConfigurationRequest < Struct.new(
+      :membership_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the member that owns the ML configuration you
+    #   requested.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_output_location
+    #   The Amazon S3 location where ML model output is stored.
+    #   @return [Types::MLOutputConfiguration]
+    #
+    # @!attribute [rw] create_time
+    #   The time at which the ML configuration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the ML configuration was updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetMLConfigurationResponse AWS API Documentation
+    #
+    class GetMLConfigurationResponse < Struct.new(
+      :membership_identifier,
+      :default_output_location,
+      :create_time,
+      :update_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ml_input_channel_arn
+    #   The Amazon Resource Name (ARN) of the ML input channel that you want
+    #   to get.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the membership that contains the ML input
+    #   channel that you want to get.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetMLInputChannelRequest AWS API Documentation
+    #
+    class GetMLInputChannelRequest < Struct.new(
+      :ml_input_channel_arn,
+      :membership_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] create_time
+    #   The time at which the ML input channel was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the ML input channel was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the membership that contains the ML input
+    #   channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_identifier
+    #   The collaboration ID of the collaboration that contains the ML input
+    #   channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_channel
+    #   The input channel that was used to create the ML input channel.
+    #   @return [Types::InputChannel]
+    #
+    # @!attribute [rw] protected_query_identifier
+    #   The ID of the protected query that was used to create the ML input
+    #   channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] ml_input_channel_arn
+    #   The Amazon Resource Name (ARN) of the ML input channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the ML input channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] configured_model_algorithm_associations
+    #   The configured model algorithm associations that were used to create
+    #   the ML input channel.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] status
+    #   The status of the ML input channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_details
+    #   Details about the status of a resource.
+    #   @return [Types::StatusDetails]
+    #
+    # @!attribute [rw] retention_in_days
+    #   The number of days to keep the data in the ML input channel.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_records
+    #   The number of records in the ML input channel.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_files
+    #   The number of files in the ML input channel.
+    #   @return [Float]
+    #
+    # @!attribute [rw] size_in_gb
+    #   The size, in GB, of the ML input channel.
+    #   @return [Float]
+    #
+    # @!attribute [rw] description
+    #   The description of the ML input channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key that was used to
+    #   create the ML input channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The optional metadata that you applied to the resource to help you
+    #   categorize and organize them. Each tag consists of a key and an
+    #   optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50.
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8.
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8.
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case sensitive.
+    #
+    #   * Do not use aws:, AWS:, or any upper or lowercase combination of
+    #     such as a prefix for keys as it is reserved for AWS use. You
+    #     cannot edit or delete tag keys with this prefix. Values can have
+    #     this prefix. If a tag value has aws as its prefix but the key does
+    #     not, then Clean Rooms ML considers it to be a user tag and will
+    #     count against the limit of 50 tags. Tags with only the key prefix
+    #     of aws do not count against your tags per resource limit.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetMLInputChannelResponse AWS API Documentation
+    #
+    class GetMLInputChannelResponse < Struct.new(
+      :create_time,
+      :update_time,
+      :membership_identifier,
+      :collaboration_identifier,
+      :input_channel,
+      :protected_query_identifier,
+      :ml_input_channel_arn,
+      :name,
+      :configured_model_algorithm_associations,
+      :status,
+      :status_details,
+      :retention_in_days,
+      :number_of_records,
+      :number_of_files,
+      :size_in_gb,
+      :description,
+      :kms_key_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] membership_identifier
+    #   Provides the membership ID of the membership that contains the
+    #   trained model inference job that you are interested in.
+    #   @return [String]
+    #
+    # @!attribute [rw] trained_model_inference_job_arn
+    #   Provides the Amazon Resource Name (ARN) of the trained model
+    #   inference job that you are interested in.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetTrainedModelInferenceJobRequest AWS API Documentation
+    #
+    class GetTrainedModelInferenceJobRequest < Struct.new(
+      :membership_identifier,
+      :trained_model_inference_job_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] create_time
+    #   The time at which the trained model inference job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the trained model inference job was
+    #   updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] trained_model_inference_job_arn
+    #   The Amazon Resource Name (ARN) of the trained model inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] configured_model_algorithm_association_arn
+    #   The Amazon Resource Name (ARN) of the configured model algorithm
+    #   association that was used for the trained model inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the trained model inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the trained model inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] trained_model_arn
+    #   The Amazon Resource Name (ARN) for the trained model that was used
+    #   for the trained model inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_config
+    #   The resource configuration information for the trained model
+    #   inference job.
+    #   @return [Types::InferenceResourceConfig]
+    #
+    # @!attribute [rw] output_configuration
+    #   The output configuration information for the trained model inference
+    #   job.
+    #   @return [Types::InferenceOutputConfiguration]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the membership that contains the trained model
+    #   inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source
+    #   The data source that was used for the trained model inference job.
+    #   @return [Types::ModelInferenceDataSource]
+    #
+    # @!attribute [rw] container_execution_parameters
+    #   The execution parameters for the model inference job container.
+    #   @return [Types::InferenceContainerExecutionParameters]
+    #
+    # @!attribute [rw] status_details
+    #   Details about the status of a resource.
+    #   @return [Types::StatusDetails]
+    #
+    # @!attribute [rw] description
+    #   The description of the trained model inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] inference_container_image_digest
+    #   Information about the training container image.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment
+    #   The environment variables to set in the Docker container.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key. This key is used to
+    #   encrypt and decrypt customer-owned data in the ML inference job and
+    #   associated data.
+    #   @return [String]
+    #
+    # @!attribute [rw] metrics_status
+    #   The metrics status for the trained model inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] metrics_status_details
+    #   Details about the metrics status for the trained model inference
+    #   job.
+    #   @return [String]
+    #
+    # @!attribute [rw] logs_status
+    #   The logs status for the trained model inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] logs_status_details
+    #   Details about the logs status for the trained model inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The optional metadata that you applied to the resource to help you
+    #   categorize and organize them. Each tag consists of a key and an
+    #   optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50.
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8.
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8.
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case sensitive.
+    #
+    #   * Do not use aws:, AWS:, or any upper or lowercase combination of
+    #     such as a prefix for keys as it is reserved for AWS use. You
+    #     cannot edit or delete tag keys with this prefix. Values can have
+    #     this prefix. If a tag value has aws as its prefix but the key does
+    #     not, then Clean Rooms ML considers it to be a user tag and will
+    #     count against the limit of 50 tags. Tags with only the key prefix
+    #     of aws do not count against your tags per resource limit.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetTrainedModelInferenceJobResponse AWS API Documentation
+    #
+    class GetTrainedModelInferenceJobResponse < Struct.new(
+      :create_time,
+      :update_time,
+      :trained_model_inference_job_arn,
+      :configured_model_algorithm_association_arn,
+      :name,
+      :status,
+      :trained_model_arn,
+      :resource_config,
+      :output_configuration,
+      :membership_identifier,
+      :data_source,
+      :container_execution_parameters,
+      :status_details,
+      :description,
+      :inference_container_image_digest,
+      :environment,
+      :kms_key_arn,
+      :metrics_status,
+      :metrics_status_details,
+      :logs_status,
+      :logs_status_details,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trained_model_arn
+    #   The Amazon Resource Name (ARN) of the trained model that you are
+    #   interested in.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the member that created the trained model that
+    #   you are interested in.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetTrainedModelRequest AWS API Documentation
+    #
+    class GetTrainedModelRequest < Struct.new(
+      :trained_model_arn,
+      :membership_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the member that created the trained model.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_identifier
+    #   The collaboration ID of the collaboration that contains the trained
+    #   model.
+    #   @return [String]
+    #
+    # @!attribute [rw] trained_model_arn
+    #   The Amazon Resource Name (ARN) of the trained model.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the trained model.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the trained model.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the trained model.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_details
+    #   Details about the status of a resource.
+    #   @return [Types::StatusDetails]
+    #
+    # @!attribute [rw] configured_model_algorithm_association_arn
+    #   The Amazon Resource Name (ARN) of the configured model algorithm
+    #   association that was used to create the trained model.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_config
+    #   The EC2 resource configuration that was used to create the trained
+    #   model.
+    #   @return [Types::ResourceConfig]
+    #
+    # @!attribute [rw] stopping_condition
+    #   The stopping condition that was used to terminate model training.
+    #   @return [Types::StoppingCondition]
+    #
+    # @!attribute [rw] metrics_status
+    #   The status of the model metrics.
+    #   @return [String]
+    #
+    # @!attribute [rw] metrics_status_details
+    #   Details about the metrics status for the trained model.
+    #   @return [String]
+    #
+    # @!attribute [rw] logs_status
+    #   The logs status for the trained model.
+    #   @return [String]
+    #
+    # @!attribute [rw] logs_status_details
+    #   Details about the logs status for the trained model.
+    #   @return [String]
+    #
+    # @!attribute [rw] training_container_image_digest
+    #   Information about the training image container.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time at which the trained model was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the trained model was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] hyperparameters
+    #   The hyperparameters that were used to create the trained model.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] environment
+    #   The EC2 environment that was used to create the trained model.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key. This key is used to
+    #   encrypt and decrypt customer-owned data in the trained ML model and
+    #   associated data.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The optional metadata that you applied to the resource to help you
+    #   categorize and organize them. Each tag consists of a key and an
+    #   optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50.
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8.
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8.
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case sensitive.
+    #
+    #   * Do not use aws:, AWS:, or any upper or lowercase combination of
+    #     such as a prefix for keys as it is reserved for AWS use. You
+    #     cannot edit or delete tag keys with this prefix. Values can have
+    #     this prefix. If a tag value has aws as its prefix but the key does
+    #     not, then Clean Rooms ML considers it to be a user tag and will
+    #     count against the limit of 50 tags. Tags with only the key prefix
+    #     of aws do not count against your tags per resource limit.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] data_channels
+    #   The data channels that were used for the trained model.
+    #   @return [Array<Types::ModelTrainingDataChannel>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetTrainedModelResponse AWS API Documentation
+    #
+    class GetTrainedModelResponse < Struct.new(
+      :membership_identifier,
+      :collaboration_identifier,
+      :trained_model_arn,
+      :name,
+      :description,
+      :status,
+      :status_details,
+      :configured_model_algorithm_association_arn,
+      :resource_config,
+      :stopping_condition,
+      :metrics_status,
+      :metrics_status_details,
+      :logs_status,
+      :logs_status_details,
+      :training_container_image_digest,
+      :create_time,
+      :update_time,
+      :hyperparameters,
+      :environment,
+      :kms_key_arn,
+      :tags,
+      :data_channels)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] training_dataset_arn
     #   The Amazon Resource Name (ARN) of the training dataset that you are
     #   interested in.
@@ -1228,6 +3305,143 @@ module Aws::CleanRoomsML
       include Aws::Structure
     end
 
+    # Provides configuration information for the inference container.
+    #
+    # @!attribute [rw] image_uri
+    #   The registry path of the docker image that contains the inference
+    #   algorithm. Clean Rooms ML supports both `registry/repository[:tag]`
+    #   and `registry/repositry[@digest]` image path formats. For more
+    #   information about using images in Clean Rooms ML, see the [Sagemaker
+    #   API reference][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AlgorithmSpecification.html#sagemaker-Type-AlgorithmSpecification-TrainingImage
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/InferenceContainerConfig AWS API Documentation
+    #
+    class InferenceContainerConfig < Struct.new(
+      :image_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides execution parameters for the inference container.
+    #
+    # @!attribute [rw] max_payload_in_mb
+    #   The maximum size of the inference container payload, specified in
+    #   MB.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/InferenceContainerExecutionParameters AWS API Documentation
+    #
+    class InferenceContainerExecutionParameters < Struct.new(
+      :max_payload_in_mb)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration information about how the inference output is stored.
+    #
+    # @!attribute [rw] accept
+    #   The MIME type used to specify the output data.
+    #   @return [String]
+    #
+    # @!attribute [rw] members
+    #   Defines the members that can receive inference output.
+    #   @return [Array<Types::InferenceReceiverMember>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/InferenceOutputConfiguration AWS API Documentation
+    #
+    class InferenceOutputConfiguration < Struct.new(
+      :accept,
+      :members)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines who will receive inference results.
+    #
+    # @!attribute [rw] account_id
+    #   The account ID of the member that can receive inference results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/InferenceReceiverMember AWS API Documentation
+    #
+    class InferenceReceiverMember < Struct.new(
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the resources used to perform model inference.
+    #
+    # @!attribute [rw] instance_type
+    #   The type of instance that is used to perform model inference.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_count
+    #   The number of instances to use.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/InferenceResourceConfig AWS API Documentation
+    #
+    class InferenceResourceConfig < Struct.new(
+      :instance_type,
+      :instance_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the data source that is used to create an
+    # ML input channel.
+    #
+    # @!attribute [rw] data_source
+    #   The data source that is used to create the ML input channel.
+    #   @return [Types::InputChannelDataSource]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM role that Clean Rooms ML can assume to read the
+    #   data referred to in the `dataSource` field the input channel.
+    #
+    #   Passing a role across AWS accounts is not allowed. If you pass a
+    #   role that isn't in your account, you get an `AccessDeniedException`
+    #   error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/InputChannel AWS API Documentation
+    #
+    class InputChannel < Struct.new(
+      :data_source,
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the data source that is used to define an input channel.
+    #
+    # @note InputChannelDataSource is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note InputChannelDataSource is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of InputChannelDataSource corresponding to the set member.
+    #
+    # @!attribute [rw] protected_query_input_parameters
+    #   Provides information necessary to perform the protected query.
+    #   @return [Types::ProtectedQueryInputParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/InputChannelDataSource AWS API Documentation
+    #
+    class InputChannelDataSource < Struct.new(
+      :protected_query_input_parameters,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ProtectedQueryInputParameters < InputChannelDataSource; end
+      class Unknown < InputChannelDataSource; end
+    end
+
     # @!attribute [rw] next_token
     #   The token value retrieved from a previous call to access the next
     #   page of results.
@@ -1253,8 +3467,7 @@ module Aws::CleanRoomsML
     end
 
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The token value used to access the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] audience_export_jobs
@@ -1302,8 +3515,7 @@ module Aws::CleanRoomsML
     end
 
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The token value used to access the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] audience_generation_jobs
@@ -1338,8 +3550,7 @@ module Aws::CleanRoomsML
     end
 
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The token value used to access the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] audience_models
@@ -1364,6 +3575,225 @@ module Aws::CleanRoomsML
     #   The maximum size of the results that is returned per call.
     #   @return [Integer]
     #
+    # @!attribute [rw] collaboration_identifier
+    #   The collaboration ID of the collaboration that contains the
+    #   configured model algorithm associations that you are interested in.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListCollaborationConfiguredModelAlgorithmAssociationsRequest AWS API Documentation
+    #
+    class ListCollaborationConfiguredModelAlgorithmAssociationsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :collaboration_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token value used to access the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_configured_model_algorithm_associations
+    #   The configured model algorithm associations that belong to this
+    #   collaboration.
+    #   @return [Array<Types::CollaborationConfiguredModelAlgorithmAssociationSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListCollaborationConfiguredModelAlgorithmAssociationsResponse AWS API Documentation
+    #
+    class ListCollaborationConfiguredModelAlgorithmAssociationsResponse < Struct.new(
+      :next_token,
+      :collaboration_configured_model_algorithm_associations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] collaboration_identifier
+    #   The collaboration ID of the collaboration that contains the ML input
+    #   channels that you want to list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListCollaborationMLInputChannelsRequest AWS API Documentation
+    #
+    class ListCollaborationMLInputChannelsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :collaboration_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token value used to access the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_ml_input_channels_list
+    #   The list of ML input channels that you wanted.
+    #   @return [Array<Types::CollaborationMLInputChannelSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListCollaborationMLInputChannelsResponse AWS API Documentation
+    #
+    class ListCollaborationMLInputChannelsResponse < Struct.new(
+      :next_token,
+      :collaboration_ml_input_channels_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of the results that is returned per call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] collaboration_identifier
+    #   The collaboration ID of the collaboration that contains the trained
+    #   model export jobs that you are interested in.
+    #   @return [String]
+    #
+    # @!attribute [rw] trained_model_arn
+    #   The Amazon Resource Name (ARN) of the trained model that was used to
+    #   create the export jobs that you are interested in.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListCollaborationTrainedModelExportJobsRequest AWS API Documentation
+    #
+    class ListCollaborationTrainedModelExportJobsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :collaboration_identifier,
+      :trained_model_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token value used to access the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_trained_model_export_jobs
+    #   The exports jobs that exist for the requested trained model in the
+    #   requested collaboration.
+    #   @return [Array<Types::CollaborationTrainedModelExportJobSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListCollaborationTrainedModelExportJobsResponse AWS API Documentation
+    #
+    class ListCollaborationTrainedModelExportJobsResponse < Struct.new(
+      :next_token,
+      :collaboration_trained_model_export_jobs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of the results that is returned per call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] collaboration_identifier
+    #   The collaboration ID of the collaboration that contains the trained
+    #   model inference jobs that you are interested in.
+    #   @return [String]
+    #
+    # @!attribute [rw] trained_model_arn
+    #   The Amazon Resource Name (ARN) of the trained model that was used to
+    #   create the trained model inference jobs that you are interested in.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListCollaborationTrainedModelInferenceJobsRequest AWS API Documentation
+    #
+    class ListCollaborationTrainedModelInferenceJobsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :collaboration_identifier,
+      :trained_model_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token value used to access the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_trained_model_inference_jobs
+    #   The trained model inference jobs that you are interested in.
+    #   @return [Array<Types::CollaborationTrainedModelInferenceJobSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListCollaborationTrainedModelInferenceJobsResponse AWS API Documentation
+    #
+    class ListCollaborationTrainedModelInferenceJobsResponse < Struct.new(
+      :next_token,
+      :collaboration_trained_model_inference_jobs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of the results that is returned per call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] collaboration_identifier
+    #   The collaboration ID of the collaboration that contains the trained
+    #   models you are interested in.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListCollaborationTrainedModelsRequest AWS API Documentation
+    #
+    class ListCollaborationTrainedModelsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :collaboration_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token value used to access the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_trained_models
+    #   The trained models in the collaboration that you requested.
+    #   @return [Array<Types::CollaborationTrainedModelSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListCollaborationTrainedModelsResponse AWS API Documentation
+    #
+    class ListCollaborationTrainedModelsResponse < Struct.new(
+      :next_token,
+      :collaboration_trained_models)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of the results that is returned per call.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListConfiguredAudienceModelsRequest AWS API Documentation
     #
     class ListConfiguredAudienceModelsRequest < Struct.new(
@@ -1374,8 +3804,7 @@ module Aws::CleanRoomsML
     end
 
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The token value used to access the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] configured_audience_models
@@ -1387,6 +3816,123 @@ module Aws::CleanRoomsML
     class ListConfiguredAudienceModelsResponse < Struct.new(
       :next_token,
       :configured_audience_models)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of the results that is returned per call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the member that created the configured model
+    #   algorithm associations you are interested in.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListConfiguredModelAlgorithmAssociationsRequest AWS API Documentation
+    #
+    class ListConfiguredModelAlgorithmAssociationsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :membership_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token value used to access the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] configured_model_algorithm_associations
+    #   The list of configured model algorithm associations.
+    #   @return [Array<Types::ConfiguredModelAlgorithmAssociationSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListConfiguredModelAlgorithmAssociationsResponse AWS API Documentation
+    #
+    class ListConfiguredModelAlgorithmAssociationsResponse < Struct.new(
+      :next_token,
+      :configured_model_algorithm_associations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of the results that is returned per call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListConfiguredModelAlgorithmsRequest AWS API Documentation
+    #
+    class ListConfiguredModelAlgorithmsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token value used to access the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] configured_model_algorithms
+    #   The list of configured model algorithms.
+    #   @return [Array<Types::ConfiguredModelAlgorithmSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListConfiguredModelAlgorithmsResponse AWS API Documentation
+    #
+    class ListConfiguredModelAlgorithmsResponse < Struct.new(
+      :next_token,
+      :configured_model_algorithms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of ML input channels to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the membership that contains the ML input
+    #   channels that you want to list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListMLInputChannelsRequest AWS API Documentation
+    #
+    class ListMLInputChannelsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :membership_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token value used to access the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] ml_input_channels_list
+    #   The list of ML input channels that you wanted.
+    #   @return [Array<Types::MLInputChannelSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListMLInputChannelsResponse AWS API Documentation
+    #
+    class ListMLInputChannelsResponse < Struct.new(
+      :next_token,
+      :ml_input_channels_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1425,6 +3971,93 @@ module Aws::CleanRoomsML
     #   The maximum size of the results that is returned per call.
     #   @return [Integer]
     #
+    # @!attribute [rw] membership_identifier
+    #   The membership
+    #   @return [String]
+    #
+    # @!attribute [rw] trained_model_arn
+    #   The Amazon Resource Name (ARN) of a trained model that was used to
+    #   create the trained model inference jobs that you are interested in.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListTrainedModelInferenceJobsRequest AWS API Documentation
+    #
+    class ListTrainedModelInferenceJobsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :membership_identifier,
+      :trained_model_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token value used to access the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] trained_model_inference_jobs
+    #   Returns the requested trained model inference jobs.
+    #   @return [Array<Types::TrainedModelInferenceJobSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListTrainedModelInferenceJobsResponse AWS API Documentation
+    #
+    class ListTrainedModelInferenceJobsResponse < Struct.new(
+      :next_token,
+      :trained_model_inference_jobs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of the results that is returned per call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the member that created the trained models you
+    #   are interested in.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListTrainedModelsRequest AWS API Documentation
+    #
+    class ListTrainedModelsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :membership_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token value used to access the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] trained_models
+    #   The list of trained models.
+    #   @return [Array<Types::TrainedModelSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListTrainedModelsResponse AWS API Documentation
+    #
+    class ListTrainedModelsResponse < Struct.new(
+      :next_token,
+      :trained_models)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of the results that is returned per call.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListTrainingDatasetsRequest AWS API Documentation
     #
     class ListTrainingDatasetsRequest < Struct.new(
@@ -1435,8 +4068,7 @@ module Aws::CleanRoomsML
     end
 
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The token value used to access the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] training_datasets
@@ -1449,6 +4081,243 @@ module Aws::CleanRoomsML
       :next_token,
       :training_datasets)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the information necessary for a user to access the logs.
+    #
+    # @!attribute [rw] allowed_account_ids
+    #   A list of account IDs that are allowed to access the logs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filter_pattern
+    #   A regular expression pattern that is used to parse the logs and
+    #   return information that matches the pattern.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/LogsConfigurationPolicy AWS API Documentation
+    #
+    class LogsConfigurationPolicy < Struct.new(
+      :allowed_account_ids,
+      :filter_pattern)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides summary information about the ML input channel.
+    #
+    # @!attribute [rw] create_time
+    #   The time at which the ML input channel was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the ML input channel was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the membership that contains the ML input
+    #   channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_identifier
+    #   The collaboration ID of the collaboration that contains the ML input
+    #   channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the ML input channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] configured_model_algorithm_associations
+    #   The associated configured model algorithms used to create the ML
+    #   input channel.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] protected_query_identifier
+    #   The ID of the protected query that was used to create the ML input
+    #   channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] ml_input_channel_arn
+    #   The Amazon Resource Name (ARN) of the ML input channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the ML input channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the ML input channel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/MLInputChannelSummary AWS API Documentation
+    #
+    class MLInputChannelSummary < Struct.new(
+      :create_time,
+      :update_time,
+      :membership_identifier,
+      :collaboration_identifier,
+      :name,
+      :configured_model_algorithm_associations,
+      :protected_query_identifier,
+      :ml_input_channel_arn,
+      :status,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration information about how the exported model artifacts are
+    # stored.
+    #
+    # @!attribute [rw] destination
+    #   The Amazon S3 location where exported model artifacts are stored.
+    #   @return [Types::Destination]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the service access role that is
+    #   used to store the model artifacts.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/MLOutputConfiguration AWS API Documentation
+    #
+    class MLOutputConfiguration < Struct.new(
+      :destination,
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the model metric that is reported for a trained
+    # model.
+    #
+    # @!attribute [rw] name
+    #   The name of the model metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] regex
+    #   The regular expression statement that defines how the model metric
+    #   is reported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/MetricDefinition AWS API Documentation
+    #
+    class MetricDefinition < Struct.new(
+      :name,
+      :regex)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the configuration policy for metrics generation.
+    #
+    # @!attribute [rw] noise_level
+    #   The noise level for the generated metrics.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/MetricsConfigurationPolicy AWS API Documentation
+    #
+    class MetricsConfigurationPolicy < Struct.new(
+      :noise_level)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines information about the data source used for model inference.
+    #
+    # @!attribute [rw] ml_input_channel_arn
+    #   The Amazon Resource Name (ARN) of the ML input channel for this
+    #   model inference data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ModelInferenceDataSource AWS API Documentation
+    #
+    class ModelInferenceDataSource < Struct.new(
+      :ml_input_channel_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the model training data channel. A training data
+    # channel is a named data source that the training algorithms can
+    # consume.
+    #
+    # @!attribute [rw] ml_input_channel_arn
+    #   The Amazon Resource Name (ARN) of the ML input channel for this
+    #   model training data channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_name
+    #   The name of the training data channel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ModelTrainingDataChannel AWS API Documentation
+    #
+    class ModelTrainingDataChannel < Struct.new(
+      :ml_input_channel_arn,
+      :channel_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the privacy configuration for a configured model
+    # algorithm association.
+    #
+    # @!attribute [rw] policies
+    #   The privacy configuration policies for a configured model algorithm
+    #   association.
+    #   @return [Types::PrivacyConfigurationPolicies]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/PrivacyConfiguration AWS API Documentation
+    #
+    class PrivacyConfiguration < Struct.new(
+      :policies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the privacy configuration policies for a configured
+    # model algorithm association.
+    #
+    # @!attribute [rw] trained_models
+    #   Specifies who will receive the trained models.
+    #   @return [Types::TrainedModelsConfigurationPolicy]
+    #
+    # @!attribute [rw] trained_model_exports
+    #   Specifies who will receive the trained model export.
+    #   @return [Types::TrainedModelExportsConfigurationPolicy]
+    #
+    # @!attribute [rw] trained_model_inference_jobs
+    #   Specifies who will receive the trained model inference jobs.
+    #   @return [Types::TrainedModelInferenceJobsConfigurationPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/PrivacyConfigurationPolicies AWS API Documentation
+    #
+    class PrivacyConfigurationPolicies < Struct.new(
+      :trained_models,
+      :trained_model_exports,
+      :trained_model_inference_jobs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information necessary to perform the protected query.
+    #
+    # @!attribute [rw] sql_parameters
+    #   The parameters for the SQL type Protected Query.
+    #   @return [Types::ProtectedQuerySQLParameters]
+    #
+    # @!attribute [rw] compute_configuration
+    #   Provides configuration information for the workers that will perform
+    #   the protected query.
+    #   @return [Types::ComputeConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ProtectedQueryInputParameters AWS API Documentation
+    #
+    class ProtectedQueryInputParameters < Struct.new(
+      :sql_parameters,
+      :compute_configuration)
+      SENSITIVE = [:sql_parameters]
       include Aws::Structure
     end
 
@@ -1525,6 +4394,24 @@ module Aws::CleanRoomsML
       include Aws::Structure
     end
 
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the member that is being configured.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_output_location
+    #   The default Amazon S3 location where ML output is stored for the
+    #   specified member.
+    #   @return [Types::MLOutputConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/PutMLConfigurationRequest AWS API Documentation
+    #
+    class PutMLConfigurationRequest < Struct.new(
+      :membership_identifier,
+      :default_output_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The relevance score of a generated audience.
     #
     # @!attribute [rw] audience_size
@@ -1541,6 +4428,30 @@ module Aws::CleanRoomsML
     class RelevanceMetric < Struct.new(
       :audience_size,
       :score)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the EC2 resources that are used to train the model.
+    #
+    # @!attribute [rw] instance_count
+    #   The number of resources that are used to train the model.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type that is used to train the model.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_size_in_gb
+    #   The maximum size of the instance that is used to train the model.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ResourceConfig AWS API Documentation
+    #
+    class ResourceConfig < Struct.new(
+      :instance_count,
+      :instance_type,
+      :volume_size_in_gb)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1700,6 +4611,157 @@ module Aws::CleanRoomsML
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   The name of the trained model export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] trained_model_arn
+    #   The Amazon Resource Name (ARN) of the trained model that you want to
+    #   export.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the member that is receiving the exported
+    #   trained model artifacts.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_configuration
+    #   The output configuration information for the trained model export
+    #   job.
+    #   @return [Types::TrainedModelExportOutputConfiguration]
+    #
+    # @!attribute [rw] description
+    #   The description of the trained model export job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/StartTrainedModelExportJobRequest AWS API Documentation
+    #
+    class StartTrainedModelExportJobRequest < Struct.new(
+      :name,
+      :trained_model_arn,
+      :membership_identifier,
+      :output_configuration,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the membership that contains the trained model
+    #   inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the trained model inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] trained_model_arn
+    #   The Amazon Resource Name (ARN) of the trained model that is used for
+    #   this trained model inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] configured_model_algorithm_association_arn
+    #   The Amazon Resource Name (ARN) of the configured model algorithm
+    #   association that is used for this trained model inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_config
+    #   Defines the resource configuration for the trained model inference
+    #   job.
+    #   @return [Types::InferenceResourceConfig]
+    #
+    # @!attribute [rw] output_configuration
+    #   Defines the output configuration information for the trained model
+    #   inference job.
+    #   @return [Types::InferenceOutputConfiguration]
+    #
+    # @!attribute [rw] data_source
+    #   Defines he data source that is used for the trained model inference
+    #   job.
+    #   @return [Types::ModelInferenceDataSource]
+    #
+    # @!attribute [rw] description
+    #   The description of the trained model inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_execution_parameters
+    #   The execution parameters for the container.
+    #   @return [Types::InferenceContainerExecutionParameters]
+    #
+    # @!attribute [rw] environment
+    #   The environment variables to set in the Docker container.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key. This key is used to
+    #   encrypt and decrypt customer-owned data in the ML inference job and
+    #   associated data.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The optional metadata that you apply to the resource to help you
+    #   categorize and organize them. Each tag consists of a key and an
+    #   optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50.
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8.
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8.
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case sensitive.
+    #
+    #   * Do not use aws:, AWS:, or any upper or lowercase combination of
+    #     such as a prefix for keys as it is reserved for AWS use. You
+    #     cannot edit or delete tag keys with this prefix. Values can have
+    #     this prefix. If a tag value has aws as its prefix but the key does
+    #     not, then Clean Rooms ML considers it to be a user tag and will
+    #     count against the limit of 50 tags. Tags with only the key prefix
+    #     of aws do not count against your tags per resource limit.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/StartTrainedModelInferenceJobRequest AWS API Documentation
+    #
+    class StartTrainedModelInferenceJobRequest < Struct.new(
+      :membership_identifier,
+      :name,
+      :trained_model_arn,
+      :configured_model_algorithm_association_arn,
+      :resource_config,
+      :output_configuration,
+      :data_source,
+      :description,
+      :container_execution_parameters,
+      :environment,
+      :kms_key_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trained_model_inference_job_arn
+    #   The Amazon Resource Name (ARN) of the trained model inference job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/StartTrainedModelInferenceJobResponse AWS API Documentation
+    #
+    class StartTrainedModelInferenceJobResponse < Struct.new(
+      :trained_model_inference_job_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about the status of a resource.
     #
     # @!attribute [rw] status_code
@@ -1719,6 +4781,21 @@ module Aws::CleanRoomsML
     class StatusDetails < Struct.new(
       :status_code,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The criteria used to stop model training.
+    #
+    # @!attribute [rw] max_runtime_in_seconds
+    #   The maximum amount of time, in seconds, that model training can run
+    #   before it is terminated.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/StoppingCondition AWS API Documentation
+    #
+    class StoppingCondition < Struct.new(
+      :max_runtime_in_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1773,6 +4850,281 @@ module Aws::CleanRoomsML
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # Information about the output of the trained model export job.
+    #
+    # @!attribute [rw] members
+    #   The members that will received the exported trained model output.
+    #   @return [Array<Types::TrainedModelExportReceiverMember>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/TrainedModelExportOutputConfiguration AWS API Documentation
+    #
+    class TrainedModelExportOutputConfiguration < Struct.new(
+      :members)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the member who will receive trained model
+    # exports.
+    #
+    # @!attribute [rw] account_id
+    #   The account ID of the member who will receive trained model exports.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/TrainedModelExportReceiverMember AWS API Documentation
+    #
+    class TrainedModelExportReceiverMember < Struct.new(
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about how the trained model exports are configured.
+    #
+    # @!attribute [rw] max_size
+    #   The maximum size of the data that can be exported.
+    #   @return [Types::TrainedModelExportsMaxSize]
+    #
+    # @!attribute [rw] files_to_export
+    #   The files that are exported during the trained model export job.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/TrainedModelExportsConfigurationPolicy AWS API Documentation
+    #
+    class TrainedModelExportsConfigurationPolicy < Struct.new(
+      :max_size,
+      :files_to_export)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The maximum size of the trained model metrics that can be exported. If
+    # the trained model metrics dataset is larger than this value, it will
+    # not be exported.
+    #
+    # @!attribute [rw] unit
+    #   The unit of measurement for the data size.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The maximum size of the dataset to export.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/TrainedModelExportsMaxSize AWS API Documentation
+    #
+    class TrainedModelExportsMaxSize < Struct.new(
+      :unit,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the trained model inference job.
+    #
+    # @!attribute [rw] trained_model_inference_job_arn
+    #   The Amazon Resource Name (ARN) of the trained model inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] configured_model_algorithm_association_arn
+    #   The Amazon Resource Name (ARN) of the configured model algorithm
+    #   association that is used for the trained model inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the membership that contains the trained model
+    #   inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] trained_model_arn
+    #   The Amazon Resource Name (ARN) of the trained model that is used for
+    #   the trained model inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_identifier
+    #   The collaboration ID of the collaboration that contains the trained
+    #   model inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the trained model inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_configuration
+    #   The output configuration information of the trained model job.
+    #   @return [Types::InferenceOutputConfiguration]
+    #
+    # @!attribute [rw] name
+    #   The name of the trained model inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the trained model inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] metrics_status
+    #   The metric status of the trained model inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] metrics_status_details
+    #   Details about the metrics status for the trained model inference
+    #   job.
+    #   @return [String]
+    #
+    # @!attribute [rw] logs_status
+    #   The log status of the trained model inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] logs_status_details
+    #   Details about the log status for the trained model inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time at which the trained model inference job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the trained model inference job was
+    #   updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/TrainedModelInferenceJobSummary AWS API Documentation
+    #
+    class TrainedModelInferenceJobSummary < Struct.new(
+      :trained_model_inference_job_arn,
+      :configured_model_algorithm_association_arn,
+      :membership_identifier,
+      :trained_model_arn,
+      :collaboration_identifier,
+      :status,
+      :output_configuration,
+      :name,
+      :description,
+      :metrics_status,
+      :metrics_status_details,
+      :logs_status,
+      :logs_status_details,
+      :create_time,
+      :update_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides configuration information for the trained model inference
+    # job.
+    #
+    # @!attribute [rw] container_logs
+    #   The logs container for the trained model inference job.
+    #   @return [Array<Types::LogsConfigurationPolicy>]
+    #
+    # @!attribute [rw] max_output_size
+    #   The maximum allowed size of the output of the trained model
+    #   inference job.
+    #   @return [Types::TrainedModelInferenceMaxOutputSize]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/TrainedModelInferenceJobsConfigurationPolicy AWS API Documentation
+    #
+    class TrainedModelInferenceJobsConfigurationPolicy < Struct.new(
+      :container_logs,
+      :max_output_size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the maximum output size for a trained model
+    # inference job.
+    #
+    # @!attribute [rw] unit
+    #   The measurement unit to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The maximum output size value.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/TrainedModelInferenceMaxOutputSize AWS API Documentation
+    #
+    class TrainedModelInferenceMaxOutputSize < Struct.new(
+      :unit,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about the trained model.
+    #
+    # @!attribute [rw] create_time
+    #   The time at which the trained model was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the trained model was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] trained_model_arn
+    #   The Amazon Resource Name (ARN) of the trained model.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the trained model.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the trained model.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The membership ID of the member that created the trained model.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_identifier
+    #   The collaboration ID of the collaboration that contains the trained
+    #   model.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the trained model.
+    #   @return [String]
+    #
+    # @!attribute [rw] configured_model_algorithm_association_arn
+    #   The Amazon Resource Name (ARN) of the configured model algorithm
+    #   association that was used to create this trained model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/TrainedModelSummary AWS API Documentation
+    #
+    class TrainedModelSummary < Struct.new(
+      :create_time,
+      :update_time,
+      :trained_model_arn,
+      :name,
+      :description,
+      :membership_identifier,
+      :collaboration_identifier,
+      :status,
+      :configured_model_algorithm_association_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration policy for the trained models.
+    #
+    # @!attribute [rw] container_logs
+    #   The container for the logs of the trained model.
+    #   @return [Array<Types::LogsConfigurationPolicy>]
+    #
+    # @!attribute [rw] container_metrics
+    #   The container for the metrics of the trained model.
+    #   @return [Types::MetricsConfigurationPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/TrainedModelsConfigurationPolicy AWS API Documentation
+    #
+    class TrainedModelsConfigurationPolicy < Struct.new(
+      :container_logs,
+      :container_metrics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Provides information about the training dataset.
     #
@@ -1902,6 +5254,26 @@ module Aws::CleanRoomsML
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration information about the compute workers that perform the
+    # transform job.
+    #
+    # @!attribute [rw] type
+    #   The instance type of the compute workers that are used.
+    #   @return [String]
+    #
+    # @!attribute [rw] number
+    #   The number of compute workers that are used.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/WorkerComputeConfiguration AWS API Documentation
+    #
+    class WorkerComputeConfiguration < Struct.new(
+      :type,
+      :number)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -190,6 +190,7 @@ module Aws::IoT
     class AttachThingPrincipalRequest
       attr_accessor thing_name: ::String
       attr_accessor principal: ::String
+      attr_accessor thing_principal_type: ("EXCLUSIVE_THING" | "NON_EXCLUSIVE_THING")
       SENSITIVE: []
     end
 
@@ -3152,6 +3153,20 @@ module Aws::IoT
       SENSITIVE: []
     end
 
+    class ListPrincipalThingsV2Request
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor principal: ::String
+      attr_accessor thing_principal_type: ("EXCLUSIVE_THING" | "NON_EXCLUSIVE_THING")
+      SENSITIVE: []
+    end
+
+    class ListPrincipalThingsV2Response
+      attr_accessor principal_thing_objects: ::Array[Types::PrincipalThingObject]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListProvisioningTemplateVersionsRequest
       attr_accessor template_name: ::String
       attr_accessor max_results: ::Integer
@@ -3346,6 +3361,20 @@ module Aws::IoT
 
     class ListThingPrincipalsResponse
       attr_accessor principals: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListThingPrincipalsV2Request
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor thing_name: ::String
+      attr_accessor thing_principal_type: ("EXCLUSIVE_THING" | "NON_EXCLUSIVE_THING")
+      SENSITIVE: []
+    end
+
+    class ListThingPrincipalsV2Response
+      attr_accessor thing_principal_objects: ::Array[Types::ThingPrincipalObject]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -3611,6 +3640,11 @@ module Aws::IoT
       SENSITIVE: []
     end
 
+    class Mqtt5Configuration
+      attr_accessor propagating_attributes: ::Array[Types::PropagatingAttribute]
+      SENSITIVE: []
+    end
+
     class MqttContext
       attr_accessor username: ::String
       attr_accessor password: ::String
@@ -3746,6 +3780,19 @@ module Aws::IoT
     class PresignedUrlConfig
       attr_accessor role_arn: ::String
       attr_accessor expires_in_sec: ::Integer
+      SENSITIVE: []
+    end
+
+    class PrincipalThingObject
+      attr_accessor thing_name: ::String
+      attr_accessor thing_principal_type: ("EXCLUSIVE_THING" | "NON_EXCLUSIVE_THING")
+      SENSITIVE: []
+    end
+
+    class PropagatingAttribute
+      attr_accessor user_property_key: ::String
+      attr_accessor thing_attribute: ::String
+      attr_accessor connection_attribute: ::String
       SENSITIVE: []
     end
 
@@ -4074,6 +4121,8 @@ module Aws::IoT
 
     class ServerCertificateConfig
       attr_accessor enable_ocsp_check: bool
+      attr_accessor ocsp_lambda_arn: ::String
+      attr_accessor ocsp_authorized_responder_arn: ::String
       SENSITIVE: []
     end
 
@@ -4432,6 +4481,12 @@ module Aws::IoT
       SENSITIVE: []
     end
 
+    class ThingPrincipalObject
+      attr_accessor principal: ::String
+      attr_accessor thing_principal_type: ("EXCLUSIVE_THING" | "NON_EXCLUSIVE_THING")
+      SENSITIVE: []
+    end
+
     class ThingTypeDefinition
       attr_accessor thing_type_name: ::String
       attr_accessor thing_type_arn: ::String
@@ -4450,6 +4505,7 @@ module Aws::IoT
     class ThingTypeProperties
       attr_accessor thing_type_description: ::String
       attr_accessor searchable_attributes: ::Array[::String]
+      attr_accessor mqtt5_configuration: Types::Mqtt5Configuration
       SENSITIVE: []
     end
 
@@ -4965,6 +5021,15 @@ module Aws::IoT
     end
 
     class UpdateThingResponse < Aws::EmptyStructure
+    end
+
+    class UpdateThingTypeRequest
+      attr_accessor thing_type_name: ::String
+      attr_accessor thing_type_properties: Types::ThingTypeProperties
+      SENSITIVE: []
+    end
+
+    class UpdateThingTypeResponse < Aws::EmptyStructure
     end
 
     class UpdateTopicRuleDestinationRequest

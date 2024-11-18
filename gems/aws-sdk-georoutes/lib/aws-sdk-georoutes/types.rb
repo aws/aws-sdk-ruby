@@ -1370,19 +1370,16 @@ module Aws::GeoRoutes
     #     * *Risk Level*: Limited risk
     #
     #     * *Restrictions*: Few restrictions
-    #
     #   * *Tunnel Category C*
     #
     #     * *Risk Level*: Medium risk
     #
     #     * *Restrictions*: Some restrictions
-    #
     #   * *Tunnel Category D*
     #
     #     * *Risk Level*: High risk
     #
     #     * *Restrictions*: Many restrictions occur
-    #
     #   * *Tunnel Category E*
     #
     #     * *Risk Level*: Very high risk
@@ -1826,19 +1823,16 @@ module Aws::GeoRoutes
     #     * *Risk Level*: Limited risk
     #
     #     * *Restrictions*: Few restrictions
-    #
     #   * *Tunnel Category C*
     #
     #     * *Risk Level*: Medium risk
     #
     #     * *Restrictions*: Some restrictions
-    #
     #   * *Tunnel Category D*
     #
     #     * *Risk Level*: High risk
     #
     #     * *Restrictions*: Many restrictions occur
-    #
     #   * *Tunnel Category E*
     #
     #     * *Risk Level*: Very high risk
@@ -3506,19 +3500,16 @@ module Aws::GeoRoutes
     #     * *Risk Level*: Limited risk
     #
     #     * *Restrictions*: Few restrictions
-    #
     #   * *Tunnel Category C*
     #
     #     * *Risk Level*: Medium risk
     #
     #     * *Restrictions*: Some restrictions
-    #
     #   * *Tunnel Category D*
     #
     #     * *Risk Level*: High risk
     #
     #     * *Restrictions*: Many restrictions occur
-    #
     #   * *Tunnel Category E*
     #
     #     * *Risk Level*: Very high risk
@@ -4979,19 +4970,16 @@ module Aws::GeoRoutes
     #     * *Risk Level*: Limited risk
     #
     #     * *Restrictions*: Few restrictions
-    #
     #   * *Tunnel Category C*
     #
     #     * *Risk Level*: Medium risk
     #
     #     * *Restrictions*: Some restrictions
-    #
     #   * *Tunnel Category D*
     #
     #     * *Risk Level*: High risk
     #
     #     * *Restrictions*: Many restrictions occur
-    #
     #   * *Tunnel Category E*
     #
     #     * *Risk Level*: Very high risk
@@ -5815,19 +5803,16 @@ module Aws::GeoRoutes
     #     * *Risk Level*: Limited risk
     #
     #     * *Restrictions*: Few restrictions
-    #
     #   * *Tunnel Category C*
     #
     #     * *Risk Level*: Medium risk
     #
     #     * *Restrictions*: Some restrictions
-    #
     #   * *Tunnel Category D*
     #
     #     * *Risk Level*: High risk
     #
     #     * *Restrictions*: Many restrictions occur
-    #
     #   * *Tunnel Category E*
     #
     #     * *Risk Level*: Very high risk
@@ -6692,19 +6677,16 @@ module Aws::GeoRoutes
     #     * *Risk Level*: Limited risk
     #
     #     * *Restrictions*: Few restrictions
-    #
     #   * *Tunnel Category C*
     #
     #     * *Risk Level*: Medium risk
     #
     #     * *Restrictions*: Some restrictions
-    #
     #   * *Tunnel Category D*
     #
     #     * *Risk Level*: High risk
     #
     #     * *Restrictions*: Many restrictions occur
-    #
     #   * *Tunnel Category E*
     #
     #     * *Risk Level*: Very high risk

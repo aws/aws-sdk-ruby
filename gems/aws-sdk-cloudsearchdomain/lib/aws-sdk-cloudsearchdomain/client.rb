@@ -438,10 +438,10 @@ module Aws::CloudSearchDomain
     #   expressions as return fields.
     #
     #   You specify the expressions in JSON using the form
-    #   `\{"EXPRESSIONNAME":"EXPRESSION"\}`. You can define and use multiple
+    #   `{"EXPRESSIONNAME":"EXPRESSION"}`. You can define and use multiple
     #   expressions in a search request. For example:
     #
-    #   ` \{"expression1":"_score*rating", "expression2":"(1/rank)*year"\} `
+    #   ` {"expression1":"_score*rating", "expression2":"(1/rank)*year"} `
     #
     #   For information about the variables, operators, and functions you can
     #   use in expressions, see [Writing Expressions][1] in the *Amazon
@@ -456,7 +456,7 @@ module Aws::CloudSearchDomain
     #   options that control how the facet information is returned. Each
     #   specified field must be facet-enabled in the domain configuration. The
     #   fields and options are specified in JSON using the form
-    #   `\{"FIELD":\{"OPTION":VALUE,"OPTION:"STRING"\},"FIELD":\{"OPTION":VALUE,"OPTION":"STRING"\}\}`.
+    #   `{"FIELD":{"OPTION":VALUE,"OPTION:"STRING"},"FIELD":{"OPTION":VALUE,"OPTION":"STRING"}}`.
     #
     #   You can specify the following faceting options:
     #
@@ -489,7 +489,7 @@ module Aws::CloudSearchDomain
     #   and return facet counts by decade.
     #
     #   `
-    #   \{"year":\{"buckets":["[1970,1979]","[1980,1989]","[1990,1999]","[2000,2009]","[2010,\}"]\}\}
+    #   {"year":{"buckets":["[1970,1979]","[1980,1989]","[1990,1999]","[2000,2009]","[2010,}"]}}
     #   `
     #
     #   To sort facets by facet count, use the `count` option. For example,
@@ -498,13 +498,13 @@ module Aws::CloudSearchDomain
     #   matching documents listed first. Setting the `size` option to 3
     #   returns only the top three facet values.
     #
-    #   ` \{"year":\{"sort":"count","size":3\}\} `
+    #   ` {"year":{"sort":"count","size":3}} `
     #
     #   To sort the facets by value, use the `bucket` option. For example, the
     #   following request sets the `sort` option to `bucket` to sort the facet
     #   values numerically by year, with earliest year listed first.
     #
-    #   ` \{"year":\{"sort":"bucket"\}\} `
+    #   ` {"year":{"sort":"bucket"}} `
     #
     #   For more information, see [Getting and Using Facet Information][2] in
     #   the *Amazon CloudSearch Developer Guide*.
@@ -536,7 +536,7 @@ module Aws::CloudSearchDomain
     #   `text-array` fields. Each specified field must be highlight enabled in
     #   the domain configuration. The fields and options are specified in JSON
     #   using the form
-    #   `\{"FIELD":\{"OPTION":VALUE,"OPTION:"STRING"\},"FIELD":\{"OPTION":VALUE,"OPTION":"STRING"\}\}`.
+    #   `{"FIELD":{"OPTION":VALUE,"OPTION:"STRING"},"FIELD":{"OPTION":VALUE,"OPTION":"STRING"}}`.
     #
     #   You can specify the following highlight options:
     #
@@ -560,8 +560,8 @@ module Aws::CloudSearchDomain
     #   For example, the following request retrieves highlights for the
     #   `actors` and `title` fields.
     #
-    #   `\{ "actors": \{\}, "title": \{"format": "text","max_phrases":
-    #   2,"pre_tag": "","post_tag": ""\} \}`
+    #   `{ "actors": {}, "title": {"format": "text","max_phrases":
+    #   2,"pre_tag": "","post_tag": ""} }`
     #
     # @option params [Boolean] :partial
     #   Enables partial results to be returned if one or more index partitions
@@ -595,7 +595,7 @@ module Aws::CloudSearchDomain
     # @option params [String] :query_options
     #   Configures options for the query parser specified in the `queryParser`
     #   parameter. You specify the options in JSON using the following form
-    #   `\{"OPTION1":"VALUE1","OPTION2":VALUE2"..."OPTIONN":"VALUEN"\}.`
+    #   `{"OPTION1":"VALUE1","OPTION2":VALUE2"..."OPTIONN":"VALUEN"}.`
     #
     #   The options you can configure vary according to which parser you use:
     #
@@ -775,7 +775,7 @@ module Aws::CloudSearchDomain
     #   Each specified field must be facet-enabled in the domain
     #   configuration. The fields are specified in JSON using the form:
     #
-    #    `\{"FIELD-A":\{\},"FIELD-B":\{\}\}` There are currently no options supported for statistics.
+    #    `{"FIELD-A":{},"FIELD-B":{}}` There are currently no options supported for statistics.
     #
     # @return [Types::SearchResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -990,7 +990,7 @@ module Aws::CloudSearchDomain
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudsearchdomain'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

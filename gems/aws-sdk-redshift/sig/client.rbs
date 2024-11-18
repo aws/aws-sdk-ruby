@@ -536,6 +536,13 @@ module Aws
                                                        authorization: ("Enabled" | "Disabled")
                                                      }?
                                                    },
+                                                 ]?,
+                                                 s3_access_grants: Array[
+                                                   {
+                                                     read_write_access: {
+                                                       authorization: ("Enabled" | "Disabled")
+                                                     }?
+                                                   },
                                                  ]?
                                                },
                                              ]
@@ -1900,6 +1907,13 @@ module Aws
                                                  lake_formation: Array[
                                                    {
                                                      lake_formation_query: {
+                                                       authorization: ("Enabled" | "Disabled")
+                                                     }?
+                                                   },
+                                                 ]?,
+                                                 s3_access_grants: Array[
+                                                   {
+                                                     read_write_access: {
                                                        authorization: ("Enabled" | "Disabled")
                                                      }?
                                                    },

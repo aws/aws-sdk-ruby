@@ -1187,6 +1187,10 @@ module Aws::Inspector2
     #             lower_inclusive: 1.0,
     #             upper_inclusive: 1.0,
     #           },
+    #           file_path: {
+    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #             value: "StringInput", # required
+    #           },
     #           name: {
     #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #             value: "StringInput", # required
@@ -1507,6 +1511,10 @@ module Aws::Inspector2
     #           epoch: {
     #             lower_inclusive: 1.0,
     #             upper_inclusive: 1.0,
+    #           },
+    #           file_path: {
+    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #             value: "StringInput", # required
     #           },
     #           name: {
     #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
@@ -2336,6 +2344,8 @@ module Aws::Inspector2
     #   resp.filter_criteria.vulnerable_packages[0].architecture.value #=> String
     #   resp.filter_criteria.vulnerable_packages[0].epoch.lower_inclusive #=> Float
     #   resp.filter_criteria.vulnerable_packages[0].epoch.upper_inclusive #=> Float
+    #   resp.filter_criteria.vulnerable_packages[0].file_path.comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
+    #   resp.filter_criteria.vulnerable_packages[0].file_path.value #=> String
     #   resp.filter_criteria.vulnerable_packages[0].name.comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filter_criteria.vulnerable_packages[0].name.value #=> String
     #   resp.filter_criteria.vulnerable_packages[0].release.comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
@@ -2949,7 +2959,7 @@ module Aws::Inspector2
       req.send_request(options)
     end
 
-    # Lists coverage details for you environment.
+    # Lists coverage details for your environment.
     #
     # @option params [Types::CoverageFilterCriteria] :filter_criteria
     #   An object that contains details on the filters to apply to the
@@ -3097,7 +3107,7 @@ module Aws::Inspector2
     #   resp.covered_resources[0].resource_metadata.lambda_function.function_tags["MapKey"] #=> String
     #   resp.covered_resources[0].resource_metadata.lambda_function.layers #=> Array
     #   resp.covered_resources[0].resource_metadata.lambda_function.layers[0] #=> String
-    #   resp.covered_resources[0].resource_metadata.lambda_function.runtime #=> String, one of "NODEJS", "NODEJS_12_X", "NODEJS_14_X", "NODEJS_16_X", "JAVA_8", "JAVA_8_AL2", "JAVA_11", "PYTHON_3_7", "PYTHON_3_8", "PYTHON_3_9", "UNSUPPORTED", "NODEJS_18_X", "GO_1_X", "JAVA_17", "PYTHON_3_10"
+    #   resp.covered_resources[0].resource_metadata.lambda_function.runtime #=> String, one of "NODEJS", "NODEJS_12_X", "NODEJS_14_X", "NODEJS_16_X", "JAVA_8", "JAVA_8_AL2", "JAVA_11", "PYTHON_3_7", "PYTHON_3_8", "PYTHON_3_9", "UNSUPPORTED", "NODEJS_18_X", "GO_1_X", "JAVA_17", "PYTHON_3_10", "PYTHON_3_11", "DOTNETCORE_3_1", "DOTNET_6", "DOTNET_7", "RUBY_2_7", "RUBY_3_2"
     #   resp.covered_resources[0].resource_type #=> String, one of "AWS_EC2_INSTANCE", "AWS_ECR_CONTAINER_IMAGE", "AWS_ECR_REPOSITORY", "AWS_LAMBDA_FUNCTION"
     #   resp.covered_resources[0].scan_mode #=> String, one of "EC2_SSM_AGENT_BASED", "EC2_AGENTLESS"
     #   resp.covered_resources[0].scan_status.reason #=> String, one of "PENDING_INITIAL_SCAN", "ACCESS_DENIED", "INTERNAL_ERROR", "UNMANAGED_EC2_INSTANCE", "UNSUPPORTED_OS", "SCAN_ELIGIBILITY_EXPIRED", "RESOURCE_TERMINATED", "SUCCESSFUL", "NO_RESOURCES_FOUND", "IMAGE_SIZE_EXCEEDED", "SCAN_FREQUENCY_MANUAL", "SCAN_FREQUENCY_SCAN_ON_PUSH", "EC2_INSTANCE_STOPPED", "PENDING_DISABLE", "NO_INVENTORY", "STALE_INVENTORY", "EXCLUDED_BY_TAG", "UNSUPPORTED_RUNTIME", "UNSUPPORTED_MEDIA_TYPE", "UNSUPPORTED_CONFIG_FILE", "DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED", "DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED", "DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED", "DEEP_INSPECTION_NO_INVENTORY", "AGENTLESS_INSTANCE_STORAGE_LIMIT_EXCEEDED", "AGENTLESS_INSTANCE_COLLECTION_TIME_LIMIT_EXCEEDED"
@@ -3476,6 +3486,8 @@ module Aws::Inspector2
     #   resp.filters[0].criteria.vulnerable_packages[0].architecture.value #=> String
     #   resp.filters[0].criteria.vulnerable_packages[0].epoch.lower_inclusive #=> Float
     #   resp.filters[0].criteria.vulnerable_packages[0].epoch.upper_inclusive #=> Float
+    #   resp.filters[0].criteria.vulnerable_packages[0].file_path.comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
+    #   resp.filters[0].criteria.vulnerable_packages[0].file_path.value #=> String
     #   resp.filters[0].criteria.vulnerable_packages[0].name.comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filters[0].criteria.vulnerable_packages[0].name.value #=> String
     #   resp.filters[0].criteria.vulnerable_packages[0].release.comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
@@ -4147,6 +4159,10 @@ module Aws::Inspector2
     #             lower_inclusive: 1.0,
     #             upper_inclusive: 1.0,
     #           },
+    #           file_path: {
+    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #             value: "StringInput", # required
+    #           },
     #           name: {
     #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #             value: "StringInput", # required
@@ -4240,7 +4256,7 @@ module Aws::Inspector2
     #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].file_path #=> String
     #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].fixed_in_version #=> String
     #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].name #=> String
-    #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].package_manager #=> String, one of "BUNDLER", "CARGO", "COMPOSER", "NPM", "NUGET", "PIPENV", "POETRY", "YARN", "GOBINARY", "GOMOD", "JAR", "OS", "PIP", "PYTHONPKG", "NODEPKG", "POM", "GEMSPEC"
+    #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].package_manager #=> String, one of "BUNDLER", "CARGO", "COMPOSER", "NPM", "NUGET", "PIPENV", "POETRY", "YARN", "GOBINARY", "GOMOD", "JAR", "OS", "PIP", "PYTHONPKG", "NODEPKG", "POM", "GEMSPEC", "DOTNET_CORE"
     #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].release #=> String
     #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].remediation #=> String
     #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].source_lambda_layer_arn #=> String
@@ -4279,7 +4295,7 @@ module Aws::Inspector2
     #   resp.findings[0].resources[0].details.aws_lambda_function.layers #=> Array
     #   resp.findings[0].resources[0].details.aws_lambda_function.layers[0] #=> String
     #   resp.findings[0].resources[0].details.aws_lambda_function.package_type #=> String, one of "IMAGE", "ZIP"
-    #   resp.findings[0].resources[0].details.aws_lambda_function.runtime #=> String, one of "NODEJS", "NODEJS_12_X", "NODEJS_14_X", "NODEJS_16_X", "JAVA_8", "JAVA_8_AL2", "JAVA_11", "PYTHON_3_7", "PYTHON_3_8", "PYTHON_3_9", "UNSUPPORTED", "NODEJS_18_X", "GO_1_X", "JAVA_17", "PYTHON_3_10"
+    #   resp.findings[0].resources[0].details.aws_lambda_function.runtime #=> String, one of "NODEJS", "NODEJS_12_X", "NODEJS_14_X", "NODEJS_16_X", "JAVA_8", "JAVA_8_AL2", "JAVA_11", "PYTHON_3_7", "PYTHON_3_8", "PYTHON_3_9", "UNSUPPORTED", "NODEJS_18_X", "GO_1_X", "JAVA_17", "PYTHON_3_10", "PYTHON_3_11", "DOTNETCORE_3_1", "DOTNET_6", "DOTNET_7", "RUBY_2_7", "RUBY_3_2"
     #   resp.findings[0].resources[0].details.aws_lambda_function.version #=> String
     #   resp.findings[0].resources[0].details.aws_lambda_function.vpc_config.security_group_ids #=> Array
     #   resp.findings[0].resources[0].details.aws_lambda_function.vpc_config.security_group_ids[0] #=> String
@@ -4646,8 +4662,8 @@ module Aws::Inspector2
 
     # Stops a CIS session. This API is used by the Amazon Inspector SSM
     # plugin to communicate with the Amazon Inspector service. The Amazon
-    # Inspector SSM plugin calls this API to start a CIS scan session for
-    # the scan ID supplied by the service.
+    # Inspector SSM plugin calls this API to stop a CIS scan session for the
+    # scan ID supplied by the service.
     #
     # @option params [required, Types::StopCisSessionMessage] :message
     #   The stop CIS session message.
@@ -5231,6 +5247,10 @@ module Aws::Inspector2
     #             lower_inclusive: 1.0,
     #             upper_inclusive: 1.0,
     #           },
+    #           file_path: {
+    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #             value: "StringInput", # required
+    #           },
     #           name: {
     #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #             value: "StringInput", # required
@@ -5351,7 +5371,7 @@ module Aws::Inspector2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-inspector2'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -92,10 +92,10 @@ module Aws::CloudFront
           poller: Aws::Waiters::Poller.new(
             operation_name: :get_distribution,
             acceptors: [{
-              "expected" => "Deployed",
               "matcher" => "path",
+              "argument" => "distribution.status",
               "state" => "success",
-              "argument" => "distribution.status"
+              "expected" => "Deployed"
             }]
           )
         }.merge(options))
@@ -129,10 +129,10 @@ module Aws::CloudFront
           poller: Aws::Waiters::Poller.new(
             operation_name: :get_invalidation,
             acceptors: [{
-              "expected" => "Completed",
               "matcher" => "path",
+              "argument" => "invalidation.status",
               "state" => "success",
-              "argument" => "invalidation.status"
+              "expected" => "Completed"
             }]
           )
         }.merge(options))
@@ -166,10 +166,10 @@ module Aws::CloudFront
           poller: Aws::Waiters::Poller.new(
             operation_name: :get_streaming_distribution,
             acceptors: [{
-              "expected" => "Deployed",
               "matcher" => "path",
+              "argument" => "streaming_distribution.status",
               "state" => "success",
-              "argument" => "streaming_distribution.status"
+              "expected" => "Deployed"
             }]
           )
         }.merge(options))

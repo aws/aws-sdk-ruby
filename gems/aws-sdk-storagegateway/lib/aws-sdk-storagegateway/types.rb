@@ -1261,11 +1261,11 @@ module Aws::StorageGateway
     #   The following example sets `NotificationPolicy` on with
     #   `SettlingTimeInSeconds` set to 60.
     #
-    #   `\{"Upload": \{"SettlingTimeInSeconds": 60\}\}`
+    #   `{"Upload": {"SettlingTimeInSeconds": 60}}`
     #
     #   The following example sets `NotificationPolicy` off.
     #
-    #   `\{\}`
+    #   `{}`
     #   @return [String]
     #
     # @!attribute [rw] vpc_endpoint_dns_name
@@ -1596,11 +1596,11 @@ module Aws::StorageGateway
     #   The following example sets `NotificationPolicy` on with
     #   `SettlingTimeInSeconds` set to 60.
     #
-    #   `\{"Upload": \{"SettlingTimeInSeconds": 60\}\}`
+    #   `{"Upload": {"SettlingTimeInSeconds": 60}}`
     #
     #   The following example sets `NotificationPolicy` off.
     #
-    #   `\{\}`
+    #   `{}`
     #   @return [String]
     #
     # @!attribute [rw] vpc_endpoint_dns_name
@@ -5175,11 +5175,11 @@ module Aws::StorageGateway
     #   The following example sets `NotificationPolicy` on with
     #   `SettlingTimeInSeconds` set to 60.
     #
-    #   `\{"Upload": \{"SettlingTimeInSeconds": 60\}\}`
+    #   `{"Upload": {"SettlingTimeInSeconds": 60}}`
     #
     #   The following example sets `NotificationPolicy` off.
     #
-    #   `\{\}`
+    #   `{}`
     #   @return [String]
     #
     # @!attribute [rw] vpc_endpoint_dns_name
@@ -5813,11 +5813,11 @@ module Aws::StorageGateway
     #   The following example sets `NotificationPolicy` on with
     #   `SettlingTimeInSeconds` set to 60.
     #
-    #   `\{"Upload": \{"SettlingTimeInSeconds": 60\}\}`
+    #   `{"Upload": {"SettlingTimeInSeconds": 60}}`
     #
     #   The following example sets `NotificationPolicy` off.
     #
-    #   `\{\}`
+    #   `{}`
     #   @return [String]
     #
     # @!attribute [rw] vpc_endpoint_dns_name
@@ -7163,11 +7163,11 @@ module Aws::StorageGateway
     #   The following example sets `NotificationPolicy` on with
     #   `SettlingTimeInSeconds` set to 60.
     #
-    #   `\{"Upload": \{"SettlingTimeInSeconds": 60\}\}`
+    #   `{"Upload": {"SettlingTimeInSeconds": 60}}`
     #
     #   The following example sets `NotificationPolicy` off.
     #
-    #   `\{\}`
+    #   `{}`
     #   @return [String]
     #
     # @!attribute [rw] audit_destination_arn
@@ -7406,11 +7406,11 @@ module Aws::StorageGateway
     #   The following example sets `NotificationPolicy` on with
     #   `SettlingTimeInSeconds` set to 60.
     #
-    #   `\{"Upload": \{"SettlingTimeInSeconds": 60\}\}`
+    #   `{"Upload": {"SettlingTimeInSeconds": 60}}`
     #
     #   The following example sets `NotificationPolicy` off.
     #
-    #   `\{\}`
+    #   `{}`
     #   @return [String]
     #
     # @!attribute [rw] oplocks_enabled

@@ -16,6 +16,7 @@ module Aws::IVS
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AudioConfiguration = Shapes::StructureShape.new(name: 'AudioConfiguration')
+    AudioConfigurationList = Shapes::ListShape.new(name: 'AudioConfigurationList')
     BatchError = Shapes::StructureShape.new(name: 'BatchError')
     BatchErrors = Shapes::ListShape.new(name: 'BatchErrors')
     BatchGetChannelRequest = Shapes::StructureShape.new(name: 'BatchGetChannelRequest')
@@ -42,6 +43,7 @@ module Aws::IVS
     ChannelType = Shapes::StringShape.new(name: 'ChannelType')
     Channels = Shapes::ListShape.new(name: 'Channels')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ContainerFormat = Shapes::StringShape.new(name: 'ContainerFormat')
     CreateChannelRequest = Shapes::StructureShape.new(name: 'CreateChannelRequest')
     CreateChannelResponse = Shapes::StructureShape.new(name: 'CreateChannelResponse')
     CreatePlaybackRestrictionPolicyRequest = Shapes::StructureShape.new(name: 'CreatePlaybackRestrictionPolicyRequest')
@@ -74,11 +76,13 @@ module Aws::IVS
     ImportPlaybackKeyPairRequest = Shapes::StructureShape.new(name: 'ImportPlaybackKeyPairRequest')
     ImportPlaybackKeyPairResponse = Shapes::StructureShape.new(name: 'ImportPlaybackKeyPairResponse')
     IngestConfiguration = Shapes::StructureShape.new(name: 'IngestConfiguration')
+    IngestConfigurations = Shapes::StructureShape.new(name: 'IngestConfigurations')
     IngestEndpoint = Shapes::StringShape.new(name: 'IngestEndpoint')
     InsecureIngest = Shapes::BooleanShape.new(name: 'InsecureIngest')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     IsAuthorized = Shapes::BooleanShape.new(name: 'IsAuthorized')
+    IsMultitrackInputEnabled = Shapes::BooleanShape.new(name: 'IsMultitrackInputEnabled')
     ListChannelsRequest = Shapes::StructureShape.new(name: 'ListChannelsRequest')
     ListChannelsResponse = Shapes::StructureShape.new(name: 'ListChannelsResponse')
     ListPlaybackKeyPairsRequest = Shapes::StructureShape.new(name: 'ListPlaybackKeyPairsRequest')
@@ -101,6 +105,9 @@ module Aws::IVS
     MaxRecordingConfigurationResults = Shapes::IntegerShape.new(name: 'MaxRecordingConfigurationResults')
     MaxStreamKeyResults = Shapes::IntegerShape.new(name: 'MaxStreamKeyResults')
     MaxStreamResults = Shapes::IntegerShape.new(name: 'MaxStreamResults')
+    MultitrackInputConfiguration = Shapes::StructureShape.new(name: 'MultitrackInputConfiguration')
+    MultitrackMaximumResolution = Shapes::StringShape.new(name: 'MultitrackMaximumResolution')
+    MultitrackPolicy = Shapes::StringShape.new(name: 'MultitrackPolicy')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PendingVerification = Shapes::StructureShape.new(name: 'PendingVerification')
     PlaybackKeyPair = Shapes::StructureShape.new(name: 'PlaybackKeyPair')
@@ -192,6 +199,7 @@ module Aws::IVS
     UpdatePlaybackRestrictionPolicyResponse = Shapes::StructureShape.new(name: 'UpdatePlaybackRestrictionPolicyResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     VideoConfiguration = Shapes::StructureShape.new(name: 'VideoConfiguration')
+    VideoConfigurationList = Shapes::ListShape.new(name: 'VideoConfigurationList')
     ViewerId = Shapes::StringShape.new(name: 'ViewerId')
     ViewerSessionVersion = Shapes::IntegerShape.new(name: 'ViewerSessionVersion')
     errorCode = Shapes::StringShape.new(name: 'errorCode')
@@ -204,7 +212,10 @@ module Aws::IVS
     AudioConfiguration.add_member(:codec, Shapes::ShapeRef.new(shape: String, location_name: "codec"))
     AudioConfiguration.add_member(:sample_rate, Shapes::ShapeRef.new(shape: Integer, location_name: "sampleRate"))
     AudioConfiguration.add_member(:target_bitrate, Shapes::ShapeRef.new(shape: Integer, location_name: "targetBitrate"))
+    AudioConfiguration.add_member(:track, Shapes::ShapeRef.new(shape: String, location_name: "track"))
     AudioConfiguration.struct_class = Types::AudioConfiguration
+
+    AudioConfigurationList.member = Shapes::ShapeRef.new(shape: AudioConfiguration)
 
     BatchError.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "arn"))
     BatchError.add_member(:code, Shapes::ShapeRef.new(shape: errorCode, location_name: "code"))
@@ -250,9 +261,11 @@ module Aws::IVS
 
     Channel.add_member(:arn, Shapes::ShapeRef.new(shape: ChannelArn, location_name: "arn"))
     Channel.add_member(:authorized, Shapes::ShapeRef.new(shape: IsAuthorized, location_name: "authorized"))
+    Channel.add_member(:container_format, Shapes::ShapeRef.new(shape: ContainerFormat, location_name: "containerFormat"))
     Channel.add_member(:ingest_endpoint, Shapes::ShapeRef.new(shape: IngestEndpoint, location_name: "ingestEndpoint"))
     Channel.add_member(:insecure_ingest, Shapes::ShapeRef.new(shape: InsecureIngest, location_name: "insecureIngest"))
     Channel.add_member(:latency_mode, Shapes::ShapeRef.new(shape: ChannelLatencyMode, location_name: "latencyMode"))
+    Channel.add_member(:multitrack_input_configuration, Shapes::ShapeRef.new(shape: MultitrackInputConfiguration, location_name: "multitrackInputConfiguration"))
     Channel.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "name"))
     Channel.add_member(:playback_restriction_policy_arn, Shapes::ShapeRef.new(shape: ChannelPlaybackRestrictionPolicyArn, location_name: "playbackRestrictionPolicyArn"))
     Channel.add_member(:playback_url, Shapes::ShapeRef.new(shape: PlaybackURL, location_name: "playbackUrl"))
@@ -288,8 +301,10 @@ module Aws::IVS
     ConflictException.struct_class = Types::ConflictException
 
     CreateChannelRequest.add_member(:authorized, Shapes::ShapeRef.new(shape: Boolean, location_name: "authorized"))
+    CreateChannelRequest.add_member(:container_format, Shapes::ShapeRef.new(shape: ContainerFormat, location_name: "containerFormat"))
     CreateChannelRequest.add_member(:insecure_ingest, Shapes::ShapeRef.new(shape: Boolean, location_name: "insecureIngest"))
     CreateChannelRequest.add_member(:latency_mode, Shapes::ShapeRef.new(shape: ChannelLatencyMode, location_name: "latencyMode"))
+    CreateChannelRequest.add_member(:multitrack_input_configuration, Shapes::ShapeRef.new(shape: MultitrackInputConfiguration, location_name: "multitrackInputConfiguration"))
     CreateChannelRequest.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "name"))
     CreateChannelRequest.add_member(:playback_restriction_policy_arn, Shapes::ShapeRef.new(shape: ChannelPlaybackRestrictionPolicyArn, location_name: "playbackRestrictionPolicyArn"))
     CreateChannelRequest.add_member(:preset, Shapes::ShapeRef.new(shape: TranscodePreset, location_name: "preset"))
@@ -405,6 +420,10 @@ module Aws::IVS
     IngestConfiguration.add_member(:video, Shapes::ShapeRef.new(shape: VideoConfiguration, location_name: "video"))
     IngestConfiguration.struct_class = Types::IngestConfiguration
 
+    IngestConfigurations.add_member(:audio_configurations, Shapes::ShapeRef.new(shape: AudioConfigurationList, required: true, location_name: "audioConfigurations"))
+    IngestConfigurations.add_member(:video_configurations, Shapes::ShapeRef.new(shape: VideoConfigurationList, required: true, location_name: "videoConfigurations"))
+    IngestConfigurations.struct_class = Types::IngestConfigurations
+
     InternalServerException.add_member(:exception_message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "exceptionMessage"))
     InternalServerException.struct_class = Types::InternalServerException
 
@@ -475,6 +494,11 @@ module Aws::IVS
 
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    MultitrackInputConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: IsMultitrackInputEnabled, location_name: "enabled"))
+    MultitrackInputConfiguration.add_member(:maximum_resolution, Shapes::ShapeRef.new(shape: MultitrackMaximumResolution, location_name: "maximumResolution"))
+    MultitrackInputConfiguration.add_member(:policy, Shapes::ShapeRef.new(shape: MultitrackPolicy, location_name: "policy"))
+    MultitrackInputConfiguration.struct_class = Types::MultitrackInputConfiguration
 
     PendingVerification.add_member(:exception_message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "exceptionMessage"))
     PendingVerification.struct_class = Types::PendingVerification
@@ -610,6 +634,7 @@ module Aws::IVS
     StreamSession.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
     StreamSession.add_member(:end_time, Shapes::ShapeRef.new(shape: Time, location_name: "endTime"))
     StreamSession.add_member(:ingest_configuration, Shapes::ShapeRef.new(shape: IngestConfiguration, location_name: "ingestConfiguration"))
+    StreamSession.add_member(:ingest_configurations, Shapes::ShapeRef.new(shape: IngestConfigurations, location_name: "ingestConfigurations"))
     StreamSession.add_member(:recording_configuration, Shapes::ShapeRef.new(shape: RecordingConfiguration, location_name: "recordingConfiguration"))
     StreamSession.add_member(:start_time, Shapes::ShapeRef.new(shape: Time, location_name: "startTime"))
     StreamSession.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, location_name: "streamId"))
@@ -665,8 +690,10 @@ module Aws::IVS
 
     UpdateChannelRequest.add_member(:arn, Shapes::ShapeRef.new(shape: ChannelArn, required: true, location_name: "arn"))
     UpdateChannelRequest.add_member(:authorized, Shapes::ShapeRef.new(shape: Boolean, location_name: "authorized"))
+    UpdateChannelRequest.add_member(:container_format, Shapes::ShapeRef.new(shape: ContainerFormat, location_name: "containerFormat"))
     UpdateChannelRequest.add_member(:insecure_ingest, Shapes::ShapeRef.new(shape: Boolean, location_name: "insecureIngest"))
     UpdateChannelRequest.add_member(:latency_mode, Shapes::ShapeRef.new(shape: ChannelLatencyMode, location_name: "latencyMode"))
+    UpdateChannelRequest.add_member(:multitrack_input_configuration, Shapes::ShapeRef.new(shape: MultitrackInputConfiguration, location_name: "multitrackInputConfiguration"))
     UpdateChannelRequest.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "name"))
     UpdateChannelRequest.add_member(:playback_restriction_policy_arn, Shapes::ShapeRef.new(shape: ChannelPlaybackRestrictionPolicyArn, location_name: "playbackRestrictionPolicyArn"))
     UpdateChannelRequest.add_member(:preset, Shapes::ShapeRef.new(shape: TranscodePreset, location_name: "preset"))
@@ -694,11 +721,16 @@ module Aws::IVS
     VideoConfiguration.add_member(:avc_profile, Shapes::ShapeRef.new(shape: String, location_name: "avcProfile"))
     VideoConfiguration.add_member(:codec, Shapes::ShapeRef.new(shape: String, location_name: "codec"))
     VideoConfiguration.add_member(:encoder, Shapes::ShapeRef.new(shape: String, location_name: "encoder"))
+    VideoConfiguration.add_member(:level, Shapes::ShapeRef.new(shape: String, location_name: "level"))
+    VideoConfiguration.add_member(:profile, Shapes::ShapeRef.new(shape: String, location_name: "profile"))
     VideoConfiguration.add_member(:target_bitrate, Shapes::ShapeRef.new(shape: Integer, location_name: "targetBitrate"))
     VideoConfiguration.add_member(:target_framerate, Shapes::ShapeRef.new(shape: Integer, location_name: "targetFramerate"))
+    VideoConfiguration.add_member(:track, Shapes::ShapeRef.new(shape: String, location_name: "track"))
     VideoConfiguration.add_member(:video_height, Shapes::ShapeRef.new(shape: Integer, location_name: "videoHeight"))
     VideoConfiguration.add_member(:video_width, Shapes::ShapeRef.new(shape: Integer, location_name: "videoWidth"))
     VideoConfiguration.struct_class = Types::VideoConfiguration
+
+    VideoConfigurationList.member = Shapes::ShapeRef.new(shape: VideoConfiguration)
 
 
     # @api private

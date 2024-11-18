@@ -882,7 +882,7 @@ module Aws::SecretsManager
     #   A list of tags to attach to the secret. Each tag is a key and value
     #   pair of strings in a JSON text string, for example:
     #
-    #   `[\{"Key":"CostCenter","Value":"12345"\},\{"Key":"environment","Value":"production"\}]`
+    #   `[{"Key":"CostCenter","Value":"12345"},{"Key":"environment","Value":"production"}]`
     #
     #   Secrets Manager tag key names are case sensitive. A tag with the key
     #   "ABC" is a different tag from one with key "abc".
@@ -1342,7 +1342,7 @@ module Aws::SecretsManager
     # length and include every character type that the system you are
     # generating a password for can support. By default, Secrets Manager
     # uses uppercase and lowercase letters, numbers, and the following
-    # characters in passwords: `` !"#$%&'()*+,-./:;<=>?@[\\]^_`\{|\}~ ``
+    # characters in passwords: `` !"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ ``
     #
     # Secrets Manager generates a CloudTrail log entry when you call this
     # action.
@@ -1370,7 +1370,7 @@ module Aws::SecretsManager
     # @option params [Boolean] :exclude_punctuation
     #   Specifies whether to exclude the following punctuation characters from
     #   the password: `` ! " # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _
-    #   ` \{ | \} ~ ``. If you don't include this switch, the password can
+    #   ` { | } ~ ``. If you don't include this switch, the password can
     #   contain punctuation.
     #
     # @option params [Boolean] :exclude_uppercase
@@ -3395,7 +3395,7 @@ module Aws::SecretsManager
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.109.0'
+      context[:gem_version] = '1.110.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -27,6 +27,8 @@ module Aws::IAM
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {AccountNotManagementOrDelegatedAdministratorException}
+  # * {CallerIsNotManagementAccountException}
   # * {ConcurrentModificationException}
   # * {CredentialReportExpiredException}
   # * {CredentialReportNotPresentException}
@@ -47,10 +49,13 @@ module Aws::IAM
   # * {MalformedPolicyDocumentException}
   # * {NoSuchEntityException}
   # * {OpenIdIdpCommunicationErrorException}
+  # * {OrganizationNotFoundException}
+  # * {OrganizationNotInAllFeaturesModeException}
   # * {PasswordPolicyViolationException}
   # * {PolicyEvaluationException}
   # * {PolicyNotAttachableException}
   # * {ReportGenerationLimitExceededException}
+  # * {ServiceAccessNotEnabledException}
   # * {ServiceFailureException}
   # * {ServiceNotSupportedException}
   # * {UnmodifiableEntityException}
@@ -61,6 +66,26 @@ module Aws::IAM
   module Errors
 
     extend Aws::Errors::DynamicErrors
+
+    class AccountNotManagementOrDelegatedAdministratorException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::IAM::Types::AccountNotManagementOrDelegatedAdministratorException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class CallerIsNotManagementAccountException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::IAM::Types::CallerIsNotManagementAccountException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
 
     class ConcurrentModificationException < ServiceError
 
@@ -362,6 +387,26 @@ module Aws::IAM
       end
     end
 
+    class OrganizationNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::IAM::Types::OrganizationNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class OrganizationNotInAllFeaturesModeException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::IAM::Types::OrganizationNotInAllFeaturesModeException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class PasswordPolicyViolationException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -419,6 +464,16 @@ module Aws::IAM
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class ServiceAccessNotEnabledException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::IAM::Types::ServiceAccessNotEnabledException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
       end
     end
 

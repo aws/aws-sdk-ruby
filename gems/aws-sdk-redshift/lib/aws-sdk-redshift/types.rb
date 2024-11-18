@@ -9543,6 +9543,20 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # The S3 Access Grants scope.
+    #
+    # @!attribute [rw] authorization
+    #   Determines whether the read/write scope is enabled or disabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ReadWriteAccess AWS API Documentation
+    #
+    class ReadWriteAccess < Struct.new(
+      :authorization)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] cluster_identifier
     #   The cluster identifier.
     #   @return [String]
@@ -11098,6 +11112,29 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # A list of scopes set up for S3 Access Grants integration.
+    #
+    # @note S3AccessGrantsScopeUnion is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note S3AccessGrantsScopeUnion is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of S3AccessGrantsScopeUnion corresponding to the set member.
+    #
+    # @!attribute [rw] read_write_access
+    #   The S3 Access Grants scope.
+    #   @return [Types::ReadWriteAccess]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/S3AccessGrantsScopeUnion AWS API Documentation
+    #
+    class S3AccessGrantsScopeUnion < Struct.new(
+      :read_write_access,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ReadWriteAccess < S3AccessGrantsScopeUnion; end
+      class Unknown < S3AccessGrantsScopeUnion; end
+    end
+
     # Amazon SNS has responded that there is a problem with the specified
     # Amazon SNS topic.
     #
@@ -11138,7 +11175,7 @@ module Aws::Redshift
     #   A JSON format string of the Amazon Redshift API operation with input
     #   parameters.
     #
-    #   "`\{"ResizeCluster":\{"NodeType":"ra3.4xlarge","ClusterIdentifier":"my-test-cluster","NumberOfNodes":3\}\}`".
+    #   "`{"ResizeCluster":{"NodeType":"ra3.4xlarge","ClusterIdentifier":"my-test-cluster","NumberOfNodes":3}}`".
     #   @return [Types::ScheduledActionType]
     #
     # @!attribute [rw] schedule
@@ -11335,16 +11372,22 @@ module Aws::Redshift
     #   A list of scopes set up for Lake Formation integration.
     #   @return [Array<Types::LakeFormationScopeUnion>]
     #
+    # @!attribute [rw] s3_access_grants
+    #   A list of scopes set up for S3 Access Grants integration.
+    #   @return [Array<Types::S3AccessGrantsScopeUnion>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ServiceIntegrationsUnion AWS API Documentation
     #
     class ServiceIntegrationsUnion < Struct.new(
       :lake_formation,
+      :s3_access_grants,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class LakeFormation < ServiceIntegrationsUnion; end
+      class S3AccessGrants < ServiceIntegrationsUnion; end
       class Unknown < ServiceIntegrationsUnion; end
     end
 

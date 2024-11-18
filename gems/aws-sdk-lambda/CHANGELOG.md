@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.141.0 (2024-11-11)
+------------------
+
+* Feature - Add Python 3.13 (python3.13) support to AWS Lambda
+
+1.140.0 (2024-11-08)
+------------------
+
+* Feature - This release adds support for using AWS KMS customer managed keys to encrypt AWS Lambda .zip deployment packages.
+
+1.139.0 (2024-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.138.0 (2024-10-25)
 ------------------
 

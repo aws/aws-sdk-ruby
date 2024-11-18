@@ -472,8 +472,8 @@ module Aws::MailManager
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags used to organize, track, or control access for the resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   For example, \{ "tags": \{"key1":"value1", "key2":"value2"}
+    #   }.
     #
     # @return [Types::CreateAddonInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -522,8 +522,8 @@ module Aws::MailManager
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags used to organize, track, or control access for the resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   For example, \{ "tags": \{"key1":"value1", "key2":"value2"}
+    #   }.
     #
     # @return [Types::CreateAddonSubscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -576,8 +576,8 @@ module Aws::MailManager
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags used to organize, track, or control access for the resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   For example, \{ "tags": \{"key1":"value1", "key2":"value2"}
+    #   }.
     #
     # @return [Types::CreateArchiveResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -635,8 +635,8 @@ module Aws::MailManager
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags used to organize, track, or control access for the resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   For example, \{ "tags": \{"key1":"value1", "key2":"value2"}
+    #   }.
     #
     # @option params [required, String] :traffic_policy_id
     #   The identifier of an existing traffic policy that you attach to an
@@ -707,8 +707,8 @@ module Aws::MailManager
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags used to organize, track, or control access for the resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   For example, \{ "tags": \{"key1":"value1", "key2":"value2"}
+    #   }.
     #
     # @return [Types::CreateRelayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -764,8 +764,8 @@ module Aws::MailManager
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags used to organize, track, or control access for the resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   For example, \{ "tags": \{"key1":"value1", "key2":"value2"}
+    #   }.
     #
     # @return [Types::CreateRuleSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -957,8 +957,8 @@ module Aws::MailManager
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags used to organize, track, or control access for the resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   For example, \{ "tags": \{"key1":"value1", "key2":"value2"}
+    #   }.
     #
     # @option params [required, String] :traffic_policy_name
     #   A user-friendly name for the traffic policy resource.
@@ -2443,8 +2443,8 @@ module Aws::MailManager
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   The tags used to organize, track, or control access for the resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   For example, \{ "tags": \{"key1":"value1", "key2":"value2"}
+    #   }.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2883,7 +2883,7 @@ module Aws::MailManager
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mailmanager'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

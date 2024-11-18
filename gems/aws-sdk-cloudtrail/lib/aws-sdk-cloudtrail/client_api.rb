@@ -93,6 +93,7 @@ module Aws::CloudTrail
     EventDataStoreFederationEnabledException = Shapes::StructureShape.new(name: 'EventDataStoreFederationEnabledException')
     EventDataStoreHasOngoingImportException = Shapes::StructureShape.new(name: 'EventDataStoreHasOngoingImportException')
     EventDataStoreKmsKeyId = Shapes::StringShape.new(name: 'EventDataStoreKmsKeyId')
+    EventDataStoreList = Shapes::ListShape.new(name: 'EventDataStoreList')
     EventDataStoreMaxLimitExceededException = Shapes::StructureShape.new(name: 'EventDataStoreMaxLimitExceededException')
     EventDataStoreName = Shapes::StringShape.new(name: 'EventDataStoreName')
     EventDataStoreNotFoundException = Shapes::StructureShape.new(name: 'EventDataStoreNotFoundException')
@@ -107,6 +108,9 @@ module Aws::CloudTrail
     ExcludeManagementEventSources = Shapes::ListShape.new(name: 'ExcludeManagementEventSources')
     FederationRoleArn = Shapes::StringShape.new(name: 'FederationRoleArn')
     FederationStatus = Shapes::StringShape.new(name: 'FederationStatus')
+    GenerateQueryRequest = Shapes::StructureShape.new(name: 'GenerateQueryRequest')
+    GenerateQueryResponse = Shapes::StructureShape.new(name: 'GenerateQueryResponse')
+    GenerateResponseException = Shapes::StructureShape.new(name: 'GenerateResponseException')
     GetChannelRequest = Shapes::StructureShape.new(name: 'GetChannelRequest')
     GetChannelResponse = Shapes::StructureShape.new(name: 'GetChannelResponse')
     GetEventDataStoreRequest = Shapes::StructureShape.new(name: 'GetEventDataStoreRequest')
@@ -230,6 +234,7 @@ module Aws::CloudTrail
     PartitionKeyList = Shapes::ListShape.new(name: 'PartitionKeyList')
     PartitionKeyName = Shapes::StringShape.new(name: 'PartitionKeyName')
     PartitionKeyType = Shapes::StringShape.new(name: 'PartitionKeyType')
+    Prompt = Shapes::StringShape.new(name: 'Prompt')
     PublicKey = Shapes::StructureShape.new(name: 'PublicKey')
     PublicKeyList = Shapes::ListShape.new(name: 'PublicKeyList')
     PutEventSelectorsRequest = Shapes::StructureShape.new(name: 'PutEventSelectorsRequest')
@@ -506,6 +511,7 @@ module Aws::CloudTrail
     DescribeQueryResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
     DescribeQueryResponse.add_member(:delivery_s3_uri, Shapes::ShapeRef.new(shape: DeliveryS3Uri, location_name: "DeliveryS3Uri"))
     DescribeQueryResponse.add_member(:delivery_status, Shapes::ShapeRef.new(shape: DeliveryStatus, location_name: "DeliveryStatus"))
+    DescribeQueryResponse.add_member(:prompt, Shapes::ShapeRef.new(shape: Prompt, location_name: "Prompt"))
     DescribeQueryResponse.struct_class = Types::DescribeQueryResponse
 
     DescribeTrailsRequest.add_member(:trail_name_list, Shapes::ShapeRef.new(shape: TrailNameList, location_name: "trailNameList"))
@@ -568,6 +574,8 @@ module Aws::CloudTrail
 
     EventDataStoreHasOngoingImportException.struct_class = Types::EventDataStoreHasOngoingImportException
 
+    EventDataStoreList.member = Shapes::ShapeRef.new(shape: EventDataStoreArn)
+
     EventDataStoreMaxLimitExceededException.struct_class = Types::EventDataStoreMaxLimitExceededException
 
     EventDataStoreNotFoundException.struct_class = Types::EventDataStoreNotFoundException
@@ -587,6 +595,16 @@ module Aws::CloudTrail
     EventsList.member = Shapes::ShapeRef.new(shape: Event)
 
     ExcludeManagementEventSources.member = Shapes::ShapeRef.new(shape: String)
+
+    GenerateQueryRequest.add_member(:event_data_stores, Shapes::ShapeRef.new(shape: EventDataStoreList, required: true, location_name: "EventDataStores"))
+    GenerateQueryRequest.add_member(:prompt, Shapes::ShapeRef.new(shape: Prompt, required: true, location_name: "Prompt"))
+    GenerateQueryRequest.struct_class = Types::GenerateQueryRequest
+
+    GenerateQueryResponse.add_member(:query_statement, Shapes::ShapeRef.new(shape: QueryStatement, location_name: "QueryStatement"))
+    GenerateQueryResponse.add_member(:query_alias, Shapes::ShapeRef.new(shape: QueryAlias, location_name: "QueryAlias"))
+    GenerateQueryResponse.struct_class = Types::GenerateQueryResponse
+
+    GenerateResponseException.struct_class = Types::GenerateResponseException
 
     GetChannelRequest.add_member(:channel, Shapes::ShapeRef.new(shape: ChannelArn, required: true, location_name: "Channel"))
     GetChannelRequest.struct_class = Types::GetChannelRequest
@@ -1567,6 +1585,22 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: EventDataStoreFederationEnabledException)
       end)
 
+      api.add_operation(:generate_query, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GenerateQuery"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GenerateQueryRequest)
+        o.output = Shapes::ShapeRef.new(shape: GenerateQueryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EventDataStoreARNInvalidException)
+        o.errors << Shapes::ShapeRef.new(shape: EventDataStoreNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InactiveEventDataStoreException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: GenerateResponseException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: NoManagementAccountSLRExistsException)
+      end)
+
       api.add_operation(:get_channel, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetChannel"
         o.http_method = "POST"
@@ -1993,6 +2027,7 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: NotOrganizationMasterAccountException)
         o.errors << Shapes::ShapeRef.new(shape: NoManagementAccountSLRExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:restore_event_data_store, Seahorse::Model::Operation.new.tap do |o|

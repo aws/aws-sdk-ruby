@@ -13089,7 +13089,6 @@ module Aws::CloudFront
     #     don't support SNI, set `SSLSupportMethod` to `vip`. This is not
     #     recommended, and results in additional monthly charges from
     #     CloudFront.
-    #
     # * The minimum SSL/TLS protocol version that the distribution can use
     #   to communicate with viewers. To specify a minimum version, choose a
     #   value for `MinimumProtocolVersion`. For more information, see

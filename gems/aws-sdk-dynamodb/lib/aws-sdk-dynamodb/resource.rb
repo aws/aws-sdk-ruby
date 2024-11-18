@@ -79,31 +79,27 @@ module Aws::DynamoDB
     #
     #     * To prevent special characters in an attribute name from being
     #       misinterpreted in an expression.
-    #
     #     Use the **#** character in an expression to dereference an attribute
     #     name. For example, consider the following attribute name:
     #
     #     * `Percentile`
     #
     #     ^
-    #
     #     The name of this attribute conflicts with a reserved word, so it
     #     cannot be used directly in an expression. (For the complete list of
     #     reserved words, see [Reserved Words][1] in the *Amazon DynamoDB
     #     Developer Guide*). To work around this, you could specify the
     #     following for `ExpressionAttributeNames`:
     #
-    #     * `\{"#P":"Percentile"\}`
+    #     * `{"#P":"Percentile"}`
     #
     #     ^
-    #
     #     You could then use this substitution in an expression, as in this
     #     example:
     #
     #     * `#P = :val`
     #
     #     ^
-    #
     #     <note markdown="1"> Tokens that begin with the **\:** character are *expression
     #     attribute values*, which are placeholders for the actual value at
     #     runtime.
@@ -206,7 +202,6 @@ module Aws::DynamoDB
     #       *both* the partition key and the sort key.
     #
     #     ^
-    #
     #   * `PutRequest` - Perform a `PutItem` operation on the specified item.
     #     The item to be put is identified by an `Item` subelement:
     #
@@ -301,6 +296,10 @@ module Aws::DynamoDB
     #           max_read_request_units: 1,
     #           max_write_request_units: 1,
     #         },
+    #         warm_throughput: {
+    #           read_units_per_second: 1,
+    #           write_units_per_second: 1,
+    #         },
     #       },
     #     ],
     #     billing_mode: "PROVISIONED", # accepts PROVISIONED, PAY_PER_REQUEST
@@ -325,6 +324,10 @@ module Aws::DynamoDB
     #     ],
     #     table_class: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
     #     deletion_protection_enabled: false,
+    #     warm_throughput: {
+    #       read_units_per_second: 1,
+    #       write_units_per_second: 1,
+    #     },
     #     resource_policy: "ResourcePolicy",
     #     on_demand_throughput: {
     #       max_read_request_units: 1,
@@ -414,7 +417,6 @@ module Aws::DynamoDB
     #
     #       * `ALL` - All of the table attributes are projected into the
     #         index.
-    #
     #     * `NonKeyAttributes` - A list of one or more non-key attribute names
     #       that are projected into the secondary index. The total count of
     #       attributes provided in `NonKeyAttributes`, summed across all of
@@ -450,14 +452,12 @@ module Aws::DynamoDB
     #
     #       * `ALL` - All of the table attributes are projected into the
     #         index.
-    #
     #     * `NonKeyAttributes` - A list of one or more non-key attribute names
     #       that are projected into the secondary index. The total count of
     #       attributes provided in `NonKeyAttributes`, summed across all of
     #       the secondary indexes, must not exceed 100. If you project the
     #       same attribute into two different indexes, this counts as two
     #       distinct attributes when determining the total.
-    #
     #   * `ProvisionedThroughput` - The provisioned throughput settings for
     #     the global secondary index, consisting of read and write capacity
     #     units.
@@ -530,6 +530,9 @@ module Aws::DynamoDB
     # @option options [Boolean] :deletion_protection_enabled
     #   Indicates whether deletion protection is to be enabled (true) or
     #   disabled (false) on the table.
+    # @option options [Types::WarmThroughput] :warm_throughput
+    #   Represents the warm throughput (in read units per second and write
+    #   units per second) for creating a table.
     # @option options [String] :resource_policy
     #   An Amazon Web Services resource-based policy document in JSON format
     #   that will be attached to the table.

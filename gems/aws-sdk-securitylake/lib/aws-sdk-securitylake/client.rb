@@ -574,10 +574,10 @@ module Aws::SecurityLake
     #   Specify the name for a third-party custom source. This must be a
     #   Regionally unique value. The `sourceName` you enter here, is used in
     #   the `LogProviderRole` name which follows the convention
-    #   `AmazonSecurityLake-Provider-\{name of the custom
-    #   source\}-\{region\}`. You must use a `CustomLogSource` name that is
-    #   shorter than or equal to 20 characters. This ensures that the
-    #   `LogProviderRole` name is below the 64 character limit.
+    #   `AmazonSecurityLake-Provider-{name of the custom source}-{region}`.
+    #   You must use a `CustomLogSource` name that is shorter than or equal to
+    #   20 characters. This ensures that the `LogProviderRole` name is below
+    #   the 64 character limit.
     #
     # @option params [String] :source_version
     #   Specify the source version for the third-party custom source, to limit
@@ -1751,8 +1751,8 @@ module Aws::SecurityLake
     # For example, omitting the key `encryptionConfiguration` from a Region
     # that is included in an update call that currently uses KMS will leave
     # that Region's KMS key in place, but specifying
-    # `encryptionConfiguration: \{kmsKeyId: 'S3_MANAGED_KEY'\}` for that
-    # same Region will reset the key to `S3-managed`.
+    # `encryptionConfiguration: {kmsKeyId: 'S3_MANAGED_KEY'}` for that same
+    # Region will reset the key to `S3-managed`.
     #
     # For more details about lifecycle management and how to update
     # retention settings for one or more Regions after enabling Security
@@ -2032,7 +2032,7 @@ module Aws::SecurityLake
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securitylake'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -241,14 +241,14 @@ module Aws::ForecastService
     #
     # The following is an example using the RETAIL domain:
     #
-    # `\{`
+    # `{`
     #
     # `"AttributeName": "demand",`
     #
-    # `"Transformations": \{"aggregation": "sum", "middlefill": "zero",
-    # "backfill": "zero"\}`
+    # `"Transformations": {"aggregation": "sum", "middlefill": "zero",
+    # "backfill": "zero"}`
     #
-    # `\}`
+    # `}`
     #
     # @!attribute [rw] attribute_name
     #   The name of the attribute as specified in the schema. Amazon
@@ -4122,20 +4122,20 @@ module Aws::ForecastService
     #
     # For example:
     #
-    # `\{`
+    # `{`
     #
     # `"AttributeName": "demand",`
     #
-    # `FeaturizationPipeline [ \{`
+    # `FeaturizationPipeline [ {`
     #
     # `"FeaturizationMethodName": "filling",`
     #
-    # `"FeaturizationMethodParameters": \{"aggregation": "avg", "backfill":
-    # "nan"\}`
+    # `"FeaturizationMethodParameters": {"aggregation": "avg", "backfill":
+    # "nan"}`
     #
-    # `\} ]`
+    # `} ]`
     #
-    # `\}`
+    # `}`
     #
     # @!attribute [rw] attribute_name
     #   The name of the schema attribute that specifies the data field to be
@@ -4252,14 +4252,14 @@ module Aws::ForecastService
     # The following is an example of how you specify a `FeaturizationMethod`
     # object.
     #
-    # `\{`
+    # `{`
     #
     # `"FeaturizationMethodName": "filling",`
     #
-    # `"FeaturizationMethodParameters": \{"aggregation": "sum",
-    # "middlefill": "zero", "backfill": "zero"\}`
+    # `"FeaturizationMethodParameters": {"aggregation": "sum", "middlefill":
+    # "zero", "backfill": "zero"}`
     #
-    # `\}`
+    # `}`
     #
     # @!attribute [rw] featurization_method_name
     #   The name of the method. The "filling" method is the only supported
@@ -4768,8 +4768,8 @@ module Aws::ForecastService
     #   For example, to list all dataset import jobs whose status is ACTIVE,
     #   you specify the following filter:
     #
-    #   `"Filters": [ \{ "Condition": "IS", "Key": "Status", "Value":
-    #   "ACTIVE" \} ]`
+    #   `"Filters": [ { "Condition": "IS", "Key": "Status", "Value":
+    #   "ACTIVE" } ]`
     #   @return [Array<Types::Filter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListDatasetImportJobsRequest AWS API Documentation
@@ -4984,9 +4984,9 @@ module Aws::ForecastService
     #   For example, to list all jobs that export a forecast named
     #   *electricityforecast*, specify the following filter:
     #
-    #   `"Filters": [ \{ "Condition": "IS", "Key": "ForecastArn", "Value":
+    #   `"Filters": [ { "Condition": "IS", "Key": "ForecastArn", "Value":
     #   "arn:aws:forecast:us-west-2:<acct-id>:forecast/electricityforecast"
-    #   \} ]`
+    #   } ]`
     #   @return [Array<Types::Filter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListForecastExportJobsRequest AWS API Documentation
@@ -5048,8 +5048,8 @@ module Aws::ForecastService
     #   For example, to list all forecasts whose status is not ACTIVE, you
     #   would specify:
     #
-    #   `"Filters": [ \{ "Condition": "IS_NOT", "Key": "Status", "Value":
-    #   "ACTIVE" \} ]`
+    #   `"Filters": [ { "Condition": "IS_NOT", "Key": "Status", "Value":
+    #   "ACTIVE" } ]`
     #   @return [Array<Types::Filter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListForecastsRequest AWS API Documentation
@@ -5116,8 +5116,8 @@ module Aws::ForecastService
     #   For example, to list only successful monitor evaluations, you would
     #   specify:
     #
-    #   `"Filters": [ \{ "Condition": "IS", "Key": "EvaluationState",
-    #   "Value": "SUCCESS" \} ]`
+    #   `"Filters": [ { "Condition": "IS", "Key": "EvaluationState",
+    #   "Value": "SUCCESS" } ]`
     #   @return [Array<Types::Filter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListMonitorEvaluationsRequest AWS API Documentation
@@ -5189,8 +5189,8 @@ module Aws::ForecastService
     #   For example, to list all monitors who's status is ACTIVE, you would
     #   specify:
     #
-    #   `"Filters": [ \{ "Condition": "IS", "Key": "Status", "Value":
-    #   "ACTIVE" \} ]`
+    #   `"Filters": [ { "Condition": "IS", "Key": "Status", "Value":
+    #   "ACTIVE" } ]`
     #   @return [Array<Types::Filter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListMonitorsRequest AWS API Documentation
@@ -5311,8 +5311,8 @@ module Aws::ForecastService
     #   For example, to list all predictors whose status is ACTIVE, you
     #   would specify:
     #
-    #   `"Filters": [ \{ "Condition": "IS", "Key": "Status", "Value":
-    #   "ACTIVE" \} ]`
+    #   `"Filters": [ { "Condition": "IS", "Key": "Status", "Value":
+    #   "ACTIVE" } ]`
     #   @return [Array<Types::Filter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListPredictorsRequest AWS API Documentation
@@ -5400,9 +5400,9 @@ module Aws::ForecastService
     #   For example, to list all jobs that export a forecast named
     #   *electricityWhatIf*, specify the following filter:
     #
-    #   `"Filters": [ \{ "Condition": "IS", "Key": "WhatIfAnalysisArn",
+    #   `"Filters": [ { "Condition": "IS", "Key": "WhatIfAnalysisArn",
     #   "Value":
-    #   "arn:aws:forecast:us-west-2:<acct-id>:forecast/electricityWhatIf" \}
+    #   "arn:aws:forecast:us-west-2:<acct-id>:forecast/electricityWhatIf" }
     #   ]`
     #   @return [Array<Types::Filter>]
     #
@@ -5467,10 +5467,10 @@ module Aws::ForecastService
     #   For example, to list all jobs that export a forecast named
     #   *electricityWIFExport*, specify the following filter:
     #
-    #   `"Filters": [ \{ "Condition": "IS", "Key":
-    #   "WhatIfForecastExportArn", "Value":
+    #   `"Filters": [ { "Condition": "IS", "Key": "WhatIfForecastExportArn",
+    #   "Value":
     #   "arn:aws:forecast:us-west-2:<acct-id>:forecast/electricityWIFExport"
-    #   \} ]`
+    #   } ]`
     #   @return [Array<Types::Filter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListWhatIfForecastExportsRequest AWS API Documentation
@@ -5534,10 +5534,10 @@ module Aws::ForecastService
     #   For example, to list all jobs that export a forecast named
     #   *electricityWhatIfForecast*, specify the following filter:
     #
-    #   `"Filters": [ \{ "Condition": "IS", "Key": "WhatIfForecastArn",
+    #   `"Filters": [ { "Condition": "IS", "Key": "WhatIfForecastArn",
     #   "Value":
     #   "arn:aws:forecast:us-west-2:<acct-id>:forecast/electricityWhatIfForecast"
-    #   \} ]`
+    #   } ]`
     #   @return [Array<Types::Filter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListWhatIfForecastsRequest AWS API Documentation

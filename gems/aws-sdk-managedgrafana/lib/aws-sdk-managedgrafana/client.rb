@@ -660,7 +660,7 @@ module Aws::ManagedGrafana
     #   A description for the workspace. This is used only to help you
     #   identify this workspace.
     #
-    #   Pattern: `^[\\p\{L\}\\p\{Z\}\\p\{N\}\\p\{P\}]\{0,2048\}$`
+    #   Pattern: `^[\\p{L}\\p{Z}\\p{N}\\p{P}]{0,2048}$`
     #
     # @option params [String] :workspace_name
     #   The name for the workspace. It does not have to be unique.
@@ -2163,7 +2163,7 @@ module Aws::ManagedGrafana
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-managedgrafana'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

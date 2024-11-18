@@ -233,6 +233,19 @@ module Aws::B2bi
       end
     end
 
+    class GenerateMappingRequest
+      attr_accessor input_file_content: ::String
+      attr_accessor output_file_content: ::String
+      attr_accessor mapping_type: ("JSONATA" | "XSLT")
+      SENSITIVE: []
+    end
+
+    class GenerateMappingResponse
+      attr_accessor mapping_template: ::String
+      attr_accessor mapping_accuracy: ::Float
+      SENSITIVE: []
+    end
+
     class GetCapabilityRequest
       attr_accessor capability_id: ::String
       SENSITIVE: []

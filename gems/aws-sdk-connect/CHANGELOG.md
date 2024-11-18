@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.185.0 (2024-11-18)
+------------------
+
+* Feature - Adds CreateContactFlowVersion and ListContactFlowVersions APIs to create and view the versions of a contact flow.
+
+1.184.0 (2024-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.183.0 (2024-10-30)
 ------------------
 

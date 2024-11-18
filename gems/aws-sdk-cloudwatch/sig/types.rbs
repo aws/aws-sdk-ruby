@@ -268,6 +268,18 @@ module Aws::CloudWatch
       SENSITIVE: []
     end
 
+    class Entity
+      attr_accessor key_attributes: ::Hash[::String, ::String]
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class EntityMetricData
+      attr_accessor entity: Types::Entity
+      attr_accessor metric_data: ::Array[Types::MetricDatum]
+      SENSITIVE: []
+    end
+
     class GetDashboardInput
       attr_accessor dashboard_name: ::String
       SENSITIVE: []
@@ -758,6 +770,8 @@ module Aws::CloudWatch
     class PutMetricDataInput
       attr_accessor namespace: ::String
       attr_accessor metric_data: ::Array[Types::MetricDatum]
+      attr_accessor entity_metric_data: ::Array[Types::EntityMetricData]
+      attr_accessor strict_entity_validation: bool
       SENSITIVE: []
     end
 

@@ -1378,6 +1378,75 @@ module Aws::B2bi
       req.send_request(options)
     end
 
+    # Takes sample input and output documents and uses Amazon Bedrock to
+    # generate a mapping automatically. Depending on the accuracy and other
+    # factors, you can then edit the mapping for your needs.
+    #
+    # <note markdown="1"> Before you can use the AI-assisted feature for Amazon Web Services B2B
+    # Data Interchange you must enable models in Amazon Bedrock. For
+    # details, see [AI-assisted template mapping prerequisites][1] in the
+    # *Amazon Web Services B2B Data Interchange User guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/b2bi/latest/userguide/ai-assisted-mapping.html#ai-assist-prereq
+    #
+    # @option params [required, String] :input_file_content
+    #   Provide the contents of a sample X12 EDI file (for inbound EDI) or
+    #   JSON/XML file (for outbound EDI) to use as a starting point for the
+    #   mapping.
+    #
+    # @option params [required, String] :output_file_content
+    #   Provide the contents of a sample X12 EDI file (for outbound EDI) or
+    #   JSON/XML file (for inbound EDI) to use as a target for the mapping.
+    #
+    # @option params [required, String] :mapping_type
+    #   Specify the mapping type: either `JSONATA` or `XSLT.`
+    #
+    # @return [Types::GenerateMappingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GenerateMappingResponse#mapping_template #mapping_template} => String
+    #   * {Types::GenerateMappingResponse#mapping_accuracy #mapping_accuracy} => Float
+    #
+    #
+    # @example Example: Sample GenerateMapping call
+    #
+    #   resp = client.generate_mapping({
+    #     input_file_content: "Sample input file content", 
+    #     mapping_type: "JSONATA", 
+    #     output_file_content: "Sample output file content", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     mapping_accuracy: 0.95, 
+    #     mapping_template: "Sample mapping content", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.generate_mapping({
+    #     input_file_content: "GenerateMappingInputFileContent", # required
+    #     output_file_content: "GenerateMappingOutputFileContent", # required
+    #     mapping_type: "JSONATA", # required, accepts JSONATA, XSLT
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.mapping_template #=> String
+    #   resp.mapping_accuracy #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/GenerateMapping AWS API Documentation
+    #
+    # @overload generate_mapping(params = {})
+    # @param [Hash] params ({})
+    def generate_mapping(params = {}, options = {})
+      req = build_request(:generate_mapping, params)
+      req.send_request(options)
+    end
+
     # Retrieves the details for the specified capability. A trading
     # capability contains the information required to transform incoming EDI
     # documents into JSON or XML outputs.
@@ -2963,7 +3032,7 @@ module Aws::B2bi
     #
     # @option params [String] :status
     #   Specifies the transformer's status. You can update the state of the
-    #   transformer, from `active` to `inactive`, or `inactive` to `active`.
+    #   transformer from `inactive` to `active`.
     #
     # @option params [String] :file_format
     #   Specifies that the currently supported file formats for EDI
@@ -3188,7 +3257,7 @@ module Aws::B2bi
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-b2bi'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

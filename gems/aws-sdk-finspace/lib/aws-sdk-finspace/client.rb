@@ -482,11 +482,11 @@ module Aws::Finspace
     #   The list of Amazon Resource Names (ARN) of the data bundles to
     #   install. Currently supported data bundle ARNs:
     #
-    #   * `arn:aws:finspace:$\{Region\}::data-bundle/capital-markets-sample` -
+    #   * `arn:aws:finspace:${Region}::data-bundle/capital-markets-sample` -
     #     Contains sample Capital Markets datasets, categories and controlled
     #     vocabularies.
     #
-    #   * `arn:aws:finspace:$\{Region\}::data-bundle/taq` (default) - Contains
+    #   * `arn:aws:finspace:${Region}::data-bundle/taq` (default) - Contains
     #     trades and quotes data in addition to sample Capital Markets data.
     #
     # @return [Types::CreateEnvironmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -567,33 +567,33 @@ module Aws::Finspace
     #
     #   1.  This request adds a single sym file at database root location.
     #
-    #       `\{ "changeType": "PUT", "s3Path":"s3://bucket/db/sym",
-    #       "dbPath":"/"\}`
+    #       `{ "changeType": "PUT", "s3Path":"s3://bucket/db/sym",
+    #       "dbPath":"/"}`
     #
     #   2.  This request adds files in the given `s3Path` under the 2020.01.02
     #       partition of the database.
     #
-    #       `\{ "changeType": "PUT", "s3Path":"s3://bucket/db/2020.01.02/",
-    #       "dbPath":"/2020.01.02/"\}`
+    #       `{ "changeType": "PUT", "s3Path":"s3://bucket/db/2020.01.02/",
+    #       "dbPath":"/2020.01.02/"}`
     #
     #   3.  This request adds files in the given `s3Path` under the *taq*
     #       table partition of the database.
     #
-    #       `[ \{ "changeType": "PUT",
+    #       `[ { "changeType": "PUT",
     #       "s3Path":"s3://bucket/db/2020.01.02/taq/",
-    #       "dbPath":"/2020.01.02/taq/"\}]`
+    #       "dbPath":"/2020.01.02/taq/"}]`
     #
     #   4.  This request deletes the 2020.01.02 partition of the database.
     #
-    #       `[\{ "changeType": "DELETE", "dbPath": "/2020.01.02/"\} ]`
+    #       `[{ "changeType": "DELETE", "dbPath": "/2020.01.02/"} ]`
     #
     #   5.  The *DELETE* request allows you to delete the existing files under
     #       the 2020.01.02 partition of the database, and the *PUT* request
     #       adds a new taq table under it.
     #
-    #       `[ \{"changeType": "DELETE", "dbPath":"/2020.01.02/"\},
-    #       \{"changeType": "PUT", "s3Path":"s3://bucket/db/2020.01.02/taq/",
-    #       "dbPath":"/2020.01.02/taq/"\}]`
+    #       `[ {"changeType": "DELETE", "dbPath":"/2020.01.02/"},
+    #       {"changeType": "PUT", "s3Path":"s3://bucket/db/2020.01.02/taq/",
+    #       "dbPath":"/2020.01.02/taq/"}]`
     #
     # @option params [required, String] :client_token
     #   A token that ensures idempotency. This token expires in 10 minutes.
@@ -3795,7 +3795,7 @@ module Aws::Finspace
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-finspace'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

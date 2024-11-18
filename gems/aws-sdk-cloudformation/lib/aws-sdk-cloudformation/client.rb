@@ -661,9 +661,9 @@ module Aws::CloudFormation
     #   limit resource-level permissions and avoid returning a response when
     #   no parameter is sent in the request:
     #
-    #    `\{ "Version": "2012-10-17", "Statement": [\{ "Effect": "Deny",
+    #    `{ "Version": "2012-10-17", "Statement": [{ "Effect": "Deny",
     #   "Action": "cloudformation:DescribeStacks", "NotResource":
-    #   "arn:aws:cloudformation:*:*:stack/*/*" \}] \}`
+    #   "arn:aws:cloudformation:*:*:stack/*/*" }] }`
     #
     #    </note>
     #
@@ -892,7 +892,6 @@ module Aws::CloudFormation
     #
     #     * If you don't specify either of these capabilities, CloudFormation
     #       returns an `InsufficientCapabilities` error.
-    #
     #     If your stack template contains these resources, we suggest that you
     #     review all permissions associated with them and edit their
     #     permissions if necessary.
@@ -910,7 +909,6 @@ module Aws::CloudFormation
     #     * [ AWS::IAM::User][6]
     #
     #     * [AWS::IAM::UserToGroupAddition][7]
-    #
     #     For more information, see [Acknowledging IAM resources in
     #     CloudFormation templates][8].
     #
@@ -1347,7 +1345,6 @@ module Aws::CloudFormation
     #
     #     * If you don't specify either of these capabilities, CloudFormation
     #       returns an `InsufficientCapabilities` error.
-    #
     #     If your stack template contains these resources, we recommend that
     #     you review all permissions associated with them and edit their
     #     permissions if necessary.
@@ -1365,7 +1362,6 @@ module Aws::CloudFormation
     #     * [AWS::IAM::User][6]
     #
     #     * [AWS::IAM::UserToGroupAddition][7]
-    #
     #     For more information, see [Acknowledging IAM resources in
     #     CloudFormation templates][8].
     #
@@ -1808,7 +1804,6 @@ module Aws::CloudFormation
     #
     #     * If you don't specify either of these capabilities, CloudFormation
     #       returns an `InsufficientCapabilities` error.
-    #
     #     If your stack template contains these resources, we recommend that
     #     you review all permissions associated with them and edit their
     #     permissions if necessary.
@@ -1826,7 +1821,6 @@ module Aws::CloudFormation
     #     * [AWS::IAM::User][6]
     #
     #     * [AWS::IAM::UserToGroupAddition][7]
-    #
     #     For more information, see [Acknowledging IAM resources in
     #     CloudFormation templates][8].
     #
@@ -3716,10 +3710,9 @@ module Aws::CloudFormation
     #   limit resource-level permissions and avoid returning a response when
     #   no parameter is sent in the request:
     #
-    #    \\\{ "Version": "2012-10-17", "Statement": \[\\\{ "Effect":
+    #    \{ "Version": "2012-10-17", "Statement": \[\{ "Effect":
     #   "Deny", "Action": "cloudformation:DescribeStacks",
-    #   "NotResource": "arn:aws:cloudformation:*:*:stack/*/*" \\}\]
-    #   \\}
+    #   "NotResource": "arn:aws:cloudformation:*:*:stack/*/*" }\] }
     #
     #    </note>
     #
@@ -4399,7 +4392,7 @@ module Aws::CloudFormation
     # @option params [required, String] :generated_template_name
     #   The name or Amazon Resource Name (ARN) of the generated template. The
     #   format is
-    #   `arn:$\{Partition\}:cloudformation:$\{Region\}:$\{Account\}:generatedtemplate/$\{Id\}`.
+    #   `arn:${Partition}:cloudformation:${Region}:${Account}:generatedtemplate/${Id}`.
     #   For example,
     #   `arn:aws:cloudformation:us-east-1:123456789012:generatedtemplate/2e8465c1-9a80-43ea-a3a3-4f2d692fe6dc
     #   `.
@@ -4960,6 +4953,67 @@ module Aws::CloudFormation
     # @param [Hash] params ({})
     def list_generated_templates(params = {}, options = {})
       req = build_request(:list_generated_templates, params)
+      req.send_request(options)
+    end
+
+    # Returns summaries of invoked Hooks when a change set or Cloud Control
+    # API operation target is provided.
+    #
+    # @option params [required, String] :target_type
+    #   The type of operation being targeted by the Hook.
+    #
+    # @option params [required, String] :target_id
+    #   The logical ID of the target the operation is acting on by the Hook.
+    #   If the target is a change set, it's the ARN of the change set.
+    #
+    #   If the target is a Cloud Control API operation, this will be the
+    #   `HookRequestToken` returned by the Cloud Control API operation
+    #   request. For more information on the `HookRequestToken`, see
+    #   [ProgressEvent][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_ProgressEvent.html
+    #
+    # @option params [String] :next_token
+    #   A string that identifies the next page of events that you want to
+    #   retrieve.
+    #
+    # @return [Types::ListHookResultsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListHookResultsOutput#target_type #target_type} => String
+    #   * {Types::ListHookResultsOutput#target_id #target_id} => String
+    #   * {Types::ListHookResultsOutput#hook_results #hook_results} => Array&lt;Types::HookResultSummary&gt;
+    #   * {Types::ListHookResultsOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_hook_results({
+    #     target_type: "CHANGE_SET", # required, accepts CHANGE_SET, STACK, RESOURCE, CLOUD_CONTROL
+    #     target_id: "HookResultId", # required
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.target_type #=> String, one of "CHANGE_SET", "STACK", "RESOURCE", "CLOUD_CONTROL"
+    #   resp.target_id #=> String
+    #   resp.hook_results #=> Array
+    #   resp.hook_results[0].invocation_point #=> String, one of "PRE_PROVISION"
+    #   resp.hook_results[0].failure_mode #=> String, one of "FAIL", "WARN"
+    #   resp.hook_results[0].type_name #=> String
+    #   resp.hook_results[0].type_version_id #=> String
+    #   resp.hook_results[0].type_configuration_version_id #=> String
+    #   resp.hook_results[0].status #=> String, one of "HOOK_IN_PROGRESS", "HOOK_COMPLETE_SUCCEEDED", "HOOK_COMPLETE_FAILED", "HOOK_FAILED"
+    #   resp.hook_results[0].hook_status_reason #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListHookResults AWS API Documentation
+    #
+    # @overload list_hook_results(params = {})
+    # @param [Hash] params ({})
+    def list_hook_results(params = {}, options = {})
+      req = build_request(:list_hook_results, params)
       req.send_request(options)
     end
 
@@ -6202,7 +6256,6 @@ module Aws::CloudFormation
     #
     #     * Public extensions that you have activated in this account and
     #       Region.
-    #
     #   * `PUBLIC`: Extensions that are publicly visible and available to be
     #     activated within any Amazon Web Services account. This includes
     #     extensions from Amazon Web Services, in addition to third-party
@@ -7425,7 +7478,6 @@ module Aws::CloudFormation
     #
     #     * If you don't specify either of these capabilities, CloudFormation
     #       returns an `InsufficientCapabilities` error.
-    #
     #     If your stack template contains these resources, we suggest that you
     #     review all permissions associated with them and edit their
     #     permissions if necessary.
@@ -7443,7 +7495,6 @@ module Aws::CloudFormation
     #     * [ AWS::IAM::User][6]
     #
     #     * [AWS::IAM::UserToGroupAddition][7]
-    #
     #     For more information, see [Acknowledging IAM resources in
     #     CloudFormation templates][8].
     #
@@ -7912,7 +7963,6 @@ module Aws::CloudFormation
     #
     #     * If you don't specify either of these capabilities, CloudFormation
     #       returns an `InsufficientCapabilities` error.
-    #
     #     If your stack template contains these resources, we recommend that
     #     you review all permissions associated with them and edit their
     #     permissions if necessary.
@@ -7930,7 +7980,6 @@ module Aws::CloudFormation
     #     * [AWS::IAM::User][6]
     #
     #     * [AWS::IAM::UserToGroupAddition][7]
-    #
     #     For more information, see [Acknowledging IAM resources in
     #     CloudFormation templates][8].
     #
@@ -8352,7 +8401,7 @@ module Aws::CloudFormation
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.122.0'
+      context[:gem_version] = '1.124.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

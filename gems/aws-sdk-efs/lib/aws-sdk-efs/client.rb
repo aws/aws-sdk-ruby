@@ -793,7 +793,7 @@ module Aws::EFS
     # @option params [Array<Types::Tag>] :tags
     #   Use to create one or more tags associated with the file system. Each
     #   tag is a user-defined key-value pair. Name your file system on
-    #   creation by including a `"Key":"Name","Value":"\{value\}"` key-value
+    #   creation by including a `"Key":"Name","Value":"{value}"` key-value
     #   pair. Each key must be unique. For more information, see [Tagging
     #   Amazon Web Services resources][1] in the *Amazon Web Services General
     #   Reference Guide*.
@@ -998,7 +998,6 @@ module Aws::EFS
     #
     #   * Sets the `requesterManaged` property of the network interface to
     #     `true`, and the `requesterId` value to `EFS`.
-    #
     #   Each Amazon EFS mount target has one corresponding requester-managed
     #   EC2 network interface. After the network interface is created,
     #   Amazon EFS sets the `NetworkInterfaceId` field in the mount
@@ -2919,7 +2918,7 @@ module Aws::EFS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-efs'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.88.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

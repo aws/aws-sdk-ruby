@@ -865,6 +865,49 @@ module Aws::B2bi
       class Unknown < FormatOptions; end
     end
 
+    # @!attribute [rw] input_file_content
+    #   Provide the contents of a sample X12 EDI file (for inbound EDI) or
+    #   JSON/XML file (for outbound EDI) to use as a starting point for the
+    #   mapping.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_file_content
+    #   Provide the contents of a sample X12 EDI file (for outbound EDI) or
+    #   JSON/XML file (for inbound EDI) to use as a target for the mapping.
+    #   @return [String]
+    #
+    # @!attribute [rw] mapping_type
+    #   Specify the mapping type: either `JSONATA` or `XSLT.`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/GenerateMappingRequest AWS API Documentation
+    #
+    class GenerateMappingRequest < Struct.new(
+      :input_file_content,
+      :output_file_content,
+      :mapping_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] mapping_template
+    #   Returns a mapping template based on your inputs.
+    #   @return [String]
+    #
+    # @!attribute [rw] mapping_accuracy
+    #   Returns a percentage that estimates the accuracy of the generated
+    #   mapping.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/b2bi-2022-06-23/GenerateMappingResponse AWS API Documentation
+    #
+    class GenerateMappingResponse < Struct.new(
+      :mapping_template,
+      :mapping_accuracy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] capability_id
     #   Specifies a system-assigned unique identifier for the capability.
     #   @return [String]
@@ -2460,7 +2503,7 @@ module Aws::B2bi
     #
     # @!attribute [rw] status
     #   Specifies the transformer's status. You can update the state of the
-    #   transformer, from `active` to `inactive`, or `inactive` to `active`.
+    #   transformer from `inactive` to `active`.
     #   @return [String]
     #
     # @!attribute [rw] file_format

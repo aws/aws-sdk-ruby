@@ -232,6 +232,89 @@ module Aws::BedrockAgentRuntime
       SENSITIVE: []
     end
 
+    class FlowTrace
+      attr_accessor condition_node_result_trace: Types::FlowTraceConditionNodeResultEvent
+      attr_accessor node_input_trace: Types::FlowTraceNodeInputEvent
+      attr_accessor node_output_trace: Types::FlowTraceNodeOutputEvent
+      attr_accessor unknown: untyped
+      SENSITIVE: [:condition_node_result_trace, :node_input_trace, :node_output_trace]
+
+      class ConditionNodeResultTrace < FlowTrace
+      end
+      class NodeInputTrace < FlowTrace
+      end
+      class NodeOutputTrace < FlowTrace
+      end
+      class Unknown < FlowTrace
+      end
+    end
+
+    class FlowTraceCondition
+      attr_accessor condition_name: ::String
+      SENSITIVE: []
+    end
+
+    class FlowTraceConditionNodeResultEvent
+      attr_accessor node_name: ::String
+      attr_accessor satisfied_conditions: ::Array[Types::FlowTraceCondition]
+      attr_accessor timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class FlowTraceEvent
+      attr_accessor trace: Types::FlowTrace
+      attr_accessor event_type: untyped
+      SENSITIVE: [:trace]
+    end
+
+    class FlowTraceNodeInputContent
+      attr_accessor document: untyped
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Document < FlowTraceNodeInputContent
+      end
+      class Unknown < FlowTraceNodeInputContent
+      end
+    end
+
+    class FlowTraceNodeInputEvent
+      attr_accessor fields: ::Array[Types::FlowTraceNodeInputField]
+      attr_accessor node_name: ::String
+      attr_accessor timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class FlowTraceNodeInputField
+      attr_accessor content: Types::FlowTraceNodeInputContent
+      attr_accessor node_input_name: ::String
+      SENSITIVE: [:content]
+    end
+
+    class FlowTraceNodeOutputContent
+      attr_accessor document: untyped
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Document < FlowTraceNodeOutputContent
+      end
+      class Unknown < FlowTraceNodeOutputContent
+      end
+    end
+
+    class FlowTraceNodeOutputEvent
+      attr_accessor fields: ::Array[Types::FlowTraceNodeOutputField]
+      attr_accessor node_name: ::String
+      attr_accessor timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class FlowTraceNodeOutputField
+      attr_accessor content: Types::FlowTraceNodeOutputContent
+      attr_accessor node_output_name: ::String
+      SENSITIVE: []
+    end
+
     class FunctionInvocationInput
       attr_accessor action_group: ::String
       attr_accessor action_invocation_type: ("RESULT" | "USER_CONFIRMATION" | "USER_CONFIRMATION_AND_RESULT")
@@ -456,6 +539,7 @@ module Aws::BedrockAgentRuntime
     end
 
     class InvokeFlowRequest
+      attr_accessor enable_trace: bool
       attr_accessor flow_alias_identifier: ::String
       attr_accessor flow_identifier: ::String
       attr_accessor inputs: ::Array[Types::FlowInput]
@@ -973,7 +1057,7 @@ module Aws::BedrockAgentRuntime
     end
 
     class FlowResponseStream < Enumerator[untyped, untyped]
-      def event_types: () -> [:access_denied_exception, :bad_gateway_exception, :conflict_exception, :dependency_failed_exception, :flow_completion_event, :flow_output_event, :internal_server_exception, :resource_not_found_exception, :service_quota_exceeded_exception, :throttling_exception, :validation_exception]
+      def event_types: () -> [:access_denied_exception, :bad_gateway_exception, :conflict_exception, :dependency_failed_exception, :flow_completion_event, :flow_output_event, :flow_trace_event, :internal_server_exception, :resource_not_found_exception, :service_quota_exceeded_exception, :throttling_exception, :validation_exception]
     end
 
     class ResponseStream < Enumerator[untyped, untyped]

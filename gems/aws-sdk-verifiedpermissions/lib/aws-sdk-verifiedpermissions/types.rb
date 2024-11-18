@@ -30,7 +30,7 @@ module Aws::VerifiedPermissions
     # [IsAuthorized][1], [BatchIsAuthorized][2], and
     # [IsAuthorizedWithToken][3] operations.
     #
-    # Example: `\{ "actionId": "<action name>", "actionType": "Action" \}`
+    # Example: `{ "actionId": "<action name>", "actionType": "Action" }`
     #
     #
     #
@@ -79,7 +79,7 @@ module Aws::VerifiedPermissions
     # @!attribute [rw] boolean
     #   An attribute value of [Boolean][1] type.
     #
-    #   Example: `\{"boolean": true\}`
+    #   Example: `{"boolean": true}`
     #
     #
     #
@@ -89,8 +89,8 @@ module Aws::VerifiedPermissions
     # @!attribute [rw] entity_identifier
     #   An attribute value of type [EntityIdentifier][1].
     #
-    #   Example: `"entityIdentifier": \{ "entityId": "<id>", "entityType":
-    #   "<entity type>"\}`
+    #   Example: `"entityIdentifier": { "entityId": "<id>", "entityType":
+    #   "<entity type>"}`
     #
     #
     #
@@ -100,7 +100,7 @@ module Aws::VerifiedPermissions
     # @!attribute [rw] long
     #   An attribute value of [Long][1] type.
     #
-    #   Example: `\{"long": 0\}`
+    #   Example: `{"long": 0}`
     #
     #
     #
@@ -110,7 +110,7 @@ module Aws::VerifiedPermissions
     # @!attribute [rw] string
     #   An attribute value of [String][1] type.
     #
-    #   Example: `\{"string": "abc"\}`
+    #   Example: `{"string": "abc"}`
     #
     #
     #
@@ -120,7 +120,7 @@ module Aws::VerifiedPermissions
     # @!attribute [rw] set
     #   An attribute value of [Set][1] type.
     #
-    #   Example: `\{"set": [ \{\} ] \}`
+    #   Example: `{"set": [ {} ] }`
     #
     #
     #
@@ -130,12 +130,32 @@ module Aws::VerifiedPermissions
     # @!attribute [rw] record
     #   An attribute value of [Record][1] type.
     #
-    #   Example: `\{"record": \{ "keyName": \{\} \} \}`
+    #   Example: `{"record": { "keyName": {} } }`
     #
     #
     #
     #   [1]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#record
     #   @return [Hash<String,Types::AttributeValue>]
+    #
+    # @!attribute [rw] ipaddr
+    #   An attribute value of [ipaddr][1] type.
+    #
+    #   Example: `{"ip": "192.168.1.100"}`
+    #
+    #
+    #
+    #   [1]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-ipaddr
+    #   @return [String]
+    #
+    # @!attribute [rw] decimal
+    #   An attribute value of [decimal][1] type.
+    #
+    #   Example: `{"decimal": "1.1"}`
+    #
+    #
+    #
+    #   [1]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-decimal
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/AttributeValue AWS API Documentation
     #
@@ -146,8 +166,10 @@ module Aws::VerifiedPermissions
       :string,
       :set,
       :record,
+      :ipaddr,
+      :decimal,
       :unknown)
-      SENSITIVE = [:boolean, :long, :string]
+      SENSITIVE = [:boolean, :long, :string, :ipaddr, :decimal]
       include Aws::Structure
       include Aws::Structure::Union
 
@@ -157,7 +179,138 @@ module Aws::VerifiedPermissions
       class String < AttributeValue; end
       class Set < AttributeValue; end
       class Record < AttributeValue; end
+      class Ipaddr < AttributeValue; end
+      class Decimal < AttributeValue; end
       class Unknown < AttributeValue; end
+    end
+
+    # Contains the information about an error resulting from a
+    # `BatchGetPolicy` API call.
+    #
+    # @!attribute [rw] code
+    #   The error code that was returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_store_id
+    #   The identifier of the policy store associated with the failed
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_id
+    #   The identifier of the policy associated with the failed request.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/BatchGetPolicyErrorItem AWS API Documentation
+    #
+    class BatchGetPolicyErrorItem < Struct.new(
+      :code,
+      :policy_store_id,
+      :policy_id,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] requests
+    #   An array of up to 100 policies you want information about.
+    #   @return [Array<Types::BatchGetPolicyInputItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/BatchGetPolicyInput AWS API Documentation
+    #
+    class BatchGetPolicyInput < Struct.new(
+      :requests)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a policy that you include in a `BatchGetPolicy` API
+    # request.
+    #
+    # @!attribute [rw] policy_store_id
+    #   The identifier of the policy store where the policy you want
+    #   information about is stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_id
+    #   The identifier of the policy you want information about.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/BatchGetPolicyInputItem AWS API Documentation
+    #
+    class BatchGetPolicyInputItem < Struct.new(
+      :policy_store_id,
+      :policy_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] results
+    #   Information about the policies listed in the request that were
+    #   successfully returned. These results are returned in the order they
+    #   were requested.
+    #   @return [Array<Types::BatchGetPolicyOutputItem>]
+    #
+    # @!attribute [rw] errors
+    #   Information about the policies from the request that resulted in an
+    #   error. These results are returned in the order they were requested.
+    #   @return [Array<Types::BatchGetPolicyErrorItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/BatchGetPolicyOutput AWS API Documentation
+    #
+    class BatchGetPolicyOutput < Struct.new(
+      :results,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a policy returned from a `BatchGetPolicy`
+    # API request.
+    #
+    # @!attribute [rw] policy_store_id
+    #   The identifier of the policy store where the policy you want
+    #   information about is stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_id
+    #   The identifier of the policy you want information about.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_type
+    #   The type of the policy. This is one of the following values:
+    #
+    #   * `STATIC`
+    #
+    #   * `TEMPLATE_LINKED`
+    #   @return [String]
+    #
+    # @!attribute [rw] definition
+    #   The policy definition of an item in the list of policies returned.
+    #   @return [Types::PolicyDefinitionDetail]
+    #
+    # @!attribute [rw] created_date
+    #   The date and time the policy was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date
+    #   The date and time the policy was most recently updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/BatchGetPolicyOutputItem AWS API Documentation
+    #
+    class BatchGetPolicyOutputItem < Struct.new(
+      :policy_store_id,
+      :policy_id,
+      :policy_type,
+      :definition,
+      :created_date,
+      :last_updated_date)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # @!attribute [rw] policy_store_id
@@ -228,7 +381,8 @@ module Aws::VerifiedPermissions
 
     # @!attribute [rw] results
     #   A series of `Allow` or `Deny` decisions for each request, and the
-    #   policies that produced them.
+    #   policies that produced them. These results are returned in the order
+    #   they were requested.
     #   @return [Array<Types::BatchIsAuthorizedOutputItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/BatchIsAuthorizedOutput AWS API Documentation
@@ -373,7 +527,8 @@ module Aws::VerifiedPermissions
     #
     # @!attribute [rw] results
     #   A series of `Allow` or `Deny` decisions for each request, and the
-    #   policies that produced them.
+    #   policies that produced them. These results are returned in the order
+    #   they were requested.
     #   @return [Array<Types::BatchIsAuthorizedWithTokenOutputItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/BatchIsAuthorizedWithTokenOutput AWS API Documentation
@@ -503,9 +658,9 @@ module Aws::VerifiedPermissions
     # This data type part of a [Configuration][1] structure that is used as
     # a parameter to [CreateIdentitySource][2].
     #
-    # Example:`"CognitoUserPoolConfiguration":\{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
+    # Example:`"CognitoUserPoolConfiguration":{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
     # ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration":
-    # \{"groupEntityType": "MyCorp::Group"\}\}`
+    # {"groupEntityType": "MyCorp::Group"}}`
     #
     #
     #
@@ -554,9 +709,9 @@ module Aws::VerifiedPermissions
     # [ConfigurationDetail][1] structure that is part of the response to
     # [GetIdentitySource][2].
     #
-    # Example:`"CognitoUserPoolConfiguration":\{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
+    # Example:`"CognitoUserPoolConfiguration":{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
     # ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration":
-    # \{"groupEntityType": "MyCorp::Group"\}\}`
+    # {"groupEntityType": "MyCorp::Group"}}`
     #
     #
     #
@@ -614,9 +769,9 @@ module Aws::VerifiedPermissions
     # [ConfigurationItem][1] structure that is part of the response to
     # [ListIdentitySources][2].
     #
-    # Example:`"CognitoUserPoolConfiguration":\{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
+    # Example:`"CognitoUserPoolConfiguration":{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
     # ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration":
-    # \{"groupEntityType": "MyCorp::Group"\}\}`
+    # {"groupEntityType": "MyCorp::Group"}}`
     #
     #
     #
@@ -685,9 +840,9 @@ module Aws::VerifiedPermissions
     #   Amazon Cognito user pool and one or more application client IDs.
     #
     #   Example:
-    #   `"configuration":\{"cognitoUserPoolConfiguration":\{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds":
+    #   `"configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds":
     #   ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration":
-    #   \{"groupEntityType": "MyCorp::Group"\}\}\}`
+    #   {"groupEntityType": "MyCorp::Group"}}}`
     #
     #
     #
@@ -701,7 +856,7 @@ module Aws::VerifiedPermissions
     #   issuer URL, token type that you want to use, and policy store entity
     #   details.
     #
-    #   Example:`"configuration":\{"openIdConnectConfiguration":\{"issuer":"https://auth.example.com","tokenSelection":\{"accessTokenOnly":\{"audiences":["https://myapp.example.com","https://myapp2.example.com"],"principalIdClaim":"sub"\}\},"entityIdPrefix":"MyOIDCProvider","groupConfiguration":\{"groupClaim":"groups","groupEntityType":"MyCorp::UserGroup"\}\}\}`
+    #   Example:`"configuration":{"openIdConnectConfiguration":{"issuer":"https://auth.example.com","tokenSelection":{"accessTokenOnly":{"audiences":["https://myapp.example.com","https://myapp2.example.com"],"principalIdClaim":"sub"}},"entityIdPrefix":"MyOIDCProvider","groupConfiguration":{"groupClaim":"groups","groupEntityType":"MyCorp::UserGroup"}}}`
     #   @return [Types::OpenIdConnectConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/Configuration AWS API Documentation
@@ -738,9 +893,9 @@ module Aws::VerifiedPermissions
     #   assign to user groups, and one or more application client IDs.
     #
     #   Example:
-    #   `"configuration":\{"cognitoUserPoolConfiguration":\{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds":
+    #   `"configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds":
     #   ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration":
-    #   \{"groupEntityType": "MyCorp::Group"\}\}\}`
+    #   {"groupEntityType": "MyCorp::Group"}}}`
     #
     #
     #
@@ -754,7 +909,7 @@ module Aws::VerifiedPermissions
     #   issuer URL, token type that you want to use, and policy store entity
     #   details.
     #
-    #   Example:`"configuration":\{"openIdConnectConfiguration":\{"issuer":"https://auth.example.com","tokenSelection":\{"accessTokenOnly":\{"audiences":["https://myapp.example.com","https://myapp2.example.com"],"principalIdClaim":"sub"\}\},"entityIdPrefix":"MyOIDCProvider","groupConfiguration":\{"groupClaim":"groups","groupEntityType":"MyCorp::UserGroup"\}\}\}`
+    #   Example:`"configuration":{"openIdConnectConfiguration":{"issuer":"https://auth.example.com","tokenSelection":{"accessTokenOnly":{"audiences":["https://myapp.example.com","https://myapp2.example.com"],"principalIdClaim":"sub"}},"entityIdPrefix":"MyOIDCProvider","groupConfiguration":{"groupClaim":"groups","groupEntityType":"MyCorp::UserGroup"}}}`
     #   @return [Types::OpenIdConnectConfigurationDetail]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/ConfigurationDetail AWS API Documentation
@@ -791,9 +946,9 @@ module Aws::VerifiedPermissions
     #   assign to user groups, and one or more application client IDs.
     #
     #   Example:
-    #   `"configuration":\{"cognitoUserPoolConfiguration":\{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds":
+    #   `"configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds":
     #   ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration":
-    #   \{"groupEntityType": "MyCorp::Group"\}\}\}`
+    #   {"groupEntityType": "MyCorp::Group"}}}`
     #
     #
     #
@@ -807,7 +962,7 @@ module Aws::VerifiedPermissions
     #   issuer URL, token type that you want to use, and policy store entity
     #   details.
     #
-    #   Example:`"configuration":\{"openIdConnectConfiguration":\{"issuer":"https://auth.example.com","tokenSelection":\{"accessTokenOnly":\{"audiences":["https://myapp.example.com","https://myapp2.example.com"],"principalIdClaim":"sub"\}\},"entityIdPrefix":"MyOIDCProvider","groupConfiguration":\{"groupClaim":"groups","groupEntityType":"MyCorp::UserGroup"\}\}\}`
+    #   Example:`"configuration":{"openIdConnectConfiguration":{"issuer":"https://auth.example.com","tokenSelection":{"accessTokenOnly":{"audiences":["https://myapp.example.com","https://myapp2.example.com"],"principalIdClaim":"sub"}},"entityIdPrefix":"MyOIDCProvider","groupConfiguration":{"groupClaim":"groups","groupEntityType":"MyCorp::UserGroup"}}}`
     #   @return [Types::OpenIdConnectConfigurationItem]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/ConfigurationItem AWS API Documentation
@@ -853,7 +1008,7 @@ module Aws::VerifiedPermissions
     # [IsAuthorizedWithToken][3] operations.
     #
     # Example:
-    # `"context":\{"contextMap":\{"<KeyName1>":\{"boolean":true\},"<KeyName2>":\{"long":1234\}\}\}`
+    # `"context":{"contextMap":{"<KeyName1>":{"boolean":true},"<KeyName2>":{"long":1234}}}`
     #
     #
     #
@@ -871,7 +1026,7 @@ module Aws::VerifiedPermissions
     #   map of a data type and its value.
     #
     #   Example:
-    #   `"contextMap":\{"<KeyName1>":\{"boolean":true\},"<KeyName2>":\{"long":1234\}\}`
+    #   `"contextMap":{"<KeyName1>":{"boolean":true},"<KeyName2>":{"long":1234}}`
     #   @return [Hash<String,Types::AttributeValue>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/ContextDefinition AWS API Documentation
@@ -1046,9 +1201,9 @@ module Aws::VerifiedPermissions
     #
     # @!attribute [rw] actions
     #   The action that a policy permits or forbids. For example,
-    #   `\{"actions": [\{"actionId": "ViewPhoto", "actionType":
-    #   "PhotoFlash::Action"\}, \{"entityID": "SharePhoto", "entityType":
-    #   "PhotoFlash::Action"\}]\}`.
+    #   `{"actions": [{"actionId": "ViewPhoto", "actionType":
+    #   "PhotoFlash::Action"}, {"entityID": "SharePhoto", "entityType":
+    #   "PhotoFlash::Action"}]}`.
     #   @return [Array<Types::ActionIdentifier>]
     #
     # @!attribute [rw] created_date
@@ -1336,7 +1491,7 @@ module Aws::VerifiedPermissions
     # [IsAuthorizedWithToken][3] operations.
     #
     # Example:
-    # `"determiningPolicies":[\{"policyId":"SPEXAMPLEabcdefg111111"\}]`
+    # `"determiningPolicies":[{"policyId":"SPEXAMPLEabcdefg111111"}]`
     #
     #
     #
@@ -1398,7 +1553,7 @@ module Aws::VerifiedPermissions
     # operation, and as a response parameter for the [CreatePolicy][2],
     # [GetPolicy][3], and [UpdatePolicy][4] operations.
     #
-    # Example: `\{"entityId":"string","entityType":"string"\}`
+    # Example: `{"entityId":"string","entityType":"string"}`
     #
     #
     #
@@ -1434,9 +1589,9 @@ module Aws::VerifiedPermissions
     # This data type is used as one of the fields in the
     # [EntitiesDefinition][1] structure.
     #
-    # `\{ "identifier": \{ "entityType": "Photo", "entityId":
-    # "VacationPhoto94.jpg" \}, "attributes": \{\}, "parents": [ \{
-    # "entityType": "Album", "entityId": "alice_folder" \} ] \}`
+    # `{ "identifier": { "entityType": "Photo", "entityId":
+    # "VacationPhoto94.jpg" }, "attributes": {}, "parents": [ {
+    # "entityType": "Album", "entityId": "alice_folder" } ] }`
     #
     #
     #
@@ -1641,9 +1796,9 @@ module Aws::VerifiedPermissions
     #
     # @!attribute [rw] actions
     #   The action that a policy permits or forbids. For example,
-    #   `\{"actions": [\{"actionId": "ViewPhoto", "actionType":
-    #   "PhotoFlash::Action"\}, \{"entityID": "SharePhoto", "entityType":
-    #   "PhotoFlash::Action"\}]\}`.
+    #   `{"actions": [{"actionId": "ViewPhoto", "actionType":
+    #   "PhotoFlash::Action"}, {"entityID": "SharePhoto", "entityType":
+    #   "PhotoFlash::Action"}]}`.
     #   @return [Array<Types::ActionIdentifier>]
     #
     # @!attribute [rw] definition
@@ -3214,7 +3369,7 @@ module Aws::VerifiedPermissions
     # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicies.html
     #
     # @!attribute [rw] policy_store_id
-    #   The identifier of the PolicyStore where the policy you want
+    #   The identifier of the policy store where the policy you want
     #   information about is stored.
     #   @return [String]
     #
@@ -3240,9 +3395,9 @@ module Aws::VerifiedPermissions
     #
     # @!attribute [rw] actions
     #   The action that a policy permits or forbids. For example,
-    #   `\{"actions": [\{"actionId": "ViewPhoto", "actionType":
-    #   "PhotoFlash::Action"\}, \{"entityID": "SharePhoto", "entityType":
-    #   "PhotoFlash::Action"\}]\}`.
+    #   `{"actions": [{"actionId": "ViewPhoto", "actionType":
+    #   "PhotoFlash::Action"}, {"entityID": "SharePhoto", "entityType":
+    #   "PhotoFlash::Action"}]}`.
     #   @return [Array<Types::ActionIdentifier>]
     #
     # @!attribute [rw] definition
@@ -3463,7 +3618,7 @@ module Aws::VerifiedPermissions
     # @!attribute [rw] cedar_json
     #   A JSON string representation of the schema supported by applications
     #   that use this policy store. To delete the schema, run [PutSchema][1]
-    #   with `\{\}` for this parameter. For more information, see [Policy
+    #   with `{}` for this parameter. For more information, see [Policy
     #   store schema][2] in the *Amazon Verified Permissions User Guide*.
     #
     #
@@ -4155,9 +4310,9 @@ module Aws::VerifiedPermissions
     #
     # @!attribute [rw] actions
     #   The action that a policy permits or forbids. For example,
-    #   `\{"actions": [\{"actionId": "ViewPhoto", "actionType":
-    #   "PhotoFlash::Action"\}, \{"entityID": "SharePhoto", "entityType":
-    #   "PhotoFlash::Action"\}]\}`.
+    #   `{"actions": [{"actionId": "ViewPhoto", "actionType":
+    #   "PhotoFlash::Action"}, {"entityID": "SharePhoto", "entityType":
+    #   "PhotoFlash::Action"}]}`.
     #   @return [Array<Types::ActionIdentifier>]
     #
     # @!attribute [rw] created_date

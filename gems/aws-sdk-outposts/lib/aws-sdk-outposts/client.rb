@@ -525,7 +525,7 @@ module Aws::Outposts
     #       },
     #     ],
     #     payment_option: "ALL_UPFRONT", # required, accepts ALL_UPFRONT, NO_UPFRONT, PARTIAL_UPFRONT
-    #     payment_term: "THREE_YEARS", # accepts THREE_YEARS, ONE_YEAR
+    #     payment_term: "THREE_YEARS", # accepts THREE_YEARS, ONE_YEAR, FIVE_YEARS
     #   })
     #
     # @example Response structure
@@ -549,7 +549,7 @@ module Aws::Outposts
     #   resp.order.payment_option #=> String, one of "ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"
     #   resp.order.order_submission_date #=> Time
     #   resp.order.order_fulfilled_date #=> Time
-    #   resp.order.payment_term #=> String, one of "THREE_YEARS", "ONE_YEAR"
+    #   resp.order.payment_term #=> String, one of "THREE_YEARS", "ONE_YEAR", "FIVE_YEARS"
     #   resp.order.order_type #=> String, one of "OUTPOST", "REPLACEMENT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/CreateOrder AWS API Documentation
@@ -806,12 +806,14 @@ module Aws::Outposts
     #   * {Types::GetCapacityTaskOutput#outpost_id #outpost_id} => String
     #   * {Types::GetCapacityTaskOutput#order_id #order_id} => String
     #   * {Types::GetCapacityTaskOutput#requested_instance_pools #requested_instance_pools} => Array&lt;Types::InstanceTypeCapacity&gt;
+    #   * {Types::GetCapacityTaskOutput#instances_to_exclude #instances_to_exclude} => Types::InstancesToExclude
     #   * {Types::GetCapacityTaskOutput#dry_run #dry_run} => Boolean
     #   * {Types::GetCapacityTaskOutput#capacity_task_status #capacity_task_status} => String
     #   * {Types::GetCapacityTaskOutput#failed #failed} => Types::CapacityTaskFailure
     #   * {Types::GetCapacityTaskOutput#creation_date #creation_date} => Time
     #   * {Types::GetCapacityTaskOutput#completion_date #completion_date} => Time
     #   * {Types::GetCapacityTaskOutput#last_modified_date #last_modified_date} => Time
+    #   * {Types::GetCapacityTaskOutput#task_action_on_blocking_instances #task_action_on_blocking_instances} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -828,13 +830,20 @@ module Aws::Outposts
     #   resp.requested_instance_pools #=> Array
     #   resp.requested_instance_pools[0].instance_type #=> String
     #   resp.requested_instance_pools[0].count #=> Integer
+    #   resp.instances_to_exclude.instances #=> Array
+    #   resp.instances_to_exclude.instances[0] #=> String
+    #   resp.instances_to_exclude.account_ids #=> Array
+    #   resp.instances_to_exclude.account_ids[0] #=> String
+    #   resp.instances_to_exclude.services #=> Array
+    #   resp.instances_to_exclude.services[0] #=> String, one of "AWS", "EC2", "ELASTICACHE", "ELB", "RDS", "ROUTE53"
     #   resp.dry_run #=> Boolean
-    #   resp.capacity_task_status #=> String, one of "REQUESTED", "IN_PROGRESS", "FAILED", "COMPLETED", "CANCELLED"
+    #   resp.capacity_task_status #=> String, one of "REQUESTED", "IN_PROGRESS", "FAILED", "COMPLETED", "WAITING_FOR_EVACUATION", "CANCELLATION_IN_PROGRESS", "CANCELLED"
     #   resp.failed.reason #=> String
-    #   resp.failed.type #=> String, one of "UNSUPPORTED_CAPACITY_CONFIGURATION"
+    #   resp.failed.type #=> String, one of "UNSUPPORTED_CAPACITY_CONFIGURATION", "UNEXPECTED_ASSET_STATE", "BLOCKING_INSTANCES_NOT_EVACUATED", "INTERNAL_SERVER_ERROR", "RESOURCE_NOT_FOUND"
     #   resp.creation_date #=> Time
     #   resp.completion_date #=> Time
     #   resp.last_modified_date #=> Time
+    #   resp.task_action_on_blocking_instances #=> String, one of "WAIT_FOR_EVACUATION", "FAIL_TASK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetCapacityTask AWS API Documentation
     #
@@ -972,7 +981,7 @@ module Aws::Outposts
     #   resp.order.payment_option #=> String, one of "ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"
     #   resp.order.order_submission_date #=> Time
     #   resp.order.order_fulfilled_date #=> Time
-    #   resp.order.payment_term #=> String, one of "THREE_YEARS", "ONE_YEAR"
+    #   resp.order.payment_term #=> String, one of "THREE_YEARS", "ONE_YEAR", "FIVE_YEARS"
     #   resp.order.order_type #=> String, one of "OUTPOST", "REPLACEMENT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetOrder AWS API Documentation
@@ -1078,7 +1087,7 @@ module Aws::Outposts
     # @option params [required, String] :outpost_identifier
     #   The ID or ARN of the Outpost.
     #
-    # @option params [required, String] :order_id
+    # @option params [String] :order_id
     #   The ID for the Amazon Web Services Outposts order.
     #
     # @option params [Integer] :max_results
@@ -1098,7 +1107,7 @@ module Aws::Outposts
     #
     #   resp = client.get_outpost_supported_instance_types({
     #     outpost_identifier: "OutpostIdentifier", # required
-    #     order_id: "OrderId", # required
+    #     order_id: "OrderId",
     #     max_results: 1,
     #     next_token: "Token",
     #   })
@@ -1212,6 +1221,69 @@ module Aws::Outposts
       req.send_request(options)
     end
 
+    # A list of Amazon EC2 instances, belonging to all accounts, running on
+    # the specified Outpost. Does not include Amazon EBS or Amazon S3
+    # instances.
+    #
+    # @option params [required, String] :outpost_identifier
+    #   The ID of the Outpost.
+    #
+    # @option params [Array<String>] :asset_id_filter
+    #   Filters the results by asset ID.
+    #
+    # @option params [Array<String>] :instance_type_filter
+    #   Filters the results by instance ID.
+    #
+    # @option params [Array<String>] :account_id_filter
+    #   Filters the results by account ID.
+    #
+    # @option params [Array<String>] :aws_service_filter
+    #   Filters the results by Amazon Web Services service.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum page size.
+    #
+    # @option params [String] :next_token
+    #   The pagination token.
+    #
+    # @return [Types::ListAssetInstancesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAssetInstancesOutput#asset_instances #asset_instances} => Array&lt;Types::AssetInstance&gt;
+    #   * {Types::ListAssetInstancesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_asset_instances({
+    #     outpost_identifier: "OutpostIdentifier", # required
+    #     asset_id_filter: ["AssetId"],
+    #     instance_type_filter: ["OutpostInstanceType"],
+    #     account_id_filter: ["AccountId"],
+    #     aws_service_filter: ["AWS"], # accepts AWS, EC2, ELASTICACHE, ELB, RDS, ROUTE53
+    #     max_results: 1,
+    #     next_token: "Token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.asset_instances #=> Array
+    #   resp.asset_instances[0].instance_id #=> String
+    #   resp.asset_instances[0].instance_type #=> String
+    #   resp.asset_instances[0].asset_id #=> String
+    #   resp.asset_instances[0].account_id #=> String
+    #   resp.asset_instances[0].aws_service_name #=> String, one of "AWS", "EC2", "ELASTICACHE", "ELB", "RDS", "ROUTE53"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListAssetInstances AWS API Documentation
+    #
+    # @overload list_asset_instances(params = {})
+    # @param [Hash] params ({})
+    def list_asset_instances(params = {}, options = {})
+      req = build_request(:list_asset_instances, params)
+      req.send_request(options)
+    end
+
     # Lists the hardware assets for the specified Outpost.
     #
     # Use filters to return specific results. If you specify multiple
@@ -1262,6 +1334,10 @@ module Aws::Outposts
     #   resp.assets[0].compute_attributes.state #=> String, one of "ACTIVE", "ISOLATED", "RETIRING"
     #   resp.assets[0].compute_attributes.instance_families #=> Array
     #   resp.assets[0].compute_attributes.instance_families[0] #=> String
+    #   resp.assets[0].compute_attributes.instance_type_capacities #=> Array
+    #   resp.assets[0].compute_attributes.instance_type_capacities[0].instance_type #=> String
+    #   resp.assets[0].compute_attributes.instance_type_capacities[0].count #=> Integer
+    #   resp.assets[0].compute_attributes.max_vcpus #=> Integer
     #   resp.assets[0].asset_location.rack_elevation #=> Float
     #   resp.next_token #=> String
     #
@@ -1271,6 +1347,57 @@ module Aws::Outposts
     # @param [Hash] params ({})
     def list_assets(params = {}, options = {})
       req = build_request(:list_assets, params)
+      req.send_request(options)
+    end
+
+    # A list of Amazon EC2 instances running on the Outpost and belonging to
+    # the account that initiated the capacity task. Use this list to specify
+    # the instances you cannot stop to free up capacity to run the capacity
+    # task.
+    #
+    # @option params [required, String] :outpost_identifier
+    #   The ID or ARN of the Outpost associated with the specified capacity
+    #   task.
+    #
+    # @option params [required, String] :capacity_task_id
+    #   The ID of the capacity task.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum page size.
+    #
+    # @option params [String] :next_token
+    #   The pagination token.
+    #
+    # @return [Types::ListBlockingInstancesForCapacityTaskOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBlockingInstancesForCapacityTaskOutput#blocking_instances #blocking_instances} => Array&lt;Types::BlockingInstance&gt;
+    #   * {Types::ListBlockingInstancesForCapacityTaskOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_blocking_instances_for_capacity_task({
+    #     outpost_identifier: "OutpostIdentifier", # required
+    #     capacity_task_id: "CapacityTaskId", # required
+    #     max_results: 1,
+    #     next_token: "Token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.blocking_instances #=> Array
+    #   resp.blocking_instances[0].instance_id #=> String
+    #   resp.blocking_instances[0].account_id #=> String
+    #   resp.blocking_instances[0].aws_service_name #=> String, one of "AWS", "EC2", "ELASTICACHE", "ELB", "RDS", "ROUTE53"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListBlockingInstancesForCapacityTask AWS API Documentation
+    #
+    # @overload list_blocking_instances_for_capacity_task(params = {})
+    # @param [Hash] params ({})
+    def list_blocking_instances_for_capacity_task(params = {}, options = {})
+      req = build_request(:list_blocking_instances_for_capacity_task, params)
       req.send_request(options)
     end
 
@@ -1308,7 +1435,7 @@ module Aws::Outposts
     #     outpost_identifier_filter: "OutpostIdentifier",
     #     max_results: 1,
     #     next_token: "Token",
-    #     capacity_task_status_filter: ["REQUESTED"], # accepts REQUESTED, IN_PROGRESS, FAILED, COMPLETED, CANCELLED
+    #     capacity_task_status_filter: ["REQUESTED"], # accepts REQUESTED, IN_PROGRESS, FAILED, COMPLETED, WAITING_FOR_EVACUATION, CANCELLATION_IN_PROGRESS, CANCELLED
     #   })
     #
     # @example Response structure
@@ -1317,7 +1444,7 @@ module Aws::Outposts
     #   resp.capacity_tasks[0].capacity_task_id #=> String
     #   resp.capacity_tasks[0].outpost_id #=> String
     #   resp.capacity_tasks[0].order_id #=> String
-    #   resp.capacity_tasks[0].capacity_task_status #=> String, one of "REQUESTED", "IN_PROGRESS", "FAILED", "COMPLETED", "CANCELLED"
+    #   resp.capacity_tasks[0].capacity_task_status #=> String, one of "REQUESTED", "IN_PROGRESS", "FAILED", "COMPLETED", "WAITING_FOR_EVACUATION", "CANCELLATION_IN_PROGRESS", "CANCELLED"
     #   resp.capacity_tasks[0].creation_date #=> Time
     #   resp.capacity_tasks[0].completion_date #=> Time
     #   resp.capacity_tasks[0].last_modified_date #=> Time
@@ -1618,23 +1745,37 @@ module Aws::Outposts
     end
 
     # Starts the specified capacity task. You can have one active capacity
-    # task for an order.
+    # task per order or Outpost.
     #
     # @option params [required, String] :outpost_identifier
     #   The ID or ARN of the Outposts associated with the specified capacity
     #   task.
     #
-    # @option params [required, String] :order_id
+    # @option params [String] :order_id
     #   The ID of the Amazon Web Services Outposts order associated with the
     #   specified capacity task.
     #
     # @option params [required, Array<Types::InstanceTypeCapacity>] :instance_pools
     #   The instance pools specified in the capacity task.
     #
+    # @option params [Types::InstancesToExclude] :instances_to_exclude
+    #   List of user-specified running instances that must not be stopped in
+    #   order to free up the capacity needed to run the capacity task.
+    #
     # @option params [Boolean] :dry_run
     #   You can request a dry run to determine if the instance type and
     #   instance size changes is above or below available instance capacity.
     #   Requesting a dry run does not make any changes to your plan.
+    #
+    # @option params [String] :task_action_on_blocking_instances
+    #   Specify one of the following options in case an instance is blocking
+    #   the capacity task from running.
+    #
+    #   * `WAIT_FOR_EVACUATION` - Checks every 10 minutes over 48 hours to
+    #     determine if instances have stopped and capacity is available to
+    #     complete the task.
+    #
+    #   * `FAIL_TASK` - The capacity task fails.
     #
     # @return [Types::StartCapacityTaskOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1642,25 +1783,33 @@ module Aws::Outposts
     #   * {Types::StartCapacityTaskOutput#outpost_id #outpost_id} => String
     #   * {Types::StartCapacityTaskOutput#order_id #order_id} => String
     #   * {Types::StartCapacityTaskOutput#requested_instance_pools #requested_instance_pools} => Array&lt;Types::InstanceTypeCapacity&gt;
+    #   * {Types::StartCapacityTaskOutput#instances_to_exclude #instances_to_exclude} => Types::InstancesToExclude
     #   * {Types::StartCapacityTaskOutput#dry_run #dry_run} => Boolean
     #   * {Types::StartCapacityTaskOutput#capacity_task_status #capacity_task_status} => String
     #   * {Types::StartCapacityTaskOutput#failed #failed} => Types::CapacityTaskFailure
     #   * {Types::StartCapacityTaskOutput#creation_date #creation_date} => Time
     #   * {Types::StartCapacityTaskOutput#completion_date #completion_date} => Time
     #   * {Types::StartCapacityTaskOutput#last_modified_date #last_modified_date} => Time
+    #   * {Types::StartCapacityTaskOutput#task_action_on_blocking_instances #task_action_on_blocking_instances} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_capacity_task({
     #     outpost_identifier: "OutpostIdentifier", # required
-    #     order_id: "OrderId", # required
+    #     order_id: "OrderId",
     #     instance_pools: [ # required
     #       {
     #         instance_type: "InstanceTypeName", # required
     #         count: 1, # required
     #       },
     #     ],
+    #     instances_to_exclude: {
+    #       instances: ["InstanceId"],
+    #       account_ids: ["AccountId"],
+    #       services: ["AWS"], # accepts AWS, EC2, ELASTICACHE, ELB, RDS, ROUTE53
+    #     },
     #     dry_run: false,
+    #     task_action_on_blocking_instances: "WAIT_FOR_EVACUATION", # accepts WAIT_FOR_EVACUATION, FAIL_TASK
     #   })
     #
     # @example Response structure
@@ -1671,13 +1820,20 @@ module Aws::Outposts
     #   resp.requested_instance_pools #=> Array
     #   resp.requested_instance_pools[0].instance_type #=> String
     #   resp.requested_instance_pools[0].count #=> Integer
+    #   resp.instances_to_exclude.instances #=> Array
+    #   resp.instances_to_exclude.instances[0] #=> String
+    #   resp.instances_to_exclude.account_ids #=> Array
+    #   resp.instances_to_exclude.account_ids[0] #=> String
+    #   resp.instances_to_exclude.services #=> Array
+    #   resp.instances_to_exclude.services[0] #=> String, one of "AWS", "EC2", "ELASTICACHE", "ELB", "RDS", "ROUTE53"
     #   resp.dry_run #=> Boolean
-    #   resp.capacity_task_status #=> String, one of "REQUESTED", "IN_PROGRESS", "FAILED", "COMPLETED", "CANCELLED"
+    #   resp.capacity_task_status #=> String, one of "REQUESTED", "IN_PROGRESS", "FAILED", "COMPLETED", "WAITING_FOR_EVACUATION", "CANCELLATION_IN_PROGRESS", "CANCELLED"
     #   resp.failed.reason #=> String
-    #   resp.failed.type #=> String, one of "UNSUPPORTED_CAPACITY_CONFIGURATION"
+    #   resp.failed.type #=> String, one of "UNSUPPORTED_CAPACITY_CONFIGURATION", "UNEXPECTED_ASSET_STATE", "BLOCKING_INSTANCES_NOT_EVACUATED", "INTERNAL_SERVER_ERROR", "RESOURCE_NOT_FOUND"
     #   resp.creation_date #=> Time
     #   resp.completion_date #=> Time
     #   resp.last_modified_date #=> Time
+    #   resp.task_action_on_blocking_instances #=> String, one of "WAIT_FOR_EVACUATION", "FAIL_TASK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/StartCapacityTask AWS API Documentation
     #
@@ -2014,7 +2170,6 @@ module Aws::Outposts
     #     * **L6-30P** – (common in US); 30A; single phase
     #
     #     * **IEC309 (blue)** – P+N+E, 6hr; 32 A; single phase
-    #
     #   * Three-phase AC feed
     #
     #     * **AH530P7W (red)** – 3P+N+E, 7hr; 30A; three phase
@@ -2156,7 +2311,7 @@ module Aws::Outposts
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.71.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

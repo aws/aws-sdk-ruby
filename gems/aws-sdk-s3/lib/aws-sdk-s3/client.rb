@@ -571,7 +571,7 @@ module Aws::S3
     #   in-progress multipart uploads are aborted or completed. To delete
     #   these in-progress multipart uploads, use the `ListMultipartUploads`
     #   operation to list the in-progress multipart uploads in the bucket
-    #   and use the `AbortMultupartUpload` operation to abort all the
+    #   and use the `AbortMultipartUpload` operation to abort all the
     #   in-progress multipart uploads.
     #
     # * **Directory buckets** - For directory buckets, you must make
@@ -837,7 +837,6 @@ module Aws::S3
     #       except the last part.
     #
     #     * HTTP Status Code: 400 Bad Request
-    #
     #   * Error Code: `InvalidPart`
     #
     #     * Description: One or more of the specified parts could not be
@@ -845,14 +844,12 @@ module Aws::S3
     #       ETag might not have matched the uploaded part's ETag.
     #
     #     * HTTP Status Code: 400 Bad Request
-    #
     #   * Error Code: `InvalidPartOrder`
     #
     #     * Description: The list of parts was not in ascending order. The
     #       parts list must be specified in order by part number.
     #
     #     * HTTP Status Code: 400 Bad Request
-    #
     #   * Error Code: `NoSuchUpload`
     #
     #     * Description: The specified multipart upload does not exist. The
@@ -1254,7 +1251,6 @@ module Aws::S3
     #     * If the destination bucket is a general purpose bucket, you must
     #       have <b> <code>s3:PutObject</code> </b> permission to write the
     #       object copy to the destination bucket.
-    #
     #   * **Directory bucket permissions** - You must have permissions in a
     #     bucket policy or an IAM identity-based policy based on the source
     #     and destination bucket types in a `CopyObject` operation.
@@ -1272,7 +1268,6 @@ module Aws::S3
     #       `Action` element of a policy to write the object to the
     #       destination. The `s3express:SessionMode` condition key can't be
     #       set to `ReadOnly` on the copy destination bucket.
-    #
     #     If the object is encrypted with SSE-KMS, you must also have the
     #     `kms:GenerateDataKey` and `kms:Decrypt` permissions in IAM
     #     identity-based policies and KMS key policies for the KMS key.
@@ -2309,7 +2304,6 @@ module Aws::S3
     #       more information about S3 Block Public Access, see [Blocking
     #       public access to your Amazon S3 storage ][6] in the *Amazon S3
     #       User Guide*.
-    #
     #   * **Directory bucket permissions** - You must have the
     #     `s3express:CreateBucket` permission in an IAM identity-based
     #     policy instead of a bucket policy. Cross-account access to this
@@ -2660,7 +2654,6 @@ module Aws::S3
     #       * `x-amz-server-side-encryption-aws-kms-key-id`
     #
     #       * `x-amz-server-side-encryption-context`
-    #
     #       <note markdown="1"> * If you specify `x-amz-server-side-encryption:aws:kms`, but
     #         don't provide `x-amz-server-side-encryption-aws-kms-key-id`,
     #         Amazon S3 uses the Amazon Web Services managed key (`aws/s3`
@@ -2706,12 +2699,10 @@ module Aws::S3
     #       * `x-amz-server-side-encryption-customer-key`
     #
     #       * `x-amz-server-side-encryption-customer-key-MD5`
-    #
     #       For more information about server-side encryption with
     #       customer-provided encryption keys (SSE-C), see [ Protecting data
     #       using server-side encryption with customer-provided encryption
     #       keys (SSE-C)][11] in the *Amazon S3 User Guide*.
-    #
     #   * **Directory buckets** - For directory buckets, there are only two
     #     supported options for server-side encryption: server-side
     #     encryption with Amazon S3 managed keys (SSE-S3) (`AES256`) and
@@ -4805,7 +4796,6 @@ module Aws::S3
     #       objects from your bucket, you must deny them the
     #       `s3:DeleteObject`, `s3:DeleteObjectVersion`, and
     #       `s3:PutLifeCycleConfiguration` permissions.
-    #
     #   * **Directory buckets permissions** - To grant access to this API
     #     operation on a directory bucket, we recommend that you use the
     #     CreateSession API operation for session-based authorization.
@@ -5164,7 +5154,6 @@ module Aws::S3
     #     * <b> <code>s3:DeleteObjectVersion</code> </b> - To delete a
     #       specific version of an object from a versioning-enabled bucket,
     #       you must specify the `s3:DeleteObjectVersion` permission.
-    #
     #   * **Directory bucket permissions** - To grant access to this API
     #     operation on a directory bucket, we recommend that you use the [
     #     `CreateSession` ][3] API operation for session-based
@@ -7744,7 +7733,6 @@ module Aws::S3
     #
     #     * If you don’t have the `s3:ListBucket` permission, Amazon S3
     #       returns an HTTP status code `403 Access Denied` error.
-    #
     #   * **Directory bucket permissions** - To grant access to this API
     #     operation on a directory bucket, we recommend that you use the [
     #     `CreateSession` ][4] API operation for session-based
@@ -8205,6 +8193,28 @@ module Aws::S3
     #   * {Types::GetObjectOutput#object_lock_legal_hold_status #object_lock_legal_hold_status} => String
     #
     #
+    # @example Example: To retrieve an object
+    #
+    #   # The following example retrieves an object for an S3 bucket.
+    #
+    #   resp = client.get_object({
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     accept_ranges: "bytes", 
+    #     content_length: 3191, 
+    #     content_type: "image/jpeg", 
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     last_modified: Time.parse("2016-12-15T01:19:41.000Z"), 
+    #     metadata: {
+    #     }, 
+    #     tag_count: 2, 
+    #     version_id: "null", 
+    #   }
+    #
     # @example Example: To retrieve a byte range of an object 
     #
     #   # The following example retrieves an object for an S3 bucket. The request specifies the range header to retrieve a
@@ -8223,31 +8233,9 @@ module Aws::S3
     #     content_range: "bytes 0-9/43", 
     #     content_type: "text/plain", 
     #     etag: "\"0d94420ffd0bc68cd3d152506b97a9cc\"", 
-    #     last_modified: Time.parse("Thu, 09 Oct 2014 22:57:28 GMT"), 
+    #     last_modified: Time.parse("2014-10-09T22:57:28.000Z"), 
     #     metadata: {
     #     }, 
-    #     version_id: "null", 
-    #   }
-    #
-    # @example Example: To retrieve an object
-    #
-    #   # The following example retrieves an object for an S3 bucket.
-    #
-    #   resp = client.get_object({
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     accept_ranges: "bytes", 
-    #     content_length: 3191, 
-    #     content_type: "image/jpeg", 
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     last_modified: Time.parse("Thu, 15 Dec 2016 01:19:41 GMT"), 
-    #     metadata: {
-    #     }, 
-    #     tag_count: 2, 
     #     version_id: "null", 
     #   }
     #
@@ -8578,7 +8566,6 @@ module Aws::S3
     #     * If you don't have the `s3:ListBucket` permission, Amazon S3
     #       returns an HTTP status code `403 Forbidden` ("access denied")
     #       error.
-    #
     #   * **Directory bucket permissions** - To grant access to this API
     #     operation on a directory bucket, we recommend that you use the [
     #     `CreateSession` ][3] API operation for session-based
@@ -8665,7 +8652,6 @@ module Aws::S3
     #     * `If-Match` condition evaluates to `true`.
     #
     #     * `If-Unmodified-Since` condition evaluates to `false`.
-    #
     #     For more information about conditional requests, see [RFC
     #     7232][7].
     #
@@ -8676,7 +8662,6 @@ module Aws::S3
     #     * `If-None-Match` condition evaluates to `false`.
     #
     #     * `If-Modified-Since` condition evaluates to `true`.
-    #
     #     For more information about conditional requests, see [RFC
     #     7232][7].
     #
@@ -9263,27 +9248,6 @@ module Aws::S3
     #   * {Types::GetObjectTaggingOutput#tag_set #tag_set} => Array&lt;Types::Tag&gt;
     #
     #
-    # @example Example: To retrieve tag set of a specific object version
-    #
-    #   # The following example retrieves tag set of an object. The request specifies object version.
-    #
-    #   resp = client.get_object_tagging({
-    #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     tag_set: [
-    #       {
-    #         key: "Key1", 
-    #         value: "Value1", 
-    #       }, 
-    #     ], 
-    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
-    #   }
-    #
     # @example Example: To retrieve tag set of an object
     #
     #   # The following example retrieves tag set of an object.
@@ -9306,6 +9270,27 @@ module Aws::S3
     #       }, 
     #     ], 
     #     version_id: "null", 
+    #   }
+    #
+    # @example Example: To retrieve tag set of a specific object version
+    #
+    #   # The following example retrieves tag set of an object. The request specifies object version.
+    #
+    #   resp = client.get_object_tagging({
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tag_set: [
+    #       {
+    #         key: "Key1", 
+    #         value: "Value1", 
+    #       }, 
+    #     ], 
+    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -9726,7 +9711,6 @@ module Aws::S3
     #
     #     * If you don’t have the `s3:ListBucket` permission, Amazon S3
     #       returns an HTTP status code `403 Forbidden` error.
-    #
     #   * **Directory bucket permissions** - To grant access to this API
     #     operation on a directory bucket, we recommend that you use the [
     #     `CreateSession` ][3] API operation for session-based
@@ -10123,7 +10107,7 @@ module Aws::S3
     #     content_length: 3191, 
     #     content_type: "image/jpeg", 
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     last_modified: Time.parse("Thu, 15 Dec 2016 01:19:41 GMT"), 
+    #     last_modified: Time.parse("2016-12-15T01:19:41.000Z"), 
     #     metadata: {
     #     }, 
     #     version_id: "null", 
@@ -10617,6 +10601,14 @@ module Aws::S3
     # For information about Amazon S3 buckets, see [Creating, configuring,
     # and working with Amazon S3 buckets][1].
     #
+    # We strongly recommend using only paginated requests. Unpaginated
+    # requests are only supported for Amazon Web Services accounts set to
+    # the default general purpose bucket quota of 10,000. If you have an
+    # approved general purpose bucket quota above 10,000, you must send
+    # paginated requests to list your account’s buckets. All unpaginated
+    # ListBuckets requests will be rejected for Amazon Web Services accounts
+    # with a general purpose bucket quota greater than 10,000.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-buckets-s3.html
@@ -10635,6 +10627,14 @@ module Aws::S3
     #   Length Constraints: Minimum length of 0. Maximum length of 1024.
     #
     #   Required: No.
+    #
+    #   <note markdown="1"> If you specify the `bucket-region`, `prefix`, or `continuation-token`
+    #   query parameters without using `max-buckets` to set the maximum number
+    #   of buckets returned in the response, Amazon S3 applies a default page
+    #   size of 10,000 and provides a continuation token if there are more
+    #   buckets.
+    #
+    #    </note>
     #
     # @option params [String] :prefix
     #   Limits the response to bucket names that begin with the specified
@@ -10757,6 +10757,11 @@ module Aws::S3
     # : <b>Directory buckets </b> - The HTTP Host header syntax is
     #   `s3express-control.region.amazonaws.com`.
     #
+    # <note markdown="1"> The `BucketRegion` response element is not part of the
+    # `ListDirectoryBuckets` Response Syntax.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html
@@ -10815,7 +10820,7 @@ module Aws::S3
     # multipart uploads are aborted or completed. To delete these
     # in-progress multipart uploads, use the `ListMultipartUploads`
     # operation to list the in-progress multipart uploads in the bucket and
-    # use the `AbortMultupartUpload` operation to abort all the in-progress
+    # use the `AbortMultipartUpload` operation to abort all the in-progress
     # multipart uploads.
     #
     #  </note>
@@ -10888,7 +10893,6 @@ module Aws::S3
     #       initiation time. Among uploads with the same key, the one that
     #       was initiated first will appear before the ones that were
     #       initiated later.
-    #
     #   * **Directory bucket** - In the `ListMultipartUploads` response, the
     #     multipart uploads aren't sorted lexicographically based on the
     #     object keys.
@@ -11101,48 +11105,6 @@ module Aws::S3
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
-    # @example Example: To list in-progress multipart uploads on a bucket
-    #
-    #   # The following example lists in-progress multipart uploads on a specific bucket.
-    #
-    #   resp = client.list_multipart_uploads({
-    #     bucket: "examplebucket", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     uploads: [
-    #       {
-    #         initiated: Time.parse("2014-05-01T05:40:58.000Z"), 
-    #         initiator: {
-    #           display_name: "display-name", 
-    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
-    #         }, 
-    #         key: "JavaFile", 
-    #         owner: {
-    #           display_name: "display-name", 
-    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
-    #         }, 
-    #         storage_class: "STANDARD", 
-    #         upload_id: "examplelUa.CInXklLQtSMJITdUnoZ1Y5GACB5UckOtspm5zbDMCkPF_qkfZzMiFZ6dksmcnqxJyIBvQMG9X9Q--", 
-    #       }, 
-    #       {
-    #         initiated: Time.parse("2014-05-01T05:41:27.000Z"), 
-    #         initiator: {
-    #           display_name: "display-name", 
-    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
-    #         }, 
-    #         key: "JavaFile", 
-    #         owner: {
-    #           display_name: "display-name", 
-    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
-    #         }, 
-    #         storage_class: "STANDARD", 
-    #         upload_id: "examplelo91lv1iwvWpvCiJWugw2xXLPAD7Z8cJyX9.WiIRgNrdG6Ldsn.9FtS63TCl1Uf5faTB.1U5Ckcbmdw--", 
-    #       }, 
-    #     ], 
-    #   }
-    #
     # @example Example: List next set of multipart uploads when previous result is truncated
     #
     #   # The following example specifies the upload-id-marker and key-marker from previous truncated response to retrieve next
@@ -11192,6 +11154,48 @@ module Aws::S3
     #         }, 
     #         storage_class: "STANDARD", 
     #         upload_id: "b7tZSqIlo91lv1iwvWpvCiJWugw2xXLPAD7Z8cJyX9.WiIRgNrdG6Ldsn.9FtS63TCl1Uf5faTB.1U5Ckcbmdw--", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To list in-progress multipart uploads on a bucket
+    #
+    #   # The following example lists in-progress multipart uploads on a specific bucket.
+    #
+    #   resp = client.list_multipart_uploads({
+    #     bucket: "examplebucket", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     uploads: [
+    #       {
+    #         initiated: Time.parse("2014-05-01T05:40:58.000Z"), 
+    #         initiator: {
+    #           display_name: "display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         key: "JavaFile", 
+    #         owner: {
+    #           display_name: "display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         storage_class: "STANDARD", 
+    #         upload_id: "examplelUa.CInXklLQtSMJITdUnoZ1Y5GACB5UckOtspm5zbDMCkPF_qkfZzMiFZ6dksmcnqxJyIBvQMG9X9Q--", 
+    #       }, 
+    #       {
+    #         initiated: Time.parse("2014-05-01T05:41:27.000Z"), 
+    #         initiator: {
+    #           display_name: "display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         key: "JavaFile", 
+    #         owner: {
+    #           display_name: "display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         storage_class: "STANDARD", 
+    #         upload_id: "examplelo91lv1iwvWpvCiJWugw2xXLPAD7Z8cJyX9.WiIRgNrdG6Ldsn.9FtS63TCl1Uf5faTB.1U5Ckcbmdw--", 
     #       }, 
     #     ], 
     #   }
@@ -12568,7 +12572,6 @@ module Aws::S3
     #       General Reference.
     #
     #        </note>
-    #
     #     For example, the following `x-amz-grant-write` header grants
     #     create, overwrite, and delete objects permission to LogDelivery
     #     group predefined by Amazon S3 and two Amazon Web Services accounts
@@ -12809,14 +12812,12 @@ module Aws::S3
     #   * *Code: InvalidArgument*
     #
     #   * *Cause: Invalid argument.*
-    #
     # * * *HTTP Error: HTTP 400 Bad Request*
     #
     #   * *Code: TooManyConfigurations*
     #
     #   * *Cause: You are attempting to create a new configuration but have
     #     already reached the 1,000-configuration limit.*
-    #
     # * * *HTTP Error: HTTP 403 Forbidden*
     #
     #   * *Code: AccessDenied*
@@ -13118,7 +13119,6 @@ module Aws::S3
     #     encryption][3] to SSE-KMS, you should verify that your KMS key ID
     #     is correct. Amazon S3 doesn't validate the KMS key ID provided in
     #     PutBucketEncryption requests.
-    #
     # * <b>Directory buckets </b> - You can optionally configure default
     #   encryption for a bucket by using server-side encryption with Key
     #   Management Service (KMS) keys (SSE-KMS).
@@ -15690,7 +15690,6 @@ module Aws::S3
     #     * <b> <code>s3:PutObjectTagging</code> </b> - To successfully set
     #       the tag-set with your `PutObject` request, you must have the
     #       `s3:PutObjectTagging`.
-    #
     #   * **Directory bucket permissions** - To grant access to this API
     #     operation on a directory bucket, we recommend that you use the [
     #     `CreateSession` ][5] API operation for session-based
@@ -16364,20 +16363,60 @@ module Aws::S3
     #   * {Types::PutObjectOutput#request_charged #request_charged} => String
     #
     #
-    # @example Example: To create an object.
+    # @example Example: To upload an object and specify optional tags
     #
-    #   # The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.
+    #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore
+    #   # S3 returns version ID of the newly created object.
     #
     #   resp = client.put_object({
-    #     body: "filetoupload", 
+    #     body: "c:\\HappyFace.jpg", 
     #     bucket: "examplebucket", 
-    #     key: "objectkey", 
+    #     key: "HappyFace.jpg", 
+    #     tagging: "key1=value1&key2=value2", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
+    #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
+    #   }
+    #
+    # @example Example: To upload an object and specify canned ACL.
+    #
+    #   # The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ
+    #   # access to authenticated users. If the bucket is versioning enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     acl: "authenticated-read", 
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
+    #   }
+    #
+    # @example Example: To upload an object and specify server-side encryption and object tags
+    #
+    #   # The following example uploads an object. The request specifies the optional server-side encryption option. The request
+    #   # also specifies optional object tags. If the bucket is versioning enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #     server_side_encryption: "AES256", 
+    #     tagging: "key1=value1&key2=value2", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     server_side_encryption: "AES256", 
+    #     version_id: "Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt", 
     #   }
     #
     # @example Example: To upload object and specify user-defined metadata
@@ -16401,41 +16440,6 @@ module Aws::S3
     #     version_id: "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0", 
     #   }
     #
-    # @example Example: To upload an object
-    #
-    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
-    #   # syntax. S3 returns VersionId of the newly created object.
-    #
-    #   resp = client.put_object({
-    #     body: "HappyFace.jpg", 
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
-    #   }
-    #
-    # @example Example: To upload an object and specify canned ACL.
-    #
-    #   # The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ
-    #   # access to authenticated users. If the bucket is versioning enabled, S3 returns version ID in response.
-    #
-    #   resp = client.put_object({
-    #     acl: "authenticated-read", 
-    #     body: "filetoupload", 
-    #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
-    #   }
-    #
     # @example Example: To upload an object (specify optional headers)
     #
     #   # The following example uploads an object. The request specifies optional request headers to directs S3 to use specific
@@ -16456,42 +16460,37 @@ module Aws::S3
     #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
     #   }
     #
-    # @example Example: To upload an object and specify optional tags
+    # @example Example: To create an object.
     #
-    #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore
-    #   # S3 returns version ID of the newly created object.
-    #
-    #   resp = client.put_object({
-    #     body: "c:\\HappyFace.jpg", 
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #     tagging: "key1=value1&key2=value2", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
-    #   }
-    #
-    # @example Example: To upload an object and specify server-side encryption and object tags
-    #
-    #   # The following example uploads an object. The request specifies the optional server-side encryption option. The request
-    #   # also specifies optional object tags. If the bucket is versioning enabled, S3 returns version ID in response.
+    #   # The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.
     #
     #   resp = client.put_object({
     #     body: "filetoupload", 
     #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #     server_side_encryption: "AES256", 
-    #     tagging: "key1=value1&key2=value2", 
+    #     key: "objectkey", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     server_side_encryption: "AES256", 
-    #     version_id: "Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt", 
+    #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
+    #   }
+    #
+    # @example Example: To upload an object
+    #
+    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
+    #   # syntax. S3 returns VersionId of the newly created object.
+    #
+    #   resp = client.put_object({
+    #     body: "HappyFace.jpg", 
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
     #   }
     #
     # @example Streaming a file from disk
@@ -16655,7 +16654,6 @@ module Aws::S3
     #       General Reference.
     #
     #        </note>
-    #
     #     For example, the following `x-amz-grant-read` header grants list
     #     objects permission to the two Amazon Web Services accounts
     #     identified by their email addresses.
@@ -17761,7 +17759,6 @@ module Aws::S3
     #     * *HTTP Status Code: 409 Conflict*
     #
     #     * *SOAP Fault Code Prefix: Client*
-    #
     #   * * *Code: GlacierExpeditedRetrievalNotAvailable*
     #
     #     * *Cause: expedited retrievals are currently not available. Try
@@ -18548,7 +18545,6 @@ module Aws::S3
     #     * x-amz-server-side-encryption-customer-key
     #
     #     * x-amz-server-side-encryption-customer-key-MD5
-    #
     #     For more information, see [Using Server-Side Encryption][11] in
     #     the *Amazon S3 User Guide*.
     #
@@ -18949,7 +18945,6 @@ module Aws::S3
     #       permissions required to use the multipart upload API, see
     #       [Multipart upload and permissions][8] and [Multipart upload API
     #       and permissions][9] in the *Amazon S3 User Guide*.
-    #
     #   * **Directory bucket permissions** - You must have permissions in a
     #     bucket policy or an IAM identity-based policy based on the source
     #     and destination bucket types in an `UploadPartCopy` operation.
@@ -18967,7 +18962,6 @@ module Aws::S3
     #       `Action` element of a policy to write the object to the
     #       destination. The `s3express:SessionMode` condition key cannot be
     #       set to `ReadOnly` on the copy destination.
-    #
     #     If the object is encrypted with SSE-KMS, you must also have the
     #     `kms:GenerateDataKey` and `kms:Decrypt` permissions in IAM
     #     identity-based policies and KMS key policies for the KMS key.
@@ -19012,7 +19006,6 @@ module Aws::S3
     #       been aborted or completed.
     #
     #     * HTTP Status Code: 404 Not Found
-    #
     #   * Error Code: `InvalidRequest`
     #
     #     * Description: The specified copy source is not supported as a
@@ -19345,6 +19338,26 @@ module Aws::S3
     #   * {Types::UploadPartCopyOutput#request_charged #request_charged} => String
     #
     #
+    # @example Example: To upload a part by copying data from an existing object as data source
+    #
+    #   # The following example uploads a part of a multipart upload by copying data from an existing object as data source.
+    #
+    #   resp = client.upload_part_copy({
+    #     bucket: "examplebucket", 
+    #     copy_source: "/bucketname/sourceobjectkey", 
+    #     key: "examplelargeobject", 
+    #     part_number: 1, 
+    #     upload_id: "exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     copy_part_result: {
+    #       etag: "\"b0c6f0e7e054ab8fa2536a2677f8734d\"", 
+    #       last_modified: Time.parse("2016-12-29T21:24:43.000Z"), 
+    #     }, 
+    #   }
+    #
     # @example Example: To upload a part by copying byte range from an existing object as data source
     #
     #   # The following example uploads a part of a multipart upload by copying a specified byte range from an existing object as
@@ -19364,26 +19377,6 @@ module Aws::S3
     #     copy_part_result: {
     #       etag: "\"65d16d19e65a7508a51f043180edcc36\"", 
     #       last_modified: Time.parse("2016-12-29T21:44:28.000Z"), 
-    #     }, 
-    #   }
-    #
-    # @example Example: To upload a part by copying data from an existing object as data source
-    #
-    #   # The following example uploads a part of a multipart upload by copying data from an existing object as data source.
-    #
-    #   resp = client.upload_part_copy({
-    #     bucket: "examplebucket", 
-    #     copy_source: "/bucketname/sourceobjectkey", 
-    #     key: "examplelargeobject", 
-    #     part_number: 1, 
-    #     upload_id: "exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     copy_part_result: {
-    #       etag: "\"b0c6f0e7e054ab8fa2536a2677f8734d\"", 
-    #       last_modified: Time.parse("2016-12-29T21:24:43.000Z"), 
     #     }, 
     #   }
     #
@@ -19845,7 +19838,7 @@ module Aws::S3
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.169.0'
+      context[:gem_version] = '1.172.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -42,6 +42,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#sse_type-instance_method
       def sse_type: () -> ("sse-ebs" | "sse-kms" | "none")
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#operator-instance_method
+      def operator: () -> Types::OperatorResponse
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#size-instance_method
       def size: () -> ::Integer
 

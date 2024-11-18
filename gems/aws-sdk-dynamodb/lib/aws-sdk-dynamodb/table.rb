@@ -58,7 +58,6 @@ module Aws::DynamoDB
     #   * `HASH` - partition key
     #
     #   * `RANGE` - sort key
-    #
     #   <note markdown="1"> The partition key of an item is also known as its *hash attribute*.
     #   The term "hash attribute" derives from DynamoDB's usage of an
     #   internal hash function to evenly distribute data items across
@@ -191,14 +190,12 @@ module Aws::DynamoDB
     #
     #     * `ALL` - All of the table attributes are projected into the
     #       index.
-    #
     #   * `NonKeyAttributes` - A list of one or more non-key attribute names
     #     that are projected into the secondary index. The total count of
     #     attributes provided in `NonKeyAttributes`, summed across all of
     #     the secondary indexes, must not exceed 100. If you project the
     #     same attribute into two different indexes, this counts as two
     #     distinct attributes when determining the total.
-    #
     # * `IndexSizeBytes` - Represents the total size of the index, in bytes.
     #   DynamoDB updates this value approximately every six hours. Recent
     #   changes might not be reflected in this value.
@@ -246,7 +243,6 @@ module Aws::DynamoDB
     #   * `DELETING` - The index is being deleted.
     #
     #   * `ACTIVE` - The index is ready for use.
-    #
     # * `ItemCount` - The number of items in the global secondary index.
     #   DynamoDB updates this value approximately every six hours. Recent
     #   changes might not be reflected in this value.
@@ -272,14 +268,12 @@ module Aws::DynamoDB
     #
     #     * `ALL` - All of the table attributes are projected into the
     #       index.
-    #
     #   * `NonKeyAttributes` - A list of one or more non-key attribute names
     #     that are projected into the secondary index. The total count of
     #     attributes provided in `NonKeyAttributes`, summed across all of
     #     the secondary indexes, must not exceed 100. If you project the
     #     same attribute into two different indexes, this counts as two
     #     distinct attributes when determining the total.
-    #
     # * `ProvisionedThroughput` - The provisioned throughput settings for
     #   the global secondary index, consisting of read and write capacity
     #   units, along with data about increases and decreases.
@@ -376,6 +370,12 @@ module Aws::DynamoDB
     # @return [Types::OnDemandThroughput]
     def on_demand_throughput
       data[:on_demand_throughput]
+    end
+
+    # Describes the warm throughput value of the base table.
+    # @return [Types::TableWarmThroughputDescription]
+    def warm_throughput
+      data[:warm_throughput]
     end
 
     # @!endgroup
@@ -669,7 +669,7 @@ module Aws::DynamoDB
     #   Developer Guide*). To work around this, you could specify the
     #   following for `ExpressionAttributeNames`:
     #
-    #   * `\{"#P":"Percentile"\}`
+    #   * `{"#P":"Percentile"}`
     #
     #   ^
     #
@@ -704,8 +704,8 @@ module Aws::DynamoDB
     #   You would first need to specify `ExpressionAttributeValues` as
     #   follows:
     #
-    #   `\{ ":avail":\{"S":"Available"\}, ":back":\{"S":"Backordered"\},
-    #   ":disc":\{"S":"Discontinued"\} \}`
+    #   `{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"},
+    #   ":disc":{"S":"Discontinued"} }`
     #
     #   You could then use these values in an expression, such as this:
     #
@@ -826,7 +826,7 @@ module Aws::DynamoDB
     #   Developer Guide*). To work around this, you could specify the
     #   following for `ExpressionAttributeNames`:
     #
-    #   * `\{"#P":"Percentile"\}`
+    #   * `{"#P":"Percentile"}`
     #
     #   ^
     #
@@ -1019,7 +1019,7 @@ module Aws::DynamoDB
     #   Developer Guide*). To work around this, you could specify the
     #   following for `ExpressionAttributeNames`:
     #
-    #   * `\{"#P":"Percentile"\}`
+    #   * `{"#P":"Percentile"}`
     #
     #   ^
     #
@@ -1054,8 +1054,8 @@ module Aws::DynamoDB
     #   You would first need to specify `ExpressionAttributeValues` as
     #   follows:
     #
-    #   `\{ ":avail":\{"S":"Available"\}, ":back":\{"S":"Backordered"\},
-    #   ":disc":\{"S":"Discontinued"\} \}`
+    #   `{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"},
+    #   ":disc":{"S":"Discontinued"} }`
     #
     #   You could then use these values in an expression, such as this:
     #
@@ -1416,7 +1416,7 @@ module Aws::DynamoDB
     #   Developer Guide*). To work around this, you could specify the
     #   following for `ExpressionAttributeNames`:
     #
-    #   * `\{"#P":"Percentile"\}`
+    #   * `{"#P":"Percentile"}`
     #
     #   ^
     #
@@ -1451,8 +1451,8 @@ module Aws::DynamoDB
     #   You would first need to specify `ExpressionAttributeValues` as
     #   follows:
     #
-    #   `\{ ":avail":\{"S":"Available"\}, ":back":\{"S":"Backordered"\},
-    #   ":disc":\{"S":"Discontinued"\} \}`
+    #   `{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"},
+    #   ":disc":{"S":"Discontinued"} }`
     #
     #   You could then use these values in an expression, such as this:
     #
@@ -1716,7 +1716,7 @@ module Aws::DynamoDB
     #   Developer Guide*). To work around this, you could specify the
     #   following for `ExpressionAttributeNames`:
     #
-    #   * `\{"#P":"Percentile"\}`
+    #   * `{"#P":"Percentile"}`
     #
     #   ^
     #
@@ -1751,8 +1751,8 @@ module Aws::DynamoDB
     #   You would first need to specify `ExpressionAttributeValues` as
     #   follows:
     #
-    #   `\{ ":avail":\{"S":"Available"\}, ":back":\{"S":"Backordered"\},
-    #   ":disc":\{"S":"Discontinued"\} \}`
+    #   `{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"},
+    #   ":disc":{"S":"Discontinued"} }`
     #
     #   You could then use these values in an expression, such as this:
     #
@@ -1816,6 +1816,10 @@ module Aws::DynamoDB
     #             max_read_request_units: 1,
     #             max_write_request_units: 1,
     #           },
+    #           warm_throughput: {
+    #             read_units_per_second: 1,
+    #             write_units_per_second: 1,
+    #           },
     #         },
     #         create: {
     #           index_name: "IndexName", # required
@@ -1836,6 +1840,10 @@ module Aws::DynamoDB
     #           on_demand_throughput: {
     #             max_read_request_units: 1,
     #             max_write_request_units: 1,
+    #           },
+    #           warm_throughput: {
+    #             read_units_per_second: 1,
+    #             write_units_per_second: 1,
     #           },
     #         },
     #         delete: {
@@ -1908,6 +1916,10 @@ module Aws::DynamoDB
     #     on_demand_throughput: {
     #       max_read_request_units: 1,
     #       max_write_request_units: 1,
+    #     },
+    #     warm_throughput: {
+    #       read_units_per_second: 1,
+    #       write_units_per_second: 1,
     #     },
     #   })
     # @param [Hash] options ({})
@@ -1987,6 +1999,9 @@ module Aws::DynamoDB
     #   Updates the maximum number of read and write units for the specified
     #   table in on-demand capacity mode. If you use this parameter, you must
     #   specify `MaxReadRequestUnits`, `MaxWriteRequestUnits`, or both.
+    # @option options [Types::WarmThroughput] :warm_throughput
+    #   Represents the warm throughput (in read units per second and write
+    #   units per second) for updating a table.
     # @return [Table]
     def update(options = {})
       options = options.merge(table_name: @name)
@@ -2136,7 +2151,6 @@ module Aws::DynamoDB
     #     * `list_append (operand, operand)` - evaluates to a list with a new
     #       element added to it. You can append the new element to the start
     #       or the end of the list by reversing the order of the operands.
-    #
     #     These function names are case-sensitive.
     #
     #   * `REMOVE` - Removes one or more attributes from an item.
@@ -2176,7 +2190,6 @@ module Aws::DynamoDB
     #       Both sets must have the same primitive data type. For example, if
     #       the existing data type is a set of strings, the `Value` must also
     #       be a set of strings.
-    #
     #     The `ADD` action only supports Number and set data types. In
     #     addition, `ADD` can only be used on top-level attributes, not nested
     #     attributes.
@@ -2248,7 +2261,7 @@ module Aws::DynamoDB
     #   Developer Guide*.) To work around this, you could specify the
     #   following for `ExpressionAttributeNames`:
     #
-    #   * `\{"#P":"Percentile"\}`
+    #   * `{"#P":"Percentile"}`
     #
     #   ^
     #
@@ -2283,8 +2296,8 @@ module Aws::DynamoDB
     #   You would first need to specify `ExpressionAttributeValues` as
     #   follows:
     #
-    #   `\{ ":avail":\{"S":"Available"\}, ":back":\{"S":"Backordered"\},
-    #   ":disc":\{"S":"Discontinued"\} \}`
+    #   `{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"},
+    #   ":disc":{"S":"Discontinued"} }`
     #
     #   You could then use these values in an expression, such as this:
     #

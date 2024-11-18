@@ -1181,6 +1181,7 @@ module Aws::QBusiness
 
     GroupMembers.add_member(:member_groups, Shapes::ShapeRef.new(shape: MemberGroups, location_name: "memberGroups"))
     GroupMembers.add_member(:member_users, Shapes::ShapeRef.new(shape: MemberUsers, location_name: "memberUsers"))
+    GroupMembers.add_member(:s3_path_for_group_members, Shapes::ShapeRef.new(shape: S3, location_name: "s3PathForGroupMembers"))
     GroupMembers.struct_class = Types::GroupMembers
 
     GroupStatusDetail.add_member(:status, Shapes::ShapeRef.new(shape: GroupStatus, location_name: "status"))
@@ -1475,6 +1476,7 @@ module Aws::QBusiness
     PutGroupRequest.add_member(:data_source_id, Shapes::ShapeRef.new(shape: DataSourceId, location_name: "dataSourceId"))
     PutGroupRequest.add_member(:type, Shapes::ShapeRef.new(shape: MembershipType, required: true, location_name: "type"))
     PutGroupRequest.add_member(:group_members, Shapes::ShapeRef.new(shape: GroupMembers, required: true, location_name: "groupMembers"))
+    PutGroupRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     PutGroupRequest.struct_class = Types::PutGroupRequest
 
     PutGroupResponse.struct_class = Types::PutGroupResponse

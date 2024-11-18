@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.275.0 (2024-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.274.0 (2024-11-14)
+------------------
+
+* Feature - Add support for Neuron instance types [ trn1/trn1n/inf2 ] on SageMaker Notebook Instances Platform.
+
+1.273.0 (2024-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.272.0 (2024-10-31)
 ------------------
 

@@ -42,6 +42,9 @@ module Aws::IAM
       SENSITIVE: []
     end
 
+    class AccountNotManagementOrDelegatedAdministratorException < Aws::EmptyStructure
+    end
+
     class AddClientIDToOpenIDConnectProviderRequest
       attr_accessor open_id_connect_provider_arn: ::String
       attr_accessor client_id: ::String
@@ -88,6 +91,9 @@ module Aws::IAM
       attr_accessor policy_name: ::String
       attr_accessor policy_arn: ::String
       SENSITIVE: []
+    end
+
+    class CallerIsNotManagementAccountException < Aws::EmptyStructure
     end
 
     class ChangePasswordRequest
@@ -448,6 +454,24 @@ module Aws::IAM
       SENSITIVE: []
     end
 
+    class DisableOrganizationsRootCredentialsManagementRequest < Aws::EmptyStructure
+    end
+
+    class DisableOrganizationsRootCredentialsManagementResponse
+      attr_accessor organization_id: ::String
+      attr_accessor enabled_features: ::Array[("RootCredentialsManagement" | "RootSessions")]
+      SENSITIVE: []
+    end
+
+    class DisableOrganizationsRootSessionsRequest < Aws::EmptyStructure
+    end
+
+    class DisableOrganizationsRootSessionsResponse
+      attr_accessor organization_id: ::String
+      attr_accessor enabled_features: ::Array[("RootCredentialsManagement" | "RootSessions")]
+      SENSITIVE: []
+    end
+
     class DuplicateCertificateException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -463,6 +487,24 @@ module Aws::IAM
       attr_accessor serial_number: ::String
       attr_accessor authentication_code_1: ::String
       attr_accessor authentication_code_2: ::String
+      SENSITIVE: []
+    end
+
+    class EnableOrganizationsRootCredentialsManagementRequest < Aws::EmptyStructure
+    end
+
+    class EnableOrganizationsRootCredentialsManagementResponse
+      attr_accessor organization_id: ::String
+      attr_accessor enabled_features: ::Array[("RootCredentialsManagement" | "RootSessions")]
+      SENSITIVE: []
+    end
+
+    class EnableOrganizationsRootSessionsRequest < Aws::EmptyStructure
+    end
+
+    class EnableOrganizationsRootSessionsResponse
+      attr_accessor organization_id: ::String
+      attr_accessor enabled_features: ::Array[("RootCredentialsManagement" | "RootSessions")]
       SENSITIVE: []
     end
 
@@ -572,7 +614,7 @@ module Aws::IAM
     end
 
     class GetAccountSummaryResponse
-      attr_accessor summary_map: ::Hash[("Users" | "UsersQuota" | "Groups" | "GroupsQuota" | "ServerCertificates" | "ServerCertificatesQuota" | "UserPolicySizeQuota" | "GroupPolicySizeQuota" | "GroupsPerUserQuota" | "SigningCertificatesPerUserQuota" | "AccessKeysPerUserQuota" | "MFADevices" | "MFADevicesInUse" | "AccountMFAEnabled" | "AccountAccessKeysPresent" | "AccountSigningCertificatesPresent" | "AttachedPoliciesPerGroupQuota" | "AttachedPoliciesPerRoleQuota" | "AttachedPoliciesPerUserQuota" | "Policies" | "PoliciesQuota" | "PolicySizeQuota" | "PolicyVersionsInUse" | "PolicyVersionsInUseQuota" | "VersionsPerPolicyQuota" | "GlobalEndpointTokenVersion"), ::Integer]
+      attr_accessor summary_map: ::Hash[("Users" | "UsersQuota" | "Groups" | "GroupsQuota" | "ServerCertificates" | "ServerCertificatesQuota" | "UserPolicySizeQuota" | "GroupPolicySizeQuota" | "GroupsPerUserQuota" | "SigningCertificatesPerUserQuota" | "AccessKeysPerUserQuota" | "MFADevices" | "MFADevicesInUse" | "AccountMFAEnabled" | "AccountAccessKeysPresent" | "AccountPasswordPresent" | "AccountSigningCertificatesPresent" | "AttachedPoliciesPerGroupQuota" | "AttachedPoliciesPerRoleQuota" | "AttachedPoliciesPerUserQuota" | "Policies" | "PoliciesQuota" | "PolicySizeQuota" | "PolicyVersionsInUse" | "PolicyVersionsInUseQuota" | "VersionsPerPolicyQuota" | "GlobalEndpointTokenVersion"), ::Integer]
       SENSITIVE: []
     end
 
@@ -1138,6 +1180,15 @@ module Aws::IAM
       SENSITIVE: []
     end
 
+    class ListOrganizationsFeaturesRequest < Aws::EmptyStructure
+    end
+
+    class ListOrganizationsFeaturesResponse
+      attr_accessor organization_id: ::String
+      attr_accessor enabled_features: ::Array[("RootCredentialsManagement" | "RootSessions")]
+      SENSITIVE: []
+    end
+
     class ListPoliciesGrantingServiceAccessEntry
       attr_accessor service_namespace: ::String
       attr_accessor policies: ::Array[Types::PolicyGrantingServiceAccess]
@@ -1445,6 +1496,12 @@ module Aws::IAM
       SENSITIVE: []
     end
 
+    class OrganizationNotFoundException < Aws::EmptyStructure
+    end
+
+    class OrganizationNotInAllFeaturesModeException < Aws::EmptyStructure
+    end
+
     class OrganizationsDecisionDetail
       attr_accessor allowed_by_organizations: bool
       SENSITIVE: []
@@ -1716,6 +1773,9 @@ module Aws::IAM
       attr_accessor upload_date: ::Time
       attr_accessor expiration: ::Time
       SENSITIVE: []
+    end
+
+    class ServiceAccessNotEnabledException < Aws::EmptyStructure
     end
 
     class ServiceFailureException

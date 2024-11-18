@@ -694,7 +694,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Client.html#put_metric_data-instance_method
       def put_metric_data: (
                              namespace: ::String,
-                             metric_data: Array[
+                             ?metric_data: Array[
                                {
                                  metric_name: ::String,
                                  dimensions: Array[
@@ -716,7 +716,39 @@ module Aws
                                  unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")?,
                                  storage_resolution: ::Integer?
                                },
-                             ]
+                             ],
+                             ?entity_metric_data: Array[
+                               {
+                                 entity: {
+                                   key_attributes: Hash[::String, ::String]?,
+                                   attributes: Hash[::String, ::String]?
+                                 }?,
+                                 metric_data: Array[
+                                   {
+                                     metric_name: ::String,
+                                     dimensions: Array[
+                                       {
+                                         name: ::String,
+                                         value: ::String
+                                       },
+                                     ]?,
+                                     timestamp: ::Time?,
+                                     value: ::Float?,
+                                     statistic_values: {
+                                       sample_count: ::Float,
+                                       sum: ::Float,
+                                       minimum: ::Float,
+                                       maximum: ::Float
+                                     }?,
+                                     values: Array[::Float]?,
+                                     counts: Array[::Float]?,
+                                     unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")?,
+                                     storage_resolution: ::Integer?
+                                   },
+                                 ]?
+                               },
+                             ],
+                             ?strict_entity_validation: bool
                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 

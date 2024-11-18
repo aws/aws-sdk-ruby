@@ -195,6 +195,10 @@ module Aws::CloudFormation
     HookFailureMode = Shapes::StringShape.new(name: 'HookFailureMode')
     HookInvocationCount = Shapes::IntegerShape.new(name: 'HookInvocationCount')
     HookInvocationPoint = Shapes::StringShape.new(name: 'HookInvocationPoint')
+    HookResultId = Shapes::StringShape.new(name: 'HookResultId')
+    HookResultNotFoundException = Shapes::StructureShape.new(name: 'HookResultNotFoundException', error: {"code"=>"HookResultNotFound", "httpStatusCode"=>404, "senderFault"=>true})
+    HookResultSummaries = Shapes::ListShape.new(name: 'HookResultSummaries')
+    HookResultSummary = Shapes::StructureShape.new(name: 'HookResultSummary')
     HookStatus = Shapes::StringShape.new(name: 'HookStatus')
     HookStatusReason = Shapes::StringShape.new(name: 'HookStatusReason')
     HookTargetType = Shapes::StringShape.new(name: 'HookTargetType')
@@ -234,6 +238,9 @@ module Aws::CloudFormation
     ListExportsOutput = Shapes::StructureShape.new(name: 'ListExportsOutput')
     ListGeneratedTemplatesInput = Shapes::StructureShape.new(name: 'ListGeneratedTemplatesInput')
     ListGeneratedTemplatesOutput = Shapes::StructureShape.new(name: 'ListGeneratedTemplatesOutput')
+    ListHookResultsInput = Shapes::StructureShape.new(name: 'ListHookResultsInput')
+    ListHookResultsOutput = Shapes::StructureShape.new(name: 'ListHookResultsOutput')
+    ListHookResultsTargetType = Shapes::StringShape.new(name: 'ListHookResultsTargetType')
     ListImportsInput = Shapes::StructureShape.new(name: 'ListImportsInput')
     ListImportsOutput = Shapes::StructureShape.new(name: 'ListImportsOutput')
     ListResourceScanRelatedResourcesInput = Shapes::StructureShape.new(name: 'ListResourceScanRelatedResourcesInput')
@@ -1170,6 +1177,19 @@ module Aws::CloudFormation
     GetTemplateSummaryOutput.add_member(:warnings, Shapes::ShapeRef.new(shape: Warnings, location_name: "Warnings"))
     GetTemplateSummaryOutput.struct_class = Types::GetTemplateSummaryOutput
 
+    HookResultNotFoundException.struct_class = Types::HookResultNotFoundException
+
+    HookResultSummaries.member = Shapes::ShapeRef.new(shape: HookResultSummary)
+
+    HookResultSummary.add_member(:invocation_point, Shapes::ShapeRef.new(shape: HookInvocationPoint, location_name: "InvocationPoint"))
+    HookResultSummary.add_member(:failure_mode, Shapes::ShapeRef.new(shape: HookFailureMode, location_name: "FailureMode"))
+    HookResultSummary.add_member(:type_name, Shapes::ShapeRef.new(shape: HookTypeName, location_name: "TypeName"))
+    HookResultSummary.add_member(:type_version_id, Shapes::ShapeRef.new(shape: HookTypeVersionId, location_name: "TypeVersionId"))
+    HookResultSummary.add_member(:type_configuration_version_id, Shapes::ShapeRef.new(shape: HookTypeConfigurationVersionId, location_name: "TypeConfigurationVersionId"))
+    HookResultSummary.add_member(:status, Shapes::ShapeRef.new(shape: HookStatus, location_name: "Status"))
+    HookResultSummary.add_member(:hook_status_reason, Shapes::ShapeRef.new(shape: HookStatusReason, location_name: "HookStatusReason"))
+    HookResultSummary.struct_class = Types::HookResultSummary
+
     ImportStacksToStackSetInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetNameOrId, required: true, location_name: "StackSetName"))
     ImportStacksToStackSetInput.add_member(:stack_ids, Shapes::ShapeRef.new(shape: StackIdList, location_name: "StackIds"))
     ImportStacksToStackSetInput.add_member(:stack_ids_url, Shapes::ShapeRef.new(shape: StackIdsUrl, location_name: "StackIdsUrl"))
@@ -1221,6 +1241,17 @@ module Aws::CloudFormation
     ListGeneratedTemplatesOutput.add_member(:summaries, Shapes::ShapeRef.new(shape: TemplateSummaries, location_name: "Summaries"))
     ListGeneratedTemplatesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListGeneratedTemplatesOutput.struct_class = Types::ListGeneratedTemplatesOutput
+
+    ListHookResultsInput.add_member(:target_type, Shapes::ShapeRef.new(shape: ListHookResultsTargetType, required: true, location_name: "TargetType"))
+    ListHookResultsInput.add_member(:target_id, Shapes::ShapeRef.new(shape: HookResultId, required: true, location_name: "TargetId"))
+    ListHookResultsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListHookResultsInput.struct_class = Types::ListHookResultsInput
+
+    ListHookResultsOutput.add_member(:target_type, Shapes::ShapeRef.new(shape: ListHookResultsTargetType, location_name: "TargetType"))
+    ListHookResultsOutput.add_member(:target_id, Shapes::ShapeRef.new(shape: HookResultId, location_name: "TargetId"))
+    ListHookResultsOutput.add_member(:hook_results, Shapes::ShapeRef.new(shape: HookResultSummaries, location_name: "HookResults"))
+    ListHookResultsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListHookResultsOutput.struct_class = Types::ListHookResultsOutput
 
     ListImportsInput.add_member(:export_name, Shapes::ShapeRef.new(shape: ExportName, required: true, location_name: "ExportName"))
     ListImportsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -2721,6 +2752,15 @@ module Aws::CloudFormation
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_hook_results, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListHookResults"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListHookResultsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListHookResultsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: HookResultNotFoundException)
       end)
 
       api.add_operation(:list_imports, Seahorse::Model::Operation.new.tap do |o|

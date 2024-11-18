@@ -199,6 +199,9 @@ module Aws::BedrockAgent
       SENSITIVE: []
     end
 
+    class AnyToolChoice < Aws::EmptyStructure
+    end
+
     class AssociateAgentKnowledgeBaseRequest
       attr_accessor agent_id: ::String
       attr_accessor agent_version: ::String
@@ -213,6 +216,9 @@ module Aws::BedrockAgent
       SENSITIVE: []
     end
 
+    class AutoToolChoice < Aws::EmptyStructure
+    end
+
     class BedrockEmbeddingModelConfiguration
       attr_accessor dimensions: ::Integer
       SENSITIVE: []
@@ -222,6 +228,14 @@ module Aws::BedrockAgent
       attr_accessor model_arn: ::String
       attr_accessor parsing_prompt: Types::ParsingPrompt
       SENSITIVE: []
+    end
+
+    class ChatPromptTemplateConfiguration
+      attr_accessor input_variables: ::Array[Types::PromptInputVariable]
+      attr_accessor messages: ::Array[Types::Message]
+      attr_accessor system: ::Array[Types::SystemContentBlock]
+      attr_accessor tool_configuration: Types::ToolConfiguration
+      SENSITIVE: [:input_variables]
     end
 
     class ChunkingConfiguration
@@ -262,6 +276,17 @@ module Aws::BedrockAgent
       attr_accessor host_type: ("SAAS")
       attr_accessor host_url: ::String
       SENSITIVE: []
+    end
+
+    class ContentBlock
+      attr_accessor text: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Text < ContentBlock
+      end
+      class Unknown < ContentBlock
+      end
     end
 
     class CrawlFilterConfiguration
@@ -480,6 +505,11 @@ module Aws::BedrockAgent
       SENSITIVE: []
     end
 
+    class CyclicConnectionFlowValidationDetails
+      attr_accessor connection: ::String
+      SENSITIVE: []
+    end
+
     class DataSource
       attr_accessor created_at: ::Time
       attr_accessor data_deletion_policy: ("RETAIN" | "DELETE")
@@ -648,6 +678,18 @@ module Aws::BedrockAgent
     class DisassociateAgentKnowledgeBaseResponse < Aws::EmptyStructure
     end
 
+    class DuplicateConditionExpressionFlowValidationDetails
+      attr_accessor expression: ::String
+      attr_accessor node: ::String
+      SENSITIVE: [:expression]
+    end
+
+    class DuplicateConnectionsFlowValidationDetails
+      attr_accessor source: ::String
+      attr_accessor target: ::String
+      SENSITIVE: []
+    end
+
     class EmbeddingModelConfiguration
       attr_accessor bedrock_embedding_model_configuration: Types::BedrockEmbeddingModelConfiguration
       SENSITIVE: []
@@ -801,9 +843,94 @@ module Aws::BedrockAgent
     end
 
     class FlowValidation
+      attr_accessor details: Types::FlowValidationDetails
       attr_accessor message: ::String
       attr_accessor severity: ("Warning" | "Error")
+      attr_accessor type: ("CyclicConnection" | "DuplicateConnections" | "DuplicateConditionExpression" | "UnreachableNode" | "UnknownConnectionSource" | "UnknownConnectionSourceOutput" | "UnknownConnectionTarget" | "UnknownConnectionTargetInput" | "UnknownConnectionCondition" | "MalformedConditionExpression" | "MalformedNodeInputExpression" | "MismatchedNodeInputType" | "MismatchedNodeOutputType" | "IncompatibleConnectionDataType" | "MissingConnectionConfiguration" | "MissingDefaultCondition" | "MissingEndingNodes" | "MissingNodeConfiguration" | "MissingNodeInput" | "MissingNodeOutput" | "MissingStartingNodes" | "MultipleNodeInputConnections" | "UnfulfilledNodeInput" | "UnsatisfiedConnectionConditions" | "Unspecified")
       SENSITIVE: []
+    end
+
+    class FlowValidationDetails
+      attr_accessor cyclic_connection: Types::CyclicConnectionFlowValidationDetails
+      attr_accessor duplicate_condition_expression: Types::DuplicateConditionExpressionFlowValidationDetails
+      attr_accessor duplicate_connections: Types::DuplicateConnectionsFlowValidationDetails
+      attr_accessor incompatible_connection_data_type: Types::IncompatibleConnectionDataTypeFlowValidationDetails
+      attr_accessor malformed_condition_expression: Types::MalformedConditionExpressionFlowValidationDetails
+      attr_accessor malformed_node_input_expression: Types::MalformedNodeInputExpressionFlowValidationDetails
+      attr_accessor mismatched_node_input_type: Types::MismatchedNodeInputTypeFlowValidationDetails
+      attr_accessor mismatched_node_output_type: Types::MismatchedNodeOutputTypeFlowValidationDetails
+      attr_accessor missing_connection_configuration: Types::MissingConnectionConfigurationFlowValidationDetails
+      attr_accessor missing_default_condition: Types::MissingDefaultConditionFlowValidationDetails
+      attr_accessor missing_ending_nodes: Types::MissingEndingNodesFlowValidationDetails
+      attr_accessor missing_node_configuration: Types::MissingNodeConfigurationFlowValidationDetails
+      attr_accessor missing_node_input: Types::MissingNodeInputFlowValidationDetails
+      attr_accessor missing_node_output: Types::MissingNodeOutputFlowValidationDetails
+      attr_accessor missing_starting_nodes: Types::MissingStartingNodesFlowValidationDetails
+      attr_accessor multiple_node_input_connections: Types::MultipleNodeInputConnectionsFlowValidationDetails
+      attr_accessor unfulfilled_node_input: Types::UnfulfilledNodeInputFlowValidationDetails
+      attr_accessor unknown_connection_condition: Types::UnknownConnectionConditionFlowValidationDetails
+      attr_accessor unknown_connection_source: Types::UnknownConnectionSourceFlowValidationDetails
+      attr_accessor unknown_connection_source_output: Types::UnknownConnectionSourceOutputFlowValidationDetails
+      attr_accessor unknown_connection_target: Types::UnknownConnectionTargetFlowValidationDetails
+      attr_accessor unknown_connection_target_input: Types::UnknownConnectionTargetInputFlowValidationDetails
+      attr_accessor unreachable_node: Types::UnreachableNodeFlowValidationDetails
+      attr_accessor unsatisfied_connection_conditions: Types::UnsatisfiedConnectionConditionsFlowValidationDetails
+      attr_accessor unspecified: Types::UnspecifiedFlowValidationDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CyclicConnection < FlowValidationDetails
+      end
+      class DuplicateConditionExpression < FlowValidationDetails
+      end
+      class DuplicateConnections < FlowValidationDetails
+      end
+      class IncompatibleConnectionDataType < FlowValidationDetails
+      end
+      class MalformedConditionExpression < FlowValidationDetails
+      end
+      class MalformedNodeInputExpression < FlowValidationDetails
+      end
+      class MismatchedNodeInputType < FlowValidationDetails
+      end
+      class MismatchedNodeOutputType < FlowValidationDetails
+      end
+      class MissingConnectionConfiguration < FlowValidationDetails
+      end
+      class MissingDefaultCondition < FlowValidationDetails
+      end
+      class MissingEndingNodes < FlowValidationDetails
+      end
+      class MissingNodeConfiguration < FlowValidationDetails
+      end
+      class MissingNodeInput < FlowValidationDetails
+      end
+      class MissingNodeOutput < FlowValidationDetails
+      end
+      class MissingStartingNodes < FlowValidationDetails
+      end
+      class MultipleNodeInputConnections < FlowValidationDetails
+      end
+      class UnfulfilledNodeInput < FlowValidationDetails
+      end
+      class UnknownConnectionCondition < FlowValidationDetails
+      end
+      class UnknownConnectionSource < FlowValidationDetails
+      end
+      class UnknownConnectionSourceOutput < FlowValidationDetails
+      end
+      class UnknownConnectionTarget < FlowValidationDetails
+      end
+      class UnknownConnectionTargetInput < FlowValidationDetails
+      end
+      class UnreachableNode < FlowValidationDetails
+      end
+      class UnsatisfiedConnectionConditions < FlowValidationDetails
+      end
+      class Unspecified < FlowValidationDetails
+      end
+      class Unknown < FlowValidationDetails
+      end
     end
 
     class FlowVersionSummary
@@ -1019,6 +1146,11 @@ module Aws::BedrockAgent
       SENSITIVE: []
     end
 
+    class IncompatibleConnectionDataTypeFlowValidationDetails
+      attr_accessor connection: ::String
+      SENSITIVE: []
+    end
+
     class InferenceConfiguration
       attr_accessor maximum_length: ::Integer
       attr_accessor stop_sequences: ::Array[::String]
@@ -1115,6 +1247,7 @@ module Aws::BedrockAgent
     end
 
     class KnowledgeBaseFlowNodeConfiguration
+      attr_accessor guardrail_configuration: Types::GuardrailConfiguration
       attr_accessor knowledge_base_id: ::String
       attr_accessor model_id: ::String
       SENSITIVE: []
@@ -1308,10 +1441,77 @@ module Aws::BedrockAgent
       SENSITIVE: []
     end
 
+    class MalformedConditionExpressionFlowValidationDetails
+      attr_accessor cause: ::String
+      attr_accessor condition: ::String
+      attr_accessor node: ::String
+      SENSITIVE: []
+    end
+
+    class MalformedNodeInputExpressionFlowValidationDetails
+      attr_accessor cause: ::String
+      attr_accessor input: ::String
+      attr_accessor node: ::String
+      SENSITIVE: []
+    end
+
     class MemoryConfiguration
       attr_accessor enabled_memory_types: ::Array[("SESSION_SUMMARY")]
       attr_accessor storage_days: ::Integer
       SENSITIVE: []
+    end
+
+    class Message
+      attr_accessor content: ::Array[Types::ContentBlock]
+      attr_accessor role: ("user" | "assistant")
+      SENSITIVE: []
+    end
+
+    class MismatchedNodeInputTypeFlowValidationDetails
+      attr_accessor expected_type: ("String" | "Number" | "Boolean" | "Object" | "Array")
+      attr_accessor input: ::String
+      attr_accessor node: ::String
+      SENSITIVE: []
+    end
+
+    class MismatchedNodeOutputTypeFlowValidationDetails
+      attr_accessor expected_type: ("String" | "Number" | "Boolean" | "Object" | "Array")
+      attr_accessor node: ::String
+      attr_accessor output: ::String
+      SENSITIVE: []
+    end
+
+    class MissingConnectionConfigurationFlowValidationDetails
+      attr_accessor connection: ::String
+      SENSITIVE: []
+    end
+
+    class MissingDefaultConditionFlowValidationDetails
+      attr_accessor node: ::String
+      SENSITIVE: []
+    end
+
+    class MissingEndingNodesFlowValidationDetails < Aws::EmptyStructure
+    end
+
+    class MissingNodeConfigurationFlowValidationDetails
+      attr_accessor node: ::String
+      SENSITIVE: []
+    end
+
+    class MissingNodeInputFlowValidationDetails
+      attr_accessor input: ::String
+      attr_accessor node: ::String
+      SENSITIVE: []
+    end
+
+    class MissingNodeOutputFlowValidationDetails
+      attr_accessor node: ::String
+      attr_accessor output: ::String
+      SENSITIVE: []
+    end
+
+    class MissingStartingNodesFlowValidationDetails < Aws::EmptyStructure
     end
 
     class MongoDbAtlasConfiguration
@@ -1329,6 +1529,12 @@ module Aws::BedrockAgent
       attr_accessor metadata_field: ::String
       attr_accessor text_field: ::String
       attr_accessor vector_field: ::String
+      SENSITIVE: []
+    end
+
+    class MultipleNodeInputConnectionsFlowValidationDetails
+      attr_accessor input: ::String
+      attr_accessor node: ::String
       SENSITIVE: []
     end
 
@@ -1417,6 +1623,11 @@ module Aws::BedrockAgent
       SENSITIVE: []
     end
 
+    class PromptAgentResource
+      attr_accessor agent_identifier: ::String
+      SENSITIVE: []
+    end
+
     class PromptConfiguration
       attr_accessor base_prompt_template: ::String
       attr_accessor inference_configuration: Types::InferenceConfiguration
@@ -1428,6 +1639,7 @@ module Aws::BedrockAgent
     end
 
     class PromptFlowNodeConfiguration
+      attr_accessor guardrail_configuration: Types::GuardrailConfiguration
       attr_accessor source_configuration: Types::PromptFlowNodeSourceConfiguration
       SENSITIVE: []
     end
@@ -1437,7 +1649,7 @@ module Aws::BedrockAgent
       attr_accessor inference_configuration: Types::PromptInferenceConfiguration
       attr_accessor model_id: ::String
       attr_accessor template_configuration: Types::PromptTemplateConfiguration
-      attr_accessor template_type: ("TEXT")
+      attr_accessor template_type: ("TEXT" | "CHAT")
       SENSITIVE: []
     end
 
@@ -1457,6 +1669,17 @@ module Aws::BedrockAgent
       class Resource < PromptFlowNodeSourceConfiguration
       end
       class Unknown < PromptFlowNodeSourceConfiguration
+      end
+    end
+
+    class PromptGenAiResource
+      attr_accessor agent: Types::PromptAgentResource
+      attr_accessor unknown: untyped
+      SENSITIVE: [:agent]
+
+      class Agent < PromptGenAiResource
+      end
+      class Unknown < PromptGenAiResource
       end
     end
 
@@ -1508,10 +1731,13 @@ module Aws::BedrockAgent
     end
 
     class PromptTemplateConfiguration
+      attr_accessor chat: Types::ChatPromptTemplateConfiguration
       attr_accessor text: Types::TextPromptTemplateConfiguration
       attr_accessor unknown: untyped
-      SENSITIVE: [:text]
+      SENSITIVE: [:chat, :text]
 
+      class Chat < PromptTemplateConfiguration
+      end
       class Text < PromptTemplateConfiguration
       end
       class Unknown < PromptTemplateConfiguration
@@ -1520,13 +1746,14 @@ module Aws::BedrockAgent
 
     class PromptVariant
       attr_accessor additional_model_request_fields: untyped
+      attr_accessor gen_ai_resource: Types::PromptGenAiResource
       attr_accessor inference_configuration: Types::PromptInferenceConfiguration
       attr_accessor metadata: ::Array[Types::PromptMetadataEntry]
       attr_accessor model_id: ::String
       attr_accessor name: ::String
       attr_accessor template_configuration: Types::PromptTemplateConfiguration
-      attr_accessor template_type: ("TEXT")
-      SENSITIVE: [:metadata]
+      attr_accessor template_type: ("TEXT" | "CHAT")
+      SENSITIVE: [:gen_ai_resource, :metadata]
     end
 
     class RdsConfiguration
@@ -1666,6 +1893,11 @@ module Aws::BedrockAgent
       SENSITIVE: []
     end
 
+    class SpecificToolChoice
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
     class StartIngestionJobRequest
       attr_accessor client_token: ::String
       attr_accessor data_source_id: ::String
@@ -1722,6 +1954,17 @@ module Aws::BedrockAgent
       end
     end
 
+    class SystemContentBlock
+      attr_accessor text: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Text < SystemContentBlock
+      end
+      class Unknown < SystemContentBlock
+      end
+    end
+
     class TagResourceRequest
       attr_accessor resource_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
@@ -1742,6 +1985,58 @@ module Aws::BedrockAgent
       SENSITIVE: []
     end
 
+    class Tool
+      attr_accessor tool_spec: Types::ToolSpecification
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ToolSpec < Tool
+      end
+      class Unknown < Tool
+      end
+    end
+
+    class ToolChoice
+      attr_accessor any: Types::AnyToolChoice
+      attr_accessor auto: Types::AutoToolChoice
+      attr_accessor tool: Types::SpecificToolChoice
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Any < ToolChoice
+      end
+      class Auto < ToolChoice
+      end
+      class Tool < ToolChoice
+      end
+      class Unknown < ToolChoice
+      end
+    end
+
+    class ToolConfiguration
+      attr_accessor tool_choice: Types::ToolChoice
+      attr_accessor tools: ::Array[Types::Tool]
+      SENSITIVE: [:tool_choice, :tools]
+    end
+
+    class ToolInputSchema
+      attr_accessor json: untyped
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Json < ToolInputSchema
+      end
+      class Unknown < ToolInputSchema
+      end
+    end
+
+    class ToolSpecification
+      attr_accessor description: ::String
+      attr_accessor input_schema: Types::ToolInputSchema
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
     class Transformation
       attr_accessor step_to_apply: ("POST_CHUNKING")
       attr_accessor transformation_function: Types::TransformationFunction
@@ -1756,6 +2051,50 @@ module Aws::BedrockAgent
     class TransformationLambdaConfiguration
       attr_accessor lambda_arn: ::String
       SENSITIVE: []
+    end
+
+    class UnfulfilledNodeInputFlowValidationDetails
+      attr_accessor input: ::String
+      attr_accessor node: ::String
+      SENSITIVE: []
+    end
+
+    class UnknownConnectionConditionFlowValidationDetails
+      attr_accessor connection: ::String
+      SENSITIVE: []
+    end
+
+    class UnknownConnectionSourceFlowValidationDetails
+      attr_accessor connection: ::String
+      SENSITIVE: []
+    end
+
+    class UnknownConnectionSourceOutputFlowValidationDetails
+      attr_accessor connection: ::String
+      SENSITIVE: []
+    end
+
+    class UnknownConnectionTargetFlowValidationDetails
+      attr_accessor connection: ::String
+      SENSITIVE: []
+    end
+
+    class UnknownConnectionTargetInputFlowValidationDetails
+      attr_accessor connection: ::String
+      SENSITIVE: []
+    end
+
+    class UnreachableNodeFlowValidationDetails
+      attr_accessor node: ::String
+      SENSITIVE: []
+    end
+
+    class UnsatisfiedConnectionConditionsFlowValidationDetails
+      attr_accessor connection: ::String
+      SENSITIVE: []
+    end
+
+    class UnspecifiedFlowValidationDetails < Aws::EmptyStructure
     end
 
     class UntagResourceRequest
@@ -1938,6 +2277,16 @@ module Aws::BedrockAgent
 
     class UrlConfiguration
       attr_accessor seed_urls: ::Array[Types::SeedUrl]
+      SENSITIVE: []
+    end
+
+    class ValidateFlowDefinitionRequest
+      attr_accessor definition: Types::FlowDefinition
+      SENSITIVE: [:definition]
+    end
+
+    class ValidateFlowDefinitionResponse
+      attr_accessor validations: ::Array[Types::FlowValidation]
       SENSITIVE: []
     end
 

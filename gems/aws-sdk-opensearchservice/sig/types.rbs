@@ -127,11 +127,24 @@ module Aws::OpenSearchService
     class AssociatePackageRequest
       attr_accessor package_id: ::String
       attr_accessor domain_name: ::String
+      attr_accessor prerequisite_package_id_list: ::Array[::String]
+      attr_accessor association_configuration: Types::PackageAssociationConfiguration
       SENSITIVE: []
     end
 
     class AssociatePackageResponse
       attr_accessor domain_package_details: Types::DomainPackageDetails
+      SENSITIVE: []
+    end
+
+    class AssociatePackagesRequest
+      attr_accessor package_list: ::Array[Types::PackageDetailsForAssociation]
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class AssociatePackagesResponse
+      attr_accessor domain_package_details_list: ::Array[Types::DomainPackageDetails]
       SENSITIVE: []
     end
 
@@ -417,9 +430,13 @@ module Aws::OpenSearchService
 
     class CreatePackageRequest
       attr_accessor package_name: ::String
-      attr_accessor package_type: ("TXT-DICTIONARY" | "ZIP-PLUGIN")
+      attr_accessor package_type: ("TXT-DICTIONARY" | "ZIP-PLUGIN" | "PACKAGE-LICENSE" | "PACKAGE-CONFIG")
       attr_accessor package_description: ::String
       attr_accessor package_source: Types::PackageSource
+      attr_accessor package_configuration: Types::PackageConfiguration
+      attr_accessor engine_version: ::String
+      attr_accessor package_vending_options: Types::PackageVendingOptions
+      attr_accessor package_encryption_options: Types::PackageEncryptionOptions
       SENSITIVE: []
     end
 
@@ -681,7 +698,7 @@ module Aws::OpenSearchService
     end
 
     class DescribePackagesFilter
-      attr_accessor name: ("PackageID" | "PackageName" | "PackageStatus" | "PackageType" | "EngineVersion")
+      attr_accessor name: ("PackageID" | "PackageName" | "PackageStatus" | "PackageType" | "EngineVersion" | "PackageOwner")
       attr_accessor value: ::Array[::String]
       SENSITIVE: []
     end
@@ -747,6 +764,17 @@ module Aws::OpenSearchService
 
     class DissociatePackageResponse
       attr_accessor domain_package_details: Types::DomainPackageDetails
+      SENSITIVE: []
+    end
+
+    class DissociatePackagesRequest
+      attr_accessor package_list: ::Array[::String]
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class DissociatePackagesResponse
+      attr_accessor domain_package_details_list: ::Array[Types::DomainPackageDetails]
       SENSITIVE: []
     end
 
@@ -828,13 +856,15 @@ module Aws::OpenSearchService
     class DomainPackageDetails
       attr_accessor package_id: ::String
       attr_accessor package_name: ::String
-      attr_accessor package_type: ("TXT-DICTIONARY" | "ZIP-PLUGIN")
+      attr_accessor package_type: ("TXT-DICTIONARY" | "ZIP-PLUGIN" | "PACKAGE-LICENSE" | "PACKAGE-CONFIG")
       attr_accessor last_updated: ::Time
       attr_accessor domain_name: ::String
       attr_accessor domain_package_status: ("ASSOCIATING" | "ASSOCIATION_FAILED" | "ACTIVE" | "DISSOCIATING" | "DISSOCIATION_FAILED")
       attr_accessor package_version: ::String
+      attr_accessor prerequisite_package_id_list: ::Array[::String]
       attr_accessor reference_path: ::String
       attr_accessor error_details: Types::ErrorDetails
+      attr_accessor association_configuration: Types::PackageAssociationConfiguration
       SENSITIVE: []
     end
 
@@ -1147,6 +1177,12 @@ module Aws::OpenSearchService
       SENSITIVE: []
     end
 
+    class KeyStoreAccessOption
+      attr_accessor key_access_role_arn: ::String
+      attr_accessor key_store_access_enabled: bool
+      SENSITIVE: []
+    end
+
     class LimitExceededException < Aws::EmptyStructure
     end
 
@@ -1422,10 +1458,23 @@ module Aws::OpenSearchService
       SENSITIVE: []
     end
 
+    class PackageAssociationConfiguration
+      attr_accessor key_store_access_option: Types::KeyStoreAccessOption
+      SENSITIVE: []
+    end
+
+    class PackageConfiguration
+      attr_accessor license_requirement: ("REQUIRED" | "OPTIONAL" | "NONE")
+      attr_accessor license_filepath: ::String
+      attr_accessor configuration_requirement: ("REQUIRED" | "OPTIONAL" | "NONE")
+      attr_accessor requires_restart_for_configuration_update: bool
+      SENSITIVE: []
+    end
+
     class PackageDetails
       attr_accessor package_id: ::String
       attr_accessor package_name: ::String
-      attr_accessor package_type: ("TXT-DICTIONARY" | "ZIP-PLUGIN")
+      attr_accessor package_type: ("TXT-DICTIONARY" | "ZIP-PLUGIN" | "PACKAGE-LICENSE" | "PACKAGE-CONFIG")
       attr_accessor package_description: ::String
       attr_accessor package_status: ("COPYING" | "COPY_FAILED" | "VALIDATING" | "VALIDATION_FAILED" | "AVAILABLE" | "DELETING" | "DELETED" | "DELETE_FAILED")
       attr_accessor created_at: ::Time
@@ -1434,6 +1483,24 @@ module Aws::OpenSearchService
       attr_accessor error_details: Types::ErrorDetails
       attr_accessor engine_version: ::String
       attr_accessor available_plugin_properties: Types::PluginProperties
+      attr_accessor available_package_configuration: Types::PackageConfiguration
+      attr_accessor allow_listed_user_list: ::Array[::String]
+      attr_accessor package_owner: ::String
+      attr_accessor package_vending_options: Types::PackageVendingOptions
+      attr_accessor package_encryption_options: Types::PackageEncryptionOptions
+      SENSITIVE: []
+    end
+
+    class PackageDetailsForAssociation
+      attr_accessor package_id: ::String
+      attr_accessor prerequisite_package_id_list: ::Array[::String]
+      attr_accessor association_configuration: Types::PackageAssociationConfiguration
+      SENSITIVE: []
+    end
+
+    class PackageEncryptionOptions
+      attr_accessor kms_key_identifier: ::String
+      attr_accessor encryption_enabled: bool
       SENSITIVE: []
     end
 
@@ -1443,11 +1510,17 @@ module Aws::OpenSearchService
       SENSITIVE: []
     end
 
+    class PackageVendingOptions
+      attr_accessor vending_enabled: bool
+      SENSITIVE: []
+    end
+
     class PackageVersionHistory
       attr_accessor package_version: ::String
       attr_accessor commit_message: ::String
       attr_accessor created_at: ::Time
       attr_accessor plugin_properties: Types::PluginProperties
+      attr_accessor package_configuration: Types::PackageConfiguration
       SENSITIVE: []
     end
 
@@ -1745,11 +1818,27 @@ module Aws::OpenSearchService
       attr_accessor package_source: Types::PackageSource
       attr_accessor package_description: ::String
       attr_accessor commit_message: ::String
+      attr_accessor package_configuration: Types::PackageConfiguration
+      attr_accessor package_encryption_options: Types::PackageEncryptionOptions
       SENSITIVE: []
     end
 
     class UpdatePackageResponse
       attr_accessor package_details: Types::PackageDetails
+      SENSITIVE: []
+    end
+
+    class UpdatePackageScopeRequest
+      attr_accessor package_id: ::String
+      attr_accessor operation: ("ADD" | "OVERRIDE" | "REMOVE")
+      attr_accessor package_user_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdatePackageScopeResponse
+      attr_accessor package_id: ::String
+      attr_accessor operation: ("ADD" | "OVERRIDE" | "REMOVE")
+      attr_accessor package_user_list: ::Array[::String]
       SENSITIVE: []
     end
 

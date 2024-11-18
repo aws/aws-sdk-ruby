@@ -449,7 +449,7 @@ module Aws::ServiceDiscovery
     #
     # @!attribute [rw] query_parameters
     #   Filters to scope the results based on custom attributes for the
-    #   instance (for example, `\{version=v1, az=1a\}`). Only instances that
+    #   instance (for example, `{version=v1, az=1a}`). Only instances that
     #   match all the specified key-value pairs are returned.
     #   @return [Hash<String,String>]
     #
@@ -762,7 +762,6 @@ module Aws::ServiceDiscovery
     #       * The name of the service.
     #
     #       * The name of the namespace.
-    #
     #       For example, if the value of `InstanceId` is `test`, the name of
     #       the service is `backend`, and the name of the namespace is
     #       `example.com`, the value of `service-hostname` is the following:

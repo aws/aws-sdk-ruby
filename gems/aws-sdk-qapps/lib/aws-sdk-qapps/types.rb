@@ -208,6 +208,87 @@ module Aws::QApps
       include Aws::Structure
     end
 
+    # @!attribute [rw] instance_id
+    #   The unique identifier of the Amazon Q Business application
+    #   environment instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] categories
+    #   The list of category objects to be created
+    #   @return [Array<Types::BatchCreateCategoryInputCategory>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qapps-2023-11-27/BatchCreateCategoryInput AWS API Documentation
+    #
+    class BatchCreateCategoryInput < Struct.new(
+      :instance_id,
+      :categories)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The category object to be created.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier to be associated with a category. If you
+    #   don't include a value, the category is automatically assigned a
+    #   unique identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The name of the category.
+    #   @return [String]
+    #
+    # @!attribute [rw] color
+    #   The color to be associated with a category. The color must be a
+    #   hexadecimal value of either 3 or 6 digits.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qapps-2023-11-27/BatchCreateCategoryInputCategory AWS API Documentation
+    #
+    class BatchCreateCategoryInputCategory < Struct.new(
+      :id,
+      :title,
+      :color)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The unique identifier of the Amazon Q Business application
+    #   environment instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] categories
+    #   The list of IDs of the categories to be deleted.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qapps-2023-11-27/BatchDeleteCategoryInput AWS API Documentation
+    #
+    class BatchDeleteCategoryInput < Struct.new(
+      :instance_id,
+      :categories)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The unique identifier of the Amazon Q Business application
+    #   environment instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] categories
+    #   The list of categories to be updated with their new values.
+    #   @return [Array<Types::CategoryInput>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qapps-2023-11-27/BatchUpdateCategoryInput AWS API Documentation
+    #
+    class BatchUpdateCategoryInput < Struct.new(
+      :instance_id,
+      :categories)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A card representing a component or step in an Amazon Q App's flow.
     #
     # @note Card is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Card corresponding to the set member.
@@ -338,11 +419,47 @@ module Aws::QApps
     #   The title or name of the category.
     #   @return [String]
     #
+    # @!attribute [rw] color
+    #   The color of the category
+    #   @return [String]
+    #
+    # @!attribute [rw] app_count
+    #   The number of published Amazon Q Apps associated with a category
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qapps-2023-11-27/Category AWS API Documentation
     #
     class Category < Struct.new(
       :id,
-      :title)
+      :title,
+      :color,
+      :app_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A label that web experience users associate with a library item. Web
+    # experience users use Categories to tag and filter library items.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the category.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The name of the category.
+    #   @return [String]
+    #
+    # @!attribute [rw] color
+    #   The color of the category, represented as a hexadecimal value of
+    #   either 3 or 6 digits.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qapps-2023-11-27/CategoryInput AWS API Documentation
+    #
+    class CategoryInput < Struct.new(
+      :id,
+      :title,
+      :color)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1198,6 +1315,32 @@ module Aws::QApps
       :is_rated_by_user,
       :user_count,
       :is_verified)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The unique identifier of the Amazon Q Business application
+    #   environment instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qapps-2023-11-27/ListCategoriesInput AWS API Documentation
+    #
+    class ListCategoriesInput < Struct.new(
+      :instance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] categories
+    #   The categories of a Amazon Q Business application environment
+    #   instance.
+    #   @return [Array<Types::Category>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qapps-2023-11-27/ListCategoriesOutput AWS API Documentation
+    #
+    class ListCategoriesOutput < Struct.new(
+      :categories)
       SENSITIVE = []
       include Aws::Structure
     end

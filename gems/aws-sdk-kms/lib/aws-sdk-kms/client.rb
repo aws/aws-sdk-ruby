@@ -1823,7 +1823,6 @@ module Aws::KMS
     #     * `SYMMETRIC_DEFAULT`
     #
     #     ^
-    #
     #   * HMAC keys (symmetric)
     #
     #     * `HMAC_224`
@@ -1833,7 +1832,6 @@ module Aws::KMS
     #     * `HMAC_384`
     #
     #     * `HMAC_512`
-    #
     #   * Asymmetric RSA key pairs (encryption and decryption -or- signing and
     #     verification)
     #
@@ -1842,7 +1840,6 @@ module Aws::KMS
     #     * `RSA_3072`
     #
     #     * `RSA_4096`
-    #
     #   * Asymmetric NIST-recommended elliptic curve key pairs (signing and
     #     verification -or- deriving shared secrets)
     #
@@ -1851,13 +1848,11 @@ module Aws::KMS
     #     * `ECC_NIST_P384` (secp384r1)
     #
     #     * `ECC_NIST_P521` (secp521r1)
-    #
     #   * Other asymmetric elliptic curve key pairs (signing and verification)
     #
     #     * `ECC_SECG_P256K1` (secp256k1), commonly used for cryptocurrencies.
     #
     #     ^
-    #
     #   * SM2 key pairs (encryption and decryption -or- signing and
     #     verification -or- deriving shared secrets)
     #
@@ -4391,25 +4386,21 @@ module Aws::KMS
     #   * `SYMMETRIC_DEFAULT`: 4096 bytes
     #
     #   ^
-    #
     # * `RSA_2048`
     #
     #   * `RSAES_OAEP_SHA_1`: 214 bytes
     #
     #   * `RSAES_OAEP_SHA_256`: 190 bytes
-    #
     # * `RSA_3072`
     #
     #   * `RSAES_OAEP_SHA_1`: 342 bytes
     #
     #   * `RSAES_OAEP_SHA_256`: 318 bytes
-    #
     # * `RSA_4096`
     #
     #   * `RSAES_OAEP_SHA_1`: 470 bytes
     #
     #   * `RSAES_OAEP_SHA_256`: 446 bytes
-    #
     # * `SM2PKE`: 1024 bytes (China Regions only)
     #
     # The KMS key that you use for this operation must be in a compatible
@@ -10782,7 +10773,7 @@ module Aws::KMS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kms'
-      context[:gem_version] = '1.95.0'
+      context[:gem_version] = '1.96.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

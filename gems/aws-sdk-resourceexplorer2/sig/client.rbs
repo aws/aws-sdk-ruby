@@ -187,6 +187,16 @@ module Aws
       def get_index: () -> _GetIndexResponseSuccess
                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIndexResponseSuccess
 
+      interface _GetManagedViewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetManagedViewOutput]
+        def managed_view: () -> Types::ManagedView
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceExplorer2/Client.html#get_managed_view-instance_method
+      def get_managed_view: (
+                              managed_view_arn: ::String
+                            ) -> _GetManagedViewResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetManagedViewResponseSuccess
+
       interface _GetViewResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetViewOutput]
         def tags: () -> ::Hash[::String, ::String]
@@ -224,6 +234,19 @@ module Aws
                                       ?next_token: ::String
                                     ) -> _ListIndexesForMembersResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIndexesForMembersResponseSuccess
+
+      interface _ListManagedViewsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListManagedViewsOutput]
+        def managed_views: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceExplorer2/Client.html#list_managed_views-instance_method
+      def list_managed_views: (
+                                ?max_results: ::Integer,
+                                ?next_token: ::String,
+                                ?service_principal: ::String
+                              ) -> _ListManagedViewsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListManagedViewsResponseSuccess
 
       interface _ListResourcesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListResourcesOutput]

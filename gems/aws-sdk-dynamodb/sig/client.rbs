@@ -222,6 +222,10 @@ module Aws
                               on_demand_throughput: {
                                 max_read_request_units: ::Integer?,
                                 max_write_request_units: ::Integer?
+                              }?,
+                              warm_throughput: {
+                                read_units_per_second: ::Integer?,
+                                write_units_per_second: ::Integer?
                               }?
                             },
                           ],
@@ -247,6 +251,10 @@ module Aws
                           ],
                           ?table_class: ("STANDARD" | "STANDARD_INFREQUENT_ACCESS"),
                           ?deletion_protection_enabled: bool,
+                          ?warm_throughput: {
+                            read_units_per_second: ::Integer?,
+                            write_units_per_second: ::Integer?
+                          },
                           ?resource_policy: ::String,
                           ?on_demand_throughput: {
                             max_read_request_units: ::Integer?,
@@ -644,6 +652,10 @@ module Aws
                                 on_demand_throughput: {
                                   max_read_request_units: ::Integer?,
                                   max_write_request_units: ::Integer?
+                                }?,
+                                warm_throughput: {
+                                  read_units_per_second: ::Integer?,
+                                  write_units_per_second: ::Integer?
                                 }?
                               },
                             ]?
@@ -848,6 +860,10 @@ module Aws
                                            on_demand_throughput: {
                                              max_read_request_units: ::Integer?,
                                              max_write_request_units: ::Integer?
+                                           }?,
+                                           warm_throughput: {
+                                             read_units_per_second: ::Integer?,
+                                             write_units_per_second: ::Integer?
                                            }?
                                          },
                                        ],
@@ -914,6 +930,10 @@ module Aws
                                                 on_demand_throughput: {
                                                   max_read_request_units: ::Integer?,
                                                   max_write_request_units: ::Integer?
+                                                }?,
+                                                warm_throughput: {
+                                                  read_units_per_second: ::Integer?,
+                                                  write_units_per_second: ::Integer?
                                                 }?
                                               },
                                             ],
@@ -1287,6 +1307,10 @@ module Aws
                                 on_demand_throughput: {
                                   max_read_request_units: ::Integer?,
                                   max_write_request_units: ::Integer?
+                                }?,
+                                warm_throughput: {
+                                  read_units_per_second: ::Integer?,
+                                  write_units_per_second: ::Integer?
                                 }?
                               }?,
                               create: {
@@ -1308,6 +1332,10 @@ module Aws
                                 on_demand_throughput: {
                                   max_read_request_units: ::Integer?,
                                   max_write_request_units: ::Integer?
+                                }?,
+                                warm_throughput: {
+                                  read_units_per_second: ::Integer?,
+                                  write_units_per_second: ::Integer?
                                 }?
                               }?,
                               delete: {
@@ -1380,6 +1408,10 @@ module Aws
                           ?on_demand_throughput: {
                             max_read_request_units: ::Integer?,
                             max_write_request_units: ::Integer?
+                          },
+                          ?warm_throughput: {
+                            read_units_per_second: ::Integer?,
+                            write_units_per_second: ::Integer?
                           }
                         ) -> _UpdateTableResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTableResponseSuccess

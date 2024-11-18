@@ -87,7 +87,6 @@ module Aws::SSMQuickSetup
     #         account.
     #
     #       ^
-    #
     #     * `TargetOrganizationalUnits`
     #
     #       * Description: (Required) A comma separated list of
@@ -95,7 +94,6 @@ module Aws::SSMQuickSetup
     #         configuration to.
     #
     #       ^
-    #
     #     * `TargetRegions`
     #
     #       * Description: (Required) A comma separated list of Amazon Web
@@ -110,21 +108,18 @@ module Aws::SSMQuickSetup
     #         you want to target.
     #
     #       ^
-    #
     #     * `TargetTagValue`
     #
     #       * Description: (Required) The value of the tag key assigned to
     #         the instances you want to target.
     #
     #       ^
-    #
     #     * `ICalendarString`
     #
     #       * Description: (Required) An iCalendar formatted string
     #         containing the schedule you want Change Manager to use.
     #
     #       ^
-    #
     #     * `TargetAccounts`
     #
     #       * Description: (Optional) The ID of the Amazon Web Services
@@ -134,7 +129,6 @@ module Aws::SSMQuickSetup
     #         `TargetAccounts` or `TargetOrganizationalUnits`.
     #
     #       ^
-    #
     #     * `TargetOrganizationalUnits`
     #
     #       * Description: (Optional) A comma separated list of
@@ -142,7 +136,6 @@ module Aws::SSMQuickSetup
     #         configuration to.
     #
     #       ^
-    #
     #     * `TargetRegions`
     #
     #       * Description: (Required) A comma separated list of Amazon Web
@@ -158,7 +151,6 @@ module Aws::SSMQuickSetup
     #         2 weeks. The default value is "`true`".
     #
     #       ^
-    #
     #     * `TargetOrganizationalUnits`
     #
     #       * Description: (Required) A comma separated list of
@@ -166,7 +158,6 @@ module Aws::SSMQuickSetup
     #         configuration to.
     #
     #       ^
-    #
     #     * `TargetRegions`
     #
     #       * Description: (Required) A comma separated list of Amazon Web
@@ -181,7 +172,6 @@ module Aws::SSMQuickSetup
     #         you want to create the aggregator index.
     #
     #       ^
-    #
     #     * `ReplaceExistingAggregator`
     #
     #       * Description: (Required) A boolean value that determines
@@ -190,7 +180,6 @@ module Aws::SSMQuickSetup
     #         `SelectedAggregatorRegion`.
     #
     #       ^
-    #
     #     * `TargetOrganizationalUnits`
     #
     #       * Description: (Required) A comma separated list of
@@ -198,7 +187,6 @@ module Aws::SSMQuickSetup
     #         configuration to.
     #
     #       ^
-    #
     #     * `TargetRegions`
     #
     #       * Description: (Required) A comma separated list of Amazon Web
@@ -213,14 +201,12 @@ module Aws::SSMQuickSetup
     #         account.
     #
     #       ^
-    #
     #     * `JobFunction`
     #
     #       * Description: (Required) The name for the Change Manager job
     #         function.
     #
     #       ^
-    #
     #     * `PermissionType`
     #
     #       * Description: (Optional) Specifies whether you want to use
@@ -230,7 +216,6 @@ module Aws::SSMQuickSetup
     #         for the parameter is `CustomerPermissions`.
     #
     #       ^
-    #
     #     * `CustomPermissions`
     #
     #       * Description: (Optional) A JSON string containing the IAM
@@ -239,7 +224,6 @@ module Aws::SSMQuickSetup
     #         for the `PermissionType` parameter.
     #
     #       ^
-    #
     #     * `TargetOrganizationalUnits`
     #
     #       * Description: (Required) A comma separated list of
@@ -247,7 +231,6 @@ module Aws::SSMQuickSetup
     #         configuration to.
     #
     #       ^
-    #
     #     * `TargetRegions`
     #
     #       * Description: (Required) A comma separated list of Amazon Web
@@ -263,7 +246,6 @@ module Aws::SSMQuickSetup
     #         account. The default value is "`false`".
     #
     #       ^
-    #
     #     * `EnableSnsNotifications`
     #
     #       * Description: (Optional) A boolean value that determines
@@ -271,7 +253,6 @@ module Aws::SSMQuickSetup
     #         created. The default value is "`true`".
     #
     #       ^
-    #
     #     * `EnableSsmOpsItems`
     #
     #       * Description: (Optional) A boolean value that determines
@@ -279,7 +260,6 @@ module Aws::SSMQuickSetup
     #         insight is created. The default value is "`true`".
     #
     #       ^
-    #
     #     * `EnableDriftRemediation`
     #
     #       * Description: (Optional) A boolean value that determines
@@ -287,7 +267,6 @@ module Aws::SSMQuickSetup
     #         value is "`false`".
     #
     #       ^
-    #
     #     * `RemediationSchedule`
     #
     #       * Description: (Optional) A rate expression that defines the
@@ -296,7 +275,6 @@ module Aws::SSMQuickSetup
     #         default value is "`none`".
     #
     #       ^
-    #
     #     * `TargetAccounts`
     #
     #       * Description: (Optional) The ID of the Amazon Web Services
@@ -306,7 +284,6 @@ module Aws::SSMQuickSetup
     #         `TargetAccounts` or `TargetOrganizationalUnits`.
     #
     #       ^
-    #
     #     * `TargetOrganizationalUnits`
     #
     #       * Description: (Optional) A comma separated list of
@@ -314,7 +291,6 @@ module Aws::SSMQuickSetup
     #         configuration to.
     #
     #       ^
-    #
     #     * `TargetRegions`
     #
     #       * Description: (Required) A comma separated list of Amazon Web
@@ -330,7 +306,6 @@ module Aws::SSMQuickSetup
     #         deployments.
     #
     #       ^
-    #
     #     * `RemediationSchedule`
     #
     #       * Description: (Optional) A rate expression that defines the
@@ -339,14 +314,12 @@ module Aws::SSMQuickSetup
     #         default value is "`none`".
     #
     #       ^
-    #
     #     * `CPackNames`
     #
     #       * Description: (Required) A comma separated list of Config
     #         conformance packs.
     #
     #       ^
-    #
     #     * `TargetAccounts`
     #
     #       * Description: (Optional) The ID of the Amazon Web Services
@@ -356,7 +329,6 @@ module Aws::SSMQuickSetup
     #         `TargetAccounts` or `TargetOrganizationalUnits`.
     #
     #       ^
-    #
     #     * `TargetOrganizationalUnits`
     #
     #       * Description: (Optional) The ID of the root of your
@@ -365,7 +337,6 @@ module Aws::SSMQuickSetup
     #         deployed to all the OUs in the Organization.
     #
     #       ^
-    #
     #     * `TargetRegions`
     #
     #       * Description: (Required) A comma separated list of Amazon Web
@@ -381,14 +352,12 @@ module Aws::SSMQuickSetup
     #         value is "`true`".
     #
     #       ^
-    #
     #     * `ResourceTypesToRecord`
     #
     #       * Description: (Optional) A comma separated list of resource
     #         types you want to record.
     #
     #       ^
-    #
     #     * `RecordGlobalResourceTypes`
     #
     #       * Description: (Optional) A boolean value that determines
@@ -396,14 +365,12 @@ module Aws::SSMQuickSetup
     #         configurations. The default value is "`false`".
     #
     #       ^
-    #
     #     * `GlobalResourceTypesRegion`
     #
     #       * Description: (Optional) Determines the Amazon Web Services
     #         Region where global resources are recorded.
     #
     #       ^
-    #
     #     * `UseCustomBucket`
     #
     #       * Description: (Optional) A boolean value that determines
@@ -411,7 +378,6 @@ module Aws::SSMQuickSetup
     #         default value is "`false`".
     #
     #       ^
-    #
     #     * `DeliveryBucketName`
     #
     #       * Description: (Optional) The name of the Amazon S3 bucket you
@@ -419,14 +385,12 @@ module Aws::SSMQuickSetup
     #         configuration history files to.
     #
     #       ^
-    #
     #     * `DeliveryBucketPrefix`
     #
     #       * Description: (Optional) The key prefix you want to use in the
     #         custom Amazon S3 bucket.
     #
     #       ^
-    #
     #     * `NotificationOptions`
     #
     #       * Description: (Optional) Determines the notification
@@ -435,7 +399,6 @@ module Aws::SSMQuickSetup
     #         default value is `NoStreaming`.
     #
     #       ^
-    #
     #     * `CustomDeliveryTopicAccountId`
     #
     #       * Description: (Optional) The ID of the Amazon Web Services
@@ -445,7 +408,6 @@ module Aws::SSMQuickSetup
     #         option.
     #
     #       ^
-    #
     #     * `CustomDeliveryTopicName`
     #
     #       * Description: (Optional) The name of the Amazon SNS topic you
@@ -454,7 +416,6 @@ module Aws::SSMQuickSetup
     #         option.
     #
     #       ^
-    #
     #     * `RemediationSchedule`
     #
     #       * Description: (Optional) A rate expression that defines the
@@ -463,7 +424,6 @@ module Aws::SSMQuickSetup
     #         default value is "`none`".
     #
     #       ^
-    #
     #     * `TargetAccounts`
     #
     #       * Description: (Optional) The ID of the Amazon Web Services
@@ -473,7 +433,6 @@ module Aws::SSMQuickSetup
     #         `TargetAccounts` or `TargetOrganizationalUnits`.
     #
     #       ^
-    #
     #     * `TargetOrganizationalUnits`
     #
     #       * Description: (Optional) The ID of the root of your
@@ -482,7 +441,6 @@ module Aws::SSMQuickSetup
     #         deployed to all the OUs in the Organization.
     #
     #       ^
-    #
     #     * `TargetRegions`
     #
     #       * Description: (Required) A comma separated list of Amazon Web
@@ -498,7 +456,6 @@ module Aws::SSMQuickSetup
     #         2 weeks. The default value is "`true`".
     #
     #       ^
-    #
     #     * `UpdateEc2LaunchAgent`
     #
     #       * Description: (Optional) A boolean value that determines
@@ -506,7 +463,6 @@ module Aws::SSMQuickSetup
     #         instances every month. The default value is "`false`".
     #
     #       ^
-    #
     #     * `CollectInventory`
     #
     #       * Description: (Optional) A boolean value that determines
@@ -514,7 +470,6 @@ module Aws::SSMQuickSetup
     #         instances every month. The default value is "`true`".
     #
     #       ^
-    #
     #     * `ScanInstances`
     #
     #       * Description: (Optional) A boolean value that determines
@@ -522,7 +477,6 @@ module Aws::SSMQuickSetup
     #         patches. The default value is "`true`".
     #
     #       ^
-    #
     #     * `InstallCloudWatchAgent`
     #
     #       * Description: (Optional) A boolean value that determines
@@ -530,7 +484,6 @@ module Aws::SSMQuickSetup
     #         instances. The default value is "`false`".
     #
     #       ^
-    #
     #     * `UpdateCloudWatchAgent`
     #
     #       * Description: (Optional) A boolean value that determines
@@ -538,7 +491,6 @@ module Aws::SSMQuickSetup
     #         instances every month. The default value is "`false`".
     #
     #       ^
-    #
     #     * `IsPolicyAttachAllowed`
     #
     #       * Description: (Optional) A boolean value that determines
@@ -547,7 +499,6 @@ module Aws::SSMQuickSetup
     #         value is "`false`".
     #
     #       ^
-    #
     #     * `TargetType`
     #
     #       * Description: (Optional) Determines how instances are targeted
@@ -557,7 +508,6 @@ module Aws::SSMQuickSetup
     #         target all instances in the account.
     #
     #       ^
-    #
     #     * `TargetInstances`
     #
     #       * Description: (Optional) A comma separated list of instance
@@ -565,7 +515,6 @@ module Aws::SSMQuickSetup
     #         specify `InstanceIds` for the `TargetType` parameter.
     #
     #       ^
-    #
     #     * `TargetTagKey`
     #
     #       * Description: (Optional) The tag key assigned to the instances
@@ -574,7 +523,6 @@ module Aws::SSMQuickSetup
     #         parameter.
     #
     #       ^
-    #
     #     * `TargetTagValue`
     #
     #       * Description: (Optional) The value of the tag key assigned to
@@ -583,7 +531,6 @@ module Aws::SSMQuickSetup
     #         parameter.
     #
     #       ^
-    #
     #     * `ResourceGroupName`
     #
     #       * Description: (Optional) The name of the resource group
@@ -592,7 +539,6 @@ module Aws::SSMQuickSetup
     #         `ResourceGroups` for the `TargetType` parameter.
     #
     #       ^
-    #
     #     * `TargetAccounts`
     #
     #       * Description: (Optional) The ID of the Amazon Web Services
@@ -602,7 +548,6 @@ module Aws::SSMQuickSetup
     #         `TargetAccounts` or `TargetOrganizationalUnits`.
     #
     #       ^
-    #
     #     * `TargetOrganizationalUnits`
     #
     #       * Description: (Optional) A comma separated list of
@@ -610,7 +555,6 @@ module Aws::SSMQuickSetup
     #         configuration to.
     #
     #       ^
-    #
     #     * `TargetRegions`
     #
     #       * Description: (Required) A comma separated list of Amazon Web
@@ -626,7 +570,6 @@ module Aws::SSMQuickSetup
     #         `AWSEFSTools`, `AWSCWAgent`, and `AWSEC2LaunchAgent`.
     #
     #       ^
-    #
     #     * `RemediationSchedule`
     #
     #       * Description: (Optional) A rate expression that defines the
@@ -635,7 +578,6 @@ module Aws::SSMQuickSetup
     #         default value is "`rate(30 days)`".
     #
     #       ^
-    #
     #     * `IsPolicyAttachAllowed`
     #
     #       * Description: (Optional) A boolean value that determines
@@ -644,7 +586,6 @@ module Aws::SSMQuickSetup
     #         value is "`false`".
     #
     #       ^
-    #
     #     * `TargetType`
     #
     #       * Description: (Optional) Determines how instances are targeted
@@ -654,7 +595,6 @@ module Aws::SSMQuickSetup
     #         target all instances in the account.
     #
     #       ^
-    #
     #     * `TargetInstances`
     #
     #       * Description: (Optional) A comma separated list of instance
@@ -662,7 +602,6 @@ module Aws::SSMQuickSetup
     #         specify `InstanceIds` for the `TargetType` parameter.
     #
     #       ^
-    #
     #     * `TargetTagKey`
     #
     #       * Description: (Required) The tag key assigned to the instances
@@ -671,7 +610,6 @@ module Aws::SSMQuickSetup
     #         parameter.
     #
     #       ^
-    #
     #     * `TargetTagValue`
     #
     #       * Description: (Required) The value of the tag key assigned to
@@ -680,7 +618,6 @@ module Aws::SSMQuickSetup
     #         parameter.
     #
     #       ^
-    #
     #     * `ResourceGroupName`
     #
     #       * Description: (Required) The name of the resource group
@@ -689,7 +626,6 @@ module Aws::SSMQuickSetup
     #         `ResourceGroups` for the `TargetType` parameter.
     #
     #       ^
-    #
     #     * `TargetAccounts`
     #
     #       * Description: (Optional) The ID of the Amazon Web Services
@@ -699,7 +635,6 @@ module Aws::SSMQuickSetup
     #         `TargetAccounts` or `TargetOrganizationalUnits`.
     #
     #       ^
-    #
     #     * `TargetOrganizationalUnits`
     #
     #       * Description: (Optional) A comma separated list of
@@ -707,7 +642,6 @@ module Aws::SSMQuickSetup
     #         configuration to.
     #
     #       ^
-    #
     #     * `TargetRegions`
     #
     #       * Description: (Required) A comma separated list of Amazon Web
@@ -723,7 +657,6 @@ module Aws::SSMQuickSetup
     #         tag.
     #
     #       ^
-    #
     #     * `SelectedPatchBaselines`
     #
     #       * Description: (Required) An array of JSON objects containing
@@ -731,7 +664,6 @@ module Aws::SSMQuickSetup
     #         patch policy.
     #
     #       ^
-    #
     #     * `PatchBaselineUseDefault`
     #
     #       * Description: (Optional) A boolean value that determines
@@ -739,7 +671,6 @@ module Aws::SSMQuickSetup
     #         Services provided.
     #
     #       ^
-    #
     #     * `ConfigurationOptionsPatchOperation`
     #
     #       * Description: (Optional) Determines whether target instances
@@ -748,21 +679,18 @@ module Aws::SSMQuickSetup
     #         default value for the parameter is `Scan`.
     #
     #       ^
-    #
     #     * `ConfigurationOptionsScanValue`
     #
     #       * Description: (Optional) A cron expression that is used as the
     #         schedule for when instances scan for available patches.
     #
     #       ^
-    #
     #     * `ConfigurationOptionsInstallValue`
     #
     #       * Description: (Optional) A cron expression that is used as the
     #         schedule for when instances install available patches.
     #
     #       ^
-    #
     #     * `ConfigurationOptionsScanNextInterval`
     #
     #       * Description: (Optional) A boolean value that determines
@@ -770,7 +698,6 @@ module Aws::SSMQuickSetup
     #         next cron interval. The default value is "`false`".
     #
     #       ^
-    #
     #     * `ConfigurationOptionsInstallNextInterval`
     #
     #       * Description: (Optional) A boolean value that determines
@@ -778,7 +705,6 @@ module Aws::SSMQuickSetup
     #         next cron interval. The default value is "`false`".
     #
     #       ^
-    #
     #     * `RebootOption`
     #
     #       * Description: (Optional) A boolean value that determines
@@ -786,7 +712,6 @@ module Aws::SSMQuickSetup
     #         The default value is "`false`".
     #
     #       ^
-    #
     #     * `IsPolicyAttachAllowed`
     #
     #       * Description: (Optional) A boolean value that determines
@@ -795,14 +720,12 @@ module Aws::SSMQuickSetup
     #         value is "`false`".
     #
     #       ^
-    #
     #     * `OutputLogEnableS3`
     #
     #       * Description: (Optional) A boolean value that determines
     #         whether command output logs are sent to Amazon S3.
     #
     #       ^
-    #
     #     * `OutputS3Location`
     #
     #       * Description: (Optional) A JSON string containing information
@@ -816,21 +739,18 @@ module Aws::SSMQuickSetup
     #             command output to is located.
     #
     #           ^
-    #
     #         * `OutputS3BucketName`
     #
     #           * Description: (Optional) The name of the Amazon S3 bucket
     #             you want Config to deliver command output to.
     #
     #           ^
-    #
     #         * `OutputS3KeyPrefix`
     #
     #           * Description: (Optional) The key prefix you want to use in
     #             the custom Amazon S3 bucket.
     #
     #           ^
-    #
     #     * `TargetType`
     #
     #       * Description: (Optional) Determines how instances are targeted
@@ -840,7 +760,6 @@ module Aws::SSMQuickSetup
     #         target all instances in the account.
     #
     #       ^
-    #
     #     * `TargetInstances`
     #
     #       * Description: (Optional) A comma separated list of instance
@@ -848,7 +767,6 @@ module Aws::SSMQuickSetup
     #         specify `InstanceIds` for the `TargetType` parameter.
     #
     #       ^
-    #
     #     * `TargetTagKey`
     #
     #       * Description: (Required) The tag key assigned to the instances
@@ -857,7 +775,6 @@ module Aws::SSMQuickSetup
     #         parameter.
     #
     #       ^
-    #
     #     * `TargetTagValue`
     #
     #       * Description: (Required) The value of the tag key assigned to
@@ -866,7 +783,6 @@ module Aws::SSMQuickSetup
     #         parameter.
     #
     #       ^
-    #
     #     * `ResourceGroupName`
     #
     #       * Description: (Required) The name of the resource group
@@ -875,7 +791,6 @@ module Aws::SSMQuickSetup
     #         `ResourceGroups` for the `TargetType` parameter.
     #
     #       ^
-    #
     #     * `TargetAccounts`
     #
     #       * Description: (Optional) The ID of the Amazon Web Services
@@ -885,7 +800,6 @@ module Aws::SSMQuickSetup
     #         `TargetAccounts` or `TargetOrganizationalUnits`.
     #
     #       ^
-    #
     #     * `TargetOrganizationalUnits`
     #
     #       * Description: (Optional) A comma separated list of
@@ -893,7 +807,6 @@ module Aws::SSMQuickSetup
     #         configuration to.
     #
     #       ^
-    #
     #     * `TargetRegions`
     #
     #       * Description: (Required) A comma separated list of Amazon Web

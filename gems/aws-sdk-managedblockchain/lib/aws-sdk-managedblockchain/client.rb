@@ -500,7 +500,6 @@ module Aws::ManagedBlockchain
     #     * `ETHEREUM_GOERLI`
     #
     #     * `POLYGON_MUMBAI`
-    #
     #     However, your existing `Accessor` tokens with these `networkType`
     #     values will remain unchanged.
     #
@@ -1986,7 +1985,7 @@ module Aws::ManagedBlockchain
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-managedblockchain'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

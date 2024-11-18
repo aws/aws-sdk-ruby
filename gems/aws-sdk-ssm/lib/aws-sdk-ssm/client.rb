@@ -5104,7 +5104,7 @@ module Aws::SSM
     #
     #   **If you filter the response by using the OperationalData operator,
     #   specify a key-value pair by using the following JSON format:
-    #   \\\{"key":"key\_name","value":"a\_value"\\}
+    #   \{"key":"key\_name","value":"a\_value"}
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this call. The call also
@@ -9056,8 +9056,8 @@ module Aws::SSM
     #   value limit of 8 KB.
     #
     #   <note markdown="1"> Parameters can't be referenced or nested in the values of other
-    #   parameters. You can't include `\{\{\}\}` or
-    #   `\{\{ssm:parameter-name\}\}` in a parameter value.
+    #   parameters. You can't include `{{}}` or `{{ssm:parameter-name}}` in a
+    #   parameter value.
     #
     #    </note>
     #
@@ -9729,7 +9729,6 @@ module Aws::SSM
     #       command associated with the task. However, there is no guarantee
     #       that the command will be terminated and the underlying process
     #       stopped.
-    #
     #     The status for tasks that are not completed is `TIMED_OUT`.
     #
     # @option params [Types::AlarmConfiguration] :alarm_configuration
@@ -10912,7 +10911,7 @@ module Aws::SSM
     #   The parameters you want to update for the association. If you create a
     #   parameter using Parameter Store, a capability of Amazon Web Services
     #   Systems Manager, you can reference the parameter using
-    #   `\{\{ssm:parameter-name\}\}`.
+    #   `{{ssm:parameter-name}}`.
     #
     # @option params [String] :document_version
     #   The document version you want update for the association.
@@ -12033,7 +12032,6 @@ module Aws::SSM
     #       command associated with the task. However, there is no guarantee
     #       that the command will be terminated and the underlying process
     #       stopped.
-    #
     #     The status for tasks that are not completed is `TIMED_OUT`.
     #
     # @option params [Types::AlarmConfiguration] :alarm_configuration
@@ -12805,7 +12803,7 @@ module Aws::SSM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.183.0'
+      context[:gem_version] = '1.185.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

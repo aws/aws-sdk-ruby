@@ -595,6 +595,14 @@ module Aws::OpenSearchService
     # @option params [required, String] :domain_name
     #   Name of the domain to associate the package with.
     #
+    # @option params [Array<String>] :prerequisite_package_id_list
+    #   A list of package IDs that must be associated with the domain before
+    #   the package specified in the request can be associated.
+    #
+    # @option params [Types::PackageAssociationConfiguration] :association_configuration
+    #   The configuration for associating a package with an Amazon OpenSearch
+    #   Service domain.
+    #
     # @return [Types::AssociatePackageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AssociatePackageResponse#domain_package_details #domain_package_details} => Types::DomainPackageDetails
@@ -604,20 +612,31 @@ module Aws::OpenSearchService
     #   resp = client.associate_package({
     #     package_id: "PackageID", # required
     #     domain_name: "DomainName", # required
+    #     prerequisite_package_id_list: ["PackageID"],
+    #     association_configuration: {
+    #       key_store_access_option: {
+    #         key_access_role_arn: "RoleArn",
+    #         key_store_access_enabled: false, # required
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.domain_package_details.package_id #=> String
     #   resp.domain_package_details.package_name #=> String
-    #   resp.domain_package_details.package_type #=> String, one of "TXT-DICTIONARY", "ZIP-PLUGIN"
+    #   resp.domain_package_details.package_type #=> String, one of "TXT-DICTIONARY", "ZIP-PLUGIN", "PACKAGE-LICENSE", "PACKAGE-CONFIG"
     #   resp.domain_package_details.last_updated #=> Time
     #   resp.domain_package_details.domain_name #=> String
     #   resp.domain_package_details.domain_package_status #=> String, one of "ASSOCIATING", "ASSOCIATION_FAILED", "ACTIVE", "DISSOCIATING", "DISSOCIATION_FAILED"
     #   resp.domain_package_details.package_version #=> String
+    #   resp.domain_package_details.prerequisite_package_id_list #=> Array
+    #   resp.domain_package_details.prerequisite_package_id_list[0] #=> String
     #   resp.domain_package_details.reference_path #=> String
     #   resp.domain_package_details.error_details.error_type #=> String
     #   resp.domain_package_details.error_details.error_message #=> String
+    #   resp.domain_package_details.association_configuration.key_store_access_option.key_access_role_arn #=> String
+    #   resp.domain_package_details.association_configuration.key_store_access_option.key_store_access_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AssociatePackage AWS API Documentation
     #
@@ -625,6 +644,67 @@ module Aws::OpenSearchService
     # @param [Hash] params ({})
     def associate_package(params = {}, options = {})
       req = build_request(:associate_package, params)
+      req.send_request(options)
+    end
+
+    # Operation in the Amazon OpenSearch Service API for associating
+    # multiple packages with a domain simultaneously.
+    #
+    # @option params [required, Array<Types::PackageDetailsForAssociation>] :package_list
+    #   A list of packages and their prerequisites to be associated with a
+    #   domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of an OpenSearch Service domain. Domain names are unique
+    #   across the domains owned by an account within an Amazon Web Services
+    #   Region.
+    #
+    # @return [Types::AssociatePackagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociatePackagesResponse#domain_package_details_list #domain_package_details_list} => Array&lt;Types::DomainPackageDetails&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_packages({
+    #     package_list: [ # required
+    #       {
+    #         package_id: "PackageID", # required
+    #         prerequisite_package_id_list: ["PackageID"],
+    #         association_configuration: {
+    #           key_store_access_option: {
+    #             key_access_role_arn: "RoleArn",
+    #             key_store_access_enabled: false, # required
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     domain_name: "DomainName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_package_details_list #=> Array
+    #   resp.domain_package_details_list[0].package_id #=> String
+    #   resp.domain_package_details_list[0].package_name #=> String
+    #   resp.domain_package_details_list[0].package_type #=> String, one of "TXT-DICTIONARY", "ZIP-PLUGIN", "PACKAGE-LICENSE", "PACKAGE-CONFIG"
+    #   resp.domain_package_details_list[0].last_updated #=> Time
+    #   resp.domain_package_details_list[0].domain_name #=> String
+    #   resp.domain_package_details_list[0].domain_package_status #=> String, one of "ASSOCIATING", "ASSOCIATION_FAILED", "ACTIVE", "DISSOCIATING", "DISSOCIATION_FAILED"
+    #   resp.domain_package_details_list[0].package_version #=> String
+    #   resp.domain_package_details_list[0].prerequisite_package_id_list #=> Array
+    #   resp.domain_package_details_list[0].prerequisite_package_id_list[0] #=> String
+    #   resp.domain_package_details_list[0].reference_path #=> String
+    #   resp.domain_package_details_list[0].error_details.error_type #=> String
+    #   resp.domain_package_details_list[0].error_details.error_message #=> String
+    #   resp.domain_package_details_list[0].association_configuration.key_store_access_option.key_access_role_arn #=> String
+    #   resp.domain_package_details_list[0].association_configuration.key_store_access_option.key_store_access_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AssociatePackages AWS API Documentation
+    #
+    # @overload associate_packages(params = {})
+    # @param [Hash] params ({})
+    def associate_packages(params = {}, options = {})
+      req = build_request(:associate_packages, params)
       req.send_request(options)
     end
 
@@ -1369,6 +1449,21 @@ module Aws::OpenSearchService
     # @option params [required, Types::PackageSource] :package_source
     #   The Amazon S3 location from which to import the package.
     #
+    # @option params [Types::PackageConfiguration] :package_configuration
+    #   The configuration parameters for the package being created.
+    #
+    # @option params [String] :engine_version
+    #   The version of the Amazon OpenSearch Service engine for which is
+    #   compatible with the package. This can only be specified for package
+    #   type `ZIP-PLUGIN`
+    #
+    # @option params [Types::PackageVendingOptions] :package_vending_options
+    #   The vending options for the package being created. They determine if
+    #   the package can be vended to other users.
+    #
+    # @option params [Types::PackageEncryptionOptions] :package_encryption_options
+    #   The encryption parameters for the package being created.
+    #
     # @return [Types::CreatePackageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePackageResponse#package_details #package_details} => Types::PackageDetails
@@ -1377,11 +1472,25 @@ module Aws::OpenSearchService
     #
     #   resp = client.create_package({
     #     package_name: "PackageName", # required
-    #     package_type: "TXT-DICTIONARY", # required, accepts TXT-DICTIONARY, ZIP-PLUGIN
+    #     package_type: "TXT-DICTIONARY", # required, accepts TXT-DICTIONARY, ZIP-PLUGIN, PACKAGE-LICENSE, PACKAGE-CONFIG
     #     package_description: "PackageDescription",
     #     package_source: { # required
     #       s3_bucket_name: "S3BucketName",
     #       s3_key: "S3Key",
+    #     },
+    #     package_configuration: {
+    #       license_requirement: "REQUIRED", # required, accepts REQUIRED, OPTIONAL, NONE
+    #       license_filepath: "LicenseFilepath",
+    #       configuration_requirement: "REQUIRED", # required, accepts REQUIRED, OPTIONAL, NONE
+    #       requires_restart_for_configuration_update: false,
+    #     },
+    #     engine_version: "EngineVersion",
+    #     package_vending_options: {
+    #       vending_enabled: false, # required
+    #     },
+    #     package_encryption_options: {
+    #       kms_key_identifier: "KmsKeyId",
+    #       encryption_enabled: false, # required
     #     },
     #   })
     #
@@ -1389,7 +1498,7 @@ module Aws::OpenSearchService
     #
     #   resp.package_details.package_id #=> String
     #   resp.package_details.package_name #=> String
-    #   resp.package_details.package_type #=> String, one of "TXT-DICTIONARY", "ZIP-PLUGIN"
+    #   resp.package_details.package_type #=> String, one of "TXT-DICTIONARY", "ZIP-PLUGIN", "PACKAGE-LICENSE", "PACKAGE-CONFIG"
     #   resp.package_details.package_description #=> String
     #   resp.package_details.package_status #=> String, one of "COPYING", "COPY_FAILED", "VALIDATING", "VALIDATION_FAILED", "AVAILABLE", "DELETING", "DELETED", "DELETE_FAILED"
     #   resp.package_details.created_at #=> Time
@@ -1403,6 +1512,16 @@ module Aws::OpenSearchService
     #   resp.package_details.available_plugin_properties.version #=> String
     #   resp.package_details.available_plugin_properties.class_name #=> String
     #   resp.package_details.available_plugin_properties.uncompressed_size_in_bytes #=> Integer
+    #   resp.package_details.available_package_configuration.license_requirement #=> String, one of "REQUIRED", "OPTIONAL", "NONE"
+    #   resp.package_details.available_package_configuration.license_filepath #=> String
+    #   resp.package_details.available_package_configuration.configuration_requirement #=> String, one of "REQUIRED", "OPTIONAL", "NONE"
+    #   resp.package_details.available_package_configuration.requires_restart_for_configuration_update #=> Boolean
+    #   resp.package_details.allow_listed_user_list #=> Array
+    #   resp.package_details.allow_listed_user_list[0] #=> String
+    #   resp.package_details.package_owner #=> String
+    #   resp.package_details.package_vending_options.vending_enabled #=> Boolean
+    #   resp.package_details.package_encryption_options.kms_key_identifier #=> String
+    #   resp.package_details.package_encryption_options.encryption_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreatePackage AWS API Documentation
     #
@@ -1780,7 +1899,7 @@ module Aws::OpenSearchService
     #
     #   resp.package_details.package_id #=> String
     #   resp.package_details.package_name #=> String
-    #   resp.package_details.package_type #=> String, one of "TXT-DICTIONARY", "ZIP-PLUGIN"
+    #   resp.package_details.package_type #=> String, one of "TXT-DICTIONARY", "ZIP-PLUGIN", "PACKAGE-LICENSE", "PACKAGE-CONFIG"
     #   resp.package_details.package_description #=> String
     #   resp.package_details.package_status #=> String, one of "COPYING", "COPY_FAILED", "VALIDATING", "VALIDATION_FAILED", "AVAILABLE", "DELETING", "DELETED", "DELETE_FAILED"
     #   resp.package_details.created_at #=> Time
@@ -1794,6 +1913,16 @@ module Aws::OpenSearchService
     #   resp.package_details.available_plugin_properties.version #=> String
     #   resp.package_details.available_plugin_properties.class_name #=> String
     #   resp.package_details.available_plugin_properties.uncompressed_size_in_bytes #=> Integer
+    #   resp.package_details.available_package_configuration.license_requirement #=> String, one of "REQUIRED", "OPTIONAL", "NONE"
+    #   resp.package_details.available_package_configuration.license_filepath #=> String
+    #   resp.package_details.available_package_configuration.configuration_requirement #=> String, one of "REQUIRED", "OPTIONAL", "NONE"
+    #   resp.package_details.available_package_configuration.requires_restart_for_configuration_update #=> Boolean
+    #   resp.package_details.allow_listed_user_list #=> Array
+    #   resp.package_details.allow_listed_user_list[0] #=> String
+    #   resp.package_details.package_owner #=> String
+    #   resp.package_details.package_vending_options.vending_enabled #=> Boolean
+    #   resp.package_details.package_encryption_options.kms_key_identifier #=> String
+    #   resp.package_details.package_encryption_options.encryption_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeletePackage AWS API Documentation
     #
@@ -2931,7 +3060,7 @@ module Aws::OpenSearchService
     #   resp = client.describe_packages({
     #     filters: [
     #       {
-    #         name: "PackageID", # accepts PackageID, PackageName, PackageStatus, PackageType, EngineVersion
+    #         name: "PackageID", # accepts PackageID, PackageName, PackageStatus, PackageType, EngineVersion, PackageOwner
     #         value: ["DescribePackagesFilterValue"],
     #       },
     #     ],
@@ -2944,7 +3073,7 @@ module Aws::OpenSearchService
     #   resp.package_details_list #=> Array
     #   resp.package_details_list[0].package_id #=> String
     #   resp.package_details_list[0].package_name #=> String
-    #   resp.package_details_list[0].package_type #=> String, one of "TXT-DICTIONARY", "ZIP-PLUGIN"
+    #   resp.package_details_list[0].package_type #=> String, one of "TXT-DICTIONARY", "ZIP-PLUGIN", "PACKAGE-LICENSE", "PACKAGE-CONFIG"
     #   resp.package_details_list[0].package_description #=> String
     #   resp.package_details_list[0].package_status #=> String, one of "COPYING", "COPY_FAILED", "VALIDATING", "VALIDATION_FAILED", "AVAILABLE", "DELETING", "DELETED", "DELETE_FAILED"
     #   resp.package_details_list[0].created_at #=> Time
@@ -2958,6 +3087,16 @@ module Aws::OpenSearchService
     #   resp.package_details_list[0].available_plugin_properties.version #=> String
     #   resp.package_details_list[0].available_plugin_properties.class_name #=> String
     #   resp.package_details_list[0].available_plugin_properties.uncompressed_size_in_bytes #=> Integer
+    #   resp.package_details_list[0].available_package_configuration.license_requirement #=> String, one of "REQUIRED", "OPTIONAL", "NONE"
+    #   resp.package_details_list[0].available_package_configuration.license_filepath #=> String
+    #   resp.package_details_list[0].available_package_configuration.configuration_requirement #=> String, one of "REQUIRED", "OPTIONAL", "NONE"
+    #   resp.package_details_list[0].available_package_configuration.requires_restart_for_configuration_update #=> Boolean
+    #   resp.package_details_list[0].allow_listed_user_list #=> Array
+    #   resp.package_details_list[0].allow_listed_user_list[0] #=> String
+    #   resp.package_details_list[0].package_owner #=> String
+    #   resp.package_details_list[0].package_vending_options.vending_enabled #=> Boolean
+    #   resp.package_details_list[0].package_encryption_options.kms_key_identifier #=> String
+    #   resp.package_details_list[0].package_encryption_options.encryption_enabled #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribePackages AWS API Documentation
@@ -3176,14 +3315,18 @@ module Aws::OpenSearchService
     #
     #   resp.domain_package_details.package_id #=> String
     #   resp.domain_package_details.package_name #=> String
-    #   resp.domain_package_details.package_type #=> String, one of "TXT-DICTIONARY", "ZIP-PLUGIN"
+    #   resp.domain_package_details.package_type #=> String, one of "TXT-DICTIONARY", "ZIP-PLUGIN", "PACKAGE-LICENSE", "PACKAGE-CONFIG"
     #   resp.domain_package_details.last_updated #=> Time
     #   resp.domain_package_details.domain_name #=> String
     #   resp.domain_package_details.domain_package_status #=> String, one of "ASSOCIATING", "ASSOCIATION_FAILED", "ACTIVE", "DISSOCIATING", "DISSOCIATION_FAILED"
     #   resp.domain_package_details.package_version #=> String
+    #   resp.domain_package_details.prerequisite_package_id_list #=> Array
+    #   resp.domain_package_details.prerequisite_package_id_list[0] #=> String
     #   resp.domain_package_details.reference_path #=> String
     #   resp.domain_package_details.error_details.error_type #=> String
     #   resp.domain_package_details.error_details.error_message #=> String
+    #   resp.domain_package_details.association_configuration.key_store_access_option.key_access_role_arn #=> String
+    #   resp.domain_package_details.association_configuration.key_store_access_option.key_store_access_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DissociatePackage AWS API Documentation
     #
@@ -3191,6 +3334,54 @@ module Aws::OpenSearchService
     # @param [Hash] params ({})
     def dissociate_package(params = {}, options = {})
       req = build_request(:dissociate_package, params)
+      req.send_request(options)
+    end
+
+    # Dissociates multiple packages from a domain simulatneously.
+    #
+    # @option params [required, Array<String>] :package_list
+    #   A list of package IDs to be dissociated from a domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of an OpenSearch Service domain. Domain names are unique
+    #   across the domains owned by an account within an Amazon Web Services
+    #   Region.
+    #
+    # @return [Types::DissociatePackagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DissociatePackagesResponse#domain_package_details_list #domain_package_details_list} => Array&lt;Types::DomainPackageDetails&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.dissociate_packages({
+    #     package_list: ["PackageID"], # required
+    #     domain_name: "DomainName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_package_details_list #=> Array
+    #   resp.domain_package_details_list[0].package_id #=> String
+    #   resp.domain_package_details_list[0].package_name #=> String
+    #   resp.domain_package_details_list[0].package_type #=> String, one of "TXT-DICTIONARY", "ZIP-PLUGIN", "PACKAGE-LICENSE", "PACKAGE-CONFIG"
+    #   resp.domain_package_details_list[0].last_updated #=> Time
+    #   resp.domain_package_details_list[0].domain_name #=> String
+    #   resp.domain_package_details_list[0].domain_package_status #=> String, one of "ASSOCIATING", "ASSOCIATION_FAILED", "ACTIVE", "DISSOCIATING", "DISSOCIATION_FAILED"
+    #   resp.domain_package_details_list[0].package_version #=> String
+    #   resp.domain_package_details_list[0].prerequisite_package_id_list #=> Array
+    #   resp.domain_package_details_list[0].prerequisite_package_id_list[0] #=> String
+    #   resp.domain_package_details_list[0].reference_path #=> String
+    #   resp.domain_package_details_list[0].error_details.error_type #=> String
+    #   resp.domain_package_details_list[0].error_details.error_message #=> String
+    #   resp.domain_package_details_list[0].association_configuration.key_store_access_option.key_access_role_arn #=> String
+    #   resp.domain_package_details_list[0].association_configuration.key_store_access_option.key_store_access_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DissociatePackages AWS API Documentation
+    #
+    # @overload dissociate_packages(params = {})
+    # @param [Hash] params ({})
+    def dissociate_packages(params = {}, options = {})
+      req = build_request(:dissociate_packages, params)
       req.send_request(options)
     end
 
@@ -3411,6 +3602,10 @@ module Aws::OpenSearchService
     #   resp.package_version_history_list[0].plugin_properties.version #=> String
     #   resp.package_version_history_list[0].plugin_properties.class_name #=> String
     #   resp.package_version_history_list[0].plugin_properties.uncompressed_size_in_bytes #=> Integer
+    #   resp.package_version_history_list[0].package_configuration.license_requirement #=> String, one of "REQUIRED", "OPTIONAL", "NONE"
+    #   resp.package_version_history_list[0].package_configuration.license_filepath #=> String
+    #   resp.package_version_history_list[0].package_configuration.configuration_requirement #=> String, one of "REQUIRED", "OPTIONAL", "NONE"
+    #   resp.package_version_history_list[0].package_configuration.requires_restart_for_configuration_update #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetPackageVersionHistory AWS API Documentation
@@ -3732,14 +3927,18 @@ module Aws::OpenSearchService
     #   resp.domain_package_details_list #=> Array
     #   resp.domain_package_details_list[0].package_id #=> String
     #   resp.domain_package_details_list[0].package_name #=> String
-    #   resp.domain_package_details_list[0].package_type #=> String, one of "TXT-DICTIONARY", "ZIP-PLUGIN"
+    #   resp.domain_package_details_list[0].package_type #=> String, one of "TXT-DICTIONARY", "ZIP-PLUGIN", "PACKAGE-LICENSE", "PACKAGE-CONFIG"
     #   resp.domain_package_details_list[0].last_updated #=> Time
     #   resp.domain_package_details_list[0].domain_name #=> String
     #   resp.domain_package_details_list[0].domain_package_status #=> String, one of "ASSOCIATING", "ASSOCIATION_FAILED", "ACTIVE", "DISSOCIATING", "DISSOCIATION_FAILED"
     #   resp.domain_package_details_list[0].package_version #=> String
+    #   resp.domain_package_details_list[0].prerequisite_package_id_list #=> Array
+    #   resp.domain_package_details_list[0].prerequisite_package_id_list[0] #=> String
     #   resp.domain_package_details_list[0].reference_path #=> String
     #   resp.domain_package_details_list[0].error_details.error_type #=> String
     #   resp.domain_package_details_list[0].error_details.error_message #=> String
+    #   resp.domain_package_details_list[0].association_configuration.key_store_access_option.key_access_role_arn #=> String
+    #   resp.domain_package_details_list[0].association_configuration.key_store_access_option.key_store_access_enabled #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListDomainsForPackage AWS API Documentation
@@ -3863,14 +4062,18 @@ module Aws::OpenSearchService
     #   resp.domain_package_details_list #=> Array
     #   resp.domain_package_details_list[0].package_id #=> String
     #   resp.domain_package_details_list[0].package_name #=> String
-    #   resp.domain_package_details_list[0].package_type #=> String, one of "TXT-DICTIONARY", "ZIP-PLUGIN"
+    #   resp.domain_package_details_list[0].package_type #=> String, one of "TXT-DICTIONARY", "ZIP-PLUGIN", "PACKAGE-LICENSE", "PACKAGE-CONFIG"
     #   resp.domain_package_details_list[0].last_updated #=> Time
     #   resp.domain_package_details_list[0].domain_name #=> String
     #   resp.domain_package_details_list[0].domain_package_status #=> String, one of "ASSOCIATING", "ASSOCIATION_FAILED", "ACTIVE", "DISSOCIATING", "DISSOCIATION_FAILED"
     #   resp.domain_package_details_list[0].package_version #=> String
+    #   resp.domain_package_details_list[0].prerequisite_package_id_list #=> Array
+    #   resp.domain_package_details_list[0].prerequisite_package_id_list[0] #=> String
     #   resp.domain_package_details_list[0].reference_path #=> String
     #   resp.domain_package_details_list[0].error_details.error_type #=> String
     #   resp.domain_package_details_list[0].error_details.error_message #=> String
+    #   resp.domain_package_details_list[0].association_configuration.key_store_access_option.key_access_role_arn #=> String
+    #   resp.domain_package_details_list[0].association_configuration.key_store_access_option.key_store_access_enabled #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListPackagesForDomain AWS API Documentation
@@ -5009,6 +5212,12 @@ module Aws::OpenSearchService
     #   Commit message for the updated file, which is shown as part of
     #   `GetPackageVersionHistoryResponse`.
     #
+    # @option params [Types::PackageConfiguration] :package_configuration
+    #   The updated configuration details for a package.
+    #
+    # @option params [Types::PackageEncryptionOptions] :package_encryption_options
+    #   Encryption options for a package.
+    #
     # @return [Types::UpdatePackageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdatePackageResponse#package_details #package_details} => Types::PackageDetails
@@ -5023,13 +5232,23 @@ module Aws::OpenSearchService
     #     },
     #     package_description: "PackageDescription",
     #     commit_message: "CommitMessage",
+    #     package_configuration: {
+    #       license_requirement: "REQUIRED", # required, accepts REQUIRED, OPTIONAL, NONE
+    #       license_filepath: "LicenseFilepath",
+    #       configuration_requirement: "REQUIRED", # required, accepts REQUIRED, OPTIONAL, NONE
+    #       requires_restart_for_configuration_update: false,
+    #     },
+    #     package_encryption_options: {
+    #       kms_key_identifier: "KmsKeyId",
+    #       encryption_enabled: false, # required
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.package_details.package_id #=> String
     #   resp.package_details.package_name #=> String
-    #   resp.package_details.package_type #=> String, one of "TXT-DICTIONARY", "ZIP-PLUGIN"
+    #   resp.package_details.package_type #=> String, one of "TXT-DICTIONARY", "ZIP-PLUGIN", "PACKAGE-LICENSE", "PACKAGE-CONFIG"
     #   resp.package_details.package_description #=> String
     #   resp.package_details.package_status #=> String, one of "COPYING", "COPY_FAILED", "VALIDATING", "VALIDATION_FAILED", "AVAILABLE", "DELETING", "DELETED", "DELETE_FAILED"
     #   resp.package_details.created_at #=> Time
@@ -5043,6 +5262,16 @@ module Aws::OpenSearchService
     #   resp.package_details.available_plugin_properties.version #=> String
     #   resp.package_details.available_plugin_properties.class_name #=> String
     #   resp.package_details.available_plugin_properties.uncompressed_size_in_bytes #=> Integer
+    #   resp.package_details.available_package_configuration.license_requirement #=> String, one of "REQUIRED", "OPTIONAL", "NONE"
+    #   resp.package_details.available_package_configuration.license_filepath #=> String
+    #   resp.package_details.available_package_configuration.configuration_requirement #=> String, one of "REQUIRED", "OPTIONAL", "NONE"
+    #   resp.package_details.available_package_configuration.requires_restart_for_configuration_update #=> Boolean
+    #   resp.package_details.allow_listed_user_list #=> Array
+    #   resp.package_details.allow_listed_user_list[0] #=> String
+    #   resp.package_details.package_owner #=> String
+    #   resp.package_details.package_vending_options.vending_enabled #=> Boolean
+    #   resp.package_details.package_encryption_options.kms_key_identifier #=> String
+    #   resp.package_details.package_encryption_options.encryption_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdatePackage AWS API Documentation
     #
@@ -5050,6 +5279,49 @@ module Aws::OpenSearchService
     # @param [Hash] params ({})
     def update_package(params = {}, options = {})
       req = build_request(:update_package, params)
+      req.send_request(options)
+    end
+
+    # Updates the scope of a package. Scope of the package defines users who
+    # can view and associate a package.
+    #
+    # @option params [required, String] :package_id
+    #   ID of the package whose scope is being updated.
+    #
+    # @option params [required, String] :operation
+    #   The operation to perform on the package scope (e.g.,
+    #   add/remove/override users).
+    #
+    # @option params [required, Array<String>] :package_user_list
+    #   List of users to be added or removed from the package scope.
+    #
+    # @return [Types::UpdatePackageScopeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdatePackageScopeResponse#package_id #package_id} => String
+    #   * {Types::UpdatePackageScopeResponse#operation #operation} => String
+    #   * {Types::UpdatePackageScopeResponse#package_user_list #package_user_list} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_package_scope({
+    #     package_id: "PackageID", # required
+    #     operation: "ADD", # required, accepts ADD, OVERRIDE, REMOVE
+    #     package_user_list: ["PackageUser"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.package_id #=> String
+    #   resp.operation #=> String, one of "ADD", "OVERRIDE", "REMOVE"
+    #   resp.package_user_list #=> Array
+    #   resp.package_user_list[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdatePackageScope AWS API Documentation
+    #
+    # @overload update_package_scope(params = {})
+    # @param [Hash] params ({})
+    def update_package_scope(params = {}, options = {})
+      req = build_request(:update_package_scope, params)
       req.send_request(options)
     end
 
@@ -5267,7 +5539,7 @@ module Aws::OpenSearchService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-opensearchservice'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

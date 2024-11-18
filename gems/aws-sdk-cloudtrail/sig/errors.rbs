@@ -61,6 +61,8 @@ module Aws
       end
       class EventDataStoreTerminationProtectedException < ::Aws::Errors::ServiceError
       end
+      class GenerateResponseException < ::Aws::Errors::ServiceError
+      end
       class ImportNotFoundException < ::Aws::Errors::ServiceError
       end
       class InactiveEventDataStoreException < ::Aws::Errors::ServiceError

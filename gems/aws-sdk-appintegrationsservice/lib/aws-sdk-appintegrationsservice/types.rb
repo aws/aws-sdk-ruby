@@ -141,8 +141,8 @@ module Aws::AppIntegrationsService
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] permissions
@@ -277,8 +277,8 @@ module Aws::AppIntegrationsService
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] client_token
@@ -350,8 +350,8 @@ module Aws::AppIntegrationsService
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] client_token
@@ -423,8 +423,8 @@ module Aws::AppIntegrationsService
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/CreateEventIntegrationRequest AWS API Documentation
@@ -616,8 +616,8 @@ module Aws::AppIntegrationsService
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/EventIntegration AWS API Documentation
@@ -792,8 +792,8 @@ module Aws::AppIntegrationsService
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] permissions
@@ -863,8 +863,8 @@ module Aws::AppIntegrationsService
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] file_configuration
@@ -926,8 +926,8 @@ module Aws::AppIntegrationsService
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/GetEventIntegrationResponse AWS API Documentation
@@ -1372,8 +1372,8 @@ module Aws::AppIntegrationsService
     #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
-    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
-    #   "key2":"value2"\\} \\}.
+    #   resource. For example, \{ "tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/TagResourceRequest AWS API Documentation

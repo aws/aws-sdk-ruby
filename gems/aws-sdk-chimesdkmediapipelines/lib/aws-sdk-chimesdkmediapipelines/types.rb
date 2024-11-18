@@ -391,6 +391,12 @@ module Aws::ChimeSDKMediaPipelines
     #
     # @!attribute [rw] identify_multiple_languages
     #   Turns language identification on or off for multiple languages.
+    #
+    #   <note markdown="1"> Calls to this API must include a `LanguageCode`, `IdentifyLanguage`,
+    #   or `IdentifyMultipleLanguages` parameter. If you include more than
+    #   one of those parameters, your transcription job fails.
+    #
+    #    </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] language_options
@@ -818,6 +824,28 @@ module Aws::ChimeSDKMediaPipelines
     #   be `ChimeSdkMeeting`.
     #   @return [Types::ChimeSdkMeetingConfiguration]
     #
+    # @!attribute [rw] sse_aws_key_management_params
+    #   An object that contains server side encryption parameters to be used
+    #   by media capture pipeline. The parameters can also be used by media
+    #   concatenation pipeline taking media capture pipeline as a media
+    #   source.
+    #   @return [Types::SseAwsKeyManagementParams]
+    #
+    # @!attribute [rw] sink_iam_role_arn
+    #   The Amazon Resource Name (ARN) of the sink role to be used with
+    #   `AwsKmsKeyId` in `SseAwsKeyManagementParams`. Can only interact with
+    #   `S3Bucket` sink type. The role must belong to the caller’s account
+    #   and be able to act on behalf of the caller during the API call. All
+    #   minimum policy permissions requirements for the caller to perform
+    #   sink-related actions are the same for `SinkIamRoleArn`.
+    #
+    #   Additionally, the role must have permission to `kms:GenerateDataKey`
+    #   using KMS key supplied as `AwsKmsKeyId` in
+    #   `SseAwsKeyManagementParams`. If media concatenation will be required
+    #   later, the role must also have permission to `kms:Decrypt` for the
+    #   same KMS key.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The tag key-value pairs.
     #   @return [Array<Types::Tag>]
@@ -831,8 +859,10 @@ module Aws::ChimeSDKMediaPipelines
       :sink_arn,
       :client_request_token,
       :chime_sdk_meeting_configuration,
+      :sse_aws_key_management_params,
+      :sink_iam_role_arn,
       :tags)
-      SENSITIVE = [:source_arn, :sink_arn, :client_request_token]
+      SENSITIVE = [:source_arn, :sink_arn, :client_request_token, :sink_iam_role_arn]
       include Aws::Structure
     end
 
@@ -2072,6 +2102,18 @@ module Aws::ChimeSDKMediaPipelines
     #   be `ChimeSdkMeeting`.
     #   @return [Types::ChimeSdkMeetingConfiguration]
     #
+    # @!attribute [rw] sse_aws_key_management_params
+    #   An object that contains server side encryption parameters to be used
+    #   by media capture pipeline. The parameters can also be used by media
+    #   concatenation pipeline taking media capture pipeline as a media
+    #   source.
+    #   @return [Types::SseAwsKeyManagementParams]
+    #
+    # @!attribute [rw] sink_iam_role_arn
+    #   The Amazon Resource Name (ARN) of the sink role to be used with
+    #   `AwsKmsKeyId` in `SseAwsKeyManagementParams`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/MediaCapturePipeline AWS API Documentation
     #
     class MediaCapturePipeline < Struct.new(
@@ -2084,8 +2126,10 @@ module Aws::ChimeSDKMediaPipelines
       :sink_arn,
       :created_timestamp,
       :updated_timestamp,
-      :chime_sdk_meeting_configuration)
-      SENSITIVE = [:source_arn, :sink_arn]
+      :chime_sdk_meeting_configuration,
+      :sse_aws_key_management_params,
+      :sink_iam_role_arn)
+      SENSITIVE = [:source_arn, :sink_arn, :sink_iam_role_arn]
       include Aws::Structure
     end
 
@@ -3000,6 +3044,69 @@ module Aws::ChimeSDKMediaPipelines
     class SqsQueueSinkConfiguration < Struct.new(
       :insights_target)
       SENSITIVE = [:insights_target]
+      include Aws::Structure
+    end
+
+    # Contains server side encryption parameters to be used by media capture
+    # pipeline. The parameters can also be used by media concatenation
+    # pipeline taking media capture pipeline as a media source.
+    #
+    # @!attribute [rw] aws_kms_key_id
+    #   The KMS key you want to use to encrypt your media pipeline output.
+    #   Decryption is required for concatenation pipeline. If using a key
+    #   located in the current Amazon Web Services account, you can specify
+    #   your KMS key in one of four ways:
+    #
+    #   * Use the KMS key ID itself. For example,
+    #     `1234abcd-12ab-34cd-56ef-1234567890ab`.
+    #
+    #   * Use an alias for the KMS key ID. For example,
+    #     `alias/ExampleAlias`.
+    #
+    #   * Use the Amazon Resource Name (ARN) for the KMS key ID. For
+    #     example,
+    #     `arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab`.
+    #
+    #   * Use the ARN for the KMS key alias. For example,
+    #     `arn:aws:kms:region:account-ID:alias/ExampleAlias`.
+    #
+    #   If using a key located in a different Amazon Web Services account
+    #   than the current Amazon Web Services account, you can specify your
+    #   KMS key in one of two ways:
+    #
+    #   * Use the ARN for the KMS key ID. For example,
+    #     `arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab`.
+    #
+    #   * Use the ARN for the KMS key alias. For example,
+    #     `arn:aws:kms:region:account-ID:alias/ExampleAlias`.
+    #
+    #   If you don't specify an encryption key, your output is encrypted
+    #   with the default Amazon S3 key (SSE-S3).
+    #
+    #   Note that the role specified in the `SinkIamRoleArn` request
+    #   parameter must have permission to use the specified KMS key.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_kms_encryption_context
+    #   Base64-encoded string of a UTF-8 encoded JSON, which contains the
+    #   encryption context as non-secret key-value pair known as encryption
+    #   context pairs, that provides an added layer of security for your
+    #   data. For more information, see [KMS encryption context][1] and
+    #   [Asymmetric keys in KMS][2] in the *Key Management Service Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/encrypt_context.html
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/SseAwsKeyManagementParams AWS API Documentation
+    #
+    class SseAwsKeyManagementParams < Struct.new(
+      :aws_kms_key_id,
+      :aws_kms_encryption_context)
+      SENSITIVE = []
       include Aws::Structure
     end
 

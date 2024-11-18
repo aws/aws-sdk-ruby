@@ -715,6 +715,12 @@ module Aws::IoTWireless
     #    </note>
     #   @return [Integer]
     #
+    # @!attribute [rw] descriptor
+    #   The Descriptor specifies some metadata about the File being
+    #   transferred using FUOTA e.g. the software version. It is sent
+    #   transparently to the device. It is a binary field encoded in base64
+    #   @return [String]
+    #
     class CreateFuotaTaskRequest < Struct.new(
       :name,
       :description,
@@ -725,7 +731,8 @@ module Aws::IoTWireless
       :tags,
       :redundancy_percent,
       :fragment_size_bytes,
-      :fragment_interval_ms)
+      :fragment_interval_ms,
+      :descriptor)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1761,6 +1768,55 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # The log options for a FUOTA task event and can be used to set log
+    # levels for a specific fuota task event.
+    #
+    # For a LoRaWAN FuotaTask type, possible event for a log message is
+    # `Fuota`.
+    #
+    # @!attribute [rw] event
+    #   The event for a log message, if the log message is tied to a fuota
+    #   task.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_level
+    #   The log level for a log message. The log levels can be disabled, or
+    #   set to `ERROR` to display less verbose logs containing only error
+    #   information, or to `INFO` for more detailed logs.
+    #   @return [String]
+    #
+    class FuotaTaskEventLogOption < Struct.new(
+      :event,
+      :log_level)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The log options for fuota tasks and can be used to set log levels for
+    # a specific type of fuota task.
+    #
+    # @!attribute [rw] type
+    #   The fuota task type.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_level
+    #   The log level for a log message. The log levels can be disabled, or
+    #   set to `ERROR` to display less verbose logs containing only error
+    #   information, or to `INFO` for more detailed logs.
+    #   @return [String]
+    #
+    # @!attribute [rw] events
+    #   The list of FUOTA task event log options.
+    #   @return [Array<Types::FuotaTaskEventLogOption>]
+    #
+    class FuotaTaskLogOption < Struct.new(
+      :type,
+      :log_level,
+      :events)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Gateway list item object that specifies the frequency and list of
     # gateways for which the downlink message should be sent.
     #
@@ -1974,6 +2030,12 @@ module Aws::IoTWireless
     #    </note>
     #   @return [Integer]
     #
+    # @!attribute [rw] descriptor
+    #   The Descriptor specifies some metadata about the File being
+    #   transferred using FUOTA e.g. the software version. It is sent
+    #   transparently to the device. It is a binary field encoded in base64
+    #   @return [String]
+    #
     class GetFuotaTaskResponse < Struct.new(
       :arn,
       :id,
@@ -1986,7 +2048,8 @@ module Aws::IoTWireless
       :created_at,
       :redundancy_percent,
       :fragment_size_bytes,
-      :fragment_interval_ms)
+      :fragment_interval_ms,
+      :descriptor)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2009,10 +2072,15 @@ module Aws::IoTWireless
     #   The list of wireless device log options.
     #   @return [Array<Types::WirelessDeviceLogOption>]
     #
+    # @!attribute [rw] fuota_task_log_options
+    #   The list of fuota task log options.
+    #   @return [Array<Types::FuotaTaskLogOption>]
+    #
     class GetLogLevelsByResourceTypesResponse < Struct.new(
       :default_log_level,
       :wireless_gateway_log_options,
-      :wireless_device_log_options)
+      :wireless_device_log_options,
+      :fuota_task_log_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2415,8 +2483,8 @@ module Aws::IoTWireless
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of the resource, which can be `WirelessDevice` or
-    #   `WirelessGateway`.
+    #   The type of the resource, which can be `WirelessDevice`,
+    #   `WirelessGateway` or `FuotaTask`.
     #   @return [String]
     #
     class GetResourceLogLevelRequest < Struct.new(
@@ -4362,9 +4430,16 @@ module Aws::IoTWireless
     #   DlClass for LoRaWAM, valid values are ClassB and ClassC.
     #   @return [String]
     #
+    # @!attribute [rw] participating_gateways
+    #   Specify the list of gateways to which you want to send the multicast
+    #   downlink messages. The multicast message will be sent to each
+    #   gateway in the sequence provided in the list.
+    #   @return [Types::ParticipatingGatewaysMulticast]
+    #
     class LoRaWANMulticast < Struct.new(
       :rf_region,
-      :dl_class)
+      :dl_class,
+      :participating_gateways)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4389,11 +4464,18 @@ module Aws::IoTWireless
     #   Number of devices that are associated to the multicast group.
     #   @return [Integer]
     #
+    # @!attribute [rw] participating_gateways
+    #   Specify the list of gateways to which you want to send the multicast
+    #   downlink messages. The multicast message will be sent to each
+    #   gateway in the sequence provided in the list.
+    #   @return [Types::ParticipatingGatewaysMulticast]
+    #
     class LoRaWANMulticastGet < Struct.new(
       :rf_region,
       :dl_class,
       :number_of_devices_requested,
-      :number_of_devices_in_group)
+      :number_of_devices_in_group,
+      :participating_gateways)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4955,6 +5037,31 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # Specify the list of gateways to which you want to send the multicast
+    # downlink messages. The multicast message will be sent to each gateway
+    # in the sequence provided in the list.
+    #
+    # @!attribute [rw] gateway_list
+    #   The list of gateways that you want to use for sending the multicast
+    #   downlink. Each downlink will be sent to all the gateways in the list
+    #   with transmission interval between them. If list is empty the
+    #   gateway list will be dynamically selected similar to the case of no
+    #   ParticipatingGateways
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] transmission_interval
+    #   The duration of time for which AWS IoT Core for LoRaWAN will wait
+    #   before transmitting the multicast payload to the next gateway in the
+    #   list.
+    #   @return [Integer]
+    #
+    class ParticipatingGatewaysMulticast < Struct.new(
+      :gateway_list,
+      :transmission_interval)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The wrapper for a position configuration.
     #
     # @!attribute [rw] resource_identifier
@@ -5103,8 +5210,8 @@ module Aws::IoTWireless
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of the resource, which can be `WirelessDevice` or
-    #   `WirelessGateway`.
+    #   The type of the resource, which can be `WirelessDevice`,
+    #   `WirelessGateway`, or `FuotaTask`.
     #   @return [String]
     #
     # @!attribute [rw] log_level
@@ -5136,8 +5243,8 @@ module Aws::IoTWireless
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of the resource, which can be `WirelessDevice` or
-    #   `WirelessGateway`.
+    #   The type of the resource, which can be `WirelessDevice`,
+    #   `WirelessGateway`, or `FuotaTask`.
     #   @return [String]
     #
     class ResetResourceLogLevelRequest < Struct.new(
@@ -6384,6 +6491,12 @@ module Aws::IoTWireless
     #    </note>
     #   @return [Integer]
     #
+    # @!attribute [rw] descriptor
+    #   The Descriptor specifies some metadata about the File being
+    #   transferred using FUOTA e.g. the software version. It is sent
+    #   transparently to the device. It is a binary field encoded in base64
+    #   @return [String]
+    #
     class UpdateFuotaTaskRequest < Struct.new(
       :id,
       :name,
@@ -6393,7 +6506,8 @@ module Aws::IoTWireless
       :firmware_update_role,
       :redundancy_percent,
       :fragment_size_bytes,
-      :fragment_interval_ms)
+      :fragment_interval_ms,
+      :descriptor)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6406,6 +6520,10 @@ module Aws::IoTWireless
     #   information, or to `INFO` for more detailed logs.
     #   @return [String]
     #
+    # @!attribute [rw] fuota_task_log_options
+    #   The list of fuota task log options.
+    #   @return [Array<Types::FuotaTaskLogOption>]
+    #
     # @!attribute [rw] wireless_device_log_options
     #   The list of wireless device log options.
     #   @return [Array<Types::WirelessDeviceLogOption>]
@@ -6416,6 +6534,7 @@ module Aws::IoTWireless
     #
     class UpdateLogLevelsByResourceTypesRequest < Struct.new(
       :default_log_level,
+      :fuota_task_log_options,
       :wireless_device_log_options,
       :wireless_gateway_log_options)
       SENSITIVE = []

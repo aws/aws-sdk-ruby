@@ -468,9 +468,13 @@ module Aws::IVS
     #   resp.channels #=> Array
     #   resp.channels[0].arn #=> String
     #   resp.channels[0].authorized #=> Boolean
+    #   resp.channels[0].container_format #=> String, one of "TS", "FRAGMENTED_MP4"
     #   resp.channels[0].ingest_endpoint #=> String
     #   resp.channels[0].insecure_ingest #=> Boolean
     #   resp.channels[0].latency_mode #=> String, one of "NORMAL", "LOW"
+    #   resp.channels[0].multitrack_input_configuration.enabled #=> Boolean
+    #   resp.channels[0].multitrack_input_configuration.maximum_resolution #=> String, one of "SD", "HD", "FULL_HD"
+    #   resp.channels[0].multitrack_input_configuration.policy #=> String, one of "ALLOW", "REQUIRE"
     #   resp.channels[0].name #=> String
     #   resp.channels[0].playback_restriction_policy_arn #=> String
     #   resp.channels[0].playback_url #=> String
@@ -578,6 +582,13 @@ module Aws::IVS
     #   Whether the channel is private (enabled for playback authorization).
     #   Default: `false`.
     #
+    # @option params [String] :container_format
+    #   Indicates which content-packaging format is used (MPEG-TS or fMP4). If
+    #   `multitrackInputConfiguration` is specified and `enabled` is `true`,
+    #   then `containerFormat` is required and must be set to
+    #   `FRAGMENTED_MP4`. Otherwise, `containerFormat` may be set to `TS` or
+    #   `FRAGMENTED_MP4`. Default: `TS`.
+    #
     # @option params [Boolean] :insecure_ingest
     #   Whether the channel allows insecure RTMP and SRT ingest. Default:
     #   `false`.
@@ -586,6 +597,10 @@ module Aws::IVS
     #   Channel latency mode. Use `NORMAL` to broadcast and deliver live video
     #   up to Full HD. Use `LOW` for near-real-time interaction with viewers.
     #   Default: `LOW`.
+    #
+    # @option params [Types::MultitrackInputConfiguration] :multitrack_input_configuration
+    #   Object specifying multitrack input configuration. Default: no
+    #   multitrack input configuration is specified.
     #
     # @option params [String] :name
     #   Channel name.
@@ -637,8 +652,14 @@ module Aws::IVS
     #
     #   resp = client.create_channel({
     #     authorized: false,
+    #     container_format: "TS", # accepts TS, FRAGMENTED_MP4
     #     insecure_ingest: false,
     #     latency_mode: "NORMAL", # accepts NORMAL, LOW
+    #     multitrack_input_configuration: {
+    #       enabled: false,
+    #       maximum_resolution: "SD", # accepts SD, HD, FULL_HD
+    #       policy: "ALLOW", # accepts ALLOW, REQUIRE
+    #     },
     #     name: "ChannelName",
     #     playback_restriction_policy_arn: "ChannelPlaybackRestrictionPolicyArn",
     #     preset: "HIGHER_BANDWIDTH_DELIVERY", # accepts HIGHER_BANDWIDTH_DELIVERY, CONSTRAINED_BANDWIDTH_DELIVERY
@@ -653,9 +674,13 @@ module Aws::IVS
     #
     #   resp.channel.arn #=> String
     #   resp.channel.authorized #=> Boolean
+    #   resp.channel.container_format #=> String, one of "TS", "FRAGMENTED_MP4"
     #   resp.channel.ingest_endpoint #=> String
     #   resp.channel.insecure_ingest #=> Boolean
     #   resp.channel.latency_mode #=> String, one of "NORMAL", "LOW"
+    #   resp.channel.multitrack_input_configuration.enabled #=> Boolean
+    #   resp.channel.multitrack_input_configuration.maximum_resolution #=> String, one of "SD", "HD", "FULL_HD"
+    #   resp.channel.multitrack_input_configuration.policy #=> String, one of "ALLOW", "REQUIRE"
     #   resp.channel.name #=> String
     #   resp.channel.playback_restriction_policy_arn #=> String
     #   resp.channel.playback_url #=> String
@@ -1070,9 +1095,13 @@ module Aws::IVS
     #
     #   resp.channel.arn #=> String
     #   resp.channel.authorized #=> Boolean
+    #   resp.channel.container_format #=> String, one of "TS", "FRAGMENTED_MP4"
     #   resp.channel.ingest_endpoint #=> String
     #   resp.channel.insecure_ingest #=> Boolean
     #   resp.channel.latency_mode #=> String, one of "NORMAL", "LOW"
+    #   resp.channel.multitrack_input_configuration.enabled #=> Boolean
+    #   resp.channel.multitrack_input_configuration.maximum_resolution #=> String, one of "SD", "HD", "FULL_HD"
+    #   resp.channel.multitrack_input_configuration.policy #=> String, one of "ALLOW", "REQUIRE"
     #   resp.channel.name #=> String
     #   resp.channel.playback_restriction_policy_arn #=> String
     #   resp.channel.playback_url #=> String
@@ -1303,9 +1332,13 @@ module Aws::IVS
     #
     #   resp.stream_session.channel.arn #=> String
     #   resp.stream_session.channel.authorized #=> Boolean
+    #   resp.stream_session.channel.container_format #=> String, one of "TS", "FRAGMENTED_MP4"
     #   resp.stream_session.channel.ingest_endpoint #=> String
     #   resp.stream_session.channel.insecure_ingest #=> Boolean
     #   resp.stream_session.channel.latency_mode #=> String, one of "NORMAL", "LOW"
+    #   resp.stream_session.channel.multitrack_input_configuration.enabled #=> Boolean
+    #   resp.stream_session.channel.multitrack_input_configuration.maximum_resolution #=> String, one of "SD", "HD", "FULL_HD"
+    #   resp.stream_session.channel.multitrack_input_configuration.policy #=> String, one of "ALLOW", "REQUIRE"
     #   resp.stream_session.channel.name #=> String
     #   resp.stream_session.channel.playback_restriction_policy_arn #=> String
     #   resp.stream_session.channel.playback_url #=> String
@@ -1321,14 +1354,36 @@ module Aws::IVS
     #   resp.stream_session.ingest_configuration.audio.codec #=> String
     #   resp.stream_session.ingest_configuration.audio.sample_rate #=> Integer
     #   resp.stream_session.ingest_configuration.audio.target_bitrate #=> Integer
+    #   resp.stream_session.ingest_configuration.audio.track #=> String
     #   resp.stream_session.ingest_configuration.video.avc_level #=> String
     #   resp.stream_session.ingest_configuration.video.avc_profile #=> String
     #   resp.stream_session.ingest_configuration.video.codec #=> String
     #   resp.stream_session.ingest_configuration.video.encoder #=> String
+    #   resp.stream_session.ingest_configuration.video.level #=> String
+    #   resp.stream_session.ingest_configuration.video.profile #=> String
     #   resp.stream_session.ingest_configuration.video.target_bitrate #=> Integer
     #   resp.stream_session.ingest_configuration.video.target_framerate #=> Integer
+    #   resp.stream_session.ingest_configuration.video.track #=> String
     #   resp.stream_session.ingest_configuration.video.video_height #=> Integer
     #   resp.stream_session.ingest_configuration.video.video_width #=> Integer
+    #   resp.stream_session.ingest_configurations.audio_configurations #=> Array
+    #   resp.stream_session.ingest_configurations.audio_configurations[0].channels #=> Integer
+    #   resp.stream_session.ingest_configurations.audio_configurations[0].codec #=> String
+    #   resp.stream_session.ingest_configurations.audio_configurations[0].sample_rate #=> Integer
+    #   resp.stream_session.ingest_configurations.audio_configurations[0].target_bitrate #=> Integer
+    #   resp.stream_session.ingest_configurations.audio_configurations[0].track #=> String
+    #   resp.stream_session.ingest_configurations.video_configurations #=> Array
+    #   resp.stream_session.ingest_configurations.video_configurations[0].avc_level #=> String
+    #   resp.stream_session.ingest_configurations.video_configurations[0].avc_profile #=> String
+    #   resp.stream_session.ingest_configurations.video_configurations[0].codec #=> String
+    #   resp.stream_session.ingest_configurations.video_configurations[0].encoder #=> String
+    #   resp.stream_session.ingest_configurations.video_configurations[0].level #=> String
+    #   resp.stream_session.ingest_configurations.video_configurations[0].profile #=> String
+    #   resp.stream_session.ingest_configurations.video_configurations[0].target_bitrate #=> Integer
+    #   resp.stream_session.ingest_configurations.video_configurations[0].target_framerate #=> Integer
+    #   resp.stream_session.ingest_configurations.video_configurations[0].track #=> String
+    #   resp.stream_session.ingest_configurations.video_configurations[0].video_height #=> Integer
+    #   resp.stream_session.ingest_configurations.video_configurations[0].video_width #=> Integer
     #   resp.stream_session.recording_configuration.arn #=> String
     #   resp.stream_session.recording_configuration.destination_configuration.s3.bucket_name #=> String
     #   resp.stream_session.recording_configuration.name #=> String
@@ -1989,6 +2044,13 @@ module Aws::IVS
     # @option params [Boolean] :authorized
     #   Whether the channel is private (enabled for playback authorization).
     #
+    # @option params [String] :container_format
+    #   Indicates which content-packaging format is used (MPEG-TS or fMP4). If
+    #   `multitrackInputConfiguration` is specified and `enabled` is `true`,
+    #   then `containerFormat` is required and must be set to
+    #   `FRAGMENTED_MP4`. Otherwise, `containerFormat` may be set to `TS` or
+    #   `FRAGMENTED_MP4`. Default: `TS`.
+    #
     # @option params [Boolean] :insecure_ingest
     #   Whether the channel allows insecure RTMP and SRT ingest. Default:
     #   `false`.
@@ -1996,6 +2058,10 @@ module Aws::IVS
     # @option params [String] :latency_mode
     #   Channel latency mode. Use `NORMAL` to broadcast and deliver live video
     #   up to Full HD. Use `LOW` for near-real-time interaction with viewers.
+    #
+    # @option params [Types::MultitrackInputConfiguration] :multitrack_input_configuration
+    #   Object specifying multitrack input configuration. Default: no
+    #   multitrack input configuration is specified.
     #
     # @option params [String] :name
     #   Channel name.
@@ -2036,8 +2102,14 @@ module Aws::IVS
     #   resp = client.update_channel({
     #     arn: "ChannelArn", # required
     #     authorized: false,
+    #     container_format: "TS", # accepts TS, FRAGMENTED_MP4
     #     insecure_ingest: false,
     #     latency_mode: "NORMAL", # accepts NORMAL, LOW
+    #     multitrack_input_configuration: {
+    #       enabled: false,
+    #       maximum_resolution: "SD", # accepts SD, HD, FULL_HD
+    #       policy: "ALLOW", # accepts ALLOW, REQUIRE
+    #     },
     #     name: "ChannelName",
     #     playback_restriction_policy_arn: "ChannelPlaybackRestrictionPolicyArn",
     #     preset: "HIGHER_BANDWIDTH_DELIVERY", # accepts HIGHER_BANDWIDTH_DELIVERY, CONSTRAINED_BANDWIDTH_DELIVERY
@@ -2049,9 +2121,13 @@ module Aws::IVS
     #
     #   resp.channel.arn #=> String
     #   resp.channel.authorized #=> Boolean
+    #   resp.channel.container_format #=> String, one of "TS", "FRAGMENTED_MP4"
     #   resp.channel.ingest_endpoint #=> String
     #   resp.channel.insecure_ingest #=> Boolean
     #   resp.channel.latency_mode #=> String, one of "NORMAL", "LOW"
+    #   resp.channel.multitrack_input_configuration.enabled #=> Boolean
+    #   resp.channel.multitrack_input_configuration.maximum_resolution #=> String, one of "SD", "HD", "FULL_HD"
+    #   resp.channel.multitrack_input_configuration.policy #=> String, one of "ALLOW", "REQUIRE"
     #   resp.channel.name #=> String
     #   resp.channel.playback_restriction_policy_arn #=> String
     #   resp.channel.playback_url #=> String
@@ -2157,7 +2233,7 @@ module Aws::IVS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ivs'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

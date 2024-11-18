@@ -150,6 +150,8 @@ module Aws::BedrockRuntime
     NonNegativeInteger = Shapes::IntegerShape.new(name: 'NonNegativeInteger')
     PartBody = Shapes::BlobShape.new(name: 'PartBody')
     PayloadPart = Shapes::StructureShape.new(name: 'PayloadPart')
+    PromptVariableMap = Shapes::MapShape.new(name: 'PromptVariableMap')
+    PromptVariableValues = Shapes::UnionShape.new(name: 'PromptVariableValues')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResponseStream = Shapes::StructureShape.new(name: 'ResponseStream')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
@@ -258,12 +260,13 @@ module Aws::BedrockRuntime
     ConverseOutput.struct_class = Types::ConverseOutput
 
     ConverseRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: ConversationalModelId, required: true, location: "uri", location_name: "modelId"))
-    ConverseRequest.add_member(:messages, Shapes::ShapeRef.new(shape: Messages, required: true, location_name: "messages"))
+    ConverseRequest.add_member(:messages, Shapes::ShapeRef.new(shape: Messages, location_name: "messages"))
     ConverseRequest.add_member(:system, Shapes::ShapeRef.new(shape: SystemContentBlocks, location_name: "system"))
     ConverseRequest.add_member(:inference_config, Shapes::ShapeRef.new(shape: InferenceConfiguration, location_name: "inferenceConfig"))
     ConverseRequest.add_member(:tool_config, Shapes::ShapeRef.new(shape: ToolConfiguration, location_name: "toolConfig"))
     ConverseRequest.add_member(:guardrail_config, Shapes::ShapeRef.new(shape: GuardrailConfiguration, location_name: "guardrailConfig"))
     ConverseRequest.add_member(:additional_model_request_fields, Shapes::ShapeRef.new(shape: Document, location_name: "additionalModelRequestFields"))
+    ConverseRequest.add_member(:prompt_variables, Shapes::ShapeRef.new(shape: PromptVariableMap, location_name: "promptVariables"))
     ConverseRequest.add_member(:additional_model_response_field_paths, Shapes::ShapeRef.new(shape: ConverseRequestAdditionalModelResponseFieldPathsList, location_name: "additionalModelResponseFieldPaths"))
     ConverseRequest.struct_class = Types::ConverseRequest
 
@@ -299,12 +302,13 @@ module Aws::BedrockRuntime
     ConverseStreamOutput.struct_class = Types::ConverseStreamOutput
 
     ConverseStreamRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: ConversationalModelId, required: true, location: "uri", location_name: "modelId"))
-    ConverseStreamRequest.add_member(:messages, Shapes::ShapeRef.new(shape: Messages, required: true, location_name: "messages"))
+    ConverseStreamRequest.add_member(:messages, Shapes::ShapeRef.new(shape: Messages, location_name: "messages"))
     ConverseStreamRequest.add_member(:system, Shapes::ShapeRef.new(shape: SystemContentBlocks, location_name: "system"))
     ConverseStreamRequest.add_member(:inference_config, Shapes::ShapeRef.new(shape: InferenceConfiguration, location_name: "inferenceConfig"))
     ConverseStreamRequest.add_member(:tool_config, Shapes::ShapeRef.new(shape: ToolConfiguration, location_name: "toolConfig"))
     ConverseStreamRequest.add_member(:guardrail_config, Shapes::ShapeRef.new(shape: GuardrailStreamConfiguration, location_name: "guardrailConfig"))
     ConverseStreamRequest.add_member(:additional_model_request_fields, Shapes::ShapeRef.new(shape: Document, location_name: "additionalModelRequestFields"))
+    ConverseStreamRequest.add_member(:prompt_variables, Shapes::ShapeRef.new(shape: PromptVariableMap, location_name: "promptVariables"))
     ConverseStreamRequest.add_member(:additional_model_response_field_paths, Shapes::ShapeRef.new(shape: ConverseStreamRequestAdditionalModelResponseFieldPathsList, location_name: "additionalModelResponseFieldPaths"))
     ConverseStreamRequest.struct_class = Types::ConverseStreamRequest
 
@@ -504,7 +508,7 @@ module Aws::BedrockRuntime
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
-    InvokeModelRequest.add_member(:body, Shapes::ShapeRef.new(shape: Body, required: true, location_name: "body"))
+    InvokeModelRequest.add_member(:body, Shapes::ShapeRef.new(shape: Body, location_name: "body"))
     InvokeModelRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: MimeType, location: "header", location_name: "Content-Type"))
     InvokeModelRequest.add_member(:accept, Shapes::ShapeRef.new(shape: MimeType, location: "header", location_name: "Accept"))
     InvokeModelRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: InvokeModelIdentifier, required: true, location: "uri", location_name: "modelId"))
@@ -521,7 +525,7 @@ module Aws::BedrockRuntime
     InvokeModelResponse[:payload] = :body
     InvokeModelResponse[:payload_member] = InvokeModelResponse.member(:body)
 
-    InvokeModelWithResponseStreamRequest.add_member(:body, Shapes::ShapeRef.new(shape: Body, required: true, location_name: "body"))
+    InvokeModelWithResponseStreamRequest.add_member(:body, Shapes::ShapeRef.new(shape: Body, location_name: "body"))
     InvokeModelWithResponseStreamRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: MimeType, location: "header", location_name: "Content-Type"))
     InvokeModelWithResponseStreamRequest.add_member(:accept, Shapes::ShapeRef.new(shape: MimeType, location: "header", location_name: "X-Amzn-Bedrock-Accept"))
     InvokeModelWithResponseStreamRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: InvokeModelIdentifier, required: true, location: "uri", location_name: "modelId"))
@@ -571,6 +575,15 @@ module Aws::BedrockRuntime
 
     PayloadPart.add_member(:bytes, Shapes::ShapeRef.new(shape: PartBody, location_name: "bytes"))
     PayloadPart.struct_class = Types::PayloadPart
+
+    PromptVariableMap.key = Shapes::ShapeRef.new(shape: String)
+    PromptVariableMap.value = Shapes::ShapeRef.new(shape: PromptVariableValues)
+
+    PromptVariableValues.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "text"))
+    PromptVariableValues.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    PromptVariableValues.add_member_subclass(:text, Types::PromptVariableValues::Text)
+    PromptVariableValues.add_member_subclass(:unknown, Types::PromptVariableValues::Unknown)
+    PromptVariableValues.struct_class = Types::PromptVariableValues
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException

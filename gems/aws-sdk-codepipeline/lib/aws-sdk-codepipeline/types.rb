@@ -242,7 +242,7 @@ module Aws::CodePipeline
     #
     #   *JSON:*
     #
-    #   `"Configuration" : \{ Key : Value \},`
+    #   `"Configuration" : { Key : Value },`
     #
     #
     #
@@ -1457,7 +1457,7 @@ module Aws::CodePipeline
     #
     #   <note markdown="1"> You can refer to a name in the configuration properties of the
     #   custom action within the URL templates by following the format of
-    #   \\\{Config:name\\}, as long as the configuration property is both
+    #   \{Config:name}, as long as the configuration property is both
     #   required and not secret. For more information, see [Create a Custom
     #   Action for a Pipeline][1].
     #
@@ -5700,9 +5700,9 @@ module Aws::CodePipeline
     #   ignored. Properties from the target action configuration can be
     #   included as placeholders in this value by surrounding the action
     #   configuration key with curly brackets. For example, if the value
-    #   supplied here is "refs/heads/\\\{Branch\\}" and the target action
-    #   has an action configuration property called "Branch" with a value
-    #   of "main", the `MatchEquals` value is evaluated as
+    #   supplied here is "refs/heads/\{Branch}" and the target action has
+    #   an action configuration property called "Branch" with a value of
+    #   "main", the `MatchEquals` value is evaluated as
     #   "refs/heads/main". For a list of action configuration properties
     #   for built-in action types, see [Pipeline Structure Reference Action
     #   Requirements][1].

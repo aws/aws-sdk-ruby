@@ -176,14 +176,14 @@ module Aws
         def version_number: () -> ::Integer
         def arn: () -> ::String
         def description: () -> ::String
-        def actions: () -> ::Hash[("PRE_CREATE_HOSTED_CONFIGURATION_VERSION" | "PRE_START_DEPLOYMENT" | "ON_DEPLOYMENT_START" | "ON_DEPLOYMENT_STEP" | "ON_DEPLOYMENT_BAKING" | "ON_DEPLOYMENT_COMPLETE" | "ON_DEPLOYMENT_ROLLED_BACK"), ::Array[Types::Action]]
+        def actions: () -> ::Hash[("PRE_CREATE_HOSTED_CONFIGURATION_VERSION" | "PRE_START_DEPLOYMENT" | "AT_DEPLOYMENT_TICK" | "ON_DEPLOYMENT_START" | "ON_DEPLOYMENT_STEP" | "ON_DEPLOYMENT_BAKING" | "ON_DEPLOYMENT_COMPLETE" | "ON_DEPLOYMENT_ROLLED_BACK"), ::Array[Types::Action]]
         def parameters: () -> ::Hash[::String, Types::Parameter]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#create_extension-instance_method
       def create_extension: (
                               name: ::String,
                               ?description: ::String,
-                              actions: Hash[("PRE_CREATE_HOSTED_CONFIGURATION_VERSION" | "PRE_START_DEPLOYMENT" | "ON_DEPLOYMENT_START" | "ON_DEPLOYMENT_STEP" | "ON_DEPLOYMENT_BAKING" | "ON_DEPLOYMENT_COMPLETE" | "ON_DEPLOYMENT_ROLLED_BACK"), Array[
+                              actions: Hash[("PRE_CREATE_HOSTED_CONFIGURATION_VERSION" | "PRE_START_DEPLOYMENT" | "AT_DEPLOYMENT_TICK" | "ON_DEPLOYMENT_START" | "ON_DEPLOYMENT_STEP" | "ON_DEPLOYMENT_BAKING" | "ON_DEPLOYMENT_COMPLETE" | "ON_DEPLOYMENT_ROLLED_BACK"), Array[
                                   {
                                     name: ::String?,
                                     description: ::String?,
@@ -421,7 +421,7 @@ module Aws
         def version_number: () -> ::Integer
         def arn: () -> ::String
         def description: () -> ::String
-        def actions: () -> ::Hash[("PRE_CREATE_HOSTED_CONFIGURATION_VERSION" | "PRE_START_DEPLOYMENT" | "ON_DEPLOYMENT_START" | "ON_DEPLOYMENT_STEP" | "ON_DEPLOYMENT_BAKING" | "ON_DEPLOYMENT_COMPLETE" | "ON_DEPLOYMENT_ROLLED_BACK"), ::Array[Types::Action]]
+        def actions: () -> ::Hash[("PRE_CREATE_HOSTED_CONFIGURATION_VERSION" | "PRE_START_DEPLOYMENT" | "AT_DEPLOYMENT_TICK" | "ON_DEPLOYMENT_START" | "ON_DEPLOYMENT_STEP" | "ON_DEPLOYMENT_BAKING" | "ON_DEPLOYMENT_COMPLETE" | "ON_DEPLOYMENT_ROLLED_BACK"), ::Array[Types::Action]]
         def parameters: () -> ::Hash[::String, Types::Parameter]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#get_extension-instance_method
@@ -780,14 +780,14 @@ module Aws
         def version_number: () -> ::Integer
         def arn: () -> ::String
         def description: () -> ::String
-        def actions: () -> ::Hash[("PRE_CREATE_HOSTED_CONFIGURATION_VERSION" | "PRE_START_DEPLOYMENT" | "ON_DEPLOYMENT_START" | "ON_DEPLOYMENT_STEP" | "ON_DEPLOYMENT_BAKING" | "ON_DEPLOYMENT_COMPLETE" | "ON_DEPLOYMENT_ROLLED_BACK"), ::Array[Types::Action]]
+        def actions: () -> ::Hash[("PRE_CREATE_HOSTED_CONFIGURATION_VERSION" | "PRE_START_DEPLOYMENT" | "AT_DEPLOYMENT_TICK" | "ON_DEPLOYMENT_START" | "ON_DEPLOYMENT_STEP" | "ON_DEPLOYMENT_BAKING" | "ON_DEPLOYMENT_COMPLETE" | "ON_DEPLOYMENT_ROLLED_BACK"), ::Array[Types::Action]]
         def parameters: () -> ::Hash[::String, Types::Parameter]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#update_extension-instance_method
       def update_extension: (
                               extension_identifier: ::String,
                               ?description: ::String,
-                              ?actions: Hash[("PRE_CREATE_HOSTED_CONFIGURATION_VERSION" | "PRE_START_DEPLOYMENT" | "ON_DEPLOYMENT_START" | "ON_DEPLOYMENT_STEP" | "ON_DEPLOYMENT_BAKING" | "ON_DEPLOYMENT_COMPLETE" | "ON_DEPLOYMENT_ROLLED_BACK"), Array[
+                              ?actions: Hash[("PRE_CREATE_HOSTED_CONFIGURATION_VERSION" | "PRE_START_DEPLOYMENT" | "AT_DEPLOYMENT_TICK" | "ON_DEPLOYMENT_START" | "ON_DEPLOYMENT_STEP" | "ON_DEPLOYMENT_BAKING" | "ON_DEPLOYMENT_COMPLETE" | "ON_DEPLOYMENT_ROLLED_BACK"), Array[
                                   {
                                     name: ::String?,
                                     description: ::String?,

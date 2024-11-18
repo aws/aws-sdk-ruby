@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.126.0 (2024-11-18)
+------------------
+
+* Feature - Amazon EC2 Auto Scaling now supports Amazon Application Recovery Controller (ARC) zonal shift and zonal autoshift to help you quickly recover an impaired application from failures in an Availability Zone (AZ).
+
+1.125.0 (2024-11-07)
+------------------
+
+* Feature - Auto Scaling groups now support the ability to strictly balance instances across Availability Zones by configuring the AvailabilityZoneDistribution parameter. If balanced-only is configured for a group, launches will always be attempted in the under scaled Availability Zone even if it is unhealthy.
+
 1.124.0 (2024-10-31)
 ------------------
 

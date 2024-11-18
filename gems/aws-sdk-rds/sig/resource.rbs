@@ -143,7 +143,8 @@ module Aws
                                ?enable_limitless_database: bool,
                                ?serverless_v2_scaling_configuration: {
                                  min_capacity: ::Float?,
-                                 max_capacity: ::Float?
+                                 max_capacity: ::Float?,
+                                 seconds_until_auto_pause: ::Integer?
                                },
                                ?network_type: ::String,
                                ?cluster_scalability_type: ("standard" | "limitless"),

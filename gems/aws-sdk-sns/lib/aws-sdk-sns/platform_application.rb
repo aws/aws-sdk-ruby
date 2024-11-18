@@ -52,7 +52,6 @@ module Aws::SNS
     #   * APNS – Returns the token or certificate.
     #
     #   * GCM – Returns the token or key.
-    #
     # * `EventEndpointCreated` – Topic ARN to which EndpointCreated event
     #   notifications should be sent.
     #

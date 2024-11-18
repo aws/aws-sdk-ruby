@@ -1196,7 +1196,8 @@
       ],
       "members":{
         "AutoScalingGroupName":{"shape":"XmlStringMaxLen255"},
-        "TrafficSources":{"shape":"TrafficSources"}
+        "TrafficSources":{"shape":"TrafficSources"},
+        "SkipZonalShiftValidation":{"shape":"SkipZonalShiftValidation"}
       }
     },
     "AutoRollback":{"type":"boolean"},
@@ -1247,7 +1248,9 @@
         "DesiredCapacityType":{"shape":"XmlStringMaxLen255"},
         "DefaultInstanceWarmup":{"shape":"DefaultInstanceWarmup"},
         "TrafficSources":{"shape":"TrafficSources"},
-        "InstanceMaintenancePolicy":{"shape":"InstanceMaintenancePolicy"}
+        "InstanceMaintenancePolicy":{"shape":"InstanceMaintenancePolicy"},
+        "AvailabilityZoneDistribution":{"shape":"AvailabilityZoneDistribution"},
+        "AvailabilityZoneImpairmentPolicy":{"shape":"AvailabilityZoneImpairmentPolicy"}
       }
     },
     "AutoScalingGroupDesiredCapacity":{"type":"integer"},
@@ -1321,6 +1324,19 @@
     "AutoScalingNotificationTypes":{
       "type":"list",
       "member":{"shape":"XmlStringMaxLen255"}
+    },
+    "AvailabilityZoneDistribution":{
+      "type":"structure",
+      "members":{
+        "CapacityDistributionStrategy":{"shape":"CapacityDistributionStrategy"}
+      }
+    },
+    "AvailabilityZoneImpairmentPolicy":{
+      "type":"structure",
+      "members":{
+        "ZonalShiftEnabled":{"shape":"ZonalShiftEnabled"},
+        "ImpairedZoneHealthCheckBehavior":{"shape":"ImpairedZoneHealthCheckBehavior"}
+      }
     },
     "AvailabilityZones":{
       "type":"list",
@@ -1437,6 +1453,13 @@
         "AutoScalingGroupName":{"shape":"XmlStringMaxLen255"}
       }
     },
+    "CapacityDistributionStrategy":{
+      "type":"string",
+      "enum":[
+        "balanced-only",
+        "balanced-best-effort"
+      ]
+    },
     "CapacityForecast":{
       "type":"structure",
       "required":[
@@ -1531,7 +1554,10 @@
         "DesiredCapacityType":{"shape":"XmlStringMaxLen255"},
         "DefaultInstanceWarmup":{"shape":"DefaultInstanceWarmup"},
         "TrafficSources":{"shape":"TrafficSources"},
-        "InstanceMaintenancePolicy":{"shape":"InstanceMaintenancePolicy"}
+        "InstanceMaintenancePolicy":{"shape":"InstanceMaintenancePolicy"},
+        "AvailabilityZoneDistribution":{"shape":"AvailabilityZoneDistribution"},
+        "AvailabilityZoneImpairmentPolicy":{"shape":"AvailabilityZoneImpairmentPolicy"},
+        "SkipZonalShiftValidation":{"shape":"SkipZonalShiftValidation"}
       }
     },
     "CreateLaunchConfigurationType":{
@@ -2082,6 +2108,13 @@
     "HealthCheckGracePeriod":{"type":"integer"},
     "HeartbeatTimeout":{"type":"integer"},
     "HonorCooldown":{"type":"boolean"},
+    "ImpairedZoneHealthCheckBehavior":{
+      "type":"string",
+      "enum":[
+        "ReplaceUnhealthy",
+        "IgnoreUnhealthy"
+      ]
+    },
     "IncludeDeletedGroups":{"type":"boolean"},
     "Instance":{
       "type":"structure",
@@ -3336,6 +3369,7 @@
     "ShouldDecrementDesiredCapacity":{"type":"boolean"},
     "ShouldRespectGracePeriod":{"type":"boolean"},
     "SkipMatching":{"type":"boolean"},
+    "SkipZonalShiftValidation":{"type":"boolean"},
     "SpotInstancePools":{"type":"integer"},
     "SpotPrice":{
       "type":"string",
@@ -3556,7 +3590,10 @@
         "Context":{"shape":"Context"},
         "DesiredCapacityType":{"shape":"XmlStringMaxLen255"},
         "DefaultInstanceWarmup":{"shape":"DefaultInstanceWarmup"},
-        "InstanceMaintenancePolicy":{"shape":"InstanceMaintenancePolicy"}
+        "InstanceMaintenancePolicy":{"shape":"InstanceMaintenancePolicy"},
+        "AvailabilityZoneDistribution":{"shape":"AvailabilityZoneDistribution"},
+        "AvailabilityZoneImpairmentPolicy":{"shape":"AvailabilityZoneImpairmentPolicy"},
+        "SkipZonalShiftValidation":{"shape":"SkipZonalShiftValidation"}
       }
     },
     "UpdatePlacementGroupParam":{
@@ -3677,6 +3714,7 @@
       "type":"string",
       "max":21847,
       "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
-    }
+    },
+    "ZonalShiftEnabled":{"type":"boolean"}
   }
 }

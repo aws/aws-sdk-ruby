@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.1009.0 (2024-11-15)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::ConnectCampaignsV2`.
+
+1.1008.0 (2024-11-15)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1007.0 (2024-11-14)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::PartnerCentralSelling`.
+
+1.1006.0 (2024-11-13)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::Billing`.
+
+1.1005.0 (2024-11-12)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1004.0 (2024-11-11)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1003.0 (2024-11-08)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1002.0 (2024-11-07)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.1001.0 (2024-11-01)
 ------------------
 

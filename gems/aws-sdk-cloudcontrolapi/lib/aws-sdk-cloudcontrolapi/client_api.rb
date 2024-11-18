@@ -35,6 +35,12 @@ module Aws::CloudControlApi
     HandlerFailureException = Shapes::StructureShape.new(name: 'HandlerFailureException')
     HandlerInternalFailureException = Shapes::StructureShape.new(name: 'HandlerInternalFailureException')
     HandlerNextToken = Shapes::StringShape.new(name: 'HandlerNextToken')
+    HookFailureMode = Shapes::StringShape.new(name: 'HookFailureMode')
+    HookInvocationPoint = Shapes::StringShape.new(name: 'HookInvocationPoint')
+    HookProgressEvent = Shapes::StructureShape.new(name: 'HookProgressEvent')
+    HookStatus = Shapes::StringShape.new(name: 'HookStatus')
+    HookTypeArn = Shapes::StringShape.new(name: 'HookTypeArn')
+    HooksProgressEvent = Shapes::ListShape.new(name: 'HooksProgressEvent')
     Identifier = Shapes::StringShape.new(name: 'Identifier')
     InvalidCredentialsException = Shapes::StructureShape.new(name: 'InvalidCredentialsException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
@@ -131,6 +137,7 @@ module Aws::CloudControlApi
     GetResourceRequestStatusInput.struct_class = Types::GetResourceRequestStatusInput
 
     GetResourceRequestStatusOutput.add_member(:progress_event, Shapes::ShapeRef.new(shape: ProgressEvent, location_name: "ProgressEvent"))
+    GetResourceRequestStatusOutput.add_member(:hooks_progress_event, Shapes::ShapeRef.new(shape: HooksProgressEvent, location_name: "HooksProgressEvent"))
     GetResourceRequestStatusOutput.struct_class = Types::GetResourceRequestStatusOutput
 
     HandlerFailureException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -138,6 +145,18 @@ module Aws::CloudControlApi
 
     HandlerInternalFailureException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     HandlerInternalFailureException.struct_class = Types::HandlerInternalFailureException
+
+    HookProgressEvent.add_member(:hook_type_name, Shapes::ShapeRef.new(shape: TypeName, location_name: "HookTypeName"))
+    HookProgressEvent.add_member(:hook_type_version_id, Shapes::ShapeRef.new(shape: TypeVersionId, location_name: "HookTypeVersionId"))
+    HookProgressEvent.add_member(:hook_type_arn, Shapes::ShapeRef.new(shape: HookTypeArn, location_name: "HookTypeArn"))
+    HookProgressEvent.add_member(:invocation_point, Shapes::ShapeRef.new(shape: HookInvocationPoint, location_name: "InvocationPoint"))
+    HookProgressEvent.add_member(:hook_status, Shapes::ShapeRef.new(shape: HookStatus, location_name: "HookStatus"))
+    HookProgressEvent.add_member(:hook_event_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "HookEventTime"))
+    HookProgressEvent.add_member(:hook_status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "HookStatusMessage"))
+    HookProgressEvent.add_member(:failure_mode, Shapes::ShapeRef.new(shape: HookFailureMode, location_name: "FailureMode"))
+    HookProgressEvent.struct_class = Types::HookProgressEvent
+
+    HooksProgressEvent.member = Shapes::ShapeRef.new(shape: HookProgressEvent)
 
     InvalidCredentialsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InvalidCredentialsException.struct_class = Types::InvalidCredentialsException
@@ -186,6 +205,7 @@ module Aws::CloudControlApi
     ProgressEvent.add_member(:type_name, Shapes::ShapeRef.new(shape: TypeName, location_name: "TypeName"))
     ProgressEvent.add_member(:identifier, Shapes::ShapeRef.new(shape: Identifier, location_name: "Identifier"))
     ProgressEvent.add_member(:request_token, Shapes::ShapeRef.new(shape: RequestToken, location_name: "RequestToken"))
+    ProgressEvent.add_member(:hooks_request_token, Shapes::ShapeRef.new(shape: RequestToken, location_name: "HooksRequestToken"))
     ProgressEvent.add_member(:operation, Shapes::ShapeRef.new(shape: Operation, location_name: "Operation"))
     ProgressEvent.add_member(:operation_status, Shapes::ShapeRef.new(shape: OperationStatus, location_name: "OperationStatus"))
     ProgressEvent.add_member(:event_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EventTime"))
@@ -250,9 +270,11 @@ module Aws::CloudControlApi
 
       api.metadata = {
         "apiVersion" => "2021-09-30",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "cloudcontrolapi",
         "jsonVersion" => "1.0",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "CloudControlApi",
         "serviceFullName" => "AWS Cloud Control API",
         "serviceId" => "CloudControl",

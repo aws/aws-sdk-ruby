@@ -814,9 +814,9 @@ module Aws::RedshiftServerless
     #   A JSON format string of the Amazon Redshift Serverless API operation
     #   with input parameters. The following is an example of a target action.
     #
-    #   `"\{"CreateSnapshot": \{"NamespaceName":
+    #   `"{"CreateSnapshot": {"NamespaceName":
     #   "sampleNamespace","SnapshotName": "sampleSnapshot", "retentionPeriod":
-    #   "1"\}\}"`
+    #   "1"}}"`
     #
     # @return [Types::CreateScheduledActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2763,11 +2763,11 @@ module Aws::RedshiftServerless
     #   The policy to create or update. For example, the following policy
     #   grants a user authorization to restore a snapshot.
     #
-    #   `"\{"Version": "2012-10-17", "Statement" : [\{ "Sid":
-    #   "AllowUserRestoreFromSnapshot", "Principal":\{"AWS":
-    #   ["739247239426"]\}, "Action":
+    #   `"{"Version": "2012-10-17", "Statement" : [{ "Sid":
+    #   "AllowUserRestoreFromSnapshot", "Principal":{"AWS":
+    #   ["739247239426"]}, "Action":
     #   ["redshift-serverless:RestoreFromSnapshot"] , "Effect": "Allow"
-    #   \}]\}"`
+    #   }]}"`
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the account to create or update a
@@ -3403,9 +3403,9 @@ module Aws::RedshiftServerless
     #   A JSON format string of the Amazon Redshift Serverless API operation
     #   with input parameters. The following is an example of a target action.
     #
-    #   `"\{"CreateSnapshot": \{"NamespaceName":
+    #   `"{"CreateSnapshot": {"NamespaceName":
     #   "sampleNamespace","SnapshotName": "sampleSnapshot", "retentionPeriod":
-    #   "1"\}\}"`
+    #   "1"}}"`
     #
     # @return [Types::UpdateScheduledActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3763,7 +3763,7 @@ module Aws::RedshiftServerless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-redshiftserverless'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

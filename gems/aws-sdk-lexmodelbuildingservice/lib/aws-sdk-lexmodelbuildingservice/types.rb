@@ -3474,8 +3474,8 @@ module Aws::LexModelBuildingService
     #
     # @!attribute [rw] sample_utterances
     #   An array of utterances (strings) that a user might say to signal the
-    #   intent. For example, "I want \\\{PizzaSize\\} pizza", "Order
-    #   \\\{Quantity\\} \\\{PizzaSize\\} pizzas".
+    #   intent. For example, "I want \{PizzaSize} pizza", "Order
+    #   \{Quantity} \{PizzaSize} pizzas".
     #
     #   In each utterance, a slot name is enclosed in curly braces.
     #   @return [Array<String>]
@@ -3942,11 +3942,11 @@ module Aws::LexModelBuildingService
     # The body of the exception contains a JSON object that describes the
     # resource.
     #
-    # `\{ "resourceType": BOT | BOTALIAS | BOTCHANNEL | INTENT,`
+    # `{ "resourceType": BOT | BOTALIAS | BOTCHANNEL | INTENT,`
     #
-    # `"resourceReference": \{`
+    # `"resourceReference": {`
     #
-    # `"name": string, "version": string \} \}`
+    # `"name": string, "version": string } }`
     #
     # @!attribute [rw] reference_type
     #   @return [String]
@@ -4043,9 +4043,9 @@ module Aws::LexModelBuildingService
     # @!attribute [rw] obfuscation_setting
     #   Determines whether a slot is obfuscated in conversation logs and
     #   stored utterances. When you obfuscate a slot, the value is replaced
-    #   by the slot name in curly braces (\\\{\\}). For example, if the slot
+    #   by the slot name in curly braces (\{}). For example, if the slot
     #   name is "full\_name", obfuscated values are replaced with
-    #   "\\\{full\_name\\}". For more information, see [ Slot Obfuscation
+    #   "\{full\_name}". For more information, see [ Slot Obfuscation
     #   ][1].
     #
     #
@@ -4087,7 +4087,7 @@ module Aws::LexModelBuildingService
     #   * `#context-name.slot-name` - The slot value "slot-name" in the
     #     context "context-name."
     #
-    #   * `\{attribute\}` - The slot value of the session attribute
+    #   * `{attribute}` - The slot value of the session attribute
     #     "attribute."
     #
     #   * `'value'` - The discrete value "value."
@@ -4191,7 +4191,7 @@ module Aws::LexModelBuildingService
     #
     #   The following regular expression operators are not supported:
     #
-    #   * Infinite repeaters: *, +, or \\\{x,\\} with no upper bound.
+    #   * Infinite repeaters: *, +, or \{x,} with no upper bound.
     #
     #   * Wild card (.)
     #   @return [String]

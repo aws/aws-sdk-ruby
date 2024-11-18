@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2024-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.73.0 (2024-11-15)
+------------------
+
+* Feature - Route 53 Resolver DNS Firewall Advanced Rules allows you to monitor and block suspicious DNS traffic based on anomalies detected in the queries, such as DNS tunneling and Domain Generation Algorithms (DGAs).
+
 1.72.0 (2024-10-18)
 ------------------
 

@@ -273,6 +273,7 @@ module Aws
         def error_message: () -> ::String
         def delivery_s3_uri: () -> ::String
         def delivery_status: () -> ("SUCCESS" | "FAILED" | "FAILED_SIGNING_FILE" | "PENDING" | "RESOURCE_NOT_FOUND" | "ACCESS_DENIED" | "ACCESS_DENIED_SIGNING_FILE" | "CANCELLED" | "UNKNOWN")
+        def prompt: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#describe_query-instance_method
       def describe_query: (
@@ -316,6 +317,18 @@ module Aws
                                federation_role_arn: ::String
                              ) -> _EnableFederationResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableFederationResponseSuccess
+
+      interface _GenerateQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GenerateQueryResponse]
+        def query_statement: () -> ::String
+        def query_alias: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#generate_query-instance_method
+      def generate_query: (
+                            event_data_stores: Array[::String],
+                            prompt: ::String
+                          ) -> _GenerateQueryResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GenerateQueryResponseSuccess
 
       interface _GetChannelResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetChannelResponse]

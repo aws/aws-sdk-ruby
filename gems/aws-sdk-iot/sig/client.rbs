@@ -174,7 +174,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT/Client.html#attach_thing_principal-instance_method
       def attach_thing_principal: (
                                     thing_name: ::String,
-                                    principal: ::String
+                                    principal: ::String,
+                                    ?thing_principal_type: ("EXCLUSIVE_THING" | "NON_EXCLUSIVE_THING")
                                   ) -> _AttachThingPrincipalResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AttachThingPrincipalResponseSuccess
 
@@ -428,7 +429,9 @@ module Aws
                                            security_policy: ::String?
                                          },
                                          ?server_certificate_config: {
-                                           enable_ocsp_check: bool?
+                                           enable_ocsp_check: bool?,
+                                           ocsp_lambda_arn: ::String?,
+                                           ocsp_authorized_responder_arn: ::String?
                                          },
                                          ?authentication_type: ("CUSTOM_AUTH_X509" | "CUSTOM_AUTH" | "AWS_X509" | "AWS_SIGV4" | "DEFAULT"),
                                          ?application_protocol: ("SECURE_MQTT" | "MQTT_WSS" | "HTTPS" | "DEFAULT"),
@@ -1116,7 +1119,16 @@ module Aws
                                thing_type_name: ::String,
                                ?thing_type_properties: {
                                  thing_type_description: ::String?,
-                                 searchable_attributes: Array[::String]?
+                                 searchable_attributes: Array[::String]?,
+                                 mqtt5_configuration: {
+                                   propagating_attributes: Array[
+                                     {
+                                       user_property_key: ::String?,
+                                       thing_attribute: ::String?,
+                                       connection_attribute: ::String?
+                                     },
+                                   ]?
+                                 }?
                                },
                                ?tags: Array[
                                  {
@@ -3254,6 +3266,20 @@ module Aws
                                  ) -> _ListPrincipalThingsResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPrincipalThingsResponseSuccess
 
+      interface _ListPrincipalThingsV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPrincipalThingsV2Response]
+        def principal_thing_objects: () -> ::Array[Types::PrincipalThingObject]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT/Client.html#list_principal_things_v2-instance_method
+      def list_principal_things_v2: (
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer,
+                                      principal: ::String,
+                                      ?thing_principal_type: ("EXCLUSIVE_THING" | "NON_EXCLUSIVE_THING")
+                                    ) -> _ListPrincipalThingsV2ResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPrincipalThingsV2ResponseSuccess
+
       interface _ListProvisioningTemplateVersionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListProvisioningTemplateVersionsResponse]
         def versions: () -> ::Array[Types::ProvisioningTemplateVersionSummary]
@@ -3451,6 +3477,20 @@ module Aws
                                    thing_name: ::String
                                  ) -> _ListThingPrincipalsResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListThingPrincipalsResponseSuccess
+
+      interface _ListThingPrincipalsV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListThingPrincipalsV2Response]
+        def thing_principal_objects: () -> ::Array[Types::ThingPrincipalObject]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT/Client.html#list_thing_principals_v2-instance_method
+      def list_thing_principals_v2: (
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer,
+                                      thing_name: ::String,
+                                      ?thing_principal_type: ("EXCLUSIVE_THING" | "NON_EXCLUSIVE_THING")
+                                    ) -> _ListThingPrincipalsV2ResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListThingPrincipalsV2ResponseSuccess
 
       interface _ListThingRegistrationTaskReportsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListThingRegistrationTaskReportsResponse]
@@ -4502,7 +4542,9 @@ module Aws
                                            security_policy: ::String?
                                          },
                                          ?server_certificate_config: {
-                                           enable_ocsp_check: bool?
+                                           enable_ocsp_check: bool?,
+                                           ocsp_lambda_arn: ::String?,
+                                           ocsp_authorized_responder_arn: ::String?
                                          },
                                          ?authentication_type: ("CUSTOM_AUTH_X509" | "CUSTOM_AUTH" | "AWS_X509" | "AWS_SIGV4" | "DEFAULT"),
                                          ?application_protocol: ("SECURE_MQTT" | "MQTT_WSS" | "HTTPS" | "DEFAULT"),
@@ -4930,6 +4972,28 @@ module Aws
                                            ?override_dynamic_groups: bool
                                          ) -> _UpdateThingGroupsForThingResponseSuccess
                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateThingGroupsForThingResponseSuccess
+
+      interface _UpdateThingTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateThingTypeResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT/Client.html#update_thing_type-instance_method
+      def update_thing_type: (
+                               thing_type_name: ::String,
+                               ?thing_type_properties: {
+                                 thing_type_description: ::String?,
+                                 searchable_attributes: Array[::String]?,
+                                 mqtt5_configuration: {
+                                   propagating_attributes: Array[
+                                     {
+                                       user_property_key: ::String?,
+                                       thing_attribute: ::String?,
+                                       connection_attribute: ::String?
+                                     },
+                                   ]?
+                                 }?
+                               }
+                             ) -> _UpdateThingTypeResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateThingTypeResponseSuccess
 
       interface _UpdateTopicRuleDestinationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTopicRuleDestinationResponse]

@@ -11,8 +11,6 @@ module Aws
 
       N_MINUS_2 = 0xFFFFFFFF00000000FFFFFFFFFFFFFFFFBCE6FAADA7179E84F3B9CAC2FC632551 - 2
 
-      # @param [String] :access_key_id
-      # @param [String] :secret_access_key
       # @return [OpenSSL::PKey::EC, Hash]
       def self.derive_asymmetric_key(access_key_id, secret_access_key)
         check_openssl_support!

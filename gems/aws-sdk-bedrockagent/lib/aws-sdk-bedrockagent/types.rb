@@ -898,6 +898,21 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
+    # Defines tools, at least one of which must be requested by the model.
+    # No text is generated but the results of tool use are sent back to the
+    # model to help generate a response. For more information, see [Use a
+    # tool to complete an Amazon Bedrock model response][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/AnyToolChoice AWS API Documentation
+    #
+    class AnyToolChoice < Aws::EmptyStructure; end
+
     # @!attribute [rw] agent_id
     #   The unique identifier of the agent with which you want to associate
     #   the knowledge base.
@@ -951,6 +966,20 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
+    # Defines tools. The model automatically decides whether to call a tool
+    # or to generate text instead. For more information, see [Use a tool to
+    # complete an Amazon Bedrock model response][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/AutoToolChoice AWS API Documentation
+    #
+    class AutoToolChoice < Aws::EmptyStructure; end
+
     # The vector configuration details for the Bedrock embeddings model.
     #
     # @!attribute [rw] dimensions
@@ -991,6 +1020,43 @@ module Aws::BedrockAgent
       :model_arn,
       :parsing_prompt)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains configurations to use a prompt in a conversational format.
+    # For more information, see [Create a prompt using Prompt
+    # management][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html
+    #
+    # @!attribute [rw] input_variables
+    #   An array of the variables in the prompt template.
+    #   @return [Array<Types::PromptInputVariable>]
+    #
+    # @!attribute [rw] messages
+    #   Contains messages in the chat for the prompt.
+    #   @return [Array<Types::Message>]
+    #
+    # @!attribute [rw] system
+    #   Contains system prompts to provide context to the model or to
+    #   describe how it should behave.
+    #   @return [Array<Types::SystemContentBlock>]
+    #
+    # @!attribute [rw] tool_configuration
+    #   Configuration information for the tools that the model can use when
+    #   generating a response.
+    #   @return [Types::ToolConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ChatPromptTemplateConfiguration AWS API Documentation
+    #
+    class ChatPromptTemplateConfiguration < Struct.new(
+      :input_variables,
+      :messages,
+      :system,
+      :tool_configuration)
+      SENSITIVE = [:input_variables, :system]
       include Aws::Structure
     end
 
@@ -1176,6 +1242,35 @@ module Aws::BedrockAgent
       :host_url)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Contains the content for the message you pass to, or receive from a
+    # model. For more information, see [Create a prompt using Prompt
+    # management][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html
+    #
+    # @note ContentBlock is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ContentBlock is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ContentBlock corresponding to the set member.
+    #
+    # @!attribute [rw] text
+    #   The text in the message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ContentBlock AWS API Documentation
+    #
+    class ContentBlock < Struct.new(
+      :text,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Text < ContentBlock; end
+      class Unknown < ContentBlock; end
     end
 
     # The configuration of filtering the data source content. For example,
@@ -2262,6 +2357,20 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
+    # Details about a cyclic connection detected in the flow.
+    #
+    # @!attribute [rw] connection
+    #   The name of the connection that causes the cycle in the flow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CyclicConnectionFlowValidationDetails AWS API Documentation
+    #
+    class CyclicConnectionFlowValidationDetails < Struct.new(
+      :connection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains details about a data source.
     #
     # @!attribute [rw] created_at
@@ -2838,6 +2947,46 @@ module Aws::BedrockAgent
     #
     class DisassociateAgentKnowledgeBaseResponse < Aws::EmptyStructure; end
 
+    # Details about duplicate condition expressions found in a condition
+    # node.
+    #
+    # @!attribute [rw] expression
+    #   The duplicated condition expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] node
+    #   The name of the node containing the duplicate condition expressions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DuplicateConditionExpressionFlowValidationDetails AWS API Documentation
+    #
+    class DuplicateConditionExpressionFlowValidationDetails < Struct.new(
+      :expression,
+      :node)
+      SENSITIVE = [:expression]
+      include Aws::Structure
+    end
+
+    # Details about duplicate connections found between two nodes in the
+    # flow.
+    #
+    # @!attribute [rw] source
+    #   The name of the source node where the duplicate connection starts.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The name of the target node where the duplicate connection ends.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DuplicateConnectionsFlowValidationDetails AWS API Documentation
+    #
+    class DuplicateConnectionsFlowValidationDetails < Struct.new(
+      :source,
+      :target)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration details for the embeddings model.
     #
     # @!attribute [rw] bedrock_embedding_model_configuration
@@ -3387,6 +3536,10 @@ module Aws::BedrockAgent
     # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetFlow.html#API_agent_GetFlow_ResponseSyntax
     # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetFlowVersion.html#API_agent_GetFlowVersion_ResponseSyntax
     #
+    # @!attribute [rw] details
+    #   Specific details about the validation issue encountered in the flow.
+    #   @return [Types::FlowValidationDetails]
+    #
     # @!attribute [rw] message
     #   A message describing the validation error.
     #   @return [String]
@@ -3395,13 +3548,185 @@ module Aws::BedrockAgent
     #   The severity of the issue described in the message.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   The type of validation issue encountered in the flow.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/FlowValidation AWS API Documentation
     #
     class FlowValidation < Struct.new(
+      :details,
       :message,
-      :severity)
+      :severity,
+      :type)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # A union type containing various possible validation issues in the
+    # flow.
+    #
+    # @note FlowValidationDetails is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of FlowValidationDetails corresponding to the set member.
+    #
+    # @!attribute [rw] cyclic_connection
+    #   Details about a cyclic connection in the flow.
+    #   @return [Types::CyclicConnectionFlowValidationDetails]
+    #
+    # @!attribute [rw] duplicate_condition_expression
+    #   Details about duplicate condition expressions in a node.
+    #   @return [Types::DuplicateConditionExpressionFlowValidationDetails]
+    #
+    # @!attribute [rw] duplicate_connections
+    #   Details about duplicate connections between nodes.
+    #   @return [Types::DuplicateConnectionsFlowValidationDetails]
+    #
+    # @!attribute [rw] incompatible_connection_data_type
+    #   Details about incompatible data types in a connection.
+    #   @return [Types::IncompatibleConnectionDataTypeFlowValidationDetails]
+    #
+    # @!attribute [rw] malformed_condition_expression
+    #   Details about a malformed condition expression in a node.
+    #   @return [Types::MalformedConditionExpressionFlowValidationDetails]
+    #
+    # @!attribute [rw] malformed_node_input_expression
+    #   Details about a malformed input expression in a node.
+    #   @return [Types::MalformedNodeInputExpressionFlowValidationDetails]
+    #
+    # @!attribute [rw] mismatched_node_input_type
+    #   Details about mismatched input data types in a node.
+    #   @return [Types::MismatchedNodeInputTypeFlowValidationDetails]
+    #
+    # @!attribute [rw] mismatched_node_output_type
+    #   Details about mismatched output data types in a node.
+    #   @return [Types::MismatchedNodeOutputTypeFlowValidationDetails]
+    #
+    # @!attribute [rw] missing_connection_configuration
+    #   Details about missing configuration for a connection.
+    #   @return [Types::MissingConnectionConfigurationFlowValidationDetails]
+    #
+    # @!attribute [rw] missing_default_condition
+    #   Details about a missing default condition in a conditional node.
+    #   @return [Types::MissingDefaultConditionFlowValidationDetails]
+    #
+    # @!attribute [rw] missing_ending_nodes
+    #   Details about missing ending nodes in the flow.
+    #   @return [Types::MissingEndingNodesFlowValidationDetails]
+    #
+    # @!attribute [rw] missing_node_configuration
+    #   Details about missing configuration for a node.
+    #   @return [Types::MissingNodeConfigurationFlowValidationDetails]
+    #
+    # @!attribute [rw] missing_node_input
+    #   Details about a missing required input in a node.
+    #   @return [Types::MissingNodeInputFlowValidationDetails]
+    #
+    # @!attribute [rw] missing_node_output
+    #   Details about a missing required output in a node.
+    #   @return [Types::MissingNodeOutputFlowValidationDetails]
+    #
+    # @!attribute [rw] missing_starting_nodes
+    #   Details about missing starting nodes in the flow.
+    #   @return [Types::MissingStartingNodesFlowValidationDetails]
+    #
+    # @!attribute [rw] multiple_node_input_connections
+    #   Details about multiple connections to a single node input.
+    #   @return [Types::MultipleNodeInputConnectionsFlowValidationDetails]
+    #
+    # @!attribute [rw] unfulfilled_node_input
+    #   Details about an unfulfilled node input with no valid connections.
+    #   @return [Types::UnfulfilledNodeInputFlowValidationDetails]
+    #
+    # @!attribute [rw] unknown_connection_condition
+    #   Details about an unknown condition for a connection.
+    #   @return [Types::UnknownConnectionConditionFlowValidationDetails]
+    #
+    # @!attribute [rw] unknown_connection_source
+    #   Details about an unknown source node for a connection.
+    #   @return [Types::UnknownConnectionSourceFlowValidationDetails]
+    #
+    # @!attribute [rw] unknown_connection_source_output
+    #   Details about an unknown source output for a connection.
+    #   @return [Types::UnknownConnectionSourceOutputFlowValidationDetails]
+    #
+    # @!attribute [rw] unknown_connection_target
+    #   Details about an unknown target node for a connection.
+    #   @return [Types::UnknownConnectionTargetFlowValidationDetails]
+    #
+    # @!attribute [rw] unknown_connection_target_input
+    #   Details about an unknown target input for a connection.
+    #   @return [Types::UnknownConnectionTargetInputFlowValidationDetails]
+    #
+    # @!attribute [rw] unreachable_node
+    #   Details about an unreachable node in the flow.
+    #   @return [Types::UnreachableNodeFlowValidationDetails]
+    #
+    # @!attribute [rw] unsatisfied_connection_conditions
+    #   Details about unsatisfied conditions for a connection.
+    #   @return [Types::UnsatisfiedConnectionConditionsFlowValidationDetails]
+    #
+    # @!attribute [rw] unspecified
+    #   Details about an unspecified validation.
+    #   @return [Types::UnspecifiedFlowValidationDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/FlowValidationDetails AWS API Documentation
+    #
+    class FlowValidationDetails < Struct.new(
+      :cyclic_connection,
+      :duplicate_condition_expression,
+      :duplicate_connections,
+      :incompatible_connection_data_type,
+      :malformed_condition_expression,
+      :malformed_node_input_expression,
+      :mismatched_node_input_type,
+      :mismatched_node_output_type,
+      :missing_connection_configuration,
+      :missing_default_condition,
+      :missing_ending_nodes,
+      :missing_node_configuration,
+      :missing_node_input,
+      :missing_node_output,
+      :missing_starting_nodes,
+      :multiple_node_input_connections,
+      :unfulfilled_node_input,
+      :unknown_connection_condition,
+      :unknown_connection_source,
+      :unknown_connection_source_output,
+      :unknown_connection_target,
+      :unknown_connection_target_input,
+      :unreachable_node,
+      :unsatisfied_connection_conditions,
+      :unspecified,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class CyclicConnection < FlowValidationDetails; end
+      class DuplicateConditionExpression < FlowValidationDetails; end
+      class DuplicateConnections < FlowValidationDetails; end
+      class IncompatibleConnectionDataType < FlowValidationDetails; end
+      class MalformedConditionExpression < FlowValidationDetails; end
+      class MalformedNodeInputExpression < FlowValidationDetails; end
+      class MismatchedNodeInputType < FlowValidationDetails; end
+      class MismatchedNodeOutputType < FlowValidationDetails; end
+      class MissingConnectionConfiguration < FlowValidationDetails; end
+      class MissingDefaultCondition < FlowValidationDetails; end
+      class MissingEndingNodes < FlowValidationDetails; end
+      class MissingNodeConfiguration < FlowValidationDetails; end
+      class MissingNodeInput < FlowValidationDetails; end
+      class MissingNodeOutput < FlowValidationDetails; end
+      class MissingStartingNodes < FlowValidationDetails; end
+      class MultipleNodeInputConnections < FlowValidationDetails; end
+      class UnfulfilledNodeInput < FlowValidationDetails; end
+      class UnknownConnectionCondition < FlowValidationDetails; end
+      class UnknownConnectionSource < FlowValidationDetails; end
+      class UnknownConnectionSourceOutput < FlowValidationDetails; end
+      class UnknownConnectionTarget < FlowValidationDetails; end
+      class UnknownConnectionTargetInput < FlowValidationDetails; end
+      class UnreachableNode < FlowValidationDetails; end
+      class UnsatisfiedConnectionConditions < FlowValidationDetails; end
+      class Unspecified < FlowValidationDetails; end
+      class Unknown < FlowValidationDetails; end
     end
 
     # Contains information about a version of a flow.
@@ -4132,7 +4457,7 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Details about the guardrail associated with an agent.
+    # Details about a guardrail associated with a resource.
     #
     # @!attribute [rw] guardrail_identifier
     #   The unique identifier of the guardrail.
@@ -4189,6 +4514,20 @@ module Aws::BedrockAgent
     #
     class HierarchicalChunkingLevelConfiguration < Struct.new(
       :max_tokens)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about incompatible data types in a connection between nodes.
+    #
+    # @!attribute [rw] connection
+    #   The name of the connection with incompatible data types.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/IncompatibleConnectionDataTypeFlowValidationDetails AWS API Documentation
+    #
+    class IncompatibleConnectionDataTypeFlowValidationDetails < Struct.new(
+      :connection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4629,6 +4968,11 @@ module Aws::BedrockAgent
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html
     #
+    # @!attribute [rw] guardrail_configuration
+    #   Contains configurations for a guardrail to apply during query and
+    #   response generation for the knowledge base in this configuration.
+    #   @return [Types::GuardrailConfiguration]
+    #
     # @!attribute [rw] knowledge_base_id
     #   The unique identifier of the knowledge base to query.
     #   @return [String]
@@ -4646,6 +4990,7 @@ module Aws::BedrockAgent
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/KnowledgeBaseFlowNodeConfiguration AWS API Documentation
     #
     class KnowledgeBaseFlowNodeConfiguration < Struct.new(
+      :guardrail_configuration,
       :knowledge_base_id,
       :model_id)
       SENSITIVE = []
@@ -5363,6 +5708,55 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
+    # Details about a malformed condition expression in a node.
+    #
+    # @!attribute [rw] cause
+    #   The error message describing why the condition expression is
+    #   malformed.
+    #   @return [String]
+    #
+    # @!attribute [rw] condition
+    #   The name of the malformed condition.
+    #   @return [String]
+    #
+    # @!attribute [rw] node
+    #   The name of the node containing the malformed condition expression.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/MalformedConditionExpressionFlowValidationDetails AWS API Documentation
+    #
+    class MalformedConditionExpressionFlowValidationDetails < Struct.new(
+      :cause,
+      :condition,
+      :node)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about a malformed input expression in a node.
+    #
+    # @!attribute [rw] cause
+    #   The error message describing why the input expression is malformed.
+    #   @return [String]
+    #
+    # @!attribute [rw] input
+    #   The name of the input with the malformed expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] node
+    #   The name of the node containing the malformed input expression.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/MalformedNodeInputExpressionFlowValidationDetails AWS API Documentation
+    #
+    class MalformedNodeInputExpressionFlowValidationDetails < Struct.new(
+      :cause,
+      :input,
+      :node)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details of the memory configuration.
     #
     # @!attribute [rw] enabled_memory_types
@@ -5382,6 +5776,174 @@ module Aws::BedrockAgent
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # A message input or response from a model. For more information, see
+    # [Create a prompt using Prompt management][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html
+    #
+    # @!attribute [rw] content
+    #   The content in the message.
+    #   @return [Array<Types::ContentBlock>]
+    #
+    # @!attribute [rw] role
+    #   The role that the message belongs to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/Message AWS API Documentation
+    #
+    class Message < Struct.new(
+      :content,
+      :role)
+      SENSITIVE = [:content]
+      include Aws::Structure
+    end
+
+    # Details about mismatched input data types in a node.
+    #
+    # @!attribute [rw] expected_type
+    #   The expected data type for the node input.
+    #   @return [String]
+    #
+    # @!attribute [rw] input
+    #   The name of the input with the mismatched data type.
+    #   @return [String]
+    #
+    # @!attribute [rw] node
+    #   The name of the node containing the input with the mismatched data
+    #   type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/MismatchedNodeInputTypeFlowValidationDetails AWS API Documentation
+    #
+    class MismatchedNodeInputTypeFlowValidationDetails < Struct.new(
+      :expected_type,
+      :input,
+      :node)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about mismatched output data types in a node.
+    #
+    # @!attribute [rw] expected_type
+    #   The expected data type for the node output.
+    #   @return [String]
+    #
+    # @!attribute [rw] node
+    #   The name of the node containing the output with the mismatched data
+    #   type.
+    #   @return [String]
+    #
+    # @!attribute [rw] output
+    #   The name of the output with the mismatched data type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/MismatchedNodeOutputTypeFlowValidationDetails AWS API Documentation
+    #
+    class MismatchedNodeOutputTypeFlowValidationDetails < Struct.new(
+      :expected_type,
+      :node,
+      :output)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about a connection missing required configuration.
+    #
+    # @!attribute [rw] connection
+    #   The name of the connection missing configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/MissingConnectionConfigurationFlowValidationDetails AWS API Documentation
+    #
+    class MissingConnectionConfigurationFlowValidationDetails < Struct.new(
+      :connection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about a missing default condition in a conditional node.
+    #
+    # @!attribute [rw] node
+    #   The name of the node missing the default condition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/MissingDefaultConditionFlowValidationDetails AWS API Documentation
+    #
+    class MissingDefaultConditionFlowValidationDetails < Struct.new(
+      :node)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about missing ending nodes (such as FlowOutputNode) in the
+    # flow.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/MissingEndingNodesFlowValidationDetails AWS API Documentation
+    #
+    class MissingEndingNodesFlowValidationDetails < Aws::EmptyStructure; end
+
+    # Details about a node missing required configuration.
+    #
+    # @!attribute [rw] node
+    #   The name of the node missing configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/MissingNodeConfigurationFlowValidationDetails AWS API Documentation
+    #
+    class MissingNodeConfigurationFlowValidationDetails < Struct.new(
+      :node)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about a missing required input in a node.
+    #
+    # @!attribute [rw] input
+    #   The name of the missing input.
+    #   @return [String]
+    #
+    # @!attribute [rw] node
+    #   The name of the node missing the required input.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/MissingNodeInputFlowValidationDetails AWS API Documentation
+    #
+    class MissingNodeInputFlowValidationDetails < Struct.new(
+      :input,
+      :node)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about a missing required output in a node.
+    #
+    # @!attribute [rw] node
+    #   The name of the node missing the required output.
+    #   @return [String]
+    #
+    # @!attribute [rw] output
+    #   The name of the missing output.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/MissingNodeOutputFlowValidationDetails AWS API Documentation
+    #
+    class MissingNodeOutputFlowValidationDetails < Struct.new(
+      :node,
+      :output)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about missing starting nodes (such as FlowInputNode) in the
+    # flow.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/MissingStartingNodesFlowValidationDetails AWS API Documentation
+    #
+    class MissingStartingNodesFlowValidationDetails < Aws::EmptyStructure; end
 
     # Contains details about the storage configuration of the knowledge base
     # in MongoDB Atlas.
@@ -5459,6 +6021,25 @@ module Aws::BedrockAgent
       :metadata_field,
       :text_field,
       :vector_field)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about multiple connections to a single node input.
+    #
+    # @!attribute [rw] input
+    #   The name of the input with multiple connections to it.
+    #   @return [String]
+    #
+    # @!attribute [rw] node
+    #   The name of the node containing the input with multiple connections.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/MultipleNodeInputConnectionsFlowValidationDetails AWS API Documentation
+    #
+    class MultipleNodeInputConnectionsFlowValidationDetails < Struct.new(
+      :input,
+      :node)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5821,6 +6402,28 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
+    # Contains specifications for an Amazon Bedrock agent with which to use
+    # the prompt. For more information, see [Create a prompt using Prompt
+    # management][1] and [Automate tasks in your application using
+    # conversational agents][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html
+    #
+    # @!attribute [rw] agent_identifier
+    #   The ARN of the agent with which to use the prompt.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/PromptAgentResource AWS API Documentation
+    #
+    class PromptAgentResource < Struct.new(
+      :agent_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains configurations to override a prompt template in one part of
     # an agent sequence. For more information, see [Advanced prompts][1].
     #
@@ -5916,6 +6519,11 @@ module Aws::BedrockAgent
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html
     #
+    # @!attribute [rw] guardrail_configuration
+    #   Contains configurations for a guardrail to apply to the prompt in
+    #   this node and the response generated from it.
+    #   @return [Types::GuardrailConfiguration]
+    #
     # @!attribute [rw] source_configuration
     #   Specifies whether the prompt is from Prompt management or defined
     #   inline.
@@ -5924,6 +6532,7 @@ module Aws::BedrockAgent
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/PromptFlowNodeConfiguration AWS API Documentation
     #
     class PromptFlowNodeConfiguration < Struct.new(
+      :guardrail_configuration,
       :source_configuration)
       SENSITIVE = []
       include Aws::Structure
@@ -5932,14 +6541,8 @@ module Aws::BedrockAgent
     # Contains configurations for a prompt defined inline in the node.
     #
     # @!attribute [rw] additional_model_request_fields
-    #   Contains model-specific inference configurations that aren't in the
-    #   `inferenceConfiguration` field. To see model-specific inference
-    #   parameters, see [Inference request parameters and response fields
-    #   for foundation models][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
+    #   Additional fields to be included in the model request for the Prompt
+    #   node.
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @!attribute [rw] inference_configuration
@@ -6019,6 +6622,35 @@ module Aws::BedrockAgent
       class Inline < PromptFlowNodeSourceConfiguration; end
       class Resource < PromptFlowNodeSourceConfiguration; end
       class Unknown < PromptFlowNodeSourceConfiguration; end
+    end
+
+    # Contains specifications for a generative AI resource with which to use
+    # the prompt. For more information, see [Create a prompt using Prompt
+    # management][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html
+    #
+    # @note PromptGenAiResource is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note PromptGenAiResource is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of PromptGenAiResource corresponding to the set member.
+    #
+    # @!attribute [rw] agent
+    #   Specifies an Amazon Bedrock agent with which to use the prompt.
+    #   @return [Types::PromptAgentResource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/PromptGenAiResource AWS API Documentation
+    #
+    class PromptGenAiResource < Struct.new(
+      :agent,
+      :unknown)
+      SENSITIVE = [:agent]
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Agent < PromptGenAiResource; end
+      class Unknown < PromptGenAiResource; end
     end
 
     # Contains inference configurations for the prompt.
@@ -6214,8 +6846,9 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Contains the message for a prompt. For more information, see [Prompt
-    # management in Amazon Bedrock][1].
+    # Contains the message for a prompt. For more information, see
+    # [Construct and store reusable prompts with Prompt management in Amazon
+    # Bedrock][1].
     #
     #
     #
@@ -6225,6 +6858,11 @@ module Aws::BedrockAgent
     #
     # @note PromptTemplateConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of PromptTemplateConfiguration corresponding to the set member.
     #
+    # @!attribute [rw] chat
+    #   Contains configurations to use the prompt in a conversational
+    #   format.
+    #   @return [Types::ChatPromptTemplateConfiguration]
+    #
     # @!attribute [rw] text
     #   Contains configurations for the text in a message for a prompt.
     #   @return [Types::TextPromptTemplateConfiguration]
@@ -6232,12 +6870,14 @@ module Aws::BedrockAgent
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/PromptTemplateConfiguration AWS API Documentation
     #
     class PromptTemplateConfiguration < Struct.new(
+      :chat,
       :text,
       :unknown)
-      SENSITIVE = [:text]
+      SENSITIVE = [:chat, :text]
       include Aws::Structure
       include Aws::Structure::Union
 
+      class Chat < PromptTemplateConfiguration; end
       class Text < PromptTemplateConfiguration; end
       class Unknown < PromptTemplateConfiguration; end
     end
@@ -6255,18 +6895,17 @@ module Aws::BedrockAgent
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
+    # @!attribute [rw] gen_ai_resource
+    #   Specifies a generative AI resource with which to use the prompt.
+    #   @return [Types::PromptGenAiResource]
+    #
     # @!attribute [rw] inference_configuration
     #   Contains inference configurations for the prompt variant.
     #   @return [Types::PromptInferenceConfiguration]
     #
     # @!attribute [rw] metadata
     #   An array of objects, each containing a key-value pair that defines a
-    #   metadata tag and value to attach to a prompt variant. For more
-    #   information, see [Create a prompt using Prompt management][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html
+    #   metadata tag and value to attach to a prompt variant.
     #   @return [Array<Types::PromptMetadataEntry>]
     #
     # @!attribute [rw] model_id
@@ -6294,13 +6933,14 @@ module Aws::BedrockAgent
     #
     class PromptVariant < Struct.new(
       :additional_model_request_fields,
+      :gen_ai_resource,
       :inference_configuration,
       :metadata,
       :model_id,
       :name,
       :template_configuration,
       :template_type)
-      SENSITIVE = [:metadata]
+      SENSITIVE = [:gen_ai_resource, :metadata]
       include Aws::Structure
     end
 
@@ -6827,6 +7467,27 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
+    # Defines a specific tool that the model must request. No text is
+    # generated but the results of tool use are sent back to the model to
+    # help generate a response. For more information, see [Use a tool to
+    # complete an Amazon Bedrock model response][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
+    #
+    # @!attribute [rw] name
+    #   The name of the tool.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/SpecificToolChoice AWS API Documentation
+    #
+    class SpecificToolChoice < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier to ensure that the API request
     #   completes no more than one time. If this token matches a previous
@@ -7020,6 +7681,35 @@ module Aws::BedrockAgent
       class Unknown < StorageFlowNodeServiceConfiguration; end
     end
 
+    # Contains a system prompt to provide context to the model or to
+    # describe how it should behave. For more information, see [Create a
+    # prompt using Prompt management][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html
+    #
+    # @note SystemContentBlock is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note SystemContentBlock is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of SystemContentBlock corresponding to the set member.
+    #
+    # @!attribute [rw] text
+    #   The text in the system prompt.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/SystemContentBlock AWS API Documentation
+    #
+    class SystemContentBlock < Struct.new(
+      :text,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Text < SystemContentBlock; end
+      class Unknown < SystemContentBlock; end
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to tag.
     #   @return [String]
@@ -7043,8 +7733,7 @@ module Aws::BedrockAgent
     class TagResourceResponse < Aws::EmptyStructure; end
 
     # Contains configurations for a text prompt template. To include a
-    # variable, enclose a word in double curly braces as in
-    # `\{\{variable\}\}`.
+    # variable, enclose a word in double curly braces as in `{{variable}}`.
     #
     # @!attribute [rw] input_variables
     #   An array of the variables in the prompt template.
@@ -7072,6 +7761,163 @@ module Aws::BedrockAgent
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains configurations for a tool that a model can use when
+    # generating a response. For more information, see [Use a tool to
+    # complete an Amazon Bedrock model response][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
+    #
+    # @note Tool is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note Tool is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Tool corresponding to the set member.
+    #
+    # @!attribute [rw] tool_spec
+    #   The specification for the tool.
+    #   @return [Types::ToolSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/Tool AWS API Documentation
+    #
+    class Tool < Struct.new(
+      :tool_spec,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ToolSpec < Tool; end
+      class Unknown < Tool; end
+    end
+
+    # Defines which tools the model should request when invoked. For more
+    # information, see [Use a tool to complete an Amazon Bedrock model
+    # response][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
+    #
+    # @note ToolChoice is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ToolChoice is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ToolChoice corresponding to the set member.
+    #
+    # @!attribute [rw] any
+    #   Defines tools, at least one of which must be requested by the model.
+    #   No text is generated but the results of tool use are sent back to
+    #   the model to help generate a response.
+    #   @return [Types::AnyToolChoice]
+    #
+    # @!attribute [rw] auto
+    #   Defines tools. The model automatically decides whether to call a
+    #   tool or to generate text instead.
+    #   @return [Types::AutoToolChoice]
+    #
+    # @!attribute [rw] tool
+    #   Defines a specific tool that the model must request. No text is
+    #   generated but the results of tool use are sent back to the model to
+    #   help generate a response.
+    #   @return [Types::SpecificToolChoice]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ToolChoice AWS API Documentation
+    #
+    class ToolChoice < Struct.new(
+      :any,
+      :auto,
+      :tool,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Any < ToolChoice; end
+      class Auto < ToolChoice; end
+      class Tool < ToolChoice; end
+      class Unknown < ToolChoice; end
+    end
+
+    # Configuration information for the tools that the model can use when
+    # generating a response. For more information, see [Use a tool to
+    # complete an Amazon Bedrock model response][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
+    #
+    # @!attribute [rw] tool_choice
+    #   Defines which tools the model should request when invoked.
+    #   @return [Types::ToolChoice]
+    #
+    # @!attribute [rw] tools
+    #   An array of tools to pass to a model.
+    #   @return [Array<Types::Tool>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ToolConfiguration AWS API Documentation
+    #
+    class ToolConfiguration < Struct.new(
+      :tool_choice,
+      :tools)
+      SENSITIVE = [:tool_choice, :tools]
+      include Aws::Structure
+    end
+
+    # The input schema for the tool. For more information, see [Use a tool
+    # to complete an Amazon Bedrock model response][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
+    #
+    # @note ToolInputSchema is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ToolInputSchema is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ToolInputSchema corresponding to the set member.
+    #
+    # @!attribute [rw] json
+    #   A JSON object defining the input schema for the tool.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ToolInputSchema AWS API Documentation
+    #
+    class ToolInputSchema < Struct.new(
+      :json,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Json < ToolInputSchema; end
+      class Unknown < ToolInputSchema; end
+    end
+
+    # Contains a specification for a tool. For more information, see [Use a
+    # tool to complete an Amazon Bedrock model response][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
+    #
+    # @!attribute [rw] description
+    #   The description of the tool.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_schema
+    #   The input schema for the tool.
+    #   @return [Types::ToolInputSchema]
+    #
+    # @!attribute [rw] name
+    #   The name of the tool.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ToolSpecification AWS API Documentation
+    #
+    class ToolSpecification < Struct.new(
+      :description,
+      :input_schema,
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7124,6 +7970,134 @@ module Aws::BedrockAgent
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Details about an unfulfilled node input with no valid connections.
+    #
+    # @!attribute [rw] input
+    #   The name of the unfulfilled input. An input is unfulfilled if there
+    #   are no data connections to it.
+    #   @return [String]
+    #
+    # @!attribute [rw] node
+    #   The name of the node containing the unfulfilled input.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UnfulfilledNodeInputFlowValidationDetails AWS API Documentation
+    #
+    class UnfulfilledNodeInputFlowValidationDetails < Struct.new(
+      :input,
+      :node)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about an unknown condition for a connection.
+    #
+    # @!attribute [rw] connection
+    #   The name of the connection with the unknown condition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UnknownConnectionConditionFlowValidationDetails AWS API Documentation
+    #
+    class UnknownConnectionConditionFlowValidationDetails < Struct.new(
+      :connection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about an unknown source node for a connection.
+    #
+    # @!attribute [rw] connection
+    #   The name of the connection with the unknown source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UnknownConnectionSourceFlowValidationDetails AWS API Documentation
+    #
+    class UnknownConnectionSourceFlowValidationDetails < Struct.new(
+      :connection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about an unknown source output for a connection.
+    #
+    # @!attribute [rw] connection
+    #   The name of the connection with the unknown source output.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UnknownConnectionSourceOutputFlowValidationDetails AWS API Documentation
+    #
+    class UnknownConnectionSourceOutputFlowValidationDetails < Struct.new(
+      :connection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about an unknown target node for a connection.
+    #
+    # @!attribute [rw] connection
+    #   The name of the connection with the unknown target.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UnknownConnectionTargetFlowValidationDetails AWS API Documentation
+    #
+    class UnknownConnectionTargetFlowValidationDetails < Struct.new(
+      :connection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about an unknown target input for a connection.
+    #
+    # @!attribute [rw] connection
+    #   The name of the connection with the unknown target input.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UnknownConnectionTargetInputFlowValidationDetails AWS API Documentation
+    #
+    class UnknownConnectionTargetInputFlowValidationDetails < Struct.new(
+      :connection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about an unreachable node in the flow. A node is unreachable
+    # when there are no paths to it from any starting node.
+    #
+    # @!attribute [rw] node
+    #   The name of the unreachable node.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UnreachableNodeFlowValidationDetails AWS API Documentation
+    #
+    class UnreachableNodeFlowValidationDetails < Struct.new(
+      :node)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about unsatisfied conditions for a connection. A condition is
+    # unsatisfied if it can never be true, for example two branches of
+    # condition node cannot be simultaneously true.
+    #
+    # @!attribute [rw] connection
+    #   The name of the connection with unsatisfied conditions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UnsatisfiedConnectionConditionsFlowValidationDetails AWS API Documentation
+    #
+    class UnsatisfiedConnectionConditionsFlowValidationDetails < Struct.new(
+      :connection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about an unspecified validation that doesn't fit other
+    # categories.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UnspecifiedFlowValidationDetails AWS API Documentation
+    #
+    class UnspecifiedFlowValidationDetails < Aws::EmptyStructure; end
 
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource from which to remove
@@ -7898,6 +8872,31 @@ module Aws::BedrockAgent
     #
     class UrlConfiguration < Struct.new(
       :seed_urls)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] definition
+    #   The definition of a flow to validate.
+    #   @return [Types::FlowDefinition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ValidateFlowDefinitionRequest AWS API Documentation
+    #
+    class ValidateFlowDefinitionRequest < Struct.new(
+      :definition)
+      SENSITIVE = [:definition]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] validations
+    #   Contains an array of objects, each of which contains an error
+    #   identified by validation.
+    #   @return [Array<Types::FlowValidation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ValidateFlowDefinitionResponse AWS API Documentation
+    #
+    class ValidateFlowDefinitionResponse < Struct.new(
+      :validations)
       SENSITIVE = []
       include Aws::Structure
     end

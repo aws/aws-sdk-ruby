@@ -932,6 +932,7 @@ module Aws::QBusiness
     class GroupMembers
       attr_accessor member_groups: ::Array[Types::MemberGroup]
       attr_accessor member_users: ::Array[Types::MemberUser]
+      attr_accessor s3_path_for_group_members: Types::S3
       SENSITIVE: []
     end
 
@@ -1329,6 +1330,7 @@ module Aws::QBusiness
       attr_accessor data_source_id: ::String
       attr_accessor type: ("INDEX" | "DATASOURCE")
       attr_accessor group_members: Types::GroupMembers
+      attr_accessor role_arn: ::String
       SENSITIVE: []
     end
 

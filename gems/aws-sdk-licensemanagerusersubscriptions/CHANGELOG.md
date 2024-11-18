@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2024-11-14)
+------------------
+
+* Feature - New and updated API operations to support License Included User-based Subscription of Microsoft Remote Desktop Services (RDS).
+
 1.26.0 (2024-10-18)
 ------------------
 

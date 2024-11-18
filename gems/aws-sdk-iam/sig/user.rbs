@@ -91,7 +91,7 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/User.html#create_login_profile-instance_method
       def create_login_profile: (
-                                  password: ::String,
+                                  ?password: ::String,
                                   ?password_reset_required: bool
                                 ) -> LoginProfile
                               | (?Hash[Symbol, untyped]) -> LoginProfile

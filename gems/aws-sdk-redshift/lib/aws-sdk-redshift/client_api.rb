@@ -464,6 +464,7 @@ module Aws::Redshift
     PurchaseReservedNodeOfferingResult = Shapes::StructureShape.new(name: 'PurchaseReservedNodeOfferingResult')
     PutResourcePolicyMessage = Shapes::StructureShape.new(name: 'PutResourcePolicyMessage')
     PutResourcePolicyResult = Shapes::StructureShape.new(name: 'PutResourcePolicyResult')
+    ReadWriteAccess = Shapes::StructureShape.new(name: 'ReadWriteAccess')
     RebootClusterMessage = Shapes::StructureShape.new(name: 'RebootClusterMessage')
     RebootClusterResult = Shapes::StructureShape.new(name: 'RebootClusterResult')
     Recommendation = Shapes::StructureShape.new(name: 'Recommendation')
@@ -526,6 +527,8 @@ module Aws::Redshift
     RevokeSnapshotAccessResult = Shapes::StructureShape.new(name: 'RevokeSnapshotAccessResult')
     RotateEncryptionKeyMessage = Shapes::StructureShape.new(name: 'RotateEncryptionKeyMessage')
     RotateEncryptionKeyResult = Shapes::StructureShape.new(name: 'RotateEncryptionKeyResult')
+    S3AccessGrantsScopeUnion = Shapes::UnionShape.new(name: 'S3AccessGrantsScopeUnion')
+    S3AccessGrantsServiceIntegrations = Shapes::ListShape.new(name: 'S3AccessGrantsServiceIntegrations')
     S3KeyPrefixValue = Shapes::StringShape.new(name: 'S3KeyPrefixValue')
     SNSInvalidTopicFault = Shapes::StructureShape.new(name: 'SNSInvalidTopicFault', error: {"code"=>"SNSInvalidTopic", "httpStatusCode"=>400, "senderFault"=>true})
     SNSNoAuthorizationFault = Shapes::StructureShape.new(name: 'SNSNoAuthorizationFault', error: {"code"=>"SNSNoAuthorization", "httpStatusCode"=>400, "senderFault"=>true})
@@ -2371,6 +2374,9 @@ module Aws::Redshift
     PutResourcePolicyResult.add_member(:resource_policy, Shapes::ShapeRef.new(shape: ResourcePolicy, location_name: "ResourcePolicy"))
     PutResourcePolicyResult.struct_class = Types::PutResourcePolicyResult
 
+    ReadWriteAccess.add_member(:authorization, Shapes::ShapeRef.new(shape: ServiceAuthorization, required: true, location_name: "Authorization"))
+    ReadWriteAccess.struct_class = Types::ReadWriteAccess
+
     RebootClusterMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
     RebootClusterMessage.struct_class = Types::RebootClusterMessage
 
@@ -2662,6 +2668,14 @@ module Aws::Redshift
     RotateEncryptionKeyResult.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
     RotateEncryptionKeyResult.struct_class = Types::RotateEncryptionKeyResult
 
+    S3AccessGrantsScopeUnion.add_member(:read_write_access, Shapes::ShapeRef.new(shape: ReadWriteAccess, location_name: "ReadWriteAccess"))
+    S3AccessGrantsScopeUnion.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    S3AccessGrantsScopeUnion.add_member_subclass(:read_write_access, Types::S3AccessGrantsScopeUnion::ReadWriteAccess)
+    S3AccessGrantsScopeUnion.add_member_subclass(:unknown, Types::S3AccessGrantsScopeUnion::Unknown)
+    S3AccessGrantsScopeUnion.struct_class = Types::S3AccessGrantsScopeUnion
+
+    S3AccessGrantsServiceIntegrations.member = Shapes::ShapeRef.new(shape: S3AccessGrantsScopeUnion)
+
     SNSInvalidTopicFault.struct_class = Types::SNSInvalidTopicFault
 
     SNSNoAuthorizationFault.struct_class = Types::SNSNoAuthorizationFault
@@ -2719,8 +2733,10 @@ module Aws::Redshift
     ServiceIntegrationList.member = Shapes::ShapeRef.new(shape: ServiceIntegrationsUnion)
 
     ServiceIntegrationsUnion.add_member(:lake_formation, Shapes::ShapeRef.new(shape: LakeFormationServiceIntegrations, location_name: "LakeFormation"))
+    ServiceIntegrationsUnion.add_member(:s3_access_grants, Shapes::ShapeRef.new(shape: S3AccessGrantsServiceIntegrations, location_name: "S3AccessGrants"))
     ServiceIntegrationsUnion.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ServiceIntegrationsUnion.add_member_subclass(:lake_formation, Types::ServiceIntegrationsUnion::LakeFormation)
+    ServiceIntegrationsUnion.add_member_subclass(:s3_access_grants, Types::ServiceIntegrationsUnion::S3AccessGrants)
     ServiceIntegrationsUnion.add_member_subclass(:unknown, Types::ServiceIntegrationsUnion::Unknown)
     ServiceIntegrationsUnion.struct_class = Types::ServiceIntegrationsUnion
 

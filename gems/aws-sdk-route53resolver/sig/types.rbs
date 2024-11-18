@@ -105,6 +105,8 @@ module Aws::Route53Resolver
       attr_accessor name: ::String
       attr_accessor firewall_domain_redirection_action: ("INSPECT_REDIRECTION_DOMAIN" | "TRUST_REDIRECTION_DOMAIN")
       attr_accessor qtype: ::String
+      attr_accessor dns_threat_protection: ("DGA" | "DNS_TUNNELING")
+      attr_accessor confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")
       SENSITIVE: []
     end
 
@@ -199,6 +201,7 @@ module Aws::Route53Resolver
     class DeleteFirewallRuleRequest
       attr_accessor firewall_rule_group_id: ::String
       attr_accessor firewall_domain_list_id: ::String
+      attr_accessor firewall_threat_protection_id: ::String
       attr_accessor qtype: ::String
       SENSITIVE: []
     end
@@ -331,6 +334,7 @@ module Aws::Route53Resolver
     class FirewallRule
       attr_accessor firewall_rule_group_id: ::String
       attr_accessor firewall_domain_list_id: ::String
+      attr_accessor firewall_threat_protection_id: ::String
       attr_accessor name: ::String
       attr_accessor priority: ::Integer
       attr_accessor action: ("ALLOW" | "BLOCK" | "ALERT")
@@ -343,6 +347,8 @@ module Aws::Route53Resolver
       attr_accessor modification_time: ::String
       attr_accessor firewall_domain_redirection_action: ("INSPECT_REDIRECTION_DOMAIN" | "TRUST_REDIRECTION_DOMAIN")
       attr_accessor qtype: ::String
+      attr_accessor dns_threat_protection: ("DGA" | "DNS_TUNNELING")
+      attr_accessor confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")
       SENSITIVE: []
     end
 
@@ -1096,6 +1102,7 @@ module Aws::Route53Resolver
     class UpdateFirewallRuleRequest
       attr_accessor firewall_rule_group_id: ::String
       attr_accessor firewall_domain_list_id: ::String
+      attr_accessor firewall_threat_protection_id: ::String
       attr_accessor priority: ::Integer
       attr_accessor action: ("ALLOW" | "BLOCK" | "ALERT")
       attr_accessor block_response: ("NODATA" | "NXDOMAIN" | "OVERRIDE")
@@ -1105,6 +1112,8 @@ module Aws::Route53Resolver
       attr_accessor name: ::String
       attr_accessor firewall_domain_redirection_action: ("INSPECT_REDIRECTION_DOMAIN" | "TRUST_REDIRECTION_DOMAIN")
       attr_accessor qtype: ::String
+      attr_accessor dns_threat_protection: ("DGA" | "DNS_TUNNELING")
+      attr_accessor confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")
       SENSITIVE: []
     end
 

@@ -115,7 +115,15 @@ module Aws
                                           launch_template: {
                                             launch_template_id: ::String?,
                                             launch_template_name: ::String?,
-                                            version: ::String?
+                                            version: ::String?,
+                                            overrides: Array[
+                                              {
+                                                launch_template_id: ::String?,
+                                                launch_template_name: ::String?,
+                                                version: ::String?,
+                                                target_instance_types: Array[::String]?
+                                              },
+                                            ]?
                                           }?,
                                           ec2_configuration: Array[
                                             {
@@ -1314,7 +1322,15 @@ module Aws
                                           launch_template: {
                                             launch_template_id: ::String?,
                                             launch_template_name: ::String?,
-                                            version: ::String?
+                                            version: ::String?,
+                                            overrides: Array[
+                                              {
+                                                launch_template_id: ::String?,
+                                                launch_template_name: ::String?,
+                                                version: ::String?,
+                                                target_instance_types: Array[::String]?
+                                              },
+                                            ]?
                                           }?,
                                           ec2_configuration: Array[
                                             {

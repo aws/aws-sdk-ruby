@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2024-11-14)
+------------------
+
+* Feature - IVS now offers customers the ability to stream multitrack video to Channels.
+
 1.63.0 (2024-10-18)
 ------------------
 

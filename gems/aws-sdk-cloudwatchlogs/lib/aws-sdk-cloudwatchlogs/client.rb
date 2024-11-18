@@ -3592,8 +3592,8 @@ module Aws::CloudWatchLogs
     #     in the first block of the policy.
     #
     #     The `Operation` property with the `Deidentify` action is what
-    #     actually masks the data, and it must contain the ` "MaskConfig":
-    #     \{\}` object. The ` "MaskConfig": \{\}` object must be empty.
+    #     actually masks the data, and it must contain the ` "MaskConfig": {}`
+    #     object. The ` "MaskConfig": {}` object must be empty.
     #
     #   For an example data protection policy, see the **Examples** section on
     #   this page.
@@ -3629,7 +3629,6 @@ module Aws::CloudWatchLogs
     #     * A logical destination in a different account created with
     #       [PutDestination][2], for cross-account delivery. Kinesis Data
     #       Streams and Firehose are supported as logical destinations.
-    #
     #   * **RoleArn** The ARN of an IAM role that grants CloudWatch Logs
     #     permissions to deliver ingested log events to the destination
     #     stream. You don't need to provide the ARN when you are working with
@@ -3769,8 +3768,8 @@ module Aws::CloudWatchLogs
     #     in the first block of the policy.
     #
     #     The `Operation` property with the `Deidentify` action is what
-    #     actually masks the data, and it must contain the ` "MaskConfig":
-    #     \{\}` object. The ` "MaskConfig": \{\}` object must be empty.
+    #     actually masks the data, and it must contain the ` "MaskConfig": {}`
+    #     object. The ` "MaskConfig": {}` object must be empty.
     #
     #   For an example data protection policy, see the **Examples** section on
     #   this page.
@@ -4546,12 +4545,12 @@ module Aws::CloudWatchLogs
     #
     #
     #
-    #   `\{ "Version": "2012-10-17", "Statement": [ \{ "Sid":
-    #   "Route53LogsToCloudWatchLogs", "Effect": "Allow", "Principal": \{
-    #   "Service": [ "route53.amazonaws.com" ] \}, "Action":
-    #   "logs:PutLogEvents", "Resource": "logArn", "Condition": \{ "ArnLike":
-    #   \{ "aws:SourceArn": "myRoute53ResourceArn" \}, "StringEquals": \{
-    #   "aws:SourceAccount": "myAwsAccountId" \} \} \} ] \}`
+    #   `{ "Version": "2012-10-17", "Statement": [ { "Sid":
+    #   "Route53LogsToCloudWatchLogs", "Effect": "Allow", "Principal": {
+    #   "Service": [ "route53.amazonaws.com" ] }, "Action":
+    #   "logs:PutLogEvents", "Resource": "logArn", "Condition": { "ArnLike": {
+    #   "aws:SourceArn": "myRoute53ResourceArn" }, "StringEquals": {
+    #   "aws:SourceAccount": "myAwsAccountId" } } } ] }`
     #
     #
     #
@@ -5627,7 +5626,7 @@ module Aws::CloudWatchLogs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.100.0'
+      context[:gem_version] = '1.102.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

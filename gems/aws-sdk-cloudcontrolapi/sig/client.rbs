@@ -131,6 +131,7 @@ module Aws
       interface _GetResourceRequestStatusResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetResourceRequestStatusOutput]
         def progress_event: () -> Types::ProgressEvent
+        def hooks_progress_event: () -> ::Array[Types::HookProgressEvent]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudControlApi/Client.html#get_resource_request_status-instance_method
       def get_resource_request_status: (

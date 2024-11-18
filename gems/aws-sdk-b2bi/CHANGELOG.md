@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2024-11-13)
+------------------
+
+* Feature - This release adds a GenerateMapping API to allow generation of JSONata or XSLT transformer code based on input and output samples.
+
 1.22.0 (2024-10-18)
 ------------------
 

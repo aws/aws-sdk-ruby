@@ -725,16 +725,6 @@ module Aws::BedrockAgentRuntime
 
     # Contains information about why a flow completed.
     #
-    # This data type is used in the following API operations:
-    #
-    # * [InvokeFlow response][1]
-    #
-    # ^
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeFlow.html#API_agent_InvokeFlow_ResponseSyntax
-    #
     # @!attribute [rw] completion_reason
     #   The reason that the flow completed.
     #   @return [String]
@@ -750,16 +740,6 @@ module Aws::BedrockAgentRuntime
 
     # Contains information about an input into the prompt flow and where to
     # send it.
-    #
-    # This data type is used in the following API operations:
-    #
-    # * [InvokeFlow request][1]
-    #
-    # ^
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeFlow.html#API_agent_InvokeFlow_RequestSyntax
     #
     # @!attribute [rw] content
     #   Contains information about an input into the prompt flow.
@@ -786,16 +766,6 @@ module Aws::BedrockAgentRuntime
 
     # Contains information about an input into the flow.
     #
-    # This data type is used in the following API operations:
-    #
-    # * [InvokeFlow request][1]
-    #
-    # ^
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeFlow.html#API_agent_InvokeFlow_RequestSyntax
-    #
     # @note FlowInputContent is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] document
@@ -818,16 +788,6 @@ module Aws::BedrockAgentRuntime
     # Contains information about the content in an output from prompt flow
     # invocation.
     #
-    # This data type is used in the following API operations:
-    #
-    # * [InvokeFlow request][1]
-    #
-    # ^
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeFlow.html#API_agent_InvokeFlow_RequestSyntax
-    #
     # @note FlowOutputContent is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of FlowOutputContent corresponding to the set member.
     #
     # @!attribute [rw] document
@@ -849,16 +809,6 @@ module Aws::BedrockAgentRuntime
 
     # Contains information about an output from prompt flow invoction.
     #
-    # This data type is used in the following API operations:
-    #
-    # * [InvokeFlow response][1]
-    #
-    # ^
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeFlow.html#API_agent_InvokeFlow_ResponseSyntax
-    #
     # @!attribute [rw] content
     #   The content in the output.
     #   @return [Types::FlowOutputContent]
@@ -878,6 +828,284 @@ module Aws::BedrockAgentRuntime
       :node_name,
       :node_type,
       :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about an input or output for a node in the flow.
+    # For more information, see [Track each step in your prompt flow by
+    # viewing its trace in Amazon Bedrock][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html
+    #
+    # @note FlowTrace is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of FlowTrace corresponding to the set member.
+    #
+    # @!attribute [rw] condition_node_result_trace
+    #   Contains information about an output from a condition node.
+    #   @return [Types::FlowTraceConditionNodeResultEvent]
+    #
+    # @!attribute [rw] node_input_trace
+    #   Contains information about the input into a node.
+    #   @return [Types::FlowTraceNodeInputEvent]
+    #
+    # @!attribute [rw] node_output_trace
+    #   Contains information about the output from a node.
+    #   @return [Types::FlowTraceNodeOutputEvent]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/FlowTrace AWS API Documentation
+    #
+    class FlowTrace < Struct.new(
+      :condition_node_result_trace,
+      :node_input_trace,
+      :node_output_trace,
+      :unknown)
+      SENSITIVE = [:condition_node_result_trace, :node_input_trace, :node_output_trace]
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ConditionNodeResultTrace < FlowTrace; end
+      class NodeInputTrace < FlowTrace; end
+      class NodeOutputTrace < FlowTrace; end
+      class Unknown < FlowTrace; end
+    end
+
+    # Contains information about a condition that was satisfied. For more
+    # information, see [Track each step in your prompt flow by viewing its
+    # trace in Amazon Bedrock][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html
+    #
+    # @!attribute [rw] condition_name
+    #   The name of the condition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/FlowTraceCondition AWS API Documentation
+    #
+    class FlowTraceCondition < Struct.new(
+      :condition_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about an output from a condition node. For more
+    # information, see [Track each step in your prompt flow by viewing its
+    # trace in Amazon Bedrock][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html
+    #
+    # @!attribute [rw] node_name
+    #   The name of the condition node.
+    #   @return [String]
+    #
+    # @!attribute [rw] satisfied_conditions
+    #   An array of objects containing information about the conditions that
+    #   were satisfied.
+    #   @return [Array<Types::FlowTraceCondition>]
+    #
+    # @!attribute [rw] timestamp
+    #   The date and time that the trace was returned.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/FlowTraceConditionNodeResultEvent AWS API Documentation
+    #
+    class FlowTraceConditionNodeResultEvent < Struct.new(
+      :node_name,
+      :satisfied_conditions,
+      :timestamp)
+      SENSITIVE = [:satisfied_conditions]
+      include Aws::Structure
+    end
+
+    # Contains information about a trace, which tracks an input or output
+    # for a node in the flow. For more information, see [Track each step in
+    # your prompt flow by viewing its trace in Amazon Bedrock][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html
+    #
+    # @!attribute [rw] trace
+    #   The trace object containing information about an input or output for
+    #   a node in the flow.
+    #   @return [Types::FlowTrace]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/FlowTraceEvent AWS API Documentation
+    #
+    class FlowTraceEvent < Struct.new(
+      :trace,
+      :event_type)
+      SENSITIVE = [:trace]
+      include Aws::Structure
+    end
+
+    # Contains the content of the node input. For more information, see
+    # [Track each step in your prompt flow by viewing its trace in Amazon
+    # Bedrock][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html
+    #
+    # @note FlowTraceNodeInputContent is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of FlowTraceNodeInputContent corresponding to the set member.
+    #
+    # @!attribute [rw] document
+    #   The content of the node input.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/FlowTraceNodeInputContent AWS API Documentation
+    #
+    class FlowTraceNodeInputContent < Struct.new(
+      :document,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Document < FlowTraceNodeInputContent; end
+      class Unknown < FlowTraceNodeInputContent; end
+    end
+
+    # Contains information about the input into a node. For more
+    # information, see [Track each step in your prompt flow by viewing its
+    # trace in Amazon Bedrock][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html
+    #
+    # @!attribute [rw] fields
+    #   An array of objects containing information about each field in the
+    #   input.
+    #   @return [Array<Types::FlowTraceNodeInputField>]
+    #
+    # @!attribute [rw] node_name
+    #   The name of the node that received the input.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   The date and time that the trace was returned.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/FlowTraceNodeInputEvent AWS API Documentation
+    #
+    class FlowTraceNodeInputEvent < Struct.new(
+      :fields,
+      :node_name,
+      :timestamp)
+      SENSITIVE = [:fields]
+      include Aws::Structure
+    end
+
+    # Contains information about a field in the input into a node. For more
+    # information, see [Track each step in your prompt flow by viewing its
+    # trace in Amazon Bedrock][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html
+    #
+    # @!attribute [rw] content
+    #   The content of the node input.
+    #   @return [Types::FlowTraceNodeInputContent]
+    #
+    # @!attribute [rw] node_input_name
+    #   The name of the node input.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/FlowTraceNodeInputField AWS API Documentation
+    #
+    class FlowTraceNodeInputField < Struct.new(
+      :content,
+      :node_input_name)
+      SENSITIVE = [:content]
+      include Aws::Structure
+    end
+
+    # Contains the content of the node output. For more information, see
+    # [Track each step in your prompt flow by viewing its trace in Amazon
+    # Bedrock][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html
+    #
+    # @note FlowTraceNodeOutputContent is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of FlowTraceNodeOutputContent corresponding to the set member.
+    #
+    # @!attribute [rw] document
+    #   The content of the node output.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/FlowTraceNodeOutputContent AWS API Documentation
+    #
+    class FlowTraceNodeOutputContent < Struct.new(
+      :document,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Document < FlowTraceNodeOutputContent; end
+      class Unknown < FlowTraceNodeOutputContent; end
+    end
+
+    # Contains information about the output from a node. For more
+    # information, see [Track each step in your prompt flow by viewing its
+    # trace in Amazon Bedrock][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html
+    #
+    # @!attribute [rw] fields
+    #   An array of objects containing information about each field in the
+    #   output.
+    #   @return [Array<Types::FlowTraceNodeOutputField>]
+    #
+    # @!attribute [rw] node_name
+    #   The name of the node that yielded the output.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   The date and time that the trace was returned.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/FlowTraceNodeOutputEvent AWS API Documentation
+    #
+    class FlowTraceNodeOutputEvent < Struct.new(
+      :fields,
+      :node_name,
+      :timestamp)
+      SENSITIVE = [:fields]
+      include Aws::Structure
+    end
+
+    # Contains information about a field in the output from a node. For more
+    # information, see [Track each step in your prompt flow by viewing its
+    # trace in Amazon Bedrock][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html
+    #
+    # @!attribute [rw] content
+    #   The content of the node output.
+    #   @return [Types::FlowTraceNodeOutputContent]
+    #
+    # @!attribute [rw] node_output_name
+    #   The name of the node output.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/FlowTraceNodeOutputField AWS API Documentation
+    #
+    class FlowTraceNodeOutputField < Struct.new(
+      :content,
+      :node_output_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1069,7 +1297,13 @@ module Aws::BedrockAgentRuntime
     #
     # @!attribute [rw] prompt_template
     #   Contains the template for the prompt that's sent to the model for
-    #   response generation.
+    #   response generation. Generation prompts must include the
+    #   `$search_results$` variable. For more information, see [Use
+    #   placeholder variables][1] in the user guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-placeholders.html
     #   @return [Types::PromptTemplate]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GenerationConfiguration AWS API Documentation
@@ -1763,6 +1997,17 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
+    # @!attribute [rw] enable_trace
+    #   Specifies whether to return the trace for the flow or not. Traces
+    #   track inputs and outputs for nodes in the flow. For more
+    #   information, see [Track each step in your prompt flow by viewing its
+    #   trace in Amazon Bedrock][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html
+    #   @return [Boolean]
+    #
     # @!attribute [rw] flow_alias_identifier
     #   The unique identifier of the flow alias.
     #   @return [String]
@@ -1779,6 +2024,7 @@ module Aws::BedrockAgentRuntime
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/InvokeFlowRequest AWS API Documentation
     #
     class InvokeFlowRequest < Struct.new(
+      :enable_trace,
       :flow_alias_identifier,
       :flow_identifier,
       :inputs)
@@ -2297,8 +2543,14 @@ module Aws::BedrockAgentRuntime
     #   @return [Types::InferenceConfig]
     #
     # @!attribute [rw] prompt_template
-    #   Contains the template for the prompt that's sent to the model for
-    #   response generation.
+    #   Contains the template for the prompt that's sent to the model.
+    #   Orchestration prompts must include the `$conversation_history$` and
+    #   `$output_format_instructions$` variables. For more information, see
+    #   [Use placeholder variables][1] in the user guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-placeholders.html
     #   @return [Types::PromptTemplate]
     #
     # @!attribute [rw] query_transformation_configuration
@@ -2842,7 +3094,7 @@ module Aws::BedrockAgentRuntime
     #   The following example would return data sources with an `animal`
     #   attribute whose value is `cat`:
     #
-    #   `"equals": \{ "key": "animal", "value": "cat" \}`
+    #   `"equals": { "key": "animal", "value": "cat" }`
     #   @return [Types::FilterAttribute]
     #
     # @!attribute [rw] greater_than
@@ -2853,7 +3105,7 @@ module Aws::BedrockAgentRuntime
     #   The following example would return data sources with an `year`
     #   attribute whose value is greater than `1989`:
     #
-    #   `"greaterThan": \{ "key": "year", "value": 1989 \}`
+    #   `"greaterThan": { "key": "year", "value": 1989 }`
     #   @return [Types::FilterAttribute]
     #
     # @!attribute [rw] greater_than_or_equals
@@ -2864,7 +3116,7 @@ module Aws::BedrockAgentRuntime
     #   The following example would return data sources with an `year`
     #   attribute whose value is greater than or equal to `1989`:
     #
-    #   `"greaterThanOrEquals": \{ "key": "year", "value": 1989 \}`
+    #   `"greaterThanOrEquals": { "key": "year", "value": 1989 }`
     #   @return [Types::FilterAttribute]
     #
     # @!attribute [rw] in
@@ -2875,7 +3127,7 @@ module Aws::BedrockAgentRuntime
     #   The following example would return data sources with an `animal`
     #   attribute that is either `cat` or `dog`:
     #
-    #   `"in": \{ "key": "animal", "value": ["cat", "dog"] \}`
+    #   `"in": { "key": "animal", "value": ["cat", "dog"] }`
     #   @return [Types::FilterAttribute]
     #
     # @!attribute [rw] less_than
@@ -2886,7 +3138,7 @@ module Aws::BedrockAgentRuntime
     #   The following example would return data sources with an `year`
     #   attribute whose value is less than to `1989`.
     #
-    #   `"lessThan": \{ "key": "year", "value": 1989 \}`
+    #   `"lessThan": { "key": "year", "value": 1989 }`
     #   @return [Types::FilterAttribute]
     #
     # @!attribute [rw] less_than_or_equals
@@ -2897,7 +3149,7 @@ module Aws::BedrockAgentRuntime
     #   The following example would return data sources with an `year`
     #   attribute whose value is less than or equal to `1989`.
     #
-    #   `"lessThanOrEquals": \{ "key": "year", "value": 1989 \}`
+    #   `"lessThanOrEquals": { "key": "year", "value": 1989 }`
     #   @return [Types::FilterAttribute]
     #
     # @!attribute [rw] list_contains
@@ -2909,7 +3161,7 @@ module Aws::BedrockAgentRuntime
     #   attribute that is a list containing a `cat` member (for example
     #   `["dog", "cat"]`).
     #
-    #   `"listContains": \{ "key": "animals", "value": "cat" \}`
+    #   `"listContains": { "key": "animals", "value": "cat" }`
     #   @return [Types::FilterAttribute]
     #
     # @!attribute [rw] not_equals
@@ -2920,7 +3172,7 @@ module Aws::BedrockAgentRuntime
     #   The following example would return data sources that don't contain
     #   an `animal` attribute whose value is `cat`.
     #
-    #   `"notEquals": \{ "key": "animal", "value": "cat" \}`
+    #   `"notEquals": { "key": "animal", "value": "cat" }`
     #   @return [Types::FilterAttribute]
     #
     # @!attribute [rw] not_in
@@ -2931,7 +3183,7 @@ module Aws::BedrockAgentRuntime
     #   The following example would return data sources whose `animal`
     #   attribute is neither `cat` nor `dog`.
     #
-    #   `"notIn": \{ "key": "animal", "value": ["cat", "dog"] \}`
+    #   `"notIn": { "key": "animal", "value": ["cat", "dog"] }`
     #   @return [Types::FilterAttribute]
     #
     # @!attribute [rw] or_all
@@ -2949,7 +3201,7 @@ module Aws::BedrockAgentRuntime
     #   The following example would return data sources with an `animal`
     #   attribute starts with `ca` (for example, `cat` or `camel`).
     #
-    #   `"startsWith": \{ "key": "animal", "value": "ca" \}`
+    #   `"startsWith": { "key": "animal", "value": "ca" }`
     #   @return [Types::FilterAttribute]
     #
     # @!attribute [rw] string_contains
@@ -2961,14 +3213,14 @@ module Aws::BedrockAgentRuntime
     #     example would return data sources with an `animal` attribute that
     #     contains the substring `at` (for example `cat`).
     #
-    #     `"stringContains": \{ "key": "animal", "value": "at" \}`
+    #     `"stringContains": { "key": "animal", "value": "at" }`
     #
     #   * A list with a member that contains the `value` as a substring. The
     #     following example would return data sources with an `animals`
     #     attribute that is a list containing a member that contains the
     #     substring `at` (for example `["dog", "cat"]`).
     #
-    #     `"stringContains": \{ "key": "animals", "value": "at" \}`
+    #     `"stringContains": { "key": "animals", "value": "at" }`
     #   @return [Types::FilterAttribute]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/RetrievalFilter AWS API Documentation
@@ -3888,16 +4140,6 @@ module Aws::BedrockAgentRuntime
 
     # The output of the flow.
     #
-    # This data type is used in the following API operations:
-    #
-    # * [InvokeFlow response][1]
-    #
-    # ^
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeFlow.html#API_agent_InvokeFlow_ResponseSyntax
-    #
     # EventStream is an Enumerator of Events.
     #  #event_types #=> Array, returns all modeled event types in the stream
     #
@@ -3913,6 +4155,7 @@ module Aws::BedrockAgentRuntime
           :dependency_failed_exception,
           :flow_completion_event,
           :flow_output_event,
+          :flow_trace_event,
           :internal_server_exception,
           :resource_not_found_exception,
           :service_quota_exceeded_exception,

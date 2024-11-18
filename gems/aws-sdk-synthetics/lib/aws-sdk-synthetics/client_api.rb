@@ -105,6 +105,7 @@ module Aws::Synthetics
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
+    ProvisionedResourceCleanupSetting = Shapes::StringShape.new(name: 'ProvisionedResourceCleanupSetting')
     RequestEntityTooLargeException = Shapes::StructureShape.new(name: 'RequestEntityTooLargeException')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceList = Shapes::ListShape.new(name: 'ResourceList')
@@ -189,6 +190,7 @@ module Aws::Synthetics
     Canary.add_member(:runtime_version, Shapes::ShapeRef.new(shape: String, location_name: "RuntimeVersion"))
     Canary.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfigOutput, location_name: "VpcConfig"))
     Canary.add_member(:visual_reference, Shapes::ShapeRef.new(shape: VisualReferenceOutput, location_name: "VisualReference"))
+    Canary.add_member(:provisioned_resource_cleanup, Shapes::ShapeRef.new(shape: ProvisionedResourceCleanupSetting, location_name: "ProvisionedResourceCleanup"))
     Canary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     Canary.add_member(:artifact_config, Shapes::ShapeRef.new(shape: ArtifactConfigOutput, location_name: "ArtifactConfig"))
     Canary.struct_class = Types::Canary
@@ -270,6 +272,7 @@ module Aws::Synthetics
     CreateCanaryRequest.add_member(:runtime_version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RuntimeVersion"))
     CreateCanaryRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfigInput, location_name: "VpcConfig"))
     CreateCanaryRequest.add_member(:resources_to_replicate_tags, Shapes::ShapeRef.new(shape: ResourceList, location_name: "ResourcesToReplicateTags"))
+    CreateCanaryRequest.add_member(:provisioned_resource_cleanup, Shapes::ShapeRef.new(shape: ProvisionedResourceCleanupSetting, location_name: "ProvisionedResourceCleanup"))
     CreateCanaryRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateCanaryRequest.add_member(:artifact_config, Shapes::ShapeRef.new(shape: ArtifactConfigInput, location_name: "ArtifactConfig"))
     CreateCanaryRequest.struct_class = Types::CreateCanaryRequest
@@ -482,6 +485,7 @@ module Aws::Synthetics
     UpdateCanaryRequest.add_member(:visual_reference, Shapes::ShapeRef.new(shape: VisualReferenceInput, location_name: "VisualReference"))
     UpdateCanaryRequest.add_member(:artifact_s3_location, Shapes::ShapeRef.new(shape: String, location_name: "ArtifactS3Location"))
     UpdateCanaryRequest.add_member(:artifact_config, Shapes::ShapeRef.new(shape: ArtifactConfigInput, location_name: "ArtifactConfig"))
+    UpdateCanaryRequest.add_member(:provisioned_resource_cleanup, Shapes::ShapeRef.new(shape: ProvisionedResourceCleanupSetting, location_name: "ProvisionedResourceCleanup"))
     UpdateCanaryRequest.struct_class = Types::UpdateCanaryRequest
 
     UpdateCanaryResponse.struct_class = Types::UpdateCanaryResponse

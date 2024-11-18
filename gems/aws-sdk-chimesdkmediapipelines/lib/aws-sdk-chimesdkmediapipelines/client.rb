@@ -475,6 +475,26 @@ module Aws::ChimeSDKMediaPipelines
     #   The configuration for a specified media pipeline. `SourceType` must be
     #   `ChimeSdkMeeting`.
     #
+    # @option params [Types::SseAwsKeyManagementParams] :sse_aws_key_management_params
+    #   An object that contains server side encryption parameters to be used
+    #   by media capture pipeline. The parameters can also be used by media
+    #   concatenation pipeline taking media capture pipeline as a media
+    #   source.
+    #
+    # @option params [String] :sink_iam_role_arn
+    #   The Amazon Resource Name (ARN) of the sink role to be used with
+    #   `AwsKmsKeyId` in `SseAwsKeyManagementParams`. Can only interact with
+    #   `S3Bucket` sink type. The role must belong to the caller’s account and
+    #   be able to act on behalf of the caller during the API call. All
+    #   minimum policy permissions requirements for the caller to perform
+    #   sink-related actions are the same for `SinkIamRoleArn`.
+    #
+    #   Additionally, the role must have permission to `kms:GenerateDataKey`
+    #   using KMS key supplied as `AwsKmsKeyId` in
+    #   `SseAwsKeyManagementParams`. If media concatenation will be required
+    #   later, the role must also have permission to `kms:Decrypt` for the
+    #   same KMS key.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   The tag key-value pairs.
     #
@@ -543,6 +563,11 @@ module Aws::ChimeSDKMediaPipelines
     #         },
     #       },
     #     },
+    #     sse_aws_key_management_params: {
+    #       aws_kms_key_id: "String", # required
+    #       aws_kms_encryption_context: "String",
+    #     },
+    #     sink_iam_role_arn: "Arn",
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -589,6 +614,9 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.video_attribute.highlight_color #=> String, one of "Black", "Blue", "Red", "Green", "White", "Yellow"
     #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.video_attribute.border_thickness #=> Integer
     #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.canvas_orientation #=> String, one of "Landscape", "Portrait"
+    #   resp.media_capture_pipeline.sse_aws_key_management_params.aws_kms_key_id #=> String
+    #   resp.media_capture_pipeline.sse_aws_key_management_params.aws_kms_encryption_context #=> String
+    #   resp.media_capture_pipeline.sink_iam_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/CreateMediaCapturePipeline AWS API Documentation
     #
@@ -1484,6 +1512,9 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.video_attribute.highlight_color #=> String, one of "Black", "Blue", "Red", "Green", "White", "Yellow"
     #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.video_attribute.border_thickness #=> Integer
     #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.canvas_orientation #=> String, one of "Landscape", "Portrait"
+    #   resp.media_capture_pipeline.sse_aws_key_management_params.aws_kms_key_id #=> String
+    #   resp.media_capture_pipeline.sse_aws_key_management_params.aws_kms_encryption_context #=> String
+    #   resp.media_capture_pipeline.sink_iam_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/GetMediaCapturePipeline AWS API Documentation
     #
@@ -1638,6 +1669,9 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.video_attribute.highlight_color #=> String, one of "Black", "Blue", "Red", "Green", "White", "Yellow"
     #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.video_attribute.border_thickness #=> Integer
     #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.canvas_orientation #=> String, one of "Landscape", "Portrait"
+    #   resp.media_pipeline.media_capture_pipeline.sse_aws_key_management_params.aws_kms_key_id #=> String
+    #   resp.media_pipeline.media_capture_pipeline.sse_aws_key_management_params.aws_kms_encryption_context #=> String
+    #   resp.media_pipeline.media_capture_pipeline.sink_iam_role_arn #=> String
     #   resp.media_pipeline.media_live_connector_pipeline.sources #=> Array
     #   resp.media_pipeline.media_live_connector_pipeline.sources[0].source_type #=> String, one of "ChimeSdkMeeting"
     #   resp.media_pipeline.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.arn #=> String
@@ -2559,7 +2593,7 @@ module Aws::ChimeSDKMediaPipelines
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-chimesdkmediapipelines'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

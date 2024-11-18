@@ -589,7 +589,7 @@ module Aws::Textract
     #     cell can be a row of a table or an additional, smaller table that
     #     contains summary information for another table.
     #
-    #   * <i>STRUCTURED\_TABLE </i> - Identifies a table with column headers
+    #   * <i>STRUCTURED_TABLE </i> - Identifies a table with column headers
     #     where the content of each row corresponds to the headers.
     #
     #   * *SEMI\_STRUCTURED\_TABLE* - Identifies a non-structured table.

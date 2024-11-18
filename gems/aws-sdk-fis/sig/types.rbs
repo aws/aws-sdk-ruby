@@ -65,6 +65,14 @@ module Aws::FIS
       SENSITIVE: []
     end
 
+    class CreateExperimentTemplateReportConfigurationInput
+      attr_accessor outputs: Types::ExperimentTemplateReportConfigurationOutputsInput
+      attr_accessor data_sources: Types::ExperimentTemplateReportConfigurationDataSourcesInput
+      attr_accessor pre_experiment_duration: ::String
+      attr_accessor post_experiment_duration: ::String
+      SENSITIVE: []
+    end
+
     class CreateExperimentTemplateRequest
       attr_accessor client_token: ::String
       attr_accessor description: ::String
@@ -75,6 +83,7 @@ module Aws::FIS
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor log_configuration: Types::CreateExperimentTemplateLogConfigurationInput
       attr_accessor experiment_options: Types::CreateExperimentTemplateExperimentOptionsInput
+      attr_accessor experiment_report_configuration: Types::CreateExperimentTemplateReportConfigurationInput
       SENSITIVE: []
     end
 
@@ -150,6 +159,8 @@ module Aws::FIS
       attr_accessor log_configuration: Types::ExperimentLogConfiguration
       attr_accessor experiment_options: Types::ExperimentOptions
       attr_accessor target_account_configurations_count: ::Integer
+      attr_accessor experiment_report_configuration: Types::ExperimentReportConfiguration
+      attr_accessor experiment_report: Types::ExperimentReport
       SENSITIVE: []
     end
 
@@ -194,6 +205,59 @@ module Aws::FIS
       attr_accessor account_targeting: ("single-account" | "multi-account")
       attr_accessor empty_target_resolution_mode: ("fail" | "skip")
       attr_accessor actions_mode: ("skip-all" | "run-all")
+      SENSITIVE: []
+    end
+
+    class ExperimentReport
+      attr_accessor state: Types::ExperimentReportState
+      attr_accessor s3_reports: ::Array[Types::ExperimentReportS3Report]
+      SENSITIVE: []
+    end
+
+    class ExperimentReportConfiguration
+      attr_accessor outputs: Types::ExperimentReportConfigurationOutputs
+      attr_accessor data_sources: Types::ExperimentReportConfigurationDataSources
+      attr_accessor pre_experiment_duration: ::String
+      attr_accessor post_experiment_duration: ::String
+      SENSITIVE: []
+    end
+
+    class ExperimentReportConfigurationCloudWatchDashboard
+      attr_accessor dashboard_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ExperimentReportConfigurationDataSources
+      attr_accessor cloud_watch_dashboards: ::Array[Types::ExperimentReportConfigurationCloudWatchDashboard]
+      SENSITIVE: []
+    end
+
+    class ExperimentReportConfigurationOutputs
+      attr_accessor s3_configuration: Types::ExperimentReportConfigurationOutputsS3Configuration
+      SENSITIVE: []
+    end
+
+    class ExperimentReportConfigurationOutputsS3Configuration
+      attr_accessor bucket_name: ::String
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class ExperimentReportError
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class ExperimentReportS3Report
+      attr_accessor arn: ::String
+      attr_accessor report_type: ::String
+      SENSITIVE: []
+    end
+
+    class ExperimentReportState
+      attr_accessor status: ("pending" | "running" | "completed" | "cancelled" | "failed")
+      attr_accessor reason: ::String
+      attr_accessor error: Types::ExperimentReportError
       SENSITIVE: []
     end
 
@@ -271,6 +335,7 @@ module Aws::FIS
       attr_accessor log_configuration: Types::ExperimentTemplateLogConfiguration
       attr_accessor experiment_options: Types::ExperimentTemplateExperimentOptions
       attr_accessor target_account_configurations_count: ::Integer
+      attr_accessor experiment_report_configuration: Types::ExperimentTemplateReportConfiguration
       SENSITIVE: []
     end
 
@@ -303,6 +368,39 @@ module Aws::FIS
       attr_accessor cloud_watch_logs_configuration: Types::ExperimentTemplateCloudWatchLogsLogConfiguration
       attr_accessor s3_configuration: Types::ExperimentTemplateS3LogConfiguration
       attr_accessor log_schema_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class ExperimentTemplateReportConfiguration
+      attr_accessor outputs: Types::ExperimentTemplateReportConfigurationOutputs
+      attr_accessor data_sources: Types::ExperimentTemplateReportConfigurationDataSources
+      attr_accessor pre_experiment_duration: ::String
+      attr_accessor post_experiment_duration: ::String
+      SENSITIVE: []
+    end
+
+    class ExperimentTemplateReportConfigurationCloudWatchDashboard
+      attr_accessor dashboard_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ExperimentTemplateReportConfigurationDataSources
+      attr_accessor cloud_watch_dashboards: ::Array[Types::ExperimentTemplateReportConfigurationCloudWatchDashboard]
+      SENSITIVE: []
+    end
+
+    class ExperimentTemplateReportConfigurationDataSourcesInput
+      attr_accessor cloud_watch_dashboards: ::Array[Types::ReportConfigurationCloudWatchDashboardInput]
+      SENSITIVE: []
+    end
+
+    class ExperimentTemplateReportConfigurationOutputs
+      attr_accessor s3_configuration: Types::ReportConfigurationS3Output
+      SENSITIVE: []
+    end
+
+    class ExperimentTemplateReportConfigurationOutputsInput
+      attr_accessor s3_configuration: Types::ReportConfigurationS3OutputInput
       SENSITIVE: []
     end
 
@@ -526,6 +624,23 @@ module Aws::FIS
       SENSITIVE: []
     end
 
+    class ReportConfigurationCloudWatchDashboardInput
+      attr_accessor dashboard_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ReportConfigurationS3Output
+      attr_accessor bucket_name: ::String
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class ReportConfigurationS3OutputInput
+      attr_accessor bucket_name: ::String
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
     class ResolvedTarget
       attr_accessor resource_type: ::String
       attr_accessor target_name: ::String
@@ -656,6 +771,14 @@ module Aws::FIS
       SENSITIVE: []
     end
 
+    class UpdateExperimentTemplateReportConfigurationInput
+      attr_accessor outputs: Types::ExperimentTemplateReportConfigurationOutputsInput
+      attr_accessor data_sources: Types::ExperimentTemplateReportConfigurationDataSourcesInput
+      attr_accessor pre_experiment_duration: ::String
+      attr_accessor post_experiment_duration: ::String
+      SENSITIVE: []
+    end
+
     class UpdateExperimentTemplateRequest
       attr_accessor id: ::String
       attr_accessor description: ::String
@@ -665,6 +788,7 @@ module Aws::FIS
       attr_accessor role_arn: ::String
       attr_accessor log_configuration: Types::UpdateExperimentTemplateLogConfigurationInput
       attr_accessor experiment_options: Types::UpdateExperimentTemplateExperimentOptionsInput
+      attr_accessor experiment_report_configuration: Types::UpdateExperimentTemplateReportConfigurationInput
       SENSITIVE: []
     end
 

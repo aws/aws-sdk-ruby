@@ -4618,8 +4618,7 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] id
     #   The case insensitive unique identifier for the endpoint in the
-    #   context of the batch. The identifier can't contain `$`, `\{` or
-    #   `\}`.
+    #   context of the batch. The identifier can't contain `$`, `{` or `}`.
     #   @return [String]
     #
     # @!attribute [rw] location
@@ -11769,7 +11768,7 @@ module Aws::Pinpoint
     # @!attribute [rw] value
     #   The value of the message header. The header value can contain up to
     #   870 characters, including the length of any rendered attributes. For
-    #   example if you add the \\\{CreationDate\\} attribute, it renders as
+    #   example if you add the \{CreationDate} attribute, it renders as
     #   YYYY-MM-DDTHH:MM:SS.SSSZ and is 24 characters in length.
     #   @return [String]
     #

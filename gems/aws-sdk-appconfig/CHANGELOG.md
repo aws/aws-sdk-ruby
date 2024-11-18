@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2024-11-18)
+------------------
+
+* Feature - AWS AppConfig has added a new extension action point, AT_DEPLOYMENT_TICK, to support third-party monitors to trigger an automatic rollback during a deployment.
+
 1.60.0 (2024-10-24)
 ------------------
 

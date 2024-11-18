@@ -1327,7 +1327,6 @@ module Aws::CodeCommit
     #
     #     * A federated user identified in IAM as Mary\_Major
     #       (arn:aws:sts::*123456789012*:federated-user/*Mary\_Major*)
-    #
     #     This option does not recognize an active session of someone
     #     assuming the role of CodeCommitReview with a role session name of
     #     *Mary\_Major*
@@ -1530,7 +1529,6 @@ module Aws::CodeCommit
     #
     #     * A federated user identified in IAM as Mary\_Major
     #       (arn:aws:sts::*123456789012*:federated-user/*Mary\_Major*)
-    #
     #     This option does not recognize an active session of someone
     #     assuming the role of CodeCommitReview with a role session name of
     #     *Mary\_Major*
@@ -6958,7 +6956,6 @@ module Aws::CodeCommit
     #
     #     * A federated user identified in IAM as Mary\_Major
     #       (arn:aws:sts::*123456789012*:federated-user/*Mary\_Major*)
-    #
     #     This option does not recognize an active session of someone
     #     assuming the role of CodeCommitReview with a role session name of
     #     *Mary\_Major*

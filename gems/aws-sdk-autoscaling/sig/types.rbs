@@ -103,6 +103,7 @@ module Aws::AutoScaling
     class AttachTrafficSourcesType
       attr_accessor auto_scaling_group_name: ::String
       attr_accessor traffic_sources: ::Array[Types::TrafficSourceIdentifier]
+      attr_accessor skip_zonal_shift_validation: bool
       SENSITIVE: []
     end
 
@@ -142,6 +143,8 @@ module Aws::AutoScaling
       attr_accessor default_instance_warmup: ::Integer
       attr_accessor traffic_sources: ::Array[Types::TrafficSourceIdentifier]
       attr_accessor instance_maintenance_policy: Types::InstanceMaintenancePolicy
+      attr_accessor availability_zone_distribution: Types::AvailabilityZoneDistribution
+      attr_accessor availability_zone_impairment_policy: Types::AvailabilityZoneImpairmentPolicy
       SENSITIVE: []
     end
 
@@ -176,6 +179,17 @@ module Aws::AutoScaling
     class AutoScalingInstancesType
       attr_accessor auto_scaling_instances: ::Array[Types::AutoScalingInstanceDetails]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class AvailabilityZoneDistribution
+      attr_accessor capacity_distribution_strategy: ("balanced-only" | "balanced-best-effort")
+      SENSITIVE: []
+    end
+
+    class AvailabilityZoneImpairmentPolicy
+      attr_accessor zonal_shift_enabled: bool
+      attr_accessor impaired_zone_health_check_behavior: ("ReplaceUnhealthy" | "IgnoreUnhealthy")
       SENSITIVE: []
     end
 
@@ -272,6 +286,9 @@ module Aws::AutoScaling
       attr_accessor default_instance_warmup: ::Integer
       attr_accessor traffic_sources: ::Array[Types::TrafficSourceIdentifier]
       attr_accessor instance_maintenance_policy: Types::InstanceMaintenancePolicy
+      attr_accessor availability_zone_distribution: Types::AvailabilityZoneDistribution
+      attr_accessor availability_zone_impairment_policy: Types::AvailabilityZoneImpairmentPolicy
+      attr_accessor skip_zonal_shift_validation: bool
       SENSITIVE: []
     end
 
@@ -1391,6 +1408,9 @@ module Aws::AutoScaling
       attr_accessor desired_capacity_type: ::String
       attr_accessor default_instance_warmup: ::Integer
       attr_accessor instance_maintenance_policy: Types::InstanceMaintenancePolicy
+      attr_accessor availability_zone_distribution: Types::AvailabilityZoneDistribution
+      attr_accessor availability_zone_impairment_policy: Types::AvailabilityZoneImpairmentPolicy
+      attr_accessor skip_zonal_shift_validation: bool
       SENSITIVE: []
     end
 

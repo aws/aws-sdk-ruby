@@ -52,6 +52,7 @@ module Aws::CloudTrail
   # * {EventDataStoreMaxLimitExceededException}
   # * {EventDataStoreNotFoundException}
   # * {EventDataStoreTerminationProtectedException}
+  # * {GenerateResponseException}
   # * {ImportNotFoundException}
   # * {InactiveEventDataStoreException}
   # * {InactiveQueryException}
@@ -362,6 +363,16 @@ module Aws::CloudTrail
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudTrail::Types::EventDataStoreTerminationProtectedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class GenerateResponseException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudTrail::Types::GenerateResponseException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

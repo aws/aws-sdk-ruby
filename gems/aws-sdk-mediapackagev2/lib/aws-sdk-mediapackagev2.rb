@@ -55,7 +55,7 @@ module Aws::MediaPackageV2
   autoload :EndpointProvider, 'aws-sdk-mediapackagev2/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-mediapackagev2/endpoints'
 
-  GEM_VERSION = '1.31.0'
+  GEM_VERSION = '1.32.0'
 
 end
 

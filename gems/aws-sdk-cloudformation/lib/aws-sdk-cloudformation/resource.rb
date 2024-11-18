@@ -148,7 +148,6 @@ module Aws::CloudFormation
     #
     #     * If you don't specify either of these capabilities, CloudFormation
     #       returns an `InsufficientCapabilities` error.
-    #
     #     If your stack template contains these resources, we recommend that
     #     you review all permissions associated with them and edit their
     #     permissions if necessary.
@@ -166,7 +165,6 @@ module Aws::CloudFormation
     #     * [AWS::IAM::User][6]
     #
     #     * [AWS::IAM::UserToGroupAddition][7]
-    #
     #     For more information, see [Acknowledging IAM resources in
     #     CloudFormation templates][8].
     #
@@ -373,10 +371,9 @@ module Aws::CloudFormation
     #   limit resource-level permissions and avoid returning a response when
     #   no parameter is sent in the request:
     #
-    #    \\\{ "Version": "2012-10-17", "Statement": \[\\\{ "Effect":
+    #    \{ "Version": "2012-10-17", "Statement": \[\{ "Effect":
     #   "Deny", "Action": "cloudformation:DescribeStacks",
-    #   "NotResource": "arn:aws:cloudformation:*:*:stack/*/*" \\}\]
-    #   \\}
+    #   "NotResource": "arn:aws:cloudformation:*:*:stack/*/*" }\] }
     #
     #    </note>
     #

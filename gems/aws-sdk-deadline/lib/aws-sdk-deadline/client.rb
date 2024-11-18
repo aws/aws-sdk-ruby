@@ -1225,6 +1225,18 @@ module Aws::Deadline
     #             iops: 1,
     #             throughput_mi_b: 1,
     #           },
+    #           accelerator_capabilities: {
+    #             selections: [ # required
+    #               {
+    #                 name: "t4", # required, accepts t4, a10g, l4, l40s
+    #                 runtime: "AcceleratorRuntime",
+    #               },
+    #             ],
+    #             count: {
+    #               min: 1, # required
+    #               max: 1,
+    #             },
+    #           },
     #           allowed_instance_types: ["InstanceType"],
     #           excluded_instance_types: ["InstanceType"],
     #           custom_amounts: [
@@ -2392,6 +2404,11 @@ module Aws::Deadline
     #   resp.configuration.service_managed_ec2.instance_capabilities.root_ebs_volume.size_gi_b #=> Integer
     #   resp.configuration.service_managed_ec2.instance_capabilities.root_ebs_volume.iops #=> Integer
     #   resp.configuration.service_managed_ec2.instance_capabilities.root_ebs_volume.throughput_mi_b #=> Integer
+    #   resp.configuration.service_managed_ec2.instance_capabilities.accelerator_capabilities.selections #=> Array
+    #   resp.configuration.service_managed_ec2.instance_capabilities.accelerator_capabilities.selections[0].name #=> String, one of "t4", "a10g", "l4", "l40s"
+    #   resp.configuration.service_managed_ec2.instance_capabilities.accelerator_capabilities.selections[0].runtime #=> String
+    #   resp.configuration.service_managed_ec2.instance_capabilities.accelerator_capabilities.count.min #=> Integer
+    #   resp.configuration.service_managed_ec2.instance_capabilities.accelerator_capabilities.count.max #=> Integer
     #   resp.configuration.service_managed_ec2.instance_capabilities.allowed_instance_types #=> Array
     #   resp.configuration.service_managed_ec2.instance_capabilities.allowed_instance_types[0] #=> String
     #   resp.configuration.service_managed_ec2.instance_capabilities.excluded_instance_types #=> Array
@@ -3677,6 +3694,11 @@ module Aws::Deadline
     #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.root_ebs_volume.size_gi_b #=> Integer
     #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.root_ebs_volume.iops #=> Integer
     #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.root_ebs_volume.throughput_mi_b #=> Integer
+    #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.accelerator_capabilities.selections #=> Array
+    #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.accelerator_capabilities.selections[0].name #=> String, one of "t4", "a10g", "l4", "l40s"
+    #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.accelerator_capabilities.selections[0].runtime #=> String
+    #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.accelerator_capabilities.count.min #=> Integer
+    #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.accelerator_capabilities.count.max #=> Integer
     #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.allowed_instance_types #=> Array
     #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.allowed_instance_types[0] #=> String
     #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.excluded_instance_types #=> Array
@@ -5716,6 +5738,18 @@ module Aws::Deadline
     #             iops: 1,
     #             throughput_mi_b: 1,
     #           },
+    #           accelerator_capabilities: {
+    #             selections: [ # required
+    #               {
+    #                 name: "t4", # required, accepts t4, a10g, l4, l40s
+    #                 runtime: "AcceleratorRuntime",
+    #               },
+    #             ],
+    #             count: {
+    #               min: 1, # required
+    #               max: 1,
+    #             },
+    #           },
     #           allowed_instance_types: ["InstanceType"],
     #           excluded_instance_types: ["InstanceType"],
     #           custom_amounts: [
@@ -6412,7 +6446,7 @@ module Aws::Deadline
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-deadline'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

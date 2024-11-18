@@ -5,6 +5,18 @@ Unreleased Changes
 
 * Feature - Always validate response checksums for operations that support or require it. Supported config options are `when_supported` and `when_required`. The default value is `when_supported`. This option is configured in code with `:response_checksum_validation`, in the shared config file as `response_checksum_validation`, and in the ENV as `ENV['AWS_response_checksum_validation']`.
 
+3.213.0 (2024-11-14)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - This release introduces the new API 'AssumeRoot', which returns short-term credentials that you can use to perform privileged tasks.
+
+3.212.0 (2024-11-06)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
 3.211.0 (2024-10-21)
 ------------------
 

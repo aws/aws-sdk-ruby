@@ -23,6 +23,8 @@ module Aws::ControlCatalog
     CommonControlSummaryList = Shapes::ListShape.new(name: 'CommonControlSummaryList')
     ControlArn = Shapes::StringShape.new(name: 'ControlArn')
     ControlBehavior = Shapes::StringShape.new(name: 'ControlBehavior')
+    ControlParameter = Shapes::StructureShape.new(name: 'ControlParameter')
+    ControlParameters = Shapes::ListShape.new(name: 'ControlParameters')
     ControlScope = Shapes::StringShape.new(name: 'ControlScope')
     ControlSummary = Shapes::StructureShape.new(name: 'ControlSummary')
     Controls = Shapes::ListShape.new(name: 'Controls')
@@ -34,6 +36,8 @@ module Aws::ControlCatalog
     DomainSummaryList = Shapes::ListShape.new(name: 'DomainSummaryList')
     GetControlRequest = Shapes::StructureShape.new(name: 'GetControlRequest')
     GetControlResponse = Shapes::StructureShape.new(name: 'GetControlResponse')
+    ImplementationDetails = Shapes::StructureShape.new(name: 'ImplementationDetails')
+    ImplementationType = Shapes::StringShape.new(name: 'ImplementationType')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     ListCommonControlsRequest = Shapes::StructureShape.new(name: 'ListCommonControlsRequest')
     ListCommonControlsResponse = Shapes::StructureShape.new(name: 'ListCommonControlsResponse')
@@ -87,6 +91,11 @@ module Aws::ControlCatalog
 
     CommonControlSummaryList.member = Shapes::ShapeRef.new(shape: CommonControlSummary)
 
+    ControlParameter.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
+    ControlParameter.struct_class = Types::ControlParameter
+
+    ControlParameters.member = Shapes::ShapeRef.new(shape: ControlParameter)
+
     ControlSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ControlArn, required: true, location_name: "Arn"))
     ControlSummary.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     ControlSummary.add_member(:description, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Description"))
@@ -118,7 +127,12 @@ module Aws::ControlCatalog
     GetControlResponse.add_member(:description, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Description"))
     GetControlResponse.add_member(:behavior, Shapes::ShapeRef.new(shape: ControlBehavior, required: true, location_name: "Behavior"))
     GetControlResponse.add_member(:region_configuration, Shapes::ShapeRef.new(shape: RegionConfiguration, required: true, location_name: "RegionConfiguration"))
+    GetControlResponse.add_member(:implementation, Shapes::ShapeRef.new(shape: ImplementationDetails, location_name: "Implementation"))
+    GetControlResponse.add_member(:parameters, Shapes::ShapeRef.new(shape: ControlParameters, location_name: "Parameters"))
     GetControlResponse.struct_class = Types::GetControlResponse
+
+    ImplementationDetails.add_member(:type, Shapes::ShapeRef.new(shape: ImplementationType, required: true, location_name: "Type"))
+    ImplementationDetails.struct_class = Types::ImplementationDetails
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
