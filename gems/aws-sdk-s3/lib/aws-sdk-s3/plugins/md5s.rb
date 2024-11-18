@@ -13,18 +13,12 @@ module Aws
                default: true,
                doc_type: 'Boolean',
                docstring: <<~DOCS)
-                 This option is deprecated. Please use `:request_checksum_calculation`
-                 instead. When `true`, `request_checksum_calculation` is set to `when_supported`,
-                 and if `false` it is set to `when_required`.
+                 This option is deprecated. Please use `:request_checksum_calculation` instead.
+                 When `false`, `request_checksum_calculation` is overridden to `when_required`.
                DOCS
 
         def after_initialize(client)
-          client.config.request_checksum_calculation =
-            if client.config.compute_checksums
-              'when_supported'
-            else
-              'when_required'
-            end
+          client.config.request_checksum_calculation = 'when_required' unless client.config.compute_checksums
         end
       end
     end

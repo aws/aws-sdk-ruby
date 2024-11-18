@@ -20,6 +20,8 @@ module Aws
         supported
       end.freeze
 
+      CRT_ALGORITHMS = %w[CRC32C CRC64NVME].freeze
+
       # Priority order of checksum algorithms to validate responses against.
       # Remove any algorithms not supported by client (ie, depending on CRT availability).
       # This list was chosen based on average performance.
@@ -49,7 +51,7 @@ module Aws
                  `requestAlgorithmMember` is modeled.
                * `when_required` - When set, a checksum will only be calculated for
                  request payloads of operations modeled with the  `httpChecksum` trait where
-                 `requestChecksumRequired` is `true` or where a requestAlgorithmMember
+                 `requestChecksumRequired` is `true` or where a `requestAlgorithmMember`
                  is modeled and supplied.
              DOCS
         resolve_request_checksum_calculation(cfg)
@@ -114,14 +116,14 @@ module Aws
         end
 
         def resolve_response_checksum_validation(cfg)
-          mode = ENV['AWS_response_checksum_validation'] ||
+          mode = ENV['AWS_RESPONSE_CHECKSUM_VALIDATION'] ||
                  Aws.shared_config.response_checksum_validation(profile: cfg.profile) ||
                  'when_supported'
           mode = mode.downcase
           unless %w[when_supported when_required].include?(mode)
             raise ArgumentError,
                   'expected :response_checksum_validation or' \
-                  " ENV['AWS_response_checksum_validation'] to be " \
+                  " ENV['AWS_RESPONSE_CHECKSUM_VALIDATION'] to be " \
                   '`when_supported` or `when_required`.'
           end
           mode
@@ -212,18 +214,18 @@ module Aws
         def add_request_config_metric(config, metrics)
           case config.request_checksum_calculation
           when 'when_supported'
-            metrics << 'FLEXIBLE_CHECKSUMS_REQ_when_supported'
+            metrics << 'FLEXIBLE_CHECKSUMS_REQ_WHEN_SUPPORTED'
           when 'when_required'
-            metrics << 'FLEXIBLE_CHECKSUMS_REQ_when_required'
+            metrics << 'FLEXIBLE_CHECKSUMS_REQ_WHEN_REQUIRED'
           end
         end
 
         def add_response_config_metric(config, metrics)
           case config.response_checksum_validation
           when 'when_supported'
-            metrics << 'FLEXIBLE_CHECKSUMS_RES_when_supported'
+            metrics << 'FLEXIBLE_CHECKSUMS_RES_WHEN_SUPPORTED'
           when 'when_required'
-            metrics << 'FLEXIBLE_CHECKSUMS_RES_when_required'
+            metrics << 'FLEXIBLE_CHECKSUMS_RES_WHEN_REQUIRED'
           end
         end
 
@@ -270,7 +272,7 @@ module Aws
 
         def checksum_optional?(context)
           context.operation.http_checksum &&
-            context.config.request_checksum_calculation == 'when_supported'
+            context.config.request_checksum_calculation != 'when_required'
         end
 
         def checksum_provided_as_header?(headers)
@@ -287,7 +289,7 @@ module Aws
           algorithm = request_algorithm_selection(context).upcase
           return algorithm if CLIENT_ALGORITHMS.include?(algorithm)
 
-          if %w[CRC32C CRC64NVME].include?(algorithm)
+          if CRT_ALGORITHMS.include?(algorithm)
             raise ArgumentError,
                   'CRC32C and CRC64NVME requires CRT support ' \
                   '- install the aws-crt gem'
