@@ -187,7 +187,8 @@ module Aws
             request_algorithm = {
               algorithm: algorithm,
               in: checksum_request_in(context),
-              name: "x-amz-checksum-#{algorithm.downcase}"
+              name: "x-amz-checksum-#{algorithm.downcase}",
+              request_algorithm_header: request_algorithm_header(context)
             }
 
             context[:http_checksum][:request_algorithm] = request_algorithm
@@ -251,6 +252,12 @@ module Aws
           context.params[input_member.to_sym] ||= DEFAULT_CHECKSUM if input_member
         end
 
+        def request_algorithm_header(context)
+          input_member = context.operation.http_checksum['requestAlgorithmMember']
+          shape = context.operation.input.shape.member(input_member)
+          shape.location_name if shape && shape.location == 'header'
+        end
+
         def request_validation_mode(context)
           return unless context.operation.http_checksum
 
@@ -309,20 +316,27 @@ module Aws
         end
 
         def calculate_request_checksum(context, checksum_properties)
+          headers = context.http_request.headers
+          if (algorithm_header = checksum_properties[:request_algorithm_header])
+            headers[algorithm_header] = checksum_properties[:algorithm]
+          end
           case checksum_properties[:in]
           when 'header'
-            header_name = checksum_properties[:name]
-            headers = context.http_request.headers
-            unless headers[header_name]
-              body = context.http_request.body_contents
-              headers[header_name] = calculate_checksum(
-                checksum_properties[:algorithm],
-                body
-              )
-            end
+            apply_request_checksum(context, headers, checksum_properties)
           when 'trailer'
-            apply_request_trailer_checksum(context, checksum_properties)
+            apply_request_trailer_checksum(context, headers, checksum_properties)
+          else
+            # nothing
           end
+        end
+
+        def apply_request_checksum(context, headers, checksum_properties)
+          header_name = checksum_properties[:name]
+          body = context.http_request.body_contents
+          headers[header_name] = calculate_checksum(
+            checksum_properties[:algorithm],
+            body
+          )
         end
 
         def calculate_checksum(algorithm, body)
@@ -345,11 +359,10 @@ module Aws
           io.rewind
         end
 
-        def apply_request_trailer_checksum(context, checksum_properties)
+        def apply_request_trailer_checksum(context, headers, checksum_properties)
           location_name = checksum_properties[:name]
 
           # set required headers
-          headers = context.http_request.headers
           headers['Content-Encoding'] = 'aws-chunked'
           headers['X-Amz-Content-Sha256'] = 'STREAMING-UNSIGNED-PAYLOAD-TRAILER'
           headers['X-Amz-Trailer'] = location_name

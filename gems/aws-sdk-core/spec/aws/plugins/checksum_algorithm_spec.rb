@@ -175,13 +175,13 @@ module Aws
           allow_any_instance_of(Aws::SharedConfig)
             .to receive(:response_checksum_validation)
             .and_return('when_supported')
-          ENV['AWS_response_checksum_validation'] = 'when_required'
+          ENV['AWS_RESPONSE_CHECKSUM_VALIDATION'] = 'when_required'
           expect(client.config.response_checksum_validation)
             .to eq('when_required')
         end
 
         it 'raises when response_checksum_validation is not valid' do
-          ENV['AWS_response_checksum_validation'] = 'peccy'
+          ENV['AWS_RESPONSE_CHECKSUM_VALIDATION'] = 'peccy'
           expect { client }.to raise_error(ArgumentError, /when_supported/)
         end
       end
@@ -193,26 +193,23 @@ module Aws
           end.to raise_error(ArgumentError)
         end
 
-        it 'with requestAlgorithmMember; will use a CRC32 as a default' do
-          resp = client.http_checksum_operation
-          header = resp.context.http_request.headers['x-amz-checksum-crc32']
-          expect(header).to eq('AAAAAA==')
-        end
-
         file = File.expand_path('checksum_request.json', __dir__)
         test_cases = JSON.load_file(file)
 
         test_cases.each do |test_case|
           it "passes test: #{test_case['documentation']}" do
-            algorithm = test_case['checksumAlgorithm'].upcase
-            unless ChecksumAlgorithm::CLIENT_ALGORITHMS.include?(algorithm)
-              skip "Algorithm #{algorithm} not supported"
+            options = {
+              body: test_case['requestPayload']
+            }
+            if (algorithm = test_case['checksumAlgorithm'])
+              algorithm.upcase!
+              unless ChecksumAlgorithm::CLIENT_ALGORITHMS.include?(algorithm)
+                skip "Algorithm #{algorithm} not supported"
+              end
+              options[:checksum_algorithm] = algorithm
             end
 
-            resp = client.http_checksum_operation(
-              checksum_algorithm: algorithm,
-              body: test_case['requestPayload']
-            )
+            resp = client.http_checksum_operation(**options)
             headers = resp.context.http_request.headers
             test_case['expectHeaders'].each do |key, value|
               expect(headers[key]).to eq(value)
@@ -227,12 +224,17 @@ module Aws
 
         test_cases.each do |test_case|
           it "passes test: #{test_case['documentation']}" do
-            algorithm = test_case['checksumAlgorithm'].upcase
-            unless ChecksumAlgorithm::CLIENT_ALGORITHMS.include?(algorithm)
-              skip "Algorithm #{algorithm} not supported"
+            options = {
+              body: test_case['requestPayload']
+            }
+            if (algorithm = test_case['checksumAlgorithm'])
+              algorithm.upcase!
+              unless ChecksumAlgorithm::CLIENT_ALGORITHMS.include?(algorithm)
+                skip "Algorithm #{algorithm} not supported"
+              end
+              options[:checksum_algorithm] = algorithm
             end
 
-            body = test_case['requestPayload']
             client.stub_responses(:http_checksum_streaming_operation, lambda do |context|
               headers = context.http_request.headers
 
@@ -256,10 +258,7 @@ module Aws
               context
             end)
 
-            client.http_checksum_streaming_operation(
-              checksum_algorithm: algorithm,
-              body: body
-            )
+            client.http_checksum_streaming_operation(**options)
           end
         end
       end

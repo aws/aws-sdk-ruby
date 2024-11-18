@@ -1,5 +1,13 @@
 [
     {
+        "documentation": "Defaults to CRC32.",
+        "requestPayload": "Hello world",
+        "expectHeaders": {
+            "x-amz-request-algorithm": "CRC32",
+            "x-amz-checksum-crc32": "i9aeUg=="
+        }
+    },
+    {
         "documentation": "CRC32 checksum calculation works.",
         "requestPayload": "Hello world",
         "checksumAlgorithm": "Crc32",

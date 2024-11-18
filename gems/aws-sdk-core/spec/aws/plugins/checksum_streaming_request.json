@@ -1,10 +1,23 @@
 [
     {
+        "documentation": "Defaults to CRC32.",
+        "requestPayload": "Hello world",
+        "expectHeaders": {
+            "content-encoding": "aws-chunked",
+            "x-amz-request-algorithm": "CRC32",
+            "x-amz-trailer": "x-amz-checksum-crc32"
+        },
+        "expectTrailers": {
+            "x-amz-checksum-crc32": "i9aeUg=="
+        }
+    },
+    {
         "documentation": "CRC32 streaming checksum calculation works.",
         "requestPayload": "Hello world",
         "checksumAlgorithm": "Crc32",
         "expectHeaders": {
             "content-encoding": "aws-chunked",
+            "x-amz-request-algorithm": "CRC32",
             "x-amz-trailer": "x-amz-checksum-crc32"
         },
         "expectTrailers": {
@@ -17,6 +30,7 @@
         "checksumAlgorithm": "Crc32C",
         "expectHeaders": {
             "content-encoding": "aws-chunked",
+            "x-amz-request-algorithm": "CRC32C",
             "x-amz-trailer": "x-amz-checksum-crc32c"
         },
         "expectTrailers": {
@@ -29,6 +43,7 @@
         "checksumAlgorithm": "Crc64Nvme",
         "expectHeaders": {
             "content-encoding": "aws-chunked",
+            "x-amz-request-algorithm": "CRC64NVME",
             "x-amz-trailer": "x-amz-checksum-crc64nvme"
         },
         "expectTrailers": {
@@ -41,6 +56,7 @@
         "checksumAlgorithm": "Sha1",
         "expectHeaders": {
             "content-encoding": "aws-chunked",
+            "x-amz-request-algorithm": "SHA1",
             "x-amz-trailer": "x-amz-checksum-sha1"
         },
         "expectTrailers": {
@@ -53,6 +69,7 @@
         "checksumAlgorithm": "Sha256",
         "expectHeaders": {
             "content-encoding": "aws-chunked",
+            "x-amz-request-algorithm": "SHA256",
             "x-amz-trailer": "x-amz-checksum-sha256"
         },
         "expectTrailers": {
