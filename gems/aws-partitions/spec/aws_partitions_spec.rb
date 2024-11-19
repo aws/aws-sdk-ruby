@@ -242,8 +242,9 @@ module Aws
 
     describe 'metadata' do
       let(:partition_metadata_json) do
-        path = File.expand_path('../test_partitions_metadata.json', __FILE__)
-        JSON.load(File.read(path))
+        JSON.load_file(
+          File.expand_path('test_partitions_metadata.json', __dir__)
+        )
       end
 
       before do
@@ -267,13 +268,12 @@ module Aws
       end
 
       after do
-        path = File.expand_path('../../partitions.json', __FILE__)
-        original_json = JSON.load(File.read(path))
+        original_json =
+          JSON.load_file(File.expand_path('../partitions.json', __dir__))
         Partitions.clear
         Partitions.add(original_json)
         Partitions.merge_metadata(
-          JSON.load(File.read(
-            File.expand_path('../../partitions-metadata.json', __FILE__)))
+          JSON.load_file(File.expand_path('../partitions-metadata.json', __dir__))
         )
       end
     end
@@ -281,8 +281,10 @@ module Aws
     # normal endpoint testing
     describe Partitions::EndpointProvider do
       let(:partition_json) do
-        path = File.expand_path('../test_partition.json', __FILE__)
-        JSON.load(File.read(path))
+        JSON.load_file(
+          File.expand_path('test_partition.json', __dir__)
+        )
+
       end
 
       before { Partitions.add(partition_json) }
@@ -428,8 +430,9 @@ module Aws
     # variants endpoints testing
     describe Partitions::EndpointProvider do
       let(:fips_partition_json) do
-        path = File.expand_path('../variant_test_partition.json', __FILE__)
-        JSON.load(File.read(path))
+        JSON.load_file(
+          File.expand_path('variant_test_partition.json', __dir__)
+        )
       end
 
       before do
@@ -438,18 +441,19 @@ module Aws
       end
 
       after do
-        path = File.expand_path('../../partitions.json', __FILE__)
-        original_json = JSON.load(File.read(path))
+        original_json =
+          JSON.load_file(File.expand_path('../partitions.json', __dir__))
         Partitions.clear
         Partitions.add(original_json)
         Partitions.merge_metadata(
-          JSON.load(File.read(
-            File.expand_path('../../partitions-metadata.json', __FILE__)))
+          JSON.load_file(
+            File.expand_path('../partitions-metadata.json', __dir__)
+          )
         )
       end
 
-      path = File.expand_path('../variant_test_cases.json', __FILE__)
-      test_cases = JSON.load(File.read(path))
+      test_cases =
+        JSON.load_file(File.expand_path('variant_test_cases.json', __dir__))
 
       describe '.resolve' do
         test_cases.each_with_index do |test_case, index|
@@ -503,6 +507,5 @@ module Aws
         end
       end
     end
-
   end
 end

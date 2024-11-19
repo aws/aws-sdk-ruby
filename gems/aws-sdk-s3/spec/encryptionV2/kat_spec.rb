@@ -27,8 +27,8 @@ module Aws
           )
         end
 
-        fixture_path = File.expand_path('../../fixtures/encryption', __FILE__)
-        kats = JSON.load File.new(File.join(fixture_path, 'aes_gcm_kat.json'))
+        fixture_path = File.expand_path('../fixtures/encryption', __dir__)
+        kats = JSON.load_file(File.new(File.join(fixture_path, 'aes_gcm_kat.json')))
         kats.each_with_index do |raw, i|
           kat = build_kat(raw)
 

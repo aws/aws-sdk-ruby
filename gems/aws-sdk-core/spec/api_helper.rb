@@ -7,48 +7,47 @@ module ApiHelper
 
     def sample_json # dynamodb
       @sample_json ||= begin
-        api = File.expand_path('../fixtures/apis/dynamodb.json', __FILE__)
-        api = JSON.load(File.read(api))
+        api =
+          JSON.load_file(File.expand_path('fixtures/apis/dynamodb.json', __dir__))
         sample_service(api: api)
       end
     end
 
     def sample_query # iam
       @sample_query ||= begin
-        api = File.expand_path('../fixtures/apis/iam.json', __FILE__)
-        api = JSON.load(File.read(api))
+        api =
+          JSON.load_file(File.expand_path('fixtures/apis/iam.json', __dir__))
         sample_service(api: api)
       end
     end
 
     def sample_rest_xml # s3
       @sample_rest_xml ||= begin
-        api = File.expand_path('../fixtures/apis/s3.json', __FILE__)
-        api = JSON.load(File.read(api))
+        api =
+          JSON.load_file(File.expand_path('fixtures/apis/s3.json', __dir__))
         sample_service(api: api)
       end
     end
 
     def sample_rest_json # glacier
       @sample_rest_json ||= begin
-        api = File.expand_path('../fixtures/apis/glacier.json', __FILE__)
-        api = JSON.load(File.read(api))
+        api =
+          JSON.load_file(File.expand_path('fixtures/apis/glacier.json', __dir__))
         sample_service(api: api)
       end
     end
 
     def sample_ec2 # ec2 has its own protocol
       @sample_ec2 ||= begin
-        api = File.expand_path('../fixtures/apis/ec2.json', __FILE__)
-        api = JSON.load(File.read(api))
+        api = JSON.load_file(File.expand_path('fixtures/apis/ec2.json', __dir__))
         sample_service(api: api)
       end
     end
 
     def sample_rpcv2_cbor # cloudwatch logs changed to cbor
       @sample_rpcv2_cbor ||= begin
-        api = File.expand_path('../fixtures/apis/logs.json', __FILE__)
-        api = JSON.load(File.read(api))
+        api =
+          JSON.load_file(File.expand_path('fixtures/apis/logs.json', __dir__))
         sample_service(api: api)
       end
     end

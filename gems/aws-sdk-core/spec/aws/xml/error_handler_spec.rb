@@ -8,7 +8,9 @@ module Aws
 
       let(:cloudfront) {
         ApiHelper.sample_service(
-          api: JSON.load(File.read(File.expand_path('../../../fixtures/apis/cloudfront.json', __FILE__)))
+          api: JSON.load_file(
+            File.expand_path('../../fixtures/apis/cloudfront.json', __dir__)
+          )
         )::Client.new(
           region: 'us-west-2',
           retry_limit: 0,
@@ -19,7 +21,9 @@ module Aws
 
       let(:route53) {
         ApiHelper.sample_service(
-          api: JSON.load(File.read(File.expand_path('../../../fixtures/apis/route53.json', __FILE__)))
+          api: JSON.load_file(
+            File.expand_path('../../fixtures/apis/route53.json', __dir__)
+          )
         )::Client.new(
           region: 'us-west-2',
           retry_limit: 0,
@@ -39,7 +43,9 @@ module Aws
 
       let(:sns) {
         ApiHelper.sample_service(
-          api: JSON.load(File.read(File.expand_path('../../../fixtures/apis/sns.json', __FILE__)))
+          api: JSON.load_file(
+            File.expand_path('../../fixtures/apis/sns.json', __dir__)
+          )
         )::Client.new(
           region: 'us-west-2',
           retry_limit: 0,

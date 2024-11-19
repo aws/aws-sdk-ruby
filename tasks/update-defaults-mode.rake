@@ -10,7 +10,7 @@ task 'update-defaults-mode', [:defaults_file] do |t, args|
   end
 
   puts "Loading defaults from: #{defaults_file}"
-  defaults = JSON.load(File.read(defaults_file))
+  defaults = JSON.load_file(defaults_file)
 
   default_mode_docs = ["<p>The following <code>:default_mode</code> values are supported: </p>"]
   default_mode_docs << "<ul>"
