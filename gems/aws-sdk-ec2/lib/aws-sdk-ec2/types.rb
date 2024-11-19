@@ -9298,6 +9298,10 @@ module Aws::EC2
     #   The information for the launch template.
     #   @return [Types::RequestLaunchTemplateData]
     #
+    # @!attribute [rw] operator
+    #   Reserved for internal use.
+    #   @return [Types::OperatorRequest]
+    #
     # @!attribute [rw] tag_specifications
     #   The tags to apply to the launch template on creation. To tag the
     #   launch template, the resource type must be `launch-template`.
@@ -9319,6 +9323,7 @@ module Aws::EC2
       :launch_template_name,
       :version_description,
       :launch_template_data,
+      :operator,
       :tag_specifications)
       SENSITIVE = []
       include Aws::Structure
@@ -10243,6 +10248,10 @@ module Aws::EC2
     #   A connection tracking specification for the network interface.
     #   @return [Types::ConnectionTrackingSpecificationRequest]
     #
+    # @!attribute [rw] operator
+    #   Reserved for internal use.
+    #   @return [Types::OperatorRequest]
+    #
     # @!attribute [rw] subnet_id
     #   The ID of the subnet to associate with the network interface.
     #   @return [String]
@@ -10324,6 +10333,7 @@ module Aws::EC2
       :client_token,
       :enable_primary_ipv_6,
       :connection_tracking_specification,
+      :operator,
       :subnet_id,
       :description,
       :private_ip_address,
@@ -12977,6 +12987,10 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
+    # @!attribute [rw] operator
+    #   Reserved for internal use.
+    #   @return [Types::OperatorRequest]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -12999,6 +13013,7 @@ module Aws::EC2
       :multi_attach_enabled,
       :throughput,
       :client_token,
+      :operator,
       :dry_run)
       SENSITIVE = []
       include Aws::Structure
@@ -17489,7 +17504,6 @@ module Aws::EC2
     #     * `dedicated` - The Capacity Reservation is created on
     #       single-tenant hardware that is dedicated to a single Amazon Web
     #       Services account.
-    #
     #   * `outpost-arn` - The Amazon Resource Name (ARN) of the Outpost on
     #     which the Capacity Reservation was created.
     #
@@ -17513,7 +17527,6 @@ module Aws::EC2
     #       request might fail due to invalid request parameters, capacity
     #       constraints, or instance limit constraints. Failed requests are
     #       retained for 60 minutes.
-    #
     #   * `start-date` - The date and time at which the Capacity Reservation
     #     was started.
     #
@@ -17532,7 +17545,6 @@ module Aws::EC2
     #
     #     * `limited` - The Capacity Reservation expires automatically at a
     #       specified date and time.
-    #
     #   * `instance-match-criteria` - Indicates the type of instance
     #     launches that the Capacity Reservation accepts. The options
     #     include:
@@ -17548,7 +17560,6 @@ module Aws::EC2
     #       Availability Zone), and explicitly target the Capacity
     #       Reservation. This ensures that only permitted instances can use
     #       the reserved capacity.
-    #
     #   * `placement-group-arn` - The ARN of the cluster placement group in
     #     which the Capacity Reservation was created.
     #   @return [Array<Types::Filter>]
@@ -31184,6 +31195,10 @@ module Aws::EC2
     #   Fargate tasks.
     #   @return [String]
     #
+    # @!attribute [rw] operator
+    #   The entity that manages the EBS volume.
+    #   @return [Types::OperatorResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EbsInstanceBlockDevice AWS API Documentation
     #
     class EbsInstanceBlockDevice < Struct.new(
@@ -31192,7 +31207,8 @@ module Aws::EC2
       :status,
       :volume_id,
       :associated_resource,
-      :volume_owner_id)
+      :volume_owner_id,
+      :operator)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -40067,6 +40083,10 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html
     #   @return [String]
     #
+    # @!attribute [rw] operator
+    #   The entity that manages the instance.
+    #   @return [Types::OperatorResponse]
+    #
     # @!attribute [rw] instance_id
     #   The ID of the instance.
     #   @return [String]
@@ -40209,6 +40229,7 @@ module Aws::EC2
       :tpm_support,
       :maintenance_options,
       :current_instance_boot_mode,
+      :operator,
       :instance_id,
       :image_id,
       :state,
@@ -40818,6 +40839,10 @@ module Aws::EC2
     #   Information about the AMI used to launch the instance.
     #   @return [Types::ImageMetadata]
     #
+    # @!attribute [rw] operator
+    #   The entity that manages the instance.
+    #   @return [Types::OperatorResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceImageMetadata AWS API Documentation
     #
     class InstanceImageMetadata < Struct.new(
@@ -40829,7 +40854,8 @@ module Aws::EC2
       :state,
       :owner_id,
       :tags,
-      :image_metadata)
+      :image_metadata,
+      :operator)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -41254,6 +41280,10 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts
     #   @return [Types::ConnectionTrackingSpecificationResponse]
     #
+    # @!attribute [rw] operator
+    #   The entity that manages the network interface.
+    #   @return [Types::OperatorResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceNetworkInterface AWS API Documentation
     #
     class InstanceNetworkInterface < Struct.new(
@@ -41275,7 +41305,8 @@ module Aws::EC2
       :interface_type,
       :ipv_4_prefixes,
       :ipv_6_prefixes,
-      :connection_tracking_configuration)
+      :connection_tracking_configuration,
+      :operator)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -42691,6 +42722,10 @@ module Aws::EC2
     #   The Amazon Resource Name (ARN) of the Outpost.
     #   @return [String]
     #
+    # @!attribute [rw] operator
+    #   The entity that manages the instance.
+    #   @return [Types::OperatorResponse]
+    #
     # @!attribute [rw] events
     #   Any scheduled events associated with the instance.
     #   @return [Array<Types::InstanceStatusEvent>]
@@ -42726,6 +42761,7 @@ module Aws::EC2
     class InstanceStatus < Struct.new(
       :availability_zone,
       :outpost_arn,
+      :operator,
       :events,
       :instance_id,
       :instance_state,
@@ -43827,7 +43863,6 @@ module Aws::EC2
     #     * You have opted-out of the IPAM home Region.
     #
     #     * Account you are using as your IPAM account has been suspended.
-    #
     #   * `throttling-failure` - IPAM account is already using the allotted
     #     transactions per second and IPAM is receiving a throttling error
     #     when assuming the Amazon Web Services IAM SLR.
@@ -45291,6 +45326,10 @@ module Aws::EC2
     #   The tags for the launch template.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] operator
+    #   The entity that manages the launch template.
+    #   @return [Types::OperatorResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplate AWS API Documentation
     #
     class LaunchTemplate < Struct.new(
@@ -45300,7 +45339,8 @@ module Aws::EC2
       :created_by,
       :default_version_number,
       :latest_version_number,
-      :tags)
+      :tags,
+      :operator)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -47004,6 +47044,10 @@ module Aws::EC2
     #   Information about the launch template.
     #   @return [Types::ResponseLaunchTemplateData]
     #
+    # @!attribute [rw] operator
+    #   The entity that manages the launch template.
+    #   @return [Types::OperatorResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateVersion AWS API Documentation
     #
     class LaunchTemplateVersion < Struct.new(
@@ -47014,7 +47058,8 @@ module Aws::EC2
       :create_time,
       :created_by,
       :default_version,
-      :launch_template_data)
+      :launch_template_data,
+      :operator)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -47643,7 +47688,6 @@ module Aws::EC2
     #
     #     * The snapshot is unlocked by a user with the appropriate
     #       permissions.
-    #
     #     Users with the appropriate IAM permissions can unlock the
     #     snapshot, increase or decrease the lock duration, and change the
     #     lock mode to `compliance` at any time.
@@ -53896,6 +53940,10 @@ module Aws::EC2
     #   interface.
     #   @return [String]
     #
+    # @!attribute [rw] operator
+    #   The entity that manages the network interface.
+    #   @return [Types::OperatorResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInterface AWS API Documentation
     #
     class NetworkInterface < Struct.new(
@@ -53925,7 +53973,8 @@ module Aws::EC2
       :vpc_id,
       :deny_all_igw_traffic,
       :ipv_6_native,
-      :ipv_6_address)
+      :ipv_6_address,
+      :operator)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -54530,6 +54579,41 @@ module Aws::EC2
       :single_availability_zone,
       :min_target_capacity,
       :max_total_price)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The entity that manages the resource.
+    #
+    # @!attribute [rw] principal
+    #   The entity that manages the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/OperatorRequest AWS API Documentation
+    #
+    class OperatorRequest < Struct.new(
+      :principal)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes whether the resource is managed by an entity and, if so,
+    # describes the entity that manages it.
+    #
+    # @!attribute [rw] managed
+    #   If `true`, the resource is managed by an entity.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] principal
+    #   If `managed` is `true`, then the principal is returned. The
+    #   principal is the entity that manages the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/OperatorResponse AWS API Documentation
+    #
+    class OperatorResponse < Struct.new(
+      :managed,
+      :principal)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -58249,6 +58333,10 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-stop-protection.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] operator
+    #   The entity that manages the launch template.
+    #   @return [Types::OperatorRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestLaunchTemplateData AWS API Documentation
     #
     class RequestLaunchTemplateData < Struct.new(
@@ -58282,7 +58370,8 @@ module Aws::EC2
       :instance_requirements,
       :private_dns_name_options,
       :maintenance_options,
-      :disable_api_stop)
+      :disable_api_stop,
+      :operator)
       SENSITIVE = [:user_data]
       include Aws::Structure
     end
@@ -59644,6 +59733,10 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-stop-protection.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] operator
+    #   The entity that manages the launch template.
+    #   @return [Types::OperatorResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResponseLaunchTemplateData AWS API Documentation
     #
     class ResponseLaunchTemplateData < Struct.new(
@@ -59677,7 +59770,8 @@ module Aws::EC2
       :instance_requirements,
       :private_dns_name_options,
       :maintenance_options,
-      :disable_api_stop)
+      :disable_api_stop,
+      :operator)
       SENSITIVE = [:user_data]
       include Aws::Structure
     end
@@ -60881,6 +60975,10 @@ module Aws::EC2
     #   ENI becomes the primary IPv6 address.
     #   @return [Boolean]
     #
+    # @!attribute [rw] operator
+    #   Reserved for internal use.
+    #   @return [Types::OperatorRequest]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
@@ -61002,6 +61100,7 @@ module Aws::EC2
       :maintenance_options,
       :disable_api_stop,
       :enable_primary_ipv_6,
+      :operator,
       :dry_run,
       :disable_api_termination,
       :instance_initiated_shutdown_behavior,
@@ -69252,6 +69351,10 @@ module Aws::EC2
     #   Reserved for future use.
     #   @return [String]
     #
+    # @!attribute [rw] operator
+    #   The entity that manages the volume.
+    #   @return [Types::OperatorResponse]
+    #
     # @!attribute [rw] volume_id
     #   The ID of the volume.
     #   @return [String]
@@ -69304,6 +69407,7 @@ module Aws::EC2
       :multi_attach_enabled,
       :throughput,
       :sse_type,
+      :operator,
       :volume_id,
       :size,
       :snapshot_id,

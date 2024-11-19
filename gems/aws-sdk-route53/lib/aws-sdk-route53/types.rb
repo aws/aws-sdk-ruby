@@ -212,7 +212,6 @@ module Aws::Route53
     #       * Application and Network Load Balancers: Use
     #         [DescribeLoadBalancers][6] to get the value of
     #         `CanonicalHostedZoneId`.
-    #
     #     * **CLI**: Use `describe-load-balancers` to get the applicable
     #       value. For more information, see the applicable guide:
     #
@@ -367,7 +366,6 @@ module Aws::Route53
     #
     #       * Application and Network Load Balancers:
     #         [DescribeLoadBalancers][8]
-    #
     #     * **CLI**: Use `describe-load-balancers` to get the value of
     #       `DNSName`. For more information, see the applicable guide:
     #
@@ -6768,7 +6766,6 @@ module Aws::Route53
     #
     #     * You specify a health check ID for the non-alias resource record
     #       set.
-    #
     #     If the health check status is healthy, Route 53 considers the
     #     alias resource record set to be healthy and includes the alias
     #     record among the records that it responds to DNS queries with.

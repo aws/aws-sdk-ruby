@@ -197,6 +197,7 @@ module Aws::RDS
     DBInstanceList = Shapes::ListShape.new(name: 'DBInstanceList')
     DBInstanceMessage = Shapes::StructureShape.new(name: 'DBInstanceMessage')
     DBInstanceNotFoundFault = Shapes::StructureShape.new(name: 'DBInstanceNotFoundFault', error: {"code"=>"DBInstanceNotFound", "httpStatusCode"=>404, "senderFault"=>true})
+    DBInstanceNotReadyFault = Shapes::StructureShape.new(name: 'DBInstanceNotReadyFault', error: {"code"=>"DBInstanceNotReady", "httpStatusCode"=>503})
     DBInstanceRole = Shapes::StructureShape.new(name: 'DBInstanceRole')
     DBInstanceRoleAlreadyExistsFault = Shapes::StructureShape.new(name: 'DBInstanceRoleAlreadyExistsFault', error: {"code"=>"DBInstanceRoleAlreadyExists", "httpStatusCode"=>400, "senderFault"=>true})
     DBInstanceRoleNotFoundFault = Shapes::StructureShape.new(name: 'DBInstanceRoleNotFoundFault', error: {"code"=>"DBInstanceRoleNotFound", "httpStatusCode"=>404, "senderFault"=>true})
@@ -667,6 +668,7 @@ module Aws::RDS
     ScalingConfiguration = Shapes::StructureShape.new(name: 'ScalingConfiguration')
     ScalingConfigurationInfo = Shapes::StructureShape.new(name: 'ScalingConfigurationInfo')
     SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
+    ServerlessV2FeaturesSupport = Shapes::StructureShape.new(name: 'ServerlessV2FeaturesSupport')
     ServerlessV2ScalingConfiguration = Shapes::StructureShape.new(name: 'ServerlessV2ScalingConfiguration')
     ServerlessV2ScalingConfigurationInfo = Shapes::StructureShape.new(name: 'ServerlessV2ScalingConfigurationInfo')
     SharedSnapshotQuotaExceededFault = Shapes::StructureShape.new(name: 'SharedSnapshotQuotaExceededFault', error: {"code"=>"SharedSnapshotQuotaExceeded", "httpStatusCode"=>400, "senderFault"=>true})
@@ -1678,6 +1680,7 @@ module Aws::RDS
     DBEngineVersion.add_member(:supported_ca_certificate_identifiers, Shapes::ShapeRef.new(shape: CACertificateIdentifiersList, location_name: "SupportedCACertificateIdentifiers"))
     DBEngineVersion.add_member(:supports_local_write_forwarding, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "SupportsLocalWriteForwarding"))
     DBEngineVersion.add_member(:supports_integrations, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsIntegrations"))
+    DBEngineVersion.add_member(:serverless_v2_features_support, Shapes::ShapeRef.new(shape: ServerlessV2FeaturesSupport, location_name: "ServerlessV2FeaturesSupport"))
     DBEngineVersion.struct_class = Types::DBEngineVersion
 
     DBEngineVersionList.member = Shapes::ShapeRef.new(shape: DBEngineVersion, location_name: "DBEngineVersion")
@@ -1831,6 +1834,8 @@ module Aws::RDS
     DBInstanceMessage.struct_class = Types::DBInstanceMessage
 
     DBInstanceNotFoundFault.struct_class = Types::DBInstanceNotFoundFault
+
+    DBInstanceNotReadyFault.struct_class = Types::DBInstanceNotReadyFault
 
     DBInstanceRole.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, location_name: "RoleArn"))
     DBInstanceRole.add_member(:feature_name, Shapes::ShapeRef.new(shape: String, location_name: "FeatureName"))
@@ -4056,12 +4061,18 @@ module Aws::RDS
     ScalingConfigurationInfo.add_member(:seconds_before_timeout, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "SecondsBeforeTimeout"))
     ScalingConfigurationInfo.struct_class = Types::ScalingConfigurationInfo
 
+    ServerlessV2FeaturesSupport.add_member(:min_capacity, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MinCapacity"))
+    ServerlessV2FeaturesSupport.add_member(:max_capacity, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MaxCapacity"))
+    ServerlessV2FeaturesSupport.struct_class = Types::ServerlessV2FeaturesSupport
+
     ServerlessV2ScalingConfiguration.add_member(:min_capacity, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MinCapacity"))
     ServerlessV2ScalingConfiguration.add_member(:max_capacity, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MaxCapacity"))
+    ServerlessV2ScalingConfiguration.add_member(:seconds_until_auto_pause, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "SecondsUntilAutoPause"))
     ServerlessV2ScalingConfiguration.struct_class = Types::ServerlessV2ScalingConfiguration
 
     ServerlessV2ScalingConfigurationInfo.add_member(:min_capacity, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MinCapacity"))
     ServerlessV2ScalingConfigurationInfo.add_member(:max_capacity, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MaxCapacity"))
+    ServerlessV2ScalingConfigurationInfo.add_member(:seconds_until_auto_pause, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "SecondsUntilAutoPause"))
     ServerlessV2ScalingConfigurationInfo.struct_class = Types::ServerlessV2ScalingConfigurationInfo
 
     SharedSnapshotQuotaExceededFault.struct_class = Types::SharedSnapshotQuotaExceededFault
@@ -5255,6 +5266,7 @@ module Aws::RDS
         o.input = Shapes::ShapeRef.new(shape: DescribeDBLogFilesMessage)
         o.output = Shapes::ShapeRef.new(shape: DescribeDBLogFilesResponse)
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotReadyFault)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_records",
           tokens: {
@@ -5700,6 +5712,7 @@ module Aws::RDS
         o.input = Shapes::ShapeRef.new(shape: DownloadDBLogFilePortionMessage)
         o.output = Shapes::ShapeRef.new(shape: DownloadDBLogFilePortionDetails)
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotReadyFault)
         o.errors << Shapes::ShapeRef.new(shape: DBLogFileNotFoundFault)
         o[:pager] = Aws::Pager.new(
           more_results: "additional_data_pending",

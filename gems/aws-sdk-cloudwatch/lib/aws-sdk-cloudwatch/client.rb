@@ -2363,7 +2363,7 @@ module Aws::CloudWatch
     #
     #   The results that are returned are an approximation of the value you
     #   specify. There is a low probability that the returned results include
-    #   metrics with last published data as much as 40 minutes more than the
+    #   metrics with last published data as much as 50 minutes more than the
     #   specified time interval.
     #
     # @option params [Boolean] :include_linked_accounts
@@ -3558,6 +3558,10 @@ module Aws::CloudWatch
     #   you specify in this parameter are ignored. To change the tags of an
     #   existing alarm, use [TagResource][1] or [UntagResource][2].
     #
+    #   To use this field to set tags for an alarm when you create it, you
+    #   must be signed on with both the `cloudwatch:PutMetricAlarm` and
+    #   `cloudwatch:TagResource` permissions.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html
@@ -3645,13 +3649,20 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
-    # Publishes metric data points to Amazon CloudWatch. CloudWatch
-    # associates the data points with the specified metric. If the specified
-    # metric does not exist, CloudWatch creates the metric. When CloudWatch
-    # creates a metric, it can take up to fifteen minutes for the metric to
-    # appear in calls to [ListMetrics][1].
+    # Publishes metric data to Amazon CloudWatch. CloudWatch associates the
+    # data with the specified metric. If the specified metric does not
+    # exist, CloudWatch creates the metric. When CloudWatch creates a
+    # metric, it can take up to fifteen minutes for the metric to appear in
+    # calls to [ListMetrics][1].
     #
-    # You can publish either individual data points in the `Value` field, or
+    # You can publish metrics with associated entity data (so that related
+    # telemetry can be found and viewed together), or publish metric data by
+    # itself. To send entity data with your metrics, use the
+    # `EntityMetricData` parameter. To send metrics without entity data, use
+    # the `MetricData` parameter. The `EntityMetricData` structure includes
+    # `MetricData` structures for the metric data.
+    #
+    # You can publish either individual values in the `Value` field, or
     # arrays of values and the number of times each value occurred during
     # the period by using the `Values` and `Counts` fields in the
     # `MetricData` structure. Using the `Values` and `Counts` method enables
@@ -3660,7 +3671,8 @@ module Aws::CloudWatch
     #
     # Each `PutMetricData` request is limited to 1 MB in size for HTTP POST
     # requests. You can send a payload compressed by gzip. Each request is
-    # also limited to no more than 1000 different metrics.
+    # also limited to no more than 1000 different metrics (across both the
+    # `MetricData` and `EntityMetricData` properties).
     #
     # Although the `Value` parameter accepts numbers of type `Double`,
     # CloudWatch rejects values that are either too small or too large.
@@ -3680,7 +3692,7 @@ module Aws::CloudWatch
     # least 48 hours to become available for [GetMetricData][3] or
     # [GetMetricStatistics][4] from the time they are submitted. Data points
     # with time stamps between 3 and 24 hours ago can take as much as 2
-    # hours to become available for for [GetMetricData][3] or
+    # hours to become available for [GetMetricData][3] or
     # [GetMetricStatistics][4].
     #
     # CloudWatch needs raw data points to calculate percentile statistics.
@@ -3708,9 +3720,64 @@ module Aws::CloudWatch
     #   To avoid conflicts with Amazon Web Services service namespaces, you
     #   should not specify a namespace that begins with `AWS/`
     #
-    # @option params [required, Array<Types::MetricDatum>] :metric_data
-    #   The data for the metric. The array can include no more than 1000
+    # @option params [Array<Types::MetricDatum>] :metric_data
+    #   The data for the metrics. Use this parameter if your metrics do not
+    #   contain associated entities. The array can include no more than 1000
     #   metrics per call.
+    #
+    #   The limit of metrics allowed, 1000, is the sum of both
+    #   `EntityMetricData` and `MetricData` metrics.
+    #
+    # @option params [Array<Types::EntityMetricData>] :entity_metric_data
+    #   Data for metrics that contain associated entity information. You can
+    #   include up to two `EntityMetricData` objects, each of which can
+    #   contain a single `Entity` and associated metrics.
+    #
+    #   The limit of metrics allowed, 1000, is the sum of both
+    #   `EntityMetricData` and `MetricData` metrics.
+    #
+    # @option params [Boolean] :strict_entity_validation
+    #   Whether to accept valid metric data when an invalid entity is sent.
+    #
+    #   * When set to `true`: Any validation error (for entity or metric data)
+    #     will fail the entire request, and no data will be ingested. The
+    #     failed operation will return a 400 result with the error.
+    #
+    #   * When set to `false`: Validation errors in the entity will not
+    #     associate the metric with the entity, but the metric data will still
+    #     be accepted and ingested. Validation errors in the metric data will
+    #     fail the entire request, and no data will be ingested.
+    #
+    #     In the case of an invalid entity, the operation will return a `200`
+    #     status, but an additional response header will contain information
+    #     about the validation errors. The new header,
+    #     `X-Amzn-Failure-Message` is an enumeration of the following values:
+    #
+    #     * `InvalidEntity` - The provided entity is invalid.
+    #
+    #     * `InvalidKeyAttributes` - The provided `KeyAttributes` of an entity
+    #       is invalid.
+    #
+    #     * `InvalidAttributes` - The provided `Attributes` of an entity is
+    #       invalid.
+    #
+    #     * `InvalidTypeValue` - The provided `Type` in the `KeyAttributes` of
+    #       an entity is invalid.
+    #
+    #     * `EntitySizeTooLarge` - The number of `EntityMetricData` objects
+    #       allowed is 2.
+    #
+    #     * `MissingRequiredFields` - There are missing required fields in the
+    #       `KeyAttributes` for the provided `Type`.
+    #     For details of the requirements for specifying an entity, see [How
+    #     to add related information to telemetry][1] in the *CloudWatch User
+    #     Guide*.
+    #
+    #   This parameter is *required* when `EntityMetricData` is included.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/adding-your-own-related-telemetry.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3718,7 +3785,7 @@ module Aws::CloudWatch
     #
     #   resp = client.put_metric_data({
     #     namespace: "Namespace", # required
-    #     metric_data: [ # required
+    #     metric_data: [
     #       {
     #         metric_name: "MetricName", # required
     #         dimensions: [
@@ -3741,6 +3808,42 @@ module Aws::CloudWatch
     #         storage_resolution: 1,
     #       },
     #     ],
+    #     entity_metric_data: [
+    #       {
+    #         entity: {
+    #           key_attributes: {
+    #             "EntityKeyAttributesMapKeyString" => "EntityKeyAttributesMapValueString",
+    #           },
+    #           attributes: {
+    #             "EntityAttributesMapKeyString" => "EntityAttributesMapValueString",
+    #           },
+    #         },
+    #         metric_data: [
+    #           {
+    #             metric_name: "MetricName", # required
+    #             dimensions: [
+    #               {
+    #                 name: "DimensionName", # required
+    #                 value: "DimensionValue", # required
+    #               },
+    #             ],
+    #             timestamp: Time.now,
+    #             value: 1.0,
+    #             statistic_values: {
+    #               sample_count: 1.0, # required
+    #               sum: 1.0, # required
+    #               minimum: 1.0, # required
+    #               maximum: 1.0, # required
+    #             },
+    #             values: [1.0],
+    #             counts: [1.0],
+    #             unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
+    #             storage_resolution: 1,
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     strict_entity_validation: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricData AWS API Documentation
@@ -4178,7 +4281,7 @@ module Aws::CloudWatch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.105.0'
+      context[:gem_version] = '1.107.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

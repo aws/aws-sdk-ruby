@@ -562,20 +562,21 @@ module Aws::ECS
     # `default` cluster when you launch your first container instance.
     # However, you can create your own cluster with a unique name.
     #
-    # <note markdown="1"> When you call the CreateCluster API operation, Amazon ECS attempts to
-    # create the Amazon ECS service-linked role for your account. This is so
-    # that it can manage required resources in other Amazon Web Services
-    # services on your behalf. However, if the user that makes the call
-    # doesn't have permissions to create the service-linked role, it isn't
-    # created. For more information, see [Using service-linked roles for
-    # Amazon ECS][1] in the *Amazon Elastic Container Service Developer
-    # Guide*.
+    # <note markdown="1"> When you call the [CreateCluster][1] API operation, Amazon ECS
+    # attempts to create the Amazon ECS service-linked role for your
+    # account. This is so that it can manage required resources in other
+    # Amazon Web Services services on your behalf. However, if the user that
+    # makes the call doesn't have permissions to create the service-linked
+    # role, it isn't created. For more information, see [Using
+    # service-linked roles for Amazon ECS][2] in the *Amazon Elastic
+    # Container Service Developer Guide*.
     #
     #  </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateCluster.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html
     #
     # @option params [String] :cluster_name
     #   The name of your cluster. If you don't specify a name for your
@@ -821,8 +822,8 @@ module Aws::ECS
     # Runs and maintains your desired number of tasks from a specified task
     # definition. If the number of tasks running in a service drops below
     # the `desiredCount`, Amazon ECS runs another copy of the task in the
-    # specified cluster. To update an existing service, see the
-    # UpdateService action.
+    # specified cluster. To update an existing service, use
+    # [UpdateService][1].
     #
     # <note markdown="1"> On March 21, 2024, a change was made to resolve the task definition
     # revision before authorization. When a task definition revision is not
@@ -839,13 +840,13 @@ module Aws::ECS
     # you can optionally run your service behind one or more load balancers.
     # The load balancers distribute traffic across the tasks that are
     # associated with the service. For more information, see [Service load
-    # balancing][1] in the *Amazon Elastic Container Service Developer
+    # balancing][2] in the *Amazon Elastic Container Service Developer
     # Guide*.
     #
     # You can attach Amazon EBS volumes to Amazon ECS tasks by configuring
     # the volume when creating or updating a service. `volumeConfigurations`
     # is only supported for REPLICA service and not DAEMON service. For more
-    # infomation, see [Amazon EBS volumes][2] in the *Amazon Elastic
+    # infomation, see [Amazon EBS volumes][3] in the *Amazon Elastic
     # Container Service Developer Guide*.
     #
     # Tasks for services that don't use a load balancer are considered
@@ -860,7 +861,7 @@ module Aws::ECS
     #   service scheduler spreads tasks across Availability Zones. You can
     #   use task placement strategies and constraints to customize task
     #   placement decisions. For more information, see [Service scheduler
-    #   concepts][3] in the *Amazon Elastic Container Service Developer
+    #   concepts][4] in the *Amazon Elastic Container Service Developer
     #   Guide*.
     #
     # * `DAEMON` - The daemon scheduling strategy deploys exactly one task
@@ -871,13 +872,13 @@ module Aws::ECS
     #   constraints. When using this strategy, you don't need to specify a
     #   desired number of tasks, a task placement strategy, or use Service
     #   Auto Scaling policies. For more information, see [Service scheduler
-    #   concepts][3] in the *Amazon Elastic Container Service Developer
+    #   concepts][4] in the *Amazon Elastic Container Service Developer
     #   Guide*.
     #
     # You can optionally specify a deployment configuration for your
     # service. The deployment is initiated by changing properties. For
     # example, the deployment might be initiated by the task definition or
-    # by your desired count of a service. You can use [UpdateService][4].
+    # by your desired count of a service. You can use [UpdateService][1].
     # The default value for a replica service for `minimumHealthyPercent` is
     # 100%. The default value for a daemon service for
     # `minimumHealthyPercent` is 0%.
@@ -937,10 +938,10 @@ module Aws::ECS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html
-    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types
-    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html
-    # [4]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html
+    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types
+    # [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html
     # [5]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateTaskSet.html
     # [6]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
     # [7]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement.html
@@ -1138,7 +1139,7 @@ module Aws::ECS
     #
     # @option params [Types::DeploymentConfiguration] :deployment_configuration
     #   Optional deployment parameters that control how many tasks run during
-    #   the deployment and the failure detection methods.
+    #   the deployment and the ordering of stopping and starting tasks.
     #
     # @option params [Array<Types::PlacementConstraint>] :placement_constraints
     #   An array of placement constraint objects to use for tasks in your
@@ -1163,26 +1164,18 @@ module Aws::ECS
     #
     # @option params [Integer] :health_check_grace_period_seconds
     #   The period of time, in seconds, that the Amazon ECS service scheduler
-    #   ignores unhealthy Elastic Load Balancing target health checks after a
-    #   task has first started. This is only used when your service is
-    #   configured to use a load balancer. If your service has a load balancer
-    #   defined and you don't specify a health check grace period value, the
-    #   default value of `0` is used.
+    #   ignores unhealthy Elastic Load Balancing, VPC Lattice, and container
+    #   health checks after a task has first started. If you don't specify a
+    #   health check grace period value, the default value of `0` is used. If
+    #   you don't use any of the health checks, then
+    #   `healthCheckGracePeriodSeconds` is unused.
     #
-    #   If you do not use an Elastic Load Balancing, we recommend that you use
-    #   the `startPeriod` in the task definition health check parameters. For
-    #   more information, see [Health check][1].
-    #
-    #   If your service's tasks take a while to start and respond to Elastic
-    #   Load Balancing health checks, you can specify a health check grace
-    #   period of up to 2,147,483,647 seconds (about 69 years). During that
-    #   time, the Amazon ECS service scheduler ignores health check status.
-    #   This grace period can prevent the service scheduler from marking tasks
-    #   as unhealthy and stopping them before they have time to come up.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_HealthCheck.html
+    #   If your service's tasks take a while to start and respond to health
+    #   checks, you can specify a health check grace period of up to
+    #   2,147,483,647 seconds (about 69 years). During that time, the Amazon
+    #   ECS service scheduler ignores health check status. This grace period
+    #   can prevent the service scheduler from marking tasks as unhealthy and
+    #   stopping them before they have time to come up.
     #
     # @option params [String] :scheduling_strategy
     #   The scheduling strategy to use for the service. For more information,
@@ -1307,6 +1300,9 @@ module Aws::ECS
     #   The configuration for a volume specified in the task definition as a
     #   volume that is configured at launch time. Currently, the only
     #   supported volume type is an Amazon EBS volume.
+    #
+    # @option params [Array<Types::VpcLatticeConfiguration>] :vpc_lattice_configurations
+    #   The VPC Lattice configuration for the service being created.
     #
     # @return [Types::CreateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1578,6 +1574,13 @@ module Aws::ECS
     #         },
     #       },
     #     ],
+    #     vpc_lattice_configurations: [
+    #       {
+    #         role_arn: "IAMRoleArn", # required
+    #         target_group_arn: "String", # required
+    #         port_name: "String", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1724,6 +1727,10 @@ module Aws::ECS
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.role_arn #=> String
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.filesystem_type #=> String, one of "ext3", "ext4", "xfs", "ntfs"
     #   resp.service.deployments[0].fargate_ephemeral_storage.kms_key_id #=> String
+    #   resp.service.deployments[0].vpc_lattice_configurations #=> Array
+    #   resp.service.deployments[0].vpc_lattice_configurations[0].role_arn #=> String
+    #   resp.service.deployments[0].vpc_lattice_configurations[0].target_group_arn #=> String
+    #   resp.service.deployments[0].vpc_lattice_configurations[0].port_name #=> String
     #   resp.service.role_arn #=> String
     #   resp.service.events #=> Array
     #   resp.service.events[0].id #=> String
@@ -2535,6 +2542,10 @@ module Aws::ECS
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.role_arn #=> String
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.filesystem_type #=> String, one of "ext3", "ext4", "xfs", "ntfs"
     #   resp.service.deployments[0].fargate_ephemeral_storage.kms_key_id #=> String
+    #   resp.service.deployments[0].vpc_lattice_configurations #=> Array
+    #   resp.service.deployments[0].vpc_lattice_configurations[0].role_arn #=> String
+    #   resp.service.deployments[0].vpc_lattice_configurations[0].target_group_arn #=> String
+    #   resp.service.deployments[0].vpc_lattice_configurations[0].port_name #=> String
     #   resp.service.role_arn #=> String
     #   resp.service.events #=> Array
     #   resp.service.events[0].id #=> String
@@ -3852,6 +3863,10 @@ module Aws::ECS
     #   resp.service_revisions[0].volume_configurations[0].managed_ebs_volume.filesystem_type #=> String, one of "ext3", "ext4", "xfs", "ntfs"
     #   resp.service_revisions[0].fargate_ephemeral_storage.kms_key_id #=> String
     #   resp.service_revisions[0].created_at #=> Time
+    #   resp.service_revisions[0].vpc_lattice_configurations #=> Array
+    #   resp.service_revisions[0].vpc_lattice_configurations[0].role_arn #=> String
+    #   resp.service_revisions[0].vpc_lattice_configurations[0].target_group_arn #=> String
+    #   resp.service_revisions[0].vpc_lattice_configurations[0].port_name #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -4097,6 +4112,10 @@ module Aws::ECS
     #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.role_arn #=> String
     #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.filesystem_type #=> String, one of "ext3", "ext4", "xfs", "ntfs"
     #   resp.services[0].deployments[0].fargate_ephemeral_storage.kms_key_id #=> String
+    #   resp.services[0].deployments[0].vpc_lattice_configurations #=> Array
+    #   resp.services[0].deployments[0].vpc_lattice_configurations[0].role_arn #=> String
+    #   resp.services[0].deployments[0].vpc_lattice_configurations[0].target_group_arn #=> String
+    #   resp.services[0].deployments[0].vpc_lattice_configurations[0].port_name #=> String
     #   resp.services[0].role_arn #=> String
     #   resp.services[0].events #=> Array
     #   resp.services[0].events[0].id #=> String
@@ -6848,22 +6867,19 @@ module Aws::ECS
     #   non-root user.
     #
     #   If the network mode is `awsvpc`, the task is allocated an elastic
-    #   network interface, and you must specify a NetworkConfiguration value
-    #   when you create a service or run a task with the task definition. For
-    #   more information, see [Task Networking][1] in the *Amazon Elastic
-    #   Container Service Developer Guide*.
+    #   network interface, and you must specify a [NetworkConfiguration][1]
+    #   value when you create a service or run a task with the task
+    #   definition. For more information, see [Task Networking][2] in the
+    #   *Amazon Elastic Container Service Developer Guide*.
     #
     #   If the network mode is `host`, you cannot run multiple instantiations
     #   of the same task on a single container instance when port mappings are
     #   used.
     #
-    #   For more information, see [Network settings][2] in the *Docker run
-    #   reference*.
     #
     #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
-    #   [2]: https://docs.docker.com/engine/reference/run/#network-settings
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_NetworkConfiguration.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
     #
     # @option params [required, Array<Types::ContainerDefinition>] :container_definitions
     #   A list of container definitions in JSON format that describe the
@@ -7026,12 +7042,10 @@ module Aws::ECS
     #   the same process namespace.
     #
     #   If no value is specified, the default is a private namespace for each
-    #   container. For more information, see [PID settings][1] in the *Docker
-    #   run reference*.
+    #   container.
     #
     #   If the `host` PID mode is used, there's a heightened risk of
-    #   undesired process namespace exposure. For more information, see
-    #   [Docker security][2].
+    #   undesired process namespace exposure.
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers.
     #
@@ -7042,11 +7056,6 @@ module Aws::ECS
     #   isn't supported for Windows containers on Fargate.
     #
     #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.docker.com/engine/reference/run/#pid-settings---pid
-    #   [2]: https://docs.docker.com/engine/security/security/
     #
     # @option params [String] :ipc_mode
     #   The IPC resource namespace to use for the containers in the task. The
@@ -7059,16 +7068,14 @@ module Aws::ECS
     #   private and not shared with other containers in a task or on the
     #   container instance. If no value is specified, then the IPC resource
     #   namespace sharing depends on the Docker daemon setting on the
-    #   container instance. For more information, see [IPC settings][1] in the
-    #   *Docker run reference*.
+    #   container instance.
     #
     #   If the `host` IPC mode is used, be aware that there is a heightened
-    #   risk of undesired IPC namespace expose. For more information, see
-    #   [Docker security][2].
+    #   risk of undesired IPC namespace expose.
     #
     #   If you are setting namespaced kernel parameters using `systemControls`
     #   for the containers in the task, the following will apply to your IPC
-    #   resource namespace. For more information, see [System Controls][3] in
+    #   resource namespace. For more information, see [System Controls][1] in
     #   the *Amazon Elastic Container Service Developer Guide*.
     #
     #   * For tasks that use the `host` IPC mode, IPC namespace related
@@ -7084,9 +7091,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/run/#ipc-settings---ipc
-    #   [2]: https://docs.docker.com/engine/security/security/
-    #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
     #
     # @option params [Types::ProxyConfiguration] :proxy_configuration
     #   The configuration details for the App Mesh proxy.
@@ -9851,7 +9856,7 @@ module Aws::ECS
     #
     # @option params [Types::DeploymentConfiguration] :deployment_configuration
     #   Optional deployment parameters that control how many tasks run during
-    #   the deployment and the failure detection methods.
+    #   the deployment and the ordering of stopping and starting tasks.
     #
     # @option params [Types::NetworkConfiguration] :network_configuration
     #   An object representing the network configuration for the service.
@@ -9897,14 +9902,17 @@ module Aws::ECS
     #
     # @option params [Integer] :health_check_grace_period_seconds
     #   The period of time, in seconds, that the Amazon ECS service scheduler
-    #   ignores unhealthy Elastic Load Balancing target health checks after a
-    #   task has first started. This is only valid if your service is
-    #   configured to use a load balancer. If your service's tasks take a
-    #   while to start and respond to Elastic Load Balancing health checks,
-    #   you can specify a health check grace period of up to 2,147,483,647
-    #   seconds. During that time, the Amazon ECS service scheduler ignores
-    #   the Elastic Load Balancing health check status. This grace period can
-    #   prevent the ECS service scheduler from marking tasks as unhealthy and
+    #   ignores unhealthy Elastic Load Balancing, VPC Lattice, and container
+    #   health checks after a task has first started. If you don't specify a
+    #   health check grace period value, the default value of `0` is used. If
+    #   you don't use any of the health checks, then
+    #   `healthCheckGracePeriodSeconds` is unused.
+    #
+    #   If your service's tasks take a while to start and respond to health
+    #   checks, you can specify a health check grace period of up to
+    #   2,147,483,647 seconds (about 69 years). During that time, the Amazon
+    #   ECS service scheduler ignores health check status. This grace period
+    #   can prevent the service scheduler from marking tasks as unhealthy and
     #   stopping them before they have time to come up.
     #
     # @option params [Boolean] :enable_execute_command
@@ -10017,6 +10025,10 @@ module Aws::ECS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ServiceManagedEBSVolumeConfiguration.html
+    #
+    # @option params [Array<Types::VpcLatticeConfiguration>] :vpc_lattice_configurations
+    #   An object representing the VPC Lattice configuration for the service
+    #   being updated.
     #
     # @return [Types::UpdateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10185,6 +10197,13 @@ module Aws::ECS
     #         },
     #       },
     #     ],
+    #     vpc_lattice_configurations: [
+    #       {
+    #         role_arn: "IAMRoleArn", # required
+    #         target_group_arn: "String", # required
+    #         port_name: "String", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -10331,6 +10350,10 @@ module Aws::ECS
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.role_arn #=> String
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.filesystem_type #=> String, one of "ext3", "ext4", "xfs", "ntfs"
     #   resp.service.deployments[0].fargate_ephemeral_storage.kms_key_id #=> String
+    #   resp.service.deployments[0].vpc_lattice_configurations #=> Array
+    #   resp.service.deployments[0].vpc_lattice_configurations[0].role_arn #=> String
+    #   resp.service.deployments[0].vpc_lattice_configurations[0].target_group_arn #=> String
+    #   resp.service.deployments[0].vpc_lattice_configurations[0].port_name #=> String
     #   resp.service.role_arn #=> String
     #   resp.service.events #=> Array
     #   resp.service.events[0].id #=> String
@@ -10744,7 +10767,7 @@ module Aws::ECS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.167.0'
+      context[:gem_version] = '1.168.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

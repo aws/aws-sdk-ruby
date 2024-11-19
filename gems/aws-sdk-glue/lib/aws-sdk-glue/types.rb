@@ -3548,7 +3548,6 @@ module Aws::Glue
     #     * Optional: `JDBC_ENFORCE_SSL`, `CUSTOM_JDBC_CERT`,
     #       `CUSTOM_JDBC_CERT_STRING`, `SKIP_CUSTOM_JDBC_CERT_VALIDATION`.
     #       These parameters are used to configure SSL with JDBC.
-    #
     #   * `KAFKA` - Designates a connection to an Apache Kafka streaming
     #     platform.
     #
@@ -3578,7 +3577,6 @@ module Aws::Glue
     #       `KAFKA_SASL_GSSAPI_KRB5_CONF`, `KAFKA_SASL_GSSAPI_SERVICE`,
     #       `KAFKA_SASL_GSSAPI_PRINCIPAL`. These parameters are used to
     #       configure SASL/GSSAPI authentication with `KAFKA`.
-    #
     #   * `MONGODB` - Designates a connection to a MongoDB document
     #     database.
     #
@@ -3587,7 +3585,6 @@ module Aws::Glue
     #     * Required: `CONNECTION_URL`.
     #
     #     * Required: All of (`USERNAME`, `PASSWORD`) or `SECRET_ID`.
-    #
     #   * `SALESFORCE` - Designates a connection to Salesforce using OAuth
     #     authencation.
     #
@@ -3595,7 +3592,6 @@ module Aws::Glue
     #       configured.
     #
     #     ^
-    #
     #   * `VIEW_VALIDATION_REDSHIFT` - Designates a connection used for view
     #     validation by Amazon Redshift.
     #
@@ -3620,7 +3616,6 @@ module Aws::Glue
     #
     #     * Required for `JDBC` `CONNECTOR_TYPE` connections: All of
     #       (`USERNAME`, `PASSWORD`) or `SECRET_ID`.
-    #
     #   * `CUSTOM` - Uses configuration settings contained in a custom
     #     connector to read from and write to data stores that are not
     #     natively supported by Glue.

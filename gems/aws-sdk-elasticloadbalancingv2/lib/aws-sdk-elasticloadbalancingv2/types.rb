@@ -2445,7 +2445,6 @@ module Aws::ElasticLoadBalancingV2
     #     * If the value is `remove`, the Application Load Balancer removes
     #       the `X-Forwarded-For` header in the HTTP request before it sends
     #       it to targets.
-    #
     #   * `routing.http2.enabled` - Indicates whether HTTP/2 is enabled. The
     #     possible values are `true` and `false`. The default is `true`.
     #     Elastic Load Balancing requires that message header names contain

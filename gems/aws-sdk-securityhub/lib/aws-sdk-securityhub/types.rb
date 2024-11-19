@@ -5363,7 +5363,6 @@ module Aws::SecurityHub
     #
     #     * The path to the folder that contains the source code (for
     #       example, `bucket-name/path/to/source-code/folder/`).
-    #
     #   * For source code in a GitHub repository, the HTTPS clone URL to the
     #     repository that contains the source and the build spec file.
     #
@@ -20522,7 +20521,6 @@ module Aws::SecurityHub
     #
     #     * `Compliance.Status` changes from `PASSED` to either `WARNING`,
     #       `FAILED`, or `NOT_AVAILABLE`.
-    #
     #   * `NOTIFIED` - Indicates that the resource owner has been notified
     #     about the security issue. Used when the initial reviewer is not
     #     the resource owner, and needs intervention from the resource
@@ -20535,7 +20533,6 @@ module Aws::SecurityHub
     #
     #     * `Compliance.Status` changes from `PASSED` to `FAILED`,
     #       `WARNING`, or `NOT_AVAILABLE`.
-    #
     #   * `SUPPRESSED` - Indicates that you reviewed the finding and don't
     #     believe that any action is needed.
     #
@@ -20551,7 +20548,6 @@ module Aws::SecurityHub
     #
     #     * `Compliance.Status` changes from `PASSED` to `FAILED`,
     #       `WARNING`, or `NOT_AVAILABLE`.
-    #
     #     In those cases, the workflow status is automatically reset to
     #     `NEW`.
     #
@@ -31751,7 +31747,6 @@ module Aws::SecurityHub
     #
     #     * `ComplianceStatus` changes from `PASSED` to either `WARNING`,
     #       `FAILED`, or `NOT_AVAILABLE`.
-    #
     #   * `NOTIFIED` - Indicates that you notified the resource owner about
     #     the security issue. Used when the initial reviewer is not the
     #     resource owner, and needs intervention from the resource owner.
@@ -31792,7 +31787,6 @@ module Aws::SecurityHub
     #
     #     * The compliance status changes from `PASSED` to either `WARNING`,
     #       `FAILED`, or `NOT_AVAILABLE`.
-    #
     #   * `NOTIFIED` - Indicates that you notified the resource owner about
     #     the security issue. Used when the initial reviewer is not the
     #     resource owner, and needs intervention from the resource owner.

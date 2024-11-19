@@ -605,7 +605,7 @@ module Aws::Route53
     # The max number of CIDR blocks included in the request is 1000. As a
     # result, big updates require multiple API calls.
     #
-    # <b> PUT and DELETE\_IF\_EXISTS</b>
+    # <b> PUT and DELETE_IF_EXISTS</b>
     #
     # Use `ChangeCidrCollection` to perform the following actions:
     #
@@ -2058,7 +2058,6 @@ module Aws::Route53
     #         can create, so we recommend that you use a consistent prefix
     #         so you can use the same resource policy for all the log groups
     #         that you create for query logging.
-    #
     #   2.  Create a CloudWatch Logs resource policy, and give it the
     #       permissions that Route 53 needs to create log streams and to
     #       send query logs to log streams. You must create the CloudWatch
@@ -2084,7 +2083,6 @@ module Aws::Route53
     #       * For `aws:SourceAccount`, supply the account ID for the account
     #         that creates the query logging configuration. For example,
     #         `aws:SourceAccount:111111111111`.
-    #
     #       For more information, see [The confused deputy problem][1] in
     #       the *Amazon Web Services IAM User Guide*.
     #
@@ -6222,7 +6220,7 @@ module Aws::Route53
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-route53'
-      context[:gem_version] = '1.104.0'
+      context[:gem_version] = '1.105.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

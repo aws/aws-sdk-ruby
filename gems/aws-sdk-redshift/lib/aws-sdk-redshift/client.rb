@@ -11360,7 +11360,6 @@ module Aws::Redshift
     #   * ra3.4xlarge
     #
     #   * ra3.16xlarge
-    #
     # * The type of nodes that you add must match the node type for the
     #   cluster.
     #
@@ -12755,7 +12754,7 @@ module Aws::Redshift
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.131.0'
+      context[:gem_version] = '1.132.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

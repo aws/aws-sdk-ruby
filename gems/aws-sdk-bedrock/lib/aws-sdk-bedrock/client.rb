@@ -3527,7 +3527,6 @@ module Aws::Bedrock
     #
     #   * (Optional) Provide up to five prompts that you would categorize as
     #     belonging to the topic in the `examples` list.
-    #
     # * Specify filter strengths for the harmful categories defined in
     #   Amazon Bedrock in the `contentPolicyConfig` object. Each
     #   [GuardrailContentFilterConfig][2] object in the `filtersConfig` list
@@ -3540,7 +3539,6 @@ module Aws::Bedrock
     #   * Specify the strength of the filter for prompts in the
     #     `inputStrength` field and for model responses in the `strength`
     #     field of the [GuardrailContentFilterConfig][2].
-    #
     # * (Optional) For security, include the ARN of a KMS key in the
     #   `kmsKeyId` field.
     #
@@ -3739,7 +3737,7 @@ module Aws::Bedrock
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrock'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

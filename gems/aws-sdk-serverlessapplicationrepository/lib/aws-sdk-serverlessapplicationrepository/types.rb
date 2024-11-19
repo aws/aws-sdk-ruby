@@ -818,28 +818,28 @@ module Aws::ServerlessApplicationRepository
     #   This property corresponds to the parameter of the same name for the
     #   <i>AWS CloudFormation <a
     #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
-    #   </i> API.
+    #    </i> API.
     #   @return [String]
     #
     # @!attribute [rw] client_token
     #   This property corresponds to the parameter of the same name for the
     #   <i>AWS CloudFormation <a
     #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
-    #   </i> API.
+    #    </i> API.
     #   @return [String]
     #
     # @!attribute [rw] description
     #   This property corresponds to the parameter of the same name for the
     #   <i>AWS CloudFormation <a
     #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
-    #   </i> API.
+    #    </i> API.
     #   @return [String]
     #
     # @!attribute [rw] notification_arns
     #   This property corresponds to the parameter of the same name for the
     #   <i>AWS CloudFormation <a
     #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
-    #   </i> API.
+    #    </i> API.
     #   @return [Array<String>]
     #
     # @!attribute [rw] parameter_overrides
@@ -850,14 +850,14 @@ module Aws::ServerlessApplicationRepository
     #   This property corresponds to the parameter of the same name for the
     #   <i>AWS CloudFormation <a
     #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
-    #   </i> API.
+    #    </i> API.
     #   @return [Array<String>]
     #
     # @!attribute [rw] rollback_configuration
     #   This property corresponds to the parameter of the same name for the
     #   <i>AWS CloudFormation <a
     #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
-    #   </i> API.
+    #    </i> API.
     #   @return [Types::RollbackConfiguration]
     #
     # @!attribute [rw] semantic_version
@@ -874,14 +874,14 @@ module Aws::ServerlessApplicationRepository
     #   This property corresponds to the parameter of the same name for the
     #   <i>AWS CloudFormation <a
     #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
-    #   </i> API.
+    #    </i> API.
     #   @return [String]
     #
     # @!attribute [rw] tags
     #   This property corresponds to the parameter of the same name for the
     #   <i>AWS CloudFormation <a
     #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
-    #   </i> API.
+    #    </i> API.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] template_id
@@ -937,7 +937,7 @@ module Aws::ServerlessApplicationRepository
     # @!attribute [rw] rollback_configuration
     #   This property corresponds to the <i>AWS CloudFormation <a
     #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a>
-    #   </i> Data Type.
+    #    </i> Data Type.
     #   @return [Types::RollbackConfiguration]
     #
     # @!attribute [rw] semantic_version
@@ -1542,20 +1542,20 @@ module Aws::ServerlessApplicationRepository
 
     # This property corresponds to the <i>AWS CloudFormation <a
     # href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a>
-    # </i> Data Type.
+    #  </i> Data Type.
     #
     # @!attribute [rw] monitoring_time_in_minutes
     #   This property corresponds to the content of the same name for the
     #   <i>AWS CloudFormation <a
     #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a>
-    #   </i> Data Type.
+    #    </i> Data Type.
     #   @return [Integer]
     #
     # @!attribute [rw] rollback_triggers
     #   This property corresponds to the content of the same name for the
     #   <i>AWS CloudFormation <a
     #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a>
-    #   </i> Data Type.
+    #    </i> Data Type.
     #   @return [Array<Types::RollbackTrigger>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/RollbackConfiguration AWS API Documentation
@@ -1569,20 +1569,20 @@ module Aws::ServerlessApplicationRepository
 
     # This property corresponds to the <i>AWS CloudFormation <a
     # href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger">RollbackTrigger</a>
-    # </i> Data Type.
+    #  </i> Data Type.
     #
     # @!attribute [rw] arn
     #   This property corresponds to the content of the same name for the
     #   <i>AWS CloudFormation <a
     #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger">RollbackTrigger</a>
-    #   </i> Data Type.
+    #    </i> Data Type.
     #   @return [String]
     #
     # @!attribute [rw] type
     #   This property corresponds to the content of the same name for the
     #   <i>AWS CloudFormation <a
     #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger">RollbackTrigger</a>
-    #   </i> Data Type.
+    #    </i> Data Type.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/RollbackTrigger AWS API Documentation
@@ -1596,20 +1596,21 @@ module Aws::ServerlessApplicationRepository
 
     # This property corresponds to the <i>AWS CloudFormation <a
     # href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag">Tag</a>
-    # </i> Data Type.
+    #  </i> Data Type.
     #
     # @!attribute [rw] key
     #   This property corresponds to the content of the same name for the
     #   <i>AWS CloudFormation <a
     #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag">Tag</a>
-    #   </i> Data Type.
+    #    </i> Data Type.
     #   @return [String]
     #
     # @!attribute [rw] value
     #   This property corresponds to the content of the same name for the
     #   <i>AWS CloudFormation <a
     #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag">
-    #   Tag</a> </i> Data Type.
+    #    Tag</a>
+    #    </i> Data Type.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/Tag AWS API Documentation

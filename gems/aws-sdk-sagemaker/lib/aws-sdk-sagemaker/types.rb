@@ -432,7 +432,6 @@ module Aws::SageMaker
     #     * MXNet (version &gt;= 1.6)
     #
     #     * PyTorch (version &gt;= 1.3)
-    #
     #   * You specify at least one [MetricDefinition][2]
     #
     #
@@ -1795,7 +1794,6 @@ module Aws::SageMaker
     #       * "randomforest"
     #
     #       * "xgboost"
-    #
     #     * In `HYPERPARAMETER_TUNING` mode:
     #
     #       * "linear-learner"
@@ -1803,7 +1801,6 @@ module Aws::SageMaker
     #       * "mlp"
     #
     #       * "xgboost"
-    #
     #   * **For the time-series forecasting problem type
     #     `TimeSeriesForecastingJobConfig`:**
     #
@@ -2442,7 +2439,6 @@ module Aws::SageMaker
     #
     #       * Multiclass classification: `Accuracy`, `BalancedAccuracy`,
     #         `F1macro`, `PrecisionMacro`, `RecallMacro`
-    #
     #       For a description of each metric, see [Autopilot metrics for
     #       classification and regression][1].
     #
@@ -2453,7 +2449,6 @@ module Aws::SageMaker
     #       * Binary classification: `F1`.
     #
     #       * Multiclass classification: `Accuracy`.
-    #
     #   * For image or text classification problem types:
     #
     #     * List of available metrics: `Accuracy`
@@ -2462,7 +2457,6 @@ module Aws::SageMaker
     #       text and image classification][2].
     #
     #     * Default objective metrics: `Accuracy`
-    #
     #   * For time-series forecasting problem types:
     #
     #     * List of available metrics: `RMSE`, `wQL`, `Average wQL`, `MASE`,
@@ -2472,7 +2466,6 @@ module Aws::SageMaker
     #       time-series forecasting][3].
     #
     #     * Default objective metrics: `AverageWeightedQuantileLoss`
-    #
     #   * For text generation problem types (LLMs fine-tuning): Fine-tuning
     #     language models in Autopilot does not require setting the
     #     `AutoMLJobObjective` field. Autopilot fine-tunes LLMs without
@@ -3367,7 +3360,6 @@ module Aws::SageMaker
     #     * When `AlgorithmsConfig` is not provided,
     #       `CandidateGenerationConfig` uses the full set of algorithms for
     #       the given training mode.
-    #
     #     For the list of all algorithms per training mode, see [
     #     AlgorithmConfig][2].
     #
@@ -21701,206 +21693,206 @@ module Aws::SageMaker
     #   in US dollars and should be based on the complexity of the task; the
     #   longer it takes in your initial testing, the more you should offer.
     #
-    #   * 0\.036
+    #   * 0.036
     #
-    #   * 0\.048
+    #   * 0.048
     #
-    #   * 0\.060
+    #   * 0.060
     #
-    #   * 0\.072
+    #   * 0.072
     #
-    #   * 0\.120
+    #   * 0.120
     #
-    #   * 0\.240
+    #   * 0.240
     #
-    #   * 0\.360
+    #   * 0.360
     #
-    #   * 0\.480
+    #   * 0.480
     #
-    #   * 0\.600
+    #   * 0.600
     #
-    #   * 0\.720
+    #   * 0.720
     #
-    #   * 0\.840
+    #   * 0.840
     #
-    #   * 0\.960
+    #   * 0.960
     #
-    #   * 1\.080
+    #   * 1.080
     #
-    #   * 1\.200
+    #   * 1.200
     #
     #   Use one of the following prices for image classification, text
     #   classification, and custom tasks. Prices are in US dollars.
     #
-    #   * 0\.012
+    #   * 0.012
     #
-    #   * 0\.024
+    #   * 0.024
     #
-    #   * 0\.036
+    #   * 0.036
     #
-    #   * 0\.048
+    #   * 0.048
     #
-    #   * 0\.060
+    #   * 0.060
     #
-    #   * 0\.072
+    #   * 0.072
     #
-    #   * 0\.120
+    #   * 0.120
     #
-    #   * 0\.240
+    #   * 0.240
     #
-    #   * 0\.360
+    #   * 0.360
     #
-    #   * 0\.480
+    #   * 0.480
     #
-    #   * 0\.600
+    #   * 0.600
     #
-    #   * 0\.720
+    #   * 0.720
     #
-    #   * 0\.840
+    #   * 0.840
     #
-    #   * 0\.960
+    #   * 0.960
     #
-    #   * 1\.080
+    #   * 1.080
     #
-    #   * 1\.200
+    #   * 1.200
     #
     #   Use one of the following prices for semantic segmentation tasks.
     #   Prices are in US dollars.
     #
-    #   * 0\.840
+    #   * 0.840
     #
-    #   * 0\.960
+    #   * 0.960
     #
-    #   * 1\.080
+    #   * 1.080
     #
-    #   * 1\.200
+    #   * 1.200
     #
     #   Use one of the following prices for Textract AnalyzeDocument
     #   Important Form Key Amazon Augmented AI review tasks. Prices are in
     #   US dollars.
     #
-    #   * 2\.400
+    #   * 2.400
     #
-    #   * 2\.280
+    #   * 2.280
     #
-    #   * 2\.160
+    #   * 2.160
     #
-    #   * 2\.040
+    #   * 2.040
     #
-    #   * 1\.920
+    #   * 1.920
     #
-    #   * 1\.800
+    #   * 1.800
     #
-    #   * 1\.680
+    #   * 1.680
     #
-    #   * 1\.560
+    #   * 1.560
     #
-    #   * 1\.440
+    #   * 1.440
     #
-    #   * 1\.320
+    #   * 1.320
     #
-    #   * 1\.200
+    #   * 1.200
     #
-    #   * 1\.080
+    #   * 1.080
     #
-    #   * 0\.960
+    #   * 0.960
     #
-    #   * 0\.840
+    #   * 0.840
     #
-    #   * 0\.720
+    #   * 0.720
     #
-    #   * 0\.600
+    #   * 0.600
     #
-    #   * 0\.480
+    #   * 0.480
     #
-    #   * 0\.360
+    #   * 0.360
     #
-    #   * 0\.240
+    #   * 0.240
     #
-    #   * 0\.120
+    #   * 0.120
     #
-    #   * 0\.072
+    #   * 0.072
     #
-    #   * 0\.060
+    #   * 0.060
     #
-    #   * 0\.048
+    #   * 0.048
     #
-    #   * 0\.036
+    #   * 0.036
     #
-    #   * 0\.024
+    #   * 0.024
     #
-    #   * 0\.012
+    #   * 0.012
     #
     #   Use one of the following prices for Rekognition
     #   DetectModerationLabels Amazon Augmented AI review tasks. Prices are
     #   in US dollars.
     #
-    #   * 1\.200
+    #   * 1.200
     #
-    #   * 1\.080
+    #   * 1.080
     #
-    #   * 0\.960
+    #   * 0.960
     #
-    #   * 0\.840
+    #   * 0.840
     #
-    #   * 0\.720
+    #   * 0.720
     #
-    #   * 0\.600
+    #   * 0.600
     #
-    #   * 0\.480
+    #   * 0.480
     #
-    #   * 0\.360
+    #   * 0.360
     #
-    #   * 0\.240
+    #   * 0.240
     #
-    #   * 0\.120
+    #   * 0.120
     #
-    #   * 0\.072
+    #   * 0.072
     #
-    #   * 0\.060
+    #   * 0.060
     #
-    #   * 0\.048
+    #   * 0.048
     #
-    #   * 0\.036
+    #   * 0.036
     #
-    #   * 0\.024
+    #   * 0.024
     #
-    #   * 0\.012
+    #   * 0.012
     #
     #   Use one of the following prices for Amazon Augmented AI custom human
     #   review tasks. Prices are in US dollars.
     #
-    #   * 1\.200
+    #   * 1.200
     #
-    #   * 1\.080
+    #   * 1.080
     #
-    #   * 0\.960
+    #   * 0.960
     #
-    #   * 0\.840
+    #   * 0.840
     #
-    #   * 0\.720
+    #   * 0.720
     #
-    #   * 0\.600
+    #   * 0.600
     #
-    #   * 0\.480
+    #   * 0.480
     #
-    #   * 0\.360
+    #   * 0.360
     #
-    #   * 0\.240
+    #   * 0.240
     #
-    #   * 0\.120
+    #   * 0.120
     #
-    #   * 0\.072
+    #   * 0.072
     #
-    #   * 0\.060
+    #   * 0.060
     #
-    #   * 0\.048
+    #   * 0.048
     #
-    #   * 0\.036
+    #   * 0.036
     #
-    #   * 0\.024
+    #   * 0.024
     #
-    #   * 0\.012
+    #   * 0.012
     #   @return [Types::PublicWorkforceTaskPrice]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HumanLoopConfig AWS API Documentation
@@ -24902,7 +24894,6 @@ module Aws::SageMaker
     #       * If using the console, `{"input":[1,1024,1024,3]}`
     #
     #       * If using the CLI, `{"input":[1,1024,1024,3]}`
-    #
     #     * Examples for two inputs:
     #
     #       * If using the console, `{"data1": [1,28,28,1],
@@ -24910,7 +24901,6 @@ module Aws::SageMaker
     #
     #       * If using the CLI, `{"data1": [1,28,28,1],
     #         "data2":[1,28,28,1]}`
-    #
     #   * `KERAS`: You must specify the name and shape (NCHW format) of
     #     expected data inputs using a dictionary format for your trained
     #     model. Note that while Keras model artifacts should be uploaded in
@@ -24923,7 +24913,6 @@ module Aws::SageMaker
     #       * If using the console, `{"input_1":[1,3,224,224]}`
     #
     #       * If using the CLI, `{"input_1":[1,3,224,224]}`
-    #
     #     * Examples for two inputs:
     #
     #       * If using the console, `{"input_1": [1,3,224,224],
@@ -24931,7 +24920,6 @@ module Aws::SageMaker
     #
     #       * If using the CLI, `{"input_1": [1,3,224,224],
     #         "input_2":[1,3,224,224]}`
-    #
     #   * `MXNET/ONNX/DARKNET`: You must specify the name and shape (NCHW
     #     format) of the expected data inputs in order using a dictionary
     #     format for your trained model. The dictionary formats required for
@@ -24942,7 +24930,6 @@ module Aws::SageMaker
     #       * If using the console, `{"data":[1,3,1024,1024]}`
     #
     #       * If using the CLI, `{"data":[1,3,1024,1024]}`
-    #
     #     * Examples for two inputs:
     #
     #       * If using the console, `{"var1": [1,1,28,28],
@@ -24950,7 +24937,6 @@ module Aws::SageMaker
     #
     #       * If using the CLI, `{"var1": [1,1,28,28],
     #         "var2":[1,1,28,28]}`
-    #
     #   * `PyTorch`: You can either specify the name and shape (NCHW format)
     #     of expected data inputs in order using a dictionary format for
     #     your trained model or you can specify the shape only using a list
@@ -24963,7 +24949,6 @@ module Aws::SageMaker
     #       * If using the console, `{"input0":[1,3,224,224]}`
     #
     #       * If using the CLI, `{"input0":[1,3,224,224]}`
-    #
     #     * Example for one input in list format: `[[1,3,224,224]]`
     #
     #     * Examples for two inputs in dictionary format:
@@ -24973,10 +24958,8 @@ module Aws::SageMaker
     #
     #       * If using the CLI, `{"input0":[1,3,224,224],
     #         "input1":[1,3,224,224]} `
-    #
     #     * Example for two inputs in list format: `[[1,3,224,224],
     #       [1,3,224,224]]`
-    #
     #   * `XGBOOST`: input data name and shape are not needed.
     #
     #   `DataInputConfig` supports the following parameters for `CoreML`
@@ -24995,7 +24978,6 @@ module Aws::SageMaker
     #       only on a select set of inputs. You can enumerate all supported
     #       input shapes, for example: `{"input_1": {"shape": [[1, 224, 224,
     #       3], [1, 160, 160, 3]]}}`
-    #
     #   * `default_shape`: Default input shape. You can set a default shape
     #     during conversion for both Range Dimension and Enumerated Shapes.
     #     For example `{"input_1": {"shape": ["1..10", 224, 224, 3],
@@ -25023,14 +25005,12 @@ module Aws::SageMaker
     #       [1,160,160,3]], "default_shape": [1,224,224,3]}}`
     #
     #     ^
-    #
     #   * Tensor type input without input name (PyTorch):
     #
     #     * `"DataInputConfig": [{"shape": [[1,3,224,224], [1,3,160,160]],
     #       "default_shape": [1,3,224,224]}]`
     #
     #     ^
-    #
     #   * Image type input:
     #
     #     * `"DataInputConfig": {"input_1": {"shape": [[1,224,224,3],
@@ -25039,7 +25019,6 @@ module Aws::SageMaker
     #
     #     * `"CompilerOptions": {"class_labels":
     #       "imagenet_labels_1000.txt"}`
-    #
     #   * Image type input without input name (PyTorch):
     #
     #     * `"DataInputConfig": [{"shape": [[1,3,224,224], [1,3,160,160]],
@@ -25061,7 +25040,6 @@ module Aws::SageMaker
     #     * `"DataInputConfig": {"inputs": [1, 224, 224, 3]}`
     #
     #     * `"CompilerOptions": {"signature_def_key": "serving_custom"}`
-    #
     #   * For TensorFlow models saved as a frozen graph, specify the input
     #     tensor names and shapes in `DataInputConfig` and the output tensor
     #     names for `output_names` in [ `OutputConfig:CompilerOptions` ][3].
@@ -35728,7 +35706,6 @@ module Aws::SageMaker
     #     * float32: Use either `"float"` or `"float32"`.
     #
     #     * int64: Use either `"int64"` or `"long"`.
-    #
     #     For example, `{"dtype" : "float32"}`.
     #
     #   * `CPU`: Compilation for CPU supports the following compiler
@@ -35739,7 +35716,6 @@ module Aws::SageMaker
     #
     #     * `mattr`: CPU flags. For example, `{'mattr': ['+neon',
     #       '+vfpv4']}`
-    #
     #   * `ARM`: Details of ARM CPU compilations.
     #
     #     * `NEON`: NEON is an implementation of the Advanced SIMD extension
@@ -35747,7 +35723,6 @@ module Aws::SageMaker
     #
     #       For example, add `{'mattr': ['+neon']}` to the compiler options
     #       if compiling for ARM 32-bit platform with the NEON support.
-    #
     #   * `NVIDIA`: Compilation for NVIDIA GPU supports the following
     #     compiler options.
     #
@@ -35756,7 +35731,6 @@ module Aws::SageMaker
     #     * `trt-ver`: Specifies the TensorRT versions in x.y.z. format.
     #
     #     * `cuda-ver`: Specifies the CUDA version in x.y format.
-    #
     #     For example, `{'gpu-code': 'sm_72', 'trt-ver': '6.0.1',
     #     'cuda-ver': '10.1'}`
     #
@@ -35769,7 +35743,6 @@ module Aws::SageMaker
     #
     #     * `mattr`: Add `{'mattr': ['+neon']}` to compiler options if
     #       compiling for ARM 32-bit platform with NEON support.
-    #
     #   * `INFERENTIA`: Compilation for target ml\_inf1 uses compiler
     #     options passed in as a JSON string. For example,
     #     `"CompilerOptions": ""--verbose 1 --num-neuroncores 2 -O2""`.
@@ -38126,204 +38099,204 @@ module Aws::SageMaker
     # US dollars and should be based on the complexity of the task; the
     # longer it takes in your initial testing, the more you should offer.
     #
-    # * 0\.036
+    # * 0.036
     #
-    # * 0\.048
+    # * 0.048
     #
-    # * 0\.060
+    # * 0.060
     #
-    # * 0\.072
+    # * 0.072
     #
-    # * 0\.120
+    # * 0.120
     #
-    # * 0\.240
+    # * 0.240
     #
-    # * 0\.360
+    # * 0.360
     #
-    # * 0\.480
+    # * 0.480
     #
-    # * 0\.600
+    # * 0.600
     #
-    # * 0\.720
+    # * 0.720
     #
-    # * 0\.840
+    # * 0.840
     #
-    # * 0\.960
+    # * 0.960
     #
-    # * 1\.080
+    # * 1.080
     #
-    # * 1\.200
+    # * 1.200
     #
     # Use one of the following prices for image classification, text
     # classification, and custom tasks. Prices are in US dollars.
     #
-    # * 0\.012
+    # * 0.012
     #
-    # * 0\.024
+    # * 0.024
     #
-    # * 0\.036
+    # * 0.036
     #
-    # * 0\.048
+    # * 0.048
     #
-    # * 0\.060
+    # * 0.060
     #
-    # * 0\.072
+    # * 0.072
     #
-    # * 0\.120
+    # * 0.120
     #
-    # * 0\.240
+    # * 0.240
     #
-    # * 0\.360
+    # * 0.360
     #
-    # * 0\.480
+    # * 0.480
     #
-    # * 0\.600
+    # * 0.600
     #
-    # * 0\.720
+    # * 0.720
     #
-    # * 0\.840
+    # * 0.840
     #
-    # * 0\.960
+    # * 0.960
     #
-    # * 1\.080
+    # * 1.080
     #
-    # * 1\.200
+    # * 1.200
     #
     # Use one of the following prices for semantic segmentation tasks.
     # Prices are in US dollars.
     #
-    # * 0\.840
+    # * 0.840
     #
-    # * 0\.960
+    # * 0.960
     #
-    # * 1\.080
+    # * 1.080
     #
-    # * 1\.200
+    # * 1.200
     #
     # Use one of the following prices for Textract AnalyzeDocument Important
     # Form Key Amazon Augmented AI review tasks. Prices are in US dollars.
     #
-    # * 2\.400
+    # * 2.400
     #
-    # * 2\.280
+    # * 2.280
     #
-    # * 2\.160
+    # * 2.160
     #
-    # * 2\.040
+    # * 2.040
     #
-    # * 1\.920
+    # * 1.920
     #
-    # * 1\.800
+    # * 1.800
     #
-    # * 1\.680
+    # * 1.680
     #
-    # * 1\.560
+    # * 1.560
     #
-    # * 1\.440
+    # * 1.440
     #
-    # * 1\.320
+    # * 1.320
     #
-    # * 1\.200
+    # * 1.200
     #
-    # * 1\.080
+    # * 1.080
     #
-    # * 0\.960
+    # * 0.960
     #
-    # * 0\.840
+    # * 0.840
     #
-    # * 0\.720
+    # * 0.720
     #
-    # * 0\.600
+    # * 0.600
     #
-    # * 0\.480
+    # * 0.480
     #
-    # * 0\.360
+    # * 0.360
     #
-    # * 0\.240
+    # * 0.240
     #
-    # * 0\.120
+    # * 0.120
     #
-    # * 0\.072
+    # * 0.072
     #
-    # * 0\.060
+    # * 0.060
     #
-    # * 0\.048
+    # * 0.048
     #
-    # * 0\.036
+    # * 0.036
     #
-    # * 0\.024
+    # * 0.024
     #
-    # * 0\.012
+    # * 0.012
     #
     # Use one of the following prices for Rekognition DetectModerationLabels
     # Amazon Augmented AI review tasks. Prices are in US dollars.
     #
-    # * 1\.200
+    # * 1.200
     #
-    # * 1\.080
+    # * 1.080
     #
-    # * 0\.960
+    # * 0.960
     #
-    # * 0\.840
+    # * 0.840
     #
-    # * 0\.720
+    # * 0.720
     #
-    # * 0\.600
+    # * 0.600
     #
-    # * 0\.480
+    # * 0.480
     #
-    # * 0\.360
+    # * 0.360
     #
-    # * 0\.240
+    # * 0.240
     #
-    # * 0\.120
+    # * 0.120
     #
-    # * 0\.072
+    # * 0.072
     #
-    # * 0\.060
+    # * 0.060
     #
-    # * 0\.048
+    # * 0.048
     #
-    # * 0\.036
+    # * 0.036
     #
-    # * 0\.024
+    # * 0.024
     #
-    # * 0\.012
+    # * 0.012
     #
     # Use one of the following prices for Amazon Augmented AI custom human
     # review tasks. Prices are in US dollars.
     #
-    # * 1\.200
+    # * 1.200
     #
-    # * 1\.080
+    # * 1.080
     #
-    # * 0\.960
+    # * 0.960
     #
-    # * 0\.840
+    # * 0.840
     #
-    # * 0\.720
+    # * 0.720
     #
-    # * 0\.600
+    # * 0.600
     #
-    # * 0\.480
+    # * 0.480
     #
-    # * 0\.360
+    # * 0.360
     #
-    # * 0\.240
+    # * 0.240
     #
-    # * 0\.120
+    # * 0.120
     #
-    # * 0\.072
+    # * 0.072
     #
-    # * 0\.060
+    # * 0.060
     #
-    # * 0\.048
+    # * 0.048
     #
-    # * 0\.036
+    # * 0.036
     #
-    # * 0\.024
+    # * 0.024
     #
-    # * 0\.012
+    # * 0.012
     #
     # @!attribute [rw] amount_in_usd
     #   Defines the amount of money paid to an Amazon Mechanical Turk worker
@@ -40089,7 +40062,6 @@ module Aws::SageMaker
     #     * A single dot (`.`)
     #
     #     * A double dot (`..`)
-    #
     #   * Ambiguous file names will result in model deployment failure. For
     #     example, if your uncompressed ML model consists of two S3 objects
     #     `s3://mybucket/model/weights` and

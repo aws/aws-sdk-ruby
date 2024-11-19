@@ -204,6 +204,8 @@ module Aws::Connect
     ContactFlowSummaryList = Shapes::ListShape.new(name: 'ContactFlowSummaryList')
     ContactFlowType = Shapes::StringShape.new(name: 'ContactFlowType')
     ContactFlowTypes = Shapes::ListShape.new(name: 'ContactFlowTypes')
+    ContactFlowVersionSummary = Shapes::StructureShape.new(name: 'ContactFlowVersionSummary')
+    ContactFlowVersionSummaryList = Shapes::ListShape.new(name: 'ContactFlowVersionSummaryList')
     ContactId = Shapes::StringShape.new(name: 'ContactId')
     ContactInitiationMethod = Shapes::StringShape.new(name: 'ContactInitiationMethod')
     ContactNotFoundException = Shapes::StructureShape.new(name: 'ContactNotFoundException')
@@ -230,6 +232,8 @@ module Aws::Connect
     CreateContactFlowModuleResponse = Shapes::StructureShape.new(name: 'CreateContactFlowModuleResponse')
     CreateContactFlowRequest = Shapes::StructureShape.new(name: 'CreateContactFlowRequest')
     CreateContactFlowResponse = Shapes::StructureShape.new(name: 'CreateContactFlowResponse')
+    CreateContactFlowVersionRequest = Shapes::StructureShape.new(name: 'CreateContactFlowVersionRequest')
+    CreateContactFlowVersionResponse = Shapes::StructureShape.new(name: 'CreateContactFlowVersionResponse')
     CreateEvaluationFormRequest = Shapes::StructureShape.new(name: 'CreateEvaluationFormRequest')
     CreateEvaluationFormResponse = Shapes::StructureShape.new(name: 'CreateEvaluationFormResponse')
     CreateHoursOfOperationRequest = Shapes::StructureShape.new(name: 'CreateHoursOfOperationRequest')
@@ -511,6 +515,7 @@ module Aws::Connect
     FlowAssociationResourceType = Shapes::StringShape.new(name: 'FlowAssociationResourceType')
     FlowAssociationSummary = Shapes::StructureShape.new(name: 'FlowAssociationSummary')
     FlowAssociationSummaryList = Shapes::ListShape.new(name: 'FlowAssociationSummaryList')
+    FlowContentSha256 = Shapes::StringShape.new(name: 'FlowContentSha256')
     FunctionArn = Shapes::StringShape.new(name: 'FunctionArn')
     FunctionArnsList = Shapes::ListShape.new(name: 'FunctionArnsList')
     GetAttachedFileRequest = Shapes::StructureShape.new(name: 'GetAttachedFileRequest')
@@ -651,6 +656,8 @@ module Aws::Connect
     ListContactEvaluationsResponse = Shapes::StructureShape.new(name: 'ListContactEvaluationsResponse')
     ListContactFlowModulesRequest = Shapes::StructureShape.new(name: 'ListContactFlowModulesRequest')
     ListContactFlowModulesResponse = Shapes::StructureShape.new(name: 'ListContactFlowModulesResponse')
+    ListContactFlowVersionsRequest = Shapes::StructureShape.new(name: 'ListContactFlowVersionsRequest')
+    ListContactFlowVersionsResponse = Shapes::StructureShape.new(name: 'ListContactFlowVersionsResponse')
     ListContactFlowsRequest = Shapes::StructureShape.new(name: 'ListContactFlowsRequest')
     ListContactFlowsResponse = Shapes::StructureShape.new(name: 'ListContactFlowsResponse')
     ListContactReferencesRequest = Shapes::StructureShape.new(name: 'ListContactReferencesRequest')
@@ -976,6 +983,7 @@ module Aws::Connect
     ResourceTagsSearchCriteria = Shapes::StructureShape.new(name: 'ResourceTagsSearchCriteria')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ResourceTypeList = Shapes::ListShape.new(name: 'ResourceTypeList')
+    ResourceVersion = Shapes::IntegerShape.new(name: 'ResourceVersion')
     ResumeContactRecordingRequest = Shapes::StructureShape.new(name: 'ResumeContactRecordingRequest')
     ResumeContactRecordingResponse = Shapes::StructureShape.new(name: 'ResumeContactRecordingResponse')
     ResumeContactRequest = Shapes::StructureShape.new(name: 'ResumeContactRequest')
@@ -1864,6 +1872,12 @@ module Aws::Connect
     ContactFlow.add_member(:description, Shapes::ShapeRef.new(shape: ContactFlowDescription, location_name: "Description"))
     ContactFlow.add_member(:content, Shapes::ShapeRef.new(shape: ContactFlowContent, location_name: "Content"))
     ContactFlow.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    ContactFlow.add_member(:is_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsDefault"))
+    ContactFlow.add_member(:flow_content_sha_256, Shapes::ShapeRef.new(shape: FlowContentSha256, location_name: "FlowContentSha256"))
+    ContactFlow.add_member(:version, Shapes::ShapeRef.new(shape: ResourceVersion, location_name: "Version"))
+    ContactFlow.add_member(:version_description, Shapes::ShapeRef.new(shape: ContactFlowDescription, location_name: "VersionDescription"))
+    ContactFlow.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    ContactFlow.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
     ContactFlow.struct_class = Types::ContactFlow
 
     ContactFlowModule.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
@@ -1925,6 +1939,13 @@ module Aws::Connect
     ContactFlowSummaryList.member = Shapes::ShapeRef.new(shape: ContactFlowSummary)
 
     ContactFlowTypes.member = Shapes::ShapeRef.new(shape: ContactFlowType)
+
+    ContactFlowVersionSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    ContactFlowVersionSummary.add_member(:version_description, Shapes::ShapeRef.new(shape: ContactFlowDescription, location_name: "VersionDescription"))
+    ContactFlowVersionSummary.add_member(:version, Shapes::ShapeRef.new(shape: ResourceVersion, location_name: "Version"))
+    ContactFlowVersionSummary.struct_class = Types::ContactFlowVersionSummary
+
+    ContactFlowVersionSummaryList.member = Shapes::ShapeRef.new(shape: ContactFlowVersionSummary)
 
     ContactNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ContactNotFoundException.struct_class = Types::ContactNotFoundException
@@ -2017,7 +2038,20 @@ module Aws::Connect
 
     CreateContactFlowResponse.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, location_name: "ContactFlowId"))
     CreateContactFlowResponse.add_member(:contact_flow_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ContactFlowArn"))
+    CreateContactFlowResponse.add_member(:flow_content_sha_256, Shapes::ShapeRef.new(shape: FlowContentSha256, location_name: "FlowContentSha256"))
     CreateContactFlowResponse.struct_class = Types::CreateContactFlowResponse
+
+    CreateContactFlowVersionRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    CreateContactFlowVersionRequest.add_member(:description, Shapes::ShapeRef.new(shape: ContactFlowDescription, location_name: "Description"))
+    CreateContactFlowVersionRequest.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "ContactFlowId"))
+    CreateContactFlowVersionRequest.add_member(:flow_content_sha_256, Shapes::ShapeRef.new(shape: FlowContentSha256, location_name: "FlowContentSha256"))
+    CreateContactFlowVersionRequest.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    CreateContactFlowVersionRequest.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
+    CreateContactFlowVersionRequest.struct_class = Types::CreateContactFlowVersionRequest
+
+    CreateContactFlowVersionResponse.add_member(:contact_flow_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ContactFlowArn"))
+    CreateContactFlowVersionResponse.add_member(:version, Shapes::ShapeRef.new(shape: ResourceVersion, location_name: "Version"))
+    CreateContactFlowVersionResponse.struct_class = Types::CreateContactFlowVersionResponse
 
     CreateEvaluationFormRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     CreateEvaluationFormRequest.add_member(:title, Shapes::ShapeRef.new(shape: EvaluationFormTitle, required: true, location_name: "Title"))
@@ -3508,6 +3542,16 @@ module Aws::Connect
     ListContactFlowModulesResponse.add_member(:contact_flow_modules_summary_list, Shapes::ShapeRef.new(shape: ContactFlowModulesSummaryList, location_name: "ContactFlowModulesSummaryList"))
     ListContactFlowModulesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListContactFlowModulesResponse.struct_class = Types::ListContactFlowModulesResponse
+
+    ListContactFlowVersionsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    ListContactFlowVersionsRequest.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "ContactFlowId"))
+    ListContactFlowVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListContactFlowVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult1000, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListContactFlowVersionsRequest.struct_class = Types::ListContactFlowVersionsRequest
+
+    ListContactFlowVersionsResponse.add_member(:contact_flow_version_summary_list, Shapes::ShapeRef.new(shape: ContactFlowVersionSummaryList, location_name: "ContactFlowVersionSummaryList"))
+    ListContactFlowVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListContactFlowVersionsResponse.struct_class = Types::ListContactFlowVersionsResponse
 
     ListContactFlowsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     ListContactFlowsRequest.add_member(:contact_flow_types, Shapes::ShapeRef.new(shape: ContactFlowTypes, location: "querystring", location_name: "contactFlowTypes"))
@@ -6233,6 +6277,21 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
+      api.add_operation(:create_contact_flow_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateContactFlowVersion"
+        o.http_method = "PUT"
+        o.http_request_uri = "/contact-flows/{InstanceId}/{ContactFlowId}/version"
+        o.input = Shapes::ShapeRef.new(shape: CreateContactFlowVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateContactFlowVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:create_evaluation_form, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateEvaluationForm"
         o.http_method = "PUT"
@@ -7667,6 +7726,26 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_contact_flow_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListContactFlowVersions"
+        o.http_method = "GET"
+        o.http_request_uri = "/contact-flows/{InstanceId}/{ContactFlowId}/versions"
+        o.input = Shapes::ShapeRef.new(shape: ListContactFlowVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListContactFlowVersionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

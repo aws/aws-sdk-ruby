@@ -54,8 +54,9 @@ module Aws::IoTSiteWise
   autoload :EndpointParameters, 'aws-sdk-iotsitewise/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-iotsitewise/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-iotsitewise/endpoints'
+  autoload :EventStreams, 'aws-sdk-iotsitewise/event_streams'
 
-  GEM_VERSION = '1.77.0'
+  GEM_VERSION = '1.78.0'
 
 end
 

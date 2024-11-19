@@ -54,7 +54,7 @@ module Aws::QuickSight
   autoload :EndpointProvider, 'aws-sdk-quicksight/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-quicksight/endpoints'
 
-  GEM_VERSION = '1.136.0'
+  GEM_VERSION = '1.137.0'
 
 end
 

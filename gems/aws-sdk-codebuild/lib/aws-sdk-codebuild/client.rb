@@ -5908,7 +5908,6 @@ module Aws::CodeBuild
     #     User Guide* to limit which entities can trigger a build, and do
     #     not store the buildspec in the project itself, to ensure that your
     #     webhooks are as secure as possible.
-    #
     # * A malicious user can use public builds to distribute malicious
     #   artifacts. We recommend that you review all pull requests to verify
     #   that the pull request is a legitimate change. We also recommend that
@@ -6142,7 +6141,7 @@ module Aws::CodeBuild
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.137.0'
+      context[:gem_version] = '1.138.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

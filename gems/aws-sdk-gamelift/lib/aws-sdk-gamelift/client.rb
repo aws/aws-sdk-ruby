@@ -936,14 +936,12 @@ module Aws::GameLift
     #   * `FleetRoleArn`
     #
     #   ^
-    #
     # * Create a fleet with a game server container group. Provide the
     #   following required parameter values:
     #
     #   * `FleetRoleArn`
     #
     #   * `GameServerContainerGroupDefinitionName`
-    #
     # * Create a fleet with a game server container group and a per-instance
     #   container group. Provide the following required parameter values:
     #
@@ -1300,7 +1298,6 @@ module Aws::GameLift
     #   * Support container. This container runs software in parallel with
     #     your game server. You can define up to 8 support containers in a
     #     game server group.
-    #
     #   When building a game server container group definition, you can
     #   choose to bundle your game server executable and all dependent
     #   software into a single game server container. Alternatively, you can
@@ -1354,7 +1351,6 @@ module Aws::GameLift
     #     * `PortConfiguration`
     #
     #     * `ServerSdkVersion` (omit to use default value)
-    #
     # * Create a per-instance container group definition. Provide the
     #   following required parameter values:
     #
@@ -11702,7 +11698,7 @@ module Aws::GameLift
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-gamelift'
-      context[:gem_version] = '1.95.0'
+      context[:gem_version] = '1.96.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

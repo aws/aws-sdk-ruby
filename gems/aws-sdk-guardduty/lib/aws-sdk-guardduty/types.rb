@@ -1279,7 +1279,6 @@ module Aws::GuardDuty
     #     * **Medium**: `["4", "5", "6"]`
     #
     #     * **High**: `["7", "8", "9"]`
-    #
     #     For more information, see [Severity levels for GuardDuty
     #     findings][2].
     #

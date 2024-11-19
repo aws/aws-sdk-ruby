@@ -293,6 +293,9 @@
   "ConnectCampaignService": {
     "models": "connectcampaigns/2021-01-30"
   },
+  "ConnectCampaignsV2": {
+    "models": "connectcampaignsv2/2024-04-23"
+  },
   "ConnectCases": {
     "models": "connectcases/2022-10-03"
   },

@@ -884,7 +884,6 @@ module Aws::SQS
     #       Default: 10. When the `ReceiveCount` for a message exceeds the
     #       `maxReceiveCount` for a queue, Amazon SQS moves the message to the
     #       dead-letter-queue.
-    #
     #   * `RedriveAllowPolicy` – The string that includes the parameters for
     #     the permissions for the dead-letter queue redrive permission and
     #     which source queues can specify dead-letter queues as a JSON object.
@@ -903,7 +902,6 @@ module Aws::SQS
     #
     #       * `byQueue` – Only queues specified by the `sourceQueueArns`
     #         parameter can specify this queue as the dead-letter queue.
-    #
     #     * `sourceQueueArns` – The Amazon Resource Names (ARN)s of the source
     #       queues that can specify this queue as the dead-letter queue and
     #       redrive messages. You can specify this parameter only when the
@@ -975,7 +973,6 @@ module Aws::SQS
     #
     #       * If the queue has `ContentBasedDeduplication` set, your
     #         `MessageDeduplicationId` overrides the generated one.
-    #
     #     * When `ContentBasedDeduplication` is in effect, messages with
     #       identical content sent within the deduplication interval are
     #       treated as duplicates and only one copy of the message is
@@ -1348,7 +1345,6 @@ module Aws::SQS
     #       Default: 10. When the `ReceiveCount` for a message exceeds the
     #       `maxReceiveCount` for a queue, Amazon SQS moves the message to the
     #       dead-letter-queue.
-    #
     #   * `RedriveAllowPolicy` – The string that includes the parameters for
     #     the permissions for the dead-letter queue redrive permission and
     #     which source queues can specify dead-letter queues as a JSON object.
@@ -1367,7 +1363,6 @@ module Aws::SQS
     #
     #       * `byQueue` – Only queues specified by the `sourceQueueArns`
     #         parameter can specify this queue as the dead-letter queue.
-    #
     #     * `sourceQueueArns` – The Amazon Resource Names (ARN)s of the source
     #       queues that can specify this queue as the dead-letter queue and
     #       redrive messages. You can specify this parameter only when the
@@ -1885,7 +1880,6 @@ module Aws::SQS
     #
     #     * For an IAM role, returns the IAM role ID, for example
     #       `ABCDE1F2GH3I4JK5LMNOP:i-a123b456`.
-    #
     #   * `SentTimestamp` – Returns the time the message was sent to the queue
     #     ([epoch time][1] in milliseconds).
     #
@@ -1929,7 +1923,6 @@ module Aws::SQS
     #
     #     * For an IAM role, returns the IAM role ID, for example
     #       `ABCDE1F2GH3I4JK5LMNOP:i-a123b456`.
-    #
     #   * `SentTimestamp` – Returns the time the message was sent to the queue
     #     ([epoch time][1] in milliseconds).
     #
@@ -2256,7 +2249,6 @@ module Aws::SQS
     #
     #     * If the queue has `ContentBasedDeduplication` set, your
     #       `MessageDeduplicationId` overrides the generated one.
-    #
     #   * When `ContentBasedDeduplication` is in effect, messages with
     #     identical content sent within the deduplication interval are treated
     #     as duplicates and only one copy of the message is delivered.
@@ -2571,7 +2563,6 @@ module Aws::SQS
     #       Default: 10. When the `ReceiveCount` for a message exceeds the
     #       `maxReceiveCount` for a queue, Amazon SQS moves the message to the
     #       dead-letter-queue.
-    #
     #   * `RedriveAllowPolicy` – The string that includes the parameters for
     #     the permissions for the dead-letter queue redrive permission and
     #     which source queues can specify dead-letter queues as a JSON object.
@@ -2590,7 +2581,6 @@ module Aws::SQS
     #
     #       * `byQueue` – Only queues specified by the `sourceQueueArns`
     #         parameter can specify this queue as the dead-letter queue.
-    #
     #     * `sourceQueueArns` – The Amazon Resource Names (ARN)s of the source
     #       queues that can specify this queue as the dead-letter queue and
     #       redrive messages. You can specify this parameter only when the
@@ -2650,7 +2640,6 @@ module Aws::SQS
     #
     #       * If the queue has `ContentBasedDeduplication` set, your
     #         `MessageDeduplicationId` overrides the generated one.
-    #
     #     * When `ContentBasedDeduplication` is in effect, messages with
     #       identical content sent within the deduplication interval are
     #       treated as duplicates and only one copy of the message is
@@ -2908,7 +2897,7 @@ module Aws::SQS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sqs'
-      context[:gem_version] = '1.88.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

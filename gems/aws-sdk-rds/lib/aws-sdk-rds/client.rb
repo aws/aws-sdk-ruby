@@ -2495,6 +2495,7 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#supported_ca_certificate_identifiers #supported_ca_certificate_identifiers} => Array&lt;String&gt;
     #   * {Types::DBEngineVersion#supports_local_write_forwarding #supports_local_write_forwarding} => Boolean
     #   * {Types::DBEngineVersion#supports_integrations #supports_integrations} => Boolean
+    #   * {Types::DBEngineVersion#serverless_v2_features_support #serverless_v2_features_support} => Types::ServerlessV2FeaturesSupport
     #
     # @example Request syntax with placeholder values
     #
@@ -2579,6 +2580,8 @@ module Aws::RDS
     #   resp.supported_ca_certificate_identifiers[0] #=> String
     #   resp.supports_local_write_forwarding #=> Boolean
     #   resp.supports_integrations #=> Boolean
+    #   resp.serverless_v2_features_support.min_capacity #=> Float
+    #   resp.serverless_v2_features_support.max_capacity #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateCustomDBEngineVersion AWS API Documentation
     #
@@ -3726,6 +3729,7 @@ module Aws::RDS
     #     serverless_v2_scaling_configuration: {
     #       min_capacity: 1.0,
     #       max_capacity: 1.0,
+    #       seconds_until_auto_pause: 1,
     #     },
     #     network_type: "String",
     #     cluster_scalability_type: "standard", # accepts standard, limitless
@@ -3863,6 +3867,7 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.network_type #=> String
     #   resp.db_cluster.db_system_id #=> String
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
@@ -4349,6 +4354,9 @@ module Aws::RDS
     #
     #     * Must contain 1 to 64 alphanumeric characters.
     #
+    #     * Must begin with a letter. Subsequent characters can be letters,
+    #       underscores, or digits (0-9).
+    #
     #     * Can't be a word reserved by the database engine.
     #
     #   Amazon Aurora PostgreSQL
@@ -4581,14 +4589,12 @@ module Aws::RDS
     #         16384.
     #
     #       * Web and Express editions: Must be an integer from 20 to 16384.
-    #
     #     * Provisioned IOPS storage (io1, io2):
     #
     #       * Enterprise and Standard editions: Must be an integer from 100 to
     #         16384.
     #
     #       * Web and Express editions: Must be an integer from 100 to 16384.
-    #
     #     * Magnetic storage (standard):
     #
     #       * Enterprise and Standard editions: Must be an integer from 20 to
@@ -8915,6 +8921,7 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#supported_ca_certificate_identifiers #supported_ca_certificate_identifiers} => Array&lt;String&gt;
     #   * {Types::DBEngineVersion#supports_local_write_forwarding #supports_local_write_forwarding} => Boolean
     #   * {Types::DBEngineVersion#supports_integrations #supports_integrations} => Boolean
+    #   * {Types::DBEngineVersion#serverless_v2_features_support #serverless_v2_features_support} => Types::ServerlessV2FeaturesSupport
     #
     # @example Request syntax with placeholder values
     #
@@ -8985,6 +8992,8 @@ module Aws::RDS
     #   resp.supported_ca_certificate_identifiers[0] #=> String
     #   resp.supports_local_write_forwarding #=> Boolean
     #   resp.supports_integrations #=> Boolean
+    #   resp.serverless_v2_features_support.min_capacity #=> Float
+    #   resp.serverless_v2_features_support.max_capacity #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteCustomDBEngineVersion AWS API Documentation
     #
@@ -9229,6 +9238,7 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.network_type #=> String
     #   resp.db_cluster.db_system_id #=> String
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
@@ -11357,7 +11367,6 @@ module Aws::RDS
     #       backup replication is stopped.
     #
     #     ^
-    #
     #   * `db-cluster-id` - Accepts DB cluster identifiers and Amazon Resource
     #     Names (ARNs). The results list includes only information about the
     #     DB cluster automated backups identified by these ARNs.
@@ -11505,7 +11514,6 @@ module Aws::RDS
     #     * `failed`
     #
     #     * `pending`
-    #
     #     The results list includes information about only the backtracks
     #     identified by these values.
     #
@@ -12674,6 +12682,7 @@ module Aws::RDS
     #   resp.db_clusters[0].performance_insights_retention_period #=> Integer
     #   resp.db_clusters[0].serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_clusters[0].serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_clusters[0].serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
     #   resp.db_clusters[0].network_type #=> String
     #   resp.db_clusters[0].db_system_id #=> String
     #   resp.db_clusters[0].master_user_secret.secret_arn #=> String
@@ -12790,7 +12799,6 @@ module Aws::RDS
     #     * `provisioned`
     #
     #     * `serverless`
-    #
     #   * `engine-version` - Accepts engine versions. The results list only
     #     includes information about the DB engine versions for these engine
     #     versions.
@@ -12977,6 +12985,8 @@ module Aws::RDS
     #   resp.db_engine_versions[0].supported_ca_certificate_identifiers[0] #=> String
     #   resp.db_engine_versions[0].supports_local_write_forwarding #=> Boolean
     #   resp.db_engine_versions[0].supports_integrations #=> Boolean
+    #   resp.db_engine_versions[0].serverless_v2_features_support.min_capacity #=> Float
+    #   resp.db_engine_versions[0].serverless_v2_features_support.max_capacity #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBEngineVersions AWS API Documentation
     #
@@ -13020,7 +13030,6 @@ module Aws::RDS
     #
     #     * `retained` - Automated backups for deleted instances and after
     #       backup replication is stopped.
-    #
     #   * `db-instance-id` - Accepts DB instance identifiers and Amazon
     #     Resource Names (ARNs). The results list includes only information
     #     about the DB instance automated backups identified by these ARNs.
@@ -14178,7 +14187,6 @@ module Aws::RDS
     #     * `resolved` - The recommendations which are completed.
     #
     #     * `dismissed` - The recommendations that you dismissed.
-    #
     #     The results list only includes the recommendations whose status is
     #     one of the specified filter values.
     #
@@ -14195,7 +14203,6 @@ module Aws::RDS
     #     * `low`
     #
     #     * `informational`
-    #
     #   * `type-id` - Accepts a list of recommendation type identifiers. The
     #     results list only includes the recommendations whose type is one of
     #     the specified filter values.
@@ -17991,6 +17998,7 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.network_type #=> String
     #   resp.db_cluster.db_system_id #=> String
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
@@ -18623,6 +18631,7 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#supported_ca_certificate_identifiers #supported_ca_certificate_identifiers} => Array&lt;String&gt;
     #   * {Types::DBEngineVersion#supports_local_write_forwarding #supports_local_write_forwarding} => Boolean
     #   * {Types::DBEngineVersion#supports_integrations #supports_integrations} => Boolean
+    #   * {Types::DBEngineVersion#serverless_v2_features_support #serverless_v2_features_support} => Types::ServerlessV2FeaturesSupport
     #
     # @example Request syntax with placeholder values
     #
@@ -18695,6 +18704,8 @@ module Aws::RDS
     #   resp.supported_ca_certificate_identifiers[0] #=> String
     #   resp.supports_local_write_forwarding #=> Boolean
     #   resp.supports_integrations #=> Boolean
+    #   resp.serverless_v2_features_support.min_capacity #=> Float
+    #   resp.serverless_v2_features_support.max_capacity #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyCustomDBEngineVersion AWS API Documentation
     #
@@ -18749,11 +18760,11 @@ module Aws::RDS
     #   Example: `my-cluster2`
     #
     # @option params [Boolean] :apply_immediately
-    #   Specifies whether the modifications in this request and any pending
-    #   modifications are asynchronously applied as soon as possible,
-    #   regardless of the `PreferredMaintenanceWindow` setting for the DB
-    #   cluster. If this parameter is disabled, changes to the DB cluster are
-    #   applied during the next maintenance window.
+    #   Specifies whether the modifications in this request are asynchronously
+    #   applied as soon as possible, regardless of the
+    #   `PreferredMaintenanceWindow` setting for the DB cluster. If this
+    #   parameter is disabled, changes to the DB cluster are applied during
+    #   the next maintenance window.
     #
     #   Most modifications can be applied immediately or during the next
     #   scheduled maintenance window. Some modifications, such as turning on
@@ -19552,6 +19563,7 @@ module Aws::RDS
     #     serverless_v2_scaling_configuration: {
     #       min_capacity: 1.0,
     #       max_capacity: 1.0,
+    #       seconds_until_auto_pause: 1,
     #     },
     #     network_type: "String",
     #     manage_master_user_password: false,
@@ -19690,6 +19702,7 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.network_type #=> String
     #   resp.db_cluster.db_system_id #=> String
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
@@ -23416,6 +23429,7 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.network_type #=> String
     #   resp.db_cluster.db_system_id #=> String
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
@@ -23717,6 +23731,7 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.network_type #=> String
     #   resp.db_cluster.db_system_id #=> String
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
@@ -25172,6 +25187,7 @@ module Aws::RDS
     #     serverless_v2_scaling_configuration: {
     #       min_capacity: 1.0,
     #       max_capacity: 1.0,
+    #       seconds_until_auto_pause: 1,
     #     },
     #     network_type: "String",
     #     manage_master_user_password: false,
@@ -25305,6 +25321,7 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.network_type #=> String
     #   resp.db_cluster.db_system_id #=> String
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
@@ -25984,6 +26001,7 @@ module Aws::RDS
     #     serverless_v2_scaling_configuration: {
     #       min_capacity: 1.0,
     #       max_capacity: 1.0,
+    #       seconds_until_auto_pause: 1,
     #     },
     #     network_type: "String",
     #     rds_custom_cluster_configuration: {
@@ -26124,6 +26142,7 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.network_type #=> String
     #   resp.db_cluster.db_system_id #=> String
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
@@ -26781,6 +26800,7 @@ module Aws::RDS
     #     serverless_v2_scaling_configuration: {
     #       min_capacity: 1.0,
     #       max_capacity: 1.0,
+    #       seconds_until_auto_pause: 1,
     #     },
     #     network_type: "String",
     #     source_db_cluster_resource_id: "String",
@@ -26922,6 +26942,7 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.network_type #=> String
     #   resp.db_cluster.db_system_id #=> String
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
@@ -29970,6 +29991,7 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.network_type #=> String
     #   resp.db_cluster.db_system_id #=> String
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
@@ -30812,6 +30834,7 @@ module Aws::RDS
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.network_type #=> String
     #   resp.db_cluster.db_system_id #=> String
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
@@ -31686,7 +31709,7 @@ module Aws::RDS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.258.0'
+      context[:gem_version] = '1.259.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -340,6 +340,7 @@ module Aws
         def supported_ca_certificate_identifiers: () -> ::Array[::String]
         def supports_local_write_forwarding: () -> bool
         def supports_integrations: () -> bool
+        def serverless_v2_features_support: () -> Types::ServerlessV2FeaturesSupport
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#create_custom_db_engine_version-instance_method
       def create_custom_db_engine_version: (
@@ -432,7 +433,8 @@ module Aws
                                ?enable_limitless_database: bool,
                                ?serverless_v2_scaling_configuration: {
                                  min_capacity: ::Float?,
-                                 max_capacity: ::Float?
+                                 max_capacity: ::Float?,
+                                 seconds_until_auto_pause: ::Integer?
                                },
                                ?network_type: ::String,
                                ?cluster_scalability_type: ("standard" | "limitless"),
@@ -975,6 +977,7 @@ module Aws
         def supported_ca_certificate_identifiers: () -> ::Array[::String]
         def supports_local_write_forwarding: () -> bool
         def supports_integrations: () -> bool
+        def serverless_v2_features_support: () -> Types::ServerlessV2FeaturesSupport
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#delete_custom_db_engine_version-instance_method
       def delete_custom_db_engine_version: (
@@ -2239,6 +2242,7 @@ module Aws
         def supported_ca_certificate_identifiers: () -> ::Array[::String]
         def supports_local_write_forwarding: () -> bool
         def supports_integrations: () -> bool
+        def serverless_v2_features_support: () -> Types::ServerlessV2FeaturesSupport
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#modify_custom_db_engine_version-instance_method
       def modify_custom_db_engine_version: (
@@ -2301,7 +2305,8 @@ module Aws
                                ?performance_insights_retention_period: ::Integer,
                                ?serverless_v2_scaling_configuration: {
                                  min_capacity: ::Float?,
-                                 max_capacity: ::Float?
+                                 max_capacity: ::Float?,
+                                 seconds_until_auto_pause: ::Integer?
                                },
                                ?network_type: ::String,
                                ?manage_master_user_password: bool,
@@ -2947,7 +2952,8 @@ module Aws
                                         ?domain_iam_role_name: ::String,
                                         ?serverless_v2_scaling_configuration: {
                                           min_capacity: ::Float?,
-                                          max_capacity: ::Float?
+                                          max_capacity: ::Float?,
+                                          seconds_until_auto_pause: ::Integer?
                                         },
                                         ?network_type: ::String,
                                         ?manage_master_user_password: bool,
@@ -3003,7 +3009,8 @@ module Aws
                                               ?publicly_accessible: bool,
                                               ?serverless_v2_scaling_configuration: {
                                                 min_capacity: ::Float?,
-                                                max_capacity: ::Float?
+                                                max_capacity: ::Float?,
+                                                seconds_until_auto_pause: ::Integer?
                                               },
                                               ?network_type: ::String,
                                               ?rds_custom_cluster_configuration: {
@@ -3065,7 +3072,8 @@ module Aws
                                                  ?iops: ::Integer,
                                                  ?serverless_v2_scaling_configuration: {
                                                    min_capacity: ::Float?,
-                                                   max_capacity: ::Float?
+                                                   max_capacity: ::Float?,
+                                                   seconds_until_auto_pause: ::Integer?
                                                  },
                                                  ?network_type: ::String,
                                                  ?source_db_cluster_resource_id: ::String,

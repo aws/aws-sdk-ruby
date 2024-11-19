@@ -929,6 +929,21 @@ module Aws
                                     ) -> _ListGeneratedTemplatesResponseSuccess
                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGeneratedTemplatesResponseSuccess
 
+      interface _ListHookResultsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListHookResultsOutput]
+        def target_type: () -> ("CHANGE_SET" | "STACK" | "RESOURCE" | "CLOUD_CONTROL")
+        def target_id: () -> ::String
+        def hook_results: () -> ::Array[Types::HookResultSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#list_hook_results-instance_method
+      def list_hook_results: (
+                               target_type: ("CHANGE_SET" | "STACK" | "RESOURCE" | "CLOUD_CONTROL"),
+                               target_id: ::String,
+                               ?next_token: ::String
+                             ) -> _ListHookResultsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListHookResultsResponseSuccess
+
       interface _ListImportsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListImportsOutput]
         def imports: () -> ::Array[::String]

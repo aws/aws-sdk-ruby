@@ -3187,20 +3187,17 @@ module Aws::ElasticBeanstalk
     #       `contains` \| `in` \| `not_in`
     #
     #     ^
-    #
     #   * `Attribute = LifecycleState`:
     #
     #     * `Operator`: `=` \| `!=` \| `in` \| `not_in`
     #
     #     * `Values`: `beta` \| `supported` \| `deprecated` \| `retired`
-    #
     #   * `Attribute = PlatformName`:
     #
     #     * `Operator`: `=` \| `!=` \| `begins_with` \| `ends_with` \|
     #       `contains` \| `in` \| `not_in`
     #
     #     ^
-    #
     #   * `Attribute = TierType`:
     #
     #     * `Operator`: `=` \| `!=`
@@ -4626,7 +4623,7 @@ module Aws::ElasticBeanstalk
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-elasticbeanstalk'
-      context[:gem_version] = '1.80.0'
+      context[:gem_version] = '1.81.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

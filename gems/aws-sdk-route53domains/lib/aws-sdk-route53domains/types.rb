@@ -1101,7 +1101,6 @@ module Aws::Route53Domains
     #       * `TRUST` (Trust)
     #
     #       * `ULC` (Unlimited liability corporation)
-    #
     #     * `CA_LEGAL_TYPE`
     #
     #       When `ContactType` is `PERSON`, valid values include the
@@ -1115,7 +1114,6 @@ module Aws::Route53Domains
     #         Resident)
     #
     #       * `RES` (Permanent resident of Canada)
-    #
     #       When `ContactType` is a value other than `PERSON`, valid values
     #       include the following:
     #
@@ -1156,14 +1154,12 @@ module Aws::Route53Domains
     #       * The value of `ES_LEGAL_FORM`
     #
     #       * The value of `ES_IDENTIFICATION_TYPE`
-    #
     #       **If `ES_LEGAL_FORM` is any value other than `INDIVIDUAL`:**
     #
     #       * Specify 1 letter + 8 numbers (CIF \[Certificado de
     #         Identificación Fiscal\])
     #
     #       * Example: B12345678
-    #
     #       **If `ES_LEGAL_FORM` is `INDIVIDUAL`, the value that you specify
     #       for `ES_IDENTIFICATION` depends on the value of
     #       `ES_IDENTIFICATION_TYPE`:**
@@ -1175,7 +1171,6 @@ module Aws::Route53Domains
     #           Identidad\], NIF \[Número de Identificación Fiscal\])
     #
     #         * Example: 12345678M
-    #
     #       * If `ES_IDENTIFICATION_TYPE` is `NIE` (for foreigners with
     #         legal residence):
     #
@@ -1183,7 +1178,6 @@ module Aws::Route53Domains
     #           Identidad de Extranjero\])
     #
     #         * Example: Y1234567X
-    #
     #       * If `ES_IDENTIFICATION_TYPE` is `OTHER` (for contacts outside
     #         of Spain):
     #
@@ -1191,7 +1185,6 @@ module Aws::Route53Domains
     #           national identity card number
     #
     #         ^
-    #
     #     * `ES_IDENTIFICATION_TYPE`
     #
     #       Valid values include the following:
@@ -1201,7 +1194,6 @@ module Aws::Route53Domains
     #       * `NIE` (For foreigners with legal residence)
     #
     #       * `OTHER` (For contacts outside of Spain)
-    #
     #     * `ES_LEGAL_FORM`
     #
     #       Valid values include the following:
@@ -1301,7 +1293,6 @@ module Aws::Route53Domains
     #       * `FINNISH`
     #
     #       * `NOT_FINNISH`
-    #
     #     * `FI_ORGANIZATION_TYPE`
     #
     #       Valid values include the following:
@@ -1394,7 +1385,6 @@ module Aws::Route53Domains
     #       * `STAT` (UK Statutory Body)
     #
     #       * `STRA` (UK Sole Trader)
-    #
     #     * `UK_COMPANY_NUMBER`
     #
     #   In addition, many TLDs require a `VAT_NUMBER`.

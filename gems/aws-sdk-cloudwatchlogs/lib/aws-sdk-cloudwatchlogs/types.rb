@@ -3840,7 +3840,6 @@ module Aws::CloudWatchLogs
     #     * A logical destination in a different account created with
     #       [PutDestination][2], for cross-account delivery. Kinesis Data
     #       Streams and Firehose are supported as logical destinations.
-    #
     #   * **RoleArn** The ARN of an IAM role that grants CloudWatch Logs
     #     permissions to deliver ingested log events to the destination
     #     stream. You don't need to provide the ARN when you are working

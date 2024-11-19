@@ -694,7 +694,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp = client.create_event_destination({
     #     configuration_set_name: "ConfigurationSetNameOrArn", # required
     #     event_destination_name: "EventDestinationName", # required
-    #     matching_event_types: ["ALL"], # required, accepts ALL, TEXT_ALL, TEXT_SENT, TEXT_PENDING, TEXT_QUEUED, TEXT_SUCCESSFUL, TEXT_DELIVERED, TEXT_INVALID, TEXT_INVALID_MESSAGE, TEXT_UNREACHABLE, TEXT_CARRIER_UNREACHABLE, TEXT_BLOCKED, TEXT_CARRIER_BLOCKED, TEXT_SPAM, TEXT_UNKNOWN, TEXT_TTL_EXPIRED, VOICE_ALL, VOICE_INITIATED, VOICE_RINGING, VOICE_ANSWERED, VOICE_COMPLETED, VOICE_BUSY, VOICE_NO_ANSWER, VOICE_FAILED, VOICE_TTL_EXPIRED, MEDIA_ALL, MEDIA_PENDING, MEDIA_QUEUED, MEDIA_SUCCESSFUL, MEDIA_DELIVERED, MEDIA_INVALID, MEDIA_INVALID_MESSAGE, MEDIA_UNREACHABLE, MEDIA_CARRIER_UNREACHABLE, MEDIA_BLOCKED, MEDIA_CARRIER_BLOCKED, MEDIA_SPAM, MEDIA_UNKNOWN, MEDIA_TTL_EXPIRED, MEDIA_FILE_INACCESSIBLE, MEDIA_FILE_TYPE_UNSUPPORTED, MEDIA_FILE_SIZE_EXCEEDED
+    #     matching_event_types: ["ALL"], # required, accepts ALL, TEXT_ALL, TEXT_SENT, TEXT_PENDING, TEXT_QUEUED, TEXT_SUCCESSFUL, TEXT_DELIVERED, TEXT_INVALID, TEXT_INVALID_MESSAGE, TEXT_UNREACHABLE, TEXT_CARRIER_UNREACHABLE, TEXT_BLOCKED, TEXT_CARRIER_BLOCKED, TEXT_SPAM, TEXT_UNKNOWN, TEXT_TTL_EXPIRED, TEXT_PROTECT_BLOCKED, VOICE_ALL, VOICE_INITIATED, VOICE_RINGING, VOICE_ANSWERED, VOICE_COMPLETED, VOICE_BUSY, VOICE_NO_ANSWER, VOICE_FAILED, VOICE_TTL_EXPIRED, MEDIA_ALL, MEDIA_PENDING, MEDIA_QUEUED, MEDIA_SUCCESSFUL, MEDIA_DELIVERED, MEDIA_INVALID, MEDIA_INVALID_MESSAGE, MEDIA_UNREACHABLE, MEDIA_CARRIER_UNREACHABLE, MEDIA_BLOCKED, MEDIA_CARRIER_BLOCKED, MEDIA_SPAM, MEDIA_UNKNOWN, MEDIA_TTL_EXPIRED, MEDIA_FILE_INACCESSIBLE, MEDIA_FILE_TYPE_UNSUPPORTED, MEDIA_FILE_SIZE_EXCEEDED
     #     cloud_watch_logs_destination: {
     #       iam_role_arn: "IamRoleArn", # required
     #       log_group_arn: "LogGroupArn", # required
@@ -716,7 +716,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.event_destination.event_destination_name #=> String
     #   resp.event_destination.enabled #=> Boolean
     #   resp.event_destination.matching_event_types #=> Array
-    #   resp.event_destination.matching_event_types[0] #=> String, one of "ALL", "TEXT_ALL", "TEXT_SENT", "TEXT_PENDING", "TEXT_QUEUED", "TEXT_SUCCESSFUL", "TEXT_DELIVERED", "TEXT_INVALID", "TEXT_INVALID_MESSAGE", "TEXT_UNREACHABLE", "TEXT_CARRIER_UNREACHABLE", "TEXT_BLOCKED", "TEXT_CARRIER_BLOCKED", "TEXT_SPAM", "TEXT_UNKNOWN", "TEXT_TTL_EXPIRED", "VOICE_ALL", "VOICE_INITIATED", "VOICE_RINGING", "VOICE_ANSWERED", "VOICE_COMPLETED", "VOICE_BUSY", "VOICE_NO_ANSWER", "VOICE_FAILED", "VOICE_TTL_EXPIRED", "MEDIA_ALL", "MEDIA_PENDING", "MEDIA_QUEUED", "MEDIA_SUCCESSFUL", "MEDIA_DELIVERED", "MEDIA_INVALID", "MEDIA_INVALID_MESSAGE", "MEDIA_UNREACHABLE", "MEDIA_CARRIER_UNREACHABLE", "MEDIA_BLOCKED", "MEDIA_CARRIER_BLOCKED", "MEDIA_SPAM", "MEDIA_UNKNOWN", "MEDIA_TTL_EXPIRED", "MEDIA_FILE_INACCESSIBLE", "MEDIA_FILE_TYPE_UNSUPPORTED", "MEDIA_FILE_SIZE_EXCEEDED"
+    #   resp.event_destination.matching_event_types[0] #=> String, one of "ALL", "TEXT_ALL", "TEXT_SENT", "TEXT_PENDING", "TEXT_QUEUED", "TEXT_SUCCESSFUL", "TEXT_DELIVERED", "TEXT_INVALID", "TEXT_INVALID_MESSAGE", "TEXT_UNREACHABLE", "TEXT_CARRIER_UNREACHABLE", "TEXT_BLOCKED", "TEXT_CARRIER_BLOCKED", "TEXT_SPAM", "TEXT_UNKNOWN", "TEXT_TTL_EXPIRED", "TEXT_PROTECT_BLOCKED", "VOICE_ALL", "VOICE_INITIATED", "VOICE_RINGING", "VOICE_ANSWERED", "VOICE_COMPLETED", "VOICE_BUSY", "VOICE_NO_ANSWER", "VOICE_FAILED", "VOICE_TTL_EXPIRED", "MEDIA_ALL", "MEDIA_PENDING", "MEDIA_QUEUED", "MEDIA_SUCCESSFUL", "MEDIA_DELIVERED", "MEDIA_INVALID", "MEDIA_INVALID_MESSAGE", "MEDIA_UNREACHABLE", "MEDIA_CARRIER_UNREACHABLE", "MEDIA_BLOCKED", "MEDIA_CARRIER_BLOCKED", "MEDIA_SPAM", "MEDIA_UNKNOWN", "MEDIA_TTL_EXPIRED", "MEDIA_FILE_INACCESSIBLE", "MEDIA_FILE_TYPE_UNSUPPORTED", "MEDIA_FILE_SIZE_EXCEEDED"
     #   resp.event_destination.cloud_watch_logs_destination.iam_role_arn #=> String
     #   resp.event_destination.cloud_watch_logs_destination.log_group_arn #=> String
     #   resp.event_destination.kinesis_firehose_destination.iam_role_arn #=> String
@@ -1317,6 +1317,7 @@ module Aws::PinpointSMSVoiceV2
     #   * {Types::DeleteConfigurationSetResult#event_destinations #event_destinations} => Array&lt;Types::EventDestination&gt;
     #   * {Types::DeleteConfigurationSetResult#default_message_type #default_message_type} => String
     #   * {Types::DeleteConfigurationSetResult#default_sender_id #default_sender_id} => String
+    #   * {Types::DeleteConfigurationSetResult#default_message_feedback_enabled #default_message_feedback_enabled} => Boolean
     #   * {Types::DeleteConfigurationSetResult#created_timestamp #created_timestamp} => Time
     #
     # @example Request syntax with placeholder values
@@ -1333,7 +1334,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.event_destinations[0].event_destination_name #=> String
     #   resp.event_destinations[0].enabled #=> Boolean
     #   resp.event_destinations[0].matching_event_types #=> Array
-    #   resp.event_destinations[0].matching_event_types[0] #=> String, one of "ALL", "TEXT_ALL", "TEXT_SENT", "TEXT_PENDING", "TEXT_QUEUED", "TEXT_SUCCESSFUL", "TEXT_DELIVERED", "TEXT_INVALID", "TEXT_INVALID_MESSAGE", "TEXT_UNREACHABLE", "TEXT_CARRIER_UNREACHABLE", "TEXT_BLOCKED", "TEXT_CARRIER_BLOCKED", "TEXT_SPAM", "TEXT_UNKNOWN", "TEXT_TTL_EXPIRED", "VOICE_ALL", "VOICE_INITIATED", "VOICE_RINGING", "VOICE_ANSWERED", "VOICE_COMPLETED", "VOICE_BUSY", "VOICE_NO_ANSWER", "VOICE_FAILED", "VOICE_TTL_EXPIRED", "MEDIA_ALL", "MEDIA_PENDING", "MEDIA_QUEUED", "MEDIA_SUCCESSFUL", "MEDIA_DELIVERED", "MEDIA_INVALID", "MEDIA_INVALID_MESSAGE", "MEDIA_UNREACHABLE", "MEDIA_CARRIER_UNREACHABLE", "MEDIA_BLOCKED", "MEDIA_CARRIER_BLOCKED", "MEDIA_SPAM", "MEDIA_UNKNOWN", "MEDIA_TTL_EXPIRED", "MEDIA_FILE_INACCESSIBLE", "MEDIA_FILE_TYPE_UNSUPPORTED", "MEDIA_FILE_SIZE_EXCEEDED"
+    #   resp.event_destinations[0].matching_event_types[0] #=> String, one of "ALL", "TEXT_ALL", "TEXT_SENT", "TEXT_PENDING", "TEXT_QUEUED", "TEXT_SUCCESSFUL", "TEXT_DELIVERED", "TEXT_INVALID", "TEXT_INVALID_MESSAGE", "TEXT_UNREACHABLE", "TEXT_CARRIER_UNREACHABLE", "TEXT_BLOCKED", "TEXT_CARRIER_BLOCKED", "TEXT_SPAM", "TEXT_UNKNOWN", "TEXT_TTL_EXPIRED", "TEXT_PROTECT_BLOCKED", "VOICE_ALL", "VOICE_INITIATED", "VOICE_RINGING", "VOICE_ANSWERED", "VOICE_COMPLETED", "VOICE_BUSY", "VOICE_NO_ANSWER", "VOICE_FAILED", "VOICE_TTL_EXPIRED", "MEDIA_ALL", "MEDIA_PENDING", "MEDIA_QUEUED", "MEDIA_SUCCESSFUL", "MEDIA_DELIVERED", "MEDIA_INVALID", "MEDIA_INVALID_MESSAGE", "MEDIA_UNREACHABLE", "MEDIA_CARRIER_UNREACHABLE", "MEDIA_BLOCKED", "MEDIA_CARRIER_BLOCKED", "MEDIA_SPAM", "MEDIA_UNKNOWN", "MEDIA_TTL_EXPIRED", "MEDIA_FILE_INACCESSIBLE", "MEDIA_FILE_TYPE_UNSUPPORTED", "MEDIA_FILE_SIZE_EXCEEDED"
     #   resp.event_destinations[0].cloud_watch_logs_destination.iam_role_arn #=> String
     #   resp.event_destinations[0].cloud_watch_logs_destination.log_group_arn #=> String
     #   resp.event_destinations[0].kinesis_firehose_destination.iam_role_arn #=> String
@@ -1341,6 +1342,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.event_destinations[0].sns_destination.topic_arn #=> String
     #   resp.default_message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.default_sender_id #=> String
+    #   resp.default_message_feedback_enabled #=> Boolean
     #   resp.created_timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteConfigurationSet AWS API Documentation
@@ -1470,7 +1472,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.event_destination.event_destination_name #=> String
     #   resp.event_destination.enabled #=> Boolean
     #   resp.event_destination.matching_event_types #=> Array
-    #   resp.event_destination.matching_event_types[0] #=> String, one of "ALL", "TEXT_ALL", "TEXT_SENT", "TEXT_PENDING", "TEXT_QUEUED", "TEXT_SUCCESSFUL", "TEXT_DELIVERED", "TEXT_INVALID", "TEXT_INVALID_MESSAGE", "TEXT_UNREACHABLE", "TEXT_CARRIER_UNREACHABLE", "TEXT_BLOCKED", "TEXT_CARRIER_BLOCKED", "TEXT_SPAM", "TEXT_UNKNOWN", "TEXT_TTL_EXPIRED", "VOICE_ALL", "VOICE_INITIATED", "VOICE_RINGING", "VOICE_ANSWERED", "VOICE_COMPLETED", "VOICE_BUSY", "VOICE_NO_ANSWER", "VOICE_FAILED", "VOICE_TTL_EXPIRED", "MEDIA_ALL", "MEDIA_PENDING", "MEDIA_QUEUED", "MEDIA_SUCCESSFUL", "MEDIA_DELIVERED", "MEDIA_INVALID", "MEDIA_INVALID_MESSAGE", "MEDIA_UNREACHABLE", "MEDIA_CARRIER_UNREACHABLE", "MEDIA_BLOCKED", "MEDIA_CARRIER_BLOCKED", "MEDIA_SPAM", "MEDIA_UNKNOWN", "MEDIA_TTL_EXPIRED", "MEDIA_FILE_INACCESSIBLE", "MEDIA_FILE_TYPE_UNSUPPORTED", "MEDIA_FILE_SIZE_EXCEEDED"
+    #   resp.event_destination.matching_event_types[0] #=> String, one of "ALL", "TEXT_ALL", "TEXT_SENT", "TEXT_PENDING", "TEXT_QUEUED", "TEXT_SUCCESSFUL", "TEXT_DELIVERED", "TEXT_INVALID", "TEXT_INVALID_MESSAGE", "TEXT_UNREACHABLE", "TEXT_CARRIER_UNREACHABLE", "TEXT_BLOCKED", "TEXT_CARRIER_BLOCKED", "TEXT_SPAM", "TEXT_UNKNOWN", "TEXT_TTL_EXPIRED", "TEXT_PROTECT_BLOCKED", "VOICE_ALL", "VOICE_INITIATED", "VOICE_RINGING", "VOICE_ANSWERED", "VOICE_COMPLETED", "VOICE_BUSY", "VOICE_NO_ANSWER", "VOICE_FAILED", "VOICE_TTL_EXPIRED", "MEDIA_ALL", "MEDIA_PENDING", "MEDIA_QUEUED", "MEDIA_SUCCESSFUL", "MEDIA_DELIVERED", "MEDIA_INVALID", "MEDIA_INVALID_MESSAGE", "MEDIA_UNREACHABLE", "MEDIA_CARRIER_UNREACHABLE", "MEDIA_BLOCKED", "MEDIA_CARRIER_BLOCKED", "MEDIA_SPAM", "MEDIA_UNKNOWN", "MEDIA_TTL_EXPIRED", "MEDIA_FILE_INACCESSIBLE", "MEDIA_FILE_TYPE_UNSUPPORTED", "MEDIA_FILE_SIZE_EXCEEDED"
     #   resp.event_destination.cloud_watch_logs_destination.iam_role_arn #=> String
     #   resp.event_destination.cloud_watch_logs_destination.log_group_arn #=> String
     #   resp.event_destination.kinesis_firehose_destination.iam_role_arn #=> String
@@ -1755,6 +1757,50 @@ module Aws::PinpointSMSVoiceV2
     # @param [Hash] params ({})
     def delete_protect_configuration(params = {}, options = {})
       req = build_request(:delete_protect_configuration, params)
+      req.send_request(options)
+    end
+
+    # Permanently delete the protect configuration rule set number override.
+    #
+    # @option params [required, String] :protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #
+    # @option params [required, String] :destination_phone_number
+    #   The destination phone number in E.164 format.
+    #
+    # @return [Types::DeleteProtectConfigurationRuleSetNumberOverrideResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteProtectConfigurationRuleSetNumberOverrideResult#protect_configuration_arn #protect_configuration_arn} => String
+    #   * {Types::DeleteProtectConfigurationRuleSetNumberOverrideResult#protect_configuration_id #protect_configuration_id} => String
+    #   * {Types::DeleteProtectConfigurationRuleSetNumberOverrideResult#destination_phone_number #destination_phone_number} => String
+    #   * {Types::DeleteProtectConfigurationRuleSetNumberOverrideResult#created_timestamp #created_timestamp} => Time
+    #   * {Types::DeleteProtectConfigurationRuleSetNumberOverrideResult#action #action} => String
+    #   * {Types::DeleteProtectConfigurationRuleSetNumberOverrideResult#iso_country_code #iso_country_code} => String
+    #   * {Types::DeleteProtectConfigurationRuleSetNumberOverrideResult#expiration_timestamp #expiration_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_protect_configuration_rule_set_number_override({
+    #     protect_configuration_id: "ProtectConfigurationIdOrArn", # required
+    #     destination_phone_number: "PhoneNumber", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.protect_configuration_arn #=> String
+    #   resp.protect_configuration_id #=> String
+    #   resp.destination_phone_number #=> String
+    #   resp.created_timestamp #=> Time
+    #   resp.action #=> String, one of "ALLOW", "BLOCK"
+    #   resp.iso_country_code #=> String
+    #   resp.expiration_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteProtectConfigurationRuleSetNumberOverride AWS API Documentation
+    #
+    # @overload delete_protect_configuration_rule_set_number_override(params = {})
+    # @param [Hash] params ({})
+    def delete_protect_configuration_rule_set_number_override(params = {}, options = {})
+      req = build_request(:delete_protect_configuration_rule_set_number_override, params)
       req.send_request(options)
     end
 
@@ -2147,7 +2193,7 @@ module Aws::PinpointSMSVoiceV2
     #     configuration_set_names: ["ConfigurationSetNameOrArn"],
     #     filters: [
     #       {
-    #         name: "event-destination-name", # required, accepts event-destination-name, matching-event-types, default-message-type, default-sender-id, protect-configuration-id
+    #         name: "event-destination-name", # required, accepts event-destination-name, matching-event-types, default-message-type, default-sender-id, default-message-feedback-enabled, protect-configuration-id
     #         values: ["FilterValue"], # required
     #       },
     #     ],
@@ -2164,7 +2210,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.configuration_sets[0].event_destinations[0].event_destination_name #=> String
     #   resp.configuration_sets[0].event_destinations[0].enabled #=> Boolean
     #   resp.configuration_sets[0].event_destinations[0].matching_event_types #=> Array
-    #   resp.configuration_sets[0].event_destinations[0].matching_event_types[0] #=> String, one of "ALL", "TEXT_ALL", "TEXT_SENT", "TEXT_PENDING", "TEXT_QUEUED", "TEXT_SUCCESSFUL", "TEXT_DELIVERED", "TEXT_INVALID", "TEXT_INVALID_MESSAGE", "TEXT_UNREACHABLE", "TEXT_CARRIER_UNREACHABLE", "TEXT_BLOCKED", "TEXT_CARRIER_BLOCKED", "TEXT_SPAM", "TEXT_UNKNOWN", "TEXT_TTL_EXPIRED", "VOICE_ALL", "VOICE_INITIATED", "VOICE_RINGING", "VOICE_ANSWERED", "VOICE_COMPLETED", "VOICE_BUSY", "VOICE_NO_ANSWER", "VOICE_FAILED", "VOICE_TTL_EXPIRED", "MEDIA_ALL", "MEDIA_PENDING", "MEDIA_QUEUED", "MEDIA_SUCCESSFUL", "MEDIA_DELIVERED", "MEDIA_INVALID", "MEDIA_INVALID_MESSAGE", "MEDIA_UNREACHABLE", "MEDIA_CARRIER_UNREACHABLE", "MEDIA_BLOCKED", "MEDIA_CARRIER_BLOCKED", "MEDIA_SPAM", "MEDIA_UNKNOWN", "MEDIA_TTL_EXPIRED", "MEDIA_FILE_INACCESSIBLE", "MEDIA_FILE_TYPE_UNSUPPORTED", "MEDIA_FILE_SIZE_EXCEEDED"
+    #   resp.configuration_sets[0].event_destinations[0].matching_event_types[0] #=> String, one of "ALL", "TEXT_ALL", "TEXT_SENT", "TEXT_PENDING", "TEXT_QUEUED", "TEXT_SUCCESSFUL", "TEXT_DELIVERED", "TEXT_INVALID", "TEXT_INVALID_MESSAGE", "TEXT_UNREACHABLE", "TEXT_CARRIER_UNREACHABLE", "TEXT_BLOCKED", "TEXT_CARRIER_BLOCKED", "TEXT_SPAM", "TEXT_UNKNOWN", "TEXT_TTL_EXPIRED", "TEXT_PROTECT_BLOCKED", "VOICE_ALL", "VOICE_INITIATED", "VOICE_RINGING", "VOICE_ANSWERED", "VOICE_COMPLETED", "VOICE_BUSY", "VOICE_NO_ANSWER", "VOICE_FAILED", "VOICE_TTL_EXPIRED", "MEDIA_ALL", "MEDIA_PENDING", "MEDIA_QUEUED", "MEDIA_SUCCESSFUL", "MEDIA_DELIVERED", "MEDIA_INVALID", "MEDIA_INVALID_MESSAGE", "MEDIA_UNREACHABLE", "MEDIA_CARRIER_UNREACHABLE", "MEDIA_BLOCKED", "MEDIA_CARRIER_BLOCKED", "MEDIA_SPAM", "MEDIA_UNKNOWN", "MEDIA_TTL_EXPIRED", "MEDIA_FILE_INACCESSIBLE", "MEDIA_FILE_TYPE_UNSUPPORTED", "MEDIA_FILE_SIZE_EXCEEDED"
     #   resp.configuration_sets[0].event_destinations[0].cloud_watch_logs_destination.iam_role_arn #=> String
     #   resp.configuration_sets[0].event_destinations[0].cloud_watch_logs_destination.log_group_arn #=> String
     #   resp.configuration_sets[0].event_destinations[0].kinesis_firehose_destination.iam_role_arn #=> String
@@ -2172,6 +2218,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.configuration_sets[0].event_destinations[0].sns_destination.topic_arn #=> String
     #   resp.configuration_sets[0].default_message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.configuration_sets[0].default_sender_id #=> String
+    #   resp.configuration_sets[0].default_message_feedback_enabled #=> Boolean
     #   resp.configuration_sets[0].created_timestamp #=> Time
     #   resp.configuration_sets[0].protect_configuration_id #=> String
     #   resp.next_token #=> String
@@ -3228,10 +3275,10 @@ module Aws::PinpointSMSVoiceV2
       req.send_request(options)
     end
 
-    # Retrieves the specified verified destiona numbers.
+    # Retrieves the specified verified destination numbers.
     #
     # @option params [Array<String>] :verified_destination_number_ids
-    #   An array of VerifiedDestinationNumberid to retreive.
+    #   An array of VerifiedDestinationNumberid to retrieve.
     #
     # @option params [Array<String>] :destination_phone_numbers
     #   An array of verified destination phone number, in E.164 format.
@@ -3583,7 +3630,68 @@ module Aws::PinpointSMSVoiceV2
       req.send_request(options)
     end
 
-    # Retreive all of the origination identies that are associated with a
+    # Retrieve all of the protect configuration rule set number overrides
+    # that match the filters.
+    #
+    # @option params [required, String] :protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #
+    # @option params [Array<Types::ProtectConfigurationRuleSetNumberOverrideFilterItem>] :filters
+    #   An array of ProtectConfigurationRuleSetNumberOverrideFilterItem
+    #   objects to filter the results.
+    #
+    # @option params [String] :next_token
+    #   The token to be used for the next set of paginated results. You don't
+    #   need to supply a value for this field in the initial request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per each request.
+    #
+    # @return [Types::ListProtectConfigurationRuleSetNumberOverridesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListProtectConfigurationRuleSetNumberOverridesResult#protect_configuration_arn #protect_configuration_arn} => String
+    #   * {Types::ListProtectConfigurationRuleSetNumberOverridesResult#protect_configuration_id #protect_configuration_id} => String
+    #   * {Types::ListProtectConfigurationRuleSetNumberOverridesResult#rule_set_number_overrides #rule_set_number_overrides} => Array&lt;Types::ProtectConfigurationRuleSetNumberOverride&gt;
+    #   * {Types::ListProtectConfigurationRuleSetNumberOverridesResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_protect_configuration_rule_set_number_overrides({
+    #     protect_configuration_id: "ProtectConfigurationIdOrArn", # required
+    #     filters: [
+    #       {
+    #         name: "iso-country-code", # required, accepts iso-country-code, destination-phone-number-begins-with, action, expires-before, expires-after, created-before, created-after
+    #         values: ["FilterValue"], # required
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.protect_configuration_arn #=> String
+    #   resp.protect_configuration_id #=> String
+    #   resp.rule_set_number_overrides #=> Array
+    #   resp.rule_set_number_overrides[0].destination_phone_number #=> String
+    #   resp.rule_set_number_overrides[0].created_timestamp #=> Time
+    #   resp.rule_set_number_overrides[0].action #=> String, one of "ALLOW", "BLOCK"
+    #   resp.rule_set_number_overrides[0].iso_country_code #=> String
+    #   resp.rule_set_number_overrides[0].expiration_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/ListProtectConfigurationRuleSetNumberOverrides AWS API Documentation
+    #
+    # @overload list_protect_configuration_rule_set_number_overrides(params = {})
+    # @param [Hash] params ({})
+    def list_protect_configuration_rule_set_number_overrides(params = {}, options = {})
+      req = build_request(:list_protect_configuration_rule_set_number_overrides, params)
+      req.send_request(options)
+    end
+
+    # Retrieve all of the origination identities that are associated with a
     # registration.
     #
     # @option params [required, String] :registration_id
@@ -3749,6 +3857,47 @@ module Aws::PinpointSMSVoiceV2
       req.send_request(options)
     end
 
+    # Set the MessageFeedbackStatus as `RECEIVED` or `FAILED` for the passed
+    # in MessageId.
+    #
+    # If you use message feedback then you must update message feedback
+    # record. When you receive a signal that a user has received the message
+    # you must use `PutMessageFeedback` to set the message feedback record
+    # as `RECEIVED`; Otherwise, an hour after the message feedback record is
+    # set to `FAILED`.
+    #
+    # @option params [required, String] :message_id
+    #   The unique identifier for the message.
+    #
+    # @option params [required, String] :message_feedback_status
+    #   Set the message feedback to be either `RECEIVED` or `FAILED`.
+    #
+    # @return [Types::PutMessageFeedbackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutMessageFeedbackResult#message_id #message_id} => String
+    #   * {Types::PutMessageFeedbackResult#message_feedback_status #message_feedback_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_message_feedback({
+    #     message_id: "MessageId", # required
+    #     message_feedback_status: "RECEIVED", # required, accepts RECEIVED, FAILED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_id #=> String
+    #   resp.message_feedback_status #=> String, one of "RECEIVED", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/PutMessageFeedback AWS API Documentation
+    #
+    # @overload put_message_feedback(params = {})
+    # @param [Hash] params ({})
+    def put_message_feedback(params = {}, options = {})
+      req = build_request(:put_message_feedback, params)
+      req.send_request(options)
+    end
+
     # Creates an opted out destination phone number in the opt-out list.
     #
     # If the destination phone number isn't valid or if the specified
@@ -3792,6 +3941,71 @@ module Aws::PinpointSMSVoiceV2
     # @param [Hash] params ({})
     def put_opted_out_number(params = {}, options = {})
       req = build_request(:put_opted_out_number, params)
+      req.send_request(options)
+    end
+
+    # Create or update a RuleSetNumberOverride and associate it with a
+    # protect configuration.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you don't specify a client token, a
+    #   randomly generated token is used for the request to ensure
+    #   idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #
+    # @option params [required, String] :destination_phone_number
+    #   The destination phone number in E.164 format.
+    #
+    # @option params [required, String] :action
+    #   The action for the rule to either block or allow messages to the
+    #   destination phone number.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :expiration_timestamp
+    #   The time the rule will expire at. If `ExpirationTimestamp` is not set
+    #   then the rule does not expire.
+    #
+    # @return [Types::PutProtectConfigurationRuleSetNumberOverrideResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutProtectConfigurationRuleSetNumberOverrideResult#protect_configuration_arn #protect_configuration_arn} => String
+    #   * {Types::PutProtectConfigurationRuleSetNumberOverrideResult#protect_configuration_id #protect_configuration_id} => String
+    #   * {Types::PutProtectConfigurationRuleSetNumberOverrideResult#destination_phone_number #destination_phone_number} => String
+    #   * {Types::PutProtectConfigurationRuleSetNumberOverrideResult#created_timestamp #created_timestamp} => Time
+    #   * {Types::PutProtectConfigurationRuleSetNumberOverrideResult#action #action} => String
+    #   * {Types::PutProtectConfigurationRuleSetNumberOverrideResult#iso_country_code #iso_country_code} => String
+    #   * {Types::PutProtectConfigurationRuleSetNumberOverrideResult#expiration_timestamp #expiration_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_protect_configuration_rule_set_number_override({
+    #     client_token: "ClientToken",
+    #     protect_configuration_id: "ProtectConfigurationIdOrArn", # required
+    #     destination_phone_number: "PhoneNumber", # required
+    #     action: "ALLOW", # required, accepts ALLOW, BLOCK
+    #     expiration_timestamp: Time.now,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.protect_configuration_arn #=> String
+    #   resp.protect_configuration_id #=> String
+    #   resp.destination_phone_number #=> String
+    #   resp.created_timestamp #=> Time
+    #   resp.action #=> String, one of "ALLOW", "BLOCK"
+    #   resp.iso_country_code #=> String
+    #   resp.expiration_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/PutProtectConfigurationRuleSetNumberOverride AWS API Documentation
+    #
+    # @overload put_protect_configuration_rule_set_number_override(params = {})
+    # @param [Hash] params ({})
+    def put_protect_configuration_rule_set_number_override(params = {}, options = {})
+      req = build_request(:put_protect_configuration_rule_set_number_override, params)
       req.send_request(options)
     end
 
@@ -4346,7 +4560,7 @@ module Aws::PinpointSMSVoiceV2
     #   message.
     #
     # @option params [Integer] :time_to_live
-    #   How long the text message is valid for. By default this is 72 hours.
+    #   How long the media message is valid for. By default this is 72 hours.
     #
     # @option params [Hash<String,String>] :context
     #   You can specify custom data in this field. If you do, that data is
@@ -4358,6 +4572,11 @@ module Aws::PinpointSMSVoiceV2
     #
     # @option params [String] :protect_configuration_id
     #   The unique identifier of the protect configuration to use.
+    #
+    # @option params [Boolean] :message_feedback_enabled
+    #   Set to true to enable message feedback for the message. When a user
+    #   receives the message you need to update the message status using
+    #   PutMessageFeedback.
     #
     # @return [Types::SendMediaMessageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4378,6 +4597,7 @@ module Aws::PinpointSMSVoiceV2
     #     },
     #     dry_run: false,
     #     protect_configuration_id: "ProtectConfigurationIdOrArn",
+    #     message_feedback_enabled: false,
     #   })
     #
     # @example Response structure
@@ -4490,6 +4710,11 @@ module Aws::PinpointSMSVoiceV2
     # @option params [String] :protect_configuration_id
     #   The unique identifier for the protect configuration.
     #
+    # @option params [Boolean] :message_feedback_enabled
+    #   Set to true to enable message feedback for the message. When a user
+    #   receives the message you need to update the message status using
+    #   PutMessageFeedback.
+    #
     # @return [Types::SendTextMessageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SendTextMessageResult#message_id #message_id} => String
@@ -4513,6 +4738,7 @@ module Aws::PinpointSMSVoiceV2
     #     },
     #     dry_run: false,
     #     protect_configuration_id: "ProtectConfigurationIdOrArn",
+    #     message_feedback_enabled: false,
     #   })
     #
     # @example Response structure
@@ -4592,6 +4818,11 @@ module Aws::PinpointSMSVoiceV2
     # @option params [String] :protect_configuration_id
     #   The unique identifier for the protect configuration.
     #
+    # @option params [Boolean] :message_feedback_enabled
+    #   Set to true to enable message feedback for the message. When a user
+    #   receives the message you need to update the message status using
+    #   PutMessageFeedback.
+    #
     # @return [Types::SendVoiceMessageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SendVoiceMessageResult#message_id #message_id} => String
@@ -4612,6 +4843,7 @@ module Aws::PinpointSMSVoiceV2
     #     },
     #     dry_run: false,
     #     protect_configuration_id: "ProtectConfigurationIdOrArn",
+    #     message_feedback_enabled: false,
     #   })
     #
     # @example Response structure
@@ -4657,6 +4889,43 @@ module Aws::PinpointSMSVoiceV2
     # @param [Hash] params ({})
     def set_account_default_protect_configuration(params = {}, options = {})
       req = build_request(:set_account_default_protect_configuration, params)
+      req.send_request(options)
+    end
+
+    # Sets a configuration set's default for message feedback.
+    #
+    # @option params [required, String] :configuration_set_name
+    #   The name of the configuration set to use. This can be either the
+    #   ConfigurationSetName or ConfigurationSetArn.
+    #
+    # @option params [required, Boolean] :message_feedback_enabled
+    #   Set to true to enable message feedback.
+    #
+    # @return [Types::SetDefaultMessageFeedbackEnabledResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SetDefaultMessageFeedbackEnabledResult#configuration_set_arn #configuration_set_arn} => String
+    #   * {Types::SetDefaultMessageFeedbackEnabledResult#configuration_set_name #configuration_set_name} => String
+    #   * {Types::SetDefaultMessageFeedbackEnabledResult#message_feedback_enabled #message_feedback_enabled} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.set_default_message_feedback_enabled({
+    #     configuration_set_name: "ConfigurationSetNameOrArn", # required
+    #     message_feedback_enabled: false, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configuration_set_arn #=> String
+    #   resp.configuration_set_name #=> String
+    #   resp.message_feedback_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SetDefaultMessageFeedbackEnabled AWS API Documentation
+    #
+    # @overload set_default_message_feedback_enabled(params = {})
+    # @param [Hash] params ({})
+    def set_default_message_feedback_enabled(params = {}, options = {})
+      req = build_request(:set_default_message_feedback_enabled, params)
       req.send_request(options)
     end
 
@@ -5011,7 +5280,7 @@ module Aws::PinpointSMSVoiceV2
     #     configuration_set_name: "ConfigurationSetNameOrArn", # required
     #     event_destination_name: "EventDestinationName", # required
     #     enabled: false,
-    #     matching_event_types: ["ALL"], # accepts ALL, TEXT_ALL, TEXT_SENT, TEXT_PENDING, TEXT_QUEUED, TEXT_SUCCESSFUL, TEXT_DELIVERED, TEXT_INVALID, TEXT_INVALID_MESSAGE, TEXT_UNREACHABLE, TEXT_CARRIER_UNREACHABLE, TEXT_BLOCKED, TEXT_CARRIER_BLOCKED, TEXT_SPAM, TEXT_UNKNOWN, TEXT_TTL_EXPIRED, VOICE_ALL, VOICE_INITIATED, VOICE_RINGING, VOICE_ANSWERED, VOICE_COMPLETED, VOICE_BUSY, VOICE_NO_ANSWER, VOICE_FAILED, VOICE_TTL_EXPIRED, MEDIA_ALL, MEDIA_PENDING, MEDIA_QUEUED, MEDIA_SUCCESSFUL, MEDIA_DELIVERED, MEDIA_INVALID, MEDIA_INVALID_MESSAGE, MEDIA_UNREACHABLE, MEDIA_CARRIER_UNREACHABLE, MEDIA_BLOCKED, MEDIA_CARRIER_BLOCKED, MEDIA_SPAM, MEDIA_UNKNOWN, MEDIA_TTL_EXPIRED, MEDIA_FILE_INACCESSIBLE, MEDIA_FILE_TYPE_UNSUPPORTED, MEDIA_FILE_SIZE_EXCEEDED
+    #     matching_event_types: ["ALL"], # accepts ALL, TEXT_ALL, TEXT_SENT, TEXT_PENDING, TEXT_QUEUED, TEXT_SUCCESSFUL, TEXT_DELIVERED, TEXT_INVALID, TEXT_INVALID_MESSAGE, TEXT_UNREACHABLE, TEXT_CARRIER_UNREACHABLE, TEXT_BLOCKED, TEXT_CARRIER_BLOCKED, TEXT_SPAM, TEXT_UNKNOWN, TEXT_TTL_EXPIRED, TEXT_PROTECT_BLOCKED, VOICE_ALL, VOICE_INITIATED, VOICE_RINGING, VOICE_ANSWERED, VOICE_COMPLETED, VOICE_BUSY, VOICE_NO_ANSWER, VOICE_FAILED, VOICE_TTL_EXPIRED, MEDIA_ALL, MEDIA_PENDING, MEDIA_QUEUED, MEDIA_SUCCESSFUL, MEDIA_DELIVERED, MEDIA_INVALID, MEDIA_INVALID_MESSAGE, MEDIA_UNREACHABLE, MEDIA_CARRIER_UNREACHABLE, MEDIA_BLOCKED, MEDIA_CARRIER_BLOCKED, MEDIA_SPAM, MEDIA_UNKNOWN, MEDIA_TTL_EXPIRED, MEDIA_FILE_INACCESSIBLE, MEDIA_FILE_TYPE_UNSUPPORTED, MEDIA_FILE_SIZE_EXCEEDED
     #     cloud_watch_logs_destination: {
     #       iam_role_arn: "IamRoleArn", # required
     #       log_group_arn: "LogGroupArn", # required
@@ -5032,7 +5301,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.event_destination.event_destination_name #=> String
     #   resp.event_destination.enabled #=> Boolean
     #   resp.event_destination.matching_event_types #=> Array
-    #   resp.event_destination.matching_event_types[0] #=> String, one of "ALL", "TEXT_ALL", "TEXT_SENT", "TEXT_PENDING", "TEXT_QUEUED", "TEXT_SUCCESSFUL", "TEXT_DELIVERED", "TEXT_INVALID", "TEXT_INVALID_MESSAGE", "TEXT_UNREACHABLE", "TEXT_CARRIER_UNREACHABLE", "TEXT_BLOCKED", "TEXT_CARRIER_BLOCKED", "TEXT_SPAM", "TEXT_UNKNOWN", "TEXT_TTL_EXPIRED", "VOICE_ALL", "VOICE_INITIATED", "VOICE_RINGING", "VOICE_ANSWERED", "VOICE_COMPLETED", "VOICE_BUSY", "VOICE_NO_ANSWER", "VOICE_FAILED", "VOICE_TTL_EXPIRED", "MEDIA_ALL", "MEDIA_PENDING", "MEDIA_QUEUED", "MEDIA_SUCCESSFUL", "MEDIA_DELIVERED", "MEDIA_INVALID", "MEDIA_INVALID_MESSAGE", "MEDIA_UNREACHABLE", "MEDIA_CARRIER_UNREACHABLE", "MEDIA_BLOCKED", "MEDIA_CARRIER_BLOCKED", "MEDIA_SPAM", "MEDIA_UNKNOWN", "MEDIA_TTL_EXPIRED", "MEDIA_FILE_INACCESSIBLE", "MEDIA_FILE_TYPE_UNSUPPORTED", "MEDIA_FILE_SIZE_EXCEEDED"
+    #   resp.event_destination.matching_event_types[0] #=> String, one of "ALL", "TEXT_ALL", "TEXT_SENT", "TEXT_PENDING", "TEXT_QUEUED", "TEXT_SUCCESSFUL", "TEXT_DELIVERED", "TEXT_INVALID", "TEXT_INVALID_MESSAGE", "TEXT_UNREACHABLE", "TEXT_CARRIER_UNREACHABLE", "TEXT_BLOCKED", "TEXT_CARRIER_BLOCKED", "TEXT_SPAM", "TEXT_UNKNOWN", "TEXT_TTL_EXPIRED", "TEXT_PROTECT_BLOCKED", "VOICE_ALL", "VOICE_INITIATED", "VOICE_RINGING", "VOICE_ANSWERED", "VOICE_COMPLETED", "VOICE_BUSY", "VOICE_NO_ANSWER", "VOICE_FAILED", "VOICE_TTL_EXPIRED", "MEDIA_ALL", "MEDIA_PENDING", "MEDIA_QUEUED", "MEDIA_SUCCESSFUL", "MEDIA_DELIVERED", "MEDIA_INVALID", "MEDIA_INVALID_MESSAGE", "MEDIA_UNREACHABLE", "MEDIA_CARRIER_UNREACHABLE", "MEDIA_BLOCKED", "MEDIA_CARRIER_BLOCKED", "MEDIA_SPAM", "MEDIA_UNKNOWN", "MEDIA_TTL_EXPIRED", "MEDIA_FILE_INACCESSIBLE", "MEDIA_FILE_TYPE_UNSUPPORTED", "MEDIA_FILE_SIZE_EXCEEDED"
     #   resp.event_destination.cloud_watch_logs_destination.iam_role_arn #=> String
     #   resp.event_destination.cloud_watch_logs_destination.log_group_arn #=> String
     #   resp.event_destination.kinesis_firehose_destination.iam_role_arn #=> String
@@ -5463,7 +5732,7 @@ module Aws::PinpointSMSVoiceV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pinpointsmsvoicev2'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -881,7 +881,7 @@ module Aws::Polly
     #   # Stores a pronunciation lexicon in an AWS Region.
     #
     #   resp = client.put_lexicon({
-    #     content: "file://example.pls", 
+    #     content: "<Lexicon Content>", 
     #     name: "W3C", 
     #   })
     #
@@ -1209,7 +1209,7 @@ module Aws::Polly
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-polly'
-      context[:gem_version] = '1.99.0'
+      context[:gem_version] = '1.100.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

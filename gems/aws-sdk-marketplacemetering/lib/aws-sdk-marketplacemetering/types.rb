@@ -580,7 +580,6 @@ module Aws::MarketplaceMetering
     #       customer subscribes to your product.
     #
     #     * The customer's AWS account was suspended.
-    #
     #   * *DuplicateRecord*- Indicates that the `UsageRecord` was invalid
     #     and not honored. A previously metered `UsageRecord` had the same
     #     customer, dimension, and time, but a different quantity.

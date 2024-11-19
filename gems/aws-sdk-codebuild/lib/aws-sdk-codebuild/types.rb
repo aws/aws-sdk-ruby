@@ -4922,7 +4922,6 @@ module Aws::CodeBuild
     #
     #     * The path to the folder that contains the source code (for
     #       example, `<bucket-name>/<path-to-source-code>/<folder>/`).
-    #
     #   * For source code in a GitHub repository, the HTTPS clone URL to the
     #     repository that contains the source and the buildspec file. You
     #     must connect your Amazon Web Services account to your GitHub
@@ -7428,7 +7427,6 @@ module Aws::CodeBuild
     #       `PRERELEASED` work with GitHub only.
     #
     #        </note>
-    #
     #   * ACTOR\_ACCOUNT\_ID
     #
     #     * A webhook event triggers a build when a GitHub, GitHub
@@ -7436,7 +7434,6 @@ module Aws::CodeBuild
     #       expression `pattern`.
     #
     #     ^
-    #
     #   * HEAD\_REF
     #
     #     * A webhook event triggers a build when the head reference matches
@@ -7448,7 +7445,6 @@ module Aws::CodeBuild
     #       request events.
     #
     #        </note>
-    #
     #   * BASE\_REF
     #
     #     * A webhook event triggers a build when the base reference matches
@@ -7458,7 +7454,6 @@ module Aws::CodeBuild
     #       <note markdown="1"> Works with pull request events only.
     #
     #        </note>
-    #
     #   * FILE\_PATH
     #
     #     * A webhook triggers a build when the path of a changed file
@@ -7469,7 +7464,6 @@ module Aws::CodeBuild
     #       not work with GitHub Enterprise pull request events.
     #
     #        </note>
-    #
     #   * COMMIT\_MESSAGE
     #
     #     * A webhook triggers a build when the head commit message matches
@@ -7480,7 +7474,6 @@ module Aws::CodeBuild
     #       not work with GitHub Enterprise pull request events.
     #
     #        </note>
-    #
     #   * TAG\_NAME
     #
     #     * A webhook triggers a build when the tag name of the release
@@ -7489,7 +7482,6 @@ module Aws::CodeBuild
     #       <note markdown="1"> Works with `RELEASED` and `PRERELEASED` events only.
     #
     #        </note>
-    #
     #   * RELEASE\_NAME
     #
     #     * A webhook triggers a build when the release name matches the
@@ -7498,7 +7490,6 @@ module Aws::CodeBuild
     #       <note markdown="1"> Works with `RELEASED` and `PRERELEASED` events only.
     #
     #        </note>
-    #
     #   * REPOSITORY\_NAME
     #
     #     * A webhook triggers a build when the repository name matches the
@@ -7507,7 +7498,6 @@ module Aws::CodeBuild
     #       <note markdown="1"> Works with GitHub global or organization webhooks only.
     #
     #        </note>
-    #
     #   * WORKFLOW\_NAME
     #
     #     * A webhook triggers a build when the workflow name matches the

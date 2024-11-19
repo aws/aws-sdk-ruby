@@ -311,7 +311,6 @@ module Aws::RDS
     #     * `provisioned`
     #
     #     * `serverless`
-    #
     #   * `engine-version` - Accepts engine versions. The results list only
     #     includes information about the DB engine versions for these engine
     #     versions.

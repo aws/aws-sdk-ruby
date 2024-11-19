@@ -1639,7 +1639,6 @@ module Aws::PartnerCentralSelling
     #     * Project.CustomerBusinessProblem
     #
     #     * PartnerOpportunityIdentifier
-    #
     #     After updates, the opportunity re-enters the validation phase.
     #     This process repeats until all issues are resolved, and the
     #     opportunity's `Lifecycle.ReviewStatus` is set to `Approved` or
@@ -1783,7 +1782,6 @@ module Aws::PartnerCentralSelling
     #     * Project.CustomerBusinessProblem
     #
     #     * PartnerOpportunityIdentifier
-    #
     #     After updates, the opportunity re-enters the validation phase.
     #     This process repeats until all issues are resolved, and the
     #     opportunity's `Lifecycle.ReviewStatus` is set to `Approved` or

@@ -2785,7 +2785,8 @@ module Aws::ECS
     #
     # @!attribute [rw] deployment_configuration
     #   Optional deployment parameters that control how many tasks run
-    #   during the deployment and the failure detection methods.
+    #   during the deployment and the ordering of stopping and starting
+    #   tasks.
     #   @return [Types::DeploymentConfiguration]
     #
     # @!attribute [rw] placement_constraints
@@ -2815,27 +2816,18 @@ module Aws::ECS
     #
     # @!attribute [rw] health_check_grace_period_seconds
     #   The period of time, in seconds, that the Amazon ECS service
-    #   scheduler ignores unhealthy Elastic Load Balancing target health
-    #   checks after a task has first started. This is only used when your
-    #   service is configured to use a load balancer. If your service has a
-    #   load balancer defined and you don't specify a health check grace
-    #   period value, the default value of `0` is used.
+    #   scheduler ignores unhealthy Elastic Load Balancing, VPC Lattice, and
+    #   container health checks after a task has first started. If you
+    #   don't specify a health check grace period value, the default value
+    #   of `0` is used. If you don't use any of the health checks, then
+    #   `healthCheckGracePeriodSeconds` is unused.
     #
-    #   If you do not use an Elastic Load Balancing, we recommend that you
-    #   use the `startPeriod` in the task definition health check
-    #   parameters. For more information, see [Health check][1].
-    #
-    #   If your service's tasks take a while to start and respond to
-    #   Elastic Load Balancing health checks, you can specify a health check
-    #   grace period of up to 2,147,483,647 seconds (about 69 years). During
-    #   that time, the Amazon ECS service scheduler ignores health check
-    #   status. This grace period can prevent the service scheduler from
-    #   marking tasks as unhealthy and stopping them before they have time
-    #   to come up.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_HealthCheck.html
+    #   If your service's tasks take a while to start and respond to health
+    #   checks, you can specify a health check grace period of up to
+    #   2,147,483,647 seconds (about 69 years). During that time, the Amazon
+    #   ECS service scheduler ignores health check status. This grace period
+    #   can prevent the service scheduler from marking tasks as unhealthy
+    #   and stopping them before they have time to come up.
     #   @return [Integer]
     #
     # @!attribute [rw] scheduling_strategy
@@ -2973,6 +2965,10 @@ module Aws::ECS
     #   supported volume type is an Amazon EBS volume.
     #   @return [Array<Types::ServiceVolumeConfiguration>]
     #
+    # @!attribute [rw] vpc_lattice_configurations
+    #   The VPC Lattice configuration for the service being created.
+    #   @return [Array<Types::VpcLatticeConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateServiceRequest AWS API Documentation
     #
     class CreateServiceRequest < Struct.new(
@@ -2999,7 +2995,8 @@ module Aws::ECS
       :propagate_tags,
       :enable_execute_command,
       :service_connect_configuration,
-      :volume_configurations)
+      :volume_configurations,
+      :vpc_lattice_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3644,6 +3641,10 @@ module Aws::ECS
     #   The Fargate ephemeral storage settings for the deployment.
     #   @return [Types::DeploymentEphemeralStorage]
     #
+    # @!attribute [rw] vpc_lattice_configurations
+    #   The VPC Lattice configuration for the service deployment.
+    #   @return [Array<Types::VpcLatticeConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Deployment AWS API Documentation
     #
     class Deployment < Struct.new(
@@ -3666,7 +3667,8 @@ module Aws::ECS
       :service_connect_configuration,
       :service_connect_resources,
       :volume_configurations,
-      :fargate_ephemeral_storage)
+      :fargate_ephemeral_storage,
+      :vpc_lattice_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3759,7 +3761,7 @@ module Aws::ECS
     end
 
     # Optional deployment parameters that control how many tasks run during
-    # the deployment and the failure detection methods.
+    # a deployment and the ordering of stopping and starting tasks.
     #
     # @!attribute [rw] deployment_circuit_breaker
     #   <note markdown="1"> The deployment circuit breaker can only be used for services using
@@ -3957,8 +3959,8 @@ module Aws::ECS
     # The amount of ephemeral storage to allocate for the deployment.
     #
     # @!attribute [rw] kms_key_id
-    #   Specify an Amazon Web Services Key Management Service key ID to
-    #   encrypt the ephemeral storage for deployment.
+    #   Specify an Key Management Service key ID to encrypt the ephemeral
+    #   storage for deployment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeploymentEphemeralStorage AWS API Documentation
@@ -6648,8 +6650,8 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] load_balancer_name
-    #   The name of the load balancer to associate with the service or task
-    #   set.
+    #   The name of the load balancer to associate with the Amazon ECS
+    #   service or task set.
     #
     #   If you are using an Application Load Balancer or a Network Load
     #   Balancer the load balancer name parameter should be omitted.
@@ -7069,8 +7071,9 @@ module Aws::ECS
     #
     # @!attribute [rw] minimum_scaling_step_size
     #   The minimum number of Amazon EC2 instances that Amazon ECS will
-    #   scale out at one time. If this parameter is omitted, the default
-    #   value of `1` is used.
+    #   scale out at one time. The scale in process is not affected by this
+    #   parameter If this parameter is omitted, the default value of `1` is
+    #   used.
     #
     #   When additional capacity is required, Amazon ECS will scale up the
     #   minimum scaling step size even if the actual demand is less than the
@@ -7111,8 +7114,8 @@ module Aws::ECS
     # The managed storage configuration for the cluster.
     #
     # @!attribute [rw] kms_key_id
-    #   Specify a Amazon Web Services Key Management Service key ID to
-    #   encrypt the managed storage.
+    #   Specify a Key Management Service key ID to encrypt the managed
+    #   storage.
     #   @return [String]
     #
     # @!attribute [rw] fargate_ephemeral_storage_kms_key_id
@@ -7232,7 +7235,6 @@ module Aws::ECS
     #       Amazon ECS agent finds open host ports from the default
     #       ephemeral range and passes it to docker to bind them to the
     #       container ports.
-    #
     #   * The `containerPortRange` valid values are between 1 and 65535.
     #
     #   * A port can only be included in one port mapping per container.
@@ -7449,14 +7451,13 @@ module Aws::ECS
     #
     class PlatformUnknownException < Aws::EmptyStructure; end
 
-    # Port mappings expose your container's network ports to the outside
-    # world. this allows clients to access your application. It's also used
-    # for inter-container communication within the same task.
+    # Port mappings allow containers to access ports on the host container
+    # instance to send or receive traffic. Port mappings are specified as
+    # part of the container definition.
     #
-    # For task definitions (both the Fargate and EC2 launch type) that use
-    # the `awsvpc` network mode, only specify the `containerPort`. The
-    # `hostPort` is always ignored, and the container port is automatically
-    # mapped to a random high-numbered port on the host.
+    # If you use containers in a task with the `awsvpc` or `host` network
+    # mode, specify the exposed ports using `containerPort`. The `hostPort`
+    # can be left blank or it must be the same value as the `containerPort`.
     #
     # Most fields of this parameter (`containerPort`, `hostPort`,
     # `protocol`) maps to `PortBindings` in the docker container create
@@ -7481,19 +7482,15 @@ module Aws::ECS
     #   The port number on the container that's bound to the user-specified
     #   or automatically assigned host port.
     #
-    #   For tasks that use the Fargate launch type or EC2 tasks that use the
-    #   `awsvpc` network mode, you use `containerPort` to specify the
-    #   exposed ports.
+    #   If you use containers in a task with the `awsvpc` or `host` network
+    #   mode, specify the exposed ports using `containerPort`.
     #
-    #   For Windows containers on Fargate, you can't use port 3150 for the
-    #   `containerPort`. This is because it's reserved.
-    #
-    #   Suppose that you're using containers in a task with the EC2 launch
-    #   type and you specify a container port and not a host port. Then,
-    #   your container automatically receives a host port in the ephemeral
-    #   port range. For more information, see `hostPort`. Port mappings that
-    #   are automatically assigned in this way don't count toward the 100
-    #   reserved ports quota of a container instance.
+    #   If you use containers in a task with the `bridge` network mode and
+    #   you specify a container port and not a host port, your container
+    #   automatically receives a host port in the ephemeral port range. For
+    #   more information, see `hostPort`. Port mappings that are
+    #   automatically assigned in this way do not count toward the 100
+    #   reserved ports limit of a container instance.
     #   @return [Integer]
     #
     # @!attribute [rw] host_port
@@ -7555,19 +7552,12 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name that's used for the port mapping. This parameter only
-    #   applies to Service Connect. This parameter is the name that you use
-    #   in the `serviceConnectConfiguration` of a service. The name can
-    #   include up to 64 characters. The characters can include lowercase
-    #   letters, numbers, underscores (\_), and hyphens (-). The name can't
-    #   start with a hyphen.
-    #
-    #   For more information, see [Service Connect][1] in the *Amazon
-    #   Elastic Container Service Developer Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
+    #   The name that's used for the port mapping. This parameter is the
+    #   name that you use in the `serviceConnectConfiguration` and the
+    #   `vpcLatticeConfigurations` of a service. The name can include up to
+    #   64 characters. The characters can include lowercase letters,
+    #   numbers, underscores (\_), and hyphens (-). The name can't start
+    #   with a hyphen.
     #   @return [String]
     #
     # @!attribute [rw] app_protocol
@@ -7632,7 +7622,6 @@ module Aws::ECS
     #       Amazon ECS agent finds open host ports from the default
     #       ephemeral range and passes it to docker to bind them to the
     #       container ports.
-    #
     #   * The `containerPortRange` valid values are between 1 and 65535.
     #
     #   * A port can only be included in one port mapping per container.
@@ -8326,22 +8315,19 @@ module Aws::ECS
     #   non-root user.
     #
     #   If the network mode is `awsvpc`, the task is allocated an elastic
-    #   network interface, and you must specify a NetworkConfiguration value
-    #   when you create a service or run a task with the task definition.
-    #   For more information, see [Task Networking][1] in the *Amazon
-    #   Elastic Container Service Developer Guide*.
+    #   network interface, and you must specify a [NetworkConfiguration][1]
+    #   value when you create a service or run a task with the task
+    #   definition. For more information, see [Task Networking][2] in the
+    #   *Amazon Elastic Container Service Developer Guide*.
     #
     #   If the network mode is `host`, you cannot run multiple
     #   instantiations of the same task on a single container instance when
     #   port mappings are used.
     #
-    #   For more information, see [Network settings][2] in the *Docker run
-    #   reference*.
     #
     #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
-    #   [2]: https://docs.docker.com/engine/reference/run/#network-settings
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_NetworkConfiguration.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
     #   @return [String]
     #
     # @!attribute [rw] container_definitions
@@ -8514,12 +8500,10 @@ module Aws::ECS
     #   share the same process namespace.
     #
     #   If no value is specified, the default is a private namespace for
-    #   each container. For more information, see [PID settings][1] in the
-    #   *Docker run reference*.
+    #   each container.
     #
     #   If the `host` PID mode is used, there's a heightened risk of
-    #   undesired process namespace exposure. For more information, see
-    #   [Docker security][2].
+    #   undesired process namespace exposure.
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers.
     #
@@ -8530,11 +8514,6 @@ module Aws::ECS
     #   (Linux). This isn't supported for Windows containers on Fargate.
     #
     #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.docker.com/engine/reference/run/#pid-settings---pid
-    #   [2]: https://docs.docker.com/engine/security/security/
     #   @return [String]
     #
     # @!attribute [rw] ipc_mode
@@ -8548,17 +8527,15 @@ module Aws::ECS
     #   containers of a task are private and not shared with other
     #   containers in a task or on the container instance. If no value is
     #   specified, then the IPC resource namespace sharing depends on the
-    #   Docker daemon setting on the container instance. For more
-    #   information, see [IPC settings][1] in the *Docker run reference*.
+    #   Docker daemon setting on the container instance.
     #
     #   If the `host` IPC mode is used, be aware that there is a heightened
-    #   risk of undesired IPC namespace expose. For more information, see
-    #   [Docker security][2].
+    #   risk of undesired IPC namespace expose.
     #
     #   If you are setting namespaced kernel parameters using
     #   `systemControls` for the containers in the task, the following will
     #   apply to your IPC resource namespace. For more information, see
-    #   [System Controls][3] in the *Amazon Elastic Container Service
+    #   [System Controls][1] in the *Amazon Elastic Container Service
     #   Developer Guide*.
     #
     #   * For tasks that use the `host` IPC mode, IPC namespace related
@@ -8574,9 +8551,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/run/#ipc-settings---ipc
-    #   [2]: https://docs.docker.com/engine/security/security/
-    #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
     #   @return [String]
     #
     # @!attribute [rw] proxy_configuration
@@ -9155,14 +9130,10 @@ module Aws::ECS
     #   You can run your Linux tasks on an ARM-based platform by setting the
     #   value to `ARM64`. This option is available for tasks that run on
     #   Linux Amazon EC2 instance or Linux containers on Fargate.
-    #
-    #   The default is `X86_64`.
     #   @return [String]
     #
     # @!attribute [rw] operating_system_family
     #   The operating system.
-    #
-    #   The default is `Linux`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RuntimePlatform AWS API Documentation
@@ -9336,9 +9307,9 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] capacity_provider_strategy
-    #   The capacity provider strategy the service uses. When using
-    #   `DescribeServices`, this field is omitted if the service was created
-    #   using a launch type.
+    #   The capacity provider strategy the service uses. When using the
+    #   DescribeServices API, this field is omitted if the service was
+    #   created using a launch type.
     #   @return [Array<Types::CapacityProviderStrategyItem>]
     #
     # @!attribute [rw] platform_version
@@ -9461,7 +9432,7 @@ module Aws::ECS
     # @!attribute [rw] tags
     #   The metadata that you apply to the service to help you categorize
     #   and organize them. Each tag consists of a key and an optional value.
-    #   You define both the key and value.
+    #   You define bot the key and value.
     #
     #   The following basic restrictions apply to tags:
     #
@@ -9963,7 +9934,7 @@ module Aws::ECS
     #
     # @!attribute [rw] deployment_configuration
     #   Optional deployment parameters that control how many tasks run
-    #   during the deployment and the failure detection methods.
+    #   during a deployment and the ordering of stopping and starting tasks.
     #   @return [Types::DeploymentConfiguration]
     #
     # @!attribute [rw] rollback
@@ -10561,6 +10532,10 @@ module Aws::ECS
     #   yyyy-mm-dd HH:mm:ss.SSSSS.
     #   @return [Time]
     #
+    # @!attribute [rw] vpc_lattice_configurations
+    #   The VPC Lattice configuration for the service revision.
+    #   @return [Array<Types::VpcLatticeConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceRevision AWS API Documentation
     #
     class ServiceRevision < Struct.new(
@@ -10580,7 +10555,8 @@ module Aws::ECS
       :service_connect_configuration,
       :volume_configurations,
       :fargate_ephemeral_storage,
-      :created_at)
+      :created_at,
+      :vpc_lattice_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11740,22 +11716,19 @@ module Aws::ECS
     #   non-root user.
     #
     #   If the network mode is `awsvpc`, the task is allocated an elastic
-    #   network interface, and you must specify a NetworkConfiguration value
-    #   when you create a service or run a task with the task definition.
-    #   For more information, see [Task Networking][1] in the *Amazon
-    #   Elastic Container Service Developer Guide*.
+    #   network interface, and you must specify a [NetworkConfiguration][1]
+    #   value when you create a service or run a task with the task
+    #   definition. For more information, see [Task Networking][2] in the
+    #   *Amazon Elastic Container Service Developer Guide*.
     #
     #   If the network mode is `host`, you cannot run multiple
     #   instantiations of the same task on a single container instance when
     #   port mappings are used.
     #
-    #   For more information, see [Network settings][2] in the *Docker run
-    #   reference*.
     #
     #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
-    #   [2]: https://docs.docker.com/engine/reference/run/#network-settings
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_NetworkConfiguration.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
     #   @return [String]
     #
     # @!attribute [rw] revision
@@ -11950,12 +11923,10 @@ module Aws::ECS
     #   share the same process namespace.
     #
     #   If no value is specified, the default is a private namespace for
-    #   each container. For more information, see [PID settings][1] in the
-    #   *Docker run reference*.
+    #   each container.
     #
     #   If the `host` PID mode is used, there's a heightened risk of
-    #   undesired process namespace exposure. For more information, see
-    #   [Docker security][2].
+    #   undesired process namespace exposure.
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers.
     #
@@ -11966,11 +11937,6 @@ module Aws::ECS
     #   (Linux). This isn't supported for Windows containers on Fargate.
     #
     #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.docker.com/engine/reference/run/#pid-settings---pid
-    #   [2]: https://docs.docker.com/engine/security/security/
     #   @return [String]
     #
     # @!attribute [rw] ipc_mode
@@ -11984,17 +11950,15 @@ module Aws::ECS
     #   containers of a task are private and not shared with other
     #   containers in a task or on the container instance. If no value is
     #   specified, then the IPC resource namespace sharing depends on the
-    #   Docker daemon setting on the container instance. For more
-    #   information, see [IPC settings][1] in the *Docker run reference*.
+    #   Docker daemon setting on the container instance.
     #
     #   If the `host` IPC mode is used, be aware that there is a heightened
-    #   risk of undesired IPC namespace expose. For more information, see
-    #   [Docker security][2].
+    #   risk of undesired IPC namespace expose.
     #
     #   If you are setting namespaced kernel parameters using
     #   `systemControls` for the containers in the task, the following will
     #   apply to your IPC resource namespace. For more information, see
-    #   [System Controls][3] in the *Amazon Elastic Container Service
+    #   [System Controls][1] in the *Amazon Elastic Container Service
     #   Developer Guide*.
     #
     #   * For tasks that use the `host` IPC mode, IPC namespace related
@@ -12010,9 +11974,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/run/#ipc-settings---ipc
-    #   [2]: https://docs.docker.com/engine/security/security/
-    #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
     #   @return [String]
     #
     # @!attribute [rw] proxy_configuration
@@ -12127,8 +12089,8 @@ module Aws::ECS
     #   @return [Integer]
     #
     # @!attribute [rw] kms_key_id
-    #   Specify an Amazon Web Services Key Management Service key ID to
-    #   encrypt the ephemeral storage for the task.
+    #   Specify an Key Management Service key ID to encrypt the ephemeral
+    #   storage for the task.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TaskEphemeralStorage AWS API Documentation
@@ -13167,7 +13129,8 @@ module Aws::ECS
     #
     # @!attribute [rw] deployment_configuration
     #   Optional deployment parameters that control how many tasks run
-    #   during the deployment and the failure detection methods.
+    #   during the deployment and the ordering of stopping and starting
+    #   tasks.
     #   @return [Types::DeploymentConfiguration]
     #
     # @!attribute [rw] network_configuration
@@ -13221,16 +13184,18 @@ module Aws::ECS
     #
     # @!attribute [rw] health_check_grace_period_seconds
     #   The period of time, in seconds, that the Amazon ECS service
-    #   scheduler ignores unhealthy Elastic Load Balancing target health
-    #   checks after a task has first started. This is only valid if your
-    #   service is configured to use a load balancer. If your service's
-    #   tasks take a while to start and respond to Elastic Load Balancing
-    #   health checks, you can specify a health check grace period of up to
-    #   2,147,483,647 seconds. During that time, the Amazon ECS service
-    #   scheduler ignores the Elastic Load Balancing health check status.
-    #   This grace period can prevent the ECS service scheduler from marking
-    #   tasks as unhealthy and stopping them before they have time to come
-    #   up.
+    #   scheduler ignores unhealthy Elastic Load Balancing, VPC Lattice, and
+    #   container health checks after a task has first started. If you
+    #   don't specify a health check grace period value, the default value
+    #   of `0` is used. If you don't use any of the health checks, then
+    #   `healthCheckGracePeriodSeconds` is unused.
+    #
+    #   If your service's tasks take a while to start and respond to health
+    #   checks, you can specify a health check grace period of up to
+    #   2,147,483,647 seconds (about 69 years). During that time, the Amazon
+    #   ECS service scheduler ignores health check status. This grace period
+    #   can prevent the service scheduler from marking tasks as unhealthy
+    #   and stopping them before they have time to come up.
     #   @return [Integer]
     #
     # @!attribute [rw] enable_execute_command
@@ -13355,6 +13320,11 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ServiceManagedEBSVolumeConfiguration.html
     #   @return [Array<Types::ServiceVolumeConfiguration>]
     #
+    # @!attribute [rw] vpc_lattice_configurations
+    #   An object representing the VPC Lattice configuration for the service
+    #   being updated.
+    #   @return [Array<Types::VpcLatticeConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateServiceRequest AWS API Documentation
     #
     class UpdateServiceRequest < Struct.new(
@@ -13376,7 +13346,8 @@ module Aws::ECS
       :propagate_tags,
       :service_registries,
       :service_connect_configuration,
-      :volume_configurations)
+      :volume_configurations,
+      :vpc_lattice_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13642,6 +13613,38 @@ module Aws::ECS
     class VolumeFrom < Struct.new(
       :source_container,
       :read_only)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The VPC Lattice configuration for your service that holds the
+    # information for the target group(s) Amazon ECS tasks will be
+    # registered to.
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM role to associate with this VPC Lattice
+    #   configuration. This is the Amazon ECS  infrastructure IAM role that
+    #   is used to manage your VPC Lattice infrastructure.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_group_arn
+    #   The full Amazon Resource Name (ARN) of the target group or groups
+    #   associated with the VPC Lattice configuration that the Amazon ECS
+    #   tasks will be registered to.
+    #   @return [String]
+    #
+    # @!attribute [rw] port_name
+    #   The name of the port mapping to register in the VPC Lattice target
+    #   group. This is the name of the `portMapping` you defined in your
+    #   task definition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/VpcLatticeConfiguration AWS API Documentation
+    #
+    class VpcLatticeConfiguration < Struct.new(
+      :role_arn,
+      :target_group_arn,
+      :port_name)
       SENSITIVE = []
       include Aws::Structure
     end

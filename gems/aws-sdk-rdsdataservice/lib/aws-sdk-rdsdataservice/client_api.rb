@@ -37,6 +37,7 @@ module Aws::RDSDataService
     CommitTransactionResponse = Shapes::StructureShape.new(name: 'CommitTransactionResponse')
     DatabaseErrorException = Shapes::StructureShape.new(name: 'DatabaseErrorException')
     DatabaseNotFoundException = Shapes::StructureShape.new(name: 'DatabaseNotFoundException')
+    DatabaseResumingException = Shapes::StructureShape.new(name: 'DatabaseResumingException')
     DatabaseUnavailableException = Shapes::StructureShape.new(name: 'DatabaseUnavailableException')
     DbName = Shapes::StringShape.new(name: 'DbName')
     DecimalReturnType = Shapes::StringShape.new(name: 'DecimalReturnType')
@@ -168,6 +169,9 @@ module Aws::RDSDataService
 
     DatabaseNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     DatabaseNotFoundException.struct_class = Types::DatabaseNotFoundException
+
+    DatabaseResumingException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    DatabaseResumingException.struct_class = Types::DatabaseResumingException
 
     DatabaseUnavailableException.struct_class = Types::DatabaseUnavailableException
 
@@ -362,6 +366,7 @@ module Aws::RDSDataService
         o.errors << Shapes::ShapeRef.new(shape: SecretsErrorException)
         o.errors << Shapes::ShapeRef.new(shape: HttpEndpointNotEnabledException)
         o.errors << Shapes::ShapeRef.new(shape: DatabaseErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: DatabaseResumingException)
         o.errors << Shapes::ShapeRef.new(shape: DatabaseUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: TransactionNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSecretException)
@@ -383,6 +388,7 @@ module Aws::RDSDataService
         o.errors << Shapes::ShapeRef.new(shape: SecretsErrorException)
         o.errors << Shapes::ShapeRef.new(shape: HttpEndpointNotEnabledException)
         o.errors << Shapes::ShapeRef.new(shape: DatabaseErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: DatabaseResumingException)
         o.errors << Shapes::ShapeRef.new(shape: DatabaseUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: TransactionNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSecretException)
@@ -440,6 +446,7 @@ module Aws::RDSDataService
         o.errors << Shapes::ShapeRef.new(shape: SecretsErrorException)
         o.errors << Shapes::ShapeRef.new(shape: HttpEndpointNotEnabledException)
         o.errors << Shapes::ShapeRef.new(shape: DatabaseErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: DatabaseResumingException)
         o.errors << Shapes::ShapeRef.new(shape: DatabaseUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: TransactionNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSecretException)

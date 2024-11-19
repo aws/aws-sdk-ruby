@@ -675,9 +675,27 @@ module Aws::IoT
     #   CreateCertificate operation) or an Amazon Cognito ID.
     #   @return [String]
     #
+    # @!attribute [rw] thing_principal_type
+    #   The type of the relation you want to specify when you attach a
+    #   principal to a thing.
+    #
+    #   * `EXCLUSIVE_THING` - Attaches the specified principal to the
+    #     specified thing, exclusively. The thing will be the only thing
+    #     that’s attached to the principal.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `NON_EXCLUSIVE_THING` - Attaches the specified principal to the
+    #     specified thing. Multiple things can be attached to the principal.
+    #
+    #   ^
+    #   @return [String]
+    #
     class AttachThingPrincipalRequest < Struct.new(
       :thing_name,
-      :principal)
+      :principal,
+      :thing_principal_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6729,8 +6747,8 @@ module Aws::IoT
     #
     # @!attribute [rw] thing_type_properties
     #   The ThingTypeProperties contains information about the thing type
-    #   including description, and a list of searchable thing attribute
-    #   names.
+    #   including description, a list of searchable thing attribute names,
+    #   and MQTT5 configuration.
     #   @return [Types::ThingTypeProperties]
     #
     # @!attribute [rw] thing_type_metadata
@@ -10930,6 +10948,66 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @!attribute [rw] next_token
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in this operation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] principal
+    #   The principal. A principal can be an X.509 certificate or an Amazon
+    #   Cognito ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] thing_principal_type
+    #   The type of the relation you want to filter in the response. If no
+    #   value is provided in this field, the response will list all things,
+    #   including both the `EXCLUSIVE_THING` and `NON_EXCLUSIVE_THING`
+    #   attachment types.
+    #
+    #   * `EXCLUSIVE_THING` - Attaches the specified principal to the
+    #     specified thing, exclusively. The thing will be the only thing
+    #     that’s attached to the principal.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `NON_EXCLUSIVE_THING` - Attaches the specified principal to the
+    #     specified thing. Multiple things can be attached to the principal.
+    #
+    #   ^
+    #   @return [String]
+    #
+    class ListPrincipalThingsV2Request < Struct.new(
+      :next_token,
+      :max_results,
+      :principal,
+      :thing_principal_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] principal_thing_objects
+    #   A list of `thingPrincipalObject` that represents the principal and
+    #   the type of relation it has with the thing.
+    #   @return [Array<Types::PrincipalThingObject>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to get the next set of results, or **null** if
+    #   there are no additional results.
+    #   @return [String]
+    #
+    class ListPrincipalThingsV2Response < Struct.new(
+      :principal_thing_objects,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] template_name
     #   The name of the provisioning template.
     #   @return [String]
@@ -11495,6 +11573,65 @@ module Aws::IoT
     #
     class ListThingPrincipalsResponse < Struct.new(
       :principals,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in this operation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] thing_name
+    #   The name of the thing.
+    #   @return [String]
+    #
+    # @!attribute [rw] thing_principal_type
+    #   The type of the relation you want to filter in the response. If no
+    #   value is provided in this field, the response will list all
+    #   principals, including both the `EXCLUSIVE_THING` and
+    #   `NON_EXCLUSIVE_THING` attachment types.
+    #
+    #   * `EXCLUSIVE_THING` - Attaches the specified principal to the
+    #     specified thing, exclusively. The thing will be the only thing
+    #     that’s attached to the principal.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `NON_EXCLUSIVE_THING` - Attaches the specified principal to the
+    #     specified thing. Multiple things can be attached to the principal.
+    #
+    #   ^
+    #   @return [String]
+    #
+    class ListThingPrincipalsV2Request < Struct.new(
+      :next_token,
+      :max_results,
+      :thing_name,
+      :thing_principal_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] thing_principal_objects
+    #   A list of `thingPrincipalObject` that represents the principal and
+    #   the type of relation it has with the thing.
+    #   @return [Array<Types::ThingPrincipalObject>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to get the next set of results, or **null** if
+    #   there are no additional results.
+    #   @return [String]
+    #
+    class ListThingPrincipalsV2Response < Struct.new(
+      :thing_principal_objects,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -12377,6 +12514,20 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The configuration to add user-defined properties to enrich MQTT 5
+    # messages.
+    #
+    # @!attribute [rw] propagating_attributes
+    #   An object that represents the propagating thing attributes and the
+    #   connection attributes.
+    #   @return [Array<Types::PropagatingAttribute>]
+    #
+    class Mqtt5Configuration < Struct.new(
+      :propagating_attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the MQTT context to use for the test authorizer request
     #
     # @!attribute [rw] username
@@ -12946,6 +13097,62 @@ module Aws::IoT
     class PresignedUrlConfig < Struct.new(
       :role_arn,
       :expires_in_sec)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents the thing and the type of relation it has
+    # with the principal.
+    #
+    # @!attribute [rw] thing_name
+    #   The name of the thing.
+    #   @return [String]
+    #
+    # @!attribute [rw] thing_principal_type
+    #   The type of the relation you want to specify when you attach a
+    #   principal to a thing. The value defaults to `NON_EXCLUSIVE_THING`.
+    #
+    #   * `EXCLUSIVE_THING` - Attaches the specified principal to the
+    #     specified thing, exclusively. The thing will be the only thing
+    #     that’s attached to the principal.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `NON_EXCLUSIVE_THING` - Attaches the specified principal to the
+    #     specified thing. Multiple things can be attached to the principal.
+    #
+    #   ^
+    #   @return [String]
+    #
+    class PrincipalThingObject < Struct.new(
+      :thing_name,
+      :thing_principal_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents the connection attribute, thing attribute,
+    # and the user property key.
+    #
+    # @!attribute [rw] user_property_key
+    #   The key of the user property key-value pair.
+    #   @return [String]
+    #
+    # @!attribute [rw] thing_attribute
+    #   The user-defined thing attribute that is propagating for MQTT 5
+    #   message enrichment.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_attribute
+    #   The attribute associated with the connection between a device and
+    #   Amazon Web Services IoT Core.
+    #   @return [String]
+    #
+    class PropagatingAttribute < Struct.new(
+      :user_property_key,
+      :thing_attribute,
+      :connection_attribute)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14090,17 +14297,42 @@ module Aws::IoT
     #   A Boolean value that indicates whether Online Certificate Status
     #   Protocol (OCSP) server certificate check is enabled or not.
     #
-    #   For more information, see [Configuring OCSP server-certificate
-    #   stapling in domain configuration][1] from Amazon Web Services IoT
-    #   Core Developer Guide.
+    #   For more information, see [ Server certificate configuration for
+    #   OCSP stapling][1] from Amazon Web Services IoT Core Developer Guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/iot-custom-endpoints-cert-config.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] ocsp_lambda_arn
+    #   The Amazon Resource Name (ARN) for a Lambda function that acts as a
+    #   Request for Comments (RFC) 6960-compliant Online Certificate Status
+    #   Protocol (OCSP) responder, supporting basic OCSP responses. The
+    #   Lambda function accepts a JSON string that's Base64-encoded.
+    #   Therefore, you must convert your OCSP response, which is typically
+    #   in the Distinguished Encoding Rules (DER) format, into a JSON string
+    #   that's Base64-encoded. The Lambda function's response is also a
+    #   Base64-encoded JSON string and the response payload must not exceed
+    #   8 kilobytes (KiB) in size. The Lambda function must be in the same
+    #   Amazon Web Services region and account as the domain configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] ocsp_authorized_responder_arn
+    #   The Amazon Resource Name (ARN) for an X.509 certificate stored in
+    #   Amazon Web Services Certificate Manager (ACM). If provided, Amazon
+    #   Web Services IoT Core will use this certificate to validate the
+    #   signature of the received OCSP response. The OCSP responder must
+    #   sign responses using either this authorized responder certificate or
+    #   the issuing certificate, depending on whether the ARN is provided or
+    #   not. The certificate must be in the same Amazon Web Services region
+    #   and account as the domain configuration.
+    #   @return [String]
+    #
     class ServerCertificateConfig < Struct.new(
-      :enable_ocsp_check)
+      :enable_ocsp_check,
+      :ocsp_lambda_arn,
+      :ocsp_authorized_responder_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15376,6 +15608,37 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # An object that represents the principal and the type of relation it
+    # has with the thing.
+    #
+    # @!attribute [rw] principal
+    #   The principal of the thing principal object.
+    #   @return [String]
+    #
+    # @!attribute [rw] thing_principal_type
+    #   The type of the relation you want to specify when you attach a
+    #   principal to a thing. The value defaults to `NON_EXCLUSIVE_THING`.
+    #
+    #   * `EXCLUSIVE_THING` - Attaches the specified principal to the
+    #     specified thing, exclusively. The thing will be the only thing
+    #     that’s attached to the principal.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `NON_EXCLUSIVE_THING` - Attaches the specified principal to the
+    #     specified thing. Multiple things can be attached to the principal.
+    #
+    #   ^
+    #   @return [String]
+    #
+    class ThingPrincipalObject < Struct.new(
+      :principal,
+      :thing_principal_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The definition of the thing type, including thing type name and
     # description.
     #
@@ -15445,9 +15708,15 @@ module Aws::IoT
     #   A list of searchable thing attribute names.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] mqtt5_configuration
+    #   The configuration to add user-defined properties to enrich MQTT 5
+    #   messages.
+    #   @return [Types::Mqtt5Configuration]
+    #
     class ThingTypeProperties < Struct.new(
       :thing_type_description,
-      :searchable_attributes)
+      :searchable_attributes,
+      :mqtt5_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17382,6 +17651,25 @@ module Aws::IoT
     # The output from the UpdateThing operation.
     #
     class UpdateThingResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] thing_type_name
+    #   The name of a thing type.
+    #   @return [String]
+    #
+    # @!attribute [rw] thing_type_properties
+    #   The ThingTypeProperties contains information about the thing type
+    #   including: a thing type description, and a list of searchable thing
+    #   attribute names.
+    #   @return [Types::ThingTypeProperties]
+    #
+    class UpdateThingTypeRequest < Struct.new(
+      :thing_type_name,
+      :thing_type_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class UpdateThingTypeResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] arn
     #   The ARN of the topic rule destination.

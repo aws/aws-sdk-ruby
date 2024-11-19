@@ -117,6 +117,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/AutoScalingGroup.html#availability_zone_distribution-instance_method
       def availability_zone_distribution: () -> Types::AvailabilityZoneDistribution
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/AutoScalingGroup.html#availability_zone_impairment_policy-instance_method
+      def availability_zone_impairment_policy: () -> Types::AvailabilityZoneImpairmentPolicy
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/AutoScalingGroup.html#load-instance_method
@@ -481,7 +484,12 @@ module Aws
                     },
                     ?availability_zone_distribution: {
                       capacity_distribution_strategy: ("balanced-only" | "balanced-best-effort")?
-                    }
+                    },
+                    ?availability_zone_impairment_policy: {
+                      zonal_shift_enabled: bool?,
+                      impaired_zone_health_check_behavior: ("ReplaceUnhealthy" | "IgnoreUnhealthy")?
+                    },
+                    ?skip_zonal_shift_validation: bool
                   ) -> AutoScalingGroup
                 | (?Hash[Symbol, untyped]) -> AutoScalingGroup
 

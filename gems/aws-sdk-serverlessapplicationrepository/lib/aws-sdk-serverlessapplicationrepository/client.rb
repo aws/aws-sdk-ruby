@@ -661,7 +661,7 @@ module Aws::ServerlessApplicationRepository
     # @option params [Types::RollbackConfiguration] :rollback_configuration
     #   This property corresponds to the <i>AWS CloudFormation <a
     #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a>
-    #   </i> Data Type.
+    #    </i> Data Type.
     #
     # @option params [String] :semantic_version
     #
@@ -1263,7 +1263,7 @@ module Aws::ServerlessApplicationRepository
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-serverlessapplicationrepository'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -89,6 +89,39 @@ module Aws
                            ) -> _AddProfileKeyResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddProfileKeyResponseSuccess
 
+      interface _BatchGetCalculatedAttributeForProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetCalculatedAttributeForProfileResponse]
+        def errors: () -> ::Array[Types::BatchGetCalculatedAttributeForProfileError]
+        def calculated_attribute_values: () -> ::Array[Types::CalculatedAttributeValue]
+        def condition_overrides: () -> Types::ConditionOverrides
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#batch_get_calculated_attribute_for_profile-instance_method
+      def batch_get_calculated_attribute_for_profile: (
+                                                        calculated_attribute_name: ::String,
+                                                        domain_name: ::String,
+                                                        profile_ids: Array[::String],
+                                                        ?condition_overrides: {
+                                                          range: {
+                                                            start: ::Integer,
+                                                            end: ::Integer?,
+                                                            unit: ("DAYS")
+                                                          }?
+                                                        }
+                                                      ) -> _BatchGetCalculatedAttributeForProfileResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetCalculatedAttributeForProfileResponseSuccess
+
+      interface _BatchGetProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetProfileResponse]
+        def errors: () -> ::Array[Types::BatchGetProfileError]
+        def profiles: () -> ::Array[Types::Profile]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#batch_get_profile-instance_method
+      def batch_get_profile: (
+                               domain_name: ::String,
+                               profile_ids: Array[::String]
+                             ) -> _BatchGetProfileResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetProfileResponseSuccess
+
       interface _CreateCalculatedAttributeDefinitionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateCalculatedAttributeDefinitionResponse]
         def calculated_attribute_name: () -> ::String
@@ -96,6 +129,7 @@ module Aws
         def description: () -> ::String
         def attribute_details: () -> Types::AttributeDetails
         def conditions: () -> Types::Conditions
+        def filter: () -> Types::Filter
         def statistic: () -> ("FIRST_OCCURRENCE" | "LAST_OCCURRENCE" | "COUNT" | "SUM" | "MINIMUM" | "MAXIMUM" | "AVERAGE" | "MAX_OCCURRENCE")
         def created_at: () -> ::Time
         def last_updated_at: () -> ::Time
@@ -125,6 +159,22 @@ module Aws
                                                         value: ::String,
                                                         operator: ("EQUAL_TO" | "GREATER_THAN" | "LESS_THAN" | "NOT_EQUAL_TO")
                                                       }?
+                                                    },
+                                                    ?filter: {
+                                                      include: ("ALL" | "ANY" | "NONE"),
+                                                      groups: Array[
+                                                        {
+                                                          type: ("ALL" | "ANY" | "NONE"),
+                                                          dimensions: Array[
+                                                            {
+                                                              attributes: Hash[::String, {
+                                                                  dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH" | "BEFORE" | "AFTER" | "BETWEEN" | "NOT_BETWEEN" | "ON" | "GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL" | "LESS_THAN_OR_EQUAL" | "EQUAL"),
+                                                                  values: Array[::String]
+                                                                }]
+                                                            },
+                                                          ]
+                                                        },
+                                                      ]
                                                     },
                                                     statistic: ("FIRST_OCCURRENCE" | "LAST_OCCURRENCE" | "COUNT" | "SUM" | "MINIMUM" | "MAXIMUM" | "AVERAGE" | "MAX_OCCURRENCE"),
                                                     ?tags: Hash[::String, ::String]
@@ -382,6 +432,458 @@ module Aws
                           ) -> _CreateProfileResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProfileResponseSuccess
 
+      interface _CreateSegmentDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSegmentDefinitionResponse]
+        def segment_definition_name: () -> ::String
+        def display_name: () -> ::String
+        def description: () -> ::String
+        def created_at: () -> ::Time
+        def segment_definition_arn: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#create_segment_definition-instance_method
+      def create_segment_definition: (
+                                       domain_name: ::String,
+                                       segment_definition_name: ::String,
+                                       display_name: ::String,
+                                       ?description: ::String,
+                                       segment_groups: {
+                                         groups: Array[
+                                           {
+                                             dimensions: Array[
+                                               {
+                                                 profile_attributes: {
+                                                   account_number: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   additional_information: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   first_name: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   last_name: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   middle_name: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   gender_string: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   party_type_string: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   birth_date: {
+                                                     dimension_type: ("BEFORE" | "AFTER" | "BETWEEN" | "NOT_BETWEEN" | "ON"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   phone_number: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   business_name: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   business_phone_number: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   home_phone_number: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   mobile_phone_number: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   email_address: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   personal_email_address: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   business_email_address: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   address: {
+                                                     city: {
+                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                       values: Array[::String]
+                                                     }?,
+                                                     country: {
+                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                       values: Array[::String]
+                                                     }?,
+                                                     county: {
+                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                       values: Array[::String]
+                                                     }?,
+                                                     postal_code: {
+                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                       values: Array[::String]
+                                                     }?,
+                                                     province: {
+                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                       values: Array[::String]
+                                                     }?,
+                                                     state: {
+                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                       values: Array[::String]
+                                                     }?
+                                                   }?,
+                                                   shipping_address: {
+                                                     city: {
+                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                       values: Array[::String]
+                                                     }?,
+                                                     country: {
+                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                       values: Array[::String]
+                                                     }?,
+                                                     county: {
+                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                       values: Array[::String]
+                                                     }?,
+                                                     postal_code: {
+                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                       values: Array[::String]
+                                                     }?,
+                                                     province: {
+                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                       values: Array[::String]
+                                                     }?,
+                                                     state: {
+                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                       values: Array[::String]
+                                                     }?
+                                                   }?,
+                                                   mailing_address: {
+                                                     city: {
+                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                       values: Array[::String]
+                                                     }?,
+                                                     country: {
+                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                       values: Array[::String]
+                                                     }?,
+                                                     county: {
+                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                       values: Array[::String]
+                                                     }?,
+                                                     postal_code: {
+                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                       values: Array[::String]
+                                                     }?,
+                                                     province: {
+                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                       values: Array[::String]
+                                                     }?,
+                                                     state: {
+                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                       values: Array[::String]
+                                                     }?
+                                                   }?,
+                                                   billing_address: {
+                                                     city: {
+                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                       values: Array[::String]
+                                                     }?,
+                                                     country: {
+                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                       values: Array[::String]
+                                                     }?,
+                                                     county: {
+                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                       values: Array[::String]
+                                                     }?,
+                                                     postal_code: {
+                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                       values: Array[::String]
+                                                     }?,
+                                                     province: {
+                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                       values: Array[::String]
+                                                     }?,
+                                                     state: {
+                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                       values: Array[::String]
+                                                     }?
+                                                   }?,
+                                                   attributes: Hash[::String, {
+                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH" | "BEFORE" | "AFTER" | "BETWEEN" | "NOT_BETWEEN" | "ON" | "GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL" | "LESS_THAN_OR_EQUAL" | "EQUAL"),
+                                                       values: Array[::String]
+                                                     }]?
+                                                 }?,
+                                                 calculated_attributes: Hash[::String, {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH" | "BEFORE" | "AFTER" | "BETWEEN" | "NOT_BETWEEN" | "ON" | "GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL" | "LESS_THAN_OR_EQUAL" | "EQUAL"),
+                                                     values: Array[::String],
+                                                     condition_overrides: {
+                                                       range: {
+                                                         start: ::Integer,
+                                                         end: ::Integer?,
+                                                         unit: ("DAYS")
+                                                       }?
+                                                     }?
+                                                   }]?
+                                               },
+                                             ]?,
+                                             source_segments: Array[
+                                               {
+                                                 segment_definition_name: ::String?
+                                               },
+                                             ]?,
+                                             source_type: ("ALL" | "ANY" | "NONE")?,
+                                             type: ("ALL" | "ANY" | "NONE")?
+                                           },
+                                         ]?,
+                                         include: ("ALL" | "ANY" | "NONE")?
+                                       },
+                                       ?tags: Hash[::String, ::String]
+                                     ) -> _CreateSegmentDefinitionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSegmentDefinitionResponseSuccess
+
+      interface _CreateSegmentEstimateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSegmentEstimateResponse]
+        def domain_name: () -> ::String
+        def estimate_id: () -> ::String
+        def status_code: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#create_segment_estimate-instance_method
+      def create_segment_estimate: (
+                                     domain_name: ::String,
+                                     segment_query: {
+                                       groups: Array[
+                                         {
+                                           dimensions: Array[
+                                             {
+                                               profile_attributes: {
+                                                 account_number: {
+                                                   dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                   values: Array[::String]
+                                                 }?,
+                                                 additional_information: {
+                                                   dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                   values: Array[::String]
+                                                 }?,
+                                                 first_name: {
+                                                   dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                   values: Array[::String]
+                                                 }?,
+                                                 last_name: {
+                                                   dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                   values: Array[::String]
+                                                 }?,
+                                                 middle_name: {
+                                                   dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                   values: Array[::String]
+                                                 }?,
+                                                 gender_string: {
+                                                   dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                   values: Array[::String]
+                                                 }?,
+                                                 party_type_string: {
+                                                   dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                   values: Array[::String]
+                                                 }?,
+                                                 birth_date: {
+                                                   dimension_type: ("BEFORE" | "AFTER" | "BETWEEN" | "NOT_BETWEEN" | "ON"),
+                                                   values: Array[::String]
+                                                 }?,
+                                                 phone_number: {
+                                                   dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                   values: Array[::String]
+                                                 }?,
+                                                 business_name: {
+                                                   dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                   values: Array[::String]
+                                                 }?,
+                                                 business_phone_number: {
+                                                   dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                   values: Array[::String]
+                                                 }?,
+                                                 home_phone_number: {
+                                                   dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                   values: Array[::String]
+                                                 }?,
+                                                 mobile_phone_number: {
+                                                   dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                   values: Array[::String]
+                                                 }?,
+                                                 email_address: {
+                                                   dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                   values: Array[::String]
+                                                 }?,
+                                                 personal_email_address: {
+                                                   dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                   values: Array[::String]
+                                                 }?,
+                                                 business_email_address: {
+                                                   dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                   values: Array[::String]
+                                                 }?,
+                                                 address: {
+                                                   city: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   country: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   county: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   postal_code: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   province: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   state: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?
+                                                 }?,
+                                                 shipping_address: {
+                                                   city: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   country: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   county: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   postal_code: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   province: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   state: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?
+                                                 }?,
+                                                 mailing_address: {
+                                                   city: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   country: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   county: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   postal_code: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   province: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   state: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?
+                                                 }?,
+                                                 billing_address: {
+                                                   city: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   country: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   county: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   postal_code: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   province: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?,
+                                                   state: {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+                                                     values: Array[::String]
+                                                   }?
+                                                 }?,
+                                                 attributes: Hash[::String, {
+                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH" | "BEFORE" | "AFTER" | "BETWEEN" | "NOT_BETWEEN" | "ON" | "GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL" | "LESS_THAN_OR_EQUAL" | "EQUAL"),
+                                                     values: Array[::String]
+                                                   }]?
+                                               }?,
+                                               calculated_attributes: Hash[::String, {
+                                                   dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH" | "BEFORE" | "AFTER" | "BETWEEN" | "NOT_BETWEEN" | "ON" | "GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL" | "LESS_THAN_OR_EQUAL" | "EQUAL"),
+                                                   values: Array[::String],
+                                                   condition_overrides: {
+                                                     range: {
+                                                       start: ::Integer,
+                                                       end: ::Integer?,
+                                                       unit: ("DAYS")
+                                                     }?
+                                                   }?
+                                                 }]?
+                                             },
+                                           ]?,
+                                           source_segments: Array[
+                                             {
+                                               segment_definition_name: ::String?
+                                             },
+                                           ]?,
+                                           source_type: ("ALL" | "ANY" | "NONE")?,
+                                           type: ("ALL" | "ANY" | "NONE")?
+                                         },
+                                       ]?,
+                                       include: ("ALL" | "ANY" | "NONE")?
+                                     }
+                                   ) -> _CreateSegmentEstimateResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSegmentEstimateResponseSuccess
+
+      interface _CreateSegmentSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSegmentSnapshotResponse]
+        def snapshot_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#create_segment_snapshot-instance_method
+      def create_segment_snapshot: (
+                                     domain_name: ::String,
+                                     segment_definition_name: ::String,
+                                     data_format: ("CSV" | "JSONL" | "ORC"),
+                                     ?encryption_key: ::String,
+                                     ?role_arn: ::String,
+                                     ?destination_uri: ::String
+                                   ) -> _CreateSegmentSnapshotResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSegmentSnapshotResponseSuccess
+
       interface _DeleteCalculatedAttributeDefinitionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCalculatedAttributeDefinitionResponse]
       end
@@ -471,6 +973,17 @@ module Aws
                                       ) -> _DeleteProfileObjectTypeResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProfileObjectTypeResponseSuccess
 
+      interface _DeleteSegmentDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSegmentDefinitionResponse]
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#delete_segment_definition-instance_method
+      def delete_segment_definition: (
+                                       domain_name: ::String,
+                                       segment_definition_name: ::String
+                                     ) -> _DeleteSegmentDefinitionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSegmentDefinitionResponseSuccess
+
       interface _DeleteWorkflowResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWorkflowResponse]
       end
@@ -523,6 +1036,7 @@ module Aws
         def created_at: () -> ::Time
         def last_updated_at: () -> ::Time
         def statistic: () -> ("FIRST_OCCURRENCE" | "LAST_OCCURRENCE" | "COUNT" | "SUM" | "MINIMUM" | "MAXIMUM" | "AVERAGE" | "MAX_OCCURRENCE")
+        def filter: () -> Types::Filter
         def conditions: () -> Types::Conditions
         def attribute_details: () -> Types::AttributeDetails
         def tags: () -> ::Hash[::String, ::String]
@@ -681,6 +1195,71 @@ module Aws
                                             ) -> _GetProfileObjectTypeTemplateResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProfileObjectTypeTemplateResponseSuccess
 
+      interface _GetSegmentDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSegmentDefinitionResponse]
+        def segment_definition_name: () -> ::String
+        def display_name: () -> ::String
+        def description: () -> ::String
+        def segment_groups: () -> Types::SegmentGroup
+        def segment_definition_arn: () -> ::String
+        def created_at: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#get_segment_definition-instance_method
+      def get_segment_definition: (
+                                    domain_name: ::String,
+                                    segment_definition_name: ::String
+                                  ) -> _GetSegmentDefinitionResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSegmentDefinitionResponseSuccess
+
+      interface _GetSegmentEstimateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSegmentEstimateResponse]
+        def domain_name: () -> ::String
+        def estimate_id: () -> ::String
+        def status: () -> ("RUNNING" | "SUCCEEDED" | "FAILED")
+        def estimate: () -> ::String
+        def message: () -> ::String
+        def status_code: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#get_segment_estimate-instance_method
+      def get_segment_estimate: (
+                                  domain_name: ::String,
+                                  estimate_id: ::String
+                                ) -> _GetSegmentEstimateResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSegmentEstimateResponseSuccess
+
+      interface _GetSegmentMembershipResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSegmentMembershipResponse]
+        def segment_definition_name: () -> ::String
+        def profiles: () -> ::Array[Types::ProfileQueryResult]
+        def failures: () -> ::Array[Types::ProfileQueryFailures]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#get_segment_membership-instance_method
+      def get_segment_membership: (
+                                    domain_name: ::String,
+                                    segment_definition_name: ::String,
+                                    profile_ids: Array[::String]
+                                  ) -> _GetSegmentMembershipResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSegmentMembershipResponseSuccess
+
+      interface _GetSegmentSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSegmentSnapshotResponse]
+        def snapshot_id: () -> ::String
+        def status: () -> ("COMPLETED" | "IN_PROGRESS" | "FAILED")
+        def status_message: () -> ::String
+        def data_format: () -> ("CSV" | "JSONL" | "ORC")
+        def encryption_key: () -> ::String
+        def role_arn: () -> ::String
+        def destination_uri: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#get_segment_snapshot-instance_method
+      def get_segment_snapshot: (
+                                  domain_name: ::String,
+                                  segment_definition_name: ::String,
+                                  snapshot_id: ::String
+                                ) -> _GetSegmentSnapshotResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSegmentSnapshotResponseSuccess
+
       interface _GetSimilarProfilesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetSimilarProfilesResponse]
         def profile_ids: () -> ::Array[::String]
@@ -828,6 +1407,34 @@ module Aws
                              ) -> _ListIntegrationsResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIntegrationsResponseSuccess
 
+      interface _ListObjectTypeAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListObjectTypeAttributesResponse]
+        def items: () -> ::Array[Types::ListObjectTypeAttributeItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#list_object_type_attributes-instance_method
+      def list_object_type_attributes: (
+                                         ?next_token: ::String,
+                                         ?max_results: ::Integer,
+                                         domain_name: ::String,
+                                         object_type_name: ::String
+                                       ) -> _ListObjectTypeAttributesResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListObjectTypeAttributesResponseSuccess
+
+      interface _ListProfileAttributeValuesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ProfileAttributeValuesResponse]
+        def domain_name: () -> ::String
+        def attribute_name: () -> ::String
+        def items: () -> ::Array[Types::AttributeValueItem]
+        def status_code: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#list_profile_attribute_values-instance_method
+      def list_profile_attribute_values: (
+                                           domain_name: ::String,
+                                           attribute_name: ::String
+                                         ) -> _ListProfileAttributeValuesResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProfileAttributeValuesResponseSuccess
+
       interface _ListProfileObjectTypeTemplatesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListProfileObjectTypeTemplatesResponse]
         def items: () -> ::Array[Types::ListProfileObjectTypeTemplateItem]
@@ -884,6 +1491,19 @@ module Aws
                                      domain_name: ::String
                                    ) -> _ListRuleBasedMatchesResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRuleBasedMatchesResponseSuccess
+
+      interface _ListSegmentDefinitionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSegmentDefinitionsResponse]
+        def next_token: () -> ::String
+        def items: () -> ::Array[Types::SegmentDefinitionItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#list_segment_definitions-instance_method
+      def list_segment_definitions: (
+                                      domain_name: ::String,
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ListSegmentDefinitionsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSegmentDefinitionsResponseSuccess
 
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
@@ -1079,7 +1699,7 @@ module Aws
                                        }],
                                      ?keys: Hash[::String, Array[
                                          {
-                                           standard_identifiers: Array[("PROFILE" | "ASSET" | "CASE" | "UNIQUE" | "SECONDARY" | "LOOKUP_ONLY" | "NEW_ONLY" | "ORDER")]?,
+                                           standard_identifiers: Array[("PROFILE" | "ASSET" | "CASE" | "ORDER" | "COMMUNICATION_RECORD" | "UNIQUE" | "SECONDARY" | "LOOKUP_ONLY" | "NEW_ONLY")]?,
                                            field_names: Array[::String]?
                                          },
                                        ]],

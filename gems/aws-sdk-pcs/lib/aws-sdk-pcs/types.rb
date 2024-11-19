@@ -1207,7 +1207,6 @@ module Aws::PCS
     #     * Ports: All
     #
     #     * Source: Self
-    #
     #   * Outbound rule 1
     #
     #     * Protocol: All
@@ -1215,7 +1214,6 @@ module Aws::PCS
     #     * Ports: All
     #
     #     * Destination: 0.0.0.0/0 (IPv4)
-    #
     #   * Outbound rule 2
     #
     #     * Protocol: All
@@ -1615,7 +1613,6 @@ module Aws::PCS
     #     * [ `Epilog` ][2]
     #
     #     * [ `SelectTypeParameters` ][3]
-    #
     #   * For **compute node groups**
     #
     #     * [ `Weight` ][4]

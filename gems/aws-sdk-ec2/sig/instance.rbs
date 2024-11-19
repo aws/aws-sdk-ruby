@@ -126,6 +126,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#current_instance_boot_mode-instance_method
       def current_instance_boot_mode: () -> ("legacy-bios" | "uefi")
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#operator-instance_method
+      def operator: () -> Types::OperatorResponse
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#image_id-instance_method
       def image_id: () -> ::String
 

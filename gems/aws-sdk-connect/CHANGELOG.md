@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.185.0 (2024-11-18)
+------------------
+
+* Feature - Adds CreateContactFlowVersion and ListContactFlowVersions APIs to create and view the versions of a contact flow.
+
 1.184.0 (2024-11-06)
 ------------------
 

@@ -9729,7 +9729,6 @@ module Aws::SSM
     #       command associated with the task. However, there is no guarantee
     #       that the command will be terminated and the underlying process
     #       stopped.
-    #
     #     The status for tasks that are not completed is `TIMED_OUT`.
     #
     # @option params [Types::AlarmConfiguration] :alarm_configuration
@@ -12033,7 +12032,6 @@ module Aws::SSM
     #       command associated with the task. However, there is no guarantee
     #       that the command will be terminated and the underlying process
     #       stopped.
-    #
     #     The status for tasks that are not completed is `TIMED_OUT`.
     #
     # @option params [Types::AlarmConfiguration] :alarm_configuration
@@ -12805,7 +12803,7 @@ module Aws::SSM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.184.0'
+      context[:gem_version] = '1.185.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

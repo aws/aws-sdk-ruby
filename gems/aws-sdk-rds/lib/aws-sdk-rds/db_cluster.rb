@@ -939,6 +939,7 @@ module Aws::RDS
     #     serverless_v2_scaling_configuration: {
     #       min_capacity: 1.0,
     #       max_capacity: 1.0,
+    #       seconds_until_auto_pause: 1,
     #     },
     #     network_type: "String",
     #     cluster_scalability_type: "standard", # accepts standard, limitless
@@ -1975,6 +1976,7 @@ module Aws::RDS
     #     serverless_v2_scaling_configuration: {
     #       min_capacity: 1.0,
     #       max_capacity: 1.0,
+    #       seconds_until_auto_pause: 1,
     #     },
     #     network_type: "String",
     #     manage_master_user_password: false,
@@ -2004,11 +2006,11 @@ module Aws::RDS
     #
     #   Example: `my-cluster2`
     # @option options [Boolean] :apply_immediately
-    #   Specifies whether the modifications in this request and any pending
-    #   modifications are asynchronously applied as soon as possible,
-    #   regardless of the `PreferredMaintenanceWindow` setting for the DB
-    #   cluster. If this parameter is disabled, changes to the DB cluster are
-    #   applied during the next maintenance window.
+    #   Specifies whether the modifications in this request are asynchronously
+    #   applied as soon as possible, regardless of the
+    #   `PreferredMaintenanceWindow` setting for the DB cluster. If this
+    #   parameter is disabled, changes to the DB cluster are applied during
+    #   the next maintenance window.
     #
     #   Most modifications can be applied immediately or during the next
     #   scheduled maintenance window. Some modifications, such as turning on
@@ -2690,6 +2692,7 @@ module Aws::RDS
     #     serverless_v2_scaling_configuration: {
     #       min_capacity: 1.0,
     #       max_capacity: 1.0,
+    #       seconds_until_auto_pause: 1,
     #     },
     #     network_type: "String",
     #     source_db_cluster_resource_id: "String",

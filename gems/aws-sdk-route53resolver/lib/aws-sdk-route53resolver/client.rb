@@ -805,8 +805,9 @@ module Aws::Route53Resolver
     #   The unique identifier of the firewall rule group where you want to
     #   create the rule.
     #
-    # @option params [required, String] :firewall_domain_list_id
-    #   The ID of the domain list that you want to use in the rule.
+    # @option params [String] :firewall_domain_list_id
+    #   The ID of the domain list that you want to use in the rule. Can't be
+    #   used together with `DnsThreatProtecton`.
     #
     # @option params [required, Integer] :priority
     #   The setting that determines the processing order of the rule in the
@@ -820,9 +821,11 @@ module Aws::Route53Resolver
     #
     # @option params [required, String] :action
     #   The action that DNS Firewall should take on a DNS query when it
-    #   matches one of the domains in the rule's domain list:
+    #   matches one of the domains in the rule's domain list, or a threat in
+    #   a DNS Firewall Advanced rule:
     #
-    #   * `ALLOW` - Permit the request to go through.
+    #   * `ALLOW` - Permit the request to go through. Not available for DNS
+    #     Firewall Advanced rules.
     #
     #   * `ALERT` - Permit the request and send metrics and logs to Cloud
     #     Watch.
@@ -873,11 +876,11 @@ module Aws::Route53Resolver
     #   How you want the the rule to evaluate DNS redirection in the DNS
     #   redirection chain, such as CNAME or DNAME.
     #
-    #   `Inspect_Redirection_Domain `(Default) inspects all domains in the
+    #   `INSPECT_REDIRECTION_DOMAIN`: (Default) inspects all domains in the
     #   redirection chain. The individual domains in the redirection chain
     #   must be added to the domain list.
     #
-    #   `Trust_Redirection_Domain ` inspects only the first domain in the
+    #   `TRUST_REDIRECTION_DOMAIN`: Inspects only the first domain in the
     #   redirection chain. You don't need to add the subsequent domains in
     #   the domain in the redirection list to the domain list.
     #
@@ -921,6 +924,23 @@ module Aws::Route53Resolver
     #
     #   [1]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
     #
+    # @option params [String] :dns_threat_protection
+    #   Use to create a DNS Firewall Advanced rule.
+    #
+    # @option params [String] :confidence_threshold
+    #   The confidence threshold for DNS Firewall Advanced. You must provide
+    #   this value when you create a DNS Firewall Advanced rule. The
+    #   confidence level values mean:
+    #
+    #   * `LOW`: Provides the highest detection rate for threats, but also
+    #     increases false positives.
+    #
+    #   * `MEDIUM`: Provides a balance between detecting threats and false
+    #     positives.
+    #
+    #   * `HIGH`: Detects only the most well corroborated threats with a low
+    #     rate of false positives.
+    #
     # @return [Types::CreateFirewallRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFirewallRuleResponse#firewall_rule #firewall_rule} => Types::FirewallRule
@@ -930,7 +950,7 @@ module Aws::Route53Resolver
     #   resp = client.create_firewall_rule({
     #     creator_request_id: "CreatorRequestId", # required
     #     firewall_rule_group_id: "ResourceId", # required
-    #     firewall_domain_list_id: "ResourceId", # required
+    #     firewall_domain_list_id: "ResourceId",
     #     priority: 1, # required
     #     action: "ALLOW", # required, accepts ALLOW, BLOCK, ALERT
     #     block_response: "NODATA", # accepts NODATA, NXDOMAIN, OVERRIDE
@@ -940,12 +960,15 @@ module Aws::Route53Resolver
     #     name: "Name", # required
     #     firewall_domain_redirection_action: "INSPECT_REDIRECTION_DOMAIN", # accepts INSPECT_REDIRECTION_DOMAIN, TRUST_REDIRECTION_DOMAIN
     #     qtype: "Qtype",
+    #     dns_threat_protection: "DGA", # accepts DGA, DNS_TUNNELING
+    #     confidence_threshold: "LOW", # accepts LOW, MEDIUM, HIGH
     #   })
     #
     # @example Response structure
     #
     #   resp.firewall_rule.firewall_rule_group_id #=> String
     #   resp.firewall_rule.firewall_domain_list_id #=> String
+    #   resp.firewall_rule.firewall_threat_protection_id #=> String
     #   resp.firewall_rule.name #=> String
     #   resp.firewall_rule.priority #=> Integer
     #   resp.firewall_rule.action #=> String, one of "ALLOW", "BLOCK", "ALERT"
@@ -958,6 +981,8 @@ module Aws::Route53Resolver
     #   resp.firewall_rule.modification_time #=> String
     #   resp.firewall_rule.firewall_domain_redirection_action #=> String, one of "INSPECT_REDIRECTION_DOMAIN", "TRUST_REDIRECTION_DOMAIN"
     #   resp.firewall_rule.qtype #=> String
+    #   resp.firewall_rule.dns_threat_protection #=> String, one of "DGA", "DNS_TUNNELING"
+    #   resp.firewall_rule.confidence_threshold #=> String, one of "LOW", "MEDIUM", "HIGH"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateFirewallRule AWS API Documentation
     #
@@ -1518,8 +1543,11 @@ module Aws::Route53Resolver
     #   The unique identifier of the firewall rule group that you want to
     #   delete the rule from.
     #
-    # @option params [required, String] :firewall_domain_list_id
+    # @option params [String] :firewall_domain_list_id
     #   The ID of the domain list that's used in the rule.
+    #
+    # @option params [String] :firewall_threat_protection_id
+    #   The ID that is created for a DNS Firewall Advanced rule.
     #
     # @option params [String] :qtype
     #   The DNS query type that the rule you are deleting evaluates. Allowed
@@ -1570,7 +1598,8 @@ module Aws::Route53Resolver
     #
     #   resp = client.delete_firewall_rule({
     #     firewall_rule_group_id: "ResourceId", # required
-    #     firewall_domain_list_id: "ResourceId", # required
+    #     firewall_domain_list_id: "ResourceId",
+    #     firewall_threat_protection_id: "ResourceId",
     #     qtype: "Qtype",
     #   })
     #
@@ -1578,6 +1607,7 @@ module Aws::Route53Resolver
     #
     #   resp.firewall_rule.firewall_rule_group_id #=> String
     #   resp.firewall_rule.firewall_domain_list_id #=> String
+    #   resp.firewall_rule.firewall_threat_protection_id #=> String
     #   resp.firewall_rule.name #=> String
     #   resp.firewall_rule.priority #=> Integer
     #   resp.firewall_rule.action #=> String, one of "ALLOW", "BLOCK", "ALERT"
@@ -1590,6 +1620,8 @@ module Aws::Route53Resolver
     #   resp.firewall_rule.modification_time #=> String
     #   resp.firewall_rule.firewall_domain_redirection_action #=> String, one of "INSPECT_REDIRECTION_DOMAIN", "TRUST_REDIRECTION_DOMAIN"
     #   resp.firewall_rule.qtype #=> String
+    #   resp.firewall_rule.dns_threat_protection #=> String, one of "DGA", "DNS_TUNNELING"
+    #   resp.firewall_rule.confidence_threshold #=> String, one of "LOW", "MEDIUM", "HIGH"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DeleteFirewallRule AWS API Documentation
     #
@@ -3009,9 +3041,11 @@ module Aws::Route53Resolver
     #   Optional additional filter for the rules to retrieve.
     #
     #   The action that DNS Firewall should take on a DNS query when it
-    #   matches one of the domains in the rule's domain list:
+    #   matches one of the domains in the rule's domain list, or a threat in
+    #   a DNS Firewall Advanced rule:
     #
-    #   * `ALLOW` - Permit the request to go through.
+    #   * `ALLOW` - Permit the request to go through. Not availabe for DNS
+    #     Firewall Advanced rules.
     #
     #   * `ALERT` - Permit the request to go through but send an alert to the
     #     logs.
@@ -3061,6 +3095,7 @@ module Aws::Route53Resolver
     #   resp.firewall_rules #=> Array
     #   resp.firewall_rules[0].firewall_rule_group_id #=> String
     #   resp.firewall_rules[0].firewall_domain_list_id #=> String
+    #   resp.firewall_rules[0].firewall_threat_protection_id #=> String
     #   resp.firewall_rules[0].name #=> String
     #   resp.firewall_rules[0].priority #=> Integer
     #   resp.firewall_rules[0].action #=> String, one of "ALLOW", "BLOCK", "ALERT"
@@ -3073,6 +3108,8 @@ module Aws::Route53Resolver
     #   resp.firewall_rules[0].modification_time #=> String
     #   resp.firewall_rules[0].firewall_domain_redirection_action #=> String, one of "INSPECT_REDIRECTION_DOMAIN", "TRUST_REDIRECTION_DOMAIN"
     #   resp.firewall_rules[0].qtype #=> String
+    #   resp.firewall_rules[0].dns_threat_protection #=> String, one of "DGA", "DNS_TUNNELING"
+    #   resp.firewall_rules[0].confidence_threshold #=> String, one of "LOW", "MEDIUM", "HIGH"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListFirewallRules AWS API Documentation
     #
@@ -3445,7 +3482,6 @@ module Aws::Route53Resolver
     #
     #     * `ACCESS_DENIED`: Permissions don't allow sending logs to the
     #       destination.
-    #
     #     If `Status` is a value other than `FAILED`, `ERROR` is null.
     #
     #   * `Id`: The ID of the query logging association
@@ -4243,8 +4279,11 @@ module Aws::Route53Resolver
     # @option params [required, String] :firewall_rule_group_id
     #   The unique identifier of the firewall rule group for the rule.
     #
-    # @option params [required, String] :firewall_domain_list_id
+    # @option params [String] :firewall_domain_list_id
     #   The ID of the domain list to use in the rule.
+    #
+    # @option params [String] :firewall_threat_protection_id
+    #   The DNS Firewall Advanced rule ID.
     #
     # @option params [Integer] :priority
     #   The setting that determines the processing order of the rule in the
@@ -4258,9 +4297,11 @@ module Aws::Route53Resolver
     #
     # @option params [String] :action
     #   The action that DNS Firewall should take on a DNS query when it
-    #   matches one of the domains in the rule's domain list:
+    #   matches one of the domains in the rule's domain list, or a threat in
+    #   a DNS Firewall Advanced rule:
     #
-    #   * `ALLOW` - Permit the request to go through.
+    #   * `ALLOW` - Permit the request to go through. Not available for DNS
+    #     Firewall Advanced rules.
     #
     #   * `ALERT` - Permit the request to go through but send an alert to the
     #     logs.
@@ -4303,11 +4344,11 @@ module Aws::Route53Resolver
     #   How you want the the rule to evaluate DNS redirection in the DNS
     #   redirection chain, such as CNAME or DNAME.
     #
-    #   `Inspect_Redirection_Domain `(Default) inspects all domains in the
+    #   `INSPECT_REDIRECTION_DOMAIN`: (Default) inspects all domains in the
     #   redirection chain. The individual domains in the redirection chain
     #   must be added to the domain list.
     #
-    #   `Trust_Redirection_Domain ` inspects only the first domain in the
+    #   `TRUST_REDIRECTION_DOMAIN`: Inspects only the first domain in the
     #   redirection chain. You don't need to add the subsequent domains in
     #   the domain in the redirection list to the domain list.
     #
@@ -4357,6 +4398,31 @@ module Aws::Route53Resolver
     #
     #   [1]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
     #
+    # @option params [String] :dns_threat_protection
+    #   The type of the DNS Firewall Advanced rule. Valid values are:
+    #
+    #   * `DGA`: Domain generation algorithms detection. DGAs are used by
+    #     attackers to generate a large number of domains to to launch malware
+    #     attacks.
+    #
+    #   * `DNS_TUNNELING`: DNS tunneling detection. DNS tunneling is used by
+    #     attackers to exfiltrate data from the client by using the DNS tunnel
+    #     without making a network connection to the client.
+    #
+    # @option params [String] :confidence_threshold
+    #   The confidence threshold for DNS Firewall Advanced. You must provide
+    #   this value when you create a DNS Firewall Advanced rule. The
+    #   confidence level values mean:
+    #
+    #   * `LOW`: Provides the highest detection rate for threats, but also
+    #     increases false positives.
+    #
+    #   * `MEDIUM`: Provides a balance between detecting threats and false
+    #     positives.
+    #
+    #   * `HIGH`: Detects only the most well corroborated threats with a low
+    #     rate of false positives.
+    #
     # @return [Types::UpdateFirewallRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFirewallRuleResponse#firewall_rule #firewall_rule} => Types::FirewallRule
@@ -4365,7 +4431,8 @@ module Aws::Route53Resolver
     #
     #   resp = client.update_firewall_rule({
     #     firewall_rule_group_id: "ResourceId", # required
-    #     firewall_domain_list_id: "ResourceId", # required
+    #     firewall_domain_list_id: "ResourceId",
+    #     firewall_threat_protection_id: "ResourceId",
     #     priority: 1,
     #     action: "ALLOW", # accepts ALLOW, BLOCK, ALERT
     #     block_response: "NODATA", # accepts NODATA, NXDOMAIN, OVERRIDE
@@ -4375,12 +4442,15 @@ module Aws::Route53Resolver
     #     name: "Name",
     #     firewall_domain_redirection_action: "INSPECT_REDIRECTION_DOMAIN", # accepts INSPECT_REDIRECTION_DOMAIN, TRUST_REDIRECTION_DOMAIN
     #     qtype: "Qtype",
+    #     dns_threat_protection: "DGA", # accepts DGA, DNS_TUNNELING
+    #     confidence_threshold: "LOW", # accepts LOW, MEDIUM, HIGH
     #   })
     #
     # @example Response structure
     #
     #   resp.firewall_rule.firewall_rule_group_id #=> String
     #   resp.firewall_rule.firewall_domain_list_id #=> String
+    #   resp.firewall_rule.firewall_threat_protection_id #=> String
     #   resp.firewall_rule.name #=> String
     #   resp.firewall_rule.priority #=> Integer
     #   resp.firewall_rule.action #=> String, one of "ALLOW", "BLOCK", "ALERT"
@@ -4393,6 +4463,8 @@ module Aws::Route53Resolver
     #   resp.firewall_rule.modification_time #=> String
     #   resp.firewall_rule.firewall_domain_redirection_action #=> String, one of "INSPECT_REDIRECTION_DOMAIN", "TRUST_REDIRECTION_DOMAIN"
     #   resp.firewall_rule.qtype #=> String
+    #   resp.firewall_rule.dns_threat_protection #=> String, one of "DGA", "DNS_TUNNELING"
+    #   resp.firewall_rule.confidence_threshold #=> String, one of "LOW", "MEDIUM", "HIGH"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateFirewallRule AWS API Documentation
     #
@@ -4802,7 +4874,7 @@ module Aws::Route53Resolver
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-route53resolver'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

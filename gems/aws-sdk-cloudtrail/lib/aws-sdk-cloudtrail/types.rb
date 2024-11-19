@@ -244,7 +244,6 @@ module Aws::CloudTrail
     #     * `kms.amazonaws.com`
     #
     #     * `secretsmanager.amazonaws.com`
-    #
     #   * <b> <code>eventName</code> </b> - This is an optional field that
     #     is only used for data events, management events (for event data
     #     stores only), and network activity events. You can use any
@@ -262,7 +261,6 @@ module Aws::CloudTrail
     #
     #     * For CloudTrail network activity events, the value must be
     #       `NetworkActivity`.
-    #
     #     The following are used only for event data stores:
     #
     #     * For CloudTrail Insights events, the value must be `Insight`.
@@ -274,7 +272,6 @@ module Aws::CloudTrail
     #
     #     * For events outside of Amazon Web Services, the value must be
     #       `ActivityAuditLog`.
-    #
     #   * <b> <code>eventType</code> </b> - This is an optional field
     #     available only for event data stores, which is used to filter
     #     management and data events on the event type. For information

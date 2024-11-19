@@ -248,7 +248,6 @@ module Aws::MachineLearning
     #
     #     * `InstanceIdentifier ` - A unique identifier for the Amazon RDS
     #       database instance.
-    #
     #   * DatabaseCredentials - AWS Identity and Access Management (IAM)
     #     credentials that are used to connect to the Amazon RDS database.
     #
@@ -355,7 +354,6 @@ module Aws::MachineLearning
     #
     #     * ` ClusterIdentifier` - The unique ID for the Amazon Redshift
     #       cluster.
-    #
     #   * DatabaseCredentials - The AWS Identity and Access Management (IAM)
     #     credentials that are used to connect to the Amazon Redshift
     #     database.

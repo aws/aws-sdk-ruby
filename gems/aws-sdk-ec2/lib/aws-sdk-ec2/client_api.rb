@@ -2377,6 +2377,8 @@ module Aws::EC2
     OnDemandOptions = Shapes::StructureShape.new(name: 'OnDemandOptions')
     OnDemandOptionsRequest = Shapes::StructureShape.new(name: 'OnDemandOptionsRequest')
     OperationType = Shapes::StringShape.new(name: 'OperationType')
+    OperatorRequest = Shapes::StructureShape.new(name: 'OperatorRequest')
+    OperatorResponse = Shapes::StructureShape.new(name: 'OperatorResponse')
     OrganizationArnStringList = Shapes::ListShape.new(name: 'OrganizationArnStringList')
     OrganizationalUnitArnStringList = Shapes::ListShape.new(name: 'OrganizationalUnitArnStringList')
     OutpostArn = Shapes::StringShape.new(name: 'OutpostArn')
@@ -4975,6 +4977,7 @@ module Aws::EC2
     CreateLaunchTemplateRequest.add_member(:launch_template_name, Shapes::ShapeRef.new(shape: LaunchTemplateName, required: true, location_name: "LaunchTemplateName"))
     CreateLaunchTemplateRequest.add_member(:version_description, Shapes::ShapeRef.new(shape: VersionDescription, location_name: "VersionDescription"))
     CreateLaunchTemplateRequest.add_member(:launch_template_data, Shapes::ShapeRef.new(shape: RequestLaunchTemplateData, required: true, location_name: "LaunchTemplateData"))
+    CreateLaunchTemplateRequest.add_member(:operator, Shapes::ShapeRef.new(shape: OperatorRequest, location_name: "Operator"))
     CreateLaunchTemplateRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateLaunchTemplateRequest.struct_class = Types::CreateLaunchTemplateRequest
 
@@ -5130,6 +5133,7 @@ module Aws::EC2
     CreateNetworkInterfaceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateNetworkInterfaceRequest.add_member(:enable_primary_ipv_6, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnablePrimaryIpv6"))
     CreateNetworkInterfaceRequest.add_member(:connection_tracking_specification, Shapes::ShapeRef.new(shape: ConnectionTrackingSpecificationRequest, location_name: "ConnectionTrackingSpecification"))
+    CreateNetworkInterfaceRequest.add_member(:operator, Shapes::ShapeRef.new(shape: OperatorRequest, location_name: "Operator"))
     CreateNetworkInterfaceRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, required: true, location_name: "subnetId"))
     CreateNetworkInterfaceRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     CreateNetworkInterfaceRequest.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "privateIpAddress"))
@@ -5595,6 +5599,7 @@ module Aws::EC2
     CreateVolumeRequest.add_member(:multi_attach_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "MultiAttachEnabled"))
     CreateVolumeRequest.add_member(:throughput, Shapes::ShapeRef.new(shape: Integer, location_name: "Throughput"))
     CreateVolumeRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateVolumeRequest.add_member(:operator, Shapes::ShapeRef.new(shape: OperatorRequest, location_name: "Operator"))
     CreateVolumeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     CreateVolumeRequest.struct_class = Types::CreateVolumeRequest
 
@@ -8488,6 +8493,7 @@ module Aws::EC2
     EbsInstanceBlockDevice.add_member(:volume_id, Shapes::ShapeRef.new(shape: String, location_name: "volumeId"))
     EbsInstanceBlockDevice.add_member(:associated_resource, Shapes::ShapeRef.new(shape: String, location_name: "associatedResource"))
     EbsInstanceBlockDevice.add_member(:volume_owner_id, Shapes::ShapeRef.new(shape: String, location_name: "volumeOwnerId"))
+    EbsInstanceBlockDevice.add_member(:operator, Shapes::ShapeRef.new(shape: OperatorResponse, location_name: "operator"))
     EbsInstanceBlockDevice.struct_class = Types::EbsInstanceBlockDevice
 
     EbsInstanceBlockDeviceSpecification.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, location_name: "volumeId"))
@@ -10166,6 +10172,7 @@ module Aws::EC2
     Instance.add_member(:tpm_support, Shapes::ShapeRef.new(shape: String, location_name: "tpmSupport"))
     Instance.add_member(:maintenance_options, Shapes::ShapeRef.new(shape: InstanceMaintenanceOptions, location_name: "maintenanceOptions"))
     Instance.add_member(:current_instance_boot_mode, Shapes::ShapeRef.new(shape: InstanceBootModeValues, location_name: "currentInstanceBootMode"))
+    Instance.add_member(:operator, Shapes::ShapeRef.new(shape: OperatorResponse, location_name: "operator"))
     Instance.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
     Instance.add_member(:image_id, Shapes::ShapeRef.new(shape: String, location_name: "imageId"))
     Instance.add_member(:state, Shapes::ShapeRef.new(shape: InstanceState, location_name: "instanceState"))
@@ -10328,6 +10335,7 @@ module Aws::EC2
     InstanceImageMetadata.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceOwnerId"))
     InstanceImageMetadata.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     InstanceImageMetadata.add_member(:image_metadata, Shapes::ShapeRef.new(shape: ImageMetadata, location_name: "imageMetadata"))
+    InstanceImageMetadata.add_member(:operator, Shapes::ShapeRef.new(shape: OperatorResponse, location_name: "operator"))
     InstanceImageMetadata.struct_class = Types::InstanceImageMetadata
 
     InstanceImageMetadataList.member = Shapes::ShapeRef.new(shape: InstanceImageMetadata, location_name: "item")
@@ -10411,6 +10419,7 @@ module Aws::EC2
     InstanceNetworkInterface.add_member(:ipv_4_prefixes, Shapes::ShapeRef.new(shape: InstanceIpv4PrefixList, location_name: "ipv4PrefixSet"))
     InstanceNetworkInterface.add_member(:ipv_6_prefixes, Shapes::ShapeRef.new(shape: InstanceIpv6PrefixList, location_name: "ipv6PrefixSet"))
     InstanceNetworkInterface.add_member(:connection_tracking_configuration, Shapes::ShapeRef.new(shape: ConnectionTrackingSpecificationResponse, location_name: "connectionTrackingConfiguration"))
+    InstanceNetworkInterface.add_member(:operator, Shapes::ShapeRef.new(shape: OperatorResponse, location_name: "operator"))
     InstanceNetworkInterface.struct_class = Types::InstanceNetworkInterface
 
     InstanceNetworkInterfaceAssociation.add_member(:carrier_ip, Shapes::ShapeRef.new(shape: String, location_name: "carrierIp"))
@@ -10542,6 +10551,7 @@ module Aws::EC2
 
     InstanceStatus.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
     InstanceStatus.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "outpostArn"))
+    InstanceStatus.add_member(:operator, Shapes::ShapeRef.new(shape: OperatorResponse, location_name: "operator"))
     InstanceStatus.add_member(:events, Shapes::ShapeRef.new(shape: InstanceStatusEventList, location_name: "eventsSet"))
     InstanceStatus.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
     InstanceStatus.add_member(:instance_state, Shapes::ShapeRef.new(shape: InstanceState, location_name: "instanceState"))
@@ -11084,6 +11094,7 @@ module Aws::EC2
     LaunchTemplate.add_member(:default_version_number, Shapes::ShapeRef.new(shape: Long, location_name: "defaultVersionNumber"))
     LaunchTemplate.add_member(:latest_version_number, Shapes::ShapeRef.new(shape: Long, location_name: "latestVersionNumber"))
     LaunchTemplate.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    LaunchTemplate.add_member(:operator, Shapes::ShapeRef.new(shape: OperatorResponse, location_name: "operator"))
     LaunchTemplate.struct_class = Types::LaunchTemplate
 
     LaunchTemplateAndOverridesResponse.add_member(:launch_template_specification, Shapes::ShapeRef.new(shape: FleetLaunchTemplateSpecification, location_name: "launchTemplateSpecification"))
@@ -11368,6 +11379,7 @@ module Aws::EC2
     LaunchTemplateVersion.add_member(:created_by, Shapes::ShapeRef.new(shape: String, location_name: "createdBy"))
     LaunchTemplateVersion.add_member(:default_version, Shapes::ShapeRef.new(shape: Boolean, location_name: "defaultVersion"))
     LaunchTemplateVersion.add_member(:launch_template_data, Shapes::ShapeRef.new(shape: ResponseLaunchTemplateData, location_name: "launchTemplateData"))
+    LaunchTemplateVersion.add_member(:operator, Shapes::ShapeRef.new(shape: OperatorResponse, location_name: "operator"))
     LaunchTemplateVersion.struct_class = Types::LaunchTemplateVersion
 
     LaunchTemplateVersionSet.member = Shapes::ShapeRef.new(shape: LaunchTemplateVersion, location_name: "item")
@@ -12635,6 +12647,7 @@ module Aws::EC2
     NetworkInterface.add_member(:deny_all_igw_traffic, Shapes::ShapeRef.new(shape: Boolean, location_name: "denyAllIgwTraffic"))
     NetworkInterface.add_member(:ipv_6_native, Shapes::ShapeRef.new(shape: Boolean, location_name: "ipv6Native"))
     NetworkInterface.add_member(:ipv_6_address, Shapes::ShapeRef.new(shape: String, location_name: "ipv6Address"))
+    NetworkInterface.add_member(:operator, Shapes::ShapeRef.new(shape: OperatorResponse, location_name: "operator"))
     NetworkInterface.struct_class = Types::NetworkInterface
 
     NetworkInterfaceAssociation.add_member(:allocation_id, Shapes::ShapeRef.new(shape: String, location_name: "allocationId"))
@@ -12765,6 +12778,13 @@ module Aws::EC2
     OnDemandOptionsRequest.add_member(:min_target_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "MinTargetCapacity"))
     OnDemandOptionsRequest.add_member(:max_total_price, Shapes::ShapeRef.new(shape: String, location_name: "MaxTotalPrice"))
     OnDemandOptionsRequest.struct_class = Types::OnDemandOptionsRequest
+
+    OperatorRequest.add_member(:principal, Shapes::ShapeRef.new(shape: String, location_name: "Principal"))
+    OperatorRequest.struct_class = Types::OperatorRequest
+
+    OperatorResponse.add_member(:managed, Shapes::ShapeRef.new(shape: Boolean, location_name: "managed"))
+    OperatorResponse.add_member(:principal, Shapes::ShapeRef.new(shape: String, location_name: "principal"))
+    OperatorResponse.struct_class = Types::OperatorResponse
 
     OrganizationArnStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "OrganizationArn")
 
@@ -13530,6 +13550,7 @@ module Aws::EC2
     RequestLaunchTemplateData.add_member(:private_dns_name_options, Shapes::ShapeRef.new(shape: LaunchTemplatePrivateDnsNameOptionsRequest, location_name: "PrivateDnsNameOptions"))
     RequestLaunchTemplateData.add_member(:maintenance_options, Shapes::ShapeRef.new(shape: LaunchTemplateInstanceMaintenanceOptionsRequest, location_name: "MaintenanceOptions"))
     RequestLaunchTemplateData.add_member(:disable_api_stop, Shapes::ShapeRef.new(shape: Boolean, location_name: "DisableApiStop"))
+    RequestLaunchTemplateData.add_member(:operator, Shapes::ShapeRef.new(shape: OperatorRequest, location_name: "Operator"))
     RequestLaunchTemplateData.struct_class = Types::RequestLaunchTemplateData
 
     RequestSpotFleetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -13803,6 +13824,7 @@ module Aws::EC2
     ResponseLaunchTemplateData.add_member(:private_dns_name_options, Shapes::ShapeRef.new(shape: LaunchTemplatePrivateDnsNameOptions, location_name: "privateDnsNameOptions"))
     ResponseLaunchTemplateData.add_member(:maintenance_options, Shapes::ShapeRef.new(shape: LaunchTemplateInstanceMaintenanceOptions, location_name: "maintenanceOptions"))
     ResponseLaunchTemplateData.add_member(:disable_api_stop, Shapes::ShapeRef.new(shape: Boolean, location_name: "disableApiStop"))
+    ResponseLaunchTemplateData.add_member(:operator, Shapes::ShapeRef.new(shape: OperatorResponse, location_name: "operator"))
     ResponseLaunchTemplateData.struct_class = Types::ResponseLaunchTemplateData
 
     RestorableByStringList.member = Shapes::ShapeRef.new(shape: String)
@@ -14022,6 +14044,7 @@ module Aws::EC2
     RunInstancesRequest.add_member(:maintenance_options, Shapes::ShapeRef.new(shape: InstanceMaintenanceOptionsRequest, location_name: "MaintenanceOptions"))
     RunInstancesRequest.add_member(:disable_api_stop, Shapes::ShapeRef.new(shape: Boolean, location_name: "DisableApiStop"))
     RunInstancesRequest.add_member(:enable_primary_ipv_6, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnablePrimaryIpv6"))
+    RunInstancesRequest.add_member(:operator, Shapes::ShapeRef.new(shape: OperatorRequest, location_name: "Operator"))
     RunInstancesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     RunInstancesRequest.add_member(:disable_api_termination, Shapes::ShapeRef.new(shape: Boolean, location_name: "disableApiTermination"))
     RunInstancesRequest.add_member(:instance_initiated_shutdown_behavior, Shapes::ShapeRef.new(shape: ShutdownBehavior, location_name: "instanceInitiatedShutdownBehavior"))
@@ -15708,6 +15731,7 @@ module Aws::EC2
     Volume.add_member(:multi_attach_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "multiAttachEnabled"))
     Volume.add_member(:throughput, Shapes::ShapeRef.new(shape: Integer, location_name: "throughput"))
     Volume.add_member(:sse_type, Shapes::ShapeRef.new(shape: SSEType, location_name: "sseType"))
+    Volume.add_member(:operator, Shapes::ShapeRef.new(shape: OperatorResponse, location_name: "operator"))
     Volume.add_member(:volume_id, Shapes::ShapeRef.new(shape: String, location_name: "volumeId"))
     Volume.add_member(:size, Shapes::ShapeRef.new(shape: Integer, location_name: "size"))
     Volume.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: String, location_name: "snapshotId"))

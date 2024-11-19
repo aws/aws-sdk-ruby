@@ -180,7 +180,8 @@ module Aws
                      ?publicly_accessible: bool,
                      ?serverless_v2_scaling_configuration: {
                        min_capacity: ::Float?,
-                       max_capacity: ::Float?
+                       max_capacity: ::Float?,
+                       seconds_until_auto_pause: ::Integer?
                      },
                      ?network_type: ::String,
                      ?rds_custom_cluster_configuration: {

@@ -501,6 +501,169 @@ module Aws::CustomerProfiles
       req.send_request(options)
     end
 
+    # Fetch the possible attribute values given the attribute name.
+    #
+    # @option params [required, String] :calculated_attribute_name
+    #   The unique name of the calculated attribute.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, Array<String>] :profile_ids
+    #   List of unique identifiers for customer profiles to retrieve.
+    #
+    # @option params [Types::ConditionOverrides] :condition_overrides
+    #   Overrides the condition block within the original calculated attribute
+    #   definition.
+    #
+    # @return [Types::BatchGetCalculatedAttributeForProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetCalculatedAttributeForProfileResponse#errors #errors} => Array&lt;Types::BatchGetCalculatedAttributeForProfileError&gt;
+    #   * {Types::BatchGetCalculatedAttributeForProfileResponse#calculated_attribute_values #calculated_attribute_values} => Array&lt;Types::CalculatedAttributeValue&gt;
+    #   * {Types::BatchGetCalculatedAttributeForProfileResponse#condition_overrides #condition_overrides} => Types::ConditionOverrides
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_calculated_attribute_for_profile({
+    #     calculated_attribute_name: "typeName", # required
+    #     domain_name: "name", # required
+    #     profile_ids: ["uuid"], # required
+    #     condition_overrides: {
+    #       range: {
+    #         start: 1, # required
+    #         end: 1,
+    #         unit: "DAYS", # required, accepts DAYS
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.errors #=> Array
+    #   resp.errors[0].code #=> String
+    #   resp.errors[0].message #=> String
+    #   resp.errors[0].profile_id #=> String
+    #   resp.calculated_attribute_values #=> Array
+    #   resp.calculated_attribute_values[0].calculated_attribute_name #=> String
+    #   resp.calculated_attribute_values[0].display_name #=> String
+    #   resp.calculated_attribute_values[0].is_data_partial #=> String
+    #   resp.calculated_attribute_values[0].profile_id #=> String
+    #   resp.calculated_attribute_values[0].value #=> String
+    #   resp.condition_overrides.range.start #=> Integer
+    #   resp.condition_overrides.range.end #=> Integer
+    #   resp.condition_overrides.range.unit #=> String, one of "DAYS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/BatchGetCalculatedAttributeForProfile AWS API Documentation
+    #
+    # @overload batch_get_calculated_attribute_for_profile(params = {})
+    # @param [Hash] params ({})
+    def batch_get_calculated_attribute_for_profile(params = {}, options = {})
+      req = build_request(:batch_get_calculated_attribute_for_profile, params)
+      req.send_request(options)
+    end
+
+    # Get a batch of profiles.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, Array<String>] :profile_ids
+    #   List of unique identifiers for customer profiles to retrieve.
+    #
+    # @return [Types::BatchGetProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetProfileResponse#errors #errors} => Array&lt;Types::BatchGetProfileError&gt;
+    #   * {Types::BatchGetProfileResponse#profiles #profiles} => Array&lt;Types::Profile&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_profile({
+    #     domain_name: "name", # required
+    #     profile_ids: ["uuid"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.errors #=> Array
+    #   resp.errors[0].code #=> String
+    #   resp.errors[0].message #=> String
+    #   resp.errors[0].profile_id #=> String
+    #   resp.profiles #=> Array
+    #   resp.profiles[0].profile_id #=> String
+    #   resp.profiles[0].account_number #=> String
+    #   resp.profiles[0].additional_information #=> String
+    #   resp.profiles[0].party_type #=> String, one of "INDIVIDUAL", "BUSINESS", "OTHER"
+    #   resp.profiles[0].business_name #=> String
+    #   resp.profiles[0].first_name #=> String
+    #   resp.profiles[0].middle_name #=> String
+    #   resp.profiles[0].last_name #=> String
+    #   resp.profiles[0].birth_date #=> String
+    #   resp.profiles[0].gender #=> String, one of "MALE", "FEMALE", "UNSPECIFIED"
+    #   resp.profiles[0].phone_number #=> String
+    #   resp.profiles[0].mobile_phone_number #=> String
+    #   resp.profiles[0].home_phone_number #=> String
+    #   resp.profiles[0].business_phone_number #=> String
+    #   resp.profiles[0].email_address #=> String
+    #   resp.profiles[0].personal_email_address #=> String
+    #   resp.profiles[0].business_email_address #=> String
+    #   resp.profiles[0].address.address_1 #=> String
+    #   resp.profiles[0].address.address_2 #=> String
+    #   resp.profiles[0].address.address_3 #=> String
+    #   resp.profiles[0].address.address_4 #=> String
+    #   resp.profiles[0].address.city #=> String
+    #   resp.profiles[0].address.county #=> String
+    #   resp.profiles[0].address.state #=> String
+    #   resp.profiles[0].address.province #=> String
+    #   resp.profiles[0].address.country #=> String
+    #   resp.profiles[0].address.postal_code #=> String
+    #   resp.profiles[0].shipping_address.address_1 #=> String
+    #   resp.profiles[0].shipping_address.address_2 #=> String
+    #   resp.profiles[0].shipping_address.address_3 #=> String
+    #   resp.profiles[0].shipping_address.address_4 #=> String
+    #   resp.profiles[0].shipping_address.city #=> String
+    #   resp.profiles[0].shipping_address.county #=> String
+    #   resp.profiles[0].shipping_address.state #=> String
+    #   resp.profiles[0].shipping_address.province #=> String
+    #   resp.profiles[0].shipping_address.country #=> String
+    #   resp.profiles[0].shipping_address.postal_code #=> String
+    #   resp.profiles[0].mailing_address.address_1 #=> String
+    #   resp.profiles[0].mailing_address.address_2 #=> String
+    #   resp.profiles[0].mailing_address.address_3 #=> String
+    #   resp.profiles[0].mailing_address.address_4 #=> String
+    #   resp.profiles[0].mailing_address.city #=> String
+    #   resp.profiles[0].mailing_address.county #=> String
+    #   resp.profiles[0].mailing_address.state #=> String
+    #   resp.profiles[0].mailing_address.province #=> String
+    #   resp.profiles[0].mailing_address.country #=> String
+    #   resp.profiles[0].mailing_address.postal_code #=> String
+    #   resp.profiles[0].billing_address.address_1 #=> String
+    #   resp.profiles[0].billing_address.address_2 #=> String
+    #   resp.profiles[0].billing_address.address_3 #=> String
+    #   resp.profiles[0].billing_address.address_4 #=> String
+    #   resp.profiles[0].billing_address.city #=> String
+    #   resp.profiles[0].billing_address.county #=> String
+    #   resp.profiles[0].billing_address.state #=> String
+    #   resp.profiles[0].billing_address.province #=> String
+    #   resp.profiles[0].billing_address.country #=> String
+    #   resp.profiles[0].billing_address.postal_code #=> String
+    #   resp.profiles[0].attributes #=> Hash
+    #   resp.profiles[0].attributes["string1To255"] #=> String
+    #   resp.profiles[0].found_by_items #=> Array
+    #   resp.profiles[0].found_by_items[0].key_name #=> String
+    #   resp.profiles[0].found_by_items[0].values #=> Array
+    #   resp.profiles[0].found_by_items[0].values[0] #=> String
+    #   resp.profiles[0].party_type_string #=> String
+    #   resp.profiles[0].gender_string #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/BatchGetProfile AWS API Documentation
+    #
+    # @overload batch_get_profile(params = {})
+    # @param [Hash] params ({})
+    def batch_get_profile(params = {}, options = {})
+      req = build_request(:batch_get_profile, params)
+      req.send_request(options)
+    end
+
     # Creates a new calculated attribute definition. After creation, new
     # object data ingested into Customer Profiles will be included in the
     # calculated attribute, which can be retrieved for a profile using the
@@ -533,6 +696,10 @@ module Aws::CustomerProfiles
     #   The conditions including range, object count, and threshold for the
     #   calculated attribute.
     #
+    # @option params [Types::Filter] :filter
+    #   Defines how to filter incoming objects to include part of the
+    #   Calculated Attribute.
+    #
     # @option params [required, String] :statistic
     #   The aggregation operation to perform for the calculated attribute.
     #
@@ -546,6 +713,7 @@ module Aws::CustomerProfiles
     #   * {Types::CreateCalculatedAttributeDefinitionResponse#description #description} => String
     #   * {Types::CreateCalculatedAttributeDefinitionResponse#attribute_details #attribute_details} => Types::AttributeDetails
     #   * {Types::CreateCalculatedAttributeDefinitionResponse#conditions #conditions} => Types::Conditions
+    #   * {Types::CreateCalculatedAttributeDefinitionResponse#filter #data.filter} => Types::Filter (This method conflicts with a method on Response, call it through the data member)
     #   * {Types::CreateCalculatedAttributeDefinitionResponse#statistic #statistic} => String
     #   * {Types::CreateCalculatedAttributeDefinitionResponse#created_at #created_at} => Time
     #   * {Types::CreateCalculatedAttributeDefinitionResponse#last_updated_at #last_updated_at} => Time
@@ -577,6 +745,24 @@ module Aws::CustomerProfiles
     #         operator: "EQUAL_TO", # required, accepts EQUAL_TO, GREATER_THAN, LESS_THAN, NOT_EQUAL_TO
     #       },
     #     },
+    #     filter: {
+    #       include: "ALL", # required, accepts ALL, ANY, NONE
+    #       groups: [ # required
+    #         {
+    #           type: "ALL", # required, accepts ALL, ANY, NONE
+    #           dimensions: [ # required
+    #             {
+    #               attributes: { # required
+    #                 "attributeName" => {
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH, BEFORE, AFTER, BETWEEN, NOT_BETWEEN, ON, GREATER_THAN, LESS_THAN, GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, EQUAL
+    #                   values: ["string1To255"], # required
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #     },
     #     statistic: "FIRST_OCCURRENCE", # required, accepts FIRST_OCCURRENCE, LAST_OCCURRENCE, COUNT, SUM, MINIMUM, MAXIMUM, AVERAGE, MAX_OCCURRENCE
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -596,6 +782,14 @@ module Aws::CustomerProfiles
     #   resp.conditions.object_count #=> Integer
     #   resp.conditions.threshold.value #=> String
     #   resp.conditions.threshold.operator #=> String, one of "EQUAL_TO", "GREATER_THAN", "LESS_THAN", "NOT_EQUAL_TO"
+    #   resp.data.filter.include #=> String, one of "ALL", "ANY", "NONE"
+    #   resp.data.filter.groups #=> Array
+    #   resp.data.filter.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
+    #   resp.data.filter.groups[0].dimensions #=> Array
+    #   resp.data.filter.groups[0].dimensions[0].attributes #=> Hash
+    #   resp.data.filter.groups[0].dimensions[0].attributes["attributeName"].dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH", "BEFORE", "AFTER", "BETWEEN", "NOT_BETWEEN", "ON", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN_OR_EQUAL", "EQUAL"
+    #   resp.data.filter.groups[0].dimensions[0].attributes["attributeName"].values #=> Array
+    #   resp.data.filter.groups[0].dimensions[0].attributes["attributeName"].values[0] #=> String
     #   resp.statistic #=> String, one of "FIRST_OCCURRENCE", "LAST_OCCURRENCE", "COUNT", "SUM", "MINIMUM", "MAXIMUM", "AVERAGE", "MAX_OCCURRENCE"
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
@@ -1170,6 +1364,569 @@ module Aws::CustomerProfiles
       req.send_request(options)
     end
 
+    # Creates a segment definition associated to the given domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :segment_definition_name
+    #   The unique name of the segment definition.
+    #
+    # @option params [required, String] :display_name
+    #   The display name of the segment definition.
+    #
+    # @option params [String] :description
+    #   The description of the segment definition.
+    #
+    # @option params [required, Types::SegmentGroup] :segment_groups
+    #   Specifies the base segments and dimensions for a segment definition
+    #   along with their respective relationship.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #
+    # @return [Types::CreateSegmentDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSegmentDefinitionResponse#segment_definition_name #segment_definition_name} => String
+    #   * {Types::CreateSegmentDefinitionResponse#display_name #display_name} => String
+    #   * {Types::CreateSegmentDefinitionResponse#description #description} => String
+    #   * {Types::CreateSegmentDefinitionResponse#created_at #created_at} => Time
+    #   * {Types::CreateSegmentDefinitionResponse#segment_definition_arn #segment_definition_arn} => String
+    #   * {Types::CreateSegmentDefinitionResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_segment_definition({
+    #     domain_name: "name", # required
+    #     segment_definition_name: "name", # required
+    #     display_name: "string1To255", # required
+    #     description: "sensitiveText",
+    #     segment_groups: { # required
+    #       groups: [
+    #         {
+    #           dimensions: [
+    #             {
+    #               profile_attributes: {
+    #                 account_number: {
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                   values: ["string1To255"], # required
+    #                 },
+    #                 additional_information: {
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                   values: ["string1To1000"], # required
+    #                 },
+    #                 first_name: {
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                   values: ["string1To255"], # required
+    #                 },
+    #                 last_name: {
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                   values: ["string1To255"], # required
+    #                 },
+    #                 middle_name: {
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                   values: ["string1To255"], # required
+    #                 },
+    #                 gender_string: {
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                   values: ["string1To255"], # required
+    #                 },
+    #                 party_type_string: {
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                   values: ["string1To255"], # required
+    #                 },
+    #                 birth_date: {
+    #                   dimension_type: "BEFORE", # required, accepts BEFORE, AFTER, BETWEEN, NOT_BETWEEN, ON
+    #                   values: ["String"], # required
+    #                 },
+    #                 phone_number: {
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                   values: ["string1To255"], # required
+    #                 },
+    #                 business_name: {
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                   values: ["string1To255"], # required
+    #                 },
+    #                 business_phone_number: {
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                   values: ["string1To255"], # required
+    #                 },
+    #                 home_phone_number: {
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                   values: ["string1To255"], # required
+    #                 },
+    #                 mobile_phone_number: {
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                   values: ["string1To255"], # required
+    #                 },
+    #                 email_address: {
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                   values: ["string1To255"], # required
+    #                 },
+    #                 personal_email_address: {
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                   values: ["string1To255"], # required
+    #                 },
+    #                 business_email_address: {
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                   values: ["string1To255"], # required
+    #                 },
+    #                 address: {
+    #                   city: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   country: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   county: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   postal_code: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   province: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   state: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                 },
+    #                 shipping_address: {
+    #                   city: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   country: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   county: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   postal_code: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   province: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   state: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                 },
+    #                 mailing_address: {
+    #                   city: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   country: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   county: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   postal_code: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   province: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   state: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                 },
+    #                 billing_address: {
+    #                   city: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   country: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   county: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   postal_code: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   province: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   state: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                 },
+    #                 attributes: {
+    #                   "typeName" => {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH, BEFORE, AFTER, BETWEEN, NOT_BETWEEN, ON, GREATER_THAN, LESS_THAN, GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, EQUAL
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                 },
+    #               },
+    #               calculated_attributes: {
+    #                 "typeName" => {
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH, BEFORE, AFTER, BETWEEN, NOT_BETWEEN, ON, GREATER_THAN, LESS_THAN, GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, EQUAL
+    #                   values: ["string1To255"], # required
+    #                   condition_overrides: {
+    #                     range: {
+    #                       start: 1, # required
+    #                       end: 1,
+    #                       unit: "DAYS", # required, accepts DAYS
+    #                     },
+    #                   },
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #           source_segments: [
+    #             {
+    #               segment_definition_name: "name",
+    #             },
+    #           ],
+    #           source_type: "ALL", # accepts ALL, ANY, NONE
+    #           type: "ALL", # accepts ALL, ANY, NONE
+    #         },
+    #       ],
+    #       include: "ALL", # accepts ALL, ANY, NONE
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.segment_definition_name #=> String
+    #   resp.display_name #=> String
+    #   resp.description #=> String
+    #   resp.created_at #=> Time
+    #   resp.segment_definition_arn #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateSegmentDefinition AWS API Documentation
+    #
+    # @overload create_segment_definition(params = {})
+    # @param [Hash] params ({})
+    def create_segment_definition(params = {}, options = {})
+      req = build_request(:create_segment_definition, params)
+      req.send_request(options)
+    end
+
+    # Creates a segment estimate query.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, Types::SegmentGroupStructure] :segment_query
+    #   The segment query for calculating a segment estimate.
+    #
+    # @return [Types::CreateSegmentEstimateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSegmentEstimateResponse#domain_name #domain_name} => String
+    #   * {Types::CreateSegmentEstimateResponse#estimate_id #estimate_id} => String
+    #   * {Types::CreateSegmentEstimateResponse#status_code #status_code} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_segment_estimate({
+    #     domain_name: "name", # required
+    #     segment_query: { # required
+    #       groups: [
+    #         {
+    #           dimensions: [
+    #             {
+    #               profile_attributes: {
+    #                 account_number: {
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                   values: ["string1To255"], # required
+    #                 },
+    #                 additional_information: {
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                   values: ["string1To1000"], # required
+    #                 },
+    #                 first_name: {
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                   values: ["string1To255"], # required
+    #                 },
+    #                 last_name: {
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                   values: ["string1To255"], # required
+    #                 },
+    #                 middle_name: {
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                   values: ["string1To255"], # required
+    #                 },
+    #                 gender_string: {
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                   values: ["string1To255"], # required
+    #                 },
+    #                 party_type_string: {
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                   values: ["string1To255"], # required
+    #                 },
+    #                 birth_date: {
+    #                   dimension_type: "BEFORE", # required, accepts BEFORE, AFTER, BETWEEN, NOT_BETWEEN, ON
+    #                   values: ["String"], # required
+    #                 },
+    #                 phone_number: {
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                   values: ["string1To255"], # required
+    #                 },
+    #                 business_name: {
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                   values: ["string1To255"], # required
+    #                 },
+    #                 business_phone_number: {
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                   values: ["string1To255"], # required
+    #                 },
+    #                 home_phone_number: {
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                   values: ["string1To255"], # required
+    #                 },
+    #                 mobile_phone_number: {
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                   values: ["string1To255"], # required
+    #                 },
+    #                 email_address: {
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                   values: ["string1To255"], # required
+    #                 },
+    #                 personal_email_address: {
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                   values: ["string1To255"], # required
+    #                 },
+    #                 business_email_address: {
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                   values: ["string1To255"], # required
+    #                 },
+    #                 address: {
+    #                   city: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   country: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   county: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   postal_code: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   province: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   state: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                 },
+    #                 shipping_address: {
+    #                   city: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   country: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   county: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   postal_code: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   province: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   state: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                 },
+    #                 mailing_address: {
+    #                   city: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   country: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   county: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   postal_code: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   province: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   state: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                 },
+    #                 billing_address: {
+    #                   city: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   country: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   county: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   postal_code: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   province: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                   state: {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                 },
+    #                 attributes: {
+    #                   "typeName" => {
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH, BEFORE, AFTER, BETWEEN, NOT_BETWEEN, ON, GREATER_THAN, LESS_THAN, GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, EQUAL
+    #                     values: ["string1To255"], # required
+    #                   },
+    #                 },
+    #               },
+    #               calculated_attributes: {
+    #                 "typeName" => {
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH, BEFORE, AFTER, BETWEEN, NOT_BETWEEN, ON, GREATER_THAN, LESS_THAN, GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, EQUAL
+    #                   values: ["string1To255"], # required
+    #                   condition_overrides: {
+    #                     range: {
+    #                       start: 1, # required
+    #                       end: 1,
+    #                       unit: "DAYS", # required, accepts DAYS
+    #                     },
+    #                   },
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #           source_segments: [
+    #             {
+    #               segment_definition_name: "name",
+    #             },
+    #           ],
+    #           source_type: "ALL", # accepts ALL, ANY, NONE
+    #           type: "ALL", # accepts ALL, ANY, NONE
+    #         },
+    #       ],
+    #       include: "ALL", # accepts ALL, ANY, NONE
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_name #=> String
+    #   resp.estimate_id #=> String
+    #   resp.status_code #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateSegmentEstimate AWS API Documentation
+    #
+    # @overload create_segment_estimate(params = {})
+    # @param [Hash] params ({})
+    def create_segment_estimate(params = {}, options = {})
+      req = build_request(:create_segment_estimate, params)
+      req.send_request(options)
+    end
+
+    # Triggers a job to export a segment to a specified destination.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :segment_definition_name
+    #   The name of the segment definition used in this snapshot request.
+    #
+    # @option params [required, String] :data_format
+    #   The format in which the segment will be exported.
+    #
+    # @option params [String] :encryption_key
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   exported segment.
+    #
+    # @option params [String] :role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that allows Customer
+    #   Profiles service principal to assume the role for conducting KMS and
+    #   S3 operations.
+    #
+    # @option params [String] :destination_uri
+    #   The destination to which the segment will be exported. This field must
+    #   be provided if the request is not submitted from the Amazon Connect
+    #   Admin Website.
+    #
+    # @return [Types::CreateSegmentSnapshotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSegmentSnapshotResponse#snapshot_id #snapshot_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_segment_snapshot({
+    #     domain_name: "name", # required
+    #     segment_definition_name: "name", # required
+    #     data_format: "CSV", # required, accepts CSV, JSONL, ORC
+    #     encryption_key: "encryptionKey",
+    #     role_arn: "RoleArn",
+    #     destination_uri: "string1To255",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.snapshot_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateSegmentSnapshot AWS API Documentation
+    #
+    # @overload create_segment_snapshot(params = {})
+    # @param [Hash] params ({})
+    def create_segment_snapshot(params = {}, options = {})
+      req = build_request(:create_segment_snapshot, params)
+      req.send_request(options)
+    end
+
     # Deletes an existing calculated attribute definition. Note that
     # deleting a default calculated attribute is possible, however once
     # deleted, you will be unable to undo that action and will need to
@@ -1437,6 +2194,38 @@ module Aws::CustomerProfiles
       req.send_request(options)
     end
 
+    # Deletes a segment definition from the domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :segment_definition_name
+    #   The unique name of the segment definition.
+    #
+    # @return [Types::DeleteSegmentDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteSegmentDefinitionResponse#message #message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_segment_definition({
+    #     domain_name: "name", # required
+    #     segment_definition_name: "name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DeleteSegmentDefinition AWS API Documentation
+    #
+    # @overload delete_segment_definition(params = {})
+    # @param [Hash] params ({})
+    def delete_segment_definition(params = {}, options = {})
+      req = build_request(:delete_segment_definition, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified workflow and all its corresponding resources.
     # This is an async process.
     #
@@ -1495,7 +2284,7 @@ module Aws::CustomerProfiles
     #   resp.detected_profile_object_types[0].keys #=> Hash
     #   resp.detected_profile_object_types[0].keys["name"] #=> Array
     #   resp.detected_profile_object_types[0].keys["name"][0].standard_identifiers #=> Array
-    #   resp.detected_profile_object_types[0].keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY", "ORDER"
+    #   resp.detected_profile_object_types[0].keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "ORDER", "COMMUNICATION_RECORD", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
     #   resp.detected_profile_object_types[0].keys["name"][0].field_names #=> Array
     #   resp.detected_profile_object_types[0].keys["name"][0].field_names[0] #=> String
     #
@@ -1595,6 +2384,7 @@ module Aws::CustomerProfiles
     #   * {Types::GetCalculatedAttributeDefinitionResponse#created_at #created_at} => Time
     #   * {Types::GetCalculatedAttributeDefinitionResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::GetCalculatedAttributeDefinitionResponse#statistic #statistic} => String
+    #   * {Types::GetCalculatedAttributeDefinitionResponse#filter #data.filter} => Types::Filter (This method conflicts with a method on Response, call it through the data member)
     #   * {Types::GetCalculatedAttributeDefinitionResponse#conditions #conditions} => Types::Conditions
     #   * {Types::GetCalculatedAttributeDefinitionResponse#attribute_details #attribute_details} => Types::AttributeDetails
     #   * {Types::GetCalculatedAttributeDefinitionResponse#tags #tags} => Hash&lt;String,String&gt;
@@ -1614,6 +2404,14 @@ module Aws::CustomerProfiles
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
     #   resp.statistic #=> String, one of "FIRST_OCCURRENCE", "LAST_OCCURRENCE", "COUNT", "SUM", "MINIMUM", "MAXIMUM", "AVERAGE", "MAX_OCCURRENCE"
+    #   resp.data.filter.include #=> String, one of "ALL", "ANY", "NONE"
+    #   resp.data.filter.groups #=> Array
+    #   resp.data.filter.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
+    #   resp.data.filter.groups[0].dimensions #=> Array
+    #   resp.data.filter.groups[0].dimensions[0].attributes #=> Hash
+    #   resp.data.filter.groups[0].dimensions[0].attributes["attributeName"].dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH", "BEFORE", "AFTER", "BETWEEN", "NOT_BETWEEN", "ON", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN_OR_EQUAL", "EQUAL"
+    #   resp.data.filter.groups[0].dimensions[0].attributes["attributeName"].values #=> Array
+    #   resp.data.filter.groups[0].dimensions[0].attributes["attributeName"].values[0] #=> String
     #   resp.conditions.range.value #=> Integer
     #   resp.conditions.range.unit #=> String, one of "DAYS"
     #   resp.conditions.object_count #=> Integer
@@ -2070,7 +2868,7 @@ module Aws::CustomerProfiles
     #   resp.keys #=> Hash
     #   resp.keys["name"] #=> Array
     #   resp.keys["name"][0].standard_identifiers #=> Array
-    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY", "ORDER"
+    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "ORDER", "COMMUNICATION_RECORD", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
     #   resp.keys["name"][0].field_names #=> Array
     #   resp.keys["name"][0].field_names[0] #=> String
     #   resp.created_at #=> Time
@@ -2128,7 +2926,7 @@ module Aws::CustomerProfiles
     #   resp.keys #=> Hash
     #   resp.keys["name"] #=> Array
     #   resp.keys["name"][0].standard_identifiers #=> Array
-    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY", "ORDER"
+    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "ORDER", "COMMUNICATION_RECORD", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
     #   resp.keys["name"][0].field_names #=> Array
     #   resp.keys["name"][0].field_names[0] #=> String
     #
@@ -2138,6 +2936,389 @@ module Aws::CustomerProfiles
     # @param [Hash] params ({})
     def get_profile_object_type_template(params = {}, options = {})
       req = build_request(:get_profile_object_type_template, params)
+      req.send_request(options)
+    end
+
+    # Gets a segment definition from the domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :segment_definition_name
+    #   The unique name of the segment definition.
+    #
+    # @return [Types::GetSegmentDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSegmentDefinitionResponse#segment_definition_name #segment_definition_name} => String
+    #   * {Types::GetSegmentDefinitionResponse#display_name #display_name} => String
+    #   * {Types::GetSegmentDefinitionResponse#description #description} => String
+    #   * {Types::GetSegmentDefinitionResponse#segment_groups #segment_groups} => Types::SegmentGroup
+    #   * {Types::GetSegmentDefinitionResponse#segment_definition_arn #segment_definition_arn} => String
+    #   * {Types::GetSegmentDefinitionResponse#created_at #created_at} => Time
+    #   * {Types::GetSegmentDefinitionResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_segment_definition({
+    #     domain_name: "name", # required
+    #     segment_definition_name: "name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.segment_definition_name #=> String
+    #   resp.display_name #=> String
+    #   resp.description #=> String
+    #   resp.segment_groups.groups #=> Array
+    #   resp.segment_groups.groups[0].dimensions #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.account_number.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.account_number.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.account_number.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.additional_information.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.additional_information.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.additional_information.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.first_name.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.first_name.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.first_name.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.last_name.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.last_name.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.last_name.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.middle_name.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.middle_name.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.middle_name.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.gender_string.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.gender_string.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.gender_string.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.party_type_string.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.party_type_string.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.party_type_string.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.birth_date.dimension_type #=> String, one of "BEFORE", "AFTER", "BETWEEN", "NOT_BETWEEN", "ON"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.birth_date.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.birth_date.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.phone_number.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.phone_number.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.phone_number.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.business_name.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.business_name.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.business_name.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.business_phone_number.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.business_phone_number.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.business_phone_number.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.home_phone_number.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.home_phone_number.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.home_phone_number.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.mobile_phone_number.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.mobile_phone_number.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.mobile_phone_number.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.email_address.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.email_address.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.email_address.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.personal_email_address.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.personal_email_address.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.personal_email_address.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.business_email_address.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.business_email_address.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.business_email_address.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.address.city.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.address.city.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.address.city.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.address.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.address.country.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.address.country.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.address.county.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.address.county.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.address.county.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.address.postal_code.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.address.postal_code.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.address.postal_code.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.address.province.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.address.province.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.address.province.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.address.state.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.address.state.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.address.state.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.shipping_address.city.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.shipping_address.city.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.shipping_address.city.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.shipping_address.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.shipping_address.country.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.shipping_address.country.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.shipping_address.county.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.shipping_address.county.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.shipping_address.county.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.shipping_address.postal_code.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.shipping_address.postal_code.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.shipping_address.postal_code.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.shipping_address.province.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.shipping_address.province.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.shipping_address.province.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.shipping_address.state.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.shipping_address.state.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.shipping_address.state.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.mailing_address.city.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.mailing_address.city.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.mailing_address.city.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.mailing_address.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.mailing_address.country.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.mailing_address.country.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.mailing_address.county.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.mailing_address.county.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.mailing_address.county.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.mailing_address.postal_code.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.mailing_address.postal_code.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.mailing_address.postal_code.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.mailing_address.province.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.mailing_address.province.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.mailing_address.province.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.mailing_address.state.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.mailing_address.state.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.mailing_address.state.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.billing_address.city.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.billing_address.city.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.billing_address.city.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.billing_address.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.billing_address.country.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.billing_address.country.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.billing_address.county.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.billing_address.county.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.billing_address.county.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.billing_address.postal_code.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.billing_address.postal_code.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.billing_address.postal_code.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.billing_address.province.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.billing_address.province.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.billing_address.province.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.billing_address.state.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.billing_address.state.values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.billing_address.state.values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.attributes #=> Hash
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.attributes["typeName"].dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH", "BEFORE", "AFTER", "BETWEEN", "NOT_BETWEEN", "ON", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN_OR_EQUAL", "EQUAL"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.attributes["typeName"].values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.attributes["typeName"].values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].calculated_attributes #=> Hash
+    #   resp.segment_groups.groups[0].dimensions[0].calculated_attributes["typeName"].dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH", "BEFORE", "AFTER", "BETWEEN", "NOT_BETWEEN", "ON", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN_OR_EQUAL", "EQUAL"
+    #   resp.segment_groups.groups[0].dimensions[0].calculated_attributes["typeName"].values #=> Array
+    #   resp.segment_groups.groups[0].dimensions[0].calculated_attributes["typeName"].values[0] #=> String
+    #   resp.segment_groups.groups[0].dimensions[0].calculated_attributes["typeName"].condition_overrides.range.start #=> Integer
+    #   resp.segment_groups.groups[0].dimensions[0].calculated_attributes["typeName"].condition_overrides.range.end #=> Integer
+    #   resp.segment_groups.groups[0].dimensions[0].calculated_attributes["typeName"].condition_overrides.range.unit #=> String, one of "DAYS"
+    #   resp.segment_groups.groups[0].source_segments #=> Array
+    #   resp.segment_groups.groups[0].source_segments[0].segment_definition_name #=> String
+    #   resp.segment_groups.groups[0].source_type #=> String, one of "ALL", "ANY", "NONE"
+    #   resp.segment_groups.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
+    #   resp.segment_groups.include #=> String, one of "ALL", "ANY", "NONE"
+    #   resp.segment_definition_arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetSegmentDefinition AWS API Documentation
+    #
+    # @overload get_segment_definition(params = {})
+    # @param [Hash] params ({})
+    def get_segment_definition(params = {}, options = {})
+      req = build_request(:get_segment_definition, params)
+      req.send_request(options)
+    end
+
+    # Gets the result of a segment estimate query.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :estimate_id
+    #   The query Id passed by a previous `CreateSegmentEstimate` operation.
+    #
+    # @return [Types::GetSegmentEstimateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSegmentEstimateResponse#domain_name #domain_name} => String
+    #   * {Types::GetSegmentEstimateResponse#estimate_id #estimate_id} => String
+    #   * {Types::GetSegmentEstimateResponse#status #status} => String
+    #   * {Types::GetSegmentEstimateResponse#estimate #estimate} => String
+    #   * {Types::GetSegmentEstimateResponse#message #message} => String
+    #   * {Types::GetSegmentEstimateResponse#status_code #status_code} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_segment_estimate({
+    #     domain_name: "name", # required
+    #     estimate_id: "string1To255", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_name #=> String
+    #   resp.estimate_id #=> String
+    #   resp.status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED"
+    #   resp.estimate #=> String
+    #   resp.message #=> String
+    #   resp.status_code #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetSegmentEstimate AWS API Documentation
+    #
+    # @overload get_segment_estimate(params = {})
+    # @param [Hash] params ({})
+    def get_segment_estimate(params = {}, options = {})
+      req = build_request(:get_segment_estimate, params)
+      req.send_request(options)
+    end
+
+    # Determines if the given profiles are within a segment.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :segment_definition_name
+    #   The Id of the wanted segment. Needs to be a valid, and existing
+    #   segment Id.
+    #
+    # @option params [required, Array<String>] :profile_ids
+    #   The list of profile IDs to query for.
+    #
+    # @return [Types::GetSegmentMembershipResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSegmentMembershipResponse#segment_definition_name #segment_definition_name} => String
+    #   * {Types::GetSegmentMembershipResponse#profiles #profiles} => Array&lt;Types::ProfileQueryResult&gt;
+    #   * {Types::GetSegmentMembershipResponse#failures #failures} => Array&lt;Types::ProfileQueryFailures&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_segment_membership({
+    #     domain_name: "name", # required
+    #     segment_definition_name: "name", # required
+    #     profile_ids: ["uuid"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.segment_definition_name #=> String
+    #   resp.profiles #=> Array
+    #   resp.profiles[0].profile_id #=> String
+    #   resp.profiles[0].query_result #=> String, one of "PRESENT", "ABSENT"
+    #   resp.profiles[0].profile.profile_id #=> String
+    #   resp.profiles[0].profile.account_number #=> String
+    #   resp.profiles[0].profile.additional_information #=> String
+    #   resp.profiles[0].profile.party_type #=> String, one of "INDIVIDUAL", "BUSINESS", "OTHER"
+    #   resp.profiles[0].profile.business_name #=> String
+    #   resp.profiles[0].profile.first_name #=> String
+    #   resp.profiles[0].profile.middle_name #=> String
+    #   resp.profiles[0].profile.last_name #=> String
+    #   resp.profiles[0].profile.birth_date #=> String
+    #   resp.profiles[0].profile.gender #=> String, one of "MALE", "FEMALE", "UNSPECIFIED"
+    #   resp.profiles[0].profile.phone_number #=> String
+    #   resp.profiles[0].profile.mobile_phone_number #=> String
+    #   resp.profiles[0].profile.home_phone_number #=> String
+    #   resp.profiles[0].profile.business_phone_number #=> String
+    #   resp.profiles[0].profile.email_address #=> String
+    #   resp.profiles[0].profile.personal_email_address #=> String
+    #   resp.profiles[0].profile.business_email_address #=> String
+    #   resp.profiles[0].profile.address.address_1 #=> String
+    #   resp.profiles[0].profile.address.address_2 #=> String
+    #   resp.profiles[0].profile.address.address_3 #=> String
+    #   resp.profiles[0].profile.address.address_4 #=> String
+    #   resp.profiles[0].profile.address.city #=> String
+    #   resp.profiles[0].profile.address.county #=> String
+    #   resp.profiles[0].profile.address.state #=> String
+    #   resp.profiles[0].profile.address.province #=> String
+    #   resp.profiles[0].profile.address.country #=> String
+    #   resp.profiles[0].profile.address.postal_code #=> String
+    #   resp.profiles[0].profile.shipping_address.address_1 #=> String
+    #   resp.profiles[0].profile.shipping_address.address_2 #=> String
+    #   resp.profiles[0].profile.shipping_address.address_3 #=> String
+    #   resp.profiles[0].profile.shipping_address.address_4 #=> String
+    #   resp.profiles[0].profile.shipping_address.city #=> String
+    #   resp.profiles[0].profile.shipping_address.county #=> String
+    #   resp.profiles[0].profile.shipping_address.state #=> String
+    #   resp.profiles[0].profile.shipping_address.province #=> String
+    #   resp.profiles[0].profile.shipping_address.country #=> String
+    #   resp.profiles[0].profile.shipping_address.postal_code #=> String
+    #   resp.profiles[0].profile.mailing_address.address_1 #=> String
+    #   resp.profiles[0].profile.mailing_address.address_2 #=> String
+    #   resp.profiles[0].profile.mailing_address.address_3 #=> String
+    #   resp.profiles[0].profile.mailing_address.address_4 #=> String
+    #   resp.profiles[0].profile.mailing_address.city #=> String
+    #   resp.profiles[0].profile.mailing_address.county #=> String
+    #   resp.profiles[0].profile.mailing_address.state #=> String
+    #   resp.profiles[0].profile.mailing_address.province #=> String
+    #   resp.profiles[0].profile.mailing_address.country #=> String
+    #   resp.profiles[0].profile.mailing_address.postal_code #=> String
+    #   resp.profiles[0].profile.billing_address.address_1 #=> String
+    #   resp.profiles[0].profile.billing_address.address_2 #=> String
+    #   resp.profiles[0].profile.billing_address.address_3 #=> String
+    #   resp.profiles[0].profile.billing_address.address_4 #=> String
+    #   resp.profiles[0].profile.billing_address.city #=> String
+    #   resp.profiles[0].profile.billing_address.county #=> String
+    #   resp.profiles[0].profile.billing_address.state #=> String
+    #   resp.profiles[0].profile.billing_address.province #=> String
+    #   resp.profiles[0].profile.billing_address.country #=> String
+    #   resp.profiles[0].profile.billing_address.postal_code #=> String
+    #   resp.profiles[0].profile.attributes #=> Hash
+    #   resp.profiles[0].profile.attributes["string1To255"] #=> String
+    #   resp.profiles[0].profile.found_by_items #=> Array
+    #   resp.profiles[0].profile.found_by_items[0].key_name #=> String
+    #   resp.profiles[0].profile.found_by_items[0].values #=> Array
+    #   resp.profiles[0].profile.found_by_items[0].values[0] #=> String
+    #   resp.profiles[0].profile.party_type_string #=> String
+    #   resp.profiles[0].profile.gender_string #=> String
+    #   resp.failures #=> Array
+    #   resp.failures[0].profile_id #=> String
+    #   resp.failures[0].message #=> String
+    #   resp.failures[0].status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetSegmentMembership AWS API Documentation
+    #
+    # @overload get_segment_membership(params = {})
+    # @param [Hash] params ({})
+    def get_segment_membership(params = {}, options = {})
+      req = build_request(:get_segment_membership, params)
+      req.send_request(options)
+    end
+
+    # Retrieve the latest status of a segment snapshot.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique identifier of the domain.
+    #
+    # @option params [required, String] :segment_definition_name
+    #   The unique name of the segment definition.
+    #
+    # @option params [required, String] :snapshot_id
+    #   The unique identifier of the segment snapshot.
+    #
+    # @return [Types::GetSegmentSnapshotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSegmentSnapshotResponse#snapshot_id #snapshot_id} => String
+    #   * {Types::GetSegmentSnapshotResponse#status #status} => String
+    #   * {Types::GetSegmentSnapshotResponse#status_message #status_message} => String
+    #   * {Types::GetSegmentSnapshotResponse#data_format #data_format} => String
+    #   * {Types::GetSegmentSnapshotResponse#encryption_key #encryption_key} => String
+    #   * {Types::GetSegmentSnapshotResponse#role_arn #role_arn} => String
+    #   * {Types::GetSegmentSnapshotResponse#destination_uri #destination_uri} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_segment_snapshot({
+    #     domain_name: "name", # required
+    #     segment_definition_name: "name", # required
+    #     snapshot_id: "uuid", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.snapshot_id #=> String
+    #   resp.status #=> String, one of "COMPLETED", "IN_PROGRESS", "FAILED"
+    #   resp.status_message #=> String
+    #   resp.data_format #=> String, one of "CSV", "JSONL", "ORC"
+    #   resp.encryption_key #=> String
+    #   resp.role_arn #=> String
+    #   resp.destination_uri #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetSegmentSnapshot AWS API Documentation
+    #
+    # @overload get_segment_snapshot(params = {})
+    # @param [Hash] params ({})
+    def get_segment_snapshot(params = {}, options = {})
+      req = build_request(:get_segment_snapshot, params)
       req.send_request(options)
     end
 
@@ -2172,6 +3353,8 @@ module Aws::CustomerProfiles
     #   * {Types::GetSimilarProfilesResponse#rule_level #rule_level} => Integer
     #   * {Types::GetSimilarProfilesResponse#confidence_score #confidence_score} => Float
     #   * {Types::GetSimilarProfilesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2657,6 +3840,91 @@ module Aws::CustomerProfiles
       req.send_request(options)
     end
 
+    # Fetch the possible attribute values given the attribute name.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from the previous call.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects returned per page.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique identifier of the domain.
+    #
+    # @option params [required, String] :object_type_name
+    #   The name of the profile object type.
+    #
+    # @return [Types::ListObjectTypeAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListObjectTypeAttributesResponse#items #items} => Array&lt;Types::ListObjectTypeAttributeItem&gt;
+    #   * {Types::ListObjectTypeAttributesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_object_type_attributes({
+    #     next_token: "token",
+    #     max_results: 1,
+    #     domain_name: "name", # required
+    #     object_type_name: "typeName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].attribute_name #=> String
+    #   resp.items[0].last_updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListObjectTypeAttributes AWS API Documentation
+    #
+    # @overload list_object_type_attributes(params = {})
+    # @param [Hash] params ({})
+    def list_object_type_attributes(params = {}, options = {})
+      req = build_request(:list_object_type_attributes, params)
+      req.send_request(options)
+    end
+
+    # Fetch the possible attribute values given the attribute name.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique identifier of the domain.
+    #
+    # @option params [required, String] :attribute_name
+    #   The attribute name.
+    #
+    # @return [Types::ProfileAttributeValuesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ProfileAttributeValuesResponse#domain_name #domain_name} => String
+    #   * {Types::ProfileAttributeValuesResponse#attribute_name #attribute_name} => String
+    #   * {Types::ProfileAttributeValuesResponse#items #items} => Array&lt;Types::AttributeValueItem&gt;
+    #   * {Types::ProfileAttributeValuesResponse#status_code #status_code} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_profile_attribute_values({
+    #     domain_name: "name", # required
+    #     attribute_name: "string1To255", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_name #=> String
+    #   resp.attribute_name #=> String
+    #   resp.items #=> Array
+    #   resp.items[0].value #=> String
+    #   resp.status_code #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListProfileAttributeValues AWS API Documentation
+    #
+    # @overload list_profile_attribute_values(params = {})
+    # @param [Hash] params ({})
+    def list_profile_attribute_values(params = {}, options = {})
+      req = build_request(:list_profile_attribute_values, params)
+      req.send_request(options)
+    end
+
     # Lists all of the template information for object types.
     #
     # @option params [String] :next_token
@@ -2816,6 +4084,8 @@ module Aws::CustomerProfiles
     #   * {Types::ListRuleBasedMatchesResponse#match_ids #match_ids} => Array&lt;String&gt;
     #   * {Types::ListRuleBasedMatchesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_rule_based_matches({
@@ -2836,6 +4106,53 @@ module Aws::CustomerProfiles
     # @param [Hash] params ({})
     def list_rule_based_matches(params = {}, options = {})
       req = build_request(:list_rule_based_matches, params)
+      req.send_request(options)
+    end
+
+    # Lists all segment definitions under a domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique identifier of the domain.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects returned per page.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from the previous call.
+    #
+    # @return [Types::ListSegmentDefinitionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSegmentDefinitionsResponse#next_token #next_token} => String
+    #   * {Types::ListSegmentDefinitionsResponse#items #items} => Array&lt;Types::SegmentDefinitionItem&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_segment_definitions({
+    #     domain_name: "name", # required
+    #     max_results: 1,
+    #     next_token: "token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.items #=> Array
+    #   resp.items[0].segment_definition_name #=> String
+    #   resp.items[0].display_name #=> String
+    #   resp.items[0].description #=> String
+    #   resp.items[0].segment_definition_arn #=> String
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListSegmentDefinitions AWS API Documentation
+    #
+    # @overload list_segment_definitions(params = {})
+    # @param [Hash] params ({})
+    def list_segment_definitions(params = {}, options = {})
+      req = build_request(:list_segment_definitions, params)
       req.send_request(options)
     end
 
@@ -3338,7 +4655,7 @@ module Aws::CustomerProfiles
     #     keys: {
     #       "name" => [
     #         {
-    #           standard_identifiers: ["PROFILE"], # accepts PROFILE, ASSET, CASE, UNIQUE, SECONDARY, LOOKUP_ONLY, NEW_ONLY, ORDER
+    #           standard_identifiers: ["PROFILE"], # accepts PROFILE, ASSET, CASE, ORDER, COMMUNICATION_RECORD, UNIQUE, SECONDARY, LOOKUP_ONLY, NEW_ONLY
     #           field_names: ["name"],
     #         },
     #       ],
@@ -3366,7 +4683,7 @@ module Aws::CustomerProfiles
     #   resp.keys #=> Hash
     #   resp.keys["name"] #=> Array
     #   resp.keys["name"][0].standard_identifiers #=> Array
-    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY", "ORDER"
+    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "ORDER", "COMMUNICATION_RECORD", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
     #   resp.keys["name"][0].field_names #=> Array
     #   resp.keys["name"][0].field_names[0] #=> String
     #   resp.created_at #=> Time
@@ -4089,7 +5406,7 @@ module Aws::CustomerProfiles
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-customerprofiles'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

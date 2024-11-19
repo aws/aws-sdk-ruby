@@ -16,7 +16,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     class AccessDeniedException < Struct.new(
-      :message)
+      :message,
+      :event_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -743,6 +744,9 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] data_type
     #   The data type of the asset model property.
+    #
+    #   If you specify `STRUCT`, you must also specify `dataTypeSpec` to
+    #   identify the type of the structure for this property.
     #   @return [String]
     #
     # @!attribute [rw] data_type_spec
@@ -2308,6 +2312,25 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # Contains text content to which the SiteWise Assistant refers to, and
+    # generate the final response. It also contains information about the
+    # source.
+    #
+    # @!attribute [rw] reference
+    #   Contains information about the data source.
+    #   @return [Types::Reference]
+    #
+    # @!attribute [rw] content
+    #   Contains the cited text from the data source.
+    #   @return [Types::Content]
+    #
+    class Citation < Struct.new(
+      :reference,
+      :content)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A description of the column in the query results.
     #
     # @!attribute [rw] name
@@ -2481,7 +2504,20 @@ module Aws::IoTSiteWise
     class ConflictingOperationException < Struct.new(
       :message,
       :resource_id,
-      :resource_arn)
+      :resource_arn,
+      :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the cited text from the data source.
+    #
+    # @!attribute [rw] text
+    #   The cited text from the data source.
+    #   @return [String]
+    #
+    class Content < Struct.new(
+      :text)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3040,13 +3076,18 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] dashboard_definition
-    #   The dashboard definition specified in a JSON literal. For detailed
-    #   information, see [Creating dashboards (CLI)][1] in the *IoT SiteWise
-    #   User Guide*.
+    #   The dashboard definition specified in a JSON literal.
+    #
+    #   * IoT SiteWise Monitor (Classic) see [Create dashboards (CLI)][1]
+    #
+    #   * IoT SiteWise Monitor (AI-aware) see [Create dashboards (CLI)][2]
+    #
+    #   in the *IoT SiteWise User Guide*
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-dashboards-using-aws-cli.html
+    #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-dashboards-ai-dashboard-cli.html
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -3096,6 +3137,80 @@ module Aws::IoTSiteWise
     class CreateDashboardResponse < Struct.new(
       :dashboard_id,
       :dashboard_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dataset_id
+    #   The ID of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_name
+    #   The name of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_description
+    #   A description about the dataset, and its functionality.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_source
+    #   The data source for the dataset.
+    #   @return [Types::DatasetSource]
+    #
+    # @!attribute [rw] client_token
+    #   A unique case-sensitive identifier that you can provide to ensure
+    #   the idempotency of the request. Don't reuse this client token if a
+    #   new idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of key-value pairs that contain metadata for the access
+    #   policy. For more information, see [Tagging your IoT SiteWise
+    #   resources][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html
+    #   @return [Hash<String,String>]
+    #
+    class CreateDatasetRequest < Struct.new(
+      :dataset_id,
+      :dataset_name,
+      :dataset_description,
+      :dataset_source,
+      :client_token,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dataset_id
+    #   The ID of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_arn
+    #   The [ARN][1] of the dataset. The format is
+    #   `arn:${Partition}:iotsitewise:${Region}:${Account}:dataset/${DatasetId}`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_status
+    #   The status of the dataset. This contains the state and any error
+    #   messages. State is `CREATING` after a successfull call to this API,
+    #   and any associated error message. The state is `ACTIVE` when ready
+    #   to use.
+    #   @return [Types::DatasetStatus]
+    #
+    class CreateDatasetResponse < Struct.new(
+      :dataset_id,
+      :dataset_arn,
+      :dataset_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3245,6 +3360,19 @@ module Aws::IoTSiteWise
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/appguide/monitor-alarms.html
     #   @return [Types::Alarms]
     #
+    # @!attribute [rw] portal_type
+    #   Define the type of portal. The value for IoT SiteWise Monitor
+    #   (Classic) is `SITEWISE_PORTAL_V1`. The value for IoT SiteWise
+    #   Monitor (AI-aware) is `SITEWISE_PORTAL_V2`.
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_type_configuration
+    #   The configuration entry associated with the specific portal type.
+    #   The value for IoT SiteWise Monitor (Classic) is
+    #   `SITEWISE_PORTAL_V1`. The value for IoT SiteWise Monitor (AI-aware)
+    #   is `SITEWISE_PORTAL_V2`.
+    #   @return [Hash<String,Types::PortalTypeEntry>]
+    #
     class CreatePortalRequest < Struct.new(
       :portal_name,
       :portal_description,
@@ -3255,8 +3383,10 @@ module Aws::IoTSiteWise
       :tags,
       :portal_auth_mode,
       :notification_sender_email,
-      :alarms)
-      SENSITIVE = []
+      :alarms,
+      :portal_type,
+      :portal_type_configuration)
+      SENSITIVE = [:portal_contact_email, :notification_sender_email]
       include Aws::Structure
     end
 
@@ -3432,6 +3562,116 @@ module Aws::IoTSiteWise
       :description,
       :creation_date,
       :last_update_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the dataset use and it's source.
+    #
+    # @!attribute [rw] dataset_arn
+    #   The [ARN][1] of the dataset. The format is
+    #   `arn:${Partition}:iotsitewise:${Region}:${Account}:dataset/${DatasetId}`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The data source for the dataset.
+    #   @return [Types::Source]
+    #
+    class DataSetReference < Struct.new(
+      :dataset_arn,
+      :source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The data source for the dataset.
+    #
+    # @!attribute [rw] source_type
+    #   The type of data source for the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_format
+    #   The format of the dataset source associated with the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_detail
+    #   The details of the dataset source associated with the dataset.
+    #   @return [Types::SourceDetail]
+    #
+    class DatasetSource < Struct.new(
+      :source_type,
+      :source_format,
+      :source_detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The status of the dataset. This contains the state and any error
+    # messages. The state is `ACTIVE` when ready to use.
+    #
+    # @!attribute [rw] state
+    #   The current status of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   Contains the details of an IoT SiteWise error.
+    #   @return [Types::ErrorDetails]
+    #
+    class DatasetStatus < Struct.new(
+      :state,
+      :error)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The summary details for the dataset.
+    #
+    # @!attribute [rw] id
+    #   The ID of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The [ARN][1] of the dataset. The format is
+    #   `arn:${Partition}:iotsitewise:${Region}:${Account}:dataset/${DatasetId}`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description about the dataset, and its functionality.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The dataset creation date, in Unix epoch time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_update_date
+    #   The date the dataset was last updated, in Unix epoch time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the dataset. This contains the state and any error
+    #   messages. The state is `ACTIVE` when ready to use.
+    #   @return [Types::DatasetStatus]
+    #
+    class DatasetSummary < Struct.new(
+      :id,
+      :arn,
+      :name,
+      :description,
+      :creation_date,
+      :last_update_date,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3678,6 +3918,38 @@ module Aws::IoTSiteWise
     end
 
     class DeleteDashboardResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] dataset_id
+    #   The ID of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique case-sensitive identifier that you can provide to ensure
+    #   the idempotency of the request. Don't reuse this client token if a
+    #   new idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    class DeleteDatasetRequest < Struct.new(
+      :dataset_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dataset_status
+    #   The status of the dataset. This contains the state and any error
+    #   messages. State is `DELETING` after a successfull call to this API,
+    #   and any associated error message.
+    #   @return [Types::DatasetStatus]
+    #
+    class DeleteDatasetResponse < Struct.new(
+      :dataset_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] gateway_id
     #   The ID of the gateway to delete.
@@ -4587,6 +4859,74 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # @!attribute [rw] dataset_id
+    #   The ID of the dataset.
+    #   @return [String]
+    #
+    class DescribeDatasetRequest < Struct.new(
+      :dataset_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dataset_id
+    #   The ID of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_arn
+    #   The [ARN][1] of the dataset. The format is
+    #   `arn:${Partition}:iotsitewise:${Region}:${Account}:dataset/${DatasetId}`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_name
+    #   The name of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_description
+    #   A description about the dataset, and its functionality.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_source
+    #   The data source for the dataset.
+    #   @return [Types::DatasetSource]
+    #
+    # @!attribute [rw] dataset_status
+    #   The status of the dataset. This contains the state and any error
+    #   messages. State is `CREATING` after a successfull call to this API,
+    #   and any associated error message. The state is `ACTIVE` when ready
+    #   to use.
+    #   @return [Types::DatasetStatus]
+    #
+    # @!attribute [rw] dataset_creation_date
+    #   The dataset creation date, in Unix epoch time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] dataset_last_update_date
+    #   The date the dataset was last updated, in Unix epoch time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] dataset_version
+    #   The version of the dataset.
+    #   @return [String]
+    #
+    class DescribeDatasetResponse < Struct.new(
+      :dataset_id,
+      :dataset_arn,
+      :dataset_name,
+      :dataset_description,
+      :dataset_source,
+      :dataset_status,
+      :dataset_creation_date,
+      :dataset_last_update_date,
+      :dataset_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @api private
     #
     class DescribeDefaultEncryptionConfigurationRequest < Aws::EmptyStructure; end
@@ -4657,10 +4997,18 @@ module Aws::IoTSiteWise
     #
     #   * `IN_SYNC` – The gateway is running the capability configuration.
     #
+    #   * `NOT_APPLICABLE` – Synchronization is not required for this
+    #     capability configuration. This is most common when integrating
+    #     partner data sources, because the data integration is handled
+    #     externally by the partner.
+    #
     #   * `OUT_OF_SYNC` – The gateway hasn't received the capability
     #     configuration.
     #
     #   * `SYNC_FAILED` – The gateway rejected the capability configuration.
+    #
+    #   * `UNKNOWN` – The synchronization status is currently unknown due to
+    #     an undetermined or temporary error.
     #   @return [String]
     #
     class DescribeGatewayCapabilityConfigurationResponse < Struct.new(
@@ -4841,6 +5189,19 @@ module Aws::IoTSiteWise
     #   SiteWise Monitor portal.
     #   @return [Types::Alarms]
     #
+    # @!attribute [rw] portal_type
+    #   Define the type of portal. The value for IoT SiteWise Monitor
+    #   (Classic) is `SITEWISE_PORTAL_V1`. The value for IoT SiteWise
+    #   Monitor (AI-aware) is `SITEWISE_PORTAL_V2`.
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_type_configuration
+    #   The configuration entry associated with the specific portal type.
+    #   The value for IoT SiteWise Monitor (Classic) is
+    #   `SITEWISE_PORTAL_V1`. The value for IoT SiteWise Monitor (AI-aware)
+    #   is `SITEWISE_PORTAL_V2`.
+    #   @return [Hash<String,Types::PortalTypeEntry>]
+    #
     class DescribePortalResponse < Struct.new(
       :portal_id,
       :portal_arn,
@@ -4856,8 +5217,10 @@ module Aws::IoTSiteWise
       :role_arn,
       :portal_auth_mode,
       :notification_sender_email,
-      :alarms)
-      SENSITIVE = []
+      :alarms,
+      :portal_type,
+      :portal_type_configuration)
+      SENSITIVE = [:portal_contact_email, :notification_sender_email]
       include Aws::Structure
     end
 
@@ -5318,10 +5681,20 @@ module Aws::IoTSiteWise
     #   25.
     #   @return [Integer]
     #
+    # @!attribute [rw] client_token
+    #   A unique case-sensitive identifier that you can provide to ensure
+    #   the idempotency of the request. Don't reuse this client token if a
+    #   new idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     class ExecuteQueryRequest < Struct.new(
       :query_statement,
       :next_token,
-      :max_results)
+      :max_results,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5434,10 +5807,18 @@ module Aws::IoTSiteWise
     #
     #   * `IN_SYNC` – The gateway is running the capability configuration.
     #
+    #   * `NOT_APPLICABLE` – Synchronization is not required for this
+    #     capability configuration. This is most common when integrating
+    #     partner data sources, because the data integration is handled
+    #     externally by the partner.
+    #
     #   * `OUT_OF_SYNC` – The gateway hasn't received the capability
     #     configuration.
     #
     #   * `SYNC_FAILED` – The gateway rejected the capability configuration.
+    #
+    #   * `UNKNOWN` – The synchronization status is currently unknown due to
+    #     an undetermined or temporary error.
     #   @return [String]
     #
     class GatewayCapabilitySummary < Struct.new(
@@ -6096,7 +6477,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     class InternalFailureException < Struct.new(
-      :message)
+      :message,
+      :event_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6126,7 +6508,70 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     class InvalidRequestException < Struct.new(
-      :message)
+      :message,
+      :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This contains the SiteWise Assistant's response and the corresponding
+    # citation.
+    #
+    # @!attribute [rw] message
+    #   The text message of the SiteWise Assistant's response.
+    #   @return [String]
+    #
+    # @!attribute [rw] citations
+    #   A list of citations, and related information for the SiteWise
+    #   Assistant's response.
+    #   @return [Array<Types::Citation>]
+    #
+    class InvocationOutput < Struct.new(
+      :message,
+      :citations,
+      :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] conversation_id
+    #   The ID assigned to a conversation. IoT SiteWise automatically
+    #   generates a unique ID for you, and this parameter is never required.
+    #   However, if you prefer to have your own ID, you must specify it here
+    #   in UUID format. If you specify your own ID, it must be globally
+    #   unique.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A text message sent to the SiteWise Assistant by the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_trace
+    #   Specifies if to turn trace on or not. It is used to track the
+    #   SiteWise Assistant's reasoning, and data access process.
+    #   @return [Boolean]
+    #
+    class InvokeAssistantRequest < Struct.new(
+      :conversation_id,
+      :message,
+      :enable_trace)
+      SENSITIVE = [:message]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] body
+    #   Contains the response, citation, and trace from the SiteWise
+    #   Assistant.
+    #   @return [Types::ResponseStream]
+    #
+    # @!attribute [rw] conversation_id
+    #   The ID of the conversation, in UUID format. This ID uniquely
+    #   identifies the conversation within IoT SiteWise.
+    #   @return [String]
+    #
+    class InvokeAssistantResponse < Struct.new(
+      :body,
+      :conversation_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6186,6 +6631,23 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # The source details for the Kendra dataset source.
+    #
+    # @!attribute [rw] knowledge_base_arn
+    #   The `knowledgeBaseArn` details for the Kendra dataset source.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The `roleARN` details for the Kendra dataset source.
+    #   @return [String]
+    #
+    class KendraSourceDetail < Struct.new(
+      :knowledge_base_arn,
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You've reached the limit for a resource. For example, this can occur
     # if you're trying to associate more than the allowed number of child
     # assets or attempting to create more than the allowed number of
@@ -6202,7 +6664,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     class LimitExceededException < Struct.new(
-      :message)
+      :message,
+      :event_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6878,6 +7341,43 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # @!attribute [rw] source_type
+    #   The type of data source for the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no
+    #   additional results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for each paginated request.
+    #   @return [Integer]
+    #
+    class ListDatasetsRequest < Struct.new(
+      :source_type,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dataset_summaries
+    #   A list that summarizes the dataset response.
+    #   @return [Array<Types::DatasetSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no
+    #   additional results.
+    #   @return [String]
+    #
+    class ListDatasetsResponse < Struct.new(
+      :dataset_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] next_token
     #   The token to be used for the next set of paginated results.
     #   @return [String]
@@ -7108,6 +7608,19 @@ module Aws::IoTSiteWise
     class ListTimeSeriesResponse < Struct.new(
       :time_series_summaries,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains location information about the cited text and where it's
+    # stored.
+    #
+    # @!attribute [rw] uri
+    #   The URI of the location.
+    #   @return [String]
+    #
+    class Location < Struct.new(
+      :uri)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7351,6 +7864,12 @@ module Aws::IoTSiteWise
     #   Contains information about the current status of a portal.
     #   @return [Types::PortalStatus]
     #
+    # @!attribute [rw] portal_type
+    #   Define the type of portal. The value for IoT SiteWise Monitor
+    #   (Classic) is `SITEWISE_PORTAL_V1`. The value for IoT SiteWise
+    #   Monitor (AI-aware) is `SITEWISE_PORTAL_V2`.
+    #   @return [String]
+    #
     class PortalSummary < Struct.new(
       :id,
       :name,
@@ -7359,7 +7878,23 @@ module Aws::IoTSiteWise
       :creation_date,
       :last_update_date,
       :role_arn,
-      :status)
+      :status,
+      :portal_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration entry associated with the specific portal type. The
+    # `portalTypeConfiguration` is a map of the `portalTypeKey` to the
+    # `PortalTypeEntry`.
+    #
+    # @!attribute [rw] portal_tools
+    #   The array of tools associated with the specified portal type. The
+    #   possible values are `ASSISTANT` and `DASHBOARD`.
+    #   @return [Array<String>]
+    #
+    class PortalTypeEntry < Struct.new(
+      :portal_tools)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7819,6 +8354,18 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # Contains the reference information.
+    #
+    # @!attribute [rw] dataset
+    #   Contains the dataset reference information.
+    #   @return [Types::DataSetReference]
+    #
+    class Reference < Struct.new(
+      :dataset)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains an IoT SiteWise Monitor resource ID for a portal or project.
     #
     # @!attribute [rw] portal
@@ -7863,7 +8410,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     class ResourceNotFoundException < Struct.new(
-      :message)
+      :message,
+      :event_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7932,6 +8480,39 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # The data source for the dataset.
+    #
+    # @!attribute [rw] arn
+    #   Contains the ARN of the dataset. If the source is Kendra, it's the
+    #   ARN of the Kendra index.
+    #   @return [String]
+    #
+    # @!attribute [rw] location
+    #   Contains the location information where the cited text is originally
+    #   stored. For example, if the data source is Kendra, and the text
+    #   synchronized is from an S3 bucket, then the location refers to an S3
+    #   object.
+    #   @return [Types::Location]
+    #
+    class Source < Struct.new(
+      :arn,
+      :location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of the dataset source associated with the dataset.
+    #
+    # @!attribute [rw] kendra
+    #   Contains details about the Kendra dataset source.
+    #   @return [Types::KendraSourceDetail]
+    #
+    class SourceDetail < Struct.new(
+      :kendra)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The [ARN][1] of the resource to tag.
     #
@@ -7986,7 +8567,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     class ThrottlingException < Struct.new(
-      :message)
+      :message,
+      :event_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8094,6 +8676,20 @@ module Aws::IoTSiteWise
     class TooManyTagsException < Struct.new(
       :message,
       :resource_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains tracing information of the SiteWise Assistant's reasoning
+    # and data access.
+    #
+    # @!attribute [rw] text
+    #   The cited text from the data source.
+    #   @return [String]
+    #
+    class Trace < Struct.new(
+      :text,
+      :event_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8213,7 +8809,6 @@ module Aws::IoTSiteWise
     #
     #     * If you create the metric after 6 PM (UTC), you get the first
     #       aggregation result at 6 PM (UTC) the next day.
-    #
     #   * The ISO 8601 format.
     #
     #     For example, if you specify `PT18H` for `offset` and `1d` for
@@ -8226,7 +8821,6 @@ module Aws::IoTSiteWise
     #
     #     * If you create the metric after 6 PM (UTC), you get the first
     #       aggregation result at 6 PM (UTC) the next day.
-    #
     #   * The 24-hour clock.
     #
     #     For example, if you specify `00:03:00` for `offset`, `5m` for
@@ -8723,13 +9317,18 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] dashboard_definition
-    #   The new dashboard definition, as specified in a JSON literal. For
-    #   detailed information, see [Creating dashboards (CLI)][1] in the *IoT
-    #   SiteWise User Guide*.
+    #   The new dashboard definition, as specified in a JSON literal.
+    #
+    #   * IoT SiteWise Monitor (Classic) see [Create dashboards (CLI)][1]
+    #
+    #   * IoT SiteWise Monitor (AI-aware) see [Create dashboards (CLI)][2]
+    #
+    #   in the *IoT SiteWise User Guide*
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-dashboards-using-aws-cli.html
+    #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-dashboards-ai-dashboard-cli.html
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -8752,6 +9351,69 @@ module Aws::IoTSiteWise
     end
 
     class UpdateDashboardResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] dataset_id
+    #   The ID of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_name
+    #   The name of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_description
+    #   A description about the dataset, and its functionality.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_source
+    #   The data source for the dataset.
+    #   @return [Types::DatasetSource]
+    #
+    # @!attribute [rw] client_token
+    #   A unique case-sensitive identifier that you can provide to ensure
+    #   the idempotency of the request. Don't reuse this client token if a
+    #   new idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    class UpdateDatasetRequest < Struct.new(
+      :dataset_id,
+      :dataset_name,
+      :dataset_description,
+      :dataset_source,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dataset_id
+    #   The ID of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_arn
+    #   The [ARN][1] of the dataset. The format is
+    #   `arn:${Partition}:iotsitewise:${Region}:${Account}:dataset/${DatasetId}`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_status
+    #   The status of the dataset. This contains the state and any error
+    #   messages. State is `UPDATING` after a successfull call to this API,
+    #   and any associated error message. The state is `ACTIVE` when ready
+    #   to use.
+    #   @return [Types::DatasetStatus]
+    #
+    class UpdateDatasetResponse < Struct.new(
+      :dataset_id,
+      :dataset_arn,
+      :dataset_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] gateway_id
     #   The ID of the gateway to be updated.
@@ -8793,10 +9455,18 @@ module Aws::IoTSiteWise
     #
     #   * `IN_SYNC` – The gateway is running the capability configuration.
     #
+    #   * `NOT_APPLICABLE` – Synchronization is not required for this
+    #     capability configuration. This is most common when integrating
+    #     partner data sources, because the data integration is handled
+    #     externally by the partner.
+    #
     #   * `OUT_OF_SYNC` – The gateway hasn't received the capability
     #     configuration.
     #
     #   * `SYNC_FAILED` – The gateway rejected the capability configuration.
+    #
+    #   * `UNKNOWN` – The synchronization status is currently unknown due to
+    #     an undetermined or temporary error.
     #
     #   After you update a capability configuration, its sync status is
     #   `OUT_OF_SYNC` until the gateway receives and applies or rejects the
@@ -8887,6 +9557,19 @@ module Aws::IoTSiteWise
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/appguide/monitor-alarms.html
     #   @return [Types::Alarms]
     #
+    # @!attribute [rw] portal_type
+    #   Define the type of portal. The value for IoT SiteWise Monitor
+    #   (Classic) is `SITEWISE_PORTAL_V1`. The value for IoT SiteWise
+    #   Monitor (AI-aware) is `SITEWISE_PORTAL_V2`.
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_type_configuration
+    #   The configuration entry associated with the specific portal type.
+    #   The value for IoT SiteWise Monitor (Classic) is
+    #   `SITEWISE_PORTAL_V1`. The value for IoT SiteWise Monitor (AI-aware)
+    #   is `SITEWISE_PORTAL_V2`.
+    #   @return [Hash<String,Types::PortalTypeEntry>]
+    #
     class UpdatePortalRequest < Struct.new(
       :portal_id,
       :portal_name,
@@ -8896,8 +9579,10 @@ module Aws::IoTSiteWise
       :role_arn,
       :client_token,
       :notification_sender_email,
-      :alarms)
-      SENSITIVE = []
+      :alarms,
+      :portal_type,
+      :portal_type_configuration)
+      SENSITIVE = [:portal_contact_email, :notification_sender_email]
       include Aws::Structure
     end
 
@@ -9056,6 +9741,30 @@ module Aws::IoTSiteWise
       :unlimited)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Contains the response, citation, and trace from the SiteWise
+    # Assistant.
+    #
+    # EventStream is an Enumerator of Events.
+    #  #event_types #=> Array, returns all modeled event types in the stream
+    #
+    class ResponseStream < Enumerator
+
+      def event_types
+        [
+          :trace,
+          :output,
+          :access_denied_exception,
+          :conflicting_operation_exception,
+          :internal_failure_exception,
+          :invalid_request_exception,
+          :limit_exceeded_exception,
+          :resource_not_found_exception,
+          :throttling_exception
+        ]
+      end
+
     end
 
   end

@@ -35,6 +35,7 @@ require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
+require 'aws-sdk-core/plugins/event_stream_configuration.rb'
 
 module Aws::IoTSiteWise
   # An API client for IoTSiteWise.  To construct a client, you need to configure a `:region` and `:credentials`.
@@ -85,6 +86,7 @@ module Aws::IoTSiteWise
     add_plugin(Aws::Plugins::Telemetry)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::RestJson)
+    add_plugin(Aws::Plugins::EventStreamConfiguration)
     add_plugin(Aws::IoTSiteWise::Plugins::Endpoints)
 
     # @overload initialize(options)
@@ -233,9 +235,15 @@ module Aws::IoTSiteWise
     #   @option options [Boolean] :endpoint_discovery (false)
     #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
+    #   @option options [Proc] :event_stream_handler
+    #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
+    #
     #   @option options [Boolean] :ignore_configured_endpoint_urls
     #     Setting to true disables use of endpoint URLs provided via environment
     #     variables and the shared configuration file.
+    #
+    #   @option options [Proc] :input_event_stream_handler
+    #     When an EventStream or Proc object is provided, it can be used for sending events for the event stream.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -252,6 +260,9 @@ module Aws::IoTSiteWise
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
     #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
+    #   @option options [Proc] :output_event_stream_handler
+    #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
@@ -1024,10 +1035,10 @@ module Aws::IoTSiteWise
     #         id: "IdentityId", # required
     #       },
     #       iam_user: {
-    #         arn: "ARN", # required
+    #         arn: "IamArn", # required
     #       },
     #       iam_role: {
-    #         arn: "ARN", # required
+    #         arn: "IamArn", # required
     #       },
     #     },
     #     access_policy_resource: { # required
@@ -1800,13 +1811,18 @@ module Aws::IoTSiteWise
     #   A description for the dashboard.
     #
     # @option params [required, String] :dashboard_definition
-    #   The dashboard definition specified in a JSON literal. For detailed
-    #   information, see [Creating dashboards (CLI)][1] in the *IoT SiteWise
-    #   User Guide*.
+    #   The dashboard definition specified in a JSON literal.
+    #
+    #   * IoT SiteWise Monitor (Classic) see [Create dashboards (CLI)][1]
+    #
+    #   * IoT SiteWise Monitor (AI-aware) see [Create dashboards (CLI)][2]
+    #
+    #   in the *IoT SiteWise User Guide*
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-dashboards-using-aws-cli.html
+    #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-dashboards-ai-dashboard-cli.html
     #
     # @option params [String] :client_token
     #   A unique case-sensitive identifier that you can provide to ensure the
@@ -1852,6 +1868,83 @@ module Aws::IoTSiteWise
     # @param [Hash] params ({})
     def create_dashboard(params = {}, options = {})
       req = build_request(:create_dashboard, params)
+      req.send_request(options)
+    end
+
+    # Creates a dataset to connect an external datasource.
+    #
+    # @option params [String] :dataset_id
+    #   The ID of the dataset.
+    #
+    # @option params [required, String] :dataset_name
+    #   The name of the dataset.
+    #
+    # @option params [String] :dataset_description
+    #   A description about the dataset, and its functionality.
+    #
+    # @option params [required, Types::DatasetSource] :dataset_source
+    #   The data source for the dataset.
+    #
+    # @option params [String] :client_token
+    #   A unique case-sensitive identifier that you can provide to ensure the
+    #   idempotency of the request. Don't reuse this client token if a new
+    #   idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A list of key-value pairs that contain metadata for the access policy.
+    #   For more information, see [Tagging your IoT SiteWise resources][1] in
+    #   the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html
+    #
+    # @return [Types::CreateDatasetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDatasetResponse#dataset_id #dataset_id} => String
+    #   * {Types::CreateDatasetResponse#dataset_arn #dataset_arn} => String
+    #   * {Types::CreateDatasetResponse#dataset_status #dataset_status} => Types::DatasetStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_dataset({
+    #     dataset_id: "ID",
+    #     dataset_name: "RestrictedName", # required
+    #     dataset_description: "RestrictedDescription",
+    #     dataset_source: { # required
+    #       source_type: "KENDRA", # required, accepts KENDRA
+    #       source_format: "KNOWLEDGE_BASE", # required, accepts KNOWLEDGE_BASE
+    #       source_detail: {
+    #         kendra: {
+    #           knowledge_base_arn: "ARN", # required
+    #           role_arn: "ARN", # required
+    #         },
+    #       },
+    #     },
+    #     client_token: "ClientToken",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dataset_id #=> String
+    #   resp.dataset_arn #=> String
+    #   resp.dataset_status.state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
+    #   resp.dataset_status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
+    #   resp.dataset_status.error.message #=> String
+    #   resp.dataset_status.error.details #=> Array
+    #   resp.dataset_status.error.details[0].code #=> String, one of "INCOMPATIBLE_COMPUTE_LOCATION", "INCOMPATIBLE_FORWARDING_CONFIGURATION"
+    #   resp.dataset_status.error.details[0].message #=> String
+    #
+    # @overload create_dataset(params = {})
+    # @param [Hash] params ({})
+    def create_dataset(params = {}, options = {})
+      req = build_request(:create_dataset, params)
       req.send_request(options)
     end
 
@@ -2016,6 +2109,16 @@ module Aws::IoTSiteWise
     #
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/appguide/monitor-alarms.html
     #
+    # @option params [String] :portal_type
+    #   Define the type of portal. The value for IoT SiteWise Monitor
+    #   (Classic) is `SITEWISE_PORTAL_V1`. The value for IoT SiteWise Monitor
+    #   (AI-aware) is `SITEWISE_PORTAL_V2`.
+    #
+    # @option params [Hash<String,Types::PortalTypeEntry>] :portal_type_configuration
+    #   The configuration entry associated with the specific portal type. The
+    #   value for IoT SiteWise Monitor (Classic) is `SITEWISE_PORTAL_V1`. The
+    #   value for IoT SiteWise Monitor (AI-aware) is `SITEWISE_PORTAL_V2`.
+    #
     # @return [Types::CreatePortalResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePortalResponse#portal_id #portal_id} => String
@@ -2035,15 +2138,21 @@ module Aws::IoTSiteWise
     #       data: "data", # required
     #       type: "PNG", # required, accepts PNG
     #     },
-    #     role_arn: "ARN", # required
+    #     role_arn: "IamArn", # required
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
     #     portal_auth_mode: "IAM", # accepts IAM, SSO
     #     notification_sender_email: "Email",
     #     alarms: {
-    #       alarm_role_arn: "ARN", # required
+    #       alarm_role_arn: "IamArn", # required
     #       notification_lambda_arn: "ARN",
+    #     },
+    #     portal_type: "SITEWISE_PORTAL_V1", # accepts SITEWISE_PORTAL_V1, SITEWISE_PORTAL_V2
+    #     portal_type_configuration: {
+    #       "PortalTypeKey" => {
+    #         portal_tools: ["Name"],
+    #       },
     #     },
     #   })
     #
@@ -2052,7 +2161,7 @@ module Aws::IoTSiteWise
     #   resp.portal_id #=> String
     #   resp.portal_arn #=> String
     #   resp.portal_start_url #=> String
-    #   resp.portal_status.state #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "FAILED"
+    #   resp.portal_status.state #=> String, one of "CREATING", "PENDING", "UPDATING", "DELETING", "ACTIVE", "FAILED"
     #   resp.portal_status.error.code #=> String, one of "INTERNAL_FAILURE", "VALIDATION_ERROR", "LIMIT_EXCEEDED"
     #   resp.portal_status.error.message #=> String
     #   resp.sso_application_id #=> String
@@ -2401,6 +2510,46 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
+    # Deletes a dataset. This cannot be undone.
+    #
+    # @option params [required, String] :dataset_id
+    #   The ID of the dataset.
+    #
+    # @option params [String] :client_token
+    #   A unique case-sensitive identifier that you can provide to ensure the
+    #   idempotency of the request. Don't reuse this client token if a new
+    #   idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::DeleteDatasetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteDatasetResponse#dataset_status #dataset_status} => Types::DatasetStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_dataset({
+    #     dataset_id: "CustomID", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dataset_status.state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
+    #   resp.dataset_status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
+    #   resp.dataset_status.error.message #=> String
+    #   resp.dataset_status.error.details #=> Array
+    #   resp.dataset_status.error.details[0].code #=> String, one of "INCOMPATIBLE_COMPUTE_LOCATION", "INCOMPATIBLE_FORWARDING_CONFIGURATION"
+    #   resp.dataset_status.error.details[0].message #=> String
+    #
+    # @overload delete_dataset(params = {})
+    # @param [Hash] params ({})
+    def delete_dataset(params = {}, options = {})
+      req = build_request(:delete_dataset, params)
+      req.send_request(options)
+    end
+
     # Deletes a gateway from IoT SiteWise. When you delete a gateway, some
     # of the gateway's files remain in your gateway's file system.
     #
@@ -2448,7 +2597,7 @@ module Aws::IoTSiteWise
     #
     # @example Response structure
     #
-    #   resp.portal_status.state #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "FAILED"
+    #   resp.portal_status.state #=> String, one of "CREATING", "PENDING", "UPDATING", "DELETING", "ACTIVE", "FAILED"
     #   resp.portal_status.error.code #=> String, one of "INTERNAL_FAILURE", "VALIDATION_ERROR", "LIMIT_EXCEEDED"
     #   resp.portal_status.error.message #=> String
     #
@@ -3370,6 +3519,56 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
+    # Retrieves information about a dataset.
+    #
+    # @option params [required, String] :dataset_id
+    #   The ID of the dataset.
+    #
+    # @return [Types::DescribeDatasetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDatasetResponse#dataset_id #dataset_id} => String
+    #   * {Types::DescribeDatasetResponse#dataset_arn #dataset_arn} => String
+    #   * {Types::DescribeDatasetResponse#dataset_name #dataset_name} => String
+    #   * {Types::DescribeDatasetResponse#dataset_description #dataset_description} => String
+    #   * {Types::DescribeDatasetResponse#dataset_source #dataset_source} => Types::DatasetSource
+    #   * {Types::DescribeDatasetResponse#dataset_status #dataset_status} => Types::DatasetStatus
+    #   * {Types::DescribeDatasetResponse#dataset_creation_date #dataset_creation_date} => Time
+    #   * {Types::DescribeDatasetResponse#dataset_last_update_date #dataset_last_update_date} => Time
+    #   * {Types::DescribeDatasetResponse#dataset_version #dataset_version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_dataset({
+    #     dataset_id: "CustomID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dataset_id #=> String
+    #   resp.dataset_arn #=> String
+    #   resp.dataset_name #=> String
+    #   resp.dataset_description #=> String
+    #   resp.dataset_source.source_type #=> String, one of "KENDRA"
+    #   resp.dataset_source.source_format #=> String, one of "KNOWLEDGE_BASE"
+    #   resp.dataset_source.source_detail.kendra.knowledge_base_arn #=> String
+    #   resp.dataset_source.source_detail.kendra.role_arn #=> String
+    #   resp.dataset_status.state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
+    #   resp.dataset_status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
+    #   resp.dataset_status.error.message #=> String
+    #   resp.dataset_status.error.details #=> Array
+    #   resp.dataset_status.error.details[0].code #=> String, one of "INCOMPATIBLE_COMPUTE_LOCATION", "INCOMPATIBLE_FORWARDING_CONFIGURATION"
+    #   resp.dataset_status.error.details[0].message #=> String
+    #   resp.dataset_creation_date #=> Time
+    #   resp.dataset_last_update_date #=> Time
+    #   resp.dataset_version #=> String
+    #
+    # @overload describe_dataset(params = {})
+    # @param [Hash] params ({})
+    def describe_dataset(params = {}, options = {})
+      req = build_request(:describe_dataset, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about the default encryption configuration for
     # the Amazon Web Services account in the default or specified Region.
     # For more information, see [Key management][1] in the *IoT SiteWise
@@ -3531,6 +3730,8 @@ module Aws::IoTSiteWise
     #   * {Types::DescribePortalResponse#portal_auth_mode #portal_auth_mode} => String
     #   * {Types::DescribePortalResponse#notification_sender_email #notification_sender_email} => String
     #   * {Types::DescribePortalResponse#alarms #alarms} => Types::Alarms
+    #   * {Types::DescribePortalResponse#portal_type #portal_type} => String
+    #   * {Types::DescribePortalResponse#portal_type_configuration #portal_type_configuration} => Hash&lt;String,Types::PortalTypeEntry&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -3547,7 +3748,7 @@ module Aws::IoTSiteWise
     #   resp.portal_client_id #=> String
     #   resp.portal_start_url #=> String
     #   resp.portal_contact_email #=> String
-    #   resp.portal_status.state #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "FAILED"
+    #   resp.portal_status.state #=> String, one of "CREATING", "PENDING", "UPDATING", "DELETING", "ACTIVE", "FAILED"
     #   resp.portal_status.error.code #=> String, one of "INTERNAL_FAILURE", "VALIDATION_ERROR", "LIMIT_EXCEEDED"
     #   resp.portal_status.error.message #=> String
     #   resp.portal_creation_date #=> Time
@@ -3559,6 +3760,10 @@ module Aws::IoTSiteWise
     #   resp.notification_sender_email #=> String
     #   resp.alarms.alarm_role_arn #=> String
     #   resp.alarms.notification_lambda_arn #=> String
+    #   resp.portal_type #=> String, one of "SITEWISE_PORTAL_V1", "SITEWISE_PORTAL_V2"
+    #   resp.portal_type_configuration #=> Hash
+    #   resp.portal_type_configuration["PortalTypeKey"].portal_tools #=> Array
+    #   resp.portal_type_configuration["PortalTypeKey"].portal_tools[0] #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -3899,6 +4104,14 @@ module Aws::IoTSiteWise
     #   The maximum number of results to return at one time. The default is
     #   25.
     #
+    # @option params [String] :client_token
+    #   A unique case-sensitive identifier that you can provide to ensure the
+    #   idempotency of the request. Don't reuse this client token if a new
+    #   idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Types::ExecuteQueryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ExecuteQueryResponse#columns #columns} => Array&lt;Types::ColumnInfo&gt;
@@ -3913,6 +4126,7 @@ module Aws::IoTSiteWise
     #     query_statement: "QueryStatement", # required
     #     next_token: "ExecuteQueryNextToken",
     #     max_results: 1,
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
@@ -4378,6 +4592,257 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
+    # Invokes SiteWise Assistant to start or continue a conversation.
+    #
+    # @option params [String] :conversation_id
+    #   The ID assigned to a conversation. IoT SiteWise automatically
+    #   generates a unique ID for you, and this parameter is never required.
+    #   However, if you prefer to have your own ID, you must specify it here
+    #   in UUID format. If you specify your own ID, it must be globally
+    #   unique.
+    #
+    # @option params [required, String] :message
+    #   A text message sent to the SiteWise Assistant by the user.
+    #
+    # @option params [Boolean] :enable_trace
+    #   Specifies if to turn trace on or not. It is used to track the SiteWise
+    #   Assistant's reasoning, and data access process.
+    #
+    # @return [Types::InvokeAssistantResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::InvokeAssistantResponse#body #body} => Types::ResponseStream
+    #   * {Types::InvokeAssistantResponse#conversation_id #conversation_id} => String
+    #
+    # @example EventStream Operation Example
+    #
+    #   You can process the event once it arrives immediately, or wait until the
+    #   full response is complete and iterate through the eventstream enumerator.
+    #
+    #   To interact with event immediately, you need to register #invoke_assistant
+    #   with callbacks. Callbacks can be registered for specific events or for all
+    #   events, including error events.
+    #
+    #   Callbacks can be passed into the `:event_stream_handler` option or within a
+    #   block statement attached to the #invoke_assistant call directly. Hybrid
+    #   pattern of both is also supported.
+    #
+    #   `:event_stream_handler` option takes in either a Proc object or
+    #   Aws::IoTSiteWise::EventStreams::ResponseStream object.
+    #
+    #   Usage pattern a): Callbacks with a block attached to #invoke_assistant
+    #     Example for registering callbacks for all event types and an error event
+    #
+    #     client.invoke_assistant( # params input# ) do |stream|
+    #       stream.on_error_event do |event|
+    #         # catch unmodeled error event in the stream
+    #         raise event
+    #         # => Aws::Errors::EventError
+    #         # event.event_type => :error
+    #         # event.error_code => String
+    #         # event.error_message => String
+    #       end
+    #
+    #       stream.on_event do |event|
+    #         # process all events arrive
+    #         puts event.event_type
+    #         ...
+    #       end
+    #
+    #     end
+    #
+    #   Usage pattern b): Pass in `:event_stream_handler` for #invoke_assistant
+    #
+    #     1) Create a Aws::IoTSiteWise::EventStreams::ResponseStream object
+    #     Example for registering callbacks with specific events
+    #
+    #       handler = Aws::IoTSiteWise::EventStreams::ResponseStream.new
+    #       handler.on_trace_event do |event|
+    #         event # => Aws::IoTSiteWise::Types::trace
+    #       end
+    #       handler.on_output_event do |event|
+    #         event # => Aws::IoTSiteWise::Types::output
+    #       end
+    #       handler.on_access_denied_exception_event do |event|
+    #         event # => Aws::IoTSiteWise::Types::accessDeniedException
+    #       end
+    #       handler.on_conflicting_operation_exception_event do |event|
+    #         event # => Aws::IoTSiteWise::Types::conflictingOperationException
+    #       end
+    #       handler.on_internal_failure_exception_event do |event|
+    #         event # => Aws::IoTSiteWise::Types::internalFailureException
+    #       end
+    #       handler.on_invalid_request_exception_event do |event|
+    #         event # => Aws::IoTSiteWise::Types::invalidRequestException
+    #       end
+    #       handler.on_limit_exceeded_exception_event do |event|
+    #         event # => Aws::IoTSiteWise::Types::limitExceededException
+    #       end
+    #       handler.on_resource_not_found_exception_event do |event|
+    #         event # => Aws::IoTSiteWise::Types::resourceNotFoundException
+    #       end
+    #       handler.on_throttling_exception_event do |event|
+    #         event # => Aws::IoTSiteWise::Types::throttlingException
+    #       end
+    #
+    #     client.invoke_assistant( # params input #, event_stream_handler: handler)
+    #
+    #     2) Use a Ruby Proc object
+    #     Example for registering callbacks with specific events
+    #
+    #     handler = Proc.new do |stream|
+    #       stream.on_trace_event do |event|
+    #         event # => Aws::IoTSiteWise::Types::trace
+    #       end
+    #       stream.on_output_event do |event|
+    #         event # => Aws::IoTSiteWise::Types::output
+    #       end
+    #       stream.on_access_denied_exception_event do |event|
+    #         event # => Aws::IoTSiteWise::Types::accessDeniedException
+    #       end
+    #       stream.on_conflicting_operation_exception_event do |event|
+    #         event # => Aws::IoTSiteWise::Types::conflictingOperationException
+    #       end
+    #       stream.on_internal_failure_exception_event do |event|
+    #         event # => Aws::IoTSiteWise::Types::internalFailureException
+    #       end
+    #       stream.on_invalid_request_exception_event do |event|
+    #         event # => Aws::IoTSiteWise::Types::invalidRequestException
+    #       end
+    #       stream.on_limit_exceeded_exception_event do |event|
+    #         event # => Aws::IoTSiteWise::Types::limitExceededException
+    #       end
+    #       stream.on_resource_not_found_exception_event do |event|
+    #         event # => Aws::IoTSiteWise::Types::resourceNotFoundException
+    #       end
+    #       stream.on_throttling_exception_event do |event|
+    #         event # => Aws::IoTSiteWise::Types::throttlingException
+    #       end
+    #     end
+    #
+    #     client.invoke_assistant( # params input #, event_stream_handler: handler)
+    #
+    #   Usage pattern c): Hybrid pattern of a) and b)
+    #
+    #       handler = Aws::IoTSiteWise::EventStreams::ResponseStream.new
+    #       handler.on_trace_event do |event|
+    #         event # => Aws::IoTSiteWise::Types::trace
+    #       end
+    #       handler.on_output_event do |event|
+    #         event # => Aws::IoTSiteWise::Types::output
+    #       end
+    #       handler.on_access_denied_exception_event do |event|
+    #         event # => Aws::IoTSiteWise::Types::accessDeniedException
+    #       end
+    #       handler.on_conflicting_operation_exception_event do |event|
+    #         event # => Aws::IoTSiteWise::Types::conflictingOperationException
+    #       end
+    #       handler.on_internal_failure_exception_event do |event|
+    #         event # => Aws::IoTSiteWise::Types::internalFailureException
+    #       end
+    #       handler.on_invalid_request_exception_event do |event|
+    #         event # => Aws::IoTSiteWise::Types::invalidRequestException
+    #       end
+    #       handler.on_limit_exceeded_exception_event do |event|
+    #         event # => Aws::IoTSiteWise::Types::limitExceededException
+    #       end
+    #       handler.on_resource_not_found_exception_event do |event|
+    #         event # => Aws::IoTSiteWise::Types::resourceNotFoundException
+    #       end
+    #       handler.on_throttling_exception_event do |event|
+    #         event # => Aws::IoTSiteWise::Types::throttlingException
+    #       end
+    #
+    #     client.invoke_assistant( # params input #, event_stream_handler: handler) do |stream|
+    #       stream.on_error_event do |event|
+    #         # catch unmodeled error event in the stream
+    #         raise event
+    #         # => Aws::Errors::EventError
+    #         # event.event_type => :error
+    #         # event.error_code => String
+    #         # event.error_message => String
+    #       end
+    #     end
+    #
+    #   You can also iterate through events after the response complete.
+    #
+    #   Events are available at resp.body # => Enumerator
+    #   For parameter input example, please refer to following request syntax
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.invoke_assistant({
+    #     conversation_id: "ConversationId",
+    #     message: "MessageInput", # required
+    #     enable_trace: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   All events are available at resp.body:
+    #   resp.body #=> Enumerator
+    #   resp.body.event_types #=> [:trace, :output, :access_denied_exception, :conflicting_operation_exception, :internal_failure_exception, :invalid_request_exception, :limit_exceeded_exception, :resource_not_found_exception, :throttling_exception]
+    #
+    #   For :trace event available at #on_trace_event callback and response eventstream enumerator:
+    #   event.text #=> String
+    #
+    #   For :output event available at #on_output_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #   event.citations #=> Array
+    #   event.citations[0].reference.dataset.dataset_arn #=> String
+    #   event.citations[0].reference.dataset.source.arn #=> String
+    #   event.citations[0].reference.dataset.source.location.uri #=> String
+    #   event.citations[0].content.text #=> String
+    #
+    #   For :access_denied_exception event available at #on_access_denied_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   For :conflicting_operation_exception event available at #on_conflicting_operation_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #   event.resource_id #=> String
+    #   event.resource_arn #=> String
+    #
+    #   For :internal_failure_exception event available at #on_internal_failure_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   For :invalid_request_exception event available at #on_invalid_request_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   For :limit_exceeded_exception event available at #on_limit_exceeded_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   For :resource_not_found_exception event available at #on_resource_not_found_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   For :throttling_exception event available at #on_throttling_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   resp.conversation_id #=> String
+    #
+    # @overload invoke_assistant(params = {})
+    # @param [Hash] params ({})
+    def invoke_assistant(params = {}, options = {}, &block)
+      params = params.dup
+      event_stream_handler = case handler = params.delete(:event_stream_handler)
+        when EventStreams::ResponseStream then handler
+        when Proc then EventStreams::ResponseStream.new.tap(&handler)
+        when nil then EventStreams::ResponseStream.new
+        else
+          msg = "expected :event_stream_handler to be a block or "\
+                "instance of Aws::IoTSiteWise::EventStreams::ResponseStream"\
+                ", got `#{handler.inspect}` instead"
+          raise ArgumentError, msg
+        end
+
+      yield(event_stream_handler) if block_given?
+
+      req = build_request(:invoke_assistant, params)
+
+      req.context[:event_stream_handler] = event_stream_handler
+      req.handlers.add(Aws::Binary::DecodeHandler, priority: 95)
+
+      req.send_request(options, &block)
+    end
+
     # Retrieves a paginated list of access policies for an identity (an IAM
     # Identity Center user, an IAM Identity Center group, or an IAM user) or
     # an IoT SiteWise Monitor resource (a portal or project).
@@ -4430,7 +4895,7 @@ module Aws::IoTSiteWise
     #     identity_id: "IdentityId",
     #     resource_type: "PORTAL", # accepts PORTAL, PROJECT
     #     resource_id: "ID",
-    #     iam_arn: "ARN",
+    #     iam_arn: "IamArn",
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -5222,6 +5687,57 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
+    # Retrieves a paginated list of datasets for a specific target resource.
+    #
+    # @option params [required, String] :source_type
+    #   The type of data source for the dataset.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results, or null if there are no
+    #   additional results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for each paginated request.
+    #
+    # @return [Types::ListDatasetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDatasetsResponse#dataset_summaries #dataset_summaries} => Array&lt;Types::DatasetSummary&gt;
+    #   * {Types::ListDatasetsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_datasets({
+    #     source_type: "KENDRA", # required, accepts KENDRA
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dataset_summaries #=> Array
+    #   resp.dataset_summaries[0].id #=> String
+    #   resp.dataset_summaries[0].arn #=> String
+    #   resp.dataset_summaries[0].name #=> String
+    #   resp.dataset_summaries[0].description #=> String
+    #   resp.dataset_summaries[0].creation_date #=> Time
+    #   resp.dataset_summaries[0].last_update_date #=> Time
+    #   resp.dataset_summaries[0].status.state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
+    #   resp.dataset_summaries[0].status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
+    #   resp.dataset_summaries[0].status.error.message #=> String
+    #   resp.dataset_summaries[0].status.error.details #=> Array
+    #   resp.dataset_summaries[0].status.error.details[0].code #=> String, one of "INCOMPATIBLE_COMPUTE_LOCATION", "INCOMPATIBLE_FORWARDING_CONFIGURATION"
+    #   resp.dataset_summaries[0].status.error.details[0].message #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_datasets(params = {})
+    # @param [Hash] params ({})
+    def list_datasets(params = {}, options = {})
+      req = build_request(:list_datasets, params)
+      req.send_request(options)
+    end
+
     # Retrieves a paginated list of gateways.
     #
     # @option params [String] :next_token
@@ -5302,9 +5818,10 @@ module Aws::IoTSiteWise
     #   resp.portal_summaries[0].creation_date #=> Time
     #   resp.portal_summaries[0].last_update_date #=> Time
     #   resp.portal_summaries[0].role_arn #=> String
-    #   resp.portal_summaries[0].status.state #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "FAILED"
+    #   resp.portal_summaries[0].status.state #=> String, one of "CREATING", "PENDING", "UPDATING", "DELETING", "ACTIVE", "FAILED"
     #   resp.portal_summaries[0].status.error.code #=> String, one of "INTERNAL_FAILURE", "VALIDATION_ERROR", "LIMIT_EXCEEDED"
     #   resp.portal_summaries[0].status.error.message #=> String
+    #   resp.portal_summaries[0].portal_type #=> String, one of "SITEWISE_PORTAL_V1", "SITEWISE_PORTAL_V2"
     #   resp.next_token #=> String
     #
     # @overload list_portals(params = {})
@@ -5779,10 +6296,10 @@ module Aws::IoTSiteWise
     #         id: "IdentityId", # required
     #       },
     #       iam_user: {
-    #         arn: "ARN", # required
+    #         arn: "IamArn", # required
     #       },
     #       iam_role: {
-    #         arn: "ARN", # required
+    #         arn: "IamArn", # required
     #       },
     #     },
     #     access_policy_resource: { # required
@@ -6515,13 +7032,18 @@ module Aws::IoTSiteWise
     #   A new description for the dashboard.
     #
     # @option params [required, String] :dashboard_definition
-    #   The new dashboard definition, as specified in a JSON literal. For
-    #   detailed information, see [Creating dashboards (CLI)][1] in the *IoT
-    #   SiteWise User Guide*.
+    #   The new dashboard definition, as specified in a JSON literal.
+    #
+    #   * IoT SiteWise Monitor (Classic) see [Create dashboards (CLI)][1]
+    #
+    #   * IoT SiteWise Monitor (AI-aware) see [Create dashboards (CLI)][2]
+    #
+    #   in the *IoT SiteWise User Guide*
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-dashboards-using-aws-cli.html
+    #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-dashboards-ai-dashboard-cli.html
     #
     # @option params [String] :client_token
     #   A unique case-sensitive identifier that you can provide to ensure the
@@ -6547,6 +7069,71 @@ module Aws::IoTSiteWise
     # @param [Hash] params ({})
     def update_dashboard(params = {}, options = {})
       req = build_request(:update_dashboard, params)
+      req.send_request(options)
+    end
+
+    # Updates a dataset.
+    #
+    # @option params [required, String] :dataset_id
+    #   The ID of the dataset.
+    #
+    # @option params [required, String] :dataset_name
+    #   The name of the dataset.
+    #
+    # @option params [String] :dataset_description
+    #   A description about the dataset, and its functionality.
+    #
+    # @option params [required, Types::DatasetSource] :dataset_source
+    #   The data source for the dataset.
+    #
+    # @option params [String] :client_token
+    #   A unique case-sensitive identifier that you can provide to ensure the
+    #   idempotency of the request. Don't reuse this client token if a new
+    #   idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::UpdateDatasetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDatasetResponse#dataset_id #dataset_id} => String
+    #   * {Types::UpdateDatasetResponse#dataset_arn #dataset_arn} => String
+    #   * {Types::UpdateDatasetResponse#dataset_status #dataset_status} => Types::DatasetStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_dataset({
+    #     dataset_id: "CustomID", # required
+    #     dataset_name: "RestrictedName", # required
+    #     dataset_description: "RestrictedDescription",
+    #     dataset_source: { # required
+    #       source_type: "KENDRA", # required, accepts KENDRA
+    #       source_format: "KNOWLEDGE_BASE", # required, accepts KNOWLEDGE_BASE
+    #       source_detail: {
+    #         kendra: {
+    #           knowledge_base_arn: "ARN", # required
+    #           role_arn: "ARN", # required
+    #         },
+    #       },
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dataset_id #=> String
+    #   resp.dataset_arn #=> String
+    #   resp.dataset_status.state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
+    #   resp.dataset_status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
+    #   resp.dataset_status.error.message #=> String
+    #   resp.dataset_status.error.details #=> Array
+    #   resp.dataset_status.error.details[0].code #=> String, one of "INCOMPATIBLE_COMPUTE_LOCATION", "INCOMPATIBLE_FORWARDING_CONFIGURATION"
+    #   resp.dataset_status.error.details[0].message #=> String
+    #
+    # @overload update_dataset(params = {})
+    # @param [Hash] params ({})
+    def update_dataset(params = {}, options = {})
+      req = build_request(:update_dataset, params)
       req.send_request(options)
     end
 
@@ -6685,6 +7272,16 @@ module Aws::IoTSiteWise
     #
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/appguide/monitor-alarms.html
     #
+    # @option params [String] :portal_type
+    #   Define the type of portal. The value for IoT SiteWise Monitor
+    #   (Classic) is `SITEWISE_PORTAL_V1`. The value for IoT SiteWise Monitor
+    #   (AI-aware) is `SITEWISE_PORTAL_V2`.
+    #
+    # @option params [Hash<String,Types::PortalTypeEntry>] :portal_type_configuration
+    #   The configuration entry associated with the specific portal type. The
+    #   value for IoT SiteWise Monitor (Classic) is `SITEWISE_PORTAL_V1`. The
+    #   value for IoT SiteWise Monitor (AI-aware) is `SITEWISE_PORTAL_V2`.
+    #
     # @return [Types::UpdatePortalResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdatePortalResponse#portal_status #portal_status} => Types::PortalStatus
@@ -6703,18 +7300,24 @@ module Aws::IoTSiteWise
     #         type: "PNG", # required, accepts PNG
     #       },
     #     },
-    #     role_arn: "ARN", # required
+    #     role_arn: "IamArn", # required
     #     client_token: "ClientToken",
     #     notification_sender_email: "Email",
     #     alarms: {
-    #       alarm_role_arn: "ARN", # required
+    #       alarm_role_arn: "IamArn", # required
     #       notification_lambda_arn: "ARN",
+    #     },
+    #     portal_type: "SITEWISE_PORTAL_V1", # accepts SITEWISE_PORTAL_V1, SITEWISE_PORTAL_V2
+    #     portal_type_configuration: {
+    #       "PortalTypeKey" => {
+    #         portal_tools: ["Name"],
+    #       },
     #     },
     #   })
     #
     # @example Response structure
     #
-    #   resp.portal_status.state #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "FAILED"
+    #   resp.portal_status.state #=> String, one of "CREATING", "PENDING", "UPDATING", "DELETING", "ACTIVE", "FAILED"
     #   resp.portal_status.error.code #=> String, one of "INTERNAL_FAILURE", "VALIDATION_ERROR", "LIMIT_EXCEEDED"
     #   resp.portal_status.error.message #=> String
     #
@@ -6780,7 +7383,7 @@ module Aws::IoTSiteWise
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.78.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

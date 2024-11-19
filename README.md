@@ -652,6 +652,7 @@ RubyGems.org page under "LINKS" section.
 | AmazonApiGatewayManagementApi                         | Aws::ApiGatewayManagementApi             | aws-sdk-apigatewaymanagementapi             | 2018-11-29  |
 | AmazonApiGatewayV2                                    | Aws::ApiGatewayV2                        | aws-sdk-apigatewayv2                        | 2018-11-29  |
 | AmazonConnectCampaignService                          | Aws::ConnectCampaignService              | aws-sdk-connectcampaignservice              | 2021-01-30  |
+| AmazonConnectCampaignServiceV2                        | Aws::ConnectCampaignsV2                  | aws-sdk-connectcampaignsv2                  | 2024-04-23  |
 | AmazonMQ                                              | Aws::MQ                                  | aws-sdk-mq                                  | 2017-11-27  |
 | AmazonMWAA                                            | Aws::MWAA                                | aws-sdk-mwaa                                | 2020-07-01  |
 | AmplifyBackend                                        | Aws::AmplifyBackend                      | aws-sdk-amplifybackend                      | 2020-08-11  |

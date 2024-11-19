@@ -137,7 +137,7 @@ module Aws
       def create_event_destination: (
                                       configuration_set_name: ::String,
                                       event_destination_name: ::String,
-                                      matching_event_types: Array[("ALL" | "TEXT_ALL" | "TEXT_SENT" | "TEXT_PENDING" | "TEXT_QUEUED" | "TEXT_SUCCESSFUL" | "TEXT_DELIVERED" | "TEXT_INVALID" | "TEXT_INVALID_MESSAGE" | "TEXT_UNREACHABLE" | "TEXT_CARRIER_UNREACHABLE" | "TEXT_BLOCKED" | "TEXT_CARRIER_BLOCKED" | "TEXT_SPAM" | "TEXT_UNKNOWN" | "TEXT_TTL_EXPIRED" | "VOICE_ALL" | "VOICE_INITIATED" | "VOICE_RINGING" | "VOICE_ANSWERED" | "VOICE_COMPLETED" | "VOICE_BUSY" | "VOICE_NO_ANSWER" | "VOICE_FAILED" | "VOICE_TTL_EXPIRED" | "MEDIA_ALL" | "MEDIA_PENDING" | "MEDIA_QUEUED" | "MEDIA_SUCCESSFUL" | "MEDIA_DELIVERED" | "MEDIA_INVALID" | "MEDIA_INVALID_MESSAGE" | "MEDIA_UNREACHABLE" | "MEDIA_CARRIER_UNREACHABLE" | "MEDIA_BLOCKED" | "MEDIA_CARRIER_BLOCKED" | "MEDIA_SPAM" | "MEDIA_UNKNOWN" | "MEDIA_TTL_EXPIRED" | "MEDIA_FILE_INACCESSIBLE" | "MEDIA_FILE_TYPE_UNSUPPORTED" | "MEDIA_FILE_SIZE_EXCEEDED")],
+                                      matching_event_types: Array[("ALL" | "TEXT_ALL" | "TEXT_SENT" | "TEXT_PENDING" | "TEXT_QUEUED" | "TEXT_SUCCESSFUL" | "TEXT_DELIVERED" | "TEXT_INVALID" | "TEXT_INVALID_MESSAGE" | "TEXT_UNREACHABLE" | "TEXT_CARRIER_UNREACHABLE" | "TEXT_BLOCKED" | "TEXT_CARRIER_BLOCKED" | "TEXT_SPAM" | "TEXT_UNKNOWN" | "TEXT_TTL_EXPIRED" | "TEXT_PROTECT_BLOCKED" | "VOICE_ALL" | "VOICE_INITIATED" | "VOICE_RINGING" | "VOICE_ANSWERED" | "VOICE_COMPLETED" | "VOICE_BUSY" | "VOICE_NO_ANSWER" | "VOICE_FAILED" | "VOICE_TTL_EXPIRED" | "MEDIA_ALL" | "MEDIA_PENDING" | "MEDIA_QUEUED" | "MEDIA_SUCCESSFUL" | "MEDIA_DELIVERED" | "MEDIA_INVALID" | "MEDIA_INVALID_MESSAGE" | "MEDIA_UNREACHABLE" | "MEDIA_CARRIER_UNREACHABLE" | "MEDIA_BLOCKED" | "MEDIA_CARRIER_BLOCKED" | "MEDIA_SPAM" | "MEDIA_UNKNOWN" | "MEDIA_TTL_EXPIRED" | "MEDIA_FILE_INACCESSIBLE" | "MEDIA_FILE_TYPE_UNSUPPORTED" | "MEDIA_FILE_SIZE_EXCEEDED")],
                                       ?cloud_watch_logs_destination: {
                                         iam_role_arn: ::String,
                                         log_group_arn: ::String
@@ -344,6 +344,7 @@ module Aws
         def event_destinations: () -> ::Array[Types::EventDestination]
         def default_message_type: () -> ("TRANSACTIONAL" | "PROMOTIONAL")
         def default_sender_id: () -> ::String
+        def default_message_feedback_enabled: () -> bool
         def created_timestamp: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoiceV2/Client.html#delete_configuration_set-instance_method
@@ -474,6 +475,23 @@ module Aws
                                         ) -> _DeleteProtectConfigurationResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProtectConfigurationResponseSuccess
 
+      interface _DeleteProtectConfigurationRuleSetNumberOverrideResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProtectConfigurationRuleSetNumberOverrideResult]
+        def protect_configuration_arn: () -> ::String
+        def protect_configuration_id: () -> ::String
+        def destination_phone_number: () -> ::String
+        def created_timestamp: () -> ::Time
+        def action: () -> ("ALLOW" | "BLOCK")
+        def iso_country_code: () -> ::String
+        def expiration_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoiceV2/Client.html#delete_protect_configuration_rule_set_number_override-instance_method
+      def delete_protect_configuration_rule_set_number_override: (
+                                                                   protect_configuration_id: ::String,
+                                                                   destination_phone_number: ::String
+                                                                 ) -> _DeleteProtectConfigurationRuleSetNumberOverrideResponseSuccess
+                                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProtectConfigurationRuleSetNumberOverrideResponseSuccess
+
       interface _DeleteRegistrationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRegistrationResult]
         def registration_arn: () -> ::String
@@ -600,7 +618,7 @@ module Aws
                                          ?configuration_set_names: Array[::String],
                                          ?filters: Array[
                                            {
-                                             name: ("event-destination-name" | "matching-event-types" | "default-message-type" | "default-sender-id" | "protect-configuration-id"),
+                                             name: ("event-destination-name" | "matching-event-types" | "default-message-type" | "default-sender-id" | "default-message-feedback-enabled" | "protect-configuration-id"),
                                              values: Array[::String]
                                            },
                                          ],
@@ -1004,6 +1022,27 @@ module Aws
                                             ) -> _ListPoolOriginationIdentitiesResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPoolOriginationIdentitiesResponseSuccess
 
+      interface _ListProtectConfigurationRuleSetNumberOverridesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProtectConfigurationRuleSetNumberOverridesResult]
+        def protect_configuration_arn: () -> ::String
+        def protect_configuration_id: () -> ::String
+        def rule_set_number_overrides: () -> ::Array[Types::ProtectConfigurationRuleSetNumberOverride]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoiceV2/Client.html#list_protect_configuration_rule_set_number_overrides-instance_method
+      def list_protect_configuration_rule_set_number_overrides: (
+                                                                  protect_configuration_id: ::String,
+                                                                  ?filters: Array[
+                                                                    {
+                                                                      name: ("iso-country-code" | "destination-phone-number-begins-with" | "action" | "expires-before" | "expires-after" | "created-before" | "created-after"),
+                                                                      values: Array[::String]
+                                                                    },
+                                                                  ],
+                                                                  ?next_token: ::String,
+                                                                  ?max_results: ::Integer
+                                                                ) -> _ListProtectConfigurationRuleSetNumberOverridesResponseSuccess
+                                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProtectConfigurationRuleSetNumberOverridesResponseSuccess
+
       interface _ListRegistrationAssociationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListRegistrationAssociationsResult]
         def registration_arn: () -> ::String
@@ -1054,6 +1093,18 @@ module Aws
                        ) -> _PutKeywordResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutKeywordResponseSuccess
 
+      interface _PutMessageFeedbackResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutMessageFeedbackResult]
+        def message_id: () -> ::String
+        def message_feedback_status: () -> ("RECEIVED" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoiceV2/Client.html#put_message_feedback-instance_method
+      def put_message_feedback: (
+                                  message_id: ::String,
+                                  message_feedback_status: ("RECEIVED" | "FAILED")
+                                ) -> _PutMessageFeedbackResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutMessageFeedbackResponseSuccess
+
       interface _PutOptedOutNumberResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutOptedOutNumberResult]
         def opt_out_list_arn: () -> ::String
@@ -1068,6 +1119,26 @@ module Aws
                                   opted_out_number: ::String
                                 ) -> _PutOptedOutNumberResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutOptedOutNumberResponseSuccess
+
+      interface _PutProtectConfigurationRuleSetNumberOverrideResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutProtectConfigurationRuleSetNumberOverrideResult]
+        def protect_configuration_arn: () -> ::String
+        def protect_configuration_id: () -> ::String
+        def destination_phone_number: () -> ::String
+        def created_timestamp: () -> ::Time
+        def action: () -> ("ALLOW" | "BLOCK")
+        def iso_country_code: () -> ::String
+        def expiration_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoiceV2/Client.html#put_protect_configuration_rule_set_number_override-instance_method
+      def put_protect_configuration_rule_set_number_override: (
+                                                                ?client_token: ::String,
+                                                                protect_configuration_id: ::String,
+                                                                destination_phone_number: ::String,
+                                                                action: ("ALLOW" | "BLOCK"),
+                                                                ?expiration_timestamp: ::Time
+                                                              ) -> _PutProtectConfigurationRuleSetNumberOverrideResponseSuccess
+                                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutProtectConfigurationRuleSetNumberOverrideResponseSuccess
 
       interface _PutRegistrationFieldValueResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutRegistrationFieldValueResult]
@@ -1244,7 +1315,8 @@ module Aws
                                 ?time_to_live: ::Integer,
                                 ?context: Hash[::String, ::String],
                                 ?dry_run: bool,
-                                ?protect_configuration_id: ::String
+                                ?protect_configuration_id: ::String,
+                                ?message_feedback_enabled: bool
                               ) -> _SendMediaMessageResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendMediaMessageResponseSuccess
 
@@ -1265,7 +1337,8 @@ module Aws
                                ?context: Hash[::String, ::String],
                                ?destination_country_parameters: Hash[("IN_TEMPLATE_ID" | "IN_ENTITY_ID"), ::String],
                                ?dry_run: bool,
-                               ?protect_configuration_id: ::String
+                               ?protect_configuration_id: ::String,
+                               ?message_feedback_enabled: bool
                              ) -> _SendTextMessageResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendTextMessageResponseSuccess
 
@@ -1285,7 +1358,8 @@ module Aws
                                 ?time_to_live: ::Integer,
                                 ?context: Hash[::String, ::String],
                                 ?dry_run: bool,
-                                ?protect_configuration_id: ::String
+                                ?protect_configuration_id: ::String,
+                                ?message_feedback_enabled: bool
                               ) -> _SendVoiceMessageResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendVoiceMessageResponseSuccess
 
@@ -1299,6 +1373,19 @@ module Aws
                                                        protect_configuration_id: ::String
                                                      ) -> _SetAccountDefaultProtectConfigurationResponseSuccess
                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetAccountDefaultProtectConfigurationResponseSuccess
+
+      interface _SetDefaultMessageFeedbackEnabledResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SetDefaultMessageFeedbackEnabledResult]
+        def configuration_set_arn: () -> ::String
+        def configuration_set_name: () -> ::String
+        def message_feedback_enabled: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoiceV2/Client.html#set_default_message_feedback_enabled-instance_method
+      def set_default_message_feedback_enabled: (
+                                                  configuration_set_name: ::String,
+                                                  message_feedback_enabled: bool
+                                                ) -> _SetDefaultMessageFeedbackEnabledResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetDefaultMessageFeedbackEnabledResponseSuccess
 
       interface _SetDefaultMessageTypeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SetDefaultMessageTypeResult]
@@ -1406,7 +1493,7 @@ module Aws
                                       configuration_set_name: ::String,
                                       event_destination_name: ::String,
                                       ?enabled: bool,
-                                      ?matching_event_types: Array[("ALL" | "TEXT_ALL" | "TEXT_SENT" | "TEXT_PENDING" | "TEXT_QUEUED" | "TEXT_SUCCESSFUL" | "TEXT_DELIVERED" | "TEXT_INVALID" | "TEXT_INVALID_MESSAGE" | "TEXT_UNREACHABLE" | "TEXT_CARRIER_UNREACHABLE" | "TEXT_BLOCKED" | "TEXT_CARRIER_BLOCKED" | "TEXT_SPAM" | "TEXT_UNKNOWN" | "TEXT_TTL_EXPIRED" | "VOICE_ALL" | "VOICE_INITIATED" | "VOICE_RINGING" | "VOICE_ANSWERED" | "VOICE_COMPLETED" | "VOICE_BUSY" | "VOICE_NO_ANSWER" | "VOICE_FAILED" | "VOICE_TTL_EXPIRED" | "MEDIA_ALL" | "MEDIA_PENDING" | "MEDIA_QUEUED" | "MEDIA_SUCCESSFUL" | "MEDIA_DELIVERED" | "MEDIA_INVALID" | "MEDIA_INVALID_MESSAGE" | "MEDIA_UNREACHABLE" | "MEDIA_CARRIER_UNREACHABLE" | "MEDIA_BLOCKED" | "MEDIA_CARRIER_BLOCKED" | "MEDIA_SPAM" | "MEDIA_UNKNOWN" | "MEDIA_TTL_EXPIRED" | "MEDIA_FILE_INACCESSIBLE" | "MEDIA_FILE_TYPE_UNSUPPORTED" | "MEDIA_FILE_SIZE_EXCEEDED")],
+                                      ?matching_event_types: Array[("ALL" | "TEXT_ALL" | "TEXT_SENT" | "TEXT_PENDING" | "TEXT_QUEUED" | "TEXT_SUCCESSFUL" | "TEXT_DELIVERED" | "TEXT_INVALID" | "TEXT_INVALID_MESSAGE" | "TEXT_UNREACHABLE" | "TEXT_CARRIER_UNREACHABLE" | "TEXT_BLOCKED" | "TEXT_CARRIER_BLOCKED" | "TEXT_SPAM" | "TEXT_UNKNOWN" | "TEXT_TTL_EXPIRED" | "TEXT_PROTECT_BLOCKED" | "VOICE_ALL" | "VOICE_INITIATED" | "VOICE_RINGING" | "VOICE_ANSWERED" | "VOICE_COMPLETED" | "VOICE_BUSY" | "VOICE_NO_ANSWER" | "VOICE_FAILED" | "VOICE_TTL_EXPIRED" | "MEDIA_ALL" | "MEDIA_PENDING" | "MEDIA_QUEUED" | "MEDIA_SUCCESSFUL" | "MEDIA_DELIVERED" | "MEDIA_INVALID" | "MEDIA_INVALID_MESSAGE" | "MEDIA_UNREACHABLE" | "MEDIA_CARRIER_UNREACHABLE" | "MEDIA_BLOCKED" | "MEDIA_CARRIER_BLOCKED" | "MEDIA_SPAM" | "MEDIA_UNKNOWN" | "MEDIA_TTL_EXPIRED" | "MEDIA_FILE_INACCESSIBLE" | "MEDIA_FILE_TYPE_UNSUPPORTED" | "MEDIA_FILE_SIZE_EXCEEDED")],
                                       ?cloud_watch_logs_destination: {
                                         iam_role_arn: ::String,
                                         log_group_arn: ::String

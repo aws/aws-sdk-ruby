@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.93.0 (2024-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.92.0 (2024-11-15)
+------------------
+
+* Feature - Doc-only updates and enhancements related to creating DataSync tasks and describing task executions.
+
 1.91.0 (2024-10-30)
 ------------------
 

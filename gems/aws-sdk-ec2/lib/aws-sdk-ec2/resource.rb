@@ -212,6 +212,9 @@ module Aws::EC2
     #     },
     #     disable_api_stop: false,
     #     enable_primary_ipv_6: false,
+    #     operator: {
+    #       principal: "String",
+    #     },
     #     dry_run: false,
     #     disable_api_termination: false,
     #     instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
@@ -544,6 +547,8 @@ module Aws::EC2
     #   attached to your instance and you enable a primary IPv6 address, the
     #   first IPv6 GUA address associated with the ENI becomes the primary
     #   IPv6 address.
+    # @option options [Types::OperatorRequest] :operator
+    #   Reserved for internal use.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
@@ -887,6 +892,9 @@ module Aws::EC2
     #       udp_stream_timeout: 1,
     #       udp_timeout: 1,
     #     },
+    #     operator: {
+    #       principal: "String",
+    #     },
     #     subnet_id: "SubnetId", # required
     #     description: "String",
     #     private_ip_address: "String",
@@ -971,6 +979,8 @@ module Aws::EC2
     #   the primary IPv6 address.
     # @option options [Types::ConnectionTrackingSpecificationRequest] :connection_tracking_specification
     #   A connection tracking specification for the network interface.
+    # @option options [Types::OperatorRequest] :operator
+    #   Reserved for internal use.
     # @option options [required, String] :subnet_id
     #   The ID of the subnet to associate with the network interface.
     # @option options [String] :description
@@ -1449,6 +1459,9 @@ module Aws::EC2
     #     multi_attach_enabled: false,
     #     throughput: 1,
     #     client_token: "String",
+    #     operator: {
+    #       principal: "String",
+    #     },
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -1597,6 +1610,8 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
+    # @option options [Types::OperatorRequest] :operator
+    #   Reserved for internal use.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

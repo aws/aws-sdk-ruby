@@ -139,7 +139,7 @@ module Aws::Outposts
       attr_accessor outpost_identifier: ::String
       attr_accessor line_items: ::Array[Types::LineItemRequest]
       attr_accessor payment_option: ("ALL_UPFRONT" | "NO_UPFRONT" | "PARTIAL_UPFRONT")
-      attr_accessor payment_term: ("THREE_YEARS" | "ONE_YEAR")
+      attr_accessor payment_term: ("THREE_YEARS" | "ONE_YEAR" | "FIVE_YEARS")
       SENSITIVE: []
     end
 
@@ -507,7 +507,7 @@ module Aws::Outposts
       attr_accessor payment_option: ("ALL_UPFRONT" | "NO_UPFRONT" | "PARTIAL_UPFRONT")
       attr_accessor order_submission_date: ::Time
       attr_accessor order_fulfilled_date: ::Time
-      attr_accessor payment_term: ("THREE_YEARS" | "ONE_YEAR")
+      attr_accessor payment_term: ("THREE_YEARS" | "ONE_YEAR" | "FIVE_YEARS")
       attr_accessor order_type: ("OUTPOST" | "REPLACEMENT")
       SENSITIVE: []
     end

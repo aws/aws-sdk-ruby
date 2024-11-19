@@ -6584,20 +6584,17 @@ module Aws::S3Control
     #     Restrictions][8].
     #
     #   ^
-    #
     # * Error code: `MalformedXMLError`
     #
     #   * Description: The XML provided does not match the schema.
     #
     #   ^
-    #
     # * Error code: `OperationAbortedError `
     #
     #   * Description: A conflicting conditional action is currently in
     #     progress against this resource. Try again.
     #
     #   ^
-    #
     # * Error code: `InternalError`
     #
     #   * Description: The service was unable to apply the provided tag to
@@ -7723,7 +7720,7 @@ module Aws::S3Control
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.96.0'
+      context[:gem_version] = '1.97.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

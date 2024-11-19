@@ -788,7 +788,6 @@ module Aws::WAFV2
     #   * If the request contains an `Accept` header with a value of
     #     `text/html`, the response includes a JavaScript page interstitial
     #     with a challenge script.
-    #
     #   Challenges run silent browser interrogations in the background, and
     #   don't generally affect the end user experience.
     #
@@ -6278,7 +6277,6 @@ module Aws::WAFV2
     #   * IP address 10.1.1.1: count 3
     #
     #   * IP address 127.0.0.0: count 1
-    #
     # * If the aggregation criteria is HTTP method, then each individual
     #   HTTP method is an aggregation instance. The aggregation instances
     #   and request counts for our example would be the following:
@@ -6286,7 +6284,6 @@ module Aws::WAFV2
     #   * HTTP method POST: count 2
     #
     #   * HTTP method GET: count 2
-    #
     # * If the aggregation criteria is IP address and HTTP method, then each
     #   IP address and each HTTP method would contribute to the combined
     #   aggregation instance. The aggregation instances and request counts
@@ -8383,7 +8380,6 @@ module Aws::WAFV2
     #     * IP address 10.1.1.1: count 3
     #
     #     * IP address 127.0.0.0: count 1
-    #
     #   * If the aggregation criteria is HTTP method, then each individual
     #     HTTP method is an aggregation instance. The aggregation instances
     #     and request counts for our example would be the following:
@@ -8391,7 +8387,6 @@ module Aws::WAFV2
     #     * HTTP method POST: count 2
     #
     #     * HTTP method GET: count 2
-    #
     #   * If the aggregation criteria is IP address and HTTP method, then
     #     each IP address and each HTTP method would contribute to the
     #     combined aggregation instance. The aggregation instances and

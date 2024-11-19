@@ -417,7 +417,6 @@ module Aws::ElasticTranscoder
     #     * **For ogg**: None
     #
     #     * **For webm**: None
-    #
     #   * **Valid Sidecar Caption Formats:** Elastic Transcoder supports
     #     dfxp (first div element only), scc, srt, and webvtt. If you want
     #     ttml or smpte-tt compatible captions, specify dfxp as your output
@@ -426,7 +425,6 @@ module Aws::ElasticTranscoder
     #     * **For FMP4**: dfxp
     #
     #     * **Non-FMP4 outputs**: All sidecar types
-    #
     #     `fmp4` captions have an extension of `.ismt`
     #   @return [String]
     #
@@ -1065,7 +1063,6 @@ module Aws::ElasticTranscoder
     #     * **Group**: The value in the `Grantee` object is one of the
     #       following predefined Amazon S3 groups: `AllUsers`,
     #       `AuthenticatedUsers`, or `LogDelivery`.
-    #
     #   * **Grantee**: The AWS user or group that you want to have access to
     #     transcoded files and playlists. To identify the user or group, you
     #     can specify the canonical user ID for an AWS account, an origin
@@ -1089,7 +1086,6 @@ module Aws::ElasticTranscoder
     #     * `FULL_CONTROL`: The grantee has `READ`, `READ_ACP`, and
     #       `WRITE_ACP` permissions for the objects that Elastic Transcoder
     #       adds to the Amazon S3 bucket.
-    #
     #   * **StorageClass**: The Amazon S3 storage class, `Standard` or
     #     `ReducedRedundancy`, that you want Elastic Transcoder to assign to
     #     the video files and playlists that it stores in your Amazon S3
@@ -1134,7 +1130,6 @@ module Aws::ElasticTranscoder
     #     * **Group**: The value in the `Grantee` object is one of the
     #       following predefined Amazon S3 groups: `AllUsers`,
     #       `AuthenticatedUsers`, or `LogDelivery`.
-    #
     #   * **Grantee**: The AWS user or group that you want to have access to
     #     thumbnail files. To identify the user or group, you can specify
     #     the canonical user ID for an AWS account, an origin access
@@ -1158,7 +1153,6 @@ module Aws::ElasticTranscoder
     #     * `FULL_CONTROL`: The grantee has `READ`, `READ_ACP`, and
     #       `WRITE_ACP` permissions for the thumbnails that Elastic
     #       Transcoder adds to the Amazon S3 bucket.
-    #
     #   * **StorageClass**: The Amazon S3 storage class, `Standard` or
     #     `ReducedRedundancy`, that you want Elastic Transcoder to assign to
     #     the thumbnails that it stores in your Amazon S3 bucket.
@@ -2523,7 +2517,6 @@ module Aws::ElasticTranscoder
     #
     #       * `Group`: One of the following predefined Amazon S3 groups:
     #         `AllUsers`, `AuthenticatedUsers`, or `LogDelivery`.
-    #
     #     * `Grantee`: The AWS user or group that you want to have access to
     #       transcoded files and playlists.
     #
@@ -2542,7 +2535,6 @@ module Aws::ElasticTranscoder
     #       * `FULL_CONTROL`: The grantee has `READ`, `READ_ACP`, and
     #         `WRITE_ACP` permissions for the objects that Elastic
     #         Transcoder adds to the Amazon S3 bucket.
-    #
     #   * **StorageClass**: The Amazon S3 storage class, Standard or
     #     ReducedRedundancy, that you want Elastic Transcoder to assign to
     #     the video files and playlists that it stores in your Amazon S3
@@ -2575,7 +2567,6 @@ module Aws::ElasticTranscoder
     #
     #       * `Group`: One of the following predefined Amazon S3 groups:
     #         `AllUsers`, `AuthenticatedUsers`, or `LogDelivery`.
-    #
     #     * `Grantee`: The AWS user or group that you want to have access to
     #       thumbnail files.
     #
@@ -2595,7 +2586,6 @@ module Aws::ElasticTranscoder
     #       * `FULL_CONTROL`: The grantee has READ, READ\_ACP, and
     #         WRITE\_ACP permissions for the thumbnails that Elastic
     #         Transcoder adds to the Amazon S3 bucket.
-    #
     #   * `StorageClass`: The Amazon S3 storage class, `Standard` or
     #     `ReducedRedundancy`, that you want Elastic Transcoder to assign to
     #     the thumbnails that it stores in your Amazon S3 bucket.
@@ -3588,7 +3578,6 @@ module Aws::ElasticTranscoder
     #     * **Group**: The value in the `Grantee` object is one of the
     #       following predefined Amazon S3 groups: `AllUsers`,
     #       `AuthenticatedUsers`, or `LogDelivery`.
-    #
     #   * **Grantee**: The AWS user or group that you want to have access to
     #     transcoded files and playlists. To identify the user or group, you
     #     can specify the canonical user ID for an AWS account, an origin
@@ -3612,7 +3601,6 @@ module Aws::ElasticTranscoder
     #     * `FULL_CONTROL`: The grantee has `READ`, `READ_ACP`, and
     #       `WRITE_ACP` permissions for the objects that Elastic Transcoder
     #       adds to the Amazon S3 bucket.
-    #
     #   * **StorageClass**: The Amazon S3 storage class, `Standard` or
     #     `ReducedRedundancy`, that you want Elastic Transcoder to assign to
     #     the video files and playlists that it stores in your Amazon S3
@@ -3657,7 +3645,6 @@ module Aws::ElasticTranscoder
     #     * **Group**: The value in the `Grantee` object is one of the
     #       following predefined Amazon S3 groups: `AllUsers`,
     #       `AuthenticatedUsers`, or `LogDelivery`.
-    #
     #   * **Grantee**: The AWS user or group that you want to have access to
     #     thumbnail files. To identify the user or group, you can specify
     #     the canonical user ID for an AWS account, an origin access
@@ -3681,7 +3668,6 @@ module Aws::ElasticTranscoder
     #     * `FULL_CONTROL`: The grantee has `READ`, `READ_ACP`, and
     #       `WRITE_ACP` permissions for the thumbnails that Elastic
     #       Transcoder adds to the Amazon S3 bucket.
-    #
     #   * **StorageClass**: The Amazon S3 storage class, `Standard` or
     #     `ReducedRedundancy`, that you want Elastic Transcoder to assign to
     #     the thumbnails that it stores in your Amazon S3 bucket.
@@ -3815,27 +3801,27 @@ module Aws::ElasticTranscoder
     #
     #   * 1b - 396
     #
-    #   * 1\.1 - 900
+    #   * 1.1 - 900
     #
-    #   * 1\.2 - 2376
+    #   * 1.2 - 2376
     #
-    #   * 1\.3 - 2376
+    #   * 1.3 - 2376
     #
     #   * 2 - 2376
     #
-    #   * 2\.1 - 4752
+    #   * 2.1 - 4752
     #
-    #   * 2\.2 - 8100
+    #   * 2.2 - 8100
     #
     #   * 3 - 8100
     #
-    #   * 3\.1 - 18000
+    #   * 3.1 - 18000
     #
-    #   * 3\.2 - 20480
+    #   * 3.2 - 20480
     #
     #   * 4 - 32768
     #
-    #   * 4\.1 - 32768
+    #   * 4.1 - 32768
     #
     #   **MaxBitRate (Optional, H.264/MPEG2/VP8/VP9 only)**
     #
@@ -3989,23 +3975,23 @@ module Aws::ElasticTranscoder
     #
     #   * 1b - 128 : 160
     #
-    #   * 1\.1 - 192 : 240
+    #   * 1.1 - 192 : 240
     #
-    #   * 1\.2 - 384 : 480
+    #   * 1.2 - 384 : 480
     #
-    #   * 1\.3 - 768 : 960
+    #   * 1.3 - 768 : 960
     #
     #   * 2 - 2000 : 2500
     #
     #   * 3 - 10000 : 12500
     #
-    #   * 3\.1 - 14000 : 17500
+    #   * 3.1 - 14000 : 17500
     #
-    #   * 3\.2 - 20000 : 25000
+    #   * 3.2 - 20000 : 25000
     #
     #   * 4 - 20000 : 25000
     #
-    #   * 4\.1 - 50000 : 62500
+    #   * 4.1 - 50000 : 62500
     #   @return [String]
     #
     # @!attribute [rw] frame_rate
@@ -4038,27 +4024,27 @@ module Aws::ElasticTranscoder
     #
     #   * 1b - 380160
     #
-    #   * 1\.1 - 76800
+    #   * 1.1 - 76800
     #
-    #   * 1\.2 - 1536000
+    #   * 1.2 - 1536000
     #
-    #   * 1\.3 - 3041280
+    #   * 1.3 - 3041280
     #
     #   * 2 - 3041280
     #
-    #   * 2\.1 - 5068800
+    #   * 2.1 - 5068800
     #
-    #   * 2\.2 - 5184000
+    #   * 2.2 - 5184000
     #
     #   * 3 - 10368000
     #
-    #   * 3\.1 - 27648000
+    #   * 3.1 - 27648000
     #
-    #   * 3\.2 - 55296000
+    #   * 3.2 - 55296000
     #
     #   * 4 - 62914560
     #
-    #   * 4\.1 - 62914560
+    #   * 4.1 - 62914560
     #   @return [String]
     #
     # @!attribute [rw] max_frame_rate
@@ -4109,27 +4095,27 @@ module Aws::ElasticTranscoder
     #
     #     * 1b - 25344
     #
-    #     * 1\.1 - 101376
+    #     * 1.1 - 101376
     #
-    #     * 1\.2 - 101376
+    #     * 1.2 - 101376
     #
-    #     * 1\.3 - 101376
+    #     * 1.3 - 101376
     #
     #     * 2 - 101376
     #
-    #     * 2\.1 - 202752
+    #     * 2.1 - 202752
     #
-    #     * 2\.2 - 404720
+    #     * 2.2 - 404720
     #
     #     * 3 - 404720
     #
-    #     * 3\.1 - 921600
+    #     * 3.1 - 921600
     #
-    #     * 3\.2 - 1310720
+    #     * 3.2 - 1310720
     #
     #     * 4 - 2097152
     #
-    #     * 4\.1 - 2097152
+    #     * 4.1 - 2097152
     #   @return [String]
     #
     # @!attribute [rw] aspect_ratio

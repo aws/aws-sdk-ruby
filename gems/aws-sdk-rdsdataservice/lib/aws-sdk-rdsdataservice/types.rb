@@ -367,6 +367,21 @@ module Aws::RDSDataService
       include Aws::Structure
     end
 
+    # A request was canceled because the Aurora Serverless v2 DB instance
+    # was in a paused state. The Data API request automatically causes the
+    # DB instance to begin resuming. Wait a few seconds and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/DatabaseResumingException AWS API Documentation
+    #
+    class DatabaseResumingException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The writer instance in the DB cluster isn't available.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/DatabaseUnavailableException AWS API Documentation

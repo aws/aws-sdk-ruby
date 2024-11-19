@@ -2582,7 +2582,6 @@ module Aws::ResilienceHub
     #          </note>
     #
     #         Type: String
-    #
     #     * <i> <code>type</code> </i>
     #
     #       The type of resource.
@@ -2612,7 +2611,6 @@ module Aws::ResilienceHub
     #       "accounts":[{"id":"<ACCOUNT_ID>"}]}]"`
     #
     #        </note>
-    #
     #   * <b> <code>appComponents</code> </b>
     #
     #     List of Application Components that this resource belongs to. If
@@ -2661,7 +2659,6 @@ module Aws::ResilienceHub
     #       "accounts":[{"id":"<ACCOUNT_ID>"}]}]"`
     #
     #        </note>
-    #
     #   * <b> <code>excludedResources</code> </b>
     #
     #     The list of logical resource identifiers to be excluded from the
@@ -2731,7 +2728,6 @@ module Aws::ResilienceHub
     #          </note>
     #
     #         Type: String
-    #
     #   * <b> <code>version</code> </b>
     #
     #     Resilience Hub application version.
@@ -4902,7 +4898,6 @@ module Aws::ResilienceHub
     #          </note>
     #
     #         Type: String
-    #
     #     * <i> <code>type</code> </i>
     #
     #       The type of resource.
@@ -4932,7 +4927,6 @@ module Aws::ResilienceHub
     #       "accounts":[{"id":"<ACCOUNT_ID>"}]}]"`
     #
     #        </note>
-    #
     #   * <b> <code>appComponents</code> </b>
     #
     #     List of Application Components that this resource belongs to. If
@@ -4981,7 +4975,6 @@ module Aws::ResilienceHub
     #       "accounts":[{"id":"<ACCOUNT_ID>"}]}]"`
     #
     #        </note>
-    #
     #   * <b> <code>excludedResources</code> </b>
     #
     #     The list of logical resource identifiers to be excluded from the
@@ -5051,7 +5044,6 @@ module Aws::ResilienceHub
     #          </note>
     #
     #         Type: String
-    #
     #   * <b> <code>version</code> </b>
     #
     #     Resilience Hub application version.

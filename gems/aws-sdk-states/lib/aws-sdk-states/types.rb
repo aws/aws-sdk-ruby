@@ -853,7 +853,6 @@ module Aws::States
     #     * `Execution has exceeded the max execution time`.
     #
     #     * `Execution redrivable period exceeded`.
-    #
     #   * For a Distributed Map that includes child workflows of type
     #     `EXPRESS`, `redriveStatusReason` is only returned if the child
     #     workflows are not redrivable. This happens when the child workflow

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.168.0 (2024-11-18)
+------------------
+
+* Feature - This release adds support for adding VPC Lattice configurations in ECS CreateService/UpdateService APIs. The configuration allows for associating VPC Lattice target groups with ECS Services.
+
 1.167.0 (2024-11-06)
 ------------------
 

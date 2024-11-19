@@ -5055,7 +5055,6 @@ module Aws::FMS
     #       and `ActionToUse`, which is the new action to use for the rule.
     #       For information about using rule action override, see
     #       [RuleActionOverride][4] in the *WAF API Reference*.
-    #
     #   * Example: `WAFV2` - `CAPTCHA` and `Challenge` configs
     #
     #     `"{"type":"WAFV2","preProcessRuleGroups":[{"ruleGroupArn":null,"overrideAction":{"type":"NONE"},"managedRuleGroupIdentifier":{"versionEnabled":null,"version":null,"vendorName":"AWS","managedRuleGroupName":"AWSManagedRulesAdminProtectionRuleSet"},"ruleGroupType":"ManagedRuleGroup","excludeRules":[],"sampledRequestsEnabled":true}],"postProcessRuleGroups":[],"defaultAction":{"type":"ALLOW"},"customRequestHandling":null,"customResponse":null,"overrideCustomerWebACLAssociation":false,"loggingConfiguration":null,"sampledRequestsEnabledForDefaultActions":true,"captchaConfig":{"immunityTimeProperty":{"immunityTime":500}},"challengeConfig":{"immunityTimeProperty":{"immunityTime":800}},"tokenDomains":["google.com","amazon.com"],"associationConfig":{"requestBody":{"CLOUDFRONT":{"defaultSizeInspectionLimit":"KB_16"}}}}"`
@@ -5077,7 +5076,6 @@ module Aws::FMS
     #       distribution should send to WAF for inspection. For more
     #       information, see [DefaultSizeInspectionLimit][8] in the *WAF API
     #       Reference*.
-    #
     #   * Example: `WAFV2` - Firewall Manager support for WAF managed rule
     #     group versioning
     #

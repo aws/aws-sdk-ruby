@@ -7788,7 +7788,6 @@ module Aws::CloudFront
     #       remove the `ETag` field from the distribution configuration.
     #
     #     * You can't change the value of `CallerReference`.
-    #
     # 3.  Submit an `UpdateDistribution` request, providing the updated
     #     distribution configuration. The new configuration replaces the
     #     existing configuration. The values that you specify in an
@@ -9490,7 +9489,7 @@ module Aws::CloudFront
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.104.0'
+      context[:gem_version] = '1.105.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

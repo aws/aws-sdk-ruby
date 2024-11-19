@@ -592,6 +592,7 @@ module Aws::RDS
     #     serverless_v2_scaling_configuration: {
     #       min_capacity: 1.0,
     #       max_capacity: 1.0,
+    #       seconds_until_auto_pause: 1,
     #     },
     #     network_type: "String",
     #     rds_custom_cluster_configuration: {

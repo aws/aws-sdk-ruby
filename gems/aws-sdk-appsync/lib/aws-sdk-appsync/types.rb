@@ -2352,7 +2352,6 @@ module Aws::AppSync
     #     * Cache hits: The number of cache hits during a request.
     #
     #     * Cache misses: The number of cache misses during a request.
-    #
     #     These metrics can be emitted to CloudWatch per resolver or for all
     #     resolvers in the request. Metrics will be recorded by API ID and
     #     resolver name. `resolverLevelMetricsBehavior` accepts one of these
@@ -2363,7 +2362,6 @@ module Aws::AppSync
     #
     #     * `PER_RESOLVER_METRICS`: Records and emits metric data for
     #       resolvers that have the `metricsConfig` value set to `ENABLED`.
-    #
     # 2.  `dataSourceLevelMetricsBehavior`: Controls how data source metrics
     #     will be emitted to CloudWatch. Data source metrics include:
     #
@@ -2374,7 +2372,6 @@ module Aws::AppSync
     #
     #     * Errors: The number of errors that occurred during a data source
     #       invocation.
-    #
     #     These metrics can be emitted to CloudWatch per data source or for
     #     all data sources in the request. Metrics will be recorded by API
     #     ID and data source name. `dataSourceLevelMetricsBehavior` accepts
@@ -2386,7 +2383,6 @@ module Aws::AppSync
     #     * `PER_DATA_SOURCE_METRICS`: Records and emits metric data for
     #       data sources that have the `metricsConfig` value set to
     #       `ENABLED`.
-    #
     # 3.  `operationLevelMetricsConfig`: Controls how operation metrics will
     #     be emitted to CloudWatch. Operation metrics include:
     #
@@ -2395,7 +2391,6 @@ module Aws::AppSync
     #
     #     * GraphQL errors: The number of GraphQL errors that occurred
     #       during a specified GraphQL operation.
-    #
     #     Metrics will be recorded by API ID and operation name. You can set
     #     the value to `ENABLED` or `DISABLED`.
     #
@@ -4132,7 +4127,6 @@ module Aws::AppSync
     #
     #     * The generated request/response functions that got resolved for
     #       error fields.
-    #
     #   * **ALL**: The following information is logged for all fields in the
     #     query:
     #

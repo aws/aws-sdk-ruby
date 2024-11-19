@@ -333,6 +333,7 @@ module Aws::ECS
       attr_accessor enable_execute_command: bool
       attr_accessor service_connect_configuration: Types::ServiceConnectConfiguration
       attr_accessor volume_configurations: ::Array[Types::ServiceVolumeConfiguration]
+      attr_accessor vpc_lattice_configurations: ::Array[Types::VpcLatticeConfiguration]
       SENSITIVE: []
     end
 
@@ -468,6 +469,7 @@ module Aws::ECS
       attr_accessor service_connect_resources: ::Array[Types::ServiceConnectServiceResource]
       attr_accessor volume_configurations: ::Array[Types::ServiceVolumeConfiguration]
       attr_accessor fargate_ephemeral_storage: Types::DeploymentEphemeralStorage
+      attr_accessor vpc_lattice_configurations: ::Array[Types::VpcLatticeConfiguration]
       SENSITIVE: []
     end
 
@@ -1489,6 +1491,7 @@ module Aws::ECS
       attr_accessor volume_configurations: ::Array[Types::ServiceVolumeConfiguration]
       attr_accessor fargate_ephemeral_storage: Types::DeploymentEphemeralStorage
       attr_accessor created_at: ::Time
+      attr_accessor vpc_lattice_configurations: ::Array[Types::VpcLatticeConfiguration]
       SENSITIVE: []
     end
 
@@ -1906,6 +1909,7 @@ module Aws::ECS
       attr_accessor service_registries: ::Array[Types::ServiceRegistry]
       attr_accessor service_connect_configuration: Types::ServiceConnectConfiguration
       attr_accessor volume_configurations: ::Array[Types::ServiceVolumeConfiguration]
+      attr_accessor vpc_lattice_configurations: ::Array[Types::VpcLatticeConfiguration]
       SENSITIVE: []
     end
 
@@ -1961,6 +1965,13 @@ module Aws::ECS
     class VolumeFrom
       attr_accessor source_container: ::String
       attr_accessor read_only: bool
+      SENSITIVE: []
+    end
+
+    class VpcLatticeConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor target_group_arn: ::String
+      attr_accessor port_name: ::String
       SENSITIVE: []
     end
   end

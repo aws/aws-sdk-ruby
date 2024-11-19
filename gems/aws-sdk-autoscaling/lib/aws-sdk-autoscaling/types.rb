@@ -324,11 +324,24 @@ module Aws::AutoScaling
     #   specify up to 10 traffic sources.
     #   @return [Array<Types::TrafficSourceIdentifier>]
     #
+    # @!attribute [rw] skip_zonal_shift_validation
+    #   If you enable zonal shift with cross-zone disabled load balancers,
+    #   capacity could become imbalanced across Availability Zones. To skip
+    #   the validation, specify `true`. For more information, see [Auto
+    #   Scaling group zonal shift][1] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-zonal-shift.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachTrafficSourcesType AWS API Documentation
     #
     class AttachTrafficSourcesType < Struct.new(
       :auto_scaling_group_name,
-      :traffic_sources)
+      :traffic_sources,
+      :skip_zonal_shift_validation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -495,6 +508,10 @@ module Aws::AutoScaling
     #   The instance capacity distribution across Availability Zones.
     #   @return [Types::AvailabilityZoneDistribution]
     #
+    # @!attribute [rw] availability_zone_impairment_policy
+    #   The Availability Zone impairment policy.
+    #   @return [Types::AvailabilityZoneImpairmentPolicy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AutoScalingGroup AWS API Documentation
     #
     class AutoScalingGroup < Struct.new(
@@ -533,7 +550,8 @@ module Aws::AutoScaling
       :default_instance_warmup,
       :traffic_sources,
       :instance_maintenance_policy,
-      :availability_zone_distribution)
+      :availability_zone_distribution,
+      :availability_zone_impairment_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -715,6 +733,35 @@ module Aws::AutoScaling
     #
     class AvailabilityZoneDistribution < Struct.new(
       :capacity_distribution_strategy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an Availability Zone impairment policy.
+    #
+    # @!attribute [rw] zonal_shift_enabled
+    #   If `true`, enable zonal shift for your Auto Scaling group.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] impaired_zone_health_check_behavior
+    #   Specifies the health check behavior for the impaired Availability
+    #   Zone in an active zonal shift. If you select `Replace unhealthy`,
+    #   instances that appear unhealthy will be replaced in all Availability
+    #   Zones. If you select `Ignore unhealthy`, instances will not be
+    #   replaced in the Availability Zone with the active zonal shift. For
+    #   more information, see [Auto Scaling group zonal shift][1] in the
+    #   *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-zonal-shift.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AvailabilityZoneImpairmentPolicy AWS API Documentation
+    #
+    class AvailabilityZoneImpairmentPolicy < Struct.new(
+      :zonal_shift_enabled,
+      :impaired_zone_health_check_behavior)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1295,6 +1342,22 @@ module Aws::AutoScaling
     #   The instance capacity distribution across Availability Zones.
     #   @return [Types::AvailabilityZoneDistribution]
     #
+    # @!attribute [rw] availability_zone_impairment_policy
+    #   The policy for Availability Zone impairment.
+    #   @return [Types::AvailabilityZoneImpairmentPolicy]
+    #
+    # @!attribute [rw] skip_zonal_shift_validation
+    #   If you enable zonal shift with cross-zone disabled load balancers,
+    #   capacity could become imbalanced across Availability Zones. To skip
+    #   the validation, specify `true`. For more information, see [Auto
+    #   Scaling group zonal shift][1] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-zonal-shift.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateAutoScalingGroupType AWS API Documentation
     #
     class CreateAutoScalingGroupType < Struct.new(
@@ -1326,7 +1389,9 @@ module Aws::AutoScaling
       :default_instance_warmup,
       :traffic_sources,
       :instance_maintenance_policy,
-      :availability_zone_distribution)
+      :availability_zone_distribution,
+      :availability_zone_impairment_policy,
+      :skip_zonal_shift_validation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7942,6 +8007,22 @@ module Aws::AutoScaling
     #   The instance capacity distribution across Availability Zones.
     #   @return [Types::AvailabilityZoneDistribution]
     #
+    # @!attribute [rw] availability_zone_impairment_policy
+    #   The policy for Availability Zone impairment.
+    #   @return [Types::AvailabilityZoneImpairmentPolicy]
+    #
+    # @!attribute [rw] skip_zonal_shift_validation
+    #   If you enable zonal shift with cross-zone disabled load balancers,
+    #   capacity could become imbalanced across Availability Zones. To skip
+    #   the validation, specify `true`. For more information, see [Auto
+    #   Scaling group zonal shift][1] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-zonal-shift.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/UpdateAutoScalingGroupType AWS API Documentation
     #
     class UpdateAutoScalingGroupType < Struct.new(
@@ -7967,7 +8048,9 @@ module Aws::AutoScaling
       :desired_capacity_type,
       :default_instance_warmup,
       :instance_maintenance_policy,
-      :availability_zone_distribution)
+      :availability_zone_distribution,
+      :availability_zone_impairment_policy,
+      :skip_zonal_shift_validation)
       SENSITIVE = []
       include Aws::Structure
     end

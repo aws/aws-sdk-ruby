@@ -443,7 +443,6 @@ module Aws::ApplicationDiscoveryService
     #
     #         2.  AWSApplicationDiscoveryServiceFirehose - Grant describe
     #             permissions for all tables in the database.
-    #
     #   * S3\_BUCKET\_LIMIT\_FAILURE - You reached the limit for Amazon S3
     #     buckets. Reduce the number of S3 buckets or request a limit
     #     increase and try again. For more information, see [Bucket

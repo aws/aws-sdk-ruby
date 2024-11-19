@@ -306,6 +306,12 @@ module Aws::EC2
       data[:current_instance_boot_mode]
     end
 
+    # The entity that manages the instance.
+    # @return [Types::OperatorResponse]
+    def operator
+      data[:operator]
+    end
+
     # The ID of the AMI used to launch the instance.
     # @return [String]
     def image_id

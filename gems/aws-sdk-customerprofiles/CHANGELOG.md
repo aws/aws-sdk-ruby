@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2024-11-18)
+------------------
+
+* Feature - This release introduces Segmentation APIs and new Calculated Attribute Event Filters as part of Amazon Connect Customer Profiles service.
+
 1.56.0 (2024-11-06)
 ------------------
 

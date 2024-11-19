@@ -525,7 +525,7 @@ module Aws::Outposts
     #       },
     #     ],
     #     payment_option: "ALL_UPFRONT", # required, accepts ALL_UPFRONT, NO_UPFRONT, PARTIAL_UPFRONT
-    #     payment_term: "THREE_YEARS", # accepts THREE_YEARS, ONE_YEAR
+    #     payment_term: "THREE_YEARS", # accepts THREE_YEARS, ONE_YEAR, FIVE_YEARS
     #   })
     #
     # @example Response structure
@@ -549,7 +549,7 @@ module Aws::Outposts
     #   resp.order.payment_option #=> String, one of "ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"
     #   resp.order.order_submission_date #=> Time
     #   resp.order.order_fulfilled_date #=> Time
-    #   resp.order.payment_term #=> String, one of "THREE_YEARS", "ONE_YEAR"
+    #   resp.order.payment_term #=> String, one of "THREE_YEARS", "ONE_YEAR", "FIVE_YEARS"
     #   resp.order.order_type #=> String, one of "OUTPOST", "REPLACEMENT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/CreateOrder AWS API Documentation
@@ -981,7 +981,7 @@ module Aws::Outposts
     #   resp.order.payment_option #=> String, one of "ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"
     #   resp.order.order_submission_date #=> Time
     #   resp.order.order_fulfilled_date #=> Time
-    #   resp.order.payment_term #=> String, one of "THREE_YEARS", "ONE_YEAR"
+    #   resp.order.payment_term #=> String, one of "THREE_YEARS", "ONE_YEAR", "FIVE_YEARS"
     #   resp.order.order_type #=> String, one of "OUTPOST", "REPLACEMENT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetOrder AWS API Documentation
@@ -2170,7 +2170,6 @@ module Aws::Outposts
     #     * **L6-30P** – (common in US); 30A; single phase
     #
     #     * **IEC309 (blue)** – P+N+E, 6hr; 32 A; single phase
-    #
     #   * Three-phase AC feed
     #
     #     * **AH530P7W (red)** – 3P+N+E, 7hr; 30A; three phase
@@ -2312,7 +2311,7 @@ module Aws::Outposts
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

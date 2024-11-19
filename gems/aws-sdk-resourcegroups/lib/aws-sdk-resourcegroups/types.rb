@@ -1430,7 +1430,6 @@ module Aws::ResourceGroups
     #       value for `ResourceTypeFilters`, see [Resources you can use with
     #       Resource Groups and Tag Editor][1] in the *Resource Groups User
     #       Guide*.
-    #
     #     Example: `"ResourceTypeFilters": ["AWS::AllSupported"]` or
     #     `"ResourceTypeFilters": ["AWS::EC2::Instance", "AWS::S3::Bucket"]`
     #
@@ -1457,7 +1456,6 @@ module Aws::ResourceGroups
     #
     #     * An S3 bucket that has the following two tags:
     #       `{"Stage":"Test"}`, and `{"Version":"1"}`
-    #
     #     The resource query results would *not* include the following items
     #     in the results, however.
     #
@@ -1473,7 +1471,6 @@ module Aws::ResourceGroups
     #       The database has all of the tag keys, but none of those keys has
     #       an associated value that matches at least one of the specified
     #       values in the filter.
-    #
     #     Example: `"TagFilters": [ { "Key": "Stage", "Values": [ "Gamma",
     #     "Beta" ] }`
     #

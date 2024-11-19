@@ -1424,7 +1424,7 @@ module Aws
                           ?on_demand_options: {
                             allocation_strategy: ("lowest-price" | "prioritized")?,
                             capacity_reservation_options: {
-                              usage_strategy: ("use-capacity-reservations-first" | "use-capacity-reservations-only" | "none")?
+                              usage_strategy: ("use-capacity-reservations-first")?
                             }?,
                             single_instance_type: bool?,
                             single_availability_zone: bool?,
@@ -2180,7 +2180,13 @@ module Aws
                                       maintenance_options: {
                                         auto_recovery: ("default" | "disabled")?
                                       }?,
-                                      disable_api_stop: bool?
+                                      disable_api_stop: bool?,
+                                      operator: {
+                                        principal: ::String?
+                                      }?
+                                    },
+                                    ?operator: {
+                                      principal: ::String?
                                     },
                                     ?tag_specifications: Array[
                                       {
@@ -2434,7 +2440,10 @@ module Aws
                                               maintenance_options: {
                                                 auto_recovery: ("default" | "disabled")?
                                               }?,
-                                              disable_api_stop: bool?
+                                              disable_api_stop: bool?,
+                                              operator: {
+                                                principal: ::String?
+                                              }?
                                             },
                                             ?resolve_alias: bool
                                           ) -> _CreateLaunchTemplateVersionResponseSuccess
@@ -2826,6 +2835,9 @@ module Aws
                                         tcp_established_timeout: ::Integer?,
                                         udp_stream_timeout: ::Integer?,
                                         udp_timeout: ::Integer?
+                                      },
+                                      ?operator: {
+                                        principal: ::String?
                                       },
                                       subnet_id: ::String,
                                       ?description: ::String,
@@ -3763,6 +3775,7 @@ module Aws
         def multi_attach_enabled: () -> bool
         def throughput: () -> ::Integer
         def sse_type: () -> ("sse-ebs" | "sse-kms" | "none")
+        def operator: () -> Types::OperatorResponse
         def volume_id: () -> ::String
         def size: () -> ::Integer
         def snapshot_id: () -> ::String
@@ -3797,6 +3810,9 @@ module Aws
                            ?multi_attach_enabled: bool,
                            ?throughput: ::Integer,
                            ?client_token: ::String,
+                           ?operator: {
+                             principal: ::String?
+                           },
                            ?dry_run: bool
                          ) -> _CreateVolumeResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVolumeResponseSuccess
@@ -12688,6 +12704,9 @@ module Aws
                            },
                            ?disable_api_stop: bool,
                            ?enable_primary_ipv_6: bool,
+                           ?operator: {
+                             principal: ::String?
+                           },
                            ?dry_run: bool,
                            ?disable_api_termination: bool,
                            ?instance_initiated_shutdown_behavior: ("stop" | "terminate"),

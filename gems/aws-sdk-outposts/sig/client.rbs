@@ -108,7 +108,7 @@ module Aws
                             },
                           ],
                           payment_option: ("ALL_UPFRONT" | "NO_UPFRONT" | "PARTIAL_UPFRONT"),
-                          ?payment_term: ("THREE_YEARS" | "ONE_YEAR")
+                          ?payment_term: ("THREE_YEARS" | "ONE_YEAR" | "FIVE_YEARS")
                         ) -> _CreateOrderResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOrderResponseSuccess
 

@@ -219,7 +219,12 @@ module Aws
                           },
                           ?availability_zone_distribution: {
                             capacity_distribution_strategy: ("balanced-only" | "balanced-best-effort")?
-                          }
+                          },
+                          ?availability_zone_impairment_policy: {
+                            zonal_shift_enabled: bool?,
+                            impaired_zone_health_check_behavior: ("ReplaceUnhealthy" | "IgnoreUnhealthy")?
+                          },
+                          ?skip_zonal_shift_validation: bool
                         ) -> AutoScalingGroup
                       | (?Hash[Symbol, untyped]) -> AutoScalingGroup
 

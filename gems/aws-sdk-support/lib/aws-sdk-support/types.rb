@@ -294,7 +294,6 @@ module Aws::Support
     #   * `unassigned`
     #
     #   * `work-in-progress`
-    #
     # * **subject** - The subject line of the case.
     #
     # * **submittedBy** - The email address of the account that submitted

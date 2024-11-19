@@ -4008,7 +4008,6 @@ module Aws::WAFV2
     #     `ListDistributionsByWebACLId`. For information, see
     #     [ListDistributionsByWebACLId][1] in the *Amazon CloudFront API
     #     Reference*.
-    #
     # * To disassociate a resource from a web ACL, use the following calls:
     #
     #   * For regional resources, call DisassociateWebACL.
@@ -9225,7 +9224,7 @@ module Aws::WAFV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.98.0'
+      context[:gem_version] = '1.99.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

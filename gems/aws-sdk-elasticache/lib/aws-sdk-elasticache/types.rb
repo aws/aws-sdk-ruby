@@ -310,7 +310,6 @@ module Aws::ElastiCache
     #
     #       **M3 node types:** `cache.m3.medium`, `cache.m3.large`,
     #       `cache.m3.xlarge`, `cache.m3.2xlarge`
-    #
     #   * Compute optimized:
     #
     #     * Previous generation: (not recommended. Existing clusters are
@@ -318,7 +317,6 @@ module Aws::ElastiCache
     #       for these types.)
     #
     #       **C1 node types:** `cache.c1.xlarge`
-    #
     #   * Memory optimized:
     #
     #     * Current generation:
@@ -757,7 +755,6 @@ module Aws::ElastiCache
     #
     #     **M3 node types:** `cache.m3.medium`, `cache.m3.large`,
     #     `cache.m3.xlarge`, `cache.m3.2xlarge`
-    #
     # * Compute optimized:
     #
     #   * Previous generation: (not recommended. Existing clusters are still
@@ -765,7 +762,6 @@ module Aws::ElastiCache
     #     types.)
     #
     #     **C1 node types:** `cache.c1.xlarge`
-    #
     # * Memory optimized:
     #
     #   * Current generation:
@@ -1470,7 +1466,6 @@ module Aws::ElastiCache
     #     * If Multi-AZ: 1
     #
     #     * If Multi-AZ: 0
-    #
     #   * Valkey or Redis OSS (cluster mode enabled): 0 (though you will not
     #     be able to failover to a replica if your primary node fails)
     #   @return [Integer]
@@ -1758,7 +1753,6 @@ module Aws::ElastiCache
     #
     #       **M3 node types:** `cache.m3.medium`, `cache.m3.large`,
     #       `cache.m3.xlarge`, `cache.m3.2xlarge`
-    #
     #   * Compute optimized:
     #
     #     * Previous generation: (not recommended. Existing clusters are
@@ -1766,7 +1760,6 @@ module Aws::ElastiCache
     #       for these types.)
     #
     #       **C1 node types:** `cache.c1.xlarge`
-    #
     #   * Memory optimized:
     #
     #     * Current generation:
@@ -2464,7 +2457,6 @@ module Aws::ElastiCache
     #
     #       **M3 node types:** `cache.m3.medium`, `cache.m3.large`,
     #       `cache.m3.xlarge`, `cache.m3.2xlarge`
-    #
     #   * Compute optimized:
     #
     #     * Previous generation: (not recommended. Existing clusters are
@@ -2472,7 +2464,6 @@ module Aws::ElastiCache
     #       for these types.)
     #
     #       **C1 node types:** `cache.c1.xlarge`
-    #
     #   * Memory optimized:
     #
     #     * Current generation:
@@ -3299,7 +3290,6 @@ module Aws::ElastiCache
     #     * If Multi-AZ is enabled: 1
     #
     #     * If Multi-AZ is not enabled: 0
-    #
     #   * Valkey or Redis OSS (cluster mode enabled): 0 (though you will not
     #     be able to failover to a replica if your primary node fails)
     #   @return [Integer]
@@ -4169,7 +4159,6 @@ module Aws::ElastiCache
     #
     #       **M3 node types:** `cache.m3.medium`, `cache.m3.large`,
     #       `cache.m3.xlarge`, `cache.m3.2xlarge`
-    #
     #   * Compute optimized:
     #
     #     * Previous generation: (not recommended. Existing clusters are
@@ -4177,7 +4166,6 @@ module Aws::ElastiCache
     #       for these types.)
     #
     #       **C1 node types:** `cache.c1.xlarge`
-    #
     #   * Memory optimized:
     #
     #     * Current generation:
@@ -4352,7 +4340,6 @@ module Aws::ElastiCache
     #
     #       **M3 node types:** `cache.m3.medium`, `cache.m3.large`,
     #       `cache.m3.xlarge`, `cache.m3.2xlarge`
-    #
     #   * Compute optimized:
     #
     #     * Previous generation: (not recommended. Existing clusters are
@@ -4360,7 +4347,6 @@ module Aws::ElastiCache
     #       for these types.)
     #
     #       **C1 node types:** `cache.c1.xlarge`
-    #
     #   * Memory optimized:
     #
     #     * Current generation:
@@ -5907,7 +5893,6 @@ module Aws::ElastiCache
     #
     #     * Result: The new delete, pending or immediate, replaces the
     #       pending delete.
-    #
     #   * Scenario-2
     #
     #     * Pending Action: Delete
@@ -5916,7 +5901,6 @@ module Aws::ElastiCache
     #
     #     * Result: The new create, pending or immediate, replaces the
     #       pending delete.
-    #
     #   * Scenario-3
     #
     #     * Pending Action: Create
@@ -5925,7 +5909,6 @@ module Aws::ElastiCache
     #
     #     * Result: The new delete, pending or immediate, replaces the
     #       pending create.
-    #
     #   * Scenario-4
     #
     #     * Pending Action: Create
@@ -8040,7 +8023,6 @@ module Aws::ElastiCache
     #
     #       **M3 node types:** `cache.m3.medium`, `cache.m3.large`,
     #       `cache.m3.xlarge`, `cache.m3.2xlarge`
-    #
     #   * Compute optimized:
     #
     #     * Previous generation: (not recommended. Existing clusters are
@@ -8048,7 +8030,6 @@ module Aws::ElastiCache
     #       for these types.)
     #
     #       **C1 node types:** `cache.c1.xlarge`
-    #
     #   * Memory optimized:
     #
     #     * Current generation:
@@ -8266,7 +8247,6 @@ module Aws::ElastiCache
     #
     #       **M3 node types:** `cache.m3.medium`, `cache.m3.large`,
     #       `cache.m3.xlarge`, `cache.m3.2xlarge`
-    #
     #   * Compute optimized:
     #
     #     * Previous generation: (not recommended. Existing clusters are
@@ -8274,7 +8254,6 @@ module Aws::ElastiCache
     #       for these types.)
     #
     #       **C1 node types:** `cache.c1.xlarge`
-    #
     #   * Memory optimized:
     #
     #     * Current generation:
@@ -8979,7 +8958,6 @@ module Aws::ElastiCache
     #
     #       **M3 node types:** `cache.m3.medium`, `cache.m3.large`,
     #       `cache.m3.xlarge`, `cache.m3.2xlarge`
-    #
     #   * Compute optimized:
     #
     #     * Previous generation: (not recommended. Existing clusters are
@@ -8987,7 +8965,6 @@ module Aws::ElastiCache
     #       for these types.)
     #
     #       **C1 node types:** `cache.c1.xlarge`
-    #
     #   * Memory optimized:
     #
     #     * Current generation:

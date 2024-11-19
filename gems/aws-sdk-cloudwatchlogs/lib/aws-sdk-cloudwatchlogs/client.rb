@@ -3629,7 +3629,6 @@ module Aws::CloudWatchLogs
     #     * A logical destination in a different account created with
     #       [PutDestination][2], for cross-account delivery. Kinesis Data
     #       Streams and Firehose are supported as logical destinations.
-    #
     #   * **RoleArn** The ARN of an IAM role that grants CloudWatch Logs
     #     permissions to deliver ingested log events to the destination
     #     stream. You don't need to provide the ARN when you are working with
@@ -5627,7 +5626,7 @@ module Aws::CloudWatchLogs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.101.0'
+      context[:gem_version] = '1.102.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

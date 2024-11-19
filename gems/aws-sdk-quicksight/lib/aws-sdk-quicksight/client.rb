@@ -5504,7 +5504,6 @@ module Aws::QuickSight
     #   * Run `aws configure` to change your default Amazon Web Services
     #     Region. Use Enter to key the same settings for your keys. For more
     #     information, see [Configuring the CLI][3].
-    #
     # * `Namespace` - A QuickSight namespace is a partition that contains
     #   users and assets (data sources, datasets, dashboards, and so on). To
     #   access assets that are in a specific namespace, users and groups
@@ -16072,7 +16071,6 @@ module Aws::QuickSight
     #   * `"quicksight:ListThemeAliases"`
     #
     #   * `"quicksight:ListThemeVersions"`
-    #
     # * Owner
     #
     #   * `"quicksight:DescribeTheme"`
@@ -16096,7 +16094,6 @@ module Aws::QuickSight
     #   * `"quicksight:UpdateThemePermissions"`
     #
     #   * `"quicksight:DescribeThemePermissions"`
-    #
     # * To specify no permissions, omit the permissions list.
     #
     # @option params [required, String] :aws_account_id
@@ -16829,7 +16826,7 @@ module Aws::QuickSight
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.136.0'
+      context[:gem_version] = '1.137.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -439,6 +439,8 @@ module Aws::ECS
     VolumeFrom = Shapes::StructureShape.new(name: 'VolumeFrom')
     VolumeFromList = Shapes::ListShape.new(name: 'VolumeFromList')
     VolumeList = Shapes::ListShape.new(name: 'VolumeList')
+    VpcLatticeConfiguration = Shapes::StructureShape.new(name: 'VpcLatticeConfiguration')
+    VpcLatticeConfigurations = Shapes::ListShape.new(name: 'VpcLatticeConfigurations')
 
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
@@ -739,6 +741,7 @@ module Aws::ECS
     CreateServiceRequest.add_member(:enable_execute_command, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableExecuteCommand"))
     CreateServiceRequest.add_member(:service_connect_configuration, Shapes::ShapeRef.new(shape: ServiceConnectConfiguration, location_name: "serviceConnectConfiguration"))
     CreateServiceRequest.add_member(:volume_configurations, Shapes::ShapeRef.new(shape: ServiceVolumeConfigurations, location_name: "volumeConfigurations"))
+    CreateServiceRequest.add_member(:vpc_lattice_configurations, Shapes::ShapeRef.new(shape: VpcLatticeConfigurations, location_name: "vpcLatticeConfigurations"))
     CreateServiceRequest.struct_class = Types::CreateServiceRequest
 
     CreateServiceResponse.add_member(:service, Shapes::ShapeRef.new(shape: Service, location_name: "service"))
@@ -836,6 +839,7 @@ module Aws::ECS
     Deployment.add_member(:service_connect_resources, Shapes::ShapeRef.new(shape: ServiceConnectServiceResourceList, location_name: "serviceConnectResources"))
     Deployment.add_member(:volume_configurations, Shapes::ShapeRef.new(shape: ServiceVolumeConfigurations, location_name: "volumeConfigurations"))
     Deployment.add_member(:fargate_ephemeral_storage, Shapes::ShapeRef.new(shape: DeploymentEphemeralStorage, location_name: "fargateEphemeralStorage"))
+    Deployment.add_member(:vpc_lattice_configurations, Shapes::ShapeRef.new(shape: VpcLatticeConfigurations, location_name: "vpcLatticeConfigurations"))
     Deployment.struct_class = Types::Deployment
 
     DeploymentAlarms.add_member(:alarm_names, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "alarmNames"))
@@ -1673,6 +1677,7 @@ module Aws::ECS
     ServiceRevision.add_member(:volume_configurations, Shapes::ShapeRef.new(shape: ServiceVolumeConfigurations, location_name: "volumeConfigurations"))
     ServiceRevision.add_member(:fargate_ephemeral_storage, Shapes::ShapeRef.new(shape: DeploymentEphemeralStorage, location_name: "fargateEphemeralStorage"))
     ServiceRevision.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    ServiceRevision.add_member(:vpc_lattice_configurations, Shapes::ShapeRef.new(shape: VpcLatticeConfigurations, location_name: "vpcLatticeConfigurations"))
     ServiceRevision.struct_class = Types::ServiceRevision
 
     ServiceRevisionSummary.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
@@ -2040,6 +2045,7 @@ module Aws::ECS
     UpdateServiceRequest.add_member(:service_registries, Shapes::ShapeRef.new(shape: ServiceRegistries, location_name: "serviceRegistries"))
     UpdateServiceRequest.add_member(:service_connect_configuration, Shapes::ShapeRef.new(shape: ServiceConnectConfiguration, location_name: "serviceConnectConfiguration"))
     UpdateServiceRequest.add_member(:volume_configurations, Shapes::ShapeRef.new(shape: ServiceVolumeConfigurations, location_name: "volumeConfigurations"))
+    UpdateServiceRequest.add_member(:vpc_lattice_configurations, Shapes::ShapeRef.new(shape: VpcLatticeConfigurations, location_name: "vpcLatticeConfigurations"))
     UpdateServiceRequest.struct_class = Types::UpdateServiceRequest
 
     UpdateServiceResponse.add_member(:service, Shapes::ShapeRef.new(shape: Service, location_name: "service"))
@@ -2084,6 +2090,13 @@ module Aws::ECS
     VolumeFromList.member = Shapes::ShapeRef.new(shape: VolumeFrom)
 
     VolumeList.member = Shapes::ShapeRef.new(shape: Volume)
+
+    VpcLatticeConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "roleArn"))
+    VpcLatticeConfiguration.add_member(:target_group_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "targetGroupArn"))
+    VpcLatticeConfiguration.add_member(:port_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "portName"))
+    VpcLatticeConfiguration.struct_class = Types::VpcLatticeConfiguration
+
+    VpcLatticeConfigurations.member = Shapes::ShapeRef.new(shape: VpcLatticeConfiguration)
 
 
     # @api private

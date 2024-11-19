@@ -833,6 +833,22 @@ module Aws::IoT
     #   The principal, which can be a certificate ARN (as returned from the
     #   CreateCertificate operation) or an Amazon Cognito ID.
     #
+    # @option params [String] :thing_principal_type
+    #   The type of the relation you want to specify when you attach a
+    #   principal to a thing.
+    #
+    #   * `EXCLUSIVE_THING` - Attaches the specified principal to the
+    #     specified thing, exclusively. The thing will be the only thing
+    #     that’s attached to the principal.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `NON_EXCLUSIVE_THING` - Attaches the specified principal to the
+    #     specified thing. Multiple things can be attached to the principal.
+    #
+    #   ^
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -840,6 +856,7 @@ module Aws::IoT
     #   resp = client.attach_thing_principal({
     #     thing_name: "ThingName", # required
     #     principal: "Principal", # required
+    #     thing_principal_type: "EXCLUSIVE_THING", # accepts EXCLUSIVE_THING, NON_EXCLUSIVE_THING
     #   })
     #
     # @overload attach_thing_principal(params = {})
@@ -1818,6 +1835,8 @@ module Aws::IoT
     #     },
     #     server_certificate_config: {
     #       enable_ocsp_check: false,
+    #       ocsp_lambda_arn: "OCSPLambdaArn",
+    #       ocsp_authorized_responder_arn: "AcmCertificateArn",
     #     },
     #     authentication_type: "CUSTOM_AUTH_X509", # accepts CUSTOM_AUTH_X509, CUSTOM_AUTH, AWS_X509, AWS_SIGV4, DEFAULT
     #     application_protocol: "SECURE_MQTT", # accepts SECURE_MQTT, MQTT_WSS, HTTPS, DEFAULT
@@ -3666,6 +3685,15 @@ module Aws::IoT
     #     thing_type_properties: {
     #       thing_type_description: "ThingTypeDescription",
     #       searchable_attributes: ["AttributeName"],
+    #       mqtt5_configuration: {
+    #         propagating_attributes: [
+    #           {
+    #             user_property_key: "UserPropertyKeyName",
+    #             thing_attribute: "AttributeName",
+    #             connection_attribute: "ConnectionAttributeName",
+    #           },
+    #         ],
+    #       },
     #     },
     #     tags: [
     #       {
@@ -6139,6 +6167,8 @@ module Aws::IoT
     #   resp.last_status_change_date #=> Time
     #   resp.tls_config.security_policy #=> String
     #   resp.server_certificate_config.enable_ocsp_check #=> Boolean
+    #   resp.server_certificate_config.ocsp_lambda_arn #=> String
+    #   resp.server_certificate_config.ocsp_authorized_responder_arn #=> String
     #   resp.authentication_type #=> String, one of "CUSTOM_AUTH_X509", "CUSTOM_AUTH", "AWS_X509", "AWS_SIGV4", "DEFAULT"
     #   resp.application_protocol #=> String, one of "SECURE_MQTT", "MQTT_WSS", "HTTPS", "DEFAULT"
     #   resp.client_certificate_config.client_certificate_callback_arn #=> String
@@ -7143,6 +7173,10 @@ module Aws::IoT
     #   resp.thing_type_properties.thing_type_description #=> String
     #   resp.thing_type_properties.searchable_attributes #=> Array
     #   resp.thing_type_properties.searchable_attributes[0] #=> String
+    #   resp.thing_type_properties.mqtt5_configuration.propagating_attributes #=> Array
+    #   resp.thing_type_properties.mqtt5_configuration.propagating_attributes[0].user_property_key #=> String
+    #   resp.thing_type_properties.mqtt5_configuration.propagating_attributes[0].thing_attribute #=> String
+    #   resp.thing_type_properties.mqtt5_configuration.propagating_attributes[0].connection_attribute #=> String
     #   resp.thing_type_metadata.deprecated #=> Boolean
     #   resp.thing_type_metadata.deprecation_date #=> Time
     #   resp.thing_type_metadata.creation_date #=> Time
@@ -10675,6 +10709,75 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Lists the things associated with the specified principal. A principal
+    # can be an X.509 certificate or an Amazon Cognito ID.
+    #
+    # Requires permission to access the [ListPrincipalThings][1] action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    #
+    # @option params [String] :next_token
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in this operation.
+    #
+    # @option params [required, String] :principal
+    #   The principal. A principal can be an X.509 certificate or an Amazon
+    #   Cognito ID.
+    #
+    # @option params [String] :thing_principal_type
+    #   The type of the relation you want to filter in the response. If no
+    #   value is provided in this field, the response will list all things,
+    #   including both the `EXCLUSIVE_THING` and `NON_EXCLUSIVE_THING`
+    #   attachment types.
+    #
+    #   * `EXCLUSIVE_THING` - Attaches the specified principal to the
+    #     specified thing, exclusively. The thing will be the only thing
+    #     that’s attached to the principal.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `NON_EXCLUSIVE_THING` - Attaches the specified principal to the
+    #     specified thing. Multiple things can be attached to the principal.
+    #
+    #   ^
+    #
+    # @return [Types::ListPrincipalThingsV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPrincipalThingsV2Response#principal_thing_objects #principal_thing_objects} => Array&lt;Types::PrincipalThingObject&gt;
+    #   * {Types::ListPrincipalThingsV2Response#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_principal_things_v2({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     principal: "Principal", # required
+    #     thing_principal_type: "EXCLUSIVE_THING", # accepts EXCLUSIVE_THING, NON_EXCLUSIVE_THING
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.principal_thing_objects #=> Array
+    #   resp.principal_thing_objects[0].thing_name #=> String
+    #   resp.principal_thing_objects[0].thing_principal_type #=> String, one of "EXCLUSIVE_THING", "NON_EXCLUSIVE_THING"
+    #   resp.next_token #=> String
+    #
+    # @overload list_principal_things_v2(params = {})
+    # @param [Hash] params ({})
+    def list_principal_things_v2(params = {}, options = {})
+      req = build_request(:list_principal_things_v2, params)
+      req.send_request(options)
+    end
+
     # A list of provisioning template versions.
     #
     # Requires permission to access the
@@ -11457,6 +11560,74 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Lists the principals associated with the specified thing. A principal
+    # can be an X.509 certificate or an Amazon Cognito ID.
+    #
+    # Requires permission to access the [ListThingPrincipals][1] action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    #
+    # @option params [String] :next_token
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in this operation.
+    #
+    # @option params [required, String] :thing_name
+    #   The name of the thing.
+    #
+    # @option params [String] :thing_principal_type
+    #   The type of the relation you want to filter in the response. If no
+    #   value is provided in this field, the response will list all
+    #   principals, including both the `EXCLUSIVE_THING` and
+    #   `NON_EXCLUSIVE_THING` attachment types.
+    #
+    #   * `EXCLUSIVE_THING` - Attaches the specified principal to the
+    #     specified thing, exclusively. The thing will be the only thing
+    #     that’s attached to the principal.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `NON_EXCLUSIVE_THING` - Attaches the specified principal to the
+    #     specified thing. Multiple things can be attached to the principal.
+    #
+    #   ^
+    #
+    # @return [Types::ListThingPrincipalsV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListThingPrincipalsV2Response#thing_principal_objects #thing_principal_objects} => Array&lt;Types::ThingPrincipalObject&gt;
+    #   * {Types::ListThingPrincipalsV2Response#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_thing_principals_v2({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     thing_name: "ThingName", # required
+    #     thing_principal_type: "EXCLUSIVE_THING", # accepts EXCLUSIVE_THING, NON_EXCLUSIVE_THING
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.thing_principal_objects #=> Array
+    #   resp.thing_principal_objects[0].principal #=> String
+    #   resp.thing_principal_objects[0].thing_principal_type #=> String, one of "EXCLUSIVE_THING", "NON_EXCLUSIVE_THING"
+    #   resp.next_token #=> String
+    #
+    # @overload list_thing_principals_v2(params = {})
+    # @param [Hash] params ({})
+    def list_thing_principals_v2(params = {}, options = {})
+      req = build_request(:list_thing_principals_v2, params)
+      req.send_request(options)
+    end
+
     # Information about the thing registration tasks.
     #
     # @option params [required, String] :task_id
@@ -11594,6 +11765,10 @@ module Aws::IoT
     #   resp.thing_types[0].thing_type_properties.thing_type_description #=> String
     #   resp.thing_types[0].thing_type_properties.searchable_attributes #=> Array
     #   resp.thing_types[0].thing_type_properties.searchable_attributes[0] #=> String
+    #   resp.thing_types[0].thing_type_properties.mqtt5_configuration.propagating_attributes #=> Array
+    #   resp.thing_types[0].thing_type_properties.mqtt5_configuration.propagating_attributes[0].user_property_key #=> String
+    #   resp.thing_types[0].thing_type_properties.mqtt5_configuration.propagating_attributes[0].thing_attribute #=> String
+    #   resp.thing_types[0].thing_type_properties.mqtt5_configuration.propagating_attributes[0].connection_attribute #=> String
     #   resp.thing_types[0].thing_type_metadata.deprecated #=> Boolean
     #   resp.thing_types[0].thing_type_metadata.deprecation_date #=> Time
     #   resp.thing_types[0].thing_type_metadata.creation_date #=> Time
@@ -14275,6 +14450,8 @@ module Aws::IoT
     #     },
     #     server_certificate_config: {
     #       enable_ocsp_check: false,
+    #       ocsp_lambda_arn: "OCSPLambdaArn",
+    #       ocsp_authorized_responder_arn: "AcmCertificateArn",
     #     },
     #     authentication_type: "CUSTOM_AUTH_X509", # accepts CUSTOM_AUTH_X509, CUSTOM_AUTH, AWS_X509, AWS_SIGV4, DEFAULT
     #     application_protocol: "SECURE_MQTT", # accepts SECURE_MQTT, MQTT_WSS, HTTPS, DEFAULT
@@ -15466,6 +15643,44 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Updates a thing type.
+    #
+    # @option params [required, String] :thing_type_name
+    #   The name of a thing type.
+    #
+    # @option params [Types::ThingTypeProperties] :thing_type_properties
+    #   The ThingTypeProperties contains information about the thing type
+    #   including: a thing type description, and a list of searchable thing
+    #   attribute names.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_thing_type({
+    #     thing_type_name: "ThingTypeName", # required
+    #     thing_type_properties: {
+    #       thing_type_description: "ThingTypeDescription",
+    #       searchable_attributes: ["AttributeName"],
+    #       mqtt5_configuration: {
+    #         propagating_attributes: [
+    #           {
+    #             user_property_key: "UserPropertyKeyName",
+    #             thing_attribute: "AttributeName",
+    #             connection_attribute: "ConnectionAttributeName",
+    #           },
+    #         ],
+    #       },
+    #     },
+    #   })
+    #
+    # @overload update_thing_type(params = {})
+    # @param [Hash] params ({})
+    def update_thing_type(params = {}, options = {})
+      req = build_request(:update_thing_type, params)
+      req.send_request(options)
+    end
+
     # Updates a topic rule destination. You use this to change the status,
     # endpoint URL, or confirmation URL of the destination.
     #
@@ -15613,7 +15828,7 @@ module Aws::IoT
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.138.0'
+      context[:gem_version] = '1.139.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

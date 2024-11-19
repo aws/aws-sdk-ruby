@@ -2105,7 +2105,6 @@ module Aws::SSM
     #     * `NoInstancesInTag`
     #
     #     * `LimitExceeded`
-    #
     #     The status values you can specify for `ListCommandInvocations`
     #     are:
     #
@@ -2134,7 +2133,6 @@ module Aws::SSM
     #     * `InvalidPlatform`
     #
     #     * `Terminated`
-    #
     #   * **DocumentName**: Specify name of the Amazon Web Services Systems
     #     Manager document (SSM document) for which you want to see command
     #     execution results. For example, specify `AWS-RunPatchBaseline` to
@@ -15926,7 +15924,6 @@ module Aws::SSM
     #       the command associated with the task. However, there is no
     #       guarantee that the command will be terminated and the underlying
     #       process stopped.
-    #
     #     The status for tasks that are not completed is `TIMED_OUT`.
     #   @return [String]
     #
@@ -17346,7 +17343,6 @@ module Aws::SSM
     #     * Terminating
     #
     #     * Failed
-    #
     #   * SessionId: Specify a session ID to return details about the
     #     session.
     #   @return [String]
@@ -19359,7 +19355,6 @@ module Aws::SSM
     #       the command associated with the task. However, there is no
     #       guarantee that the command will be terminated and the underlying
     #       process stopped.
-    #
     #     The status for tasks that are not completed is `TIMED_OUT`.
     #   @return [String]
     #

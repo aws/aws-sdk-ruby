@@ -989,7 +989,6 @@ module Aws::CodeGuruReviewer
     #
     #     * Setting up source code access. This is required for CodeGuru
     #       Reviewer to securely clone code in your repository.
-    #
     #   * **Failed**: The repository failed to associate or disassociate.
     #
     #   * **Disassociating**: CodeGuru Reviewer is removing the
@@ -1525,7 +1524,6 @@ module Aws::CodeGuruReviewer
     #
     #     * Setting up source code access. This is required for CodeGuru
     #       Reviewer to securely clone code in your repository.
-    #
     #   * **Failed**: The repository failed to associate or disassociate.
     #
     #   * **Disassociating**: CodeGuru Reviewer is removing the
@@ -1674,7 +1672,6 @@ module Aws::CodeGuruReviewer
     #
     #     * Setting up source code access. This is required for CodeGuru
     #       Reviewer to securely clone code in your repository.
-    #
     #   * **Failed**: The repository failed to associate or disassociate.
     #
     #   * **Disassociating**: CodeGuru Reviewer is removing the

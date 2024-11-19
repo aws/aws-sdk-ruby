@@ -665,14 +665,12 @@ module Aws::DynamoDB
     #
     #     * To prevent special characters in an attribute name from being
     #       misinterpreted in an expression.
-    #
     #     Use the **#** character in an expression to dereference an attribute
     #     name. For example, consider the following attribute name:
     #
     #     * `Percentile`
     #
     #     ^
-    #
     #     The name of this attribute conflicts with a reserved word, so it
     #     cannot be used directly in an expression. (For the complete list of
     #     reserved words, see [Reserved Words][1] in the *Amazon DynamoDB
@@ -682,14 +680,12 @@ module Aws::DynamoDB
     #     * `{"#P":"Percentile"}`
     #
     #     ^
-    #
     #     You could then use this substitution in an expression, as in this
     #     example:
     #
     #     * `#P = :val`
     #
     #     ^
-    #
     #     <note markdown="1"> Tokens that begin with the **\:** character are *expression
     #     attribute values*, which are placeholders for the actual value at
     #     runtime.
@@ -979,7 +975,6 @@ module Aws::DynamoDB
     #       *both* the partition key and the sort key.
     #
     #     ^
-    #
     #   * `PutRequest` - Perform a `PutItem` operation on the specified item.
     #     The item to be put is identified by an `Item` subelement:
     #
@@ -1421,7 +1416,6 @@ module Aws::DynamoDB
     #
     #       * `ALL` - All of the table attributes are projected into the
     #         index.
-    #
     #     * `NonKeyAttributes` - A list of one or more non-key attribute names
     #       that are projected into the secondary index. The total count of
     #       attributes provided in `NonKeyAttributes`, summed across all of
@@ -1458,14 +1452,12 @@ module Aws::DynamoDB
     #
     #       * `ALL` - All of the table attributes are projected into the
     #         index.
-    #
     #     * `NonKeyAttributes` - A list of one or more non-key attribute names
     #       that are projected into the secondary index. The total count of
     #       attributes provided in `NonKeyAttributes`, summed across all of
     #       the secondary indexes, must not exceed 100. If you project the
     #       same attribute into two different indexes, this counts as two
     #       distinct attributes when determining the total.
-    #
     #   * `ProvisionedThroughput` - The provisioned throughput settings for
     #     the global secondary index, consisting of read and write capacity
     #     units.
@@ -3031,7 +3023,6 @@ module Aws::DynamoDB
     #     * If the table has one or more global secondary indexes (GSIs),
     #       loop over these GSIs and add their provisioned capacity values
     #       to your variables as well.
-    #
     # 5.  Report the account quotas for that Region returned by
     #     `DescribeLimits`, along with the total current provisioned
     #     capacity levels you have calculated.
@@ -7572,7 +7563,6 @@ module Aws::DynamoDB
     #     * `list_append (operand, operand)` - evaluates to a list with a new
     #       element added to it. You can append the new element to the start
     #       or the end of the list by reversing the order of the operands.
-    #
     #     These function names are case-sensitive.
     #
     #   * `REMOVE` - Removes one or more attributes from an item.
@@ -7612,7 +7602,6 @@ module Aws::DynamoDB
     #       Both sets must have the same primitive data type. For example, if
     #       the existing data type is a set of strings, the `Value` must also
     #       be a set of strings.
-    #
     #     The `ADD` action only supports Number and set data types. In
     #     addition, `ADD` can only be used on top-level attributes, not nested
     #     attributes.
@@ -8570,7 +8559,7 @@ module Aws::DynamoDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.129.0'
+      context[:gem_version] = '1.130.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

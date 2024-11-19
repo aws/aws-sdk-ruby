@@ -3432,7 +3432,6 @@ module Aws::VerifiedPermissions
     #   * The action referenced by the policy.
     #
     #   * A condition clause, such as when and unless.
-    #
     #   You can't change these elements of a static policy:
     #
     #   * Changing a policy from a static policy to a template-linked
@@ -3443,7 +3442,6 @@ module Aws::VerifiedPermissions
     #   * The principal referenced by a static policy.
     #
     #   * The resource referenced by a static policy.
-    #
     # * To update a template-linked policy, you must update the template
     #   instead.
     #
@@ -3773,7 +3771,7 @@ module Aws::VerifiedPermissions
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-verifiedpermissions'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

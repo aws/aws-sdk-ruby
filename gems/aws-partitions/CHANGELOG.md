@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.1009.0 (2024-11-15)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::ConnectCampaignsV2`.
+
 1.1008.0 (2024-11-15)
 ------------------
 

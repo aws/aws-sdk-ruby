@@ -179,6 +179,11 @@ module Aws::AutoScaling
     #     availability_zone_distribution: {
     #       capacity_distribution_strategy: "balanced-only", # accepts balanced-only, balanced-best-effort
     #     },
+    #     availability_zone_impairment_policy: {
+    #       zonal_shift_enabled: false,
+    #       impaired_zone_health_check_behavior: "ReplaceUnhealthy", # accepts ReplaceUnhealthy, IgnoreUnhealthy
+    #     },
+    #     skip_zonal_shift_validation: false,
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :auto_scaling_group_name
@@ -473,6 +478,18 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-maintenance-policy.html
     # @option options [Types::AvailabilityZoneDistribution] :availability_zone_distribution
     #   The instance capacity distribution across Availability Zones.
+    # @option options [Types::AvailabilityZoneImpairmentPolicy] :availability_zone_impairment_policy
+    #   The policy for Availability Zone impairment.
+    # @option options [Boolean] :skip_zonal_shift_validation
+    #   If you enable zonal shift with cross-zone disabled load balancers,
+    #   capacity could become imbalanced across Availability Zones. To skip
+    #   the validation, specify `true`. For more information, see [Auto
+    #   Scaling group zonal shift][1] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-zonal-shift.html
     # @return [AutoScalingGroup]
     def create_group(options = {})
       Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do

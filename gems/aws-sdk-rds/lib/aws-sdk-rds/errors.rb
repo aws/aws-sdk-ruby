@@ -58,6 +58,7 @@ module Aws::RDS
   # * {DBInstanceAutomatedBackupNotFoundFault}
   # * {DBInstanceAutomatedBackupQuotaExceededFault}
   # * {DBInstanceNotFoundFault}
+  # * {DBInstanceNotReadyFault}
   # * {DBInstanceRoleAlreadyExistsFault}
   # * {DBInstanceRoleNotFoundFault}
   # * {DBInstanceRoleQuotaExceededFault}
@@ -483,6 +484,16 @@ module Aws::RDS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::RDS::Types::DBInstanceNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class DBInstanceNotReadyFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::DBInstanceNotReadyFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

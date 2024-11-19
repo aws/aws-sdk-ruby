@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2024-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.73.0 (2024-11-15)
+------------------
+
+* Feature - You can now purchase AWS Outposts rack or server capacity for a 5-year term with one of  the following payment options: All Upfront, Partial Upfront, and No Upfront.
+
 1.72.0 (2024-11-11)
 ------------------
 

@@ -471,6 +471,74 @@ module Aws::QConnect
       include Aws::Structure
     end
 
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base. Can be either the ID or the
+    #   ARN. URLs cannot contain the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_template_id
+    #   The identifier of the message template. Can be either the ID or the
+    #   ARN. It cannot contain any qualifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The version number of the message template version to activate.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ActivateMessageTemplateRequest AWS API Documentation
+    #
+    class ActivateMessageTemplateRequest < Struct.new(
+      :knowledge_base_id,
+      :message_template_id,
+      :version_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message_template_arn
+    #   The Amazon Resource Name (ARN) of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_template_id
+    #   The identifier of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The version number of the message template version that is
+    #   activated.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ActivateMessageTemplateResponse AWS API Documentation
+    #
+    class ActivateMessageTemplateResponse < Struct.new(
+      :message_template_arn,
+      :message_template_id,
+      :version_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an agent.
+    #
+    # @!attribute [rw] first_name
+    #   The agent’s first name as entered in their Amazon Connect user
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_name
+    #   The agent’s last name as entered in their Amazon Connect user
+    #   account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/AgentAttributes AWS API Documentation
+    #
+    class AgentAttributes < Struct.new(
+      :first_name,
+      :last_name)
+      SENSITIVE = [:first_name, :last_name]
+      include Aws::Structure
+    end
+
     # Content association data for a [step-by-step guide][1].
     #
     #
@@ -1502,9 +1570,9 @@ module Aws::QConnect
     #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. If not provided, the AWS SDK populates
-    #   this field. For more information about idempotency, see [Making
-    #   retries safe with idempotent APIs][1].
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1]..
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -1577,9 +1645,9 @@ module Aws::QConnect
     #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. If not provided, the AWS SDK populates
-    #   this field. For more information about idempotency, see [Making
-    #   retries safe with idempotent APIs][1].
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1]..
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -1638,9 +1706,9 @@ module Aws::QConnect
     #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. If not provided, the AWS SDK populates
-    #   this field. For more information about idempotency, see [Making
-    #   retries safe with idempotent APIs][1].
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1]..
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -1725,16 +1793,16 @@ module Aws::QConnect
     #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. If not provided, the AWS SDK populates
-    #   this field. For more information about idempotency, see [Making
-    #   retries safe with idempotent APIs][1].
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1]..
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #
     #
     #
-    #   [1]: http://aws.amazon.com/https:/aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   [1]: http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #   @return [String]
     #
     # @!attribute [rw] modified_time
@@ -1793,7 +1861,7 @@ module Aws::QConnect
     #
     #
     #
-    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   [1]: http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1836,7 +1904,7 @@ module Aws::QConnect
     #
     #
     #
-    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   [1]: http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1921,7 +1989,7 @@ module Aws::QConnect
     #
     #
     #
-    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   [1]: http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #   @return [String]
     #
     # @!attribute [rw] content_id
@@ -1974,7 +2042,7 @@ module Aws::QConnect
     #
     #
     #
-    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   [1]: http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #   @return [String]
     #
     # @!attribute [rw] knowledge_base_id
@@ -2064,7 +2132,7 @@ module Aws::QConnect
     #
     #
     #
-    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   [1]: http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -2106,7 +2174,7 @@ module Aws::QConnect
     #
     # @!attribute [rw] source_configuration
     #   The source of the knowledge base content. Only set this argument for
-    #   EXTERNAL knowledge bases.
+    #   EXTERNAL or Managed knowledge bases.
     #   @return [Types::SourceConfiguration]
     #
     # @!attribute [rw] tags
@@ -2146,6 +2214,197 @@ module Aws::QConnect
       include Aws::Structure
     end
 
+    # @!attribute [rw] body
+    #   The body of the attachment file being uploaded. It should be encoded
+    #   using base64 encoding.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
+    # @!attribute [rw] content_disposition
+    #   The presentation information for the attachment file.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base. Can be either the ID or the
+    #   ARN. URLs cannot contain the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_template_id
+    #   The identifier of the message template. Can be either the ID or the
+    #   ARN. It cannot contain any qualifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the attachment file being uploaded. The name should
+    #   include the file extension.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/CreateMessageTemplateAttachmentRequest AWS API Documentation
+    #
+    class CreateMessageTemplateAttachmentRequest < Struct.new(
+      :body,
+      :client_token,
+      :content_disposition,
+      :knowledge_base_id,
+      :message_template_id,
+      :name)
+      SENSITIVE = [:body, :name]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attachment
+    #   The message template attachment.
+    #   @return [Types::MessageTemplateAttachment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/CreateMessageTemplateAttachmentResponse AWS API Documentation
+    #
+    class CreateMessageTemplateAttachmentResponse < Struct.new(
+      :attachment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_subtype
+    #   The channel subtype this message template applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The content of the message template.
+    #   @return [Types::MessageTemplateContentProvider]
+    #
+    # @!attribute [rw] default_attributes
+    #   An object that specifies the default values to use for variables in
+    #   the message template. This object contains different categories of
+    #   key-value pairs. Each key defines a variable or placeholder in the
+    #   message template. The corresponding value defines the default value
+    #   for that variable.
+    #   @return [Types::MessageTemplateAttributes]
+    #
+    # @!attribute [rw] description
+    #   The description of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] grouping_configuration
+    #   The configuration information of the grouping of Amazon Q in Connect
+    #   users.
+    #   @return [Types::GroupingConfiguration]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base. Can be either the ID or the
+    #   ARN. URLs cannot contain the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] language
+    #   The language code value for the language in which the quick response
+    #   is written. The supported language codes include `de_DE`, `en_US`,
+    #   `es_ES`, `fr_FR`, `id_ID`, `it_IT`, `ja_JP`, `ko_KR`, `pt_BR`,
+    #   `zh_CN`, `zh_TW`
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/CreateMessageTemplateRequest AWS API Documentation
+    #
+    class CreateMessageTemplateRequest < Struct.new(
+      :channel_subtype,
+      :client_token,
+      :content,
+      :default_attributes,
+      :description,
+      :grouping_configuration,
+      :knowledge_base_id,
+      :language,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message_template
+    #   The message template.
+    #   @return [Types::MessageTemplateData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/CreateMessageTemplateResponse AWS API Documentation
+    #
+    class CreateMessageTemplateResponse < Struct.new(
+      :message_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base. Can be either the ID or the
+    #   ARN. URLs cannot contain the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_template_content_sha_256
+    #   The checksum value of the message template content that is
+    #   referenced by the `$LATEST` qualifier. It can be returned in
+    #   `MessageTemplateData` or `ExtendedMessageTemplateData`. It’s
+    #   calculated by content, language, `defaultAttributes` and
+    #   `Attachments` of the message template. If not supplied, the message
+    #   template version will be created based on the message template
+    #   content that is referenced by the `$LATEST` qualifier by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_template_id
+    #   The identifier of the message template. Can be either the ID or the
+    #   ARN. It cannot contain any qualifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/CreateMessageTemplateVersionRequest AWS API Documentation
+    #
+    class CreateMessageTemplateVersionRequest < Struct.new(
+      :knowledge_base_id,
+      :message_template_content_sha_256,
+      :message_template_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message_template
+    #   The message template.
+    #   @return [Types::ExtendedMessageTemplateData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/CreateMessageTemplateVersionResponse AWS API Documentation
+    #
+    class CreateMessageTemplateVersionResponse < Struct.new(
+      :message_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] channels
     #   The Amazon Connect channels this quick response applies to.
     #   @return [Array<String>]
@@ -2161,7 +2420,7 @@ module Aws::QConnect
     #
     #
     #
-    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   [1]: http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #   @return [String]
     #
     # @!attribute [rw] content
@@ -2270,7 +2529,7 @@ module Aws::QConnect
     #
     #
     #
-    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   [1]: http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -2313,6 +2572,308 @@ module Aws::QConnect
     class CreateSessionResponse < Struct.new(
       :session)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The customer profile attributes that are used with the message
+    # template.
+    #
+    # @!attribute [rw] account_number
+    #   A unique account number that you have given to the customer.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_information
+    #   Any additional information relevant to the customer's profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] address1
+    #   The first line of a customer address.
+    #   @return [String]
+    #
+    # @!attribute [rw] address2
+    #   The second line of a customer address.
+    #   @return [String]
+    #
+    # @!attribute [rw] address3
+    #   The third line of a customer address.
+    #   @return [String]
+    #
+    # @!attribute [rw] address4
+    #   The fourth line of a customer address.
+    #   @return [String]
+    #
+    # @!attribute [rw] billing_address_1
+    #   The first line of a customer’s billing address.
+    #   @return [String]
+    #
+    # @!attribute [rw] billing_address_2
+    #   The second line of a customer’s billing address.
+    #   @return [String]
+    #
+    # @!attribute [rw] billing_address_3
+    #   The third line of a customer’s billing address.
+    #   @return [String]
+    #
+    # @!attribute [rw] billing_address_4
+    #   The fourth line of a customer’s billing address.
+    #   @return [String]
+    #
+    # @!attribute [rw] billing_city
+    #   The city of a customer’s billing address.
+    #   @return [String]
+    #
+    # @!attribute [rw] billing_country
+    #   The country of a customer’s billing address.
+    #   @return [String]
+    #
+    # @!attribute [rw] billing_county
+    #   The county of a customer’s billing address.
+    #   @return [String]
+    #
+    # @!attribute [rw] billing_postal_code
+    #   The postal code of a customer’s billing address.
+    #   @return [String]
+    #
+    # @!attribute [rw] billing_province
+    #   The province of a customer’s billing address.
+    #   @return [String]
+    #
+    # @!attribute [rw] billing_state
+    #   The state of a customer’s billing address.
+    #   @return [String]
+    #
+    # @!attribute [rw] birth_date
+    #   The customer's birth date.
+    #   @return [String]
+    #
+    # @!attribute [rw] business_email_address
+    #   The customer's business email address.
+    #   @return [String]
+    #
+    # @!attribute [rw] business_name
+    #   The name of the customer's business.
+    #   @return [String]
+    #
+    # @!attribute [rw] business_phone_number
+    #   The customer's business phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] city
+    #   The city in which a customer lives.
+    #   @return [String]
+    #
+    # @!attribute [rw] country
+    #   The country in which a customer lives.
+    #   @return [String]
+    #
+    # @!attribute [rw] county
+    #   The county in which a customer lives.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom
+    #   The custom attributes in customer profile attributes.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] email_address
+    #   The customer's email address, which has not been specified as a
+    #   personal or business address.
+    #   @return [String]
+    #
+    # @!attribute [rw] first_name
+    #   The customer's first name.
+    #   @return [String]
+    #
+    # @!attribute [rw] gender
+    #   The customer's gender.
+    #   @return [String]
+    #
+    # @!attribute [rw] home_phone_number
+    #   The customer's mobile phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_name
+    #   The customer's last name.
+    #   @return [String]
+    #
+    # @!attribute [rw] mailing_address_1
+    #   The first line of a customer’s mailing address.
+    #   @return [String]
+    #
+    # @!attribute [rw] mailing_address_2
+    #   The second line of a customer’s mailing address.
+    #   @return [String]
+    #
+    # @!attribute [rw] mailing_address_3
+    #   The third line of a customer’s mailing address.
+    #   @return [String]
+    #
+    # @!attribute [rw] mailing_address_4
+    #   The fourth line of a customer’s mailing address.
+    #   @return [String]
+    #
+    # @!attribute [rw] mailing_city
+    #   The city of a customer’s mailing address.
+    #   @return [String]
+    #
+    # @!attribute [rw] mailing_country
+    #   The country of a customer’s mailing address.
+    #   @return [String]
+    #
+    # @!attribute [rw] mailing_county
+    #   The county of a customer’s mailing address.
+    #   @return [String]
+    #
+    # @!attribute [rw] mailing_postal_code
+    #   The postal code of a customer’s mailing address.
+    #   @return [String]
+    #
+    # @!attribute [rw] mailing_province
+    #   The province of a customer’s mailing address.
+    #   @return [String]
+    #
+    # @!attribute [rw] mailing_state
+    #   The state of a customer’s mailing address.
+    #   @return [String]
+    #
+    # @!attribute [rw] middle_name
+    #   The customer's middle name.
+    #   @return [String]
+    #
+    # @!attribute [rw] mobile_phone_number
+    #   The customer's mobile phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] party_type
+    #   The customer's party type.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number
+    #   The customer's phone number, which has not been specified as a
+    #   mobile, home, or business number.
+    #   @return [String]
+    #
+    # @!attribute [rw] postal_code
+    #   The postal code of a customer address.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_arn
+    #   The ARN of a customer profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_id
+    #   The unique identifier of a customer profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] province
+    #   The province in which a customer lives.
+    #   @return [String]
+    #
+    # @!attribute [rw] shipping_address_1
+    #   The first line of a customer’s shipping address.
+    #   @return [String]
+    #
+    # @!attribute [rw] shipping_address_2
+    #   The second line of a customer’s shipping address.
+    #   @return [String]
+    #
+    # @!attribute [rw] shipping_address_3
+    #   The third line of a customer’s shipping address.
+    #   @return [String]
+    #
+    # @!attribute [rw] shipping_address_4
+    #   The fourth line of a customer’s shipping address.
+    #   @return [String]
+    #
+    # @!attribute [rw] shipping_city
+    #   The city of a customer’s shipping address.
+    #   @return [String]
+    #
+    # @!attribute [rw] shipping_country
+    #   The country of a customer’s shipping address.
+    #   @return [String]
+    #
+    # @!attribute [rw] shipping_county
+    #   The county of a customer’s shipping address.
+    #   @return [String]
+    #
+    # @!attribute [rw] shipping_postal_code
+    #   The postal code of a customer’s shipping address.
+    #   @return [String]
+    #
+    # @!attribute [rw] shipping_province
+    #   The province of a customer’s shipping address.
+    #   @return [String]
+    #
+    # @!attribute [rw] shipping_state
+    #   The state of a customer’s shipping address.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state in which a customer lives.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/CustomerProfileAttributes AWS API Documentation
+    #
+    class CustomerProfileAttributes < Struct.new(
+      :account_number,
+      :additional_information,
+      :address1,
+      :address2,
+      :address3,
+      :address4,
+      :billing_address_1,
+      :billing_address_2,
+      :billing_address_3,
+      :billing_address_4,
+      :billing_city,
+      :billing_country,
+      :billing_county,
+      :billing_postal_code,
+      :billing_province,
+      :billing_state,
+      :birth_date,
+      :business_email_address,
+      :business_name,
+      :business_phone_number,
+      :city,
+      :country,
+      :county,
+      :custom,
+      :email_address,
+      :first_name,
+      :gender,
+      :home_phone_number,
+      :last_name,
+      :mailing_address_1,
+      :mailing_address_2,
+      :mailing_address_3,
+      :mailing_address_4,
+      :mailing_city,
+      :mailing_country,
+      :mailing_county,
+      :mailing_postal_code,
+      :mailing_province,
+      :mailing_state,
+      :middle_name,
+      :mobile_phone_number,
+      :party_type,
+      :phone_number,
+      :postal_code,
+      :profile_arn,
+      :profile_id,
+      :province,
+      :shipping_address_1,
+      :shipping_address_2,
+      :shipping_address_3,
+      :shipping_address_4,
+      :shipping_city,
+      :shipping_country,
+      :shipping_county,
+      :shipping_postal_code,
+      :shipping_province,
+      :shipping_state,
+      :state)
+      SENSITIVE = [:account_number, :additional_information, :address1, :address2, :address3, :address4, :billing_address_1, :billing_address_2, :billing_address_3, :billing_address_4, :billing_city, :billing_country, :billing_county, :billing_postal_code, :billing_province, :billing_state, :birth_date, :business_email_address, :business_name, :business_phone_number, :city, :country, :county, :custom, :email_address, :first_name, :gender, :home_phone_number, :last_name, :mailing_address_1, :mailing_address_2, :mailing_address_3, :mailing_address_4, :mailing_city, :mailing_country, :mailing_county, :mailing_postal_code, :mailing_province, :mailing_state, :middle_name, :mobile_phone_number, :party_type, :phone_number, :postal_code, :profile_arn, :profile_id, :province, :shipping_address_1, :shipping_address_2, :shipping_address_3, :shipping_address_4, :shipping_city, :shipping_country, :shipping_county, :shipping_postal_code, :shipping_province, :shipping_state, :state]
       include Aws::Structure
     end
 
@@ -2397,6 +2958,53 @@ module Aws::QConnect
     class DataSummary < Struct.new(
       :details,
       :reference)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base. Can be either the ID or the
+    #   ARN. URLs cannot contain the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_template_id
+    #   The identifier of the message template. Can be either the ID or the
+    #   ARN. It cannot contain any qualifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The version number of the message template version to deactivate.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/DeactivateMessageTemplateRequest AWS API Documentation
+    #
+    class DeactivateMessageTemplateRequest < Struct.new(
+      :knowledge_base_id,
+      :message_template_id,
+      :version_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message_template_arn
+    #   The Amazon Resource Name (ARN) of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_template_id
+    #   The identifier of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The version number of the message template version that has been
+    #   deactivated.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/DeactivateMessageTemplateResponse AWS API Documentation
+    #
+    class DeactivateMessageTemplateResponse < Struct.new(
+      :message_template_arn,
+      :message_template_id,
+      :version_number)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2630,6 +3238,57 @@ module Aws::QConnect
     #
     class DeleteKnowledgeBaseResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] attachment_id
+    #   The identifier of the attachment file.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base. Can be either the ID or the
+    #   ARN. URLs cannot contain the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_template_id
+    #   The identifier of the message template. Can be either the ID or the
+    #   ARN. It cannot contain any qualifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/DeleteMessageTemplateAttachmentRequest AWS API Documentation
+    #
+    class DeleteMessageTemplateAttachmentRequest < Struct.new(
+      :attachment_id,
+      :knowledge_base_id,
+      :message_template_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/DeleteMessageTemplateAttachmentResponse AWS API Documentation
+    #
+    class DeleteMessageTemplateAttachmentResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base. Can be either the ID or the
+    #   ARN. URLs cannot contain the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_template_id
+    #   The identifier of the message template. Can be either the ID or the
+    #   ARN.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/DeleteMessageTemplateRequest AWS API Documentation
+    #
+    class DeleteMessageTemplateRequest < Struct.new(
+      :knowledge_base_id,
+      :message_template_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/DeleteMessageTemplateResponse AWS API Documentation
+    #
+    class DeleteMessageTemplateResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] knowledge_base_id
     #   The knowledge base from which the quick response is deleted. The
     #   identifier of the knowledge base.
@@ -2692,6 +3351,199 @@ module Aws::QConnect
       :highlights,
       :text)
       SENSITIVE = [:text]
+      include Aws::Structure
+    end
+
+    # The email header to include in email messages.
+    #
+    # @!attribute [rw] name
+    #   The name of the email header.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the email header.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/EmailHeader AWS API Documentation
+    #
+    class EmailHeader < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = [:value]
+      include Aws::Structure
+    end
+
+    # The content of the message template that applies to the email channel
+    # subtype.
+    #
+    # @!attribute [rw] body
+    #   The body to use in email messages.
+    #   @return [Types::EmailMessageTemplateContentBody]
+    #
+    # @!attribute [rw] headers
+    #   The email headers to include in email messages.
+    #   @return [Array<Types::EmailHeader>]
+    #
+    # @!attribute [rw] subject
+    #   The subject line, or title, to use in email messages.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/EmailMessageTemplateContent AWS API Documentation
+    #
+    class EmailMessageTemplateContent < Struct.new(
+      :body,
+      :headers,
+      :subject)
+      SENSITIVE = [:subject]
+      include Aws::Structure
+    end
+
+    # The body to use in email messages.
+    #
+    # @!attribute [rw] html
+    #   The message body, in HTML format, to use in email messages that are
+    #   based on the message template. We recommend using HTML format for
+    #   email clients that render HTML content. You can include links,
+    #   formatted text, and more in an HTML message.
+    #   @return [Types::MessageTemplateBodyContentProvider]
+    #
+    # @!attribute [rw] plain_text
+    #   The message body, in plain text format, to use in email messages
+    #   that are based on the message template. We recommend using plain
+    #   text format for email clients that don't render HTML content and
+    #   clients that are connected to high-latency networks, such as mobile
+    #   devices.
+    #   @return [Types::MessageTemplateBodyContentProvider]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/EmailMessageTemplateContentBody AWS API Documentation
+    #
+    class EmailMessageTemplateContentBody < Struct.new(
+      :html,
+      :plain_text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The extended data of a message template.
+    #
+    # @!attribute [rw] attachments
+    #   The message template attachments.
+    #   @return [Array<Types::MessageTemplateAttachment>]
+    #
+    # @!attribute [rw] attribute_types
+    #   The types of attributes contain the message template.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] channel_subtype
+    #   The channel subtype this message template applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The content of the message template.
+    #   @return [Types::MessageTemplateContentProvider]
+    #
+    # @!attribute [rw] created_time
+    #   The timestamp when the message template was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] default_attributes
+    #   An object that specifies the default values to use for variables in
+    #   the message template. This object contains different categories of
+    #   key-value pairs. Each key defines a variable or placeholder in the
+    #   message template. The corresponding value defines the default value
+    #   for that variable.
+    #   @return [Types::MessageTemplateAttributes]
+    #
+    # @!attribute [rw] description
+    #   The description of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] grouping_configuration
+    #   The configuration information of the grouping of Amazon Q in Connect
+    #   users.
+    #   @return [Types::GroupingConfiguration]
+    #
+    # @!attribute [rw] is_active
+    #   Whether the version of the message template is activated.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] knowledge_base_arn
+    #   The Amazon Resource Name (ARN) of the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] language
+    #   The language code value for the language in which the quick response
+    #   is written. The supported language codes include `de_DE`, `en_US`,
+    #   `es_ES`, `fr_FR`, `id_ID`, `it_IT`, `ja_JP`, `ko_KR`, `pt_BR`,
+    #   `zh_CN`, `zh_TW`
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_by
+    #   The Amazon Resource Name (ARN) of the user who last updated the
+    #   message template data.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when the message template data was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] message_template_arn
+    #   The Amazon Resource Name (ARN) of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_template_content_sha_256
+    #   The checksum value of the message template content that is
+    #   referenced by the `$LATEST` qualifier. It can be returned in
+    #   `MessageTemplateData` or `ExtendedMessageTemplateData`. It’s
+    #   calculated by content, language, `defaultAttributes` and
+    #   `Attachments` of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_template_id
+    #   The identifier of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] version_number
+    #   The version number of the message template version.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ExtendedMessageTemplateData AWS API Documentation
+    #
+    class ExtendedMessageTemplateData < Struct.new(
+      :attachments,
+      :attribute_types,
+      :channel_subtype,
+      :content,
+      :created_time,
+      :default_attributes,
+      :description,
+      :grouping_configuration,
+      :is_active,
+      :knowledge_base_arn,
+      :knowledge_base_id,
+      :language,
+      :last_modified_by,
+      :last_modified_time,
+      :message_template_arn,
+      :message_template_content_sha_256,
+      :message_template_id,
+      :name,
+      :tags,
+      :version_number)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3097,6 +3949,37 @@ module Aws::QConnect
     #
     class GetKnowledgeBaseResponse < Struct.new(
       :knowledge_base)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base. Can be either the ID or the
+    #   ARN. URLs cannot contain the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_template_id
+    #   The identifier of the message template. Can be either the ID or the
+    #   ARN.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/GetMessageTemplateRequest AWS API Documentation
+    #
+    class GetMessageTemplateRequest < Struct.new(
+      :knowledge_base_id,
+      :message_template_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message_template
+    #   The message template.
+    #   @return [Types::ExtendedMessageTemplateData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/GetMessageTemplateResponse AWS API Documentation
+    #
+    class GetMessageTemplateResponse < Struct.new(
+      :message_template)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4191,6 +5074,98 @@ module Aws::QConnect
     #   The maximum number of results to return per page.
     #   @return [Integer]
     #
+    # @!attribute [rw] message_template_id
+    #   The identifier of the message template. Can be either the ID or the
+    #   ARN. It cannot contain any qualifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ListMessageTemplateVersionsRequest AWS API Documentation
+    #
+    class ListMessageTemplateVersionsRequest < Struct.new(
+      :knowledge_base_id,
+      :max_results,
+      :message_template_id,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message_template_version_summaries
+    #   Summary information about the versions of a message template.
+    #   @return [Array<Types::MessageTemplateVersionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ListMessageTemplateVersionsResponse AWS API Documentation
+    #
+    class ListMessageTemplateVersionsResponse < Struct.new(
+      :message_template_version_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base. Can be either the ID or the
+    #   ARN. URLs cannot contain the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ListMessageTemplatesRequest AWS API Documentation
+    #
+    class ListMessageTemplatesRequest < Struct.new(
+      :knowledge_base_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message_template_summaries
+    #   Summary information about the message template.
+    #   @return [Array<Types::MessageTemplateSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ListMessageTemplatesResponse AWS API Documentation
+    #
+    class ListMessageTemplatesResponse < Struct.new(
+      :message_template_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base. Can be either the ID or the
+    #   ARN. URLs cannot contain the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
     # @!attribute [rw] next_token
     #   The token for the next set of results. Use the value returned in the
     #   previous response in the next request to retrieve the next set of
@@ -4291,6 +5266,614 @@ module Aws::QConnect
     class ManualSearchAIAgentConfiguration < Struct.new(
       :answer_generation_ai_prompt_id,
       :association_configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the message template attachment.
+    #
+    # @!attribute [rw] attachment_id
+    #   The identifier of the attachment file.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_disposition
+    #   The presentation information for the attachment file.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the attachment file being uploaded. The name should
+    #   include the file extension.
+    #   @return [String]
+    #
+    # @!attribute [rw] uploaded_time
+    #   The timestamp when the attachment file was uploaded.
+    #   @return [Time]
+    #
+    # @!attribute [rw] url
+    #   A pre-signed Amazon S3 URL that can be used to download the
+    #   attachment file.
+    #   @return [String]
+    #
+    # @!attribute [rw] url_expiry
+    #   The expiration time of the pre-signed Amazon S3 URL.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/MessageTemplateAttachment AWS API Documentation
+    #
+    class MessageTemplateAttachment < Struct.new(
+      :attachment_id,
+      :content_disposition,
+      :name,
+      :uploaded_time,
+      :url,
+      :url_expiry)
+      SENSITIVE = [:name, :url]
+      include Aws::Structure
+    end
+
+    # The attributes that are used with the message template.
+    #
+    # @!attribute [rw] agent_attributes
+    #   The agent attributes that are used with the message template.
+    #   @return [Types::AgentAttributes]
+    #
+    # @!attribute [rw] custom_attributes
+    #   The custom attributes that are used with the message template.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] customer_profile_attributes
+    #   The customer profile attributes that are used with the message
+    #   template.
+    #   @return [Types::CustomerProfileAttributes]
+    #
+    # @!attribute [rw] system_attributes
+    #   The system attributes that are used with the message template.
+    #   @return [Types::SystemAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/MessageTemplateAttributes AWS API Documentation
+    #
+    class MessageTemplateAttributes < Struct.new(
+      :agent_attributes,
+      :custom_attributes,
+      :customer_profile_attributes,
+      :system_attributes)
+      SENSITIVE = [:custom_attributes]
+      include Aws::Structure
+    end
+
+    # The container of the message template body.
+    #
+    # @note MessageTemplateBodyContentProvider is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note MessageTemplateBodyContentProvider is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of MessageTemplateBodyContentProvider corresponding to the set member.
+    #
+    # @!attribute [rw] content
+    #   The content of the message template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/MessageTemplateBodyContentProvider AWS API Documentation
+    #
+    class MessageTemplateBodyContentProvider < Struct.new(
+      :content,
+      :unknown)
+      SENSITIVE = [:content]
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Content < MessageTemplateBodyContentProvider; end
+      class Unknown < MessageTemplateBodyContentProvider; end
+    end
+
+    # The container of message template content.
+    #
+    # @note MessageTemplateContentProvider is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note MessageTemplateContentProvider is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of MessageTemplateContentProvider corresponding to the set member.
+    #
+    # @!attribute [rw] email
+    #   The content of the message template that applies to the email
+    #   channel subtype.
+    #   @return [Types::EmailMessageTemplateContent]
+    #
+    # @!attribute [rw] sms
+    #   The content of the message template that applies to the SMS channel
+    #   subtype.
+    #   @return [Types::SMSMessageTemplateContent]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/MessageTemplateContentProvider AWS API Documentation
+    #
+    class MessageTemplateContentProvider < Struct.new(
+      :email,
+      :sms,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Email < MessageTemplateContentProvider; end
+      class Sms < MessageTemplateContentProvider; end
+      class Unknown < MessageTemplateContentProvider; end
+    end
+
+    # The data of a message template.
+    #
+    # @!attribute [rw] attribute_types
+    #   The types of attributes that the message template contains.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] channel_subtype
+    #   The channel subtype this message template applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The content of the message template.
+    #   @return [Types::MessageTemplateContentProvider]
+    #
+    # @!attribute [rw] created_time
+    #   The timestamp when the message template was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] default_attributes
+    #   An object that specifies the default values to use for variables in
+    #   the message template. This object contains different categories of
+    #   key-value pairs. Each key defines a variable or placeholder in the
+    #   message template. The corresponding value defines the default value
+    #   for that variable.
+    #   @return [Types::MessageTemplateAttributes]
+    #
+    # @!attribute [rw] description
+    #   The description of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] grouping_configuration
+    #   The configuration information of the grouping of Amazon Q in Connect
+    #   users.
+    #   @return [Types::GroupingConfiguration]
+    #
+    # @!attribute [rw] knowledge_base_arn
+    #   The Amazon Resource Name (ARN) of the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] language
+    #   The language code value for the language in which the quick response
+    #   is written. The supported language codes include `de_DE`, `en_US`,
+    #   `es_ES`, `fr_FR`, `id_ID`, `it_IT`, `ja_JP`, `ko_KR`, `pt_BR`,
+    #   `zh_CN`, `zh_TW`
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_by
+    #   The Amazon Resource Name (ARN) of the user who last updated the
+    #   message template data.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when the message template data was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] message_template_arn
+    #   The Amazon Resource Name (ARN) of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_template_content_sha_256
+    #   The checksum value of the message template content that is
+    #   referenced by the `$LATEST` qualifier. It can be returned in
+    #   `MessageTemplateData` or `ExtendedMessageTemplateData`. It’s
+    #   calculated by content, language, `defaultAttributes` and
+    #   `Attachments` of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_template_id
+    #   The identifier of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/MessageTemplateData AWS API Documentation
+    #
+    class MessageTemplateData < Struct.new(
+      :attribute_types,
+      :channel_subtype,
+      :content,
+      :created_time,
+      :default_attributes,
+      :description,
+      :grouping_configuration,
+      :knowledge_base_arn,
+      :knowledge_base_id,
+      :language,
+      :last_modified_by,
+      :last_modified_time,
+      :message_template_arn,
+      :message_template_content_sha_256,
+      :message_template_id,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The message template fields to filter the message template query
+    # results by. The following is the list of supported field names:
+    #
+    # * name
+    #
+    # * description
+    #
+    # * channel
+    #
+    # * channelSubtype
+    #
+    # * language
+    #
+    # * qualifier
+    #
+    # * createdTime
+    #
+    # * lastModifiedTime
+    #
+    # * lastModifiedBy
+    #
+    # * groupingConfiguration.criteria
+    #
+    # * groupingConfiguration.values
+    #
+    # @!attribute [rw] include_no_existence
+    #   Whether to treat null value as a match for the attribute field.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] name
+    #   The name of the attribute field to filter the message templates by.
+    #   @return [String]
+    #
+    # @!attribute [rw] operator
+    #   The operator to use for filtering.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values of attribute field to filter the message template by.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/MessageTemplateFilterField AWS API Documentation
+    #
+    class MessageTemplateFilterField < Struct.new(
+      :include_no_existence,
+      :name,
+      :operator,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The message template fields to order the message template query
+    # results by. The following is the list of supported field names:
+    #
+    # * name
+    #
+    # * description
+    #
+    # * channel
+    #
+    # * channelSubtype
+    #
+    # * language
+    #
+    # * qualifier
+    #
+    # * createdTime
+    #
+    # * lastModifiedTime
+    #
+    # * lastModifiedBy
+    #
+    # * groupingConfiguration.criteria
+    #
+    # * groupingConfiguration.values
+    #
+    # @!attribute [rw] name
+    #   The name of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] order
+    #   The order at which the message templates are sorted by.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/MessageTemplateOrderField AWS API Documentation
+    #
+    class MessageTemplateOrderField < Struct.new(
+      :name,
+      :order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The message template fields to query message templates by. The
+    # following is the list of supported field names:
+    #
+    # * name
+    #
+    # * description
+    #
+    # @!attribute [rw] allow_fuzziness
+    #   Whether the query expects only exact matches on the attribute field
+    #   values. The results of the query will only include exact matches if
+    #   this parameter is set to false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] name
+    #   The name of the attribute to query the message templates by.
+    #   @return [String]
+    #
+    # @!attribute [rw] operator
+    #   The operator to use for matching attribute field values in the
+    #   query.
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   The importance of the attribute field when calculating query result
+    #   relevancy scores. The value set for this parameter affects the
+    #   ordering of search results.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values of the attribute to query the message templates by.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/MessageTemplateQueryField AWS API Documentation
+    #
+    class MessageTemplateQueryField < Struct.new(
+      :allow_fuzziness,
+      :name,
+      :operator,
+      :priority,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The search expression of the message template.
+    #
+    # @!attribute [rw] filters
+    #   The configuration of filtering rules applied to message template
+    #   query results.
+    #   @return [Array<Types::MessageTemplateFilterField>]
+    #
+    # @!attribute [rw] order_on_field
+    #   The message template attribute fields on which the query results are
+    #   ordered.
+    #   @return [Types::MessageTemplateOrderField]
+    #
+    # @!attribute [rw] queries
+    #   The message template query expressions.
+    #   @return [Array<Types::MessageTemplateQueryField>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/MessageTemplateSearchExpression AWS API Documentation
+    #
+    class MessageTemplateSearchExpression < Struct.new(
+      :filters,
+      :order_on_field,
+      :queries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of message template search.
+    #
+    # @!attribute [rw] channel_subtype
+    #   The channel subtype this message template applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The timestamp when the message template was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] grouping_configuration
+    #   The configuration information of the grouping of Amazon Q in Connect
+    #   users.
+    #   @return [Types::GroupingConfiguration]
+    #
+    # @!attribute [rw] is_active
+    #   Whether the version of the message template is activated.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] knowledge_base_arn
+    #   The Amazon Resource Name (ARN) of the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] language
+    #   The language code value for the language in which the quick response
+    #   is written. The supported language codes include `de_DE`, `en_US`,
+    #   `es_ES`, `fr_FR`, `id_ID`, `it_IT`, `ja_JP`, `ko_KR`, `pt_BR`,
+    #   `zh_CN`, `zh_TW`
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_by
+    #   The Amazon Resource Name (ARN) of the user who last updated the
+    #   message template data.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when the message template data was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] message_template_arn
+    #   The Amazon Resource Name (ARN) of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_template_id
+    #   The identifier of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] version_number
+    #   The version number of the message template version.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/MessageTemplateSearchResultData AWS API Documentation
+    #
+    class MessageTemplateSearchResultData < Struct.new(
+      :channel_subtype,
+      :created_time,
+      :description,
+      :grouping_configuration,
+      :is_active,
+      :knowledge_base_arn,
+      :knowledge_base_id,
+      :language,
+      :last_modified_by,
+      :last_modified_time,
+      :message_template_arn,
+      :message_template_id,
+      :name,
+      :tags,
+      :version_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The summary of the message template.
+    #
+    # @!attribute [rw] active_version_number
+    #   The version number of the message template version that is
+    #   activated.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] channel_subtype
+    #   The channel subtype this message template applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The timestamp when the message template was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_arn
+    #   The Amazon Resource Name (ARN) of the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_by
+    #   The Amazon Resource Name (ARN) of the user who last updated the
+    #   message template data.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when the message template data was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] message_template_arn
+    #   The Amazon Resource Name (ARN) of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_template_id
+    #   The identifier of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/MessageTemplateSummary AWS API Documentation
+    #
+    class MessageTemplateSummary < Struct.new(
+      :active_version_number,
+      :channel_subtype,
+      :created_time,
+      :description,
+      :knowledge_base_arn,
+      :knowledge_base_id,
+      :last_modified_by,
+      :last_modified_time,
+      :message_template_arn,
+      :message_template_id,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The summary of the message template version.
+    #
+    # @!attribute [rw] channel_subtype
+    #   The channel subtype this message template applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_active
+    #   Whether the version of the message template is activated.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] knowledge_base_arn
+    #   The Amazon Resource Name (ARN) of the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_template_arn
+    #   The Amazon Resource Name (ARN) of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_template_id
+    #   The identifier of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The version number of the message template version.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/MessageTemplateVersionSummary AWS API Documentation
+    #
+    class MessageTemplateVersionSummary < Struct.new(
+      :channel_subtype,
+      :is_active,
+      :knowledge_base_arn,
+      :knowledge_base_id,
+      :message_template_arn,
+      :message_template_id,
+      :name,
+      :version_number)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4757,7 +6340,9 @@ module Aws::QConnect
     #
     # @!attribute [rw] language
     #   The language code value for the language in which the quick response
-    #   is written.
+    #   is written. The supported language codes include `de_DE`, `en_US`,
+    #   `es_ES`, `fr_FR`, `id_ID`, `it_IT`, `ja_JP`, `ko_KR`, `pt_BR`,
+    #   `zh_CN`, `zh_TW`
     #   @return [String]
     #
     # @!attribute [rw] last_modified_by
@@ -5393,6 +6978,56 @@ module Aws::QConnect
     #
     class RemoveKnowledgeBaseTemplateUriResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] attributes
+    #   An object that specifies the values to use for variables in the
+    #   message template. This object contains different categories of
+    #   key-value pairs. Each key defines a variable or placeholder in the
+    #   message template. The corresponding value defines the value for that
+    #   variable.
+    #   @return [Types::MessageTemplateAttributes]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base. Can be either the ID or the
+    #   ARN. URLs cannot contain the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_template_id
+    #   The identifier of the message template. Can be either the ID or the
+    #   ARN.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/RenderMessageTemplateRequest AWS API Documentation
+    #
+    class RenderMessageTemplateRequest < Struct.new(
+      :attributes,
+      :knowledge_base_id,
+      :message_template_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attachments
+    #   The message template attachments.
+    #   @return [Array<Types::MessageTemplateAttachment>]
+    #
+    # @!attribute [rw] attributes_not_interpolated
+    #   The attribute keys that are not resolved.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] content
+    #   The content of the message template.
+    #   @return [Types::MessageTemplateContentProvider]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/RenderMessageTemplateResponse AWS API Documentation
+    #
+    class RenderMessageTemplateResponse < Struct.new(
+      :attachments,
+      :attributes_not_interpolated,
+      :content)
+      SENSITIVE = [:attributes_not_interpolated]
+      include Aws::Structure
+    end
+
     # Information about how to render the content.
     #
     # @!attribute [rw] template_uri
@@ -5535,6 +7170,35 @@ module Aws::QConnect
       class Unknown < RuntimeSessionDataValue; end
     end
 
+    # The content of the message template that applies to the SMS channel
+    # subtype.
+    #
+    # @!attribute [rw] body
+    #   The body to use in SMS messages.
+    #   @return [Types::SMSMessageTemplateContentBody]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/SMSMessageTemplateContent AWS API Documentation
+    #
+    class SMSMessageTemplateContent < Struct.new(
+      :body)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The body to use in SMS messages.
+    #
+    # @!attribute [rw] plain_text
+    #   The message body to use in SMS messages.
+    #   @return [Types::MessageTemplateBodyContentProvider]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/SMSMessageTemplateContentBody AWS API Documentation
+    #
+    class SMSMessageTemplateContentBody < Struct.new(
+      :plain_text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] knowledge_base_id
     #   The identifier of the knowledge base. This should not be a
     #   QUICK\_RESPONSES type knowledge base. Can be either the ID or the
@@ -5594,6 +7258,54 @@ module Aws::QConnect
     #
     class SearchExpression < Struct.new(
       :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base. Can be either the ID or the
+    #   ARN. URLs cannot contain the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] search_expression
+    #   The search expression for querying the message template.
+    #   @return [Types::MessageTemplateSearchExpression]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/SearchMessageTemplatesRequest AWS API Documentation
+    #
+    class SearchMessageTemplatesRequest < Struct.new(
+      :knowledge_base_id,
+      :max_results,
+      :next_token,
+      :search_expression)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] results
+    #   The results of the message template search.
+    #   @return [Array<Types::MessageTemplateSearchResultData>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/SearchMessageTemplatesResponse AWS API Documentation
+    #
+    class SearchMessageTemplatesResponse < Struct.new(
+      :next_token,
+      :results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6067,6 +7779,47 @@ module Aws::QConnect
       include Aws::Structure
     end
 
+    # The system attributes that are used with the message template.
+    #
+    # @!attribute [rw] customer_endpoint
+    #   The CustomerEndpoint attribute.
+    #   @return [Types::SystemEndpointAttributes]
+    #
+    # @!attribute [rw] name
+    #   The name of the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] system_endpoint
+    #   The SystemEndpoint attribute.
+    #   @return [Types::SystemEndpointAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/SystemAttributes AWS API Documentation
+    #
+    class SystemAttributes < Struct.new(
+      :customer_endpoint,
+      :name,
+      :system_endpoint)
+      SENSITIVE = [:name]
+      include Aws::Structure
+    end
+
+    # The system endpoint attributes that are used with the message
+    # template.
+    #
+    # @!attribute [rw] address
+    #   The customer's phone number if used with `customerEndpoint`, or the
+    #   number the customer dialed to call your contact center if used with
+    #   `systemEndpoint`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/SystemEndpointAttributes AWS API Documentation
+    #
+    class SystemEndpointAttributes < Struct.new(
+      :address)
+      SENSITIVE = [:address]
+      include Aws::Structure
+    end
+
     # A leaf node condition which can be used to specify a tag condition.
     #
     # @!attribute [rw] key
@@ -6243,9 +7996,9 @@ module Aws::QConnect
     #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. If not provided, the AWS SDK populates
-    #   this field. For more information about idempotency, see [Making
-    #   retries safe with idempotent APIs][1].
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1]..
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -6303,16 +8056,16 @@ module Aws::QConnect
     #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. If not provided, the AWS SDK populates
-    #   this field. For more information about idempotency, see [Making
-    #   retries safe with idempotent APIs][1].
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1]..
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #
     #
     #
-    #   [1]: http://aws.amazon.com/https:/aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   [1]: http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -6494,6 +8247,106 @@ module Aws::QConnect
     #
     class UpdateKnowledgeBaseTemplateUriResponse < Struct.new(
       :knowledge_base)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] description
+    #   The description of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] grouping_configuration
+    #   The configuration information of the grouping of Amazon Q in Connect
+    #   users.
+    #   @return [Types::GroupingConfiguration]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base. Can be either the ID or the
+    #   ARN. URLs cannot contain the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_template_id
+    #   The identifier of the message template. Can be either the ID or the
+    #   ARN. It cannot contain any qualifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the message template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/UpdateMessageTemplateMetadataRequest AWS API Documentation
+    #
+    class UpdateMessageTemplateMetadataRequest < Struct.new(
+      :description,
+      :grouping_configuration,
+      :knowledge_base_id,
+      :message_template_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message_template
+    #   The message template.
+    #   @return [Types::MessageTemplateData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/UpdateMessageTemplateMetadataResponse AWS API Documentation
+    #
+    class UpdateMessageTemplateMetadataResponse < Struct.new(
+      :message_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] content
+    #   The content of the message template.
+    #   @return [Types::MessageTemplateContentProvider]
+    #
+    # @!attribute [rw] default_attributes
+    #   An object that specifies the default values to use for variables in
+    #   the message template. This object contains different categories of
+    #   key-value pairs. Each key defines a variable or placeholder in the
+    #   message template. The corresponding value defines the default value
+    #   for that variable.
+    #   @return [Types::MessageTemplateAttributes]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base. Can be either the ID or the
+    #   ARN. URLs cannot contain the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] language
+    #   The language code value for the language in which the quick response
+    #   is written. The supported language codes include `de_DE`, `en_US`,
+    #   `es_ES`, `fr_FR`, `id_ID`, `it_IT`, `ja_JP`, `ko_KR`, `pt_BR`,
+    #   `zh_CN`, `zh_TW`
+    #   @return [String]
+    #
+    # @!attribute [rw] message_template_id
+    #   The identifier of the message template. Can be either the ID or the
+    #   ARN. It cannot contain any qualifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/UpdateMessageTemplateRequest AWS API Documentation
+    #
+    class UpdateMessageTemplateRequest < Struct.new(
+      :content,
+      :default_attributes,
+      :knowledge_base_id,
+      :language,
+      :message_template_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message_template
+    #   The message template.
+    #   @return [Types::MessageTemplateData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/UpdateMessageTemplateResponse AWS API Documentation
+    #
+    class UpdateMessageTemplateResponse < Struct.new(
+      :message_template)
       SENSITIVE = []
       include Aws::Structure
     end

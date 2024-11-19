@@ -3401,7 +3401,6 @@ module Aws::Organizations
     #   * Provide and verify the required contact information
     #
     #   * Provide a current payment method
-    #
     #   Amazon Web Services uses the payment method to charge for any
     #   billable (not free tier) Amazon Web Services activity that occurs
     #   while the account isn't attached to an organization. For more
@@ -5851,7 +5850,7 @@ module Aws::Organizations
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.107.0'
+      context[:gem_version] = '1.108.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

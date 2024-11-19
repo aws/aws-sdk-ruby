@@ -15824,13 +15824,11 @@ module Aws::LexModelsV2
     #
     #     * `audio/lpcm; sample-rate=8000; sample-size-bits=16;
     #       channel-count=1; is-big-endian=false`
-    #
     #   * Opus format
     #
     #     * `audio/x-cbr-opus-with-preamble;preamble-size=0;bit-rate=256000;frame-size-milliseconds=4`
     #
     #     ^
-    #
     #   * Text format
     #
     #     * `text/plain; charset=utf-8`

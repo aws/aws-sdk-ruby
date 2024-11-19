@@ -611,7 +611,6 @@ module Aws::MachineLearning
     #
     #     * `InstanceIdentifier ` - A unique identifier for the Amazon RDS
     #       database instance.
-    #
     #   * DatabaseCredentials - AWS Identity and Access Management (IAM)
     #     credentials that are used to connect to the Amazon RDS database.
     #
@@ -764,7 +763,6 @@ module Aws::MachineLearning
     #
     #     * ` ClusterIdentifier` - The unique ID for the Amazon Redshift
     #       cluster.
-    #
     #   * DatabaseCredentials - The AWS Identity and Access Management (IAM)
     #     credentials that are used to connect to the Amazon Redshift
     #     database.
@@ -2488,7 +2486,7 @@ module Aws::MachineLearning
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-machinelearning'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

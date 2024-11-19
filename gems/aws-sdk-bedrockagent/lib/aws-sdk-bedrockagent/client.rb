@@ -524,7 +524,6 @@ module Aws::BedrockAgent
     #     seconds for which the agent should maintain session information.
     #     After this time expires, the subsequent `InvokeAgent` request
     #     begins a new session.
-    #
     # * To enable your agent to retain conversational context across
     #   multiple sessions, include a `memoryConfiguration` object. For more
     #   information, see [Configure memory][1].
@@ -6405,7 +6404,7 @@ module Aws::BedrockAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagent'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

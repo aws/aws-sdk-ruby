@@ -302,6 +302,13 @@ module Aws
                                   filesystem_type: ("ext3" | "ext4" | "xfs" | "ntfs")?
                                 }?
                               },
+                            ],
+                            ?vpc_lattice_configurations: Array[
+                              {
+                                role_arn: ::String,
+                                target_group_arn: ::String,
+                                port_name: ::String
+                              },
                             ]
                           ) -> _CreateServiceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateServiceResponseSuccess
@@ -1732,6 +1739,13 @@ module Aws
                                   role_arn: ::String,
                                   filesystem_type: ("ext3" | "ext4" | "xfs" | "ntfs")?
                                 }?
+                              },
+                            ],
+                            ?vpc_lattice_configurations: Array[
+                              {
+                                role_arn: ::String,
+                                target_group_arn: ::String,
+                                port_name: ::String
                               },
                             ]
                           ) -> _UpdateServiceResponseSuccess

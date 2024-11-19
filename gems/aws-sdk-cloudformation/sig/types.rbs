@@ -764,6 +764,20 @@ module Aws::CloudFormation
       SENSITIVE: []
     end
 
+    class HookResultNotFoundException < Aws::EmptyStructure
+    end
+
+    class HookResultSummary
+      attr_accessor invocation_point: ("PRE_PROVISION")
+      attr_accessor failure_mode: ("FAIL" | "WARN")
+      attr_accessor type_name: ::String
+      attr_accessor type_version_id: ::String
+      attr_accessor type_configuration_version_id: ::String
+      attr_accessor status: ("HOOK_IN_PROGRESS" | "HOOK_COMPLETE_SUCCEEDED" | "HOOK_COMPLETE_FAILED" | "HOOK_FAILED")
+      attr_accessor hook_status_reason: ::String
+      SENSITIVE: []
+    end
+
     class ImportStacksToStackSetInput
       attr_accessor stack_set_name: ::String
       attr_accessor stack_ids: ::Array[::String]
@@ -826,6 +840,21 @@ module Aws::CloudFormation
 
     class ListGeneratedTemplatesOutput
       attr_accessor summaries: ::Array[Types::TemplateSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListHookResultsInput
+      attr_accessor target_type: ("CHANGE_SET" | "STACK" | "RESOURCE" | "CLOUD_CONTROL")
+      attr_accessor target_id: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListHookResultsOutput
+      attr_accessor target_type: ("CHANGE_SET" | "STACK" | "RESOURCE" | "CLOUD_CONTROL")
+      attr_accessor target_id: ::String
+      attr_accessor hook_results: ::Array[Types::HookResultSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end

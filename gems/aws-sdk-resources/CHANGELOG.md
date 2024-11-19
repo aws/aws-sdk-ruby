@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.214.0 (2024-11-15)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-connectcampaignsv2` gem.
+
 3.213.0 (2024-11-14)
 ------------------
 

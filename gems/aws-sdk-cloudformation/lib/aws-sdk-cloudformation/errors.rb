@@ -33,6 +33,7 @@ module Aws::CloudFormation
   # * {ConcurrentResourcesLimitExceededException}
   # * {CreatedButModifiedException}
   # * {GeneratedTemplateNotFoundException}
+  # * {HookResultNotFoundException}
   # * {InsufficientCapabilitiesException}
   # * {InvalidChangeSetStatusException}
   # * {InvalidOperationException}
@@ -121,6 +122,16 @@ module Aws::CloudFormation
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudFormation::Types::GeneratedTemplateNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class HookResultNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFormation::Types::HookResultNotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

@@ -398,6 +398,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateContactFlowResponse]
         def contact_flow_id: () -> ::String
         def contact_flow_arn: () -> ::String
+        def flow_content_sha_256: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#create_contact_flow-instance_method
       def create_contact_flow: (
@@ -426,6 +427,22 @@ module Aws
                                         ?client_token: ::String
                                       ) -> _CreateContactFlowModuleResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContactFlowModuleResponseSuccess
+
+      interface _CreateContactFlowVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateContactFlowVersionResponse]
+        def contact_flow_arn: () -> ::String
+        def version: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#create_contact_flow_version-instance_method
+      def create_contact_flow_version: (
+                                         instance_id: ::String,
+                                         ?description: ::String,
+                                         contact_flow_id: ::String,
+                                         ?flow_content_sha_256: ::String,
+                                         ?last_modified_time: ::Time,
+                                         ?last_modified_region: ::String
+                                       ) -> _CreateContactFlowVersionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContactFlowVersionResponseSuccess
 
       interface _CreateEvaluationFormResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateEvaluationFormResponse]
@@ -559,7 +576,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#create_integration_association-instance_method
       def create_integration_association: (
                                             instance_id: ::String,
-                                            integration_type: ("EVENT" | "VOICE_ID" | "PINPOINT_APP" | "WISDOM_ASSISTANT" | "WISDOM_KNOWLEDGE_BASE" | "WISDOM_QUICK_RESPONSES" | "CASES_DOMAIN" | "APPLICATION" | "FILE_SCANNER"),
+                                            integration_type: ("EVENT" | "VOICE_ID" | "PINPOINT_APP" | "WISDOM_ASSISTANT" | "WISDOM_KNOWLEDGE_BASE" | "WISDOM_QUICK_RESPONSES" | "Q_MESSAGE_TEMPLATES" | "CASES_DOMAIN" | "APPLICATION" | "FILE_SCANNER"),
                                             integration_arn: ::String,
                                             ?source_application_url: ::String,
                                             ?source_application_name: ::String,
@@ -1965,6 +1982,20 @@ module Aws
                                      ) -> _ListContactFlowModulesResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListContactFlowModulesResponseSuccess
 
+      interface _ListContactFlowVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListContactFlowVersionsResponse]
+        def contact_flow_version_summary_list: () -> ::Array[Types::ContactFlowVersionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#list_contact_flow_versions-instance_method
+      def list_contact_flow_versions: (
+                                        instance_id: ::String,
+                                        contact_flow_id: ::String,
+                                        ?next_token: ::String,
+                                        ?max_results: ::Integer
+                                      ) -> _ListContactFlowVersionsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListContactFlowVersionsResponseSuccess
+
       interface _ListContactFlowsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListContactFlowsResponse]
         def contact_flow_summary_list: () -> ::Array[Types::ContactFlowSummary]
@@ -2108,7 +2139,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#list_integration_associations-instance_method
       def list_integration_associations: (
                                            instance_id: ::String,
-                                           ?integration_type: ("EVENT" | "VOICE_ID" | "PINPOINT_APP" | "WISDOM_ASSISTANT" | "WISDOM_KNOWLEDGE_BASE" | "WISDOM_QUICK_RESPONSES" | "CASES_DOMAIN" | "APPLICATION" | "FILE_SCANNER"),
+                                           ?integration_type: ("EVENT" | "VOICE_ID" | "PINPOINT_APP" | "WISDOM_ASSISTANT" | "WISDOM_KNOWLEDGE_BASE" | "WISDOM_QUICK_RESPONSES" | "Q_MESSAGE_TEMPLATES" | "CASES_DOMAIN" | "APPLICATION" | "FILE_SCANNER"),
                                            ?next_token: ::String,
                                            ?max_results: ::Integer,
                                            ?integration_arn: ::String

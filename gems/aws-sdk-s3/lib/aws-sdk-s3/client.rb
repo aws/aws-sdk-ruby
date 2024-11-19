@@ -837,7 +837,6 @@ module Aws::S3
     #       except the last part.
     #
     #     * HTTP Status Code: 400 Bad Request
-    #
     #   * Error Code: `InvalidPart`
     #
     #     * Description: One or more of the specified parts could not be
@@ -845,14 +844,12 @@ module Aws::S3
     #       ETag might not have matched the uploaded part's ETag.
     #
     #     * HTTP Status Code: 400 Bad Request
-    #
     #   * Error Code: `InvalidPartOrder`
     #
     #     * Description: The list of parts was not in ascending order. The
     #       parts list must be specified in order by part number.
     #
     #     * HTTP Status Code: 400 Bad Request
-    #
     #   * Error Code: `NoSuchUpload`
     #
     #     * Description: The specified multipart upload does not exist. The
@@ -1254,7 +1251,6 @@ module Aws::S3
     #     * If the destination bucket is a general purpose bucket, you must
     #       have <b> <code>s3:PutObject</code> </b> permission to write the
     #       object copy to the destination bucket.
-    #
     #   * **Directory bucket permissions** - You must have permissions in a
     #     bucket policy or an IAM identity-based policy based on the source
     #     and destination bucket types in a `CopyObject` operation.
@@ -1272,7 +1268,6 @@ module Aws::S3
     #       `Action` element of a policy to write the object to the
     #       destination. The `s3express:SessionMode` condition key can't be
     #       set to `ReadOnly` on the copy destination bucket.
-    #
     #     If the object is encrypted with SSE-KMS, you must also have the
     #     `kms:GenerateDataKey` and `kms:Decrypt` permissions in IAM
     #     identity-based policies and KMS key policies for the KMS key.
@@ -2309,7 +2304,6 @@ module Aws::S3
     #       more information about S3 Block Public Access, see [Blocking
     #       public access to your Amazon S3 storage ][6] in the *Amazon S3
     #       User Guide*.
-    #
     #   * **Directory bucket permissions** - You must have the
     #     `s3express:CreateBucket` permission in an IAM identity-based
     #     policy instead of a bucket policy. Cross-account access to this
@@ -2660,7 +2654,6 @@ module Aws::S3
     #       * `x-amz-server-side-encryption-aws-kms-key-id`
     #
     #       * `x-amz-server-side-encryption-context`
-    #
     #       <note markdown="1"> * If you specify `x-amz-server-side-encryption:aws:kms`, but
     #         don't provide `x-amz-server-side-encryption-aws-kms-key-id`,
     #         Amazon S3 uses the Amazon Web Services managed key (`aws/s3`
@@ -2706,12 +2699,10 @@ module Aws::S3
     #       * `x-amz-server-side-encryption-customer-key`
     #
     #       * `x-amz-server-side-encryption-customer-key-MD5`
-    #
     #       For more information about server-side encryption with
     #       customer-provided encryption keys (SSE-C), see [ Protecting data
     #       using server-side encryption with customer-provided encryption
     #       keys (SSE-C)][11] in the *Amazon S3 User Guide*.
-    #
     #   * **Directory buckets** - For directory buckets, there are only two
     #     supported options for server-side encryption: server-side
     #     encryption with Amazon S3 managed keys (SSE-S3) (`AES256`) and
@@ -4805,7 +4796,6 @@ module Aws::S3
     #       objects from your bucket, you must deny them the
     #       `s3:DeleteObject`, `s3:DeleteObjectVersion`, and
     #       `s3:PutLifeCycleConfiguration` permissions.
-    #
     #   * **Directory buckets permissions** - To grant access to this API
     #     operation on a directory bucket, we recommend that you use the
     #     CreateSession API operation for session-based authorization.
@@ -5164,7 +5154,6 @@ module Aws::S3
     #     * <b> <code>s3:DeleteObjectVersion</code> </b> - To delete a
     #       specific version of an object from a versioning-enabled bucket,
     #       you must specify the `s3:DeleteObjectVersion` permission.
-    #
     #   * **Directory bucket permissions** - To grant access to this API
     #     operation on a directory bucket, we recommend that you use the [
     #     `CreateSession` ][3] API operation for session-based
@@ -7744,7 +7733,6 @@ module Aws::S3
     #
     #     * If you don’t have the `s3:ListBucket` permission, Amazon S3
     #       returns an HTTP status code `403 Access Denied` error.
-    #
     #   * **Directory bucket permissions** - To grant access to this API
     #     operation on a directory bucket, we recommend that you use the [
     #     `CreateSession` ][4] API operation for session-based
@@ -8578,7 +8566,6 @@ module Aws::S3
     #     * If you don't have the `s3:ListBucket` permission, Amazon S3
     #       returns an HTTP status code `403 Forbidden` ("access denied")
     #       error.
-    #
     #   * **Directory bucket permissions** - To grant access to this API
     #     operation on a directory bucket, we recommend that you use the [
     #     `CreateSession` ][3] API operation for session-based
@@ -8665,7 +8652,6 @@ module Aws::S3
     #     * `If-Match` condition evaluates to `true`.
     #
     #     * `If-Unmodified-Since` condition evaluates to `false`.
-    #
     #     For more information about conditional requests, see [RFC
     #     7232][7].
     #
@@ -8676,7 +8662,6 @@ module Aws::S3
     #     * `If-None-Match` condition evaluates to `false`.
     #
     #     * `If-Modified-Since` condition evaluates to `true`.
-    #
     #     For more information about conditional requests, see [RFC
     #     7232][7].
     #
@@ -9726,7 +9711,6 @@ module Aws::S3
     #
     #     * If you don’t have the `s3:ListBucket` permission, Amazon S3
     #       returns an HTTP status code `403 Forbidden` error.
-    #
     #   * **Directory bucket permissions** - To grant access to this API
     #     operation on a directory bucket, we recommend that you use the [
     #     `CreateSession` ][3] API operation for session-based
@@ -10909,7 +10893,6 @@ module Aws::S3
     #       initiation time. Among uploads with the same key, the one that
     #       was initiated first will appear before the ones that were
     #       initiated later.
-    #
     #   * **Directory bucket** - In the `ListMultipartUploads` response, the
     #     multipart uploads aren't sorted lexicographically based on the
     #     object keys.
@@ -12589,7 +12572,6 @@ module Aws::S3
     #       General Reference.
     #
     #        </note>
-    #
     #     For example, the following `x-amz-grant-write` header grants
     #     create, overwrite, and delete objects permission to LogDelivery
     #     group predefined by Amazon S3 and two Amazon Web Services accounts
@@ -12830,14 +12812,12 @@ module Aws::S3
     #   * *Code: InvalidArgument*
     #
     #   * *Cause: Invalid argument.*
-    #
     # * * *HTTP Error: HTTP 400 Bad Request*
     #
     #   * *Code: TooManyConfigurations*
     #
     #   * *Cause: You are attempting to create a new configuration but have
     #     already reached the 1,000-configuration limit.*
-    #
     # * * *HTTP Error: HTTP 403 Forbidden*
     #
     #   * *Code: AccessDenied*
@@ -13139,7 +13119,6 @@ module Aws::S3
     #     encryption][3] to SSE-KMS, you should verify that your KMS key ID
     #     is correct. Amazon S3 doesn't validate the KMS key ID provided in
     #     PutBucketEncryption requests.
-    #
     # * <b>Directory buckets </b> - You can optionally configure default
     #   encryption for a bucket by using server-side encryption with Key
     #   Management Service (KMS) keys (SSE-KMS).
@@ -15711,7 +15690,6 @@ module Aws::S3
     #     * <b> <code>s3:PutObjectTagging</code> </b> - To successfully set
     #       the tag-set with your `PutObject` request, you must have the
     #       `s3:PutObjectTagging`.
-    #
     #   * **Directory bucket permissions** - To grant access to this API
     #     operation on a directory bucket, we recommend that you use the [
     #     `CreateSession` ][5] API operation for session-based
@@ -16676,7 +16654,6 @@ module Aws::S3
     #       General Reference.
     #
     #        </note>
-    #
     #     For example, the following `x-amz-grant-read` header grants list
     #     objects permission to the two Amazon Web Services accounts
     #     identified by their email addresses.
@@ -17782,7 +17759,6 @@ module Aws::S3
     #     * *HTTP Status Code: 409 Conflict*
     #
     #     * *SOAP Fault Code Prefix: Client*
-    #
     #   * * *Code: GlacierExpeditedRetrievalNotAvailable*
     #
     #     * *Cause: expedited retrievals are currently not available. Try
@@ -18569,7 +18545,6 @@ module Aws::S3
     #     * x-amz-server-side-encryption-customer-key
     #
     #     * x-amz-server-side-encryption-customer-key-MD5
-    #
     #     For more information, see [Using Server-Side Encryption][11] in
     #     the *Amazon S3 User Guide*.
     #
@@ -18970,7 +18945,6 @@ module Aws::S3
     #       permissions required to use the multipart upload API, see
     #       [Multipart upload and permissions][8] and [Multipart upload API
     #       and permissions][9] in the *Amazon S3 User Guide*.
-    #
     #   * **Directory bucket permissions** - You must have permissions in a
     #     bucket policy or an IAM identity-based policy based on the source
     #     and destination bucket types in an `UploadPartCopy` operation.
@@ -18988,7 +18962,6 @@ module Aws::S3
     #       `Action` element of a policy to write the object to the
     #       destination. The `s3express:SessionMode` condition key cannot be
     #       set to `ReadOnly` on the copy destination.
-    #
     #     If the object is encrypted with SSE-KMS, you must also have the
     #     `kms:GenerateDataKey` and `kms:Decrypt` permissions in IAM
     #     identity-based policies and KMS key policies for the KMS key.
@@ -19033,7 +19006,6 @@ module Aws::S3
     #       been aborted or completed.
     #
     #     * HTTP Status Code: 404 Not Found
-    #
     #   * Error Code: `InvalidRequest`
     #
     #     * Description: The specified copy source is not supported as a
@@ -19866,7 +19838,7 @@ module Aws::S3
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.171.0'
+      context[:gem_version] = '1.172.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

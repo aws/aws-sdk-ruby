@@ -33,11 +33,14 @@ module Aws
                       ?endpoint_cache_max_threads: Integer,
                       ?endpoint_cache_poll_interval: Integer,
                       ?endpoint_discovery: bool,
+                      ?event_stream_handler: Proc,
                       ?ignore_configured_endpoint_urls: bool,
+                      ?input_event_stream_handler: Proc,
                       ?log_formatter: untyped,
                       ?log_level: Symbol,
                       ?logger: untyped,
                       ?max_attempts: Integer,
+                      ?output_event_stream_handler: Proc,
                       ?profile: String,
                       ?request_min_compression_size_bytes: Integer,
                       ?retry_backoff: Proc,
@@ -605,6 +608,32 @@ module Aws
                             ) -> _CreateDashboardResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDashboardResponseSuccess
 
+      interface _CreateDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDatasetResponse]
+        def dataset_id: () -> ::String
+        def dataset_arn: () -> ::String
+        def dataset_status: () -> Types::DatasetStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#create_dataset-instance_method
+      def create_dataset: (
+                            ?dataset_id: ::String,
+                            dataset_name: ::String,
+                            ?dataset_description: ::String,
+                            dataset_source: {
+                              source_type: ("KENDRA"),
+                              source_format: ("KNOWLEDGE_BASE"),
+                              source_detail: {
+                                kendra: {
+                                  knowledge_base_arn: ::String,
+                                  role_arn: ::String
+                                }?
+                              }?
+                            },
+                            ?client_token: ::String,
+                            ?tags: Hash[::String, ::String]
+                          ) -> _CreateDatasetResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDatasetResponseSuccess
+
       interface _CreateGatewayResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateGatewayResponse]
         def gateway_id: () -> ::String
@@ -653,7 +682,11 @@ module Aws
                            ?alarms: {
                              alarm_role_arn: ::String,
                              notification_lambda_arn: ::String?
-                           }
+                           },
+                           ?portal_type: ("SITEWISE_PORTAL_V1" | "SITEWISE_PORTAL_V2"),
+                           ?portal_type_configuration: Hash[::String, {
+                               portal_tools: Array[::String]?
+                             }]
                          ) -> _CreatePortalResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePortalResponseSuccess
 
@@ -731,6 +764,17 @@ module Aws
                               ?client_token: ::String
                             ) -> _DeleteDashboardResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDashboardResponseSuccess
+
+      interface _DeleteDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDatasetResponse]
+        def dataset_status: () -> Types::DatasetStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#delete_dataset-instance_method
+      def delete_dataset: (
+                            dataset_id: ::String,
+                            ?client_token: ::String
+                          ) -> _DeleteDatasetResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDatasetResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#delete_gateway-instance_method
       def delete_gateway: (
@@ -942,6 +986,24 @@ module Aws
                               ) -> _DescribeDashboardResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDashboardResponseSuccess
 
+      interface _DescribeDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDatasetResponse]
+        def dataset_id: () -> ::String
+        def dataset_arn: () -> ::String
+        def dataset_name: () -> ::String
+        def dataset_description: () -> ::String
+        def dataset_source: () -> Types::DatasetSource
+        def dataset_status: () -> Types::DatasetStatus
+        def dataset_creation_date: () -> ::Time
+        def dataset_last_update_date: () -> ::Time
+        def dataset_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_dataset-instance_method
+      def describe_dataset: (
+                              dataset_id: ::String
+                            ) -> _DescribeDatasetResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDatasetResponseSuccess
+
       interface _DescribeDefaultEncryptionConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDefaultEncryptionConfigurationResponse]
         def encryption_type: () -> ("SITEWISE_DEFAULT_ENCRYPTION" | "KMS_BASED_ENCRYPTION")
@@ -1009,6 +1071,8 @@ module Aws
         def portal_auth_mode: () -> ("IAM" | "SSO")
         def notification_sender_email: () -> ::String
         def alarms: () -> Types::Alarms
+        def portal_type: () -> ("SITEWISE_PORTAL_V1" | "SITEWISE_PORTAL_V2")
+        def portal_type_configuration: () -> ::Hash[::String, Types::PortalTypeEntry]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_portal-instance_method
       def describe_portal: (
@@ -1113,7 +1177,8 @@ module Aws
       def execute_query: (
                            query_statement: ::String,
                            ?next_token: ::String,
-                           ?max_results: ::Integer
+                           ?max_results: ::Integer,
+                           ?client_token: ::String
                          ) -> _ExecuteQueryResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExecuteQueryResponseSuccess
 
@@ -1191,6 +1256,19 @@ module Aws
                                                     ?interval_window_in_seconds: ::Integer
                                                   ) -> _GetInterpolatedAssetPropertyValuesResponseSuccess
                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInterpolatedAssetPropertyValuesResponseSuccess
+
+      interface _InvokeAssistantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InvokeAssistantResponse]
+        def body: () -> Types::ResponseStream
+        def conversation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#invoke_assistant-instance_method
+      def invoke_assistant: (
+                              ?conversation_id: ::String,
+                              message: ::String,
+                              ?enable_trace: bool
+                            ) ?{ (*untyped) -> void } -> _InvokeAssistantResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _InvokeAssistantResponseSuccess
 
       interface _ListAccessPoliciesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAccessPoliciesResponse]
@@ -1361,6 +1439,19 @@ module Aws
                              ?max_results: ::Integer
                            ) -> _ListDashboardsResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDashboardsResponseSuccess
+
+      interface _ListDatasetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDatasetsResponse]
+        def dataset_summaries: () -> ::Array[Types::DatasetSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_datasets-instance_method
+      def list_datasets: (
+                           source_type: ("KENDRA"),
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListDatasetsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDatasetsResponseSuccess
 
       interface _ListGatewaysResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListGatewaysResponse]
@@ -1874,6 +1965,31 @@ module Aws
                             ) -> _UpdateDashboardResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDashboardResponseSuccess
 
+      interface _UpdateDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDatasetResponse]
+        def dataset_id: () -> ::String
+        def dataset_arn: () -> ::String
+        def dataset_status: () -> Types::DatasetStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#update_dataset-instance_method
+      def update_dataset: (
+                            dataset_id: ::String,
+                            dataset_name: ::String,
+                            ?dataset_description: ::String,
+                            dataset_source: {
+                              source_type: ("KENDRA"),
+                              source_format: ("KNOWLEDGE_BASE"),
+                              source_detail: {
+                                kendra: {
+                                  knowledge_base_arn: ::String,
+                                  role_arn: ::String
+                                }?
+                              }?
+                            },
+                            ?client_token: ::String
+                          ) -> _UpdateDatasetResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDatasetResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#update_gateway-instance_method
       def update_gateway: (
                             gateway_id: ::String,
@@ -1917,7 +2033,11 @@ module Aws
                            ?alarms: {
                              alarm_role_arn: ::String,
                              notification_lambda_arn: ::String?
-                           }
+                           },
+                           ?portal_type: ("SITEWISE_PORTAL_V1" | "SITEWISE_PORTAL_V2"),
+                           ?portal_type_configuration: Hash[::String, {
+                               portal_tools: Array[::String]?
+                             }]
                          ) -> _UpdatePortalResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePortalResponseSuccess
 

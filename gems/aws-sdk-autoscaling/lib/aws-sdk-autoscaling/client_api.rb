@@ -63,6 +63,7 @@ module Aws::AutoScaling
     AutoScalingInstancesType = Shapes::StructureShape.new(name: 'AutoScalingInstancesType')
     AutoScalingNotificationTypes = Shapes::ListShape.new(name: 'AutoScalingNotificationTypes')
     AvailabilityZoneDistribution = Shapes::StructureShape.new(name: 'AvailabilityZoneDistribution')
+    AvailabilityZoneImpairmentPolicy = Shapes::StructureShape.new(name: 'AvailabilityZoneImpairmentPolicy')
     AvailabilityZones = Shapes::ListShape.new(name: 'AvailabilityZones')
     BakeTime = Shapes::IntegerShape.new(name: 'BakeTime')
     BareMetal = Shapes::StringShape.new(name: 'BareMetal')
@@ -168,6 +169,7 @@ module Aws::AutoScaling
     HealthCheckGracePeriod = Shapes::IntegerShape.new(name: 'HealthCheckGracePeriod')
     HeartbeatTimeout = Shapes::IntegerShape.new(name: 'HeartbeatTimeout')
     HonorCooldown = Shapes::BooleanShape.new(name: 'HonorCooldown')
+    ImpairedZoneHealthCheckBehavior = Shapes::StringShape.new(name: 'ImpairedZoneHealthCheckBehavior')
     IncludeDeletedGroups = Shapes::BooleanShape.new(name: 'IncludeDeletedGroups')
     Instance = Shapes::StructureShape.new(name: 'Instance')
     InstanceGeneration = Shapes::StringShape.new(name: 'InstanceGeneration')
@@ -348,6 +350,7 @@ module Aws::AutoScaling
     ShouldDecrementDesiredCapacity = Shapes::BooleanShape.new(name: 'ShouldDecrementDesiredCapacity')
     ShouldRespectGracePeriod = Shapes::BooleanShape.new(name: 'ShouldRespectGracePeriod')
     SkipMatching = Shapes::BooleanShape.new(name: 'SkipMatching')
+    SkipZonalShiftValidation = Shapes::BooleanShape.new(name: 'SkipZonalShiftValidation')
     SpotInstancePools = Shapes::IntegerShape.new(name: 'SpotInstancePools')
     SpotPrice = Shapes::StringShape.new(name: 'SpotPrice')
     StandbyInstances = Shapes::StringShape.new(name: 'StandbyInstances')
@@ -399,6 +402,7 @@ module Aws::AutoScaling
     XmlStringMetricLabel = Shapes::StringShape.new(name: 'XmlStringMetricLabel')
     XmlStringMetricStat = Shapes::StringShape.new(name: 'XmlStringMetricStat')
     XmlStringUserData = Shapes::StringShape.new(name: 'XmlStringUserData')
+    ZonalShiftEnabled = Shapes::BooleanShape.new(name: 'ZonalShiftEnabled')
 
     AcceleratorCountRequest.add_member(:min, Shapes::ShapeRef.new(shape: NullablePositiveInteger, location_name: "Min"))
     AcceleratorCountRequest.add_member(:max, Shapes::ShapeRef.new(shape: NullablePositiveInteger, location_name: "Max"))
@@ -483,6 +487,7 @@ module Aws::AutoScaling
 
     AttachTrafficSourcesType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "AutoScalingGroupName"))
     AttachTrafficSourcesType.add_member(:traffic_sources, Shapes::ShapeRef.new(shape: TrafficSources, required: true, location_name: "TrafficSources"))
+    AttachTrafficSourcesType.add_member(:skip_zonal_shift_validation, Shapes::ShapeRef.new(shape: SkipZonalShiftValidation, location_name: "SkipZonalShiftValidation"))
     AttachTrafficSourcesType.struct_class = Types::AttachTrafficSourcesType
 
     AutoScalingGroup.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "AutoScalingGroupName"))
@@ -521,6 +526,7 @@ module Aws::AutoScaling
     AutoScalingGroup.add_member(:traffic_sources, Shapes::ShapeRef.new(shape: TrafficSources, location_name: "TrafficSources"))
     AutoScalingGroup.add_member(:instance_maintenance_policy, Shapes::ShapeRef.new(shape: InstanceMaintenancePolicy, location_name: "InstanceMaintenancePolicy"))
     AutoScalingGroup.add_member(:availability_zone_distribution, Shapes::ShapeRef.new(shape: AvailabilityZoneDistribution, location_name: "AvailabilityZoneDistribution"))
+    AutoScalingGroup.add_member(:availability_zone_impairment_policy, Shapes::ShapeRef.new(shape: AvailabilityZoneImpairmentPolicy, location_name: "AvailabilityZoneImpairmentPolicy"))
     AutoScalingGroup.struct_class = Types::AutoScalingGroup
 
     AutoScalingGroupNames.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen255)
@@ -559,6 +565,10 @@ module Aws::AutoScaling
 
     AvailabilityZoneDistribution.add_member(:capacity_distribution_strategy, Shapes::ShapeRef.new(shape: CapacityDistributionStrategy, location_name: "CapacityDistributionStrategy"))
     AvailabilityZoneDistribution.struct_class = Types::AvailabilityZoneDistribution
+
+    AvailabilityZoneImpairmentPolicy.add_member(:zonal_shift_enabled, Shapes::ShapeRef.new(shape: ZonalShiftEnabled, location_name: "ZonalShiftEnabled"))
+    AvailabilityZoneImpairmentPolicy.add_member(:impaired_zone_health_check_behavior, Shapes::ShapeRef.new(shape: ImpairedZoneHealthCheckBehavior, location_name: "ImpairedZoneHealthCheckBehavior"))
+    AvailabilityZoneImpairmentPolicy.struct_class = Types::AvailabilityZoneImpairmentPolicy
 
     AvailabilityZones.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen255)
 
@@ -642,6 +652,8 @@ module Aws::AutoScaling
     CreateAutoScalingGroupType.add_member(:traffic_sources, Shapes::ShapeRef.new(shape: TrafficSources, location_name: "TrafficSources"))
     CreateAutoScalingGroupType.add_member(:instance_maintenance_policy, Shapes::ShapeRef.new(shape: InstanceMaintenancePolicy, location_name: "InstanceMaintenancePolicy"))
     CreateAutoScalingGroupType.add_member(:availability_zone_distribution, Shapes::ShapeRef.new(shape: AvailabilityZoneDistribution, location_name: "AvailabilityZoneDistribution"))
+    CreateAutoScalingGroupType.add_member(:availability_zone_impairment_policy, Shapes::ShapeRef.new(shape: AvailabilityZoneImpairmentPolicy, location_name: "AvailabilityZoneImpairmentPolicy"))
+    CreateAutoScalingGroupType.add_member(:skip_zonal_shift_validation, Shapes::ShapeRef.new(shape: SkipZonalShiftValidation, location_name: "SkipZonalShiftValidation"))
     CreateAutoScalingGroupType.struct_class = Types::CreateAutoScalingGroupType
 
     CreateLaunchConfigurationType.add_member(:launch_configuration_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "LaunchConfigurationName"))
@@ -1561,6 +1573,8 @@ module Aws::AutoScaling
     UpdateAutoScalingGroupType.add_member(:default_instance_warmup, Shapes::ShapeRef.new(shape: DefaultInstanceWarmup, location_name: "DefaultInstanceWarmup"))
     UpdateAutoScalingGroupType.add_member(:instance_maintenance_policy, Shapes::ShapeRef.new(shape: InstanceMaintenancePolicy, location_name: "InstanceMaintenancePolicy"))
     UpdateAutoScalingGroupType.add_member(:availability_zone_distribution, Shapes::ShapeRef.new(shape: AvailabilityZoneDistribution, location_name: "AvailabilityZoneDistribution"))
+    UpdateAutoScalingGroupType.add_member(:availability_zone_impairment_policy, Shapes::ShapeRef.new(shape: AvailabilityZoneImpairmentPolicy, location_name: "AvailabilityZoneImpairmentPolicy"))
+    UpdateAutoScalingGroupType.add_member(:skip_zonal_shift_validation, Shapes::ShapeRef.new(shape: SkipZonalShiftValidation, location_name: "SkipZonalShiftValidation"))
     UpdateAutoScalingGroupType.struct_class = Types::UpdateAutoScalingGroupType
 
     VCpuCountRequest.add_member(:min, Shapes::ShapeRef.new(shape: NullablePositiveInteger, required: true, location_name: "Min"))

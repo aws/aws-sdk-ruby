@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.259.0 (2024-11-18)
+------------------
+
+* Feature - Add support for the automatic pause/resume feature of Aurora Serverless v2.
+
 1.258.0 (2024-11-12)
 ------------------
 

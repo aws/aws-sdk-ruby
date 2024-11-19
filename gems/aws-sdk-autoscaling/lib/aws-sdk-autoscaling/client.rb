@@ -692,6 +692,17 @@ module Aws::AutoScaling
     #   The unique identifiers of one or more traffic sources. You can specify
     #   up to 10 traffic sources.
     #
+    # @option params [Boolean] :skip_zonal_shift_validation
+    #   If you enable zonal shift with cross-zone disabled load balancers,
+    #   capacity could become imbalanced across Availability Zones. To skip
+    #   the validation, specify `true`. For more information, see [Auto
+    #   Scaling group zonal shift][1] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-zonal-shift.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -722,6 +733,7 @@ module Aws::AutoScaling
     #         type: "XmlStringMaxLen511",
     #       },
     #     ],
+    #     skip_zonal_shift_validation: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachTrafficSources AWS API Documentation
@@ -1312,6 +1324,20 @@ module Aws::AutoScaling
     # @option params [Types::AvailabilityZoneDistribution] :availability_zone_distribution
     #   The instance capacity distribution across Availability Zones.
     #
+    # @option params [Types::AvailabilityZoneImpairmentPolicy] :availability_zone_impairment_policy
+    #   The policy for Availability Zone impairment.
+    #
+    # @option params [Boolean] :skip_zonal_shift_validation
+    #   If you enable zonal shift with cross-zone disabled load balancers,
+    #   capacity could become imbalanced across Availability Zones. To skip
+    #   the validation, specify `true`. For more information, see [Auto
+    #   Scaling group zonal shift][1] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-zonal-shift.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -1580,6 +1606,11 @@ module Aws::AutoScaling
     #     availability_zone_distribution: {
     #       capacity_distribution_strategy: "balanced-only", # accepts balanced-only, balanced-best-effort
     #     },
+    #     availability_zone_impairment_policy: {
+    #       zonal_shift_enabled: false,
+    #       impaired_zone_health_check_behavior: "ReplaceUnhealthy", # accepts ReplaceUnhealthy, IgnoreUnhealthy
+    #     },
+    #     skip_zonal_shift_validation: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateAutoScalingGroup AWS API Documentation
@@ -2688,6 +2719,8 @@ module Aws::AutoScaling
     #   resp.auto_scaling_groups[0].instance_maintenance_policy.min_healthy_percentage #=> Integer
     #   resp.auto_scaling_groups[0].instance_maintenance_policy.max_healthy_percentage #=> Integer
     #   resp.auto_scaling_groups[0].availability_zone_distribution.capacity_distribution_strategy #=> String, one of "balanced-only", "balanced-best-effort"
+    #   resp.auto_scaling_groups[0].availability_zone_impairment_policy.zonal_shift_enabled #=> Boolean
+    #   resp.auto_scaling_groups[0].availability_zone_impairment_policy.impaired_zone_health_check_behavior #=> String, one of "ReplaceUnhealthy", "IgnoreUnhealthy"
     #   resp.next_token #=> String
     #
     #
@@ -7166,6 +7199,20 @@ module Aws::AutoScaling
     # @option params [Types::AvailabilityZoneDistribution] :availability_zone_distribution
     #   The instance capacity distribution across Availability Zones.
     #
+    # @option params [Types::AvailabilityZoneImpairmentPolicy] :availability_zone_impairment_policy
+    #   The policy for Availability Zone impairment.
+    #
+    # @option params [Boolean] :skip_zonal_shift_validation
+    #   If you enable zonal shift with cross-zone disabled load balancers,
+    #   capacity could become imbalanced across Availability Zones. To skip
+    #   the validation, specify `true`. For more information, see [Auto
+    #   Scaling group zonal shift][1] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-zonal-shift.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -7299,6 +7346,11 @@ module Aws::AutoScaling
     #     availability_zone_distribution: {
     #       capacity_distribution_strategy: "balanced-only", # accepts balanced-only, balanced-best-effort
     #     },
+    #     availability_zone_impairment_policy: {
+    #       zonal_shift_enabled: false,
+    #       impaired_zone_health_check_behavior: "ReplaceUnhealthy", # accepts ReplaceUnhealthy, IgnoreUnhealthy
+    #     },
+    #     skip_zonal_shift_validation: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/UpdateAutoScalingGroup AWS API Documentation
@@ -7328,7 +7380,7 @@ module Aws::AutoScaling
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.125.0'
+      context[:gem_version] = '1.126.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -128,6 +128,26 @@ module Aws::QConnect
       SENSITIVE: []
     end
 
+    class ActivateMessageTemplateRequest
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor message_template_id: ::String
+      attr_accessor version_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class ActivateMessageTemplateResponse
+      attr_accessor message_template_arn: ::String
+      attr_accessor message_template_id: ::String
+      attr_accessor version_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class AgentAttributes
+      attr_accessor first_name: ::String
+      attr_accessor last_name: ::String
+      SENSITIVE: [:first_name, :last_name]
+    end
+
     class AmazonConnectGuideAssociationData
       attr_accessor flow_id: ::String
       SENSITIVE: []
@@ -531,6 +551,52 @@ module Aws::QConnect
       SENSITIVE: []
     end
 
+    class CreateMessageTemplateAttachmentRequest
+      attr_accessor body: ::String
+      attr_accessor client_token: ::String
+      attr_accessor content_disposition: ("ATTACHMENT")
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor message_template_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: [:body, :name]
+    end
+
+    class CreateMessageTemplateAttachmentResponse
+      attr_accessor attachment: Types::MessageTemplateAttachment
+      SENSITIVE: []
+    end
+
+    class CreateMessageTemplateRequest
+      attr_accessor channel_subtype: ("EMAIL" | "SMS")
+      attr_accessor client_token: ::String
+      attr_accessor content: Types::MessageTemplateContentProvider
+      attr_accessor default_attributes: Types::MessageTemplateAttributes
+      attr_accessor description: ::String
+      attr_accessor grouping_configuration: Types::GroupingConfiguration
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor language: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateMessageTemplateResponse
+      attr_accessor message_template: Types::MessageTemplateData
+      SENSITIVE: []
+    end
+
+    class CreateMessageTemplateVersionRequest
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor message_template_content_sha_256: ::String
+      attr_accessor message_template_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateMessageTemplateVersionResponse
+      attr_accessor message_template: Types::ExtendedMessageTemplateData
+      SENSITIVE: []
+    end
+
     class CreateQuickResponseRequest
       attr_accessor channels: ::Array[::String]
       attr_accessor client_token: ::String
@@ -566,6 +632,68 @@ module Aws::QConnect
     class CreateSessionResponse
       attr_accessor session: Types::SessionData
       SENSITIVE: []
+    end
+
+    class CustomerProfileAttributes
+      attr_accessor account_number: ::String
+      attr_accessor additional_information: ::String
+      attr_accessor address1: ::String
+      attr_accessor address2: ::String
+      attr_accessor address3: ::String
+      attr_accessor address4: ::String
+      attr_accessor billing_address_1: ::String
+      attr_accessor billing_address_2: ::String
+      attr_accessor billing_address_3: ::String
+      attr_accessor billing_address_4: ::String
+      attr_accessor billing_city: ::String
+      attr_accessor billing_country: ::String
+      attr_accessor billing_county: ::String
+      attr_accessor billing_postal_code: ::String
+      attr_accessor billing_province: ::String
+      attr_accessor billing_state: ::String
+      attr_accessor birth_date: ::String
+      attr_accessor business_email_address: ::String
+      attr_accessor business_name: ::String
+      attr_accessor business_phone_number: ::String
+      attr_accessor city: ::String
+      attr_accessor country: ::String
+      attr_accessor county: ::String
+      attr_accessor custom: ::Hash[::String, ::String]
+      attr_accessor email_address: ::String
+      attr_accessor first_name: ::String
+      attr_accessor gender: ::String
+      attr_accessor home_phone_number: ::String
+      attr_accessor last_name: ::String
+      attr_accessor mailing_address_1: ::String
+      attr_accessor mailing_address_2: ::String
+      attr_accessor mailing_address_3: ::String
+      attr_accessor mailing_address_4: ::String
+      attr_accessor mailing_city: ::String
+      attr_accessor mailing_country: ::String
+      attr_accessor mailing_county: ::String
+      attr_accessor mailing_postal_code: ::String
+      attr_accessor mailing_province: ::String
+      attr_accessor mailing_state: ::String
+      attr_accessor middle_name: ::String
+      attr_accessor mobile_phone_number: ::String
+      attr_accessor party_type: ::String
+      attr_accessor phone_number: ::String
+      attr_accessor postal_code: ::String
+      attr_accessor profile_arn: ::String
+      attr_accessor profile_id: ::String
+      attr_accessor province: ::String
+      attr_accessor shipping_address_1: ::String
+      attr_accessor shipping_address_2: ::String
+      attr_accessor shipping_address_3: ::String
+      attr_accessor shipping_address_4: ::String
+      attr_accessor shipping_city: ::String
+      attr_accessor shipping_country: ::String
+      attr_accessor shipping_county: ::String
+      attr_accessor shipping_postal_code: ::String
+      attr_accessor shipping_province: ::String
+      attr_accessor shipping_state: ::String
+      attr_accessor state: ::String
+      SENSITIVE: [:account_number, :additional_information, :address1, :address2, :address3, :address4, :billing_address_1, :billing_address_2, :billing_address_3, :billing_address_4, :billing_city, :billing_country, :billing_county, :billing_postal_code, :billing_province, :billing_state, :birth_date, :business_email_address, :business_name, :business_phone_number, :city, :country, :county, :custom, :email_address, :first_name, :gender, :home_phone_number, :last_name, :mailing_address_1, :mailing_address_2, :mailing_address_3, :mailing_address_4, :mailing_city, :mailing_country, :mailing_county, :mailing_postal_code, :mailing_province, :mailing_state, :middle_name, :mobile_phone_number, :party_type, :phone_number, :postal_code, :profile_arn, :profile_id, :province, :shipping_address_1, :shipping_address_2, :shipping_address_3, :shipping_address_4, :shipping_city, :shipping_country, :shipping_county, :shipping_postal_code, :shipping_province, :shipping_state, :state]
     end
 
     class DataDetails
@@ -605,6 +733,20 @@ module Aws::QConnect
     class DataSummary
       attr_accessor details: Types::DataDetails
       attr_accessor reference: Types::DataReference
+      SENSITIVE: []
+    end
+
+    class DeactivateMessageTemplateRequest
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor message_template_id: ::String
+      attr_accessor version_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeactivateMessageTemplateResponse
+      attr_accessor message_template_arn: ::String
+      attr_accessor message_template_id: ::String
+      attr_accessor version_number: ::Integer
       SENSITIVE: []
     end
 
@@ -699,6 +841,25 @@ module Aws::QConnect
     class DeleteKnowledgeBaseResponse < Aws::EmptyStructure
     end
 
+    class DeleteMessageTemplateAttachmentRequest
+      attr_accessor attachment_id: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor message_template_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMessageTemplateAttachmentResponse < Aws::EmptyStructure
+    end
+
+    class DeleteMessageTemplateRequest
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor message_template_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMessageTemplateResponse < Aws::EmptyStructure
+    end
+
     class DeleteQuickResponseRequest
       attr_accessor knowledge_base_id: ::String
       attr_accessor quick_response_id: ::String
@@ -719,6 +880,49 @@ module Aws::QConnect
       attr_accessor highlights: ::Array[Types::Highlight]
       attr_accessor text: ::String
       SENSITIVE: [:text]
+    end
+
+    class EmailHeader
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: [:value]
+    end
+
+    class EmailMessageTemplateContent
+      attr_accessor body: Types::EmailMessageTemplateContentBody
+      attr_accessor headers: ::Array[Types::EmailHeader]
+      attr_accessor subject: ::String
+      SENSITIVE: [:subject]
+    end
+
+    class EmailMessageTemplateContentBody
+      attr_accessor html: Types::MessageTemplateBodyContentProvider
+      attr_accessor plain_text: Types::MessageTemplateBodyContentProvider
+      SENSITIVE: []
+    end
+
+    class ExtendedMessageTemplateData
+      attr_accessor attachments: ::Array[Types::MessageTemplateAttachment]
+      attr_accessor attribute_types: ::Array[("SYSTEM" | "AGENT" | "CUSTOMER_PROFILE" | "CUSTOM")]
+      attr_accessor channel_subtype: ("EMAIL" | "SMS")
+      attr_accessor content: Types::MessageTemplateContentProvider
+      attr_accessor created_time: ::Time
+      attr_accessor default_attributes: Types::MessageTemplateAttributes
+      attr_accessor description: ::String
+      attr_accessor grouping_configuration: Types::GroupingConfiguration
+      attr_accessor is_active: bool
+      attr_accessor knowledge_base_arn: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor language: ::String
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor message_template_arn: ::String
+      attr_accessor message_template_content_sha_256: ::String
+      attr_accessor message_template_id: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor version_number: ::Integer
+      SENSITIVE: []
     end
 
     class ExternalSourceConfiguration
@@ -855,6 +1059,17 @@ module Aws::QConnect
 
     class GetKnowledgeBaseResponse
       attr_accessor knowledge_base: Types::KnowledgeBaseData
+      SENSITIVE: []
+    end
+
+    class GetMessageTemplateRequest
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor message_template_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMessageTemplateResponse
+      attr_accessor message_template: Types::ExtendedMessageTemplateData
       SENSITIVE: []
     end
 
@@ -1140,6 +1355,33 @@ module Aws::QConnect
       SENSITIVE: []
     end
 
+    class ListMessageTemplateVersionsRequest
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor message_template_id: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMessageTemplateVersionsResponse
+      attr_accessor message_template_version_summaries: ::Array[Types::MessageTemplateVersionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMessageTemplatesRequest
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMessageTemplatesResponse
+      attr_accessor message_template_summaries: ::Array[Types::MessageTemplateSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListQuickResponsesRequest
       attr_accessor knowledge_base_id: ::String
       attr_accessor max_results: ::Integer
@@ -1177,6 +1419,147 @@ module Aws::QConnect
     class ManualSearchAIAgentConfiguration
       attr_accessor answer_generation_ai_prompt_id: ::String
       attr_accessor association_configurations: ::Array[Types::AssociationConfiguration]
+      SENSITIVE: []
+    end
+
+    class MessageTemplateAttachment
+      attr_accessor attachment_id: ::String
+      attr_accessor content_disposition: ("ATTACHMENT")
+      attr_accessor name: ::String
+      attr_accessor uploaded_time: ::Time
+      attr_accessor url: ::String
+      attr_accessor url_expiry: ::Time
+      SENSITIVE: [:name, :url]
+    end
+
+    class MessageTemplateAttributes
+      attr_accessor agent_attributes: Types::AgentAttributes
+      attr_accessor custom_attributes: ::Hash[::String, ::String]
+      attr_accessor customer_profile_attributes: Types::CustomerProfileAttributes
+      attr_accessor system_attributes: Types::SystemAttributes
+      SENSITIVE: [:custom_attributes]
+    end
+
+    class MessageTemplateBodyContentProvider
+      attr_accessor content: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: [:content]
+
+      class Content < MessageTemplateBodyContentProvider
+      end
+      class Unknown < MessageTemplateBodyContentProvider
+      end
+    end
+
+    class MessageTemplateContentProvider
+      attr_accessor email: Types::EmailMessageTemplateContent
+      attr_accessor sms: Types::SMSMessageTemplateContent
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Email < MessageTemplateContentProvider
+      end
+      class Sms < MessageTemplateContentProvider
+      end
+      class Unknown < MessageTemplateContentProvider
+      end
+    end
+
+    class MessageTemplateData
+      attr_accessor attribute_types: ::Array[("SYSTEM" | "AGENT" | "CUSTOMER_PROFILE" | "CUSTOM")]
+      attr_accessor channel_subtype: ("EMAIL" | "SMS")
+      attr_accessor content: Types::MessageTemplateContentProvider
+      attr_accessor created_time: ::Time
+      attr_accessor default_attributes: Types::MessageTemplateAttributes
+      attr_accessor description: ::String
+      attr_accessor grouping_configuration: Types::GroupingConfiguration
+      attr_accessor knowledge_base_arn: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor language: ::String
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor message_template_arn: ::String
+      attr_accessor message_template_content_sha_256: ::String
+      attr_accessor message_template_id: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class MessageTemplateFilterField
+      attr_accessor include_no_existence: bool
+      attr_accessor name: ::String
+      attr_accessor operator: ("EQUALS" | "PREFIX")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class MessageTemplateOrderField
+      attr_accessor name: ::String
+      attr_accessor order: ("ASC" | "DESC")
+      SENSITIVE: []
+    end
+
+    class MessageTemplateQueryField
+      attr_accessor allow_fuzziness: bool
+      attr_accessor name: ::String
+      attr_accessor operator: ("CONTAINS" | "CONTAINS_AND_PREFIX")
+      attr_accessor priority: ("HIGH" | "MEDIUM" | "LOW")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class MessageTemplateSearchExpression
+      attr_accessor filters: ::Array[Types::MessageTemplateFilterField]
+      attr_accessor order_on_field: Types::MessageTemplateOrderField
+      attr_accessor queries: ::Array[Types::MessageTemplateQueryField]
+      SENSITIVE: []
+    end
+
+    class MessageTemplateSearchResultData
+      attr_accessor channel_subtype: ("EMAIL" | "SMS")
+      attr_accessor created_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor grouping_configuration: Types::GroupingConfiguration
+      attr_accessor is_active: bool
+      attr_accessor knowledge_base_arn: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor language: ::String
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor message_template_arn: ::String
+      attr_accessor message_template_id: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor version_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class MessageTemplateSummary
+      attr_accessor active_version_number: ::Integer
+      attr_accessor channel_subtype: ("EMAIL" | "SMS")
+      attr_accessor created_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor knowledge_base_arn: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor message_template_arn: ::String
+      attr_accessor message_template_id: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class MessageTemplateVersionSummary
+      attr_accessor channel_subtype: ("EMAIL" | "SMS")
+      attr_accessor is_active: bool
+      attr_accessor knowledge_base_arn: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor message_template_arn: ::String
+      attr_accessor message_template_id: ::String
+      attr_accessor name: ::String
+      attr_accessor version_number: ::Integer
       SENSITIVE: []
     end
 
@@ -1481,6 +1864,20 @@ module Aws::QConnect
     class RemoveKnowledgeBaseTemplateUriResponse < Aws::EmptyStructure
     end
 
+    class RenderMessageTemplateRequest
+      attr_accessor attributes: Types::MessageTemplateAttributes
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor message_template_id: ::String
+      SENSITIVE: []
+    end
+
+    class RenderMessageTemplateResponse
+      attr_accessor attachments: ::Array[Types::MessageTemplateAttachment]
+      attr_accessor attributes_not_interpolated: ::Array[::String]
+      attr_accessor content: Types::MessageTemplateContentProvider
+      SENSITIVE: [:attributes_not_interpolated]
+    end
+
     class RenderingConfiguration
       attr_accessor template_uri: ::String
       SENSITIVE: []
@@ -1523,6 +1920,16 @@ module Aws::QConnect
       end
     end
 
+    class SMSMessageTemplateContent
+      attr_accessor body: Types::SMSMessageTemplateContentBody
+      SENSITIVE: []
+    end
+
+    class SMSMessageTemplateContentBody
+      attr_accessor plain_text: Types::MessageTemplateBodyContentProvider
+      SENSITIVE: []
+    end
+
     class SearchContentRequest
       attr_accessor knowledge_base_id: ::String
       attr_accessor max_results: ::Integer
@@ -1539,6 +1946,20 @@ module Aws::QConnect
 
     class SearchExpression
       attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class SearchMessageTemplatesRequest
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor search_expression: Types::MessageTemplateSearchExpression
+      SENSITIVE: []
+    end
+
+    class SearchMessageTemplatesResponse
+      attr_accessor next_token: ::String
+      attr_accessor results: ::Array[Types::MessageTemplateSearchResultData]
       SENSITIVE: []
     end
 
@@ -1671,6 +2092,18 @@ module Aws::QConnect
       SENSITIVE: []
     end
 
+    class SystemAttributes
+      attr_accessor customer_endpoint: Types::SystemEndpointAttributes
+      attr_accessor name: ::String
+      attr_accessor system_endpoint: Types::SystemEndpointAttributes
+      SENSITIVE: [:name]
+    end
+
+    class SystemEndpointAttributes
+      attr_accessor address: ::String
+      SENSITIVE: [:address]
+    end
+
     class TagCondition
       attr_accessor key: ::String
       attr_accessor value: ::String
@@ -1801,6 +2234,34 @@ module Aws::QConnect
 
     class UpdateKnowledgeBaseTemplateUriResponse
       attr_accessor knowledge_base: Types::KnowledgeBaseData
+      SENSITIVE: []
+    end
+
+    class UpdateMessageTemplateMetadataRequest
+      attr_accessor description: ::String
+      attr_accessor grouping_configuration: Types::GroupingConfiguration
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor message_template_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateMessageTemplateMetadataResponse
+      attr_accessor message_template: Types::MessageTemplateData
+      SENSITIVE: []
+    end
+
+    class UpdateMessageTemplateRequest
+      attr_accessor content: Types::MessageTemplateContentProvider
+      attr_accessor default_attributes: Types::MessageTemplateAttributes
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor language: ::String
+      attr_accessor message_template_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateMessageTemplateResponse
+      attr_accessor message_template: Types::MessageTemplateData
       SENSITIVE: []
     end
 

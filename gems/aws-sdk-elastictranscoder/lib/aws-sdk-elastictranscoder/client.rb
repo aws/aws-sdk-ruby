@@ -1177,7 +1177,6 @@ module Aws::ElasticTranscoder
     #     * **Group**: The value in the `Grantee` object is one of the
     #       following predefined Amazon S3 groups: `AllUsers`,
     #       `AuthenticatedUsers`, or `LogDelivery`.
-    #
     #   * **Grantee**: The AWS user or group that you want to have access to
     #     transcoded files and playlists. To identify the user or group, you
     #     can specify the canonical user ID for an AWS account, an origin
@@ -1201,7 +1200,6 @@ module Aws::ElasticTranscoder
     #     * `FULL_CONTROL`: The grantee has `READ`, `READ_ACP`, and
     #       `WRITE_ACP` permissions for the objects that Elastic Transcoder
     #       adds to the Amazon S3 bucket.
-    #
     #   * **StorageClass**: The Amazon S3 storage class, `Standard` or
     #     `ReducedRedundancy`, that you want Elastic Transcoder to assign to
     #     the video files and playlists that it stores in your Amazon S3
@@ -1245,7 +1243,6 @@ module Aws::ElasticTranscoder
     #     * **Group**: The value in the `Grantee` object is one of the
     #       following predefined Amazon S3 groups: `AllUsers`,
     #       `AuthenticatedUsers`, or `LogDelivery`.
-    #
     #   * **Grantee**: The AWS user or group that you want to have access to
     #     thumbnail files. To identify the user or group, you can specify the
     #     canonical user ID for an AWS account, an origin access identity for
@@ -1269,7 +1266,6 @@ module Aws::ElasticTranscoder
     #     * `FULL_CONTROL`: The grantee has `READ`, `READ_ACP`, and
     #       `WRITE_ACP` permissions for the thumbnails that Elastic Transcoder
     #       adds to the Amazon S3 bucket.
-    #
     #   * **StorageClass**: The Amazon S3 storage class, `Standard` or
     #     `ReducedRedundancy`, that you want Elastic Transcoder to assign to
     #     the thumbnails that it stores in your Amazon S3 bucket.
@@ -2766,7 +2762,6 @@ module Aws::ElasticTranscoder
     #     * **Group**: The value in the `Grantee` object is one of the
     #       following predefined Amazon S3 groups: `AllUsers`,
     #       `AuthenticatedUsers`, or `LogDelivery`.
-    #
     #   * **Grantee**: The AWS user or group that you want to have access to
     #     transcoded files and playlists. To identify the user or group, you
     #     can specify the canonical user ID for an AWS account, an origin
@@ -2790,7 +2785,6 @@ module Aws::ElasticTranscoder
     #     * `FULL_CONTROL`: The grantee has `READ`, `READ_ACP`, and
     #       `WRITE_ACP` permissions for the objects that Elastic Transcoder
     #       adds to the Amazon S3 bucket.
-    #
     #   * **StorageClass**: The Amazon S3 storage class, `Standard` or
     #     `ReducedRedundancy`, that you want Elastic Transcoder to assign to
     #     the video files and playlists that it stores in your Amazon S3
@@ -2834,7 +2828,6 @@ module Aws::ElasticTranscoder
     #     * **Group**: The value in the `Grantee` object is one of the
     #       following predefined Amazon S3 groups: `AllUsers`,
     #       `AuthenticatedUsers`, or `LogDelivery`.
-    #
     #   * **Grantee**: The AWS user or group that you want to have access to
     #     thumbnail files. To identify the user or group, you can specify the
     #     canonical user ID for an AWS account, an origin access identity for
@@ -2858,7 +2851,6 @@ module Aws::ElasticTranscoder
     #     * `FULL_CONTROL`: The grantee has `READ`, `READ_ACP`, and
     #       `WRITE_ACP` permissions for the thumbnails that Elastic Transcoder
     #       adds to the Amazon S3 bucket.
-    #
     #   * **StorageClass**: The Amazon S3 storage class, `Standard` or
     #     `ReducedRedundancy`, that you want Elastic Transcoder to assign to
     #     the thumbnails that it stores in your Amazon S3 bucket.
@@ -3116,7 +3108,7 @@ module Aws::ElasticTranscoder
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-elastictranscoder'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

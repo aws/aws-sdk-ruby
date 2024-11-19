@@ -73,6 +73,8 @@ module Aws
       end
       class DBInstanceNotFoundFault < ::Aws::Errors::ServiceError
       end
+      class DBInstanceNotReadyFault < ::Aws::Errors::ServiceError
+      end
       class DBInstanceRoleAlreadyExistsFault < ::Aws::Errors::ServiceError
       end
       class DBInstanceRoleNotFoundFault < ::Aws::Errors::ServiceError

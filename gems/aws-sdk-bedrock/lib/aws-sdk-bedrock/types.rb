@@ -2817,7 +2817,6 @@ module Aws::Bedrock
     #       vehicle. VIN content and format are defined in the *ISO 3779*
     #       specification. Each country has specific codes and formats for
     #       VINs.
-    #
     #   * **Finance**
     #
     #     * **REDIT\_DEBIT\_CARD\_CVV**
@@ -2862,7 +2861,6 @@ module Aws::Bedrock
     #       codes refer to specific branches, while eight-digit codes (or
     #       11-digit codes ending in 'XXX') refer to the head or primary
     #       office.
-    #
     #   * **IT**
     #
     #     * **IP\_ADDRESS**
@@ -2889,7 +2887,6 @@ module Aws::Bedrock
     #       A unique identifier that's associated with an access key. You
     #       use the access key ID and secret access key to sign programmatic
     #       Amazon Web Services requests cryptographically.
-    #
     #   * **USA specific**
     #
     #     * **US\_BANK\_ACCOUNT\_NUMBER**
@@ -2919,7 +2916,6 @@ module Aws::Bedrock
     #       A US Social Security Number (SSN) is a nine-digit number that is
     #       issued to US citizens, permanent residents, and temporary
     #       working residents.
-    #
     #   * **Canada specific**
     #
     #     * **CA\_HEALTH\_NUMBER**
@@ -2937,7 +2933,6 @@ module Aws::Bedrock
     #       The SIN is formatted as three groups of three digits, such as
     #       *123-456-789*. A SIN can be validated through a simple
     #       check-digit process called the [Luhn algorithm][2].
-    #
     #   * **UK Specific**
     #
     #     * **UK\_NATIONAL\_HEALTH\_SERVICE\_NUMBER**
@@ -2962,7 +2957,6 @@ module Aws::Bedrock
     #
     #       A UK Unique Taxpayer Reference (UTR) is a 10-digit number that
     #       identifies a taxpayer or a business.
-    #
     #   * **Custom**
     #
     #     * **Regex filter** - You can use a regular expressions to define

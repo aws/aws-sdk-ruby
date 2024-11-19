@@ -160,6 +160,45 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # Object that segments on Customer Profile's address object.
+    #
+    # @!attribute [rw] city
+    #   The city belonging to the address.
+    #   @return [Types::ProfileDimension]
+    #
+    # @!attribute [rw] country
+    #   The country belonging to the address.
+    #   @return [Types::ProfileDimension]
+    #
+    # @!attribute [rw] county
+    #   The county belonging to the address.
+    #   @return [Types::ProfileDimension]
+    #
+    # @!attribute [rw] postal_code
+    #   The postal code belonging to the address.
+    #   @return [Types::ProfileDimension]
+    #
+    # @!attribute [rw] province
+    #   The province belonging to the address.
+    #   @return [Types::ProfileDimension]
+    #
+    # @!attribute [rw] state
+    #   The state belonging to the address.
+    #   @return [Types::ProfileDimension]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/AddressDimension AWS API Documentation
+    #
+    class AddressDimension < Struct.new(
+      :city,
+      :country,
+      :county,
+      :postal_code,
+      :province,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details for workflow of type `APPFLOW_INTEGRATION`.
     #
     # @!attribute [rw] flow_definition
@@ -314,6 +353,25 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # Object that segments on various Customer Profile's fields.
+    #
+    # @!attribute [rw] dimension_type
+    #   The action to segment with.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values to apply the DimensionType on.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/AttributeDimension AWS API Documentation
+    #
+    class AttributeDimension < Struct.new(
+      :dimension_type,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details of a single attribute item specified in the mathematical
     # expression.
     #
@@ -340,13 +398,11 @@ module Aws::CustomerProfiles
     #   * You can choose from `Email`, `BusinessEmail`, and `PersonalEmail`
     #
     #   ^
-    #
     # * Phone number type
     #
     #   * You can choose from `Phone`, `HomePhone`, and `MobilePhone`
     #
     #   ^
-    #
     # * Address type
     #
     #   * You can choose from `Address`, `BusinessAddress`,
@@ -411,6 +467,20 @@ module Aws::CustomerProfiles
       :address,
       :phone_number,
       :email_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # List containing the values for the given attribute.
+    #
+    # @!attribute [rw] value
+    #   An individual value belonging to the given attribute.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/AttributeValueItem AWS API Documentation
+    #
+    class AttributeValueItem < Struct.new(
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -483,6 +553,225 @@ module Aws::CustomerProfiles
     class Batch < Struct.new(
       :start_time,
       :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Error object describing why a specific profile and calculated
+    # attribute failed.
+    #
+    # @!attribute [rw] code
+    #   Status code for why a specific profile and calculated attribute
+    #   failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Message describing why a specific profile and calculated attribute
+    #   failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_id
+    #   The profile id that failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/BatchGetCalculatedAttributeForProfileError AWS API Documentation
+    #
+    class BatchGetCalculatedAttributeForProfileError < Struct.new(
+      :code,
+      :message,
+      :profile_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] calculated_attribute_name
+    #   The unique name of the calculated attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_ids
+    #   List of unique identifiers for customer profiles to retrieve.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] condition_overrides
+    #   Overrides the condition block within the original calculated
+    #   attribute definition.
+    #   @return [Types::ConditionOverrides]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/BatchGetCalculatedAttributeForProfileRequest AWS API Documentation
+    #
+    class BatchGetCalculatedAttributeForProfileRequest < Struct.new(
+      :calculated_attribute_name,
+      :domain_name,
+      :profile_ids,
+      :condition_overrides)
+      SENSITIVE = [:condition_overrides]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] errors
+    #   List of errors for calculated attribute values that could not be
+    #   retrieved.
+    #   @return [Array<Types::BatchGetCalculatedAttributeForProfileError>]
+    #
+    # @!attribute [rw] calculated_attribute_values
+    #   List of calculated attribute values retrieved.
+    #   @return [Array<Types::CalculatedAttributeValue>]
+    #
+    # @!attribute [rw] condition_overrides
+    #   Overrides the condition block within the original calculated
+    #   attribute definition.
+    #   @return [Types::ConditionOverrides]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/BatchGetCalculatedAttributeForProfileResponse AWS API Documentation
+    #
+    class BatchGetCalculatedAttributeForProfileResponse < Struct.new(
+      :errors,
+      :calculated_attribute_values,
+      :condition_overrides)
+      SENSITIVE = [:condition_overrides]
+      include Aws::Structure
+    end
+
+    # Error object describing why a specific profile failed.
+    #
+    # @!attribute [rw] code
+    #   Status code for why a specific profile failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Message describing why a specific profile failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_id
+    #   The profile id that failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/BatchGetProfileError AWS API Documentation
+    #
+    class BatchGetProfileError < Struct.new(
+      :code,
+      :message,
+      :profile_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_ids
+    #   List of unique identifiers for customer profiles to retrieve.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/BatchGetProfileRequest AWS API Documentation
+    #
+    class BatchGetProfileRequest < Struct.new(
+      :domain_name,
+      :profile_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] errors
+    #   For information about the errors that are common to all actions, see
+    #   [Common Errors][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/CommonErrors.html
+    #   @return [Array<Types::BatchGetProfileError>]
+    #
+    # @!attribute [rw] profiles
+    #   Array of Profile Objects.
+    #   @return [Array<Types::Profile>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/BatchGetProfileResponse AWS API Documentation
+    #
+    class BatchGetProfileResponse < Struct.new(
+      :errors,
+      :profiles)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Object that segments on Customer Profile's Calculated Attributes.
+    #
+    # @!attribute [rw] dimension_type
+    #   The action to segment with.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values to apply the DimensionType with.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] condition_overrides
+    #   Applies the given condition over the initial Calculated Attribute's
+    #   definition.
+    #   @return [Types::ConditionOverrides]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CalculatedAttributeDimension AWS API Documentation
+    #
+    class CalculatedAttributeDimension < Struct.new(
+      :dimension_type,
+      :values,
+      :condition_overrides)
+      SENSITIVE = [:condition_overrides]
+      include Aws::Structure
+    end
+
+    # The object containing the values of a single calculated attribute
+    # value.
+    #
+    # @!attribute [rw] calculated_attribute_name
+    #   The unique name of the calculated attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the calculated attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_data_partial
+    #   Indicates whether the calculated attribute's value is based on
+    #   partial data. If the data is partial, it is set to true.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_id
+    #   The profile id belonging to this calculated attribute value.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the calculated attribute.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CalculatedAttributeValue AWS API Documentation
+    #
+    class CalculatedAttributeValue < Struct.new(
+      :calculated_attribute_name,
+      :display_name,
+      :is_data_partial,
+      :profile_id,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object to override the original condition block of a calculated
+    # attribute.
+    #
+    # @!attribute [rw] range
+    #   The relative time period over which data is included in the
+    #   aggregation for this override.
+    #   @return [Types::RangeOverride]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ConditionOverrides AWS API Documentation
+    #
+    class ConditionOverrides < Struct.new(
+      :range)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -619,6 +908,11 @@ module Aws::CustomerProfiles
     #   calculated attribute.
     #   @return [Types::Conditions]
     #
+    # @!attribute [rw] filter
+    #   Defines how to filter incoming objects to include part of the
+    #   Calculated Attribute.
+    #   @return [Types::Filter]
+    #
     # @!attribute [rw] statistic
     #   The aggregation operation to perform for the calculated attribute.
     #   @return [String]
@@ -637,6 +931,7 @@ module Aws::CustomerProfiles
       :description,
       :attribute_details,
       :conditions,
+      :filter,
       :statistic,
       :tags)
       SENSITIVE = [:description, :attribute_details, :conditions, :statistic]
@@ -665,6 +960,10 @@ module Aws::CustomerProfiles
     #   calculated attribute.
     #   @return [Types::Conditions]
     #
+    # @!attribute [rw] filter
+    #   The filter that was used as part of the request.
+    #   @return [Types::Filter]
+    #
     # @!attribute [rw] statistic
     #   The aggregation operation to perform for the calculated attribute.
     #   @return [String]
@@ -692,6 +991,7 @@ module Aws::CustomerProfiles
       :description,
       :attribute_details,
       :conditions,
+      :filter,
       :statistic,
       :created_at,
       :last_updated_at,
@@ -1098,6 +1398,197 @@ module Aws::CustomerProfiles
     #   The unique name of the domain.
     #   @return [String]
     #
+    # @!attribute [rw] segment_definition_name
+    #   The unique name of the segment definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the segment definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the segment definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_groups
+    #   Specifies the base segments and dimensions for a segment definition
+    #   along with their respective relationship.
+    #   @return [Types::SegmentGroup]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateSegmentDefinitionRequest AWS API Documentation
+    #
+    class CreateSegmentDefinitionRequest < Struct.new(
+      :domain_name,
+      :segment_definition_name,
+      :display_name,
+      :description,
+      :segment_groups,
+      :tags)
+      SENSITIVE = [:description, :segment_groups]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] segment_definition_name
+    #   The name of the segment definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the segment definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the segment definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp of when the segment definition was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] segment_definition_arn
+    #   The arn of the segment definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateSegmentDefinitionResponse AWS API Documentation
+    #
+    class CreateSegmentDefinitionResponse < Struct.new(
+      :segment_definition_name,
+      :display_name,
+      :description,
+      :created_at,
+      :segment_definition_arn,
+      :tags)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_query
+    #   The segment query for calculating a segment estimate.
+    #   @return [Types::SegmentGroupStructure]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateSegmentEstimateRequest AWS API Documentation
+    #
+    class CreateSegmentEstimateRequest < Struct.new(
+      :domain_name,
+      :segment_query)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimate_id
+    #   A unique identifier for the resource. The value can be passed to
+    #   `GetSegmentEstimate` to retrieve the result of segment estimate
+    #   status.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_code
+    #   The status code for the response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateSegmentEstimateResponse AWS API Documentation
+    #
+    class CreateSegmentEstimateResponse < Struct.new(
+      :domain_name,
+      :estimate_id,
+      :status_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_definition_name
+    #   The name of the segment definition used in this snapshot request.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_format
+    #   The format in which the segment will be exported.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_key
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   exported segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that allows Customer
+    #   Profiles service principal to assume the role for conducting KMS and
+    #   S3 operations.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_uri
+    #   The destination to which the segment will be exported. This field
+    #   must be provided if the request is not submitted from the Amazon
+    #   Connect Admin Website.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateSegmentSnapshotRequest AWS API Documentation
+    #
+    class CreateSegmentSnapshotRequest < Struct.new(
+      :domain_name,
+      :segment_definition_name,
+      :data_format,
+      :encryption_key,
+      :role_arn,
+      :destination_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshot_id
+    #   The unique identifier of the segment snapshot.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateSegmentSnapshotResponse AWS API Documentation
+    #
+    class CreateSegmentSnapshotResponse < Struct.new(
+      :snapshot_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Object that segments on various Customer Profile's date fields.
+    #
+    # @!attribute [rw] dimension_type
+    #   The action to segment with.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values to apply the DimensionType on.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DateDimension AWS API Documentation
+    #
+    class DateDimension < Struct.new(
+      :dimension_type,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
     # @!attribute [rw] calculated_attribute_name
     #   The unique name of the calculated attribute.
     #   @return [String]
@@ -1330,6 +1821,35 @@ module Aws::CustomerProfiles
     #   The unique name of the domain.
     #   @return [String]
     #
+    # @!attribute [rw] segment_definition_name
+    #   The unique name of the segment definition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DeleteSegmentDefinitionRequest AWS API Documentation
+    #
+    class DeleteSegmentDefinitionRequest < Struct.new(
+      :domain_name,
+      :segment_definition_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   A message that indicates the delete request is done.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DeleteSegmentDefinitionResponse AWS API Documentation
+    #
+    class DeleteSegmentDefinitionResponse < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
     # @!attribute [rw] workflow_id
     #   Unique identifier for the workflow.
     #   @return [String]
@@ -1426,6 +1946,36 @@ module Aws::CustomerProfiles
       :keys)
       SENSITIVE = [:fields, :keys]
       include Aws::Structure
+    end
+
+    # Object that holds what profile and calculated attributes to segment
+    # on.
+    #
+    # @note Dimension is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note Dimension is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Dimension corresponding to the set member.
+    #
+    # @!attribute [rw] profile_attributes
+    #   Object that holds the profile attributes to segment on.
+    #   @return [Types::ProfileAttributes]
+    #
+    # @!attribute [rw] calculated_attributes
+    #   Object that holds the calculated attributes to segment on.
+    #   @return [Hash<String,Types::CalculatedAttributeDimension>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/Dimension AWS API Documentation
+    #
+    class Dimension < Struct.new(
+      :profile_attributes,
+      :calculated_attributes,
+      :unknown)
+      SENSITIVE = [:profile_attributes]
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ProfileAttributes < Dimension; end
+      class CalculatedAttributes < Dimension; end
+      class Unknown < Dimension; end
     end
 
     # Usage-specific statistics about the domain.
@@ -1578,6 +2128,26 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # Object that segments on various Customer profile's fields that are
+    # larger than normal.
+    #
+    # @!attribute [rw] dimension_type
+    #   The action to segment with.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values to apply the DimensionType on.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ExtraLengthValueProfileDimension AWS API Documentation
+    #
+    class ExtraLengthValueProfileDimension < Struct.new(
+      :dimension_type,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A duplicate customer profile that is to be merged into a main profile.
     #
     # @!attribute [rw] account_number
@@ -1691,6 +2261,80 @@ module Aws::CustomerProfiles
       :mailing_address,
       :billing_address,
       :attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines how to filter the objects coming in for calculated attributes.
+    #
+    # @!attribute [rw] include
+    #   Define whether to include or exclude objects for Calculated
+    #   Attributed calculation that fit the filter groups criteria.
+    #   @return [String]
+    #
+    # @!attribute [rw] groups
+    #   Holds the list of Filter groups within the Filter definition.
+    #   @return [Array<Types::FilterGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/Filter AWS API Documentation
+    #
+    class Filter < Struct.new(
+      :include,
+      :groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Object that defines how to filter the incoming objects for the
+    # calculated attribute.
+    #
+    # @!attribute [rw] dimension_type
+    #   The action to filter with.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values to apply the DimensionType on.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/FilterAttributeDimension AWS API Documentation
+    #
+    class FilterAttributeDimension < Struct.new(
+      :dimension_type,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the map of attribute names to attribute dimensions.
+    #
+    # @!attribute [rw] attributes
+    #   Is the attribute within the FilterDimension map
+    #   @return [Hash<String,Types::FilterAttributeDimension>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/FilterDimension AWS API Documentation
+    #
+    class FilterDimension < Struct.new(
+      :attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Object that holds the dimensions to filter on.
+    #
+    # @!attribute [rw] type
+    #   The type of logical relationship between the dimensions of the
+    #   Filter group.
+    #   @return [String]
+    #
+    # @!attribute [rw] dimensions
+    #   Object that holds the attributes to filter on.
+    #   @return [Array<Types::FilterDimension>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/FilterGroup AWS API Documentation
+    #
+    class FilterGroup < Struct.new(
+      :type,
+      :dimensions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1866,6 +2510,10 @@ module Aws::CustomerProfiles
     #   The aggregation operation to perform for the calculated attribute.
     #   @return [String]
     #
+    # @!attribute [rw] filter
+    #   The filter assigned to this calculated attribute definition.
+    #   @return [Types::Filter]
+    #
     # @!attribute [rw] conditions
     #   The conditions including range, object count, and threshold for the
     #   calculated attribute.
@@ -1890,6 +2538,7 @@ module Aws::CustomerProfiles
       :created_at,
       :last_updated_at,
       :statistic,
+      :filter,
       :conditions,
       :attribute_details,
       :tags)
@@ -2505,6 +3154,238 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_definition_name
+    #   The unique name of the segment definition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetSegmentDefinitionRequest AWS API Documentation
+    #
+    class GetSegmentDefinitionRequest < Struct.new(
+      :domain_name,
+      :segment_definition_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] segment_definition_name
+    #   The name of the segment definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the segment definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the segment definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_groups
+    #   The segment criteria associated with this definition.
+    #   @return [Types::SegmentGroup]
+    #
+    # @!attribute [rw] segment_definition_arn
+    #   The arn of the segment definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp of when the segment definition was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetSegmentDefinitionResponse AWS API Documentation
+    #
+    class GetSegmentDefinitionResponse < Struct.new(
+      :segment_definition_name,
+      :display_name,
+      :description,
+      :segment_groups,
+      :segment_definition_arn,
+      :created_at,
+      :tags)
+      SENSITIVE = [:description, :segment_groups]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimate_id
+    #   The query Id passed by a previous `CreateSegmentEstimate` operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetSegmentEstimateRequest AWS API Documentation
+    #
+    class GetSegmentEstimateRequest < Struct.new(
+      :domain_name,
+      :estimate_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimate_id
+    #   The `QueryId` which is the same as the value passed in `QueryId`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the query.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimate
+    #   The estimated number of profiles contained in the segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The error message if there is any error.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_code
+    #   The status code of the segment estimate.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetSegmentEstimateResponse AWS API Documentation
+    #
+    class GetSegmentEstimateResponse < Struct.new(
+      :domain_name,
+      :estimate_id,
+      :status,
+      :estimate,
+      :message,
+      :status_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_definition_name
+    #   The Id of the wanted segment. Needs to be a valid, and existing
+    #   segment Id.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_ids
+    #   The list of profile IDs to query for.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetSegmentMembershipRequest AWS API Documentation
+    #
+    class GetSegmentMembershipRequest < Struct.new(
+      :domain_name,
+      :segment_definition_name,
+      :profile_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] segment_definition_name
+    #   The unique name of the segment definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] profiles
+    #   An array of maps where each contains a response per profile
+    #   requested.
+    #   @return [Array<Types::ProfileQueryResult>]
+    #
+    # @!attribute [rw] failures
+    #   An array of maps where each contains a response per profile failed
+    #   for the request.
+    #   @return [Array<Types::ProfileQueryFailures>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetSegmentMembershipResponse AWS API Documentation
+    #
+    class GetSegmentMembershipResponse < Struct.new(
+      :segment_definition_name,
+      :profiles,
+      :failures)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique identifier of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_definition_name
+    #   The unique name of the segment definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_id
+    #   The unique identifier of the segment snapshot.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetSegmentSnapshotRequest AWS API Documentation
+    #
+    class GetSegmentSnapshotRequest < Struct.new(
+      :domain_name,
+      :segment_definition_name,
+      :snapshot_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshot_id
+    #   The unique identifier of the segment snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the asynchronous job for exporting the segment
+    #   snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The status message of the asynchronous job for exporting the segment
+    #   snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_format
+    #   The format in which the segment will be exported.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_key
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   exported segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that allows Customer
+    #   Profiles service principal to assume the role for conducting KMS and
+    #   S3 operations.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_uri
+    #   The destination to which the segment will be exported. This field
+    #   must be provided if the request is not submitted from the Amazon
+    #   Connect Admin Website.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetSegmentSnapshotResponse AWS API Documentation
+    #
+    class GetSegmentSnapshotResponse < Struct.new(
+      :snapshot_id,
+      :status,
+      :status_message,
+      :data_format,
+      :encryption_key,
+      :role_arn,
+      :destination_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] next_token
     #   The pagination token from the previous `GetSimilarProfiles` API
     #   call.
@@ -2709,6 +3590,36 @@ module Aws::CustomerProfiles
       :workflow_type,
       :items,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains dimensions that determine what to segment on.
+    #
+    # @!attribute [rw] dimensions
+    #   Defines the attributes to segment on.
+    #   @return [Array<Types::Dimension>]
+    #
+    # @!attribute [rw] source_segments
+    #   Defines the starting source of data.
+    #   @return [Array<Types::SourceSegment>]
+    #
+    # @!attribute [rw] source_type
+    #   Defines how to interact with the source data.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Defines how to interact with the profiles found in the current
+    #   filtering.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/Group AWS API Documentation
+    #
+    class Group < Struct.new(
+      :dimensions,
+      :source_segments,
+      :source_type,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3338,6 +4249,69 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # Item that contains the attribute and when it was last updated.
+    #
+    # @!attribute [rw] attribute_name
+    #   Name of the attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_at
+    #   When the attribute was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListObjectTypeAttributeItem AWS API Documentation
+    #
+    class ListObjectTypeAttributeItem < Struct.new(
+      :attribute_name,
+      :last_updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The pagination token from the previous call.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of objects returned per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] domain_name
+    #   The unique identifier of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] object_type_name
+    #   The name of the profile object type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListObjectTypeAttributesRequest AWS API Documentation
+    #
+    class ListObjectTypeAttributesRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :domain_name,
+      :object_type_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   The items returned as part of the response.
+    #   @return [Array<Types::ListObjectTypeAttributeItem>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token from the previous call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListObjectTypeAttributesResponse AWS API Documentation
+    #
+    class ListObjectTypeAttributesResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A ProfileObjectType instance.
     #
     # @!attribute [rw] object_type_name
@@ -3599,6 +4573,45 @@ module Aws::CustomerProfiles
     class ListRuleBasedMatchesResponse < Struct.new(
       :match_ids,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique identifier of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of objects returned per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token from the previous call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListSegmentDefinitionsRequest AWS API Documentation
+    #
+    class ListSegmentDefinitionsRequest < Struct.new(
+      :domain_name,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The pagination token from the previous call.
+    #   @return [String]
+    #
+    # @!attribute [rw] items
+    #   List of segment definitions.
+    #   @return [Array<Types::SegmentDefinitionItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListSegmentDefinitionsResponse AWS API Documentation
+    #
+    class ListSegmentDefinitionsResponse < Struct.new(
+      :next_token,
+      :items)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4177,6 +5190,235 @@ module Aws::CustomerProfiles
     end
 
     # @!attribute [rw] domain_name
+    #   The unique identifier of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_name
+    #   The attribute name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ProfileAttributeValuesRequest AWS API Documentation
+    #
+    class ProfileAttributeValuesRequest < Struct.new(
+      :domain_name,
+      :attribute_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_name
+    #   The attribute name.
+    #   @return [String]
+    #
+    # @!attribute [rw] items
+    #   The items returned as part of the response.
+    #   @return [Array<Types::AttributeValueItem>]
+    #
+    # @!attribute [rw] status_code
+    #   The status code for the response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ProfileAttributeValuesResponse AWS API Documentation
+    #
+    class ProfileAttributeValuesResponse < Struct.new(
+      :domain_name,
+      :attribute_name,
+      :items,
+      :status_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The object used to segment on attributes within the customer profile.
+    #
+    # @!attribute [rw] account_number
+    #   A field to describe values to segment on within account number.
+    #   @return [Types::ProfileDimension]
+    #
+    # @!attribute [rw] additional_information
+    #   A field to describe values to segment on within additional
+    #   information.
+    #   @return [Types::ExtraLengthValueProfileDimension]
+    #
+    # @!attribute [rw] first_name
+    #   A field to describe values to segment on within first name.
+    #   @return [Types::ProfileDimension]
+    #
+    # @!attribute [rw] last_name
+    #   A field to describe values to segment on within last name.
+    #   @return [Types::ProfileDimension]
+    #
+    # @!attribute [rw] middle_name
+    #   A field to describe values to segment on within middle name.
+    #   @return [Types::ProfileDimension]
+    #
+    # @!attribute [rw] gender_string
+    #   A field to describe values to segment on within genderString.
+    #   @return [Types::ProfileDimension]
+    #
+    # @!attribute [rw] party_type_string
+    #   A field to describe values to segment on within partyTypeString.
+    #   @return [Types::ProfileDimension]
+    #
+    # @!attribute [rw] birth_date
+    #   A field to describe values to segment on within birthDate.
+    #   @return [Types::DateDimension]
+    #
+    # @!attribute [rw] phone_number
+    #   A field to describe values to segment on within phone number.
+    #   @return [Types::ProfileDimension]
+    #
+    # @!attribute [rw] business_name
+    #   A field to describe values to segment on within business name.
+    #   @return [Types::ProfileDimension]
+    #
+    # @!attribute [rw] business_phone_number
+    #   A field to describe values to segment on within business phone
+    #   number.
+    #   @return [Types::ProfileDimension]
+    #
+    # @!attribute [rw] home_phone_number
+    #   A field to describe values to segment on within home phone number.
+    #   @return [Types::ProfileDimension]
+    #
+    # @!attribute [rw] mobile_phone_number
+    #   A field to describe values to segment on within mobile phone number.
+    #   @return [Types::ProfileDimension]
+    #
+    # @!attribute [rw] email_address
+    #   A field to describe values to segment on within email address.
+    #   @return [Types::ProfileDimension]
+    #
+    # @!attribute [rw] personal_email_address
+    #   A field to describe values to segment on within personal email
+    #   address.
+    #   @return [Types::ProfileDimension]
+    #
+    # @!attribute [rw] business_email_address
+    #   A field to describe values to segment on within business email
+    #   address.
+    #   @return [Types::ProfileDimension]
+    #
+    # @!attribute [rw] address
+    #   A field to describe values to segment on within address.
+    #   @return [Types::AddressDimension]
+    #
+    # @!attribute [rw] shipping_address
+    #   A field to describe values to segment on within shipping address.
+    #   @return [Types::AddressDimension]
+    #
+    # @!attribute [rw] mailing_address
+    #   A field to describe values to segment on within mailing address.
+    #   @return [Types::AddressDimension]
+    #
+    # @!attribute [rw] billing_address
+    #   A field to describe values to segment on within billing address.
+    #   @return [Types::AddressDimension]
+    #
+    # @!attribute [rw] attributes
+    #   A field to describe values to segment on within attributes.
+    #   @return [Hash<String,Types::AttributeDimension>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ProfileAttributes AWS API Documentation
+    #
+    class ProfileAttributes < Struct.new(
+      :account_number,
+      :additional_information,
+      :first_name,
+      :last_name,
+      :middle_name,
+      :gender_string,
+      :party_type_string,
+      :birth_date,
+      :phone_number,
+      :business_name,
+      :business_phone_number,
+      :home_phone_number,
+      :mobile_phone_number,
+      :email_address,
+      :personal_email_address,
+      :business_email_address,
+      :address,
+      :shipping_address,
+      :mailing_address,
+      :billing_address,
+      :attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Object to hold the dimensions of a profile's fields to segment on.
+    #
+    # @!attribute [rw] dimension_type
+    #   The action to segment on.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values to apply the DimensionType on.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ProfileDimension AWS API Documentation
+    #
+    class ProfileDimension < Struct.new(
+      :dimension_type,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Object that holds failures for membership.
+    #
+    # @!attribute [rw] profile_id
+    #   The profile id the failure belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message describing the failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status describing the failure.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ProfileQueryFailures AWS API Documentation
+    #
+    class ProfileQueryFailures < Struct.new(
+      :profile_id,
+      :message,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Object that holds the results for membership.
+    #
+    # @!attribute [rw] profile_id
+    #   The profile id the result belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_result
+    #   Describes whether the profile was absent or present in the segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile
+    #   The standard profile of a customer.
+    #   @return [Types::Profile]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ProfileQueryResult AWS API Documentation
+    #
+    class ProfileQueryResult < Struct.new(
+      :profile_id,
+      :query_result,
+      :profile)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
     #   The unique name of the domain.
     #   @return [String]
     #
@@ -4517,6 +5759,30 @@ module Aws::CustomerProfiles
     #
     class Range < Struct.new(
       :value,
+      :unit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Overrides the original range on a calculated attribute definition.
+    #
+    # @!attribute [rw] start
+    #   The start time of when to include objects.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end
+    #   The end time of when to include objects.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] unit
+    #   The unit for start and end.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/RangeOverride AWS API Documentation
+    #
+    class RangeOverride < Struct.new(
+      :start,
+      :end,
       :unit)
       SENSITIVE = []
       include Aws::Structure
@@ -4922,6 +6188,85 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # Object holding the segment definition fields.
+    #
+    # @!attribute [rw] segment_definition_name
+    #   Name of the segment definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   Display name of the segment definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the segment definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_definition_arn
+    #   The arn of the segment definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   When the segment definition was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   The tags belonging to the segment definition.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/SegmentDefinitionItem AWS API Documentation
+    #
+    class SegmentDefinitionItem < Struct.new(
+      :segment_definition_name,
+      :display_name,
+      :description,
+      :segment_definition_arn,
+      :created_at,
+      :tags)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # Contains all groups of the segment definition.
+    #
+    # @!attribute [rw] groups
+    #   Holds the list of groups within the segment definition.
+    #   @return [Array<Types::Group>]
+    #
+    # @!attribute [rw] include
+    #   Defines whether to include or exclude the profiles that fit the
+    #   segment criteria.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/SegmentGroup AWS API Documentation
+    #
+    class SegmentGroup < Struct.new(
+      :groups,
+      :include)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains all groups of the segment definition.
+    #
+    # @!attribute [rw] groups
+    #   Holds the list of groups within the segment definition.
+    #   @return [Array<Types::Group>]
+    #
+    # @!attribute [rw] include
+    #   Define whether to include or exclude the profiles that fit the
+    #   segment criteria.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/SegmentGroupStructure AWS API Documentation
+    #
+    class SegmentGroupStructure < Struct.new(
+      :groups,
+      :include)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The properties that are applied when ServiceNow is being used as a
     # source.
     #
@@ -5007,6 +6352,20 @@ module Aws::CustomerProfiles
       :connector_type,
       :incremental_pull_config,
       :source_connector_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The source segments to build off of.
+    #
+    # @!attribute [rw] segment_definition_name
+    #   The unique name of the segment definition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/SourceSegment AWS API Documentation
+    #
+    class SourceSegment < Struct.new(
+      :segment_definition_name)
       SENSITIVE = []
       include Aws::Structure
     end

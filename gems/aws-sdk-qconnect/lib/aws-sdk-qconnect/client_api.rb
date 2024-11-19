@@ -35,11 +35,15 @@ module Aws::QConnect
     AIPromptVersionSummariesList = Shapes::ListShape.new(name: 'AIPromptVersionSummariesList')
     AIPromptVersionSummary = Shapes::StructureShape.new(name: 'AIPromptVersionSummary')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    ActivateMessageTemplateRequest = Shapes::StructureShape.new(name: 'ActivateMessageTemplateRequest')
+    ActivateMessageTemplateResponse = Shapes::StructureShape.new(name: 'ActivateMessageTemplateResponse')
+    AgentAttributes = Shapes::StructureShape.new(name: 'AgentAttributes')
     AmazonConnectGuideAssociationData = Shapes::StructureShape.new(name: 'AmazonConnectGuideAssociationData')
     AndConditions = Shapes::ListShape.new(name: 'AndConditions')
     AnswerRecommendationAIAgentConfiguration = Shapes::StructureShape.new(name: 'AnswerRecommendationAIAgentConfiguration')
     AppIntegrationsConfiguration = Shapes::StructureShape.new(name: 'AppIntegrationsConfiguration')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    ArnWithQualifier = Shapes::StringShape.new(name: 'ArnWithQualifier')
     AssistantAssociationData = Shapes::StructureShape.new(name: 'AssistantAssociationData')
     AssistantAssociationInputData = Shapes::UnionShape.new(name: 'AssistantAssociationInputData')
     AssistantAssociationOutputData = Shapes::UnionShape.new(name: 'AssistantAssociationOutputData')
@@ -57,10 +61,12 @@ module Aws::QConnect
     AssociationConfigurationData = Shapes::UnionShape.new(name: 'AssociationConfigurationData')
     AssociationConfigurationList = Shapes::ListShape.new(name: 'AssociationConfigurationList')
     AssociationType = Shapes::StringShape.new(name: 'AssociationType')
+    AttachmentFileName = Shapes::StringShape.new(name: 'AttachmentFileName')
     BedrockFoundationModelConfigurationForParsing = Shapes::StructureShape.new(name: 'BedrockFoundationModelConfigurationForParsing')
     BedrockModelArnForParsing = Shapes::StringShape.new(name: 'BedrockModelArnForParsing')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     Channel = Shapes::StringShape.new(name: 'Channel')
+    ChannelSubtype = Shapes::StringShape.new(name: 'ChannelSubtype')
     Channels = Shapes::ListShape.new(name: 'Channels')
     ChunkingConfiguration = Shapes::StructureShape.new(name: 'ChunkingConfiguration')
     ChunkingStrategy = Shapes::StringShape.new(name: 'ChunkingStrategy')
@@ -81,6 +87,7 @@ module Aws::QConnect
     ContentAssociationType = Shapes::StringShape.new(name: 'ContentAssociationType')
     ContentData = Shapes::StructureShape.new(name: 'ContentData')
     ContentDataDetails = Shapes::StructureShape.new(name: 'ContentDataDetails')
+    ContentDisposition = Shapes::StringShape.new(name: 'ContentDisposition')
     ContentFeedbackData = Shapes::UnionShape.new(name: 'ContentFeedbackData')
     ContentMetadata = Shapes::MapShape.new(name: 'ContentMetadata')
     ContentReference = Shapes::StructureShape.new(name: 'ContentReference')
@@ -107,14 +114,24 @@ module Aws::QConnect
     CreateContentResponse = Shapes::StructureShape.new(name: 'CreateContentResponse')
     CreateKnowledgeBaseRequest = Shapes::StructureShape.new(name: 'CreateKnowledgeBaseRequest')
     CreateKnowledgeBaseResponse = Shapes::StructureShape.new(name: 'CreateKnowledgeBaseResponse')
+    CreateMessageTemplateAttachmentRequest = Shapes::StructureShape.new(name: 'CreateMessageTemplateAttachmentRequest')
+    CreateMessageTemplateAttachmentResponse = Shapes::StructureShape.new(name: 'CreateMessageTemplateAttachmentResponse')
+    CreateMessageTemplateRequest = Shapes::StructureShape.new(name: 'CreateMessageTemplateRequest')
+    CreateMessageTemplateResponse = Shapes::StructureShape.new(name: 'CreateMessageTemplateResponse')
+    CreateMessageTemplateVersionRequest = Shapes::StructureShape.new(name: 'CreateMessageTemplateVersionRequest')
+    CreateMessageTemplateVersionResponse = Shapes::StructureShape.new(name: 'CreateMessageTemplateVersionResponse')
     CreateQuickResponseRequest = Shapes::StructureShape.new(name: 'CreateQuickResponseRequest')
     CreateQuickResponseResponse = Shapes::StructureShape.new(name: 'CreateQuickResponseResponse')
     CreateSessionRequest = Shapes::StructureShape.new(name: 'CreateSessionRequest')
     CreateSessionResponse = Shapes::StructureShape.new(name: 'CreateSessionResponse')
+    CustomAttributes = Shapes::MapShape.new(name: 'CustomAttributes')
+    CustomerProfileAttributes = Shapes::StructureShape.new(name: 'CustomerProfileAttributes')
     DataDetails = Shapes::UnionShape.new(name: 'DataDetails')
     DataReference = Shapes::UnionShape.new(name: 'DataReference')
     DataSummary = Shapes::StructureShape.new(name: 'DataSummary')
     DataSummaryList = Shapes::ListShape.new(name: 'DataSummaryList')
+    DeactivateMessageTemplateRequest = Shapes::StructureShape.new(name: 'DeactivateMessageTemplateRequest')
+    DeactivateMessageTemplateResponse = Shapes::StructureShape.new(name: 'DeactivateMessageTemplateResponse')
     DeleteAIAgentRequest = Shapes::StructureShape.new(name: 'DeleteAIAgentRequest')
     DeleteAIAgentResponse = Shapes::StructureShape.new(name: 'DeleteAIAgentResponse')
     DeleteAIAgentVersionRequest = Shapes::StructureShape.new(name: 'DeleteAIAgentVersionRequest')
@@ -135,11 +152,22 @@ module Aws::QConnect
     DeleteImportJobResponse = Shapes::StructureShape.new(name: 'DeleteImportJobResponse')
     DeleteKnowledgeBaseRequest = Shapes::StructureShape.new(name: 'DeleteKnowledgeBaseRequest')
     DeleteKnowledgeBaseResponse = Shapes::StructureShape.new(name: 'DeleteKnowledgeBaseResponse')
+    DeleteMessageTemplateAttachmentRequest = Shapes::StructureShape.new(name: 'DeleteMessageTemplateAttachmentRequest')
+    DeleteMessageTemplateAttachmentResponse = Shapes::StructureShape.new(name: 'DeleteMessageTemplateAttachmentResponse')
+    DeleteMessageTemplateRequest = Shapes::StructureShape.new(name: 'DeleteMessageTemplateRequest')
+    DeleteMessageTemplateResponse = Shapes::StructureShape.new(name: 'DeleteMessageTemplateResponse')
     DeleteQuickResponseRequest = Shapes::StructureShape.new(name: 'DeleteQuickResponseRequest')
     DeleteQuickResponseResponse = Shapes::StructureShape.new(name: 'DeleteQuickResponseResponse')
     Description = Shapes::StringShape.new(name: 'Description')
     Document = Shapes::StructureShape.new(name: 'Document')
     DocumentText = Shapes::StructureShape.new(name: 'DocumentText')
+    EmailHeader = Shapes::StructureShape.new(name: 'EmailHeader')
+    EmailHeaderKey = Shapes::StringShape.new(name: 'EmailHeaderKey')
+    EmailHeaderValue = Shapes::StringShape.new(name: 'EmailHeaderValue')
+    EmailHeaders = Shapes::ListShape.new(name: 'EmailHeaders')
+    EmailMessageTemplateContent = Shapes::StructureShape.new(name: 'EmailMessageTemplateContent')
+    EmailMessageTemplateContentBody = Shapes::StructureShape.new(name: 'EmailMessageTemplateContentBody')
+    ExtendedMessageTemplateData = Shapes::StructureShape.new(name: 'ExtendedMessageTemplateData')
     ExternalSource = Shapes::StringShape.new(name: 'ExternalSource')
     ExternalSourceConfiguration = Shapes::StructureShape.new(name: 'ExternalSourceConfiguration')
     FailureReason = Shapes::ListShape.new(name: 'FailureReason')
@@ -172,6 +200,8 @@ module Aws::QConnect
     GetImportJobResponse = Shapes::StructureShape.new(name: 'GetImportJobResponse')
     GetKnowledgeBaseRequest = Shapes::StructureShape.new(name: 'GetKnowledgeBaseRequest')
     GetKnowledgeBaseResponse = Shapes::StructureShape.new(name: 'GetKnowledgeBaseResponse')
+    GetMessageTemplateRequest = Shapes::StructureShape.new(name: 'GetMessageTemplateRequest')
+    GetMessageTemplateResponse = Shapes::StructureShape.new(name: 'GetMessageTemplateResponse')
     GetQuickResponseRequest = Shapes::StructureShape.new(name: 'GetQuickResponseRequest')
     GetQuickResponseResponse = Shapes::StructureShape.new(name: 'GetQuickResponseResponse')
     GetRecommendationsRequest = Shapes::StructureShape.new(name: 'GetRecommendationsRequest')
@@ -227,6 +257,10 @@ module Aws::QConnect
     ListImportJobsResponse = Shapes::StructureShape.new(name: 'ListImportJobsResponse')
     ListKnowledgeBasesRequest = Shapes::StructureShape.new(name: 'ListKnowledgeBasesRequest')
     ListKnowledgeBasesResponse = Shapes::StructureShape.new(name: 'ListKnowledgeBasesResponse')
+    ListMessageTemplateVersionsRequest = Shapes::StructureShape.new(name: 'ListMessageTemplateVersionsRequest')
+    ListMessageTemplateVersionsResponse = Shapes::StructureShape.new(name: 'ListMessageTemplateVersionsResponse')
+    ListMessageTemplatesRequest = Shapes::StructureShape.new(name: 'ListMessageTemplatesRequest')
+    ListMessageTemplatesResponse = Shapes::StructureShape.new(name: 'ListMessageTemplatesResponse')
     ListQuickResponsesRequest = Shapes::StructureShape.new(name: 'ListQuickResponsesRequest')
     ListQuickResponsesResponse = Shapes::StructureShape.new(name: 'ListQuickResponsesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
@@ -235,10 +269,41 @@ module Aws::QConnect
     ManagedSourceConfiguration = Shapes::UnionShape.new(name: 'ManagedSourceConfiguration')
     ManualSearchAIAgentConfiguration = Shapes::StructureShape.new(name: 'ManualSearchAIAgentConfiguration')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MessageTemplateAttachment = Shapes::StructureShape.new(name: 'MessageTemplateAttachment')
+    MessageTemplateAttachmentList = Shapes::ListShape.new(name: 'MessageTemplateAttachmentList')
+    MessageTemplateAttributeKey = Shapes::StringShape.new(name: 'MessageTemplateAttributeKey')
+    MessageTemplateAttributeKeyList = Shapes::ListShape.new(name: 'MessageTemplateAttributeKeyList')
+    MessageTemplateAttributeType = Shapes::StringShape.new(name: 'MessageTemplateAttributeType')
+    MessageTemplateAttributeTypeList = Shapes::ListShape.new(name: 'MessageTemplateAttributeTypeList')
+    MessageTemplateAttributeValue = Shapes::StringShape.new(name: 'MessageTemplateAttributeValue')
+    MessageTemplateAttributes = Shapes::StructureShape.new(name: 'MessageTemplateAttributes')
+    MessageTemplateBodyContentProvider = Shapes::UnionShape.new(name: 'MessageTemplateBodyContentProvider')
+    MessageTemplateContentProvider = Shapes::UnionShape.new(name: 'MessageTemplateContentProvider')
+    MessageTemplateContentSha256 = Shapes::StringShape.new(name: 'MessageTemplateContentSha256')
+    MessageTemplateData = Shapes::StructureShape.new(name: 'MessageTemplateData')
+    MessageTemplateFilterField = Shapes::StructureShape.new(name: 'MessageTemplateFilterField')
+    MessageTemplateFilterFieldList = Shapes::ListShape.new(name: 'MessageTemplateFilterFieldList')
+    MessageTemplateFilterOperator = Shapes::StringShape.new(name: 'MessageTemplateFilterOperator')
+    MessageTemplateFilterValue = Shapes::StringShape.new(name: 'MessageTemplateFilterValue')
+    MessageTemplateFilterValueList = Shapes::ListShape.new(name: 'MessageTemplateFilterValueList')
+    MessageTemplateOrderField = Shapes::StructureShape.new(name: 'MessageTemplateOrderField')
+    MessageTemplateQueryField = Shapes::StructureShape.new(name: 'MessageTemplateQueryField')
+    MessageTemplateQueryFieldList = Shapes::ListShape.new(name: 'MessageTemplateQueryFieldList')
+    MessageTemplateQueryOperator = Shapes::StringShape.new(name: 'MessageTemplateQueryOperator')
+    MessageTemplateQueryValue = Shapes::StringShape.new(name: 'MessageTemplateQueryValue')
+    MessageTemplateQueryValueList = Shapes::ListShape.new(name: 'MessageTemplateQueryValueList')
+    MessageTemplateSearchExpression = Shapes::StructureShape.new(name: 'MessageTemplateSearchExpression')
+    MessageTemplateSearchResultData = Shapes::StructureShape.new(name: 'MessageTemplateSearchResultData')
+    MessageTemplateSearchResultsList = Shapes::ListShape.new(name: 'MessageTemplateSearchResultsList')
+    MessageTemplateSummary = Shapes::StructureShape.new(name: 'MessageTemplateSummary')
+    MessageTemplateSummaryList = Shapes::ListShape.new(name: 'MessageTemplateSummaryList')
+    MessageTemplateVersionSummary = Shapes::StructureShape.new(name: 'MessageTemplateVersionSummary')
+    MessageTemplateVersionSummaryList = Shapes::ListShape.new(name: 'MessageTemplateVersionSummaryList')
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NonEmptySensitiveString = Shapes::StringShape.new(name: 'NonEmptySensitiveString')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
+    NonEmptyUnlimitedString = Shapes::StringShape.new(name: 'NonEmptyUnlimitedString')
     NotifyRecommendationsReceivedError = Shapes::StructureShape.new(name: 'NotifyRecommendationsReceivedError')
     NotifyRecommendationsReceivedErrorList = Shapes::ListShape.new(name: 'NotifyRecommendationsReceivedErrorList')
     NotifyRecommendationsReceivedErrorMessage = Shapes::StringShape.new(name: 'NotifyRecommendationsReceivedErrorMessage')
@@ -314,6 +379,8 @@ module Aws::QConnect
     RemoveAssistantAIAgentResponse = Shapes::StructureShape.new(name: 'RemoveAssistantAIAgentResponse')
     RemoveKnowledgeBaseTemplateUriRequest = Shapes::StructureShape.new(name: 'RemoveKnowledgeBaseTemplateUriRequest')
     RemoveKnowledgeBaseTemplateUriResponse = Shapes::StructureShape.new(name: 'RemoveKnowledgeBaseTemplateUriResponse')
+    RenderMessageTemplateRequest = Shapes::StructureShape.new(name: 'RenderMessageTemplateRequest')
+    RenderMessageTemplateResponse = Shapes::StructureShape.new(name: 'RenderMessageTemplateResponse')
     RenderingConfiguration = Shapes::StructureShape.new(name: 'RenderingConfiguration')
     RequestTimeoutException = Shapes::StructureShape.new(name: 'RequestTimeoutException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -321,9 +388,13 @@ module Aws::QConnect
     RuntimeSessionData = Shapes::StructureShape.new(name: 'RuntimeSessionData')
     RuntimeSessionDataList = Shapes::ListShape.new(name: 'RuntimeSessionDataList')
     RuntimeSessionDataValue = Shapes::UnionShape.new(name: 'RuntimeSessionDataValue')
+    SMSMessageTemplateContent = Shapes::StructureShape.new(name: 'SMSMessageTemplateContent')
+    SMSMessageTemplateContentBody = Shapes::StructureShape.new(name: 'SMSMessageTemplateContentBody')
     SearchContentRequest = Shapes::StructureShape.new(name: 'SearchContentRequest')
     SearchContentResponse = Shapes::StructureShape.new(name: 'SearchContentResponse')
     SearchExpression = Shapes::StructureShape.new(name: 'SearchExpression')
+    SearchMessageTemplatesRequest = Shapes::StructureShape.new(name: 'SearchMessageTemplatesRequest')
+    SearchMessageTemplatesResponse = Shapes::StructureShape.new(name: 'SearchMessageTemplatesResponse')
     SearchQuickResponsesRequest = Shapes::StructureShape.new(name: 'SearchQuickResponsesRequest')
     SearchQuickResponsesResponse = Shapes::StructureShape.new(name: 'SearchQuickResponsesResponse')
     SearchSessionsRequest = Shapes::StructureShape.new(name: 'SearchSessionsRequest')
@@ -353,7 +424,10 @@ module Aws::QConnect
     Status = Shapes::StringShape.new(name: 'Status')
     String = Shapes::StringShape.new(name: 'String')
     SyncStatus = Shapes::StringShape.new(name: 'SyncStatus')
+    SyntheticTimestamp_date_time = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_date_time', timestampFormat: "iso8601")
     SyntheticTimestamp_epoch_seconds = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_epoch_seconds', timestampFormat: "unixTimestamp")
+    SystemAttributes = Shapes::StructureShape.new(name: 'SystemAttributes')
+    SystemEndpointAttributes = Shapes::StructureShape.new(name: 'SystemEndpointAttributes')
     TagCondition = Shapes::StructureShape.new(name: 'TagCondition')
     TagFilter = Shapes::UnionShape.new(name: 'TagFilter')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -382,6 +456,10 @@ module Aws::QConnect
     UpdateContentResponse = Shapes::StructureShape.new(name: 'UpdateContentResponse')
     UpdateKnowledgeBaseTemplateUriRequest = Shapes::StructureShape.new(name: 'UpdateKnowledgeBaseTemplateUriRequest')
     UpdateKnowledgeBaseTemplateUriResponse = Shapes::StructureShape.new(name: 'UpdateKnowledgeBaseTemplateUriResponse')
+    UpdateMessageTemplateMetadataRequest = Shapes::StructureShape.new(name: 'UpdateMessageTemplateMetadataRequest')
+    UpdateMessageTemplateMetadataResponse = Shapes::StructureShape.new(name: 'UpdateMessageTemplateMetadataResponse')
+    UpdateMessageTemplateRequest = Shapes::StructureShape.new(name: 'UpdateMessageTemplateRequest')
+    UpdateMessageTemplateResponse = Shapes::StructureShape.new(name: 'UpdateMessageTemplateResponse')
     UpdateQuickResponseRequest = Shapes::StructureShape.new(name: 'UpdateQuickResponseRequest')
     UpdateQuickResponseResponse = Shapes::StructureShape.new(name: 'UpdateQuickResponseResponse')
     UpdateSessionDataRequest = Shapes::StructureShape.new(name: 'UpdateSessionDataRequest')
@@ -512,6 +590,20 @@ module Aws::QConnect
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    ActivateMessageTemplateRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
+    ActivateMessageTemplateRequest.add_member(:message_template_id, Shapes::ShapeRef.new(shape: UuidOrArnOrEitherWithQualifier, required: true, location: "uri", location_name: "messageTemplateId"))
+    ActivateMessageTemplateRequest.add_member(:version_number, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "versionNumber"))
+    ActivateMessageTemplateRequest.struct_class = Types::ActivateMessageTemplateRequest
+
+    ActivateMessageTemplateResponse.add_member(:message_template_arn, Shapes::ShapeRef.new(shape: ArnWithQualifier, required: true, location_name: "messageTemplateArn"))
+    ActivateMessageTemplateResponse.add_member(:message_template_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "messageTemplateId"))
+    ActivateMessageTemplateResponse.add_member(:version_number, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "versionNumber"))
+    ActivateMessageTemplateResponse.struct_class = Types::ActivateMessageTemplateResponse
+
+    AgentAttributes.add_member(:first_name, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "firstName"))
+    AgentAttributes.add_member(:last_name, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "lastName"))
+    AgentAttributes.struct_class = Types::AgentAttributes
 
     AmazonConnectGuideAssociationData.add_member(:flow_id, Shapes::ShapeRef.new(shape: GenericArn, location_name: "flowId"))
     AmazonConnectGuideAssociationData.struct_class = Types::AmazonConnectGuideAssociationData
@@ -830,6 +922,40 @@ module Aws::QConnect
     CreateKnowledgeBaseResponse.add_member(:knowledge_base, Shapes::ShapeRef.new(shape: KnowledgeBaseData, location_name: "knowledgeBase"))
     CreateKnowledgeBaseResponse.struct_class = Types::CreateKnowledgeBaseResponse
 
+    CreateMessageTemplateAttachmentRequest.add_member(:body, Shapes::ShapeRef.new(shape: NonEmptyUnlimitedString, required: true, location_name: "body"))
+    CreateMessageTemplateAttachmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
+    CreateMessageTemplateAttachmentRequest.add_member(:content_disposition, Shapes::ShapeRef.new(shape: ContentDisposition, required: true, location_name: "contentDisposition"))
+    CreateMessageTemplateAttachmentRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
+    CreateMessageTemplateAttachmentRequest.add_member(:message_template_id, Shapes::ShapeRef.new(shape: UuidOrArnOrEitherWithQualifier, required: true, location: "uri", location_name: "messageTemplateId"))
+    CreateMessageTemplateAttachmentRequest.add_member(:name, Shapes::ShapeRef.new(shape: AttachmentFileName, required: true, location_name: "name"))
+    CreateMessageTemplateAttachmentRequest.struct_class = Types::CreateMessageTemplateAttachmentRequest
+
+    CreateMessageTemplateAttachmentResponse.add_member(:attachment, Shapes::ShapeRef.new(shape: MessageTemplateAttachment, location_name: "attachment"))
+    CreateMessageTemplateAttachmentResponse.struct_class = Types::CreateMessageTemplateAttachmentResponse
+
+    CreateMessageTemplateRequest.add_member(:channel_subtype, Shapes::ShapeRef.new(shape: ChannelSubtype, required: true, location_name: "channelSubtype"))
+    CreateMessageTemplateRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateMessageTemplateRequest.add_member(:content, Shapes::ShapeRef.new(shape: MessageTemplateContentProvider, required: true, location_name: "content"))
+    CreateMessageTemplateRequest.add_member(:default_attributes, Shapes::ShapeRef.new(shape: MessageTemplateAttributes, location_name: "defaultAttributes"))
+    CreateMessageTemplateRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CreateMessageTemplateRequest.add_member(:grouping_configuration, Shapes::ShapeRef.new(shape: GroupingConfiguration, location_name: "groupingConfiguration"))
+    CreateMessageTemplateRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
+    CreateMessageTemplateRequest.add_member(:language, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "language"))
+    CreateMessageTemplateRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    CreateMessageTemplateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateMessageTemplateRequest.struct_class = Types::CreateMessageTemplateRequest
+
+    CreateMessageTemplateResponse.add_member(:message_template, Shapes::ShapeRef.new(shape: MessageTemplateData, location_name: "messageTemplate"))
+    CreateMessageTemplateResponse.struct_class = Types::CreateMessageTemplateResponse
+
+    CreateMessageTemplateVersionRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
+    CreateMessageTemplateVersionRequest.add_member(:message_template_content_sha_256, Shapes::ShapeRef.new(shape: MessageTemplateContentSha256, location_name: "messageTemplateContentSha256"))
+    CreateMessageTemplateVersionRequest.add_member(:message_template_id, Shapes::ShapeRef.new(shape: UuidOrArnOrEitherWithQualifier, required: true, location: "uri", location_name: "messageTemplateId"))
+    CreateMessageTemplateVersionRequest.struct_class = Types::CreateMessageTemplateVersionRequest
+
+    CreateMessageTemplateVersionResponse.add_member(:message_template, Shapes::ShapeRef.new(shape: ExtendedMessageTemplateData, location_name: "messageTemplate"))
+    CreateMessageTemplateVersionResponse.struct_class = Types::CreateMessageTemplateVersionResponse
+
     CreateQuickResponseRequest.add_member(:channels, Shapes::ShapeRef.new(shape: Channels, location_name: "channels"))
     CreateQuickResponseRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateQuickResponseRequest.add_member(:content, Shapes::ShapeRef.new(shape: QuickResponseDataProvider, required: true, location_name: "content"))
@@ -859,6 +985,69 @@ module Aws::QConnect
     CreateSessionResponse.add_member(:session, Shapes::ShapeRef.new(shape: SessionData, location_name: "session"))
     CreateSessionResponse.struct_class = Types::CreateSessionResponse
 
+    CustomAttributes.key = Shapes::ShapeRef.new(shape: MessageTemplateAttributeKey)
+    CustomAttributes.value = Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue)
+
+    CustomerProfileAttributes.add_member(:account_number, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "accountNumber"))
+    CustomerProfileAttributes.add_member(:additional_information, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "additionalInformation"))
+    CustomerProfileAttributes.add_member(:address1, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "address1"))
+    CustomerProfileAttributes.add_member(:address2, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "address2"))
+    CustomerProfileAttributes.add_member(:address3, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "address3"))
+    CustomerProfileAttributes.add_member(:address4, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "address4"))
+    CustomerProfileAttributes.add_member(:billing_address_1, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "billingAddress1"))
+    CustomerProfileAttributes.add_member(:billing_address_2, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "billingAddress2"))
+    CustomerProfileAttributes.add_member(:billing_address_3, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "billingAddress3"))
+    CustomerProfileAttributes.add_member(:billing_address_4, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "billingAddress4"))
+    CustomerProfileAttributes.add_member(:billing_city, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "billingCity"))
+    CustomerProfileAttributes.add_member(:billing_country, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "billingCountry"))
+    CustomerProfileAttributes.add_member(:billing_county, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "billingCounty"))
+    CustomerProfileAttributes.add_member(:billing_postal_code, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "billingPostalCode"))
+    CustomerProfileAttributes.add_member(:billing_province, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "billingProvince"))
+    CustomerProfileAttributes.add_member(:billing_state, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "billingState"))
+    CustomerProfileAttributes.add_member(:birth_date, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "birthDate"))
+    CustomerProfileAttributes.add_member(:business_email_address, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "businessEmailAddress"))
+    CustomerProfileAttributes.add_member(:business_name, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "businessName"))
+    CustomerProfileAttributes.add_member(:business_phone_number, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "businessPhoneNumber"))
+    CustomerProfileAttributes.add_member(:city, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "city"))
+    CustomerProfileAttributes.add_member(:country, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "country"))
+    CustomerProfileAttributes.add_member(:county, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "county"))
+    CustomerProfileAttributes.add_member(:custom, Shapes::ShapeRef.new(shape: CustomAttributes, location_name: "custom"))
+    CustomerProfileAttributes.add_member(:email_address, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "emailAddress"))
+    CustomerProfileAttributes.add_member(:first_name, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "firstName"))
+    CustomerProfileAttributes.add_member(:gender, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "gender"))
+    CustomerProfileAttributes.add_member(:home_phone_number, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "homePhoneNumber"))
+    CustomerProfileAttributes.add_member(:last_name, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "lastName"))
+    CustomerProfileAttributes.add_member(:mailing_address_1, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "mailingAddress1"))
+    CustomerProfileAttributes.add_member(:mailing_address_2, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "mailingAddress2"))
+    CustomerProfileAttributes.add_member(:mailing_address_3, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "mailingAddress3"))
+    CustomerProfileAttributes.add_member(:mailing_address_4, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "mailingAddress4"))
+    CustomerProfileAttributes.add_member(:mailing_city, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "mailingCity"))
+    CustomerProfileAttributes.add_member(:mailing_country, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "mailingCountry"))
+    CustomerProfileAttributes.add_member(:mailing_county, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "mailingCounty"))
+    CustomerProfileAttributes.add_member(:mailing_postal_code, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "mailingPostalCode"))
+    CustomerProfileAttributes.add_member(:mailing_province, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "mailingProvince"))
+    CustomerProfileAttributes.add_member(:mailing_state, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "mailingState"))
+    CustomerProfileAttributes.add_member(:middle_name, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "middleName"))
+    CustomerProfileAttributes.add_member(:mobile_phone_number, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "mobilePhoneNumber"))
+    CustomerProfileAttributes.add_member(:party_type, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "partyType"))
+    CustomerProfileAttributes.add_member(:phone_number, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "phoneNumber"))
+    CustomerProfileAttributes.add_member(:postal_code, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "postalCode"))
+    CustomerProfileAttributes.add_member(:profile_arn, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "profileARN"))
+    CustomerProfileAttributes.add_member(:profile_id, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "profileId"))
+    CustomerProfileAttributes.add_member(:province, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "province"))
+    CustomerProfileAttributes.add_member(:shipping_address_1, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "shippingAddress1"))
+    CustomerProfileAttributes.add_member(:shipping_address_2, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "shippingAddress2"))
+    CustomerProfileAttributes.add_member(:shipping_address_3, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "shippingAddress3"))
+    CustomerProfileAttributes.add_member(:shipping_address_4, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "shippingAddress4"))
+    CustomerProfileAttributes.add_member(:shipping_city, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "shippingCity"))
+    CustomerProfileAttributes.add_member(:shipping_country, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "shippingCountry"))
+    CustomerProfileAttributes.add_member(:shipping_county, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "shippingCounty"))
+    CustomerProfileAttributes.add_member(:shipping_postal_code, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "shippingPostalCode"))
+    CustomerProfileAttributes.add_member(:shipping_province, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "shippingProvince"))
+    CustomerProfileAttributes.add_member(:shipping_state, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "shippingState"))
+    CustomerProfileAttributes.add_member(:state, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "state"))
+    CustomerProfileAttributes.struct_class = Types::CustomerProfileAttributes
+
     DataDetails.add_member(:content_data, Shapes::ShapeRef.new(shape: ContentDataDetails, location_name: "contentData"))
     DataDetails.add_member(:generative_data, Shapes::ShapeRef.new(shape: GenerativeDataDetails, location_name: "generativeData"))
     DataDetails.add_member(:intent_detected_data, Shapes::ShapeRef.new(shape: IntentDetectedDataDetails, location_name: "intentDetectedData"))
@@ -884,6 +1073,16 @@ module Aws::QConnect
     DataSummary.struct_class = Types::DataSummary
 
     DataSummaryList.member = Shapes::ShapeRef.new(shape: DataSummary)
+
+    DeactivateMessageTemplateRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
+    DeactivateMessageTemplateRequest.add_member(:message_template_id, Shapes::ShapeRef.new(shape: UuidOrArnOrEitherWithQualifier, required: true, location: "uri", location_name: "messageTemplateId"))
+    DeactivateMessageTemplateRequest.add_member(:version_number, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "versionNumber"))
+    DeactivateMessageTemplateRequest.struct_class = Types::DeactivateMessageTemplateRequest
+
+    DeactivateMessageTemplateResponse.add_member(:message_template_arn, Shapes::ShapeRef.new(shape: ArnWithQualifier, required: true, location_name: "messageTemplateArn"))
+    DeactivateMessageTemplateResponse.add_member(:message_template_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "messageTemplateId"))
+    DeactivateMessageTemplateResponse.add_member(:version_number, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "versionNumber"))
+    DeactivateMessageTemplateResponse.struct_class = Types::DeactivateMessageTemplateResponse
 
     DeleteAIAgentRequest.add_member(:ai_agent_id, Shapes::ShapeRef.new(shape: UuidOrArnOrEitherWithQualifier, required: true, location: "uri", location_name: "aiAgentId"))
     DeleteAIAgentRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
@@ -946,6 +1145,19 @@ module Aws::QConnect
 
     DeleteKnowledgeBaseResponse.struct_class = Types::DeleteKnowledgeBaseResponse
 
+    DeleteMessageTemplateAttachmentRequest.add_member(:attachment_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "attachmentId"))
+    DeleteMessageTemplateAttachmentRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
+    DeleteMessageTemplateAttachmentRequest.add_member(:message_template_id, Shapes::ShapeRef.new(shape: UuidOrArnOrEitherWithQualifier, required: true, location: "uri", location_name: "messageTemplateId"))
+    DeleteMessageTemplateAttachmentRequest.struct_class = Types::DeleteMessageTemplateAttachmentRequest
+
+    DeleteMessageTemplateAttachmentResponse.struct_class = Types::DeleteMessageTemplateAttachmentResponse
+
+    DeleteMessageTemplateRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
+    DeleteMessageTemplateRequest.add_member(:message_template_id, Shapes::ShapeRef.new(shape: UuidOrArnOrEitherWithQualifier, required: true, location: "uri", location_name: "messageTemplateId"))
+    DeleteMessageTemplateRequest.struct_class = Types::DeleteMessageTemplateRequest
+
+    DeleteMessageTemplateResponse.struct_class = Types::DeleteMessageTemplateResponse
+
     DeleteQuickResponseRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
     DeleteQuickResponseRequest.add_member(:quick_response_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "quickResponseId"))
     DeleteQuickResponseRequest.struct_class = Types::DeleteQuickResponseRequest
@@ -960,6 +1172,43 @@ module Aws::QConnect
     DocumentText.add_member(:highlights, Shapes::ShapeRef.new(shape: Highlights, location_name: "highlights"))
     DocumentText.add_member(:text, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "text"))
     DocumentText.struct_class = Types::DocumentText
+
+    EmailHeader.add_member(:name, Shapes::ShapeRef.new(shape: EmailHeaderKey, location_name: "name"))
+    EmailHeader.add_member(:value, Shapes::ShapeRef.new(shape: EmailHeaderValue, location_name: "value"))
+    EmailHeader.struct_class = Types::EmailHeader
+
+    EmailHeaders.member = Shapes::ShapeRef.new(shape: EmailHeader)
+
+    EmailMessageTemplateContent.add_member(:body, Shapes::ShapeRef.new(shape: EmailMessageTemplateContentBody, location_name: "body"))
+    EmailMessageTemplateContent.add_member(:headers, Shapes::ShapeRef.new(shape: EmailHeaders, location_name: "headers"))
+    EmailMessageTemplateContent.add_member(:subject, Shapes::ShapeRef.new(shape: NonEmptyUnlimitedString, location_name: "subject"))
+    EmailMessageTemplateContent.struct_class = Types::EmailMessageTemplateContent
+
+    EmailMessageTemplateContentBody.add_member(:html, Shapes::ShapeRef.new(shape: MessageTemplateBodyContentProvider, location_name: "html"))
+    EmailMessageTemplateContentBody.add_member(:plain_text, Shapes::ShapeRef.new(shape: MessageTemplateBodyContentProvider, location_name: "plainText"))
+    EmailMessageTemplateContentBody.struct_class = Types::EmailMessageTemplateContentBody
+
+    ExtendedMessageTemplateData.add_member(:attachments, Shapes::ShapeRef.new(shape: MessageTemplateAttachmentList, location_name: "attachments"))
+    ExtendedMessageTemplateData.add_member(:attribute_types, Shapes::ShapeRef.new(shape: MessageTemplateAttributeTypeList, location_name: "attributeTypes"))
+    ExtendedMessageTemplateData.add_member(:channel_subtype, Shapes::ShapeRef.new(shape: ChannelSubtype, required: true, location_name: "channelSubtype"))
+    ExtendedMessageTemplateData.add_member(:content, Shapes::ShapeRef.new(shape: MessageTemplateContentProvider, required: true, location_name: "content"))
+    ExtendedMessageTemplateData.add_member(:created_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdTime"))
+    ExtendedMessageTemplateData.add_member(:default_attributes, Shapes::ShapeRef.new(shape: MessageTemplateAttributes, location_name: "defaultAttributes"))
+    ExtendedMessageTemplateData.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    ExtendedMessageTemplateData.add_member(:grouping_configuration, Shapes::ShapeRef.new(shape: GroupingConfiguration, location_name: "groupingConfiguration"))
+    ExtendedMessageTemplateData.add_member(:is_active, Shapes::ShapeRef.new(shape: Boolean, location_name: "isActive"))
+    ExtendedMessageTemplateData.add_member(:knowledge_base_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "knowledgeBaseArn"))
+    ExtendedMessageTemplateData.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "knowledgeBaseId"))
+    ExtendedMessageTemplateData.add_member(:language, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "language"))
+    ExtendedMessageTemplateData.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: GenericArn, required: true, location_name: "lastModifiedBy"))
+    ExtendedMessageTemplateData.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "lastModifiedTime"))
+    ExtendedMessageTemplateData.add_member(:message_template_arn, Shapes::ShapeRef.new(shape: ArnWithQualifier, required: true, location_name: "messageTemplateArn"))
+    ExtendedMessageTemplateData.add_member(:message_template_content_sha_256, Shapes::ShapeRef.new(shape: MessageTemplateContentSha256, required: true, location_name: "messageTemplateContentSha256"))
+    ExtendedMessageTemplateData.add_member(:message_template_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "messageTemplateId"))
+    ExtendedMessageTemplateData.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    ExtendedMessageTemplateData.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    ExtendedMessageTemplateData.add_member(:version_number, Shapes::ShapeRef.new(shape: Version, location_name: "versionNumber"))
+    ExtendedMessageTemplateData.struct_class = Types::ExtendedMessageTemplateData
 
     ExternalSourceConfiguration.add_member(:configuration, Shapes::ShapeRef.new(shape: Configuration, required: true, location_name: "configuration"))
     ExternalSourceConfiguration.add_member(:source, Shapes::ShapeRef.new(shape: ExternalSource, required: true, location_name: "source"))
@@ -1053,6 +1302,13 @@ module Aws::QConnect
 
     GetKnowledgeBaseResponse.add_member(:knowledge_base, Shapes::ShapeRef.new(shape: KnowledgeBaseData, location_name: "knowledgeBase"))
     GetKnowledgeBaseResponse.struct_class = Types::GetKnowledgeBaseResponse
+
+    GetMessageTemplateRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
+    GetMessageTemplateRequest.add_member(:message_template_id, Shapes::ShapeRef.new(shape: UuidOrArnOrEitherWithQualifier, required: true, location: "uri", location_name: "messageTemplateId"))
+    GetMessageTemplateRequest.struct_class = Types::GetMessageTemplateRequest
+
+    GetMessageTemplateResponse.add_member(:message_template, Shapes::ShapeRef.new(shape: ExtendedMessageTemplateData, location_name: "messageTemplate"))
+    GetMessageTemplateResponse.struct_class = Types::GetMessageTemplateResponse
 
     GetQuickResponseRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
     GetQuickResponseRequest.add_member(:quick_response_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "quickResponseId"))
@@ -1273,6 +1529,25 @@ module Aws::QConnect
     ListKnowledgeBasesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "nextToken"))
     ListKnowledgeBasesResponse.struct_class = Types::ListKnowledgeBasesResponse
 
+    ListMessageTemplateVersionsRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
+    ListMessageTemplateVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListMessageTemplateVersionsRequest.add_member(:message_template_id, Shapes::ShapeRef.new(shape: UuidOrArnOrEitherWithQualifier, required: true, location: "uri", location_name: "messageTemplateId"))
+    ListMessageTemplateVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListMessageTemplateVersionsRequest.struct_class = Types::ListMessageTemplateVersionsRequest
+
+    ListMessageTemplateVersionsResponse.add_member(:message_template_version_summaries, Shapes::ShapeRef.new(shape: MessageTemplateVersionSummaryList, required: true, location_name: "messageTemplateVersionSummaries"))
+    ListMessageTemplateVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListMessageTemplateVersionsResponse.struct_class = Types::ListMessageTemplateVersionsResponse
+
+    ListMessageTemplatesRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
+    ListMessageTemplatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListMessageTemplatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListMessageTemplatesRequest.struct_class = Types::ListMessageTemplatesRequest
+
+    ListMessageTemplatesResponse.add_member(:message_template_summaries, Shapes::ShapeRef.new(shape: MessageTemplateSummaryList, required: true, location_name: "messageTemplateSummaries"))
+    ListMessageTemplatesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListMessageTemplatesResponse.struct_class = Types::ListMessageTemplatesResponse
+
     ListQuickResponsesRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
     ListQuickResponsesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListQuickResponsesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location: "querystring", location_name: "nextToken"))
@@ -1297,6 +1572,136 @@ module Aws::QConnect
     ManualSearchAIAgentConfiguration.add_member(:answer_generation_ai_prompt_id, Shapes::ShapeRef.new(shape: UuidWithQualifier, location_name: "answerGenerationAIPromptId"))
     ManualSearchAIAgentConfiguration.add_member(:association_configurations, Shapes::ShapeRef.new(shape: AssociationConfigurationList, location_name: "associationConfigurations"))
     ManualSearchAIAgentConfiguration.struct_class = Types::ManualSearchAIAgentConfiguration
+
+    MessageTemplateAttachment.add_member(:attachment_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "attachmentId"))
+    MessageTemplateAttachment.add_member(:content_disposition, Shapes::ShapeRef.new(shape: ContentDisposition, required: true, location_name: "contentDisposition"))
+    MessageTemplateAttachment.add_member(:name, Shapes::ShapeRef.new(shape: AttachmentFileName, required: true, location_name: "name"))
+    MessageTemplateAttachment.add_member(:uploaded_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "uploadedTime"))
+    MessageTemplateAttachment.add_member(:url, Shapes::ShapeRef.new(shape: Url, required: true, location_name: "url"))
+    MessageTemplateAttachment.add_member(:url_expiry, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "urlExpiry"))
+    MessageTemplateAttachment.struct_class = Types::MessageTemplateAttachment
+
+    MessageTemplateAttachmentList.member = Shapes::ShapeRef.new(shape: MessageTemplateAttachment)
+
+    MessageTemplateAttributeKeyList.member = Shapes::ShapeRef.new(shape: MessageTemplateAttributeKey)
+
+    MessageTemplateAttributeTypeList.member = Shapes::ShapeRef.new(shape: MessageTemplateAttributeType)
+
+    MessageTemplateAttributes.add_member(:agent_attributes, Shapes::ShapeRef.new(shape: AgentAttributes, location_name: "agentAttributes"))
+    MessageTemplateAttributes.add_member(:custom_attributes, Shapes::ShapeRef.new(shape: CustomAttributes, location_name: "customAttributes"))
+    MessageTemplateAttributes.add_member(:customer_profile_attributes, Shapes::ShapeRef.new(shape: CustomerProfileAttributes, location_name: "customerProfileAttributes"))
+    MessageTemplateAttributes.add_member(:system_attributes, Shapes::ShapeRef.new(shape: SystemAttributes, location_name: "systemAttributes"))
+    MessageTemplateAttributes.struct_class = Types::MessageTemplateAttributes
+
+    MessageTemplateBodyContentProvider.add_member(:content, Shapes::ShapeRef.new(shape: NonEmptyUnlimitedString, location_name: "content"))
+    MessageTemplateBodyContentProvider.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    MessageTemplateBodyContentProvider.add_member_subclass(:content, Types::MessageTemplateBodyContentProvider::Content)
+    MessageTemplateBodyContentProvider.add_member_subclass(:unknown, Types::MessageTemplateBodyContentProvider::Unknown)
+    MessageTemplateBodyContentProvider.struct_class = Types::MessageTemplateBodyContentProvider
+
+    MessageTemplateContentProvider.add_member(:email, Shapes::ShapeRef.new(shape: EmailMessageTemplateContent, location_name: "email"))
+    MessageTemplateContentProvider.add_member(:sms, Shapes::ShapeRef.new(shape: SMSMessageTemplateContent, location_name: "sms"))
+    MessageTemplateContentProvider.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    MessageTemplateContentProvider.add_member_subclass(:email, Types::MessageTemplateContentProvider::Email)
+    MessageTemplateContentProvider.add_member_subclass(:sms, Types::MessageTemplateContentProvider::Sms)
+    MessageTemplateContentProvider.add_member_subclass(:unknown, Types::MessageTemplateContentProvider::Unknown)
+    MessageTemplateContentProvider.struct_class = Types::MessageTemplateContentProvider
+
+    MessageTemplateData.add_member(:attribute_types, Shapes::ShapeRef.new(shape: MessageTemplateAttributeTypeList, location_name: "attributeTypes"))
+    MessageTemplateData.add_member(:channel_subtype, Shapes::ShapeRef.new(shape: ChannelSubtype, required: true, location_name: "channelSubtype"))
+    MessageTemplateData.add_member(:content, Shapes::ShapeRef.new(shape: MessageTemplateContentProvider, required: true, location_name: "content"))
+    MessageTemplateData.add_member(:created_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdTime"))
+    MessageTemplateData.add_member(:default_attributes, Shapes::ShapeRef.new(shape: MessageTemplateAttributes, location_name: "defaultAttributes"))
+    MessageTemplateData.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    MessageTemplateData.add_member(:grouping_configuration, Shapes::ShapeRef.new(shape: GroupingConfiguration, location_name: "groupingConfiguration"))
+    MessageTemplateData.add_member(:knowledge_base_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "knowledgeBaseArn"))
+    MessageTemplateData.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "knowledgeBaseId"))
+    MessageTemplateData.add_member(:language, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "language"))
+    MessageTemplateData.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: GenericArn, required: true, location_name: "lastModifiedBy"))
+    MessageTemplateData.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "lastModifiedTime"))
+    MessageTemplateData.add_member(:message_template_arn, Shapes::ShapeRef.new(shape: ArnWithQualifier, required: true, location_name: "messageTemplateArn"))
+    MessageTemplateData.add_member(:message_template_content_sha_256, Shapes::ShapeRef.new(shape: MessageTemplateContentSha256, required: true, location_name: "messageTemplateContentSha256"))
+    MessageTemplateData.add_member(:message_template_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "messageTemplateId"))
+    MessageTemplateData.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    MessageTemplateData.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    MessageTemplateData.struct_class = Types::MessageTemplateData
+
+    MessageTemplateFilterField.add_member(:include_no_existence, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeNoExistence"))
+    MessageTemplateFilterField.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "name"))
+    MessageTemplateFilterField.add_member(:operator, Shapes::ShapeRef.new(shape: MessageTemplateFilterOperator, required: true, location_name: "operator"))
+    MessageTemplateFilterField.add_member(:values, Shapes::ShapeRef.new(shape: MessageTemplateFilterValueList, location_name: "values"))
+    MessageTemplateFilterField.struct_class = Types::MessageTemplateFilterField
+
+    MessageTemplateFilterFieldList.member = Shapes::ShapeRef.new(shape: MessageTemplateFilterField)
+
+    MessageTemplateFilterValueList.member = Shapes::ShapeRef.new(shape: MessageTemplateFilterValue)
+
+    MessageTemplateOrderField.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "name"))
+    MessageTemplateOrderField.add_member(:order, Shapes::ShapeRef.new(shape: Order, location_name: "order"))
+    MessageTemplateOrderField.struct_class = Types::MessageTemplateOrderField
+
+    MessageTemplateQueryField.add_member(:allow_fuzziness, Shapes::ShapeRef.new(shape: Boolean, location_name: "allowFuzziness"))
+    MessageTemplateQueryField.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "name"))
+    MessageTemplateQueryField.add_member(:operator, Shapes::ShapeRef.new(shape: MessageTemplateQueryOperator, required: true, location_name: "operator"))
+    MessageTemplateQueryField.add_member(:priority, Shapes::ShapeRef.new(shape: Priority, location_name: "priority"))
+    MessageTemplateQueryField.add_member(:values, Shapes::ShapeRef.new(shape: MessageTemplateQueryValueList, required: true, location_name: "values"))
+    MessageTemplateQueryField.struct_class = Types::MessageTemplateQueryField
+
+    MessageTemplateQueryFieldList.member = Shapes::ShapeRef.new(shape: MessageTemplateQueryField)
+
+    MessageTemplateQueryValueList.member = Shapes::ShapeRef.new(shape: MessageTemplateQueryValue)
+
+    MessageTemplateSearchExpression.add_member(:filters, Shapes::ShapeRef.new(shape: MessageTemplateFilterFieldList, location_name: "filters"))
+    MessageTemplateSearchExpression.add_member(:order_on_field, Shapes::ShapeRef.new(shape: MessageTemplateOrderField, location_name: "orderOnField"))
+    MessageTemplateSearchExpression.add_member(:queries, Shapes::ShapeRef.new(shape: MessageTemplateQueryFieldList, location_name: "queries"))
+    MessageTemplateSearchExpression.struct_class = Types::MessageTemplateSearchExpression
+
+    MessageTemplateSearchResultData.add_member(:channel_subtype, Shapes::ShapeRef.new(shape: ChannelSubtype, required: true, location_name: "channelSubtype"))
+    MessageTemplateSearchResultData.add_member(:created_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdTime"))
+    MessageTemplateSearchResultData.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    MessageTemplateSearchResultData.add_member(:grouping_configuration, Shapes::ShapeRef.new(shape: GroupingConfiguration, location_name: "groupingConfiguration"))
+    MessageTemplateSearchResultData.add_member(:is_active, Shapes::ShapeRef.new(shape: Boolean, location_name: "isActive"))
+    MessageTemplateSearchResultData.add_member(:knowledge_base_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "knowledgeBaseArn"))
+    MessageTemplateSearchResultData.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "knowledgeBaseId"))
+    MessageTemplateSearchResultData.add_member(:language, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "language"))
+    MessageTemplateSearchResultData.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: GenericArn, required: true, location_name: "lastModifiedBy"))
+    MessageTemplateSearchResultData.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "lastModifiedTime"))
+    MessageTemplateSearchResultData.add_member(:message_template_arn, Shapes::ShapeRef.new(shape: ArnWithQualifier, required: true, location_name: "messageTemplateArn"))
+    MessageTemplateSearchResultData.add_member(:message_template_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "messageTemplateId"))
+    MessageTemplateSearchResultData.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    MessageTemplateSearchResultData.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    MessageTemplateSearchResultData.add_member(:version_number, Shapes::ShapeRef.new(shape: Version, location_name: "versionNumber"))
+    MessageTemplateSearchResultData.struct_class = Types::MessageTemplateSearchResultData
+
+    MessageTemplateSearchResultsList.member = Shapes::ShapeRef.new(shape: MessageTemplateSearchResultData)
+
+    MessageTemplateSummary.add_member(:active_version_number, Shapes::ShapeRef.new(shape: Version, location_name: "activeVersionNumber"))
+    MessageTemplateSummary.add_member(:channel_subtype, Shapes::ShapeRef.new(shape: ChannelSubtype, required: true, location_name: "channelSubtype"))
+    MessageTemplateSummary.add_member(:created_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdTime"))
+    MessageTemplateSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    MessageTemplateSummary.add_member(:knowledge_base_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "knowledgeBaseArn"))
+    MessageTemplateSummary.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "knowledgeBaseId"))
+    MessageTemplateSummary.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: GenericArn, required: true, location_name: "lastModifiedBy"))
+    MessageTemplateSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "lastModifiedTime"))
+    MessageTemplateSummary.add_member(:message_template_arn, Shapes::ShapeRef.new(shape: ArnWithQualifier, required: true, location_name: "messageTemplateArn"))
+    MessageTemplateSummary.add_member(:message_template_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "messageTemplateId"))
+    MessageTemplateSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    MessageTemplateSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    MessageTemplateSummary.struct_class = Types::MessageTemplateSummary
+
+    MessageTemplateSummaryList.member = Shapes::ShapeRef.new(shape: MessageTemplateSummary)
+
+    MessageTemplateVersionSummary.add_member(:channel_subtype, Shapes::ShapeRef.new(shape: ChannelSubtype, required: true, location_name: "channelSubtype"))
+    MessageTemplateVersionSummary.add_member(:is_active, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isActive"))
+    MessageTemplateVersionSummary.add_member(:knowledge_base_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "knowledgeBaseArn"))
+    MessageTemplateVersionSummary.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "knowledgeBaseId"))
+    MessageTemplateVersionSummary.add_member(:message_template_arn, Shapes::ShapeRef.new(shape: ArnWithQualifier, required: true, location_name: "messageTemplateArn"))
+    MessageTemplateVersionSummary.add_member(:message_template_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "messageTemplateId"))
+    MessageTemplateVersionSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    MessageTemplateVersionSummary.add_member(:version_number, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "versionNumber"))
+    MessageTemplateVersionSummary.struct_class = Types::MessageTemplateVersionSummary
+
+    MessageTemplateVersionSummaryList.member = Shapes::ShapeRef.new(shape: MessageTemplateVersionSummary)
 
     NotifyRecommendationsReceivedError.add_member(:message, Shapes::ShapeRef.new(shape: NotifyRecommendationsReceivedErrorMessage, location_name: "message"))
     NotifyRecommendationsReceivedError.add_member(:recommendation_id, Shapes::ShapeRef.new(shape: RecommendationId, location_name: "recommendationId"))
@@ -1541,6 +1946,16 @@ module Aws::QConnect
 
     RemoveKnowledgeBaseTemplateUriResponse.struct_class = Types::RemoveKnowledgeBaseTemplateUriResponse
 
+    RenderMessageTemplateRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: MessageTemplateAttributes, required: true, location_name: "attributes"))
+    RenderMessageTemplateRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
+    RenderMessageTemplateRequest.add_member(:message_template_id, Shapes::ShapeRef.new(shape: UuidOrArnOrEitherWithQualifier, required: true, location: "uri", location_name: "messageTemplateId"))
+    RenderMessageTemplateRequest.struct_class = Types::RenderMessageTemplateRequest
+
+    RenderMessageTemplateResponse.add_member(:attachments, Shapes::ShapeRef.new(shape: MessageTemplateAttachmentList, location_name: "attachments"))
+    RenderMessageTemplateResponse.add_member(:attributes_not_interpolated, Shapes::ShapeRef.new(shape: MessageTemplateAttributeKeyList, location_name: "attributesNotInterpolated"))
+    RenderMessageTemplateResponse.add_member(:content, Shapes::ShapeRef.new(shape: MessageTemplateContentProvider, required: true, location_name: "content"))
+    RenderMessageTemplateResponse.struct_class = Types::RenderMessageTemplateResponse
+
     RenderingConfiguration.add_member(:template_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "templateUri"))
     RenderingConfiguration.struct_class = Types::RenderingConfiguration
 
@@ -1570,6 +1985,12 @@ module Aws::QConnect
     RuntimeSessionDataValue.add_member_subclass(:unknown, Types::RuntimeSessionDataValue::Unknown)
     RuntimeSessionDataValue.struct_class = Types::RuntimeSessionDataValue
 
+    SMSMessageTemplateContent.add_member(:body, Shapes::ShapeRef.new(shape: SMSMessageTemplateContentBody, location_name: "body"))
+    SMSMessageTemplateContent.struct_class = Types::SMSMessageTemplateContent
+
+    SMSMessageTemplateContentBody.add_member(:plain_text, Shapes::ShapeRef.new(shape: MessageTemplateBodyContentProvider, location_name: "plainText"))
+    SMSMessageTemplateContentBody.struct_class = Types::SMSMessageTemplateContentBody
+
     SearchContentRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
     SearchContentRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     SearchContentRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -1582,6 +2003,16 @@ module Aws::QConnect
 
     SearchExpression.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, required: true, location_name: "filters"))
     SearchExpression.struct_class = Types::SearchExpression
+
+    SearchMessageTemplatesRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
+    SearchMessageTemplatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    SearchMessageTemplatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    SearchMessageTemplatesRequest.add_member(:search_expression, Shapes::ShapeRef.new(shape: MessageTemplateSearchExpression, required: true, location_name: "searchExpression"))
+    SearchMessageTemplatesRequest.struct_class = Types::SearchMessageTemplatesRequest
+
+    SearchMessageTemplatesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    SearchMessageTemplatesResponse.add_member(:results, Shapes::ShapeRef.new(shape: MessageTemplateSearchResultsList, required: true, location_name: "results"))
+    SearchMessageTemplatesResponse.struct_class = Types::SearchMessageTemplatesResponse
 
     SearchQuickResponsesRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: ContactAttributes, location_name: "attributes"))
     SearchQuickResponsesRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
@@ -1678,6 +2109,14 @@ module Aws::QConnect
     StartImportJobResponse.add_member(:import_job, Shapes::ShapeRef.new(shape: ImportJobData, location_name: "importJob"))
     StartImportJobResponse.struct_class = Types::StartImportJobResponse
 
+    SystemAttributes.add_member(:customer_endpoint, Shapes::ShapeRef.new(shape: SystemEndpointAttributes, location_name: "customerEndpoint"))
+    SystemAttributes.add_member(:name, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "name"))
+    SystemAttributes.add_member(:system_endpoint, Shapes::ShapeRef.new(shape: SystemEndpointAttributes, location_name: "systemEndpoint"))
+    SystemAttributes.struct_class = Types::SystemAttributes
+
+    SystemEndpointAttributes.add_member(:address, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "address"))
+    SystemEndpointAttributes.struct_class = Types::SystemEndpointAttributes
+
     TagCondition.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "key"))
     TagCondition.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "value"))
     TagCondition.struct_class = Types::TagCondition
@@ -1773,6 +2212,26 @@ module Aws::QConnect
     UpdateKnowledgeBaseTemplateUriResponse.add_member(:knowledge_base, Shapes::ShapeRef.new(shape: KnowledgeBaseData, location_name: "knowledgeBase"))
     UpdateKnowledgeBaseTemplateUriResponse.struct_class = Types::UpdateKnowledgeBaseTemplateUriResponse
 
+    UpdateMessageTemplateMetadataRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateMessageTemplateMetadataRequest.add_member(:grouping_configuration, Shapes::ShapeRef.new(shape: GroupingConfiguration, location_name: "groupingConfiguration"))
+    UpdateMessageTemplateMetadataRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
+    UpdateMessageTemplateMetadataRequest.add_member(:message_template_id, Shapes::ShapeRef.new(shape: UuidOrArnOrEitherWithQualifier, required: true, location: "uri", location_name: "messageTemplateId"))
+    UpdateMessageTemplateMetadataRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+    UpdateMessageTemplateMetadataRequest.struct_class = Types::UpdateMessageTemplateMetadataRequest
+
+    UpdateMessageTemplateMetadataResponse.add_member(:message_template, Shapes::ShapeRef.new(shape: MessageTemplateData, location_name: "messageTemplate"))
+    UpdateMessageTemplateMetadataResponse.struct_class = Types::UpdateMessageTemplateMetadataResponse
+
+    UpdateMessageTemplateRequest.add_member(:content, Shapes::ShapeRef.new(shape: MessageTemplateContentProvider, location_name: "content"))
+    UpdateMessageTemplateRequest.add_member(:default_attributes, Shapes::ShapeRef.new(shape: MessageTemplateAttributes, location_name: "defaultAttributes"))
+    UpdateMessageTemplateRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
+    UpdateMessageTemplateRequest.add_member(:language, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "language"))
+    UpdateMessageTemplateRequest.add_member(:message_template_id, Shapes::ShapeRef.new(shape: UuidOrArnOrEitherWithQualifier, required: true, location: "uri", location_name: "messageTemplateId"))
+    UpdateMessageTemplateRequest.struct_class = Types::UpdateMessageTemplateRequest
+
+    UpdateMessageTemplateResponse.add_member(:message_template, Shapes::ShapeRef.new(shape: MessageTemplateData, location_name: "messageTemplate"))
+    UpdateMessageTemplateResponse.struct_class = Types::UpdateMessageTemplateResponse
+
     UpdateQuickResponseRequest.add_member(:channels, Shapes::ShapeRef.new(shape: Channels, location_name: "channels"))
     UpdateQuickResponseRequest.add_member(:content, Shapes::ShapeRef.new(shape: QuickResponseDataProvider, location_name: "content"))
     UpdateQuickResponseRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: QuickResponseType, location_name: "contentType"))
@@ -1855,6 +2314,19 @@ module Aws::QConnect
         "signingName" => "wisdom",
         "uid" => "qconnect-2020-10-19",
       }
+
+      api.add_operation(:activate_message_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ActivateMessageTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/knowledgeBases/{knowledgeBaseId}/messageTemplates/{messageTemplateId}/activate"
+        o.input = Shapes::ShapeRef.new(shape: ActivateMessageTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: ActivateMessageTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
 
       api.add_operation(:create_ai_agent, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateAIAgent"
@@ -1976,6 +2448,48 @@ module Aws::QConnect
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:create_message_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateMessageTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/knowledgeBases/{knowledgeBaseId}/messageTemplates"
+        o.input = Shapes::ShapeRef.new(shape: CreateMessageTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateMessageTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:create_message_template_attachment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateMessageTemplateAttachment"
+        o.http_method = "POST"
+        o.http_request_uri = "/knowledgeBases/{knowledgeBaseId}/messageTemplates/{messageTemplateId}/attachments"
+        o.input = Shapes::ShapeRef.new(shape: CreateMessageTemplateAttachmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateMessageTemplateAttachmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:create_message_template_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateMessageTemplateVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/knowledgeBases/{knowledgeBaseId}/messageTemplates/{messageTemplateId}/versions"
+        o.input = Shapes::ShapeRef.new(shape: CreateMessageTemplateVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateMessageTemplateVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:create_quick_response, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateQuickResponse"
         o.http_method = "POST"
@@ -1999,6 +2513,19 @@ module Aws::QConnect
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:deactivate_message_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeactivateMessageTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/knowledgeBases/{knowledgeBaseId}/messageTemplates/{messageTemplateId}/deactivate"
+        o.input = Shapes::ShapeRef.new(shape: DeactivateMessageTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeactivateMessageTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:delete_ai_agent, Seahorse::Model::Operation.new.tap do |o|
@@ -2119,6 +2646,32 @@ module Aws::QConnect
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:delete_message_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteMessageTemplate"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/knowledgeBases/{knowledgeBaseId}/messageTemplates/{messageTemplateId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteMessageTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteMessageTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:delete_message_template_attachment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteMessageTemplateAttachment"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/knowledgeBases/{knowledgeBaseId}/messageTemplates/{messageTemplateId}/attachments/{attachmentId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteMessageTemplateAttachmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteMessageTemplateAttachmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:delete_quick_response, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteQuickResponse"
         o.http_method = "DELETE"
@@ -2229,6 +2782,18 @@ module Aws::QConnect
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_message_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMessageTemplate"
+        o.http_method = "GET"
+        o.http_request_uri = "/knowledgeBases/{knowledgeBaseId}/messageTemplates/{messageTemplateId}"
+        o.input = Shapes::ShapeRef.new(shape: GetMessageTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMessageTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_quick_response, Seahorse::Model::Operation.new.tap do |o|
@@ -2436,6 +3001,42 @@ module Aws::QConnect
         )
       end)
 
+      api.add_operation(:list_message_template_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMessageTemplateVersions"
+        o.http_method = "GET"
+        o.http_request_uri = "/knowledgeBases/{knowledgeBaseId}/messageTemplates/{messageTemplateId}/versions"
+        o.input = Shapes::ShapeRef.new(shape: ListMessageTemplateVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListMessageTemplateVersionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_message_templates, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMessageTemplates"
+        o.http_method = "GET"
+        o.http_request_uri = "/knowledgeBases/{knowledgeBaseId}/messageTemplates"
+        o.input = Shapes::ShapeRef.new(shape: ListMessageTemplatesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListMessageTemplatesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_quick_responses, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListQuickResponses"
         o.http_method = "GET"
@@ -2526,6 +3127,18 @@ module Aws::QConnect
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:render_message_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RenderMessageTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/knowledgeBases/{knowledgeBaseId}/messageTemplates/{messageTemplateId}/render"
+        o.input = Shapes::ShapeRef.new(shape: RenderMessageTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: RenderMessageTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:search_content, Seahorse::Model::Operation.new.tap do |o|
         o.name = "SearchContent"
         o.http_method = "POST"
@@ -2535,6 +3148,24 @@ module Aws::QConnect
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:search_message_templates, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchMessageTemplates"
+        o.http_method = "POST"
+        o.http_request_uri = "/knowledgeBases/{knowledgeBaseId}/search/messageTemplates"
+        o.input = Shapes::ShapeRef.new(shape: SearchMessageTemplatesRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchMessageTemplatesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -2680,6 +3311,32 @@ module Aws::QConnect
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_message_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateMessageTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/knowledgeBases/{knowledgeBaseId}/messageTemplates/{messageTemplateId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateMessageTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateMessageTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:update_message_template_metadata, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateMessageTemplateMetadata"
+        o.http_method = "POST"
+        o.http_request_uri = "/knowledgeBases/{knowledgeBaseId}/messageTemplates/{messageTemplateId}/metadata"
+        o.input = Shapes::ShapeRef.new(shape: UpdateMessageTemplateMetadataRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateMessageTemplateMetadataResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_quick_response, Seahorse::Model::Operation.new.tap do |o|

@@ -6717,7 +6717,7 @@ module Aws::EC2
     #     on_demand_options: {
     #       allocation_strategy: "lowest-price", # accepts lowest-price, prioritized
     #       capacity_reservation_options: {
-    #         usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first, use-capacity-reservations-only, none
+    #         usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
     #       },
     #       single_instance_type: false,
     #       single_availability_zone: false,
@@ -8591,6 +8591,9 @@ module Aws::EC2
     # @option params [required, Types::RequestLaunchTemplateData] :launch_template_data
     #   The information for the launch template.
     #
+    # @option params [Types::OperatorRequest] :operator
+    #   Reserved for internal use.
+    #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the launch template on creation. To tag the
     #   launch template, the resource type must be `launch-template`.
@@ -8887,6 +8890,12 @@ module Aws::EC2
     #         auto_recovery: "default", # accepts default, disabled
     #       },
     #       disable_api_stop: false,
+    #       operator: {
+    #         principal: "String",
+    #       },
+    #     },
+    #     operator: {
+    #       principal: "String",
     #     },
     #     tag_specifications: [
     #       {
@@ -8912,6 +8921,8 @@ module Aws::EC2
     #   resp.launch_template.tags #=> Array
     #   resp.launch_template.tags[0].key #=> String
     #   resp.launch_template.tags[0].value #=> String
+    #   resp.launch_template.operator.managed #=> Boolean
+    #   resp.launch_template.operator.principal #=> String
     #   resp.warning.errors #=> Array
     #   resp.warning.errors[0].code #=> String
     #   resp.warning.errors[0].message #=> String
@@ -9289,6 +9300,9 @@ module Aws::EC2
     #         auto_recovery: "default", # accepts default, disabled
     #       },
     #       disable_api_stop: false,
+    #       operator: {
+    #         principal: "String",
+    #       },
     #     },
     #     resolve_alias: false,
     #   })
@@ -9451,6 +9465,10 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.private_dns_name_options.enable_resource_name_dns_aaaa_record #=> Boolean
     #   resp.launch_template_version.launch_template_data.maintenance_options.auto_recovery #=> String, one of "default", "disabled"
     #   resp.launch_template_version.launch_template_data.disable_api_stop #=> Boolean
+    #   resp.launch_template_version.launch_template_data.operator.managed #=> Boolean
+    #   resp.launch_template_version.launch_template_data.operator.principal #=> String
+    #   resp.launch_template_version.operator.managed #=> Boolean
+    #   resp.launch_template_version.operator.principal #=> String
     #   resp.warning.errors #=> Array
     #   resp.warning.errors[0].code #=> String
     #   resp.warning.errors[0].message #=> String
@@ -10768,6 +10786,9 @@ module Aws::EC2
     # @option params [Types::ConnectionTrackingSpecificationRequest] :connection_tracking_specification
     #   A connection tracking specification for the network interface.
     #
+    # @option params [Types::OperatorRequest] :operator
+    #   Reserved for internal use.
+    #
     # @option params [required, String] :subnet_id
     #   The ID of the subnet to associate with the network interface.
     #
@@ -10911,6 +10932,9 @@ module Aws::EC2
     #       udp_stream_timeout: 1,
     #       udp_timeout: 1,
     #     },
+    #     operator: {
+    #       principal: "String",
+    #     },
     #     subnet_id: "SubnetId", # required
     #     description: "String",
     #     private_ip_address: "String",
@@ -10996,6 +11020,8 @@ module Aws::EC2
     #   resp.network_interface.deny_all_igw_traffic #=> Boolean
     #   resp.network_interface.ipv_6_native #=> Boolean
     #   resp.network_interface.ipv_6_address #=> String
+    #   resp.network_interface.operator.managed #=> Boolean
+    #   resp.network_interface.operator.principal #=> String
     #   resp.client_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkInterface AWS API Documentation
@@ -14688,6 +14714,9 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
+    # @option params [Types::OperatorRequest] :operator
+    #   Reserved for internal use.
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -14704,6 +14733,7 @@ module Aws::EC2
     #   * {Types::Volume#multi_attach_enabled #multi_attach_enabled} => Boolean
     #   * {Types::Volume#throughput #throughput} => Integer
     #   * {Types::Volume#sse_type #sse_type} => String
+    #   * {Types::Volume#operator #operator} => Types::OperatorResponse
     #   * {Types::Volume#volume_id #volume_id} => String
     #   * {Types::Volume#size #size} => Integer
     #   * {Types::Volume#snapshot_id #snapshot_id} => String
@@ -14791,6 +14821,9 @@ module Aws::EC2
     #     multi_attach_enabled: false,
     #     throughput: 1,
     #     client_token: "String",
+    #     operator: {
+    #       principal: "String",
+    #     },
     #     dry_run: false,
     #   })
     #
@@ -14806,6 +14839,8 @@ module Aws::EC2
     #   resp.multi_attach_enabled #=> Boolean
     #   resp.throughput #=> Integer
     #   resp.sse_type #=> String, one of "sse-ebs", "sse-kms", "none"
+    #   resp.operator.managed #=> Boolean
+    #   resp.operator.principal #=> String
     #   resp.volume_id #=> String
     #   resp.size #=> Integer
     #   resp.snapshot_id #=> String
@@ -16956,6 +16991,8 @@ module Aws::EC2
     #   resp.launch_template.tags #=> Array
     #   resp.launch_template.tags[0].key #=> String
     #   resp.launch_template.tags[0].value #=> String
+    #   resp.launch_template.operator.managed #=> Boolean
+    #   resp.launch_template.operator.principal #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteLaunchTemplate AWS API Documentation
     #
@@ -21097,7 +21134,6 @@ module Aws::EC2
     #     * `dedicated` - The Capacity Reservation is created on single-tenant
     #       hardware that is dedicated to a single Amazon Web Services
     #       account.
-    #
     #   * `outpost-arn` - The Amazon Resource Name (ARN) of the Outpost on
     #     which the Capacity Reservation was created.
     #
@@ -21121,7 +21157,6 @@ module Aws::EC2
     #       might fail due to invalid request parameters, capacity
     #       constraints, or instance limit constraints. Failed requests are
     #       retained for 60 minutes.
-    #
     #   * `start-date` - The date and time at which the Capacity Reservation
     #     was started.
     #
@@ -21140,7 +21175,6 @@ module Aws::EC2
     #
     #     * `limited` - The Capacity Reservation expires automatically at a
     #       specified date and time.
-    #
     #   * `instance-match-criteria` - Indicates the type of instance launches
     #     that the Capacity Reservation accepts. The options include:
     #
@@ -21155,7 +21189,6 @@ module Aws::EC2
     #       Availability Zone), and explicitly target the Capacity
     #       Reservation. This ensures that only permitted instances can use
     #       the reserved capacity.
-    #
     #   * `placement-group-arn` - The ARN of the cluster placement group in
     #     which the Capacity Reservation was created.
     #
@@ -23022,7 +23055,7 @@ module Aws::EC2
     #   resp.fleets[0].spot_options.min_target_capacity #=> Integer
     #   resp.fleets[0].spot_options.max_total_price #=> String
     #   resp.fleets[0].on_demand_options.allocation_strategy #=> String, one of "lowest-price", "prioritized"
-    #   resp.fleets[0].on_demand_options.capacity_reservation_options.usage_strategy #=> String, one of "use-capacity-reservations-first", "use-capacity-reservations-only", "none"
+    #   resp.fleets[0].on_demand_options.capacity_reservation_options.usage_strategy #=> String, one of "use-capacity-reservations-first"
     #   resp.fleets[0].on_demand_options.single_instance_type #=> Boolean
     #   resp.fleets[0].on_demand_options.single_availability_zone #=> Boolean
     #   resp.fleets[0].on_demand_options.min_target_capacity #=> Integer
@@ -24711,6 +24744,8 @@ module Aws::EC2
     #   resp.block_device_mappings[0].ebs.volume_id #=> String
     #   resp.block_device_mappings[0].ebs.associated_resource #=> String
     #   resp.block_device_mappings[0].ebs.volume_owner_id #=> String
+    #   resp.block_device_mappings[0].ebs.operator.managed #=> Boolean
+    #   resp.block_device_mappings[0].ebs.operator.principal #=> String
     #   resp.disable_api_termination.value #=> Boolean
     #   resp.ena_support.value #=> Boolean
     #   resp.enclave_options.enabled #=> Boolean
@@ -25249,6 +25284,8 @@ module Aws::EC2
     #   resp.instance_image_metadata[0].image_metadata.creation_date #=> String
     #   resp.instance_image_metadata[0].image_metadata.deprecation_time #=> String
     #   resp.instance_image_metadata[0].image_metadata.is_public #=> Boolean
+    #   resp.instance_image_metadata[0].operator.managed #=> Boolean
+    #   resp.instance_image_metadata[0].operator.principal #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceImageMetadata AWS API Documentation
@@ -25454,6 +25491,8 @@ module Aws::EC2
     #   resp.instance_statuses #=> Array
     #   resp.instance_statuses[0].availability_zone #=> String
     #   resp.instance_statuses[0].outpost_arn #=> String
+    #   resp.instance_statuses[0].operator.managed #=> Boolean
+    #   resp.instance_statuses[0].operator.principal #=> String
     #   resp.instance_statuses[0].events #=> Array
     #   resp.instance_statuses[0].events[0].instance_event_id #=> String
     #   resp.instance_statuses[0].events[0].code #=> String, one of "instance-reboot", "system-reboot", "system-maintenance", "instance-retirement", "instance-stop"
@@ -25509,7 +25548,6 @@ module Aws::EC2
     #   * Availability Zone
     #
     #   * Local Zone
-    #
     # * Supported instance types
     #
     #   * `hpc6a.48xlarge` \| `hpc6id.32xlarge` \| `hpc7a.12xlarge` \|
@@ -26634,6 +26672,8 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].block_device_mappings[0].ebs.volume_id #=> String
     #   resp.reservations[0].instances[0].block_device_mappings[0].ebs.associated_resource #=> String
     #   resp.reservations[0].instances[0].block_device_mappings[0].ebs.volume_owner_id #=> String
+    #   resp.reservations[0].instances[0].block_device_mappings[0].ebs.operator.managed #=> Boolean
+    #   resp.reservations[0].instances[0].block_device_mappings[0].ebs.operator.principal #=> String
     #   resp.reservations[0].instances[0].client_token #=> String
     #   resp.reservations[0].instances[0].ebs_optimized #=> Boolean
     #   resp.reservations[0].instances[0].ena_support #=> Boolean
@@ -26698,6 +26738,8 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].network_interfaces[0].connection_tracking_configuration.tcp_established_timeout #=> Integer
     #   resp.reservations[0].instances[0].network_interfaces[0].connection_tracking_configuration.udp_stream_timeout #=> Integer
     #   resp.reservations[0].instances[0].network_interfaces[0].connection_tracking_configuration.udp_timeout #=> Integer
+    #   resp.reservations[0].instances[0].network_interfaces[0].operator.managed #=> Boolean
+    #   resp.reservations[0].instances[0].network_interfaces[0].operator.principal #=> String
     #   resp.reservations[0].instances[0].outpost_arn #=> String
     #   resp.reservations[0].instances[0].root_device_name #=> String
     #   resp.reservations[0].instances[0].root_device_type #=> String, one of "ebs", "instance-store"
@@ -26741,6 +26783,8 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].tpm_support #=> String
     #   resp.reservations[0].instances[0].maintenance_options.auto_recovery #=> String, one of "disabled", "default"
     #   resp.reservations[0].instances[0].current_instance_boot_mode #=> String, one of "legacy-bios", "uefi"
+    #   resp.reservations[0].instances[0].operator.managed #=> Boolean
+    #   resp.reservations[0].instances[0].operator.principal #=> String
     #   resp.reservations[0].instances[0].instance_id #=> String
     #   resp.reservations[0].instances[0].image_id #=> String
     #   resp.reservations[0].instances[0].state.code #=> Integer
@@ -28023,6 +28067,10 @@ module Aws::EC2
     #   resp.launch_template_versions[0].launch_template_data.private_dns_name_options.enable_resource_name_dns_aaaa_record #=> Boolean
     #   resp.launch_template_versions[0].launch_template_data.maintenance_options.auto_recovery #=> String, one of "default", "disabled"
     #   resp.launch_template_versions[0].launch_template_data.disable_api_stop #=> Boolean
+    #   resp.launch_template_versions[0].launch_template_data.operator.managed #=> Boolean
+    #   resp.launch_template_versions[0].launch_template_data.operator.principal #=> String
+    #   resp.launch_template_versions[0].operator.managed #=> Boolean
+    #   resp.launch_template_versions[0].operator.principal #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLaunchTemplateVersions AWS API Documentation
@@ -28133,6 +28181,8 @@ module Aws::EC2
     #   resp.launch_templates[0].tags #=> Array
     #   resp.launch_templates[0].tags[0].key #=> String
     #   resp.launch_templates[0].tags[0].value #=> String
+    #   resp.launch_templates[0].operator.managed #=> Boolean
+    #   resp.launch_templates[0].operator.principal #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLaunchTemplates AWS API Documentation
@@ -31015,6 +31065,8 @@ module Aws::EC2
     #   resp.network_interfaces[0].deny_all_igw_traffic #=> Boolean
     #   resp.network_interfaces[0].ipv_6_native #=> Boolean
     #   resp.network_interfaces[0].ipv_6_address #=> String
+    #   resp.network_interfaces[0].operator.managed #=> Boolean
+    #   resp.network_interfaces[0].operator.principal #=> String
     #   resp.next_token #=> String
     #
     #
@@ -37385,6 +37437,8 @@ module Aws::EC2
     #   resp.volumes[0].multi_attach_enabled #=> Boolean
     #   resp.volumes[0].throughput #=> Integer
     #   resp.volumes[0].sse_type #=> String, one of "sse-ebs", "sse-kms", "none"
+    #   resp.volumes[0].operator.managed #=> Boolean
+    #   resp.volumes[0].operator.principal #=> String
     #   resp.volumes[0].volume_id #=> String
     #   resp.volumes[0].size #=> Integer
     #   resp.volumes[0].snapshot_id #=> String
@@ -44029,6 +44083,8 @@ module Aws::EC2
     #   resp.launch_template_data.private_dns_name_options.enable_resource_name_dns_aaaa_record #=> Boolean
     #   resp.launch_template_data.maintenance_options.auto_recovery #=> String, one of "default", "disabled"
     #   resp.launch_template_data.disable_api_stop #=> Boolean
+    #   resp.launch_template_data.operator.managed #=> Boolean
+    #   resp.launch_template_data.operator.principal #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetLaunchTemplateData AWS API Documentation
     #
@@ -46890,7 +46946,6 @@ module Aws::EC2
     #
     #     * The snapshot is unlocked by a user with the appropriate
     #       permissions.
-    #
     #     Users with the appropriate IAM permissions can unlock the snapshot,
     #     increase or decrease the lock duration, and change the lock mode to
     #     `compliance` at any time.
@@ -49663,6 +49718,8 @@ module Aws::EC2
     #   resp.launch_template.tags #=> Array
     #   resp.launch_template.tags[0].key #=> String
     #   resp.launch_template.tags[0].value #=> String
+    #   resp.launch_template.operator.managed #=> Boolean
+    #   resp.launch_template.operator.principal #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyLaunchTemplate AWS API Documentation
     #
@@ -57879,6 +57936,9 @@ module Aws::EC2
     #   first IPv6 GUA address associated with the ENI becomes the primary
     #   IPv6 address.
     #
+    # @option params [Types::OperatorRequest] :operator
+    #   Reserved for internal use.
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
@@ -58137,6 +58197,9 @@ module Aws::EC2
     #     },
     #     disable_api_stop: false,
     #     enable_primary_ipv_6: false,
+    #     operator: {
+    #       principal: "String",
+    #     },
     #     dry_run: false,
     #     disable_api_termination: false,
     #     instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
@@ -58221,6 +58284,8 @@ module Aws::EC2
     #   resp.instances[0].block_device_mappings[0].ebs.volume_id #=> String
     #   resp.instances[0].block_device_mappings[0].ebs.associated_resource #=> String
     #   resp.instances[0].block_device_mappings[0].ebs.volume_owner_id #=> String
+    #   resp.instances[0].block_device_mappings[0].ebs.operator.managed #=> Boolean
+    #   resp.instances[0].block_device_mappings[0].ebs.operator.principal #=> String
     #   resp.instances[0].client_token #=> String
     #   resp.instances[0].ebs_optimized #=> Boolean
     #   resp.instances[0].ena_support #=> Boolean
@@ -58285,6 +58350,8 @@ module Aws::EC2
     #   resp.instances[0].network_interfaces[0].connection_tracking_configuration.tcp_established_timeout #=> Integer
     #   resp.instances[0].network_interfaces[0].connection_tracking_configuration.udp_stream_timeout #=> Integer
     #   resp.instances[0].network_interfaces[0].connection_tracking_configuration.udp_timeout #=> Integer
+    #   resp.instances[0].network_interfaces[0].operator.managed #=> Boolean
+    #   resp.instances[0].network_interfaces[0].operator.principal #=> String
     #   resp.instances[0].outpost_arn #=> String
     #   resp.instances[0].root_device_name #=> String
     #   resp.instances[0].root_device_type #=> String, one of "ebs", "instance-store"
@@ -58328,6 +58395,8 @@ module Aws::EC2
     #   resp.instances[0].tpm_support #=> String
     #   resp.instances[0].maintenance_options.auto_recovery #=> String, one of "disabled", "default"
     #   resp.instances[0].current_instance_boot_mode #=> String, one of "legacy-bios", "uefi"
+    #   resp.instances[0].operator.managed #=> Boolean
+    #   resp.instances[0].operator.principal #=> String
     #   resp.instances[0].instance_id #=> String
     #   resp.instances[0].image_id #=> String
     #   resp.instances[0].state.code #=> Integer
@@ -60849,7 +60918,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.488.0'
+      context[:gem_version] = '1.490.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -96,6 +96,15 @@ module Aws::CloudWatch
     EnableAlarmActionsInput = Shapes::StructureShape.new(name: 'EnableAlarmActionsInput')
     EnableInsightRulesInput = Shapes::StructureShape.new(name: 'EnableInsightRulesInput')
     EnableInsightRulesOutput = Shapes::StructureShape.new(name: 'EnableInsightRulesOutput')
+    Entity = Shapes::StructureShape.new(name: 'Entity')
+    EntityAttributesMap = Shapes::MapShape.new(name: 'EntityAttributesMap')
+    EntityAttributesMapKeyString = Shapes::StringShape.new(name: 'EntityAttributesMapKeyString')
+    EntityAttributesMapValueString = Shapes::StringShape.new(name: 'EntityAttributesMapValueString')
+    EntityKeyAttributesMap = Shapes::MapShape.new(name: 'EntityKeyAttributesMap')
+    EntityKeyAttributesMapKeyString = Shapes::StringShape.new(name: 'EntityKeyAttributesMapKeyString')
+    EntityKeyAttributesMapValueString = Shapes::StringShape.new(name: 'EntityKeyAttributesMapValueString')
+    EntityMetricData = Shapes::StructureShape.new(name: 'EntityMetricData')
+    EntityMetricDataList = Shapes::ListShape.new(name: 'EntityMetricDataList')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     EvaluateLowSampleCountPercentile = Shapes::StringShape.new(name: 'EvaluateLowSampleCountPercentile')
     EvaluationPeriods = Shapes::IntegerShape.new(name: 'EvaluationPeriods')
@@ -266,6 +275,7 @@ module Aws::CloudWatch
     StopMetricStreamsInput = Shapes::StructureShape.new(name: 'StopMetricStreamsInput')
     StopMetricStreamsOutput = Shapes::StructureShape.new(name: 'StopMetricStreamsOutput')
     StorageResolution = Shapes::IntegerShape.new(name: 'StorageResolution')
+    StrictEntityValidation = Shapes::BooleanShape.new(name: 'StrictEntityValidation')
     SuppressorPeriod = Shapes::IntegerShape.new(name: 'SuppressorPeriod')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -507,6 +517,22 @@ module Aws::CloudWatch
 
     EnableInsightRulesOutput.add_member(:failures, Shapes::ShapeRef.new(shape: BatchFailures, location_name: "Failures"))
     EnableInsightRulesOutput.struct_class = Types::EnableInsightRulesOutput
+
+    Entity.add_member(:key_attributes, Shapes::ShapeRef.new(shape: EntityKeyAttributesMap, location_name: "KeyAttributes"))
+    Entity.add_member(:attributes, Shapes::ShapeRef.new(shape: EntityAttributesMap, location_name: "Attributes"))
+    Entity.struct_class = Types::Entity
+
+    EntityAttributesMap.key = Shapes::ShapeRef.new(shape: EntityAttributesMapKeyString)
+    EntityAttributesMap.value = Shapes::ShapeRef.new(shape: EntityAttributesMapValueString)
+
+    EntityKeyAttributesMap.key = Shapes::ShapeRef.new(shape: EntityKeyAttributesMapKeyString)
+    EntityKeyAttributesMap.value = Shapes::ShapeRef.new(shape: EntityKeyAttributesMapValueString)
+
+    EntityMetricData.add_member(:entity, Shapes::ShapeRef.new(shape: Entity, location_name: "Entity"))
+    EntityMetricData.add_member(:metric_data, Shapes::ShapeRef.new(shape: MetricData, location_name: "MetricData"))
+    EntityMetricData.struct_class = Types::EntityMetricData
+
+    EntityMetricDataList.member = Shapes::ShapeRef.new(shape: EntityMetricData)
 
     ExtendedStatistics.member = Shapes::ShapeRef.new(shape: ExtendedStatistic)
 
@@ -925,7 +951,9 @@ module Aws::CloudWatch
     PutMetricAlarmInput.struct_class = Types::PutMetricAlarmInput
 
     PutMetricDataInput.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location_name: "Namespace"))
-    PutMetricDataInput.add_member(:metric_data, Shapes::ShapeRef.new(shape: MetricData, required: true, location_name: "MetricData"))
+    PutMetricDataInput.add_member(:metric_data, Shapes::ShapeRef.new(shape: MetricData, location_name: "MetricData"))
+    PutMetricDataInput.add_member(:entity_metric_data, Shapes::ShapeRef.new(shape: EntityMetricDataList, location_name: "EntityMetricData"))
+    PutMetricDataInput.add_member(:strict_entity_validation, Shapes::ShapeRef.new(shape: StrictEntityValidation, location_name: "StrictEntityValidation", metadata: {"box"=>true}))
     PutMetricDataInput.struct_class = Types::PutMetricDataInput
 
     PutMetricStreamInput.add_member(:name, Shapes::ShapeRef.new(shape: MetricStreamName, required: true, location_name: "Name"))

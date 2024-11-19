@@ -54,7 +54,6 @@ module Aws::LocationService
     #     * `geo:GetMap*` - Allows all actions needed for map rendering.
     #
     #     ^
-    #
     #   * **Place actions**
     #
     #     * `geo:SearchPlaceIndexForText` - Allows geocoding.
@@ -65,7 +64,6 @@ module Aws::LocationService
     #       suggestions from text.
     #
     #     * `GetPlace` - Allows finding a place by place ID.
-    #
     #   * **Route actions**
     #
     #     * `geo:CalculateRoute` - Allows point to point routing.

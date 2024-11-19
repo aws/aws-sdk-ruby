@@ -998,7 +998,6 @@ module Aws::EFS
     #
     #   * Sets the `requesterManaged` property of the network interface to
     #     `true`, and the `requesterId` value to `EFS`.
-    #
     #   Each Amazon EFS mount target has one corresponding requester-managed
     #   EC2 network interface. After the network interface is created,
     #   Amazon EFS sets the `NetworkInterfaceId` field in the mount
@@ -2919,7 +2918,7 @@ module Aws::EFS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-efs'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.88.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

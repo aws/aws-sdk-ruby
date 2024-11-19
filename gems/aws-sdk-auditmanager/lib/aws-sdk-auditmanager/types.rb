@@ -4263,7 +4263,6 @@ module Aws::AuditManager
     #       API call.
     #
     #     ^
-    #
     #   * `UPLOAD_FILE` and `INPUT_TEXT` are only used when mapping a data
     #     source for manual evidence.
     #
@@ -4296,7 +4295,6 @@ module Aws::AuditManager
     #     * Managed rule name: [s3-bucket-acl-prohibited][3]
     #
     #       `keywordValue`: `S3_BUCKET_ACL_PROHIBITED`
-    #
     #   * For [custom rules][4], you form the `keywordValue` by adding the
     #     `Custom_` prefix to the rule name. This prefix distinguishes the
     #     custom rule from a managed rule.
@@ -4306,7 +4304,6 @@ module Aws::AuditManager
     #     * Custom rule name: my-custom-config-rule
     #
     #       `keywordValue`: `Custom_my-custom-config-rule`
-    #
     #   * For [service-linked rules][5], you form the `keywordValue` by
     #     adding the `Custom_` prefix to the rule name. In addition, you
     #     remove the suffix ID that appears at the end of the rule name.
@@ -4345,7 +4342,6 @@ module Aws::AuditManager
     #         of the custom rule name itself may vary. For accuracy, we
     #         recommend that you visit the [Config console][7] to verify
     #         your custom rule name.
-    #
     #   2.  For Security Hub: The format varies for Security Hub control
     #       names. For accuracy, we recommend that you reference the list of
     #       [supported Security Hub controls][8].

@@ -630,7 +630,6 @@ module Aws::TaxSettings
     #
     #   * **Note:** In the **Tax Settings** page of the Billing console,
     #     `Government` appears as **Public institutions**
-    #
     # * If your `sector` is `Business` and you're subject to KDV tax, you
     #   must specify your industry in the `industries` field.
     #
@@ -1275,7 +1274,6 @@ module Aws::TaxSettings
     #
     #   * **Note:** In the **Tax Settings** page of the Billing console,
     #     `Government` appears as **Public institutions**
-    #
     # * If your `sector` is `Business` and you're subject to KDV tax, you
     #   must specify your industry in the `industries` field.
     #
@@ -1426,7 +1424,7 @@ module Aws::TaxSettings
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-taxsettings'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

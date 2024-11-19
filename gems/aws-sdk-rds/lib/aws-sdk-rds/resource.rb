@@ -103,6 +103,7 @@ module Aws::RDS
     #     serverless_v2_scaling_configuration: {
     #       min_capacity: 1.0,
     #       max_capacity: 1.0,
+    #       seconds_until_auto_pause: 1,
     #     },
     #     network_type: "String",
     #     cluster_scalability_type: "standard", # accepts standard, limitless
@@ -1166,6 +1167,9 @@ module Aws::RDS
     #
     #     * Must contain 1 to 64 alphanumeric characters.
     #
+    #     * Must begin with a letter. Subsequent characters can be letters,
+    #       underscores, or digits (0-9).
+    #
     #     * Can't be a word reserved by the database engine.
     #
     #   Amazon Aurora PostgreSQL
@@ -1396,14 +1400,12 @@ module Aws::RDS
     #         16384.
     #
     #       * Web and Express editions: Must be an integer from 20 to 16384.
-    #
     #     * Provisioned IOPS storage (io1, io2):
     #
     #       * Enterprise and Standard editions: Must be an integer from 100 to
     #         16384.
     #
     #       * Web and Express editions: Must be an integer from 100 to 16384.
-    #
     #     * Magnetic storage (standard):
     #
     #       * Enterprise and Standard editions: Must be an integer from 20 to
@@ -3102,7 +3104,6 @@ module Aws::RDS
     #     * `provisioned`
     #
     #     * `serverless`
-    #
     #   * `engine-version` - Accepts engine versions. The results list only
     #     includes information about the DB engine versions for these engine
     #     versions.

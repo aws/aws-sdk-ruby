@@ -3344,6 +3344,9 @@ module Aws::RDS
     #
     #     * Must contain 1 to 64 alphanumeric characters.
     #
+    #     * Must begin with a letter. Subsequent characters can be letters,
+    #       underscores, or digits (0-9).
+    #
     #     * Can't be a word reserved by the database engine.
     #
     #   Amazon Aurora PostgreSQL
@@ -3580,7 +3583,6 @@ module Aws::RDS
     #         to 16384.
     #
     #       * Web and Express editions: Must be an integer from 20 to 16384.
-    #
     #     * Provisioned IOPS storage (io1, io2):
     #
     #       * Enterprise and Standard editions: Must be an integer from 100
@@ -3588,7 +3590,6 @@ module Aws::RDS
     #
     #       * Web and Express editions: Must be an integer from 100 to
     #         16384.
-    #
     #     * Magnetic storage (standard):
     #
     #       * Enterprise and Standard editions: Must be an integer from 20
@@ -8578,6 +8579,16 @@ module Aws::RDS
     #   integrations with Amazon Redshift.
     #   @return [Boolean]
     #
+    # @!attribute [rw] serverless_v2_features_support
+    #   Specifies any Aurora Serverless v2 properties or limits that differ
+    #   between Aurora engine versions. You can test the values of this
+    #   attribute when deciding which Aurora version to use in a new or
+    #   upgraded DB cluster. You can also retrieve the version of an
+    #   existing DB cluster and check whether that version supports certain
+    #   Aurora Serverless v2 features before you attempt to use those
+    #   features.
+    #   @return [Types::ServerlessV2FeaturesSupport]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBEngineVersion AWS API Documentation
     #
     class DBEngineVersion < Struct.new(
@@ -8614,7 +8625,8 @@ module Aws::RDS
       :supports_certificate_rotation_without_restart,
       :supported_ca_certificate_identifiers,
       :supports_local_write_forwarding,
-      :supports_integrations)
+      :supports_integrations,
+      :serverless_v2_features_support)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9635,6 +9647,13 @@ module Aws::RDS
     #
     class DBInstanceNotFoundFault < Aws::EmptyStructure; end
 
+    # An attempt to download or examine log files didn't succeed because an
+    # Aurora Serverless v2 instance was paused.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstanceNotReadyFault AWS API Documentation
+    #
+    class DBInstanceNotReadyFault < Aws::EmptyStructure; end
+
     # Information about an Amazon Web Services Identity and Access
     # Management (IAM) role that is associated with a DB instance.
     #
@@ -10604,6 +10623,8 @@ module Aws::RDS
     #
     class DBSecurityGroupQuotaExceededFault < Aws::EmptyStructure; end
 
+    # Contains the details for an Amazon RDS DB shard group.
+    #
     # @!attribute [rw] db_shard_group_resource_id
     #   The Amazon Web Services Region-unique, immutable identifier for the
     #   DB shard group.
@@ -12181,7 +12202,6 @@ module Aws::RDS
     #       backup replication is stopped.
     #
     #     ^
-    #
     #   * `db-cluster-id` - Accepts DB cluster identifiers and Amazon
     #     Resource Names (ARNs). The results list includes only information
     #     about the DB cluster automated backups identified by these ARNs.
@@ -12272,7 +12292,6 @@ module Aws::RDS
     #     * `failed`
     #
     #     * `pending`
-    #
     #     The results list includes information about only the backtracks
     #     identified by these values.
     #   @return [Array<Types::Filter>]
@@ -12791,7 +12810,6 @@ module Aws::RDS
     #     * `provisioned`
     #
     #     * `serverless`
-    #
     #   * `engine-version` - Accepts engine versions. The results list only
     #     includes information about the DB engine versions for these engine
     #     versions.
@@ -12901,7 +12919,6 @@ module Aws::RDS
     #
     #     * `retained` - Automated backups for deleted instances and after
     #       backup replication is stopped.
-    #
     #   * `db-instance-id` - Accepts DB instance identifiers and Amazon
     #     Resource Names (ARNs). The results list includes only information
     #     about the DB instance automated backups identified by these ARNs.
@@ -13518,7 +13535,6 @@ module Aws::RDS
     #     * `resolved` - The recommendations which are completed.
     #
     #     * `dismissed` - The recommendations that you dismissed.
-    #
     #     The results list only includes the recommendations whose status is
     #     one of the specified filter values.
     #
@@ -13535,7 +13551,6 @@ module Aws::RDS
     #     * `low`
     #
     #     * `informational`
-    #
     #   * `type-id` - Accepts a list of recommendation type identifiers. The
     #     results list only includes the recommendations whose type is one
     #     of the specified filter values.
@@ -17211,11 +17226,11 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] apply_immediately
-    #   Specifies whether the modifications in this request and any pending
-    #   modifications are asynchronously applied as soon as possible,
-    #   regardless of the `PreferredMaintenanceWindow` setting for the DB
-    #   cluster. If this parameter is disabled, changes to the DB cluster
-    #   are applied during the next maintenance window.
+    #   Specifies whether the modifications in this request are
+    #   asynchronously applied as soon as possible, regardless of the
+    #   `PreferredMaintenanceWindow` setting for the DB cluster. If this
+    #   parameter is disabled, changes to the DB cluster are applied during
+    #   the next maintenance window.
     #
     #   Most modifications can be applied immediately or during the next
     #   scheduled maintenance window. Some modifications, such as turning on
@@ -26694,6 +26709,34 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # Specifies any Aurora Serverless v2 properties or limits that differ
+    # between Aurora engine versions. You can test the values of this
+    # attribute when deciding which Aurora version to use in a new or
+    # upgraded DB cluster. You can also retrieve the version of an existing
+    # DB cluster and check whether that version supports certain Aurora
+    # Serverless v2 features before you attempt to use those features.
+    #
+    # @!attribute [rw] min_capacity
+    #   If the minimum capacity is 0 ACUs, the engine version supports the
+    #   automatic pause/resume feature of Aurora Serverless v2.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max_capacity
+    #   Specifies the upper Aurora Serverless v2 capacity limit for a
+    #   particular engine version. Depending on the engine version, the
+    #   maximum capacity for an Aurora Serverless v2 cluster might be `256`
+    #   or `128`.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ServerlessV2FeaturesSupport AWS API Documentation
+    #
+    class ServerlessV2FeaturesSupport < Struct.new(
+      :min_capacity,
+      :max_capacity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the scaling configuration of an Aurora Serverless v2 DB
     # cluster.
     #
@@ -26707,22 +26750,35 @@ module Aws::RDS
     # @!attribute [rw] min_capacity
     #   The minimum number of Aurora capacity units (ACUs) for a DB instance
     #   in an Aurora Serverless v2 cluster. You can specify ACU values in
-    #   half-step increments, such as 8, 8.5, 9, and so on. The smallest
-    #   value that you can use is 0.5.
+    #   half-step increments, such as 8, 8.5, 9, and so on. For Aurora
+    #   versions that support the Aurora Serverless v2 auto-pause feature,
+    #   the smallest value that you can use is 0. For versions that don't
+    #   support Aurora Serverless v2 auto-pause, the smallest value that you
+    #   can use is 0.5.
     #   @return [Float]
     #
     # @!attribute [rw] max_capacity
     #   The maximum number of Aurora capacity units (ACUs) for a DB instance
     #   in an Aurora Serverless v2 cluster. You can specify ACU values in
-    #   half-step increments, such as 40, 40.5, 41, and so on. The largest
-    #   value that you can use is 128.
+    #   half-step increments, such as 32, 32.5, 33, and so on. The largest
+    #   value that you can use is 256 for recent Aurora versions, or 128 for
+    #   older versions.
     #   @return [Float]
+    #
+    # @!attribute [rw] seconds_until_auto_pause
+    #   Specifies the number of seconds an Aurora Serverless v2 DB instance
+    #   must be idle before Aurora attempts to automatically pause it.
+    #
+    #   Specify a value between 300 seconds (five minutes) and 86,400
+    #   seconds (one day). The default is 300 seconds.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ServerlessV2ScalingConfiguration AWS API Documentation
     #
     class ServerlessV2ScalingConfiguration < Struct.new(
       :min_capacity,
-      :max_capacity)
+      :max_capacity,
+      :seconds_until_auto_pause)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26739,22 +26795,40 @@ module Aws::RDS
     # @!attribute [rw] min_capacity
     #   The minimum number of Aurora capacity units (ACUs) for a DB instance
     #   in an Aurora Serverless v2 cluster. You can specify ACU values in
-    #   half-step increments, such as 8, 8.5, 9, and so on. The smallest
-    #   value that you can use is 0.5.
+    #   half-step increments, such as 8, 8.5, 9, and so on. For Aurora
+    #   versions that support the Aurora Serverless v2 auto-pause feature,
+    #   the smallest value that you can use is 0. For versions that don't
+    #   support Aurora Serverless v2 auto-pause, the smallest value that you
+    #   can use is 0.5.
     #   @return [Float]
     #
     # @!attribute [rw] max_capacity
     #   The maximum number of Aurora capacity units (ACUs) for a DB instance
     #   in an Aurora Serverless v2 cluster. You can specify ACU values in
-    #   half-step increments, such as 40, 40.5, 41, and so on. The largest
-    #   value that you can use is 128.
+    #   half-step increments, such as 32, 32.5, 33, and so on. The largest
+    #   value that you can use is 256 for recent Aurora versions, or 128 for
+    #   older versions.
     #   @return [Float]
+    #
+    # @!attribute [rw] seconds_until_auto_pause
+    #   The number of seconds an Aurora Serverless v2 DB instance must be
+    #   idle before Aurora attempts to automatically pause it. This property
+    #   is only shown when the minimum capacity for the cluster is set to 0
+    #   ACUs. Changing the minimum capacity to a nonzero value removes this
+    #   property. If you later change the minimum capacity back to 0 ACUs,
+    #   this property is reset to its default value unless you specify it
+    #   again.
+    #
+    #   This value ranges between 300 seconds (five minutes) and 86,400
+    #   seconds (one day). The default is 300 seconds.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ServerlessV2ScalingConfigurationInfo AWS API Documentation
     #
     class ServerlessV2ScalingConfigurationInfo < Struct.new(
       :min_capacity,
-      :max_capacity)
+      :max_capacity,
+      :seconds_until_auto_pause)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -777,7 +777,6 @@ module Aws::CloudFormation
     #
     #     * If you don't specify either of these capabilities,
     #       CloudFormation returns an `InsufficientCapabilities` error.
-    #
     #     If your stack template contains these resources, we suggest that
     #     you review all permissions associated with them and edit their
     #     permissions if necessary.
@@ -795,7 +794,6 @@ module Aws::CloudFormation
     #     * [ AWS::IAM::User][6]
     #
     #     * [AWS::IAM::UserToGroupAddition][7]
-    #
     #     For more information, see [Acknowledging IAM resources in
     #     CloudFormation templates][8].
     #
@@ -1176,7 +1174,6 @@ module Aws::CloudFormation
     #
     #     * If you don't specify either of these capabilities,
     #       CloudFormation returns an `InsufficientCapabilities` error.
-    #
     #     If your stack template contains these resources, we recommend that
     #     you review all permissions associated with them and edit their
     #     permissions if necessary.
@@ -1194,7 +1191,6 @@ module Aws::CloudFormation
     #     * [AWS::IAM::User][6]
     #
     #     * [AWS::IAM::UserToGroupAddition][7]
-    #
     #     For more information, see [Acknowledging IAM resources in
     #     CloudFormation templates][8].
     #
@@ -1611,7 +1607,6 @@ module Aws::CloudFormation
     #
     #     * If you don't specify either of these capabilities,
     #       CloudFormation returns an `InsufficientCapabilities` error.
-    #
     #     If your stack template contains these resources, we recommend that
     #     you review all permissions associated with them and edit their
     #     permissions if necessary.
@@ -1629,7 +1624,6 @@ module Aws::CloudFormation
     #     * [AWS::IAM::User][6]
     #
     #     * [AWS::IAM::UserToGroupAddition][7]
-    #
     #     For more information, see [Acknowledging IAM resources in
     #     CloudFormation templates][8].
     #
@@ -4441,6 +4435,66 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # The specified target doesn't have any requested Hook invocations.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/HookResultNotFoundException AWS API Documentation
+    #
+    class HookResultNotFoundException < Aws::EmptyStructure; end
+
+    # Describes a Hook invocation, its status, and the reason for its
+    # status.
+    #
+    # @!attribute [rw] invocation_point
+    #   The exact point in the provisioning logic where the Hook runs.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_mode
+    #   The failure mode of the invocation. The following are potential
+    #   modes:
+    #
+    #   * `FAIL`: If the hook invocation returns a failure, then the
+    #     requested target operation should fail.
+    #
+    #   * `WARN`: If the hook invocation returns a failure, then the
+    #     requested target operation should warn.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_name
+    #   The type name of the Hook being invoked.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_version_id
+    #   The version of the Hook being invoked.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_configuration_version_id
+    #   The version of the Hook type configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The state of the Hook invocation.
+    #   @return [String]
+    #
+    # @!attribute [rw] hook_status_reason
+    #   A description of the Hook results status. For example, if the Hook
+    #   result is in a `FAILED` state, this may contain additional
+    #   information for the `FAILED` state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/HookResultSummary AWS API Documentation
+    #
+    class HookResultSummary < Struct.new(
+      :invocation_point,
+      :failure_mode,
+      :type_name,
+      :type_version_id,
+      :type_configuration_version_id,
+      :status,
+      :hook_status_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] stack_set_name
     #   The name of the stack set. The name must be unique in the Region
     #   where you create your stack set.
@@ -4676,6 +4730,78 @@ module Aws::CloudFormation
     #
     class ListGeneratedTemplatesOutput < Struct.new(
       :summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] target_type
+    #   The type of operation being targeted by the Hook.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_id
+    #   The logical ID of the target the operation is acting on by the Hook.
+    #   If the target is a change set, it's the ARN of the change set.
+    #
+    #   If the target is a Cloud Control API operation, this will be the
+    #   `HookRequestToken` returned by the Cloud Control API operation
+    #   request. For more information on the `HookRequestToken`, see
+    #   [ProgressEvent][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_ProgressEvent.html
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A string that identifies the next page of events that you want to
+    #   retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListHookResultsInput AWS API Documentation
+    #
+    class ListHookResultsInput < Struct.new(
+      :target_type,
+      :target_id,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] target_type
+    #   The type of operation being targeted by the Hook.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_id
+    #   The logical ID of the target the operation is acting on by the Hook.
+    #   If the target is a change set, it's the ARN of the change set.
+    #
+    #   If the target is a Cloud Control API operation, this will be the
+    #   `HooksRequestToken` returned by the Cloud Control API operation
+    #   request. For more information on the `HooksRequestToken`, see
+    #   [ProgressEvent][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_ProgressEvent.html
+    #   @return [String]
+    #
+    # @!attribute [rw] hook_results
+    #   A list of `HookResultSummary` structures that provides the status
+    #   and Hook status reason for each Hook invocation for the specified
+    #   target.
+    #   @return [Array<Types::HookResultSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token, `null` or empty if no more results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListHookResultsOutput AWS API Documentation
+    #
+    class ListHookResultsOutput < Struct.new(
+      :target_type,
+      :target_id,
+      :hook_results,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -5695,7 +5821,6 @@ module Aws::CloudFormation
     #
     #     * Public extensions that you have activated in this account and
     #       Region.
-    #
     #   * `PUBLIC`: Extensions that are publicly visible and available to be
     #     activated within any Amazon Web Services account. This includes
     #     extensions from Amazon Web Services, in addition to third-party
@@ -7953,7 +8078,6 @@ module Aws::CloudFormation
     #     * The stack was part of a `CreateStackSet` or `UpdateStackSet`
     #       operation that failed or was stopped before the stack was
     #       created or updated.
-    #
     #   * `CURRENT`: The stack is currently up to date with the stack set.
     #   @return [String]
     #
@@ -8222,7 +8346,6 @@ module Aws::CloudFormation
     #     * The stack was part of a `CreateStackSet` or `UpdateStackSet`
     #       operation that failed or was stopped before the stack was
     #       created or updated.
-    #
     #   * `CURRENT`: The stack is currently up to date with the stack set.
     #   @return [String]
     #
@@ -10225,7 +10348,6 @@ module Aws::CloudFormation
     #
     #     * Public extensions from publishers other than Amazon, whether
     #       activated or not.
-    #
     #   * `AWS_TYPES`: Extensions available for use from Amazon.
     #   @return [String]
     #
@@ -10640,7 +10762,6 @@ module Aws::CloudFormation
     #
     #     * If you don't specify either of these capabilities,
     #       CloudFormation returns an `InsufficientCapabilities` error.
-    #
     #     If your stack template contains these resources, we suggest that
     #     you review all permissions associated with them and edit their
     #     permissions if necessary.
@@ -10658,7 +10779,6 @@ module Aws::CloudFormation
     #     * [ AWS::IAM::User][6]
     #
     #     * [AWS::IAM::UserToGroupAddition][7]
-    #
     #     For more information, see [Acknowledging IAM resources in
     #     CloudFormation templates][8].
     #
@@ -11079,7 +11199,6 @@ module Aws::CloudFormation
     #
     #     * If you don't specify either of these capabilities,
     #       CloudFormation returns an `InsufficientCapabilities` error.
-    #
     #     If your stack template contains these resources, we recommend that
     #     you review all permissions associated with them and edit their
     #     permissions if necessary.
@@ -11097,7 +11216,6 @@ module Aws::CloudFormation
     #     * [AWS::IAM::User][6]
     #
     #     * [AWS::IAM::UserToGroupAddition][7]
-    #
     #     For more information, see [Acknowledging IAM resources in
     #     CloudFormation templates][8].
     #

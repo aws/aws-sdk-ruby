@@ -110,6 +110,11 @@ module Aws::RDSDataService
       SENSITIVE: []
     end
 
+    class DatabaseResumingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class DatabaseUnavailableException < Aws::EmptyStructure
     end
 

@@ -99,7 +99,6 @@ module Aws::FSx
     #
     #     * For Lustre, storage optimization consists of rebalancing the
     #       data across the existing and newly added file servers.
-    #
     #     You can track the storage-optimization progress using the
     #     `ProgressPercent` property. When `STORAGE_OPTIMIZATION` has been
     #     completed successfully, the parent `FILE_SYSTEM_UPDATE` action
@@ -3632,7 +3631,6 @@ module Aws::FSx
     #       `nfs://filer-domain-name`, which indicates the root of the
     #       subdirectories specified with the `DataRepositorySubdirectories`
     #       parameter.
-    #
     #   * For Amazon File Cache, the path can be an S3 bucket or prefix in
     #     the format `s3://bucket-name/prefix/` (where `prefix` is
     #     optional).
@@ -5729,7 +5727,6 @@ module Aws::FSx
     #       `nfs://filer-domain-name`, which indicates the root of the
     #       subdirectories specified with the `DataRepositorySubdirectories`
     #       parameter.
-    #
     #   * The path can be an S3 bucket or prefix in the format
     #     `s3://bucket-name/prefix/` (where `prefix` is optional).
     #   @return [String]

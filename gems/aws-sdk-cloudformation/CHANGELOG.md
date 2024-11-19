@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.124.0 (2024-11-18)
+------------------
+
+* Feature - This release adds a new API, ListHookResults, that allows retrieving CloudFormation Hooks invocation results for hooks invoked during a create change set operation or Cloud Control API operation
+
 1.123.0 (2024-11-06)
 ------------------
 

@@ -447,6 +447,51 @@ module Aws::QConnect
 
     # @!group API Operations
 
+    # Activates a specific version of the Amazon Q in Connect message
+    # template. After the version is activated, the previous active version
+    # will be deactivated automatically. You can use the `$ACTIVE_VERSION`
+    # qualifier later to reference the version that is in active status.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The identifier of the knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
+    #
+    # @option params [required, String] :message_template_id
+    #   The identifier of the message template. Can be either the ID or the
+    #   ARN. It cannot contain any qualifier.
+    #
+    # @option params [required, Integer] :version_number
+    #   The version number of the message template version to activate.
+    #
+    # @return [Types::ActivateMessageTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ActivateMessageTemplateResponse#message_template_arn #message_template_arn} => String
+    #   * {Types::ActivateMessageTemplateResponse#message_template_id #message_template_id} => String
+    #   * {Types::ActivateMessageTemplateResponse#version_number #version_number} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.activate_message_template({
+    #     knowledge_base_id: "UuidOrArn", # required
+    #     message_template_id: "UuidOrArnOrEitherWithQualifier", # required
+    #     version_number: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_template_arn #=> String
+    #   resp.message_template_id #=> String
+    #   resp.version_number #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ActivateMessageTemplate AWS API Documentation
+    #
+    # @overload activate_message_template(params = {})
+    # @param [Hash] params ({})
+    def activate_message_template(params = {}, options = {})
+      req = build_request(:activate_message_template, params)
+      req.send_request(options)
+    end
+
     # Creates an Amazon Q in Connect AI Agent.
     #
     # @option params [required, String] :assistant_id
@@ -455,9 +500,9 @@ module Aws::QConnect
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. If not provided, the AWS SDK populates
-    #   this field. For more information about idempotency, see [Making
-    #   retries safe with idempotent APIs][1].
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1]..
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -660,9 +705,9 @@ module Aws::QConnect
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. If not provided, the AWS SDK populates
-    #   this field. For more information about idempotency, see [Making
-    #   retries safe with idempotent APIs][1].
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1]..
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -766,9 +811,9 @@ module Aws::QConnect
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. If not provided, the AWS SDK populates
-    #   this field. For more information about idempotency, see [Making
-    #   retries safe with idempotent APIs][1].
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1]..
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -868,16 +913,16 @@ module Aws::QConnect
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. If not provided, the AWS SDK populates
-    #   this field. For more information about idempotency, see [Making
-    #   retries safe with idempotent APIs][1].
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1]..
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     #
     #
-    #   [1]: http://aws.amazon.com/https:/aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   [1]: http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @option params [Time,DateTime,Date,Integer,String] :modified_time
     #   The time the AI Prompt was last modified.
@@ -939,7 +984,7 @@ module Aws::QConnect
     #
     #
     #
-    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   [1]: http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @option params [String] :description
     #   The description of the assistant.
@@ -1042,7 +1087,7 @@ module Aws::QConnect
     #
     #
     #
-    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   [1]: http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
@@ -1104,7 +1149,7 @@ module Aws::QConnect
     #
     #
     #
-    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   [1]: http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @option params [required, String] :knowledge_base_id
     #   The identifier of the knowledge base. This should not be a
@@ -1237,7 +1282,7 @@ module Aws::QConnect
     #
     #
     #
-    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   [1]: http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @option params [required, String] :content_id
     #   The identifier of the content.
@@ -1330,7 +1375,7 @@ module Aws::QConnect
     #
     #
     #
-    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   [1]: http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @option params [String] :description
     #   The description.
@@ -1365,7 +1410,7 @@ module Aws::QConnect
     #
     # @option params [Types::SourceConfiguration] :source_configuration
     #   The source of the knowledge base content. Only set this argument for
-    #   EXTERNAL knowledge bases.
+    #   EXTERNAL or Managed knowledge bases.
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
@@ -1498,6 +1543,518 @@ module Aws::QConnect
       req.send_request(options)
     end
 
+    # Creates an Amazon Q in Connect message template. The name of the
+    # message template has to be unique for each knowledge base. The channel
+    # subtype of the message template is immutable and cannot be modified
+    # after creation. After the message template is created, you can use the
+    # `$LATEST` qualifier to reference the created message template.
+    #
+    # @option params [required, String] :channel_subtype
+    #   The channel subtype this message template applies to.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @option params [required, Types::MessageTemplateContentProvider] :content
+    #   The content of the message template.
+    #
+    # @option params [Types::MessageTemplateAttributes] :default_attributes
+    #   An object that specifies the default values to use for variables in
+    #   the message template. This object contains different categories of
+    #   key-value pairs. Each key defines a variable or placeholder in the
+    #   message template. The corresponding value defines the default value
+    #   for that variable.
+    #
+    # @option params [String] :description
+    #   The description of the message template.
+    #
+    # @option params [Types::GroupingConfiguration] :grouping_configuration
+    #   The configuration information of the grouping of Amazon Q in Connect
+    #   users.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The identifier of the knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
+    #
+    # @option params [String] :language
+    #   The language code value for the language in which the quick response
+    #   is written. The supported language codes include `de_DE`, `en_US`,
+    #   `es_ES`, `fr_FR`, `id_ID`, `it_IT`, `ja_JP`, `ko_KR`, `pt_BR`,
+    #   `zh_CN`, `zh_TW`
+    #
+    # @option params [required, String] :name
+    #   The name of the message template.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #
+    # @return [Types::CreateMessageTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateMessageTemplateResponse#message_template #message_template} => Types::MessageTemplateData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_message_template({
+    #     channel_subtype: "EMAIL", # required, accepts EMAIL, SMS
+    #     client_token: "ClientToken",
+    #     content: { # required
+    #       email: {
+    #         body: {
+    #           html: {
+    #             content: "NonEmptyUnlimitedString",
+    #           },
+    #           plain_text: {
+    #             content: "NonEmptyUnlimitedString",
+    #           },
+    #         },
+    #         headers: [
+    #           {
+    #             name: "EmailHeaderKey",
+    #             value: "EmailHeaderValue",
+    #           },
+    #         ],
+    #         subject: "NonEmptyUnlimitedString",
+    #       },
+    #       sms: {
+    #         body: {
+    #           plain_text: {
+    #             content: "NonEmptyUnlimitedString",
+    #           },
+    #         },
+    #       },
+    #     },
+    #     default_attributes: {
+    #       agent_attributes: {
+    #         first_name: "MessageTemplateAttributeValue",
+    #         last_name: "MessageTemplateAttributeValue",
+    #       },
+    #       custom_attributes: {
+    #         "MessageTemplateAttributeKey" => "MessageTemplateAttributeValue",
+    #       },
+    #       customer_profile_attributes: {
+    #         account_number: "MessageTemplateAttributeValue",
+    #         additional_information: "MessageTemplateAttributeValue",
+    #         address1: "MessageTemplateAttributeValue",
+    #         address2: "MessageTemplateAttributeValue",
+    #         address3: "MessageTemplateAttributeValue",
+    #         address4: "MessageTemplateAttributeValue",
+    #         billing_address_1: "MessageTemplateAttributeValue",
+    #         billing_address_2: "MessageTemplateAttributeValue",
+    #         billing_address_3: "MessageTemplateAttributeValue",
+    #         billing_address_4: "MessageTemplateAttributeValue",
+    #         billing_city: "MessageTemplateAttributeValue",
+    #         billing_country: "MessageTemplateAttributeValue",
+    #         billing_county: "MessageTemplateAttributeValue",
+    #         billing_postal_code: "MessageTemplateAttributeValue",
+    #         billing_province: "MessageTemplateAttributeValue",
+    #         billing_state: "MessageTemplateAttributeValue",
+    #         birth_date: "MessageTemplateAttributeValue",
+    #         business_email_address: "MessageTemplateAttributeValue",
+    #         business_name: "MessageTemplateAttributeValue",
+    #         business_phone_number: "MessageTemplateAttributeValue",
+    #         city: "MessageTemplateAttributeValue",
+    #         country: "MessageTemplateAttributeValue",
+    #         county: "MessageTemplateAttributeValue",
+    #         custom: {
+    #           "MessageTemplateAttributeKey" => "MessageTemplateAttributeValue",
+    #         },
+    #         email_address: "MessageTemplateAttributeValue",
+    #         first_name: "MessageTemplateAttributeValue",
+    #         gender: "MessageTemplateAttributeValue",
+    #         home_phone_number: "MessageTemplateAttributeValue",
+    #         last_name: "MessageTemplateAttributeValue",
+    #         mailing_address_1: "MessageTemplateAttributeValue",
+    #         mailing_address_2: "MessageTemplateAttributeValue",
+    #         mailing_address_3: "MessageTemplateAttributeValue",
+    #         mailing_address_4: "MessageTemplateAttributeValue",
+    #         mailing_city: "MessageTemplateAttributeValue",
+    #         mailing_country: "MessageTemplateAttributeValue",
+    #         mailing_county: "MessageTemplateAttributeValue",
+    #         mailing_postal_code: "MessageTemplateAttributeValue",
+    #         mailing_province: "MessageTemplateAttributeValue",
+    #         mailing_state: "MessageTemplateAttributeValue",
+    #         middle_name: "MessageTemplateAttributeValue",
+    #         mobile_phone_number: "MessageTemplateAttributeValue",
+    #         party_type: "MessageTemplateAttributeValue",
+    #         phone_number: "MessageTemplateAttributeValue",
+    #         postal_code: "MessageTemplateAttributeValue",
+    #         profile_arn: "MessageTemplateAttributeValue",
+    #         profile_id: "MessageTemplateAttributeValue",
+    #         province: "MessageTemplateAttributeValue",
+    #         shipping_address_1: "MessageTemplateAttributeValue",
+    #         shipping_address_2: "MessageTemplateAttributeValue",
+    #         shipping_address_3: "MessageTemplateAttributeValue",
+    #         shipping_address_4: "MessageTemplateAttributeValue",
+    #         shipping_city: "MessageTemplateAttributeValue",
+    #         shipping_country: "MessageTemplateAttributeValue",
+    #         shipping_county: "MessageTemplateAttributeValue",
+    #         shipping_postal_code: "MessageTemplateAttributeValue",
+    #         shipping_province: "MessageTemplateAttributeValue",
+    #         shipping_state: "MessageTemplateAttributeValue",
+    #         state: "MessageTemplateAttributeValue",
+    #       },
+    #       system_attributes: {
+    #         customer_endpoint: {
+    #           address: "MessageTemplateAttributeValue",
+    #         },
+    #         name: "MessageTemplateAttributeValue",
+    #         system_endpoint: {
+    #           address: "MessageTemplateAttributeValue",
+    #         },
+    #       },
+    #     },
+    #     description: "Description",
+    #     grouping_configuration: {
+    #       criteria: "GroupingCriteria",
+    #       values: ["GroupingValue"],
+    #     },
+    #     knowledge_base_id: "UuidOrArn", # required
+    #     language: "LanguageCode",
+    #     name: "Name", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_template.attribute_types #=> Array
+    #   resp.message_template.attribute_types[0] #=> String, one of "SYSTEM", "AGENT", "CUSTOMER_PROFILE", "CUSTOM"
+    #   resp.message_template.channel_subtype #=> String, one of "EMAIL", "SMS"
+    #   resp.message_template.content.email.body.html.content #=> String
+    #   resp.message_template.content.email.body.plain_text.content #=> String
+    #   resp.message_template.content.email.headers #=> Array
+    #   resp.message_template.content.email.headers[0].name #=> String
+    #   resp.message_template.content.email.headers[0].value #=> String
+    #   resp.message_template.content.email.subject #=> String
+    #   resp.message_template.content.sms.body.plain_text.content #=> String
+    #   resp.message_template.created_time #=> Time
+    #   resp.message_template.default_attributes.agent_attributes.first_name #=> String
+    #   resp.message_template.default_attributes.agent_attributes.last_name #=> String
+    #   resp.message_template.default_attributes.custom_attributes #=> Hash
+    #   resp.message_template.default_attributes.custom_attributes["MessageTemplateAttributeKey"] #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.account_number #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.additional_information #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.address1 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.address2 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.address3 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.address4 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_address_1 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_address_2 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_address_3 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_address_4 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_city #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_country #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_county #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_postal_code #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_province #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_state #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.birth_date #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.business_email_address #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.business_name #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.business_phone_number #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.city #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.country #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.county #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.custom #=> Hash
+    #   resp.message_template.default_attributes.customer_profile_attributes.custom["MessageTemplateAttributeKey"] #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.email_address #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.first_name #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.gender #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.home_phone_number #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.last_name #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_address_1 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_address_2 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_address_3 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_address_4 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_city #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_country #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_county #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_postal_code #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_province #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_state #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.middle_name #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mobile_phone_number #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.party_type #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.phone_number #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.postal_code #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.profile_arn #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.profile_id #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.province #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_address_1 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_address_2 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_address_3 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_address_4 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_city #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_country #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_county #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_postal_code #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_province #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_state #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.state #=> String
+    #   resp.message_template.default_attributes.system_attributes.customer_endpoint.address #=> String
+    #   resp.message_template.default_attributes.system_attributes.name #=> String
+    #   resp.message_template.default_attributes.system_attributes.system_endpoint.address #=> String
+    #   resp.message_template.description #=> String
+    #   resp.message_template.grouping_configuration.criteria #=> String
+    #   resp.message_template.grouping_configuration.values #=> Array
+    #   resp.message_template.grouping_configuration.values[0] #=> String
+    #   resp.message_template.knowledge_base_arn #=> String
+    #   resp.message_template.knowledge_base_id #=> String
+    #   resp.message_template.language #=> String
+    #   resp.message_template.last_modified_by #=> String
+    #   resp.message_template.last_modified_time #=> Time
+    #   resp.message_template.message_template_arn #=> String
+    #   resp.message_template.message_template_content_sha_256 #=> String
+    #   resp.message_template.message_template_id #=> String
+    #   resp.message_template.name #=> String
+    #   resp.message_template.tags #=> Hash
+    #   resp.message_template.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/CreateMessageTemplate AWS API Documentation
+    #
+    # @overload create_message_template(params = {})
+    # @param [Hash] params ({})
+    def create_message_template(params = {}, options = {})
+      req = build_request(:create_message_template, params)
+      req.send_request(options)
+    end
+
+    # Uploads an attachment file to the specified Amazon Q in Connect
+    # message template. The name of the message template attachment has to
+    # be unique for each message template referenced by the `$LATEST`
+    # qualifier. The body of the attachment file should be encoded using
+    # base64 encoding. After the file is uploaded, you can use the
+    # pre-signed Amazon S3 URL returned in response to download the uploaded
+    # file.
+    #
+    # @option params [required, String] :body
+    #   The body of the attachment file being uploaded. It should be encoded
+    #   using base64 encoding.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @option params [required, String] :content_disposition
+    #   The presentation information for the attachment file.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The identifier of the knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
+    #
+    # @option params [required, String] :message_template_id
+    #   The identifier of the message template. Can be either the ID or the
+    #   ARN. It cannot contain any qualifier.
+    #
+    # @option params [required, String] :name
+    #   The name of the attachment file being uploaded. The name should
+    #   include the file extension.
+    #
+    # @return [Types::CreateMessageTemplateAttachmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateMessageTemplateAttachmentResponse#attachment #attachment} => Types::MessageTemplateAttachment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_message_template_attachment({
+    #     body: "NonEmptyUnlimitedString", # required
+    #     client_token: "ClientToken",
+    #     content_disposition: "ATTACHMENT", # required, accepts ATTACHMENT
+    #     knowledge_base_id: "UuidOrArn", # required
+    #     message_template_id: "UuidOrArnOrEitherWithQualifier", # required
+    #     name: "AttachmentFileName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attachment.attachment_id #=> String
+    #   resp.attachment.content_disposition #=> String, one of "ATTACHMENT"
+    #   resp.attachment.name #=> String
+    #   resp.attachment.uploaded_time #=> Time
+    #   resp.attachment.url #=> String
+    #   resp.attachment.url_expiry #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/CreateMessageTemplateAttachment AWS API Documentation
+    #
+    # @overload create_message_template_attachment(params = {})
+    # @param [Hash] params ({})
+    def create_message_template_attachment(params = {}, options = {})
+      req = build_request(:create_message_template_attachment, params)
+      req.send_request(options)
+    end
+
+    # Creates a new Amazon Q in Connect message template version from the
+    # current content and configuration of a message template. Versions are
+    # immutable and monotonically increasing. Once a version is created, you
+    # can reference a specific version of the message template by passing in
+    # `<message-template-id>:<versionNumber>` as the message template
+    # identifier. An error is displayed if the supplied
+    # `messageTemplateContentSha256` is different from the
+    # `messageTemplateContentSha256` of the message template with `$LATEST`
+    # qualifier. If multiple `CreateMessageTemplateVersion` requests are
+    # made while the message template remains the same, only the first
+    # invocation creates a new version and the succeeding requests will
+    # return the same response as the first invocation.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The identifier of the knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
+    #
+    # @option params [String] :message_template_content_sha_256
+    #   The checksum value of the message template content that is referenced
+    #   by the `$LATEST` qualifier. It can be returned in
+    #   `MessageTemplateData` or `ExtendedMessageTemplateData`. It’s
+    #   calculated by content, language, `defaultAttributes` and `Attachments`
+    #   of the message template. If not supplied, the message template version
+    #   will be created based on the message template content that is
+    #   referenced by the `$LATEST` qualifier by default.
+    #
+    # @option params [required, String] :message_template_id
+    #   The identifier of the message template. Can be either the ID or the
+    #   ARN. It cannot contain any qualifier.
+    #
+    # @return [Types::CreateMessageTemplateVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateMessageTemplateVersionResponse#message_template #message_template} => Types::ExtendedMessageTemplateData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_message_template_version({
+    #     knowledge_base_id: "UuidOrArn", # required
+    #     message_template_content_sha_256: "MessageTemplateContentSha256",
+    #     message_template_id: "UuidOrArnOrEitherWithQualifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_template.attachments #=> Array
+    #   resp.message_template.attachments[0].attachment_id #=> String
+    #   resp.message_template.attachments[0].content_disposition #=> String, one of "ATTACHMENT"
+    #   resp.message_template.attachments[0].name #=> String
+    #   resp.message_template.attachments[0].uploaded_time #=> Time
+    #   resp.message_template.attachments[0].url #=> String
+    #   resp.message_template.attachments[0].url_expiry #=> Time
+    #   resp.message_template.attribute_types #=> Array
+    #   resp.message_template.attribute_types[0] #=> String, one of "SYSTEM", "AGENT", "CUSTOMER_PROFILE", "CUSTOM"
+    #   resp.message_template.channel_subtype #=> String, one of "EMAIL", "SMS"
+    #   resp.message_template.content.email.body.html.content #=> String
+    #   resp.message_template.content.email.body.plain_text.content #=> String
+    #   resp.message_template.content.email.headers #=> Array
+    #   resp.message_template.content.email.headers[0].name #=> String
+    #   resp.message_template.content.email.headers[0].value #=> String
+    #   resp.message_template.content.email.subject #=> String
+    #   resp.message_template.content.sms.body.plain_text.content #=> String
+    #   resp.message_template.created_time #=> Time
+    #   resp.message_template.default_attributes.agent_attributes.first_name #=> String
+    #   resp.message_template.default_attributes.agent_attributes.last_name #=> String
+    #   resp.message_template.default_attributes.custom_attributes #=> Hash
+    #   resp.message_template.default_attributes.custom_attributes["MessageTemplateAttributeKey"] #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.account_number #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.additional_information #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.address1 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.address2 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.address3 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.address4 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_address_1 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_address_2 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_address_3 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_address_4 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_city #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_country #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_county #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_postal_code #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_province #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_state #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.birth_date #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.business_email_address #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.business_name #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.business_phone_number #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.city #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.country #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.county #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.custom #=> Hash
+    #   resp.message_template.default_attributes.customer_profile_attributes.custom["MessageTemplateAttributeKey"] #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.email_address #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.first_name #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.gender #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.home_phone_number #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.last_name #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_address_1 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_address_2 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_address_3 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_address_4 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_city #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_country #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_county #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_postal_code #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_province #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_state #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.middle_name #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mobile_phone_number #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.party_type #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.phone_number #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.postal_code #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.profile_arn #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.profile_id #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.province #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_address_1 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_address_2 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_address_3 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_address_4 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_city #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_country #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_county #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_postal_code #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_province #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_state #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.state #=> String
+    #   resp.message_template.default_attributes.system_attributes.customer_endpoint.address #=> String
+    #   resp.message_template.default_attributes.system_attributes.name #=> String
+    #   resp.message_template.default_attributes.system_attributes.system_endpoint.address #=> String
+    #   resp.message_template.description #=> String
+    #   resp.message_template.grouping_configuration.criteria #=> String
+    #   resp.message_template.grouping_configuration.values #=> Array
+    #   resp.message_template.grouping_configuration.values[0] #=> String
+    #   resp.message_template.is_active #=> Boolean
+    #   resp.message_template.knowledge_base_arn #=> String
+    #   resp.message_template.knowledge_base_id #=> String
+    #   resp.message_template.language #=> String
+    #   resp.message_template.last_modified_by #=> String
+    #   resp.message_template.last_modified_time #=> Time
+    #   resp.message_template.message_template_arn #=> String
+    #   resp.message_template.message_template_content_sha_256 #=> String
+    #   resp.message_template.message_template_id #=> String
+    #   resp.message_template.name #=> String
+    #   resp.message_template.tags #=> Hash
+    #   resp.message_template.tags["TagKey"] #=> String
+    #   resp.message_template.version_number #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/CreateMessageTemplateVersion AWS API Documentation
+    #
+    # @overload create_message_template_version(params = {})
+    # @param [Hash] params ({})
+    def create_message_template_version(params = {}, options = {})
+      req = build_request(:create_message_template_version, params)
+      req.send_request(options)
+    end
+
     # Creates an Amazon Q in Connect quick response.
     #
     # @option params [Array<String>] :channels
@@ -1514,7 +2071,7 @@ module Aws::QConnect
     #
     #
     #
-    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   [1]: http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @option params [required, Types::QuickResponseDataProvider] :content
     #   The content of the quick response.
@@ -1646,7 +2203,7 @@ module Aws::QConnect
     #
     #
     #
-    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   [1]: http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @option params [String] :description
     #   The description.
@@ -1736,6 +2293,50 @@ module Aws::QConnect
     # @param [Hash] params ({})
     def create_session(params = {}, options = {})
       req = build_request(:create_session, params)
+      req.send_request(options)
+    end
+
+    # Deactivates a specific version of the Amazon Q in Connect message
+    # template . After the version is deactivated, you can no longer use the
+    # `$ACTIVE_VERSION` qualifier to reference the version in active status.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The identifier of the knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
+    #
+    # @option params [required, String] :message_template_id
+    #   The identifier of the message template. Can be either the ID or the
+    #   ARN. It cannot contain any qualifier.
+    #
+    # @option params [required, Integer] :version_number
+    #   The version number of the message template version to deactivate.
+    #
+    # @return [Types::DeactivateMessageTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeactivateMessageTemplateResponse#message_template_arn #message_template_arn} => String
+    #   * {Types::DeactivateMessageTemplateResponse#message_template_id #message_template_id} => String
+    #   * {Types::DeactivateMessageTemplateResponse#version_number #version_number} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deactivate_message_template({
+    #     knowledge_base_id: "UuidOrArn", # required
+    #     message_template_id: "UuidOrArnOrEitherWithQualifier", # required
+    #     version_number: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_template_arn #=> String
+    #   resp.message_template_id #=> String
+    #   resp.version_number #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/DeactivateMessageTemplate AWS API Documentation
+    #
+    # @overload deactivate_message_template(params = {})
+    # @param [Hash] params ({})
+    def deactivate_message_template(params = {}, options = {})
+      req = build_request(:deactivate_message_template, params)
       req.send_request(options)
     end
 
@@ -2038,6 +2639,73 @@ module Aws::QConnect
     # @param [Hash] params ({})
     def delete_knowledge_base(params = {}, options = {})
       req = build_request(:delete_knowledge_base, params)
+      req.send_request(options)
+    end
+
+    # Deletes an Amazon Q in Connect message template entirely or a specific
+    # version of the message template if version is supplied in the request.
+    # You can provide the message template identifier as
+    # `<message-template-id>:<versionNumber>` to delete a specific version
+    # of the message template. If it is not supplied, the message template
+    # and all available versions will be deleted.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The identifier of the knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
+    #
+    # @option params [required, String] :message_template_id
+    #   The identifier of the message template. Can be either the ID or the
+    #   ARN.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_message_template({
+    #     knowledge_base_id: "UuidOrArn", # required
+    #     message_template_id: "UuidOrArnOrEitherWithQualifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/DeleteMessageTemplate AWS API Documentation
+    #
+    # @overload delete_message_template(params = {})
+    # @param [Hash] params ({})
+    def delete_message_template(params = {}, options = {})
+      req = build_request(:delete_message_template, params)
+      req.send_request(options)
+    end
+
+    # Deletes the attachment file from the Amazon Q in Connect message
+    # template that is referenced by `$LATEST` qualifier. Attachments on
+    # available message template versions will remain unchanged.
+    #
+    # @option params [required, String] :attachment_id
+    #   The identifier of the attachment file.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The identifier of the knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
+    #
+    # @option params [required, String] :message_template_id
+    #   The identifier of the message template. Can be either the ID or the
+    #   ARN. It cannot contain any qualifier.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_message_template_attachment({
+    #     attachment_id: "Uuid", # required
+    #     knowledge_base_id: "UuidOrArn", # required
+    #     message_template_id: "UuidOrArnOrEitherWithQualifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/DeleteMessageTemplateAttachment AWS API Documentation
+    #
+    # @overload delete_message_template_attachment(params = {})
+    # @param [Hash] params ({})
+    def delete_message_template_attachment(params = {}, options = {})
+      req = build_request(:delete_message_template_attachment, params)
       req.send_request(options)
     end
 
@@ -2545,6 +3213,145 @@ module Aws::QConnect
     # @param [Hash] params ({})
     def get_knowledge_base(params = {}, options = {})
       req = build_request(:get_knowledge_base, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the Amazon Q in Connect message template. The message
+    # template identifier can contain an optional qualifier, for example,
+    # `<message-template-id>:<qualifier>`, which is either an actual version
+    # number or an Amazon Q Connect managed qualifier `$ACTIVE_VERSION` \|
+    # `$LATEST`. If it is not supplied, then `$LATEST` is assumed
+    # implicitly.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The identifier of the knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
+    #
+    # @option params [required, String] :message_template_id
+    #   The identifier of the message template. Can be either the ID or the
+    #   ARN.
+    #
+    # @return [Types::GetMessageTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMessageTemplateResponse#message_template #message_template} => Types::ExtendedMessageTemplateData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_message_template({
+    #     knowledge_base_id: "UuidOrArn", # required
+    #     message_template_id: "UuidOrArnOrEitherWithQualifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_template.attachments #=> Array
+    #   resp.message_template.attachments[0].attachment_id #=> String
+    #   resp.message_template.attachments[0].content_disposition #=> String, one of "ATTACHMENT"
+    #   resp.message_template.attachments[0].name #=> String
+    #   resp.message_template.attachments[0].uploaded_time #=> Time
+    #   resp.message_template.attachments[0].url #=> String
+    #   resp.message_template.attachments[0].url_expiry #=> Time
+    #   resp.message_template.attribute_types #=> Array
+    #   resp.message_template.attribute_types[0] #=> String, one of "SYSTEM", "AGENT", "CUSTOMER_PROFILE", "CUSTOM"
+    #   resp.message_template.channel_subtype #=> String, one of "EMAIL", "SMS"
+    #   resp.message_template.content.email.body.html.content #=> String
+    #   resp.message_template.content.email.body.plain_text.content #=> String
+    #   resp.message_template.content.email.headers #=> Array
+    #   resp.message_template.content.email.headers[0].name #=> String
+    #   resp.message_template.content.email.headers[0].value #=> String
+    #   resp.message_template.content.email.subject #=> String
+    #   resp.message_template.content.sms.body.plain_text.content #=> String
+    #   resp.message_template.created_time #=> Time
+    #   resp.message_template.default_attributes.agent_attributes.first_name #=> String
+    #   resp.message_template.default_attributes.agent_attributes.last_name #=> String
+    #   resp.message_template.default_attributes.custom_attributes #=> Hash
+    #   resp.message_template.default_attributes.custom_attributes["MessageTemplateAttributeKey"] #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.account_number #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.additional_information #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.address1 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.address2 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.address3 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.address4 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_address_1 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_address_2 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_address_3 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_address_4 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_city #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_country #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_county #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_postal_code #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_province #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_state #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.birth_date #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.business_email_address #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.business_name #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.business_phone_number #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.city #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.country #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.county #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.custom #=> Hash
+    #   resp.message_template.default_attributes.customer_profile_attributes.custom["MessageTemplateAttributeKey"] #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.email_address #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.first_name #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.gender #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.home_phone_number #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.last_name #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_address_1 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_address_2 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_address_3 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_address_4 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_city #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_country #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_county #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_postal_code #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_province #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_state #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.middle_name #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mobile_phone_number #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.party_type #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.phone_number #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.postal_code #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.profile_arn #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.profile_id #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.province #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_address_1 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_address_2 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_address_3 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_address_4 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_city #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_country #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_county #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_postal_code #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_province #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_state #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.state #=> String
+    #   resp.message_template.default_attributes.system_attributes.customer_endpoint.address #=> String
+    #   resp.message_template.default_attributes.system_attributes.name #=> String
+    #   resp.message_template.default_attributes.system_attributes.system_endpoint.address #=> String
+    #   resp.message_template.description #=> String
+    #   resp.message_template.grouping_configuration.criteria #=> String
+    #   resp.message_template.grouping_configuration.values #=> Array
+    #   resp.message_template.grouping_configuration.values[0] #=> String
+    #   resp.message_template.is_active #=> Boolean
+    #   resp.message_template.knowledge_base_arn #=> String
+    #   resp.message_template.knowledge_base_id #=> String
+    #   resp.message_template.language #=> String
+    #   resp.message_template.last_modified_by #=> String
+    #   resp.message_template.last_modified_time #=> Time
+    #   resp.message_template.message_template_arn #=> String
+    #   resp.message_template.message_template_content_sha_256 #=> String
+    #   resp.message_template.message_template_id #=> String
+    #   resp.message_template.name #=> String
+    #   resp.message_template.tags #=> Hash
+    #   resp.message_template.tags["TagKey"] #=> String
+    #   resp.message_template.version_number #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/GetMessageTemplate AWS API Documentation
+    #
+    # @overload get_message_template(params = {})
+    # @param [Hash] params ({})
+    def get_message_template(params = {}, options = {})
+      req = build_request(:get_message_template, params)
       req.send_request(options)
     end
 
@@ -3472,6 +4279,120 @@ module Aws::QConnect
       req.send_request(options)
     end
 
+    # Lists all the available versions for the specified Amazon Q in Connect
+    # message template.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The identifier of the knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [required, String] :message_template_id
+    #   The identifier of the message template. Can be either the ID or the
+    #   ARN. It cannot contain any qualifier.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @return [Types::ListMessageTemplateVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMessageTemplateVersionsResponse#message_template_version_summaries #message_template_version_summaries} => Array&lt;Types::MessageTemplateVersionSummary&gt;
+    #   * {Types::ListMessageTemplateVersionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_message_template_versions({
+    #     knowledge_base_id: "UuidOrArn", # required
+    #     max_results: 1,
+    #     message_template_id: "UuidOrArnOrEitherWithQualifier", # required
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_template_version_summaries #=> Array
+    #   resp.message_template_version_summaries[0].channel_subtype #=> String, one of "EMAIL", "SMS"
+    #   resp.message_template_version_summaries[0].is_active #=> Boolean
+    #   resp.message_template_version_summaries[0].knowledge_base_arn #=> String
+    #   resp.message_template_version_summaries[0].knowledge_base_id #=> String
+    #   resp.message_template_version_summaries[0].message_template_arn #=> String
+    #   resp.message_template_version_summaries[0].message_template_id #=> String
+    #   resp.message_template_version_summaries[0].name #=> String
+    #   resp.message_template_version_summaries[0].version_number #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ListMessageTemplateVersions AWS API Documentation
+    #
+    # @overload list_message_template_versions(params = {})
+    # @param [Hash] params ({})
+    def list_message_template_versions(params = {}, options = {})
+      req = build_request(:list_message_template_versions, params)
+      req.send_request(options)
+    end
+
+    # Lists all the available Amazon Q in Connect message templates for the
+    # specified knowledge base.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The identifier of the knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @return [Types::ListMessageTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMessageTemplatesResponse#message_template_summaries #message_template_summaries} => Array&lt;Types::MessageTemplateSummary&gt;
+    #   * {Types::ListMessageTemplatesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_message_templates({
+    #     knowledge_base_id: "UuidOrArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_template_summaries #=> Array
+    #   resp.message_template_summaries[0].active_version_number #=> Integer
+    #   resp.message_template_summaries[0].channel_subtype #=> String, one of "EMAIL", "SMS"
+    #   resp.message_template_summaries[0].created_time #=> Time
+    #   resp.message_template_summaries[0].description #=> String
+    #   resp.message_template_summaries[0].knowledge_base_arn #=> String
+    #   resp.message_template_summaries[0].knowledge_base_id #=> String
+    #   resp.message_template_summaries[0].last_modified_by #=> String
+    #   resp.message_template_summaries[0].last_modified_time #=> Time
+    #   resp.message_template_summaries[0].message_template_arn #=> String
+    #   resp.message_template_summaries[0].message_template_id #=> String
+    #   resp.message_template_summaries[0].name #=> String
+    #   resp.message_template_summaries[0].tags #=> Hash
+    #   resp.message_template_summaries[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ListMessageTemplates AWS API Documentation
+    #
+    # @overload list_message_templates(params = {})
+    # @param [Hash] params ({})
+    def list_message_templates(params = {}, options = {})
+      req = build_request(:list_message_templates, params)
+      req.send_request(options)
+    end
+
     # Lists information about quick response.
     #
     # @option params [required, String] :knowledge_base_id
@@ -3863,6 +4784,150 @@ module Aws::QConnect
       req.send_request(options)
     end
 
+    # Renders the Amazon Q in Connect message template based on the
+    # attribute values provided and generates the message content. For any
+    # variable present in the message template, if the attribute value is
+    # neither provided in the attribute request parameter nor the default
+    # attribute of the message template, the rendered message content will
+    # keep the variable placeholder as it is and return the attribute keys
+    # that are missing.
+    #
+    # @option params [required, Types::MessageTemplateAttributes] :attributes
+    #   An object that specifies the values to use for variables in the
+    #   message template. This object contains different categories of
+    #   key-value pairs. Each key defines a variable or placeholder in the
+    #   message template. The corresponding value defines the value for that
+    #   variable.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The identifier of the knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
+    #
+    # @option params [required, String] :message_template_id
+    #   The identifier of the message template. Can be either the ID or the
+    #   ARN.
+    #
+    # @return [Types::RenderMessageTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RenderMessageTemplateResponse#attachments #attachments} => Array&lt;Types::MessageTemplateAttachment&gt;
+    #   * {Types::RenderMessageTemplateResponse#attributes_not_interpolated #attributes_not_interpolated} => Array&lt;String&gt;
+    #   * {Types::RenderMessageTemplateResponse#content #content} => Types::MessageTemplateContentProvider
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.render_message_template({
+    #     attributes: { # required
+    #       agent_attributes: {
+    #         first_name: "MessageTemplateAttributeValue",
+    #         last_name: "MessageTemplateAttributeValue",
+    #       },
+    #       custom_attributes: {
+    #         "MessageTemplateAttributeKey" => "MessageTemplateAttributeValue",
+    #       },
+    #       customer_profile_attributes: {
+    #         account_number: "MessageTemplateAttributeValue",
+    #         additional_information: "MessageTemplateAttributeValue",
+    #         address1: "MessageTemplateAttributeValue",
+    #         address2: "MessageTemplateAttributeValue",
+    #         address3: "MessageTemplateAttributeValue",
+    #         address4: "MessageTemplateAttributeValue",
+    #         billing_address_1: "MessageTemplateAttributeValue",
+    #         billing_address_2: "MessageTemplateAttributeValue",
+    #         billing_address_3: "MessageTemplateAttributeValue",
+    #         billing_address_4: "MessageTemplateAttributeValue",
+    #         billing_city: "MessageTemplateAttributeValue",
+    #         billing_country: "MessageTemplateAttributeValue",
+    #         billing_county: "MessageTemplateAttributeValue",
+    #         billing_postal_code: "MessageTemplateAttributeValue",
+    #         billing_province: "MessageTemplateAttributeValue",
+    #         billing_state: "MessageTemplateAttributeValue",
+    #         birth_date: "MessageTemplateAttributeValue",
+    #         business_email_address: "MessageTemplateAttributeValue",
+    #         business_name: "MessageTemplateAttributeValue",
+    #         business_phone_number: "MessageTemplateAttributeValue",
+    #         city: "MessageTemplateAttributeValue",
+    #         country: "MessageTemplateAttributeValue",
+    #         county: "MessageTemplateAttributeValue",
+    #         custom: {
+    #           "MessageTemplateAttributeKey" => "MessageTemplateAttributeValue",
+    #         },
+    #         email_address: "MessageTemplateAttributeValue",
+    #         first_name: "MessageTemplateAttributeValue",
+    #         gender: "MessageTemplateAttributeValue",
+    #         home_phone_number: "MessageTemplateAttributeValue",
+    #         last_name: "MessageTemplateAttributeValue",
+    #         mailing_address_1: "MessageTemplateAttributeValue",
+    #         mailing_address_2: "MessageTemplateAttributeValue",
+    #         mailing_address_3: "MessageTemplateAttributeValue",
+    #         mailing_address_4: "MessageTemplateAttributeValue",
+    #         mailing_city: "MessageTemplateAttributeValue",
+    #         mailing_country: "MessageTemplateAttributeValue",
+    #         mailing_county: "MessageTemplateAttributeValue",
+    #         mailing_postal_code: "MessageTemplateAttributeValue",
+    #         mailing_province: "MessageTemplateAttributeValue",
+    #         mailing_state: "MessageTemplateAttributeValue",
+    #         middle_name: "MessageTemplateAttributeValue",
+    #         mobile_phone_number: "MessageTemplateAttributeValue",
+    #         party_type: "MessageTemplateAttributeValue",
+    #         phone_number: "MessageTemplateAttributeValue",
+    #         postal_code: "MessageTemplateAttributeValue",
+    #         profile_arn: "MessageTemplateAttributeValue",
+    #         profile_id: "MessageTemplateAttributeValue",
+    #         province: "MessageTemplateAttributeValue",
+    #         shipping_address_1: "MessageTemplateAttributeValue",
+    #         shipping_address_2: "MessageTemplateAttributeValue",
+    #         shipping_address_3: "MessageTemplateAttributeValue",
+    #         shipping_address_4: "MessageTemplateAttributeValue",
+    #         shipping_city: "MessageTemplateAttributeValue",
+    #         shipping_country: "MessageTemplateAttributeValue",
+    #         shipping_county: "MessageTemplateAttributeValue",
+    #         shipping_postal_code: "MessageTemplateAttributeValue",
+    #         shipping_province: "MessageTemplateAttributeValue",
+    #         shipping_state: "MessageTemplateAttributeValue",
+    #         state: "MessageTemplateAttributeValue",
+    #       },
+    #       system_attributes: {
+    #         customer_endpoint: {
+    #           address: "MessageTemplateAttributeValue",
+    #         },
+    #         name: "MessageTemplateAttributeValue",
+    #         system_endpoint: {
+    #           address: "MessageTemplateAttributeValue",
+    #         },
+    #       },
+    #     },
+    #     knowledge_base_id: "UuidOrArn", # required
+    #     message_template_id: "UuidOrArnOrEitherWithQualifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attachments #=> Array
+    #   resp.attachments[0].attachment_id #=> String
+    #   resp.attachments[0].content_disposition #=> String, one of "ATTACHMENT"
+    #   resp.attachments[0].name #=> String
+    #   resp.attachments[0].uploaded_time #=> Time
+    #   resp.attachments[0].url #=> String
+    #   resp.attachments[0].url_expiry #=> Time
+    #   resp.attributes_not_interpolated #=> Array
+    #   resp.attributes_not_interpolated[0] #=> String
+    #   resp.content.email.body.html.content #=> String
+    #   resp.content.email.body.plain_text.content #=> String
+    #   resp.content.email.headers #=> Array
+    #   resp.content.email.headers[0].name #=> String
+    #   resp.content.email.headers[0].value #=> String
+    #   resp.content.email.subject #=> String
+    #   resp.content.sms.body.plain_text.content #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/RenderMessageTemplate AWS API Documentation
+    #
+    # @overload render_message_template(params = {})
+    # @param [Hash] params ({})
+    def render_message_template(params = {}, options = {})
+      req = build_request(:render_message_template, params)
+      req.send_request(options)
+    end
+
     # Searches for content in a specified knowledge base. Can be used to get
     # a specific content resource by its name.
     #
@@ -3930,6 +4995,94 @@ module Aws::QConnect
     # @param [Hash] params ({})
     def search_content(params = {}, options = {})
       req = build_request(:search_content, params)
+      req.send_request(options)
+    end
+
+    # Searches for Amazon Q in Connect message templates in the specified
+    # knowledge base.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The identifier of the knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [required, Types::MessageTemplateSearchExpression] :search_expression
+    #   The search expression for querying the message template.
+    #
+    # @return [Types::SearchMessageTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchMessageTemplatesResponse#next_token #next_token} => String
+    #   * {Types::SearchMessageTemplatesResponse#results #results} => Array&lt;Types::MessageTemplateSearchResultData&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_message_templates({
+    #     knowledge_base_id: "UuidOrArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     search_expression: { # required
+    #       filters: [
+    #         {
+    #           include_no_existence: false,
+    #           name: "NonEmptyString", # required
+    #           operator: "EQUALS", # required, accepts EQUALS, PREFIX
+    #           values: ["MessageTemplateFilterValue"],
+    #         },
+    #       ],
+    #       order_on_field: {
+    #         name: "NonEmptyString", # required
+    #         order: "ASC", # accepts ASC, DESC
+    #       },
+    #       queries: [
+    #         {
+    #           allow_fuzziness: false,
+    #           name: "NonEmptyString", # required
+    #           operator: "CONTAINS", # required, accepts CONTAINS, CONTAINS_AND_PREFIX
+    #           priority: "HIGH", # accepts HIGH, MEDIUM, LOW
+    #           values: ["MessageTemplateQueryValue"], # required
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.results #=> Array
+    #   resp.results[0].channel_subtype #=> String, one of "EMAIL", "SMS"
+    #   resp.results[0].created_time #=> Time
+    #   resp.results[0].description #=> String
+    #   resp.results[0].grouping_configuration.criteria #=> String
+    #   resp.results[0].grouping_configuration.values #=> Array
+    #   resp.results[0].grouping_configuration.values[0] #=> String
+    #   resp.results[0].is_active #=> Boolean
+    #   resp.results[0].knowledge_base_arn #=> String
+    #   resp.results[0].knowledge_base_id #=> String
+    #   resp.results[0].language #=> String
+    #   resp.results[0].last_modified_by #=> String
+    #   resp.results[0].last_modified_time #=> Time
+    #   resp.results[0].message_template_arn #=> String
+    #   resp.results[0].message_template_id #=> String
+    #   resp.results[0].name #=> String
+    #   resp.results[0].tags #=> Hash
+    #   resp.results[0].tags["TagKey"] #=> String
+    #   resp.results[0].version_number #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/SearchMessageTemplates AWS API Documentation
+    #
+    # @overload search_message_templates(params = {})
+    # @param [Hash] params ({})
+    def search_message_templates(params = {}, options = {})
+      req = build_request(:search_message_templates, params)
       req.send_request(options)
     end
 
@@ -4327,9 +5480,9 @@ module Aws::QConnect
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. If not provided, the AWS SDK populates
-    #   this field. For more information about idempotency, see [Making
-    #   retries safe with idempotent APIs][1].
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1]..
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -4519,16 +5672,16 @@ module Aws::QConnect
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. If not provided, the AWS SDK populates
-    #   this field. For more information about idempotency, see [Making
-    #   retries safe with idempotent APIs][1].
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1]..
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     #
     #
-    #   [1]: http://aws.amazon.com/https:/aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   [1]: http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @option params [String] :description
     #   The description of the Amazon Q in Connect AI Prompt.
@@ -4803,6 +5956,405 @@ module Aws::QConnect
     # @param [Hash] params ({})
     def update_knowledge_base_template_uri(params = {}, options = {})
       req = build_request(:update_knowledge_base_template_uri, params)
+      req.send_request(options)
+    end
+
+    # Updates the Amazon Q in Connect message template. Partial update is
+    # supported. If any field is not supplied, it will remain unchanged for
+    # the message template that is referenced by the `$LATEST` qualifier.
+    # Any modification will only apply to the message template that is
+    # referenced by the `$LATEST` qualifier. The fields for all available
+    # versions will remain unchanged.
+    #
+    # @option params [Types::MessageTemplateContentProvider] :content
+    #   The content of the message template.
+    #
+    # @option params [Types::MessageTemplateAttributes] :default_attributes
+    #   An object that specifies the default values to use for variables in
+    #   the message template. This object contains different categories of
+    #   key-value pairs. Each key defines a variable or placeholder in the
+    #   message template. The corresponding value defines the default value
+    #   for that variable.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The identifier of the knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
+    #
+    # @option params [String] :language
+    #   The language code value for the language in which the quick response
+    #   is written. The supported language codes include `de_DE`, `en_US`,
+    #   `es_ES`, `fr_FR`, `id_ID`, `it_IT`, `ja_JP`, `ko_KR`, `pt_BR`,
+    #   `zh_CN`, `zh_TW`
+    #
+    # @option params [required, String] :message_template_id
+    #   The identifier of the message template. Can be either the ID or the
+    #   ARN. It cannot contain any qualifier.
+    #
+    # @return [Types::UpdateMessageTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateMessageTemplateResponse#message_template #message_template} => Types::MessageTemplateData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_message_template({
+    #     content: {
+    #       email: {
+    #         body: {
+    #           html: {
+    #             content: "NonEmptyUnlimitedString",
+    #           },
+    #           plain_text: {
+    #             content: "NonEmptyUnlimitedString",
+    #           },
+    #         },
+    #         headers: [
+    #           {
+    #             name: "EmailHeaderKey",
+    #             value: "EmailHeaderValue",
+    #           },
+    #         ],
+    #         subject: "NonEmptyUnlimitedString",
+    #       },
+    #       sms: {
+    #         body: {
+    #           plain_text: {
+    #             content: "NonEmptyUnlimitedString",
+    #           },
+    #         },
+    #       },
+    #     },
+    #     default_attributes: {
+    #       agent_attributes: {
+    #         first_name: "MessageTemplateAttributeValue",
+    #         last_name: "MessageTemplateAttributeValue",
+    #       },
+    #       custom_attributes: {
+    #         "MessageTemplateAttributeKey" => "MessageTemplateAttributeValue",
+    #       },
+    #       customer_profile_attributes: {
+    #         account_number: "MessageTemplateAttributeValue",
+    #         additional_information: "MessageTemplateAttributeValue",
+    #         address1: "MessageTemplateAttributeValue",
+    #         address2: "MessageTemplateAttributeValue",
+    #         address3: "MessageTemplateAttributeValue",
+    #         address4: "MessageTemplateAttributeValue",
+    #         billing_address_1: "MessageTemplateAttributeValue",
+    #         billing_address_2: "MessageTemplateAttributeValue",
+    #         billing_address_3: "MessageTemplateAttributeValue",
+    #         billing_address_4: "MessageTemplateAttributeValue",
+    #         billing_city: "MessageTemplateAttributeValue",
+    #         billing_country: "MessageTemplateAttributeValue",
+    #         billing_county: "MessageTemplateAttributeValue",
+    #         billing_postal_code: "MessageTemplateAttributeValue",
+    #         billing_province: "MessageTemplateAttributeValue",
+    #         billing_state: "MessageTemplateAttributeValue",
+    #         birth_date: "MessageTemplateAttributeValue",
+    #         business_email_address: "MessageTemplateAttributeValue",
+    #         business_name: "MessageTemplateAttributeValue",
+    #         business_phone_number: "MessageTemplateAttributeValue",
+    #         city: "MessageTemplateAttributeValue",
+    #         country: "MessageTemplateAttributeValue",
+    #         county: "MessageTemplateAttributeValue",
+    #         custom: {
+    #           "MessageTemplateAttributeKey" => "MessageTemplateAttributeValue",
+    #         },
+    #         email_address: "MessageTemplateAttributeValue",
+    #         first_name: "MessageTemplateAttributeValue",
+    #         gender: "MessageTemplateAttributeValue",
+    #         home_phone_number: "MessageTemplateAttributeValue",
+    #         last_name: "MessageTemplateAttributeValue",
+    #         mailing_address_1: "MessageTemplateAttributeValue",
+    #         mailing_address_2: "MessageTemplateAttributeValue",
+    #         mailing_address_3: "MessageTemplateAttributeValue",
+    #         mailing_address_4: "MessageTemplateAttributeValue",
+    #         mailing_city: "MessageTemplateAttributeValue",
+    #         mailing_country: "MessageTemplateAttributeValue",
+    #         mailing_county: "MessageTemplateAttributeValue",
+    #         mailing_postal_code: "MessageTemplateAttributeValue",
+    #         mailing_province: "MessageTemplateAttributeValue",
+    #         mailing_state: "MessageTemplateAttributeValue",
+    #         middle_name: "MessageTemplateAttributeValue",
+    #         mobile_phone_number: "MessageTemplateAttributeValue",
+    #         party_type: "MessageTemplateAttributeValue",
+    #         phone_number: "MessageTemplateAttributeValue",
+    #         postal_code: "MessageTemplateAttributeValue",
+    #         profile_arn: "MessageTemplateAttributeValue",
+    #         profile_id: "MessageTemplateAttributeValue",
+    #         province: "MessageTemplateAttributeValue",
+    #         shipping_address_1: "MessageTemplateAttributeValue",
+    #         shipping_address_2: "MessageTemplateAttributeValue",
+    #         shipping_address_3: "MessageTemplateAttributeValue",
+    #         shipping_address_4: "MessageTemplateAttributeValue",
+    #         shipping_city: "MessageTemplateAttributeValue",
+    #         shipping_country: "MessageTemplateAttributeValue",
+    #         shipping_county: "MessageTemplateAttributeValue",
+    #         shipping_postal_code: "MessageTemplateAttributeValue",
+    #         shipping_province: "MessageTemplateAttributeValue",
+    #         shipping_state: "MessageTemplateAttributeValue",
+    #         state: "MessageTemplateAttributeValue",
+    #       },
+    #       system_attributes: {
+    #         customer_endpoint: {
+    #           address: "MessageTemplateAttributeValue",
+    #         },
+    #         name: "MessageTemplateAttributeValue",
+    #         system_endpoint: {
+    #           address: "MessageTemplateAttributeValue",
+    #         },
+    #       },
+    #     },
+    #     knowledge_base_id: "UuidOrArn", # required
+    #     language: "LanguageCode",
+    #     message_template_id: "UuidOrArnOrEitherWithQualifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_template.attribute_types #=> Array
+    #   resp.message_template.attribute_types[0] #=> String, one of "SYSTEM", "AGENT", "CUSTOMER_PROFILE", "CUSTOM"
+    #   resp.message_template.channel_subtype #=> String, one of "EMAIL", "SMS"
+    #   resp.message_template.content.email.body.html.content #=> String
+    #   resp.message_template.content.email.body.plain_text.content #=> String
+    #   resp.message_template.content.email.headers #=> Array
+    #   resp.message_template.content.email.headers[0].name #=> String
+    #   resp.message_template.content.email.headers[0].value #=> String
+    #   resp.message_template.content.email.subject #=> String
+    #   resp.message_template.content.sms.body.plain_text.content #=> String
+    #   resp.message_template.created_time #=> Time
+    #   resp.message_template.default_attributes.agent_attributes.first_name #=> String
+    #   resp.message_template.default_attributes.agent_attributes.last_name #=> String
+    #   resp.message_template.default_attributes.custom_attributes #=> Hash
+    #   resp.message_template.default_attributes.custom_attributes["MessageTemplateAttributeKey"] #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.account_number #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.additional_information #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.address1 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.address2 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.address3 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.address4 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_address_1 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_address_2 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_address_3 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_address_4 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_city #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_country #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_county #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_postal_code #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_province #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_state #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.birth_date #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.business_email_address #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.business_name #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.business_phone_number #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.city #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.country #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.county #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.custom #=> Hash
+    #   resp.message_template.default_attributes.customer_profile_attributes.custom["MessageTemplateAttributeKey"] #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.email_address #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.first_name #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.gender #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.home_phone_number #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.last_name #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_address_1 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_address_2 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_address_3 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_address_4 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_city #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_country #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_county #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_postal_code #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_province #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_state #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.middle_name #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mobile_phone_number #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.party_type #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.phone_number #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.postal_code #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.profile_arn #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.profile_id #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.province #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_address_1 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_address_2 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_address_3 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_address_4 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_city #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_country #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_county #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_postal_code #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_province #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_state #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.state #=> String
+    #   resp.message_template.default_attributes.system_attributes.customer_endpoint.address #=> String
+    #   resp.message_template.default_attributes.system_attributes.name #=> String
+    #   resp.message_template.default_attributes.system_attributes.system_endpoint.address #=> String
+    #   resp.message_template.description #=> String
+    #   resp.message_template.grouping_configuration.criteria #=> String
+    #   resp.message_template.grouping_configuration.values #=> Array
+    #   resp.message_template.grouping_configuration.values[0] #=> String
+    #   resp.message_template.knowledge_base_arn #=> String
+    #   resp.message_template.knowledge_base_id #=> String
+    #   resp.message_template.language #=> String
+    #   resp.message_template.last_modified_by #=> String
+    #   resp.message_template.last_modified_time #=> Time
+    #   resp.message_template.message_template_arn #=> String
+    #   resp.message_template.message_template_content_sha_256 #=> String
+    #   resp.message_template.message_template_id #=> String
+    #   resp.message_template.name #=> String
+    #   resp.message_template.tags #=> Hash
+    #   resp.message_template.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/UpdateMessageTemplate AWS API Documentation
+    #
+    # @overload update_message_template(params = {})
+    # @param [Hash] params ({})
+    def update_message_template(params = {}, options = {})
+      req = build_request(:update_message_template, params)
+      req.send_request(options)
+    end
+
+    # Updates the Amazon Q in Connect message template metadata. Note that
+    # any modification to the message template’s name, description and
+    # grouping configuration will applied to the message template pointed by
+    # the `$LATEST` qualifier and all available versions. Partial update is
+    # supported. If any field is not supplied, it will remain unchanged for
+    # the message template.
+    #
+    # @option params [String] :description
+    #   The description of the message template.
+    #
+    # @option params [Types::GroupingConfiguration] :grouping_configuration
+    #   The configuration information of the grouping of Amazon Q in Connect
+    #   users.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The identifier of the knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
+    #
+    # @option params [required, String] :message_template_id
+    #   The identifier of the message template. Can be either the ID or the
+    #   ARN. It cannot contain any qualifier.
+    #
+    # @option params [String] :name
+    #   The name of the message template.
+    #
+    # @return [Types::UpdateMessageTemplateMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateMessageTemplateMetadataResponse#message_template #message_template} => Types::MessageTemplateData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_message_template_metadata({
+    #     description: "Description",
+    #     grouping_configuration: {
+    #       criteria: "GroupingCriteria",
+    #       values: ["GroupingValue"],
+    #     },
+    #     knowledge_base_id: "UuidOrArn", # required
+    #     message_template_id: "UuidOrArnOrEitherWithQualifier", # required
+    #     name: "Name",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_template.attribute_types #=> Array
+    #   resp.message_template.attribute_types[0] #=> String, one of "SYSTEM", "AGENT", "CUSTOMER_PROFILE", "CUSTOM"
+    #   resp.message_template.channel_subtype #=> String, one of "EMAIL", "SMS"
+    #   resp.message_template.content.email.body.html.content #=> String
+    #   resp.message_template.content.email.body.plain_text.content #=> String
+    #   resp.message_template.content.email.headers #=> Array
+    #   resp.message_template.content.email.headers[0].name #=> String
+    #   resp.message_template.content.email.headers[0].value #=> String
+    #   resp.message_template.content.email.subject #=> String
+    #   resp.message_template.content.sms.body.plain_text.content #=> String
+    #   resp.message_template.created_time #=> Time
+    #   resp.message_template.default_attributes.agent_attributes.first_name #=> String
+    #   resp.message_template.default_attributes.agent_attributes.last_name #=> String
+    #   resp.message_template.default_attributes.custom_attributes #=> Hash
+    #   resp.message_template.default_attributes.custom_attributes["MessageTemplateAttributeKey"] #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.account_number #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.additional_information #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.address1 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.address2 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.address3 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.address4 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_address_1 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_address_2 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_address_3 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_address_4 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_city #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_country #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_county #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_postal_code #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_province #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.billing_state #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.birth_date #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.business_email_address #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.business_name #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.business_phone_number #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.city #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.country #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.county #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.custom #=> Hash
+    #   resp.message_template.default_attributes.customer_profile_attributes.custom["MessageTemplateAttributeKey"] #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.email_address #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.first_name #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.gender #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.home_phone_number #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.last_name #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_address_1 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_address_2 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_address_3 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_address_4 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_city #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_country #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_county #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_postal_code #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_province #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mailing_state #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.middle_name #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.mobile_phone_number #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.party_type #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.phone_number #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.postal_code #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.profile_arn #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.profile_id #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.province #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_address_1 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_address_2 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_address_3 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_address_4 #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_city #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_country #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_county #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_postal_code #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_province #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.shipping_state #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.state #=> String
+    #   resp.message_template.default_attributes.system_attributes.customer_endpoint.address #=> String
+    #   resp.message_template.default_attributes.system_attributes.name #=> String
+    #   resp.message_template.default_attributes.system_attributes.system_endpoint.address #=> String
+    #   resp.message_template.description #=> String
+    #   resp.message_template.grouping_configuration.criteria #=> String
+    #   resp.message_template.grouping_configuration.values #=> Array
+    #   resp.message_template.grouping_configuration.values[0] #=> String
+    #   resp.message_template.knowledge_base_arn #=> String
+    #   resp.message_template.knowledge_base_id #=> String
+    #   resp.message_template.language #=> String
+    #   resp.message_template.last_modified_by #=> String
+    #   resp.message_template.last_modified_time #=> Time
+    #   resp.message_template.message_template_arn #=> String
+    #   resp.message_template.message_template_content_sha_256 #=> String
+    #   resp.message_template.message_template_id #=> String
+    #   resp.message_template.name #=> String
+    #   resp.message_template.tags #=> Hash
+    #   resp.message_template.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/UpdateMessageTemplateMetadata AWS API Documentation
+    #
+    # @overload update_message_template_metadata(params = {})
+    # @param [Hash] params ({})
+    def update_message_template_metadata(params = {}, options = {})
+      req = build_request(:update_message_template_metadata, params)
       req.send_request(options)
     end
 
@@ -5100,7 +6652,7 @@ module Aws::QConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-qconnect'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

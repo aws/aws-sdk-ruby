@@ -4723,7 +4723,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 403 Forbidden
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* AccountProblem
     #
     #     * *Description:* There is a problem with your Amazon Web Services
@@ -4733,7 +4732,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 403 Forbidden
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* AllAccessDisabled
     #
     #     * *Description:* All access to this Amazon S3 resource has been
@@ -4743,7 +4741,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 403 Forbidden
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* AmbiguousGrantByEmailAddress
     #
     #     * *Description:* The email address you provided is associated with
@@ -4752,7 +4749,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* AuthorizationHeaderMalformed
     #
     #     * *Description:* The authorization header you provided is invalid.
@@ -4760,7 +4756,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *HTTP Status Code:* N/A
-    #
     #   * * *Code:* BadDigest
     #
     #     * *Description:* The Content-MD5 you specified did not match what
@@ -4769,7 +4764,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* BucketAlreadyExists
     #
     #     * *Description:* The requested bucket name is not available. The
@@ -4779,7 +4773,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 409 Conflict
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* BucketAlreadyOwnedByYou
     #
     #     * *Description:* The bucket you tried to create already exists,
@@ -4793,7 +4786,6 @@ module Aws::S3
     #       Region)
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* BucketNotEmpty
     #
     #     * *Description:* The bucket you tried to delete is not empty.
@@ -4801,7 +4793,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 409 Conflict
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* CredentialsNotSupported
     #
     #     * *Description:* This request does not support credentials.
@@ -4809,7 +4800,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* CrossLocationLoggingProhibited
     #
     #     * *Description:* Cross-location logging not allowed. Buckets in
@@ -4819,7 +4809,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 403 Forbidden
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* EntityTooSmall
     #
     #     * *Description:* Your proposed upload is smaller than the minimum
@@ -4828,7 +4817,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* EntityTooLarge
     #
     #     * *Description:* Your proposed upload exceeds the maximum allowed
@@ -4837,7 +4825,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* ExpiredToken
     #
     #     * *Description:* The provided token has expired.
@@ -4845,7 +4832,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* IllegalVersioningConfigurationException
     #
     #     * *Description:* Indicates that the versioning configuration
@@ -4854,7 +4840,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* IncompleteBody
     #
     #     * *Description:* You did not provide the number of bytes specified
@@ -4863,7 +4848,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* IncorrectNumberOfFilesInPostRequest
     #
     #     * *Description:* POST requires exactly one file upload per
@@ -4872,7 +4856,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* InlineDataTooLarge
     #
     #     * *Description:* Inline data exceeds the maximum allowed size.
@@ -4880,7 +4863,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* InternalError
     #
     #     * *Description:* We encountered an internal error. Please try
@@ -4889,7 +4871,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 500 Internal Server Error
     #
     #     * *SOAP Fault Code Prefix:* Server
-    #
     #   * * *Code:* InvalidAccessKeyId
     #
     #     * *Description:* The Amazon Web Services access key ID you
@@ -4898,7 +4879,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 403 Forbidden
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* InvalidAddressingHeader
     #
     #     * *Description:* You must specify the Anonymous role.
@@ -4906,7 +4886,6 @@ module Aws::S3
     #     * *HTTP Status Code:* N/A
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* InvalidArgument
     #
     #     * *Description:* Invalid Argument
@@ -4914,7 +4893,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* InvalidBucketName
     #
     #     * *Description:* The specified bucket is not valid.
@@ -4922,7 +4900,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* InvalidBucketState
     #
     #     * *Description:* The request is not valid with the current state
@@ -4931,7 +4908,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 409 Conflict
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* InvalidDigest
     #
     #     * *Description:* The Content-MD5 you specified is not valid.
@@ -4939,7 +4915,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* InvalidEncryptionAlgorithmError
     #
     #     * *Description:* The encryption request you specified is not
@@ -4948,7 +4923,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* InvalidLocationConstraint
     #
     #     * *Description:* The specified location constraint is not valid.
@@ -4958,7 +4932,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* InvalidObjectState
     #
     #     * *Description:* The action is not valid for the current state of
@@ -4967,7 +4940,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 403 Forbidden
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* InvalidPart
     #
     #     * *Description:* One or more of the specified parts could not be
@@ -4977,7 +4949,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* InvalidPartOrder
     #
     #     * *Description:* The list of parts was not in ascending order.
@@ -4986,7 +4957,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* InvalidPayer
     #
     #     * *Description:* All access to this object has been disabled.
@@ -4996,7 +4966,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 403 Forbidden
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* InvalidPolicyDocument
     #
     #     * *Description:* The content of the form does not meet the
@@ -5005,7 +4974,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* InvalidRange
     #
     #     * *Description:* The requested range cannot be satisfied.
@@ -5013,7 +4981,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 416 Requested Range Not Satisfiable
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* InvalidRequest
     #
     #     * *Description:* Please use `AWS4-HMAC-SHA256`.
@@ -5021,7 +4988,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *Code:* N/A
-    #
     #   * * *Code:* InvalidRequest
     #
     #     * *Description:* SOAP requests must be made over an HTTPS
@@ -5030,7 +4996,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* InvalidRequest
     #
     #     * *Description:* Amazon S3 Transfer Acceleration is not supported
@@ -5039,7 +5004,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *Code:* N/A
-    #
     #   * * *Code:* InvalidRequest
     #
     #     * *Description:* Amazon S3 Transfer Acceleration is not supported
@@ -5048,7 +5012,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *Code:* N/A
-    #
     #   * * *Code:* InvalidRequest
     #
     #     * *Description:* Amazon S3 Transfer Accelerate endpoint only
@@ -5057,7 +5020,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *Code:* N/A
-    #
     #   * * *Code:* InvalidRequest
     #
     #     * *Description:* Amazon S3 Transfer Accelerate is not configured
@@ -5066,7 +5028,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *Code:* N/A
-    #
     #   * * *Code:* InvalidRequest
     #
     #     * *Description:* Amazon S3 Transfer Accelerate is disabled on this
@@ -5075,7 +5036,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *Code:* N/A
-    #
     #   * * *Code:* InvalidRequest
     #
     #     * *Description:* Amazon S3 Transfer Acceleration is not supported
@@ -5085,7 +5045,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *Code:* N/A
-    #
     #   * * *Code:* InvalidRequest
     #
     #     * *Description:* Amazon S3 Transfer Acceleration cannot be enabled
@@ -5095,7 +5054,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *Code:* N/A
-    #
     #   * * *Code:* InvalidSecurity
     #
     #     * *Description:* The provided security credentials are not valid.
@@ -5103,7 +5061,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 403 Forbidden
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* InvalidSOAPRequest
     #
     #     * *Description:* The SOAP request body is invalid.
@@ -5111,7 +5068,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* InvalidStorageClass
     #
     #     * *Description:* The storage class you specified is not valid.
@@ -5119,7 +5075,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* InvalidTargetBucketForLogging
     #
     #     * *Description:* The target bucket for logging does not exist, is
@@ -5129,7 +5084,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* InvalidToken
     #
     #     * *Description:* The provided token is malformed or otherwise
@@ -5138,7 +5092,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* InvalidURI
     #
     #     * *Description:* Couldn't parse the specified URI.
@@ -5146,7 +5099,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* KeyTooLongError
     #
     #     * *Description:* Your key is too long.
@@ -5154,7 +5106,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* MalformedACLError
     #
     #     * *Description:* The XML you provided was not well-formed or did
@@ -5163,7 +5114,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* MalformedPOSTRequest
     #
     #     * *Description:* The body of your POST request is not well-formed
@@ -5172,7 +5122,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* MalformedXML
     #
     #     * *Description:* This happens when the user sends malformed XML
@@ -5184,7 +5133,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* MaxMessageLengthExceeded
     #
     #     * *Description:* Your request was too big.
@@ -5192,7 +5140,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* MaxPostPreDataLengthExceededError
     #
     #     * *Description:* Your POST request fields preceding the upload
@@ -5201,7 +5148,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* MetadataTooLarge
     #
     #     * *Description:* Your metadata headers exceed the maximum allowed
@@ -5210,7 +5156,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* MethodNotAllowed
     #
     #     * *Description:* The specified method is not allowed against this
@@ -5219,7 +5164,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 405 Method Not Allowed
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* MissingAttachment
     #
     #     * *Description:* A SOAP attachment was expected, but none were
@@ -5228,7 +5172,6 @@ module Aws::S3
     #     * *HTTP Status Code:* N/A
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* MissingContentLength
     #
     #     * *Description:* You must provide the Content-Length HTTP header.
@@ -5236,7 +5179,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 411 Length Required
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* MissingRequestBodyError
     #
     #     * *Description:* This happens when the user sends an empty XML
@@ -5246,7 +5188,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* MissingSecurityElement
     #
     #     * *Description:* The SOAP 1.1 request is missing a security
@@ -5255,7 +5196,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* MissingSecurityHeader
     #
     #     * *Description:* Your request is missing a required header.
@@ -5263,7 +5203,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* NoLoggingStatusForKey
     #
     #     * *Description:* There is no such thing as a logging status
@@ -5272,7 +5211,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* NoSuchBucket
     #
     #     * *Description:* The specified bucket does not exist.
@@ -5280,7 +5218,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 404 Not Found
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* NoSuchBucketPolicy
     #
     #     * *Description:* The specified bucket does not have a bucket
@@ -5289,7 +5226,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 404 Not Found
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* NoSuchKey
     #
     #     * *Description:* The specified key does not exist.
@@ -5297,7 +5233,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 404 Not Found
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* NoSuchLifecycleConfiguration
     #
     #     * *Description:* The lifecycle configuration does not exist.
@@ -5305,7 +5240,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 404 Not Found
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* NoSuchUpload
     #
     #     * *Description:* The specified multipart upload does not exist.
@@ -5315,7 +5249,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 404 Not Found
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* NoSuchVersion
     #
     #     * *Description:* Indicates that the version ID specified in the
@@ -5324,7 +5257,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 404 Not Found
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* NotImplemented
     #
     #     * *Description:* A header you provided implies functionality that
@@ -5333,7 +5265,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 501 Not Implemented
     #
     #     * *SOAP Fault Code Prefix:* Server
-    #
     #   * * *Code:* NotSignedUp
     #
     #     * *Description:* Your account is not signed up for the Amazon S3
@@ -5343,7 +5274,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 403 Forbidden
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* OperationAborted
     #
     #     * *Description:* A conflicting conditional action is currently in
@@ -5352,7 +5282,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 409 Conflict
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* PermanentRedirect
     #
     #     * *Description:* The bucket you are attempting to access must be
@@ -5362,7 +5291,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 301 Moved Permanently
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* PreconditionFailed
     #
     #     * *Description:* At least one of the preconditions you specified
@@ -5371,7 +5299,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 412 Precondition Failed
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* Redirect
     #
     #     * *Description:* Temporary redirect.
@@ -5379,7 +5306,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 307 Moved Temporarily
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* RestoreAlreadyInProgress
     #
     #     * *Description:* Object restore is already in progress.
@@ -5387,7 +5313,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 409 Conflict
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* RequestIsNotMultiPartContent
     #
     #     * *Description:* Bucket POST must be of the enclosure-type
@@ -5396,7 +5321,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* RequestTimeout
     #
     #     * *Description:* Your socket connection to the server was not read
@@ -5405,7 +5329,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* RequestTimeTooSkewed
     #
     #     * *Description:* The difference between the request time and the
@@ -5414,7 +5337,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 403 Forbidden
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* RequestTorrentOfBucketError
     #
     #     * *Description:* Requesting the torrent file of a bucket is not
@@ -5423,7 +5345,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* SignatureDoesNotMatch
     #
     #     * *Description:* The request signature we calculated does not
@@ -5435,7 +5356,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 403 Forbidden
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* ServiceUnavailable
     #
     #     * *Description:* Service is unable to handle request.
@@ -5443,7 +5363,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 503 Service Unavailable
     #
     #     * *SOAP Fault Code Prefix:* Server
-    #
     #   * * *Code:* SlowDown
     #
     #     * *Description:* Reduce your request rate.
@@ -5451,7 +5370,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 503 Slow Down
     #
     #     * *SOAP Fault Code Prefix:* Server
-    #
     #   * * *Code:* TemporaryRedirect
     #
     #     * *Description:* You are being redirected to the bucket while DNS
@@ -5460,7 +5378,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 307 Moved Temporarily
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* TokenRefreshRequired
     #
     #     * *Description:* The provided token must be refreshed.
@@ -5468,7 +5385,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* TooManyBuckets
     #
     #     * *Description:* You have attempted to create more buckets than
@@ -5477,7 +5393,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* UnexpectedContent
     #
     #     * *Description:* This request does not support content.
@@ -5485,7 +5400,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* UnresolvableGrantByEmailAddress
     #
     #     * *Description:* The email address you provided does not match any
@@ -5494,7 +5408,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *SOAP Fault Code Prefix:* Client
-    #
     #   * * *Code:* UserKeyMustBeSpecified
     #
     #     * *Description:* The bucket POST must contain the specified field

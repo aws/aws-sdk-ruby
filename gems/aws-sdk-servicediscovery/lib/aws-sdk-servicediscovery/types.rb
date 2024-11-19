@@ -762,7 +762,6 @@ module Aws::ServiceDiscovery
     #       * The name of the service.
     #
     #       * The name of the namespace.
-    #
     #       For example, if the value of `InstanceId` is `test`, the name of
     #       the service is `backend`, and the name of the namespace is
     #       `example.com`, the value of `service-hostname` is the following:

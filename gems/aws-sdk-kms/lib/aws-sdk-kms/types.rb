@@ -896,7 +896,6 @@ module Aws::KMS
     #     * `SYMMETRIC_DEFAULT`
     #
     #     ^
-    #
     #   * HMAC keys (symmetric)
     #
     #     * `HMAC_224`
@@ -906,7 +905,6 @@ module Aws::KMS
     #     * `HMAC_384`
     #
     #     * `HMAC_512`
-    #
     #   * Asymmetric RSA key pairs (encryption and decryption -or- signing
     #     and verification)
     #
@@ -915,7 +913,6 @@ module Aws::KMS
     #     * `RSA_3072`
     #
     #     * `RSA_4096`
-    #
     #   * Asymmetric NIST-recommended elliptic curve key pairs (signing and
     #     verification -or- deriving shared secrets)
     #
@@ -924,7 +921,6 @@ module Aws::KMS
     #     * `ECC_NIST_P384` (secp384r1)
     #
     #     * `ECC_NIST_P521` (secp521r1)
-    #
     #   * Other asymmetric elliptic curve key pairs (signing and
     #     verification)
     #
@@ -932,7 +928,6 @@ module Aws::KMS
     #       cryptocurrencies.
     #
     #     ^
-    #
     #   * SM2 key pairs (encryption and decryption -or- signing and
     #     verification -or- deriving shared secrets)
     #
@@ -1452,7 +1447,6 @@ module Aws::KMS
     #
     #     * The [TLS certificate][6] specifies the private DNS hostname at
     #       which the endpoint is reachable.
-    #
     #   * `XKS_VPC_ENDPOINT_SERVICE_NOT_FOUND` — KMS can't find the VPC
     #     endpoint service that it uses to communicate with the external key
     #     store proxy. Verify that the `XksProxyVpcEndpointServiceName` is

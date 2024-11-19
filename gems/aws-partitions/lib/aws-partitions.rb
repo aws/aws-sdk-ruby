@@ -337,6 +337,7 @@ module Aws
             'ConfigService' => 'config',
             'Connect' => 'connect',
             'ConnectCampaignService' => 'connect-campaigns',
+            'ConnectCampaignsV2' => 'connect-campaigns',
             'ConnectCases' => 'cases',
             'ConnectContactLens' => 'contact-lens',
             'ConnectParticipant' => 'participant.connect',

@@ -89,6 +89,8 @@ module Aws::PinpointSMSVoiceV2
     DeletePoolResult = Shapes::StructureShape.new(name: 'DeletePoolResult')
     DeleteProtectConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteProtectConfigurationRequest')
     DeleteProtectConfigurationResult = Shapes::StructureShape.new(name: 'DeleteProtectConfigurationResult')
+    DeleteProtectConfigurationRuleSetNumberOverrideRequest = Shapes::StructureShape.new(name: 'DeleteProtectConfigurationRuleSetNumberOverrideRequest')
+    DeleteProtectConfigurationRuleSetNumberOverrideResult = Shapes::StructureShape.new(name: 'DeleteProtectConfigurationRuleSetNumberOverrideResult')
     DeleteRegistrationAttachmentRequest = Shapes::StructureShape.new(name: 'DeleteRegistrationAttachmentRequest')
     DeleteRegistrationAttachmentResult = Shapes::StructureShape.new(name: 'DeleteRegistrationAttachmentResult')
     DeleteRegistrationFieldValueRequest = Shapes::StructureShape.new(name: 'DeleteRegistrationFieldValueRequest')
@@ -184,6 +186,9 @@ module Aws::PinpointSMSVoiceV2
     LanguageCode = Shapes::StringShape.new(name: 'LanguageCode')
     ListPoolOriginationIdentitiesRequest = Shapes::StructureShape.new(name: 'ListPoolOriginationIdentitiesRequest')
     ListPoolOriginationIdentitiesResult = Shapes::StructureShape.new(name: 'ListPoolOriginationIdentitiesResult')
+    ListProtectConfigurationRuleSetNumberOverrideFilter = Shapes::ListShape.new(name: 'ListProtectConfigurationRuleSetNumberOverrideFilter')
+    ListProtectConfigurationRuleSetNumberOverridesRequest = Shapes::StructureShape.new(name: 'ListProtectConfigurationRuleSetNumberOverridesRequest')
+    ListProtectConfigurationRuleSetNumberOverridesResult = Shapes::StructureShape.new(name: 'ListProtectConfigurationRuleSetNumberOverridesResult')
     ListRegistrationAssociationsRequest = Shapes::StructureShape.new(name: 'ListRegistrationAssociationsRequest')
     ListRegistrationAssociationsResult = Shapes::StructureShape.new(name: 'ListRegistrationAssociationsResult')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
@@ -194,6 +199,8 @@ module Aws::PinpointSMSVoiceV2
     MediaMessageOriginationIdentity = Shapes::StringShape.new(name: 'MediaMessageOriginationIdentity')
     MediaUrlList = Shapes::ListShape.new(name: 'MediaUrlList')
     MediaUrlValue = Shapes::StringShape.new(name: 'MediaUrlValue')
+    MessageFeedbackStatus = Shapes::StringShape.new(name: 'MessageFeedbackStatus')
+    MessageId = Shapes::StringShape.new(name: 'MessageId')
     MessageType = Shapes::StringShape.new(name: 'MessageType')
     MessageTypeList = Shapes::ListShape.new(name: 'MessageTypeList')
     MonthlyLimit = Shapes::IntegerShape.new(name: 'MonthlyLimit')
@@ -251,11 +258,20 @@ module Aws::PinpointSMSVoiceV2
     ProtectConfigurationIdOrArn = Shapes::StringShape.new(name: 'ProtectConfigurationIdOrArn')
     ProtectConfigurationInformation = Shapes::StructureShape.new(name: 'ProtectConfigurationInformation')
     ProtectConfigurationInformationList = Shapes::ListShape.new(name: 'ProtectConfigurationInformationList')
+    ProtectConfigurationRuleOverrideAction = Shapes::StringShape.new(name: 'ProtectConfigurationRuleOverrideAction')
+    ProtectConfigurationRuleSetNumberOverride = Shapes::StructureShape.new(name: 'ProtectConfigurationRuleSetNumberOverride')
+    ProtectConfigurationRuleSetNumberOverrideFilterItem = Shapes::StructureShape.new(name: 'ProtectConfigurationRuleSetNumberOverrideFilterItem')
+    ProtectConfigurationRuleSetNumberOverrideFilterName = Shapes::StringShape.new(name: 'ProtectConfigurationRuleSetNumberOverrideFilterName')
+    ProtectConfigurationRuleSetNumberOverrideList = Shapes::ListShape.new(name: 'ProtectConfigurationRuleSetNumberOverrideList')
     ProtectStatus = Shapes::StringShape.new(name: 'ProtectStatus')
     PutKeywordRequest = Shapes::StructureShape.new(name: 'PutKeywordRequest')
     PutKeywordResult = Shapes::StructureShape.new(name: 'PutKeywordResult')
+    PutMessageFeedbackRequest = Shapes::StructureShape.new(name: 'PutMessageFeedbackRequest')
+    PutMessageFeedbackResult = Shapes::StructureShape.new(name: 'PutMessageFeedbackResult')
     PutOptedOutNumberRequest = Shapes::StructureShape.new(name: 'PutOptedOutNumberRequest')
     PutOptedOutNumberResult = Shapes::StructureShape.new(name: 'PutOptedOutNumberResult')
+    PutProtectConfigurationRuleSetNumberOverrideRequest = Shapes::StructureShape.new(name: 'PutProtectConfigurationRuleSetNumberOverrideRequest')
+    PutProtectConfigurationRuleSetNumberOverrideResult = Shapes::StructureShape.new(name: 'PutProtectConfigurationRuleSetNumberOverrideResult')
     PutRegistrationFieldValueRequest = Shapes::StructureShape.new(name: 'PutRegistrationFieldValueRequest')
     PutRegistrationFieldValueResult = Shapes::StructureShape.new(name: 'PutRegistrationFieldValueResult')
     PutResourcePolicyRequest = Shapes::StructureShape.new(name: 'PutResourcePolicyRequest')
@@ -350,6 +366,8 @@ module Aws::PinpointSMSVoiceV2
     ServiceQuotaExceededExceptionReason = Shapes::StringShape.new(name: 'ServiceQuotaExceededExceptionReason')
     SetAccountDefaultProtectConfigurationRequest = Shapes::StructureShape.new(name: 'SetAccountDefaultProtectConfigurationRequest')
     SetAccountDefaultProtectConfigurationResult = Shapes::StructureShape.new(name: 'SetAccountDefaultProtectConfigurationResult')
+    SetDefaultMessageFeedbackEnabledRequest = Shapes::StructureShape.new(name: 'SetDefaultMessageFeedbackEnabledRequest')
+    SetDefaultMessageFeedbackEnabledResult = Shapes::StructureShape.new(name: 'SetDefaultMessageFeedbackEnabledResult')
     SetDefaultMessageTypeRequest = Shapes::StructureShape.new(name: 'SetDefaultMessageTypeRequest')
     SetDefaultMessageTypeResult = Shapes::StructureShape.new(name: 'SetDefaultMessageTypeResult')
     SetDefaultSenderIdRequest = Shapes::StructureShape.new(name: 'SetDefaultSenderIdRequest')
@@ -478,6 +496,7 @@ module Aws::PinpointSMSVoiceV2
     ConfigurationSetInformation.add_member(:event_destinations, Shapes::ShapeRef.new(shape: EventDestinationList, required: true, location_name: "EventDestinations"))
     ConfigurationSetInformation.add_member(:default_message_type, Shapes::ShapeRef.new(shape: MessageType, location_name: "DefaultMessageType"))
     ConfigurationSetInformation.add_member(:default_sender_id, Shapes::ShapeRef.new(shape: SenderId, location_name: "DefaultSenderId"))
+    ConfigurationSetInformation.add_member(:default_message_feedback_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "DefaultMessageFeedbackEnabled"))
     ConfigurationSetInformation.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTimestamp"))
     ConfigurationSetInformation.add_member(:protect_configuration_id, Shapes::ShapeRef.new(shape: ProtectConfigurationIdOrArn, location_name: "ProtectConfigurationId"))
     ConfigurationSetInformation.struct_class = Types::ConfigurationSetInformation
@@ -646,6 +665,7 @@ module Aws::PinpointSMSVoiceV2
     DeleteConfigurationSetResult.add_member(:event_destinations, Shapes::ShapeRef.new(shape: EventDestinationList, location_name: "EventDestinations"))
     DeleteConfigurationSetResult.add_member(:default_message_type, Shapes::ShapeRef.new(shape: MessageType, location_name: "DefaultMessageType"))
     DeleteConfigurationSetResult.add_member(:default_sender_id, Shapes::ShapeRef.new(shape: SenderId, location_name: "DefaultSenderId"))
+    DeleteConfigurationSetResult.add_member(:default_message_feedback_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "DefaultMessageFeedbackEnabled"))
     DeleteConfigurationSetResult.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
     DeleteConfigurationSetResult.struct_class = Types::DeleteConfigurationSetResult
 
@@ -734,6 +754,19 @@ module Aws::PinpointSMSVoiceV2
     DeleteProtectConfigurationResult.add_member(:account_default, Shapes::ShapeRef.new(shape: PrimitiveBoolean, required: true, location_name: "AccountDefault"))
     DeleteProtectConfigurationResult.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: PrimitiveBoolean, required: true, location_name: "DeletionProtectionEnabled"))
     DeleteProtectConfigurationResult.struct_class = Types::DeleteProtectConfigurationResult
+
+    DeleteProtectConfigurationRuleSetNumberOverrideRequest.add_member(:protect_configuration_id, Shapes::ShapeRef.new(shape: ProtectConfigurationIdOrArn, required: true, location_name: "ProtectConfigurationId"))
+    DeleteProtectConfigurationRuleSetNumberOverrideRequest.add_member(:destination_phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, required: true, location_name: "DestinationPhoneNumber"))
+    DeleteProtectConfigurationRuleSetNumberOverrideRequest.struct_class = Types::DeleteProtectConfigurationRuleSetNumberOverrideRequest
+
+    DeleteProtectConfigurationRuleSetNumberOverrideResult.add_member(:protect_configuration_arn, Shapes::ShapeRef.new(shape: ProtectConfigurationArn, required: true, location_name: "ProtectConfigurationArn"))
+    DeleteProtectConfigurationRuleSetNumberOverrideResult.add_member(:protect_configuration_id, Shapes::ShapeRef.new(shape: ProtectConfigurationId, required: true, location_name: "ProtectConfigurationId"))
+    DeleteProtectConfigurationRuleSetNumberOverrideResult.add_member(:destination_phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, required: true, location_name: "DestinationPhoneNumber"))
+    DeleteProtectConfigurationRuleSetNumberOverrideResult.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTimestamp"))
+    DeleteProtectConfigurationRuleSetNumberOverrideResult.add_member(:action, Shapes::ShapeRef.new(shape: ProtectConfigurationRuleOverrideAction, required: true, location_name: "Action"))
+    DeleteProtectConfigurationRuleSetNumberOverrideResult.add_member(:iso_country_code, Shapes::ShapeRef.new(shape: IsoCountryCode, location_name: "IsoCountryCode"))
+    DeleteProtectConfigurationRuleSetNumberOverrideResult.add_member(:expiration_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExpirationTimestamp"))
+    DeleteProtectConfigurationRuleSetNumberOverrideResult.struct_class = Types::DeleteProtectConfigurationRuleSetNumberOverrideResult
 
     DeleteRegistrationAttachmentRequest.add_member(:registration_attachment_id, Shapes::ShapeRef.new(shape: RegistrationAttachmentIdOrArn, required: true, location_name: "RegistrationAttachmentId"))
     DeleteRegistrationAttachmentRequest.struct_class = Types::DeleteRegistrationAttachmentRequest
@@ -1111,6 +1144,20 @@ module Aws::PinpointSMSVoiceV2
     ListPoolOriginationIdentitiesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListPoolOriginationIdentitiesResult.struct_class = Types::ListPoolOriginationIdentitiesResult
 
+    ListProtectConfigurationRuleSetNumberOverrideFilter.member = Shapes::ShapeRef.new(shape: ProtectConfigurationRuleSetNumberOverrideFilterItem)
+
+    ListProtectConfigurationRuleSetNumberOverridesRequest.add_member(:protect_configuration_id, Shapes::ShapeRef.new(shape: ProtectConfigurationIdOrArn, required: true, location_name: "ProtectConfigurationId"))
+    ListProtectConfigurationRuleSetNumberOverridesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ListProtectConfigurationRuleSetNumberOverrideFilter, location_name: "Filters"))
+    ListProtectConfigurationRuleSetNumberOverridesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListProtectConfigurationRuleSetNumberOverridesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListProtectConfigurationRuleSetNumberOverridesRequest.struct_class = Types::ListProtectConfigurationRuleSetNumberOverridesRequest
+
+    ListProtectConfigurationRuleSetNumberOverridesResult.add_member(:protect_configuration_arn, Shapes::ShapeRef.new(shape: ProtectConfigurationArn, required: true, location_name: "ProtectConfigurationArn"))
+    ListProtectConfigurationRuleSetNumberOverridesResult.add_member(:protect_configuration_id, Shapes::ShapeRef.new(shape: ProtectConfigurationId, required: true, location_name: "ProtectConfigurationId"))
+    ListProtectConfigurationRuleSetNumberOverridesResult.add_member(:rule_set_number_overrides, Shapes::ShapeRef.new(shape: ProtectConfigurationRuleSetNumberOverrideList, location_name: "RuleSetNumberOverrides"))
+    ListProtectConfigurationRuleSetNumberOverridesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListProtectConfigurationRuleSetNumberOverridesResult.struct_class = Types::ListProtectConfigurationRuleSetNumberOverridesResult
+
     ListRegistrationAssociationsRequest.add_member(:registration_id, Shapes::ShapeRef.new(shape: RegistrationIdOrArn, required: true, location_name: "RegistrationId"))
     ListRegistrationAssociationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: RegistrationAssociationFilterList, location_name: "Filters"))
     ListRegistrationAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -1255,6 +1302,19 @@ module Aws::PinpointSMSVoiceV2
 
     ProtectConfigurationInformationList.member = Shapes::ShapeRef.new(shape: ProtectConfigurationInformation)
 
+    ProtectConfigurationRuleSetNumberOverride.add_member(:destination_phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, required: true, location_name: "DestinationPhoneNumber"))
+    ProtectConfigurationRuleSetNumberOverride.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTimestamp"))
+    ProtectConfigurationRuleSetNumberOverride.add_member(:action, Shapes::ShapeRef.new(shape: ProtectConfigurationRuleOverrideAction, required: true, location_name: "Action"))
+    ProtectConfigurationRuleSetNumberOverride.add_member(:iso_country_code, Shapes::ShapeRef.new(shape: IsoCountryCode, location_name: "IsoCountryCode"))
+    ProtectConfigurationRuleSetNumberOverride.add_member(:expiration_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExpirationTimestamp"))
+    ProtectConfigurationRuleSetNumberOverride.struct_class = Types::ProtectConfigurationRuleSetNumberOverride
+
+    ProtectConfigurationRuleSetNumberOverrideFilterItem.add_member(:name, Shapes::ShapeRef.new(shape: ProtectConfigurationRuleSetNumberOverrideFilterName, required: true, location_name: "Name"))
+    ProtectConfigurationRuleSetNumberOverrideFilterItem.add_member(:values, Shapes::ShapeRef.new(shape: FilterValueList, required: true, location_name: "Values"))
+    ProtectConfigurationRuleSetNumberOverrideFilterItem.struct_class = Types::ProtectConfigurationRuleSetNumberOverrideFilterItem
+
+    ProtectConfigurationRuleSetNumberOverrideList.member = Shapes::ShapeRef.new(shape: ProtectConfigurationRuleSetNumberOverride)
+
     PutKeywordRequest.add_member(:origination_identity, Shapes::ShapeRef.new(shape: PhoneOrPoolIdOrArn, required: true, location_name: "OriginationIdentity"))
     PutKeywordRequest.add_member(:keyword, Shapes::ShapeRef.new(shape: Keyword, required: true, location_name: "Keyword"))
     PutKeywordRequest.add_member(:keyword_message, Shapes::ShapeRef.new(shape: KeywordMessage, required: true, location_name: "KeywordMessage"))
@@ -1268,6 +1328,14 @@ module Aws::PinpointSMSVoiceV2
     PutKeywordResult.add_member(:keyword_action, Shapes::ShapeRef.new(shape: KeywordAction, location_name: "KeywordAction"))
     PutKeywordResult.struct_class = Types::PutKeywordResult
 
+    PutMessageFeedbackRequest.add_member(:message_id, Shapes::ShapeRef.new(shape: MessageId, required: true, location_name: "MessageId"))
+    PutMessageFeedbackRequest.add_member(:message_feedback_status, Shapes::ShapeRef.new(shape: MessageFeedbackStatus, required: true, location_name: "MessageFeedbackStatus"))
+    PutMessageFeedbackRequest.struct_class = Types::PutMessageFeedbackRequest
+
+    PutMessageFeedbackResult.add_member(:message_id, Shapes::ShapeRef.new(shape: MessageId, required: true, location_name: "MessageId"))
+    PutMessageFeedbackResult.add_member(:message_feedback_status, Shapes::ShapeRef.new(shape: MessageFeedbackStatus, required: true, location_name: "MessageFeedbackStatus"))
+    PutMessageFeedbackResult.struct_class = Types::PutMessageFeedbackResult
+
     PutOptedOutNumberRequest.add_member(:opt_out_list_name, Shapes::ShapeRef.new(shape: OptOutListNameOrArn, required: true, location_name: "OptOutListName"))
     PutOptedOutNumberRequest.add_member(:opted_out_number, Shapes::ShapeRef.new(shape: PhoneNumber, required: true, location_name: "OptedOutNumber"))
     PutOptedOutNumberRequest.struct_class = Types::PutOptedOutNumberRequest
@@ -1278,6 +1346,22 @@ module Aws::PinpointSMSVoiceV2
     PutOptedOutNumberResult.add_member(:opted_out_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "OptedOutTimestamp"))
     PutOptedOutNumberResult.add_member(:end_user_opted_out, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "EndUserOptedOut"))
     PutOptedOutNumberResult.struct_class = Types::PutOptedOutNumberResult
+
+    PutProtectConfigurationRuleSetNumberOverrideRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    PutProtectConfigurationRuleSetNumberOverrideRequest.add_member(:protect_configuration_id, Shapes::ShapeRef.new(shape: ProtectConfigurationIdOrArn, required: true, location_name: "ProtectConfigurationId"))
+    PutProtectConfigurationRuleSetNumberOverrideRequest.add_member(:destination_phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, required: true, location_name: "DestinationPhoneNumber"))
+    PutProtectConfigurationRuleSetNumberOverrideRequest.add_member(:action, Shapes::ShapeRef.new(shape: ProtectConfigurationRuleOverrideAction, required: true, location_name: "Action"))
+    PutProtectConfigurationRuleSetNumberOverrideRequest.add_member(:expiration_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExpirationTimestamp"))
+    PutProtectConfigurationRuleSetNumberOverrideRequest.struct_class = Types::PutProtectConfigurationRuleSetNumberOverrideRequest
+
+    PutProtectConfigurationRuleSetNumberOverrideResult.add_member(:protect_configuration_arn, Shapes::ShapeRef.new(shape: ProtectConfigurationArn, required: true, location_name: "ProtectConfigurationArn"))
+    PutProtectConfigurationRuleSetNumberOverrideResult.add_member(:protect_configuration_id, Shapes::ShapeRef.new(shape: ProtectConfigurationId, required: true, location_name: "ProtectConfigurationId"))
+    PutProtectConfigurationRuleSetNumberOverrideResult.add_member(:destination_phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, required: true, location_name: "DestinationPhoneNumber"))
+    PutProtectConfigurationRuleSetNumberOverrideResult.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTimestamp"))
+    PutProtectConfigurationRuleSetNumberOverrideResult.add_member(:action, Shapes::ShapeRef.new(shape: ProtectConfigurationRuleOverrideAction, required: true, location_name: "Action"))
+    PutProtectConfigurationRuleSetNumberOverrideResult.add_member(:iso_country_code, Shapes::ShapeRef.new(shape: IsoCountryCode, location_name: "IsoCountryCode"))
+    PutProtectConfigurationRuleSetNumberOverrideResult.add_member(:expiration_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExpirationTimestamp"))
+    PutProtectConfigurationRuleSetNumberOverrideResult.struct_class = Types::PutProtectConfigurationRuleSetNumberOverrideResult
 
     PutRegistrationFieldValueRequest.add_member(:registration_id, Shapes::ShapeRef.new(shape: RegistrationIdOrArn, required: true, location_name: "RegistrationId"))
     PutRegistrationFieldValueRequest.add_member(:field_path, Shapes::ShapeRef.new(shape: FieldPath, required: true, location_name: "FieldPath"))
@@ -1586,6 +1670,7 @@ module Aws::PinpointSMSVoiceV2
     SendMediaMessageRequest.add_member(:context, Shapes::ShapeRef.new(shape: ContextMap, location_name: "Context"))
     SendMediaMessageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "DryRun"))
     SendMediaMessageRequest.add_member(:protect_configuration_id, Shapes::ShapeRef.new(shape: ProtectConfigurationIdOrArn, location_name: "ProtectConfigurationId"))
+    SendMediaMessageRequest.add_member(:message_feedback_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "MessageFeedbackEnabled"))
     SendMediaMessageRequest.struct_class = Types::SendMediaMessageRequest
 
     SendMediaMessageResult.add_member(:message_id, Shapes::ShapeRef.new(shape: String, location_name: "MessageId"))
@@ -1603,6 +1688,7 @@ module Aws::PinpointSMSVoiceV2
     SendTextMessageRequest.add_member(:destination_country_parameters, Shapes::ShapeRef.new(shape: DestinationCountryParameters, location_name: "DestinationCountryParameters"))
     SendTextMessageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "DryRun"))
     SendTextMessageRequest.add_member(:protect_configuration_id, Shapes::ShapeRef.new(shape: ProtectConfigurationIdOrArn, location_name: "ProtectConfigurationId"))
+    SendTextMessageRequest.add_member(:message_feedback_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "MessageFeedbackEnabled"))
     SendTextMessageRequest.struct_class = Types::SendTextMessageRequest
 
     SendTextMessageResult.add_member(:message_id, Shapes::ShapeRef.new(shape: String, location_name: "MessageId"))
@@ -1619,6 +1705,7 @@ module Aws::PinpointSMSVoiceV2
     SendVoiceMessageRequest.add_member(:context, Shapes::ShapeRef.new(shape: ContextMap, location_name: "Context"))
     SendVoiceMessageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "DryRun"))
     SendVoiceMessageRequest.add_member(:protect_configuration_id, Shapes::ShapeRef.new(shape: ProtectConfigurationIdOrArn, location_name: "ProtectConfigurationId"))
+    SendVoiceMessageRequest.add_member(:message_feedback_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "MessageFeedbackEnabled"))
     SendVoiceMessageRequest.struct_class = Types::SendVoiceMessageRequest
 
     SendVoiceMessageResult.add_member(:message_id, Shapes::ShapeRef.new(shape: String, location_name: "MessageId"))
@@ -1658,6 +1745,15 @@ module Aws::PinpointSMSVoiceV2
     SetAccountDefaultProtectConfigurationResult.add_member(:default_protect_configuration_arn, Shapes::ShapeRef.new(shape: ProtectConfigurationArn, required: true, location_name: "DefaultProtectConfigurationArn"))
     SetAccountDefaultProtectConfigurationResult.add_member(:default_protect_configuration_id, Shapes::ShapeRef.new(shape: ProtectConfigurationId, required: true, location_name: "DefaultProtectConfigurationId"))
     SetAccountDefaultProtectConfigurationResult.struct_class = Types::SetAccountDefaultProtectConfigurationResult
+
+    SetDefaultMessageFeedbackEnabledRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetNameOrArn, required: true, location_name: "ConfigurationSetName"))
+    SetDefaultMessageFeedbackEnabledRequest.add_member(:message_feedback_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "MessageFeedbackEnabled"))
+    SetDefaultMessageFeedbackEnabledRequest.struct_class = Types::SetDefaultMessageFeedbackEnabledRequest
+
+    SetDefaultMessageFeedbackEnabledResult.add_member(:configuration_set_arn, Shapes::ShapeRef.new(shape: String, location_name: "ConfigurationSetArn"))
+    SetDefaultMessageFeedbackEnabledResult.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
+    SetDefaultMessageFeedbackEnabledResult.add_member(:message_feedback_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "MessageFeedbackEnabled"))
+    SetDefaultMessageFeedbackEnabledResult.struct_class = Types::SetDefaultMessageFeedbackEnabledResult
 
     SetDefaultMessageTypeRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetNameOrArn, required: true, location_name: "ConfigurationSetName"))
     SetDefaultMessageTypeRequest.add_member(:message_type, Shapes::ShapeRef.new(shape: MessageType, required: true, location_name: "MessageType"))
@@ -2239,6 +2335,19 @@ module Aws::PinpointSMSVoiceV2
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:delete_protect_configuration_rule_set_number_override, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteProtectConfigurationRuleSetNumberOverride"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteProtectConfigurationRuleSetNumberOverrideRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteProtectConfigurationRuleSetNumberOverrideResult)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:delete_registration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteRegistration"
         o.http_method = "POST"
@@ -2774,6 +2883,25 @@ module Aws::PinpointSMSVoiceV2
         )
       end)
 
+      api.add_operation(:list_protect_configuration_rule_set_number_overrides, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListProtectConfigurationRuleSetNumberOverrides"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListProtectConfigurationRuleSetNumberOverridesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListProtectConfigurationRuleSetNumberOverridesResult)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_registration_associations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListRegistrationAssociations"
         o.http_method = "POST"
@@ -2821,6 +2949,19 @@ module Aws::PinpointSMSVoiceV2
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:put_message_feedback, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutMessageFeedback"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutMessageFeedbackRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutMessageFeedbackResult)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:put_opted_out_number, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutOptedOutNumber"
         o.http_method = "POST"
@@ -2831,6 +2972,20 @@ module Aws::PinpointSMSVoiceV2
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:put_protect_configuration_rule_set_number_override, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutProtectConfigurationRuleSetNumberOverride"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutProtectConfigurationRuleSetNumberOverrideRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutProtectConfigurationRuleSetNumberOverrideResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -2984,6 +3139,19 @@ module Aws::PinpointSMSVoiceV2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: SetAccountDefaultProtectConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: SetAccountDefaultProtectConfigurationResult)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:set_default_message_feedback_enabled, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SetDefaultMessageFeedbackEnabled"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SetDefaultMessageFeedbackEnabledRequest)
+        o.output = Shapes::ShapeRef.new(shape: SetDefaultMessageFeedbackEnabledResult)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

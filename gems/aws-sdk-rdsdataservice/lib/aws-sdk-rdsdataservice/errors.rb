@@ -31,6 +31,7 @@ module Aws::RDSDataService
   # * {BadRequestException}
   # * {DatabaseErrorException}
   # * {DatabaseNotFoundException}
+  # * {DatabaseResumingException}
   # * {DatabaseUnavailableException}
   # * {ForbiddenException}
   # * {HttpEndpointNotEnabledException}
@@ -99,6 +100,21 @@ module Aws::RDSDataService
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::RDSDataService::Types::DatabaseNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class DatabaseResumingException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDSDataService::Types::DatabaseResumingException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

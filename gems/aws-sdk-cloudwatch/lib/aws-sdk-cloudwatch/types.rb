@@ -1073,6 +1073,73 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
+    # An entity associated with metrics, to allow for finding related
+    # telemetry. An entity is typically a resource or service within your
+    # system. For example, metrics from an Amazon EC2 instance could be
+    # associated with that instance as the entity. Similarly, metrics from a
+    # service that you own could be associated with that service as the
+    # entity.
+    #
+    # @!attribute [rw] key_attributes
+    #   The attributes of the entity which identify the specific entity, as
+    #   a list of key-value pairs. Entities with the same `KeyAttributes`
+    #   are considered to be the same entity. For an entity to be valid, the
+    #   `KeyAttributes` must exist and be formatted correctly.
+    #
+    #   There are five allowed attributes (key names): `Type`,
+    #   `ResourceType`, `Identifier`, `Name`, and `Environment`.
+    #
+    #   For details about how to use the key attributes to specify an
+    #   entity, see [How to add related information to telemetry][1] in the
+    #   *CloudWatch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/adding-your-own-related-telemetry.html
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] attributes
+    #   Additional attributes of the entity that are not used to specify the
+    #   identity of the entity. A list of key-value pairs.
+    #
+    #   For details about how to use the attributes, see [How to add related
+    #   information to telemetry][1] in the *CloudWatch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/adding-your-own-related-telemetry.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/Entity AWS API Documentation
+    #
+    class Entity < Struct.new(
+      :key_attributes,
+      :attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A set of metrics that are associated with an entity, such as a
+    # specific service or resource. Contains the entity and the list of
+    # metric data associated with it.
+    #
+    # @!attribute [rw] entity
+    #   The entity associated with the metrics.
+    #   @return [Types::Entity]
+    #
+    # @!attribute [rw] metric_data
+    #   The metric data.
+    #   @return [Array<Types::MetricDatum>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/EntityMetricData AWS API Documentation
+    #
+    class EntityMetricData < Struct.new(
+      :entity,
+      :metric_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] dashboard_name
     #   The name of the dashboard to be described.
     #   @return [String]
@@ -2157,7 +2224,7 @@ module Aws::CloudWatch
     #
     #   The results that are returned are an approximation of the value you
     #   specify. There is a low probability that the returned results
-    #   include metrics with last published data as much as 40 minutes more
+    #   include metrics with last published data as much as 50 minutes more
     #   than the specified time interval.
     #   @return [String]
     #
@@ -4045,6 +4112,10 @@ module Aws::CloudWatch
     #   tags you specify in this parameter are ignored. To change the tags
     #   of an existing alarm, use [TagResource][1] or [UntagResource][2].
     #
+    #   To use this field to set tags for an alarm when you create it, you
+    #   must be signed on with both the `cloudwatch:PutMetricAlarm` and
+    #   `cloudwatch:TagResource` permissions.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html
@@ -4101,15 +4172,75 @@ module Aws::CloudWatch
     #   @return [String]
     #
     # @!attribute [rw] metric_data
-    #   The data for the metric. The array can include no more than 1000
+    #   The data for the metrics. Use this parameter if your metrics do not
+    #   contain associated entities. The array can include no more than 1000
     #   metrics per call.
+    #
+    #   The limit of metrics allowed, 1000, is the sum of both
+    #   `EntityMetricData` and `MetricData` metrics.
     #   @return [Array<Types::MetricDatum>]
+    #
+    # @!attribute [rw] entity_metric_data
+    #   Data for metrics that contain associated entity information. You can
+    #   include up to two `EntityMetricData` objects, each of which can
+    #   contain a single `Entity` and associated metrics.
+    #
+    #   The limit of metrics allowed, 1000, is the sum of both
+    #   `EntityMetricData` and `MetricData` metrics.
+    #   @return [Array<Types::EntityMetricData>]
+    #
+    # @!attribute [rw] strict_entity_validation
+    #   Whether to accept valid metric data when an invalid entity is sent.
+    #
+    #   * When set to `true`: Any validation error (for entity or metric
+    #     data) will fail the entire request, and no data will be ingested.
+    #     The failed operation will return a 400 result with the error.
+    #
+    #   * When set to `false`: Validation errors in the entity will not
+    #     associate the metric with the entity, but the metric data will
+    #     still be accepted and ingested. Validation errors in the metric
+    #     data will fail the entire request, and no data will be ingested.
+    #
+    #     In the case of an invalid entity, the operation will return a
+    #     `200` status, but an additional response header will contain
+    #     information about the validation errors. The new header,
+    #     `X-Amzn-Failure-Message` is an enumeration of the following
+    #     values:
+    #
+    #     * `InvalidEntity` - The provided entity is invalid.
+    #
+    #     * `InvalidKeyAttributes` - The provided `KeyAttributes` of an
+    #       entity is invalid.
+    #
+    #     * `InvalidAttributes` - The provided `Attributes` of an entity is
+    #       invalid.
+    #
+    #     * `InvalidTypeValue` - The provided `Type` in the `KeyAttributes`
+    #       of an entity is invalid.
+    #
+    #     * `EntitySizeTooLarge` - The number of `EntityMetricData` objects
+    #       allowed is 2.
+    #
+    #     * `MissingRequiredFields` - There are missing required fields in
+    #       the `KeyAttributes` for the provided `Type`.
+    #     For details of the requirements for specifying an entity, see [How
+    #     to add related information to telemetry][1] in the *CloudWatch
+    #     User Guide*.
+    #
+    #   This parameter is *required* when `EntityMetricData` is included.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/adding-your-own-related-telemetry.html
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricDataInput AWS API Documentation
     #
     class PutMetricDataInput < Struct.new(
       :namespace,
-      :metric_data)
+      :metric_data,
+      :entity_metric_data,
+      :strict_entity_validation)
       SENSITIVE = []
       include Aws::Structure
     end

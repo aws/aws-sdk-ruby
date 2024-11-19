@@ -1202,7 +1202,6 @@ module Aws::TimestreamWrite
     #
     #     * Version is not present in the request, *or* the value of version
     #       in the new record is equal to or lower than the existing value
-    #
     #     If Timestream rejects data for this case, the `ExistingVersion`
     #     field in the `RejectedRecords` response will indicate the current
     #     record’s version. To force an update, you can resend the request
@@ -1260,7 +1259,6 @@ module Aws::TimestreamWrite
     #
     #   * Version is not present in the request *or* the value of version in
     #     the new record is equal to or lower than the existing value
-    #
     #   In this case, if Timestream rejects data, the `ExistingVersion`
     #   field in the `RejectedRecords` response will indicate the current
     #   record’s version. To force an update, you can resend the request

@@ -733,7 +733,6 @@ module Aws::Athena
     #       function.
     #
     #       `function=lambda_arn `
-    #
     #   * The `GLUE` type takes a catalog ID parameter and is required. The `
     #     catalog_id ` is the account ID of the Amazon Web Services account to
     #     which the Glue Data Catalog belongs.
@@ -3721,7 +3720,7 @@ module Aws::Athena
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.96.0'
+      context[:gem_version] = '1.97.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
