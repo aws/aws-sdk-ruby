@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Improve `SimpleAttributes` documentation.
+
 1.131.0 (2024-12-03)
 ------------------
 

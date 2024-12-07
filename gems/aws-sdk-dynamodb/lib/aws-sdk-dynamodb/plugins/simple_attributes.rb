@@ -32,6 +32,17 @@ module Aws
       #       }
       #     )
       #
+      # Members are marshalled using the following objects:
+      #
+      # * `Hash` or `#to_h` => `:m`
+      # * `Array` => `:l`
+      # * `String` or `Symbol` or `#to_str` => `:s`
+      # * `Numeric` => `:n`
+      # * `StringIO` or `IO` => `:b`
+      # * `Set<Object>` => `:ss` or `:ns` or `:bs`
+      # * `true` or `false` => `:bool`
+      # * `nil` => `:null`
+      #
       # With this plugin **disabled**, `simple_attributes: false`:
       #
       #     # note that all types are prefixed in a hash and that
@@ -78,6 +89,19 @@ module Aws
       #       }
       #     }
       #
+      # Members are unmarshalled into the following objects:
+      #
+      # * `:m` => `Hash`
+      # * `:l` => `Array`
+      # * `:s` => `String`
+      # * `:n` => `BigDecimal`
+      # * `:b` => `StringIO`
+      # * `:null` => `nil`
+      # * `:bool` => `true` or `false`
+      # * `:ss` => `Set<String>`
+      # * `:ns` => `Set<BigDecimal>`
+      # * `:bs` => `Set<StringIO>`
+      #
       # With this plugin **disabled**, `simple_attributes: false`:
       #
       #     # note that the request `:key` had to be type prefixed
@@ -101,6 +125,8 @@ hashes, arrays, sets, integers, floats, booleans, and nil.
 Disabling this option requires that all attribute values have
 their types specified, e.g. `{ s: 'abc' }` instead of simply
 `'abc'`.
+
+See {Aws::DynamoDB::Plugins::SimpleAttributes} for more information.
         DOCS
         ) do |config|
           !config.simple_json
