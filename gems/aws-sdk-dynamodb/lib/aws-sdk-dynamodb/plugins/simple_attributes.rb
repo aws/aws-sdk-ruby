@@ -13,6 +13,30 @@ module Aws
       #
       #     ddb = Aws::DynamoDB::Client.new(simple_attributes: false)
       #
+      # Members are marshalled using the following objects:
+      #
+      # * `Hash` or `#to_h` => `:m`
+      # * `Array` => `:l`
+      # * `String` or `Symbol` or `#to_str` => `:s`
+      # * `Numeric` => `:n`
+      # * `StringIO` or `IO` => `:b`
+      # * `Set<Object>` => `:ss` or `:ns` or `:bs`
+      # * `true` or `false` => `:bool`
+      # * `nil` => `:null`
+      #
+      # Members are unmarshalled into the following objects:
+      #
+      # * `:m` => `Hash`
+      # * `:l` => `Array`
+      # * `:s` => `String`
+      # * `:n` => `BigDecimal`
+      # * `:b` => `StringIO`
+      # * `:null` => `nil`
+      # * `:bool` => `true` or `false`
+      # * `:ss` => `Set<String>`
+      # * `:ns` => `Set<BigDecimal>`
+      # * `:bs` => `Set<StringIO>`
+      #
       # ## Input Examples
       #
       # With this plugin **enabled**, `simple_attributes: true`:
@@ -31,17 +55,6 @@ module Aws
       #         }
       #       }
       #     )
-      #
-      # Members are marshalled using the following objects:
-      #
-      # * `Hash` or `#to_h` => `:m`
-      # * `Array` => `:l`
-      # * `String` or `Symbol` or `#to_str` => `:s`
-      # * `Numeric` => `:n`
-      # * `StringIO` or `IO` => `:b`
-      # * `Set<Object>` => `:ss` or `:ns` or `:bs`
-      # * `true` or `false` => `:bool`
-      # * `nil` => `:null`
       #
       # With this plugin **disabled**, `simple_attributes: false`:
       #
@@ -88,19 +101,6 @@ module Aws
       #         last: 'Doe',
       #       }
       #     }
-      #
-      # Members are unmarshalled into the following objects:
-      #
-      # * `:m` => `Hash`
-      # * `:l` => `Array`
-      # * `:s` => `String`
-      # * `:n` => `BigDecimal`
-      # * `:b` => `StringIO`
-      # * `:null` => `nil`
-      # * `:bool` => `true` or `false`
-      # * `:ss` => `Set<String>`
-      # * `:ns` => `Set<BigDecimal>`
-      # * `:bs` => `Set<StringIO>`
       #
       # With this plugin **disabled**, `simple_attributes: false`:
       #
