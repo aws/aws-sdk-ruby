@@ -238,6 +238,7 @@ module Aws
             credentials_provider: context[:sigv4_credentials] || context.config.credentials,
             signing_algorithm: scheme_name.to_sym,
             uri_escape_path: !!!auth_scheme['disableDoubleEncoding'],
+            normalize_path: !!!auth_scheme['disableNormalizePath'],
             unsigned_headers: unsigned_headers,
             apply_checksum_header: false
           )

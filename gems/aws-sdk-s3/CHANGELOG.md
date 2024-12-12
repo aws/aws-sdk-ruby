@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Do not normalize object keys when calling `presigned_url` or `presigned_request`.
+
 1.176.0 (2024-12-03)
 ------------------
 

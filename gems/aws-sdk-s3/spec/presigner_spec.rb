@@ -189,6 +189,15 @@ module Aws
           expect(url).to match(/x-amz-acl=public-read/)
         end
 
+        it 'does not normalize object keys' do
+          url = subject.presigned_url(
+            :get_object,
+            bucket: 'aws-sdk',
+            key: 'foo/../bar'
+          )
+          expect(url).to include('foo/../bar')
+        end
+
         context 'credential expiration' do
           let(:credentials) do
             credentials_provider_class.new(expiration_time)
@@ -331,12 +340,20 @@ module Aws
         end
 
         it 'returns x-amz-* headers instead of hoisting to the query string' do
-          signer = Presigner.new(client: client)
-          url, headers = signer.presigned_request(
+          url, headers = subject.presigned_request(
             :put_object, bucket: 'aws-sdk', key: 'foo', acl: 'public-read'
           )
           expect(url).to match(/X-Amz-SignedHeaders=host%3Bx-amz-acl/)
           expect(headers).to eq('x-amz-acl' => 'public-read')
+        end
+
+        it 'does not normalize object keys' do
+          url, = subject.presigned_request(
+            :get_object,
+            bucket: 'aws-sdk',
+            key: 'foo/../bar'
+          )
+          expect(url).to include('foo/../bar')
         end
 
         context 'credential expiration' do
