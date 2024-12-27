@@ -24,9 +24,6 @@ module Aws
   #   arn.resource
   #   # => foo/bar
   #
-  #   # Note: parser available for parsing resource details
-  #   @see Aws::ARNParser#parse_resource
-  #
   # @see https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-arns
   class ARN
 

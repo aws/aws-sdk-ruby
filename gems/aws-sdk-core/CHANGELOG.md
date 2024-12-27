@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix documentation that references a non-existent method.
+
 3.214.0 (2024-11-25)
 ------------------
 
