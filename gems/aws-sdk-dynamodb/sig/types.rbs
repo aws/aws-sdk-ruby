@@ -1096,6 +1096,7 @@ module Aws::DynamoDB
 
     class PointInTimeRecoveryDescription
       attr_accessor point_in_time_recovery_status: ("ENABLED" | "DISABLED")
+      attr_accessor recovery_period_in_days: ::Integer
       attr_accessor earliest_restorable_date_time: ::Time
       attr_accessor latest_restorable_date_time: ::Time
       SENSITIVE: []
@@ -1103,6 +1104,7 @@ module Aws::DynamoDB
 
     class PointInTimeRecoverySpecification
       attr_accessor point_in_time_recovery_enabled: bool
+      attr_accessor recovery_period_in_days: ::Integer
       SENSITIVE: []
     end
 

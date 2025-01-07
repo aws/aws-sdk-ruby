@@ -1098,7 +1098,8 @@ module Aws
       def update_continuous_backups: (
                                        table_name: ::String,
                                        point_in_time_recovery_specification: {
-                                         point_in_time_recovery_enabled: bool
+                                         point_in_time_recovery_enabled: bool,
+                                         recovery_period_in_days: ::Integer?
                                        }
                                      ) -> _UpdateContinuousBackupsResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateContinuousBackupsResponseSuccess

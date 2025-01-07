@@ -344,6 +344,7 @@ module Aws::DynamoDB
     PutResourcePolicyOutput = Shapes::StructureShape.new(name: 'PutResourcePolicyOutput')
     QueryInput = Shapes::StructureShape.new(name: 'QueryInput')
     QueryOutput = Shapes::StructureShape.new(name: 'QueryOutput')
+    RecoveryPeriodInDays = Shapes::IntegerShape.new(name: 'RecoveryPeriodInDays')
     RegionName = Shapes::StringShape.new(name: 'RegionName')
     Replica = Shapes::StructureShape.new(name: 'Replica')
     ReplicaAlreadyExistsException = Shapes::StructureShape.new(name: 'ReplicaAlreadyExistsException')
@@ -1381,11 +1382,13 @@ module Aws::DynamoDB
     PartiQLBatchResponse.member = Shapes::ShapeRef.new(shape: BatchStatementResponse)
 
     PointInTimeRecoveryDescription.add_member(:point_in_time_recovery_status, Shapes::ShapeRef.new(shape: PointInTimeRecoveryStatus, location_name: "PointInTimeRecoveryStatus"))
+    PointInTimeRecoveryDescription.add_member(:recovery_period_in_days, Shapes::ShapeRef.new(shape: RecoveryPeriodInDays, location_name: "RecoveryPeriodInDays"))
     PointInTimeRecoveryDescription.add_member(:earliest_restorable_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "EarliestRestorableDateTime"))
     PointInTimeRecoveryDescription.add_member(:latest_restorable_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "LatestRestorableDateTime"))
     PointInTimeRecoveryDescription.struct_class = Types::PointInTimeRecoveryDescription
 
     PointInTimeRecoverySpecification.add_member(:point_in_time_recovery_enabled, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "PointInTimeRecoveryEnabled"))
+    PointInTimeRecoverySpecification.add_member(:recovery_period_in_days, Shapes::ShapeRef.new(shape: RecoveryPeriodInDays, location_name: "RecoveryPeriodInDays"))
     PointInTimeRecoverySpecification.struct_class = Types::PointInTimeRecoverySpecification
 
     PointInTimeRecoveryUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))

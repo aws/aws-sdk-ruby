@@ -34,7 +34,7 @@ module Aws::DynamoDB
             if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
               raise ArgumentError, "Invalid Configuration: Dualstack and local endpoint are not supported"
             end
-            return Aws::Endpoints::Endpoint.new(url: "http://localhost:8000", headers: {}, properties: {"authSchemes"=>[{"signingRegion"=>"us-east-1", "signingName"=>"dynamodb", "name"=>"sigv4"}]}, metadata: { account_id_endpoint: false })
+            return Aws::Endpoints::Endpoint.new(url: "http://localhost:8000", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"dynamodb", "signingRegion"=>"us-east-1"}]}, metadata: { account_id_endpoint: false })
           end
           if Aws::Endpoints::Matchers.set?(account_id_endpoint_mode) && Aws::Endpoints::Matchers.string_equals?(account_id_endpoint_mode, "required") && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(account_id))
             raise ArgumentError, "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded."

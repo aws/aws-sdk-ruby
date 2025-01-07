@@ -2542,8 +2542,9 @@ module Aws::DynamoDB
     # and `LatestRestorableDateTime`.
     #
     # `LatestRestorableDateTime` is typically 5 minutes before the current
-    # time. You can restore your table to any point in time during the last
-    # 35 days.
+    # time. You can restore your table to any point in time in the last 35
+    # days. You can set the recovery period to any value between 1 and 35
+    # days.
     #
     # You can call `DescribeContinuousBackups` at a maximum rate of 10 times
     # per second.
@@ -2569,6 +2570,7 @@ module Aws::DynamoDB
     #
     #   resp.continuous_backups_description.continuous_backups_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.continuous_backups_description.point_in_time_recovery_description.point_in_time_recovery_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.continuous_backups_description.point_in_time_recovery_description.recovery_period_in_days #=> Integer
     #   resp.continuous_backups_description.point_in_time_recovery_description.earliest_restorable_date_time #=> Time
     #   resp.continuous_backups_description.point_in_time_recovery_description.latest_restorable_date_time #=> Time
     #
@@ -5884,8 +5886,9 @@ module Aws::DynamoDB
 
     # Restores the specified table to the specified point in time within
     # `EarliestRestorableDateTime` and `LatestRestorableDateTime`. You can
-    # restore your table to any point in time during the last 35 days. Any
-    # number of users can execute up to 50 concurrent restores (any type of
+    # restore your table to any point in time in the last 35 days. You can
+    # set the recovery period to any value between 1 and 35 days. Any number
+    # of users can execute up to 50 concurrent restores (any type of
     # restore) in a given account.
     #
     # When you restore using point in time recovery, DynamoDB restores your
@@ -7037,8 +7040,9 @@ module Aws::DynamoDB
     # and `LatestRestorableDateTime`.
     #
     # `LatestRestorableDateTime` is typically 5 minutes before the current
-    # time. You can restore your table to any point in time during the last
-    # 35 days.
+    # time. You can restore your table to any point in time in the last 35
+    # days. You can set the recovery period to any value between 1 and 35
+    # days.
     #
     # @option params [required, String] :table_name
     #   The name of the table. You can also provide the Amazon Resource Name
@@ -7057,6 +7061,7 @@ module Aws::DynamoDB
     #     table_name: "TableArn", # required
     #     point_in_time_recovery_specification: { # required
     #       point_in_time_recovery_enabled: false, # required
+    #       recovery_period_in_days: 1,
     #     },
     #   })
     #
@@ -7064,6 +7069,7 @@ module Aws::DynamoDB
     #
     #   resp.continuous_backups_description.continuous_backups_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.continuous_backups_description.point_in_time_recovery_description.point_in_time_recovery_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.continuous_backups_description.point_in_time_recovery_description.recovery_period_in_days #=> Integer
     #   resp.continuous_backups_description.point_in_time_recovery_description.earliest_restorable_date_time #=> Time
     #   resp.continuous_backups_description.point_in_time_recovery_description.latest_restorable_date_time #=> Time
     #
@@ -8596,7 +8602,7 @@ module Aws::DynamoDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.132.0'
+      context[:gem_version] = '1.133.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

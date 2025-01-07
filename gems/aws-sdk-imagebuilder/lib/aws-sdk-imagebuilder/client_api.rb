@@ -211,6 +211,8 @@ module Aws::Imagebuilder
     ImageVersionList = Shapes::ListShape.new(name: 'ImageVersionList')
     ImportComponentRequest = Shapes::StructureShape.new(name: 'ImportComponentRequest')
     ImportComponentResponse = Shapes::StructureShape.new(name: 'ImportComponentResponse')
+    ImportDiskImageRequest = Shapes::StructureShape.new(name: 'ImportDiskImageRequest')
+    ImportDiskImageResponse = Shapes::StructureShape.new(name: 'ImportDiskImageResponse')
     ImportVmImageRequest = Shapes::StructureShape.new(name: 'ImportVmImageRequest')
     ImportVmImageResponse = Shapes::StructureShape.new(name: 'ImportVmImageResponse')
     InfrastructureConfiguration = Shapes::StructureShape.new(name: 'InfrastructureConfiguration')
@@ -1304,6 +1306,22 @@ module Aws::Imagebuilder
     ImportComponentResponse.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
     ImportComponentResponse.add_member(:component_build_version_arn, Shapes::ShapeRef.new(shape: ComponentBuildVersionArn, location_name: "componentBuildVersionArn"))
     ImportComponentResponse.struct_class = Types::ImportComponentResponse
+
+    ImportDiskImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "name"))
+    ImportDiskImageRequest.add_member(:semantic_version, Shapes::ShapeRef.new(shape: VersionNumber, required: true, location_name: "semanticVersion"))
+    ImportDiskImageRequest.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
+    ImportDiskImageRequest.add_member(:platform, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "platform"))
+    ImportDiskImageRequest.add_member(:os_version, Shapes::ShapeRef.new(shape: OsVersion, required: true, location_name: "osVersion"))
+    ImportDiskImageRequest.add_member(:execution_role, Shapes::ShapeRef.new(shape: RoleNameOrArn, location_name: "executionRole"))
+    ImportDiskImageRequest.add_member(:infrastructure_configuration_arn, Shapes::ShapeRef.new(shape: InfrastructureConfigurationArn, required: true, location_name: "infrastructureConfigurationArn"))
+    ImportDiskImageRequest.add_member(:uri, Shapes::ShapeRef.new(shape: Uri, required: true, location_name: "uri"))
+    ImportDiskImageRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    ImportDiskImageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    ImportDiskImageRequest.struct_class = Types::ImportDiskImageRequest
+
+    ImportDiskImageResponse.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
+    ImportDiskImageResponse.add_member(:image_build_version_arn, Shapes::ShapeRef.new(shape: ImageBuildVersionArn, location_name: "imageBuildVersionArn"))
+    ImportDiskImageResponse.struct_class = Types::ImportDiskImageResponse
 
     ImportVmImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "name"))
     ImportVmImageRequest.add_member(:semantic_version, Shapes::ShapeRef.new(shape: VersionNumber, required: true, location_name: "semanticVersion"))
@@ -2757,6 +2775,17 @@ module Aws::Imagebuilder
         o.errors << Shapes::ShapeRef.new(shape: InvalidVersionNumberException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+      end)
+
+      api.add_operation(:import_disk_image, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ImportDiskImage"
+        o.http_method = "PUT"
+        o.http_request_uri = "/ImportDiskImage"
+        o.input = Shapes::ShapeRef.new(shape: ImportDiskImageRequest)
+        o.output = Shapes::ShapeRef.new(shape: ImportDiskImageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:import_vm_image, Seahorse::Model::Operation.new.tap do |o|

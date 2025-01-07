@@ -5853,6 +5853,14 @@ module Aws::DynamoDB
     #   * `DISABLED` - Point in time recovery is disabled.
     #   @return [String]
     #
+    # @!attribute [rw] recovery_period_in_days
+    #   The number of preceding days for which continuous backups are taken
+    #   and maintained. Your table data is only recoverable to any
+    #   point-in-time from within the configured recovery period. This
+    #   parameter is optional. If no value is provided, the value will
+    #   default to 35.
+    #   @return [Integer]
+    #
     # @!attribute [rw] earliest_restorable_date_time
     #   Specifies the earliest point in time you can restore your table to.
     #   You can restore your table to any point in time during the last 35
@@ -5868,6 +5876,7 @@ module Aws::DynamoDB
     #
     class PointInTimeRecoveryDescription < Struct.new(
       :point_in_time_recovery_status,
+      :recovery_period_in_days,
       :earliest_restorable_date_time,
       :latest_restorable_date_time)
       SENSITIVE = []
@@ -5881,10 +5890,19 @@ module Aws::DynamoDB
     #   disabled (false) on the table.
     #   @return [Boolean]
     #
+    # @!attribute [rw] recovery_period_in_days
+    #   The number of preceding days for which continuous backups are taken
+    #   and maintained. Your table data is only recoverable to any
+    #   point-in-time from within the configured recovery period. This
+    #   parameter is optional. If no value is provided, the value will
+    #   default to 35.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/PointInTimeRecoverySpecification AWS API Documentation
     #
     class PointInTimeRecoverySpecification < Struct.new(
-      :point_in_time_recovery_enabled)
+      :point_in_time_recovery_enabled,
+      :recovery_period_in_days)
       SENSITIVE = []
       include Aws::Structure
     end

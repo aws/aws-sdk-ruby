@@ -168,6 +168,7 @@ module Aws::CloudHSMV2
     Cluster.add_member(:create_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateTimestamp"))
     Cluster.add_member(:hsms, Shapes::ShapeRef.new(shape: Hsms, location_name: "Hsms"))
     Cluster.add_member(:hsm_type, Shapes::ShapeRef.new(shape: HsmType, location_name: "HsmType"))
+    Cluster.add_member(:hsm_type_rollback_expiration, Shapes::ShapeRef.new(shape: Timestamp, location_name: "HsmTypeRollbackExpiration"))
     Cluster.add_member(:pre_co_password, Shapes::ShapeRef.new(shape: PreCoPassword, location_name: "PreCoPassword"))
     Cluster.add_member(:security_group, Shapes::ShapeRef.new(shape: SecurityGroup, location_name: "SecurityGroup"))
     Cluster.add_member(:source_backup_id, Shapes::ShapeRef.new(shape: BackupId, location_name: "SourceBackupId"))
@@ -284,6 +285,7 @@ module Aws::CloudHSMV2
     Hsm.add_member(:eni_ip, Shapes::ShapeRef.new(shape: IpAddress, location_name: "EniIp"))
     Hsm.add_member(:eni_ip_v6, Shapes::ShapeRef.new(shape: IpV6Address, location_name: "EniIpV6"))
     Hsm.add_member(:hsm_id, Shapes::ShapeRef.new(shape: HsmId, required: true, location_name: "HsmId"))
+    Hsm.add_member(:hsm_type, Shapes::ShapeRef.new(shape: HsmType, location_name: "HsmType"))
     Hsm.add_member(:state, Shapes::ShapeRef.new(shape: HsmState, location_name: "State"))
     Hsm.add_member(:state_message, Shapes::ShapeRef.new(shape: String, location_name: "StateMessage"))
     Hsm.struct_class = Types::Hsm
@@ -315,7 +317,8 @@ module Aws::CloudHSMV2
     ModifyBackupAttributesResponse.add_member(:backup, Shapes::ShapeRef.new(shape: Backup, location_name: "Backup"))
     ModifyBackupAttributesResponse.struct_class = Types::ModifyBackupAttributesResponse
 
-    ModifyClusterRequest.add_member(:backup_retention_policy, Shapes::ShapeRef.new(shape: BackupRetentionPolicy, required: true, location_name: "BackupRetentionPolicy"))
+    ModifyClusterRequest.add_member(:hsm_type, Shapes::ShapeRef.new(shape: HsmType, location_name: "HsmType"))
+    ModifyClusterRequest.add_member(:backup_retention_policy, Shapes::ShapeRef.new(shape: BackupRetentionPolicy, location_name: "BackupRetentionPolicy"))
     ModifyClusterRequest.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ClusterId"))
     ModifyClusterRequest.struct_class = Types::ModifyClusterRequest
 

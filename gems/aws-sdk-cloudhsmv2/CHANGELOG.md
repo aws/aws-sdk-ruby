@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2025-01-07)
+------------------
+
+* Feature - Adds support to ModifyCluster for modifying a Cluster's Hsm Type.
+
 1.70.0 (2024-12-13)
 ------------------
 

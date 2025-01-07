@@ -280,6 +280,11 @@ module Aws::CloudHSMV2
     #   The type of HSM that the cluster contains.
     #   @return [String]
     #
+    # @!attribute [rw] hsm_type_rollback_expiration
+    #   The timestamp until when the cluster can be rolled back to its
+    #   original HSM type.
+    #   @return [Time]
+    #
     # @!attribute [rw] pre_co_password
     #   The default password for the cluster's Pre-Crypto Officer (PRECO)
     #   user.
@@ -313,19 +318,17 @@ module Aws::CloudHSMV2
     #   @return [String]
     #
     # @!attribute [rw] network_type
-    #   The cluster's NetworkType can be set to either IPV4 (which is the
-    #   default) or DUALSTACK. When set to IPV4, communication between your
-    #   application and the Hardware Security Modules (HSMs) is restricted
-    #   to the IPv4 protocol only. In contrast, the DUALSTACK network type
-    #   enables communication over both the IPv4 and IPv6 protocols. To use
-    #   the DUALSTACK option, you'll need to configure your Virtual Private
-    #   Cloud (VPC) and subnets to support both IPv4 and IPv6. This involves
-    #   adding IPv6 Classless Inter-Domain Routing (CIDR) blocks to the
-    #   existing IPv4 CIDR blocks in your subnets. The choice between IPV4
-    #   and DUALSTACK network types determines the flexibility of the
-    #   network addressing setup for your cluster. The DUALSTACK option
-    #   provides more flexibility by allowing both IPv4 and IPv6
-    #   communication.
+    #   The cluster's NetworkType can be IPv4 (the default) or DUALSTACK.
+    #   The IPv4 NetworkType restricts communication between your
+    #   application and the hardware security modules (HSMs) to the IPv4
+    #   protocol only. The DUALSTACK NetworkType enables communication over
+    #   both IPv4 and IPv6 protocols. To use DUALSTACK, configure your
+    #   virtual private cloud (VPC) and subnets to support both IPv4 and
+    #   IPv6. This configuration involves adding IPv6 Classless Inter-Domain
+    #   Routing (CIDR) blocks to the existing IPv4 CIDR blocks in your
+    #   subnets. The NetworkType you choose affects the network addressing
+    #   options for your cluster. DUALSTACK provides more flexibility by
+    #   supporting both IPv4 and IPv6 communication.
     #   @return [String]
     #
     # @!attribute [rw] certificates
@@ -350,6 +353,7 @@ module Aws::CloudHSMV2
       :create_timestamp,
       :hsms,
       :hsm_type,
+      :hsm_type_rollback_expiration,
       :pre_co_password,
       :security_group,
       :source_backup_id,
@@ -873,6 +877,10 @@ module Aws::CloudHSMV2
     #   The HSM's identifier (ID).
     #   @return [String]
     #
+    # @!attribute [rw] hsm_type
+    #   The type of HSM.
+    #   @return [String]
+    #
     # @!attribute [rw] state
     #   The HSM's state.
     #   @return [String]
@@ -891,6 +899,7 @@ module Aws::CloudHSMV2
       :eni_ip,
       :eni_ip_v6,
       :hsm_id,
+      :hsm_type,
       :state,
       :state_message)
       SENSITIVE = []
@@ -1028,6 +1037,10 @@ module Aws::CloudHSMV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] hsm_type
+    #   The desired HSM type of the cluster.
+    #   @return [String]
+    #
     # @!attribute [rw] backup_retention_policy
     #   A policy that defines how the service retains backups.
     #   @return [Types::BackupRetentionPolicy]
@@ -1040,6 +1053,7 @@ module Aws::CloudHSMV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/ModifyClusterRequest AWS API Documentation
     #
     class ModifyClusterRequest < Struct.new(
+      :hsm_type,
       :backup_retention_policy,
       :cluster_id)
       SENSITIVE = []

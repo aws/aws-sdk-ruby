@@ -254,7 +254,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudHSMV2/Client.html#modify_cluster-instance_method
       def modify_cluster: (
-                            backup_retention_policy: {
+                            ?hsm_type: ::String,
+                            ?backup_retention_policy: {
                               type: ("DAYS")?,
                               value: ::String?
                             },

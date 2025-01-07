@@ -3453,6 +3453,8 @@ module Aws::Imagebuilder
     #
     #   * **IMPORT** – A VM import created the image to use as the base
     #     image for the recipe.
+    #
+    #   * **IMPORT\_ISO** – An ISO disk import created the image.
     #   @return [String]
     #
     # @!attribute [rw] image_source
@@ -4099,6 +4101,8 @@ module Aws::Imagebuilder
     #
     #   * **IMPORT** – A VM import created the image to use as the base
     #     image for the recipe.
+    #
+    #   * **IMPORT\_ISO** – An ISO disk import created the image.
     #   @return [String]
     #
     # @!attribute [rw] image_source
@@ -4151,8 +4155,7 @@ module Aws::Imagebuilder
     # @!attribute [rw] timeout_minutes
     #   The maximum time in minutes that tests are permitted to run.
     #
-    #   <note markdown="1"> The timeout attribute is not currently active. This value is
-    #   ignored.
+    #   <note markdown="1"> The timeout property is not currently active. This value is ignored.
     #
     #    </note>
     #   @return [Integer]
@@ -4255,6 +4258,8 @@ module Aws::Imagebuilder
     #
     #   * **IMPORT** – A VM import created the image to use as the base
     #     image for the recipe.
+    #
+    #   * **IMPORT\_ISO** – An ISO disk import created the image.
     #   @return [String]
     #
     # @!attribute [rw] image_source
@@ -4396,6 +4401,98 @@ module Aws::Imagebuilder
       :request_id,
       :client_token,
       :component_build_version_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the image resource that's created from the import.
+    #   @return [String]
+    #
+    # @!attribute [rw] semantic_version
+    #   The semantic version to attach to the image that's created during
+    #   the import process. This version follows the semantic version
+    #   syntax.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description for your disk image import.
+    #   @return [String]
+    #
+    # @!attribute [rw] platform
+    #   The operating system platform for the imported image. Allowed values
+    #   include the following: `Windows`.
+    #   @return [String]
+    #
+    # @!attribute [rw] os_version
+    #   The operating system version for the imported image. Allowed values
+    #   include the following: `Microsoft Windows 11`.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_role
+    #   The name or Amazon Resource Name (ARN) for the IAM role you create
+    #   that grants Image Builder access to perform workflow actions to
+    #   import an image from a Microsoft ISO file.
+    #   @return [String]
+    #
+    # @!attribute [rw] infrastructure_configuration_arn
+    #   The Amazon Resource Name (ARN) of the infrastructure configuration
+    #   resource that's used for launching the EC2 instance on which the
+    #   ISO image is built.
+    #   @return [String]
+    #
+    # @!attribute [rw] uri
+    #   The `uri` of the ISO disk file that's stored in Amazon S3.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags that are attached to image resources created from the import.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier you provide to ensure idempotency
+    #   of the request. For more information, see [Ensuring idempotency][1]
+    #   in the *Amazon EC2 API Reference*.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ImportDiskImageRequest AWS API Documentation
+    #
+    class ImportDiskImageRequest < Struct.new(
+      :name,
+      :semantic_version,
+      :description,
+      :platform,
+      :os_version,
+      :execution_role,
+      :infrastructure_configuration_arn,
+      :uri,
+      :tags,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   The client token that uniquely identifies the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_build_version_arn
+    #   The Amazon Resource Name (ARN) of the output AMI that was created
+    #   from the ISO disk file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ImportDiskImageResponse AWS API Documentation
+    #
+    class ImportDiskImageResponse < Struct.new(
+      :client_token,
+      :image_build_version_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7331,17 +7428,22 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] pipeline_execution_start_condition
-    #   The condition configures when the pipeline should trigger a new
-    #   image build. When the `pipelineExecutionStartCondition` is set to
-    #   `EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE`, and you use
-    #   semantic version filters on the base image or components in your
-    #   image recipe, EC2 Image Builder will build a new image only when
-    #   there are new versions of the image or components in your recipe
-    #   that match the semantic version filter. When it is set to
-    #   `EXPRESSION_MATCH_ONLY`, it will build a new image every time the
-    #   CRON expression matches the current time. For semantic version
-    #   syntax, see [CreateComponent][1] in the <i> EC2 Image Builder API
-    #   Reference</i>.
+    #   The start condition configures when the pipeline should trigger a
+    #   new image build, as follows. If no value is set Image Builder
+    #   defaults to `EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE`.
+    #
+    #   * `EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE` (default) –
+    #     When you use semantic version filters on the base image or
+    #     components in your image recipe, EC2 Image Builder builds a new
+    #     image only when there are new versions of the base image or
+    #     components in your recipe that match the filter.
+    #
+    #     <note markdown="1"> For semantic version syntax, see [CreateComponent][1].
+    #
+    #      </note>
+    #
+    #   * `EXPRESSION_MATCH_ONLY` – This condition builds a new image every
+    #     time the CRON expression matches the current time.
     #
     #
     #

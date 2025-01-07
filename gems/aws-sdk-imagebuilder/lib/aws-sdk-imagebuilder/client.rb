@@ -2422,7 +2422,7 @@ module Aws::Imagebuilder
     #   resp.image.output_resources.containers[0].image_uris[0] #=> String
     #   resp.image.tags #=> Hash
     #   resp.image.tags["TagKey"] #=> String
-    #   resp.image.build_type #=> String, one of "USER_INITIATED", "SCHEDULED", "IMPORT"
+    #   resp.image.build_type #=> String, one of "USER_INITIATED", "SCHEDULED", "IMPORT", "IMPORT_ISO"
     #   resp.image.image_source #=> String, one of "AMAZON_MANAGED", "AWS_MARKETPLACE", "IMPORTED", "CUSTOM"
     #   resp.image.scan_state.status #=> String, one of "PENDING", "SCANNING", "COLLECTING", "COMPLETED", "ABANDONED", "FAILED", "TIMED_OUT"
     #   resp.image.scan_state.reason #=> String
@@ -3115,6 +3115,95 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
+    # Import a Windows operating system image from a verified Microsoft ISO
+    # disk file. The following disk images are supported:
+    #
+    # * Windows 11 Enterprise
+    #
+    # ^
+    #
+    # @option params [required, String] :name
+    #   The name of the image resource that's created from the import.
+    #
+    # @option params [required, String] :semantic_version
+    #   The semantic version to attach to the image that's created during the
+    #   import process. This version follows the semantic version syntax.
+    #
+    # @option params [String] :description
+    #   The description for your disk image import.
+    #
+    # @option params [required, String] :platform
+    #   The operating system platform for the imported image. Allowed values
+    #   include the following: `Windows`.
+    #
+    # @option params [required, String] :os_version
+    #   The operating system version for the imported image. Allowed values
+    #   include the following: `Microsoft Windows 11`.
+    #
+    # @option params [String] :execution_role
+    #   The name or Amazon Resource Name (ARN) for the IAM role you create
+    #   that grants Image Builder access to perform workflow actions to import
+    #   an image from a Microsoft ISO file.
+    #
+    # @option params [required, String] :infrastructure_configuration_arn
+    #   The Amazon Resource Name (ARN) of the infrastructure configuration
+    #   resource that's used for launching the EC2 instance on which the ISO
+    #   image is built.
+    #
+    # @option params [required, String] :uri
+    #   The `uri` of the ISO disk file that's stored in Amazon S3.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Tags that are attached to image resources created from the import.
+    #
+    # @option params [required, String] :client_token
+    #   Unique, case-sensitive identifier you provide to ensure idempotency of
+    #   the request. For more information, see [Ensuring idempotency][1] in
+    #   the *Amazon EC2 API Reference*.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @return [Types::ImportDiskImageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ImportDiskImageResponse#client_token #client_token} => String
+    #   * {Types::ImportDiskImageResponse#image_build_version_arn #image_build_version_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.import_disk_image({
+    #     name: "NonEmptyString", # required
+    #     semantic_version: "VersionNumber", # required
+    #     description: "NonEmptyString",
+    #     platform: "NonEmptyString", # required
+    #     os_version: "OsVersion", # required
+    #     execution_role: "RoleNameOrArn",
+    #     infrastructure_configuration_arn: "InfrastructureConfigurationArn", # required
+    #     uri: "Uri", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     client_token: "ClientToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.client_token #=> String
+    #   resp.image_build_version_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ImportDiskImage AWS API Documentation
+    #
+    # @overload import_disk_image(params = {})
+    # @param [Hash] params ({})
+    def import_disk_image(params = {}, options = {})
+      req = build_request(:import_disk_image, params)
+      req.send_request(options)
+    end
+
     # When you export your virtual machine (VM) from its virtualization
     # environment, that process creates a set of one or more disk container
     # files that act as snapshots of your VM’s environment, settings, and
@@ -3589,7 +3678,7 @@ module Aws::Imagebuilder
     #   resp.image_summary_list[0].output_resources.containers[0].image_uris[0] #=> String
     #   resp.image_summary_list[0].tags #=> Hash
     #   resp.image_summary_list[0].tags["TagKey"] #=> String
-    #   resp.image_summary_list[0].build_type #=> String, one of "USER_INITIATED", "SCHEDULED", "IMPORT"
+    #   resp.image_summary_list[0].build_type #=> String, one of "USER_INITIATED", "SCHEDULED", "IMPORT", "IMPORT_ISO"
     #   resp.image_summary_list[0].image_source #=> String, one of "AMAZON_MANAGED", "AWS_MARKETPLACE", "IMPORTED", "CUSTOM"
     #   resp.image_summary_list[0].deprecation_time #=> Time
     #   resp.image_summary_list[0].lifecycle_execution_id #=> String
@@ -3722,7 +3811,7 @@ module Aws::Imagebuilder
     #   resp.image_summary_list[0].output_resources.containers[0].image_uris[0] #=> String
     #   resp.image_summary_list[0].tags #=> Hash
     #   resp.image_summary_list[0].tags["TagKey"] #=> String
-    #   resp.image_summary_list[0].build_type #=> String, one of "USER_INITIATED", "SCHEDULED", "IMPORT"
+    #   resp.image_summary_list[0].build_type #=> String, one of "USER_INITIATED", "SCHEDULED", "IMPORT", "IMPORT_ISO"
     #   resp.image_summary_list[0].image_source #=> String, one of "AMAZON_MANAGED", "AWS_MARKETPLACE", "IMPORTED", "CUSTOM"
     #   resp.image_summary_list[0].deprecation_time #=> Time
     #   resp.image_summary_list[0].lifecycle_execution_id #=> String
@@ -4164,7 +4253,7 @@ module Aws::Imagebuilder
     #   resp.image_version_list[0].os_version #=> String
     #   resp.image_version_list[0].owner #=> String
     #   resp.image_version_list[0].date_created #=> String
-    #   resp.image_version_list[0].build_type #=> String, one of "USER_INITIATED", "SCHEDULED", "IMPORT"
+    #   resp.image_version_list[0].build_type #=> String, one of "USER_INITIATED", "SCHEDULED", "IMPORT", "IMPORT_ISO"
     #   resp.image_version_list[0].image_source #=> String, one of "AMAZON_MANAGED", "AWS_MARKETPLACE", "IMPORTED", "CUSTOM"
     #   resp.next_token #=> String
     #
@@ -5680,7 +5769,7 @@ module Aws::Imagebuilder
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

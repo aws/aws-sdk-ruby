@@ -83,6 +83,7 @@ module Aws::CloudHSMV2
       attr_accessor create_timestamp: ::Time
       attr_accessor hsms: ::Array[Types::Hsm]
       attr_accessor hsm_type: ::String
+      attr_accessor hsm_type_rollback_expiration: ::Time
       attr_accessor pre_co_password: ::String
       attr_accessor security_group: ::String
       attr_accessor source_backup_id: ::String
@@ -235,6 +236,7 @@ module Aws::CloudHSMV2
       attr_accessor eni_ip: ::String
       attr_accessor eni_ip_v6: ::String
       attr_accessor hsm_id: ::String
+      attr_accessor hsm_type: ::String
       attr_accessor state: ("CREATE_IN_PROGRESS" | "ACTIVE" | "DEGRADED" | "DELETE_IN_PROGRESS" | "DELETED")
       attr_accessor state_message: ::String
       SENSITIVE: []
@@ -278,6 +280,7 @@ module Aws::CloudHSMV2
     end
 
     class ModifyClusterRequest
+      attr_accessor hsm_type: ::String
       attr_accessor backup_retention_policy: Types::BackupRetentionPolicy
       attr_accessor cluster_id: ::String
       SENSITIVE: []

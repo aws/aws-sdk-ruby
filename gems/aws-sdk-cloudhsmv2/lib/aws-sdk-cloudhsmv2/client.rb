@@ -583,9 +583,11 @@ module Aws::CloudHSMV2
     #   resp.cluster.hsms[0].eni_ip #=> String
     #   resp.cluster.hsms[0].eni_ip_v6 #=> String
     #   resp.cluster.hsms[0].hsm_id #=> String
+    #   resp.cluster.hsms[0].hsm_type #=> String
     #   resp.cluster.hsms[0].state #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "DEGRADED", "DELETE_IN_PROGRESS", "DELETED"
     #   resp.cluster.hsms[0].state_message #=> String
     #   resp.cluster.hsm_type #=> String
+    #   resp.cluster.hsm_type_rollback_expiration #=> Time
     #   resp.cluster.pre_co_password #=> String
     #   resp.cluster.security_group #=> String
     #   resp.cluster.source_backup_id #=> String
@@ -655,6 +657,7 @@ module Aws::CloudHSMV2
     #   resp.hsm.eni_ip #=> String
     #   resp.hsm.eni_ip_v6 #=> String
     #   resp.hsm.hsm_id #=> String
+    #   resp.hsm.hsm_type #=> String
     #   resp.hsm.state #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "DEGRADED", "DELETE_IN_PROGRESS", "DELETED"
     #   resp.hsm.state_message #=> String
     #
@@ -753,9 +756,11 @@ module Aws::CloudHSMV2
     #   resp.cluster.hsms[0].eni_ip #=> String
     #   resp.cluster.hsms[0].eni_ip_v6 #=> String
     #   resp.cluster.hsms[0].hsm_id #=> String
+    #   resp.cluster.hsms[0].hsm_type #=> String
     #   resp.cluster.hsms[0].state #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "DEGRADED", "DELETE_IN_PROGRESS", "DELETED"
     #   resp.cluster.hsms[0].state_message #=> String
     #   resp.cluster.hsm_type #=> String
+    #   resp.cluster.hsm_type_rollback_expiration #=> Time
     #   resp.cluster.pre_co_password #=> String
     #   resp.cluster.security_group #=> String
     #   resp.cluster.source_backup_id #=> String
@@ -1053,9 +1058,11 @@ module Aws::CloudHSMV2
     #   resp.clusters[0].hsms[0].eni_ip #=> String
     #   resp.clusters[0].hsms[0].eni_ip_v6 #=> String
     #   resp.clusters[0].hsms[0].hsm_id #=> String
+    #   resp.clusters[0].hsms[0].hsm_type #=> String
     #   resp.clusters[0].hsms[0].state #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "DEGRADED", "DELETE_IN_PROGRESS", "DELETED"
     #   resp.clusters[0].hsms[0].state_message #=> String
     #   resp.clusters[0].hsm_type #=> String
+    #   resp.clusters[0].hsm_type_rollback_expiration #=> Time
     #   resp.clusters[0].pre_co_password #=> String
     #   resp.clusters[0].security_group #=> String
     #   resp.clusters[0].source_backup_id #=> String
@@ -1284,7 +1291,10 @@ module Aws::CloudHSMV2
     # **Cross-account use:** No. You cannot perform this operation on an
     # CloudHSM cluster in a different Amazon Web Services account.
     #
-    # @option params [required, Types::BackupRetentionPolicy] :backup_retention_policy
+    # @option params [String] :hsm_type
+    #   The desired HSM type of the cluster.
+    #
+    # @option params [Types::BackupRetentionPolicy] :backup_retention_policy
     #   A policy that defines how the service retains backups.
     #
     # @option params [required, String] :cluster_id
@@ -1298,7 +1308,8 @@ module Aws::CloudHSMV2
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_cluster({
-    #     backup_retention_policy: { # required
+    #     hsm_type: "HsmType",
+    #     backup_retention_policy: {
     #       type: "DAYS", # accepts DAYS
     #       value: "BackupRetentionValue",
     #     },
@@ -1320,9 +1331,11 @@ module Aws::CloudHSMV2
     #   resp.cluster.hsms[0].eni_ip #=> String
     #   resp.cluster.hsms[0].eni_ip_v6 #=> String
     #   resp.cluster.hsms[0].hsm_id #=> String
+    #   resp.cluster.hsms[0].hsm_type #=> String
     #   resp.cluster.hsms[0].state #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "DEGRADED", "DELETE_IN_PROGRESS", "DELETED"
     #   resp.cluster.hsms[0].state_message #=> String
     #   resp.cluster.hsm_type #=> String
+    #   resp.cluster.hsm_type_rollback_expiration #=> Time
     #   resp.cluster.pre_co_password #=> String
     #   resp.cluster.security_group #=> String
     #   resp.cluster.source_backup_id #=> String
@@ -1556,7 +1569,7 @@ module Aws::CloudHSMV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudhsmv2'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

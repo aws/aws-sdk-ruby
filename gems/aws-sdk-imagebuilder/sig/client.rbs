@@ -845,6 +845,26 @@ module Aws
                             ) -> _ImportComponentResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportComponentResponseSuccess
 
+      interface _ImportDiskImageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ImportDiskImageResponse]
+        def client_token: () -> ::String
+        def image_build_version_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#import_disk_image-instance_method
+      def import_disk_image: (
+                               name: ::String,
+                               semantic_version: ::String,
+                               ?description: ::String,
+                               platform: ::String,
+                               os_version: ::String,
+                               ?execution_role: ::String,
+                               infrastructure_configuration_arn: ::String,
+                               uri: ::String,
+                               ?tags: Hash[::String, ::String],
+                               client_token: ::String
+                             ) -> _ImportDiskImageResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportDiskImageResponseSuccess
+
       interface _ImportVmImageResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ImportVmImageResponse]
         def request_id: () -> ::String

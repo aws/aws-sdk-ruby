@@ -844,7 +844,7 @@ module Aws::Imagebuilder
       attr_accessor date_created: ::String
       attr_accessor output_resources: Types::OutputResources
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor build_type: ("USER_INITIATED" | "SCHEDULED" | "IMPORT")
+      attr_accessor build_type: ("USER_INITIATED" | "SCHEDULED" | "IMPORT" | "IMPORT_ISO")
       attr_accessor image_source: ("AMAZON_MANAGED" | "AWS_MARKETPLACE" | "IMPORTED" | "CUSTOM")
       attr_accessor scan_state: Types::ImageScanState
       attr_accessor image_scanning_configuration: Types::ImageScanningConfiguration
@@ -988,7 +988,7 @@ module Aws::Imagebuilder
       attr_accessor date_created: ::String
       attr_accessor output_resources: Types::OutputResources
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor build_type: ("USER_INITIATED" | "SCHEDULED" | "IMPORT")
+      attr_accessor build_type: ("USER_INITIATED" | "SCHEDULED" | "IMPORT" | "IMPORT_ISO")
       attr_accessor image_source: ("AMAZON_MANAGED" | "AWS_MARKETPLACE" | "IMPORTED" | "CUSTOM")
       attr_accessor deprecation_time: ::Time
       attr_accessor lifecycle_execution_id: ::String
@@ -1010,7 +1010,7 @@ module Aws::Imagebuilder
       attr_accessor os_version: ::String
       attr_accessor owner: ::String
       attr_accessor date_created: ::String
-      attr_accessor build_type: ("USER_INITIATED" | "SCHEDULED" | "IMPORT")
+      attr_accessor build_type: ("USER_INITIATED" | "SCHEDULED" | "IMPORT" | "IMPORT_ISO")
       attr_accessor image_source: ("AMAZON_MANAGED" | "AWS_MARKETPLACE" | "IMPORTED" | "CUSTOM")
       SENSITIVE: []
     end
@@ -1035,6 +1035,26 @@ module Aws::Imagebuilder
       attr_accessor request_id: ::String
       attr_accessor client_token: ::String
       attr_accessor component_build_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ImportDiskImageRequest
+      attr_accessor name: ::String
+      attr_accessor semantic_version: ::String
+      attr_accessor description: ::String
+      attr_accessor platform: ::String
+      attr_accessor os_version: ::String
+      attr_accessor execution_role: ::String
+      attr_accessor infrastructure_configuration_arn: ::String
+      attr_accessor uri: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class ImportDiskImageResponse
+      attr_accessor client_token: ::String
+      attr_accessor image_build_version_arn: ::String
       SENSITIVE: []
     end
 
