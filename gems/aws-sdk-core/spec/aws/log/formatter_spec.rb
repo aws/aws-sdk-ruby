@@ -34,6 +34,10 @@ module Aws
         end
 
         it 'provides a :request_params replacement' do
+          tmpfile = Tempfile.create
+          File.unlink(tmpfile.path) unless RUBY_DESCRIPTION.match?(/mswin|ming|cygwin/)
+          tmpfile.write('foo=bar')
+
           response.context.params = {
             foo: 'bar',
             attributes: {
@@ -43,6 +47,7 @@ module Aws
             config: {
               nested: true,
               path: Pathname.new(__FILE__),
+              tmpfile:,
               complex: double('obj', inspect: '"inspected"')
             },
             huge: '-' * 1000
@@ -50,8 +55,10 @@ module Aws
           formatted = format('{:request_params}', max_string_size: 20)
           size = File.size(__FILE__)
           expect(formatted).to eq(<<-FORMATTED.strip)
-{foo:"bar",attributes:{"color"=>"red","size"=>"large"},config:{nested:true,path:#<File:#{__FILE__} (#{size} bytes)>,complex:"inspected"},huge:#<String "--------------------" ... (1000 bytes)>}
+{foo:"bar",attributes:{"color"=>"red","size"=>"large"},config:{nested:true,path:#<File:#{__FILE__} (#{size} bytes)>,tmpfile:#<File:#{tmpfile.path} (#{tmpfile.size} bytes)>,complex:"inspected"},huge:#<String "--------------------" ... (1000 bytes)>}
           FORMATTED
+        ensure
+          tmpfile.close
         end
 
         it 'provides a :time replacement' do
