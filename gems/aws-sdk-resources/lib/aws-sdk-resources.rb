@@ -136,6 +136,7 @@ module Aws
   autoload :EBS, 'aws-sdk-ebs'
   autoload :EC2, 'aws-sdk-ec2'
   autoload :EC2InstanceConnect, 'aws-sdk-ec2instanceconnect'
+  autoload :Echo, 'aws-sdk-echo'
   autoload :ECR, 'aws-sdk-ecr'
   autoload :ECRPublic, 'aws-sdk-ecrpublic'
   autoload :ECS, 'aws-sdk-ecs'

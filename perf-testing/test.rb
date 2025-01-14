@@ -13,10 +13,12 @@ query_cloudwatch.describe_alarms
 # Make a CBOR request to cbor_cloudwatch
 cbor_cloudwatch.describe_alarms
 
+require 'aws-sdk-core/plugins/protocols/rpc_v2'
+ENV['AWS_REGION'] = 'us-west-2'
 Aws::SecretsManager::Client.remove_plugin(Aws::Plugins::Protocols::JsonRpc)
 json_ssm = Aws::SecretsManager::Client.new(plugins: [Aws::Plugins::Protocols::JsonRpc])
 cbor_ssm = Aws::SecretsManager::Client.new(plugins: [Aws::Plugins::Protocols::RpcV2])
-
+json_ssm.put_secret_value({secret_id: "test_id"})
 
 # TODO: add warm up iterations
 # TODO: add tests for each protocol type
