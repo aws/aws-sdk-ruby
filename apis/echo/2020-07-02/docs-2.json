@@ -1,0 +1,119 @@
+{
+  "version": "2.0",
+  "service": null,
+  "operations": {
+    "EchoOperation": null
+  },
+  "shapes": {
+    "Blob": {
+      "base": null,
+      "refs": {
+        "ComplexStructure$blobMember": null,
+        "EchoOperationInput$blobMember": null,
+        "EchoOperationOutput$blobMember": null
+      }
+    },
+    "Boolean": {
+      "base": null,
+      "refs": {
+        "ComplexStructure$booleanMember": null,
+        "EchoOperationInput$booleanMember": null,
+        "EchoOperationOutput$booleanMember": null
+      }
+    },
+    "ComplexStructure": {
+      "base": null,
+      "refs": {
+        "ComplexStructure$complexStructMember": null,
+        "EchoOperationInput$complexStructMember": null,
+        "EchoOperationOutput$complexStructMember": null,
+        "ListOfComplexStructure$member": null
+      }
+    },
+    "Double": {
+      "base": null,
+      "refs": {
+        "ComplexStructure$doubleMember": null,
+        "EchoOperationInput$doubleMember": null,
+        "EchoOperationOutput$doubleMember": null
+      }
+    },
+    "EchoOperationInput": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "EchoOperationOutput": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "Float": {
+      "base": null,
+      "refs": {
+        "ComplexStructure$floatMember": null,
+        "EchoOperationInput$floatMember": null,
+        "EchoOperationOutput$floatMember": null
+      }
+    },
+    "Integer": {
+      "base": null,
+      "refs": {
+        "ComplexStructure$integerMember": null,
+        "EchoOperationInput$integerMember": null,
+        "EchoOperationOutput$integerMember": null
+      }
+    },
+    "ListOfComplexStructure": {
+      "base": null,
+      "refs": {
+        "ComplexStructure$listOfComplexObjectMember": null,
+        "EchoOperationInput$listOfComplexObjectMember": null,
+        "EchoOperationOutput$listOfComplexObjectMember": null
+      }
+    },
+    "ListOfStrings": {
+      "base": null,
+      "refs": {
+        "ComplexStructure$listOfStringsMember": null,
+        "EchoOperationInput$listOfStringsMember": null,
+        "EchoOperationOutput$listOfStringsMember": null
+      }
+    },
+    "Long": {
+      "base": null,
+      "refs": {
+        "ComplexStructure$longMember": null,
+        "EchoOperationInput$longMember": null,
+        "EchoOperationOutput$longMember": null
+      }
+    },
+    "MapOfStringToString": {
+      "base": null,
+      "refs": {
+        "ComplexStructure$mapOfStringToStringMember": null,
+        "EchoOperationInput$mapOfStringToStringMember": null,
+        "EchoOperationOutput$mapOfStringToStringMember": null
+      }
+    },
+    "String": {
+      "base": null,
+      "refs": {
+        "ComplexStructure$stringMember": null,
+        "EchoOperationInput$stringMember": null,
+        "EchoOperationOutput$stringMember": null,
+        "ListOfStrings$member": null,
+        "MapOfStringToString$key": null,
+        "MapOfStringToString$value": null
+      }
+    },
+    "Timestamp": {
+      "base": null,
+      "refs": {
+        "ComplexStructure$timestampMember": null,
+        "EchoOperationInput$timestampMember": null,
+        "EchoOperationOutput$timestampMember": null
+      }
+    }
+  }
+}

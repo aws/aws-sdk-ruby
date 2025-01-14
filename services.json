@@ -422,6 +422,9 @@
   "EC2InstanceConnect": {
     "models": "ec2-instance-connect/2018-04-02"
   },
+  "Echo": {
+    "models": "echo/2020-07-02"
+  },
   "ECR": {
     "models": "ecr/2015-09-21"
   },

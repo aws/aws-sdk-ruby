@@ -1,0 +1,59 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Echo
+  module Types
+
+    class ComplexStructure
+      attr_accessor boolean_member: bool
+      attr_accessor string_member: ::String
+      attr_accessor integer_member: ::Integer
+      attr_accessor long_member: ::Integer
+      attr_accessor float_member: ::Float
+      attr_accessor double_member: ::Float
+      attr_accessor timestamp_member: ::Time
+      attr_accessor blob_member: ::String
+      attr_accessor list_of_strings_member: ::Array[::String]
+      attr_accessor list_of_complex_object_member: ::Array[Types::ComplexStructure]
+      attr_accessor map_of_string_to_string_member: ::Hash[::String, ::String]
+      attr_accessor complex_struct_member: Types::ComplexStructure
+      SENSITIVE: []
+    end
+
+    class EchoOperationInput
+      attr_accessor boolean_member: bool
+      attr_accessor string_member: ::String
+      attr_accessor integer_member: ::Integer
+      attr_accessor long_member: ::Integer
+      attr_accessor float_member: ::Float
+      attr_accessor double_member: ::Float
+      attr_accessor timestamp_member: ::Time
+      attr_accessor blob_member: ::String
+      attr_accessor list_of_strings_member: ::Array[::String]
+      attr_accessor list_of_complex_object_member: ::Array[Types::ComplexStructure]
+      attr_accessor map_of_string_to_string_member: ::Hash[::String, ::String]
+      attr_accessor complex_struct_member: Types::ComplexStructure
+      SENSITIVE: []
+    end
+
+    class EchoOperationOutput
+      attr_accessor boolean_member: bool
+      attr_accessor string_member: ::String
+      attr_accessor integer_member: ::Integer
+      attr_accessor long_member: ::Integer
+      attr_accessor float_member: ::Float
+      attr_accessor double_member: ::Float
+      attr_accessor timestamp_member: ::Time
+      attr_accessor blob_member: ::String
+      attr_accessor list_of_strings_member: ::Array[::String]
+      attr_accessor list_of_complex_object_member: ::Array[Types::ComplexStructure]
+      attr_accessor map_of_string_to_string_member: ::Hash[::String, ::String]
+      attr_accessor complex_struct_member: Types::ComplexStructure
+      SENSITIVE: []
+    end
+  end
+end
