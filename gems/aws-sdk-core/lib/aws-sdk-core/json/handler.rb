@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-require "benchmark"
 
 module Aws
   module Json
@@ -10,7 +9,10 @@ module Aws
       # @param [Seahorse::Client::RequestContext] context
       # @return [Seahorse::Client::Response]
       def call(context)
-        puts(Benchmark.measure { build_request(context) })
+        t_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+        build_request(context)
+        t_build_request_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+        puts("Build Request Time: #{t_build_request_end - t_start}")
         response = @handler.call(context)
         response.on(200..299) { |resp| parse_response(resp) }
         response.on(200..599) { |_resp| apply_request_id(context) }

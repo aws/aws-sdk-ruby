@@ -26,7 +26,10 @@ module Aws
       # @param [Seahorse::Client::RequestContext] context
       # @return [Seahorse::Client::Response]
       def call(context)
+        t_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
         build_request(context)
+        t_build_request_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+        puts "Build Request Time: #{t_build_request_end - t_start}"
         @handler.call(context).on_success do |resp|
           resp.error = nil
           parsed = parse_xml(context)
