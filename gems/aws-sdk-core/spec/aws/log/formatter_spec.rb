@@ -34,6 +34,13 @@ module Aws
         end
 
         it 'provides a :request_params replacement' do
+          file = Tempfile.create
+          # This is not available on windows, see:
+          # - https://docs.ruby-lang.org/en/3.4/Tempfile.html#class-Tempfile-label-Unlink+after+creation
+          # - https://github.com/aws/aws-sdk-ruby/issues/3163
+          File.unlink(file.path) unless RUBY_DESCRIPTION.match?(/mswin|ming|cygwin/)
+          file.write('foo=bar')
+
           response.context.params = {
             foo: 'bar',
             attributes: {
@@ -43,15 +50,19 @@ module Aws
             config: {
               nested: true,
               path: Pathname.new(__FILE__),
+              tmpfile: file,
               complex: double('obj', inspect: '"inspected"')
             },
-            huge: '-' * 1000
+            huge: '-' * 1000,
+            list: ['one', 'two']
           }
           formatted = format('{:request_params}', max_string_size: 20)
           size = File.size(__FILE__)
           expect(formatted).to eq(<<-FORMATTED.strip)
-{foo:"bar",attributes:{"color"=>"red","size"=>"large"},config:{nested:true,path:#<File:#{__FILE__} (#{size} bytes)>,complex:"inspected"},huge:#<String "--------------------" ... (1000 bytes)>}
+{foo:"bar",attributes:{"color"=>"red","size"=>"large"},config:{nested:true,path:#<File:#{__FILE__} (#{size} bytes)>,tmpfile:#<File:#{file.path} (#{file.size} bytes)>,complex:"inspected"},huge:#<String "--------------------" ... (1000 bytes)>,list:["one","two"]}
           FORMATTED
+        ensure
+          file.close
         end
 
         it 'provides a :time replacement' do

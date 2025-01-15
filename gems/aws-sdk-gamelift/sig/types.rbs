@@ -1298,6 +1298,7 @@ module Aws::GameLift
       attr_accessor placed_player_sessions: ::Array[Types::PlacedPlayerSession]
       attr_accessor game_session_data: ::String
       attr_accessor matchmaker_data: ::String
+      attr_accessor priority_configuration_override: Types::PriorityConfigurationOverride
       SENSITIVE: [:ip_address, :port]
     end
 
@@ -1773,6 +1774,12 @@ module Aws::GameLift
       SENSITIVE: []
     end
 
+    class PriorityConfigurationOverride
+      attr_accessor placement_fallback_strategy: ("DEFAULT_AFTER_SINGLE_PASS" | "NONE")
+      attr_accessor location_order: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class PutScalingPolicyInput
       attr_accessor name: ::String
       attr_accessor fleet_id: ::String
@@ -1957,6 +1964,7 @@ module Aws::GameLift
       attr_accessor player_latencies: ::Array[Types::PlayerLatency]
       attr_accessor desired_player_sessions: ::Array[Types::DesiredPlayerSession]
       attr_accessor game_session_data: ::String
+      attr_accessor priority_configuration_override: Types::PriorityConfigurationOverride
       SENSITIVE: []
     end
 

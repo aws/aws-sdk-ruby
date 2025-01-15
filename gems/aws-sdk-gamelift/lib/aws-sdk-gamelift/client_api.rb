@@ -407,6 +407,7 @@ module Aws::GameLift
     LocationList = Shapes::ListShape.new(name: 'LocationList')
     LocationModel = Shapes::StructureShape.new(name: 'LocationModel')
     LocationModelList = Shapes::ListShape.new(name: 'LocationModelList')
+    LocationOrderOverrideList = Shapes::ListShape.new(name: 'LocationOrderOverrideList')
     LocationState = Shapes::StructureShape.new(name: 'LocationState')
     LocationStateList = Shapes::ListShape.new(name: 'LocationStateList')
     LocationStringModel = Shapes::StringShape.new(name: 'LocationStringModel')
@@ -455,6 +456,7 @@ module Aws::GameLift
     OutOfCapacityException = Shapes::StructureShape.new(name: 'OutOfCapacityException')
     PlacedPlayerSession = Shapes::StructureShape.new(name: 'PlacedPlayerSession')
     PlacedPlayerSessionList = Shapes::ListShape.new(name: 'PlacedPlayerSessionList')
+    PlacementFallbackStrategy = Shapes::StringShape.new(name: 'PlacementFallbackStrategy')
     Player = Shapes::StructureShape.new(name: 'Player')
     PlayerAttributeMap = Shapes::MapShape.new(name: 'PlayerAttributeMap')
     PlayerAttributeString = Shapes::StringShape.new(name: 'PlayerAttributeString')
@@ -480,6 +482,7 @@ module Aws::GameLift
     PositiveInteger = Shapes::IntegerShape.new(name: 'PositiveInteger')
     PositiveLong = Shapes::IntegerShape.new(name: 'PositiveLong')
     PriorityConfiguration = Shapes::StructureShape.new(name: 'PriorityConfiguration')
+    PriorityConfigurationOverride = Shapes::StructureShape.new(name: 'PriorityConfigurationOverride')
     PriorityType = Shapes::StringShape.new(name: 'PriorityType')
     PriorityTypeList = Shapes::ListShape.new(name: 'PriorityTypeList')
     ProtectionPolicy = Shapes::StringShape.new(name: 'ProtectionPolicy')
@@ -714,7 +717,7 @@ module Aws::GameLift
 
     ContainerFleet.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
     ContainerFleet.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, location_name: "FleetArn"))
-    ContainerFleet.add_member(:fleet_role_arn, Shapes::ShapeRef.new(shape: ArnStringModel, location_name: "FleetRoleArn"))
+    ContainerFleet.add_member(:fleet_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "FleetRoleArn"))
     ContainerFleet.add_member(:game_server_container_group_definition_name, Shapes::ShapeRef.new(shape: ContainerGroupDefinitionName, location_name: "GameServerContainerGroupDefinitionName"))
     ContainerFleet.add_member(:game_server_container_group_definition_arn, Shapes::ShapeRef.new(shape: ContainerGroupDefinitionArn, location_name: "GameServerContainerGroupDefinitionArn"))
     ContainerFleet.add_member(:per_instance_container_group_definition_name, Shapes::ShapeRef.new(shape: ContainerGroupDefinitionName, location_name: "PerInstanceContainerGroupDefinitionName"))
@@ -815,7 +818,7 @@ module Aws::GameLift
     CreateBuildOutput.add_member(:storage_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "StorageLocation"))
     CreateBuildOutput.struct_class = Types::CreateBuildOutput
 
-    CreateContainerFleetInput.add_member(:fleet_role_arn, Shapes::ShapeRef.new(shape: ArnStringModel, required: true, location_name: "FleetRoleArn"))
+    CreateContainerFleetInput.add_member(:fleet_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "FleetRoleArn"))
     CreateContainerFleetInput.add_member(:description, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Description"))
     CreateContainerFleetInput.add_member(:game_server_container_group_definition_name, Shapes::ShapeRef.new(shape: ContainerGroupDefinitionNameOrArn, location_name: "GameServerContainerGroupDefinitionName"))
     CreateContainerFleetInput.add_member(:per_instance_container_group_definition_name, Shapes::ShapeRef.new(shape: ContainerGroupDefinitionNameOrArn, location_name: "PerInstanceContainerGroupDefinitionName"))
@@ -1620,6 +1623,7 @@ module Aws::GameLift
     GameSessionPlacement.add_member(:placed_player_sessions, Shapes::ShapeRef.new(shape: PlacedPlayerSessionList, location_name: "PlacedPlayerSessions"))
     GameSessionPlacement.add_member(:game_session_data, Shapes::ShapeRef.new(shape: LargeGameSessionData, location_name: "GameSessionData"))
     GameSessionPlacement.add_member(:matchmaker_data, Shapes::ShapeRef.new(shape: MatchmakerData, location_name: "MatchmakerData"))
+    GameSessionPlacement.add_member(:priority_configuration_override, Shapes::ShapeRef.new(shape: PriorityConfigurationOverride, location_name: "PriorityConfigurationOverride"))
     GameSessionPlacement.struct_class = Types::GameSessionPlacement
 
     GameSessionQueue.add_member(:name, Shapes::ShapeRef.new(shape: GameSessionQueueName, location_name: "Name"))
@@ -1885,6 +1889,8 @@ module Aws::GameLift
 
     LocationModelList.member = Shapes::ShapeRef.new(shape: LocationModel)
 
+    LocationOrderOverrideList.member = Shapes::ShapeRef.new(shape: LocationStringModel)
+
     LocationState.add_member(:location, Shapes::ShapeRef.new(shape: LocationStringModel, location_name: "Location"))
     LocationState.add_member(:status, Shapes::ShapeRef.new(shape: FleetStatus, location_name: "Status"))
     LocationState.struct_class = Types::LocationState
@@ -2030,6 +2036,10 @@ module Aws::GameLift
     PriorityConfiguration.add_member(:priority_order, Shapes::ShapeRef.new(shape: PriorityTypeList, location_name: "PriorityOrder"))
     PriorityConfiguration.add_member(:location_order, Shapes::ShapeRef.new(shape: LocationList, location_name: "LocationOrder"))
     PriorityConfiguration.struct_class = Types::PriorityConfiguration
+
+    PriorityConfigurationOverride.add_member(:placement_fallback_strategy, Shapes::ShapeRef.new(shape: PlacementFallbackStrategy, location_name: "PlacementFallbackStrategy"))
+    PriorityConfigurationOverride.add_member(:location_order, Shapes::ShapeRef.new(shape: LocationOrderOverrideList, required: true, location_name: "LocationOrder"))
+    PriorityConfigurationOverride.struct_class = Types::PriorityConfigurationOverride
 
     PriorityTypeList.member = Shapes::ShapeRef.new(shape: PriorityType)
 
@@ -2178,6 +2188,7 @@ module Aws::GameLift
     StartGameSessionPlacementInput.add_member(:player_latencies, Shapes::ShapeRef.new(shape: PlayerLatencyList, location_name: "PlayerLatencies"))
     StartGameSessionPlacementInput.add_member(:desired_player_sessions, Shapes::ShapeRef.new(shape: DesiredPlayerSessionList, location_name: "DesiredPlayerSessions"))
     StartGameSessionPlacementInput.add_member(:game_session_data, Shapes::ShapeRef.new(shape: LargeGameSessionData, location_name: "GameSessionData"))
+    StartGameSessionPlacementInput.add_member(:priority_configuration_override, Shapes::ShapeRef.new(shape: PriorityConfigurationOverride, location_name: "PriorityConfigurationOverride"))
     StartGameSessionPlacementInput.struct_class = Types::StartGameSessionPlacementInput
 
     StartGameSessionPlacementOutput.add_member(:game_session_placement, Shapes::ShapeRef.new(shape: GameSessionPlacement, location_name: "GameSessionPlacement"))
@@ -3883,6 +3894,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedRegionException)
       end)
 
       api.add_operation(:start_match_backfill, Seahorse::Model::Operation.new.tap do |o|

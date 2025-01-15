@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.215.1 (2025-01-14)
+------------------
+
+* Issue - Fixed error when attempting to log an unlinked tempfile.
+
 3.215.0 (2025-01-10)
 ------------------
 

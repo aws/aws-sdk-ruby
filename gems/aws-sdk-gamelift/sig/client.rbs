@@ -1529,7 +1529,11 @@ module Aws
                                               player_data: ::String?
                                             },
                                           ],
-                                          ?game_session_data: ::String
+                                          ?game_session_data: ::String,
+                                          ?priority_configuration_override: {
+                                            placement_fallback_strategy: ("DEFAULT_AFTER_SINGLE_PASS" | "NONE")?,
+                                            location_order: Array[::String]
+                                          }
                                         ) -> _StartGameSessionPlacementResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartGameSessionPlacementResponseSuccess
 
