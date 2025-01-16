@@ -9,18 +9,20 @@ module Aws
       # @param [Seahorse::Client::RequestContext] context
       # @return [Seahorse::Client::Response]
       def call(context)
-        t_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+        t_ser_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
         build_request(context)
-        t_build_request_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-        puts("Build Request Time: #{t_build_request_end - t_start}")
+        t_ser_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+        t_deser_start, t_deser_end = nil
         response = @handler.call(context)
         response.on(200..299) do |resp|
-          t_response_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+          t_deser_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
           parse_response(resp)
-          t_response_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-          puts("Parse Response Time: #{t_response_end - t_response_start}")
+          t_deser_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
         end
         response.on(200..599) { |_resp| apply_request_id(context) }
+        puts("Serialization Time: #{format('%.3f', (t_ser_end - t_ser_start) * 1000.0)} ms")
+        puts("Deserialization Time: #{format('%.3f', (t_deser_end - t_deser_start) * 1000.0)} ms")
+        response
       end
 
       private
@@ -78,7 +80,7 @@ module Aws
       end
 
       def content_type(context)
-        CONTENT_TYPE % [context.config.api.metadata['jsonVersion']]
+        format(CONTENT_TYPE, context.config.api.metadata['jsonVersion'])
       end
 
       def target(context)
