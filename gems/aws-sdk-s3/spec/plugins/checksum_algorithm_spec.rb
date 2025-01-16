@@ -5,7 +5,7 @@ require_relative '../spec_helper'
 module Aws
   module S3
     module Plugins
-      describe SkipWholeMultipartGetChecksums do
+      describe ChecksumAlgorithm do
         let(:creds) { Aws::Credentials.new('akid', 'secret') }
         let(:client) { S3::Client.new(stub_responses: true) }
         let(:bucket) { 'bucket' }
@@ -66,16 +66,31 @@ module Aws
           expect(resp.context[:http_checksum][:validated]).to eq 'CRC32'
         end
 
-        it 'does not validate on a whole multipart GET' do
-          client.stub_responses(
-            :get_object,
-            [{
-               body: body,
-               headers: {'x-amz-checksum-crc32' => 'cpjwid==-12'},
-               status_code: 200
-             }])
-          resp = client.get_object(bucket: bucket, key: key, checksum_mode: 'ENABLED')
-          expect(resp.context[:http_checksum][:validated]).to be_nil
+        context 'checksum response composite validation' do
+          file = File.expand_path('checksum_response_composite.json', __dir__)
+          test_cases = JSON.load_file(file)
+
+          test_cases.each do |test_case|
+            it "passes test: #{test_case['documentation']}" do
+              if (algorithm = test_case['checksumAlgorithm'])
+                algorithm.upcase!
+                unless Aws::Plugins::ChecksumAlgorithm::CLIENT_ALGORITHMS.include?(algorithm)
+                  skip "Algorithm #{algorithm} not supported"
+                end
+              end
+
+              client.stub_responses(
+                :get_object,
+                [{
+                   body: test_case['responsePayload'],
+                   headers: test_case['responseHeaders'],
+                   status_code: 200
+                }]
+              )
+              resp = client.get_object(bucket: bucket, key: key, checksum_mode: 'ENABLED')
+              expect(resp.context[:http_checksum][:validated]).to be_nil
+            end
+          end
         end
       end
     end

@@ -16,7 +16,6 @@ module Aws
 
       THREAD_COUNT = 10
 
-      # @api private
       CREATE_OPTIONS = Set.new(
         Client.api.operation(:create_multipart_upload).input.shape.member_names
       )
@@ -25,9 +24,14 @@ module Aws
         Client.api.operation(:complete_multipart_upload).input.shape.member_names
       )
 
-      # @api private
       UPLOAD_PART_OPTIONS = Set.new(
         Client.api.operation(:upload_part).input.shape.member_names
+      )
+
+      CHECKSUM_KEYS = Set.new(
+        Client.api.operation(:upload_part).input.shape.members.map do |n, s|
+          n if s.location == 'header' && s.location_name.start_with?('x-amz-checksum-')
+        end.compact
       )
 
       # @option options [Client] :client
@@ -121,15 +125,27 @@ module Aws
         parts
       end
 
+      def checksum_key?(key)
+        CHECKSUM_KEYS.include?(key)
+      end
+
+      def has_checksum_key?(keys)
+        keys.any? { |key| checksum_key?(key) }
+      end
+
       def create_opts(options)
-        CREATE_OPTIONS.inject({}) do |hash, key|
+        opts = { checksum_algorithm: Aws::Plugins::ChecksumAlgorithm::DEFAULT_CHECKSUM }
+        opts[:checksum_type] = 'FULL_OBJECT' if has_checksum_key?(options.keys)
+        CREATE_OPTIONS.inject(opts) do |hash, key|
           hash[key] = options[key] if options.key?(key)
           hash
         end
       end
 
       def complete_opts(options)
-        COMPLETE_OPTIONS.inject({}) do |hash, key|
+        opts = {}
+        opts[:checksum_type] = 'FULL_OBJECT' if has_checksum_key?(options.keys)
+        COMPLETE_OPTIONS.inject(opts) do |hash, key|
           hash[key] = options[key] if options.key?(key)
           hash
         end
@@ -137,7 +153,10 @@ module Aws
 
       def upload_part_opts(options)
         UPLOAD_PART_OPTIONS.inject({}) do |hash, key|
-          hash[key] = options[key] if options.key?(key)
+          if options.key?(key)
+            # don't pass through checksum calculations
+            hash[key] = options[key] unless checksum_key?(key)
+          end
           hash
         end
       end
@@ -159,14 +178,13 @@ module Aws
                 end
                 resp = @client.upload_part(part)
                 part[:body].close
-                completed_part = {etag: resp.etag, part_number: part[:part_number]}
-
-                # get the requested checksum from the response
-                if part[:checksum_algorithm]
-                  k = "checksum_#{part[:checksum_algorithm].downcase}".to_sym
-                  completed_part[k] = resp[k]
-                end
-
+                completed_part = {
+                  etag: resp.etag,
+                  part_number: part[:part_number]
+                }
+                algorithm = resp.context.params[:checksum_algorithm]
+                k = "checksum_#{algorithm.downcase}".to_sym
+                completed_part[k] = resp.send(k)
                 completed.push(completed_part)
               end
               nil

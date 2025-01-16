@@ -1501,7 +1501,7 @@ module Aws::SESV2
 
     class Recommendation
       attr_accessor resource_arn: ::String
-      attr_accessor type: ("DKIM" | "DMARC" | "SPF" | "BIMI")
+      attr_accessor type: ("DKIM" | "DMARC" | "SPF" | "BIMI" | "COMPLAINT")
       attr_accessor description: ::String
       attr_accessor status: ("OPEN" | "FIXED")
       attr_accessor created_timestamp: ::Time

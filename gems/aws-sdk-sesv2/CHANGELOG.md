@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2025-01-15)
+------------------
+
+* Feature - This release introduces a new recommendation in Virtual Deliverability Manager Advisor, which detects elevated complaint rates for customer sending identities.
+
 1.68.0 (2024-12-11)
 ------------------
 

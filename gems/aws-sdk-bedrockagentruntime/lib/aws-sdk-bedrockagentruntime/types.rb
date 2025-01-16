@@ -3011,6 +3011,15 @@ module Aws::BedrockAgentRuntime
     #   requests to continue the same conversation.
     #   @return [String]
     #
+    # @!attribute [rw] streaming_configurations
+    #   Specifies the configurations for streaming.
+    #
+    #   <note markdown="1"> To use agent streaming, you need permissions to perform the
+    #   `bedrock:InvokeModelWithResponseStream` action.
+    #
+    #    </note>
+    #   @return [Types::StreamingConfigurations]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/InvokeInlineAgentRequest AWS API Documentation
     #
     class InvokeInlineAgentRequest < Struct.new(
@@ -3027,7 +3036,8 @@ module Aws::BedrockAgentRuntime
       :instruction,
       :knowledge_bases,
       :prompt_override_configuration,
-      :session_id)
+      :session_id,
+      :streaming_configurations)
       SENSITIVE = [:input_text, :instruction, :prompt_override_configuration]
       include Aws::Structure
     end

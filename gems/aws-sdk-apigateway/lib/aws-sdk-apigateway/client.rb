@@ -259,10 +259,33 @@ module Aws::APIGateway
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [String] :request_checksum_calculation ("when_supported")
+    #     Determines when a checksum will be calculated for request payloads. Values are:
+    #
+    #     * `when_supported` - (default) When set, a checksum will be
+    #       calculated for all request payloads of operations modeled with the
+    #       `httpChecksum` trait where `requestChecksumRequired` is `true` and/or a
+    #       `requestAlgorithmMember` is modeled.
+    #     * `when_required` - When set, a checksum will only be calculated for
+    #       request payloads of operations modeled with the  `httpChecksum` trait where
+    #       `requestChecksumRequired` is `true` or where a `requestAlgorithmMember`
+    #       is modeled and supplied.
+    #
     #   @option options [Integer] :request_min_compression_size_bytes (10240)
     #     The minimum size in bytes that triggers compression for request
     #     bodies. The value must be non-negative integer value between 0
     #     and 10485780 bytes inclusive.
+    #
+    #   @option options [String] :response_checksum_validation ("when_supported")
+    #     Determines when checksum validation will be performed on response payloads. Values are:
+    #
+    #     * `when_supported` - (default) When set, checksum validation is performed on all
+    #       response payloads of operations modeled with the `httpChecksum` trait where
+    #       `responseAlgorithms` is modeled, except when no modeled checksum algorithms
+    #       are supported.
+    #     * `when_required` - When set, checksum validation is not performed on
+    #       response payloads of operations unless the checksum algorithm is supported and
+    #       the `requestValidationModeMember` member is set to `ENABLED`.
     #
     #   @option options [Proc] :retry_backoff
     #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
@@ -672,8 +695,8 @@ module Aws::APIGateway
     #   The domain name of the BasePathMapping resource to create.
     #
     # @option params [String] :domain_name_id
-    #   The identifier for the domain name resource. Supported only for
-    #   private custom domain names.
+    #   The identifier for the domain name resource. Required for private
+    #   custom domain names.
     #
     # @option params [String] :base_path
     #   The base path name that callers of the API must provide as part of the
@@ -3074,8 +3097,8 @@ module Aws::APIGateway
     #   The name of the DomainName resource.
     #
     # @option params [String] :domain_name_id
-    #   The identifier for the domain name resource. Supported only for
-    #   private custom domain names.
+    #   The identifier for the domain name resource. Required for private
+    #   custom domain names.
     #
     # @return [Types::DomainName] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7354,7 +7377,7 @@ module Aws::APIGateway
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.110.0'
+      context[:gem_version] = '1.111.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

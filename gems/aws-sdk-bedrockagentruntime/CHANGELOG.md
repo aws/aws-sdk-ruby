@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2025-01-15)
+------------------
+
+* Feature - Now supports streaming for inline agents.
+
 1.38.0 (2024-12-20)
 ------------------
 

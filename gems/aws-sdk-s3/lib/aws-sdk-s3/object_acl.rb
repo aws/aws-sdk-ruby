@@ -229,7 +229,7 @@ module Aws::S3
     #       },
     #     },
     #     content_md5: "ContentMD5",
-    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
     #     grant_full_control: "GrantFullControl",
     #     grant_read: "GrantRead",
     #     grant_read_acp: "GrantReadACP",
@@ -251,9 +251,9 @@ module Aws::S3
     #   Contains the elements that set the ACL permissions for an object per
     #   grantee.
     # @option options [String] :content_md5
-    #   The base64-encoded 128-bit MD5 digest of the data. This header must be
-    #   used as a message integrity check to verify that the request body was
-    #   not corrupted in transit. For more information, go to [RFC
+    #   The Base64 encoded 128-bit `MD5` digest of the data. This header must
+    #   be used as a message integrity check to verify that the request body
+    #   was not corrupted in transit. For more information, go to [RFC
     #   1864.&gt;][1]
     #
     #   For requests made using the Amazon Web Services Command Line Interface

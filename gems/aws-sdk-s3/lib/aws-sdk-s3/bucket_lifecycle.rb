@@ -206,7 +206,7 @@ module Aws::S3
     #
     #   bucket_lifecycle.put({
     #     content_md5: "ContentMD5",
-    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
     #     lifecycle_configuration: {
     #       rules: [ # required
     #         {

@@ -54,7 +54,7 @@ module Aws::MarketplaceEntitlementService
   autoload :EndpointProvider, 'aws-sdk-marketplaceentitlementservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-marketplaceentitlementservice/endpoints'
 
-  GEM_VERSION = '1.63.0'
+  GEM_VERSION = '1.64.0'
 
 end
 

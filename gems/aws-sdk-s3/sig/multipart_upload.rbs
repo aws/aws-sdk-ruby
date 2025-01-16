@@ -42,7 +42,10 @@ module Aws
       def initiator: () -> Types::Initiator
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/MultipartUpload.html#checksum_algorithm-instance_method
-      def checksum_algorithm: () -> ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+      def checksum_algorithm: () -> ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/MultipartUpload.html#checksum_type-instance_method
+      def checksum_type: () -> ("COMPOSITE" | "FULL_OBJECT")
 
       def client: () -> Client
 
@@ -70,6 +73,7 @@ module Aws
                             etag: ::String?,
                             checksum_crc32: ::String?,
                             checksum_crc32c: ::String?,
+                            checksum_crc64nvme: ::String?,
                             checksum_sha1: ::String?,
                             checksum_sha256: ::String?,
                             part_number: ::Integer?
@@ -78,8 +82,11 @@ module Aws
                       },
                       ?checksum_crc32: ::String,
                       ?checksum_crc32c: ::String,
+                      ?checksum_crc64nvme: ::String,
                       ?checksum_sha1: ::String,
                       ?checksum_sha256: ::String,
+                      ?checksum_type: ("COMPOSITE" | "FULL_OBJECT"),
+                      ?mpu_object_size: ::Integer,
                       ?request_payer: ("requester"),
                       ?expected_bucket_owner: ::String,
                       ?if_match: ::String,

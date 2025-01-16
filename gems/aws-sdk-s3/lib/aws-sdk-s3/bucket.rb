@@ -392,7 +392,7 @@ module Aws::S3
     #     request_payer: "requester", # accepts requester
     #     bypass_governance_retention: false,
     #     expected_bucket_owner: "AccountId",
-    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
     #   })
     # @param [Hash] options ({})
     # @option options [required, Types::Delete] :delete
@@ -458,22 +458,23 @@ module Aws::S3
     #   For the `x-amz-checksum-algorithm ` header, replace ` algorithm ` with
     #   the supported algorithm from the following list:
     #
-    #   * `CRC32`
+    #   * `CRC-32`
     #
-    #   * `CRC32C`
+    #   * `CRC-32C`
     #
-    #   * `SHA1`
+    #   * `CRC-64NVME`
     #
-    #   * `SHA256`
+    #   * `SHA-1`
+    #
+    #   * `SHA-256`
     #
     #   For more information, see [Checking object integrity][1] in the
     #   *Amazon S3 User Guide*.
     #
     #   If the individual checksum value you provide through
     #   `x-amz-checksum-algorithm ` doesn't match the checksum algorithm you
-    #   set through `x-amz-sdk-checksum-algorithm`, Amazon S3 ignores any
-    #   provided `ChecksumAlgorithm` parameter and uses the checksum algorithm
-    #   that matches the provided value in `x-amz-checksum-algorithm `.
+    #   set through `x-amz-sdk-checksum-algorithm`, Amazon S3 fails the
+    #   request with a `BadDigest` error.
     #
     #   If you provide an individual checksum, Amazon S3 ignores any provided
     #   `ChecksumAlgorithm` parameter.
@@ -502,9 +503,10 @@ module Aws::S3
     #     content_length: 1,
     #     content_md5: "ContentMD5",
     #     content_type: "ContentType",
-    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
     #     checksum_crc32: "ChecksumCRC32",
     #     checksum_crc32c: "ChecksumCRC32C",
+    #     checksum_crc64nvme: "ChecksumCRC64NVME",
     #     checksum_sha1: "ChecksumSHA1",
     #     checksum_sha256: "ChecksumSHA256",
     #     expires: Time.now,
@@ -611,7 +613,7 @@ module Aws::S3
     #
     #   [1]: https://www.rfc-editor.org/rfc/rfc9110.html#name-content-length
     # @option options [String] :content_md5
-    #   The base64-encoded 128-bit MD5 digest of the message (without the
+    #   The Base64 encoded 128-bit `MD5` digest of the message (without the
     #   headers) according to RFC 1864. This header can be used as a message
     #   integrity check to verify that the data is the same data that was
     #   originally sent. Although it is optional, we recommend using the
@@ -654,22 +656,23 @@ module Aws::S3
     #   For the `x-amz-checksum-algorithm ` header, replace ` algorithm ` with
     #   the supported algorithm from the following list:
     #
-    #   * `CRC32`
+    #   * `CRC-32`
     #
-    #   * `CRC32C`
+    #   * `CRC-32C`
     #
-    #   * `SHA1`
+    #   * `CRC-64NVME`
     #
-    #   * `SHA256`
+    #   * `SHA-1`
+    #
+    #   * `SHA-256`
     #
     #   For more information, see [Checking object integrity][1] in the
     #   *Amazon S3 User Guide*.
     #
     #   If the individual checksum value you provide through
     #   `x-amz-checksum-algorithm ` doesn't match the checksum algorithm you
-    #   set through `x-amz-sdk-checksum-algorithm`, Amazon S3 ignores any
-    #   provided `ChecksumAlgorithm` parameter and uses the checksum algorithm
-    #   that matches the provided value in `x-amz-checksum-algorithm `.
+    #   set through `x-amz-sdk-checksum-algorithm`, Amazon S3 fails the
+    #   request with a `BadDigest` error.
     #
     #   <note markdown="1"> The `Content-MD5` or `x-amz-sdk-checksum-algorithm` header is required
     #   for any request to upload an object with a retention period configured
@@ -689,7 +692,7 @@ module Aws::S3
     # @option options [String] :checksum_crc32
     #   This header can be used as a data integrity check to verify that the
     #   data received is the same data that was originally sent. This header
-    #   specifies the base64-encoded, 32-bit CRC-32 checksum of the object.
+    #   specifies the Base64 encoded, 32-bit `CRC-32` checksum of the object.
     #   For more information, see [Checking object integrity][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -699,9 +702,20 @@ module Aws::S3
     # @option options [String] :checksum_crc32c
     #   This header can be used as a data integrity check to verify that the
     #   data received is the same data that was originally sent. This header
-    #   specifies the base64-encoded, 32-bit CRC-32C checksum of the object.
+    #   specifies the Base64 encoded, 32-bit `CRC-32C` checksum of the object.
     #   For more information, see [Checking object integrity][1] in the
     #   *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
+    # @option options [String] :checksum_crc64nvme
+    #   This header can be used as a data integrity check to verify that the
+    #   data received is the same data that was originally sent. This header
+    #   specifies the Base64 encoded, 64-bit `CRC-64NVME` checksum of the
+    #   object. The `CRC-64NVME` checksum is always a full object checksum.
+    #   For more information, see [Checking object integrity in the Amazon S3
+    #   User Guide][1].
     #
     #
     #
@@ -709,9 +723,9 @@ module Aws::S3
     # @option options [String] :checksum_sha1
     #   This header can be used as a data integrity check to verify that the
     #   data received is the same data that was originally sent. This header
-    #   specifies the base64-encoded, 160-bit SHA-1 digest of the object. For
-    #   more information, see [Checking object integrity][1] in the *Amazon S3
-    #   User Guide*.
+    #   specifies the Base64 encoded, 160-bit `SHA-1` digest of the object.
+    #   For more information, see [Checking object integrity][1] in the
+    #   *Amazon S3 User Guide*.
     #
     #
     #
@@ -719,7 +733,7 @@ module Aws::S3
     # @option options [String] :checksum_sha256
     #   This header can be used as a data integrity check to verify that the
     #   data received is the same data that was originally sent. This header
-    #   specifies the base64-encoded, 256-bit SHA-256 digest of the object.
+    #   specifies the Base64 encoded, 256-bit `SHA-256` digest of the object.
     #   For more information, see [Checking object integrity][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -990,7 +1004,7 @@ module Aws::S3
     # @option options [String] :ssekms_encryption_context
     #   Specifies the Amazon Web Services KMS Encryption Context as an
     #   additional encryption context to use for object encryption. The value
-    #   of this header is a Base64-encoded string of a UTF-8 encoded JSON,
+    #   of this header is a Base64 encoded string of a UTF-8 encoded JSON,
     #   which contains the encryption context as key-value pairs. This value
     #   is stored as object metadata and automatically gets passed on to
     #   Amazon Web Services KMS for future `GetObject` operations on this

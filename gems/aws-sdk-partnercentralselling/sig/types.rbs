@@ -204,6 +204,7 @@ module Aws::PartnerCentralSelling
       attr_accessor resource_identifier: ::String
       attr_accessor resource_snapshot_template_identifier: ::String
       attr_accessor resource_type: ("Opportunity")
+      attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 
@@ -559,7 +560,7 @@ module Aws::PartnerCentralSelling
       attr_accessor engagement_invitation_id: ::String
       attr_accessor message: ::String
       attr_accessor opportunity_id: ::String
-      attr_accessor reason_code: ("InvitationAccessDenied" | "InvitationValidationFailed" | "EngagementAccessDenied" | "OpportunityAccessDenied" | "ResourceSnapshotJobAccessDenied" | "ResourceSnapshotJobValidationFailed" | "ResourceSnapshotJobConflict" | "EngagementValidationFailed" | "EngagementConflict" | "OpportunitySubmissionFailed" | "EngagementInvitationConflict" | "OpportunityValidationFailed" | "OpportunityConflict" | "ResourceSnapshotAccessDenied" | "ResourceSnapshotValidationFailed" | "ResourceSnapshotConflict" | "InternalError" | "ServiceQuotaExceeded" | "RequestThrottled")
+      attr_accessor reason_code: ("InvitationAccessDenied" | "InvitationValidationFailed" | "EngagementAccessDenied" | "OpportunityAccessDenied" | "ResourceSnapshotJobAccessDenied" | "ResourceSnapshotJobValidationFailed" | "ResourceSnapshotJobConflict" | "EngagementValidationFailed" | "EngagementConflict" | "OpportunitySubmissionFailed" | "EngagementInvitationConflict" | "InternalError" | "OpportunityValidationFailed" | "OpportunityConflict" | "ResourceSnapshotAccessDenied" | "ResourceSnapshotValidationFailed" | "ResourceSnapshotConflict" | "ServiceQuotaExceeded" | "RequestThrottled")
       attr_accessor resource_snapshot_job_id: ::String
       attr_accessor start_time: ::Time
       attr_accessor task_arn: ::String
@@ -591,7 +592,7 @@ module Aws::PartnerCentralSelling
       attr_accessor engagement_invitation_id: ::String
       attr_accessor message: ::String
       attr_accessor opportunity_id: ::String
-      attr_accessor reason_code: ("InvitationAccessDenied" | "InvitationValidationFailed" | "EngagementAccessDenied" | "OpportunityAccessDenied" | "ResourceSnapshotJobAccessDenied" | "ResourceSnapshotJobValidationFailed" | "ResourceSnapshotJobConflict" | "EngagementValidationFailed" | "EngagementConflict" | "OpportunitySubmissionFailed" | "EngagementInvitationConflict" | "OpportunityValidationFailed" | "OpportunityConflict" | "ResourceSnapshotAccessDenied" | "ResourceSnapshotValidationFailed" | "ResourceSnapshotConflict" | "InternalError" | "ServiceQuotaExceeded" | "RequestThrottled")
+      attr_accessor reason_code: ("InvitationAccessDenied" | "InvitationValidationFailed" | "EngagementAccessDenied" | "OpportunityAccessDenied" | "ResourceSnapshotJobAccessDenied" | "ResourceSnapshotJobValidationFailed" | "ResourceSnapshotJobConflict" | "EngagementValidationFailed" | "EngagementConflict" | "OpportunitySubmissionFailed" | "EngagementInvitationConflict" | "InternalError" | "OpportunityValidationFailed" | "OpportunityConflict" | "ResourceSnapshotAccessDenied" | "ResourceSnapshotValidationFailed" | "ResourceSnapshotConflict" | "ServiceQuotaExceeded" | "RequestThrottled")
       attr_accessor resource_snapshot_job_id: ::String
       attr_accessor start_time: ::Time
       attr_accessor task_arn: ::String
@@ -752,6 +753,16 @@ module Aws::PartnerCentralSelling
     class ListSolutionsResponse
       attr_accessor next_token: ::String
       attr_accessor solution_summaries: ::Array[Types::SolutionBase]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 
@@ -1003,6 +1014,7 @@ module Aws::PartnerCentralSelling
       attr_accessor catalog: ::String
       attr_accessor client_token: ::String
       attr_accessor identifier: ::String
+      attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 
@@ -1010,7 +1022,7 @@ module Aws::PartnerCentralSelling
       attr_accessor engagement_invitation_id: ::String
       attr_accessor message: ::String
       attr_accessor opportunity_id: ::String
-      attr_accessor reason_code: ("InvitationAccessDenied" | "InvitationValidationFailed" | "EngagementAccessDenied" | "OpportunityAccessDenied" | "ResourceSnapshotJobAccessDenied" | "ResourceSnapshotJobValidationFailed" | "ResourceSnapshotJobConflict" | "EngagementValidationFailed" | "EngagementConflict" | "OpportunitySubmissionFailed" | "EngagementInvitationConflict" | "OpportunityValidationFailed" | "OpportunityConflict" | "ResourceSnapshotAccessDenied" | "ResourceSnapshotValidationFailed" | "ResourceSnapshotConflict" | "InternalError" | "ServiceQuotaExceeded" | "RequestThrottled")
+      attr_accessor reason_code: ("InvitationAccessDenied" | "InvitationValidationFailed" | "EngagementAccessDenied" | "OpportunityAccessDenied" | "ResourceSnapshotJobAccessDenied" | "ResourceSnapshotJobValidationFailed" | "ResourceSnapshotJobConflict" | "EngagementValidationFailed" | "EngagementConflict" | "OpportunitySubmissionFailed" | "EngagementInvitationConflict" | "InternalError" | "OpportunityValidationFailed" | "OpportunityConflict" | "ResourceSnapshotAccessDenied" | "ResourceSnapshotValidationFailed" | "ResourceSnapshotConflict" | "ServiceQuotaExceeded" | "RequestThrottled")
       attr_accessor resource_snapshot_job_id: ::String
       attr_accessor start_time: ::Time
       attr_accessor task_arn: ::String
@@ -1024,6 +1036,7 @@ module Aws::PartnerCentralSelling
       attr_accessor catalog: ::String
       attr_accessor client_token: ::String
       attr_accessor identifier: ::String
+      attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 
@@ -1032,7 +1045,7 @@ module Aws::PartnerCentralSelling
       attr_accessor engagement_invitation_id: ::String
       attr_accessor message: ::String
       attr_accessor opportunity_id: ::String
-      attr_accessor reason_code: ("InvitationAccessDenied" | "InvitationValidationFailed" | "EngagementAccessDenied" | "OpportunityAccessDenied" | "ResourceSnapshotJobAccessDenied" | "ResourceSnapshotJobValidationFailed" | "ResourceSnapshotJobConflict" | "EngagementValidationFailed" | "EngagementConflict" | "OpportunitySubmissionFailed" | "EngagementInvitationConflict" | "OpportunityValidationFailed" | "OpportunityConflict" | "ResourceSnapshotAccessDenied" | "ResourceSnapshotValidationFailed" | "ResourceSnapshotConflict" | "InternalError" | "ServiceQuotaExceeded" | "RequestThrottled")
+      attr_accessor reason_code: ("InvitationAccessDenied" | "InvitationValidationFailed" | "EngagementAccessDenied" | "OpportunityAccessDenied" | "ResourceSnapshotJobAccessDenied" | "ResourceSnapshotJobValidationFailed" | "ResourceSnapshotJobConflict" | "EngagementValidationFailed" | "EngagementConflict" | "OpportunitySubmissionFailed" | "EngagementInvitationConflict" | "InternalError" | "OpportunityValidationFailed" | "OpportunityConflict" | "ResourceSnapshotAccessDenied" | "ResourceSnapshotValidationFailed" | "ResourceSnapshotConflict" | "ServiceQuotaExceeded" | "RequestThrottled")
       attr_accessor resource_snapshot_job_id: ::String
       attr_accessor start_time: ::Time
       attr_accessor task_arn: ::String
@@ -1061,9 +1074,33 @@ module Aws::PartnerCentralSelling
       SENSITIVE: []
     end
 
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
     class ThrottlingException
       attr_accessor message: ::String
       SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
     end
 
     class UpdateOpportunityRequest

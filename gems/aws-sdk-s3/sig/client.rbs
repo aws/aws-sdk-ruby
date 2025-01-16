@@ -49,8 +49,10 @@ module Aws
                       ?max_attempts: Integer,
                       ?output_event_stream_handler: Proc,
                       ?profile: String,
+                      ?request_checksum_calculation: String,
                       ?request_min_compression_size_bytes: Integer,
                       ?require_https_for_sse_cpk: bool,
+                      ?response_checksum_validation: String,
                       ?retry_backoff: Proc,
                       ?retry_base_delay: Float,
                       ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
@@ -114,8 +116,10 @@ module Aws
         def etag: () -> ::String
         def checksum_crc32: () -> ::String
         def checksum_crc32c: () -> ::String
+        def checksum_crc64nvme: () -> ::String
         def checksum_sha1: () -> ::String
         def checksum_sha256: () -> ::String
+        def checksum_type: () -> ("COMPOSITE" | "FULL_OBJECT")
         def server_side_encryption: () -> ("AES256" | "aws:kms" | "aws:kms:dsse")
         def version_id: () -> ::String
         def ssekms_key_id: () -> ::String
@@ -132,6 +136,7 @@ module Aws
                                              etag: ::String?,
                                              checksum_crc32: ::String?,
                                              checksum_crc32c: ::String?,
+                                             checksum_crc64nvme: ::String?,
                                              checksum_sha1: ::String?,
                                              checksum_sha256: ::String?,
                                              part_number: ::Integer?
@@ -141,8 +146,11 @@ module Aws
                                        upload_id: ::String,
                                        ?checksum_crc32: ::String,
                                        ?checksum_crc32c: ::String,
+                                       ?checksum_crc64nvme: ::String,
                                        ?checksum_sha1: ::String,
                                        ?checksum_sha256: ::String,
+                                       ?checksum_type: ("COMPOSITE" | "FULL_OBJECT"),
+                                       ?mpu_object_size: ::Integer,
                                        ?request_payer: ("requester"),
                                        ?expected_bucket_owner: ::String,
                                        ?if_match: ::String,
@@ -172,7 +180,7 @@ module Aws
                          ?acl: ("private" | "public-read" | "public-read-write" | "authenticated-read" | "aws-exec-read" | "bucket-owner-read" | "bucket-owner-full-control"),
                          bucket: ::String,
                          ?cache_control: ::String,
-                         ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256"),
+                         ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
                          ?content_disposition: ::String,
                          ?content_encoding: ::String,
                          ?content_language: ::String,
@@ -246,7 +254,7 @@ module Aws
       def create_bucket_metadata_table_configuration: (
                                                         bucket: ::String,
                                                         ?content_md5: ::String,
-                                                        ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256"),
+                                                        ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
                                                         metadata_table_configuration: {
                                                           s3_tables_destination: {
                                                             table_bucket_arn: ::String,
@@ -271,7 +279,8 @@ module Aws
         def ssekms_encryption_context: () -> ::String
         def bucket_key_enabled: () -> bool
         def request_charged: () -> ("requester")
-        def checksum_algorithm: () -> ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+        def checksum_algorithm: () -> ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
+        def checksum_type: () -> ("COMPOSITE" | "FULL_OBJECT")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html#create_multipart_upload-instance_method
       def create_multipart_upload: (
@@ -304,7 +313,8 @@ module Aws
                                      ?object_lock_retain_until_date: ::Time,
                                      ?object_lock_legal_hold_status: ("ON" | "OFF"),
                                      ?expected_bucket_owner: ::String,
-                                     ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+                                     ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
+                                     ?checksum_type: ("COMPOSITE" | "FULL_OBJECT")
                                    ) -> _CreateMultipartUploadResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMultipartUploadResponseSuccess
 
@@ -487,7 +497,7 @@ module Aws
                             ?request_payer: ("requester"),
                             ?bypass_governance_retention: bool,
                             ?expected_bucket_owner: ::String,
-                            ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+                            ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
                           ) -> _DeleteObjectsResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteObjectsResponseSuccess
 
@@ -779,8 +789,10 @@ module Aws
         def etag: () -> ::String
         def checksum_crc32: () -> ::String
         def checksum_crc32c: () -> ::String
+        def checksum_crc64nvme: () -> ::String
         def checksum_sha1: () -> ::String
         def checksum_sha256: () -> ::String
+        def checksum_type: () -> ("COMPOSITE" | "FULL_OBJECT")
         def missing_meta: () -> ::Integer
         def version_id: () -> ::String
         def cache_control: () -> ::String
@@ -981,8 +993,10 @@ module Aws
         def content_length: () -> ::Integer
         def checksum_crc32: () -> ::String
         def checksum_crc32c: () -> ::String
+        def checksum_crc64nvme: () -> ::String
         def checksum_sha1: () -> ::String
         def checksum_sha256: () -> ::String
+        def checksum_type: () -> ("COMPOSITE" | "FULL_OBJECT")
         def etag: () -> ::String
         def missing_meta: () -> ::Integer
         def version_id: () -> ::String
@@ -1259,7 +1273,8 @@ module Aws
         def owner: () -> Types::Owner
         def storage_class: () -> ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE")
         def request_charged: () -> ("requester")
-        def checksum_algorithm: () -> ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+        def checksum_algorithm: () -> ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
+        def checksum_type: () -> ("COMPOSITE" | "FULL_OBJECT")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html#list_parts-instance_method
       def list_parts: (
@@ -1283,7 +1298,7 @@ module Aws
                                                    status: ("Enabled" | "Suspended")?
                                                  },
                                                  ?expected_bucket_owner: ::String,
-                                                 ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+                                                 ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
                                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -1310,7 +1325,7 @@ module Aws
                             },
                             bucket: ::String,
                             ?content_md5: ::String,
-                            ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256"),
+                            ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
                             ?grant_full_control: ::String,
                             ?grant_read: ::String,
                             ?grant_read_acp: ::String,
@@ -1376,7 +1391,7 @@ module Aws
                                ]
                              },
                              ?content_md5: ::String,
-                             ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256"),
+                             ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
                              ?expected_bucket_owner: ::String
                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -1385,7 +1400,7 @@ module Aws
       def put_bucket_encryption: (
                                    bucket: ::String,
                                    ?content_md5: ::String,
-                                   ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256"),
+                                   ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
                                    server_side_encryption_configuration: {
                                      rules: Array[
                                        {
@@ -1473,7 +1488,7 @@ module Aws
       def put_bucket_lifecycle: (
                                   bucket: ::String,
                                   ?content_md5: ::String,
-                                  ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256"),
+                                  ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
                                   ?lifecycle_configuration: {
                                     rules: Array[
                                       {
@@ -1516,7 +1531,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html#put_bucket_lifecycle_configuration-instance_method
       def put_bucket_lifecycle_configuration: (
                                                 bucket: ::String,
-                                                ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256"),
+                                                ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
                                                 ?lifecycle_configuration: {
                                                   rules: Array[
                                                     {
@@ -1606,7 +1621,7 @@ module Aws
                                   }?
                                 },
                                 ?content_md5: ::String,
-                                ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256"),
+                                ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
                                 ?expected_bucket_owner: ::String
                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -1644,7 +1659,7 @@ module Aws
       def put_bucket_notification: (
                                      bucket: ::String,
                                      ?content_md5: ::String,
-                                     ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256"),
+                                     ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
                                      notification_configuration: {
                                        topic_configuration: {
                                          id: ::String?,
@@ -1752,7 +1767,7 @@ module Aws
       def put_bucket_policy: (
                                bucket: ::String,
                                ?content_md5: ::String,
-                               ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256"),
+                               ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
                                ?confirm_remove_self_bucket_access: bool,
                                policy: ::String,
                                ?expected_bucket_owner: ::String
@@ -1763,7 +1778,7 @@ module Aws
       def put_bucket_replication: (
                                     bucket: ::String,
                                     ?content_md5: ::String,
-                                    ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256"),
+                                    ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
                                     replication_configuration: {
                                       role: ::String,
                                       rules: Array[
@@ -1837,7 +1852,7 @@ module Aws
       def put_bucket_request_payment: (
                                         bucket: ::String,
                                         ?content_md5: ::String,
-                                        ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256"),
+                                        ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
                                         request_payment_configuration: {
                                           payer: ("Requester" | "BucketOwner")
                                         },
@@ -1849,7 +1864,7 @@ module Aws
       def put_bucket_tagging: (
                                 bucket: ::String,
                                 ?content_md5: ::String,
-                                ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256"),
+                                ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
                                 tagging: {
                                   tag_set: Array[
                                     {
@@ -1866,7 +1881,7 @@ module Aws
       def put_bucket_versioning: (
                                    bucket: ::String,
                                    ?content_md5: ::String,
-                                   ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256"),
+                                   ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
                                    ?mfa: ::String,
                                    versioning_configuration: {
                                      mfa_delete: ("Enabled" | "Disabled")?,
@@ -1880,7 +1895,7 @@ module Aws
       def put_bucket_website: (
                                 bucket: ::String,
                                 ?content_md5: ::String,
-                                ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256"),
+                                ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
                                 website_configuration: {
                                   error_document: {
                                     key: ::String
@@ -1918,8 +1933,10 @@ module Aws
         def etag: () -> ::String
         def checksum_crc32: () -> ::String
         def checksum_crc32c: () -> ::String
+        def checksum_crc64nvme: () -> ::String
         def checksum_sha1: () -> ::String
         def checksum_sha256: () -> ::String
+        def checksum_type: () -> ("COMPOSITE" | "FULL_OBJECT")
         def server_side_encryption: () -> ("AES256" | "aws:kms" | "aws:kms:dsse")
         def version_id: () -> ::String
         def sse_customer_algorithm: () -> ::String
@@ -1942,9 +1959,10 @@ module Aws
                         ?content_length: ::Integer,
                         ?content_md5: ::String,
                         ?content_type: ::String,
-                        ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256"),
+                        ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
                         ?checksum_crc32: ::String,
                         ?checksum_crc32c: ::String,
+                        ?checksum_crc64nvme: ::String,
                         ?checksum_sha1: ::String,
                         ?checksum_sha256: ::String,
                         ?expires: ::Time,
@@ -2002,7 +2020,7 @@ module Aws
                             },
                             bucket: ::String,
                             ?content_md5: ::String,
-                            ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256"),
+                            ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
                             ?grant_full_control: ::String,
                             ?grant_read: ::String,
                             ?grant_read_acp: ::String,
@@ -2029,7 +2047,7 @@ module Aws
                                    ?request_payer: ("requester"),
                                    ?version_id: ::String,
                                    ?content_md5: ::String,
-                                   ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256"),
+                                   ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
                                    ?expected_bucket_owner: ::String
                                  ) -> _PutObjectLegalHoldResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutObjectLegalHoldResponseSuccess
@@ -2054,7 +2072,7 @@ module Aws
                                            ?request_payer: ("requester"),
                                            ?token: ::String,
                                            ?content_md5: ::String,
-                                           ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256"),
+                                           ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
                                            ?expected_bucket_owner: ::String
                                          ) -> _PutObjectLockConfigurationResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutObjectLockConfigurationResponseSuccess
@@ -2075,7 +2093,7 @@ module Aws
                                   ?version_id: ::String,
                                   ?bypass_governance_retention: bool,
                                   ?content_md5: ::String,
-                                  ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256"),
+                                  ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
                                   ?expected_bucket_owner: ::String
                                 ) -> _PutObjectRetentionResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutObjectRetentionResponseSuccess
@@ -2090,7 +2108,7 @@ module Aws
                                 key: ::String,
                                 ?version_id: ::String,
                                 ?content_md5: ::String,
-                                ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256"),
+                                ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
                                 tagging: {
                                   tag_set: Array[
                                     {
@@ -2108,7 +2126,7 @@ module Aws
       def put_public_access_block: (
                                      bucket: ::String,
                                      ?content_md5: ::String,
-                                     ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256"),
+                                     ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
                                      public_access_block_configuration: {
                                        block_public_acls: bool?,
                                        ignore_public_acls: bool?,
@@ -2211,7 +2229,7 @@ module Aws
                               }?
                             },
                             ?request_payer: ("requester"),
-                            ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256"),
+                            ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
                             ?expected_bucket_owner: ::String
                           ) -> _RestoreObjectResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreObjectResponseSuccess
@@ -2275,6 +2293,7 @@ module Aws
         def etag: () -> ::String
         def checksum_crc32: () -> ::String
         def checksum_crc32c: () -> ::String
+        def checksum_crc64nvme: () -> ::String
         def checksum_sha1: () -> ::String
         def checksum_sha256: () -> ::String
         def sse_customer_algorithm: () -> ::String
@@ -2289,9 +2308,10 @@ module Aws
                          bucket: ::String,
                          ?content_length: ::Integer,
                          ?content_md5: ::String,
-                         ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256"),
+                         ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
                          ?checksum_crc32: ::String,
                          ?checksum_crc32c: ::String,
+                         ?checksum_crc64nvme: ::String,
                          ?checksum_sha1: ::String,
                          ?checksum_sha256: ::String,
                          key: ::String,
@@ -2358,6 +2378,7 @@ module Aws
                                        ?content_type: ::String,
                                        ?checksum_crc32: ::String,
                                        ?checksum_crc32c: ::String,
+                                       ?checksum_crc64nvme: ::String,
                                        ?checksum_sha1: ::String,
                                        ?checksum_sha256: ::String,
                                        ?delete_marker: bool,

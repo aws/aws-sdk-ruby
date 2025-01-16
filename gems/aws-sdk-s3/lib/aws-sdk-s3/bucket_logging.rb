@@ -213,7 +213,7 @@ module Aws::S3
     #       },
     #     },
     #     content_md5: "ContentMD5",
-    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
     #     expected_bucket_owner: "AccountId",
     #   })
     # @param [Hash] options ({})

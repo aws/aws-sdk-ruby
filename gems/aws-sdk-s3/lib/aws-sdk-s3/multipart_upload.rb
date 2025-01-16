@@ -103,6 +103,18 @@ module Aws::S3
       data[:checksum_algorithm]
     end
 
+    # The checksum type that is used to calculate the object’s checksum
+    # value. For more information, see [Checking object integrity][1] in the
+    # *Amazon S3 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
+    # @return [String]
+    def checksum_type
+      data[:checksum_type]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -295,6 +307,7 @@ module Aws::S3
     #           etag: "ETag",
     #           checksum_crc32: "ChecksumCRC32",
     #           checksum_crc32c: "ChecksumCRC32C",
+    #           checksum_crc64nvme: "ChecksumCRC64NVME",
     #           checksum_sha1: "ChecksumSHA1",
     #           checksum_sha256: "ChecksumSHA256",
     #           part_number: 1,
@@ -303,8 +316,11 @@ module Aws::S3
     #     },
     #     checksum_crc32: "ChecksumCRC32",
     #     checksum_crc32c: "ChecksumCRC32C",
+    #     checksum_crc64nvme: "ChecksumCRC64NVME",
     #     checksum_sha1: "ChecksumSHA1",
     #     checksum_sha256: "ChecksumSHA256",
+    #     checksum_type: "COMPOSITE", # accepts COMPOSITE, FULL_OBJECT
+    #     mpu_object_size: 1,
     #     request_payer: "requester", # accepts requester
     #     expected_bucket_owner: "AccountId",
     #     if_match: "IfMatch",
@@ -319,7 +335,7 @@ module Aws::S3
     # @option options [String] :checksum_crc32
     #   This header can be used as a data integrity check to verify that the
     #   data received is the same data that was originally sent. This header
-    #   specifies the base64-encoded, 32-bit CRC-32 checksum of the object.
+    #   specifies the Base64 encoded, 32-bit `CRC-32` checksum of the object.
     #   For more information, see [Checking object integrity][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -329,9 +345,20 @@ module Aws::S3
     # @option options [String] :checksum_crc32c
     #   This header can be used as a data integrity check to verify that the
     #   data received is the same data that was originally sent. This header
-    #   specifies the base64-encoded, 32-bit CRC-32C checksum of the object.
+    #   specifies the Base64 encoded, 32-bit `CRC-32C` checksum of the object.
     #   For more information, see [Checking object integrity][1] in the
     #   *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
+    # @option options [String] :checksum_crc64nvme
+    #   This header can be used as a data integrity check to verify that the
+    #   data received is the same data that was originally sent. This header
+    #   specifies the Base64 encoded, 64-bit `CRC-64NVME` checksum of the
+    #   object. The `CRC-64NVME` checksum is always a full object checksum.
+    #   For more information, see [Checking object integrity in the Amazon S3
+    #   User Guide][1].
     #
     #
     #
@@ -339,9 +366,9 @@ module Aws::S3
     # @option options [String] :checksum_sha1
     #   This header can be used as a data integrity check to verify that the
     #   data received is the same data that was originally sent. This header
-    #   specifies the base64-encoded, 160-bit SHA-1 digest of the object. For
-    #   more information, see [Checking object integrity][1] in the *Amazon S3
-    #   User Guide*.
+    #   specifies the Base64 encoded, 160-bit `SHA-1` digest of the object.
+    #   For more information, see [Checking object integrity][1] in the
+    #   *Amazon S3 User Guide*.
     #
     #
     #
@@ -349,13 +376,28 @@ module Aws::S3
     # @option options [String] :checksum_sha256
     #   This header can be used as a data integrity check to verify that the
     #   data received is the same data that was originally sent. This header
-    #   specifies the base64-encoded, 256-bit SHA-256 digest of the object.
+    #   specifies the Base64 encoded, 256-bit `SHA-256` digest of the object.
     #   For more information, see [Checking object integrity][1] in the
     #   *Amazon S3 User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
+    # @option options [String] :checksum_type
+    #   This header specifies the checksum type of the object, which
+    #   determines how part-level checksums are combined to create an
+    #   object-level checksum for multipart objects. You can use this header
+    #   as a data integrity check to verify that the checksum type that is
+    #   received is the same checksum that was specified. If the checksum type
+    #   doesn’t match the checksum type that was specified for the object
+    #   during the `CreateMultipartUpload` request, it’ll result in a
+    #   `BadDigest` error. For more information, see Checking object integrity
+    #   in the Amazon S3 User Guide.
+    # @option options [Integer] :mpu_object_size
+    #   The expected total object size of the multipart upload request. If
+    #   there’s a mismatch between the specified object size value and the
+    #   actual object size value, it results in an `HTTP 400 InvalidRequest`
+    #   error.
     # @option options [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their

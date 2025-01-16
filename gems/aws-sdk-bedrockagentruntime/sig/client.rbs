@@ -42,7 +42,9 @@ module Aws
                       ?max_attempts: Integer,
                       ?output_event_stream_handler: Proc,
                       ?profile: String,
+                      ?request_checksum_calculation: String,
                       ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
                       ?retry_backoff: Proc,
                       ?retry_base_delay: Float,
                       ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
@@ -586,7 +588,11 @@ module Aws
                                      },
                                    ]
                                  },
-                                 session_id: ::String
+                                 session_id: ::String,
+                                 ?streaming_configurations: {
+                                   apply_guardrail_interval: ::Integer?,
+                                   stream_final_response: bool?
+                                 }
                                ) ?{ (*untyped) -> void } -> _InvokeInlineAgentResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _InvokeInlineAgentResponseSuccess
 

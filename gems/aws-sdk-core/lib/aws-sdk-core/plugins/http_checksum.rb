@@ -11,8 +11,8 @@ module Aws
         CHUNK_SIZE = 1 * 1024 * 1024 # one MB
 
         def call(context)
-          if checksum_required?(context) &&
-             !context[:checksum_algorithms] && # skip in favor of flexible checksum
+          if context.operation.http_checksum_required &&
+             !context[:http_checksum][:request_algorithm] && # skip in favor of flexible checksum
              !context[:s3_express_endpoint] # s3 express endpoints do not support md5
             body = context.http_request.body
             context.http_request.headers['Content-Md5'] ||= md5(body)
@@ -21,12 +21,6 @@ module Aws
         end
 
         private
-
-        def checksum_required?(context)
-          context.operation.http_checksum_required ||
-            (context.operation.http_checksum &&
-              context.operation.http_checksum['requestChecksumRequired'])
-        end
 
         # @param [File, Tempfile, IO#read, String] value
         # @return [String<MD5>]

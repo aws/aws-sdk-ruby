@@ -39,7 +39,9 @@ module Aws
                       ?logger: untyped,
                       ?max_attempts: Integer,
                       ?profile: String,
+                      ?request_checksum_calculation: String,
                       ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
                       ?retry_backoff: Proc,
                       ?retry_base_delay: Float,
                       ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
@@ -329,7 +331,13 @@ module Aws
                                           engagement_identifier: ::String,
                                           resource_identifier: ::String,
                                           resource_snapshot_template_identifier: ::String,
-                                          resource_type: ("Opportunity")
+                                          resource_type: ("Opportunity"),
+                                          ?tags: Array[
+                                            {
+                                              key: ::String,
+                                              value: ::String
+                                            },
+                                          ]
                                         ) -> _CreateResourceSnapshotJobResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateResourceSnapshotJobResponseSuccess
 
@@ -696,6 +704,16 @@ module Aws
                           ) -> _ListSolutionsResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSolutionsResponseSuccess
 
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralSelling/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
       interface _PutSellingSystemSettingsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutSellingSystemSettingsResponse]
         def catalog: () -> ::String
@@ -721,7 +739,7 @@ module Aws
         def engagement_invitation_id: () -> ::String
         def message: () -> ::String
         def opportunity_id: () -> ::String
-        def reason_code: () -> ("InvitationAccessDenied" | "InvitationValidationFailed" | "EngagementAccessDenied" | "OpportunityAccessDenied" | "ResourceSnapshotJobAccessDenied" | "ResourceSnapshotJobValidationFailed" | "ResourceSnapshotJobConflict" | "EngagementValidationFailed" | "EngagementConflict" | "OpportunitySubmissionFailed" | "EngagementInvitationConflict" | "OpportunityValidationFailed" | "OpportunityConflict" | "ResourceSnapshotAccessDenied" | "ResourceSnapshotValidationFailed" | "ResourceSnapshotConflict" | "InternalError" | "ServiceQuotaExceeded" | "RequestThrottled")
+        def reason_code: () -> ("InvitationAccessDenied" | "InvitationValidationFailed" | "EngagementAccessDenied" | "OpportunityAccessDenied" | "ResourceSnapshotJobAccessDenied" | "ResourceSnapshotJobValidationFailed" | "ResourceSnapshotJobConflict" | "EngagementValidationFailed" | "EngagementConflict" | "OpportunitySubmissionFailed" | "EngagementInvitationConflict" | "InternalError" | "OpportunityValidationFailed" | "OpportunityConflict" | "ResourceSnapshotAccessDenied" | "ResourceSnapshotValidationFailed" | "ResourceSnapshotConflict" | "ServiceQuotaExceeded" | "RequestThrottled")
         def resource_snapshot_job_id: () -> ::String
         def start_time: () -> ::Time
         def task_arn: () -> ::String
@@ -732,7 +750,13 @@ module Aws
       def start_engagement_by_accepting_invitation_task: (
                                                            catalog: ::String,
                                                            client_token: ::String,
-                                                           identifier: ::String
+                                                           identifier: ::String,
+                                                           ?tags: Array[
+                                                             {
+                                                               key: ::String,
+                                                               value: ::String
+                                                             },
+                                                           ]
                                                          ) -> _StartEngagementByAcceptingInvitationTaskResponseSuccess
                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartEngagementByAcceptingInvitationTaskResponseSuccess
 
@@ -742,7 +766,7 @@ module Aws
         def engagement_invitation_id: () -> ::String
         def message: () -> ::String
         def opportunity_id: () -> ::String
-        def reason_code: () -> ("InvitationAccessDenied" | "InvitationValidationFailed" | "EngagementAccessDenied" | "OpportunityAccessDenied" | "ResourceSnapshotJobAccessDenied" | "ResourceSnapshotJobValidationFailed" | "ResourceSnapshotJobConflict" | "EngagementValidationFailed" | "EngagementConflict" | "OpportunitySubmissionFailed" | "EngagementInvitationConflict" | "OpportunityValidationFailed" | "OpportunityConflict" | "ResourceSnapshotAccessDenied" | "ResourceSnapshotValidationFailed" | "ResourceSnapshotConflict" | "InternalError" | "ServiceQuotaExceeded" | "RequestThrottled")
+        def reason_code: () -> ("InvitationAccessDenied" | "InvitationValidationFailed" | "EngagementAccessDenied" | "OpportunityAccessDenied" | "ResourceSnapshotJobAccessDenied" | "ResourceSnapshotJobValidationFailed" | "ResourceSnapshotJobConflict" | "EngagementValidationFailed" | "EngagementConflict" | "OpportunitySubmissionFailed" | "EngagementInvitationConflict" | "InternalError" | "OpportunityValidationFailed" | "OpportunityConflict" | "ResourceSnapshotAccessDenied" | "ResourceSnapshotValidationFailed" | "ResourceSnapshotConflict" | "ServiceQuotaExceeded" | "RequestThrottled")
         def resource_snapshot_job_id: () -> ::String
         def start_time: () -> ::Time
         def task_arn: () -> ::String
@@ -757,7 +781,13 @@ module Aws
                                                     },
                                                     catalog: ::String,
                                                     client_token: ::String,
-                                                    identifier: ::String
+                                                    identifier: ::String,
+                                                    ?tags: Array[
+                                                      {
+                                                        key: ::String,
+                                                        value: ::String
+                                                      },
+                                                    ]
                                                   ) -> _StartEngagementFromOpportunityTaskResponseSuccess
                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartEngagementFromOpportunityTaskResponseSuccess
 
@@ -783,6 +813,31 @@ module Aws
                                 ?visibility: ("Full" | "Limited")
                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralSelling/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralSelling/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
 
       interface _UpdateOpportunityResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateOpportunityResponse]

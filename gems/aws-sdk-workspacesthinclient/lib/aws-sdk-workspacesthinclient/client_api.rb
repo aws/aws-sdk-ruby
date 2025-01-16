@@ -294,7 +294,7 @@ module Aws::WorkSpacesThinClient
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
-    MaintenanceWindow.add_member(:type, Shapes::ShapeRef.new(shape: MaintenanceWindowType, location_name: "type"))
+    MaintenanceWindow.add_member(:type, Shapes::ShapeRef.new(shape: MaintenanceWindowType, required: true, location_name: "type"))
     MaintenanceWindow.add_member(:start_time_hour, Shapes::ShapeRef.new(shape: Hour, location_name: "startTimeHour"))
     MaintenanceWindow.add_member(:start_time_minute, Shapes::ShapeRef.new(shape: Minute, location_name: "startTimeMinute"))
     MaintenanceWindow.add_member(:end_time_hour, Shapes::ShapeRef.new(shape: Hour, location_name: "endTimeHour"))

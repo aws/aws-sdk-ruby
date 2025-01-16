@@ -42,7 +42,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/BucketLifecycle.html#put-instance_method
       def put: (
                  ?content_md5: ::String,
-                 ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256"),
+                 ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
                  ?lifecycle_configuration: {
                    rules: Array[
                      {

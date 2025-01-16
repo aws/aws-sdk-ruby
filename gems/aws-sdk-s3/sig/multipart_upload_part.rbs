@@ -41,6 +41,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/MultipartUploadPart.html#checksum_crc32c-instance_method
       def checksum_crc32c: () -> ::String
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/MultipartUploadPart.html#checksum_crc64nvme-instance_method
+      def checksum_crc64nvme: () -> ::String
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/MultipartUploadPart.html#checksum_sha1-instance_method
       def checksum_sha1: () -> ::String
 
@@ -82,9 +85,10 @@ module Aws
                     ?body: ::String | ::StringIO | ::File,
                     ?content_length: ::Integer,
                     ?content_md5: ::String,
-                    ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256"),
+                    ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
                     ?checksum_crc32: ::String,
                     ?checksum_crc32c: ::String,
+                    ?checksum_crc64nvme: ::String,
                     ?checksum_sha1: ::String,
                     ?checksum_sha256: ::String,
                     ?sse_customer_algorithm: ::String,

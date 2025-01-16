@@ -824,6 +824,7 @@ module Aws::BedrockAgentRuntime
       attr_accessor knowledge_bases: ::Array[Types::KnowledgeBase]
       attr_accessor prompt_override_configuration: Types::PromptOverrideConfiguration
       attr_accessor session_id: ::String
+      attr_accessor streaming_configurations: Types::StreamingConfigurations
       SENSITIVE: [:input_text, :instruction, :prompt_override_configuration]
     end
 

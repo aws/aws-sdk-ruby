@@ -27,7 +27,10 @@ module Aws
       def etag: () -> ::String
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/ObjectVersion.html#checksum_algorithm-instance_method
-      def checksum_algorithm: () -> ::Array[("CRC32" | "CRC32C" | "SHA1" | "SHA256")]
+      def checksum_algorithm: () -> ::Array[("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/ObjectVersion.html#checksum_type-instance_method
+      def checksum_type: () -> ("COMPOSITE" | "FULL_OBJECT")
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/ObjectVersion.html#size-instance_method
       def size: () -> ::Integer
@@ -131,7 +134,7 @@ module Aws
                              ?request_payer: ("requester"),
                              ?bypass_governance_retention: bool,
                              ?expected_bucket_owner: ::String,
-                             ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+                             ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
                            ) -> void
                        | (?Hash[Symbol, untyped]) -> void
       end

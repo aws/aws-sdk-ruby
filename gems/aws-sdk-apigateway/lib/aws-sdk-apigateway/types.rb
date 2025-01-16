@@ -632,8 +632,8 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] domain_name_id
-    #   The identifier for the domain name resource. Supported only for
-    #   private custom domain names.
+    #   The identifier for the domain name resource. Required for private
+    #   custom domain names.
     #   @return [String]
     #
     # @!attribute [rw] base_path
@@ -2645,8 +2645,8 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] domain_name_id
-    #   The identifier for the domain name resource. Supported only for
-    #   private custom domain names.
+    #   The identifier for the domain name resource. Required for private
+    #   custom domain names.
     #   @return [String]
     #
     class GetDomainNameRequest < Struct.new(

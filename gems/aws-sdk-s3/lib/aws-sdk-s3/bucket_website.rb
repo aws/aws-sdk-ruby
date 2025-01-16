@@ -223,7 +223,7 @@ module Aws::S3
     #
     #   bucket_website.put({
     #     content_md5: "ContentMD5",
-    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
     #     website_configuration: { # required
     #       error_document: {
     #         key: "ObjectKey", # required
@@ -255,7 +255,7 @@ module Aws::S3
     #   })
     # @param [Hash] options ({})
     # @option options [String] :content_md5
-    #   The base64-encoded 128-bit MD5 digest of the data. You must use this
+    #   The Base64 encoded 128-bit `MD5` digest of the data. You must use this
     #   header as a message integrity check to verify that the request body
     #   was not corrupted in transit. For more information, see [RFC 1864][1].
     #

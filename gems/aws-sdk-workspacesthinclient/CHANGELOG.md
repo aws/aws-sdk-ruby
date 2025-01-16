@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2025-01-15)
+------------------
+
+* Feature - Mark type in MaintenanceWindow as required.
+
 1.18.0 (2024-10-18)
 ------------------
 

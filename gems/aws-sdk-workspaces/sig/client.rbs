@@ -39,7 +39,9 @@ module Aws
                       ?logger: untyped,
                       ?max_attempts: Integer,
                       ?profile: String,
+                      ?request_checksum_calculation: String,
                       ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
                       ?retry_backoff: Proc,
                       ?retry_base_delay: Float,
                       ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
@@ -283,7 +285,7 @@ module Aws
                                      bundle_description: ::String,
                                      image_id: ::String,
                                      compute_type: {
-                                       name: ("VALUE" | "STANDARD" | "PERFORMANCE" | "POWER" | "GRAPHICS" | "POWERPRO" | "GRAPHICSPRO" | "GRAPHICS_G4DN" | "GRAPHICSPRO_G4DN")?
+                                       name: ("VALUE" | "STANDARD" | "PERFORMANCE" | "POWER" | "GRAPHICS" | "POWERPRO" | "GENERALPURPOSE_4XLARGE" | "GENERALPURPOSE_8XLARGE" | "GRAPHICSPRO" | "GRAPHICS_G4DN" | "GRAPHICSPRO_G4DN")?
                                      },
                                      user_storage: {
                                        capacity: ::String
@@ -345,7 +347,7 @@ module Aws
                                      running_mode_auto_stop_timeout_in_minutes: ::Integer?,
                                      root_volume_size_gib: ::Integer?,
                                      user_volume_size_gib: ::Integer?,
-                                     compute_type_name: ("VALUE" | "STANDARD" | "PERFORMANCE" | "POWER" | "GRAPHICS" | "POWERPRO" | "GRAPHICSPRO" | "GRAPHICS_G4DN" | "GRAPHICSPRO_G4DN")?,
+                                     compute_type_name: ("VALUE" | "STANDARD" | "PERFORMANCE" | "POWER" | "GRAPHICS" | "POWERPRO" | "GENERALPURPOSE_4XLARGE" | "GENERALPURPOSE_8XLARGE" | "GRAPHICSPRO" | "GRAPHICS_G4DN" | "GRAPHICSPRO_G4DN")?,
                                      protocols: Array[("PCOIP" | "WSP")]?,
                                      operating_system_name: ("AMAZON_LINUX_2" | "UBUNTU_18_04" | "UBUNTU_20_04" | "UBUNTU_22_04" | "UNKNOWN" | "WINDOWS_10" | "WINDOWS_11" | "WINDOWS_7" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "RHEL_8" | "ROCKY_8")?,
                                      global_accelerator: {
@@ -537,7 +539,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#describe_applications-instance_method
       def describe_applications: (
                                    ?application_ids: Array[::String],
-                                   ?compute_type_names: Array[("VALUE" | "STANDARD" | "PERFORMANCE" | "POWER" | "GRAPHICS" | "POWERPRO" | "GRAPHICSPRO" | "GRAPHICS_G4DN" | "GRAPHICSPRO_G4DN")],
+                                   ?compute_type_names: Array[("VALUE" | "STANDARD" | "PERFORMANCE" | "POWER" | "GRAPHICS" | "POWERPRO" | "GENERALPURPOSE_4XLARGE" | "GENERALPURPOSE_8XLARGE" | "GRAPHICSPRO" | "GRAPHICS_G4DN" | "GRAPHICSPRO_G4DN")],
                                    ?license_type: ("LICENSED" | "UNLICENSED"),
                                    ?operating_system_names: Array[("AMAZON_LINUX_2" | "UBUNTU_18_04" | "UBUNTU_20_04" | "UBUNTU_22_04" | "UNKNOWN" | "WINDOWS_10" | "WINDOWS_11" | "WINDOWS_7" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "RHEL_8" | "ROCKY_8")],
                                    ?owner: ::String,
@@ -1106,7 +1108,7 @@ module Aws
                                            running_mode_auto_stop_timeout_in_minutes: ::Integer?,
                                            root_volume_size_gib: ::Integer?,
                                            user_volume_size_gib: ::Integer?,
-                                           compute_type_name: ("VALUE" | "STANDARD" | "PERFORMANCE" | "POWER" | "GRAPHICS" | "POWERPRO" | "GRAPHICSPRO" | "GRAPHICS_G4DN" | "GRAPHICSPRO_G4DN")?,
+                                           compute_type_name: ("VALUE" | "STANDARD" | "PERFORMANCE" | "POWER" | "GRAPHICS" | "POWERPRO" | "GENERALPURPOSE_4XLARGE" | "GENERALPURPOSE_8XLARGE" | "GRAPHICSPRO" | "GRAPHICS_G4DN" | "GRAPHICSPRO_G4DN")?,
                                            protocols: Array[("PCOIP" | "WSP")]?,
                                            operating_system_name: ("AMAZON_LINUX_2" | "UBUNTU_18_04" | "UBUNTU_20_04" | "UBUNTU_22_04" | "UNKNOWN" | "WINDOWS_10" | "WINDOWS_11" | "WINDOWS_7" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "RHEL_8" | "ROCKY_8")?,
                                            global_accelerator: {

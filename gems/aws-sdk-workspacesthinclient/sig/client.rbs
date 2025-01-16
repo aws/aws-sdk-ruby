@@ -39,7 +39,9 @@ module Aws
                       ?logger: untyped,
                       ?max_attempts: Integer,
                       ?profile: String,
+                      ?request_checksum_calculation: String,
                       ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
                       ?retry_backoff: Proc,
                       ?retry_base_delay: Float,
                       ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
@@ -86,7 +88,7 @@ module Aws
                                 ?desktop_endpoint: ::String,
                                 ?software_set_update_schedule: ("USE_MAINTENANCE_WINDOW" | "APPLY_IMMEDIATELY"),
                                 ?maintenance_window: {
-                                  type: ("SYSTEM" | "CUSTOM")?,
+                                  type: ("SYSTEM" | "CUSTOM"),
                                   start_time_hour: ::Integer?,
                                   start_time_minute: ::Integer?,
                                   end_time_hour: ::Integer?,
@@ -255,7 +257,7 @@ module Aws
                                 ?desktop_endpoint: ::String,
                                 ?software_set_update_schedule: ("USE_MAINTENANCE_WINDOW" | "APPLY_IMMEDIATELY"),
                                 ?maintenance_window: {
-                                  type: ("SYSTEM" | "CUSTOM")?,
+                                  type: ("SYSTEM" | "CUSTOM"),
                                   start_time_hour: ::Integer?,
                                   start_time_minute: ::Integer?,
                                   end_time_hour: ::Integer?,

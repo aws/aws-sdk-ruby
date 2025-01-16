@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.178.0 (2025-01-15)
+------------------
+
+* Feature - This change enhances integrity protections for new SDK requests to S3. S3 SDKs now support the CRC64NVME checksum algorithm, full object checksums for multipart S3 objects, and new default integrity protections for S3 requests.
+
+* Feature - Default to using `CRC32` checksum validation for S3 uploads and downloads.
+
 1.177.0 (2025-01-03)
 ------------------
 

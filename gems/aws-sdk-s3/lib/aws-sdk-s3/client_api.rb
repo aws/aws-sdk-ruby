@@ -76,9 +76,11 @@ module Aws::S3
     ChecksumAlgorithmList = Shapes::ListShape.new(name: 'ChecksumAlgorithmList', flattened: true)
     ChecksumCRC32 = Shapes::StringShape.new(name: 'ChecksumCRC32')
     ChecksumCRC32C = Shapes::StringShape.new(name: 'ChecksumCRC32C')
+    ChecksumCRC64NVME = Shapes::StringShape.new(name: 'ChecksumCRC64NVME')
     ChecksumMode = Shapes::StringShape.new(name: 'ChecksumMode')
     ChecksumSHA1 = Shapes::StringShape.new(name: 'ChecksumSHA1')
     ChecksumSHA256 = Shapes::StringShape.new(name: 'ChecksumSHA256')
+    ChecksumType = Shapes::StringShape.new(name: 'ChecksumType')
     CloudFunction = Shapes::StringShape.new(name: 'CloudFunction')
     CloudFunctionConfiguration = Shapes::StructureShape.new(name: 'CloudFunctionConfiguration')
     CloudFunctionInvocationRole = Shapes::StringShape.new(name: 'CloudFunctionInvocationRole')
@@ -396,6 +398,7 @@ module Aws::S3
     MetricsStatus = Shapes::StringShape.new(name: 'MetricsStatus')
     Minutes = Shapes::IntegerShape.new(name: 'Minutes')
     MissingMeta = Shapes::IntegerShape.new(name: 'MissingMeta')
+    MpuObjectSize = Shapes::IntegerShape.new(name: 'MpuObjectSize')
     MultipartUpload = Shapes::StructureShape.new(name: 'MultipartUpload')
     MultipartUploadId = Shapes::StringShape.new(name: 'MultipartUploadId')
     MultipartUploadList = Shapes::ListShape.new(name: 'MultipartUploadList', flattened: true)
@@ -756,8 +759,10 @@ module Aws::S3
 
     Checksum.add_member(:checksum_crc32, Shapes::ShapeRef.new(shape: ChecksumCRC32, location_name: "ChecksumCRC32"))
     Checksum.add_member(:checksum_crc32c, Shapes::ShapeRef.new(shape: ChecksumCRC32C, location_name: "ChecksumCRC32C"))
+    Checksum.add_member(:checksum_crc64nvme, Shapes::ShapeRef.new(shape: ChecksumCRC64NVME, location_name: "ChecksumCRC64NVME"))
     Checksum.add_member(:checksum_sha1, Shapes::ShapeRef.new(shape: ChecksumSHA1, location_name: "ChecksumSHA1"))
     Checksum.add_member(:checksum_sha256, Shapes::ShapeRef.new(shape: ChecksumSHA256, location_name: "ChecksumSHA256"))
+    Checksum.add_member(:checksum_type, Shapes::ShapeRef.new(shape: ChecksumType, location_name: "ChecksumType"))
     Checksum.struct_class = Types::Checksum
 
     ChecksumAlgorithmList.member = Shapes::ShapeRef.new(shape: ChecksumAlgorithm)
@@ -781,8 +786,10 @@ module Aws::S3
     CompleteMultipartUploadOutput.add_member(:etag, Shapes::ShapeRef.new(shape: ETag, location_name: "ETag"))
     CompleteMultipartUploadOutput.add_member(:checksum_crc32, Shapes::ShapeRef.new(shape: ChecksumCRC32, location_name: "ChecksumCRC32"))
     CompleteMultipartUploadOutput.add_member(:checksum_crc32c, Shapes::ShapeRef.new(shape: ChecksumCRC32C, location_name: "ChecksumCRC32C"))
+    CompleteMultipartUploadOutput.add_member(:checksum_crc64nvme, Shapes::ShapeRef.new(shape: ChecksumCRC64NVME, location_name: "ChecksumCRC64NVME"))
     CompleteMultipartUploadOutput.add_member(:checksum_sha1, Shapes::ShapeRef.new(shape: ChecksumSHA1, location_name: "ChecksumSHA1"))
     CompleteMultipartUploadOutput.add_member(:checksum_sha256, Shapes::ShapeRef.new(shape: ChecksumSHA256, location_name: "ChecksumSHA256"))
+    CompleteMultipartUploadOutput.add_member(:checksum_type, Shapes::ShapeRef.new(shape: ChecksumType, location_name: "ChecksumType"))
     CompleteMultipartUploadOutput.add_member(:server_side_encryption, Shapes::ShapeRef.new(shape: ServerSideEncryption, location: "header", location_name: "x-amz-server-side-encryption"))
     CompleteMultipartUploadOutput.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "header", location_name: "x-amz-version-id"))
     CompleteMultipartUploadOutput.add_member(:ssekms_key_id, Shapes::ShapeRef.new(shape: SSEKMSKeyId, location: "header", location_name: "x-amz-server-side-encryption-aws-kms-key-id"))
@@ -796,8 +803,11 @@ module Aws::S3
     CompleteMultipartUploadRequest.add_member(:upload_id, Shapes::ShapeRef.new(shape: MultipartUploadId, required: true, location: "querystring", location_name: "uploadId"))
     CompleteMultipartUploadRequest.add_member(:checksum_crc32, Shapes::ShapeRef.new(shape: ChecksumCRC32, location: "header", location_name: "x-amz-checksum-crc32"))
     CompleteMultipartUploadRequest.add_member(:checksum_crc32c, Shapes::ShapeRef.new(shape: ChecksumCRC32C, location: "header", location_name: "x-amz-checksum-crc32c"))
+    CompleteMultipartUploadRequest.add_member(:checksum_crc64nvme, Shapes::ShapeRef.new(shape: ChecksumCRC64NVME, location: "header", location_name: "x-amz-checksum-crc64nvme"))
     CompleteMultipartUploadRequest.add_member(:checksum_sha1, Shapes::ShapeRef.new(shape: ChecksumSHA1, location: "header", location_name: "x-amz-checksum-sha1"))
     CompleteMultipartUploadRequest.add_member(:checksum_sha256, Shapes::ShapeRef.new(shape: ChecksumSHA256, location: "header", location_name: "x-amz-checksum-sha256"))
+    CompleteMultipartUploadRequest.add_member(:checksum_type, Shapes::ShapeRef.new(shape: ChecksumType, location: "header", location_name: "x-amz-checksum-type"))
+    CompleteMultipartUploadRequest.add_member(:mpu_object_size, Shapes::ShapeRef.new(shape: MpuObjectSize, location: "header", location_name: "x-amz-mp-object-size"))
     CompleteMultipartUploadRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
     CompleteMultipartUploadRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
     CompleteMultipartUploadRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: IfMatch, location: "header", location_name: "If-Match"))
@@ -815,6 +825,7 @@ module Aws::S3
     CompletedPart.add_member(:etag, Shapes::ShapeRef.new(shape: ETag, location_name: "ETag"))
     CompletedPart.add_member(:checksum_crc32, Shapes::ShapeRef.new(shape: ChecksumCRC32, location_name: "ChecksumCRC32"))
     CompletedPart.add_member(:checksum_crc32c, Shapes::ShapeRef.new(shape: ChecksumCRC32C, location_name: "ChecksumCRC32C"))
+    CompletedPart.add_member(:checksum_crc64nvme, Shapes::ShapeRef.new(shape: ChecksumCRC64NVME, location_name: "ChecksumCRC64NVME"))
     CompletedPart.add_member(:checksum_sha1, Shapes::ShapeRef.new(shape: ChecksumSHA1, location_name: "ChecksumSHA1"))
     CompletedPart.add_member(:checksum_sha256, Shapes::ShapeRef.new(shape: ChecksumSHA256, location_name: "ChecksumSHA256"))
     CompletedPart.add_member(:part_number, Shapes::ShapeRef.new(shape: PartNumber, location_name: "PartNumber"))
@@ -888,8 +899,10 @@ module Aws::S3
 
     CopyObjectResult.add_member(:etag, Shapes::ShapeRef.new(shape: ETag, location_name: "ETag"))
     CopyObjectResult.add_member(:last_modified, Shapes::ShapeRef.new(shape: LastModified, location_name: "LastModified"))
+    CopyObjectResult.add_member(:checksum_type, Shapes::ShapeRef.new(shape: ChecksumType, location_name: "ChecksumType"))
     CopyObjectResult.add_member(:checksum_crc32, Shapes::ShapeRef.new(shape: ChecksumCRC32, location_name: "ChecksumCRC32"))
     CopyObjectResult.add_member(:checksum_crc32c, Shapes::ShapeRef.new(shape: ChecksumCRC32C, location_name: "ChecksumCRC32C"))
+    CopyObjectResult.add_member(:checksum_crc64nvme, Shapes::ShapeRef.new(shape: ChecksumCRC64NVME, location_name: "ChecksumCRC64NVME"))
     CopyObjectResult.add_member(:checksum_sha1, Shapes::ShapeRef.new(shape: ChecksumSHA1, location_name: "ChecksumSHA1"))
     CopyObjectResult.add_member(:checksum_sha256, Shapes::ShapeRef.new(shape: ChecksumSHA256, location_name: "ChecksumSHA256"))
     CopyObjectResult.struct_class = Types::CopyObjectResult
@@ -898,6 +911,7 @@ module Aws::S3
     CopyPartResult.add_member(:last_modified, Shapes::ShapeRef.new(shape: LastModified, location_name: "LastModified"))
     CopyPartResult.add_member(:checksum_crc32, Shapes::ShapeRef.new(shape: ChecksumCRC32, location_name: "ChecksumCRC32"))
     CopyPartResult.add_member(:checksum_crc32c, Shapes::ShapeRef.new(shape: ChecksumCRC32C, location_name: "ChecksumCRC32C"))
+    CopyPartResult.add_member(:checksum_crc64nvme, Shapes::ShapeRef.new(shape: ChecksumCRC64NVME, location_name: "ChecksumCRC64NVME"))
     CopyPartResult.add_member(:checksum_sha1, Shapes::ShapeRef.new(shape: ChecksumSHA1, location_name: "ChecksumSHA1"))
     CopyPartResult.add_member(:checksum_sha256, Shapes::ShapeRef.new(shape: ChecksumSHA256, location_name: "ChecksumSHA256"))
     CopyPartResult.struct_class = Types::CopyPartResult
@@ -946,6 +960,7 @@ module Aws::S3
     CreateMultipartUploadOutput.add_member(:bucket_key_enabled, Shapes::ShapeRef.new(shape: BucketKeyEnabled, location: "header", location_name: "x-amz-server-side-encryption-bucket-key-enabled"))
     CreateMultipartUploadOutput.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-request-charged"))
     CreateMultipartUploadOutput.add_member(:checksum_algorithm, Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location: "header", location_name: "x-amz-checksum-algorithm"))
+    CreateMultipartUploadOutput.add_member(:checksum_type, Shapes::ShapeRef.new(shape: ChecksumType, location: "header", location_name: "x-amz-checksum-type"))
     CreateMultipartUploadOutput.struct_class = Types::CreateMultipartUploadOutput
 
     CreateMultipartUploadRequest.add_member(:acl, Shapes::ShapeRef.new(shape: ObjectCannedACL, location: "header", location_name: "x-amz-acl"))
@@ -978,6 +993,7 @@ module Aws::S3
     CreateMultipartUploadRequest.add_member(:object_lock_legal_hold_status, Shapes::ShapeRef.new(shape: ObjectLockLegalHoldStatus, location: "header", location_name: "x-amz-object-lock-legal-hold"))
     CreateMultipartUploadRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
     CreateMultipartUploadRequest.add_member(:checksum_algorithm, Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location: "header", location_name: "x-amz-checksum-algorithm"))
+    CreateMultipartUploadRequest.add_member(:checksum_type, Shapes::ShapeRef.new(shape: ChecksumType, location: "header", location_name: "x-amz-checksum-type"))
     CreateMultipartUploadRequest.struct_class = Types::CreateMultipartUploadRequest
 
     CreateSessionOutput.add_member(:server_side_encryption, Shapes::ShapeRef.new(shape: ServerSideEncryption, location: "header", location_name: "x-amz-server-side-encryption"))
@@ -1442,8 +1458,10 @@ module Aws::S3
     GetObjectOutput.add_member(:etag, Shapes::ShapeRef.new(shape: ETag, location: "header", location_name: "ETag"))
     GetObjectOutput.add_member(:checksum_crc32, Shapes::ShapeRef.new(shape: ChecksumCRC32, location: "header", location_name: "x-amz-checksum-crc32"))
     GetObjectOutput.add_member(:checksum_crc32c, Shapes::ShapeRef.new(shape: ChecksumCRC32C, location: "header", location_name: "x-amz-checksum-crc32c"))
+    GetObjectOutput.add_member(:checksum_crc64nvme, Shapes::ShapeRef.new(shape: ChecksumCRC64NVME, location: "header", location_name: "x-amz-checksum-crc64nvme"))
     GetObjectOutput.add_member(:checksum_sha1, Shapes::ShapeRef.new(shape: ChecksumSHA1, location: "header", location_name: "x-amz-checksum-sha1"))
     GetObjectOutput.add_member(:checksum_sha256, Shapes::ShapeRef.new(shape: ChecksumSHA256, location: "header", location_name: "x-amz-checksum-sha256"))
+    GetObjectOutput.add_member(:checksum_type, Shapes::ShapeRef.new(shape: ChecksumType, location: "header", location_name: "x-amz-checksum-type"))
     GetObjectOutput.add_member(:missing_meta, Shapes::ShapeRef.new(shape: MissingMeta, location: "header", location_name: "x-amz-missing-meta"))
     GetObjectOutput.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "header", location_name: "x-amz-version-id"))
     GetObjectOutput.add_member(:cache_control, Shapes::ShapeRef.new(shape: CacheControl, location: "header", location_name: "Cache-Control"))
@@ -1575,8 +1593,10 @@ module Aws::S3
     HeadObjectOutput.add_member(:content_length, Shapes::ShapeRef.new(shape: ContentLength, location: "header", location_name: "Content-Length"))
     HeadObjectOutput.add_member(:checksum_crc32, Shapes::ShapeRef.new(shape: ChecksumCRC32, location: "header", location_name: "x-amz-checksum-crc32"))
     HeadObjectOutput.add_member(:checksum_crc32c, Shapes::ShapeRef.new(shape: ChecksumCRC32C, location: "header", location_name: "x-amz-checksum-crc32c"))
+    HeadObjectOutput.add_member(:checksum_crc64nvme, Shapes::ShapeRef.new(shape: ChecksumCRC64NVME, location: "header", location_name: "x-amz-checksum-crc64nvme"))
     HeadObjectOutput.add_member(:checksum_sha1, Shapes::ShapeRef.new(shape: ChecksumSHA1, location: "header", location_name: "x-amz-checksum-sha1"))
     HeadObjectOutput.add_member(:checksum_sha256, Shapes::ShapeRef.new(shape: ChecksumSHA256, location: "header", location_name: "x-amz-checksum-sha256"))
+    HeadObjectOutput.add_member(:checksum_type, Shapes::ShapeRef.new(shape: ChecksumType, location: "header", location_name: "x-amz-checksum-type"))
     HeadObjectOutput.add_member(:etag, Shapes::ShapeRef.new(shape: ETag, location: "header", location_name: "ETag"))
     HeadObjectOutput.add_member(:missing_meta, Shapes::ShapeRef.new(shape: MissingMeta, location: "header", location_name: "x-amz-missing-meta"))
     HeadObjectOutput.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "header", location_name: "x-amz-version-id"))
@@ -1929,6 +1949,7 @@ module Aws::S3
     ListPartsOutput.add_member(:storage_class, Shapes::ShapeRef.new(shape: StorageClass, location_name: "StorageClass"))
     ListPartsOutput.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-request-charged"))
     ListPartsOutput.add_member(:checksum_algorithm, Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm"))
+    ListPartsOutput.add_member(:checksum_type, Shapes::ShapeRef.new(shape: ChecksumType, location_name: "ChecksumType"))
     ListPartsOutput.struct_class = Types::ListPartsOutput
 
     ListPartsRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket", metadata: {"contextParam"=>{"name"=>"Bucket"}}))
@@ -1994,6 +2015,7 @@ module Aws::S3
     MultipartUpload.add_member(:owner, Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
     MultipartUpload.add_member(:initiator, Shapes::ShapeRef.new(shape: Initiator, location_name: "Initiator"))
     MultipartUpload.add_member(:checksum_algorithm, Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm"))
+    MultipartUpload.add_member(:checksum_type, Shapes::ShapeRef.new(shape: ChecksumType, location_name: "ChecksumType"))
     MultipartUpload.struct_class = Types::MultipartUpload
 
     MultipartUploadList.member = Shapes::ShapeRef.new(shape: MultipartUpload)
@@ -2033,6 +2055,7 @@ module Aws::S3
     Object.add_member(:last_modified, Shapes::ShapeRef.new(shape: LastModified, location_name: "LastModified"))
     Object.add_member(:etag, Shapes::ShapeRef.new(shape: ETag, location_name: "ETag"))
     Object.add_member(:checksum_algorithm, Shapes::ShapeRef.new(shape: ChecksumAlgorithmList, location_name: "ChecksumAlgorithm"))
+    Object.add_member(:checksum_type, Shapes::ShapeRef.new(shape: ChecksumType, location_name: "ChecksumType"))
     Object.add_member(:size, Shapes::ShapeRef.new(shape: Size, location_name: "Size"))
     Object.add_member(:storage_class, Shapes::ShapeRef.new(shape: ObjectStorageClass, location_name: "StorageClass"))
     Object.add_member(:owner, Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
@@ -2074,12 +2097,14 @@ module Aws::S3
     ObjectPart.add_member(:size, Shapes::ShapeRef.new(shape: Size, location_name: "Size"))
     ObjectPart.add_member(:checksum_crc32, Shapes::ShapeRef.new(shape: ChecksumCRC32, location_name: "ChecksumCRC32"))
     ObjectPart.add_member(:checksum_crc32c, Shapes::ShapeRef.new(shape: ChecksumCRC32C, location_name: "ChecksumCRC32C"))
+    ObjectPart.add_member(:checksum_crc64nvme, Shapes::ShapeRef.new(shape: ChecksumCRC64NVME, location_name: "ChecksumCRC64NVME"))
     ObjectPart.add_member(:checksum_sha1, Shapes::ShapeRef.new(shape: ChecksumSHA1, location_name: "ChecksumSHA1"))
     ObjectPart.add_member(:checksum_sha256, Shapes::ShapeRef.new(shape: ChecksumSHA256, location_name: "ChecksumSHA256"))
     ObjectPart.struct_class = Types::ObjectPart
 
     ObjectVersion.add_member(:etag, Shapes::ShapeRef.new(shape: ETag, location_name: "ETag"))
     ObjectVersion.add_member(:checksum_algorithm, Shapes::ShapeRef.new(shape: ChecksumAlgorithmList, location_name: "ChecksumAlgorithm"))
+    ObjectVersion.add_member(:checksum_type, Shapes::ShapeRef.new(shape: ChecksumType, location_name: "ChecksumType"))
     ObjectVersion.add_member(:size, Shapes::ShapeRef.new(shape: Size, location_name: "Size"))
     ObjectVersion.add_member(:storage_class, Shapes::ShapeRef.new(shape: ObjectVersionStorageClass, location_name: "StorageClass"))
     ObjectVersion.add_member(:key, Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key"))
@@ -2121,6 +2146,7 @@ module Aws::S3
     Part.add_member(:size, Shapes::ShapeRef.new(shape: Size, location_name: "Size"))
     Part.add_member(:checksum_crc32, Shapes::ShapeRef.new(shape: ChecksumCRC32, location_name: "ChecksumCRC32"))
     Part.add_member(:checksum_crc32c, Shapes::ShapeRef.new(shape: ChecksumCRC32C, location_name: "ChecksumCRC32C"))
+    Part.add_member(:checksum_crc64nvme, Shapes::ShapeRef.new(shape: ChecksumCRC64NVME, location_name: "ChecksumCRC64NVME"))
     Part.add_member(:checksum_sha1, Shapes::ShapeRef.new(shape: ChecksumSHA1, location_name: "ChecksumSHA1"))
     Part.add_member(:checksum_sha256, Shapes::ShapeRef.new(shape: ChecksumSHA256, location_name: "ChecksumSHA256"))
     Part.struct_class = Types::Part
@@ -2387,8 +2413,10 @@ module Aws::S3
     PutObjectOutput.add_member(:etag, Shapes::ShapeRef.new(shape: ETag, location: "header", location_name: "ETag"))
     PutObjectOutput.add_member(:checksum_crc32, Shapes::ShapeRef.new(shape: ChecksumCRC32, location: "header", location_name: "x-amz-checksum-crc32"))
     PutObjectOutput.add_member(:checksum_crc32c, Shapes::ShapeRef.new(shape: ChecksumCRC32C, location: "header", location_name: "x-amz-checksum-crc32c"))
+    PutObjectOutput.add_member(:checksum_crc64nvme, Shapes::ShapeRef.new(shape: ChecksumCRC64NVME, location: "header", location_name: "x-amz-checksum-crc64nvme"))
     PutObjectOutput.add_member(:checksum_sha1, Shapes::ShapeRef.new(shape: ChecksumSHA1, location: "header", location_name: "x-amz-checksum-sha1"))
     PutObjectOutput.add_member(:checksum_sha256, Shapes::ShapeRef.new(shape: ChecksumSHA256, location: "header", location_name: "x-amz-checksum-sha256"))
+    PutObjectOutput.add_member(:checksum_type, Shapes::ShapeRef.new(shape: ChecksumType, location: "header", location_name: "x-amz-checksum-type"))
     PutObjectOutput.add_member(:server_side_encryption, Shapes::ShapeRef.new(shape: ServerSideEncryption, location: "header", location_name: "x-amz-server-side-encryption"))
     PutObjectOutput.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "header", location_name: "x-amz-version-id"))
     PutObjectOutput.add_member(:sse_customer_algorithm, Shapes::ShapeRef.new(shape: SSECustomerAlgorithm, location: "header", location_name: "x-amz-server-side-encryption-customer-algorithm"))
@@ -2413,6 +2441,7 @@ module Aws::S3
     PutObjectRequest.add_member(:checksum_algorithm, Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location: "header", location_name: "x-amz-sdk-checksum-algorithm"))
     PutObjectRequest.add_member(:checksum_crc32, Shapes::ShapeRef.new(shape: ChecksumCRC32, location: "header", location_name: "x-amz-checksum-crc32"))
     PutObjectRequest.add_member(:checksum_crc32c, Shapes::ShapeRef.new(shape: ChecksumCRC32C, location: "header", location_name: "x-amz-checksum-crc32c"))
+    PutObjectRequest.add_member(:checksum_crc64nvme, Shapes::ShapeRef.new(shape: ChecksumCRC64NVME, location: "header", location_name: "x-amz-checksum-crc64nvme"))
     PutObjectRequest.add_member(:checksum_sha1, Shapes::ShapeRef.new(shape: ChecksumSHA1, location: "header", location_name: "x-amz-checksum-sha1"))
     PutObjectRequest.add_member(:checksum_sha256, Shapes::ShapeRef.new(shape: ChecksumSHA256, location: "header", location_name: "x-amz-checksum-sha256"))
     PutObjectRequest.add_member(:expires, Shapes::ShapeRef.new(shape: Expires, location: "header", location_name: "Expires"))
@@ -2792,6 +2821,7 @@ module Aws::S3
     UploadPartOutput.add_member(:etag, Shapes::ShapeRef.new(shape: ETag, location: "header", location_name: "ETag"))
     UploadPartOutput.add_member(:checksum_crc32, Shapes::ShapeRef.new(shape: ChecksumCRC32, location: "header", location_name: "x-amz-checksum-crc32"))
     UploadPartOutput.add_member(:checksum_crc32c, Shapes::ShapeRef.new(shape: ChecksumCRC32C, location: "header", location_name: "x-amz-checksum-crc32c"))
+    UploadPartOutput.add_member(:checksum_crc64nvme, Shapes::ShapeRef.new(shape: ChecksumCRC64NVME, location: "header", location_name: "x-amz-checksum-crc64nvme"))
     UploadPartOutput.add_member(:checksum_sha1, Shapes::ShapeRef.new(shape: ChecksumSHA1, location: "header", location_name: "x-amz-checksum-sha1"))
     UploadPartOutput.add_member(:checksum_sha256, Shapes::ShapeRef.new(shape: ChecksumSHA256, location: "header", location_name: "x-amz-checksum-sha256"))
     UploadPartOutput.add_member(:sse_customer_algorithm, Shapes::ShapeRef.new(shape: SSECustomerAlgorithm, location: "header", location_name: "x-amz-server-side-encryption-customer-algorithm"))
@@ -2808,6 +2838,7 @@ module Aws::S3
     UploadPartRequest.add_member(:checksum_algorithm, Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location: "header", location_name: "x-amz-sdk-checksum-algorithm"))
     UploadPartRequest.add_member(:checksum_crc32, Shapes::ShapeRef.new(shape: ChecksumCRC32, location: "header", location_name: "x-amz-checksum-crc32"))
     UploadPartRequest.add_member(:checksum_crc32c, Shapes::ShapeRef.new(shape: ChecksumCRC32C, location: "header", location_name: "x-amz-checksum-crc32c"))
+    UploadPartRequest.add_member(:checksum_crc64nvme, Shapes::ShapeRef.new(shape: ChecksumCRC64NVME, location: "header", location_name: "x-amz-checksum-crc64nvme"))
     UploadPartRequest.add_member(:checksum_sha1, Shapes::ShapeRef.new(shape: ChecksumSHA1, location: "header", location_name: "x-amz-checksum-sha1"))
     UploadPartRequest.add_member(:checksum_sha256, Shapes::ShapeRef.new(shape: ChecksumSHA256, location: "header", location_name: "x-amz-checksum-sha256"))
     UploadPartRequest.add_member(:key, Shapes::ShapeRef.new(shape: ObjectKey, required: true, location: "uri", location_name: "Key", metadata: {"contextParam"=>{"name"=>"Key"}}))
@@ -2850,6 +2881,7 @@ module Aws::S3
     WriteGetObjectResponseRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, location: "header", location_name: "x-amz-fwd-header-Content-Type"))
     WriteGetObjectResponseRequest.add_member(:checksum_crc32, Shapes::ShapeRef.new(shape: ChecksumCRC32, location: "header", location_name: "x-amz-fwd-header-x-amz-checksum-crc32"))
     WriteGetObjectResponseRequest.add_member(:checksum_crc32c, Shapes::ShapeRef.new(shape: ChecksumCRC32C, location: "header", location_name: "x-amz-fwd-header-x-amz-checksum-crc32c"))
+    WriteGetObjectResponseRequest.add_member(:checksum_crc64nvme, Shapes::ShapeRef.new(shape: ChecksumCRC64NVME, location: "header", location_name: "x-amz-fwd-header-x-amz-checksum-crc64nvme"))
     WriteGetObjectResponseRequest.add_member(:checksum_sha1, Shapes::ShapeRef.new(shape: ChecksumSHA1, location: "header", location_name: "x-amz-fwd-header-x-amz-checksum-sha1"))
     WriteGetObjectResponseRequest.add_member(:checksum_sha256, Shapes::ShapeRef.new(shape: ChecksumSHA256, location: "header", location_name: "x-amz-fwd-header-x-amz-checksum-sha256"))
     WriteGetObjectResponseRequest.add_member(:delete_marker, Shapes::ShapeRef.new(shape: DeleteMarker, location: "header", location_name: "x-amz-fwd-header-x-amz-delete-marker"))
@@ -3311,11 +3343,11 @@ module Aws::S3
         o.http_request_uri = "/{Key+}"
         o.http_checksum = {
           "requestValidationModeMember" => "checksum_mode",
-          "responseAlgorithms" => ["CRC32", "CRC32C", "SHA256", "SHA1"],
+          "responseAlgorithms" => ["CRC64NVME", "CRC32", "CRC32C", "SHA256", "SHA1"],
         }
         o.http_checksum = {
           "requestValidationModeMember" => "checksum_mode",
-          "responseAlgorithms" => ["CRC32", "CRC32C", "SHA256", "SHA1"],
+          "responseAlgorithms" => ["CRC64NVME", "CRC32", "CRC32C", "SHA256", "SHA1"],
         }
         o.input = Shapes::ShapeRef.new(shape: GetObjectRequest)
         o.output = Shapes::ShapeRef.new(shape: GetObjectOutput)

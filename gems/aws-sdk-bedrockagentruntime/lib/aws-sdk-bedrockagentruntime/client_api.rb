@@ -1067,6 +1067,7 @@ module Aws::BedrockAgentRuntime
     InvokeInlineAgentRequest.add_member(:knowledge_bases, Shapes::ShapeRef.new(shape: KnowledgeBases, location_name: "knowledgeBases"))
     InvokeInlineAgentRequest.add_member(:prompt_override_configuration, Shapes::ShapeRef.new(shape: PromptOverrideConfiguration, location_name: "promptOverrideConfiguration"))
     InvokeInlineAgentRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, required: true, location: "uri", location_name: "sessionId"))
+    InvokeInlineAgentRequest.add_member(:streaming_configurations, Shapes::ShapeRef.new(shape: StreamingConfigurations, location_name: "streamingConfigurations"))
     InvokeInlineAgentRequest.struct_class = Types::InvokeInlineAgentRequest
 
     InvokeInlineAgentResponse.add_member(:completion, Shapes::ShapeRef.new(shape: InlineAgentResponseStream, required: true, eventstream: true, location_name: "completion"))

@@ -40,6 +40,7 @@ require 'aws-sdk-s3/plugins/access_grants.rb'
 require 'aws-sdk-s3/plugins/arn.rb'
 require 'aws-sdk-s3/plugins/bucket_dns.rb'
 require 'aws-sdk-s3/plugins/bucket_name_restrictions.rb'
+require 'aws-sdk-s3/plugins/checksum_algorithm.rb'
 require 'aws-sdk-s3/plugins/dualstack.rb'
 require 'aws-sdk-s3/plugins/expect_100_continue.rb'
 require 'aws-sdk-s3/plugins/express_session_auth.rb'
@@ -52,7 +53,6 @@ require 'aws-sdk-s3/plugins/redirects.rb'
 require 'aws-sdk-s3/plugins/s3_host_id.rb'
 require 'aws-sdk-s3/plugins/s3_signer.rb'
 require 'aws-sdk-s3/plugins/sse_cpk.rb'
-require 'aws-sdk-s3/plugins/skip_whole_multipart_get_checksums.rb'
 require 'aws-sdk-s3/plugins/streaming_retry.rb'
 require 'aws-sdk-s3/plugins/url_encoded_keys.rb'
 require 'aws-sdk-core/plugins/event_stream_configuration.rb'
@@ -111,6 +111,7 @@ module Aws::S3
     add_plugin(Aws::S3::Plugins::ARN)
     add_plugin(Aws::S3::Plugins::BucketDns)
     add_plugin(Aws::S3::Plugins::BucketNameRestrictions)
+    add_plugin(Aws::S3::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::S3::Plugins::Dualstack)
     add_plugin(Aws::S3::Plugins::Expect100Continue)
     add_plugin(Aws::S3::Plugins::ExpressSessionAuth)
@@ -123,7 +124,6 @@ module Aws::S3
     add_plugin(Aws::S3::Plugins::S3HostId)
     add_plugin(Aws::S3::Plugins::S3Signer)
     add_plugin(Aws::S3::Plugins::SseCpk)
-    add_plugin(Aws::S3::Plugins::SkipWholeMultipartGetChecksums)
     add_plugin(Aws::S3::Plugins::StreamingRetry)
     add_plugin(Aws::S3::Plugins::UrlEncodedKeys)
     add_plugin(Aws::Plugins::EventStreamConfiguration)
@@ -240,11 +240,8 @@ module Aws::S3
     #     will use the Client Side Monitoring Agent Publisher.
     #
     #   @option options [Boolean] :compute_checksums (true)
-    #     When `true` a MD5 checksum will be computed and sent in the Content Md5
-    #     header for :put_object and :upload_part. When `false`, MD5 checksums
-    #     will not be computed for these operations. Checksums are still computed
-    #     for operations requiring them. Checksum errors returned by Amazon S3 are
-    #     automatically retried up to `:retry_limit` times.
+    #     This option is deprecated. Please use `:request_checksum_calculation` instead.
+    #     When `false`, `request_checksum_calculation` is overridden to `when_required`.
     #
     #   @option options [Boolean] :convert_params (true)
     #     When `true`, an attempt is made to coerce request parameters into
@@ -340,6 +337,18 @@ module Aws::S3
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [String] :request_checksum_calculation ("when_supported")
+    #     Determines when a checksum will be calculated for request payloads. Values are:
+    #
+    #     * `when_supported` - (default) When set, a checksum will be
+    #       calculated for all request payloads of operations modeled with the
+    #       `httpChecksum` trait where `requestChecksumRequired` is `true` and/or a
+    #       `requestAlgorithmMember` is modeled.
+    #     * `when_required` - When set, a checksum will only be calculated for
+    #       request payloads of operations modeled with the  `httpChecksum` trait where
+    #       `requestChecksumRequired` is `true` or where a `requestAlgorithmMember`
+    #       is modeled and supplied.
+    #
     #   @option options [Integer] :request_min_compression_size_bytes (10240)
     #     The minimum size in bytes that triggers compression for request
     #     bodies. The value must be non-negative integer value between 0
@@ -349,6 +358,17 @@ module Aws::S3
     #     When `true`, the endpoint **must** be HTTPS for all operations
     #     where server-side-encryption is used with customer-provided keys.
     #     This should only be disabled for local testing.
+    #
+    #   @option options [String] :response_checksum_validation ("when_supported")
+    #     Determines when checksum validation will be performed on response payloads. Values are:
+    #
+    #     * `when_supported` - (default) When set, checksum validation is performed on all
+    #       response payloads of operations modeled with the `httpChecksum` trait where
+    #       `responseAlgorithms` is modeled, except when no modeled checksum algorithms
+    #       are supported.
+    #     * `when_required` - When set, checksum validation is not performed on
+    #       response payloads of operations unless the checksum algorithm is supported and
+    #       the `requestValidationModeMember` member is set to `ENABLED`.
     #
     #   @option options [Proc] :retry_backoff
     #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
@@ -582,8 +602,8 @@ module Aws::S3
     #   endpoints in Availability Zones, see [Regional and Zonal endpoints
     #   for directory buckets in Availability Zones][2] in the *Amazon S3
     #   User Guide*. For more information about endpoints in Local Zones,
-    #   see [Concepts for directory buckets in Local Zones][3] in the
-    #   *Amazon S3 User Guide*.
+    #   see [Available Local Zone for directory buckets][3] in the *Amazon
+    #   S3 User Guide*.
     #
     #  </note>
     #
@@ -627,7 +647,7 @@ module Aws::S3
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html
@@ -815,8 +835,8 @@ module Aws::S3
     # endpoints in Availability Zones, see [Regional and Zonal endpoints for
     # directory buckets in Availability Zones][5] in the *Amazon S3 User
     # Guide*. For more information about endpoints in Local Zones, see
-    # [Concepts for directory buckets in Local Zones][6] in the *Amazon S3
-    # User Guide*.
+    # [Available Local Zone for directory buckets][6] in the *Amazon S3 User
+    # Guide*.
     #
     #  </note>
     #
@@ -903,7 +923,7 @@ module Aws::S3
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ErrorBestPractices.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html
     # [7]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html
     # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Checksum.html
@@ -969,7 +989,7 @@ module Aws::S3
     # @option params [String] :checksum_crc32
     #   This header can be used as a data integrity check to verify that the
     #   data received is the same data that was originally sent. This header
-    #   specifies the base64-encoded, 32-bit CRC-32 checksum of the object.
+    #   specifies the Base64 encoded, 32-bit `CRC-32` checksum of the object.
     #   For more information, see [Checking object integrity][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -980,9 +1000,21 @@ module Aws::S3
     # @option params [String] :checksum_crc32c
     #   This header can be used as a data integrity check to verify that the
     #   data received is the same data that was originally sent. This header
-    #   specifies the base64-encoded, 32-bit CRC-32C checksum of the object.
+    #   specifies the Base64 encoded, 32-bit `CRC-32C` checksum of the object.
     #   For more information, see [Checking object integrity][1] in the
     #   *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
+    #
+    # @option params [String] :checksum_crc64nvme
+    #   This header can be used as a data integrity check to verify that the
+    #   data received is the same data that was originally sent. This header
+    #   specifies the Base64 encoded, 64-bit `CRC-64NVME` checksum of the
+    #   object. The `CRC-64NVME` checksum is always a full object checksum.
+    #   For more information, see [Checking object integrity in the Amazon S3
+    #   User Guide][1].
     #
     #
     #
@@ -991,9 +1023,9 @@ module Aws::S3
     # @option params [String] :checksum_sha1
     #   This header can be used as a data integrity check to verify that the
     #   data received is the same data that was originally sent. This header
-    #   specifies the base64-encoded, 160-bit SHA-1 digest of the object. For
-    #   more information, see [Checking object integrity][1] in the *Amazon S3
-    #   User Guide*.
+    #   specifies the Base64 encoded, 160-bit `SHA-1` digest of the object.
+    #   For more information, see [Checking object integrity][1] in the
+    #   *Amazon S3 User Guide*.
     #
     #
     #
@@ -1002,13 +1034,30 @@ module Aws::S3
     # @option params [String] :checksum_sha256
     #   This header can be used as a data integrity check to verify that the
     #   data received is the same data that was originally sent. This header
-    #   specifies the base64-encoded, 256-bit SHA-256 digest of the object.
+    #   specifies the Base64 encoded, 256-bit `SHA-256` digest of the object.
     #   For more information, see [Checking object integrity][1] in the
     #   *Amazon S3 User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
+    #
+    # @option params [String] :checksum_type
+    #   This header specifies the checksum type of the object, which
+    #   determines how part-level checksums are combined to create an
+    #   object-level checksum for multipart objects. You can use this header
+    #   as a data integrity check to verify that the checksum type that is
+    #   received is the same checksum that was specified. If the checksum type
+    #   doesn’t match the checksum type that was specified for the object
+    #   during the `CreateMultipartUpload` request, it’ll result in a
+    #   `BadDigest` error. For more information, see Checking object integrity
+    #   in the Amazon S3 User Guide.
+    #
+    # @option params [Integer] :mpu_object_size
+    #   The expected total object size of the multipart upload request. If
+    #   there’s a mismatch between the specified object size value and the
+    #   actual object size value, it results in an `HTTP 400 InvalidRequest`
+    #   error.
     #
     # @option params [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
@@ -1125,8 +1174,10 @@ module Aws::S3
     #   * {Types::CompleteMultipartUploadOutput#etag #etag} => String
     #   * {Types::CompleteMultipartUploadOutput#checksum_crc32 #checksum_crc32} => String
     #   * {Types::CompleteMultipartUploadOutput#checksum_crc32c #checksum_crc32c} => String
+    #   * {Types::CompleteMultipartUploadOutput#checksum_crc64nvme #checksum_crc64nvme} => String
     #   * {Types::CompleteMultipartUploadOutput#checksum_sha1 #checksum_sha1} => String
     #   * {Types::CompleteMultipartUploadOutput#checksum_sha256 #checksum_sha256} => String
+    #   * {Types::CompleteMultipartUploadOutput#checksum_type #checksum_type} => String
     #   * {Types::CompleteMultipartUploadOutput#server_side_encryption #server_side_encryption} => String
     #   * {Types::CompleteMultipartUploadOutput#version_id #version_id} => String
     #   * {Types::CompleteMultipartUploadOutput#ssekms_key_id #ssekms_key_id} => String
@@ -1175,6 +1226,7 @@ module Aws::S3
     #           etag: "ETag",
     #           checksum_crc32: "ChecksumCRC32",
     #           checksum_crc32c: "ChecksumCRC32C",
+    #           checksum_crc64nvme: "ChecksumCRC64NVME",
     #           checksum_sha1: "ChecksumSHA1",
     #           checksum_sha256: "ChecksumSHA256",
     #           part_number: 1,
@@ -1184,8 +1236,11 @@ module Aws::S3
     #     upload_id: "MultipartUploadId", # required
     #     checksum_crc32: "ChecksumCRC32",
     #     checksum_crc32c: "ChecksumCRC32C",
+    #     checksum_crc64nvme: "ChecksumCRC64NVME",
     #     checksum_sha1: "ChecksumSHA1",
     #     checksum_sha256: "ChecksumSHA256",
+    #     checksum_type: "COMPOSITE", # accepts COMPOSITE, FULL_OBJECT
+    #     mpu_object_size: 1,
     #     request_payer: "requester", # accepts requester
     #     expected_bucket_owner: "AccountId",
     #     if_match: "IfMatch",
@@ -1204,8 +1259,10 @@ module Aws::S3
     #   resp.etag #=> String
     #   resp.checksum_crc32 #=> String
     #   resp.checksum_crc32c #=> String
+    #   resp.checksum_crc64nvme #=> String
     #   resp.checksum_sha1 #=> String
     #   resp.checksum_sha256 #=> String
+    #   resp.checksum_type #=> String, one of "COMPOSITE", "FULL_OBJECT"
     #   resp.server_side_encryption #=> String, one of "AES256", "aws:kms", "aws:kms:dsse"
     #   resp.version_id #=> String
     #   resp.ssekms_key_id #=> String
@@ -1247,8 +1304,8 @@ module Aws::S3
     #   endpoints in Availability Zones, see [Regional and Zonal endpoints
     #   for directory buckets in Availability Zones][2] in the *Amazon S3
     #   User Guide*. For more information about endpoints in Local Zones,
-    #   see [Concepts for directory buckets in Local Zones][3] in the
-    #   *Amazon S3 User Guide*.
+    #   see [Available Local Zone for directory buckets][3] in the *Amazon
+    #   S3 User Guide*.
     #
     # * VPC endpoints don't support cross-Region requests (including
     #   copies). If you're using VPC endpoints, your source and destination
@@ -1387,7 +1444,7 @@ module Aws::S3
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/CopyingObjctsUsingRESTMPUapi.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html
     # [4]: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-regions.html#manage-acct-regions-enable-standalone
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html
@@ -2207,7 +2264,7 @@ module Aws::S3
     #     acl: "private", # accepts private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, bucket-owner-full-control
     #     bucket: "BucketName", # required
     #     cache_control: "CacheControl",
-    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
     #     content_disposition: "ContentDisposition",
     #     content_encoding: "ContentEncoding",
     #     content_language: "ContentLanguage",
@@ -2253,8 +2310,10 @@ module Aws::S3
     #
     #   resp.copy_object_result.etag #=> String
     #   resp.copy_object_result.last_modified #=> Time
+    #   resp.copy_object_result.checksum_type #=> String, one of "COMPOSITE", "FULL_OBJECT"
     #   resp.copy_object_result.checksum_crc32 #=> String
     #   resp.copy_object_result.checksum_crc32c #=> String
+    #   resp.copy_object_result.checksum_crc64nvme #=> String
     #   resp.copy_object_result.checksum_sha1 #=> String
     #   resp.copy_object_result.checksum_sha256 #=> String
     #   resp.expiration #=> String
@@ -2310,8 +2369,8 @@ module Aws::S3
     #   information about endpoints in Availability Zones, see [Regional and
     #   Zonal endpoints for directory buckets in Availability Zones][4] in
     #   the *Amazon S3 User Guide*. For more information about endpoints in
-    #   Local Zones, see [Concepts for directory buckets in Local Zones][5]
-    #   in the *Amazon S3 User Guide*.
+    #   Local Zones, see [Available Local Zone for directory buckets][5] in
+    #   the *Amazon S3 User Guide*.
     #
     #  </note>
     #
@@ -2403,7 +2462,7 @@ module Aws::S3
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-buckets-s3.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html
     # [7]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html
@@ -2666,7 +2725,7 @@ module Aws::S3
     #   resp = client.create_bucket_metadata_table_configuration({
     #     bucket: "BucketName", # required
     #     content_md5: "ContentMD5",
-    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
     #     metadata_table_configuration: { # required
     #       s3_tables_destination: { # required
     #         table_bucket_arn: "S3TablesBucketArn", # required
@@ -2721,8 +2780,8 @@ module Aws::S3
     #   endpoints in Availability Zones, see [Regional and Zonal endpoints
     #   for directory buckets in Availability Zones][4] in the *Amazon S3
     #   User Guide*. For more information about endpoints in Local Zones,
-    #   see [Concepts for directory buckets in Local Zones][5] in the
-    #   *Amazon S3 User Guide*.
+    #   see [Available Local Zone for directory buckets][5] in the *Amazon
+    #   S3 User Guide*.
     #
     #  </note>
     #
@@ -2924,7 +2983,7 @@ module Aws::S3
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
     # [7]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html#mpuAndPermissions
@@ -3441,7 +3500,7 @@ module Aws::S3
     #
     # @option params [String] :ssekms_encryption_context
     #   Specifies the Amazon Web Services KMS Encryption Context to use for
-    #   object encryption. The value of this header is a Base64-encoded string
+    #   object encryption. The value of this header is a Base64 encoded string
     #   of a UTF-8 encoded JSON, which contains the encryption context as
     #   key-value pairs.
     #
@@ -3539,6 +3598,15 @@ module Aws::S3
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
     #
+    # @option params [String] :checksum_type
+    #   Indicates the checksum type that you want Amazon S3 to use to
+    #   calculate the object’s checksum value. For more information, see
+    #   [Checking object integrity in the Amazon S3 User Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
+    #
     # @return [Types::CreateMultipartUploadOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateMultipartUploadOutput#abort_date #abort_date} => Time
@@ -3554,6 +3622,7 @@ module Aws::S3
     #   * {Types::CreateMultipartUploadOutput#bucket_key_enabled #bucket_key_enabled} => Boolean
     #   * {Types::CreateMultipartUploadOutput#request_charged #request_charged} => String
     #   * {Types::CreateMultipartUploadOutput#checksum_algorithm #checksum_algorithm} => String
+    #   * {Types::CreateMultipartUploadOutput#checksum_type #checksum_type} => String
     #
     #
     # @example Example: To initiate a multipart upload
@@ -3606,7 +3675,8 @@ module Aws::S3
     #     object_lock_retain_until_date: Time.now,
     #     object_lock_legal_hold_status: "ON", # accepts ON, OFF
     #     expected_bucket_owner: "AccountId",
-    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
+    #     checksum_type: "COMPOSITE", # accepts COMPOSITE, FULL_OBJECT
     #   })
     #
     # @example Response structure
@@ -3623,7 +3693,8 @@ module Aws::S3
     #   resp.ssekms_encryption_context #=> String
     #   resp.bucket_key_enabled #=> Boolean
     #   resp.request_charged #=> String, one of "requester"
-    #   resp.checksum_algorithm #=> String, one of "CRC32", "CRC32C", "SHA1", "SHA256"
+    #   resp.checksum_algorithm #=> String, one of "CRC32", "CRC32C", "SHA1", "SHA256", "CRC64NVME"
+    #   resp.checksum_type #=> String, one of "COMPOSITE", "FULL_OBJECT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateMultipartUpload AWS API Documentation
     #
@@ -3677,8 +3748,8 @@ module Aws::S3
     #   endpoints in Availability Zones, see [Regional and Zonal endpoints
     #   for directory buckets in Availability Zones][3] in the *Amazon S3
     #   User Guide*. For more information about endpoints in Local Zones,
-    #   see [Concepts for directory buckets in Local Zones][4] in the
-    #   *Amazon S3 User Guide*.
+    #   see [Available Local Zone for directory buckets][4] in the *Amazon
+    #   S3 User Guide*.
     #
     # * <b> <code>CopyObject</code> API operation</b> - Unlike other Zonal
     #   endpoint API operations, the `CopyObject` API operation doesn't use
@@ -3784,7 +3855,7 @@ module Aws::S3
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-APIs.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-optimizing-performance-guidelines-design-patterns.html#s3-express-optimizing-performance-session-authentication
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_HeadBucket.html
@@ -3848,7 +3919,7 @@ module Aws::S3
     # @option params [String] :ssekms_encryption_context
     #   Specifies the Amazon Web Services KMS Encryption Context as an
     #   additional encryption context to use for object encryption. The value
-    #   of this header is a Base64-encoded string of a UTF-8 encoded JSON,
+    #   of this header is a Base64 encoded string of a UTF-8 encoded JSON,
     #   which contains the encryption context as key-value pairs. This value
     #   is stored as object metadata and automatically gets passed on to
     #   Amazon Web Services KMS for future `GetObject` operations on this
@@ -3944,8 +4015,8 @@ module Aws::S3
     #   information about endpoints in Availability Zones, see [Regional and
     #   Zonal endpoints for directory buckets in Availability Zones][1] in
     #   the *Amazon S3 User Guide*. For more information about endpoints in
-    #   Local Zones, see [Concepts for directory buckets in Local Zones][2]
-    #   in the *Amazon S3 User Guide*.
+    #   Local Zones, see [Available Local Zone for directory buckets][2] in
+    #   the *Amazon S3 User Guide*.
     #
     #  </note>
     #
@@ -3976,7 +4047,7 @@ module Aws::S3
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html
@@ -4441,8 +4512,8 @@ module Aws::S3
     #     information about endpoints in Availability Zones, see [Regional
     #     and Zonal endpoints for directory buckets in Availability
     #     Zones][3] in the *Amazon S3 User Guide*. For more information
-    #     about endpoints in Local Zones, see [Concepts for directory
-    #     buckets in Local Zones][4] in the *Amazon S3 User Guide*.
+    #     about endpoints in Local Zones, see [Available Local Zone for
+    #     directory buckets][4] in the *Amazon S3 User Guide*.
     #
     #      </note>
     # ^
@@ -4465,7 +4536,7 @@ module Aws::S3
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#intro-lifecycle-rules-actions
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html
@@ -4692,7 +4763,7 @@ module Aws::S3
     # about endpoints in Availability Zones, see [Regional and Zonal
     # endpoints for directory buckets in Availability Zones][1] in the
     # *Amazon S3 User Guide*. For more information about endpoints in Local
-    # Zones, see [Concepts for directory buckets in Local Zones][2] in the
+    # Zones, see [Available Local Zone for directory buckets][2] in the
     # *Amazon S3 User Guide*.
     #
     #  </note>
@@ -4749,7 +4820,7 @@ module Aws::S3
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html
@@ -5042,8 +5113,8 @@ module Aws::S3
     #   endpoints in Availability Zones, see [Regional and Zonal endpoints
     #   for directory buckets in Availability Zones][3] in the *Amazon S3
     #   User Guide*. For more information about endpoints in Local Zones,
-    #   see [Concepts for directory buckets in Local Zones][4] in the
-    #   *Amazon S3 User Guide*.
+    #   see [Available Local Zone for directory buckets][4] in the *Amazon
+    #   S3 User Guide*.
     #
     #  </note>
     #
@@ -5116,7 +5187,7 @@ module Aws::S3
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/DeletingObjectVersions.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/DeletingObjectsfromVersioningSuspendedBuckets.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMFADelete.html
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETE.html#ExampleVersionObjectDelete
@@ -5270,15 +5341,6 @@ module Aws::S3
     #   * {Types::DeleteObjectOutput#request_charged #request_charged} => String
     #
     #
-    # @example Example: To delete an object (from a non-versioned bucket)
-    #
-    #   # The following example deletes an object from a non-versioned bucket.
-    #
-    #   resp = client.delete_object({
-    #     bucket: "ExampleBucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
     # @example Example: To delete an object
     #
     #   # The following example deletes an object from an S3 bucket.
@@ -5291,6 +5353,15 @@ module Aws::S3
     #   resp.to_h outputs the following:
     #   {
     #   }
+    #
+    # @example Example: To delete an object (from a non-versioned bucket)
+    #
+    #   # The following example deletes an object from a non-versioned bucket.
+    #
+    #   resp = client.delete_object({
+    #     bucket: "ExampleBucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -5470,8 +5541,8 @@ module Aws::S3
     #   endpoints in Availability Zones, see [Regional and Zonal endpoints
     #   for directory buckets in Availability Zones][1] in the *Amazon S3
     #   User Guide*. For more information about endpoints in Local Zones,
-    #   see [Concepts for directory buckets in Local Zones][2] in the
-    #   *Amazon S3 User Guide*.
+    #   see [Available Local Zone for directory buckets][2] in the *Amazon
+    #   S3 User Guide*.
     #
     #  </note>
     #
@@ -5555,7 +5626,7 @@ module Aws::S3
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html#MultiFactorAuthenticationDelete
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html
@@ -5677,22 +5748,23 @@ module Aws::S3
     #   For the `x-amz-checksum-algorithm ` header, replace ` algorithm ` with
     #   the supported algorithm from the following list:
     #
-    #   * `CRC32`
+    #   * `CRC-32`
     #
-    #   * `CRC32C`
+    #   * `CRC-32C`
     #
-    #   * `SHA1`
+    #   * `CRC-64NVME`
     #
-    #   * `SHA256`
+    #   * `SHA-1`
+    #
+    #   * `SHA-256`
     #
     #   For more information, see [Checking object integrity][1] in the
     #   *Amazon S3 User Guide*.
     #
     #   If the individual checksum value you provide through
     #   `x-amz-checksum-algorithm ` doesn't match the checksum algorithm you
-    #   set through `x-amz-sdk-checksum-algorithm`, Amazon S3 ignores any
-    #   provided `ChecksumAlgorithm` parameter and uses the checksum algorithm
-    #   that matches the provided value in `x-amz-checksum-algorithm `.
+    #   set through `x-amz-sdk-checksum-algorithm`, Amazon S3 fails the
+    #   request with a `BadDigest` error.
     #
     #   If you provide an individual checksum, Amazon S3 ignores any provided
     #   `ChecksumAlgorithm` parameter.
@@ -5800,7 +5872,7 @@ module Aws::S3
     #     request_payer: "requester", # accepts requester
     #     bypass_governance_retention: false,
     #     expected_bucket_owner: "AccountId",
-    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
     #   })
     #
     # @example Response structure
@@ -6733,8 +6805,8 @@ module Aws::S3
     #     information about endpoints in Availability Zones, see [Regional
     #     and Zonal endpoints for directory buckets in Availability
     #     Zones][5] in the *Amazon S3 User Guide*. For more information
-    #     about endpoints in Local Zones, see [Concepts for directory
-    #     buckets in Local Zones][6] in the *Amazon S3 User Guide*.
+    #     about endpoints in Local Zones, see [Available Local Zone for
+    #     directory buckets][6] in the *Amazon S3 User Guide*.
     #
     #      </note>
     #
@@ -6768,7 +6840,7 @@ module Aws::S3
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycle.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html
     # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycle.html
     # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketLifecycle.html
@@ -7484,7 +7556,7 @@ module Aws::S3
     # about endpoints in Availability Zones, see [Regional and Zonal
     # endpoints for directory buckets in Availability Zones][1] in the
     # *Amazon S3 User Guide*. For more information about endpoints in Local
-    # Zones, see [Concepts for directory buckets in Local Zones][2] in the
+    # Zones, see [Available Local Zone for directory buckets][2] in the
     # *Amazon S3 User Guide*.
     #
     #  </note>
@@ -7548,7 +7620,7 @@ module Aws::S3
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html
@@ -8176,8 +8248,8 @@ module Aws::S3
     # endpoints in Availability Zones, see [Regional and Zonal endpoints for
     # directory buckets in Availability Zones][2] in the *Amazon S3 User
     # Guide*. For more information about endpoints in Local Zones, see
-    # [Concepts for directory buckets in Local Zones][3] in the *Amazon S3
-    # User Guide*.
+    # [Available Local Zone for directory buckets][3] in the *Amazon S3 User
+    # Guide*.
     #
     # Permissions
     # : * **General purpose bucket permissions** - You must have the
@@ -8313,7 +8385,7 @@ module Aws::S3
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html#VirtualHostingSpecifyBucket
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html
@@ -8639,8 +8711,10 @@ module Aws::S3
     #   * {Types::GetObjectOutput#etag #etag} => String
     #   * {Types::GetObjectOutput#checksum_crc32 #checksum_crc32} => String
     #   * {Types::GetObjectOutput#checksum_crc32c #checksum_crc32c} => String
+    #   * {Types::GetObjectOutput#checksum_crc64nvme #checksum_crc64nvme} => String
     #   * {Types::GetObjectOutput#checksum_sha1 #checksum_sha1} => String
     #   * {Types::GetObjectOutput#checksum_sha256 #checksum_sha256} => String
+    #   * {Types::GetObjectOutput#checksum_type #checksum_type} => String
     #   * {Types::GetObjectOutput#missing_meta #missing_meta} => Integer
     #   * {Types::GetObjectOutput#version_id #version_id} => String
     #   * {Types::GetObjectOutput#cache_control #cache_control} => String
@@ -8781,8 +8855,10 @@ module Aws::S3
     #   resp.etag #=> String
     #   resp.checksum_crc32 #=> String
     #   resp.checksum_crc32c #=> String
+    #   resp.checksum_crc64nvme #=> String
     #   resp.checksum_sha1 #=> String
     #   resp.checksum_sha256 #=> String
+    #   resp.checksum_type #=> String, one of "COMPOSITE", "FULL_OBJECT"
     #   resp.missing_meta #=> Integer
     #   resp.version_id #=> String
     #   resp.cache_control #=> String
@@ -9019,8 +9095,8 @@ module Aws::S3
     # endpoints in Availability Zones, see [Regional and Zonal endpoints for
     # directory buckets in Availability Zones][1] in the *Amazon S3 User
     # Guide*. For more information about endpoints in Local Zones, see
-    # [Concepts for directory buckets in Local Zones][2] in the *Amazon S3
-    # User Guide*.
+    # [Available Local Zone for directory buckets][2] in the *Amazon S3 User
+    # Guide*.
     #
     #  </note>
     #
@@ -9169,7 +9245,7 @@ module Aws::S3
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html
@@ -9341,8 +9417,10 @@ module Aws::S3
     #   resp.etag #=> String
     #   resp.checksum.checksum_crc32 #=> String
     #   resp.checksum.checksum_crc32c #=> String
+    #   resp.checksum.checksum_crc64nvme #=> String
     #   resp.checksum.checksum_sha1 #=> String
     #   resp.checksum.checksum_sha256 #=> String
+    #   resp.checksum.checksum_type #=> String, one of "COMPOSITE", "FULL_OBJECT"
     #   resp.object_parts.total_parts_count #=> Integer
     #   resp.object_parts.part_number_marker #=> Integer
     #   resp.object_parts.next_part_number_marker #=> Integer
@@ -9353,6 +9431,7 @@ module Aws::S3
     #   resp.object_parts.parts[0].size #=> Integer
     #   resp.object_parts.parts[0].checksum_crc32 #=> String
     #   resp.object_parts.parts[0].checksum_crc32c #=> String
+    #   resp.object_parts.parts[0].checksum_crc64nvme #=> String
     #   resp.object_parts.parts[0].checksum_sha1 #=> String
     #   resp.object_parts.parts[0].checksum_sha256 #=> String
     #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE"
@@ -10040,8 +10119,8 @@ module Aws::S3
     #   endpoints in Availability Zones, see [Regional and Zonal endpoints
     #   for directory buckets in Availability Zones][5] in the *Amazon S3
     #   User Guide*. For more information about endpoints in Local Zones,
-    #   see [Concepts for directory buckets in Local Zones][6] in the
-    #   *Amazon S3 User Guide*.
+    #   see [Available Local Zone for directory buckets][6] in the *Amazon
+    #   S3 User Guide*.
     #
     #    </note>
     #
@@ -10051,7 +10130,7 @@ module Aws::S3
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-example-bucket-policies.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-identity-policies.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html
     #
     # @option params [required, String] :bucket
@@ -10291,8 +10370,8 @@ module Aws::S3
     #   endpoints in Availability Zones, see [Regional and Zonal endpoints
     #   for directory buckets in Availability Zones][6] in the *Amazon S3
     #   User Guide*. For more information about endpoints in Local Zones,
-    #   see [Concepts for directory buckets in Local Zones][7] in the
-    #   *Amazon S3 User Guide*.
+    #   see [Available Local Zone for directory buckets][7] in the *Amazon
+    #   S3 User Guide*.
     #
     #    </note>
     #
@@ -10309,7 +10388,7 @@ module Aws::S3
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-serv-side-encryption.html
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
     # [7]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html
     # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
     # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAttributes.html
@@ -10554,8 +10633,10 @@ module Aws::S3
     #   * {Types::HeadObjectOutput#content_length #content_length} => Integer
     #   * {Types::HeadObjectOutput#checksum_crc32 #checksum_crc32} => String
     #   * {Types::HeadObjectOutput#checksum_crc32c #checksum_crc32c} => String
+    #   * {Types::HeadObjectOutput#checksum_crc64nvme #checksum_crc64nvme} => String
     #   * {Types::HeadObjectOutput#checksum_sha1 #checksum_sha1} => String
     #   * {Types::HeadObjectOutput#checksum_sha256 #checksum_sha256} => String
+    #   * {Types::HeadObjectOutput#checksum_type #checksum_type} => String
     #   * {Types::HeadObjectOutput#etag #etag} => String
     #   * {Types::HeadObjectOutput#missing_meta #missing_meta} => Integer
     #   * {Types::HeadObjectOutput#version_id #version_id} => String
@@ -10640,8 +10721,10 @@ module Aws::S3
     #   resp.content_length #=> Integer
     #   resp.checksum_crc32 #=> String
     #   resp.checksum_crc32c #=> String
+    #   resp.checksum_crc64nvme #=> String
     #   resp.checksum_sha1 #=> String
     #   resp.checksum_sha256 #=> String
+    #   resp.checksum_type #=> String, one of "COMPOSITE", "FULL_OBJECT"
     #   resp.etag #=> String
     #   resp.missing_meta #=> Integer
     #   resp.version_id #=> String
@@ -11231,7 +11314,7 @@ module Aws::S3
     # about endpoints in Availability Zones, see [Regional and Zonal
     # endpoints for directory buckets in Availability Zones][2] in the
     # *Amazon S3 User Guide*. For more information about endpoints in Local
-    # Zones, see [Concepts for directory buckets in Local Zones][3] in the
+    # Zones, see [Available Local Zone for directory buckets][3] in the
     # *Amazon S3 User Guide*.
     #
     #  </note>
@@ -11260,7 +11343,7 @@ module Aws::S3
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html
     #
@@ -11355,8 +11438,8 @@ module Aws::S3
     # endpoints in Availability Zones, see [Regional and Zonal endpoints for
     # directory buckets in Availability Zones][2] in the *Amazon S3 User
     # Guide*. For more information about endpoints in Local Zones, see
-    # [Concepts for directory buckets in Local Zones][3] in the *Amazon S3
-    # User Guide*.
+    # [Available Local Zone for directory buckets][3] in the *Amazon S3 User
+    # Guide*.
     #
     #  </note>
     #
@@ -11417,7 +11500,7 @@ module Aws::S3
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html
@@ -11735,7 +11818,8 @@ module Aws::S3
     #   resp.uploads[0].owner.id #=> String
     #   resp.uploads[0].initiator.id #=> String
     #   resp.uploads[0].initiator.display_name #=> String
-    #   resp.uploads[0].checksum_algorithm #=> String, one of "CRC32", "CRC32C", "SHA1", "SHA256"
+    #   resp.uploads[0].checksum_algorithm #=> String, one of "CRC32", "CRC32C", "SHA1", "SHA256", "CRC64NVME"
+    #   resp.uploads[0].checksum_type #=> String, one of "COMPOSITE", "FULL_OBJECT"
     #   resp.common_prefixes #=> Array
     #   resp.common_prefixes[0].prefix #=> String
     #   resp.encoding_type #=> String, one of "url"
@@ -11953,7 +12037,8 @@ module Aws::S3
     #   resp.versions #=> Array
     #   resp.versions[0].etag #=> String
     #   resp.versions[0].checksum_algorithm #=> Array
-    #   resp.versions[0].checksum_algorithm[0] #=> String, one of "CRC32", "CRC32C", "SHA1", "SHA256"
+    #   resp.versions[0].checksum_algorithm[0] #=> String, one of "CRC32", "CRC32C", "SHA1", "SHA256", "CRC64NVME"
+    #   resp.versions[0].checksum_type #=> String, one of "COMPOSITE", "FULL_OBJECT"
     #   resp.versions[0].size #=> Integer
     #   resp.versions[0].storage_class #=> String, one of "STANDARD"
     #   resp.versions[0].key #=> String
@@ -12198,7 +12283,8 @@ module Aws::S3
     #   resp.contents[0].last_modified #=> Time
     #   resp.contents[0].etag #=> String
     #   resp.contents[0].checksum_algorithm #=> Array
-    #   resp.contents[0].checksum_algorithm[0] #=> String, one of "CRC32", "CRC32C", "SHA1", "SHA256"
+    #   resp.contents[0].checksum_algorithm[0] #=> String, one of "CRC32", "CRC32C", "SHA1", "SHA256", "CRC64NVME"
+    #   resp.contents[0].checksum_type #=> String, one of "COMPOSITE", "FULL_OBJECT"
     #   resp.contents[0].size #=> Integer
     #   resp.contents[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "GLACIER", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE"
     #   resp.contents[0].owner.display_name #=> String
@@ -12248,8 +12334,8 @@ module Aws::S3
     #   endpoints in Availability Zones, see [Regional and Zonal endpoints
     #   for directory buckets in Availability Zones][3] in the *Amazon S3
     #   User Guide*. For more information about endpoints in Local Zones,
-    #   see [Concepts for directory buckets in Local Zones][4] in the
-    #   *Amazon S3 User Guide*.
+    #   see [Available Local Zone for directory buckets][4] in the *Amazon
+    #   S3 User Guide*.
     #
     #  </note>
     #
@@ -12307,7 +12393,7 @@ module Aws::S3
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/ListingKeysUsingAPIs.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBuckets.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html
@@ -12539,7 +12625,8 @@ module Aws::S3
     #   resp.contents[0].last_modified #=> Time
     #   resp.contents[0].etag #=> String
     #   resp.contents[0].checksum_algorithm #=> Array
-    #   resp.contents[0].checksum_algorithm[0] #=> String, one of "CRC32", "CRC32C", "SHA1", "SHA256"
+    #   resp.contents[0].checksum_algorithm[0] #=> String, one of "CRC32", "CRC32C", "SHA1", "SHA256", "CRC64NVME"
+    #   resp.contents[0].checksum_type #=> String, one of "COMPOSITE", "FULL_OBJECT"
     #   resp.contents[0].size #=> Integer
     #   resp.contents[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "GLACIER", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE"
     #   resp.contents[0].owner.display_name #=> String
@@ -12596,8 +12683,8 @@ module Aws::S3
     # endpoints in Availability Zones, see [Regional and Zonal endpoints for
     # directory buckets in Availability Zones][3] in the *Amazon S3 User
     # Guide*. For more information about endpoints in Local Zones, see
-    # [Concepts for directory buckets in Local Zones][4] in the *Amazon S3
-    # User Guide*.
+    # [Available Local Zone for directory buckets][4] in the *Amazon S3 User
+    # Guide*.
     #
     #  </note>
     #
@@ -12651,7 +12738,7 @@ module Aws::S3
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html
@@ -12800,6 +12887,7 @@ module Aws::S3
     #   * {Types::ListPartsOutput#storage_class #storage_class} => String
     #   * {Types::ListPartsOutput#request_charged #request_charged} => String
     #   * {Types::ListPartsOutput#checksum_algorithm #checksum_algorithm} => String
+    #   * {Types::ListPartsOutput#checksum_type #checksum_type} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -12874,6 +12962,7 @@ module Aws::S3
     #   resp.parts[0].size #=> Integer
     #   resp.parts[0].checksum_crc32 #=> String
     #   resp.parts[0].checksum_crc32c #=> String
+    #   resp.parts[0].checksum_crc64nvme #=> String
     #   resp.parts[0].checksum_sha1 #=> String
     #   resp.parts[0].checksum_sha256 #=> String
     #   resp.initiator.id #=> String
@@ -12882,7 +12971,8 @@ module Aws::S3
     #   resp.owner.id #=> String
     #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE"
     #   resp.request_charged #=> String, one of "requester"
-    #   resp.checksum_algorithm #=> String, one of "CRC32", "CRC32C", "SHA1", "SHA256"
+    #   resp.checksum_algorithm #=> String, one of "CRC32", "CRC32C", "SHA1", "SHA256", "CRC64NVME"
+    #   resp.checksum_type #=> String, one of "COMPOSITE", "FULL_OBJECT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListParts AWS API Documentation
     #
@@ -12980,7 +13070,7 @@ module Aws::S3
     #       status: "Enabled", # accepts Enabled, Suspended
     #     },
     #     expected_bucket_owner: "AccountId",
-    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketAccelerateConfiguration AWS API Documentation
@@ -13176,9 +13266,10 @@ module Aws::S3
     #   The bucket to which to apply the ACL.
     #
     # @option params [String] :content_md5
-    #   The base64-encoded 128-bit MD5 digest of the data. This header must be
-    #   used as a message integrity check to verify that the request body was
-    #   not corrupted in transit. For more information, go to [RFC 1864.][1]
+    #   The Base64 encoded 128-bit `MD5` digest of the data. This header must
+    #   be used as a message integrity check to verify that the request body
+    #   was not corrupted in transit. For more information, go to [RFC
+    #   1864.][1]
     #
     #   For requests made using the Amazon Web Services Command Line Interface
     #   (CLI) or Amazon Web Services SDKs, this field is calculated
@@ -13267,7 +13358,7 @@ module Aws::S3
     #     },
     #     bucket: "BucketName", # required
     #     content_md5: "ContentMD5",
-    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
     #     grant_full_control: "GrantFullControl",
     #     grant_read: "GrantRead",
     #     grant_read_acp: "GrantReadACP",
@@ -13491,9 +13582,10 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html
     #
     # @option params [String] :content_md5
-    #   The base64-encoded 128-bit MD5 digest of the data. This header must be
-    #   used as a message integrity check to verify that the request body was
-    #   not corrupted in transit. For more information, go to [RFC 1864.][1]
+    #   The Base64 encoded 128-bit `MD5` digest of the data. This header must
+    #   be used as a message integrity check to verify that the request body
+    #   was not corrupted in transit. For more information, go to [RFC
+    #   1864.][1]
     #
     #   For requests made using the Amazon Web Services Command Line Interface
     #   (CLI) or Amazon Web Services SDKs, this field is calculated
@@ -13587,7 +13679,7 @@ module Aws::S3
     #       ],
     #     },
     #     content_md5: "ContentMD5",
-    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
     #     expected_bucket_owner: "AccountId",
     #   })
     #
@@ -13611,7 +13703,7 @@ module Aws::S3
     # about endpoints in Availability Zones, see [Regional and Zonal
     # endpoints for directory buckets in Availability Zones][1] in the
     # *Amazon S3 User Guide*. For more information about endpoints in Local
-    # Zones, see [Concepts for directory buckets in Local Zones][2] in the
+    # Zones, see [Available Local Zone for directory buckets][2] in the
     # *Amazon S3 User Guide*.
     #
     #  </note>
@@ -13719,7 +13811,7 @@ module Aws::S3
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html
@@ -13757,7 +13849,7 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-bucket-naming-rules.html
     #
     # @option params [String] :content_md5
-    #   The base64-encoded 128-bit MD5 digest of the server-side encryption
+    #   The Base64 encoded 128-bit `MD5` digest of the server-side encryption
     #   configuration.
     #
     #   For requests made using the Amazon Web Services Command Line Interface
@@ -13810,7 +13902,7 @@ module Aws::S3
     #   resp = client.put_bucket_encryption({
     #     bucket: "BucketName", # required
     #     content_md5: "ContentMD5",
-    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
     #     server_side_encryption_configuration: { # required
     #       rules: [ # required
     #         {
@@ -14111,6 +14203,10 @@ module Aws::S3
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is not supported for directory buckets.
+    #
+    #  </note>
+    #
     # For an updated version of this API, see
     # [PutBucketLifecycleConfiguration][1]. This version has been
     # deprecated. Existing lifecycle configurations will work. For new
@@ -14218,7 +14314,7 @@ module Aws::S3
     #   resp = client.put_bucket_lifecycle({
     #     bucket: "BucketName", # required
     #     content_md5: "ContentMD5",
-    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
     #     lifecycle_configuration: {
     #       rules: [ # required
     #         {
@@ -14364,8 +14460,8 @@ module Aws::S3
     #     information about endpoints in Availability Zones, see [Regional
     #     and Zonal endpoints for directory buckets in Availability
     #     Zones][7] in the *Amazon S3 User Guide*. For more information
-    #     about endpoints in Local Zones, see [Concepts for directory
-    #     buckets in Local Zones][8] in the *Amazon S3 User Guide*.
+    #     about endpoints in Local Zones, see [Available Local Zone for
+    #     directory buckets][8] in the *Amazon S3 User Guide*.
     #
     #      </note>
     #
@@ -14387,7 +14483,7 @@ module Aws::S3
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html
-    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
     # [8]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html
     # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycleConfiguration.html
     # [10]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketLifecycle.html
@@ -14483,7 +14579,7 @@ module Aws::S3
     #
     #   resp = client.put_bucket_lifecycle_configuration({
     #     bucket: "BucketName", # required
-    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
     #     lifecycle_configuration: {
     #       rules: [ # required
     #         {
@@ -14726,7 +14822,7 @@ module Aws::S3
     #       },
     #     },
     #     content_md5: "ContentMD5",
-    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
     #     expected_bucket_owner: "AccountId",
     #   })
     #
@@ -14895,7 +14991,7 @@ module Aws::S3
     #   resp = client.put_bucket_notification({
     #     bucket: "BucketName", # required
     #     content_md5: "ContentMD5",
-    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
     #     notification_configuration: { # required
     #       topic_configuration: {
     #         id: "NotificationId",
@@ -15192,7 +15288,7 @@ module Aws::S3
     # about endpoints in Availability Zones, see [Regional and Zonal
     # endpoints for directory buckets in Availability Zones][1] in the
     # *Amazon S3 User Guide*. For more information about endpoints in Local
-    # Zones, see [Concepts for directory buckets in Local Zones][2] in the
+    # Zones, see [Available Local Zone for directory buckets][2] in the
     # *Amazon S3 User Guide*.
     #
     #  </note>
@@ -15256,7 +15352,7 @@ module Aws::S3
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html
@@ -15305,22 +15401,23 @@ module Aws::S3
     #   For the `x-amz-checksum-algorithm ` header, replace ` algorithm ` with
     #   the supported algorithm from the following list:
     #
-    #   * `CRC32`
+    #   * `CRC-32`
     #
-    #   * `CRC32C`
+    #   * `CRC-32C`
     #
-    #   * `SHA1`
+    #   * `CRC-64NVME`
     #
-    #   * `SHA256`
+    #   * `SHA-1`
+    #
+    #   * `SHA-256`
     #
     #   For more information, see [Checking object integrity][1] in the
     #   *Amazon S3 User Guide*.
     #
     #   If the individual checksum value you provide through
     #   `x-amz-checksum-algorithm ` doesn't match the checksum algorithm you
-    #   set through `x-amz-sdk-checksum-algorithm`, Amazon S3 ignores any
-    #   provided `ChecksumAlgorithm` parameter and uses the checksum algorithm
-    #   that matches the provided value in `x-amz-checksum-algorithm `.
+    #   set through `x-amz-sdk-checksum-algorithm`, Amazon S3 fails the
+    #   request with a `BadDigest` error.
     #
     #   <note markdown="1"> For directory buckets, when you use Amazon Web Services SDKs, `CRC32`
     #   is the default checksum algorithm that's used for performance.
@@ -15373,7 +15470,7 @@ module Aws::S3
     #   resp = client.put_bucket_policy({
     #     bucket: "BucketName", # required
     #     content_md5: "ContentMD5",
-    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
     #     confirm_remove_self_bucket_access: false,
     #     policy: "Policy", # required
     #     expected_bucket_owner: "AccountId",
@@ -15479,7 +15576,7 @@ module Aws::S3
     #   The name of the bucket
     #
     # @option params [String] :content_md5
-    #   The base64-encoded 128-bit MD5 digest of the data. You must use this
+    #   The Base64 encoded 128-bit `MD5` digest of the data. You must use this
     #   header as a message integrity check to verify that the request body
     #   was not corrupted in transit. For more information, see [RFC 1864][1].
     #
@@ -15548,7 +15645,7 @@ module Aws::S3
     #   resp = client.put_bucket_replication({
     #     bucket: "BucketName", # required
     #     content_md5: "ContentMD5",
-    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
     #     replication_configuration: { # required
     #       role: "Role", # required
     #       rules: [ # required
@@ -15652,7 +15749,7 @@ module Aws::S3
     #   The bucket name.
     #
     # @option params [String] :content_md5
-    #   The base64-encoded 128-bit MD5 digest of the data. You must use this
+    #   The Base64 encoded 128-bit `MD5` digest of the data. You must use this
     #   header as a message integrity check to verify that the request body
     #   was not corrupted in transit. For more information, see [RFC 1864][1].
     #
@@ -15707,7 +15804,7 @@ module Aws::S3
     #   resp = client.put_bucket_request_payment({
     #     bucket: "BucketName", # required
     #     content_md5: "ContentMD5",
-    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
     #     request_payment_configuration: { # required
     #       payer: "Requester", # required, accepts Requester, BucketOwner
     #     },
@@ -15789,7 +15886,7 @@ module Aws::S3
     #   The bucket name.
     #
     # @option params [String] :content_md5
-    #   The base64-encoded 128-bit MD5 digest of the data. You must use this
+    #   The Base64 encoded 128-bit `MD5` digest of the data. You must use this
     #   header as a message integrity check to verify that the request body
     #   was not corrupted in transit. For more information, see [RFC 1864][1].
     #
@@ -15853,7 +15950,7 @@ module Aws::S3
     #   resp = client.put_bucket_tagging({
     #     bucket: "BucketName", # required
     #     content_md5: "ContentMD5",
-    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
     #     tagging: { # required
     #       tag_set: [ # required
     #         {
@@ -15880,10 +15977,10 @@ module Aws::S3
     #
     # <note markdown="1"> When you enable versioning on a bucket for the first time, it might
     # take a short amount of time for the change to be fully propagated.
-    # While this change is propagating, you may encounter intermittent `HTTP
-    # 404 NoSuchKey` errors for requests to objects created or updated after
-    # enabling versioning. We recommend that you wait for 15 minutes after
-    # enabling versioning before issuing write operations (`PUT` or
+    # While this change is propagating, you might encounter intermittent
+    # `HTTP 404 NoSuchKey` errors for requests to objects created or updated
+    # after enabling versioning. We recommend that you wait for 15 minutes
+    # after enabling versioning before issuing write operations (`PUT` or
     # `DELETE`) on objects in the bucket.
     #
     #  </note>
@@ -15936,7 +16033,7 @@ module Aws::S3
     #   The bucket name.
     #
     # @option params [String] :content_md5
-    #   &gt;The base64-encoded 128-bit MD5 digest of the data. You must use
+    #   &gt;The Base64 encoded 128-bit `MD5` digest of the data. You must use
     #   this header as a message integrity check to verify that the request
     #   body was not corrupted in transit. For more information, see [RFC
     #   1864][1].
@@ -15997,7 +16094,7 @@ module Aws::S3
     #   resp = client.put_bucket_versioning({
     #     bucket: "BucketName", # required
     #     content_md5: "ContentMD5",
-    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
     #     mfa: "MFA",
     #     versioning_configuration: { # required
     #       mfa_delete: "Enabled", # accepts Enabled, Disabled
@@ -16098,7 +16195,7 @@ module Aws::S3
     #   The bucket name.
     #
     # @option params [String] :content_md5
-    #   The base64-encoded 128-bit MD5 digest of the data. You must use this
+    #   The Base64 encoded 128-bit `MD5` digest of the data. You must use this
     #   header as a message integrity check to verify that the request body
     #   was not corrupted in transit. For more information, see [RFC 1864][1].
     #
@@ -16159,7 +16256,7 @@ module Aws::S3
     #   resp = client.put_bucket_website({
     #     bucket: "BucketName", # required
     #     content_md5: "ContentMD5",
-    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
     #     website_configuration: { # required
     #       error_document: {
     #         key: "ObjectKey", # required
@@ -16220,8 +16317,8 @@ module Aws::S3
     #   endpoints in Availability Zones, see [Regional and Zonal endpoints
     #   for directory buckets in Availability Zones][1] in the *Amazon S3
     #   User Guide*. For more information about endpoints in Local Zones,
-    #   see [Concepts for directory buckets in Local Zones][2] in the
-    #   *Amazon S3 User Guide*.
+    #   see [Available Local Zone for directory buckets][2] in the *Amazon
+    #   S3 User Guide*.
     #
     #  </note>
     #
@@ -16313,7 +16410,7 @@ module Aws::S3
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/AddingObjectstoVersioningEnabledBuckets.html
@@ -16448,7 +16545,7 @@ module Aws::S3
     #   [1]: https://www.rfc-editor.org/rfc/rfc9110.html#name-content-length
     #
     # @option params [String] :content_md5
-    #   The base64-encoded 128-bit MD5 digest of the message (without the
+    #   The Base64 encoded 128-bit `MD5` digest of the message (without the
     #   headers) according to RFC 1864. This header can be used as a message
     #   integrity check to verify that the data is the same data that was
     #   originally sent. Although it is optional, we recommend using the
@@ -16493,22 +16590,23 @@ module Aws::S3
     #   For the `x-amz-checksum-algorithm ` header, replace ` algorithm ` with
     #   the supported algorithm from the following list:
     #
-    #   * `CRC32`
+    #   * `CRC-32`
     #
-    #   * `CRC32C`
+    #   * `CRC-32C`
     #
-    #   * `SHA1`
+    #   * `CRC-64NVME`
     #
-    #   * `SHA256`
+    #   * `SHA-1`
+    #
+    #   * `SHA-256`
     #
     #   For more information, see [Checking object integrity][1] in the
     #   *Amazon S3 User Guide*.
     #
     #   If the individual checksum value you provide through
     #   `x-amz-checksum-algorithm ` doesn't match the checksum algorithm you
-    #   set through `x-amz-sdk-checksum-algorithm`, Amazon S3 ignores any
-    #   provided `ChecksumAlgorithm` parameter and uses the checksum algorithm
-    #   that matches the provided value in `x-amz-checksum-algorithm `.
+    #   set through `x-amz-sdk-checksum-algorithm`, Amazon S3 fails the
+    #   request with a `BadDigest` error.
     #
     #   <note markdown="1"> The `Content-MD5` or `x-amz-sdk-checksum-algorithm` header is required
     #   for any request to upload an object with a retention period configured
@@ -16529,7 +16627,7 @@ module Aws::S3
     # @option params [String] :checksum_crc32
     #   This header can be used as a data integrity check to verify that the
     #   data received is the same data that was originally sent. This header
-    #   specifies the base64-encoded, 32-bit CRC-32 checksum of the object.
+    #   specifies the Base64 encoded, 32-bit `CRC-32` checksum of the object.
     #   For more information, see [Checking object integrity][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -16540,9 +16638,21 @@ module Aws::S3
     # @option params [String] :checksum_crc32c
     #   This header can be used as a data integrity check to verify that the
     #   data received is the same data that was originally sent. This header
-    #   specifies the base64-encoded, 32-bit CRC-32C checksum of the object.
+    #   specifies the Base64 encoded, 32-bit `CRC-32C` checksum of the object.
     #   For more information, see [Checking object integrity][1] in the
     #   *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
+    #
+    # @option params [String] :checksum_crc64nvme
+    #   This header can be used as a data integrity check to verify that the
+    #   data received is the same data that was originally sent. This header
+    #   specifies the Base64 encoded, 64-bit `CRC-64NVME` checksum of the
+    #   object. The `CRC-64NVME` checksum is always a full object checksum.
+    #   For more information, see [Checking object integrity in the Amazon S3
+    #   User Guide][1].
     #
     #
     #
@@ -16551,9 +16661,9 @@ module Aws::S3
     # @option params [String] :checksum_sha1
     #   This header can be used as a data integrity check to verify that the
     #   data received is the same data that was originally sent. This header
-    #   specifies the base64-encoded, 160-bit SHA-1 digest of the object. For
-    #   more information, see [Checking object integrity][1] in the *Amazon S3
-    #   User Guide*.
+    #   specifies the Base64 encoded, 160-bit `SHA-1` digest of the object.
+    #   For more information, see [Checking object integrity][1] in the
+    #   *Amazon S3 User Guide*.
     #
     #
     #
@@ -16562,7 +16672,7 @@ module Aws::S3
     # @option params [String] :checksum_sha256
     #   This header can be used as a data integrity check to verify that the
     #   data received is the same data that was originally sent. This header
-    #   specifies the base64-encoded, 256-bit SHA-256 digest of the object.
+    #   specifies the Base64 encoded, 256-bit `SHA-256` digest of the object.
     #   For more information, see [Checking object integrity][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -16851,7 +16961,7 @@ module Aws::S3
     # @option params [String] :ssekms_encryption_context
     #   Specifies the Amazon Web Services KMS Encryption Context as an
     #   additional encryption context to use for object encryption. The value
-    #   of this header is a Base64-encoded string of a UTF-8 encoded JSON,
+    #   of this header is a Base64 encoded string of a UTF-8 encoded JSON,
     #   which contains the encryption context as key-value pairs. This value
     #   is stored as object metadata and automatically gets passed on to
     #   Amazon Web Services KMS for future `GetObject` operations on this
@@ -16962,8 +17072,10 @@ module Aws::S3
     #   * {Types::PutObjectOutput#etag #etag} => String
     #   * {Types::PutObjectOutput#checksum_crc32 #checksum_crc32} => String
     #   * {Types::PutObjectOutput#checksum_crc32c #checksum_crc32c} => String
+    #   * {Types::PutObjectOutput#checksum_crc64nvme #checksum_crc64nvme} => String
     #   * {Types::PutObjectOutput#checksum_sha1 #checksum_sha1} => String
     #   * {Types::PutObjectOutput#checksum_sha256 #checksum_sha256} => String
+    #   * {Types::PutObjectOutput#checksum_type #checksum_type} => String
     #   * {Types::PutObjectOutput#server_side_encryption #server_side_encryption} => String
     #   * {Types::PutObjectOutput#version_id #version_id} => String
     #   * {Types::PutObjectOutput#sse_customer_algorithm #sse_customer_algorithm} => String
@@ -16974,24 +17086,6 @@ module Aws::S3
     #   * {Types::PutObjectOutput#size #size} => Integer
     #   * {Types::PutObjectOutput#request_charged #request_charged} => String
     #
-    #
-    # @example Example: To upload an object and specify canned ACL.
-    #
-    #   # The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ
-    #   # access to authenticated users. If the bucket is versioning enabled, S3 returns version ID in response.
-    #
-    #   resp = client.put_object({
-    #     acl: "authenticated-read", 
-    #     body: "filetoupload", 
-    #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
-    #   }
     #
     # @example Example: To create an object.
     #
@@ -17009,22 +17103,21 @@ module Aws::S3
     #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
     #   }
     #
-    # @example Example: To upload an object and specify optional tags
+    # @example Example: To upload an object
     #
-    #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore
-    #   # S3 returns version ID of the newly created object.
+    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
+    #   # syntax. S3 returns VersionId of the newly created object.
     #
     #   resp = client.put_object({
-    #     body: "c:\\HappyFace.jpg", 
+    #     body: "HappyFace.jpg", 
     #     bucket: "examplebucket", 
     #     key: "HappyFace.jpg", 
-    #     tagging: "key1=value1&key2=value2", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
+    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
     #   }
     #
     # @example Example: To upload an object and specify server-side encryption and object tags
@@ -17045,43 +17138,6 @@ module Aws::S3
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
     #     server_side_encryption: "AES256", 
     #     version_id: "Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt", 
-    #   }
-    #
-    # @example Example: To upload an object (specify optional headers)
-    #
-    #   # The following example uploads an object. The request specifies optional request headers to directs S3 to use specific
-    #   # storage class and use server-side encryption.
-    #
-    #   resp = client.put_object({
-    #     body: "HappyFace.jpg", 
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #     server_side_encryption: "AES256", 
-    #     storage_class: "STANDARD_IA", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     server_side_encryption: "AES256", 
-    #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
-    #   }
-    #
-    # @example Example: To upload an object
-    #
-    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
-    #   # syntax. S3 returns VersionId of the newly created object.
-    #
-    #   resp = client.put_object({
-    #     body: "HappyFace.jpg", 
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
     #   }
     #
     # @example Example: To upload object and specify user-defined metadata
@@ -17105,6 +17161,62 @@ module Aws::S3
     #     version_id: "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0", 
     #   }
     #
+    # @example Example: To upload an object and specify optional tags
+    #
+    #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore
+    #   # S3 returns version ID of the newly created object.
+    #
+    #   resp = client.put_object({
+    #     body: "c:\\HappyFace.jpg", 
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #     tagging: "key1=value1&key2=value2", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
+    #   }
+    #
+    # @example Example: To upload an object (specify optional headers)
+    #
+    #   # The following example uploads an object. The request specifies optional request headers to directs S3 to use specific
+    #   # storage class and use server-side encryption.
+    #
+    #   resp = client.put_object({
+    #     body: "HappyFace.jpg", 
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #     server_side_encryption: "AES256", 
+    #     storage_class: "STANDARD_IA", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     server_side_encryption: "AES256", 
+    #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
+    #   }
+    #
+    # @example Example: To upload an object and specify canned ACL.
+    #
+    #   # The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ
+    #   # access to authenticated users. If the bucket is versioning enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     acl: "authenticated-read", 
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
+    #   }
+    #
     # @example Streaming a file from disk
     #   # upload file from disk in a single request, may not exceed 5GB
     #   File.open('/source/file/path', 'rb') do |file|
@@ -17124,9 +17236,10 @@ module Aws::S3
     #     content_length: 1,
     #     content_md5: "ContentMD5",
     #     content_type: "ContentType",
-    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
     #     checksum_crc32: "ChecksumCRC32",
     #     checksum_crc32c: "ChecksumCRC32C",
+    #     checksum_crc64nvme: "ChecksumCRC64NVME",
     #     checksum_sha1: "ChecksumSHA1",
     #     checksum_sha256: "ChecksumSHA256",
     #     expires: Time.now,
@@ -17164,8 +17277,10 @@ module Aws::S3
     #   resp.etag #=> String
     #   resp.checksum_crc32 #=> String
     #   resp.checksum_crc32c #=> String
+    #   resp.checksum_crc64nvme #=> String
     #   resp.checksum_sha1 #=> String
     #   resp.checksum_sha256 #=> String
+    #   resp.checksum_type #=> String, one of "COMPOSITE", "FULL_OBJECT"
     #   resp.server_side_encryption #=> String, one of "AES256", "aws:kms", "aws:kms:dsse"
     #   resp.version_id #=> String
     #   resp.sse_customer_algorithm #=> String
@@ -17394,9 +17509,9 @@ module Aws::S3
     #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     #
     # @option params [String] :content_md5
-    #   The base64-encoded 128-bit MD5 digest of the data. This header must be
-    #   used as a message integrity check to verify that the request body was
-    #   not corrupted in transit. For more information, go to [RFC
+    #   The Base64 encoded 128-bit `MD5` digest of the data. This header must
+    #   be used as a message integrity check to verify that the request body
+    #   was not corrupted in transit. For more information, go to [RFC
     #   1864.&gt;][1]
     #
     #   For requests made using the Amazon Web Services Command Line Interface
@@ -17529,7 +17644,7 @@ module Aws::S3
     #     },
     #     bucket: "BucketName", # required
     #     content_md5: "ContentMD5",
-    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
     #     grant_full_control: "GrantFullControl",
     #     grant_read: "GrantRead",
     #     grant_read_acp: "GrantReadACP",
@@ -17656,7 +17771,7 @@ module Aws::S3
     #     request_payer: "requester", # accepts requester
     #     version_id: "ObjectVersionId",
     #     content_md5: "ContentMD5",
-    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
     #     expected_bucket_owner: "AccountId",
     #   })
     #
@@ -17775,7 +17890,7 @@ module Aws::S3
     #     request_payer: "requester", # accepts requester
     #     token: "ObjectLockToken",
     #     content_md5: "ContentMD5",
-    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
     #     expected_bucket_owner: "AccountId",
     #   })
     #
@@ -17904,7 +18019,7 @@ module Aws::S3
     #     version_id: "ObjectVersionId",
     #     bypass_governance_retention: false,
     #     content_md5: "ContentMD5",
-    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
     #     expected_bucket_owner: "AccountId",
     #   })
     #
@@ -18094,7 +18209,7 @@ module Aws::S3
     #     key: "ObjectKey", # required
     #     version_id: "ObjectVersionId",
     #     content_md5: "ContentMD5",
-    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
     #     tagging: { # required
     #       tag_set: [ # required
     #         {
@@ -18209,7 +18324,7 @@ module Aws::S3
     #   resp = client.put_public_access_block({
     #     bucket: "BucketName", # required
     #     content_md5: "ContentMD5",
-    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
     #     public_access_block_configuration: { # required
     #       block_public_acls: false,
     #       ignore_public_acls: false,
@@ -18594,7 +18709,7 @@ module Aws::S3
     #       },
     #     },
     #     request_payer: "requester", # accepts requester
-    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
     #     expected_bucket_owner: "AccountId",
     #   })
     #
@@ -19071,8 +19186,8 @@ module Aws::S3
     # endpoints in Availability Zones, see [Regional and Zonal endpoints for
     # directory buckets in Availability Zones][5] in the *Amazon S3 User
     # Guide*. For more information about endpoints in Local Zones, see
-    # [Concepts for directory buckets in Local Zones][6] in the *Amazon S3
-    # User Guide*.
+    # [Available Local Zone for directory buckets][6] in the *Amazon S3 User
+    # Guide*.
     #
     #  </note>
     #
@@ -19206,7 +19321,7 @@ module Aws::S3
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html
     # [7]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html
     # [8]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html
@@ -19271,7 +19386,7 @@ module Aws::S3
     #   the body cannot be determined automatically.
     #
     # @option params [String] :content_md5
-    #   The base64-encoded 128-bit MD5 digest of the part data. This parameter
+    #   The Base64 encoded 128-bit MD5 digest of the part data. This parameter
     #   is auto-populated when using the command from the CLI. This parameter
     #   is required if object lock parameters are specified.
     #
@@ -19301,7 +19416,7 @@ module Aws::S3
     # @option params [String] :checksum_crc32
     #   This header can be used as a data integrity check to verify that the
     #   data received is the same data that was originally sent. This header
-    #   specifies the base64-encoded, 32-bit CRC-32 checksum of the object.
+    #   specifies the Base64 encoded, 32-bit `CRC-32` checksum of the object.
     #   For more information, see [Checking object integrity][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -19312,8 +19427,19 @@ module Aws::S3
     # @option params [String] :checksum_crc32c
     #   This header can be used as a data integrity check to verify that the
     #   data received is the same data that was originally sent. This header
-    #   specifies the base64-encoded, 32-bit CRC-32C checksum of the object.
+    #   specifies the Base64 encoded, 32-bit `CRC-32C` checksum of the object.
     #   For more information, see [Checking object integrity][1] in the
+    #   *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
+    #
+    # @option params [String] :checksum_crc64nvme
+    #   This header can be used as a data integrity check to verify that the
+    #   data received is the same data that was originally sent. This header
+    #   specifies the Base64 encoded, 64-bit `CRC-64NVME` checksum of the
+    #   part. For more information, see [Checking object integrity][1] in the
     #   *Amazon S3 User Guide*.
     #
     #
@@ -19323,9 +19449,9 @@ module Aws::S3
     # @option params [String] :checksum_sha1
     #   This header can be used as a data integrity check to verify that the
     #   data received is the same data that was originally sent. This header
-    #   specifies the base64-encoded, 160-bit SHA-1 digest of the object. For
-    #   more information, see [Checking object integrity][1] in the *Amazon S3
-    #   User Guide*.
+    #   specifies the Base64 encoded, 160-bit `SHA-1` digest of the object.
+    #   For more information, see [Checking object integrity][1] in the
+    #   *Amazon S3 User Guide*.
     #
     #
     #
@@ -19334,7 +19460,7 @@ module Aws::S3
     # @option params [String] :checksum_sha256
     #   This header can be used as a data integrity check to verify that the
     #   data received is the same data that was originally sent. This header
-    #   specifies the base64-encoded, 256-bit SHA-256 digest of the object.
+    #   specifies the Base64 encoded, 256-bit `SHA-256` digest of the object.
     #   For more information, see [Checking object integrity][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -19411,6 +19537,7 @@ module Aws::S3
     #   * {Types::UploadPartOutput#etag #etag} => String
     #   * {Types::UploadPartOutput#checksum_crc32 #checksum_crc32} => String
     #   * {Types::UploadPartOutput#checksum_crc32c #checksum_crc32c} => String
+    #   * {Types::UploadPartOutput#checksum_crc64nvme #checksum_crc64nvme} => String
     #   * {Types::UploadPartOutput#checksum_sha1 #checksum_sha1} => String
     #   * {Types::UploadPartOutput#checksum_sha256 #checksum_sha256} => String
     #   * {Types::UploadPartOutput#sse_customer_algorithm #sse_customer_algorithm} => String
@@ -19445,9 +19572,10 @@ module Aws::S3
     #     bucket: "BucketName", # required
     #     content_length: 1,
     #     content_md5: "ContentMD5",
-    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
     #     checksum_crc32: "ChecksumCRC32",
     #     checksum_crc32c: "ChecksumCRC32C",
+    #     checksum_crc64nvme: "ChecksumCRC64NVME",
     #     checksum_sha1: "ChecksumSHA1",
     #     checksum_sha256: "ChecksumSHA256",
     #     key: "ObjectKey", # required
@@ -19466,6 +19594,7 @@ module Aws::S3
     #   resp.etag #=> String
     #   resp.checksum_crc32 #=> String
     #   resp.checksum_crc32c #=> String
+    #   resp.checksum_crc64nvme #=> String
     #   resp.checksum_sha1 #=> String
     #   resp.checksum_sha256 #=> String
     #   resp.sse_customer_algorithm #=> String
@@ -19516,8 +19645,8 @@ module Aws::S3
     # endpoints in Availability Zones, see [Regional and Zonal endpoints for
     # directory buckets in Availability Zones][5] in the *Amazon S3 User
     # Guide*. For more information about endpoints in Local Zones, see
-    # [Concepts for directory buckets in Local Zones][6] in the *Amazon S3
-    # User Guide*.
+    # [Available Local Zone for directory buckets][6] in the *Amazon S3 User
+    # Guide*.
     #
     #  </note>
     #
@@ -19662,7 +19791,7 @@ module Aws::S3
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectOperations.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html
     # [7]: https://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html
     # [8]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html
@@ -20044,6 +20173,7 @@ module Aws::S3
     #   resp.copy_part_result.last_modified #=> Time
     #   resp.copy_part_result.checksum_crc32 #=> String
     #   resp.copy_part_result.checksum_crc32c #=> String
+    #   resp.copy_part_result.checksum_crc64nvme #=> String
     #   resp.copy_part_result.checksum_sha1 #=> String
     #   resp.copy_part_result.checksum_sha256 #=> String
     #   resp.server_side_encryption #=> String, one of "AES256", "aws:kms", "aws:kms:dsse"
@@ -20208,7 +20338,7 @@ module Aws::S3
     # @option params [String] :checksum_crc32
     #   This header can be used as a data integrity check to verify that the
     #   data received is the same data that was originally sent. This
-    #   specifies the base64-encoded, 32-bit CRC-32 checksum of the object
+    #   specifies the Base64 encoded, 32-bit `CRC-32` checksum of the object
     #   returned by the Object Lambda function. This may not match the
     #   checksum for the object stored in Amazon S3. Amazon S3 will perform
     #   validation of the checksum values only when the original `GetObject`
@@ -20228,7 +20358,7 @@ module Aws::S3
     # @option params [String] :checksum_crc32c
     #   This header can be used as a data integrity check to verify that the
     #   data received is the same data that was originally sent. This
-    #   specifies the base64-encoded, 32-bit CRC-32C checksum of the object
+    #   specifies the Base64 encoded, 32-bit `CRC-32C` checksum of the object
     #   returned by the Object Lambda function. This may not match the
     #   checksum for the object stored in Amazon S3. Amazon S3 will perform
     #   validation of the checksum values only when the original `GetObject`
@@ -20243,10 +20373,21 @@ module Aws::S3
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
     #
+    # @option params [String] :checksum_crc64nvme
+    #   This header can be used as a data integrity check to verify that the
+    #   data received is the same data that was originally sent. This header
+    #   specifies the Base64 encoded, 64-bit `CRC-64NVME` checksum of the
+    #   part. For more information, see [Checking object integrity][1] in the
+    #   *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
+    #
     # @option params [String] :checksum_sha1
     #   This header can be used as a data integrity check to verify that the
     #   data received is the same data that was originally sent. This
-    #   specifies the base64-encoded, 160-bit SHA-1 digest of the object
+    #   specifies the Base64 encoded, 160-bit `SHA-1` digest of the object
     #   returned by the Object Lambda function. This may not match the
     #   checksum for the object stored in Amazon S3. Amazon S3 will perform
     #   validation of the checksum values only when the original `GetObject`
@@ -20264,7 +20405,7 @@ module Aws::S3
     # @option params [String] :checksum_sha256
     #   This header can be used as a data integrity check to verify that the
     #   data received is the same data that was originally sent. This
-    #   specifies the base64-encoded, 256-bit SHA-256 digest of the object
+    #   specifies the Base64 encoded, 256-bit `SHA-256` digest of the object
     #   returned by the Object Lambda function. This may not match the
     #   checksum for the object stored in Amazon S3. Amazon S3 will perform
     #   validation of the checksum values only when the original `GetObject`
@@ -20416,6 +20557,7 @@ module Aws::S3
     #     content_type: "ContentType",
     #     checksum_crc32: "ChecksumCRC32",
     #     checksum_crc32c: "ChecksumCRC32C",
+    #     checksum_crc64nvme: "ChecksumCRC64NVME",
     #     checksum_sha1: "ChecksumSHA1",
     #     checksum_sha256: "ChecksumSHA256",
     #     delete_marker: false,
@@ -20471,7 +20613,7 @@ module Aws::S3
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.177.0'
+      context[:gem_version] = '1.178.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

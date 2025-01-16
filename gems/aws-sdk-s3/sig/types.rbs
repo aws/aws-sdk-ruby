@@ -144,8 +144,10 @@ module Aws::S3
     class Checksum
       attr_accessor checksum_crc32: ::String
       attr_accessor checksum_crc32c: ::String
+      attr_accessor checksum_crc64nvme: ::String
       attr_accessor checksum_sha1: ::String
       attr_accessor checksum_sha256: ::String
+      attr_accessor checksum_type: ("COMPOSITE" | "FULL_OBJECT")
       SENSITIVE: []
     end
 
@@ -171,8 +173,10 @@ module Aws::S3
       attr_accessor etag: ::String
       attr_accessor checksum_crc32: ::String
       attr_accessor checksum_crc32c: ::String
+      attr_accessor checksum_crc64nvme: ::String
       attr_accessor checksum_sha1: ::String
       attr_accessor checksum_sha256: ::String
+      attr_accessor checksum_type: ("COMPOSITE" | "FULL_OBJECT")
       attr_accessor server_side_encryption: ("AES256" | "aws:kms" | "aws:kms:dsse")
       attr_accessor version_id: ::String
       attr_accessor ssekms_key_id: ::String
@@ -188,8 +192,11 @@ module Aws::S3
       attr_accessor upload_id: ::String
       attr_accessor checksum_crc32: ::String
       attr_accessor checksum_crc32c: ::String
+      attr_accessor checksum_crc64nvme: ::String
       attr_accessor checksum_sha1: ::String
       attr_accessor checksum_sha256: ::String
+      attr_accessor checksum_type: ("COMPOSITE" | "FULL_OBJECT")
+      attr_accessor mpu_object_size: ::Integer
       attr_accessor request_payer: ("requester")
       attr_accessor expected_bucket_owner: ::String
       attr_accessor if_match: ::String
@@ -209,6 +216,7 @@ module Aws::S3
       attr_accessor etag: ::String
       attr_accessor checksum_crc32: ::String
       attr_accessor checksum_crc32c: ::String
+      attr_accessor checksum_crc64nvme: ::String
       attr_accessor checksum_sha1: ::String
       attr_accessor checksum_sha256: ::String
       attr_accessor part_number: ::Integer
@@ -245,7 +253,7 @@ module Aws::S3
       attr_accessor acl: ("private" | "public-read" | "public-read-write" | "authenticated-read" | "aws-exec-read" | "bucket-owner-read" | "bucket-owner-full-control")
       attr_accessor bucket: ::String
       attr_accessor cache_control: ::String
-      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
       attr_accessor content_disposition: ::String
       attr_accessor content_encoding: ::String
       attr_accessor content_language: ::String
@@ -289,8 +297,10 @@ module Aws::S3
     class CopyObjectResult
       attr_accessor etag: ::String
       attr_accessor last_modified: ::Time
+      attr_accessor checksum_type: ("COMPOSITE" | "FULL_OBJECT")
       attr_accessor checksum_crc32: ::String
       attr_accessor checksum_crc32c: ::String
+      attr_accessor checksum_crc64nvme: ::String
       attr_accessor checksum_sha1: ::String
       attr_accessor checksum_sha256: ::String
       SENSITIVE: []
@@ -301,6 +311,7 @@ module Aws::S3
       attr_accessor last_modified: ::Time
       attr_accessor checksum_crc32: ::String
       attr_accessor checksum_crc32c: ::String
+      attr_accessor checksum_crc64nvme: ::String
       attr_accessor checksum_sha1: ::String
       attr_accessor checksum_sha256: ::String
       SENSITIVE: []
@@ -316,7 +327,7 @@ module Aws::S3
     class CreateBucketMetadataTableConfigurationRequest
       attr_accessor bucket: ::String
       attr_accessor content_md5: ::String
-      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
       attr_accessor metadata_table_configuration: Types::MetadataTableConfiguration
       attr_accessor expected_bucket_owner: ::String
       SENSITIVE: []
@@ -354,7 +365,8 @@ module Aws::S3
       attr_accessor ssekms_encryption_context: ::String
       attr_accessor bucket_key_enabled: bool
       attr_accessor request_charged: ("requester")
-      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
+      attr_accessor checksum_type: ("COMPOSITE" | "FULL_OBJECT")
       SENSITIVE: [:ssekms_key_id, :ssekms_encryption_context]
     end
 
@@ -388,7 +400,8 @@ module Aws::S3
       attr_accessor object_lock_retain_until_date: ::Time
       attr_accessor object_lock_legal_hold_status: ("ON" | "OFF")
       attr_accessor expected_bucket_owner: ::String
-      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
+      attr_accessor checksum_type: ("COMPOSITE" | "FULL_OBJECT")
       SENSITIVE: [:sse_customer_key, :ssekms_key_id, :ssekms_encryption_context]
     end
 
@@ -573,7 +586,7 @@ module Aws::S3
       attr_accessor request_payer: ("requester")
       attr_accessor bypass_governance_retention: bool
       attr_accessor expected_bucket_owner: ::String
-      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
       SENSITIVE: []
     end
 
@@ -1000,8 +1013,10 @@ module Aws::S3
       attr_accessor etag: ::String
       attr_accessor checksum_crc32: ::String
       attr_accessor checksum_crc32c: ::String
+      attr_accessor checksum_crc64nvme: ::String
       attr_accessor checksum_sha1: ::String
       attr_accessor checksum_sha256: ::String
+      attr_accessor checksum_type: ("COMPOSITE" | "FULL_OBJECT")
       attr_accessor missing_meta: ::Integer
       attr_accessor version_id: ::String
       attr_accessor cache_control: ::String
@@ -1153,8 +1168,10 @@ module Aws::S3
       attr_accessor content_length: ::Integer
       attr_accessor checksum_crc32: ::String
       attr_accessor checksum_crc32c: ::String
+      attr_accessor checksum_crc64nvme: ::String
       attr_accessor checksum_sha1: ::String
       attr_accessor checksum_sha256: ::String
+      attr_accessor checksum_type: ("COMPOSITE" | "FULL_OBJECT")
       attr_accessor etag: ::String
       attr_accessor missing_meta: ::Integer
       attr_accessor version_id: ::String
@@ -1584,7 +1601,8 @@ module Aws::S3
       attr_accessor owner: Types::Owner
       attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE")
       attr_accessor request_charged: ("requester")
-      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
+      attr_accessor checksum_type: ("COMPOSITE" | "FULL_OBJECT")
       SENSITIVE: []
     end
 
@@ -1666,7 +1684,8 @@ module Aws::S3
       attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE")
       attr_accessor owner: Types::Owner
       attr_accessor initiator: Types::Initiator
-      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
+      attr_accessor checksum_type: ("COMPOSITE" | "FULL_OBJECT")
       SENSITIVE: []
     end
 
@@ -1716,7 +1735,8 @@ module Aws::S3
       attr_accessor key: ::String
       attr_accessor last_modified: ::Time
       attr_accessor etag: ::String
-      attr_accessor checksum_algorithm: ::Array[("CRC32" | "CRC32C" | "SHA1" | "SHA256")]
+      attr_accessor checksum_algorithm: ::Array[("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")]
+      attr_accessor checksum_type: ("COMPOSITE" | "FULL_OBJECT")
       attr_accessor size: ::Integer
       attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "GLACIER" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE")
       attr_accessor owner: Types::Owner
@@ -1766,6 +1786,7 @@ module Aws::S3
       attr_accessor size: ::Integer
       attr_accessor checksum_crc32: ::String
       attr_accessor checksum_crc32c: ::String
+      attr_accessor checksum_crc64nvme: ::String
       attr_accessor checksum_sha1: ::String
       attr_accessor checksum_sha256: ::String
       SENSITIVE: []
@@ -1773,7 +1794,8 @@ module Aws::S3
 
     class ObjectVersion
       attr_accessor etag: ::String
-      attr_accessor checksum_algorithm: ::Array[("CRC32" | "CRC32C" | "SHA1" | "SHA256")]
+      attr_accessor checksum_algorithm: ::Array[("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")]
+      attr_accessor checksum_type: ("COMPOSITE" | "FULL_OBJECT")
       attr_accessor size: ::Integer
       attr_accessor storage_class: ("STANDARD")
       attr_accessor key: ::String
@@ -1822,6 +1844,7 @@ module Aws::S3
       attr_accessor size: ::Integer
       attr_accessor checksum_crc32: ::String
       attr_accessor checksum_crc32c: ::String
+      attr_accessor checksum_crc64nvme: ::String
       attr_accessor checksum_sha1: ::String
       attr_accessor checksum_sha256: ::String
       SENSITIVE: []
@@ -1862,7 +1885,7 @@ module Aws::S3
       attr_accessor bucket: ::String
       attr_accessor accelerate_configuration: Types::AccelerateConfiguration
       attr_accessor expected_bucket_owner: ::String
-      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
       SENSITIVE: []
     end
 
@@ -1871,7 +1894,7 @@ module Aws::S3
       attr_accessor access_control_policy: Types::AccessControlPolicy
       attr_accessor bucket: ::String
       attr_accessor content_md5: ::String
-      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
       attr_accessor grant_full_control: ::String
       attr_accessor grant_read: ::String
       attr_accessor grant_read_acp: ::String
@@ -1893,7 +1916,7 @@ module Aws::S3
       attr_accessor bucket: ::String
       attr_accessor cors_configuration: Types::CORSConfiguration
       attr_accessor content_md5: ::String
-      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
       attr_accessor expected_bucket_owner: ::String
       SENSITIVE: []
     end
@@ -1901,7 +1924,7 @@ module Aws::S3
     class PutBucketEncryptionRequest
       attr_accessor bucket: ::String
       attr_accessor content_md5: ::String
-      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
       attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration
       attr_accessor expected_bucket_owner: ::String
       SENSITIVE: []
@@ -1929,7 +1952,7 @@ module Aws::S3
 
     class PutBucketLifecycleConfigurationRequest
       attr_accessor bucket: ::String
-      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
       attr_accessor lifecycle_configuration: Types::BucketLifecycleConfiguration
       attr_accessor expected_bucket_owner: ::String
       attr_accessor transition_default_minimum_object_size: ("varies_by_storage_class" | "all_storage_classes_128K")
@@ -1939,7 +1962,7 @@ module Aws::S3
     class PutBucketLifecycleRequest
       attr_accessor bucket: ::String
       attr_accessor content_md5: ::String
-      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
       attr_accessor lifecycle_configuration: Types::LifecycleConfiguration
       attr_accessor expected_bucket_owner: ::String
       SENSITIVE: []
@@ -1949,7 +1972,7 @@ module Aws::S3
       attr_accessor bucket: ::String
       attr_accessor bucket_logging_status: Types::BucketLoggingStatus
       attr_accessor content_md5: ::String
-      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
       attr_accessor expected_bucket_owner: ::String
       SENSITIVE: []
     end
@@ -1973,7 +1996,7 @@ module Aws::S3
     class PutBucketNotificationRequest
       attr_accessor bucket: ::String
       attr_accessor content_md5: ::String
-      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
       attr_accessor notification_configuration: Types::NotificationConfigurationDeprecated
       attr_accessor expected_bucket_owner: ::String
       SENSITIVE: []
@@ -1990,7 +2013,7 @@ module Aws::S3
     class PutBucketPolicyRequest
       attr_accessor bucket: ::String
       attr_accessor content_md5: ::String
-      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
       attr_accessor confirm_remove_self_bucket_access: bool
       attr_accessor policy: ::IO
       attr_accessor expected_bucket_owner: ::String
@@ -2000,7 +2023,7 @@ module Aws::S3
     class PutBucketReplicationRequest
       attr_accessor bucket: ::String
       attr_accessor content_md5: ::String
-      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
       attr_accessor replication_configuration: Types::ReplicationConfiguration
       attr_accessor token: ::String
       attr_accessor expected_bucket_owner: ::String
@@ -2010,7 +2033,7 @@ module Aws::S3
     class PutBucketRequestPaymentRequest
       attr_accessor bucket: ::String
       attr_accessor content_md5: ::String
-      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
       attr_accessor request_payment_configuration: Types::RequestPaymentConfiguration
       attr_accessor expected_bucket_owner: ::String
       SENSITIVE: []
@@ -2019,7 +2042,7 @@ module Aws::S3
     class PutBucketTaggingRequest
       attr_accessor bucket: ::String
       attr_accessor content_md5: ::String
-      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
       attr_accessor tagging: Types::Tagging
       attr_accessor expected_bucket_owner: ::String
       SENSITIVE: []
@@ -2028,7 +2051,7 @@ module Aws::S3
     class PutBucketVersioningRequest
       attr_accessor bucket: ::String
       attr_accessor content_md5: ::String
-      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
       attr_accessor mfa: ::String
       attr_accessor versioning_configuration: Types::VersioningConfiguration
       attr_accessor expected_bucket_owner: ::String
@@ -2038,7 +2061,7 @@ module Aws::S3
     class PutBucketWebsiteRequest
       attr_accessor bucket: ::String
       attr_accessor content_md5: ::String
-      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
       attr_accessor website_configuration: Types::WebsiteConfiguration
       attr_accessor expected_bucket_owner: ::String
       SENSITIVE: []
@@ -2054,7 +2077,7 @@ module Aws::S3
       attr_accessor access_control_policy: Types::AccessControlPolicy
       attr_accessor bucket: ::String
       attr_accessor content_md5: ::String
-      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
       attr_accessor grant_full_control: ::String
       attr_accessor grant_read: ::String
       attr_accessor grant_read_acp: ::String
@@ -2079,7 +2102,7 @@ module Aws::S3
       attr_accessor request_payer: ("requester")
       attr_accessor version_id: ::String
       attr_accessor content_md5: ::String
-      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
       attr_accessor expected_bucket_owner: ::String
       SENSITIVE: []
     end
@@ -2095,7 +2118,7 @@ module Aws::S3
       attr_accessor request_payer: ("requester")
       attr_accessor token: ::String
       attr_accessor content_md5: ::String
-      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
       attr_accessor expected_bucket_owner: ::String
       SENSITIVE: []
     end
@@ -2105,8 +2128,10 @@ module Aws::S3
       attr_accessor etag: ::String
       attr_accessor checksum_crc32: ::String
       attr_accessor checksum_crc32c: ::String
+      attr_accessor checksum_crc64nvme: ::String
       attr_accessor checksum_sha1: ::String
       attr_accessor checksum_sha256: ::String
+      attr_accessor checksum_type: ("COMPOSITE" | "FULL_OBJECT")
       attr_accessor server_side_encryption: ("AES256" | "aws:kms" | "aws:kms:dsse")
       attr_accessor version_id: ::String
       attr_accessor sse_customer_algorithm: ::String
@@ -2130,9 +2155,10 @@ module Aws::S3
       attr_accessor content_length: ::Integer
       attr_accessor content_md5: ::String
       attr_accessor content_type: ::String
-      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
       attr_accessor checksum_crc32: ::String
       attr_accessor checksum_crc32c: ::String
+      attr_accessor checksum_crc64nvme: ::String
       attr_accessor checksum_sha1: ::String
       attr_accessor checksum_sha256: ::String
       attr_accessor expires: ::Time
@@ -2176,7 +2202,7 @@ module Aws::S3
       attr_accessor version_id: ::String
       attr_accessor bypass_governance_retention: bool
       attr_accessor content_md5: ::String
-      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
       attr_accessor expected_bucket_owner: ::String
       SENSITIVE: []
     end
@@ -2191,7 +2217,7 @@ module Aws::S3
       attr_accessor key: ::String
       attr_accessor version_id: ::String
       attr_accessor content_md5: ::String
-      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
       attr_accessor tagging: Types::Tagging
       attr_accessor expected_bucket_owner: ::String
       attr_accessor request_payer: ("requester")
@@ -2201,7 +2227,7 @@ module Aws::S3
     class PutPublicAccessBlockRequest
       attr_accessor bucket: ::String
       attr_accessor content_md5: ::String
-      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
       attr_accessor public_access_block_configuration: Types::PublicAccessBlockConfiguration
       attr_accessor expected_bucket_owner: ::String
       SENSITIVE: []
@@ -2314,7 +2340,7 @@ module Aws::S3
       attr_accessor version_id: ::String
       attr_accessor restore_request: Types::RestoreRequest
       attr_accessor request_payer: ("requester")
-      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
       attr_accessor expected_bucket_owner: ::String
       SENSITIVE: []
     end
@@ -2586,6 +2612,7 @@ module Aws::S3
       attr_accessor etag: ::String
       attr_accessor checksum_crc32: ::String
       attr_accessor checksum_crc32c: ::String
+      attr_accessor checksum_crc64nvme: ::String
       attr_accessor checksum_sha1: ::String
       attr_accessor checksum_sha256: ::String
       attr_accessor sse_customer_algorithm: ::String
@@ -2601,9 +2628,10 @@ module Aws::S3
       attr_accessor bucket: ::String
       attr_accessor content_length: ::Integer
       attr_accessor content_md5: ::String
-      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
       attr_accessor checksum_crc32: ::String
       attr_accessor checksum_crc32c: ::String
+      attr_accessor checksum_crc64nvme: ::String
       attr_accessor checksum_sha1: ::String
       attr_accessor checksum_sha256: ::String
       attr_accessor key: ::String
@@ -2648,6 +2676,7 @@ module Aws::S3
       attr_accessor content_type: ::String
       attr_accessor checksum_crc32: ::String
       attr_accessor checksum_crc32c: ::String
+      attr_accessor checksum_crc64nvme: ::String
       attr_accessor checksum_sha1: ::String
       attr_accessor checksum_sha256: ::String
       attr_accessor delete_marker: bool

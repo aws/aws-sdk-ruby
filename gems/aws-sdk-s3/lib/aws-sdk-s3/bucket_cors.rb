@@ -214,7 +214,7 @@ module Aws::S3
     #       ],
     #     },
     #     content_md5: "ContentMD5",
-    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
     #     expected_bucket_owner: "AccountId",
     #   })
     # @param [Hash] options ({})
@@ -227,9 +227,10 @@ module Aws::S3
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html
     # @option options [String] :content_md5
-    #   The base64-encoded 128-bit MD5 digest of the data. This header must be
-    #   used as a message integrity check to verify that the request body was
-    #   not corrupted in transit. For more information, go to [RFC 1864.][1]
+    #   The Base64 encoded 128-bit `MD5` digest of the data. This header must
+    #   be used as a message integrity check to verify that the request body
+    #   was not corrupted in transit. For more information, go to [RFC
+    #   1864.][1]
     #
     #   For requests made using the Amazon Web Services Command Line Interface
     #   (CLI) or Amazon Web Services SDKs, this field is calculated

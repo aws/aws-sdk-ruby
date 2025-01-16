@@ -55,7 +55,7 @@ module Aws::PaymentCryptography
   autoload :EndpointProvider, 'aws-sdk-paymentcryptography/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-paymentcryptography/endpoints'
 
-  GEM_VERSION = '1.28.0'
+  GEM_VERSION = '1.29.0'
 
 end
 

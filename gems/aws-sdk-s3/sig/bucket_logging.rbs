@@ -61,7 +61,7 @@ module Aws
                    }?
                  },
                  ?content_md5: ::String,
-                 ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256"),
+                 ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
                  ?expected_bucket_owner: ::String
                ) -> ::Aws::EmptyStructure
              | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2025-01-15)
+------------------
+
+* Feature - corrects the dual-stack endpoint configuration
+
 1.67.0 (2024-10-18)
 ------------------
 

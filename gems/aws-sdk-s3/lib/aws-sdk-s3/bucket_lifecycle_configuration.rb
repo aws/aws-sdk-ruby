@@ -43,7 +43,7 @@ module Aws::S3
     # Indicates which default minimum object size behavior is applied to the
     # lifecycle configuration.
     #
-    # <note markdown="1"> This parameter applies to general purpose buckets only. It is not
+    # <note markdown="1"> This parameter applies to general purpose buckets only. It isn't
     # supported for directory bucket lifecycle configurations.
     #
     #  </note>
@@ -230,7 +230,7 @@ module Aws::S3
     # @example Request syntax with placeholder values
     #
     #   bucket_lifecycle_configuration.put({
-    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
+    #     checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256, CRC64NVME
     #     lifecycle_configuration: {
     #       rules: [ # required
     #         {

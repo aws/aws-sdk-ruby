@@ -215,6 +215,8 @@ module Aws::PartnerCentralSelling
     ListSolutionsRequestIdentifierList = Shapes::ListShape.new(name: 'ListSolutionsRequestIdentifierList')
     ListSolutionsRequestStatusList = Shapes::ListShape.new(name: 'ListSolutionsRequestStatusList')
     ListSolutionsResponse = Shapes::StructureShape.new(name: 'ListSolutionsResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListTasksSortBase = Shapes::StructureShape.new(name: 'ListTasksSortBase')
     ListTasksSortName = Shapes::StringShape.new(name: 'ListTasksSortName')
     Marketing = Shapes::StructureShape.new(name: 'Marketing')
@@ -318,6 +320,14 @@ module Aws::PartnerCentralSelling
     StopResourceSnapshotJobRequest = Shapes::StructureShape.new(name: 'StopResourceSnapshotJobRequest')
     String = Shapes::StringShape.new(name: 'String')
     SubmitOpportunityRequest = Shapes::StructureShape.new(name: 'SubmitOpportunityRequest')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TaggableResourceArn = Shapes::StringShape.new(name: 'TaggableResourceArn')
     TaskArn = Shapes::StringShape.new(name: 'TaskArn')
     TaskArnOrIdentifier = Shapes::StringShape.new(name: 'TaskArnOrIdentifier')
     TaskIdentifier = Shapes::StringShape.new(name: 'TaskIdentifier')
@@ -325,6 +335,8 @@ module Aws::PartnerCentralSelling
     TaskStatus = Shapes::StringShape.new(name: 'TaskStatus')
     TaskStatuses = Shapes::ListShape.new(name: 'TaskStatuses')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateOpportunityRequest = Shapes::StructureShape.new(name: 'UpdateOpportunityRequest')
     UpdateOpportunityRequestPartnerOpportunityIdentifierString = Shapes::StringShape.new(name: 'UpdateOpportunityRequestPartnerOpportunityIdentifierString')
     UpdateOpportunityResponse = Shapes::StructureShape.new(name: 'UpdateOpportunityResponse')
@@ -498,6 +510,7 @@ module Aws::PartnerCentralSelling
     CreateResourceSnapshotJobRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location_name: "ResourceIdentifier"))
     CreateResourceSnapshotJobRequest.add_member(:resource_snapshot_template_identifier, Shapes::ShapeRef.new(shape: ResourceTemplateName, required: true, location_name: "ResourceSnapshotTemplateIdentifier"))
     CreateResourceSnapshotJobRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "ResourceType"))
+    CreateResourceSnapshotJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateResourceSnapshotJobRequest.struct_class = Types::CreateResourceSnapshotJobRequest
 
     CreateResourceSnapshotJobResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceSnapshotJobArn, location_name: "Arn"))
@@ -969,6 +982,12 @@ module Aws::PartnerCentralSelling
     ListSolutionsResponse.add_member(:solution_summaries, Shapes::ShapeRef.new(shape: SolutionList, required: true, location_name: "SolutionSummaries"))
     ListSolutionsResponse.struct_class = Types::ListSolutionsResponse
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TaggableResourceArn, required: true, location_name: "ResourceArn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     ListTasksSortBase.add_member(:sort_by, Shapes::ShapeRef.new(shape: ListTasksSortName, required: true, location_name: "SortBy"))
     ListTasksSortBase.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, required: true, location_name: "SortOrder"))
     ListTasksSortBase.struct_class = Types::ListTasksSortBase
@@ -1169,6 +1188,7 @@ module Aws::PartnerCentralSelling
     StartEngagementByAcceptingInvitationTaskRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
     StartEngagementByAcceptingInvitationTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: StartEngagementByAcceptingInvitationTaskRequestClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     StartEngagementByAcceptingInvitationTaskRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: EngagementInvitationArnOrIdentifier, required: true, location_name: "Identifier"))
+    StartEngagementByAcceptingInvitationTaskRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     StartEngagementByAcceptingInvitationTaskRequest.struct_class = Types::StartEngagementByAcceptingInvitationTaskRequest
 
     StartEngagementByAcceptingInvitationTaskResponse.add_member(:engagement_invitation_id, Shapes::ShapeRef.new(shape: EngagementInvitationIdentifier, location_name: "EngagementInvitationId"))
@@ -1186,6 +1206,7 @@ module Aws::PartnerCentralSelling
     StartEngagementFromOpportunityTaskRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
     StartEngagementFromOpportunityTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: StartEngagementFromOpportunityTaskRequestClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     StartEngagementFromOpportunityTaskRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: OpportunityIdentifier, required: true, location_name: "Identifier"))
+    StartEngagementFromOpportunityTaskRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     StartEngagementFromOpportunityTaskRequest.struct_class = Types::StartEngagementFromOpportunityTaskRequest
 
     StartEngagementFromOpportunityTaskResponse.add_member(:engagement_id, Shapes::ShapeRef.new(shape: EngagementIdentifier, location_name: "EngagementId"))
@@ -1214,12 +1235,32 @@ module Aws::PartnerCentralSelling
     SubmitOpportunityRequest.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
     SubmitOpportunityRequest.struct_class = Types::SubmitOpportunityRequest
 
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
+    Tag.struct_class = Types::Tag
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TaggableResourceArn, required: true, location_name: "ResourceArn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
     TaskIdentifiers.member = Shapes::ShapeRef.new(shape: TaskArnOrIdentifier)
 
     TaskStatuses.member = Shapes::ShapeRef.new(shape: TaskStatus)
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TaggableResourceArn, required: true, location_name: "ResourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateOpportunityRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
     UpdateOpportunityRequest.add_member(:customer, Shapes::ShapeRef.new(shape: Customer, location_name: "Customer"))
@@ -1281,6 +1322,7 @@ module Aws::PartnerCentralSelling
         o.input = Shapes::ShapeRef.new(shape: AcceptEngagementInvitationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1390,6 +1432,7 @@ module Aws::PartnerCentralSelling
         o.input = Shapes::ShapeRef.new(shape: DeleteResourceSnapshotJobRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1632,6 +1675,7 @@ module Aws::PartnerCentralSelling
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1676,6 +1720,19 @@ module Aws::PartnerCentralSelling
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:put_selling_system_settings, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutSellingSystemSettings"
         o.http_method = "POST"
@@ -1695,6 +1752,7 @@ module Aws::PartnerCentralSelling
         o.input = Shapes::ShapeRef.new(shape: RejectEngagementInvitationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1762,6 +1820,34 @@ module Aws::PartnerCentralSelling
         o.input = Shapes::ShapeRef.new(shape: SubmitOpportunityRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

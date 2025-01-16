@@ -29,24 +29,17 @@ for different buckets.
         # @api private
         class Handler < Seahorse::Client::Handler
           def call(context)
-            if (props = context[:endpoint_properties])
-              # S3 Express endpoint - turn off md5 and enable crc32 default
-              if props['backend'] == 'S3Express'
-                if context.operation_name == :put_object || checksum_required?(context)
-                  context[:default_request_checksum_algorithm] = 'CRC32'
-                end
-                context[:s3_express_endpoint] = true
-              end
+            context[:s3_express_endpoint] = true if s3_express_endpoint?(context)
 
-              # if s3 express auth, use new credentials and sign additional header
-              if context[:auth_scheme]['name'] == 'sigv4-s3express' &&
-                 !context.config.disable_s3_express_session_auth
-                bucket = context.params[:bucket]
-                credentials_provider = context.config.express_credentials_provider
-                credentials = credentials_provider.express_credentials_for(bucket)
-                context[:sigv4_credentials] = credentials # Sign will use this
-              end
+            # if s3 express auth, use new credentials and sign additional header
+            if context[:auth_scheme]['name'] == 'sigv4-s3express' &&
+               !context.config.disable_s3_express_session_auth
+              bucket = context.params[:bucket]
+              credentials_provider = context.config.express_credentials_provider
+              credentials = credentials_provider.express_credentials_for(bucket)
+              context[:sigv4_credentials] = credentials # Sign will use this
             end
+
             with_metric(credentials) { @handler.call(context) }
           end
 
@@ -58,10 +51,8 @@ for different buckets.
             Aws::Plugins::UserAgent.metric('S3_EXPRESS_BUCKET', &block)
           end
 
-          def checksum_required?(context)
-            context.operation.http_checksum_required ||
-              (context.operation.http_checksum &&
-                context.operation.http_checksum['requestChecksumRequired'])
+          def s3_express_endpoint?(context)
+            context[:endpoint_properties]['backend'] == 'S3Express'
           end
         end
 

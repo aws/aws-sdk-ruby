@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2025-01-15)
+------------------
+
+* Feature - Add Tagging support for ResourceSnapshotJob resources
+
 1.3.0 (2024-12-05)
 ------------------
 

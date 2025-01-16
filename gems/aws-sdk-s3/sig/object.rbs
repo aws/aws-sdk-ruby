@@ -47,11 +47,17 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Object.html#checksum_crc32c-instance_method
       def checksum_crc32c: () -> ::String
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Object.html#checksum_crc64nvme-instance_method
+      def checksum_crc64nvme: () -> ::String
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Object.html#checksum_sha1-instance_method
       def checksum_sha1: () -> ::String
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Object.html#checksum_sha256-instance_method
       def checksum_sha256: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Object.html#checksum_type-instance_method
+      def checksum_type: () -> ("COMPOSITE" | "FULL_OBJECT")
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Object.html#etag-instance_method
       def etag: () -> ::String
@@ -153,7 +159,7 @@ module Aws
       def copy_from: (
                        ?acl: ("private" | "public-read" | "public-read-write" | "authenticated-read" | "aws-exec-read" | "bucket-owner-read" | "bucket-owner-full-control"),
                        ?cache_control: ::String,
-                       ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256"),
+                       ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
                        ?content_disposition: ::String,
                        ?content_encoding: ::String,
                        ?content_language: ::String,
@@ -259,7 +265,8 @@ module Aws
                                        ?object_lock_retain_until_date: ::Time,
                                        ?object_lock_legal_hold_status: ("ON" | "OFF"),
                                        ?expected_bucket_owner: ::String,
-                                       ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+                                       ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
+                                       ?checksum_type: ("COMPOSITE" | "FULL_OBJECT")
                                      ) -> MultipartUpload
                                    | (?Hash[Symbol, untyped]) -> MultipartUpload
 
@@ -274,9 +281,10 @@ module Aws
                  ?content_length: ::Integer,
                  ?content_md5: ::String,
                  ?content_type: ::String,
-                 ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256"),
+                 ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
                  ?checksum_crc32: ::String,
                  ?checksum_crc32c: ::String,
+                 ?checksum_crc64nvme: ::String,
                  ?checksum_sha1: ::String,
                  ?checksum_sha256: ::String,
                  ?expires: ::Time,
@@ -391,7 +399,7 @@ module Aws
                               }?
                             },
                             ?request_payer: ("requester"),
-                            ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256"),
+                            ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME"),
                             ?expected_bucket_owner: ::String
                           ) -> Types::RestoreObjectOutput
                         | (?Hash[Symbol, untyped]) -> Types::RestoreObjectOutput
@@ -439,7 +447,7 @@ module Aws
                              ?request_payer: ("requester"),
                              ?bypass_governance_retention: bool,
                              ?expected_bucket_owner: ::String,
-                             ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+                             ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
                            ) -> void
                        | (?Hash[Symbol, untyped]) -> void
       end

@@ -257,10 +257,33 @@ module Aws::PartnerCentralSelling
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [String] :request_checksum_calculation ("when_supported")
+    #     Determines when a checksum will be calculated for request payloads. Values are:
+    #
+    #     * `when_supported` - (default) When set, a checksum will be
+    #       calculated for all request payloads of operations modeled with the
+    #       `httpChecksum` trait where `requestChecksumRequired` is `true` and/or a
+    #       `requestAlgorithmMember` is modeled.
+    #     * `when_required` - When set, a checksum will only be calculated for
+    #       request payloads of operations modeled with the  `httpChecksum` trait where
+    #       `requestChecksumRequired` is `true` or where a `requestAlgorithmMember`
+    #       is modeled and supplied.
+    #
     #   @option options [Integer] :request_min_compression_size_bytes (10240)
     #     The minimum size in bytes that triggers compression for request
     #     bodies. The value must be non-negative integer value between 0
     #     and 10485780 bytes inclusive.
+    #
+    #   @option options [String] :response_checksum_validation ("when_supported")
+    #     Determines when checksum validation will be performed on response payloads. Values are:
+    #
+    #     * `when_supported` - (default) When set, checksum validation is performed on all
+    #       response payloads of operations modeled with the `httpChecksum` trait where
+    #       `responseAlgorithms` is modeled, except when no modeled checksum algorithms
+    #       are supported.
+    #     * `when_required` - When set, checksum validation is not performed on
+    #       response payloads of operations unless the checksum algorithm is supported and
+    #       the `requestValidationModeMember` member is set to `ENABLED`.
     #
     #   @option options [Proc] :retry_backoff
     #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
@@ -835,8 +858,8 @@ module Aws::PartnerCentralSelling
     # 2.  To associate a solution with the opportunity, use
     #     `AssociateOpportunity`.
     #
-    # 3.  To submit the opportunity, use
-    #     `StartEngagementFromOpportunityTask`.
+    # 3.  To start the engagement with AWS, use
+    #     `StartEngagementFromOpportunity`.
     #
     # After submission, you can't edit the opportunity until the review is
     # complete. But opportunities in the `Pending Submission` state must
@@ -963,13 +986,6 @@ module Aws::PartnerCentralSelling
     #   * Cosell—Support for Public Tender/RFx: Opportunity related to the
     #     public sector where the partner needs Amazon Web Services RFx
     #     support.
-    #
-    #   * Do Not Need Support from AWS Sales Rep: Indicates that a partner
-    #     doesn't need support from an Amazon Web Services sales
-    #     representative, and the partner solely manages the opportunity.
-    #     It's possible to request coselling support on these opportunities
-    #     at any stage during their lifecycles. This is also known as a
-    #     for-visibility-only (FVO) opportunity.
     #
     # @option params [Types::Project] :project
     #   An object that contains project details for the `Opportunity`.
@@ -1179,9 +1195,8 @@ module Aws::PartnerCentralSelling
     #   values are `AWS` and ` Sandbox`.
     #
     # @option params [required, String] :client_token
-    #   Specifies a unique, client-generated UUID to ensure that the request
-    #   is handled exactly once. This token helps prevent duplicate snapshot
-    #   job creations.
+    #   A client-generated UUID used for idempotency check. The token helps
+    #   prevent duplicate job creations.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1192,7 +1207,7 @@ module Aws::PartnerCentralSelling
     #
     # @option params [required, String] :resource_identifier
     #   Specifies the identifier of the specific resource to be snapshotted.
-    #   The format depends on the `ResourceType`.
+    #   The format depends on the ` ResourceType`.
     #
     # @option params [required, String] :resource_snapshot_template_identifier
     #   Specifies the name of the template that defines the schema for the
@@ -1200,7 +1215,10 @@ module Aws::PartnerCentralSelling
     #
     # @option params [required, String] :resource_type
     #   The type of resource for which the snapshot job is being created. Must
-    #   be one of the supported resource types `Opportunity`.
+    #   be one of the supported resource types i.e. `Opportunity`
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of objects specifying each tag name and value.
     #
     # @return [Types::CreateResourceSnapshotJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1216,6 +1234,12 @@ module Aws::PartnerCentralSelling
     #     resource_identifier: "ResourceIdentifier", # required
     #     resource_snapshot_template_identifier: "ResourceTemplateName", # required
     #     resource_type: "Opportunity", # required, accepts Opportunity
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2011,7 +2035,7 @@ module Aws::PartnerCentralSelling
     #   resp.task_summaries[0].engagement_invitation_id #=> String
     #   resp.task_summaries[0].message #=> String
     #   resp.task_summaries[0].opportunity_id #=> String
-    #   resp.task_summaries[0].reason_code #=> String, one of "InvitationAccessDenied", "InvitationValidationFailed", "EngagementAccessDenied", "OpportunityAccessDenied", "ResourceSnapshotJobAccessDenied", "ResourceSnapshotJobValidationFailed", "ResourceSnapshotJobConflict", "EngagementValidationFailed", "EngagementConflict", "OpportunitySubmissionFailed", "EngagementInvitationConflict", "OpportunityValidationFailed", "OpportunityConflict", "ResourceSnapshotAccessDenied", "ResourceSnapshotValidationFailed", "ResourceSnapshotConflict", "InternalError", "ServiceQuotaExceeded", "RequestThrottled"
+    #   resp.task_summaries[0].reason_code #=> String, one of "InvitationAccessDenied", "InvitationValidationFailed", "EngagementAccessDenied", "OpportunityAccessDenied", "ResourceSnapshotJobAccessDenied", "ResourceSnapshotJobValidationFailed", "ResourceSnapshotJobConflict", "EngagementValidationFailed", "EngagementConflict", "OpportunitySubmissionFailed", "EngagementInvitationConflict", "InternalError", "OpportunityValidationFailed", "OpportunityConflict", "ResourceSnapshotAccessDenied", "ResourceSnapshotValidationFailed", "ResourceSnapshotConflict", "ServiceQuotaExceeded", "RequestThrottled"
     #   resp.task_summaries[0].resource_snapshot_job_id #=> String
     #   resp.task_summaries[0].start_time #=> Time
     #   resp.task_summaries[0].task_arn #=> String
@@ -2101,7 +2125,7 @@ module Aws::PartnerCentralSelling
     #   resp.task_summaries[0].engagement_invitation_id #=> String
     #   resp.task_summaries[0].message #=> String
     #   resp.task_summaries[0].opportunity_id #=> String
-    #   resp.task_summaries[0].reason_code #=> String, one of "InvitationAccessDenied", "InvitationValidationFailed", "EngagementAccessDenied", "OpportunityAccessDenied", "ResourceSnapshotJobAccessDenied", "ResourceSnapshotJobValidationFailed", "ResourceSnapshotJobConflict", "EngagementValidationFailed", "EngagementConflict", "OpportunitySubmissionFailed", "EngagementInvitationConflict", "OpportunityValidationFailed", "OpportunityConflict", "ResourceSnapshotAccessDenied", "ResourceSnapshotValidationFailed", "ResourceSnapshotConflict", "InternalError", "ServiceQuotaExceeded", "RequestThrottled"
+    #   resp.task_summaries[0].reason_code #=> String, one of "InvitationAccessDenied", "InvitationValidationFailed", "EngagementAccessDenied", "OpportunityAccessDenied", "ResourceSnapshotJobAccessDenied", "ResourceSnapshotJobValidationFailed", "ResourceSnapshotJobConflict", "EngagementValidationFailed", "EngagementConflict", "OpportunitySubmissionFailed", "EngagementInvitationConflict", "InternalError", "OpportunityValidationFailed", "OpportunityConflict", "ResourceSnapshotAccessDenied", "ResourceSnapshotValidationFailed", "ResourceSnapshotConflict", "ServiceQuotaExceeded", "RequestThrottled"
     #   resp.task_summaries[0].resource_snapshot_job_id #=> String
     #   resp.task_summaries[0].start_time #=> Time
     #   resp.task_summaries[0].task_arn #=> String
@@ -2216,17 +2240,17 @@ module Aws::PartnerCentralSelling
       req.send_request(options)
     end
 
-    # Retrieves the details of member partners in an engagement. This
-    # operation can only be invoked by members of the engagement. The
+    # Retrieves the details of member partners in an Engagement. This
+    # operation can only be invoked by members of the Engagement. The
     # `ListEngagementMembers` operation allows you to fetch information
-    # about the members of a specific engagement. This action is restricted
-    # to members of the engagement being queried.
+    # about the members of a specific Engagement. This action is restricted
+    # to members of the Engagement being queried.
     #
     # @option params [required, String] :catalog
     #   The catalog related to the request.
     #
     # @option params [required, String] :identifier
-    #   Identifier of the engagement record to retrieve members from.
+    #   Identifier of the Engagement record to retrieve members from.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in a single call.
@@ -2272,11 +2296,15 @@ module Aws::PartnerCentralSelling
     #
     # @option params [required, String] :catalog
     #   Specifies the catalog in which to search for engagement-resource
-    #   associations.
+    #   associations. Valid Values: "AWS" or "Sandbox"
+    #
+    #   * `AWS` for production environments.
+    #
+    #   * `Sandbox` for testing and development purposes.
     #
     # @option params [String] :created_by
-    #   Filters the results to include only associations with resources owned
-    #   by the specified AWS account. Use this when you want to find
+    #   Filters the response to include only snapshots of resources owned by
+    #   the specified AWS account ID. Use this when you want to find
     #   associations related to resources owned by a particular account.
     #
     # @option params [String] :engagement_identifier
@@ -2340,7 +2368,7 @@ module Aws::PartnerCentralSelling
       req.send_request(options)
     end
 
-    # This action allows users to retrieve a list of engagement records from
+    # This action allows users to retrieve a list of Engagement records from
     # Partner Central. This action can be used to manage and track various
     # engagements across different stages of the partner selling process.
     #
@@ -2624,13 +2652,25 @@ module Aws::PartnerCentralSelling
     end
 
     # Retrieves a list of resource view snapshots based on specified
-    # criteria.
+    # criteria. This operation supports various use cases, including:
+    #
+    # * Fetching all snapshots associated with an engagement.
+    #
+    # * Retrieving snapshots of a specific resource type within an
+    #   engagement.
+    #
+    # * Obtaining snapshots for a particular resource using a specified
+    #   template.
+    #
+    # * Accessing the latest snapshot of a resource within an engagement.
+    #
+    # * Filtering snapshots by resource owner.
     #
     # @option params [required, String] :catalog
     #   Specifies the catalog related to the request.
     #
     # @option params [String] :created_by
-    #   Filters the response to include only snapshots of resources created by
+    #   Filters the response to include only snapshots of resources owned by
     #   the specified AWS account.
     #
     # @option params [required, String] :engagement_identifier
@@ -2777,6 +2817,37 @@ module Aws::PartnerCentralSelling
       req.send_request(options)
     end
 
+    # Returns a list of tags for a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource for which you want to
+    #   retrieve tags.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "TaggableResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Updates the currently set system settings, which include the IAM Role
     # used for resource snapshot jobs.
     #
@@ -2893,6 +2964,9 @@ module Aws::PartnerCentralSelling
     #   accepted. Providing the correct identifier helps ensure that the
     #   correct engagement is processed.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of objects specifying each tag name and value.
+    #
     # @return [Types::StartEngagementByAcceptingInvitationTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartEngagementByAcceptingInvitationTaskResponse#engagement_invitation_id #engagement_invitation_id} => String
@@ -2911,6 +2985,12 @@ module Aws::PartnerCentralSelling
     #     catalog: "CatalogIdentifier", # required
     #     client_token: "StartEngagementByAcceptingInvitationTaskRequestClientTokenString", # required
     #     identifier: "EngagementInvitationArnOrIdentifier", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2918,7 +2998,7 @@ module Aws::PartnerCentralSelling
     #   resp.engagement_invitation_id #=> String
     #   resp.message #=> String
     #   resp.opportunity_id #=> String
-    #   resp.reason_code #=> String, one of "InvitationAccessDenied", "InvitationValidationFailed", "EngagementAccessDenied", "OpportunityAccessDenied", "ResourceSnapshotJobAccessDenied", "ResourceSnapshotJobValidationFailed", "ResourceSnapshotJobConflict", "EngagementValidationFailed", "EngagementConflict", "OpportunitySubmissionFailed", "EngagementInvitationConflict", "OpportunityValidationFailed", "OpportunityConflict", "ResourceSnapshotAccessDenied", "ResourceSnapshotValidationFailed", "ResourceSnapshotConflict", "InternalError", "ServiceQuotaExceeded", "RequestThrottled"
+    #   resp.reason_code #=> String, one of "InvitationAccessDenied", "InvitationValidationFailed", "EngagementAccessDenied", "OpportunityAccessDenied", "ResourceSnapshotJobAccessDenied", "ResourceSnapshotJobValidationFailed", "ResourceSnapshotJobConflict", "EngagementValidationFailed", "EngagementConflict", "OpportunitySubmissionFailed", "EngagementInvitationConflict", "InternalError", "OpportunityValidationFailed", "OpportunityConflict", "ResourceSnapshotAccessDenied", "ResourceSnapshotValidationFailed", "ResourceSnapshotConflict", "ServiceQuotaExceeded", "RequestThrottled"
     #   resp.resource_snapshot_job_id #=> String
     #   resp.start_time #=> Time
     #   resp.task_arn #=> String
@@ -2963,6 +3043,9 @@ module Aws::PartnerCentralSelling
     #   task is to be initiated. This helps ensure that the task is applied to
     #   the correct opportunity.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of objects specifying each tag name and value.
+    #
     # @return [Types::StartEngagementFromOpportunityTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartEngagementFromOpportunityTaskResponse#engagement_id #engagement_id} => String
@@ -2986,6 +3069,12 @@ module Aws::PartnerCentralSelling
     #     catalog: "CatalogIdentifier", # required
     #     client_token: "StartEngagementFromOpportunityTaskRequestClientTokenString", # required
     #     identifier: "OpportunityIdentifier", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2994,7 +3083,7 @@ module Aws::PartnerCentralSelling
     #   resp.engagement_invitation_id #=> String
     #   resp.message #=> String
     #   resp.opportunity_id #=> String
-    #   resp.reason_code #=> String, one of "InvitationAccessDenied", "InvitationValidationFailed", "EngagementAccessDenied", "OpportunityAccessDenied", "ResourceSnapshotJobAccessDenied", "ResourceSnapshotJobValidationFailed", "ResourceSnapshotJobConflict", "EngagementValidationFailed", "EngagementConflict", "OpportunitySubmissionFailed", "EngagementInvitationConflict", "OpportunityValidationFailed", "OpportunityConflict", "ResourceSnapshotAccessDenied", "ResourceSnapshotValidationFailed", "ResourceSnapshotConflict", "InternalError", "ServiceQuotaExceeded", "RequestThrottled"
+    #   resp.reason_code #=> String, one of "InvitationAccessDenied", "InvitationValidationFailed", "EngagementAccessDenied", "OpportunityAccessDenied", "ResourceSnapshotJobAccessDenied", "ResourceSnapshotJobValidationFailed", "ResourceSnapshotJobConflict", "EngagementValidationFailed", "EngagementConflict", "OpportunitySubmissionFailed", "EngagementInvitationConflict", "InternalError", "OpportunityValidationFailed", "OpportunityConflict", "ResourceSnapshotAccessDenied", "ResourceSnapshotValidationFailed", "ResourceSnapshotConflict", "ServiceQuotaExceeded", "RequestThrottled"
     #   resp.resource_snapshot_job_id #=> String
     #   resp.start_time #=> Time
     #   resp.task_arn #=> String
@@ -3013,7 +3102,12 @@ module Aws::PartnerCentralSelling
     # Starts a resource snapshot job that has been previously created.
     #
     # @option params [required, String] :catalog
-    #   Specifies the catalog related to the request.
+    #   Specifies the catalog related to the request. Valid values are:
+    #
+    #   * AWS: Starts the request from the production AWS environment.
+    #
+    #   * Sandbox: Starts the request from a sandbox environment used for
+    #     testing or development purposes.
     #
     # @option params [required, String] :resource_snapshot_job_identifier
     #   The identifier of the resource snapshot job to start.
@@ -3040,7 +3134,12 @@ module Aws::PartnerCentralSelling
     # stopped.
     #
     # @option params [required, String] :catalog
-    #   Specifies the catalog related to the request.
+    #   Specifies the catalog related to the request. Valid values are:
+    #
+    #   * AWS: Stops the request from the production AWS environment.
+    #
+    #   * Sandbox: Stops the request from a sandbox environment used for
+    #     testing or development purposes.
     #
     # @option params [required, String] :resource_snapshot_job_identifier
     #   The identifier of the job to stop.
@@ -3063,24 +3162,42 @@ module Aws::PartnerCentralSelling
       req.send_request(options)
     end
 
-    # Use this action to submit an opportunity that was previously created
+    # Use this action to submit an Opportunity that was previously created
     # by partner for AWS review. After you perform this action, the
-    # opportunity becomes non-editable until it is reviewed by AWS and has `
+    # Opportunity becomes non-editable until it is reviewed by AWS and has `
     # LifeCycle.ReviewStatus ` as either `Approved` or `Action Required`.
     #
     # @option params [required, String] :catalog
-    #   Specifies the catalog related to the request.
+    #   Specifies the catalog related to the request. Valid values are:
+    #
+    #   * AWS: Submits the opportunity request from the production AWS
+    #     environment.
+    #
+    #   * Sandbox: Submits the opportunity request from a sandbox environment
+    #     used for testing or development purposes.
     #
     # @option params [required, String] :identifier
-    #   The identifier of the opportunity previously created by partner and
+    #   The identifier of the Opportunity previously created by partner and
     #   needs to be submitted.
     #
     # @option params [required, String] :involvement_type
     #   Specifies the level of AWS sellers' involvement on the opportunity.
+    #   Valid values:
+    #
+    #   * `Co-sell`: Indicates the user wants to co-sell with AWS. Share the
+    #     opportunity with AWS to receive deal assistance and support.
+    #
+    #   * `For Visibility Only`: Indicates that the user does not need support
+    #     from AWS Sales Rep. Share this opportunity with AWS for visibility
+    #     only, you will not receive deal assistance and support.
     #
     # @option params [String] :visibility
     #   Determines whether to restrict visibility of the opportunity from AWS
-    #   sales. Default value is Full.
+    #   sales. Default value is Full. Valid values:
+    #
+    #   * `Full`: The opportunity is fully visible to AWS sales.
+    #
+    #   * `Limited`: The opportunity has restricted visibility to AWS sales.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3099,6 +3216,65 @@ module Aws::PartnerCentralSelling
     # @param [Hash] params ({})
     def submit_opportunity(params = {}, options = {})
       req = build_request(:submit_opportunity, params)
+      req.send_request(options)
+    end
+
+    # Assigns one or more tags (key-value pairs) to the specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to tag.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   A map of the key-value pairs of the tag or tags to assign to the
+    #   resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "TaggableResourceArn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes a tag or tags from a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to untag.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The keys of the key-value pairs for the tag or tags you want to remove
+    #   from the specified resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "TaggableResourceArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -3205,13 +3381,6 @@ module Aws::PartnerCentralSelling
     #   * Cosell—Support for Public Tender/RFx: Opportunity related to the
     #     public sector where the partner needs RFx support from Amazon Web
     #     Services.
-    #
-    #   * Do Not Need Support from AWS Sales Rep: Indicates that a partner
-    #     doesn't need support from an Amazon Web Services Sales
-    #     representative. The opportunity is managed solely by the partner.
-    #     It's possible to request coselling support on these opportunities
-    #     at any stage during their lifecycle. Also known as,
-    #     for-visibility-only (FVO) opportunity.
     #
     # @option params [Types::Project] :project
     #   An object that contains project details summary for the `Opportunity`.
@@ -3348,7 +3517,7 @@ module Aws::PartnerCentralSelling
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-partnercentralselling'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

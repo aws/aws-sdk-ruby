@@ -903,13 +903,6 @@ module Aws::PartnerCentralSelling
     #   * Cosell—Support for Public Tender/RFx: Opportunity related to the
     #     public sector where the partner needs Amazon Web Services RFx
     #     support.
-    #
-    #   * Do Not Need Support from AWS Sales Rep: Indicates that a partner
-    #     doesn't need support from an Amazon Web Services sales
-    #     representative, and the partner solely manages the opportunity.
-    #     It's possible to request coselling support on these opportunities
-    #     at any stage during their lifecycles. This is also known as a
-    #     for-visibility-only (FVO) opportunity.
     #   @return [Array<String>]
     #
     # @!attribute [rw] project
@@ -976,9 +969,8 @@ module Aws::PartnerCentralSelling
     #   @return [String]
     #
     # @!attribute [rw] client_token
-    #   Specifies a unique, client-generated UUID to ensure that the request
-    #   is handled exactly once. This token helps prevent duplicate snapshot
-    #   job creations.
+    #   A client-generated UUID used for idempotency check. The token helps
+    #   prevent duplicate job creations.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -991,7 +983,7 @@ module Aws::PartnerCentralSelling
     #
     # @!attribute [rw] resource_identifier
     #   Specifies the identifier of the specific resource to be snapshotted.
-    #   The format depends on the `ResourceType`.
+    #   The format depends on the ` ResourceType`.
     #   @return [String]
     #
     # @!attribute [rw] resource_snapshot_template_identifier
@@ -1001,8 +993,12 @@ module Aws::PartnerCentralSelling
     #
     # @!attribute [rw] resource_type
     #   The type of resource for which the snapshot job is being created.
-    #   Must be one of the supported resource types `Opportunity`.
+    #   Must be one of the supported resource types i.e. `Opportunity`
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of objects specifying each tag name and value.
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/CreateResourceSnapshotJobRequest AWS API Documentation
     #
@@ -1012,7 +1008,8 @@ module Aws::PartnerCentralSelling
       :engagement_identifier,
       :resource_identifier,
       :resource_snapshot_template_identifier,
-      :resource_type)
+      :resource_type,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1551,7 +1548,9 @@ module Aws::PartnerCentralSelling
     #   @return [String]
     #
     # @!attribute [rw] created_by
-    #   The AWS account ID of the entity that created the association.
+    #   The AWS account ID of the entity that owns the resource. Identifies
+    #   the account responsible for or having primary control over the
+    #   resource.
     #   @return [String]
     #
     # @!attribute [rw] engagement_id
@@ -1601,27 +1600,27 @@ module Aws::PartnerCentralSelling
     # An object that contains an `Engagement`'s subset of fields.
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the created engagement.
+    #   The Amazon Resource Name (ARN) of the created Engagement.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The date and time when the engagement was created.
+    #   The date and time when the Engagement was created.
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   The AWS account ID of the engagement creator.
+    #   The AWS Account ID of the Engagement creator.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The unique identifier for the engagement.
+    #   The unique identifier for the Engagement.
     #   @return [String]
     #
     # @!attribute [rw] member_count
-    #   The number of members in the engagement.
+    #   The number of members in the Engagement.
     #   @return [Integer]
     #
     # @!attribute [rw] title
-    #   The title of the engagement.
+    #   The title of the Engagement.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/EngagementSummary AWS API Documentation
@@ -2144,13 +2143,6 @@ module Aws::PartnerCentralSelling
     #   * Cosell—Support for Public Tender/RFx: Opportunity related to the
     #     public sector where the partner needs Amazon Web Services RFx
     #     support.
-    #
-    #   * Do Not Need Support from Amazon Web Services Sales Rep: Indicates
-    #     that a partner doesn't need support from an Amazon Web Services
-    #     sales representative, and the partner solely manages the
-    #     opportunity. It's possible to request coselling support on these
-    #     opportunities at any stage during their lifecycle. Also known as,
-    #     for-visibility-only (FVO) opportunity.
     #   @return [Array<String>]
     #
     # @!attribute [rw] project
@@ -2218,18 +2210,18 @@ module Aws::PartnerCentralSelling
     end
 
     # @!attribute [rw] arn
-    #   he Amazon Resource Name (ARN) of the snapshot job. This globally
+    #   The Amazon Resource Name (ARN) of the snapshot job. This globally
     #   unique identifier can be used for resource-specific operations
     #   across AWS services.
     #   @return [String]
     #
     # @!attribute [rw] catalog
     #   The catalog in which the snapshot job was created. This will match
-    #   the catalog specified in the request.
+    #   the Catalog specified in the request.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The date and time when the snapshot job was created, in ISO 8601
+    #   The date and time when the snapshot job was created in ISO 8601
     #   format (UTC). Example: "2023-05-01T20:37:46Z"
     #   @return [Time]
     #
@@ -2240,7 +2232,7 @@ module Aws::PartnerCentralSelling
     #
     # @!attribute [rw] id
     #   The unique identifier of the snapshot job. This matches the
-    #   `ResourceSnapshotJobIdentifier` provided in the request.
+    #   ResourceSnapshotJobIdentifier provided in the request.
     #   @return [String]
     #
     # @!attribute [rw] last_failure
@@ -2262,7 +2254,7 @@ module Aws::PartnerCentralSelling
     #
     # @!attribute [rw] resource_id
     #   The identifier of the specific resource being snapshotted. The
-    #   format may vary depending on the `ResourceType`.
+    #   format might vary depending on the ResourceType.
     #   @return [String]
     #
     # @!attribute [rw] resource_snapshot_template_name
@@ -2273,7 +2265,7 @@ module Aws::PartnerCentralSelling
     #
     # @!attribute [rw] resource_type
     #   The type of resource being snapshotted. This would have
-    #   `Opportunity` as a value as it is dependent on the supported
+    #   "Opportunity" as a value as it is dependent on the supported
     #   resource type.
     #   @return [String]
     #
@@ -2358,9 +2350,8 @@ module Aws::PartnerCentralSelling
     end
 
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the snapshot. This globally unique
-    #   identifier can be used for resource-specific operations across AWS
-    #   services.
+    #   The Amazon Resource Name (ARN) that uniquely identifies the resource
+    #   snapshot.
     #   @return [String]
     #
     # @!attribute [rw] catalog
@@ -2392,7 +2383,7 @@ module Aws::PartnerCentralSelling
     #
     # @!attribute [rw] resource_id
     #   The identifier of the specific resource that was snapshotted.
-    #   Matches the `ResourceIdentifier` specified in the request.
+    #   Matches the ResourceIdentifier specified in the request.
     #   @return [String]
     #
     # @!attribute [rw] resource_snapshot_template_name
@@ -2402,7 +2393,7 @@ module Aws::PartnerCentralSelling
     #
     # @!attribute [rw] resource_type
     #   The type of the resource that was snapshotted. Matches the
-    #   `ResourceType` specified in the request.
+    #   ResourceType specified in the request.
     #   @return [String]
     #
     # @!attribute [rw] revision
@@ -3062,9 +3053,7 @@ module Aws::PartnerCentralSelling
     #   @return [String]
     #
     # @!attribute [rw] engagement_invitation_id
-    #   The unique identifier of the engagement identifier created as a
-    #   result of the task. This field is populated when the task is
-    #   completed successfully.
+    #   The unique identifier of the Engagement Invitation.
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -3306,7 +3295,7 @@ module Aws::PartnerCentralSelling
     #   @return [String]
     #
     # @!attribute [rw] identifier
-    #   Identifier of the engagement record to retrieve members from.
+    #   Identifier of the Engagement record to retrieve members from.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -3351,12 +3340,16 @@ module Aws::PartnerCentralSelling
 
     # @!attribute [rw] catalog
     #   Specifies the catalog in which to search for engagement-resource
-    #   associations.
+    #   associations. Valid Values: "AWS" or "Sandbox"
+    #
+    #   * `AWS` for production environments.
+    #
+    #   * `Sandbox` for testing and development purposes.
     #   @return [String]
     #
     # @!attribute [rw] created_by
-    #   Filters the results to include only associations with resources
-    #   owned by the specified AWS account. Use this when you want to find
+    #   Filters the response to include only snapshots of resources owned by
+    #   the specified AWS account ID. Use this when you want to find
     #   associations related to resources owned by a particular account.
     #   @return [String]
     #
@@ -3645,8 +3638,8 @@ module Aws::PartnerCentralSelling
     #   @return [String]
     #
     # @!attribute [rw] created_by
-    #   Filters the response to include only snapshots of resources created
-    #   by the specified AWS account.
+    #   Filters the response to include only snapshots of resources owned by
+    #   the specified AWS account.
     #   @return [String]
     #
     # @!attribute [rw] engagement_identifier
@@ -3785,6 +3778,32 @@ module Aws::PartnerCentralSelling
     class ListSolutionsResponse < Struct.new(
       :next_token,
       :solution_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource for which you want to
+    #   retrieve tags.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   A map of the key-value pairs for the tag or tags assigned to the
+    #   specified resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4669,9 +4688,7 @@ module Aws::PartnerCentralSelling
     #   @return [String]
     #
     # @!attribute [rw] engagement_id
-    #   The unique identifier for the engagement within the AWS Partner
-    #   Central system. This ID is used for direct references to the
-    #   engagement within the service.
+    #   The unique identifier of the Engagement.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -4681,7 +4698,13 @@ module Aws::PartnerCentralSelling
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   Represents the current status of the resource snapshot job.
+    #   The current status of the snapshot job.
+    #
+    #   Valid values:
+    #
+    #   * STOPPED: The job is not currently running.
+    #
+    #   * RUNNING: The job is actively executing.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/ResourceSnapshotJobSummary AWS API Documentation
@@ -4730,8 +4753,8 @@ module Aws::PartnerCentralSelling
     #   @return [String]
     #
     # @!attribute [rw] created_by
-    #   The AWS account ID of the principal (user or role) who created the
-    #   snapshot. This helps in tracking the origin of the snapshot.
+    #   The AWS account ID of the entity that owns the resource from which
+    #   the snapshot was created.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -4986,12 +5009,17 @@ module Aws::PartnerCentralSelling
     #   correct engagement is processed.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of objects specifying each tag name and value.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/StartEngagementByAcceptingInvitationTaskRequest AWS API Documentation
     #
     class StartEngagementByAcceptingInvitationTaskRequest < Struct.new(
       :catalog,
       :client_token,
-      :identifier)
+      :identifier,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5016,7 +5044,7 @@ module Aws::PartnerCentralSelling
     #   @return [String]
     #
     # @!attribute [rw] resource_snapshot_job_id
-    #   The identifier of the resource snapshot job created as part of this
+    #   The identifier of the Resource Snapshot Job created as part of this
     #   task.
     #   @return [String]
     #
@@ -5082,24 +5110,29 @@ module Aws::PartnerCentralSelling
     #   to the correct opportunity.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of objects specifying each tag name and value.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/StartEngagementFromOpportunityTaskRequest AWS API Documentation
     #
     class StartEngagementFromOpportunityTaskRequest < Struct.new(
       :aws_submission,
       :catalog,
       :client_token,
-      :identifier)
+      :identifier,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] engagement_id
-    #   The identifier of the newly created engagement. Only populated if
+    #   The identifier of the newly created Engagement. Only populated if
     #   TaskStatus is COMPLETE.
     #   @return [String]
     #
     # @!attribute [rw] engagement_invitation_id
-    #   The identifier of the new engagement invitation. Only populated if
+    #   The identifier of the new Engagement invitation. Only populated if
     #   TaskStatus is COMPLETE.
     #   @return [String]
     #
@@ -5121,7 +5154,7 @@ module Aws::PartnerCentralSelling
     # @!attribute [rw] resource_snapshot_job_id
     #   The identifier of the resource snapshot job created to add the
     #   opportunity resource snapshot to the Engagement. Only populated if
-    #   TaskStatus is COMPLETE.
+    #   TaskStatus is COMPLETE
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -5163,7 +5196,12 @@ module Aws::PartnerCentralSelling
     end
 
     # @!attribute [rw] catalog
-    #   Specifies the catalog related to the request.
+    #   Specifies the catalog related to the request. Valid values are:
+    #
+    #   * AWS: Starts the request from the production AWS environment.
+    #
+    #   * Sandbox: Starts the request from a sandbox environment used for
+    #     testing or development purposes.
     #   @return [String]
     #
     # @!attribute [rw] resource_snapshot_job_identifier
@@ -5180,7 +5218,12 @@ module Aws::PartnerCentralSelling
     end
 
     # @!attribute [rw] catalog
-    #   Specifies the catalog related to the request.
+    #   Specifies the catalog related to the request. Valid values are:
+    #
+    #   * AWS: Stops the request from the production AWS environment.
+    #
+    #   * Sandbox: Stops the request from a sandbox environment used for
+    #     testing or development purposes.
     #   @return [String]
     #
     # @!attribute [rw] resource_snapshot_job_identifier
@@ -5197,21 +5240,39 @@ module Aws::PartnerCentralSelling
     end
 
     # @!attribute [rw] catalog
-    #   Specifies the catalog related to the request.
+    #   Specifies the catalog related to the request. Valid values are:
+    #
+    #   * AWS: Submits the opportunity request from the production AWS
+    #     environment.
+    #
+    #   * Sandbox: Submits the opportunity request from a sandbox
+    #     environment used for testing or development purposes.
     #   @return [String]
     #
     # @!attribute [rw] identifier
-    #   The identifier of the opportunity previously created by partner and
+    #   The identifier of the Opportunity previously created by partner and
     #   needs to be submitted.
     #   @return [String]
     #
     # @!attribute [rw] involvement_type
     #   Specifies the level of AWS sellers' involvement on the opportunity.
+    #   Valid values:
+    #
+    #   * `Co-sell`: Indicates the user wants to co-sell with AWS. Share the
+    #     opportunity with AWS to receive deal assistance and support.
+    #
+    #   * `For Visibility Only`: Indicates that the user does not need
+    #     support from AWS Sales Rep. Share this opportunity with AWS for
+    #     visibility only, you will not receive deal assistance and support.
     #   @return [String]
     #
     # @!attribute [rw] visibility
     #   Determines whether to restrict visibility of the opportunity from
-    #   AWS sales. Default value is Full.
+    #   AWS sales. Default value is Full. Valid values:
+    #
+    #   * `Full`: The opportunity is fully visible to AWS sales.
+    #
+    #   * `Limited`: The opportunity has restricted visibility to AWS sales.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/SubmitOpportunityRequest AWS API Documentation
@@ -5224,6 +5285,47 @@ module Aws::PartnerCentralSelling
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # The key-value pair assigned to a specified resource.
+    #
+    # @!attribute [rw] key
+    #   The key in the tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value in the tag.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A map of the key-value pairs of the tag or tags to assign to the
+    #   resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
 
     # This error occurs when there are too many requests sent. Review the
     # provided quotas and adapt your usage to avoid throttling.
@@ -5245,6 +5347,29 @@ module Aws::PartnerCentralSelling
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to
+    #   untag.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The keys of the key-value pairs for the tag or tags you want to
+    #   remove from the specified resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] catalog
     #   Specifies the catalog associated with the request. This field takes
@@ -5347,13 +5472,6 @@ module Aws::PartnerCentralSelling
     #   * Cosell—Support for Public Tender/RFx: Opportunity related to the
     #     public sector where the partner needs RFx support from Amazon Web
     #     Services.
-    #
-    #   * Do Not Need Support from AWS Sales Rep: Indicates that a partner
-    #     doesn't need support from an Amazon Web Services Sales
-    #     representative. The opportunity is managed solely by the partner.
-    #     It's possible to request coselling support on these opportunities
-    #     at any stage during their lifecycle. Also known as,
-    #     for-visibility-only (FVO) opportunity.
     #   @return [Array<String>]
     #
     # @!attribute [rw] project

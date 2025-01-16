@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+3.216.0 (2025-01-15)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Feature - Always calculate request checksums for operations that support or require it. Supported config options are `when_supported` and `when_required`. The default value is `when_supported`. This option is configured in code with `:request_checksum_calculation`, in the shared config file as `request_checksum_calculation`, and in the ENV as `ENV['AWS_REQUEST_CHECKSUM_CALCULATION']`.
+
+* Feature - Always validate response checksums for operations that support or require it. Supported config options are `when_supported` and `when_required`. The default value is `when_supported`. This option is configured in code with `:response_checksum_validation`, in the shared config file as `response_checksum_validation`, and in the ENV as `ENV['AWS_RESPONSE_CHECKSUM_VALIDATION']`.
+
+* Feature - Support CRC64NVME checksums through the `aws-crt` gem.
+
 3.215.1 (2025-01-14)
 ------------------
 

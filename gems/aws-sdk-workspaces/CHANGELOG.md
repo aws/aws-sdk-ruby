@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.129.0 (2025-01-15)
+------------------
+
+* Feature - Added GeneralPurpose.4xlarge & GeneralPurpose.8xlarge ComputeTypes.
+
 1.128.0 (2024-12-19)
 ------------------
 
