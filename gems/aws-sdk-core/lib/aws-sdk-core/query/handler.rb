@@ -26,11 +26,11 @@ module Aws
       # @param [Seahorse::Client::RequestContext] context
       # @return [Seahorse::Client::Response]
       def call(context)
-        t_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+        t_total_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
         build_request(context)
-        t_build_request_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-        puts "Build Request Time: #{t_build_request_end - t_start}"
+        ret = ''
         @handler.call(context).on_success do |resp|
+          t_deserial_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
           resp.error = nil
           parsed = parse_xml(context)
           if parsed.nil? || parsed == EmptyStructure
@@ -38,12 +38,20 @@ module Aws
           else
             resp.data = parsed
           end
+          ret = resp
+          puts "This should be the content length: #{ret["Content-Length"]}"
+          t_deserial_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+          puts "#### Deserialization Time: #{t_deserial_end - t_deserial_start}"
         end
+        t_total_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+        puts "#### Total Time: #{t_total_end - t_total_start}"
+        return ret
       end
 
       private
 
       def build_request(context)
+        t_serial_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
         context.http_request.http_method = 'POST'
         context.http_request.headers['Content-Type'] = CONTENT_TYPE
         param_list = ParamList.new
@@ -53,6 +61,8 @@ module Aws
           apply_params(param_list, context.params, input_shape)
         end
         context.http_request.body = param_list.to_io
+        t_serial_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+        puts "#### Serialization Time: #{t_serial_end - t_serial_start}"
       end
 
       def apply_params(param_list, params, rules)

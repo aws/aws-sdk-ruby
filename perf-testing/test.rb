@@ -4,7 +4,8 @@
 # Aws::CloudWatch::Client.remove_plugin(Aws::Plugins::Protocols::Query)
 # query_cloudwatch = Aws::CloudWatch::Client.new(plugins: [Aws::Plugins::Protocols::Query])
 # cbor_cloudwatch = Aws::CloudWatch::Client.new(plugins: [Aws::Plugins::Protocols::RpcV2])
-#
+# query_cloudwatch.describe_alarms
+
 # # Make a Query request to query_cloudwatch
 # query_cloudwatch.describe_alarms
 #

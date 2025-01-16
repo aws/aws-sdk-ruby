@@ -14,7 +14,12 @@ module Aws
         t_build_request_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
         puts("Build Request Time: #{t_build_request_end - t_start}")
         response = @handler.call(context)
-        response.on(200..299) { |resp| parse_response(resp) }
+        response.on(200..299) do |resp|
+          t_response_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+          parse_response(resp)
+          t_response_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+          puts("Parse Response Time: #{t_response_end - t_response_start}")
+        end
         response.on(200..599) { |_resp| apply_request_id(context) }
       end
 
