@@ -16,4 +16,5 @@ benchmark_report.json
 
 .ruby-version
 
-/perf-testing/test-output/local-only/*.txt
+perf-testing/test-output/local-only/*.txt
+!perf-testing/test-output/local-only
