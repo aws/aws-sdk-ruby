@@ -26,6 +26,7 @@ module Aws
       # @param [Seahorse::Client::RequestContext] context
       # @return [Seahorse::Client::Response]
       def call(context)
+        puts 'In Query call'
         t_total_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
         build_request(context)
         ret = ''

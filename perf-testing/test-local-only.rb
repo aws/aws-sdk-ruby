@@ -6,6 +6,8 @@ require 'aws-sdk-echo'
 require 'aws-sdk-core/plugins/protocols/json_rpc'
 require 'aws-sdk-core/plugins/protocols/rpc_v2'
 
+ITERATIONS = ARGV.first.to_i
+
 ASCII = "!\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~".chars
 INT_MIN, INT_MAX = -2147483648, 2147483647
 LONG_MIN, LONG_MAX = -9223372036854775808, 9223372036854775807
@@ -96,90 +98,97 @@ def random_large_blob
   }
 end
 
-file = File.open('perf-testing/output.txt', 'w')
-# $stdout = file
+file = File.open('perf-testing/data.txt', 'w')
+$stdout = file
 
 Aws::Echo::Client.remove_plugin(Aws::Plugins::Protocols::JsonRpc)
 json_echo = Aws::Echo::Client.new(plugins: [Aws::Plugins::Protocols::JsonRpc], stub_responses: true)
+
 cbor_echo = Aws::Echo::Client.new(plugins: [Aws::Plugins::Protocols::RpcV2], stub_responses: true)
+cbor_echo.config.api = cbor_echo.config.api.dup
+cbor_echo.config.api.metadata = cbor_echo.config.api.metadata.dup
+cbor_echo.config.api.metadata['protocol'] = 'smithy-rpc-v2-cbor'
 
-test = {
-  list_of_strings_member: %w[test test1 test2]
-}
+(1..ITERATIONS).each do
+  all_types = random_all_types
+  list_of_strings = random_long_list_of_strings
+  complex_object = random_complex_object
+  list_of_complex = random_list_of_complex_objects
+  large_blob = random_large_blob
+  json_echo.stub_responses(:echo_operation,
+                           all_types,
+                           list_of_strings,
+                           complex_object,
+                           list_of_complex,
+                           large_blob)
+  cbor_echo.stub_responses(:echo_operation,
+                           all_types,
+                           list_of_strings,
+                           complex_object,
+                           list_of_complex,
+                           large_blob)
 
-puts "test #{test}"
+  json_echo.echo_operation(all_types)
+  json_echo.echo_operation(list_of_strings)
+  json_echo.echo_operation(complex_object)
+  json_echo.echo_operation(list_of_complex)
+  json_echo.echo_operation(large_blob)
 
-cbor_echo.stub_responses(:echo_operation, test)
-resp = cbor_echo.echo_operation(test)
-puts "Resp: #{resp}"
-#
-# (1...2).each do |i|
-#   all_types = random_all_types
-#   list_of_strings = random_long_list_of_strings
-#   complex_object = random_complex_object
-#   list_of_complex = random_list_of_complex_objects
-#   large_blob = random_large_blob
-#   json_echo.stub_responses(:echo_operation,
-#                         all_types,
-#                         list_of_strings,
-#                         complex_object,
-#                         list_of_complex,
-#                         large_blob)
-#   cbor_echo.stub_responses(:echo_operation,
-#                         all_types,
-#                         list_of_strings,
-#                         complex_object,
-#                         list_of_complex,
-#                         large_blob)
-#   # puts 'JSON'
-#   # puts 'All types'
-#   # json_echo.echo_operation(all_types)
-#   # puts 'Long list of strings'
-#   # json_echo.echo_operation(list_of_strings)
-#   # puts 'Complex object'
-#   # json_echo.echo_operation(complex_object)
-#   # puts 'List of complex objects'
-#   # json_echo.echo_operation(list_of_complex)
-#   # puts 'Very large blob'
-#   # json_echo.echo_operation(large_blob)
-#   puts 'CBOR'
-#   puts 'All types'
-#   cbor_echo.echo_operation(all_types)
-#   puts 'Long list of strings'
-#   cbor_echo.echo_operation(list_of_strings)
-#   puts 'Complex object'
-#   cbor_echo.echo_operation(complex_object)
-#   puts 'List of complex objects'
-#   cbor_echo.echo_operation(list_of_complex)
-#   puts 'Very large blob'
-#   cbor_echo.echo_operation(large_blob)
-#
-#
-#   # all_types = random_all_types
-#   # client.stub_responses(:echo_operation, all_types)
-#   # resp = client.echo_operation(all_types)
-#   # pp resp.to_h
-#
-#   # list_of_strings = random_long_list_of_strings
-#   # client.stub_responses(:echo_operation, list_of_strings)
-#   # resp = client.echo_operation(list_of_strings)
-#   # puts resp.to_h
-#
-#   # complex_object = random_complex_object
-#   # client.stub_responses(:echo_operation, complex_object)
-#   # resp = client.echo_operation
-#   # puts resp.to_h
-#
-#   # list_of_complex = random_list_of_complex_objects
-#   # client.stub_responses(:echo_operation, list_of_complex)
-#   # resp = client.echo_operation
-#   # puts resp.to_h
-#
-#   # large_blob = random_large_blob
-#   # client.stub_responses(:echo_operation, large_blob)
-#   # resp = client.echo_operation
-#   # puts resp.to_h
-#
-# end
+  cbor_echo.echo_operation(all_types)
+  cbor_echo.echo_operation(list_of_strings)
+  cbor_echo.echo_operation(complex_object)
+  cbor_echo.echo_operation(list_of_complex)
+  cbor_echo.echo_operation(large_blob)
+end
 
 file.close
+$stdout = STDOUT
+
+test_cases = ['All types', 'Long list of strings', 'Complex object', 'List of complex objects', 'Very large blob']
+
+def p50(data)
+  data[(data.length - 1) / 2]
+end
+
+def p90(data)
+  data[(data.length - 1) * 0.9]
+end
+
+
+infile = File.open('perf-testing/data.txt', 'r')
+outfile = File.open('perf-testing/analysis.txt', 'w')
+raw = File.open('perf-testing/raw.txt', 'w')
+
+data = Array.new(20){Array.new}
+
+count = 0
+while (line = infile.gets)
+  ser, deser = line.split
+  data[count % 20] << ser.to_f
+  data[count % 20 + 1] << deser.to_f
+  count += 2
+end
+
+$stdout = raw
+data.each do |i|
+  pp i.sort
+end
+$stdout = STDOUT
+
+data.each_with_index do |arr, i|
+  arr.sort!
+  result = {
+    "service": 'Local Only',
+    "test_case": test_cases[(i / 2) % 5],
+    "protocol": i < 10 ? 'JSON' : 'CBOR',
+    "metric": i.even? ? 'Serialization time (ms)' : 'Deserialization time (ms)',
+    "p50": p50(arr),
+    "p90": p90(arr),
+    "max": arr.last
+  }
+  outfile.puts(JSON.pretty_generate(result))
+end
+
+infile.close
+outfile.close
+raw.close

@@ -6,10 +6,21 @@ module Aws
       # @param [Seahorse::Client::RequestContext] context
       # @return [Seahorse::Client::Response]
       def call(context)
+        # puts 'In CBOR call'
+        t_ser_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
         build_request(context)
+        t_ser_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+        t_deser_start, t_deser_end = nil
         response = with_metric { @handler.call(context) }
-        response.on(200..299) { |resp| resp.data = parse_body(context) }
+        response.on(200..299) do |resp|
+          t_deser_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+          resp.data = parse_body(context)
+          t_deser_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+        end
         response.on(200..599) { |_resp| apply_request_id(context) }
+        # puts "Serialization Time: #{format('%.3f', (t_ser_end - t_ser_start) * 1000.0)} ms"
+        # puts "Deserialization Time: #{format('%.3f', (t_deser_end - t_deser_start) * 1000.0)} ms"
+        puts "#{format('%.3f', (t_ser_end - t_ser_start) * 1000.0)} #{format('%.3f', (t_deser_end - t_deser_start) * 1000.0)}"
         response
       end
 
