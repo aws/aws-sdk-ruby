@@ -14,24 +14,20 @@ module Aws
       METADATA_STRUCT = ::Struct.new(:request_id)
 
       METADATA_REF = begin
-        request_id = ShapeRef.new(
-          shape: StringShape.new,
-          location_name: 'RequestId')
-        response_metadata = StructureShape.new
-        response_metadata.struct_class = METADATA_STRUCT
-        response_metadata.add_member(:request_id, request_id)
-        ShapeRef.new(shape: response_metadata, location_name: 'ResponseMetadata')
-      end
+                       request_id = ShapeRef.new(
+                         shape: StringShape.new,
+                         location_name: 'RequestId')
+                       response_metadata = StructureShape.new
+                       response_metadata.struct_class = METADATA_STRUCT
+                       response_metadata.add_member(:request_id, request_id)
+                       ShapeRef.new(shape: response_metadata, location_name: 'ResponseMetadata')
+                     end
 
       # @param [Seahorse::Client::RequestContext] context
       # @return [Seahorse::Client::Response]
       def call(context)
-        puts 'In Query call'
-        t_total_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
         build_request(context)
-        ret = ''
         @handler.call(context).on_success do |resp|
-          t_deserial_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
           resp.error = nil
           parsed = parse_xml(context)
           if parsed.nil? || parsed == EmptyStructure
@@ -39,20 +35,12 @@ module Aws
           else
             resp.data = parsed
           end
-          ret = resp
-          puts "This should be the content length: #{ret["Content-Length"]}"
-          t_deserial_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-          puts "#### Deserialization Time: #{t_deserial_end - t_deserial_start}"
         end
-        t_total_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-        puts "#### Total Time: #{t_total_end - t_total_start}"
-        return ret
       end
 
       private
 
       def build_request(context)
-        t_serial_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
         context.http_request.http_method = 'POST'
         context.http_request.headers['Content-Type'] = CONTENT_TYPE
         param_list = ParamList.new
@@ -62,8 +50,6 @@ module Aws
           apply_params(param_list, context.params, input_shape)
         end
         context.http_request.body = param_list.to_io
-        t_serial_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-        puts "#### Serialization Time: #{t_serial_end - t_serial_start}"
       end
 
       def apply_params(param_list, params, rules)

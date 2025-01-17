@@ -9,10 +9,15 @@ require 'aws-sdk-core/plugins/protocols/rpc_v2'
 ITERATIONS = ARGV.first.to_i
 
 ASCII = "!\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~".chars
-INT_MIN, INT_MAX = -2147483648, 2147483647
-LONG_MIN, LONG_MAX = -9223372036854775808, 9223372036854775807
-FLOAT_MIN, FLOAT_MAX = -2147483648.0, 2147483647.0
-DOUBLE_MIN, DOUBLE_MAX = -9223372036854775808.0, 9223372036854775807.0
+INT_MIN = -2147483648
+INT_MAX = 2147483647
+LONG_MIN = -9223372036854775808
+LONG_MAX = 9223372036854775807
+FLOAT_MIN = -2147483648.0
+FLOAT_MAX = 2147483647.0
+DOUBLE_MIN = -9223372036854775808.0
+DOUBLE_MAX = 9223372036854775807.0
+RUN_START_TIMESTAMP = Time.now
 
 def random_map_of_string_to_string
   map = {}
@@ -32,7 +37,7 @@ def random_all_types
     long_member: rand(LONG_MIN...LONG_MAX),
     float_member: rand(FLOAT_MIN...FLOAT_MAX),
     double_member: rand(DOUBLE_MIN...DOUBLE_MAX),
-    timestamp_member: Time.now,
+    timestamp_member: RUN_START_TIMESTAMP,
     blob_member: Random.bytes(128),
     list_of_strings_member: (0...8).map { (0...32).map { ASCII[rand(ASCII.length)] }.join },
     map_of_string_to_string_member: random_map_of_string_to_string,
@@ -85,7 +90,7 @@ def random_list_of_complex_objects
         string_member: (0...32).map { ASCII[rand(ASCII.length)] }.join,
         long_member: rand(LONG_MIN...LONG_MAX),
         double_member: rand(DOUBLE_MIN...DOUBLE_MAX),
-        timestamp_member: Time.now,
+        timestamp_member: RUN_START_TIMESTAMP,
         list_of_strings_member: (0...8).map { (0...32).map { ASCII[rand(ASCII.length)] }.join }
       }
     end
@@ -98,8 +103,9 @@ def random_large_blob
   }
 end
 
-file = File.open('perf-testing/data.txt', 'w')
-$stdout = file
+thread = Thread.current
+thread[:json_data] = []
+thread[:cbor_data] = []
 
 Aws::Echo::Client.remove_plugin(Aws::Plugins::Protocols::JsonRpc)
 json_echo = Aws::Echo::Client.new(plugins: [Aws::Plugins::Protocols::JsonRpc], stub_responses: true)
@@ -141,9 +147,6 @@ cbor_echo.config.api.metadata['protocol'] = 'smithy-rpc-v2-cbor'
   cbor_echo.echo_operation(large_blob)
 end
 
-file.close
-$stdout = STDOUT
-
 test_cases = ['All types', 'Long list of strings', 'Complex object', 'List of complex objects', 'Very large blob']
 
 def p50(data)
@@ -154,41 +157,64 @@ def p90(data)
   data[(data.length - 1) * 0.9]
 end
 
+data = File.open('perf-testing/test-output/local-only/data.txt', 'w')
+raw = File.open('perf-testing/test-output/local-only/raw.txt', 'w')
 
-infile = File.open('perf-testing/data.txt', 'r')
-outfile = File.open('perf-testing/analysis.txt', 'w')
-raw = File.open('perf-testing/raw.txt', 'w')
+parsed_json_data = Array.new(10) { [] }
+parsed_cbor_data = Array.new(10) { [] }
 
-data = Array.new(20){Array.new}
-
-count = 0
-while (line = infile.gets)
-  ser, deser = line.split
-  data[count % 20] << ser.to_f
-  data[count % 20 + 1] << deser.to_f
-  count += 2
+thread[:json_data].each_with_index do |i, idx|
+  ser = i[0].to_f
+  deser = i[1].to_f
+  parsed_json_data[(idx % 5) * 2] << ser
+  parsed_json_data[(idx % 5) * 2 + 1] << deser
 end
 
+thread[:cbor_data].each_with_index do |i, idx|
+  ser = i[0].to_f
+  deser = i[1].to_f
+  parsed_cbor_data[(idx % 5) * 2] << ser
+  parsed_cbor_data[(idx % 5) * 2 + 1] << deser
+end
+
+parsed_json_data.each do |i|
+  i.sort!
+end
+parsed_cbor_data.each do |i|
+  i.sort!
+end
 $stdout = raw
-data.each do |i|
-  pp i.sort
-end
+pp parsed_json_data
+pp parsed_cbor_data
 $stdout = STDOUT
 
-data.each_with_index do |arr, i|
-  arr.sort!
+parsed_json_data.each_with_index do |i, idx|
+  i.sort!
   result = {
-    "service": 'Local Only',
-    "test_case": test_cases[(i / 2) % 5],
-    "protocol": i < 10 ? 'JSON' : 'CBOR',
-    "metric": i.even? ? 'Serialization time (ms)' : 'Deserialization time (ms)',
-    "p50": p50(arr),
-    "p90": p90(arr),
-    "max": arr.last
+    "service": 'Local only',
+    "test_case": test_cases[(idx / 2) % 5],
+    "protocol": 'JSON',
+    "metric": idx.even? ? 'Serialization time (ms)' : 'Deserialization time (ms)',
+    "p50": p50(i),
+    "p90": p90(i),
+    "max": i.last
   }
-  outfile.puts(JSON.pretty_generate(result))
+  data.puts(JSON.pretty_generate(result))
 end
 
-infile.close
-outfile.close
+parsed_cbor_data.each_with_index do |i, idx|
+  i.sort!
+  result = {
+    "service": 'Local only',
+    "test_case": test_cases[(idx / 2) % 5],
+    "protocol": 'CBOR',
+    "metric": idx.even? ? 'Serialization time (ms)' : 'Deserialization time (ms)',
+    "p50": p50(i),
+    "p90": p90(i),
+    "max": i.last
+  }
+  data.puts(JSON.pretty_generate(result))
+end
+
+data.close
 raw.close

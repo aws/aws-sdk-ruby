@@ -15,3 +15,5 @@ benchmark_report.json
 .idea
 
 .ruby-version
+
+/perf-testing/test-output/local-only/*.txt
