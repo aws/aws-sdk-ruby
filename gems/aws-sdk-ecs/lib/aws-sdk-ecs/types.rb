@@ -1377,9 +1377,9 @@ module Aws::ECS
     #   @return [Array<Types::VolumeFrom>]
     #
     # @!attribute [rw] linux_parameters
-    #   Linux-specific modifications that are applied to the container, such
-    #   as Linux kernel capabilities. For more information see
-    #   [KernelCapabilities][1].
+    #   Linux-specific modifications that are applied to the default Docker
+    #   container configuration, such as Linux kernel capabilities. For more
+    #   information see [KernelCapabilities][1].
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers.
     #

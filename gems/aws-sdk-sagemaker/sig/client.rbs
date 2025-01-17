@@ -8186,7 +8186,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#search_training_plan_offerings-instance_method
       def search_training_plan_offerings: (
-                                            instance_type: ("ml.p4d.24xlarge" | "ml.p5.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.trn2.48xlarge"),
+                                            instance_type: ("ml.p4d.24xlarge" | "ml.p5.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.trn1.32xlarge" | "ml.trn2.48xlarge"),
                                             instance_count: ::Integer,
                                             ?start_time_after: ::Time,
                                             ?end_time_before: ::Time,

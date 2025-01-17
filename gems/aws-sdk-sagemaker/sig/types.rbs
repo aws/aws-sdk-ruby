@@ -8651,7 +8651,7 @@ module Aws::SageMaker
     end
 
     class ReservedCapacityOffering
-      attr_accessor instance_type: ("ml.p4d.24xlarge" | "ml.p5.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.trn2.48xlarge")
+      attr_accessor instance_type: ("ml.p4d.24xlarge" | "ml.p5.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.trn1.32xlarge" | "ml.trn2.48xlarge")
       attr_accessor instance_count: ::Integer
       attr_accessor availability_zone: ::String
       attr_accessor duration_hours: ::Integer
@@ -8663,7 +8663,7 @@ module Aws::SageMaker
 
     class ReservedCapacitySummary
       attr_accessor reserved_capacity_arn: ::String
-      attr_accessor instance_type: ("ml.p4d.24xlarge" | "ml.p5.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.trn2.48xlarge")
+      attr_accessor instance_type: ("ml.p4d.24xlarge" | "ml.p5.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.trn1.32xlarge" | "ml.trn2.48xlarge")
       attr_accessor total_instance_count: ::Integer
       attr_accessor status: ("Pending" | "Active" | "Scheduled" | "Expired" | "Failed")
       attr_accessor availability_zone: ::String
@@ -8887,7 +8887,7 @@ module Aws::SageMaker
     end
 
     class SearchTrainingPlanOfferingsRequest
-      attr_accessor instance_type: ("ml.p4d.24xlarge" | "ml.p5.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.trn2.48xlarge")
+      attr_accessor instance_type: ("ml.p4d.24xlarge" | "ml.p5.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.trn1.32xlarge" | "ml.trn2.48xlarge")
       attr_accessor instance_count: ::Integer
       attr_accessor start_time_after: ::Time
       attr_accessor end_time_before: ::Time

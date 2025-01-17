@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.176.0 (2025-01-16)
+------------------
+
+* Feature - The release addresses Amazon ECS documentation tickets.
+
 1.175.0 (2025-01-15)
 ------------------
 

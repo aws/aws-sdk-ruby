@@ -17388,7 +17388,7 @@ module Aws::SageMaker
     #   resp.target_resources[0] #=> String, one of "training-job", "hyperpod-cluster"
     #   resp.reserved_capacity_summaries #=> Array
     #   resp.reserved_capacity_summaries[0].reserved_capacity_arn #=> String
-    #   resp.reserved_capacity_summaries[0].instance_type #=> String, one of "ml.p4d.24xlarge", "ml.p5.48xlarge", "ml.p5e.48xlarge", "ml.p5en.48xlarge", "ml.trn2.48xlarge"
+    #   resp.reserved_capacity_summaries[0].instance_type #=> String, one of "ml.p4d.24xlarge", "ml.p5.48xlarge", "ml.p5e.48xlarge", "ml.p5en.48xlarge", "ml.trn1.32xlarge", "ml.trn2.48xlarge"
     #   resp.reserved_capacity_summaries[0].total_instance_count #=> Integer
     #   resp.reserved_capacity_summaries[0].status #=> String, one of "Pending", "Active", "Scheduled", "Expired", "Failed"
     #   resp.reserved_capacity_summaries[0].availability_zone #=> String
@@ -24197,7 +24197,7 @@ module Aws::SageMaker
     #   resp.training_plan_summaries[0].target_resources[0] #=> String, one of "training-job", "hyperpod-cluster"
     #   resp.training_plan_summaries[0].reserved_capacity_summaries #=> Array
     #   resp.training_plan_summaries[0].reserved_capacity_summaries[0].reserved_capacity_arn #=> String
-    #   resp.training_plan_summaries[0].reserved_capacity_summaries[0].instance_type #=> String, one of "ml.p4d.24xlarge", "ml.p5.48xlarge", "ml.p5e.48xlarge", "ml.p5en.48xlarge", "ml.trn2.48xlarge"
+    #   resp.training_plan_summaries[0].reserved_capacity_summaries[0].instance_type #=> String, one of "ml.p4d.24xlarge", "ml.p5.48xlarge", "ml.p5e.48xlarge", "ml.p5en.48xlarge", "ml.trn1.32xlarge", "ml.trn2.48xlarge"
     #   resp.training_plan_summaries[0].reserved_capacity_summaries[0].total_instance_count #=> Integer
     #   resp.training_plan_summaries[0].reserved_capacity_summaries[0].status #=> String, one of "Pending", "Active", "Scheduled", "Expired", "Failed"
     #   resp.training_plan_summaries[0].reserved_capacity_summaries[0].availability_zone #=> String
@@ -25168,7 +25168,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.search_training_plan_offerings({
-    #     instance_type: "ml.p4d.24xlarge", # required, accepts ml.p4d.24xlarge, ml.p5.48xlarge, ml.p5e.48xlarge, ml.p5en.48xlarge, ml.trn2.48xlarge
+    #     instance_type: "ml.p4d.24xlarge", # required, accepts ml.p4d.24xlarge, ml.p5.48xlarge, ml.p5e.48xlarge, ml.p5en.48xlarge, ml.trn1.32xlarge, ml.trn2.48xlarge
     #     instance_count: 1, # required
     #     start_time_after: Time.now,
     #     end_time_before: Time.now,
@@ -25189,7 +25189,7 @@ module Aws::SageMaker
     #   resp.training_plan_offerings[0].upfront_fee #=> String
     #   resp.training_plan_offerings[0].currency_code #=> String
     #   resp.training_plan_offerings[0].reserved_capacity_offerings #=> Array
-    #   resp.training_plan_offerings[0].reserved_capacity_offerings[0].instance_type #=> String, one of "ml.p4d.24xlarge", "ml.p5.48xlarge", "ml.p5e.48xlarge", "ml.p5en.48xlarge", "ml.trn2.48xlarge"
+    #   resp.training_plan_offerings[0].reserved_capacity_offerings[0].instance_type #=> String, one of "ml.p4d.24xlarge", "ml.p5.48xlarge", "ml.p5e.48xlarge", "ml.p5en.48xlarge", "ml.trn1.32xlarge", "ml.trn2.48xlarge"
     #   resp.training_plan_offerings[0].reserved_capacity_offerings[0].instance_count #=> Integer
     #   resp.training_plan_offerings[0].reserved_capacity_offerings[0].availability_zone #=> String
     #   resp.training_plan_offerings[0].reserved_capacity_offerings[0].duration_hours #=> Integer
@@ -29469,7 +29469,7 @@ module Aws::SageMaker
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.281.0'
+      context[:gem_version] = '1.282.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
