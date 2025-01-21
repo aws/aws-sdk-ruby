@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Use epoch seconds instead of milliseconds in cbor encode/decode.
+
 3.216.0 (2025-01-15)
 ------------------
 
