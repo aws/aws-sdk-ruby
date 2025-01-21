@@ -357,10 +357,10 @@ module Aws::EC2
     # @param [Hash] options ({})
     # @option options [Array<String>] :ipv_4_prefixes
     #   One or more IPv4 prefixes assigned to the network interface. You
-    #   cannot use this option if you use the `Ipv4PrefixCount` option.
+    #   can't use this option if you use the `Ipv4PrefixCount` option.
     # @option options [Integer] :ipv_4_prefix_count
     #   The number of IPv4 prefixes that Amazon Web Services automatically
-    #   assigns to the network interface. You cannot use this option if you
+    #   assigns to the network interface. You can't use this option if you
     #   use the `Ipv4 Prefixes` option.
     # @option options [Array<String>] :private_ip_addresses
     #   The IP addresses to be assigned as a secondary private IP address to

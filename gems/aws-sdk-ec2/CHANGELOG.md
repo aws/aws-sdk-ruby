@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.501.0 (2025-01-17)
+------------------
+
+* Feature - Release u7i-6tb.112xlarge, u7i-8tb.112xlarge, u7inh-32tb.480xlarge, p5e.48xlarge, p5en.48xlarge, f2.12xlarge, f2.48xlarge, trn2.48xlarge instance types.
+
 1.500.0 (2025-01-15)
 ------------------
 

@@ -1178,7 +1178,7 @@ module Aws::Detective
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/detective/latest/userguide/detective-investigations.html
+    #   [1]: https://docs.aws.amazon.com/detective/latest/userguide/detective-investigation-about.html
     #
     # @option params [String] :next_token
     #   Lists if there are more results available. The value of nextToken is a
@@ -1721,13 +1721,13 @@ module Aws::Detective
       req.send_request(options)
     end
 
-    # Starts a data source packages for the behavior graph.
+    # Starts a data source package for the Detective behavior graph.
     #
     # @option params [required, String] :graph_arn
     #   The ARN of the behavior graph.
     #
     # @option params [required, Array<String>] :datasource_packages
-    #   The data source package start for the behavior graph.
+    #   The data source package to start for the behavior graph.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1825,7 +1825,7 @@ module Aws::Detective
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-detective'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

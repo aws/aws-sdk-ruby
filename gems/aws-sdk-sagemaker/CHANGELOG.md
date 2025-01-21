@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.283.0 (2025-01-17)
+------------------
+
+* Feature - Correction of docs for  "Added support for ml.trn1.32xlarge instance type in Reserved Capacity Offering"
+
 1.282.0 (2025-01-16)
 ------------------
 

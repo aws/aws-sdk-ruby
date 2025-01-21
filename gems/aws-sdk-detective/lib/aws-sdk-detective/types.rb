@@ -730,7 +730,7 @@ module Aws::Detective
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/detective/latest/userguide/detective-investigations.html
+    # [1]: https://docs.aws.amazon.com/detective/latest/userguide/detective-investigation-about.html
     #
     # @!attribute [rw] tt_ps_observed_detail
     #   Details about the indicator of compromise.
@@ -943,7 +943,7 @@ module Aws::Detective
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/detective/latest/userguide/detective-investigations.html
+    #   [1]: https://docs.aws.amazon.com/detective/latest/userguide/detective-investigation-about.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -1843,7 +1843,7 @@ module Aws::Detective
     #   @return [String]
     #
     # @!attribute [rw] datasource_packages
-    #   The data source package start for the behavior graph.
+    #   The data source package to start for the behavior graph.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/UpdateDatasourcePackagesRequest AWS API Documentation

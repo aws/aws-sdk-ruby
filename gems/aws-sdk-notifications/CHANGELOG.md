@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2025-01-17)
+------------------
+
+* Feature - Added support for Managed Notifications, integration with AWS Organization and added aggregation summaries for Aggregate Notifications
+
 1.1.0 (2025-01-15)
 ------------------
 

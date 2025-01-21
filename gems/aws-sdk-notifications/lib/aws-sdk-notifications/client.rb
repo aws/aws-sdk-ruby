@@ -471,8 +471,8 @@ module Aws::Notifications
     # @!group API Operations
 
     # Associates a delivery [Channel][1] with a particular
-    # NotificationConfiguration. Supported Channels include AWS Chatbot, the
-    # AWS Console Mobile Application, and emails (notifications-contacts).
+    # `NotificationConfiguration`. Supported Channels include Chatbot, the
+    # Console Mobile Application, and emails (notifications-contacts).
     #
     #
     #
@@ -480,13 +480,13 @@ module Aws::Notifications
     #
     # @option params [required, String] :arn
     #   The Amazon Resource Name (ARN) of the Channel to associate with the
-    #   NotificationConfiguration.
+    #   `NotificationConfiguration`.
     #
-    #   Supported ARNs include AWS Chatbot, the Console Mobile Application,
-    #   and notifications-contacts.
+    #   Supported ARNs include Chatbot, the Console Mobile Application, and
+    #   notifications-contacts.
     #
     # @option params [required, String] :notification_configuration_arn
-    #   The ARN of the NotificationConfiguration to associate with the
+    #   The ARN of the `NotificationConfiguration` to associate with the
     #   Channel.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -507,24 +507,91 @@ module Aws::Notifications
       req.send_request(options)
     end
 
-    # Creates an [EventRule][1] that is associated with a specified
-    # Notification Configuration.
+    # Associates an Account Contact with a particular
+    # `ManagedNotificationConfiguration`.
+    #
+    # @option params [required, String] :contact_identifier
+    #   A unique value of an Account Contact Type to associate with the
+    #   `ManagedNotificationConfiguration`.
+    #
+    # @option params [required, String] :managed_notification_configuration_arn
+    #   The Amazon Resource Name (ARN) of the
+    #   `ManagedNotificationConfiguration` to associate with the Account
+    #   Contact.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_managed_notification_account_contact({
+    #     contact_identifier: "ACCOUNT_PRIMARY", # required, accepts ACCOUNT_PRIMARY, ACCOUNT_ALTERNATE_BILLING, ACCOUNT_ALTERNATE_OPERATIONS, ACCOUNT_ALTERNATE_SECURITY
+    #     managed_notification_configuration_arn: "ManagedNotificationConfigurationOsArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/AssociateManagedNotificationAccountContact AWS API Documentation
+    #
+    # @overload associate_managed_notification_account_contact(params = {})
+    # @param [Hash] params ({})
+    def associate_managed_notification_account_contact(params = {}, options = {})
+      req = build_request(:associate_managed_notification_account_contact, params)
+      req.send_request(options)
+    end
+
+    # Associates an additional Channel with a particular
+    # `ManagedNotificationConfiguration`.
+    #
+    # Supported Channels include Chatbot, the Console Mobile Application,
+    # and emails (notifications-contacts).
+    #
+    # @option params [required, String] :channel_arn
+    #   The Amazon Resource Name (ARN) of the Channel to associate with the
+    #   `ManagedNotificationConfiguration`.
+    #
+    #   Supported ARNs include Chatbot, the Console Mobile Application, and
+    #   email (notifications-contacts).
+    #
+    # @option params [required, String] :managed_notification_configuration_arn
+    #   The Amazon Resource Name (ARN) of the
+    #   `ManagedNotificationConfiguration` to associate with the additional
+    #   Channel.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_managed_notification_additional_channel({
+    #     channel_arn: "ChannelArn", # required
+    #     managed_notification_configuration_arn: "ManagedNotificationConfigurationOsArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/AssociateManagedNotificationAdditionalChannel AWS API Documentation
+    #
+    # @overload associate_managed_notification_additional_channel(params = {})
+    # @param [Hash] params ({})
+    def associate_managed_notification_additional_channel(params = {}, options = {})
+      req = build_request(:associate_managed_notification_additional_channel, params)
+      req.send_request(options)
+    end
+
+    # Creates an [ `EventRule` ][1] that is associated with a specified
+    # `NotificationConfiguration`.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/notifications/latest/userguide/glossary.html
     #
     # @option params [required, String] :notification_configuration_arn
-    #   The Amazon Resource Name (ARN) of the NotificationConfiguration
-    #   associated with this EventRule.
+    #   The Amazon Resource Name (ARN) of the `NotificationConfiguration`
+    #   associated with this `EventRule`.
     #
     # @option params [required, String] :source
     #   The matched event source.
     #
-    #   Must match one of the valid EventBridge sources. Only AWS service
-    #   sourced events are supported. For example, `aws.ec2` and
-    #   `aws.cloudwatch`. For more information, see [Event delivery from AWS
-    #   services][1] in the *Amazon EventBridge User Guide*.
+    #   Must match one of the valid EventBridge sources. Only Amazon Web
+    #   Services service sourced events are supported. For example, `aws.ec2`
+    #   and `aws.cloudwatch`. For more information, see [Event delivery from
+    #   Amazon Web Services services][1] in the *Amazon EventBridge User
+    #   Guide*.
     #
     #
     #
@@ -534,9 +601,10 @@ module Aws::Notifications
     #   The event type to match.
     #
     #   Must match one of the valid Amazon EventBridge event types. For
-    #   example, EC2 Instance State-change Notification and AWS CloudWatch
-    #   Alarm State Change. For more information, see [Event delivery from AWS
-    #   services][1] in the *Amazon EventBridge User Guide*.
+    #   example, EC2 Instance State-change Notification and Amazon CloudWatch
+    #   Alarm State Change. For more information, see [Event delivery from
+    #   Amazon Web Services services][1] in the *Amazon EventBridge User
+    #   Guide*.
     #
     #
     #
@@ -544,7 +612,7 @@ module Aws::Notifications
     #
     # @option params [String] :event_pattern
     #   An additional event pattern used to further filter the events this
-    #   EventRule receives.
+    #   `EventRule` receives.
     #
     #   For more information, see [Amazon EventBridge event patterns][1] in
     #   the *Amazon EventBridge User Guide.*
@@ -554,7 +622,8 @@ module Aws::Notifications
     #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html
     #
     # @option params [required, Array<String>] :regions
-    #   A list of AWS Regions that send events to this EventRule.
+    #   A list of Amazon Web Services Regions that send events to this
+    #   `EventRule`.
     #
     # @return [Types::CreateEventRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -589,17 +658,17 @@ module Aws::Notifications
       req.send_request(options)
     end
 
-    # Creates a new NotificationConfiguration.
+    # Creates a new `NotificationConfiguration`.
     #
     # @option params [required, String] :name
-    #   The name of the NotificationConfiguration. Supports RFC 3986's
+    #   The name of the `NotificationConfiguration`. Supports RFC 3986's
     #   unreserved characters.
     #
     # @option params [required, String] :description
-    #   The description of the NotificationConfiguration.
+    #   The description of the `NotificationConfiguration`.
     #
     # @option params [String] :aggregation_duration
-    #   The aggregation preference of the NotificationConfiguration.
+    #   The aggregation preference of the `NotificationConfiguration`.
     #
     #   * Values:
     #
@@ -617,7 +686,7 @@ module Aws::Notifications
     #
     #       * Don't aggregate notifications.
     #
-    #         No delay in delivery.
+    #       ^
     #
     # @option params [Hash<String,String>] :tags
     #   A map of tags assigned to a resource. A tag is a string-to-string map
@@ -653,10 +722,10 @@ module Aws::Notifications
       req.send_request(options)
     end
 
-    # Deletes an EventRule.
+    # Deletes an `EventRule`.
     #
     # @option params [required, String] :arn
-    #   The Amazon Resource Name (ARN) of the EventRule to delete.
+    #   The Amazon Resource Name (ARN) of the `EventRule` to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -675,10 +744,10 @@ module Aws::Notifications
       req.send_request(options)
     end
 
-    # Deletes a NotificationConfiguration.
+    # Deletes a `NotificationConfiguration`.
     #
     # @option params [required, String] :arn
-    #   The Amazon Resource Name (ARN) of the NotificationConfiguration to
+    #   The Amazon Resource Name (ARN) of the `NotificationConfiguration` to
     #   delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -698,17 +767,18 @@ module Aws::Notifications
       req.send_request(options)
     end
 
-    # Deregisters a NotificationHub in the specified Region.
+    # Deregisters a `NotificationConfiguration` in the specified Region.
     #
-    # <note markdown="1"> You can't deregister the last NotificationHub in the account.
-    # NotificationEvents stored in the deregistered NotificationHub are no
-    # longer be visible. Recreating a new NotificationHub in the same Region
-    # restores access to those NotificationEvents.
+    # <note markdown="1"> You can't deregister the last `NotificationHub` in the account.
+    # `NotificationEvents` stored in the deregistered
+    # `NotificationConfiguration` are no longer be visible. Recreating a new
+    # `NotificationConfiguration` in the same Region restores access to
+    # those `NotificationEvents`.
     #
     #  </note>
     #
     # @option params [required, String] :notification_hub_region
-    #   The NotificationHub Region.
+    #   The `NotificationConfiguration` Region.
     #
     # @return [Types::DeregisterNotificationHubResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -736,15 +806,29 @@ module Aws::Notifications
       req.send_request(options)
     end
 
-    # Disassociates a Channel from a specified NotificationConfiguration.
-    # Supported Channels include AWS Chatbot, the AWS Console Mobile
-    # Application, and emails (notifications-contacts).
+    # Disables service trust between User Notifications and Amazon Web
+    # Services Organizations.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/DisableNotificationsAccessForOrganization AWS API Documentation
+    #
+    # @overload disable_notifications_access_for_organization(params = {})
+    # @param [Hash] params ({})
+    def disable_notifications_access_for_organization(params = {}, options = {})
+      req = build_request(:disable_notifications_access_for_organization, params)
+      req.send_request(options)
+    end
+
+    # Disassociates a Channel from a specified `NotificationConfiguration`.
+    # Supported Channels include Chatbot, the Console Mobile Application,
+    # and emails (notifications-contacts).
     #
     # @option params [required, String] :arn
     #   The Amazon Resource Name (ARN) of the Channel to disassociate.
     #
     # @option params [required, String] :notification_configuration_arn
-    #   The ARN of the NotificationConfiguration to disassociate.
+    #   The ARN of the `NotificationConfiguration` to disassociate.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -764,10 +848,86 @@ module Aws::Notifications
       req.send_request(options)
     end
 
-    # Returns a specified EventRule.
+    # Disassociates an Account Contact with a particular
+    # `ManagedNotificationConfiguration`.
+    #
+    # @option params [required, String] :contact_identifier
+    #   The unique value of an Account Contact Type to associate with the
+    #   `ManagedNotificationConfiguration`.
+    #
+    # @option params [required, String] :managed_notification_configuration_arn
+    #   The Amazon Resource Name (ARN) of the
+    #   `ManagedNotificationConfiguration` to associate with the Account
+    #   Contact.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_managed_notification_account_contact({
+    #     contact_identifier: "ACCOUNT_PRIMARY", # required, accepts ACCOUNT_PRIMARY, ACCOUNT_ALTERNATE_BILLING, ACCOUNT_ALTERNATE_OPERATIONS, ACCOUNT_ALTERNATE_SECURITY
+    #     managed_notification_configuration_arn: "ManagedNotificationConfigurationOsArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/DisassociateManagedNotificationAccountContact AWS API Documentation
+    #
+    # @overload disassociate_managed_notification_account_contact(params = {})
+    # @param [Hash] params ({})
+    def disassociate_managed_notification_account_contact(params = {}, options = {})
+      req = build_request(:disassociate_managed_notification_account_contact, params)
+      req.send_request(options)
+    end
+
+    # Disassociates an additional Channel from a particular
+    # `ManagedNotificationConfiguration`.
+    #
+    # Supported Channels include Chatbot, the Console Mobile Application,
+    # and emails (notifications-contacts).
+    #
+    # @option params [required, String] :channel_arn
+    #   The Amazon Resource Name (ARN) of the Channel to associate with the
+    #   `ManagedNotificationConfiguration`.
+    #
+    # @option params [required, String] :managed_notification_configuration_arn
+    #   The Amazon Resource Name (ARN) of the Managed Notification
+    #   Configuration to associate with the additional Channel.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_managed_notification_additional_channel({
+    #     channel_arn: "ChannelArn", # required
+    #     managed_notification_configuration_arn: "ManagedNotificationConfigurationOsArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/DisassociateManagedNotificationAdditionalChannel AWS API Documentation
+    #
+    # @overload disassociate_managed_notification_additional_channel(params = {})
+    # @param [Hash] params ({})
+    def disassociate_managed_notification_additional_channel(params = {}, options = {})
+      req = build_request(:disassociate_managed_notification_additional_channel, params)
+      req.send_request(options)
+    end
+
+    # Enables service trust between User Notifications and Amazon Web
+    # Services Organizations.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/EnableNotificationsAccessForOrganization AWS API Documentation
+    #
+    # @overload enable_notifications_access_for_organization(params = {})
+    # @param [Hash] params ({})
+    def enable_notifications_access_for_organization(params = {}, options = {})
+      req = build_request(:enable_notifications_access_for_organization, params)
+      req.send_request(options)
+    end
+
+    # Returns a specified `EventRule`.
     #
     # @option params [required, String] :arn
-    #   The Amazon Resource Name (ARN) of the EventRule to return.
+    #   The Amazon Resource Name (ARN) of the `EventRule` to return.
     #
     # @return [Types::GetEventRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -812,10 +972,195 @@ module Aws::Notifications
       req.send_request(options)
     end
 
-    # Returns a specified NotificationConfiguration.
+    # Returns the child event of a specific given
+    # `ManagedNotificationEvent`.
     #
     # @option params [required, String] :arn
-    #   The Amazon Resource Name (ARN) of the NotificationConfiguration to
+    #   The Amazon Resource Name (ARN) of the `ManagedNotificationChildEvent`
+    #   to return.
+    #
+    # @option params [String] :locale
+    #   The locale code of the language used for the retrieved
+    #   `ManagedNotificationChildEvent`. The default locale is English
+    #   `en_US`.
+    #
+    # @return [Types::GetManagedNotificationChildEventResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetManagedNotificationChildEventResponse#arn #arn} => String
+    #   * {Types::GetManagedNotificationChildEventResponse#managed_notification_configuration_arn #managed_notification_configuration_arn} => String
+    #   * {Types::GetManagedNotificationChildEventResponse#creation_time #creation_time} => Time
+    #   * {Types::GetManagedNotificationChildEventResponse#content #content} => Types::ManagedNotificationChildEvent
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_managed_notification_child_event({
+    #     arn: "ManagedNotificationChildEventArn", # required
+    #     locale: "de_DE", # accepts de_DE, en_CA, en_US, en_UK, es_ES, fr_CA, fr_FR, id_ID, it_IT, ja_JP, ko_KR, pt_BR, tr_TR, zh_CN, zh_TW
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.managed_notification_configuration_arn #=> String
+    #   resp.creation_time #=> Time
+    #   resp.content.schema_version #=> String, one of "v1.0"
+    #   resp.content.id #=> String
+    #   resp.content.message_components.headline #=> String
+    #   resp.content.message_components.paragraph_summary #=> String
+    #   resp.content.message_components.complete_description #=> String
+    #   resp.content.message_components.dimensions #=> Array
+    #   resp.content.message_components.dimensions[0].name #=> String
+    #   resp.content.message_components.dimensions[0].value #=> String
+    #   resp.content.source_event_detail_url #=> String
+    #   resp.content.source_event_detail_url_display_text #=> String
+    #   resp.content.notification_type #=> String, one of "ALERT", "WARNING", "ANNOUNCEMENT", "INFORMATIONAL"
+    #   resp.content.event_status #=> String, one of "HEALTHY", "UNHEALTHY"
+    #   resp.content.aggregate_managed_notification_event_arn #=> String
+    #   resp.content.start_time #=> Time
+    #   resp.content.end_time #=> Time
+    #   resp.content.text_parts #=> Hash
+    #   resp.content.text_parts["TextPartId"].type #=> String, one of "LOCALIZED_TEXT", "PLAIN_TEXT", "URL"
+    #   resp.content.text_parts["TextPartId"].display_text #=> String
+    #   resp.content.text_parts["TextPartId"].text_by_locale #=> Hash
+    #   resp.content.text_parts["TextPartId"].text_by_locale["LocaleCode"] #=> String
+    #   resp.content.text_parts["TextPartId"].url #=> String
+    #   resp.content.organizational_unit_id #=> String
+    #   resp.content.aggregation_detail.summarization_dimensions #=> Array
+    #   resp.content.aggregation_detail.summarization_dimensions[0].name #=> String
+    #   resp.content.aggregation_detail.summarization_dimensions[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/GetManagedNotificationChildEvent AWS API Documentation
+    #
+    # @overload get_managed_notification_child_event(params = {})
+    # @param [Hash] params ({})
+    def get_managed_notification_child_event(params = {}, options = {})
+      req = build_request(:get_managed_notification_child_event, params)
+      req.send_request(options)
+    end
+
+    # Returns a specified `ManagedNotificationConfiguration`.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the
+    #   `ManagedNotificationConfiguration` to return.
+    #
+    # @return [Types::GetManagedNotificationConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetManagedNotificationConfigurationResponse#arn #arn} => String
+    #   * {Types::GetManagedNotificationConfigurationResponse#name #name} => String
+    #   * {Types::GetManagedNotificationConfigurationResponse#description #description} => String
+    #   * {Types::GetManagedNotificationConfigurationResponse#category #category} => String
+    #   * {Types::GetManagedNotificationConfigurationResponse#sub_category #sub_category} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_managed_notification_configuration({
+    #     arn: "ManagedNotificationConfigurationOsArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.category #=> String
+    #   resp.sub_category #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/GetManagedNotificationConfiguration AWS API Documentation
+    #
+    # @overload get_managed_notification_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_managed_notification_configuration(params = {}, options = {})
+      req = build_request(:get_managed_notification_configuration, params)
+      req.send_request(options)
+    end
+
+    # Returns a specified `ManagedNotificationEvent`.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the `ManagedNotificationEvent` to
+    #   return.
+    #
+    # @option params [String] :locale
+    #   The locale code of the language used for the retrieved
+    #   `ManagedNotificationEvent`. The default locale is English `(en_US)`.
+    #
+    # @return [Types::GetManagedNotificationEventResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetManagedNotificationEventResponse#arn #arn} => String
+    #   * {Types::GetManagedNotificationEventResponse#managed_notification_configuration_arn #managed_notification_configuration_arn} => String
+    #   * {Types::GetManagedNotificationEventResponse#creation_time #creation_time} => Time
+    #   * {Types::GetManagedNotificationEventResponse#content #content} => Types::ManagedNotificationEvent
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_managed_notification_event({
+    #     arn: "ManagedNotificationEventArn", # required
+    #     locale: "de_DE", # accepts de_DE, en_CA, en_US, en_UK, es_ES, fr_CA, fr_FR, id_ID, it_IT, ja_JP, ko_KR, pt_BR, tr_TR, zh_CN, zh_TW
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.managed_notification_configuration_arn #=> String
+    #   resp.creation_time #=> Time
+    #   resp.content.schema_version #=> String, one of "v1.0"
+    #   resp.content.id #=> String
+    #   resp.content.message_components.headline #=> String
+    #   resp.content.message_components.paragraph_summary #=> String
+    #   resp.content.message_components.complete_description #=> String
+    #   resp.content.message_components.dimensions #=> Array
+    #   resp.content.message_components.dimensions[0].name #=> String
+    #   resp.content.message_components.dimensions[0].value #=> String
+    #   resp.content.source_event_detail_url #=> String
+    #   resp.content.source_event_detail_url_display_text #=> String
+    #   resp.content.notification_type #=> String, one of "ALERT", "WARNING", "ANNOUNCEMENT", "INFORMATIONAL"
+    #   resp.content.event_status #=> String, one of "HEALTHY", "UNHEALTHY"
+    #   resp.content.aggregation_event_type #=> String, one of "AGGREGATE", "CHILD", "NONE"
+    #   resp.content.aggregation_summary.event_count #=> Integer
+    #   resp.content.aggregation_summary.aggregated_by #=> Array
+    #   resp.content.aggregation_summary.aggregated_by[0].name #=> String
+    #   resp.content.aggregation_summary.aggregated_by[0].value #=> String
+    #   resp.content.aggregation_summary.aggregated_accounts.name #=> String
+    #   resp.content.aggregation_summary.aggregated_accounts.count #=> Integer
+    #   resp.content.aggregation_summary.aggregated_accounts.sample_values #=> Array
+    #   resp.content.aggregation_summary.aggregated_accounts.sample_values[0] #=> String
+    #   resp.content.aggregation_summary.aggregated_regions.name #=> String
+    #   resp.content.aggregation_summary.aggregated_regions.count #=> Integer
+    #   resp.content.aggregation_summary.aggregated_regions.sample_values #=> Array
+    #   resp.content.aggregation_summary.aggregated_regions.sample_values[0] #=> String
+    #   resp.content.aggregation_summary.aggregated_organizational_units.name #=> String
+    #   resp.content.aggregation_summary.aggregated_organizational_units.count #=> Integer
+    #   resp.content.aggregation_summary.aggregated_organizational_units.sample_values #=> Array
+    #   resp.content.aggregation_summary.aggregated_organizational_units.sample_values[0] #=> String
+    #   resp.content.aggregation_summary.additional_summarization_dimensions #=> Array
+    #   resp.content.aggregation_summary.additional_summarization_dimensions[0].name #=> String
+    #   resp.content.aggregation_summary.additional_summarization_dimensions[0].count #=> Integer
+    #   resp.content.aggregation_summary.additional_summarization_dimensions[0].sample_values #=> Array
+    #   resp.content.aggregation_summary.additional_summarization_dimensions[0].sample_values[0] #=> String
+    #   resp.content.start_time #=> Time
+    #   resp.content.end_time #=> Time
+    #   resp.content.text_parts #=> Hash
+    #   resp.content.text_parts["TextPartId"].type #=> String, one of "LOCALIZED_TEXT", "PLAIN_TEXT", "URL"
+    #   resp.content.text_parts["TextPartId"].display_text #=> String
+    #   resp.content.text_parts["TextPartId"].text_by_locale #=> Hash
+    #   resp.content.text_parts["TextPartId"].text_by_locale["LocaleCode"] #=> String
+    #   resp.content.text_parts["TextPartId"].url #=> String
+    #   resp.content.organizational_unit_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/GetManagedNotificationEvent AWS API Documentation
+    #
+    # @overload get_managed_notification_event(params = {})
+    # @param [Hash] params ({})
+    def get_managed_notification_event(params = {}, options = {})
+      req = build_request(:get_managed_notification_event, params)
+      req.send_request(options)
+    end
+
+    # Returns a specified `NotificationConfiguration`.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the `NotificationConfiguration` to
     #   return.
     #
     # @return [Types::GetNotificationConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -851,27 +1196,27 @@ module Aws::Notifications
       req.send_request(options)
     end
 
-    # Returns a specified NotificationEvent.
+    # Returns a specified `NotificationEvent`.
     #
     # User Notifications stores notifications in the individual Regions you
     # register as notification hubs and the Region of the source event rule.
-    # GetNotificationEvent only returns notifications stored in the same
+    # `GetNotificationEvent` only returns notifications stored in the same
     # Region in which the action is called. User Notifications doesn't
     # backfill notifications to new Regions selected as notification hubs.
     # For this reason, we recommend that you make calls in your oldest
     # registered notification hub. For more information, see [Notification
-    # hubs][1] in the *AWS User Notifications User Guide*.
+    # hubs][1] in the *Amazon Web Services User Notifications User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/notifications/latest/userguide/notification-hubs.html
     #
     # @option params [required, String] :arn
-    #   The Amazon Resource Name (ARN) of the NotificationEvent to return.
+    #   The Amazon Resource Name (ARN) of the `NotificationEvent` to return.
     #
     # @option params [String] :locale
     #   The locale code of the language used for the retrieved
-    #   NotificationEvent. The default locale is English `en_US`.
+    #   `NotificationEvent`. The default locale is English `en_US`.
     #
     # @return [Types::GetNotificationEventResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -919,6 +1264,27 @@ module Aws::Notifications
     #   resp.content.event_status #=> String, one of "HEALTHY", "UNHEALTHY"
     #   resp.content.aggregation_event_type #=> String, one of "AGGREGATE", "CHILD", "NONE"
     #   resp.content.aggregate_notification_event_arn #=> String
+    #   resp.content.aggregation_summary.event_count #=> Integer
+    #   resp.content.aggregation_summary.aggregated_by #=> Array
+    #   resp.content.aggregation_summary.aggregated_by[0].name #=> String
+    #   resp.content.aggregation_summary.aggregated_by[0].value #=> String
+    #   resp.content.aggregation_summary.aggregated_accounts.name #=> String
+    #   resp.content.aggregation_summary.aggregated_accounts.count #=> Integer
+    #   resp.content.aggregation_summary.aggregated_accounts.sample_values #=> Array
+    #   resp.content.aggregation_summary.aggregated_accounts.sample_values[0] #=> String
+    #   resp.content.aggregation_summary.aggregated_regions.name #=> String
+    #   resp.content.aggregation_summary.aggregated_regions.count #=> Integer
+    #   resp.content.aggregation_summary.aggregated_regions.sample_values #=> Array
+    #   resp.content.aggregation_summary.aggregated_regions.sample_values[0] #=> String
+    #   resp.content.aggregation_summary.aggregated_organizational_units.name #=> String
+    #   resp.content.aggregation_summary.aggregated_organizational_units.count #=> Integer
+    #   resp.content.aggregation_summary.aggregated_organizational_units.sample_values #=> Array
+    #   resp.content.aggregation_summary.aggregated_organizational_units.sample_values[0] #=> String
+    #   resp.content.aggregation_summary.additional_summarization_dimensions #=> Array
+    #   resp.content.aggregation_summary.additional_summarization_dimensions[0].name #=> String
+    #   resp.content.aggregation_summary.additional_summarization_dimensions[0].count #=> Integer
+    #   resp.content.aggregation_summary.additional_summarization_dimensions[0].sample_values #=> Array
+    #   resp.content.aggregation_summary.additional_summarization_dimensions[0].sample_values[0] #=> String
     #   resp.content.start_time #=> Time
     #   resp.content.end_time #=> Time
     #   resp.content.text_parts #=> Hash
@@ -942,10 +1308,30 @@ module Aws::Notifications
       req.send_request(options)
     end
 
-    # Returns a list of Channels for a NotificationConfiguration.
+    # Returns the AccessStatus of Service Trust Enablement for User
+    # Notifications and Amazon Web Services Organizations.
+    #
+    # @return [Types::GetNotificationsAccessForOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetNotificationsAccessForOrganizationResponse#notifications_access_for_organization #notifications_access_for_organization} => Types::NotificationsAccessForOrganization
+    #
+    # @example Response structure
+    #
+    #   resp.notifications_access_for_organization.access_status #=> String, one of "ENABLED", "DISABLED", "PENDING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/GetNotificationsAccessForOrganization AWS API Documentation
+    #
+    # @overload get_notifications_access_for_organization(params = {})
+    # @param [Hash] params ({})
+    def get_notifications_access_for_organization(params = {}, options = {})
+      req = build_request(:get_notifications_access_for_organization, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of Channels for a `NotificationConfiguration`.
     #
     # @option params [required, String] :notification_configuration_arn
-    #   The Amazon Resource Name (ARN) of the NotificationConfiguration.
+    #   The Amazon Resource Name (ARN) of the `NotificationConfiguration`.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned in this call. The default
@@ -953,7 +1339,8 @@ module Aws::Notifications
     #
     # @option params [String] :next_token
     #   The start token for paginated calls. Retrieved from the response of a
-    #   previous ListNotificationEvents call. NextToken uses Base64 encoding.
+    #   previous ListNotificationEvents call. `NextToken` uses Base64
+    #   encoding.
     #
     # @return [Types::ListChannelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -985,11 +1372,11 @@ module Aws::Notifications
       req.send_request(options)
     end
 
-    # Returns a list of EventRules according to specified filters, in
+    # Returns a list of `EventRules` according to specified filters, in
     # reverse chronological order (newest first).
     #
     # @option params [required, String] :notification_configuration_arn
-    #   The Amazon Resource Name (ARN) of the NotificationConfiguration.
+    #   The Amazon Resource Name (ARN) of the `NotificationConfiguration`.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned in this call. The default
@@ -997,7 +1384,7 @@ module Aws::Notifications
     #
     # @option params [String] :next_token
     #   The start token for paginated calls. Retrieved from the response of a
-    #   previous ListEventRules call. Next token uses Base64 encoding.
+    #   previous `ListEventRules` call. Next token uses Base64 encoding.
     #
     # @return [Types::ListEventRulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1041,16 +1428,302 @@ module Aws::Notifications
       req.send_request(options)
     end
 
-    # Returns a list of abbreviated NotificationConfigurations according to
-    # specified filters, in reverse chronological order (newest first).
+    # Returns a list of Account contacts and Channels associated with a
+    # `ManagedNotificationConfiguration`, in paginated format.
+    #
+    # @option params [required, String] :managed_notification_configuration_arn
+    #   The Amazon Resource Name (ARN) of the
+    #   `ManagedNotificationConfiguration` to match.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned in this call. Defaults to
+    #   20.
+    #
+    # @option params [String] :next_token
+    #   The start token for paginated calls. Retrieved from the response of a
+    #   previous `ListManagedNotificationChannelAssociations` call.
+    #
+    # @return [Types::ListManagedNotificationChannelAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListManagedNotificationChannelAssociationsResponse#next_token #next_token} => String
+    #   * {Types::ListManagedNotificationChannelAssociationsResponse#channel_associations #channel_associations} => Array&lt;Types::ManagedNotificationChannelAssociationSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_managed_notification_channel_associations({
+    #     managed_notification_configuration_arn: "ManagedNotificationConfigurationOsArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.channel_associations #=> Array
+    #   resp.channel_associations[0].channel_identifier #=> String
+    #   resp.channel_associations[0].channel_type #=> String, one of "MOBILE", "CHATBOT", "EMAIL", "ACCOUNT_CONTACT"
+    #   resp.channel_associations[0].override_option #=> String, one of "ENABLED", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/ListManagedNotificationChannelAssociations AWS API Documentation
+    #
+    # @overload list_managed_notification_channel_associations(params = {})
+    # @param [Hash] params ({})
+    def list_managed_notification_channel_associations(params = {}, options = {})
+      req = build_request(:list_managed_notification_channel_associations, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of `ManagedNotificationChildEvents` for a specified
+    # aggregate `ManagedNotificationEvent`, ordered by creation time in
+    # reverse chronological order (newest first).
+    #
+    # @option params [required, String] :aggregate_managed_notification_event_arn
+    #   The Amazon Resource Name (ARN) of the `ManagedNotificationEvent`.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #   The earliest time of events to return from this call.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #   Latest time of events to return from this call.
+    #
+    # @option params [String] :locale
+    #   The locale code of the language used for the retrieved
+    #   `NotificationEvent`. The default locale is English.`en_US`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned in this call. Defaults to
+    #   20.
+    #
+    # @option params [String] :related_account
+    #   The Amazon Web Services account ID associated with the Managed
+    #   Notification Child Events.
+    #
+    # @option params [String] :organizational_unit_id
+    #   The identifier of the Amazon Web Services Organizations organizational
+    #   unit (OU) associated with the Managed Notification Child Events.
+    #
+    # @option params [String] :next_token
+    #   The start token for paginated calls. Retrieved from the response of a
+    #   previous ListManagedNotificationChannelAssociations call. Next token
+    #   uses Base64 encoding.
+    #
+    # @return [Types::ListManagedNotificationChildEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListManagedNotificationChildEventsResponse#next_token #next_token} => String
+    #   * {Types::ListManagedNotificationChildEventsResponse#managed_notification_child_events #managed_notification_child_events} => Array&lt;Types::ManagedNotificationChildEventOverview&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_managed_notification_child_events({
+    #     aggregate_managed_notification_event_arn: "ManagedNotificationEventArn", # required
+    #     start_time: Time.now,
+    #     end_time: Time.now,
+    #     locale: "de_DE", # accepts de_DE, en_CA, en_US, en_UK, es_ES, fr_CA, fr_FR, id_ID, it_IT, ja_JP, ko_KR, pt_BR, tr_TR, zh_CN, zh_TW
+    #     max_results: 1,
+    #     related_account: "AccountId",
+    #     organizational_unit_id: "OrganizationalUnitId",
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.managed_notification_child_events #=> Array
+    #   resp.managed_notification_child_events[0].arn #=> String
+    #   resp.managed_notification_child_events[0].managed_notification_configuration_arn #=> String
+    #   resp.managed_notification_child_events[0].related_account #=> String
+    #   resp.managed_notification_child_events[0].creation_time #=> Time
+    #   resp.managed_notification_child_events[0].child_event.schema_version #=> String, one of "v1.0"
+    #   resp.managed_notification_child_events[0].child_event.source_event_metadata.event_origin_region #=> String
+    #   resp.managed_notification_child_events[0].child_event.source_event_metadata.source #=> String
+    #   resp.managed_notification_child_events[0].child_event.source_event_metadata.event_type #=> String
+    #   resp.managed_notification_child_events[0].child_event.message_components.headline #=> String
+    #   resp.managed_notification_child_events[0].child_event.aggregation_detail.summarization_dimensions #=> Array
+    #   resp.managed_notification_child_events[0].child_event.aggregation_detail.summarization_dimensions[0].name #=> String
+    #   resp.managed_notification_child_events[0].child_event.aggregation_detail.summarization_dimensions[0].value #=> String
+    #   resp.managed_notification_child_events[0].child_event.event_status #=> String, one of "HEALTHY", "UNHEALTHY"
+    #   resp.managed_notification_child_events[0].child_event.notification_type #=> String, one of "ALERT", "WARNING", "ANNOUNCEMENT", "INFORMATIONAL"
+    #   resp.managed_notification_child_events[0].aggregate_managed_notification_event_arn #=> String
+    #   resp.managed_notification_child_events[0].organizational_unit_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/ListManagedNotificationChildEvents AWS API Documentation
+    #
+    # @overload list_managed_notification_child_events(params = {})
+    # @param [Hash] params ({})
+    def list_managed_notification_child_events(params = {}, options = {})
+      req = build_request(:list_managed_notification_child_events, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of Managed Notification Configurations according to
+    # specified filters, ordered by creation time in reverse chronological
+    # order (newest first).
+    #
+    # @option params [String] :channel_identifier
+    #   The identifier or ARN of the notification channel to filter
+    #   configurations by.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned in this call. Defaults to
+    #   20.
+    #
+    # @option params [String] :next_token
+    #   The start token for paginated calls. Retrieved from the response of a
+    #   previous ListManagedNotificationChannelAssociations call. Next token
+    #   uses Base64 encoding.
+    #
+    # @return [Types::ListManagedNotificationConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListManagedNotificationConfigurationsResponse#next_token #next_token} => String
+    #   * {Types::ListManagedNotificationConfigurationsResponse#managed_notification_configurations #managed_notification_configurations} => Array&lt;Types::ManagedNotificationConfigurationStructure&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_managed_notification_configurations({
+    #     channel_identifier: "ChannelIdentifier",
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.managed_notification_configurations #=> Array
+    #   resp.managed_notification_configurations[0].arn #=> String
+    #   resp.managed_notification_configurations[0].name #=> String
+    #   resp.managed_notification_configurations[0].description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/ListManagedNotificationConfigurations AWS API Documentation
+    #
+    # @overload list_managed_notification_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_managed_notification_configurations(params = {}, options = {})
+      req = build_request(:list_managed_notification_configurations, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of Managed Notification Events according to specified
+    # filters, ordered by creation time in reverse chronological order
+    # (newest first).
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #   The earliest time of events to return from this call.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #   Latest time of events to return from this call.
+    #
+    # @option params [String] :locale
+    #   The locale code of the language used for the retrieved
+    #   NotificationEvent. The default locale is English (en\_US).
+    #
+    # @option params [String] :source
+    #   The Amazon Web Services service the event originates from. For example
+    #   aws.cloudwatch.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned in this call. Defaults to
+    #   20.
+    #
+    # @option params [String] :next_token
+    #   The start token for paginated calls. Retrieved from the response of a
+    #   previous `ListManagedNotificationChannelAssociations` call. Next token
+    #   uses Base64 encoding.
+    #
+    # @option params [String] :organizational_unit_id
+    #   The Organizational Unit Id that an Amazon Web Services account belongs
+    #   to.
+    #
+    # @option params [String] :related_account
+    #   The Amazon Web Services account ID associated with the Managed
+    #   Notification Events.
+    #
+    # @return [Types::ListManagedNotificationEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListManagedNotificationEventsResponse#next_token #next_token} => String
+    #   * {Types::ListManagedNotificationEventsResponse#managed_notification_events #managed_notification_events} => Array&lt;Types::ManagedNotificationEventOverview&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_managed_notification_events({
+    #     start_time: Time.now,
+    #     end_time: Time.now,
+    #     locale: "de_DE", # accepts de_DE, en_CA, en_US, en_UK, es_ES, fr_CA, fr_FR, id_ID, it_IT, ja_JP, ko_KR, pt_BR, tr_TR, zh_CN, zh_TW
+    #     source: "Source",
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     organizational_unit_id: "OrganizationalUnitId",
+    #     related_account: "AccountId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.managed_notification_events #=> Array
+    #   resp.managed_notification_events[0].arn #=> String
+    #   resp.managed_notification_events[0].managed_notification_configuration_arn #=> String
+    #   resp.managed_notification_events[0].related_account #=> String
+    #   resp.managed_notification_events[0].creation_time #=> Time
+    #   resp.managed_notification_events[0].notification_event.schema_version #=> String, one of "v1.0"
+    #   resp.managed_notification_events[0].notification_event.source_event_metadata.event_origin_region #=> String
+    #   resp.managed_notification_events[0].notification_event.source_event_metadata.source #=> String
+    #   resp.managed_notification_events[0].notification_event.source_event_metadata.event_type #=> String
+    #   resp.managed_notification_events[0].notification_event.message_components.headline #=> String
+    #   resp.managed_notification_events[0].notification_event.event_status #=> String, one of "HEALTHY", "UNHEALTHY"
+    #   resp.managed_notification_events[0].notification_event.notification_type #=> String, one of "ALERT", "WARNING", "ANNOUNCEMENT", "INFORMATIONAL"
+    #   resp.managed_notification_events[0].aggregation_event_type #=> String, one of "AGGREGATE", "CHILD", "NONE"
+    #   resp.managed_notification_events[0].organizational_unit_id #=> String
+    #   resp.managed_notification_events[0].aggregation_summary.event_count #=> Integer
+    #   resp.managed_notification_events[0].aggregation_summary.aggregated_by #=> Array
+    #   resp.managed_notification_events[0].aggregation_summary.aggregated_by[0].name #=> String
+    #   resp.managed_notification_events[0].aggregation_summary.aggregated_by[0].value #=> String
+    #   resp.managed_notification_events[0].aggregation_summary.aggregated_accounts.name #=> String
+    #   resp.managed_notification_events[0].aggregation_summary.aggregated_accounts.count #=> Integer
+    #   resp.managed_notification_events[0].aggregation_summary.aggregated_accounts.sample_values #=> Array
+    #   resp.managed_notification_events[0].aggregation_summary.aggregated_accounts.sample_values[0] #=> String
+    #   resp.managed_notification_events[0].aggregation_summary.aggregated_regions.name #=> String
+    #   resp.managed_notification_events[0].aggregation_summary.aggregated_regions.count #=> Integer
+    #   resp.managed_notification_events[0].aggregation_summary.aggregated_regions.sample_values #=> Array
+    #   resp.managed_notification_events[0].aggregation_summary.aggregated_regions.sample_values[0] #=> String
+    #   resp.managed_notification_events[0].aggregation_summary.aggregated_organizational_units.name #=> String
+    #   resp.managed_notification_events[0].aggregation_summary.aggregated_organizational_units.count #=> Integer
+    #   resp.managed_notification_events[0].aggregation_summary.aggregated_organizational_units.sample_values #=> Array
+    #   resp.managed_notification_events[0].aggregation_summary.aggregated_organizational_units.sample_values[0] #=> String
+    #   resp.managed_notification_events[0].aggregation_summary.additional_summarization_dimensions #=> Array
+    #   resp.managed_notification_events[0].aggregation_summary.additional_summarization_dimensions[0].name #=> String
+    #   resp.managed_notification_events[0].aggregation_summary.additional_summarization_dimensions[0].count #=> Integer
+    #   resp.managed_notification_events[0].aggregation_summary.additional_summarization_dimensions[0].sample_values #=> Array
+    #   resp.managed_notification_events[0].aggregation_summary.additional_summarization_dimensions[0].sample_values[0] #=> String
+    #   resp.managed_notification_events[0].aggregated_notification_regions #=> Array
+    #   resp.managed_notification_events[0].aggregated_notification_regions[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/ListManagedNotificationEvents AWS API Documentation
+    #
+    # @overload list_managed_notification_events(params = {})
+    # @param [Hash] params ({})
+    def list_managed_notification_events(params = {}, options = {})
+      req = build_request(:list_managed_notification_events, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of abbreviated `NotificationConfigurations` according
+    # to specified filters, in reverse chronological order (newest first).
     #
     # @option params [String] :event_rule_source
     #   The matched event source.
     #
-    #   Must match one of the valid EventBridge sources. Only AWS service
-    #   sourced events are supported. For example, `aws.ec2` and
-    #   `aws.cloudwatch`. For more information, see [Event delivery from AWS
-    #   services][1] in the *Amazon EventBridge User Guide*.
+    #   Must match one of the valid EventBridge sources. Only Amazon Web
+    #   Services service sourced events are supported. For example, `aws.ec2`
+    #   and `aws.cloudwatch`. For more information, see [Event delivery from
+    #   Amazon Web Services services][1] in the *Amazon EventBridge User
+    #   Guide*.
     #
     #
     #
@@ -1060,29 +1733,29 @@ module Aws::Notifications
     #   The Amazon Resource Name (ARN) of the Channel to match.
     #
     # @option params [String] :status
-    #   The NotificationConfiguration status to match.
+    #   The `NotificationConfiguration` status to match.
     #
     #   * Values:
     #
     #     * `ACTIVE`
     #
-    #       * All EventRules are `ACTIVE` and any call can be run.
+    #       * All `EventRules` are `ACTIVE` and any call can be run.
     #
     #       ^
     #     * `PARTIALLY_ACTIVE`
     #
-    #       * Some EventRules are `ACTIVE` and some are `INACTIVE`. Any call
+    #       * Some `EventRules` are `ACTIVE` and some are `INACTIVE`. Any call
     #         can be run.
     #
     #       * Any call can be run.
     #     * `INACTIVE`
     #
-    #       * All EventRules are `INACTIVE` and any call can be run.
+    #       * All `EventRules` are `INACTIVE` and any call can be run.
     #
     #       ^
     #     * `DELETING`
     #
-    #       * This NotificationConfiguration is being deleted.
+    #       * This `NotificationConfiguration` is being deleted.
     #
     #       * Only `GET` and `LIST` calls can be run.
     #
@@ -1092,7 +1765,7 @@ module Aws::Notifications
     #
     # @option params [String] :next_token
     #   The start token for paginated calls. Retrieved from the response of a
-    #   previous ListEventRules call. Next token uses Base64 encoding.
+    #   previous `ListEventRules` call. Next token uses Base64 encoding.
     #
     # @return [Types::ListNotificationConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1131,7 +1804,7 @@ module Aws::Notifications
       req.send_request(options)
     end
 
-    # Returns a list of NotificationEvents according to specified filters,
+    # Returns a list of `NotificationEvents` according to specified filters,
     # in reverse chronological order (newest first).
     #
     # User Notifications stores notifications in the individual Regions you
@@ -1141,7 +1814,7 @@ module Aws::Notifications
     # backfill notifications to new Regions selected as notification hubs.
     # For this reason, we recommend that you make calls in your oldest
     # registered notification hub. For more information, see [Notification
-    # hubs][1] in the *AWS User Notifications User Guide*.
+    # hubs][1] in the *Amazon Web Services User Notifications User Guide*.
     #
     #
     #
@@ -1155,15 +1828,16 @@ module Aws::Notifications
     #
     # @option params [String] :locale
     #   The locale code of the language used for the retrieved
-    #   NotificationEvent. The default locale is English `(en_US)`.
+    #   `NotificationEvent`. The default locale is English `(en_US)`.
     #
     # @option params [String] :source
     #   The matched event source.
     #
-    #   Must match one of the valid EventBridge sources. Only AWS service
-    #   sourced events are supported. For example, `aws.ec2` and
-    #   `aws.cloudwatch`. For more information, see [Event delivery from AWS
-    #   services][1] in the *Amazon EventBridge User Guide*.
+    #   Must match one of the valid EventBridge sources. Only Amazon Web
+    #   Services service sourced events are supported. For example, `aws.ec2`
+    #   and `aws.cloudwatch`. For more information, see [Event delivery from
+    #   Amazon Web Services services][1] in the *Amazon EventBridge User
+    #   Guide*.
     #
     #
     #
@@ -1173,7 +1847,7 @@ module Aws::Notifications
     #   Include aggregated child events in the result.
     #
     # @option params [String] :aggregate_notification_event_arn
-    #   The Amazon Resource Name (ARN) of the aggregatedNotificationEventArn
+    #   The Amazon Resource Name (ARN) of the `aggregatedNotificationEventArn`
     #   to match.
     #
     # @option params [Integer] :max_results
@@ -1182,7 +1856,7 @@ module Aws::Notifications
     #
     # @option params [String] :next_token
     #   The start token for paginated calls. Retrieved from the response of a
-    #   previous ListEventRules call. Next token uses Base64 encoding.
+    #   previous `ListEventRules` call. Next token uses Base64 encoding.
     #
     # @return [Types::ListNotificationEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1221,6 +1895,27 @@ module Aws::Notifications
     #   resp.notification_events[0].notification_event.notification_type #=> String, one of "ALERT", "WARNING", "ANNOUNCEMENT", "INFORMATIONAL"
     #   resp.notification_events[0].aggregation_event_type #=> String, one of "AGGREGATE", "CHILD", "NONE"
     #   resp.notification_events[0].aggregate_notification_event_arn #=> String
+    #   resp.notification_events[0].aggregation_summary.event_count #=> Integer
+    #   resp.notification_events[0].aggregation_summary.aggregated_by #=> Array
+    #   resp.notification_events[0].aggregation_summary.aggregated_by[0].name #=> String
+    #   resp.notification_events[0].aggregation_summary.aggregated_by[0].value #=> String
+    #   resp.notification_events[0].aggregation_summary.aggregated_accounts.name #=> String
+    #   resp.notification_events[0].aggregation_summary.aggregated_accounts.count #=> Integer
+    #   resp.notification_events[0].aggregation_summary.aggregated_accounts.sample_values #=> Array
+    #   resp.notification_events[0].aggregation_summary.aggregated_accounts.sample_values[0] #=> String
+    #   resp.notification_events[0].aggregation_summary.aggregated_regions.name #=> String
+    #   resp.notification_events[0].aggregation_summary.aggregated_regions.count #=> Integer
+    #   resp.notification_events[0].aggregation_summary.aggregated_regions.sample_values #=> Array
+    #   resp.notification_events[0].aggregation_summary.aggregated_regions.sample_values[0] #=> String
+    #   resp.notification_events[0].aggregation_summary.aggregated_organizational_units.name #=> String
+    #   resp.notification_events[0].aggregation_summary.aggregated_organizational_units.count #=> Integer
+    #   resp.notification_events[0].aggregation_summary.aggregated_organizational_units.sample_values #=> Array
+    #   resp.notification_events[0].aggregation_summary.aggregated_organizational_units.sample_values[0] #=> String
+    #   resp.notification_events[0].aggregation_summary.additional_summarization_dimensions #=> Array
+    #   resp.notification_events[0].aggregation_summary.additional_summarization_dimensions[0].name #=> String
+    #   resp.notification_events[0].aggregation_summary.additional_summarization_dimensions[0].count #=> Integer
+    #   resp.notification_events[0].aggregation_summary.additional_summarization_dimensions[0].sample_values #=> Array
+    #   resp.notification_events[0].aggregation_summary.additional_summarization_dimensions[0].sample_values[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/ListNotificationEvents AWS API Documentation
     #
@@ -1231,7 +1926,7 @@ module Aws::Notifications
       req.send_request(options)
     end
 
-    # Returns a list of NotificationHubs.
+    # Returns a list of `NotificationHubs`.
     #
     # @option params [Integer] :max_results
     #   The maximum number of records to list in a single response.
@@ -1275,10 +1970,11 @@ module Aws::Notifications
 
     # Returns a list of tags for a specified Amazon Resource Name (ARN).
     #
-    # For more information, see [Tagging your AWS resources][1] in the
-    # *Tagging AWS Resources User Guide*.
+    # For more information, see [Tagging your Amazon Web Services
+    # resources][1] in the *Tagging Amazon Web Services Resources User
+    # Guide*.
     #
-    # <note markdown="1"> This is only supported for NotificationConfigurations.
+    # <note markdown="1"> This is only supported for `NotificationConfigurations`.
     #
     #  </note>
     #
@@ -1313,13 +2009,13 @@ module Aws::Notifications
       req.send_request(options)
     end
 
-    # Registers a NotificationHub in the specified Region.
+    # Registers a `NotificationConfiguration` in the specified Region.
     #
-    # There is a maximum of one NotificationHub per Region. You can have a
-    # maximum of 3 NotificationHubs at a time.
+    # There is a maximum of one `NotificationConfiguration` per Region. You
+    # can have a maximum of 3 `NotificationHub` resources at a time.
     #
     # @option params [required, String] :notification_hub_region
-    #   The Region of the NotificationHub.
+    #   The Region of the `NotificationHub`.
     #
     # @return [Types::RegisterNotificationHubResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1353,10 +2049,11 @@ module Aws::Notifications
 
     # Tags the resource with a tag key and value.
     #
-    # For more information, see [Tagging your AWS resources][1] in the
-    # *Tagging AWS Resources User Guide*.
+    # For more information, see [Tagging your Amazon Web Services
+    # resources][1] in the *Tagging Amazon Web Services Resources User
+    # Guide*.
     #
-    # <note markdown="1"> This is only supported for NotificationConfigurations.
+    # <note markdown="1"> This is only supported for `NotificationConfigurations`.
     #
     #  </note>
     #
@@ -1393,8 +2090,9 @@ module Aws::Notifications
 
     # Untags a resource with a specified Amazon Resource Name (ARN).
     #
-    # For more information, see [Tagging your AWS resources][1] in the
-    # *Tagging AWS Resources User Guide*.
+    # For more information, see [Tagging your Amazon Web Services
+    # resources][1] in the *Tagging Amazon Web Services Resources User
+    # Guide*.
     #
     #
     #
@@ -1424,14 +2122,14 @@ module Aws::Notifications
       req.send_request(options)
     end
 
-    # Updates an existing EventRule.
+    # Updates an existing `EventRule`.
     #
     # @option params [required, String] :arn
-    #   The Amazon Resource Name (ARN) to use to update the EventRule.
+    #   The Amazon Resource Name (ARN) to use to update the `EventRule`.
     #
     # @option params [String] :event_pattern
     #   An additional event pattern used to further filter the events this
-    #   EventRule receives.
+    #   `EventRule` receives.
     #
     #   For more information, see [Amazon EventBridge event patterns][1] in
     #   the *Amazon EventBridge User Guide.*
@@ -1441,7 +2139,8 @@ module Aws::Notifications
     #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html
     #
     # @option params [Array<String>] :regions
-    #   A list of AWS Regions that sends events to this EventRule.
+    #   A list of Amazon Web Services Regions that sends events to this
+    #   `EventRule`.
     #
     # @return [Types::UpdateEventRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1474,47 +2173,38 @@ module Aws::Notifications
       req.send_request(options)
     end
 
-    # Updates a NotificationConfiguration.
+    # Updates a `NotificationConfiguration`.
     #
     # @option params [required, String] :arn
     #   The Amazon Resource Name (ARN) used to update the
-    #   NotificationConfiguration.
+    #   `NotificationConfiguration`.
     #
     # @option params [String] :name
-    #   The name of the NotificationConfiguration.
+    #   The name of the `NotificationConfiguration`.
     #
     # @option params [String] :description
-    #   The description of the NotificationConfiguration.
+    #   The description of the `NotificationConfiguration`.
     #
     # @option params [String] :aggregation_duration
-    #   The status of this NotificationConfiguration.
-    #
-    #   The status should always be `INACTIVE` when part of the
-    #   CreateNotificationConfiguration response.
+    #   The aggregation preference of the `NotificationConfiguration`.
     #
     #   * Values:
     #
-    #     * `ACTIVE`
+    #     * `LONG`
     #
-    #       * All EventRules are `ACTIVE` and any call can be run.
-    #
-    #       ^
-    #     * `PARTIALLY_ACTIVE`
-    #
-    #       * Some EventRules are `ACTIVE` and some are `INACTIVE`. Any call
-    #         can be run.
-    #
-    #       * Any call can be run.
-    #     * `INACTIVE`
-    #
-    #       * All EventRules are `INACTIVE` and any call can be run.
+    #       * Aggregate notifications for long periods of time (12 hours).
     #
     #       ^
-    #     * `DELETING`
+    #     * `SHORT`
     #
-    #       * This NotificationConfiguration is being deleted.
+    #       * Aggregate notifications for short periods of time (5 minutes).
     #
-    #       * Only `GET` and `LIST` calls can be run.
+    #       ^
+    #     * `NONE`
+    #
+    #       * Don't aggregate notifications.
+    #
+    #       ^
     #
     # @return [Types::UpdateNotificationConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1560,7 +2250,7 @@ module Aws::Notifications
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-notifications'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

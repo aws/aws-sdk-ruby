@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2025-01-17)
+------------------
+
+* Feature - Doc only update for Detective documentation.
+
 1.61.0 (2025-01-15)
 ------------------
 

@@ -34702,8 +34702,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] image
-    #   The Amazon EC2 Container Registry path where inference code is
-    #   stored.
+    #   The Amazon Elastic Container Registry (Amazon ECR) path where
+    #   inference code is stored.
     #
     #   If you are using your own custom algorithm instead of an algorithm
     #   provided by SageMaker, the inference code must meet SageMaker

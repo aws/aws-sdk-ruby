@@ -87,6 +87,26 @@ module Aws
                              ) -> _AssociateChannelResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateChannelResponseSuccess
 
+      interface _AssociateManagedNotificationAccountContactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateManagedNotificationAccountContactResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Notifications/Client.html#associate_managed_notification_account_contact-instance_method
+      def associate_managed_notification_account_contact: (
+                                                            contact_identifier: ("ACCOUNT_PRIMARY" | "ACCOUNT_ALTERNATE_BILLING" | "ACCOUNT_ALTERNATE_OPERATIONS" | "ACCOUNT_ALTERNATE_SECURITY"),
+                                                            managed_notification_configuration_arn: ::String
+                                                          ) -> _AssociateManagedNotificationAccountContactResponseSuccess
+                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateManagedNotificationAccountContactResponseSuccess
+
+      interface _AssociateManagedNotificationAdditionalChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateManagedNotificationAdditionalChannelResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Notifications/Client.html#associate_managed_notification_additional_channel-instance_method
+      def associate_managed_notification_additional_channel: (
+                                                               channel_arn: ::String,
+                                                               managed_notification_configuration_arn: ::String
+                                                             ) -> _AssociateManagedNotificationAdditionalChannelResponseSuccess
+                                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateManagedNotificationAdditionalChannelResponseSuccess
+
       interface _CreateEventRuleResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateEventRuleResponse]
         def arn: () -> ::String
@@ -146,6 +166,14 @@ module Aws
                                        ) -> _DeregisterNotificationHubResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterNotificationHubResponseSuccess
 
+      interface _DisableNotificationsAccessForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisableNotificationsAccessForOrganizationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Notifications/Client.html#disable_notifications_access_for_organization-instance_method
+      def disable_notifications_access_for_organization: (
+                                                         ) -> _DisableNotificationsAccessForOrganizationResponseSuccess
+                                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableNotificationsAccessForOrganizationResponseSuccess
+
       interface _DisassociateChannelResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateChannelResponse]
       end
@@ -155,6 +183,34 @@ module Aws
                                   notification_configuration_arn: ::String
                                 ) -> _DisassociateChannelResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateChannelResponseSuccess
+
+      interface _DisassociateManagedNotificationAccountContactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateManagedNotificationAccountContactResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Notifications/Client.html#disassociate_managed_notification_account_contact-instance_method
+      def disassociate_managed_notification_account_contact: (
+                                                               contact_identifier: ("ACCOUNT_PRIMARY" | "ACCOUNT_ALTERNATE_BILLING" | "ACCOUNT_ALTERNATE_OPERATIONS" | "ACCOUNT_ALTERNATE_SECURITY"),
+                                                               managed_notification_configuration_arn: ::String
+                                                             ) -> _DisassociateManagedNotificationAccountContactResponseSuccess
+                                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateManagedNotificationAccountContactResponseSuccess
+
+      interface _DisassociateManagedNotificationAdditionalChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateManagedNotificationAdditionalChannelResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Notifications/Client.html#disassociate_managed_notification_additional_channel-instance_method
+      def disassociate_managed_notification_additional_channel: (
+                                                                  channel_arn: ::String,
+                                                                  managed_notification_configuration_arn: ::String
+                                                                ) -> _DisassociateManagedNotificationAdditionalChannelResponseSuccess
+                                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateManagedNotificationAdditionalChannelResponseSuccess
+
+      interface _EnableNotificationsAccessForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableNotificationsAccessForOrganizationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Notifications/Client.html#enable_notifications_access_for_organization-instance_method
+      def enable_notifications_access_for_organization: (
+                                                        ) -> _EnableNotificationsAccessForOrganizationResponseSuccess
+                                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableNotificationsAccessForOrganizationResponseSuccess
 
       interface _GetEventRuleResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetEventRuleResponse]
@@ -173,6 +229,48 @@ module Aws
                             arn: ::String
                           ) -> _GetEventRuleResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEventRuleResponseSuccess
+
+      interface _GetManagedNotificationChildEventResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetManagedNotificationChildEventResponse]
+        def arn: () -> ::String
+        def managed_notification_configuration_arn: () -> ::String
+        def creation_time: () -> ::Time
+        def content: () -> Types::ManagedNotificationChildEvent
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Notifications/Client.html#get_managed_notification_child_event-instance_method
+      def get_managed_notification_child_event: (
+                                                  arn: ::String,
+                                                  ?locale: ("de_DE" | "en_CA" | "en_US" | "en_UK" | "es_ES" | "fr_CA" | "fr_FR" | "id_ID" | "it_IT" | "ja_JP" | "ko_KR" | "pt_BR" | "tr_TR" | "zh_CN" | "zh_TW")
+                                                ) -> _GetManagedNotificationChildEventResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetManagedNotificationChildEventResponseSuccess
+
+      interface _GetManagedNotificationConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetManagedNotificationConfigurationResponse]
+        def arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def category: () -> ::String
+        def sub_category: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Notifications/Client.html#get_managed_notification_configuration-instance_method
+      def get_managed_notification_configuration: (
+                                                    arn: ::String
+                                                  ) -> _GetManagedNotificationConfigurationResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetManagedNotificationConfigurationResponseSuccess
+
+      interface _GetManagedNotificationEventResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetManagedNotificationEventResponse]
+        def arn: () -> ::String
+        def managed_notification_configuration_arn: () -> ::String
+        def creation_time: () -> ::Time
+        def content: () -> Types::ManagedNotificationEvent
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Notifications/Client.html#get_managed_notification_event-instance_method
+      def get_managed_notification_event: (
+                                            arn: ::String,
+                                            ?locale: ("de_DE" | "en_CA" | "en_US" | "en_UK" | "es_ES" | "fr_CA" | "fr_FR" | "id_ID" | "it_IT" | "ja_JP" | "ko_KR" | "pt_BR" | "tr_TR" | "zh_CN" | "zh_TW")
+                                          ) -> _GetManagedNotificationEventResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetManagedNotificationEventResponseSuccess
 
       interface _GetNotificationConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetNotificationConfigurationResponse]
@@ -203,6 +301,15 @@ module Aws
                                   ) -> _GetNotificationEventResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetNotificationEventResponseSuccess
 
+      interface _GetNotificationsAccessForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetNotificationsAccessForOrganizationResponse]
+        def notifications_access_for_organization: () -> Types::NotificationsAccessForOrganization
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Notifications/Client.html#get_notifications_access_for_organization-instance_method
+      def get_notifications_access_for_organization: (
+                                                     ) -> _GetNotificationsAccessForOrganizationResponseSuccess
+                                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetNotificationsAccessForOrganizationResponseSuccess
+
       interface _ListChannelsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListChannelsResponse]
         def next_token: () -> ::String
@@ -228,6 +335,68 @@ module Aws
                               ?next_token: ::String
                             ) -> _ListEventRulesResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEventRulesResponseSuccess
+
+      interface _ListManagedNotificationChannelAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListManagedNotificationChannelAssociationsResponse]
+        def next_token: () -> ::String
+        def channel_associations: () -> ::Array[Types::ManagedNotificationChannelAssociationSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Notifications/Client.html#list_managed_notification_channel_associations-instance_method
+      def list_managed_notification_channel_associations: (
+                                                            managed_notification_configuration_arn: ::String,
+                                                            ?max_results: ::Integer,
+                                                            ?next_token: ::String
+                                                          ) -> _ListManagedNotificationChannelAssociationsResponseSuccess
+                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListManagedNotificationChannelAssociationsResponseSuccess
+
+      interface _ListManagedNotificationChildEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListManagedNotificationChildEventsResponse]
+        def next_token: () -> ::String
+        def managed_notification_child_events: () -> ::Array[Types::ManagedNotificationChildEventOverview]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Notifications/Client.html#list_managed_notification_child_events-instance_method
+      def list_managed_notification_child_events: (
+                                                    aggregate_managed_notification_event_arn: ::String,
+                                                    ?start_time: ::Time,
+                                                    ?end_time: ::Time,
+                                                    ?locale: ("de_DE" | "en_CA" | "en_US" | "en_UK" | "es_ES" | "fr_CA" | "fr_FR" | "id_ID" | "it_IT" | "ja_JP" | "ko_KR" | "pt_BR" | "tr_TR" | "zh_CN" | "zh_TW"),
+                                                    ?max_results: ::Integer,
+                                                    ?related_account: ::String,
+                                                    ?organizational_unit_id: ::String,
+                                                    ?next_token: ::String
+                                                  ) -> _ListManagedNotificationChildEventsResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListManagedNotificationChildEventsResponseSuccess
+
+      interface _ListManagedNotificationConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListManagedNotificationConfigurationsResponse]
+        def next_token: () -> ::String
+        def managed_notification_configurations: () -> ::Array[Types::ManagedNotificationConfigurationStructure]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Notifications/Client.html#list_managed_notification_configurations-instance_method
+      def list_managed_notification_configurations: (
+                                                      ?channel_identifier: ::String,
+                                                      ?max_results: ::Integer,
+                                                      ?next_token: ::String
+                                                    ) -> _ListManagedNotificationConfigurationsResponseSuccess
+                                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListManagedNotificationConfigurationsResponseSuccess
+
+      interface _ListManagedNotificationEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListManagedNotificationEventsResponse]
+        def next_token: () -> ::String
+        def managed_notification_events: () -> ::Array[Types::ManagedNotificationEventOverview]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Notifications/Client.html#list_managed_notification_events-instance_method
+      def list_managed_notification_events: (
+                                              ?start_time: ::Time,
+                                              ?end_time: ::Time,
+                                              ?locale: ("de_DE" | "en_CA" | "en_US" | "en_UK" | "es_ES" | "fr_CA" | "fr_FR" | "id_ID" | "it_IT" | "ja_JP" | "ko_KR" | "pt_BR" | "tr_TR" | "zh_CN" | "zh_TW"),
+                                              ?source: ::String,
+                                              ?max_results: ::Integer,
+                                              ?next_token: ::String,
+                                              ?organizational_unit_id: ::String,
+                                              ?related_account: ::String
+                                            ) -> _ListManagedNotificationEventsResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListManagedNotificationEventsResponseSuccess
 
       interface _ListNotificationConfigurationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListNotificationConfigurationsResponse]

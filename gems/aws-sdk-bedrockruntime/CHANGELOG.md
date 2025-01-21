@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2025-01-17)
+------------------
+
+* Feature - Allow hyphens in tool name for Converse and ConverseStream APIs
+
 1.35.0 (2025-01-15)
 ------------------
 

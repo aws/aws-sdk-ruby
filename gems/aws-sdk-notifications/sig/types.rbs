@@ -13,6 +13,27 @@ module Aws::Notifications
       SENSITIVE: []
     end
 
+    class AggregationDetail
+      attr_accessor summarization_dimensions: ::Array[Types::SummarizationDimensionDetail]
+      SENSITIVE: []
+    end
+
+    class AggregationKey
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class AggregationSummary
+      attr_accessor event_count: ::Integer
+      attr_accessor aggregated_by: ::Array[Types::AggregationKey]
+      attr_accessor aggregated_accounts: Types::SummarizationDimensionOverview
+      attr_accessor aggregated_regions: Types::SummarizationDimensionOverview
+      attr_accessor aggregated_organizational_units: Types::SummarizationDimensionOverview
+      attr_accessor additional_summarization_dimensions: ::Array[Types::SummarizationDimensionOverview]
+      SENSITIVE: []
+    end
+
     class AssociateChannelRequest
       attr_accessor arn: ::String
       attr_accessor notification_configuration_arn: ::String
@@ -20,6 +41,24 @@ module Aws::Notifications
     end
 
     class AssociateChannelResponse < Aws::EmptyStructure
+    end
+
+    class AssociateManagedNotificationAccountContactRequest
+      attr_accessor contact_identifier: ("ACCOUNT_PRIMARY" | "ACCOUNT_ALTERNATE_BILLING" | "ACCOUNT_ALTERNATE_OPERATIONS" | "ACCOUNT_ALTERNATE_SECURITY")
+      attr_accessor managed_notification_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateManagedNotificationAccountContactResponse < Aws::EmptyStructure
+    end
+
+    class AssociateManagedNotificationAdditionalChannelRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor managed_notification_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateManagedNotificationAdditionalChannelResponse < Aws::EmptyStructure
     end
 
     class ConflictException
@@ -91,6 +130,12 @@ module Aws::Notifications
       SENSITIVE: []
     end
 
+    class DisableNotificationsAccessForOrganizationRequest < Aws::EmptyStructure
+    end
+
+    class DisableNotificationsAccessForOrganizationResponse < Aws::EmptyStructure
+    end
+
     class DisassociateChannelRequest
       attr_accessor arn: ::String
       attr_accessor notification_configuration_arn: ::String
@@ -98,6 +143,30 @@ module Aws::Notifications
     end
 
     class DisassociateChannelResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateManagedNotificationAccountContactRequest
+      attr_accessor contact_identifier: ("ACCOUNT_PRIMARY" | "ACCOUNT_ALTERNATE_BILLING" | "ACCOUNT_ALTERNATE_OPERATIONS" | "ACCOUNT_ALTERNATE_SECURITY")
+      attr_accessor managed_notification_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateManagedNotificationAccountContactResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateManagedNotificationAdditionalChannelRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor managed_notification_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateManagedNotificationAdditionalChannelResponse < Aws::EmptyStructure
+    end
+
+    class EnableNotificationsAccessForOrganizationRequest < Aws::EmptyStructure
+    end
+
+    class EnableNotificationsAccessForOrganizationResponse < Aws::EmptyStructure
     end
 
     class EventRuleStatusSummary
@@ -137,6 +206,48 @@ module Aws::Notifications
       SENSITIVE: []
     end
 
+    class GetManagedNotificationChildEventRequest
+      attr_accessor arn: ::String
+      attr_accessor locale: ("de_DE" | "en_CA" | "en_US" | "en_UK" | "es_ES" | "fr_CA" | "fr_FR" | "id_ID" | "it_IT" | "ja_JP" | "ko_KR" | "pt_BR" | "tr_TR" | "zh_CN" | "zh_TW")
+      SENSITIVE: []
+    end
+
+    class GetManagedNotificationChildEventResponse
+      attr_accessor arn: ::String
+      attr_accessor managed_notification_configuration_arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor content: Types::ManagedNotificationChildEvent
+      SENSITIVE: []
+    end
+
+    class GetManagedNotificationConfigurationRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetManagedNotificationConfigurationResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor category: ::String
+      attr_accessor sub_category: ::String
+      SENSITIVE: []
+    end
+
+    class GetManagedNotificationEventRequest
+      attr_accessor arn: ::String
+      attr_accessor locale: ("de_DE" | "en_CA" | "en_US" | "en_UK" | "es_ES" | "fr_CA" | "fr_FR" | "id_ID" | "it_IT" | "ja_JP" | "ko_KR" | "pt_BR" | "tr_TR" | "zh_CN" | "zh_TW")
+      SENSITIVE: []
+    end
+
+    class GetManagedNotificationEventResponse
+      attr_accessor arn: ::String
+      attr_accessor managed_notification_configuration_arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor content: Types::ManagedNotificationEvent
+      SENSITIVE: []
+    end
+
     class GetNotificationConfigurationRequest
       attr_accessor arn: ::String
       SENSITIVE: []
@@ -163,6 +274,14 @@ module Aws::Notifications
       attr_accessor notification_configuration_arn: ::String
       attr_accessor creation_time: ::Time
       attr_accessor content: Types::NotificationEvent
+      SENSITIVE: []
+    end
+
+    class GetNotificationsAccessForOrganizationRequest < Aws::EmptyStructure
+    end
+
+    class GetNotificationsAccessForOrganizationResponse
+      attr_accessor notifications_access_for_organization: Types::NotificationsAccessForOrganization
       SENSITIVE: []
     end
 
@@ -194,6 +313,68 @@ module Aws::Notifications
     class ListEventRulesResponse
       attr_accessor next_token: ::String
       attr_accessor event_rules: ::Array[Types::EventRuleStructure]
+      SENSITIVE: []
+    end
+
+    class ListManagedNotificationChannelAssociationsRequest
+      attr_accessor managed_notification_configuration_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListManagedNotificationChannelAssociationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor channel_associations: ::Array[Types::ManagedNotificationChannelAssociationSummary]
+      SENSITIVE: []
+    end
+
+    class ListManagedNotificationChildEventsRequest
+      attr_accessor aggregate_managed_notification_event_arn: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor locale: ("de_DE" | "en_CA" | "en_US" | "en_UK" | "es_ES" | "fr_CA" | "fr_FR" | "id_ID" | "it_IT" | "ja_JP" | "ko_KR" | "pt_BR" | "tr_TR" | "zh_CN" | "zh_TW")
+      attr_accessor max_results: ::Integer
+      attr_accessor related_account: ::String
+      attr_accessor organizational_unit_id: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListManagedNotificationChildEventsResponse
+      attr_accessor next_token: ::String
+      attr_accessor managed_notification_child_events: ::Array[Types::ManagedNotificationChildEventOverview]
+      SENSITIVE: []
+    end
+
+    class ListManagedNotificationConfigurationsRequest
+      attr_accessor channel_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListManagedNotificationConfigurationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor managed_notification_configurations: ::Array[Types::ManagedNotificationConfigurationStructure]
+      SENSITIVE: []
+    end
+
+    class ListManagedNotificationEventsRequest
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor locale: ("de_DE" | "en_CA" | "en_US" | "en_UK" | "es_ES" | "fr_CA" | "fr_FR" | "id_ID" | "it_IT" | "ja_JP" | "ko_KR" | "pt_BR" | "tr_TR" | "zh_CN" | "zh_TW")
+      attr_accessor source: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor organizational_unit_id: ::String
+      attr_accessor related_account: ::String
+      SENSITIVE: []
+    end
+
+    class ListManagedNotificationEventsResponse
+      attr_accessor next_token: ::String
+      attr_accessor managed_notification_events: ::Array[Types::ManagedNotificationEventOverview]
       SENSITIVE: []
     end
 
@@ -252,6 +433,104 @@ module Aws::Notifications
       SENSITIVE: []
     end
 
+    class ManagedNotificationChannelAssociationSummary
+      attr_accessor channel_identifier: ::String
+      attr_accessor channel_type: ("MOBILE" | "CHATBOT" | "EMAIL" | "ACCOUNT_CONTACT")
+      attr_accessor override_option: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class ManagedNotificationChildEvent
+      attr_accessor schema_version: ("v1.0")
+      attr_accessor id: ::String
+      attr_accessor message_components: Types::MessageComponents
+      attr_accessor source_event_detail_url: ::String
+      attr_accessor source_event_detail_url_display_text: ::String
+      attr_accessor notification_type: ("ALERT" | "WARNING" | "ANNOUNCEMENT" | "INFORMATIONAL")
+      attr_accessor event_status: ("HEALTHY" | "UNHEALTHY")
+      attr_accessor aggregate_managed_notification_event_arn: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor text_parts: ::Hash[::String, Types::TextPartValue]
+      attr_accessor organizational_unit_id: ::String
+      attr_accessor aggregation_detail: Types::AggregationDetail
+      SENSITIVE: []
+    end
+
+    class ManagedNotificationChildEventOverview
+      attr_accessor arn: ::String
+      attr_accessor managed_notification_configuration_arn: ::String
+      attr_accessor related_account: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor child_event: Types::ManagedNotificationChildEventSummary
+      attr_accessor aggregate_managed_notification_event_arn: ::String
+      attr_accessor organizational_unit_id: ::String
+      SENSITIVE: []
+    end
+
+    class ManagedNotificationChildEventSummary
+      attr_accessor schema_version: ("v1.0")
+      attr_accessor source_event_metadata: Types::ManagedSourceEventMetadataSummary
+      attr_accessor message_components: Types::MessageComponentsSummary
+      attr_accessor aggregation_detail: Types::AggregationDetail
+      attr_accessor event_status: ("HEALTHY" | "UNHEALTHY")
+      attr_accessor notification_type: ("ALERT" | "WARNING" | "ANNOUNCEMENT" | "INFORMATIONAL")
+      SENSITIVE: []
+    end
+
+    class ManagedNotificationConfigurationStructure
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class ManagedNotificationEvent
+      attr_accessor schema_version: ("v1.0")
+      attr_accessor id: ::String
+      attr_accessor message_components: Types::MessageComponents
+      attr_accessor source_event_detail_url: ::String
+      attr_accessor source_event_detail_url_display_text: ::String
+      attr_accessor notification_type: ("ALERT" | "WARNING" | "ANNOUNCEMENT" | "INFORMATIONAL")
+      attr_accessor event_status: ("HEALTHY" | "UNHEALTHY")
+      attr_accessor aggregation_event_type: ("AGGREGATE" | "CHILD" | "NONE")
+      attr_accessor aggregation_summary: Types::AggregationSummary
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor text_parts: ::Hash[::String, Types::TextPartValue]
+      attr_accessor organizational_unit_id: ::String
+      SENSITIVE: []
+    end
+
+    class ManagedNotificationEventOverview
+      attr_accessor arn: ::String
+      attr_accessor managed_notification_configuration_arn: ::String
+      attr_accessor related_account: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor notification_event: Types::ManagedNotificationEventSummary
+      attr_accessor aggregation_event_type: ("AGGREGATE" | "CHILD" | "NONE")
+      attr_accessor organizational_unit_id: ::String
+      attr_accessor aggregation_summary: Types::AggregationSummary
+      attr_accessor aggregated_notification_regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ManagedNotificationEventSummary
+      attr_accessor schema_version: ("v1.0")
+      attr_accessor source_event_metadata: Types::ManagedSourceEventMetadataSummary
+      attr_accessor message_components: Types::MessageComponentsSummary
+      attr_accessor event_status: ("HEALTHY" | "UNHEALTHY")
+      attr_accessor notification_type: ("ALERT" | "WARNING" | "ANNOUNCEMENT" | "INFORMATIONAL")
+      SENSITIVE: []
+    end
+
+    class ManagedSourceEventMetadataSummary
+      attr_accessor event_origin_region: ::String
+      attr_accessor source: ::String
+      attr_accessor event_type: ::String
+      SENSITIVE: []
+    end
+
     class MediaElement
       attr_accessor media_id: ::String
       attr_accessor type: ("IMAGE")
@@ -294,6 +573,7 @@ module Aws::Notifications
       attr_accessor event_status: ("HEALTHY" | "UNHEALTHY")
       attr_accessor aggregation_event_type: ("AGGREGATE" | "CHILD" | "NONE")
       attr_accessor aggregate_notification_event_arn: ::String
+      attr_accessor aggregation_summary: Types::AggregationSummary
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
       attr_accessor text_parts: ::Hash[::String, Types::TextPartValue]
@@ -309,6 +589,7 @@ module Aws::Notifications
       attr_accessor notification_event: Types::NotificationEventSummary
       attr_accessor aggregation_event_type: ("AGGREGATE" | "CHILD" | "NONE")
       attr_accessor aggregate_notification_event_arn: ::String
+      attr_accessor aggregation_summary: Types::AggregationSummary
       SENSITIVE: []
     end
 
@@ -332,6 +613,11 @@ module Aws::Notifications
     class NotificationHubStatusSummary
       attr_accessor status: ("ACTIVE" | "REGISTERING" | "DEREGISTERING" | "INACTIVE")
       attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class NotificationsAccessForOrganization
+      attr_accessor access_status: ("ENABLED" | "DISABLED" | "PENDING")
       SENSITIVE: []
     end
 
@@ -387,6 +673,19 @@ module Aws::Notifications
       attr_accessor event_origin_region: ::String
       attr_accessor source: ::String
       attr_accessor event_type: ::String
+      SENSITIVE: []
+    end
+
+    class SummarizationDimensionDetail
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class SummarizationDimensionOverview
+      attr_accessor name: ::String
+      attr_accessor count: ::Integer
+      attr_accessor sample_values: ::Array[::String]
       SENSITIVE: []
     end
 

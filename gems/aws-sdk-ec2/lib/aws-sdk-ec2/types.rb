@@ -1748,7 +1748,7 @@ module Aws::EC2
     #
     # @!attribute [rw] ipv_6_prefixes
     #   One or more IPv6 prefixes assigned to the network interface. You
-    #   cannot use this option if you use the `Ipv6PrefixCount` option.
+    #   can't use this option if you use the `Ipv6PrefixCount` option.
     #   @return [Array<String>]
     #
     # @!attribute [rw] network_interface_id
@@ -1810,12 +1810,12 @@ module Aws::EC2
     #
     # @!attribute [rw] ipv_4_prefixes
     #   One or more IPv4 prefixes assigned to the network interface. You
-    #   cannot use this option if you use the `Ipv4PrefixCount` option.
+    #   can't use this option if you use the `Ipv4PrefixCount` option.
     #   @return [Array<String>]
     #
     # @!attribute [rw] ipv_4_prefix_count
     #   The number of IPv4 prefixes that Amazon Web Services automatically
-    #   assigns to the network interface. You cannot use this option if you
+    #   assigns to the network interface. You can't use this option if you
     #   use the `Ipv4 Prefixes` option.
     #   @return [Integer]
     #
@@ -10878,7 +10878,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] groups
-    #   The IDs of one or more security groups.
+    #   The IDs of the security groups.
     #   @return [Array<String>]
     #
     # @!attribute [rw] private_ip_addresses
@@ -43952,9 +43952,12 @@ module Aws::EC2
     # @!attribute [rw] accelerator_types
     #   The accelerator types that must be on the instance type.
     #
+    #   * For instance types with FPGA accelerators, specify `fpga`.
+    #
     #   * For instance types with GPU accelerators, specify `gpu`.
     #
-    #   * For instance types with FPGA accelerators, specify `fpga`.
+    #   * For instance types with Inference accelerators, specify
+    #     `inference`.
     #
     #   Default: Any accelerator type
     #   @return [Array<String>]
@@ -44435,9 +44438,12 @@ module Aws::EC2
     # @!attribute [rw] accelerator_types
     #   The accelerator types that must be on the instance type.
     #
-    #   * To include instance types with GPU hardware, specify `gpu`.
+    #   * For instance types with FPGA accelerators, specify `fpga`.
     #
-    #   * To include instance types with FPGA hardware, specify `fpga`.
+    #   * For instance types with GPU accelerators, specify `gpu`.
+    #
+    #   * For instance types with Inference accelerators, specify
+    #     `inference`.
     #
     #   Default: Any accelerator type
     #   @return [Array<String>]
@@ -47034,7 +47040,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the IPv4 prefix option for a network interface.
+    # Describes the IPv6 prefix option for a network interface.
     #
     # @!attribute [rw] ipv_6_prefix
     #   The IPv6 prefix.
@@ -70947,7 +70953,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] unassigned_ipv_6_prefixes
-    #   The IPv4 prefixes that have been unassigned from the network
+    #   The IPv6 prefixes that have been unassigned from the network
     #   interface.
     #   @return [Array<String>]
     #
