@@ -77,7 +77,7 @@ module Aws
         end
 
         it 'encodes times' do
-          expect(cbor64_encode(time)).to eq('wRsAAAFvYQ3z8A==')
+          expect(cbor64_encode(time)).to eq('wftB14MjtYAAAA==')
         end
 
         it 'encodes BigDecimals' do
