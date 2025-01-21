@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.94.0 (2025-01-21)
+------------------
+
+* Feature - This release adds support for the topic attribute FifoThroughputScope for SNS FIFO topics. For details, see the documentation history in the Amazon Simple Notification Service Developer Guide.
+
 1.93.0 (2025-01-15)
 ------------------
 

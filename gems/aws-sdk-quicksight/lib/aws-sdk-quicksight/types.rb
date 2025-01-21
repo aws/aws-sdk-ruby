@@ -32968,11 +32968,20 @@ module Aws::QuickSight
     #   Determines the visibility of the thousands separator.
     #   @return [String]
     #
+    # @!attribute [rw] grouping_style
+    #   Determines the way numbers are styled to accommodate different
+    #   readability standards. The `DEFAULT` value uses the standard
+    #   international grouping system and groups numbers by the thousands.
+    #   The `LAKHS` value uses the Indian numbering system and groups
+    #   numbers by lakhs and crores.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ThousandSeparatorOptions AWS API Documentation
     #
     class ThousandSeparatorOptions < Struct.new(
       :symbol,
-      :visibility)
+      :visibility,
+      :grouping_style)
       SENSITIVE = []
       include Aws::Structure
     end

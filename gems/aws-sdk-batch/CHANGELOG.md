@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.108.0 (2025-01-21)
+------------------
+
+* Feature - Documentation-only update: clarified the description of the shareDecaySeconds parameter of the FairsharePolicy data type, clarified the description of the priority parameter of the JobQueueDetail data type.
+
 1.107.0 (2025-01-15)
 ------------------
 

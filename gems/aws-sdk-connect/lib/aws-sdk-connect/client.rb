@@ -1118,7 +1118,7 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # &gt;Associates a set of proficiencies with a user.
+    # Associates a set of proficiencies with a user.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -1880,7 +1880,7 @@ module Aws::Connect
     #   resp = client.create_contact_flow({
     #     instance_id: "InstanceId", # required
     #     name: "ContactFlowName", # required
-    #     type: "CONTACT_FLOW", # required, accepts CONTACT_FLOW, CUSTOMER_QUEUE, CUSTOMER_HOLD, CUSTOMER_WHISPER, AGENT_HOLD, AGENT_WHISPER, OUTBOUND_WHISPER, AGENT_TRANSFER, QUEUE_TRANSFER
+    #     type: "CONTACT_FLOW", # required, accepts CONTACT_FLOW, CUSTOMER_QUEUE, CUSTOMER_HOLD, CUSTOMER_WHISPER, AGENT_HOLD, AGENT_WHISPER, OUTBOUND_WHISPER, AGENT_TRANSFER, QUEUE_TRANSFER, CAMPAIGN
     #     description: "ContactFlowDescription",
     #     content: "ContactFlowContent", # required
     #     status: "PUBLISHED", # accepts PUBLISHED, SAVED
@@ -1979,9 +1979,7 @@ module Aws::Connect
     end
 
     # Publishes a new version of the flow provided. Versions are immutable
-    # and monotonically increasing. If a version of the same flow content
-    # already exists, no new version is created and instead the existing
-    # version number is returned. If the `FlowContentSha256` provided is
+    # and monotonically increasing. If the `FlowContentSha256` provided is
     # different from the `FlowContentSha256` of the `$LATEST` published flow
     # content, then an error is returned. This API only supports creating
     # versions for flows of type `Campaign`.
@@ -1997,6 +1995,9 @@ module Aws::Connect
     #
     # @option params [String] :flow_content_sha_256
     #   Indicates the checksum value of the flow content.
+    #
+    # @option params [Integer] :contact_flow_version
+    #   The identifier of the flow version.
     #
     # @option params [Time,DateTime,Date,Integer,String] :last_modified_time
     #   The Amazon Web Services Region where this resource was last modified.
@@ -2016,6 +2017,7 @@ module Aws::Connect
     #     description: "ContactFlowDescription",
     #     contact_flow_id: "ARN", # required
     #     flow_content_sha_256: "FlowContentSha256",
+    #     contact_flow_version: 1,
     #     last_modified_time: Time.now,
     #     last_modified_region: "RegionName",
     #   })
@@ -4297,6 +4299,41 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Deletes the particular version specified in flow version identifier.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :contact_flow_id
+    #   The identifier of the flow.
+    #
+    # @option params [required, Integer] :contact_flow_version
+    #   The identifier of the flow version.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_contact_flow_version({
+    #     instance_id: "InstanceId", # required
+    #     contact_flow_id: "ARN", # required
+    #     contact_flow_version: 1, # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteContactFlowVersion AWS API Documentation
+    #
+    # @overload delete_contact_flow_version(params = {})
+    # @param [Hash] params ({})
+    def delete_contact_flow_version(params = {}, options = {})
+      req = build_request(:delete_contact_flow_version, params)
+      req.send_request(options)
+    end
+
     # Deletes email address from the specified Amazon Connect instance.
     #
     # @option params [required, String] :instance_id
@@ -4604,8 +4641,7 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Deletes a queue. It isn't possible to delete a queue by using the
-    # Amazon Connect admin website.
+    # Deletes a queue.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
@@ -5420,6 +5456,9 @@ module Aws::Connect
     # a flow is published, `$SAVED` needs to be supplied to view saved
     # content that has not been published.
     #
+    # Use `arn:aws:.../contact-flow/{id}:{version}` to retrieve the content
+    # of a specific flow version.
+    #
     # In the response, **Status** indicates the flow status as either
     # `SAVED` or `PUBLISHED`. The `PUBLISHED` status will initiate
     # validation on the content. `SAVED` does not initiate validation of the
@@ -5451,7 +5490,7 @@ module Aws::Connect
     #   resp.contact_flow.arn #=> String
     #   resp.contact_flow.id #=> String
     #   resp.contact_flow.name #=> String
-    #   resp.contact_flow.type #=> String, one of "CONTACT_FLOW", "CUSTOMER_QUEUE", "CUSTOMER_HOLD", "CUSTOMER_WHISPER", "AGENT_HOLD", "AGENT_WHISPER", "OUTBOUND_WHISPER", "AGENT_TRANSFER", "QUEUE_TRANSFER"
+    #   resp.contact_flow.type #=> String, one of "CONTACT_FLOW", "CUSTOMER_QUEUE", "CUSTOMER_HOLD", "CUSTOMER_WHISPER", "AGENT_HOLD", "AGENT_WHISPER", "OUTBOUND_WHISPER", "AGENT_TRANSFER", "QUEUE_TRANSFER", "CAMPAIGN"
     #   resp.contact_flow.state #=> String, one of "ACTIVE", "ARCHIVED"
     #   resp.contact_flow.status #=> String, one of "PUBLISHED", "SAVED"
     #   resp.contact_flow.description #=> String
@@ -10593,7 +10632,7 @@ module Aws::Connect
     #
     #   resp = client.list_contact_flows({
     #     instance_id: "InstanceId", # required
-    #     contact_flow_types: ["CONTACT_FLOW"], # accepts CONTACT_FLOW, CUSTOMER_QUEUE, CUSTOMER_HOLD, CUSTOMER_WHISPER, AGENT_HOLD, AGENT_WHISPER, OUTBOUND_WHISPER, AGENT_TRANSFER, QUEUE_TRANSFER
+    #     contact_flow_types: ["CONTACT_FLOW"], # accepts CONTACT_FLOW, CUSTOMER_QUEUE, CUSTOMER_HOLD, CUSTOMER_WHISPER, AGENT_HOLD, AGENT_WHISPER, OUTBOUND_WHISPER, AGENT_TRANSFER, QUEUE_TRANSFER, CAMPAIGN
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -10604,7 +10643,7 @@ module Aws::Connect
     #   resp.contact_flow_summary_list[0].id #=> String
     #   resp.contact_flow_summary_list[0].arn #=> String
     #   resp.contact_flow_summary_list[0].name #=> String
-    #   resp.contact_flow_summary_list[0].contact_flow_type #=> String, one of "CONTACT_FLOW", "CUSTOMER_QUEUE", "CUSTOMER_HOLD", "CUSTOMER_WHISPER", "AGENT_HOLD", "AGENT_WHISPER", "OUTBOUND_WHISPER", "AGENT_TRANSFER", "QUEUE_TRANSFER"
+    #   resp.contact_flow_summary_list[0].contact_flow_type #=> String, one of "CONTACT_FLOW", "CUSTOMER_QUEUE", "CUSTOMER_HOLD", "CUSTOMER_WHISPER", "AGENT_HOLD", "AGENT_WHISPER", "OUTBOUND_WHISPER", "AGENT_TRANSFER", "QUEUE_TRANSFER", "CAMPAIGN"
     #   resp.contact_flow_summary_list[0].contact_flow_state #=> String, one of "ACTIVE", "ARCHIVED"
     #   resp.contact_flow_summary_list[0].contact_flow_status #=> String, one of "PUBLISHED", "SAVED"
     #   resp.next_token #=> String
@@ -13709,7 +13748,7 @@ module Aws::Connect
     #         value: "String",
     #         comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
     #       },
-    #       type_condition: "CONTACT_FLOW", # accepts CONTACT_FLOW, CUSTOMER_QUEUE, CUSTOMER_HOLD, CUSTOMER_WHISPER, AGENT_HOLD, AGENT_WHISPER, OUTBOUND_WHISPER, AGENT_TRANSFER, QUEUE_TRANSFER
+    #       type_condition: "CONTACT_FLOW", # accepts CONTACT_FLOW, CUSTOMER_QUEUE, CUSTOMER_HOLD, CUSTOMER_WHISPER, AGENT_HOLD, AGENT_WHISPER, OUTBOUND_WHISPER, AGENT_TRANSFER, QUEUE_TRANSFER, CAMPAIGN
     #       state_condition: "ACTIVE", # accepts ACTIVE, ARCHIVED
     #       status_condition: "PUBLISHED", # accepts PUBLISHED, SAVED
     #     },
@@ -13721,7 +13760,7 @@ module Aws::Connect
     #   resp.contact_flows[0].arn #=> String
     #   resp.contact_flows[0].id #=> String
     #   resp.contact_flows[0].name #=> String
-    #   resp.contact_flows[0].type #=> String, one of "CONTACT_FLOW", "CUSTOMER_QUEUE", "CUSTOMER_HOLD", "CUSTOMER_WHISPER", "AGENT_HOLD", "AGENT_WHISPER", "OUTBOUND_WHISPER", "AGENT_TRANSFER", "QUEUE_TRANSFER"
+    #   resp.contact_flows[0].type #=> String, one of "CONTACT_FLOW", "CUSTOMER_QUEUE", "CUSTOMER_HOLD", "CUSTOMER_WHISPER", "AGENT_HOLD", "AGENT_WHISPER", "OUTBOUND_WHISPER", "AGENT_TRANSFER", "QUEUE_TRANSFER", "CAMPAIGN"
     #   resp.contact_flows[0].state #=> String, one of "ACTIVE", "ARCHIVED"
     #   resp.contact_flows[0].status #=> String, one of "PUBLISHED", "SAVED"
     #   resp.contact_flows[0].description #=> String
@@ -20622,7 +20661,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.193.0'
+      context[:gem_version] = '1.194.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

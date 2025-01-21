@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2025-01-21)
+------------------
+
+* Feature - Increasing entryPoint in SparkSubmit to accept longer script paths. New limit is 4kb.
+
 1.39.0 (2025-01-15)
 ------------------
 

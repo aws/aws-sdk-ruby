@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.142.0 (2025-01-21)
+------------------
+
+* Feature - Added `DigitGroupingStyle` in ThousandsSeparator to allow grouping by `LAKH`( Indian Grouping system ) currency. Support LAKH and `CRORE` currency types in Column Formatting.
+
 1.141.0 (2025-01-15)
 ------------------
 

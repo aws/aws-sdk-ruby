@@ -148,6 +148,7 @@ module Aws::IoTSiteWise
     BatchPutAssetPropertyValueErrorCode = Shapes::StringShape.new(name: 'BatchPutAssetPropertyValueErrorCode')
     BatchPutAssetPropertyValueRequest = Shapes::StructureShape.new(name: 'BatchPutAssetPropertyValueRequest')
     BatchPutAssetPropertyValueResponse = Shapes::StructureShape.new(name: 'BatchPutAssetPropertyValueResponse')
+    BooleanValue = Shapes::BooleanShape.new(name: 'BooleanValue')
     Bucket = Shapes::StringShape.new(name: 'Bucket')
     CapabilityConfiguration = Shapes::StringShape.new(name: 'CapabilityConfiguration')
     CapabilityNamespace = Shapes::StringShape.new(name: 'CapabilityNamespace')
@@ -271,6 +272,7 @@ module Aws::IoTSiteWise
     DetailedErrorCode = Shapes::StringShape.new(name: 'DetailedErrorCode')
     DetailedErrorMessage = Shapes::StringShape.new(name: 'DetailedErrorMessage')
     DetailedErrors = Shapes::ListShape.new(name: 'DetailedErrors')
+    DisallowIngestNullNaN = Shapes::BooleanShape.new(name: 'DisallowIngestNullNaN')
     DisassociateAssetsRequest = Shapes::StructureShape.new(name: 'DisassociateAssetsRequest')
     DisassociateTimeSeriesFromAssetPropertyRequest = Shapes::StructureShape.new(name: 'DisassociateTimeSeriesFromAssetPropertyRequest')
     DisassociatedDataStorageState = Shapes::StringShape.new(name: 'DisassociatedDataStorageState')
@@ -445,6 +447,7 @@ module Aws::IoTSiteWise
     PropertyValueBooleanValue = Shapes::BooleanShape.new(name: 'PropertyValueBooleanValue')
     PropertyValueDoubleValue = Shapes::FloatShape.new(name: 'PropertyValueDoubleValue')
     PropertyValueIntegerValue = Shapes::IntegerShape.new(name: 'PropertyValueIntegerValue')
+    PropertyValueNullValue = Shapes::StructureShape.new(name: 'PropertyValueNullValue')
     PropertyValueStringValue = Shapes::StringShape.new(name: 'PropertyValueStringValue')
     PutAssetPropertyValueEntries = Shapes::ListShape.new(name: 'PutAssetPropertyValueEntries')
     PutAssetPropertyValueEntry = Shapes::StructureShape.new(name: 'PutAssetPropertyValueEntry')
@@ -458,6 +461,7 @@ module Aws::IoTSiteWise
     Quality = Shapes::StringShape.new(name: 'Quality')
     QueryStatement = Shapes::StringShape.new(name: 'QueryStatement')
     QueryTimeoutException = Shapes::StructureShape.new(name: 'QueryTimeoutException')
+    RawValueType = Shapes::StringShape.new(name: 'RawValueType')
     Reference = Shapes::StructureShape.new(name: 'Reference')
     Resolution = Shapes::StringShape.new(name: 'Resolution')
     Resource = Shapes::StructureShape.new(name: 'Resource')
@@ -1010,6 +1014,7 @@ module Aws::IoTSiteWise
 
     BatchPutAssetPropertyErrors.member = Shapes::ShapeRef.new(shape: BatchPutAssetPropertyError)
 
+    BatchPutAssetPropertyValueRequest.add_member(:enable_partial_entry_processing, Shapes::ShapeRef.new(shape: BooleanValue, location_name: "enablePartialEntryProcessing"))
     BatchPutAssetPropertyValueRequest.add_member(:entries, Shapes::ShapeRef.new(shape: PutAssetPropertyValueEntries, required: true, location_name: "entries"))
     BatchPutAssetPropertyValueRequest.struct_class = Types::BatchPutAssetPropertyValueRequest
 
@@ -1560,6 +1565,7 @@ module Aws::IoTSiteWise
     DescribeStorageConfigurationResponse.add_member(:last_update_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateDate"))
     DescribeStorageConfigurationResponse.add_member(:warm_tier, Shapes::ShapeRef.new(shape: WarmTierState, location_name: "warmTier"))
     DescribeStorageConfigurationResponse.add_member(:warm_tier_retention_period, Shapes::ShapeRef.new(shape: WarmTierRetentionPeriod, location_name: "warmTierRetentionPeriod"))
+    DescribeStorageConfigurationResponse.add_member(:disallow_ingest_null_na_n, Shapes::ShapeRef.new(shape: DisallowIngestNullNaN, location_name: "disallowIngestNullNaN"))
     DescribeStorageConfigurationResponse.struct_class = Types::DescribeStorageConfigurationResponse
 
     DescribeTimeSeriesRequest.add_member(:alias, Shapes::ShapeRef.new(shape: PropertyAlias, location: "querystring", location_name: "alias"))
@@ -2087,6 +2093,9 @@ module Aws::IoTSiteWise
     PropertyType.add_member(:metric, Shapes::ShapeRef.new(shape: Metric, location_name: "metric"))
     PropertyType.struct_class = Types::PropertyType
 
+    PropertyValueNullValue.add_member(:value_type, Shapes::ShapeRef.new(shape: RawValueType, required: true, location_name: "valueType"))
+    PropertyValueNullValue.struct_class = Types::PropertyValueNullValue
+
     PutAssetPropertyValueEntries.member = Shapes::ShapeRef.new(shape: PutAssetPropertyValueEntry)
 
     PutAssetPropertyValueEntry.add_member(:entry_id, Shapes::ShapeRef.new(shape: EntryId, required: true, location_name: "entryId"))
@@ -2116,6 +2125,7 @@ module Aws::IoTSiteWise
     PutStorageConfigurationRequest.add_member(:retention_period, Shapes::ShapeRef.new(shape: RetentionPeriod, location_name: "retentionPeriod"))
     PutStorageConfigurationRequest.add_member(:warm_tier, Shapes::ShapeRef.new(shape: WarmTierState, location_name: "warmTier"))
     PutStorageConfigurationRequest.add_member(:warm_tier_retention_period, Shapes::ShapeRef.new(shape: WarmTierRetentionPeriod, location_name: "warmTierRetentionPeriod"))
+    PutStorageConfigurationRequest.add_member(:disallow_ingest_null_na_n, Shapes::ShapeRef.new(shape: DisallowIngestNullNaN, location_name: "disallowIngestNullNaN"))
     PutStorageConfigurationRequest.struct_class = Types::PutStorageConfigurationRequest
 
     PutStorageConfigurationResponse.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, required: true, location_name: "storageType"))
@@ -2125,6 +2135,7 @@ module Aws::IoTSiteWise
     PutStorageConfigurationResponse.add_member(:configuration_status, Shapes::ShapeRef.new(shape: ConfigurationStatus, required: true, location_name: "configurationStatus"))
     PutStorageConfigurationResponse.add_member(:warm_tier, Shapes::ShapeRef.new(shape: WarmTierState, location_name: "warmTier"))
     PutStorageConfigurationResponse.add_member(:warm_tier_retention_period, Shapes::ShapeRef.new(shape: WarmTierRetentionPeriod, location_name: "warmTierRetentionPeriod"))
+    PutStorageConfigurationResponse.add_member(:disallow_ingest_null_na_n, Shapes::ShapeRef.new(shape: DisallowIngestNullNaN, location_name: "disallowIngestNullNaN"))
     PutStorageConfigurationResponse.struct_class = Types::PutStorageConfigurationResponse
 
     Qualities.member = Shapes::ShapeRef.new(shape: Quality)
@@ -2377,6 +2388,7 @@ module Aws::IoTSiteWise
     Variant.add_member(:integer_value, Shapes::ShapeRef.new(shape: PropertyValueIntegerValue, location_name: "integerValue"))
     Variant.add_member(:double_value, Shapes::ShapeRef.new(shape: PropertyValueDoubleValue, location_name: "doubleValue"))
     Variant.add_member(:boolean_value, Shapes::ShapeRef.new(shape: PropertyValueBooleanValue, location_name: "booleanValue"))
+    Variant.add_member(:null_value, Shapes::ShapeRef.new(shape: PropertyValueNullValue, location_name: "nullValue"))
     Variant.struct_class = Types::Variant
 
     WarmTierRetentionPeriod.add_member(:number_of_days, Shapes::ShapeRef.new(shape: NumberOfDays, location_name: "numberOfDays"))

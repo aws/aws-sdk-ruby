@@ -14,6 +14,34 @@ module Aws::CognitoIdentityProvider
   describe EndpointProvider do
     subject { Aws::CognitoIdentityProvider::EndpointProvider.new }
 
+    context "For region af-south-1 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://cognito-idp.af-south-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"af-south-1", :use_fips=>false, :use_dual_stack=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "For region ap-east-1 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://cognito-idp.ap-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"ap-east-1", :use_fips=>false, :use_dual_stack=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
     context "For region ap-northeast-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://cognito-idp.ap-northeast-1.amazonaws.com"}}
@@ -42,6 +70,20 @@ module Aws::CognitoIdentityProvider
       end
     end
 
+    context "For region ap-northeast-3 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://cognito-idp.ap-northeast-3.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"ap-northeast-3", :use_fips=>false, :use_dual_stack=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
     context "For region ap-south-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://cognito-idp.ap-south-1.amazonaws.com"}}
@@ -49,6 +91,20 @@ module Aws::CognitoIdentityProvider
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{:region=>"ap-south-1", :use_fips=>false, :use_dual_stack=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "For region ap-south-2 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://cognito-idp.ap-south-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"ap-south-2", :use_fips=>false, :use_dual_stack=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -84,6 +140,34 @@ module Aws::CognitoIdentityProvider
       end
     end
 
+    context "For region ap-southeast-3 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://cognito-idp.ap-southeast-3.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"ap-southeast-3", :use_fips=>false, :use_dual_stack=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "For region ap-southeast-4 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://cognito-idp.ap-southeast-4.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"ap-southeast-4", :use_fips=>false, :use_dual_stack=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
     context "For region ca-central-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://cognito-idp.ca-central-1.amazonaws.com"}}
@@ -91,6 +175,20 @@ module Aws::CognitoIdentityProvider
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{:region=>"ca-central-1", :use_fips=>false, :use_dual_stack=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "For region ca-west-1 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://cognito-idp.ca-west-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"ca-west-1", :use_fips=>false, :use_dual_stack=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -112,6 +210,20 @@ module Aws::CognitoIdentityProvider
       end
     end
 
+    context "For region eu-central-2 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://cognito-idp.eu-central-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"eu-central-2", :use_fips=>false, :use_dual_stack=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
     context "For region eu-north-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://cognito-idp.eu-north-1.amazonaws.com"}}
@@ -119,6 +231,34 @@ module Aws::CognitoIdentityProvider
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{:region=>"eu-north-1", :use_fips=>false, :use_dual_stack=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "For region eu-south-1 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://cognito-idp.eu-south-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"eu-south-1", :use_fips=>false, :use_dual_stack=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "For region eu-south-2 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://cognito-idp.eu-south-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"eu-south-2", :use_fips=>false, :use_dual_stack=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -161,6 +301,34 @@ module Aws::CognitoIdentityProvider
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{:region=>"eu-west-3", :use_fips=>false, :use_dual_stack=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "For region il-central-1 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://cognito-idp.il-central-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"il-central-1", :use_fips=>false, :use_dual_stack=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "For region me-central-1 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://cognito-idp.me-central-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"me-central-1", :use_fips=>false, :use_dual_stack=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -224,6 +392,20 @@ module Aws::CognitoIdentityProvider
       end
     end
 
+    context "For region us-east-1 with FIPS enabled and DualStack enabled" do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://cognito-idp-fips.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>true, :use_dual_stack=>true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
     context "For region us-east-2 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://cognito-idp.us-east-2.amazonaws.com"}}
@@ -245,6 +427,20 @@ module Aws::CognitoIdentityProvider
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{:region=>"us-east-2", :use_fips=>true, :use_dual_stack=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "For region us-east-2 with FIPS enabled and DualStack enabled" do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://cognito-idp-fips.us-east-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-2", :use_fips=>true, :use_dual_stack=>true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -280,6 +476,20 @@ module Aws::CognitoIdentityProvider
       end
     end
 
+    context "For region us-west-1 with FIPS enabled and DualStack enabled" do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://cognito-idp-fips.us-west-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-west-1", :use_fips=>true, :use_dual_stack=>true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
     context "For region us-west-2 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://cognito-idp.us-west-2.amazonaws.com"}}
@@ -308,13 +518,13 @@ module Aws::CognitoIdentityProvider
       end
     end
 
-    context "For region us-east-1 with FIPS enabled and DualStack enabled" do
+    context "For region us-west-2 with FIPS enabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://cognito-idp-fips.us-east-1.api.aws"}}
+        {"endpoint"=>{"url"=>"https://cognito-idp-fips.us-west-2.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>true, :use_dual_stack=>true})
+        params = EndpointParameters.new(**{:region=>"us-west-2", :use_fips=>true, :use_dual_stack=>true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -324,7 +534,7 @@ module Aws::CognitoIdentityProvider
 
     context "For region us-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://cognito-idp.us-east-1.api.aws"}}
+        {"endpoint"=>{"url"=>"https://cognito-idp.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do

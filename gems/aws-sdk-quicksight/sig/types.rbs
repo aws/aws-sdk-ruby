@@ -1866,7 +1866,7 @@ module Aws::QuickSight
       attr_accessor separator_configuration: Types::NumericSeparatorConfiguration
       attr_accessor symbol: ::String
       attr_accessor decimal_places_configuration: Types::DecimalPlacesConfiguration
-      attr_accessor number_scale: ("NONE" | "AUTO" | "THOUSANDS" | "MILLIONS" | "BILLIONS" | "TRILLIONS")
+      attr_accessor number_scale: ("NONE" | "AUTO" | "THOUSANDS" | "MILLIONS" | "BILLIONS" | "TRILLIONS" | "LAKHS" | "CRORES")
       attr_accessor negative_value_configuration: Types::NegativeValueConfiguration
       attr_accessor null_value_format_configuration: Types::NullValueFormatConfiguration
       SENSITIVE: [:prefix, :suffix]
@@ -3850,7 +3850,7 @@ module Aws::QuickSight
       attr_accessor fraction_digits: ::Integer
       attr_accessor prefix: ::String
       attr_accessor suffix: ::String
-      attr_accessor unit_scaler: ("NONE" | "AUTO" | "THOUSANDS" | "MILLIONS" | "BILLIONS" | "TRILLIONS")
+      attr_accessor unit_scaler: ("NONE" | "AUTO" | "THOUSANDS" | "MILLIONS" | "BILLIONS" | "TRILLIONS" | "LAKHS" | "CRORES")
       attr_accessor negative_format: Types::NegativeFormat
       attr_accessor currency_symbol: ::String
       SENSITIVE: []
@@ -6286,7 +6286,7 @@ module Aws::QuickSight
       attr_accessor suffix: ::String
       attr_accessor separator_configuration: Types::NumericSeparatorConfiguration
       attr_accessor decimal_places_configuration: Types::DecimalPlacesConfiguration
-      attr_accessor number_scale: ("NONE" | "AUTO" | "THOUSANDS" | "MILLIONS" | "BILLIONS" | "TRILLIONS")
+      attr_accessor number_scale: ("NONE" | "AUTO" | "THOUSANDS" | "MILLIONS" | "BILLIONS" | "TRILLIONS" | "LAKHS" | "CRORES")
       attr_accessor negative_value_configuration: Types::NegativeValueConfiguration
       attr_accessor null_value_format_configuration: Types::NullValueFormatConfiguration
       SENSITIVE: [:prefix, :suffix]
@@ -8527,6 +8527,7 @@ module Aws::QuickSight
     class ThousandSeparatorOptions
       attr_accessor symbol: ("COMMA" | "DOT" | "SPACE")
       attr_accessor visibility: ("HIDDEN" | "VISIBLE")
+      attr_accessor grouping_style: ("DEFAULT" | "LAKHS")
       SENSITIVE: []
     end
 

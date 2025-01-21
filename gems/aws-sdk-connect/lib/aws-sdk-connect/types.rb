@@ -3508,7 +3508,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] flow_content_sha_256
-    #   Indicates the checksum value of the flow content.
+    #   Indicates the checksum value of the latest published flow content.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateContactFlowResponse AWS API Documentation
@@ -3537,6 +3537,10 @@ module Aws::Connect
     #   Indicates the checksum value of the flow content.
     #   @return [String]
     #
+    # @!attribute [rw] contact_flow_version
+    #   The identifier of the flow version.
+    #   @return [Integer]
+    #
     # @!attribute [rw] last_modified_time
     #   The Amazon Web Services Region where this resource was last
     #   modified.
@@ -3554,6 +3558,7 @@ module Aws::Connect
       :description,
       :contact_flow_id,
       :flow_content_sha_256,
+      :contact_flow_version,
       :last_modified_time,
       :last_modified_region)
       SENSITIVE = []
@@ -5871,6 +5876,37 @@ module Aws::Connect
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteContactFlowResponse AWS API Documentation
     #
     class DeleteContactFlowResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_version
+    #   The identifier of the flow version.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteContactFlowVersionRequest AWS API Documentation
+    #
+    class DeleteContactFlowVersionRequest < Struct.new(
+      :instance_id,
+      :contact_flow_id,
+      :contact_flow_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteContactFlowVersionResponse AWS API Documentation
+    #
+    class DeleteContactFlowVersionResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can [find the

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2025-01-21)
+------------------
+
+* Feature - AWS IoT SiteWise now supports ingestion and querying of Null (all data types) and NaN (double type) values of bad or uncertain data quality. New partial error handling prevents data loss during ingestion. Enabled by default for new customers; existing customers can opt-in.
+
 1.79.0 (2025-01-15)
 ------------------
 

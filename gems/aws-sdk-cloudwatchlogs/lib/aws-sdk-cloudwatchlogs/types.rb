@@ -4949,12 +4949,12 @@ module Aws::CloudWatchLogs
     #   create the integration. This role must have the permissions
     #   necessary to access the OpenSearch Service collection to be able to
     #   create the dashboards. For more information about the permissions
-    #   needed, see [Create an IAM role to access the OpenSearch Service
-    #   collection][1] in the CloudWatch Logs User Guide.
+    #   needed, see [Permissions that the integration needs][1] in the
+    #   CloudWatch Logs User Guide.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/OpenSearch-Dashboards-CreateRole
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/OpenSearch-Dashboards-CreateRole.html
     #   @return [String]
     #
     # @!attribute [rw] dashboard_viewer_principals
@@ -4962,8 +4962,12 @@ module Aws::CloudWatchLogs
     #   permission to for viewing the dashboards.
     #
     #   In addition to specifying these users here, you must also grant them
-    #   the **CloudWatchOpenSearchDashboardsAccess** IAM policy. For more
-    #   information, see
+    #   the **CloudWatchOpenSearchDashboardAccess** IAM policy. For more
+    #   information, see [IAM policies for users][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/OpenSearch-Dashboards-UserRoles.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] application_arn
@@ -5982,13 +5986,27 @@ module Aws::CloudWatchLogs
     #
     #   * For Amazon Bedrock, the valid value is `APPLICATION_LOGS`.
     #
+    #   * For CloudFront, the valid value is `ACCESS_LOGS`.
+    #
     #   * For Amazon CodeWhisperer, the valid value is `EVENT_LOGS`.
+    #
+    #   * For Elemental MediaPackage, the valid values are
+    #     `EGRESS_ACCESS_LOGS` and `INGRESS_ACCESS_LOGS`.
+    #
+    #   * For Elemental MediaTailor, the valid values are
+    #     `AD_DECISION_SERVER_LOGS`, `MANIFEST_SERVICE_LOGS`, and
+    #     `TRANSCODE_LOGS`.
     #
     #   * For IAM Identity Center, the valid value is `ERROR_LOGS`.
     #
+    #   * For Amazon Q, the valid value is `EVENT_LOGS`.
+    #
+    #   * For Amazon SES mail manager, the valid value is `APPLICATION_LOG`.
+    #
     #   * For Amazon WorkMail, the valid values are `ACCESS_CONTROL_LOGS`,
-    #     `AUTHENTICATION_LOGS`, `WORKMAIL_AVAILABILITY_PROVIDER_LOGS`, and
-    #     `WORKMAIL_MAILBOX_ACCESS_LOGS`.
+    #     `AUTHENTICATION_LOGS`, `WORKMAIL_AVAILABILITY_PROVIDER_LOGS`,
+    #     `WORKMAIL_MAILBOX_ACCESS_LOGS`, and
+    #     `WORKMAIL_PERSONAL_ACCESS_TOKEN_LOGS`.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -7033,9 +7051,14 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] suffix_path
     #   This string allows re-configuring the S3 object prefix to contain
     #   either static or variable sections. The valid variables to use in
-    #   the suffix path will vary by each log source. See
-    #   ConfigurationTemplate$allowedSuffixPathFields for more info on what
-    #   values are supported in the suffix path for each log source.
+    #   the suffix path will vary by each log source. To find the values
+    #   supported for the suffix path for each log source, use the
+    #   [DescribeConfigurationTemplates][1] operation and check the
+    #   `allowedSuffixPathFields` field in the response.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeConfigurationTemplates.html
     #   @return [String]
     #
     # @!attribute [rw] enable_hive_compatible_path
@@ -7083,7 +7106,7 @@ module Aws::CloudWatchLogs
     #
     class ServiceUnavailableException < Aws::EmptyStructure; end
 
-    # his exception is returned if an unknown error occurs during a Live
+    # This exception is returned if an unknown error occurs during a Live
     # Tail session.
     #
     # @!attribute [rw] message

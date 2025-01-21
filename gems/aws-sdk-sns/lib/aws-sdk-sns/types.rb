@@ -405,6 +405,22 @@ module Aws::SNS
     #       (Optional) To override the generated value, you can specify a
     #       value for the `MessageDeduplicationId` parameter for the
     #       `Publish` action.
+    #   ^
+    #
+    #   * `FifoThroughputScope` – Enables higher throughput for your FIFO
+    #     topic by adjusting the scope of deduplication. This attribute has
+    #     two possible values:
+    #
+    #     * `Topic` – The scope of message deduplication is across the
+    #       entire topic. This is the default value and maintains existing
+    #       behavior, with a maximum throughput of 3000 messages per second
+    #       or 20MB per second, whichever comes first.
+    #
+    #     * `MessageGroup` – The scope of deduplication is within each
+    #       individual message group, which enables higher throughput per
+    #       topic subject to regional quotas. For more information on quotas
+    #       or to request an increase, see [Amazon SNS service quotas][6] in
+    #       the Amazon Web Services General Reference.
     #
     #
     #
@@ -413,6 +429,7 @@ module Aws::SNS
     #   [3]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
     #   [4]: https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html
     #   [5]: https://docs.aws.amazon.com/sns/latest/api/API_Publish.html
+    #   [6]: https://docs.aws.amazon.com/general/latest/gr/sns.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] tags
@@ -1733,11 +1750,24 @@ module Aws::SNS
     # @!attribute [rw] message_deduplication_id
     #   This parameter applies only to FIFO (first-in-first-out) topics.
     #
-    #   The token used for deduplication of messages within a 5-minute
-    #   minimum deduplication interval. If a message with a particular
-    #   `MessageDeduplicationId` is sent successfully, subsequent messages
-    #   with the same `MessageDeduplicationId` are accepted successfully but
-    #   aren't delivered.
+    #   * This parameter applies only to FIFO (first-in-first-out) topics.
+    #     The `MessageDeduplicationId` can contain up to 128 alphanumeric
+    #     characters `(a-z, A-Z, 0-9)` and punctuation ``
+    #     (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~) ``.
+    #
+    #   * Every message must have a unique `MessageDeduplicationId`, which
+    #     is a token used for deduplication of sent messages within the 5
+    #     minute minimum deduplication interval.
+    #
+    #   * The scope of deduplication depends on the `FifoThroughputScope`
+    #     attribute, when set to `Topic` the message deduplication scope is
+    #     across the entire topic, when set to `MessageGroup` the message
+    #     deduplication scope is within each individual message group.
+    #
+    #   * If a message with a particular `MessageDeduplicationId` is sent
+    #     successfully, subsequent messages within the deduplication scope
+    #     and interval, with the same `MessageDeduplicationId`, are accepted
+    #     successfully but aren't delivered.
     #
     #   * Every message must have a unique `MessageDeduplicationId`.
     #
@@ -1756,15 +1786,16 @@ module Aws::SNS
     #     * If the topic has a `ContentBasedDeduplication` set, your
     #       `MessageDeduplicationId` overrides the generated one.
     #   * When `ContentBasedDeduplication` is in effect, messages with
-    #     identical content sent within the deduplication interval are
-    #     treated as duplicates and only one copy of the message is
+    #     identical content sent within the deduplication scope and interval
+    #     are treated as duplicates and only one copy of the message is
     #     delivered.
     #
     #   * If you send one message with `ContentBasedDeduplication` enabled,
     #     and then another message with a `MessageDeduplicationId` that is
     #     the same as the one generated for the first
     #     `MessageDeduplicationId`, the two messages are treated as
-    #     duplicates and only one copy of the message is delivered.
+    #     duplicates, within the deduplication scope and interval, and only
+    #     one copy of the message is delivered.
     #
     #   <note markdown="1"> The `MessageDeduplicationId` is available to the consumer of the
     #   message (this can be useful for troubleshooting delivery issues).
@@ -1778,11 +1809,6 @@ module Aws::SNS
     #   even after the message is received and deleted.
     #
     #    </note>
-    #
-    #   The length of `MessageDeduplicationId` is 128 characters.
-    #
-    #   `MessageDeduplicationId` can contain alphanumeric characters `(a-z,
-    #   A-Z, 0-9)` and punctuation `` (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~) ``.
     #   @return [String]
     #
     # @!attribute [rw] message_group_id
@@ -1985,20 +2011,52 @@ module Aws::SNS
     #   @return [Hash<String,Types::MessageAttributeValue>]
     #
     # @!attribute [rw] message_deduplication_id
-    #   This parameter applies only to FIFO (first-in-first-out) topics. The
-    #   `MessageDeduplicationId` can contain up to 128 alphanumeric
-    #   characters `(a-z, A-Z, 0-9)` and punctuation ``
-    #   (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~) ``.
+    #   * This parameter applies only to FIFO (first-in-first-out) topics.
+    #     The `MessageDeduplicationId` can contain up to 128 alphanumeric
+    #     characters `(a-z, A-Z, 0-9)` and punctuation ``
+    #     (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~) ``.
     #
-    #   Every message must have a unique `MessageDeduplicationId`, which is
-    #   a token used for deduplication of sent messages. If a message with a
-    #   particular `MessageDeduplicationId` is sent successfully, any
-    #   message sent with the same `MessageDeduplicationId` during the
-    #   5-minute deduplication interval is treated as a duplicate.
+    #   * Every message must have a unique `MessageDeduplicationId`, which
+    #     is a token used for deduplication of sent messages within the 5
+    #     minute minimum deduplication interval.
     #
-    #   If the topic has `ContentBasedDeduplication` set, the system
-    #   generates a `MessageDeduplicationId` based on the contents of the
-    #   message. Your `MessageDeduplicationId` overrides the generated one.
+    #   * The scope of deduplication depends on the `FifoThroughputScope`
+    #     attribute, when set to `Topic` the message deduplication scope is
+    #     across the entire topic, when set to `MessageGroup` the message
+    #     deduplication scope is within each individual message group.
+    #
+    #   * If a message with a particular `MessageDeduplicationId` is sent
+    #     successfully, subsequent messages within the deduplication scope
+    #     and interval, with the same `MessageDeduplicationId`, are accepted
+    #     successfully but aren't delivered.
+    #
+    #   * Every message must have a unique `MessageDeduplicationId`:
+    #
+    #     * You may provide a `MessageDeduplicationId` explicitly.
+    #
+    #     * If you aren't able to provide a `MessageDeduplicationId` and
+    #       you enable `ContentBasedDeduplication` for your topic, Amazon
+    #       SNS uses a SHA-256 hash to generate the `MessageDeduplicationId`
+    #       using the body of the message (but not the attributes of the
+    #       message).
+    #
+    #     * If you don't provide a `MessageDeduplicationId` and the topic
+    #       doesn't have `ContentBasedDeduplication` set, the action fails
+    #       with an error.
+    #
+    #     * If the topic has a `ContentBasedDeduplication` set, your
+    #       `MessageDeduplicationId` overrides the generated one.
+    #   * When `ContentBasedDeduplication` is in effect, messages with
+    #     identical content sent within the deduplication scope and interval
+    #     are treated as duplicates and only one copy of the message is
+    #     delivered.
+    #
+    #   * If you send one message with `ContentBasedDeduplication` enabled,
+    #     and then another message with a `MessageDeduplicationId` that is
+    #     the same as the one generated for the first
+    #     `MessageDeduplicationId`, the two messages are treated as
+    #     duplicates, within the deduplication scope and interval, and only
+    #     one copy of the message is delivered.
     #   @return [String]
     #
     # @!attribute [rw] message_group_id
@@ -2623,6 +2681,22 @@ module Aws::SNS
     #       (Optional) To override the generated value, you can specify a
     #       value for the `MessageDeduplicationId` parameter for the
     #       `Publish` action.
+    #   ^
+    #
+    #   * `FifoThroughputScope` – Enables higher throughput for your FIFO
+    #     topic by adjusting the scope of deduplication. This attribute has
+    #     two possible values:
+    #
+    #     * `Topic` – The scope of message deduplication is across the
+    #       entire topic. This is the default value and maintains existing
+    #       behavior, with a maximum throughput of 3000 messages per second
+    #       or 20MB per second, whichever comes first.
+    #
+    #     * `MessageGroup` – The scope of deduplication is within each
+    #       individual message group, which enables higher throughput per
+    #       topic subject to regional quotas. For more information on quotas
+    #       or to request an increase, see [Amazon SNS service quotas][7] in
+    #       the Amazon Web Services General Reference.
     #
     #
     #
@@ -2632,6 +2706,7 @@ module Aws::SNS
     #   [4]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
     #   [5]: https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html
     #   [6]: https://docs.aws.amazon.com/sns/latest/api/API_Publish.html
+    #   [7]: https://docs.aws.amazon.com/general/latest/gr/sns.html
     #   @return [String]
     #
     # @!attribute [rw] attribute_value

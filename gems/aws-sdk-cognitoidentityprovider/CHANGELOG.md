@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.114.0 (2025-01-21)
+------------------
+
+* Feature - corrects the dual-stack endpoint configuration for cognitoidp
+
 1.113.0 (2025-01-15)
 ------------------
 

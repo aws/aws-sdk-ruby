@@ -441,7 +441,7 @@ module Aws
       def create_contact_flow: (
                                  instance_id: ::String,
                                  name: ::String,
-                                 type: ("CONTACT_FLOW" | "CUSTOMER_QUEUE" | "CUSTOMER_HOLD" | "CUSTOMER_WHISPER" | "AGENT_HOLD" | "AGENT_WHISPER" | "OUTBOUND_WHISPER" | "AGENT_TRANSFER" | "QUEUE_TRANSFER"),
+                                 type: ("CONTACT_FLOW" | "CUSTOMER_QUEUE" | "CUSTOMER_HOLD" | "CUSTOMER_WHISPER" | "AGENT_HOLD" | "AGENT_WHISPER" | "OUTBOUND_WHISPER" | "AGENT_TRANSFER" | "QUEUE_TRANSFER" | "CAMPAIGN"),
                                  ?description: ::String,
                                  content: ::String,
                                  ?status: ("PUBLISHED" | "SAVED"),
@@ -476,6 +476,7 @@ module Aws
                                          ?description: ::String,
                                          contact_flow_id: ::String,
                                          ?flow_content_sha_256: ::String,
+                                         ?contact_flow_version: ::Integer,
                                          ?last_modified_time: ::Time,
                                          ?last_modified_region: ::String
                                        ) -> _CreateContactFlowVersionResponseSuccess
@@ -1173,6 +1174,17 @@ module Aws
                                         contact_flow_module_id: ::String
                                       ) -> _DeleteContactFlowModuleResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteContactFlowModuleResponseSuccess
+
+      interface _DeleteContactFlowVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteContactFlowVersionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#delete_contact_flow_version-instance_method
+      def delete_contact_flow_version: (
+                                         instance_id: ::String,
+                                         contact_flow_id: ::String,
+                                         contact_flow_version: ::Integer
+                                       ) -> _DeleteContactFlowVersionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteContactFlowVersionResponseSuccess
 
       interface _DeleteEmailAddressResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEmailAddressResponse]
@@ -2199,7 +2211,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#list_contact_flows-instance_method
       def list_contact_flows: (
                                 instance_id: ::String,
-                                ?contact_flow_types: Array[("CONTACT_FLOW" | "CUSTOMER_QUEUE" | "CUSTOMER_HOLD" | "CUSTOMER_WHISPER" | "AGENT_HOLD" | "AGENT_WHISPER" | "OUTBOUND_WHISPER" | "AGENT_TRANSFER" | "QUEUE_TRANSFER")],
+                                ?contact_flow_types: Array[("CONTACT_FLOW" | "CUSTOMER_QUEUE" | "CUSTOMER_HOLD" | "CUSTOMER_WHISPER" | "AGENT_HOLD" | "AGENT_WHISPER" | "OUTBOUND_WHISPER" | "AGENT_TRANSFER" | "QUEUE_TRANSFER" | "CAMPAIGN")],
                                 ?next_token: ::String,
                                 ?max_results: ::Integer
                               ) -> _ListContactFlowsResponseSuccess
@@ -2987,7 +2999,7 @@ module Aws
                                       value: ::String?,
                                       comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
                                     }?,
-                                    type_condition: ("CONTACT_FLOW" | "CUSTOMER_QUEUE" | "CUSTOMER_HOLD" | "CUSTOMER_WHISPER" | "AGENT_HOLD" | "AGENT_WHISPER" | "OUTBOUND_WHISPER" | "AGENT_TRANSFER" | "QUEUE_TRANSFER")?,
+                                    type_condition: ("CONTACT_FLOW" | "CUSTOMER_QUEUE" | "CUSTOMER_HOLD" | "CUSTOMER_WHISPER" | "AGENT_HOLD" | "AGENT_WHISPER" | "OUTBOUND_WHISPER" | "AGENT_TRANSFER" | "QUEUE_TRANSFER" | "CAMPAIGN")?,
                                     state_condition: ("ACTIVE" | "ARCHIVED")?,
                                     status_condition: ("PUBLISHED" | "SAVED")?
                                   }

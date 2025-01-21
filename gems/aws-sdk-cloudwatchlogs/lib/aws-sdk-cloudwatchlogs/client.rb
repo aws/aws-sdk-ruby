@@ -496,9 +496,10 @@ module Aws::CloudWatchLogs
     # parameter or the `resourceIdentifier` parameter. You can't specify
     # both of those parameters in the same operation.
     #
-    # * Specify the `logGroupName` parameter to cause all log events stored
-    #   in the log group to be encrypted with that key. Only the log events
-    #   ingested after the key is associated are encrypted with that key.
+    # * Specify the `logGroupName` parameter to cause log events ingested
+    #   into that log group to be encrypted with that key. Only the log
+    #   events ingested after the key is associated are encrypted with that
+    #   key.
     #
     #   Associating a KMS key with a log group overrides any existing
     #   associations between the log group and a KMS key. After a KMS key is
@@ -782,6 +783,14 @@ module Aws::CloudWatchLogs
     # specify a prefix to be used as the Amazon S3 key prefix for all
     # exported objects.
     #
+    # <note markdown="1"> We recommend that you don't regularly export to Amazon S3 as a way to
+    # continuously archive your logs. For that use case, we instaed
+    # recommend that you use subscriptions. For more information about
+    # subscriptions, see [Real-time processing of log data with
+    # subscriptions][3].
+    #
+    #  </note>
+    #
     # <note markdown="1"> Time-based sorting on chunks of log data inside an exported file is
     # not guaranteed. You can sort the exported log field data by using
     # Linux utilities.
@@ -792,6 +801,7 @@ module Aws::CloudWatchLogs
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeExportTasks.html
     # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CancelExportTask.html
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Subscriptions.html
     #
     # @option params [String] :task_name
     #   The name of the export task.
@@ -1212,7 +1222,7 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
-    # Deletes s *delivery*. A delivery is a connection between a logical
+    # Deletes a *delivery*. A delivery is a connection between a logical
     # *delivery source* and a logical *delivery destination*. Deleting a
     # delivery only deletes the connection between the delivery source and
     # delivery destination. It does not delete the delivery destination or
@@ -1696,6 +1706,25 @@ module Aws::CloudWatchLogs
     end
 
     # Returns a list of all CloudWatch Logs account policies in the account.
+    #
+    # To use this operation, you must be signed on with the correct
+    # permissions depending on the type of policy that you are retrieving
+    # information for.
+    #
+    # * To see data protection policies, you must have the
+    #   `logs:GetDataProtectionPolicy` and `logs:DescribeAccountPolicies`
+    #   permissions.
+    #
+    # * To see subscription filter policies, you must have the
+    #   `logs:DescrubeSubscriptionFilters` and
+    #   `logs:DescribeAccountPolicies` permissions.
+    #
+    # * To see transformer policies, you must have the `logs:GetTransformer`
+    #   and `logs:DescribeAccountPolicies` permissions.
+    #
+    # * To see field index policies, you must have the
+    #   `logs:DescribeIndexPolicies` and `logs:DescribeAccountPolicies`
+    #   permissions.
     #
     # @option params [required, String] :policy_type
     #   Use this parameter to limit the returned policies to only the policies
@@ -2349,8 +2378,8 @@ module Aws::CloudWatchLogs
     # `logGroupIdentifier` or `logGroupName`. You must include one of these
     # two parameters, but you can't include both.
     #
-    # This operation has a limit of five transactions per second, after
-    # which transactions are throttled.
+    # This operation has a limit of 25 transactions per second, after which
+    # transactions are throttled.
     #
     # If you are using CloudWatch cross-account observability, you can use
     # this operation in a monitoring account and view data from the linked
@@ -4045,6 +4074,22 @@ module Aws::CloudWatchLogs
     # policy, or field index policy that applies to all log groups or a
     # subset of log groups in the account.
     #
+    # To use this operation, you must be signed on with the correct
+    # permissions depending on the type of policy that you are creating.
+    #
+    # * To create a data protection policy, you must have the
+    #   `logs:PutDataProtectionPolicy` and `logs:PutAccountPolicy`
+    #   permissions.
+    #
+    # * To create a subscription filter policy, you must have the
+    #   `logs:PutSubscriptionFilter` and `logs:PutccountPolicy` permissions.
+    #
+    # * To create a transformer policy, you must have the
+    #   `logs:PutTransformer` and `logs:PutAccountPolicy` permissions.
+    #
+    # * To create a field index policy, you must have the
+    #   `logs:PutIndexPolicy` and `logs:PutAccountPolicy` permissions.
+    #
     # **Data protection policy**
     #
     # A data protection policy can help safeguard sensitive data that's
@@ -4522,9 +4567,10 @@ module Aws::CloudWatchLogs
     #   the resource that is actually sending the logs. For more
     #   information, see [PutDeliverySource][1].
     #
-    # * Use `PutDeliveryDestination` to create a *delivery destination*,
-    #   which is a logical object that represents the actual delivery
-    #   destination.
+    # * Use `PutDeliveryDestination` to create a *delivery destination* in
+    #   the same account of the actual delivery destination. The delivery
+    #   destination that you create is a logical object that represents the
+    #   actual delivery destination.
     #
     # * If you are delivering logs cross-account, you must use
     #   [PutDeliveryDestinationPolicy][2] in the destination account to
@@ -4741,13 +4787,27 @@ module Aws::CloudWatchLogs
     #
     #   * For Amazon Bedrock, the valid value is `APPLICATION_LOGS`.
     #
+    #   * For CloudFront, the valid value is `ACCESS_LOGS`.
+    #
     #   * For Amazon CodeWhisperer, the valid value is `EVENT_LOGS`.
+    #
+    #   * For Elemental MediaPackage, the valid values are
+    #     `EGRESS_ACCESS_LOGS` and `INGRESS_ACCESS_LOGS`.
+    #
+    #   * For Elemental MediaTailor, the valid values are
+    #     `AD_DECISION_SERVER_LOGS`, `MANIFEST_SERVICE_LOGS`, and
+    #     `TRANSCODE_LOGS`.
     #
     #   * For IAM Identity Center, the valid value is `ERROR_LOGS`.
     #
+    #   * For Amazon Q, the valid value is `EVENT_LOGS`.
+    #
+    #   * For Amazon SES mail manager, the valid value is `APPLICATION_LOG`.
+    #
     #   * For Amazon WorkMail, the valid values are `ACCESS_CONTROL_LOGS`,
-    #     `AUTHENTICATION_LOGS`, `WORKMAIL_AVAILABILITY_PROVIDER_LOGS`, and
-    #     `WORKMAIL_MAILBOX_ACCESS_LOGS`.
+    #     `AUTHENTICATION_LOGS`, `WORKMAIL_AVAILABILITY_PROVIDER_LOGS`,
+    #     `WORKMAIL_MAILBOX_ACCESS_LOGS`, and
+    #     `WORKMAIL_PERSONAL_ACCESS_TOKEN_LOGS`.
     #
     # @option params [Hash<String,String>] :tags
     #   An optional list of key-value pairs to associate with the resource.
@@ -5204,12 +5264,12 @@ module Aws::CloudWatchLogs
     # The maximum number of metric filters that can be associated with a log
     # group is 100.
     #
-    # Using regular expressions to create metric filters is supported. For
-    # these filters, there is a quota of two regular expression patterns
-    # within a single filter pattern. There is also a quota of five regular
+    # Using regular expressions in filter patterns is supported. For these
+    # filters, there is a quota of two regular expression patterns within a
+    # single filter pattern. There is also a quota of five regular
     # expression patterns per log group. For more information about using
-    # regular expressions in metric filters, see [ Filter pattern syntax for
-    # metric filters, subscription filters, filter log events, and Live
+    # regular expressions in filter patterns, see [ Filter pattern syntax
+    # for metric filters, subscription filters, filter log events, and Live
     # Tail][2].
     #
     # When you create a metric filter, you can also optionally assign a unit
@@ -5554,13 +5614,13 @@ module Aws::CloudWatchLogs
     # it. If you are updating an existing filter, you must specify the
     # correct name in `filterName`.
     #
-    # Using regular expressions to create subscription filters is supported.
-    # For these filters, there is a quotas of quota of two regular
-    # expression patterns within a single filter pattern. There is also a
-    # quota of five regular expression patterns per log group. For more
-    # information about using regular expressions in subscription filters,
-    # see [ Filter pattern syntax for metric filters, subscription filters,
-    # filter log events, and Live Tail][3].
+    # Using regular expressions in filter patterns is supported. For these
+    # filters, there is a quotas of quota of two regular expression patterns
+    # within a single filter pattern. There is also a quota of five regular
+    # expression patterns per log group. For more information about using
+    # regular expressions in filter patterns, see [ Filter pattern syntax
+    # for metric filters, subscription filters, filter log events, and Live
+    # Tail][3].
     #
     # To perform a `PutSubscriptionFilter` operation for any destination
     # except a Lambda function, you must also have the `iam:PassRole`
@@ -6941,7 +7001,7 @@ module Aws::CloudWatchLogs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.106.0'
+      context[:gem_version] = '1.107.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
