@@ -7,7 +7,7 @@ require 'aws-sdk-core/plugins/protocols/json_rpc'
 require 'aws-sdk-core/plugins/protocols/rpc_v2'
 
 ITERATIONS = ARGV.first.to_i
-
+WARMUP = 10
 ASCII = "!\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~".chars
 INT_MIN = -2147483648
 INT_MAX = 2147483647
@@ -106,6 +106,7 @@ end
 thread = Thread.current
 thread[:json_data] = []
 thread[:cbor_data] = []
+thread[:warm] = false
 
 Aws::Echo::Client.remove_plugin(Aws::Plugins::Protocols::JsonRpc)
 json_echo = Aws::Echo::Client.new(plugins: [Aws::Plugins::Protocols::JsonRpc], stub_responses: true)
@@ -115,7 +116,9 @@ cbor_echo.config.api = cbor_echo.config.api.dup
 cbor_echo.config.api.metadata = cbor_echo.config.api.metadata.dup
 cbor_echo.config.api.metadata['protocol'] = 'smithy-rpc-v2-cbor'
 
-(1..ITERATIONS).each do
+(0...(ITERATIONS + WARMUP)).each do |i|
+  thread[:warm] = true if i == WARMUP
+
   all_types = random_all_types
   list_of_strings = random_long_list_of_strings
   complex_object = random_complex_object
@@ -197,7 +200,8 @@ parsed_json_data.each_with_index do |i, idx|
     "metric": idx.even? ? 'Serialization time (ms)' : 'Deserialization time (ms)',
     "p50": p50(i),
     "p90": p90(i),
-    "max": i.last
+    "max": i.last,
+    "n": ITERATIONS
   }
   data.puts(JSON.pretty_generate(result))
 end
@@ -211,7 +215,8 @@ parsed_cbor_data.each_with_index do |i, idx|
     "metric": idx.even? ? 'Serialization time (ms)' : 'Deserialization time (ms)',
     "p50": p50(i),
     "p90": p90(i),
-    "max": i.last
+    "max": i.last,
+    "n": ITERATIONS
   }
   data.puts(JSON.pretty_generate(result))
 end
