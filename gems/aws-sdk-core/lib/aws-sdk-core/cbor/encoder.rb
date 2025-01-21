@@ -226,7 +226,7 @@ module Aws
 
       def add_time(value)
         head(MAJOR_TYPE_TAG, TAG_TYPE_EPOCH)
-        epoch_ms = (value.to_f * 1000).to_i
+        epoch_ms = (value.to_f).to_i
         add_integer(epoch_ms)
       end
 
