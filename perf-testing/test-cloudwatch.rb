@@ -6,6 +6,7 @@ require 'aws-sdk-cloudwatch'
 require 'aws-sdk-core/plugins/protocols/rpc_v2'
 
 ITERATIONS = ARGV.first.to_i
+WARMUP = 10
 METRIC_COUNTS = [16, 64, 256, 1000]
 BASE_TIME = Time.now.to_i - 2 * 60 * 60
 SUITE_ID = (0...8).map { (48 + rand(10)).chr }.join
@@ -63,9 +64,14 @@ end
 
 def generate_list_metrics_request(iteration)
   {
-    name_space: "TestNamespace#{iteration}"
+    namespace: "TestNamespace#{iteration}"
   }
 end
+
+thread = Thread.current
+thread[:query_data] = []
+thread[:cbor_data] = []
+thread[:warm] = false
 
 Aws::CloudWatch::Client.api.metadata['targetPrefix'] = 'GraniteServiceVersion20100801'
 Aws::CloudWatch::Client.remove_plugin(Aws::Plugins::Protocols::Query)
@@ -75,25 +81,45 @@ cbor_cloudwatch.config.api = cbor_cloudwatch.config.api.dup
 cbor_cloudwatch.config.api.metadata = cbor_cloudwatch.config.api.metadata.dup
 cbor_cloudwatch.config.api.metadata['protocol'] = 'smithy-rpc-v2-cbor'
 
-metric_counts = [1, 16, 64, 256, 1000]
+# metric_counts = [1, 16, 64, 256, 1000]
+metric_counts = [1, 16, 64]
+thread[:warm] = true
+
 metric_counts.each do |metrics|
   (0...ITERATIONS).each do |i|
+    puts 'Put Metric Data'
     request = generate_put_metric_data_request(metrics, BASE_TIME, SUITE_ID)
-    query_cloudwatch.put_metric_data(request)
-    cbor_cloudwatch.put_metric_data(request)
+    query_resp = query_cloudwatch.put_metric_data(request)
+    cbor_resp = cbor_cloudwatch.put_metric_data(request)
+    puts "Query Resp"
+    pp query_resp
+    puts "Cbor Resp"
+    pp cbor_resp
     sleep(2) if (i % 50).zero?
   end
-  # (0...ITERATIONS).each do |i|
-  #   request = generate_get_metric_data_request(metrics, BASE_TIME, SUITE_ID)
-  #   query_cloudwatch.get_metric_data(request)
-  #   cbor_cloudwatch.get_metric_data(request)
-  #   sleep(2) if (i % 50).zero?
-  # end
+  (0...ITERATIONS).each do |i|
+    puts 'Get Metric Data'
+    request = generate_get_metric_data_request(metrics, BASE_TIME, SUITE_ID)
+    query_resp = query_cloudwatch.get_metric_data(request)
+    cbor_resp = cbor_cloudwatch.get_metric_data(request)
+    puts "Query Resp"
+    pp query_resp
+    puts "Cbor Resp"
+    pp cbor_resp
+    sleep(2) if (i % 50).zero?
+  end
+end
+(0...ITERATIONS).each do |i|
+  puts 'List Metrics'
+  request = generate_list_metrics_request(i)
+  query_resp = query_cloudwatch.list_metrics(request)
+  cbor_resp = cbor_cloudwatch.list_metrics(request)
+  puts "Query Resp"
+  pp query_resp
+  puts "Cbor Resp"
+  pp cbor_resp
+  sleep(2) if (i % 50).zero?
 end
 
-# (0...ITERATIONS).each do |i|
-#   request = generate_list_metrics_request(i)
-#   query_cloudwatch.list_metrics(request)
-#   cbor_cloudwatch.list_metrics(request)
-#   sleep(2) if (i % 50).zero?
-# end
+pp thread[:query_data]
+pp thread[:cbor_data]

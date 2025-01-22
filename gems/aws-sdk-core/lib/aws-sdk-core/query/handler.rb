@@ -26,8 +26,16 @@ module Aws
       # @param [Seahorse::Client::RequestContext] context
       # @return [Seahorse::Client::Response]
       def call(context)
+        thread = Thread.current
+        t_ser_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
         build_request(context)
+        t_ser_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+        t_deser_start, t_deser_end = nil
+        response = nil
+        success = false
         @handler.call(context).on_success do |resp|
+          success = true
+          t_deser_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
           resp.error = nil
           parsed = parse_xml(context)
           if parsed.nil? || parsed == EmptyStructure
@@ -35,7 +43,15 @@ module Aws
           else
             resp.data = parsed
           end
+          t_deser_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+          response = resp
         end
+        puts 'NOT SUCCESSFUL' unless success
+        if thread[:warm] && success
+          thread[:query_data] << [format('%.3f', (t_ser_end - t_ser_start) * 1000.0),
+                                  format('%.3f', (t_deser_end - t_deser_start) * 1000.0)]
+        end
+        response
       end
 
       private
