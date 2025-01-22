@@ -24,8 +24,8 @@ module Aws
         end
         response.on(200..599) { |_resp| apply_request_id(context) }
         if thread[:warm] && success
-          thread[:json_data] << [format('%.3f', (t_ser_end - t_ser_start) * 1000.0),
-                                 format('%.3f', (t_deser_end - t_deser_start) * 1000.0)]
+          thread[:json_serde_data] << [format('%.3f', (t_ser_end - t_ser_start) * 1000.0).to_f,
+                                       format('%.3f', (t_deser_end - t_deser_start) * 1000.0).to_f]
         end
         response
       end

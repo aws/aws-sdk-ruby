@@ -5,6 +5,8 @@ require 'aws-sdk-core'
 require 'aws-sdk-echo'
 require 'aws-sdk-core/plugins/protocols/json_rpc'
 require 'aws-sdk-core/plugins/protocols/rpc_v2'
+require_relative 'Stats'
+include Stats
 
 ITERATIONS = ARGV.first.to_i
 WARMUP = 10
@@ -104,8 +106,8 @@ def random_large_blob
 end
 
 thread = Thread.current
-thread[:json_data] = []
-thread[:cbor_data] = []
+thread[:json_serde_data] = []
+thread[:cbor_serde_data] = []
 thread[:warm] = false
 
 Aws::Echo::Client.remove_plugin(Aws::Plugins::Protocols::JsonRpc)
@@ -152,30 +154,22 @@ end
 
 test_cases = ['All types', 'Long list of strings', 'Complex object', 'List of complex objects', 'Very large blob']
 
-def p50(data)
-  data[(data.length - 1) / 2]
-end
-
-def p90(data)
-  data[(data.length - 1) * 0.9]
-end
-
 data = File.open('perf-testing/test-output/local-only/data.txt', 'w')
 raw = File.open('perf-testing/test-output/local-only/raw.txt', 'w')
 
 parsed_json_data = Array.new(10) { [] }
 parsed_cbor_data = Array.new(10) { [] }
 
-thread[:json_data].each_with_index do |i, idx|
-  ser = i[0].to_f
-  deser = i[1].to_f
+thread[:json_serde_data].each_with_index do |i, idx|
+  ser = i[0]
+  deser = i[1]
   parsed_json_data[(idx % 5) * 2] << ser
   parsed_json_data[(idx % 5) * 2 + 1] << deser
 end
 
-thread[:cbor_data].each_with_index do |i, idx|
-  ser = i[0].to_f
-  deser = i[1].to_f
+thread[:cbor_serde_data].each_with_index do |i, idx|
+  ser = i[0]
+  deser = i[1]
   parsed_cbor_data[(idx % 5) * 2] << ser
   parsed_cbor_data[(idx % 5) * 2 + 1] << deser
 end

@@ -48,8 +48,8 @@ module Aws
         end
         puts 'NOT SUCCESSFUL' unless success
         if thread[:warm] && success
-          thread[:query_data] << [format('%.3f', (t_ser_end - t_ser_start) * 1000.0),
-                                  format('%.3f', (t_deser_end - t_deser_start) * 1000.0)]
+          thread[:query_serde_data] << [format('%.3f', (t_ser_end - t_ser_start) * 1000.0).to_f,
+                                        format('%.3f', (t_deser_end - t_deser_start) * 1000.0).to_f]
         end
         response
       end

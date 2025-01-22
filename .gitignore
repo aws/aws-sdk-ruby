@@ -18,3 +18,5 @@ benchmark_report.json
 
 perf-testing/test-output/local-only/*.txt
 !perf-testing/test-output/local-only
+perf-testing/test-output/cloudwatch/*.txt
+!perf-testing/test-output/cloudwatch
