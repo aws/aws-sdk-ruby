@@ -771,6 +771,7 @@ module Aws::QuickSight
     DescribeVPCConnectionResponse = Shapes::StructureShape.new(name: 'DescribeVPCConnectionResponse')
     Description = Shapes::StringShape.new(name: 'Description')
     DestinationParameterValueConfiguration = Shapes::StructureShape.new(name: 'DestinationParameterValueConfiguration')
+    DigitGroupingStyle = Shapes::StringShape.new(name: 'DigitGroupingStyle')
     DimensionField = Shapes::StructureShape.new(name: 'DimensionField')
     DimensionFieldList = Shapes::ListShape.new(name: 'DimensionFieldList')
     DisplayFormat = Shapes::StringShape.new(name: 'DisplayFormat')
@@ -1800,6 +1801,7 @@ module Aws::QuickSight
     TableStyleTargetList = Shapes::ListShape.new(name: 'TableStyleTargetList')
     TableTotalsPlacement = Shapes::StringShape.new(name: 'TableTotalsPlacement')
     TableTotalsScrollStatus = Shapes::StringShape.new(name: 'TableTotalsScrollStatus')
+    TableUnaggregatedFieldList = Shapes::ListShape.new(name: 'TableUnaggregatedFieldList')
     TableUnaggregatedFieldWells = Shapes::StructureShape.new(name: 'TableUnaggregatedFieldWells')
     TableVisual = Shapes::StructureShape.new(name: 'TableVisual')
     Tag = Shapes::StructureShape.new(name: 'Tag')
@@ -8735,7 +8737,9 @@ module Aws::QuickSight
 
     TableStyleTargetList.member = Shapes::ShapeRef.new(shape: TableStyleTarget)
 
-    TableUnaggregatedFieldWells.add_member(:values, Shapes::ShapeRef.new(shape: UnaggregatedFieldList, location_name: "Values"))
+    TableUnaggregatedFieldList.member = Shapes::ShapeRef.new(shape: UnaggregatedField)
+
+    TableUnaggregatedFieldWells.add_member(:values, Shapes::ShapeRef.new(shape: TableUnaggregatedFieldList, location_name: "Values"))
     TableUnaggregatedFieldWells.struct_class = Types::TableUnaggregatedFieldWells
 
     TableVisual.add_member(:visual_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "VisualId"))
@@ -8926,6 +8930,7 @@ module Aws::QuickSight
 
     ThousandSeparatorOptions.add_member(:symbol, Shapes::ShapeRef.new(shape: NumericSeparatorSymbol, location_name: "Symbol"))
     ThousandSeparatorOptions.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
+    ThousandSeparatorOptions.add_member(:grouping_style, Shapes::ShapeRef.new(shape: DigitGroupingStyle, location_name: "GroupingStyle"))
     ThousandSeparatorOptions.struct_class = Types::ThousandSeparatorOptions
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))

@@ -518,6 +518,7 @@ module Aws::IoTSiteWise
     end
 
     class BatchPutAssetPropertyValueRequest
+      attr_accessor enable_partial_entry_processing: bool
       attr_accessor entries: ::Array[Types::PutAssetPropertyValueEntry]
       SENSITIVE: []
     end
@@ -1231,6 +1232,7 @@ module Aws::IoTSiteWise
       attr_accessor last_update_date: ::Time
       attr_accessor warm_tier: ("ENABLED" | "DISABLED")
       attr_accessor warm_tier_retention_period: Types::WarmTierRetentionPeriod
+      attr_accessor disallow_ingest_null_na_n: bool
       SENSITIVE: []
     end
 
@@ -1939,6 +1941,11 @@ module Aws::IoTSiteWise
       SENSITIVE: []
     end
 
+    class PropertyValueNullValue
+      attr_accessor value_type: ("D" | "B" | "S" | "I" | "U")
+      SENSITIVE: []
+    end
+
     class PutAssetPropertyValueEntry
       attr_accessor entry_id: ::String
       attr_accessor asset_id: ::String
@@ -1976,6 +1983,7 @@ module Aws::IoTSiteWise
       attr_accessor retention_period: Types::RetentionPeriod
       attr_accessor warm_tier: ("ENABLED" | "DISABLED")
       attr_accessor warm_tier_retention_period: Types::WarmTierRetentionPeriod
+      attr_accessor disallow_ingest_null_na_n: bool
       SENSITIVE: []
     end
 
@@ -1987,6 +1995,7 @@ module Aws::IoTSiteWise
       attr_accessor configuration_status: Types::ConfigurationStatus
       attr_accessor warm_tier: ("ENABLED" | "DISABLED")
       attr_accessor warm_tier_retention_period: Types::WarmTierRetentionPeriod
+      attr_accessor disallow_ingest_null_na_n: bool
       SENSITIVE: []
     end
 
@@ -2311,6 +2320,7 @@ module Aws::IoTSiteWise
       attr_accessor integer_value: ::Integer
       attr_accessor double_value: ::Float
       attr_accessor boolean_value: bool
+      attr_accessor null_value: Types::PropertyValueNullValue
       SENSITIVE: []
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.194.0 (2025-01-21)
+------------------
+
+* Feature - Added DeleteContactFlowVersion API and the CAMPAIGN flow type
+
 1.193.0 (2025-01-15)
 ------------------
 

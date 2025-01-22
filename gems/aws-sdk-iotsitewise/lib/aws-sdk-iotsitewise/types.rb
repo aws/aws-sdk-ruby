@@ -2290,12 +2290,20 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # @!attribute [rw] enable_partial_entry_processing
+    #   This setting enables partial ingestion at entry-level. If set to
+    #   `true`, we ingest all TQVs not resulting in an error. If set to
+    #   `false`, an invalid TQV fails ingestion of the entire entry that
+    #   contains it.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] entries
     #   The list of asset property value entries for the batch put request.
     #   You can specify up to 10 entries per request.
     #   @return [Array<Types::PutAssetPropertyValueEntry>]
     #
     class BatchPutAssetPropertyValueRequest < Struct.new(
+      :enable_partial_entry_processing,
       :entries)
       SENSITIVE = []
       include Aws::Structure
@@ -5348,6 +5356,12 @@ module Aws::IoTSiteWise
     #   enabled.
     #   @return [Types::WarmTierRetentionPeriod]
     #
+    # @!attribute [rw] disallow_ingest_null_na_n
+    #   Describes the configuration for ingesting NULL and NaN data. By
+    #   default the feature is allowed. The feature is disallowed if the
+    #   value is `true`.
+    #   @return [Boolean]
+    #
     class DescribeStorageConfigurationResponse < Struct.new(
       :storage_type,
       :multi_layer_storage,
@@ -5356,7 +5370,8 @@ module Aws::IoTSiteWise
       :configuration_status,
       :last_update_date,
       :warm_tier,
-      :warm_tier_retention_period)
+      :warm_tier_retention_period,
+      :disallow_ingest_null_na_n)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8105,6 +8120,19 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # The value type of null asset property data with BAD and UNCERTAIN
+    # qualities.
+    #
+    # @!attribute [rw] value_type
+    #   The type of null asset property data.
+    #   @return [String]
+    #
+    class PropertyValueNullValue < Struct.new(
+      :value_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains a list of value updates for an asset property in the list of
     # asset entries consumed by the [BatchPutAssetPropertyValue][1] API
     # operation.
@@ -8261,13 +8289,20 @@ module Aws::IoTSiteWise
     #   enabled.
     #   @return [Types::WarmTierRetentionPeriod]
     #
+    # @!attribute [rw] disallow_ingest_null_na_n
+    #   Describes the configuration for ingesting NULL and NaN data. By
+    #   default the feature is allowed. The feature is disallowed if the
+    #   value is `true`.
+    #   @return [Boolean]
+    #
     class PutStorageConfigurationRequest < Struct.new(
       :storage_type,
       :multi_layer_storage,
       :disassociated_data_storage,
       :retention_period,
       :warm_tier,
-      :warm_tier_retention_period)
+      :warm_tier_retention_period,
+      :disallow_ingest_null_na_n)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8331,6 +8366,12 @@ module Aws::IoTSiteWise
     #   enabled.
     #   @return [Types::WarmTierRetentionPeriod]
     #
+    # @!attribute [rw] disallow_ingest_null_na_n
+    #   Describes the configuration for ingesting NULL and NaN data. By
+    #   default the feature is allowed. The feature is disallowed if the
+    #   value is `true`.
+    #   @return [Boolean]
+    #
     class PutStorageConfigurationResponse < Struct.new(
       :storage_type,
       :multi_layer_storage,
@@ -8338,7 +8379,8 @@ module Aws::IoTSiteWise
       :retention_period,
       :configuration_status,
       :warm_tier,
-      :warm_tier_retention_period)
+      :warm_tier_retention_period,
+      :disallow_ingest_null_na_n)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9700,7 +9742,9 @@ module Aws::IoTSiteWise
     # Contains an asset property value (of a single type only).
     #
     # @!attribute [rw] string_value
-    #   Asset property data of type string (sequence of characters).
+    #   Asset property data of type string (sequence of characters). The
+    #   allowed pattern: "^$\|\[^\\u0000-\\u001F\\u007F\]+". The max
+    #   length is 1024.
     #   @return [String]
     #
     # @!attribute [rw] integer_value
@@ -9708,18 +9752,25 @@ module Aws::IoTSiteWise
     #   @return [Integer]
     #
     # @!attribute [rw] double_value
-    #   Asset property data of type double (floating point number).
+    #   Asset property data of type double (floating point number). The min
+    #   value is -10^10. The max value is 10^10. Double.NaN is allowed.
     #   @return [Float]
     #
     # @!attribute [rw] boolean_value
     #   Asset property data of type Boolean (true or false).
     #   @return [Boolean]
     #
+    # @!attribute [rw] null_value
+    #   The type of null asset property data with BAD and UNCERTAIN
+    #   qualities.
+    #   @return [Types::PropertyValueNullValue]
+    #
     class Variant < Struct.new(
       :string_value,
       :integer_value,
       :double_value,
-      :boolean_value)
+      :boolean_value,
+      :null_value)
       SENSITIVE = []
       include Aws::Structure
     end

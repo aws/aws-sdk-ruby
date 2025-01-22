@@ -203,6 +203,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#batch_put_asset_property_value-instance_method
       def batch_put_asset_property_value: (
+                                            ?enable_partial_entry_processing: bool,
                                             entries: Array[
                                               {
                                                 entry_id: ::String,
@@ -215,7 +216,10 @@ module Aws
                                                       string_value: ::String?,
                                                       integer_value: ::Integer?,
                                                       double_value: ::Float?,
-                                                      boolean_value: bool?
+                                                      boolean_value: bool?,
+                                                      null_value: {
+                                                        value_type: ("D" | "B" | "S" | "I" | "U")
+                                                      }?
                                                     },
                                                     timestamp: {
                                                       time_in_seconds: ::Integer,
@@ -1108,6 +1112,7 @@ module Aws
         def last_update_date: () -> ::Time
         def warm_tier: () -> ("ENABLED" | "DISABLED")
         def warm_tier_retention_period: () -> Types::WarmTierRetentionPeriod
+        def disallow_ingest_null_na_n: () -> bool
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_storage_configuration-instance_method
       def describe_storage_configuration: (
@@ -1563,6 +1568,7 @@ module Aws
         def configuration_status: () -> Types::ConfigurationStatus
         def warm_tier: () -> ("ENABLED" | "DISABLED")
         def warm_tier_retention_period: () -> Types::WarmTierRetentionPeriod
+        def disallow_ingest_null_na_n: () -> bool
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#put_storage_configuration-instance_method
       def put_storage_configuration: (
@@ -1582,7 +1588,8 @@ module Aws
                                        ?warm_tier_retention_period: {
                                          number_of_days: ::Integer?,
                                          unlimited: bool?
-                                       }
+                                       },
+                                       ?disallow_ingest_null_na_n: bool
                                      ) -> _PutStorageConfigurationResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutStorageConfigurationResponseSuccess
 

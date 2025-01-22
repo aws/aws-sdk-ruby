@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.107.0 (2025-01-21)
+------------------
+
+* Feature - Documentation-only update to address doc errors
+
 1.106.0 (2025-01-15)
 ------------------
 

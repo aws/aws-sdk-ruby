@@ -544,7 +544,7 @@ module Aws::QuickSight
     #                 fraction_digits: 1,
     #                 prefix: "LimitedString",
     #                 suffix: "LimitedString",
-    #                 unit_scaler: "NONE", # accepts NONE, AUTO, THOUSANDS, MILLIONS, BILLIONS, TRILLIONS
+    #                 unit_scaler: "NONE", # accepts NONE, AUTO, THOUSANDS, MILLIONS, BILLIONS, TRILLIONS, LAKHS, CRORES
     #                 negative_format: {
     #                   prefix: "LimitedString",
     #                   suffix: "LimitedString",
@@ -579,7 +579,7 @@ module Aws::QuickSight
     #                 fraction_digits: 1,
     #                 prefix: "LimitedString",
     #                 suffix: "LimitedString",
-    #                 unit_scaler: "NONE", # accepts NONE, AUTO, THOUSANDS, MILLIONS, BILLIONS, TRILLIONS
+    #                 unit_scaler: "NONE", # accepts NONE, AUTO, THOUSANDS, MILLIONS, BILLIONS, TRILLIONS, LAKHS, CRORES
     #                 negative_format: {
     #                   prefix: "LimitedString",
     #                   suffix: "LimitedString",
@@ -915,7 +915,7 @@ module Aws::QuickSight
     #                   fraction_digits: 1,
     #                   prefix: "LimitedString",
     #                   suffix: "LimitedString",
-    #                   unit_scaler: "NONE", # accepts NONE, AUTO, THOUSANDS, MILLIONS, BILLIONS, TRILLIONS
+    #                   unit_scaler: "NONE", # accepts NONE, AUTO, THOUSANDS, MILLIONS, BILLIONS, TRILLIONS, LAKHS, CRORES
     #                   negative_format: {
     #                     prefix: "LimitedString",
     #                     suffix: "LimitedString",
@@ -950,7 +950,7 @@ module Aws::QuickSight
     #                   fraction_digits: 1,
     #                   prefix: "LimitedString",
     #                   suffix: "LimitedString",
-    #                   unit_scaler: "NONE", # accepts NONE, AUTO, THOUSANDS, MILLIONS, BILLIONS, TRILLIONS
+    #                   unit_scaler: "NONE", # accepts NONE, AUTO, THOUSANDS, MILLIONS, BILLIONS, TRILLIONS, LAKHS, CRORES
     #                   negative_format: {
     #                     prefix: "LimitedString",
     #                     suffix: "LimitedString",
@@ -3975,7 +3975,7 @@ module Aws::QuickSight
     #                   fraction_digits: 1,
     #                   prefix: "LimitedString",
     #                   suffix: "LimitedString",
-    #                   unit_scaler: "NONE", # accepts NONE, AUTO, THOUSANDS, MILLIONS, BILLIONS, TRILLIONS
+    #                   unit_scaler: "NONE", # accepts NONE, AUTO, THOUSANDS, MILLIONS, BILLIONS, TRILLIONS, LAKHS, CRORES
     #                   negative_format: {
     #                     prefix: "LimitedString",
     #                     suffix: "LimitedString",
@@ -4015,7 +4015,7 @@ module Aws::QuickSight
     #                   fraction_digits: 1,
     #                   prefix: "LimitedString",
     #                   suffix: "LimitedString",
-    #                   unit_scaler: "NONE", # accepts NONE, AUTO, THOUSANDS, MILLIONS, BILLIONS, TRILLIONS
+    #                   unit_scaler: "NONE", # accepts NONE, AUTO, THOUSANDS, MILLIONS, BILLIONS, TRILLIONS, LAKHS, CRORES
     #                   negative_format: {
     #                     prefix: "LimitedString",
     #                     suffix: "LimitedString",
@@ -8755,7 +8755,7 @@ module Aws::QuickSight
     #   resp.topic.data_sets[0].columns[0].default_formatting.display_format_options.fraction_digits #=> Integer
     #   resp.topic.data_sets[0].columns[0].default_formatting.display_format_options.prefix #=> String
     #   resp.topic.data_sets[0].columns[0].default_formatting.display_format_options.suffix #=> String
-    #   resp.topic.data_sets[0].columns[0].default_formatting.display_format_options.unit_scaler #=> String, one of "NONE", "AUTO", "THOUSANDS", "MILLIONS", "BILLIONS", "TRILLIONS"
+    #   resp.topic.data_sets[0].columns[0].default_formatting.display_format_options.unit_scaler #=> String, one of "NONE", "AUTO", "THOUSANDS", "MILLIONS", "BILLIONS", "TRILLIONS", "LAKHS", "CRORES"
     #   resp.topic.data_sets[0].columns[0].default_formatting.display_format_options.negative_format.prefix #=> String
     #   resp.topic.data_sets[0].columns[0].default_formatting.display_format_options.negative_format.suffix #=> String
     #   resp.topic.data_sets[0].columns[0].default_formatting.display_format_options.currency_symbol #=> String
@@ -8785,7 +8785,7 @@ module Aws::QuickSight
     #   resp.topic.data_sets[0].calculated_fields[0].default_formatting.display_format_options.fraction_digits #=> Integer
     #   resp.topic.data_sets[0].calculated_fields[0].default_formatting.display_format_options.prefix #=> String
     #   resp.topic.data_sets[0].calculated_fields[0].default_formatting.display_format_options.suffix #=> String
-    #   resp.topic.data_sets[0].calculated_fields[0].default_formatting.display_format_options.unit_scaler #=> String, one of "NONE", "AUTO", "THOUSANDS", "MILLIONS", "BILLIONS", "TRILLIONS"
+    #   resp.topic.data_sets[0].calculated_fields[0].default_formatting.display_format_options.unit_scaler #=> String, one of "NONE", "AUTO", "THOUSANDS", "MILLIONS", "BILLIONS", "TRILLIONS", "LAKHS", "CRORES"
     #   resp.topic.data_sets[0].calculated_fields[0].default_formatting.display_format_options.negative_format.prefix #=> String
     #   resp.topic.data_sets[0].calculated_fields[0].default_formatting.display_format_options.negative_format.suffix #=> String
     #   resp.topic.data_sets[0].calculated_fields[0].default_formatting.display_format_options.currency_symbol #=> String
@@ -11529,7 +11529,7 @@ module Aws::QuickSight
     #   resp.answers[0].mir.metrics[0].display_format_options.fraction_digits #=> Integer
     #   resp.answers[0].mir.metrics[0].display_format_options.prefix #=> String
     #   resp.answers[0].mir.metrics[0].display_format_options.suffix #=> String
-    #   resp.answers[0].mir.metrics[0].display_format_options.unit_scaler #=> String, one of "NONE", "AUTO", "THOUSANDS", "MILLIONS", "BILLIONS", "TRILLIONS"
+    #   resp.answers[0].mir.metrics[0].display_format_options.unit_scaler #=> String, one of "NONE", "AUTO", "THOUSANDS", "MILLIONS", "BILLIONS", "TRILLIONS", "LAKHS", "CRORES"
     #   resp.answers[0].mir.metrics[0].display_format_options.negative_format.prefix #=> String
     #   resp.answers[0].mir.metrics[0].display_format_options.negative_format.suffix #=> String
     #   resp.answers[0].mir.metrics[0].display_format_options.currency_symbol #=> String
@@ -11549,7 +11549,7 @@ module Aws::QuickSight
     #   resp.answers[0].mir.group_by_list[0].display_format_options.fraction_digits #=> Integer
     #   resp.answers[0].mir.group_by_list[0].display_format_options.prefix #=> String
     #   resp.answers[0].mir.group_by_list[0].display_format_options.suffix #=> String
-    #   resp.answers[0].mir.group_by_list[0].display_format_options.unit_scaler #=> String, one of "NONE", "AUTO", "THOUSANDS", "MILLIONS", "BILLIONS", "TRILLIONS"
+    #   resp.answers[0].mir.group_by_list[0].display_format_options.unit_scaler #=> String, one of "NONE", "AUTO", "THOUSANDS", "MILLIONS", "BILLIONS", "TRILLIONS", "LAKHS", "CRORES"
     #   resp.answers[0].mir.group_by_list[0].display_format_options.negative_format.prefix #=> String
     #   resp.answers[0].mir.group_by_list[0].display_format_options.negative_format.suffix #=> String
     #   resp.answers[0].mir.group_by_list[0].display_format_options.currency_symbol #=> String
@@ -11740,7 +11740,7 @@ module Aws::QuickSight
     #   resp.answers[0].primary_visual.ir.metrics[0].display_format_options.fraction_digits #=> Integer
     #   resp.answers[0].primary_visual.ir.metrics[0].display_format_options.prefix #=> String
     #   resp.answers[0].primary_visual.ir.metrics[0].display_format_options.suffix #=> String
-    #   resp.answers[0].primary_visual.ir.metrics[0].display_format_options.unit_scaler #=> String, one of "NONE", "AUTO", "THOUSANDS", "MILLIONS", "BILLIONS", "TRILLIONS"
+    #   resp.answers[0].primary_visual.ir.metrics[0].display_format_options.unit_scaler #=> String, one of "NONE", "AUTO", "THOUSANDS", "MILLIONS", "BILLIONS", "TRILLIONS", "LAKHS", "CRORES"
     #   resp.answers[0].primary_visual.ir.metrics[0].display_format_options.negative_format.prefix #=> String
     #   resp.answers[0].primary_visual.ir.metrics[0].display_format_options.negative_format.suffix #=> String
     #   resp.answers[0].primary_visual.ir.metrics[0].display_format_options.currency_symbol #=> String
@@ -11760,7 +11760,7 @@ module Aws::QuickSight
     #   resp.answers[0].primary_visual.ir.group_by_list[0].display_format_options.fraction_digits #=> Integer
     #   resp.answers[0].primary_visual.ir.group_by_list[0].display_format_options.prefix #=> String
     #   resp.answers[0].primary_visual.ir.group_by_list[0].display_format_options.suffix #=> String
-    #   resp.answers[0].primary_visual.ir.group_by_list[0].display_format_options.unit_scaler #=> String, one of "NONE", "AUTO", "THOUSANDS", "MILLIONS", "BILLIONS", "TRILLIONS"
+    #   resp.answers[0].primary_visual.ir.group_by_list[0].display_format_options.unit_scaler #=> String, one of "NONE", "AUTO", "THOUSANDS", "MILLIONS", "BILLIONS", "TRILLIONS", "LAKHS", "CRORES"
     #   resp.answers[0].primary_visual.ir.group_by_list[0].display_format_options.negative_format.prefix #=> String
     #   resp.answers[0].primary_visual.ir.group_by_list[0].display_format_options.negative_format.suffix #=> String
     #   resp.answers[0].primary_visual.ir.group_by_list[0].display_format_options.currency_symbol #=> String
@@ -17005,7 +17005,7 @@ module Aws::QuickSight
     #                   fraction_digits: 1,
     #                   prefix: "LimitedString",
     #                   suffix: "LimitedString",
-    #                   unit_scaler: "NONE", # accepts NONE, AUTO, THOUSANDS, MILLIONS, BILLIONS, TRILLIONS
+    #                   unit_scaler: "NONE", # accepts NONE, AUTO, THOUSANDS, MILLIONS, BILLIONS, TRILLIONS, LAKHS, CRORES
     #                   negative_format: {
     #                     prefix: "LimitedString",
     #                     suffix: "LimitedString",
@@ -17045,7 +17045,7 @@ module Aws::QuickSight
     #                   fraction_digits: 1,
     #                   prefix: "LimitedString",
     #                   suffix: "LimitedString",
-    #                   unit_scaler: "NONE", # accepts NONE, AUTO, THOUSANDS, MILLIONS, BILLIONS, TRILLIONS
+    #                   unit_scaler: "NONE", # accepts NONE, AUTO, THOUSANDS, MILLIONS, BILLIONS, TRILLIONS, LAKHS, CRORES
     #                   negative_format: {
     #                     prefix: "LimitedString",
     #                     suffix: "LimitedString",
@@ -17538,7 +17538,7 @@ module Aws::QuickSight
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.141.0'
+      context[:gem_version] = '1.142.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

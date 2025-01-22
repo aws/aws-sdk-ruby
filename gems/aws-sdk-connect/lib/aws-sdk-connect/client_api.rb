@@ -335,6 +335,8 @@ module Aws::Connect
     DeleteContactFlowModuleResponse = Shapes::StructureShape.new(name: 'DeleteContactFlowModuleResponse')
     DeleteContactFlowRequest = Shapes::StructureShape.new(name: 'DeleteContactFlowRequest')
     DeleteContactFlowResponse = Shapes::StructureShape.new(name: 'DeleteContactFlowResponse')
+    DeleteContactFlowVersionRequest = Shapes::StructureShape.new(name: 'DeleteContactFlowVersionRequest')
+    DeleteContactFlowVersionResponse = Shapes::StructureShape.new(name: 'DeleteContactFlowVersionResponse')
     DeleteEmailAddressRequest = Shapes::StructureShape.new(name: 'DeleteEmailAddressRequest')
     DeleteEmailAddressResponse = Shapes::StructureShape.new(name: 'DeleteEmailAddressResponse')
     DeleteEvaluationFormRequest = Shapes::StructureShape.new(name: 'DeleteEvaluationFormRequest')
@@ -2221,6 +2223,7 @@ module Aws::Connect
     CreateContactFlowVersionRequest.add_member(:description, Shapes::ShapeRef.new(shape: ContactFlowDescription, location_name: "Description"))
     CreateContactFlowVersionRequest.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "ContactFlowId"))
     CreateContactFlowVersionRequest.add_member(:flow_content_sha_256, Shapes::ShapeRef.new(shape: FlowContentSha256, location_name: "FlowContentSha256"))
+    CreateContactFlowVersionRequest.add_member(:contact_flow_version, Shapes::ShapeRef.new(shape: ResourceVersion, location_name: "ContactFlowVersion"))
     CreateContactFlowVersionRequest.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     CreateContactFlowVersionRequest.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
     CreateContactFlowVersionRequest.struct_class = Types::CreateContactFlowVersionRequest
@@ -2638,6 +2641,13 @@ module Aws::Connect
     DeleteContactFlowRequest.struct_class = Types::DeleteContactFlowRequest
 
     DeleteContactFlowResponse.struct_class = Types::DeleteContactFlowResponse
+
+    DeleteContactFlowVersionRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    DeleteContactFlowVersionRequest.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "ContactFlowId"))
+    DeleteContactFlowVersionRequest.add_member(:contact_flow_version, Shapes::ShapeRef.new(shape: ResourceVersion, required: true, location: "uri", location_name: "ContactFlowVersion"))
+    DeleteContactFlowVersionRequest.struct_class = Types::DeleteContactFlowVersionRequest
+
+    DeleteContactFlowVersionResponse.struct_class = Types::DeleteContactFlowVersionResponse
 
     DeleteEmailAddressRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DeleteEmailAddressRequest.add_member(:email_address_id, Shapes::ShapeRef.new(shape: EmailAddressId, required: true, location: "uri", location_name: "EmailAddressId"))
@@ -7330,6 +7340,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:delete_contact_flow_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteContactFlowVersion"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/contact-flows/{InstanceId}/{ContactFlowId}/version/{ContactFlowVersion}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteContactFlowVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteContactFlowVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:delete_email_address, Seahorse::Model::Operation.new.tap do |o|

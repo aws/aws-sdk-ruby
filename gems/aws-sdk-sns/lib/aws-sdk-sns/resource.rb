@@ -155,6 +155,22 @@ module Aws::SNS
     #       (Optional) To override the generated value, you can specify a
     #       value for the `MessageDeduplicationId` parameter for the `Publish`
     #       action.
+    #   ^
+    #
+    #   * `FifoThroughputScope` – Enables higher throughput for your FIFO
+    #     topic by adjusting the scope of deduplication. This attribute has
+    #     two possible values:
+    #
+    #     * `Topic` – The scope of message deduplication is across the entire
+    #       topic. This is the default value and maintains existing behavior,
+    #       with a maximum throughput of 3000 messages per second or 20MB per
+    #       second, whichever comes first.
+    #
+    #     * `MessageGroup` – The scope of deduplication is within each
+    #       individual message group, which enables higher throughput per
+    #       topic subject to regional quotas. For more information on quotas
+    #       or to request an increase, see [Amazon SNS service quotas][6] in
+    #       the Amazon Web Services General Reference.
     #
     #
     #
@@ -163,6 +179,7 @@ module Aws::SNS
     #   [3]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
     #   [4]: https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html
     #   [5]: https://docs.aws.amazon.com/sns/latest/api/API_Publish.html
+    #   [6]: https://docs.aws.amazon.com/general/latest/gr/sns.html
     # @option options [Array<Types::Tag>] :tags
     #   The list of tags to add to a new topic.
     #

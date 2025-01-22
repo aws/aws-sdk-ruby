@@ -27,6 +27,18 @@ module Aws::CognitoIdentityProvider
         if (partition_result = Aws::Endpoints::Matchers.aws_partition(region))
           if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
             if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS")) && Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
+              if Aws::Endpoints::Matchers.string_equals?(region, "us-east-1")
+                return Aws::Endpoints::Endpoint.new(url: "https://cognito-idp-fips.us-east-1.amazonaws.com", headers: {}, properties: {})
+              end
+              if Aws::Endpoints::Matchers.string_equals?(region, "us-east-2")
+                return Aws::Endpoints::Endpoint.new(url: "https://cognito-idp-fips.us-east-2.amazonaws.com", headers: {}, properties: {})
+              end
+              if Aws::Endpoints::Matchers.string_equals?(region, "us-west-1")
+                return Aws::Endpoints::Endpoint.new(url: "https://cognito-idp-fips.us-west-1.amazonaws.com", headers: {}, properties: {})
+              end
+              if Aws::Endpoints::Matchers.string_equals?(region, "us-west-2")
+                return Aws::Endpoints::Endpoint.new(url: "https://cognito-idp-fips.us-west-2.amazonaws.com", headers: {}, properties: {})
+              end
               return Aws::Endpoints::Endpoint.new(url: "https://cognito-idp-fips.#{region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
             end
             raise ArgumentError, "FIPS and DualStack are enabled, but this partition does not support one or both"
@@ -39,6 +51,9 @@ module Aws::CognitoIdentityProvider
           end
           if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
             if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
+              if Aws::Endpoints::Matchers.string_equals?("aws", Aws::Endpoints::Matchers.attr(partition_result, "name"))
+                return Aws::Endpoints::Endpoint.new(url: "https://cognito-idp.#{region}.amazonaws.com", headers: {}, properties: {})
+              end
               return Aws::Endpoints::Endpoint.new(url: "https://cognito-idp.#{region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
             end
             raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"

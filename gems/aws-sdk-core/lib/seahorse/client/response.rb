@@ -75,6 +75,8 @@ module Seahorse
       # Necessary to define as a subclass of Delegator
       # @api private
       def __getobj__
+        return yield if block_given? && !defined?(@data)
+
         @data
       end
 

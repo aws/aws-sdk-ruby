@@ -822,6 +822,7 @@ module Aws::IoTSiteWise
     #   resp.success_entries[0].asset_property_value.value.integer_value #=> Integer
     #   resp.success_entries[0].asset_property_value.value.double_value #=> Float
     #   resp.success_entries[0].asset_property_value.value.boolean_value #=> Boolean
+    #   resp.success_entries[0].asset_property_value.value.null_value.value_type #=> String, one of "D", "B", "S", "I", "U"
     #   resp.success_entries[0].asset_property_value.timestamp.time_in_seconds #=> Integer
     #   resp.success_entries[0].asset_property_value.timestamp.offset_in_nanos #=> Integer
     #   resp.success_entries[0].asset_property_value.quality #=> String, one of "GOOD", "BAD", "UNCERTAIN"
@@ -904,6 +905,7 @@ module Aws::IoTSiteWise
     #   resp.success_entries[0].asset_property_value_history[0].value.integer_value #=> Integer
     #   resp.success_entries[0].asset_property_value_history[0].value.double_value #=> Float
     #   resp.success_entries[0].asset_property_value_history[0].value.boolean_value #=> Boolean
+    #   resp.success_entries[0].asset_property_value_history[0].value.null_value.value_type #=> String, one of "D", "B", "S", "I", "U"
     #   resp.success_entries[0].asset_property_value_history[0].timestamp.time_in_seconds #=> Integer
     #   resp.success_entries[0].asset_property_value_history[0].timestamp.offset_in_nanos #=> Integer
     #   resp.success_entries[0].asset_property_value_history[0].quality #=> String, one of "GOOD", "BAD", "UNCERTAIN"
@@ -955,6 +957,12 @@ module Aws::IoTSiteWise
     # [2]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html
     # [3]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-batchputassetpropertyvalue-action
     #
+    # @option params [Boolean] :enable_partial_entry_processing
+    #   This setting enables partial ingestion at entry-level. If set to
+    #   `true`, we ingest all TQVs not resulting in an error. If set to
+    #   `false`, an invalid TQV fails ingestion of the entire entry that
+    #   contains it.
+    #
     # @option params [required, Array<Types::PutAssetPropertyValueEntry>] :entries
     #   The list of asset property value entries for the batch put request.
     #   You can specify up to 10 entries per request.
@@ -966,6 +974,7 @@ module Aws::IoTSiteWise
     # @example Request syntax with placeholder values
     #
     #   resp = client.batch_put_asset_property_value({
+    #     enable_partial_entry_processing: false,
     #     entries: [ # required
     #       {
     #         entry_id: "EntryId", # required
@@ -979,6 +988,9 @@ module Aws::IoTSiteWise
     #               integer_value: 1,
     #               double_value: 1.0,
     #               boolean_value: false,
+    #               null_value: {
+    #                 value_type: "D", # required, accepts D, B, S, I, U
+    #               },
     #             },
     #             timestamp: { # required
     #               time_in_seconds: 1, # required
@@ -3852,6 +3864,7 @@ module Aws::IoTSiteWise
     #   * {Types::DescribeStorageConfigurationResponse#last_update_date #last_update_date} => Time
     #   * {Types::DescribeStorageConfigurationResponse#warm_tier #warm_tier} => String
     #   * {Types::DescribeStorageConfigurationResponse#warm_tier_retention_period #warm_tier_retention_period} => Types::WarmTierRetentionPeriod
+    #   * {Types::DescribeStorageConfigurationResponse#disallow_ingest_null_na_n #disallow_ingest_null_na_n} => Boolean
     #
     # @example Response structure
     #
@@ -3868,6 +3881,7 @@ module Aws::IoTSiteWise
     #   resp.warm_tier #=> String, one of "ENABLED", "DISABLED"
     #   resp.warm_tier_retention_period.number_of_days #=> Integer
     #   resp.warm_tier_retention_period.unlimited #=> Boolean
+    #   resp.disallow_ingest_null_na_n #=> Boolean
     #
     # @overload describe_storage_configuration(params = {})
     # @param [Hash] params ({})
@@ -4333,6 +4347,7 @@ module Aws::IoTSiteWise
     #   resp.property_value.value.integer_value #=> Integer
     #   resp.property_value.value.double_value #=> Float
     #   resp.property_value.value.boolean_value #=> Boolean
+    #   resp.property_value.value.null_value.value_type #=> String, one of "D", "B", "S", "I", "U"
     #   resp.property_value.timestamp.time_in_seconds #=> Integer
     #   resp.property_value.timestamp.offset_in_nanos #=> Integer
     #   resp.property_value.quality #=> String, one of "GOOD", "BAD", "UNCERTAIN"
@@ -4433,6 +4448,7 @@ module Aws::IoTSiteWise
     #   resp.asset_property_value_history[0].value.integer_value #=> Integer
     #   resp.asset_property_value_history[0].value.double_value #=> Float
     #   resp.asset_property_value_history[0].value.boolean_value #=> Boolean
+    #   resp.asset_property_value_history[0].value.null_value.value_type #=> String, one of "D", "B", "S", "I", "U"
     #   resp.asset_property_value_history[0].timestamp.time_in_seconds #=> Integer
     #   resp.asset_property_value_history[0].timestamp.offset_in_nanos #=> Integer
     #   resp.asset_property_value_history[0].quality #=> String, one of "GOOD", "BAD", "UNCERTAIN"
@@ -4606,6 +4622,7 @@ module Aws::IoTSiteWise
     #   resp.interpolated_asset_property_values[0].value.integer_value #=> Integer
     #   resp.interpolated_asset_property_values[0].value.double_value #=> Float
     #   resp.interpolated_asset_property_values[0].value.boolean_value #=> Boolean
+    #   resp.interpolated_asset_property_values[0].value.null_value.value_type #=> String, one of "D", "B", "S", "I", "U"
     #   resp.next_token #=> String
     #
     # @overload get_interpolated_asset_property_values(params = {})
@@ -6160,6 +6177,11 @@ module Aws::IoTSiteWise
     #   tier before it is deleted. You can set this only if cold tier is
     #   enabled.
     #
+    # @option params [Boolean] :disallow_ingest_null_na_n
+    #   Describes the configuration for ingesting NULL and NaN data. By
+    #   default the feature is allowed. The feature is disallowed if the value
+    #   is `true`.
+    #
     # @return [Types::PutStorageConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutStorageConfigurationResponse#storage_type #storage_type} => String
@@ -6169,6 +6191,7 @@ module Aws::IoTSiteWise
     #   * {Types::PutStorageConfigurationResponse#configuration_status #configuration_status} => Types::ConfigurationStatus
     #   * {Types::PutStorageConfigurationResponse#warm_tier #warm_tier} => String
     #   * {Types::PutStorageConfigurationResponse#warm_tier_retention_period #warm_tier_retention_period} => Types::WarmTierRetentionPeriod
+    #   * {Types::PutStorageConfigurationResponse#disallow_ingest_null_na_n #disallow_ingest_null_na_n} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -6190,6 +6213,7 @@ module Aws::IoTSiteWise
     #       number_of_days: 1,
     #       unlimited: false,
     #     },
+    #     disallow_ingest_null_na_n: false,
     #   })
     #
     # @example Response structure
@@ -6206,6 +6230,7 @@ module Aws::IoTSiteWise
     #   resp.warm_tier #=> String, one of "ENABLED", "DISABLED"
     #   resp.warm_tier_retention_period.number_of_days #=> Integer
     #   resp.warm_tier_retention_period.unlimited #=> Boolean
+    #   resp.disallow_ingest_null_na_n #=> Boolean
     #
     # @overload put_storage_configuration(params = {})
     # @param [Hash] params ({})
@@ -7406,7 +7431,7 @@ module Aws::IoTSiteWise
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
