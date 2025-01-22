@@ -20,11 +20,11 @@ module Seahorse
             method = context.http_request.http_method
             # We use Net::HTTP with body_stream which doesn't do this by default
             if body.respond_to?(:size) && !METHODS_WITHOUT_BODY.include?(method)
-              thread[:request_size_data] << body.size
+              thread[:request_size_data] << body.size if thread[:warm]
               context.http_request.headers['Content-Length'] = body.size
             end
             resp = @handler.call(context)
-            if context.http_response.body.respond_to?(:size)
+            if context.http_response.body.respond_to?(:size) && thread[:warm]
               thread[:response_size_data] << context.http_response.body.size
             end
             resp

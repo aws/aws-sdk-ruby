@@ -177,15 +177,28 @@ cbor_cloudwatch.config.api = cbor_cloudwatch.config.api.dup
 cbor_cloudwatch.config.api.metadata = cbor_cloudwatch.config.api.metadata.dup
 cbor_cloudwatch.config.api.metadata['protocol'] = 'smithy-rpc-v2-cbor'
 
-# metric_counts = [16, 64, 256, 1000]
-metric_counts = [1, 16]
-thread[:warm] = true
-
 data = File.open('perf-testing/test-output/cloudwatch/data.txt', 'w')
 raw = File.open('perf-testing/test-output/cloudwatch/raw.txt', 'w')
 
+# Warm up
+(0...WARMUP).each do
+  request = generate_put_metric_data_request(1, BASE_TIME, SUITE_ID)
+  query_cloudwatch.put_metric_data(request)
+  cbor_cloudwatch.put_metric_data(request)
+  request = generate_get_metric_data_request(11, BASE_TIME, SUITE_ID)
+  query_cloudwatch.get_metric_data(request)
+  cbor_cloudwatch.get_metric_data(request)
+end
+(0...WARMUP).each do
+  request = generate_list_metrics_request
+  query_cloudwatch.list_metrics(request)
+  cbor_cloudwatch.list_metrics(request)
+end
 
-metric_counts.each do |metrics|
+thread[:warm] = true
+
+
+METRIC_COUNTS.each do |metrics|
   (0...ITERATIONS).each do |i|
     # puts 'Put Metric Data'
     # puts 'Query'
