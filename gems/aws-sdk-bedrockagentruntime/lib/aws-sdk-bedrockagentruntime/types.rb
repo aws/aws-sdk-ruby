@@ -1197,6 +1197,10 @@ module Aws::BedrockAgentRuntime
     #   Contains information about an input into the prompt flow.
     #   @return [Types::FlowInputContent]
     #
+    # @!attribute [rw] node_input_name
+    #   The name of the input from the flow input node.
+    #   @return [String]
+    #
     # @!attribute [rw] node_name
     #   The name of the flow input node that begins the prompt flow.
     #   @return [String]
@@ -1210,6 +1214,7 @@ module Aws::BedrockAgentRuntime
     #
     class FlowInput < Struct.new(
       :content,
+      :node_input_name,
       :node_name,
       :node_output_name)
       SENSITIVE = [:content]
@@ -1235,6 +1240,56 @@ module Aws::BedrockAgentRuntime
 
       class Document < FlowInputContent; end
       class Unknown < FlowInputContent; end
+    end
+
+    # The content structure containing input information for multi-turn flow
+    # interactions.
+    #
+    # @note FlowMultiTurnInputContent is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of FlowMultiTurnInputContent corresponding to the set member.
+    #
+    # @!attribute [rw] document
+    #   The requested additional input to send back to the multi-turn flow
+    #   node.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/FlowMultiTurnInputContent AWS API Documentation
+    #
+    class FlowMultiTurnInputContent < Struct.new(
+      :document,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Document < FlowMultiTurnInputContent; end
+      class Unknown < FlowMultiTurnInputContent; end
+    end
+
+    # Response object from the flow multi-turn node requesting additional
+    # information.
+    #
+    # @!attribute [rw] content
+    #   The content payload containing the input request details for the
+    #   multi-turn interaction.
+    #   @return [Types::FlowMultiTurnInputContent]
+    #
+    # @!attribute [rw] node_name
+    #   The name of the node in the flow that is requesting the input.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_type
+    #   The type of the node in the flow that is requesting the input.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/FlowMultiTurnInputRequestEvent AWS API Documentation
+    #
+    class FlowMultiTurnInputRequestEvent < Struct.new(
+      :content,
+      :node_name,
+      :node_type,
+      :event_type)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # Contains information about the content in an output from prompt flow
@@ -2869,6 +2924,11 @@ module Aws::BedrockAgentRuntime
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] execution_id
+    #   The unique identifier for the current flow execution. If you don't
+    #   provide a value, Amazon Bedrock creates the identifier for you.
+    #   @return [String]
+    #
     # @!attribute [rw] flow_alias_identifier
     #   The unique identifier of the flow alias.
     #   @return [String]
@@ -2890,6 +2950,7 @@ module Aws::BedrockAgentRuntime
     #
     class InvokeFlowRequest < Struct.new(
       :enable_trace,
+      :execution_id,
       :flow_alias_identifier,
       :flow_identifier,
       :inputs,
@@ -2898,6 +2959,10 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
+    # @!attribute [rw] execution_id
+    #   The unique identifier for the current flow execution.
+    #   @return [String]
+    #
     # @!attribute [rw] response_stream
     #   The output of the flow, returned as a stream. If there's an error,
     #   the error is returned.
@@ -2906,6 +2971,7 @@ module Aws::BedrockAgentRuntime
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/InvokeFlowResponse AWS API Documentation
     #
     class InvokeFlowResponse < Struct.new(
+      :execution_id,
       :response_stream)
       SENSITIVE = []
       include Aws::Structure
@@ -6256,6 +6322,7 @@ module Aws::BedrockAgentRuntime
           :conflict_exception,
           :dependency_failed_exception,
           :flow_completion_event,
+          :flow_multi_turn_input_request_event,
           :flow_output_event,
           :flow_trace_event,
           :internal_server_exception,

@@ -265,6 +265,13 @@ module Aws
                                              fade_out: ::Integer?,
                                              layer: ::Integer?,
                                              output_names: Array[::String]
+                                           }?,
+                                           id_3_segment_tagging_settings: {
+                                             id_3: ::String?,
+                                             tag: ::String?
+                                           }?,
+                                           timed_metadata_settings: {
+                                             id_3: ::String
                                            }?
                                          },
                                          schedule_action_start_settings: {
@@ -812,7 +819,9 @@ module Aws
                                       klv_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")?,
                                       klv_name_modifier: ::String?,
                                       nielsen_id_3_name_modifier: ::String?,
-                                      scte_35_name_modifier: ::String?
+                                      scte_35_name_modifier: ::String?,
+                                      id_3_behavior: ("DISABLED" | "ENABLED")?,
+                                      id_3_name_modifier: ::String?
                                     }?,
                                     srt_group_settings: {
                                       input_loss_action: ("DROP_PROGRAM" | "DROP_TS" | "EMIT_PROGRAM")?
@@ -2870,7 +2879,9 @@ module Aws
                                       klv_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")?,
                                       klv_name_modifier: ::String?,
                                       nielsen_id_3_name_modifier: ::String?,
-                                      scte_35_name_modifier: ::String?
+                                      scte_35_name_modifier: ::String?,
+                                      id_3_behavior: ("DISABLED" | "ENABLED")?,
+                                      id_3_name_modifier: ::String?
                                     }?,
                                     srt_group_settings: {
                                       input_loss_action: ("DROP_PROGRAM" | "DROP_TS" | "EMIT_PROGRAM")?

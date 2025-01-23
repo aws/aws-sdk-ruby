@@ -333,13 +333,14 @@ module Aws::BedrockAgentRuntime
     end
 
     class FlowCompletionEvent
-      attr_accessor completion_reason: ("SUCCESS")
+      attr_accessor completion_reason: ("SUCCESS" | "INPUT_REQUIRED")
       attr_accessor event_type: untyped
       SENSITIVE: []
     end
 
     class FlowInput
       attr_accessor content: Types::FlowInputContent
+      attr_accessor node_input_name: ::String
       attr_accessor node_name: ::String
       attr_accessor node_output_name: ::String
       SENSITIVE: [:content]
@@ -354,6 +355,25 @@ module Aws::BedrockAgentRuntime
       end
       class Unknown < FlowInputContent
       end
+    end
+
+    class FlowMultiTurnInputContent
+      attr_accessor document: untyped
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Document < FlowMultiTurnInputContent
+      end
+      class Unknown < FlowMultiTurnInputContent
+      end
+    end
+
+    class FlowMultiTurnInputRequestEvent
+      attr_accessor content: Types::FlowMultiTurnInputContent
+      attr_accessor node_name: ::String
+      attr_accessor node_type: ("FlowInputNode" | "FlowOutputNode" | "LambdaFunctionNode" | "KnowledgeBaseNode" | "PromptNode" | "ConditionNode" | "LexNode")
+      attr_accessor event_type: untyped
+      SENSITIVE: []
     end
 
     class FlowOutputContent
@@ -797,6 +817,7 @@ module Aws::BedrockAgentRuntime
 
     class InvokeFlowRequest
       attr_accessor enable_trace: bool
+      attr_accessor execution_id: ::String
       attr_accessor flow_alias_identifier: ::String
       attr_accessor flow_identifier: ::String
       attr_accessor inputs: ::Array[Types::FlowInput]
@@ -805,6 +826,7 @@ module Aws::BedrockAgentRuntime
     end
 
     class InvokeFlowResponse
+      attr_accessor execution_id: ::String
       attr_accessor response_stream: Types::FlowResponseStream
       SENSITIVE: []
     end
@@ -1655,7 +1677,7 @@ module Aws::BedrockAgentRuntime
     end
 
     class FlowResponseStream < Enumerator[untyped, untyped]
-      def event_types: () -> [:access_denied_exception, :bad_gateway_exception, :conflict_exception, :dependency_failed_exception, :flow_completion_event, :flow_output_event, :flow_trace_event, :internal_server_exception, :resource_not_found_exception, :service_quota_exceeded_exception, :throttling_exception, :validation_exception]
+      def event_types: () -> [:access_denied_exception, :bad_gateway_exception, :conflict_exception, :dependency_failed_exception, :flow_completion_event, :flow_multi_turn_input_request_event, :flow_output_event, :flow_trace_event, :internal_server_exception, :resource_not_found_exception, :service_quota_exceeded_exception, :throttling_exception, :validation_exception]
     end
 
     class InlineAgentResponseStream < Enumerator[untyped, untyped]

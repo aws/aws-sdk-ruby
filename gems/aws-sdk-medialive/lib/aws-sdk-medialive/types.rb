@@ -11057,6 +11057,15 @@ module Aws::MediaLive
     #   outputs
     #   @return [Types::StaticImageOutputDeactivateScheduleActionSettings]
     #
+    # @!attribute [rw] id_3_segment_tagging_settings
+    #   Action to insert ID3 metadata in every segment, in applicable output
+    #   groups
+    #   @return [Types::Id3SegmentTaggingScheduleActionSettings]
+    #
+    # @!attribute [rw] timed_metadata_settings
+    #   Action to insert ID3 metadata once, in applicable output groups
+    #   @return [Types::TimedMetadataScheduleActionSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ScheduleActionSettings AWS API Documentation
     #
     class ScheduleActionSettings < Struct.new(
@@ -11074,7 +11083,9 @@ module Aws::MediaLive
       :static_image_activate_settings,
       :static_image_deactivate_settings,
       :static_image_output_activate_settings,
-      :static_image_output_deactivate_settings)
+      :static_image_output_deactivate_settings,
+      :id_3_segment_tagging_settings,
+      :timed_metadata_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13903,6 +13914,21 @@ module Aws::MediaLive
     #   period (.) and has a maximum length of 100 characters.
     #   @return [String]
     #
+    # @!attribute [rw] id_3_behavior
+    #   Set to ENABLED to enable ID3 metadata insertion. To include
+    #   metadata, you configure other parameters in the output group, or you
+    #   add an ID3 action to the channel schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] id_3_name_modifier
+    #   Change the modifier that MediaLive automatically adds to the
+    #   Streams() name that identifies an ID3 track. The default is "id3",
+    #   which means the default name will be Streams(id3.cmfm). Any string
+    #   you enter here will replace the "id3" string.\\nThe modifier can
+    #   only contain: numbers, letters, plus (+), minus (-), underscore (\_)
+    #   and period (.) and has a maximum length of 100 characters.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CmafIngestGroupSettings AWS API Documentation
     #
     class CmafIngestGroupSettings < Struct.new(
@@ -13915,7 +13941,9 @@ module Aws::MediaLive
       :klv_behavior,
       :klv_name_modifier,
       :nielsen_id_3_name_modifier,
-      :scte_35_name_modifier)
+      :scte_35_name_modifier,
+      :id_3_behavior,
+      :id_3_name_modifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20939,6 +20967,48 @@ module Aws::MediaLive
     #
     class ListVersionsResponse < Struct.new(
       :versions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings for the action to insert ID3 metadata in every segment, in
+    # applicable output groups.
+    #
+    # @!attribute [rw] id_3
+    #   Complete this parameter if you want to specify the entire ID3
+    #   metadata. Enter a base64 string that contains one or more fully
+    #   formed ID3 tags, according to the ID3 specification:
+    #   http://id3.org/id3v2.4.0-structure
+    #   @return [String]
+    #
+    # @!attribute [rw] tag
+    #   Complete this parameter if you want to specify only the metadata,
+    #   not the entire frame. MediaLive will insert the metadata in a TXXX
+    #   frame. Enter the value as plain text. You can include standard
+    #   MediaLive variable data such as the current segment number.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Id3SegmentTaggingScheduleActionSettings AWS API Documentation
+    #
+    class Id3SegmentTaggingScheduleActionSettings < Struct.new(
+      :id_3,
+      :tag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings for the action to insert ID3 metadata (as a one-time action)
+    # in applicable output groups.
+    #
+    # @!attribute [rw] id_3
+    #   Enter a base64 string that contains one or more fully formed ID3
+    #   tags.See the ID3 specification: http://id3.org/id3v2.4.0-structure
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/TimedMetadataScheduleActionSettings AWS API Documentation
+    #
+    class TimedMetadataScheduleActionSettings < Struct.new(
+      :id_3)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2025-01-22)
+------------------
+
+* Feature - Adds multi-turn input support for an Agent node in an Amazon Bedrock Flow
+
 1.39.0 (2025-01-15)
 ------------------
 

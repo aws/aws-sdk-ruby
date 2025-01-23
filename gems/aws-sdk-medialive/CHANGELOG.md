@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.143.0 (2025-01-22)
+------------------
+
+* Feature - AWS Elemental MediaLive adds a new feature, ID3 segment tagging, in CMAF Ingest output groups. It allows customers to insert ID3 tags into every output segment, controlled by a newly added channel schedule action Id3SegmentTagging.
+
 1.142.0 (2025-01-15)
 ------------------
 

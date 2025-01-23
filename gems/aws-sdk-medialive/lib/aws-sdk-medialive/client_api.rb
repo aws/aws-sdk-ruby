@@ -152,6 +152,7 @@ module Aws::MediaLive
     ClusterNetworkSettingsUpdateRequest = Shapes::StructureShape.new(name: 'ClusterNetworkSettingsUpdateRequest')
     ClusterState = Shapes::StringShape.new(name: 'ClusterState')
     ClusterType = Shapes::StringShape.new(name: 'ClusterType')
+    CmafId3Behavior = Shapes::StringShape.new(name: 'CmafId3Behavior')
     CmafIngestGroupSettings = Shapes::StructureShape.new(name: 'CmafIngestGroupSettings')
     CmafIngestOutputSettings = Shapes::StructureShape.new(name: 'CmafIngestOutputSettings')
     CmafIngestSegmentLengthUnits = Shapes::StringShape.new(name: 'CmafIngestSegmentLengthUnits')
@@ -479,6 +480,7 @@ module Aws::MediaLive
     HlsWebdavSettings = Shapes::StructureShape.new(name: 'HlsWebdavSettings')
     HtmlMotionGraphicsSettings = Shapes::StructureShape.new(name: 'HtmlMotionGraphicsSettings')
     IFrameOnlyPlaylistType = Shapes::StringShape.new(name: 'IFrameOnlyPlaylistType')
+    Id3SegmentTaggingScheduleActionSettings = Shapes::StructureShape.new(name: 'Id3SegmentTaggingScheduleActionSettings')
     ImmediateModeScheduleActionStartSettings = Shapes::StructureShape.new(name: 'ImmediateModeScheduleActionStartSettings')
     IncludeFillerNalUnits = Shapes::StringShape.new(name: 'IncludeFillerNalUnits')
     Input = Shapes::StructureShape.new(name: 'Input')
@@ -900,6 +902,7 @@ module Aws::MediaLive
     TimecodeBurninSettings = Shapes::StructureShape.new(name: 'TimecodeBurninSettings')
     TimecodeConfig = Shapes::StructureShape.new(name: 'TimecodeConfig')
     TimecodeConfigSource = Shapes::StringShape.new(name: 'TimecodeConfigSource')
+    TimedMetadataScheduleActionSettings = Shapes::StructureShape.new(name: 'TimedMetadataScheduleActionSettings')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     TooManyRequestsExceptionResponseContent = Shapes::StructureShape.new(name: 'TooManyRequestsExceptionResponseContent')
     TransferInputDevice = Shapes::StructureShape.new(name: 'TransferInputDevice')
@@ -1678,6 +1681,8 @@ module Aws::MediaLive
     CmafIngestGroupSettings.add_member(:klv_name_modifier, Shapes::ShapeRef.new(shape: __stringMax100, location_name: "klvNameModifier"))
     CmafIngestGroupSettings.add_member(:nielsen_id_3_name_modifier, Shapes::ShapeRef.new(shape: __stringMax100, location_name: "nielsenId3NameModifier"))
     CmafIngestGroupSettings.add_member(:scte_35_name_modifier, Shapes::ShapeRef.new(shape: __stringMax100, location_name: "scte35NameModifier"))
+    CmafIngestGroupSettings.add_member(:id_3_behavior, Shapes::ShapeRef.new(shape: CmafId3Behavior, location_name: "id3Behavior"))
+    CmafIngestGroupSettings.add_member(:id_3_name_modifier, Shapes::ShapeRef.new(shape: __stringMax100, location_name: "id3NameModifier"))
     CmafIngestGroupSettings.struct_class = Types::CmafIngestGroupSettings
 
     CmafIngestOutputSettings.add_member(:name_modifier, Shapes::ShapeRef.new(shape: __string, location_name: "nameModifier"))
@@ -3226,6 +3231,10 @@ module Aws::MediaLive
 
     HtmlMotionGraphicsSettings.struct_class = Types::HtmlMotionGraphicsSettings
 
+    Id3SegmentTaggingScheduleActionSettings.add_member(:id_3, Shapes::ShapeRef.new(shape: __string, location_name: "id3"))
+    Id3SegmentTaggingScheduleActionSettings.add_member(:tag, Shapes::ShapeRef.new(shape: __string, location_name: "tag"))
+    Id3SegmentTaggingScheduleActionSettings.struct_class = Types::Id3SegmentTaggingScheduleActionSettings
+
     ImmediateModeScheduleActionStartSettings.struct_class = Types::ImmediateModeScheduleActionStartSettings
 
     Input.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
@@ -4404,6 +4413,8 @@ module Aws::MediaLive
     ScheduleActionSettings.add_member(:static_image_deactivate_settings, Shapes::ShapeRef.new(shape: StaticImageDeactivateScheduleActionSettings, location_name: "staticImageDeactivateSettings"))
     ScheduleActionSettings.add_member(:static_image_output_activate_settings, Shapes::ShapeRef.new(shape: StaticImageOutputActivateScheduleActionSettings, location_name: "staticImageOutputActivateSettings"))
     ScheduleActionSettings.add_member(:static_image_output_deactivate_settings, Shapes::ShapeRef.new(shape: StaticImageOutputDeactivateScheduleActionSettings, location_name: "staticImageOutputDeactivateSettings"))
+    ScheduleActionSettings.add_member(:id_3_segment_tagging_settings, Shapes::ShapeRef.new(shape: Id3SegmentTaggingScheduleActionSettings, location_name: "id3SegmentTaggingSettings"))
+    ScheduleActionSettings.add_member(:timed_metadata_settings, Shapes::ShapeRef.new(shape: TimedMetadataScheduleActionSettings, location_name: "timedMetadataSettings"))
     ScheduleActionSettings.struct_class = Types::ScheduleActionSettings
 
     ScheduleActionStartSettings.add_member(:fixed_mode_schedule_action_start_settings, Shapes::ShapeRef.new(shape: FixedModeScheduleActionStartSettings, location_name: "fixedModeScheduleActionStartSettings"))
@@ -4874,6 +4885,9 @@ module Aws::MediaLive
     TimecodeConfig.add_member(:source, Shapes::ShapeRef.new(shape: TimecodeConfigSource, required: true, location_name: "source"))
     TimecodeConfig.add_member(:sync_threshold, Shapes::ShapeRef.new(shape: __integerMin1Max1000000, location_name: "syncThreshold"))
     TimecodeConfig.struct_class = Types::TimecodeConfig
+
+    TimedMetadataScheduleActionSettings.add_member(:id_3, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "id3"))
+    TimedMetadataScheduleActionSettings.struct_class = Types::TimedMetadataScheduleActionSettings
 
     TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     TooManyRequestsException.struct_class = Types::TooManyRequestsException

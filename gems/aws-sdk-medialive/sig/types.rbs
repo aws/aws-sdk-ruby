@@ -2785,6 +2785,8 @@ module Aws::MediaLive
       attr_accessor static_image_deactivate_settings: Types::StaticImageDeactivateScheduleActionSettings
       attr_accessor static_image_output_activate_settings: Types::StaticImageOutputActivateScheduleActionSettings
       attr_accessor static_image_output_deactivate_settings: Types::StaticImageOutputDeactivateScheduleActionSettings
+      attr_accessor id_3_segment_tagging_settings: Types::Id3SegmentTaggingScheduleActionSettings
+      attr_accessor timed_metadata_settings: Types::TimedMetadataScheduleActionSettings
       SENSITIVE: []
     end
 
@@ -3583,6 +3585,8 @@ module Aws::MediaLive
       attr_accessor klv_name_modifier: ::String
       attr_accessor nielsen_id_3_name_modifier: ::String
       attr_accessor scte_35_name_modifier: ::String
+      attr_accessor id_3_behavior: ("DISABLED" | "ENABLED")
+      attr_accessor id_3_name_modifier: ::String
       SENSITIVE: []
     end
 
@@ -5473,6 +5477,17 @@ module Aws::MediaLive
 
     class ListVersionsResponse
       attr_accessor versions: ::Array[Types::ChannelEngineVersionResponse]
+      SENSITIVE: []
+    end
+
+    class Id3SegmentTaggingScheduleActionSettings
+      attr_accessor id_3: ::String
+      attr_accessor tag: ::String
+      SENSITIVE: []
+    end
+
+    class TimedMetadataScheduleActionSettings
+      attr_accessor id_3: ::String
       SENSITIVE: []
     end
   end

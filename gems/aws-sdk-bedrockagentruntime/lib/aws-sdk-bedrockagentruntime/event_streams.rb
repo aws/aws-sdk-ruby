@@ -134,6 +134,10 @@ module Aws::BedrockAgentRuntime
         @event_emitter.on(:flow_completion_event, block) if block_given?
       end
 
+      def on_flow_multi_turn_input_request_event_event(&block)
+        @event_emitter.on(:flow_multi_turn_input_request_event, block) if block_given?
+      end
+
       def on_flow_output_event_event(&block)
         @event_emitter.on(:flow_output_event, block) if block_given?
       end
@@ -180,6 +184,7 @@ module Aws::BedrockAgentRuntime
         on_conflict_exception_event(&block)
         on_dependency_failed_exception_event(&block)
         on_flow_completion_event_event(&block)
+        on_flow_multi_turn_input_request_event_event(&block)
         on_flow_output_event_event(&block)
         on_flow_trace_event_event(&block)
         on_internal_server_exception_event(&block)

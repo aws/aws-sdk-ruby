@@ -4044,13 +4044,20 @@ module Aws::Glue
     # @option params [Integer] :timeout
     #   The job timeout in minutes. This is the maximum time that a job run
     #   can consume resources before it is terminated and enters `TIMEOUT`
-    #   status. The default is 2,880 minutes (48 hours) for batch jobs.
+    #   status.
     #
-    #   Streaming jobs must have timeout values less than 7 days or 10080
-    #   minutes. When the value is left blank, the job will be restarted after
-    #   7 days based if you have not setup a maintenance window. If you have
-    #   setup maintenance window, it will be restarted during the maintenance
-    #   window after 7 days.
+    #   Jobs must have timeout values less than 7 days or 10080 minutes.
+    #   Otherwise, the jobs will throw an exception.
+    #
+    #   When the value is left blank, the timeout is defaulted to 2880
+    #   minutes.
+    #
+    #   Any existing Glue jobs that had a timeout value greater than 7 days
+    #   will be defaulted to 7 days. For instance if you have specified a
+    #   timeout of 20 days for a batch job, it will be stopped on the 7th day.
+    #
+    #   For streaming jobs, if you have set up a maintenance window, it will
+    #   be restarted during the maintenance window after 7 days.
     #
     # @option params [Float] :max_capacity
     #   For Glue version 1.0 or earlier jobs, using the standard worker type,
@@ -4897,8 +4904,8 @@ module Aws::Glue
     #
     # @option params [Integer] :timeout
     #   The number of minutes before session times out. Default for Spark ETL
-    #   jobs is 48 hours (2880 minutes), the maximum session lifetime for this
-    #   job type. Consult the documentation for other job types.
+    #   jobs is 48 hours (2880 minutes). Consult the documentation for other
+    #   job types.
     #
     # @option params [Integer] :idle_timeout
     #   The number of minutes when idle before session times out. Default for
@@ -17411,6 +17418,9 @@ module Aws::Glue
     #   will be defaulted to 7 days. For instance if you have specified a
     #   timeout of 20 days for a batch job, it will be stopped on the 7th day.
     #
+    #   For streaming jobs, if you have set up a maintenance window, it will
+    #   be restarted during the maintenance window after 7 days.
+    #
     # @option params [Float] :max_capacity
     #   For Glue version 1.0 or earlier jobs, using the standard worker type,
     #   the number of Glue data processing units (DPUs) that can be allocated
@@ -20071,7 +20081,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.207.0'
+      context[:gem_version] = '1.208.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

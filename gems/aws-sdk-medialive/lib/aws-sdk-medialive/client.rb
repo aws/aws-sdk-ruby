@@ -768,6 +768,13 @@ module Aws::MediaLive
     #               layer: 1,
     #               output_names: ["__string"], # required
     #             },
+    #             id_3_segment_tagging_settings: {
+    #               id_3: "__string",
+    #               tag: "__string",
+    #             },
+    #             timed_metadata_settings: {
+    #               id_3: "__string", # required
+    #             },
     #           },
     #           schedule_action_start_settings: { # required
     #             fixed_mode_schedule_action_start_settings: {
@@ -867,6 +874,9 @@ module Aws::MediaLive
     #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_output_deactivate_settings.layer #=> Integer
     #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_output_deactivate_settings.output_names #=> Array
     #   resp.creates.schedule_actions[0].schedule_action_settings.static_image_output_deactivate_settings.output_names[0] #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.id_3_segment_tagging_settings.id_3 #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.id_3_segment_tagging_settings.tag #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.timed_metadata_settings.id_3 #=> String
     #   resp.creates.schedule_actions[0].schedule_action_start_settings.fixed_mode_schedule_action_start_settings.time #=> String
     #   resp.creates.schedule_actions[0].schedule_action_start_settings.follow_mode_schedule_action_start_settings.follow_point #=> String, one of "END", "START"
     #   resp.creates.schedule_actions[0].schedule_action_start_settings.follow_mode_schedule_action_start_settings.reference_action_name #=> String
@@ -947,6 +957,9 @@ module Aws::MediaLive
     #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_output_deactivate_settings.layer #=> Integer
     #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_output_deactivate_settings.output_names #=> Array
     #   resp.deletes.schedule_actions[0].schedule_action_settings.static_image_output_deactivate_settings.output_names[0] #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.id_3_segment_tagging_settings.id_3 #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.id_3_segment_tagging_settings.tag #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.timed_metadata_settings.id_3 #=> String
     #   resp.deletes.schedule_actions[0].schedule_action_start_settings.fixed_mode_schedule_action_start_settings.time #=> String
     #   resp.deletes.schedule_actions[0].schedule_action_start_settings.follow_mode_schedule_action_start_settings.follow_point #=> String, one of "END", "START"
     #   resp.deletes.schedule_actions[0].schedule_action_start_settings.follow_mode_schedule_action_start_settings.reference_action_name #=> String
@@ -1375,6 +1388,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.klv_name_modifier #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.nielsen_id_3_name_modifier #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.scte_35_name_modifier #=> String
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.id_3_behavior #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.id_3_name_modifier #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.srt_group_settings.input_loss_action #=> String, one of "DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"
     #   resp.channel.encoder_settings.output_groups[0].outputs #=> Array
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].audio_description_names #=> Array
@@ -2699,6 +2714,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.klv_name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.nielsen_id_3_name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.scte_35_name_modifier #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.id_3_behavior #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.id_3_name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.srt_group_settings.input_loss_action #=> String, one of "DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"
     #   resp.encoder_settings.output_groups[0].outputs #=> Array
     #   resp.encoder_settings.output_groups[0].outputs[0].audio_description_names #=> Array
@@ -3840,6 +3857,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.klv_name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.nielsen_id_3_name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.scte_35_name_modifier #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.id_3_behavior #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.id_3_name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.srt_group_settings.input_loss_action #=> String, one of "DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"
     #   resp.encoder_settings.output_groups[0].outputs #=> Array
     #   resp.encoder_settings.output_groups[0].outputs[0].audio_description_names #=> Array
@@ -4958,6 +4977,9 @@ module Aws::MediaLive
     #   resp.schedule_actions[0].schedule_action_settings.static_image_output_deactivate_settings.layer #=> Integer
     #   resp.schedule_actions[0].schedule_action_settings.static_image_output_deactivate_settings.output_names #=> Array
     #   resp.schedule_actions[0].schedule_action_settings.static_image_output_deactivate_settings.output_names[0] #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.id_3_segment_tagging_settings.id_3 #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.id_3_segment_tagging_settings.tag #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.timed_metadata_settings.id_3 #=> String
     #   resp.schedule_actions[0].schedule_action_start_settings.fixed_mode_schedule_action_start_settings.time #=> String
     #   resp.schedule_actions[0].schedule_action_start_settings.follow_mode_schedule_action_start_settings.follow_point #=> String, one of "END", "START"
     #   resp.schedule_actions[0].schedule_action_start_settings.follow_mode_schedule_action_start_settings.reference_action_name #=> String
@@ -6167,6 +6189,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.klv_name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.nielsen_id_3_name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.scte_35_name_modifier #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.id_3_behavior #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.id_3_name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.srt_group_settings.input_loss_action #=> String, one of "DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"
     #   resp.encoder_settings.output_groups[0].outputs #=> Array
     #   resp.encoder_settings.output_groups[0].outputs[0].audio_description_names #=> Array
@@ -7115,6 +7139,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.klv_name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.nielsen_id_3_name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.scte_35_name_modifier #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.id_3_behavior #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.id_3_name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.srt_group_settings.input_loss_action #=> String, one of "DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"
     #   resp.encoder_settings.output_groups[0].outputs #=> Array
     #   resp.encoder_settings.output_groups[0].outputs[0].audio_description_names #=> Array
@@ -8093,6 +8119,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.klv_name_modifier #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.nielsen_id_3_name_modifier #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.scte_35_name_modifier #=> String
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.id_3_behavior #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.id_3_name_modifier #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.srt_group_settings.input_loss_action #=> String, one of "DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"
     #   resp.channel.encoder_settings.output_groups[0].outputs #=> Array
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].audio_description_names #=> Array
@@ -8956,6 +8984,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.klv_name_modifier #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.nielsen_id_3_name_modifier #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.scte_35_name_modifier #=> String
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.id_3_behavior #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.id_3_name_modifier #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.srt_group_settings.input_loss_action #=> String, one of "DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"
     #   resp.channel.encoder_settings.output_groups[0].outputs #=> Array
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].audio_description_names #=> Array
@@ -10362,6 +10392,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.klv_name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.nielsen_id_3_name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.scte_35_name_modifier #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.id_3_behavior #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.cmaf_ingest_group_settings.id_3_name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.srt_group_settings.input_loss_action #=> String, one of "DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"
     #   resp.encoder_settings.output_groups[0].outputs #=> Array
     #   resp.encoder_settings.output_groups[0].outputs[0].audio_description_names #=> Array
@@ -13734,7 +13766,7 @@ module Aws::MediaLive
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.142.0'
+      context[:gem_version] = '1.143.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

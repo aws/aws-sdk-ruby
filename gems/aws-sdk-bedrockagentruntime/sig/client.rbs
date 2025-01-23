@@ -330,11 +330,13 @@ module Aws
 
       interface _InvokeFlowResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::InvokeFlowResponse]
+        def execution_id: () -> ::String
         def response_stream: () -> Types::FlowResponseStream
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentRuntime/Client.html#invoke_flow-instance_method
       def invoke_flow: (
                          ?enable_trace: bool,
+                         ?execution_id: ::String,
                          flow_alias_identifier: ::String,
                          flow_identifier: ::String,
                          inputs: Array[
@@ -343,8 +345,9 @@ module Aws
                                document: {
                                }?
                              },
+                             node_input_name: ::String?,
                              node_name: ::String,
-                             node_output_name: ::String
+                             node_output_name: ::String?
                            },
                          ],
                          ?model_performance_configuration: {

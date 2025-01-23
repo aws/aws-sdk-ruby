@@ -477,7 +477,7 @@ module Aws::WorkSpacesThinClient
     #
     # @option params [required, String] :desktop_arn
     #   The Amazon Resource Name (ARN) of the desktop to stream from Amazon
-    #   WorkSpaces, WorkSpaces Web, or AppStream 2.0.
+    #   WorkSpaces, WorkSpaces Secure Browser, or AppStream 2.0.
     #
     # @option params [String] :desktop_endpoint
     #   The URL for the identity provider login (only for environments that
@@ -1205,7 +1205,7 @@ module Aws::WorkSpacesThinClient
     #
     # @option params [String] :desktop_arn
     #   The Amazon Resource Name (ARN) of the desktop to stream from Amazon
-    #   WorkSpaces, WorkSpaces Web, or AppStream 2.0.
+    #   WorkSpaces, WorkSpaces Secure Browser, or AppStream 2.0.
     #
     # @option params [String] :desktop_endpoint
     #   The URL for the identity provider login (only for environments that
@@ -1333,7 +1333,7 @@ module Aws::WorkSpacesThinClient
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-workspacesthinclient'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

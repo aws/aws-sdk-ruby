@@ -1650,6 +1650,10 @@ module Aws::BedrockAgentRuntime
     #
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html
     #
+    # @option params [String] :execution_id
+    #   The unique identifier for the current flow execution. If you don't
+    #   provide a value, Amazon Bedrock creates the identifier for you.
+    #
     # @option params [required, String] :flow_alias_identifier
     #   The unique identifier of the flow alias.
     #
@@ -1665,6 +1669,7 @@ module Aws::BedrockAgentRuntime
     #
     # @return [Types::InvokeFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::InvokeFlowResponse#execution_id #execution_id} => String
     #   * {Types::InvokeFlowResponse#response_stream #response_stream} => Types::FlowResponseStream
     #
     # @example EventStream Operation Example
@@ -1725,6 +1730,9 @@ module Aws::BedrockAgentRuntime
     #       handler.on_flow_completion_event_event do |event|
     #         event # => Aws::BedrockAgentRuntime::Types::flowCompletionEvent
     #       end
+    #       handler.on_flow_multi_turn_input_request_event_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::flowMultiTurnInputRequestEvent
+    #       end
     #       handler.on_flow_output_event_event do |event|
     #         event # => Aws::BedrockAgentRuntime::Types::flowOutputEvent
     #       end
@@ -1767,6 +1775,9 @@ module Aws::BedrockAgentRuntime
     #       end
     #       stream.on_flow_completion_event_event do |event|
     #         event # => Aws::BedrockAgentRuntime::Types::flowCompletionEvent
+    #       end
+    #       stream.on_flow_multi_turn_input_request_event_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::flowMultiTurnInputRequestEvent
     #       end
     #       stream.on_flow_output_event_event do |event|
     #         event # => Aws::BedrockAgentRuntime::Types::flowOutputEvent
@@ -1811,6 +1822,9 @@ module Aws::BedrockAgentRuntime
     #       handler.on_flow_completion_event_event do |event|
     #         event # => Aws::BedrockAgentRuntime::Types::flowCompletionEvent
     #       end
+    #       handler.on_flow_multi_turn_input_request_event_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::flowMultiTurnInputRequestEvent
+    #       end
     #       handler.on_flow_output_event_event do |event|
     #         event # => Aws::BedrockAgentRuntime::Types::flowOutputEvent
     #       end
@@ -1853,6 +1867,7 @@ module Aws::BedrockAgentRuntime
     #
     #   resp = client.invoke_flow({
     #     enable_trace: false,
+    #     execution_id: "FlowExecutionId",
     #     flow_alias_identifier: "FlowAliasIdentifier", # required
     #     flow_identifier: "FlowIdentifier", # required
     #     inputs: [ # required
@@ -1861,8 +1876,9 @@ module Aws::BedrockAgentRuntime
     #           document: {
     #           },
     #         },
+    #         node_input_name: "NodeInputName",
     #         node_name: "NodeName", # required
-    #         node_output_name: "NodeOutputName", # required
+    #         node_output_name: "NodeOutputName",
     #       },
     #     ],
     #     model_performance_configuration: {
@@ -1874,9 +1890,10 @@ module Aws::BedrockAgentRuntime
     #
     # @example Response structure
     #
+    #   resp.execution_id #=> String
     #   All events are available at resp.response_stream:
     #   resp.response_stream #=> Enumerator
-    #   resp.response_stream.event_types #=> [:access_denied_exception, :bad_gateway_exception, :conflict_exception, :dependency_failed_exception, :flow_completion_event, :flow_output_event, :flow_trace_event, :internal_server_exception, :resource_not_found_exception, :service_quota_exceeded_exception, :throttling_exception, :validation_exception]
+    #   resp.response_stream.event_types #=> [:access_denied_exception, :bad_gateway_exception, :conflict_exception, :dependency_failed_exception, :flow_completion_event, :flow_multi_turn_input_request_event, :flow_output_event, :flow_trace_event, :internal_server_exception, :resource_not_found_exception, :service_quota_exceeded_exception, :throttling_exception, :validation_exception]
     #
     #   For :access_denied_exception event available at #on_access_denied_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
@@ -1893,7 +1910,11 @@ module Aws::BedrockAgentRuntime
     #   event.resource_name #=> String
     #
     #   For :flow_completion_event event available at #on_flow_completion_event_event callback and response eventstream enumerator:
-    #   event.completion_reason #=> String, one of "SUCCESS"
+    #   event.completion_reason #=> String, one of "SUCCESS", "INPUT_REQUIRED"
+    #
+    #   For :flow_multi_turn_input_request_event event available at #on_flow_multi_turn_input_request_event_event callback and response eventstream enumerator:
+    #   event.node_name #=> String
+    #   event.node_type #=> String, one of "FlowInputNode", "FlowOutputNode", "LambdaFunctionNode", "KnowledgeBaseNode", "PromptNode", "ConditionNode", "LexNode"
     #
     #   For :flow_output_event event available at #on_flow_output_event_event callback and response eventstream enumerator:
     #   event.node_name #=> String
@@ -4335,7 +4356,7 @@ module Aws::BedrockAgentRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentruntime'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

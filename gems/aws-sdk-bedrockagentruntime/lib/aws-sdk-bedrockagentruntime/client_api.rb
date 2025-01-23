@@ -112,10 +112,13 @@ module Aws::BedrockAgentRuntime
     FlowAliasIdentifier = Shapes::StringShape.new(name: 'FlowAliasIdentifier')
     FlowCompletionEvent = Shapes::StructureShape.new(name: 'FlowCompletionEvent')
     FlowCompletionReason = Shapes::StringShape.new(name: 'FlowCompletionReason')
+    FlowExecutionId = Shapes::StringShape.new(name: 'FlowExecutionId')
     FlowIdentifier = Shapes::StringShape.new(name: 'FlowIdentifier')
     FlowInput = Shapes::StructureShape.new(name: 'FlowInput')
     FlowInputContent = Shapes::UnionShape.new(name: 'FlowInputContent')
     FlowInputs = Shapes::ListShape.new(name: 'FlowInputs')
+    FlowMultiTurnInputContent = Shapes::UnionShape.new(name: 'FlowMultiTurnInputContent')
+    FlowMultiTurnInputRequestEvent = Shapes::StructureShape.new(name: 'FlowMultiTurnInputRequestEvent')
     FlowOutputContent = Shapes::UnionShape.new(name: 'FlowOutputContent')
     FlowOutputEvent = Shapes::StructureShape.new(name: 'FlowOutputEvent')
     FlowResponseStream = Shapes::StructureShape.new(name: 'FlowResponseStream')
@@ -677,8 +680,9 @@ module Aws::BedrockAgentRuntime
     FlowCompletionEvent.struct_class = Types::FlowCompletionEvent
 
     FlowInput.add_member(:content, Shapes::ShapeRef.new(shape: FlowInputContent, required: true, location_name: "content"))
+    FlowInput.add_member(:node_input_name, Shapes::ShapeRef.new(shape: NodeInputName, location_name: "nodeInputName"))
     FlowInput.add_member(:node_name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "nodeName"))
-    FlowInput.add_member(:node_output_name, Shapes::ShapeRef.new(shape: NodeOutputName, required: true, location_name: "nodeOutputName"))
+    FlowInput.add_member(:node_output_name, Shapes::ShapeRef.new(shape: NodeOutputName, location_name: "nodeOutputName"))
     FlowInput.struct_class = Types::FlowInput
 
     FlowInputContent.add_member(:document, Shapes::ShapeRef.new(shape: Document, location_name: "document"))
@@ -688,6 +692,17 @@ module Aws::BedrockAgentRuntime
     FlowInputContent.struct_class = Types::FlowInputContent
 
     FlowInputs.member = Shapes::ShapeRef.new(shape: FlowInput)
+
+    FlowMultiTurnInputContent.add_member(:document, Shapes::ShapeRef.new(shape: Document, location_name: "document"))
+    FlowMultiTurnInputContent.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    FlowMultiTurnInputContent.add_member_subclass(:document, Types::FlowMultiTurnInputContent::Document)
+    FlowMultiTurnInputContent.add_member_subclass(:unknown, Types::FlowMultiTurnInputContent::Unknown)
+    FlowMultiTurnInputContent.struct_class = Types::FlowMultiTurnInputContent
+
+    FlowMultiTurnInputRequestEvent.add_member(:content, Shapes::ShapeRef.new(shape: FlowMultiTurnInputContent, required: true, location_name: "content"))
+    FlowMultiTurnInputRequestEvent.add_member(:node_name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "nodeName"))
+    FlowMultiTurnInputRequestEvent.add_member(:node_type, Shapes::ShapeRef.new(shape: NodeType, required: true, location_name: "nodeType"))
+    FlowMultiTurnInputRequestEvent.struct_class = Types::FlowMultiTurnInputRequestEvent
 
     FlowOutputContent.add_member(:document, Shapes::ShapeRef.new(shape: Document, location_name: "document"))
     FlowOutputContent.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -705,6 +720,7 @@ module Aws::BedrockAgentRuntime
     FlowResponseStream.add_member(:conflict_exception, Shapes::ShapeRef.new(shape: ConflictException, location_name: "conflictException"))
     FlowResponseStream.add_member(:dependency_failed_exception, Shapes::ShapeRef.new(shape: DependencyFailedException, location_name: "dependencyFailedException"))
     FlowResponseStream.add_member(:flow_completion_event, Shapes::ShapeRef.new(shape: FlowCompletionEvent, event: true, location_name: "flowCompletionEvent"))
+    FlowResponseStream.add_member(:flow_multi_turn_input_request_event, Shapes::ShapeRef.new(shape: FlowMultiTurnInputRequestEvent, event: true, location_name: "flowMultiTurnInputRequestEvent"))
     FlowResponseStream.add_member(:flow_output_event, Shapes::ShapeRef.new(shape: FlowOutputEvent, event: true, location_name: "flowOutputEvent"))
     FlowResponseStream.add_member(:flow_trace_event, Shapes::ShapeRef.new(shape: FlowTraceEvent, event: true, location_name: "flowTraceEvent"))
     FlowResponseStream.add_member(:internal_server_exception, Shapes::ShapeRef.new(shape: InternalServerException, location_name: "internalServerException"))
@@ -1042,12 +1058,14 @@ module Aws::BedrockAgentRuntime
     InvokeAgentResponse[:payload_member] = InvokeAgentResponse.member(:completion)
 
     InvokeFlowRequest.add_member(:enable_trace, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableTrace"))
+    InvokeFlowRequest.add_member(:execution_id, Shapes::ShapeRef.new(shape: FlowExecutionId, location_name: "executionId"))
     InvokeFlowRequest.add_member(:flow_alias_identifier, Shapes::ShapeRef.new(shape: FlowAliasIdentifier, required: true, location: "uri", location_name: "flowAliasIdentifier"))
     InvokeFlowRequest.add_member(:flow_identifier, Shapes::ShapeRef.new(shape: FlowIdentifier, required: true, location: "uri", location_name: "flowIdentifier"))
     InvokeFlowRequest.add_member(:inputs, Shapes::ShapeRef.new(shape: FlowInputs, required: true, location_name: "inputs"))
     InvokeFlowRequest.add_member(:model_performance_configuration, Shapes::ShapeRef.new(shape: ModelPerformanceConfiguration, location_name: "modelPerformanceConfiguration"))
     InvokeFlowRequest.struct_class = Types::InvokeFlowRequest
 
+    InvokeFlowResponse.add_member(:execution_id, Shapes::ShapeRef.new(shape: FlowExecutionId, location: "header", location_name: "x-amz-bedrock-flow-execution-id"))
     InvokeFlowResponse.add_member(:response_stream, Shapes::ShapeRef.new(shape: FlowResponseStream, required: true, eventstream: true, location_name: "responseStream"))
     InvokeFlowResponse.struct_class = Types::InvokeFlowResponse
     InvokeFlowResponse[:payload] = :response_stream

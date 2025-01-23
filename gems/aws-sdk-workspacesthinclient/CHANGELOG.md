@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2025-01-22)
+------------------
+
+* Feature - Rename WorkSpaces Web to WorkSpaces Secure Browser
+
 1.19.0 (2025-01-15)
 ------------------
 

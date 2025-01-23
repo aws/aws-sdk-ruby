@@ -63,7 +63,7 @@ module Aws
         end
 
         it 'decodes integer times' do
-          expect(cbor64_decode('wRsAAAFvYQ3z8A=='))
+          expect(cbor64_decode('wftB14MjtYAAAA=='))
             .to eq(Time.parse('2020-01-01 12:21:42Z'))
         end
 

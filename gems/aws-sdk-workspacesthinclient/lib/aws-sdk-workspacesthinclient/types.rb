@@ -54,7 +54,7 @@ module Aws::WorkSpacesThinClient
     #
     # @!attribute [rw] desktop_arn
     #   The Amazon Resource Name (ARN) of the desktop to stream from Amazon
-    #   WorkSpaces, WorkSpaces Web, or AppStream 2.0.
+    #   WorkSpaces, WorkSpaces Secure Browser, or AppStream 2.0.
     #   @return [String]
     #
     # @!attribute [rw] desktop_endpoint
@@ -490,7 +490,7 @@ module Aws::WorkSpacesThinClient
     #
     # @!attribute [rw] desktop_arn
     #   The Amazon Resource Name (ARN) of the desktop to stream from Amazon
-    #   WorkSpaces, WorkSpaces Web, or AppStream 2.0.
+    #   WorkSpaces, WorkSpaces Secure Browser, or AppStream 2.0.
     #   @return [String]
     #
     # @!attribute [rw] desktop_endpoint
@@ -605,7 +605,7 @@ module Aws::WorkSpacesThinClient
     #
     # @!attribute [rw] desktop_arn
     #   The Amazon Resource Name (ARN) of the desktop to stream from Amazon
-    #   WorkSpaces, WorkSpaces Web, or AppStream 2.0.
+    #   WorkSpaces, WorkSpaces Secure Browser, or AppStream 2.0.
     #   @return [String]
     #
     # @!attribute [rw] desktop_endpoint
@@ -1284,7 +1284,7 @@ module Aws::WorkSpacesThinClient
     #
     # @!attribute [rw] desktop_arn
     #   The Amazon Resource Name (ARN) of the desktop to stream from Amazon
-    #   WorkSpaces, WorkSpaces Web, or AppStream 2.0.
+    #   WorkSpaces, WorkSpaces Secure Browser, or AppStream 2.0.
     #   @return [String]
     #
     # @!attribute [rw] desktop_endpoint
