@@ -19,7 +19,7 @@ FLOAT_MIN = -2147483648.0
 FLOAT_MAX = 2147483647.0
 DOUBLE_MIN = -9223372036854775808.0
 DOUBLE_MAX = 9223372036854775807.0
-RUN_START_TIMESTAMP = Time.now
+RUN_START_TIMESTAMP = Time.now.to_i
 
 def random_map_of_string_to_string
   map = {}
@@ -108,6 +108,9 @@ end
 thread = Thread.current
 thread[:json_serde_data] = []
 thread[:cbor_serde_data] = []
+# Unused arrays but need them for other test suites to run with request/response body size
+thread[:request_size_data] = []
+thread[:response_size_data] = []
 thread[:warm] = false
 
 Aws::Echo::Client.remove_plugin(Aws::Plugins::Protocols::JsonRpc)

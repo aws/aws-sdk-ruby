@@ -197,15 +197,12 @@ thread[:warm] = true
 
 METRIC_COUNTS.each do |metrics|
   (0...ITERATIONS).each do |i|
-    # puts 'Put Metric Data'
-    # puts 'Query'
     request = generate_put_metric_data_request(metrics, BASE_TIME, SUITE_ID)
     t_query_total_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     query_cloudwatch.put_metric_data(request)
     t_query_total_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     thread[:query_total_data] << format('%.3f', (t_query_total_end - t_query_total_start) * 1000.0).to_f
 
-    # puts 'CBOR'
     t_cbor_total_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     cbor_cloudwatch.put_metric_data(request)
     t_cbor_total_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
@@ -214,45 +211,31 @@ METRIC_COUNTS.each do |metrics|
   end
   analyze('Put metric data', metrics, thread, data, raw)
   (0...ITERATIONS).each do |i|
-    # puts 'Get Metric Data'
-    # puts 'Query'
     request = generate_get_metric_data_request(metrics, BASE_TIME, SUITE_ID)
     t_query_total_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    query_resp = query_cloudwatch.get_metric_data(request)
+    query_cloudwatch.get_metric_data(request)
     t_query_total_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     thread[:query_total_data] << format('%.3f', (t_query_total_end - t_query_total_start) * 1000.0).to_f
 
-    # puts 'CBOR'
     t_cbor_total_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    cbor_resp = cbor_cloudwatch.get_metric_data(request)
+    cbor_cloudwatch.get_metric_data(request)
     t_cbor_total_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     thread[:cbor_total_data] << format('%.3f', (t_cbor_total_end - t_cbor_total_start) * 1000.0).to_f
-    # puts 'Query Resp'
-    # pp query_resp
-    # puts 'Cbor Resp'
-    # pp cbor_resp
     sleep(2) if (i % 50).zero?
   end
   analyze('Get metric data', metrics, thread, data, raw)
 end
 (0...ITERATIONS).each do |i|
-  # puts 'List Metrics'
-  # puts 'Query'
   request = generate_list_metrics_request
   t_query_total_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-  query_resp = query_cloudwatch.list_metrics(request)
+  query_cloudwatch.list_metrics(request)
   t_query_total_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
   thread[:query_total_data] << format('%.3f', (t_query_total_end - t_query_total_start) * 1000.0).to_f
 
-  # puts 'CBOR'
   t_cbor_total_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-  cbor_resp = cbor_cloudwatch.list_metrics(request)
+  cbor_cloudwatch.list_metrics(request)
   t_cbor_total_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
   thread[:cbor_total_data] << format('%.3f', (t_cbor_total_end - t_cbor_total_start) * 1000.0).to_f
-  # puts 'Query Resp'
-  # pp query_resp
-  # puts 'Cbor Resp'
-  # pp cbor_resp
   sleep(2) if (i % 50).zero?
 end
 analyze('List metrics', 0, thread, data, raw)
