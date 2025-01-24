@@ -1449,12 +1449,12 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Assigns the specified IPv6 addresses to the specified network
-    # interface. You can specify specific IPv6 addresses, or you can specify
-    # the number of IPv6 addresses to be automatically assigned from the
-    # subnet's IPv6 CIDR block range. You can assign as many IPv6 addresses
-    # to a network interface as you can assign private IPv4 addresses, and
-    # the limit varies by instance type.
+    # Assigns one or more IPv6 addresses to the specified network interface.
+    # You can specify one or more specific IPv6 addresses, or you can
+    # specify the number of IPv6 addresses to be automatically assigned from
+    # within the subnet's IPv6 CIDR block range. You can assign as many
+    # IPv6 addresses to a network interface as you can assign private IPv4
+    # addresses, and the limit varies per instance type.
     #
     # You must specify either the IPv6 addresses or the IPv6 address count
     # in the request.
@@ -1475,7 +1475,7 @@ module Aws::EC2
     #
     # @option params [Array<String>] :ipv_6_prefixes
     #   One or more IPv6 prefixes assigned to the network interface. You
-    #   can't use this option if you use the `Ipv6PrefixCount` option.
+    #   cannot use this option if you use the `Ipv6PrefixCount` option.
     #
     # @option params [required, String] :network_interface_id
     #   The ID of the network interface.
@@ -1525,15 +1525,15 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Assigns the specified secondary private IP addresses to the specified
+    # Assigns one or more secondary private IP addresses to the specified
     # network interface.
     #
-    # You can specify specific secondary IP addresses, or you can specify
-    # the number of secondary IP addresses to be automatically assigned from
-    # the subnet's CIDR block range. The number of secondary IP addresses
-    # that you can assign to an instance varies by instance type. For more
-    # information about Elastic IP addresses, see [Elastic IP Addresses][1]
-    # in the *Amazon EC2 User Guide*.
+    # You can specify one or more specific secondary IP addresses, or you
+    # can specify the number of secondary IP addresses to be automatically
+    # assigned within the subnet's CIDR block range. The number of
+    # secondary IP addresses that you can assign to an instance varies by
+    # instance type. For more information about Elastic IP addresses, see
+    # [Elastic IP Addresses][1] in the *Amazon EC2 User Guide*.
     #
     # When you move a secondary private IP address to another network
     # interface, any Elastic IP address that is associated with the IP
@@ -1559,11 +1559,11 @@ module Aws::EC2
     #
     # @option params [Array<String>] :ipv_4_prefixes
     #   One or more IPv4 prefixes assigned to the network interface. You
-    #   can't use this option if you use the `Ipv4PrefixCount` option.
+    #   cannot use this option if you use the `Ipv4PrefixCount` option.
     #
     # @option params [Integer] :ipv_4_prefix_count
     #   The number of IPv4 prefixes that Amazon Web Services automatically
-    #   assigns to the network interface. You can't use this option if you
+    #   assigns to the network interface. You cannot use this option if you
     #   use the `Ipv4 Prefixes` option.
     #
     # @option params [required, String] :network_interface_id
@@ -4107,11 +4107,6 @@ module Aws::EC2
     #   duration has elapsed. You can't cancel a future-dated Capacity
     #   Reservation during the commitment duration.
     #
-    # <note markdown="1"> You can't modify or cancel a Capacity Block. For more information,
-    # see [Capacity Blocks for ML][1].
-    #
-    #  </note>
-    #
     # If a future-dated Capacity Reservation enters the `delayed` state, the
     # commitment duration is waived, and you can cancel it as soon as it
     # enters the `active` state.
@@ -4122,10 +4117,6 @@ module Aws::EC2
     # Capacity Reservation, launch On-Demand Instance capacity, or run in
     # any open Capacity Reservation that has matching attributes and
     # sufficient capacity.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-blocks.html
     #
     # @option params [required, String] :capacity_reservation_id
     #   The ID of the Capacity Reservation to be cancelled.
@@ -4969,7 +4960,7 @@ module Aws::EC2
     # Snapshots copied to an Outpost are encrypted by default using the
     # default encryption key for the Region, or a different key that you
     # specify in the request using **KmsKeyId**. Outposts do not support
-    # unencrypted snapshots. For more information, see [Amazon EBS local
+    # unencrypted snapshots. For more information, [ Amazon EBS local
     # snapshots on Outposts][1] in the *Amazon EBS User Guide*.
     #
     # Snapshots created by copying another snapshot have an arbitrary volume
@@ -5472,7 +5463,7 @@ module Aws::EC2
     #   resp.capacity_reservation.capacity_reservation_fleet_id #=> String
     #   resp.capacity_reservation.placement_group_arn #=> String
     #   resp.capacity_reservation.capacity_allocations #=> Array
-    #   resp.capacity_reservation.capacity_allocations[0].allocation_type #=> String, one of "used"
+    #   resp.capacity_reservation.capacity_allocations[0].allocation_type #=> String, one of "used", "future"
     #   resp.capacity_reservation.capacity_allocations[0].count #=> Integer
     #   resp.capacity_reservation.reservation_type #=> String, one of "default", "capacity-block"
     #   resp.capacity_reservation.unused_reservation_billing_owner_id #=> String
@@ -5576,7 +5567,7 @@ module Aws::EC2
     #   resp.source_capacity_reservation.capacity_reservation_fleet_id #=> String
     #   resp.source_capacity_reservation.placement_group_arn #=> String
     #   resp.source_capacity_reservation.capacity_allocations #=> Array
-    #   resp.source_capacity_reservation.capacity_allocations[0].allocation_type #=> String, one of "used"
+    #   resp.source_capacity_reservation.capacity_allocations[0].allocation_type #=> String, one of "used", "future"
     #   resp.source_capacity_reservation.capacity_allocations[0].count #=> Integer
     #   resp.source_capacity_reservation.reservation_type #=> String, one of "default", "capacity-block"
     #   resp.source_capacity_reservation.unused_reservation_billing_owner_id #=> String
@@ -5608,7 +5599,7 @@ module Aws::EC2
     #   resp.destination_capacity_reservation.capacity_reservation_fleet_id #=> String
     #   resp.destination_capacity_reservation.placement_group_arn #=> String
     #   resp.destination_capacity_reservation.capacity_allocations #=> Array
-    #   resp.destination_capacity_reservation.capacity_allocations[0].allocation_type #=> String, one of "used"
+    #   resp.destination_capacity_reservation.capacity_allocations[0].allocation_type #=> String, one of "used", "future"
     #   resp.destination_capacity_reservation.capacity_allocations[0].count #=> Integer
     #   resp.destination_capacity_reservation.reservation_type #=> String, one of "default", "capacity-block"
     #   resp.destination_capacity_reservation.unused_reservation_billing_owner_id #=> String
@@ -9993,8 +9984,9 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Creates a managed prefix list. You can specify entries for the prefix
-    # list. Each entry consists of a CIDR block and an optional description.
+    # Creates a managed prefix list. You can specify one or more entries for
+    # the prefix list. Each entry consists of a CIDR block and an optional
+    # description.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -11052,7 +11044,7 @@ module Aws::EC2
     #   primary (only one IP address can be designated as primary).
     #
     # @option params [Array<String>] :groups
-    #   The IDs of the security groups.
+    #   The IDs of one or more security groups.
     #
     # @option params [Array<Types::PrivateIpAddressSpecification>] :private_ip_addresses
     #   The private IPv4 addresses.
@@ -12214,7 +12206,7 @@ module Aws::EC2
     #   the same Region as the volume.
     #
     # * If the source volume is in a Local Zone, you can create the snapshot
-    #   in the same Local Zone or in its parent Amazon Web Services Region.
+    #   in the same Local Zone or in parent Amazon Web Services Region.
     #
     # * If the source volume is on an Outpost, you can create the snapshot
     #   on the same Outpost or in its parent Amazon Web Services Region.
@@ -12242,8 +12234,8 @@ module Aws::EC2
     # Snapshots that are taken from encrypted volumes are automatically
     # encrypted. Volumes that are created from encrypted snapshots are also
     # automatically encrypted. Your encrypted volumes and any associated
-    # snapshots always remain protected. For more information, see [Amazon
-    # EBS encryption][1] in the *Amazon EBS User Guide*.
+    # snapshots always remain protected. For more information, [Amazon EBS
+    # encryption][1] in the *Amazon EBS User Guide*.
     #
     #
     #
@@ -12419,8 +12411,8 @@ module Aws::EC2
     #   in the same Region as the instance.
     #
     # * If the source instance is in a Local Zone, you can create the
-    #   snapshots in the same Local Zone or in its parent Amazon Web
-    #   Services Region.
+    #   snapshots in the same Local Zone or in parent Amazon Web Services
+    #   Region.
     #
     # * If the source instance is on an Outpost, you can create the
     #   snapshots on the same Outpost or in its parent Amazon Web Services
@@ -18519,7 +18511,7 @@ module Aws::EC2
     # the volume.
     #
     # You cannot delete a snapshot of the root device of an EBS volume used
-    # by a registered AMI. You must first deregister the AMI before you can
+    # by a registered AMI. You must first de-register the AMI before you can
     # delete the snapshot.
     #
     # For more information, see [Delete an Amazon EBS snapshot][1] in the
@@ -21574,15 +21566,6 @@ module Aws::EC2
     # Amazon Web Services Region that you're currently using. With Capacity
     # Blocks, you purchase a specific instance type for a period of time.
     #
-    # To search for an available Capacity Block offering, you specify a
-    # reservation duration and instance count. You must select one of the
-    # following options.
-    #
-    # * For reservation durations<b> 1-day increments up 14 days and 7-day
-    #   increments up to 182 days total</b>
-    #
-    # * For instance count<b> 1, 2, 4, 8, 16, 32, or 64 instances</b>
-    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -22020,7 +22003,7 @@ module Aws::EC2
     #   resp.capacity_reservations[0].capacity_reservation_fleet_id #=> String
     #   resp.capacity_reservations[0].placement_group_arn #=> String
     #   resp.capacity_reservations[0].capacity_allocations #=> Array
-    #   resp.capacity_reservations[0].capacity_allocations[0].allocation_type #=> String, one of "used"
+    #   resp.capacity_reservations[0].capacity_allocations[0].allocation_type #=> String, one of "used", "future"
     #   resp.capacity_reservations[0].capacity_allocations[0].count #=> Integer
     #   resp.capacity_reservations[0].reservation_type #=> String, one of "default", "capacity-block"
     #   resp.capacity_reservations[0].unused_reservation_billing_owner_id #=> String
@@ -26454,8 +26437,7 @@ module Aws::EC2
     #   * `p3dn.24xlarge` \| `p4d.24xlarge` \| `p4de.24xlarge` \|
     #     `p5.48xlarge` \| `p5e.48xlarge` \| `p5en.48xlarge`
     #
-    #   * `trn1.2xlarge` \| `trn1.32xlarge` \| `trn1n.32xlarge` \|
-    #     `trn2.48xlarge` \| `trn2u.48xlarge`
+    #   * `trn1.2xlarge` \| `trn1.32xlarge` \| `trn1n.32xlarge`
     #
     # For more information, see [Amazon EC2 instance topology][1] in the
     # *Amazon EC2 User Guide*.
@@ -31688,8 +31670,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes the specified network interfaces or all your network
-    # interfaces.
+    # Describes one or more of your network interfaces.
     #
     # If you have a large number of network interfaces, the operation fails
     # unless you use pagination or one of the following filters: `group-id`,
@@ -31799,13 +31780,6 @@ module Aws::EC2
     #   * `mac-address` - The MAC address of the network interface.
     #
     #   * `network-interface-id` - The ID of the network interface.
-    #
-    #   * `operator.managed` - A Boolean that indicates whether this is a
-    #     managed network interface.
-    #
-    #   * `operator.principal` - The principal that manages the network
-    #     interface. Only valid for managed network interfaces, where
-    #     `managed` is `true`.
     #
     #   * `owner-id` - The Amazon Web Services account ID of the network
     #     interface owner.
@@ -55367,7 +55341,7 @@ module Aws::EC2
     #   resp.source_capacity_reservation.capacity_reservation_fleet_id #=> String
     #   resp.source_capacity_reservation.placement_group_arn #=> String
     #   resp.source_capacity_reservation.capacity_allocations #=> Array
-    #   resp.source_capacity_reservation.capacity_allocations[0].allocation_type #=> String, one of "used"
+    #   resp.source_capacity_reservation.capacity_allocations[0].allocation_type #=> String, one of "used", "future"
     #   resp.source_capacity_reservation.capacity_allocations[0].count #=> Integer
     #   resp.source_capacity_reservation.reservation_type #=> String, one of "default", "capacity-block"
     #   resp.source_capacity_reservation.unused_reservation_billing_owner_id #=> String
@@ -55399,7 +55373,7 @@ module Aws::EC2
     #   resp.destination_capacity_reservation.capacity_reservation_fleet_id #=> String
     #   resp.destination_capacity_reservation.placement_group_arn #=> String
     #   resp.destination_capacity_reservation.capacity_allocations #=> Array
-    #   resp.destination_capacity_reservation.capacity_allocations[0].allocation_type #=> String, one of "used"
+    #   resp.destination_capacity_reservation.capacity_allocations[0].allocation_type #=> String, one of "used", "future"
     #   resp.destination_capacity_reservation.capacity_allocations[0].count #=> Integer
     #   resp.destination_capacity_reservation.reservation_type #=> String, one of "default", "capacity-block"
     #   resp.destination_capacity_reservation.unused_reservation_billing_owner_id #=> String
@@ -55844,7 +55818,7 @@ module Aws::EC2
     #   resp.capacity_reservation.capacity_reservation_fleet_id #=> String
     #   resp.capacity_reservation.placement_group_arn #=> String
     #   resp.capacity_reservation.capacity_allocations #=> Array
-    #   resp.capacity_reservation.capacity_allocations[0].allocation_type #=> String, one of "used"
+    #   resp.capacity_reservation.capacity_allocations[0].allocation_type #=> String, one of "used", "future"
     #   resp.capacity_reservation.capacity_allocations[0].count #=> Integer
     #   resp.capacity_reservation.reservation_type #=> String, one of "default", "capacity-block"
     #   resp.capacity_reservation.unused_reservation_billing_owner_id #=> String
@@ -62618,7 +62592,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Unassigns the specified IPv6 addresses or Prefix Delegation prefixes
+    # Unassigns one or more IPv6 addresses IPv4 Prefix Delegation prefixes
     # from a network interface.
     #
     # @option params [Array<String>] :ipv_6_prefixes
@@ -62661,7 +62635,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Unassigns the specified secondary private IP addresses or IPv4 Prefix
+    # Unassigns one or more secondary private IP addresses, or IPv4 Prefix
     # Delegation prefixes from a network interface.
     #
     # @option params [Array<String>] :ipv_4_prefixes
@@ -63179,7 +63153,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.501.0'
+      context[:gem_version] = '1.502.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

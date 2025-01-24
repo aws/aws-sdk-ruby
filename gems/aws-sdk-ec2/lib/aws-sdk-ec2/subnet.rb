@@ -1003,7 +1003,7 @@ module Aws::EC2
     #   cannot indicate any IP addresses specified in `privateIpAddresses` as
     #   primary (only one IP address can be designated as primary).
     # @option options [Array<String>] :groups
-    #   The IDs of the security groups.
+    #   The IDs of one or more security groups.
     # @option options [Array<Types::PrivateIpAddressSpecification>] :private_ip_addresses
     #   The private IPv4 addresses.
     #
@@ -1817,13 +1817,6 @@ module Aws::EC2
     #   * `mac-address` - The MAC address of the network interface.
     #
     #   * `network-interface-id` - The ID of the network interface.
-    #
-    #   * `operator.managed` - A Boolean that indicates whether this is a
-    #     managed network interface.
-    #
-    #   * `operator.principal` - The principal that manages the network
-    #     interface. Only valid for managed network interfaces, where
-    #     `managed` is `true`.
     #
     #   * `owner-id` - The Amazon Web Services account ID of the network
     #     interface owner.

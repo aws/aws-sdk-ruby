@@ -1748,7 +1748,7 @@ module Aws::EC2
     #
     # @!attribute [rw] ipv_6_prefixes
     #   One or more IPv6 prefixes assigned to the network interface. You
-    #   can't use this option if you use the `Ipv6PrefixCount` option.
+    #   cannot use this option if you use the `Ipv6PrefixCount` option.
     #   @return [Array<String>]
     #
     # @!attribute [rw] network_interface_id
@@ -1810,12 +1810,12 @@ module Aws::EC2
     #
     # @!attribute [rw] ipv_4_prefixes
     #   One or more IPv4 prefixes assigned to the network interface. You
-    #   can't use this option if you use the `Ipv4PrefixCount` option.
+    #   cannot use this option if you use the `Ipv4PrefixCount` option.
     #   @return [Array<String>]
     #
     # @!attribute [rw] ipv_4_prefix_count
     #   The number of IPv4 prefixes that Amazon Web Services automatically
-    #   assigns to the network interface. You can't use this option if you
+    #   assigns to the network interface. You cannot use this option if you
     #   use the `Ipv4 Prefixes` option.
     #   @return [Integer]
     #
@@ -10878,7 +10878,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] groups
-    #   The IDs of the security groups.
+    #   The IDs of one or more security groups.
     #   @return [Array<String>]
     #
     # @!attribute [rw] private_ip_addresses
@@ -24983,13 +24983,6 @@ module Aws::EC2
     #   * `mac-address` - The MAC address of the network interface.
     #
     #   * `network-interface-id` - The ID of the network interface.
-    #
-    #   * `operator.managed` - A Boolean that indicates whether this is a
-    #     managed network interface.
-    #
-    #   * `operator.principal` - The principal that manages the network
-    #     interface. Only valid for managed network interfaces, where
-    #     `managed` is `true`.
     #
     #   * `owner-id` - The Amazon Web Services account ID of the network
     #     interface owner.
@@ -42384,8 +42377,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] no_device
-    #   Suppresses the specified device included in the block device
-    #   mapping.
+    #   suppress the specified device included in the block device mapping.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceBlockDeviceMappingSpecification AWS API Documentation
@@ -43436,9 +43428,15 @@ module Aws::EC2
     #   @return [Array<Types::PrivateIpAddressSpecification>]
     #
     # @!attribute [rw] secondary_private_ip_address_count
-    #   The number of secondary private IPv4 addresses. You can’t specify
-    #   this parameter and also specify a secondary private IP address using
-    #   the `PrivateIpAddress` parameter.
+    #   The number of secondary private IPv4 addresses. You can't specify
+    #   this option and specify more than one private IP address using the
+    #   private IP addresses option. You cannot specify this option if
+    #   you're launching more than one instance in a [RunInstances][1]
+    #   request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
     #   @return [Integer]
     #
     # @!attribute [rw] subnet_id
@@ -43952,12 +43950,9 @@ module Aws::EC2
     # @!attribute [rw] accelerator_types
     #   The accelerator types that must be on the instance type.
     #
-    #   * For instance types with FPGA accelerators, specify `fpga`.
-    #
     #   * For instance types with GPU accelerators, specify `gpu`.
     #
-    #   * For instance types with Inference accelerators, specify
-    #     `inference`.
+    #   * For instance types with FPGA accelerators, specify `fpga`.
     #
     #   Default: Any accelerator type
     #   @return [Array<String>]
@@ -44438,12 +44433,9 @@ module Aws::EC2
     # @!attribute [rw] accelerator_types
     #   The accelerator types that must be on the instance type.
     #
-    #   * For instance types with FPGA accelerators, specify `fpga`.
+    #   * To include instance types with GPU hardware, specify `gpu`.
     #
-    #   * For instance types with GPU accelerators, specify `gpu`.
-    #
-    #   * For instance types with Inference accelerators, specify
-    #     `inference`.
+    #   * To include instance types with FPGA hardware, specify `fpga`.
     #
     #   Default: Any accelerator type
     #   @return [Array<String>]
@@ -47040,7 +47032,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the IPv6 prefix option for a network interface.
+    # Describes the IPv4 prefix option for a network interface.
     #
     # @!attribute [rw] ipv_6_prefix
     #   The IPv6 prefix.
@@ -70953,7 +70945,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] unassigned_ipv_6_prefixes
-    #   The IPv6 prefixes that have been unassigned from the network
+    #   The IPv4 prefixes that have been unassigned from the network
     #   interface.
     #   @return [Array<String>]
     #

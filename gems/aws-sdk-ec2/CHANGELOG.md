@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.502.0 (2025-01-23)
+------------------
+
+* Feature - Added "future" allocation type for future dated capacity reservation
+
 1.501.0 (2025-01-17)
 ------------------
 

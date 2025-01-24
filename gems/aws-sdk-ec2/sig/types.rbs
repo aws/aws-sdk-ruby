@@ -1172,7 +1172,7 @@ module Aws::EC2
     end
 
     class CapacityAllocation
-      attr_accessor allocation_type: ("used")
+      attr_accessor allocation_type: ("used" | "future")
       attr_accessor count: ::Integer
       SENSITIVE: []
     end
