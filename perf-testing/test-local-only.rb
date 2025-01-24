@@ -144,8 +144,6 @@ def output_raw(thread, outfile)
 end
 
 def analyze(test_cases, measurements, input, protocol, data)
-  pp input
-
   test_cases.each do |test|
     measurements.each do |m|
       write_test_output(test, protocol, 0, m, input[test][m], data)

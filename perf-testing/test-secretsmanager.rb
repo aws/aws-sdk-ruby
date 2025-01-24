@@ -332,5 +332,3 @@ end
 data.close
 raw.close
 
-t_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-puts "Total time: #{t_end - t_start}"
