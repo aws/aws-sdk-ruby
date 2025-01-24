@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 $LOAD_PATH.unshift(File.expand_path('../gems/aws-sdk-core/lib', __dir__))
 $LOAD_PATH.unshift(File.expand_path('../gems/aws-sdk-cloudwatch/lib', __dir__))
 
@@ -10,7 +12,7 @@ include Stats
 
 ITERATIONS = ARGV.first.to_i
 WARMUP = 10
-METRIC_COUNTS = [16, 64, 256, 1000]
+METRIC_COUNTS = [16, 64, 256, 1000].freeze
 BASE_TIME = Time.now - 2 * 60 * 60
 SUITE_ID = SecureRandom.uuid
 
@@ -67,7 +69,7 @@ end
 
 def generate_list_metrics_request
   {
-    namespace: "TestNamespace"
+    namespace: 'TestNamespace'
   }
 end
 

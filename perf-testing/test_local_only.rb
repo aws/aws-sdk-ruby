@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 $LOAD_PATH.unshift(File.expand_path('../gems/aws-sdk-core/lib', __dir__))
 $LOAD_PATH.unshift(File.expand_path('../gems/aws-sdk-echo/lib', __dir__))
 
@@ -11,14 +13,14 @@ include Stats
 ITERATIONS = ARGV.first.to_i
 WARMUP = 10
 ASCII = "!\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~".chars
-INT_MIN = -2147483648
-INT_MAX = 2147483647
-LONG_MIN = -9223372036854775808
-LONG_MAX = 9223372036854775807
-FLOAT_MIN = -2147483648.0
-FLOAT_MAX = 2147483647.0
-DOUBLE_MIN = -9223372036854775808.0
-DOUBLE_MAX = 9223372036854775807.0
+INT_MIN = -2_147_483_648
+INT_MAX = 2_147_483_647
+LONG_MIN = -9_223_372_036_854_775_808
+LONG_MAX = 9_223_372_036_854_775_807
+FLOAT_MIN = -2_147_483_648.0
+FLOAT_MAX = 2_147_483_647.0
+DOUBLE_MIN = -9_223_372_036_854_775_808.0
+DOUBLE_MAX = 9_223_372_036_854_775_807.0
 RUN_START_TIMESTAMP = Time.now
 
 def random_map_of_string_to_string
@@ -75,7 +77,7 @@ def random_complex_object
           complex_struct_member: {
             list_of_strings_member: (0...8).map { (0...32).map { ASCII[rand(ASCII.length)] }.join },
             complex_struct_member: {
-              map_of_string_to_string_member: random_map_of_string_to_string,
+              map_of_string_to_string_member: random_map_of_string_to_string
             }
           }
         }
@@ -101,7 +103,7 @@ end
 
 def random_large_blob
   {
-    blob_member: Random.bytes(262144)
+    blob_member: Random.bytes(262_144)
   }
 end
 
@@ -158,14 +160,14 @@ def separate_and_analyze(test_cases, measurements, thread, data, raw)
   json_full_serde_data = Array.new(5) { [] }
   json_full_request_data = Array.new(5) { [] }
   json_full_response_data = Array.new(5) { [] }
-  thread[:json_serde_data].each_with_index do |data, i|
-    json_full_serde_data[i % 5] << data
+  thread[:json_serde_data].each_with_index do |d, i|
+    json_full_serde_data[i % 5] << d
   end
-  thread[:request_size_data].each_with_index do |data, i|
-    json_full_request_data[i % 5] << data unless i % 10 > 4
+  thread[:request_size_data].each_with_index do |d, i|
+    json_full_request_data[i % 5] << d unless i % 10 > 4
   end
-  thread[:response_size_data].each_with_index do |data, i|
-    json_full_response_data[i % 5] << data unless i % 10 > 4
+  thread[:response_size_data].each_with_index do |d, i|
+    json_full_response_data[i % 5] << d unless i % 10 > 4
   end
   json_full_test_cases = {}
   (0...5).each do |i|
@@ -182,14 +184,14 @@ def separate_and_analyze(test_cases, measurements, thread, data, raw)
   cbor_full_serde_data = Array.new(5) { [] }
   cbor_full_request_data = Array.new(5) { [] }
   cbor_full_response_data = Array.new(5) { [] }
-  thread[:cbor_serde_data].each_with_index do |data, i|
-    cbor_full_serde_data[i % 5] << data
+  thread[:cbor_serde_data].each_with_index do |d, i|
+    cbor_full_serde_data[i % 5] << d
   end
-  thread[:request_size_data].each_with_index do |data, i|
-    cbor_full_request_data[i % 5] << data unless i % 10 < 5
+  thread[:request_size_data].each_with_index do |d, i|
+    cbor_full_request_data[i % 5] << d unless i % 10 < 5
   end
-  thread[:response_size_data].each_with_index do |data, i|
-    cbor_full_response_data[i % 5] << data unless i % 10 < 5
+  thread[:response_size_data].each_with_index do |d, i|
+    cbor_full_response_data[i % 5] << d unless i % 10 < 5
   end
   cbor_full_test_cases = {}
   (0...5).each do |i|

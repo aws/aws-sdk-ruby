@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 $LOAD_PATH.unshift(File.expand_path('../gems/aws-sdk-core/lib', __dir__))
 $LOAD_PATH.unshift(File.expand_path('../gems/aws-sdk-secretsmanager/lib', __dir__))
 
@@ -10,11 +12,11 @@ include Stats
 
 ITERATIONS = ARGV.first.to_i
 WARMUP = 5
-SIZES = [64, 512, 4096, 8192, 45056]
+SIZES = [64, 512, 4096, 8192, 45_056].freeze
 RUN_START_TIMESTAMP = Time.now.to_i
 ASCII = "!\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~".chars
 MEASUREMENTS = ['Total request time (ms)', 'Serialization time (ms)', 'Deserialization time (ms)',
-                'Request payload size (bytes)', 'Response payload size (bytes)']
+                'Request payload size (bytes)', 'Response payload size (bytes)'].freeze
 
 def generate_create_secret_request(timestamp, iteration)
   {
@@ -243,8 +245,6 @@ def make_and_time_request(request, command, json_ssm, cbor_ssm, thread)
   end
 end
 
-t_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-
 thread = Thread.current
 thread[:json_serde_data] = []
 thread[:cbor_serde_data] = []
@@ -365,4 +365,3 @@ end
 
 data.close
 raw.close
-
