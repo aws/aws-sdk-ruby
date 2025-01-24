@@ -19,7 +19,7 @@ FLOAT_MIN = -2147483648.0
 FLOAT_MAX = 2147483647.0
 DOUBLE_MIN = -9223372036854775808.0
 DOUBLE_MAX = 9223372036854775807.0
-RUN_START_TIMESTAMP = Time.now.to_i
+RUN_START_TIMESTAMP = Time.now
 
 def random_map_of_string_to_string
   map = {}
@@ -105,21 +105,109 @@ def random_large_blob
   }
 end
 
+def separate_serde_data(data)
+  separated = Array.new(2) { [] }
+  data.each do |i|
+    separated[0] << i[0]
+    separated[1] << i[1]
+  end
+  separated
+end
+
+def write_test_output(operation, protocol, dimension, metric, input, outfile)
+  input.sort!
+  result = {
+    "service": 'Local only',
+    "test_case": operation,
+    "protocol": protocol,
+    "dimension_value": dimension,
+    "metric": metric,
+    "p50": p50(input),
+    "p90": p90(input),
+    "max": input.last,
+    "n": ITERATIONS
+  }
+  outfile.puts(JSON.pretty_generate(result))
+end
+
+def output_raw(thread, outfile)
+  $stdout = outfile
+  puts 'Json Serde Data Raw'
+  pp thread[:json_serde_data]
+  puts 'Cbor Serde Data Raw'
+  pp thread[:cbor_serde_data]
+  puts 'Request Size Data Raw (Alternating Json and CBOR)'
+  pp thread[:request_size_data]
+  puts 'Response Size Data Raw (Alternating Json and CBOR)'
+  pp thread[:response_size_data]
+  $stdout = STDOUT
+end
+
+def analyze(test_case, metrics, thread, data, raw)
+  raw.puts(test_case)
+  output_raw(thread, raw)
+
+  separated_request_size = separate_byte_data(thread[:request_size_data])
+  # pp separated_request_size
+  separated_response_size = separate_byte_data(thread[:response_size_data])
+  # pp separated_response_size
+
+  separated_query_serde = separate_serde_data(thread[:query_serde_data])
+  write_test_output(test_case, 'JSON', metrics, 'Serialization time (ms)', separated_query_serde[0], data)
+  write_test_output(test_case, 'JSON', metrics, 'Deserialization time (ms)', separated_query_serde[1], data)
+  write_test_output(test_case, 'JSON', metrics, 'Request payload size (bytes)', separated_request_size[0], data)
+  write_test_output(test_case, 'JSON', metrics, 'Response payload size (bytes)', separated_response_size[0], data)
+
+  separated_cbor_serde = separate_serde_data(thread[:cbor_serde_data])
+  write_test_output(test_case, 'CBOR', metrics, 'Serialization time (ms)', separated_cbor_serde[0], data)
+  write_test_output(test_case, 'CBOR', metrics, 'Deserialization time (ms)', separated_cbor_serde[1], data)
+  write_test_output(test_case, 'CBOR', metrics, 'Request payload size (bytes)', separated_request_size[1], data)
+  write_test_output(test_case, 'CBOR', metrics, 'Response payload size (bytes)', separated_response_size[1], data)
+
+  clear_thread_data(thread)
+end
+
+def big_analyze(test_cases, thread)
+  json_full_serde_data = Array.new(5) { [] }
+  json_full_request_data = Array.new(5) { [] }
+  json_full_response_data = Array.new(5) { [] }
+  thread[:json_serde_data].each_with_index do |data, i|
+    json_full_serde_data[i % 5] << data
+  end
+  thread[:request_size_data].each_with_index do |data, i|
+    json_full_request_data[i % 5] << data unless i % 10 > 4
+  end
+  thread[:response_size_data].each_with_index do |data, i|
+    json_full_response_data[i % 5] << data unless i % 10 > 4
+  end
+  json_full_test_cases = Array.new(5) {}
+  (0...5).each do |i|
+    separated = separate_serde_data(json_full_serde_data[i])
+    json_all_types_data[test_cases[0]] = separated[0]
+    json_all_types_data[test_cases[1]] = separated[1]
+    json_all_types_data[test_cases[2]] = json_full_request_data
+
+  end
+
+
+end
+
 thread = Thread.current
 thread[:json_serde_data] = []
 thread[:cbor_serde_data] = []
-# Unused arrays but need them for other test suites to run with request/response body size
 thread[:request_size_data] = []
 thread[:response_size_data] = []
 thread[:warm] = false
 
 Aws::Echo::Client.remove_plugin(Aws::Plugins::Protocols::JsonRpc)
 json_echo = Aws::Echo::Client.new(plugins: [Aws::Plugins::Protocols::JsonRpc], stub_responses: true)
-
 cbor_echo = Aws::Echo::Client.new(plugins: [Aws::Plugins::Protocols::RpcV2], stub_responses: true)
 cbor_echo.config.api = cbor_echo.config.api.dup
 cbor_echo.config.api.metadata = cbor_echo.config.api.metadata.dup
 cbor_echo.config.api.metadata['protocol'] = 'smithy-rpc-v2-cbor'
+
+data = File.open('perf-testing/test-output/local-only/data.txt', 'w')
+raw = File.open('perf-testing/test-output/local-only/raw.txt', 'w')
 
 (0...(ITERATIONS + WARMUP)).each do |i|
   thread[:warm] = true if i == WARMUP
@@ -155,10 +243,9 @@ cbor_echo.config.api.metadata['protocol'] = 'smithy-rpc-v2-cbor'
   cbor_echo.echo_operation(large_blob)
 end
 
-test_cases = ['All types', 'Long list of strings', 'Complex object', 'List of complex objects', 'Very large blob']
+output_raw(thread, raw)
 
-data = File.open('perf-testing/test-output/local-only/data.txt', 'w')
-raw = File.open('perf-testing/test-output/local-only/raw.txt', 'w')
+test_cases = ['All types', 'Long list of strings', 'Complex object', 'List of complex objects', 'Very large blob']
 
 parsed_json_data = Array.new(10) { [] }
 parsed_cbor_data = Array.new(10) { [] }
@@ -177,45 +264,14 @@ thread[:cbor_serde_data].each_with_index do |i, idx|
   parsed_cbor_data[(idx % 5) * 2 + 1] << deser
 end
 
-parsed_json_data.each do |i|
-  i.sort!
-end
-parsed_cbor_data.each do |i|
-  i.sort!
-end
-$stdout = raw
-pp parsed_json_data
-pp parsed_cbor_data
-$stdout = STDOUT
-
 parsed_json_data.each_with_index do |i, idx|
-  i.sort!
-  result = {
-    "service": 'Local only',
-    "test_case": test_cases[(idx / 2) % 5],
-    "protocol": 'JSON',
-    "metric": idx.even? ? 'Serialization time (ms)' : 'Deserialization time (ms)',
-    "p50": p50(i),
-    "p90": p90(i),
-    "max": i.last,
-    "n": ITERATIONS
-  }
-  data.puts(JSON.pretty_generate(result))
+  write_test_output(test_cases[(idx / 2) % 5], 'JSON', 0, 
+                    idx.even? ? 'Serialization time (ms)' : 'Deserialization time (ms)', i, data)
 end
 
 parsed_cbor_data.each_with_index do |i, idx|
-  i.sort!
-  result = {
-    "service": 'Local only',
-    "test_case": test_cases[(idx / 2) % 5],
-    "protocol": 'CBOR',
-    "metric": idx.even? ? 'Serialization time (ms)' : 'Deserialization time (ms)',
-    "p50": p50(i),
-    "p90": p90(i),
-    "max": i.last,
-    "n": ITERATIONS
-  }
-  data.puts(JSON.pretty_generate(result))
+  write_test_output(test_cases[(idx / 2) % 5], 'CBOR', 0,
+                    idx.even? ? 'Serialization time (ms)' : 'Deserialization time (ms)', i, data)
 end
 
 data.close

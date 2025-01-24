@@ -184,7 +184,7 @@ raw = File.open('perf-testing/test-output/cloudwatch/raw.txt', 'w')
   request = generate_put_metric_data_request(1, BASE_TIME, SUITE_ID)
   query_cloudwatch.put_metric_data(request)
   cbor_cloudwatch.put_metric_data(request)
-  request = generate_get_metric_data_request(11, BASE_TIME, SUITE_ID)
+  request = generate_get_metric_data_request(1, BASE_TIME, SUITE_ID)
   query_cloudwatch.get_metric_data(request)
   cbor_cloudwatch.get_metric_data(request)
 end

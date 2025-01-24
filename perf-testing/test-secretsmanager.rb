@@ -175,6 +175,7 @@ def clear_thread_data(thread)
   thread[:request_size_data] = []
   thread[:response_size_data] = []
 end
+
 def analyze(test_case, metrics, thread, data, raw)
   raw.puts("Test case: #{test_case} #{metrics}")
   output_raw(thread, raw)
@@ -241,6 +242,8 @@ def make_and_time_request(request, command, json_ssm, cbor_ssm, thread)
     thread[:cbor_total_data] << format('%.3f', (t_cbor_total_end - t_cbor_total_start) * 1000.0).to_f
   end
 end
+
+t_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
 
 thread = Thread.current
 thread[:json_serde_data] = []
@@ -325,3 +328,9 @@ thread[:warm] = false
   request = generate_binary_delete_secret_request(RUN_START_TIMESTAMP, i.to_s.rjust(3, '0'))
   cbor_ssm.delete_secret(request)
 end
+
+data.close
+raw.close
+
+t_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+puts "Total time: #{t_end - t_start}"
