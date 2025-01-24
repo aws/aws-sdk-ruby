@@ -9,7 +9,7 @@ require_relative 'Stats'
 include Stats
 
 ITERATIONS = ARGV.first.to_i
-WARMUP = 10
+WARMUP = 5
 SIZES = [64, 512, 4096, 8192, 45056]
 RUN_START_TIMESTAMP = Time.now.to_i
 ASCII = "!\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~".chars
@@ -273,6 +273,40 @@ raw = File.open('perf-testing/test-output/secretsmanager/raw.txt', 'w')
 end
 
 # Warm up
+if ITERATIONS > WARMUP
+  SIZES.each do |size|
+    (0...WARMUP).each do |i|
+      request = generate_put_secret_value_request(RUN_START_TIMESTAMP, i.to_s.rjust(3, '0'), size)
+      json_ssm.put_secret_value(request)
+      cbor_ssm.put_secret_value(request)
+    end
+    (0...WARMUP).each do |i|
+      request = generate_binary_put_secret_value_request(RUN_START_TIMESTAMP, i.to_s.rjust(3, '0'), size)
+      json_ssm.put_secret_value(request)
+      cbor_ssm.put_secret_value(request)
+    end
+    (0...WARMUP).each do |i|
+      request = generate_get_secret_value_request(RUN_START_TIMESTAMP, i.to_s.rjust(3, '0'))
+      json_ssm.get_secret_value(request)
+      cbor_ssm.get_secret_value(request)
+    end
+    (0...WARMUP).each do |i|
+      request = generate_binary_get_secret_value_request(RUN_START_TIMESTAMP, i.to_s.rjust(3, '0'))
+      json_ssm.get_secret_value(request)
+      cbor_ssm.get_secret_value(request)
+    end
+  end
+  (0...WARMUP).each do |i|
+    request = generate_describe_secret_request(RUN_START_TIMESTAMP, i.to_s.rjust(3, '0'))
+    json_ssm.describe_secret(request)
+    cbor_ssm.describe_secret(request)
+  end
+  (0...WARMUP).each do |i|
+    request = generate_list_secrets_request(i.to_s.rjust(3, '0'))
+    json_ssm.list_secrets(request)
+    cbor_ssm.list_secrets(request)
+  end
+end
 thread[:warm] = true
 
 SIZES.each do |size|
