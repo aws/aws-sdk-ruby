@@ -12,7 +12,7 @@ include Stats
 
 ITERATIONS = ARGV.first.to_i
 WARMUP = 10
-ASCII = "!\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~".chars
+ASCII = " !\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~".chars
 INT_MIN = -2_147_483_648
 INT_MAX = 2_147_483_647
 LONG_MIN = -9_223_372_036_854_775_808
