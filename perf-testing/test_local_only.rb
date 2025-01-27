@@ -7,6 +7,7 @@ require 'aws-sdk-core'
 require 'aws-sdk-echo'
 require 'aws-sdk-core/plugins/protocols/json_rpc'
 require 'aws-sdk-core/plugins/protocols/rpc_v2'
+require 'fileutils'
 require_relative 'Stats'
 include Stats
 
@@ -220,8 +221,10 @@ cbor_echo.config.api = cbor_echo.config.api.dup
 cbor_echo.config.api.metadata = cbor_echo.config.api.metadata.dup
 cbor_echo.config.api.metadata['protocol'] = 'smithy-rpc-v2-cbor'
 
-data = File.open('perf-testing/test-output/local-only/data.txt', 'w')
-raw = File.open('perf-testing/test-output/local-only/raw.txt', 'w')
+path = __dir__
+FileUtils.mkdir_p("#{path}/test-output/local-only")
+data = File.open("#{path}/test-output/local-only/data.txt", 'w')
+raw = File.open("#{path}/test-output/local-only/raw.txt", 'w')
 
 (0...(iterations + WARMUP)).each do |i|
   thread[:warm] = true if i == WARMUP

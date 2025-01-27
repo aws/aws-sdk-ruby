@@ -16,11 +16,4 @@ benchmark_report.json
 
 .ruby-version
 
-perf-testing/test-output/local-only/*.txt
-!perf-testing/test-output/local-only
-perf-testing/test-output/cloudwatch/*.txt
-!perf-testing/test-output/cloudwatch
-perf-testing/test-output/secretsmanager/*.txt
-!perf-testing/test-output/secretsmanager
-perf-testing/test-output/combined/*.txt
-!perf-testing/test-output/combined
+perf-testing/test-output/*

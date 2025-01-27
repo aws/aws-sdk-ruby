@@ -261,9 +261,10 @@ cbor_ssm.config.api = cbor_ssm.config.api.dup
 cbor_ssm.config.api.metadata = cbor_ssm.config.api.metadata.dup
 cbor_ssm.config.api.metadata['protocol'] = 'smithy-rpc-v2-cbor'
 
-data = File.open('perf-testing/test-output/secretsmanager/data.txt', 'w')
-raw = File.open('perf-testing/test-output/secretsmanager/raw.txt', 'w')
-# requests = File.open('perf-testing/test-output/secretsmanager/# requests.txt', 'w')
+path = __dir__
+FileUtils.mkdir_p("#{path}/test-output/secretsmanager")
+data = File.open("#{path}/test-output/secretsmanager/data.txt", 'w')
+raw = File.open("#{path}/test-output/secretsmanager/raw.txt", 'w')
 
 (0...ITERATIONS).each do |i|
   request = generate_create_secret_request(run_start_timestamp, i.to_s.rjust(3, '0'))

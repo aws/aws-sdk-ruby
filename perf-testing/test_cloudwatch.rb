@@ -179,8 +179,10 @@ cbor_cloudwatch.config.api = cbor_cloudwatch.config.api.dup
 cbor_cloudwatch.config.api.metadata = cbor_cloudwatch.config.api.metadata.dup
 cbor_cloudwatch.config.api.metadata['protocol'] = 'smithy-rpc-v2-cbor'
 
-data = File.open('perf-testing/test-output/cloudwatch/data.txt', 'w')
-raw = File.open('perf-testing/test-output/cloudwatch/raw.txt', 'w')
+path = __dir__
+FileUtils.mkdir_p("#{path}/test-output/cloudwatch")
+data = File.open("#{path}/test-output/cloudwatch/data.txt", 'w')
+raw = File.open("#{path}/test-output/cloudwatch/raw.txt", 'w')
 
 (0...WARMUP).each do
   request = generate_put_metric_data_request(1, BASE_TIME, SUITE_ID)
