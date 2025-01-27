@@ -294,7 +294,6 @@ SIZES.each do |size|
   (0...ITERATIONS).each do |i|
     request = generate_put_secret_value_request(run_start_timestamp, i.to_s.rjust(3, '0'), size)
     make_and_time_request(request, 'put', json_ssm, cbor_ssm, thread)
-    # requests.puts(JSON.pretty_generate(request))
   end
   analyze('Put string secret', size, thread, data, raw)
   # Put secret value (binary)
@@ -302,21 +301,18 @@ SIZES.each do |size|
     request = generate_binary_put_secret_value_request(run_start_timestamp, i.to_s.rjust(3, '0'), size)
     make_and_time_request(request, 'put', json_ssm, cbor_ssm, thread)
     request[:secret_binary] = request[:secret_binary].force_encoding('ISO-8859-1').encode('UTF-8')
-    # requests.puts(JSON.pretty_generate(request))
   end
   analyze('Put binary secret', size, thread, data, raw)
   # Get secret value (string)
   (0...ITERATIONS).each do |i|
     request = generate_get_secret_value_request(run_start_timestamp, i.to_s.rjust(3, '0'))
     make_and_time_request(request, 'get', json_ssm, cbor_ssm, thread)
-    # requests.puts(JSON.pretty_generate(request))
   end
   analyze('Get string secret', size, thread, data, raw)
   # Get secret value (binary)
   (0...ITERATIONS).each do |i|
     request = generate_binary_get_secret_value_request(run_start_timestamp, i.to_s.rjust(3, '0'))
     make_and_time_request(request, 'get', json_ssm, cbor_ssm, thread)
-    # requests.puts(JSON.pretty_generate(request))
   end
   analyze('Get binary secret', size, thread, data, raw)
 end
@@ -324,14 +320,12 @@ end
 (0...ITERATIONS).each do |i|
   request = generate_describe_secret_request(run_start_timestamp, i.to_s.rjust(3, '0'))
   make_and_time_request(request, 'describe', json_ssm, cbor_ssm, thread)
-  # requests.puts(JSON.pretty_generate(request))
 end
 analyze('Describe secret', 0, thread, data, raw)
 
 (0...ITERATIONS).each do |i|
   request = generate_list_secrets_request(i.to_s.rjust(3, '0'))
   make_and_time_request(request, 'list', json_ssm, cbor_ssm, thread)
-  # requests.puts(JSON.pretty_generate(request))
 end
 analyze('List secrets', 0, thread, data, raw)
 
