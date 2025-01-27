@@ -1199,6 +1199,7 @@ module Aws::MediaConvert
     #             bitrate: 1,
     #             codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_2, LEVEL_2_1, LEVEL_3, LEVEL_3_1, LEVEL_4, LEVEL_4_1, LEVEL_5, LEVEL_5_1, LEVEL_5_2, LEVEL_6, LEVEL_6_1, LEVEL_6_2
     #             codec_profile: "MAIN_MAIN", # accepts MAIN_MAIN, MAIN_HIGH, MAIN10_MAIN, MAIN10_HIGH, MAIN_422_8BIT_MAIN, MAIN_422_8BIT_HIGH, MAIN_422_10BIT_MAIN, MAIN_422_10BIT_HIGH
+    #             deblocking: "ENABLED", # accepts ENABLED, DISABLED
     #             dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #             end_of_stream_markers: "INCLUDE", # accepts INCLUDE, SUPPRESS
     #             flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
@@ -1907,6 +1908,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h265_settings.bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_2", "LEVEL_2_1", "LEVEL_3", "LEVEL_3_1", "LEVEL_4", "LEVEL_4_1", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2", "LEVEL_6", "LEVEL_6_1", "LEVEL_6_2"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.codec_profile #=> String, one of "MAIN_MAIN", "MAIN_HIGH", "MAIN10_MAIN", "MAIN10_HIGH", "MAIN_422_8BIT_MAIN", "MAIN_422_8BIT_HIGH", "MAIN_422_10BIT_MAIN", "MAIN_422_10BIT_HIGH"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.deblocking #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.end_of_stream_markers #=> String, one of "INCLUDE", "SUPPRESS"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -2884,6 +2886,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h265_settings.bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_2", "LEVEL_2_1", "LEVEL_3", "LEVEL_3_1", "LEVEL_4", "LEVEL_4_1", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2", "LEVEL_6", "LEVEL_6_1", "LEVEL_6_2"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.codec_profile #=> String, one of "MAIN_MAIN", "MAIN_HIGH", "MAIN10_MAIN", "MAIN10_HIGH", "MAIN_422_8BIT_MAIN", "MAIN_422_8BIT_HIGH", "MAIN_422_10BIT_MAIN", "MAIN_422_10BIT_HIGH"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.deblocking #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.end_of_stream_markers #=> String, one of "INCLUDE", "SUPPRESS"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -3729,6 +3732,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.bitrate #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_2", "LEVEL_2_1", "LEVEL_3", "LEVEL_3_1", "LEVEL_4", "LEVEL_4_1", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2", "LEVEL_6", "LEVEL_6_1", "LEVEL_6_2"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.codec_profile #=> String, one of "MAIN_MAIN", "MAIN_HIGH", "MAIN10_MAIN", "MAIN10_HIGH", "MAIN_422_8BIT_MAIN", "MAIN_422_8BIT_HIGH", "MAIN_422_10BIT_MAIN", "MAIN_422_10BIT_HIGH"
+    #   resp.presets[0].settings.video_description.codec_settings.h265_settings.deblocking #=> String, one of "ENABLED", "DISABLED"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.end_of_stream_markers #=> String, one of "INCLUDE", "SUPPRESS"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -4855,6 +4859,7 @@ module Aws::MediaConvert
     #             bitrate: 1,
     #             codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_2, LEVEL_2_1, LEVEL_3, LEVEL_3_1, LEVEL_4, LEVEL_4_1, LEVEL_5, LEVEL_5_1, LEVEL_5_2, LEVEL_6, LEVEL_6_1, LEVEL_6_2
     #             codec_profile: "MAIN_MAIN", # accepts MAIN_MAIN, MAIN_HIGH, MAIN10_MAIN, MAIN10_HIGH, MAIN_422_8BIT_MAIN, MAIN_422_8BIT_HIGH, MAIN_422_10BIT_MAIN, MAIN_422_10BIT_HIGH
+    #             deblocking: "ENABLED", # accepts ENABLED, DISABLED
     #             dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #             end_of_stream_markers: "INCLUDE", # accepts INCLUDE, SUPPRESS
     #             flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
@@ -5560,6 +5565,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h265_settings.bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_2", "LEVEL_2_1", "LEVEL_3", "LEVEL_3_1", "LEVEL_4", "LEVEL_4_1", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2", "LEVEL_6", "LEVEL_6_1", "LEVEL_6_2"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.codec_profile #=> String, one of "MAIN_MAIN", "MAIN_HIGH", "MAIN10_MAIN", "MAIN10_HIGH", "MAIN_422_8BIT_MAIN", "MAIN_422_8BIT_HIGH", "MAIN_422_10BIT_MAIN", "MAIN_422_10BIT_HIGH"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.deblocking #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.end_of_stream_markers #=> String, one of "INCLUDE", "SUPPRESS"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -5914,7 +5920,7 @@ module Aws::MediaConvert
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.148.0'
+      context[:gem_version] = '1.149.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

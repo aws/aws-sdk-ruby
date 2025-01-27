@@ -1090,7 +1090,7 @@ module Aws::BedrockAgent
     #   resp.agent_alias.agent_alias_history_events[0].start_date #=> Time
     #   resp.agent_alias.agent_alias_id #=> String
     #   resp.agent_alias.agent_alias_name #=> String
-    #   resp.agent_alias.agent_alias_status #=> String, one of "CREATING", "PREPARED", "FAILED", "UPDATING", "DELETING"
+    #   resp.agent_alias.agent_alias_status #=> String, one of "CREATING", "PREPARED", "FAILED", "UPDATING", "DELETING", "DISSOCIATED"
     #   resp.agent_alias.agent_id #=> String
     #   resp.agent_alias.client_token #=> String
     #   resp.agent_alias.created_at #=> Time
@@ -1579,6 +1579,9 @@ module Aws::BedrockAgent
     #                         {
     #                           content: [ # required
     #                             {
+    #                               cache_point: {
+    #                                 type: "default", # required, accepts default
+    #                               },
     #                               text: "String",
     #                             },
     #                           ],
@@ -1587,6 +1590,9 @@ module Aws::BedrockAgent
     #                       ],
     #                       system: [
     #                         {
+    #                           cache_point: {
+    #                             type: "default", # required, accepts default
+    #                           },
     #                           text: "NonEmptyString",
     #                         },
     #                       ],
@@ -1602,6 +1608,9 @@ module Aws::BedrockAgent
     #                         },
     #                         tools: [ # required
     #                           {
+    #                             cache_point: {
+    #                               type: "default", # required, accepts default
+    #                             },
     #                             tool_spec: {
     #                               description: "NonEmptyString",
     #                               input_schema: { # required
@@ -1615,6 +1624,9 @@ module Aws::BedrockAgent
     #                       },
     #                     },
     #                     text: {
+    #                       cache_point: {
+    #                         type: "default", # required, accepts default
+    #                       },
     #                       input_variables: [
     #                         {
     #                           name: "PromptInputVariableName",
@@ -1708,14 +1720,18 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.input_variables[0].name #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages #=> Array
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages[0].content #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages[0].content[0].cache_point.type #=> String, one of "default"
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages[0].content[0].text #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages[0].role #=> String, one of "user", "assistant"
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.system #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.system[0].cache_point.type #=> String, one of "default"
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.system[0].text #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tool_choice.tool.name #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].cache_point.type #=> String, one of "default"
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].tool_spec.description #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].tool_spec.name #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.cache_point.type #=> String, one of "default"
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables #=> Array
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables[0].name #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.text #=> String
@@ -1924,14 +1940,18 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.input_variables[0].name #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages #=> Array
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages[0].content #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages[0].content[0].cache_point.type #=> String, one of "default"
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages[0].content[0].text #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages[0].role #=> String, one of "user", "assistant"
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.system #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.system[0].cache_point.type #=> String, one of "default"
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.system[0].text #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tool_choice.tool.name #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].cache_point.type #=> String, one of "default"
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].tool_spec.description #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].tool_spec.name #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.cache_point.type #=> String, one of "default"
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables #=> Array
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables[0].name #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.text #=> String
@@ -2405,6 +2425,9 @@ module Aws::BedrockAgent
     #               {
     #                 content: [ # required
     #                   {
+    #                     cache_point: {
+    #                       type: "default", # required, accepts default
+    #                     },
     #                     text: "String",
     #                   },
     #                 ],
@@ -2413,6 +2436,9 @@ module Aws::BedrockAgent
     #             ],
     #             system: [
     #               {
+    #                 cache_point: {
+    #                   type: "default", # required, accepts default
+    #                 },
     #                 text: "NonEmptyString",
     #               },
     #             ],
@@ -2428,6 +2454,9 @@ module Aws::BedrockAgent
     #               },
     #               tools: [ # required
     #                 {
+    #                   cache_point: {
+    #                     type: "default", # required, accepts default
+    #                   },
     #                   tool_spec: {
     #                     description: "NonEmptyString",
     #                     input_schema: { # required
@@ -2441,6 +2470,9 @@ module Aws::BedrockAgent
     #             },
     #           },
     #           text: {
+    #             cache_point: {
+    #               type: "default", # required, accepts default
+    #             },
     #             input_variables: [
     #               {
     #                 name: "PromptInputVariableName",
@@ -2480,14 +2512,18 @@ module Aws::BedrockAgent
     #   resp.variants[0].template_configuration.chat.input_variables[0].name #=> String
     #   resp.variants[0].template_configuration.chat.messages #=> Array
     #   resp.variants[0].template_configuration.chat.messages[0].content #=> Array
+    #   resp.variants[0].template_configuration.chat.messages[0].content[0].cache_point.type #=> String, one of "default"
     #   resp.variants[0].template_configuration.chat.messages[0].content[0].text #=> String
     #   resp.variants[0].template_configuration.chat.messages[0].role #=> String, one of "user", "assistant"
     #   resp.variants[0].template_configuration.chat.system #=> Array
+    #   resp.variants[0].template_configuration.chat.system[0].cache_point.type #=> String, one of "default"
     #   resp.variants[0].template_configuration.chat.system[0].text #=> String
     #   resp.variants[0].template_configuration.chat.tool_configuration.tool_choice.tool.name #=> String
     #   resp.variants[0].template_configuration.chat.tool_configuration.tools #=> Array
+    #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].cache_point.type #=> String, one of "default"
     #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].tool_spec.description #=> String
     #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].tool_spec.name #=> String
+    #   resp.variants[0].template_configuration.text.cache_point.type #=> String, one of "default"
     #   resp.variants[0].template_configuration.text.input_variables #=> Array
     #   resp.variants[0].template_configuration.text.input_variables[0].name #=> String
     #   resp.variants[0].template_configuration.text.text #=> String
@@ -2589,14 +2625,18 @@ module Aws::BedrockAgent
     #   resp.variants[0].template_configuration.chat.input_variables[0].name #=> String
     #   resp.variants[0].template_configuration.chat.messages #=> Array
     #   resp.variants[0].template_configuration.chat.messages[0].content #=> Array
+    #   resp.variants[0].template_configuration.chat.messages[0].content[0].cache_point.type #=> String, one of "default"
     #   resp.variants[0].template_configuration.chat.messages[0].content[0].text #=> String
     #   resp.variants[0].template_configuration.chat.messages[0].role #=> String, one of "user", "assistant"
     #   resp.variants[0].template_configuration.chat.system #=> Array
+    #   resp.variants[0].template_configuration.chat.system[0].cache_point.type #=> String, one of "default"
     #   resp.variants[0].template_configuration.chat.system[0].text #=> String
     #   resp.variants[0].template_configuration.chat.tool_configuration.tool_choice.tool.name #=> String
     #   resp.variants[0].template_configuration.chat.tool_configuration.tools #=> Array
+    #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].cache_point.type #=> String, one of "default"
     #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].tool_spec.description #=> String
     #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].tool_spec.name #=> String
+    #   resp.variants[0].template_configuration.text.cache_point.type #=> String, one of "default"
     #   resp.variants[0].template_configuration.text.input_variables #=> Array
     #   resp.variants[0].template_configuration.text.input_variables[0].name #=> String
     #   resp.variants[0].template_configuration.text.text #=> String
@@ -2708,7 +2748,7 @@ module Aws::BedrockAgent
     # @example Response structure
     #
     #   resp.agent_alias_id #=> String
-    #   resp.agent_alias_status #=> String, one of "CREATING", "PREPARED", "FAILED", "UPDATING", "DELETING"
+    #   resp.agent_alias_status #=> String, one of "CREATING", "PREPARED", "FAILED", "UPDATING", "DELETING", "DISSOCIATED"
     #   resp.agent_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DeleteAgentAlias AWS API Documentation
@@ -3286,7 +3326,7 @@ module Aws::BedrockAgent
     #   resp.agent_alias.agent_alias_history_events[0].start_date #=> Time
     #   resp.agent_alias.agent_alias_id #=> String
     #   resp.agent_alias.agent_alias_name #=> String
-    #   resp.agent_alias.agent_alias_status #=> String, one of "CREATING", "PREPARED", "FAILED", "UPDATING", "DELETING"
+    #   resp.agent_alias.agent_alias_status #=> String, one of "CREATING", "PREPARED", "FAILED", "UPDATING", "DELETING", "DISSOCIATED"
     #   resp.agent_alias.agent_id #=> String
     #   resp.agent_alias.client_token #=> String
     #   resp.agent_alias.created_at #=> Time
@@ -3642,14 +3682,18 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.input_variables[0].name #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages #=> Array
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages[0].content #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages[0].content[0].cache_point.type #=> String, one of "default"
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages[0].content[0].text #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages[0].role #=> String, one of "user", "assistant"
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.system #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.system[0].cache_point.type #=> String, one of "default"
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.system[0].text #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tool_choice.tool.name #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].cache_point.type #=> String, one of "default"
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].tool_spec.description #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].tool_spec.name #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.cache_point.type #=> String, one of "default"
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables #=> Array
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables[0].name #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.text #=> String
@@ -3707,11 +3751,15 @@ module Aws::BedrockAgent
     #   resp.validations[0].details.unknown_connection_source_output.connection #=> String
     #   resp.validations[0].details.unknown_connection_target.connection #=> String
     #   resp.validations[0].details.unknown_connection_target_input.connection #=> String
+    #   resp.validations[0].details.unknown_node_input.input #=> String
+    #   resp.validations[0].details.unknown_node_input.node #=> String
+    #   resp.validations[0].details.unknown_node_output.node #=> String
+    #   resp.validations[0].details.unknown_node_output.output #=> String
     #   resp.validations[0].details.unreachable_node.node #=> String
     #   resp.validations[0].details.unsatisfied_connection_conditions.connection #=> String
     #   resp.validations[0].message #=> String
     #   resp.validations[0].severity #=> String, one of "Warning", "Error"
-    #   resp.validations[0].type #=> String, one of "CyclicConnection", "DuplicateConnections", "DuplicateConditionExpression", "UnreachableNode", "UnknownConnectionSource", "UnknownConnectionSourceOutput", "UnknownConnectionTarget", "UnknownConnectionTargetInput", "UnknownConnectionCondition", "MalformedConditionExpression", "MalformedNodeInputExpression", "MismatchedNodeInputType", "MismatchedNodeOutputType", "IncompatibleConnectionDataType", "MissingConnectionConfiguration", "MissingDefaultCondition", "MissingEndingNodes", "MissingNodeConfiguration", "MissingNodeInput", "MissingNodeOutput", "MissingStartingNodes", "MultipleNodeInputConnections", "UnfulfilledNodeInput", "UnsatisfiedConnectionConditions", "Unspecified"
+    #   resp.validations[0].type #=> String, one of "CyclicConnection", "DuplicateConnections", "DuplicateConditionExpression", "UnreachableNode", "UnknownConnectionSource", "UnknownConnectionSourceOutput", "UnknownConnectionTarget", "UnknownConnectionTargetInput", "UnknownConnectionCondition", "MalformedConditionExpression", "MalformedNodeInputExpression", "MismatchedNodeInputType", "MismatchedNodeOutputType", "IncompatibleConnectionDataType", "MissingConnectionConfiguration", "MissingDefaultCondition", "MissingEndingNodes", "MissingNodeConfiguration", "MissingNodeInput", "MissingNodeOutput", "MissingStartingNodes", "MultipleNodeInputConnections", "UnfulfilledNodeInput", "UnsatisfiedConnectionConditions", "Unspecified", "UnknownNodeInput", "UnknownNodeOutput"
     #   resp.version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetFlow AWS API Documentation
@@ -3846,14 +3894,18 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.input_variables[0].name #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages #=> Array
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages[0].content #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages[0].content[0].cache_point.type #=> String, one of "default"
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages[0].content[0].text #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages[0].role #=> String, one of "user", "assistant"
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.system #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.system[0].cache_point.type #=> String, one of "default"
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.system[0].text #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tool_choice.tool.name #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].cache_point.type #=> String, one of "default"
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].tool_spec.description #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].tool_spec.name #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.cache_point.type #=> String, one of "default"
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables #=> Array
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables[0].name #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.text #=> String
@@ -4176,14 +4228,18 @@ module Aws::BedrockAgent
     #   resp.variants[0].template_configuration.chat.input_variables[0].name #=> String
     #   resp.variants[0].template_configuration.chat.messages #=> Array
     #   resp.variants[0].template_configuration.chat.messages[0].content #=> Array
+    #   resp.variants[0].template_configuration.chat.messages[0].content[0].cache_point.type #=> String, one of "default"
     #   resp.variants[0].template_configuration.chat.messages[0].content[0].text #=> String
     #   resp.variants[0].template_configuration.chat.messages[0].role #=> String, one of "user", "assistant"
     #   resp.variants[0].template_configuration.chat.system #=> Array
+    #   resp.variants[0].template_configuration.chat.system[0].cache_point.type #=> String, one of "default"
     #   resp.variants[0].template_configuration.chat.system[0].text #=> String
     #   resp.variants[0].template_configuration.chat.tool_configuration.tool_choice.tool.name #=> String
     #   resp.variants[0].template_configuration.chat.tool_configuration.tools #=> Array
+    #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].cache_point.type #=> String, one of "default"
     #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].tool_spec.description #=> String
     #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].tool_spec.name #=> String
+    #   resp.variants[0].template_configuration.text.cache_point.type #=> String, one of "default"
     #   resp.variants[0].template_configuration.text.input_variables #=> Array
     #   resp.variants[0].template_configuration.text.input_variables[0].name #=> String
     #   resp.variants[0].template_configuration.text.text #=> String
@@ -4410,7 +4466,7 @@ module Aws::BedrockAgent
     #   resp.agent_alias_summaries #=> Array
     #   resp.agent_alias_summaries[0].agent_alias_id #=> String
     #   resp.agent_alias_summaries[0].agent_alias_name #=> String
-    #   resp.agent_alias_summaries[0].agent_alias_status #=> String, one of "CREATING", "PREPARED", "FAILED", "UPDATING", "DELETING"
+    #   resp.agent_alias_summaries[0].agent_alias_status #=> String, one of "CREATING", "PREPARED", "FAILED", "UPDATING", "DELETING", "DISSOCIATED"
     #   resp.agent_alias_summaries[0].created_at #=> Time
     #   resp.agent_alias_summaries[0].description #=> String
     #   resp.agent_alias_summaries[0].routing_configuration #=> Array
@@ -5803,7 +5859,7 @@ module Aws::BedrockAgent
     #   resp.agent_alias.agent_alias_history_events[0].start_date #=> Time
     #   resp.agent_alias.agent_alias_id #=> String
     #   resp.agent_alias.agent_alias_name #=> String
-    #   resp.agent_alias.agent_alias_status #=> String, one of "CREATING", "PREPARED", "FAILED", "UPDATING", "DELETING"
+    #   resp.agent_alias.agent_alias_status #=> String, one of "CREATING", "PREPARED", "FAILED", "UPDATING", "DELETING", "DISSOCIATED"
     #   resp.agent_alias.agent_id #=> String
     #   resp.agent_alias.client_token #=> String
     #   resp.agent_alias.created_at #=> Time
@@ -6370,6 +6426,9 @@ module Aws::BedrockAgent
     #                         {
     #                           content: [ # required
     #                             {
+    #                               cache_point: {
+    #                                 type: "default", # required, accepts default
+    #                               },
     #                               text: "String",
     #                             },
     #                           ],
@@ -6378,6 +6437,9 @@ module Aws::BedrockAgent
     #                       ],
     #                       system: [
     #                         {
+    #                           cache_point: {
+    #                             type: "default", # required, accepts default
+    #                           },
     #                           text: "NonEmptyString",
     #                         },
     #                       ],
@@ -6393,6 +6455,9 @@ module Aws::BedrockAgent
     #                         },
     #                         tools: [ # required
     #                           {
+    #                             cache_point: {
+    #                               type: "default", # required, accepts default
+    #                             },
     #                             tool_spec: {
     #                               description: "NonEmptyString",
     #                               input_schema: { # required
@@ -6406,6 +6471,9 @@ module Aws::BedrockAgent
     #                       },
     #                     },
     #                     text: {
+    #                       cache_point: {
+    #                         type: "default", # required, accepts default
+    #                       },
     #                       input_variables: [
     #                         {
     #                           name: "PromptInputVariableName",
@@ -6497,14 +6565,18 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.input_variables[0].name #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages #=> Array
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages[0].content #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages[0].content[0].cache_point.type #=> String, one of "default"
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages[0].content[0].text #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.messages[0].role #=> String, one of "user", "assistant"
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.system #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.system[0].cache_point.type #=> String, one of "default"
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.system[0].text #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tool_choice.tool.name #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].cache_point.type #=> String, one of "default"
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].tool_spec.description #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.chat.tool_configuration.tools[0].tool_spec.name #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.cache_point.type #=> String, one of "default"
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables #=> Array
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables[0].name #=> String
     #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.text #=> String
@@ -6985,6 +7057,9 @@ module Aws::BedrockAgent
     #               {
     #                 content: [ # required
     #                   {
+    #                     cache_point: {
+    #                       type: "default", # required, accepts default
+    #                     },
     #                     text: "String",
     #                   },
     #                 ],
@@ -6993,6 +7068,9 @@ module Aws::BedrockAgent
     #             ],
     #             system: [
     #               {
+    #                 cache_point: {
+    #                   type: "default", # required, accepts default
+    #                 },
     #                 text: "NonEmptyString",
     #               },
     #             ],
@@ -7008,6 +7086,9 @@ module Aws::BedrockAgent
     #               },
     #               tools: [ # required
     #                 {
+    #                   cache_point: {
+    #                     type: "default", # required, accepts default
+    #                   },
     #                   tool_spec: {
     #                     description: "NonEmptyString",
     #                     input_schema: { # required
@@ -7021,6 +7102,9 @@ module Aws::BedrockAgent
     #             },
     #           },
     #           text: {
+    #             cache_point: {
+    #               type: "default", # required, accepts default
+    #             },
     #             input_variables: [
     #               {
     #                 name: "PromptInputVariableName",
@@ -7060,14 +7144,18 @@ module Aws::BedrockAgent
     #   resp.variants[0].template_configuration.chat.input_variables[0].name #=> String
     #   resp.variants[0].template_configuration.chat.messages #=> Array
     #   resp.variants[0].template_configuration.chat.messages[0].content #=> Array
+    #   resp.variants[0].template_configuration.chat.messages[0].content[0].cache_point.type #=> String, one of "default"
     #   resp.variants[0].template_configuration.chat.messages[0].content[0].text #=> String
     #   resp.variants[0].template_configuration.chat.messages[0].role #=> String, one of "user", "assistant"
     #   resp.variants[0].template_configuration.chat.system #=> Array
+    #   resp.variants[0].template_configuration.chat.system[0].cache_point.type #=> String, one of "default"
     #   resp.variants[0].template_configuration.chat.system[0].text #=> String
     #   resp.variants[0].template_configuration.chat.tool_configuration.tool_choice.tool.name #=> String
     #   resp.variants[0].template_configuration.chat.tool_configuration.tools #=> Array
+    #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].cache_point.type #=> String, one of "default"
     #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].tool_spec.description #=> String
     #   resp.variants[0].template_configuration.chat.tool_configuration.tools[0].tool_spec.name #=> String
+    #   resp.variants[0].template_configuration.text.cache_point.type #=> String, one of "default"
     #   resp.variants[0].template_configuration.text.input_variables #=> Array
     #   resp.variants[0].template_configuration.text.input_variables[0].name #=> String
     #   resp.variants[0].template_configuration.text.text #=> String
@@ -7179,6 +7267,9 @@ module Aws::BedrockAgent
     #                         {
     #                           content: [ # required
     #                             {
+    #                               cache_point: {
+    #                                 type: "default", # required, accepts default
+    #                               },
     #                               text: "String",
     #                             },
     #                           ],
@@ -7187,6 +7278,9 @@ module Aws::BedrockAgent
     #                       ],
     #                       system: [
     #                         {
+    #                           cache_point: {
+    #                             type: "default", # required, accepts default
+    #                           },
     #                           text: "NonEmptyString",
     #                         },
     #                       ],
@@ -7202,6 +7296,9 @@ module Aws::BedrockAgent
     #                         },
     #                         tools: [ # required
     #                           {
+    #                             cache_point: {
+    #                               type: "default", # required, accepts default
+    #                             },
     #                             tool_spec: {
     #                               description: "NonEmptyString",
     #                               input_schema: { # required
@@ -7215,6 +7312,9 @@ module Aws::BedrockAgent
     #                       },
     #                     },
     #                     text: {
+    #                       cache_point: {
+    #                         type: "default", # required, accepts default
+    #                       },
     #                       input_variables: [
     #                         {
     #                           name: "PromptInputVariableName",
@@ -7302,11 +7402,15 @@ module Aws::BedrockAgent
     #   resp.validations[0].details.unknown_connection_source_output.connection #=> String
     #   resp.validations[0].details.unknown_connection_target.connection #=> String
     #   resp.validations[0].details.unknown_connection_target_input.connection #=> String
+    #   resp.validations[0].details.unknown_node_input.input #=> String
+    #   resp.validations[0].details.unknown_node_input.node #=> String
+    #   resp.validations[0].details.unknown_node_output.node #=> String
+    #   resp.validations[0].details.unknown_node_output.output #=> String
     #   resp.validations[0].details.unreachable_node.node #=> String
     #   resp.validations[0].details.unsatisfied_connection_conditions.connection #=> String
     #   resp.validations[0].message #=> String
     #   resp.validations[0].severity #=> String, one of "Warning", "Error"
-    #   resp.validations[0].type #=> String, one of "CyclicConnection", "DuplicateConnections", "DuplicateConditionExpression", "UnreachableNode", "UnknownConnectionSource", "UnknownConnectionSourceOutput", "UnknownConnectionTarget", "UnknownConnectionTargetInput", "UnknownConnectionCondition", "MalformedConditionExpression", "MalformedNodeInputExpression", "MismatchedNodeInputType", "MismatchedNodeOutputType", "IncompatibleConnectionDataType", "MissingConnectionConfiguration", "MissingDefaultCondition", "MissingEndingNodes", "MissingNodeConfiguration", "MissingNodeInput", "MissingNodeOutput", "MissingStartingNodes", "MultipleNodeInputConnections", "UnfulfilledNodeInput", "UnsatisfiedConnectionConditions", "Unspecified"
+    #   resp.validations[0].type #=> String, one of "CyclicConnection", "DuplicateConnections", "DuplicateConditionExpression", "UnreachableNode", "UnknownConnectionSource", "UnknownConnectionSourceOutput", "UnknownConnectionTarget", "UnknownConnectionTargetInput", "UnknownConnectionCondition", "MalformedConditionExpression", "MalformedNodeInputExpression", "MismatchedNodeInputType", "MismatchedNodeOutputType", "IncompatibleConnectionDataType", "MissingConnectionConfiguration", "MissingDefaultCondition", "MissingEndingNodes", "MissingNodeConfiguration", "MissingNodeInput", "MissingNodeOutput", "MissingStartingNodes", "MultipleNodeInputConnections", "UnfulfilledNodeInput", "UnsatisfiedConnectionConditions", "Unspecified", "UnknownNodeInput", "UnknownNodeOutput"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ValidateFlowDefinition AWS API Documentation
     #
@@ -7335,7 +7439,7 @@ module Aws::BedrockAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagent'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

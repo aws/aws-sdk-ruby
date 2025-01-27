@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.101.0 (2025-01-27)
+------------------
+
+* Feature - Minor fix to ARN validation for Lambda functions passed to S3 Batch Operations
+
 1.100.0 (2025-01-15)
 ------------------
 

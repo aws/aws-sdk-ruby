@@ -449,6 +449,8 @@ module Aws::BedrockAgent
     #   * UPDATING – The agent alias is being updated.
     #
     #   * DELETING – The agent alias is being deleted.
+    #
+    #   * DISSOCIATED - The agent alias has no version associated with it.
     #   @return [String]
     #
     # @!attribute [rw] agent_id
@@ -1328,6 +1330,21 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
+    # Indicates where a cache checkpoint is located. All information before
+    # this checkpoint is cached to be accessed on subsequent requests.
+    #
+    # @!attribute [rw] type
+    #   Indicates that the CachePointBlock is of the default type
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CachePointBlock AWS API Documentation
+    #
+    class CachePointBlock < Struct.new(
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains configurations to use a prompt in a conversational format.
     # For more information, see [Create a prompt using Prompt
     # management][1].
@@ -1561,6 +1578,10 @@ module Aws::BedrockAgent
     #
     # @note ContentBlock is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ContentBlock corresponding to the set member.
     #
+    # @!attribute [rw] cache_point
+    #   Creates a cache checkpoint within a message.
+    #   @return [Types::CachePointBlock]
+    #
     # @!attribute [rw] text
     #   The text in the message.
     #   @return [String]
@@ -1568,12 +1589,14 @@ module Aws::BedrockAgent
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ContentBlock AWS API Documentation
     #
     class ContentBlock < Struct.new(
+      :cache_point,
       :text,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
+      class CachePoint < ContentBlock; end
       class Text < ContentBlock; end
       class Unknown < ContentBlock; end
     end
@@ -4247,6 +4270,14 @@ module Aws::BedrockAgent
     #   Details about an unknown target input for a connection.
     #   @return [Types::UnknownConnectionTargetInputFlowValidationDetails]
     #
+    # @!attribute [rw] unknown_node_input
+    #   Details about an unknown input for a node.
+    #   @return [Types::UnknownNodeInputFlowValidationDetails]
+    #
+    # @!attribute [rw] unknown_node_output
+    #   Details about an unknown output for a node.
+    #   @return [Types::UnknownNodeOutputFlowValidationDetails]
+    #
     # @!attribute [rw] unreachable_node
     #   Details about an unreachable node in the flow.
     #   @return [Types::UnreachableNodeFlowValidationDetails]
@@ -4284,6 +4315,8 @@ module Aws::BedrockAgent
       :unknown_connection_source_output,
       :unknown_connection_target,
       :unknown_connection_target_input,
+      :unknown_node_input,
+      :unknown_node_output,
       :unreachable_node,
       :unsatisfied_connection_conditions,
       :unspecified,
@@ -4314,6 +4347,8 @@ module Aws::BedrockAgent
       class UnknownConnectionSourceOutput < FlowValidationDetails; end
       class UnknownConnectionTarget < FlowValidationDetails; end
       class UnknownConnectionTargetInput < FlowValidationDetails; end
+      class UnknownNodeInput < FlowValidationDetails; end
+      class UnknownNodeOutput < FlowValidationDetails; end
       class UnreachableNode < FlowValidationDetails; end
       class UnsatisfiedConnectionConditions < FlowValidationDetails; end
       class Unspecified < FlowValidationDetails; end
@@ -9162,6 +9197,10 @@ module Aws::BedrockAgent
     #
     # @note SystemContentBlock is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of SystemContentBlock corresponding to the set member.
     #
+    # @!attribute [rw] cache_point
+    #   Creates a cache checkpoint within a tool designation
+    #   @return [Types::CachePointBlock]
+    #
     # @!attribute [rw] text
     #   The text in the system prompt.
     #   @return [String]
@@ -9169,12 +9208,14 @@ module Aws::BedrockAgent
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/SystemContentBlock AWS API Documentation
     #
     class SystemContentBlock < Struct.new(
+      :cache_point,
       :text,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
+      class CachePoint < SystemContentBlock; end
       class Text < SystemContentBlock; end
       class Unknown < SystemContentBlock; end
     end
@@ -9218,6 +9259,10 @@ module Aws::BedrockAgent
     # Contains configurations for a text prompt template. To include a
     # variable, enclose a word in double curly braces as in `{{variable}}`.
     #
+    # @!attribute [rw] cache_point
+    #   A cache checkpoint within a template configuration.
+    #   @return [Types::CachePointBlock]
+    #
     # @!attribute [rw] input_variables
     #   An array of the variables in the prompt template.
     #   @return [Array<Types::PromptInputVariable>]
@@ -9229,6 +9274,7 @@ module Aws::BedrockAgent
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/TextPromptTemplateConfiguration AWS API Documentation
     #
     class TextPromptTemplateConfiguration < Struct.new(
+      :cache_point,
       :input_variables,
       :text)
       SENSITIVE = [:input_variables, :text]
@@ -9260,6 +9306,10 @@ module Aws::BedrockAgent
     #
     # @note Tool is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Tool corresponding to the set member.
     #
+    # @!attribute [rw] cache_point
+    #   Creates a cache checkpoint within a tool designation
+    #   @return [Types::CachePointBlock]
+    #
     # @!attribute [rw] tool_spec
     #   The specification for the tool.
     #   @return [Types::ToolSpecification]
@@ -9267,12 +9317,14 @@ module Aws::BedrockAgent
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/Tool AWS API Documentation
     #
     class Tool < Struct.new(
+      :cache_point,
       :tool_spec,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
+      class CachePoint < Tool; end
       class ToolSpec < Tool; end
       class Unknown < Tool; end
     end
@@ -9540,6 +9592,44 @@ module Aws::BedrockAgent
     #
     class UnknownConnectionTargetInputFlowValidationDetails < Struct.new(
       :connection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about an unknown input for a node.
+    #
+    # @!attribute [rw] input
+    #   The name of the node with the unknown input.
+    #   @return [String]
+    #
+    # @!attribute [rw] node
+    #   The name of the unknown input.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UnknownNodeInputFlowValidationDetails AWS API Documentation
+    #
+    class UnknownNodeInputFlowValidationDetails < Struct.new(
+      :input,
+      :node)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about an unknown output for a node.
+    #
+    # @!attribute [rw] node
+    #   The name of the node with the unknown output.
+    #   @return [String]
+    #
+    # @!attribute [rw] output
+    #   The name of the unknown output.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UnknownNodeOutputFlowValidationDetails AWS API Documentation
+    #
+    class UnknownNodeOutputFlowValidationDetails < Struct.new(
+      :node,
+      :output)
       SENSITIVE = []
       include Aws::Structure
     end

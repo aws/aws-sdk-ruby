@@ -69,6 +69,8 @@ module Aws::BedrockAgent
     ByteContentBlob = Shapes::BlobShape.new(name: 'ByteContentBlob')
     ByteContentDoc = Shapes::StructureShape.new(name: 'ByteContentDoc')
     ByteContentDocMimeTypeString = Shapes::StringShape.new(name: 'ByteContentDocMimeTypeString')
+    CachePointBlock = Shapes::StructureShape.new(name: 'CachePointBlock')
+    CachePointType = Shapes::StringShape.new(name: 'CachePointType')
     ChatPromptTemplateConfiguration = Shapes::StructureShape.new(name: 'ChatPromptTemplateConfiguration')
     ChunkingConfiguration = Shapes::StructureShape.new(name: 'ChunkingConfiguration')
     ChunkingStrategy = Shapes::StringShape.new(name: 'ChunkingStrategy')
@@ -586,6 +588,8 @@ module Aws::BedrockAgent
     UnknownConnectionSourceOutputFlowValidationDetails = Shapes::StructureShape.new(name: 'UnknownConnectionSourceOutputFlowValidationDetails')
     UnknownConnectionTargetFlowValidationDetails = Shapes::StructureShape.new(name: 'UnknownConnectionTargetFlowValidationDetails')
     UnknownConnectionTargetInputFlowValidationDetails = Shapes::StructureShape.new(name: 'UnknownConnectionTargetInputFlowValidationDetails')
+    UnknownNodeInputFlowValidationDetails = Shapes::StructureShape.new(name: 'UnknownNodeInputFlowValidationDetails')
+    UnknownNodeOutputFlowValidationDetails = Shapes::StructureShape.new(name: 'UnknownNodeOutputFlowValidationDetails')
     UnreachableNodeFlowValidationDetails = Shapes::StructureShape.new(name: 'UnreachableNodeFlowValidationDetails')
     UnsatisfiedConnectionConditionsFlowValidationDetails = Shapes::StructureShape.new(name: 'UnsatisfiedConnectionConditionsFlowValidationDetails')
     UnspecifiedFlowValidationDetails = Shapes::StructureShape.new(name: 'UnspecifiedFlowValidationDetails')
@@ -872,6 +876,9 @@ module Aws::BedrockAgent
     ByteContentDoc.add_member(:mime_type, Shapes::ShapeRef.new(shape: ByteContentDocMimeTypeString, required: true, location_name: "mimeType"))
     ByteContentDoc.struct_class = Types::ByteContentDoc
 
+    CachePointBlock.add_member(:type, Shapes::ShapeRef.new(shape: CachePointType, required: true, location_name: "type"))
+    CachePointBlock.struct_class = Types::CachePointBlock
+
     ChatPromptTemplateConfiguration.add_member(:input_variables, Shapes::ShapeRef.new(shape: PromptInputVariablesList, location_name: "inputVariables"))
     ChatPromptTemplateConfiguration.add_member(:messages, Shapes::ShapeRef.new(shape: Messages, required: true, location_name: "messages"))
     ChatPromptTemplateConfiguration.add_member(:system, Shapes::ShapeRef.new(shape: SystemContentBlocks, location_name: "system"))
@@ -905,8 +912,10 @@ module Aws::BedrockAgent
     ConfluenceSourceConfiguration.add_member(:host_url, Shapes::ShapeRef.new(shape: HttpsUrl, required: true, location_name: "hostUrl"))
     ConfluenceSourceConfiguration.struct_class = Types::ConfluenceSourceConfiguration
 
+    ContentBlock.add_member(:cache_point, Shapes::ShapeRef.new(shape: CachePointBlock, location_name: "cachePoint"))
     ContentBlock.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "text"))
     ContentBlock.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ContentBlock.add_member_subclass(:cache_point, Types::ContentBlock::CachePoint)
     ContentBlock.add_member_subclass(:text, Types::ContentBlock::Text)
     ContentBlock.add_member_subclass(:unknown, Types::ContentBlock::Unknown)
     ContentBlock.struct_class = Types::ContentBlock
@@ -1432,6 +1441,8 @@ module Aws::BedrockAgent
     FlowValidationDetails.add_member(:unknown_connection_source_output, Shapes::ShapeRef.new(shape: UnknownConnectionSourceOutputFlowValidationDetails, location_name: "unknownConnectionSourceOutput"))
     FlowValidationDetails.add_member(:unknown_connection_target, Shapes::ShapeRef.new(shape: UnknownConnectionTargetFlowValidationDetails, location_name: "unknownConnectionTarget"))
     FlowValidationDetails.add_member(:unknown_connection_target_input, Shapes::ShapeRef.new(shape: UnknownConnectionTargetInputFlowValidationDetails, location_name: "unknownConnectionTargetInput"))
+    FlowValidationDetails.add_member(:unknown_node_input, Shapes::ShapeRef.new(shape: UnknownNodeInputFlowValidationDetails, location_name: "unknownNodeInput"))
+    FlowValidationDetails.add_member(:unknown_node_output, Shapes::ShapeRef.new(shape: UnknownNodeOutputFlowValidationDetails, location_name: "unknownNodeOutput"))
     FlowValidationDetails.add_member(:unreachable_node, Shapes::ShapeRef.new(shape: UnreachableNodeFlowValidationDetails, location_name: "unreachableNode"))
     FlowValidationDetails.add_member(:unsatisfied_connection_conditions, Shapes::ShapeRef.new(shape: UnsatisfiedConnectionConditionsFlowValidationDetails, location_name: "unsatisfiedConnectionConditions"))
     FlowValidationDetails.add_member(:unspecified, Shapes::ShapeRef.new(shape: UnspecifiedFlowValidationDetails, location_name: "unspecified"))
@@ -1458,6 +1469,8 @@ module Aws::BedrockAgent
     FlowValidationDetails.add_member_subclass(:unknown_connection_source_output, Types::FlowValidationDetails::UnknownConnectionSourceOutput)
     FlowValidationDetails.add_member_subclass(:unknown_connection_target, Types::FlowValidationDetails::UnknownConnectionTarget)
     FlowValidationDetails.add_member_subclass(:unknown_connection_target_input, Types::FlowValidationDetails::UnknownConnectionTargetInput)
+    FlowValidationDetails.add_member_subclass(:unknown_node_input, Types::FlowValidationDetails::UnknownNodeInput)
+    FlowValidationDetails.add_member_subclass(:unknown_node_output, Types::FlowValidationDetails::UnknownNodeOutput)
     FlowValidationDetails.add_member_subclass(:unreachable_node, Types::FlowValidationDetails::UnreachableNode)
     FlowValidationDetails.add_member_subclass(:unsatisfied_connection_conditions, Types::FlowValidationDetails::UnsatisfiedConnectionConditions)
     FlowValidationDetails.add_member_subclass(:unspecified, Types::FlowValidationDetails::Unspecified)
@@ -2389,8 +2402,10 @@ module Aws::BedrockAgent
 
     SupplementalDataStorageLocations.member = Shapes::ShapeRef.new(shape: SupplementalDataStorageLocation)
 
+    SystemContentBlock.add_member(:cache_point, Shapes::ShapeRef.new(shape: CachePointBlock, location_name: "cachePoint"))
     SystemContentBlock.add_member(:text, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "text"))
     SystemContentBlock.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    SystemContentBlock.add_member_subclass(:cache_point, Types::SystemContentBlock::CachePoint)
     SystemContentBlock.add_member_subclass(:text, Types::SystemContentBlock::Text)
     SystemContentBlock.add_member_subclass(:unknown, Types::SystemContentBlock::Unknown)
     SystemContentBlock.struct_class = Types::SystemContentBlock
@@ -2411,6 +2426,7 @@ module Aws::BedrockAgent
     TextContentDoc.add_member(:data, Shapes::ShapeRef.new(shape: Data, required: true, location_name: "data"))
     TextContentDoc.struct_class = Types::TextContentDoc
 
+    TextPromptTemplateConfiguration.add_member(:cache_point, Shapes::ShapeRef.new(shape: CachePointBlock, location_name: "cachePoint"))
     TextPromptTemplateConfiguration.add_member(:input_variables, Shapes::ShapeRef.new(shape: PromptInputVariablesList, location_name: "inputVariables"))
     TextPromptTemplateConfiguration.add_member(:text, Shapes::ShapeRef.new(shape: TextPrompt, required: true, location_name: "text"))
     TextPromptTemplateConfiguration.struct_class = Types::TextPromptTemplateConfiguration
@@ -2418,8 +2434,10 @@ module Aws::BedrockAgent
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
+    Tool.add_member(:cache_point, Shapes::ShapeRef.new(shape: CachePointBlock, location_name: "cachePoint"))
     Tool.add_member(:tool_spec, Shapes::ShapeRef.new(shape: ToolSpecification, location_name: "toolSpec"))
     Tool.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    Tool.add_member_subclass(:cache_point, Types::Tool::CachePoint)
     Tool.add_member_subclass(:tool_spec, Types::Tool::ToolSpec)
     Tool.add_member_subclass(:unknown, Types::Tool::Unknown)
     Tool.struct_class = Types::Tool
@@ -2481,6 +2499,14 @@ module Aws::BedrockAgent
 
     UnknownConnectionTargetInputFlowValidationDetails.add_member(:connection, Shapes::ShapeRef.new(shape: FlowConnectionName, required: true, location_name: "connection"))
     UnknownConnectionTargetInputFlowValidationDetails.struct_class = Types::UnknownConnectionTargetInputFlowValidationDetails
+
+    UnknownNodeInputFlowValidationDetails.add_member(:input, Shapes::ShapeRef.new(shape: FlowNodeInputName, required: true, location_name: "input"))
+    UnknownNodeInputFlowValidationDetails.add_member(:node, Shapes::ShapeRef.new(shape: FlowNodeName, required: true, location_name: "node"))
+    UnknownNodeInputFlowValidationDetails.struct_class = Types::UnknownNodeInputFlowValidationDetails
+
+    UnknownNodeOutputFlowValidationDetails.add_member(:node, Shapes::ShapeRef.new(shape: FlowNodeName, required: true, location_name: "node"))
+    UnknownNodeOutputFlowValidationDetails.add_member(:output, Shapes::ShapeRef.new(shape: FlowNodeOutputName, required: true, location_name: "output"))
+    UnknownNodeOutputFlowValidationDetails.struct_class = Types::UnknownNodeOutputFlowValidationDetails
 
     UnreachableNodeFlowValidationDetails.add_member(:node, Shapes::ShapeRef.new(shape: FlowNodeName, required: true, location_name: "node"))
     UnreachableNodeFlowValidationDetails.struct_class = Types::UnreachableNodeFlowValidationDetails

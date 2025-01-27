@@ -719,7 +719,8 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] external_audio_file_input
-    #   Specifies audio data from an external file source.
+    #   Specify the S3, HTTP, or HTTPS URL for your external audio file
+    #   input.
     #   @return [String]
     #
     # @!attribute [rw] hls_rendition_group_settings
@@ -736,12 +737,16 @@ module Aws::MediaConvert
     #   @return [Types::HlsRenditionGroupSettings]
     #
     # @!attribute [rw] language_code
-    #   Selects a specific language code from within an audio source.
+    #   Specify the language to select from your audio input. In the
+    #   MediaConvert console choose from a list of languages. In your JSON
+    #   job settings choose from an ISO 639-2 three-letter code listed at
+    #   https://www.loc.gov/standards/iso639-2/php/code\_list.php
     #   @return [String]
     #
     # @!attribute [rw] offset
-    #   Specifies a time delta in milliseconds to offset the audio from the
-    #   input video.
+    #   Specify a time delta, in milliseconds, to offset the audio from the
+    #   input video. To specify no offset: Keep the default value, 0. To
+    #   specify an offset: Enter an integer from -2147483648 to 2147483647
     #   @return [Integer]
     #
     # @!attribute [rw] pids
@@ -4339,6 +4344,77 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Use Dynamic audio selectors when you do not know the track layout of
+    # your source when you submit your job, but want to select multiple
+    # audio tracks. When you include an audio track in your output and
+    # specify this Dynamic audio selector as the Audio source, MediaConvert
+    # creates an output audio track for each dynamically selected track.
+    # Note that when you include a Dynamic audio selector for two or more
+    # inputs, each input must have the same number of audio tracks and audio
+    # channels.
+    #
+    # @!attribute [rw] audio_duration_correction
+    #   Apply audio timing corrections to help synchronize audio and video
+    #   in your output. To apply timing corrections, your input must meet
+    #   the following requirements: * Container: MP4, or MOV, with an
+    #   accurate time-to-sample (STTS) table. * Audio track: AAC. Choose
+    #   from the following audio timing correction settings: * Disabled
+    #   (Default): Apply no correction. * Auto: Recommended for most
+    #   inputs. MediaConvert analyzes the audio timing in your input and
+    #   determines which correction setting to use, if needed. * Track:
+    #   Adjust the duration of each audio frame by a constant amount to
+    #   align the audio track length with STTS duration. Track-level
+    #   correction does not affect pitch, and is recommended for tonal audio
+    #   content such as music. * Frame: Adjust the duration of each audio
+    #   frame by a variable amount to align audio frames with STTS
+    #   timestamps. No corrections are made to already-aligned frames.
+    #   Frame-level correction may affect the pitch of corrected frames, and
+    #   is recommended for atonal audio content such as speech or
+    #   percussion. * Force: Apply audio duration correction, either Track
+    #   or Frame depending on your input, regardless of the accuracy of your
+    #   input's STTS table. Your output audio and video may not be aligned
+    #   or it may contain audio artifacts.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_audio_file_input
+    #   Specify the S3, HTTP, or HTTPS URL for your external audio file
+    #   input.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   Specify the language to select from your audio input. In the
+    #   MediaConvert console choose from a list of languages. In your JSON
+    #   job settings choose from an ISO 639-2 three-letter code listed at
+    #   https://www.loc.gov/standards/iso639-2/php/code\_list.php
+    #   @return [String]
+    #
+    # @!attribute [rw] offset
+    #   Specify a time delta, in milliseconds, to offset the audio from the
+    #   input video. To specify no offset: Keep the default value, 0. To
+    #   specify an offset: Enter an integer from -2147483648 to 2147483647
+    #   @return [Integer]
+    #
+    # @!attribute [rw] selector_type
+    #   Specify which audio tracks to dynamically select from your source.
+    #   To select all audio tracks: Keep the default value, All tracks. To
+    #   select all audio tracks with a specific language code: Choose
+    #   Language code. When you do, you must also specify a language code
+    #   under the Language code setting. If there is no matching Language
+    #   code in your source, then no track will be selected.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DynamicAudioSelector AWS API Documentation
+    #
+    class DynamicAudioSelector < Struct.new(
+      :audio_duration_correction,
+      :external_audio_file_input,
+      :language_code,
+      :offset,
+      :selector_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Required when you set Codec to the value EAC3\_ATMOS.
     #
     # @!attribute [rw] bitrate
@@ -6005,6 +6081,15 @@ module Aws::MediaConvert
     #   available with the HEVC 4:2:2 License.
     #   @return [String]
     #
+    # @!attribute [rw] deblocking
+    #   Use Deblocking to improve the video quality of your output by
+    #   smoothing the edges of macroblock artifacts created during video
+    #   compression. To reduce blocking artifacts at block boundaries, and
+    #   improve overall video quality: Keep the default value, Enabled. To
+    #   not apply any deblocking: Choose Disabled. Visible block edge
+    #   artifacts might appear in the output, especially at lower bitrates.
+    #   @return [String]
+    #
     # @!attribute [rw] dynamic_sub_gop
     #   Specify whether to allow the number of B-frames in your output GOP
     #   structure to vary or not depending on your input video content. To
@@ -6385,6 +6470,7 @@ module Aws::MediaConvert
       :bitrate,
       :codec_level,
       :codec_profile,
+      :deblocking,
       :dynamic_sub_gop,
       :end_of_stream_markers,
       :flicker_adaptive_quantization,
@@ -7338,6 +7424,17 @@ module Aws::MediaConvert
     #   https://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html.
     #   @return [String]
     #
+    # @!attribute [rw] dynamic_audio_selectors
+    #   Use Dynamic audio selectors when you do not know the track layout of
+    #   your source when you submit your job, but want to select multiple
+    #   audio tracks. When you include an audio track in your output and
+    #   specify this Dynamic audio selector as the Audio source,
+    #   MediaConvert creates an output audio track for each dynamically
+    #   selected track. Note that when you include a Dynamic audio selector
+    #   for two or more inputs, each input must have the same number of
+    #   audio tracks and audio channels.
+    #   @return [Hash<String,Types::DynamicAudioSelector>]
+    #
     # @!attribute [rw] file_input
     #   Specify the source file for your transcoding job. You can use
     #   multiple inputs in a single job. The service concatenates these
@@ -7484,6 +7581,7 @@ module Aws::MediaConvert
       :decryption_settings,
       :denoise_filter,
       :dolby_vision_metadata_xml,
+      :dynamic_audio_selectors,
       :file_input,
       :filter_enable,
       :filter_strength,
@@ -7661,6 +7759,17 @@ module Aws::MediaConvert
     #   https://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html.
     #   @return [String]
     #
+    # @!attribute [rw] dynamic_audio_selectors
+    #   Use Dynamic audio selectors when you do not know the track layout of
+    #   your source when you submit your job, but want to select multiple
+    #   audio tracks. When you include an audio track in your output and
+    #   specify this Dynamic audio selector as the Audio source,
+    #   MediaConvert creates an output audio track for each dynamically
+    #   selected track. Note that when you include a Dynamic audio selector
+    #   for two or more inputs, each input must have the same number of
+    #   audio tracks and audio channels.
+    #   @return [Hash<String,Types::DynamicAudioSelector>]
+    #
     # @!attribute [rw] filter_enable
     #   Specify whether to apply input filtering to improve the video
     #   quality of your input. To apply filtering depending on your input
@@ -7776,6 +7885,7 @@ module Aws::MediaConvert
       :deblock_filter,
       :denoise_filter,
       :dolby_vision_metadata_xml,
+      :dynamic_audio_selectors,
       :filter_enable,
       :filter_strength,
       :image_inserter,

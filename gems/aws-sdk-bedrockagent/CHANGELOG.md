@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2025-01-27)
+------------------
+
+* Feature - Add support for the prompt caching feature for Bedrock Prompt Management
+
 1.42.0 (2025-01-15)
 ------------------
 

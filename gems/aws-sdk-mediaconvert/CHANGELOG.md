@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.149.0 (2025-01-27)
+------------------
+
+* Feature - This release adds support for dynamic audio configuration and the ability to disable the deblocking filter for h265 encodes.
+
 1.148.0 (2025-01-15)
 ------------------
 

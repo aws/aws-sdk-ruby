@@ -493,6 +493,9 @@ module Aws
                                              {
                                                content: Array[
                                                  {
+                                                   cache_point: {
+                                                     type: ("default")
+                                                   }?,
                                                    text: ::String?
                                                  },
                                                ],
@@ -501,6 +504,9 @@ module Aws
                                            ],
                                            system: Array[
                                              {
+                                               cache_point: {
+                                                 type: ("default")
+                                               }?,
                                                text: ::String?
                                              },
                                            ]?,
@@ -516,6 +522,9 @@ module Aws
                                              }?,
                                              tools: Array[
                                                {
+                                                 cache_point: {
+                                                   type: ("default")
+                                                 }?,
                                                  tool_spec: {
                                                    description: ::String?,
                                                    input_schema: {
@@ -529,6 +538,9 @@ module Aws
                                            }?
                                          }?,
                                          text: {
+                                           cache_point: {
+                                             type: ("default")
+                                           }?,
                                            input_variables: Array[
                                              {
                                                name: ::String?
@@ -842,6 +854,9 @@ module Aws
                                      {
                                        content: Array[
                                          {
+                                           cache_point: {
+                                             type: ("default")
+                                           }?,
                                            text: ::String?
                                          },
                                        ],
@@ -850,6 +865,9 @@ module Aws
                                    ],
                                    system: Array[
                                      {
+                                       cache_point: {
+                                         type: ("default")
+                                       }?,
                                        text: ::String?
                                      },
                                    ]?,
@@ -865,6 +883,9 @@ module Aws
                                      }?,
                                      tools: Array[
                                        {
+                                         cache_point: {
+                                           type: ("default")
+                                         }?,
                                          tool_spec: {
                                            description: ::String?,
                                            input_schema: {
@@ -878,6 +899,9 @@ module Aws
                                    }?
                                  }?,
                                  text: {
+                                   cache_point: {
+                                     type: ("default")
+                                   }?,
                                    input_variables: Array[
                                      {
                                        name: ::String?
@@ -941,7 +965,7 @@ module Aws
       interface _DeleteAgentAliasResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAgentAliasResponse]
         def agent_alias_id: () -> ::String
-        def agent_alias_status: () -> ("CREATING" | "PREPARED" | "FAILED" | "UPDATING" | "DELETING")
+        def agent_alias_status: () -> ("CREATING" | "PREPARED" | "FAILED" | "UPDATING" | "DELETING" | "DISSOCIATED")
         def agent_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#delete_agent_alias-instance_method
@@ -2034,6 +2058,9 @@ module Aws
                                              {
                                                content: Array[
                                                  {
+                                                   cache_point: {
+                                                     type: ("default")
+                                                   }?,
                                                    text: ::String?
                                                  },
                                                ],
@@ -2042,6 +2069,9 @@ module Aws
                                            ],
                                            system: Array[
                                              {
+                                               cache_point: {
+                                                 type: ("default")
+                                               }?,
                                                text: ::String?
                                              },
                                            ]?,
@@ -2057,6 +2087,9 @@ module Aws
                                              }?,
                                              tools: Array[
                                                {
+                                                 cache_point: {
+                                                   type: ("default")
+                                                 }?,
                                                  tool_spec: {
                                                    description: ::String?,
                                                    input_schema: {
@@ -2070,6 +2103,9 @@ module Aws
                                            }?
                                          }?,
                                          text: {
+                                           cache_point: {
+                                             type: ("default")
+                                           }?,
                                            input_variables: Array[
                                              {
                                                name: ::String?
@@ -2359,6 +2395,9 @@ module Aws
                                      {
                                        content: Array[
                                          {
+                                           cache_point: {
+                                             type: ("default")
+                                           }?,
                                            text: ::String?
                                          },
                                        ],
@@ -2367,6 +2406,9 @@ module Aws
                                    ],
                                    system: Array[
                                      {
+                                       cache_point: {
+                                         type: ("default")
+                                       }?,
                                        text: ::String?
                                      },
                                    ]?,
@@ -2382,6 +2424,9 @@ module Aws
                                      }?,
                                      tools: Array[
                                        {
+                                         cache_point: {
+                                           type: ("default")
+                                         }?,
                                          tool_spec: {
                                            description: ::String?,
                                            input_schema: {
@@ -2395,6 +2440,9 @@ module Aws
                                    }?
                                  }?,
                                  text: {
+                                   cache_point: {
+                                     type: ("default")
+                                   }?,
                                    input_variables: Array[
                                      {
                                        name: ::String?
@@ -2499,6 +2547,9 @@ module Aws
                                                           {
                                                             content: Array[
                                                               {
+                                                                cache_point: {
+                                                                  type: ("default")
+                                                                }?,
                                                                 text: ::String?
                                                               },
                                                             ],
@@ -2507,6 +2558,9 @@ module Aws
                                                         ],
                                                         system: Array[
                                                           {
+                                                            cache_point: {
+                                                              type: ("default")
+                                                            }?,
                                                             text: ::String?
                                                           },
                                                         ]?,
@@ -2522,6 +2576,9 @@ module Aws
                                                           }?,
                                                           tools: Array[
                                                             {
+                                                              cache_point: {
+                                                                type: ("default")
+                                                              }?,
                                                               tool_spec: {
                                                                 description: ::String?,
                                                                 input_schema: {
@@ -2535,6 +2592,9 @@ module Aws
                                                         }?
                                                       }?,
                                                       text: {
+                                                        cache_point: {
+                                                          type: ("default")
+                                                        }?,
                                                         input_variables: Array[
                                                           {
                                                             name: ::String?

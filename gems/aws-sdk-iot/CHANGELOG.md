@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.143.0 (2025-01-27)
+------------------
+
+* Feature - Raised the documentParameters size limit to 30 KB for AWS IoT Device Management - Jobs.
+
 1.142.0 (2025-01-15)
 ------------------
 

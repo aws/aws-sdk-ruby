@@ -228,6 +228,8 @@ module Aws::MediaConvert
     DvbSubtitlingType = Shapes::StringShape.new(name: 'DvbSubtitlingType')
     DvbTdtSettings = Shapes::StructureShape.new(name: 'DvbTdtSettings')
     DvbddsHandling = Shapes::StringShape.new(name: 'DvbddsHandling')
+    DynamicAudioSelector = Shapes::StructureShape.new(name: 'DynamicAudioSelector')
+    DynamicAudioSelectorType = Shapes::StringShape.new(name: 'DynamicAudioSelectorType')
     Eac3AtmosBitstreamMode = Shapes::StringShape.new(name: 'Eac3AtmosBitstreamMode')
     Eac3AtmosCodingMode = Shapes::StringShape.new(name: 'Eac3AtmosCodingMode')
     Eac3AtmosDialogueIntelligence = Shapes::StringShape.new(name: 'Eac3AtmosDialogueIntelligence')
@@ -320,6 +322,7 @@ module Aws::MediaConvert
     H265AlternateTransferFunctionSei = Shapes::StringShape.new(name: 'H265AlternateTransferFunctionSei')
     H265CodecLevel = Shapes::StringShape.new(name: 'H265CodecLevel')
     H265CodecProfile = Shapes::StringShape.new(name: 'H265CodecProfile')
+    H265Deblocking = Shapes::StringShape.new(name: 'H265Deblocking')
     H265DynamicSubGop = Shapes::StringShape.new(name: 'H265DynamicSubGop')
     H265EndOfStreamMarkers = Shapes::StringShape.new(name: 'H265EndOfStreamMarkers')
     H265FlickerAdaptiveQuantization = Shapes::StringShape.new(name: 'H265FlickerAdaptiveQuantization')
@@ -860,6 +863,7 @@ module Aws::MediaConvert
     __mapOfAudioSelector = Shapes::MapShape.new(name: '__mapOfAudioSelector')
     __mapOfAudioSelectorGroup = Shapes::MapShape.new(name: '__mapOfAudioSelectorGroup')
     __mapOfCaptionSelector = Shapes::MapShape.new(name: '__mapOfCaptionSelector')
+    __mapOfDynamicAudioSelector = Shapes::MapShape.new(name: '__mapOfDynamicAudioSelector')
     __mapOf__string = Shapes::MapShape.new(name: '__mapOf__string')
     __string = Shapes::StringShape.new(name: '__string')
     __stringMax1000 = Shapes::StringShape.new(name: '__stringMax1000')
@@ -1469,6 +1473,13 @@ module Aws::MediaConvert
     DvbTdtSettings.add_member(:tdt_interval, Shapes::ShapeRef.new(shape: __integerMin1000Max30000, location_name: "tdtInterval"))
     DvbTdtSettings.struct_class = Types::DvbTdtSettings
 
+    DynamicAudioSelector.add_member(:audio_duration_correction, Shapes::ShapeRef.new(shape: AudioDurationCorrection, location_name: "audioDurationCorrection"))
+    DynamicAudioSelector.add_member(:external_audio_file_input, Shapes::ShapeRef.new(shape: __stringPatternS3Https, location_name: "externalAudioFileInput"))
+    DynamicAudioSelector.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "languageCode"))
+    DynamicAudioSelector.add_member(:offset, Shapes::ShapeRef.new(shape: __integerMinNegative2147483648Max2147483647, location_name: "offset"))
+    DynamicAudioSelector.add_member(:selector_type, Shapes::ShapeRef.new(shape: DynamicAudioSelectorType, location_name: "selectorType"))
+    DynamicAudioSelector.struct_class = Types::DynamicAudioSelector
+
     Eac3AtmosSettings.add_member(:bitrate, Shapes::ShapeRef.new(shape: __integerMin384000Max1024000, location_name: "bitrate"))
     Eac3AtmosSettings.add_member(:bitstream_mode, Shapes::ShapeRef.new(shape: Eac3AtmosBitstreamMode, location_name: "bitstreamMode"))
     Eac3AtmosSettings.add_member(:coding_mode, Shapes::ShapeRef.new(shape: Eac3AtmosCodingMode, location_name: "codingMode"))
@@ -1672,6 +1683,7 @@ module Aws::MediaConvert
     H265Settings.add_member(:bitrate, Shapes::ShapeRef.new(shape: __integerMin1000Max1466400000, location_name: "bitrate"))
     H265Settings.add_member(:codec_level, Shapes::ShapeRef.new(shape: H265CodecLevel, location_name: "codecLevel"))
     H265Settings.add_member(:codec_profile, Shapes::ShapeRef.new(shape: H265CodecProfile, location_name: "codecProfile"))
+    H265Settings.add_member(:deblocking, Shapes::ShapeRef.new(shape: H265Deblocking, location_name: "deblocking"))
     H265Settings.add_member(:dynamic_sub_gop, Shapes::ShapeRef.new(shape: H265DynamicSubGop, location_name: "dynamicSubGop"))
     H265Settings.add_member(:end_of_stream_markers, Shapes::ShapeRef.new(shape: H265EndOfStreamMarkers, location_name: "endOfStreamMarkers"))
     H265Settings.add_member(:flicker_adaptive_quantization, Shapes::ShapeRef.new(shape: H265FlickerAdaptiveQuantization, location_name: "flickerAdaptiveQuantization"))
@@ -1831,6 +1843,7 @@ module Aws::MediaConvert
     Input.add_member(:decryption_settings, Shapes::ShapeRef.new(shape: InputDecryptionSettings, location_name: "decryptionSettings"))
     Input.add_member(:denoise_filter, Shapes::ShapeRef.new(shape: InputDenoiseFilter, location_name: "denoiseFilter"))
     Input.add_member(:dolby_vision_metadata_xml, Shapes::ShapeRef.new(shape: __stringMin14PatternS3XmlXMLHttpsXmlXML, location_name: "dolbyVisionMetadataXml"))
+    Input.add_member(:dynamic_audio_selectors, Shapes::ShapeRef.new(shape: __mapOfDynamicAudioSelector, location_name: "dynamicAudioSelectors"))
     Input.add_member(:file_input, Shapes::ShapeRef.new(shape: __stringMax2048PatternS3Https, location_name: "fileInput"))
     Input.add_member(:filter_enable, Shapes::ShapeRef.new(shape: InputFilterEnable, location_name: "filterEnable"))
     Input.add_member(:filter_strength, Shapes::ShapeRef.new(shape: __integerMin0Max5, location_name: "filterStrength"))
@@ -1867,6 +1880,7 @@ module Aws::MediaConvert
     InputTemplate.add_member(:deblock_filter, Shapes::ShapeRef.new(shape: InputDeblockFilter, location_name: "deblockFilter"))
     InputTemplate.add_member(:denoise_filter, Shapes::ShapeRef.new(shape: InputDenoiseFilter, location_name: "denoiseFilter"))
     InputTemplate.add_member(:dolby_vision_metadata_xml, Shapes::ShapeRef.new(shape: __stringMin14PatternS3XmlXMLHttpsXmlXML, location_name: "dolbyVisionMetadataXml"))
+    InputTemplate.add_member(:dynamic_audio_selectors, Shapes::ShapeRef.new(shape: __mapOfDynamicAudioSelector, location_name: "dynamicAudioSelectors"))
     InputTemplate.add_member(:filter_enable, Shapes::ShapeRef.new(shape: InputFilterEnable, location_name: "filterEnable"))
     InputTemplate.add_member(:filter_strength, Shapes::ShapeRef.new(shape: __integerMin0Max5, location_name: "filterStrength"))
     InputTemplate.add_member(:image_inserter, Shapes::ShapeRef.new(shape: ImageInserter, location_name: "imageInserter"))
@@ -2899,6 +2913,9 @@ module Aws::MediaConvert
 
     __mapOfCaptionSelector.key = Shapes::ShapeRef.new(shape: __string)
     __mapOfCaptionSelector.value = Shapes::ShapeRef.new(shape: CaptionSelector)
+
+    __mapOfDynamicAudioSelector.key = Shapes::ShapeRef.new(shape: __string)
+    __mapOfDynamicAudioSelector.value = Shapes::ShapeRef.new(shape: DynamicAudioSelector)
 
     __mapOf__string.key = Shapes::ShapeRef.new(shape: __string)
     __mapOf__string.value = Shapes::ShapeRef.new(shape: __string)

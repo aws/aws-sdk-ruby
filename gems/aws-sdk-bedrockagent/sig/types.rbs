@@ -99,7 +99,7 @@ module Aws::BedrockAgent
       attr_accessor agent_alias_history_events: ::Array[Types::AgentAliasHistoryEvent]
       attr_accessor agent_alias_id: ::String
       attr_accessor agent_alias_name: ::String
-      attr_accessor agent_alias_status: ("CREATING" | "PREPARED" | "FAILED" | "UPDATING" | "DELETING")
+      attr_accessor agent_alias_status: ("CREATING" | "PREPARED" | "FAILED" | "UPDATING" | "DELETING" | "DISSOCIATED")
       attr_accessor agent_id: ::String
       attr_accessor client_token: ::String
       attr_accessor created_at: ::Time
@@ -126,7 +126,7 @@ module Aws::BedrockAgent
     class AgentAliasSummary
       attr_accessor agent_alias_id: ::String
       attr_accessor agent_alias_name: ::String
-      attr_accessor agent_alias_status: ("CREATING" | "PREPARED" | "FAILED" | "UPDATING" | "DELETING")
+      attr_accessor agent_alias_status: ("CREATING" | "PREPARED" | "FAILED" | "UPDATING" | "DELETING" | "DISSOCIATED")
       attr_accessor created_at: ::Time
       attr_accessor description: ::String
       attr_accessor routing_configuration: ::Array[Types::AgentAliasRoutingConfigurationListItem]
@@ -295,6 +295,11 @@ module Aws::BedrockAgent
       SENSITIVE: [:data]
     end
 
+    class CachePointBlock
+      attr_accessor type: ("default")
+      SENSITIVE: []
+    end
+
     class ChatPromptTemplateConfiguration
       attr_accessor input_variables: ::Array[Types::PromptInputVariable]
       attr_accessor messages: ::Array[Types::Message]
@@ -344,10 +349,13 @@ module Aws::BedrockAgent
     end
 
     class ContentBlock
+      attr_accessor cache_point: Types::CachePointBlock
       attr_accessor text: ::String
       attr_accessor unknown: untyped
       SENSITIVE: []
 
+      class CachePoint < ContentBlock
+      end
       class Text < ContentBlock
       end
       class Unknown < ContentBlock
@@ -663,7 +671,7 @@ module Aws::BedrockAgent
 
     class DeleteAgentAliasResponse
       attr_accessor agent_alias_id: ::String
-      attr_accessor agent_alias_status: ("CREATING" | "PREPARED" | "FAILED" | "UPDATING" | "DELETING")
+      attr_accessor agent_alias_status: ("CREATING" | "PREPARED" | "FAILED" | "UPDATING" | "DELETING" | "DISSOCIATED")
       attr_accessor agent_id: ::String
       SENSITIVE: []
     end
@@ -988,7 +996,7 @@ module Aws::BedrockAgent
       attr_accessor details: Types::FlowValidationDetails
       attr_accessor message: ::String
       attr_accessor severity: ("Warning" | "Error")
-      attr_accessor type: ("CyclicConnection" | "DuplicateConnections" | "DuplicateConditionExpression" | "UnreachableNode" | "UnknownConnectionSource" | "UnknownConnectionSourceOutput" | "UnknownConnectionTarget" | "UnknownConnectionTargetInput" | "UnknownConnectionCondition" | "MalformedConditionExpression" | "MalformedNodeInputExpression" | "MismatchedNodeInputType" | "MismatchedNodeOutputType" | "IncompatibleConnectionDataType" | "MissingConnectionConfiguration" | "MissingDefaultCondition" | "MissingEndingNodes" | "MissingNodeConfiguration" | "MissingNodeInput" | "MissingNodeOutput" | "MissingStartingNodes" | "MultipleNodeInputConnections" | "UnfulfilledNodeInput" | "UnsatisfiedConnectionConditions" | "Unspecified")
+      attr_accessor type: ("CyclicConnection" | "DuplicateConnections" | "DuplicateConditionExpression" | "UnreachableNode" | "UnknownConnectionSource" | "UnknownConnectionSourceOutput" | "UnknownConnectionTarget" | "UnknownConnectionTargetInput" | "UnknownConnectionCondition" | "MalformedConditionExpression" | "MalformedNodeInputExpression" | "MismatchedNodeInputType" | "MismatchedNodeOutputType" | "IncompatibleConnectionDataType" | "MissingConnectionConfiguration" | "MissingDefaultCondition" | "MissingEndingNodes" | "MissingNodeConfiguration" | "MissingNodeInput" | "MissingNodeOutput" | "MissingStartingNodes" | "MultipleNodeInputConnections" | "UnfulfilledNodeInput" | "UnsatisfiedConnectionConditions" | "Unspecified" | "UnknownNodeInput" | "UnknownNodeOutput")
       SENSITIVE: []
     end
 
@@ -1015,6 +1023,8 @@ module Aws::BedrockAgent
       attr_accessor unknown_connection_source_output: Types::UnknownConnectionSourceOutputFlowValidationDetails
       attr_accessor unknown_connection_target: Types::UnknownConnectionTargetFlowValidationDetails
       attr_accessor unknown_connection_target_input: Types::UnknownConnectionTargetInputFlowValidationDetails
+      attr_accessor unknown_node_input: Types::UnknownNodeInputFlowValidationDetails
+      attr_accessor unknown_node_output: Types::UnknownNodeOutputFlowValidationDetails
       attr_accessor unreachable_node: Types::UnreachableNodeFlowValidationDetails
       attr_accessor unsatisfied_connection_conditions: Types::UnsatisfiedConnectionConditionsFlowValidationDetails
       attr_accessor unspecified: Types::UnspecifiedFlowValidationDetails
@@ -1064,6 +1074,10 @@ module Aws::BedrockAgent
       class UnknownConnectionTarget < FlowValidationDetails
       end
       class UnknownConnectionTargetInput < FlowValidationDetails
+      end
+      class UnknownNodeInput < FlowValidationDetails
+      end
+      class UnknownNodeOutput < FlowValidationDetails
       end
       class UnreachableNode < FlowValidationDetails
       end
@@ -2331,10 +2345,13 @@ module Aws::BedrockAgent
     end
 
     class SystemContentBlock
+      attr_accessor cache_point: Types::CachePointBlock
       attr_accessor text: ::String
       attr_accessor unknown: untyped
       SENSITIVE: []
 
+      class CachePoint < SystemContentBlock
+      end
       class Text < SystemContentBlock
       end
       class Unknown < SystemContentBlock
@@ -2356,6 +2373,7 @@ module Aws::BedrockAgent
     end
 
     class TextPromptTemplateConfiguration
+      attr_accessor cache_point: Types::CachePointBlock
       attr_accessor input_variables: ::Array[Types::PromptInputVariable]
       attr_accessor text: ::String
       SENSITIVE: [:input_variables, :text]
@@ -2367,10 +2385,13 @@ module Aws::BedrockAgent
     end
 
     class Tool
+      attr_accessor cache_point: Types::CachePointBlock
       attr_accessor tool_spec: Types::ToolSpecification
       attr_accessor unknown: untyped
       SENSITIVE: []
 
+      class CachePoint < Tool
+      end
       class ToolSpec < Tool
       end
       class Unknown < Tool
@@ -2462,6 +2483,18 @@ module Aws::BedrockAgent
 
     class UnknownConnectionTargetInputFlowValidationDetails
       attr_accessor connection: ::String
+      SENSITIVE: []
+    end
+
+    class UnknownNodeInputFlowValidationDetails
+      attr_accessor input: ::String
+      attr_accessor node: ::String
+      SENSITIVE: []
+    end
+
+    class UnknownNodeOutputFlowValidationDetails
+      attr_accessor node: ::String
+      attr_accessor output: ::String
       SENSITIVE: []
     end
 
