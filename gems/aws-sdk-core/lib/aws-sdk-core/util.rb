@@ -106,6 +106,12 @@ module Aws
         end
       end
 
+      def benchmark(&block)
+        t_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+        yield block
+        t_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+        (t_end - t_start) * 1000.0
+      end
     end
   end
 end

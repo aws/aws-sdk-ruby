@@ -196,15 +196,13 @@ clear_thread_data(thread)
 METRIC_COUNTS.each do |metrics|
   (0...ITERATIONS).each do |i|
     request = generate_put_metric_data_request(metrics, BASE_TIME, SUITE_ID)
-    t_query_total_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    query_cloudwatch.put_metric_data(request)
-    t_query_total_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    thread[:query_total_data] << format('%.3f', (t_query_total_end - t_query_total_start) * 1000.0).to_f
+    thread[:query_total_data] << Aws::Util.benchmark do
+      query_cloudwatch.put_metric_data(request)
+    end
 
-    t_cbor_total_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    cbor_cloudwatch.put_metric_data(request)
-    t_cbor_total_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    thread[:cbor_total_data] << format('%.3f', (t_cbor_total_end - t_cbor_total_start) * 1000.0).to_f
+    thread[:cbor_total_data] << Aws::Util.benchmark do
+      cbor_cloudwatch.put_metric_data(request)
+    end
 
     # Sleep to prevent rate limit exceeded errors (from testing doc)
     sleep(2) if (i % 50).zero?
@@ -212,15 +210,13 @@ METRIC_COUNTS.each do |metrics|
   analyze('Put metric data', metrics, thread, data, raw)
   (0...ITERATIONS).each do |i|
     request = generate_get_metric_data_request(metrics, BASE_TIME, SUITE_ID)
-    t_query_total_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    query_cloudwatch.get_metric_data(request)
-    t_query_total_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    thread[:query_total_data] << format('%.3f', (t_query_total_end - t_query_total_start) * 1000.0).to_f
+    thread[:query_total_data] << Aws::Util.benchmark do
+      query_cloudwatch.get_metric_data(request)
+    end
 
-    t_cbor_total_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    cbor_cloudwatch.get_metric_data(request)
-    t_cbor_total_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    thread[:cbor_total_data] << format('%.3f', (t_cbor_total_end - t_cbor_total_start) * 1000.0).to_f
+    thread[:cbor_total_data] << Aws::Util.benchmark do
+      cbor_cloudwatch.get_metric_data(request)
+    end
 
     # Sleep to prevent rate limit exceeded errors (from testing doc)
     sleep(2) if (i % 50).zero?
@@ -229,15 +225,12 @@ METRIC_COUNTS.each do |metrics|
 end
 (0...ITERATIONS).each do |i|
   request = generate_list_metrics_request
-  t_query_total_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-  query_cloudwatch.list_metrics(request)
-  t_query_total_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-  thread[:query_total_data] << format('%.3f', (t_query_total_end - t_query_total_start) * 1000.0).to_f
-
-  t_cbor_total_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-  cbor_cloudwatch.list_metrics(request)
-  t_cbor_total_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-  thread[:cbor_total_data] << format('%.3f', (t_cbor_total_end - t_cbor_total_start) * 1000.0).to_f
+  thread[:query_total_data] << Aws::Util.benchmark do
+    query_cloudwatch.list_metrics(request)
+  end
+  thread[:cbor_total_data] << Aws::Util.benchmark do
+    cbor_cloudwatch.list_metrics(request)
+  end
 
   # Sleep to prevent rate limit exceeded errors (from testing doc)
   sleep(2) if (i % 50).zero?

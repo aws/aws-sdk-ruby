@@ -207,41 +207,33 @@ end
 def make_and_time_request(request, command, json_ssm, cbor_ssm, thread)
   case command
   when 'put'
-    t_json_total_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    json_ssm.put_secret_value(request)
-    t_json_total_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    thread[:json_total_data] << format('%.3f', (t_json_total_end - t_json_total_start) * 1000.0).to_f
-    t_cbor_total_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    cbor_ssm.put_secret_value(request)
-    t_cbor_total_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    thread[:cbor_total_data] << format('%.3f', (t_cbor_total_end - t_cbor_total_start) * 1000.0).to_f
+    thread[:json_total_data] << Aws::Util.benchmark do
+      json_ssm.put_secret_value(request)
+    end
+    thread[:cbor_total_data] << Aws::Util.benchmark do
+      cbor_ssm.put_secret_value(request)
+    end
   when 'get'
-    t_json_total_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    json_ssm.get_secret_value(request)
-    t_json_total_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    thread[:json_total_data] << format('%.3f', (t_json_total_end - t_json_total_start) * 1000.0).to_f
-    t_cbor_total_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    cbor_ssm.get_secret_value(request)
-    t_cbor_total_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    thread[:cbor_total_data] << format('%.3f', (t_cbor_total_end - t_cbor_total_start) * 1000.0).to_f
+    thread[:json_total_data] << Aws::Util.benchmark do
+      json_ssm.get_secret_value(request)
+    end
+    thread[:cbor_total_data] << Aws::Util.benchmark do
+      cbor_ssm.get_secret_value(request)
+    end
   when 'describe'
-    t_json_total_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    json_ssm.describe_secret(request)
-    t_json_total_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    thread[:json_total_data] << format('%.3f', (t_json_total_end - t_json_total_start) * 1000.0).to_f
-    t_cbor_total_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    cbor_ssm.describe_secret(request)
-    t_cbor_total_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    thread[:cbor_total_data] << format('%.3f', (t_cbor_total_end - t_cbor_total_start) * 1000.0).to_f
+    thread[:json_total_data] << Aws::Util.benchmark do
+      json_ssm.describe_secret(request)
+    end
+    thread[:cbor_total_data] << Aws::Util.benchmark do
+      cbor_ssm.describe_secret(request)
+    end
   else
-    t_json_total_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    json_ssm.list_secrets(request)
-    t_json_total_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    thread[:json_total_data] << format('%.3f', (t_json_total_end - t_json_total_start) * 1000.0).to_f
-    t_cbor_total_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    cbor_ssm.list_secrets(request)
-    t_cbor_total_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    thread[:cbor_total_data] << format('%.3f', (t_cbor_total_end - t_cbor_total_start) * 1000.0).to_f
+    thread[:json_total_data] << Aws::Util.benchmark do
+      json_ssm.list_secrets(request)
+    end
+    thread[:cbor_total_data] << Aws::Util.benchmark do
+      cbor_ssm.list_secrets(request)
+    end
   end
 end
 

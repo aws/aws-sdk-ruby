@@ -27,25 +27,24 @@ module Aws
       # @return [Seahorse::Client::Response]
       def call(context)
         thread = Thread.current
-        t_ser_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-        build_request(context)
-        t_ser_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-        t_deser_start, t_deser_end = nil
+        ser_time = Aws::Util.benchmark do
+          build_request(context)
+        end
+        deser_time = nil
         response = nil
         @handler.call(context).on_success do |resp|
-          t_deser_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-          resp.error = nil
-          parsed = parse_xml(context)
-          if parsed.nil? || parsed == EmptyStructure
-            resp.data = EmptyStructure.new
-          else
-            resp.data = parsed
+          deser_time = Aws::Util.benchmark do
+            resp.error = nil
+            parsed = parse_xml(context)
+            if parsed.nil? || parsed == EmptyStructure
+              resp.data = EmptyStructure.new
+            else
+              resp.data = parsed
+            end
           end
-          t_deser_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
           response = resp
         end
-        thread[:query_serde_data] << [(t_ser_end - t_ser_start) * 1000.0,
-                                      (t_deser_end - t_deser_start) * 1000.0]
+        thread[:query_serde_data] << [ser_time, deser_time]
         response
       end
 
