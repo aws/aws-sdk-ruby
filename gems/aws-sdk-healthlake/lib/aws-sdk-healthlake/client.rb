@@ -536,7 +536,7 @@ module Aws::HealthLake
     #       },
     #     ],
     #     identity_provider_configuration: {
-    #       authorization_strategy: "SMART_ON_FHIR_V1", # required, accepts SMART_ON_FHIR_V1, AWS_AUTH
+    #       authorization_strategy: "SMART_ON_FHIR_V1", # required, accepts SMART_ON_FHIR_V1, SMART_ON_FHIR, AWS_AUTH
     #       fine_grained_authorization_enabled: false,
     #       metadata: "ConfigurationMetadata",
     #       idp_lambda_arn: "LambdaArn",
@@ -623,7 +623,7 @@ module Aws::HealthLake
     #   resp.datastore_properties.sse_configuration.kms_encryption_config.cmk_type #=> String, one of "CUSTOMER_MANAGED_KMS_KEY", "AWS_OWNED_KMS_KEY"
     #   resp.datastore_properties.sse_configuration.kms_encryption_config.kms_key_id #=> String
     #   resp.datastore_properties.preload_data_config.preload_data_type #=> String, one of "SYNTHEA"
-    #   resp.datastore_properties.identity_provider_configuration.authorization_strategy #=> String, one of "SMART_ON_FHIR_V1", "AWS_AUTH"
+    #   resp.datastore_properties.identity_provider_configuration.authorization_strategy #=> String, one of "SMART_ON_FHIR_V1", "SMART_ON_FHIR", "AWS_AUTH"
     #   resp.datastore_properties.identity_provider_configuration.fine_grained_authorization_enabled #=> Boolean
     #   resp.datastore_properties.identity_provider_configuration.metadata #=> String
     #   resp.datastore_properties.identity_provider_configuration.idp_lambda_arn #=> String
@@ -664,7 +664,7 @@ module Aws::HealthLake
     #
     #   resp.export_job_properties.job_id #=> String
     #   resp.export_job_properties.job_name #=> String
-    #   resp.export_job_properties.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED_WITH_ERRORS", "COMPLETED", "FAILED", "CANCEL_SUBMITTED", "CANCEL_IN_PROGRESS", "CANCEL_COMPLETED", "CANCEL_FAILED"
+    #   resp.export_job_properties.job_status #=> String, one of "SUBMITTED", "QUEUED", "IN_PROGRESS", "COMPLETED_WITH_ERRORS", "COMPLETED", "FAILED", "CANCEL_SUBMITTED", "CANCEL_IN_PROGRESS", "CANCEL_COMPLETED", "CANCEL_FAILED"
     #   resp.export_job_properties.submit_time #=> Time
     #   resp.export_job_properties.end_time #=> Time
     #   resp.export_job_properties.datastore_id #=> String
@@ -706,7 +706,7 @@ module Aws::HealthLake
     #
     #   resp.import_job_properties.job_id #=> String
     #   resp.import_job_properties.job_name #=> String
-    #   resp.import_job_properties.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED_WITH_ERRORS", "COMPLETED", "FAILED", "CANCEL_SUBMITTED", "CANCEL_IN_PROGRESS", "CANCEL_COMPLETED", "CANCEL_FAILED"
+    #   resp.import_job_properties.job_status #=> String, one of "SUBMITTED", "QUEUED", "IN_PROGRESS", "COMPLETED_WITH_ERRORS", "COMPLETED", "FAILED", "CANCEL_SUBMITTED", "CANCEL_IN_PROGRESS", "CANCEL_COMPLETED", "CANCEL_FAILED"
     #   resp.import_job_properties.submit_time #=> Time
     #   resp.import_job_properties.end_time #=> Time
     #   resp.import_job_properties.datastore_id #=> String
@@ -779,7 +779,7 @@ module Aws::HealthLake
     #   resp.datastore_properties_list[0].sse_configuration.kms_encryption_config.cmk_type #=> String, one of "CUSTOMER_MANAGED_KMS_KEY", "AWS_OWNED_KMS_KEY"
     #   resp.datastore_properties_list[0].sse_configuration.kms_encryption_config.kms_key_id #=> String
     #   resp.datastore_properties_list[0].preload_data_config.preload_data_type #=> String, one of "SYNTHEA"
-    #   resp.datastore_properties_list[0].identity_provider_configuration.authorization_strategy #=> String, one of "SMART_ON_FHIR_V1", "AWS_AUTH"
+    #   resp.datastore_properties_list[0].identity_provider_configuration.authorization_strategy #=> String, one of "SMART_ON_FHIR_V1", "SMART_ON_FHIR", "AWS_AUTH"
     #   resp.datastore_properties_list[0].identity_provider_configuration.fine_grained_authorization_enabled #=> Boolean
     #   resp.datastore_properties_list[0].identity_provider_configuration.metadata #=> String
     #   resp.datastore_properties_list[0].identity_provider_configuration.idp_lambda_arn #=> String
@@ -841,7 +841,7 @@ module Aws::HealthLake
     #     next_token: "NextToken",
     #     max_results: 1,
     #     job_name: "JobName",
-    #     job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED_WITH_ERRORS, COMPLETED, FAILED, CANCEL_SUBMITTED, CANCEL_IN_PROGRESS, CANCEL_COMPLETED, CANCEL_FAILED
+    #     job_status: "SUBMITTED", # accepts SUBMITTED, QUEUED, IN_PROGRESS, COMPLETED_WITH_ERRORS, COMPLETED, FAILED, CANCEL_SUBMITTED, CANCEL_IN_PROGRESS, CANCEL_COMPLETED, CANCEL_FAILED
     #     submitted_before: Time.now,
     #     submitted_after: Time.now,
     #   })
@@ -851,7 +851,7 @@ module Aws::HealthLake
     #   resp.export_job_properties_list #=> Array
     #   resp.export_job_properties_list[0].job_id #=> String
     #   resp.export_job_properties_list[0].job_name #=> String
-    #   resp.export_job_properties_list[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED_WITH_ERRORS", "COMPLETED", "FAILED", "CANCEL_SUBMITTED", "CANCEL_IN_PROGRESS", "CANCEL_COMPLETED", "CANCEL_FAILED"
+    #   resp.export_job_properties_list[0].job_status #=> String, one of "SUBMITTED", "QUEUED", "IN_PROGRESS", "COMPLETED_WITH_ERRORS", "COMPLETED", "FAILED", "CANCEL_SUBMITTED", "CANCEL_IN_PROGRESS", "CANCEL_COMPLETED", "CANCEL_FAILED"
     #   resp.export_job_properties_list[0].submit_time #=> Time
     #   resp.export_job_properties_list[0].end_time #=> Time
     #   resp.export_job_properties_list[0].datastore_id #=> String
@@ -915,7 +915,7 @@ module Aws::HealthLake
     #     next_token: "NextToken",
     #     max_results: 1,
     #     job_name: "JobName",
-    #     job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED_WITH_ERRORS, COMPLETED, FAILED, CANCEL_SUBMITTED, CANCEL_IN_PROGRESS, CANCEL_COMPLETED, CANCEL_FAILED
+    #     job_status: "SUBMITTED", # accepts SUBMITTED, QUEUED, IN_PROGRESS, COMPLETED_WITH_ERRORS, COMPLETED, FAILED, CANCEL_SUBMITTED, CANCEL_IN_PROGRESS, CANCEL_COMPLETED, CANCEL_FAILED
     #     submitted_before: Time.now,
     #     submitted_after: Time.now,
     #   })
@@ -925,7 +925,7 @@ module Aws::HealthLake
     #   resp.import_job_properties_list #=> Array
     #   resp.import_job_properties_list[0].job_id #=> String
     #   resp.import_job_properties_list[0].job_name #=> String
-    #   resp.import_job_properties_list[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED_WITH_ERRORS", "COMPLETED", "FAILED", "CANCEL_SUBMITTED", "CANCEL_IN_PROGRESS", "CANCEL_COMPLETED", "CANCEL_FAILED"
+    #   resp.import_job_properties_list[0].job_status #=> String, one of "SUBMITTED", "QUEUED", "IN_PROGRESS", "COMPLETED_WITH_ERRORS", "COMPLETED", "FAILED", "CANCEL_SUBMITTED", "CANCEL_IN_PROGRESS", "CANCEL_COMPLETED", "CANCEL_FAILED"
     #   resp.import_job_properties_list[0].submit_time #=> Time
     #   resp.import_job_properties_list[0].end_time #=> Time
     #   resp.import_job_properties_list[0].datastore_id #=> String
@@ -1000,7 +1000,7 @@ module Aws::HealthLake
     # @option params [required, String] :data_access_role_arn
     #   The Amazon Resource Name used during the initiation of the job.
     #
-    # @option params [required, String] :client_token
+    # @option params [String] :client_token
     #   An optional user provided token used for ensuring idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -1024,13 +1024,13 @@ module Aws::HealthLake
     #     },
     #     datastore_id: "DatastoreId", # required
     #     data_access_role_arn: "IamRoleArn", # required
-    #     client_token: "ClientTokenString", # required
+    #     client_token: "ClientTokenString",
     #   })
     #
     # @example Response structure
     #
     #   resp.job_id #=> String
-    #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED_WITH_ERRORS", "COMPLETED", "FAILED", "CANCEL_SUBMITTED", "CANCEL_IN_PROGRESS", "CANCEL_COMPLETED", "CANCEL_FAILED"
+    #   resp.job_status #=> String, one of "SUBMITTED", "QUEUED", "IN_PROGRESS", "COMPLETED_WITH_ERRORS", "COMPLETED", "FAILED", "CANCEL_SUBMITTED", "CANCEL_IN_PROGRESS", "CANCEL_COMPLETED", "CANCEL_FAILED"
     #   resp.datastore_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/StartFHIRExportJob AWS API Documentation
@@ -1062,7 +1062,7 @@ module Aws::HealthLake
     #   The Amazon Resource Name (ARN) that gives AWS HealthLake access
     #   permission.
     #
-    # @option params [required, String] :client_token
+    # @option params [String] :client_token
     #   Optional user provided token used for ensuring idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -1089,13 +1089,13 @@ module Aws::HealthLake
     #     },
     #     datastore_id: "DatastoreId", # required
     #     data_access_role_arn: "IamRoleArn", # required
-    #     client_token: "ClientTokenString", # required
+    #     client_token: "ClientTokenString",
     #   })
     #
     # @example Response structure
     #
     #   resp.job_id #=> String
-    #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED_WITH_ERRORS", "COMPLETED", "FAILED", "CANCEL_SUBMITTED", "CANCEL_IN_PROGRESS", "CANCEL_COMPLETED", "CANCEL_FAILED"
+    #   resp.job_status #=> String, one of "SUBMITTED", "QUEUED", "IN_PROGRESS", "COMPLETED_WITH_ERRORS", "COMPLETED", "FAILED", "CANCEL_SUBMITTED", "CANCEL_IN_PROGRESS", "CANCEL_COMPLETED", "CANCEL_FAILED"
     #   resp.datastore_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/StartFHIRImportJob AWS API Documentation
@@ -1185,7 +1185,7 @@ module Aws::HealthLake
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-healthlake'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

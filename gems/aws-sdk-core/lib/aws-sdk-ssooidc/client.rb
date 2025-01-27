@@ -472,7 +472,7 @@ module Aws::SSOOIDC
 
     # Creates and returns access and refresh tokens for clients that are
     # authenticated using client secrets. The access token can be used to
-    # fetch short-term credentials for the assigned AWS accounts or to
+    # fetch short-lived credentials for the assigned AWS accounts or to
     # access application APIs using `bearer` authentication.
     #
     # @option params [required, String] :client_id
@@ -484,30 +484,28 @@ module Aws::SSOOIDC
     #   the persisted result of the RegisterClient API.
     #
     # @option params [required, String] :grant_type
-    #   Supports the following OAuth grant types: Device Code and Refresh
-    #   Token. Specify either of the following values, depending on the grant
-    #   type that you want:
+    #   Supports the following OAuth grant types: Authorization Code, Device
+    #   Code, and Refresh Token. Specify one of the following values,
+    #   depending on the grant type that you want:
+    #
+    #   * Authorization Code - `authorization_code`
     #
     #   * Device Code - `urn:ietf:params:oauth:grant-type:device_code`
     #
     #   * Refresh Token - `refresh_token`
     #
-    #   For information about how to obtain the device code, see the
-    #   StartDeviceAuthorization topic.
-    #
     # @option params [String] :device_code
     #   Used only when calling this API for the Device Code grant type. This
-    #   short-term code is used to identify this authorization request. This
+    #   short-lived code is used to identify this authorization request. This
     #   comes from the result of the StartDeviceAuthorization API.
     #
     # @option params [String] :code
     #   Used only when calling this API for the Authorization Code grant type.
-    #   The short-term code is used to identify this authorization request.
-    #   This grant type is currently unsupported for the CreateToken API.
+    #   The short-lived code is used to identify this authorization request.
     #
     # @option params [String] :refresh_token
     #   Used only when calling this API for the Refresh Token grant type. This
-    #   token is used to refresh short-term tokens, such as the access token,
+    #   token is used to refresh short-lived tokens, such as the access token,
     #   that might expire.
     #
     #   For more information about the features and limitations of the current
@@ -613,7 +611,7 @@ module Aws::SSOOIDC
 
     # Creates and returns access and refresh tokens for clients and
     # applications that are authenticated using IAM entities. The access
-    # token can be used to fetch short-term credentials for the assigned
+    # token can be used to fetch short-lived credentials for the assigned
     # Amazon Web Services accounts or to access application APIs using
     # `bearer` authentication.
     #
@@ -636,14 +634,14 @@ module Aws::SSOOIDC
     #
     # @option params [String] :code
     #   Used only when calling this API for the Authorization Code grant type.
-    #   This short-term code is used to identify this authorization request.
+    #   This short-lived code is used to identify this authorization request.
     #   The code is obtained through a redirect from IAM Identity Center to a
     #   redirect URI persisted in the Authorization Code GrantOptions for the
     #   application.
     #
     # @option params [String] :refresh_token
     #   Used only when calling this API for the Refresh Token grant type. This
-    #   token is used to refresh short-term tokens, such as the access token,
+    #   token is used to refresh short-lived tokens, such as the access token,
     #   that might expire.
     #
     #   For more information about the features and limitations of the current
@@ -846,9 +844,10 @@ module Aws::SSOOIDC
       req.send_request(options)
     end
 
-    # Registers a client with IAM Identity Center. This allows clients to
-    # initiate device authorization. The output should be persisted for
-    # reuse through many authentication requests.
+    # Registers a public client with IAM Identity Center. This allows
+    # clients to perform authorization using the authorization
+    # code grant with Proof Key for Code Exchange (PKCE) or the device
+    # code grant.
     #
     # @option params [required, String] :client_name
     #   The friendly name of the client.
@@ -870,7 +869,14 @@ module Aws::SSOOIDC
     # @option params [Array<String>] :grant_types
     #   The list of OAuth 2.0 grant types that are defined by the client. This
     #   list is used to restrict the token granting flows available to the
-    #   client.
+    #   client. Supports the following OAuth 2.0 grant types: Authorization
+    #   Code, Device Code, and Refresh Token.
+    #
+    #   * Authorization Code - `authorization_code`
+    #
+    #   * Device Code - `urn:ietf:params:oauth:grant-type:device_code`
+    #
+    #   * Refresh Token - `refresh_token`
     #
     # @option params [String] :issuer_url
     #   The IAM Identity Center Issuer URL associated with an instance of IAM
@@ -1045,7 +1051,7 @@ module Aws::SSOOIDC
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.216.1'
+      context[:gem_version] = '3.217.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

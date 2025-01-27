@@ -77,6 +77,7 @@ module Aws::Transfer
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor preserve_filename: ("ENABLED" | "DISABLED")
       attr_accessor enforce_message_signing: ("ENABLED" | "DISABLED")
+      attr_accessor custom_directories: Types::CustomDirectoriesType
       SENSITIVE: []
     end
 
@@ -183,6 +184,15 @@ module Aws::Transfer
 
     class CreateWorkflowResponse
       attr_accessor workflow_id: ::String
+      SENSITIVE: []
+    end
+
+    class CustomDirectoriesType
+      attr_accessor failed_files_directory: ::String
+      attr_accessor mdn_files_directory: ::String
+      attr_accessor payload_files_directory: ::String
+      attr_accessor status_files_directory: ::String
+      attr_accessor temporary_files_directory: ::String
       SENSITIVE: []
     end
 
@@ -437,6 +447,7 @@ module Aws::Transfer
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor preserve_filename: ("ENABLED" | "DISABLED")
       attr_accessor enforce_message_signing: ("ENABLED" | "DISABLED")
+      attr_accessor custom_directories: Types::CustomDirectoriesType
       SENSITIVE: []
     end
 
@@ -1237,6 +1248,7 @@ module Aws::Transfer
       attr_accessor access_role: ::String
       attr_accessor preserve_filename: ("ENABLED" | "DISABLED")
       attr_accessor enforce_message_signing: ("ENABLED" | "DISABLED")
+      attr_accessor custom_directories: Types::CustomDirectoriesType
       SENSITIVE: []
     end
 

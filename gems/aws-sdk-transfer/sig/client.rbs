@@ -116,7 +116,7 @@ module Aws
                               server_id: ::String,
                               local_profile_id: ::String,
                               partner_profile_id: ::String,
-                              base_directory: ::String,
+                              ?base_directory: ::String,
                               access_role: ::String,
                               ?status: ("ACTIVE" | "INACTIVE"),
                               ?tags: Array[
@@ -126,7 +126,14 @@ module Aws
                                 },
                               ],
                               ?preserve_filename: ("ENABLED" | "DISABLED"),
-                              ?enforce_message_signing: ("ENABLED" | "DISABLED")
+                              ?enforce_message_signing: ("ENABLED" | "DISABLED"),
+                              ?custom_directories: {
+                                failed_files_directory: ::String,
+                                mdn_files_directory: ::String,
+                                payload_files_directory: ::String,
+                                status_files_directory: ::String,
+                                temporary_files_directory: ::String
+                              }
                             ) -> _CreateAgreementResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAgreementResponseSuccess
 
@@ -1030,7 +1037,14 @@ module Aws
                               ?base_directory: ::String,
                               ?access_role: ::String,
                               ?preserve_filename: ("ENABLED" | "DISABLED"),
-                              ?enforce_message_signing: ("ENABLED" | "DISABLED")
+                              ?enforce_message_signing: ("ENABLED" | "DISABLED"),
+                              ?custom_directories: {
+                                failed_files_directory: ::String,
+                                mdn_files_directory: ::String,
+                                payload_files_directory: ::String,
+                                status_files_directory: ::String,
+                                temporary_files_directory: ::String
+                              }
                             ) -> _UpdateAgreementResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAgreementResponseSuccess
 

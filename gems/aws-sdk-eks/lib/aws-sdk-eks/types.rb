@@ -257,7 +257,7 @@ module Aws::EKS
     #   namespace in the cluster.
     #
     #   For more information, see [Attach an IAM Role to an Amazon EKS
-    #   add-on using Pod Identity][1] in the EKS User Guide.
+    #   add-on using Pod Identity][1] in the *Amazon EKS User Guide*.
     #
     #
     #
@@ -286,14 +286,17 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # Contains compatibility information for an Amazon EKS add-on.
+    # The summary information about the Amazon EKS add-on compatibility for
+    # the next Kubernetes version for an insight check in the
+    # `UPGRADE_READINESS` category.
     #
     # @!attribute [rw] name
     #   The name of the Amazon EKS add-on.
     #   @return [String]
     #
     # @!attribute [rw] compatible_versions
-    #   A list of compatible add-on versions.
+    #   The list of compatible Amazon EKS add-on versions for the next
+    #   Kubernetes version.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AddonCompatibilityDetail AWS API Documentation
@@ -391,7 +394,7 @@ module Aws::EKS
     # a namespace in the cluster.
     #
     # For more information, see [Attach an IAM Role to an Amazon EKS add-on
-    # using Pod Identity][1] in the EKS User Guide.
+    # using Pod Identity][1] in the *Amazon EKS User Guide*.
     #
     #
     #
@@ -684,7 +687,7 @@ module Aws::EKS
     # or disabled. If the block storage capability is enabled, EKS Auto Mode
     # will create and delete EBS volumes in your Amazon Web Services
     # account. For more information, see EKS Auto Mode block storage
-    # capability in the EKS User Guide.
+    # capability in the *Amazon EKS User Guide*.
     #
     # @!attribute [rw] enabled
     #   Indicates if the block storage capability is enabled on your EKS
@@ -911,7 +914,8 @@ module Aws::EKS
     #   This value indicates if extended support is enabled or disabled for
     #   the cluster.
     #
-    #   [Learn more about EKS Extended Support in the EKS User Guide.][1]
+    #   [Learn more about EKS Extended Support in the *Amazon EKS User
+    #   Guide*.][1]
     #
     #
     #
@@ -933,7 +937,7 @@ module Aws::EKS
     #   enabled or disabled. If the compute capability is enabled, EKS Auto
     #   Mode will create and delete EC2 Managed Instances in your Amazon Web
     #   Services account. For more information, see EKS Auto Mode compute
-    #   capability in the EKS User Guide.
+    #   capability in the *Amazon EKS User Guide*.
     #   @return [Types::ComputeConfigResponse]
     #
     # @!attribute [rw] storage_config
@@ -942,7 +946,7 @@ module Aws::EKS
     #   enabled or disabled. If the block storage capability is enabled, EKS
     #   Auto Mode will create and delete EBS volumes in your Amazon Web
     #   Services account. For more information, see EKS Auto Mode block
-    #   storage capability in the EKS User Guide.
+    #   storage capability in the *Amazon EKS User Guide*.
     #   @return [Types::StorageConfigResponse]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Cluster AWS API Documentation
@@ -1096,8 +1100,8 @@ module Aws::EKS
 
     # Request to update the configuration of the compute capability of your
     # EKS Auto Mode cluster. For example, enable the capability. For more
-    # information, see EKS Auto Mode compute capability in the EKS User
-    # Guide.
+    # information, see EKS Auto Mode compute capability in the *Amazon EKS
+    # User Guide*.
     #
     # @!attribute [rw] enabled
     #   Request to enable or disable the compute capability on your EKS Auto
@@ -1109,14 +1113,14 @@ module Aws::EKS
     # @!attribute [rw] node_pools
     #   Configuration for node pools that defines the compute resources for
     #   your EKS Auto Mode cluster. For more information, see EKS Auto Mode
-    #   Node Pools in the EKS User Guide.
+    #   Node Pools in the *Amazon EKS User Guide*.
     #   @return [Array<String>]
     #
     # @!attribute [rw] node_role_arn
     #   The ARN of the IAM Role EKS will assign to EC2 Managed Instances in
     #   your EKS Auto Mode cluster. This value cannot be changed after the
     #   compute capability of EKS Auto Mode is enabled. For more
-    #   information, see the IAM Reference in the EKS User Guide.
+    #   information, see the IAM Reference in the *Amazon EKS User Guide*.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ComputeConfigRequest AWS API Documentation
@@ -1142,7 +1146,7 @@ module Aws::EKS
     # @!attribute [rw] node_pools
     #   Indicates the current configuration of node pools in your EKS Auto
     #   Mode cluster. For more information, see EKS Auto Mode Node Pools in
-    #   the EKS User Guide.
+    #   the *Amazon EKS User Guide*.
     #   @return [Array<String>]
     #
     # @!attribute [rw] node_role_arn
@@ -1218,8 +1222,8 @@ module Aws::EKS
 
     # The placement configuration for all the control plane instances of
     # your local Amazon EKS cluster on an Amazon Web Services Outpost. For
-    # more information, see [Capacity considerations][1] in the Amazon EKS
-    # User Guide.
+    # more information, see [Capacity considerations][1] in the *Amazon EKS
+    # User Guide*.
     #
     #
     #
@@ -1296,15 +1300,20 @@ module Aws::EKS
     #   access entry creation.
     #
     #   The valid principals differ depending on the type of the access
-    #   entry in the `type` field. The only valid ARN is IAM roles for the
-    #   types of access entries for nodes: ` . You can use every IAM
-    #   principal type for STANDARD access entries. You can't use the STS
-    #   session principal type with access entries because this is a
-    #   temporary principal for each session and not a permanent identity
-    #   that can be assigned permissions.</p>  IAM best practices recommend
-    #   using IAM roles with temporary credentials, rather than IAM users
-    #   with long-term credentials.
-    #   `
+    #   entry in the `type` field. For `STANDARD` access entries, you can
+    #   use every IAM principal type. For nodes (`EC2` (for EKS Auto Mode),
+    #   `EC2_LINUX`, `EC2_WINDOWS`, `FARGATE_LINUX`, and `HYBRID_LINUX`),
+    #   the only valid ARN is IAM roles. You can't use the STS session
+    #   principal type with access entries because this is a temporary
+    #   principal for each session and not a permanent identity that can be
+    #   assigned permissions.
+    #
+    #   [IAM best practices][1] recommend using IAM roles with temporary
+    #   credentials, rather than IAM users with long-term credentials.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#bp-users-federation-idp
     #   @return [String]
     #
     # @!attribute [rw] kubernetes_groups
@@ -1362,18 +1371,21 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of the new access entry. Valid values are `Standard`,
-    #   `FARGATE_LINUX`, `EC2_LINUX`, and `EC2_WINDOWS`.
+    #   The type of the new access entry. Valid values are `STANDARD`,
+    #   `FARGATE_LINUX`, `EC2_LINUX`, `EC2_WINDOWS`, `EC2` (for EKS Auto
+    #   Mode), `HYBRID_LINUX`, and `HYPERPOD_LINUX`.
     #
     #   If the `principalArn` is for an IAM role that's used for
     #   self-managed Amazon EC2 nodes, specify `EC2_LINUX` or `EC2_WINDOWS`.
     #   Amazon EKS grants the necessary permissions to the node for you. If
     #   the `principalArn` is for any other purpose, specify `STANDARD`. If
     #   you don't specify a value, Amazon EKS sets the value to `STANDARD`.
-    #   It's unnecessary to create access entries for IAM roles used with
-    #   Fargate profiles or managed Amazon EC2 nodes, because Amazon EKS
-    #   creates entries in the `aws-auth` `ConfigMap` for the roles. You
-    #   can't change this value once you've created the access entry.
+    #   If you have the access mode of the cluster set to
+    #   `API_AND_CONFIG_MAP`, it's unnecessary to create access entries for
+    #   IAM roles used with Fargate profiles or managed Amazon EC2 nodes,
+    #   because Amazon EKS creates entries in the `aws-auth` `ConfigMap` for
+    #   the roles. You can't change this value once you've created the
+    #   access entry.
     #
     #   If you set the value to `EC2_LINUX` or `EC2_WINDOWS`, you can't
     #   specify values for `kubernetesGroups`, or associate an
@@ -1510,7 +1522,7 @@ module Aws::EKS
     #   Role.
     #
     #   For more information, see [Attach an IAM Role to an Amazon EKS
-    #   add-on using Pod Identity][1] in the EKS User Guide.
+    #   add-on using Pod Identity][1] in the *Amazon EKS User Guide*.
     #
     #
     #
@@ -1603,8 +1615,8 @@ module Aws::EKS
     #
     # @!attribute [rw] logging
     #   Enable or disable exporting the Kubernetes control plane logs for
-    #   your cluster to CloudWatch Logs. By default, cluster control plane
-    #   logs aren't exported to CloudWatch Logs. For more information, see
+    #   your cluster to CloudWatch Logs . By default, cluster control plane
+    #   logs aren't exported to CloudWatch Logs . For more information, see
     #   [Amazon EKS Cluster control plane logs][1] in the <i> <i>Amazon EKS
     #   User Guide</i> </i>.
     #
@@ -1684,14 +1696,14 @@ module Aws::EKS
     #   until the zonal shift expires or you cancel it. You can extend the
     #   zonal shift if necessary.
     #
-    #   You can start a zonal shift for an EKS cluster, or you can allow
-    #   Amazon Web Services to do it for you by enabling *zonal autoshift*.
-    #   This shift updates the flow of east-to-west network traffic in your
-    #   cluster to only consider network endpoints for Pods running on
-    #   worker nodes in healthy AZs. Additionally, any ALB or NLB handling
-    #   ingress traffic for applications in your EKS cluster will
-    #   automatically route traffic to targets in the healthy AZs. For more
-    #   information about zonal shift in EKS, see [Learn about Amazon
+    #   You can start a zonal shift for an Amazon EKS cluster, or you can
+    #   allow Amazon Web Services to do it for you by enabling *zonal
+    #   autoshift*. This shift updates the flow of east-to-west network
+    #   traffic in your cluster to only consider network endpoints for Pods
+    #   running on worker nodes in healthy AZs. Additionally, any ALB or NLB
+    #   handling ingress traffic for applications in your Amazon EKS cluster
+    #   will automatically route traffic to targets in the healthy AZs. For
+    #   more information about zonal shift in EKS, see [Learn about Amazon
     #   Application Recovery Controller (ARC) Zonal Shift in Amazon EKS][1]
     #   in the <i> <i>Amazon EKS User Guide</i> </i>.
     #
@@ -3193,7 +3205,7 @@ module Aws::EKS
     # Indicates the current configuration of the load balancing capability
     # on your EKS Auto Mode cluster. For example, if the capability is
     # enabled or disabled. For more information, see EKS Auto Mode load
-    # balancing capability in the EKS User Guide.
+    # balancing capability in the *Amazon EKS User Guide*.
     #
     # @!attribute [rw] enabled
     #   Indicates if the load balancing capability is enabled on your EKS
@@ -3550,7 +3562,7 @@ module Aws::EKS
     #   @return [Array<Types::DeprecationDetail>]
     #
     # @!attribute [rw] addon_compatibility_details
-    #   A list of AddonCompatibilityDetail objects for Amazon EKS add-ons.
+    #   A list of `AddonCompatibilityDetail` objects for Amazon EKS add-ons.
     #   @return [Array<Types::AddonCompatibilityDetail>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/InsightCategorySpecificSummary AWS API Documentation
@@ -3896,7 +3908,7 @@ module Aws::EKS
     #   version `1.10.1` or later of the Amazon VPC CNI add-on. If you
     #   specify `ipv6`, then ensure that your VPC meets the requirements
     #   listed in the considerations listed in [Assigning IPv6 addresses to
-    #   pods and services][1] in the Amazon EKS User Guide. Kubernetes
+    #   pods and services][1] in the *Amazon EKS User Guide*. Kubernetes
     #   assigns services `IPv6` addresses from the unique local address
     #   range `(fc00::/7)`. You can't specify a custom `IPv6` CIDR block.
     #   Pod addresses are assigned from the subnet's `IPv6` CIDR.
@@ -3909,7 +3921,7 @@ module Aws::EKS
     # @!attribute [rw] elastic_load_balancing
     #   Request to enable or disable the load balancing capability on your
     #   EKS Auto Mode cluster. For more information, see EKS Auto Mode load
-    #   balancing capability in the EKS User Guide.
+    #   balancing capability in the *Amazon EKS User Guide*.
     #   @return [Types::ElasticLoadBalancing]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/KubernetesNetworkConfigRequest AWS API Documentation
@@ -4354,7 +4366,7 @@ module Aws::EKS
 
     # @!attribute [rw] clusters
     #   A list of all of the clusters for your account in the specified
-    #   Amazon Web Services Region.
+    #   Amazon Web Services Region .
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -4893,9 +4905,9 @@ module Aws::EKS
     #
     # @!attribute [rw] enabled
     #   If a log type is enabled, that log type exports its control plane
-    #   logs to CloudWatch Logs. If a log type isn't enabled, that log type
-    #   doesn't export its control plane logs. Each individual log type can
-    #   be enabled or disabled independently.
+    #   logs to CloudWatch Logs . If a log type isn't enabled, that log
+    #   type doesn't export its control plane logs. Each individual log
+    #   type can be enabled or disabled independently.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/LogSetup AWS API Documentation
@@ -5223,7 +5235,10 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # The node group update configuration.
+    # The node group update configuration. An Amazon EKS managed node group
+    # updates by replacing nodes with new nodes of newer AMI versions in
+    # parallel. You choose the *maximum unavailable* and the *update
+    # strategy*.
     #
     # @!attribute [rw] max_unavailable
     #   The maximum number of nodes unavailable at once during a version
@@ -5238,11 +5253,34 @@ module Aws::EKS
     #   once. This value or `maxUnavailable` is required to have a value.
     #   @return [Integer]
     #
+    # @!attribute [rw] update_strategy
+    #   The configuration for the behavior to follow during a node group
+    #   version update of this managed node group. You choose between two
+    #   possible strategies for replacing nodes during an
+    #   [UpdateNodegroupVersion][1] action.
+    #
+    #   An Amazon EKS managed node group updates by replacing nodes with new
+    #   nodes of newer AMI versions in parallel. The *update strategy*
+    #   changes the managed node update behavior of the managed node group
+    #   for each quantity. The *default* strategy has guardrails to protect
+    #   you from misconfiguration and launches the new instances first,
+    #   before terminating the old instances. The *minimal* strategy removes
+    #   the guardrails and terminates the old instances before launching the
+    #   new instances. This minimal strategy is useful in scenarios where
+    #   you are constrained to resources or costs (for example, with
+    #   hardware accelerators such as GPUs).
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/latest/APIReference/API_UpdateNodegroupVersion.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/NodegroupUpdateConfig AWS API Documentation
     #
     class NodegroupUpdateConfig < Struct.new(
       :max_unavailable,
-      :max_unavailable_percentage)
+      :max_unavailable_percentage,
+      :update_strategy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6186,8 +6224,8 @@ module Aws::EKS
 
     # Request to update the configuration of the storage capability of your
     # EKS Auto Mode cluster. For example, enable the capability. For more
-    # information, see EKS Auto Mode block storage capability in the EKS
-    # User Guide.
+    # information, see EKS Auto Mode block storage capability in the *Amazon
+    # EKS User Guide*.
     #
     # @!attribute [rw] block_storage
     #   Request to configure EBS Block Storage settings for your EKS Auto
@@ -6545,7 +6583,7 @@ module Aws::EKS
     #   deleted.
     #
     #   For more information, see [Attach an IAM Role to an Amazon EKS
-    #   add-on using Pod Identity][1] in the EKS User Guide.
+    #   add-on using Pod Identity][1] in the *Amazon EKS User Guide*.
     #
     #
     #
@@ -6590,8 +6628,8 @@ module Aws::EKS
     #
     # @!attribute [rw] logging
     #   Enable or disable exporting the Kubernetes control plane logs for
-    #   your cluster to CloudWatch Logs. By default, cluster control plane
-    #   logs aren't exported to CloudWatch Logs. For more information, see
+    #   your cluster to CloudWatch Logs . By default, cluster control plane
+    #   logs aren't exported to CloudWatch Logs . For more information, see
     #   [Amazon EKS cluster control plane logs][1] in the <i> <i>Amazon EKS
     #   User Guide</i> </i>.
     #
@@ -7053,7 +7091,8 @@ module Aws::EKS
     # extended support have higher costs. The default value is `EXTENDED`.
     # Use `STANDARD` to disable extended support.
     #
-    # [Learn more about EKS Extended Support in the EKS User Guide.][1]
+    # [Learn more about EKS Extended Support in the *Amazon EKS User
+    # Guide*.][1]
     #
     #
     #
@@ -7064,7 +7103,8 @@ module Aws::EKS
     #   at the end of standard support. If the cluster is set to `STANDARD`,
     #   it will be automatically upgraded at the end of standard support.
     #
-    #   [Learn more about EKS Extended Support in the EKS User Guide.][1]
+    #   [Learn more about EKS Extended Support in the *Amazon EKS User
+    #   Guide*.][1]
     #
     #
     #
@@ -7082,7 +7122,8 @@ module Aws::EKS
     # This value indicates if extended support is enabled or disabled for
     # the cluster.
     #
-    # [Learn more about EKS Extended Support in the EKS User Guide.][1]
+    # [Learn more about EKS Extended Support in the *Amazon EKS User
+    # Guide*.][1]
     #
     #
     #
@@ -7093,7 +7134,8 @@ module Aws::EKS
     #   at the end of standard support. If the cluster is set to `STANDARD`,
     #   it will be automatically upgraded at the end of standard support.
     #
-    #   [Learn more about EKS Extended Support in the EKS User Guide.][1]
+    #   [Learn more about EKS Extended Support in the *Amazon EKS User
+    #   Guide*.][1]
     #
     #
     #

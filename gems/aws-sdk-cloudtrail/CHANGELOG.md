@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.99.0 (2025-01-24)
+------------------
+
+* Feature - This release introduces the SearchSampleQueries API that allows users to search for CloudTrail Lake sample queries.
+
 1.98.0 (2025-01-15)
 ------------------
 

@@ -59,6 +59,7 @@ module Aws::Transfer
     CreateWebAppResponse = Shapes::StructureShape.new(name: 'CreateWebAppResponse')
     CreateWorkflowRequest = Shapes::StructureShape.new(name: 'CreateWorkflowRequest')
     CreateWorkflowResponse = Shapes::StructureShape.new(name: 'CreateWorkflowResponse')
+    CustomDirectoriesType = Shapes::StructureShape.new(name: 'CustomDirectoriesType')
     CustomStepDetails = Shapes::StructureShape.new(name: 'CustomStepDetails')
     CustomStepStatus = Shapes::StringShape.new(name: 'CustomStepStatus')
     CustomStepTarget = Shapes::StringShape.new(name: 'CustomStepTarget')
@@ -435,12 +436,13 @@ module Aws::Transfer
     CreateAgreementRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
     CreateAgreementRequest.add_member(:local_profile_id, Shapes::ShapeRef.new(shape: ProfileId, required: true, location_name: "LocalProfileId"))
     CreateAgreementRequest.add_member(:partner_profile_id, Shapes::ShapeRef.new(shape: ProfileId, required: true, location_name: "PartnerProfileId"))
-    CreateAgreementRequest.add_member(:base_directory, Shapes::ShapeRef.new(shape: HomeDirectory, required: true, location_name: "BaseDirectory"))
+    CreateAgreementRequest.add_member(:base_directory, Shapes::ShapeRef.new(shape: HomeDirectory, location_name: "BaseDirectory"))
     CreateAgreementRequest.add_member(:access_role, Shapes::ShapeRef.new(shape: Role, required: true, location_name: "AccessRole"))
     CreateAgreementRequest.add_member(:status, Shapes::ShapeRef.new(shape: AgreementStatusType, location_name: "Status"))
     CreateAgreementRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateAgreementRequest.add_member(:preserve_filename, Shapes::ShapeRef.new(shape: PreserveFilenameType, location_name: "PreserveFilename"))
     CreateAgreementRequest.add_member(:enforce_message_signing, Shapes::ShapeRef.new(shape: EnforceMessageSigningType, location_name: "EnforceMessageSigning"))
+    CreateAgreementRequest.add_member(:custom_directories, Shapes::ShapeRef.new(shape: CustomDirectoriesType, location_name: "CustomDirectories"))
     CreateAgreementRequest.struct_class = Types::CreateAgreementRequest
 
     CreateAgreementResponse.add_member(:agreement_id, Shapes::ShapeRef.new(shape: AgreementId, required: true, location_name: "AgreementId"))
@@ -522,6 +524,13 @@ module Aws::Transfer
 
     CreateWorkflowResponse.add_member(:workflow_id, Shapes::ShapeRef.new(shape: WorkflowId, required: true, location_name: "WorkflowId"))
     CreateWorkflowResponse.struct_class = Types::CreateWorkflowResponse
+
+    CustomDirectoriesType.add_member(:failed_files_directory, Shapes::ShapeRef.new(shape: HomeDirectory, required: true, location_name: "FailedFilesDirectory"))
+    CustomDirectoriesType.add_member(:mdn_files_directory, Shapes::ShapeRef.new(shape: HomeDirectory, required: true, location_name: "MdnFilesDirectory"))
+    CustomDirectoriesType.add_member(:payload_files_directory, Shapes::ShapeRef.new(shape: HomeDirectory, required: true, location_name: "PayloadFilesDirectory"))
+    CustomDirectoriesType.add_member(:status_files_directory, Shapes::ShapeRef.new(shape: HomeDirectory, required: true, location_name: "StatusFilesDirectory"))
+    CustomDirectoriesType.add_member(:temporary_files_directory, Shapes::ShapeRef.new(shape: HomeDirectory, required: true, location_name: "TemporaryFilesDirectory"))
+    CustomDirectoriesType.struct_class = Types::CustomDirectoriesType
 
     CustomStepDetails.add_member(:name, Shapes::ShapeRef.new(shape: WorkflowStepName, location_name: "Name"))
     CustomStepDetails.add_member(:target, Shapes::ShapeRef.new(shape: CustomStepTarget, location_name: "Target"))
@@ -689,6 +698,7 @@ module Aws::Transfer
     DescribedAgreement.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     DescribedAgreement.add_member(:preserve_filename, Shapes::ShapeRef.new(shape: PreserveFilenameType, location_name: "PreserveFilename"))
     DescribedAgreement.add_member(:enforce_message_signing, Shapes::ShapeRef.new(shape: EnforceMessageSigningType, location_name: "EnforceMessageSigning"))
+    DescribedAgreement.add_member(:custom_directories, Shapes::ShapeRef.new(shape: CustomDirectoriesType, location_name: "CustomDirectories"))
     DescribedAgreement.struct_class = Types::DescribedAgreement
 
     DescribedCertificate.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
@@ -1339,6 +1349,7 @@ module Aws::Transfer
     UpdateAgreementRequest.add_member(:access_role, Shapes::ShapeRef.new(shape: Role, location_name: "AccessRole"))
     UpdateAgreementRequest.add_member(:preserve_filename, Shapes::ShapeRef.new(shape: PreserveFilenameType, location_name: "PreserveFilename"))
     UpdateAgreementRequest.add_member(:enforce_message_signing, Shapes::ShapeRef.new(shape: EnforceMessageSigningType, location_name: "EnforceMessageSigning"))
+    UpdateAgreementRequest.add_member(:custom_directories, Shapes::ShapeRef.new(shape: CustomDirectoriesType, location_name: "CustomDirectories"))
     UpdateAgreementRequest.struct_class = Types::UpdateAgreementRequest
 
     UpdateAgreementResponse.add_member(:agreement_id, Shapes::ShapeRef.new(shape: AgreementId, required: true, location_name: "AgreementId"))

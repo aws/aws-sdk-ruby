@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.111.0 (2025-01-24)
+------------------
+
+* Feature - Added CustomDirectories as a new directory option for storing inbound AS2 messages, MDN files and Status files.
+
 1.110.0 (2025-01-15)
 ------------------
 

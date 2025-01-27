@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.127.0 (2025-01-24)
+------------------
+
+* Feature - Adds support for UpdateStrategies in EKS Managed Node Groups.
+
 1.126.0 (2025-01-15)
 ------------------
 

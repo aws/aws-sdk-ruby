@@ -835,6 +835,19 @@ module Aws
                                     ) -> _RestoreEventDataStoreResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreEventDataStoreResponseSuccess
 
+      interface _SearchSampleQueriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchSampleQueriesResponse]
+        def search_results: () -> ::Array[Types::SearchSampleQueriesSearchResult]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#search_sample_queries-instance_method
+      def search_sample_queries: (
+                                   search_phrase: ::String,
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _SearchSampleQueriesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchSampleQueriesResponseSuccess
+
       interface _StartDashboardRefreshResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartDashboardRefreshResponse]
         def refresh_id: () -> ::String

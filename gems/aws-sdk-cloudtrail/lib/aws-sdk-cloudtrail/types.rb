@@ -96,7 +96,7 @@ module Aws::CloudTrail
     # a trail.
     #
     # For information about configurable advanced event selector fields, see
-    # [AdvancedEventSelector][4] in the *CloudTrailUser Guide*.
+    # [AdvancedEventSelector][4] in the *CloudTrail API Reference*.
     #
     #
     #
@@ -133,7 +133,14 @@ module Aws::CloudTrail
     #   filtering is not supported.
     #
     #   For more information, see [AdvancedFieldSelector][1] in the
-    #   *CloudTrailUser Guide*.
+    #   *CloudTrail API Reference*.
+    #
+    #   <note markdown="1"> Selectors don't support the use of wildcards like `*` . To match
+    #   multiple values with a single condition, you may use `StartsWith`,
+    #   `EndsWith`, `NotStartsWith`, or `NotEndsWith` to explicitly match
+    #   the beginning or end of the event field.
+    #
+    #    </note>
     #
     #
     #
@@ -4653,6 +4660,80 @@ module Aws::CloudTrail
       :s3_location_uri,
       :s3_bucket_region,
       :s3_bucket_access_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] search_phrase
+    #   The natural language phrase to use for the semantic search. The
+    #   phrase must be in English. The length constraint is in characters,
+    #   not words.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return on a single page. The
+    #   default value is 10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token you can use to get the next page of results. The length
+    #   constraint is in characters, not words.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/SearchSampleQueriesRequest AWS API Documentation
+    #
+    class SearchSampleQueriesRequest < Struct.new(
+      :search_phrase,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] search_results
+    #   A list of objects containing the search results ordered from most
+    #   relevant to least relevant.
+    #   @return [Array<Types::SearchSampleQueriesSearchResult>]
+    #
+    # @!attribute [rw] next_token
+    #   A token you can use to get the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/SearchSampleQueriesResponse AWS API Documentation
+    #
+    class SearchSampleQueriesResponse < Struct.new(
+      :search_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A search result returned by the `SearchSampleQueries` operation.
+    #
+    # @!attribute [rw] name
+    #   The name of a sample query.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A longer description of a sample query.
+    #   @return [String]
+    #
+    # @!attribute [rw] sql
+    #   The SQL code of the sample query.
+    #   @return [String]
+    #
+    # @!attribute [rw] relevance
+    #   A value between 0 and 1 indicating the similarity between the search
+    #   phrase and result.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/SearchSampleQueriesSearchResult AWS API Documentation
+    #
+    class SearchSampleQueriesSearchResult < Struct.new(
+      :name,
+      :description,
+      :sql,
+      :relevance)
       SENSITIVE = []
       include Aws::Structure
     end

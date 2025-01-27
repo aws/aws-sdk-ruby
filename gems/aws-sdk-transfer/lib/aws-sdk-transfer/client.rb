@@ -657,6 +657,11 @@ module Aws::Transfer
     # The partner is identified with the `PartnerProfileId`, and the AS2
     # process is identified with the `LocalProfileId`.
     #
+    # <note markdown="1"> Specify *either* `BaseDirectory` or `CustomDirectories`, but not both.
+    # Specifying both causes the command to fail.
+    #
+    #  </note>
+    #
     # @option params [String] :description
     #   A name or short description to identify the agreement.
     #
@@ -670,7 +675,7 @@ module Aws::Transfer
     # @option params [required, String] :partner_profile_id
     #   A unique identifier for the partner profile used in the agreement.
     #
-    # @option params [required, String] :base_directory
+    # @option params [String] :base_directory
     #   The landing directory (folder) for files transferred by using the AS2
     #   protocol.
     #
@@ -742,6 +747,21 @@ module Aws::Transfer
     #   * `DISABLED` (default value): Transfer Family accepts unsigned
     #     messages from your trading partner.
     #
+    # @option params [Types::CustomDirectoriesType] :custom_directories
+    #   A `CustomDirectoriesType` structure. This structure specifies custom
+    #   directories for storing various AS2 message files. You can specify
+    #   directories for the following types of files.
+    #
+    #   * Failed files
+    #
+    #   * MDN files
+    #
+    #   * Payload files
+    #
+    #   * Status files
+    #
+    #   * Temporary files
+    #
     # @return [Types::CreateAgreementResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAgreementResponse#agreement_id #agreement_id} => String
@@ -753,7 +773,7 @@ module Aws::Transfer
     #     server_id: "ServerId", # required
     #     local_profile_id: "ProfileId", # required
     #     partner_profile_id: "ProfileId", # required
-    #     base_directory: "HomeDirectory", # required
+    #     base_directory: "HomeDirectory",
     #     access_role: "Role", # required
     #     status: "ACTIVE", # accepts ACTIVE, INACTIVE
     #     tags: [
@@ -764,6 +784,13 @@ module Aws::Transfer
     #     ],
     #     preserve_filename: "ENABLED", # accepts ENABLED, DISABLED
     #     enforce_message_signing: "ENABLED", # accepts ENABLED, DISABLED
+    #     custom_directories: {
+    #       failed_files_directory: "HomeDirectory", # required
+    #       mdn_files_directory: "HomeDirectory", # required
+    #       payload_files_directory: "HomeDirectory", # required
+    #       status_files_directory: "HomeDirectory", # required
+    #       temporary_files_directory: "HomeDirectory", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -2192,6 +2219,11 @@ module Aws::Transfer
     #   resp.agreement.tags[0].value #=> String
     #   resp.agreement.preserve_filename #=> String, one of "ENABLED", "DISABLED"
     #   resp.agreement.enforce_message_signing #=> String, one of "ENABLED", "DISABLED"
+    #   resp.agreement.custom_directories.failed_files_directory #=> String
+    #   resp.agreement.custom_directories.mdn_files_directory #=> String
+    #   resp.agreement.custom_directories.payload_files_directory #=> String
+    #   resp.agreement.custom_directories.status_files_directory #=> String
+    #   resp.agreement.custom_directories.temporary_files_directory #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeAgreement AWS API Documentation
     #
@@ -4359,6 +4391,16 @@ module Aws::Transfer
     # `AgreementId` and the `ServerId` for the agreement that you want to
     # update, along with the new values for the parameters to update.
     #
+    # <note markdown="1"> Specify *either* `BaseDirectory` or `CustomDirectories`, but not both.
+    # Specifying both causes the command to fail.
+    #
+    #  If you update an agreement from using base directory to custom
+    # directories, the base directory is no longer used. Similarly, if you
+    # change from custom directories to a base directory, the custom
+    # directories are no longer used.
+    #
+    #  </note>
+    #
     # @option params [required, String] :agreement_id
     #   A unique identifier for the agreement. This identifier is returned
     #   when you create an agreement.
@@ -4448,6 +4490,21 @@ module Aws::Transfer
     #   * `DISABLED` (default value): Transfer Family accepts unsigned
     #     messages from your trading partner.
     #
+    # @option params [Types::CustomDirectoriesType] :custom_directories
+    #   A `CustomDirectoriesType` structure. This structure specifies custom
+    #   directories for storing various AS2 message files. You can specify
+    #   directories for the following types of files.
+    #
+    #   * Failed files
+    #
+    #   * MDN files
+    #
+    #   * Payload files
+    #
+    #   * Status files
+    #
+    #   * Temporary files
+    #
     # @return [Types::UpdateAgreementResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAgreementResponse#agreement_id #agreement_id} => String
@@ -4465,6 +4522,13 @@ module Aws::Transfer
     #     access_role: "Role",
     #     preserve_filename: "ENABLED", # accepts ENABLED, DISABLED
     #     enforce_message_signing: "ENABLED", # accepts ENABLED, DISABLED
+    #     custom_directories: {
+    #       failed_files_directory: "HomeDirectory", # required
+    #       mdn_files_directory: "HomeDirectory", # required
+    #       payload_files_directory: "HomeDirectory", # required
+    #       status_files_directory: "HomeDirectory", # required
+    #       temporary_files_directory: "HomeDirectory", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -5311,7 +5375,7 @@ module Aws::Transfer
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.110.0'
+      context[:gem_version] = '1.111.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

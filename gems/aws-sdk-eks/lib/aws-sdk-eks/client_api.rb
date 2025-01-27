@@ -246,6 +246,7 @@ module Aws::EKS
     NodegroupScalingConfig = Shapes::StructureShape.new(name: 'NodegroupScalingConfig')
     NodegroupStatus = Shapes::StringShape.new(name: 'NodegroupStatus')
     NodegroupUpdateConfig = Shapes::StructureShape.new(name: 'NodegroupUpdateConfig')
+    NodegroupUpdateStrategies = Shapes::StringShape.new(name: 'NodegroupUpdateStrategies')
     NonZeroInteger = Shapes::IntegerShape.new(name: 'NonZeroInteger')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     OIDC = Shapes::StructureShape.new(name: 'OIDC')
@@ -1227,6 +1228,7 @@ module Aws::EKS
 
     NodegroupUpdateConfig.add_member(:max_unavailable, Shapes::ShapeRef.new(shape: NonZeroInteger, location_name: "maxUnavailable"))
     NodegroupUpdateConfig.add_member(:max_unavailable_percentage, Shapes::ShapeRef.new(shape: PercentCapacity, location_name: "maxUnavailablePercentage"))
+    NodegroupUpdateConfig.add_member(:update_strategy, Shapes::ShapeRef.new(shape: NodegroupUpdateStrategies, location_name: "updateStrategy"))
     NodegroupUpdateConfig.struct_class = Types::NodegroupUpdateConfig
 
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))

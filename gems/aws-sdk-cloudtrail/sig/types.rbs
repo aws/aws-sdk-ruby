@@ -1095,6 +1095,27 @@ module Aws::CloudTrail
       SENSITIVE: []
     end
 
+    class SearchSampleQueriesRequest
+      attr_accessor search_phrase: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchSampleQueriesResponse
+      attr_accessor search_results: ::Array[Types::SearchSampleQueriesSearchResult]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchSampleQueriesSearchResult
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor sql: ::String
+      attr_accessor relevance: ::Float
+      SENSITIVE: []
+    end
+
     class ServiceQuotaExceededException < Aws::EmptyStructure
     end
 

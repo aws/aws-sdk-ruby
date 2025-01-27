@@ -428,7 +428,7 @@ module Aws::SSM
     #   Choose the parameter that will define how your automation will
     #   branch out. This target is required for associations that use an
     #   Automation runbook and target resources by using rate controls.
-    #   Automation is a capability of Amazon Web Services Systems Manager.
+    #   Automation is a tool in Amazon Web Services Systems Manager.
     #   @return [String]
     #
     # @!attribute [rw] parameters
@@ -510,9 +510,9 @@ module Aws::SSM
     #
     #   In `MANUAL` mode, you must specify the `AssociationId` as a
     #   parameter for the PutComplianceItems API operation. In this case,
-    #   compliance data isn't managed by State Manager, a capability of
-    #   Amazon Web Services Systems Manager. It is managed by your direct
-    #   call to the PutComplianceItems API operation.
+    #   compliance data isn't managed by State Manager, a tool in Amazon
+    #   Web Services Systems Manager. It is managed by your direct call to
+    #   the PutComplianceItems API operation.
     #
     #   By default, all associations use `AUTO` mode.
     #   @return [String]
@@ -967,9 +967,9 @@ module Aws::SSM
     #
     #   In `MANUAL` mode, you must specify the `AssociationId` as a
     #   parameter for the PutComplianceItems API operation. In this case,
-    #   compliance data isn't managed by State Manager, a capability of
-    #   Amazon Web Services Systems Manager. It is managed by your direct
-    #   call to the PutComplianceItems API operation.
+    #   compliance data isn't managed by State Manager, a tool in Amazon
+    #   Web Services Systems Manager. It is managed by your direct call to
+    #   the PutComplianceItems API operation.
     #
     #   By default, all associations use `AUTO` mode.
     #   @return [String]
@@ -2087,9 +2087,9 @@ module Aws::SSM
     #
     # @!attribute [rw] service_role
     #   The Identity and Access Management (IAM) service role that Run
-    #   Command, a capability of Amazon Web Services Systems Manager, uses
-    #   to act on your behalf when sending notifications about command
-    #   status changes.
+    #   Command, a tool in Amazon Web Services Systems Manager, uses to act
+    #   on your behalf when sending notifications about command status
+    #   changes.
     #   @return [String]
     #
     # @!attribute [rw] notification_config
@@ -2379,9 +2379,9 @@ module Aws::SSM
     #
     # @!attribute [rw] service_role
     #   The Identity and Access Management (IAM) service role that Run
-    #   Command, a capability of Amazon Web Services Systems Manager, uses
-    #   to act on your behalf when sending notifications about command
-    #   status changes on a per managed node basis.
+    #   Command, a tool in Amazon Web Services Systems Manager, uses to act
+    #   on your behalf when sending notifications about command status
+    #   changes on a per managed node basis.
     #   @return [String]
     #
     # @!attribute [rw] notification_config
@@ -2967,8 +2967,8 @@ module Aws::SSM
     # @!attribute [rw] automation_target_parameter_name
     #   Specify the target for the association. This target is required for
     #   associations that use an Automation runbook and target resources by
-    #   using rate controls. Automation is a capability of Amazon Web
-    #   Services Systems Manager.
+    #   using rate controls. Automation is a tool in Amazon Web Services
+    #   Systems Manager.
     #   @return [String]
     #
     # @!attribute [rw] document_version
@@ -3037,9 +3037,9 @@ module Aws::SSM
     #
     #   In `MANUAL` mode, you must specify the `AssociationId` as a
     #   parameter for the PutComplianceItems API operation. In this case,
-    #   compliance data isn't managed by State Manager, a capability of
-    #   Amazon Web Services Systems Manager. It is managed by your direct
-    #   call to the PutComplianceItems API operation.
+    #   compliance data isn't managed by State Manager, a tool in Amazon
+    #   Web Services Systems Manager. It is managed by your direct call to
+    #   the PutComplianceItems API operation.
     #
     #   By default, all associations use `AUTO` mode.
     #   @return [String]
@@ -3235,7 +3235,7 @@ module Aws::SSM
     #   Choose the parameter that will define how your automation will
     #   branch out. This target is required for associations that use an
     #   Automation runbook and target resources by using rate controls.
-    #   Automation is a capability of Amazon Web Services Systems Manager.
+    #   Automation is a tool in Amazon Web Services Systems Manager.
     #   @return [String]
     #
     # @!attribute [rw] max_errors
@@ -6357,7 +6357,7 @@ module Aws::SSM
     # @!attribute [rw] instances_with_unreported_not_applicable_patches
     #   The number of managed nodes with `NotApplicable` patches beyond the
     #   supported limit, which aren't reported by name to Inventory.
-    #   Inventory is a capability of Amazon Web Services Systems Manager.
+    #   Inventory is a tool in Amazon Web Services Systems Manager.
     #   @return [Integer]
     #
     # @!attribute [rw] instances_with_critical_non_compliant_patches
@@ -10010,7 +10010,7 @@ module Aws::SSM
     # @!attribute [rw] unreported_not_applicable_count
     #   The number of patches beyond the supported limit of
     #   `NotApplicableCount` that aren't reported by name to Inventory.
-    #   Inventory is a capability of Amazon Web Services Systems Manager.
+    #   Inventory is a tool in Amazon Web Services Systems Manager.
     #   @return [Integer]
     #
     # @!attribute [rw] not_applicable_count
@@ -14734,9 +14734,9 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] policy_type
-    #   The type of policy. Parameter Store, a capability of Amazon Web
-    #   Services Systems Manager, supports the following policy types:
-    #   Expiration, ExpirationNotification, and NoChangeNotification.
+    #   The type of policy. Parameter Store, a tool in Amazon Web Services
+    #   Systems Manager, supports the following policy types: Expiration,
+    #   ExpirationNotification, and NoChangeNotification.
     #   @return [String]
     #
     # @!attribute [rw] policy_status
@@ -15789,8 +15789,8 @@ module Aws::SSM
     #   value limit of 8 KB.
     #
     #   <note markdown="1"> Parameters can't be referenced or nested in the values of other
-    #   parameters. You can't include `{{}}` or `{{ssm:parameter-name}}` in
-    #   a parameter value.
+    #   parameters. You can't include values wrapped in double brackets
+    #   `{{}}` or `{{ssm:parameter-name}}` in a parameter value.
     #
     #    </note>
     #   @return [String]
@@ -15939,8 +15939,8 @@ module Aws::SSM
     #
     # @!attribute [rw] policies
     #   One or more policies to apply to a parameter. This operation takes a
-    #   JSON array. Parameter Store, a capability of Amazon Web Services
-    #   Systems Manager supports the following policy types:
+    #   JSON array. Parameter Store, a tool in Amazon Web Services Systems
+    #   Manager supports the following policy types:
     #
     #   Expiration: This policy deletes the parameter after it expires. When
     #   you create the policy, you specify the expiration date. You can
@@ -17625,8 +17625,8 @@ module Aws::SSM
     #
     # @!attribute [rw] cloud_watch_output_config
     #   Enables Amazon Web Services Systems Manager to send Run Command
-    #   output to Amazon CloudWatch Logs. Run Command is a capability of
-    #   Amazon Web Services Systems Manager.
+    #   output to Amazon CloudWatch Logs. Run Command is a tool in Amazon
+    #   Web Services Systems Manager.
     #   @return [Types::CloudWatchOutputConfig]
     #
     # @!attribute [rw] alarm_configuration
@@ -18069,8 +18069,11 @@ module Aws::SSM
     #
     #   * `Key=OS,Value=Windows`
     #
-    #   <note markdown="1"> To add tags to an existing automation, use the AddTagsToResource
-    #   operation.
+    #   <note markdown="1"> The `Array Members` maximum value is reported as 1000. This number
+    #   includes capacity reserved for internal operations. When calling the
+    #   `StartAutomationExecution` action, you can specify a maximum of 5
+    #   tags. You can, however, use the AddTagsToResource action to add up
+    #   to a total of 50 tags to an existing automation configuration.
     #
     #    </note>
     #   @return [Array<Types::Tag>]
@@ -18193,6 +18196,14 @@ module Aws::SSM
     #   * `Key=Environment,Value=Production`
     #
     #   * `Key=Region,Value=us-east-2`
+    #
+    #   <note markdown="1"> The `Array Members` maximum value is reported as 1000. This number
+    #   includes capacity reserved for internal operations. When calling the
+    #   `StartChangeRequestExecution` action, you can specify a maximum of 5
+    #   tags. You can, however, use the AddTagsToResource action to add up
+    #   to a total of 50 tags to an existing change request configuration.
+    #
+    #    </note>
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] scheduled_end_time
@@ -18302,7 +18313,13 @@ module Aws::SSM
     #
     # @!attribute [rw] parameters
     #   The values you want to specify for the parameters defined in the
-    #   Session document.
+    #   Session document. For more information about these parameters, see
+    #   [Create a Session Manager preferences document][1] in the *Amazon
+    #   Web Services Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/getting-started-create-preferences-cli.html
     #   @return [Hash<String,Array<String>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartSessionRequest AWS API Documentation
@@ -18600,7 +18617,7 @@ module Aws::SSM
     #
     # Supported formats include the following.
     #
-    # **For all Systems Manager capabilities:**
+    # **For all Systems Manager tools:**
     #
     # * `Key=tag-key,Values=tag-value-1,tag-value-2`
     #
@@ -19061,8 +19078,8 @@ module Aws::SSM
     #
     # @!attribute [rw] parameters
     #   The parameters you want to update for the association. If you create
-    #   a parameter using Parameter Store, a capability of Amazon Web
-    #   Services Systems Manager, you can reference the parameter using
+    #   a parameter using Parameter Store, a tool in Amazon Web Services
+    #   Systems Manager, you can reference the parameter using
     #   `{{ssm:parameter-name}}`.
     #   @return [Hash<String,Array<String>>]
     #
@@ -19129,7 +19146,7 @@ module Aws::SSM
     #   Choose the parameter that will define how your automation will
     #   branch out. This target is required for associations that use an
     #   Automation runbook and target resources by using rate controls.
-    #   Automation is a capability of Amazon Web Services Systems Manager.
+    #   Automation is a tool in Amazon Web Services Systems Manager.
     #   @return [String]
     #
     # @!attribute [rw] max_errors
@@ -19177,9 +19194,9 @@ module Aws::SSM
     #
     #   In `MANUAL` mode, you must specify the `AssociationId` as a
     #   parameter for the PutComplianceItems API operation. In this case,
-    #   compliance data isn't managed by State Manager, a capability of
-    #   Amazon Web Services Systems Manager. It is managed by your direct
-    #   call to the PutComplianceItems API operation.
+    #   compliance data isn't managed by State Manager, a tool in Amazon
+    #   Web Services Systems Manager. It is managed by your direct call to
+    #   the PutComplianceItems API operation.
     #
     #   By default, all associations use `AUTO` mode.
     #   @return [String]

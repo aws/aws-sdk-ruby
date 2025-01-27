@@ -2029,8 +2029,8 @@ module Aws::CloudTrail
     # get Insights event selectors for a trail. You cannot specify these
     # parameters together.
     #
-    # For more information, see [Logging CloudTrail Insights events][1] in
-    # the *CloudTrail User Guide*.
+    # For more information, see [Working with CloudTrail Insights][1] in the
+    # *CloudTrail User Guide*.
     #
     #
     #
@@ -3059,10 +3059,11 @@ module Aws::CloudTrail
     # If you want your trail to log Insights events, be sure the event
     # selector or advanced event selector enables logging of the Insights
     # event types you want configured for your trail. For more information
-    # about logging Insights events, see [Logging Insights events][1] in the
-    # *CloudTrail User Guide*. By default, trails created without specific
-    # event selectors are configured to log all read and write management
-    # events, and no data events or network activity events.
+    # about logging Insights events, see [Working with CloudTrail
+    # Insights][1] in the *CloudTrail User Guide*. By default, trails
+    # created without specific event selectors are configured to log all
+    # read and write management events, and no data events or network
+    # activity events.
     #
     # When an event occurs in your account, CloudTrail evaluates the event
     # selectors or advanced event selectors in all trails. For each trail,
@@ -3273,8 +3274,8 @@ module Aws::CloudTrail
     # management events. You can call `GetEventDataStore` on an event data
     # store to check whether the event data store logs management events.
     #
-    # For more information, see [Logging CloudTrail Insights events][1] in
-    # the *CloudTrail User Guide*.
+    # For more information, see [Working with CloudTrail Insights][1] in the
+    # *CloudTrail User Guide*.
     #
     #
     #
@@ -3554,6 +3555,53 @@ module Aws::CloudTrail
     # @param [Hash] params ({})
     def restore_event_data_store(params = {}, options = {})
       req = build_request(:restore_event_data_store, params)
+      req.send_request(options)
+    end
+
+    # Searches sample queries and returns a list of sample queries that are
+    # sorted by relevance. To search for sample queries, provide a natural
+    # language `SearchPhrase` in English.
+    #
+    # @option params [required, String] :search_phrase
+    #   The natural language phrase to use for the semantic search. The phrase
+    #   must be in English. The length constraint is in characters, not words.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return on a single page. The default
+    #   value is 10.
+    #
+    # @option params [String] :next_token
+    #   A token you can use to get the next page of results. The length
+    #   constraint is in characters, not words.
+    #
+    # @return [Types::SearchSampleQueriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchSampleQueriesResponse#search_results #search_results} => Array&lt;Types::SearchSampleQueriesSearchResult&gt;
+    #   * {Types::SearchSampleQueriesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_sample_queries({
+    #     search_phrase: "SearchSampleQueriesSearchPhrase", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.search_results #=> Array
+    #   resp.search_results[0].name #=> String
+    #   resp.search_results[0].description #=> String
+    #   resp.search_results[0].sql #=> String
+    #   resp.search_results[0].relevance #=> Float
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/SearchSampleQueries AWS API Documentation
+    #
+    # @overload search_sample_queries(params = {})
+    # @param [Hash] params ({})
+    def search_sample_queries(params = {}, options = {})
+      req = build_request(:search_sample_queries, params)
       req.send_request(options)
     end
 
@@ -4536,7 +4584,7 @@ module Aws::CloudTrail
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.98.0'
+      context[:gem_version] = '1.99.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

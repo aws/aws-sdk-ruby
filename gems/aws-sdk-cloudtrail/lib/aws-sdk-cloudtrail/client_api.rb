@@ -306,6 +306,16 @@ module Aws::CloudTrail
     RetentionPeriod = Shapes::IntegerShape.new(name: 'RetentionPeriod')
     S3BucketDoesNotExistException = Shapes::StructureShape.new(name: 'S3BucketDoesNotExistException')
     S3ImportSource = Shapes::StructureShape.new(name: 'S3ImportSource')
+    SampleQueryDescription = Shapes::StringShape.new(name: 'SampleQueryDescription')
+    SampleQueryName = Shapes::StringShape.new(name: 'SampleQueryName')
+    SampleQueryRelevance = Shapes::FloatShape.new(name: 'SampleQueryRelevance')
+    SampleQuerySQL = Shapes::StringShape.new(name: 'SampleQuerySQL')
+    SearchSampleQueriesMaxResults = Shapes::IntegerShape.new(name: 'SearchSampleQueriesMaxResults')
+    SearchSampleQueriesRequest = Shapes::StructureShape.new(name: 'SearchSampleQueriesRequest')
+    SearchSampleQueriesResponse = Shapes::StructureShape.new(name: 'SearchSampleQueriesResponse')
+    SearchSampleQueriesSearchPhrase = Shapes::StringShape.new(name: 'SearchSampleQueriesSearchPhrase')
+    SearchSampleQueriesSearchResult = Shapes::StructureShape.new(name: 'SearchSampleQueriesSearchResult')
+    SearchSampleQueriesSearchResults = Shapes::ListShape.new(name: 'SearchSampleQueriesSearchResults')
     SelectorField = Shapes::StringShape.new(name: 'SelectorField')
     SelectorName = Shapes::StringShape.new(name: 'SelectorName')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
@@ -1212,6 +1222,23 @@ module Aws::CloudTrail
     S3ImportSource.add_member(:s3_bucket_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "S3BucketRegion"))
     S3ImportSource.add_member(:s3_bucket_access_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "S3BucketAccessRoleArn"))
     S3ImportSource.struct_class = Types::S3ImportSource
+
+    SearchSampleQueriesRequest.add_member(:search_phrase, Shapes::ShapeRef.new(shape: SearchSampleQueriesSearchPhrase, required: true, location_name: "SearchPhrase"))
+    SearchSampleQueriesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: SearchSampleQueriesMaxResults, location_name: "MaxResults"))
+    SearchSampleQueriesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    SearchSampleQueriesRequest.struct_class = Types::SearchSampleQueriesRequest
+
+    SearchSampleQueriesResponse.add_member(:search_results, Shapes::ShapeRef.new(shape: SearchSampleQueriesSearchResults, location_name: "SearchResults"))
+    SearchSampleQueriesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    SearchSampleQueriesResponse.struct_class = Types::SearchSampleQueriesResponse
+
+    SearchSampleQueriesSearchResult.add_member(:name, Shapes::ShapeRef.new(shape: SampleQueryName, location_name: "Name"))
+    SearchSampleQueriesSearchResult.add_member(:description, Shapes::ShapeRef.new(shape: SampleQueryDescription, location_name: "Description"))
+    SearchSampleQueriesSearchResult.add_member(:sql, Shapes::ShapeRef.new(shape: SampleQuerySQL, location_name: "SQL"))
+    SearchSampleQueriesSearchResult.add_member(:relevance, Shapes::ShapeRef.new(shape: SampleQueryRelevance, location_name: "Relevance"))
+    SearchSampleQueriesSearchResult.struct_class = Types::SearchSampleQueriesSearchResult
+
+    SearchSampleQueriesSearchResults.member = Shapes::ShapeRef.new(shape: SearchSampleQueriesSearchResult)
 
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
@@ -2252,6 +2279,17 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: NotOrganizationMasterAccountException)
         o.errors << Shapes::ShapeRef.new(shape: NoManagementAccountSLRExistsException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationNotInAllFeaturesModeException)
+      end)
+
+      api.add_operation(:search_sample_queries, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchSampleQueries"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SearchSampleQueriesRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchSampleQueriesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
       end)
 
       api.add_operation(:start_dashboard_refresh, Seahorse::Model::Operation.new.tap do |o|

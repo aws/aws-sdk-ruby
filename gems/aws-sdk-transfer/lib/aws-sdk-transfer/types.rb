@@ -517,6 +517,22 @@ module Aws::Transfer
     #     messages from your trading partner.
     #   @return [String]
     #
+    # @!attribute [rw] custom_directories
+    #   A `CustomDirectoriesType` structure. This structure specifies custom
+    #   directories for storing various AS2 message files. You can specify
+    #   directories for the following types of files.
+    #
+    #   * Failed files
+    #
+    #   * MDN files
+    #
+    #   * Payload files
+    #
+    #   * Status files
+    #
+    #   * Temporary files
+    #   @return [Types::CustomDirectoriesType]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateAgreementRequest AWS API Documentation
     #
     class CreateAgreementRequest < Struct.new(
@@ -529,7 +545,8 @@ module Aws::Transfer
       :status,
       :tags,
       :preserve_filename,
-      :enforce_message_signing)
+      :enforce_message_signing,
+      :custom_directories)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1321,6 +1338,41 @@ module Aws::Transfer
     #
     class CreateWorkflowResponse < Struct.new(
       :workflow_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains Amazon S3 locations for storing specific types of AS2 message
+    # files.
+    #
+    # @!attribute [rw] failed_files_directory
+    #   Specifies a location to store failed AS2 message files.
+    #   @return [String]
+    #
+    # @!attribute [rw] mdn_files_directory
+    #   Specifies a location to store MDN files.
+    #   @return [String]
+    #
+    # @!attribute [rw] payload_files_directory
+    #   Specifies a location to store the payload for AS2 message files.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_files_directory
+    #   Specifies a location to store AS2 status messages.
+    #   @return [String]
+    #
+    # @!attribute [rw] temporary_files_directory
+    #   Specifies a location to store temporary AS2 message files.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CustomDirectoriesType AWS API Documentation
+    #
+    class CustomDirectoriesType < Struct.new(
+      :failed_files_directory,
+      :mdn_files_directory,
+      :payload_files_directory,
+      :status_files_directory,
+      :temporary_files_directory)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2260,6 +2312,22 @@ module Aws::Transfer
     #     messages from your trading partner.
     #   @return [String]
     #
+    # @!attribute [rw] custom_directories
+    #   A `CustomDirectoriesType` structure. This structure specifies custom
+    #   directories for storing various AS2 message files. You can specify
+    #   directories for the following types of files.
+    #
+    #   * Failed files
+    #
+    #   * MDN files
+    #
+    #   * Payload files
+    #
+    #   * Status files
+    #
+    #   * Temporary files
+    #   @return [Types::CustomDirectoriesType]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribedAgreement AWS API Documentation
     #
     class DescribedAgreement < Struct.new(
@@ -2274,7 +2342,8 @@ module Aws::Transfer
       :access_role,
       :tags,
       :preserve_filename,
-      :enforce_message_signing)
+      :enforce_message_signing,
+      :custom_directories)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6283,6 +6352,22 @@ module Aws::Transfer
     #     messages from your trading partner.
     #   @return [String]
     #
+    # @!attribute [rw] custom_directories
+    #   A `CustomDirectoriesType` structure. This structure specifies custom
+    #   directories for storing various AS2 message files. You can specify
+    #   directories for the following types of files.
+    #
+    #   * Failed files
+    #
+    #   * MDN files
+    #
+    #   * Payload files
+    #
+    #   * Status files
+    #
+    #   * Temporary files
+    #   @return [Types::CustomDirectoriesType]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateAgreementRequest AWS API Documentation
     #
     class UpdateAgreementRequest < Struct.new(
@@ -6295,7 +6380,8 @@ module Aws::Transfer
       :base_directory,
       :access_role,
       :preserve_filename,
-      :enforce_message_signing)
+      :enforce_message_signing,
+      :custom_directories)
       SENSITIVE = []
       include Aws::Structure
     end

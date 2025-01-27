@@ -588,8 +588,8 @@ module Aws::SSM
 
     # Associates a related item to a Systems Manager OpsCenter OpsItem. For
     # example, you can associate an Incident Manager incident or analysis
-    # with an OpsItem. Incident Manager and OpsCenter are capabilities of
-    # Amazon Web Services Systems Manager.
+    # with an OpsItem. Incident Manager and OpsCenter are tools in Amazon
+    # Web Services Systems Manager.
     #
     # @option params [required, String] :ops_item_id
     #   The ID of the OpsItem to which you want to associate a resource as a
@@ -702,10 +702,10 @@ module Aws::SSM
     # your on-premises servers, edge devices, or virtual machine (VM) with
     # Amazon Web Services Systems Manager. Registering these machines with
     # Systems Manager makes it possible to manage them using Systems Manager
-    # capabilities. You use the activation code and ID when installing SSM
-    # Agent on machines in your hybrid environment. For more information
-    # about requirements for managing on-premises machines using Systems
-    # Manager, see [Using Amazon Web Services Systems Manager in hybrid and
+    # tools. You use the activation code and ID when installing SSM Agent on
+    # machines in your hybrid environment. For more information about
+    # requirements for managing on-premises machines using Systems Manager,
+    # see [Using Amazon Web Services Systems Manager in hybrid and
     # multicloud environments][1] in the *Amazon Web Services Systems
     # Manager User Guide*.
     #
@@ -837,10 +837,10 @@ module Aws::SSM
     # targets, the association specifies a schedule for when the
     # configuration is reapplied. For dynamic targets, such as an Amazon Web
     # Services resource group or an Amazon Web Services autoscaling group,
-    # State Manager, a capability of Amazon Web Services Systems Manager
-    # applies the configuration when new managed nodes are added to the
-    # group. The association also specifies actions to take when applying
-    # the configuration. For example, an association for anti-virus software
+    # State Manager, a tool in Amazon Web Services Systems Manager applies
+    # the configuration when new managed nodes are added to the group. The
+    # association also specifies actions to take when applying the
+    # configuration. For example, an association for anti-virus software
     # might run once a day. If the software isn't installed, then State
     # Manager installs it. If the software is installed, but the service
     # isn't running, then the association might instruct State Manager to
@@ -926,7 +926,7 @@ module Aws::SSM
     #   Choose the parameter that will define how your automation will branch
     #   out. This target is required for associations that use an Automation
     #   runbook and target resources by using rate controls. Automation is a
-    #   capability of Amazon Web Services Systems Manager.
+    #   tool in Amazon Web Services Systems Manager.
     #
     # @option params [String] :max_errors
     #   The number of errors that are allowed before the system stops sending
@@ -5666,8 +5666,8 @@ module Aws::SSM
 
     # Deletes the association between an OpsItem and a related item. For
     # example, this API operation can delete an Incident Manager incident
-    # from an OpsItem. Incident Manager is a capability of Amazon Web
-    # Services Systems Manager.
+    # from an OpsItem. Incident Manager is a tool in Amazon Web Services
+    # Systems Manager.
     #
     # @option params [required, String] :ops_item_id
     #   The ID of the OpsItem for which you want to delete an association
@@ -5910,7 +5910,7 @@ module Aws::SSM
     # open. If one or more calendars in the request are closed, the status
     # returned is `CLOSED`.
     #
-    # For more information about Change Calendar, a capability of Amazon Web
+    # For more information about Change Calendar, a tool in Amazon Web
     # Services Systems Manager, see [Amazon Web Services Systems Manager
     # Change Calendar][1] in the *Amazon Web Services Systems Manager User
     # Guide*.
@@ -6137,8 +6137,8 @@ module Aws::SSM
     # Interface (CLI), the system attempts to use your local Amazon Web
     # Services credentials and the operation fails. To avoid this, you can
     # run the command in the Amazon Web Services Systems Manager console.
-    # Use Run Command, a capability of Amazon Web Services Systems Manager,
-    # with an SSM document that enables you to target a managed node with a
+    # Use Run Command, a tool in Amazon Web Services Systems Manager, with
+    # an SSM document that enables you to target a managed node with a
     # script or command. For example, run the command using the
     # `AWS-RunShellScript` document or the `AWS-RunPowerShellScript`
     # document.
@@ -7280,8 +7280,8 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Retrieve information about one or more parameters in a specific
-    # hierarchy.
+    # Retrieve information about one or more parameters under a specified
+    # level in a hierarchy.
     #
     # Request results are returned on a best-effort basis. If you specify
     # `MaxResults` in the request, the response includes information up to
@@ -7793,8 +7793,8 @@ module Aws::SSM
     # Returns all State Manager associations in the current Amazon Web
     # Services account and Amazon Web Services Region. You can limit the
     # results to a specific State Manager association document or managed
-    # node by specifying a filter. State Manager is a capability of Amazon
-    # Web Services Systems Manager.
+    # node by specifying a filter. State Manager is a tool in Amazon Web
+    # Services Systems Manager.
     #
     # @option params [Array<Types::AssociationFilter>] :association_filter_list
     #   One or more filters. Use a filter to return a more specific list of
@@ -8797,8 +8797,8 @@ module Aws::SSM
     end
 
     # Lists all related-item resources associated with a Systems Manager
-    # OpsCenter OpsItem. OpsCenter is a capability of Amazon Web Services
-    # Systems Manager.
+    # OpsCenter OpsItem. OpsCenter is a tool in Amazon Web Services Systems
+    # Manager.
     #
     # @option params [String] :ops_item_id
     #   The ID of the OpsItem for which you want to list all related-item
@@ -9399,8 +9399,8 @@ module Aws::SSM
     #   value limit of 8 KB.
     #
     #   <note markdown="1"> Parameters can't be referenced or nested in the values of other
-    #   parameters. You can't include `{{}}` or `{{ssm:parameter-name}}` in a
-    #   parameter value.
+    #   parameters. You can't include values wrapped in double brackets
+    #   `{{}}` or `{{ssm:parameter-name}}` in a parameter value.
     #
     #    </note>
     #
@@ -9540,8 +9540,8 @@ module Aws::SSM
     #
     # @option params [String] :policies
     #   One or more policies to apply to a parameter. This operation takes a
-    #   JSON array. Parameter Store, a capability of Amazon Web Services
-    #   Systems Manager supports the following policy types:
+    #   JSON array. Parameter Store, a tool in Amazon Web Services Systems
+    #   Manager supports the following policy types:
     #
     #   Expiration: This policy deletes the parameter after it expires. When
     #   you create the policy, you specify the expiration date. You can update
@@ -10550,7 +10550,7 @@ module Aws::SSM
     #
     # @option params [Types::CloudWatchOutputConfig] :cloud_watch_output_config
     #   Enables Amazon Web Services Systems Manager to send Run Command output
-    #   to Amazon CloudWatch Logs. Run Command is a capability of Amazon Web
+    #   to Amazon CloudWatch Logs. Run Command is a tool in Amazon Web
     #   Services Systems Manager.
     #
     # @option params [Types::AlarmConfiguration] :alarm_configuration
@@ -10777,8 +10777,11 @@ module Aws::SSM
     #
     #   * `Key=OS,Value=Windows`
     #
-    #   <note markdown="1"> To add tags to an existing automation, use the AddTagsToResource
-    #   operation.
+    #   <note markdown="1"> The `Array Members` maximum value is reported as 1000. This number
+    #   includes capacity reserved for internal operations. When calling the
+    #   `StartAutomationExecution` action, you can specify a maximum of 5
+    #   tags. You can, however, use the AddTagsToResource action to add up to
+    #   a total of 50 tags to an existing automation configuration.
     #
     #    </note>
     #
@@ -10946,6 +10949,14 @@ module Aws::SSM
     #   * `Key=Environment,Value=Production`
     #
     #   * `Key=Region,Value=us-east-2`
+    #
+    #   <note markdown="1"> The `Array Members` maximum value is reported as 1000. This number
+    #   includes capacity reserved for internal operations. When calling the
+    #   `StartChangeRequestExecution` action, you can specify a maximum of 5
+    #   tags. You can, however, use the AddTagsToResource action to add up to
+    #   a total of 50 tags to an existing change request configuration.
+    #
+    #    </note>
     #
     # @option params [Time,DateTime,Date,Integer,String] :scheduled_end_time
     #   The time that the requester expects the runbook workflow related to
@@ -11190,7 +11201,13 @@ module Aws::SSM
     #
     # @option params [Hash<String,Array>] :parameters
     #   The values you want to specify for the parameters defined in the
-    #   Session document.
+    #   Session document. For more information about these parameters, see
+    #   [Create a Session Manager preferences document][1] in the *Amazon Web
+    #   Services Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/getting-started-create-preferences-cli.html
     #
     # @return [Types::StartSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11357,8 +11374,8 @@ module Aws::SSM
     #
     # @option params [Hash<String,Array>] :parameters
     #   The parameters you want to update for the association. If you create a
-    #   parameter using Parameter Store, a capability of Amazon Web Services
-    #   Systems Manager, you can reference the parameter using
+    #   parameter using Parameter Store, a tool in Amazon Web Services Systems
+    #   Manager, you can reference the parameter using
     #   `{{ssm:parameter-name}}`.
     #
     # @option params [String] :document_version
@@ -11417,7 +11434,7 @@ module Aws::SSM
     #   Choose the parameter that will define how your automation will branch
     #   out. This target is required for associations that use an Automation
     #   runbook and target resources by using rate controls. Automation is a
-    #   capability of Amazon Web Services Systems Manager.
+    #   tool in Amazon Web Services Systems Manager.
     #
     # @option params [String] :max_errors
     #   The number of errors that are allowed before the system stops sending
@@ -11461,8 +11478,8 @@ module Aws::SSM
     #
     #   In `MANUAL` mode, you must specify the `AssociationId` as a parameter
     #   for the PutComplianceItems API operation. In this case, compliance
-    #   data isn't managed by State Manager, a capability of Amazon Web
-    #   Services Systems Manager. It is managed by your direct call to the
+    #   data isn't managed by State Manager, a tool in Amazon Web Services
+    #   Systems Manager. It is managed by your direct call to the
     #   PutComplianceItems API operation.
     #
     #   By default, all associations use `AUTO` mode.
@@ -13261,7 +13278,7 @@ module Aws::SSM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.187.0'
+      context[:gem_version] = '1.188.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

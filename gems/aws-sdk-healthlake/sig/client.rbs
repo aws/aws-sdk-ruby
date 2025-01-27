@@ -106,7 +106,7 @@ module Aws
                                      },
                                    ],
                                    ?identity_provider_configuration: {
-                                     authorization_strategy: ("SMART_ON_FHIR_V1" | "AWS_AUTH"),
+                                     authorization_strategy: ("SMART_ON_FHIR_V1" | "SMART_ON_FHIR" | "AWS_AUTH"),
                                      fine_grained_authorization_enabled: bool?,
                                      metadata: ::String?,
                                      idp_lambda_arn: ::String?
@@ -188,7 +188,7 @@ module Aws
                                    ?next_token: ::String,
                                    ?max_results: ::Integer,
                                    ?job_name: ::String,
-                                   ?job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED_WITH_ERRORS" | "COMPLETED" | "FAILED" | "CANCEL_SUBMITTED" | "CANCEL_IN_PROGRESS" | "CANCEL_COMPLETED" | "CANCEL_FAILED"),
+                                   ?job_status: ("SUBMITTED" | "QUEUED" | "IN_PROGRESS" | "COMPLETED_WITH_ERRORS" | "COMPLETED" | "FAILED" | "CANCEL_SUBMITTED" | "CANCEL_IN_PROGRESS" | "CANCEL_COMPLETED" | "CANCEL_FAILED"),
                                    ?submitted_before: ::Time,
                                    ?submitted_after: ::Time
                                  ) -> _ListFHIRExportJobsResponseSuccess
@@ -205,7 +205,7 @@ module Aws
                                    ?next_token: ::String,
                                    ?max_results: ::Integer,
                                    ?job_name: ::String,
-                                   ?job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED_WITH_ERRORS" | "COMPLETED" | "FAILED" | "CANCEL_SUBMITTED" | "CANCEL_IN_PROGRESS" | "CANCEL_COMPLETED" | "CANCEL_FAILED"),
+                                   ?job_status: ("SUBMITTED" | "QUEUED" | "IN_PROGRESS" | "COMPLETED_WITH_ERRORS" | "COMPLETED" | "FAILED" | "CANCEL_SUBMITTED" | "CANCEL_IN_PROGRESS" | "CANCEL_COMPLETED" | "CANCEL_FAILED"),
                                    ?submitted_before: ::Time,
                                    ?submitted_after: ::Time
                                  ) -> _ListFHIRImportJobsResponseSuccess
@@ -224,7 +224,7 @@ module Aws
       interface _StartFHIRExportJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartFHIRExportJobResponse]
         def job_id: () -> ::String
-        def job_status: () -> ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED_WITH_ERRORS" | "COMPLETED" | "FAILED" | "CANCEL_SUBMITTED" | "CANCEL_IN_PROGRESS" | "CANCEL_COMPLETED" | "CANCEL_FAILED")
+        def job_status: () -> ("SUBMITTED" | "QUEUED" | "IN_PROGRESS" | "COMPLETED_WITH_ERRORS" | "COMPLETED" | "FAILED" | "CANCEL_SUBMITTED" | "CANCEL_IN_PROGRESS" | "CANCEL_COMPLETED" | "CANCEL_FAILED")
         def datastore_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/HealthLake/Client.html#start_fhir_export_job-instance_method
@@ -238,14 +238,14 @@ module Aws
                                    },
                                    datastore_id: ::String,
                                    data_access_role_arn: ::String,
-                                   client_token: ::String
+                                   ?client_token: ::String
                                  ) -> _StartFHIRExportJobResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartFHIRExportJobResponseSuccess
 
       interface _StartFHIRImportJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartFHIRImportJobResponse]
         def job_id: () -> ::String
-        def job_status: () -> ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED_WITH_ERRORS" | "COMPLETED" | "FAILED" | "CANCEL_SUBMITTED" | "CANCEL_IN_PROGRESS" | "CANCEL_COMPLETED" | "CANCEL_FAILED")
+        def job_status: () -> ("SUBMITTED" | "QUEUED" | "IN_PROGRESS" | "COMPLETED_WITH_ERRORS" | "COMPLETED" | "FAILED" | "CANCEL_SUBMITTED" | "CANCEL_IN_PROGRESS" | "CANCEL_COMPLETED" | "CANCEL_FAILED")
         def datastore_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/HealthLake/Client.html#start_fhir_import_job-instance_method
@@ -262,7 +262,7 @@ module Aws
                                    },
                                    datastore_id: ::String,
                                    data_access_role_arn: ::String,
-                                   client_token: ::String
+                                   ?client_token: ::String
                                  ) -> _StartFHIRImportJobResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartFHIRImportJobResponseSuccess
 

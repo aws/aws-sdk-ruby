@@ -339,7 +339,8 @@ module Aws
                               },
                               ?update_config: {
                                 max_unavailable: ::Integer?,
-                                max_unavailable_percentage: ::Integer?
+                                max_unavailable_percentage: ::Integer?,
+                                update_strategy: ("DEFAULT" | "MINIMAL")?
                               },
                               ?node_repair_config: {
                                 enabled: bool?
@@ -998,7 +999,8 @@ module Aws
                                      },
                                      ?update_config: {
                                        max_unavailable: ::Integer?,
-                                       max_unavailable_percentage: ::Integer?
+                                       max_unavailable_percentage: ::Integer?,
+                                       update_strategy: ("DEFAULT" | "MINIMAL")?
                                      },
                                      ?node_repair_config: {
                                        enabled: bool?
