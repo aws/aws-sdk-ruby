@@ -108,15 +108,6 @@ def random_large_blob
   }
 end
 
-def separate_serde_data(data)
-  separated = Array.new(2) { [] }
-  data.each do |i|
-    separated[0] << i[0]
-    separated[1] << i[1]
-  end
-  separated
-end
-
 def write_test_output(operation, protocol, dimension, metric, input, outfile, iterations)
   input.sort!
   result = {
@@ -135,10 +126,14 @@ end
 
 def output_raw(thread, outfile)
   $stdout = outfile
-  puts 'Json Serde Data Raw'
-  pp thread[:json_serde_data]
-  puts 'Cbor Serde Data Raw'
-  pp thread[:cbor_serde_data]
+  puts 'Json Serialization Data Raw'
+  pp thread[:json_ser_data]
+  puts 'Json Deserialization Data Raw'
+  pp thread[:json_deser_data]
+  puts 'Cbor Serialization Data Raw'
+  pp thread[:cbor_ser_data]
+  puts 'Cbor Deserialization Data Raw'
+  pp thread[:cbor_deser_data]
   puts 'Request Size Data Raw (Alternating Json and CBOR)'
   pp thread[:request_size_data]
   puts 'Response Size Data Raw (Alternating Json and CBOR)'
@@ -147,8 +142,10 @@ def output_raw(thread, outfile)
 end
 
 def clear_thread_data(thread)
-  thread[:json_serde_data] = []
-  thread[:cbor_serde_data] = []
+  thread[:json_ser_data] = []
+  thread[:json_deser_data] = []
+  thread[:cbor_ser_data] = []
+  thread[:cbor_deser_data] = []
   thread[:request_size_data] = []
   thread[:response_size_data] = []
 end
@@ -165,11 +162,15 @@ def separate_and_analyze(test_cases, measurements, thread, data, raw, iterations
   raw.puts('All test cases')
   output_raw(thread, raw)
 
-  json_full_serde_data = Array.new(5) { [] }
+  json_full_ser_data = Array.new(5) { [] }
+  json_full_deser_data = Array.new(5) { [] }
   json_full_request_data = Array.new(5) { [] }
   json_full_response_data = Array.new(5) { [] }
-  thread[:json_serde_data].each_with_index do |d, i|
-    json_full_serde_data[i % 5] << d
+  thread[:json_ser_data].each_with_index do |d, i|
+    json_full_ser_data[i % 5] << d
+  end
+  thread[:json_deser_data].each_with_index do |d, i|
+    json_full_deser_data[i % 5] << d
   end
   thread[:request_size_data].each_with_index do |d, i|
     json_full_request_data[i % 5] << d unless i % 10 > 4
@@ -179,21 +180,24 @@ def separate_and_analyze(test_cases, measurements, thread, data, raw, iterations
   end
   json_full_test_cases = {}
   (0...5).each do |i|
-    separated = separate_serde_data(json_full_serde_data[i])
     current = {}
-    current[measurements[0]] = separated[0]
-    current[measurements[1]] = separated[1]
+    current[measurements[0]] = json_full_ser_data[i]
+    current[measurements[1]] = json_full_deser_data[i]
     current[measurements[2]] = json_full_request_data[i]
     current[measurements[3]] = json_full_response_data[i]
     json_full_test_cases[test_cases[i]] = current
   end
   analyze(test_cases, measurements, json_full_test_cases, 'JSON', data, iterations)
 
-  cbor_full_serde_data = Array.new(5) { [] }
+  cbor_full_ser_data = Array.new(5) { [] }
+  cbor_full_deser_data = Array.new(5) { [] }
   cbor_full_request_data = Array.new(5) { [] }
   cbor_full_response_data = Array.new(5) { [] }
-  thread[:cbor_serde_data].each_with_index do |d, i|
-    cbor_full_serde_data[i % 5] << d
+  thread[:cbor_ser_data].each_with_index do |d, i|
+    cbor_full_ser_data[i % 5] << d
+  end
+  thread[:cbor_deser_data].each_with_index do |d, i|
+    cbor_full_deser_data[i % 5] << d
   end
   thread[:request_size_data].each_with_index do |d, i|
     cbor_full_request_data[i % 5] << d unless i % 10 < 5
@@ -203,10 +207,9 @@ def separate_and_analyze(test_cases, measurements, thread, data, raw, iterations
   end
   cbor_full_test_cases = {}
   (0...5).each do |i|
-    separated = separate_serde_data(cbor_full_serde_data[i])
     current = {}
-    current[measurements[0]] = separated[0]
-    current[measurements[1]] = separated[1]
+    current[measurements[0]] = cbor_full_ser_data[i]
+    current[measurements[1]] = cbor_full_deser_data[i]
     current[measurements[2]] = cbor_full_request_data[i]
     current[measurements[3]] = cbor_full_response_data[i]
     cbor_full_test_cases[test_cases[i]] = current

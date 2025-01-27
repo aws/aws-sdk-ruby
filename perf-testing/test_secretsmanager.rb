@@ -115,15 +115,6 @@ def generate_binary_delete_secret_request(timestamp, iteration)
   }
 end
 
-def separate_serde_data(data)
-  separated = Array.new(2) { [] }
-  data.each do |i|
-    separated[0] << i[0]
-    separated[1] << i[1]
-  end
-  separated
-end
-
 def separate_byte_data(data)
   separated = Array.new(2) { [] }
   data.each_with_index do |i, idx|
@@ -154,10 +145,14 @@ end
 
 def output_raw(thread, outfile)
   $stdout = outfile
-  puts 'Json Serde Data Raw'
-  pp thread[:json_serde_data]
-  puts 'Cbor Serde Data Raw'
-  pp thread[:cbor_serde_data]
+  puts 'Json Serialization Data Raw'
+  pp thread[:json_ser_data]
+  puts 'Cbor Serialization Data Raw'
+  pp thread[:cbor_ser_data]
+  puts 'Json Deserialization Data Raw'
+  pp thread[:json_deser_data]
+  puts 'Cbor Deserialization Data Raw'
+  pp thread[:cbor_deser_data]
   puts 'Json Total Data Raw'
   pp thread[:json_total_data]
   puts 'Cbor Total Data Raw'
@@ -170,8 +165,10 @@ def output_raw(thread, outfile)
 end
 
 def clear_thread_data(thread)
-  thread[:json_serde_data] = []
-  thread[:cbor_serde_data] = []
+  thread[:json_ser_data] = []
+  thread[:json_deser_data] = []
+  thread[:cbor_ser_data] = []
+  thread[:cbor_deser_data] = []
   thread[:json_total_data] = []
   thread[:cbor_total_data] = []
   thread[:request_size_data] = []
@@ -183,20 +180,16 @@ def analyze(test_case, metrics, thread, data, raw)
   output_raw(thread, raw)
 
   separated_request_size = separate_byte_data(thread[:request_size_data])
-  # pp separated_request_size
   separated_response_size = separate_byte_data(thread[:response_size_data])
-  # pp separated_response_size
 
-  separated_json_serde = separate_serde_data(thread[:json_serde_data])
-  write_test_output(test_case, 'JSON', metrics, 'Serialization time (ms)', separated_json_serde[0], data)
-  write_test_output(test_case, 'JSON', metrics, 'Deserialization time (ms)', separated_json_serde[1], data)
+  write_test_output(test_case, 'JSON', metrics, 'Serialization time (ms)', thread[:json_ser_data], data)
+  write_test_output(test_case, 'JSON', metrics, 'Deserialization time (ms)', thread[:json_deser_data], data)
   write_test_output(test_case, 'JSON', metrics, 'Total request time (ms)', thread[:json_total_data], data)
   write_test_output(test_case, 'JSON', metrics, 'Request payload size (bytes)', separated_request_size[0], data)
   write_test_output(test_case, 'JSON', metrics, 'Response payload size (bytes)', separated_response_size[0], data)
 
-  separated_cbor_serde = separate_serde_data(thread[:cbor_serde_data])
-  write_test_output(test_case, 'CBOR', metrics, 'Serialization time (ms)', separated_cbor_serde[0], data)
-  write_test_output(test_case, 'CBOR', metrics, 'Deserialization time (ms)', separated_cbor_serde[1], data)
+  write_test_output(test_case, 'CBOR', metrics, 'Serialization time (ms)', thread[:cbor_ser_data], data)
+  write_test_output(test_case, 'CBOR', metrics, 'Deserialization time (ms)', thread[:cbor_deser_data], data)
   write_test_output(test_case, 'CBOR', metrics, 'Total request time (ms)', thread[:cbor_total_data], data)
   write_test_output(test_case, 'CBOR', metrics, 'Request payload size (bytes)', separated_request_size[1], data)
   write_test_output(test_case, 'CBOR', metrics, 'Response payload size (bytes)', separated_response_size[1], data)

@@ -27,13 +27,12 @@ module Aws
       # @return [Seahorse::Client::Response]
       def call(context)
         thread = Thread.current
-        ser_time = Aws::Util.benchmark do
+        thread[:query_ser_data] << Aws::Util.benchmark do
           build_request(context)
         end
-        deser_time = nil
         response = nil
         @handler.call(context).on_success do |resp|
-          deser_time = Aws::Util.benchmark do
+          thread[:query_deser_data] << Aws::Util.benchmark do
             resp.error = nil
             parsed = parse_xml(context)
             if parsed.nil? || parsed == EmptyStructure
@@ -44,7 +43,6 @@ module Aws
           end
           response = resp
         end
-        thread[:query_serde_data] << [ser_time, deser_time]
         response
       end
 

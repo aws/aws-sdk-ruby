@@ -7,18 +7,16 @@ module Aws
       # @return [Seahorse::Client::Response]
       def call(context)
         thread = Thread.current
-        ser_time = Aws::Util.benchmark do
+        thread[:cbor_ser_data] << Aws::Util.benchmark do
           build_request(context)
         end
-        deser_time = nil;
         response = with_metric { @handler.call(context) }
         response.on(200..299) do |resp|
-          deser_time = Aws::Util.benchmark do
+          thread[:cbor_deser_data] << Aws::Util.benchmark do
             resp.data = parse_body(context)
           end
         end
         response.on(200..599) { |_resp| apply_request_id(context) }
-        thread[:cbor_serde_data] << [ser_time, deser_time]
         response
       end
 

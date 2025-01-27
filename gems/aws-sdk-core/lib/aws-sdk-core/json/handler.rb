@@ -10,18 +10,16 @@ module Aws
       # @return [Seahorse::Client::Response]
       def call(context)
         thread = Thread.current
-        ser_time = Aws::Util.benchmark do
+        thread[:json_ser_data] << Aws::Util.benchmark do
           build_request(context)
         end
-        deser_time = nil
         response = @handler.call(context)
         response.on(200..299) do |resp|
-          deser_time = Aws::Util.benchmark do
+          thread[:json_deser_data] << Aws::Util.benchmark do
             parse_response(resp)
           end
         end
         response.on(200..599) { |_resp| apply_request_id(context) }
-        thread[:json_serde_data] << [ser_time, deser_time]
         response
       end
 
