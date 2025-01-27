@@ -10,7 +10,6 @@ require 'aws-sdk-core/plugins/protocols/rpc_v2'
 require_relative 'Stats'
 include Stats
 
-ITERATIONS = ARGV.first.to_i
 WARMUP = 10
 ASCII = " !\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~".chars
 INT_MIN = -2_147_483_648
@@ -21,6 +20,7 @@ FLOAT_MIN = -2_147_483_648.0
 FLOAT_MAX = 2_147_483_647.0
 DOUBLE_MIN = -9_223_372_036_854_775_808.0
 DOUBLE_MAX = 9_223_372_036_854_775_807.0
+iterations = ARGV.first.to_i
 run_start_timestamp = Time.now
 
 def random_map_of_string_to_string
@@ -33,7 +33,7 @@ def random_map_of_string_to_string
   map
 end
 
-def random_all_types
+def random_all_types(timestamp)
   {
     boolean_member: rand(2) == 1,
     string_member: (0...32).map { ASCII[rand(ASCII.length)] }.join,
@@ -41,7 +41,7 @@ def random_all_types
     long_member: rand(LONG_MIN...LONG_MAX),
     float_member: rand(FLOAT_MIN...FLOAT_MAX),
     double_member: rand(DOUBLE_MIN...DOUBLE_MAX),
-    timestamp_member: run_start_timestamp,
+    timestamp_member: timestamp,
     blob_member: Random.bytes(128),
     list_of_strings_member: (0...8).map { (0...32).map { ASCII[rand(ASCII.length)] }.join },
     map_of_string_to_string_member: random_map_of_string_to_string,
@@ -86,7 +86,7 @@ def random_complex_object
   }
 end
 
-def random_list_of_complex_objects
+def random_list_of_complex_objects(timestamp)
   {
     list_of_complex_object_member: (0...64).map do
       {
@@ -94,7 +94,7 @@ def random_list_of_complex_objects
         string_member: (0...32).map { ASCII[rand(ASCII.length)] }.join,
         long_member: rand(LONG_MIN...LONG_MAX),
         double_member: rand(DOUBLE_MIN...DOUBLE_MAX),
-        timestamp_member: run_start_timestamp,
+        timestamp_member: timestamp,
         list_of_strings_member: (0...8).map { (0...32).map { ASCII[rand(ASCII.length)] }.join }
       }
     end
@@ -116,7 +116,7 @@ def separate_serde_data(data)
   separated
 end
 
-def write_test_output(operation, protocol, dimension, metric, input, outfile)
+def write_test_output(operation, protocol, dimension, metric, input, outfile, iterations)
   input.sort!
   result = {
     service: 'Local only',
@@ -127,7 +127,7 @@ def write_test_output(operation, protocol, dimension, metric, input, outfile)
     p50: p50(input),
     p90: p90(input),
     max: input.last,
-    n: ITERATIONS
+    n: iterations
   }
   outfile.puts(JSON.pretty_generate(result))
 end
@@ -145,15 +145,15 @@ def output_raw(thread, outfile)
   $stdout = STDOUT
 end
 
-def analyze(test_cases, measurements, input, protocol, data)
+def analyze(test_cases, measurements, input, protocol, data, iterations)
   test_cases.each do |test|
     measurements.each do |m|
-      write_test_output(test, protocol, 0, m, input[test][m], data)
+      write_test_output(test, protocol, 0, m, input[test][m], data, iterations)
     end
   end
 end
 
-def separate_and_analyze(test_cases, measurements, thread, data, raw)
+def separate_and_analyze(test_cases, measurements, thread, data, raw, iterations)
   raw.puts('All test cases')
   output_raw(thread, raw)
 
@@ -179,7 +179,7 @@ def separate_and_analyze(test_cases, measurements, thread, data, raw)
     current[measurements[3]] = json_full_response_data[i]
     json_full_test_cases[test_cases[i]] = current
   end
-  analyze(test_cases, measurements, json_full_test_cases, 'JSON', data)
+  analyze(test_cases, measurements, json_full_test_cases, 'JSON', data, iterations)
 
   cbor_full_serde_data = Array.new(5) { [] }
   cbor_full_request_data = Array.new(5) { [] }
@@ -203,7 +203,7 @@ def separate_and_analyze(test_cases, measurements, thread, data, raw)
     current[measurements[3]] = cbor_full_response_data[i]
     cbor_full_test_cases[test_cases[i]] = current
   end
-  analyze(test_cases, measurements, cbor_full_test_cases, 'CBOR', data)
+  analyze(test_cases, measurements, cbor_full_test_cases, 'CBOR', data, iterations)
 end
 
 thread = Thread.current
@@ -223,13 +223,13 @@ cbor_echo.config.api.metadata['protocol'] = 'smithy-rpc-v2-cbor'
 data = File.open('perf-testing/test-output/local-only/data.txt', 'w')
 raw = File.open('perf-testing/test-output/local-only/raw.txt', 'w')
 
-(0...(ITERATIONS + WARMUP)).each do |i|
+(0...(iterations + WARMUP)).each do |i|
   thread[:warm] = true if i == WARMUP
 
-  all_types = random_all_types
+  all_types = random_all_types(run_start_timestamp)
   list_of_strings = random_long_list_of_strings
   complex_object = random_complex_object
-  list_of_complex = random_list_of_complex_objects
+  list_of_complex = random_list_of_complex_objects(run_start_timestamp)
   large_blob = random_large_blob
   json_echo.stub_responses(:echo_operation,
                            all_types,
@@ -261,7 +261,7 @@ test_cases = ['All types', 'Long list of strings', 'Complex object', 'List of co
 measurements = ['Serialization time (ms)', 'Deserialization time (ms)', 'Request payload size (bytes)',
                 'Response payload size (bytes)']
 
-separate_and_analyze(test_cases, measurements, thread, data, raw)
+separate_and_analyze(test_cases, measurements, thread, data, raw, iterations)
 
 data.close
 raw.close
