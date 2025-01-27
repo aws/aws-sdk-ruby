@@ -246,13 +246,7 @@ def make_and_time_request(request, command, json_ssm, cbor_ssm, thread)
 end
 
 thread = Thread.current
-thread[:json_serde_data] = []
-thread[:cbor_serde_data] = []
-thread[:json_total_data] = []
-thread[:cbor_total_data] = []
-thread[:request_size_data] = []
-thread[:response_size_data] = []
-thread[:warm] = false
+clear_thread_data(thread)
 
 Aws::SecretsManager::Client.remove_plugin(Aws::Plugins::Protocols::JsonRpc)
 json_ssm = Aws::SecretsManager::Client.new(plugins: [Aws::Plugins::Protocols::JsonRpc], region: 'us-west-2')
@@ -308,7 +302,7 @@ if ITERATIONS > WARMUP
     cbor_ssm.list_secrets(request)
   end
 end
-thread[:warm] = true
+clear_thread_data(thread)
 
 SIZES.each do |size|
   # Put secret value (string)

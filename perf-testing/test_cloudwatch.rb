@@ -163,13 +163,7 @@ def analyze(test_case, metrics, thread, data, raw)
 end
 
 thread = Thread.current
-thread[:query_serde_data] = []
-thread[:cbor_serde_data] = []
-thread[:query_total_data] = []
-thread[:cbor_total_data] = []
-thread[:request_size_data] = []
-thread[:response_size_data] = []
-thread[:warm] = false
+clear_thread_data(thread)
 
 Aws::CloudWatch::Client.api.metadata['targetPrefix'] = 'GraniteServiceVersion20100801'
 Aws::CloudWatch::Client.remove_plugin(Aws::Plugins::Protocols::Query)
@@ -197,7 +191,7 @@ end
   query_cloudwatch.list_metrics(request)
   cbor_cloudwatch.list_metrics(request)
 end
-thread[:warm] = true
+clear_thread_data(thread)
 
 METRIC_COUNTS.each do |metrics|
   (0...ITERATIONS).each do |i|

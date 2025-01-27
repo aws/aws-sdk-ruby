@@ -21,10 +21,8 @@ module Aws
           t_deser_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
         end
         response.on(200..599) { |_resp| apply_request_id(context) }
-        if thread[:warm]
-          thread[:json_serde_data] << [format('%.3f', (t_ser_end - t_ser_start) * 1000.0).to_f,
-                                       format('%.3f', (t_deser_end - t_deser_start) * 1000.0).to_f]
-        end
+        thread[:json_serde_data] << [format('%.3f', (t_ser_end - t_ser_start) * 1000.0).to_f,
+                                     format('%.3f', (t_deser_end - t_deser_start) * 1000.0).to_f]
         response
       end
 

@@ -146,6 +146,13 @@ def output_raw(thread, outfile)
   $stdout = STDOUT
 end
 
+def clear_thread_data(thread)
+  thread[:json_serde_data] = []
+  thread[:cbor_serde_data] = []
+  thread[:request_size_data] = []
+  thread[:response_size_data] = []
+end
+
 def analyze(test_cases, measurements, input, protocol, data, iterations)
   test_cases.each do |test|
     measurements.each do |m|
@@ -208,11 +215,7 @@ def separate_and_analyze(test_cases, measurements, thread, data, raw, iterations
 end
 
 thread = Thread.current
-thread[:json_serde_data] = []
-thread[:cbor_serde_data] = []
-thread[:request_size_data] = []
-thread[:response_size_data] = []
-thread[:warm] = false
+clear_thread_data(thread)
 
 Aws::Echo::Client.remove_plugin(Aws::Plugins::Protocols::JsonRpc)
 json_echo = Aws::Echo::Client.new(plugins: [Aws::Plugins::Protocols::JsonRpc], stub_responses: true)
@@ -227,7 +230,7 @@ data = File.open("#{path}/test-output/local-only/data.txt", 'w')
 raw = File.open("#{path}/test-output/local-only/raw.txt", 'w')
 
 (0...(iterations + WARMUP)).each do |i|
-  thread[:warm] = true if i == WARMUP
+  clear_thread_data(thread) if i == WARMUP
 
   all_types = random_all_types(run_start_timestamp)
   list_of_strings = random_long_list_of_strings
