@@ -14,16 +14,14 @@ module Aws
         build_request(context)
         t_ser_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
         t_deser_start, t_deser_end = nil
-        success = false
         response = @handler.call(context)
         response.on(200..299) do |resp|
-          success = true
           t_deser_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
           parse_response(resp)
           t_deser_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
         end
         response.on(200..599) { |_resp| apply_request_id(context) }
-        if thread[:warm] && success
+        if thread[:warm]
           thread[:json_serde_data] << [format('%.3f', (t_ser_end - t_ser_start) * 1000.0).to_f,
                                        format('%.3f', (t_deser_end - t_deser_start) * 1000.0).to_f]
         end

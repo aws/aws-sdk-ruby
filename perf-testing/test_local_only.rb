@@ -21,7 +21,7 @@ FLOAT_MIN = -2_147_483_648.0
 FLOAT_MAX = 2_147_483_647.0
 DOUBLE_MIN = -9_223_372_036_854_775_808.0
 DOUBLE_MAX = 9_223_372_036_854_775_807.0
-RUN_START_TIMESTAMP = Time.now
+run_start_timestamp = Time.now
 
 def random_map_of_string_to_string
   map = {}
@@ -41,7 +41,7 @@ def random_all_types
     long_member: rand(LONG_MIN...LONG_MAX),
     float_member: rand(FLOAT_MIN...FLOAT_MAX),
     double_member: rand(DOUBLE_MIN...DOUBLE_MAX),
-    timestamp_member: RUN_START_TIMESTAMP,
+    timestamp_member: run_start_timestamp,
     blob_member: Random.bytes(128),
     list_of_strings_member: (0...8).map { (0...32).map { ASCII[rand(ASCII.length)] }.join },
     map_of_string_to_string_member: random_map_of_string_to_string,
@@ -94,7 +94,7 @@ def random_list_of_complex_objects
         string_member: (0...32).map { ASCII[rand(ASCII.length)] }.join,
         long_member: rand(LONG_MIN...LONG_MAX),
         double_member: rand(DOUBLE_MIN...DOUBLE_MAX),
-        timestamp_member: RUN_START_TIMESTAMP,
+        timestamp_member: run_start_timestamp,
         list_of_strings_member: (0...8).map { (0...32).map { ASCII[rand(ASCII.length)] }.join }
       }
     end
@@ -119,15 +119,15 @@ end
 def write_test_output(operation, protocol, dimension, metric, input, outfile)
   input.sort!
   result = {
-    "service": 'Local only',
-    "test_case": operation,
-    "protocol": protocol,
-    "dimension_value": dimension,
-    "metric": metric,
-    "p50": p50(input),
-    "p90": p90(input),
-    "max": input.last,
-    "n": ITERATIONS
+    service: 'Local only',
+    test_case: operation,
+    protocol: protocol,
+    dimension_value: dimension,
+    metric: metric,
+    p50: p50(input),
+    p90: p90(input),
+    max: input.last,
+    n: ITERATIONS
   }
   outfile.puts(JSON.pretty_generate(result))
 end

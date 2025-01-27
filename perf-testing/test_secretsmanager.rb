@@ -13,10 +13,10 @@ include Stats
 ITERATIONS = ARGV.first.to_i
 WARMUP = 5
 SIZES = [64, 512, 4096, 8192, 45_056].freeze
-RUN_START_TIMESTAMP = Time.now.to_i
 ASCII = "!\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~".chars
 MEASUREMENTS = ['Total request time (ms)', 'Serialization time (ms)', 'Deserialization time (ms)',
                 'Request payload size (bytes)', 'Response payload size (bytes)'].freeze
+run_start_timestamp = Time.now.to_i
 
 def generate_create_secret_request(timestamp, iteration)
   {
@@ -139,15 +139,15 @@ end
 def write_test_output(operation, protocol, dimension, metric, input, outfile)
   input.sort!
   result = {
-    "service": 'SecretsManager',
-    "test_case": operation,
-    "protocol": protocol,
-    "dimension_value": dimension,
-    "metric": metric,
-    "p50": p50(input),
-    "p90": p90(input),
-    "max": input.last,
-    "n": ITERATIONS
+    service: 'SecretsManager',
+    test_case: operation,
+    protocol: protocol,
+    dimension_value: dimension,
+    metric: metric,
+    p50: p50(input),
+    p90: p90(input),
+    max: input.last,
+    n: ITERATIONS
   }
   outfile.puts(JSON.pretty_generate(result))
 end
@@ -266,9 +266,9 @@ raw = File.open('perf-testing/test-output/secretsmanager/raw.txt', 'w')
 # requests = File.open('perf-testing/test-output/secretsmanager/# requests.txt', 'w')
 
 (0...ITERATIONS).each do |i|
-  request = generate_create_secret_request(RUN_START_TIMESTAMP, i.to_s.rjust(3, '0'))
+  request = generate_create_secret_request(run_start_timestamp, i.to_s.rjust(3, '0'))
   json_ssm.create_secret(request)
-  request = generate_binary_create_secret_request(RUN_START_TIMESTAMP, i.to_s.rjust(3, '0'))
+  request = generate_binary_create_secret_request(run_start_timestamp, i.to_s.rjust(3, '0'))
   cbor_ssm.create_secret(request)
 end
 
@@ -276,28 +276,28 @@ end
 if ITERATIONS > WARMUP
   SIZES.each do |size|
     (0...WARMUP).each do |i|
-      request = generate_put_secret_value_request(RUN_START_TIMESTAMP, i.to_s.rjust(3, '0'), size)
+      request = generate_put_secret_value_request(run_start_timestamp, i.to_s.rjust(3, '0'), size)
       json_ssm.put_secret_value(request)
       cbor_ssm.put_secret_value(request)
     end
     (0...WARMUP).each do |i|
-      request = generate_binary_put_secret_value_request(RUN_START_TIMESTAMP, i.to_s.rjust(3, '0'), size)
+      request = generate_binary_put_secret_value_request(run_start_timestamp, i.to_s.rjust(3, '0'), size)
       json_ssm.put_secret_value(request)
       cbor_ssm.put_secret_value(request)
     end
     (0...WARMUP).each do |i|
-      request = generate_get_secret_value_request(RUN_START_TIMESTAMP, i.to_s.rjust(3, '0'))
+      request = generate_get_secret_value_request(run_start_timestamp, i.to_s.rjust(3, '0'))
       json_ssm.get_secret_value(request)
       cbor_ssm.get_secret_value(request)
     end
     (0...WARMUP).each do |i|
-      request = generate_binary_get_secret_value_request(RUN_START_TIMESTAMP, i.to_s.rjust(3, '0'))
+      request = generate_binary_get_secret_value_request(run_start_timestamp, i.to_s.rjust(3, '0'))
       json_ssm.get_secret_value(request)
       cbor_ssm.get_secret_value(request)
     end
   end
   (0...WARMUP).each do |i|
-    request = generate_describe_secret_request(RUN_START_TIMESTAMP, i.to_s.rjust(3, '0'))
+    request = generate_describe_secret_request(run_start_timestamp, i.to_s.rjust(3, '0'))
     json_ssm.describe_secret(request)
     cbor_ssm.describe_secret(request)
   end
@@ -312,14 +312,14 @@ thread[:warm] = true
 SIZES.each do |size|
   # Put secret value (string)
   (0...ITERATIONS).each do |i|
-    request = generate_put_secret_value_request(RUN_START_TIMESTAMP, i.to_s.rjust(3, '0'), size)
+    request = generate_put_secret_value_request(run_start_timestamp, i.to_s.rjust(3, '0'), size)
     make_and_time_request(request, 'put', json_ssm, cbor_ssm, thread)
     # requests.puts(JSON.pretty_generate(request))
   end
   analyze('Put string secret', size, thread, data, raw)
   # Put secret value (binary)
   (0...ITERATIONS).each do |i|
-    request = generate_binary_put_secret_value_request(RUN_START_TIMESTAMP, i.to_s.rjust(3, '0'), size)
+    request = generate_binary_put_secret_value_request(run_start_timestamp, i.to_s.rjust(3, '0'), size)
     make_and_time_request(request, 'put', json_ssm, cbor_ssm, thread)
     request[:secret_binary] = request[:secret_binary].force_encoding('ISO-8859-1').encode('UTF-8')
     # requests.puts(JSON.pretty_generate(request))
@@ -327,14 +327,14 @@ SIZES.each do |size|
   analyze('Put binary secret', size, thread, data, raw)
   # Get secret value (string)
   (0...ITERATIONS).each do |i|
-    request = generate_get_secret_value_request(RUN_START_TIMESTAMP, i.to_s.rjust(3, '0'))
+    request = generate_get_secret_value_request(run_start_timestamp, i.to_s.rjust(3, '0'))
     make_and_time_request(request, 'get', json_ssm, cbor_ssm, thread)
     # requests.puts(JSON.pretty_generate(request))
   end
   analyze('Get string secret', size, thread, data, raw)
   # Get secret value (binary)
   (0...ITERATIONS).each do |i|
-    request = generate_binary_get_secret_value_request(RUN_START_TIMESTAMP, i.to_s.rjust(3, '0'))
+    request = generate_binary_get_secret_value_request(run_start_timestamp, i.to_s.rjust(3, '0'))
     make_and_time_request(request, 'get', json_ssm, cbor_ssm, thread)
     # requests.puts(JSON.pretty_generate(request))
   end
@@ -342,7 +342,7 @@ SIZES.each do |size|
 end
 
 (0...ITERATIONS).each do |i|
-  request = generate_describe_secret_request(RUN_START_TIMESTAMP, i.to_s.rjust(3, '0'))
+  request = generate_describe_secret_request(run_start_timestamp, i.to_s.rjust(3, '0'))
   make_and_time_request(request, 'describe', json_ssm, cbor_ssm, thread)
   # requests.puts(JSON.pretty_generate(request))
 end
@@ -357,9 +357,9 @@ analyze('List secrets', 0, thread, data, raw)
 
 thread[:warm] = false
 (0...ITERATIONS).each do |i|
-  request = generate_delete_secret_request(RUN_START_TIMESTAMP, i.to_s.rjust(3, '0'))
+  request = generate_delete_secret_request(run_start_timestamp, i.to_s.rjust(3, '0'))
   json_ssm.delete_secret(request)
-  request = generate_binary_delete_secret_request(RUN_START_TIMESTAMP, i.to_s.rjust(3, '0'))
+  request = generate_binary_delete_secret_request(run_start_timestamp, i.to_s.rjust(3, '0'))
   cbor_ssm.delete_secret(request)
 end
 

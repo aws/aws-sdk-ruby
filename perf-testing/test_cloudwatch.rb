@@ -97,15 +97,15 @@ end
 def write_test_output(operation, protocol, dimension, metric, input, outfile)
   input.sort!
   result = {
-    "service": 'CloudWatch',
-    "test_case": operation,
-    "protocol": protocol,
-    "dimension_value": dimension,
-    "metric": metric,
-    "p50": p50(input),
-    "p90": p90(input),
-    "max": input.last,
-    "n": ITERATIONS
+    service: 'CloudWatch',
+    test_case: operation,
+    protocol: protocol,
+    dimension_value: dimension,
+    metric: metric,
+    p50: p50(input),
+    p90: p90(input),
+    max: input.last,
+    n: ITERATIONS
   }
   outfile.puts(JSON.pretty_generate(result))
 end
@@ -209,6 +209,8 @@ METRIC_COUNTS.each do |metrics|
     cbor_cloudwatch.put_metric_data(request)
     t_cbor_total_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     thread[:cbor_total_data] << format('%.3f', (t_cbor_total_end - t_cbor_total_start) * 1000.0).to_f
+
+    # Sleep to prevent rate limit exceeded errors (from testing doc)
     sleep(2) if (i % 50).zero?
   end
   analyze('Put metric data', metrics, thread, data, raw)
@@ -223,6 +225,8 @@ METRIC_COUNTS.each do |metrics|
     cbor_cloudwatch.get_metric_data(request)
     t_cbor_total_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     thread[:cbor_total_data] << format('%.3f', (t_cbor_total_end - t_cbor_total_start) * 1000.0).to_f
+
+    # Sleep to prevent rate limit exceeded errors (from testing doc)
     sleep(2) if (i % 50).zero?
   end
   analyze('Get metric data', metrics, thread, data, raw)
@@ -238,6 +242,8 @@ end
   cbor_cloudwatch.list_metrics(request)
   t_cbor_total_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
   thread[:cbor_total_data] << format('%.3f', (t_cbor_total_end - t_cbor_total_start) * 1000.0).to_f
+
+  # Sleep to prevent rate limit exceeded errors (from testing doc)
   sleep(2) if (i % 50).zero?
 end
 analyze('List metrics', 0, thread, data, raw)

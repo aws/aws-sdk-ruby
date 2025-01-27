@@ -32,9 +32,7 @@ module Aws
         t_ser_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
         t_deser_start, t_deser_end = nil
         response = nil
-        success = false
         @handler.call(context).on_success do |resp|
-          success = true
           t_deser_start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
           resp.error = nil
           parsed = parse_xml(context)
@@ -46,7 +44,7 @@ module Aws
           t_deser_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
           response = resp
         end
-        if thread[:warm] && success
+        if thread[:warm]
           thread[:query_serde_data] << [format('%.3f', (t_ser_end - t_ser_start) * 1000.0).to_f,
                                         format('%.3f', (t_deser_end - t_deser_start) * 1000.0).to_f]
         end

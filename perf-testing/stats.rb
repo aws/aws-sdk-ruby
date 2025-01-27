@@ -1,9 +1,9 @@
 module Stats
-  def p50(data)
-    data[(data.length - 1) / 2]
+  def p50(sorted_data)
+    sorted_data[(sorted_data.length - 1) / 2]
   end
 
-  def p90(data)
-    data[(data.length - 1) * 0.9]
+  def p90(sorted_data)
+    sorted_data[(sorted_data.length - 1) * 0.9]
   end
 end
