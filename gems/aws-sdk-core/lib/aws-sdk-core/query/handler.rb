@@ -44,8 +44,8 @@ module Aws
           t_deser_end = Process.clock_gettime(Process::CLOCK_MONOTONIC)
           response = resp
         end
-        thread[:query_serde_data] << [format('%.3f', (t_ser_end - t_ser_start) * 1000.0).to_f,
-                                      format('%.3f', (t_deser_end - t_deser_start) * 1000.0).to_f]
+        thread[:query_serde_data] << [(t_ser_end - t_ser_start) * 1000.0,
+                                      (t_deser_end - t_deser_start) * 1000.0]
         response
       end
 

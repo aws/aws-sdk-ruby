@@ -226,7 +226,7 @@ cbor_echo.config.api.metadata['protocol'] = 'smithy-rpc-v2-cbor'
 
 path = __dir__
 FileUtils.mkdir_p("#{path}/test-output/local-only")
-data = File.open("#{path}/test-output/local-only/data.txt", 'w')
+data = File.open("#{path}/test-output/local-only/data.json", 'w')
 raw = File.open("#{path}/test-output/local-only/raw.txt", 'w')
 
 (0...(iterations + WARMUP)).each do |i|

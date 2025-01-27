@@ -175,7 +175,7 @@ cbor_cloudwatch.config.api.metadata['protocol'] = 'smithy-rpc-v2-cbor'
 
 path = __dir__
 FileUtils.mkdir_p("#{path}/test-output/cloudwatch")
-data = File.open("#{path}/test-output/cloudwatch/data.txt", 'w')
+data = File.open("#{path}/test-output/cloudwatch/data.json", 'w')
 raw = File.open("#{path}/test-output/cloudwatch/raw.txt", 'w')
 
 (0...WARMUP).each do

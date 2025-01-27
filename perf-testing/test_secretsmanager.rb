@@ -257,7 +257,7 @@ cbor_ssm.config.api.metadata['protocol'] = 'smithy-rpc-v2-cbor'
 
 path = __dir__
 FileUtils.mkdir_p("#{path}/test-output/secretsmanager")
-data = File.open("#{path}/test-output/secretsmanager/data.txt", 'w')
+data = File.open("#{path}/test-output/secretsmanager/data.json", 'w')
 raw = File.open("#{path}/test-output/secretsmanager/raw.txt", 'w')
 
 (0...ITERATIONS).each do |i|
