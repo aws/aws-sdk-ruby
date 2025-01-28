@@ -8,7 +8,7 @@ require 'aws-sdk-echo'
 require 'aws-sdk-core/plugins/protocols/json_rpc'
 require 'aws-sdk-core/plugins/protocols/rpc_v2'
 require 'fileutils'
-require_relative 'Stats'
+require_relative 'stats'
 include Stats
 
 WARMUP = 10

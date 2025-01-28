@@ -7,7 +7,7 @@ require 'aws-sdk-core'
 require 'aws-sdk-secretsmanager'
 require 'aws-sdk-core/plugins/protocols/rpc_v2'
 require 'securerandom'
-require_relative 'Stats'
+require_relative 'stats'
 include Stats
 
 WARMUP = 5
