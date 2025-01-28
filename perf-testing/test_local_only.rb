@@ -108,9 +108,9 @@ def random_large_blob
   }
 end
 
-def format_test_output(operation, protocol, dimension, metric, input, output, iterations)
+def format_test_output(operation, protocol, dimension, metric, input, iterations)
   input.sort!
-  result = {
+  {
     service: 'Local only',
     test_case: operation,
     protocol: protocol,
@@ -121,7 +121,6 @@ def format_test_output(operation, protocol, dimension, metric, input, output, it
     max: input.last,
     n: iterations
   }
-  output << result
 end
 
 def output_raw(thread, outfile)
@@ -151,10 +150,10 @@ def clear_thread_data(thread)
 end
 
 def analyze(test_cases, input, protocol, output, iterations)
-  measurements = get_measurements.drop(1)
+  measurements = MEASUREMENTS.drop(1)
   test_cases.each do |test|
     measurements.each do |m|
-      format_test_output(test, protocol, 0, m, input[test][m], output, iterations)
+      output << format_test_output(test, protocol, 0, m, input[test][m], iterations)
     end
   end
 end
@@ -163,7 +162,7 @@ def separate_and_analyze(test_cases, thread, raw, output, iterations)
   raw.puts('All test cases')
   output_raw(thread, raw)
 
-  measurements = get_measurements.drop(1)
+  measurements = MEASUREMENTS.drop(1)
 
   json_full_ser_data = Array.new(5) { [] }
   json_full_deser_data = Array.new(5) { [] }

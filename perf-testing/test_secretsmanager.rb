@@ -125,9 +125,9 @@ def separate_byte_data(data)
   separated
 end
 
-def format_test_output(operation, protocol, dimension, metric, input, output, iterations)
+def format_test_output(operation, protocol, dimension, metric, input, iterations)
   input.sort!
-  result = {
+  {
     service: 'SecretsManager',
     test_case: operation,
     protocol: protocol,
@@ -138,7 +138,6 @@ def format_test_output(operation, protocol, dimension, metric, input, output, it
     max: input.last,
     n: iterations
   }
-  output << result
 end
 
 def output_raw(thread, outfile)
@@ -180,18 +179,18 @@ def analyze(test_case, metrics, thread, raw, output, iterations)
   separated_request_size = separate_byte_data(thread[:request_size_data])
   separated_response_size = separate_byte_data(thread[:response_size_data])
 
-  measurements = get_measurements
+  measurements = MEASUREMENTS
 
   json_data = [thread[:json_total_data], thread[:json_ser_data], thread[:json_deser_data], separated_request_size[0],
                separated_response_size[0]]
   json_data.each_with_index do |data, idx|
-    format_test_output(test_case, 'JSON', metrics, measurements[idx], data, output, iterations)
+    output << format_test_output(test_case, 'JSON', metrics, measurements[idx], data, iterations)
   end
 
   cbor_data = [thread[:cbor_total_data], thread[:cbor_ser_data], thread[:cbor_deser_data], separated_request_size[1],
                separated_response_size[1]]
   cbor_data.each_with_index do |data, idx|
-    format_test_output(test_case, 'CBOR', metrics, measurements[idx], data, output, iterations)
+    output << format_test_output(test_case, 'CBOR', metrics, measurements[idx], data, iterations)
   end
 
   clear_thread_data(thread)
