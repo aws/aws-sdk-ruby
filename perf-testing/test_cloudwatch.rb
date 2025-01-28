@@ -10,11 +10,11 @@ require 'securerandom'
 require_relative 'Stats'
 include Stats
 
-ITERATIONS = ARGV.first.to_i
 WARMUP = 10
 METRIC_COUNTS = [16, 64, 256, 1000].freeze
 BASE_TIME = Time.now - 2 * 60 * 60
 SUITE_ID = SecureRandom.uuid
+iterations = ARGV.first.to_i
 
 def generate_put_metric_data_request(metrics, base_time, suite_id)
   request = {}
@@ -85,7 +85,7 @@ def separate_byte_data(data)
   separated
 end
 
-def write_test_output(operation, protocol, dimension, metric, input, outfile)
+def format_test_output(operation, protocol, dimension, metric, input, output, iterations)
   input.sort!
   result = {
     service: 'CloudWatch',
@@ -96,13 +96,17 @@ def write_test_output(operation, protocol, dimension, metric, input, outfile)
     p50: p50(input),
     p90: p90(input),
     max: input.last,
-    n: ITERATIONS
+    n: iterations
   }
-  outfile.puts(JSON.pretty_generate(result))
+  output << result
 end
 
 def output_raw(thread, outfile)
   $stdout = outfile
+  puts 'Query Total Data Raw'
+  pp thread[:query_total_data]
+  puts 'Cbor Total Data Raw'
+  pp thread[:cbor_total_data]
   puts 'Query Serialization Data Raw'
   pp thread[:query_ser_data]
   puts 'Cbor Serialization Data Raw'
@@ -111,10 +115,6 @@ def output_raw(thread, outfile)
   pp thread[:query_deser_data]
   puts 'Cbor Deserialization Data Raw'
   pp thread[:cbor_deser_data]
-  puts 'Query Total Data Raw'
-  pp thread[:query_total_data]
-  puts 'Cbor Total Data Raw'
-  pp thread[:cbor_total_data]
   puts 'Request Size Data Raw (Alternating Query and CBOR)'
   pp thread[:request_size_data]
   puts 'Response Size Data Raw (Alternating Query and CBOR)'
@@ -133,24 +133,26 @@ def clear_thread_data(thread)
   thread[:response_size_data] = []
 end
 
-def analyze(test_case, metrics, thread, data, raw)
+def analyze(test_case, metrics, thread, raw, output, iterations)
   raw.puts("Test case: #{test_case} #{metrics}")
   output_raw(thread, raw)
 
   separated_request_size = separate_byte_data(thread[:request_size_data])
   separated_response_size = separate_byte_data(thread[:response_size_data])
 
-  write_test_output(test_case, 'Query', metrics, 'Serialization time (ms)', thread[:query_ser_data], data)
-  write_test_output(test_case, 'Query', metrics, 'Deserialization time (ms)', thread[:query_deser_data], data)
-  write_test_output(test_case, 'Query', metrics, 'Total request time (ms)', thread[:query_total_data], data)
-  write_test_output(test_case, 'Query', metrics, 'Request payload size (bytes)', separated_request_size[0], data)
-  write_test_output(test_case, 'Query', metrics, 'Response payload size (bytes)', separated_response_size[0], data)
+  measurements = get_measurements
 
-  write_test_output(test_case, 'CBOR', metrics, 'Serialization time (ms)', thread[:cbor_ser_data], data)
-  write_test_output(test_case, 'CBOR', metrics, 'Deserialization time (ms)', thread[:cbor_deser_data], data)
-  write_test_output(test_case, 'CBOR', metrics, 'Total request time (ms)', thread[:cbor_total_data], data)
-  write_test_output(test_case, 'CBOR', metrics, 'Request payload size (bytes)', separated_request_size[1], data)
-  write_test_output(test_case, 'CBOR', metrics, 'Response payload size (bytes)', separated_response_size[1], data)
+  query_data = [thread[:query_total_data], thread[:query_ser_data], thread[:query_deser_data],
+                separated_request_size[0], separated_response_size[0]]
+  query_data.each_with_index do |data, idx|
+    format_test_output(test_case, 'Query', metrics, measurements[idx], data, output, iterations)
+  end
+
+  cbor_data = [thread[:cbor_total_data], thread[:cbor_ser_data], thread[:cbor_deser_data],
+               separated_request_size[1], separated_response_size[1]]
+  cbor_data.each_with_index do |data, idx|
+    format_test_output(test_case, 'CBOR', metrics, measurements[idx], data, output, iterations)
+  end
 
   clear_thread_data(thread)
 end
@@ -170,6 +172,7 @@ path = __dir__
 FileUtils.mkdir_p("#{path}/test-output/cloudwatch")
 data = File.open("#{path}/test-output/cloudwatch/data.json", 'w')
 raw = File.open("#{path}/test-output/cloudwatch/raw.txt", 'w')
+output = []
 
 (0...WARMUP).each do
   request = generate_put_metric_data_request(1, BASE_TIME, SUITE_ID)
@@ -187,7 +190,7 @@ end
 clear_thread_data(thread)
 
 METRIC_COUNTS.each do |metrics|
-  (0...ITERATIONS).each do |i|
+  (0...iterations).each do |i|
     request = generate_put_metric_data_request(metrics, BASE_TIME, SUITE_ID)
     thread[:query_total_data] << Aws::Util.benchmark do
       query_cloudwatch.put_metric_data(request)
@@ -200,8 +203,8 @@ METRIC_COUNTS.each do |metrics|
     # Sleep to prevent rate limit exceeded errors (from testing doc)
     sleep(2) if (i % 50).zero?
   end
-  analyze('Put metric data', metrics, thread, data, raw)
-  (0...ITERATIONS).each do |i|
+  analyze('Put metric data', metrics, thread, raw, output, iterations)
+  (0...iterations).each do |i|
     request = generate_get_metric_data_request(metrics, BASE_TIME, SUITE_ID)
     thread[:query_total_data] << Aws::Util.benchmark do
       query_cloudwatch.get_metric_data(request)
@@ -214,9 +217,9 @@ METRIC_COUNTS.each do |metrics|
     # Sleep to prevent rate limit exceeded errors (from testing doc)
     sleep(2) if (i % 50).zero?
   end
-  analyze('Get metric data', metrics, thread, data, raw)
+  analyze('Get metric data', metrics, thread, raw, output, iterations)
 end
-(0...ITERATIONS).each do |i|
+(0...iterations).each do |i|
   request = generate_list_metrics_request
   thread[:query_total_data] << Aws::Util.benchmark do
     query_cloudwatch.list_metrics(request)
@@ -228,7 +231,9 @@ end
   # Sleep to prevent rate limit exceeded errors (from testing doc)
   sleep(2) if (i % 50).zero?
 end
-analyze('List metrics', 0, thread, data, raw)
+analyze('List metrics', 0, thread, raw, output, iterations)
+
+data.puts(JSON.pretty_generate(output))
 
 data.close
 raw.close

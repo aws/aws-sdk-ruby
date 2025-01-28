@@ -10,12 +10,10 @@ require 'securerandom'
 require_relative 'Stats'
 include Stats
 
-ITERATIONS = ARGV.first.to_i
 WARMUP = 5
 SIZES = [64, 512, 4096, 8192, 45_056].freeze
 ASCII = "!\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~".chars
-MEASUREMENTS = ['Total request time (ms)', 'Serialization time (ms)', 'Deserialization time (ms)',
-                'Request payload size (bytes)', 'Response payload size (bytes)'].freeze
+iterations = ARGV.first.to_i
 run_start_timestamp = Time.now.to_i
 
 def generate_create_secret_request(timestamp, iteration)
@@ -127,7 +125,7 @@ def separate_byte_data(data)
   separated
 end
 
-def write_test_output(operation, protocol, dimension, metric, input, outfile)
+def format_test_output(operation, protocol, dimension, metric, input, output, iterations)
   input.sort!
   result = {
     service: 'SecretsManager',
@@ -138,13 +136,17 @@ def write_test_output(operation, protocol, dimension, metric, input, outfile)
     p50: p50(input),
     p90: p90(input),
     max: input.last,
-    n: ITERATIONS
+    n: iterations
   }
-  outfile.puts(JSON.pretty_generate(result))
+  output << result
 end
 
 def output_raw(thread, outfile)
   $stdout = outfile
+  puts 'Json Total Data Raw'
+  pp thread[:json_total_data]
+  puts 'Cbor Total Data Raw'
+  pp thread[:cbor_total_data]
   puts 'Json Serialization Data Raw'
   pp thread[:json_ser_data]
   puts 'Cbor Serialization Data Raw'
@@ -153,10 +155,6 @@ def output_raw(thread, outfile)
   pp thread[:json_deser_data]
   puts 'Cbor Deserialization Data Raw'
   pp thread[:cbor_deser_data]
-  puts 'Json Total Data Raw'
-  pp thread[:json_total_data]
-  puts 'Cbor Total Data Raw'
-  pp thread[:cbor_total_data]
   puts 'Request Size Data Raw (Alternating Json and CBOR)'
   pp thread[:request_size_data]
   puts 'Response Size Data Raw (Alternating Json and CBOR)'
@@ -175,24 +173,26 @@ def clear_thread_data(thread)
   thread[:response_size_data] = []
 end
 
-def analyze(test_case, metrics, thread, data, raw)
+def analyze(test_case, metrics, thread, raw, output, iterations)
   raw.puts("Test case: #{test_case} #{metrics}")
   output_raw(thread, raw)
 
   separated_request_size = separate_byte_data(thread[:request_size_data])
   separated_response_size = separate_byte_data(thread[:response_size_data])
 
-  write_test_output(test_case, 'JSON', metrics, 'Serialization time (ms)', thread[:json_ser_data], data)
-  write_test_output(test_case, 'JSON', metrics, 'Deserialization time (ms)', thread[:json_deser_data], data)
-  write_test_output(test_case, 'JSON', metrics, 'Total request time (ms)', thread[:json_total_data], data)
-  write_test_output(test_case, 'JSON', metrics, 'Request payload size (bytes)', separated_request_size[0], data)
-  write_test_output(test_case, 'JSON', metrics, 'Response payload size (bytes)', separated_response_size[0], data)
+  measurements = get_measurements
 
-  write_test_output(test_case, 'CBOR', metrics, 'Serialization time (ms)', thread[:cbor_ser_data], data)
-  write_test_output(test_case, 'CBOR', metrics, 'Deserialization time (ms)', thread[:cbor_deser_data], data)
-  write_test_output(test_case, 'CBOR', metrics, 'Total request time (ms)', thread[:cbor_total_data], data)
-  write_test_output(test_case, 'CBOR', metrics, 'Request payload size (bytes)', separated_request_size[1], data)
-  write_test_output(test_case, 'CBOR', metrics, 'Response payload size (bytes)', separated_response_size[1], data)
+  json_data = [thread[:json_total_data], thread[:json_ser_data], thread[:json_deser_data], separated_request_size[0],
+               separated_response_size[0]]
+  json_data.each_with_index do |data, idx|
+    format_test_output(test_case, 'JSON', metrics, measurements[idx], data, output, iterations)
+  end
+
+  cbor_data = [thread[:cbor_total_data], thread[:cbor_ser_data], thread[:cbor_deser_data], separated_request_size[1],
+               separated_response_size[1]]
+  cbor_data.each_with_index do |data, idx|
+    format_test_output(test_case, 'CBOR', metrics, measurements[idx], data, output, iterations)
+  end
 
   clear_thread_data(thread)
 end
@@ -244,8 +244,9 @@ path = __dir__
 FileUtils.mkdir_p("#{path}/test-output/secretsmanager")
 data = File.open("#{path}/test-output/secretsmanager/data.json", 'w')
 raw = File.open("#{path}/test-output/secretsmanager/raw.txt", 'w')
+output = []
 
-(0...ITERATIONS).each do |i|
+(0...iterations).each do |i|
   request = generate_create_secret_request(run_start_timestamp, i.to_s.rjust(3, '0'))
   json_ssm.create_secret(request)
   request = generate_binary_create_secret_request(run_start_timestamp, i.to_s.rjust(3, '0'))
@@ -253,7 +254,7 @@ raw = File.open("#{path}/test-output/secretsmanager/raw.txt", 'w')
 end
 
 # Warm up
-if ITERATIONS > WARMUP
+if iterations > WARMUP
   SIZES.each do |size|
     (0...WARMUP).each do |i|
       request = generate_put_secret_value_request(run_start_timestamp, i.to_s.rjust(3, '0'), size)
@@ -291,51 +292,53 @@ clear_thread_data(thread)
 
 SIZES.each do |size|
   # Put secret value (string)
-  (0...ITERATIONS).each do |i|
+  (0...iterations).each do |i|
     request = generate_put_secret_value_request(run_start_timestamp, i.to_s.rjust(3, '0'), size)
     make_and_time_request(request, 'put', json_ssm, cbor_ssm, thread)
   end
-  analyze('Put string secret', size, thread, data, raw)
+  analyze('Put string secret', size, thread, raw, output, iterations)
   # Put secret value (binary)
-  (0...ITERATIONS).each do |i|
+  (0...iterations).each do |i|
     request = generate_binary_put_secret_value_request(run_start_timestamp, i.to_s.rjust(3, '0'), size)
     make_and_time_request(request, 'put', json_ssm, cbor_ssm, thread)
     request[:secret_binary] = request[:secret_binary].force_encoding('ISO-8859-1').encode('UTF-8')
   end
-  analyze('Put binary secret', size, thread, data, raw)
+  analyze('Put binary secret', size, thread, raw, output, iterations)
   # Get secret value (string)
-  (0...ITERATIONS).each do |i|
+  (0...iterations).each do |i|
     request = generate_get_secret_value_request(run_start_timestamp, i.to_s.rjust(3, '0'))
     make_and_time_request(request, 'get', json_ssm, cbor_ssm, thread)
   end
-  analyze('Get string secret', size, thread, data, raw)
+  analyze('Get string secret', size, thread, raw, output, iterations)
   # Get secret value (binary)
-  (0...ITERATIONS).each do |i|
+  (0...iterations).each do |i|
     request = generate_binary_get_secret_value_request(run_start_timestamp, i.to_s.rjust(3, '0'))
     make_and_time_request(request, 'get', json_ssm, cbor_ssm, thread)
   end
-  analyze('Get binary secret', size, thread, data, raw)
+  analyze('Get binary secret', size, thread, raw, output, iterations)
 end
 
-(0...ITERATIONS).each do |i|
+(0...iterations).each do |i|
   request = generate_describe_secret_request(run_start_timestamp, i.to_s.rjust(3, '0'))
   make_and_time_request(request, 'describe', json_ssm, cbor_ssm, thread)
 end
-analyze('Describe secret', 0, thread, data, raw)
+analyze('Describe secret', 0, thread, raw, output, iterations)
 
-(0...ITERATIONS).each do |i|
+(0...iterations).each do |i|
   request = generate_list_secrets_request(i.to_s.rjust(3, '0'))
   make_and_time_request(request, 'list', json_ssm, cbor_ssm, thread)
 end
-analyze('List secrets', 0, thread, data, raw)
+analyze('List secrets', 0, thread, raw, output, iterations)
 
 thread[:warm] = false
-(0...ITERATIONS).each do |i|
+(0...iterations).each do |i|
   request = generate_delete_secret_request(run_start_timestamp, i.to_s.rjust(3, '0'))
   json_ssm.delete_secret(request)
   request = generate_binary_delete_secret_request(run_start_timestamp, i.to_s.rjust(3, '0'))
   cbor_ssm.delete_secret(request)
 end
+
+data.puts(JSON.pretty_generate(output))
 
 data.close
 raw.close

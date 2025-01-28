@@ -108,7 +108,7 @@ def random_large_blob
   }
 end
 
-def write_test_output(operation, protocol, dimension, metric, input, outfile, iterations)
+def format_test_output(operation, protocol, dimension, metric, input, output, iterations)
   input.sort!
   result = {
     service: 'Local only',
@@ -121,7 +121,7 @@ def write_test_output(operation, protocol, dimension, metric, input, outfile, it
     max: input.last,
     n: iterations
   }
-  outfile.puts(JSON.pretty_generate(result))
+  output << result
 end
 
 def output_raw(thread, outfile)
@@ -150,17 +150,20 @@ def clear_thread_data(thread)
   thread[:response_size_data] = []
 end
 
-def analyze(test_cases, measurements, input, protocol, data, iterations)
+def analyze(test_cases, input, protocol, output, iterations)
+  measurements = get_measurements.drop(1)
   test_cases.each do |test|
     measurements.each do |m|
-      write_test_output(test, protocol, 0, m, input[test][m], data, iterations)
+      format_test_output(test, protocol, 0, m, input[test][m], output, iterations)
     end
   end
 end
 
-def separate_and_analyze(test_cases, measurements, thread, data, raw, iterations)
+def separate_and_analyze(test_cases, thread, raw, output, iterations)
   raw.puts('All test cases')
   output_raw(thread, raw)
+
+  measurements = get_measurements.drop(1)
 
   json_full_ser_data = Array.new(5) { [] }
   json_full_deser_data = Array.new(5) { [] }
@@ -187,7 +190,7 @@ def separate_and_analyze(test_cases, measurements, thread, data, raw, iterations
     current[measurements[3]] = json_full_response_data[i]
     json_full_test_cases[test_cases[i]] = current
   end
-  analyze(test_cases, measurements, json_full_test_cases, 'JSON', data, iterations)
+  analyze(test_cases, json_full_test_cases, 'JSON', output, iterations)
 
   cbor_full_ser_data = Array.new(5) { [] }
   cbor_full_deser_data = Array.new(5) { [] }
@@ -214,7 +217,7 @@ def separate_and_analyze(test_cases, measurements, thread, data, raw, iterations
     current[measurements[3]] = cbor_full_response_data[i]
     cbor_full_test_cases[test_cases[i]] = current
   end
-  analyze(test_cases, measurements, cbor_full_test_cases, 'CBOR', data, iterations)
+  analyze(test_cases, cbor_full_test_cases, 'CBOR', output, iterations)
 end
 
 thread = Thread.current
@@ -231,6 +234,7 @@ path = __dir__
 FileUtils.mkdir_p("#{path}/test-output/local-only")
 data = File.open("#{path}/test-output/local-only/data.json", 'w')
 raw = File.open("#{path}/test-output/local-only/raw.txt", 'w')
+output = []
 
 (0...(iterations + WARMUP)).each do |i|
   clear_thread_data(thread) if i == WARMUP
@@ -267,10 +271,9 @@ raw = File.open("#{path}/test-output/local-only/raw.txt", 'w')
 end
 
 test_cases = ['All types', 'Long list of strings', 'Complex object', 'List of complex objects', 'Very large blob']
-measurements = ['Serialization time (ms)', 'Deserialization time (ms)', 'Request payload size (bytes)',
-                'Response payload size (bytes)']
 
-separate_and_analyze(test_cases, measurements, thread, data, raw, iterations)
+separate_and_analyze(test_cases, thread, raw, output, iterations)
+data.puts(JSON.pretty_generate(output))
 
 data.close
 raw.close

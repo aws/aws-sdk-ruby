@@ -10,4 +10,4 @@ if [ ! -d "$SCRIPT_DIR"/test-output/combined ]; then
   mkdir "$SCRIPT_DIR"/test-output/combined
 fi
 
-cat "$SCRIPT_DIR"/test-output/local-only/data.json "$SCRIPT_DIR"/test-output/secretsmanager/data.json "$SCRIPT_DIR"/test-output/cloudwatch/data.json > "$SCRIPT_DIR"/test-output/combined/combined.json
+jq -s 'add' "$SCRIPT_DIR"/test-output/local-only/data.json "$SCRIPT_DIR"/test-output/secretsmanager/data.json "$SCRIPT_DIR"/test-output/cloudwatch/data.json > "$SCRIPT_DIR"/test-output/combined/combined.json
