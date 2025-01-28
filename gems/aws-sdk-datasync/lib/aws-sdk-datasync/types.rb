@@ -1196,7 +1196,7 @@ module Aws::DataSync
     #
     #   To copy all data in the subdirectory, DataSync must be able to mount
     #   the SMB share and access all of its data. For more information, see
-    #   [required permissions][1] for SMB locations.
+    #   [Providing DataSync access to SMB file servers][1].
     #
     #
     #
@@ -1204,20 +1204,25 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] server_hostname
-    #   Specifies the Domain Name Service (DNS) name or IP address of the
-    #   SMB file server that your DataSync agent will mount.
+    #   Specifies the domain name or IP address of the SMB file server that
+    #   your DataSync agent will mount.
     #
-    #   <note markdown="1"> You can't specify an IP version 6 (IPv6) address.
+    #   Remember the following when configuring this parameter:
     #
-    #    </note>
+    #   * You can't specify an IP version 6 (IPv6) address.
+    #
+    #   * If you're using Kerberos authentication, you must specify a
+    #     domain name.
     #   @return [String]
     #
     # @!attribute [rw] user
     #   Specifies the user that can mount and access the files, folders, and
-    #   file metadata in your SMB file server.
+    #   file metadata in your SMB file server. This parameter applies only
+    #   if `AuthenticationType` is set to `NTLM`.
     #
     #   For information about choosing a user with the right level of access
-    #   for your transfer, see [required permissions][1] for SMB locations.
+    #   for your transfer, see [Providing DataSync access to SMB file
+    #   servers][1].
     #
     #
     #
@@ -1225,25 +1230,20 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] domain
-    #   Specifies the name of the Active Directory domain that your SMB file
-    #   server belongs to.
+    #   Specifies the Windows domain name that your SMB file server belongs
+    #   to. This parameter applies only if `AuthenticationType` is set to
+    #   `NTLM`.
     #
-    #   If you have multiple Active Directory domains in your environment,
-    #   configuring this parameter makes sure that DataSync connects to the
-    #   right file server.
+    #   If you have multiple domains in your environment, configuring this
+    #   parameter makes sure that DataSync connects to the right file
+    #   server.
     #   @return [String]
     #
     # @!attribute [rw] password
     #   Specifies the password of the user who can mount your SMB file
     #   server and has permission to access the files and folders involved
-    #   in your transfer.
-    #
-    #   For more information, see [required permissions][1] for SMB
-    #   locations.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions
+    #   in your transfer. This parameter applies only if
+    #   `AuthenticationType` is set to `NTLM`.
     #   @return [String]
     #
     # @!attribute [rw] agent_arns
@@ -1263,6 +1263,62 @@ module Aws::DataSync
     #   name tag for your location.
     #   @return [Array<Types::TagListEntry>]
     #
+    # @!attribute [rw] authentication_type
+    #   Specifies the authentication protocol that DataSync uses to connect
+    #   to your SMB file server. DataSync supports `NTLM` (default) and
+    #   `KERBEROS` authentication.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_ip_addresses
+    #   Specifies the IPv4 addresses for the DNS servers that your SMB file
+    #   server belongs to. This parameter applies only if
+    #   `AuthenticationType` is set to `KERBEROS`.
+    #
+    #   If you have multiple domains in your environment, configuring this
+    #   parameter makes sure that DataSync connects to the right SMB file
+    #   server.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] kerberos_principal
+    #   Specifies a service principal name (SPN), which is an identity in
+    #   your Kerberos realm that has permission to access the files,
+    #   folders, and file metadata in your SMB file server.
+    #
+    #   SPNs are case sensitive and must include a prepended `cifs/`. For
+    #   example, an SPN might look like `cifs/kerberosuser@EXAMPLE.COM`.
+    #
+    #   Your task execution will fail if the SPN that you provide for this
+    #   parameter doesn’t match what’s exactly in your keytab or `krb5.conf`
+    #   files.
+    #   @return [String]
+    #
+    # @!attribute [rw] kerberos_keytab
+    #   Specifies your Kerberos key table (keytab) file, which includes
+    #   mappings between your service principal name (SPN) and encryption
+    #   keys.
+    #
+    #   You can specify the keytab using a file path (for example,
+    #   `file://path/to/file.keytab`). The file must be base64 encoded. If
+    #   you're using the CLI, the encoding is done for you.
+    #
+    #   To avoid task execution errors, make sure that the SPN in the keytab
+    #   file matches exactly what you specify for `KerberosPrincipal` and in
+    #   your `krb5.conf` file.
+    #   @return [String]
+    #
+    # @!attribute [rw] kerberos_krb_5_conf
+    #   Specifies a Kerberos configuration file (`krb5.conf`) that defines
+    #   your Kerberos realm configuration.
+    #
+    #   You can specify the `krb5.conf` using a file path (for example,
+    #   `file://path/to/krb5.conf`). The file must be base64 encoded. If
+    #   you're using the CLI, the encoding is done for you.
+    #
+    #   To avoid task execution errors, make sure that the service principal
+    #   name (SPN) in the `krb5.conf` file matches exactly what you specify
+    #   for `KerberosPrincipal` and in your keytab file.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationSmbRequest AWS API Documentation
     #
     class CreateLocationSmbRequest < Struct.new(
@@ -1273,7 +1329,12 @@ module Aws::DataSync
       :password,
       :agent_arns,
       :mount_options,
-      :tags)
+      :tags,
+      :authentication_type,
+      :dns_ip_addresses,
+      :kerberos_principal,
+      :kerberos_keytab,
+      :kerberos_krb_5_conf)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -2373,21 +2434,40 @@ module Aws::DataSync
     #
     # @!attribute [rw] user
     #   The user that can mount and access the files, folders, and file
-    #   metadata in your SMB file server.
+    #   metadata in your SMB file server. This element applies only if
+    #   `AuthenticationType` is set to `NTLM`.
     #   @return [String]
     #
     # @!attribute [rw] domain
-    #   The name of the Microsoft Active Directory domain that the SMB file
-    #   server belongs to.
+    #   The name of the Windows domain that the SMB file server belongs to.
+    #   This element applies only if `AuthenticationType` is set to `NTLM`.
     #   @return [String]
     #
     # @!attribute [rw] mount_options
-    #   The protocol that DataSync use to access your SMB file.
+    #   The SMB protocol version that DataSync uses to access your SMB file
+    #   server.
     #   @return [Types::SmbMountOptions]
     #
     # @!attribute [rw] creation_time
     #   The time that the SMB location was created.
     #   @return [Time]
+    #
+    # @!attribute [rw] dns_ip_addresses
+    #   The IPv4 addresses for the DNS servers that your SMB file server
+    #   belongs to. This element applies only if `AuthenticationType` is set
+    #   to `KERBEROS`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] kerberos_principal
+    #   The Kerberos service principal name (SPN) that has permission to
+    #   access the files, folders, and file metadata in your SMB file
+    #   server.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_type
+    #   The authentication protocol that DataSync uses to connect to your
+    #   SMB file server.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationSmbResponse AWS API Documentation
     #
@@ -2398,7 +2478,10 @@ module Aws::DataSync
       :user,
       :domain,
       :mount_options,
-      :creation_time)
+      :creation_time,
+      :dns_ip_addresses,
+      :kerberos_principal,
+      :authentication_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6793,7 +6876,7 @@ module Aws::DataSync
     #
     #   To copy all data in the specified subdirectory, DataSync must be
     #   able to mount the SMB share and access all of its data. For more
-    #   information, see [required permissions][1] for SMB locations.
+    #   information, see [Providing DataSync access to SMB file servers][1].
     #
     #
     #
@@ -6803,10 +6886,12 @@ module Aws::DataSync
     # @!attribute [rw] user
     #   Specifies the user name that can mount your SMB file server and has
     #   permission to access the files and folders involved in your
-    #   transfer.
+    #   transfer. This parameter applies only if `AuthenticationType` is set
+    #   to `NTLM`.
     #
     #   For information about choosing a user with the right level of access
-    #   for your transfer, see [required permissions][1] for SMB locations.
+    #   for your transfer, see [Providing DataSync access to SMB file
+    #   servers][1].
     #
     #
     #
@@ -6815,31 +6900,19 @@ module Aws::DataSync
     #
     # @!attribute [rw] domain
     #   Specifies the Windows domain name that your SMB file server belongs
-    #   to.
+    #   to. This parameter applies only if `AuthenticationType` is set to
+    #   `NTLM`.
     #
     #   If you have multiple domains in your environment, configuring this
     #   parameter makes sure that DataSync connects to the right file
     #   server.
-    #
-    #   For more information, see [required permissions][1] for SMB
-    #   locations.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions
     #   @return [String]
     #
     # @!attribute [rw] password
     #   Specifies the password of the user who can mount your SMB file
     #   server and has permission to access the files and folders involved
-    #   in your transfer.
-    #
-    #   For more information, see [required permissions][1] for SMB
-    #   locations.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions
+    #   in your transfer. This parameter applies only if
+    #   `AuthenticationType` is set to `NTLM`.
     #   @return [String]
     #
     # @!attribute [rw] agent_arns
@@ -6853,6 +6926,62 @@ module Aws::DataSync
     #   that DataSync uses to access an SMB file server.
     #   @return [Types::SmbMountOptions]
     #
+    # @!attribute [rw] authentication_type
+    #   Specifies the authentication protocol that DataSync uses to connect
+    #   to your SMB file server. DataSync supports `NTLM` (default) and
+    #   `KERBEROS` authentication.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_ip_addresses
+    #   Specifies the IPv4 addresses for the DNS servers that your SMB file
+    #   server belongs to. This parameter applies only if
+    #   `AuthenticationType` is set to `KERBEROS`.
+    #
+    #   If you have multiple domains in your environment, configuring this
+    #   parameter makes sure that DataSync connects to the right SMB file
+    #   server.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] kerberos_principal
+    #   Specifies a service principal name (SPN), which is an identity in
+    #   your Kerberos realm that has permission to access the files,
+    #   folders, and file metadata in your SMB file server.
+    #
+    #   SPNs are case sensitive and must include a prepended `cifs/`. For
+    #   example, an SPN might look like `cifs/kerberosuser@EXAMPLE.COM`.
+    #
+    #   Your task execution will fail if the SPN that you provide for this
+    #   parameter doesn’t match what’s exactly in your keytab or `krb5.conf`
+    #   files.
+    #   @return [String]
+    #
+    # @!attribute [rw] kerberos_keytab
+    #   Specifies your Kerberos key table (keytab) file, which includes
+    #   mappings between your service principal name (SPN) and encryption
+    #   keys.
+    #
+    #   You can specify the keytab using a file path (for example,
+    #   `file://path/to/file.keytab`). The file must be base64 encoded. If
+    #   you're using the CLI, the encoding is done for you.
+    #
+    #   To avoid task execution errors, make sure that the SPN in the keytab
+    #   file matches exactly what you specify for `KerberosPrincipal` and in
+    #   your `krb5.conf` file.
+    #   @return [String]
+    #
+    # @!attribute [rw] kerberos_krb_5_conf
+    #   Specifies a Kerberos configuration file (`krb5.conf`) that defines
+    #   your Kerberos realm configuration.
+    #
+    #   You can specify the `krb5.conf` using a file path (for example,
+    #   `file://path/to/krb5.conf`). The file must be base64 encoded. If
+    #   you're using the CLI, the encoding is done for you.
+    #
+    #   To avoid task execution errors, make sure that the service principal
+    #   name (SPN) in the `krb5.conf` file matches exactly what you specify
+    #   for `KerberosPrincipal` and in your keytab file.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateLocationSmbRequest AWS API Documentation
     #
     class UpdateLocationSmbRequest < Struct.new(
@@ -6862,7 +6991,12 @@ module Aws::DataSync
       :domain,
       :password,
       :agent_arns,
-      :mount_options)
+      :mount_options,
+      :authentication_type,
+      :dns_ip_addresses,
+      :kerberos_principal,
+      :kerberos_keytab,
+      :kerberos_krb_5_conf)
       SENSITIVE = [:password]
       include Aws::Structure
     end

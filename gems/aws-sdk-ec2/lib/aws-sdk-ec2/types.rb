@@ -8672,8 +8672,14 @@ module Aws::EC2
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [Ensuring
-    #   idempotency][1].
+    #   idempotency of the request. If you do not specify a client token, a
+    #   randomly generated token is used for the request to ensure
+    #   idempotency.
+    #
+    #   For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #
     #
     #
@@ -34249,8 +34255,14 @@ module Aws::EC2
     #     valid and several attempts to launch instances have failed. For
     #     more information, see the description of the event.
     #
-    #   * `launchSpecUnusable` - The price in a launch specification is not
-    #     valid because it is below the Spot price.
+    #   * `launchSpecUnusable` - The price specified in a launch
+    #     specification is not valid because it is below the Spot price for
+    #     the requested Spot pools.
+    #
+    #     Note: Even if a fleet with the `maintain` request type is in the
+    #     process of being canceled, it may still publish a
+    #     `launchSpecUnusable` event. This does not mean that the canceled
+    #     fleet is attempting to launch a new instance.
     #
     #   * `registerWithLoadBalancersFailed` - An attempt to register
     #     instances with load balancers failed. For more information, see
@@ -42377,7 +42389,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] no_device
-    #   suppress the specified device included in the block device mapping.
+    #   Suppresses the specified device included in the block device
+    #   mapping.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceBlockDeviceMappingSpecification AWS API Documentation
@@ -43950,9 +43963,12 @@ module Aws::EC2
     # @!attribute [rw] accelerator_types
     #   The accelerator types that must be on the instance type.
     #
+    #   * For instance types with FPGA accelerators, specify `fpga`.
+    #
     #   * For instance types with GPU accelerators, specify `gpu`.
     #
-    #   * For instance types with FPGA accelerators, specify `fpga`.
+    #   * For instance types with Inference accelerators, specify
+    #     `inference`.
     #
     #   Default: Any accelerator type
     #   @return [Array<String>]
@@ -44433,9 +44449,12 @@ module Aws::EC2
     # @!attribute [rw] accelerator_types
     #   The accelerator types that must be on the instance type.
     #
-    #   * To include instance types with GPU hardware, specify `gpu`.
+    #   * For instance types with FPGA accelerators, specify `fpga`.
     #
-    #   * To include instance types with FPGA hardware, specify `fpga`.
+    #   * For instance types with GPU accelerators, specify `gpu`.
+    #
+    #   * For instance types with Inference accelerators, specify
+    #     `inference`.
     #
     #   Default: Any accelerator type
     #   @return [Array<String>]
@@ -66995,6 +67014,10 @@ module Aws::EC2
     #   If you specify a maximum price, your Spot Instances will be
     #   interrupted more frequently than if you do not specify this
     #   parameter.
+    #
+    #    If you specify a maximum price, it must be more than USD $0.001.
+    #   Specifying a value below USD $0.001 will result in an
+    #   `InvalidParameterValue` error message.
     #   @return [String]
     #
     # @!attribute [rw] spot_instance_type

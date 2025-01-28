@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2025-01-28)
+------------------
+
+* Feature - feature: Deadline: Add support for limiting the concurrent usage of external resources, like floating licenses, using limits and the ability to constrain the maximum number of workers that work on a job
+
 1.18.0 (2025-01-15)
 ------------------
 

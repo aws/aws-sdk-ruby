@@ -4107,6 +4107,11 @@ module Aws::EC2
     #   duration has elapsed. You can't cancel a future-dated Capacity
     #   Reservation during the commitment duration.
     #
+    # <note markdown="1"> You can't modify or cancel a Capacity Block. For more information,
+    # see [Capacity Blocks for ML][1].
+    #
+    #  </note>
+    #
     # If a future-dated Capacity Reservation enters the `delayed` state, the
     # commitment duration is waived, and you can cancel it as soon as it
     # enters the `active` state.
@@ -4117,6 +4122,10 @@ module Aws::EC2
     # Capacity Reservation, launch On-Demand Instance capacity, or run in
     # any open Capacity Reservation that has matching attributes and
     # sufficient capacity.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-blocks.html
     #
     # @option params [required, String] :capacity_reservation_id
     #   The ID of the Capacity Reservation to be cancelled.
@@ -6794,8 +6803,14 @@ module Aws::EC2
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [Ensuring
-    #   idempotency][1].
+    #   idempotency of the request. If you do not specify a client token, a
+    #   randomly generated token is used for the request to ensure
+    #   idempotency.
+    #
+    #   For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     #
     #
@@ -21566,6 +21581,15 @@ module Aws::EC2
     # Amazon Web Services Region that you're currently using. With Capacity
     # Blocks, you purchase a specific instance type for a period of time.
     #
+    # To search for an available Capacity Block offering, you specify a
+    # reservation duration and instance count. You must select one of the
+    # following options.
+    #
+    # * For reservation durations<b> 1-day increments up 14 days and 7-day
+    #   increments up to 182 days total</b>
+    #
+    # * For instance count<b> 1, 2, 4, 8, 16, 32, or 64 instances</b>
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -26437,7 +26461,8 @@ module Aws::EC2
     #   * `p3dn.24xlarge` \| `p4d.24xlarge` \| `p4de.24xlarge` \|
     #     `p5.48xlarge` \| `p5e.48xlarge` \| `p5en.48xlarge`
     #
-    #   * `trn1.2xlarge` \| `trn1.32xlarge` \| `trn1n.32xlarge`
+    #   * `trn1.2xlarge` \| `trn1.32xlarge` \| `trn1n.32xlarge` \|
+    #     `trn2.48xlarge` \| `trn2u.48xlarge`
     #
     # For more information, see [Amazon EC2 instance topology][1] in the
     # *Amazon EC2 User Guide*.
@@ -63153,7 +63178,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.502.0'
+      context[:gem_version] = '1.503.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

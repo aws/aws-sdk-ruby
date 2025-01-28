@@ -25,9 +25,12 @@ module Aws::Deadline
     AcceleratorTypes = Shapes::ListShape.new(name: 'AcceleratorTypes')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccessKeyId = Shapes::StringShape.new(name: 'AccessKeyId')
+    AcquiredLimit = Shapes::StructureShape.new(name: 'AcquiredLimit')
+    AcquiredLimits = Shapes::ListShape.new(name: 'AcquiredLimits')
     AggregationId = Shapes::StringShape.new(name: 'AggregationId')
     AllowedStorageProfileIds = Shapes::ListShape.new(name: 'AllowedStorageProfileIds')
     AmountCapabilityName = Shapes::StringShape.new(name: 'AmountCapabilityName')
+    AmountRequirementName = Shapes::StringShape.new(name: 'AmountRequirementName')
     AssignedEnvironmentEnterSessionActionDefinition = Shapes::StructureShape.new(name: 'AssignedEnvironmentEnterSessionActionDefinition')
     AssignedEnvironmentExitSessionActionDefinition = Shapes::StructureShape.new(name: 'AssignedEnvironmentExitSessionActionDefinition')
     AssignedSession = Shapes::StructureShape.new(name: 'AssignedSession')
@@ -102,12 +105,16 @@ module Aws::Deadline
     CreateLicenseEndpointRequestSecurityGroupIdsList = Shapes::ListShape.new(name: 'CreateLicenseEndpointRequestSecurityGroupIdsList')
     CreateLicenseEndpointRequestSubnetIdsList = Shapes::ListShape.new(name: 'CreateLicenseEndpointRequestSubnetIdsList')
     CreateLicenseEndpointResponse = Shapes::StructureShape.new(name: 'CreateLicenseEndpointResponse')
+    CreateLimitRequest = Shapes::StructureShape.new(name: 'CreateLimitRequest')
+    CreateLimitResponse = Shapes::StructureShape.new(name: 'CreateLimitResponse')
     CreateMonitorRequest = Shapes::StructureShape.new(name: 'CreateMonitorRequest')
     CreateMonitorResponse = Shapes::StructureShape.new(name: 'CreateMonitorResponse')
     CreateQueueEnvironmentRequest = Shapes::StructureShape.new(name: 'CreateQueueEnvironmentRequest')
     CreateQueueEnvironmentResponse = Shapes::StructureShape.new(name: 'CreateQueueEnvironmentResponse')
     CreateQueueFleetAssociationRequest = Shapes::StructureShape.new(name: 'CreateQueueFleetAssociationRequest')
     CreateQueueFleetAssociationResponse = Shapes::StructureShape.new(name: 'CreateQueueFleetAssociationResponse')
+    CreateQueueLimitAssociationRequest = Shapes::StructureShape.new(name: 'CreateQueueLimitAssociationRequest')
+    CreateQueueLimitAssociationResponse = Shapes::StructureShape.new(name: 'CreateQueueLimitAssociationResponse')
     CreateQueueRequest = Shapes::StructureShape.new(name: 'CreateQueueRequest')
     CreateQueueResponse = Shapes::StructureShape.new(name: 'CreateQueueResponse')
     CreateStorageProfileRequest = Shapes::StructureShape.new(name: 'CreateStorageProfileRequest')
@@ -131,6 +138,8 @@ module Aws::Deadline
     DeleteFleetResponse = Shapes::StructureShape.new(name: 'DeleteFleetResponse')
     DeleteLicenseEndpointRequest = Shapes::StructureShape.new(name: 'DeleteLicenseEndpointRequest')
     DeleteLicenseEndpointResponse = Shapes::StructureShape.new(name: 'DeleteLicenseEndpointResponse')
+    DeleteLimitRequest = Shapes::StructureShape.new(name: 'DeleteLimitRequest')
+    DeleteLimitResponse = Shapes::StructureShape.new(name: 'DeleteLimitResponse')
     DeleteMeteredProductRequest = Shapes::StructureShape.new(name: 'DeleteMeteredProductRequest')
     DeleteMeteredProductResponse = Shapes::StructureShape.new(name: 'DeleteMeteredProductResponse')
     DeleteMonitorRequest = Shapes::StructureShape.new(name: 'DeleteMonitorRequest')
@@ -139,6 +148,8 @@ module Aws::Deadline
     DeleteQueueEnvironmentResponse = Shapes::StructureShape.new(name: 'DeleteQueueEnvironmentResponse')
     DeleteQueueFleetAssociationRequest = Shapes::StructureShape.new(name: 'DeleteQueueFleetAssociationRequest')
     DeleteQueueFleetAssociationResponse = Shapes::StructureShape.new(name: 'DeleteQueueFleetAssociationResponse')
+    DeleteQueueLimitAssociationRequest = Shapes::StructureShape.new(name: 'DeleteQueueLimitAssociationRequest')
+    DeleteQueueLimitAssociationResponse = Shapes::StructureShape.new(name: 'DeleteQueueLimitAssociationResponse')
     DeleteQueueRequest = Shapes::StructureShape.new(name: 'DeleteQueueRequest')
     DeleteQueueResponse = Shapes::StructureShape.new(name: 'DeleteQueueResponse')
     DeleteStorageProfileRequest = Shapes::StructureShape.new(name: 'DeleteStorageProfileRequest')
@@ -217,12 +228,16 @@ module Aws::Deadline
     GetLicenseEndpointResponse = Shapes::StructureShape.new(name: 'GetLicenseEndpointResponse')
     GetLicenseEndpointResponseSecurityGroupIdsList = Shapes::ListShape.new(name: 'GetLicenseEndpointResponseSecurityGroupIdsList')
     GetLicenseEndpointResponseSubnetIdsList = Shapes::ListShape.new(name: 'GetLicenseEndpointResponseSubnetIdsList')
+    GetLimitRequest = Shapes::StructureShape.new(name: 'GetLimitRequest')
+    GetLimitResponse = Shapes::StructureShape.new(name: 'GetLimitResponse')
     GetMonitorRequest = Shapes::StructureShape.new(name: 'GetMonitorRequest')
     GetMonitorResponse = Shapes::StructureShape.new(name: 'GetMonitorResponse')
     GetQueueEnvironmentRequest = Shapes::StructureShape.new(name: 'GetQueueEnvironmentRequest')
     GetQueueEnvironmentResponse = Shapes::StructureShape.new(name: 'GetQueueEnvironmentResponse')
     GetQueueFleetAssociationRequest = Shapes::StructureShape.new(name: 'GetQueueFleetAssociationRequest')
     GetQueueFleetAssociationResponse = Shapes::StructureShape.new(name: 'GetQueueFleetAssociationResponse')
+    GetQueueLimitAssociationRequest = Shapes::StructureShape.new(name: 'GetQueueLimitAssociationRequest')
+    GetQueueLimitAssociationResponse = Shapes::StructureShape.new(name: 'GetQueueLimitAssociationResponse')
     GetQueueRequest = Shapes::StructureShape.new(name: 'GetQueueRequest')
     GetQueueResponse = Shapes::StructureShape.new(name: 'GetQueueResponse')
     GetSessionActionRequest = Shapes::StructureShape.new(name: 'GetSessionActionRequest')
@@ -296,6 +311,9 @@ module Aws::Deadline
     LicenseEndpointSummaries = Shapes::ListShape.new(name: 'LicenseEndpointSummaries')
     LicenseEndpointSummary = Shapes::StructureShape.new(name: 'LicenseEndpointSummary')
     LicenseProduct = Shapes::StringShape.new(name: 'LicenseProduct')
+    LimitId = Shapes::StringShape.new(name: 'LimitId')
+    LimitSummaries = Shapes::ListShape.new(name: 'LimitSummaries')
+    LimitSummary = Shapes::StructureShape.new(name: 'LimitSummary')
     ListAttributeCapabilityValue = Shapes::ListShape.new(name: 'ListAttributeCapabilityValue')
     ListAvailableMeteredProductsRequest = Shapes::StructureShape.new(name: 'ListAvailableMeteredProductsRequest')
     ListAvailableMeteredProductsResponse = Shapes::StructureShape.new(name: 'ListAvailableMeteredProductsResponse')
@@ -317,6 +335,8 @@ module Aws::Deadline
     ListJobsResponse = Shapes::StructureShape.new(name: 'ListJobsResponse')
     ListLicenseEndpointsRequest = Shapes::StructureShape.new(name: 'ListLicenseEndpointsRequest')
     ListLicenseEndpointsResponse = Shapes::StructureShape.new(name: 'ListLicenseEndpointsResponse')
+    ListLimitsRequest = Shapes::StructureShape.new(name: 'ListLimitsRequest')
+    ListLimitsResponse = Shapes::StructureShape.new(name: 'ListLimitsResponse')
     ListMeteredProductsRequest = Shapes::StructureShape.new(name: 'ListMeteredProductsRequest')
     ListMeteredProductsResponse = Shapes::StructureShape.new(name: 'ListMeteredProductsResponse')
     ListMonitorsRequest = Shapes::StructureShape.new(name: 'ListMonitorsRequest')
@@ -325,6 +345,8 @@ module Aws::Deadline
     ListQueueEnvironmentsResponse = Shapes::StructureShape.new(name: 'ListQueueEnvironmentsResponse')
     ListQueueFleetAssociationsRequest = Shapes::StructureShape.new(name: 'ListQueueFleetAssociationsRequest')
     ListQueueFleetAssociationsResponse = Shapes::StructureShape.new(name: 'ListQueueFleetAssociationsResponse')
+    ListQueueLimitAssociationsRequest = Shapes::StructureShape.new(name: 'ListQueueLimitAssociationsRequest')
+    ListQueueLimitAssociationsResponse = Shapes::StructureShape.new(name: 'ListQueueLimitAssociationsResponse')
     ListQueueMembersRequest = Shapes::StructureShape.new(name: 'ListQueueMembersRequest')
     ListQueueMembersResponse = Shapes::StructureShape.new(name: 'ListQueueMembersResponse')
     ListQueuesRequest = Shapes::StructureShape.new(name: 'ListQueuesRequest')
@@ -365,15 +387,18 @@ module Aws::Deadline
     ManifestPropertiesInputManifestPathString = Shapes::StringShape.new(name: 'ManifestPropertiesInputManifestPathString')
     ManifestPropertiesList = Shapes::ListShape.new(name: 'ManifestPropertiesList')
     ManifestPropertiesRootPathString = Shapes::StringShape.new(name: 'ManifestPropertiesRootPathString')
+    MaxCount = Shapes::IntegerShape.new(name: 'MaxCount')
     MaxFailedTasksCount = Shapes::IntegerShape.new(name: 'MaxFailedTasksCount')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxRetriesPerTask = Shapes::IntegerShape.new(name: 'MaxRetriesPerTask')
+    MaxWorkerCount = Shapes::IntegerShape.new(name: 'MaxWorkerCount')
     MembershipLevel = Shapes::StringShape.new(name: 'MembershipLevel')
     MemoryAmountMiB = Shapes::IntegerShape.new(name: 'MemoryAmountMiB')
     MemoryMiBRange = Shapes::StructureShape.new(name: 'MemoryMiBRange')
     MeteredProductId = Shapes::StringShape.new(name: 'MeteredProductId')
     MeteredProductSummary = Shapes::StructureShape.new(name: 'MeteredProductSummary')
     MeteredProductSummaryList = Shapes::ListShape.new(name: 'MeteredProductSummaryList')
+    MinOneMaxInteger = Shapes::IntegerShape.new(name: 'MinOneMaxInteger')
     MinOneMaxTenThousand = Shapes::IntegerShape.new(name: 'MinOneMaxTenThousand')
     MinZeroMaxInteger = Shapes::IntegerShape.new(name: 'MinZeroMaxInteger')
     MonitorId = Shapes::StringShape.new(name: 'MonitorId')
@@ -409,6 +434,9 @@ module Aws::Deadline
     QueueFleetAssociationSummaries = Shapes::ListShape.new(name: 'QueueFleetAssociationSummaries')
     QueueFleetAssociationSummary = Shapes::StructureShape.new(name: 'QueueFleetAssociationSummary')
     QueueId = Shapes::StringShape.new(name: 'QueueId')
+    QueueLimitAssociationStatus = Shapes::StringShape.new(name: 'QueueLimitAssociationStatus')
+    QueueLimitAssociationSummaries = Shapes::ListShape.new(name: 'QueueLimitAssociationSummaries')
+    QueueLimitAssociationSummary = Shapes::StructureShape.new(name: 'QueueLimitAssociationSummary')
     QueueMember = Shapes::StructureShape.new(name: 'QueueMember')
     QueueMemberList = Shapes::ListShape.new(name: 'QueueMemberList')
     QueueStatus = Shapes::StringShape.new(name: 'QueueStatus')
@@ -557,6 +585,8 @@ module Aws::Deadline
     UpdateJobLifecycleStatus = Shapes::StringShape.new(name: 'UpdateJobLifecycleStatus')
     UpdateJobRequest = Shapes::StructureShape.new(name: 'UpdateJobRequest')
     UpdateJobResponse = Shapes::StructureShape.new(name: 'UpdateJobResponse')
+    UpdateLimitRequest = Shapes::StructureShape.new(name: 'UpdateLimitRequest')
+    UpdateLimitResponse = Shapes::StructureShape.new(name: 'UpdateLimitResponse')
     UpdateMonitorRequest = Shapes::StructureShape.new(name: 'UpdateMonitorRequest')
     UpdateMonitorResponse = Shapes::StructureShape.new(name: 'UpdateMonitorResponse')
     UpdateQueueEnvironmentRequest = Shapes::StructureShape.new(name: 'UpdateQueueEnvironmentRequest')
@@ -564,6 +594,9 @@ module Aws::Deadline
     UpdateQueueFleetAssociationRequest = Shapes::StructureShape.new(name: 'UpdateQueueFleetAssociationRequest')
     UpdateQueueFleetAssociationResponse = Shapes::StructureShape.new(name: 'UpdateQueueFleetAssociationResponse')
     UpdateQueueFleetAssociationStatus = Shapes::StringShape.new(name: 'UpdateQueueFleetAssociationStatus')
+    UpdateQueueLimitAssociationRequest = Shapes::StructureShape.new(name: 'UpdateQueueLimitAssociationRequest')
+    UpdateQueueLimitAssociationResponse = Shapes::StructureShape.new(name: 'UpdateQueueLimitAssociationResponse')
+    UpdateQueueLimitAssociationStatus = Shapes::StringShape.new(name: 'UpdateQueueLimitAssociationStatus')
     UpdateQueueRequest = Shapes::StructureShape.new(name: 'UpdateQueueRequest')
     UpdateQueueResponse = Shapes::StructureShape.new(name: 'UpdateQueueResponse')
     UpdateSessionRequest = Shapes::StructureShape.new(name: 'UpdateSessionRequest')
@@ -638,6 +671,12 @@ module Aws::Deadline
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     AccessDeniedException.add_member(:context, Shapes::ShapeRef.new(shape: ExceptionContext, location_name: "context"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AcquiredLimit.add_member(:limit_id, Shapes::ShapeRef.new(shape: LimitId, required: true, location_name: "limitId"))
+    AcquiredLimit.add_member(:count, Shapes::ShapeRef.new(shape: MinOneMaxInteger, required: true, location_name: "count"))
+    AcquiredLimit.struct_class = Types::AcquiredLimit
+
+    AcquiredLimits.member = Shapes::ShapeRef.new(shape: AcquiredLimit)
 
     AllowedStorageProfileIds.member = Shapes::ShapeRef.new(shape: StorageProfileId)
 
@@ -891,6 +930,7 @@ module Aws::Deadline
     CreateJobRequest.add_member(:target_task_run_status, Shapes::ShapeRef.new(shape: CreateJobTargetTaskRunStatus, location_name: "targetTaskRunStatus"))
     CreateJobRequest.add_member(:max_failed_tasks_count, Shapes::ShapeRef.new(shape: MaxFailedTasksCount, location_name: "maxFailedTasksCount"))
     CreateJobRequest.add_member(:max_retries_per_task, Shapes::ShapeRef.new(shape: MaxRetriesPerTask, location_name: "maxRetriesPerTask"))
+    CreateJobRequest.add_member(:max_worker_count, Shapes::ShapeRef.new(shape: MaxWorkerCount, location_name: "maxWorkerCount"))
     CreateJobRequest.add_member(:source_job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "sourceJobId"))
     CreateJobRequest.struct_class = Types::CreateJobRequest
 
@@ -910,6 +950,17 @@ module Aws::Deadline
 
     CreateLicenseEndpointResponse.add_member(:license_endpoint_id, Shapes::ShapeRef.new(shape: LicenseEndpointId, required: true, location_name: "licenseEndpointId"))
     CreateLicenseEndpointResponse.struct_class = Types::CreateLicenseEndpointResponse
+
+    CreateLimitRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
+    CreateLimitRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "displayName"))
+    CreateLimitRequest.add_member(:amount_requirement_name, Shapes::ShapeRef.new(shape: AmountRequirementName, required: true, location_name: "amountRequirementName"))
+    CreateLimitRequest.add_member(:max_count, Shapes::ShapeRef.new(shape: MaxCount, required: true, location_name: "maxCount"))
+    CreateLimitRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
+    CreateLimitRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CreateLimitRequest.struct_class = Types::CreateLimitRequest
+
+    CreateLimitResponse.add_member(:limit_id, Shapes::ShapeRef.new(shape: LimitId, required: true, location_name: "limitId"))
+    CreateLimitResponse.struct_class = Types::CreateLimitResponse
 
     CreateMonitorRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
     CreateMonitorRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "displayName"))
@@ -939,6 +990,13 @@ module Aws::Deadline
     CreateQueueFleetAssociationRequest.struct_class = Types::CreateQueueFleetAssociationRequest
 
     CreateQueueFleetAssociationResponse.struct_class = Types::CreateQueueFleetAssociationResponse
+
+    CreateQueueLimitAssociationRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
+    CreateQueueLimitAssociationRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location_name: "queueId"))
+    CreateQueueLimitAssociationRequest.add_member(:limit_id, Shapes::ShapeRef.new(shape: LimitId, required: true, location_name: "limitId"))
+    CreateQueueLimitAssociationRequest.struct_class = Types::CreateQueueLimitAssociationRequest
+
+    CreateQueueLimitAssociationResponse.struct_class = Types::CreateQueueLimitAssociationResponse
 
     CreateQueueRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
     CreateQueueRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
@@ -1023,6 +1081,12 @@ module Aws::Deadline
 
     DeleteLicenseEndpointResponse.struct_class = Types::DeleteLicenseEndpointResponse
 
+    DeleteLimitRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
+    DeleteLimitRequest.add_member(:limit_id, Shapes::ShapeRef.new(shape: LimitId, required: true, location: "uri", location_name: "limitId"))
+    DeleteLimitRequest.struct_class = Types::DeleteLimitRequest
+
+    DeleteLimitResponse.struct_class = Types::DeleteLimitResponse
+
     DeleteMeteredProductRequest.add_member(:license_endpoint_id, Shapes::ShapeRef.new(shape: LicenseEndpointId, required: true, location: "uri", location_name: "licenseEndpointId"))
     DeleteMeteredProductRequest.add_member(:product_id, Shapes::ShapeRef.new(shape: MeteredProductId, required: true, location: "uri", location_name: "productId"))
     DeleteMeteredProductRequest.struct_class = Types::DeleteMeteredProductRequest
@@ -1047,6 +1111,13 @@ module Aws::Deadline
     DeleteQueueFleetAssociationRequest.struct_class = Types::DeleteQueueFleetAssociationRequest
 
     DeleteQueueFleetAssociationResponse.struct_class = Types::DeleteQueueFleetAssociationResponse
+
+    DeleteQueueLimitAssociationRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
+    DeleteQueueLimitAssociationRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "queueId"))
+    DeleteQueueLimitAssociationRequest.add_member(:limit_id, Shapes::ShapeRef.new(shape: LimitId, required: true, location: "uri", location_name: "limitId"))
+    DeleteQueueLimitAssociationRequest.struct_class = Types::DeleteQueueLimitAssociationRequest
+
+    DeleteQueueLimitAssociationResponse.struct_class = Types::DeleteQueueLimitAssociationResponse
 
     DeleteQueueRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     DeleteQueueRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "queueId"))
@@ -1296,8 +1367,8 @@ module Aws::Deadline
     GetJobEntityError.struct_class = Types::GetJobEntityError
 
     GetJobRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
-    GetJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
     GetJobRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "queueId"))
+    GetJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
     GetJobRequest.struct_class = Types::GetJobRequest
 
     GetJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "jobId"))
@@ -1320,6 +1391,7 @@ module Aws::Deadline
     GetJobResponse.add_member(:parameters, Shapes::ShapeRef.new(shape: JobParameters, location_name: "parameters"))
     GetJobResponse.add_member(:attachments, Shapes::ShapeRef.new(shape: Attachments, location_name: "attachments"))
     GetJobResponse.add_member(:description, Shapes::ShapeRef.new(shape: JobDescription, location_name: "description"))
+    GetJobResponse.add_member(:max_worker_count, Shapes::ShapeRef.new(shape: MaxWorkerCount, location_name: "maxWorkerCount"))
     GetJobResponse.add_member(:source_job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "sourceJobId"))
     GetJobResponse.struct_class = Types::GetJobResponse
 
@@ -1338,6 +1410,23 @@ module Aws::Deadline
     GetLicenseEndpointResponseSecurityGroupIdsList.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 
     GetLicenseEndpointResponseSubnetIdsList.member = Shapes::ShapeRef.new(shape: SubnetId)
+
+    GetLimitRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
+    GetLimitRequest.add_member(:limit_id, Shapes::ShapeRef.new(shape: LimitId, required: true, location: "uri", location_name: "limitId"))
+    GetLimitRequest.struct_class = Types::GetLimitRequest
+
+    GetLimitResponse.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "displayName"))
+    GetLimitResponse.add_member(:amount_requirement_name, Shapes::ShapeRef.new(shape: AmountRequirementName, required: true, location_name: "amountRequirementName"))
+    GetLimitResponse.add_member(:max_count, Shapes::ShapeRef.new(shape: MaxCount, required: true, location_name: "maxCount"))
+    GetLimitResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, required: true, location_name: "createdAt"))
+    GetLimitResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, required: true, location_name: "createdBy"))
+    GetLimitResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, location_name: "updatedAt"))
+    GetLimitResponse.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
+    GetLimitResponse.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location_name: "farmId"))
+    GetLimitResponse.add_member(:limit_id, Shapes::ShapeRef.new(shape: LimitId, required: true, location_name: "limitId"))
+    GetLimitResponse.add_member(:current_count, Shapes::ShapeRef.new(shape: MinZeroMaxInteger, required: true, location_name: "currentCount"))
+    GetLimitResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    GetLimitResponse.struct_class = Types::GetLimitResponse
 
     GetMonitorRequest.add_member(:monitor_id, Shapes::ShapeRef.new(shape: MonitorId, required: true, location: "uri", location_name: "monitorId"))
     GetMonitorRequest.struct_class = Types::GetMonitorRequest
@@ -1385,6 +1474,20 @@ module Aws::Deadline
     GetQueueFleetAssociationResponse.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
     GetQueueFleetAssociationResponse.struct_class = Types::GetQueueFleetAssociationResponse
 
+    GetQueueLimitAssociationRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
+    GetQueueLimitAssociationRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "queueId"))
+    GetQueueLimitAssociationRequest.add_member(:limit_id, Shapes::ShapeRef.new(shape: LimitId, required: true, location: "uri", location_name: "limitId"))
+    GetQueueLimitAssociationRequest.struct_class = Types::GetQueueLimitAssociationRequest
+
+    GetQueueLimitAssociationResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, required: true, location_name: "createdAt"))
+    GetQueueLimitAssociationResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, required: true, location_name: "createdBy"))
+    GetQueueLimitAssociationResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, location_name: "updatedAt"))
+    GetQueueLimitAssociationResponse.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
+    GetQueueLimitAssociationResponse.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location_name: "queueId"))
+    GetQueueLimitAssociationResponse.add_member(:limit_id, Shapes::ShapeRef.new(shape: LimitId, required: true, location_name: "limitId"))
+    GetQueueLimitAssociationResponse.add_member(:status, Shapes::ShapeRef.new(shape: QueueLimitAssociationStatus, required: true, location_name: "status"))
+    GetQueueLimitAssociationResponse.struct_class = Types::GetQueueLimitAssociationResponse
+
     GetQueueRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     GetQueueRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "queueId"))
     GetQueueRequest.struct_class = Types::GetQueueRequest
@@ -1423,6 +1526,7 @@ module Aws::Deadline
     GetSessionActionResponse.add_member(:process_exit_code, Shapes::ShapeRef.new(shape: ProcessExitCode, location_name: "processExitCode"))
     GetSessionActionResponse.add_member(:progress_message, Shapes::ShapeRef.new(shape: SessionActionProgressMessage, location_name: "progressMessage"))
     GetSessionActionResponse.add_member(:definition, Shapes::ShapeRef.new(shape: SessionActionDefinition, required: true, location_name: "definition"))
+    GetSessionActionResponse.add_member(:acquired_limits, Shapes::ShapeRef.new(shape: AcquiredLimits, location_name: "acquiredLimits"))
     GetSessionActionResponse.struct_class = Types::GetSessionActionResponse
 
     GetSessionRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
@@ -1533,9 +1637,9 @@ module Aws::Deadline
     GetWorkerRequest.add_member(:worker_id, Shapes::ShapeRef.new(shape: WorkerId, required: true, location: "uri", location_name: "workerId"))
     GetWorkerRequest.struct_class = Types::GetWorkerRequest
 
-    GetWorkerResponse.add_member(:worker_id, Shapes::ShapeRef.new(shape: WorkerId, required: true, location_name: "workerId"))
     GetWorkerResponse.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location_name: "farmId"))
     GetWorkerResponse.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location_name: "fleetId"))
+    GetWorkerResponse.add_member(:worker_id, Shapes::ShapeRef.new(shape: WorkerId, required: true, location_name: "workerId"))
     GetWorkerResponse.add_member(:host_properties, Shapes::ShapeRef.new(shape: HostPropertiesResponse, location_name: "hostProperties"))
     GetWorkerResponse.add_member(:status, Shapes::ShapeRef.new(shape: WorkerStatus, required: true, location_name: "status"))
     GetWorkerResponse.add_member(:log, Shapes::ShapeRef.new(shape: LogConfiguration, location_name: "log"))
@@ -1680,6 +1784,7 @@ module Aws::Deadline
     JobSearchSummary.add_member(:ended_at, Shapes::ShapeRef.new(shape: EndedAt, location_name: "endedAt"))
     JobSearchSummary.add_member(:started_at, Shapes::ShapeRef.new(shape: StartedAt, location_name: "startedAt"))
     JobSearchSummary.add_member(:job_parameters, Shapes::ShapeRef.new(shape: JobParameters, location_name: "jobParameters"))
+    JobSearchSummary.add_member(:max_worker_count, Shapes::ShapeRef.new(shape: MaxWorkerCount, location_name: "maxWorkerCount"))
     JobSearchSummary.add_member(:source_job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "sourceJobId"))
     JobSearchSummary.struct_class = Types::JobSearchSummary
 
@@ -1701,6 +1806,7 @@ module Aws::Deadline
     JobSummary.add_member(:task_run_status_counts, Shapes::ShapeRef.new(shape: TaskRunStatusCounts, location_name: "taskRunStatusCounts"))
     JobSummary.add_member(:max_failed_tasks_count, Shapes::ShapeRef.new(shape: MaxFailedTasksCount, location_name: "maxFailedTasksCount"))
     JobSummary.add_member(:max_retries_per_task, Shapes::ShapeRef.new(shape: MaxRetriesPerTask, location_name: "maxRetriesPerTask"))
+    JobSummary.add_member(:max_worker_count, Shapes::ShapeRef.new(shape: MaxWorkerCount, location_name: "maxWorkerCount"))
     JobSummary.add_member(:source_job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "sourceJobId"))
     JobSummary.struct_class = Types::JobSummary
 
@@ -1711,6 +1817,20 @@ module Aws::Deadline
     LicenseEndpointSummary.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "statusMessage"))
     LicenseEndpointSummary.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "vpcId"))
     LicenseEndpointSummary.struct_class = Types::LicenseEndpointSummary
+
+    LimitSummaries.member = Shapes::ShapeRef.new(shape: LimitSummary)
+
+    LimitSummary.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "displayName"))
+    LimitSummary.add_member(:amount_requirement_name, Shapes::ShapeRef.new(shape: AmountRequirementName, required: true, location_name: "amountRequirementName"))
+    LimitSummary.add_member(:max_count, Shapes::ShapeRef.new(shape: MaxCount, required: true, location_name: "maxCount"))
+    LimitSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, required: true, location_name: "createdAt"))
+    LimitSummary.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, required: true, location_name: "createdBy"))
+    LimitSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, location_name: "updatedAt"))
+    LimitSummary.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
+    LimitSummary.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location_name: "farmId"))
+    LimitSummary.add_member(:limit_id, Shapes::ShapeRef.new(shape: LimitId, required: true, location_name: "limitId"))
+    LimitSummary.add_member(:current_count, Shapes::ShapeRef.new(shape: MinZeroMaxInteger, required: true, location_name: "currentCount"))
+    LimitSummary.struct_class = Types::LimitSummary
 
     ListAttributeCapabilityValue.member = Shapes::ShapeRef.new(shape: AttributeCapabilityValue)
 
@@ -1813,6 +1933,15 @@ module Aws::Deadline
     ListLicenseEndpointsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListLicenseEndpointsResponse.struct_class = Types::ListLicenseEndpointsResponse
 
+    ListLimitsRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
+    ListLimitsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListLimitsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListLimitsRequest.struct_class = Types::ListLimitsRequest
+
+    ListLimitsResponse.add_member(:limits, Shapes::ShapeRef.new(shape: LimitSummaries, required: true, location_name: "limits"))
+    ListLimitsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListLimitsResponse.struct_class = Types::ListLimitsResponse
+
     ListMeteredProductsRequest.add_member(:license_endpoint_id, Shapes::ShapeRef.new(shape: LicenseEndpointId, required: true, location: "uri", location_name: "licenseEndpointId"))
     ListMeteredProductsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
     ListMeteredProductsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -1850,6 +1979,17 @@ module Aws::Deadline
     ListQueueFleetAssociationsResponse.add_member(:queue_fleet_associations, Shapes::ShapeRef.new(shape: QueueFleetAssociationSummaries, required: true, location_name: "queueFleetAssociations"))
     ListQueueFleetAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListQueueFleetAssociationsResponse.struct_class = Types::ListQueueFleetAssociationsResponse
+
+    ListQueueLimitAssociationsRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
+    ListQueueLimitAssociationsRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, location: "querystring", location_name: "queueId"))
+    ListQueueLimitAssociationsRequest.add_member(:limit_id, Shapes::ShapeRef.new(shape: LimitId, location: "querystring", location_name: "limitId"))
+    ListQueueLimitAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListQueueLimitAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListQueueLimitAssociationsRequest.struct_class = Types::ListQueueLimitAssociationsRequest
+
+    ListQueueLimitAssociationsResponse.add_member(:queue_limit_associations, Shapes::ShapeRef.new(shape: QueueLimitAssociationSummaries, required: true, location_name: "queueLimitAssociations"))
+    ListQueueLimitAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListQueueLimitAssociationsResponse.struct_class = Types::ListQueueLimitAssociationsResponse
 
     ListQueueMembersRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     ListQueueMembersRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "queueId"))
@@ -2089,6 +2229,17 @@ module Aws::Deadline
     QueueFleetAssociationSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, location_name: "updatedAt"))
     QueueFleetAssociationSummary.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
     QueueFleetAssociationSummary.struct_class = Types::QueueFleetAssociationSummary
+
+    QueueLimitAssociationSummaries.member = Shapes::ShapeRef.new(shape: QueueLimitAssociationSummary)
+
+    QueueLimitAssociationSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, required: true, location_name: "createdAt"))
+    QueueLimitAssociationSummary.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, required: true, location_name: "createdBy"))
+    QueueLimitAssociationSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, location_name: "updatedAt"))
+    QueueLimitAssociationSummary.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
+    QueueLimitAssociationSummary.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location_name: "queueId"))
+    QueueLimitAssociationSummary.add_member(:limit_id, Shapes::ShapeRef.new(shape: LimitId, required: true, location_name: "limitId"))
+    QueueLimitAssociationSummary.add_member(:status, Shapes::ShapeRef.new(shape: QueueLimitAssociationStatus, required: true, location_name: "status"))
+    QueueLimitAssociationSummary.struct_class = Types::QueueLimitAssociationSummary
 
     QueueMember.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location_name: "farmId"))
     QueueMember.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location_name: "queueId"))
@@ -2579,17 +2730,27 @@ module Aws::Deadline
     UpdateFleetResponse.struct_class = Types::UpdateFleetResponse
 
     UpdateJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
-    UpdateJobRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
-    UpdateJobRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "queueId"))
-    UpdateJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
     UpdateJobRequest.add_member(:target_task_run_status, Shapes::ShapeRef.new(shape: JobTargetTaskRunStatus, location_name: "targetTaskRunStatus"))
     UpdateJobRequest.add_member(:priority, Shapes::ShapeRef.new(shape: JobPriority, location_name: "priority"))
     UpdateJobRequest.add_member(:max_failed_tasks_count, Shapes::ShapeRef.new(shape: MaxFailedTasksCount, location_name: "maxFailedTasksCount"))
     UpdateJobRequest.add_member(:max_retries_per_task, Shapes::ShapeRef.new(shape: MaxRetriesPerTask, location_name: "maxRetriesPerTask"))
     UpdateJobRequest.add_member(:lifecycle_status, Shapes::ShapeRef.new(shape: UpdateJobLifecycleStatus, location_name: "lifecycleStatus"))
+    UpdateJobRequest.add_member(:max_worker_count, Shapes::ShapeRef.new(shape: MaxWorkerCount, location_name: "maxWorkerCount"))
+    UpdateJobRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
+    UpdateJobRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "queueId"))
+    UpdateJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
     UpdateJobRequest.struct_class = Types::UpdateJobRequest
 
     UpdateJobResponse.struct_class = Types::UpdateJobResponse
+
+    UpdateLimitRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
+    UpdateLimitRequest.add_member(:limit_id, Shapes::ShapeRef.new(shape: LimitId, required: true, location: "uri", location_name: "limitId"))
+    UpdateLimitRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "displayName"))
+    UpdateLimitRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateLimitRequest.add_member(:max_count, Shapes::ShapeRef.new(shape: MaxCount, location_name: "maxCount"))
+    UpdateLimitRequest.struct_class = Types::UpdateLimitRequest
+
+    UpdateLimitResponse.struct_class = Types::UpdateLimitResponse
 
     UpdateMonitorRequest.add_member(:monitor_id, Shapes::ShapeRef.new(shape: MonitorId, required: true, location: "uri", location_name: "monitorId"))
     UpdateMonitorRequest.add_member(:subdomain, Shapes::ShapeRef.new(shape: Subdomain, location_name: "subdomain"))
@@ -2618,6 +2779,14 @@ module Aws::Deadline
 
     UpdateQueueFleetAssociationResponse.struct_class = Types::UpdateQueueFleetAssociationResponse
 
+    UpdateQueueLimitAssociationRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
+    UpdateQueueLimitAssociationRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "queueId"))
+    UpdateQueueLimitAssociationRequest.add_member(:limit_id, Shapes::ShapeRef.new(shape: LimitId, required: true, location: "uri", location_name: "limitId"))
+    UpdateQueueLimitAssociationRequest.add_member(:status, Shapes::ShapeRef.new(shape: UpdateQueueLimitAssociationStatus, required: true, location_name: "status"))
+    UpdateQueueLimitAssociationRequest.struct_class = Types::UpdateQueueLimitAssociationRequest
+
+    UpdateQueueLimitAssociationResponse.struct_class = Types::UpdateQueueLimitAssociationResponse
+
     UpdateQueueRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
     UpdateQueueRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     UpdateQueueRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "queueId"))
@@ -2636,21 +2805,21 @@ module Aws::Deadline
     UpdateQueueResponse.struct_class = Types::UpdateQueueResponse
 
     UpdateSessionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
+    UpdateSessionRequest.add_member(:target_lifecycle_status, Shapes::ShapeRef.new(shape: SessionLifecycleTargetStatus, required: true, location_name: "targetLifecycleStatus"))
     UpdateSessionRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     UpdateSessionRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "queueId"))
     UpdateSessionRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
     UpdateSessionRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, required: true, location: "uri", location_name: "sessionId"))
-    UpdateSessionRequest.add_member(:target_lifecycle_status, Shapes::ShapeRef.new(shape: SessionLifecycleTargetStatus, required: true, location_name: "targetLifecycleStatus"))
     UpdateSessionRequest.struct_class = Types::UpdateSessionRequest
 
     UpdateSessionResponse.struct_class = Types::UpdateSessionResponse
 
+    UpdateStepRequest.add_member(:target_task_run_status, Shapes::ShapeRef.new(shape: StepTargetTaskRunStatus, required: true, location_name: "targetTaskRunStatus"))
     UpdateStepRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
     UpdateStepRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     UpdateStepRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "queueId"))
     UpdateStepRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
     UpdateStepRequest.add_member(:step_id, Shapes::ShapeRef.new(shape: StepId, required: true, location: "uri", location_name: "stepId"))
-    UpdateStepRequest.add_member(:target_task_run_status, Shapes::ShapeRef.new(shape: StepTargetTaskRunStatus, required: true, location_name: "targetTaskRunStatus"))
     UpdateStepRequest.struct_class = Types::UpdateStepRequest
 
     UpdateStepResponse.struct_class = Types::UpdateStepResponse
@@ -2667,12 +2836,12 @@ module Aws::Deadline
     UpdateStorageProfileResponse.struct_class = Types::UpdateStorageProfileResponse
 
     UpdateTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
+    UpdateTaskRequest.add_member(:target_run_status, Shapes::ShapeRef.new(shape: TaskTargetRunStatus, required: true, location_name: "targetRunStatus"))
     UpdateTaskRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     UpdateTaskRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "queueId"))
     UpdateTaskRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
     UpdateTaskRequest.add_member(:step_id, Shapes::ShapeRef.new(shape: StepId, required: true, location: "uri", location_name: "stepId"))
     UpdateTaskRequest.add_member(:task_id, Shapes::ShapeRef.new(shape: TaskId, required: true, location: "uri", location_name: "taskId"))
-    UpdateTaskRequest.add_member(:target_run_status, Shapes::ShapeRef.new(shape: TaskTargetRunStatus, required: true, location_name: "targetRunStatus"))
     UpdateTaskRequest.struct_class = Types::UpdateTaskRequest
 
     UpdateTaskResponse.struct_class = Types::UpdateTaskResponse
@@ -3082,6 +3251,23 @@ module Aws::Deadline
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
+      api.add_operation(:create_limit, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateLimit"
+        o.http_method = "POST"
+        o.http_request_uri = "/2023-10-12/farms/{farmId}/limits"
+        o.endpoint_pattern = {
+          "hostPrefix" => "management.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: CreateLimitRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateLimitResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
       api.add_operation(:create_monitor, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateMonitor"
         o.http_method = "POST"
@@ -3141,6 +3327,22 @@ module Aws::Deadline
         }
         o.input = Shapes::ShapeRef.new(shape: CreateQueueFleetAssociationRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateQueueFleetAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:create_queue_limit_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateQueueLimitAssociation"
+        o.http_method = "PUT"
+        o.http_request_uri = "/2023-10-12/farms/{farmId}/queue-limit-associations"
+        o.endpoint_pattern = {
+          "hostPrefix" => "management.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: CreateQueueLimitAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateQueueLimitAssociationResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -3248,6 +3450,21 @@ module Aws::Deadline
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:delete_limit, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteLimit"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2023-10-12/farms/{farmId}/limits/{limitId}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "management.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DeleteLimitRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteLimitResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:delete_metered_product, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteMeteredProduct"
         o.http_method = "DELETE"
@@ -3321,6 +3538,23 @@ module Aws::Deadline
         }
         o.input = Shapes::ShapeRef.new(shape: DeleteQueueFleetAssociationRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteQueueFleetAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:delete_queue_limit_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteQueueLimitAssociation"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2023-10-12/farms/{farmId}/queue-limit-associations/{queueId}/{limitId}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "management.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DeleteQueueLimitAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteQueueLimitAssociationResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -3507,6 +3741,22 @@ module Aws::Deadline
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:get_limit, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetLimit"
+        o.http_method = "GET"
+        o.http_request_uri = "/2023-10-12/farms/{farmId}/limits/{limitId}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "management.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: GetLimitRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetLimitResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:get_monitor, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetMonitor"
         o.http_method = "GET"
@@ -3564,6 +3814,22 @@ module Aws::Deadline
         }
         o.input = Shapes::ShapeRef.new(shape: GetQueueFleetAssociationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetQueueFleetAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:get_queue_limit_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetQueueLimitAssociation"
+        o.http_method = "GET"
+        o.http_request_uri = "/2023-10-12/farms/{farmId}/queue-limit-associations/{queueId}/{limitId}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "management.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: GetQueueLimitAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetQueueLimitAssociationResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -3921,6 +4187,28 @@ module Aws::Deadline
         )
       end)
 
+      api.add_operation(:list_limits, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListLimits"
+        o.http_method = "GET"
+        o.http_request_uri = "/2023-10-12/farms/{farmId}/limits"
+        o.endpoint_pattern = {
+          "hostPrefix" => "management.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListLimitsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListLimitsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_metered_products, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListMeteredProducts"
         o.http_method = "GET"
@@ -3995,6 +4283,27 @@ module Aws::Deadline
         }
         o.input = Shapes::ShapeRef.new(shape: ListQueueFleetAssociationsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListQueueFleetAssociationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_queue_limit_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListQueueLimitAssociations"
+        o.http_method = "GET"
+        o.http_request_uri = "/2023-10-12/farms/{farmId}/queue-limit-associations"
+        o.endpoint_pattern = {
+          "hostPrefix" => "management.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListQueueLimitAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListQueueLimitAssociationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -4483,6 +4792,22 @@ module Aws::Deadline
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:update_limit, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateLimit"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/2023-10-12/farms/{farmId}/limits/{limitId}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "management.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: UpdateLimitRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateLimitResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:update_monitor, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateMonitor"
         o.http_method = "PATCH"
@@ -4540,6 +4865,22 @@ module Aws::Deadline
         }
         o.input = Shapes::ShapeRef.new(shape: UpdateQueueFleetAssociationRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateQueueFleetAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:update_queue_limit_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateQueueLimitAssociation"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/2023-10-12/farms/{farmId}/queue-limit-associations/{queueId}/{limitId}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "management.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: UpdateQueueLimitAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateQueueLimitAssociationResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

@@ -577,6 +577,10 @@ module Aws::Firehose
     #   * `KinesisStreamAsSource`: The Firehose stream uses a Kinesis data
     #     stream as a source.
     #
+    # @option params [Types::DirectPutSourceConfiguration] :direct_put_source_configuration
+    #   The structure that configures parameters such as `ThroughputHintInMBs`
+    #   for a stream configured with Direct PUT as a source.
+    #
     # @option params [Types::KinesisStreamSourceConfiguration] :kinesis_stream_source_configuration
     #   When a Kinesis data stream is used as the source for the Firehose
     #   stream, a KinesisStreamSourceConfiguration containing the Kinesis data
@@ -599,7 +603,8 @@ module Aws::Firehose
     #   destination.
     #
     # @option params [Types::ElasticsearchDestinationConfiguration] :elasticsearch_destination_configuration
-    #   The destination in Amazon ES. You can specify only one destination.
+    #   The destination in Amazon OpenSearch Service. You can specify only one
+    #   destination.
     #
     # @option params [Types::AmazonopensearchserviceDestinationConfiguration] :amazonopensearchservice_destination_configuration
     #   The destination in Amazon OpenSearch Service. You can specify only one
@@ -627,8 +632,8 @@ module Aws::Firehose
     #   Firehose performs an additional authorization on the
     #   `firehose:TagDeliveryStream` action to verify if users have
     #   permissions to create tags. If you do not provide this permission,
-    #   requests to create new Firehose Firehose streams with IAM resource
-    #   tags will fail with an `AccessDeniedException` such as following.
+    #   requests to create new Firehose streams with IAM resource tags will
+    #   fail with an `AccessDeniedException` such as following.
     #
     #   **AccessDeniedException**
     #
@@ -659,6 +664,9 @@ module Aws::Firehose
     #   Configure Apache Iceberg Tables destination.
     #
     # @option params [Types::DatabaseSourceConfiguration] :database_source_configuration
+    #   The top level object for configuring streams with database as a
+    #   source.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #
     # @return [Types::CreateDeliveryStreamOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -670,6 +678,9 @@ module Aws::Firehose
     #   resp = client.create_delivery_stream({
     #     delivery_stream_name: "DeliveryStreamName", # required
     #     delivery_stream_type: "DirectPut", # accepts DirectPut, KinesisStreamAsSource, MSKAsSource, DatabaseAsSource
+    #     direct_put_source_configuration: {
+    #       throughput_hint_in_m_bs: 1, # required
+    #     },
     #     kinesis_stream_source_configuration: {
     #       kinesis_stream_arn: "KinesisStreamARN", # required
     #       role_arn: "RoleARN", # required
@@ -1358,6 +1369,7 @@ module Aws::Firehose
     #         duration_in_seconds: 1,
     #       },
     #       role_arn: "RoleARN", # required
+    #       append_only: false,
     #       catalog_configuration: { # required
     #         catalog_arn: "GlueDataCatalogARN",
     #         warehouse_location: "WarehouseLocation",
@@ -1540,6 +1552,7 @@ module Aws::Firehose
     #   resp.delivery_stream_description.version_id #=> String
     #   resp.delivery_stream_description.create_timestamp #=> Time
     #   resp.delivery_stream_description.last_update_timestamp #=> Time
+    #   resp.delivery_stream_description.source.direct_put_source_description.throughput_hint_in_m_bs #=> Integer
     #   resp.delivery_stream_description.source.kinesis_stream_source_description.kinesis_stream_arn #=> String
     #   resp.delivery_stream_description.source.kinesis_stream_source_description.role_arn #=> String
     #   resp.delivery_stream_description.source.kinesis_stream_source_description.delivery_start_timestamp #=> Time
@@ -1944,6 +1957,7 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.s3_backup_mode #=> String, one of "FailedDataOnly", "AllData"
     #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.retry_options.duration_in_seconds #=> Integer
     #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.role_arn #=> String
+    #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.append_only #=> Boolean
     #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.catalog_configuration.catalog_arn #=> String
     #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.catalog_configuration.warehouse_location #=> String
     #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.s3_destination_description.role_arn #=> String
@@ -2576,7 +2590,7 @@ module Aws::Firehose
     #   Describes an update for a destination in Amazon Redshift.
     #
     # @option params [Types::ElasticsearchDestinationUpdate] :elasticsearch_destination_update
-    #   Describes an update for a destination in Amazon ES.
+    #   Describes an update for a destination in Amazon OpenSearch Service.
     #
     # @option params [Types::AmazonopensearchserviceDestinationUpdate] :amazonopensearchservice_destination_update
     #   Describes an update for a destination in Amazon OpenSearch Service.
@@ -3249,6 +3263,7 @@ module Aws::Firehose
     #         duration_in_seconds: 1,
     #       },
     #       role_arn: "RoleARN",
+    #       append_only: false,
     #       catalog_configuration: {
     #         catalog_arn: "GlueDataCatalogARN",
     #         warehouse_location: "WarehouseLocation",
@@ -3305,7 +3320,7 @@ module Aws::Firehose
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-firehose'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

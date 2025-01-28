@@ -2550,12 +2550,27 @@ module Aws::AppSync
     #   `util.log.error` in the evaluated code.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] stash
+    #   An object available inside each resolver and function handler. A
+    #   single `stash` object lives through a single resolver run.
+    #   Therefore, you can use the stash to pass arbitrary data across
+    #   request and response handlers and across functions in a pipeline
+    #   resolver.
+    #   @return [String]
+    #
+    # @!attribute [rw] out_errors
+    #   The list of runtime errors that are added to the GraphQL operation
+    #   response.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/EvaluateCodeResponse AWS API Documentation
     #
     class EvaluateCodeResponse < Struct.new(
       :evaluation_result,
       :error,
-      :logs)
+      :logs,
+      :stash,
+      :out_errors)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2592,12 +2607,27 @@ module Aws::AppSync
     #   `util.log.error` in the evaluated code.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] stash
+    #   An object available inside each resolver and function handler. A
+    #   single `stash` object lives through a single resolver run.
+    #   Therefore, you can use the stash to pass arbitrary data across
+    #   request and response handlers and across functions in a pipeline
+    #   resolver.
+    #   @return [String]
+    #
+    # @!attribute [rw] out_errors
+    #   The list of runtime errors that are added to the GraphQL operation
+    #   response.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/EvaluateMappingTemplateResponse AWS API Documentation
     #
     class EvaluateMappingTemplateResponse < Struct.new(
       :evaluation_result,
       :error,
-      :logs)
+      :logs,
+      :stash,
+      :out_errors)
       SENSITIVE = []
       include Aws::Structure
     end

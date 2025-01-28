@@ -1400,6 +1400,16 @@ module Aws::TimestreamInfluxDB
     #   instance or with a Multi-AZ standby for high availability.
     #   @return [String]
     #
+    # @!attribute [rw] db_storage_type
+    #   The Timestream for InfluxDB DB storage type that InfluxDB stores
+    #   data on.
+    #   @return [String]
+    #
+    # @!attribute [rw] allocated_storage
+    #   The amount of storage to allocate for your DB storage type (in
+    #   gibibytes).
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/UpdateDbInstanceInput AWS API Documentation
     #
     class UpdateDbInstanceInput < Struct.new(
@@ -1408,7 +1418,9 @@ module Aws::TimestreamInfluxDB
       :db_parameter_group_identifier,
       :port,
       :db_instance_type,
-      :deployment_type)
+      :deployment_type,
+      :db_storage_type,
+      :allocated_storage)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -10,23 +10,20 @@
 module Aws::Deadline
   module Types
 
-    # Provides information about the GPU accelerators and drivers for the
-    # instance types in a fleet. If you include the
-    # `acceleratorCapabilities` property in the
-    # [ServiceManagedEc2InstanceCapabilities][1] object, all of the Amazon
-    # EC2 instances will have at least one accelerator.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/deadline-cloud/latest/APIReference/API_ServiceManagedEc2InstanceCapabilities
+    # Provides information about the GPU accelerators used for jobs
+    # processed by a fleet.
     #
     # @!attribute [rw] selections
-    #   A list of objects that contain the GPU name of the accelerator and
-    #   driver for the instance types that support the accelerator.
+    #   A list of accelerator capabilities requested for this fleet. Only
+    #   Amazon Elastic Compute Cloud instances that provide these
+    #   capabilities will be used. For example, if you specify both L4 and
+    #   T4 chips, Deadline Cloud will use Amazon EC2 instances that have
+    #   either the L4 or the T4 chip installed.
     #   @return [Array<Types::AcceleratorSelection>]
     #
     # @!attribute [rw] count
-    #   The number of GPUs on each worker. The default is 1.
+    #   The number of GPU accelerators specified for worker hosts in this
+    #   fleet.
     #   @return [Types::AcceleratorCountRange]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/AcceleratorCapabilities AWS API Documentation
@@ -38,15 +35,15 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # The range for the GPU fleet acceleration.
+    # Defines the maximum and minimum number of GPU accelerators required
+    # for a worker instance..
     #
     # @!attribute [rw] min
-    #   The minimum number of GPUs for the accelerator. If you set the value
-    #   to 0, a worker will still have 1 GPU.
+    #   The minimum number of GPU accelerators in the worker host.
     #   @return [Integer]
     #
     # @!attribute [rw] max
-    #   The maximum number of GPUs for the accelerator.
+    #   The maximum number of GPU accelerators in the worker host.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/AcceleratorCountRange AWS API Documentation
@@ -58,15 +55,49 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # Values that you can use to select a particular Amazon EC2 instance
-    # type.
+    # Describes a specific GPU accelerator required for an Amazon Elastic
+    # Compute Cloud worker host.
     #
     # @!attribute [rw] name
-    #   The name of the GPU accelerator.
+    #   The name of the chip used by the GPU accelerator.
+    #
+    #   If you specify `l4` as the name of the accelerator, you must specify
+    #   `latest` or `grid:r550` as the runtime.
+    #
+    #   The available GPU accelerators are:
+    #
+    #   * `t4` - NVIDIA T4 Tensor Core GPU
+    #
+    #   * `a10g` - NVIDIA A10G Tensor Core GPU
+    #
+    #   * `l4` - NVIDIA L4 Tensor Core GPU
+    #
+    #   * `l40s` - NVIDIA L40S Tensor Core GPU
     #   @return [String]
     #
     # @!attribute [rw] runtime
-    #   The driver version that the GPU accelerator uses.
+    #   Specifies the runtime driver to use for the GPU accelerator. You
+    #   must use the same runtime for all GPUs.
+    #
+    #   You can choose from the following runtimes:
+    #
+    #   * `latest` - Use the latest runtime available for the chip. If you
+    #     specify `latest` and a new version of the runtime is released, the
+    #     new version of the runtime is used.
+    #
+    #   * `grid:r550` - [NVIDIA vGPU software 17][1]
+    #
+    #   * `grid:r535` - [NVIDIA vGPU software 16][2]
+    #
+    #   If you don't specify a runtime, Deadline Cloud uses `latest` as the
+    #   default. However, if you have multiple accelerators and specify
+    #   `latest` for some and leave others blank, Deadline Cloud raises an
+    #   exception.
+    #
+    #
+    #
+    #   [1]: https://docs.nvidia.com/vgpu/17.0/index.html
+    #   [2]: https://docs.nvidia.com/vgpu/16.0/index.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/AcceleratorSelection AWS API Documentation
@@ -78,7 +109,8 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # The range for memory, in MiB, to use for the accelerator.
+    # Defines the maximum and minimum amount of memory, in MiB, to use for
+    # the accelerator.
     #
     # @!attribute [rw] min
     #   The minimum amount of memory to use for the accelerator, measured in
@@ -114,6 +146,25 @@ module Aws::Deadline
     class AccessDeniedException < Struct.new(
       :message,
       :context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the number of resources used.
+    #
+    # @!attribute [rw] limit_id
+    #   The unique identifier of the limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   The number of limit resources used.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/AcquiredLimit AWS API Documentation
+    #
+    class AcquiredLimit < Struct.new(
+      :limit_id,
+      :count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1196,6 +1247,19 @@ module Aws::Deadline
     #   The maximum number of retries for each task.
     #   @return [Integer]
     #
+    # @!attribute [rw] max_worker_count
+    #   The maximum number of worker hosts that can concurrently process a
+    #   job. When the `maxWorkerCount` is reached, no more workers will be
+    #   assigned to process the job, even if the fleets assigned to the
+    #   job's queue has available workers.
+    #
+    #   You can't set the `maxWorkerCount` to 0. If you set it to -1, there
+    #   is no maximum number of workers.
+    #
+    #   If you don't specify the `maxWorkerCount`, Deadline Cloud won't
+    #   throttle the number of workers used to process the job.
+    #   @return [Integer]
+    #
     # @!attribute [rw] source_job_id
     #   The job ID for the source job.
     #   @return [String]
@@ -1215,6 +1279,7 @@ module Aws::Deadline
       :target_task_run_status,
       :max_failed_tasks_count,
       :max_retries_per_task,
+      :max_worker_count,
       :source_job_id)
       SENSITIVE = [:template, :parameters]
       include Aws::Structure
@@ -1277,6 +1342,77 @@ module Aws::Deadline
     #
     class CreateLicenseEndpointResponse < Struct.new(
       :license_endpoint_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   The unique token which the server uses to recognize retries of the
+    #   same request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the limit.
+    #
+    #   This field can store any content. Escape or encode this content
+    #   before displaying it on a webpage or any other system that might
+    #   interpret the content of this field.
+    #   @return [String]
+    #
+    # @!attribute [rw] amount_requirement_name
+    #   The value that you specify as the `name` in the `amounts` field of
+    #   the `hostRequirements` in a step of a job template to declare the
+    #   limit requirement.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_count
+    #   The maximum number of resources constrained by this limit. When all
+    #   of the resources are in use, steps that require the limit won't be
+    #   scheduled until the resource is available.
+    #
+    #   The `maxCount` must not be 0. If the value is -1, there is no
+    #   restriction on the number of resources that can be acquired for this
+    #   limit.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] farm_id
+    #   The farm ID of the farm that contains the limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the limit. A description helps you identify the
+    #   purpose of the limit.
+    #
+    #   This field can store any content. Escape or encode this content
+    #   before displaying it on a webpage or any other system that might
+    #   interpret the content of this field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/CreateLimitRequest AWS API Documentation
+    #
+    class CreateLimitRequest < Struct.new(
+      :client_token,
+      :display_name,
+      :amount_requirement_name,
+      :max_count,
+      :farm_id,
+      :description)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] limit_id
+    #   A unique identifier for the limit. Use this identifier in other
+    #   operations, such as `CreateQueueLimitAssociation` and `DeleteLimit`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/CreateLimitResponse AWS API Documentation
+    #
+    class CreateLimitResponse < Struct.new(
+      :limit_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1425,6 +1561,33 @@ module Aws::Deadline
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/CreateQueueFleetAssociationResponse AWS API Documentation
     #
     class CreateQueueFleetAssociationResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] farm_id
+    #   The unique identifier of the farm that contains the queue and limit
+    #   to associate.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_id
+    #   The unique identifier of the queue to associate with the limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit_id
+    #   The unique identifier of the limit to associate with the queue.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/CreateQueueLimitAssociationRequest AWS API Documentation
+    #
+    class CreateQueueLimitAssociationRequest < Struct.new(
+      :farm_id,
+      :queue_id,
+      :limit_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/CreateQueueLimitAssociationResponse AWS API Documentation
+    #
+    class CreateQueueLimitAssociationResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] client_token
     #   The unique token which the server uses to recognize retries of the
@@ -1796,6 +1959,27 @@ module Aws::Deadline
     #
     class DeleteLicenseEndpointResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] farm_id
+    #   The unique identifier of the farm that contains the limit to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit_id
+    #   The unique identifier of the limit to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/DeleteLimitRequest AWS API Documentation
+    #
+    class DeleteLimitRequest < Struct.new(
+      :farm_id,
+      :limit_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/DeleteLimitResponse AWS API Documentation
+    #
+    class DeleteLimitResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] license_endpoint_id
     #   The ID of the license endpoint from which to remove the metered
     #   product.
@@ -1887,6 +2071,33 @@ module Aws::Deadline
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/DeleteQueueFleetAssociationResponse AWS API Documentation
     #
     class DeleteQueueFleetAssociationResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] farm_id
+    #   The unique identifier of the farm that contains the queue and limit
+    #   to disassociate.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_id
+    #   The unique identifier of the queue to disassociate.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit_id
+    #   The unique identifier of the limit to disassociate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/DeleteQueueLimitAssociationRequest AWS API Documentation
+    #
+    class DeleteQueueLimitAssociationRequest < Struct.new(
+      :farm_id,
+      :queue_id,
+      :limit_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/DeleteQueueLimitAssociationResponse AWS API Documentation
+    #
+    class DeleteQueueLimitAssociationResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] farm_id
     #   The ID of the farm from which to remove the queue.
@@ -2942,20 +3153,20 @@ module Aws::Deadline
     #   The farm ID of the farm in the job.
     #   @return [String]
     #
-    # @!attribute [rw] job_id
-    #   The job ID.
-    #   @return [String]
-    #
     # @!attribute [rw] queue_id
     #   The queue ID associated with the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_id
+    #   The job ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/GetJobRequest AWS API Documentation
     #
     class GetJobRequest < Struct.new(
       :farm_id,
-      :job_id,
-      :queue_id)
+      :queue_id,
+      :job_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3046,6 +3257,16 @@ module Aws::Deadline
     #   interpret the content of this field.
     #   @return [String]
     #
+    # @!attribute [rw] max_worker_count
+    #   The maximum number of worker hosts that can concurrently process a
+    #   job. When the `maxWorkerCount` is reached, no more workers will be
+    #   assigned to process the job, even if the fleets assigned to the
+    #   job's queue has available workers.
+    #
+    #   If you don't set the `maxWorkerCount` when you create a job, this
+    #   value is not returned in the response.
+    #   @return [Integer]
+    #
     # @!attribute [rw] source_job_id
     #   The job ID for the source job.
     #   @return [String]
@@ -3073,6 +3294,7 @@ module Aws::Deadline
       :parameters,
       :attachments,
       :description,
+      :max_worker_count,
       :source_job_id)
       SENSITIVE = [:parameters, :description]
       include Aws::Structure
@@ -3130,6 +3352,105 @@ module Aws::Deadline
       :subnet_ids,
       :security_group_ids)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] farm_id
+    #   The unique identifier of the farm that contains the limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit_id
+    #   The unique identifier of the limit to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/GetLimitRequest AWS API Documentation
+    #
+    class GetLimitRequest < Struct.new(
+      :farm_id,
+      :limit_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] display_name
+    #   The display name of the limit.
+    #
+    #   This field can store any content. Escape or encode this content
+    #   before displaying it on a webpage or any other system that might
+    #   interpret the content of this field.
+    #   @return [String]
+    #
+    # @!attribute [rw] amount_requirement_name
+    #   The value that you specify as the `name` in the `amounts` field of
+    #   the `hostRequirements` in a step of a job template to declare the
+    #   limit requirement.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_count
+    #   The maximum number of resources constrained by this limit. When all
+    #   of the resources are in use, steps that require the limit won't be
+    #   scheduled until the resource is available.
+    #
+    #   The `maxValue` must not be 0. If the value is -1, there is no
+    #   restriction on the number of resources that can be acquired for this
+    #   limit.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] created_at
+    #   The Unix timestamp of the date and time that the limit was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The user identifier of the person that created the limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The Unix timestamp of the date and time that the limit was last
+    #   updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_by
+    #   The user identifier of the person that last updated the limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] farm_id
+    #   The unique identifier of the farm that contains the limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit_id
+    #   The unique identifier of the limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_count
+    #   The number of resources from the limit that are being used by jobs.
+    #   The result is delayed and may not be the count at the time that you
+    #   called the operation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   The description of the limit that helps identify what the limit is
+    #   used for.
+    #
+    #   This field can store any content. Escape or encode this content
+    #   before displaying it on a webpage or any other system that might
+    #   interpret the content of this field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/GetLimitResponse AWS API Documentation
+    #
+    class GetLimitResponse < Struct.new(
+      :display_name,
+      :amount_requirement_name,
+      :max_count,
+      :created_at,
+      :created_by,
+      :updated_at,
+      :updated_by,
+      :farm_id,
+      :limit_id,
+      :current_count,
+      :description)
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 
@@ -3359,6 +3680,73 @@ module Aws::Deadline
     end
 
     # @!attribute [rw] farm_id
+    #   The unique identifier of the farm that contains the associated queue
+    #   and limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_id
+    #   The unique identifier of the queue associated with the limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit_id
+    #   The unique identifier of the limit associated with the queue.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/GetQueueLimitAssociationRequest AWS API Documentation
+    #
+    class GetQueueLimitAssociationRequest < Struct.new(
+      :farm_id,
+      :queue_id,
+      :limit_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] created_at
+    #   The Unix timestamp of the date and time that the association was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The user identifier of the person that created the association.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The Unix timestamp of the date and time that the association was
+    #   last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_by
+    #   The user identifier of the person that last updated the association.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_id
+    #   The unique identifier of the queue associated with the limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit_id
+    #   The unique identifier of the limit associated with the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the limit.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/GetQueueLimitAssociationResponse AWS API Documentation
+    #
+    class GetQueueLimitAssociationResponse < Struct.new(
+      :created_at,
+      :created_by,
+      :updated_at,
+      :updated_by,
+      :queue_id,
+      :limit_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] farm_id
     #   The farm ID of the farm in the queue.
     #   @return [String]
     #
@@ -3545,6 +3933,11 @@ module Aws::Deadline
     #   The session action definition.
     #   @return [Types::SessionActionDefinition]
     #
+    # @!attribute [rw] acquired_limits
+    #   The limits and their amounts acquired during a session action. If no
+    #   limits were acquired during the session, this field isn't returned.
+    #   @return [Array<Types::AcquiredLimit>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/GetSessionActionResponse AWS API Documentation
     #
     class GetSessionActionResponse < Struct.new(
@@ -3557,7 +3950,8 @@ module Aws::Deadline
       :session_id,
       :process_exit_code,
       :progress_message,
-      :definition)
+      :definition,
+      :acquired_limits)
       SENSITIVE = [:progress_message]
       include Aws::Structure
     end
@@ -4095,16 +4489,16 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # @!attribute [rw] worker_id
-    #   The worker ID.
-    #   @return [String]
-    #
     # @!attribute [rw] farm_id
     #   The farm ID.
     #   @return [String]
     #
     # @!attribute [rw] fleet_id
     #   The fleet ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] worker_id
+    #   The worker ID.
     #   @return [String]
     #
     # @!attribute [rw] host_properties
@@ -4138,9 +4532,9 @@ module Aws::Deadline
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/GetWorkerResponse AWS API Documentation
     #
     class GetWorkerResponse < Struct.new(
-      :worker_id,
       :farm_id,
       :fleet_id,
+      :worker_id,
       :host_properties,
       :status,
       :log,
@@ -4678,6 +5072,18 @@ module Aws::Deadline
     #   The job parameters.
     #   @return [Hash<String,Types::JobParameter>]
     #
+    # @!attribute [rw] max_worker_count
+    #   The maximum number of worker hosts that can concurrently process a
+    #   job. When the `maxWorkerCount` is reached, no more workers will be
+    #   assigned to process the job, even if the fleets assigned to the
+    #   job's queue has available workers.
+    #
+    #   You can't set the `maxWorkerCount` to 0. If you set it to -1, there
+    #   is no maximum number of workers.
+    #
+    #   If you don't specify the `maxWorkerCount`, the default is -1.
+    #   @return [Integer]
+    #
     # @!attribute [rw] source_job_id
     #   The job ID for the source job.
     #   @return [String]
@@ -4701,6 +5107,7 @@ module Aws::Deadline
       :ended_at,
       :started_at,
       :job_parameters,
+      :max_worker_count,
       :source_job_id)
       SENSITIVE = [:job_parameters]
       include Aws::Structure
@@ -4793,6 +5200,18 @@ module Aws::Deadline
     #   The maximum number of retries for a job.
     #   @return [Integer]
     #
+    # @!attribute [rw] max_worker_count
+    #   The maximum number of worker hosts that can concurrently process a
+    #   job. When the `maxWorkerCount` is reached, no more workers will be
+    #   assigned to process the job, even if the fleets assigned to the
+    #   job's queue has available workers.
+    #
+    #   You can't set the `maxWorkerCount` to 0. If you set it to -1, there
+    #   is no maximum number of workers.
+    #
+    #   If you don't specify the `maxWorkerCount`, the default is -1.
+    #   @return [Integer]
+    #
     # @!attribute [rw] source_job_id
     #   The job ID for the source job.
     #   @return [String]
@@ -4816,6 +5235,7 @@ module Aws::Deadline
       :task_run_status_counts,
       :max_failed_tasks_count,
       :max_retries_per_task,
+      :max_worker_count,
       :source_job_id)
       SENSITIVE = []
       include Aws::Structure
@@ -4847,6 +5267,80 @@ module Aws::Deadline
       :status,
       :status_message,
       :vpc_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about a specific limit.
+    #
+    # @!attribute [rw] display_name
+    #   The name of the limit used in lists to identify the limit.
+    #
+    #   This field can store any content. Escape or encode this content
+    #   before displaying it on a webpage or any other system that might
+    #   interpret the content of this field.
+    #   @return [String]
+    #
+    # @!attribute [rw] amount_requirement_name
+    #   The value that you specify as the `name` in the `amounts` field of
+    #   the `hostRequirements` in a step of a job template to declare the
+    #   limit requirement.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_count
+    #   The maximum number of resources constrained by this limit. When all
+    #   of the resources are in use, steps that require the limit won't be
+    #   scheduled until the resource is available.
+    #
+    #   The `maxValue` must not be 0. If the value is -1, there is no
+    #   restriction on the number of resources that can be acquired for this
+    #   limit.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] created_at
+    #   The Unix timestamp of the date and time that the limit was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The user identifier of the person that created the limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The Unix timestamp of the date and time that the limit was last
+    #   updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_by
+    #   The user identifier of the person that last updated the limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] farm_id
+    #   The unique identifier of the farm that contains the limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit_id
+    #   The unique identifier of the limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_count
+    #   The number of resources from the limit that are being used by jobs.
+    #   The result is delayed and may not be the count at the time that you
+    #   called the operation.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/LimitSummary AWS API Documentation
+    #
+    class LimitSummary < Struct.new(
+      :display_name,
+      :amount_requirement_name,
+      :max_count,
+      :created_at,
+      :created_by,
+      :updated_at,
+      :updated_by,
+      :farm_id,
+      :limit_id,
+      :current_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5370,6 +5864,52 @@ module Aws::Deadline
       include Aws::Structure
     end
 
+    # @!attribute [rw] farm_id
+    #   The unique identifier of the farm that contains the limits.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or `null` to start from the
+    #   beginning.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of limits to return in each page of results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/ListLimitsRequest AWS API Documentation
+    #
+    class ListLimitsRequest < Struct.new(
+      :farm_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] limits
+    #   A list of limits that the farm contains.
+    #   @return [Array<Types::LimitSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If Deadline Cloud returns `nextToken`, then there are more results
+    #   available. The value of `nextToken` is a unique pagination token for
+    #   each page. To retrieve the next page, call the operation again using
+    #   the returned token. Keep all other arguments unchanged. If no
+    #   results remain, then `nextToken` is set to `null`. Each pagination
+    #   token expires after 24 hours. If you provide a token that isn't
+    #   valid, then you receive an HTTP 400 `ValidationException` error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/ListLimitsResponse AWS API Documentation
+    #
+    class ListLimitsResponse < Struct.new(
+      :limits,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] license_endpoint_id
     #   The license endpoint ID to include on the list of metered products.
     #   @return [String]
@@ -5564,6 +6104,71 @@ module Aws::Deadline
     #
     class ListQueueFleetAssociationsResponse < Struct.new(
       :queue_fleet_associations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] farm_id
+    #   The unique identifier of the farm that contains the limits and
+    #   associations.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_id
+    #   Specifies that the operation should return only the queue limit
+    #   associations for the specified queue. If you specify both the
+    #   `queueId` and the `limitId`, only the specified limit is returned if
+    #   it exists.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit_id
+    #   Specifies that the operation should return only the queue limit
+    #   associations for the specified limit. If you specify both the
+    #   `queueId` and the `limitId`, only the specified limit is returned if
+    #   it exists.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or `null` to start from the
+    #   beginning.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of associations to return in each page of
+    #   results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/ListQueueLimitAssociationsRequest AWS API Documentation
+    #
+    class ListQueueLimitAssociationsRequest < Struct.new(
+      :farm_id,
+      :queue_id,
+      :limit_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] queue_limit_associations
+    #   A list of associations between limits and queues in the farm
+    #   specified in the request.
+    #   @return [Array<Types::QueueLimitAssociationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If Deadline Cloud returns `nextToken`, then there are more results
+    #   available. The value of `nextToken` is a unique pagination token for
+    #   each page. To retrieve the next page, call the operation again using
+    #   the returned token. Keep all other arguments unchanged. If no
+    #   results remain, then `nextToken` is set to `null`. Each pagination
+    #   token expires after 24 hours. If you provide a token that isn't
+    #   valid, then you receive an HTTP 400 `ValidationException` error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/ListQueueLimitAssociationsResponse AWS API Documentation
+    #
+    class ListQueueLimitAssociationsResponse < Struct.new(
+      :queue_limit_associations,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -6332,7 +6937,7 @@ module Aws::Deadline
     #   @return [String]
     #
     # @!attribute [rw] input_manifest_hash
-    #   The has value of the file.
+    #   The hash value of the file.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/ManifestProperties AWS API Documentation
@@ -6672,6 +7277,63 @@ module Aws::Deadline
       :created_by,
       :updated_at,
       :updated_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the association between a queue and a
+    # limit.
+    #
+    # @!attribute [rw] created_at
+    #   The Unix timestamp of the date and time that the association was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The user identifier of the person that created the association.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The Unix timestamp of the date and time that the association was
+    #   last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_by
+    #   The user identifier of the person that updated the association.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_id
+    #   The unique identifier of the queue in the association.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit_id
+    #   The unique identifier of the limit in the association.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of task scheduling in the queue-limit association.
+    #
+    #   * `ACTIVE` - Association is active.
+    #
+    #   * `STOP_LIMIT_USAGE_AND_COMPLETE_TASKS` - Association has stopped
+    #     scheduling new tasks and is completing current tasks.
+    #
+    #   * `STOP_LIMIT_USAGE_AND_CANCEL_TASKS` - Association has stopped
+    #     scheduling new tasks and is canceling current tasks.
+    #
+    #   * `STOPPED` - Association has been stopped.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/QueueLimitAssociationSummary AWS API Documentation
+    #
+    class QueueLimitAssociationSummary < Struct.new(
+      :created_at,
+      :created_by,
+      :updated_at,
+      :updated_by,
+      :queue_id,
+      :limit_id,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7269,14 +7931,8 @@ module Aws::Deadline
     #   @return [Types::Ec2EbsVolume]
     #
     # @!attribute [rw] accelerator_capabilities
-    #   The GPU accelerator capabilities required for the Amazon EC2
-    #   instances. If you include the `acceleratorCapabilities` property in
-    #   the [ServiceManagedEc2InstanceCapabilities][1] object, all of the
-    #   Amazon EC2 instances will have at least one accelerator.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/deadline-cloud/latest/APIReference/API_ServiceManagedEc2InstanceCapabilities
+    #   Describes the GPU accelerator capabilities required for worker host
+    #   instances in this fleet.
     #   @return [Types::AcceleratorCapabilities]
     #
     # @!attribute [rw] allowed_instance_types
@@ -8714,18 +9370,6 @@ module Aws::Deadline
     #   not need to pass this option.
     #   @return [String]
     #
-    # @!attribute [rw] farm_id
-    #   The farm ID of the job to update.
-    #   @return [String]
-    #
-    # @!attribute [rw] queue_id
-    #   The queue ID of the job to update.
-    #   @return [String]
-    #
-    # @!attribute [rw] job_id
-    #   The job ID to update.
-    #   @return [String]
-    #
     # @!attribute [rw] target_task_run_status
     #   The task status to update the job's tasks to.
     #   @return [String]
@@ -8751,18 +9395,45 @@ module Aws::Deadline
     #   The job can't be recovered.
     #   @return [String]
     #
+    # @!attribute [rw] max_worker_count
+    #   The maximum number of worker hosts that can concurrently process a
+    #   job. When the `maxWorkerCount` is reached, no more workers will be
+    #   assigned to process the job, even if the fleets assigned to the
+    #   job's queue has available workers.
+    #
+    #   You can't set the `maxWorkerCount` to 0. If you set it to -1, there
+    #   is no maximum number of workers.
+    #
+    #   If you don't specify the `maxWorkerCount`, the default is -1.
+    #
+    #   The maximum number of workers that can process tasks in the job.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] farm_id
+    #   The farm ID of the job to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_id
+    #   The queue ID of the job to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_id
+    #   The job ID to update.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/UpdateJobRequest AWS API Documentation
     #
     class UpdateJobRequest < Struct.new(
       :client_token,
-      :farm_id,
-      :queue_id,
-      :job_id,
       :target_task_run_status,
       :priority,
       :max_failed_tasks_count,
       :max_retries_per_task,
-      :lifecycle_status)
+      :lifecycle_status,
+      :max_worker_count,
+      :farm_id,
+      :queue_id,
+      :job_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8770,6 +9441,60 @@ module Aws::Deadline
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/UpdateJobResponse AWS API Documentation
     #
     class UpdateJobResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] farm_id
+    #   The unique identifier of the farm that contains the limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit_id
+    #   The unique identifier of the limit to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The new display name of the limit.
+    #
+    #   This field can store any content. Escape or encode this content
+    #   before displaying it on a webpage or any other system that might
+    #   interpret the content of this field.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The new description of the limit.
+    #
+    #   This field can store any content. Escape or encode this content
+    #   before displaying it on a webpage or any other system that might
+    #   interpret the content of this field.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_count
+    #   The maximum number of resources constrained by this limit. When all
+    #   of the resources are in use, steps that require the limit won't be
+    #   scheduled until the resource is available.
+    #
+    #   If more than the new maximum number is currently in use, running
+    #   jobs finish but no new jobs are started until the number of
+    #   resources in use is below the new maximum number.
+    #
+    #   The `maxCount` must not be 0. If the value is -1, there is no
+    #   restriction on the number of resources that can be acquired for this
+    #   limit.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/UpdateLimitRequest AWS API Documentation
+    #
+    class UpdateLimitRequest < Struct.new(
+      :farm_id,
+      :limit_id,
+      :display_name,
+      :description,
+      :max_count)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/UpdateLimitResponse AWS API Documentation
+    #
+    class UpdateLimitResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] monitor_id
     #   The unique identifier of the monitor to update.
@@ -8888,6 +9613,40 @@ module Aws::Deadline
     #
     class UpdateQueueFleetAssociationResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] farm_id
+    #   The unique identifier of the farm that contains the associated
+    #   queues and limits.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_id
+    #   The unique identifier of the queue associated to the limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit_id
+    #   The unique identifier of the limit associated to the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Sets the status of the limit. You can mark the limit active, or you
+    #   can stop usage of the limit and either complete existing tasks or
+    #   cancel any existing tasks immediately.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/UpdateQueueLimitAssociationRequest AWS API Documentation
+    #
+    class UpdateQueueLimitAssociationRequest < Struct.new(
+      :farm_id,
+      :queue_id,
+      :limit_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/UpdateQueueLimitAssociationResponse AWS API Documentation
+    #
+    class UpdateQueueLimitAssociationResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] client_token
     #   The idempotency token to update in the queue.
     #
@@ -8984,6 +9743,10 @@ module Aws::Deadline
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] target_lifecycle_status
+    #   The life cycle status to update in the session.
+    #   @return [String]
+    #
     # @!attribute [rw] farm_id
     #   The farm ID to update in the session.
     #   @return [String]
@@ -9000,19 +9763,15 @@ module Aws::Deadline
     #   The session ID to update.
     #   @return [String]
     #
-    # @!attribute [rw] target_lifecycle_status
-    #   The life cycle status to update in the session.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/UpdateSessionRequest AWS API Documentation
     #
     class UpdateSessionRequest < Struct.new(
       :client_token,
+      :target_lifecycle_status,
       :farm_id,
       :queue_id,
       :job_id,
-      :session_id,
-      :target_lifecycle_status)
+      :session_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9021,6 +9780,10 @@ module Aws::Deadline
     #
     class UpdateSessionResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] target_task_run_status
+    #   The task status to update the step's tasks to.
+    #   @return [String]
+    #
     # @!attribute [rw] client_token
     #   The unique token which the server uses to recognize retries of the
     #   same request.
@@ -9045,19 +9808,15 @@ module Aws::Deadline
     #   The step ID to update.
     #   @return [String]
     #
-    # @!attribute [rw] target_task_run_status
-    #   The task status to update the step's tasks to.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/UpdateStepRequest AWS API Documentation
     #
     class UpdateStepRequest < Struct.new(
+      :target_task_run_status,
       :client_token,
       :farm_id,
       :queue_id,
       :job_id,
-      :step_id,
-      :target_task_run_status)
+      :step_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9128,6 +9887,10 @@ module Aws::Deadline
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] target_run_status
+    #   The run status with which to start the task.
+    #   @return [String]
+    #
     # @!attribute [rw] farm_id
     #   The farm ID to update.
     #   @return [String]
@@ -9148,20 +9911,16 @@ module Aws::Deadline
     #   The task ID to update.
     #   @return [String]
     #
-    # @!attribute [rw] target_run_status
-    #   The run status with which to start the task.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/UpdateTaskRequest AWS API Documentation
     #
     class UpdateTaskRequest < Struct.new(
       :client_token,
+      :target_run_status,
       :farm_id,
       :queue_id,
       :job_id,
       :step_id,
-      :task_id,
-      :target_run_status)
+      :task_id)
       SENSITIVE = []
       include Aws::Structure
     end

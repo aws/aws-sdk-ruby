@@ -105,6 +105,8 @@ module Aws::Firehose
     DestinationId = Shapes::StringShape.new(name: 'DestinationId')
     DestinationTableConfiguration = Shapes::StructureShape.new(name: 'DestinationTableConfiguration')
     DestinationTableConfigurationList = Shapes::ListShape.new(name: 'DestinationTableConfigurationList')
+    DirectPutSourceConfiguration = Shapes::StructureShape.new(name: 'DirectPutSourceConfiguration')
+    DirectPutSourceDescription = Shapes::StructureShape.new(name: 'DirectPutSourceDescription')
     DocumentIdOptions = Shapes::StructureShape.new(name: 'DocumentIdOptions')
     DynamicPartitioningConfiguration = Shapes::StructureShape.new(name: 'DynamicPartitioningConfiguration')
     ElasticsearchBufferingHints = Shapes::StructureShape.new(name: 'ElasticsearchBufferingHints')
@@ -296,6 +298,7 @@ module Aws::Firehose
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    ThroughputHintInMBs = Shapes::IntegerShape.new(name: 'ThroughputHintInMBs')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TopicName = Shapes::StringShape.new(name: 'TopicName')
     UntagDeliveryStreamInput = Shapes::StructureShape.new(name: 'UntagDeliveryStreamInput')
@@ -432,6 +435,7 @@ module Aws::Firehose
 
     CreateDeliveryStreamInput.add_member(:delivery_stream_name, Shapes::ShapeRef.new(shape: DeliveryStreamName, required: true, location_name: "DeliveryStreamName"))
     CreateDeliveryStreamInput.add_member(:delivery_stream_type, Shapes::ShapeRef.new(shape: DeliveryStreamType, location_name: "DeliveryStreamType"))
+    CreateDeliveryStreamInput.add_member(:direct_put_source_configuration, Shapes::ShapeRef.new(shape: DirectPutSourceConfiguration, location_name: "DirectPutSourceConfiguration"))
     CreateDeliveryStreamInput.add_member(:kinesis_stream_source_configuration, Shapes::ShapeRef.new(shape: KinesisStreamSourceConfiguration, location_name: "KinesisStreamSourceConfiguration"))
     CreateDeliveryStreamInput.add_member(:delivery_stream_encryption_configuration_input, Shapes::ShapeRef.new(shape: DeliveryStreamEncryptionConfigurationInput, location_name: "DeliveryStreamEncryptionConfigurationInput"))
     CreateDeliveryStreamInput.add_member(:s3_destination_configuration, Shapes::ShapeRef.new(shape: S3DestinationConfiguration, deprecated: true, location_name: "S3DestinationConfiguration"))
@@ -588,6 +592,12 @@ module Aws::Firehose
     DestinationTableConfiguration.struct_class = Types::DestinationTableConfiguration
 
     DestinationTableConfigurationList.member = Shapes::ShapeRef.new(shape: DestinationTableConfiguration)
+
+    DirectPutSourceConfiguration.add_member(:throughput_hint_in_m_bs, Shapes::ShapeRef.new(shape: ThroughputHintInMBs, required: true, location_name: "ThroughputHintInMBs"))
+    DirectPutSourceConfiguration.struct_class = Types::DirectPutSourceConfiguration
+
+    DirectPutSourceDescription.add_member(:throughput_hint_in_m_bs, Shapes::ShapeRef.new(shape: ThroughputHintInMBs, location_name: "ThroughputHintInMBs"))
+    DirectPutSourceDescription.struct_class = Types::DirectPutSourceDescription
 
     DocumentIdOptions.add_member(:default_document_id_format, Shapes::ShapeRef.new(shape: DefaultDocumentIdFormat, required: true, location_name: "DefaultDocumentIdFormat"))
     DocumentIdOptions.struct_class = Types::DocumentIdOptions
@@ -782,6 +792,7 @@ module Aws::Firehose
     IcebergDestinationConfiguration.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: IcebergS3BackupMode, location_name: "S3BackupMode"))
     IcebergDestinationConfiguration.add_member(:retry_options, Shapes::ShapeRef.new(shape: RetryOptions, location_name: "RetryOptions"))
     IcebergDestinationConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleARN"))
+    IcebergDestinationConfiguration.add_member(:append_only, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "AppendOnly"))
     IcebergDestinationConfiguration.add_member(:catalog_configuration, Shapes::ShapeRef.new(shape: CatalogConfiguration, required: true, location_name: "CatalogConfiguration"))
     IcebergDestinationConfiguration.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: S3DestinationConfiguration, required: true, location_name: "S3Configuration"))
     IcebergDestinationConfiguration.struct_class = Types::IcebergDestinationConfiguration
@@ -795,6 +806,7 @@ module Aws::Firehose
     IcebergDestinationDescription.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: IcebergS3BackupMode, location_name: "S3BackupMode"))
     IcebergDestinationDescription.add_member(:retry_options, Shapes::ShapeRef.new(shape: RetryOptions, location_name: "RetryOptions"))
     IcebergDestinationDescription.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
+    IcebergDestinationDescription.add_member(:append_only, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "AppendOnly"))
     IcebergDestinationDescription.add_member(:catalog_configuration, Shapes::ShapeRef.new(shape: CatalogConfiguration, location_name: "CatalogConfiguration"))
     IcebergDestinationDescription.add_member(:s3_destination_description, Shapes::ShapeRef.new(shape: S3DestinationDescription, location_name: "S3DestinationDescription"))
     IcebergDestinationDescription.struct_class = Types::IcebergDestinationDescription
@@ -808,6 +820,7 @@ module Aws::Firehose
     IcebergDestinationUpdate.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: IcebergS3BackupMode, location_name: "S3BackupMode"))
     IcebergDestinationUpdate.add_member(:retry_options, Shapes::ShapeRef.new(shape: RetryOptions, location_name: "RetryOptions"))
     IcebergDestinationUpdate.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
+    IcebergDestinationUpdate.add_member(:append_only, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "AppendOnly"))
     IcebergDestinationUpdate.add_member(:catalog_configuration, Shapes::ShapeRef.new(shape: CatalogConfiguration, location_name: "CatalogConfiguration"))
     IcebergDestinationUpdate.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: S3DestinationConfiguration, location_name: "S3Configuration"))
     IcebergDestinationUpdate.struct_class = Types::IcebergDestinationUpdate
@@ -1144,6 +1157,7 @@ module Aws::Firehose
     SnowflakeVpcConfiguration.add_member(:private_link_vpce_id, Shapes::ShapeRef.new(shape: SnowflakePrivateLinkVpceId, required: true, location_name: "PrivateLinkVpceId"))
     SnowflakeVpcConfiguration.struct_class = Types::SnowflakeVpcConfiguration
 
+    SourceDescription.add_member(:direct_put_source_description, Shapes::ShapeRef.new(shape: DirectPutSourceDescription, location_name: "DirectPutSourceDescription"))
     SourceDescription.add_member(:kinesis_stream_source_description, Shapes::ShapeRef.new(shape: KinesisStreamSourceDescription, location_name: "KinesisStreamSourceDescription"))
     SourceDescription.add_member(:msk_source_description, Shapes::ShapeRef.new(shape: MSKSourceDescription, location_name: "MSKSourceDescription"))
     SourceDescription.add_member(:database_source_description, Shapes::ShapeRef.new(shape: DatabaseSourceDescription, location_name: "DatabaseSourceDescription"))

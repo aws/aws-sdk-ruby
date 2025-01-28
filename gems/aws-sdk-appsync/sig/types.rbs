@@ -616,6 +616,8 @@ module Aws::AppSync
       attr_accessor evaluation_result: ::String
       attr_accessor error: Types::EvaluateCodeErrorDetail
       attr_accessor logs: ::Array[::String]
+      attr_accessor stash: ::String
+      attr_accessor out_errors: ::String
       SENSITIVE: []
     end
 
@@ -629,6 +631,8 @@ module Aws::AppSync
       attr_accessor evaluation_result: ::String
       attr_accessor error: Types::ErrorDetail
       attr_accessor logs: ::Array[::String]
+      attr_accessor stash: ::String
+      attr_accessor out_errors: ::String
       SENSITIVE: []
     end
 

@@ -155,7 +155,7 @@ module Aws::Firehose
     #   @return [Types::CloudWatchLoggingOptions]
     #
     # @!attribute [rw] vpc_configuration_description
-    #   The details of the VPC of the Amazon ES destination.
+    #   The details of the VPC of the Amazon OpenSearch Service destination.
     #   @return [Types::VpcConfigurationDescription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/AmazonOpenSearchServerlessDestinationDescription AWS API Documentation
@@ -440,7 +440,7 @@ module Aws::Firehose
     #   @return [Types::CloudWatchLoggingOptions]
     #
     # @!attribute [rw] vpc_configuration_description
-    #   The details of the VPC of the Amazon ES destination.
+    #   The details of the VPC of the Amazon OpenSearch Service destination.
     #   @return [Types::VpcConfigurationDescription]
     #
     # @!attribute [rw] document_id_options
@@ -644,6 +644,9 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] warehouse_location
+    #   The warehouse location for Apache Iceberg tables. You must configure
+    #   this when schema evolution and table creation is enabled.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [String]
     #
@@ -767,6 +770,12 @@ module Aws::Firehose
     #     stream as a source.
     #   @return [String]
     #
+    # @!attribute [rw] direct_put_source_configuration
+    #   The structure that configures parameters such as
+    #   `ThroughputHintInMBs` for a stream configured with Direct PUT as a
+    #   source.
+    #   @return [Types::DirectPutSourceConfiguration]
+    #
     # @!attribute [rw] kinesis_stream_source_configuration
     #   When a Kinesis data stream is used as the source for the Firehose
     #   stream, a KinesisStreamSourceConfiguration containing the Kinesis
@@ -794,7 +803,8 @@ module Aws::Firehose
     #   @return [Types::RedshiftDestinationConfiguration]
     #
     # @!attribute [rw] elasticsearch_destination_configuration
-    #   The destination in Amazon ES. You can specify only one destination.
+    #   The destination in Amazon OpenSearch Service. You can specify only
+    #   one destination.
     #   @return [Types::ElasticsearchDestinationConfiguration]
     #
     # @!attribute [rw] amazonopensearchservice_destination_configuration
@@ -826,8 +836,8 @@ module Aws::Firehose
     #   Data Firehose performs an additional authorization on the
     #   `firehose:TagDeliveryStream` action to verify if users have
     #   permissions to create tags. If you do not provide this permission,
-    #   requests to create new Firehose Firehose streams with IAM resource
-    #   tags will fail with an `AccessDeniedException` such as following.
+    #   requests to create new Firehose streams with IAM resource tags will
+    #   fail with an `AccessDeniedException` such as following.
     #
     #   **AccessDeniedException**
     #
@@ -863,6 +873,9 @@ module Aws::Firehose
     #   @return [Types::IcebergDestinationConfiguration]
     #
     # @!attribute [rw] database_source_configuration
+    #   The top level object for configuring streams with database as a
+    #   source.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Types::DatabaseSourceConfiguration]
     #
@@ -871,6 +884,7 @@ module Aws::Firehose
     class CreateDeliveryStreamInput < Struct.new(
       :delivery_stream_name,
       :delivery_stream_type,
+      :direct_put_source_configuration,
       :kinesis_stream_source_configuration,
       :delivery_stream_encryption_configuration_input,
       :s3_destination_configuration,
@@ -948,13 +962,22 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # The structure used to configure the list of column patterns in source
+    # database endpoint for Firehose to read from.
+    #
     # Amazon Data Firehose is in preview release and is subject to change.
     #
     # @!attribute [rw] include
+    #   The list of column patterns in source database to be included for
+    #   Firehose to read from.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Array<String>]
     #
     # @!attribute [rw] exclude
+    #   The list of column patterns in source database to be excluded for
+    #   Firehose to read from.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Array<String>]
     #
@@ -967,13 +990,22 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # The structure used to configure the list of database patterns in
+    # source database endpoint for Firehose to read from.
+    #
     # Amazon Data Firehose is in preview release and is subject to change.
     #
     # @!attribute [rw] include
+    #   The list of database patterns in source database endpoint to be
+    #   included for Firehose to read from.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Array<String>]
     #
     # @!attribute [rw] exclude
+    #   The list of database patterns in source database endpoint to be
+    #   excluded for Firehose to read from.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Array<String>]
     #
@@ -986,25 +1018,41 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # The structure that describes the snapshot information of a table in
+    # source database endpoint that Firehose reads.
+    #
     # Amazon Data Firehose is in preview release and is subject to change.
     #
     # @!attribute [rw] id
+    #   The identifier of the current snapshot of the table in source
+    #   database endpoint.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [String]
     #
     # @!attribute [rw] table
+    #   The fully qualified name of the table in source database endpoint
+    #   that Firehose reads.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [String]
     #
     # @!attribute [rw] request_timestamp
+    #   The timestamp when the current snapshot is taken on the table.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Time]
     #
     # @!attribute [rw] requested_by
+    #   The principal that sent the request to take the current snapshot on
+    #   the table.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [String]
     #
     # @!attribute [rw] status
+    #   The status of the current snapshot of the table.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [String]
     #
@@ -1028,6 +1076,9 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # The structure to configure the authentication methods for Firehose to
+    # connect to source database endpoint.
+    #
     # Amazon Data Firehose is in preview release and is subject to change.
     #
     # @!attribute [rw] secrets_manager_configuration
@@ -1042,49 +1093,92 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # The top level object for configuring streams with database as a
+    # source.
+    #
     # Amazon Data Firehose is in preview release and is subject to change.
     #
     # @!attribute [rw] type
+    #   The type of database engine. This can be one of the following
+    #   values.
+    #
+    #   * MySQL
+    #
+    #   * PostgreSQL
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [String]
     #
     # @!attribute [rw] endpoint
+    #   The endpoint of the database server.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [String]
     #
     # @!attribute [rw] port
+    #   The port of the database. This can be one of the following values.
+    #
+    #   * 3306 for MySQL database type
+    #
+    #   * 5432 for PostgreSQL database type
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Integer]
     #
     # @!attribute [rw] ssl_mode
+    #   The mode to enable or disable SSL when Firehose connects to the
+    #   database endpoint.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [String]
     #
     # @!attribute [rw] databases
+    #   The list of database patterns in source database endpoint for
+    #   Firehose to read from.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Types::DatabaseList]
     #
     # @!attribute [rw] tables
+    #   The list of table patterns in source database endpoint for Firehose
+    #   to read from.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Types::DatabaseTableList]
     #
     # @!attribute [rw] columns
+    #   The list of column patterns in source database endpoint for Firehose
+    #   to read from.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Types::DatabaseColumnList]
     #
     # @!attribute [rw] surrogate_keys
+    #   The optional list of table and column names used as unique key
+    #   columns when taking snapshot if the tables don’t have primary keys
+    #   configured.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Array<String>]
     #
     # @!attribute [rw] snapshot_watermark_table
+    #   The fully qualified name of the table in source database endpoint
+    #   that Firehose uses to track snapshot progress.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [String]
     #
     # @!attribute [rw] database_source_authentication_configuration
+    #   The structure to configure the authentication methods for Firehose
+    #   to connect to source database endpoint.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Types::DatabaseSourceAuthenticationConfiguration]
     #
     # @!attribute [rw] database_source_vpc_configuration
+    #   The details of the VPC Endpoint Service which Firehose uses to
+    #   create a PrivateLink to the database.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Types::DatabaseSourceVPCConfiguration]
     #
@@ -1106,53 +1200,98 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # The top level object for database source description.
+    #
     # Amazon Data Firehose is in preview release and is subject to change.
     #
     # @!attribute [rw] type
+    #   The type of database engine. This can be one of the following
+    #   values.
+    #
+    #   * MySQL
+    #
+    #   * PostgreSQL
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [String]
     #
     # @!attribute [rw] endpoint
+    #   The endpoint of the database server.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [String]
     #
     # @!attribute [rw] port
+    #   The port of the database. This can be one of the following values.
+    #
+    #   * 3306 for MySQL database type
+    #
+    #   * 5432 for PostgreSQL database type
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Integer]
     #
     # @!attribute [rw] ssl_mode
+    #   The mode to enable or disable SSL when Firehose connects to the
+    #   database endpoint.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [String]
     #
     # @!attribute [rw] databases
+    #   The list of database patterns in source database endpoint for
+    #   Firehose to read from.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Types::DatabaseList]
     #
     # @!attribute [rw] tables
+    #   The list of table patterns in source database endpoint for Firehose
+    #   to read from.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Types::DatabaseTableList]
     #
     # @!attribute [rw] columns
+    #   The list of column patterns in source database endpoint for Firehose
+    #   to read from.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Types::DatabaseColumnList]
     #
     # @!attribute [rw] surrogate_keys
+    #   The optional list of table and column names used as unique key
+    #   columns when taking snapshot if the tables don’t have primary keys
+    #   configured.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Array<String>]
     #
     # @!attribute [rw] snapshot_watermark_table
+    #   The fully qualified name of the table in source database endpoint
+    #   that Firehose uses to track snapshot progress.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_info
+    #   The structure that describes the snapshot information of a table in
+    #   source database endpoint that Firehose reads.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Array<Types::DatabaseSnapshotInfo>]
     #
     # @!attribute [rw] database_source_authentication_configuration
+    #   The structure to configure the authentication methods for Firehose
+    #   to connect to source database endpoint.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Types::DatabaseSourceAuthenticationConfiguration]
     #
     # @!attribute [rw] database_source_vpc_configuration
+    #   The details of the VPC Endpoint Service which Firehose uses to
+    #   create a PrivateLink to the database.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Types::DatabaseSourceVPCConfiguration]
     #
@@ -1175,9 +1314,19 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # The structure for details of the VPC Endpoint Service which Firehose
+    # uses to create a PrivateLink to the database.
+    #
     # Amazon Data Firehose is in preview release and is subject to change.
     #
     # @!attribute [rw] vpc_endpoint_service_name
+    #   The VPC endpoint service name which Firehose uses to create a
+    #   PrivateLink to the database. The endpoint service must have the
+    #   Firehose service principle `firehose.amazonaws.com` as an allowed
+    #   principal on the VPC endpoint service. The VPC endpoint service name
+    #   is a string that looks like
+    #   `com.amazonaws.vpce.<region>.<vpc-endpoint-service-id>`.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [String]
     #
@@ -1189,13 +1338,22 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # The structure used to configure the list of table patterns in source
+    # database endpoint for Firehose to read from.
+    #
     # Amazon Data Firehose is in preview release and is subject to change.
     #
     # @!attribute [rw] include
+    #   The list of table patterns in source database endpoint to be
+    #   included for Firehose to read from.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Array<String>]
     #
     # @!attribute [rw] exclude
+    #   The list of table patterns in source database endpoint to be
+    #   excluded for Firehose to read from.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Array<String>]
     #
@@ -1528,7 +1686,7 @@ module Aws::Firehose
     #   @return [Types::RedshiftDestinationDescription]
     #
     # @!attribute [rw] elasticsearch_destination_description
-    #   The destination in Amazon ES.
+    #   The destination in Amazon OpenSearch Service.
     #   @return [Types::ElasticsearchDestinationDescription]
     #
     # @!attribute [rw] amazonopensearchservice_destination_description
@@ -1591,6 +1749,9 @@ module Aws::Firehose
     #   @return [Array<String>]
     #
     # @!attribute [rw] partition_spec
+    #   The partition spec configuration for a table that is used by
+    #   automatic table creation.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Types::PartitionSpec]
     #
@@ -1608,6 +1769,50 @@ module Aws::Firehose
       :unique_keys,
       :partition_spec,
       :s3_error_output_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The structure that configures parameters such as `ThroughputHintInMBs`
+    # for a stream configured with Direct PUT as a source.
+    #
+    # @!attribute [rw] throughput_hint_in_m_bs
+    #   The value that you configure for this parameter is for information
+    #   purpose only and does not affect Firehose delivery throughput limit.
+    #   You can use the [Firehose Limits form][1] to request a throughput
+    #   limit increase.
+    #
+    #
+    #
+    #   [1]: https://support.console.aws.amazon.com/support/home#/case/create%3FissueType=service-limit-increase%26limitType=kinesis-firehose-limits
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DirectPutSourceConfiguration AWS API Documentation
+    #
+    class DirectPutSourceConfiguration < Struct.new(
+      :throughput_hint_in_m_bs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The structure that configures parameters such as `ThroughputHintInMBs`
+    # for a stream configured with Direct PUT as a source.
+    #
+    # @!attribute [rw] throughput_hint_in_m_bs
+    #   The value that you configure for this parameter is for information
+    #   purpose only and does not affect Firehose delivery throughput limit.
+    #   You can use the [Firehose Limits form][1] to request a throughput
+    #   limit increase.
+    #
+    #
+    #
+    #   [1]: https://support.console.aws.amazon.com/support/home#/case/create%3FissueType=service-limit-increase%26limitType=kinesis-firehose-limits
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DirectPutSourceDescription AWS API Documentation
+    #
+    class DirectPutSourceDescription < Struct.new(
+      :throughput_hint_in_m_bs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1654,7 +1859,7 @@ module Aws::Firehose
     #
     # @!attribute [rw] enabled
     #   Specifies that the dynamic partitioning is enabled for this Firehose
-    #   Firehose stream.
+    #   stream.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DynamicPartitioningConfiguration AWS API Documentation
@@ -1667,7 +1872,7 @@ module Aws::Firehose
     end
 
     # Describes the buffering to perform before delivering data to the
-    # Amazon ES destination.
+    # Amazon OpenSearch Service destination.
     #
     # @!attribute [rw] interval_in_seconds
     #   Buffer incoming data for the specified period of time, in seconds,
@@ -1694,14 +1899,15 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # Describes the configuration of a destination in Amazon ES.
+    # Describes the configuration of a destination in Amazon OpenSearch
+    # Service.
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role to be assumed by
-    #   Firehose for calling the Amazon ES Configuration API and for
-    #   indexing documents. For more information, see [Grant Firehose Access
-    #   to an Amazon S3 Destination][1] and [Amazon Resource Names (ARNs)
-    #   and Amazon Web Services Service Namespaces][2].
+    #   Firehose for calling the Amazon OpenSearch Service Configuration API
+    #   and for indexing documents. For more information, see [Grant
+    #   Firehose Access to an Amazon S3 Destination][1] and [Amazon Resource
+    #   Names (ARNs) and Amazon Web Services Service Namespaces][2].
     #
     #
     #
@@ -1710,8 +1916,8 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] domain_arn
-    #   The ARN of the Amazon ES domain. The IAM role must have permissions
-    #   for `DescribeDomain`, `DescribeDomains`, and
+    #   The ARN of the Amazon OpenSearch Service domain. The IAM role must
+    #   have permissions for `DescribeDomain`, `DescribeDomains`, and
     #   `DescribeDomainConfig` after assuming the role specified in
     #   **RoleARN**. For more information, see [Amazon Resource Names (ARNs)
     #   and Amazon Web Services Service Namespaces][1].
@@ -1744,8 +1950,8 @@ module Aws::Firehose
     # @!attribute [rw] index_rotation_period
     #   The Elasticsearch index rotation period. Index rotation appends a
     #   timestamp to the `IndexName` to facilitate the expiration of old
-    #   data. For more information, see [Index Rotation for the Amazon ES
-    #   Destination][1]. The default value is `OneDay`.
+    #   data. For more information, see [Index Rotation for the Amazon
+    #   OpenSearch Service Destination][1]. The default value is `OneDay`.
     #
     #
     #
@@ -1759,7 +1965,7 @@ module Aws::Firehose
     #
     # @!attribute [rw] retry_options
     #   The retry behavior in case Firehose is unable to deliver documents
-    #   to Amazon ES. The default value is 300 (5 minutes).
+    #   to Amazon OpenSearch Service. The default value is 300 (5 minutes).
     #   @return [Types::ElasticsearchRetryOptions]
     #
     # @!attribute [rw] s3_backup_mode
@@ -1770,7 +1976,7 @@ module Aws::Firehose
     #   set to `AllDocuments`, Firehose delivers all incoming records to
     #   Amazon S3, and also writes failed documents with
     #   `AmazonOpenSearchService-failed/` appended to the prefix. For more
-    #   information, see [Amazon S3 Backup for the Amazon ES
+    #   information, see [Amazon S3 Backup for the Amazon OpenSearch Service
     #   Destination][1]. Default value is `FailedDocumentsOnly`.
     #
     #   You can't change this backup mode after you create the Firehose
@@ -1824,7 +2030,7 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # The destination description in Amazon ES.
+    # The destination description in Amazon OpenSearch Service.
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the Amazon Web Services
@@ -1837,12 +2043,12 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] domain_arn
-    #   The ARN of the Amazon ES domain. For more information, see [Amazon
-    #   Resource Names (ARNs) and Amazon Web Services Service
-    #   Namespaces][1].
+    #   The ARN of the Amazon OpenSearch Service domain. For more
+    #   information, see [Amazon Resource Names (ARNs) and Amazon Web
+    #   Services Service Namespaces][1].
     #
     #   Firehose uses either `ClusterEndpoint` or `DomainARN` to send data
-    #   to Amazon ES.
+    #   to Amazon OpenSearch Service.
     #
     #
     #
@@ -1852,7 +2058,7 @@ module Aws::Firehose
     # @!attribute [rw] cluster_endpoint
     #   The endpoint to use when communicating with the cluster. Firehose
     #   uses either this `ClusterEndpoint` or the `DomainARN` field to send
-    #   data to Amazon ES.
+    #   data to Amazon OpenSearch Service.
     #   @return [String]
     #
     # @!attribute [rw] index_name
@@ -1874,7 +2080,7 @@ module Aws::Firehose
     #   @return [Types::ElasticsearchBufferingHints]
     #
     # @!attribute [rw] retry_options
-    #   The Amazon ES retry options.
+    #   The Amazon OpenSearch Service retry options.
     #   @return [Types::ElasticsearchRetryOptions]
     #
     # @!attribute [rw] s3_backup_mode
@@ -1925,14 +2131,14 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # Describes an update for a destination in Amazon ES.
+    # Describes an update for a destination in Amazon OpenSearch Service.
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role to be assumed by
-    #   Firehose for calling the Amazon ES Configuration API and for
-    #   indexing documents. For more information, see [Grant Firehose Access
-    #   to an Amazon S3 Destination][1] and [Amazon Resource Names (ARNs)
-    #   and Amazon Web Services Service Namespaces][2].
+    #   Firehose for calling the Amazon OpenSearch Service Configuration API
+    #   and for indexing documents. For more information, see [Grant
+    #   Firehose Access to an Amazon S3 Destination][1] and [Amazon Resource
+    #   Names (ARNs) and Amazon Web Services Service Namespaces][2].
     #
     #
     #
@@ -1941,8 +2147,8 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] domain_arn
-    #   The ARN of the Amazon ES domain. The IAM role must have permissions
-    #   for `DescribeDomain`, `DescribeDomains`, and
+    #   The ARN of the Amazon OpenSearch Service domain. The IAM role must
+    #   have permissions for `DescribeDomain`, `DescribeDomains`, and
     #   `DescribeDomainConfig` after assuming the IAM role specified in
     #   `RoleARN`. For more information, see [Amazon Resource Names (ARNs)
     #   and Amazon Web Services Service Namespaces][1].
@@ -1979,8 +2185,8 @@ module Aws::Firehose
     # @!attribute [rw] index_rotation_period
     #   The Elasticsearch index rotation period. Index rotation appends a
     #   timestamp to `IndexName` to facilitate the expiration of old data.
-    #   For more information, see [Index Rotation for the Amazon ES
-    #   Destination][1]. Default value is `OneDay`.
+    #   For more information, see [Index Rotation for the Amazon OpenSearch
+    #   Service Destination][1]. Default value is `OneDay`.
     #
     #
     #
@@ -1994,7 +2200,7 @@ module Aws::Firehose
     #
     # @!attribute [rw] retry_options
     #   The retry behavior in case Firehose is unable to deliver documents
-    #   to Amazon ES. The default value is 300 (5 minutes).
+    #   to Amazon OpenSearch Service. The default value is 300 (5 minutes).
     #   @return [Types::ElasticsearchRetryOptions]
     #
     # @!attribute [rw] s3_update
@@ -2035,14 +2241,14 @@ module Aws::Firehose
     end
 
     # Configures retry behavior in case Firehose is unable to deliver
-    # documents to Amazon ES.
+    # documents to Amazon OpenSearch Service.
     #
     # @!attribute [rw] duration_in_seconds
-    #   After an initial failure to deliver to Amazon ES, the total amount
-    #   of time during which Firehose retries delivery (including the first
-    #   attempt). After this time has elapsed, the failed documents are
-    #   written to Amazon S3. Default value is 300 seconds (5 minutes). A
-    #   value of 0 (zero) results in no retries.
+    #   After an initial failure to deliver to Amazon OpenSearch Service,
+    #   the total amount of time during which Firehose retries delivery
+    #   (including the first attempt). After this time has elapsed, the
+    #   failed documents are written to Amazon S3. Default value is 300
+    #   seconds (5 minutes). A value of 0 (zero) results in no retries.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ElasticsearchRetryOptions AWS API Documentation
@@ -2862,10 +3068,14 @@ module Aws::Firehose
     #   @return [Array<Types::DestinationTableConfiguration>]
     #
     # @!attribute [rw] schema_evolution_configuration
+    #   The configuration to enable automatic schema evolution.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Types::SchemaEvolutionConfiguration]
     #
     # @!attribute [rw] table_creation_configuration
+    #   The configuration to enable automatic table creation.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Types::TableCreationConfiguration]
     #
@@ -2902,6 +3112,19 @@ module Aws::Firehose
     #   Firehose for calling Apache Iceberg Tables.
     #   @return [String]
     #
+    # @!attribute [rw] append_only
+    #   Describes whether all incoming data for this delivery stream will be
+    #   append only (inserts only and not for updates and deletes) for
+    #   Iceberg delivery. This feature is only applicable for Apache Iceberg
+    #   Tables.
+    #
+    #   The default value is false. If you set this value to true, Firehose
+    #   automatically increases the throughput limit of a stream based on
+    #   the throttling levels of the stream. If you set this parameter to
+    #   true for a stream with updates and deletes, you will see out of
+    #   order delivery.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] catalog_configuration
     #   Configuration describing where the destination Apache Iceberg Tables
     #   are persisted.
@@ -2923,6 +3146,7 @@ module Aws::Firehose
       :s3_backup_mode,
       :retry_options,
       :role_arn,
+      :append_only,
       :catalog_configuration,
       :s3_configuration)
       SENSITIVE = []
@@ -2939,10 +3163,14 @@ module Aws::Firehose
     #   @return [Array<Types::DestinationTableConfiguration>]
     #
     # @!attribute [rw] schema_evolution_configuration
+    #   The description of automatic schema evolution configuration.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Types::SchemaEvolutionConfiguration]
     #
     # @!attribute [rw] table_creation_configuration
+    #   The description of table creation configuration.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Types::TableCreationConfiguration]
     #
@@ -2978,6 +3206,19 @@ module Aws::Firehose
     #   The Amazon Resource Name (ARN) of the IAM role to be assumed by
     #   Firehose for calling Apache Iceberg Tables.
     #   @return [String]
+    #
+    # @!attribute [rw] append_only
+    #   Describes whether all incoming data for this delivery stream will be
+    #   append only (inserts only and not for updates and deletes) for
+    #   Iceberg delivery. This feature is only applicable for Apache Iceberg
+    #   Tables.
+    #
+    #   The default value is false. If you set this value to true, Firehose
+    #   automatically increases the throughput limit of a stream based on
+    #   the throttling levels of the stream. If you set this parameter to
+    #   true for a stream with updates and deletes, you will see out of
+    #   order delivery.
+    #   @return [Boolean]
     #
     # @!attribute [rw] catalog_configuration
     #   Configuration describing where the destination Iceberg tables are
@@ -3000,6 +3241,7 @@ module Aws::Firehose
       :s3_backup_mode,
       :retry_options,
       :role_arn,
+      :append_only,
       :catalog_configuration,
       :s3_destination_description)
       SENSITIVE = []
@@ -3016,10 +3258,14 @@ module Aws::Firehose
     #   @return [Array<Types::DestinationTableConfiguration>]
     #
     # @!attribute [rw] schema_evolution_configuration
+    #   The configuration to enable automatic schema evolution.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Types::SchemaEvolutionConfiguration]
     #
     # @!attribute [rw] table_creation_configuration
+    #   The configuration to enable automatic table creation.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Types::TableCreationConfiguration]
     #
@@ -3056,6 +3302,19 @@ module Aws::Firehose
     #   Firehose for calling Apache Iceberg Tables.
     #   @return [String]
     #
+    # @!attribute [rw] append_only
+    #   Describes whether all incoming data for this delivery stream will be
+    #   append only (inserts only and not for updates and deletes) for
+    #   Iceberg delivery. This feature is only applicable for Apache Iceberg
+    #   Tables.
+    #
+    #   The default value is false. If you set this value to true, Firehose
+    #   automatically increases the throughput limit of a stream based on
+    #   the throttling levels of the stream. If you set this parameter to
+    #   true for a stream with updates and deletes, you will see out of
+    #   order delivery.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] catalog_configuration
     #   Configuration describing where the destination Iceberg tables are
     #   persisted.
@@ -3077,6 +3336,7 @@ module Aws::Firehose
       :s3_backup_mode,
       :retry_options,
       :role_arn,
+      :append_only,
       :catalog_configuration,
       :s3_configuration)
       SENSITIVE = []
@@ -3207,7 +3467,7 @@ module Aws::Firehose
     end
 
     # Details about a Kinesis data stream used as the source for a Firehose
-    # Firehose stream.
+    # stream.
     #
     # @!attribute [rw] kinesis_stream_arn
     #   The Amazon Resource Name (ARN) of the source Kinesis data stream.
@@ -3395,7 +3655,7 @@ module Aws::Firehose
     end
 
     # Details about the Amazon MSK cluster used as the source for a Firehose
-    # Firehose stream.
+    # stream.
     #
     # @!attribute [rw] msk_cluster_arn
     #   The ARN of the Amazon MSK cluster.
@@ -3642,9 +3902,13 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # Represents a single field in a `PartitionSpec`.
+    #
     # Amazon Data Firehose is in preview release and is subject to change.
     #
     # @!attribute [rw] source_name
+    #   The column name to be configured in partition spec.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [String]
     #
@@ -3656,10 +3920,27 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # Represents how to produce partition data for a table. Partition data
+    # is produced by transforming columns in a table. Each column transform
+    # is represented by a named `PartitionField`.
+    #
+    # Here is an example of the schema in JSON.
+    #
+    # `"partitionSpec": { "identity": [ {"sourceName": "column1"},
+    # {"sourceName": "column2"}, {"sourceName": "column3"} ] }`
+    #
     # Amazon Data Firehose is in preview release and is subject to change.
     #
     # @!attribute [rw] identity
+    #   List of identity [transforms][1] that performs an identity
+    #   transformation. The transform takes the source value, and does not
+    #   modify it. Result type is the source type.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
+    #
+    #
+    #
+    #   [1]: https://iceberg.apache.org/spec/#partition-transforms
     #   @return [Array<Types::PartitionField>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/PartitionSpec AWS API Documentation
@@ -4466,9 +4747,13 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # The configuration to enable schema evolution.
+    #
     # Amazon Data Firehose is in preview release and is subject to change.
     #
     # @!attribute [rw] enabled
+    #   Specify whether you want to enable schema evolution.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Boolean]
     #
@@ -4518,12 +4803,7 @@ module Aws::Firehose
 
     # The serializer that you want Firehose to use to convert data to the
     # target format before writing it to Amazon S3. Firehose supports two
-    # types of serializers: the [ORC SerDe][1] and the [Parquet SerDe][2].
-    #
-    #
-    #
-    # [1]: https://hive.apache.org/javadocs/r1.2.2/api/org/apache/hadoop/hive/ql/io/orc/OrcSerde.html
-    # [2]: https://hive.apache.org/javadocs/r1.2.2/api/org/apache/hadoop/hive/ql/io/parquet/serde/ParquetHiveSerDe.html
+    # types of serializers: the ORC SerDe and the Parquet SerDe.
     #
     # @!attribute [rw] parquet_ser_de
     #   A serializer to use for converting data to the Parquet format before
@@ -4532,7 +4812,7 @@ module Aws::Firehose
     #
     #
     #
-    #   [1]: https://parquet.apache.org/documentation/latest/
+    #   [1]: https://parquet.apache.org/docs/contribution-guidelines/
     #   @return [Types::ParquetSerDe]
     #
     # @!attribute [rw] orc_ser_de
@@ -4659,11 +4939,25 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] meta_data_column_name
-    #   The name of the record metadata column
+    #   Specify a column name in the table, where the metadata information
+    #   has to be loaded. When you enable this field, you will see the
+    #   following column in the snowflake table, which differs based on the
+    #   source type.
+    #
+    #   For Direct PUT as source
+    #
+    #   `{ "firehoseDeliveryStreamName" : "streamname", "IngestionTime" :
+    #   "timestamp" }`
+    #
+    #   For Kinesis Data Stream as source
+    #
+    #   ` "kinesisStreamName" : "streamname", "kinesisShardId" : "Id",
+    #   "kinesisPartitionKey" : "key", "kinesisSequenceNumber" : "1234",
+    #   "subsequenceNumber" : "2334", "IngestionTime" : "timestamp" }`
     #   @return [String]
     #
     # @!attribute [rw] content_column_name
-    #   The name of the record content column
+    #   The name of the record content column.
     #   @return [String]
     #
     # @!attribute [rw] snowflake_vpc_configuration
@@ -5078,7 +5372,11 @@ module Aws::Firehose
     end
 
     # Details about a Kinesis data stream used as the source for a Firehose
-    # Firehose stream.
+    # stream.
+    #
+    # @!attribute [rw] direct_put_source_description
+    #   Details about Direct PUT used as the source for a Firehose stream.
+    #   @return [Types::DirectPutSourceDescription]
     #
     # @!attribute [rw] kinesis_stream_source_description
     #   The KinesisStreamSourceDescription value for the source Kinesis data
@@ -5091,12 +5389,15 @@ module Aws::Firehose
     #   @return [Types::MSKSourceDescription]
     #
     # @!attribute [rw] database_source_description
+    #   Details about a database used as the source for a Firehose stream.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Types::DatabaseSourceDescription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SourceDescription AWS API Documentation
     #
     class SourceDescription < Struct.new(
+      :direct_put_source_description,
       :kinesis_stream_source_description,
       :msk_source_description,
       :database_source_description)
@@ -5425,9 +5726,13 @@ module Aws::Firehose
     #
     class StopDeliveryStreamEncryptionOutput < Aws::EmptyStructure; end
 
+    # The configuration to enable automatic table creation.
+    #
     # Amazon Data Firehose is in preview release and is subject to change.
     #
     # @!attribute [rw] enabled
+    #   Specify whether you want to enable automatic table creation.
+    #
     #   Amazon Data Firehose is in preview release and is subject to change.
     #   @return [Boolean]
     #
@@ -5537,7 +5842,7 @@ module Aws::Firehose
     #   @return [Types::RedshiftDestinationUpdate]
     #
     # @!attribute [rw] elasticsearch_destination_update
-    #   Describes an update for a destination in Amazon ES.
+    #   Describes an update for a destination in Amazon OpenSearch Service.
     #   @return [Types::ElasticsearchDestinationUpdate]
     #
     # @!attribute [rw] amazonopensearchservice_destination_update
@@ -5594,12 +5899,12 @@ module Aws::Firehose
     #
     # @!attribute [rw] subnet_ids
     #   The IDs of the subnets that you want Firehose to use to create ENIs
-    #   in the VPC of the Amazon ES destination. Make sure that the routing
-    #   tables and inbound and outbound rules allow traffic to flow from the
-    #   subnets whose IDs are specified here to the subnets that have the
-    #   destination Amazon ES endpoints. Firehose creates at least one ENI
-    #   in each of the subnets that are specified here. Do not delete or
-    #   modify these ENIs.
+    #   in the VPC of the Amazon OpenSearch Service destination. Make sure
+    #   that the routing tables and inbound and outbound rules allow traffic
+    #   to flow from the subnets whose IDs are specified here to the subnets
+    #   that have the destination Amazon OpenSearch Service endpoints.
+    #   Firehose creates at least one ENI in each of the subnets that are
+    #   specified here. Do not delete or modify these ENIs.
     #
     #   The number of ENIs that Firehose creates in the subnets specified
     #   here scales up and down automatically based on throughput. To enable
@@ -5648,17 +5953,18 @@ module Aws::Firehose
     #
     # @!attribute [rw] security_group_ids
     #   The IDs of the security groups that you want Firehose to use when it
-    #   creates ENIs in the VPC of the Amazon ES destination. You can use
-    #   the same security group that the Amazon ES domain uses or different
-    #   ones. If you specify different security groups here, ensure that
-    #   they allow outbound HTTPS traffic to the Amazon ES domain's
-    #   security group. Also ensure that the Amazon ES domain's security
-    #   group allows HTTPS traffic from the security groups specified here.
-    #   If you use the same security group for both your delivery stream and
-    #   the Amazon ES domain, make sure the security group inbound rule
-    #   allows HTTPS traffic. For more information about security group
-    #   rules, see [Security group rules][1] in the Amazon VPC
-    #   documentation.
+    #   creates ENIs in the VPC of the Amazon OpenSearch Service
+    #   destination. You can use the same security group that the Amazon
+    #   OpenSearch Service domain uses or different ones. If you specify
+    #   different security groups here, ensure that they allow outbound
+    #   HTTPS traffic to the Amazon OpenSearch Service domain's security
+    #   group. Also ensure that the Amazon OpenSearch Service domain's
+    #   security group allows HTTPS traffic from the security groups
+    #   specified here. If you use the same security group for both your
+    #   delivery stream and the Amazon OpenSearch Service domain, make sure
+    #   the security group inbound rule allows HTTPS traffic. For more
+    #   information about security group rules, see [Security group
+    #   rules][1] in the Amazon VPC documentation.
     #
     #
     #
@@ -5675,16 +5981,16 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # The details of the VPC of the Amazon ES destination.
+    # The details of the VPC of the Amazon OpenSearch Service destination.
     #
     # @!attribute [rw] subnet_ids
     #   The IDs of the subnets that Firehose uses to create ENIs in the VPC
-    #   of the Amazon ES destination. Make sure that the routing tables and
-    #   inbound and outbound rules allow traffic to flow from the subnets
-    #   whose IDs are specified here to the subnets that have the
-    #   destination Amazon ES endpoints. Firehose creates at least one ENI
-    #   in each of the subnets that are specified here. Do not delete or
-    #   modify these ENIs.
+    #   of the Amazon OpenSearch Service destination. Make sure that the
+    #   routing tables and inbound and outbound rules allow traffic to flow
+    #   from the subnets whose IDs are specified here to the subnets that
+    #   have the destination Amazon OpenSearch Service endpoints. Firehose
+    #   creates at least one ENI in each of the subnets that are specified
+    #   here. Do not delete or modify these ENIs.
     #
     #   The number of ENIs that Firehose creates in the subnets specified
     #   here scales up and down automatically based on throughput. To enable
@@ -5730,16 +6036,18 @@ module Aws::Firehose
     #
     # @!attribute [rw] security_group_ids
     #   The IDs of the security groups that Firehose uses when it creates
-    #   ENIs in the VPC of the Amazon ES destination. You can use the same
-    #   security group that the Amazon ES domain uses or different ones. If
-    #   you specify different security groups, ensure that they allow
-    #   outbound HTTPS traffic to the Amazon ES domain's security group.
-    #   Also ensure that the Amazon ES domain's security group allows HTTPS
-    #   traffic from the security groups specified here. If you use the same
-    #   security group for both your Firehose stream and the Amazon ES
-    #   domain, make sure the security group inbound rule allows HTTPS
-    #   traffic. For more information about security group rules, see
-    #   [Security group rules][1] in the Amazon VPC documentation.
+    #   ENIs in the VPC of the Amazon OpenSearch Service destination. You
+    #   can use the same security group that the Amazon ES domain uses or
+    #   different ones. If you specify different security groups, ensure
+    #   that they allow outbound HTTPS traffic to the Amazon OpenSearch
+    #   Service domain's security group. Also ensure that the Amazon
+    #   OpenSearch Service domain's security group allows HTTPS traffic
+    #   from the security groups specified here. If you use the same
+    #   security group for both your Firehose stream and the Amazon
+    #   OpenSearch Service domain, make sure the security group inbound rule
+    #   allows HTTPS traffic. For more information about security group
+    #   rules, see [Security group rules][1] in the Amazon VPC
+    #   documentation.
     #
     #
     #
@@ -5747,7 +6055,7 @@ module Aws::Firehose
     #   @return [Array<String>]
     #
     # @!attribute [rw] vpc_id
-    #   The ID of the Amazon ES destination's VPC.
+    #   The ID of the Amazon OpenSearch Service destination's VPC.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/VpcConfigurationDescription AWS API Documentation

@@ -246,6 +246,7 @@ module Aws::AppSync
     OpenIDConnectConfig = Shapes::StructureShape.new(name: 'OpenIDConnectConfig')
     OpenSearchServiceDataSourceConfig = Shapes::StructureShape.new(name: 'OpenSearchServiceDataSourceConfig')
     OperationLevelMetricsConfig = Shapes::StringShape.new(name: 'OperationLevelMetricsConfig')
+    OutErrors = Shapes::StringShape.new(name: 'OutErrors')
     OutputType = Shapes::StringShape.new(name: 'OutputType')
     OwnerContact = Shapes::StringShape.new(name: 'OwnerContact')
     Ownership = Shapes::StringShape.new(name: 'Ownership')
@@ -283,6 +284,7 @@ module Aws::AppSync
     StartSchemaCreationResponse = Shapes::StructureShape.new(name: 'StartSchemaCreationResponse')
     StartSchemaMergeRequest = Shapes::StructureShape.new(name: 'StartSchemaMergeRequest')
     StartSchemaMergeResponse = Shapes::StructureShape.new(name: 'StartSchemaMergeResponse')
+    Stash = Shapes::StringShape.new(name: 'Stash')
     String = Shapes::StringShape.new(name: 'String')
     SyncConfig = Shapes::StructureShape.new(name: 'SyncConfig')
     TTL = Shapes::IntegerShape.new(name: 'TTL')
@@ -795,6 +797,8 @@ module Aws::AppSync
     EvaluateCodeResponse.add_member(:evaluation_result, Shapes::ShapeRef.new(shape: EvaluationResult, location_name: "evaluationResult"))
     EvaluateCodeResponse.add_member(:error, Shapes::ShapeRef.new(shape: EvaluateCodeErrorDetail, location_name: "error"))
     EvaluateCodeResponse.add_member(:logs, Shapes::ShapeRef.new(shape: Logs, location_name: "logs"))
+    EvaluateCodeResponse.add_member(:stash, Shapes::ShapeRef.new(shape: Stash, location_name: "stash"))
+    EvaluateCodeResponse.add_member(:out_errors, Shapes::ShapeRef.new(shape: OutErrors, location_name: "outErrors"))
     EvaluateCodeResponse.struct_class = Types::EvaluateCodeResponse
 
     EvaluateMappingTemplateRequest.add_member(:template, Shapes::ShapeRef.new(shape: Template, required: true, location_name: "template"))
@@ -804,6 +808,8 @@ module Aws::AppSync
     EvaluateMappingTemplateResponse.add_member(:evaluation_result, Shapes::ShapeRef.new(shape: EvaluationResult, location_name: "evaluationResult"))
     EvaluateMappingTemplateResponse.add_member(:error, Shapes::ShapeRef.new(shape: ErrorDetail, location_name: "error"))
     EvaluateMappingTemplateResponse.add_member(:logs, Shapes::ShapeRef.new(shape: Logs, location_name: "logs"))
+    EvaluateMappingTemplateResponse.add_member(:stash, Shapes::ShapeRef.new(shape: Stash, location_name: "stash"))
+    EvaluateMappingTemplateResponse.add_member(:out_errors, Shapes::ShapeRef.new(shape: OutErrors, location_name: "outErrors"))
     EvaluateMappingTemplateResponse.struct_class = Types::EvaluateMappingTemplateResponse
 
     EventBridgeDataSourceConfig.add_member(:event_bus_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "eventBusArn"))

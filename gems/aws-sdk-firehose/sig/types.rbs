@@ -162,6 +162,7 @@ module Aws::Firehose
     class CreateDeliveryStreamInput
       attr_accessor delivery_stream_name: ::String
       attr_accessor delivery_stream_type: ("DirectPut" | "KinesisStreamAsSource" | "MSKAsSource" | "DatabaseAsSource")
+      attr_accessor direct_put_source_configuration: Types::DirectPutSourceConfiguration
       attr_accessor kinesis_stream_source_configuration: Types::KinesisStreamSourceConfiguration
       attr_accessor delivery_stream_encryption_configuration_input: Types::DeliveryStreamEncryptionConfigurationInput
       attr_accessor s3_destination_configuration: Types::S3DestinationConfiguration
@@ -340,6 +341,16 @@ module Aws::Firehose
       attr_accessor unique_keys: ::Array[::String]
       attr_accessor partition_spec: Types::PartitionSpec
       attr_accessor s3_error_output_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class DirectPutSourceConfiguration
+      attr_accessor throughput_hint_in_m_bs: ::Integer
+      SENSITIVE: []
+    end
+
+    class DirectPutSourceDescription
+      attr_accessor throughput_hint_in_m_bs: ::Integer
       SENSITIVE: []
     end
 
@@ -579,6 +590,7 @@ module Aws::Firehose
       attr_accessor s3_backup_mode: ("FailedDataOnly" | "AllData")
       attr_accessor retry_options: Types::RetryOptions
       attr_accessor role_arn: ::String
+      attr_accessor append_only: bool
       attr_accessor catalog_configuration: Types::CatalogConfiguration
       attr_accessor s3_configuration: Types::S3DestinationConfiguration
       SENSITIVE: []
@@ -594,6 +606,7 @@ module Aws::Firehose
       attr_accessor s3_backup_mode: ("FailedDataOnly" | "AllData")
       attr_accessor retry_options: Types::RetryOptions
       attr_accessor role_arn: ::String
+      attr_accessor append_only: bool
       attr_accessor catalog_configuration: Types::CatalogConfiguration
       attr_accessor s3_destination_description: Types::S3DestinationDescription
       SENSITIVE: []
@@ -609,6 +622,7 @@ module Aws::Firehose
       attr_accessor s3_backup_mode: ("FailedDataOnly" | "AllData")
       attr_accessor retry_options: Types::RetryOptions
       attr_accessor role_arn: ::String
+      attr_accessor append_only: bool
       attr_accessor catalog_configuration: Types::CatalogConfiguration
       attr_accessor s3_configuration: Types::S3DestinationConfiguration
       SENSITIVE: []
@@ -1031,6 +1045,7 @@ module Aws::Firehose
     end
 
     class SourceDescription
+      attr_accessor direct_put_source_description: Types::DirectPutSourceDescription
       attr_accessor kinesis_stream_source_description: Types::KinesisStreamSourceDescription
       attr_accessor msk_source_description: Types::MSKSourceDescription
       attr_accessor database_source_description: Types::DatabaseSourceDescription

@@ -5030,7 +5030,7 @@ module Aws::EC2
     CreateFleetInstancesSet.member = Shapes::ShapeRef.new(shape: CreateFleetInstance, location_name: "item")
 
     CreateFleetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
-    CreateFleetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken"))
+    CreateFleetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateFleetRequest.add_member(:spot_options, Shapes::ShapeRef.new(shape: SpotOptionsRequest, location_name: "SpotOptions"))
     CreateFleetRequest.add_member(:on_demand_options, Shapes::ShapeRef.new(shape: OnDemandOptionsRequest, location_name: "OnDemandOptions"))
     CreateFleetRequest.add_member(:excess_capacity_termination_policy, Shapes::ShapeRef.new(shape: FleetExcessCapacityTerminationPolicy, location_name: "ExcessCapacityTerminationPolicy"))

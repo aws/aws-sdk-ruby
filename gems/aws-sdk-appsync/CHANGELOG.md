@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.98.0 (2025-01-28)
+------------------
+
+* Feature - Add stash and outErrors to EvaluateCode/EvaluateMappingTemplate response
+
 1.97.0 (2025-01-15)
 ------------------
 

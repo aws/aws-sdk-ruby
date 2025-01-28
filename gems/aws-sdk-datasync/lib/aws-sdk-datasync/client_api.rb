@@ -120,6 +120,7 @@ module Aws::DataSync
     DiscoveryServerPort = Shapes::IntegerShape.new(name: 'DiscoveryServerPort')
     DiscoverySystemType = Shapes::StringShape.new(name: 'DiscoverySystemType')
     DiscoveryTime = Shapes::TimestampShape.new(name: 'DiscoveryTime')
+    DnsIpList = Shapes::ListShape.new(name: 'DnsIpList')
     Duration = Shapes::IntegerShape.new(name: 'Duration')
     Ec2Config = Shapes::StructureShape.new(name: 'Ec2Config')
     Ec2SecurityGroupArn = Shapes::StringShape.new(name: 'Ec2SecurityGroupArn')
@@ -149,7 +150,6 @@ module Aws::DataSync
     FsxProtocolSmb = Shapes::StructureShape.new(name: 'FsxProtocolSmb')
     FsxUpdateProtocol = Shapes::StructureShape.new(name: 'FsxUpdateProtocol')
     FsxUpdateProtocolSmb = Shapes::StructureShape.new(name: 'FsxUpdateProtocolSmb')
-    FsxUpdateSmbDomain = Shapes::StringShape.new(name: 'FsxUpdateSmbDomain')
     FsxWindowsSubdirectory = Shapes::StringShape.new(name: 'FsxWindowsSubdirectory')
     GenerateRecommendationsRequest = Shapes::StructureShape.new(name: 'GenerateRecommendationsRequest')
     GenerateRecommendationsResponse = Shapes::StructureShape.new(name: 'GenerateRecommendationsResponse')
@@ -277,6 +277,8 @@ module Aws::DataSync
     ScheduleStatus = Shapes::StringShape.new(name: 'ScheduleStatus')
     SecretsManagerArn = Shapes::StringShape.new(name: 'SecretsManagerArn')
     ServerHostname = Shapes::StringShape.new(name: 'ServerHostname')
+    ServerIpAddress = Shapes::StringShape.new(name: 'ServerIpAddress')
+    SmbAuthenticationType = Shapes::StringShape.new(name: 'SmbAuthenticationType')
     SmbDomain = Shapes::StringShape.new(name: 'SmbDomain')
     SmbMountOptions = Shapes::StructureShape.new(name: 'SmbMountOptions')
     SmbPassword = Shapes::StringShape.new(name: 'SmbPassword')
@@ -356,6 +358,7 @@ module Aws::DataSync
     UpdateLocationS3Response = Shapes::StructureShape.new(name: 'UpdateLocationS3Response')
     UpdateLocationSmbRequest = Shapes::StructureShape.new(name: 'UpdateLocationSmbRequest')
     UpdateLocationSmbResponse = Shapes::StructureShape.new(name: 'UpdateLocationSmbResponse')
+    UpdateSmbDomain = Shapes::StringShape.new(name: 'UpdateSmbDomain')
     UpdateStorageSystemRequest = Shapes::StructureShape.new(name: 'UpdateStorageSystemRequest')
     UpdateStorageSystemResponse = Shapes::StructureShape.new(name: 'UpdateStorageSystemResponse')
     UpdateTaskExecutionRequest = Shapes::StructureShape.new(name: 'UpdateTaskExecutionRequest')
@@ -539,12 +542,17 @@ module Aws::DataSync
 
     CreateLocationSmbRequest.add_member(:subdirectory, Shapes::ShapeRef.new(shape: SmbSubdirectory, required: true, location_name: "Subdirectory"))
     CreateLocationSmbRequest.add_member(:server_hostname, Shapes::ShapeRef.new(shape: ServerHostname, required: true, location_name: "ServerHostname"))
-    CreateLocationSmbRequest.add_member(:user, Shapes::ShapeRef.new(shape: SmbUser, required: true, location_name: "User"))
+    CreateLocationSmbRequest.add_member(:user, Shapes::ShapeRef.new(shape: SmbUser, location_name: "User"))
     CreateLocationSmbRequest.add_member(:domain, Shapes::ShapeRef.new(shape: SmbDomain, location_name: "Domain"))
-    CreateLocationSmbRequest.add_member(:password, Shapes::ShapeRef.new(shape: SmbPassword, required: true, location_name: "Password"))
+    CreateLocationSmbRequest.add_member(:password, Shapes::ShapeRef.new(shape: SmbPassword, location_name: "Password"))
     CreateLocationSmbRequest.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, required: true, location_name: "AgentArns"))
     CreateLocationSmbRequest.add_member(:mount_options, Shapes::ShapeRef.new(shape: SmbMountOptions, location_name: "MountOptions"))
     CreateLocationSmbRequest.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
+    CreateLocationSmbRequest.add_member(:authentication_type, Shapes::ShapeRef.new(shape: SmbAuthenticationType, location_name: "AuthenticationType"))
+    CreateLocationSmbRequest.add_member(:dns_ip_addresses, Shapes::ShapeRef.new(shape: DnsIpList, location_name: "DnsIpAddresses"))
+    CreateLocationSmbRequest.add_member(:kerberos_principal, Shapes::ShapeRef.new(shape: KerberosPrincipal, location_name: "KerberosPrincipal"))
+    CreateLocationSmbRequest.add_member(:kerberos_keytab, Shapes::ShapeRef.new(shape: KerberosKeytabFile, location_name: "KerberosKeytab"))
+    CreateLocationSmbRequest.add_member(:kerberos_krb_5_conf, Shapes::ShapeRef.new(shape: KerberosKrb5ConfFile, location_name: "KerberosKrb5Conf"))
     CreateLocationSmbRequest.struct_class = Types::CreateLocationSmbRequest
 
     CreateLocationSmbResponse.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
@@ -737,6 +745,9 @@ module Aws::DataSync
     DescribeLocationSmbResponse.add_member(:domain, Shapes::ShapeRef.new(shape: SmbDomain, location_name: "Domain"))
     DescribeLocationSmbResponse.add_member(:mount_options, Shapes::ShapeRef.new(shape: SmbMountOptions, location_name: "MountOptions"))
     DescribeLocationSmbResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
+    DescribeLocationSmbResponse.add_member(:dns_ip_addresses, Shapes::ShapeRef.new(shape: DnsIpList, location_name: "DnsIpAddresses"))
+    DescribeLocationSmbResponse.add_member(:kerberos_principal, Shapes::ShapeRef.new(shape: KerberosPrincipal, location_name: "KerberosPrincipal"))
+    DescribeLocationSmbResponse.add_member(:authentication_type, Shapes::ShapeRef.new(shape: SmbAuthenticationType, location_name: "AuthenticationType"))
     DescribeLocationSmbResponse.struct_class = Types::DescribeLocationSmbResponse
 
     DescribeStorageSystemRequest.add_member(:storage_system_arn, Shapes::ShapeRef.new(shape: StorageSystemArn, required: true, location_name: "StorageSystemArn"))
@@ -847,6 +858,8 @@ module Aws::DataSync
     DiscoveryServerConfiguration.add_member(:server_port, Shapes::ShapeRef.new(shape: DiscoveryServerPort, location_name: "ServerPort"))
     DiscoveryServerConfiguration.struct_class = Types::DiscoveryServerConfiguration
 
+    DnsIpList.member = Shapes::ShapeRef.new(shape: ServerIpAddress)
+
     Ec2Config.add_member(:subnet_arn, Shapes::ShapeRef.new(shape: Ec2SubnetArn, required: true, location_name: "SubnetArn"))
     Ec2Config.add_member(:security_group_arns, Shapes::ShapeRef.new(shape: Ec2SecurityGroupArnList, required: true, location_name: "SecurityGroupArns"))
     Ec2Config.struct_class = Types::Ec2Config
@@ -882,7 +895,7 @@ module Aws::DataSync
     FsxUpdateProtocol.add_member(:smb, Shapes::ShapeRef.new(shape: FsxUpdateProtocolSmb, location_name: "SMB"))
     FsxUpdateProtocol.struct_class = Types::FsxUpdateProtocol
 
-    FsxUpdateProtocolSmb.add_member(:domain, Shapes::ShapeRef.new(shape: FsxUpdateSmbDomain, location_name: "Domain"))
+    FsxUpdateProtocolSmb.add_member(:domain, Shapes::ShapeRef.new(shape: UpdateSmbDomain, location_name: "Domain"))
     FsxUpdateProtocolSmb.add_member(:mount_options, Shapes::ShapeRef.new(shape: SmbMountOptions, location_name: "MountOptions"))
     FsxUpdateProtocolSmb.add_member(:password, Shapes::ShapeRef.new(shape: SmbPassword, location_name: "Password"))
     FsxUpdateProtocolSmb.add_member(:user, Shapes::ShapeRef.new(shape: SmbUser, location_name: "User"))
@@ -1357,7 +1370,7 @@ module Aws::DataSync
 
     UpdateLocationFsxWindowsRequest.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, required: true, location_name: "LocationArn"))
     UpdateLocationFsxWindowsRequest.add_member(:subdirectory, Shapes::ShapeRef.new(shape: FsxWindowsSubdirectory, location_name: "Subdirectory"))
-    UpdateLocationFsxWindowsRequest.add_member(:domain, Shapes::ShapeRef.new(shape: FsxUpdateSmbDomain, location_name: "Domain"))
+    UpdateLocationFsxWindowsRequest.add_member(:domain, Shapes::ShapeRef.new(shape: UpdateSmbDomain, location_name: "Domain"))
     UpdateLocationFsxWindowsRequest.add_member(:user, Shapes::ShapeRef.new(shape: SmbUser, location_name: "User"))
     UpdateLocationFsxWindowsRequest.add_member(:password, Shapes::ShapeRef.new(shape: SmbPassword, location_name: "Password"))
     UpdateLocationFsxWindowsRequest.struct_class = Types::UpdateLocationFsxWindowsRequest
@@ -1416,6 +1429,11 @@ module Aws::DataSync
     UpdateLocationSmbRequest.add_member(:password, Shapes::ShapeRef.new(shape: SmbPassword, location_name: "Password"))
     UpdateLocationSmbRequest.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
     UpdateLocationSmbRequest.add_member(:mount_options, Shapes::ShapeRef.new(shape: SmbMountOptions, location_name: "MountOptions"))
+    UpdateLocationSmbRequest.add_member(:authentication_type, Shapes::ShapeRef.new(shape: SmbAuthenticationType, location_name: "AuthenticationType"))
+    UpdateLocationSmbRequest.add_member(:dns_ip_addresses, Shapes::ShapeRef.new(shape: DnsIpList, location_name: "DnsIpAddresses"))
+    UpdateLocationSmbRequest.add_member(:kerberos_principal, Shapes::ShapeRef.new(shape: KerberosPrincipal, location_name: "KerberosPrincipal"))
+    UpdateLocationSmbRequest.add_member(:kerberos_keytab, Shapes::ShapeRef.new(shape: KerberosKeytabFile, location_name: "KerberosKeytab"))
+    UpdateLocationSmbRequest.add_member(:kerberos_krb_5_conf, Shapes::ShapeRef.new(shape: KerberosKrb5ConfFile, location_name: "KerberosKrb5Conf"))
     UpdateLocationSmbRequest.struct_class = Types::UpdateLocationSmbRequest
 
     UpdateLocationSmbResponse.struct_class = Types::UpdateLocationSmbResponse

@@ -238,6 +238,11 @@ module Aws::DataSync
       attr_accessor agent_arns: ::Array[::String]
       attr_accessor mount_options: Types::SmbMountOptions
       attr_accessor tags: ::Array[Types::TagListEntry]
+      attr_accessor authentication_type: ("NTLM" | "KERBEROS")
+      attr_accessor dns_ip_addresses: ::Array[::String]
+      attr_accessor kerberos_principal: ::String
+      attr_accessor kerberos_keytab: ::String
+      attr_accessor kerberos_krb_5_conf: ::String
       SENSITIVE: [:password]
     end
 
@@ -499,6 +504,9 @@ module Aws::DataSync
       attr_accessor domain: ::String
       attr_accessor mount_options: Types::SmbMountOptions
       attr_accessor creation_time: ::Time
+      attr_accessor dns_ip_addresses: ::Array[::String]
+      attr_accessor kerberos_principal: ::String
+      attr_accessor authentication_type: ("NTLM" | "KERBEROS")
       SENSITIVE: []
     end
 
@@ -1331,6 +1339,11 @@ module Aws::DataSync
       attr_accessor password: ::String
       attr_accessor agent_arns: ::Array[::String]
       attr_accessor mount_options: Types::SmbMountOptions
+      attr_accessor authentication_type: ("NTLM" | "KERBEROS")
+      attr_accessor dns_ip_addresses: ::Array[::String]
+      attr_accessor kerberos_principal: ::String
+      attr_accessor kerberos_keytab: ::String
+      attr_accessor kerberos_krb_5_conf: ::String
       SENSITIVE: [:password]
     end
 

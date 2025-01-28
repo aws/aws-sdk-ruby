@@ -1299,9 +1299,9 @@ module Aws::Deadline
       req.send_request(options)
     end
 
-    # Creates a job. A job is a set of instructions that AWS Deadline Cloud
-    # uses to schedule and run work on available workers. For more
-    # information, see [Deadline Cloud jobs][1].
+    # Creates a job. A job is a set of instructions that Deadline Cloud uses
+    # to schedule and run work on available workers. For more information,
+    # see [Deadline Cloud jobs][1].
     #
     #
     #
@@ -1352,6 +1352,18 @@ module Aws::Deadline
     # @option params [Integer] :max_retries_per_task
     #   The maximum number of retries for each task.
     #
+    # @option params [Integer] :max_worker_count
+    #   The maximum number of worker hosts that can concurrently process a
+    #   job. When the `maxWorkerCount` is reached, no more workers will be
+    #   assigned to process the job, even if the fleets assigned to the job's
+    #   queue has available workers.
+    #
+    #   You can't set the `maxWorkerCount` to 0. If you set it to -1, there
+    #   is no maximum number of workers.
+    #
+    #   If you don't specify the `maxWorkerCount`, Deadline Cloud won't
+    #   throttle the number of workers used to process the job.
+    #
     # @option params [String] :source_job_id
     #   The job ID for the source job.
     #
@@ -1393,6 +1405,7 @@ module Aws::Deadline
     #     target_task_run_status: "READY", # accepts READY, SUSPENDED
     #     max_failed_tasks_count: 1,
     #     max_retries_per_task: 1,
+    #     max_worker_count: 1,
     #     source_job_id: "JobId",
     #   })
     #
@@ -1458,6 +1471,81 @@ module Aws::Deadline
     # @param [Hash] params ({})
     def create_license_endpoint(params = {}, options = {})
       req = build_request(:create_license_endpoint, params)
+      req.send_request(options)
+    end
+
+    # Creates a limit that manages the distribution of shared resources,
+    # such as floating licenses. A limit can throttle work assignments, help
+    # manage workloads, and track current usage. Before you use a limit, you
+    # must associate the limit with one or more queues.
+    #
+    # You must add the `amountRequirementName` to a step in a job template
+    # to declare the limit requirement.
+    #
+    # @option params [String] :client_token
+    #   The unique token which the server uses to recognize retries of the
+    #   same request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :display_name
+    #   The display name of the limit.
+    #
+    #   This field can store any content. Escape or encode this content before
+    #   displaying it on a webpage or any other system that might interpret
+    #   the content of this field.
+    #
+    # @option params [required, String] :amount_requirement_name
+    #   The value that you specify as the `name` in the `amounts` field of the
+    #   `hostRequirements` in a step of a job template to declare the limit
+    #   requirement.
+    #
+    # @option params [required, Integer] :max_count
+    #   The maximum number of resources constrained by this limit. When all of
+    #   the resources are in use, steps that require the limit won't be
+    #   scheduled until the resource is available.
+    #
+    #   The `maxCount` must not be 0. If the value is -1, there is no
+    #   restriction on the number of resources that can be acquired for this
+    #   limit.
+    #
+    # @option params [required, String] :farm_id
+    #   The farm ID of the farm that contains the limit.
+    #
+    # @option params [String] :description
+    #   A description of the limit. A description helps you identify the
+    #   purpose of the limit.
+    #
+    #   This field can store any content. Escape or encode this content before
+    #   displaying it on a webpage or any other system that might interpret
+    #   the content of this field.
+    #
+    # @return [Types::CreateLimitResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateLimitResponse#limit_id #limit_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_limit({
+    #     client_token: "ClientToken",
+    #     display_name: "ResourceName", # required
+    #     amount_requirement_name: "AmountRequirementName", # required
+    #     max_count: 1, # required
+    #     farm_id: "FarmId", # required
+    #     description: "Description",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.limit_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/CreateLimit AWS API Documentation
+    #
+    # @overload create_limit(params = {})
+    # @param [Hash] params ({})
+    def create_limit(params = {}, options = {})
+      req = build_request(:create_limit, params)
       req.send_request(options)
     end
 
@@ -1709,6 +1797,40 @@ module Aws::Deadline
       req.send_request(options)
     end
 
+    # Associates a limit with a particular queue. After the limit is
+    # associated, all workers for jobs that specify the limit associated
+    # with the queue are subject to the limit. You can't associate two
+    # limits with the same `amountRequirementName` to the same queue.
+    #
+    # @option params [required, String] :farm_id
+    #   The unique identifier of the farm that contains the queue and limit to
+    #   associate.
+    #
+    # @option params [required, String] :queue_id
+    #   The unique identifier of the queue to associate with the limit.
+    #
+    # @option params [required, String] :limit_id
+    #   The unique identifier of the limit to associate with the queue.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_queue_limit_association({
+    #     farm_id: "FarmId", # required
+    #     queue_id: "QueueId", # required
+    #     limit_id: "LimitId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/CreateQueueLimitAssociation AWS API Documentation
+    #
+    # @overload create_queue_limit_association(params = {})
+    # @param [Hash] params ({})
+    def create_queue_limit_association(params = {}, options = {})
+      req = build_request(:create_queue_limit_association, params)
+      req.send_request(options)
+    end
+
     # Creates a storage profile that specifies the operating system, file
     # type, and file location of resources used on a farm.
     #
@@ -1926,6 +2048,34 @@ module Aws::Deadline
       req.send_request(options)
     end
 
+    # Removes a limit from the specified farm. Before you delete a limit you
+    # must use the `DeleteQueueLimitAssociation` operation to remove the
+    # association with any queues.
+    #
+    # @option params [required, String] :farm_id
+    #   The unique identifier of the farm that contains the limit to delete.
+    #
+    # @option params [required, String] :limit_id
+    #   The unique identifier of the limit to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_limit({
+    #     farm_id: "FarmId", # required
+    #     limit_id: "LimitId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/DeleteLimit AWS API Documentation
+    #
+    # @overload delete_limit(params = {})
+    # @param [Hash] params ({})
+    def delete_limit(params = {}, options = {})
+      req = build_request(:delete_limit, params)
+      req.send_request(options)
+    end
+
     # Deletes a metered product.
     #
     # @option params [required, String] :license_endpoint_id
@@ -2064,6 +2214,42 @@ module Aws::Deadline
     # @param [Hash] params ({})
     def delete_queue_fleet_association(params = {}, options = {})
       req = build_request(:delete_queue_fleet_association, params)
+      req.send_request(options)
+    end
+
+    # Removes the association between a queue and a limit. You must use the
+    # `UpdateQueueLimitAssociation` operation to set the status to
+    # `STOP_LIMIT_USAGE_AND_COMPLETE_TASKS` or
+    # `STOP_LIMIT_USAGE_AND_CANCEL_TASKS`. The status does not change
+    # immediately. Use the `GetQueueLimitAssociation` operation to see if
+    # the status changed to `STOPPED` before deleting the association.
+    #
+    # @option params [required, String] :farm_id
+    #   The unique identifier of the farm that contains the queue and limit to
+    #   disassociate.
+    #
+    # @option params [required, String] :queue_id
+    #   The unique identifier of the queue to disassociate.
+    #
+    # @option params [required, String] :limit_id
+    #   The unique identifier of the limit to disassociate.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_queue_limit_association({
+    #     farm_id: "FarmId", # required
+    #     queue_id: "QueueId", # required
+    #     limit_id: "LimitId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/DeleteQueueLimitAssociation AWS API Documentation
+    #
+    # @overload delete_queue_limit_association(params = {})
+    # @param [Hash] params ({})
+    def delete_queue_limit_association(params = {}, options = {})
+      req = build_request(:delete_queue_limit_association, params)
       req.send_request(options)
     end
 
@@ -2478,11 +2664,11 @@ module Aws::Deadline
     # @option params [required, String] :farm_id
     #   The farm ID of the farm in the job.
     #
-    # @option params [required, String] :job_id
-    #   The job ID.
-    #
     # @option params [required, String] :queue_id
     #   The queue ID associated with the job.
+    #
+    # @option params [required, String] :job_id
+    #   The job ID.
     #
     # @return [Types::GetJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2506,14 +2692,15 @@ module Aws::Deadline
     #   * {Types::GetJobResponse#parameters #parameters} => Hash&lt;String,Types::JobParameter&gt;
     #   * {Types::GetJobResponse#attachments #attachments} => Types::Attachments
     #   * {Types::GetJobResponse#description #description} => String
+    #   * {Types::GetJobResponse#max_worker_count #max_worker_count} => Integer
     #   * {Types::GetJobResponse#source_job_id #source_job_id} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_job({
     #     farm_id: "FarmId", # required
-    #     job_id: "JobId", # required
     #     queue_id: "QueueId", # required
+    #     job_id: "JobId", # required
     #   })
     #
     # @example Response structure
@@ -2551,6 +2738,7 @@ module Aws::Deadline
     #   resp.attachments.manifests[0].input_manifest_hash #=> String
     #   resp.attachments.file_system #=> String, one of "COPIED", "VIRTUAL"
     #   resp.description #=> String
+    #   resp.max_worker_count #=> Integer
     #   resp.source_job_id #=> String
     #
     #
@@ -2612,6 +2800,58 @@ module Aws::Deadline
     # @param [Hash] params ({})
     def get_license_endpoint(params = {}, options = {})
       req = build_request(:get_license_endpoint, params)
+      req.send_request(options)
+    end
+
+    # Gets information about a specific limit.
+    #
+    # @option params [required, String] :farm_id
+    #   The unique identifier of the farm that contains the limit.
+    #
+    # @option params [required, String] :limit_id
+    #   The unique identifier of the limit to return.
+    #
+    # @return [Types::GetLimitResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLimitResponse#display_name #display_name} => String
+    #   * {Types::GetLimitResponse#amount_requirement_name #amount_requirement_name} => String
+    #   * {Types::GetLimitResponse#max_count #max_count} => Integer
+    #   * {Types::GetLimitResponse#created_at #created_at} => Time
+    #   * {Types::GetLimitResponse#created_by #created_by} => String
+    #   * {Types::GetLimitResponse#updated_at #updated_at} => Time
+    #   * {Types::GetLimitResponse#updated_by #updated_by} => String
+    #   * {Types::GetLimitResponse#farm_id #farm_id} => String
+    #   * {Types::GetLimitResponse#limit_id #limit_id} => String
+    #   * {Types::GetLimitResponse#current_count #current_count} => Integer
+    #   * {Types::GetLimitResponse#description #description} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_limit({
+    #     farm_id: "FarmId", # required
+    #     limit_id: "LimitId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.display_name #=> String
+    #   resp.amount_requirement_name #=> String
+    #   resp.max_count #=> Integer
+    #   resp.created_at #=> Time
+    #   resp.created_by #=> String
+    #   resp.updated_at #=> Time
+    #   resp.updated_by #=> String
+    #   resp.farm_id #=> String
+    #   resp.limit_id #=> String
+    #   resp.current_count #=> Integer
+    #   resp.description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/GetLimit AWS API Documentation
+    #
+    # @overload get_limit(params = {})
+    # @param [Hash] params ({})
+    def get_limit(params = {}, options = {})
+      req = build_request(:get_limit, params)
       req.send_request(options)
     end
 
@@ -2844,6 +3084,61 @@ module Aws::Deadline
       req.send_request(options)
     end
 
+    # Gets information about a specific association between a queue and a
+    # limit.
+    #
+    # @option params [required, String] :farm_id
+    #   The unique identifier of the farm that contains the associated queue
+    #   and limit.
+    #
+    # @option params [required, String] :queue_id
+    #   The unique identifier of the queue associated with the limit.
+    #
+    # @option params [required, String] :limit_id
+    #   The unique identifier of the limit associated with the queue.
+    #
+    # @return [Types::GetQueueLimitAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetQueueLimitAssociationResponse#created_at #created_at} => Time
+    #   * {Types::GetQueueLimitAssociationResponse#created_by #created_by} => String
+    #   * {Types::GetQueueLimitAssociationResponse#updated_at #updated_at} => Time
+    #   * {Types::GetQueueLimitAssociationResponse#updated_by #updated_by} => String
+    #   * {Types::GetQueueLimitAssociationResponse#queue_id #queue_id} => String
+    #   * {Types::GetQueueLimitAssociationResponse#limit_id #limit_id} => String
+    #   * {Types::GetQueueLimitAssociationResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_queue_limit_association({
+    #     farm_id: "FarmId", # required
+    #     queue_id: "QueueId", # required
+    #     limit_id: "LimitId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.created_at #=> Time
+    #   resp.created_by #=> String
+    #   resp.updated_at #=> Time
+    #   resp.updated_by #=> String
+    #   resp.queue_id #=> String
+    #   resp.limit_id #=> String
+    #   resp.status #=> String, one of "ACTIVE", "STOP_LIMIT_USAGE_AND_COMPLETE_TASKS", "STOP_LIMIT_USAGE_AND_CANCEL_TASKS", "STOPPED"
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * queue_limit_association_stopped
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/GetQueueLimitAssociation AWS API Documentation
+    #
+    # @overload get_queue_limit_association(params = {})
+    # @param [Hash] params ({})
+    def get_queue_limit_association(params = {}, options = {})
+      req = build_request(:get_queue_limit_association, params)
+      req.send_request(options)
+    end
+
     # Gets a session.
     #
     # @option params [required, String] :farm_id
@@ -2948,6 +3243,7 @@ module Aws::Deadline
     #   * {Types::GetSessionActionResponse#process_exit_code #process_exit_code} => Integer
     #   * {Types::GetSessionActionResponse#progress_message #progress_message} => String
     #   * {Types::GetSessionActionResponse#definition #definition} => Types::SessionActionDefinition
+    #   * {Types::GetSessionActionResponse#acquired_limits #acquired_limits} => Array&lt;Types::AcquiredLimit&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2979,6 +3275,9 @@ module Aws::Deadline
     #   resp.definition.task_run.parameters["String"].string #=> String
     #   resp.definition.task_run.parameters["String"].path #=> String
     #   resp.definition.sync_input_job_attachments.step_id #=> String
+    #   resp.acquired_limits #=> Array
+    #   resp.acquired_limits[0].limit_id #=> String
+    #   resp.acquired_limits[0].count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/GetSessionAction AWS API Documentation
     #
@@ -3331,9 +3630,9 @@ module Aws::Deadline
     #
     # @return [Types::GetWorkerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetWorkerResponse#worker_id #worker_id} => String
     #   * {Types::GetWorkerResponse#farm_id #farm_id} => String
     #   * {Types::GetWorkerResponse#fleet_id #fleet_id} => String
+    #   * {Types::GetWorkerResponse#worker_id #worker_id} => String
     #   * {Types::GetWorkerResponse#host_properties #host_properties} => Types::HostPropertiesResponse
     #   * {Types::GetWorkerResponse#status #status} => String
     #   * {Types::GetWorkerResponse#log #log} => Types::LogConfiguration
@@ -3352,9 +3651,9 @@ module Aws::Deadline
     #
     # @example Response structure
     #
-    #   resp.worker_id #=> String
     #   resp.farm_id #=> String
     #   resp.fleet_id #=> String
+    #   resp.worker_id #=> String
     #   resp.host_properties.ip_addresses.ip_v4_addresses #=> Array
     #   resp.host_properties.ip_addresses.ip_v4_addresses[0] #=> String
     #   resp.host_properties.ip_addresses.ip_v6_addresses #=> Array
@@ -3913,6 +4212,7 @@ module Aws::Deadline
     #   resp.jobs[0].task_run_status_counts["TaskRunStatus"] #=> Integer
     #   resp.jobs[0].max_failed_tasks_count #=> Integer
     #   resp.jobs[0].max_retries_per_task #=> Integer
+    #   resp.jobs[0].max_worker_count #=> Integer
     #   resp.jobs[0].source_job_id #=> String
     #   resp.next_token #=> String
     #
@@ -3964,6 +4264,57 @@ module Aws::Deadline
     # @param [Hash] params ({})
     def list_license_endpoints(params = {}, options = {})
       req = build_request(:list_license_endpoints, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of limits defined in the specified farm.
+    #
+    # @option params [required, String] :farm_id
+    #   The unique identifier of the farm that contains the limits.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results, or `null` to start from the
+    #   beginning.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of limits to return in each page of results.
+    #
+    # @return [Types::ListLimitsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLimitsResponse#limits #limits} => Array&lt;Types::LimitSummary&gt;
+    #   * {Types::ListLimitsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_limits({
+    #     farm_id: "FarmId", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.limits #=> Array
+    #   resp.limits[0].display_name #=> String
+    #   resp.limits[0].amount_requirement_name #=> String
+    #   resp.limits[0].max_count #=> Integer
+    #   resp.limits[0].created_at #=> Time
+    #   resp.limits[0].created_by #=> String
+    #   resp.limits[0].updated_at #=> Time
+    #   resp.limits[0].updated_by #=> String
+    #   resp.limits[0].farm_id #=> String
+    #   resp.limits[0].limit_id #=> String
+    #   resp.limits[0].current_count #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/ListLimits AWS API Documentation
+    #
+    # @overload list_limits(params = {})
+    # @param [Hash] params ({})
+    def list_limits(params = {}, options = {})
+      req = build_request(:list_limits, params)
       req.send_request(options)
     end
 
@@ -4165,6 +4516,70 @@ module Aws::Deadline
     # @param [Hash] params ({})
     def list_queue_fleet_associations(params = {}, options = {})
       req = build_request(:list_queue_fleet_associations, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of the associations between queues and limits defined in a
+    # farm.
+    #
+    # @option params [required, String] :farm_id
+    #   The unique identifier of the farm that contains the limits and
+    #   associations.
+    #
+    # @option params [String] :queue_id
+    #   Specifies that the operation should return only the queue limit
+    #   associations for the specified queue. If you specify both the
+    #   `queueId` and the `limitId`, only the specified limit is returned if
+    #   it exists.
+    #
+    # @option params [String] :limit_id
+    #   Specifies that the operation should return only the queue limit
+    #   associations for the specified limit. If you specify both the
+    #   `queueId` and the `limitId`, only the specified limit is returned if
+    #   it exists.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results, or `null` to start from the
+    #   beginning.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of associations to return in each page of results.
+    #
+    # @return [Types::ListQueueLimitAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListQueueLimitAssociationsResponse#queue_limit_associations #queue_limit_associations} => Array&lt;Types::QueueLimitAssociationSummary&gt;
+    #   * {Types::ListQueueLimitAssociationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_queue_limit_associations({
+    #     farm_id: "FarmId", # required
+    #     queue_id: "QueueId",
+    #     limit_id: "LimitId",
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.queue_limit_associations #=> Array
+    #   resp.queue_limit_associations[0].created_at #=> Time
+    #   resp.queue_limit_associations[0].created_by #=> String
+    #   resp.queue_limit_associations[0].updated_at #=> Time
+    #   resp.queue_limit_associations[0].updated_by #=> String
+    #   resp.queue_limit_associations[0].queue_id #=> String
+    #   resp.queue_limit_associations[0].limit_id #=> String
+    #   resp.queue_limit_associations[0].status #=> String, one of "ACTIVE", "STOP_LIMIT_USAGE_AND_COMPLETE_TASKS", "STOP_LIMIT_USAGE_AND_CANCEL_TASKS", "STOPPED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/ListQueueLimitAssociations AWS API Documentation
+    #
+    # @overload list_queue_limit_associations(params = {})
+    # @param [Hash] params ({})
+    def list_queue_limit_associations(params = {}, options = {})
+      req = build_request(:list_queue_limit_associations, params)
       req.send_request(options)
     end
 
@@ -5043,6 +5458,7 @@ module Aws::Deadline
     #   resp.jobs[0].job_parameters["String"].float #=> String
     #   resp.jobs[0].job_parameters["String"].string #=> String
     #   resp.jobs[0].job_parameters["String"].path #=> String
+    #   resp.jobs[0].max_worker_count #=> Integer
     #   resp.jobs[0].source_job_id #=> String
     #   resp.next_item_offset #=> Integer
     #   resp.total_results #=> Integer
@@ -5820,15 +6236,6 @@ module Aws::Deadline
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [required, String] :farm_id
-    #   The farm ID of the job to update.
-    #
-    # @option params [required, String] :queue_id
-    #   The queue ID of the job to update.
-    #
-    # @option params [required, String] :job_id
-    #   The job ID to update.
-    #
     # @option params [String] :target_task_run_status
     #   The task status to update the job's tasks to.
     #
@@ -5849,20 +6256,43 @@ module Aws::Deadline
     #   An archived jobs and its steps and tasks are deleted after 120 days.
     #   The job can't be recovered.
     #
+    # @option params [Integer] :max_worker_count
+    #   The maximum number of worker hosts that can concurrently process a
+    #   job. When the `maxWorkerCount` is reached, no more workers will be
+    #   assigned to process the job, even if the fleets assigned to the job's
+    #   queue has available workers.
+    #
+    #   You can't set the `maxWorkerCount` to 0. If you set it to -1, there
+    #   is no maximum number of workers.
+    #
+    #   If you don't specify the `maxWorkerCount`, the default is -1.
+    #
+    #   The maximum number of workers that can process tasks in the job.
+    #
+    # @option params [required, String] :farm_id
+    #   The farm ID of the job to update.
+    #
+    # @option params [required, String] :queue_id
+    #   The queue ID of the job to update.
+    #
+    # @option params [required, String] :job_id
+    #   The job ID to update.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_job({
     #     client_token: "ClientToken",
-    #     farm_id: "FarmId", # required
-    #     queue_id: "QueueId", # required
-    #     job_id: "JobId", # required
     #     target_task_run_status: "READY", # accepts READY, FAILED, SUCCEEDED, CANCELED, SUSPENDED, PENDING
     #     priority: 1,
     #     max_failed_tasks_count: 1,
     #     max_retries_per_task: 1,
     #     lifecycle_status: "ARCHIVED", # accepts ARCHIVED
+    #     max_worker_count: 1,
+    #     farm_id: "FarmId", # required
+    #     queue_id: "QueueId", # required
+    #     job_id: "JobId", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/UpdateJob AWS API Documentation
@@ -5871,6 +6301,62 @@ module Aws::Deadline
     # @param [Hash] params ({})
     def update_job(params = {}, options = {})
       req = build_request(:update_job, params)
+      req.send_request(options)
+    end
+
+    # Updates the properties of the specified limit.
+    #
+    # @option params [required, String] :farm_id
+    #   The unique identifier of the farm that contains the limit.
+    #
+    # @option params [required, String] :limit_id
+    #   The unique identifier of the limit to update.
+    #
+    # @option params [String] :display_name
+    #   The new display name of the limit.
+    #
+    #   This field can store any content. Escape or encode this content before
+    #   displaying it on a webpage or any other system that might interpret
+    #   the content of this field.
+    #
+    # @option params [String] :description
+    #   The new description of the limit.
+    #
+    #   This field can store any content. Escape or encode this content before
+    #   displaying it on a webpage or any other system that might interpret
+    #   the content of this field.
+    #
+    # @option params [Integer] :max_count
+    #   The maximum number of resources constrained by this limit. When all of
+    #   the resources are in use, steps that require the limit won't be
+    #   scheduled until the resource is available.
+    #
+    #   If more than the new maximum number is currently in use, running jobs
+    #   finish but no new jobs are started until the number of resources in
+    #   use is below the new maximum number.
+    #
+    #   The `maxCount` must not be 0. If the value is -1, there is no
+    #   restriction on the number of resources that can be acquired for this
+    #   limit.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_limit({
+    #     farm_id: "FarmId", # required
+    #     limit_id: "LimitId", # required
+    #     display_name: "ResourceName",
+    #     description: "Description",
+    #     max_count: 1,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/UpdateLimit AWS API Documentation
+    #
+    # @overload update_limit(params = {})
+    # @param [Hash] params ({})
+    def update_limit(params = {}, options = {})
+      req = build_request(:update_limit, params)
       req.send_request(options)
     end
 
@@ -6093,6 +6579,45 @@ module Aws::Deadline
       req.send_request(options)
     end
 
+    # Updates the status of the queue. If you set the status to one of the
+    # `STOP_LIMIT_USAGE*` values, there will be a delay before the status
+    # transitions to the `STOPPED` state.
+    #
+    # @option params [required, String] :farm_id
+    #   The unique identifier of the farm that contains the associated queues
+    #   and limits.
+    #
+    # @option params [required, String] :queue_id
+    #   The unique identifier of the queue associated to the limit.
+    #
+    # @option params [required, String] :limit_id
+    #   The unique identifier of the limit associated to the queue.
+    #
+    # @option params [required, String] :status
+    #   Sets the status of the limit. You can mark the limit active, or you
+    #   can stop usage of the limit and either complete existing tasks or
+    #   cancel any existing tasks immediately.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_queue_limit_association({
+    #     farm_id: "FarmId", # required
+    #     queue_id: "QueueId", # required
+    #     limit_id: "LimitId", # required
+    #     status: "ACTIVE", # required, accepts ACTIVE, STOP_LIMIT_USAGE_AND_COMPLETE_TASKS, STOP_LIMIT_USAGE_AND_CANCEL_TASKS
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/UpdateQueueLimitAssociation AWS API Documentation
+    #
+    # @overload update_queue_limit_association(params = {})
+    # @param [Hash] params ({})
+    def update_queue_limit_association(params = {}, options = {})
+      req = build_request(:update_queue_limit_association, params)
+      req.send_request(options)
+    end
+
     # Updates a session.
     #
     # @option params [String] :client_token
@@ -6101,6 +6626,9 @@ module Aws::Deadline
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    # @option params [required, String] :target_lifecycle_status
+    #   The life cycle status to update in the session.
     #
     # @option params [required, String] :farm_id
     #   The farm ID to update in the session.
@@ -6114,20 +6642,17 @@ module Aws::Deadline
     # @option params [required, String] :session_id
     #   The session ID to update.
     #
-    # @option params [required, String] :target_lifecycle_status
-    #   The life cycle status to update in the session.
-    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_session({
     #     client_token: "ClientToken",
+    #     target_lifecycle_status: "ENDED", # required, accepts ENDED
     #     farm_id: "FarmId", # required
     #     queue_id: "QueueId", # required
     #     job_id: "JobId", # required
     #     session_id: "SessionId", # required
-    #     target_lifecycle_status: "ENDED", # required, accepts ENDED
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/UpdateSession AWS API Documentation
@@ -6140,6 +6665,9 @@ module Aws::Deadline
     end
 
     # Updates a step.
+    #
+    # @option params [required, String] :target_task_run_status
+    #   The task status to update the step's tasks to.
     #
     # @option params [String] :client_token
     #   The unique token which the server uses to recognize retries of the
@@ -6160,20 +6688,17 @@ module Aws::Deadline
     # @option params [required, String] :step_id
     #   The step ID to update.
     #
-    # @option params [required, String] :target_task_run_status
-    #   The task status to update the step's tasks to.
-    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_step({
+    #     target_task_run_status: "READY", # required, accepts READY, FAILED, SUCCEEDED, CANCELED, SUSPENDED, PENDING
     #     client_token: "ClientToken",
     #     farm_id: "FarmId", # required
     #     queue_id: "QueueId", # required
     #     job_id: "JobId", # required
     #     step_id: "StepId", # required
-    #     target_task_run_status: "READY", # required, accepts READY, FAILED, SUCCEEDED, CANCELED, SUSPENDED, PENDING
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/UpdateStep AWS API Documentation
@@ -6260,6 +6785,9 @@ module Aws::Deadline
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [required, String] :target_run_status
+    #   The run status with which to start the task.
+    #
     # @option params [required, String] :farm_id
     #   The farm ID to update.
     #
@@ -6275,21 +6803,18 @@ module Aws::Deadline
     # @option params [required, String] :task_id
     #   The task ID to update.
     #
-    # @option params [required, String] :target_run_status
-    #   The run status with which to start the task.
-    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_task({
     #     client_token: "ClientToken",
+    #     target_run_status: "READY", # required, accepts READY, FAILED, SUCCEEDED, CANCELED, SUSPENDED, PENDING
     #     farm_id: "FarmId", # required
     #     queue_id: "QueueId", # required
     #     job_id: "JobId", # required
     #     step_id: "StepId", # required
     #     task_id: "TaskId", # required
-    #     target_run_status: "READY", # required, accepts READY, FAILED, SUCCEEDED, CANCELED, SUSPENDED, PENDING
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/UpdateTask AWS API Documentation
@@ -6469,7 +6994,7 @@ module Aws::Deadline
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-deadline'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -6542,6 +7067,7 @@ module Aws::Deadline
     # | license_endpoint_deleted        | {Client#get_license_endpoint}        | 10       | 234           |
     # | license_endpoint_valid          | {Client#get_license_endpoint}        | 10       | 114           |
     # | queue_fleet_association_stopped | {Client#get_queue_fleet_association} | 10       | 60            |
+    # | queue_limit_association_stopped | {Client#get_queue_limit_association} | 10       | 60            |
     # | queue_scheduling                | {Client#get_queue}                   | 10       | 70            |
     # | queue_scheduling_blocked        | {Client#get_queue}                   | 10       | 30            |
     #
@@ -6599,6 +7125,7 @@ module Aws::Deadline
         license_endpoint_deleted: Waiters::LicenseEndpointDeleted,
         license_endpoint_valid: Waiters::LicenseEndpointValid,
         queue_fleet_association_stopped: Waiters::QueueFleetAssociationStopped,
+        queue_limit_association_stopped: Waiters::QueueLimitAssociationStopped,
         queue_scheduling: Waiters::QueueScheduling,
         queue_scheduling_blocked: Waiters::QueueSchedulingBlocked
       }

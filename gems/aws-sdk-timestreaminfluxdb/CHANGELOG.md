@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2025-01-28)
+------------------
+
+* Feature - Adds 'allocatedStorage' parameter to UpdateDbInstance API that allows increasing the database instance storage size and 'dbStorageType' parameter to UpdateDbInstance API that allows changing the storage type of the database instance
+
 1.17.0 (2025-01-15)
 ------------------
 

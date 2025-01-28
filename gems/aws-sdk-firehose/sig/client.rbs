@@ -86,6 +86,9 @@ module Aws
       def create_delivery_stream: (
                                     delivery_stream_name: ::String,
                                     ?delivery_stream_type: ("DirectPut" | "KinesisStreamAsSource" | "MSKAsSource" | "DatabaseAsSource"),
+                                    ?direct_put_source_configuration: {
+                                      throughput_hint_in_m_bs: ::Integer
+                                    },
                                     ?kinesis_stream_source_configuration: {
                                       kinesis_stream_arn: ::String,
                                       role_arn: ::String
@@ -772,6 +775,7 @@ module Aws
                                         duration_in_seconds: ::Integer?
                                       }?,
                                       role_arn: ::String,
+                                      append_only: bool?,
                                       catalog_configuration: {
                                         catalog_arn: ::String?,
                                         warehouse_location: ::String?
@@ -1608,6 +1612,7 @@ module Aws
                                     duration_in_seconds: ::Integer?
                                   }?,
                                   role_arn: ::String?,
+                                  append_only: bool?,
                                   catalog_configuration: {
                                     catalog_arn: ::String?,
                                     warehouse_location: ::String?

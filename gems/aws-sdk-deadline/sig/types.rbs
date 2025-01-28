@@ -38,6 +38,12 @@ module Aws::Deadline
       SENSITIVE: []
     end
 
+    class AcquiredLimit
+      attr_accessor limit_id: ::String
+      attr_accessor count: ::Integer
+      SENSITIVE: []
+    end
+
     class AssignedEnvironmentEnterSessionActionDefinition
       attr_accessor environment_id: ::String
       SENSITIVE: []
@@ -360,6 +366,7 @@ module Aws::Deadline
       attr_accessor target_task_run_status: ("READY" | "SUSPENDED")
       attr_accessor max_failed_tasks_count: ::Integer
       attr_accessor max_retries_per_task: ::Integer
+      attr_accessor max_worker_count: ::Integer
       attr_accessor source_job_id: ::String
       SENSITIVE: [:template, :parameters]
     end
@@ -380,6 +387,21 @@ module Aws::Deadline
 
     class CreateLicenseEndpointResponse
       attr_accessor license_endpoint_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLimitRequest
+      attr_accessor client_token: ::String
+      attr_accessor display_name: ::String
+      attr_accessor amount_requirement_name: ::String
+      attr_accessor max_count: ::Integer
+      attr_accessor farm_id: ::String
+      attr_accessor description: ::String
+      SENSITIVE: [:description]
+    end
+
+    class CreateLimitResponse
+      attr_accessor limit_id: ::String
       SENSITIVE: []
     end
 
@@ -421,6 +443,16 @@ module Aws::Deadline
     end
 
     class CreateQueueFleetAssociationResponse < Aws::EmptyStructure
+    end
+
+    class CreateQueueLimitAssociationRequest
+      attr_accessor farm_id: ::String
+      attr_accessor queue_id: ::String
+      attr_accessor limit_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateQueueLimitAssociationResponse < Aws::EmptyStructure
     end
 
     class CreateQueueRequest
@@ -532,6 +564,15 @@ module Aws::Deadline
     class DeleteLicenseEndpointResponse < Aws::EmptyStructure
     end
 
+    class DeleteLimitRequest
+      attr_accessor farm_id: ::String
+      attr_accessor limit_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLimitResponse < Aws::EmptyStructure
+    end
+
     class DeleteMeteredProductRequest
       attr_accessor license_endpoint_id: ::String
       attr_accessor product_id: ::String
@@ -567,6 +608,16 @@ module Aws::Deadline
     end
 
     class DeleteQueueFleetAssociationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteQueueLimitAssociationRequest
+      attr_accessor farm_id: ::String
+      attr_accessor queue_id: ::String
+      attr_accessor limit_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteQueueLimitAssociationResponse < Aws::EmptyStructure
     end
 
     class DeleteQueueRequest
@@ -884,8 +935,8 @@ module Aws::Deadline
 
     class GetJobRequest
       attr_accessor farm_id: ::String
-      attr_accessor job_id: ::String
       attr_accessor queue_id: ::String
+      attr_accessor job_id: ::String
       SENSITIVE: []
     end
 
@@ -910,6 +961,7 @@ module Aws::Deadline
       attr_accessor parameters: ::Hash[::String, Types::JobParameter]
       attr_accessor attachments: Types::Attachments
       attr_accessor description: ::String
+      attr_accessor max_worker_count: ::Integer
       attr_accessor source_job_id: ::String
       SENSITIVE: [:parameters, :description]
     end
@@ -928,6 +980,27 @@ module Aws::Deadline
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor security_group_ids: ::Array[::String]
       SENSITIVE: []
+    end
+
+    class GetLimitRequest
+      attr_accessor farm_id: ::String
+      attr_accessor limit_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetLimitResponse
+      attr_accessor display_name: ::String
+      attr_accessor amount_requirement_name: ::String
+      attr_accessor max_count: ::Integer
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      attr_accessor farm_id: ::String
+      attr_accessor limit_id: ::String
+      attr_accessor current_count: ::Integer
+      attr_accessor description: ::String
+      SENSITIVE: [:description]
     end
 
     class GetMonitorRequest
@@ -988,6 +1061,24 @@ module Aws::Deadline
       SENSITIVE: []
     end
 
+    class GetQueueLimitAssociationRequest
+      attr_accessor farm_id: ::String
+      attr_accessor queue_id: ::String
+      attr_accessor limit_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetQueueLimitAssociationResponse
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      attr_accessor queue_id: ::String
+      attr_accessor limit_id: ::String
+      attr_accessor status: ("ACTIVE" | "STOP_LIMIT_USAGE_AND_COMPLETE_TASKS" | "STOP_LIMIT_USAGE_AND_CANCEL_TASKS" | "STOPPED")
+      SENSITIVE: []
+    end
+
     class GetQueueRequest
       attr_accessor farm_id: ::String
       attr_accessor queue_id: ::String
@@ -1033,6 +1124,7 @@ module Aws::Deadline
       attr_accessor process_exit_code: ::Integer
       attr_accessor progress_message: ::String
       attr_accessor definition: Types::SessionActionDefinition
+      attr_accessor acquired_limits: ::Array[Types::AcquiredLimit]
       SENSITIVE: [:progress_message]
     end
 
@@ -1171,9 +1263,9 @@ module Aws::Deadline
     end
 
     class GetWorkerResponse
-      attr_accessor worker_id: ::String
       attr_accessor farm_id: ::String
       attr_accessor fleet_id: ::String
+      attr_accessor worker_id: ::String
       attr_accessor host_properties: Types::HostPropertiesResponse
       attr_accessor status: ("CREATED" | "STARTED" | "STOPPING" | "STOPPED" | "NOT_RESPONDING" | "NOT_COMPATIBLE" | "RUNNING" | "IDLE")
       attr_accessor log: Types::LogConfiguration
@@ -1353,6 +1445,7 @@ module Aws::Deadline
       attr_accessor ended_at: ::Time
       attr_accessor started_at: ::Time
       attr_accessor job_parameters: ::Hash[::String, Types::JobParameter]
+      attr_accessor max_worker_count: ::Integer
       attr_accessor source_job_id: ::String
       SENSITIVE: [:job_parameters]
     end
@@ -1374,6 +1467,7 @@ module Aws::Deadline
       attr_accessor task_run_status_counts: ::Hash[("PENDING" | "READY" | "ASSIGNED" | "STARTING" | "SCHEDULED" | "INTERRUPTING" | "RUNNING" | "SUSPENDED" | "CANCELED" | "FAILED" | "SUCCEEDED" | "NOT_COMPATIBLE"), ::Integer]
       attr_accessor max_failed_tasks_count: ::Integer
       attr_accessor max_retries_per_task: ::Integer
+      attr_accessor max_worker_count: ::Integer
       attr_accessor source_job_id: ::String
       SENSITIVE: []
     end
@@ -1383,6 +1477,20 @@ module Aws::Deadline
       attr_accessor status: ("CREATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "READY" | "NOT_READY")
       attr_accessor status_message: ::String
       attr_accessor vpc_id: ::String
+      SENSITIVE: []
+    end
+
+    class LimitSummary
+      attr_accessor display_name: ::String
+      attr_accessor amount_requirement_name: ::String
+      attr_accessor max_count: ::Integer
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      attr_accessor farm_id: ::String
+      attr_accessor limit_id: ::String
+      attr_accessor current_count: ::Integer
       SENSITIVE: []
     end
 
@@ -1525,6 +1633,19 @@ module Aws::Deadline
       SENSITIVE: []
     end
 
+    class ListLimitsRequest
+      attr_accessor farm_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListLimitsResponse
+      attr_accessor limits: ::Array[Types::LimitSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListMeteredProductsRequest
       attr_accessor license_endpoint_id: ::String
       attr_accessor next_token: ::String
@@ -1575,6 +1696,21 @@ module Aws::Deadline
 
     class ListQueueFleetAssociationsResponse
       attr_accessor queue_fleet_associations: ::Array[Types::QueueFleetAssociationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListQueueLimitAssociationsRequest
+      attr_accessor farm_id: ::String
+      attr_accessor queue_id: ::String
+      attr_accessor limit_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListQueueLimitAssociationsResponse
+      attr_accessor queue_limit_associations: ::Array[Types::QueueLimitAssociationSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -1872,6 +2008,17 @@ module Aws::Deadline
       attr_accessor created_by: ::String
       attr_accessor updated_at: ::Time
       attr_accessor updated_by: ::String
+      SENSITIVE: []
+    end
+
+    class QueueLimitAssociationSummary
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      attr_accessor queue_id: ::String
+      attr_accessor limit_id: ::String
+      attr_accessor status: ("ACTIVE" | "STOP_LIMIT_USAGE_AND_COMPLETE_TASKS" | "STOP_LIMIT_USAGE_AND_CANCEL_TASKS" | "STOPPED")
       SENSITIVE: []
     end
 
@@ -2453,18 +2600,31 @@ module Aws::Deadline
 
     class UpdateJobRequest
       attr_accessor client_token: ::String
-      attr_accessor farm_id: ::String
-      attr_accessor queue_id: ::String
-      attr_accessor job_id: ::String
       attr_accessor target_task_run_status: ("READY" | "FAILED" | "SUCCEEDED" | "CANCELED" | "SUSPENDED" | "PENDING")
       attr_accessor priority: ::Integer
       attr_accessor max_failed_tasks_count: ::Integer
       attr_accessor max_retries_per_task: ::Integer
       attr_accessor lifecycle_status: ("ARCHIVED")
+      attr_accessor max_worker_count: ::Integer
+      attr_accessor farm_id: ::String
+      attr_accessor queue_id: ::String
+      attr_accessor job_id: ::String
       SENSITIVE: []
     end
 
     class UpdateJobResponse < Aws::EmptyStructure
+    end
+
+    class UpdateLimitRequest
+      attr_accessor farm_id: ::String
+      attr_accessor limit_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor max_count: ::Integer
+      SENSITIVE: [:description]
+    end
+
+    class UpdateLimitResponse < Aws::EmptyStructure
     end
 
     class UpdateMonitorRequest
@@ -2503,6 +2663,17 @@ module Aws::Deadline
     class UpdateQueueFleetAssociationResponse < Aws::EmptyStructure
     end
 
+    class UpdateQueueLimitAssociationRequest
+      attr_accessor farm_id: ::String
+      attr_accessor queue_id: ::String
+      attr_accessor limit_id: ::String
+      attr_accessor status: ("ACTIVE" | "STOP_LIMIT_USAGE_AND_COMPLETE_TASKS" | "STOP_LIMIT_USAGE_AND_CANCEL_TASKS")
+      SENSITIVE: []
+    end
+
+    class UpdateQueueLimitAssociationResponse < Aws::EmptyStructure
+    end
+
     class UpdateQueueRequest
       attr_accessor client_token: ::String
       attr_accessor farm_id: ::String
@@ -2525,11 +2696,11 @@ module Aws::Deadline
 
     class UpdateSessionRequest
       attr_accessor client_token: ::String
+      attr_accessor target_lifecycle_status: ("ENDED")
       attr_accessor farm_id: ::String
       attr_accessor queue_id: ::String
       attr_accessor job_id: ::String
       attr_accessor session_id: ::String
-      attr_accessor target_lifecycle_status: ("ENDED")
       SENSITIVE: []
     end
 
@@ -2537,12 +2708,12 @@ module Aws::Deadline
     end
 
     class UpdateStepRequest
+      attr_accessor target_task_run_status: ("READY" | "FAILED" | "SUCCEEDED" | "CANCELED" | "SUSPENDED" | "PENDING")
       attr_accessor client_token: ::String
       attr_accessor farm_id: ::String
       attr_accessor queue_id: ::String
       attr_accessor job_id: ::String
       attr_accessor step_id: ::String
-      attr_accessor target_task_run_status: ("READY" | "FAILED" | "SUCCEEDED" | "CANCELED" | "SUSPENDED" | "PENDING")
       SENSITIVE: []
     end
 
@@ -2565,12 +2736,12 @@ module Aws::Deadline
 
     class UpdateTaskRequest
       attr_accessor client_token: ::String
+      attr_accessor target_run_status: ("READY" | "FAILED" | "SUCCEEDED" | "CANCELED" | "SUSPENDED" | "PENDING")
       attr_accessor farm_id: ::String
       attr_accessor queue_id: ::String
       attr_accessor job_id: ::String
       attr_accessor step_id: ::String
       attr_accessor task_id: ::String
-      attr_accessor target_run_status: ("READY" | "FAILED" | "SUCCEEDED" | "CANCELED" | "SUSPENDED" | "PENDING")
       SENSITIVE: []
     end
 

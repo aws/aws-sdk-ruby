@@ -74,6 +74,7 @@ module Aws::Deadline
   # | license_endpoint_deleted        | {Client#get_license_endpoint}        | 10       | 234           |
   # | license_endpoint_valid          | {Client#get_license_endpoint}        | 10       | 114           |
   # | queue_fleet_association_stopped | {Client#get_queue_fleet_association} | 10       | 60            |
+  # | queue_limit_association_stopped | {Client#get_queue_limit_association} | 10       | 60            |
   # | queue_scheduling                | {Client#get_queue}                   | 10       | 70            |
   # | queue_scheduling_blocked        | {Client#get_queue}                   | 10       | 30            |
   #
@@ -316,6 +317,43 @@ module Aws::Deadline
 
       # @option (see Client#get_queue_fleet_association)
       # @return (see Client#get_queue_fleet_association)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until a QueueLimitAssociation is stopped. Use this after setting the status to STOP_LIMIT_USAGE_AND_COMPLETE_TASKS or STOP_LIMIT_USAGE_AND_CANCEL_TASKS to wait for a QueueLimitAssociation to reach STOPPED
+    class QueueLimitAssociationStopped
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (60)
+      # @option options [Integer] :delay (10)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 60,
+          delay: 10,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_queue_limit_association,
+            acceptors: [{
+              "matcher" => "path",
+              "argument" => "status",
+              "state" => "success",
+              "expected" => "STOPPED"
+            }]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_queue_limit_association)
+      # @return (see Client#get_queue_limit_association)
       def wait(params = {})
         @waiter.wait(client: @client, params: params)
       end

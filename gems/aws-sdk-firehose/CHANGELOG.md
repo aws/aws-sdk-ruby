@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2025-01-28)
+------------------
+
+* Feature - For AppendOnly streams, Firehose will automatically scale to match your throughput.
+
 1.86.0 (2025-01-15)
 ------------------
 

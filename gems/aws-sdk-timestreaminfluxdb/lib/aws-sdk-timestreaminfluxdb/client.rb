@@ -1235,6 +1235,14 @@ module Aws::TimestreamInfluxDB
     #   Specifies whether the DB instance will be deployed as a standalone
     #   instance or with a Multi-AZ standby for high availability.
     #
+    # @option params [String] :db_storage_type
+    #   The Timestream for InfluxDB DB storage type that InfluxDB stores data
+    #   on.
+    #
+    # @option params [Integer] :allocated_storage
+    #   The amount of storage to allocate for your DB storage type (in
+    #   gibibytes).
+    #
     # @return [Types::UpdateDbInstanceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDbInstanceOutput#id #id} => String
@@ -1271,6 +1279,8 @@ module Aws::TimestreamInfluxDB
     #     port: 1,
     #     db_instance_type: "db.influx.medium", # accepts db.influx.medium, db.influx.large, db.influx.xlarge, db.influx.2xlarge, db.influx.4xlarge, db.influx.8xlarge, db.influx.12xlarge, db.influx.16xlarge
     #     deployment_type: "SINGLE_AZ", # accepts SINGLE_AZ, WITH_MULTIAZ_STANDBY
+    #     db_storage_type: "InfluxIOIncludedT1", # accepts InfluxIOIncludedT1, InfluxIOIncludedT2, InfluxIOIncludedT3
+    #     allocated_storage: 1,
     #   })
     #
     # @example Response structure
@@ -1325,7 +1335,7 @@ module Aws::TimestreamInfluxDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-timestreaminfluxdb'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

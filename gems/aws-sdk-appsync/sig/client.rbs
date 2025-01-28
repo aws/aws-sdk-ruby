@@ -573,6 +573,8 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::EvaluateCodeResponse]
         def evaluation_result: () -> ::String
         def logs: () -> ::Array[::String]
+        def stash: () -> ::String
+        def out_errors: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#evaluate_code-instance_method
       def evaluate_code: (
@@ -590,6 +592,8 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::EvaluateMappingTemplateResponse]
         def evaluation_result: () -> ::String
         def logs: () -> ::Array[::String]
+        def stash: () -> ::String
+        def out_errors: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppSync/Client.html#evaluate_mapping_template-instance_method
       def evaluate_mapping_template: (

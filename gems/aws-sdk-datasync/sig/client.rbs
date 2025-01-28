@@ -400,9 +400,9 @@ module Aws
       def create_location_smb: (
                                  subdirectory: ::String,
                                  server_hostname: ::String,
-                                 user: ::String,
+                                 ?user: ::String,
                                  ?domain: ::String,
-                                 password: ::String,
+                                 ?password: ::String,
                                  agent_arns: Array[::String],
                                  ?mount_options: {
                                    version: ("AUTOMATIC" | "SMB2" | "SMB3" | "SMB1" | "SMB2_0")?
@@ -412,7 +412,12 @@ module Aws
                                      key: ::String,
                                      value: ::String?
                                    },
-                                 ]
+                                 ],
+                                 ?authentication_type: ("NTLM" | "KERBEROS"),
+                                 ?dns_ip_addresses: Array[::String],
+                                 ?kerberos_principal: ::String,
+                                 ?kerberos_keytab: ::String,
+                                 ?kerberos_krb_5_conf: ::String
                                ) -> _CreateLocationSmbResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLocationSmbResponseSuccess
 
@@ -732,6 +737,9 @@ module Aws
         def domain: () -> ::String
         def mount_options: () -> Types::SmbMountOptions
         def creation_time: () -> ::Time
+        def dns_ip_addresses: () -> ::Array[::String]
+        def kerberos_principal: () -> ::String
+        def authentication_type: () -> ("NTLM" | "KERBEROS")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#describe_location_smb-instance_method
       def describe_location_smb: (
@@ -1320,7 +1328,12 @@ module Aws
                                  ?agent_arns: Array[::String],
                                  ?mount_options: {
                                    version: ("AUTOMATIC" | "SMB2" | "SMB3" | "SMB1" | "SMB2_0")?
-                                 }
+                                 },
+                                 ?authentication_type: ("NTLM" | "KERBEROS"),
+                                 ?dns_ip_addresses: Array[::String],
+                                 ?kerberos_principal: ::String,
+                                 ?kerberos_keytab: ::String,
+                                 ?kerberos_krb_5_conf: ::String
                                ) -> _UpdateLocationSmbResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLocationSmbResponseSuccess
 

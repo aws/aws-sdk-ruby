@@ -423,6 +423,7 @@ module Aws
                         ?target_task_run_status: ("READY" | "SUSPENDED"),
                         ?max_failed_tasks_count: ::Integer,
                         ?max_retries_per_task: ::Integer,
+                        ?max_worker_count: ::Integer,
                         ?source_job_id: ::String
                       ) -> _CreateJobResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateJobResponseSuccess
@@ -440,6 +441,21 @@ module Aws
                                      ?tags: Hash[::String, ::String]
                                    ) -> _CreateLicenseEndpointResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLicenseEndpointResponseSuccess
+
+      interface _CreateLimitResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLimitResponse]
+        def limit_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#create_limit-instance_method
+      def create_limit: (
+                          ?client_token: ::String,
+                          display_name: ::String,
+                          amount_requirement_name: ::String,
+                          max_count: ::Integer,
+                          farm_id: ::String,
+                          ?description: ::String
+                        ) -> _CreateLimitResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLimitResponseSuccess
 
       interface _CreateMonitorResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateMonitorResponse]
@@ -514,6 +530,17 @@ module Aws
                                             fleet_id: ::String
                                           ) -> _CreateQueueFleetAssociationResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateQueueFleetAssociationResponseSuccess
+
+      interface _CreateQueueLimitAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateQueueLimitAssociationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#create_queue_limit_association-instance_method
+      def create_queue_limit_association: (
+                                            farm_id: ::String,
+                                            queue_id: ::String,
+                                            limit_id: ::String
+                                          ) -> _CreateQueueLimitAssociationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateQueueLimitAssociationResponseSuccess
 
       interface _CreateStorageProfileResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateStorageProfileResponse]
@@ -593,6 +620,16 @@ module Aws
                                    ) -> _DeleteLicenseEndpointResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLicenseEndpointResponseSuccess
 
+      interface _DeleteLimitResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLimitResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#delete_limit-instance_method
+      def delete_limit: (
+                          farm_id: ::String,
+                          limit_id: ::String
+                        ) -> _DeleteLimitResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLimitResponseSuccess
+
       interface _DeleteMeteredProductResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMeteredProductResponse]
       end
@@ -643,6 +680,17 @@ module Aws
                                             fleet_id: ::String
                                           ) -> _DeleteQueueFleetAssociationResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteQueueFleetAssociationResponseSuccess
+
+      interface _DeleteQueueLimitAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteQueueLimitAssociationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#delete_queue_limit_association-instance_method
+      def delete_queue_limit_association: (
+                                            farm_id: ::String,
+                                            queue_id: ::String,
+                                            limit_id: ::String
+                                          ) -> _DeleteQueueLimitAssociationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteQueueLimitAssociationResponseSuccess
 
       interface _DeleteStorageProfileResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteStorageProfileResponse]
@@ -799,13 +847,14 @@ module Aws
         def parameters: () -> ::Hash[::String, Types::JobParameter]
         def attachments: () -> Types::Attachments
         def description: () -> ::String
+        def max_worker_count: () -> ::Integer
         def source_job_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#get_job-instance_method
       def get_job: (
                      farm_id: ::String,
-                     job_id: ::String,
-                     queue_id: ::String
+                     queue_id: ::String,
+                     job_id: ::String
                    ) -> _GetJobResponseSuccess
                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetJobResponseSuccess
 
@@ -824,6 +873,27 @@ module Aws
                                   license_endpoint_id: ::String
                                 ) -> _GetLicenseEndpointResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLicenseEndpointResponseSuccess
+
+      interface _GetLimitResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLimitResponse]
+        def display_name: () -> ::String
+        def amount_requirement_name: () -> ::String
+        def max_count: () -> ::Integer
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+        def farm_id: () -> ::String
+        def limit_id: () -> ::String
+        def current_count: () -> ::Integer
+        def description: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#get_limit-instance_method
+      def get_limit: (
+                       farm_id: ::String,
+                       limit_id: ::String
+                     ) -> _GetLimitResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLimitResponseSuccess
 
       interface _GetMonitorResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetMonitorResponse]
@@ -909,6 +979,24 @@ module Aws
                                        ) -> _GetQueueFleetAssociationResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetQueueFleetAssociationResponseSuccess
 
+      interface _GetQueueLimitAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetQueueLimitAssociationResponse]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+        def queue_id: () -> ::String
+        def limit_id: () -> ::String
+        def status: () -> ("ACTIVE" | "STOP_LIMIT_USAGE_AND_COMPLETE_TASKS" | "STOP_LIMIT_USAGE_AND_CANCEL_TASKS" | "STOPPED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#get_queue_limit_association-instance_method
+      def get_queue_limit_association: (
+                                         farm_id: ::String,
+                                         queue_id: ::String,
+                                         limit_id: ::String
+                                       ) -> _GetQueueLimitAssociationResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetQueueLimitAssociationResponseSuccess
+
       interface _GetSessionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetSessionResponse]
         def session_id: () -> ::String
@@ -945,6 +1033,7 @@ module Aws
         def process_exit_code: () -> ::Integer
         def progress_message: () -> ::String
         def definition: () -> Types::SessionActionDefinition
+        def acquired_limits: () -> ::Array[Types::AcquiredLimit]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#get_session_action-instance_method
       def get_session_action: (
@@ -1060,9 +1149,9 @@ module Aws
 
       interface _GetWorkerResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkerResponse]
-        def worker_id: () -> ::String
         def farm_id: () -> ::String
         def fleet_id: () -> ::String
+        def worker_id: () -> ::String
         def host_properties: () -> Types::HostPropertiesResponse
         def status: () -> ("CREATED" | "STARTED" | "STOPPING" | "STOPPED" | "NOT_RESPONDING" | "NOT_COMPATIBLE" | "RUNNING" | "IDLE")
         def log: () -> Types::LogConfiguration
@@ -1218,6 +1307,19 @@ module Aws
                                   ) -> _ListLicenseEndpointsResponseSuccess
                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLicenseEndpointsResponseSuccess
 
+      interface _ListLimitsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLimitsResponse]
+        def limits: () -> ::Array[Types::LimitSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#list_limits-instance_method
+      def list_limits: (
+                         farm_id: ::String,
+                         ?next_token: ::String,
+                         ?max_results: ::Integer
+                       ) -> _ListLimitsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLimitsResponseSuccess
+
       interface _ListMeteredProductsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListMeteredProductsResponse]
         def metered_products: () -> ::Array[Types::MeteredProductSummary]
@@ -1271,6 +1373,21 @@ module Aws
                                            ?max_results: ::Integer
                                          ) -> _ListQueueFleetAssociationsResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListQueueFleetAssociationsResponseSuccess
+
+      interface _ListQueueLimitAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListQueueLimitAssociationsResponse]
+        def queue_limit_associations: () -> ::Array[Types::QueueLimitAssociationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#list_queue_limit_associations-instance_method
+      def list_queue_limit_associations: (
+                                           farm_id: ::String,
+                                           ?queue_id: ::String,
+                                           ?limit_id: ::String,
+                                           ?next_token: ::String,
+                                           ?max_results: ::Integer
+                                         ) -> _ListQueueLimitAssociationsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListQueueLimitAssociationsResponseSuccess
 
       interface _ListQueueMembersResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListQueueMembersResponse]
@@ -1894,16 +2011,30 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#update_job-instance_method
       def update_job: (
                         ?client_token: ::String,
-                        farm_id: ::String,
-                        queue_id: ::String,
-                        job_id: ::String,
                         ?target_task_run_status: ("READY" | "FAILED" | "SUCCEEDED" | "CANCELED" | "SUSPENDED" | "PENDING"),
                         ?priority: ::Integer,
                         ?max_failed_tasks_count: ::Integer,
                         ?max_retries_per_task: ::Integer,
-                        ?lifecycle_status: ("ARCHIVED")
+                        ?lifecycle_status: ("ARCHIVED"),
+                        ?max_worker_count: ::Integer,
+                        farm_id: ::String,
+                        queue_id: ::String,
+                        job_id: ::String
                       ) -> _UpdateJobResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateJobResponseSuccess
+
+      interface _UpdateLimitResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLimitResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#update_limit-instance_method
+      def update_limit: (
+                          farm_id: ::String,
+                          limit_id: ::String,
+                          ?display_name: ::String,
+                          ?description: ::String,
+                          ?max_count: ::Integer
+                        ) -> _UpdateLimitResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLimitResponseSuccess
 
       interface _UpdateMonitorResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMonitorResponse]
@@ -1978,17 +2109,29 @@ module Aws
                                           ) -> _UpdateQueueFleetAssociationResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateQueueFleetAssociationResponseSuccess
 
+      interface _UpdateQueueLimitAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateQueueLimitAssociationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#update_queue_limit_association-instance_method
+      def update_queue_limit_association: (
+                                            farm_id: ::String,
+                                            queue_id: ::String,
+                                            limit_id: ::String,
+                                            status: ("ACTIVE" | "STOP_LIMIT_USAGE_AND_COMPLETE_TASKS" | "STOP_LIMIT_USAGE_AND_CANCEL_TASKS")
+                                          ) -> _UpdateQueueLimitAssociationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateQueueLimitAssociationResponseSuccess
+
       interface _UpdateSessionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSessionResponse]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#update_session-instance_method
       def update_session: (
                             ?client_token: ::String,
+                            target_lifecycle_status: ("ENDED"),
                             farm_id: ::String,
                             queue_id: ::String,
                             job_id: ::String,
-                            session_id: ::String,
-                            target_lifecycle_status: ("ENDED")
+                            session_id: ::String
                           ) -> _UpdateSessionResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSessionResponseSuccess
 
@@ -1997,12 +2140,12 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#update_step-instance_method
       def update_step: (
+                         target_task_run_status: ("READY" | "FAILED" | "SUCCEEDED" | "CANCELED" | "SUSPENDED" | "PENDING"),
                          ?client_token: ::String,
                          farm_id: ::String,
                          queue_id: ::String,
                          job_id: ::String,
-                         step_id: ::String,
-                         target_task_run_status: ("READY" | "FAILED" | "SUCCEEDED" | "CANCELED" | "SUSPENDED" | "PENDING")
+                         step_id: ::String
                        ) -> _UpdateStepResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStepResponseSuccess
 
@@ -2039,12 +2182,12 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#update_task-instance_method
       def update_task: (
                          ?client_token: ::String,
+                         target_run_status: ("READY" | "FAILED" | "SUCCEEDED" | "CANCELED" | "SUSPENDED" | "PENDING"),
                          farm_id: ::String,
                          queue_id: ::String,
                          job_id: ::String,
                          step_id: ::String,
-                         task_id: ::String,
-                         target_run_status: ("READY" | "FAILED" | "SUCCEEDED" | "CANCELED" | "SUSPENDED" | "PENDING")
+                         task_id: ::String
                        ) -> _UpdateTaskResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTaskResponseSuccess
 
@@ -2114,8 +2257,8 @@ module Aws
                     | (:fleet_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetFleetResponseSuccess
                     | (:job_create_complete waiter_name, 
                     farm_id: ::String,
-                    job_id: ::String,
-                    queue_id: ::String
+                    queue_id: ::String,
+                    job_id: ::String
                   ) -> Client::_GetJobResponseSuccess
                     | (:job_create_complete waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetJobResponseSuccess
                     | (:license_endpoint_deleted waiter_name, 
@@ -2132,6 +2275,12 @@ module Aws
                     fleet_id: ::String
                   ) -> Client::_GetQueueFleetAssociationResponseSuccess
                     | (:queue_fleet_association_stopped waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetQueueFleetAssociationResponseSuccess
+                    | (:queue_limit_association_stopped waiter_name, 
+                    farm_id: ::String,
+                    queue_id: ::String,
+                    limit_id: ::String
+                  ) -> Client::_GetQueueLimitAssociationResponseSuccess
+                    | (:queue_limit_association_stopped waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetQueueLimitAssociationResponseSuccess
                     | (:queue_scheduling waiter_name, 
                     farm_id: ::String,
                     queue_id: ::String

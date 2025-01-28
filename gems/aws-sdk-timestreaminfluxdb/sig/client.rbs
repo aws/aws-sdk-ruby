@@ -357,7 +357,9 @@ module Aws
                                 ?db_parameter_group_identifier: ::String,
                                 ?port: ::Integer,
                                 ?db_instance_type: ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge"),
-                                ?deployment_type: ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY")
+                                ?deployment_type: ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY"),
+                                ?db_storage_type: ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3"),
+                                ?allocated_storage: ::Integer
                               ) -> _UpdateDbInstanceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDbInstanceResponseSuccess
     end

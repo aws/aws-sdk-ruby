@@ -2073,6 +2073,8 @@ module Aws::AppSync
     #   * {Types::EvaluateCodeResponse#evaluation_result #evaluation_result} => String
     #   * {Types::EvaluateCodeResponse#error #error} => Types::EvaluateCodeErrorDetail
     #   * {Types::EvaluateCodeResponse#logs #logs} => Array&lt;String&gt;
+    #   * {Types::EvaluateCodeResponse#stash #stash} => String
+    #   * {Types::EvaluateCodeResponse#out_errors #out_errors} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2098,6 +2100,8 @@ module Aws::AppSync
     #   resp.error.code_errors[0].location.span #=> Integer
     #   resp.logs #=> Array
     #   resp.logs[0] #=> String
+    #   resp.stash #=> String
+    #   resp.out_errors #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/EvaluateCode AWS API Documentation
     #
@@ -2132,6 +2136,8 @@ module Aws::AppSync
     #   * {Types::EvaluateMappingTemplateResponse#evaluation_result #evaluation_result} => String
     #   * {Types::EvaluateMappingTemplateResponse#error #error} => Types::ErrorDetail
     #   * {Types::EvaluateMappingTemplateResponse#logs #logs} => Array&lt;String&gt;
+    #   * {Types::EvaluateMappingTemplateResponse#stash #stash} => String
+    #   * {Types::EvaluateMappingTemplateResponse#out_errors #out_errors} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2146,6 +2152,8 @@ module Aws::AppSync
     #   resp.error.message #=> String
     #   resp.logs #=> Array
     #   resp.logs[0] #=> String
+    #   resp.stash #=> String
+    #   resp.out_errors #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/EvaluateMappingTemplate AWS API Documentation
     #
@@ -5003,7 +5011,7 @@ module Aws::AppSync
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.97.0'
+      context[:gem_version] = '1.98.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -361,6 +361,8 @@ module Aws::TimestreamInfluxDB
     UpdateDbInstanceInput.add_member(:port, Shapes::ShapeRef.new(shape: Port, location_name: "port"))
     UpdateDbInstanceInput.add_member(:db_instance_type, Shapes::ShapeRef.new(shape: DbInstanceType, location_name: "dbInstanceType"))
     UpdateDbInstanceInput.add_member(:deployment_type, Shapes::ShapeRef.new(shape: DeploymentType, location_name: "deploymentType"))
+    UpdateDbInstanceInput.add_member(:db_storage_type, Shapes::ShapeRef.new(shape: DbStorageType, location_name: "dbStorageType"))
+    UpdateDbInstanceInput.add_member(:allocated_storage, Shapes::ShapeRef.new(shape: AllocatedStorage, location_name: "allocatedStorage"))
     UpdateDbInstanceInput.struct_class = Types::UpdateDbInstanceInput
 
     UpdateDbInstanceOutput.add_member(:id, Shapes::ShapeRef.new(shape: DbInstanceId, required: true, location_name: "id"))
