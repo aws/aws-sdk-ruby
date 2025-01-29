@@ -113,7 +113,7 @@ module Aws
               signing_algorithm: scheme_name.to_sym,
               uri_escape_path: !!!auth_scheme['disableDoubleEncoding'],
               normalize_path: !!!auth_scheme['disableNormalizePath'],
-              unsigned_headers: %w[content-length user-agent x-amzn-trace-id]
+              unsigned_headers: %w[content-length user-agent x-amzn-trace-id expect transfer-encoding connection]
             )
           rescue Aws::Sigv4::Errors::MissingCredentialsError
             raise Aws::Errors::MissingCredentialsError

@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Add `transfer-encoding` and `connection` to list of unsigned sigv4 headers.
+
 3.217.0 (2025-01-24)
 ------------------
 
