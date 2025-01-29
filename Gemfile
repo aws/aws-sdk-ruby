@@ -6,6 +6,7 @@ gem 'rake', require: false
 # SDK feature dependencies
 gem 'aws-crt' if ENV['CRT']
 gem 'base64'
+gem 'bigdecimal'
 gem 'http-2'
 gem 'jmespath'
 if defined?(JRUBY_VERSION)

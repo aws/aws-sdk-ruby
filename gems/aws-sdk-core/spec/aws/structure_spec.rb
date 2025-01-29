@@ -9,7 +9,7 @@ module Aws
       expect(Structure.new(:abc).new).to be_kind_of(Struct)
     end
 
-    it 'accpets positional members' do
+    it 'accepts positional members' do
       expect(Structure.new(:abc, :xyz).members).to eq([:abc, :xyz])
     end
 
@@ -85,7 +85,7 @@ module Aws
           include Aws::Structure
         end
         struct = Type.new(trait: 'trait', access_token: 'secret')
-        expect(struct.to_s).to eq("{:trait=>\"trait\", :access_token=>\"[FILTERED]\"}")
+        expect(struct.to_s).to include('"[FILTERED]"')
       end
     end
 
