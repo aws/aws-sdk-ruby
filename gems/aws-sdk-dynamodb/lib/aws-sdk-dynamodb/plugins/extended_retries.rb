@@ -5,7 +5,7 @@ module Aws
     module Plugins
       class ExtendedRetries < Seahorse::Client::Plugin
         DEFAULT_BACKOFF = lambda do |c|
-          return if c.retries < 1
+          return unless c.retries > 1
 
           delay = 2**(c.retries - 1) * c.config.retry_base_delay
           if (c.config.retry_max_delay || 0) > 0
