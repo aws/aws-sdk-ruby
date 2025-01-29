@@ -12,11 +12,10 @@ module Aws
             delay = [delay, c.config.retry_max_delay].min
           end
           jitter = c.config.retry_jitter
-          jitter = JITTERS[jitter] if jitter.is_a?(Symbol)
+          jitter = Aws::Plugins::RetryErrors::JITTERS[jitter] if jitter.is_a?(Symbol)
           delay = jitter.call(delay) if jitter
           Kernel.sleep(delay)
         end
-
 
         option(
           :retry_limit,
