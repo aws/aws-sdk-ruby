@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Allow other retry configs to influence DynamoDB extended retries.
+
 1.134.0 (2025-01-15)
 ------------------
 
