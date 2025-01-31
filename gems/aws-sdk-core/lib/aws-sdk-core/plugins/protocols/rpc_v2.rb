@@ -7,7 +7,7 @@ module Aws
 
         option(:protocol, 'smithy-rpc-v2-cbor')
 
-        option(:one_pass_serde, true, docstring: 'When true, use one pass serde which avoid intermediate hash use')
+        option(:one_pass_serde, false, docstring: 'When true, use one pass serde which avoid intermediate hash use')
 
         handler(Aws::RpcV2::Handler)
         handler(Aws::RpcV2::ContentTypeHandler, priority: 30)
