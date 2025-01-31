@@ -4,6 +4,7 @@ require_relative 'spec_helper'
 require_relative 'protocol_tests_spec_helper'
 
 ProtocolTestsHelper.fixtures.each do |protocol, files|
+
   describe "Protocol: #{protocol}" do
     ProtocolTestsHelper.engines_for(protocol).each do |engine|
 

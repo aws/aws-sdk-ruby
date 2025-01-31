@@ -7,6 +7,9 @@ module Aws
       # @return [Seahorse::Client::Response]
       def call(context)
         thread = Thread.current
+        thread[:cbor_ser_data] ||= []
+        thread[:cbor_deser_data] ||= []
+
         thread[:cbor_ser_data] << Aws::Util.benchmark do
           build_request(context)
         end
@@ -41,7 +44,11 @@ module Aws
       end
 
       def build_body(context)
-        Builder.new(context.operation.input).serialize(context.params)
+        if context.config.one_pass_serde
+          OnePassBuilder.new(context.operation.input).serialize(context.params)
+        else
+          Builder.new(context.operation.input).serialize(context.params)
+        end
       end
 
       def parse_body(context)

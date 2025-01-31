@@ -50,7 +50,9 @@ module Aws
         self
       end
 
-      private
+      # TODO: one pass serialization requires us to expose a lot more methods
+      # For testing just expose everything.
+      # private
 
       MAJOR_TYPE_UNSIGNED_INT = 0x00 # 000_00000 - Major Type 0 - unsigned int
       MAJOR_TYPE_NEGATIVE_INT = 0x20 # 001_00000 - Major Type 1 - negative int
