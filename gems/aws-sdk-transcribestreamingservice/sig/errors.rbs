@@ -11,6 +11,9 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
     end
   end
 end

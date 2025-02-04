@@ -109,6 +109,55 @@ module Aws::MailManager
       include Aws::Structure
     end
 
+    # Filtering options for ListMembersOfAddressList operation.
+    #
+    # @!attribute [rw] address_prefix
+    #   Filter to limit the results to addresses having the provided prefix.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/AddressFilter AWS API Documentation
+    #
+    class AddressFilter < Struct.new(
+      :address_prefix)
+      SENSITIVE = [:address_prefix]
+      include Aws::Structure
+    end
+
+    # An address list contains a list of emails and domains that are used in
+    # MailManager Ingress endpoints and Rules for email management.
+    #
+    # @!attribute [rw] address_list_arn
+    #   The Amazon Resource Name (ARN) of the address list.
+    #   @return [String]
+    #
+    # @!attribute [rw] address_list_id
+    #   The identifier of the address list.
+    #   @return [String]
+    #
+    # @!attribute [rw] address_list_name
+    #   The user-friendly name of the address list.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The timestamp of when the address list was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_timestamp
+    #   The timestamp of when the address list was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/AddressList AWS API Documentation
+    #
+    class AddressList < Struct.new(
+      :address_list_arn,
+      :address_list_id,
+      :address_list_name,
+      :created_timestamp,
+      :last_updated_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The result of an analysis can be used in conditions to trigger
     # actions. Analyses can inspect the email content and report a certain
     # aspect of the email.
@@ -447,6 +496,95 @@ module Aws::MailManager
       include Aws::Structure
     end
 
+    # @!attribute [rw] address_list_id
+    #   The unique identifier of the address list for importing addresses
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique token that Amazon SES uses to recognize subsequent retries
+    #   of the same request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_data_format
+    #   The format of the input for an import job.
+    #   @return [Types::ImportDataFormat]
+    #
+    # @!attribute [rw] name
+    #   A user-friendly name for the import job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/CreateAddressListImportJobRequest AWS API Documentation
+    #
+    class CreateAddressListImportJobRequest < Struct.new(
+      :address_list_id,
+      :client_token,
+      :import_data_format,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The identifier of the created import job.
+    #   @return [String]
+    #
+    # @!attribute [rw] pre_signed_url
+    #   The pre-signed URL target for uploading the input file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/CreateAddressListImportJobResponse AWS API Documentation
+    #
+    class CreateAddressListImportJobResponse < Struct.new(
+      :job_id,
+      :pre_signed_url)
+      SENSITIVE = [:pre_signed_url]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] address_list_name
+    #   A user-friendly name for the address list.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique token that Amazon SES uses to recognize subsequent retries
+    #   of the same request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for the
+    #   resource. For example, \{ "tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/CreateAddressListRequest AWS API Documentation
+    #
+    class CreateAddressListRequest < Struct.new(
+      :address_list_name,
+      :client_token,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] address_list_id
+    #   The identifier of the created address list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/CreateAddressListResponse AWS API Documentation
+    #
+    class CreateAddressListResponse < Struct.new(
+      :address_list_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request to create a new email archive.
     #
     # @!attribute [rw] archive_name
@@ -757,6 +895,22 @@ module Aws::MailManager
     #
     class DeleteAddonSubscriptionResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] address_list_id
+    #   The identifier of an existing address list resource to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/DeleteAddressListRequest AWS API Documentation
+    #
+    class DeleteAddressListRequest < Struct.new(
+      :address_list_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/DeleteAddressListResponse AWS API Documentation
+    #
+    class DeleteAddressListResponse < Aws::EmptyStructure; end
+
     # The request to initiate deletion of an email archive.
     #
     # @!attribute [rw] archive_id
@@ -912,6 +1066,28 @@ module Aws::MailManager
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] address
+    #   The address to be removed from the address list.
+    #   @return [String]
+    #
+    # @!attribute [rw] address_list_id
+    #   The unique identifier of the address list to remove the address
+    #   from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/DeregisterMemberFromAddressListRequest AWS API Documentation
+    #
+    class DeregisterMemberFromAddressListRequest < Struct.new(
+      :address,
+      :address_list_id)
+      SENSITIVE = [:address]
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/DeregisterMemberFromAddressListResponse AWS API Documentation
+    #
+    class DeregisterMemberFromAddressListResponse < Aws::EmptyStructure; end
 
     # This action causes processing to stop and the email to be dropped. If
     # the action applies only to certain recipients, only those recipients
@@ -1089,6 +1265,132 @@ module Aws::MailManager
       :addon_name,
       :addon_subscription_arn,
       :created_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The identifier of the import job that needs to be retrieved.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/GetAddressListImportJobRequest AWS API Documentation
+    #
+    class GetAddressListImportJobRequest < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] address_list_id
+    #   The unique identifier of the address list the import job was created
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] completed_timestamp
+    #   The timestamp of when the import job was completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The timestamp of when the import job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] error
+    #   The reason for failure of an import job.
+    #   @return [String]
+    #
+    # @!attribute [rw] failed_items_count
+    #   The number of input addresses that failed to be imported into the
+    #   address list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] import_data_format
+    #   The format of the input for an import job.
+    #   @return [Types::ImportDataFormat]
+    #
+    # @!attribute [rw] imported_items_count
+    #   The number of input addresses successfully imported into the address
+    #   list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] job_id
+    #   The identifier of the import job.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A user-friendly name for the import job.
+    #   @return [String]
+    #
+    # @!attribute [rw] pre_signed_url
+    #   The pre-signed URL target for uploading the input file.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_timestamp
+    #   The timestamp of when the import job was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the import job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/GetAddressListImportJobResponse AWS API Documentation
+    #
+    class GetAddressListImportJobResponse < Struct.new(
+      :address_list_id,
+      :completed_timestamp,
+      :created_timestamp,
+      :error,
+      :failed_items_count,
+      :import_data_format,
+      :imported_items_count,
+      :job_id,
+      :name,
+      :pre_signed_url,
+      :start_timestamp,
+      :status)
+      SENSITIVE = [:pre_signed_url]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] address_list_id
+    #   The identifier of an existing address list resource to be retrieved.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/GetAddressListRequest AWS API Documentation
+    #
+    class GetAddressListRequest < Struct.new(
+      :address_list_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] address_list_arn
+    #   The Amazon Resource Name (ARN) of the address list resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] address_list_id
+    #   The identifier of the address list resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] address_list_name
+    #   A user-friendly name for the address list resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The date of when then address list was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_timestamp
+    #   The date of when the address list was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/GetAddressListResponse AWS API Documentation
+    #
+    class GetAddressListResponse < Struct.new(
+      :address_list_arn,
+      :address_list_id,
+      :address_list_name,
+      :created_timestamp,
+      :last_updated_timestamp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1451,6 +1753,41 @@ module Aws::MailManager
       include Aws::Structure
     end
 
+    # @!attribute [rw] address
+    #   The address to be retrieved from the address list.
+    #   @return [String]
+    #
+    # @!attribute [rw] address_list_id
+    #   The unique identifier of the address list to retrieve the address
+    #   from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/GetMemberOfAddressListRequest AWS API Documentation
+    #
+    class GetMemberOfAddressListRequest < Struct.new(
+      :address,
+      :address_list_id)
+      SENSITIVE = [:address]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] address
+    #   The address retrieved from the address list.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The timestamp of when the address was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/GetMemberOfAddressListResponse AWS API Documentation
+    #
+    class GetMemberOfAddressListResponse < Struct.new(
+      :address,
+      :created_timestamp)
+      SENSITIVE = [:address]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] relay_id
     #   A unique relay identifier.
     #   @return [String]
@@ -1620,6 +1957,94 @@ module Aws::MailManager
       include Aws::Structure
     end
 
+    # The import data format contains the specifications of the input file
+    # that would be passed to the address list import job.
+    #
+    # @!attribute [rw] import_data_type
+    #   The type of file that would be passed as an input for the address
+    #   list import job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/ImportDataFormat AWS API Documentation
+    #
+    class ImportDataFormat < Struct.new(
+      :import_data_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about an import job.
+    #
+    # @!attribute [rw] address_list_id
+    #   The unique identifier of the address list the import job was created
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] completed_timestamp
+    #   The timestamp of when the import job was completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The timestamp of when the import job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] error
+    #   The reason for failure of an import job.
+    #   @return [String]
+    #
+    # @!attribute [rw] failed_items_count
+    #   The number of addresses in the input that failed to get imported
+    #   into address list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] import_data_format
+    #   The format of the input for the import job.
+    #   @return [Types::ImportDataFormat]
+    #
+    # @!attribute [rw] imported_items_count
+    #   The number of addresses in the input that were successfully imported
+    #   into the address list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] job_id
+    #   The identifier of the import job.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A user-friendly name for the import job.
+    #   @return [String]
+    #
+    # @!attribute [rw] pre_signed_url
+    #   The pre-signed URL target for uploading the input file.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_timestamp
+    #   The timestamp of when the import job was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the import job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/ImportJob AWS API Documentation
+    #
+    class ImportJob < Struct.new(
+      :address_list_id,
+      :completed_timestamp,
+      :created_timestamp,
+      :error,
+      :failed_items_count,
+      :import_data_format,
+      :imported_items_count,
+      :job_id,
+      :name,
+      :pre_signed_url,
+      :start_timestamp,
+      :status)
+      SENSITIVE = [:pre_signed_url]
+      include Aws::Structure
+    end
+
     # The Add On ARN and its returned value that is evaluated in a policy
     # statement's conditional expression to either deny or block the
     # incoming email.
@@ -1672,16 +2097,23 @@ module Aws::MailManager
     #   and its returned value.
     #   @return [Types::IngressAnalysis]
     #
+    # @!attribute [rw] is_in_address_list
+    #   The structure type for a boolean condition that provides the address
+    #   lists to evaluate incoming traffic on.
+    #   @return [Types::IngressIsInAddressList]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/IngressBooleanToEvaluate AWS API Documentation
     #
     class IngressBooleanToEvaluate < Struct.new(
       :analysis,
+      :is_in_address_list,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class Analysis < IngressBooleanToEvaluate; end
+      class IsInAddressList < IngressBooleanToEvaluate; end
       class Unknown < IngressBooleanToEvaluate; end
     end
 
@@ -1730,6 +2162,28 @@ module Aws::MailManager
       :evaluate,
       :operator,
       :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The address lists and the address list attribute value that is
+    # evaluated in a policy statement's conditional expression to either
+    # deny or block the incoming email.
+    #
+    # @!attribute [rw] address_lists
+    #   The address lists that will be used for evaluation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] attribute
+    #   The email attribute that needs to be evaluated against the address
+    #   list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/IngressIsInAddressList AWS API Documentation
+    #
+    class IngressIsInAddressList < Struct.new(
+      :address_lists,
+      :attribute)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2022,6 +2476,90 @@ module Aws::MailManager
       include Aws::Structure
     end
 
+    # @!attribute [rw] address_list_id
+    #   The unique identifier of the address list for listing import jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If you received a pagination token from a previous call to this API,
+    #   you can provide it here to continue paginating through the next page
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The maximum number of import jobs that are returned per call. You
+    #   can use NextToken to retrieve the next page of jobs.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/ListAddressListImportJobsRequest AWS API Documentation
+    #
+    class ListAddressListImportJobsRequest < Struct.new(
+      :address_list_id,
+      :next_token,
+      :page_size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] import_jobs
+    #   The list of import jobs.
+    #   @return [Array<Types::ImportJob>]
+    #
+    # @!attribute [rw] next_token
+    #   If NextToken is returned, there are more results available. The
+    #   value of NextToken is a unique pagination token for each page. Make
+    #   the call again using the returned token to retrieve the next page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/ListAddressListImportJobsResponse AWS API Documentation
+    #
+    class ListAddressListImportJobsResponse < Struct.new(
+      :import_jobs,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If you received a pagination token from a previous call to this API,
+    #   you can provide it here to continue paginating through the next page
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The maximum number of address list resources that are returned per
+    #   call. You can use NextToken to retrieve the next page of address
+    #   lists.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/ListAddressListsRequest AWS API Documentation
+    #
+    class ListAddressListsRequest < Struct.new(
+      :next_token,
+      :page_size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] address_lists
+    #   The list of address lists.
+    #   @return [Array<Types::AddressList>]
+    #
+    # @!attribute [rw] next_token
+    #   If NextToken is returned, there are more results available. The
+    #   value of NextToken is a unique pagination token for each page. Make
+    #   the call again using the returned token to retrieve the next page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/ListAddressListsResponse AWS API Documentation
+    #
+    class ListAddressListsResponse < Struct.new(
+      :address_lists,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request to list archive export jobs in your account.
     #
     # @!attribute [rw] archive_id
@@ -2191,6 +2729,56 @@ module Aws::MailManager
     #
     class ListIngressPointsResponse < Struct.new(
       :ingress_points,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] address_list_id
+    #   The unique identifier of the address list to list the addresses
+    #   from.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   Filter to be used to limit the results.
+    #   @return [Types::AddressFilter]
+    #
+    # @!attribute [rw] next_token
+    #   If you received a pagination token from a previous call to this API,
+    #   you can provide it here to continue paginating through the next page
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The maximum number of address list members that are returned per
+    #   call. You can use NextToken to retrieve the next page of members.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/ListMembersOfAddressListRequest AWS API Documentation
+    #
+    class ListMembersOfAddressListRequest < Struct.new(
+      :address_list_id,
+      :filter,
+      :next_token,
+      :page_size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] addresses
+    #   The list of addresses.
+    #   @return [Array<Types::SavedAddress>]
+    #
+    # @!attribute [rw] next_token
+    #   If NextToken is returned, there are more results available. The
+    #   value of NextToken is a unique pagination token for each page. Make
+    #   the call again using the returned token to retrieve the next page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/ListMembersOfAddressListResponse AWS API Documentation
+    #
+    class ListMembersOfAddressListResponse < Struct.new(
+      :addresses,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -2494,6 +3082,28 @@ module Aws::MailManager
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] address
+    #   The address to be added to the address list.
+    #   @return [String]
+    #
+    # @!attribute [rw] address_list_id
+    #   The unique identifier of the address list where the address should
+    #   be added.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/RegisterMemberToAddressListRequest AWS API Documentation
+    #
+    class RegisterMemberToAddressListRequest < Struct.new(
+      :address,
+      :address_list_id)
+      SENSITIVE = [:address]
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/RegisterMemberToAddressListResponse AWS API Documentation
+    #
+    class RegisterMemberToAddressListResponse < Aws::EmptyStructure; end
 
     # The relay resource that can be used as a rule to relay receiving
     # emails to the destination relay server.
@@ -2861,16 +3471,23 @@ module Aws::MailManager
     #   email.
     #   @return [String]
     #
+    # @!attribute [rw] is_in_address_list
+    #   The structure representing the address lists and address list
+    #   attribute that will be used in evaluation of boolean expression.
+    #   @return [Types::RuleIsInAddressList]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/RuleBooleanToEvaluate AWS API Documentation
     #
     class RuleBooleanToEvaluate < Struct.new(
       :attribute,
+      :is_in_address_list,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class Attribute < RuleBooleanToEvaluate; end
+      class IsInAddressList < RuleBooleanToEvaluate; end
       class Unknown < RuleBooleanToEvaluate; end
     end
 
@@ -3008,6 +3625,27 @@ module Aws::MailManager
 
       class Attribute < RuleIpToEvaluate; end
       class Unknown < RuleIpToEvaluate; end
+    end
+
+    # The structure type for a boolean condition that provides the address
+    # lists and address list attribute to evaluate.
+    #
+    # @!attribute [rw] address_lists
+    #   The address lists that will be used for evaluation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] attribute
+    #   The email attribute that needs to be evaluated against the address
+    #   list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/RuleIsInAddressList AWS API Documentation
+    #
+    class RuleIsInAddressList < Struct.new(
+      :address_lists,
+      :attribute)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # A number expression to match numeric conditions with integers from the
@@ -3256,6 +3894,25 @@ module Aws::MailManager
       include Aws::Structure
     end
 
+    # An address that is a member of an address list.
+    #
+    # @!attribute [rw] address
+    #   The email or domain that constitutes the address.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The timestamp of when the address was added to the address list.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/SavedAddress AWS API Documentation
+    #
+    class SavedAddress < Struct.new(
+      :address,
+      :created_timestamp)
+      SENSITIVE = [:address]
+      include Aws::Structure
+    end
+
     # The current status of an archive search job.
     #
     # @!attribute [rw] completion_timestamp
@@ -3338,6 +3995,22 @@ module Aws::MailManager
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] job_id
+    #   The identifier of the import job that needs to be started.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/StartAddressListImportJobRequest AWS API Documentation
+    #
+    class StartAddressListImportJobRequest < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/StartAddressListImportJobResponse AWS API Documentation
+    #
+    class StartAddressListImportJobResponse < Aws::EmptyStructure; end
 
     # The request to initiate an export of emails from an archive.
     #
@@ -3445,6 +4118,22 @@ module Aws::MailManager
       include Aws::Structure
     end
 
+    # @!attribute [rw] job_id
+    #   The identifier of the import job that needs to be stopped.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/StopAddressListImportJobRequest AWS API Documentation
+    #
+    class StopAddressListImportJobRequest < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/StopAddressListImportJobResponse AWS API Documentation
+    #
+    class StopAddressListImportJobResponse < Aws::EmptyStructure; end
+
     # The request to stop an in-progress archive export job.
     #
     # @!attribute [rw] export_id
@@ -3509,7 +4198,7 @@ module Aws::MailManager
     class Tag < Struct.new(
       :key,
       :value)
-      SENSITIVE = [:key, :value]
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3592,7 +4281,7 @@ module Aws::MailManager
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
-      SENSITIVE = [:tag_keys]
+      SENSITIVE = []
       include Aws::Structure
     end
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.94.0 (2025-02-03)
+------------------
+
+* Feature - Add support for CloudWatch Vended Logs which allows for delivery of customer logs to CloudWatch Logs, S3, or Firehose.
+
+1.93.0 (2025-01-30)
+------------------
+
+* Feature - Adds options for configuring how MediaTailor conditions ads before inserting them into the content stream. Based on the new settings, MediaTailor will either transcode ads to match the content stream as it has in the past, or it will insert ads without first transcoding them.
+
 1.92.0 (2025-01-15)
 ------------------
 

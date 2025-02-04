@@ -471,11 +471,14 @@ module Aws::DatabaseMigrationService
     SybaseSettings = Shapes::StructureShape.new(name: 'SybaseSettings')
     TStamp = Shapes::TimestampShape.new(name: 'TStamp')
     TableListToReload = Shapes::ListShape.new(name: 'TableListToReload')
+    TablePreparationMode = Shapes::StringShape.new(name: 'TablePreparationMode')
     TableStatistics = Shapes::StructureShape.new(name: 'TableStatistics')
     TableStatisticsList = Shapes::ListShape.new(name: 'TableStatisticsList')
     TableToReload = Shapes::StructureShape.new(name: 'TableToReload')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagList = Shapes::ListShape.new(name: 'TagList')
+    TargetDataSetting = Shapes::StructureShape.new(name: 'TargetDataSetting')
+    TargetDataSettings = Shapes::ListShape.new(name: 'TargetDataSettings')
     TargetDbType = Shapes::StringShape.new(name: 'TargetDbType')
     TestConnectionMessage = Shapes::StructureShape.new(name: 'TestConnectionMessage')
     TestConnectionResponse = Shapes::StructureShape.new(name: 'TestConnectionResponse')
@@ -616,6 +619,7 @@ module Aws::DatabaseMigrationService
     CreateDataMigrationMessage.add_member(:service_access_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServiceAccessRoleArn"))
     CreateDataMigrationMessage.add_member(:enable_cloudwatch_logs, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableCloudwatchLogs"))
     CreateDataMigrationMessage.add_member(:source_data_settings, Shapes::ShapeRef.new(shape: SourceDataSettings, location_name: "SourceDataSettings"))
+    CreateDataMigrationMessage.add_member(:target_data_settings, Shapes::ShapeRef.new(shape: TargetDataSettings, location_name: "TargetDataSettings"))
     CreateDataMigrationMessage.add_member(:number_of_jobs, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "NumberOfJobs"))
     CreateDataMigrationMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateDataMigrationMessage.add_member(:selection_rules, Shapes::ShapeRef.new(shape: SecretString, location_name: "SelectionRules"))
@@ -800,6 +804,7 @@ module Aws::DatabaseMigrationService
     DataMigration.add_member(:data_migration_type, Shapes::ShapeRef.new(shape: MigrationTypeValue, location_name: "DataMigrationType"))
     DataMigration.add_member(:data_migration_settings, Shapes::ShapeRef.new(shape: DataMigrationSettings, location_name: "DataMigrationSettings"))
     DataMigration.add_member(:source_data_settings, Shapes::ShapeRef.new(shape: SourceDataSettings, location_name: "SourceDataSettings"))
+    DataMigration.add_member(:target_data_settings, Shapes::ShapeRef.new(shape: TargetDataSettings, location_name: "TargetDataSettings"))
     DataMigration.add_member(:data_migration_statistics, Shapes::ShapeRef.new(shape: DataMigrationStatistics, location_name: "DataMigrationStatistics"))
     DataMigration.add_member(:data_migration_status, Shapes::ShapeRef.new(shape: String, location_name: "DataMigrationStatus"))
     DataMigration.add_member(:public_ip_addresses, Shapes::ShapeRef.new(shape: PublicIpAddressList, location_name: "PublicIpAddresses"))
@@ -1807,6 +1812,7 @@ module Aws::DatabaseMigrationService
     ModifyDataMigrationMessage.add_member(:service_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "ServiceAccessRoleArn"))
     ModifyDataMigrationMessage.add_member(:data_migration_type, Shapes::ShapeRef.new(shape: MigrationTypeValue, location_name: "DataMigrationType"))
     ModifyDataMigrationMessage.add_member(:source_data_settings, Shapes::ShapeRef.new(shape: SourceDataSettings, location_name: "SourceDataSettings"))
+    ModifyDataMigrationMessage.add_member(:target_data_settings, Shapes::ShapeRef.new(shape: TargetDataSettings, location_name: "TargetDataSettings"))
     ModifyDataMigrationMessage.add_member(:number_of_jobs, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "NumberOfJobs"))
     ModifyDataMigrationMessage.add_member(:selection_rules, Shapes::ShapeRef.new(shape: SecretString, location_name: "SelectionRules"))
     ModifyDataMigrationMessage.struct_class = Types::ModifyDataMigrationMessage
@@ -2800,6 +2806,11 @@ module Aws::DatabaseMigrationService
     Tag.struct_class = Types::Tag
 
     TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TargetDataSetting.add_member(:table_preparation_mode, Shapes::ShapeRef.new(shape: TablePreparationMode, location_name: "TablePreparationMode"))
+    TargetDataSetting.struct_class = Types::TargetDataSetting
+
+    TargetDataSettings.member = Shapes::ShapeRef.new(shape: TargetDataSetting)
 
     TestConnectionMessage.add_member(:replication_instance_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationInstanceArn"))
     TestConnectionMessage.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EndpointArn"))

@@ -116,7 +116,8 @@ module Aws
                                          },
                                        ]?
                                      },
-                                   ]?
+                                   ]?,
+                                   cedar_json: ::String?
                                  },
                                  requests: Array[
                                    {
@@ -133,7 +134,8 @@ module Aws
                                        entity_id: ::String
                                      }?,
                                      context: {
-                                       context_map: Hash[::String, untyped]?
+                                       context_map: Hash[::String, untyped]?,
+                                       cedar_json: ::String?
                                      }?
                                    },
                                  ]
@@ -165,7 +167,8 @@ module Aws
                                                     },
                                                   ]?
                                                 },
-                                              ]?
+                                              ]?,
+                                              cedar_json: ::String?
                                             },
                                             requests: Array[
                                               {
@@ -178,7 +181,8 @@ module Aws
                                                   entity_id: ::String
                                                 }?,
                                                 context: {
-                                                  context_map: Hash[::String, untyped]?
+                                                  context_map: Hash[::String, untyped]?,
+                                                  cedar_json: ::String?
                                                 }?
                                               },
                                             ]
@@ -439,7 +443,8 @@ module Aws
                              entity_id: ::String
                            },
                            ?context: {
-                             context_map: Hash[::String, untyped]?
+                             context_map: Hash[::String, untyped]?,
+                             cedar_json: ::String?
                            },
                            ?entities: {
                              entity_list: Array[
@@ -456,7 +461,8 @@ module Aws
                                    },
                                  ]?
                                },
-                             ]?
+                             ]?,
+                             cedar_json: ::String?
                            }
                          ) -> _IsAuthorizedResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _IsAuthorizedResponseSuccess
@@ -482,7 +488,8 @@ module Aws
                                         entity_id: ::String
                                       },
                                       ?context: {
-                                        context_map: Hash[::String, untyped]?
+                                        context_map: Hash[::String, untyped]?,
+                                        cedar_json: ::String?
                                       },
                                       ?entities: {
                                         entity_list: Array[
@@ -499,7 +506,8 @@ module Aws
                                               },
                                             ]?
                                           },
-                                        ]?
+                                        ]?,
+                                        cedar_json: ::String?
                                       }
                                     ) -> _IsAuthorizedWithTokenResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _IsAuthorizedWithTokenResponseSuccess

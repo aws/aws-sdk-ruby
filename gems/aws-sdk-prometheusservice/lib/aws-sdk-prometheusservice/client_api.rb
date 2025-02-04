@@ -82,6 +82,7 @@ module Aws::PrometheusService
     PutRuleGroupsNamespaceRequest = Shapes::StructureShape.new(name: 'PutRuleGroupsNamespaceRequest')
     PutRuleGroupsNamespaceResponse = Shapes::StructureShape.new(name: 'PutRuleGroupsNamespaceResponse')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    RoleConfiguration = Shapes::StructureShape.new(name: 'RoleConfiguration')
     RuleGroupsNamespaceArn = Shapes::StringShape.new(name: 'RuleGroupsNamespaceArn')
     RuleGroupsNamespaceData = Shapes::BlobShape.new(name: 'RuleGroupsNamespaceData')
     RuleGroupsNamespaceDescription = Shapes::StructureShape.new(name: 'RuleGroupsNamespaceDescription')
@@ -190,6 +191,7 @@ module Aws::PrometheusService
     CreateScraperRequest.add_member(:alias, Shapes::ShapeRef.new(shape: ScraperAlias, location_name: "alias"))
     CreateScraperRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateScraperRequest.add_member(:destination, Shapes::ShapeRef.new(shape: Destination, required: true, location_name: "destination"))
+    CreateScraperRequest.add_member(:role_configuration, Shapes::ShapeRef.new(shape: RoleConfiguration, location_name: "roleConfiguration"))
     CreateScraperRequest.add_member(:scrape_configuration, Shapes::ShapeRef.new(shape: ScrapeConfiguration, required: true, location_name: "scrapeConfiguration"))
     CreateScraperRequest.add_member(:source, Shapes::ShapeRef.new(shape: Source, required: true, location_name: "source"))
     CreateScraperRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
@@ -362,6 +364,10 @@ module Aws::PrometheusService
     ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceType"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    RoleConfiguration.add_member(:source_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "sourceRoleArn"))
+    RoleConfiguration.add_member(:target_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "targetRoleArn"))
+    RoleConfiguration.struct_class = Types::RoleConfiguration
+
     RuleGroupsNamespaceDescription.add_member(:arn, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceArn, required: true, location_name: "arn"))
     RuleGroupsNamespaceDescription.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     RuleGroupsNamespaceDescription.add_member(:data, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceData, required: true, location_name: "data"))
@@ -397,6 +403,7 @@ module Aws::PrometheusService
     ScraperDescription.add_member(:destination, Shapes::ShapeRef.new(shape: Destination, required: true, location_name: "destination"))
     ScraperDescription.add_member(:last_modified_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastModifiedAt"))
     ScraperDescription.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "roleArn"))
+    ScraperDescription.add_member(:role_configuration, Shapes::ShapeRef.new(shape: RoleConfiguration, location_name: "roleConfiguration"))
     ScraperDescription.add_member(:scrape_configuration, Shapes::ShapeRef.new(shape: ScrapeConfiguration, required: true, location_name: "scrapeConfiguration"))
     ScraperDescription.add_member(:scraper_id, Shapes::ShapeRef.new(shape: ScraperId, required: true, location_name: "scraperId"))
     ScraperDescription.add_member(:source, Shapes::ShapeRef.new(shape: Source, required: true, location_name: "source"))
@@ -417,6 +424,7 @@ module Aws::PrometheusService
     ScraperSummary.add_member(:destination, Shapes::ShapeRef.new(shape: Destination, required: true, location_name: "destination"))
     ScraperSummary.add_member(:last_modified_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastModifiedAt"))
     ScraperSummary.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "roleArn"))
+    ScraperSummary.add_member(:role_configuration, Shapes::ShapeRef.new(shape: RoleConfiguration, location_name: "roleConfiguration"))
     ScraperSummary.add_member(:scraper_id, Shapes::ShapeRef.new(shape: ScraperId, required: true, location_name: "scraperId"))
     ScraperSummary.add_member(:source, Shapes::ShapeRef.new(shape: Source, required: true, location_name: "source"))
     ScraperSummary.add_member(:status, Shapes::ShapeRef.new(shape: ScraperStatus, required: true, location_name: "status"))
@@ -477,6 +485,7 @@ module Aws::PrometheusService
     UpdateScraperRequest.add_member(:alias, Shapes::ShapeRef.new(shape: ScraperAlias, location_name: "alias"))
     UpdateScraperRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdateScraperRequest.add_member(:destination, Shapes::ShapeRef.new(shape: Destination, location_name: "destination"))
+    UpdateScraperRequest.add_member(:role_configuration, Shapes::ShapeRef.new(shape: RoleConfiguration, location_name: "roleConfiguration"))
     UpdateScraperRequest.add_member(:scrape_configuration, Shapes::ShapeRef.new(shape: ScrapeConfiguration, location_name: "scrapeConfiguration"))
     UpdateScraperRequest.add_member(:scraper_id, Shapes::ShapeRef.new(shape: ScraperId, required: true, location: "uri", location_name: "scraperId"))
     UpdateScraperRequest.struct_class = Types::UpdateScraperRequest

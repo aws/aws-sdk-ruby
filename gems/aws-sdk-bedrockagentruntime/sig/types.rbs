@@ -200,6 +200,8 @@ module Aws::BedrockAgentRuntime
 
     class CitationEvent
       attr_accessor citation: Types::Citation
+      attr_accessor generated_response_part: Types::GeneratedResponsePart
+      attr_accessor retrieved_references: ::Array[Types::RetrievedReference]
       attr_accessor event_type: untyped
       SENSITIVE: []
     end
@@ -750,6 +752,7 @@ module Aws::BedrockAgentRuntime
 
     class InternalServerException
       attr_accessor message: ::String
+      attr_accessor reason: ::String
       attr_accessor event_type: untyped
       SENSITIVE: []
     end

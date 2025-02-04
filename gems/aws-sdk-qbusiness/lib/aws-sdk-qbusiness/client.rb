@@ -481,24 +481,26 @@ module Aws::QBusiness
 
     # @!group API Operations
 
-    # Adds or updates a permission policy for a Q Business application,
-    # allowing cross-account access for an ISV. This operation creates a new
-    # policy statement for the specified Q Business application. The policy
-    # statement defines the IAM actions that the ISV is allowed to perform
-    # on the Q Business application's resources.
+    # Adds or updates a permission policy for a Amazon Q Business
+    # application, allowing cross-account access for an ISV. This operation
+    # creates a new policy statement for the specified Amazon Q Business
+    # application. The policy statement defines the IAM actions that the ISV
+    # is allowed to perform on the Amazon Q Business application's
+    # resources.
     #
     # @option params [required, String] :application_id
-    #   The unique identifier of the Q Business application.
+    #   The unique identifier of the Amazon Q Business application.
     #
     # @option params [required, String] :statement_id
     #   A unique identifier for the policy statement.
     #
     # @option params [required, Array<String>] :actions
-    #   The list of Q Business actions that the ISV is allowed to perform.
+    #   The list of Amazon Q Business actions that the ISV is allowed to
+    #   perform.
     #
     # @option params [required, String] :principal
-    #   The Amazon Resource Name (ARN) of the IAM role for the ISV that is
-    #   being granted permission.
+    #   The Amazon Resource Name of the IAM role for the ISV that is being
+    #   granted permission.
     #
     # @return [Types::AssociatePermissionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -748,6 +750,45 @@ module Aws::QBusiness
     # @param [Hash] params ({})
     def batch_put_document(params = {}, options = {})
       req = build_request(:batch_put_document, params)
+      req.send_request(options)
+    end
+
+    # Unsubscribes a user or a group from their pricing tier in an Amazon Q
+    # Business application. An unsubscribed user or group loses all Amazon Q
+    # Business feature access at the start of next month.
+    #
+    # @option params [required, String] :application_id
+    #   The identifier of the Amazon Q Business application for which the
+    #   subscription is being cancelled.
+    #
+    # @option params [required, String] :subscription_id
+    #   The identifier of the Amazon Q Business subscription being cancelled.
+    #
+    # @return [Types::CancelSubscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelSubscriptionResponse#subscription_arn #subscription_arn} => String
+    #   * {Types::CancelSubscriptionResponse#current_subscription #current_subscription} => Types::SubscriptionDetails
+    #   * {Types::CancelSubscriptionResponse#next_subscription #next_subscription} => Types::SubscriptionDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_subscription({
+    #     application_id: "ApplicationId", # required
+    #     subscription_id: "SubscriptionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.subscription_arn #=> String
+    #   resp.current_subscription.type #=> String, one of "Q_LITE", "Q_BUSINESS"
+    #   resp.next_subscription.type #=> String, one of "Q_LITE", "Q_BUSINESS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/CancelSubscription AWS API Documentation
+    #
+    # @overload cancel_subscription(params = {})
+    # @param [Hash] params ({})
+    def cancel_subscription(params = {}, options = {})
+      req = build_request(:cancel_subscription, params)
       req.send_request(options)
     end
 
@@ -1168,18 +1209,18 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Creates a new data accessor for an ISV to access data from a Q
+    # Creates a new data accessor for an ISV to access data from a Amazon Q
     # Business application. The data accessor is an entity that represents
-    # the ISV's access to the Q Business application's data. It includes
-    # the IAM role ARN for the ISV, a friendly name, and a set of action
-    # configurations that define the specific actions the ISV is allowed to
-    # perform and any associated data filters. When the data accessor is
-    # created, an AWS IAM Identity Center application is also created to
-    # manage the ISV's identity and authentication for accessing the Q
-    # Business application.
+    # the ISV's access to the Amazon Q Business application's data. It
+    # includes the IAM role ARN for the ISV, a friendly name, and a set of
+    # action configurations that define the specific actions the ISV is
+    # allowed to perform and any associated data filters. When the data
+    # accessor is created, an IAM Identity Center application is also
+    # created to manage the ISV's identity and authentication for accessing
+    # the Amazon Q Business application.
     #
     # @option params [required, String] :application_id
-    #   The unique identifier of the Q Business application.
+    #   The unique identifier of the Amazon Q Business application.
     #
     # @option params [required, String] :principal
     #   The Amazon Resource Name (ARN) of the IAM role for the ISV that will
@@ -1819,6 +1860,72 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
+    # Subscribes an IAM Identity Center user or a group to a pricing tier
+    # for an Amazon Q Business application.
+    #
+    # Amazon Q Business offers two subscription tiers: `Q_LITE` and
+    # `Q_BUSINESS`. Subscription tier determines feature access for the
+    # user. For more information on subscriptions and pricing tiers, see
+    # [Amazon Q Business pricing][1].
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/q/business/pricing/
+    #
+    # @option params [required, String] :application_id
+    #   The identifier of the Amazon Q Business application the subscription
+    #   should be added to.
+    #
+    # @option params [required, Types::SubscriptionPrincipal] :principal
+    #   The IAM Identity Center `UserId` or `GroupId` of a user or group in
+    #   the IAM Identity Center instance connected to the Amazon Q Business
+    #   application.
+    #
+    # @option params [required, String] :type
+    #   The type of Amazon Q Business subscription you want to create.
+    #
+    # @option params [String] :client_token
+    #   A token that you provide to identify the request to create a
+    #   subscription for your Amazon Q Business application.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateSubscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSubscriptionResponse#subscription_id #subscription_id} => String
+    #   * {Types::CreateSubscriptionResponse#subscription_arn #subscription_arn} => String
+    #   * {Types::CreateSubscriptionResponse#current_subscription #current_subscription} => Types::SubscriptionDetails
+    #   * {Types::CreateSubscriptionResponse#next_subscription #next_subscription} => Types::SubscriptionDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_subscription({
+    #     application_id: "ApplicationId", # required
+    #     principal: { # required
+    #       user: "UserIdentifier",
+    #       group: "GroupIdentifier",
+    #     },
+    #     type: "Q_LITE", # required, accepts Q_LITE, Q_BUSINESS
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.subscription_id #=> String
+    #   resp.subscription_arn #=> String
+    #   resp.current_subscription.type #=> String, one of "Q_LITE", "Q_BUSINESS"
+    #   resp.next_subscription.type #=> String, one of "Q_LITE", "Q_BUSINESS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/CreateSubscription AWS API Documentation
+    #
+    # @overload create_subscription(params = {})
+    # @param [Hash] params ({})
+    def create_subscription(params = {}, options = {})
+      req = build_request(:create_subscription, params)
+      req.send_request(options)
+    end
+
     # Creates a universally unique identifier (UUID) mapped to a list of
     # local user ids within an application.
     #
@@ -2077,12 +2184,12 @@ module Aws::QBusiness
     end
 
     # Deletes a specified data accessor. This operation permanently removes
-    # the data accessor and its associated AWS IAM Identity Center
-    # application. Any access granted to the ISV through this data accessor
-    # will be revoked
+    # the data accessor and its associated IAM Identity Center application.
+    # Any access granted to the ISV through this data accessor will be
+    # revoked.
     #
     # @option params [required, String] :application_id
-    #   The unique identifier of the Q Business application.
+    #   The unique identifier of the Amazon Q Business application.
     #
     # @option params [required, String] :data_accessor_id
     #   The unique identifier of the data accessor to delete.
@@ -2327,13 +2434,13 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Removes a permission policy from a Q Business application, revoking
-    # the cross-account access that was previously granted to an ISV. This
-    # operation deletes the specified policy statement from the
+    # Removes a permission policy from a Amazon Q Business application,
+    # revoking the cross-account access that was previously granted to an
+    # ISV. This operation deletes the specified policy statement from the
     # application's permission policy.
     #
     # @option params [required, String] :application_id
-    #   The unique identifier of the Q Business application.
+    #   The unique identifier of the Amazon Q Business application.
     #
     # @option params [required, String] :statement_id
     #   The statement ID of the permission to remove.
@@ -2423,8 +2530,8 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Gets information about an chat controls configured for an existing
-    # Amazon Q Business application.
+    # Gets information about chat controls configured for an existing Amazon
+    # Q Business application.
     #
     # @option params [required, String] :application_id
     #   The identifier of the application for which the chat controls are
@@ -2442,6 +2549,7 @@ module Aws::QBusiness
     # @return [Types::GetChatControlsConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetChatControlsConfigurationResponse#response_scope #response_scope} => String
+    #   * {Types::GetChatControlsConfigurationResponse#orchestration_configuration #orchestration_configuration} => Types::AppliedOrchestrationConfiguration
     #   * {Types::GetChatControlsConfigurationResponse#blocked_phrases #blocked_phrases} => Types::BlockedPhrasesConfiguration
     #   * {Types::GetChatControlsConfigurationResponse#topic_configurations #topic_configurations} => Array&lt;Types::TopicConfiguration&gt;
     #   * {Types::GetChatControlsConfigurationResponse#creator_mode_configuration #creator_mode_configuration} => Types::AppliedCreatorModeConfiguration
@@ -2460,6 +2568,7 @@ module Aws::QBusiness
     # @example Response structure
     #
     #   resp.response_scope #=> String, one of "ENTERPRISE_CONTENT_ONLY", "EXTENDED_KNOWLEDGE_ENABLED"
+    #   resp.orchestration_configuration.control #=> String, one of "ENABLED", "DISABLED"
     #   resp.blocked_phrases.blocked_phrases #=> Array
     #   resp.blocked_phrases.blocked_phrases[0] #=> String
     #   resp.blocked_phrases.system_message_override #=> String
@@ -2496,13 +2605,13 @@ module Aws::QBusiness
 
     # Retrieves information about a specified data accessor. This operation
     # returns details about the data accessor, including its display name,
-    # unique identifier, Amazon Resource Name (ARN), the associated Q
-    # Business application and AWS IAM Identity Center application, the IAM
-    # role for the ISV, the action configurations, and the timestamps for
-    # when the data accessor was created and last updated.
+    # unique identifier, Amazon Resource Name (ARN), the associated Amazon Q
+    # Business application and IAM Identity Center application, the IAM role
+    # for the ISV, the action configurations, and the timestamps for when
+    # the data accessor was created and last updated.
     #
     # @option params [required, String] :application_id
-    #   The unique identifier of the Q Business application.
+    #   The unique identifier of the Amazon Q Business application.
     #
     # @option params [required, String] :data_accessor_id
     #   The unique identifier of the data accessor to retrieve.
@@ -2934,12 +3043,13 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Retrieves the current permission policy for a Q Business application.
-    # The policy is returned as a JSON-formatted string and defines the IAM
-    # actions that are allowed or denied for the application's resources.
+    # Retrieves the current permission policy for a Amazon Q Business
+    # application. The policy is returned as a JSON-formatted string and
+    # defines the IAM actions that are allowed or denied for the
+    # application's resources.
     #
     # @option params [required, String] :application_id
-    #   The unique identifier of the Q Business application.
+    #   The unique identifier of the Amazon Q Business application.
     #
     # @return [Types::GetPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3314,13 +3424,13 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Lists the data accessors for a Q Business application. This operation
-    # returns a paginated list of data accessor summaries, including the
-    # friendly name, unique identifier, ARN, associated IAM role, and
-    # creation/update timestamps for each data accessor.
+    # Lists the data accessors for a Amazon Q Business application. This
+    # operation returns a paginated list of data accessor summaries,
+    # including the friendly name, unique identifier, ARN, associated IAM
+    # role, and creation/update timestamps for each data accessor.
     #
     # @option params [required, String] :application_id
-    #   The unique identifier of the Q Business application.
+    #   The unique identifier of the Amazon Q Business application.
     #
     # @option params [String] :next_token
     #   The token for the next set of results. (You received this token from a
@@ -3994,6 +4104,56 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
+    # Lists all subscriptions created in an Amazon Q Business application.
+    #
+    # @option params [required, String] :application_id
+    #   The identifier of the Amazon Q Business application linked to the
+    #   subscription.
+    #
+    # @option params [String] :next_token
+    #   If the `maxResults` response was incomplete because there is more data
+    #   to retrieve, Amazon Q Business returns a pagination token in the
+    #   response. You can use this pagination token to retrieve the next set
+    #   of Amazon Q Business subscriptions.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of Amazon Q Business subscriptions to return.
+    #
+    # @return [Types::ListSubscriptionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSubscriptionsResponse#next_token #next_token} => String
+    #   * {Types::ListSubscriptionsResponse#subscriptions #subscriptions} => Array&lt;Types::Subscription&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_subscriptions({
+    #     application_id: "ApplicationId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.subscriptions #=> Array
+    #   resp.subscriptions[0].subscription_id #=> String
+    #   resp.subscriptions[0].subscription_arn #=> String
+    #   resp.subscriptions[0].principal.user #=> String
+    #   resp.subscriptions[0].principal.group #=> String
+    #   resp.subscriptions[0].current_subscription.type #=> String, one of "Q_LITE", "Q_BUSINESS"
+    #   resp.subscriptions[0].next_subscription.type #=> String, one of "Q_LITE", "Q_BUSINESS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ListSubscriptions AWS API Documentation
+    #
+    # @overload list_subscriptions(params = {})
+    # @param [Hash] params ({})
+    def list_subscriptions(params = {}, options = {})
+      req = build_request(:list_subscriptions, params)
+      req.send_request(options)
+    end
+
     # Gets a list of tags associated with a specified resource. Amazon Q
     # Business applications and data sources can have tags associated with
     # them.
@@ -4135,6 +4295,13 @@ module Aws::QBusiness
     # property group, can see top-secret company documents in their Amazon Q
     # Business chat results.
     #
+    # There are two options for creating groups, either passing group
+    # members inline or using an S3 file via the S3PathForGroupMembers
+    # field. For inline groups, there is a limit of 1000 members per group
+    # and for provided S3 files there is a limit of 100 thousand members.
+    # When creating a group using an S3 file, you provide both an S3 file
+    # and a `RoleArn` for Amazon Q Buisness to access the file.
+    #
     # @option params [required, String] :application_id
     #   The identifier of the application in which the user and group mapping
     #   belongs.
@@ -4169,9 +4336,7 @@ module Aws::QBusiness
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of an IAM role that has access to the
-    #   S3 file that contains your list of users that belong to a group.The
-    #   Amazon Resource Name (ARN) of an IAM role that has access to the S3
-    #   file that contains your list of users that belong to a group.
+    #   S3 file that contains your list of users that belong to a group.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4213,17 +4378,17 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Searches for relevant content in a Q Business application based on a
-    # query. This operation takes a search query text, the Q Business
-    # application identifier, and optional filters (such as content source
-    # and maximum results) as input. It returns a list of relevant content
-    # items, where each item includes the content text, the unique document
-    # identifier, the document title, the document URI, any relevant
-    # document attributes, and score attributes indicating the confidence
-    # level of the relevance.
+    # Searches for relevant content in a Amazon Q Business application based
+    # on a query. This operation takes a search query text, the Amazon Q
+    # Business application identifier, and optional filters (such as content
+    # source and maximum results) as input. It returns a list of relevant
+    # content items, where each item includes the content text, the unique
+    # document identifier, the document title, the document URI, any
+    # relevant document attributes, and score attributes indicating the
+    # confidence level of the relevance.
     #
     # @option params [required, String] :application_id
-    #   The unique identifier of the Q Business application to search.
+    #   The unique identifier of the Amazon Q Business application to search.
     #
     # @option params [required, String] :query_text
     #   The text to search for.
@@ -4598,7 +4763,7 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
-    # Updates an set of chat controls configured for an existing Amazon Q
+    # Updates a set of chat controls configured for an existing Amazon Q
     # Business application.
     #
     # @option params [required, String] :application_id
@@ -4618,6 +4783,9 @@ module Aws::QBusiness
     #   system to generate answers only from your enterprise data, or also
     #   uses the large language models (LLM) knowledge to respons to end user
     #   questions in chat.
+    #
+    # @option params [Types::OrchestrationConfiguration] :orchestration_configuration
+    #   The chat response orchestration settings for your application.
     #
     # @option params [Types::BlockedPhrasesConfigurationUpdate] :blocked_phrases_configuration_update
     #   The phrases blocked from chat by your chat control configuration.
@@ -4639,6 +4807,9 @@ module Aws::QBusiness
     #     application_id: "ApplicationId", # required
     #     client_token: "ClientToken",
     #     response_scope: "ENTERPRISE_CONTENT_ONLY", # accepts ENTERPRISE_CONTENT_ONLY, EXTENDED_KNOWLEDGE_ENABLED
+    #     orchestration_configuration: {
+    #       control: "ENABLED", # required, accepts ENABLED, DISABLED
+    #     },
     #     blocked_phrases_configuration_update: {
     #       blocked_phrases_to_create_or_update: ["BlockedPhrase"],
     #       blocked_phrases_to_delete: ["BlockedPhrase"],
@@ -4731,7 +4902,7 @@ module Aws::QBusiness
     # the data accessor.
     #
     # @option params [required, String] :application_id
-    #   The unique identifier of the Q Business application.
+    #   The unique identifier of the Amazon Q Business application.
     #
     # @option params [required, String] :data_accessor_id
     #   The unique identifier of the data accessor to update.
@@ -5191,6 +5362,55 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
+    # Updates the pricing tier for an Amazon Q Business subscription.
+    # Upgrades are instant. Downgrades apply at the start of the next month.
+    # Subscription tier determines feature access for the user. For more
+    # information on subscriptions and pricing tiers, see [Amazon Q Business
+    # pricing][1].
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/q/business/pricing/
+    #
+    # @option params [required, String] :application_id
+    #   The identifier of the Amazon Q Business application where the
+    #   subscription update should take effect.
+    #
+    # @option params [required, String] :subscription_id
+    #   The identifier of the Amazon Q Business subscription to be updated.
+    #
+    # @option params [required, String] :type
+    #   The type of the Amazon Q Business subscription to be updated.
+    #
+    # @return [Types::UpdateSubscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSubscriptionResponse#subscription_arn #subscription_arn} => String
+    #   * {Types::UpdateSubscriptionResponse#current_subscription #current_subscription} => Types::SubscriptionDetails
+    #   * {Types::UpdateSubscriptionResponse#next_subscription #next_subscription} => Types::SubscriptionDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_subscription({
+    #     application_id: "ApplicationId", # required
+    #     subscription_id: "SubscriptionId", # required
+    #     type: "Q_LITE", # required, accepts Q_LITE, Q_BUSINESS
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.subscription_arn #=> String
+    #   resp.current_subscription.type #=> String, one of "Q_LITE", "Q_BUSINESS"
+    #   resp.next_subscription.type #=> String, one of "Q_LITE", "Q_BUSINESS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/UpdateSubscription AWS API Documentation
+    #
+    # @overload update_subscription(params = {})
+    # @param [Hash] params ({})
+    def update_subscription(params = {}, options = {})
+      req = build_request(:update_subscription, params)
+      req.send_request(options)
+    end
+
     # Updates a information associated with a user id.
     #
     # @option params [required, String] :application_id
@@ -5390,7 +5610,7 @@ module Aws::QBusiness
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-qbusiness'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

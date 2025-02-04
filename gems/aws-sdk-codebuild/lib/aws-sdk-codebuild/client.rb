@@ -1024,7 +1024,7 @@ module Aws::CodeBuild
     #   resp.projects[0].webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH", "COMMIT_MESSAGE", "WORKFLOW_NAME", "TAG_NAME", "RELEASE_NAME", "REPOSITORY_NAME"
     #   resp.projects[0].webhook.filter_groups[0][0].pattern #=> String
     #   resp.projects[0].webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
-    #   resp.projects[0].webhook.build_type #=> String, one of "BUILD", "BUILD_BATCH"
+    #   resp.projects[0].webhook.build_type #=> String, one of "BUILD", "BUILD_BATCH", "RUNNER_BUILDKITE_BUILD"
     #   resp.projects[0].webhook.manual_creation #=> Boolean
     #   resp.projects[0].webhook.last_modified_secret #=> Time
     #   resp.projects[0].webhook.scope_configuration.name #=> String
@@ -1895,7 +1895,7 @@ module Aws::CodeBuild
     #   resp.project.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH", "COMMIT_MESSAGE", "WORKFLOW_NAME", "TAG_NAME", "RELEASE_NAME", "REPOSITORY_NAME"
     #   resp.project.webhook.filter_groups[0][0].pattern #=> String
     #   resp.project.webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
-    #   resp.project.webhook.build_type #=> String, one of "BUILD", "BUILD_BATCH"
+    #   resp.project.webhook.build_type #=> String, one of "BUILD", "BUILD_BATCH", "RUNNER_BUILDKITE_BUILD"
     #   resp.project.webhook.manual_creation #=> Boolean
     #   resp.project.webhook.last_modified_secret #=> Time
     #   resp.project.webhook.scope_configuration.name #=> String
@@ -2100,7 +2100,7 @@ module Aws::CodeBuild
     #         },
     #       ],
     #     ],
-    #     build_type: "BUILD", # accepts BUILD, BUILD_BATCH
+    #     build_type: "BUILD", # accepts BUILD, BUILD_BATCH, RUNNER_BUILDKITE_BUILD
     #     manual_creation: false,
     #     scope_configuration: {
     #       name: "String", # required
@@ -2120,7 +2120,7 @@ module Aws::CodeBuild
     #   resp.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH", "COMMIT_MESSAGE", "WORKFLOW_NAME", "TAG_NAME", "RELEASE_NAME", "REPOSITORY_NAME"
     #   resp.webhook.filter_groups[0][0].pattern #=> String
     #   resp.webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
-    #   resp.webhook.build_type #=> String, one of "BUILD", "BUILD_BATCH"
+    #   resp.webhook.build_type #=> String, one of "BUILD", "BUILD_BATCH", "RUNNER_BUILDKITE_BUILD"
     #   resp.webhook.manual_creation #=> Boolean
     #   resp.webhook.last_modified_secret #=> Time
     #   resp.webhook.scope_configuration.name #=> String
@@ -5873,7 +5873,7 @@ module Aws::CodeBuild
     #   resp.project.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH", "COMMIT_MESSAGE", "WORKFLOW_NAME", "TAG_NAME", "RELEASE_NAME", "REPOSITORY_NAME"
     #   resp.project.webhook.filter_groups[0][0].pattern #=> String
     #   resp.project.webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
-    #   resp.project.webhook.build_type #=> String, one of "BUILD", "BUILD_BATCH"
+    #   resp.project.webhook.build_type #=> String, one of "BUILD", "BUILD_BATCH", "RUNNER_BUILDKITE_BUILD"
     #   resp.project.webhook.manual_creation #=> Boolean
     #   resp.project.webhook.last_modified_secret #=> Time
     #   resp.project.webhook.scope_configuration.name #=> String
@@ -6133,7 +6133,7 @@ module Aws::CodeBuild
     #         },
     #       ],
     #     ],
-    #     build_type: "BUILD", # accepts BUILD, BUILD_BATCH
+    #     build_type: "BUILD", # accepts BUILD, BUILD_BATCH, RUNNER_BUILDKITE_BUILD
     #   })
     #
     # @example Response structure
@@ -6147,7 +6147,7 @@ module Aws::CodeBuild
     #   resp.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH", "COMMIT_MESSAGE", "WORKFLOW_NAME", "TAG_NAME", "RELEASE_NAME", "REPOSITORY_NAME"
     #   resp.webhook.filter_groups[0][0].pattern #=> String
     #   resp.webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
-    #   resp.webhook.build_type #=> String, one of "BUILD", "BUILD_BATCH"
+    #   resp.webhook.build_type #=> String, one of "BUILD", "BUILD_BATCH", "RUNNER_BUILDKITE_BUILD"
     #   resp.webhook.manual_creation #=> Boolean
     #   resp.webhook.last_modified_secret #=> Time
     #   resp.webhook.scope_configuration.name #=> String
@@ -6181,7 +6181,7 @@ module Aws::CodeBuild
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.140.0'
+      context[:gem_version] = '1.141.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -84,6 +84,7 @@ module Aws::PrometheusService
       attr_accessor alias: ::String
       attr_accessor client_token: ::String
       attr_accessor destination: Types::Destination
+      attr_accessor role_configuration: Types::RoleConfiguration
       attr_accessor scrape_configuration: Types::ScrapeConfiguration
       attr_accessor source: Types::Source
       attr_accessor tags: ::Hash[::String, ::String]
@@ -335,6 +336,12 @@ module Aws::PrometheusService
       SENSITIVE: []
     end
 
+    class RoleConfiguration
+      attr_accessor source_role_arn: ::String
+      attr_accessor target_role_arn: ::String
+      SENSITIVE: []
+    end
+
     class RuleGroupsNamespaceDescription
       attr_accessor arn: ::String
       attr_accessor created_at: ::Time
@@ -380,6 +387,7 @@ module Aws::PrometheusService
       attr_accessor destination: Types::Destination
       attr_accessor last_modified_at: ::Time
       attr_accessor role_arn: ::String
+      attr_accessor role_configuration: Types::RoleConfiguration
       attr_accessor scrape_configuration: Types::ScrapeConfiguration
       attr_accessor scraper_id: ::String
       attr_accessor source: Types::Source
@@ -401,6 +409,7 @@ module Aws::PrometheusService
       attr_accessor destination: Types::Destination
       attr_accessor last_modified_at: ::Time
       attr_accessor role_arn: ::String
+      attr_accessor role_configuration: Types::RoleConfiguration
       attr_accessor scraper_id: ::String
       attr_accessor source: Types::Source
       attr_accessor status: Types::ScraperStatus
@@ -471,6 +480,7 @@ module Aws::PrometheusService
       attr_accessor alias: ::String
       attr_accessor client_token: ::String
       attr_accessor destination: Types::Destination
+      attr_accessor role_configuration: Types::RoleConfiguration
       attr_accessor scrape_configuration: Types::ScrapeConfiguration
       attr_accessor scraper_id: ::String
       SENSITIVE: []

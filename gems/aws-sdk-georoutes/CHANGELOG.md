@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2025-01-31)
+------------------
+
+* Feature - The OptimizeWaypoints API now supports 50 waypoints per request (20 with constraints like AccessHours or AppointmentTime). It adds waypoint clustering via Clustering and ClusteringIndex for better optimization. Also, total distance validation is removed for greater flexibility.
+
 1.2.0 (2025-01-15)
 ------------------
 

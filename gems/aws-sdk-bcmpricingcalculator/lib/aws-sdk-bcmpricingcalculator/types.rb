@@ -2514,11 +2514,11 @@ module Aws::BCMPricingCalculator
     #   @return [Array<Types::ListBillEstimatesFilter>]
     #
     # @!attribute [rw] created_at_filter
-    #   Filter bill estimates based on their creation date.
+    #   Filter bill estimates based on the creation date.
     #   @return [Types::FilterTimestamp]
     #
     # @!attribute [rw] expires_at_filter
-    #   Filter bill estimates based on their expiration date.
+    #   Filter bill estimates based on the expiration date.
     #   @return [Types::FilterTimestamp]
     #
     # @!attribute [rw] next_token
@@ -2673,11 +2673,11 @@ module Aws::BCMPricingCalculator
     #   @return [Array<Types::ListBillScenariosFilter>]
     #
     # @!attribute [rw] created_at_filter
-    #   Filter bill scenarios based on their creation date.
+    #   Filter bill scenarios based on the creation date.
     #   @return [Types::FilterTimestamp]
     #
     # @!attribute [rw] expires_at_filter
-    #   Filter bill scenarios based on their expiration date.
+    #   Filter bill scenarios based on the expiration date.
     #   @return [Types::FilterTimestamp]
     #
     # @!attribute [rw] next_token
@@ -2834,11 +2834,11 @@ module Aws::BCMPricingCalculator
     end
 
     # @!attribute [rw] created_at_filter
-    #   Filter workload estimates based on their creation date.
+    #   Filter workload estimates based on the creation date.
     #   @return [Types::FilterTimestamp]
     #
     # @!attribute [rw] expires_at_filter
-    #   Filter workload estimates based on their expiration date.
+    #   Filter workload estimates based on the expiration date.
     #   @return [Types::FilterTimestamp]
     #
     # @!attribute [rw] filters

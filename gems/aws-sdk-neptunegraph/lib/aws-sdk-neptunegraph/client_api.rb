@@ -576,6 +576,7 @@ module Aws::NeptuneGraph
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
+    ListExportTasksInput.add_member(:graph_identifier, Shapes::ShapeRef.new(shape: GraphIdentifier, location: "querystring", location_name: "graphIdentifier"))
     ListExportTasksInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
     ListExportTasksInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListExportTasksInput.struct_class = Types::ListExportTasksInput

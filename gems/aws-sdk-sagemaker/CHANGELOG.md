@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.285.0 (2025-02-04)
+------------------
+
+* Feature - IPv6 support for Hyperpod clusters
+
+1.284.0 (2025-01-31)
+------------------
+
+* Feature - This release introduces a new valid value in InstanceType parameter: p5en.48xlarge, in ProductionVariant.
+
 1.283.0 (2025-01-17)
 ------------------
 

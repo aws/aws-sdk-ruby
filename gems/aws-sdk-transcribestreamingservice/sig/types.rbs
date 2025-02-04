@@ -67,6 +67,19 @@ module Aws::TranscribeStreamingService
       SENSITIVE: []
     end
 
+    class ClinicalNoteGenerationResult
+      attr_accessor clinical_note_output_location: ::String
+      attr_accessor transcript_output_location: ::String
+      attr_accessor status: ("IN_PROGRESS" | "FAILED" | "COMPLETED")
+      attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class ClinicalNoteGenerationSettings
+      attr_accessor output_bucket_name: ::String
+      SENSITIVE: []
+    end
+
     class ConfigurationEvent
       attr_accessor channel_definitions: ::Array[Types::ChannelDefinition]
       attr_accessor post_call_analytics_settings: Types::PostCallAnalyticsSettings
@@ -87,6 +100,16 @@ module Aws::TranscribeStreamingService
       attr_accessor type: ::String
       attr_accessor content: ::String
       attr_accessor confidence: ::Float
+      SENSITIVE: []
+    end
+
+    class GetMedicalScribeStreamRequest
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMedicalScribeStreamResponse
+      attr_accessor medical_scribe_stream_details: Types::MedicalScribeStreamDetails
       SENSITIVE: []
     end
 
@@ -161,6 +184,98 @@ module Aws::TranscribeStreamingService
       SENSITIVE: []
     end
 
+    class MedicalScribeAudioEvent
+      attr_accessor audio_chunk: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class MedicalScribeChannelDefinition
+      attr_accessor channel_id: ::Integer
+      attr_accessor participant_role: ("PATIENT" | "CLINICIAN")
+      SENSITIVE: []
+    end
+
+    class MedicalScribeConfigurationEvent
+      attr_accessor vocabulary_name: ::String
+      attr_accessor vocabulary_filter_name: ::String
+      attr_accessor vocabulary_filter_method: ("remove" | "mask" | "tag")
+      attr_accessor resource_access_role_arn: ::String
+      attr_accessor channel_definitions: ::Array[Types::MedicalScribeChannelDefinition]
+      attr_accessor encryption_settings: Types::MedicalScribeEncryptionSettings
+      attr_accessor post_stream_analytics_settings: Types::MedicalScribePostStreamAnalyticsSettings
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class MedicalScribeEncryptionSettings
+      attr_accessor kms_encryption_context: ::Hash[::String, ::String]
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class MedicalScribePostStreamAnalyticsResult
+      attr_accessor clinical_note_generation_result: Types::ClinicalNoteGenerationResult
+      SENSITIVE: []
+    end
+
+    class MedicalScribePostStreamAnalyticsSettings
+      attr_accessor clinical_note_generation_settings: Types::ClinicalNoteGenerationSettings
+      SENSITIVE: []
+    end
+
+    class MedicalScribeSessionControlEvent
+      attr_accessor type: ("END_OF_SESSION")
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class MedicalScribeStreamDetails
+      attr_accessor session_id: ::String
+      attr_accessor stream_created_at: ::Time
+      attr_accessor stream_ended_at: ::Time
+      attr_accessor language_code: ("en-US")
+      attr_accessor media_sample_rate_hertz: ::Integer
+      attr_accessor media_encoding: ("pcm" | "ogg-opus" | "flac")
+      attr_accessor vocabulary_name: ::String
+      attr_accessor vocabulary_filter_name: ::String
+      attr_accessor vocabulary_filter_method: ("remove" | "mask" | "tag")
+      attr_accessor resource_access_role_arn: ::String
+      attr_accessor channel_definitions: ::Array[Types::MedicalScribeChannelDefinition]
+      attr_accessor encryption_settings: Types::MedicalScribeEncryptionSettings
+      attr_accessor stream_status: ("IN_PROGRESS" | "PAUSED" | "FAILED" | "COMPLETED")
+      attr_accessor post_stream_analytics_settings: Types::MedicalScribePostStreamAnalyticsSettings
+      attr_accessor post_stream_analytics_result: Types::MedicalScribePostStreamAnalyticsResult
+      SENSITIVE: []
+    end
+
+    class MedicalScribeTranscriptEvent
+      attr_accessor transcript_segment: Types::MedicalScribeTranscriptSegment
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class MedicalScribeTranscriptItem
+      attr_accessor begin_audio_time: ::Float
+      attr_accessor end_audio_time: ::Float
+      attr_accessor type: ("pronunciation" | "punctuation")
+      attr_accessor confidence: ::Float
+      attr_accessor content: ::String
+      attr_accessor vocabulary_filter_match: bool
+      SENSITIVE: []
+    end
+
+    class MedicalScribeTranscriptSegment
+      attr_accessor segment_id: ::String
+      attr_accessor begin_audio_time: ::Float
+      attr_accessor end_audio_time: ::Float
+      attr_accessor content: ::String
+      attr_accessor items: ::Array[Types::MedicalScribeTranscriptItem]
+      attr_accessor is_partial: bool
+      attr_accessor channel_id: ::String
+      SENSITIVE: []
+    end
+
     class MedicalTranscript
       attr_accessor results: ::Array[Types::MedicalResult]
       SENSITIVE: []
@@ -182,6 +297,11 @@ module Aws::TranscribeStreamingService
       attr_accessor data_access_role_arn: ::String
       attr_accessor content_redaction_output: ("redacted" | "redacted_and_unredacted")
       attr_accessor output_encryption_kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -237,6 +357,25 @@ module Aws::TranscribeStreamingService
       attr_accessor content_identification_type: ("PII")
       attr_accessor content_redaction_type: ("PII")
       attr_accessor pii_entity_types: ::String
+      SENSITIVE: []
+    end
+
+    class StartMedicalScribeStreamRequest
+      attr_accessor session_id: ::String
+      attr_accessor language_code: ("en-US")
+      attr_accessor media_sample_rate_hertz: ::Integer
+      attr_accessor media_encoding: ("pcm" | "ogg-opus" | "flac")
+      attr_accessor input_stream: Types::MedicalScribeInputStream
+      SENSITIVE: []
+    end
+
+    class StartMedicalScribeStreamResponse
+      attr_accessor session_id: ::String
+      attr_accessor request_id: ::String
+      attr_accessor language_code: ("en-US")
+      attr_accessor media_sample_rate_hertz: ::Integer
+      attr_accessor media_encoding: ("pcm" | "ogg-opus" | "flac")
+      attr_accessor result_stream: Types::MedicalScribeResultStream
       SENSITIVE: []
     end
 
@@ -366,6 +505,14 @@ module Aws::TranscribeStreamingService
 
     class CallAnalyticsTranscriptResultStream < Enumerator[untyped, untyped]
       def event_types: () -> [:utterance_event, :category_event, :bad_request_exception, :limit_exceeded_exception, :internal_failure_exception, :conflict_exception, :service_unavailable_exception]
+    end
+
+    class MedicalScribeInputStream < Enumerator[untyped, untyped]
+      def event_types: () -> [:audio_event, :session_control_event, :configuration_event]
+    end
+
+    class MedicalScribeResultStream < Enumerator[untyped, untyped]
+      def event_types: () -> [:transcript_event, :bad_request_exception, :limit_exceeded_exception, :internal_failure_exception, :conflict_exception, :service_unavailable_exception]
     end
 
     class MedicalTranscriptResultStream < Enumerator[untyped, untyped]

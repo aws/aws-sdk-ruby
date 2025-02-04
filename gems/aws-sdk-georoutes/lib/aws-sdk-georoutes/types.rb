@@ -24,7 +24,7 @@ module Aws::GeoRoutes
     end
 
     # @!attribute [rw] allow
-    #   Features that are allowed while calculating. a route
+    #   Features that are allowed while calculating an isoline.
     #   @return [Types::IsolineAllowOptions]
     #
     # @!attribute [rw] arrival_time
@@ -80,7 +80,7 @@ module Aws::GeoRoutes
     #   @return [String]
     #
     # @!attribute [rw] isoline_granularity
-    #   Defines the granularity of the returned Isoline
+    #   Defines the granularity of the returned Isoline.
     #   @return [Types::IsolineGranularityOptions]
     #
     # @!attribute [rw] key
@@ -116,6 +116,15 @@ module Aws::GeoRoutes
     # @!attribute [rw] thresholds
     #   Threshold to be used for the isoline calculation. Up to 3 thresholds
     #   per provided type can be requested.
+    #
+    #   You incur a calculation charge for each threshold. Using a large
+    #   amount of thresholds in a request can lead you to incur unexpected
+    #   charges. See [ Amazon Location's pricing page][1] for more
+    #   information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html`
     #   @return [Types::IsolineThresholds]
     #
     # @!attribute [rw] traffic
@@ -227,7 +236,7 @@ module Aws::GeoRoutes
     end
 
     # @!attribute [rw] allow
-    #   Features that are allowed while calculating. a route
+    #   Features that are allowed while calculating a route.
     #   @return [Types::RouteMatrixAllowOptions]
     #
     # @!attribute [rw] avoid
@@ -256,6 +265,17 @@ module Aws::GeoRoutes
     #
     # @!attribute [rw] destinations
     #   List of destinations for the route.
+    #
+    #   <note markdown="1"> Route calculations are billed for each origin and destination pair.
+    #   If you use a large matrix of origins and destinations, your costs
+    #   will increase accordingly. See [ Amazon Location's pricing page][1]
+    #   for more information.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html`
     #   @return [Array<Types::RouteMatrixDestination>]
     #
     # @!attribute [rw] exclude
@@ -275,6 +295,17 @@ module Aws::GeoRoutes
     #
     # @!attribute [rw] origins
     #   The position in longitude and latitude for the origin.
+    #
+    #   <note markdown="1"> Route calculations are billed for each origin and destination pair.
+    #   Using a large amount of Origins in a request can lead you to incur
+    #   unexpected charges. See [ Amazon Location's pricing page][1] for
+    #   more information.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html`
     #   @return [Array<Types::RouteMatrixOrigin>]
     #
     # @!attribute [rw] routing_boundary
@@ -364,7 +395,7 @@ module Aws::GeoRoutes
     end
 
     # @!attribute [rw] allow
-    #   Features that are allowed while calculating. a route
+    #   Features that are allowed while calculating a route.
     #   @return [Types::RouteAllowOptions]
     #
     # @!attribute [rw] arrival_time
@@ -535,7 +566,7 @@ module Aws::GeoRoutes
     #   Type of step returned by the response. Default provides basic steps
     #   intended for web based applications. TurnByTurn provides detailed
     #   instructions with more granularity intended for a turn based
-    #   naviagtion system.
+    #   navigation system.
     #   @return [String]
     #
     # @!attribute [rw] waypoints
@@ -698,15 +729,19 @@ module Aws::GeoRoutes
       include Aws::Structure
     end
 
-    # Features that are allowed while calculating. a route
+    # Features that are allowed while calculating an isoline.
     #
     # @!attribute [rw] hot
-    #   Allow Hot (High Occupancy Toll) lanes while calculating the route.
+    #   Allow Hot (High Occupancy Toll) lanes while calculating an isoline.
+    #
+    #   Default value: `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] hov
-    #   Allow Hov (High Occupancy vehicle) lanes while calculating the
-    #   route.
+    #   Allow Hov (High Occupancy vehicle) lanes while calculating an
+    #   isoline.
+    #
+    #   Default value: `false`
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-routes-2020-11-19/IsolineAllowOptions AWS API Documentation
@@ -722,7 +757,7 @@ module Aws::GeoRoutes
     #
     # @!attribute [rw] except
     #   Exceptions to the provided avoidance geometry, to be included while
-    #   calculating the route.
+    #   calculating an isoline.
     #   @return [Array<Types::IsolineAvoidanceAreaGeometry>]
     #
     # @!attribute [rw] geometry
@@ -738,7 +773,7 @@ module Aws::GeoRoutes
       include Aws::Structure
     end
 
-    # The avoidance geometry, to be included while calculating the route.
+    # The avoidance geometry, to be included while calculating an isoline.
     #
     # @!attribute [rw] bounding_box
     #   Geometry defined as a bounding box. The first pair represents the X
@@ -791,33 +826,33 @@ module Aws::GeoRoutes
       include Aws::Structure
     end
 
-    # Features that are avoided while calculating a route. Avoidance is on a
-    # best-case basis. If an avoidance can't be satisfied for a particular
-    # case, it violates the avoidance and the returned response produces a
-    # notice for the violation.
+    # Features that are avoided while calculating isolines. Avoidance is on
+    # a best-case basis. If an avoidance can't be satisfied for a
+    # particular case, it violates the avoidance and the returned response
+    # produces a notice for the violation.
     #
     # @!attribute [rw] areas
     #   Areas to be avoided.
     #   @return [Array<Types::IsolineAvoidanceArea>]
     #
     # @!attribute [rw] car_shuttle_trains
-    #   Avoid car-shuttle-trains while calculating the route.
+    #   Avoid car-shuttle-trains while calculating an isoline.
     #   @return [Boolean]
     #
     # @!attribute [rw] controlled_access_highways
-    #   Avoid controlled access highways while calculating the route.
+    #   Avoid controlled access highways while calculating an isoline.
     #   @return [Boolean]
     #
     # @!attribute [rw] dirt_roads
-    #   Avoid dirt roads while calculating the route.
+    #   Avoid dirt roads while calculating an isoline.
     #   @return [Boolean]
     #
     # @!attribute [rw] ferries
-    #   Avoid ferries while calculating the route.
+    #   Avoid ferries while calculating an isoline.
     #   @return [Boolean]
     #
     # @!attribute [rw] seasonal_closure
-    #   Avoid roads that have seasonal closure while calculating the route.
+    #   Avoid roads that have seasonal closure while calculating an isoline.
     #   @return [Boolean]
     #
     # @!attribute [rw] toll_roads
@@ -840,7 +875,7 @@ module Aws::GeoRoutes
     #   @return [Array<String>]
     #
     # @!attribute [rw] tunnels
-    #   Avoid tunnels while calculating the route.
+    #   Avoid tunnels while calculating an isoline.
     #   @return [Boolean]
     #
     # @!attribute [rw] u_turns
@@ -884,7 +919,7 @@ module Aws::GeoRoutes
       include Aws::Structure
     end
 
-    # Options for vehicles.
+    # Travel mode options when the provided travel mode is `Car`.
     #
     # @!attribute [rw] engine_type
     #   Engine type of the vehicle.
@@ -945,7 +980,7 @@ module Aws::GeoRoutes
       include Aws::Structure
     end
 
-    # Geometry of the connection between different Isoline components.
+    # Geometry of the connection between different isoline components.
     #
     # @!attribute [rw] line_string
     #   An ordered list of positions used to plot a route on a map.
@@ -1015,7 +1050,7 @@ module Aws::GeoRoutes
     # @!attribute [rw] max_resolution
     #   Maximum resolution of the returned isoline.
     #
-    #   **Unit**: `centimeters`
+    #   **Unit**: `meters`
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-routes-2020-11-19/IsolineGranularityOptions AWS API Documentation
@@ -1067,7 +1102,7 @@ module Aws::GeoRoutes
       include Aws::Structure
     end
 
-    # Options for the property.
+    # Origin related options.
     #
     # @!attribute [rw] avoid_actions_for_distance
     #   Avoids actions for the provided distance. This is typically to
@@ -1100,7 +1135,7 @@ module Aws::GeoRoutes
       include Aws::Structure
     end
 
-    # Options for the property.
+    # Travel mode options when the provided travel mode is `Scooter`
     #
     # @!attribute [rw] engine_type
     #   Engine type of the vehicle.
@@ -1185,7 +1220,7 @@ module Aws::GeoRoutes
       include Aws::Structure
     end
 
-    # Threshold to be used for the isoline calculation. Up to 3 thresholds
+    # Threshold to be used for the isoline calculation. Up to 5 thresholds
     # per provided type can be requested.
     #
     # @!attribute [rw] distance
@@ -1262,7 +1297,12 @@ module Aws::GeoRoutes
     #   @return [Types::IsolineCarOptions]
     #
     # @!attribute [rw] scooter
-    #   Travel mode options when the provided travel mode is "Scooter"
+    #   Travel mode options when the provided travel mode is `Scooter`
+    #
+    #   <note markdown="1"> When travel mode is set to `Scooter`, then the avoidance option
+    #   `ControlledAccessHighways` defaults to `true`.
+    #
+    #    </note>
     #   @return [Types::IsolineScooterOptions]
     #
     # @!attribute [rw] truck
@@ -1471,10 +1511,15 @@ module Aws::GeoRoutes
     end
 
     # @!attribute [rw] avoid
-    #   Features that are avoided while calculating a route. Avoidance is on
-    #   a best-case basis. If an avoidance can't be satisfied for a
-    #   particular case, this setting is ignored.
+    #   Features that are avoided. Avoidance is on a best-case basis. If an
+    #   avoidance can't be satisfied for a particular case, this setting is
+    #   ignored.
     #   @return [Types::WaypointOptimizationAvoidanceOptions]
+    #
+    # @!attribute [rw] clustering
+    #   Clustering allows you to specify how nearby waypoints can be
+    #   clustered to improve the optimized sequence.
+    #   @return [Types::WaypointOptimizationClusteringOptions]
     #
     # @!attribute [rw] departure_time
     #   Departure time from the waypoint.
@@ -1548,6 +1593,7 @@ module Aws::GeoRoutes
     #
     class OptimizeWaypointsRequest < Struct.new(
       :avoid,
+      :clustering,
       :departure_time,
       :destination,
       :destination_options,
@@ -1888,15 +1934,19 @@ module Aws::GeoRoutes
       include Aws::Structure
     end
 
-    # Features that are allowed while calculating. a route
+    # Features that are allowed while calculating a route.
     #
     # @!attribute [rw] hot
     #   Allow Hot (High Occupancy Toll) lanes while calculating the route.
+    #
+    #   Default value: `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] hov
     #   Allow Hov (High Occupancy vehicle) lanes while calculating the
     #   route.
+    #
+    #   Default value: `false`
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-routes-2020-11-19/RouteAllowOptions AWS API Documentation
@@ -1975,7 +2025,12 @@ module Aws::GeoRoutes
       include Aws::Structure
     end
 
-    # Options related to areas to be avoided.
+    # Specifies options for areas to avoid when calculating the route. This
+    # is a best-effort avoidance setting, meaning the router will try to
+    # honor the avoidance preferences but may still include restricted areas
+    # if no feasible alternative route exists. If avoidance options are not
+    # followed, the response will indicate that the avoidance criteria were
+    # violated.
     #
     # @!attribute [rw] areas
     #   Areas to be avoided.
@@ -2065,7 +2120,7 @@ module Aws::GeoRoutes
       include Aws::Structure
     end
 
-    # Travel mode options when the provided travel mode is "Car"
+    # Travel mode options when the provided travel mode is `Car`.
     #
     # @!attribute [rw] engine_type
     #   Engine type of the vehicle.
@@ -2278,7 +2333,9 @@ module Aws::GeoRoutes
       include Aws::Structure
     end
 
-    # Exclusion options for the route.
+    # Specifies strict exclusion options for the route calculation. This
+    # setting mandates that the router will avoid any routes that include
+    # the specified options, rather than merely attempting to minimize them.
     #
     # @!attribute [rw] countries
     #   List of countries to be avoided defined by two-letter or
@@ -2573,6 +2630,8 @@ module Aws::GeoRoutes
     # @!attribute [rw] distance
     #   Distance of the computed span. This feature doesn't split a span,
     #   but is always computed on a span split by other properties.
+    #
+    #   **Unit**: `meters`
     #   @return [Integer]
     #
     # @!attribute [rw] duration
@@ -2865,11 +2924,15 @@ module Aws::GeoRoutes
     #
     # @!attribute [rw] hot
     #   Allow Hot (High Occupancy Toll) lanes while calculating the route.
+    #
+    #   Default value: `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] hov
     #   Allow Hov (High Occupancy vehicle) lanes while calculating the
     #   route.
+    #
+    #   Default value: `false`
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-routes-2020-11-19/RouteMatrixAllowOptions AWS API Documentation
@@ -2949,7 +3012,12 @@ module Aws::GeoRoutes
       include Aws::Structure
     end
 
-    # Options related to the route matrix.
+    # Specifies options for areas to avoid when calculating the route. This
+    # is a best-effort avoidance setting, meaning the router will try to
+    # honor the avoidance preferences but may still include restricted areas
+    # if no feasible alternative route exists. If avoidance options are not
+    # followed, the response will indicate that the avoidance criteria were
+    # violated.
     #
     # @!attribute [rw] areas
     #   Areas to be avoided.
@@ -3089,7 +3157,7 @@ module Aws::GeoRoutes
       include Aws::Structure
     end
 
-    # Options related to the car.
+    # Travel mode options when the provided travel mode is `Car`.
     #
     # @!attribute [rw] license_plate
     #   The vehicle License Plate.
@@ -3198,7 +3266,9 @@ module Aws::GeoRoutes
       include Aws::Structure
     end
 
-    # Exclusion options.
+    # Specifies strict exclusion options for the route calculation. This
+    # setting mandates that the router will avoid any routes that include
+    # the specified options, rather than merely attempting to minimize them.
     #
     # @!attribute [rw] countries
     #   List of countries to be avoided defined by two-letter or
@@ -3305,7 +3375,7 @@ module Aws::GeoRoutes
       include Aws::Structure
     end
 
-    # Travel mode options when the provided travel mode is "Scooter"
+    # Travel mode options when the provided travel mode is `Scooter`
     #
     # @!attribute [rw] license_plate
     #   The vehicle License Plate.
@@ -3406,7 +3476,12 @@ module Aws::GeoRoutes
     #   @return [Types::RouteMatrixCarOptions]
     #
     # @!attribute [rw] scooter
-    #   Travel mode options when the provided travel mode is "Scooter"
+    #   Travel mode options when the provided travel mode is `Scooter`
+    #
+    #   <note markdown="1"> When travel mode is set to `Scooter`, then the avoidance option
+    #   `ControlledAccessHighways` defaults to `true`.
+    #
+    #    </note>
     #   @return [Types::RouteMatrixScooterOptions]
     #
     # @!attribute [rw] truck
@@ -4292,7 +4367,7 @@ module Aws::GeoRoutes
       include Aws::Structure
     end
 
-    # Travel mode options when the provided travel mode is "Scooter"
+    # Travel mode options when the provided travel mode is `Scooter`
     #
     # @!attribute [rw] engine_type
     #   Engine type of the vehicle.
@@ -4861,7 +4936,12 @@ module Aws::GeoRoutes
     #   @return [Types::RoutePedestrianOptions]
     #
     # @!attribute [rw] scooter
-    #   Travel mode options when the provided travel mode is "Scooter"
+    #   Travel mode options when the provided travel mode is `Scooter`
+    #
+    #   <note markdown="1"> When travel mode is set to `Scooter`, then the avoidance option
+    #   `ControlledAccessHighways` defaults to `true`.
+    #
+    #    </note>
     #   @return [Types::RouteScooterOptions]
     #
     # @!attribute [rw] truck
@@ -6154,7 +6234,11 @@ module Aws::GeoRoutes
       include Aws::Structure
     end
 
-    # Options for WaypointOptimizationAvoidance.
+    # Specifies options for areas to avoid. This is a best-effort avoidance
+    # setting, meaning the router will try to honor the avoidance
+    # preferences but may still include restricted areas if no feasible
+    # alternative route exists. If avoidance options are not followed, the
+    # response will indicate that the avoidance criteria were violated.
     #
     # @!attribute [rw] areas
     #   Areas to be avoided.
@@ -6200,6 +6284,30 @@ module Aws::GeoRoutes
       :toll_roads,
       :tunnels,
       :u_turns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Options for WaypointOptimizationClustering.
+    #
+    # @!attribute [rw] algorithm
+    #   The algorithm to be used. `DrivingDistance` assigns all the
+    #   waypoints that are within driving distance of each other into a
+    #   single cluster. `TopologySegment` assigns all the waypoints that are
+    #   within the same topology segment into a single cluster. A Topology
+    #   segment is a linear stretch of road between two junctions.
+    #   @return [String]
+    #
+    # @!attribute [rw] driving_distance_options
+    #   Driving distance options to be used when the clustering algorithm is
+    #   DrivingDistance.
+    #   @return [Types::WaypointOptimizationDrivingDistanceOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/geo-routes-2020-11-19/WaypointOptimizationClusteringOptions AWS API Documentation
+    #
+    class WaypointOptimizationClusteringOptions < Struct.new(
+      :algorithm,
+      :driving_distance_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6321,7 +6429,24 @@ module Aws::GeoRoutes
       include Aws::Structure
     end
 
-    # Exclusion options.
+    # Driving distance related options.
+    #
+    # @!attribute [rw] driving_distance
+    #   DrivingDistance assigns all the waypoints that are within driving
+    #   distance of each other into a single cluster.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/geo-routes-2020-11-19/WaypointOptimizationDrivingDistanceOptions AWS API Documentation
+    #
+    class WaypointOptimizationDrivingDistanceOptions < Struct.new(
+      :driving_distance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies strict exclusion options for the route calculation. This
+    # setting mandates that the router will avoid any routes that include
+    # the specified options, rather than merely attempting to minimize them.
     #
     # @!attribute [rw] countries
     #   List of countries to be avoided defined by two-letter or
@@ -6394,6 +6519,12 @@ module Aws::GeoRoutes
     #   `2020-04-22T17:57:24+02:00`
     #   @return [String]
     #
+    # @!attribute [rw] cluster_index
+    #   Index of the cluster the waypoint is associated with. The index is
+    #   included in the response only if clustering was performed while
+    #   processing the request.
+    #   @return [Integer]
+    #
     # @!attribute [rw] departure_time
     #   Estimated time of departure from thr origin.
     #
@@ -6419,6 +6550,7 @@ module Aws::GeoRoutes
     #
     class WaypointOptimizationOptimizedWaypoint < Struct.new(
       :arrival_time,
+      :cluster_index,
       :departure_time,
       :id,
       :position)
@@ -6426,7 +6558,7 @@ module Aws::GeoRoutes
       include Aws::Structure
     end
 
-    # Options related to the origin.
+    # Origin related options.
     #
     # @!attribute [rw] id
     #   The Origin Id.

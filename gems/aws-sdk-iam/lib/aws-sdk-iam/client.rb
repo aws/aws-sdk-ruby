@@ -529,17 +529,27 @@ module Aws::IAM
     #
     #  </note>
     #
-    # For more information about roles, see [IAM roles][4] in the *IAM User
+    # When using the [iam:AssociatedResourceArn][4] condition in a policy to
+    # restrict the [PassRole][5] IAM action, special considerations apply if
+    # the policy is intended to define access for the
+    # `AddRoleToInstanceProfile` action. In this case, you cannot specify a
+    # Region or instance ID in the EC2 instance ARN. The ARN value must be
+    # `arn:aws:ec2:*:CallerAccountId:instance/*`. Using any other ARN value
+    # may lead to unexpected evaluation results.
+    #
+    # For more information about roles, see [IAM roles][6] in the *IAM User
     # Guide*. For more information about instance profiles, see [Using
-    # instance profiles][5] in the *IAM User Guide*.
+    # instance profiles][7] in the *IAM User Guide*.
     #
     #
     #
     # [1]: https://en.wikipedia.org/wiki/Eventual_consistency
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DisassociateIamInstanceProfile.html
     # [3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateIamInstanceProfile.html
-    # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
-    # [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
+    # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#available-keys-for-iam
+    # [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html
+    # [6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
+    # [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
     #
     # @option params [required, String] :instance_profile_name
     #   The name of the instance profile to update.
@@ -2102,6 +2112,14 @@ module Aws::IAM
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     #
+    # @option params [String] :assertion_encryption_mode
+    #   Specifies the encryption setting for the SAML provider.
+    #
+    # @option params [String] :add_private_key
+    #   The private key generated from your external identity provider. The
+    #   private key must be a .pem file that uses AES-GCM or AES-CBC
+    #   encryption algorithm to decrypt SAML assertions.
+    #
     # @return [Types::CreateSAMLProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSAMLProviderResponse#saml_provider_arn #saml_provider_arn} => String
@@ -2118,6 +2136,8 @@ module Aws::IAM
     #         value: "tagValueType", # required
     #       },
     #     ],
+    #     assertion_encryption_mode: "Required", # accepts Required, Allowed
+    #     add_private_key: "privateKeyType",
     #   })
     #
     # @example Response structure
@@ -3907,7 +3927,7 @@ module Aws::IAM
 
     # Disables the management of privileged root user credentials across
     # member accounts in your organization. When you disable this feature,
-    # the management account and the delegated admininstrator for IAM can no
+    # the management account and the delegated administrator for IAM can no
     # longer manage root user credentials for member accounts in your
     # organization.
     #
@@ -3950,7 +3970,7 @@ module Aws::IAM
 
     # Disables root user sessions for privileged tasks across member
     # accounts in your organization. When you disable this feature, the
-    # management account and the delegated admininstrator for IAM can no
+    # management account and the delegated administrator for IAM can no
     # longer perform privileged tasks on member accounts in your
     # organization.
     #
@@ -4074,7 +4094,7 @@ module Aws::IAM
     # Enables the management of privileged root user credentials across
     # member accounts in your organization. When you enable root credentials
     # management for [centralized root access][1], the management account
-    # and the delegated admininstrator for IAM can manage root user
+    # and the delegated administrator for IAM can manage root user
     # credentials for member accounts in your organization.
     #
     # Before you enable centralized root access, you must have an account
@@ -4091,7 +4111,7 @@ module Aws::IAM
     #
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html#id_root-user-access-management
     # [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html
-    # [3]: https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-ra.html
+    # [3]: https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-iam.html
     #
     # @return [Types::EnableOrganizationsRootCredentialsManagementResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5967,10 +5987,13 @@ module Aws::IAM
     #
     # @return [Types::GetSAMLProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetSAMLProviderResponse#saml_provider_uuid #saml_provider_uuid} => String
     #   * {Types::GetSAMLProviderResponse#saml_metadata_document #saml_metadata_document} => String
     #   * {Types::GetSAMLProviderResponse#create_date #create_date} => Time
     #   * {Types::GetSAMLProviderResponse#valid_until #valid_until} => Time
     #   * {Types::GetSAMLProviderResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::GetSAMLProviderResponse#assertion_encryption_mode #assertion_encryption_mode} => String
+    #   * {Types::GetSAMLProviderResponse#private_key_list #private_key_list} => Array&lt;Types::SAMLPrivateKey&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -5980,12 +6003,17 @@ module Aws::IAM
     #
     # @example Response structure
     #
+    #   resp.saml_provider_uuid #=> String
     #   resp.saml_metadata_document #=> String
     #   resp.create_date #=> Time
     #   resp.valid_until #=> Time
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #   resp.assertion_encryption_mode #=> String, one of "Required", "Allowed"
+    #   resp.private_key_list #=> Array
+    #   resp.private_key_list[0].key_id #=> String
+    #   resp.private_key_list[0].timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetSAMLProvider AWS API Documentation
     #
@@ -6748,12 +6776,12 @@ module Aws::IAM
     # Lists the account alias associated with the Amazon Web Services
     # account (Note: you can have only one). For information about using an
     # Amazon Web Services account alias, see [Creating, deleting, and
-    # listing an Amazon Web Services account alias][1] in the *Amazon Web
-    # Services Sign-In User Guide*.
+    # listing an Amazon Web Services account alias][1] in the *IAM User
+    # Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/signin/latest/userguide/CreateAccountAlias.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html#CreateAccountAlias
     #
     # @option params [String] :marker
     #   Use this parameter only when paginating results and only after you
@@ -13000,24 +13028,17 @@ module Aws::IAM
       req.send_request(options)
     end
 
-    # Updates the metadata document for an existing SAML provider resource
-    # object.
+    # Updates the metadata document, SAML encryption settings, and private
+    # keys for an existing SAML provider. To rotate private keys, add your
+    # new private key and then remove the old key in a separate request.
     #
-    # <note markdown="1"> This operation requires [Signature Version 4][1].
-    #
-    #  </note>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
-    #
-    # @option params [required, String] :saml_metadata_document
+    # @option params [String] :saml_metadata_document
     #   An XML document generated by an identity provider (IdP) that supports
     #   SAML 2.0. The document includes the issuer's name, expiration
     #   information, and keys that can be used to validate the SAML
     #   authentication response (assertions) that are received from the IdP.
     #   You must generate the metadata document using the identity management
-    #   software that is used as your organization's IdP.
+    #   software that is used as your IdP.
     #
     # @option params [required, String] :saml_provider_arn
     #   The Amazon Resource Name (ARN) of the SAML provider to update.
@@ -13029,6 +13050,17 @@ module Aws::IAM
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
+    # @option params [String] :assertion_encryption_mode
+    #   Specifies the encryption setting for the SAML provider.
+    #
+    # @option params [String] :add_private_key
+    #   Specifies the new private key from your external identity provider.
+    #   The private key must be a .pem file that uses AES-GCM or AES-CBC
+    #   encryption algorithm to decrypt SAML assertions.
+    #
+    # @option params [String] :remove_private_key
+    #   The Key ID of the private key to remove.
+    #
     # @return [Types::UpdateSAMLProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateSAMLProviderResponse#saml_provider_arn #saml_provider_arn} => String
@@ -13036,8 +13068,11 @@ module Aws::IAM
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_saml_provider({
-    #     saml_metadata_document: "SAMLMetadataDocumentType", # required
+    #     saml_metadata_document: "SAMLMetadataDocumentType",
     #     saml_provider_arn: "arnType", # required
+    #     assertion_encryption_mode: "Required", # accepts Required, Allowed
+    #     add_private_key: "privateKeyType",
+    #     remove_private_key: "privateKeyIdType",
     #   })
     #
     # @example Response structure
@@ -13835,7 +13870,7 @@ module Aws::IAM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.115.0'
+      context[:gem_version] = '1.116.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

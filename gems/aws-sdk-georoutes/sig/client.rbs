@@ -664,6 +664,12 @@ module Aws
                                   tunnels: bool?,
                                   u_turns: bool?
                                 },
+                                ?clustering: {
+                                  algorithm: ("DrivingDistance" | "TopologySegment"),
+                                  driving_distance_options: {
+                                    driving_distance: ::Integer
+                                  }?
+                                },
                                 ?departure_time: ::String,
                                 ?destination: Array[::Float],
                                 ?destination_options: {

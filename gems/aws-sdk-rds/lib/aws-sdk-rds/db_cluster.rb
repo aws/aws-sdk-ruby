@@ -281,7 +281,18 @@ module Aws::RDS
       data[:iam_database_authentication_enabled]
     end
 
-    # The ID of the clone group with which the DB cluster is associated.
+    # The ID of the clone group with which the DB cluster is associated. For
+    # newly created clusters, the ID is typically null.
+    #
+    # If you clone a DB cluster when the ID is null, the operation populates
+    # the ID value for the source cluster and the clone because both
+    # clusters become part of the same clone group. Even if you delete the
+    # clone cluster, the clone group ID remains for the lifetime of the
+    # source cluster to show that it was used in a cloning operation.
+    #
+    # For PITR, the clone group ID is inherited from the source cluster. For
+    # snapshot restore operations, the clone group ID isn't inherited from
+    # the source cluster.
     # @return [String]
     def clone_group_id
       data[:clone_group_id]
@@ -1328,9 +1339,9 @@ module Aws::RDS
     #
     #   The following values are valid for each DB engine:
     #
-    #   * Aurora MySQL - `audit | error | general | slowquery`
+    #   * Aurora MySQL - `audit | error | general | instance | slowquery`
     #
-    #   * Aurora PostgreSQL - `postgresql`
+    #   * Aurora PostgreSQL - `instance | postgresql`
     #
     #   * RDS for MySQL - `error | general | slowquery`
     #
@@ -2164,9 +2175,9 @@ module Aws::RDS
     #
     #   The following values are valid for each DB engine:
     #
-    #   * Aurora MySQL - `audit | error | general | slowquery`
+    #   * Aurora MySQL - `audit | error | general | instance | slowquery`
     #
-    #   * Aurora PostgreSQL - `postgresql`
+    #   * Aurora PostgreSQL - `instance | postgresql`
     #
     #   * RDS for MySQL - `error | general | slowquery`
     #
@@ -2896,11 +2907,12 @@ module Aws::RDS
     #
     #   **Aurora MySQL**
     #
-    #   Possible values are `audit`, `error`, `general`, and `slowquery`.
+    #   Possible values are `audit`, `error`, `general`, `instance`, and
+    #   `slowquery`.
     #
     #   **Aurora PostgreSQL**
     #
-    #   Possible value is `postgresql`.
+    #   Possible value are `instance` and `postgresql`.
     #
     #   For more information about exporting CloudWatch Logs for Amazon RDS,
     #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the

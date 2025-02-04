@@ -1155,6 +1155,7 @@ module Aws::BCMPricingCalculator
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: BatchDeleteBillScenarioCommitmentModificationRequest)
         o.output = Shapes::ShapeRef.new(shape: BatchDeleteBillScenarioCommitmentModificationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1169,6 +1170,7 @@ module Aws::BCMPricingCalculator
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: BatchDeleteBillScenarioUsageModificationRequest)
         o.output = Shapes::ShapeRef.new(shape: BatchDeleteBillScenarioUsageModificationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -1199,6 +1201,7 @@ module Aws::BCMPricingCalculator
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: BatchUpdateBillScenarioCommitmentModificationRequest)
         o.output = Shapes::ShapeRef.new(shape: BatchUpdateBillScenarioCommitmentModificationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1213,6 +1216,7 @@ module Aws::BCMPricingCalculator
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: BatchUpdateBillScenarioUsageModificationRequest)
         o.output = Shapes::ShapeRef.new(shape: BatchUpdateBillScenarioUsageModificationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -1302,6 +1306,7 @@ module Aws::BCMPricingCalculator
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteBillScenarioRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteBillScenarioResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

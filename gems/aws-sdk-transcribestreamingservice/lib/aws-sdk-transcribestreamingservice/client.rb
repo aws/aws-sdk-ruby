@@ -481,6 +481,60 @@ module Aws::TranscribeStreamingService
 
     # @!group API Operations
 
+    # Provides details about the specified Amazon Web Services HealthScribe
+    # streaming session. To view the status of the streaming session, check
+    # the `StreamStatus` field in the response. To get the details of
+    # post-stream analytics, including its status, check the
+    # `PostStreamAnalyticsResult` field in the response.
+    #
+    # @option params [required, String] :session_id
+    #   The identifier of the HealthScribe streaming session you want
+    #   information about.
+    #
+    # @return [Types::GetMedicalScribeStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMedicalScribeStreamResponse#medical_scribe_stream_details #medical_scribe_stream_details} => Types::MedicalScribeStreamDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_medical_scribe_stream({
+    #     session_id: "SessionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.medical_scribe_stream_details.session_id #=> String
+    #   resp.medical_scribe_stream_details.stream_created_at #=> Time
+    #   resp.medical_scribe_stream_details.stream_ended_at #=> Time
+    #   resp.medical_scribe_stream_details.language_code #=> String, one of "en-US"
+    #   resp.medical_scribe_stream_details.media_sample_rate_hertz #=> Integer
+    #   resp.medical_scribe_stream_details.media_encoding #=> String, one of "pcm", "ogg-opus", "flac"
+    #   resp.medical_scribe_stream_details.vocabulary_name #=> String
+    #   resp.medical_scribe_stream_details.vocabulary_filter_name #=> String
+    #   resp.medical_scribe_stream_details.vocabulary_filter_method #=> String, one of "remove", "mask", "tag"
+    #   resp.medical_scribe_stream_details.resource_access_role_arn #=> String
+    #   resp.medical_scribe_stream_details.channel_definitions #=> Array
+    #   resp.medical_scribe_stream_details.channel_definitions[0].channel_id #=> Integer
+    #   resp.medical_scribe_stream_details.channel_definitions[0].participant_role #=> String, one of "PATIENT", "CLINICIAN"
+    #   resp.medical_scribe_stream_details.encryption_settings.kms_encryption_context #=> Hash
+    #   resp.medical_scribe_stream_details.encryption_settings.kms_encryption_context["NonEmptyString"] #=> String
+    #   resp.medical_scribe_stream_details.encryption_settings.kms_key_id #=> String
+    #   resp.medical_scribe_stream_details.stream_status #=> String, one of "IN_PROGRESS", "PAUSED", "FAILED", "COMPLETED"
+    #   resp.medical_scribe_stream_details.post_stream_analytics_settings.clinical_note_generation_settings.output_bucket_name #=> String
+    #   resp.medical_scribe_stream_details.post_stream_analytics_result.clinical_note_generation_result.clinical_note_output_location #=> String
+    #   resp.medical_scribe_stream_details.post_stream_analytics_result.clinical_note_generation_result.transcript_output_location #=> String
+    #   resp.medical_scribe_stream_details.post_stream_analytics_result.clinical_note_generation_result.status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
+    #   resp.medical_scribe_stream_details.post_stream_analytics_result.clinical_note_generation_result.failure_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/GetMedicalScribeStream AWS API Documentation
+    #
+    # @overload get_medical_scribe_stream(params = {})
+    # @param [Hash] params ({})
+    def get_medical_scribe_stream(params = {}, options = {})
+      req = build_request(:get_medical_scribe_stream, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -499,7 +553,7 @@ module Aws::TranscribeStreamingService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-transcribestreamingservice'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

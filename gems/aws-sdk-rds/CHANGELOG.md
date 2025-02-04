@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.267.0 (2025-01-31)
+------------------
+
+* Feature - Updates to Aurora MySQL and Aurora PostgreSQL API pages with instance log type in the create and modify DB Cluster.
+
 1.266.0 (2025-01-15)
 ------------------
 

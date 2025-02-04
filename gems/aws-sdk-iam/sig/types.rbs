@@ -224,7 +224,9 @@ module Aws::IAM
       attr_accessor saml_metadata_document: ::String
       attr_accessor name: ::String
       attr_accessor tags: ::Array[Types::Tag]
-      SENSITIVE: []
+      attr_accessor assertion_encryption_mode: ("Required" | "Allowed")
+      attr_accessor add_private_key: ::String
+      SENSITIVE: [:add_private_key]
     end
 
     class CreateSAMLProviderResponse
@@ -788,10 +790,13 @@ module Aws::IAM
     end
 
     class GetSAMLProviderResponse
+      attr_accessor saml_provider_uuid: ::String
       attr_accessor saml_metadata_document: ::String
       attr_accessor create_date: ::Time
       attr_accessor valid_until: ::Time
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor assertion_encryption_mode: ("Required" | "Allowed")
+      attr_accessor private_key_list: ::Array[Types::SAMLPrivateKey]
       SENSITIVE: []
     end
 
@@ -1732,6 +1737,12 @@ module Aws::IAM
       SENSITIVE: []
     end
 
+    class SAMLPrivateKey
+      attr_accessor key_id: ::String
+      attr_accessor timestamp: ::Time
+      SENSITIVE: []
+    end
+
     class SAMLProviderListEntry
       attr_accessor arn: ::String
       attr_accessor valid_until: ::Time
@@ -2076,7 +2087,10 @@ module Aws::IAM
     class UpdateSAMLProviderRequest
       attr_accessor saml_metadata_document: ::String
       attr_accessor saml_provider_arn: ::String
-      SENSITIVE: []
+      attr_accessor assertion_encryption_mode: ("Required" | "Allowed")
+      attr_accessor add_private_key: ::String
+      attr_accessor remove_private_key: ::String
+      SENSITIVE: [:add_private_key]
     end
 
     class UpdateSAMLProviderResponse

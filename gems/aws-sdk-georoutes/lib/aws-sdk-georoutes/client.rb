@@ -474,7 +474,7 @@ module Aws::GeoRoutes
     # reached in a given threshold of time, distance.
     #
     # @option params [Types::IsolineAllowOptions] :allow
-    #   Features that are allowed while calculating. a route
+    #   Features that are allowed while calculating an isoline.
     #
     # @option params [String] :arrival_time
     #   Time of arrival at the destination.
@@ -521,7 +521,7 @@ module Aws::GeoRoutes
     #   Default Value:`FlexiblePolyline`
     #
     # @option params [Types::IsolineGranularityOptions] :isoline_granularity
-    #   Defines the granularity of the returned Isoline
+    #   Defines the granularity of the returned Isoline.
     #
     # @option params [String] :key
     #   Optional: The API key to be used for authorization. Either an API key
@@ -551,6 +551,15 @@ module Aws::GeoRoutes
     # @option params [required, Types::IsolineThresholds] :thresholds
     #   Threshold to be used for the isoline calculation. Up to 3 thresholds
     #   per provided type can be requested.
+    #
+    #   You incur a calculation charge for each threshold. Using a large
+    #   amount of thresholds in a request can lead you to incur unexpected
+    #   charges. See [ Amazon Location's pricing page][1] for more
+    #   information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html`
     #
     # @option params [Types::IsolineTrafficOptions] :traffic
     #   Traffic related options.
@@ -786,13 +795,13 @@ module Aws::GeoRoutes
       req.send_request(options)
     end
 
-    # Calculates route matrix containing the results for all pairs of
-    # Origins to Destinations. Each row corresponds to one entry in Origins.
-    # Each entry in the row corresponds to the route from that entry in
-    # Origins to an entry in Destinations positions.
+    # Use `CalculateRouteMatrix` to compute results for all pairs of Origins
+    # to Destinations. Each row corresponds to one entry in Origins. Each
+    # entry in the row corresponds to the route from that entry in Origins
+    # to an entry in Destinations positions.
     #
     # @option params [Types::RouteMatrixAllowOptions] :allow
-    #   Features that are allowed while calculating. a route
+    #   Features that are allowed while calculating a route.
     #
     # @option params [Types::RouteMatrixAvoidanceOptions] :avoid
     #   Features that are avoided while calculating a route. Avoidance is on a
@@ -817,6 +826,17 @@ module Aws::GeoRoutes
     # @option params [required, Array<Types::RouteMatrixDestination>] :destinations
     #   List of destinations for the route.
     #
+    #   <note markdown="1"> Route calculations are billed for each origin and destination pair. If
+    #   you use a large matrix of origins and destinations, your costs will
+    #   increase accordingly. See [ Amazon Location's pricing page][1] for
+    #   more information.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html`
+    #
     # @option params [Types::RouteMatrixExclusionOptions] :exclude
     #   Features to be strictly excluded while calculating the route.
     #
@@ -831,6 +851,17 @@ module Aws::GeoRoutes
     #
     # @option params [required, Array<Types::RouteMatrixOrigin>] :origins
     #   The position in longitude and latitude for the origin.
+    #
+    #   <note markdown="1"> Route calculations are billed for each origin and destination pair.
+    #   Using a large amount of Origins in a request can lead you to incur
+    #   unexpected charges. See [ Amazon Location's pricing page][1] for more
+    #   information.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html`
     #
     # @option params [required, Types::RouteMatrixBoundary] :routing_boundary
     #   Boundary within which the matrix is to be calculated. All data,
@@ -1043,11 +1074,11 @@ module Aws::GeoRoutes
       req.send_request(options)
     end
 
-    # Calculates a route given the following required parameters: `Origin`
-    # and `Destination`.
+    # `CalculateRoutes` computes routes given the following required
+    # parameters: `Origin` and `Destination`.
     #
     # @option params [Types::RouteAllowOptions] :allow
-    #   Features that are allowed while calculating. a route
+    #   Features that are allowed while calculating a route.
     #
     # @option params [String] :arrival_time
     #   Time of arrival at the destination.
@@ -1191,7 +1222,7 @@ module Aws::GeoRoutes
     #   Type of step returned by the response. Default provides basic steps
     #   intended for web based applications. TurnByTurn provides detailed
     #   instructions with more granularity intended for a turn based
-    #   naviagtion system.
+    #   navigation system.
     #
     # @option params [Array<Types::RouteWaypoint>] :waypoints
     #   List of waypoints between the Origin and Destination.
@@ -1449,7 +1480,7 @@ module Aws::GeoRoutes
     #   resp.routes[0].legs[0].ferry_leg_details.departure.place.waypoint_index #=> Integer
     #   resp.routes[0].legs[0].ferry_leg_details.departure.time #=> String
     #   resp.routes[0].legs[0].ferry_leg_details.notices #=> Array
-    #   resp.routes[0].legs[0].ferry_leg_details.notices[0].code #=> String, one of "AccuratePolylineUnavailable", "NoSchedule", "Other", "ViolatedAvoidFerry", "ViolatedAvoidRailFerry"
+    #   resp.routes[0].legs[0].ferry_leg_details.notices[0].code #=> String, one of "AccuratePolylineUnavailable", "NoSchedule", "Other", "ViolatedAvoidFerry", "ViolatedAvoidRailFerry", "SeasonalClosure"
     #   resp.routes[0].legs[0].ferry_leg_details.notices[0].impact #=> String, one of "High", "Low"
     #   resp.routes[0].legs[0].ferry_leg_details.pass_through_waypoints #=> Array
     #   resp.routes[0].legs[0].ferry_leg_details.pass_through_waypoints[0].geometry_offset #=> Integer
@@ -1608,7 +1639,7 @@ module Aws::GeoRoutes
     #   resp.routes[0].legs[0].pedestrian_leg_details.travel_steps[0].turn_step_details.turn_angle #=> Float
     #   resp.routes[0].legs[0].pedestrian_leg_details.travel_steps[0].turn_step_details.turn_intensity #=> String, one of "Sharp", "Slight", "Typical"
     #   resp.routes[0].legs[0].pedestrian_leg_details.travel_steps[0].type #=> String, one of "Arrive", "Continue", "Depart", "Keep", "RoundaboutEnter", "RoundaboutExit", "RoundaboutPass", "Turn", "Exit", "Ramp", "UTurn"
-    #   resp.routes[0].legs[0].travel_mode #=> String, one of "Car", "Ferry", "Pedestrian", "Scooter", "Truck"
+    #   resp.routes[0].legs[0].travel_mode #=> String, one of "Car", "Ferry", "Pedestrian", "Scooter", "Truck", "CarShuttleTrain"
     #   resp.routes[0].legs[0].type #=> String, one of "Ferry", "Pedestrian", "Vehicle"
     #   resp.routes[0].legs[0].vehicle_leg_details.arrival.place.name #=> String
     #   resp.routes[0].legs[0].vehicle_leg_details.arrival.place.original_position #=> Array
@@ -1888,15 +1919,19 @@ module Aws::GeoRoutes
       req.send_request(options)
     end
 
-    # Calculates the optimal order to travel between a set of waypoints to
-    # minimize either the travel time or the distance travelled during the
-    # journey, based on road network restrictions and the traffic pattern
-    # data.
+    # `OptimizeWaypoints` calculates the optimal order to travel between a
+    # set of waypoints to minimize either the travel time or the distance
+    # travelled during the journey, based on road network restrictions and
+    # the traffic pattern data.
     #
     # @option params [Types::WaypointOptimizationAvoidanceOptions] :avoid
-    #   Features that are avoided while calculating a route. Avoidance is on a
-    #   best-case basis. If an avoidance can't be satisfied for a particular
-    #   case, this setting is ignored.
+    #   Features that are avoided. Avoidance is on a best-case basis. If an
+    #   avoidance can't be satisfied for a particular case, this setting is
+    #   ignored.
+    #
+    # @option params [Types::WaypointOptimizationClusteringOptions] :clustering
+    #   Clustering allows you to specify how nearby waypoints can be clustered
+    #   to improve the optimized sequence.
     #
     # @option params [String] :departure_time
     #   Departure time from the waypoint.
@@ -1980,6 +2015,12 @@ module Aws::GeoRoutes
     #       toll_roads: false,
     #       tunnels: false,
     #       u_turns: false,
+    #     },
+    #     clustering: {
+    #       algorithm: "DrivingDistance", # required, accepts DrivingDistance, TopologySegment
+    #       driving_distance_options: {
+    #         driving_distance: 1, # required
+    #       },
     #     },
     #     departure_time: "TimestampWithTimezoneOffset",
     #     destination: [1.0],
@@ -2096,6 +2137,7 @@ module Aws::GeoRoutes
     #   resp.impeding_waypoints[0].position[0] #=> Float
     #   resp.optimized_waypoints #=> Array
     #   resp.optimized_waypoints[0].arrival_time #=> String
+    #   resp.optimized_waypoints[0].cluster_index #=> Integer
     #   resp.optimized_waypoints[0].departure_time #=> String
     #   resp.optimized_waypoints[0].id #=> String
     #   resp.optimized_waypoints[0].position #=> Array
@@ -2115,8 +2157,7 @@ module Aws::GeoRoutes
       req.send_request(options)
     end
 
-    # The SnapToRoads action matches GPS trace to roads most likely traveled
-    # on.
+    # `SnapToRoads` matches GPS trace to roads most likely traveled on.
     #
     # @option params [String] :key
     #   Optional: The API key to be used for authorization. Either an API key
@@ -2232,7 +2273,7 @@ module Aws::GeoRoutes
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-georoutes'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

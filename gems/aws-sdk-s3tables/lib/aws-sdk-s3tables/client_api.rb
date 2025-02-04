@@ -17,6 +17,7 @@ module Aws::S3Tables
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateNamespaceRequest = Shapes::StructureShape.new(name: 'CreateNamespaceRequest')
     CreateNamespaceRequestNamespaceList = Shapes::ListShape.new(name: 'CreateNamespaceRequestNamespaceList')
@@ -51,6 +52,8 @@ module Aws::S3Tables
     GetTableRequest = Shapes::StructureShape.new(name: 'GetTableRequest')
     GetTableResponse = Shapes::StructureShape.new(name: 'GetTableResponse')
     IcebergCompactionSettings = Shapes::StructureShape.new(name: 'IcebergCompactionSettings')
+    IcebergMetadata = Shapes::StructureShape.new(name: 'IcebergMetadata')
+    IcebergSchema = Shapes::StructureShape.new(name: 'IcebergSchema')
     IcebergSnapshotManagementSettings = Shapes::StructureShape.new(name: 'IcebergSnapshotManagementSettings')
     IcebergUnreferencedFileRemovalSettings = Shapes::StructureShape.new(name: 'IcebergUnreferencedFileRemovalSettings')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
@@ -83,6 +86,8 @@ module Aws::S3Tables
     PutTablePolicyRequest = Shapes::StructureShape.new(name: 'PutTablePolicyRequest')
     RenameTableRequest = Shapes::StructureShape.new(name: 'RenameTableRequest')
     ResourcePolicy = Shapes::StringShape.new(name: 'ResourcePolicy')
+    SchemaField = Shapes::StructureShape.new(name: 'SchemaField')
+    SchemaFieldList = Shapes::ListShape.new(name: 'SchemaFieldList')
     String = Shapes::StringShape.new(name: 'String')
     SyntheticTimestamp_date_time = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_date_time', timestampFormat: "iso8601")
     TableARN = Shapes::StringShape.new(name: 'TableARN')
@@ -101,6 +106,7 @@ module Aws::S3Tables
     TableMaintenanceJobType = Shapes::StringShape.new(name: 'TableMaintenanceJobType')
     TableMaintenanceSettings = Shapes::UnionShape.new(name: 'TableMaintenanceSettings')
     TableMaintenanceType = Shapes::StringShape.new(name: 'TableMaintenanceType')
+    TableMetadata = Shapes::UnionShape.new(name: 'TableMetadata')
     TableName = Shapes::StringShape.new(name: 'TableName')
     TableSummary = Shapes::StructureShape.new(name: 'TableSummary')
     TableSummaryList = Shapes::ListShape.new(name: 'TableSummaryList')
@@ -140,6 +146,7 @@ module Aws::S3Tables
     CreateTableRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: NamespaceName, required: true, location: "uri", location_name: "namespace"))
     CreateTableRequest.add_member(:name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "name"))
     CreateTableRequest.add_member(:format, Shapes::ShapeRef.new(shape: OpenTableFormat, required: true, location_name: "format"))
+    CreateTableRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: TableMetadata, location_name: "metadata"))
     CreateTableRequest.struct_class = Types::CreateTableRequest
 
     CreateTableResponse.add_member(:table_arn, Shapes::ShapeRef.new(shape: TableARN, required: true, location_name: "tableARN"))
@@ -262,6 +269,12 @@ module Aws::S3Tables
     IcebergCompactionSettings.add_member(:target_file_size_mb, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "targetFileSizeMB"))
     IcebergCompactionSettings.struct_class = Types::IcebergCompactionSettings
 
+    IcebergMetadata.add_member(:schema, Shapes::ShapeRef.new(shape: IcebergSchema, required: true, location_name: "schema"))
+    IcebergMetadata.struct_class = Types::IcebergMetadata
+
+    IcebergSchema.add_member(:fields, Shapes::ShapeRef.new(shape: SchemaFieldList, required: true, location_name: "fields"))
+    IcebergSchema.struct_class = Types::IcebergSchema
+
     IcebergSnapshotManagementSettings.add_member(:min_snapshots_to_keep, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "minSnapshotsToKeep"))
     IcebergSnapshotManagementSettings.add_member(:max_snapshot_age_hours, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "maxSnapshotAgeHours"))
     IcebergSnapshotManagementSettings.struct_class = Types::IcebergSnapshotManagementSettings
@@ -346,6 +359,13 @@ module Aws::S3Tables
     RenameTableRequest.add_member(:version_token, Shapes::ShapeRef.new(shape: VersionToken, location_name: "versionToken"))
     RenameTableRequest.struct_class = Types::RenameTableRequest
 
+    SchemaField.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    SchemaField.add_member(:type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "type"))
+    SchemaField.add_member(:required, Shapes::ShapeRef.new(shape: Boolean, location_name: "required"))
+    SchemaField.struct_class = Types::SchemaField
+
+    SchemaFieldList.member = Shapes::ShapeRef.new(shape: SchemaField)
+
     TableBucketMaintenanceConfiguration.key = Shapes::ShapeRef.new(shape: TableBucketMaintenanceType)
     TableBucketMaintenanceConfiguration.value = Shapes::ShapeRef.new(shape: TableBucketMaintenanceConfigurationValue)
 
@@ -389,6 +409,12 @@ module Aws::S3Tables
     TableMaintenanceSettings.add_member_subclass(:iceberg_snapshot_management, Types::TableMaintenanceSettings::IcebergSnapshotManagement)
     TableMaintenanceSettings.add_member_subclass(:unknown, Types::TableMaintenanceSettings::Unknown)
     TableMaintenanceSettings.struct_class = Types::TableMaintenanceSettings
+
+    TableMetadata.add_member(:iceberg, Shapes::ShapeRef.new(shape: IcebergMetadata, location_name: "iceberg"))
+    TableMetadata.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    TableMetadata.add_member_subclass(:iceberg, Types::TableMetadata::Iceberg)
+    TableMetadata.add_member_subclass(:unknown, Types::TableMetadata::Unknown)
+    TableMetadata.struct_class = Types::TableMetadata
 
     TableSummary.add_member(:namespace, Shapes::ShapeRef.new(shape: NamespaceList, required: true, location_name: "namespace"))
     TableSummary.add_member(:name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "name"))

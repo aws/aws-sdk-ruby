@@ -734,6 +734,9 @@ module Aws::DatabaseMigrationService
     # @option params [Array<Types::SourceDataSetting>] :source_data_settings
     #   Specifies information about the source data provider.
     #
+    # @option params [Array<Types::TargetDataSetting>] :target_data_settings
+    #   Specifies information about the target data provider.
+    #
     # @option params [Integer] :number_of_jobs
     #   The number of parallel jobs that trigger parallel threads to unload
     #   the tables from the source, and then load them to the target.
@@ -765,6 +768,11 @@ module Aws::DatabaseMigrationService
     #         slot_name: "String",
     #       },
     #     ],
+    #     target_data_settings: [
+    #       {
+    #         table_preparation_mode: "do-nothing", # accepts do-nothing, truncate, drop-tables-on-target
+    #       },
+    #     ],
     #     number_of_jobs: 1,
     #     tags: [
     #       {
@@ -794,6 +802,8 @@ module Aws::DatabaseMigrationService
     #   resp.data_migration.source_data_settings[0].cdc_start_time #=> Time
     #   resp.data_migration.source_data_settings[0].cdc_stop_time #=> Time
     #   resp.data_migration.source_data_settings[0].slot_name #=> String
+    #   resp.data_migration.target_data_settings #=> Array
+    #   resp.data_migration.target_data_settings[0].table_preparation_mode #=> String, one of "do-nothing", "truncate", "drop-tables-on-target"
     #   resp.data_migration.data_migration_statistics.tables_loaded #=> Integer
     #   resp.data_migration.data_migration_statistics.elapsed_time_millis #=> Integer
     #   resp.data_migration.data_migration_statistics.tables_loading #=> Integer
@@ -3415,6 +3425,8 @@ module Aws::DatabaseMigrationService
     #   resp.data_migration.source_data_settings[0].cdc_start_time #=> Time
     #   resp.data_migration.source_data_settings[0].cdc_stop_time #=> Time
     #   resp.data_migration.source_data_settings[0].slot_name #=> String
+    #   resp.data_migration.target_data_settings #=> Array
+    #   resp.data_migration.target_data_settings[0].table_preparation_mode #=> String, one of "do-nothing", "truncate", "drop-tables-on-target"
     #   resp.data_migration.data_migration_statistics.tables_loaded #=> Integer
     #   resp.data_migration.data_migration_statistics.elapsed_time_millis #=> Integer
     #   resp.data_migration.data_migration_statistics.tables_loading #=> Integer
@@ -4965,6 +4977,8 @@ module Aws::DatabaseMigrationService
     #   resp.data_migrations[0].source_data_settings[0].cdc_start_time #=> Time
     #   resp.data_migrations[0].source_data_settings[0].cdc_stop_time #=> Time
     #   resp.data_migrations[0].source_data_settings[0].slot_name #=> String
+    #   resp.data_migrations[0].target_data_settings #=> Array
+    #   resp.data_migrations[0].target_data_settings[0].table_preparation_mode #=> String, one of "do-nothing", "truncate", "drop-tables-on-target"
     #   resp.data_migrations[0].data_migration_statistics.tables_loaded #=> Integer
     #   resp.data_migrations[0].data_migration_statistics.elapsed_time_millis #=> Integer
     #   resp.data_migrations[0].data_migration_statistics.tables_loading #=> Integer
@@ -8769,6 +8783,10 @@ module Aws::DatabaseMigrationService
     #   The new information about the source data provider for the data
     #   migration.
     #
+    # @option params [Array<Types::TargetDataSetting>] :target_data_settings
+    #   The new information about the target data provider for the data
+    #   migration.
+    #
     # @option params [Integer] :number_of_jobs
     #   The number of parallel jobs that trigger parallel threads to unload
     #   the tables from the source, and then load them to the target.
@@ -8797,6 +8815,11 @@ module Aws::DatabaseMigrationService
     #         slot_name: "String",
     #       },
     #     ],
+    #     target_data_settings: [
+    #       {
+    #         table_preparation_mode: "do-nothing", # accepts do-nothing, truncate, drop-tables-on-target
+    #       },
+    #     ],
     #     number_of_jobs: 1,
     #     selection_rules: "SecretString",
     #   })
@@ -8819,6 +8842,8 @@ module Aws::DatabaseMigrationService
     #   resp.data_migration.source_data_settings[0].cdc_start_time #=> Time
     #   resp.data_migration.source_data_settings[0].cdc_stop_time #=> Time
     #   resp.data_migration.source_data_settings[0].slot_name #=> String
+    #   resp.data_migration.target_data_settings #=> Array
+    #   resp.data_migration.target_data_settings[0].table_preparation_mode #=> String, one of "do-nothing", "truncate", "drop-tables-on-target"
     #   resp.data_migration.data_migration_statistics.tables_loaded #=> Integer
     #   resp.data_migration.data_migration_statistics.elapsed_time_millis #=> Integer
     #   resp.data_migration.data_migration_statistics.tables_loading #=> Integer
@@ -11362,6 +11387,8 @@ module Aws::DatabaseMigrationService
     #   resp.data_migration.source_data_settings[0].cdc_start_time #=> Time
     #   resp.data_migration.source_data_settings[0].cdc_stop_time #=> Time
     #   resp.data_migration.source_data_settings[0].slot_name #=> String
+    #   resp.data_migration.target_data_settings #=> Array
+    #   resp.data_migration.target_data_settings[0].table_preparation_mode #=> String, one of "do-nothing", "truncate", "drop-tables-on-target"
     #   resp.data_migration.data_migration_statistics.tables_loaded #=> Integer
     #   resp.data_migration.data_migration_statistics.elapsed_time_millis #=> Integer
     #   resp.data_migration.data_migration_statistics.tables_loading #=> Integer
@@ -12267,6 +12294,8 @@ module Aws::DatabaseMigrationService
     #   resp.data_migration.source_data_settings[0].cdc_start_time #=> Time
     #   resp.data_migration.source_data_settings[0].cdc_stop_time #=> Time
     #   resp.data_migration.source_data_settings[0].slot_name #=> String
+    #   resp.data_migration.target_data_settings #=> Array
+    #   resp.data_migration.target_data_settings[0].table_preparation_mode #=> String, one of "do-nothing", "truncate", "drop-tables-on-target"
     #   resp.data_migration.data_migration_statistics.tables_loaded #=> Integer
     #   resp.data_migration.data_migration_statistics.elapsed_time_millis #=> Integer
     #   resp.data_migration.data_migration_statistics.tables_loading #=> Integer
@@ -12560,7 +12589,7 @@ module Aws::DatabaseMigrationService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.112.0'
+      context[:gem_version] = '1.113.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -232,10 +232,13 @@ module Aws::VerifiedPermissions
 
     class ContextDefinition
       attr_accessor context_map: ::Hash[::String, Types::AttributeValue]
+      attr_accessor cedar_json: ::String
       attr_accessor unknown: untyped
-      SENSITIVE: [:context_map]
+      SENSITIVE: [:context_map, :cedar_json]
 
       class ContextMap < ContextDefinition
+      end
+      class CedarJson < ContextDefinition
       end
       class Unknown < ContextDefinition
       end
@@ -350,10 +353,13 @@ module Aws::VerifiedPermissions
 
     class EntitiesDefinition
       attr_accessor entity_list: ::Array[Types::EntityItem]
+      attr_accessor cedar_json: ::String
       attr_accessor unknown: untyped
-      SENSITIVE: []
+      SENSITIVE: [:cedar_json]
 
       class EntityList < EntitiesDefinition
+      end
+      class CedarJson < EntitiesDefinition
       end
       class Unknown < EntitiesDefinition
       end

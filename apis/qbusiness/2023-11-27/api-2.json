@@ -70,6 +70,24 @@
         {"shape":"ServiceQuotaExceededException"}
       ]
     },
+    "CancelSubscription":{
+      "name":"CancelSubscription",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/applications/{applicationId}/subscriptions/{subscriptionId}",
+        "responseCode":200
+      },
+      "input":{"shape":"CancelSubscriptionRequest"},
+      "output":{"shape":"CancelSubscriptionResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServerException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ValidationException"},
+        {"shape":"AccessDeniedException"}
+      ],
+      "idempotent":true
+    },
     "Chat":{
       "name":"Chat",
       "http":{
@@ -227,6 +245,25 @@
         {"shape":"AccessDeniedException"},
         {"shape":"ServiceQuotaExceededException"}
       ]
+    },
+    "CreateSubscription":{
+      "name":"CreateSubscription",
+      "http":{
+        "method":"POST",
+        "requestUri":"/applications/{applicationId}/subscriptions",
+        "responseCode":200
+      },
+      "input":{"shape":"CreateSubscriptionRequest"},
+      "output":{"shape":"CreateSubscriptionResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServerException"},
+        {"shape":"ConflictException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ValidationException"},
+        {"shape":"AccessDeniedException"}
+      ],
+      "idempotent":true
     },
     "CreateUser":{
       "name":"CreateUser",
@@ -959,6 +996,24 @@
         {"shape":"AccessDeniedException"}
       ]
     },
+    "ListSubscriptions":{
+      "name":"ListSubscriptions",
+      "http":{
+        "method":"GET",
+        "requestUri":"/applications/{applicationId}/subscriptions",
+        "responseCode":200
+      },
+      "input":{"shape":"ListSubscriptionsRequest"},
+      "output":{"shape":"ListSubscriptionsResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServerException"},
+        {"shape":"ConflictException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ValidationException"},
+        {"shape":"AccessDeniedException"}
+      ]
+    },
     "ListTagsForResource":{
       "name":"ListTagsForResource",
       "http":{
@@ -1255,6 +1310,25 @@
         {"shape":"ValidationException"},
         {"shape":"AccessDeniedException"},
         {"shape":"ServiceQuotaExceededException"}
+      ],
+      "idempotent":true
+    },
+    "UpdateSubscription":{
+      "name":"UpdateSubscription",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/applications/{applicationId}/subscriptions/{subscriptionId}",
+        "responseCode":200
+      },
+      "input":{"shape":"UpdateSubscriptionRequest"},
+      "output":{"shape":"UpdateSubscriptionResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServerException"},
+        {"shape":"ConflictException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ValidationException"},
+        {"shape":"AccessDeniedException"}
       ],
       "idempotent":true
     },
@@ -1557,6 +1631,13 @@
       "required":["creatorModeControl"],
       "members":{
         "creatorModeControl":{"shape":"CreatorModeControl"}
+      }
+    },
+    "AppliedOrchestrationConfiguration":{
+      "type":"structure",
+      "required":["control"],
+      "members":{
+        "control":{"shape":"OrchestrationControl"}
       }
     },
     "AssociatePermissionRequest":{
@@ -1883,6 +1964,33 @@
       "member":{"shape":"BrowserExtension"},
       "max":2,
       "min":0
+    },
+    "CancelSubscriptionRequest":{
+      "type":"structure",
+      "required":[
+        "applicationId",
+        "subscriptionId"
+      ],
+      "members":{
+        "applicationId":{
+          "shape":"ApplicationId",
+          "location":"uri",
+          "locationName":"applicationId"
+        },
+        "subscriptionId":{
+          "shape":"SubscriptionId",
+          "location":"uri",
+          "locationName":"subscriptionId"
+        }
+      }
+    },
+    "CancelSubscriptionResponse":{
+      "type":"structure",
+      "members":{
+        "subscriptionArn":{"shape":"SubscriptionArn"},
+        "currentSubscription":{"shape":"SubscriptionDetails"},
+        "nextSubscription":{"shape":"SubscriptionDetails"}
+      }
     },
     "ChatInput":{
       "type":"structure",
@@ -2338,6 +2446,36 @@
       "members":{
         "retrieverId":{"shape":"RetrieverId"},
         "retrieverArn":{"shape":"RetrieverArn"}
+      }
+    },
+    "CreateSubscriptionRequest":{
+      "type":"structure",
+      "required":[
+        "applicationId",
+        "principal",
+        "type"
+      ],
+      "members":{
+        "applicationId":{
+          "shape":"ApplicationId",
+          "location":"uri",
+          "locationName":"applicationId"
+        },
+        "principal":{"shape":"SubscriptionPrincipal"},
+        "type":{"shape":"SubscriptionType"},
+        "clientToken":{
+          "shape":"ClientToken",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "CreateSubscriptionResponse":{
+      "type":"structure",
+      "members":{
+        "subscriptionId":{"shape":"SubscriptionId"},
+        "subscriptionArn":{"shape":"SubscriptionArn"},
+        "currentSubscription":{"shape":"SubscriptionDetails"},
+        "nextSubscription":{"shape":"SubscriptionDetails"}
       }
     },
     "CreateUserRequest":{
@@ -3279,6 +3417,7 @@
       "type":"structure",
       "members":{
         "responseScope":{"shape":"ResponseScope"},
+        "orchestrationConfiguration":{"shape":"AppliedOrchestrationConfiguration"},
         "blockedPhrases":{"shape":"BlockedPhrasesConfiguration"},
         "topicConfigurations":{"shape":"TopicConfigurations"},
         "creatorModeConfiguration":{"shape":"AppliedCreatorModeConfiguration"},
@@ -3634,6 +3773,12 @@
         "browserExtensionConfiguration":{"shape":"BrowserExtensionConfiguration"},
         "customizationConfiguration":{"shape":"CustomizationConfiguration"}
       }
+    },
+    "GroupIdentifier":{
+      "type":"string",
+      "max":47,
+      "min":1,
+      "pattern":"([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}"
     },
     "GroupMembers":{
       "type":"structure",
@@ -4408,6 +4553,34 @@
         "nextToken":{"shape":"NextToken"}
       }
     },
+    "ListSubscriptionsRequest":{
+      "type":"structure",
+      "required":["applicationId"],
+      "members":{
+        "applicationId":{
+          "shape":"ApplicationId",
+          "location":"uri",
+          "locationName":"applicationId"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "maxResults":{
+          "shape":"MaxResultsIntegerForListSubscriptions",
+          "location":"querystring",
+          "locationName":"maxResults"
+        }
+      }
+    },
+    "ListSubscriptionsResponse":{
+      "type":"structure",
+      "members":{
+        "nextToken":{"shape":"NextToken"},
+        "subscriptions":{"shape":"Subscriptions"}
+      }
+    },
     "ListTagsForResourceRequest":{
       "type":"structure",
       "required":["resourceARN"],
@@ -4561,6 +4734,12 @@
       "type":"integer",
       "box":true,
       "max":50,
+      "min":1
+    },
+    "MaxResultsIntegerForListSubscriptions":{
+      "type":"integer",
+      "box":true,
+      "max":100,
       "min":1
     },
     "MaxResultsIntegerForListWebExperiencesRequest":{
@@ -4786,6 +4965,20 @@
         "secretsArn":{"shape":"SecretArn"},
         "secretsRole":{"shape":"RoleArn"}
       }
+    },
+    "OrchestrationConfiguration":{
+      "type":"structure",
+      "required":["control"],
+      "members":{
+        "control":{"shape":"OrchestrationControl"}
+      }
+    },
+    "OrchestrationControl":{
+      "type":"string",
+      "enum":[
+        "ENABLED",
+        "DISABLED"
+      ]
     },
     "Origin":{
       "type":"string",
@@ -5492,12 +5685,51 @@
       "type":"list",
       "member":{"shape":"SubnetId"}
     },
+    "Subscription":{
+      "type":"structure",
+      "members":{
+        "subscriptionId":{"shape":"SubscriptionId"},
+        "subscriptionArn":{"shape":"SubscriptionArn"},
+        "principal":{"shape":"SubscriptionPrincipal"},
+        "currentSubscription":{"shape":"SubscriptionDetails"},
+        "nextSubscription":{"shape":"SubscriptionDetails"}
+      }
+    },
+    "SubscriptionArn":{
+      "type":"string",
+      "max":1224,
+      "min":10,
+      "pattern":"arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}"
+    },
+    "SubscriptionDetails":{
+      "type":"structure",
+      "members":{
+        "type":{"shape":"SubscriptionType"}
+      }
+    },
+    "SubscriptionId":{
+      "type":"string",
+      "max":1224,
+      "min":0
+    },
+    "SubscriptionPrincipal":{
+      "type":"structure",
+      "members":{
+        "user":{"shape":"UserIdentifier"},
+        "group":{"shape":"GroupIdentifier"}
+      },
+      "union":true
+    },
     "SubscriptionType":{
       "type":"string",
       "enum":[
         "Q_LITE",
         "Q_BUSINESS"
       ]
+    },
+    "Subscriptions":{
+      "type":"list",
+      "member":{"shape":"Subscription"}
     },
     "SyncSchedule":{
       "type":"string",
@@ -5720,6 +5952,7 @@
           "idempotencyToken":true
         },
         "responseScope":{"shape":"ResponseScope"},
+        "orchestrationConfiguration":{"shape":"OrchestrationConfiguration"},
         "blockedPhrasesConfigurationUpdate":{"shape":"BlockedPhrasesConfigurationUpdate"},
         "topicConfigurationsToCreateOrUpdate":{"shape":"TopicConfigurations"},
         "topicConfigurationsToDelete":{"shape":"TopicConfigurations"},
@@ -5880,6 +6113,35 @@
       "members":{
       }
     },
+    "UpdateSubscriptionRequest":{
+      "type":"structure",
+      "required":[
+        "applicationId",
+        "subscriptionId",
+        "type"
+      ],
+      "members":{
+        "applicationId":{
+          "shape":"ApplicationId",
+          "location":"uri",
+          "locationName":"applicationId"
+        },
+        "subscriptionId":{
+          "shape":"SubscriptionId",
+          "location":"uri",
+          "locationName":"subscriptionId"
+        },
+        "type":{"shape":"SubscriptionType"}
+      }
+    },
+    "UpdateSubscriptionResponse":{
+      "type":"structure",
+      "members":{
+        "subscriptionArn":{"shape":"SubscriptionArn"},
+        "currentSubscription":{"shape":"SubscriptionDetails"},
+        "nextSubscription":{"shape":"SubscriptionDetails"}
+      }
+    },
     "UpdateUserRequest":{
       "type":"structure",
       "required":[
@@ -5975,6 +6237,12 @@
       "max":1024,
       "min":1,
       "pattern":"\\P{C}*"
+    },
+    "UserIdentifier":{
+      "type":"string",
+      "max":47,
+      "min":1,
+      "pattern":"([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}"
     },
     "UserIds":{
       "type":"list",

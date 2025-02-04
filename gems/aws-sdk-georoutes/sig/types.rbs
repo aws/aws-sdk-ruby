@@ -307,6 +307,7 @@ module Aws::GeoRoutes
 
     class OptimizeWaypointsRequest
       attr_accessor avoid: Types::WaypointOptimizationAvoidanceOptions
+      attr_accessor clustering: Types::WaypointOptimizationClusteringOptions
       attr_accessor departure_time: ::String
       attr_accessor destination: ::Array[::Float]
       attr_accessor destination_options: Types::WaypointOptimizationDestinationOptions
@@ -549,7 +550,7 @@ module Aws::GeoRoutes
     end
 
     class RouteFerryNotice
-      attr_accessor code: ("AccuratePolylineUnavailable" | "NoSchedule" | "Other" | "ViolatedAvoidFerry" | "ViolatedAvoidRailFerry")
+      attr_accessor code: ("AccuratePolylineUnavailable" | "NoSchedule" | "Other" | "ViolatedAvoidFerry" | "ViolatedAvoidRailFerry" | "SeasonalClosure")
       attr_accessor impact: ("High" | "Low")
       SENSITIVE: []
     end
@@ -611,7 +612,7 @@ module Aws::GeoRoutes
       attr_accessor geometry: Types::RouteLegGeometry
       attr_accessor language: ::String
       attr_accessor pedestrian_leg_details: Types::RoutePedestrianLegDetails
-      attr_accessor travel_mode: ("Car" | "Ferry" | "Pedestrian" | "Scooter" | "Truck")
+      attr_accessor travel_mode: ("Car" | "Ferry" | "Pedestrian" | "Scooter" | "Truck" | "CarShuttleTrain")
       attr_accessor type: ("Ferry" | "Pedestrian" | "Vehicle")
       attr_accessor vehicle_leg_details: Types::RouteVehicleLegDetails
       SENSITIVE: []
@@ -1433,6 +1434,12 @@ module Aws::GeoRoutes
       SENSITIVE: []
     end
 
+    class WaypointOptimizationClusteringOptions
+      attr_accessor algorithm: ("DrivingDistance" | "TopologySegment")
+      attr_accessor driving_distance_options: Types::WaypointOptimizationDrivingDistanceOptions
+      SENSITIVE: []
+    end
+
     class WaypointOptimizationConnection
       attr_accessor distance: ::Integer
       attr_accessor from: ::String
@@ -1460,6 +1467,11 @@ module Aws::GeoRoutes
       SENSITIVE: []
     end
 
+    class WaypointOptimizationDrivingDistanceOptions
+      attr_accessor driving_distance: ::Integer
+      SENSITIVE: []
+    end
+
     class WaypointOptimizationExclusionOptions
       attr_accessor countries: ::Array[::String]
       SENSITIVE: []
@@ -1480,6 +1492,7 @@ module Aws::GeoRoutes
 
     class WaypointOptimizationOptimizedWaypoint
       attr_accessor arrival_time: ::String
+      attr_accessor cluster_index: ::Integer
       attr_accessor departure_time: ::String
       attr_accessor id: ::String
       attr_accessor position: ::Array[::Float]

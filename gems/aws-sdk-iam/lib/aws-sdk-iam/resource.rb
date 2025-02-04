@@ -580,6 +580,8 @@ module Aws::IAM
     #         value: "tagValueType", # required
     #       },
     #     ],
+    #     assertion_encryption_mode: "Required", # accepts Required, Allowed
+    #     add_private_key: "privateKeyType",
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :saml_metadata_document
@@ -622,6 +624,12 @@ module Aws::IAM
     #
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    # @option options [String] :assertion_encryption_mode
+    #   Specifies the encryption setting for the SAML provider.
+    # @option options [String] :add_private_key
+    #   The private key generated from your external identity provider. The
+    #   private key must be a .pem file that uses AES-GCM or AES-CBC
+    #   encryption algorithm to decrypt SAML assertions.
     # @return [SamlProvider]
     def create_saml_provider(options = {})
       resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do

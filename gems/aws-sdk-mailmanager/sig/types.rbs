@@ -36,6 +36,20 @@ module Aws::MailManager
       SENSITIVE: []
     end
 
+    class AddressFilter
+      attr_accessor address_prefix: ::String
+      SENSITIVE: [:address_prefix]
+    end
+
+    class AddressList
+      attr_accessor address_list_arn: ::String
+      attr_accessor address_list_id: ::String
+      attr_accessor address_list_name: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor last_updated_timestamp: ::Time
+      SENSITIVE: []
+    end
+
     class Analysis
       attr_accessor analyzer: ::String
       attr_accessor result_field: ::String
@@ -151,6 +165,32 @@ module Aws::MailManager
       SENSITIVE: []
     end
 
+    class CreateAddressListImportJobRequest
+      attr_accessor address_list_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor import_data_format: Types::ImportDataFormat
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAddressListImportJobResponse
+      attr_accessor job_id: ::String
+      attr_accessor pre_signed_url: ::String
+      SENSITIVE: [:pre_signed_url]
+    end
+
+    class CreateAddressListRequest
+      attr_accessor address_list_name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateAddressListResponse
+      attr_accessor address_list_id: ::String
+      SENSITIVE: []
+    end
+
     class CreateArchiveRequest
       attr_accessor archive_name: ::String
       attr_accessor client_token: ::String
@@ -240,6 +280,14 @@ module Aws::MailManager
     class DeleteAddonSubscriptionResponse < Aws::EmptyStructure
     end
 
+    class DeleteAddressListRequest
+      attr_accessor address_list_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAddressListResponse < Aws::EmptyStructure
+    end
+
     class DeleteArchiveRequest
       attr_accessor archive_id: ::String
       SENSITIVE: []
@@ -293,6 +341,15 @@ module Aws::MailManager
       attr_accessor index_id: ::String
       attr_accessor role_arn: ::String
       SENSITIVE: []
+    end
+
+    class DeregisterMemberFromAddressListRequest
+      attr_accessor address: ::String
+      attr_accessor address_list_id: ::String
+      SENSITIVE: [:address]
+    end
+
+    class DeregisterMemberFromAddressListResponse < Aws::EmptyStructure
     end
 
     class DropAction < Aws::EmptyStructure
@@ -352,6 +409,41 @@ module Aws::MailManager
       attr_accessor addon_name: ::String
       attr_accessor addon_subscription_arn: ::String
       attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class GetAddressListImportJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAddressListImportJobResponse
+      attr_accessor address_list_id: ::String
+      attr_accessor completed_timestamp: ::Time
+      attr_accessor created_timestamp: ::Time
+      attr_accessor error: ::String
+      attr_accessor failed_items_count: ::Integer
+      attr_accessor import_data_format: Types::ImportDataFormat
+      attr_accessor imported_items_count: ::Integer
+      attr_accessor job_id: ::String
+      attr_accessor name: ::String
+      attr_accessor pre_signed_url: ::String
+      attr_accessor start_timestamp: ::Time
+      attr_accessor status: ("CREATED" | "PROCESSING" | "COMPLETED" | "FAILED" | "STOPPED")
+      SENSITIVE: [:pre_signed_url]
+    end
+
+    class GetAddressListRequest
+      attr_accessor address_list_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAddressListResponse
+      attr_accessor address_list_arn: ::String
+      attr_accessor address_list_id: ::String
+      attr_accessor address_list_name: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor last_updated_timestamp: ::Time
       SENSITIVE: []
     end
 
@@ -455,6 +547,18 @@ module Aws::MailManager
       SENSITIVE: []
     end
 
+    class GetMemberOfAddressListRequest
+      attr_accessor address: ::String
+      attr_accessor address_list_id: ::String
+      SENSITIVE: [:address]
+    end
+
+    class GetMemberOfAddressListResponse
+      attr_accessor address: ::String
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: [:address]
+    end
+
     class GetRelayRequest
       attr_accessor relay_id: ::String
       SENSITIVE: []
@@ -504,6 +608,27 @@ module Aws::MailManager
       SENSITIVE: []
     end
 
+    class ImportDataFormat
+      attr_accessor import_data_type: ("CSV" | "JSON")
+      SENSITIVE: []
+    end
+
+    class ImportJob
+      attr_accessor address_list_id: ::String
+      attr_accessor completed_timestamp: ::Time
+      attr_accessor created_timestamp: ::Time
+      attr_accessor error: ::String
+      attr_accessor failed_items_count: ::Integer
+      attr_accessor import_data_format: Types::ImportDataFormat
+      attr_accessor imported_items_count: ::Integer
+      attr_accessor job_id: ::String
+      attr_accessor name: ::String
+      attr_accessor pre_signed_url: ::String
+      attr_accessor start_timestamp: ::Time
+      attr_accessor status: ("CREATED" | "PROCESSING" | "COMPLETED" | "FAILED" | "STOPPED")
+      SENSITIVE: [:pre_signed_url]
+    end
+
     class IngressAnalysis
       attr_accessor analyzer: ::String
       attr_accessor result_field: ::String
@@ -518,10 +643,13 @@ module Aws::MailManager
 
     class IngressBooleanToEvaluate
       attr_accessor analysis: Types::IngressAnalysis
+      attr_accessor is_in_address_list: Types::IngressIsInAddressList
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class Analysis < IngressBooleanToEvaluate
+      end
+      class IsInAddressList < IngressBooleanToEvaluate
       end
       class Unknown < IngressBooleanToEvaluate
       end
@@ -542,6 +670,12 @@ module Aws::MailManager
       attr_accessor evaluate: Types::IngressIpToEvaluate
       attr_accessor operator: ("CIDR_MATCHES" | "NOT_CIDR_MATCHES")
       attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class IngressIsInAddressList
+      attr_accessor address_lists: ::Array[::String]
+      attr_accessor attribute: ("RECIPIENT")
       SENSITIVE: []
     end
 
@@ -641,6 +775,31 @@ module Aws::MailManager
       SENSITIVE: []
     end
 
+    class ListAddressListImportJobsRequest
+      attr_accessor address_list_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAddressListImportJobsResponse
+      attr_accessor import_jobs: ::Array[Types::ImportJob]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAddressListsRequest
+      attr_accessor next_token: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAddressListsResponse
+      attr_accessor address_lists: ::Array[Types::AddressList]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListArchiveExportsRequest
       attr_accessor archive_id: ::String
       attr_accessor next_token: ::String
@@ -687,6 +846,20 @@ module Aws::MailManager
 
     class ListIngressPointsResponse
       attr_accessor ingress_points: ::Array[Types::IngressPoint]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMembersOfAddressListRequest
+      attr_accessor address_list_id: ::String
+      attr_accessor filter: Types::AddressFilter
+      attr_accessor next_token: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListMembersOfAddressListResponse
+      attr_accessor addresses: ::Array[Types::SavedAddress]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -783,6 +956,15 @@ module Aws::MailManager
       attr_accessor action: ("ALLOW" | "DENY")
       attr_accessor conditions: ::Array[Types::PolicyCondition]
       SENSITIVE: []
+    end
+
+    class RegisterMemberToAddressListRequest
+      attr_accessor address: ::String
+      attr_accessor address_list_id: ::String
+      SENSITIVE: [:address]
+    end
+
+    class RegisterMemberToAddressListResponse < Aws::EmptyStructure
     end
 
     class Relay
@@ -896,10 +1078,13 @@ module Aws::MailManager
 
     class RuleBooleanToEvaluate
       attr_accessor attribute: ("READ_RECEIPT_REQUESTED" | "TLS" | "TLS_WRAPPED")
+      attr_accessor is_in_address_list: Types::RuleIsInAddressList
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class Attribute < RuleBooleanToEvaluate
+      end
+      class IsInAddressList < RuleBooleanToEvaluate
       end
       class Unknown < RuleBooleanToEvaluate
       end
@@ -953,6 +1138,12 @@ module Aws::MailManager
       end
       class Unknown < RuleIpToEvaluate
       end
+    end
+
+    class RuleIsInAddressList
+      attr_accessor address_lists: ::Array[::String]
+      attr_accessor attribute: ("RECIPIENT" | "MAIL_FROM" | "SENDER" | "FROM" | "TO" | "CC")
+      SENSITIVE: []
     end
 
     class RuleNumberExpression
@@ -1036,6 +1227,12 @@ module Aws::MailManager
       SENSITIVE: []
     end
 
+    class SavedAddress
+      attr_accessor address: ::String
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: [:address]
+    end
+
     class SearchStatus
       attr_accessor completion_timestamp: ::Time
       attr_accessor error_message: ::String
@@ -1059,6 +1256,14 @@ module Aws::MailManager
     class ServiceQuotaExceededException
       attr_accessor message: ::String
       SENSITIVE: []
+    end
+
+    class StartAddressListImportJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartAddressListImportJobResponse < Aws::EmptyStructure
     end
 
     class StartArchiveExportRequest
@@ -1091,6 +1296,14 @@ module Aws::MailManager
       SENSITIVE: []
     end
 
+    class StopAddressListImportJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopAddressListImportJobResponse < Aws::EmptyStructure
+    end
+
     class StopArchiveExportRequest
       attr_accessor export_id: ::String
       SENSITIVE: []
@@ -1110,7 +1323,7 @@ module Aws::MailManager
     class Tag
       attr_accessor key: ::String
       attr_accessor value: ::String
-      SENSITIVE: [:key, :value]
+      SENSITIVE: []
     end
 
     class TagResourceRequest

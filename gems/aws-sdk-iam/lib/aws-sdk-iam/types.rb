@@ -1401,13 +1401,25 @@ module Aws::IAM
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] assertion_encryption_mode
+    #   Specifies the encryption setting for the SAML provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] add_private_key
+    #   The private key generated from your external identity provider. The
+    #   private key must be a .pem file that uses AES-GCM or AES-CBC
+    #   encryption algorithm to decrypt SAML assertions.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateSAMLProviderRequest AWS API Documentation
     #
     class CreateSAMLProviderRequest < Struct.new(
       :saml_metadata_document,
       :name,
-      :tags)
-      SENSITIVE = []
+      :tags,
+      :assertion_encryption_mode,
+      :add_private_key)
+      SENSITIVE = [:add_private_key]
       include Aws::Structure
     end
 
@@ -3995,6 +4007,10 @@ module Aws::IAM
 
     # Contains the response to a successful GetSAMLProvider request.
     #
+    # @!attribute [rw] saml_provider_uuid
+    #   The unique identifier assigned to the SAML provider.
+    #   @return [String]
+    #
     # @!attribute [rw] saml_metadata_document
     #   The XML metadata document that includes information about an
     #   identity provider.
@@ -4019,13 +4035,24 @@ module Aws::IAM
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] assertion_encryption_mode
+    #   Specifies the encryption setting for the SAML provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_key_list
+    #   The private key metadata for the SAML provider.
+    #   @return [Array<Types::SAMLPrivateKey>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetSAMLProviderResponse AWS API Documentation
     #
     class GetSAMLProviderResponse < Struct.new(
+      :saml_provider_uuid,
       :saml_metadata_document,
       :create_date,
       :valid_until,
-      :tags)
+      :tags,
+      :assertion_encryption_mode,
+      :private_key_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9192,6 +9219,33 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # Contains the private keys for the SAML provider.
+    #
+    # This data type is used as a response element in the GetSAMLProvider
+    # operation.
+    #
+    # @!attribute [rw] key_id
+    #   The unique identifier for the SAML private key.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   The date and time, in [ISO 8601 date-time ][1] format, when the
+    #   private key was uploaded.
+    #
+    #
+    #
+    #   [1]: http://www.iso.org/iso/iso8601
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SAMLPrivateKey AWS API Documentation
+    #
+    class SAMLPrivateKey < Struct.new(
+      :key_id,
+      :timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the list of SAML providers for this account.
     #
     # @!attribute [rw] arn
@@ -11345,7 +11399,7 @@ module Aws::IAM
     #   expiration information, and keys that can be used to validate the
     #   SAML authentication response (assertions) that are received from the
     #   IdP. You must generate the metadata document using the identity
-    #   management software that is used as your organization's IdP.
+    #   management software that is used as your IdP.
     #   @return [String]
     #
     # @!attribute [rw] saml_provider_arn
@@ -11359,12 +11413,29 @@ module Aws::IAM
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
+    # @!attribute [rw] assertion_encryption_mode
+    #   Specifies the encryption setting for the SAML provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] add_private_key
+    #   Specifies the new private key from your external identity provider.
+    #   The private key must be a .pem file that uses AES-GCM or AES-CBC
+    #   encryption algorithm to decrypt SAML assertions.
+    #   @return [String]
+    #
+    # @!attribute [rw] remove_private_key
+    #   The Key ID of the private key to remove.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSAMLProviderRequest AWS API Documentation
     #
     class UpdateSAMLProviderRequest < Struct.new(
       :saml_metadata_document,
-      :saml_provider_arn)
-      SENSITIVE = []
+      :saml_provider_arn,
+      :assertion_encryption_mode,
+      :add_private_key,
+      :remove_private_key)
+      SENSITIVE = [:add_private_key]
       include Aws::Structure
     end
 

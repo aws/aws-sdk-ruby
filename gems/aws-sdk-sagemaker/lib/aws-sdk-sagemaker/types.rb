@@ -1342,6 +1342,16 @@ module Aws::SageMaker
     # @!attribute [rw] resource_spec
     #   Specifies the ARN's of a SageMaker AI image and SageMaker AI image
     #   version, and the instance type that the version runs on.
+    #
+    #   <note markdown="1"> When both `SageMakerImageVersionArn` and `SageMakerImageArn` are
+    #   passed, `SageMakerImageVersionArn` is used. Any updates to
+    #   `SageMakerImageArn` will not take effect if
+    #   `SageMakerImageVersionArn` already exists in the `ResourceSpec`
+    #   because `SageMakerImageVersionArn` always takes precedence. To clear
+    #   the value set for `SageMakerImageVersionArn`, pass `None` as the
+    #   value.
+    #
+    #    </note>
     #   @return [Types::ResourceSpec]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AppDetails AWS API Documentation
@@ -4272,15 +4282,9 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] override_vpc_config
-    #   Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker
-    #   jobs, hosted models, and compute resources have access to. You can
-    #   control access to and from your resources by configuring a VPC. For
-    #   more information, see [Give SageMaker Access to Resources in your
-    #   Amazon VPC][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html
+    #   The customized VPC configuration at the instance group level that
+    #   overrides the default VPC configuration of the SageMaker HyperPod
+    #   cluster.
     #   @return [Types::VpcConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterInstanceGroupDetails AWS API Documentation
@@ -4360,15 +4364,32 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] override_vpc_config
-    #   Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker
-    #   jobs, hosted models, and compute resources have access to. You can
-    #   control access to and from your resources by configuring a VPC. For
-    #   more information, see [Give SageMaker Access to Resources in your
-    #   Amazon VPC][1].
+    #   To configure multi-AZ deployments, customize the VPC configuration
+    #   at the instance group level. You can specify different subnets and
+    #   security groups across different AZs in the instance group
+    #   specification to override a SageMaker HyperPod cluster's default
+    #   VPC configuration. For more information about deploying a cluster in
+    #   multiple AZs, see [Setting up SageMaker HyperPod clusters across
+    #   multiple AZs][1].
+    #
+    #   <note markdown="1"> If you configure your VPC with IPv6 support and specify subnets with
+    #   IPv6 addressing enabled in your instance group VPC configuration,
+    #   the nodes automatically use IPv6 addressing for network
+    #   communication.
+    #
+    #    For information about adding IPv6 support for your VPC, see [IPv6
+    #   support for your VPC][2].
+    #
+    #    For information about creating a new VPC for use with IPv6, see
+    #   [Create a VPC][3].
+    #
+    #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-prerequisites.html#sagemaker-hyperpod-prerequisites-multiple-availability-zones
+    #   [2]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-migrate-ipv6.html
+    #   [3]: https://docs.aws.amazon.com/vpc/latest/userguide/create-vpc.html
     #   @return [Types::VpcConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterInstanceGroupSpecification AWS API Documentation
@@ -4521,15 +4542,9 @@ module Aws::SageMaker
     #   @return [Types::ClusterLifeCycleConfig]
     #
     # @!attribute [rw] override_vpc_config
-    #   Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker
-    #   jobs, hosted models, and compute resources have access to. You can
-    #   control access to and from your resources by configuring a VPC. For
-    #   more information, see [Give SageMaker Access to Resources in your
-    #   Amazon VPC][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html
+    #   The customized VPC configuration at the instance group level that
+    #   overrides the default VPC configuration of the SageMaker HyperPod
+    #   cluster.
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] threads_per_core
@@ -4549,7 +4564,9 @@ module Aws::SageMaker
     #
     # @!attribute [rw] private_primary_ipv_6
     #   The private primary IPv6 address of the SageMaker HyperPod cluster
-    #   node.
+    #   node when configured with an Amazon VPC that supports IPv6 and
+    #   includes subnets with IPv6 addressing enabled in either the cluster
+    #   VPC configuration or the instance group VPC configuration.
     #   @return [String]
     #
     # @!attribute [rw] private_dns_hostname
@@ -4768,6 +4785,16 @@ module Aws::SageMaker
     # @!attribute [rw] default_resource_spec
     #   Specifies the ARN's of a SageMaker AI image and SageMaker AI image
     #   version, and the instance type that the version runs on.
+    #
+    #   <note markdown="1"> When both `SageMakerImageVersionArn` and `SageMakerImageArn` are
+    #   passed, `SageMakerImageVersionArn` is used. Any updates to
+    #   `SageMakerImageArn` will not take effect if
+    #   `SageMakerImageVersionArn` already exists in the `ResourceSpec`
+    #   because `SageMakerImageVersionArn` always takes precedence. To clear
+    #   the value set for `SageMakerImageVersionArn`, pass `None` as the
+    #   value.
+    #
+    #    </note>
     #   @return [Types::ResourceSpec]
     #
     # @!attribute [rw] custom_images
@@ -6135,15 +6162,29 @@ module Aws::SageMaker
     #   @return [Array<Types::ClusterInstanceGroupSpecification>]
     #
     # @!attribute [rw] vpc_config
-    #   Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker
-    #   jobs, hosted models, and compute resources have access to. You can
-    #   control access to and from your resources by configuring a VPC. For
-    #   more information, see [Give SageMaker Access to Resources in your
-    #   Amazon VPC][1].
+    #   Specifies the Amazon Virtual Private Cloud (VPC) that is associated
+    #   with the Amazon SageMaker HyperPod cluster. You can control access
+    #   to and from your resources by configuring your VPC. For more
+    #   information, see [Give SageMaker access to resources in your Amazon
+    #   VPC][1].
+    #
+    #   <note markdown="1"> If you configure your VPC with IPv6 support and specify subnets with
+    #   IPv6 addressing enabled in your VPC configuration, the cluster
+    #   automatically uses IPv6 addressing for network communication.
+    #
+    #    For information about adding IPv6 support for your VPC, see [IPv6
+    #   support for your VPC][2].
+    #
+    #    For information about creating a new VPC for use with IPv6, see
+    #   [Create a VPC][3].
+    #
+    #    </note>
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html
+    #   [2]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-migrate-ipv6.html
+    #   [3]: https://docs.aws.amazon.com/vpc/latest/userguide/create-vpc.html
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] tags
@@ -26379,6 +26420,16 @@ module Aws::SageMaker
     # @!attribute [rw] default_resource_spec
     #   Specifies the ARN's of a SageMaker AI image and SageMaker AI image
     #   version, and the instance type that the version runs on.
+    #
+    #   <note markdown="1"> When both `SageMakerImageVersionArn` and `SageMakerImageArn` are
+    #   passed, `SageMakerImageVersionArn` is used. Any updates to
+    #   `SageMakerImageArn` will not take effect if
+    #   `SageMakerImageVersionArn` already exists in the `ResourceSpec`
+    #   because `SageMakerImageVersionArn` always takes precedence. To clear
+    #   the value set for `SageMakerImageVersionArn`, pass `None` as the
+    #   value.
+    #
+    #    </note>
     #   @return [Types::ResourceSpec]
     #
     # @!attribute [rw] custom_images
@@ -40139,6 +40190,16 @@ module Aws::SageMaker
     # @!attribute [rw] default_resource_spec
     #   Specifies the ARN's of a SageMaker AI image and SageMaker AI image
     #   version, and the instance type that the version runs on.
+    #
+    #   <note markdown="1"> When both `SageMakerImageVersionArn` and `SageMakerImageArn` are
+    #   passed, `SageMakerImageVersionArn` is used. Any updates to
+    #   `SageMakerImageArn` will not take effect if
+    #   `SageMakerImageVersionArn` already exists in the `ResourceSpec`
+    #   because `SageMakerImageVersionArn` always takes precedence. To clear
+    #   the value set for `SageMakerImageVersionArn`, pass `None` as the
+    #   value.
+    #
+    #    </note>
     #   @return [Types::ResourceSpec]
     #
     # @!attribute [rw] custom_images
@@ -40198,6 +40259,16 @@ module Aws::SageMaker
     # @!attribute [rw] default_resource_spec
     #   Specifies the ARN's of a SageMaker AI image and SageMaker AI image
     #   version, and the instance type that the version runs on.
+    #
+    #   <note markdown="1"> When both `SageMakerImageVersionArn` and `SageMakerImageArn` are
+    #   passed, `SageMakerImageVersionArn` is used. Any updates to
+    #   `SageMakerImageArn` will not take effect if
+    #   `SageMakerImageVersionArn` already exists in the `ResourceSpec`
+    #   because `SageMakerImageVersionArn` always takes precedence. To clear
+    #   the value set for `SageMakerImageVersionArn`, pass `None` as the
+    #   value.
+    #
+    #    </note>
     #   @return [Types::ResourceSpec]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RStudioServerProDomainSettings AWS API Documentation
@@ -40221,6 +40292,16 @@ module Aws::SageMaker
     # @!attribute [rw] default_resource_spec
     #   Specifies the ARN's of a SageMaker AI image and SageMaker AI image
     #   version, and the instance type that the version runs on.
+    #
+    #   <note markdown="1"> When both `SageMakerImageVersionArn` and `SageMakerImageArn` are
+    #   passed, `SageMakerImageVersionArn` is used. Any updates to
+    #   `SageMakerImageArn` will not take effect if
+    #   `SageMakerImageVersionArn` already exists in the `ResourceSpec`
+    #   because `SageMakerImageVersionArn` always takes precedence. To clear
+    #   the value set for `SageMakerImageVersionArn`, pass `None` as the
+    #   value.
+    #
+    #    </note>
     #   @return [Types::ResourceSpec]
     #
     # @!attribute [rw] r_studio_connect_url
@@ -41442,12 +41523,22 @@ module Aws::SageMaker
     # Specifies the ARN's of a SageMaker AI image and SageMaker AI image
     # version, and the instance type that the version runs on.
     #
+    # <note markdown="1"> When both `SageMakerImageVersionArn` and `SageMakerImageArn` are
+    # passed, `SageMakerImageVersionArn` is used. Any updates to
+    # `SageMakerImageArn` will not take effect if `SageMakerImageVersionArn`
+    # already exists in the `ResourceSpec` because
+    # `SageMakerImageVersionArn` always takes precedence. To clear the value
+    # set for `SageMakerImageVersionArn`, pass `None` as the value.
+    #
+    #  </note>
+    #
     # @!attribute [rw] sage_maker_image_arn
     #   The ARN of the SageMaker AI image that the image version belongs to.
     #   @return [String]
     #
     # @!attribute [rw] sage_maker_image_version_arn
-    #   The ARN of the image version created on the instance.
+    #   The ARN of the image version created on the instance. To clear the
+    #   value set for `SageMakerImageVersionArn`, pass `None` as the value.
     #   @return [String]
     #
     # @!attribute [rw] sage_maker_image_version_alias
@@ -43020,6 +43111,16 @@ module Aws::SageMaker
     # @!attribute [rw] default_resource_spec
     #   Specifies the ARN's of a SageMaker AI image and SageMaker AI image
     #   version, and the instance type that the version runs on.
+    #
+    #   <note markdown="1"> When both `SageMakerImageVersionArn` and `SageMakerImageArn` are
+    #   passed, `SageMakerImageVersionArn` is used. Any updates to
+    #   `SageMakerImageArn` will not take effect if
+    #   `SageMakerImageVersionArn` already exists in the `ResourceSpec`
+    #   because `SageMakerImageVersionArn` always takes precedence. To clear
+    #   the value set for `SageMakerImageVersionArn`, pass `None` as the
+    #   value.
+    #
+    #    </note>
     #   @return [Types::ResourceSpec]
     #
     # @!attribute [rw] app_lifecycle_management
@@ -43110,6 +43211,16 @@ module Aws::SageMaker
     # @!attribute [rw] default_resource_spec
     #   Specifies the ARN's of a SageMaker AI image and SageMaker AI image
     #   version, and the instance type that the version runs on.
+    #
+    #   <note markdown="1"> When both `SageMakerImageVersionArn` and `SageMakerImageArn` are
+    #   passed, `SageMakerImageVersionArn` is used. Any updates to
+    #   `SageMakerImageArn` will not take effect if
+    #   `SageMakerImageVersionArn` already exists in the `ResourceSpec`
+    #   because `SageMakerImageVersionArn` always takes precedence. To clear
+    #   the value set for `SageMakerImageVersionArn`, pass `None` as the
+    #   value.
+    #
+    #    </note>
     #   @return [Types::ResourceSpec]
     #
     # @!attribute [rw] code_repositories

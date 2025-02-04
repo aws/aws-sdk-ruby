@@ -134,6 +134,10 @@ module Aws
                                 workspace_arn: ::String
                               }?
                             },
+                            ?role_configuration: {
+                              source_role_arn: ::String?,
+                              target_role_arn: ::String?
+                            },
                             scrape_configuration: {
                               configuration_blob: ::String?
                             },
@@ -391,6 +395,10 @@ module Aws
                               amp_configuration: {
                                 workspace_arn: ::String
                               }?
+                            },
+                            ?role_configuration: {
+                              source_role_arn: ::String?,
+                              target_role_arn: ::String?
                             },
                             ?scrape_configuration: {
                               configuration_blob: ::String?

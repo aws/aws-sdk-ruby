@@ -4919,12 +4919,19 @@ module Aws::AppStream
     #   The names of the domains for the account.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] domains_require_admin_consent
+    #   The OneDrive for Business domains where you require admin consent
+    #   when users try to link their OneDrive account to AppStream 2.0. The
+    #   attribute can only be specified when ConnectorType=ONE\_DRIVE.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StorageConnector AWS API Documentation
     #
     class StorageConnector < Struct.new(
       :connector_type,
       :resource_identifier,
-      :domains)
+      :domains,
+      :domains_require_admin_consent)
       SENSITIVE = []
       include Aws::Structure
     end

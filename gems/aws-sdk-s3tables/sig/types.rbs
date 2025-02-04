@@ -50,6 +50,7 @@ module Aws::S3Tables
       attr_accessor namespace: ::String
       attr_accessor name: ::String
       attr_accessor format: ("ICEBERG")
+      attr_accessor metadata: Types::TableMetadata
       SENSITIVE: []
     end
 
@@ -225,6 +226,16 @@ module Aws::S3Tables
       SENSITIVE: []
     end
 
+    class IcebergMetadata
+      attr_accessor schema: Types::IcebergSchema
+      SENSITIVE: []
+    end
+
+    class IcebergSchema
+      attr_accessor fields: ::Array[Types::SchemaField]
+      SENSITIVE: []
+    end
+
     class IcebergSnapshotManagementSettings
       attr_accessor min_snapshots_to_keep: ::Integer
       attr_accessor max_snapshot_age_hours: ::Integer
@@ -337,6 +348,13 @@ module Aws::S3Tables
       SENSITIVE: []
     end
 
+    class SchemaField
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      attr_accessor required: bool
+      SENSITIVE: []
+    end
+
     class TableBucketMaintenanceConfigurationValue
       attr_accessor status: ("enabled" | "disabled")
       attr_accessor settings: Types::TableBucketMaintenanceSettings
@@ -386,6 +404,17 @@ module Aws::S3Tables
       class IcebergSnapshotManagement < TableMaintenanceSettings
       end
       class Unknown < TableMaintenanceSettings
+      end
+    end
+
+    class TableMetadata
+      attr_accessor iceberg: Types::IcebergMetadata
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Iceberg < TableMetadata
+      end
+      class Unknown < TableMetadata
       end
     end
 

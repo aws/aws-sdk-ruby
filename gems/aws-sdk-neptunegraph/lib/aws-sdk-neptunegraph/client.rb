@@ -802,9 +802,9 @@ module Aws::NeptuneGraph
     #   (m-NCUs) to use for the graph. Default: 1024, or the approved upper
     #   limit for your account.
     #
-    #   If both the minimum and maximum values are specified, the max of the
-    #   `min-provisioned-memory` and `max-provisioned memory` is used to
-    #   create the graph. If neither value is specified 128 m-NCUs are used.
+    #   If both the minimum and maximum values are specified, the final
+    #   `provisioned-memory` will be chosen per the actual size of your
+    #   imported data. If neither value is specified, 128 m-NCUs are used.
     #
     # @option params [Integer] :min_provisioned_memory
     #   The minimum provisioned memory-optimized Neptune Capacity Units
@@ -1581,6 +1581,9 @@ module Aws::NeptuneGraph
 
     # Retrieves a list of export tasks.
     #
+    # @option params [String] :graph_identifier
+    #   The unique identifier of the Neptune Analytics graph.
+    #
     # @option params [String] :next_token
     #   Pagination token used to paginate input.
     #
@@ -1597,6 +1600,7 @@ module Aws::NeptuneGraph
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_export_tasks({
+    #     graph_identifier: "GraphIdentifier",
     #     next_token: "PaginationToken",
     #     max_results: 1,
     #   })
@@ -2444,7 +2448,7 @@ module Aws::NeptuneGraph
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-neptunegraph'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

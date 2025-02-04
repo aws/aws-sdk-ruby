@@ -2135,7 +2135,8 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     # @option options [Integer] :storage_throughput
-    #   The storage throughput value for the DB instance.
+    #   The storage throughput value, in mebibyte per second (MiBps), for the
+    #   DB instance.
     #
     #   This setting applies only to the `gp3` storage type.
     #

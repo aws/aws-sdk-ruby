@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2025-02-04)
+------------------
+
+* Feature - Adds functionality to enable/disable a new Q Business Chat orchestration feature. If enabled, Q Business can orchestrate over datasources and plugins without the need for customers to select specific chat modes.
+
+1.27.0 (2025-01-30)
+------------------
+
+* Feature - Added APIs to manage QBusiness user subscriptions
+
 1.26.0 (2025-01-15)
 ------------------
 

@@ -686,6 +686,9 @@ module Aws::PrometheusService
     #   The Amazon Managed Service for Prometheus workspace to send metrics
     #   to.
     #
+    # @option params [Types::RoleConfiguration] :role_configuration
+    #   The scraper role configuration for the workspace.
+    #
     # @option params [required, Types::ScrapeConfiguration] :scrape_configuration
     #   The configuration file to use in the new scraper. For more
     #   information, see [Scraper configuration][1] in the *Amazon Managed
@@ -718,6 +721,10 @@ module Aws::PrometheusService
     #       amp_configuration: {
     #         workspace_arn: "WorkspaceArn", # required
     #       },
+    #     },
+    #     role_configuration: {
+    #       source_role_arn: "IamRoleArn",
+    #       target_role_arn: "IamRoleArn",
     #     },
     #     scrape_configuration: { # required
     #       configuration_blob: "data",
@@ -1124,6 +1131,8 @@ module Aws::PrometheusService
     #   resp.scraper.destination.amp_configuration.workspace_arn #=> String
     #   resp.scraper.last_modified_at #=> Time
     #   resp.scraper.role_arn #=> String
+    #   resp.scraper.role_configuration.source_role_arn #=> String
+    #   resp.scraper.role_configuration.target_role_arn #=> String
     #   resp.scraper.scrape_configuration.configuration_blob #=> String
     #   resp.scraper.scraper_id #=> String
     #   resp.scraper.source.eks_configuration.cluster_arn #=> String
@@ -1334,6 +1343,8 @@ module Aws::PrometheusService
     #   resp.scrapers[0].destination.amp_configuration.workspace_arn #=> String
     #   resp.scrapers[0].last_modified_at #=> Time
     #   resp.scrapers[0].role_arn #=> String
+    #   resp.scrapers[0].role_configuration.source_role_arn #=> String
+    #   resp.scrapers[0].role_configuration.target_role_arn #=> String
     #   resp.scrapers[0].scraper_id #=> String
     #   resp.scrapers[0].source.eks_configuration.cluster_arn #=> String
     #   resp.scrapers[0].source.eks_configuration.security_group_ids #=> Array
@@ -1698,6 +1709,9 @@ module Aws::PrometheusService
     #   The new Amazon Managed Service for Prometheus workspace to send
     #   metrics to.
     #
+    # @option params [Types::RoleConfiguration] :role_configuration
+    #   The scraper role configuration for the workspace.
+    #
     # @option params [Types::ScrapeConfiguration] :scrape_configuration
     #   Contains the base-64 encoded YAML configuration for the scraper.
     #
@@ -1730,6 +1744,10 @@ module Aws::PrometheusService
     #       amp_configuration: {
     #         workspace_arn: "WorkspaceArn", # required
     #       },
+    #     },
+    #     role_configuration: {
+    #       source_role_arn: "IamRoleArn",
+    #       target_role_arn: "IamRoleArn",
     #     },
     #     scrape_configuration: {
     #       configuration_blob: "data",
@@ -1809,7 +1827,7 @@ module Aws::PrometheusService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-prometheusservice'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

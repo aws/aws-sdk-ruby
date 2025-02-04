@@ -578,6 +578,101 @@ module Aws::MailManager
       req.send_request(options)
     end
 
+    # Creates a new address list.
+    #
+    # @option params [required, String] :address_list_name
+    #   A user-friendly name for the address list.
+    #
+    # @option params [String] :client_token
+    #   A unique token that Amazon SES uses to recognize subsequent retries of
+    #   the same request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags used to organize, track, or control access for the resource.
+    #   For example, \{ "tags": \{"key1":"value1", "key2":"value2"}
+    #   }.
+    #
+    # @return [Types::CreateAddressListResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAddressListResponse#address_list_id #address_list_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_address_list({
+    #     address_list_name: "AddressListName", # required
+    #     client_token: "IdempotencyToken",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.address_list_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/CreateAddressList AWS API Documentation
+    #
+    # @overload create_address_list(params = {})
+    # @param [Hash] params ({})
+    def create_address_list(params = {}, options = {})
+      req = build_request(:create_address_list, params)
+      req.send_request(options)
+    end
+
+    # Creates an import job for an address list.
+    #
+    # @option params [required, String] :address_list_id
+    #   The unique identifier of the address list for importing addresses to.
+    #
+    # @option params [String] :client_token
+    #   A unique token that Amazon SES uses to recognize subsequent retries of
+    #   the same request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, Types::ImportDataFormat] :import_data_format
+    #   The format of the input for an import job.
+    #
+    # @option params [required, String] :name
+    #   A user-friendly name for the import job.
+    #
+    # @return [Types::CreateAddressListImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAddressListImportJobResponse#job_id #job_id} => String
+    #   * {Types::CreateAddressListImportJobResponse#pre_signed_url #pre_signed_url} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_address_list_import_job({
+    #     address_list_id: "AddressListId", # required
+    #     client_token: "IdempotencyToken",
+    #     import_data_format: { # required
+    #       import_data_type: "CSV", # required, accepts CSV, JSON
+    #     },
+    #     name: "JobName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.pre_signed_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/CreateAddressListImportJob AWS API Documentation
+    #
+    # @overload create_address_list_import_job(params = {})
+    # @param [Hash] params ({})
+    def create_address_list_import_job(params = {}, options = {})
+      req = build_request(:create_address_list_import_job, params)
+      req.send_request(options)
+    end
+
     # Creates a new email archive resource for storing and retaining emails.
     #
     # @option params [required, String] :archive_name
@@ -850,6 +945,10 @@ module Aws::MailManager
     #             boolean_expression: {
     #               evaluate: { # required
     #                 attribute: "READ_RECEIPT_REQUESTED", # accepts READ_RECEIPT_REQUESTED, TLS, TLS_WRAPPED
+    #                 is_in_address_list: {
+    #                   address_lists: ["AddressListArn"], # required
+    #                   attribute: "RECIPIENT", # required, accepts RECIPIENT, MAIL_FROM, SENDER, FROM, TO, CC
+    #                 },
     #               },
     #               operator: "IS_TRUE", # required, accepts IS_TRUE, IS_FALSE
     #             },
@@ -898,6 +997,10 @@ module Aws::MailManager
     #             boolean_expression: {
     #               evaluate: { # required
     #                 attribute: "READ_RECEIPT_REQUESTED", # accepts READ_RECEIPT_REQUESTED, TLS, TLS_WRAPPED
+    #                 is_in_address_list: {
+    #                   address_lists: ["AddressListArn"], # required
+    #                   attribute: "RECIPIENT", # required, accepts RECIPIENT, MAIL_FROM, SENDER, FROM, TO, CC
+    #                 },
     #               },
     #               operator: "IS_TRUE", # required, accepts IS_TRUE, IS_FALSE
     #             },
@@ -1013,6 +1116,10 @@ module Aws::MailManager
     #                   analyzer: "AnalyzerArn", # required
     #                   result_field: "ResultField", # required
     #                 },
+    #                 is_in_address_list: {
+    #                   address_lists: ["AddressListArn"], # required
+    #                   attribute: "RECIPIENT", # required, accepts RECIPIENT
+    #                 },
     #               },
     #               operator: "IS_TRUE", # required, accepts IS_TRUE, IS_FALSE
     #             },
@@ -1104,6 +1211,28 @@ module Aws::MailManager
     # @param [Hash] params ({})
     def delete_addon_subscription(params = {}, options = {})
       req = build_request(:delete_addon_subscription, params)
+      req.send_request(options)
+    end
+
+    # Deletes an address list.
+    #
+    # @option params [required, String] :address_list_id
+    #   The identifier of an existing address list resource to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_address_list({
+    #     address_list_id: "AddressListId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/DeleteAddressList AWS API Documentation
+    #
+    # @overload delete_address_list(params = {})
+    # @param [Hash] params ({})
+    def delete_address_list(params = {}, options = {})
+      req = build_request(:delete_address_list, params)
       req.send_request(options)
     end
 
@@ -1223,6 +1352,32 @@ module Aws::MailManager
       req.send_request(options)
     end
 
+    # Removes a member from an address list.
+    #
+    # @option params [required, String] :address
+    #   The address to be removed from the address list.
+    #
+    # @option params [required, String] :address_list_id
+    #   The unique identifier of the address list to remove the address from.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deregister_member_from_address_list({
+    #     address: "Address", # required
+    #     address_list_id: "AddressListId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/DeregisterMemberFromAddressList AWS API Documentation
+    #
+    # @overload deregister_member_from_address_list(params = {})
+    # @param [Hash] params ({})
+    def deregister_member_from_address_list(params = {}, options = {})
+      req = build_request(:deregister_member_from_address_list, params)
+      req.send_request(options)
+    end
+
     # Gets detailed information about an Add On instance.
     #
     # @option params [required, String] :addon_instance_id
@@ -1286,6 +1441,92 @@ module Aws::MailManager
     # @param [Hash] params ({})
     def get_addon_subscription(params = {}, options = {})
       req = build_request(:get_addon_subscription, params)
+      req.send_request(options)
+    end
+
+    # Fetch attributes of an address list.
+    #
+    # @option params [required, String] :address_list_id
+    #   The identifier of an existing address list resource to be retrieved.
+    #
+    # @return [Types::GetAddressListResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAddressListResponse#address_list_arn #address_list_arn} => String
+    #   * {Types::GetAddressListResponse#address_list_id #address_list_id} => String
+    #   * {Types::GetAddressListResponse#address_list_name #address_list_name} => String
+    #   * {Types::GetAddressListResponse#created_timestamp #created_timestamp} => Time
+    #   * {Types::GetAddressListResponse#last_updated_timestamp #last_updated_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_address_list({
+    #     address_list_id: "AddressListId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.address_list_arn #=> String
+    #   resp.address_list_id #=> String
+    #   resp.address_list_name #=> String
+    #   resp.created_timestamp #=> Time
+    #   resp.last_updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/GetAddressList AWS API Documentation
+    #
+    # @overload get_address_list(params = {})
+    # @param [Hash] params ({})
+    def get_address_list(params = {}, options = {})
+      req = build_request(:get_address_list, params)
+      req.send_request(options)
+    end
+
+    # Fetch attributes of an import job.
+    #
+    # @option params [required, String] :job_id
+    #   The identifier of the import job that needs to be retrieved.
+    #
+    # @return [Types::GetAddressListImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAddressListImportJobResponse#address_list_id #address_list_id} => String
+    #   * {Types::GetAddressListImportJobResponse#completed_timestamp #completed_timestamp} => Time
+    #   * {Types::GetAddressListImportJobResponse#created_timestamp #created_timestamp} => Time
+    #   * {Types::GetAddressListImportJobResponse#error #error} => String
+    #   * {Types::GetAddressListImportJobResponse#failed_items_count #failed_items_count} => Integer
+    #   * {Types::GetAddressListImportJobResponse#import_data_format #import_data_format} => Types::ImportDataFormat
+    #   * {Types::GetAddressListImportJobResponse#imported_items_count #imported_items_count} => Integer
+    #   * {Types::GetAddressListImportJobResponse#job_id #job_id} => String
+    #   * {Types::GetAddressListImportJobResponse#name #name} => String
+    #   * {Types::GetAddressListImportJobResponse#pre_signed_url #pre_signed_url} => String
+    #   * {Types::GetAddressListImportJobResponse#start_timestamp #start_timestamp} => Time
+    #   * {Types::GetAddressListImportJobResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_address_list_import_job({
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.address_list_id #=> String
+    #   resp.completed_timestamp #=> Time
+    #   resp.created_timestamp #=> Time
+    #   resp.error #=> String
+    #   resp.failed_items_count #=> Integer
+    #   resp.import_data_format.import_data_type #=> String, one of "CSV", "JSON"
+    #   resp.imported_items_count #=> Integer
+    #   resp.job_id #=> String
+    #   resp.name #=> String
+    #   resp.pre_signed_url #=> String
+    #   resp.start_timestamp #=> Time
+    #   resp.status #=> String, one of "CREATED", "PROCESSING", "COMPLETED", "FAILED", "STOPPED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/GetAddressListImportJob AWS API Documentation
+    #
+    # @overload get_address_list_import_job(params = {})
+    # @param [Hash] params ({})
+    def get_address_list_import_job(params = {}, options = {})
+      req = build_request(:get_address_list_import_job, params)
       req.send_request(options)
     end
 
@@ -1619,6 +1860,41 @@ module Aws::MailManager
       req.send_request(options)
     end
 
+    # Fetch attributes of a member in an address list.
+    #
+    # @option params [required, String] :address
+    #   The address to be retrieved from the address list.
+    #
+    # @option params [required, String] :address_list_id
+    #   The unique identifier of the address list to retrieve the address
+    #   from.
+    #
+    # @return [Types::GetMemberOfAddressListResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMemberOfAddressListResponse#address #address} => String
+    #   * {Types::GetMemberOfAddressListResponse#created_timestamp #created_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_member_of_address_list({
+    #     address: "Address", # required
+    #     address_list_id: "AddressListId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.address #=> String
+    #   resp.created_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/GetMemberOfAddressList AWS API Documentation
+    #
+    # @overload get_member_of_address_list(params = {})
+    # @param [Hash] params ({})
+    def get_member_of_address_list(params = {}, options = {})
+      req = build_request(:get_member_of_address_list, params)
+      req.send_request(options)
+    end
+
     # Fetch the relay resource and it's attributes.
     #
     # @option params [required, String] :relay_id
@@ -1715,6 +1991,9 @@ module Aws::MailManager
     #   resp.rules[0].actions[0].write_to_s3.s3_sse_kms_key_id #=> String
     #   resp.rules[0].conditions #=> Array
     #   resp.rules[0].conditions[0].boolean_expression.evaluate.attribute #=> String, one of "READ_RECEIPT_REQUESTED", "TLS", "TLS_WRAPPED"
+    #   resp.rules[0].conditions[0].boolean_expression.evaluate.is_in_address_list.address_lists #=> Array
+    #   resp.rules[0].conditions[0].boolean_expression.evaluate.is_in_address_list.address_lists[0] #=> String
+    #   resp.rules[0].conditions[0].boolean_expression.evaluate.is_in_address_list.attribute #=> String, one of "RECIPIENT", "MAIL_FROM", "SENDER", "FROM", "TO", "CC"
     #   resp.rules[0].conditions[0].boolean_expression.operator #=> String, one of "IS_TRUE", "IS_FALSE"
     #   resp.rules[0].conditions[0].dmarc_expression.operator #=> String, one of "EQUALS", "NOT_EQUALS"
     #   resp.rules[0].conditions[0].dmarc_expression.values #=> Array
@@ -1740,6 +2019,9 @@ module Aws::MailManager
     #   resp.rules[0].name #=> String
     #   resp.rules[0].unless #=> Array
     #   resp.rules[0].unless[0].boolean_expression.evaluate.attribute #=> String, one of "READ_RECEIPT_REQUESTED", "TLS", "TLS_WRAPPED"
+    #   resp.rules[0].unless[0].boolean_expression.evaluate.is_in_address_list.address_lists #=> Array
+    #   resp.rules[0].unless[0].boolean_expression.evaluate.is_in_address_list.address_lists[0] #=> String
+    #   resp.rules[0].unless[0].boolean_expression.evaluate.is_in_address_list.attribute #=> String, one of "RECIPIENT", "MAIL_FROM", "SENDER", "FROM", "TO", "CC"
     #   resp.rules[0].unless[0].boolean_expression.operator #=> String, one of "IS_TRUE", "IS_FALSE"
     #   resp.rules[0].unless[0].dmarc_expression.operator #=> String, one of "EQUALS", "NOT_EQUALS"
     #   resp.rules[0].unless[0].dmarc_expression.values #=> Array
@@ -1805,6 +2087,9 @@ module Aws::MailManager
     #   resp.policy_statements[0].conditions #=> Array
     #   resp.policy_statements[0].conditions[0].boolean_expression.evaluate.analysis.analyzer #=> String
     #   resp.policy_statements[0].conditions[0].boolean_expression.evaluate.analysis.result_field #=> String
+    #   resp.policy_statements[0].conditions[0].boolean_expression.evaluate.is_in_address_list.address_lists #=> Array
+    #   resp.policy_statements[0].conditions[0].boolean_expression.evaluate.is_in_address_list.address_lists[0] #=> String
+    #   resp.policy_statements[0].conditions[0].boolean_expression.evaluate.is_in_address_list.attribute #=> String, one of "RECIPIENT"
     #   resp.policy_statements[0].conditions[0].boolean_expression.operator #=> String, one of "IS_TRUE", "IS_FALSE"
     #   resp.policy_statements[0].conditions[0].ip_expression.evaluate.attribute #=> String, one of "SENDER_IP"
     #   resp.policy_statements[0].conditions[0].ip_expression.operator #=> String, one of "CIDR_MATCHES", "NOT_CIDR_MATCHES"
@@ -1914,6 +2199,106 @@ module Aws::MailManager
     # @param [Hash] params ({})
     def list_addon_subscriptions(params = {}, options = {})
       req = build_request(:list_addon_subscriptions, params)
+      req.send_request(options)
+    end
+
+    # Lists jobs for an address list.
+    #
+    # @option params [required, String] :address_list_id
+    #   The unique identifier of the address list for listing import jobs.
+    #
+    # @option params [String] :next_token
+    #   If you received a pagination token from a previous call to this API,
+    #   you can provide it here to continue paginating through the next page
+    #   of results.
+    #
+    # @option params [Integer] :page_size
+    #   The maximum number of import jobs that are returned per call. You can
+    #   use NextToken to retrieve the next page of jobs.
+    #
+    # @return [Types::ListAddressListImportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAddressListImportJobsResponse#import_jobs #import_jobs} => Array&lt;Types::ImportJob&gt;
+    #   * {Types::ListAddressListImportJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_address_list_import_jobs({
+    #     address_list_id: "AddressListId", # required
+    #     next_token: "PaginationToken",
+    #     page_size: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.import_jobs #=> Array
+    #   resp.import_jobs[0].address_list_id #=> String
+    #   resp.import_jobs[0].completed_timestamp #=> Time
+    #   resp.import_jobs[0].created_timestamp #=> Time
+    #   resp.import_jobs[0].error #=> String
+    #   resp.import_jobs[0].failed_items_count #=> Integer
+    #   resp.import_jobs[0].import_data_format.import_data_type #=> String, one of "CSV", "JSON"
+    #   resp.import_jobs[0].imported_items_count #=> Integer
+    #   resp.import_jobs[0].job_id #=> String
+    #   resp.import_jobs[0].name #=> String
+    #   resp.import_jobs[0].pre_signed_url #=> String
+    #   resp.import_jobs[0].start_timestamp #=> Time
+    #   resp.import_jobs[0].status #=> String, one of "CREATED", "PROCESSING", "COMPLETED", "FAILED", "STOPPED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/ListAddressListImportJobs AWS API Documentation
+    #
+    # @overload list_address_list_import_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_address_list_import_jobs(params = {}, options = {})
+      req = build_request(:list_address_list_import_jobs, params)
+      req.send_request(options)
+    end
+
+    # Lists address lists for this account.
+    #
+    # @option params [String] :next_token
+    #   If you received a pagination token from a previous call to this API,
+    #   you can provide it here to continue paginating through the next page
+    #   of results.
+    #
+    # @option params [Integer] :page_size
+    #   The maximum number of address list resources that are returned per
+    #   call. You can use NextToken to retrieve the next page of address
+    #   lists.
+    #
+    # @return [Types::ListAddressListsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAddressListsResponse#address_lists #address_lists} => Array&lt;Types::AddressList&gt;
+    #   * {Types::ListAddressListsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_address_lists({
+    #     next_token: "PaginationToken",
+    #     page_size: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.address_lists #=> Array
+    #   resp.address_lists[0].address_list_arn #=> String
+    #   resp.address_lists[0].address_list_id #=> String
+    #   resp.address_lists[0].address_list_name #=> String
+    #   resp.address_lists[0].created_timestamp #=> Time
+    #   resp.address_lists[0].last_updated_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/ListAddressLists AWS API Documentation
+    #
+    # @overload list_address_lists(params = {})
+    # @param [Hash] params ({})
+    def list_address_lists(params = {}, options = {})
+      req = build_request(:list_address_lists, params)
       req.send_request(options)
     end
 
@@ -2100,6 +2485,57 @@ module Aws::MailManager
       req.send_request(options)
     end
 
+    # Lists members of an address list.
+    #
+    # @option params [required, String] :address_list_id
+    #   The unique identifier of the address list to list the addresses from.
+    #
+    # @option params [Types::AddressFilter] :filter
+    #   Filter to be used to limit the results.
+    #
+    # @option params [String] :next_token
+    #   If you received a pagination token from a previous call to this API,
+    #   you can provide it here to continue paginating through the next page
+    #   of results.
+    #
+    # @option params [Integer] :page_size
+    #   The maximum number of address list members that are returned per call.
+    #   You can use NextToken to retrieve the next page of members.
+    #
+    # @return [Types::ListMembersOfAddressListResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMembersOfAddressListResponse#addresses #addresses} => Array&lt;Types::SavedAddress&gt;
+    #   * {Types::ListMembersOfAddressListResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_members_of_address_list({
+    #     address_list_id: "AddressListId", # required
+    #     filter: {
+    #       address_prefix: "AddressPrefix",
+    #     },
+    #     next_token: "PaginationToken",
+    #     page_size: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.addresses #=> Array
+    #   resp.addresses[0].address #=> String
+    #   resp.addresses[0].created_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/ListMembersOfAddressList AWS API Documentation
+    #
+    # @overload list_members_of_address_list(params = {})
+    # @param [Hash] params ({})
+    def list_members_of_address_list(params = {}, options = {})
+      req = build_request(:list_members_of_address_list, params)
+      req.send_request(options)
+    end
+
     # Lists all the existing relay resources.
     #
     # @option params [String] :next_token
@@ -2252,6 +2688,55 @@ module Aws::MailManager
     # @param [Hash] params ({})
     def list_traffic_policies(params = {}, options = {})
       req = build_request(:list_traffic_policies, params)
+      req.send_request(options)
+    end
+
+    # Adds a member to an address list.
+    #
+    # @option params [required, String] :address
+    #   The address to be added to the address list.
+    #
+    # @option params [required, String] :address_list_id
+    #   The unique identifier of the address list where the address should be
+    #   added.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_member_to_address_list({
+    #     address: "Address", # required
+    #     address_list_id: "AddressListId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/RegisterMemberToAddressList AWS API Documentation
+    #
+    # @overload register_member_to_address_list(params = {})
+    # @param [Hash] params ({})
+    def register_member_to_address_list(params = {}, options = {})
+      req = build_request(:register_member_to_address_list, params)
+      req.send_request(options)
+    end
+
+    # Starts an import job for an address list.
+    #
+    # @option params [required, String] :job_id
+    #   The identifier of the import job that needs to be started.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_address_list_import_job({
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/StartAddressListImportJob AWS API Documentation
+    #
+    # @overload start_address_list_import_job(params = {})
+    # @param [Hash] params ({})
+    def start_address_list_import_job(params = {}, options = {})
+      req = build_request(:start_address_list_import_job, params)
       req.send_request(options)
     end
 
@@ -2422,6 +2907,28 @@ module Aws::MailManager
     # @param [Hash] params ({})
     def start_archive_search(params = {}, options = {})
       req = build_request(:start_archive_search, params)
+      req.send_request(options)
+    end
+
+    # Stops an ongoing import job for an address list.
+    #
+    # @option params [required, String] :job_id
+    #   The identifier of the import job that needs to be stopped.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_address_list_import_job({
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/StopAddressListImportJob AWS API Documentation
+    #
+    # @overload stop_address_list_import_job(params = {})
+    # @param [Hash] params ({})
+    def stop_address_list_import_job(params = {}, options = {})
+      req = build_request(:stop_address_list_import_job, params)
       req.send_request(options)
     end
 
@@ -2722,6 +3229,10 @@ module Aws::MailManager
     #             boolean_expression: {
     #               evaluate: { # required
     #                 attribute: "READ_RECEIPT_REQUESTED", # accepts READ_RECEIPT_REQUESTED, TLS, TLS_WRAPPED
+    #                 is_in_address_list: {
+    #                   address_lists: ["AddressListArn"], # required
+    #                   attribute: "RECIPIENT", # required, accepts RECIPIENT, MAIL_FROM, SENDER, FROM, TO, CC
+    #                 },
     #               },
     #               operator: "IS_TRUE", # required, accepts IS_TRUE, IS_FALSE
     #             },
@@ -2770,6 +3281,10 @@ module Aws::MailManager
     #             boolean_expression: {
     #               evaluate: { # required
     #                 attribute: "READ_RECEIPT_REQUESTED", # accepts READ_RECEIPT_REQUESTED, TLS, TLS_WRAPPED
+    #                 is_in_address_list: {
+    #                   address_lists: ["AddressListArn"], # required
+    #                   attribute: "RECIPIENT", # required, accepts RECIPIENT, MAIL_FROM, SENDER, FROM, TO, CC
+    #                 },
     #               },
     #               operator: "IS_TRUE", # required, accepts IS_TRUE, IS_FALSE
     #             },
@@ -2863,6 +3378,10 @@ module Aws::MailManager
     #                   analyzer: "AnalyzerArn", # required
     #                   result_field: "ResultField", # required
     #                 },
+    #                 is_in_address_list: {
+    #                   address_lists: ["AddressListArn"], # required
+    #                   attribute: "RECIPIENT", # required, accepts RECIPIENT
+    #                 },
     #               },
     #               operator: "IS_TRUE", # required, accepts IS_TRUE, IS_FALSE
     #             },
@@ -2922,7 +3441,7 @@ module Aws::MailManager
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mailmanager'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1955,6 +1955,7 @@ module Aws::AppStream
     #         connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS, GOOGLE_DRIVE, ONE_DRIVE
     #         resource_identifier: "ResourceIdentifier",
     #         domains: ["Domain"],
+    #         domains_require_admin_consent: ["Domain"],
     #       },
     #     ],
     #     redirect_url: "RedirectURL",
@@ -1997,6 +1998,8 @@ module Aws::AppStream
     #   resp.stack.storage_connectors[0].resource_identifier #=> String
     #   resp.stack.storage_connectors[0].domains #=> Array
     #   resp.stack.storage_connectors[0].domains[0] #=> String
+    #   resp.stack.storage_connectors[0].domains_require_admin_consent #=> Array
+    #   resp.stack.storage_connectors[0].domains_require_admin_consent[0] #=> String
     #   resp.stack.redirect_url #=> String
     #   resp.stack.feedback_url #=> String
     #   resp.stack.stack_errors #=> Array
@@ -3561,6 +3564,8 @@ module Aws::AppStream
     #   resp.stacks[0].storage_connectors[0].resource_identifier #=> String
     #   resp.stacks[0].storage_connectors[0].domains #=> Array
     #   resp.stacks[0].storage_connectors[0].domains[0] #=> String
+    #   resp.stacks[0].storage_connectors[0].domains_require_admin_consent #=> Array
+    #   resp.stacks[0].storage_connectors[0].domains_require_admin_consent[0] #=> String
     #   resp.stacks[0].redirect_url #=> String
     #   resp.stacks[0].feedback_url #=> String
     #   resp.stacks[0].stack_errors #=> Array
@@ -5269,6 +5274,7 @@ module Aws::AppStream
     #         connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS, GOOGLE_DRIVE, ONE_DRIVE
     #         resource_identifier: "ResourceIdentifier",
     #         domains: ["Domain"],
+    #         domains_require_admin_consent: ["Domain"],
     #       },
     #     ],
     #     delete_storage_connectors: false,
@@ -5310,6 +5316,8 @@ module Aws::AppStream
     #   resp.stack.storage_connectors[0].resource_identifier #=> String
     #   resp.stack.storage_connectors[0].domains #=> Array
     #   resp.stack.storage_connectors[0].domains[0] #=> String
+    #   resp.stack.storage_connectors[0].domains_require_admin_consent #=> Array
+    #   resp.stack.storage_connectors[0].domains_require_admin_consent[0] #=> String
     #   resp.stack.redirect_url #=> String
     #   resp.stack.feedback_url #=> String
     #   resp.stack.stack_errors #=> Array
@@ -5443,7 +5451,7 @@ module Aws::AppStream
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.104.0'
+      context[:gem_version] = '1.105.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -842,6 +842,7 @@ module Aws::VerifiedPermissions
     #           ],
     #         },
     #       ],
+    #       cedar_json: "CedarJson",
     #     },
     #     requests: [ # required
     #       {
@@ -861,6 +862,7 @@ module Aws::VerifiedPermissions
     #           context_map: {
     #             "String" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #           },
+    #           cedar_json: "CedarJson",
     #         },
     #       },
     #     ],
@@ -877,6 +879,7 @@ module Aws::VerifiedPermissions
     #   resp.results[0].request.resource.entity_id #=> String
     #   resp.results[0].request.context.context_map #=> Hash
     #   resp.results[0].request.context.context_map["String"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.results[0].request.context.cedar_json #=> String
     #   resp.results[0].decision #=> String, one of "ALLOW", "DENY"
     #   resp.results[0].determining_policies #=> Array
     #   resp.results[0].determining_policies[0].policy_id #=> String
@@ -1130,6 +1133,7 @@ module Aws::VerifiedPermissions
     #           ],
     #         },
     #       ],
+    #       cedar_json: "CedarJson",
     #     },
     #     requests: [ # required
     #       {
@@ -1145,6 +1149,7 @@ module Aws::VerifiedPermissions
     #           context_map: {
     #             "String" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #           },
+    #           cedar_json: "CedarJson",
     #         },
     #       },
     #     ],
@@ -1161,6 +1166,7 @@ module Aws::VerifiedPermissions
     #   resp.results[0].request.resource.entity_id #=> String
     #   resp.results[0].request.context.context_map #=> Hash
     #   resp.results[0].request.context.context_map["String"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.results[0].request.context.cedar_json #=> String
     #   resp.results[0].decision #=> String, one of "ALLOW", "DENY"
     #   resp.results[0].determining_policies #=> Array
     #   resp.results[0].determining_policies[0].policy_id #=> String
@@ -2478,6 +2484,7 @@ module Aws::VerifiedPermissions
     #       context_map: {
     #         "String" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #       },
+    #       cedar_json: "CedarJson",
     #     },
     #     entities: {
     #       entity_list: [
@@ -2497,6 +2504,7 @@ module Aws::VerifiedPermissions
     #           ],
     #         },
     #       ],
+    #       cedar_json: "CedarJson",
     #     },
     #   })
     #
@@ -2652,6 +2660,7 @@ module Aws::VerifiedPermissions
     #       context_map: {
     #         "String" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #       },
+    #       cedar_json: "CedarJson",
     #     },
     #     entities: {
     #       entity_list: [
@@ -2671,6 +2680,7 @@ module Aws::VerifiedPermissions
     #           ],
     #         },
     #       ],
+    #       cedar_json: "CedarJson",
     #     },
     #   })
     #
@@ -3794,7 +3804,7 @@ module Aws::VerifiedPermissions
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-verifiedpermissions'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

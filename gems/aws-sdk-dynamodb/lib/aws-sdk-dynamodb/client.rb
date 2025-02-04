@@ -301,7 +301,7 @@ module Aws::DynamoDB
     #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
     #     This option is only used in the `legacy` retry mode.
     #
-    #   @option options [Float] :retry_base_delay (0.3)
+    #   @option options [Float] :retry_base_delay (0.05)
     #     The base delay in seconds used by the default backoff function. This option
     #     is only used in the `legacy` retry mode.
     #
@@ -317,8 +317,9 @@ module Aws::DynamoDB
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
     #     The maximum number of seconds to delay between retries (0 for no limit)
@@ -8625,7 +8626,7 @@ module Aws::DynamoDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.134.0'
+      context[:gem_version] = '1.135.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

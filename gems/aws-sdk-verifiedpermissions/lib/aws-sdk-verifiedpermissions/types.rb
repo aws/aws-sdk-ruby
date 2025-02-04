@@ -1007,6 +1007,11 @@ module Aws::VerifiedPermissions
     # [IsAuthorized][1], [BatchIsAuthorized][2], and
     # [IsAuthorizedWithToken][3] operations.
     #
+    # If you're passing context as part of the request, exactly one
+    # instance of `context` must be passed. If you don't want to pass
+    # context, omit the `context` parameter from your request rather than
+    # sending `context {}`.
+    #
     # Example:
     # `"context":{"contextMap":{"<KeyName1>":{"boolean":true},"<KeyName2>":{"long":1234}}}`
     #
@@ -1029,16 +1034,26 @@ module Aws::VerifiedPermissions
     #   `"contextMap":{"<KeyName1>":{"boolean":true},"<KeyName2>":{"long":1234}}`
     #   @return [Hash<String,Types::AttributeValue>]
     #
+    # @!attribute [rw] cedar_json
+    #   A Cedar JSON string representation of the context needed to
+    #   successfully evaluate an authorization request.
+    #
+    #   Example: `{"cedarJson":"{"<KeyName1>": true, "<KeyName2>":
+    #   1234}" }`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/ContextDefinition AWS API Documentation
     #
     class ContextDefinition < Struct.new(
       :context_map,
+      :cedar_json,
       :unknown)
-      SENSITIVE = [:context_map]
+      SENSITIVE = [:context_map, :cedar_json]
       include Aws::Structure
       include Aws::Structure::Union
 
       class ContextMap < ContextDefinition; end
+      class CedarJson < ContextDefinition; end
       class Unknown < ContextDefinition; end
     end
 
@@ -1532,18 +1547,33 @@ module Aws::VerifiedPermissions
     #   authorization request. Each entity in this array must include an
     #   identifier for the entity, the attributes of the entity, and a list
     #   of any parent entities.
+    #
+    #   <note markdown="1"> If you include multiple entities with the same `identifier`, only
+    #   the last one is processed in the request.
+    #
+    #    </note>
     #   @return [Array<Types::EntityItem>]
+    #
+    # @!attribute [rw] cedar_json
+    #   A Cedar JSON string representation of the entities needed to
+    #   successfully evaluate an authorization request.
+    #
+    #   Example: `{"cedarJson":
+    #   "[{"uid":{"type":"Photo","id":"VacationPhoto94.jpg"},"attrs":{"accessLevel":"public"},"parents":[]}]"}`
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/EntitiesDefinition AWS API Documentation
     #
     class EntitiesDefinition < Struct.new(
       :entity_list,
+      :cedar_json,
       :unknown)
-      SENSITIVE = []
+      SENSITIVE = [:cedar_json]
       include Aws::Structure
       include Aws::Structure::Union
 
       class EntityList < EntitiesDefinition; end
+      class CedarJson < EntitiesDefinition; end
       class Unknown < EntitiesDefinition; end
     end
 

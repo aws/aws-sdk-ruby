@@ -481,6 +481,14 @@ module Aws::BCMPricingCalculator
     # Reserved Instances commitments that you want to model in a Bill
     # Scenario.
     #
+    # <note markdown="1"> The `BatchCreateBillScenarioCommitmentModification` operation doesn't
+    # have its own IAM permission. To authorize this operation for Amazon
+    # Web Services principals, include the permission
+    # `bcm-pricing-calculator:CreateBillScenarioCommitmentModification` in
+    # your policies.
+    #
+    #  </note>
+    #
     # @option params [required, String] :bill_scenario_id
     #   The ID of the Bill Scenario for which you want to create the modeled
     #   commitment.
@@ -559,6 +567,14 @@ module Aws::BCMPricingCalculator
 
     # Create Amazon Web Services service usage that you want to model in a
     # Bill Scenario.
+    #
+    # <note markdown="1"> The `BatchCreateBillScenarioUsageModification` operation doesn't have
+    # its own IAM permission. To authorize this operation for Amazon Web
+    # Services principals, include the permission
+    # `bcm-pricing-calculator:CreateBillScenarioUsageModification` in your
+    # policies.
+    #
+    #  </note>
     #
     # @option params [required, String] :bill_scenario_id
     #   The ID of the Bill Scenario for which you want to create the modeled
@@ -704,6 +720,13 @@ module Aws::BCMPricingCalculator
     # Create Amazon Web Services service usage that you want to model in a
     # Workload Estimate.
     #
+    # <note markdown="1"> The `BatchCreateWorkloadEstimateUsage` operation doesn't have its own
+    # IAM permission. To authorize this operation for Amazon Web Services
+    # principals, include the permission
+    # `bcm-pricing-calculator:CreateWorkloadEstimateUsage` in your policies.
+    #
+    #  </note>
+    #
     # @option params [required, String] :workload_estimate_id
     #   The ID of the Workload estimate for which you want to create the
     #   modeled usage.
@@ -846,6 +869,14 @@ module Aws::BCMPricingCalculator
     # BillScenarioCommitmentModificationAction][1] of [
     # BatchCreateBillScenarioCommitmentModification][2] operation.
     #
+    # <note markdown="1"> The `BatchDeleteBillScenarioCommitmentModification` operation doesn't
+    # have its own IAM permission. To authorize this operation for Amazon
+    # Web Services principals, include the permission
+    # `bcm-pricing-calculator:DeleteBillScenarioCommitmentModification` in
+    # your policies.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AWSBCMPricingCalculator_BillScenarioCommitmentModificationAction.html
@@ -890,6 +921,14 @@ module Aws::BCMPricingCalculator
     # of a existing usage. If you want model removal of an existing usage,
     # see [ BatchUpdateBillScenarioUsageModification][1].
     #
+    # <note markdown="1"> The `BatchDeleteBillScenarioUsageModification` operation doesn't have
+    # its own IAM permission. To authorize this operation for Amazon Web
+    # Services principals, include the permission
+    # `bcm-pricing-calculator:DeleteBillScenarioUsageModification` in your
+    # policies.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AWSBCMPricingCalculator_BatchUpdateBillScenarioUsageModification.html
@@ -933,6 +972,13 @@ module Aws::BCMPricingCalculator
     # removal) of a existing usage. If you want model removal of an existing
     # usage, see [ BatchUpdateWorkloadEstimateUsage][1].
     #
+    # <note markdown="1"> The `BatchDeleteWorkloadEstimateUsage` operation doesn't have its own
+    # IAM permission. To authorize this operation for Amazon Web Services
+    # principals, include the permission
+    # `bcm-pricing-calculator:DeleteWorkloadEstimateUsage` in your policies.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AWSBCMPricingCalculator_BatchUpdateWorkloadEstimateUsage.html
@@ -973,6 +1019,14 @@ module Aws::BCMPricingCalculator
 
     # Update a newly added or existing commitment. You can update the
     # commitment group based on a commitment ID and a Bill scenario ID.
+    #
+    # <note markdown="1"> The `BatchUpdateBillScenarioCommitmentModification` operation doesn't
+    # have its own IAM permission. To authorize this operation for Amazon
+    # Web Services principals, include the permission
+    # `bcm-pricing-calculator:UpdateBillScenarioCommitmentModification` in
+    # your policies.
+    #
+    #  </note>
     #
     # @option params [required, String] :bill_scenario_id
     #   The ID of the Bill Scenario for which you want to modify the
@@ -1027,6 +1081,14 @@ module Aws::BCMPricingCalculator
     # Update a newly added or existing usage lines. You can update the usage
     # amounts, usage hour, and usage group based on a usage ID and a Bill
     # scenario ID.
+    #
+    # <note markdown="1"> The `BatchUpdateBillScenarioUsageModification` operation doesn't have
+    # its own IAM permission. To authorize this operation for Amazon Web
+    # Services principals, include the permission
+    # `bcm-pricing-calculator:UpdateBillScenarioUsageModification` in your
+    # policies.
+    #
+    #  </note>
     #
     # @option params [required, String] :bill_scenario_id
     #   The ID of the Bill Scenario for which you want to modify the usage
@@ -1118,6 +1180,13 @@ module Aws::BCMPricingCalculator
     # Update a newly added or existing usage lines. You can update the usage
     # amounts and usage group based on a usage ID and a Workload estimate
     # ID.
+    #
+    # <note markdown="1"> The `BatchUpdateWorkloadEstimateUsage` operation doesn't have its own
+    # IAM permission. To authorize this operation for Amazon Web Services
+    # principals, include the permission
+    # `bcm-pricing-calculator:UpdateWorkloadEstimateUsage` in your policies.
+    #
+    #  </note>
     #
     # @option params [required, String] :workload_estimate_id
     #   The ID of the Workload estimate for which you want to modify the usage
@@ -1919,10 +1988,10 @@ module Aws::BCMPricingCalculator
     #   Filters to apply to the list of bill estimates.
     #
     # @option params [Types::FilterTimestamp] :created_at_filter
-    #   Filter bill estimates based on their creation date.
+    #   Filter bill estimates based on the creation date.
     #
     # @option params [Types::FilterTimestamp] :expires_at_filter
-    #   Filter bill estimates based on their expiration date.
+    #   Filter bill estimates based on the expiration date.
     #
     # @option params [String] :next_token
     #   A token to retrieve the next page of results.
@@ -2126,10 +2195,10 @@ module Aws::BCMPricingCalculator
     #   Filters to apply to the list of bill scenarios.
     #
     # @option params [Types::FilterTimestamp] :created_at_filter
-    #   Filter bill scenarios based on their creation date.
+    #   Filter bill scenarios based on the creation date.
     #
     # @option params [Types::FilterTimestamp] :expires_at_filter
-    #   Filter bill scenarios based on their expiration date.
+    #   Filter bill scenarios based on the expiration date.
     #
     # @option params [String] :next_token
     #   A token to retrieve the next page of results.
@@ -2309,10 +2378,10 @@ module Aws::BCMPricingCalculator
     # Lists all workload estimates for the account.
     #
     # @option params [Types::FilterTimestamp] :created_at_filter
-    #   Filter workload estimates based on their creation date.
+    #   Filter workload estimates based on the creation date.
     #
     # @option params [Types::FilterTimestamp] :expires_at_filter
-    #   Filter workload estimates based on their expiration date.
+    #   Filter workload estimates based on the expiration date.
     #
     # @option params [Array<Types::ListWorkloadEstimatesFilter>] :filters
     #   Filters to apply to the list of workload estimates.
@@ -2647,7 +2716,7 @@ module Aws::BCMPricingCalculator
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bcmpricingcalculator'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

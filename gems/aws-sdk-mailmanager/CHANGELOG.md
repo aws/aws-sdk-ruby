@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2025-01-29)
+------------------
+
+* Feature - This release includes a new feature for Amazon SES Mail Manager which allows customers to specify known addresses and domains and make use of those in traffic policies and rules actions to distinguish between known and unknown entries.
+
 1.17.0 (2025-01-15)
 ------------------
 

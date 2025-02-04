@@ -1319,6 +1319,7 @@ module Aws::AppStream
     StorageConnector.add_member(:connector_type, Shapes::ShapeRef.new(shape: StorageConnectorType, required: true, location_name: "ConnectorType"))
     StorageConnector.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "ResourceIdentifier"))
     StorageConnector.add_member(:domains, Shapes::ShapeRef.new(shape: DomainList, location_name: "Domains"))
+    StorageConnector.add_member(:domains_require_admin_consent, Shapes::ShapeRef.new(shape: DomainList, location_name: "DomainsRequireAdminConsent"))
     StorageConnector.struct_class = Types::StorageConnector
 
     StorageConnectorList.member = Shapes::ShapeRef.new(shape: StorageConnector)

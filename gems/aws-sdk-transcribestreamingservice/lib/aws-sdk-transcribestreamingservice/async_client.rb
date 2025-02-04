@@ -821,6 +821,268 @@ module Aws::TranscribeStreamingService
       req.send_request(options, &block)
     end
 
+    # Starts a bidirectional HTTP/2 stream, where audio is streamed to
+    # Amazon Web Services HealthScribe and the transcription results are
+    # streamed to your application.
+    #
+    # When you start a stream, you first specify the stream configuration in
+    # a `MedicalScribeConfigurationEvent`. This event includes channel
+    # definitions, encryption settings, and post-stream analytics settings,
+    # such as the output configuration for aggregated transcript and
+    # clinical note generation. These are additional streaming session
+    # configurations beyond those provided in your initial start request
+    # headers. Whether you are starting a new session or resuming an
+    # existing session, your first event must be a
+    # `MedicalScribeConfigurationEvent`.
+    #
+    # After you send a `MedicalScribeConfigurationEvent`, you start
+    # `AudioEvents` and Amazon Web Services HealthScribe responds with
+    # real-time transcription results. When you are finished, to start
+    # processing the results with the post-stream analytics, send a
+    # `MedicalScribeSessionControlEvent` with a `Type` of `END_OF_SESSION`
+    # and Amazon Web Services HealthScribe starts the analytics.
+    #
+    # You can pause or resume streaming. To pause streaming, complete the
+    # input stream without sending the `MedicalScribeSessionControlEvent`.
+    # To resume streaming, call the `StartMedicalScribeStream` and specify
+    # the same SessionId you used to start the stream.
+    #
+    # The following parameters are required:
+    #
+    # * `language-code`
+    #
+    # * `media-encoding`
+    #
+    # * `media-sample-rate-hertz`
+    #
+    #
+    #
+    # For more information on streaming with Amazon Web Services
+    # HealthScribe, see [Amazon Web Services HealthScribe][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/health-scribe-streaming.html
+    #
+    # @option params [String] :session_id
+    #   Specify an identifier for your streaming session (in UUID format). If
+    #   you don't include a SessionId in your request, Amazon Web Services
+    #   HealthScribe generates an ID and returns it in the response.
+    #
+    # @option params [required, String] :language_code
+    #   Specify the language code for your HealthScribe streaming session.
+    #
+    # @option params [required, Integer] :media_sample_rate_hertz
+    #   Specify the sample rate of the input audio (in hertz). Amazon Web
+    #   Services HealthScribe supports a range from 16,000 Hz to 48,000 Hz.
+    #   The sample rate you specify must match that of your audio.
+    #
+    # @option params [required, String] :media_encoding
+    #   Specify the encoding used for the input audio.
+    #
+    #   Supported formats are:
+    #
+    #   * FLAC
+    #
+    #   * OPUS-encoded audio in an Ogg container
+    #
+    #   * PCM (only signed 16-bit little-endian audio formats, which does not
+    #     include WAV)
+    #
+    #   For more information, see [Media formats][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio
+    #
+    # @return [Types::StartMedicalScribeStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartMedicalScribeStreamResponse#session_id #session_id} => String
+    #   * {Types::StartMedicalScribeStreamResponse#request_id #request_id} => String
+    #   * {Types::StartMedicalScribeStreamResponse#language_code #language_code} => String
+    #   * {Types::StartMedicalScribeStreamResponse#media_sample_rate_hertz #media_sample_rate_hertz} => Integer
+    #   * {Types::StartMedicalScribeStreamResponse#media_encoding #media_encoding} => String
+    #   * {Types::StartMedicalScribeStreamResponse#result_stream #result_stream} => Types::MedicalScribeResultStream
+    #
+    # @example Bi-directional EventStream Operation Example
+    #
+    #   You can signal input events after the initial request is established. Events
+    #   will be sent to the stream immediately once the stream connection is
+    #   established successfully.
+    #
+    #   To signal events, you can call the #signal methods from an Aws::TranscribeStreamingService::EventStreams::MedicalScribeInputStream
+    #   object. You must signal events before calling #wait or #join! on the async response.
+    #
+    #     input_stream = Aws::TranscribeStreamingService::EventStreams::MedicalScribeInputStream.new
+    #
+    #     async_resp = client.start_medical_scribe_stream(
+    #       # params input
+    #       input_event_stream_handler: input_stream) do |out_stream|
+    #
+    #       # register callbacks for events
+    #       out_stream.on_transcript_event_event do |event|
+    #         event # => Aws::TranscribeStreamingService::Types::TranscriptEvent
+    #       end
+    #       out_stream.on_bad_request_exception_event do |event|
+    #         event # => Aws::TranscribeStreamingService::Types::BadRequestException
+    #       end
+    #       out_stream.on_limit_exceeded_exception_event do |event|
+    #         event # => Aws::TranscribeStreamingService::Types::LimitExceededException
+    #       end
+    #       out_stream.on_internal_failure_exception_event do |event|
+    #         event # => Aws::TranscribeStreamingService::Types::InternalFailureException
+    #       end
+    #       out_stream.on_conflict_exception_event do |event|
+    #         event # => Aws::TranscribeStreamingService::Types::ConflictException
+    #       end
+    #       out_stream.on_service_unavailable_exception_event do |event|
+    #         event # => Aws::TranscribeStreamingService::Types::ServiceUnavailableException
+    #       end
+    #
+    #     end
+    #     # => Aws::Seahorse::Client::AsyncResponse
+    #
+    #     # signal events
+    #     input_stream.signal_audio_event_event( ... )
+    #     input_stream.signal_session_control_event_event( ... )
+    #     input_stream.signal_configuration_event_event( ... )
+    #
+    #     # make sure to signal :end_stream at the end
+    #     input_stream.signal_end_stream
+    #
+    #     # wait until stream is closed before finalizing the sync response
+    #     resp = async_resp.wait
+    #     # Or close the stream and finalize sync response immediately
+    #     # resp = async_resp.join!
+    #
+    #   You can also provide an Aws::TranscribeStreamingService::EventStreams::MedicalScribeResultStream object to register callbacks
+    #   before initializing the request instead of processing from the request block.
+    #
+    #     output_stream = Aws::TranscribeStreamingService::EventStreams::MedicalScribeResultStream.new
+    #     # register callbacks for output events
+    #     output_stream.on_transcript_event_event do |event|
+    #       event # => Aws::TranscribeStreamingService::Types::TranscriptEvent
+    #     end
+    #     output_stream.on_bad_request_exception_event do |event|
+    #       event # => Aws::TranscribeStreamingService::Types::BadRequestException
+    #     end
+    #     output_stream.on_limit_exceeded_exception_event do |event|
+    #       event # => Aws::TranscribeStreamingService::Types::LimitExceededException
+    #     end
+    #     output_stream.on_internal_failure_exception_event do |event|
+    #       event # => Aws::TranscribeStreamingService::Types::InternalFailureException
+    #     end
+    #     output_stream.on_conflict_exception_event do |event|
+    #       event # => Aws::TranscribeStreamingService::Types::ConflictException
+    #     end
+    #     output_stream.on_service_unavailable_exception_event do |event|
+    #       event # => Aws::TranscribeStreamingService::Types::ServiceUnavailableException
+    #     end
+    #     output_stream.on_error_event do |event|
+    #       # catch unmodeled error event in the stream
+    #       raise event
+    #       # => Aws::Errors::EventError
+    #       # event.event_type => :error
+    #       # event.error_code => String
+    #       # event.error_message => String
+    #     end
+    #
+    #     async_resp = client.start_medical_scribe_stream (
+    #       # params input
+    #       input_event_stream_handler: input_stream
+    #       output_event_stream_handler: output_stream
+    #     )
+    #
+    #     resp = async_resp.join!
+    #
+    #   You can also iterate through events after the response is complete.
+    #
+    #   Events are available at resp.result_stream # => Enumerator
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   async_resp = async_client.start_medical_scribe_stream({
+    #     session_id: "SessionId",
+    #     language_code: "en-US", # required, accepts en-US
+    #     media_sample_rate_hertz: 1, # required
+    #     media_encoding: "pcm", # required, accepts pcm, ogg-opus, flac
+    #     input_event_stream_hander: EventStreams::MedicalScribeInputStream.new,
+    #   })
+    #   # => Seahorse::Client::AsyncResponse
+    #   async_resp.wait
+    #   # => Seahorse::Client::Response
+    #   # Or use async_resp.join!
+    #
+    # @example Response structure
+    #
+    #   resp.session_id #=> String
+    #   resp.request_id #=> String
+    #   resp.language_code #=> String, one of "en-US"
+    #   resp.media_sample_rate_hertz #=> Integer
+    #   resp.media_encoding #=> String, one of "pcm", "ogg-opus", "flac"
+    #   All events are available at resp.result_stream:
+    #   resp.result_stream #=> Enumerator
+    #   resp.result_stream.event_types #=> [:transcript_event, :bad_request_exception, :limit_exceeded_exception, :internal_failure_exception, :conflict_exception, :service_unavailable_exception]
+    #
+    #   For :transcript_event event available at #on_transcript_event_event callback and response eventstream enumerator:
+    #   event.transcript_segment.segment_id #=> String
+    #   event.transcript_segment.begin_audio_time #=> Float
+    #   event.transcript_segment.end_audio_time #=> Float
+    #   event.transcript_segment.content #=> String
+    #   event.transcript_segment.items #=> Array
+    #   event.transcript_segment.items[0].begin_audio_time #=> Float
+    #   event.transcript_segment.items[0].end_audio_time #=> Float
+    #   event.transcript_segment.items[0].type #=> String, one of "pronunciation", "punctuation"
+    #   event.transcript_segment.items[0].confidence #=> Float
+    #   event.transcript_segment.items[0].content #=> String
+    #   event.transcript_segment.items[0].vocabulary_filter_match #=> Boolean
+    #   event.transcript_segment.is_partial #=> Boolean
+    #   event.transcript_segment.channel_id #=> String
+    #
+    #   For :bad_request_exception event available at #on_bad_request_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   For :limit_exceeded_exception event available at #on_limit_exceeded_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   For :internal_failure_exception event available at #on_internal_failure_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   For :conflict_exception event available at #on_conflict_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   For :service_unavailable_exception event available at #on_service_unavailable_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartMedicalScribeStream AWS API Documentation
+    #
+    # @overload start_medical_scribe_stream(params = {})
+    # @param [Hash] params ({})
+    def start_medical_scribe_stream(params = {}, options = {}, &block)
+      params = params.dup
+      input_event_stream_handler = _event_stream_handler(
+        :input,
+        params.delete(:input_event_stream_handler),
+        EventStreams::MedicalScribeInputStream
+      )
+      output_event_stream_handler = _event_stream_handler(
+        :output,
+        params.delete(:output_event_stream_handler) || params.delete(:event_stream_handler),
+        EventStreams::MedicalScribeResultStream
+      )
+
+      yield(output_event_stream_handler) if block_given?
+
+      req = build_request(:start_medical_scribe_stream, params)
+
+      req.context[:input_event_stream_handler] = input_event_stream_handler
+      req.handlers.add(Aws::Binary::EncodeHandler, priority: 55)
+      req.context[:output_event_stream_handler] = output_event_stream_handler
+      req.handlers.add(Aws::Binary::DecodeHandler, priority: 55)
+
+      req.send_request(options, &block)
+    end
+
     # Starts a bidirectional HTTP/2 or WebSocket stream where audio is
     # streamed to Amazon Transcribe Medical and the transcription results
     # are streamed to your application.
@@ -1788,7 +2050,7 @@ module Aws::TranscribeStreamingService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-transcribestreamingservice'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

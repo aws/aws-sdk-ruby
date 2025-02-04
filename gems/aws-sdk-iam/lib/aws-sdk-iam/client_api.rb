@@ -332,6 +332,7 @@ module Aws::IAM
     RoleUsageListType = Shapes::ListShape.new(name: 'RoleUsageListType')
     RoleUsageType = Shapes::StructureShape.new(name: 'RoleUsageType')
     SAMLMetadataDocumentType = Shapes::StringShape.new(name: 'SAMLMetadataDocumentType')
+    SAMLPrivateKey = Shapes::StructureShape.new(name: 'SAMLPrivateKey')
     SAMLProviderListEntry = Shapes::StructureShape.new(name: 'SAMLProviderListEntry')
     SAMLProviderListType = Shapes::ListShape.new(name: 'SAMLProviderListType')
     SAMLProviderNameType = Shapes::StringShape.new(name: 'SAMLProviderNameType')
@@ -410,6 +411,7 @@ module Aws::IAM
     accountAliasListType = Shapes::ListShape.new(name: 'accountAliasListType')
     accountAliasType = Shapes::StringShape.new(name: 'accountAliasType')
     arnType = Shapes::StringShape.new(name: 'arnType')
+    assertionEncryptionModeType = Shapes::StringShape.new(name: 'assertionEncryptionModeType')
     assignmentStatusType = Shapes::StringShape.new(name: 'assignmentStatusType')
     attachedPoliciesListType = Shapes::ListShape.new(name: 'attachedPoliciesListType')
     attachmentCountType = Shapes::IntegerShape.new(name: 'attachmentCountType')
@@ -487,6 +489,8 @@ module Aws::IAM
     policyScopeType = Shapes::StringShape.new(name: 'policyScopeType')
     policyType = Shapes::StringShape.new(name: 'policyType')
     policyVersionIdType = Shapes::StringShape.new(name: 'policyVersionIdType')
+    privateKeyIdType = Shapes::StringShape.new(name: 'privateKeyIdType')
+    privateKeyList = Shapes::ListShape.new(name: 'privateKeyList')
     privateKeyType = Shapes::StringShape.new(name: 'privateKeyType')
     publicKeyFingerprintType = Shapes::StringShape.new(name: 'publicKeyFingerprintType')
     publicKeyIdType = Shapes::StringShape.new(name: 'publicKeyIdType')
@@ -694,6 +698,8 @@ module Aws::IAM
     CreateSAMLProviderRequest.add_member(:saml_metadata_document, Shapes::ShapeRef.new(shape: SAMLMetadataDocumentType, required: true, location_name: "SAMLMetadataDocument"))
     CreateSAMLProviderRequest.add_member(:name, Shapes::ShapeRef.new(shape: SAMLProviderNameType, required: true, location_name: "Name"))
     CreateSAMLProviderRequest.add_member(:tags, Shapes::ShapeRef.new(shape: tagListType, location_name: "Tags"))
+    CreateSAMLProviderRequest.add_member(:assertion_encryption_mode, Shapes::ShapeRef.new(shape: assertionEncryptionModeType, location_name: "AssertionEncryptionMode"))
+    CreateSAMLProviderRequest.add_member(:add_private_key, Shapes::ShapeRef.new(shape: privateKeyType, location_name: "AddPrivateKey"))
     CreateSAMLProviderRequest.struct_class = Types::CreateSAMLProviderRequest
 
     CreateSAMLProviderResponse.add_member(:saml_provider_arn, Shapes::ShapeRef.new(shape: arnType, location_name: "SAMLProviderArn"))
@@ -1075,10 +1081,13 @@ module Aws::IAM
     GetSAMLProviderRequest.add_member(:saml_provider_arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "SAMLProviderArn"))
     GetSAMLProviderRequest.struct_class = Types::GetSAMLProviderRequest
 
+    GetSAMLProviderResponse.add_member(:saml_provider_uuid, Shapes::ShapeRef.new(shape: privateKeyIdType, location_name: "SAMLProviderUUID"))
     GetSAMLProviderResponse.add_member(:saml_metadata_document, Shapes::ShapeRef.new(shape: SAMLMetadataDocumentType, location_name: "SAMLMetadataDocument"))
     GetSAMLProviderResponse.add_member(:create_date, Shapes::ShapeRef.new(shape: dateType, location_name: "CreateDate"))
     GetSAMLProviderResponse.add_member(:valid_until, Shapes::ShapeRef.new(shape: dateType, location_name: "ValidUntil"))
     GetSAMLProviderResponse.add_member(:tags, Shapes::ShapeRef.new(shape: tagListType, location_name: "Tags"))
+    GetSAMLProviderResponse.add_member(:assertion_encryption_mode, Shapes::ShapeRef.new(shape: assertionEncryptionModeType, location_name: "AssertionEncryptionMode"))
+    GetSAMLProviderResponse.add_member(:private_key_list, Shapes::ShapeRef.new(shape: privateKeyList, location_name: "PrivateKeyList"))
     GetSAMLProviderResponse.struct_class = Types::GetSAMLProviderResponse
 
     GetSSHPublicKeyRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: userNameType, required: true, location_name: "UserName"))
@@ -1767,6 +1776,10 @@ module Aws::IAM
     RoleUsageType.add_member(:resources, Shapes::ShapeRef.new(shape: ArnListType, location_name: "Resources"))
     RoleUsageType.struct_class = Types::RoleUsageType
 
+    SAMLPrivateKey.add_member(:key_id, Shapes::ShapeRef.new(shape: privateKeyIdType, location_name: "KeyId"))
+    SAMLPrivateKey.add_member(:timestamp, Shapes::ShapeRef.new(shape: dateType, location_name: "Timestamp"))
+    SAMLPrivateKey.struct_class = Types::SAMLPrivateKey
+
     SAMLProviderListEntry.add_member(:arn, Shapes::ShapeRef.new(shape: arnType, location_name: "Arn"))
     SAMLProviderListEntry.add_member(:valid_until, Shapes::ShapeRef.new(shape: dateType, location_name: "ValidUntil"))
     SAMLProviderListEntry.add_member(:create_date, Shapes::ShapeRef.new(shape: dateType, location_name: "CreateDate"))
@@ -2028,8 +2041,11 @@ module Aws::IAM
 
     UpdateRoleResponse.struct_class = Types::UpdateRoleResponse
 
-    UpdateSAMLProviderRequest.add_member(:saml_metadata_document, Shapes::ShapeRef.new(shape: SAMLMetadataDocumentType, required: true, location_name: "SAMLMetadataDocument"))
+    UpdateSAMLProviderRequest.add_member(:saml_metadata_document, Shapes::ShapeRef.new(shape: SAMLMetadataDocumentType, location_name: "SAMLMetadataDocument"))
     UpdateSAMLProviderRequest.add_member(:saml_provider_arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "SAMLProviderArn"))
+    UpdateSAMLProviderRequest.add_member(:assertion_encryption_mode, Shapes::ShapeRef.new(shape: assertionEncryptionModeType, location_name: "AssertionEncryptionMode"))
+    UpdateSAMLProviderRequest.add_member(:add_private_key, Shapes::ShapeRef.new(shape: privateKeyType, location_name: "AddPrivateKey"))
+    UpdateSAMLProviderRequest.add_member(:remove_private_key, Shapes::ShapeRef.new(shape: privateKeyIdType, location_name: "RemovePrivateKey"))
     UpdateSAMLProviderRequest.struct_class = Types::UpdateSAMLProviderRequest
 
     UpdateSAMLProviderResponse.add_member(:saml_provider_arn, Shapes::ShapeRef.new(shape: arnType, location_name: "SAMLProviderArn"))
@@ -2151,6 +2167,8 @@ module Aws::IAM
     policyListType.member = Shapes::ShapeRef.new(shape: Policy)
 
     policyNameListType.member = Shapes::ShapeRef.new(shape: policyNameType)
+
+    privateKeyList.member = Shapes::ShapeRef.new(shape: SAMLPrivateKey)
 
     roleDetailListType.member = Shapes::ShapeRef.new(shape: RoleDetail)
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.179.0 (2025-01-29)
+------------------
+
+* Feature - Change the type of MpuObjectSize in CompleteMultipartUploadRequest from int to long.
+
 1.178.0 (2025-01-15)
 ------------------
 

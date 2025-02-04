@@ -27,6 +27,7 @@ module Aws
       end
       class InternalServerException < ::Aws::Errors::ServiceError
         def message: () -> ::String
+        def reason: () -> ::String
       end
       class ModelNotReadyException < ::Aws::Errors::ServiceError
         def message: () -> ::String

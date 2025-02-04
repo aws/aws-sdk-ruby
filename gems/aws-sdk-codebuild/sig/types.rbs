@@ -348,7 +348,7 @@ module Aws::CodeBuild
       attr_accessor project_name: ::String
       attr_accessor branch_filter: ::String
       attr_accessor filter_groups: ::Array[::Array[Types::WebhookFilter]]
-      attr_accessor build_type: ("BUILD" | "BUILD_BATCH")
+      attr_accessor build_type: ("BUILD" | "BUILD_BATCH" | "RUNNER_BUILDKITE_BUILD")
       attr_accessor manual_creation: bool
       attr_accessor scope_configuration: Types::ScopeConfiguration
       SENSITIVE: []
@@ -1292,7 +1292,7 @@ module Aws::CodeBuild
       attr_accessor branch_filter: ::String
       attr_accessor rotate_secret: bool
       attr_accessor filter_groups: ::Array[::Array[Types::WebhookFilter]]
-      attr_accessor build_type: ("BUILD" | "BUILD_BATCH")
+      attr_accessor build_type: ("BUILD" | "BUILD_BATCH" | "RUNNER_BUILDKITE_BUILD")
       SENSITIVE: []
     end
 
@@ -1314,7 +1314,7 @@ module Aws::CodeBuild
       attr_accessor secret: ::String
       attr_accessor branch_filter: ::String
       attr_accessor filter_groups: ::Array[::Array[Types::WebhookFilter]]
-      attr_accessor build_type: ("BUILD" | "BUILD_BATCH")
+      attr_accessor build_type: ("BUILD" | "BUILD_BATCH" | "RUNNER_BUILDKITE_BUILD")
       attr_accessor manual_creation: bool
       attr_accessor last_modified_secret: ::Time
       attr_accessor scope_configuration: Types::ScopeConfiguration

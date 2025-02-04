@@ -153,6 +153,11 @@ module Aws
                                        slot_name: ::String?
                                      },
                                    ],
+                                   ?target_data_settings: Array[
+                                     {
+                                       table_preparation_mode: ("do-nothing" | "truncate" | "drop-tables-on-target")?
+                                     },
+                                   ],
                                    ?number_of_jobs: ::Integer,
                                    ?tags: Array[
                                      {
@@ -1800,6 +1805,11 @@ module Aws
                                        cdc_start_time: ::Time?,
                                        cdc_stop_time: ::Time?,
                                        slot_name: ::String?
+                                     },
+                                   ],
+                                   ?target_data_settings: Array[
+                                     {
+                                       table_preparation_mode: ("do-nothing" | "truncate" | "drop-tables-on-target")?
                                      },
                                    ],
                                    ?number_of_jobs: ::Integer,

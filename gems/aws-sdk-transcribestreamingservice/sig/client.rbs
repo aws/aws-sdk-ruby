@@ -80,6 +80,16 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _GetMedicalScribeStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMedicalScribeStreamResponse]
+        def medical_scribe_stream_details: () -> Types::MedicalScribeStreamDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeStreamingService/Client.html#get_medical_scribe_stream-instance_method
+      def get_medical_scribe_stream: (
+                                       session_id: ::String
+                                     ) -> _GetMedicalScribeStreamResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMedicalScribeStreamResponseSuccess
+
       interface _StartCallAnalyticsStreamTranscriptionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartCallAnalyticsStreamTranscriptionResponse]
         def request_id: () -> ::String
@@ -116,6 +126,25 @@ module Aws
                                                        ?pii_entity_types: ::String
                                                      ) ?{ (*untyped) -> void } -> _StartCallAnalyticsStreamTranscriptionResponseSuccess
                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _StartCallAnalyticsStreamTranscriptionResponseSuccess
+
+      interface _StartMedicalScribeStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMedicalScribeStreamResponse]
+        def session_id: () -> ::String
+        def request_id: () -> ::String
+        def language_code: () -> ("en-US")
+        def media_sample_rate_hertz: () -> ::Integer
+        def media_encoding: () -> ("pcm" | "ogg-opus" | "flac")
+        def result_stream: () -> Types::MedicalScribeResultStream
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeStreamingService/Client.html#start_medical_scribe_stream-instance_method
+      def start_medical_scribe_stream: (
+                                         ?session_id: ::String,
+                                         language_code: ("en-US"),
+                                         media_sample_rate_hertz: ::Integer,
+                                         media_encoding: ("pcm" | "ogg-opus" | "flac"),
+                                         input_event_stream_hander: untyped
+                                       ) ?{ (*untyped) -> void } -> _StartMedicalScribeStreamResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _StartMedicalScribeStreamResponseSuccess
 
       interface _StartMedicalStreamTranscriptionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartMedicalStreamTranscriptionResponse]

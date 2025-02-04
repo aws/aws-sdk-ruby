@@ -112,6 +112,39 @@ module Aws
                                      ) -> _CreateAddonSubscriptionResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAddonSubscriptionResponseSuccess
 
+      interface _CreateAddressListResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAddressListResponse]
+        def address_list_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#create_address_list-instance_method
+      def create_address_list: (
+                                 address_list_name: ::String,
+                                 ?client_token: ::String,
+                                 ?tags: Array[
+                                   {
+                                     key: ::String,
+                                     value: ::String
+                                   },
+                                 ]
+                               ) -> _CreateAddressListResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAddressListResponseSuccess
+
+      interface _CreateAddressListImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAddressListImportJobResponse]
+        def job_id: () -> ::String
+        def pre_signed_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#create_address_list_import_job-instance_method
+      def create_address_list_import_job: (
+                                            address_list_id: ::String,
+                                            ?client_token: ::String,
+                                            import_data_format: {
+                                              import_data_type: ("CSV" | "JSON")
+                                            },
+                                            name: ::String
+                                          ) -> _CreateAddressListImportJobResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAddressListImportJobResponseSuccess
+
       interface _CreateArchiveResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateArchiveResponse]
         def archive_id: () -> ::String
@@ -239,7 +272,11 @@ module Aws
                                    {
                                      boolean_expression: {
                                        evaluate: {
-                                         attribute: ("READ_RECEIPT_REQUESTED" | "TLS" | "TLS_WRAPPED")?
+                                         attribute: ("READ_RECEIPT_REQUESTED" | "TLS" | "TLS_WRAPPED")?,
+                                         is_in_address_list: {
+                                           address_lists: Array[::String],
+                                           attribute: ("RECIPIENT" | "MAIL_FROM" | "SENDER" | "FROM" | "TO" | "CC")
+                                         }?
                                        },
                                        operator: ("IS_TRUE" | "IS_FALSE")
                                      }?,
@@ -287,7 +324,11 @@ module Aws
                                    {
                                      boolean_expression: {
                                        evaluate: {
-                                         attribute: ("READ_RECEIPT_REQUESTED" | "TLS" | "TLS_WRAPPED")?
+                                         attribute: ("READ_RECEIPT_REQUESTED" | "TLS" | "TLS_WRAPPED")?,
+                                         is_in_address_list: {
+                                           address_lists: Array[::String],
+                                           attribute: ("RECIPIENT" | "MAIL_FROM" | "SENDER" | "FROM" | "TO" | "CC")
+                                         }?
                                        },
                                        operator: ("IS_TRUE" | "IS_FALSE")
                                      }?,
@@ -360,6 +401,10 @@ module Aws
                                                analysis: {
                                                  analyzer: ::String,
                                                  result_field: ::String
+                                               }?,
+                                               is_in_address_list: {
+                                                 address_lists: Array[::String],
+                                                 attribute: ("RECIPIENT")
                                                }?
                                              },
                                              operator: ("IS_TRUE" | "IS_FALSE")
@@ -417,6 +462,15 @@ module Aws
                                      ) -> _DeleteAddonSubscriptionResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAddonSubscriptionResponseSuccess
 
+      interface _DeleteAddressListResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAddressListResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#delete_address_list-instance_method
+      def delete_address_list: (
+                                 address_list_id: ::String
+                               ) -> _DeleteAddressListResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAddressListResponseSuccess
+
       interface _DeleteArchiveResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteArchiveResponse]
       end
@@ -462,6 +516,16 @@ module Aws
                                  ) -> _DeleteTrafficPolicyResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTrafficPolicyResponseSuccess
 
+      interface _DeregisterMemberFromAddressListResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterMemberFromAddressListResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#deregister_member_from_address_list-instance_method
+      def deregister_member_from_address_list: (
+                                                 address: ::String,
+                                                 address_list_id: ::String
+                                               ) -> _DeregisterMemberFromAddressListResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterMemberFromAddressListResponseSuccess
+
       interface _GetAddonInstanceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAddonInstanceResponse]
         def addon_instance_arn: () -> ::String
@@ -486,6 +550,40 @@ module Aws
                                     addon_subscription_id: ::String
                                   ) -> _GetAddonSubscriptionResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAddonSubscriptionResponseSuccess
+
+      interface _GetAddressListResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAddressListResponse]
+        def address_list_arn: () -> ::String
+        def address_list_id: () -> ::String
+        def address_list_name: () -> ::String
+        def created_timestamp: () -> ::Time
+        def last_updated_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#get_address_list-instance_method
+      def get_address_list: (
+                              address_list_id: ::String
+                            ) -> _GetAddressListResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAddressListResponseSuccess
+
+      interface _GetAddressListImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAddressListImportJobResponse]
+        def address_list_id: () -> ::String
+        def completed_timestamp: () -> ::Time
+        def created_timestamp: () -> ::Time
+        def failed_items_count: () -> ::Integer
+        def import_data_format: () -> Types::ImportDataFormat
+        def imported_items_count: () -> ::Integer
+        def job_id: () -> ::String
+        def name: () -> ::String
+        def pre_signed_url: () -> ::String
+        def start_timestamp: () -> ::Time
+        def status: () -> ("CREATED" | "PROCESSING" | "COMPLETED" | "FAILED" | "STOPPED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#get_address_list_import_job-instance_method
+      def get_address_list_import_job: (
+                                         job_id: ::String
+                                       ) -> _GetAddressListImportJobResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAddressListImportJobResponseSuccess
 
       interface _GetArchiveResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetArchiveResponse]
@@ -587,6 +685,18 @@ module Aws
                              ) -> _GetIngressPointResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIngressPointResponseSuccess
 
+      interface _GetMemberOfAddressListResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMemberOfAddressListResponse]
+        def address: () -> ::String
+        def created_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#get_member_of_address_list-instance_method
+      def get_member_of_address_list: (
+                                        address: ::String,
+                                        address_list_id: ::String
+                                      ) -> _GetMemberOfAddressListResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMemberOfAddressListResponseSuccess
+
       interface _GetRelayResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetRelayResponse]
         def authentication: () -> Types::RelayAuthentication
@@ -660,6 +770,31 @@ module Aws
                                     ) -> _ListAddonSubscriptionsResponseSuccess
                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAddonSubscriptionsResponseSuccess
 
+      interface _ListAddressListImportJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAddressListImportJobsResponse]
+        def import_jobs: () -> ::Array[Types::ImportJob]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#list_address_list_import_jobs-instance_method
+      def list_address_list_import_jobs: (
+                                           address_list_id: ::String,
+                                           ?next_token: ::String,
+                                           ?page_size: ::Integer
+                                         ) -> _ListAddressListImportJobsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAddressListImportJobsResponseSuccess
+
+      interface _ListAddressListsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAddressListsResponse]
+        def address_lists: () -> ::Array[Types::AddressList]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#list_address_lists-instance_method
+      def list_address_lists: (
+                                ?next_token: ::String,
+                                ?page_size: ::Integer
+                              ) -> _ListAddressListsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAddressListsResponseSuccess
+
       interface _ListArchiveExportsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListArchiveExportsResponse]
         def exports: () -> ::Array[Types::ExportSummary]
@@ -710,6 +845,22 @@ module Aws
                                ) -> _ListIngressPointsResponseSuccess
                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIngressPointsResponseSuccess
 
+      interface _ListMembersOfAddressListResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMembersOfAddressListResponse]
+        def addresses: () -> ::Array[Types::SavedAddress]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#list_members_of_address_list-instance_method
+      def list_members_of_address_list: (
+                                          address_list_id: ::String,
+                                          ?filter: {
+                                            address_prefix: ::String?
+                                          },
+                                          ?next_token: ::String,
+                                          ?page_size: ::Integer
+                                        ) -> _ListMembersOfAddressListResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMembersOfAddressListResponseSuccess
+
       interface _ListRelaysResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListRelaysResponse]
         def next_token: () -> ::String
@@ -755,6 +906,25 @@ module Aws
                                    ?page_size: ::Integer
                                  ) -> _ListTrafficPoliciesResponseSuccess
                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTrafficPoliciesResponseSuccess
+
+      interface _RegisterMemberToAddressListResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterMemberToAddressListResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#register_member_to_address_list-instance_method
+      def register_member_to_address_list: (
+                                             address: ::String,
+                                             address_list_id: ::String
+                                           ) -> _RegisterMemberToAddressListResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterMemberToAddressListResponseSuccess
+
+      interface _StartAddressListImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartAddressListImportJobResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#start_address_list_import_job-instance_method
+      def start_address_list_import_job: (
+                                           job_id: ::String
+                                         ) -> _StartAddressListImportJobResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartAddressListImportJobResponseSuccess
 
       interface _StartArchiveExportResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartArchiveExportResponse]
@@ -859,6 +1029,15 @@ module Aws
                                   to_timestamp: ::Time
                                 ) -> _StartArchiveSearchResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartArchiveSearchResponseSuccess
+
+      interface _StopAddressListImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopAddressListImportJobResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#stop_address_list_import_job-instance_method
+      def stop_address_list_import_job: (
+                                          job_id: ::String
+                                        ) -> _StopAddressListImportJobResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopAddressListImportJobResponseSuccess
 
       interface _StopArchiveExportResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StopArchiveExportResponse]
@@ -1007,7 +1186,11 @@ module Aws
                                    {
                                      boolean_expression: {
                                        evaluate: {
-                                         attribute: ("READ_RECEIPT_REQUESTED" | "TLS" | "TLS_WRAPPED")?
+                                         attribute: ("READ_RECEIPT_REQUESTED" | "TLS" | "TLS_WRAPPED")?,
+                                         is_in_address_list: {
+                                           address_lists: Array[::String],
+                                           attribute: ("RECIPIENT" | "MAIL_FROM" | "SENDER" | "FROM" | "TO" | "CC")
+                                         }?
                                        },
                                        operator: ("IS_TRUE" | "IS_FALSE")
                                      }?,
@@ -1055,7 +1238,11 @@ module Aws
                                    {
                                      boolean_expression: {
                                        evaluate: {
-                                         attribute: ("READ_RECEIPT_REQUESTED" | "TLS" | "TLS_WRAPPED")?
+                                         attribute: ("READ_RECEIPT_REQUESTED" | "TLS" | "TLS_WRAPPED")?,
+                                         is_in_address_list: {
+                                           address_lists: Array[::String],
+                                           attribute: ("RECIPIENT" | "MAIL_FROM" | "SENDER" | "FROM" | "TO" | "CC")
+                                         }?
                                        },
                                        operator: ("IS_TRUE" | "IS_FALSE")
                                      }?,
@@ -1120,6 +1307,10 @@ module Aws
                                                analysis: {
                                                  analyzer: ::String,
                                                  result_field: ::String
+                                               }?,
+                                               is_in_address_list: {
+                                                 address_lists: Array[::String],
+                                                 attribute: ("RECIPIENT")
                                                }?
                                              },
                                              operator: ("IS_TRUE" | "IS_FALSE")

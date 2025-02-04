@@ -1251,6 +1251,7 @@ module Aws::AppStream
       attr_accessor connector_type: ("HOMEFOLDERS" | "GOOGLE_DRIVE" | "ONE_DRIVE")
       attr_accessor resource_identifier: ::String
       attr_accessor domains: ::Array[::String]
+      attr_accessor domains_require_admin_consent: ::Array[::String]
       SENSITIVE: []
     end
 

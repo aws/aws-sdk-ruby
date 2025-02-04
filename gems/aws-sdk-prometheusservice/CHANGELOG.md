@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2025-01-31)
+------------------
+
+* Feature - Add support for sending metrics to cross account and CMCK AMP workspaces through RoleConfiguration on Create/Update Scraper.
+
 1.45.0 (2025-01-15)
 ------------------
 

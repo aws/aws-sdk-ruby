@@ -484,9 +484,9 @@ module Aws::NeptuneGraph
     #   (m-NCUs) to use for the graph. Default: 1024, or the approved upper
     #   limit for your account.
     #
-    #   If both the minimum and maximum values are specified, the max of the
-    #   `min-provisioned-memory` and `max-provisioned memory` is used to
-    #   create the graph. If neither value is specified 128 m-NCUs are used.
+    #   If both the minimum and maximum values are specified, the final
+    #   `provisioned-memory` will be chosen per the actual size of your
+    #   imported data. If neither value is specified, 128 m-NCUs are used.
     #   @return [Integer]
     #
     # @!attribute [rw] min_provisioned_memory
@@ -1953,6 +1953,10 @@ module Aws::NeptuneGraph
       include Aws::Structure
     end
 
+    # @!attribute [rw] graph_identifier
+    #   The unique identifier of the Neptune Analytics graph.
+    #   @return [String]
+    #
     # @!attribute [rw] next_token
     #   Pagination token used to paginate input.
     #   @return [String]
@@ -1964,6 +1968,7 @@ module Aws::NeptuneGraph
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/ListExportTasksInput AWS API Documentation
     #
     class ListExportTasksInput < Struct.new(
+      :graph_identifier,
       :next_token,
       :max_results)
       SENSITIVE = []

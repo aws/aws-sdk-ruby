@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.113.0 (2025-02-04)
+------------------
+
+* Feature - Introduces TargetDataSettings with the TablePreparationMode option available for data migrations.
+
 1.112.0 (2025-01-15)
 ------------------
 

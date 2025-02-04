@@ -45,6 +45,7 @@ module Aws::VerifiedPermissions
     BatchIsAuthorizedWithTokenOutputList = Shapes::ListShape.new(name: 'BatchIsAuthorizedWithTokenOutputList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanAttribute = Shapes::BooleanShape.new(name: 'BooleanAttribute')
+    CedarJson = Shapes::StringShape.new(name: 'CedarJson')
     Claim = Shapes::StringShape.new(name: 'Claim')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
     ClientIds = Shapes::ListShape.new(name: 'ClientIds')
@@ -386,8 +387,10 @@ module Aws::VerifiedPermissions
     ConflictException.struct_class = Types::ConflictException
 
     ContextDefinition.add_member(:context_map, Shapes::ShapeRef.new(shape: ContextMap, location_name: "contextMap"))
+    ContextDefinition.add_member(:cedar_json, Shapes::ShapeRef.new(shape: CedarJson, location_name: "cedarJson"))
     ContextDefinition.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ContextDefinition.add_member_subclass(:context_map, Types::ContextDefinition::ContextMap)
+    ContextDefinition.add_member_subclass(:cedar_json, Types::ContextDefinition::CedarJson)
     ContextDefinition.add_member_subclass(:unknown, Types::ContextDefinition::Unknown)
     ContextDefinition.struct_class = Types::ContextDefinition
 
@@ -474,8 +477,10 @@ module Aws::VerifiedPermissions
     DeterminingPolicyList.member = Shapes::ShapeRef.new(shape: DeterminingPolicyItem)
 
     EntitiesDefinition.add_member(:entity_list, Shapes::ShapeRef.new(shape: EntityList, location_name: "entityList"))
+    EntitiesDefinition.add_member(:cedar_json, Shapes::ShapeRef.new(shape: CedarJson, location_name: "cedarJson"))
     EntitiesDefinition.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     EntitiesDefinition.add_member_subclass(:entity_list, Types::EntitiesDefinition::EntityList)
+    EntitiesDefinition.add_member_subclass(:cedar_json, Types::EntitiesDefinition::CedarJson)
     EntitiesDefinition.add_member_subclass(:unknown, Types::EntitiesDefinition::Unknown)
     EntitiesDefinition.struct_class = Types::EntitiesDefinition
 

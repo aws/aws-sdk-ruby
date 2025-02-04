@@ -423,7 +423,7 @@ module Aws
                                 },
                               ],
                             ],
-                            ?build_type: ("BUILD" | "BUILD_BATCH"),
+                            ?build_type: ("BUILD" | "BUILD_BATCH" | "RUNNER_BUILDKITE_BUILD"),
                             ?manual_creation: bool,
                             ?scope_configuration: {
                               name: ::String,
@@ -1361,7 +1361,7 @@ module Aws
                                 },
                               ],
                             ],
-                            ?build_type: ("BUILD" | "BUILD_BATCH")
+                            ?build_type: ("BUILD" | "BUILD_BATCH" | "RUNNER_BUILDKITE_BUILD")
                           ) -> _UpdateWebhookResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWebhookResponseSuccess
     end

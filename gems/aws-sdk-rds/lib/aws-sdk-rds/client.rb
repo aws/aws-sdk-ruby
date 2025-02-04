@@ -3085,9 +3085,9 @@ module Aws::RDS
     #
     #   The following values are valid for each DB engine:
     #
-    #   * Aurora MySQL - `audit | error | general | slowquery`
+    #   * Aurora MySQL - `audit | error | general | instance | slowquery`
     #
-    #   * Aurora PostgreSQL - `postgresql`
+    #   * Aurora PostgreSQL - `instance | postgresql`
     #
     #   * RDS for MySQL - `error | general | slowquery`
     #
@@ -5586,7 +5586,8 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     #
     # @option params [Integer] :storage_throughput
-    #   The storage throughput value for the DB instance.
+    #   The storage throughput value, in mebibyte per second (MiBps), for the
+    #   DB instance.
     #
     #   This setting applies only to the `gp3` storage type.
     #
@@ -19020,9 +19021,9 @@ module Aws::RDS
     #
     #   The following values are valid for each DB engine:
     #
-    #   * Aurora MySQL - `audit | error | general | slowquery`
+    #   * Aurora MySQL - `audit | error | general | instance | slowquery`
     #
-    #   * Aurora PostgreSQL - `postgresql`
+    #   * Aurora PostgreSQL - `instance | postgresql`
     #
     #   * RDS for MySQL - `error | general | slowquery`
     #
@@ -25071,15 +25072,25 @@ module Aws::RDS
     #
     #   **Aurora MySQL**
     #
-    #   Possible values are `audit`, `error`, `general`, and `slowquery`.
+    #   Possible values are `audit`, `error`, `general`, `instance`, and
+    #   `slowquery`.
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Possible value are `instance` and `postgresql`.
+    #
+    #   For more information about exporting CloudWatch Logs for Amazon RDS,
+    #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the
+    #   *Amazon RDS User Guide*.
     #
     #   For more information about exporting CloudWatch Logs for Amazon
-    #   Aurora, see [Publishing Database Logs to Amazon CloudWatch Logs][1] in
+    #   Aurora, see [Publishing Database Logs to Amazon CloudWatch Logs][2] in
     #   the *Amazon Aurora User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #
     # @option params [Boolean] :deletion_protection
     #   Specifies whether to enable deletion protection for the DB cluster.
@@ -25745,11 +25756,12 @@ module Aws::RDS
     #
     #   **Aurora MySQL**
     #
-    #   Possible values are `audit`, `error`, `general`, and `slowquery`.
+    #   Possible values are `audit`, `error`, `general`, `instance`, and
+    #   `slowquery`.
     #
     #   **Aurora PostgreSQL**
     #
-    #   Possible value is `postgresql`.
+    #   Possible value are `instance` and `postgresql`.
     #
     #   For more information about exporting CloudWatch Logs for Amazon RDS,
     #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the
@@ -26543,11 +26555,12 @@ module Aws::RDS
     #
     #   **Aurora MySQL**
     #
-    #   Possible values are `audit`, `error`, `general`, and `slowquery`.
+    #   Possible values are `audit`, `error`, `general`, `instance`, and
+    #   `slowquery`.
     #
     #   **Aurora PostgreSQL**
     #
-    #   Possible value is `postgresql`.
+    #   Possible value are `instance` and `postgresql`.
     #
     #   For more information about exporting CloudWatch Logs for Amazon RDS,
     #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the
@@ -31043,11 +31056,12 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Stops an Amazon RDS DB instance. When you stop a DB instance, Amazon
-    # RDS retains the DB instance's metadata, including its endpoint, DB
-    # parameter group, and option group membership. Amazon RDS also retains
-    # the transaction logs so you can do a point-in-time restore if
-    # necessary.
+    # Stops an Amazon RDS DB instance temporarily. When you stop a DB
+    # instance, Amazon RDS retains the DB instance's metadata, including
+    # its endpoint, DB parameter group, and option group membership. Amazon
+    # RDS also retains the transaction logs so you can do a point-in-time
+    # restore if necessary. The instance restarts automatically after 7
+    # days.
     #
     # For more information, see [ Stopping an Amazon RDS DB Instance
     # Temporarily][1] in the *Amazon RDS User Guide.*
@@ -31894,7 +31908,7 @@ module Aws::RDS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.266.0'
+      context[:gem_version] = '1.267.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

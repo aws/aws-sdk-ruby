@@ -317,6 +317,10 @@ module Aws::PrometheusService
     #   to.
     #   @return [Types::Destination]
     #
+    # @!attribute [rw] role_configuration
+    #   The scraper role configuration for the workspace.
+    #   @return [Types::RoleConfiguration]
+    #
     # @!attribute [rw] scrape_configuration
     #   The configuration file to use in the new scraper. For more
     #   information, see [Scraper configuration][1] in the *Amazon Managed
@@ -342,6 +346,7 @@ module Aws::PrometheusService
       :alias,
       :client_token,
       :destination,
+      :role_configuration,
       :scrape_configuration,
       :source,
       :tags)
@@ -1259,6 +1264,26 @@ module Aws::PrometheusService
       include Aws::Structure
     end
 
+    # To configure roles that allows users to write to an Amazon Managed
+    # Service for Prometheus workspace in a different account.
+    #
+    # @!attribute [rw] source_role_arn
+    #   A ARN identifying the source role configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_role_arn
+    #   A ARN identifying the target role configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/RoleConfiguration AWS API Documentation
+    #
+    class RoleConfiguration < Struct.new(
+      :source_role_arn,
+      :target_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details about one rule groups namespace.
     #
     # @!attribute [rw] arn
@@ -1438,6 +1463,11 @@ module Aws::PrometheusService
     #   `arn:aws:iam::123456789012:role/service-role/AmazonGrafanaServiceRole-12example`.
     #   @return [String]
     #
+    # @!attribute [rw] role_configuration
+    #   To configure roles that allows users to write to an Amazon Managed
+    #   Service for Prometheus workspace in a different account.
+    #   @return [Types::RoleConfiguration]
+    #
     # @!attribute [rw] scrape_configuration
     #   The configuration in use by the scraper.
     #   @return [Types::ScrapeConfiguration]
@@ -1473,6 +1503,7 @@ module Aws::PrometheusService
       :destination,
       :last_modified_at,
       :role_arn,
+      :role_configuration,
       :scrape_configuration,
       :scraper_id,
       :source,
@@ -1528,6 +1559,11 @@ module Aws::PrometheusService
     #   behalf.
     #   @return [String]
     #
+    # @!attribute [rw] role_configuration
+    #   To configure roles that allows users to write to an Amazon Managed
+    #   Service for Prometheus workspace in a different account.
+    #   @return [Types::RoleConfiguration]
+    #
     # @!attribute [rw] scraper_id
     #   The ID of the scraper.
     #   @return [String]
@@ -1558,6 +1594,7 @@ module Aws::PrometheusService
       :destination,
       :last_modified_at,
       :role_arn,
+      :role_configuration,
       :scraper_id,
       :source,
       :status,
@@ -1758,6 +1795,10 @@ module Aws::PrometheusService
     #   metrics to.
     #   @return [Types::Destination]
     #
+    # @!attribute [rw] role_configuration
+    #   The scraper role configuration for the workspace.
+    #   @return [Types::RoleConfiguration]
+    #
     # @!attribute [rw] scrape_configuration
     #   Contains the base-64 encoded YAML configuration for the scraper.
     #
@@ -1782,6 +1823,7 @@ module Aws::PrometheusService
       :alias,
       :client_token,
       :destination,
+      :role_configuration,
       :scrape_configuration,
       :scraper_id)
       SENSITIVE = []

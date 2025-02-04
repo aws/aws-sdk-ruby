@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.141.0 (2025-01-31)
+------------------
+
+* Feature - Added support for CodeBuild self-hosted Buildkite runner builds
+
 1.140.0 (2025-01-15)
 ------------------
 

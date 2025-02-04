@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2025-01-30)
+------------------
+
+* Feature - Adds Cedar JSON format support for entities and context data in authorization requests
+
 1.39.0 (2025-01-15)
 ------------------
 

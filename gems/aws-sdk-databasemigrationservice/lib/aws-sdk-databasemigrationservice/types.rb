@@ -623,6 +623,10 @@ module Aws::DatabaseMigrationService
     #   Specifies information about the source data provider.
     #   @return [Array<Types::SourceDataSetting>]
     #
+    # @!attribute [rw] target_data_settings
+    #   Specifies information about the target data provider.
+    #   @return [Array<Types::TargetDataSetting>]
+    #
     # @!attribute [rw] number_of_jobs
     #   The number of parallel jobs that trigger parallel threads to unload
     #   the tables from the source, and then load them to the target.
@@ -646,6 +650,7 @@ module Aws::DatabaseMigrationService
       :service_access_role_arn,
       :enable_cloudwatch_logs,
       :source_data_settings,
+      :target_data_settings,
       :number_of_jobs,
       :tags,
       :selection_rules)
@@ -1922,6 +1927,11 @@ module Aws::DatabaseMigrationService
     #   provider.
     #   @return [Array<Types::SourceDataSetting>]
     #
+    # @!attribute [rw] target_data_settings
+    #   Specifies information about the data migration's target data
+    #   provider.
+    #   @return [Array<Types::TargetDataSetting>]
+    #
     # @!attribute [rw] data_migration_statistics
     #   Provides information about the data migration's run, including
     #   start and stop time, latency, and data migration progress.
@@ -1961,6 +1971,7 @@ module Aws::DatabaseMigrationService
       :data_migration_type,
       :data_migration_settings,
       :source_data_settings,
+      :target_data_settings,
       :data_migration_statistics,
       :data_migration_status,
       :public_ip_addresses,
@@ -6801,22 +6812,23 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # Specifies using Kerberos authentication settings for use with DMS.
+    # Specifies the settings required for kerberos authentication when
+    # creating the replication instance.
     #
     # @!attribute [rw] key_cache_secret_id
-    #   Specifies the secret ID of the key cache for the replication
-    #   instance.
+    #   Specifies the ID of the secret that stores the key cache file
+    #   required for kerberos authentication.
     #   @return [String]
     #
     # @!attribute [rw] key_cache_secret_iam_arn
     #   Specifies the Amazon Resource Name (ARN) of the IAM role that grants
     #   Amazon Web Services DMS access to the secret containing key cache
-    #   file for the replication instance.
+    #   file for the kerberos authentication.
     #   @return [String]
     #
     # @!attribute [rw] krb_5_file_contents
-    #   Specifies the ID of the secret that stores the key cache file
-    #   required for kerberos authentication of the replication instance.
+    #   Specifies the contents of krb5 configuration file required for
+    #   kerberos authentication.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/KerberosAuthenticationSettings AWS API Documentation
@@ -7181,7 +7193,8 @@ module Aws::DatabaseMigrationService
     #   @return [Boolean]
     #
     # @!attribute [rw] authentication_method
-    #   Specifies using Kerberos authentication with Microsoft SQL Server.
+    #   Specifies the authentication method to be used with Microsoft SQL
+    #   Server.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/MicrosoftSQLServerSettings AWS API Documentation
@@ -7368,6 +7381,11 @@ module Aws::DatabaseMigrationService
     #   migration.
     #   @return [Array<Types::SourceDataSetting>]
     #
+    # @!attribute [rw] target_data_settings
+    #   The new information about the target data provider for the data
+    #   migration.
+    #   @return [Array<Types::TargetDataSetting>]
+    #
     # @!attribute [rw] number_of_jobs
     #   The number of parallel jobs that trigger parallel threads to unload
     #   the tables from the source, and then load them to the target.
@@ -7387,6 +7405,7 @@ module Aws::DatabaseMigrationService
       :service_access_role_arn,
       :data_migration_type,
       :source_data_settings,
+      :target_data_settings,
       :number_of_jobs,
       :selection_rules)
       SENSITIVE = [:selection_rules]
@@ -9387,7 +9406,7 @@ module Aws::DatabaseMigrationService
     #   @return [Integer]
     #
     # @!attribute [rw] authentication_method
-    #   Specifies using Kerberos authentication with Oracle.
+    #   Specifies the authentication method to be used with Oracle.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/OracleSettings AWS API Documentation
@@ -14014,6 +14033,23 @@ module Aws::DatabaseMigrationService
       :key,
       :value,
       :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines settings for a target data provider for a data migration.
+    #
+    # @!attribute [rw] table_preparation_mode
+    #   This setting determines how DMS handles the target tables before
+    #   starting a data migration, either by leaving them untouched,
+    #   dropping and recreating them, or truncating the existing data in the
+    #   target tables.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/TargetDataSetting AWS API Documentation
+    #
+    class TargetDataSetting < Struct.new(
+      :table_preparation_mode)
       SENSITIVE = []
       include Aws::Structure
     end

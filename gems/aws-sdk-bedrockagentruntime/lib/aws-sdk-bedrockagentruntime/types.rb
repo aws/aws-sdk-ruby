@@ -740,10 +740,20 @@ module Aws::BedrockAgentRuntime
     #   The citation.
     #   @return [Types::Citation]
     #
+    # @!attribute [rw] generated_response_part
+    #   The generated response to the citation event.
+    #   @return [Types::GeneratedResponsePart]
+    #
+    # @!attribute [rw] retrieved_references
+    #   The retrieved references of the citation event.
+    #   @return [Array<Types::RetrievedReference>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/CitationEvent AWS API Documentation
     #
     class CitationEvent < Struct.new(
       :citation,
+      :generated_response_part,
+      :retrieved_references,
       :event_type)
       SENSITIVE = []
       include Aws::Structure
@@ -2663,10 +2673,17 @@ module Aws::BedrockAgentRuntime
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @!attribute [rw] reason
+    #   The reason for the exception. If the reason is
+    #   `BEDROCK_MODEL_INVOCATION_SERVICE_UNAVAILABLE`, the model invocation
+    #   service is unavailable. Retry your request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/InternalServerException AWS API Documentation
     #
     class InternalServerException < Struct.new(
       :message,
+      :reason,
       :event_type)
       SENSITIVE = []
       include Aws::Structure

@@ -167,7 +167,9 @@ module Aws
                                       key: ::String,
                                       value: ::String
                                     },
-                                  ]
+                                  ],
+                                  ?assertion_encryption_mode: ("Required" | "Allowed"),
+                                  ?add_private_key: ::String
                                 ) -> SamlProvider
                               | (?Hash[Symbol, untyped]) -> SamlProvider
 

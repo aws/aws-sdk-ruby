@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2025-01-29)
+------------------
+
+* Feature - Added ConflictException error type in DeleteBillScenario, BatchDeleteBillScenarioCommitmentModification, BatchDeleteBillScenarioUsageModification, BatchUpdateBillScenarioUsageModification, and BatchUpdateBillScenarioCommitmentModification API operations.
+
 1.3.0 (2025-01-15)
 ------------------
 

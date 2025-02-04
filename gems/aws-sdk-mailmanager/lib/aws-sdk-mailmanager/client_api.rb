@@ -27,6 +27,15 @@ module Aws::MailManager
     AddonSubscriptionArn = Shapes::StringShape.new(name: 'AddonSubscriptionArn')
     AddonSubscriptionId = Shapes::StringShape.new(name: 'AddonSubscriptionId')
     AddonSubscriptions = Shapes::ListShape.new(name: 'AddonSubscriptions')
+    Address = Shapes::StringShape.new(name: 'Address')
+    AddressFilter = Shapes::StructureShape.new(name: 'AddressFilter')
+    AddressList = Shapes::StructureShape.new(name: 'AddressList')
+    AddressListArn = Shapes::StringShape.new(name: 'AddressListArn')
+    AddressListId = Shapes::StringShape.new(name: 'AddressListId')
+    AddressListName = Shapes::StringShape.new(name: 'AddressListName')
+    AddressLists = Shapes::ListShape.new(name: 'AddressLists')
+    AddressPageSize = Shapes::IntegerShape.new(name: 'AddressPageSize')
+    AddressPrefix = Shapes::StringShape.new(name: 'AddressPrefix')
     Analysis = Shapes::StructureShape.new(name: 'Analysis')
     AnalyzerArn = Shapes::StringShape.new(name: 'AnalyzerArn')
     Archive = Shapes::StructureShape.new(name: 'Archive')
@@ -56,6 +65,10 @@ module Aws::MailManager
     CreateAddonInstanceResponse = Shapes::StructureShape.new(name: 'CreateAddonInstanceResponse')
     CreateAddonSubscriptionRequest = Shapes::StructureShape.new(name: 'CreateAddonSubscriptionRequest')
     CreateAddonSubscriptionResponse = Shapes::StructureShape.new(name: 'CreateAddonSubscriptionResponse')
+    CreateAddressListImportJobRequest = Shapes::StructureShape.new(name: 'CreateAddressListImportJobRequest')
+    CreateAddressListImportJobResponse = Shapes::StructureShape.new(name: 'CreateAddressListImportJobResponse')
+    CreateAddressListRequest = Shapes::StructureShape.new(name: 'CreateAddressListRequest')
+    CreateAddressListResponse = Shapes::StructureShape.new(name: 'CreateAddressListResponse')
     CreateArchiveRequest = Shapes::StructureShape.new(name: 'CreateArchiveRequest')
     CreateArchiveResponse = Shapes::StructureShape.new(name: 'CreateArchiveResponse')
     CreateIngressPointRequest = Shapes::StructureShape.new(name: 'CreateIngressPointRequest')
@@ -70,6 +83,8 @@ module Aws::MailManager
     DeleteAddonInstanceResponse = Shapes::StructureShape.new(name: 'DeleteAddonInstanceResponse')
     DeleteAddonSubscriptionRequest = Shapes::StructureShape.new(name: 'DeleteAddonSubscriptionRequest')
     DeleteAddonSubscriptionResponse = Shapes::StructureShape.new(name: 'DeleteAddonSubscriptionResponse')
+    DeleteAddressListRequest = Shapes::StructureShape.new(name: 'DeleteAddressListRequest')
+    DeleteAddressListResponse = Shapes::StructureShape.new(name: 'DeleteAddressListResponse')
     DeleteArchiveRequest = Shapes::StructureShape.new(name: 'DeleteArchiveRequest')
     DeleteArchiveResponse = Shapes::StructureShape.new(name: 'DeleteArchiveResponse')
     DeleteIngressPointRequest = Shapes::StructureShape.new(name: 'DeleteIngressPointRequest')
@@ -82,6 +97,8 @@ module Aws::MailManager
     DeleteTrafficPolicyResponse = Shapes::StructureShape.new(name: 'DeleteTrafficPolicyResponse')
     DeliverToMailboxAction = Shapes::StructureShape.new(name: 'DeliverToMailboxAction')
     DeliverToQBusinessAction = Shapes::StructureShape.new(name: 'DeliverToQBusinessAction')
+    DeregisterMemberFromAddressListRequest = Shapes::StructureShape.new(name: 'DeregisterMemberFromAddressListRequest')
+    DeregisterMemberFromAddressListResponse = Shapes::StructureShape.new(name: 'DeregisterMemberFromAddressListResponse')
     Double = Shapes::FloatShape.new(name: 'Double')
     DropAction = Shapes::StructureShape.new(name: 'DropAction')
     EmailAddress = Shapes::StringShape.new(name: 'EmailAddress')
@@ -99,6 +116,10 @@ module Aws::MailManager
     GetAddonInstanceResponse = Shapes::StructureShape.new(name: 'GetAddonInstanceResponse')
     GetAddonSubscriptionRequest = Shapes::StructureShape.new(name: 'GetAddonSubscriptionRequest')
     GetAddonSubscriptionResponse = Shapes::StructureShape.new(name: 'GetAddonSubscriptionResponse')
+    GetAddressListImportJobRequest = Shapes::StructureShape.new(name: 'GetAddressListImportJobRequest')
+    GetAddressListImportJobResponse = Shapes::StructureShape.new(name: 'GetAddressListImportJobResponse')
+    GetAddressListRequest = Shapes::StructureShape.new(name: 'GetAddressListRequest')
+    GetAddressListResponse = Shapes::StructureShape.new(name: 'GetAddressListResponse')
     GetArchiveExportRequest = Shapes::StructureShape.new(name: 'GetArchiveExportRequest')
     GetArchiveExportResponse = Shapes::StructureShape.new(name: 'GetArchiveExportResponse')
     GetArchiveMessageContentRequest = Shapes::StructureShape.new(name: 'GetArchiveMessageContentRequest')
@@ -113,6 +134,8 @@ module Aws::MailManager
     GetArchiveSearchResultsResponse = Shapes::StructureShape.new(name: 'GetArchiveSearchResultsResponse')
     GetIngressPointRequest = Shapes::StructureShape.new(name: 'GetIngressPointRequest')
     GetIngressPointResponse = Shapes::StructureShape.new(name: 'GetIngressPointResponse')
+    GetMemberOfAddressListRequest = Shapes::StructureShape.new(name: 'GetMemberOfAddressListRequest')
+    GetMemberOfAddressListResponse = Shapes::StructureShape.new(name: 'GetMemberOfAddressListResponse')
     GetRelayRequest = Shapes::StructureShape.new(name: 'GetRelayRequest')
     GetRelayResponse = Shapes::StructureShape.new(name: 'GetRelayResponse')
     GetRuleSetRequest = Shapes::StructureShape.new(name: 'GetRuleSetRequest')
@@ -124,6 +147,13 @@ module Aws::MailManager
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
     IdOrArn = Shapes::StringShape.new(name: 'IdOrArn')
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
+    ImportDataFormat = Shapes::StructureShape.new(name: 'ImportDataFormat')
+    ImportDataType = Shapes::StringShape.new(name: 'ImportDataType')
+    ImportJob = Shapes::StructureShape.new(name: 'ImportJob')
+    ImportJobStatus = Shapes::StringShape.new(name: 'ImportJobStatus')
+    ImportJobs = Shapes::ListShape.new(name: 'ImportJobs')
+    IngressAddressListArnList = Shapes::ListShape.new(name: 'IngressAddressListArnList')
+    IngressAddressListEmailAttribute = Shapes::StringShape.new(name: 'IngressAddressListEmailAttribute')
     IngressAnalysis = Shapes::StructureShape.new(name: 'IngressAnalysis')
     IngressBooleanExpression = Shapes::StructureShape.new(name: 'IngressBooleanExpression')
     IngressBooleanOperator = Shapes::StringShape.new(name: 'IngressBooleanOperator')
@@ -132,6 +162,7 @@ module Aws::MailManager
     IngressIpToEvaluate = Shapes::UnionShape.new(name: 'IngressIpToEvaluate')
     IngressIpv4Attribute = Shapes::StringShape.new(name: 'IngressIpv4Attribute')
     IngressIpv4Expression = Shapes::StructureShape.new(name: 'IngressIpv4Expression')
+    IngressIsInAddressList = Shapes::StructureShape.new(name: 'IngressIsInAddressList')
     IngressPoint = Shapes::StructureShape.new(name: 'IngressPoint')
     IngressPointARecord = Shapes::StringShape.new(name: 'IngressPointARecord')
     IngressPointArn = Shapes::StringShape.new(name: 'IngressPointArn')
@@ -156,12 +187,19 @@ module Aws::MailManager
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     Ipv4Cidr = Shapes::StringShape.new(name: 'Ipv4Cidr')
     Ipv4Cidrs = Shapes::ListShape.new(name: 'Ipv4Cidrs')
+    JobId = Shapes::StringShape.new(name: 'JobId')
+    JobItemsCount = Shapes::IntegerShape.new(name: 'JobItemsCount')
+    JobName = Shapes::StringShape.new(name: 'JobName')
     KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     ListAddonInstancesRequest = Shapes::StructureShape.new(name: 'ListAddonInstancesRequest')
     ListAddonInstancesResponse = Shapes::StructureShape.new(name: 'ListAddonInstancesResponse')
     ListAddonSubscriptionsRequest = Shapes::StructureShape.new(name: 'ListAddonSubscriptionsRequest')
     ListAddonSubscriptionsResponse = Shapes::StructureShape.new(name: 'ListAddonSubscriptionsResponse')
+    ListAddressListImportJobsRequest = Shapes::StructureShape.new(name: 'ListAddressListImportJobsRequest')
+    ListAddressListImportJobsResponse = Shapes::StructureShape.new(name: 'ListAddressListImportJobsResponse')
+    ListAddressListsRequest = Shapes::StructureShape.new(name: 'ListAddressListsRequest')
+    ListAddressListsResponse = Shapes::StructureShape.new(name: 'ListAddressListsResponse')
     ListArchiveExportsRequest = Shapes::StructureShape.new(name: 'ListArchiveExportsRequest')
     ListArchiveExportsResponse = Shapes::StructureShape.new(name: 'ListArchiveExportsResponse')
     ListArchiveSearchesRequest = Shapes::StructureShape.new(name: 'ListArchiveSearchesRequest')
@@ -170,6 +208,8 @@ module Aws::MailManager
     ListArchivesResponse = Shapes::StructureShape.new(name: 'ListArchivesResponse')
     ListIngressPointsRequest = Shapes::StructureShape.new(name: 'ListIngressPointsRequest')
     ListIngressPointsResponse = Shapes::StructureShape.new(name: 'ListIngressPointsResponse')
+    ListMembersOfAddressListRequest = Shapes::StructureShape.new(name: 'ListMembersOfAddressListRequest')
+    ListMembersOfAddressListResponse = Shapes::StructureShape.new(name: 'ListMembersOfAddressListResponse')
     ListRelaysRequest = Shapes::StructureShape.new(name: 'ListRelaysRequest')
     ListRelaysResponse = Shapes::StructureShape.new(name: 'ListRelaysResponse')
     ListRuleSetsRequest = Shapes::StructureShape.new(name: 'ListRuleSetsRequest')
@@ -191,9 +231,12 @@ module Aws::MailManager
     PolicyConditions = Shapes::ListShape.new(name: 'PolicyConditions')
     PolicyStatement = Shapes::StructureShape.new(name: 'PolicyStatement')
     PolicyStatementList = Shapes::ListShape.new(name: 'PolicyStatementList')
+    PreSignedUrl = Shapes::StringShape.new(name: 'PreSignedUrl')
     QBusinessApplicationId = Shapes::StringShape.new(name: 'QBusinessApplicationId')
     QBusinessIndexId = Shapes::StringShape.new(name: 'QBusinessIndexId')
     Recipients = Shapes::ListShape.new(name: 'Recipients')
+    RegisterMemberToAddressListRequest = Shapes::StructureShape.new(name: 'RegisterMemberToAddressListRequest')
+    RegisterMemberToAddressListResponse = Shapes::StructureShape.new(name: 'RegisterMemberToAddressListResponse')
     Relay = Shapes::StructureShape.new(name: 'Relay')
     RelayAction = Shapes::StructureShape.new(name: 'RelayAction')
     RelayArn = Shapes::StringShape.new(name: 'RelayArn')
@@ -212,6 +255,8 @@ module Aws::MailManager
     Rule = Shapes::StructureShape.new(name: 'Rule')
     RuleAction = Shapes::UnionShape.new(name: 'RuleAction')
     RuleActions = Shapes::ListShape.new(name: 'RuleActions')
+    RuleAddressListArnList = Shapes::ListShape.new(name: 'RuleAddressListArnList')
+    RuleAddressListEmailAttribute = Shapes::StringShape.new(name: 'RuleAddressListEmailAttribute')
     RuleBooleanEmailAttribute = Shapes::StringShape.new(name: 'RuleBooleanEmailAttribute')
     RuleBooleanExpression = Shapes::StructureShape.new(name: 'RuleBooleanExpression')
     RuleBooleanOperator = Shapes::StringShape.new(name: 'RuleBooleanOperator')
@@ -228,6 +273,7 @@ module Aws::MailManager
     RuleIpStringValue = Shapes::StringShape.new(name: 'RuleIpStringValue')
     RuleIpToEvaluate = Shapes::UnionShape.new(name: 'RuleIpToEvaluate')
     RuleIpValueList = Shapes::ListShape.new(name: 'RuleIpValueList')
+    RuleIsInAddressList = Shapes::StructureShape.new(name: 'RuleIsInAddressList')
     RuleName = Shapes::StringShape.new(name: 'RuleName')
     RuleNumberEmailAttribute = Shapes::StringShape.new(name: 'RuleNumberEmailAttribute')
     RuleNumberExpression = Shapes::StructureShape.new(name: 'RuleNumberExpression')
@@ -257,6 +303,8 @@ module Aws::MailManager
     S3Location = Shapes::StringShape.new(name: 'S3Location')
     S3Prefix = Shapes::StringShape.new(name: 'S3Prefix')
     S3PresignedURL = Shapes::StringShape.new(name: 'S3PresignedURL')
+    SavedAddress = Shapes::StructureShape.new(name: 'SavedAddress')
+    SavedAddresses = Shapes::ListShape.new(name: 'SavedAddresses')
     SearchId = Shapes::StringShape.new(name: 'SearchId')
     SearchMaxResults = Shapes::IntegerShape.new(name: 'SearchMaxResults')
     SearchState = Shapes::StringShape.new(name: 'SearchState')
@@ -268,10 +316,14 @@ module Aws::MailManager
     SenderIpAddress = Shapes::StringShape.new(name: 'SenderIpAddress')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SmtpPassword = Shapes::StringShape.new(name: 'SmtpPassword')
+    StartAddressListImportJobRequest = Shapes::StructureShape.new(name: 'StartAddressListImportJobRequest')
+    StartAddressListImportJobResponse = Shapes::StructureShape.new(name: 'StartAddressListImportJobResponse')
     StartArchiveExportRequest = Shapes::StructureShape.new(name: 'StartArchiveExportRequest')
     StartArchiveExportResponse = Shapes::StructureShape.new(name: 'StartArchiveExportResponse')
     StartArchiveSearchRequest = Shapes::StructureShape.new(name: 'StartArchiveSearchRequest')
     StartArchiveSearchResponse = Shapes::StructureShape.new(name: 'StartArchiveSearchResponse')
+    StopAddressListImportJobRequest = Shapes::StructureShape.new(name: 'StopAddressListImportJobRequest')
+    StopAddressListImportJobResponse = Shapes::StructureShape.new(name: 'StopAddressListImportJobResponse')
     StopArchiveExportRequest = Shapes::StructureShape.new(name: 'StopArchiveExportRequest')
     StopArchiveExportResponse = Shapes::StructureShape.new(name: 'StopArchiveExportResponse')
     StopArchiveSearchRequest = Shapes::StructureShape.new(name: 'StopArchiveSearchRequest')
@@ -332,6 +384,18 @@ module Aws::MailManager
     AddonSubscription.struct_class = Types::AddonSubscription
 
     AddonSubscriptions.member = Shapes::ShapeRef.new(shape: AddonSubscription)
+
+    AddressFilter.add_member(:address_prefix, Shapes::ShapeRef.new(shape: AddressPrefix, location_name: "AddressPrefix"))
+    AddressFilter.struct_class = Types::AddressFilter
+
+    AddressList.add_member(:address_list_arn, Shapes::ShapeRef.new(shape: AddressListArn, required: true, location_name: "AddressListArn"))
+    AddressList.add_member(:address_list_id, Shapes::ShapeRef.new(shape: AddressListId, required: true, location_name: "AddressListId"))
+    AddressList.add_member(:address_list_name, Shapes::ShapeRef.new(shape: AddressListName, required: true, location_name: "AddressListName"))
+    AddressList.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTimestamp"))
+    AddressList.add_member(:last_updated_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastUpdatedTimestamp"))
+    AddressList.struct_class = Types::AddressList
+
+    AddressLists.member = Shapes::ShapeRef.new(shape: AddressList)
 
     Analysis.add_member(:analyzer, Shapes::ShapeRef.new(shape: AnalyzerArn, required: true, location_name: "Analyzer"))
     Analysis.add_member(:result_field, Shapes::ShapeRef.new(shape: ResultField, required: true, location_name: "ResultField"))
@@ -409,6 +473,24 @@ module Aws::MailManager
     CreateAddonSubscriptionResponse.add_member(:addon_subscription_id, Shapes::ShapeRef.new(shape: AddonSubscriptionId, required: true, location_name: "AddonSubscriptionId"))
     CreateAddonSubscriptionResponse.struct_class = Types::CreateAddonSubscriptionResponse
 
+    CreateAddressListImportJobRequest.add_member(:address_list_id, Shapes::ShapeRef.new(shape: AddressListId, required: true, location_name: "AddressListId"))
+    CreateAddressListImportJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAddressListImportJobRequest.add_member(:import_data_format, Shapes::ShapeRef.new(shape: ImportDataFormat, required: true, location_name: "ImportDataFormat"))
+    CreateAddressListImportJobRequest.add_member(:name, Shapes::ShapeRef.new(shape: JobName, required: true, location_name: "Name"))
+    CreateAddressListImportJobRequest.struct_class = Types::CreateAddressListImportJobRequest
+
+    CreateAddressListImportJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
+    CreateAddressListImportJobResponse.add_member(:pre_signed_url, Shapes::ShapeRef.new(shape: PreSignedUrl, required: true, location_name: "PreSignedUrl"))
+    CreateAddressListImportJobResponse.struct_class = Types::CreateAddressListImportJobResponse
+
+    CreateAddressListRequest.add_member(:address_list_name, Shapes::ShapeRef.new(shape: AddressListName, required: true, location_name: "AddressListName"))
+    CreateAddressListRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAddressListRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateAddressListRequest.struct_class = Types::CreateAddressListRequest
+
+    CreateAddressListResponse.add_member(:address_list_id, Shapes::ShapeRef.new(shape: AddressListId, required: true, location_name: "AddressListId"))
+    CreateAddressListResponse.struct_class = Types::CreateAddressListResponse
+
     CreateArchiveRequest.add_member(:archive_name, Shapes::ShapeRef.new(shape: ArchiveNameString, required: true, location_name: "ArchiveName"))
     CreateArchiveRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateArchiveRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
@@ -472,6 +554,11 @@ module Aws::MailManager
 
     DeleteAddonSubscriptionResponse.struct_class = Types::DeleteAddonSubscriptionResponse
 
+    DeleteAddressListRequest.add_member(:address_list_id, Shapes::ShapeRef.new(shape: AddressListId, required: true, location_name: "AddressListId"))
+    DeleteAddressListRequest.struct_class = Types::DeleteAddressListRequest
+
+    DeleteAddressListResponse.struct_class = Types::DeleteAddressListResponse
+
     DeleteArchiveRequest.add_member(:archive_id, Shapes::ShapeRef.new(shape: ArchiveIdString, required: true, location_name: "ArchiveId"))
     DeleteArchiveRequest.struct_class = Types::DeleteArchiveRequest
 
@@ -507,6 +594,12 @@ module Aws::MailManager
     DeliverToQBusinessAction.add_member(:index_id, Shapes::ShapeRef.new(shape: QBusinessIndexId, required: true, location_name: "IndexId"))
     DeliverToQBusinessAction.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "RoleArn"))
     DeliverToQBusinessAction.struct_class = Types::DeliverToQBusinessAction
+
+    DeregisterMemberFromAddressListRequest.add_member(:address, Shapes::ShapeRef.new(shape: Address, required: true, location_name: "Address"))
+    DeregisterMemberFromAddressListRequest.add_member(:address_list_id, Shapes::ShapeRef.new(shape: AddressListId, required: true, location_name: "AddressListId"))
+    DeregisterMemberFromAddressListRequest.struct_class = Types::DeregisterMemberFromAddressListRequest
+
+    DeregisterMemberFromAddressListResponse.struct_class = Types::DeregisterMemberFromAddressListResponse
 
     DropAction.struct_class = Types::DropAction
 
@@ -551,6 +644,33 @@ module Aws::MailManager
     GetAddonSubscriptionResponse.add_member(:addon_subscription_arn, Shapes::ShapeRef.new(shape: AddonSubscriptionArn, location_name: "AddonSubscriptionArn"))
     GetAddonSubscriptionResponse.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
     GetAddonSubscriptionResponse.struct_class = Types::GetAddonSubscriptionResponse
+
+    GetAddressListImportJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
+    GetAddressListImportJobRequest.struct_class = Types::GetAddressListImportJobRequest
+
+    GetAddressListImportJobResponse.add_member(:address_list_id, Shapes::ShapeRef.new(shape: AddressListId, required: true, location_name: "AddressListId"))
+    GetAddressListImportJobResponse.add_member(:completed_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CompletedTimestamp"))
+    GetAddressListImportJobResponse.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTimestamp"))
+    GetAddressListImportJobResponse.add_member(:error, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Error"))
+    GetAddressListImportJobResponse.add_member(:failed_items_count, Shapes::ShapeRef.new(shape: JobItemsCount, location_name: "FailedItemsCount"))
+    GetAddressListImportJobResponse.add_member(:import_data_format, Shapes::ShapeRef.new(shape: ImportDataFormat, required: true, location_name: "ImportDataFormat"))
+    GetAddressListImportJobResponse.add_member(:imported_items_count, Shapes::ShapeRef.new(shape: JobItemsCount, location_name: "ImportedItemsCount"))
+    GetAddressListImportJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
+    GetAddressListImportJobResponse.add_member(:name, Shapes::ShapeRef.new(shape: JobName, required: true, location_name: "Name"))
+    GetAddressListImportJobResponse.add_member(:pre_signed_url, Shapes::ShapeRef.new(shape: PreSignedUrl, required: true, location_name: "PreSignedUrl"))
+    GetAddressListImportJobResponse.add_member(:start_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTimestamp"))
+    GetAddressListImportJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: ImportJobStatus, required: true, location_name: "Status"))
+    GetAddressListImportJobResponse.struct_class = Types::GetAddressListImportJobResponse
+
+    GetAddressListRequest.add_member(:address_list_id, Shapes::ShapeRef.new(shape: AddressListId, required: true, location_name: "AddressListId"))
+    GetAddressListRequest.struct_class = Types::GetAddressListRequest
+
+    GetAddressListResponse.add_member(:address_list_arn, Shapes::ShapeRef.new(shape: AddressListArn, required: true, location_name: "AddressListArn"))
+    GetAddressListResponse.add_member(:address_list_id, Shapes::ShapeRef.new(shape: AddressListId, required: true, location_name: "AddressListId"))
+    GetAddressListResponse.add_member(:address_list_name, Shapes::ShapeRef.new(shape: AddressListName, required: true, location_name: "AddressListName"))
+    GetAddressListResponse.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTimestamp"))
+    GetAddressListResponse.add_member(:last_updated_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastUpdatedTimestamp"))
+    GetAddressListResponse.struct_class = Types::GetAddressListResponse
 
     GetArchiveExportRequest.add_member(:export_id, Shapes::ShapeRef.new(shape: ExportId, required: true, location_name: "ExportId"))
     GetArchiveExportRequest.struct_class = Types::GetArchiveExportRequest
@@ -624,6 +744,14 @@ module Aws::MailManager
     GetIngressPointResponse.add_member(:type, Shapes::ShapeRef.new(shape: IngressPointType, location_name: "Type"))
     GetIngressPointResponse.struct_class = Types::GetIngressPointResponse
 
+    GetMemberOfAddressListRequest.add_member(:address, Shapes::ShapeRef.new(shape: Address, required: true, location_name: "Address"))
+    GetMemberOfAddressListRequest.add_member(:address_list_id, Shapes::ShapeRef.new(shape: AddressListId, required: true, location_name: "AddressListId"))
+    GetMemberOfAddressListRequest.struct_class = Types::GetMemberOfAddressListRequest
+
+    GetMemberOfAddressListResponse.add_member(:address, Shapes::ShapeRef.new(shape: Address, required: true, location_name: "Address"))
+    GetMemberOfAddressListResponse.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTimestamp"))
+    GetMemberOfAddressListResponse.struct_class = Types::GetMemberOfAddressListResponse
+
     GetRelayRequest.add_member(:relay_id, Shapes::ShapeRef.new(shape: RelayId, required: true, location_name: "RelayId"))
     GetRelayRequest.struct_class = Types::GetRelayRequest
 
@@ -661,6 +789,27 @@ module Aws::MailManager
     GetTrafficPolicyResponse.add_member(:traffic_policy_name, Shapes::ShapeRef.new(shape: TrafficPolicyName, required: true, location_name: "TrafficPolicyName"))
     GetTrafficPolicyResponse.struct_class = Types::GetTrafficPolicyResponse
 
+    ImportDataFormat.add_member(:import_data_type, Shapes::ShapeRef.new(shape: ImportDataType, required: true, location_name: "ImportDataType"))
+    ImportDataFormat.struct_class = Types::ImportDataFormat
+
+    ImportJob.add_member(:address_list_id, Shapes::ShapeRef.new(shape: AddressListId, required: true, location_name: "AddressListId"))
+    ImportJob.add_member(:completed_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CompletedTimestamp"))
+    ImportJob.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTimestamp"))
+    ImportJob.add_member(:error, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Error"))
+    ImportJob.add_member(:failed_items_count, Shapes::ShapeRef.new(shape: JobItemsCount, location_name: "FailedItemsCount"))
+    ImportJob.add_member(:import_data_format, Shapes::ShapeRef.new(shape: ImportDataFormat, required: true, location_name: "ImportDataFormat"))
+    ImportJob.add_member(:imported_items_count, Shapes::ShapeRef.new(shape: JobItemsCount, location_name: "ImportedItemsCount"))
+    ImportJob.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
+    ImportJob.add_member(:name, Shapes::ShapeRef.new(shape: JobName, required: true, location_name: "Name"))
+    ImportJob.add_member(:pre_signed_url, Shapes::ShapeRef.new(shape: PreSignedUrl, required: true, location_name: "PreSignedUrl"))
+    ImportJob.add_member(:start_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTimestamp"))
+    ImportJob.add_member(:status, Shapes::ShapeRef.new(shape: ImportJobStatus, required: true, location_name: "Status"))
+    ImportJob.struct_class = Types::ImportJob
+
+    ImportJobs.member = Shapes::ShapeRef.new(shape: ImportJob)
+
+    IngressAddressListArnList.member = Shapes::ShapeRef.new(shape: AddressListArn)
+
     IngressAnalysis.add_member(:analyzer, Shapes::ShapeRef.new(shape: AnalyzerArn, required: true, location_name: "Analyzer"))
     IngressAnalysis.add_member(:result_field, Shapes::ShapeRef.new(shape: ResultField, required: true, location_name: "ResultField"))
     IngressAnalysis.struct_class = Types::IngressAnalysis
@@ -670,8 +819,10 @@ module Aws::MailManager
     IngressBooleanExpression.struct_class = Types::IngressBooleanExpression
 
     IngressBooleanToEvaluate.add_member(:analysis, Shapes::ShapeRef.new(shape: IngressAnalysis, location_name: "Analysis"))
+    IngressBooleanToEvaluate.add_member(:is_in_address_list, Shapes::ShapeRef.new(shape: IngressIsInAddressList, location_name: "IsInAddressList"))
     IngressBooleanToEvaluate.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     IngressBooleanToEvaluate.add_member_subclass(:analysis, Types::IngressBooleanToEvaluate::Analysis)
+    IngressBooleanToEvaluate.add_member_subclass(:is_in_address_list, Types::IngressBooleanToEvaluate::IsInAddressList)
     IngressBooleanToEvaluate.add_member_subclass(:unknown, Types::IngressBooleanToEvaluate::Unknown)
     IngressBooleanToEvaluate.struct_class = Types::IngressBooleanToEvaluate
 
@@ -685,6 +836,10 @@ module Aws::MailManager
     IngressIpv4Expression.add_member(:operator, Shapes::ShapeRef.new(shape: IngressIpOperator, required: true, location_name: "Operator"))
     IngressIpv4Expression.add_member(:values, Shapes::ShapeRef.new(shape: Ipv4Cidrs, required: true, location_name: "Values"))
     IngressIpv4Expression.struct_class = Types::IngressIpv4Expression
+
+    IngressIsInAddressList.add_member(:address_lists, Shapes::ShapeRef.new(shape: IngressAddressListArnList, required: true, location_name: "AddressLists"))
+    IngressIsInAddressList.add_member(:attribute, Shapes::ShapeRef.new(shape: IngressAddressListEmailAttribute, required: true, location_name: "Attribute"))
+    IngressIsInAddressList.struct_class = Types::IngressIsInAddressList
 
     IngressPoint.add_member(:a_record, Shapes::ShapeRef.new(shape: IngressPointARecord, location_name: "ARecord"))
     IngressPoint.add_member(:ingress_point_id, Shapes::ShapeRef.new(shape: IngressPointId, required: true, location_name: "IngressPointId"))
@@ -752,6 +907,23 @@ module Aws::MailManager
     ListAddonSubscriptionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListAddonSubscriptionsResponse.struct_class = Types::ListAddonSubscriptionsResponse
 
+    ListAddressListImportJobsRequest.add_member(:address_list_id, Shapes::ShapeRef.new(shape: AddressListId, required: true, location_name: "AddressListId"))
+    ListAddressListImportJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListAddressListImportJobsRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location_name: "PageSize"))
+    ListAddressListImportJobsRequest.struct_class = Types::ListAddressListImportJobsRequest
+
+    ListAddressListImportJobsResponse.add_member(:import_jobs, Shapes::ShapeRef.new(shape: ImportJobs, required: true, location_name: "ImportJobs"))
+    ListAddressListImportJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListAddressListImportJobsResponse.struct_class = Types::ListAddressListImportJobsResponse
+
+    ListAddressListsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListAddressListsRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location_name: "PageSize"))
+    ListAddressListsRequest.struct_class = Types::ListAddressListsRequest
+
+    ListAddressListsResponse.add_member(:address_lists, Shapes::ShapeRef.new(shape: AddressLists, required: true, location_name: "AddressLists"))
+    ListAddressListsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListAddressListsResponse.struct_class = Types::ListAddressListsResponse
+
     ListArchiveExportsRequest.add_member(:archive_id, Shapes::ShapeRef.new(shape: ArchiveId, required: true, location_name: "ArchiveId"))
     ListArchiveExportsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListArchiveExportsRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location_name: "PageSize"))
@@ -785,6 +957,16 @@ module Aws::MailManager
     ListIngressPointsResponse.add_member(:ingress_points, Shapes::ShapeRef.new(shape: IngressPointsList, location_name: "IngressPoints"))
     ListIngressPointsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListIngressPointsResponse.struct_class = Types::ListIngressPointsResponse
+
+    ListMembersOfAddressListRequest.add_member(:address_list_id, Shapes::ShapeRef.new(shape: AddressListId, required: true, location_name: "AddressListId"))
+    ListMembersOfAddressListRequest.add_member(:filter, Shapes::ShapeRef.new(shape: AddressFilter, location_name: "Filter"))
+    ListMembersOfAddressListRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListMembersOfAddressListRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: AddressPageSize, location_name: "PageSize"))
+    ListMembersOfAddressListRequest.struct_class = Types::ListMembersOfAddressListRequest
+
+    ListMembersOfAddressListResponse.add_member(:addresses, Shapes::ShapeRef.new(shape: SavedAddresses, required: true, location_name: "Addresses"))
+    ListMembersOfAddressListResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListMembersOfAddressListResponse.struct_class = Types::ListMembersOfAddressListResponse
 
     ListRelaysRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListRelaysRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: Integer, location_name: "PageSize"))
@@ -854,6 +1036,12 @@ module Aws::MailManager
     PolicyStatementList.member = Shapes::ShapeRef.new(shape: PolicyStatement)
 
     Recipients.member = Shapes::ShapeRef.new(shape: EmailAddress)
+
+    RegisterMemberToAddressListRequest.add_member(:address, Shapes::ShapeRef.new(shape: Address, required: true, location_name: "Address"))
+    RegisterMemberToAddressListRequest.add_member(:address_list_id, Shapes::ShapeRef.new(shape: AddressListId, required: true, location_name: "AddressListId"))
+    RegisterMemberToAddressListRequest.struct_class = Types::RegisterMemberToAddressListRequest
+
+    RegisterMemberToAddressListResponse.struct_class = Types::RegisterMemberToAddressListResponse
 
     Relay.add_member(:last_modified_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTimestamp"))
     Relay.add_member(:relay_id, Shapes::ShapeRef.new(shape: RelayId, location_name: "RelayId"))
@@ -933,13 +1121,17 @@ module Aws::MailManager
 
     RuleActions.member = Shapes::ShapeRef.new(shape: RuleAction)
 
+    RuleAddressListArnList.member = Shapes::ShapeRef.new(shape: AddressListArn)
+
     RuleBooleanExpression.add_member(:evaluate, Shapes::ShapeRef.new(shape: RuleBooleanToEvaluate, required: true, location_name: "Evaluate"))
     RuleBooleanExpression.add_member(:operator, Shapes::ShapeRef.new(shape: RuleBooleanOperator, required: true, location_name: "Operator"))
     RuleBooleanExpression.struct_class = Types::RuleBooleanExpression
 
     RuleBooleanToEvaluate.add_member(:attribute, Shapes::ShapeRef.new(shape: RuleBooleanEmailAttribute, location_name: "Attribute"))
+    RuleBooleanToEvaluate.add_member(:is_in_address_list, Shapes::ShapeRef.new(shape: RuleIsInAddressList, location_name: "IsInAddressList"))
     RuleBooleanToEvaluate.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     RuleBooleanToEvaluate.add_member_subclass(:attribute, Types::RuleBooleanToEvaluate::Attribute)
+    RuleBooleanToEvaluate.add_member_subclass(:is_in_address_list, Types::RuleBooleanToEvaluate::IsInAddressList)
     RuleBooleanToEvaluate.add_member_subclass(:unknown, Types::RuleBooleanToEvaluate::Unknown)
     RuleBooleanToEvaluate.struct_class = Types::RuleBooleanToEvaluate
 
@@ -979,6 +1171,10 @@ module Aws::MailManager
     RuleIpToEvaluate.struct_class = Types::RuleIpToEvaluate
 
     RuleIpValueList.member = Shapes::ShapeRef.new(shape: RuleIpStringValue)
+
+    RuleIsInAddressList.add_member(:address_lists, Shapes::ShapeRef.new(shape: RuleAddressListArnList, required: true, location_name: "AddressLists"))
+    RuleIsInAddressList.add_member(:attribute, Shapes::ShapeRef.new(shape: RuleAddressListEmailAttribute, required: true, location_name: "Attribute"))
+    RuleIsInAddressList.struct_class = Types::RuleIsInAddressList
 
     RuleNumberExpression.add_member(:evaluate, Shapes::ShapeRef.new(shape: RuleNumberToEvaluate, required: true, location_name: "Evaluate"))
     RuleNumberExpression.add_member(:operator, Shapes::ShapeRef.new(shape: RuleNumberOperator, required: true, location_name: "Operator"))
@@ -1040,6 +1236,12 @@ module Aws::MailManager
     S3ExportDestinationConfiguration.add_member(:s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "S3Location"))
     S3ExportDestinationConfiguration.struct_class = Types::S3ExportDestinationConfiguration
 
+    SavedAddress.add_member(:address, Shapes::ShapeRef.new(shape: Address, required: true, location_name: "Address"))
+    SavedAddress.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTimestamp"))
+    SavedAddress.struct_class = Types::SavedAddress
+
+    SavedAddresses.member = Shapes::ShapeRef.new(shape: SavedAddress)
+
     SearchStatus.add_member(:completion_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CompletionTimestamp"))
     SearchStatus.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
     SearchStatus.add_member(:state, Shapes::ShapeRef.new(shape: SearchState, location_name: "State"))
@@ -1058,6 +1260,11 @@ module Aws::MailManager
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
+    StartAddressListImportJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
+    StartAddressListImportJobRequest.struct_class = Types::StartAddressListImportJobRequest
+
+    StartAddressListImportJobResponse.struct_class = Types::StartAddressListImportJobResponse
 
     StartArchiveExportRequest.add_member(:archive_id, Shapes::ShapeRef.new(shape: ArchiveId, required: true, location_name: "ArchiveId"))
     StartArchiveExportRequest.add_member(:export_destination_configuration, Shapes::ShapeRef.new(shape: ExportDestinationConfiguration, required: true, location_name: "ExportDestinationConfiguration"))
@@ -1080,6 +1287,11 @@ module Aws::MailManager
 
     StartArchiveSearchResponse.add_member(:search_id, Shapes::ShapeRef.new(shape: SearchId, location_name: "SearchId"))
     StartArchiveSearchResponse.struct_class = Types::StartArchiveSearchResponse
+
+    StopAddressListImportJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
+    StopAddressListImportJobRequest.struct_class = Types::StopAddressListImportJobRequest
+
+    StopAddressListImportJobResponse.struct_class = Types::StopAddressListImportJobResponse
 
     StopArchiveExportRequest.add_member(:export_id, Shapes::ShapeRef.new(shape: ExportId, required: true, location_name: "ExportId"))
     StopArchiveExportRequest.struct_class = Types::StopArchiveExportRequest
@@ -1214,6 +1426,31 @@ module Aws::MailManager
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:create_address_list, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAddressList"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateAddressListRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAddressListResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:create_address_list_import_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAddressListImportJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateAddressListImportJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAddressListImportJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:create_archive, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateArchive"
         o.http_method = "POST"
@@ -1291,6 +1528,17 @@ module Aws::MailManager
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:delete_address_list, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAddressList"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAddressListRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAddressListResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:delete_archive, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteArchive"
         o.http_method = "POST"
@@ -1346,6 +1594,18 @@ module Aws::MailManager
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:deregister_member_from_address_list, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeregisterMemberFromAddressList"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeregisterMemberFromAddressListRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeregisterMemberFromAddressListResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:get_addon_instance, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetAddonInstance"
         o.http_method = "POST"
@@ -1364,6 +1624,30 @@ module Aws::MailManager
         o.output = Shapes::ShapeRef.new(shape: GetAddonSubscriptionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_address_list, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAddressList"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAddressListRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAddressListResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_address_list_import_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAddressListImportJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAddressListImportJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAddressListImportJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_archive, Seahorse::Model::Operation.new.tap do |o|
@@ -1444,6 +1728,18 @@ module Aws::MailManager
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:get_member_of_address_list, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMemberOfAddressList"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetMemberOfAddressListRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMemberOfAddressListResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:get_relay, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetRelay"
         o.http_method = "POST"
@@ -1496,6 +1792,41 @@ module Aws::MailManager
         o.input = Shapes::ShapeRef.new(shape: ListAddonSubscriptionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListAddonSubscriptionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_address_list_import_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAddressListImportJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListAddressListImportJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAddressListImportJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_address_lists, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAddressLists"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListAddressListsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAddressListsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "page_size",
           tokens: {
@@ -1572,6 +1903,24 @@ module Aws::MailManager
         )
       end)
 
+      api.add_operation(:list_members_of_address_list, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMembersOfAddressList"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListMembersOfAddressListRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListMembersOfAddressListResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_relays, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListRelays"
         o.http_method = "POST"
@@ -1627,6 +1976,33 @@ module Aws::MailManager
         )
       end)
 
+      api.add_operation(:register_member_to_address_list, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RegisterMemberToAddressList"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RegisterMemberToAddressListRequest)
+        o.output = Shapes::ShapeRef.new(shape: RegisterMemberToAddressListResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:start_address_list_import_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartAddressListImportJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartAddressListImportJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartAddressListImportJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:start_archive_export, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartArchiveExport"
         o.http_method = "POST"
@@ -1649,6 +2025,19 @@ module Aws::MailManager
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:stop_address_list_import_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopAddressListImportJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopAddressListImportJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopAddressListImportJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)

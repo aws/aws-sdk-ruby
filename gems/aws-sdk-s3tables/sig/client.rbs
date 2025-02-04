@@ -99,7 +99,20 @@ module Aws
                           table_bucket_arn: ::String,
                           namespace: ::String,
                           name: ::String,
-                          format: ("ICEBERG")
+                          format: ("ICEBERG"),
+                          ?metadata: {
+                            iceberg: {
+                              schema: {
+                                fields: Array[
+                                  {
+                                    name: ::String,
+                                    type: ::String,
+                                    required: bool?
+                                  },
+                                ]
+                              }
+                            }?
+                          }
                         ) -> _CreateTableResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTableResponseSuccess
 

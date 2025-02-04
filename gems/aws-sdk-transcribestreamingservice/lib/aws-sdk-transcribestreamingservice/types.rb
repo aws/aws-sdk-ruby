@@ -48,8 +48,24 @@ module Aws::TranscribeStreamingService
     # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/event-stream.html
     #
     # @!attribute [rw] audio_chunk
-    #   An audio blob that contains the next part of the audio that you want
-    #   to transcribe. The maximum audio chunk size is 32 KB.
+    #   An audio blob containing the next segment of audio from your
+    #   application, with a maximum duration of 1 second. The maximum size
+    #   in bytes varies based on audio properties.
+    #
+    #   Find recommended size in [Transcribing streaming best practices][1].
+    #
+    #   Size calculation: `Duration (s) * Sample Rate (Hz) * Number of
+    #   Channels * 2 (Bytes per Sample)`
+    #
+    #   For example, a 1-second chunk of 16 kHz, 2-channel, 16-bit audio
+    #   would be `1 * 16000 * 2 * 2 = 64000 bytes`.
+    #
+    #   For 8 kHz, 1-channel, 16-bit audio, a 1-second chunk would be `1 *
+    #   8000 * 1 * 2 = 16000 bytes`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#best-practices
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/AudioEvent AWS API Documentation
@@ -259,6 +275,87 @@ module Aws::TranscribeStreamingService
       include Aws::Structure
     end
 
+    # The details for clinical note generation, including status, and output
+    # locations for clinical note and aggregated transcript if the analytics
+    # completed, or failure reason if the analytics failed.
+    #
+    # @!attribute [rw] clinical_note_output_location
+    #   Holds the Amazon S3 URI for the output Clinical Note.
+    #   @return [String]
+    #
+    # @!attribute [rw] transcript_output_location
+    #   Holds the Amazon S3 URI for the output Transcript.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the clinical note generation.
+    #
+    #   Possible Values:
+    #
+    #   * `IN_PROGRESS`
+    #
+    #   * `FAILED`
+    #
+    #   * `COMPLETED`
+    #
+    #   After audio streaming finishes, and you send a
+    #   `MedicalScribeSessionControlEvent` event (with END\_OF\_SESSION as
+    #   the Type), the status is set to `IN_PROGRESS`. If the status is
+    #   `COMPLETED`, the analytics completed successfully, and you can find
+    #   the results at the locations specified in
+    #   `ClinicalNoteOutputLocation` and `TranscriptOutputLocation`. If the
+    #   status is `FAILED`, `FailureReason` provides details about the
+    #   failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   If `ClinicalNoteGenerationResult` is `FAILED`, information about why
+    #   it failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/ClinicalNoteGenerationResult AWS API Documentation
+    #
+    class ClinicalNoteGenerationResult < Struct.new(
+      :clinical_note_output_location,
+      :transcript_output_location,
+      :status,
+      :failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The output configuration for aggregated transcript and clinical note
+    # generation.
+    #
+    # @!attribute [rw] output_bucket_name
+    #   The name of the Amazon S3 bucket where you want the output of Amazon
+    #   Web Services HealthScribe post-stream analytics stored. Don't
+    #   include the `S3://` prefix of the specified bucket.
+    #
+    #   HealthScribe outputs transcript and clinical note files under the
+    #   prefix:
+    #   `S3://$output-bucket-name/healthscribe-streaming/session-id/post-stream-analytics/clinical-notes`
+    #
+    #   The role `ResourceAccessRoleArn` specified in the
+    #   `MedicalScribeConfigurationEvent` must have permission to use the
+    #   specified location. You can change Amazon S3 permissions using the [
+    #   Amazon Web Services Management Console ][1]. See also [Permissions
+    #   Required for IAM User Roles ][2] .
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/s3
+    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/ClinicalNoteGenerationSettings AWS API Documentation
+    #
+    class ClinicalNoteGenerationSettings < Struct.new(
+      :output_bucket_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Allows you to set audio channel definitions and post-call analytics
     # settings.
     #
@@ -351,6 +448,31 @@ module Aws::TranscribeStreamingService
       :type,
       :content,
       :confidence)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] session_id
+    #   The identifier of the HealthScribe streaming session you want
+    #   information about.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/GetMedicalScribeStreamRequest AWS API Documentation
+    #
+    class GetMedicalScribeStreamRequest < Struct.new(
+      :session_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] medical_scribe_stream_details
+    #   Provides details about a HealthScribe streaming session.
+    #   @return [Types::MedicalScribeStreamDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/GetMedicalScribeStreamResponse AWS API Documentation
+    #
+    class GetMedicalScribeStreamResponse < Struct.new(
+      :medical_scribe_stream_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -658,6 +780,515 @@ module Aws::TranscribeStreamingService
       include Aws::Structure
     end
 
+    # A wrapper for your audio chunks
+    #
+    # For more information, see [Event stream encoding][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/event-stream.html
+    #
+    # @!attribute [rw] audio_chunk
+    #   An audio blob containing the next segment of audio from your
+    #   application, with a maximum duration of 1 second. The maximum size
+    #   in bytes varies based on audio properties.
+    #
+    #   Find recommended size in [Transcribing streaming best practices][1].
+    #
+    #   Size calculation: `Duration (s) * Sample Rate (Hz) * Number of
+    #   Channels * 2 (Bytes per Sample)`
+    #
+    #   For example, a 1-second chunk of 16 kHz, 2-channel, 16-bit audio
+    #   would be `1 * 16000 * 2 * 2 = 64000 bytes`.
+    #
+    #   For 8 kHz, 1-channel, 16-bit audio, a 1-second chunk would be `1 *
+    #   8000 * 1 * 2 = 16000 bytes`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#best-practices
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/MedicalScribeAudioEvent AWS API Documentation
+    #
+    class MedicalScribeAudioEvent < Struct.new(
+      :audio_chunk,
+      :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Makes it possible to specify which speaker is on which channel. For
+    # example, if the clinician is the first participant to speak, you would
+    # set the `ChannelId` of the first `ChannelDefinition` in the list to
+    # `0` (to indicate the first channel) and `ParticipantRole` to
+    # `CLINICIAN` (to indicate that it's the clinician speaking). Then you
+    # would set the `ChannelId` of the second `ChannelDefinition` in the
+    # list to `1` (to indicate the second channel) and `ParticipantRole` to
+    # `PATIENT` (to indicate that it's the patient speaking).
+    #
+    # If you don't specify a channel definition, HealthScribe will diarize
+    # the transcription and identify speaker roles for each speaker.
+    #
+    # @!attribute [rw] channel_id
+    #   Specify the audio channel you want to define.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] participant_role
+    #   Specify the participant that you want to flag. The allowed options
+    #   are `CLINICIAN` and `PATIENT`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/MedicalScribeChannelDefinition AWS API Documentation
+    #
+    class MedicalScribeChannelDefinition < Struct.new(
+      :channel_id,
+      :participant_role)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specify details to configure the streaming session, including channel
+    # definitions, encryption settings, post-stream analytics settings,
+    # resource access role ARN and vocabulary settings.
+    #
+    # Whether you are starting a new session or resuming an existing
+    # session, your first event must be a `MedicalScribeConfigurationEvent`.
+    # If you are resuming a session, then this event must have the same
+    # configurations that you provided to start the session.
+    #
+    # @!attribute [rw] vocabulary_name
+    #   Specify the name of the custom vocabulary you want to use for your
+    #   streaming session. Custom vocabulary names are case-sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_filter_name
+    #   Specify the name of the custom vocabulary filter you want to include
+    #   in your streaming session. Custom vocabulary filter names are
+    #   case-sensitive.
+    #
+    #   If you include `VocabularyFilterName` in the
+    #   `MedicalScribeConfigurationEvent`, you must also include
+    #   `VocabularyFilterMethod`.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_filter_method
+    #   Specify how you want your custom vocabulary filter applied to the
+    #   streaming session.
+    #
+    #   To replace words with `***`, specify `mask`.
+    #
+    #   To delete words, specify `remove`.
+    #
+    #   To flag words without changing them, specify `tag`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_access_role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that has permissions
+    #   to access the Amazon S3 output bucket you specified, and use your
+    #   KMS key if supplied. If the role that you specify doesn’t have the
+    #   appropriate permissions, your request fails.
+    #
+    #   IAM role ARNs have the format
+    #   `arn:partition:iam::account:role/role-name-with-path`. For example:
+    #   `arn:aws:iam::111122223333:role/Admin`.
+    #
+    #   For more information, see [Amazon Web Services HealthScribe][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/health-scribe-streaming.html
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_definitions
+    #   Specify which speaker is on which audio channel.
+    #   @return [Array<Types::MedicalScribeChannelDefinition>]
+    #
+    # @!attribute [rw] encryption_settings
+    #   Specify the encryption settings for your streaming session.
+    #   @return [Types::MedicalScribeEncryptionSettings]
+    #
+    # @!attribute [rw] post_stream_analytics_settings
+    #   Specify settings for post-stream analytics.
+    #   @return [Types::MedicalScribePostStreamAnalyticsSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/MedicalScribeConfigurationEvent AWS API Documentation
+    #
+    class MedicalScribeConfigurationEvent < Struct.new(
+      :vocabulary_name,
+      :vocabulary_filter_name,
+      :vocabulary_filter_method,
+      :resource_access_role_arn,
+      :channel_definitions,
+      :encryption_settings,
+      :post_stream_analytics_settings,
+      :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains encryption related settings to be used for data encryption
+    # with Key Management Service, including KmsEncryptionContext and
+    # KmsKeyId. The KmsKeyId is required, while KmsEncryptionContext is
+    # optional for additional layer of security.
+    #
+    # By default, Amazon Web Services HealthScribe provides encryption at
+    # rest to protect sensitive customer data using Amazon S3-managed keys.
+    # HealthScribe uses the KMS key you specify as a second layer of
+    # encryption.
+    #
+    # Your `ResourceAccessRoleArn` must permission to use your KMS key. For
+    # more information, see [Data Encryption at rest for Amazon Web Services
+    # HealthScribe][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/health-scribe-encryption.html
+    #
+    # @!attribute [rw] kms_encryption_context
+    #   A map of plain text, non-secret key:value pairs, known as encryption
+    #   context pairs, that provide an added layer of security for your
+    #   data. For more information, see [KMSencryption context ][1] and
+    #   [Asymmetric keys in KMS ][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/key-management.html#kms-context
+    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/symmetric-asymmetric.html
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The ID of the KMS key you want to use for your streaming session.
+    #   You can specify its KMS key ID, key Amazon Resource Name (ARN),
+    #   alias name, or alias ARN. When using an alias name, prefix it with
+    #   `"alias/"`. To specify a KMS key in a different Amazon Web Services
+    #   account, you must use the key ARN or alias ARN.
+    #
+    #   For example:
+    #
+    #   * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+    #
+    #   * Key ARN:
+    #     arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+    #
+    #   * Alias name: alias/ExampleAlias
+    #
+    #   * Alias ARN: arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
+    #
+    #   To get the key ID and key ARN for a KMS key, use the [ListKeys][1]
+    #   or [DescribeKey][2] KMS API operations. To get the alias name and
+    #   alias ARN, use [ListKeys][3] API operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_ListKeys.html
+    #   [2]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html
+    #   [3]: https://docs.aws.amazon.com/kms/latest/APIReference/API_ListAliases.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/MedicalScribeEncryptionSettings AWS API Documentation
+    #
+    class MedicalScribeEncryptionSettings < Struct.new(
+      :kms_encryption_context,
+      :kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details for the result of post-stream analytics.
+    #
+    # @!attribute [rw] clinical_note_generation_result
+    #   Provides the Clinical Note Generation result for post-stream
+    #   analytics.
+    #   @return [Types::ClinicalNoteGenerationResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/MedicalScribePostStreamAnalyticsResult AWS API Documentation
+    #
+    class MedicalScribePostStreamAnalyticsResult < Struct.new(
+      :clinical_note_generation_result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The settings for post-stream analytics.
+    #
+    # @!attribute [rw] clinical_note_generation_settings
+    #   Specify settings for the post-stream clinical note generation.
+    #   @return [Types::ClinicalNoteGenerationSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/MedicalScribePostStreamAnalyticsSettings AWS API Documentation
+    #
+    class MedicalScribePostStreamAnalyticsSettings < Struct.new(
+      :clinical_note_generation_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specify the lifecycle of your streaming session.
+    #
+    # @!attribute [rw] type
+    #   The type of `MedicalScribeSessionControlEvent`.
+    #
+    #   Possible Values:
+    #
+    #   * `END_OF_SESSION` - Indicates the audio streaming is complete.
+    #     After you send an END\_OF\_SESSION event, Amazon Web Services
+    #     HealthScribe starts the post-stream analytics. The session can't
+    #     be resumed after this event is sent. After Amazon Web Services
+    #     HealthScribe processes the event, the real-time `StreamStatus` is
+    #     `COMPLETED`. You get the `StreamStatus` and other stream details
+    #     with the [GetMedicalScribeStream][1] API operation. For more
+    #     information about different streaming statuses, see the
+    #     `StreamStatus` description in the [MedicalScribeStreamDetails][2].
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/APIReference/API_streaming_GetMedicalScribeStream.html
+    #   [2]: https://docs.aws.amazon.com/transcribe/latest/APIReference/API_streaming_MedicalScribeStreamDetails.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/MedicalScribeSessionControlEvent AWS API Documentation
+    #
+    class MedicalScribeSessionControlEvent < Struct.new(
+      :type,
+      :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about a Amazon Web Services HealthScribe streaming
+    # session.
+    #
+    # @!attribute [rw] session_id
+    #   The identifier of the HealthScribe streaming session.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_created_at
+    #   The date and time when the HealthScribe streaming session was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] stream_ended_at
+    #   The date and time when the HealthScribe streaming session was ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] language_code
+    #   The Language Code of the HealthScribe streaming session.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_sample_rate_hertz
+    #   The sample rate (in hertz) of the HealthScribe streaming session.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] media_encoding
+    #   The Media Encoding of the HealthScribe streaming session.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_name
+    #   The vocabulary name of the HealthScribe streaming session.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_filter_name
+    #   The name of the vocabulary filter used for the HealthScribe
+    #   streaming session .
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_filter_method
+    #   The method of the vocabulary filter for the HealthScribe streaming
+    #   session.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_access_role_arn
+    #   The Amazon Resource Name (ARN) of the role used in the HealthScribe
+    #   streaming session.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_definitions
+    #   The Channel Definitions of the HealthScribe streaming session.
+    #   @return [Array<Types::MedicalScribeChannelDefinition>]
+    #
+    # @!attribute [rw] encryption_settings
+    #   The Encryption Settings of the HealthScribe streaming session.
+    #   @return [Types::MedicalScribeEncryptionSettings]
+    #
+    # @!attribute [rw] stream_status
+    #   The streaming status of the HealthScribe streaming session.
+    #
+    #   Possible Values:
+    #
+    #   * `IN_PROGRESS`
+    #
+    #   * `PAUSED`
+    #
+    #   * `FAILED`
+    #
+    #   * `COMPLETED`
+    #
+    #   <note markdown="1"> This status is specific to real-time streaming. A `COMPLETED` status
+    #   doesn't mean that the post-stream analytics is complete. To get
+    #   status of an analytics result, check the `Status` field for the
+    #   analytics result within the
+    #   `MedicalScribePostStreamAnalyticsResult`. For example, you can view
+    #   the status of the `ClinicalNoteGenerationResult`.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] post_stream_analytics_settings
+    #   The post-stream analytics settings of the HealthScribe streaming
+    #   session.
+    #   @return [Types::MedicalScribePostStreamAnalyticsSettings]
+    #
+    # @!attribute [rw] post_stream_analytics_result
+    #   The result of post-stream analytics for the HealthScribe streaming
+    #   session.
+    #   @return [Types::MedicalScribePostStreamAnalyticsResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/MedicalScribeStreamDetails AWS API Documentation
+    #
+    class MedicalScribeStreamDetails < Struct.new(
+      :session_id,
+      :stream_created_at,
+      :stream_ended_at,
+      :language_code,
+      :media_sample_rate_hertz,
+      :media_encoding,
+      :vocabulary_name,
+      :vocabulary_filter_name,
+      :vocabulary_filter_method,
+      :resource_access_role_arn,
+      :channel_definitions,
+      :encryption_settings,
+      :stream_status,
+      :post_stream_analytics_settings,
+      :post_stream_analytics_result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The event associated with `MedicalScribeResultStream`.
+    #
+    # Contains `MedicalScribeTranscriptSegment`, which contains segment
+    # related information.
+    #
+    # @!attribute [rw] transcript_segment
+    #   The `TranscriptSegment` associated with a
+    #   `MedicalScribeTranscriptEvent`.
+    #   @return [Types::MedicalScribeTranscriptSegment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/MedicalScribeTranscriptEvent AWS API Documentation
+    #
+    class MedicalScribeTranscriptEvent < Struct.new(
+      :transcript_segment,
+      :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A word, phrase, or punctuation mark in your transcription output,
+    # along with various associated attributes, such as confidence score,
+    # type, and start and end times.
+    #
+    # @!attribute [rw] begin_audio_time
+    #   The start time, in milliseconds, of the transcribed item.
+    #   @return [Float]
+    #
+    # @!attribute [rw] end_audio_time
+    #   The end time, in milliseconds, of the transcribed item.
+    #   @return [Float]
+    #
+    # @!attribute [rw] type
+    #   The type of item identified. Options are: `PRONUNCIATION` (spoken
+    #   words) and `PUNCTUATION`.
+    #   @return [String]
+    #
+    # @!attribute [rw] confidence
+    #   The confidence score associated with a word or phrase in your
+    #   transcript.
+    #
+    #   Confidence scores are values between 0 and 1. A larger value
+    #   indicates a higher probability that the identified item correctly
+    #   matches the item spoken in your media.
+    #   @return [Float]
+    #
+    # @!attribute [rw] content
+    #   The word, phrase or punctuation mark that was transcribed.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_filter_match
+    #   Indicates whether the specified item matches a word in the
+    #   vocabulary filter included in your configuration event. If `true`,
+    #   there is a vocabulary filter match.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/MedicalScribeTranscriptItem AWS API Documentation
+    #
+    class MedicalScribeTranscriptItem < Struct.new(
+      :begin_audio_time,
+      :end_audio_time,
+      :type,
+      :confidence,
+      :content,
+      :vocabulary_filter_match)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a set of transcription results, along with additional
+    # information of the segment.
+    #
+    # @!attribute [rw] segment_id
+    #   The identifier of the segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] begin_audio_time
+    #   The start time, in milliseconds, of the segment.
+    #   @return [Float]
+    #
+    # @!attribute [rw] end_audio_time
+    #   The end time, in milliseconds, of the segment.
+    #   @return [Float]
+    #
+    # @!attribute [rw] content
+    #   Contains transcribed text of the segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] items
+    #   Contains words, phrases, or punctuation marks in your segment.
+    #   @return [Array<Types::MedicalScribeTranscriptItem>]
+    #
+    # @!attribute [rw] is_partial
+    #   Indicates if the segment is complete.
+    #
+    #   If `IsPartial` is `true`, the segment is not complete. If
+    #   `IsPartial` is `false`, the segment is complete.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] channel_id
+    #   Indicates which audio channel is associated with the
+    #   `MedicalScribeTranscriptSegment`.
+    #
+    #   If `MedicalScribeChannelDefinition` is not provided in the
+    #   `MedicalScribeConfigurationEvent`, then this field will not be
+    #   included.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/MedicalScribeTranscriptSegment AWS API Documentation
+    #
+    class MedicalScribeTranscriptSegment < Struct.new(
+      :segment_id,
+      :begin_audio_time,
+      :end_audio_time,
+      :content,
+      :items,
+      :is_partial,
+      :channel_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The `MedicalTranscript` associated with a `.</p>  MedicalTranscript
     # contains Results, which contains a set of transcription results from
     # one or more audio segments, along with additional information per your
@@ -814,6 +1445,19 @@ module Aws::TranscribeStreamingService
       :data_access_role_arn,
       :content_redaction_output,
       :output_encryption_kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request references a resource which doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1208,6 +1852,104 @@ module Aws::TranscribeStreamingService
       :content_identification_type,
       :content_redaction_type,
       :pii_entity_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] session_id
+    #   Specify an identifier for your streaming session (in UUID format).
+    #   If you don't include a SessionId in your request, Amazon Web
+    #   Services HealthScribe generates an ID and returns it in the
+    #   response.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   Specify the language code for your HealthScribe streaming session.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_sample_rate_hertz
+    #   Specify the sample rate of the input audio (in hertz). Amazon Web
+    #   Services HealthScribe supports a range from 16,000 Hz to 48,000 Hz.
+    #   The sample rate you specify must match that of your audio.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] media_encoding
+    #   Specify the encoding used for the input audio.
+    #
+    #   Supported formats are:
+    #
+    #   * FLAC
+    #
+    #   * OPUS-encoded audio in an Ogg container
+    #
+    #   * PCM (only signed 16-bit little-endian audio formats, which does
+    #     not include WAV)
+    #
+    #   For more information, see [Media formats][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio
+    #   @return [String]
+    #
+    # @!attribute [rw] input_stream
+    #   Specify the input stream where you will send events in real time.
+    #
+    #   The first element of the input stream must be a
+    #   `MedicalScribeConfigurationEvent`.
+    #   @return [Types::MedicalScribeInputStream]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartMedicalScribeStreamRequest AWS API Documentation
+    #
+    class StartMedicalScribeStreamRequest < Struct.new(
+      :session_id,
+      :language_code,
+      :media_sample_rate_hertz,
+      :media_encoding,
+      :input_stream)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] session_id
+    #   The identifier (in UUID format) for your streaming session.
+    #
+    #   If you already started streaming, this is same ID as the one you
+    #   specified in your initial `StartMedicalScribeStreamRequest`.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The unique identifier for your streaming request.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The Language Code that you specified in your request. Same as
+    #   provided in the `StartMedicalScribeStreamRequest`.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_sample_rate_hertz
+    #   The sample rate (in hertz) that you specified in your request. Same
+    #   as provided in the `StartMedicalScribeStreamRequest`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] media_encoding
+    #   The Media Encoding you specified in your request. Same as provided
+    #   in the `StartMedicalScribeStreamRequest`
+    #   @return [String]
+    #
+    # @!attribute [rw] result_stream
+    #   The result stream where you will receive the output events.
+    #   @return [Types::MedicalScribeResultStream]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartMedicalScribeStreamResponse AWS API Documentation
+    #
+    class StartMedicalScribeStreamResponse < Struct.new(
+      :session_id,
+      :request_id,
+      :language_code,
+      :media_sample_rate_hertz,
+      :media_encoding,
+      :result_stream)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2154,6 +2896,59 @@ module Aws::TranscribeStreamingService
         [
           :utterance_event,
           :category_event,
+          :bad_request_exception,
+          :limit_exceeded_exception,
+          :internal_failure_exception,
+          :conflict_exception,
+          :service_unavailable_exception
+        ]
+      end
+
+    end
+
+    # An encoded stream of events. The stream is encoded as HTTP/2 data
+    # frames.
+    #
+    # An input stream consists of the following types of events. The first
+    # element of the input stream must be the
+    # `MedicalScribeConfigurationEvent` event type.
+    #
+    # * `MedicalScribeConfigurationEvent`
+    #
+    # * `MedicalScribeAudioEvent`
+    #
+    # * `MedicalScribeSessionControlEvent`
+    #
+    # EventStream is an Enumerator of Events.
+    #  #event_types #=> Array, returns all modeled event types in the stream
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/MedicalScribeInputStream AWS API Documentation
+    #
+    class MedicalScribeInputStream < Enumerator
+
+      def event_types
+        [
+          :audio_event,
+          :session_control_event,
+          :configuration_event
+        ]
+      end
+
+    end
+
+    # Result stream where you will receive the output events. The details
+    # are provided in the `MedicalScribeTranscriptEvent` object.
+    #
+    # EventStream is an Enumerator of Events.
+    #  #event_types #=> Array, returns all modeled event types in the stream
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/MedicalScribeResultStream AWS API Documentation
+    #
+    class MedicalScribeResultStream < Enumerator
+
+      def event_types
+        [
+          :transcript_event,
           :bad_request_exception,
           :limit_exceeded_exception,
           :internal_failure_exception,

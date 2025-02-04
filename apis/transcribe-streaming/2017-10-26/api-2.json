@@ -14,6 +14,21 @@
     "auth":["aws.auth#sigv4"]
   },
   "operations":{
+    "GetMedicalScribeStream":{
+      "name":"GetMedicalScribeStream",
+      "http":{
+        "method":"GET",
+        "requestUri":"/medical-scribe-stream/{SessionId}"
+      },
+      "input":{"shape":"GetMedicalScribeStreamRequest"},
+      "output":{"shape":"GetMedicalScribeStreamResponse"},
+      "errors":[
+        {"shape":"BadRequestException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ResourceNotFoundException"}
+      ]
+    },
     "StartCallAnalyticsStreamTranscription":{
       "name":"StartCallAnalyticsStreamTranscription",
       "http":{
@@ -22,6 +37,22 @@
       },
       "input":{"shape":"StartCallAnalyticsStreamTranscriptionRequest"},
       "output":{"shape":"StartCallAnalyticsStreamTranscriptionResponse"},
+      "errors":[
+        {"shape":"BadRequestException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ConflictException"},
+        {"shape":"ServiceUnavailableException"}
+      ]
+    },
+    "StartMedicalScribeStream":{
+      "name":"StartMedicalScribeStream",
+      "http":{
+        "method":"POST",
+        "requestUri":"/medical-scribe-stream"
+      },
+      "input":{"shape":"StartMedicalScribeStreamRequest"},
+      "output":{"shape":"StartMedicalScribeStreamResponse"},
       "errors":[
         {"shape":"BadRequestException"},
         {"shape":"LimitExceededException"},
@@ -104,6 +135,11 @@
       "exception":true
     },
     "Boolean":{"type":"boolean"},
+    "BucketName":{
+      "type":"string",
+      "max":64,
+      "pattern":"[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]"
+    },
     "CallAnalyticsEntity":{
       "type":"structure",
       "members":{
@@ -199,6 +235,30 @@
         "End":{"shape":"Integer"}
       }
     },
+    "ClinicalNoteGenerationResult":{
+      "type":"structure",
+      "members":{
+        "ClinicalNoteOutputLocation":{"shape":"Uri"},
+        "TranscriptOutputLocation":{"shape":"Uri"},
+        "Status":{"shape":"ClinicalNoteGenerationStatus"},
+        "FailureReason":{"shape":"String"}
+      }
+    },
+    "ClinicalNoteGenerationSettings":{
+      "type":"structure",
+      "required":["OutputBucketName"],
+      "members":{
+        "OutputBucketName":{"shape":"BucketName"}
+      }
+    },
+    "ClinicalNoteGenerationStatus":{
+      "type":"string",
+      "enum":[
+        "IN_PROGRESS",
+        "FAILED",
+        "COMPLETED"
+      ]
+    },
     "Confidence":{"type":"double"},
     "ConfigurationEvent":{
       "type":"structure",
@@ -231,6 +291,7 @@
       "type":"string",
       "enum":["PII"]
     },
+    "DateTime":{"type":"timestamp"},
     "Double":{"type":"double"},
     "Entity":{
       "type":"structure",
@@ -246,6 +307,29 @@
     "EntityList":{
       "type":"list",
       "member":{"shape":"Entity"}
+    },
+    "GetMedicalScribeStreamRequest":{
+      "type":"structure",
+      "required":["SessionId"],
+      "members":{
+        "SessionId":{
+          "shape":"SessionId",
+          "location":"uri",
+          "locationName":"SessionId"
+        }
+      }
+    },
+    "GetMedicalScribeStreamResponse":{
+      "type":"structure",
+      "members":{
+        "MedicalScribeStreamDetails":{"shape":"MedicalScribeStreamDetails"}
+      }
+    },
+    "IamRoleArn":{
+      "type":"string",
+      "max":2048,
+      "min":20,
+      "pattern":"^arn:(aws|aws-cn|aws-us-gov|aws-iso-{0,1}[a-z]{0,1}):iam::[0-9]{0,63}:role/[A-Za-z0-9:_/+=,@.-]{0,1024}$"
     },
     "Integer":{"type":"integer"},
     "InternalFailureException":{
@@ -290,6 +374,19 @@
         "pronunciation",
         "punctuation"
       ]
+    },
+    "KMSEncryptionContextMap":{
+      "type":"map",
+      "key":{"shape":"NonEmptyString"},
+      "value":{"shape":"NonEmptyString"},
+      "max":10,
+      "min":1
+    },
+    "KMSKeyId":{
+      "type":"string",
+      "max":2048,
+      "min":1,
+      "pattern":"^[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,2048}$"
     },
     "LanguageCode":{
       "type":"string",
@@ -454,6 +551,212 @@
       "type":"list",
       "member":{"shape":"MedicalResult"}
     },
+    "MedicalScribeAudioEvent":{
+      "type":"structure",
+      "required":["AudioChunk"],
+      "members":{
+        "AudioChunk":{
+          "shape":"AudioChunk",
+          "eventpayload":true
+        }
+      },
+      "event":true
+    },
+    "MedicalScribeChannelDefinition":{
+      "type":"structure",
+      "required":[
+        "ChannelId",
+        "ParticipantRole"
+      ],
+      "members":{
+        "ChannelId":{"shape":"MedicalScribeChannelId"},
+        "ParticipantRole":{"shape":"MedicalScribeParticipantRole"}
+      }
+    },
+    "MedicalScribeChannelDefinitions":{
+      "type":"list",
+      "member":{"shape":"MedicalScribeChannelDefinition"},
+      "max":2,
+      "min":2
+    },
+    "MedicalScribeChannelId":{
+      "type":"integer",
+      "max":1,
+      "min":0
+    },
+    "MedicalScribeConfigurationEvent":{
+      "type":"structure",
+      "required":[
+        "ResourceAccessRoleArn",
+        "PostStreamAnalyticsSettings"
+      ],
+      "members":{
+        "VocabularyName":{"shape":"VocabularyName"},
+        "VocabularyFilterName":{"shape":"VocabularyFilterName"},
+        "VocabularyFilterMethod":{"shape":"MedicalScribeVocabularyFilterMethod"},
+        "ResourceAccessRoleArn":{"shape":"IamRoleArn"},
+        "ChannelDefinitions":{"shape":"MedicalScribeChannelDefinitions"},
+        "EncryptionSettings":{"shape":"MedicalScribeEncryptionSettings"},
+        "PostStreamAnalyticsSettings":{"shape":"MedicalScribePostStreamAnalyticsSettings"}
+      },
+      "event":true
+    },
+    "MedicalScribeEncryptionSettings":{
+      "type":"structure",
+      "required":["KmsKeyId"],
+      "members":{
+        "KmsEncryptionContext":{"shape":"KMSEncryptionContextMap"},
+        "KmsKeyId":{"shape":"KMSKeyId"}
+      }
+    },
+    "MedicalScribeInputStream":{
+      "type":"structure",
+      "members":{
+        "AudioEvent":{"shape":"MedicalScribeAudioEvent"},
+        "SessionControlEvent":{"shape":"MedicalScribeSessionControlEvent"},
+        "ConfigurationEvent":{"shape":"MedicalScribeConfigurationEvent"}
+      },
+      "eventstream":true
+    },
+    "MedicalScribeLanguageCode":{
+      "type":"string",
+      "enum":["en-US"]
+    },
+    "MedicalScribeMediaEncoding":{
+      "type":"string",
+      "enum":[
+        "pcm",
+        "ogg-opus",
+        "flac"
+      ]
+    },
+    "MedicalScribeMediaSampleRateHertz":{
+      "type":"integer",
+      "max":48000,
+      "min":16000
+    },
+    "MedicalScribeParticipantRole":{
+      "type":"string",
+      "enum":[
+        "PATIENT",
+        "CLINICIAN"
+      ]
+    },
+    "MedicalScribePostStreamAnalyticsResult":{
+      "type":"structure",
+      "members":{
+        "ClinicalNoteGenerationResult":{"shape":"ClinicalNoteGenerationResult"}
+      }
+    },
+    "MedicalScribePostStreamAnalyticsSettings":{
+      "type":"structure",
+      "required":["ClinicalNoteGenerationSettings"],
+      "members":{
+        "ClinicalNoteGenerationSettings":{"shape":"ClinicalNoteGenerationSettings"}
+      }
+    },
+    "MedicalScribeResultStream":{
+      "type":"structure",
+      "members":{
+        "TranscriptEvent":{"shape":"MedicalScribeTranscriptEvent"},
+        "BadRequestException":{"shape":"BadRequestException"},
+        "LimitExceededException":{"shape":"LimitExceededException"},
+        "InternalFailureException":{"shape":"InternalFailureException"},
+        "ConflictException":{"shape":"ConflictException"},
+        "ServiceUnavailableException":{"shape":"ServiceUnavailableException"}
+      },
+      "eventstream":true
+    },
+    "MedicalScribeSessionControlEvent":{
+      "type":"structure",
+      "required":["Type"],
+      "members":{
+        "Type":{"shape":"MedicalScribeSessionControlEventType"}
+      },
+      "event":true
+    },
+    "MedicalScribeSessionControlEventType":{
+      "type":"string",
+      "enum":["END_OF_SESSION"]
+    },
+    "MedicalScribeStreamDetails":{
+      "type":"structure",
+      "members":{
+        "SessionId":{"shape":"SessionId"},
+        "StreamCreatedAt":{"shape":"DateTime"},
+        "StreamEndedAt":{"shape":"DateTime"},
+        "LanguageCode":{"shape":"MedicalScribeLanguageCode"},
+        "MediaSampleRateHertz":{"shape":"MedicalScribeMediaSampleRateHertz"},
+        "MediaEncoding":{"shape":"MedicalScribeMediaEncoding"},
+        "VocabularyName":{"shape":"VocabularyName"},
+        "VocabularyFilterName":{"shape":"VocabularyFilterName"},
+        "VocabularyFilterMethod":{"shape":"MedicalScribeVocabularyFilterMethod"},
+        "ResourceAccessRoleArn":{"shape":"IamRoleArn"},
+        "ChannelDefinitions":{"shape":"MedicalScribeChannelDefinitions"},
+        "EncryptionSettings":{"shape":"MedicalScribeEncryptionSettings"},
+        "StreamStatus":{"shape":"MedicalScribeStreamStatus"},
+        "PostStreamAnalyticsSettings":{"shape":"MedicalScribePostStreamAnalyticsSettings"},
+        "PostStreamAnalyticsResult":{"shape":"MedicalScribePostStreamAnalyticsResult"}
+      }
+    },
+    "MedicalScribeStreamStatus":{
+      "type":"string",
+      "enum":[
+        "IN_PROGRESS",
+        "PAUSED",
+        "FAILED",
+        "COMPLETED"
+      ]
+    },
+    "MedicalScribeTranscriptEvent":{
+      "type":"structure",
+      "members":{
+        "TranscriptSegment":{"shape":"MedicalScribeTranscriptSegment"}
+      },
+      "event":true
+    },
+    "MedicalScribeTranscriptItem":{
+      "type":"structure",
+      "members":{
+        "BeginAudioTime":{"shape":"Double"},
+        "EndAudioTime":{"shape":"Double"},
+        "Type":{"shape":"MedicalScribeTranscriptItemType"},
+        "Confidence":{"shape":"Confidence"},
+        "Content":{"shape":"String"},
+        "VocabularyFilterMatch":{"shape":"NullableBoolean"}
+      }
+    },
+    "MedicalScribeTranscriptItemList":{
+      "type":"list",
+      "member":{"shape":"MedicalScribeTranscriptItem"}
+    },
+    "MedicalScribeTranscriptItemType":{
+      "type":"string",
+      "enum":[
+        "pronunciation",
+        "punctuation"
+      ]
+    },
+    "MedicalScribeTranscriptSegment":{
+      "type":"structure",
+      "members":{
+        "SegmentId":{"shape":"String"},
+        "BeginAudioTime":{"shape":"Double"},
+        "EndAudioTime":{"shape":"Double"},
+        "Content":{"shape":"String"},
+        "Items":{"shape":"MedicalScribeTranscriptItemList"},
+        "IsPartial":{"shape":"Boolean"},
+        "ChannelId":{"shape":"String"}
+      }
+    },
+    "MedicalScribeVocabularyFilterMethod":{
+      "type":"string",
+      "enum":[
+        "remove",
+        "mask",
+        "tag"
+      ]
+    },
     "MedicalTranscript":{
       "type":"structure",
       "members":{
@@ -484,6 +787,16 @@
       "max":200,
       "min":1,
       "pattern":"^[0-9a-zA-Z._-]+"
+    },
+    "NonEmptyString":{
+      "type":"string",
+      "max":2000,
+      "min":1,
+      "pattern":".*\\S.*"
+    },
+    "NullableBoolean":{
+      "type":"boolean",
+      "box":true
     },
     "NumberOfChannels":{
       "type":"integer",
@@ -530,6 +843,14 @@
       }
     },
     "RequestId":{"type":"string"},
+    "ResourceNotFoundException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "error":{"httpStatusCode":404},
+      "exception":true
+    },
     "Result":{
       "type":"structure",
       "members":{
@@ -736,6 +1057,71 @@
         }
       },
       "payload":"CallAnalyticsTranscriptResultStream"
+    },
+    "StartMedicalScribeStreamRequest":{
+      "type":"structure",
+      "required":[
+        "LanguageCode",
+        "MediaSampleRateHertz",
+        "MediaEncoding",
+        "InputStream"
+      ],
+      "members":{
+        "SessionId":{
+          "shape":"SessionId",
+          "location":"header",
+          "locationName":"x-amzn-transcribe-session-id"
+        },
+        "LanguageCode":{
+          "shape":"MedicalScribeLanguageCode",
+          "location":"header",
+          "locationName":"x-amzn-transcribe-language-code"
+        },
+        "MediaSampleRateHertz":{
+          "shape":"MedicalScribeMediaSampleRateHertz",
+          "location":"header",
+          "locationName":"x-amzn-transcribe-sample-rate"
+        },
+        "MediaEncoding":{
+          "shape":"MedicalScribeMediaEncoding",
+          "location":"header",
+          "locationName":"x-amzn-transcribe-media-encoding"
+        },
+        "InputStream":{"shape":"MedicalScribeInputStream"}
+      },
+      "payload":"InputStream"
+    },
+    "StartMedicalScribeStreamResponse":{
+      "type":"structure",
+      "members":{
+        "SessionId":{
+          "shape":"SessionId",
+          "location":"header",
+          "locationName":"x-amzn-transcribe-session-id"
+        },
+        "RequestId":{
+          "shape":"RequestId",
+          "location":"header",
+          "locationName":"x-amzn-request-id"
+        },
+        "LanguageCode":{
+          "shape":"MedicalScribeLanguageCode",
+          "location":"header",
+          "locationName":"x-amzn-transcribe-language-code"
+        },
+        "MediaSampleRateHertz":{
+          "shape":"MedicalScribeMediaSampleRateHertz",
+          "location":"header",
+          "locationName":"x-amzn-transcribe-sample-rate"
+        },
+        "MediaEncoding":{
+          "shape":"MedicalScribeMediaEncoding",
+          "location":"header",
+          "locationName":"x-amzn-transcribe-media-encoding"
+        },
+        "ResultStream":{"shape":"MedicalScribeResultStream"}
+      },
+      "payload":"ResultStream"
     },
     "StartMedicalStreamTranscriptionRequest":{
       "type":"structure",
@@ -1165,6 +1551,12 @@
         "CONVERSATION",
         "DICTATION"
       ]
+    },
+    "Uri":{
+      "type":"string",
+      "max":2000,
+      "min":1,
+      "pattern":"(s3://|http(s*)://).+"
     },
     "UtteranceEvent":{
       "type":"structure",

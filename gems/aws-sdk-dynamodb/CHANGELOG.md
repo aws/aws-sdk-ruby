@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.135.0 (2025-01-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+* Issue - Allow other retry configs to influence DynamoDB extended retries.
+
 1.134.0 (2025-01-15)
 ------------------
 

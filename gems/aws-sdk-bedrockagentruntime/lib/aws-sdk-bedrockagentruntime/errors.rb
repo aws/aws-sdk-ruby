@@ -127,6 +127,11 @@ module Aws::BedrockAgentRuntime
       def message
         @message || @data[:message]
       end
+
+      # @return [String]
+      def reason
+        @data[:reason]
+      end
     end
 
     class ModelNotReadyException < ServiceError

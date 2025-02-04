@@ -17,6 +17,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/SamlProvider.html#arn-instance_method
       def arn: () -> String
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/SamlProvider.html#saml_provider_uuid-instance_method
+      def saml_provider_uuid: () -> ::String
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/SamlProvider.html#saml_metadata_document-instance_method
       def saml_metadata_document: () -> ::String
 
@@ -28,6 +31,12 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/SamlProvider.html#tags-instance_method
       def tags: () -> ::Array[Types::Tag]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/SamlProvider.html#assertion_encryption_mode-instance_method
+      def assertion_encryption_mode: () -> ("Required" | "Allowed")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/SamlProvider.html#private_key_list-instance_method
+      def private_key_list: () -> ::Array[Types::SAMLPrivateKey]
 
       def client: () -> Client
 
@@ -49,7 +58,10 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/SamlProvider.html#update-instance_method
       def update: (
-                    saml_metadata_document: ::String
+                    ?saml_metadata_document: ::String,
+                    ?assertion_encryption_mode: ("Required" | "Allowed"),
+                    ?add_private_key: ::String,
+                    ?remove_private_key: ::String
                   ) -> Types::UpdateSAMLProviderResponse
                 | (?Hash[Symbol, untyped]) -> Types::UpdateSAMLProviderResponse
 

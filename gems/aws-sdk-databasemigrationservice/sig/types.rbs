@@ -153,6 +153,7 @@ module Aws::DatabaseMigrationService
       attr_accessor service_access_role_arn: ::String
       attr_accessor enable_cloudwatch_logs: bool
       attr_accessor source_data_settings: ::Array[Types::SourceDataSetting]
+      attr_accessor target_data_settings: ::Array[Types::TargetDataSetting]
       attr_accessor number_of_jobs: ::Integer
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor selection_rules: ::String
@@ -381,6 +382,7 @@ module Aws::DatabaseMigrationService
       attr_accessor data_migration_type: ("full-load" | "cdc" | "full-load-and-cdc")
       attr_accessor data_migration_settings: Types::DataMigrationSettings
       attr_accessor source_data_settings: ::Array[Types::SourceDataSetting]
+      attr_accessor target_data_settings: ::Array[Types::TargetDataSetting]
       attr_accessor data_migration_statistics: Types::DataMigrationStatistics
       attr_accessor data_migration_status: ::String
       attr_accessor public_ip_addresses: ::Array[::String]
@@ -1701,6 +1703,7 @@ module Aws::DatabaseMigrationService
       attr_accessor service_access_role_arn: ::String
       attr_accessor data_migration_type: ("full-load" | "cdc" | "full-load-and-cdc")
       attr_accessor source_data_settings: ::Array[Types::SourceDataSetting]
+      attr_accessor target_data_settings: ::Array[Types::TargetDataSetting]
       attr_accessor number_of_jobs: ::Integer
       attr_accessor selection_rules: ::String
       SENSITIVE: [:selection_rules]
@@ -2876,6 +2879,11 @@ module Aws::DatabaseMigrationService
       attr_accessor key: ::String
       attr_accessor value: ::String
       attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class TargetDataSetting
+      attr_accessor table_preparation_mode: ("do-nothing" | "truncate" | "drop-tables-on-target")
       SENSITIVE: []
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2025-01-29)
+------------------
+
+* Feature - This release adds support for AWS HealthScribe Streaming APIs within Amazon Transcribe.
+
 1.73.0 (2025-01-15)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.97.0 (2025-02-04)
+------------------
+
+* Feature - Doc-only update to provide more information on using Kerberos authentication with SMB locations.
+
 1.96.0 (2025-01-28)
 ------------------
 

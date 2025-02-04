@@ -88,8 +88,9 @@ module Seahorse
           end
 
           it 'provides a :http_request_headers replacement' do
-            response.context.http_request.headers = { 'foo' => 'bar' }
-            expect(format(':http_request_headers')).to eq('{"foo"=>"bar"}')
+            req = response.context.http_request
+            req.headers = { 'foo' => 'bar' }
+            expect(format(':http_request_headers')).to eq(req.headers.inspect)
           end
 
           it 'provides a :http_request_body replacement' do
@@ -106,8 +107,9 @@ module Seahorse
           end
 
           it 'provides a :http_response_headers replacement' do
-            response.context.http_response.headers['foo'] = 'bar'
-            expect(format(':http_response_headers')).to eq('{"foo"=>"bar"}')
+            resp = response.context.http_response
+            resp.headers['foo'] = 'bar'
+            expect(format(':http_response_headers')).to eq(resp.headers.inspect)
           end
 
           it 'provides a :http_response_body replacement' do

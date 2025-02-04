@@ -478,6 +478,7 @@ module Aws::NeptuneGraph
     end
 
     class ListExportTasksInput
+      attr_accessor graph_identifier: ::String
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       SENSITIVE: []

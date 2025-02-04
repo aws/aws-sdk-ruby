@@ -128,13 +128,18 @@ module Aws::S3Tables
     #   The format for the table.
     #   @return [String]
     #
+    # @!attribute [rw] metadata
+    #   The metadata for the table.
+    #   @return [Types::TableMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/CreateTableRequest AWS API Documentation
     #
     class CreateTableRequest < Struct.new(
       :table_bucket_arn,
       :namespace,
       :name,
-      :format)
+      :format,
+      :metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -175,7 +180,7 @@ module Aws::S3Tables
     end
 
     # @!attribute [rw] table_bucket_arn
-    #   The Amazon Resource Number (ARN) of the table bucket.
+    #   The Amazon Resource Name (ARN) of the table bucket.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/DeleteTableBucketPolicyRequest AWS API Documentation
@@ -199,8 +204,8 @@ module Aws::S3Tables
     end
 
     # @!attribute [rw] table_bucket_arn
-    #   The Amazon Resource Number (ARN) of the table bucket that contains
-    #   the table.
+    #   The Amazon Resource Name (ARN) of the table bucket that contains the
+    #   table.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -338,7 +343,7 @@ module Aws::S3Tables
     end
 
     # @!attribute [rw] table_bucket_arn
-    #   The Amazon Resource Number (ARN) of the table bucket.
+    #   The Amazon Resource Name (ARN) of the table bucket.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/GetTableBucketPolicyRequest AWS API Documentation
@@ -350,7 +355,7 @@ module Aws::S3Tables
     end
 
     # @!attribute [rw] resource_policy
-    #   The name of the resource policy.
+    #   The `JSON` that defines the policy.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/GetTableBucketPolicyResponse AWS API Documentation
@@ -523,8 +528,8 @@ module Aws::S3Tables
     end
 
     # @!attribute [rw] table_bucket_arn
-    #   The Amazon Resource Number (ARN) of the table bucket that contains
-    #   the table.
+    #   The Amazon Resource Name (ARN) of the table bucket that contains the
+    #   table.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -546,7 +551,7 @@ module Aws::S3Tables
     end
 
     # @!attribute [rw] resource_policy
-    #   The name of the resource policy.
+    #   The `JSON` that defines the policy.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/GetTablePolicyResponse AWS API Documentation
@@ -667,6 +672,34 @@ module Aws::S3Tables
     #
     class IcebergCompactionSettings < Struct.new(
       :target_file_size_mb)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about the metadata for an Iceberg table.
+    #
+    # @!attribute [rw] schema
+    #   The schema for an Iceberg table.
+    #   @return [Types::IcebergSchema]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/IcebergMetadata AWS API Documentation
+    #
+    class IcebergMetadata < Struct.new(
+      :schema)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about the schema for an Iceberg table.
+    #
+    # @!attribute [rw] fields
+    #   The schema fields for the table
+    #   @return [Array<Types::SchemaField>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/IcebergSchema AWS API Documentation
+    #
+    class IcebergSchema < Struct.new(
+      :fields)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -820,7 +853,7 @@ module Aws::S3Tables
     end
 
     # @!attribute [rw] table_bucket_arn
-    #   The Amazon resource Number (ARN) of the table bucket.
+    #   The Amazon resource Name (ARN) of the table bucket.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -940,11 +973,11 @@ module Aws::S3Tables
     end
 
     # @!attribute [rw] table_bucket_arn
-    #   The Amazon Resource Number (ARN) of the table bucket.
+    #   The Amazon Resource Name (ARN) of the table bucket.
     #   @return [String]
     #
     # @!attribute [rw] resource_policy
-    #   The name of the resource policy.
+    #   The `JSON` that defines the policy.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/PutTableBucketPolicyRequest AWS API Documentation
@@ -990,8 +1023,8 @@ module Aws::S3Tables
     end
 
     # @!attribute [rw] table_bucket_arn
-    #   The Amazon Resource Number (ARN) of the table bucket that contains
-    #   the table.
+    #   The Amazon Resource Name (ARN) of the table bucket that contains the
+    #   table.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -1003,7 +1036,7 @@ module Aws::S3Tables
     #   @return [String]
     #
     # @!attribute [rw] resource_policy
-    #   The name of the resource policy.
+    #   The `JSON` that defines the policy.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/PutTablePolicyRequest AWS API Documentation
@@ -1050,6 +1083,39 @@ module Aws::S3Tables
       :new_namespace_name,
       :new_name,
       :version_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about a schema field.
+    #
+    # @!attribute [rw] name
+    #   The name of the field.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The field type. S3 Tables supports all Apache Iceberg primitive
+    #   types. For more information, see the [Apache Iceberg
+    #   documentation][1].
+    #
+    #
+    #
+    #   [1]: https://iceberg.apache.org/spec/#primitive-types
+    #   @return [String]
+    #
+    # @!attribute [rw] required
+    #   A Boolean value that specifies whether values are required for each
+    #   row in this field. By default, this is `false` and null values are
+    #   allowed in the field. If this is `true` the field does not allow
+    #   null values.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/SchemaField AWS API Documentation
+    #
+    class SchemaField < Struct.new(
+      :name,
+      :type,
+      :required)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1101,7 +1167,7 @@ module Aws::S3Tables
     # Contains details about a table bucket.
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Number (ARN) of the table bucket.
+    #   The Amazon Resource Name (ARN) of the table bucket.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1203,6 +1269,27 @@ module Aws::S3Tables
       class Unknown < TableMaintenanceSettings; end
     end
 
+    # Contains details about the table metadata.
+    #
+    # @note TableMetadata is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] iceberg
+    #   Contains details about the metadata of an Iceberg table.
+    #   @return [Types::IcebergMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/TableMetadata AWS API Documentation
+    #
+    class TableMetadata < Struct.new(
+      :iceberg,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Iceberg < TableMetadata; end
+      class Unknown < TableMetadata; end
+    end
+
     # Contains details about a table.
     #
     # @!attribute [rw] namespace
@@ -1218,7 +1305,7 @@ module Aws::S3Tables
     #   @return [String]
     #
     # @!attribute [rw] table_arn
-    #   The Amazon Resource Number (ARN) of the table.
+    #   The Amazon Resource Name (ARN) of the table.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -1292,7 +1379,7 @@ module Aws::S3Tables
     #   @return [String]
     #
     # @!attribute [rw] table_arn
-    #   The Amazon Resource Number (ARN) of the table.
+    #   The Amazon Resource Name (ARN) of the table.
     #   @return [String]
     #
     # @!attribute [rw] namespace

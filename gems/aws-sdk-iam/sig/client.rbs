@@ -267,7 +267,9 @@ module Aws
                                       key: ::String,
                                       value: ::String
                                     },
-                                  ]
+                                  ],
+                                  ?assertion_encryption_mode: ("Required" | "Allowed"),
+                                  ?add_private_key: ::String
                                 ) -> _CreateSAMLProviderResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSAMLProviderResponseSuccess
 
@@ -803,10 +805,13 @@ module Aws
 
       interface _GetSAMLProviderResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetSAMLProviderResponse]
+        def saml_provider_uuid: () -> ::String
         def saml_metadata_document: () -> ::String
         def create_date: () -> ::Time
         def valid_until: () -> ::Time
         def tags: () -> ::Array[Types::Tag]
+        def assertion_encryption_mode: () -> ("Required" | "Allowed")
+        def private_key_list: () -> ::Array[Types::SAMLPrivateKey]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_saml_provider-instance_method
       def get_saml_provider: (
@@ -1770,8 +1775,11 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#update_saml_provider-instance_method
       def update_saml_provider: (
-                                  saml_metadata_document: ::String,
-                                  saml_provider_arn: ::String
+                                  ?saml_metadata_document: ::String,
+                                  saml_provider_arn: ::String,
+                                  ?assertion_encryption_mode: ("Required" | "Allowed"),
+                                  ?add_private_key: ::String,
+                                  ?remove_private_key: ::String
                                 ) -> _UpdateSAMLProviderResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSAMLProviderResponseSuccess
 

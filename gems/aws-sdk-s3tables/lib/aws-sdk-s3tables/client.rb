@@ -472,11 +472,17 @@ module Aws::S3Tables
 
     # Creates a namespace. A namespace is a logical grouping of tables
     # within your table bucket, which you can use to organize tables. For
-    # more information, see [Table namespaces][1].
+    # more information, see [Create a namespace][1] in the *Amazon Simple
+    # Storage Service User Guide*.
+    #
+    # Permissions
+    #
+    # : You must have the `s3tables:CreateNamespace` permission to use this
+    #   operation.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-namespace.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-namespace-create.html
     #
     # @option params [required, String] :table_bucket_arn
     #   The Amazon Resource Name (ARN) of the table bucket to create the
@@ -513,7 +519,23 @@ module Aws::S3Tables
     end
 
     # Creates a new table associated with the given namespace in a table
-    # bucket.
+    # bucket. For more information, see [Creating an Amazon S3 table][1] in
+    # the *Amazon Simple Storage Service User Guide*.
+    #
+    # Permissions
+    #
+    # : You must have the `s3tables:CreateTable` permission to use this
+    #   operation.
+    #
+    #   <note markdown="1"> Additionally, you must have the `s3tables:PutTableData` permission
+    #   to use this operation with the optional `metadata` request
+    #   parameter.
+    #
+    #    </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-create.html
     #
     # @option params [required, String] :table_bucket_arn
     #   The Amazon Resource Name (ARN) of the table bucket to create the table
@@ -528,6 +550,9 @@ module Aws::S3Tables
     # @option params [required, String] :format
     #   The format for the table.
     #
+    # @option params [Types::TableMetadata] :metadata
+    #   The metadata for the table.
+    #
     # @return [Types::CreateTableResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTableResponse#table_arn #table_arn} => String
@@ -540,6 +565,19 @@ module Aws::S3Tables
     #     namespace: "NamespaceName", # required
     #     name: "TableName", # required
     #     format: "ICEBERG", # required, accepts ICEBERG
+    #     metadata: {
+    #       iceberg: {
+    #         schema: { # required
+    #           fields: [ # required
+    #             {
+    #               name: "String", # required
+    #               type: "String", # required
+    #               required: false,
+    #             },
+    #           ],
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -556,7 +594,17 @@ module Aws::S3Tables
       req.send_request(options)
     end
 
-    # Creates a table bucket.
+    # Creates a table bucket. For more information, see [Creating a table
+    # bucket][1] in the *Amazon Simple Storage Service User Guide*.
+    #
+    # Permissions
+    #
+    # : You must have the `s3tables:CreateTableBucket` permission to use
+    #   this operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-buckets-create.html
     #
     # @option params [required, String] :name
     #   The name for the table bucket.
@@ -584,7 +632,17 @@ module Aws::S3Tables
       req.send_request(options)
     end
 
-    # Deletes a namespace.
+    # Deletes a namespace. For more information, see [Delete a namespace][1]
+    # in the *Amazon Simple Storage Service User Guide*.
+    #
+    # Permissions
+    #
+    # : You must have the `s3tables:DeleteNamespace` permission to use this
+    #   operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-namespace-delete.html
     #
     # @option params [required, String] :table_bucket_arn
     #   The Amazon Resource Name (ARN) of the table bucket associated with the
@@ -611,7 +669,17 @@ module Aws::S3Tables
       req.send_request(options)
     end
 
-    # Deletes a table.
+    # Deletes a table. For more information, see [Deleting an Amazon S3
+    # table][1] in the *Amazon Simple Storage Service User Guide*.
+    #
+    # Permissions
+    #
+    # : You must have the `s3tables:DeleteTable` permission to use this
+    #   operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-delete.html
     #
     # @option params [required, String] :table_bucket_arn
     #   The Amazon Resource Name (ARN) of the table bucket that contains the
@@ -646,7 +714,17 @@ module Aws::S3Tables
       req.send_request(options)
     end
 
-    # Deletes a table bucket.
+    # Deletes a table bucket. For more information, see [Deleting a table
+    # bucket][1] in the *Amazon Simple Storage Service User Guide*.
+    #
+    # Permissions
+    #
+    # : You must have the `s3tables:DeleteTableBucket` permission to use
+    #   this operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-buckets-delete.html
     #
     # @option params [required, String] :table_bucket_arn
     #   The Amazon Resource Name (ARN) of the table bucket.
@@ -668,10 +746,21 @@ module Aws::S3Tables
       req.send_request(options)
     end
 
-    # Deletes a table bucket policy.
+    # Deletes a table bucket policy. For more information, see [Deleting a
+    # table bucket policy][1] in the *Amazon Simple Storage Service User
+    # Guide*.
+    #
+    # Permissions
+    #
+    # : You must have the `s3tables:DeleteTableBucketPolicy` permission to
+    #   use this operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-bucket-policy.html#table-bucket-policy-delete
     #
     # @option params [required, String] :table_bucket_arn
-    #   The Amazon Resource Number (ARN) of the table bucket.
+    #   The Amazon Resource Name (ARN) of the table bucket.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -690,10 +779,20 @@ module Aws::S3Tables
       req.send_request(options)
     end
 
-    # Deletes a table policy.
+    # Deletes a table policy. For more information, see [Deleting a table
+    # policy][1] in the *Amazon Simple Storage Service User Guide*.
+    #
+    # Permissions
+    #
+    # : You must have the `s3tables:DeleteTablePolicy` permission to use
+    #   this operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-table-policy.html#table-policy-delete
     #
     # @option params [required, String] :table_bucket_arn
-    #   The Amazon Resource Number (ARN) of the table bucket that contains the
+    #   The Amazon Resource Name (ARN) of the table bucket that contains the
     #   table.
     #
     # @option params [required, String] :namespace
@@ -721,7 +820,17 @@ module Aws::S3Tables
       req.send_request(options)
     end
 
-    # Gets details about a namespace.
+    # Gets details about a namespace. For more information, see [Table
+    # namespaces][1] in the *Amazon Simple Storage Service User Guide*.
+    #
+    # Permissions
+    #
+    # : You must have the `s3tables:GetNamespace` permission to use this
+    #   operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-namespace.html
     #
     # @option params [required, String] :table_bucket_arn
     #   The Amazon Resource Name (ARN) of the table bucket.
@@ -760,7 +869,17 @@ module Aws::S3Tables
       req.send_request(options)
     end
 
-    # Gets details about a table.
+    # Gets details about a table. For more information, see [S3 Tables][1]
+    # in the *Amazon Simple Storage Service User Guide*.
+    #
+    # Permissions
+    #
+    # : You must have the `s3tables:GetTable` permission to use this
+    #   operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-tables.html
     #
     # @option params [required, String] :table_bucket_arn
     #   The Amazon Resource Name (ARN) of the table bucket associated with the
@@ -824,7 +943,18 @@ module Aws::S3Tables
       req.send_request(options)
     end
 
-    # Gets details on a table bucket.
+    # Gets details on a table bucket. For more information, see [Viewing
+    # details about an Amazon S3 table bucket][1] in the *Amazon Simple
+    # Storage Service User Guide*.
+    #
+    # Permissions
+    #
+    # : You must have the `s3tables:GetTableBucket` permission to use this
+    #   operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-buckets-details.html
     #
     # @option params [required, String] :table_bucket_arn
     #   The Amazon Resource Name (ARN) of the table bucket.
@@ -859,7 +989,17 @@ module Aws::S3Tables
     end
 
     # Gets details about a maintenance configuration for a given table
-    # bucket.
+    # bucket. For more information, see [Amazon S3 table bucket
+    # maintenance][1] in the *Amazon Simple Storage Service User Guide*.
+    #
+    # Permissions
+    #
+    # : You must have the `s3tables:GetTableBucketMaintenanceConfiguration`
+    #   permission to use this operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-table-buckets-maintenance.html
     #
     # @option params [required, String] :table_bucket_arn
     #   The Amazon Resource Name (ARN) of the table bucket associated with the
@@ -893,10 +1033,21 @@ module Aws::S3Tables
       req.send_request(options)
     end
 
-    # Gets details about a table bucket policy.
+    # Gets details about a table bucket policy. For more information, see
+    # [Viewing a table bucket policy][1] in the *Amazon Simple Storage
+    # Service User Guide*.
+    #
+    # Permissions
+    #
+    # : You must have the `s3tables:GetTableBucketPolicy` permission to use
+    #   this operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-bucket-policy.html#table-bucket-policy-get
     #
     # @option params [required, String] :table_bucket_arn
-    #   The Amazon Resource Number (ARN) of the table bucket.
+    #   The Amazon Resource Name (ARN) of the table bucket.
     #
     # @return [Types::GetTableBucketPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -921,7 +1072,18 @@ module Aws::S3Tables
       req.send_request(options)
     end
 
-    # Gets details about the maintenance configuration of a table.
+    # Gets details about the maintenance configuration of a table. For more
+    # information, see [S3 Tables maintenance][1] in the *Amazon Simple
+    # Storage Service User Guide*.
+    #
+    # Permissions
+    #
+    # : You must have the `s3tables:GetTableMaintenanceConfiguration`
+    #   permission to use this operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-maintenance.html
     #
     # @option params [required, String] :table_bucket_arn
     #   The Amazon Resource Name (ARN) of the table bucket.
@@ -963,7 +1125,18 @@ module Aws::S3Tables
       req.send_request(options)
     end
 
-    # Gets the status of a maintenance job for a table.
+    # Gets the status of a maintenance job for a table. For more
+    # information, see [S3 Tables maintenance][1] in the *Amazon Simple
+    # Storage Service User Guide*.
+    #
+    # Permissions
+    #
+    # : You must have the `s3tables:GetTableMaintenanceJobStatus` permission
+    #   to use this operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-maintenance.html
     #
     # @option params [required, String] :table_bucket_arn
     #   The Amazon Resource Name (ARN) of the table bucket.
@@ -1006,6 +1179,11 @@ module Aws::S3Tables
 
     # Gets the location of the table metadata.
     #
+    # Permissions
+    #
+    # : You must have the `s3tables:GetTableMetadataLocation` permission to
+    #   use this operation.
+    #
     # @option params [required, String] :table_bucket_arn
     #   The Amazon Resource Name (ARN) of the table bucket.
     #
@@ -1044,10 +1222,20 @@ module Aws::S3Tables
       req.send_request(options)
     end
 
-    # Gets details about a table policy.
+    # Gets details about a table policy. For more information, see [Viewing
+    # a table policy][1] in the *Amazon Simple Storage Service User Guide*.
+    #
+    # Permissions
+    #
+    # : You must have the `s3tables:GetTablePolicy` permission to use this
+    #   operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-table-policy.html#table-policy-get
     #
     # @option params [required, String] :table_bucket_arn
-    #   The Amazon Resource Number (ARN) of the table bucket that contains the
+    #   The Amazon Resource Name (ARN) of the table bucket that contains the
     #   table.
     #
     # @option params [required, String] :namespace
@@ -1081,7 +1269,18 @@ module Aws::S3Tables
       req.send_request(options)
     end
 
-    # Lists the namespaces within a table bucket.
+    # Lists the namespaces within a table bucket. For more information, see
+    # [Table namespaces][1] in the *Amazon Simple Storage Service User
+    # Guide*.
+    #
+    # Permissions
+    #
+    # : You must have the `s3tables:ListNamespaces` permission to use this
+    #   operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-namespace.html
     #
     # @option params [required, String] :table_bucket_arn
     #   The Amazon Resource Name (ARN) of the table bucket.
@@ -1133,7 +1332,17 @@ module Aws::S3Tables
       req.send_request(options)
     end
 
-    # Lists table buckets for your account.
+    # Lists table buckets for your account. For more information, see [S3
+    # Table buckets][1] in the *Amazon Simple Storage Service User Guide*.
+    #
+    # Permissions
+    #
+    # : You must have the `s3tables:ListTableBuckets` permission to use this
+    #   operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-buckets.html
     #
     # @option params [String] :prefix
     #   The prefix of the table buckets.
@@ -1180,10 +1389,20 @@ module Aws::S3Tables
       req.send_request(options)
     end
 
-    # List tables in the given table bucket.
+    # List tables in the given table bucket. For more information, see [S3
+    # Tables][1] in the *Amazon Simple Storage Service User Guide*.
+    #
+    # Permissions
+    #
+    # : You must have the `s3tables:ListTables` permission to use this
+    #   operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-tables.html
     #
     # @option params [required, String] :table_bucket_arn
-    #   The Amazon resource Number (ARN) of the table bucket.
+    #   The Amazon resource Name (ARN) of the table bucket.
     #
     # @option params [String] :namespace
     #   The namespace of the tables.
@@ -1239,7 +1458,18 @@ module Aws::S3Tables
     end
 
     # Creates a new maintenance configuration or replaces an existing
-    # maintenance configuration for a table bucket.
+    # maintenance configuration for a table bucket. For more information,
+    # see [Amazon S3 table bucket maintenance][1] in the *Amazon Simple
+    # Storage Service User Guide*.
+    #
+    # Permissions
+    #
+    # : You must have the `s3tables:PutTableBucketMaintenanceConfiguration`
+    #   permission to use this operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-table-buckets-maintenance.html
     #
     # @option params [required, String] :table_bucket_arn
     #   The Amazon Resource Name (ARN) of the table bucket associated with the
@@ -1280,13 +1510,24 @@ module Aws::S3Tables
     end
 
     # Creates a new maintenance configuration or replaces an existing table
-    # bucket policy for a table bucket.
+    # bucket policy for a table bucket. For more information, see [Adding a
+    # table bucket policy][1] in the *Amazon Simple Storage Service User
+    # Guide*.
+    #
+    # Permissions
+    #
+    # : You must have the `s3tables:PutTableBucketPolicy` permission to use
+    #   this operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-bucket-policy.html#table-bucket-policy-add
     #
     # @option params [required, String] :table_bucket_arn
-    #   The Amazon Resource Number (ARN) of the table bucket.
+    #   The Amazon Resource Name (ARN) of the table bucket.
     #
     # @option params [required, String] :resource_policy
-    #   The name of the resource policy.
+    #   The `JSON` that defines the policy.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1307,7 +1548,18 @@ module Aws::S3Tables
     end
 
     # Creates a new maintenance configuration or replaces an existing
-    # maintenance configuration for a table.
+    # maintenance configuration for a table. For more information, see [S3
+    # Tables maintenance][1] in the *Amazon Simple Storage Service User
+    # Guide*.
+    #
+    # Permissions
+    #
+    # : You must have the `s3tables:PutTableMaintenanceConfiguration`
+    #   permission to use this operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-maintenance.html
     #
     # @option params [required, String] :table_bucket_arn
     #   The Amazon Resource Name (ARN) of the table associated with the
@@ -1358,10 +1610,20 @@ module Aws::S3Tables
     end
 
     # Creates a new maintenance configuration or replaces an existing table
-    # policy for a table.
+    # policy for a table. For more information, see [Adding a table
+    # policy][1] in the *Amazon Simple Storage Service User Guide*.
+    #
+    # Permissions
+    #
+    # : You must have the `s3tables:PutTablePolicy` permission to use this
+    #   operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-table-policy.html#table-policy-add
     #
     # @option params [required, String] :table_bucket_arn
-    #   The Amazon Resource Number (ARN) of the table bucket that contains the
+    #   The Amazon Resource Name (ARN) of the table bucket that contains the
     #   table.
     #
     # @option params [required, String] :namespace
@@ -1371,7 +1633,7 @@ module Aws::S3Tables
     #   The name of the table.
     #
     # @option params [required, String] :resource_policy
-    #   The name of the resource policy.
+    #   The `JSON` that defines the policy.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1393,7 +1655,17 @@ module Aws::S3Tables
       req.send_request(options)
     end
 
-    # Renames a table or a namespace.
+    # Renames a table or a namespace. For more information, see [S3
+    # Tables][1] in the *Amazon Simple Storage Service User Guide*.
+    #
+    # Permissions
+    #
+    # : You must have the `s3tables:RenameTable` permission to use this
+    #   operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-tables.html
     #
     # @option params [required, String] :table_bucket_arn
     #   The Amazon Resource Name (ARN) of the table bucket.
@@ -1435,7 +1707,16 @@ module Aws::S3Tables
       req.send_request(options)
     end
 
-    # Updates the metadata location for a table.
+    # Updates the metadata location for a table. The metadata location of a
+    # table must be an S3 URI that begins with the table's warehouse
+    # location. The metadata location for an Apache Iceberg table must end
+    # with `.metadata.json`, or if the metadata file is Gzip-compressed,
+    # `.metadata.json.gz`.
+    #
+    # Permissions
+    #
+    # : You must have the `s3tables:UpdateTableMetadataLocation` permission
+    #   to use this operation.
     #
     # @option params [required, String] :table_bucket_arn
     #   The Amazon Resource Name (ARN) of the table bucket.
@@ -1506,7 +1787,7 @@ module Aws::S3Tables
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3tables'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:transcribestreamingservice)
 # structure.
 #
 #     transcribe_streaming_service = Aws::TranscribeStreamingService::Client.new
-#     resp = transcribe_streaming_service.start_call_analytics_stream_transcription(params)
+#     resp = transcribe_streaming_service.get_medical_scribe_stream(params)
 #
 # See {Client} for more information.
 #
@@ -56,7 +56,7 @@ module Aws::TranscribeStreamingService
   autoload :AsyncClient, 'aws-sdk-transcribestreamingservice/async_client'
   autoload :EventStreams, 'aws-sdk-transcribestreamingservice/event_streams'
 
-  GEM_VERSION = '1.73.0'
+  GEM_VERSION = '1.74.0'
 
 end
 

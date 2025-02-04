@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.116.0 (2025-02-04)
+------------------
+
+* Feature - This release adds support for accepting encrypted SAML assertions. Customers can now configure their identity provider to encrypt the SAML assertions it sends to IAM.
+
 1.115.0 (2025-01-15)
 ------------------
 

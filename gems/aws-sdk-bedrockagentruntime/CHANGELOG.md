@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2025-01-31)
+------------------
+
+* Feature - This change is to deprecate the existing citation field under RetrieveAndGenerateStream API response in lieu of GeneratedResponsePart and RetrievedReferences
+
+1.41.0 (2025-01-30)
+------------------
+
+* Feature - Add a 'reason' field to InternalServerException
+
 1.40.0 (2025-01-22)
 ------------------
 

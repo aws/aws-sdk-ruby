@@ -232,6 +232,19 @@ module Aws
                               ) -> _BatchPutDocumentResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchPutDocumentResponseSuccess
 
+      interface _CancelSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelSubscriptionResponse]
+        def subscription_arn: () -> ::String
+        def current_subscription: () -> Types::SubscriptionDetails
+        def next_subscription: () -> Types::SubscriptionDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#cancel_subscription-instance_method
+      def cancel_subscription: (
+                                 application_id: ::String,
+                                 subscription_id: ::String
+                               ) -> _CancelSubscriptionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelSubscriptionResponseSuccess
+
       interface _ChatResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ChatOutput]
         def output_stream: () -> Types::ChatOutputStream
@@ -723,6 +736,25 @@ module Aws
                             ) -> _CreateRetrieverResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRetrieverResponseSuccess
 
+      interface _CreateSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSubscriptionResponse]
+        def subscription_id: () -> ::String
+        def subscription_arn: () -> ::String
+        def current_subscription: () -> Types::SubscriptionDetails
+        def next_subscription: () -> Types::SubscriptionDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#create_subscription-instance_method
+      def create_subscription: (
+                                 application_id: ::String,
+                                 principal: {
+                                   user: ::String?,
+                                   group: ::String?
+                                 },
+                                 type: ("Q_LITE" | "Q_BUSINESS"),
+                                 ?client_token: ::String
+                               ) -> _CreateSubscriptionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSubscriptionResponseSuccess
+
       interface _CreateUserResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateUserResponse]
       end
@@ -935,6 +967,7 @@ module Aws
       interface _GetChatControlsConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetChatControlsConfigurationResponse]
         def response_scope: () -> ("ENTERPRISE_CONTENT_ONLY" | "EXTENDED_KNOWLEDGE_ENABLED")
+        def orchestration_configuration: () -> Types::AppliedOrchestrationConfiguration
         def blocked_phrases: () -> Types::BlockedPhrasesConfiguration
         def topic_configurations: () -> ::Array[Types::TopicConfiguration]
         def creator_mode_configuration: () -> Types::AppliedCreatorModeConfiguration
@@ -1344,6 +1377,19 @@ module Aws
                            ) -> _ListRetrieversResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRetrieversResponseSuccess
 
+      interface _ListSubscriptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSubscriptionsResponse]
+        def next_token: () -> ::String
+        def subscriptions: () -> ::Array[Types::Subscription]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#list_subscriptions-instance_method
+      def list_subscriptions: (
+                                application_id: ::String,
+                                ?next_token: ::String,
+                                ?max_results: ::Integer
+                              ) -> _ListSubscriptionsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSubscriptionsResponseSuccess
+
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
         def tags: () -> ::Array[Types::Tag]
@@ -1588,6 +1634,9 @@ module Aws
                                                 application_id: ::String,
                                                 ?client_token: ::String,
                                                 ?response_scope: ("ENTERPRISE_CONTENT_ONLY" | "EXTENDED_KNOWLEDGE_ENABLED"),
+                                                ?orchestration_configuration: {
+                                                  control: ("ENABLED" | "DISABLED")
+                                                },
                                                 ?blocked_phrases_configuration_update: {
                                                   blocked_phrases_to_create_or_update: Array[::String]?,
                                                   blocked_phrases_to_delete: Array[::String]?,
@@ -1938,6 +1987,20 @@ module Aws
                               ?role_arn: ::String
                             ) -> _UpdateRetrieverResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRetrieverResponseSuccess
+
+      interface _UpdateSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSubscriptionResponse]
+        def subscription_arn: () -> ::String
+        def current_subscription: () -> Types::SubscriptionDetails
+        def next_subscription: () -> Types::SubscriptionDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#update_subscription-instance_method
+      def update_subscription: (
+                                 application_id: ::String,
+                                 subscription_id: ::String,
+                                 type: ("Q_LITE" | "Q_BUSINESS")
+                               ) -> _UpdateSubscriptionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSubscriptionResponseSuccess
 
       interface _UpdateUserResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateUserResponse]

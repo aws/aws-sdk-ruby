@@ -427,6 +427,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NeptuneGraph/Client.html#list_export_tasks-instance_method
       def list_export_tasks: (
+                               ?graph_identifier: ::String,
                                ?next_token: ::String,
                                ?max_results: ::Integer
                              ) -> _ListExportTasksResponseSuccess

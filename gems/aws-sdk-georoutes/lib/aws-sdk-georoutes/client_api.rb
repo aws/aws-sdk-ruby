@@ -31,6 +31,7 @@ module Aws::GeoRoutes
     CalculateRoutesRequestMaxAlternativesInteger = Shapes::IntegerShape.new(name: 'CalculateRoutesRequestMaxAlternativesInteger')
     CalculateRoutesResponse = Shapes::StructureShape.new(name: 'CalculateRoutesResponse')
     Circle = Shapes::StructureShape.new(name: 'Circle')
+    ClusterIndex = Shapes::IntegerShape.new(name: 'ClusterIndex')
     Corridor = Shapes::StructureShape.new(name: 'Corridor')
     CountryCode = Shapes::StringShape.new(name: 'CountryCode')
     CountryCode3 = Shapes::StringShape.new(name: 'CountryCode3')
@@ -448,11 +449,14 @@ module Aws::GeoRoutes
     WaypointOptimizationAvoidanceAreaGeometry = Shapes::StructureShape.new(name: 'WaypointOptimizationAvoidanceAreaGeometry')
     WaypointOptimizationAvoidanceOptions = Shapes::StructureShape.new(name: 'WaypointOptimizationAvoidanceOptions')
     WaypointOptimizationAvoidanceOptionsAreasList = Shapes::ListShape.new(name: 'WaypointOptimizationAvoidanceOptionsAreasList')
+    WaypointOptimizationClusteringAlgorithm = Shapes::StringShape.new(name: 'WaypointOptimizationClusteringAlgorithm')
+    WaypointOptimizationClusteringOptions = Shapes::StructureShape.new(name: 'WaypointOptimizationClusteringOptions')
     WaypointOptimizationConnection = Shapes::StructureShape.new(name: 'WaypointOptimizationConnection')
     WaypointOptimizationConnectionList = Shapes::ListShape.new(name: 'WaypointOptimizationConnectionList')
     WaypointOptimizationConstraint = Shapes::StringShape.new(name: 'WaypointOptimizationConstraint')
     WaypointOptimizationDestinationOptions = Shapes::StructureShape.new(name: 'WaypointOptimizationDestinationOptions')
     WaypointOptimizationDriverOptions = Shapes::StructureShape.new(name: 'WaypointOptimizationDriverOptions')
+    WaypointOptimizationDrivingDistanceOptions = Shapes::StructureShape.new(name: 'WaypointOptimizationDrivingDistanceOptions')
     WaypointOptimizationExclusionOptions = Shapes::StructureShape.new(name: 'WaypointOptimizationExclusionOptions')
     WaypointOptimizationFailedConstraint = Shapes::StructureShape.new(name: 'WaypointOptimizationFailedConstraint')
     WaypointOptimizationFailedConstraintList = Shapes::ListShape.new(name: 'WaypointOptimizationFailedConstraintList')
@@ -762,6 +766,7 @@ module Aws::GeoRoutes
     LocalizedStringList.member = Shapes::ShapeRef.new(shape: LocalizedString)
 
     OptimizeWaypointsRequest.add_member(:avoid, Shapes::ShapeRef.new(shape: WaypointOptimizationAvoidanceOptions, location_name: "Avoid"))
+    OptimizeWaypointsRequest.add_member(:clustering, Shapes::ShapeRef.new(shape: WaypointOptimizationClusteringOptions, location_name: "Clustering"))
     OptimizeWaypointsRequest.add_member(:departure_time, Shapes::ShapeRef.new(shape: TimestampWithTimezoneOffset, location_name: "DepartureTime"))
     OptimizeWaypointsRequest.add_member(:destination, Shapes::ShapeRef.new(shape: Position, location_name: "Destination"))
     OptimizeWaypointsRequest.add_member(:destination_options, Shapes::ShapeRef.new(shape: WaypointOptimizationDestinationOptions, location_name: "DestinationOptions"))
@@ -1733,6 +1738,10 @@ module Aws::GeoRoutes
 
     WaypointOptimizationAvoidanceOptionsAreasList.member = Shapes::ShapeRef.new(shape: WaypointOptimizationAvoidanceArea)
 
+    WaypointOptimizationClusteringOptions.add_member(:algorithm, Shapes::ShapeRef.new(shape: WaypointOptimizationClusteringAlgorithm, required: true, location_name: "Algorithm"))
+    WaypointOptimizationClusteringOptions.add_member(:driving_distance_options, Shapes::ShapeRef.new(shape: WaypointOptimizationDrivingDistanceOptions, location_name: "DrivingDistanceOptions"))
+    WaypointOptimizationClusteringOptions.struct_class = Types::WaypointOptimizationClusteringOptions
+
     WaypointOptimizationConnection.add_member(:distance, Shapes::ShapeRef.new(shape: DistanceMeters, required: true, location_name: "Distance"))
     WaypointOptimizationConnection.add_member(:from, Shapes::ShapeRef.new(shape: WaypointId, required: true, location_name: "From"))
     WaypointOptimizationConnection.add_member(:rest_duration, Shapes::ShapeRef.new(shape: DurationSeconds, required: true, location_name: "RestDuration"))
@@ -1756,6 +1765,9 @@ module Aws::GeoRoutes
     WaypointOptimizationDriverOptions.add_member(:treat_service_time_as, Shapes::ShapeRef.new(shape: WaypointOptimizationServiceTimeTreatment, location_name: "TreatServiceTimeAs"))
     WaypointOptimizationDriverOptions.struct_class = Types::WaypointOptimizationDriverOptions
 
+    WaypointOptimizationDrivingDistanceOptions.add_member(:driving_distance, Shapes::ShapeRef.new(shape: DistanceMeters, required: true, location_name: "DrivingDistance"))
+    WaypointOptimizationDrivingDistanceOptions.struct_class = Types::WaypointOptimizationDrivingDistanceOptions
+
     WaypointOptimizationExclusionOptions.add_member(:countries, Shapes::ShapeRef.new(shape: CountryCodeList, required: true, location_name: "Countries"))
     WaypointOptimizationExclusionOptions.struct_class = Types::WaypointOptimizationExclusionOptions
 
@@ -1775,6 +1787,7 @@ module Aws::GeoRoutes
     WaypointOptimizationImpedingWaypointList.member = Shapes::ShapeRef.new(shape: WaypointOptimizationImpedingWaypoint)
 
     WaypointOptimizationOptimizedWaypoint.add_member(:arrival_time, Shapes::ShapeRef.new(shape: TimestampWithTimezoneOffset, location_name: "ArrivalTime"))
+    WaypointOptimizationOptimizedWaypoint.add_member(:cluster_index, Shapes::ShapeRef.new(shape: ClusterIndex, location_name: "ClusterIndex"))
     WaypointOptimizationOptimizedWaypoint.add_member(:departure_time, Shapes::ShapeRef.new(shape: TimestampWithTimezoneOffset, required: true, location_name: "DepartureTime"))
     WaypointOptimizationOptimizedWaypoint.add_member(:id, Shapes::ShapeRef.new(shape: WaypointId, required: true, location_name: "Id"))
     WaypointOptimizationOptimizedWaypoint.add_member(:position, Shapes::ShapeRef.new(shape: Position, required: true, location_name: "Position"))

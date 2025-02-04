@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.105.0 (2025-01-30)
+------------------
+
+* Feature - Add support for managing admin consent requirement on selected domains for OneDrive Storage Connectors in AppStream2.0.
+
 1.104.0 (2025-01-15)
 ------------------
 

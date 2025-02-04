@@ -2593,9 +2593,9 @@ module Aws::RDS
     #
     #   The following values are valid for each DB engine:
     #
-    #   * Aurora MySQL - `audit | error | general | slowquery`
+    #   * Aurora MySQL - `audit | error | general | instance | slowquery`
     #
-    #   * Aurora PostgreSQL - `postgresql`
+    #   * Aurora PostgreSQL - `instance | postgresql`
     #
     #   * RDS for MySQL - `error | general | slowquery`
     #
@@ -4647,7 +4647,8 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] storage_throughput
-    #   The storage throughput value for the DB instance.
+    #   The storage throughput value, in mebibyte per second (MiBps), for
+    #   the DB instance.
     #
     #   This setting applies only to the `gp3` storage type.
     #
@@ -6988,6 +6989,18 @@ module Aws::RDS
     #
     # @!attribute [rw] clone_group_id
     #   The ID of the clone group with which the DB cluster is associated.
+    #   For newly created clusters, the ID is typically null.
+    #
+    #   If you clone a DB cluster when the ID is null, the operation
+    #   populates the ID value for the source cluster and the clone because
+    #   both clusters become part of the same clone group. Even if you
+    #   delete the clone cluster, the clone group ID remains for the
+    #   lifetime of the source cluster to show that it was used in a cloning
+    #   operation.
+    #
+    #   For PITR, the clone group ID is inherited from the source cluster.
+    #   For snapshot restore operations, the clone group ID isn't inherited
+    #   from the source cluster.
     #   @return [String]
     #
     # @!attribute [rw] cluster_create_time
@@ -17512,9 +17525,9 @@ module Aws::RDS
     #
     #   The following values are valid for each DB engine:
     #
-    #   * Aurora MySQL - `audit | error | general | slowquery`
+    #   * Aurora MySQL - `audit | error | general | instance | slowquery`
     #
-    #   * Aurora PostgreSQL - `postgresql`
+    #   * Aurora PostgreSQL - `instance | postgresql`
     #
     #   * RDS for MySQL - `error | general | slowquery`
     #
@@ -22991,15 +23004,25 @@ module Aws::RDS
     #
     #   **Aurora MySQL**
     #
-    #   Possible values are `audit`, `error`, `general`, and `slowquery`.
+    #   Possible values are `audit`, `error`, `general`, `instance`, and
+    #   `slowquery`.
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Possible value are `instance` and `postgresql`.
+    #
+    #   For more information about exporting CloudWatch Logs for Amazon RDS,
+    #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the
+    #   *Amazon RDS User Guide*.
     #
     #   For more information about exporting CloudWatch Logs for Amazon
-    #   Aurora, see [Publishing Database Logs to Amazon CloudWatch Logs][1]
+    #   Aurora, see [Publishing Database Logs to Amazon CloudWatch Logs][2]
     #   in the *Amazon Aurora User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #   @return [Array<String>]
     #
     # @!attribute [rw] deletion_protection
@@ -23475,11 +23498,12 @@ module Aws::RDS
     #
     #   **Aurora MySQL**
     #
-    #   Possible values are `audit`, `error`, `general`, and `slowquery`.
+    #   Possible values are `audit`, `error`, `general`, `instance`, and
+    #   `slowquery`.
     #
     #   **Aurora PostgreSQL**
     #
-    #   Possible value is `postgresql`.
+    #   Possible value are `instance` and `postgresql`.
     #
     #   For more information about exporting CloudWatch Logs for Amazon RDS,
     #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the
@@ -24082,11 +24106,12 @@ module Aws::RDS
     #
     #   **Aurora MySQL**
     #
-    #   Possible values are `audit`, `error`, `general`, and `slowquery`.
+    #   Possible values are `audit`, `error`, `general`, `instance`, and
+    #   `slowquery`.
     #
     #   **Aurora PostgreSQL**
     #
-    #   Possible value is `postgresql`.
+    #   Possible value are `instance` and `postgresql`.
     #
     #   For more information about exporting CloudWatch Logs for Amazon RDS,
     #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the

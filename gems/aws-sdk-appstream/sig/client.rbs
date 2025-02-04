@@ -405,7 +405,8 @@ module Aws
                             {
                               connector_type: ("HOMEFOLDERS" | "GOOGLE_DRIVE" | "ONE_DRIVE"),
                               resource_identifier: ::String?,
-                              domains: Array[::String]?
+                              domains: Array[::String]?,
+                              domains_require_admin_consent: Array[::String]?
                             },
                           ],
                           ?redirect_url: ::String,
@@ -1218,7 +1219,8 @@ module Aws
                             {
                               connector_type: ("HOMEFOLDERS" | "GOOGLE_DRIVE" | "ONE_DRIVE"),
                               resource_identifier: ::String?,
-                              domains: Array[::String]?
+                              domains: Array[::String]?,
+                              domains_require_admin_consent: Array[::String]?
                             },
                           ],
                           ?delete_storage_connectors: bool,

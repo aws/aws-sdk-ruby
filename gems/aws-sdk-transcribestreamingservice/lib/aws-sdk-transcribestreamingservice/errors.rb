@@ -27,12 +27,28 @@ module Aws::TranscribeStreamingService
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {ResourceNotFoundException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
+
+    class ResourceNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::TranscribeStreamingService::Types::ResourceNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
 
   end
 end

@@ -7518,6 +7518,11 @@ module Aws::CodeBuild
     #       <note markdown="1"> Works with `WORKFLOW_JOB_QUEUED` events only.
     #
     #        </note>
+    #
+    #       <note markdown="1"> For CodeBuild-hosted Buildkite runner builds, WORKFLOW\_NAME
+    #       filters will filter by pipeline name.
+    #
+    #        </note>
     #   @return [String]
     #
     # @!attribute [rw] pattern
