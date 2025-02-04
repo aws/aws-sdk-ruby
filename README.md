@@ -1,3 +1,112 @@
+# CBOR Performance Testing
+
+This branch was created for RPC v2 CBOR performance testing.
+
+## Setup
+
+To run the tests, you will need to provision and launch an EC2 instance, install
+Ruby and other tools, and clone this repo. You can use the `perf-testing/setup.sh`
+setup script to set up your EC2 instance for testing. The steps are also outlined below.
+
+### Provision EC2
+
+In the AWS console, navigate to EC2 and click Launch Instances. After naming your instance, 
+Select Amazon Linux 2 AMI (HVM) - Kernel 5.10, SSD Volume Type for AMI and 64-bit (x86) for
+Architecture. For instance type, select c6a.8xlarge. Create a new key pair to securely
+connect to your instance. Click Launch instance.
+
+### Set up EC2
+
+After connecting to the instance through SSH, you'll need to set up some tools.
+```
+sudo yum -y install \
+  zip unzip \
+  tar \
+  make \
+  gcc \
+  git \
+  libicu \
+  libxml2 libxml2-devel \
+  gcc-c++ glibc-headers openssl-devel readline libyaml-devel readline-devel zlib zlib-devel libffi-devel \
+  rustc \
+  awscli wget
+```
+
+### Set up Ruby
+
+Next, you'll need to set up Ruby.
+```
+curl -L https://cache.ruby-lang.org/pub/ruby/3.4/ruby-3.4.1.tar.gz | tar xz && \
+cd ruby-3.4.1 && \
+  ./configure --enable-yjit && make && make install
+```
+Verify Ruby is set up correctly by running `ruby -v`. You can also verify that YJIT was 
+enabled correctly by running `ruby --yjit -v`.
+```
+~$ ruby -v
+ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +PRISM [x86_64-linux]
+~$ ruby --yjit -v
+ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +YJIT +PRISM [x86_64-linux]
+```
+
+### Clone Repo
+
+Next, you'll need to clone this repo.
+```
+cd ..
+
+git clone https://github.com/aws/aws-sdk-ruby.git
+cd aws-sdk-ruby
+git switch -c cbor-perf-testing
+```
+
+### Install Gems
+
+Finally, install any necessary gems before running the test.
+```
+bundle config set —local path 'vendor/bundle' && bundle install
+```
+
+## Running Tests
+
+Before running the tests, ensure you have exported your AWS credentials.
+
+To prevent SSH disconnections from interrupting the tests, you can use `screen` to keep the
+test running in the background even if the SSH connection becomes interrupted. Simply run
+```
+screen
+```
+and a new window will be created.
+
+To run the tests, start in the top level directory (`aws-sdk-ruby`). Then run
+```
+bundle exec bash perf-testing/run-perf-tests.sh 500
+```
+which will run the tests with 500 iterations. Change the number of iterations if necessary.
+
+Then hit the `Ctrl-a d` keys to detach the session and return to the original window. The
+tests will continue to run in the background.
+
+To resume the testing session, run
+```
+screen -r
+```
+and the detached session will be reattached.
+
+Test results are stored in the `perf-testing/test-output` directory, with the results for
+each test suite stored in respective subdirectories. The combined testing data can be
+found in the `perf-testing/test-output/combined` directory.
+
+To copy the results to your local machine, you can use `scp`. You'll need your pem key which
+you created while setting up the EC2 instance, your EC2 username (or default `ec2-user`)
+and EC2 IP (found in the AWS console), and the path to the `test-output` directory.
+
+On your local machine, run 
+```
+scp -i your_key.pem -r your_ec2_username@your_ec2_ip:/path/to/test-output /local/path
+```
+to copy the `test-output` directory to your local machine at `/local/path`.
+
 # AWS SDK for Ruby - Version 3
 
 [![Gem Version](https://badge.fury.io/rb/aws-sdk-core.svg)](https://badge.fury.io/rb/aws-sdk-core)

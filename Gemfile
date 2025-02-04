@@ -18,6 +18,7 @@ gem 'json', '>= 2.4.0' # due to load_file support
 gem 'nokogiri', '>= 1.6.8.1'
 gem 'oga'
 gem 'rexml'
+gem 'base64'
 # These protocol parsers do not have java gems
 unless defined?(JRUBY_VERSION)
   gem 'libxml-ruby'
