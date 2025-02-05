@@ -67,7 +67,7 @@ module BuildTools
     api('CloudFront') do |api|
 
       api['shapes'].each do |_, shape|
-        if shape['members'] && shape['members']['MaxItems']
+        if shape['members'] && shape['members']['MaxItems'] && shape['members']['MaxItems']['shape'] == 'string'
           shape['members']['MaxItems']['shape'] = 'integer'
         end
       end
