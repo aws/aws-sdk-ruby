@@ -234,6 +234,19 @@ module Aws::CloudFormation
       SENSITIVE: []
     end
 
+    class CreateStackRefactorInput
+      attr_accessor description: ::String
+      attr_accessor enable_stack_creation: bool
+      attr_accessor resource_mappings: ::Array[Types::ResourceMapping]
+      attr_accessor stack_definitions: ::Array[Types::StackDefinition]
+      SENSITIVE: []
+    end
+
+    class CreateStackRefactorOutput
+      attr_accessor stack_refactor_id: ::String
+      SENSITIVE: []
+    end
+
     class CreateStackSetInput
       attr_accessor stack_set_name: ::String
       attr_accessor description: ::String
@@ -510,6 +523,22 @@ module Aws::CloudFormation
       SENSITIVE: []
     end
 
+    class DescribeStackRefactorInput
+      attr_accessor stack_refactor_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStackRefactorOutput
+      attr_accessor description: ::String
+      attr_accessor stack_refactor_id: ::String
+      attr_accessor stack_ids: ::Array[::String]
+      attr_accessor execution_status: ("UNAVAILABLE" | "AVAILABLE" | "OBSOLETE" | "EXECUTE_IN_PROGRESS" | "EXECUTE_COMPLETE" | "EXECUTE_FAILED" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_COMPLETE" | "ROLLBACK_FAILED")
+      attr_accessor execution_status_reason: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED" | "DELETE_IN_PROGRESS" | "DELETE_COMPLETE" | "DELETE_FAILED")
+      attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
     class DescribeStackResourceDriftsInput
       attr_accessor stack_name: ::String
       attr_accessor stack_resource_drift_status_filters: ::Array[("IN_SYNC" | "MODIFIED" | "DELETED" | "NOT_CHECKED")]
@@ -693,6 +722,11 @@ module Aws::CloudFormation
     end
 
     class ExecuteChangeSetOutput < Aws::EmptyStructure
+    end
+
+    class ExecuteStackRefactorInput
+      attr_accessor stack_refactor_id: ::String
+      SENSITIVE: []
     end
 
     class Export
@@ -945,6 +979,32 @@ module Aws::CloudFormation
 
     class ListStackInstancesOutput
       attr_accessor summaries: ::Array[Types::StackInstanceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStackRefactorActionsInput
+      attr_accessor stack_refactor_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListStackRefactorActionsOutput
+      attr_accessor stack_refactor_actions: ::Array[Types::StackRefactorAction]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStackRefactorsInput
+      attr_accessor execution_status_filter: ::Array[("UNAVAILABLE" | "AVAILABLE" | "OBSOLETE" | "EXECUTE_IN_PROGRESS" | "EXECUTE_COMPLETE" | "EXECUTE_FAILED" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_COMPLETE" | "ROLLBACK_FAILED")]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListStackRefactorsOutput
+      attr_accessor stack_refactor_summaries: ::Array[Types::StackRefactorSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -1273,6 +1333,18 @@ module Aws::CloudFormation
       SENSITIVE: []
     end
 
+    class ResourceLocation
+      attr_accessor stack_name: ::String
+      attr_accessor logical_resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceMapping
+      attr_accessor source: Types::ResourceLocation
+      attr_accessor destination: Types::ResourceLocation
+      SENSITIVE: []
+    end
+
     class ResourceScanInProgressException < Aws::EmptyStructure
     end
 
@@ -1417,6 +1489,13 @@ module Aws::CloudFormation
       SENSITIVE: []
     end
 
+    class StackDefinition
+      attr_accessor stack_name: ::String
+      attr_accessor template_body: ::String
+      attr_accessor template_url: ::String
+      SENSITIVE: []
+    end
+
     class StackDriftInformation
       attr_accessor stack_drift_status: ("DRIFTED" | "IN_SYNC" | "UNKNOWN" | "NOT_CHECKED")
       attr_accessor last_check_timestamp: ::Time
@@ -1437,7 +1516,7 @@ module Aws::CloudFormation
       attr_accessor physical_resource_id: ::String
       attr_accessor resource_type: ::String
       attr_accessor timestamp: ::Time
-      attr_accessor resource_status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "CREATE_COMPLETE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETE_COMPLETE" | "DELETE_SKIPPED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED" | "UPDATE_COMPLETE" | "IMPORT_FAILED" | "IMPORT_COMPLETE" | "IMPORT_IN_PROGRESS" | "IMPORT_ROLLBACK_IN_PROGRESS" | "IMPORT_ROLLBACK_FAILED" | "IMPORT_ROLLBACK_COMPLETE" | "UPDATE_ROLLBACK_IN_PROGRESS" | "UPDATE_ROLLBACK_COMPLETE" | "UPDATE_ROLLBACK_FAILED" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_COMPLETE" | "ROLLBACK_FAILED")
+      attr_accessor resource_status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "CREATE_COMPLETE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETE_COMPLETE" | "DELETE_SKIPPED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED" | "UPDATE_COMPLETE" | "IMPORT_FAILED" | "IMPORT_COMPLETE" | "IMPORT_IN_PROGRESS" | "IMPORT_ROLLBACK_IN_PROGRESS" | "IMPORT_ROLLBACK_FAILED" | "IMPORT_ROLLBACK_COMPLETE" | "EXPORT_FAILED" | "EXPORT_COMPLETE" | "EXPORT_IN_PROGRESS" | "EXPORT_ROLLBACK_IN_PROGRESS" | "EXPORT_ROLLBACK_FAILED" | "EXPORT_ROLLBACK_COMPLETE" | "UPDATE_ROLLBACK_IN_PROGRESS" | "UPDATE_ROLLBACK_COMPLETE" | "UPDATE_ROLLBACK_FAILED" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_COMPLETE" | "ROLLBACK_FAILED")
       attr_accessor resource_status_reason: ::String
       attr_accessor resource_properties: ::String
       attr_accessor client_request_token: ::String
@@ -1510,6 +1589,33 @@ module Aws::CloudFormation
     class StackNotFoundException < Aws::EmptyStructure
     end
 
+    class StackRefactorAction
+      attr_accessor action: ("MOVE" | "CREATE")
+      attr_accessor entity: ("RESOURCE" | "STACK")
+      attr_accessor physical_resource_id: ::String
+      attr_accessor resource_identifier: ::String
+      attr_accessor description: ::String
+      attr_accessor detection: ("AUTO" | "MANUAL")
+      attr_accessor detection_reason: ::String
+      attr_accessor tag_resources: ::Array[Types::Tag]
+      attr_accessor untag_resources: ::Array[::String]
+      attr_accessor resource_mapping: Types::ResourceMapping
+      SENSITIVE: []
+    end
+
+    class StackRefactorNotFoundException < Aws::EmptyStructure
+    end
+
+    class StackRefactorSummary
+      attr_accessor stack_refactor_id: ::String
+      attr_accessor description: ::String
+      attr_accessor execution_status: ("UNAVAILABLE" | "AVAILABLE" | "OBSOLETE" | "EXECUTE_IN_PROGRESS" | "EXECUTE_COMPLETE" | "EXECUTE_FAILED" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_COMPLETE" | "ROLLBACK_FAILED")
+      attr_accessor execution_status_reason: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED" | "DELETE_IN_PROGRESS" | "DELETE_COMPLETE" | "DELETE_FAILED")
+      attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
     class StackResource
       attr_accessor stack_name: ::String
       attr_accessor stack_id: ::String
@@ -1517,7 +1623,7 @@ module Aws::CloudFormation
       attr_accessor physical_resource_id: ::String
       attr_accessor resource_type: ::String
       attr_accessor timestamp: ::Time
-      attr_accessor resource_status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "CREATE_COMPLETE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETE_COMPLETE" | "DELETE_SKIPPED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED" | "UPDATE_COMPLETE" | "IMPORT_FAILED" | "IMPORT_COMPLETE" | "IMPORT_IN_PROGRESS" | "IMPORT_ROLLBACK_IN_PROGRESS" | "IMPORT_ROLLBACK_FAILED" | "IMPORT_ROLLBACK_COMPLETE" | "UPDATE_ROLLBACK_IN_PROGRESS" | "UPDATE_ROLLBACK_COMPLETE" | "UPDATE_ROLLBACK_FAILED" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_COMPLETE" | "ROLLBACK_FAILED")
+      attr_accessor resource_status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "CREATE_COMPLETE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETE_COMPLETE" | "DELETE_SKIPPED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED" | "UPDATE_COMPLETE" | "IMPORT_FAILED" | "IMPORT_COMPLETE" | "IMPORT_IN_PROGRESS" | "IMPORT_ROLLBACK_IN_PROGRESS" | "IMPORT_ROLLBACK_FAILED" | "IMPORT_ROLLBACK_COMPLETE" | "EXPORT_FAILED" | "EXPORT_COMPLETE" | "EXPORT_IN_PROGRESS" | "EXPORT_ROLLBACK_IN_PROGRESS" | "EXPORT_ROLLBACK_FAILED" | "EXPORT_ROLLBACK_COMPLETE" | "UPDATE_ROLLBACK_IN_PROGRESS" | "UPDATE_ROLLBACK_COMPLETE" | "UPDATE_ROLLBACK_FAILED" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_COMPLETE" | "ROLLBACK_FAILED")
       attr_accessor resource_status_reason: ::String
       attr_accessor description: ::String
       attr_accessor drift_information: Types::StackResourceDriftInformation
@@ -1532,7 +1638,7 @@ module Aws::CloudFormation
       attr_accessor physical_resource_id: ::String
       attr_accessor resource_type: ::String
       attr_accessor last_updated_timestamp: ::Time
-      attr_accessor resource_status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "CREATE_COMPLETE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETE_COMPLETE" | "DELETE_SKIPPED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED" | "UPDATE_COMPLETE" | "IMPORT_FAILED" | "IMPORT_COMPLETE" | "IMPORT_IN_PROGRESS" | "IMPORT_ROLLBACK_IN_PROGRESS" | "IMPORT_ROLLBACK_FAILED" | "IMPORT_ROLLBACK_COMPLETE" | "UPDATE_ROLLBACK_IN_PROGRESS" | "UPDATE_ROLLBACK_COMPLETE" | "UPDATE_ROLLBACK_FAILED" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_COMPLETE" | "ROLLBACK_FAILED")
+      attr_accessor resource_status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "CREATE_COMPLETE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETE_COMPLETE" | "DELETE_SKIPPED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED" | "UPDATE_COMPLETE" | "IMPORT_FAILED" | "IMPORT_COMPLETE" | "IMPORT_IN_PROGRESS" | "IMPORT_ROLLBACK_IN_PROGRESS" | "IMPORT_ROLLBACK_FAILED" | "IMPORT_ROLLBACK_COMPLETE" | "EXPORT_FAILED" | "EXPORT_COMPLETE" | "EXPORT_IN_PROGRESS" | "EXPORT_ROLLBACK_IN_PROGRESS" | "EXPORT_ROLLBACK_FAILED" | "EXPORT_ROLLBACK_COMPLETE" | "UPDATE_ROLLBACK_IN_PROGRESS" | "UPDATE_ROLLBACK_COMPLETE" | "UPDATE_ROLLBACK_FAILED" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_COMPLETE" | "ROLLBACK_FAILED")
       attr_accessor resource_status_reason: ::String
       attr_accessor description: ::String
       attr_accessor metadata: ::String
@@ -1573,7 +1679,7 @@ module Aws::CloudFormation
       attr_accessor physical_resource_id: ::String
       attr_accessor resource_type: ::String
       attr_accessor last_updated_timestamp: ::Time
-      attr_accessor resource_status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "CREATE_COMPLETE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETE_COMPLETE" | "DELETE_SKIPPED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED" | "UPDATE_COMPLETE" | "IMPORT_FAILED" | "IMPORT_COMPLETE" | "IMPORT_IN_PROGRESS" | "IMPORT_ROLLBACK_IN_PROGRESS" | "IMPORT_ROLLBACK_FAILED" | "IMPORT_ROLLBACK_COMPLETE" | "UPDATE_ROLLBACK_IN_PROGRESS" | "UPDATE_ROLLBACK_COMPLETE" | "UPDATE_ROLLBACK_FAILED" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_COMPLETE" | "ROLLBACK_FAILED")
+      attr_accessor resource_status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "CREATE_COMPLETE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETE_COMPLETE" | "DELETE_SKIPPED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED" | "UPDATE_COMPLETE" | "IMPORT_FAILED" | "IMPORT_COMPLETE" | "IMPORT_IN_PROGRESS" | "IMPORT_ROLLBACK_IN_PROGRESS" | "IMPORT_ROLLBACK_FAILED" | "IMPORT_ROLLBACK_COMPLETE" | "EXPORT_FAILED" | "EXPORT_COMPLETE" | "EXPORT_IN_PROGRESS" | "EXPORT_ROLLBACK_IN_PROGRESS" | "EXPORT_ROLLBACK_FAILED" | "EXPORT_ROLLBACK_COMPLETE" | "UPDATE_ROLLBACK_IN_PROGRESS" | "UPDATE_ROLLBACK_COMPLETE" | "UPDATE_ROLLBACK_FAILED" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_COMPLETE" | "ROLLBACK_FAILED")
       attr_accessor resource_status_reason: ::String
       attr_accessor drift_information: Types::StackResourceDriftInformationSummary
       attr_accessor module_info: Types::ModuleInfo

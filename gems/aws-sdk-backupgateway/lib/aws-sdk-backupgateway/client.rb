@@ -1496,7 +1496,7 @@ module Aws::BackupGateway
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-backupgateway'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

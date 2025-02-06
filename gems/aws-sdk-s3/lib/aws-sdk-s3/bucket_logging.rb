@@ -226,7 +226,7 @@ module Aws::S3
     #   (CLI) or Amazon Web Services SDKs, this field is calculated
     #   automatically.
     # @option options [String] :checksum_algorithm
-    #   Indicates the algorithm used to create the checksum for the object
+    #   Indicates the algorithm used to create the checksum for the request
     #   when you use the SDK. This header will not provide any additional
     #   functionality if you don't use the SDK. When you send this header,
     #   there must be a corresponding `x-amz-checksum` or `x-amz-trailer`

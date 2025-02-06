@@ -470,6 +470,75 @@ module Aws::ConnectCases
 
     # @!group API Operations
 
+    # Gets a batch of case rules. In the Amazon Connect admin website, case
+    # rules are known as *case field conditions*. For more information about
+    # case field conditions, see [Add case field conditions to a case
+    # template][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
+    #
+    # @option params [required, Array<Types::CaseRuleIdentifier>] :case_rules
+    #   List of case rule identifiers.
+    #
+    # @option params [required, String] :domain_id
+    #   Unique identifier of a Cases domain.
+    #
+    # @return [Types::BatchGetCaseRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetCaseRuleResponse#case_rules #case_rules} => Array&lt;Types::GetCaseRuleResponse&gt;
+    #   * {Types::BatchGetCaseRuleResponse#errors #errors} => Array&lt;Types::CaseRuleError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_case_rule({
+    #     case_rules: [ # required
+    #       {
+    #         id: "CaseRuleId", # required
+    #       },
+    #     ],
+    #     domain_id: "DomainId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.case_rules #=> Array
+    #   resp.case_rules[0].case_rule_arn #=> String
+    #   resp.case_rules[0].case_rule_id #=> String
+    #   resp.case_rules[0].created_time #=> Time
+    #   resp.case_rules[0].deleted #=> Boolean
+    #   resp.case_rules[0].description #=> String
+    #   resp.case_rules[0].last_modified_time #=> Time
+    #   resp.case_rules[0].name #=> String
+    #   resp.case_rules[0].rule.required.conditions #=> Array
+    #   resp.case_rules[0].rule.required.conditions[0].equal_to.operand_one.field_id #=> String
+    #   resp.case_rules[0].rule.required.conditions[0].equal_to.operand_two.boolean_value #=> Boolean
+    #   resp.case_rules[0].rule.required.conditions[0].equal_to.operand_two.double_value #=> Float
+    #   resp.case_rules[0].rule.required.conditions[0].equal_to.operand_two.string_value #=> String
+    #   resp.case_rules[0].rule.required.conditions[0].equal_to.result #=> Boolean
+    #   resp.case_rules[0].rule.required.conditions[0].not_equal_to.operand_one.field_id #=> String
+    #   resp.case_rules[0].rule.required.conditions[0].not_equal_to.operand_two.boolean_value #=> Boolean
+    #   resp.case_rules[0].rule.required.conditions[0].not_equal_to.operand_two.double_value #=> Float
+    #   resp.case_rules[0].rule.required.conditions[0].not_equal_to.operand_two.string_value #=> String
+    #   resp.case_rules[0].rule.required.conditions[0].not_equal_to.result #=> Boolean
+    #   resp.case_rules[0].rule.required.default_value #=> Boolean
+    #   resp.case_rules[0].tags #=> Hash
+    #   resp.case_rules[0].tags["String"] #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].error_code #=> String
+    #   resp.errors[0].id #=> String
+    #   resp.errors[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/BatchGetCaseRule AWS API Documentation
+    #
+    # @overload batch_get_case_rule(params = {})
+    # @param [Hash] params ({})
+    def batch_get_case_rule(params = {}, options = {})
+      req = build_request(:batch_get_case_rule, params)
+      req.send_request(options)
+    end
+
     # Returns the description for the list of fields in the request
     # parameters.
     #
@@ -575,7 +644,13 @@ module Aws::ConnectCases
     #
     #  </note>
     #
-    #      <p>Creates a case in the specified Cases domain. Case system and custom fields are taken as an array id/value pairs with a declared data types.</p> <p>The following fields are required when creating a case:</p> <ul> <li> <p> <code>customer_id</code> - You must provide the full customer profile ARN in this format: <code>arn:aws:profile:your_AWS_Region:your_AWS_account ID:domains/your_profiles_domain_name/profiles/profile_ID</code> </p> </li> <li> <p> <code>title</code> </p> </li> </ul>
+    # Creates a case in the specified Cases domain. Case system and custom
+    # fields are taken as an array id/value pairs with a declared data
+    # types.
+    #
+    # The following fields are required when creating a case:
+    #
+    #      <ul> <li> <p> <code>customer_id</code> - You must provide the full customer profile ARN in this format: <code>arn:aws:profile:your_AWS_Region:your_AWS_account ID:domains/your_profiles_domain_name/profiles/profile_ID</code> </p> </li> <li> <p> <code>title</code> </p> </li> </ul>
     #
     #
     #
@@ -647,6 +722,89 @@ module Aws::ConnectCases
     # @param [Hash] params ({})
     def create_case(params = {}, options = {})
       req = build_request(:create_case, params)
+      req.send_request(options)
+    end
+
+    # Creates a new case rule. In the Amazon Connect admin website, case
+    # rules are known as *case field conditions*. For more information about
+    # case field conditions, see [Add case field conditions to a case
+    # template][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
+    #
+    # @option params [String] :description
+    #   The description of a case rule.
+    #
+    # @option params [required, String] :domain_id
+    #   Unique identifier of a Cases domain.
+    #
+    # @option params [required, String] :name
+    #   Name of the case rule.
+    #
+    # @option params [required, Types::CaseRuleDetails] :rule
+    #   Represents what rule type should take place, under what conditions.
+    #
+    # @return [Types::CreateCaseRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCaseRuleResponse#case_rule_arn #case_rule_arn} => String
+    #   * {Types::CreateCaseRuleResponse#case_rule_id #case_rule_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_case_rule({
+    #     description: "CaseRuleDescription",
+    #     domain_id: "DomainId", # required
+    #     name: "CaseRuleName", # required
+    #     rule: { # required
+    #       required: {
+    #         conditions: [ # required
+    #           {
+    #             equal_to: {
+    #               operand_one: { # required
+    #                 field_id: "FieldId",
+    #               },
+    #               operand_two: { # required
+    #                 boolean_value: false,
+    #                 double_value: 1.0,
+    #                 empty_value: {
+    #                 },
+    #                 string_value: "OperandTwoStringValueString",
+    #               },
+    #               result: false, # required
+    #             },
+    #             not_equal_to: {
+    #               operand_one: { # required
+    #                 field_id: "FieldId",
+    #               },
+    #               operand_two: { # required
+    #                 boolean_value: false,
+    #                 double_value: 1.0,
+    #                 empty_value: {
+    #                 },
+    #                 string_value: "OperandTwoStringValueString",
+    #               },
+    #               result: false, # required
+    #             },
+    #           },
+    #         ],
+    #         default_value: false, # required
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.case_rule_arn #=> String
+    #   resp.case_rule_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/CreateCaseRule AWS API Documentation
+    #
+    # @overload create_case_rule(params = {})
+    # @param [Hash] params ({})
+    def create_case_rule(params = {}, options = {})
+      req = build_request(:create_case_rule, params)
       req.send_request(options)
     end
 
@@ -838,7 +996,7 @@ module Aws::ConnectCases
     #   [DescribeUser][1] permission on the ARN of the user that you
     #   provide.
     #
-    #       </note>
+    # * The `type` field is reserved for internal use only.
     #
     #  </note>
     #
@@ -912,6 +1070,23 @@ module Aws::ConnectCases
     # Inactive, as indicated by its status. Inactive templates cannot be
     # used to create cases.
     #
+    # Other template APIs are:
+    #
+    # * [DeleteTemplate][1]
+    #
+    # * [GetTemplate][2]
+    #
+    # * [ListTemplates][3]
+    #
+    # * [UpdateTemplate][4]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_DeleteTemplate.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_GetTemplate.html
+    # [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_ListTemplates.html
+    # [4]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_UpdateTemplate.html
+    #
     # @option params [String] :description
     #   A brief description of the template.
     #
@@ -927,6 +1102,14 @@ module Aws::ConnectCases
     # @option params [Array<Types::RequiredField>] :required_fields
     #   A list of fields that must contain a value for a case to be
     #   successfully created with this template.
+    #
+    # @option params [Array<Types::TemplateRule>] :rules
+    #   A list of case rules (also known as [case field conditions][1]) on a
+    #   template.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
     #
     # @option params [String] :status
     #   The status of the template.
@@ -950,6 +1133,12 @@ module Aws::ConnectCases
     #         field_id: "FieldId", # required
     #       },
     #     ],
+    #     rules: [
+    #       {
+    #         case_rule_id: "CaseRuleId", # required
+    #         field_id: "FieldId", # required
+    #       },
+    #     ],
     #     status: "Active", # accepts Active, Inactive
     #   })
     #
@@ -964,6 +1153,39 @@ module Aws::ConnectCases
     # @param [Hash] params ({})
     def create_template(params = {}, options = {})
       req = build_request(:create_template, params)
+      req.send_request(options)
+    end
+
+    # Deletes a case rule. In the Amazon Connect admin website, case rules
+    # are known as *case field conditions*. For more information about case
+    # field conditions, see [Add case field conditions to a case
+    # template][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
+    #
+    # @option params [required, String] :case_rule_id
+    #   Unique identifier of a case rule.
+    #
+    # @option params [required, String] :domain_id
+    #   Unique identifier of a Cases domain.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_case_rule({
+    #     case_rule_id: "CaseRuleId", # required
+    #     domain_id: "DomainId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/DeleteCaseRule AWS API Documentation
+    #
+    # @overload delete_case_rule(params = {})
+    # @param [Hash] params ({})
+    def delete_case_rule(params = {}, options = {})
+      req = build_request(:delete_case_rule, params)
       req.send_request(options)
     end
 
@@ -1362,7 +1584,23 @@ module Aws::ConnectCases
       req.send_request(options)
     end
 
-    # Returns the details for the requested template.
+    # Returns the details for the requested template. Other template APIs
+    # are:
+    #
+    # * [CreateTemplate][1]
+    #
+    # * [DeleteTemplate][2]
+    #
+    # * [ListTemplates][3]
+    #
+    # * [UpdateTemplate][4]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateTemplate.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_DeleteTemplate.html
+    # [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_ListTemplates.html
+    # [4]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_UpdateTemplate.html
     #
     # @option params [required, String] :domain_id
     #   The unique identifier of the Cases domain.
@@ -1379,6 +1617,7 @@ module Aws::ConnectCases
     #   * {Types::GetTemplateResponse#layout_configuration #layout_configuration} => Types::LayoutConfiguration
     #   * {Types::GetTemplateResponse#name #name} => String
     #   * {Types::GetTemplateResponse#required_fields #required_fields} => Array&lt;Types::RequiredField&gt;
+    #   * {Types::GetTemplateResponse#rules #rules} => Array&lt;Types::TemplateRule&gt;
     #   * {Types::GetTemplateResponse#status #status} => String
     #   * {Types::GetTemplateResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetTemplateResponse#template_arn #template_arn} => String
@@ -1401,6 +1640,9 @@ module Aws::ConnectCases
     #   resp.name #=> String
     #   resp.required_fields #=> Array
     #   resp.required_fields[0].field_id #=> String
+    #   resp.rules #=> Array
+    #   resp.rules[0].case_rule_id #=> String
+    #   resp.rules[0].field_id #=> String
     #   resp.status #=> String, one of "Active", "Inactive"
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
@@ -1413,6 +1655,60 @@ module Aws::ConnectCases
     # @param [Hash] params ({})
     def get_template(params = {}, options = {})
       req = build_request(:get_template, params)
+      req.send_request(options)
+    end
+
+    # Lists all case rules in a Cases domain. In the Amazon Connect admin
+    # website, case rules are known as *case field conditions*. For more
+    # information about case field conditions, see [Add case field
+    # conditions to a case template][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
+    #
+    # @option params [required, String] :domain_id
+    #   Unique identifier of a Cases domain.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @return [Types::ListCaseRulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCaseRulesResponse#case_rules #case_rules} => Array&lt;Types::CaseRuleSummary&gt;
+    #   * {Types::ListCaseRulesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_case_rules({
+    #     domain_id: "DomainId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.case_rules #=> Array
+    #   resp.case_rules[0].case_rule_arn #=> String
+    #   resp.case_rules[0].case_rule_id #=> String
+    #   resp.case_rules[0].description #=> String
+    #   resp.case_rules[0].name #=> String
+    #   resp.case_rules[0].rule_type #=> String, one of "Required"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/ListCaseRules AWS API Documentation
+    #
+    # @overload list_case_rules(params = {})
+    # @param [Hash] params ({})
+    def list_case_rules(params = {}, options = {})
+      req = build_request(:list_case_rules, params)
       req.send_request(options)
     end
 
@@ -1683,6 +1979,23 @@ module Aws::ConnectCases
 
     # Lists all of the templates in a Cases domain. Each list item is a
     # condensed summary object of the template.
+    #
+    # Other template APIs are:
+    #
+    # * [CreateTemplate][1]
+    #
+    # * [DeleteTemplate][2]
+    #
+    # * [GetTemplate][3]
+    #
+    # * [UpdateTemplate][4]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateTemplate.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_DeleteTemplate.html
+    # [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_GetTemplate.html
+    # [4]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_UpdateTemplate.html
     #
     # @option params [required, String] :domain_id
     #   The unique identifier of the Cases domain.
@@ -2089,7 +2402,12 @@ module Aws::ConnectCases
     #
     #  </note>
     #
-    #      <p>Updates the values of fields on a case. Fields to be updated are received as an array of id/value pairs identical to the <code>CreateCase</code> input .</p> <p>If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.</p>
+    # Updates the values of fields on a case. Fields to be updated are
+    # received as an array of id/value pairs identical to the `CreateCase`
+    # input .
+    #
+    # If the action is successful, the service sends back an HTTP 200
+    # response with an empty HTTP body.
     #
     #
     #
@@ -2139,6 +2457,85 @@ module Aws::ConnectCases
     # @param [Hash] params ({})
     def update_case(params = {}, options = {})
       req = build_request(:update_case, params)
+      req.send_request(options)
+    end
+
+    # Updates a case rule. In the Amazon Connect admin website, case rules
+    # are known as *case field conditions*. For more information about case
+    # field conditions, see [Add case field conditions to a case
+    # template][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
+    #
+    # @option params [required, String] :case_rule_id
+    #   Unique identifier of a case rule.
+    #
+    # @option params [String] :description
+    #   Description of a case rule.
+    #
+    # @option params [required, String] :domain_id
+    #   Unique identifier of a Cases domain.
+    #
+    # @option params [String] :name
+    #   Name of the case rule.
+    #
+    # @option params [Types::CaseRuleDetails] :rule
+    #   Represents what rule type should take place, under what conditions.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_case_rule({
+    #     case_rule_id: "CaseRuleId", # required
+    #     description: "CaseRuleDescription",
+    #     domain_id: "DomainId", # required
+    #     name: "CaseRuleName",
+    #     rule: {
+    #       required: {
+    #         conditions: [ # required
+    #           {
+    #             equal_to: {
+    #               operand_one: { # required
+    #                 field_id: "FieldId",
+    #               },
+    #               operand_two: { # required
+    #                 boolean_value: false,
+    #                 double_value: 1.0,
+    #                 empty_value: {
+    #                 },
+    #                 string_value: "OperandTwoStringValueString",
+    #               },
+    #               result: false, # required
+    #             },
+    #             not_equal_to: {
+    #               operand_one: { # required
+    #                 field_id: "FieldId",
+    #               },
+    #               operand_two: { # required
+    #                 boolean_value: false,
+    #                 double_value: 1.0,
+    #                 empty_value: {
+    #                 },
+    #                 string_value: "OperandTwoStringValueString",
+    #               },
+    #               result: false, # required
+    #             },
+    #           },
+    #         ],
+    #         default_value: false, # required
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/UpdateCaseRule AWS API Documentation
+    #
+    # @overload update_case_rule(params = {})
+    # @param [Hash] params ({})
+    def update_case_rule(params = {}, options = {})
+      req = build_request(:update_case_rule, params)
       req.send_request(options)
     end
 
@@ -2260,6 +2657,23 @@ module Aws::ConnectCases
     # given attribute, that attribute is ignored and its current value is
     # preserved.
     #
+    # Other template APIs are:
+    #
+    # * [CreateTemplate][1]
+    #
+    # * [DeleteTemplate][2]
+    #
+    # * [GetTemplate][3]
+    #
+    # * [ListTemplates][4]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateTemplate.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_DeleteTemplate.html
+    # [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_GetTemplate.html
+    # [4]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_ListTemplates.html
+    #
     # @option params [String] :description
     #   A brief description of the template.
     #
@@ -2275,6 +2689,14 @@ module Aws::ConnectCases
     # @option params [Array<Types::RequiredField>] :required_fields
     #   A list of fields that must contain a value for a case to be
     #   successfully created with this template.
+    #
+    # @option params [Array<Types::TemplateRule>] :rules
+    #   A list of case rules (also known as [case field conditions][1]) on a
+    #   template.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html
     #
     # @option params [String] :status
     #   The status of the template.
@@ -2295,6 +2717,12 @@ module Aws::ConnectCases
     #     name: "TemplateName",
     #     required_fields: [
     #       {
+    #         field_id: "FieldId", # required
+    #       },
+    #     ],
+    #     rules: [
+    #       {
+    #         case_rule_id: "CaseRuleId", # required
     #         field_id: "FieldId", # required
     #       },
     #     ],
@@ -2329,7 +2757,7 @@ module Aws::ConnectCases
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connectcases'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

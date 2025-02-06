@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2025-02-06)
+------------------
+
+* Feature - This release adds the ability to conditionally require fields on a template. Check public documentation for more information.
+
 1.37.0 (2025-01-15)
 ------------------
 

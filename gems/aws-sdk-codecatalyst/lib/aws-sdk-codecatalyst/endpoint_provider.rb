@@ -10,14 +10,11 @@
 module Aws::CodeCatalyst
   class EndpointProvider
     def resolve_endpoint(parameters)
-      use_fips = parameters.use_fips
-      region = parameters.region
-      endpoint = parameters.endpoint
-      if Aws::Endpoints::Matchers.set?(endpoint)
-        return Aws::Endpoints::Endpoint.new(url: endpoint, headers: {}, properties: {})
+      if Aws::Endpoints::Matchers.set?(parameters.endpoint)
+        return Aws::Endpoints::Endpoint.new(url: parameters.endpoint, headers: {}, properties: {})
       end
-      if Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(region)) && (partition_result = Aws::Endpoints::Matchers.aws_partition("us-west-2"))
-        if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
+      if Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(parameters.region)) && (partition_result = Aws::Endpoints::Matchers.aws_partition("us-west-2"))
+        if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true)
           if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"), false)
             raise ArgumentError, "Partition does not support FIPS."
           end
@@ -25,8 +22,8 @@ module Aws::CodeCatalyst
         end
         return Aws::Endpoints::Endpoint.new(url: "https://codecatalyst.global.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
       end
-      if Aws::Endpoints::Matchers.set?(region) && (partition_result = Aws::Endpoints::Matchers.aws_partition(region))
-        if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
+      if Aws::Endpoints::Matchers.set?(parameters.region) && (partition_result = Aws::Endpoints::Matchers.aws_partition(parameters.region))
+        if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true)
           if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"), false)
             raise ArgumentError, "Partition does not support FIPS."
           end

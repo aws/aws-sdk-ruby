@@ -56,6 +56,8 @@ module Aws
       end
       class StackNotFoundException < ::Aws::Errors::ServiceError
       end
+      class StackRefactorNotFoundException < ::Aws::Errors::ServiceError
+      end
       class StackSetNotEmptyException < ::Aws::Errors::ServiceError
       end
       class StackSetNotFoundException < ::Aws::Errors::ServiceError

@@ -1219,20 +1219,17 @@ module Aws::S3
     #   Signature Version in Request Authentication][1] in the *Amazon S3 User
     #   Guide*.
     #
-    #   **Directory buckets** - If you specify `x-amz-server-side-encryption`
-    #   with `aws:kms`, the ` x-amz-server-side-encryption-aws-kms-key-id`
-    #   header is implicitly assigned the ID of the KMS symmetric encryption
-    #   customer managed key that's configured for your directory bucket's
-    #   default encryption setting. If you want to specify the `
-    #   x-amz-server-side-encryption-aws-kms-key-id` header explicitly, you
-    #   can only specify it with the ID (Key ID or Key ARN) of the KMS
-    #   customer managed key that's configured for your directory bucket's
-    #   default encryption setting. Otherwise, you get an HTTP `400 Bad
-    #   Request` error. Only use the key ID or key ARN. The key alias format
-    #   of the KMS key isn't supported. Your SSE-KMS configuration can only
-    #   support 1 [customer managed key][2] per directory bucket for the
-    #   lifetime of the bucket. The [Amazon Web Services managed key][3]
-    #   (`aws/s3`) isn't supported.
+    #   **Directory buckets** - To encrypt data using SSE-KMS, it's
+    #   recommended to specify the `x-amz-server-side-encryption` header to
+    #   `aws:kms`. Then, the `x-amz-server-side-encryption-aws-kms-key-id`
+    #   header implicitly uses the bucket's default KMS customer managed key
+    #   ID. If you want to explicitly set the `
+    #   x-amz-server-side-encryption-aws-kms-key-id` header, it must match the
+    #   bucket's default customer managed key (using key ID or ARN, not
+    #   alias). Your SSE-KMS configuration can only support 1 [customer
+    #   managed key][2] per directory bucket's lifetime. The [Amazon Web
+    #   Services managed key][3] (`aws/s3`) isn't supported. Incorrect key
+    #   specification results in an HTTP `400 Bad Request` error.
     #
     #
     #
@@ -1503,7 +1500,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/https:/tools.ietf.org/html/rfc7232
+    #   [1]: https://tools.ietf.org/html/rfc7232
     # @option options [Time,DateTime,Date,Integer,String] :if_match_last_modified_time
     #   If present, the object is deleted only if its modification times
     #   matches the provided `Timestamp`. If the `Timestamp` values do not
@@ -1784,15 +1781,6 @@ module Aws::S3
     #   fails with the HTTP status code `403 Forbidden` (access denied).
     # @option options [String] :checksum_mode
     #   To retrieve the checksum, this mode must be enabled.
-    #
-    #   **General purpose buckets** - In addition, if you enable checksum mode
-    #   and the object is uploaded with a [checksum][1] and encrypted with an
-    #   Key Management Service (KMS) key, you must have permission to use the
-    #   `kms:Decrypt` action to retrieve the checksum.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Checksum.html
     # @return [Types::GetObjectOutput]
     def get(options = {}, &block)
       options = options.merge(
@@ -2253,20 +2241,17 @@ module Aws::S3
     #   `x-amz-server-side-encryption-aws-kms-key-id`, Amazon S3 uses the
     #   Amazon Web Services managed key (`aws/s3`) to protect the data.
     #
-    #   **Directory buckets** - If you specify `x-amz-server-side-encryption`
-    #   with `aws:kms`, the ` x-amz-server-side-encryption-aws-kms-key-id`
-    #   header is implicitly assigned the ID of the KMS symmetric encryption
-    #   customer managed key that's configured for your directory bucket's
-    #   default encryption setting. If you want to specify the `
-    #   x-amz-server-side-encryption-aws-kms-key-id` header explicitly, you
-    #   can only specify it with the ID (Key ID or Key ARN) of the KMS
-    #   customer managed key that's configured for your directory bucket's
-    #   default encryption setting. Otherwise, you get an HTTP `400 Bad
-    #   Request` error. Only use the key ID or key ARN. The key alias format
-    #   of the KMS key isn't supported. Your SSE-KMS configuration can only
-    #   support 1 [customer managed key][1] per directory bucket for the
-    #   lifetime of the bucket. The [Amazon Web Services managed key][2]
-    #   (`aws/s3`) isn't supported.
+    #   **Directory buckets** - To encrypt data using SSE-KMS, it's
+    #   recommended to specify the `x-amz-server-side-encryption` header to
+    #   `aws:kms`. Then, the `x-amz-server-side-encryption-aws-kms-key-id`
+    #   header implicitly uses the bucket's default KMS customer managed key
+    #   ID. If you want to explicitly set the `
+    #   x-amz-server-side-encryption-aws-kms-key-id` header, it must match the
+    #   bucket's default customer managed key (using key ID or ARN, not
+    #   alias). Your SSE-KMS configuration can only support 1 [customer
+    #   managed key][1] per directory bucket's lifetime. The [Amazon Web
+    #   Services managed key][2] (`aws/s3`) isn't supported. Incorrect key
+    #   specification results in an HTTP `400 Bad Request` error.
     #
     #
     #
@@ -2876,20 +2861,17 @@ module Aws::S3
     #   `x-amz-server-side-encryption-aws-kms-key-id`, Amazon S3 uses the
     #   Amazon Web Services managed key (`aws/s3`) to protect the data.
     #
-    #   **Directory buckets** - If you specify `x-amz-server-side-encryption`
-    #   with `aws:kms`, the ` x-amz-server-side-encryption-aws-kms-key-id`
-    #   header is implicitly assigned the ID of the KMS symmetric encryption
-    #   customer managed key that's configured for your directory bucket's
-    #   default encryption setting. If you want to specify the `
-    #   x-amz-server-side-encryption-aws-kms-key-id` header explicitly, you
-    #   can only specify it with the ID (Key ID or Key ARN) of the KMS
-    #   customer managed key that's configured for your directory bucket's
-    #   default encryption setting. Otherwise, you get an HTTP `400 Bad
-    #   Request` error. Only use the key ID or key ARN. The key alias format
-    #   of the KMS key isn't supported. Your SSE-KMS configuration can only
-    #   support 1 [customer managed key][1] per directory bucket for the
-    #   lifetime of the bucket. The [Amazon Web Services managed key][2]
-    #   (`aws/s3`) isn't supported.
+    #   **Directory buckets** - To encrypt data using SSE-KMS, it's
+    #   recommended to specify the `x-amz-server-side-encryption` header to
+    #   `aws:kms`. Then, the `x-amz-server-side-encryption-aws-kms-key-id`
+    #   header implicitly uses the bucket's default KMS customer managed key
+    #   ID. If you want to explicitly set the `
+    #   x-amz-server-side-encryption-aws-kms-key-id` header, it must match the
+    #   bucket's default customer managed key (using key ID or ARN, not
+    #   alias). Your SSE-KMS configuration can only support 1 [customer
+    #   managed key][1] per directory bucket's lifetime. The [Amazon Web
+    #   Services managed key][2] (`aws/s3`) isn't supported. Incorrect key
+    #   specification results in an HTTP `400 Bad Request` error.
     #
     #
     #

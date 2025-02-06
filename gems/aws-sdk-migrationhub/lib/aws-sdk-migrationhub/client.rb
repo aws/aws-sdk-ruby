@@ -1536,7 +1536,7 @@ module Aws::MigrationHub
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-migrationhub'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

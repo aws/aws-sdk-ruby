@@ -134,7 +134,7 @@ module Aws::CloudFormation
       data[:hook_status_reason]
     end
 
-    # Invocation points are points in provisioning logic where hooks are
+    # Invocation points are points in provisioning logic where Hooks are
     # initiated.
     # @return [String]
     def hook_invocation_point

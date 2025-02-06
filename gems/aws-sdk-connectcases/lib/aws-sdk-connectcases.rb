@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:connectcases)
 # structure.
 #
 #     connect_cases = Aws::ConnectCases::Client.new
-#     resp = connect_cases.batch_get_field(params)
+#     resp = connect_cases.batch_get_case_rule(params)
 #
 # See {Client} for more information.
 #
@@ -54,7 +54,7 @@ module Aws::ConnectCases
   autoload :EndpointProvider, 'aws-sdk-connectcases/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-connectcases/endpoints'
 
-  GEM_VERSION = '1.37.0'
+  GEM_VERSION = '1.38.0'
 
 end
 

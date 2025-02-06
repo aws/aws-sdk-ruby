@@ -54,7 +54,7 @@ module Aws::KinesisVideoWebRTCStorage
   autoload :EndpointProvider, 'aws-sdk-kinesisvideowebrtcstorage/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-kinesisvideowebrtcstorage/endpoints'
 
-  GEM_VERSION = '1.27.0'
+  GEM_VERSION = '1.28.0'
 
 end
 

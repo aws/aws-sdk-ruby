@@ -49,6 +49,7 @@ module Aws::CloudFormation
   # * {ResourceScanNotFoundException}
   # * {StackInstanceNotFoundException}
   # * {StackNotFoundException}
+  # * {StackRefactorNotFoundException}
   # * {StackSetNotEmptyException}
   # * {StackSetNotFoundException}
   # * {StaleRequestException}
@@ -282,6 +283,16 @@ module Aws::CloudFormation
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudFormation::Types::StackNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class StackRefactorNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFormation::Types::StackRefactorNotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

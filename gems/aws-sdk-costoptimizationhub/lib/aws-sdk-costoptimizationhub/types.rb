@@ -238,16 +238,35 @@ module Aws::CostOptimizationHub
       include Aws::Structure
     end
 
-    # The EC2 auto scaling group configuration used for recommendations.
+    # The EC2 Auto Scaling group configuration used for recommendations.
     #
     # @!attribute [rw] instance
-    #   Details about the instance.
+    #   Details about the instance for the EC2 Auto Scaling group with a
+    #   single instance type.
     #   @return [Types::InstanceConfiguration]
+    #
+    # @!attribute [rw] mixed_instances
+    #   A list of instance types for an EC2 Auto Scaling group with mixed
+    #   instance types.
+    #   @return [Array<Types::MixedInstanceConfiguration>]
+    #
+    # @!attribute [rw] type
+    #   The type of EC2 Auto Scaling group, showing whether it consists of a
+    #   single instance type or mixed instance types.
+    #   @return [String]
+    #
+    # @!attribute [rw] allocation_strategy
+    #   The strategy used for allocating instances, based on a predefined
+    #   priority order or based on the lowest available price.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cost-optimization-hub-2022-07-26/Ec2AutoScalingGroupConfiguration AWS API Documentation
     #
     class Ec2AutoScalingGroupConfiguration < Struct.new(
-      :instance)
+      :instance,
+      :mixed_instances,
+      :type,
+      :allocation_strategy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -848,10 +867,10 @@ module Aws::CostOptimizationHub
       include Aws::Structure
     end
 
-    # The Instance configuration used for recommendations.
+    # The instance configuration used for recommendations.
     #
     # @!attribute [rw] type
-    #   Details about the type.
+    #   The instance type of the configuration.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cost-optimization-hub-2022-07-26/InstanceConfiguration AWS API Documentation
@@ -1081,6 +1100,21 @@ module Aws::CostOptimizationHub
     class ListRecommendationsResponse < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for the EC2 Auto Scaling group with mixed instance
+    # types.
+    #
+    # @!attribute [rw] type
+    #   The instance type of the configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cost-optimization-hub-2022-07-26/MixedInstanceConfiguration AWS API Documentation
+    #
+    class MixedInstanceConfiguration < Struct.new(
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1759,7 +1793,7 @@ module Aws::CostOptimizationHub
     #   @return [Types::ComputeSavingsPlans]
     #
     # @!attribute [rw] sage_maker_savings_plans
-    #   The SageMaker Savings Plans recommendation details.
+    #   The SageMaker AI Savings Plans recommendation details.
     #   @return [Types::SageMakerSavingsPlans]
     #
     # @!attribute [rw] rds_db_instance

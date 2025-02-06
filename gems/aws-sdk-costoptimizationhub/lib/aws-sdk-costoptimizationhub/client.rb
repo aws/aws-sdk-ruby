@@ -564,7 +564,7 @@ module Aws::CostOptimizationHub
     #   resp.estimated_monthly_cost #=> Float
     #   resp.implementation_effort #=> String, one of "VeryLow", "Low", "Medium", "High", "VeryHigh"
     #   resp.restart_needed #=> Boolean
-    #   resp.action_type #=> String, one of "Rightsize", "Stop", "Upgrade", "PurchaseSavingsPlans", "PurchaseReservedInstances", "MigrateToGraviton", "Delete"
+    #   resp.action_type #=> String, one of "Rightsize", "Stop", "Upgrade", "PurchaseSavingsPlans", "PurchaseReservedInstances", "MigrateToGraviton", "Delete", "ScaleIn"
     #   resp.rollback_possible #=> Boolean
     #   resp.current_resource_details.lambda_function.configuration.compute.v_cpu #=> Float
     #   resp.current_resource_details.lambda_function.configuration.compute.memory_size_in_mb #=> Integer
@@ -629,6 +629,10 @@ module Aws::CostOptimizationHub
     #   resp.current_resource_details.ebs_volume.cost_calculation.pricing.estimated_discounts.other_discount #=> Float
     #   resp.current_resource_details.ebs_volume.cost_calculation.pricing.estimated_cost_after_discounts #=> Float
     #   resp.current_resource_details.ec2_auto_scaling_group.configuration.instance.type #=> String
+    #   resp.current_resource_details.ec2_auto_scaling_group.configuration.mixed_instances #=> Array
+    #   resp.current_resource_details.ec2_auto_scaling_group.configuration.mixed_instances[0].type #=> String
+    #   resp.current_resource_details.ec2_auto_scaling_group.configuration.type #=> String, one of "SingleInstanceType", "MixedInstanceTypes"
+    #   resp.current_resource_details.ec2_auto_scaling_group.configuration.allocation_strategy #=> String, one of "Prioritized", "LowestPrice"
     #   resp.current_resource_details.ec2_auto_scaling_group.cost_calculation.usages #=> Array
     #   resp.current_resource_details.ec2_auto_scaling_group.cost_calculation.usages[0].usage_type #=> String
     #   resp.current_resource_details.ec2_auto_scaling_group.cost_calculation.usages[0].usage_amount #=> Float
@@ -850,6 +854,10 @@ module Aws::CostOptimizationHub
     #   resp.recommended_resource_details.ebs_volume.cost_calculation.pricing.estimated_discounts.other_discount #=> Float
     #   resp.recommended_resource_details.ebs_volume.cost_calculation.pricing.estimated_cost_after_discounts #=> Float
     #   resp.recommended_resource_details.ec2_auto_scaling_group.configuration.instance.type #=> String
+    #   resp.recommended_resource_details.ec2_auto_scaling_group.configuration.mixed_instances #=> Array
+    #   resp.recommended_resource_details.ec2_auto_scaling_group.configuration.mixed_instances[0].type #=> String
+    #   resp.recommended_resource_details.ec2_auto_scaling_group.configuration.type #=> String, one of "SingleInstanceType", "MixedInstanceTypes"
+    #   resp.recommended_resource_details.ec2_auto_scaling_group.configuration.allocation_strategy #=> String, one of "Prioritized", "LowestPrice"
     #   resp.recommended_resource_details.ec2_auto_scaling_group.cost_calculation.usages #=> Array
     #   resp.recommended_resource_details.ec2_auto_scaling_group.cost_calculation.usages[0].usage_type #=> String
     #   resp.recommended_resource_details.ec2_auto_scaling_group.cost_calculation.usages[0].usage_amount #=> Float
@@ -1120,7 +1128,7 @@ module Aws::CostOptimizationHub
     #       account_ids: ["AccountId"],
     #       regions: ["String"],
     #       resource_types: ["Ec2Instance"], # accepts Ec2Instance, LambdaFunction, EbsVolume, EcsService, Ec2AutoScalingGroup, Ec2InstanceSavingsPlans, ComputeSavingsPlans, SageMakerSavingsPlans, Ec2ReservedInstances, RdsReservedInstances, OpenSearchReservedInstances, RedshiftReservedInstances, ElastiCacheReservedInstances, RdsDbInstanceStorage, RdsDbInstance
-    #       action_types: ["Rightsize"], # accepts Rightsize, Stop, Upgrade, PurchaseSavingsPlans, PurchaseReservedInstances, MigrateToGraviton, Delete
+    #       action_types: ["Rightsize"], # accepts Rightsize, Stop, Upgrade, PurchaseSavingsPlans, PurchaseReservedInstances, MigrateToGraviton, Delete, ScaleIn
     #       tags: [
     #         {
     #           key: "String",
@@ -1194,7 +1202,7 @@ module Aws::CostOptimizationHub
     #       account_ids: ["AccountId"],
     #       regions: ["String"],
     #       resource_types: ["Ec2Instance"], # accepts Ec2Instance, LambdaFunction, EbsVolume, EcsService, Ec2AutoScalingGroup, Ec2InstanceSavingsPlans, ComputeSavingsPlans, SageMakerSavingsPlans, Ec2ReservedInstances, RdsReservedInstances, OpenSearchReservedInstances, RedshiftReservedInstances, ElastiCacheReservedInstances, RdsDbInstanceStorage, RdsDbInstance
-    #       action_types: ["Rightsize"], # accepts Rightsize, Stop, Upgrade, PurchaseSavingsPlans, PurchaseReservedInstances, MigrateToGraviton, Delete
+    #       action_types: ["Rightsize"], # accepts Rightsize, Stop, Upgrade, PurchaseSavingsPlans, PurchaseReservedInstances, MigrateToGraviton, Delete, ScaleIn
     #       tags: [
     #         {
     #           key: "String",
@@ -1348,7 +1356,7 @@ module Aws::CostOptimizationHub
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-costoptimizationhub'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

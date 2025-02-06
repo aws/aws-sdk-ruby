@@ -28,6 +28,10 @@ module Aws::ConnectCases
     AuditEventPerformedBy = Shapes::StructureShape.new(name: 'AuditEventPerformedBy')
     AuditEventType = Shapes::StringShape.new(name: 'AuditEventType')
     BasicLayout = Shapes::StructureShape.new(name: 'BasicLayout')
+    BatchGetCaseRuleRequest = Shapes::StructureShape.new(name: 'BatchGetCaseRuleRequest')
+    BatchGetCaseRuleResponse = Shapes::StructureShape.new(name: 'BatchGetCaseRuleResponse')
+    BatchGetCaseRuleResponseCaseRulesList = Shapes::ListShape.new(name: 'BatchGetCaseRuleResponseCaseRulesList')
+    BatchGetCaseRuleResponseErrorsList = Shapes::ListShape.new(name: 'BatchGetCaseRuleResponseErrorsList')
     BatchGetFieldIdentifierList = Shapes::ListShape.new(name: 'BatchGetFieldIdentifierList')
     BatchGetFieldRequest = Shapes::StructureShape.new(name: 'BatchGetFieldRequest')
     BatchGetFieldResponse = Shapes::StructureShape.new(name: 'BatchGetFieldResponse')
@@ -38,6 +42,9 @@ module Aws::ConnectCases
     BatchPutFieldOptionsResponse = Shapes::StructureShape.new(name: 'BatchPutFieldOptionsResponse')
     BatchPutFieldOptionsResponseErrorsList = Shapes::ListShape.new(name: 'BatchPutFieldOptionsResponseErrorsList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BooleanCondition = Shapes::UnionShape.new(name: 'BooleanCondition')
+    BooleanConditionList = Shapes::ListShape.new(name: 'BooleanConditionList')
+    BooleanOperands = Shapes::StructureShape.new(name: 'BooleanOperands')
     CaseArn = Shapes::StringShape.new(name: 'CaseArn')
     CaseEventIncludedData = Shapes::StructureShape.new(name: 'CaseEventIncludedData')
     CaseEventIncludedDataFieldsList = Shapes::ListShape.new(name: 'CaseEventIncludedDataFieldsList')
@@ -45,6 +52,15 @@ module Aws::ConnectCases
     CaseFilterAndAllList = Shapes::ListShape.new(name: 'CaseFilterAndAllList')
     CaseFilterOrAllList = Shapes::ListShape.new(name: 'CaseFilterOrAllList')
     CaseId = Shapes::StringShape.new(name: 'CaseId')
+    CaseRuleArn = Shapes::StringShape.new(name: 'CaseRuleArn')
+    CaseRuleDescription = Shapes::StringShape.new(name: 'CaseRuleDescription')
+    CaseRuleDetails = Shapes::UnionShape.new(name: 'CaseRuleDetails')
+    CaseRuleError = Shapes::StructureShape.new(name: 'CaseRuleError')
+    CaseRuleId = Shapes::StringShape.new(name: 'CaseRuleId')
+    CaseRuleIdentifier = Shapes::StructureShape.new(name: 'CaseRuleIdentifier')
+    CaseRuleIdentifierList = Shapes::ListShape.new(name: 'CaseRuleIdentifierList')
+    CaseRuleName = Shapes::StringShape.new(name: 'CaseRuleName')
+    CaseRuleSummary = Shapes::StructureShape.new(name: 'CaseRuleSummary')
     CaseSummary = Shapes::StructureShape.new(name: 'CaseSummary')
     Channel = Shapes::StringShape.new(name: 'Channel')
     CommentBody = Shapes::StringShape.new(name: 'CommentBody')
@@ -62,6 +78,8 @@ module Aws::ConnectCases
     CreateCaseRequestClientTokenString = Shapes::StringShape.new(name: 'CreateCaseRequestClientTokenString')
     CreateCaseRequestFieldsList = Shapes::ListShape.new(name: 'CreateCaseRequestFieldsList')
     CreateCaseResponse = Shapes::StructureShape.new(name: 'CreateCaseResponse')
+    CreateCaseRuleRequest = Shapes::StructureShape.new(name: 'CreateCaseRuleRequest')
+    CreateCaseRuleResponse = Shapes::StructureShape.new(name: 'CreateCaseRuleResponse')
     CreateDomainRequest = Shapes::StructureShape.new(name: 'CreateDomainRequest')
     CreateDomainResponse = Shapes::StructureShape.new(name: 'CreateDomainResponse')
     CreateFieldRequest = Shapes::StructureShape.new(name: 'CreateFieldRequest')
@@ -73,6 +91,8 @@ module Aws::ConnectCases
     CreateTemplateRequest = Shapes::StructureShape.new(name: 'CreateTemplateRequest')
     CreateTemplateResponse = Shapes::StructureShape.new(name: 'CreateTemplateResponse')
     CreatedTime = Shapes::TimestampShape.new(name: 'CreatedTime', timestampFormat: "iso8601")
+    DeleteCaseRuleRequest = Shapes::StructureShape.new(name: 'DeleteCaseRuleRequest')
+    DeleteCaseRuleResponse = Shapes::StructureShape.new(name: 'DeleteCaseRuleResponse')
     DeleteDomainRequest = Shapes::StructureShape.new(name: 'DeleteDomainRequest')
     DeleteDomainResponse = Shapes::StructureShape.new(name: 'DeleteDomainResponse')
     DeleteFieldRequest = Shapes::StructureShape.new(name: 'DeleteFieldRequest')
@@ -90,6 +110,7 @@ module Aws::ConnectCases
     DomainSummaryList = Shapes::ListShape.new(name: 'DomainSummaryList')
     Double = Shapes::FloatShape.new(name: 'Double')
     EmptyFieldValue = Shapes::StructureShape.new(name: 'EmptyFieldValue')
+    EmptyOperandValue = Shapes::StructureShape.new(name: 'EmptyOperandValue')
     EventBridgeConfiguration = Shapes::StructureShape.new(name: 'EventBridgeConfiguration')
     EventIncludedData = Shapes::StructureShape.new(name: 'EventIncludedData')
     FieldArn = Shapes::StringShape.new(name: 'FieldArn')
@@ -127,6 +148,7 @@ module Aws::ConnectCases
     GetCaseRequestFieldsList = Shapes::ListShape.new(name: 'GetCaseRequestFieldsList')
     GetCaseResponse = Shapes::StructureShape.new(name: 'GetCaseResponse')
     GetCaseResponseFieldsList = Shapes::ListShape.new(name: 'GetCaseResponseFieldsList')
+    GetCaseRuleResponse = Shapes::StructureShape.new(name: 'GetCaseRuleResponse')
     GetDomainRequest = Shapes::StructureShape.new(name: 'GetDomainRequest')
     GetDomainResponse = Shapes::StructureShape.new(name: 'GetDomainResponse')
     GetFieldResponse = Shapes::StructureShape.new(name: 'GetFieldResponse')
@@ -146,6 +168,9 @@ module Aws::ConnectCases
     LayoutSections = Shapes::StructureShape.new(name: 'LayoutSections')
     LayoutSummary = Shapes::StructureShape.new(name: 'LayoutSummary')
     LayoutSummaryList = Shapes::ListShape.new(name: 'LayoutSummaryList')
+    ListCaseRulesRequest = Shapes::StructureShape.new(name: 'ListCaseRulesRequest')
+    ListCaseRulesResponse = Shapes::StructureShape.new(name: 'ListCaseRulesResponse')
+    ListCaseRulesResponseCaseRulesList = Shapes::ListShape.new(name: 'ListCaseRulesResponseCaseRulesList')
     ListCasesForContactRequest = Shapes::StructureShape.new(name: 'ListCasesForContactRequest')
     ListCasesForContactRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListCasesForContactRequestMaxResultsInteger')
     ListCasesForContactResponse = Shapes::StructureShape.new(name: 'ListCasesForContactResponse')
@@ -167,6 +192,9 @@ module Aws::ConnectCases
     ListTemplatesResponseTemplatesList = Shapes::ListShape.new(name: 'ListTemplatesResponseTemplatesList')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    OperandOne = Shapes::UnionShape.new(name: 'OperandOne')
+    OperandTwo = Shapes::UnionShape.new(name: 'OperandTwo')
+    OperandTwoStringValueString = Shapes::StringShape.new(name: 'OperandTwoStringValueString')
     Order = Shapes::StringShape.new(name: 'Order')
     PutCaseEventConfigurationRequest = Shapes::StructureShape.new(name: 'PutCaseEventConfigurationRequest')
     PutCaseEventConfigurationResponse = Shapes::StructureShape.new(name: 'PutCaseEventConfigurationResponse')
@@ -177,9 +205,11 @@ module Aws::ConnectCases
     RelatedItemInputContent = Shapes::UnionShape.new(name: 'RelatedItemInputContent')
     RelatedItemType = Shapes::StringShape.new(name: 'RelatedItemType')
     RelatedItemTypeFilter = Shapes::UnionShape.new(name: 'RelatedItemTypeFilter')
+    RequiredCaseRule = Shapes::StructureShape.new(name: 'RequiredCaseRule')
     RequiredField = Shapes::StructureShape.new(name: 'RequiredField')
     RequiredFieldList = Shapes::ListShape.new(name: 'RequiredFieldList')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    RuleType = Shapes::StringShape.new(name: 'RuleType')
     SearchCasesRequest = Shapes::StructureShape.new(name: 'SearchCasesRequest')
     SearchCasesRequestFieldsList = Shapes::ListShape.new(name: 'SearchCasesRequestFieldsList')
     SearchCasesRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'SearchCasesRequestMaxResultsInteger')
@@ -205,9 +235,11 @@ module Aws::ConnectCases
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     Tags = Shapes::MapShape.new(name: 'Tags')
     TemplateArn = Shapes::StringShape.new(name: 'TemplateArn')
+    TemplateCaseRuleList = Shapes::ListShape.new(name: 'TemplateCaseRuleList')
     TemplateDescription = Shapes::StringShape.new(name: 'TemplateDescription')
     TemplateId = Shapes::StringShape.new(name: 'TemplateId')
     TemplateName = Shapes::StringShape.new(name: 'TemplateName')
+    TemplateRule = Shapes::StructureShape.new(name: 'TemplateRule')
     TemplateStatus = Shapes::StringShape.new(name: 'TemplateStatus')
     TemplateStatusFilters = Shapes::ListShape.new(name: 'TemplateStatusFilters')
     TemplateSummary = Shapes::StructureShape.new(name: 'TemplateSummary')
@@ -216,6 +248,8 @@ module Aws::ConnectCases
     UpdateCaseRequest = Shapes::StructureShape.new(name: 'UpdateCaseRequest')
     UpdateCaseRequestFieldsList = Shapes::ListShape.new(name: 'UpdateCaseRequestFieldsList')
     UpdateCaseResponse = Shapes::StructureShape.new(name: 'UpdateCaseResponse')
+    UpdateCaseRuleRequest = Shapes::StructureShape.new(name: 'UpdateCaseRuleRequest')
+    UpdateCaseRuleResponse = Shapes::StructureShape.new(name: 'UpdateCaseRuleResponse')
     UpdateFieldRequest = Shapes::StructureShape.new(name: 'UpdateFieldRequest')
     UpdateFieldResponse = Shapes::StructureShape.new(name: 'UpdateFieldResponse')
     UpdateLayoutRequest = Shapes::StructureShape.new(name: 'UpdateLayoutRequest')
@@ -268,6 +302,18 @@ module Aws::ConnectCases
     BasicLayout.add_member(:top_panel, Shapes::ShapeRef.new(shape: LayoutSections, location_name: "topPanel"))
     BasicLayout.struct_class = Types::BasicLayout
 
+    BatchGetCaseRuleRequest.add_member(:case_rules, Shapes::ShapeRef.new(shape: CaseRuleIdentifierList, required: true, location_name: "caseRules"))
+    BatchGetCaseRuleRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
+    BatchGetCaseRuleRequest.struct_class = Types::BatchGetCaseRuleRequest
+
+    BatchGetCaseRuleResponse.add_member(:case_rules, Shapes::ShapeRef.new(shape: BatchGetCaseRuleResponseCaseRulesList, required: true, location_name: "caseRules"))
+    BatchGetCaseRuleResponse.add_member(:errors, Shapes::ShapeRef.new(shape: BatchGetCaseRuleResponseErrorsList, required: true, location_name: "errors"))
+    BatchGetCaseRuleResponse.struct_class = Types::BatchGetCaseRuleResponse
+
+    BatchGetCaseRuleResponseCaseRulesList.member = Shapes::ShapeRef.new(shape: GetCaseRuleResponse)
+
+    BatchGetCaseRuleResponseErrorsList.member = Shapes::ShapeRef.new(shape: CaseRuleError)
+
     BatchGetFieldIdentifierList.member = Shapes::ShapeRef.new(shape: FieldIdentifier)
 
     BatchGetFieldRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
@@ -294,6 +340,21 @@ module Aws::ConnectCases
 
     BatchPutFieldOptionsResponseErrorsList.member = Shapes::ShapeRef.new(shape: FieldOptionError)
 
+    BooleanCondition.add_member(:equal_to, Shapes::ShapeRef.new(shape: BooleanOperands, location_name: "equalTo"))
+    BooleanCondition.add_member(:not_equal_to, Shapes::ShapeRef.new(shape: BooleanOperands, location_name: "notEqualTo"))
+    BooleanCondition.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    BooleanCondition.add_member_subclass(:equal_to, Types::BooleanCondition::EqualTo)
+    BooleanCondition.add_member_subclass(:not_equal_to, Types::BooleanCondition::NotEqualTo)
+    BooleanCondition.add_member_subclass(:unknown, Types::BooleanCondition::Unknown)
+    BooleanCondition.struct_class = Types::BooleanCondition
+
+    BooleanConditionList.member = Shapes::ShapeRef.new(shape: BooleanCondition)
+
+    BooleanOperands.add_member(:operand_one, Shapes::ShapeRef.new(shape: OperandOne, required: true, location_name: "operandOne"))
+    BooleanOperands.add_member(:operand_two, Shapes::ShapeRef.new(shape: OperandTwo, required: true, location_name: "operandTwo"))
+    BooleanOperands.add_member(:result, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "result"))
+    BooleanOperands.struct_class = Types::BooleanOperands
+
     CaseEventIncludedData.add_member(:fields, Shapes::ShapeRef.new(shape: CaseEventIncludedDataFieldsList, required: true, location_name: "fields"))
     CaseEventIncludedData.struct_class = Types::CaseEventIncludedData
 
@@ -314,6 +375,29 @@ module Aws::ConnectCases
     CaseFilterAndAllList.member = Shapes::ShapeRef.new(shape: CaseFilter)
 
     CaseFilterOrAllList.member = Shapes::ShapeRef.new(shape: CaseFilter)
+
+    CaseRuleDetails.add_member(:required, Shapes::ShapeRef.new(shape: RequiredCaseRule, location_name: "required"))
+    CaseRuleDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    CaseRuleDetails.add_member_subclass(:required, Types::CaseRuleDetails::Required)
+    CaseRuleDetails.add_member_subclass(:unknown, Types::CaseRuleDetails::Unknown)
+    CaseRuleDetails.struct_class = Types::CaseRuleDetails
+
+    CaseRuleError.add_member(:error_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "errorCode"))
+    CaseRuleError.add_member(:id, Shapes::ShapeRef.new(shape: CaseRuleId, required: true, location_name: "id"))
+    CaseRuleError.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    CaseRuleError.struct_class = Types::CaseRuleError
+
+    CaseRuleIdentifier.add_member(:id, Shapes::ShapeRef.new(shape: CaseRuleId, required: true, location_name: "id"))
+    CaseRuleIdentifier.struct_class = Types::CaseRuleIdentifier
+
+    CaseRuleIdentifierList.member = Shapes::ShapeRef.new(shape: CaseRuleIdentifier)
+
+    CaseRuleSummary.add_member(:case_rule_arn, Shapes::ShapeRef.new(shape: CaseRuleArn, required: true, location_name: "caseRuleArn"))
+    CaseRuleSummary.add_member(:case_rule_id, Shapes::ShapeRef.new(shape: CaseRuleId, required: true, location_name: "caseRuleId"))
+    CaseRuleSummary.add_member(:description, Shapes::ShapeRef.new(shape: CaseRuleDescription, location_name: "description"))
+    CaseRuleSummary.add_member(:name, Shapes::ShapeRef.new(shape: CaseRuleName, required: true, location_name: "name"))
+    CaseRuleSummary.add_member(:rule_type, Shapes::ShapeRef.new(shape: RuleType, required: true, location_name: "ruleType"))
+    CaseRuleSummary.struct_class = Types::CaseRuleSummary
 
     CaseSummary.add_member(:case_id, Shapes::ShapeRef.new(shape: CaseId, required: true, location_name: "caseId"))
     CaseSummary.add_member(:template_id, Shapes::ShapeRef.new(shape: TemplateId, required: true, location_name: "templateId"))
@@ -354,6 +438,16 @@ module Aws::ConnectCases
     CreateCaseResponse.add_member(:case_arn, Shapes::ShapeRef.new(shape: CaseArn, required: true, location_name: "caseArn"))
     CreateCaseResponse.add_member(:case_id, Shapes::ShapeRef.new(shape: CaseId, required: true, location_name: "caseId"))
     CreateCaseResponse.struct_class = Types::CreateCaseResponse
+
+    CreateCaseRuleRequest.add_member(:description, Shapes::ShapeRef.new(shape: CaseRuleDescription, location_name: "description"))
+    CreateCaseRuleRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
+    CreateCaseRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: CaseRuleName, required: true, location_name: "name"))
+    CreateCaseRuleRequest.add_member(:rule, Shapes::ShapeRef.new(shape: CaseRuleDetails, required: true, location_name: "rule"))
+    CreateCaseRuleRequest.struct_class = Types::CreateCaseRuleRequest
+
+    CreateCaseRuleResponse.add_member(:case_rule_arn, Shapes::ShapeRef.new(shape: CaseRuleArn, required: true, location_name: "caseRuleArn"))
+    CreateCaseRuleResponse.add_member(:case_rule_id, Shapes::ShapeRef.new(shape: CaseRuleId, required: true, location_name: "caseRuleId"))
+    CreateCaseRuleResponse.struct_class = Types::CreateCaseRuleResponse
 
     CreateDomainRequest.add_member(:name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "name"))
     CreateDomainRequest.struct_class = Types::CreateDomainRequest
@@ -398,12 +492,19 @@ module Aws::ConnectCases
     CreateTemplateRequest.add_member(:layout_configuration, Shapes::ShapeRef.new(shape: LayoutConfiguration, location_name: "layoutConfiguration"))
     CreateTemplateRequest.add_member(:name, Shapes::ShapeRef.new(shape: TemplateName, required: true, location_name: "name"))
     CreateTemplateRequest.add_member(:required_fields, Shapes::ShapeRef.new(shape: RequiredFieldList, location_name: "requiredFields"))
+    CreateTemplateRequest.add_member(:rules, Shapes::ShapeRef.new(shape: TemplateCaseRuleList, location_name: "rules"))
     CreateTemplateRequest.add_member(:status, Shapes::ShapeRef.new(shape: TemplateStatus, location_name: "status"))
     CreateTemplateRequest.struct_class = Types::CreateTemplateRequest
 
     CreateTemplateResponse.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, required: true, location_name: "templateArn"))
     CreateTemplateResponse.add_member(:template_id, Shapes::ShapeRef.new(shape: TemplateId, required: true, location_name: "templateId"))
     CreateTemplateResponse.struct_class = Types::CreateTemplateResponse
+
+    DeleteCaseRuleRequest.add_member(:case_rule_id, Shapes::ShapeRef.new(shape: CaseRuleId, required: true, location: "uri", location_name: "caseRuleId"))
+    DeleteCaseRuleRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
+    DeleteCaseRuleRequest.struct_class = Types::DeleteCaseRuleRequest
+
+    DeleteCaseRuleResponse.struct_class = Types::DeleteCaseRuleResponse
 
     DeleteDomainRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
     DeleteDomainRequest.struct_class = Types::DeleteDomainRequest
@@ -436,6 +537,8 @@ module Aws::ConnectCases
     DomainSummaryList.member = Shapes::ShapeRef.new(shape: DomainSummary)
 
     EmptyFieldValue.struct_class = Types::EmptyFieldValue
+
+    EmptyOperandValue.struct_class = Types::EmptyOperandValue
 
     EventBridgeConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
     EventBridgeConfiguration.add_member(:included_data, Shapes::ShapeRef.new(shape: EventIncludedData, location_name: "includedData"))
@@ -555,6 +658,17 @@ module Aws::ConnectCases
 
     GetCaseResponseFieldsList.member = Shapes::ShapeRef.new(shape: FieldValue)
 
+    GetCaseRuleResponse.add_member(:case_rule_arn, Shapes::ShapeRef.new(shape: CaseRuleArn, required: true, location_name: "caseRuleArn"))
+    GetCaseRuleResponse.add_member(:case_rule_id, Shapes::ShapeRef.new(shape: CaseRuleId, required: true, location_name: "caseRuleId"))
+    GetCaseRuleResponse.add_member(:created_time, Shapes::ShapeRef.new(shape: CreatedTime, location_name: "createdTime"))
+    GetCaseRuleResponse.add_member(:deleted, Shapes::ShapeRef.new(shape: Deleted, location_name: "deleted"))
+    GetCaseRuleResponse.add_member(:description, Shapes::ShapeRef.new(shape: CaseRuleDescription, location_name: "description"))
+    GetCaseRuleResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: LastModifiedTime, location_name: "lastModifiedTime"))
+    GetCaseRuleResponse.add_member(:name, Shapes::ShapeRef.new(shape: CaseRuleName, required: true, location_name: "name"))
+    GetCaseRuleResponse.add_member(:rule, Shapes::ShapeRef.new(shape: CaseRuleDetails, required: true, location_name: "rule"))
+    GetCaseRuleResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    GetCaseRuleResponse.struct_class = Types::GetCaseRuleResponse
+
     GetDomainRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
     GetDomainRequest.struct_class = Types::GetDomainRequest
 
@@ -603,6 +717,7 @@ module Aws::ConnectCases
     GetTemplateResponse.add_member(:layout_configuration, Shapes::ShapeRef.new(shape: LayoutConfiguration, location_name: "layoutConfiguration"))
     GetTemplateResponse.add_member(:name, Shapes::ShapeRef.new(shape: TemplateName, required: true, location_name: "name"))
     GetTemplateResponse.add_member(:required_fields, Shapes::ShapeRef.new(shape: RequiredFieldList, location_name: "requiredFields"))
+    GetTemplateResponse.add_member(:rules, Shapes::ShapeRef.new(shape: TemplateCaseRuleList, location_name: "rules"))
     GetTemplateResponse.add_member(:status, Shapes::ShapeRef.new(shape: TemplateStatus, required: true, location_name: "status"))
     GetTemplateResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     GetTemplateResponse.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, required: true, location_name: "templateArn"))
@@ -631,6 +746,17 @@ module Aws::ConnectCases
     LayoutSummary.struct_class = Types::LayoutSummary
 
     LayoutSummaryList.member = Shapes::ShapeRef.new(shape: LayoutSummary)
+
+    ListCaseRulesRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
+    ListCaseRulesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListCaseRulesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListCaseRulesRequest.struct_class = Types::ListCaseRulesRequest
+
+    ListCaseRulesResponse.add_member(:case_rules, Shapes::ShapeRef.new(shape: ListCaseRulesResponseCaseRulesList, required: true, location_name: "caseRules"))
+    ListCaseRulesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListCaseRulesResponse.struct_class = Types::ListCaseRulesResponse
+
+    ListCaseRulesResponseCaseRulesList.member = Shapes::ShapeRef.new(shape: CaseRuleSummary)
 
     ListCasesForContactRequest.add_member(:contact_arn, Shapes::ShapeRef.new(shape: ContactArn, required: true, location_name: "contactArn"))
     ListCasesForContactRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
@@ -701,6 +827,24 @@ module Aws::ConnectCases
 
     ListTemplatesResponseTemplatesList.member = Shapes::ShapeRef.new(shape: TemplateSummary)
 
+    OperandOne.add_member(:field_id, Shapes::ShapeRef.new(shape: FieldId, location_name: "fieldId"))
+    OperandOne.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    OperandOne.add_member_subclass(:field_id, Types::OperandOne::FieldId)
+    OperandOne.add_member_subclass(:unknown, Types::OperandOne::Unknown)
+    OperandOne.struct_class = Types::OperandOne
+
+    OperandTwo.add_member(:boolean_value, Shapes::ShapeRef.new(shape: Boolean, location_name: "booleanValue"))
+    OperandTwo.add_member(:double_value, Shapes::ShapeRef.new(shape: Double, location_name: "doubleValue"))
+    OperandTwo.add_member(:empty_value, Shapes::ShapeRef.new(shape: EmptyOperandValue, location_name: "emptyValue"))
+    OperandTwo.add_member(:string_value, Shapes::ShapeRef.new(shape: OperandTwoStringValueString, location_name: "stringValue"))
+    OperandTwo.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    OperandTwo.add_member_subclass(:boolean_value, Types::OperandTwo::BooleanValue)
+    OperandTwo.add_member_subclass(:double_value, Types::OperandTwo::DoubleValue)
+    OperandTwo.add_member_subclass(:empty_value, Types::OperandTwo::EmptyValue)
+    OperandTwo.add_member_subclass(:string_value, Types::OperandTwo::StringValue)
+    OperandTwo.add_member_subclass(:unknown, Types::OperandTwo::Unknown)
+    OperandTwo.struct_class = Types::OperandTwo
+
     PutCaseEventConfigurationRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
     PutCaseEventConfigurationRequest.add_member(:event_bridge, Shapes::ShapeRef.new(shape: EventBridgeConfiguration, required: true, location_name: "eventBridge"))
     PutCaseEventConfigurationRequest.struct_class = Types::PutCaseEventConfigurationRequest
@@ -739,6 +883,10 @@ module Aws::ConnectCases
     RelatedItemTypeFilter.add_member_subclass(:file, Types::RelatedItemTypeFilter::File)
     RelatedItemTypeFilter.add_member_subclass(:unknown, Types::RelatedItemTypeFilter::Unknown)
     RelatedItemTypeFilter.struct_class = Types::RelatedItemTypeFilter
+
+    RequiredCaseRule.add_member(:conditions, Shapes::ShapeRef.new(shape: BooleanConditionList, required: true, location_name: "conditions"))
+    RequiredCaseRule.add_member(:default_value, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "defaultValue"))
+    RequiredCaseRule.struct_class = Types::RequiredCaseRule
 
     RequiredField.add_member(:field_id, Shapes::ShapeRef.new(shape: FieldId, required: true, location_name: "fieldId"))
     RequiredField.struct_class = Types::RequiredField
@@ -824,6 +972,12 @@ module Aws::ConnectCases
     Tags.key = Shapes::ShapeRef.new(shape: String)
     Tags.value = Shapes::ShapeRef.new(shape: String)
 
+    TemplateCaseRuleList.member = Shapes::ShapeRef.new(shape: TemplateRule)
+
+    TemplateRule.add_member(:case_rule_id, Shapes::ShapeRef.new(shape: CaseRuleId, required: true, location_name: "caseRuleId"))
+    TemplateRule.add_member(:field_id, Shapes::ShapeRef.new(shape: FieldId, required: true, location_name: "fieldId"))
+    TemplateRule.struct_class = Types::TemplateRule
+
     TemplateStatusFilters.member = Shapes::ShapeRef.new(shape: TemplateStatus)
 
     TemplateSummary.add_member(:name, Shapes::ShapeRef.new(shape: TemplateName, required: true, location_name: "name"))
@@ -849,6 +1003,15 @@ module Aws::ConnectCases
 
     UpdateCaseResponse.struct_class = Types::UpdateCaseResponse
 
+    UpdateCaseRuleRequest.add_member(:case_rule_id, Shapes::ShapeRef.new(shape: CaseRuleId, required: true, location: "uri", location_name: "caseRuleId"))
+    UpdateCaseRuleRequest.add_member(:description, Shapes::ShapeRef.new(shape: CaseRuleDescription, location_name: "description"))
+    UpdateCaseRuleRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
+    UpdateCaseRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: CaseRuleName, location_name: "name"))
+    UpdateCaseRuleRequest.add_member(:rule, Shapes::ShapeRef.new(shape: CaseRuleDetails, location_name: "rule"))
+    UpdateCaseRuleRequest.struct_class = Types::UpdateCaseRuleRequest
+
+    UpdateCaseRuleResponse.struct_class = Types::UpdateCaseRuleResponse
+
     UpdateFieldRequest.add_member(:description, Shapes::ShapeRef.new(shape: FieldDescription, location_name: "description"))
     UpdateFieldRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
     UpdateFieldRequest.add_member(:field_id, Shapes::ShapeRef.new(shape: FieldId, required: true, location: "uri", location_name: "fieldId"))
@@ -870,6 +1033,7 @@ module Aws::ConnectCases
     UpdateTemplateRequest.add_member(:layout_configuration, Shapes::ShapeRef.new(shape: LayoutConfiguration, location_name: "layoutConfiguration"))
     UpdateTemplateRequest.add_member(:name, Shapes::ShapeRef.new(shape: TemplateName, location_name: "name"))
     UpdateTemplateRequest.add_member(:required_fields, Shapes::ShapeRef.new(shape: RequiredFieldList, location_name: "requiredFields"))
+    UpdateTemplateRequest.add_member(:rules, Shapes::ShapeRef.new(shape: TemplateCaseRuleList, location_name: "rules"))
     UpdateTemplateRequest.add_member(:status, Shapes::ShapeRef.new(shape: TemplateStatus, location_name: "status"))
     UpdateTemplateRequest.add_member(:template_id, Shapes::ShapeRef.new(shape: TemplateId, required: true, location: "uri", location_name: "templateId"))
     UpdateTemplateRequest.struct_class = Types::UpdateTemplateRequest
@@ -905,6 +1069,19 @@ module Aws::ConnectCases
         "signingName" => "cases",
         "uid" => "connectcases-2022-10-03",
       }
+
+      api.add_operation(:batch_get_case_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetCaseRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/domains/{domainId}/rules-batch"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetCaseRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetCaseRuleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
 
       api.add_operation(:batch_get_field, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BatchGetField"
@@ -945,6 +1122,21 @@ module Aws::ConnectCases
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:create_case_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCaseRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/domains/{domainId}/case-rules"
+        o.input = Shapes::ShapeRef.new(shape: CreateCaseRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateCaseRuleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:create_domain, Seahorse::Model::Operation.new.tap do |o|
@@ -1018,6 +1210,19 @@ module Aws::ConnectCases
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:delete_case_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteCaseRule"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/domains/{domainId}/case-rules/{caseRuleId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteCaseRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteCaseRuleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:delete_domain, Seahorse::Model::Operation.new.tap do |o|
@@ -1164,6 +1369,25 @@ module Aws::ConnectCases
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:list_case_rules, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCaseRules"
+        o.http_method = "POST"
+        o.http_request_uri = "/domains/{domainId}/rules-list/"
+        o.input = Shapes::ShapeRef.new(shape: ListCaseRulesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCaseRulesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_cases_for_contact, Seahorse::Model::Operation.new.tap do |o|
@@ -1380,6 +1604,20 @@ module Aws::ConnectCases
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_case_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateCaseRule"
+        o.http_method = "PUT"
+        o.http_request_uri = "/domains/{domainId}/case-rules/{caseRuleId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateCaseRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateCaseRuleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:update_field, Seahorse::Model::Operation.new.tap do |o|

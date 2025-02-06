@@ -10,63 +10,58 @@
 module Aws::NeptuneGraph
   class EndpointProvider
     def resolve_endpoint(parameters)
-      region = parameters.region
-      use_fips = parameters.use_fips
-      use_dual_stack = parameters.use_dual_stack
-      endpoint = parameters.endpoint
-      api_type = parameters.api_type
-      if Aws::Endpoints::Matchers.set?(endpoint)
-        if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
+      if Aws::Endpoints::Matchers.set?(parameters.endpoint)
+        if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true)
           raise ArgumentError, "Invalid Configuration: FIPS and custom endpoint are not supported"
         end
-        if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
+        if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
           raise ArgumentError, "Invalid Configuration: Dualstack and custom endpoint are not supported"
         end
-        return Aws::Endpoints::Endpoint.new(url: endpoint, headers: {}, properties: {})
+        return Aws::Endpoints::Endpoint.new(url: parameters.endpoint, headers: {}, properties: {})
       end
-      if Aws::Endpoints::Matchers.set?(region)
-        if (partition_result = Aws::Endpoints::Matchers.aws_partition(region))
-          if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
+      if Aws::Endpoints::Matchers.set?(parameters.region)
+        if (partition_result = Aws::Endpoints::Matchers.aws_partition(parameters.region))
+          if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
             if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS")) && Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
-              if Aws::Endpoints::Matchers.string_equals?(api_type, "ControlPlane")
-                return Aws::Endpoints::Endpoint.new(url: "https://neptune-graph-fips.#{region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+              if Aws::Endpoints::Matchers.string_equals?(parameters.api_type, "ControlPlane")
+                return Aws::Endpoints::Endpoint.new(url: "https://neptune-graph-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
               end
-              if Aws::Endpoints::Matchers.string_equals?(api_type, "DataPlane")
+              if Aws::Endpoints::Matchers.string_equals?(parameters.api_type, "DataPlane")
                 raise ArgumentError, "Invalid Configuration: fips endpoint is not supported for this API"
               end
               raise ArgumentError, "Invalid Configuration: Unknown ApiType"
             end
             raise ArgumentError, "FIPS and DualStack are enabled, but this partition does not support one or both"
           end
-          if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
+          if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true)
             if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
-              if Aws::Endpoints::Matchers.string_equals?(api_type, "ControlPlane")
-                return Aws::Endpoints::Endpoint.new(url: "https://neptune-graph-fips.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+              if Aws::Endpoints::Matchers.string_equals?(parameters.api_type, "ControlPlane")
+                return Aws::Endpoints::Endpoint.new(url: "https://neptune-graph-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
               end
-              if Aws::Endpoints::Matchers.string_equals?(api_type, "DataPlane")
+              if Aws::Endpoints::Matchers.string_equals?(parameters.api_type, "DataPlane")
                 raise ArgumentError, "Invalid Configuration: fips endpoint is not supported for this API"
               end
               raise ArgumentError, "Invalid Configuration: Unknown ApiType"
             end
             raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
           end
-          if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
+          if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
             if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
-              if Aws::Endpoints::Matchers.string_equals?(api_type, "ControlPlane")
-                return Aws::Endpoints::Endpoint.new(url: "https://neptune-graph.#{region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+              if Aws::Endpoints::Matchers.string_equals?(parameters.api_type, "ControlPlane")
+                return Aws::Endpoints::Endpoint.new(url: "https://neptune-graph.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
               end
-              if Aws::Endpoints::Matchers.string_equals?(api_type, "DataPlane")
-                return Aws::Endpoints::Endpoint.new(url: "https://neptune-graph.#{region}.on.aws", headers: {}, properties: {})
+              if Aws::Endpoints::Matchers.string_equals?(parameters.api_type, "DataPlane")
+                return Aws::Endpoints::Endpoint.new(url: "https://neptune-graph.#{parameters.region}.on.aws", headers: {}, properties: {})
               end
               raise ArgumentError, "Invalid Configuration: Unknown ApiType"
             end
             raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
           end
-          if Aws::Endpoints::Matchers.string_equals?(api_type, "ControlPlane")
-            return Aws::Endpoints::Endpoint.new(url: "https://neptune-graph.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+          if Aws::Endpoints::Matchers.string_equals?(parameters.api_type, "ControlPlane")
+            return Aws::Endpoints::Endpoint.new(url: "https://neptune-graph.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
           end
-          if Aws::Endpoints::Matchers.string_equals?(api_type, "DataPlane")
-            return Aws::Endpoints::Endpoint.new(url: "https://#{region}.neptune-graph.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+          if Aws::Endpoints::Matchers.string_equals?(parameters.api_type, "DataPlane")
+            return Aws::Endpoints::Endpoint.new(url: "https://#{parameters.region}.neptune-graph.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
           end
           raise ArgumentError, "Invalid Configuration: Unknown ApiType"
         end

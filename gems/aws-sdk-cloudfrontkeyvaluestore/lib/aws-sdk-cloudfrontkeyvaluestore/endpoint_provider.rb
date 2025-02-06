@@ -10,24 +10,20 @@
 module Aws::CloudFrontKeyValueStore
   class EndpointProvider
     def resolve_endpoint(parameters)
-      kvs_arn = parameters.kvs_arn
-      region = parameters.region
-      use_fips = parameters.use_fips
-      endpoint = parameters.endpoint
-      if Aws::Endpoints::Matchers.boolean_equals?(use_fips, false)
-        if Aws::Endpoints::Matchers.set?(kvs_arn)
-          if (parsed_arn = Aws::Endpoints::Matchers.aws_parse_arn(kvs_arn))
+      if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, false)
+        if Aws::Endpoints::Matchers.set?(parameters.kvs_arn)
+          if (parsed_arn = Aws::Endpoints::Matchers.aws_parse_arn(parameters.kvs_arn))
             if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(parsed_arn, "service"), "cloudfront")
               if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(parsed_arn, "region"), "")
                 if (arn_type = Aws::Endpoints::Matchers.attr(parsed_arn, "resourceId[0]"))
                   if Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(arn_type, ""))
                     if Aws::Endpoints::Matchers.string_equals?(arn_type, "key-value-store")
                       if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(parsed_arn, "partition"), "aws")
-                        if Aws::Endpoints::Matchers.set?(region)
-                          if (partition_result = Aws::Endpoints::Matchers.aws_partition(region))
+                        if Aws::Endpoints::Matchers.set?(parameters.region)
+                          if (partition_result = Aws::Endpoints::Matchers.aws_partition(parameters.region))
                             if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "#{parsed_arn['partition']}")
-                              if Aws::Endpoints::Matchers.set?(endpoint)
-                                if (url = Aws::Endpoints::Matchers.parse_url(endpoint))
+                              if Aws::Endpoints::Matchers.set?(parameters.endpoint)
+                                if (url = Aws::Endpoints::Matchers.parse_url(parameters.endpoint))
                                   return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{parsed_arn['accountId']}.#{url['authority']}#{url['path']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4a", "signingName"=>"cloudfront-keyvaluestore", "signingRegionSet"=>["*"]}]})
                                 end
                                 raise ArgumentError, "Provided endpoint is not a valid URL"
@@ -37,8 +33,8 @@ module Aws::CloudFrontKeyValueStore
                             raise ArgumentError, "Client was configured for partition `#{partition_result['name']}` but Kvs ARN has `#{parsed_arn['partition']}`"
                           end
                         end
-                        if Aws::Endpoints::Matchers.set?(endpoint)
-                          if (url = Aws::Endpoints::Matchers.parse_url(endpoint))
+                        if Aws::Endpoints::Matchers.set?(parameters.endpoint)
+                          if (url = Aws::Endpoints::Matchers.parse_url(parameters.endpoint))
                             return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{parsed_arn['accountId']}.#{url['authority']}#{url['path']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4a", "signingName"=>"cloudfront-keyvaluestore", "signingRegionSet"=>["*"]}]})
                           end
                           raise ArgumentError, "Provided endpoint is not a valid URL"

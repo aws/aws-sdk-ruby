@@ -21,6 +21,7 @@ module Aws::CostOptimizationHub
     AccountIdList = Shapes::ListShape.new(name: 'AccountIdList')
     ActionType = Shapes::StringShape.new(name: 'ActionType')
     ActionTypeList = Shapes::ListShape.new(name: 'ActionTypeList')
+    AllocationStrategy = Shapes::StringShape.new(name: 'AllocationStrategy')
     BlockStoragePerformanceConfiguration = Shapes::StructureShape.new(name: 'BlockStoragePerformanceConfiguration')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ComputeConfiguration = Shapes::StructureShape.new(name: 'ComputeConfiguration')
@@ -33,6 +34,7 @@ module Aws::CostOptimizationHub
     EbsVolumeConfiguration = Shapes::StructureShape.new(name: 'EbsVolumeConfiguration')
     Ec2AutoScalingGroup = Shapes::StructureShape.new(name: 'Ec2AutoScalingGroup')
     Ec2AutoScalingGroupConfiguration = Shapes::StructureShape.new(name: 'Ec2AutoScalingGroupConfiguration')
+    Ec2AutoScalingGroupType = Shapes::StringShape.new(name: 'Ec2AutoScalingGroupType')
     Ec2Instance = Shapes::StructureShape.new(name: 'Ec2Instance')
     Ec2InstanceConfiguration = Shapes::StructureShape.new(name: 'Ec2InstanceConfiguration')
     Ec2InstanceSavingsPlans = Shapes::StructureShape.new(name: 'Ec2InstanceSavingsPlans')
@@ -67,6 +69,8 @@ module Aws::CostOptimizationHub
     ListRecommendationsResponse = Shapes::StructureShape.new(name: 'ListRecommendationsResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MemberAccountDiscountVisibility = Shapes::StringShape.new(name: 'MemberAccountDiscountVisibility')
+    MixedInstanceConfiguration = Shapes::StructureShape.new(name: 'MixedInstanceConfiguration')
+    MixedInstanceConfigurationList = Shapes::ListShape.new(name: 'MixedInstanceConfigurationList')
     OpenSearchReservedInstances = Shapes::StructureShape.new(name: 'OpenSearchReservedInstances')
     OpenSearchReservedInstancesConfiguration = Shapes::StructureShape.new(name: 'OpenSearchReservedInstancesConfiguration')
     Order = Shapes::StringShape.new(name: 'Order')
@@ -174,6 +178,9 @@ module Aws::CostOptimizationHub
     Ec2AutoScalingGroup.struct_class = Types::Ec2AutoScalingGroup
 
     Ec2AutoScalingGroupConfiguration.add_member(:instance, Shapes::ShapeRef.new(shape: InstanceConfiguration, location_name: "instance"))
+    Ec2AutoScalingGroupConfiguration.add_member(:mixed_instances, Shapes::ShapeRef.new(shape: MixedInstanceConfigurationList, location_name: "mixedInstances"))
+    Ec2AutoScalingGroupConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: Ec2AutoScalingGroupType, location_name: "type"))
+    Ec2AutoScalingGroupConfiguration.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: AllocationStrategy, location_name: "allocationStrategy"))
     Ec2AutoScalingGroupConfiguration.struct_class = Types::Ec2AutoScalingGroupConfiguration
 
     Ec2Instance.add_member(:configuration, Shapes::ShapeRef.new(shape: Ec2InstanceConfiguration, location_name: "configuration"))
@@ -346,6 +353,11 @@ module Aws::CostOptimizationHub
     ListRecommendationsResponse.add_member(:items, Shapes::ShapeRef.new(shape: RecommendationList, location_name: "items"))
     ListRecommendationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListRecommendationsResponse.struct_class = Types::ListRecommendationsResponse
+
+    MixedInstanceConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
+    MixedInstanceConfiguration.struct_class = Types::MixedInstanceConfiguration
+
+    MixedInstanceConfigurationList.member = Shapes::ShapeRef.new(shape: MixedInstanceConfiguration)
 
     OpenSearchReservedInstances.add_member(:configuration, Shapes::ShapeRef.new(shape: OpenSearchReservedInstancesConfiguration, location_name: "configuration"))
     OpenSearchReservedInstances.add_member(:cost_calculation, Shapes::ShapeRef.new(shape: ReservedInstancesCostCalculation, location_name: "costCalculation"))

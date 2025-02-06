@@ -77,6 +77,22 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _BatchGetCaseRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetCaseRuleResponse]
+        def case_rules: () -> ::Array[Types::GetCaseRuleResponse]
+        def errors: () -> ::Array[Types::CaseRuleError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#batch_get_case_rule-instance_method
+      def batch_get_case_rule: (
+                                 case_rules: Array[
+                                   {
+                                     id: ::String
+                                   },
+                                 ],
+                                 domain_id: ::String
+                               ) -> _BatchGetCaseRuleResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetCaseRuleResponseSuccess
+
       interface _BatchGetFieldResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetFieldResponse]
         def errors: () -> ::Array[Types::FieldError]
@@ -139,6 +155,54 @@ module Aws
                          template_id: ::String
                        ) -> _CreateCaseResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCaseResponseSuccess
+
+      interface _CreateCaseRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCaseRuleResponse]
+        def case_rule_arn: () -> ::String
+        def case_rule_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#create_case_rule-instance_method
+      def create_case_rule: (
+                              ?description: ::String,
+                              domain_id: ::String,
+                              name: ::String,
+                              rule: {
+                                required: {
+                                  conditions: Array[
+                                    {
+                                      equal_to: {
+                                        operand_one: {
+                                          field_id: ::String?
+                                        },
+                                        operand_two: {
+                                          boolean_value: bool?,
+                                          double_value: ::Float?,
+                                          empty_value: {
+                                          }?,
+                                          string_value: ::String?
+                                        },
+                                        result: bool
+                                      }?,
+                                      not_equal_to: {
+                                        operand_one: {
+                                          field_id: ::String?
+                                        },
+                                        operand_two: {
+                                          boolean_value: bool?,
+                                          double_value: ::Float?,
+                                          empty_value: {
+                                          }?,
+                                          string_value: ::String?
+                                        },
+                                        result: bool
+                                      }?
+                                    },
+                                  ],
+                                  default_value: bool
+                                }?
+                              }
+                            ) -> _CreateCaseRuleResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCaseRuleResponseSuccess
 
       interface _CreateDomainResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateDomainResponse]
@@ -256,9 +320,25 @@ module Aws
                                  field_id: ::String
                                },
                              ],
+                             ?rules: Array[
+                               {
+                                 case_rule_id: ::String,
+                                 field_id: ::String
+                               },
+                             ],
                              ?status: ("Active" | "Inactive")
                            ) -> _CreateTemplateResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTemplateResponseSuccess
+
+      interface _DeleteCaseRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCaseRuleResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#delete_case_rule-instance_method
+      def delete_case_rule: (
+                              case_rule_id: ::String,
+                              domain_id: ::String
+                            ) -> _DeleteCaseRuleResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCaseRuleResponseSuccess
 
       interface _DeleteDomainResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDomainResponse]
@@ -385,6 +465,7 @@ module Aws
         def layout_configuration: () -> Types::LayoutConfiguration
         def name: () -> ::String
         def required_fields: () -> ::Array[Types::RequiredField]
+        def rules: () -> ::Array[Types::TemplateRule]
         def status: () -> ("Active" | "Inactive")
         def tags: () -> ::Hash[::String, ::String]
         def template_arn: () -> ::String
@@ -396,6 +477,19 @@ module Aws
                           template_id: ::String
                         ) -> _GetTemplateResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTemplateResponseSuccess
+
+      interface _ListCaseRulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCaseRulesResponse]
+        def case_rules: () -> ::Array[Types::CaseRuleSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#list_case_rules-instance_method
+      def list_case_rules: (
+                             domain_id: ::String,
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _ListCaseRulesResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCaseRulesResponseSuccess
 
       interface _ListCasesForContactResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListCasesForContactResponse]
@@ -681,6 +775,53 @@ module Aws
                        ) -> _UpdateCaseResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCaseResponseSuccess
 
+      interface _UpdateCaseRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCaseRuleResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#update_case_rule-instance_method
+      def update_case_rule: (
+                              case_rule_id: ::String,
+                              ?description: ::String,
+                              domain_id: ::String,
+                              ?name: ::String,
+                              ?rule: {
+                                required: {
+                                  conditions: Array[
+                                    {
+                                      equal_to: {
+                                        operand_one: {
+                                          field_id: ::String?
+                                        },
+                                        operand_two: {
+                                          boolean_value: bool?,
+                                          double_value: ::Float?,
+                                          empty_value: {
+                                          }?,
+                                          string_value: ::String?
+                                        },
+                                        result: bool
+                                      }?,
+                                      not_equal_to: {
+                                        operand_one: {
+                                          field_id: ::String?
+                                        },
+                                        operand_two: {
+                                          boolean_value: bool?,
+                                          double_value: ::Float?,
+                                          empty_value: {
+                                          }?,
+                                          string_value: ::String?
+                                        },
+                                        result: bool
+                                      }?
+                                    },
+                                  ],
+                                  default_value: bool
+                                }?
+                              }
+                            ) -> _UpdateCaseRuleResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCaseRuleResponseSuccess
+
       interface _UpdateFieldResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFieldResponse]
       end
@@ -749,6 +890,12 @@ module Aws
                              ?name: ::String,
                              ?required_fields: Array[
                                {
+                                 field_id: ::String
+                               },
+                             ],
+                             ?rules: Array[
+                               {
+                                 case_rule_id: ::String,
                                  field_id: ::String
                                },
                              ],

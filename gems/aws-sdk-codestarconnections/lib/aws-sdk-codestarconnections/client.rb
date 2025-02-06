@@ -1746,7 +1746,7 @@ module Aws::CodeStarconnections
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-codestarconnections'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -75,6 +75,9 @@ module Aws::CostOptimizationHub
 
     class Ec2AutoScalingGroupConfiguration
       attr_accessor instance: Types::InstanceConfiguration
+      attr_accessor mixed_instances: ::Array[Types::MixedInstanceConfiguration]
+      attr_accessor type: ("SingleInstanceType" | "MixedInstanceTypes")
+      attr_accessor allocation_strategy: ("Prioritized" | "LowestPrice")
       SENSITIVE: []
     end
 
@@ -179,7 +182,7 @@ module Aws::CostOptimizationHub
       attr_accessor account_ids: ::Array[::String]
       attr_accessor regions: ::Array[::String]
       attr_accessor resource_types: ::Array[("Ec2Instance" | "LambdaFunction" | "EbsVolume" | "EcsService" | "Ec2AutoScalingGroup" | "Ec2InstanceSavingsPlans" | "ComputeSavingsPlans" | "SageMakerSavingsPlans" | "Ec2ReservedInstances" | "RdsReservedInstances" | "OpenSearchReservedInstances" | "RedshiftReservedInstances" | "ElastiCacheReservedInstances" | "RdsDbInstanceStorage" | "RdsDbInstance")]
-      attr_accessor action_types: ::Array[("Rightsize" | "Stop" | "Upgrade" | "PurchaseSavingsPlans" | "PurchaseReservedInstances" | "MigrateToGraviton" | "Delete")]
+      attr_accessor action_types: ::Array[("Rightsize" | "Stop" | "Upgrade" | "PurchaseSavingsPlans" | "PurchaseReservedInstances" | "MigrateToGraviton" | "Delete" | "ScaleIn")]
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor resource_ids: ::Array[::String]
       attr_accessor resource_arns: ::Array[::String]
@@ -220,7 +223,7 @@ module Aws::CostOptimizationHub
       attr_accessor estimated_monthly_cost: ::Float
       attr_accessor implementation_effort: ("VeryLow" | "Low" | "Medium" | "High" | "VeryHigh")
       attr_accessor restart_needed: bool
-      attr_accessor action_type: ("Rightsize" | "Stop" | "Upgrade" | "PurchaseSavingsPlans" | "PurchaseReservedInstances" | "MigrateToGraviton" | "Delete")
+      attr_accessor action_type: ("Rightsize" | "Stop" | "Upgrade" | "PurchaseSavingsPlans" | "PurchaseReservedInstances" | "MigrateToGraviton" | "Delete" | "ScaleIn")
       attr_accessor rollback_possible: bool
       attr_accessor current_resource_details: Types::ResourceDetails
       attr_accessor recommended_resource_details: Types::ResourceDetails
@@ -295,6 +298,11 @@ module Aws::CostOptimizationHub
     class ListRecommendationsResponse
       attr_accessor items: ::Array[Types::Recommendation]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MixedInstanceConfiguration
+      attr_accessor type: ::String
       SENSITIVE: []
     end
 

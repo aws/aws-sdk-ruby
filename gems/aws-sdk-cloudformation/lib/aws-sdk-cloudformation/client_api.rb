@@ -89,6 +89,8 @@ module Aws::CloudFormation
     CreateStackInstancesInput = Shapes::StructureShape.new(name: 'CreateStackInstancesInput')
     CreateStackInstancesOutput = Shapes::StructureShape.new(name: 'CreateStackInstancesOutput')
     CreateStackOutput = Shapes::StructureShape.new(name: 'CreateStackOutput')
+    CreateStackRefactorInput = Shapes::StructureShape.new(name: 'CreateStackRefactorInput')
+    CreateStackRefactorOutput = Shapes::StructureShape.new(name: 'CreateStackRefactorOutput')
     CreateStackSetInput = Shapes::StructureShape.new(name: 'CreateStackSetInput')
     CreateStackSetOutput = Shapes::StructureShape.new(name: 'CreateStackSetOutput')
     CreatedButModifiedException = Shapes::StructureShape.new(name: 'CreatedButModifiedException', error: {"code"=>"CreatedButModifiedException", "httpStatusCode"=>409, "senderFault"=>true})
@@ -131,6 +133,8 @@ module Aws::CloudFormation
     DescribeStackEventsOutput = Shapes::StructureShape.new(name: 'DescribeStackEventsOutput')
     DescribeStackInstanceInput = Shapes::StructureShape.new(name: 'DescribeStackInstanceInput')
     DescribeStackInstanceOutput = Shapes::StructureShape.new(name: 'DescribeStackInstanceOutput')
+    DescribeStackRefactorInput = Shapes::StructureShape.new(name: 'DescribeStackRefactorInput')
+    DescribeStackRefactorOutput = Shapes::StructureShape.new(name: 'DescribeStackRefactorOutput')
     DescribeStackResourceDriftsInput = Shapes::StructureShape.new(name: 'DescribeStackResourceDriftsInput')
     DescribeStackResourceDriftsOutput = Shapes::StructureShape.new(name: 'DescribeStackResourceDriftsOutput')
     DescribeStackResourceInput = Shapes::StructureShape.new(name: 'DescribeStackResourceInput')
@@ -155,9 +159,11 @@ module Aws::CloudFormation
     DetectStackResourceDriftOutput = Shapes::StructureShape.new(name: 'DetectStackResourceDriftOutput')
     DetectStackSetDriftInput = Shapes::StructureShape.new(name: 'DetectStackSetDriftInput')
     DetectStackSetDriftOutput = Shapes::StructureShape.new(name: 'DetectStackSetDriftOutput')
+    DetectionReason = Shapes::StringShape.new(name: 'DetectionReason')
     DifferenceType = Shapes::StringShape.new(name: 'DifferenceType')
     DisableRollback = Shapes::BooleanShape.new(name: 'DisableRollback')
     DriftedStackInstancesCount = Shapes::IntegerShape.new(name: 'DriftedStackInstancesCount')
+    EnableStackCreation = Shapes::BooleanShape.new(name: 'EnableStackCreation')
     EnableTerminationProtection = Shapes::BooleanShape.new(name: 'EnableTerminationProtection')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
@@ -167,8 +173,10 @@ module Aws::CloudFormation
     EventId = Shapes::StringShape.new(name: 'EventId')
     ExecuteChangeSetInput = Shapes::StructureShape.new(name: 'ExecuteChangeSetInput')
     ExecuteChangeSetOutput = Shapes::StructureShape.new(name: 'ExecuteChangeSetOutput')
+    ExecuteStackRefactorInput = Shapes::StructureShape.new(name: 'ExecuteStackRefactorInput')
     ExecutionRoleName = Shapes::StringShape.new(name: 'ExecutionRoleName')
     ExecutionStatus = Shapes::StringShape.new(name: 'ExecutionStatus')
+    ExecutionStatusReason = Shapes::StringShape.new(name: 'ExecutionStatusReason')
     Export = Shapes::StructureShape.new(name: 'Export')
     ExportName = Shapes::StringShape.new(name: 'ExportName')
     ExportValue = Shapes::StringShape.new(name: 'ExportValue')
@@ -253,6 +261,10 @@ module Aws::CloudFormation
     ListStackInstanceResourceDriftsOutput = Shapes::StructureShape.new(name: 'ListStackInstanceResourceDriftsOutput')
     ListStackInstancesInput = Shapes::StructureShape.new(name: 'ListStackInstancesInput')
     ListStackInstancesOutput = Shapes::StructureShape.new(name: 'ListStackInstancesOutput')
+    ListStackRefactorActionsInput = Shapes::StructureShape.new(name: 'ListStackRefactorActionsInput')
+    ListStackRefactorActionsOutput = Shapes::StructureShape.new(name: 'ListStackRefactorActionsOutput')
+    ListStackRefactorsInput = Shapes::StructureShape.new(name: 'ListStackRefactorsInput')
+    ListStackRefactorsOutput = Shapes::StructureShape.new(name: 'ListStackRefactorsOutput')
     ListStackResourcesInput = Shapes::StructureShape.new(name: 'ListStackResourcesInput')
     ListStackResourcesOutput = Shapes::StructureShape.new(name: 'ListStackResourcesOutput')
     ListStackSetAutoDeploymentTargetsInput = Shapes::StructureShape.new(name: 'ListStackSetAutoDeploymentTargetsInput')
@@ -378,6 +390,9 @@ module Aws::CloudFormation
     ResourceIdentifierSummaries = Shapes::ListShape.new(name: 'ResourceIdentifierSummaries')
     ResourceIdentifierSummary = Shapes::StructureShape.new(name: 'ResourceIdentifierSummary')
     ResourceIdentifiers = Shapes::ListShape.new(name: 'ResourceIdentifiers')
+    ResourceLocation = Shapes::StructureShape.new(name: 'ResourceLocation')
+    ResourceMapping = Shapes::StructureShape.new(name: 'ResourceMapping')
+    ResourceMappings = Shapes::ListShape.new(name: 'ResourceMappings')
     ResourceModel = Shapes::StringShape.new(name: 'ResourceModel')
     ResourceProperties = Shapes::StringShape.new(name: 'ResourceProperties')
     ResourcePropertyPath = Shapes::StringShape.new(name: 'ResourcePropertyPath')
@@ -434,6 +449,8 @@ module Aws::CloudFormation
     SetTypeDefaultVersionOutput = Shapes::StructureShape.new(name: 'SetTypeDefaultVersionOutput')
     SignalResourceInput = Shapes::StructureShape.new(name: 'SignalResourceInput')
     Stack = Shapes::StructureShape.new(name: 'Stack')
+    StackDefinition = Shapes::StructureShape.new(name: 'StackDefinition')
+    StackDefinitions = Shapes::ListShape.new(name: 'StackDefinitions')
     StackDriftDetectionId = Shapes::StringShape.new(name: 'StackDriftDetectionId')
     StackDriftDetectionStatus = Shapes::StringShape.new(name: 'StackDriftDetectionStatus')
     StackDriftDetectionStatusReason = Shapes::StringShape.new(name: 'StackDriftDetectionStatusReason')
@@ -444,6 +461,7 @@ module Aws::CloudFormation
     StackEvents = Shapes::ListShape.new(name: 'StackEvents')
     StackId = Shapes::StringShape.new(name: 'StackId')
     StackIdList = Shapes::ListShape.new(name: 'StackIdList')
+    StackIds = Shapes::ListShape.new(name: 'StackIds')
     StackIdsUrl = Shapes::StringShape.new(name: 'StackIdsUrl')
     StackInstance = Shapes::StructureShape.new(name: 'StackInstance')
     StackInstanceComprehensiveStatus = Shapes::StructureShape.new(name: 'StackInstanceComprehensiveStatus')
@@ -465,6 +483,22 @@ module Aws::CloudFormation
     StackPolicyDuringUpdateBody = Shapes::StringShape.new(name: 'StackPolicyDuringUpdateBody')
     StackPolicyDuringUpdateURL = Shapes::StringShape.new(name: 'StackPolicyDuringUpdateURL')
     StackPolicyURL = Shapes::StringShape.new(name: 'StackPolicyURL')
+    StackRefactorAction = Shapes::StructureShape.new(name: 'StackRefactorAction')
+    StackRefactorActionEntity = Shapes::StringShape.new(name: 'StackRefactorActionEntity')
+    StackRefactorActionType = Shapes::StringShape.new(name: 'StackRefactorActionType')
+    StackRefactorActions = Shapes::ListShape.new(name: 'StackRefactorActions')
+    StackRefactorDetection = Shapes::StringShape.new(name: 'StackRefactorDetection')
+    StackRefactorExecutionStatus = Shapes::StringShape.new(name: 'StackRefactorExecutionStatus')
+    StackRefactorExecutionStatusFilter = Shapes::ListShape.new(name: 'StackRefactorExecutionStatusFilter')
+    StackRefactorId = Shapes::StringShape.new(name: 'StackRefactorId')
+    StackRefactorNotFoundException = Shapes::StructureShape.new(name: 'StackRefactorNotFoundException', error: {"code"=>"StackRefactorNotFoundException", "httpStatusCode"=>404, "senderFault"=>true})
+    StackRefactorResourceIdentifier = Shapes::StringShape.new(name: 'StackRefactorResourceIdentifier')
+    StackRefactorStatus = Shapes::StringShape.new(name: 'StackRefactorStatus')
+    StackRefactorStatusReason = Shapes::StringShape.new(name: 'StackRefactorStatusReason')
+    StackRefactorSummaries = Shapes::ListShape.new(name: 'StackRefactorSummaries')
+    StackRefactorSummary = Shapes::StructureShape.new(name: 'StackRefactorSummary')
+    StackRefactorTagResources = Shapes::ListShape.new(name: 'StackRefactorTagResources')
+    StackRefactorUntagResources = Shapes::ListShape.new(name: 'StackRefactorUntagResources')
     StackResource = Shapes::StructureShape.new(name: 'StackResource')
     StackResourceDetail = Shapes::StructureShape.new(name: 'StackResourceDetail')
     StackResourceDrift = Shapes::StructureShape.new(name: 'StackResourceDrift')
@@ -784,6 +818,15 @@ module Aws::CloudFormation
     CreateStackOutput.add_member(:stack_id, Shapes::ShapeRef.new(shape: StackId, location_name: "StackId"))
     CreateStackOutput.struct_class = Types::CreateStackOutput
 
+    CreateStackRefactorInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    CreateStackRefactorInput.add_member(:enable_stack_creation, Shapes::ShapeRef.new(shape: EnableStackCreation, location_name: "EnableStackCreation"))
+    CreateStackRefactorInput.add_member(:resource_mappings, Shapes::ShapeRef.new(shape: ResourceMappings, location_name: "ResourceMappings"))
+    CreateStackRefactorInput.add_member(:stack_definitions, Shapes::ShapeRef.new(shape: StackDefinitions, required: true, location_name: "StackDefinitions"))
+    CreateStackRefactorInput.struct_class = Types::CreateStackRefactorInput
+
+    CreateStackRefactorOutput.add_member(:stack_refactor_id, Shapes::ShapeRef.new(shape: StackRefactorId, required: true, location_name: "StackRefactorId"))
+    CreateStackRefactorOutput.struct_class = Types::CreateStackRefactorOutput
+
     CreateStackSetInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetName, required: true, location_name: "StackSetName"))
     CreateStackSetInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateStackSetInput.add_member(:template_body, Shapes::ShapeRef.new(shape: TemplateBody, location_name: "TemplateBody"))
@@ -991,6 +1034,18 @@ module Aws::CloudFormation
     DescribeStackInstanceOutput.add_member(:stack_instance, Shapes::ShapeRef.new(shape: StackInstance, location_name: "StackInstance"))
     DescribeStackInstanceOutput.struct_class = Types::DescribeStackInstanceOutput
 
+    DescribeStackRefactorInput.add_member(:stack_refactor_id, Shapes::ShapeRef.new(shape: StackRefactorId, required: true, location_name: "StackRefactorId"))
+    DescribeStackRefactorInput.struct_class = Types::DescribeStackRefactorInput
+
+    DescribeStackRefactorOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    DescribeStackRefactorOutput.add_member(:stack_refactor_id, Shapes::ShapeRef.new(shape: StackRefactorId, location_name: "StackRefactorId"))
+    DescribeStackRefactorOutput.add_member(:stack_ids, Shapes::ShapeRef.new(shape: StackIds, location_name: "StackIds"))
+    DescribeStackRefactorOutput.add_member(:execution_status, Shapes::ShapeRef.new(shape: StackRefactorExecutionStatus, location_name: "ExecutionStatus"))
+    DescribeStackRefactorOutput.add_member(:execution_status_reason, Shapes::ShapeRef.new(shape: ExecutionStatusReason, location_name: "ExecutionStatusReason"))
+    DescribeStackRefactorOutput.add_member(:status, Shapes::ShapeRef.new(shape: StackRefactorStatus, location_name: "Status"))
+    DescribeStackRefactorOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: StackRefactorStatusReason, location_name: "StatusReason"))
+    DescribeStackRefactorOutput.struct_class = Types::DescribeStackRefactorOutput
+
     DescribeStackResourceDriftsInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackNameOrId, required: true, location_name: "StackName"))
     DescribeStackResourceDriftsInput.add_member(:stack_resource_drift_status_filters, Shapes::ShapeRef.new(shape: StackResourceDriftStatusFilters, location_name: "StackResourceDriftStatusFilters"))
     DescribeStackResourceDriftsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -1124,6 +1179,9 @@ module Aws::CloudFormation
     ExecuteChangeSetInput.struct_class = Types::ExecuteChangeSetInput
 
     ExecuteChangeSetOutput.struct_class = Types::ExecuteChangeSetOutput
+
+    ExecuteStackRefactorInput.add_member(:stack_refactor_id, Shapes::ShapeRef.new(shape: StackRefactorId, required: true, location_name: "StackRefactorId"))
+    ExecuteStackRefactorInput.struct_class = Types::ExecuteStackRefactorInput
 
     Export.add_member(:exporting_stack_id, Shapes::ShapeRef.new(shape: StackId, location_name: "ExportingStackId"))
     Export.add_member(:name, Shapes::ShapeRef.new(shape: ExportName, location_name: "Name"))
@@ -1318,6 +1376,24 @@ module Aws::CloudFormation
     ListStackInstancesOutput.add_member(:summaries, Shapes::ShapeRef.new(shape: StackInstanceSummaries, location_name: "Summaries"))
     ListStackInstancesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListStackInstancesOutput.struct_class = Types::ListStackInstancesOutput
+
+    ListStackRefactorActionsInput.add_member(:stack_refactor_id, Shapes::ShapeRef.new(shape: StackRefactorId, required: true, location_name: "StackRefactorId"))
+    ListStackRefactorActionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListStackRefactorActionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListStackRefactorActionsInput.struct_class = Types::ListStackRefactorActionsInput
+
+    ListStackRefactorActionsOutput.add_member(:stack_refactor_actions, Shapes::ShapeRef.new(shape: StackRefactorActions, required: true, location_name: "StackRefactorActions"))
+    ListStackRefactorActionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListStackRefactorActionsOutput.struct_class = Types::ListStackRefactorActionsOutput
+
+    ListStackRefactorsInput.add_member(:execution_status_filter, Shapes::ShapeRef.new(shape: StackRefactorExecutionStatusFilter, location_name: "ExecutionStatusFilter"))
+    ListStackRefactorsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListStackRefactorsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListStackRefactorsInput.struct_class = Types::ListStackRefactorsInput
+
+    ListStackRefactorsOutput.add_member(:stack_refactor_summaries, Shapes::ShapeRef.new(shape: StackRefactorSummaries, required: true, location_name: "StackRefactorSummaries"))
+    ListStackRefactorsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListStackRefactorsOutput.struct_class = Types::ListStackRefactorsOutput
 
     ListStackResourcesInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackName, required: true, location_name: "StackName"))
     ListStackResourcesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -1594,6 +1670,16 @@ module Aws::CloudFormation
 
     ResourceIdentifiers.member = Shapes::ShapeRef.new(shape: ResourceIdentifierPropertyKey)
 
+    ResourceLocation.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackName, required: true, location_name: "StackName"))
+    ResourceLocation.add_member(:logical_resource_id, Shapes::ShapeRef.new(shape: LogicalResourceId, required: true, location_name: "LogicalResourceId"))
+    ResourceLocation.struct_class = Types::ResourceLocation
+
+    ResourceMapping.add_member(:source, Shapes::ShapeRef.new(shape: ResourceLocation, required: true, location_name: "Source"))
+    ResourceMapping.add_member(:destination, Shapes::ShapeRef.new(shape: ResourceLocation, required: true, location_name: "Destination"))
+    ResourceMapping.struct_class = Types::ResourceMapping
+
+    ResourceMappings.member = Shapes::ShapeRef.new(shape: ResourceMapping)
+
     ResourceScanInProgressException.struct_class = Types::ResourceScanInProgressException
 
     ResourceScanLimitExceededException.struct_class = Types::ResourceScanLimitExceededException
@@ -1722,6 +1808,13 @@ module Aws::CloudFormation
     Stack.add_member(:detailed_status, Shapes::ShapeRef.new(shape: DetailedStatus, location_name: "DetailedStatus"))
     Stack.struct_class = Types::Stack
 
+    StackDefinition.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackName, location_name: "StackName"))
+    StackDefinition.add_member(:template_body, Shapes::ShapeRef.new(shape: TemplateBody, location_name: "TemplateBody"))
+    StackDefinition.add_member(:template_url, Shapes::ShapeRef.new(shape: TemplateURL, location_name: "TemplateURL"))
+    StackDefinition.struct_class = Types::StackDefinition
+
+    StackDefinitions.member = Shapes::ShapeRef.new(shape: StackDefinition)
+
     StackDriftInformation.add_member(:stack_drift_status, Shapes::ShapeRef.new(shape: StackDriftStatus, required: true, location_name: "StackDriftStatus"))
     StackDriftInformation.add_member(:last_check_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastCheckTimestamp"))
     StackDriftInformation.struct_class = Types::StackDriftInformation
@@ -1752,6 +1845,8 @@ module Aws::CloudFormation
     StackEvents.member = Shapes::ShapeRef.new(shape: StackEvent)
 
     StackIdList.member = Shapes::ShapeRef.new(shape: StackId)
+
+    StackIds.member = Shapes::ShapeRef.new(shape: StackId)
 
     StackInstance.add_member(:stack_set_id, Shapes::ShapeRef.new(shape: StackSetId, location_name: "StackSetId"))
     StackInstance.add_member(:region, Shapes::ShapeRef.new(shape: Region, location_name: "Region"))
@@ -1806,6 +1901,38 @@ module Aws::CloudFormation
     StackInstanceSummary.struct_class = Types::StackInstanceSummary
 
     StackNotFoundException.struct_class = Types::StackNotFoundException
+
+    StackRefactorAction.add_member(:action, Shapes::ShapeRef.new(shape: StackRefactorActionType, location_name: "Action"))
+    StackRefactorAction.add_member(:entity, Shapes::ShapeRef.new(shape: StackRefactorActionEntity, location_name: "Entity"))
+    StackRefactorAction.add_member(:physical_resource_id, Shapes::ShapeRef.new(shape: PhysicalResourceId, location_name: "PhysicalResourceId"))
+    StackRefactorAction.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: StackRefactorResourceIdentifier, location_name: "ResourceIdentifier"))
+    StackRefactorAction.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    StackRefactorAction.add_member(:detection, Shapes::ShapeRef.new(shape: StackRefactorDetection, location_name: "Detection"))
+    StackRefactorAction.add_member(:detection_reason, Shapes::ShapeRef.new(shape: DetectionReason, location_name: "DetectionReason"))
+    StackRefactorAction.add_member(:tag_resources, Shapes::ShapeRef.new(shape: StackRefactorTagResources, location_name: "TagResources"))
+    StackRefactorAction.add_member(:untag_resources, Shapes::ShapeRef.new(shape: StackRefactorUntagResources, location_name: "UntagResources"))
+    StackRefactorAction.add_member(:resource_mapping, Shapes::ShapeRef.new(shape: ResourceMapping, location_name: "ResourceMapping"))
+    StackRefactorAction.struct_class = Types::StackRefactorAction
+
+    StackRefactorActions.member = Shapes::ShapeRef.new(shape: StackRefactorAction)
+
+    StackRefactorExecutionStatusFilter.member = Shapes::ShapeRef.new(shape: StackRefactorExecutionStatus)
+
+    StackRefactorNotFoundException.struct_class = Types::StackRefactorNotFoundException
+
+    StackRefactorSummaries.member = Shapes::ShapeRef.new(shape: StackRefactorSummary)
+
+    StackRefactorSummary.add_member(:stack_refactor_id, Shapes::ShapeRef.new(shape: StackRefactorId, location_name: "StackRefactorId"))
+    StackRefactorSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    StackRefactorSummary.add_member(:execution_status, Shapes::ShapeRef.new(shape: StackRefactorExecutionStatus, location_name: "ExecutionStatus"))
+    StackRefactorSummary.add_member(:execution_status_reason, Shapes::ShapeRef.new(shape: ExecutionStatusReason, location_name: "ExecutionStatusReason"))
+    StackRefactorSummary.add_member(:status, Shapes::ShapeRef.new(shape: StackRefactorStatus, location_name: "Status"))
+    StackRefactorSummary.add_member(:status_reason, Shapes::ShapeRef.new(shape: StackRefactorStatusReason, location_name: "StatusReason"))
+    StackRefactorSummary.struct_class = Types::StackRefactorSummary
+
+    StackRefactorTagResources.member = Shapes::ShapeRef.new(shape: Tag)
+
+    StackRefactorUntagResources.member = Shapes::ShapeRef.new(shape: TagKey)
 
     StackResource.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackName, location_name: "StackName"))
     StackResource.add_member(:stack_id, Shapes::ShapeRef.new(shape: StackId, location_name: "StackId"))
@@ -2345,6 +2472,14 @@ module Aws::CloudFormation
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
+      api.add_operation(:create_stack_refactor, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateStackRefactor"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateStackRefactorInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateStackRefactorOutput)
+      end)
+
       api.add_operation(:create_stack_set, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateStackSet"
         o.http_method = "POST"
@@ -2536,6 +2671,15 @@ module Aws::CloudFormation
         o.errors << Shapes::ShapeRef.new(shape: StackInstanceNotFoundException)
       end)
 
+      api.add_operation(:describe_stack_refactor, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeStackRefactor"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeStackRefactorInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeStackRefactorOutput)
+        o.errors << Shapes::ShapeRef.new(shape: StackRefactorNotFoundException)
+      end)
+
       api.add_operation(:describe_stack_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeStackResource"
         o.http_method = "POST"
@@ -2662,6 +2806,14 @@ module Aws::CloudFormation
         o.errors << Shapes::ShapeRef.new(shape: ChangeSetNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientCapabilitiesException)
         o.errors << Shapes::ShapeRef.new(shape: TokenAlreadyExistsException)
+      end)
+
+      api.add_operation(:execute_stack_refactor, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ExecuteStackRefactor"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ExecuteStackRefactorInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 
       api.add_operation(:get_generated_template, Seahorse::Model::Operation.new.tap do |o|
@@ -2840,6 +2992,34 @@ module Aws::CloudFormation
         o.input = Shapes::ShapeRef.new(shape: ListStackInstancesInput)
         o.output = Shapes::ShapeRef.new(shape: ListStackInstancesOutput)
         o.errors << Shapes::ShapeRef.new(shape: StackSetNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_stack_refactor_actions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListStackRefactorActions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListStackRefactorActionsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListStackRefactorActionsOutput)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_stack_refactors, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListStackRefactors"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListStackRefactorsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListStackRefactorsOutput)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

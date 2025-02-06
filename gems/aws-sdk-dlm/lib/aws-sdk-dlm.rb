@@ -54,7 +54,7 @@ module Aws::DLM
   autoload :EndpointProvider, 'aws-sdk-dlm/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-dlm/endpoints'
 
-  GEM_VERSION = '1.84.0'
+  GEM_VERSION = '1.85.0'
 
 end
 

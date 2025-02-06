@@ -3,6 +3,15 @@ Unreleased Changes
 
 * Issue - Add handling of block in ExtendedSession delegation (#3178).
 
+3.218.0 (2025-02-06)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
 3.217.1 (2025-01-30)
 ------------------
 

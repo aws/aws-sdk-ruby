@@ -2042,7 +2042,7 @@ module Aws::RolesAnywhere
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rolesanywhere'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -2108,7 +2108,7 @@ module Aws::CloudFront
     ListConflictingAliasesRequest.add_member(:distribution_id, Shapes::ShapeRef.new(shape: distributionIdString, required: true, location: "querystring", location_name: "DistributionId"))
     ListConflictingAliasesRequest.add_member(:alias, Shapes::ShapeRef.new(shape: aliasString, required: true, location: "querystring", location_name: "Alias"))
     ListConflictingAliasesRequest.add_member(:marker, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "Marker"))
-    ListConflictingAliasesRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, location: "querystring", location_name: "MaxItems"))
+    ListConflictingAliasesRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: listConflictingAliasesMaxItemsInteger, location: "querystring", location_name: "MaxItems"))
     ListConflictingAliasesRequest.struct_class = Types::ListConflictingAliasesRequest
 
     ListConflictingAliasesResult.add_member(:conflicting_aliases_list, Shapes::ShapeRef.new(shape: ConflictingAliasesList, location_name: "ConflictingAliasesList"))

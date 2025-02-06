@@ -307,6 +307,36 @@ module Aws
                                   ) -> _CreateStackInstancesResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStackInstancesResponseSuccess
 
+      interface _CreateStackRefactorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateStackRefactorOutput]
+        def stack_refactor_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#create_stack_refactor-instance_method
+      def create_stack_refactor: (
+                                   ?description: ::String,
+                                   ?enable_stack_creation: bool,
+                                   ?resource_mappings: Array[
+                                     {
+                                       source: {
+                                         stack_name: ::String,
+                                         logical_resource_id: ::String
+                                       },
+                                       destination: {
+                                         stack_name: ::String,
+                                         logical_resource_id: ::String
+                                       }
+                                     },
+                                   ],
+                                   stack_definitions: Array[
+                                     {
+                                       stack_name: ::String?,
+                                       template_body: ::String?,
+                                       template_url: ::String?
+                                     },
+                                   ]
+                                 ) -> _CreateStackRefactorResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStackRefactorResponseSuccess
+
       interface _CreateStackSetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateStackSetOutput]
         def stack_set_id: () -> ::String
@@ -610,6 +640,22 @@ module Aws
                                    ) -> _DescribeStackInstanceResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStackInstanceResponseSuccess
 
+      interface _DescribeStackRefactorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStackRefactorOutput]
+        def description: () -> ::String
+        def stack_refactor_id: () -> ::String
+        def stack_ids: () -> ::Array[::String]
+        def execution_status: () -> ("UNAVAILABLE" | "AVAILABLE" | "OBSOLETE" | "EXECUTE_IN_PROGRESS" | "EXECUTE_COMPLETE" | "EXECUTE_FAILED" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_COMPLETE" | "ROLLBACK_FAILED")
+        def execution_status_reason: () -> ::String
+        def status: () -> ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED" | "DELETE_IN_PROGRESS" | "DELETE_COMPLETE" | "DELETE_FAILED")
+        def status_reason: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#describe_stack_refactor-instance_method
+      def describe_stack_refactor: (
+                                     stack_refactor_id: ::String
+                                   ) -> _DescribeStackRefactorResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStackRefactorResponseSuccess
+
       interface _DescribeStackResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStackResourceOutput]
         def stack_resource_detail: () -> Types::StackResourceDetail
@@ -810,6 +856,12 @@ module Aws
                                 ?retain_except_on_create: bool
                               ) -> _ExecuteChangeSetResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExecuteChangeSetResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#execute_stack_refactor-instance_method
+      def execute_stack_refactor: (
+                                    stack_refactor_id: ::String
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       interface _GetGeneratedTemplateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetGeneratedTemplateOutput]
@@ -1045,6 +1097,32 @@ module Aws
                                   ?call_as: ("SELF" | "DELEGATED_ADMIN")
                                 ) -> _ListStackInstancesResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStackInstancesResponseSuccess
+
+      interface _ListStackRefactorActionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStackRefactorActionsOutput]
+        def stack_refactor_actions: () -> ::Array[Types::StackRefactorAction]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#list_stack_refactor_actions-instance_method
+      def list_stack_refactor_actions: (
+                                         stack_refactor_id: ::String,
+                                         ?next_token: ::String,
+                                         ?max_results: ::Integer
+                                       ) -> _ListStackRefactorActionsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStackRefactorActionsResponseSuccess
+
+      interface _ListStackRefactorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStackRefactorsOutput]
+        def stack_refactor_summaries: () -> ::Array[Types::StackRefactorSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#list_stack_refactors-instance_method
+      def list_stack_refactors: (
+                                  ?execution_status_filter: Array[("UNAVAILABLE" | "AVAILABLE" | "OBSOLETE" | "EXECUTE_IN_PROGRESS" | "EXECUTE_COMPLETE" | "EXECUTE_FAILED" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_COMPLETE" | "ROLLBACK_FAILED")],
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
+                                ) -> _ListStackRefactorsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStackRefactorsResponseSuccess
 
       interface _ListStackResourcesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListStackResourcesOutput]
@@ -1555,6 +1633,14 @@ module Aws
                     ?next_token: ::String
                   ) -> Client::_DescribeStacksResponseSuccess
                     | (:stack_import_complete waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeStacksResponseSuccess
+                    | (:stack_refactor_create_complete waiter_name, 
+                    stack_refactor_id: ::String
+                  ) -> Client::_DescribeStackRefactorResponseSuccess
+                    | (:stack_refactor_create_complete waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeStackRefactorResponseSuccess
+                    | (:stack_refactor_execute_complete waiter_name, 
+                    stack_refactor_id: ::String
+                  ) -> Client::_DescribeStackRefactorResponseSuccess
+                    | (:stack_refactor_execute_complete waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeStackRefactorResponseSuccess
                     | (:stack_rollback_complete waiter_name, 
                     ?stack_name: ::String,
                     ?next_token: ::String

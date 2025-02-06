@@ -2226,7 +2226,7 @@ module Aws::Keyspaces
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-keyspaces'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

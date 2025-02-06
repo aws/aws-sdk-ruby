@@ -65,6 +65,18 @@ module Aws::ConnectCases
       SENSITIVE: []
     end
 
+    class BatchGetCaseRuleRequest
+      attr_accessor case_rules: ::Array[Types::CaseRuleIdentifier]
+      attr_accessor domain_id: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetCaseRuleResponse
+      attr_accessor case_rules: ::Array[Types::GetCaseRuleResponse]
+      attr_accessor errors: ::Array[Types::CaseRuleError]
+      SENSITIVE: []
+    end
+
     class BatchGetFieldRequest
       attr_accessor domain_id: ::String
       attr_accessor fields: ::Array[Types::FieldIdentifier]
@@ -86,6 +98,27 @@ module Aws::ConnectCases
 
     class BatchPutFieldOptionsResponse
       attr_accessor errors: ::Array[Types::FieldOptionError]
+      SENSITIVE: []
+    end
+
+    class BooleanCondition
+      attr_accessor equal_to: Types::BooleanOperands
+      attr_accessor not_equal_to: Types::BooleanOperands
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class EqualTo < BooleanCondition
+      end
+      class NotEqualTo < BooleanCondition
+      end
+      class Unknown < BooleanCondition
+      end
+    end
+
+    class BooleanOperands
+      attr_accessor operand_one: Types::OperandOne
+      attr_accessor operand_two: Types::OperandTwo
+      attr_accessor result: bool
       SENSITIVE: []
     end
 
@@ -112,6 +145,38 @@ module Aws::ConnectCases
       end
       class Unknown < CaseFilter
       end
+    end
+
+    class CaseRuleDetails
+      attr_accessor required: Types::RequiredCaseRule
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Required < CaseRuleDetails
+      end
+      class Unknown < CaseRuleDetails
+      end
+    end
+
+    class CaseRuleError
+      attr_accessor error_code: ::String
+      attr_accessor id: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CaseRuleIdentifier
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class CaseRuleSummary
+      attr_accessor case_rule_arn: ::String
+      attr_accessor case_rule_id: ::String
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor rule_type: ("Required")
+      SENSITIVE: []
     end
 
     class CaseSummary
@@ -164,6 +229,20 @@ module Aws::ConnectCases
     class CreateCaseResponse
       attr_accessor case_arn: ::String
       attr_accessor case_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCaseRuleRequest
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor name: ::String
+      attr_accessor rule: Types::CaseRuleDetails
+      SENSITIVE: []
+    end
+
+    class CreateCaseRuleResponse
+      attr_accessor case_rule_arn: ::String
+      attr_accessor case_rule_id: ::String
       SENSITIVE: []
     end
 
@@ -227,6 +306,7 @@ module Aws::ConnectCases
       attr_accessor layout_configuration: Types::LayoutConfiguration
       attr_accessor name: ::String
       attr_accessor required_fields: ::Array[Types::RequiredField]
+      attr_accessor rules: ::Array[Types::TemplateRule]
       attr_accessor status: ("Active" | "Inactive")
       SENSITIVE: []
     end
@@ -235,6 +315,15 @@ module Aws::ConnectCases
       attr_accessor template_arn: ::String
       attr_accessor template_id: ::String
       SENSITIVE: []
+    end
+
+    class DeleteCaseRuleRequest
+      attr_accessor case_rule_id: ::String
+      attr_accessor domain_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCaseRuleResponse < Aws::EmptyStructure
     end
 
     class DeleteDomainRequest
@@ -280,6 +369,9 @@ module Aws::ConnectCases
     end
 
     class EmptyFieldValue < Aws::EmptyStructure
+    end
+
+    class EmptyOperandValue < Aws::EmptyStructure
     end
 
     class EventBridgeConfiguration
@@ -445,6 +537,19 @@ module Aws::ConnectCases
       SENSITIVE: []
     end
 
+    class GetCaseRuleResponse
+      attr_accessor case_rule_arn: ::String
+      attr_accessor case_rule_id: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor deleted: bool
+      attr_accessor description: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor rule: Types::CaseRuleDetails
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class GetDomainRequest
       attr_accessor domain_id: ::String
       SENSITIVE: []
@@ -506,6 +611,7 @@ module Aws::ConnectCases
       attr_accessor layout_configuration: Types::LayoutConfiguration
       attr_accessor name: ::String
       attr_accessor required_fields: ::Array[Types::RequiredField]
+      attr_accessor rules: ::Array[Types::TemplateRule]
       attr_accessor status: ("Active" | "Inactive")
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor template_arn: ::String
@@ -544,6 +650,19 @@ module Aws::ConnectCases
       attr_accessor layout_arn: ::String
       attr_accessor layout_id: ::String
       attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ListCaseRulesRequest
+      attr_accessor domain_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCaseRulesResponse
+      attr_accessor case_rules: ::Array[Types::CaseRuleSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -638,6 +757,37 @@ module Aws::ConnectCases
       SENSITIVE: []
     end
 
+    class OperandOne
+      attr_accessor field_id: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class FieldId < OperandOne
+      end
+      class Unknown < OperandOne
+      end
+    end
+
+    class OperandTwo
+      attr_accessor boolean_value: bool
+      attr_accessor double_value: ::Float
+      attr_accessor empty_value: Types::EmptyOperandValue
+      attr_accessor string_value: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class BooleanValue < OperandTwo
+      end
+      class DoubleValue < OperandTwo
+      end
+      class EmptyValue < OperandTwo
+      end
+      class StringValue < OperandTwo
+      end
+      class Unknown < OperandTwo
+      end
+    end
+
     class PutCaseEventConfigurationRequest
       attr_accessor domain_id: ::String
       attr_accessor event_bridge: Types::EventBridgeConfiguration
@@ -701,6 +851,12 @@ module Aws::ConnectCases
       end
       class Unknown < RelatedItemTypeFilter
       end
+    end
+
+    class RequiredCaseRule
+      attr_accessor conditions: ::Array[Types::BooleanCondition]
+      attr_accessor default_value: bool
+      SENSITIVE: []
     end
 
     class RequiredField
@@ -793,6 +949,12 @@ module Aws::ConnectCases
       SENSITIVE: []
     end
 
+    class TemplateRule
+      attr_accessor case_rule_id: ::String
+      attr_accessor field_id: ::String
+      SENSITIVE: []
+    end
+
     class TemplateSummary
       attr_accessor name: ::String
       attr_accessor status: ("Active" | "Inactive")
@@ -823,6 +985,18 @@ module Aws::ConnectCases
     class UpdateCaseResponse < Aws::EmptyStructure
     end
 
+    class UpdateCaseRuleRequest
+      attr_accessor case_rule_id: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor name: ::String
+      attr_accessor rule: Types::CaseRuleDetails
+      SENSITIVE: []
+    end
+
+    class UpdateCaseRuleResponse < Aws::EmptyStructure
+    end
+
     class UpdateFieldRequest
       attr_accessor description: ::String
       attr_accessor domain_id: ::String
@@ -851,6 +1025,7 @@ module Aws::ConnectCases
       attr_accessor layout_configuration: Types::LayoutConfiguration
       attr_accessor name: ::String
       attr_accessor required_fields: ::Array[Types::RequiredField]
+      attr_accessor rules: ::Array[Types::TemplateRule]
       attr_accessor status: ("Active" | "Inactive")
       attr_accessor template_id: ::String
       SENSITIVE: []
