@@ -336,6 +336,8 @@ module Seahorse
           attr_reader :last_used
 
           def __getobj__
+            return yield if block_given? && !defined?(@http)
+
             @http
           end
 
