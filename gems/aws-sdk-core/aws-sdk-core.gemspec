@@ -23,4 +23,6 @@ Gem::Specification.new do |spec|
   }
 
   spec.required_ruby_version = '>= 2.5'
+
+  spec.add_runtime_dependency 'base64'
 end
