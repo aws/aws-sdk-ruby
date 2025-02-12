@@ -29,7 +29,7 @@ module Aws
 
       describe '#encode error' do
 
-        it 'raises an error when payload exceeds' do
+        it 'does not raise an error when payload exceeds' do
           payload = double('payload', :length => 16777217)
           message = Aws::EventStream::Message.new(
             headers: {},
@@ -37,10 +37,10 @@ module Aws
           )
           expect {
             Encoder.new.encode(message)
-          }.to raise_error(Aws::EventStream::Errors::EventPayloadLengthExceedError)
+          }.not_to raise_error(Aws::EventStream::Errors::EventPayloadLengthExceedError)
         end
 
-        it 'raises an error when encoded headers exceeds' do
+        it 'does not raise an error when encoded headers exceeds' do
           headers = {}
           headers['foo'] = Aws::EventStream::HeaderValue.new(
             value: '*' * 131073, type: 'string'
@@ -51,7 +51,7 @@ module Aws
           )
           expect {
             Encoder.new.encode(message)
-          }.to raise_error(Aws::EventStream::Errors::EventHeadersLengthExceedError)
+          }.not_to raise_error(Aws::EventStream::Errors::EventHeadersLengthExceedError)
 
         end
 

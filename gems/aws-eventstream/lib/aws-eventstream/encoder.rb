@@ -41,12 +41,6 @@ module Aws
       # and 4 bytes total message crc checksum
       OVERHEAD_LENGTH = 16
 
-      # Maximum header length allowed (after encode) 128kb
-      MAX_HEADERS_LENGTH = 131072
-
-      # Maximum payload length allowed (after encode) 16mb
-      MAX_PAYLOAD_LENGTH = 16777216
-
       # Encodes Aws::EventStream::Message to output IO when
       #   provided, else return the encoded binary string
       #
@@ -81,9 +75,6 @@ module Aws
         encoded_header = encode_headers(message)
         header_length = encoded_header.bytesize
         # encode payload
-        if message.payload.length > MAX_PAYLOAD_LENGTH
-          raise Aws::EventStream::Errors::EventPayloadLengthExceedError.new
-        end
         encoded_payload = message.payload.read
         total_length = header_length + encoded_payload.bytesize + OVERHEAD_LENGTH
 
@@ -124,10 +115,7 @@ module Aws
             pattern ? [value.value].pack(pattern) : value.value,
           ].pack('a*a*a*')
         end
-        header_entries.join.tap do |encoded_header|
-          break encoded_header if encoded_header.bytesize <= MAX_HEADERS_LENGTH
-          raise Aws::EventStream::Errors::EventHeadersLengthExceedError.new
-        end
+        header_entries.join
       end
 
       private
