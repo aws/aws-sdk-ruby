@@ -25,33 +25,25 @@ module Aws
             expect(test_io.string.freeze).to eq(expectation)
           end
         end
-      end
 
-      describe '#encode error' do
-
-        it 'does not raise an error when payload exceeds' do
-          payload = double('payload', :length => 16777217)
+        it 'encodes large payloads' do
           message = Aws::EventStream::Message.new(
             headers: {},
-            payload: payload
+            payload: StringIO.new('.' * 24 * 1024 * 1024)
           )
-          expect {
-            Encoder.new.encode(message)
-          }.not_to raise_error(Aws::EventStream::Errors::EventPayloadLengthExceedError)
+          Encoder.new.encode(message)
         end
 
-        it 'does not raise an error when encoded headers exceeds' do
+        it 'encodes long headers' do
           headers = {}
           headers['foo'] = Aws::EventStream::HeaderValue.new(
-            value: '*' * 131073, type: 'string'
+            value: '*' * 131_073, type: 'string'
           )
           message = Aws::EventStream::Message.new(
             headers: headers,
             payload: StringIO.new
           )
-          expect {
-            Encoder.new.encode(message)
-          }.not_to raise_error(Aws::EventStream::Errors::EventHeadersLengthExceedError)
+          Encoder.new.encode(message)
 
         end
 
