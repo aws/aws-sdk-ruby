@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Remove event stream max payload size and headers length checks.
+
 1.3.0 (2023-11-22)
 ------------------
 
