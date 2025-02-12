@@ -777,6 +777,8 @@ module Aws::BedrockAgent
     #       override_lambda: "LambdaArn",
     #       prompt_configurations: [ # required
     #         {
+    #           additional_model_request_fields: {
+    #           },
     #           base_prompt_template: "BasePromptTemplate",
     #           foundation_model: "ModelIdentifier",
     #           inference_configuration: {
@@ -2986,12 +2988,12 @@ module Aws::BedrockAgent
 
     # Deletes documents from a data source and syncs the changes to the
     # knowledge base that is connected to it. For more information, see
-    # [Ingest documents into a knowledge base in real-time][1] in the Amazon
+    # [Ingest changes directly into a knowledge base][1] in the Amazon
     # Bedrock User Guide.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-real-time-ingestion.html
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-direct-ingestion.html
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure that the API request
@@ -4101,12 +4103,12 @@ module Aws::BedrockAgent
     end
 
     # Retrieves specific documents from a data source that is connected to a
-    # knowledge base. For more information, see [Ingest documents into a
-    # knowledge base in real-time][1] in the Amazon Bedrock User Guide.
+    # knowledge base. For more information, see [Ingest changes directly
+    # into a knowledge base][1] in the Amazon Bedrock User Guide.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-real-time-ingestion.html
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-direct-ingestion.html
     #
     # @option params [required, String] :data_source_id
     #   The unique identifier of the data source that contains the documents.
@@ -4258,12 +4260,12 @@ module Aws::BedrockAgent
     # Ingests documents directly into the knowledge base that is connected
     # to the data source. The `dataSourceType` specified in the content for
     # each document must match the type of the data source that you specify
-    # in the header. For more information, see [Ingest documents into a
-    # knowledge base in real-time][1] in the Amazon Bedrock User Guide.
+    # in the header. For more information, see [Ingest changes directly into
+    # a knowledge base][1] in the Amazon Bedrock User Guide.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-real-time-ingestion.html
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-direct-ingestion.html
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure that the API request
@@ -5010,12 +5012,12 @@ module Aws::BedrockAgent
 
     # Retrieves all the documents contained in a data source that is
     # connected to a knowledge base. For more information, see [Ingest
-    # documents into a knowledge base in real-time][1] in the Amazon Bedrock
-    # User Guide.
+    # changes directly into a knowledge base][1] in the Amazon Bedrock User
+    # Guide.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-real-time-ingestion.html
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-direct-ingestion.html
     #
     # @option params [required, String] :data_source_id
     #   The unique identifier of the data source that contains the documents.
@@ -5602,6 +5604,8 @@ module Aws::BedrockAgent
     #       override_lambda: "LambdaArn",
     #       prompt_configurations: [ # required
     #         {
+    #           additional_model_request_fields: {
+    #           },
     #           base_prompt_template: "BasePromptTemplate",
     #           foundation_model: "ModelIdentifier",
     #           inference_configuration: {
@@ -7439,7 +7443,7 @@ module Aws::BedrockAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagent'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

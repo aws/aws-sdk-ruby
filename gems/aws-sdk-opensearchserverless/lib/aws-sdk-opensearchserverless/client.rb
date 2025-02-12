@@ -514,25 +514,25 @@ module Aws::OpenSearchServerless
     # @example Response structure
     #
     #   resp.collection_details #=> Array
-    #   resp.collection_details[0].arn #=> String
-    #   resp.collection_details[0].collection_endpoint #=> String
-    #   resp.collection_details[0].created_date #=> Integer
-    #   resp.collection_details[0].dashboard_endpoint #=> String
-    #   resp.collection_details[0].description #=> String
-    #   resp.collection_details[0].failure_code #=> String
-    #   resp.collection_details[0].failure_message #=> String
     #   resp.collection_details[0].id #=> String
-    #   resp.collection_details[0].kms_key_arn #=> String
-    #   resp.collection_details[0].last_modified_date #=> Integer
     #   resp.collection_details[0].name #=> String
-    #   resp.collection_details[0].standby_replicas #=> String, one of "ENABLED", "DISABLED"
     #   resp.collection_details[0].status #=> String, one of "CREATING", "DELETING", "ACTIVE", "FAILED"
     #   resp.collection_details[0].type #=> String, one of "SEARCH", "TIMESERIES", "VECTORSEARCH"
+    #   resp.collection_details[0].description #=> String
+    #   resp.collection_details[0].arn #=> String
+    #   resp.collection_details[0].kms_key_arn #=> String
+    #   resp.collection_details[0].standby_replicas #=> String, one of "ENABLED", "DISABLED"
+    #   resp.collection_details[0].created_date #=> Integer
+    #   resp.collection_details[0].last_modified_date #=> Integer
+    #   resp.collection_details[0].collection_endpoint #=> String
+    #   resp.collection_details[0].dashboard_endpoint #=> String
+    #   resp.collection_details[0].failure_code #=> String
+    #   resp.collection_details[0].failure_message #=> String
     #   resp.collection_error_details #=> Array
-    #   resp.collection_error_details[0].error_code #=> String
-    #   resp.collection_error_details[0].error_message #=> String
     #   resp.collection_error_details[0].id #=> String
     #   resp.collection_error_details[0].name #=> String
+    #   resp.collection_error_details[0].error_message #=> String
+    #   resp.collection_error_details[0].error_code #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/BatchGetCollection AWS API Documentation
     #
@@ -564,8 +564,8 @@ module Aws::OpenSearchServerless
     #   resp = client.batch_get_effective_lifecycle_policy({
     #     resource_identifiers: [ # required
     #       {
-    #         resource: "ResourceName", # required
     #         type: "retention", # required, accepts retention
+    #         resource: "ResourceName", # required
     #       },
     #     ],
     #   })
@@ -573,17 +573,17 @@ module Aws::OpenSearchServerless
     # @example Response structure
     #
     #   resp.effective_lifecycle_policy_details #=> Array
-    #   resp.effective_lifecycle_policy_details[0].no_min_retention_period #=> Boolean
-    #   resp.effective_lifecycle_policy_details[0].policy_name #=> String
+    #   resp.effective_lifecycle_policy_details[0].type #=> String, one of "retention"
     #   resp.effective_lifecycle_policy_details[0].resource #=> String
+    #   resp.effective_lifecycle_policy_details[0].policy_name #=> String
     #   resp.effective_lifecycle_policy_details[0].resource_type #=> String, one of "index"
     #   resp.effective_lifecycle_policy_details[0].retention_period #=> String
-    #   resp.effective_lifecycle_policy_details[0].type #=> String, one of "retention"
+    #   resp.effective_lifecycle_policy_details[0].no_min_retention_period #=> Boolean
     #   resp.effective_lifecycle_policy_error_details #=> Array
-    #   resp.effective_lifecycle_policy_error_details[0].error_code #=> String
-    #   resp.effective_lifecycle_policy_error_details[0].error_message #=> String
-    #   resp.effective_lifecycle_policy_error_details[0].resource #=> String
     #   resp.effective_lifecycle_policy_error_details[0].type #=> String, one of "retention"
+    #   resp.effective_lifecycle_policy_error_details[0].resource #=> String
+    #   resp.effective_lifecycle_policy_error_details[0].error_message #=> String
+    #   resp.effective_lifecycle_policy_error_details[0].error_code #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/BatchGetEffectiveLifecyclePolicy AWS API Documentation
     #
@@ -615,8 +615,8 @@ module Aws::OpenSearchServerless
     #   resp = client.batch_get_lifecycle_policy({
     #     identifiers: [ # required
     #       {
-    #         name: "PolicyName", # required
     #         type: "retention", # required, accepts retention
+    #         name: "PolicyName", # required
     #       },
     #     ],
     #   })
@@ -624,17 +624,17 @@ module Aws::OpenSearchServerless
     # @example Response structure
     #
     #   resp.lifecycle_policy_details #=> Array
-    #   resp.lifecycle_policy_details[0].created_date #=> Integer
-    #   resp.lifecycle_policy_details[0].description #=> String
-    #   resp.lifecycle_policy_details[0].last_modified_date #=> Integer
+    #   resp.lifecycle_policy_details[0].type #=> String, one of "retention"
     #   resp.lifecycle_policy_details[0].name #=> String
     #   resp.lifecycle_policy_details[0].policy_version #=> String
-    #   resp.lifecycle_policy_details[0].type #=> String, one of "retention"
+    #   resp.lifecycle_policy_details[0].description #=> String
+    #   resp.lifecycle_policy_details[0].created_date #=> Integer
+    #   resp.lifecycle_policy_details[0].last_modified_date #=> Integer
     #   resp.lifecycle_policy_error_details #=> Array
-    #   resp.lifecycle_policy_error_details[0].error_code #=> String
-    #   resp.lifecycle_policy_error_details[0].error_message #=> String
-    #   resp.lifecycle_policy_error_details[0].name #=> String
     #   resp.lifecycle_policy_error_details[0].type #=> String, one of "retention"
+    #   resp.lifecycle_policy_error_details[0].name #=> String
+    #   resp.lifecycle_policy_error_details[0].error_message #=> String
+    #   resp.lifecycle_policy_error_details[0].error_code #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/BatchGetLifecyclePolicy AWS API Documentation
     #
@@ -670,21 +670,21 @@ module Aws::OpenSearchServerless
     # @example Response structure
     #
     #   resp.vpc_endpoint_details #=> Array
-    #   resp.vpc_endpoint_details[0].created_date #=> Integer
-    #   resp.vpc_endpoint_details[0].failure_code #=> String
-    #   resp.vpc_endpoint_details[0].failure_message #=> String
     #   resp.vpc_endpoint_details[0].id #=> String
     #   resp.vpc_endpoint_details[0].name #=> String
+    #   resp.vpc_endpoint_details[0].vpc_id #=> String
+    #   resp.vpc_endpoint_details[0].subnet_ids #=> Array
+    #   resp.vpc_endpoint_details[0].subnet_ids[0] #=> String
     #   resp.vpc_endpoint_details[0].security_group_ids #=> Array
     #   resp.vpc_endpoint_details[0].security_group_ids[0] #=> String
     #   resp.vpc_endpoint_details[0].status #=> String, one of "PENDING", "DELETING", "ACTIVE", "FAILED"
-    #   resp.vpc_endpoint_details[0].subnet_ids #=> Array
-    #   resp.vpc_endpoint_details[0].subnet_ids[0] #=> String
-    #   resp.vpc_endpoint_details[0].vpc_id #=> String
+    #   resp.vpc_endpoint_details[0].created_date #=> Integer
+    #   resp.vpc_endpoint_details[0].failure_code #=> String
+    #   resp.vpc_endpoint_details[0].failure_message #=> String
     #   resp.vpc_endpoint_error_details #=> Array
-    #   resp.vpc_endpoint_error_details[0].error_code #=> String
-    #   resp.vpc_endpoint_error_details[0].error_message #=> String
     #   resp.vpc_endpoint_error_details[0].id #=> String
+    #   resp.vpc_endpoint_error_details[0].error_message #=> String
+    #   resp.vpc_endpoint_error_details[0].error_code #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/BatchGetVpcEndpoint AWS API Documentation
     #
@@ -705,25 +705,25 @@ module Aws::OpenSearchServerless
     #
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-data-access.html
     #
+    # @option params [required, String] :type
+    #   The type of policy.
+    #
+    # @option params [required, String] :name
+    #   The name of the policy.
+    #
+    # @option params [String] :description
+    #   A description of the policy. Typically used to store information about
+    #   the permissions defined in the policy.
+    #
+    # @option params [required, String] :policy
+    #   The JSON policy document to use as the content for the policy.
+    #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
     #   request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
-    #
-    # @option params [String] :description
-    #   A description of the policy. Typically used to store information about
-    #   the permissions defined in the policy.
-    #
-    # @option params [required, String] :name
-    #   The name of the policy.
-    #
-    # @option params [required, String] :policy
-    #   The JSON policy document to use as the content for the policy.
-    #
-    # @option params [required, String] :type
-    #   The type of policy.
     #
     # @return [Types::CreateAccessPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -732,21 +732,21 @@ module Aws::OpenSearchServerless
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_access_policy({
-    #     client_token: "ClientToken",
-    #     description: "PolicyDescription",
-    #     name: "PolicyName", # required
-    #     policy: "PolicyDocument", # required
     #     type: "data", # required, accepts data
+    #     name: "PolicyName", # required
+    #     description: "PolicyDescription",
+    #     policy: "PolicyDocument", # required
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
     #
-    #   resp.access_policy_detail.created_date #=> Integer
-    #   resp.access_policy_detail.description #=> String
-    #   resp.access_policy_detail.last_modified_date #=> Integer
+    #   resp.access_policy_detail.type #=> String, one of "data"
     #   resp.access_policy_detail.name #=> String
     #   resp.access_policy_detail.policy_version #=> String
-    #   resp.access_policy_detail.type #=> String, one of "data"
+    #   resp.access_policy_detail.description #=> String
+    #   resp.access_policy_detail.created_date #=> Integer
+    #   resp.access_policy_detail.last_modified_date #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/CreateAccessPolicy AWS API Documentation
     #
@@ -765,28 +765,28 @@ module Aws::OpenSearchServerless
     #
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html
     #
+    # @option params [required, String] :name
+    #   Name of the collection.
+    #
+    # @option params [String] :type
+    #   The type of collection.
+    #
+    # @option params [String] :description
+    #   Description of the collection.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   An arbitrary set of tags (key–value pairs) to associate with the
+    #   OpenSearch Serverless collection.
+    #
+    # @option params [String] :standby_replicas
+    #   Indicates whether standby replicas should be used for a collection.
+    #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
     #   request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
-    #
-    # @option params [String] :description
-    #   Description of the collection.
-    #
-    # @option params [required, String] :name
-    #   Name of the collection.
-    #
-    # @option params [String] :standby_replicas
-    #   Indicates whether standby replicas should be used for a collection.
-    #
-    # @option params [Array<Types::Tag>] :tags
-    #   An arbitrary set of tags (key–value pairs) to associate with the
-    #   OpenSearch Serverless collection.
-    #
-    # @option params [String] :type
-    #   The type of collection.
     #
     # @return [Types::CreateCollectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -795,31 +795,31 @@ module Aws::OpenSearchServerless
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_collection({
-    #     client_token: "ClientToken",
-    #     description: "CreateCollectionRequestDescriptionString",
     #     name: "CollectionName", # required
-    #     standby_replicas: "ENABLED", # accepts ENABLED, DISABLED
+    #     type: "SEARCH", # accepts SEARCH, TIMESERIES, VECTORSEARCH
+    #     description: "CreateCollectionRequestDescriptionString",
     #     tags: [
     #       {
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       },
     #     ],
-    #     type: "SEARCH", # accepts SEARCH, TIMESERIES, VECTORSEARCH
+    #     standby_replicas: "ENABLED", # accepts ENABLED, DISABLED
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
     #
-    #   resp.create_collection_detail.arn #=> String
-    #   resp.create_collection_detail.created_date #=> Integer
-    #   resp.create_collection_detail.description #=> String
     #   resp.create_collection_detail.id #=> String
-    #   resp.create_collection_detail.kms_key_arn #=> String
-    #   resp.create_collection_detail.last_modified_date #=> Integer
     #   resp.create_collection_detail.name #=> String
-    #   resp.create_collection_detail.standby_replicas #=> String, one of "ENABLED", "DISABLED"
     #   resp.create_collection_detail.status #=> String, one of "CREATING", "DELETING", "ACTIVE", "FAILED"
     #   resp.create_collection_detail.type #=> String, one of "SEARCH", "TIMESERIES", "VECTORSEARCH"
+    #   resp.create_collection_detail.description #=> String
+    #   resp.create_collection_detail.arn #=> String
+    #   resp.create_collection_detail.kms_key_arn #=> String
+    #   resp.create_collection_detail.standby_replicas #=> String, one of "ENABLED", "DISABLED"
+    #   resp.create_collection_detail.created_date #=> Integer
+    #   resp.create_collection_detail.last_modified_date #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/CreateCollection AWS API Documentation
     #
@@ -839,25 +839,25 @@ module Aws::OpenSearchServerless
     #
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html#serverless-lifecycle-create
     #
+    # @option params [required, String] :type
+    #   The type of lifecycle policy.
+    #
+    # @option params [required, String] :name
+    #   The name of the lifecycle policy.
+    #
+    # @option params [String] :description
+    #   A description of the lifecycle policy.
+    #
+    # @option params [required, String] :policy
+    #   The JSON policy document to use as the content for the lifecycle
+    #   policy.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure idempotency of the
     #   request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
-    #
-    # @option params [String] :description
-    #   A description of the lifecycle policy.
-    #
-    # @option params [required, String] :name
-    #   The name of the lifecycle policy.
-    #
-    # @option params [required, String] :policy
-    #   The JSON policy document to use as the content for the lifecycle
-    #   policy.
-    #
-    # @option params [required, String] :type
-    #   The type of lifecycle policy.
     #
     # @return [Types::CreateLifecyclePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -866,21 +866,21 @@ module Aws::OpenSearchServerless
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_lifecycle_policy({
-    #     client_token: "ClientToken",
-    #     description: "PolicyDescription",
-    #     name: "PolicyName", # required
-    #     policy: "PolicyDocument", # required
     #     type: "retention", # required, accepts retention
+    #     name: "PolicyName", # required
+    #     description: "PolicyDescription",
+    #     policy: "PolicyDocument", # required
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
     #
-    #   resp.lifecycle_policy_detail.created_date #=> Integer
-    #   resp.lifecycle_policy_detail.description #=> String
-    #   resp.lifecycle_policy_detail.last_modified_date #=> Integer
+    #   resp.lifecycle_policy_detail.type #=> String, one of "retention"
     #   resp.lifecycle_policy_detail.name #=> String
     #   resp.lifecycle_policy_detail.policy_version #=> String
-    #   resp.lifecycle_policy_detail.type #=> String, one of "retention"
+    #   resp.lifecycle_policy_detail.description #=> String
+    #   resp.lifecycle_policy_detail.created_date #=> Integer
+    #   resp.lifecycle_policy_detail.last_modified_date #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/CreateLifecyclePolicy AWS API Documentation
     #
@@ -899,30 +899,30 @@ module Aws::OpenSearchServerless
     #
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html
     #
-    # @option params [String] :client_token
-    #   Unique, case-sensitive identifier to ensure idempotency of the
-    #   request.
+    # @option params [required, String] :type
+    #   The type of security configuration.
     #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.**
+    # @option params [required, String] :name
+    #   The name of the security configuration.
     #
     # @option params [String] :description
     #   A description of the security configuration.
+    #
+    # @option params [Types::SamlConfigOptions] :saml_options
+    #   Describes SAML options in in the form of a key-value map. This field
+    #   is required if you specify `saml` for the `type` parameter.
     #
     # @option params [Types::CreateIamIdentityCenterConfigOptions] :iam_identity_center_options
     #   Describes IAM Identity Center options in the form of a key-value map.
     #   This field is required if you specify iamidentitycenter for the type
     #   parameter.
     #
-    # @option params [required, String] :name
-    #   The name of the security configuration.
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
     #
-    # @option params [Types::SamlConfigOptions] :saml_options
-    #   Describes SAML options in in the form of a key-value map. This field
-    #   is required if you specify `saml` for the `type` parameter.
-    #
-    # @option params [required, String] :type
-    #   The type of security configuration.
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @return [Types::CreateSecurityConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -931,41 +931,43 @@ module Aws::OpenSearchServerless
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_security_config({
-    #     client_token: "ClientToken",
+    #     type: "saml", # required, accepts saml, iamidentitycenter
+    #     name: "ConfigName", # required
     #     description: "ConfigDescription",
+    #     saml_options: {
+    #       metadata: "samlMetadata", # required
+    #       user_attribute: "samlUserAttribute",
+    #       group_attribute: "samlGroupAttribute",
+    #       open_search_serverless_entity_id: "openSearchServerlessEntityId",
+    #       session_timeout: 1,
+    #     },
     #     iam_identity_center_options: {
-    #       group_attribute: "GroupId", # accepts GroupId, GroupName
     #       instance_arn: "IamIdentityCenterInstanceArn", # required
     #       user_attribute: "UserId", # accepts UserId, UserName, Email
+    #       group_attribute: "GroupId", # accepts GroupId, GroupName
     #     },
-    #     name: "ConfigName", # required
-    #     saml_options: {
-    #       group_attribute: "samlGroupAttribute",
-    #       metadata: "samlMetadata", # required
-    #       session_timeout: 1,
-    #       user_attribute: "samlUserAttribute",
-    #     },
-    #     type: "saml", # required, accepts saml, iamidentitycenter
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
     #
-    #   resp.security_config_detail.config_version #=> String
-    #   resp.security_config_detail.created_date #=> Integer
-    #   resp.security_config_detail.description #=> String
-    #   resp.security_config_detail.iam_identity_center_options.application_arn #=> String
-    #   resp.security_config_detail.iam_identity_center_options.application_description #=> String
-    #   resp.security_config_detail.iam_identity_center_options.application_name #=> String
-    #   resp.security_config_detail.iam_identity_center_options.group_attribute #=> String, one of "GroupId", "GroupName"
-    #   resp.security_config_detail.iam_identity_center_options.instance_arn #=> String
-    #   resp.security_config_detail.iam_identity_center_options.user_attribute #=> String, one of "UserId", "UserName", "Email"
     #   resp.security_config_detail.id #=> String
-    #   resp.security_config_detail.last_modified_date #=> Integer
-    #   resp.security_config_detail.saml_options.group_attribute #=> String
-    #   resp.security_config_detail.saml_options.metadata #=> String
-    #   resp.security_config_detail.saml_options.session_timeout #=> Integer
-    #   resp.security_config_detail.saml_options.user_attribute #=> String
     #   resp.security_config_detail.type #=> String, one of "saml", "iamidentitycenter"
+    #   resp.security_config_detail.config_version #=> String
+    #   resp.security_config_detail.description #=> String
+    #   resp.security_config_detail.saml_options.metadata #=> String
+    #   resp.security_config_detail.saml_options.user_attribute #=> String
+    #   resp.security_config_detail.saml_options.group_attribute #=> String
+    #   resp.security_config_detail.saml_options.open_search_serverless_entity_id #=> String
+    #   resp.security_config_detail.saml_options.session_timeout #=> Integer
+    #   resp.security_config_detail.iam_identity_center_options.instance_arn #=> String
+    #   resp.security_config_detail.iam_identity_center_options.application_arn #=> String
+    #   resp.security_config_detail.iam_identity_center_options.application_name #=> String
+    #   resp.security_config_detail.iam_identity_center_options.application_description #=> String
+    #   resp.security_config_detail.iam_identity_center_options.user_attribute #=> String, one of "UserId", "UserName", "Email"
+    #   resp.security_config_detail.iam_identity_center_options.group_attribute #=> String, one of "GroupId", "GroupName"
+    #   resp.security_config_detail.created_date #=> Integer
+    #   resp.security_config_detail.last_modified_date #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/CreateSecurityConfig AWS API Documentation
     #
@@ -989,25 +991,25 @@ module Aws::OpenSearchServerless
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-network.html
     # [2]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-encryption.html
     #
+    # @option params [required, String] :type
+    #   The type of security policy.
+    #
+    # @option params [required, String] :name
+    #   The name of the policy.
+    #
+    # @option params [String] :description
+    #   A description of the policy. Typically used to store information about
+    #   the permissions defined in the policy.
+    #
+    # @option params [required, String] :policy
+    #   The JSON policy document to use as the content for the new policy.
+    #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
     #   request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
-    #
-    # @option params [String] :description
-    #   A description of the policy. Typically used to store information about
-    #   the permissions defined in the policy.
-    #
-    # @option params [required, String] :name
-    #   The name of the policy.
-    #
-    # @option params [required, String] :policy
-    #   The JSON policy document to use as the content for the new policy.
-    #
-    # @option params [required, String] :type
-    #   The type of security policy.
     #
     # @return [Types::CreateSecurityPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1016,21 +1018,21 @@ module Aws::OpenSearchServerless
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_security_policy({
-    #     client_token: "ClientToken",
-    #     description: "PolicyDescription",
-    #     name: "PolicyName", # required
-    #     policy: "PolicyDocument", # required
     #     type: "encryption", # required, accepts encryption, network
+    #     name: "PolicyName", # required
+    #     description: "PolicyDescription",
+    #     policy: "PolicyDocument", # required
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
     #
-    #   resp.security_policy_detail.created_date #=> Integer
-    #   resp.security_policy_detail.description #=> String
-    #   resp.security_policy_detail.last_modified_date #=> Integer
+    #   resp.security_policy_detail.type #=> String, one of "encryption", "network"
     #   resp.security_policy_detail.name #=> String
     #   resp.security_policy_detail.policy_version #=> String
-    #   resp.security_policy_detail.type #=> String, one of "encryption", "network"
+    #   resp.security_policy_detail.description #=> String
+    #   resp.security_policy_detail.created_date #=> Integer
+    #   resp.security_policy_detail.last_modified_date #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/CreateSecurityPolicy AWS API Documentation
     #
@@ -1049,27 +1051,27 @@ module Aws::OpenSearchServerless
     #
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html
     #
-    # @option params [String] :client_token
-    #   Unique, case-sensitive identifier to ensure idempotency of the
-    #   request.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.**
-    #
     # @option params [required, String] :name
     #   The name of the interface endpoint.
+    #
+    # @option params [required, String] :vpc_id
+    #   The ID of the VPC from which you'll access OpenSearch Serverless.
+    #
+    # @option params [required, Array<String>] :subnet_ids
+    #   The ID of one or more subnets from which you'll access OpenSearch
+    #   Serverless.
     #
     # @option params [Array<String>] :security_group_ids
     #   The unique identifiers of the security groups that define the ports,
     #   protocols, and sources for inbound traffic that you are authorizing
     #   into your endpoint.
     #
-    # @option params [required, Array<String>] :subnet_ids
-    #   The ID of one or more subnets from which you'll access OpenSearch
-    #   Serverless.
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
     #
-    # @option params [required, String] :vpc_id
-    #   The ID of the VPC from which you'll access OpenSearch Serverless.
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @return [Types::CreateVpcEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1078,11 +1080,11 @@ module Aws::OpenSearchServerless
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_vpc_endpoint({
-    #     client_token: "ClientToken",
     #     name: "VpcEndpointName", # required
-    #     security_group_ids: ["SecurityGroupId"],
-    #     subnet_ids: ["SubnetId"], # required
     #     vpc_id: "VpcId", # required
+    #     subnet_ids: ["SubnetId"], # required
+    #     security_group_ids: ["SecurityGroupId"],
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
@@ -1107,6 +1109,12 @@ module Aws::OpenSearchServerless
     #
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-data-access.html
     #
+    # @option params [required, String] :type
+    #   The type of policy.
+    #
+    # @option params [required, String] :name
+    #   The name of the policy to delete.
+    #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -1114,20 +1122,14 @@ module Aws::OpenSearchServerless
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [required, String] :name
-    #   The name of the policy to delete.
-    #
-    # @option params [required, String] :type
-    #   The type of policy.
-    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_access_policy({
-    #     client_token: "ClientToken",
-    #     name: "PolicyName", # required
     #     type: "data", # required, accepts data
+    #     name: "PolicyName", # required
+    #     client_token: "ClientToken",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/DeleteAccessPolicy AWS API Documentation
@@ -1146,13 +1148,6 @@ module Aws::OpenSearchServerless
     #
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html
     #
-    # @option params [String] :client_token
-    #   A unique, case-sensitive identifier to ensure idempotency of the
-    #   request.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.**
-    #
     # @option params [required, String] :id
     #   The unique identifier of the collection. For example, `1iu5usc406kd`.
     #   The ID is part of the collection endpoint. You can also retrieve it
@@ -1162,6 +1157,13 @@ module Aws::OpenSearchServerless
     #
     #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/ServerlessAPIReference/API_ListCollections.html
     #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Types::DeleteCollectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteCollectionResponse#delete_collection_detail #delete_collection_detail} => Types::DeleteCollectionDetail
@@ -1169,8 +1171,8 @@ module Aws::OpenSearchServerless
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_collection({
-    #     client_token: "ClientToken",
     #     id: "CollectionId", # required
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
@@ -1195,6 +1197,12 @@ module Aws::OpenSearchServerless
     #
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html#serverless-lifecycle-delete
     #
+    # @option params [required, String] :type
+    #   The type of lifecycle policy.
+    #
+    # @option params [required, String] :name
+    #   The name of the policy to delete.
+    #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -1202,20 +1210,14 @@ module Aws::OpenSearchServerless
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [required, String] :name
-    #   The name of the policy to delete.
-    #
-    # @option params [required, String] :type
-    #   The type of lifecycle policy.
-    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_lifecycle_policy({
-    #     client_token: "ClientToken",
-    #     name: "PolicyName", # required
     #     type: "retention", # required, accepts retention
+    #     name: "PolicyName", # required
+    #     client_token: "ClientToken",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/DeleteLifecyclePolicy AWS API Documentation
@@ -1235,6 +1237,11 @@ module Aws::OpenSearchServerless
     #
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html
     #
+    # @option params [required, String] :id
+    #   The security configuration identifier. For SAML the ID will be
+    #   `saml/<accountId>/<idpProviderName>`. For example,
+    #   `saml/123456789123/OKTADev`.
+    #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -1242,18 +1249,13 @@ module Aws::OpenSearchServerless
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [required, String] :id
-    #   The security configuration identifier. For SAML the ID will be
-    #   `saml/<accountId>/<idpProviderName>`. For example,
-    #   `saml/123456789123/OKTADev`.
-    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_security_config({
-    #     client_token: "ClientToken",
     #     id: "SecurityConfigId", # required
+    #     client_token: "ClientToken",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/DeleteSecurityConfig AWS API Documentation
@@ -1267,6 +1269,12 @@ module Aws::OpenSearchServerless
 
     # Deletes an OpenSearch Serverless security policy.
     #
+    # @option params [required, String] :type
+    #   The type of policy.
+    #
+    # @option params [required, String] :name
+    #   The name of the policy to delete.
+    #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -1274,20 +1282,14 @@ module Aws::OpenSearchServerless
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [required, String] :name
-    #   The name of the policy to delete.
-    #
-    # @option params [required, String] :type
-    #   The type of policy.
-    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_security_policy({
-    #     client_token: "ClientToken",
-    #     name: "PolicyName", # required
     #     type: "encryption", # required, accepts encryption, network
+    #     name: "PolicyName", # required
+    #     client_token: "ClientToken",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/DeleteSecurityPolicy AWS API Documentation
@@ -1307,15 +1309,15 @@ module Aws::OpenSearchServerless
     #
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html
     #
+    # @option params [required, String] :id
+    #   The VPC endpoint identifier.
+    #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
     #   request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
-    #
-    # @option params [required, String] :id
-    #   The VPC endpoint identifier.
     #
     # @return [Types::DeleteVpcEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1324,8 +1326,8 @@ module Aws::OpenSearchServerless
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_vpc_endpoint({
-    #     client_token: "ClientToken",
     #     id: "VpcEndpointId", # required
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
@@ -1350,11 +1352,11 @@ module Aws::OpenSearchServerless
     #
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-data-access.html
     #
-    # @option params [required, String] :name
-    #   The name of the access policy.
-    #
     # @option params [required, String] :type
     #   Tye type of policy. Currently, the only supported value is `data`.
+    #
+    # @option params [required, String] :name
+    #   The name of the access policy.
     #
     # @return [Types::GetAccessPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1363,18 +1365,18 @@ module Aws::OpenSearchServerless
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_access_policy({
-    #     name: "PolicyName", # required
     #     type: "data", # required, accepts data
+    #     name: "PolicyName", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.access_policy_detail.created_date #=> Integer
-    #   resp.access_policy_detail.description #=> String
-    #   resp.access_policy_detail.last_modified_date #=> Integer
+    #   resp.access_policy_detail.type #=> String, one of "data"
     #   resp.access_policy_detail.name #=> String
     #   resp.access_policy_detail.policy_version #=> String
-    #   resp.access_policy_detail.type #=> String, one of "data"
+    #   resp.access_policy_detail.description #=> String
+    #   resp.access_policy_detail.created_date #=> Integer
+    #   resp.access_policy_detail.last_modified_date #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/GetAccessPolicy AWS API Documentation
     #
@@ -1411,18 +1413,18 @@ module Aws::OpenSearchServerless
     # @return [Types::GetPoliciesStatsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetPoliciesStatsResponse#access_policy_stats #access_policy_stats} => Types::AccessPolicyStats
-    #   * {Types::GetPoliciesStatsResponse#lifecycle_policy_stats #lifecycle_policy_stats} => Types::LifecyclePolicyStats
-    #   * {Types::GetPoliciesStatsResponse#security_config_stats #security_config_stats} => Types::SecurityConfigStats
     #   * {Types::GetPoliciesStatsResponse#security_policy_stats #security_policy_stats} => Types::SecurityPolicyStats
+    #   * {Types::GetPoliciesStatsResponse#security_config_stats #security_config_stats} => Types::SecurityConfigStats
+    #   * {Types::GetPoliciesStatsResponse#lifecycle_policy_stats #lifecycle_policy_stats} => Types::LifecyclePolicyStats
     #   * {Types::GetPoliciesStatsResponse#total_policy_count #total_policy_count} => Integer
     #
     # @example Response structure
     #
     #   resp.access_policy_stats.data_policy_count #=> Integer
-    #   resp.lifecycle_policy_stats.retention_policy_count #=> Integer
-    #   resp.security_config_stats.saml_config_count #=> Integer
     #   resp.security_policy_stats.encryption_policy_count #=> Integer
     #   resp.security_policy_stats.network_policy_count #=> Integer
+    #   resp.security_config_stats.saml_config_count #=> Integer
+    #   resp.lifecycle_policy_stats.retention_policy_count #=> Integer
     #   resp.total_policy_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/GetPoliciesStats AWS API Documentation
@@ -1457,22 +1459,23 @@ module Aws::OpenSearchServerless
     #
     # @example Response structure
     #
-    #   resp.security_config_detail.config_version #=> String
-    #   resp.security_config_detail.created_date #=> Integer
-    #   resp.security_config_detail.description #=> String
-    #   resp.security_config_detail.iam_identity_center_options.application_arn #=> String
-    #   resp.security_config_detail.iam_identity_center_options.application_description #=> String
-    #   resp.security_config_detail.iam_identity_center_options.application_name #=> String
-    #   resp.security_config_detail.iam_identity_center_options.group_attribute #=> String, one of "GroupId", "GroupName"
-    #   resp.security_config_detail.iam_identity_center_options.instance_arn #=> String
-    #   resp.security_config_detail.iam_identity_center_options.user_attribute #=> String, one of "UserId", "UserName", "Email"
     #   resp.security_config_detail.id #=> String
-    #   resp.security_config_detail.last_modified_date #=> Integer
-    #   resp.security_config_detail.saml_options.group_attribute #=> String
-    #   resp.security_config_detail.saml_options.metadata #=> String
-    #   resp.security_config_detail.saml_options.session_timeout #=> Integer
-    #   resp.security_config_detail.saml_options.user_attribute #=> String
     #   resp.security_config_detail.type #=> String, one of "saml", "iamidentitycenter"
+    #   resp.security_config_detail.config_version #=> String
+    #   resp.security_config_detail.description #=> String
+    #   resp.security_config_detail.saml_options.metadata #=> String
+    #   resp.security_config_detail.saml_options.user_attribute #=> String
+    #   resp.security_config_detail.saml_options.group_attribute #=> String
+    #   resp.security_config_detail.saml_options.open_search_serverless_entity_id #=> String
+    #   resp.security_config_detail.saml_options.session_timeout #=> Integer
+    #   resp.security_config_detail.iam_identity_center_options.instance_arn #=> String
+    #   resp.security_config_detail.iam_identity_center_options.application_arn #=> String
+    #   resp.security_config_detail.iam_identity_center_options.application_name #=> String
+    #   resp.security_config_detail.iam_identity_center_options.application_description #=> String
+    #   resp.security_config_detail.iam_identity_center_options.user_attribute #=> String, one of "UserId", "UserName", "Email"
+    #   resp.security_config_detail.iam_identity_center_options.group_attribute #=> String, one of "GroupId", "GroupName"
+    #   resp.security_config_detail.created_date #=> Integer
+    #   resp.security_config_detail.last_modified_date #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/GetSecurityConfig AWS API Documentation
     #
@@ -1493,11 +1496,11 @@ module Aws::OpenSearchServerless
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-network.html
     # [2]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-encryption.html
     #
-    # @option params [required, String] :name
-    #   The name of the security policy.
-    #
     # @option params [required, String] :type
     #   The type of security policy.
+    #
+    # @option params [required, String] :name
+    #   The name of the security policy.
     #
     # @return [Types::GetSecurityPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1506,18 +1509,18 @@ module Aws::OpenSearchServerless
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_security_policy({
-    #     name: "PolicyName", # required
     #     type: "encryption", # required, accepts encryption, network
+    #     name: "PolicyName", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.security_policy_detail.created_date #=> Integer
-    #   resp.security_policy_detail.description #=> String
-    #   resp.security_policy_detail.last_modified_date #=> Integer
+    #   resp.security_policy_detail.type #=> String, one of "encryption", "network"
     #   resp.security_policy_detail.name #=> String
     #   resp.security_policy_detail.policy_version #=> String
-    #   resp.security_policy_detail.type #=> String, one of "encryption", "network"
+    #   resp.security_policy_detail.description #=> String
+    #   resp.security_policy_detail.created_date #=> Integer
+    #   resp.security_policy_detail.last_modified_date #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/GetSecurityPolicy AWS API Documentation
     #
@@ -1531,10 +1534,12 @@ module Aws::OpenSearchServerless
     # Returns information about a list of OpenSearch Serverless access
     # policies.
     #
-    # @option params [Integer] :max_results
-    #   An optional parameter that specifies the maximum number of results to
-    #   return. You can use `nextToken` to get the next page of results. The
-    #   default is 20.
+    # @option params [required, String] :type
+    #   The type of access policy.
+    #
+    # @option params [Array<String>] :resource
+    #   Resource filters (can be collections or indexes) that policies can
+    #   apply to.
     #
     # @option params [String] :next_token
     #   If your initial `ListAccessPolicies` operation returns a `nextToken`,
@@ -1542,12 +1547,10 @@ module Aws::OpenSearchServerless
     #   `ListAccessPolicies` operations, which returns results in the next
     #   page.
     #
-    # @option params [Array<String>] :resource
-    #   Resource filters (can be collections or indexes) that policies can
-    #   apply to.
-    #
-    # @option params [required, String] :type
-    #   The type of access policy.
+    # @option params [Integer] :max_results
+    #   An optional parameter that specifies the maximum number of results to
+    #   return. You can use `nextToken` to get the next page of results. The
+    #   default is 20.
     #
     # @return [Types::ListAccessPoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1559,21 +1562,21 @@ module Aws::OpenSearchServerless
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_access_policies({
-    #     max_results: 1,
-    #     next_token: "String",
-    #     resource: ["Resource"],
     #     type: "data", # required, accepts data
+    #     resource: ["Resource"],
+    #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
     #   resp.access_policy_summaries #=> Array
-    #   resp.access_policy_summaries[0].created_date #=> Integer
-    #   resp.access_policy_summaries[0].description #=> String
-    #   resp.access_policy_summaries[0].last_modified_date #=> Integer
+    #   resp.access_policy_summaries[0].type #=> String, one of "data"
     #   resp.access_policy_summaries[0].name #=> String
     #   resp.access_policy_summaries[0].policy_version #=> String
-    #   resp.access_policy_summaries[0].type #=> String, one of "data"
+    #   resp.access_policy_summaries[0].description #=> String
+    #   resp.access_policy_summaries[0].created_date #=> Integer
+    #   resp.access_policy_summaries[0].last_modified_date #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/ListAccessPolicies AWS API Documentation
@@ -1600,14 +1603,14 @@ module Aws::OpenSearchServerless
     # @option params [Types::CollectionFilters] :collection_filters
     #   A list of filter names and values that you can use for requests.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of results to return. Default is 20. You can use
-    #   `nextToken` to get the next page of results.
-    #
     # @option params [String] :next_token
     #   If your initial `ListCollections` operation returns a `nextToken`, you
     #   can include the returned `nextToken` in subsequent `ListCollections`
     #   operations, which returns results in the next page.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return. Default is 20. You can use
+    #   `nextToken` to get the next page of results.
     #
     # @return [Types::ListCollectionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1623,17 +1626,17 @@ module Aws::OpenSearchServerless
     #       name: "CollectionName",
     #       status: "CREATING", # accepts CREATING, DELETING, ACTIVE, FAILED
     #     },
-    #     max_results: 1,
     #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
     #   resp.collection_summaries #=> Array
-    #   resp.collection_summaries[0].arn #=> String
     #   resp.collection_summaries[0].id #=> String
     #   resp.collection_summaries[0].name #=> String
     #   resp.collection_summaries[0].status #=> String, one of "CREATING", "DELETING", "ACTIVE", "FAILED"
+    #   resp.collection_summaries[0].arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/ListCollections AWS API Documentation
@@ -1652,10 +1655,12 @@ module Aws::OpenSearchServerless
     #
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html#serverless-lifecycle-list
     #
-    # @option params [Integer] :max_results
-    #   An optional parameter that specifies the maximum number of results to
-    #   return. You can use use `nextToken` to get the next page of results.
-    #   The default is 10.
+    # @option params [required, String] :type
+    #   The type of lifecycle policy.
+    #
+    # @option params [Array<String>] :resources
+    #   Resource filters that policies can apply to. Currently, the only
+    #   supported resource type is `index`.
     #
     # @option params [String] :next_token
     #   If your initial `ListLifecyclePolicies` operation returns a
@@ -1663,12 +1668,10 @@ module Aws::OpenSearchServerless
     #   `ListLifecyclePolicies` operations, which returns results in the next
     #   page.
     #
-    # @option params [Array<String>] :resources
-    #   Resource filters that policies can apply to. Currently, the only
-    #   supported resource type is `index`.
-    #
-    # @option params [required, String] :type
-    #   The type of lifecycle policy.
+    # @option params [Integer] :max_results
+    #   An optional parameter that specifies the maximum number of results to
+    #   return. You can use use `nextToken` to get the next page of results.
+    #   The default is 10.
     #
     # @return [Types::ListLifecyclePoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1680,21 +1683,21 @@ module Aws::OpenSearchServerless
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_lifecycle_policies({
-    #     max_results: 1,
-    #     next_token: "String",
-    #     resources: ["LifecycleResource"],
     #     type: "retention", # required, accepts retention
+    #     resources: ["LifecycleResource"],
+    #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
     #   resp.lifecycle_policy_summaries #=> Array
-    #   resp.lifecycle_policy_summaries[0].created_date #=> Integer
-    #   resp.lifecycle_policy_summaries[0].description #=> String
-    #   resp.lifecycle_policy_summaries[0].last_modified_date #=> Integer
+    #   resp.lifecycle_policy_summaries[0].type #=> String, one of "retention"
     #   resp.lifecycle_policy_summaries[0].name #=> String
     #   resp.lifecycle_policy_summaries[0].policy_version #=> String
-    #   resp.lifecycle_policy_summaries[0].type #=> String, one of "retention"
+    #   resp.lifecycle_policy_summaries[0].description #=> String
+    #   resp.lifecycle_policy_summaries[0].created_date #=> Integer
+    #   resp.lifecycle_policy_summaries[0].last_modified_date #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/ListLifecyclePolicies AWS API Documentation
@@ -1714,10 +1717,8 @@ module Aws::OpenSearchServerless
     #
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html
     #
-    # @option params [Integer] :max_results
-    #   An optional parameter that specifies the maximum number of results to
-    #   return. You can use `nextToken` to get the next page of results. The
-    #   default is 20.
+    # @option params [required, String] :type
+    #   The type of security configuration.
     #
     # @option params [String] :next_token
     #   If your initial `ListSecurityConfigs` operation returns a `nextToken`,
@@ -1725,34 +1726,36 @@ module Aws::OpenSearchServerless
     #   `ListSecurityConfigs` operations, which returns results in the next
     #   page.
     #
-    # @option params [required, String] :type
-    #   The type of security configuration.
+    # @option params [Integer] :max_results
+    #   An optional parameter that specifies the maximum number of results to
+    #   return. You can use `nextToken` to get the next page of results. The
+    #   default is 20.
     #
     # @return [Types::ListSecurityConfigsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListSecurityConfigsResponse#next_token #next_token} => String
     #   * {Types::ListSecurityConfigsResponse#security_config_summaries #security_config_summaries} => Array&lt;Types::SecurityConfigSummary&gt;
+    #   * {Types::ListSecurityConfigsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_security_configs({
-    #     max_results: 1,
-    #     next_token: "String",
     #     type: "saml", # required, accepts saml, iamidentitycenter
+    #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.security_config_summaries #=> Array
-    #   resp.security_config_summaries[0].config_version #=> String
-    #   resp.security_config_summaries[0].created_date #=> Integer
-    #   resp.security_config_summaries[0].description #=> String
     #   resp.security_config_summaries[0].id #=> String
-    #   resp.security_config_summaries[0].last_modified_date #=> Integer
     #   resp.security_config_summaries[0].type #=> String, one of "saml", "iamidentitycenter"
+    #   resp.security_config_summaries[0].config_version #=> String
+    #   resp.security_config_summaries[0].description #=> String
+    #   resp.security_config_summaries[0].created_date #=> Integer
+    #   resp.security_config_summaries[0].last_modified_date #=> Integer
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/ListSecurityConfigs AWS API Documentation
     #
@@ -1766,10 +1769,12 @@ module Aws::OpenSearchServerless
     # Returns information about configured OpenSearch Serverless security
     # policies.
     #
-    # @option params [Integer] :max_results
-    #   An optional parameter that specifies the maximum number of results to
-    #   return. You can use `nextToken` to get the next page of results. The
-    #   default is 20.
+    # @option params [required, String] :type
+    #   The type of policy.
+    #
+    # @option params [Array<String>] :resource
+    #   Resource filters (can be collection or indexes) that policies can
+    #   apply to.
     #
     # @option params [String] :next_token
     #   If your initial `ListSecurityPolicies` operation returns a
@@ -1777,39 +1782,37 @@ module Aws::OpenSearchServerless
     #   `ListSecurityPolicies` operations, which returns results in the next
     #   page.
     #
-    # @option params [Array<String>] :resource
-    #   Resource filters (can be collection or indexes) that policies can
-    #   apply to.
-    #
-    # @option params [required, String] :type
-    #   The type of policy.
+    # @option params [Integer] :max_results
+    #   An optional parameter that specifies the maximum number of results to
+    #   return. You can use `nextToken` to get the next page of results. The
+    #   default is 20.
     #
     # @return [Types::ListSecurityPoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListSecurityPoliciesResponse#next_token #next_token} => String
     #   * {Types::ListSecurityPoliciesResponse#security_policy_summaries #security_policy_summaries} => Array&lt;Types::SecurityPolicySummary&gt;
+    #   * {Types::ListSecurityPoliciesResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_security_policies({
-    #     max_results: 1,
-    #     next_token: "String",
-    #     resource: ["Resource"],
     #     type: "encryption", # required, accepts encryption, network
+    #     resource: ["Resource"],
+    #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.security_policy_summaries #=> Array
-    #   resp.security_policy_summaries[0].created_date #=> Integer
-    #   resp.security_policy_summaries[0].description #=> String
-    #   resp.security_policy_summaries[0].last_modified_date #=> Integer
+    #   resp.security_policy_summaries[0].type #=> String, one of "encryption", "network"
     #   resp.security_policy_summaries[0].name #=> String
     #   resp.security_policy_summaries[0].policy_version #=> String
-    #   resp.security_policy_summaries[0].type #=> String, one of "encryption", "network"
+    #   resp.security_policy_summaries[0].description #=> String
+    #   resp.security_policy_summaries[0].created_date #=> Integer
+    #   resp.security_policy_summaries[0].last_modified_date #=> Integer
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/ListSecurityPolicies AWS API Documentation
     #
@@ -1866,45 +1869,45 @@ module Aws::OpenSearchServerless
     #
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html
     #
-    # @option params [Integer] :max_results
-    #   An optional parameter that specifies the maximum number of results to
-    #   return. You can use `nextToken` to get the next page of results. The
-    #   default is 20.
+    # @option params [Types::VpcEndpointFilters] :vpc_endpoint_filters
+    #   Filter the results according to the current status of the VPC
+    #   endpoint. Possible statuses are `CREATING`, `DELETING`, `UPDATING`,
+    #   `ACTIVE`, and `FAILED`.
     #
     # @option params [String] :next_token
     #   If your initial `ListVpcEndpoints` operation returns a `nextToken`,
     #   you can include the returned `nextToken` in subsequent
     #   `ListVpcEndpoints` operations, which returns results in the next page.
     #
-    # @option params [Types::VpcEndpointFilters] :vpc_endpoint_filters
-    #   Filter the results according to the current status of the VPC
-    #   endpoint. Possible statuses are `CREATING`, `DELETING`, `UPDATING`,
-    #   `ACTIVE`, and `FAILED`.
+    # @option params [Integer] :max_results
+    #   An optional parameter that specifies the maximum number of results to
+    #   return. You can use `nextToken` to get the next page of results. The
+    #   default is 20.
     #
     # @return [Types::ListVpcEndpointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListVpcEndpointsResponse#next_token #next_token} => String
     #   * {Types::ListVpcEndpointsResponse#vpc_endpoint_summaries #vpc_endpoint_summaries} => Array&lt;Types::VpcEndpointSummary&gt;
+    #   * {Types::ListVpcEndpointsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_vpc_endpoints({
-    #     max_results: 1,
-    #     next_token: "String",
     #     vpc_endpoint_filters: {
     #       status: "PENDING", # accepts PENDING, DELETING, ACTIVE, FAILED
     #     },
+    #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.vpc_endpoint_summaries #=> Array
     #   resp.vpc_endpoint_summaries[0].id #=> String
     #   resp.vpc_endpoint_summaries[0].name #=> String
     #   resp.vpc_endpoint_summaries[0].status #=> String, one of "PENDING", "DELETING", "ACTIVE", "FAILED"
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/ListVpcEndpoints AWS API Documentation
     #
@@ -1997,28 +2000,28 @@ module Aws::OpenSearchServerless
     #
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-data-access.html
     #
+    # @option params [required, String] :type
+    #   The type of policy.
+    #
+    # @option params [required, String] :name
+    #   The name of the policy.
+    #
+    # @option params [required, String] :policy_version
+    #   The version of the policy being updated.
+    #
+    # @option params [String] :description
+    #   A description of the policy. Typically used to store information about
+    #   the permissions defined in the policy.
+    #
+    # @option params [String] :policy
+    #   The JSON policy document to use as the content for the policy.
+    #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
     #   request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
-    #
-    # @option params [String] :description
-    #   A description of the policy. Typically used to store information about
-    #   the permissions defined in the policy.
-    #
-    # @option params [required, String] :name
-    #   The name of the policy.
-    #
-    # @option params [String] :policy
-    #   The JSON policy document to use as the content for the policy.
-    #
-    # @option params [required, String] :policy_version
-    #   The version of the policy being updated.
-    #
-    # @option params [required, String] :type
-    #   The type of policy.
     #
     # @return [Types::UpdateAccessPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2027,22 +2030,22 @@ module Aws::OpenSearchServerless
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_access_policy({
-    #     client_token: "ClientToken",
-    #     description: "PolicyDescription",
-    #     name: "PolicyName", # required
-    #     policy: "PolicyDocument",
-    #     policy_version: "PolicyVersion", # required
     #     type: "data", # required, accepts data
+    #     name: "PolicyName", # required
+    #     policy_version: "PolicyVersion", # required
+    #     description: "PolicyDescription",
+    #     policy: "PolicyDocument",
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
     #
-    #   resp.access_policy_detail.created_date #=> Integer
-    #   resp.access_policy_detail.description #=> String
-    #   resp.access_policy_detail.last_modified_date #=> Integer
+    #   resp.access_policy_detail.type #=> String, one of "data"
     #   resp.access_policy_detail.name #=> String
     #   resp.access_policy_detail.policy_version #=> String
-    #   resp.access_policy_detail.type #=> String, one of "data"
+    #   resp.access_policy_detail.description #=> String
+    #   resp.access_policy_detail.created_date #=> Integer
+    #   resp.access_policy_detail.last_modified_date #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/UpdateAccessPolicy AWS API Documentation
     #
@@ -2100,18 +2103,18 @@ module Aws::OpenSearchServerless
 
     # Updates an OpenSearch Serverless collection.
     #
+    # @option params [required, String] :id
+    #   The unique identifier of the collection.
+    #
+    # @option params [String] :description
+    #   A description of the collection.
+    #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
     #   request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
-    #
-    # @option params [String] :description
-    #   A description of the collection.
-    #
-    # @option params [required, String] :id
-    #   The unique identifier of the collection.
     #
     # @return [Types::UpdateCollectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2120,21 +2123,21 @@ module Aws::OpenSearchServerless
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_collection({
-    #     client_token: "ClientToken",
-    #     description: "UpdateCollectionRequestDescriptionString",
     #     id: "CollectionId", # required
+    #     description: "UpdateCollectionRequestDescriptionString",
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
     #
-    #   resp.update_collection_detail.arn #=> String
-    #   resp.update_collection_detail.created_date #=> Integer
-    #   resp.update_collection_detail.description #=> String
     #   resp.update_collection_detail.id #=> String
-    #   resp.update_collection_detail.last_modified_date #=> Integer
     #   resp.update_collection_detail.name #=> String
     #   resp.update_collection_detail.status #=> String, one of "CREATING", "DELETING", "ACTIVE", "FAILED"
     #   resp.update_collection_detail.type #=> String, one of "SEARCH", "TIMESERIES", "VECTORSEARCH"
+    #   resp.update_collection_detail.description #=> String
+    #   resp.update_collection_detail.arn #=> String
+    #   resp.update_collection_detail.created_date #=> Integer
+    #   resp.update_collection_detail.last_modified_date #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/UpdateCollection AWS API Documentation
     #
@@ -2152,28 +2155,28 @@ module Aws::OpenSearchServerless
     #
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html#serverless-lifecycle-update
     #
+    # @option params [required, String] :type
+    #   The type of lifecycle policy.
+    #
+    # @option params [required, String] :name
+    #   The name of the policy.
+    #
+    # @option params [required, String] :policy_version
+    #   The version of the policy being updated.
+    #
+    # @option params [String] :description
+    #   A description of the lifecycle policy.
+    #
+    # @option params [String] :policy
+    #   The JSON policy document to use as the content for the lifecycle
+    #   policy.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure idempotency of the
     #   request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
-    #
-    # @option params [String] :description
-    #   A description of the lifecycle policy.
-    #
-    # @option params [required, String] :name
-    #   The name of the policy.
-    #
-    # @option params [String] :policy
-    #   The JSON policy document to use as the content for the lifecycle
-    #   policy.
-    #
-    # @option params [required, String] :policy_version
-    #   The version of the policy being updated.
-    #
-    # @option params [required, String] :type
-    #   The type of lifecycle policy.
     #
     # @return [Types::UpdateLifecyclePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2182,22 +2185,22 @@ module Aws::OpenSearchServerless
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_lifecycle_policy({
-    #     client_token: "ClientToken",
-    #     description: "PolicyDescription",
-    #     name: "PolicyName", # required
-    #     policy: "PolicyDocument",
-    #     policy_version: "PolicyVersion", # required
     #     type: "retention", # required, accepts retention
+    #     name: "PolicyName", # required
+    #     policy_version: "PolicyVersion", # required
+    #     description: "PolicyDescription",
+    #     policy: "PolicyDocument",
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
     #
-    #   resp.lifecycle_policy_detail.created_date #=> Integer
-    #   resp.lifecycle_policy_detail.description #=> String
-    #   resp.lifecycle_policy_detail.last_modified_date #=> Integer
+    #   resp.lifecycle_policy_detail.type #=> String, one of "retention"
     #   resp.lifecycle_policy_detail.name #=> String
     #   resp.lifecycle_policy_detail.policy_version #=> String
-    #   resp.lifecycle_policy_detail.type #=> String, one of "retention"
+    #   resp.lifecycle_policy_detail.description #=> String
+    #   resp.lifecycle_policy_detail.created_date #=> Integer
+    #   resp.lifecycle_policy_detail.last_modified_date #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/UpdateLifecyclePolicy AWS API Documentation
     #
@@ -2216,12 +2219,10 @@ module Aws::OpenSearchServerless
     #
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html
     #
-    # @option params [String] :client_token
-    #   Unique, case-sensitive identifier to ensure idempotency of the
-    #   request.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.**
+    # @option params [required, String] :id
+    #   The security configuration identifier. For SAML the ID will be
+    #   `saml/<accountId>/<idpProviderName>`. For example,
+    #   `saml/123456789123/OKTADev`.
     #
     # @option params [required, String] :config_version
     #   The version of the security configuration to be updated. You can find
@@ -2231,16 +2232,18 @@ module Aws::OpenSearchServerless
     # @option params [String] :description
     #   A description of the security configuration.
     #
+    # @option params [Types::SamlConfigOptions] :saml_options
+    #   SAML options in in the form of a key-value map.
+    #
     # @option params [Types::UpdateIamIdentityCenterConfigOptions] :iam_identity_center_options_updates
     #   Describes IAM Identity Center options in the form of a key-value map.
     #
-    # @option params [required, String] :id
-    #   The security configuration identifier. For SAML the ID will be
-    #   `saml/<accountId>/<idpProviderName>`. For example,
-    #   `saml/123456789123/OKTADev`.
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
     #
-    # @option params [Types::SamlConfigOptions] :saml_options
-    #   SAML options in in the form of a key-value map.
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @return [Types::UpdateSecurityConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2249,40 +2252,42 @@ module Aws::OpenSearchServerless
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_security_config({
-    #     client_token: "ClientToken",
+    #     id: "SecurityConfigId", # required
     #     config_version: "PolicyVersion", # required
     #     description: "ConfigDescription",
-    #     iam_identity_center_options_updates: {
-    #       group_attribute: "GroupId", # accepts GroupId, GroupName
-    #       user_attribute: "UserId", # accepts UserId, UserName, Email
-    #     },
-    #     id: "SecurityConfigId", # required
     #     saml_options: {
-    #       group_attribute: "samlGroupAttribute",
     #       metadata: "samlMetadata", # required
-    #       session_timeout: 1,
     #       user_attribute: "samlUserAttribute",
+    #       group_attribute: "samlGroupAttribute",
+    #       open_search_serverless_entity_id: "openSearchServerlessEntityId",
+    #       session_timeout: 1,
     #     },
+    #     iam_identity_center_options_updates: {
+    #       user_attribute: "UserId", # accepts UserId, UserName, Email
+    #       group_attribute: "GroupId", # accepts GroupId, GroupName
+    #     },
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
     #
-    #   resp.security_config_detail.config_version #=> String
-    #   resp.security_config_detail.created_date #=> Integer
-    #   resp.security_config_detail.description #=> String
-    #   resp.security_config_detail.iam_identity_center_options.application_arn #=> String
-    #   resp.security_config_detail.iam_identity_center_options.application_description #=> String
-    #   resp.security_config_detail.iam_identity_center_options.application_name #=> String
-    #   resp.security_config_detail.iam_identity_center_options.group_attribute #=> String, one of "GroupId", "GroupName"
-    #   resp.security_config_detail.iam_identity_center_options.instance_arn #=> String
-    #   resp.security_config_detail.iam_identity_center_options.user_attribute #=> String, one of "UserId", "UserName", "Email"
     #   resp.security_config_detail.id #=> String
-    #   resp.security_config_detail.last_modified_date #=> Integer
-    #   resp.security_config_detail.saml_options.group_attribute #=> String
-    #   resp.security_config_detail.saml_options.metadata #=> String
-    #   resp.security_config_detail.saml_options.session_timeout #=> Integer
-    #   resp.security_config_detail.saml_options.user_attribute #=> String
     #   resp.security_config_detail.type #=> String, one of "saml", "iamidentitycenter"
+    #   resp.security_config_detail.config_version #=> String
+    #   resp.security_config_detail.description #=> String
+    #   resp.security_config_detail.saml_options.metadata #=> String
+    #   resp.security_config_detail.saml_options.user_attribute #=> String
+    #   resp.security_config_detail.saml_options.group_attribute #=> String
+    #   resp.security_config_detail.saml_options.open_search_serverless_entity_id #=> String
+    #   resp.security_config_detail.saml_options.session_timeout #=> Integer
+    #   resp.security_config_detail.iam_identity_center_options.instance_arn #=> String
+    #   resp.security_config_detail.iam_identity_center_options.application_arn #=> String
+    #   resp.security_config_detail.iam_identity_center_options.application_name #=> String
+    #   resp.security_config_detail.iam_identity_center_options.application_description #=> String
+    #   resp.security_config_detail.iam_identity_center_options.user_attribute #=> String, one of "UserId", "UserName", "Email"
+    #   resp.security_config_detail.iam_identity_center_options.group_attribute #=> String, one of "GroupId", "GroupName"
+    #   resp.security_config_detail.created_date #=> Integer
+    #   resp.security_config_detail.last_modified_date #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/UpdateSecurityConfig AWS API Documentation
     #
@@ -2302,28 +2307,28 @@ module Aws::OpenSearchServerless
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-network.html
     # [2]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-encryption.html
     #
+    # @option params [required, String] :type
+    #   The type of access policy.
+    #
+    # @option params [required, String] :name
+    #   The name of the policy.
+    #
+    # @option params [required, String] :policy_version
+    #   The version of the policy being updated.
+    #
+    # @option params [String] :description
+    #   A description of the policy. Typically used to store information about
+    #   the permissions defined in the policy.
+    #
+    # @option params [String] :policy
+    #   The JSON policy document to use as the content for the new policy.
+    #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
     #   request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
-    #
-    # @option params [String] :description
-    #   A description of the policy. Typically used to store information about
-    #   the permissions defined in the policy.
-    #
-    # @option params [required, String] :name
-    #   The name of the policy.
-    #
-    # @option params [String] :policy
-    #   The JSON policy document to use as the content for the new policy.
-    #
-    # @option params [required, String] :policy_version
-    #   The version of the policy being updated.
-    #
-    # @option params [required, String] :type
-    #   The type of access policy.
     #
     # @return [Types::UpdateSecurityPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2332,22 +2337,22 @@ module Aws::OpenSearchServerless
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_security_policy({
-    #     client_token: "ClientToken",
-    #     description: "PolicyDescription",
-    #     name: "PolicyName", # required
-    #     policy: "PolicyDocument",
-    #     policy_version: "PolicyVersion", # required
     #     type: "encryption", # required, accepts encryption, network
+    #     name: "PolicyName", # required
+    #     policy_version: "PolicyVersion", # required
+    #     description: "PolicyDescription",
+    #     policy: "PolicyDocument",
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
     #
-    #   resp.security_policy_detail.created_date #=> Integer
-    #   resp.security_policy_detail.description #=> String
-    #   resp.security_policy_detail.last_modified_date #=> Integer
+    #   resp.security_policy_detail.type #=> String, one of "encryption", "network"
     #   resp.security_policy_detail.name #=> String
     #   resp.security_policy_detail.policy_version #=> String
-    #   resp.security_policy_detail.type #=> String, one of "encryption", "network"
+    #   resp.security_policy_detail.description #=> String
+    #   resp.security_policy_detail.created_date #=> Integer
+    #   resp.security_policy_detail.last_modified_date #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/UpdateSecurityPolicy AWS API Documentation
     #
@@ -2366,13 +2371,23 @@ module Aws::OpenSearchServerless
     #
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html
     #
+    # @option params [required, String] :id
+    #   The unique identifier of the interface endpoint to update.
+    #
+    # @option params [Array<String>] :add_subnet_ids
+    #   The ID of one or more subnets to add to the endpoint.
+    #
+    # @option params [Array<String>] :remove_subnet_ids
+    #   The unique identifiers of the subnets to remove from the endpoint.
+    #
     # @option params [Array<String>] :add_security_group_ids
     #   The unique identifiers of the security groups to add to the endpoint.
     #   Security groups define the ports, protocols, and sources for inbound
     #   traffic that you are authorizing into your endpoint.
     #
-    # @option params [Array<String>] :add_subnet_ids
-    #   The ID of one or more subnets to add to the endpoint.
+    # @option params [Array<String>] :remove_security_group_ids
+    #   The unique identifiers of the security groups to remove from the
+    #   endpoint.
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
@@ -2381,16 +2396,6 @@ module Aws::OpenSearchServerless
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [required, String] :id
-    #   The unique identifier of the interface endpoint to update.
-    #
-    # @option params [Array<String>] :remove_security_group_ids
-    #   The unique identifiers of the security groups to remove from the
-    #   endpoint.
-    #
-    # @option params [Array<String>] :remove_subnet_ids
-    #   The unique identifiers of the subnets to remove from the endpoint.
-    #
     # @return [Types::UpdateVpcEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateVpcEndpointResponse#update_vpc_endpoint_detail #update_vpc_endpoint_detail} => Types::UpdateVpcEndpointDetail
@@ -2398,24 +2403,24 @@ module Aws::OpenSearchServerless
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_vpc_endpoint({
-    #     add_security_group_ids: ["SecurityGroupId"],
-    #     add_subnet_ids: ["SubnetId"],
-    #     client_token: "ClientToken",
     #     id: "VpcEndpointId", # required
-    #     remove_security_group_ids: ["SecurityGroupId"],
+    #     add_subnet_ids: ["SubnetId"],
     #     remove_subnet_ids: ["SubnetId"],
+    #     add_security_group_ids: ["SecurityGroupId"],
+    #     remove_security_group_ids: ["SecurityGroupId"],
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
     #
     #   resp.update_vpc_endpoint_detail.id #=> String
-    #   resp.update_vpc_endpoint_detail.last_modified_date #=> Integer
     #   resp.update_vpc_endpoint_detail.name #=> String
-    #   resp.update_vpc_endpoint_detail.security_group_ids #=> Array
-    #   resp.update_vpc_endpoint_detail.security_group_ids[0] #=> String
     #   resp.update_vpc_endpoint_detail.status #=> String, one of "PENDING", "DELETING", "ACTIVE", "FAILED"
     #   resp.update_vpc_endpoint_detail.subnet_ids #=> Array
     #   resp.update_vpc_endpoint_detail.subnet_ids[0] #=> String
+    #   resp.update_vpc_endpoint_detail.security_group_ids #=> Array
+    #   resp.update_vpc_endpoint_detail.security_group_ids[0] #=> String
+    #   resp.update_vpc_endpoint_detail.last_modified_date #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/UpdateVpcEndpoint AWS API Documentation
     #
@@ -2444,7 +2449,7 @@ module Aws::OpenSearchServerless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-opensearchserverless'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

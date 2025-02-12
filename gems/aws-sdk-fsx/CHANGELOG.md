@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.109.0 (2025-02-12)
+------------------
+
+* Feature - Support for in-place Lustre version upgrades
+
 1.108.0 (2025-02-06)
 ------------------
 

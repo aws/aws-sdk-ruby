@@ -14149,12 +14149,18 @@ module Aws::MediaLive
     #   Represents the tags associated with a resource.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] request_id
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateCloudWatchAlarmTemplateGroupRequest AWS API Documentation
     #
     class CreateCloudWatchAlarmTemplateGroupRequest < Struct.new(
       :description,
       :name,
-      :tags)
+      :tags,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14172,12 +14178,18 @@ module Aws::MediaLive
     #   Represents the tags associated with a resource.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] request_id
+    #   An ID that you assign to a create request. This ID ensures idempotency when creating resources.**A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateCloudWatchAlarmTemplateGroupRequestContent AWS API Documentation
     #
     class CreateCloudWatchAlarmTemplateGroupRequestContent < Struct.new(
       :description,
       :name,
-      :tags)
+      :tags,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14307,6 +14319,11 @@ module Aws::MediaLive
     #   alarm's condition.
     #   @return [String]
     #
+    # @!attribute [rw] request_id
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateCloudWatchAlarmTemplateRequest AWS API Documentation
     #
     class CreateCloudWatchAlarmTemplateRequest < Struct.new(
@@ -14322,7 +14339,8 @@ module Aws::MediaLive
       :tags,
       :target_resource_type,
       :threshold,
-      :treat_missing_data)
+      :treat_missing_data,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14388,6 +14406,11 @@ module Aws::MediaLive
     #   alarm's condition.
     #   @return [String]
     #
+    # @!attribute [rw] request_id
+    #   An ID that you assign to a create request. This ID ensures idempotency when creating resources.**A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateCloudWatchAlarmTemplateRequestContent AWS API Documentation
     #
     class CreateCloudWatchAlarmTemplateRequestContent < Struct.new(
@@ -14403,7 +14426,8 @@ module Aws::MediaLive
       :tags,
       :target_resource_type,
       :threshold,
-      :treat_missing_data)
+      :treat_missing_data,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14601,12 +14625,18 @@ module Aws::MediaLive
     #   Represents the tags associated with a resource.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] request_id
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateEventBridgeRuleTemplateGroupRequest AWS API Documentation
     #
     class CreateEventBridgeRuleTemplateGroupRequest < Struct.new(
       :description,
       :name,
-      :tags)
+      :tags,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14624,12 +14654,18 @@ module Aws::MediaLive
     #   Represents the tags associated with a resource.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] request_id
+    #   An ID that you assign to a create request. This ID ensures idempotency when creating resources.**A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateEventBridgeRuleTemplateGroupRequestContent AWS API Documentation
     #
     class CreateEventBridgeRuleTemplateGroupRequestContent < Struct.new(
       :description,
       :name,
-      :tags)
+      :tags,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14732,6 +14768,11 @@ module Aws::MediaLive
     #   Represents the tags associated with a resource.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] request_id
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateEventBridgeRuleTemplateRequest AWS API Documentation
     #
     class CreateEventBridgeRuleTemplateRequest < Struct.new(
@@ -14740,7 +14781,8 @@ module Aws::MediaLive
       :event_type,
       :group_identifier,
       :name,
-      :tags)
+      :tags,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14770,6 +14812,11 @@ module Aws::MediaLive
     #   Represents the tags associated with a resource.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] request_id
+    #   An ID that you assign to a create request. This ID ensures idempotency when creating resources.**A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateEventBridgeRuleTemplateRequestContent AWS API Documentation
     #
     class CreateEventBridgeRuleTemplateRequestContent < Struct.new(
@@ -14778,7 +14825,8 @@ module Aws::MediaLive
       :event_type,
       :group_identifier,
       :name,
-      :tags)
+      :tags,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14908,6 +14956,11 @@ module Aws::MediaLive
     #   Represents the tags associated with a resource.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] request_id
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateSignalMapRequest AWS API Documentation
     #
     class CreateSignalMapRequest < Struct.new(
@@ -14916,7 +14969,8 @@ module Aws::MediaLive
       :discovery_entry_point_arn,
       :event_bridge_rule_template_group_identifiers,
       :name,
-      :tags)
+      :tags,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14945,6 +14999,11 @@ module Aws::MediaLive
     #   Represents the tags associated with a resource.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] request_id
+    #   An ID that you assign to a create request. This ID ensures idempotency when creating resources.**A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateSignalMapRequestContent AWS API Documentation
     #
     class CreateSignalMapRequestContent < Struct.new(
@@ -14953,7 +15012,8 @@ module Aws::MediaLive
       :discovery_entry_point_arn,
       :event_bridge_rule_template_group_identifiers,
       :name,
-      :tags)
+      :tags,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16633,11 +16693,17 @@ module Aws::MediaLive
     # @!attribute [rw] identifier
     #   @return [String]
     #
+    # @!attribute [rw] request_id
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartMonitorDeploymentRequest AWS API Documentation
     #
     class StartMonitorDeploymentRequest < Struct.new(
       :dry_run,
-      :identifier)
+      :identifier,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16645,10 +16711,16 @@ module Aws::MediaLive
     # @!attribute [rw] dry_run
     #   @return [Boolean]
     #
+    # @!attribute [rw] request_id
+    #   An ID that you assign to a create request. This ID ensures idempotency when creating resources.**A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartMonitorDeploymentRequestContent AWS API Documentation
     #
     class StartMonitorDeploymentRequestContent < Struct.new(
-      :dry_run)
+      :dry_run,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end

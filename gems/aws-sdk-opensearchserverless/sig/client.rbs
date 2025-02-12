@@ -99,8 +99,8 @@ module Aws
       def batch_get_effective_lifecycle_policy: (
                                                   resource_identifiers: Array[
                                                     {
-                                                      resource: ::String,
-                                                      type: ("retention")
+                                                      type: ("retention"),
+                                                      resource: ::String
                                                     },
                                                   ]
                                                 ) -> _BatchGetEffectiveLifecyclePolicyResponseSuccess
@@ -115,8 +115,8 @@ module Aws
       def batch_get_lifecycle_policy: (
                                         identifiers: Array[
                                           {
-                                            name: ::String,
-                                            type: ("retention")
+                                            type: ("retention"),
+                                            name: ::String
                                           },
                                         ]
                                       ) -> _BatchGetLifecyclePolicyResponseSuccess
@@ -139,11 +139,11 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#create_access_policy-instance_method
       def create_access_policy: (
-                                  ?client_token: ::String,
-                                  ?description: ::String,
+                                  type: ("data"),
                                   name: ::String,
+                                  ?description: ::String,
                                   policy: ::String,
-                                  type: ("data")
+                                  ?client_token: ::String
                                 ) -> _CreateAccessPolicyResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAccessPolicyResponseSuccess
 
@@ -153,17 +153,17 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#create_collection-instance_method
       def create_collection: (
-                               ?client_token: ::String,
-                               ?description: ::String,
                                name: ::String,
-                               ?standby_replicas: ("ENABLED" | "DISABLED"),
+                               ?type: ("SEARCH" | "TIMESERIES" | "VECTORSEARCH"),
+                               ?description: ::String,
                                ?tags: Array[
                                  {
                                    key: ::String,
                                    value: ::String
                                  },
                                ],
-                               ?type: ("SEARCH" | "TIMESERIES" | "VECTORSEARCH")
+                               ?standby_replicas: ("ENABLED" | "DISABLED"),
+                               ?client_token: ::String
                              ) -> _CreateCollectionResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCollectionResponseSuccess
 
@@ -173,11 +173,11 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#create_lifecycle_policy-instance_method
       def create_lifecycle_policy: (
-                                     ?client_token: ::String,
-                                     ?description: ::String,
+                                     type: ("retention"),
                                      name: ::String,
+                                     ?description: ::String,
                                      policy: ::String,
-                                     type: ("retention")
+                                     ?client_token: ::String
                                    ) -> _CreateLifecyclePolicyResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLifecyclePolicyResponseSuccess
 
@@ -187,21 +187,22 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#create_security_config-instance_method
       def create_security_config: (
-                                    ?client_token: ::String,
-                                    ?description: ::String,
-                                    ?iam_identity_center_options: {
-                                      group_attribute: ("GroupId" | "GroupName")?,
-                                      instance_arn: ::String,
-                                      user_attribute: ("UserId" | "UserName" | "Email")?
-                                    },
+                                    type: ("saml" | "iamidentitycenter"),
                                     name: ::String,
+                                    ?description: ::String,
                                     ?saml_options: {
-                                      group_attribute: ::String?,
                                       metadata: ::String,
-                                      session_timeout: ::Integer?,
-                                      user_attribute: ::String?
+                                      user_attribute: ::String?,
+                                      group_attribute: ::String?,
+                                      open_search_serverless_entity_id: ::String?,
+                                      session_timeout: ::Integer?
                                     },
-                                    type: ("saml" | "iamidentitycenter")
+                                    ?iam_identity_center_options: {
+                                      instance_arn: ::String,
+                                      user_attribute: ("UserId" | "UserName" | "Email")?,
+                                      group_attribute: ("GroupId" | "GroupName")?
+                                    },
+                                    ?client_token: ::String
                                   ) -> _CreateSecurityConfigResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSecurityConfigResponseSuccess
 
@@ -211,11 +212,11 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#create_security_policy-instance_method
       def create_security_policy: (
-                                    ?client_token: ::String,
-                                    ?description: ::String,
+                                    type: ("encryption" | "network"),
                                     name: ::String,
+                                    ?description: ::String,
                                     policy: ::String,
-                                    type: ("encryption" | "network")
+                                    ?client_token: ::String
                                   ) -> _CreateSecurityPolicyResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSecurityPolicyResponseSuccess
 
@@ -225,11 +226,11 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#create_vpc_endpoint-instance_method
       def create_vpc_endpoint: (
-                                 ?client_token: ::String,
                                  name: ::String,
-                                 ?security_group_ids: Array[::String],
+                                 vpc_id: ::String,
                                  subnet_ids: Array[::String],
-                                 vpc_id: ::String
+                                 ?security_group_ids: Array[::String],
+                                 ?client_token: ::String
                                ) -> _CreateVpcEndpointResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVpcEndpointResponseSuccess
 
@@ -238,9 +239,9 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#delete_access_policy-instance_method
       def delete_access_policy: (
-                                  ?client_token: ::String,
+                                  type: ("data"),
                                   name: ::String,
-                                  type: ("data")
+                                  ?client_token: ::String
                                 ) -> _DeleteAccessPolicyResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAccessPolicyResponseSuccess
 
@@ -250,8 +251,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#delete_collection-instance_method
       def delete_collection: (
-                               ?client_token: ::String,
-                               id: ::String
+                               id: ::String,
+                               ?client_token: ::String
                              ) -> _DeleteCollectionResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCollectionResponseSuccess
 
@@ -260,9 +261,9 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#delete_lifecycle_policy-instance_method
       def delete_lifecycle_policy: (
-                                     ?client_token: ::String,
+                                     type: ("retention"),
                                      name: ::String,
-                                     type: ("retention")
+                                     ?client_token: ::String
                                    ) -> _DeleteLifecyclePolicyResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLifecyclePolicyResponseSuccess
 
@@ -271,8 +272,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#delete_security_config-instance_method
       def delete_security_config: (
-                                    ?client_token: ::String,
-                                    id: ::String
+                                    id: ::String,
+                                    ?client_token: ::String
                                   ) -> _DeleteSecurityConfigResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSecurityConfigResponseSuccess
 
@@ -281,9 +282,9 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#delete_security_policy-instance_method
       def delete_security_policy: (
-                                    ?client_token: ::String,
+                                    type: ("encryption" | "network"),
                                     name: ::String,
-                                    type: ("encryption" | "network")
+                                    ?client_token: ::String
                                   ) -> _DeleteSecurityPolicyResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSecurityPolicyResponseSuccess
 
@@ -293,8 +294,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#delete_vpc_endpoint-instance_method
       def delete_vpc_endpoint: (
-                                 ?client_token: ::String,
-                                 id: ::String
+                                 id: ::String,
+                                 ?client_token: ::String
                                ) -> _DeleteVpcEndpointResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVpcEndpointResponseSuccess
 
@@ -304,8 +305,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#get_access_policy-instance_method
       def get_access_policy: (
-                               name: ::String,
-                               type: ("data")
+                               type: ("data"),
+                               name: ::String
                              ) -> _GetAccessPolicyResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccessPolicyResponseSuccess
 
@@ -321,9 +322,9 @@ module Aws
       interface _GetPoliciesStatsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetPoliciesStatsResponse]
         def access_policy_stats: () -> Types::AccessPolicyStats
-        def lifecycle_policy_stats: () -> Types::LifecyclePolicyStats
-        def security_config_stats: () -> Types::SecurityConfigStats
         def security_policy_stats: () -> Types::SecurityPolicyStats
+        def security_config_stats: () -> Types::SecurityConfigStats
+        def lifecycle_policy_stats: () -> Types::LifecyclePolicyStats
         def total_policy_count: () -> ::Integer
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#get_policies_stats-instance_method
@@ -347,8 +348,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#get_security_policy-instance_method
       def get_security_policy: (
-                                 name: ::String,
-                                 type: ("encryption" | "network")
+                                 type: ("encryption" | "network"),
+                                 name: ::String
                                ) -> _GetSecurityPolicyResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSecurityPolicyResponseSuccess
 
@@ -359,10 +360,10 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#list_access_policies-instance_method
       def list_access_policies: (
-                                  ?max_results: ::Integer,
-                                  ?next_token: ::String,
+                                  type: ("data"),
                                   ?resource: Array[::String],
-                                  type: ("data")
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
                                 ) -> _ListAccessPoliciesResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccessPoliciesResponseSuccess
 
@@ -377,8 +378,8 @@ module Aws
                                 name: ::String?,
                                 status: ("CREATING" | "DELETING" | "ACTIVE" | "FAILED")?
                               },
-                              ?max_results: ::Integer,
-                              ?next_token: ::String
+                              ?next_token: ::String,
+                              ?max_results: ::Integer
                             ) -> _ListCollectionsResponseSuccess
                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCollectionsResponseSuccess
 
@@ -389,37 +390,37 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#list_lifecycle_policies-instance_method
       def list_lifecycle_policies: (
-                                     ?max_results: ::Integer,
-                                     ?next_token: ::String,
+                                     type: ("retention"),
                                      ?resources: Array[::String],
-                                     type: ("retention")
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
                                    ) -> _ListLifecyclePoliciesResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLifecyclePoliciesResponseSuccess
 
       interface _ListSecurityConfigsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListSecurityConfigsResponse]
-        def next_token: () -> ::String
         def security_config_summaries: () -> ::Array[Types::SecurityConfigSummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#list_security_configs-instance_method
       def list_security_configs: (
-                                   ?max_results: ::Integer,
+                                   type: ("saml" | "iamidentitycenter"),
                                    ?next_token: ::String,
-                                   type: ("saml" | "iamidentitycenter")
+                                   ?max_results: ::Integer
                                  ) -> _ListSecurityConfigsResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSecurityConfigsResponseSuccess
 
       interface _ListSecurityPoliciesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListSecurityPoliciesResponse]
-        def next_token: () -> ::String
         def security_policy_summaries: () -> ::Array[Types::SecurityPolicySummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#list_security_policies-instance_method
       def list_security_policies: (
-                                    ?max_results: ::Integer,
-                                    ?next_token: ::String,
+                                    type: ("encryption" | "network"),
                                     ?resource: Array[::String],
-                                    type: ("encryption" | "network")
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
                                   ) -> _ListSecurityPoliciesResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSecurityPoliciesResponseSuccess
 
@@ -435,16 +436,16 @@ module Aws
 
       interface _ListVpcEndpointsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListVpcEndpointsResponse]
-        def next_token: () -> ::String
         def vpc_endpoint_summaries: () -> ::Array[Types::VpcEndpointSummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#list_vpc_endpoints-instance_method
       def list_vpc_endpoints: (
-                                ?max_results: ::Integer,
-                                ?next_token: ::String,
                                 ?vpc_endpoint_filters: {
                                   status: ("PENDING" | "DELETING" | "ACTIVE" | "FAILED")?
-                                }
+                                },
+                                ?next_token: ::String,
+                                ?max_results: ::Integer
                               ) -> _ListVpcEndpointsResponseSuccess
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVpcEndpointsResponseSuccess
 
@@ -479,12 +480,12 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#update_access_policy-instance_method
       def update_access_policy: (
-                                  ?client_token: ::String,
-                                  ?description: ::String,
+                                  type: ("data"),
                                   name: ::String,
-                                  ?policy: ::String,
                                   policy_version: ::String,
-                                  type: ("data")
+                                  ?description: ::String,
+                                  ?policy: ::String,
+                                  ?client_token: ::String
                                 ) -> _UpdateAccessPolicyResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAccessPolicyResponseSuccess
 
@@ -507,9 +508,9 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#update_collection-instance_method
       def update_collection: (
-                               ?client_token: ::String,
+                               id: ::String,
                                ?description: ::String,
-                               id: ::String
+                               ?client_token: ::String
                              ) -> _UpdateCollectionResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCollectionResponseSuccess
 
@@ -519,12 +520,12 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#update_lifecycle_policy-instance_method
       def update_lifecycle_policy: (
-                                     ?client_token: ::String,
-                                     ?description: ::String,
+                                     type: ("retention"),
                                      name: ::String,
-                                     ?policy: ::String,
                                      policy_version: ::String,
-                                     type: ("retention")
+                                     ?description: ::String,
+                                     ?policy: ::String,
+                                     ?client_token: ::String
                                    ) -> _UpdateLifecyclePolicyResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLifecyclePolicyResponseSuccess
 
@@ -534,20 +535,21 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#update_security_config-instance_method
       def update_security_config: (
-                                    ?client_token: ::String,
+                                    id: ::String,
                                     config_version: ::String,
                                     ?description: ::String,
-                                    ?iam_identity_center_options_updates: {
-                                      group_attribute: ("GroupId" | "GroupName")?,
-                                      user_attribute: ("UserId" | "UserName" | "Email")?
-                                    },
-                                    id: ::String,
                                     ?saml_options: {
-                                      group_attribute: ::String?,
                                       metadata: ::String,
-                                      session_timeout: ::Integer?,
-                                      user_attribute: ::String?
-                                    }
+                                      user_attribute: ::String?,
+                                      group_attribute: ::String?,
+                                      open_search_serverless_entity_id: ::String?,
+                                      session_timeout: ::Integer?
+                                    },
+                                    ?iam_identity_center_options_updates: {
+                                      user_attribute: ("UserId" | "UserName" | "Email")?,
+                                      group_attribute: ("GroupId" | "GroupName")?
+                                    },
+                                    ?client_token: ::String
                                   ) -> _UpdateSecurityConfigResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSecurityConfigResponseSuccess
 
@@ -557,12 +559,12 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#update_security_policy-instance_method
       def update_security_policy: (
-                                    ?client_token: ::String,
-                                    ?description: ::String,
+                                    type: ("encryption" | "network"),
                                     name: ::String,
-                                    ?policy: ::String,
                                     policy_version: ::String,
-                                    type: ("encryption" | "network")
+                                    ?description: ::String,
+                                    ?policy: ::String,
+                                    ?client_token: ::String
                                   ) -> _UpdateSecurityPolicyResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSecurityPolicyResponseSuccess
 
@@ -572,12 +574,12 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#update_vpc_endpoint-instance_method
       def update_vpc_endpoint: (
-                                 ?add_security_group_ids: Array[::String],
-                                 ?add_subnet_ids: Array[::String],
-                                 ?client_token: ::String,
                                  id: ::String,
+                                 ?add_subnet_ids: Array[::String],
+                                 ?remove_subnet_ids: Array[::String],
+                                 ?add_security_group_ids: Array[::String],
                                  ?remove_security_group_ids: Array[::String],
-                                 ?remove_subnet_ids: Array[::String]
+                                 ?client_token: ::String
                                ) -> _UpdateVpcEndpointResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateVpcEndpointResponseSuccess
     end

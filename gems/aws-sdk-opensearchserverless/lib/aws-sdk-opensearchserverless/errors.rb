@@ -115,11 +115,6 @@ module Aws::OpenSearchServerless
       end
 
       # @return [String]
-      def quota_code
-        @data[:quota_code]
-      end
-
-      # @return [String]
       def resource_id
         @data[:resource_id]
       end
@@ -132,6 +127,11 @@ module Aws::OpenSearchServerless
       # @return [String]
       def service_code
         @data[:service_code]
+      end
+
+      # @return [String]
+      def quota_code
+        @data[:quota_code]
       end
     end
 

@@ -9,13 +9,13 @@ module Aws::OpenSearchServerless
   module Types
 
     class AccessPolicyDetail
-      attr_accessor created_date: ::Integer
-      attr_accessor description: ::String
-      attr_accessor last_modified_date: ::Integer
-      attr_accessor name: ::String
-      attr_accessor policy: untyped
-      attr_accessor policy_version: ::String
       attr_accessor type: ("data")
+      attr_accessor name: ::String
+      attr_accessor policy_version: ::String
+      attr_accessor description: ::String
+      attr_accessor policy: untyped
+      attr_accessor created_date: ::Integer
+      attr_accessor last_modified_date: ::Integer
       SENSITIVE: []
     end
 
@@ -25,12 +25,12 @@ module Aws::OpenSearchServerless
     end
 
     class AccessPolicySummary
-      attr_accessor created_date: ::Integer
-      attr_accessor description: ::String
-      attr_accessor last_modified_date: ::Integer
+      attr_accessor type: ("data")
       attr_accessor name: ::String
       attr_accessor policy_version: ::String
-      attr_accessor type: ("data")
+      attr_accessor description: ::String
+      attr_accessor created_date: ::Integer
+      attr_accessor last_modified_date: ::Integer
       SENSITIVE: []
     end
 
@@ -91,28 +91,28 @@ module Aws::OpenSearchServerless
     end
 
     class CollectionDetail
-      attr_accessor arn: ::String
-      attr_accessor collection_endpoint: ::String
-      attr_accessor created_date: ::Integer
-      attr_accessor dashboard_endpoint: ::String
-      attr_accessor description: ::String
-      attr_accessor failure_code: ::String
-      attr_accessor failure_message: ::String
       attr_accessor id: ::String
-      attr_accessor kms_key_arn: ::String
-      attr_accessor last_modified_date: ::Integer
       attr_accessor name: ::String
-      attr_accessor standby_replicas: ("ENABLED" | "DISABLED")
       attr_accessor status: ("CREATING" | "DELETING" | "ACTIVE" | "FAILED")
       attr_accessor type: ("SEARCH" | "TIMESERIES" | "VECTORSEARCH")
+      attr_accessor description: ::String
+      attr_accessor arn: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor standby_replicas: ("ENABLED" | "DISABLED")
+      attr_accessor created_date: ::Integer
+      attr_accessor last_modified_date: ::Integer
+      attr_accessor collection_endpoint: ::String
+      attr_accessor dashboard_endpoint: ::String
+      attr_accessor failure_code: ::String
+      attr_accessor failure_message: ::String
       SENSITIVE: []
     end
 
     class CollectionErrorDetail
-      attr_accessor error_code: ::String
-      attr_accessor error_message: ::String
       attr_accessor id: ::String
       attr_accessor name: ::String
+      attr_accessor error_message: ::String
+      attr_accessor error_code: ::String
       SENSITIVE: []
     end
 
@@ -123,10 +123,10 @@ module Aws::OpenSearchServerless
     end
 
     class CollectionSummary
-      attr_accessor arn: ::String
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor status: ("CREATING" | "DELETING" | "ACTIVE" | "FAILED")
+      attr_accessor arn: ::String
       SENSITIVE: []
     end
 
@@ -136,11 +136,11 @@ module Aws::OpenSearchServerless
     end
 
     class CreateAccessPolicyRequest
-      attr_accessor client_token: ::String
-      attr_accessor description: ::String
-      attr_accessor name: ::String
-      attr_accessor policy: ::String
       attr_accessor type: ("data")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor policy: ::String
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -150,26 +150,26 @@ module Aws::OpenSearchServerless
     end
 
     class CreateCollectionDetail
-      attr_accessor arn: ::String
-      attr_accessor created_date: ::Integer
-      attr_accessor description: ::String
       attr_accessor id: ::String
-      attr_accessor kms_key_arn: ::String
-      attr_accessor last_modified_date: ::Integer
       attr_accessor name: ::String
-      attr_accessor standby_replicas: ("ENABLED" | "DISABLED")
       attr_accessor status: ("CREATING" | "DELETING" | "ACTIVE" | "FAILED")
       attr_accessor type: ("SEARCH" | "TIMESERIES" | "VECTORSEARCH")
+      attr_accessor description: ::String
+      attr_accessor arn: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor standby_replicas: ("ENABLED" | "DISABLED")
+      attr_accessor created_date: ::Integer
+      attr_accessor last_modified_date: ::Integer
       SENSITIVE: []
     end
 
     class CreateCollectionRequest
-      attr_accessor client_token: ::String
-      attr_accessor description: ::String
       attr_accessor name: ::String
-      attr_accessor standby_replicas: ("ENABLED" | "DISABLED")
-      attr_accessor tags: ::Array[Types::Tag]
       attr_accessor type: ("SEARCH" | "TIMESERIES" | "VECTORSEARCH")
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor standby_replicas: ("ENABLED" | "DISABLED")
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -179,18 +179,18 @@ module Aws::OpenSearchServerless
     end
 
     class CreateIamIdentityCenterConfigOptions
-      attr_accessor group_attribute: ("GroupId" | "GroupName")
       attr_accessor instance_arn: ::String
       attr_accessor user_attribute: ("UserId" | "UserName" | "Email")
+      attr_accessor group_attribute: ("GroupId" | "GroupName")
       SENSITIVE: []
     end
 
     class CreateLifecyclePolicyRequest
-      attr_accessor client_token: ::String
-      attr_accessor description: ::String
-      attr_accessor name: ::String
-      attr_accessor policy: ::String
       attr_accessor type: ("retention")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor policy: ::String
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -200,12 +200,12 @@ module Aws::OpenSearchServerless
     end
 
     class CreateSecurityConfigRequest
-      attr_accessor client_token: ::String
-      attr_accessor description: ::String
-      attr_accessor iam_identity_center_options: Types::CreateIamIdentityCenterConfigOptions
-      attr_accessor name: ::String
-      attr_accessor saml_options: Types::SamlConfigOptions
       attr_accessor type: ("saml" | "iamidentitycenter")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor saml_options: Types::SamlConfigOptions
+      attr_accessor iam_identity_center_options: Types::CreateIamIdentityCenterConfigOptions
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -215,11 +215,11 @@ module Aws::OpenSearchServerless
     end
 
     class CreateSecurityPolicyRequest
-      attr_accessor client_token: ::String
-      attr_accessor description: ::String
-      attr_accessor name: ::String
-      attr_accessor policy: ::String
       attr_accessor type: ("encryption" | "network")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor policy: ::String
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -236,11 +236,11 @@ module Aws::OpenSearchServerless
     end
 
     class CreateVpcEndpointRequest
-      attr_accessor client_token: ::String
       attr_accessor name: ::String
-      attr_accessor security_group_ids: ::Array[::String]
-      attr_accessor subnet_ids: ::Array[::String]
       attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -250,9 +250,9 @@ module Aws::OpenSearchServerless
     end
 
     class DeleteAccessPolicyRequest
-      attr_accessor client_token: ::String
-      attr_accessor name: ::String
       attr_accessor type: ("data")
+      attr_accessor name: ::String
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -267,8 +267,8 @@ module Aws::OpenSearchServerless
     end
 
     class DeleteCollectionRequest
-      attr_accessor client_token: ::String
       attr_accessor id: ::String
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -278,9 +278,9 @@ module Aws::OpenSearchServerless
     end
 
     class DeleteLifecyclePolicyRequest
-      attr_accessor client_token: ::String
-      attr_accessor name: ::String
       attr_accessor type: ("retention")
+      attr_accessor name: ::String
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -288,8 +288,8 @@ module Aws::OpenSearchServerless
     end
 
     class DeleteSecurityConfigRequest
-      attr_accessor client_token: ::String
       attr_accessor id: ::String
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -297,9 +297,9 @@ module Aws::OpenSearchServerless
     end
 
     class DeleteSecurityPolicyRequest
-      attr_accessor client_token: ::String
-      attr_accessor name: ::String
       attr_accessor type: ("encryption" | "network")
+      attr_accessor name: ::String
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -314,8 +314,8 @@ module Aws::OpenSearchServerless
     end
 
     class DeleteVpcEndpointRequest
-      attr_accessor client_token: ::String
       attr_accessor id: ::String
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -325,26 +325,26 @@ module Aws::OpenSearchServerless
     end
 
     class EffectiveLifecyclePolicyDetail
-      attr_accessor no_min_retention_period: bool
-      attr_accessor policy_name: ::String
+      attr_accessor type: ("retention")
       attr_accessor resource: ::String
+      attr_accessor policy_name: ::String
       attr_accessor resource_type: ("index")
       attr_accessor retention_period: ::String
-      attr_accessor type: ("retention")
+      attr_accessor no_min_retention_period: bool
       SENSITIVE: []
     end
 
     class EffectiveLifecyclePolicyErrorDetail
-      attr_accessor error_code: ::String
-      attr_accessor error_message: ::String
-      attr_accessor resource: ::String
       attr_accessor type: ("retention")
+      attr_accessor resource: ::String
+      attr_accessor error_message: ::String
+      attr_accessor error_code: ::String
       SENSITIVE: []
     end
 
     class GetAccessPolicyRequest
-      attr_accessor name: ::String
       attr_accessor type: ("data")
+      attr_accessor name: ::String
       SENSITIVE: []
     end
 
@@ -366,9 +366,9 @@ module Aws::OpenSearchServerless
 
     class GetPoliciesStatsResponse
       attr_accessor access_policy_stats: Types::AccessPolicyStats
-      attr_accessor lifecycle_policy_stats: Types::LifecyclePolicyStats
-      attr_accessor security_config_stats: Types::SecurityConfigStats
       attr_accessor security_policy_stats: Types::SecurityPolicyStats
+      attr_accessor security_config_stats: Types::SecurityConfigStats
+      attr_accessor lifecycle_policy_stats: Types::LifecyclePolicyStats
       attr_accessor total_policy_count: ::Integer
       SENSITIVE: []
     end
@@ -384,8 +384,8 @@ module Aws::OpenSearchServerless
     end
 
     class GetSecurityPolicyRequest
-      attr_accessor name: ::String
       attr_accessor type: ("encryption" | "network")
+      attr_accessor name: ::String
       SENSITIVE: []
     end
 
@@ -395,12 +395,12 @@ module Aws::OpenSearchServerless
     end
 
     class IamIdentityCenterConfigOptions
-      attr_accessor application_arn: ::String
-      attr_accessor application_description: ::String
-      attr_accessor application_name: ::String
-      attr_accessor group_attribute: ("GroupId" | "GroupName")
       attr_accessor instance_arn: ::String
+      attr_accessor application_arn: ::String
+      attr_accessor application_name: ::String
+      attr_accessor application_description: ::String
       attr_accessor user_attribute: ("UserId" | "UserName" | "Email")
+      attr_accessor group_attribute: ("GroupId" | "GroupName")
       SENSITIVE: []
     end
 
@@ -410,33 +410,33 @@ module Aws::OpenSearchServerless
     end
 
     class LifecyclePolicyDetail
-      attr_accessor created_date: ::Integer
-      attr_accessor description: ::String
-      attr_accessor last_modified_date: ::Integer
-      attr_accessor name: ::String
-      attr_accessor policy: untyped
-      attr_accessor policy_version: ::String
       attr_accessor type: ("retention")
+      attr_accessor name: ::String
+      attr_accessor policy_version: ::String
+      attr_accessor description: ::String
+      attr_accessor policy: untyped
+      attr_accessor created_date: ::Integer
+      attr_accessor last_modified_date: ::Integer
       SENSITIVE: []
     end
 
     class LifecyclePolicyErrorDetail
-      attr_accessor error_code: ::String
-      attr_accessor error_message: ::String
-      attr_accessor name: ::String
       attr_accessor type: ("retention")
+      attr_accessor name: ::String
+      attr_accessor error_message: ::String
+      attr_accessor error_code: ::String
       SENSITIVE: []
     end
 
     class LifecyclePolicyIdentifier
-      attr_accessor name: ::String
       attr_accessor type: ("retention")
+      attr_accessor name: ::String
       SENSITIVE: []
     end
 
     class LifecyclePolicyResourceIdentifier
-      attr_accessor resource: ::String
       attr_accessor type: ("retention")
+      attr_accessor resource: ::String
       SENSITIVE: []
     end
 
@@ -446,20 +446,20 @@ module Aws::OpenSearchServerless
     end
 
     class LifecyclePolicySummary
-      attr_accessor created_date: ::Integer
-      attr_accessor description: ::String
-      attr_accessor last_modified_date: ::Integer
+      attr_accessor type: ("retention")
       attr_accessor name: ::String
       attr_accessor policy_version: ::String
-      attr_accessor type: ("retention")
+      attr_accessor description: ::String
+      attr_accessor created_date: ::Integer
+      attr_accessor last_modified_date: ::Integer
       SENSITIVE: []
     end
 
     class ListAccessPoliciesRequest
-      attr_accessor max_results: ::Integer
-      attr_accessor next_token: ::String
-      attr_accessor resource: ::Array[::String]
       attr_accessor type: ("data")
+      attr_accessor resource: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
@@ -471,8 +471,8 @@ module Aws::OpenSearchServerless
 
     class ListCollectionsRequest
       attr_accessor collection_filters: Types::CollectionFilters
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
@@ -483,10 +483,10 @@ module Aws::OpenSearchServerless
     end
 
     class ListLifecyclePoliciesRequest
-      attr_accessor max_results: ::Integer
-      attr_accessor next_token: ::String
-      attr_accessor resources: ::Array[::String]
       attr_accessor type: ("retention")
+      attr_accessor resources: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
@@ -497,29 +497,29 @@ module Aws::OpenSearchServerless
     end
 
     class ListSecurityConfigsRequest
-      attr_accessor max_results: ::Integer
-      attr_accessor next_token: ::String
       attr_accessor type: ("saml" | "iamidentitycenter")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class ListSecurityConfigsResponse
-      attr_accessor next_token: ::String
       attr_accessor security_config_summaries: ::Array[Types::SecurityConfigSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class ListSecurityPoliciesRequest
-      attr_accessor max_results: ::Integer
-      attr_accessor next_token: ::String
-      attr_accessor resource: ::Array[::String]
       attr_accessor type: ("encryption" | "network")
+      attr_accessor resource: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class ListSecurityPoliciesResponse
-      attr_accessor next_token: ::String
       attr_accessor security_policy_summaries: ::Array[Types::SecurityPolicySummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -534,15 +534,15 @@ module Aws::OpenSearchServerless
     end
 
     class ListVpcEndpointsRequest
-      attr_accessor max_results: ::Integer
-      attr_accessor next_token: ::String
       attr_accessor vpc_endpoint_filters: Types::VpcEndpointFilters
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class ListVpcEndpointsResponse
-      attr_accessor next_token: ::String
       attr_accessor vpc_endpoint_summaries: ::Array[Types::VpcEndpointSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -557,22 +557,23 @@ module Aws::OpenSearchServerless
     end
 
     class SamlConfigOptions
-      attr_accessor group_attribute: ::String
       attr_accessor metadata: ::String
-      attr_accessor session_timeout: ::Integer
       attr_accessor user_attribute: ::String
+      attr_accessor group_attribute: ::String
+      attr_accessor open_search_serverless_entity_id: ::String
+      attr_accessor session_timeout: ::Integer
       SENSITIVE: []
     end
 
     class SecurityConfigDetail
-      attr_accessor config_version: ::String
-      attr_accessor created_date: ::Integer
-      attr_accessor description: ::String
-      attr_accessor iam_identity_center_options: Types::IamIdentityCenterConfigOptions
       attr_accessor id: ::String
-      attr_accessor last_modified_date: ::Integer
-      attr_accessor saml_options: Types::SamlConfigOptions
       attr_accessor type: ("saml" | "iamidentitycenter")
+      attr_accessor config_version: ::String
+      attr_accessor description: ::String
+      attr_accessor saml_options: Types::SamlConfigOptions
+      attr_accessor iam_identity_center_options: Types::IamIdentityCenterConfigOptions
+      attr_accessor created_date: ::Integer
+      attr_accessor last_modified_date: ::Integer
       SENSITIVE: []
     end
 
@@ -582,23 +583,23 @@ module Aws::OpenSearchServerless
     end
 
     class SecurityConfigSummary
-      attr_accessor config_version: ::String
-      attr_accessor created_date: ::Integer
-      attr_accessor description: ::String
       attr_accessor id: ::String
-      attr_accessor last_modified_date: ::Integer
       attr_accessor type: ("saml" | "iamidentitycenter")
+      attr_accessor config_version: ::String
+      attr_accessor description: ::String
+      attr_accessor created_date: ::Integer
+      attr_accessor last_modified_date: ::Integer
       SENSITIVE: []
     end
 
     class SecurityPolicyDetail
-      attr_accessor created_date: ::Integer
-      attr_accessor description: ::String
-      attr_accessor last_modified_date: ::Integer
-      attr_accessor name: ::String
-      attr_accessor policy: untyped
-      attr_accessor policy_version: ::String
       attr_accessor type: ("encryption" | "network")
+      attr_accessor name: ::String
+      attr_accessor policy_version: ::String
+      attr_accessor description: ::String
+      attr_accessor policy: untyped
+      attr_accessor created_date: ::Integer
+      attr_accessor last_modified_date: ::Integer
       SENSITIVE: []
     end
 
@@ -609,21 +610,21 @@ module Aws::OpenSearchServerless
     end
 
     class SecurityPolicySummary
-      attr_accessor created_date: ::Integer
-      attr_accessor description: ::String
-      attr_accessor last_modified_date: ::Integer
+      attr_accessor type: ("encryption" | "network")
       attr_accessor name: ::String
       attr_accessor policy_version: ::String
-      attr_accessor type: ("encryption" | "network")
+      attr_accessor description: ::String
+      attr_accessor created_date: ::Integer
+      attr_accessor last_modified_date: ::Integer
       SENSITIVE: []
     end
 
     class ServiceQuotaExceededException
       attr_accessor message: ::String
-      attr_accessor quota_code: ::String
       attr_accessor resource_id: ::String
       attr_accessor resource_type: ::String
       attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
       SENSITIVE: []
     end
 
@@ -652,12 +653,12 @@ module Aws::OpenSearchServerless
     end
 
     class UpdateAccessPolicyRequest
-      attr_accessor client_token: ::String
-      attr_accessor description: ::String
-      attr_accessor name: ::String
-      attr_accessor policy: ::String
-      attr_accessor policy_version: ::String
       attr_accessor type: ("data")
+      attr_accessor name: ::String
+      attr_accessor policy_version: ::String
+      attr_accessor description: ::String
+      attr_accessor policy: ::String
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -677,21 +678,21 @@ module Aws::OpenSearchServerless
     end
 
     class UpdateCollectionDetail
-      attr_accessor arn: ::String
-      attr_accessor created_date: ::Integer
-      attr_accessor description: ::String
       attr_accessor id: ::String
-      attr_accessor last_modified_date: ::Integer
       attr_accessor name: ::String
       attr_accessor status: ("CREATING" | "DELETING" | "ACTIVE" | "FAILED")
       attr_accessor type: ("SEARCH" | "TIMESERIES" | "VECTORSEARCH")
+      attr_accessor description: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_date: ::Integer
+      attr_accessor last_modified_date: ::Integer
       SENSITIVE: []
     end
 
     class UpdateCollectionRequest
-      attr_accessor client_token: ::String
-      attr_accessor description: ::String
       attr_accessor id: ::String
+      attr_accessor description: ::String
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -701,18 +702,18 @@ module Aws::OpenSearchServerless
     end
 
     class UpdateIamIdentityCenterConfigOptions
-      attr_accessor group_attribute: ("GroupId" | "GroupName")
       attr_accessor user_attribute: ("UserId" | "UserName" | "Email")
+      attr_accessor group_attribute: ("GroupId" | "GroupName")
       SENSITIVE: []
     end
 
     class UpdateLifecyclePolicyRequest
-      attr_accessor client_token: ::String
-      attr_accessor description: ::String
-      attr_accessor name: ::String
-      attr_accessor policy: ::String
-      attr_accessor policy_version: ::String
       attr_accessor type: ("retention")
+      attr_accessor name: ::String
+      attr_accessor policy_version: ::String
+      attr_accessor description: ::String
+      attr_accessor policy: ::String
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -722,12 +723,12 @@ module Aws::OpenSearchServerless
     end
 
     class UpdateSecurityConfigRequest
-      attr_accessor client_token: ::String
+      attr_accessor id: ::String
       attr_accessor config_version: ::String
       attr_accessor description: ::String
-      attr_accessor iam_identity_center_options_updates: Types::UpdateIamIdentityCenterConfigOptions
-      attr_accessor id: ::String
       attr_accessor saml_options: Types::SamlConfigOptions
+      attr_accessor iam_identity_center_options_updates: Types::UpdateIamIdentityCenterConfigOptions
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -737,12 +738,12 @@ module Aws::OpenSearchServerless
     end
 
     class UpdateSecurityPolicyRequest
-      attr_accessor client_token: ::String
-      attr_accessor description: ::String
-      attr_accessor name: ::String
-      attr_accessor policy: ::String
-      attr_accessor policy_version: ::String
       attr_accessor type: ("encryption" | "network")
+      attr_accessor name: ::String
+      attr_accessor policy_version: ::String
+      attr_accessor description: ::String
+      attr_accessor policy: ::String
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -753,21 +754,21 @@ module Aws::OpenSearchServerless
 
     class UpdateVpcEndpointDetail
       attr_accessor id: ::String
-      attr_accessor last_modified_date: ::Integer
       attr_accessor name: ::String
-      attr_accessor security_group_ids: ::Array[::String]
       attr_accessor status: ("PENDING" | "DELETING" | "ACTIVE" | "FAILED")
       attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor last_modified_date: ::Integer
       SENSITIVE: []
     end
 
     class UpdateVpcEndpointRequest
-      attr_accessor add_security_group_ids: ::Array[::String]
-      attr_accessor add_subnet_ids: ::Array[::String]
-      attr_accessor client_token: ::String
       attr_accessor id: ::String
-      attr_accessor remove_security_group_ids: ::Array[::String]
+      attr_accessor add_subnet_ids: ::Array[::String]
       attr_accessor remove_subnet_ids: ::Array[::String]
+      attr_accessor add_security_group_ids: ::Array[::String]
+      attr_accessor remove_security_group_ids: ::Array[::String]
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -782,22 +783,22 @@ module Aws::OpenSearchServerless
     end
 
     class VpcEndpointDetail
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor status: ("PENDING" | "DELETING" | "ACTIVE" | "FAILED")
       attr_accessor created_date: ::Integer
       attr_accessor failure_code: ::String
       attr_accessor failure_message: ::String
-      attr_accessor id: ::String
-      attr_accessor name: ::String
-      attr_accessor security_group_ids: ::Array[::String]
-      attr_accessor status: ("PENDING" | "DELETING" | "ACTIVE" | "FAILED")
-      attr_accessor subnet_ids: ::Array[::String]
-      attr_accessor vpc_id: ::String
       SENSITIVE: []
     end
 
     class VpcEndpointErrorDetail
-      attr_accessor error_code: ::String
-      attr_accessor error_message: ::String
       attr_accessor id: ::String
+      attr_accessor error_message: ::String
+      attr_accessor error_code: ::String
       SENSITIVE: []
     end
 

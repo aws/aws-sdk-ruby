@@ -1752,6 +1752,7 @@ module Aws::FSx
     UpdateFileSystemRequest.add_member(:ontap_configuration, Shapes::ShapeRef.new(shape: UpdateFileSystemOntapConfiguration, location_name: "OntapConfiguration"))
     UpdateFileSystemRequest.add_member(:open_zfs_configuration, Shapes::ShapeRef.new(shape: UpdateFileSystemOpenZFSConfiguration, location_name: "OpenZFSConfiguration"))
     UpdateFileSystemRequest.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, location_name: "StorageType"))
+    UpdateFileSystemRequest.add_member(:file_system_type_version, Shapes::ShapeRef.new(shape: FileSystemTypeVersion, location_name: "FileSystemTypeVersion"))
     UpdateFileSystemRequest.struct_class = Types::UpdateFileSystemRequest
 
     UpdateFileSystemResponse.add_member(:file_system, Shapes::ShapeRef.new(shape: FileSystem, location_name: "FileSystem"))

@@ -2005,6 +2005,18 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] build_type
     #   Specifies the type of build this webhook will trigger.
+    #
+    #   <note markdown="1"> `RUNNER_BUILDKITE_BUILD` is only available for `NO_SOURCE` source
+    #   type projects configured for Buildkite runner builds. For more
+    #   information about CodeBuild-hosted Buildkite runner builds, see
+    #   [Tutorial: Configure a CodeBuild-hosted Buildkite runner][1] in the
+    #   *CodeBuild user guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/sample-runner-buildkite.html
     #   @return [String]
     #
     # @!attribute [rw] manual_creation
@@ -7279,6 +7291,18 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] build_type
     #   Specifies the type of build this webhook will trigger.
+    #
+    #   <note markdown="1"> `RUNNER_BUILDKITE_BUILD` is only available for `NO_SOURCE` source
+    #   type projects configured for Buildkite runner builds. For more
+    #   information about CodeBuild-hosted Buildkite runner builds, see
+    #   [Tutorial: Configure a CodeBuild-hosted Buildkite runner][1] in the
+    #   *CodeBuild user guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/sample-runner-buildkite.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateWebhookInput AWS API Documentation
@@ -7373,6 +7397,18 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] build_type
     #   Specifies the type of build this webhook will trigger.
+    #
+    #   <note markdown="1"> `RUNNER_BUILDKITE_BUILD` is only available for `NO_SOURCE` source
+    #   type projects configured for Buildkite runner builds. For more
+    #   information about CodeBuild-hosted Buildkite runner builds, see
+    #   [Tutorial: Configure a CodeBuild-hosted Buildkite runner][1] in the
+    #   *CodeBuild user guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/sample-runner-buildkite.html
     #   @return [String]
     #
     # @!attribute [rw] manual_creation

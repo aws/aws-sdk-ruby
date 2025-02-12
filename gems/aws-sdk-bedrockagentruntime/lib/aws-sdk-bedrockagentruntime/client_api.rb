@@ -1327,6 +1327,7 @@ module Aws::BedrockAgentRuntime
     PreProcessingTrace.add_member_subclass(:unknown, Types::PreProcessingTrace::Unknown)
     PreProcessingTrace.struct_class = Types::PreProcessingTrace
 
+    PromptConfiguration.add_member(:additional_model_request_fields, Shapes::ShapeRef.new(shape: Document, location_name: "additionalModelRequestFields"))
     PromptConfiguration.add_member(:base_prompt_template, Shapes::ShapeRef.new(shape: BasePromptTemplate, location_name: "basePromptTemplate"))
     PromptConfiguration.add_member(:inference_configuration, Shapes::ShapeRef.new(shape: InferenceConfiguration, location_name: "inferenceConfiguration"))
     PromptConfiguration.add_member(:parser_mode, Shapes::ShapeRef.new(shape: CreationMode, location_name: "parserMode"))

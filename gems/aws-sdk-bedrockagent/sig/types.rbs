@@ -1908,6 +1908,7 @@ module Aws::BedrockAgent
     end
 
     class PromptConfiguration
+      attr_accessor additional_model_request_fields: untyped
       attr_accessor base_prompt_template: ::String
       attr_accessor foundation_model: ::String
       attr_accessor inference_configuration: Types::InferenceConfiguration

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.145.0 (2025-02-12)
+------------------
+
+* Feature - Adds a RequestId parameter to all MediaLive Workflow Monitor create operations.  The RequestId parameter allows idempotent operations.
+
 1.144.0 (2025-02-06)
 ------------------
 

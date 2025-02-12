@@ -1180,6 +1180,7 @@ module Aws::MediaLive
     __stringMin1Max255 = Shapes::StringShape.new(name: '__stringMin1Max255')
     __stringMin1Max255PatternS = Shapes::StringShape.new(name: '__stringMin1Max255PatternS')
     __stringMin1Max256 = Shapes::StringShape.new(name: '__stringMin1Max256')
+    __stringMin1Max256PatternS = Shapes::StringShape.new(name: '__stringMin1Max256PatternS')
     __stringMin1Max35 = Shapes::StringShape.new(name: '__stringMin1Max35')
     __stringMin1Max7 = Shapes::StringShape.new(name: '__stringMin1Max7')
     __stringMin2Max2 = Shapes::StringShape.new(name: '__stringMin2Max2')
@@ -1767,11 +1768,13 @@ module Aws::MediaLive
     CreateCloudWatchAlarmTemplateGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
     CreateCloudWatchAlarmTemplateGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
     CreateCloudWatchAlarmTemplateGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateCloudWatchAlarmTemplateGroupRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternS, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
     CreateCloudWatchAlarmTemplateGroupRequest.struct_class = Types::CreateCloudWatchAlarmTemplateGroupRequest
 
     CreateCloudWatchAlarmTemplateGroupRequestContent.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
     CreateCloudWatchAlarmTemplateGroupRequestContent.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
     CreateCloudWatchAlarmTemplateGroupRequestContent.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateCloudWatchAlarmTemplateGroupRequestContent.add_member(:request_id, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternS, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
     CreateCloudWatchAlarmTemplateGroupRequestContent.struct_class = Types::CreateCloudWatchAlarmTemplateGroupRequestContent
 
     CreateCloudWatchAlarmTemplateGroupResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveCloudwatchAlarmTemplateGroup, location_name: "arn"))
@@ -1805,6 +1808,7 @@ module Aws::MediaLive
     CreateCloudWatchAlarmTemplateRequest.add_member(:target_resource_type, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateTargetResourceType, required: true, location_name: "targetResourceType"))
     CreateCloudWatchAlarmTemplateRequest.add_member(:threshold, Shapes::ShapeRef.new(shape: __double, required: true, location_name: "threshold"))
     CreateCloudWatchAlarmTemplateRequest.add_member(:treat_missing_data, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateTreatMissingData, required: true, location_name: "treatMissingData"))
+    CreateCloudWatchAlarmTemplateRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternS, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
     CreateCloudWatchAlarmTemplateRequest.struct_class = Types::CreateCloudWatchAlarmTemplateRequest
 
     CreateCloudWatchAlarmTemplateRequestContent.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateComparisonOperator, required: true, location_name: "comparisonOperator"))
@@ -1820,6 +1824,7 @@ module Aws::MediaLive
     CreateCloudWatchAlarmTemplateRequestContent.add_member(:target_resource_type, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateTargetResourceType, required: true, location_name: "targetResourceType"))
     CreateCloudWatchAlarmTemplateRequestContent.add_member(:threshold, Shapes::ShapeRef.new(shape: __double, required: true, location_name: "threshold"))
     CreateCloudWatchAlarmTemplateRequestContent.add_member(:treat_missing_data, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateTreatMissingData, required: true, location_name: "treatMissingData"))
+    CreateCloudWatchAlarmTemplateRequestContent.add_member(:request_id, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternS, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
     CreateCloudWatchAlarmTemplateRequestContent.struct_class = Types::CreateCloudWatchAlarmTemplateRequestContent
 
     CreateCloudWatchAlarmTemplateResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveCloudwatchAlarmTemplate, location_name: "arn"))
@@ -1881,11 +1886,13 @@ module Aws::MediaLive
     CreateEventBridgeRuleTemplateGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
     CreateEventBridgeRuleTemplateGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
     CreateEventBridgeRuleTemplateGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateEventBridgeRuleTemplateGroupRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternS, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
     CreateEventBridgeRuleTemplateGroupRequest.struct_class = Types::CreateEventBridgeRuleTemplateGroupRequest
 
     CreateEventBridgeRuleTemplateGroupRequestContent.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
     CreateEventBridgeRuleTemplateGroupRequestContent.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
     CreateEventBridgeRuleTemplateGroupRequestContent.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateEventBridgeRuleTemplateGroupRequestContent.add_member(:request_id, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternS, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
     CreateEventBridgeRuleTemplateGroupRequestContent.struct_class = Types::CreateEventBridgeRuleTemplateGroupRequestContent
 
     CreateEventBridgeRuleTemplateGroupResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveEventbridgeRuleTemplateGroup, location_name: "arn"))
@@ -1912,6 +1919,7 @@ module Aws::MediaLive
     CreateEventBridgeRuleTemplateRequest.add_member(:group_identifier, Shapes::ShapeRef.new(shape: __stringPatternS, required: true, location_name: "groupIdentifier"))
     CreateEventBridgeRuleTemplateRequest.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
     CreateEventBridgeRuleTemplateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateEventBridgeRuleTemplateRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternS, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
     CreateEventBridgeRuleTemplateRequest.struct_class = Types::CreateEventBridgeRuleTemplateRequest
 
     CreateEventBridgeRuleTemplateRequestContent.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
@@ -1920,6 +1928,7 @@ module Aws::MediaLive
     CreateEventBridgeRuleTemplateRequestContent.add_member(:group_identifier, Shapes::ShapeRef.new(shape: __stringPatternS, required: true, location_name: "groupIdentifier"))
     CreateEventBridgeRuleTemplateRequestContent.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
     CreateEventBridgeRuleTemplateRequestContent.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateEventBridgeRuleTemplateRequestContent.add_member(:request_id, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternS, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
     CreateEventBridgeRuleTemplateRequestContent.struct_class = Types::CreateEventBridgeRuleTemplateRequestContent
 
     CreateEventBridgeRuleTemplateResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveEventbridgeRuleTemplate, location_name: "arn"))
@@ -2102,6 +2111,7 @@ module Aws::MediaLive
     CreateSignalMapRequest.add_member(:event_bridge_rule_template_group_identifiers, Shapes::ShapeRef.new(shape: __listOf__stringPatternS, location_name: "eventBridgeRuleTemplateGroupIdentifiers"))
     CreateSignalMapRequest.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
     CreateSignalMapRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateSignalMapRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternS, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
     CreateSignalMapRequest.struct_class = Types::CreateSignalMapRequest
 
     CreateSignalMapRequestContent.add_member(:cloud_watch_alarm_template_group_identifiers, Shapes::ShapeRef.new(shape: __listOf__stringPatternS, location_name: "cloudWatchAlarmTemplateGroupIdentifiers"))
@@ -2110,6 +2120,7 @@ module Aws::MediaLive
     CreateSignalMapRequestContent.add_member(:event_bridge_rule_template_group_identifiers, Shapes::ShapeRef.new(shape: __listOf__stringPatternS, location_name: "eventBridgeRuleTemplateGroupIdentifiers"))
     CreateSignalMapRequestContent.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
     CreateSignalMapRequestContent.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateSignalMapRequestContent.add_member(:request_id, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternS, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
     CreateSignalMapRequestContent.struct_class = Types::CreateSignalMapRequestContent
 
     CreateSignalMapResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveSignalMap, location_name: "arn"))
@@ -4629,9 +4640,11 @@ module Aws::MediaLive
 
     StartMonitorDeploymentRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: __boolean, location_name: "dryRun"))
     StartMonitorDeploymentRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "identifier"))
+    StartMonitorDeploymentRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternS, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
     StartMonitorDeploymentRequest.struct_class = Types::StartMonitorDeploymentRequest
 
     StartMonitorDeploymentRequestContent.add_member(:dry_run, Shapes::ShapeRef.new(shape: __boolean, location_name: "dryRun"))
+    StartMonitorDeploymentRequestContent.add_member(:request_id, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternS, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
     StartMonitorDeploymentRequestContent.struct_class = Types::StartMonitorDeploymentRequestContent
 
     StartMonitorDeploymentResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveSignalMap, location_name: "arn"))

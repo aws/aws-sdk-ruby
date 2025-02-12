@@ -576,6 +576,8 @@ module Aws
                                    override_lambda: ::String?,
                                    prompt_configurations: Array[
                                      {
+                                       additional_model_request_fields: {
+                                       }?,
                                        base_prompt_template: ::String?,
                                        inference_configuration: {
                                          maximum_length: ::Integer?,

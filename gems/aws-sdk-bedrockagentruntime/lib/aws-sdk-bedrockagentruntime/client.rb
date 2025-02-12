@@ -2523,6 +2523,8 @@ module Aws::BedrockAgentRuntime
     #       override_lambda: "LambdaResourceArn",
     #       prompt_configurations: [ # required
     #         {
+    #           additional_model_request_fields: {
+    #           },
     #           base_prompt_template: "BasePromptTemplate",
     #           inference_configuration: {
     #             maximum_length: 1,
@@ -4385,7 +4387,7 @@ module Aws::BedrockAgentRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentruntime'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

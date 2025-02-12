@@ -2064,6 +2064,18 @@ module Aws::CodeBuild
     # @option params [String] :build_type
     #   Specifies the type of build this webhook will trigger.
     #
+    #   <note markdown="1"> `RUNNER_BUILDKITE_BUILD` is only available for `NO_SOURCE` source type
+    #   projects configured for Buildkite runner builds. For more information
+    #   about CodeBuild-hosted Buildkite runner builds, see [Tutorial:
+    #   Configure a CodeBuild-hosted Buildkite runner][1] in the *CodeBuild
+    #   user guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/sample-runner-buildkite.html
+    #
     # @option params [Boolean] :manual_creation
     #   If manualCreation is true, CodeBuild doesn't create a webhook in
     #   GitHub and instead returns `payloadUrl` and `secret` values for the
@@ -6114,6 +6126,18 @@ module Aws::CodeBuild
     # @option params [String] :build_type
     #   Specifies the type of build this webhook will trigger.
     #
+    #   <note markdown="1"> `RUNNER_BUILDKITE_BUILD` is only available for `NO_SOURCE` source type
+    #   projects configured for Buildkite runner builds. For more information
+    #   about CodeBuild-hosted Buildkite runner builds, see [Tutorial:
+    #   Configure a CodeBuild-hosted Buildkite runner][1] in the *CodeBuild
+    #   user guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/sample-runner-buildkite.html
+    #
     # @return [Types::UpdateWebhookOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateWebhookOutput#webhook #webhook} => Types::Webhook
@@ -6181,7 +6205,7 @@ module Aws::CodeBuild
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.142.0'
+      context[:gem_version] = '1.143.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

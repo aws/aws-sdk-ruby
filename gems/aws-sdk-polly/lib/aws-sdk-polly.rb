@@ -54,7 +54,7 @@ module Aws::Polly
   autoload :EndpointProvider, 'aws-sdk-polly/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-polly/endpoints'
 
-  GEM_VERSION = '1.102.0'
+  GEM_VERSION = '1.103.0'
 
 end
 

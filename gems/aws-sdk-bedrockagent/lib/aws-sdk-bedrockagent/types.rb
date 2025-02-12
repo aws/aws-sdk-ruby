@@ -7509,6 +7509,16 @@ module Aws::BedrockAgent
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
     #
+    # @!attribute [rw] additional_model_request_fields
+    #   If the Converse or ConverseStream operations support the model,
+    #   `additionalModelRequestFields` contains additional inference
+    #   parameters, beyond the base set of inference parameters in the
+    #   `inferenceConfiguration` field.
+    #
+    #   For more information, see *Inference request parameters and response
+    #   fields for foundation models* in the Amazon Bedrock user guide.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
     # @!attribute [rw] base_prompt_template
     #   Defines the prompt template with which to replace the default prompt
     #   template. You can use placeholder variables in the base prompt
@@ -7580,6 +7590,7 @@ module Aws::BedrockAgent
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/PromptConfiguration AWS API Documentation
     #
     class PromptConfiguration < Struct.new(
+      :additional_model_request_fields,
       :base_prompt_template,
       :foundation_model,
       :inference_configuration,

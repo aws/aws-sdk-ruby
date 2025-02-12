@@ -2081,6 +2081,7 @@ module Aws::BedrockAgent
     PromptAgentResource.add_member(:agent_identifier, Shapes::ShapeRef.new(shape: AgentAliasArn, required: true, location_name: "agentIdentifier"))
     PromptAgentResource.struct_class = Types::PromptAgentResource
 
+    PromptConfiguration.add_member(:additional_model_request_fields, Shapes::ShapeRef.new(shape: Document, location_name: "additionalModelRequestFields"))
     PromptConfiguration.add_member(:base_prompt_template, Shapes::ShapeRef.new(shape: BasePromptTemplate, location_name: "basePromptTemplate"))
     PromptConfiguration.add_member(:foundation_model, Shapes::ShapeRef.new(shape: ModelIdentifier, location_name: "foundationModel"))
     PromptConfiguration.add_member(:inference_configuration, Shapes::ShapeRef.new(shape: InferenceConfiguration, location_name: "inferenceConfiguration"))

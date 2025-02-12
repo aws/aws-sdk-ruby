@@ -1155,6 +1155,7 @@ module Aws::BedrockAgentRuntime
     end
 
     class PromptConfiguration
+      attr_accessor additional_model_request_fields: untyped
       attr_accessor base_prompt_template: ::String
       attr_accessor inference_configuration: Types::InferenceConfiguration
       attr_accessor parser_mode: ("DEFAULT" | "OVERRIDDEN")

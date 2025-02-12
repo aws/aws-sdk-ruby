@@ -559,7 +559,7 @@ module Aws::FSx
 
     # Cancels an existing Amazon FSx for Lustre data repository task if that
     # task is in either the `PENDING` or `EXECUTING` state. When you cancel
-    # am export task, Amazon FSx does the following.
+    # an export task, Amazon FSx does the following.
     #
     # * Any files that FSx has already exported are not reverted.
     #
@@ -2378,7 +2378,7 @@ module Aws::FSx
     # client request token doesn't exist, `CreateFileCache` does the
     # following:
     #
-    # * Creates a new, empty Amazon File Cache resourcewith an assigned ID,
+    # * Creates a new, empty Amazon File Cache resource with an assigned ID,
     #   and an initial lifecycle state of `CREATING`.
     #
     # * Returns the description of the cache in JSON format.
@@ -3350,10 +3350,9 @@ module Aws::FSx
     #   you're creating from a backup. Valid values are `2.10`, `2.12`, and
     #   `2.15`.
     #
-    #   You don't need to specify `FileSystemTypeVersion` because it will be
-    #   applied using the backup's `FileSystemTypeVersion` setting. If you
-    #   choose to specify `FileSystemTypeVersion` when creating from backup,
-    #   the value must match the backup's `FileSystemTypeVersion` setting.
+    #   You can enter a Lustre version that is newer than the backup's
+    #   `FileSystemTypeVersion` setting. If you don't enter a newer Lustre
+    #   version, it defaults to the backup's setting.
     #
     # @option params [Types::CreateFileSystemOpenZFSConfiguration] :open_zfs_configuration
     #   The OpenZFS configuration for the file system that's being created.
@@ -3368,8 +3367,8 @@ module Aws::FSx
     #
     #   If used to create a file system other than OpenZFS, you must provide a
     #   value that matches the backup's `StorageCapacity` value. If you
-    #   provide any other value, Amazon FSx responds with with an HTTP status
-    #   code 400 Bad Request.
+    #   provide any other value, Amazon FSx responds with an HTTP status code
+    #   400 Bad Request.
     #
     # @return [Types::CreateFileSystemFromBackupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8253,6 +8252,8 @@ module Aws::FSx
     #
     # * `DataCompressionType`
     #
+    # * `FileSystemTypeVersion`
+    #
     # * `LogConfiguration`
     #
     # * `LustreRootSquashConfiguration`
@@ -8398,6 +8399,11 @@ module Aws::FSx
     # @option params [String] :storage_type
     #   Specifies the file system's storage type.
     #
+    # @option params [String] :file_system_type_version
+    #   The Lustre version you are updating an FSx for Lustre file system to.
+    #   Valid values are `2.12` and `2.15`. The value you choose must be newer
+    #   than the file system's current Lustre version.
+    #
     # @return [Types::UpdateFileSystemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFileSystemResponse#file_system #file_system} => Types::FileSystem
@@ -8529,6 +8535,7 @@ module Aws::FSx
     #       },
     #     },
     #     storage_type: "SSD", # accepts SSD, HDD, INTELLIGENT_TIERING
+    #     file_system_type_version: "FileSystemTypeVersion",
     #   })
     #
     # @example Response structure
@@ -9443,7 +9450,7 @@ module Aws::FSx
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.108.0'
+      context[:gem_version] = '1.109.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2025-02-12)
+------------------
+
+* Feature - Custom OpenSearchServerless Entity ID for SAML Config.
+
 1.33.0 (2025-02-06)
 ------------------
 

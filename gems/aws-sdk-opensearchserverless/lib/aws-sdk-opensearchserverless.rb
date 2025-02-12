@@ -49,12 +49,13 @@ module Aws::OpenSearchServerless
   end
   autoload :Client, 'aws-sdk-opensearchserverless/client'
   autoload :Errors, 'aws-sdk-opensearchserverless/errors'
+  autoload :Waiters, 'aws-sdk-opensearchserverless/waiters'
   autoload :Resource, 'aws-sdk-opensearchserverless/resource'
   autoload :EndpointParameters, 'aws-sdk-opensearchserverless/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-opensearchserverless/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-opensearchserverless/endpoints'
 
-  GEM_VERSION = '1.33.0'
+  GEM_VERSION = '1.34.0'
 
 end
 

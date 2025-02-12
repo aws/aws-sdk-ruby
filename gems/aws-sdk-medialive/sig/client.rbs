@@ -3921,7 +3921,8 @@ module Aws
                                                ?tags: Hash[::String, ::String],
                                                target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET"),
                                                threshold: ::Float,
-                                               treat_missing_data: ("notBreaching" | "breaching" | "ignore" | "missing")
+                                               treat_missing_data: ("notBreaching" | "breaching" | "ignore" | "missing"),
+                                               ?request_id: ::String
                                              ) -> _CreateCloudWatchAlarmTemplateResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCloudWatchAlarmTemplateResponseSuccess
 
@@ -3939,7 +3940,8 @@ module Aws
       def create_cloud_watch_alarm_template_group: (
                                                      ?description: ::String,
                                                      name: ::String,
-                                                     ?tags: Hash[::String, ::String]
+                                                     ?tags: Hash[::String, ::String],
+                                                     ?request_id: ::String
                                                    ) -> _CreateCloudWatchAlarmTemplateGroupResponseSuccess
                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCloudWatchAlarmTemplateGroupResponseSuccess
 
@@ -3967,7 +3969,8 @@ module Aws
                                                event_type: ("MEDIALIVE_MULTIPLEX_ALERT" | "MEDIALIVE_MULTIPLEX_STATE_CHANGE" | "MEDIALIVE_CHANNEL_ALERT" | "MEDIALIVE_CHANNEL_INPUT_CHANGE" | "MEDIALIVE_CHANNEL_STATE_CHANGE" | "MEDIAPACKAGE_INPUT_NOTIFICATION" | "MEDIAPACKAGE_KEY_PROVIDER_NOTIFICATION" | "MEDIAPACKAGE_HARVEST_JOB_NOTIFICATION" | "SIGNAL_MAP_ACTIVE_ALARM" | "MEDIACONNECT_ALERT" | "MEDIACONNECT_SOURCE_HEALTH" | "MEDIACONNECT_OUTPUT_HEALTH" | "MEDIACONNECT_FLOW_STATUS_CHANGE"),
                                                group_identifier: ::String,
                                                name: ::String,
-                                               ?tags: Hash[::String, ::String]
+                                               ?tags: Hash[::String, ::String],
+                                               ?request_id: ::String
                                              ) -> _CreateEventBridgeRuleTemplateResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEventBridgeRuleTemplateResponseSuccess
 
@@ -3985,7 +3988,8 @@ module Aws
       def create_event_bridge_rule_template_group: (
                                                      ?description: ::String,
                                                      name: ::String,
-                                                     ?tags: Hash[::String, ::String]
+                                                     ?tags: Hash[::String, ::String],
+                                                     ?request_id: ::String
                                                    ) -> _CreateEventBridgeRuleTemplateGroupResponseSuccess
                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEventBridgeRuleTemplateGroupResponseSuccess
 
@@ -4017,7 +4021,8 @@ module Aws
                                discovery_entry_point_arn: ::String,
                                ?event_bridge_rule_template_group_identifiers: Array[::String],
                                name: ::String,
-                               ?tags: Hash[::String, ::String]
+                               ?tags: Hash[::String, ::String],
+                               ?request_id: ::String
                              ) -> _CreateSignalMapResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSignalMapResponseSuccess
 
@@ -4276,7 +4281,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#start_monitor_deployment-instance_method
       def start_monitor_deployment: (
                                       ?dry_run: bool,
-                                      identifier: ::String
+                                      identifier: ::String,
+                                      ?request_id: ::String
                                     ) -> _StartMonitorDeploymentResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMonitorDeploymentResponseSuccess
 

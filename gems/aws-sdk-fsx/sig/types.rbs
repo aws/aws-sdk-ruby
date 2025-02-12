@@ -1611,6 +1611,7 @@ module Aws::FSx
       attr_accessor ontap_configuration: Types::UpdateFileSystemOntapConfiguration
       attr_accessor open_zfs_configuration: Types::UpdateFileSystemOpenZFSConfiguration
       attr_accessor storage_type: ("SSD" | "HDD" | "INTELLIGENT_TIERING")
+      attr_accessor file_system_type_version: ::String
       SENSITIVE: []
     end
 

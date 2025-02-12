@@ -10923,6 +10923,10 @@ module Aws::MediaLive
     #   Specifies how missing data points are treated when evaluating the
     #   alarm's condition.
     #
+    # @option params [String] :request_id
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Types::CreateCloudWatchAlarmTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCloudWatchAlarmTemplateResponse#arn #arn} => String
@@ -10961,6 +10965,7 @@ module Aws::MediaLive
     #     target_resource_type: "CLOUDFRONT_DISTRIBUTION", # required, accepts CLOUDFRONT_DISTRIBUTION, MEDIALIVE_MULTIPLEX, MEDIALIVE_CHANNEL, MEDIALIVE_INPUT_DEVICE, MEDIAPACKAGE_CHANNEL, MEDIAPACKAGE_ORIGIN_ENDPOINT, MEDIACONNECT_FLOW, S3_BUCKET
     #     threshold: 1.0, # required
     #     treat_missing_data: "notBreaching", # required, accepts notBreaching, breaching, ignore, missing
+    #     request_id: "__stringMin1Max256PatternS",
     #   })
     #
     # @example Response structure
@@ -11004,6 +11009,10 @@ module Aws::MediaLive
     # @option params [Hash<String,String>] :tags
     #   Represents the tags associated with a resource.
     #
+    # @option params [String] :request_id
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Types::CreateCloudWatchAlarmTemplateGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCloudWatchAlarmTemplateGroupResponse#arn #arn} => String
@@ -11022,6 +11031,7 @@ module Aws::MediaLive
     #     tags: {
     #       "__string" => "__string",
     #     },
+    #     request_id: "__stringMin1Max256PatternS",
     #   })
     #
     # @example Response structure
@@ -11061,6 +11071,10 @@ module Aws::MediaLive
     # @option params [Hash<String,String>] :tags
     #   Represents the tags associated with a resource.
     #
+    # @option params [String] :request_id
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Types::CreateEventBridgeRuleTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEventBridgeRuleTemplateResponse#arn #arn} => String
@@ -11089,6 +11103,7 @@ module Aws::MediaLive
     #     tags: {
     #       "__string" => "__string",
     #     },
+    #     request_id: "__stringMin1Max256PatternS",
     #   })
     #
     # @example Response structure
@@ -11126,6 +11141,10 @@ module Aws::MediaLive
     # @option params [Hash<String,String>] :tags
     #   Represents the tags associated with a resource.
     #
+    # @option params [String] :request_id
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Types::CreateEventBridgeRuleTemplateGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEventBridgeRuleTemplateGroupResponse#arn #arn} => String
@@ -11144,6 +11163,7 @@ module Aws::MediaLive
     #     tags: {
     #       "__string" => "__string",
     #     },
+    #     request_id: "__stringMin1Max256PatternS",
     #   })
     #
     # @example Response structure
@@ -11182,6 +11202,10 @@ module Aws::MediaLive
     # @option params [Hash<String,String>] :tags
     #   Represents the tags associated with a resource.
     #
+    # @option params [String] :request_id
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Types::CreateSignalMapResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSignalMapResponse#arn #arn} => String
@@ -11214,6 +11238,7 @@ module Aws::MediaLive
     #     tags: {
     #       "__string" => "__string",
     #     },
+    #     request_id: "__stringMin1Max256PatternS",
     #   })
     #
     # @example Response structure
@@ -11997,6 +12022,10 @@ module Aws::MediaLive
     #
     # @option params [required, String] :identifier
     #
+    # @option params [String] :request_id
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Types::StartMonitorDeploymentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartMonitorDeploymentResponse#arn #arn} => String
@@ -12023,6 +12052,7 @@ module Aws::MediaLive
     #   resp = client.start_monitor_deployment({
     #     dry_run: false,
     #     identifier: "__string", # required
+    #     request_id: "__stringMin1Max256PatternS",
     #   })
     #
     # @example Response structure
@@ -13766,7 +13796,7 @@ module Aws::MediaLive
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.144.0'
+      context[:gem_version] = '1.145.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

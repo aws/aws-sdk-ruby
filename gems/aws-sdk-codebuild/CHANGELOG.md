@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.143.0 (2025-02-12)
+------------------
+
+* Feature - Add note for the RUNNER_BUILDKITE_BUILD buildType.
+
 1.142.0 (2025-02-06)
 ------------------
 

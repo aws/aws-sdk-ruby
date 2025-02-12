@@ -1649,11 +1649,9 @@ module Aws::FSx
     #   you're creating from a backup. Valid values are `2.10`, `2.12`, and
     #   `2.15`.
     #
-    #   You don't need to specify `FileSystemTypeVersion` because it will
-    #   be applied using the backup's `FileSystemTypeVersion` setting. If
-    #   you choose to specify `FileSystemTypeVersion` when creating from
-    #   backup, the value must match the backup's `FileSystemTypeVersion`
-    #   setting.
+    #   You can enter a Lustre version that is newer than the backup's
+    #   `FileSystemTypeVersion` setting. If you don't enter a newer Lustre
+    #   version, it defaults to the backup's setting.
     #   @return [String]
     #
     # @!attribute [rw] open_zfs_configuration
@@ -1670,8 +1668,8 @@ module Aws::FSx
     #
     #   If used to create a file system other than OpenZFS, you must provide
     #   a value that matches the backup's `StorageCapacity` value. If you
-    #   provide any other value, Amazon FSx responds with with an HTTP
-    #   status code 400 Bad Request.
+    #   provide any other value, Amazon FSx responds with an HTTP status
+    #   code 400 Bad Request.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemFromBackupRequest AWS API Documentation
@@ -3103,7 +3101,7 @@ module Aws::FSx
     #   Specifies the suggested block size for a volume in a ZFS dataset, in
     #   kibibytes (KiB). For file systems using the Intelligent-Tiering
     #   storage class, valid values are 128, 256, 512, 1024, 2048, or 4096
-    #   KiB, with a default of 2048 KiB. For all other file systems, valid
+    #   KiB, with a default of 1024 KiB. For all other file systems, valid
     #   values are 4, 8, 16, 32, 64, 128, 256, 512, or 1024 KiB, with a
     #   default of 128 KiB. We recommend using the default setting for the
     #   majority of use cases. Generally, workloads that write in fixed
@@ -4129,8 +4127,8 @@ module Aws::FSx
     end
 
     # (Optional) An array of filter objects you can use to filter the
-    # response of data repository tasks you will see in the the response.
-    # You can filter the tasks returned in the response by one or more file
+    # response of data repository tasks you will see in the response. You
+    # can filter the tasks returned in the response by one or more file
     # system IDs, task lifecycles, and by task type. A filter object
     # consists of a filter `Name`, and one or more `Values` for the filter.
     #
@@ -7614,7 +7612,7 @@ module Aws::FSx
     #   @return [Integer]
     #
     # @!attribute [rw] storage_capacity_quota_gi_b
-    #   The maximum amount of storage in gibibtyes (GiB) that the volume can
+    #   The maximum amount of storage in gibibytes (GiB) that the volume can
     #   use from its parent. You can specify a quota larger than the storage
     #   on the parent volume.
     #   @return [Integer]
@@ -9205,7 +9203,7 @@ module Aws::FSx
     #   Update the password for the `fsxadmin` user by entering a new
     #   password. You use the `fsxadmin` user to access the NetApp ONTAP CLI
     #   and REST API to manage your file system resources. For more
-    #   information, see [Managing resources using NetApp Applicaton][1].
+    #   information, see [Managing resources using NetApp Application][1].
     #
     #
     #
@@ -9545,6 +9543,12 @@ module Aws::FSx
     #   Specifies the file system's storage type.
     #   @return [String]
     #
+    # @!attribute [rw] file_system_type_version
+    #   The Lustre version you are updating an FSx for Lustre file system
+    #   to. Valid values are `2.12` and `2.15`. The value you choose must be
+    #   newer than the file system's current Lustre version.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemRequest AWS API Documentation
     #
     class UpdateFileSystemRequest < Struct.new(
@@ -9555,7 +9559,8 @@ module Aws::FSx
       :lustre_configuration,
       :ontap_configuration,
       :open_zfs_configuration,
-      :storage_type)
+      :storage_type,
+      :file_system_type_version)
       SENSITIVE = []
       include Aws::Structure
     end

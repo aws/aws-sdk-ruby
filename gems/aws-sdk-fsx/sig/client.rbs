@@ -1221,7 +1221,8 @@ module Aws
                                     size_gi_b: ::Integer?
                                   }?
                                 },
-                                ?storage_type: ("SSD" | "HDD" | "INTELLIGENT_TIERING")
+                                ?storage_type: ("SSD" | "HDD" | "INTELLIGENT_TIERING"),
+                                ?file_system_type_version: ::String
                               ) -> _UpdateFileSystemResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFileSystemResponseSuccess
 

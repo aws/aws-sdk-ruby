@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.103.0 (2025-02-12)
+------------------
+
+* Feature - Added support for the new voice - Jasmine (en-SG). Jasmine is available as a Neural voice only.
+
 1.102.0 (2025-02-06)
 ------------------
 
