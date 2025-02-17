@@ -69,7 +69,7 @@ module AwsSdkCodeGenerator
 
       # @return [Array<String>]
       def plugin_requires
-        @plugins.map(&:require_path)
+        @plugins.map(&:require_path).map { |p| p.chomp('.rb') }
       end
 
       # @return [Array<String>]
