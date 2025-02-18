@@ -113,9 +113,11 @@ module AwsSdkCodeGenerator
             input_shape_name = @api['operations'][options[:operation_name]]['input']['shape']
             input = @api['shapes'][input_shape_name]
             @operation_params = options[:operation_params].map do |k,v|
+              next if input['members'][k].nil?
+
               member_shape = @api['shapes'][input['members'][k]['shape']]
               Param.new(Underscore.underscore(k), transform_operation_values(v, member_shape))
-            end
+            end.compact
             @client_params = options[:client_params].map do |k,v|
               Param.new(Underscore.underscore(k), v)
             end
