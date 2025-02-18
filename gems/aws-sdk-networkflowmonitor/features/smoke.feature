@@ -17,4 +17,4 @@ Feature: Smoke tests for NetworkFlowMonitor
       """
 {"monitor_name":"SmokeTestMonitor"}
       """
-    Then I expect an error was not raised
+    Then I expect an error was raised

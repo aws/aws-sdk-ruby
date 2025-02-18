@@ -15,7 +15,7 @@ Feature: Smoke tests for DSQL
       """
     When I call the operation 'get_cluster' with params:
       """
-{"identifier":"someIdentifier"}
+{"identifier":"aaaaaaaaaaaaaaaaaaaaaaaaaa"}
       """
     Then I expect a 'Aws::DSQL::Errors::ResourceNotFoundException' was raised
 

@@ -17,7 +17,7 @@ Feature: Smoke tests for ObservabilityAdmin
       """
 {}
       """
-    Then I expect a 'Aws::ObservabilityAdmin::Errors::AccessDeniedException' was raised
+    Then I expect an error was not raised
 
   @observabilityadmin @smoke
   Scenario: GetTelemetryEvaluationStatus
@@ -29,4 +29,4 @@ Feature: Smoke tests for ObservabilityAdmin
       """
 {}
       """
-    Then I expect a 'Aws::ObservabilityAdmin::Errors::AccessDeniedException' was raised
+    Then I expect an error was not raised

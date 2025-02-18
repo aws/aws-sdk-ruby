@@ -6,15 +6,3 @@
 # WARNING ABOUT GENERATED CODE
 
 Feature: Smoke tests for ElasticTranscoder
-
-  @elastictranscoder @smoke
-  Scenario: ListPresetsSuccess
-    Given I create a 'Aws::ElasticTranscoder' client with config:
-      """
-{"region":"us-west-2"}
-      """
-    When I call the operation 'list_presets' with params:
-      """
-{}
-      """
-    Then I expect an error was not raised
