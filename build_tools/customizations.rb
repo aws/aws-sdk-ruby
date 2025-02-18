@@ -257,9 +257,14 @@ module BuildTools
     end
 
     smoke('ObservabilityAdmin') do |smoke|
-      smoke['testCases'].each do |test_case|
-        test_case['expectation']  = { 'success' => {} }
+      test = smoke['testCases'].find do |test_case|
+        test_case['id'] == 'GetTelemetryEvaluationStatusForOrganization'
       end
+      test['expectation'] = { 'failure' => { 'errorId' => 'ValidationException' } }
+      test = smoke['testCases'].find do |test_case|
+        test_case['id'] == 'GetTelemetryEvaluationStatus'
+      end
+      test['expectation'] = { 'success' => {} }
     end
   end
 end

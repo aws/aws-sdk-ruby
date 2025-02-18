@@ -17,7 +17,7 @@ Feature: Smoke tests for ObservabilityAdmin
       """
 {}
       """
-    Then I expect an error was not raised
+    Then I expect a 'Aws::ObservabilityAdmin::Errors::ValidationException' was raised
 
   @observabilityadmin @smoke
   Scenario: GetTelemetryEvaluationStatus
