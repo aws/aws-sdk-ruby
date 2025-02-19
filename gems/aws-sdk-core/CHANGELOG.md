@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+3.219.1 (2025-02-19)
+------------------
+* Issue - Do not use connection-pooling in single-threaded processes.
+
 3.219.0 (2025-02-18)
 ------------------
 
@@ -41,7 +45,7 @@ Unreleased Changes
 
 * Issue - Use epoch seconds instead of milliseconds in cbor encode/decode.
 
-* Issue - Add handling of block in response delegation (#3169). 
+* Issue - Add handling of block in response delegation (#3169).
 
 3.216.0 (2025-01-15)
 ------------------
