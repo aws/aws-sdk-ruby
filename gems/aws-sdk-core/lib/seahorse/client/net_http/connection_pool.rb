@@ -17,9 +17,11 @@ module Seahorse
     module NetHttp
 
       class ConnectionPool
+        if Thread.list.select {|thread| thread.status == "run"}.count > 1
+          @pools_mutex = Mutex.new
+          @pools = {}
+        end
 
-        @pools_mutex = Mutex.new
-        @pools = {}
         @default_logger = Logger.new($stdout)
 
         OPTIONS = {
@@ -45,8 +47,10 @@ module Seahorse
             value = options[opt_name].nil? ? default_value : options[opt_name]
             instance_variable_set("@#{opt_name}", value)
           end
-          @pool_mutex = Mutex.new
-          @pool = {}
+          if @pools_mutex
+            @pool_mutex = Mutex.new
+            @pool = {}
+          end
         end
 
         OPTIONS.keys.each do |attr_name|
@@ -91,10 +95,12 @@ module Seahorse
           session = nil
 
           # attempt to recycle an already open session
-          @pool_mutex.synchronize do
-            _clean
-            if @pool.key?(endpoint)
-              session = @pool[endpoint].shift
+          if @pool_mutex
+            @pool_mutex.synchronize do
+              _clean
+              if @pool.key?(endpoint)
+                session = @pool[endpoint].shift
+              end
             end
           end
 
@@ -108,10 +114,14 @@ module Seahorse
             session.finish if session
             raise
           else
-            # No error raised? Good, check the session into the pool.
-            @pool_mutex.synchronize do
-              @pool[endpoint] = [] unless @pool.key?(endpoint)
-              @pool[endpoint] << session
+            if @pool_mutex
+              # No error raised? Good, check the session into the pool.
+              @pool_mutex.synchronize do
+                @pool[endpoint] = [] unless @pool.key?(endpoint)
+                @pool[endpoint] << session
+              end
+            else
+              session.finish
             end
           end
           nil
@@ -120,6 +130,8 @@ module Seahorse
         # @return [Integer] Returns the count of sessions currently in the
         #   pool, not counting those currently in use.
         def size
+          return 0 unless @pool_mutex
+
           @pool_mutex.synchronize do
             @pool.values.flatten.size
           end
@@ -129,7 +141,7 @@ module Seahorse
         # the idle timeout).
         # @return [nil]
         def clean!
-          @pool_mutex.synchronize { _clean }
+          @pool_mutex.synchronize { _clean } if @pool_mutex
           nil
         end
 
@@ -139,9 +151,11 @@ module Seahorse
         # state.
         # @return [nil]
         def empty!
-          @pool_mutex.synchronize do
-            @pool.values.flatten.map(&:finish)
-            @pool.clear
+          if @pool_mutex
+            @pool_mutex.synchronize do
+              @pool.values.flatten.map(&:finish)
+              @pool.clear
+            end
           end
           nil
         end
@@ -214,14 +228,20 @@ module Seahorse
           # @return [ConnectionPool]
           def for options = {}
             options = pool_options(options)
-            @pools_mutex.synchronize do
-              @pools[options] ||= new(options)
+            if @pools_mutex
+              @pools_mutex.synchronize do
+                @pools[options] ||= new(options)
+              end
+            else
+              new(options)
             end
           end
 
           # @return [Array<ConnectionPool>] Returns a list of the
           #   constructed connection pools.
           def pools
+            return [] unless @pools_mutex
+
             @pools_mutex.synchronize do
               @pools.values
             end
