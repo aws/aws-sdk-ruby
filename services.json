@@ -455,10 +455,6 @@
   "ElasticBeanstalk": {
     "models": "elasticbeanstalk/2010-12-01"
   },
-  "ElasticInference": {
-    "models": "elastic-inference/2017-07-25",
-    "deprecated": true
-  },
   "ElasticLoadBalancing": {
     "models": "elasticloadbalancing/2012-06-01"
   },
