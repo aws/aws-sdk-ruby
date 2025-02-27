@@ -1,3 +1,4 @@
 [submodule "tasks/benchmark"]
 	path = tasks/benchmark
 	url = https://github.com/aws/aws-sdk-ruby-benchmark-tools.git
+	branch = feature/roadrunner
