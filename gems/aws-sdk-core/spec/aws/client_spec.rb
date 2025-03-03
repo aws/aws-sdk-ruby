@@ -171,12 +171,12 @@ Known AWS regions include (not specific to this service):
         expect(client.example_operation.data.to_h).to eq({})
       end
 
-      # it 'accepts stubs given to the constructor' do
-      #   client = client_class.new(stub_responses: {
-      #     example_operation: { string: 'value' }
-      #   })
-      #   expect(client.example_operation.string).to eq('value')
-      # end
+      it 'accepts stubs given to the constructor' do
+        client = client_class.new(stub_responses: {
+          example_operation: { string: 'value' }
+        })
+        expect(client.example_operation.string).to eq('value')
+      end
 
       context 'api requests' do
         ApiRequestsStubbingExample = ApiHelper.sample_rest_xml
