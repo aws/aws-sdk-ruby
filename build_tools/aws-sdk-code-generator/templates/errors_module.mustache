@@ -27,15 +27,28 @@ module {{module_name}}
   {{=<% %>=}}
   # * {<% name %>}
   <%={{ }}=%>
+  {{#query_protocol?}}
+  {{#custom_error_class?}}
+  #    * `{{custom_error_class}}` may generated to use instead of this class name.
+  {{/custom_error_class?}}
+  {{/query_protocol?}}
   {{/errors}}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
+  {{#query_protocol?}}
+  # Some existing error classes may use a different class name than documented.
+  {{/query_protocol?}}
   module Errors
 
     extend Aws::Errors::DynamicErrors
 
     {{#errors}}
+    {{#query_protocol?}}
+    {{#custom_error_class?}}
+    # `{{custom_error_class}}` may be used instead of the class name documented below.
+    {{/custom_error_class?}}
+    {{/query_protocol?}}
     class {{name}} < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
