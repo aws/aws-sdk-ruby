@@ -29,7 +29,7 @@ module {{module_name}}
   <%={{ }}=%>
   {{#query_protocol?}}
   {{#custom_error_class?}}
-  #    * `{{custom_error_class}}` may be generated to use instead of this class name.
+  #    * This error class is not used. `{{custom_error_class}}` is used during parsing instead.
   {{/custom_error_class?}}
   {{/query_protocol?}}
   {{/errors}}
@@ -37,7 +37,7 @@ module {{module_name}}
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
   {{#query_protocol?}}
-  # Some existing error classes may use a different class name than documented.
+  # Some existing error classes may use a different class name than the one documented.
   {{/query_protocol?}}
   module Errors
 
@@ -46,7 +46,8 @@ module {{module_name}}
     {{#errors}}
     {{#query_protocol?}}
     {{#custom_error_class?}}
-    # `{{custom_error_class}}` may be used instead of the class name documented below.
+    # @deprecated This error class is not used during parsing.
+    #   Please use `{{custom_error_class}}` instead.
     {{/custom_error_class?}}
     {{/query_protocol?}}
     class {{name}} < ServiceError
