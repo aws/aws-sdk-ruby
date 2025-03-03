@@ -80,7 +80,7 @@ requests are made, and retries are disabled.
           resp = Seahorse::Client::Response.new(context: context)
           async_mode = context.client.is_a? Seahorse::Client::AsyncBase
           stub = context.client.next_stub(context)
-          apply_stub(stub, resp, async_mode)
+          stub[:mutex].synchronize { apply_stub(stub, resp, async_mode) }
 
           if async_mode
             Seahorse::Client::AsyncResponse.new(
