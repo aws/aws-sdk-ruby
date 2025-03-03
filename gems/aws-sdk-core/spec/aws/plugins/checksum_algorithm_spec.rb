@@ -255,7 +255,7 @@ module Aws
               test_case['expectTrailers'].each do |key, value|
                 expect(read_body).to include("#{key}:#{value}")
               end
-              context
+              {}
             end)
 
             client.http_checksum_streaming_operation(**options)

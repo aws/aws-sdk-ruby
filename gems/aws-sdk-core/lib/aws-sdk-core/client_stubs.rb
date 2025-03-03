@@ -237,20 +237,15 @@ module Aws
       stub = config.stubs_mutex.synchronize do
         stubs = config.stubs[operation_name] || []
         case stubs.length
-        when 0 then default_stub(operation_name)
+        when 0 then stub_data(operation_name)
         when 1 then stubs.first
         else stubs.shift
         end
       end
-      Proc === stub ? convert_stub(operation_name, stub.call(context)) : stub
+      convert_stub(operation_name, stub, context)
     end
 
     private
-
-    def default_stub(operation_name)
-      stub = stub_data(operation_name)
-      http_response_stub(operation_name, stub)
-    end
 
     # This method converts the given stub data and converts it to a
     # HTTP response (when possible). This enables the response stubbing
@@ -258,19 +253,16 @@ module Aws
     # during response handling.
     def apply_stubs(operation_name, stubs)
       config.stubs_mutex.synchronize do
-        config.stubs[operation_name.to_sym] = stubs.map do |stub|
-          convert_stub(operation_name, stub)
-        end
+        config.stubs[operation_name.to_sym] = stubs
       end
     end
 
-    def convert_stub(operation_name, stub)
+    def convert_stub(operation_name, stub, context)
       stub = case stub
-      when Proc then stub
+      when Proc then convert_stub(operation_name, stub.call(context), context)
       when Exception, Class then { error: stub }
       when String then service_error_stub(stub)
-      when Hash then http_response_stub(operation_name, stub)
-      else { data: stub }
+      else http_response_stub(operation_name, stub)
       end
       if Hash === stub
         stub[:mutex] = Mutex.new

@@ -171,6 +171,7 @@ module Aws
             large_body.rewind
             uncompressed = Zlib::GzipReader.new(body)
             expect(uncompressed.read).to eq(large_body.read)
+            {}
           end)
           client.operation_streaming(body: large_body)
         end
@@ -185,6 +186,7 @@ module Aws
             body.rewind
             uncompressed = Zlib::GzipReader.new(body)
             expect(uncompressed.read).to eq(small_body)
+            {}
           end)
           client.operation_streaming(body: small_body)
         end
