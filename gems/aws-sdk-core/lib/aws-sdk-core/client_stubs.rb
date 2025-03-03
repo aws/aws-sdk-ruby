@@ -231,16 +231,16 @@ module Aws
 
     private
 
-    # This method converts the given stub data and converts it to a
-    # HTTP response (when possible). This enables the response stubbing
-    # plugin to provide a HTTP response that triggers all normal events
-    # during response handling.
     def apply_stubs(operation_name, stubs)
       @config.stubs_mutex.synchronize do
         @config.stubs[operation_name.to_sym] = stubs
       end
     end
 
+    # This method converts the given stub data and converts it to a
+    # HTTP response (when possible). This enables the response stubbing
+    # plugin to provide a HTTP response that triggers all normal events
+    # during response handling.
     def convert_stub(operation_name, stub, context)
       case stub
       when Proc then convert_stub(operation_name, stub.call(context), context)

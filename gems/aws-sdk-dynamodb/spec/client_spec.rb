@@ -161,14 +161,10 @@ module Aws
 
         it 'observes the :simple_attributes configuration option' do
           client = Client.new(stub_responses: true, simple_attributes: false)
+          client.stub_responses(:get_item, item: { 'id' => 'value' })
           expect {
-            client.stub_responses(:get_item, item: { 'id' => 'value' })
+            client.get_item(table_name: 'table', key: { 'id' => { s: 'value' }})
           }.to raise_error(ArgumentError)
-
-          client.stub_responses(:get_item, item: { 'id' => { s: 'value' }})
-          resp = client.get_item(table_name: 'table', key: { 'id' => { s: 'value' }})
-          expect(resp.item.keys).to eq(['id'])
-          expect(resp.item['id'].s).to eq('value')
         end
 
       end

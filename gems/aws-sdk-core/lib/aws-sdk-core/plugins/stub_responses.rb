@@ -35,10 +35,10 @@ requests are made, and retries are disabled.
       option(:api_requests_mutex) { Mutex.new }
 
       def add_handlers(handlers, config)
-        if config.stub_responses
-          handlers.add(RequestsHandler, step: :sign, priority: 5)
-          handlers.add(Handler, step: :send)
-        end
+        return unless config.stub_responses
+
+        handlers.add(ApiRequestsHandler, step: :sign, priority: 5)
+        handlers.add(StubbingHandler, step: :send)
       end
 
       def after_initialize(client)
@@ -54,7 +54,7 @@ requests are made, and retries are disabled.
         end
       end
 
-      class RequestsHandler < Seahorse::Client::Handler
+      class ApiRequestsHandler < Seahorse::Client::Handler
         def call(context)
           context.config.api_requests_mutex.synchronize do
             context.config.api_requests << {
@@ -67,8 +67,7 @@ requests are made, and retries are disabled.
         end
       end
 
-      class Handler < Seahorse::Client::Handler
-
+      class StubbingHandler < Seahorse::Client::Handler
         def call(context)
           span_wrapper(context) do
             stub_responses(context)

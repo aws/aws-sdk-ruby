@@ -25,6 +25,7 @@ describe 'Client Interface:' do
       it 'sets the Authorization header' do
         client.stub_responses(:bearer_auth, -> (context) {
           expect(context.http_request.headers['Authorization']).to eq('Bearer token')
+          {}
         })
         client.bearer_auth
       end
@@ -34,6 +35,7 @@ describe 'Client Interface:' do
       it 'sets the Authorization header' do
         client.stub_responses(:sigv_4_auth, -> (context) {
           expect(context.http_request.headers['Authorization']).to include('AWS4-HMAC-SHA256')
+          {}
         })
         client.sigv_4_auth
       end
@@ -43,6 +45,7 @@ describe 'Client Interface:' do
       it 'does not set the Authorization header' do
         client.stub_responses(:no_auth, -> (context) {
           expect(context.http_request.headers.key?('Authorization')).to be_falsey
+          {}
         })
         client.no_auth
       end
