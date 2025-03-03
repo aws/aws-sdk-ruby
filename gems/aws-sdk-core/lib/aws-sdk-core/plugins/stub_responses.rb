@@ -29,6 +29,11 @@ requests are made, and retries are disabled.
         end
       end
 
+      option(:stubs) { {} }
+      option(:stubs_mutex) { Mutex.new }
+      option(:api_requests) { [] }
+      option(:api_requests_mutex) { Mutex.new }
+
       def add_handlers(handlers, config)
         handlers.add(Handler, step: :send) if config.stub_responses
       end
@@ -60,10 +65,21 @@ requests are made, and retries are disabled.
           stub = context.client.next_stub(context)
           resp = Seahorse::Client::Response.new(context: context)
           async_mode = context.client.is_a? Seahorse::Client::AsyncBase
+
           if Hash === stub && stub[:mutex]
-            stub[:mutex].synchronize { apply_stub(stub, resp, async_mode) }
+            stub[:mutex].synchronize do
+              apply_stub(stub, resp, async_mode)
+            end
           else
             apply_stub(stub, resp, async_mode)
+          end
+
+          context.config.api_requests_mutex.synchronize do
+            context.config.api_requests << {
+              operation_name: context.operation_name,
+              params: context.params,
+              context: context
+            }
           end
 
           if async_mode

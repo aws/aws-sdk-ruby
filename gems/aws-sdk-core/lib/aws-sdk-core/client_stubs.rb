@@ -15,27 +15,27 @@ module Aws
 
     # @api private
     def setup_stubbing
-      @stubs = {}
-      @stub_mutex = Mutex.new
+      # @stubs = {}
+      # @stub_mutex = Mutex.new
       if Hash === @config.stub_responses
         @config.stub_responses.each do |operation_name, stubs|
           apply_stubs(operation_name, Array === stubs ? stubs : [stubs])
         end
       end
-
-      # When a client is stubbed allow the user to access the requests made
-      requests = @api_requests = []
-      requests_mutex = @requests_mutex = Mutex.new
-      self.handle do |context|
-        requests_mutex.synchronize do
-          requests << {
-            operation_name: context.operation_name,
-            params: context.params,
-            context: context
-          }
-        end
-        @handler.call(context)
-      end
+      #
+      # # When a client is stubbed allow the user to access the requests made
+      # requests = @api_requests = []
+      # requests_mutex = @requests_mutex = Mutex.new
+      # self.handle do |context|
+      #   requests_mutex.synchronize do
+      #     requests << {
+      #       operation_name: context.operation_name,
+      #       params: context.params,
+      #       context: context
+      #     }
+      #   end
+      #   @handler.call(context)
+      # end
     end
 
     # Configures what data / errors should be returned from the named operation
@@ -195,11 +195,11 @@ module Aws
     #   is not stubbed.
     def api_requests(options = {})
       if config.stub_responses
-        @requests_mutex.synchronize do
+        config.api_requests_mutex.synchronize do
           if options[:exclude_presign]
-            @api_requests.reject {|req| req[:context][:presigned_url] }
+            config.api_requests.reject {|req| req[:context][:presigned_url] }
           else
-            @api_requests
+            config.api_requests
           end
         end
       else
@@ -234,8 +234,8 @@ module Aws
     # @api private
     def next_stub(context)
       operation_name = context.operation_name.to_sym
-      stub = @stub_mutex.synchronize do
-        stubs = @stubs[operation_name] || []
+      stub = config.stubs_mutex.synchronize do
+        stubs = config.stubs[operation_name] || []
         case stubs.length
         when 0 then default_stub(operation_name)
         when 1 then stubs.first
@@ -257,8 +257,8 @@ module Aws
     # plugin to provide a HTTP response that triggers all normal events
     # during response handling.
     def apply_stubs(operation_name, stubs)
-      @stub_mutex.synchronize do
-        @stubs[operation_name.to_sym] = stubs.map do |stub|
+      config.stubs_mutex.synchronize do
+        config.stubs[operation_name.to_sym] = stubs.map do |stub|
           convert_stub(operation_name, stub)
         end
       end
