@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Remove per-stub Mutexes.
+
 3.219.0 (2025-02-18)
 ------------------
 
