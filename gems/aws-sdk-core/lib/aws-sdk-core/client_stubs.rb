@@ -218,18 +218,17 @@ module Aws
     # @api private
     def next_stub(context)
       operation_name = context.operation_name.to_sym
-      @config.stubs_mutex.synchronize do
+      stub = @config.stubs_mutex.synchronize do
         stubs = @config.stubs[operation_name] || []
-        stub =
-          case stubs.length
-          when 0 then stub_data(operation_name)
-          when 1 then stubs.first
-          else stubs.shift
-          end
-        stub = convert_stub(operation_name, stub, context)
-        stub[:mutex] = Mutex.new
-        stub
+        case stubs.length
+        when 0 then stub_data(operation_name)
+        when 1 then stubs.first
+        else stubs.shift
+        end
       end
+      stub = convert_stub(operation_name, stub, context)
+      stub[:mutex] = Mutex.new
+      stub
     end
 
     private
