@@ -493,6 +493,9 @@ module Aws::BedrockDataAutomation
     # @option params [Types::EncryptionConfiguration] :encryption_configuration
     #   KMS Encryption Configuration
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   List of tags
+    #
     # @return [Types::CreateBlueprintResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateBlueprintResponse#blueprint #blueprint} => Types::Blueprint
@@ -508,9 +511,15 @@ module Aws::BedrockDataAutomation
     #     encryption_configuration: {
     #       kms_key_id: "KmsKeyId", # required
     #       kms_encryption_context: {
-    #         "String" => "String",
+    #         "EncryptionContextKey" => "EncryptionContextValue",
     #       },
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -525,7 +534,7 @@ module Aws::BedrockDataAutomation
     #   resp.blueprint.blueprint_stage #=> String, one of "DEVELOPMENT", "LIVE"
     #   resp.blueprint.kms_key_id #=> String
     #   resp.blueprint.kms_encryption_context #=> Hash
-    #   resp.blueprint.kms_encryption_context["String"] #=> String
+    #   resp.blueprint.kms_encryption_context["EncryptionContextKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/CreateBlueprint AWS API Documentation
     #
@@ -571,7 +580,7 @@ module Aws::BedrockDataAutomation
     #   resp.blueprint.blueprint_stage #=> String, one of "DEVELOPMENT", "LIVE"
     #   resp.blueprint.kms_key_id #=> String
     #   resp.blueprint.kms_encryption_context #=> Hash
-    #   resp.blueprint.kms_encryption_context["String"] #=> String
+    #   resp.blueprint.kms_encryption_context["EncryptionContextKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/CreateBlueprintVersion AWS API Documentation
     #
@@ -611,6 +620,9 @@ module Aws::BedrockDataAutomation
     # @option params [Types::EncryptionConfiguration] :encryption_configuration
     #   KMS Encryption Configuration
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   List of tags
+    #
     # @return [Types::CreateDataAutomationProjectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDataAutomationProjectResponse#project_arn #project_arn} => String
@@ -649,7 +661,7 @@ module Aws::BedrockDataAutomation
     #         extraction: {
     #           category: { # required
     #             state: "ENABLED", # required, accepts ENABLED, DISABLED
-    #             types: ["CONTENT_MODERATION"], # accepts CONTENT_MODERATION, TEXT_DETECTION
+    #             types: ["CONTENT_MODERATION"], # accepts CONTENT_MODERATION, TEXT_DETECTION, LOGOS
     #           },
     #           bounding_box: { # required
     #             state: "ENABLED", # required, accepts ENABLED, DISABLED
@@ -664,7 +676,7 @@ module Aws::BedrockDataAutomation
     #         extraction: {
     #           category: { # required
     #             state: "ENABLED", # required, accepts ENABLED, DISABLED
-    #             types: ["CONTENT_MODERATION"], # accepts CONTENT_MODERATION, TEXT_DETECTION, TRANSCRIPT
+    #             types: ["CONTENT_MODERATION"], # accepts CONTENT_MODERATION, TEXT_DETECTION, TRANSCRIPT, LOGOS
     #           },
     #           bounding_box: { # required
     #             state: "ENABLED", # required, accepts ENABLED, DISABLED
@@ -672,19 +684,19 @@ module Aws::BedrockDataAutomation
     #         },
     #         generative_field: {
     #           state: "ENABLED", # required, accepts ENABLED, DISABLED
-    #           types: ["VIDEO_SUMMARY"], # accepts VIDEO_SUMMARY, SCENE_SUMMARY, IAB
+    #           types: ["VIDEO_SUMMARY"], # accepts VIDEO_SUMMARY, IAB, CHAPTER_SUMMARY
     #         },
     #       },
     #       audio: {
     #         extraction: {
     #           category: { # required
     #             state: "ENABLED", # required, accepts ENABLED, DISABLED
-    #             types: ["AUDIO_CONTENT_MODERATION"], # accepts AUDIO_CONTENT_MODERATION, CHAPTER_CONTENT_MODERATION, TRANSCRIPT
+    #             types: ["AUDIO_CONTENT_MODERATION"], # accepts AUDIO_CONTENT_MODERATION, TRANSCRIPT, TOPIC_CONTENT_MODERATION
     #           },
     #         },
     #         generative_field: {
     #           state: "ENABLED", # required, accepts ENABLED, DISABLED
-    #           types: ["AUDIO_SUMMARY"], # accepts AUDIO_SUMMARY, CHAPTER_SUMMARY, IAB
+    #           types: ["AUDIO_SUMMARY"], # accepts AUDIO_SUMMARY, IAB, TOPIC_SUMMARY
     #         },
     #       },
     #     },
@@ -708,9 +720,15 @@ module Aws::BedrockDataAutomation
     #     encryption_configuration: {
     #       kms_key_id: "KmsKeyId", # required
     #       kms_encryption_context: {
-    #         "String" => "String",
+    #         "EncryptionContextKey" => "EncryptionContextValue",
     #       },
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -820,7 +838,7 @@ module Aws::BedrockDataAutomation
     #   resp.blueprint.blueprint_stage #=> String, one of "DEVELOPMENT", "LIVE"
     #   resp.blueprint.kms_key_id #=> String
     #   resp.blueprint.kms_encryption_context #=> Hash
-    #   resp.blueprint.kms_encryption_context["String"] #=> String
+    #   resp.blueprint.kms_encryption_context["EncryptionContextKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/GetBlueprint AWS API Documentation
     #
@@ -868,24 +886,24 @@ module Aws::BedrockDataAutomation
     #   resp.project.standard_output_configuration.document.output_format.additional_file_format.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.project.standard_output_configuration.image.extraction.category.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.project.standard_output_configuration.image.extraction.category.types #=> Array
-    #   resp.project.standard_output_configuration.image.extraction.category.types[0] #=> String, one of "CONTENT_MODERATION", "TEXT_DETECTION"
+    #   resp.project.standard_output_configuration.image.extraction.category.types[0] #=> String, one of "CONTENT_MODERATION", "TEXT_DETECTION", "LOGOS"
     #   resp.project.standard_output_configuration.image.extraction.bounding_box.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.project.standard_output_configuration.image.generative_field.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.project.standard_output_configuration.image.generative_field.types #=> Array
     #   resp.project.standard_output_configuration.image.generative_field.types[0] #=> String, one of "IMAGE_SUMMARY", "IAB"
     #   resp.project.standard_output_configuration.video.extraction.category.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.project.standard_output_configuration.video.extraction.category.types #=> Array
-    #   resp.project.standard_output_configuration.video.extraction.category.types[0] #=> String, one of "CONTENT_MODERATION", "TEXT_DETECTION", "TRANSCRIPT"
+    #   resp.project.standard_output_configuration.video.extraction.category.types[0] #=> String, one of "CONTENT_MODERATION", "TEXT_DETECTION", "TRANSCRIPT", "LOGOS"
     #   resp.project.standard_output_configuration.video.extraction.bounding_box.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.project.standard_output_configuration.video.generative_field.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.project.standard_output_configuration.video.generative_field.types #=> Array
-    #   resp.project.standard_output_configuration.video.generative_field.types[0] #=> String, one of "VIDEO_SUMMARY", "SCENE_SUMMARY", "IAB"
+    #   resp.project.standard_output_configuration.video.generative_field.types[0] #=> String, one of "VIDEO_SUMMARY", "IAB", "CHAPTER_SUMMARY"
     #   resp.project.standard_output_configuration.audio.extraction.category.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.project.standard_output_configuration.audio.extraction.category.types #=> Array
-    #   resp.project.standard_output_configuration.audio.extraction.category.types[0] #=> String, one of "AUDIO_CONTENT_MODERATION", "CHAPTER_CONTENT_MODERATION", "TRANSCRIPT"
+    #   resp.project.standard_output_configuration.audio.extraction.category.types[0] #=> String, one of "AUDIO_CONTENT_MODERATION", "TRANSCRIPT", "TOPIC_CONTENT_MODERATION"
     #   resp.project.standard_output_configuration.audio.generative_field.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.project.standard_output_configuration.audio.generative_field.types #=> Array
-    #   resp.project.standard_output_configuration.audio.generative_field.types[0] #=> String, one of "AUDIO_SUMMARY", "CHAPTER_SUMMARY", "IAB"
+    #   resp.project.standard_output_configuration.audio.generative_field.types[0] #=> String, one of "AUDIO_SUMMARY", "IAB", "TOPIC_SUMMARY"
     #   resp.project.custom_output_configuration.blueprints #=> Array
     #   resp.project.custom_output_configuration.blueprints[0].blueprint_arn #=> String
     #   resp.project.custom_output_configuration.blueprints[0].blueprint_version #=> String
@@ -894,7 +912,7 @@ module Aws::BedrockDataAutomation
     #   resp.project.status #=> String, one of "COMPLETED", "IN_PROGRESS", "FAILED"
     #   resp.project.kms_key_id #=> String
     #   resp.project.kms_encryption_context #=> Hash
-    #   resp.project.kms_encryption_context["String"] #=> String
+    #   resp.project.kms_encryption_context["EncryptionContextKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/GetDataAutomationProject AWS API Documentation
     #
@@ -1022,6 +1040,93 @@ module Aws::BedrockDataAutomation
       req.send_request(options)
     end
 
+    # List tags for an Amazon Bedrock Data Automation resource
+    #
+    # @option params [required, String] :resource_arn
+    #   ARN of a taggable resource
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "TaggableResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Tag an Amazon Bedrock Data Automation resource
+    #
+    # @option params [required, String] :resource_arn
+    #   ARN of a taggable resource
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   List of tags
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "TaggableResourceArn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Untag an Amazon Bedrock Data Automation resource
+    #
+    # @option params [required, String] :resource_arn
+    #   ARN of a taggable resource
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   List of tag keys
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "TaggableResourceArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Updates an existing Amazon Bedrock Data Automation Blueprint
     #
     # @option params [required, String] :blueprint_arn
@@ -1033,6 +1138,9 @@ module Aws::BedrockDataAutomation
     # @option params [String] :blueprint_stage
     #   Stage of the Blueprint
     #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   KMS Encryption Configuration
+    #
     # @return [Types::UpdateBlueprintResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateBlueprintResponse#blueprint #blueprint} => Types::Blueprint
@@ -1043,6 +1151,12 @@ module Aws::BedrockDataAutomation
     #     blueprint_arn: "BlueprintArn", # required
     #     schema: "BlueprintSchema", # required
     #     blueprint_stage: "DEVELOPMENT", # accepts DEVELOPMENT, LIVE
+    #     encryption_configuration: {
+    #       kms_key_id: "KmsKeyId", # required
+    #       kms_encryption_context: {
+    #         "EncryptionContextKey" => "EncryptionContextValue",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1057,7 +1171,7 @@ module Aws::BedrockDataAutomation
     #   resp.blueprint.blueprint_stage #=> String, one of "DEVELOPMENT", "LIVE"
     #   resp.blueprint.kms_key_id #=> String
     #   resp.blueprint.kms_encryption_context #=> Hash
-    #   resp.blueprint.kms_encryption_context["String"] #=> String
+    #   resp.blueprint.kms_encryption_context["EncryptionContextKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/UpdateBlueprint AWS API Documentation
     #
@@ -1088,6 +1202,9 @@ module Aws::BedrockDataAutomation
     #
     # @option params [Types::OverrideConfiguration] :override_configuration
     #   Override configuration
+    #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   KMS Encryption Configuration
     #
     # @return [Types::UpdateDataAutomationProjectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1127,7 +1244,7 @@ module Aws::BedrockDataAutomation
     #         extraction: {
     #           category: { # required
     #             state: "ENABLED", # required, accepts ENABLED, DISABLED
-    #             types: ["CONTENT_MODERATION"], # accepts CONTENT_MODERATION, TEXT_DETECTION
+    #             types: ["CONTENT_MODERATION"], # accepts CONTENT_MODERATION, TEXT_DETECTION, LOGOS
     #           },
     #           bounding_box: { # required
     #             state: "ENABLED", # required, accepts ENABLED, DISABLED
@@ -1142,7 +1259,7 @@ module Aws::BedrockDataAutomation
     #         extraction: {
     #           category: { # required
     #             state: "ENABLED", # required, accepts ENABLED, DISABLED
-    #             types: ["CONTENT_MODERATION"], # accepts CONTENT_MODERATION, TEXT_DETECTION, TRANSCRIPT
+    #             types: ["CONTENT_MODERATION"], # accepts CONTENT_MODERATION, TEXT_DETECTION, TRANSCRIPT, LOGOS
     #           },
     #           bounding_box: { # required
     #             state: "ENABLED", # required, accepts ENABLED, DISABLED
@@ -1150,19 +1267,19 @@ module Aws::BedrockDataAutomation
     #         },
     #         generative_field: {
     #           state: "ENABLED", # required, accepts ENABLED, DISABLED
-    #           types: ["VIDEO_SUMMARY"], # accepts VIDEO_SUMMARY, SCENE_SUMMARY, IAB
+    #           types: ["VIDEO_SUMMARY"], # accepts VIDEO_SUMMARY, IAB, CHAPTER_SUMMARY
     #         },
     #       },
     #       audio: {
     #         extraction: {
     #           category: { # required
     #             state: "ENABLED", # required, accepts ENABLED, DISABLED
-    #             types: ["AUDIO_CONTENT_MODERATION"], # accepts AUDIO_CONTENT_MODERATION, CHAPTER_CONTENT_MODERATION, TRANSCRIPT
+    #             types: ["AUDIO_CONTENT_MODERATION"], # accepts AUDIO_CONTENT_MODERATION, TRANSCRIPT, TOPIC_CONTENT_MODERATION
     #           },
     #         },
     #         generative_field: {
     #           state: "ENABLED", # required, accepts ENABLED, DISABLED
-    #           types: ["AUDIO_SUMMARY"], # accepts AUDIO_SUMMARY, CHAPTER_SUMMARY, IAB
+    #           types: ["AUDIO_SUMMARY"], # accepts AUDIO_SUMMARY, IAB, TOPIC_SUMMARY
     #         },
     #       },
     #     },
@@ -1180,6 +1297,12 @@ module Aws::BedrockDataAutomation
     #         splitter: {
     #           state: "ENABLED", # accepts ENABLED, DISABLED
     #         },
+    #       },
+    #     },
+    #     encryption_configuration: {
+    #       kms_key_id: "KmsKeyId", # required
+    #       kms_encryption_context: {
+    #         "EncryptionContextKey" => "EncryptionContextValue",
     #       },
     #     },
     #   })
@@ -1217,7 +1340,7 @@ module Aws::BedrockDataAutomation
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockdataautomation'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -888,6 +888,43 @@ module Aws::CloudWatchRUM
       req.send_request(options)
     end
 
+    # Removes the association of a resource-based policy from an app
+    # monitor.
+    #
+    # @option params [required, String] :name
+    #   The app monitor that you want to remove the resource policy from.
+    #
+    # @option params [String] :policy_revision_id
+    #   Specifies a specific policy revision to delete. Provide a
+    #   `PolicyRevisionId` to ensure an atomic delete operation. If the
+    #   revision ID that you provide doesn't match the latest policy revision
+    #   ID, the request will be rejected with an
+    #   `InvalidPolicyRevisionIdException` error.
+    #
+    # @return [Types::DeleteResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteResourcePolicyResponse#policy_revision_id #policy_revision_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_policy({
+    #     name: "AppMonitorName", # required
+    #     policy_revision_id: "PolicyRevisionId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy_revision_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/DeleteResourcePolicy AWS API Documentation
+    #
+    # @overload delete_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_policy(params = {}, options = {})
+      req = build_request(:delete_resource_policy, params)
+      req.send_request(options)
+    end
+
     # Deletes a destination for CloudWatch RUM extended metrics, so that the
     # specified app monitor stops sending extended metrics to that
     # destination.
@@ -1039,6 +1076,38 @@ module Aws::CloudWatchRUM
       req.send_request(options)
     end
 
+    # Use this operation to retrieve information about a resource-based
+    # policy that is attached to an app monitor.
+    #
+    # @option params [required, String] :name
+    #   The name of the app monitor that is associated with the resource-based
+    #   policy that you want to view.
+    #
+    # @return [Types::GetResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourcePolicyResponse#policy_document #policy_document} => String
+    #   * {Types::GetResourcePolicyResponse#policy_revision_id #policy_revision_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resource_policy({
+    #     name: "AppMonitorName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy_document #=> String
+    #   resp.policy_revision_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/GetResourcePolicy AWS API Documentation
+    #
+    # @overload get_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def get_resource_policy(params = {}, options = {})
+      req = build_request(:get_resource_policy, params)
+      req.send_request(options)
+    end
+
     # Returns a list of the Amazon CloudWatch RUM app monitors in the
     # account.
     #
@@ -1170,6 +1239,70 @@ module Aws::CloudWatchRUM
       req.send_request(options)
     end
 
+    # Use this operation to assign a resource-based policy to a CloudWatch
+    # RUM app monitor to control access to it. Each app monitor can have one
+    # resource-based policy. The maximum size of the policy is 4 KB. To
+    # learn more about using resource policies with RUM, see [Using
+    # resource-based policies with CloudWatch RUM][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-resource-policies.html
+    #
+    # @option params [required, String] :name
+    #   The name of the app monitor that you want to apply this resource-based
+    #   policy to. To find the names of your app monitors, you can use the
+    #   [ListAppMonitors][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_ListAppMonitors.html
+    #
+    # @option params [required, String] :policy_document
+    #   The JSON to use as the resource policy. The document can be up to 4 KB
+    #   in size. For more information about the contents and syntax for this
+    #   policy, see [Using resource-based policies with CloudWatch RUM][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-resource-policies.html
+    #
+    # @option params [String] :policy_revision_id
+    #   A string value that you can use to conditionally update your policy.
+    #   You can provide the revision ID of your existing policy to make
+    #   mutating requests against that policy.
+    #
+    #   When you assign a policy revision ID, then later requests about that
+    #   policy will be rejected with an `InvalidPolicyRevisionIdException`
+    #   error if they don't provide the correct current revision ID.
+    #
+    # @return [Types::PutResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutResourcePolicyResponse#policy_document #policy_document} => String
+    #   * {Types::PutResourcePolicyResponse#policy_revision_id #policy_revision_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_resource_policy({
+    #     name: "AppMonitorName", # required
+    #     policy_document: "String", # required
+    #     policy_revision_id: "PolicyRevisionId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy_document #=> String
+    #   resp.policy_revision_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/PutResourcePolicy AWS API Documentation
+    #
+    # @overload put_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def put_resource_policy(params = {}, options = {})
+      req = build_request(:put_resource_policy, params)
+      req.send_request(options)
+    end
+
     # Sends telemetry events about your application performance and user
     # behavior to CloudWatch RUM. The code snippet that RUM generates for
     # you to add to your application includes `PutRumEvents` operations to
@@ -1177,6 +1310,17 @@ module Aws::CloudWatchRUM
     #
     # Each `PutRumEvents` operation can send a batch of events from one user
     # session.
+    #
+    # @option params [String] :alias
+    #   If the app monitor uses a resource-based policy that requires
+    #   `PutRumEvents` requests to specify a certain alias, specify that alias
+    #   here. This alias will be compared to the `rum:alias` context key in
+    #   the resource-based policy. For more information, see [Using
+    #   resource-based policies with CloudWatch RUM][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-resource-policies.html
     #
     # @option params [required, Types::AppMonitorDetails] :app_monitor_details
     #   A structure that contains information about the app monitor that
@@ -1200,6 +1344,7 @@ module Aws::CloudWatchRUM
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_rum_events({
+    #     alias: "Alias",
     #     app_monitor_details: { # required
     #       id: "String",
     #       name: "String",
@@ -1551,7 +1696,7 @@ module Aws::CloudWatchRUM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchrum'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

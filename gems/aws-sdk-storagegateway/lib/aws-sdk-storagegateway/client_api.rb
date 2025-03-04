@@ -186,6 +186,8 @@ module Aws::StorageGateway
     EndpointNetworkConfiguration = Shapes::StructureShape.new(name: 'EndpointNetworkConfiguration')
     EndpointType = Shapes::StringShape.new(name: 'EndpointType')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
+    EvictFilesFailingUploadInput = Shapes::StructureShape.new(name: 'EvictFilesFailingUploadInput')
+    EvictFilesFailingUploadOutput = Shapes::StructureShape.new(name: 'EvictFilesFailingUploadOutput')
     FileShareARN = Shapes::StringShape.new(name: 'FileShareARN')
     FileShareARNList = Shapes::ListShape.new(name: 'FileShareARNList')
     FileShareClientList = Shapes::ListShape.new(name: 'FileShareClientList')
@@ -1059,6 +1061,13 @@ module Aws::StorageGateway
 
     EndpointNetworkConfiguration.add_member(:ip_addresses, Shapes::ShapeRef.new(shape: IpAddressList, location_name: "IpAddresses"))
     EndpointNetworkConfiguration.struct_class = Types::EndpointNetworkConfiguration
+
+    EvictFilesFailingUploadInput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, required: true, location_name: "FileShareARN"))
+    EvictFilesFailingUploadInput.add_member(:force_remove, Shapes::ShapeRef.new(shape: boolean, location_name: "ForceRemove"))
+    EvictFilesFailingUploadInput.struct_class = Types::EvictFilesFailingUploadInput
+
+    EvictFilesFailingUploadOutput.add_member(:notification_id, Shapes::ShapeRef.new(shape: string, location_name: "NotificationId"))
+    EvictFilesFailingUploadOutput.struct_class = Types::EvictFilesFailingUploadOutput
 
     FileShareARNList.member = Shapes::ShapeRef.new(shape: FileShareARN)
 
@@ -2310,6 +2319,16 @@ module Aws::StorageGateway
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DisassociateFileSystemInput)
         o.output = Shapes::ShapeRef.new(shape: DisassociateFileSystemOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:evict_files_failing_upload, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "EvictFilesFailingUpload"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: EvictFilesFailingUploadInput)
+        o.output = Shapes::ShapeRef.new(shape: EvictFilesFailingUploadOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)

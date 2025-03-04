@@ -6573,6 +6573,24 @@ module Aws::EC2
     #   resp.vpc.cidr_block_association_set[0].cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
     #   resp.vpc.cidr_block_association_set[0].cidr_block_state.status_message #=> String
     #   resp.vpc.is_default #=> Boolean
+    #   resp.vpc.encryption_control.vpc_id #=> String
+    #   resp.vpc.encryption_control.vpc_encryption_control_id #=> String
+    #   resp.vpc.encryption_control.mode #=> String, one of "monitor", "enforce"
+    #   resp.vpc.encryption_control.state #=> String, one of "enforce-in-progress", "monitor-in-progress", "enforce-failed", "monitor-failed", "deleting", "deleted", "available"
+    #   resp.vpc.encryption_control.state_message #=> String
+    #   resp.vpc.encryption_control.resource_exclusions.internet_gateway.state #=> String, one of "enabling", "enabled", "disabling", "disabled"
+    #   resp.vpc.encryption_control.resource_exclusions.internet_gateway.state_message #=> String
+    #   resp.vpc.encryption_control.resource_exclusions.egress_only_internet_gateway.state #=> String, one of "enabling", "enabled", "disabling", "disabled"
+    #   resp.vpc.encryption_control.resource_exclusions.egress_only_internet_gateway.state_message #=> String
+    #   resp.vpc.encryption_control.resource_exclusions.nat_gateway.state #=> String, one of "enabling", "enabled", "disabling", "disabled"
+    #   resp.vpc.encryption_control.resource_exclusions.nat_gateway.state_message #=> String
+    #   resp.vpc.encryption_control.resource_exclusions.virtual_private_gateway.state #=> String, one of "enabling", "enabled", "disabling", "disabled"
+    #   resp.vpc.encryption_control.resource_exclusions.virtual_private_gateway.state_message #=> String
+    #   resp.vpc.encryption_control.resource_exclusions.vpc_peering.state #=> String, one of "enabling", "enabled", "disabling", "disabled"
+    #   resp.vpc.encryption_control.resource_exclusions.vpc_peering.state_message #=> String
+    #   resp.vpc.encryption_control.tags #=> Array
+    #   resp.vpc.encryption_control.tags[0].key #=> String
+    #   resp.vpc.encryption_control.tags[0].value #=> String
     #   resp.vpc.tags #=> Array
     #   resp.vpc.tags[0].key #=> String
     #   resp.vpc.tags[0].value #=> String
@@ -15514,6 +15532,24 @@ module Aws::EC2
     #   resp.vpc.cidr_block_association_set[0].cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
     #   resp.vpc.cidr_block_association_set[0].cidr_block_state.status_message #=> String
     #   resp.vpc.is_default #=> Boolean
+    #   resp.vpc.encryption_control.vpc_id #=> String
+    #   resp.vpc.encryption_control.vpc_encryption_control_id #=> String
+    #   resp.vpc.encryption_control.mode #=> String, one of "monitor", "enforce"
+    #   resp.vpc.encryption_control.state #=> String, one of "enforce-in-progress", "monitor-in-progress", "enforce-failed", "monitor-failed", "deleting", "deleted", "available"
+    #   resp.vpc.encryption_control.state_message #=> String
+    #   resp.vpc.encryption_control.resource_exclusions.internet_gateway.state #=> String, one of "enabling", "enabled", "disabling", "disabled"
+    #   resp.vpc.encryption_control.resource_exclusions.internet_gateway.state_message #=> String
+    #   resp.vpc.encryption_control.resource_exclusions.egress_only_internet_gateway.state #=> String, one of "enabling", "enabled", "disabling", "disabled"
+    #   resp.vpc.encryption_control.resource_exclusions.egress_only_internet_gateway.state_message #=> String
+    #   resp.vpc.encryption_control.resource_exclusions.nat_gateway.state #=> String, one of "enabling", "enabled", "disabling", "disabled"
+    #   resp.vpc.encryption_control.resource_exclusions.nat_gateway.state_message #=> String
+    #   resp.vpc.encryption_control.resource_exclusions.virtual_private_gateway.state #=> String, one of "enabling", "enabled", "disabling", "disabled"
+    #   resp.vpc.encryption_control.resource_exclusions.virtual_private_gateway.state_message #=> String
+    #   resp.vpc.encryption_control.resource_exclusions.vpc_peering.state #=> String, one of "enabling", "enabled", "disabling", "disabled"
+    #   resp.vpc.encryption_control.resource_exclusions.vpc_peering.state_message #=> String
+    #   resp.vpc.encryption_control.tags #=> Array
+    #   resp.vpc.encryption_control.tags[0].key #=> String
+    #   resp.vpc.encryption_control.tags[0].value #=> String
     #   resp.vpc.tags #=> Array
     #   resp.vpc.tags[0].key #=> String
     #   resp.vpc.tags[0].value #=> String
@@ -40045,6 +40081,24 @@ module Aws::EC2
     #   resp.vpcs[0].cidr_block_association_set[0].cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
     #   resp.vpcs[0].cidr_block_association_set[0].cidr_block_state.status_message #=> String
     #   resp.vpcs[0].is_default #=> Boolean
+    #   resp.vpcs[0].encryption_control.vpc_id #=> String
+    #   resp.vpcs[0].encryption_control.vpc_encryption_control_id #=> String
+    #   resp.vpcs[0].encryption_control.mode #=> String, one of "monitor", "enforce"
+    #   resp.vpcs[0].encryption_control.state #=> String, one of "enforce-in-progress", "monitor-in-progress", "enforce-failed", "monitor-failed", "deleting", "deleted", "available"
+    #   resp.vpcs[0].encryption_control.state_message #=> String
+    #   resp.vpcs[0].encryption_control.resource_exclusions.internet_gateway.state #=> String, one of "enabling", "enabled", "disabling", "disabled"
+    #   resp.vpcs[0].encryption_control.resource_exclusions.internet_gateway.state_message #=> String
+    #   resp.vpcs[0].encryption_control.resource_exclusions.egress_only_internet_gateway.state #=> String, one of "enabling", "enabled", "disabling", "disabled"
+    #   resp.vpcs[0].encryption_control.resource_exclusions.egress_only_internet_gateway.state_message #=> String
+    #   resp.vpcs[0].encryption_control.resource_exclusions.nat_gateway.state #=> String, one of "enabling", "enabled", "disabling", "disabled"
+    #   resp.vpcs[0].encryption_control.resource_exclusions.nat_gateway.state_message #=> String
+    #   resp.vpcs[0].encryption_control.resource_exclusions.virtual_private_gateway.state #=> String, one of "enabling", "enabled", "disabling", "disabled"
+    #   resp.vpcs[0].encryption_control.resource_exclusions.virtual_private_gateway.state_message #=> String
+    #   resp.vpcs[0].encryption_control.resource_exclusions.vpc_peering.state #=> String, one of "enabling", "enabled", "disabling", "disabled"
+    #   resp.vpcs[0].encryption_control.resource_exclusions.vpc_peering.state_message #=> String
+    #   resp.vpcs[0].encryption_control.tags #=> Array
+    #   resp.vpcs[0].encryption_control.tags[0].key #=> String
+    #   resp.vpcs[0].encryption_control.tags[0].value #=> String
     #   resp.vpcs[0].tags #=> Array
     #   resp.vpcs[0].tags[0].key #=> String
     #   resp.vpcs[0].tags[0].value #=> String
@@ -63326,7 +63380,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.508.0'
+      context[:gem_version] = '1.509.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

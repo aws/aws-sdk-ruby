@@ -20,6 +20,7 @@ module AwsSdkCodeGenerator
       # @return [String|nil]
       def generated_src_warning
         return if @service.protocol == 'api-gateway'
+
         GENERATED_SRC_WARNING
       end
 
@@ -40,6 +41,10 @@ module AwsSdkCodeGenerator
       # @return [String]
       def customization_file_path
         "#{gem_name}/customizations/errors"
+      end
+
+      def query_protocol?
+        @service.protocol == 'query'
       end
 
       private

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2025-03-03)
+------------------
+
+* Feature - Add support for PutResourcePolicy, GetResourcePolicy and DeleteResourcePolicy to support resource based policies for AWS CloudWatch RUM
+
 1.37.0 (2025-02-18)
 ------------------
 

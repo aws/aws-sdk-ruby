@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2025-02-28)
+------------------
+
+* Feature - This release lets Amazon Bedrock Flows support newer models by increasing the maximum length of output in a prompt configuration. This release also increases the maximum number of prompt variables to 20 and the maximum number of node inputs to 20.
+
 1.48.0 (2025-02-24)
 ------------------
 

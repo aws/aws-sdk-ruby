@@ -544,7 +544,7 @@ module Aws::Pricing
     #
     #   resp = client.describe_services({
     #     service_code: "String",
-    #     format_version: "String",
+    #     format_version: "FormatVersion",
     #     next_token: "String",
     #     max_results: 1,
     #   })
@@ -739,11 +739,11 @@ module Aws::Pricing
     #     filters: [
     #       {
     #         type: "TERM_MATCH", # required, accepts TERM_MATCH
-    #         field: "String", # required
-    #         value: "String", # required
+    #         field: "Field", # required
+    #         value: "Value", # required
     #       },
     #     ],
-    #     format_version: "String",
+    #     format_version: "FormatVersion",
     #     next_token: "String",
     #     max_results: 1,
     #   })
@@ -880,7 +880,7 @@ module Aws::Pricing
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pricing'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

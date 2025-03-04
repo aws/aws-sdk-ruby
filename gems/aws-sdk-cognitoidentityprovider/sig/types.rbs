@@ -181,6 +181,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor session: ::String
       attr_accessor challenge_parameters: ::Hash[::String, ::String]
       attr_accessor authentication_result: Types::AuthenticationResultType
+      attr_accessor available_challenges: ::Array[("SMS_MFA" | "EMAIL_OTP" | "SOFTWARE_TOKEN_MFA" | "SELECT_MFA_TYPE" | "MFA_SETUP" | "PASSWORD_VERIFIER" | "CUSTOM_CHALLENGE" | "SELECT_CHALLENGE" | "DEVICE_SRP_AUTH" | "DEVICE_PASSWORD_VERIFIER" | "ADMIN_NO_SRP_AUTH" | "NEW_PASSWORD_REQUIRED" | "SMS_OTP" | "PASSWORD" | "WEB_AUTHN" | "PASSWORD_SRP")]
       SENSITIVE: [:session]
     end
 
@@ -874,6 +875,11 @@ module Aws::CognitoIdentityProvider
       SENSITIVE: []
     end
 
+    class DeviceKeyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class DeviceSecretVerifierConfigType
       attr_accessor password_verifier: ::String
       attr_accessor salt: ::String
@@ -1503,7 +1509,7 @@ module Aws::CognitoIdentityProvider
     end
 
     class PreTokenGenerationVersionConfigType
-      attr_accessor lambda_version: ("V1_0" | "V2_0")
+      attr_accessor lambda_version: ("V1_0" | "V2_0" | "V3_0")
       attr_accessor lambda_arn: ::String
       SENSITIVE: []
     end

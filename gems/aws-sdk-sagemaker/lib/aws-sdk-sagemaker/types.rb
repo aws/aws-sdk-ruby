@@ -6823,6 +6823,10 @@ module Aws::SageMaker
     #   The Amazon Resource Name (ARN) of the created domain.
     #   @return [String]
     #
+    # @!attribute [rw] domain_id
+    #   The ID of the created domain.
+    #   @return [String]
+    #
     # @!attribute [rw] url
     #   The URL to the created domain.
     #   @return [String]
@@ -6831,6 +6835,7 @@ module Aws::SageMaker
     #
     class CreateDomainResponse < Struct.new(
       :domain_arn,
+      :domain_id,
       :url)
       SENSITIVE = []
       include Aws::Structure
@@ -15469,6 +15474,10 @@ module Aws::SageMaker
     #   The date and time that hub content was created.
     #   @return [Time]
     #
+    # @!attribute [rw] last_modified_time
+    #   The last modified time of the hub content.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeHubContentResponse AWS API Documentation
     #
     class DescribeHubContentResponse < Struct.new(
@@ -15490,7 +15499,8 @@ module Aws::SageMaker
       :hub_content_dependencies,
       :hub_content_status,
       :failure_reason,
-      :creation_time)
+      :creation_time,
+      :last_modified_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22612,6 +22622,30 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The configuration for a private hub model reference that points to a
+    # public SageMaker JumpStart model.
+    #
+    # For more information about private hubs, see [Private curated hubs for
+    # foundation model access control in JumpStart][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-curated-hubs.html
+    #
+    # @!attribute [rw] hub_content_arn
+    #   The ARN of your private model hub content. This should be a
+    #   `ModelReference` resource type that points to a SageMaker JumpStart
+    #   public hub model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HubAccessConfig AWS API Documentation
+    #
+    class HubAccessConfig < Struct.new(
+      :hub_content_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Any dependencies related to hub content, such as scripts, model
     # artifacts, datasets, or notebooks.
     #
@@ -25348,6 +25382,10 @@ module Aws::SageMaker
     #   content such as type, associated containers, scripts, and more.
     #   @return [String]
     #
+    # @!attribute [rw] support_status
+    #   The status of the hub content resource.
+    #   @return [String]
+    #
     # @!attribute [rw] hub_content_search_keywords
     #   The searchable keywords of the hub content.
     #   @return [Array<String>]
@@ -25368,6 +25406,7 @@ module Aws::SageMaker
       :hub_content_description,
       :hub_content_markdown,
       :hub_content_document,
+      :support_status,
       :hub_content_search_keywords,
       :tags)
       SENSITIVE = []
@@ -26700,6 +26739,14 @@ module Aws::SageMaker
     # @!attribute [rw] custom_images
     #   A list of custom SageMaker AI images that are configured to run as a
     #   KernelGateway app.
+    #
+    #   The maximum number of custom images are as follows.
+    #
+    #   * On a domain level: 200
+    #
+    #   * On a space level: 5
+    #
+    #   * On a user profile level: 5
     #   @return [Array<Types::CustomImage>]
     #
     # @!attribute [rw] lifecycle_config_arns
@@ -41984,6 +42031,30 @@ module Aws::SageMaker
     #   source.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] model_access_config
+    #   The access configuration file to control access to the ML model. You
+    #   can explicitly accept the model end-user license agreement (EULA)
+    #   within the `ModelAccessConfig`.
+    #
+    #   * If you are a Jumpstart user, see the [End-user license
+    #     agreements][1] section for more details on accepting the EULA.
+    #
+    #   * If you are an AutoML user, see the *Optional Parameters* section
+    #     of *Create an AutoML job to fine-tune text generation models using
+    #     the API* for details on [How to set the EULA acceptance when
+    #     fine-tuning a model using the AutoML API][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-choose.html#jumpstart-foundation-models-choose-eula
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-create-experiment-finetune-llms.html#autopilot-llms-finetuning-api-optional-params
+    #   @return [Types::ModelAccessConfig]
+    #
+    # @!attribute [rw] hub_access_config
+    #   The configuration for a private hub model reference that points to a
+    #   SageMaker JumpStart public hub model.
+    #   @return [Types::HubAccessConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/S3DataSource AWS API Documentation
     #
     class S3DataSource < Struct.new(
@@ -41991,7 +42062,9 @@ module Aws::SageMaker
       :s3_uri,
       :s3_data_distribution_type,
       :attribute_names,
-      :instance_group_names)
+      :instance_group_names,
+      :model_access_config,
+      :hub_access_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -48138,6 +48211,134 @@ module Aws::SageMaker
       :description,
       :parameter_additions,
       :parameter_removals)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hub_name
+    #   The name of the SageMaker hub that contains the hub content you want
+    #   to update. You can optionally use the hub ARN instead.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_name
+    #   The name of the hub content resource that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_type
+    #   The content type of the resource that you want to update. Only
+    #   specify a `ModelReference` resource for this API. To update a
+    #   `Model` or `Notebook` resource, use the `UpdateHubContent` API
+    #   instead.
+    #   @return [String]
+    #
+    # @!attribute [rw] min_version
+    #   The minimum hub content version of the referenced model that you
+    #   want to use. The minimum version must be older than the latest
+    #   available version of the referenced model. To support all versions
+    #   of a model, set the value to `1.0.0`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateHubContentReferenceRequest AWS API Documentation
+    #
+    class UpdateHubContentReferenceRequest < Struct.new(
+      :hub_name,
+      :hub_content_name,
+      :hub_content_type,
+      :min_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hub_arn
+    #   The ARN of the private model hub that contains the updated hub
+    #   content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_arn
+    #   The ARN of the hub content resource that was updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateHubContentReferenceResponse AWS API Documentation
+    #
+    class UpdateHubContentReferenceResponse < Struct.new(
+      :hub_arn,
+      :hub_content_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hub_name
+    #   The name of the SageMaker hub that contains the hub content you want
+    #   to update. You can optionally use the hub ARN instead.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_name
+    #   The name of the hub content resource that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_type
+    #   The content type of the resource that you want to update. Only
+    #   specify a `Model` or `Notebook` resource for this API. To update a
+    #   `ModelReference`, use the `UpdateHubContentReference` API instead.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_version
+    #   The hub content version that you want to update. For example, if you
+    #   have two versions of a resource in your hub, you can update the
+    #   second version.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_display_name
+    #   The display name of the hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_description
+    #   The description of the hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_markdown
+    #   A string that provides a description of the hub content. This string
+    #   can include links, tables, and standard markdown formatting.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_search_keywords
+    #   The searchable keywords of the hub content.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] support_status
+    #   Indicates the current status of the hub content resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateHubContentRequest AWS API Documentation
+    #
+    class UpdateHubContentRequest < Struct.new(
+      :hub_name,
+      :hub_content_name,
+      :hub_content_type,
+      :hub_content_version,
+      :hub_content_display_name,
+      :hub_content_description,
+      :hub_content_markdown,
+      :hub_content_search_keywords,
+      :support_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hub_arn
+    #   The ARN of the private model hub that contains the updated hub
+    #   content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_arn
+    #   The ARN of the hub content resource that was updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateHubContentResponse AWS API Documentation
+    #
+    class UpdateHubContentResponse < Struct.new(
+      :hub_arn,
+      :hub_content_arn)
       SENSITIVE = []
       include Aws::Structure
     end

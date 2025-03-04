@@ -23,6 +23,9 @@ module Aws
       class ConcurrentModificationException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class DeviceKeyExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class DuplicateProviderException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

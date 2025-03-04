@@ -16019,6 +16019,7 @@ module Aws::EC2
       attr_accessor ipv_6_cidr_block_association_set: ::Array[Types::VpcIpv6CidrBlockAssociation]
       attr_accessor cidr_block_association_set: ::Array[Types::VpcCidrBlockAssociation]
       attr_accessor is_default: bool
+      attr_accessor encryption_control: Types::VpcEncryptionControl
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor block_public_access_states: Types::BlockPublicAccessStates
       attr_accessor vpc_id: ::String
@@ -16076,6 +16077,32 @@ module Aws::EC2
       attr_accessor classic_link_enabled: bool
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor vpc_id: ::String
+      SENSITIVE: []
+    end
+
+    class VpcEncryptionControl
+      attr_accessor vpc_id: ::String
+      attr_accessor vpc_encryption_control_id: ::String
+      attr_accessor mode: ("monitor" | "enforce")
+      attr_accessor state: ("enforce-in-progress" | "monitor-in-progress" | "enforce-failed" | "monitor-failed" | "deleting" | "deleted" | "available")
+      attr_accessor state_message: ::String
+      attr_accessor resource_exclusions: Types::VpcEncryptionControlExclusions
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class VpcEncryptionControlExclusion
+      attr_accessor state: ("enabling" | "enabled" | "disabling" | "disabled")
+      attr_accessor state_message: ::String
+      SENSITIVE: []
+    end
+
+    class VpcEncryptionControlExclusions
+      attr_accessor internet_gateway: Types::VpcEncryptionControlExclusion
+      attr_accessor egress_only_internet_gateway: Types::VpcEncryptionControlExclusion
+      attr_accessor nat_gateway: Types::VpcEncryptionControlExclusion
+      attr_accessor virtual_private_gateway: Types::VpcEncryptionControlExclusion
+      attr_accessor vpc_peering: Types::VpcEncryptionControlExclusion
       SENSITIVE: []
     end
 

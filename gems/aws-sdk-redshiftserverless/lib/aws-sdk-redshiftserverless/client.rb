@@ -1166,6 +1166,11 @@ module Aws::RedshiftServerless
     # @option params [Array<Types::Tag>] :tags
     #   A array of tag instances.
     #
+    # @option params [String] :track_name
+    #   An optional parameter for the name of the track for the workgroup. If
+    #   you don't provide a track name, the workgroup is assigned to the
+    #   `current` track.
+    #
     # @option params [required, String] :workgroup_name
     #   The name of the created workgroup.
     #
@@ -1201,6 +1206,7 @@ module Aws::RedshiftServerless
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     track_name: "TrackName",
     #     workgroup_name: "WorkgroupName", # required
     #   })
     #
@@ -1232,6 +1238,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.max_capacity #=> Integer
     #   resp.workgroup.namespace_name #=> String
     #   resp.workgroup.patch_version #=> String
+    #   resp.workgroup.pending_track_name #=> String
     #   resp.workgroup.port #=> Integer
     #   resp.workgroup.price_performance_target.level #=> Integer
     #   resp.workgroup.price_performance_target.status #=> String, one of "ENABLED", "DISABLED"
@@ -1241,6 +1248,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.status #=> String, one of "CREATING", "AVAILABLE", "MODIFYING", "DELETING"
     #   resp.workgroup.subnet_ids #=> Array
     #   resp.workgroup.subnet_ids[0] #=> String
+    #   resp.workgroup.track_name #=> String
     #   resp.workgroup.workgroup_arn #=> String
     #   resp.workgroup.workgroup_id #=> String
     #   resp.workgroup.workgroup_name #=> String
@@ -1609,6 +1617,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.max_capacity #=> Integer
     #   resp.workgroup.namespace_name #=> String
     #   resp.workgroup.patch_version #=> String
+    #   resp.workgroup.pending_track_name #=> String
     #   resp.workgroup.port #=> Integer
     #   resp.workgroup.price_performance_target.level #=> Integer
     #   resp.workgroup.price_performance_target.status #=> String, one of "ENABLED", "DISABLED"
@@ -1618,6 +1627,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.status #=> String, one of "CREATING", "AVAILABLE", "MODIFYING", "DELETING"
     #   resp.workgroup.subnet_ids #=> Array
     #   resp.workgroup.subnet_ids[0] #=> String
+    #   resp.workgroup.track_name #=> String
     #   resp.workgroup.workgroup_arn #=> String
     #   resp.workgroup.workgroup_id #=> String
     #   resp.workgroup.workgroup_name #=> String
@@ -2047,6 +2057,38 @@ module Aws::RedshiftServerless
       req.send_request(options)
     end
 
+    # Get the Redshift Serverless version for a specified track.
+    #
+    # @option params [required, String] :track_name
+    #   The name of the track of which its version is fetched.
+    #
+    # @return [Types::GetTrackResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTrackResponse#track #track} => Types::ServerlessTrack
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_track({
+    #     track_name: "TrackName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.track.track_name #=> String
+    #   resp.track.update_targets #=> Array
+    #   resp.track.update_targets[0].track_name #=> String
+    #   resp.track.update_targets[0].workgroup_version #=> String
+    #   resp.track.workgroup_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetTrack AWS API Documentation
+    #
+    # @overload get_track(params = {})
+    # @param [Hash] params ({})
+    def get_track(params = {}, options = {})
+      req = build_request(:get_track, params)
+      req.send_request(options)
+    end
+
     # Returns information about a usage limit.
     #
     # @option params [required, String] :usage_limit_id
@@ -2124,6 +2166,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.max_capacity #=> Integer
     #   resp.workgroup.namespace_name #=> String
     #   resp.workgroup.patch_version #=> String
+    #   resp.workgroup.pending_track_name #=> String
     #   resp.workgroup.port #=> Integer
     #   resp.workgroup.price_performance_target.level #=> Integer
     #   resp.workgroup.price_performance_target.status #=> String, one of "ENABLED", "DISABLED"
@@ -2133,6 +2176,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.status #=> String, one of "CREATING", "AVAILABLE", "MODIFYING", "DELETING"
     #   resp.workgroup.subnet_ids #=> Array
     #   resp.workgroup.subnet_ids[0] #=> String
+    #   resp.workgroup.track_name #=> String
     #   resp.workgroup.workgroup_arn #=> String
     #   resp.workgroup.workgroup_id #=> String
     #   resp.workgroup.workgroup_name #=> String
@@ -2716,6 +2760,54 @@ module Aws::RedshiftServerless
       req.send_request(options)
     end
 
+    # List the Amazon Redshift Serverless versions.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of response records to return in each call. If the
+    #   number of remaining response records exceeds the specified MaxRecords
+    #   value, a value is returned in a marker field of the response. You can
+    #   retrieve the next set of records by retrying the command with the
+    #   returned marker value.
+    #
+    # @option params [String] :next_token
+    #   If your initial `ListTracksRequest` operation returns a `nextToken`,
+    #   you can include the returned `nextToken` in following
+    #   `ListTracksRequest` operations, which returns results in the next
+    #   page.
+    #
+    # @return [Types::ListTracksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTracksResponse#next_token #next_token} => String
+    #   * {Types::ListTracksResponse#tracks #tracks} => Array&lt;Types::ServerlessTrack&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tracks({
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.tracks #=> Array
+    #   resp.tracks[0].track_name #=> String
+    #   resp.tracks[0].update_targets #=> Array
+    #   resp.tracks[0].update_targets[0].track_name #=> String
+    #   resp.tracks[0].update_targets[0].workgroup_version #=> String
+    #   resp.tracks[0].workgroup_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListTracks AWS API Documentation
+    #
+    # @overload list_tracks(params = {})
+    # @param [Hash] params ({})
+    def list_tracks(params = {}, options = {})
+      req = build_request(:list_tracks, params)
+      req.send_request(options)
+    end
+
     # Lists all usage limits within Amazon Redshift Serverless.
     #
     # @option params [Integer] :max_results
@@ -2832,6 +2924,7 @@ module Aws::RedshiftServerless
     #   resp.workgroups[0].max_capacity #=> Integer
     #   resp.workgroups[0].namespace_name #=> String
     #   resp.workgroups[0].patch_version #=> String
+    #   resp.workgroups[0].pending_track_name #=> String
     #   resp.workgroups[0].port #=> Integer
     #   resp.workgroups[0].price_performance_target.level #=> Integer
     #   resp.workgroups[0].price_performance_target.status #=> String, one of "ENABLED", "DISABLED"
@@ -2841,6 +2934,7 @@ module Aws::RedshiftServerless
     #   resp.workgroups[0].status #=> String, one of "CREATING", "AVAILABLE", "MODIFYING", "DELETING"
     #   resp.workgroups[0].subnet_ids #=> Array
     #   resp.workgroups[0].subnet_ids[0] #=> String
+    #   resp.workgroups[0].track_name #=> String
     #   resp.workgroups[0].workgroup_arn #=> String
     #   resp.workgroups[0].workgroup_id #=> String
     #   resp.workgroups[0].workgroup_name #=> String
@@ -3781,6 +3875,11 @@ module Aws::RedshiftServerless
     # @option params [Array<String>] :subnet_ids
     #   An array of VPC subnet IDs to associate with the workgroup.
     #
+    # @option params [String] :track_name
+    #   An optional parameter for the name of the track for the workgroup. If
+    #   you don't provide a track name, the workgroup is assigned to the
+    #   `current` track.
+    #
     # @option params [required, String] :workgroup_name
     #   The name of the workgroup to update. You can't update the name of a
     #   workgroup once it is created.
@@ -3810,6 +3909,7 @@ module Aws::RedshiftServerless
     #     publicly_accessible: false,
     #     security_group_ids: ["SecurityGroupId"],
     #     subnet_ids: ["SubnetId"],
+    #     track_name: "TrackName",
     #     workgroup_name: "WorkgroupName", # required
     #   })
     #
@@ -3841,6 +3941,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.max_capacity #=> Integer
     #   resp.workgroup.namespace_name #=> String
     #   resp.workgroup.patch_version #=> String
+    #   resp.workgroup.pending_track_name #=> String
     #   resp.workgroup.port #=> Integer
     #   resp.workgroup.price_performance_target.level #=> Integer
     #   resp.workgroup.price_performance_target.status #=> String, one of "ENABLED", "DISABLED"
@@ -3850,6 +3951,7 @@ module Aws::RedshiftServerless
     #   resp.workgroup.status #=> String, one of "CREATING", "AVAILABLE", "MODIFYING", "DELETING"
     #   resp.workgroup.subnet_ids #=> Array
     #   resp.workgroup.subnet_ids[0] #=> String
+    #   resp.workgroup.track_name #=> String
     #   resp.workgroup.workgroup_arn #=> String
     #   resp.workgroup.workgroup_id #=> String
     #   resp.workgroup.workgroup_name #=> String
@@ -3882,7 +3984,7 @@ module Aws::RedshiftServerless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-redshiftserverless'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

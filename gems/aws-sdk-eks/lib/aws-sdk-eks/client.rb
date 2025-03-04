@@ -1471,6 +1471,9 @@ module Aws::EKS
     #   resp.subscription.auto_renew #=> Boolean
     #   resp.subscription.license_arns #=> Array
     #   resp.subscription.license_arns[0] #=> String
+    #   resp.subscription.licenses #=> Array
+    #   resp.subscription.licenses[0].id #=> String
+    #   resp.subscription.licenses[0].token #=> String
     #   resp.subscription.tags #=> Hash
     #   resp.subscription.tags["TagKey"] #=> String
     #
@@ -1627,8 +1630,15 @@ module Aws::EKS
     # current Kubernetes version for the cluster. All node groups are
     # created with the latest AMI release version for the respective minor
     # Kubernetes version of the cluster, unless you deploy a custom AMI
-    # using a launch template. For more information about using launch
-    # templates, see [Customizing managed nodes with launch templates][1].
+    # using a launch template.
+    #
+    # For later updates, you will only be able to update a node group using
+    # a launch template only if it was originally deployed with a launch
+    # template. Additionally, the launch template ID or name must match what
+    # was used when the node group was created. You can update the launch
+    # template version with necessary changes. For more information about
+    # using launch templates, see [Customizing managed nodes with launch
+    # templates][1].
     #
     # An Amazon EKS managed node group is an Amazon EC2 Auto Scaling group
     # and associated Amazon EC2 instances that are managed by Amazon Web
@@ -1772,10 +1782,13 @@ module Aws::EKS
     # @option params [Types::LaunchTemplateSpecification] :launch_template
     #   An object representing a node group's launch template specification.
     #   When using this object, don't directly specify `instanceTypes`,
-    #   `diskSize`, or `remoteAccess`. Make sure that the launch template
-    #   meets the requirements in `launchTemplateSpecification`. Also refer to
-    #   [Customizing managed nodes with launch templates][1] in the *Amazon
-    #   EKS User Guide*.
+    #   `diskSize`, or `remoteAccess`. You cannot later specify a different
+    #   launch template ID or name than what was used to create the node
+    #   group.
+    #
+    #   Make sure that the launch template meets the requirements in
+    #   `launchTemplateSpecification`. Also refer to [Customizing managed
+    #   nodes with launch templates][1] in the *Amazon EKS User Guide*.
     #
     #
     #
@@ -2304,6 +2317,9 @@ module Aws::EKS
     #   resp.subscription.auto_renew #=> Boolean
     #   resp.subscription.license_arns #=> Array
     #   resp.subscription.license_arns[0] #=> String
+    #   resp.subscription.licenses #=> Array
+    #   resp.subscription.licenses[0].id #=> String
+    #   resp.subscription.licenses[0].token #=> String
     #   resp.subscription.tags #=> Hash
     #   resp.subscription.tags["TagKey"] #=> String
     #
@@ -3105,6 +3121,9 @@ module Aws::EKS
     #   resp.subscription.auto_renew #=> Boolean
     #   resp.subscription.license_arns #=> Array
     #   resp.subscription.license_arns[0] #=> String
+    #   resp.subscription.licenses #=> Array
+    #   resp.subscription.licenses[0].id #=> String
+    #   resp.subscription.licenses[0].token #=> String
     #   resp.subscription.tags #=> Hash
     #   resp.subscription.tags["TagKey"] #=> String
     #
@@ -3943,6 +3962,9 @@ module Aws::EKS
     #   resp.subscriptions[0].auto_renew #=> Boolean
     #   resp.subscriptions[0].license_arns #=> Array
     #   resp.subscriptions[0].license_arns[0] #=> String
+    #   resp.subscriptions[0].licenses #=> Array
+    #   resp.subscriptions[0].licenses[0].id #=> String
+    #   resp.subscriptions[0].licenses[0].token #=> String
     #   resp.subscriptions[0].tags #=> Hash
     #   resp.subscriptions[0].tags["TagKey"] #=> String
     #   resp.next_token #=> String
@@ -5123,6 +5145,9 @@ module Aws::EKS
     #   resp.subscription.auto_renew #=> Boolean
     #   resp.subscription.license_arns #=> Array
     #   resp.subscription.license_arns[0] #=> String
+    #   resp.subscription.licenses #=> Array
+    #   resp.subscription.licenses[0].id #=> String
+    #   resp.subscription.licenses[0].token #=> String
     #   resp.subscription.tags #=> Hash
     #   resp.subscription.tags["TagKey"] #=> String
     #
@@ -5257,11 +5282,15 @@ module Aws::EKS
     # node group.
     #
     # You can update a node group using a launch template only if the node
-    # group was originally deployed with a launch template. If you need to
-    # update a custom AMI in a node group that was deployed with a launch
-    # template, then update your custom AMI, specify the new ID in a new
-    # version of the launch template, and then update the node group to the
-    # new version of the launch template.
+    # group was originally deployed with a launch template. Additionally,
+    # the launch template ID or name must match what was used when the node
+    # group was created. You can update the launch template version with
+    # necessary changes.
+    #
+    # If you need to update a custom AMI in a node group that was deployed
+    # with a launch template, then update your custom AMI, specify the new
+    # ID in a new version of the launch template, and then update the node
+    # group to the new version of the launch template.
     #
     # If you update without a launch template, then you can update to the
     # latest available AMI version of a node group's current Kubernetes
@@ -5333,7 +5362,9 @@ module Aws::EKS
     # @option params [Types::LaunchTemplateSpecification] :launch_template
     #   An object representing a node group's launch template specification.
     #   You can only update a node group using a launch template if the node
-    #   group was originally deployed with a launch template.
+    #   group was originally deployed with a launch template. When updating,
+    #   you must specify the same launch template ID or name that was used to
+    #   create the node group.
     #
     # @option params [Boolean] :force
     #   Force the update if any `Pod` on the existing node group can't be
@@ -5469,7 +5500,7 @@ module Aws::EKS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.130.0'
+      context[:gem_version] = '1.131.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

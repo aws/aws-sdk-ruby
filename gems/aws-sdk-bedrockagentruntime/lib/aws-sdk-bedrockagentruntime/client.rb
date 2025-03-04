@@ -481,6 +481,162 @@ module Aws::BedrockAgentRuntime
 
     # @!group API Operations
 
+    # Creates a new invocation within a session. An invocation groups the
+    # related invocation steps that store the content from a conversation.
+    # For more information about sessions, see [Store and retrieve
+    # conversation history and context with Amazon Bedrock sessions][1].
+    #
+    # Related APIs
+    #
+    # * [ListInvocations][2]
+    #
+    # * [ListSessions][3]
+    #
+    # * [GetSession][4]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_ListInvocations.html
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_ListSessions.html
+    # [4]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_GetSession.html
+    #
+    # @option params [String] :description
+    #   A description for the interactions in the invocation. For example,
+    #   "User asking about weather in Seattle".
+    #
+    # @option params [String] :invocation_id
+    #   A unique identifier for the invocation in UUID format.
+    #
+    # @option params [required, String] :session_identifier
+    #   The unique identifier for the associated session for the invocation.
+    #   You can specify either the session's `sessionId` or its Amazon
+    #   Resource Name (ARN).
+    #
+    # @return [Types::CreateInvocationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateInvocationResponse#created_at #created_at} => Time
+    #   * {Types::CreateInvocationResponse#invocation_id #invocation_id} => String
+    #   * {Types::CreateInvocationResponse#session_id #session_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_invocation({
+    #     description: "InvocationDescription",
+    #     invocation_id: "Uuid",
+    #     session_identifier: "SessionIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.created_at #=> Time
+    #   resp.invocation_id #=> String
+    #   resp.session_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/CreateInvocation AWS API Documentation
+    #
+    # @overload create_invocation(params = {})
+    # @param [Hash] params ({})
+    def create_invocation(params = {}, options = {})
+      req = build_request(:create_invocation, params)
+      req.send_request(options)
+    end
+
+    # Creates a session to temporarily store conversations for generative AI
+    # (GenAI) applications built with open-source frameworks such as
+    # LangGraph and LlamaIndex. Sessions enable you to save the state of
+    # conversations at checkpoints, with the added security and
+    # infrastructure of Amazon Web Services. For more information, see
+    # [Store and retrieve conversation history and context with Amazon
+    # Bedrock sessions][1].
+    #
+    # By default, Amazon Bedrock uses Amazon Web Services-managed keys for
+    # session encryption, including session metadata, or you can use your
+    # own KMS key. For more information, see [Amazon Bedrock session
+    # encryption][2].
+    #
+    # <note markdown="1"> You use a session to store state and conversation history for
+    # generative AI applications built with open-source frameworks. For
+    # Amazon Bedrock Agents, the service automatically manages conversation
+    # context and associates them with the agent-specific sessionId you
+    # specify in the [InvokeAgent][3] API operation.
+    #
+    #  </note>
+    #
+    # Related APIs:
+    #
+    # * [ListSessions][4]
+    #
+    # * [GetSession][5]
+    #
+    # * [EndSession][6]
+    #
+    # * [DeleteSession][7]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/session-encryption.html
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/API_agent-runtime_InvokeAgent.html
+    # [4]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_ListSessions.html
+    # [5]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_GetSession.html
+    # [6]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_EndSession.html
+    # [7]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_DeleteSession.html
+    #
+    # @option params [String] :encryption_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key to use to encrypt the
+    #   session data. The user or role creating the session must have
+    #   permission to use the key. For more information, see [Amazon Bedrock
+    #   session encryption][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/session-encryption.html
+    #
+    # @option params [Hash<String,String>] :session_metadata
+    #   A map of key-value pairs containing attributes to be persisted across
+    #   the session. For example, the user's ID, their language preference,
+    #   and the type of device they are using.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Specify the key-value pairs for the tags that you want to attach to
+    #   the session.
+    #
+    # @return [Types::CreateSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSessionResponse#created_at #created_at} => Time
+    #   * {Types::CreateSessionResponse#session_arn #session_arn} => String
+    #   * {Types::CreateSessionResponse#session_id #session_id} => String
+    #   * {Types::CreateSessionResponse#session_status #session_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_session({
+    #     encryption_key_arn: "KmsKeyArn",
+    #     session_metadata: {
+    #       "SessionMetadataKey" => "SessionMetadataValue",
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.created_at #=> Time
+    #   resp.session_arn #=> String
+    #   resp.session_id #=> String
+    #   resp.session_status #=> String, one of "ACTIVE", "EXPIRED", "ENDED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/CreateSession AWS API Documentation
+    #
+    # @overload create_session(params = {})
+    # @param [Hash] params ({})
+    def create_session(params = {}, options = {})
+      req = build_request(:create_session, params)
+      req.send_request(options)
+    end
+
     # Deletes memory from the specified memory identifier.
     #
     # @option params [required, String] :agent_alias_id
@@ -512,6 +668,79 @@ module Aws::BedrockAgentRuntime
     # @param [Hash] params ({})
     def delete_agent_memory(params = {}, options = {})
       req = build_request(:delete_agent_memory, params)
+      req.send_request(options)
+    end
+
+    # Deletes a session that you ended. You can't delete a session with an
+    # `ACTIVE` status. To delete an active session, you must first end it
+    # with the [EndSession][1] API operation. For more information about
+    # sessions, see [Store and retrieve conversation history and context
+    # with Amazon Bedrock sessions][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_EndSession.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html
+    #
+    # @option params [required, String] :session_identifier
+    #   The unique identifier for the session to be deleted. You can specify
+    #   either the session's `sessionId` or its Amazon Resource Name (ARN).
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_session({
+    #     session_identifier: "SessionIdentifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/DeleteSession AWS API Documentation
+    #
+    # @overload delete_session(params = {})
+    # @param [Hash] params ({})
+    def delete_session(params = {}, options = {})
+      req = build_request(:delete_session, params)
+      req.send_request(options)
+    end
+
+    # Ends the session. After you end a session, you can still access its
+    # content but you can’t add to it. To delete the session and it's
+    # content, you use the DeleteSession API operation. For more information
+    # about sessions, see [Store and retrieve conversation history and
+    # context with Amazon Bedrock sessions][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html
+    #
+    # @option params [required, String] :session_identifier
+    #   The unique identifier for the session to end. You can specify either
+    #   the session's `sessionId` or its Amazon Resource Name (ARN).
+    #
+    # @return [Types::EndSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EndSessionResponse#session_arn #session_arn} => String
+    #   * {Types::EndSessionResponse#session_id #session_id} => String
+    #   * {Types::EndSessionResponse#session_status #session_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.end_session({
+    #     session_identifier: "SessionIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.session_arn #=> String
+    #   resp.session_id #=> String
+    #   resp.session_status #=> String, one of "ACTIVE", "EXPIRED", "ENDED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/EndSession AWS API Documentation
+    #
+    # @overload end_session(params = {})
+    # @param [Hash] params ({})
+    def end_session(params = {}, options = {})
+      req = build_request(:end_session, params)
       req.send_request(options)
     end
 
@@ -628,6 +857,108 @@ module Aws::BedrockAgentRuntime
     # @param [Hash] params ({})
     def get_agent_memory(params = {}, options = {})
       req = build_request(:get_agent_memory, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the details of a specific invocation step within an
+    # invocation in a session. For more information about sessions, see
+    # [Store and retrieve conversation history and context with Amazon
+    # Bedrock sessions][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html
+    #
+    # @option params [required, String] :invocation_identifier
+    #   The unique identifier for the invocation in UUID format.
+    #
+    # @option params [required, String] :invocation_step_id
+    #   The unique identifier (in UUID format) for the specific invocation
+    #   step to retrieve.
+    #
+    # @option params [required, String] :session_identifier
+    #   The unique identifier for the invocation step's associated session.
+    #   You can specify either the session's `sessionId` or its Amazon
+    #   Resource Name (ARN).
+    #
+    # @return [Types::GetInvocationStepResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetInvocationStepResponse#invocation_step #invocation_step} => Types::InvocationStep
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_invocation_step({
+    #     invocation_identifier: "InvocationIdentifier", # required
+    #     invocation_step_id: "Uuid", # required
+    #     session_identifier: "SessionIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.invocation_step.invocation_id #=> String
+    #   resp.invocation_step.invocation_step_id #=> String
+    #   resp.invocation_step.invocation_step_time #=> Time
+    #   resp.invocation_step.payload.content_blocks #=> Array
+    #   resp.invocation_step.payload.content_blocks[0].image.format #=> String, one of "png", "jpeg", "gif", "webp"
+    #   resp.invocation_step.payload.content_blocks[0].image.source.bytes #=> String
+    #   resp.invocation_step.payload.content_blocks[0].image.source.s3_location.uri #=> String
+    #   resp.invocation_step.payload.content_blocks[0].text #=> String
+    #   resp.invocation_step.session_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GetInvocationStep AWS API Documentation
+    #
+    # @overload get_invocation_step(params = {})
+    # @param [Hash] params ({})
+    def get_invocation_step(params = {}, options = {})
+      req = build_request(:get_invocation_step, params)
+      req.send_request(options)
+    end
+
+    # Retrieves details about a specific session. For more information about
+    # sessions, see [Store and retrieve conversation history and context
+    # with Amazon Bedrock sessions][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html
+    #
+    # @option params [required, String] :session_identifier
+    #   A unique identifier for the session to retrieve. You can specify
+    #   either the session's `sessionId` or its Amazon Resource Name (ARN).
+    #
+    # @return [Types::GetSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSessionResponse#created_at #created_at} => Time
+    #   * {Types::GetSessionResponse#encryption_key_arn #encryption_key_arn} => String
+    #   * {Types::GetSessionResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::GetSessionResponse#session_arn #session_arn} => String
+    #   * {Types::GetSessionResponse#session_id #session_id} => String
+    #   * {Types::GetSessionResponse#session_metadata #session_metadata} => Hash&lt;String,String&gt;
+    #   * {Types::GetSessionResponse#session_status #session_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_session({
+    #     session_identifier: "SessionIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.created_at #=> Time
+    #   resp.encryption_key_arn #=> String
+    #   resp.last_updated_at #=> Time
+    #   resp.session_arn #=> String
+    #   resp.session_id #=> String
+    #   resp.session_metadata #=> Hash
+    #   resp.session_metadata["SessionMetadataKey"] #=> String
+    #   resp.session_status #=> String, one of "ACTIVE", "EXPIRED", "ENDED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GetSession AWS API Documentation
+    #
+    # @overload get_session(params = {})
+    # @param [Hash] params ({})
+    def get_session(params = {}, options = {})
+      req = build_request(:get_session, params)
       req.send_request(options)
     end
 
@@ -3028,6 +3359,209 @@ module Aws::BedrockAgentRuntime
       req.send_request(options, &block)
     end
 
+    # Lists all invocation steps associated with a session and optionally,
+    # an invocation within the session. For more information about sessions,
+    # see [Store and retrieve conversation history and context with Amazon
+    # Bedrock sessions][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html
+    #
+    # @option params [String] :invocation_identifier
+    #   The unique identifier (in UUID format) for the invocation to list
+    #   invocation steps for.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response. If the total
+    #   number of results is greater than this value, use the token returned
+    #   in the response in the `nextToken` field when making another request
+    #   to return the next batch of results.
+    #
+    # @option params [String] :next_token
+    #   If the total number of results is greater than the `maxResults` value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
+    #   results.
+    #
+    # @option params [required, String] :session_identifier
+    #   The unique identifier for the session associated with the invocation
+    #   steps. You can specify either the session's `sessionId` or its Amazon
+    #   Resource Name (ARN).
+    #
+    # @return [Types::ListInvocationStepsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListInvocationStepsResponse#invocation_step_summaries #invocation_step_summaries} => Array&lt;Types::InvocationStepSummary&gt;
+    #   * {Types::ListInvocationStepsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_invocation_steps({
+    #     invocation_identifier: "InvocationIdentifier",
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     session_identifier: "SessionIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.invocation_step_summaries #=> Array
+    #   resp.invocation_step_summaries[0].invocation_id #=> String
+    #   resp.invocation_step_summaries[0].invocation_step_id #=> String
+    #   resp.invocation_step_summaries[0].invocation_step_time #=> Time
+    #   resp.invocation_step_summaries[0].session_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ListInvocationSteps AWS API Documentation
+    #
+    # @overload list_invocation_steps(params = {})
+    # @param [Hash] params ({})
+    def list_invocation_steps(params = {}, options = {})
+      req = build_request(:list_invocation_steps, params)
+      req.send_request(options)
+    end
+
+    # Lists all invocations associated with a specific session. For more
+    # information about sessions, see [Store and retrieve conversation
+    # history and context with Amazon Bedrock sessions][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response. If the total
+    #   number of results is greater than this value, use the token returned
+    #   in the response in the `nextToken` field when making another request
+    #   to return the next batch of results.
+    #
+    # @option params [String] :next_token
+    #   If the total number of results is greater than the `maxResults` value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
+    #   results.
+    #
+    # @option params [required, String] :session_identifier
+    #   The unique identifier for the session to list invocations for. You can
+    #   specify either the session's `sessionId` or its Amazon Resource Name
+    #   (ARN).
+    #
+    # @return [Types::ListInvocationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListInvocationsResponse#invocation_summaries #invocation_summaries} => Array&lt;Types::InvocationSummary&gt;
+    #   * {Types::ListInvocationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_invocations({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     session_identifier: "SessionIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.invocation_summaries #=> Array
+    #   resp.invocation_summaries[0].created_at #=> Time
+    #   resp.invocation_summaries[0].invocation_id #=> String
+    #   resp.invocation_summaries[0].session_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ListInvocations AWS API Documentation
+    #
+    # @overload list_invocations(params = {})
+    # @param [Hash] params ({})
+    def list_invocations(params = {}, options = {})
+      req = build_request(:list_invocations, params)
+      req.send_request(options)
+    end
+
+    # Lists all sessions in your Amazon Web Services account. For more
+    # information about sessions, see [Store and retrieve conversation
+    # history and context with Amazon Bedrock sessions][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response. If the total
+    #   number of results is greater than this value, use the token returned
+    #   in the response in the `nextToken` field when making another request
+    #   to return the next batch of results.
+    #
+    # @option params [String] :next_token
+    #   If the total number of results is greater than the `maxResults` value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
+    #   results.
+    #
+    # @return [Types::ListSessionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSessionsResponse#next_token #next_token} => String
+    #   * {Types::ListSessionsResponse#session_summaries #session_summaries} => Array&lt;Types::SessionSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_sessions({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.session_summaries #=> Array
+    #   resp.session_summaries[0].created_at #=> Time
+    #   resp.session_summaries[0].last_updated_at #=> Time
+    #   resp.session_summaries[0].session_arn #=> String
+    #   resp.session_summaries[0].session_id #=> String
+    #   resp.session_summaries[0].session_status #=> String, one of "ACTIVE", "EXPIRED", "ENDED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ListSessions AWS API Documentation
+    #
+    # @overload list_sessions(params = {})
+    # @param [Hash] params ({})
+    def list_sessions(params = {}, options = {})
+      req = build_request(:list_sessions, params)
+      req.send_request(options)
+    end
+
+    # List all the tags for the resource you specify.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource for which to list tags.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "TaggableResourcesArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Optimizes a prompt for the task that you specify. For more
     # information, see [Optimize a prompt][1] in the [Amazon Bedrock User
     # Guide][2].
@@ -3263,6 +3797,90 @@ module Aws::BedrockAgentRuntime
       req.handlers.add(Aws::Binary::DecodeHandler, priority: 95)
 
       req.send_request(options, &block)
+    end
+
+    # Add an invocation step to an invocation in a session. An invocation
+    # step stores fine-grained state checkpoints, including text and images,
+    # for each interaction. For more information about sessions, see [Store
+    # and retrieve conversation history and context with Amazon Bedrock
+    # sessions][1].
+    #
+    # Related APIs:
+    #
+    # * [GetInvocationStep][2]
+    #
+    # * [ListInvocationSteps][3]
+    #
+    # * [ListInvocations][4]
+    #
+    # * [ListSessions][4]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_GetInvocationStep.html
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_ListInvocationSteps.html
+    # [4]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_ListInvocations.html
+    #
+    # @option params [required, String] :invocation_identifier
+    #   The unique identifier (in UUID format) of the invocation to add the
+    #   invocation step to.
+    #
+    # @option params [String] :invocation_step_id
+    #   The unique identifier of the invocation step in UUID format.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :invocation_step_time
+    #   The timestamp for when the invocation step occurred.
+    #
+    # @option params [required, Types::InvocationStepPayload] :payload
+    #   The payload for the invocation step, including text and images for the
+    #   interaction.
+    #
+    # @option params [required, String] :session_identifier
+    #   The unique identifier for the session to add the invocation step to.
+    #   You can specify either the session's `sessionId` or its Amazon
+    #   Resource Name (ARN).
+    #
+    # @return [Types::PutInvocationStepResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutInvocationStepResponse#invocation_step_id #invocation_step_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_invocation_step({
+    #     invocation_identifier: "InvocationIdentifier", # required
+    #     invocation_step_id: "Uuid",
+    #     invocation_step_time: Time.now, # required
+    #     payload: { # required
+    #       content_blocks: [
+    #         {
+    #           image: {
+    #             format: "png", # required, accepts png, jpeg, gif, webp
+    #             source: { # required
+    #               bytes: "data",
+    #               s3_location: {
+    #                 uri: "S3Uri", # required
+    #               },
+    #             },
+    #           },
+    #           text: "BedrockSessionContentBlockTextString",
+    #         },
+    #       ],
+    #     },
+    #     session_identifier: "SessionIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.invocation_step_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/PutInvocationStep AWS API Documentation
+    #
+    # @overload put_invocation_step(params = {})
+    # @param [Hash] params ({})
+    def put_invocation_step(params = {}, options = {})
+      req = build_request(:put_invocation_step, params)
+      req.send_request(options)
     end
 
     # Reranks the relevance of sources based on queries. For more
@@ -4387,6 +5005,118 @@ module Aws::BedrockAgentRuntime
       req.send_request(options, &block)
     end
 
+    # Associate tags with a resource. For more information, see [Tagging
+    # resources][1] in the Amazon Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to tag.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   An object containing key-value pairs that define the tags to attach to
+    #   the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "TaggableResourcesArn", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Remove tags from a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource from which to remove
+    #   tags.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   A list of keys of the tags to remove from the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "TaggableResourcesArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates the metadata or encryption settings of a session. For more
+    # information about sessions, see [Store and retrieve conversation
+    # history and context with Amazon Bedrock sessions][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html
+    #
+    # @option params [required, String] :session_identifier
+    #   The unique identifier of the session to modify. You can specify either
+    #   the session's `sessionId` or its Amazon Resource Name (ARN).
+    #
+    # @option params [Hash<String,String>] :session_metadata
+    #   A map of key-value pairs containing attributes to be persisted across
+    #   the session. For example the user's ID, their language preference,
+    #   and the type of device they are using.
+    #
+    # @return [Types::UpdateSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSessionResponse#created_at #created_at} => Time
+    #   * {Types::UpdateSessionResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::UpdateSessionResponse#session_arn #session_arn} => String
+    #   * {Types::UpdateSessionResponse#session_id #session_id} => String
+    #   * {Types::UpdateSessionResponse#session_status #session_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_session({
+    #     session_identifier: "SessionIdentifier", # required
+    #     session_metadata: {
+    #       "SessionMetadataKey" => "SessionMetadataValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.created_at #=> Time
+    #   resp.last_updated_at #=> Time
+    #   resp.session_arn #=> String
+    #   resp.session_id #=> String
+    #   resp.session_status #=> String, one of "ACTIVE", "EXPIRED", "ENDED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/UpdateSession AWS API Documentation
+    #
+    # @overload update_session(params = {})
+    # @param [Hash] params ({})
+    def update_session(params = {}, options = {})
+      req = build_request(:update_session, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -4405,7 +5135,7 @@ module Aws::BedrockAgentRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentruntime'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

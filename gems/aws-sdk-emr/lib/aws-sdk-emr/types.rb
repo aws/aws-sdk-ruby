@@ -1709,7 +1709,9 @@ module Aws::EMR
     #   @return [Array<Types::EbsBlockDeviceConfig>]
     #
     # @!attribute [rw] ebs_optimized
-    #   Indicates whether an Amazon EBS volume is EBS-optimized.
+    #   Indicates whether an Amazon EBS volume is EBS-optimized. The default
+    #   is false. You should explicitly set this value to true to enable the
+    #   Amazon EBS-optimized setting for an EC2 instance.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/EbsConfiguration AWS API Documentation

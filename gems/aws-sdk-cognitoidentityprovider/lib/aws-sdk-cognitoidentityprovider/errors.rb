@@ -31,6 +31,7 @@ module Aws::CognitoIdentityProvider
   # * {CodeDeliveryFailureException}
   # * {CodeMismatchException}
   # * {ConcurrentModificationException}
+  # * {DeviceKeyExistsException}
   # * {DuplicateProviderException}
   # * {EnableSoftwareTokenMFAException}
   # * {ExpiredCodeException}
@@ -136,6 +137,21 @@ module Aws::CognitoIdentityProvider
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CognitoIdentityProvider::Types::ConcurrentModificationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class DeviceKeyExistsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CognitoIdentityProvider::Types::DeviceKeyExistsException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

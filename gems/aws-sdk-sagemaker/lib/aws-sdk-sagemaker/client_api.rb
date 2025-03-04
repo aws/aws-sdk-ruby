@@ -1032,6 +1032,7 @@ module Aws::SageMaker
     HolidayConfigAttributes = Shapes::StructureShape.new(name: 'HolidayConfigAttributes')
     HookParameters = Shapes::MapShape.new(name: 'HookParameters')
     Horovod = Shapes::BooleanShape.new(name: 'Horovod')
+    HubAccessConfig = Shapes::StructureShape.new(name: 'HubAccessConfig')
     HubArn = Shapes::StringShape.new(name: 'HubArn')
     HubContentArn = Shapes::StringShape.new(name: 'HubContentArn')
     HubContentDependency = Shapes::StructureShape.new(name: 'HubContentDependency')
@@ -2408,6 +2409,10 @@ module Aws::SageMaker
     UpdateFeatureGroupRequest = Shapes::StructureShape.new(name: 'UpdateFeatureGroupRequest')
     UpdateFeatureGroupResponse = Shapes::StructureShape.new(name: 'UpdateFeatureGroupResponse')
     UpdateFeatureMetadataRequest = Shapes::StructureShape.new(name: 'UpdateFeatureMetadataRequest')
+    UpdateHubContentReferenceRequest = Shapes::StructureShape.new(name: 'UpdateHubContentReferenceRequest')
+    UpdateHubContentReferenceResponse = Shapes::StructureShape.new(name: 'UpdateHubContentReferenceResponse')
+    UpdateHubContentRequest = Shapes::StructureShape.new(name: 'UpdateHubContentRequest')
+    UpdateHubContentResponse = Shapes::StructureShape.new(name: 'UpdateHubContentResponse')
     UpdateHubRequest = Shapes::StructureShape.new(name: 'UpdateHubRequest')
     UpdateHubResponse = Shapes::StructureShape.new(name: 'UpdateHubResponse')
     UpdateImageRequest = Shapes::StructureShape.new(name: 'UpdateImageRequest')
@@ -3582,6 +3587,7 @@ module Aws::SageMaker
     CreateDomainRequest.struct_class = Types::CreateDomainRequest
 
     CreateDomainResponse.add_member(:domain_arn, Shapes::ShapeRef.new(shape: DomainArn, location_name: "DomainArn"))
+    CreateDomainResponse.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId"))
     CreateDomainResponse.add_member(:url, Shapes::ShapeRef.new(shape: String1024, location_name: "Url"))
     CreateDomainResponse.struct_class = Types::CreateDomainResponse
 
@@ -5107,6 +5113,7 @@ module Aws::SageMaker
     DescribeHubContentResponse.add_member(:hub_content_status, Shapes::ShapeRef.new(shape: HubContentStatus, required: true, location_name: "HubContentStatus"))
     DescribeHubContentResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
     DescribeHubContentResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    DescribeHubContentResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     DescribeHubContentResponse.struct_class = Types::DescribeHubContentResponse
 
     DescribeHubRequest.add_member(:hub_name, Shapes::ShapeRef.new(shape: HubNameOrArn, required: true, location_name: "HubName"))
@@ -6431,6 +6438,9 @@ module Aws::SageMaker
     HookParameters.key = Shapes::ShapeRef.new(shape: ConfigKey)
     HookParameters.value = Shapes::ShapeRef.new(shape: ConfigValue)
 
+    HubAccessConfig.add_member(:hub_content_arn, Shapes::ShapeRef.new(shape: HubContentArn, required: true, location_name: "HubContentArn"))
+    HubAccessConfig.struct_class = Types::HubAccessConfig
+
     HubContentDependency.add_member(:dependency_origin_path, Shapes::ShapeRef.new(shape: DependencyOriginPath, location_name: "DependencyOriginPath"))
     HubContentDependency.add_member(:dependency_copy_path, Shapes::ShapeRef.new(shape: DependencyCopyPath, location_name: "DependencyCopyPath"))
     HubContentDependency.struct_class = Types::HubContentDependency
@@ -6721,6 +6731,7 @@ module Aws::SageMaker
     ImportHubContentRequest.add_member(:hub_content_description, Shapes::ShapeRef.new(shape: HubContentDescription, location_name: "HubContentDescription"))
     ImportHubContentRequest.add_member(:hub_content_markdown, Shapes::ShapeRef.new(shape: HubContentMarkdown, location_name: "HubContentMarkdown"))
     ImportHubContentRequest.add_member(:hub_content_document, Shapes::ShapeRef.new(shape: HubContentDocument, required: true, location_name: "HubContentDocument"))
+    ImportHubContentRequest.add_member(:support_status, Shapes::ShapeRef.new(shape: HubContentSupportStatus, location_name: "SupportStatus"))
     ImportHubContentRequest.add_member(:hub_content_search_keywords, Shapes::ShapeRef.new(shape: HubContentSearchKeywordList, location_name: "HubContentSearchKeywords"))
     ImportHubContentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ImportHubContentRequest.struct_class = Types::ImportHubContentRequest
@@ -9700,6 +9711,8 @@ module Aws::SageMaker
     S3DataSource.add_member(:s3_data_distribution_type, Shapes::ShapeRef.new(shape: S3DataDistribution, location_name: "S3DataDistributionType"))
     S3DataSource.add_member(:attribute_names, Shapes::ShapeRef.new(shape: AttributeNames, location_name: "AttributeNames"))
     S3DataSource.add_member(:instance_group_names, Shapes::ShapeRef.new(shape: InstanceGroupNames, location_name: "InstanceGroupNames"))
+    S3DataSource.add_member(:model_access_config, Shapes::ShapeRef.new(shape: ModelAccessConfig, location_name: "ModelAccessConfig"))
+    S3DataSource.add_member(:hub_access_config, Shapes::ShapeRef.new(shape: HubAccessConfig, location_name: "HubAccessConfig"))
     S3DataSource.struct_class = Types::S3DataSource
 
     S3ModelDataSource.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3ModelUri, required: true, location_name: "S3Uri"))
@@ -10698,6 +10711,31 @@ module Aws::SageMaker
     UpdateFeatureMetadataRequest.add_member(:parameter_additions, Shapes::ShapeRef.new(shape: FeatureParameterAdditions, location_name: "ParameterAdditions"))
     UpdateFeatureMetadataRequest.add_member(:parameter_removals, Shapes::ShapeRef.new(shape: FeatureParameterRemovals, location_name: "ParameterRemovals"))
     UpdateFeatureMetadataRequest.struct_class = Types::UpdateFeatureMetadataRequest
+
+    UpdateHubContentReferenceRequest.add_member(:hub_name, Shapes::ShapeRef.new(shape: HubNameOrArn, required: true, location_name: "HubName"))
+    UpdateHubContentReferenceRequest.add_member(:hub_content_name, Shapes::ShapeRef.new(shape: HubContentName, required: true, location_name: "HubContentName"))
+    UpdateHubContentReferenceRequest.add_member(:hub_content_type, Shapes::ShapeRef.new(shape: HubContentType, required: true, location_name: "HubContentType"))
+    UpdateHubContentReferenceRequest.add_member(:min_version, Shapes::ShapeRef.new(shape: HubContentVersion, location_name: "MinVersion"))
+    UpdateHubContentReferenceRequest.struct_class = Types::UpdateHubContentReferenceRequest
+
+    UpdateHubContentReferenceResponse.add_member(:hub_arn, Shapes::ShapeRef.new(shape: HubArn, required: true, location_name: "HubArn"))
+    UpdateHubContentReferenceResponse.add_member(:hub_content_arn, Shapes::ShapeRef.new(shape: HubContentArn, required: true, location_name: "HubContentArn"))
+    UpdateHubContentReferenceResponse.struct_class = Types::UpdateHubContentReferenceResponse
+
+    UpdateHubContentRequest.add_member(:hub_name, Shapes::ShapeRef.new(shape: HubNameOrArn, required: true, location_name: "HubName"))
+    UpdateHubContentRequest.add_member(:hub_content_name, Shapes::ShapeRef.new(shape: HubContentName, required: true, location_name: "HubContentName"))
+    UpdateHubContentRequest.add_member(:hub_content_type, Shapes::ShapeRef.new(shape: HubContentType, required: true, location_name: "HubContentType"))
+    UpdateHubContentRequest.add_member(:hub_content_version, Shapes::ShapeRef.new(shape: HubContentVersion, required: true, location_name: "HubContentVersion"))
+    UpdateHubContentRequest.add_member(:hub_content_display_name, Shapes::ShapeRef.new(shape: HubContentDisplayName, location_name: "HubContentDisplayName"))
+    UpdateHubContentRequest.add_member(:hub_content_description, Shapes::ShapeRef.new(shape: HubContentDescription, location_name: "HubContentDescription"))
+    UpdateHubContentRequest.add_member(:hub_content_markdown, Shapes::ShapeRef.new(shape: HubContentMarkdown, location_name: "HubContentMarkdown"))
+    UpdateHubContentRequest.add_member(:hub_content_search_keywords, Shapes::ShapeRef.new(shape: HubContentSearchKeywordList, location_name: "HubContentSearchKeywords"))
+    UpdateHubContentRequest.add_member(:support_status, Shapes::ShapeRef.new(shape: HubContentSupportStatus, location_name: "SupportStatus"))
+    UpdateHubContentRequest.struct_class = Types::UpdateHubContentRequest
+
+    UpdateHubContentResponse.add_member(:hub_arn, Shapes::ShapeRef.new(shape: HubArn, required: true, location_name: "HubArn"))
+    UpdateHubContentResponse.add_member(:hub_content_arn, Shapes::ShapeRef.new(shape: HubContentArn, required: true, location_name: "HubContentArn"))
+    UpdateHubContentResponse.struct_class = Types::UpdateHubContentResponse
 
     UpdateHubRequest.add_member(:hub_name, Shapes::ShapeRef.new(shape: HubNameOrArn, required: true, location_name: "HubName"))
     UpdateHubRequest.add_member(:hub_description, Shapes::ShapeRef.new(shape: HubDescription, location_name: "HubDescription"))
@@ -14560,6 +14598,26 @@ module Aws::SageMaker
         o.input = Shapes::ShapeRef.new(shape: UpdateHubRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateHubResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
+      api.add_operation(:update_hub_content, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateHubContent"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateHubContentRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateHubContentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
+      end)
+
+      api.add_operation(:update_hub_content_reference, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateHubContentReference"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateHubContentReferenceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateHubContentReferenceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
       end)
 
       api.add_operation(:update_image, Seahorse::Model::Operation.new.tap do |o|

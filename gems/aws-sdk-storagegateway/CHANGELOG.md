@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.106.0 (2025-02-27)
+------------------
+
+* Feature - This release adds support to invoke a process that cleans the specified file share's cache of file entries that are failing upload to Amazon S3.
+
 1.105.0 (2025-02-18)
 ------------------
 

@@ -2711,7 +2711,10 @@ module Aws::TranscribeService
     # media file into an Amazon S3 bucket; you can then specify the Amazon
     # S3 location of the file using the `Media` parameter.
     #
-    # Note that job queuing is enabled by default for Call Analytics jobs.
+    # Job queuing is available for Call Analytics jobs. If you pass a
+    # `DataAccessRoleArn` in your request and you exceed your Concurrent Job
+    # Limit, your job will automatically be added to a queue to be processed
+    # once your concurrent job count is below the limit.
     #
     # You must include the following parameters in your
     # `StartCallAnalyticsJob` request:
@@ -2724,10 +2727,6 @@ module Aws::TranscribeService
     # * `CallAnalyticsJobName`: A custom name that you create for your
     #   transcription job that's unique within your Amazon Web Services
     #   account.
-    #
-    # * `DataAccessRoleArn`: The Amazon Resource Name (ARN) of an IAM role
-    #   that has permissions to access the Amazon S3 bucket that contains
-    #   your input files.
     #
     # * `Media` (`MediaFileUri` or `RedactedMediaFileUri`): The Amazon S3
     #   location of your media file.
@@ -4567,7 +4566,7 @@ module Aws::TranscribeService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.115.0'
+      context[:gem_version] = '1.116.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

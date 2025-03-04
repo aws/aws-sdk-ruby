@@ -248,6 +248,7 @@ module Aws
         def session: () -> ::String
         def challenge_parameters: () -> ::Hash[::String, ::String]
         def authentication_result: () -> Types::AuthenticationResultType
+        def available_challenges: () -> ::Array[("SMS_MFA" | "EMAIL_OTP" | "SOFTWARE_TOKEN_MFA" | "SELECT_MFA_TYPE" | "MFA_SETUP" | "PASSWORD_VERIFIER" | "CUSTOM_CHALLENGE" | "SELECT_CHALLENGE" | "DEVICE_SRP_AUTH" | "DEVICE_PASSWORD_VERIFIER" | "ADMIN_NO_SRP_AUTH" | "NEW_PASSWORD_REQUIRED" | "SMS_OTP" | "PASSWORD" | "WEB_AUTHN" | "PASSWORD_SRP")]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html#admin_initiate_auth-instance_method
       def admin_initiate_auth: (
@@ -699,7 +700,7 @@ module Aws
                                 pre_token_generation: ::String?,
                                 user_migration: ::String?,
                                 pre_token_generation_config: {
-                                  lambda_version: ("V1_0" | "V2_0"),
+                                  lambda_version: ("V1_0" | "V2_0" | "V3_0"),
                                   lambda_arn: ::String
                                 }?,
                                 custom_sms_sender: {
@@ -1810,7 +1811,7 @@ module Aws
                                 pre_token_generation: ::String?,
                                 user_migration: ::String?,
                                 pre_token_generation_config: {
-                                  lambda_version: ("V1_0" | "V2_0"),
+                                  lambda_version: ("V1_0" | "V2_0" | "V3_0"),
                                   lambda_arn: ::String
                                 }?,
                                 custom_sms_sender: {

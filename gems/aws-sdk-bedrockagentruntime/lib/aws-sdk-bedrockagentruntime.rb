@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:bedrockagentruntime)
 # structure.
 #
 #     bedrock_agent_runtime = Aws::BedrockAgentRuntime::Client.new
-#     resp = bedrock_agent_runtime.delete_agent_memory(params)
+#     resp = bedrock_agent_runtime.create_invocation(params)
 #
 # See {Client} for more information.
 #
@@ -55,7 +55,7 @@ module Aws::BedrockAgentRuntime
   autoload :Endpoints, 'aws-sdk-bedrockagentruntime/endpoints'
   autoload :EventStreams, 'aws-sdk-bedrockagentruntime/event_streams'
 
-  GEM_VERSION = '1.46.0'
+  GEM_VERSION = '1.47.0'
 
 end
 

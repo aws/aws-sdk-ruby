@@ -4941,6 +4941,67 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
+    # Starts a process that cleans the specified file share's cache of file
+    # entries that are failing upload to Amazon S3. This API operation
+    # reports success if the request is received with valid arguments, and
+    # there are no other cache clean operations currently in-progress for
+    # the specified file share. After a successful request, the cache clean
+    # operation occurs asynchronously and reports progress using CloudWatch
+    # logs and notifications.
+    #
+    # If `ForceRemove` is set to `True`, the cache clean operation will
+    # delete file data from the gateway which might otherwise be
+    # recoverable. We recommend using this operation only after all other
+    # methods to clear files failing upload have been exhausted, and if your
+    # business need outweighs the potential data loss.
+    #
+    # @option params [required, String] :file_share_arn
+    #   The Amazon Resource Name (ARN) of the file share for which you want to
+    #   start the cache clean operation.
+    #
+    # @option params [Boolean] :force_remove
+    #   Specifies whether cache entries with full or partial file data
+    #   currently stored on the gateway will be forcibly removed by the cache
+    #   clean operation.
+    #
+    #   Valid arguments:
+    #
+    #   * `False` - The cache clean operation skips cache entries failing
+    #     upload if they are associated with data currently stored on the
+    #     gateway. This preserves the cached data.
+    #
+    #   * `True` - The cache clean operation removes cache entries failing
+    #     upload even if they are associated with data currently stored on the
+    #     gateway. This deletes the cached data.
+    #
+    #     If `ForceRemove` is set to `True`, the cache clean operation will
+    #     delete file data from the gateway which might otherwise be
+    #     recoverable.
+    #
+    # @return [Types::EvictFilesFailingUploadOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EvictFilesFailingUploadOutput#notification_id #notification_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.evict_files_failing_upload({
+    #     file_share_arn: "FileShareARN", # required
+    #     force_remove: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.notification_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/EvictFilesFailingUpload AWS API Documentation
+    #
+    # @overload evict_files_failing_upload(params = {})
+    # @param [Hash] params ({})
+    def evict_files_failing_upload(params = {}, options = {})
+      req = build_request(:evict_files_failing_upload, params)
+      req.send_request(options)
+    end
+
     # Adds a file gateway to an Active Directory domain. This operation is
     # only supported for file gateways that support the SMB file protocol.
     #
@@ -7906,7 +7967,7 @@ module Aws::StorageGateway
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.105.0'
+      context[:gem_version] = '1.106.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

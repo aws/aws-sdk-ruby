@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.131.0 (2025-02-28)
+------------------
+
+* Feature - Adding licenses to EKS Anywhere Subscription operations response.
+
 1.130.0 (2025-02-18)
 ------------------
 

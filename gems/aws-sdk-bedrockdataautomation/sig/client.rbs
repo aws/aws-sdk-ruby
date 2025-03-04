@@ -91,7 +91,13 @@ module Aws
                               ?encryption_configuration: {
                                 kms_key_id: ::String,
                                 kms_encryption_context: Hash[::String, ::String]?
-                              }
+                              },
+                              ?tags: Array[
+                                {
+                                  key: ::String,
+                                  value: ::String
+                                },
+                              ]
                             ) -> _CreateBlueprintResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBlueprintResponseSuccess
 
@@ -143,7 +149,7 @@ module Aws
                                                 extraction: {
                                                   category: {
                                                     state: ("ENABLED" | "DISABLED"),
-                                                    types: Array[("CONTENT_MODERATION" | "TEXT_DETECTION")]?
+                                                    types: Array[("CONTENT_MODERATION" | "TEXT_DETECTION" | "LOGOS")]?
                                                   },
                                                   bounding_box: {
                                                     state: ("ENABLED" | "DISABLED")
@@ -158,7 +164,7 @@ module Aws
                                                 extraction: {
                                                   category: {
                                                     state: ("ENABLED" | "DISABLED"),
-                                                    types: Array[("CONTENT_MODERATION" | "TEXT_DETECTION" | "TRANSCRIPT")]?
+                                                    types: Array[("CONTENT_MODERATION" | "TEXT_DETECTION" | "TRANSCRIPT" | "LOGOS")]?
                                                   },
                                                   bounding_box: {
                                                     state: ("ENABLED" | "DISABLED")
@@ -166,19 +172,19 @@ module Aws
                                                 }?,
                                                 generative_field: {
                                                   state: ("ENABLED" | "DISABLED"),
-                                                  types: Array[("VIDEO_SUMMARY" | "SCENE_SUMMARY" | "IAB")]?
+                                                  types: Array[("VIDEO_SUMMARY" | "IAB" | "CHAPTER_SUMMARY")]?
                                                 }?
                                               }?,
                                               audio: {
                                                 extraction: {
                                                   category: {
                                                     state: ("ENABLED" | "DISABLED"),
-                                                    types: Array[("AUDIO_CONTENT_MODERATION" | "CHAPTER_CONTENT_MODERATION" | "TRANSCRIPT")]?
+                                                    types: Array[("AUDIO_CONTENT_MODERATION" | "TRANSCRIPT" | "TOPIC_CONTENT_MODERATION")]?
                                                   }
                                                 }?,
                                                 generative_field: {
                                                   state: ("ENABLED" | "DISABLED"),
-                                                  types: Array[("AUDIO_SUMMARY" | "CHAPTER_SUMMARY" | "IAB")]?
+                                                  types: Array[("AUDIO_SUMMARY" | "IAB" | "TOPIC_SUMMARY")]?
                                                 }?
                                               }?
                                             },
@@ -202,7 +208,13 @@ module Aws
                                             ?encryption_configuration: {
                                               kms_key_id: ::String,
                                               kms_encryption_context: Hash[::String, ::String]?
-                                            }
+                                            },
+                                            ?tags: Array[
+                                              {
+                                                key: ::String,
+                                                value: ::String
+                                              },
+                                            ]
                                           ) -> _CreateDataAutomationProjectResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataAutomationProjectResponseSuccess
 
@@ -288,6 +300,41 @@ module Aws
                                          ) -> _ListDataAutomationProjectsResponseSuccess
                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataAutomationProjectsResponseSuccess
 
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockDataAutomation/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockDataAutomation/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockDataAutomation/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
       interface _UpdateBlueprintResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBlueprintResponse]
         def blueprint: () -> Types::Blueprint
@@ -296,7 +343,11 @@ module Aws
       def update_blueprint: (
                               blueprint_arn: ::String,
                               schema: ::String,
-                              ?blueprint_stage: ("DEVELOPMENT" | "LIVE")
+                              ?blueprint_stage: ("DEVELOPMENT" | "LIVE"),
+                              ?encryption_configuration: {
+                                kms_key_id: ::String,
+                                kms_encryption_context: Hash[::String, ::String]?
+                              }
                             ) -> _UpdateBlueprintResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBlueprintResponseSuccess
 
@@ -337,7 +388,7 @@ module Aws
                                                 extraction: {
                                                   category: {
                                                     state: ("ENABLED" | "DISABLED"),
-                                                    types: Array[("CONTENT_MODERATION" | "TEXT_DETECTION")]?
+                                                    types: Array[("CONTENT_MODERATION" | "TEXT_DETECTION" | "LOGOS")]?
                                                   },
                                                   bounding_box: {
                                                     state: ("ENABLED" | "DISABLED")
@@ -352,7 +403,7 @@ module Aws
                                                 extraction: {
                                                   category: {
                                                     state: ("ENABLED" | "DISABLED"),
-                                                    types: Array[("CONTENT_MODERATION" | "TEXT_DETECTION" | "TRANSCRIPT")]?
+                                                    types: Array[("CONTENT_MODERATION" | "TEXT_DETECTION" | "TRANSCRIPT" | "LOGOS")]?
                                                   },
                                                   bounding_box: {
                                                     state: ("ENABLED" | "DISABLED")
@@ -360,19 +411,19 @@ module Aws
                                                 }?,
                                                 generative_field: {
                                                   state: ("ENABLED" | "DISABLED"),
-                                                  types: Array[("VIDEO_SUMMARY" | "SCENE_SUMMARY" | "IAB")]?
+                                                  types: Array[("VIDEO_SUMMARY" | "IAB" | "CHAPTER_SUMMARY")]?
                                                 }?
                                               }?,
                                               audio: {
                                                 extraction: {
                                                   category: {
                                                     state: ("ENABLED" | "DISABLED"),
-                                                    types: Array[("AUDIO_CONTENT_MODERATION" | "CHAPTER_CONTENT_MODERATION" | "TRANSCRIPT")]?
+                                                    types: Array[("AUDIO_CONTENT_MODERATION" | "TRANSCRIPT" | "TOPIC_CONTENT_MODERATION")]?
                                                   }
                                                 }?,
                                                 generative_field: {
                                                   state: ("ENABLED" | "DISABLED"),
-                                                  types: Array[("AUDIO_SUMMARY" | "CHAPTER_SUMMARY" | "IAB")]?
+                                                  types: Array[("AUDIO_SUMMARY" | "IAB" | "TOPIC_SUMMARY")]?
                                                 }?
                                               }?
                                             },
@@ -391,6 +442,10 @@ module Aws
                                                   state: ("ENABLED" | "DISABLED")?
                                                 }?
                                               }?
+                                            },
+                                            ?encryption_configuration: {
+                                              kms_key_id: ::String,
+                                              kms_encryption_context: Hash[::String, ::String]?
                                             }
                                           ) -> _UpdateDataAutomationProjectResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataAutomationProjectResponseSuccess

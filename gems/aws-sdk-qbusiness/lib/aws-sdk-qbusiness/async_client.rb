@@ -550,6 +550,18 @@ module Aws::QBusiness
     #   event.source_attributions[0].text_message_segments[0].snippet_excerpt.text #=> String
     #   event.source_attributions[0].text_message_segments[0].media_id #=> String
     #   event.source_attributions[0].text_message_segments[0].media_mime_type #=> String
+    #   event.source_attributions[0].text_message_segments[0].source_details.image_source_details.media_id #=> String
+    #   event.source_attributions[0].text_message_segments[0].source_details.image_source_details.media_mime_type #=> String
+    #   event.source_attributions[0].text_message_segments[0].source_details.audio_source_details.media_id #=> String
+    #   event.source_attributions[0].text_message_segments[0].source_details.audio_source_details.media_mime_type #=> String
+    #   event.source_attributions[0].text_message_segments[0].source_details.audio_source_details.start_time_milliseconds #=> Integer
+    #   event.source_attributions[0].text_message_segments[0].source_details.audio_source_details.end_time_milliseconds #=> Integer
+    #   event.source_attributions[0].text_message_segments[0].source_details.audio_source_details.audio_extraction_type #=> String, one of "TRANSCRIPT", "SUMMARY"
+    #   event.source_attributions[0].text_message_segments[0].source_details.video_source_details.media_id #=> String
+    #   event.source_attributions[0].text_message_segments[0].source_details.video_source_details.media_mime_type #=> String
+    #   event.source_attributions[0].text_message_segments[0].source_details.video_source_details.start_time_milliseconds #=> Integer
+    #   event.source_attributions[0].text_message_segments[0].source_details.video_source_details.end_time_milliseconds #=> Integer
+    #   event.source_attributions[0].text_message_segments[0].source_details.video_source_details.video_extraction_type #=> String, one of "TRANSCRIPT", "SUMMARY"
     #   event.final_text_message #=> String
     #
     #   For :action_review_event event available at #on_action_review_event_event callback and response eventstream enumerator:
@@ -630,7 +642,7 @@ module Aws::QBusiness
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-qbusiness'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

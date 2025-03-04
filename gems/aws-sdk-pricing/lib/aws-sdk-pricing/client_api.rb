@@ -24,11 +24,13 @@ module Aws::Pricing
     DescribeServicesResponse = Shapes::StructureShape.new(name: 'DescribeServicesResponse')
     EffectiveDate = Shapes::TimestampShape.new(name: 'EffectiveDate')
     ExpiredNextTokenException = Shapes::StructureShape.new(name: 'ExpiredNextTokenException')
+    Field = Shapes::StringShape.new(name: 'Field')
     FileFormat = Shapes::StringShape.new(name: 'FileFormat')
     FileFormats = Shapes::ListShape.new(name: 'FileFormats')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterType = Shapes::StringShape.new(name: 'FilterType')
     Filters = Shapes::ListShape.new(name: 'Filters')
+    FormatVersion = Shapes::StringShape.new(name: 'FormatVersion')
     GetAttributeValuesRequest = Shapes::StructureShape.new(name: 'GetAttributeValuesRequest')
     GetAttributeValuesResponse = Shapes::StructureShape.new(name: 'GetAttributeValuesResponse')
     GetPriceListFileUrlRequest = Shapes::StructureShape.new(name: 'GetPriceListFileUrlRequest')
@@ -54,6 +56,7 @@ module Aws::Pricing
     String = Shapes::StringShape.new(name: 'String')
     SynthesizedJsonPriceListJsonItem = Shapes::StringShape.new(name: 'SynthesizedJsonPriceListJsonItem')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    Value = Shapes::StringShape.new(name: 'Value')
     errorMessage = Shapes::StringShape.new(name: 'errorMessage')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
@@ -67,13 +70,13 @@ module Aws::Pricing
     AttributeValueList.member = Shapes::ShapeRef.new(shape: AttributeValue)
 
     DescribeServicesRequest.add_member(:service_code, Shapes::ShapeRef.new(shape: String, location_name: "ServiceCode"))
-    DescribeServicesRequest.add_member(:format_version, Shapes::ShapeRef.new(shape: String, location_name: "FormatVersion"))
+    DescribeServicesRequest.add_member(:format_version, Shapes::ShapeRef.new(shape: FormatVersion, location_name: "FormatVersion"))
     DescribeServicesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeServicesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "MaxResults"))
     DescribeServicesRequest.struct_class = Types::DescribeServicesRequest
 
     DescribeServicesResponse.add_member(:services, Shapes::ShapeRef.new(shape: ServiceList, location_name: "Services"))
-    DescribeServicesResponse.add_member(:format_version, Shapes::ShapeRef.new(shape: String, location_name: "FormatVersion"))
+    DescribeServicesResponse.add_member(:format_version, Shapes::ShapeRef.new(shape: FormatVersion, location_name: "FormatVersion"))
     DescribeServicesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeServicesResponse.struct_class = Types::DescribeServicesResponse
 
@@ -83,8 +86,8 @@ module Aws::Pricing
     FileFormats.member = Shapes::ShapeRef.new(shape: FileFormat)
 
     Filter.add_member(:type, Shapes::ShapeRef.new(shape: FilterType, required: true, location_name: "Type"))
-    Filter.add_member(:field, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Field"))
-    Filter.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Value"))
+    Filter.add_member(:field, Shapes::ShapeRef.new(shape: Field, required: true, location_name: "Field"))
+    Filter.add_member(:value, Shapes::ShapeRef.new(shape: Value, required: true, location_name: "Value"))
     Filter.struct_class = Types::Filter
 
     Filters.member = Shapes::ShapeRef.new(shape: Filter)
@@ -108,12 +111,12 @@ module Aws::Pricing
 
     GetProductsRequest.add_member(:service_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServiceCode"))
     GetProductsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters"))
-    GetProductsRequest.add_member(:format_version, Shapes::ShapeRef.new(shape: String, location_name: "FormatVersion"))
+    GetProductsRequest.add_member(:format_version, Shapes::ShapeRef.new(shape: FormatVersion, location_name: "FormatVersion"))
     GetProductsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     GetProductsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "MaxResults"))
     GetProductsRequest.struct_class = Types::GetProductsRequest
 
-    GetProductsResponse.add_member(:format_version, Shapes::ShapeRef.new(shape: String, location_name: "FormatVersion"))
+    GetProductsResponse.add_member(:format_version, Shapes::ShapeRef.new(shape: FormatVersion, location_name: "FormatVersion"))
     GetProductsResponse.add_member(:price_list, Shapes::ShapeRef.new(shape: PriceListJsonItems, location_name: "PriceList"))
     GetProductsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     GetProductsResponse.struct_class = Types::GetProductsResponse

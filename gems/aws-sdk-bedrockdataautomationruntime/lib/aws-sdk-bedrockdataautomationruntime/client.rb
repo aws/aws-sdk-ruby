@@ -537,6 +537,12 @@ module Aws::BedrockDataAutomationRuntime
     # @option params [Array<Types::Blueprint>] :blueprints
     #   Blueprint list.
     #
+    # @option params [required, String] :data_automation_profile_arn
+    #   Data automation profile ARN
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   List of tags.
+    #
     # @return [Types::InvokeDataAutomationAsyncResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::InvokeDataAutomationAsyncResponse#invocation_arn #invocation_arn} => String
@@ -552,11 +558,11 @@ module Aws::BedrockDataAutomationRuntime
     #       s3_uri: "S3Uri", # required
     #     },
     #     data_automation_configuration: {
-    #       data_automation_arn: "DataAutomationArn", # required
+    #       data_automation_project_arn: "DataAutomationArn", # required
     #       stage: "LIVE", # accepts LIVE, DEVELOPMENT
     #     },
     #     encryption_configuration: {
-    #       kms_key_id: "NonEmptyString", # required
+    #       kms_key_id: "KMSKeyId", # required
     #       kms_encryption_context: {
     #         "EncryptionContextKey" => "EncryptionContextValue",
     #       },
@@ -573,6 +579,13 @@ module Aws::BedrockDataAutomationRuntime
     #         stage: "DEVELOPMENT", # accepts DEVELOPMENT, LIVE
     #       },
     #     ],
+    #     data_automation_profile_arn: "DataAutomationProfileArn", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -585,6 +598,93 @@ module Aws::BedrockDataAutomationRuntime
     # @param [Hash] params ({})
     def invoke_data_automation_async(params = {}, options = {})
       req = build_request(:invoke_data_automation_async, params)
+      req.send_request(options)
+    end
+
+    # List tags for an Amazon Bedrock Data Automation resource
+    #
+    # @option params [required, String] :resource_arn
+    #   ARN of a taggable resource
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "TaggableResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-runtime-2024-06-13/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Tag an Amazon Bedrock Data Automation resource
+    #
+    # @option params [required, String] :resource_arn
+    #   ARN of a taggable resource
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   List of tags
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "TaggableResourceArn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-runtime-2024-06-13/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Untag an Amazon Bedrock Data Automation resource
+    #
+    # @option params [required, String] :resource_arn
+    #   ARN of a taggable resource
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   List of tag keys
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "TaggableResourceArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-runtime-2024-06-13/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -606,7 +706,7 @@ module Aws::BedrockDataAutomationRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockdataautomationruntime'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

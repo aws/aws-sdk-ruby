@@ -4159,6 +4159,75 @@ module Aws::MediaConvert
       req.send_request(options)
     end
 
+    # The Probe operation analyzes the provided media file and returns
+    # comprehensive metadata about its container format, tracks, and any
+    # encountered errors.
+    #
+    # @option params [Array<Types::ProbeInputFile>] :input_files
+    #   The list of input media files to be probed.
+    #
+    # @return [Types::ProbeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ProbeResponse#probe_results #probe_results} => Array&lt;Types::ProbeResult&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.probe({
+    #     input_files: [
+    #       {
+    #         file_url: "__string",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.probe_results #=> Array
+    #   resp.probe_results[0].container.duration #=> Float
+    #   resp.probe_results[0].container.format #=> String, one of "mp4", "quicktime", "matroska", "webm"
+    #   resp.probe_results[0].container.tracks #=> Array
+    #   resp.probe_results[0].container.tracks[0].audio_properties.bit_depth #=> Integer
+    #   resp.probe_results[0].container.tracks[0].audio_properties.bit_rate #=> Integer
+    #   resp.probe_results[0].container.tracks[0].audio_properties.channels #=> Integer
+    #   resp.probe_results[0].container.tracks[0].audio_properties.frame_rate.denominator #=> Integer
+    #   resp.probe_results[0].container.tracks[0].audio_properties.frame_rate.numerator #=> Integer
+    #   resp.probe_results[0].container.tracks[0].audio_properties.language_code #=> String
+    #   resp.probe_results[0].container.tracks[0].audio_properties.sample_rate #=> Integer
+    #   resp.probe_results[0].container.tracks[0].codec #=> String, one of "UNKNOWN", "AAC", "AC3", "EAC3", "FLAC", "MP3", "OPUS", "PCM", "VORBIS", "AV1", "AVC", "HEVC", "MJPEG", "MP4V", "MPEG2", "PRORES", "THEORA", "VP8", "VP9", "C608", "C708", "WEBVTT"
+    #   resp.probe_results[0].container.tracks[0].data_properties.language_code #=> String
+    #   resp.probe_results[0].container.tracks[0].duration #=> Float
+    #   resp.probe_results[0].container.tracks[0].index #=> Integer
+    #   resp.probe_results[0].container.tracks[0].track_type #=> String, one of "video", "audio", "data"
+    #   resp.probe_results[0].container.tracks[0].video_properties.bit_depth #=> Integer
+    #   resp.probe_results[0].container.tracks[0].video_properties.bit_rate #=> Integer
+    #   resp.probe_results[0].container.tracks[0].video_properties.color_primaries #=> String, one of "ITU_709", "UNSPECIFIED", "RESERVED", "ITU_470M", "ITU_470BG", "SMPTE_170M", "SMPTE_240M", "GENERIC_FILM", "ITU_2020", "SMPTE_428_1", "SMPTE_431_2", "SMPTE_EG_432_1", "IPT", "SMPTE_2067XYZ", "EBU_3213_E", "LAST"
+    #   resp.probe_results[0].container.tracks[0].video_properties.frame_rate.denominator #=> Integer
+    #   resp.probe_results[0].container.tracks[0].video_properties.frame_rate.numerator #=> Integer
+    #   resp.probe_results[0].container.tracks[0].video_properties.height #=> Integer
+    #   resp.probe_results[0].container.tracks[0].video_properties.matrix_coefficients #=> String, one of "RGB", "ITU_709", "UNSPECIFIED", "RESERVED", "FCC", "ITU_470BG", "SMPTE_170M", "SMPTE_240M", "YCgCo", "ITU_2020_NCL", "ITU_2020_CL", "SMPTE_2085", "CD_NCL", "CD_CL", "ITU_2100ICtCp", "IPT", "EBU3213", "LAST"
+    #   resp.probe_results[0].container.tracks[0].video_properties.transfer_characteristics #=> String, one of "ITU_709", "UNSPECIFIED", "RESERVED", "ITU_470M", "ITU_470BG", "SMPTE_170M", "SMPTE_240M", "LINEAR", "LOG10_2", "LOC10_2_5", "IEC_61966_2_4", "ITU_1361", "IEC_61966_2_1", "ITU_2020_10bit", "ITU_2020_12bit", "SMPTE_2084", "SMPTE_428_1", "ARIB_B67", "LAST"
+    #   resp.probe_results[0].container.tracks[0].video_properties.width #=> Integer
+    #   resp.probe_results[0].metadata.etag #=> String
+    #   resp.probe_results[0].metadata.file_size #=> Integer
+    #   resp.probe_results[0].metadata.last_modified #=> Time
+    #   resp.probe_results[0].metadata.mime_type #=> String
+    #   resp.probe_results[0].track_mappings #=> Array
+    #   resp.probe_results[0].track_mappings[0].audio_track_indexes #=> Array
+    #   resp.probe_results[0].track_mappings[0].audio_track_indexes[0] #=> Integer
+    #   resp.probe_results[0].track_mappings[0].data_track_indexes #=> Array
+    #   resp.probe_results[0].track_mappings[0].data_track_indexes[0] #=> Integer
+    #   resp.probe_results[0].track_mappings[0].video_track_indexes #=> Array
+    #   resp.probe_results[0].track_mappings[0].video_track_indexes[0] #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Probe AWS API Documentation
+    #
+    # @overload probe(params = {})
+    # @param [Hash] params ({})
+    def probe(params = {}, options = {})
+      req = build_request(:probe, params)
+      req.send_request(options)
+    end
+
     # Create or change your policy. For more information about policies, see
     # the user guide at
     # http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
@@ -5954,7 +6023,7 @@ module Aws::MediaConvert
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.152.0'
+      context[:gem_version] = '1.153.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

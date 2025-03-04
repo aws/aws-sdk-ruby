@@ -68,6 +68,10 @@ module Aws::QBusiness
     AttributeFilters = Shapes::ListShape.new(name: 'AttributeFilters')
     AttributeType = Shapes::StringShape.new(name: 'AttributeType')
     AttributeValueOperator = Shapes::StringShape.new(name: 'AttributeValueOperator')
+    AudioExtractionConfiguration = Shapes::StructureShape.new(name: 'AudioExtractionConfiguration')
+    AudioExtractionStatus = Shapes::StringShape.new(name: 'AudioExtractionStatus')
+    AudioExtractionType = Shapes::StringShape.new(name: 'AudioExtractionType')
+    AudioSourceDetails = Shapes::StructureShape.new(name: 'AudioSourceDetails')
     AuthChallengeRequest = Shapes::StructureShape.new(name: 'AuthChallengeRequest')
     AuthChallengeRequestEvent = Shapes::StructureShape.new(name: 'AuthChallengeRequestEvent')
     AuthChallengeResponse = Shapes::StructureShape.new(name: 'AuthChallengeResponse')
@@ -164,6 +168,8 @@ module Aws::QBusiness
     DateAttributeBoostingConfiguration = Shapes::StructureShape.new(name: 'DateAttributeBoostingConfiguration')
     DeleteApplicationRequest = Shapes::StructureShape.new(name: 'DeleteApplicationRequest')
     DeleteApplicationResponse = Shapes::StructureShape.new(name: 'DeleteApplicationResponse')
+    DeleteAttachmentRequest = Shapes::StructureShape.new(name: 'DeleteAttachmentRequest')
+    DeleteAttachmentResponse = Shapes::StructureShape.new(name: 'DeleteAttachmentResponse')
     DeleteChatControlsConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteChatControlsConfigurationRequest')
     DeleteChatControlsConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteChatControlsConfigurationResponse')
     DeleteConversationRequest = Shapes::StructureShape.new(name: 'DeleteConversationRequest')
@@ -269,6 +275,7 @@ module Aws::QBusiness
     IdentityType = Shapes::StringShape.new(name: 'IdentityType')
     ImageExtractionConfiguration = Shapes::StructureShape.new(name: 'ImageExtractionConfiguration')
     ImageExtractionStatus = Shapes::StringShape.new(name: 'ImageExtractionStatus')
+    ImageSourceDetails = Shapes::StructureShape.new(name: 'ImageSourceDetails')
     Index = Shapes::StructureShape.new(name: 'Index')
     IndexArn = Shapes::StringShape.new(name: 'IndexArn')
     IndexCapacityConfiguration = Shapes::StructureShape.new(name: 'IndexCapacityConfiguration')
@@ -450,6 +457,7 @@ module Aws::QBusiness
     SourceAttribution = Shapes::StructureShape.new(name: 'SourceAttribution')
     SourceAttributionMediaId = Shapes::StringShape.new(name: 'SourceAttributionMediaId')
     SourceAttributions = Shapes::ListShape.new(name: 'SourceAttributions')
+    SourceDetails = Shapes::UnionShape.new(name: 'SourceDetails')
     StartDataSourceSyncJobRequest = Shapes::StructureShape.new(name: 'StartDataSourceSyncJobRequest')
     StartDataSourceSyncJobResponse = Shapes::StructureShape.new(name: 'StartDataSourceSyncJobResponse')
     StatementId = Shapes::StringShape.new(name: 'StatementId')
@@ -527,6 +535,10 @@ module Aws::QBusiness
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFields = Shapes::ListShape.new(name: 'ValidationExceptionFields')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
+    VideoExtractionConfiguration = Shapes::StructureShape.new(name: 'VideoExtractionConfiguration')
+    VideoExtractionStatus = Shapes::StringShape.new(name: 'VideoExtractionStatus')
+    VideoExtractionType = Shapes::StringShape.new(name: 'VideoExtractionType')
+    VideoSourceDetails = Shapes::StructureShape.new(name: 'VideoSourceDetails')
     WebExperience = Shapes::StructureShape.new(name: 'WebExperience')
     WebExperienceArn = Shapes::StringShape.new(name: 'WebExperienceArn')
     WebExperienceAuthConfiguration = Shapes::UnionShape.new(name: 'WebExperienceAuthConfiguration')
@@ -706,6 +718,16 @@ module Aws::QBusiness
     AttributeFilter.struct_class = Types::AttributeFilter
 
     AttributeFilters.member = Shapes::ShapeRef.new(shape: AttributeFilter)
+
+    AudioExtractionConfiguration.add_member(:audio_extraction_status, Shapes::ShapeRef.new(shape: AudioExtractionStatus, required: true, location_name: "audioExtractionStatus"))
+    AudioExtractionConfiguration.struct_class = Types::AudioExtractionConfiguration
+
+    AudioSourceDetails.add_member(:media_id, Shapes::ShapeRef.new(shape: MediaId, location_name: "mediaId"))
+    AudioSourceDetails.add_member(:media_mime_type, Shapes::ShapeRef.new(shape: String, location_name: "mediaMimeType"))
+    AudioSourceDetails.add_member(:start_time_milliseconds, Shapes::ShapeRef.new(shape: Long, location_name: "startTimeMilliseconds"))
+    AudioSourceDetails.add_member(:end_time_milliseconds, Shapes::ShapeRef.new(shape: Long, location_name: "endTimeMilliseconds"))
+    AudioSourceDetails.add_member(:audio_extraction_type, Shapes::ShapeRef.new(shape: AudioExtractionType, location_name: "audioExtractionType"))
+    AudioSourceDetails.struct_class = Types::AudioSourceDetails
 
     AuthChallengeRequest.add_member(:authorization_url, Shapes::ShapeRef.new(shape: Url, required: true, location_name: "authorizationUrl"))
     AuthChallengeRequest.struct_class = Types::AuthChallengeRequest
@@ -1076,6 +1098,14 @@ module Aws::QBusiness
     DeleteApplicationRequest.struct_class = Types::DeleteApplicationRequest
 
     DeleteApplicationResponse.struct_class = Types::DeleteApplicationResponse
+
+    DeleteAttachmentRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "applicationId"))
+    DeleteAttachmentRequest.add_member(:conversation_id, Shapes::ShapeRef.new(shape: ConversationId, required: true, location: "uri", location_name: "conversationId"))
+    DeleteAttachmentRequest.add_member(:attachment_id, Shapes::ShapeRef.new(shape: AttachmentId, required: true, location: "uri", location_name: "attachmentId"))
+    DeleteAttachmentRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location: "querystring", location_name: "userId"))
+    DeleteAttachmentRequest.struct_class = Types::DeleteAttachmentRequest
+
+    DeleteAttachmentResponse.struct_class = Types::DeleteAttachmentResponse
 
     DeleteChatControlsConfigurationRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "applicationId"))
     DeleteChatControlsConfigurationRequest.struct_class = Types::DeleteChatControlsConfigurationRequest
@@ -1494,6 +1524,10 @@ module Aws::QBusiness
     ImageExtractionConfiguration.add_member(:image_extraction_status, Shapes::ShapeRef.new(shape: ImageExtractionStatus, required: true, location_name: "imageExtractionStatus"))
     ImageExtractionConfiguration.struct_class = Types::ImageExtractionConfiguration
 
+    ImageSourceDetails.add_member(:media_id, Shapes::ShapeRef.new(shape: MediaId, location_name: "mediaId"))
+    ImageSourceDetails.add_member(:media_mime_type, Shapes::ShapeRef.new(shape: String, location_name: "mediaMimeType"))
+    ImageSourceDetails.struct_class = Types::ImageSourceDetails
+
     Index.add_member(:display_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "displayName"))
     Index.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, location_name: "indexId"))
     Index.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
@@ -1702,6 +1736,8 @@ module Aws::QBusiness
     ListWebExperiencesResponse.struct_class = Types::ListWebExperiencesResponse
 
     MediaExtractionConfiguration.add_member(:image_extraction_configuration, Shapes::ShapeRef.new(shape: ImageExtractionConfiguration, location_name: "imageExtractionConfiguration"))
+    MediaExtractionConfiguration.add_member(:audio_extraction_configuration, Shapes::ShapeRef.new(shape: AudioExtractionConfiguration, location_name: "audioExtractionConfiguration"))
+    MediaExtractionConfiguration.add_member(:video_extraction_configuration, Shapes::ShapeRef.new(shape: VideoExtractionConfiguration, location_name: "videoExtractionConfiguration"))
     MediaExtractionConfiguration.struct_class = Types::MediaExtractionConfiguration
 
     MediaTooLargeException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
@@ -1948,6 +1984,16 @@ module Aws::QBusiness
 
     SourceAttributions.member = Shapes::ShapeRef.new(shape: SourceAttribution)
 
+    SourceDetails.add_member(:image_source_details, Shapes::ShapeRef.new(shape: ImageSourceDetails, location_name: "imageSourceDetails"))
+    SourceDetails.add_member(:audio_source_details, Shapes::ShapeRef.new(shape: AudioSourceDetails, location_name: "audioSourceDetails"))
+    SourceDetails.add_member(:video_source_details, Shapes::ShapeRef.new(shape: VideoSourceDetails, location_name: "videoSourceDetails"))
+    SourceDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    SourceDetails.add_member_subclass(:image_source_details, Types::SourceDetails::ImageSourceDetails)
+    SourceDetails.add_member_subclass(:audio_source_details, Types::SourceDetails::AudioSourceDetails)
+    SourceDetails.add_member_subclass(:video_source_details, Types::SourceDetails::VideoSourceDetails)
+    SourceDetails.add_member_subclass(:unknown, Types::SourceDetails::Unknown)
+    SourceDetails.struct_class = Types::SourceDetails
+
     StartDataSourceSyncJobRequest.add_member(:data_source_id, Shapes::ShapeRef.new(shape: DataSourceId, required: true, location: "uri", location_name: "dataSourceId"))
     StartDataSourceSyncJobRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "applicationId"))
     StartDataSourceSyncJobRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location: "uri", location_name: "indexId"))
@@ -2025,8 +2071,9 @@ module Aws::QBusiness
     TextSegment.add_member(:begin_offset, Shapes::ShapeRef.new(shape: Integer, location_name: "beginOffset"))
     TextSegment.add_member(:end_offset, Shapes::ShapeRef.new(shape: Integer, location_name: "endOffset"))
     TextSegment.add_member(:snippet_excerpt, Shapes::ShapeRef.new(shape: SnippetExcerpt, location_name: "snippetExcerpt"))
-    TextSegment.add_member(:media_id, Shapes::ShapeRef.new(shape: SourceAttributionMediaId, location_name: "mediaId"))
-    TextSegment.add_member(:media_mime_type, Shapes::ShapeRef.new(shape: String, location_name: "mediaMimeType"))
+    TextSegment.add_member(:media_id, Shapes::ShapeRef.new(shape: SourceAttributionMediaId, deprecated: true, location_name: "mediaId", metadata: {"deprecatedMessage"=>"Deprecated in favor of using mediaId within the respective sourceDetails field.", "deprecatedSince"=>"2025-02-28"}))
+    TextSegment.add_member(:media_mime_type, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "mediaMimeType", metadata: {"deprecatedMessage"=>"Deprecated in favor of using mediaMimeType within the respective sourceDetails field.", "deprecatedSince"=>"2025-02-28"}))
+    TextSegment.add_member(:source_details, Shapes::ShapeRef.new(shape: SourceDetails, location_name: "sourceDetails"))
     TextSegment.struct_class = Types::TextSegment
 
     TextSegmentList.member = Shapes::ShapeRef.new(shape: TextSegment)
@@ -2188,6 +2235,16 @@ module Aws::QBusiness
     ValidationExceptionField.struct_class = Types::ValidationExceptionField
 
     ValidationExceptionFields.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
+
+    VideoExtractionConfiguration.add_member(:video_extraction_status, Shapes::ShapeRef.new(shape: VideoExtractionStatus, required: true, location_name: "videoExtractionStatus"))
+    VideoExtractionConfiguration.struct_class = Types::VideoExtractionConfiguration
+
+    VideoSourceDetails.add_member(:media_id, Shapes::ShapeRef.new(shape: MediaId, location_name: "mediaId"))
+    VideoSourceDetails.add_member(:media_mime_type, Shapes::ShapeRef.new(shape: String, location_name: "mediaMimeType"))
+    VideoSourceDetails.add_member(:start_time_milliseconds, Shapes::ShapeRef.new(shape: Long, location_name: "startTimeMilliseconds"))
+    VideoSourceDetails.add_member(:end_time_milliseconds, Shapes::ShapeRef.new(shape: Long, location_name: "endTimeMilliseconds"))
+    VideoSourceDetails.add_member(:video_extraction_type, Shapes::ShapeRef.new(shape: VideoExtractionType, location_name: "videoExtractionType"))
+    VideoSourceDetails.struct_class = Types::VideoSourceDetails
 
     WebExperience.add_member(:web_experience_id, Shapes::ShapeRef.new(shape: WebExperienceId, location_name: "webExperienceId"))
     WebExperience.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
@@ -2459,6 +2516,20 @@ module Aws::QBusiness
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:delete_attachment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAttachment"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/applications/{applicationId}/conversations/{conversationId}/attachments/{attachmentId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAttachmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAttachmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: LicenseNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

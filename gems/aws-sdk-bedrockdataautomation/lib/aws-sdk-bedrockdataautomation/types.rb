@@ -286,6 +286,10 @@ module Aws::BedrockDataAutomation
     #   KMS Encryption Configuration
     #   @return [Types::EncryptionConfiguration]
     #
+    # @!attribute [rw] tags
+    #   List of tags
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/CreateBlueprintRequest AWS API Documentation
     #
     class CreateBlueprintRequest < Struct.new(
@@ -294,7 +298,8 @@ module Aws::BedrockDataAutomation
       :blueprint_stage,
       :schema,
       :client_token,
-      :encryption_configuration)
+      :encryption_configuration,
+      :tags)
       SENSITIVE = [:blueprint_name, :schema]
       include Aws::Structure
     end
@@ -386,6 +391,10 @@ module Aws::BedrockDataAutomation
     #   KMS Encryption Configuration
     #   @return [Types::EncryptionConfiguration]
     #
+    # @!attribute [rw] tags
+    #   List of tags
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/CreateDataAutomationProjectRequest AWS API Documentation
     #
     class CreateDataAutomationProjectRequest < Struct.new(
@@ -396,7 +405,8 @@ module Aws::BedrockDataAutomation
       :custom_output_configuration,
       :override_configuration,
       :client_token,
-      :encryption_configuration)
+      :encryption_configuration,
+      :tags)
       SENSITIVE = [:project_name, :project_description]
       include Aws::Structure
     end
@@ -1068,6 +1078,30 @@ module Aws::BedrockDataAutomation
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   ARN of a taggable resource
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   List of tags
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Override configuration
     #
     # @!attribute [rw] document
@@ -1155,6 +1189,47 @@ module Aws::BedrockDataAutomation
       include Aws::Structure
     end
 
+    # Key value pair of a tag
+    #
+    # @!attribute [rw] key
+    #   Defines the context of the tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Defines the value within the context. e.g. &lt;key=reason,
+    #   value=training&gt;.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   ARN of a taggable resource
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   List of tags
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # This exception is thrown when the number of requests exceeds the limit
     #
     # @!attribute [rw] message
@@ -1168,6 +1243,27 @@ module Aws::BedrockDataAutomation
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] resource_arn
+    #   ARN of a taggable resource
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   List of tag keys
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # Update Blueprint Request
     #
@@ -1183,12 +1279,17 @@ module Aws::BedrockDataAutomation
     #   Stage of the Blueprint
     #   @return [String]
     #
+    # @!attribute [rw] encryption_configuration
+    #   KMS Encryption Configuration
+    #   @return [Types::EncryptionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/UpdateBlueprintRequest AWS API Documentation
     #
     class UpdateBlueprintRequest < Struct.new(
       :blueprint_arn,
       :schema,
-      :blueprint_stage)
+      :blueprint_stage,
+      :encryption_configuration)
       SENSITIVE = [:schema]
       include Aws::Structure
     end
@@ -1234,6 +1335,10 @@ module Aws::BedrockDataAutomation
     #   Override configuration
     #   @return [Types::OverrideConfiguration]
     #
+    # @!attribute [rw] encryption_configuration
+    #   KMS Encryption Configuration
+    #   @return [Types::EncryptionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/UpdateDataAutomationProjectRequest AWS API Documentation
     #
     class UpdateDataAutomationProjectRequest < Struct.new(
@@ -1242,7 +1347,8 @@ module Aws::BedrockDataAutomation
       :project_description,
       :standard_output_configuration,
       :custom_output_configuration,
-      :override_configuration)
+      :override_configuration,
+      :encryption_configuration)
       SENSITIVE = [:project_description]
       include Aws::Structure
     end

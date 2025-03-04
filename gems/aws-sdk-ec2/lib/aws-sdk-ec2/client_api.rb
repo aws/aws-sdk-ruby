@@ -3351,6 +3351,13 @@ module Aws::EC2
     VpcClassicLink = Shapes::StructureShape.new(name: 'VpcClassicLink')
     VpcClassicLinkIdList = Shapes::ListShape.new(name: 'VpcClassicLinkIdList')
     VpcClassicLinkList = Shapes::ListShape.new(name: 'VpcClassicLinkList')
+    VpcEncryptionControl = Shapes::StructureShape.new(name: 'VpcEncryptionControl')
+    VpcEncryptionControlExclusion = Shapes::StructureShape.new(name: 'VpcEncryptionControlExclusion')
+    VpcEncryptionControlExclusionState = Shapes::StringShape.new(name: 'VpcEncryptionControlExclusionState')
+    VpcEncryptionControlExclusions = Shapes::StructureShape.new(name: 'VpcEncryptionControlExclusions')
+    VpcEncryptionControlId = Shapes::StringShape.new(name: 'VpcEncryptionControlId')
+    VpcEncryptionControlMode = Shapes::StringShape.new(name: 'VpcEncryptionControlMode')
+    VpcEncryptionControlState = Shapes::StringShape.new(name: 'VpcEncryptionControlState')
     VpcEndpoint = Shapes::StructureShape.new(name: 'VpcEndpoint')
     VpcEndpointAssociation = Shapes::StructureShape.new(name: 'VpcEndpointAssociation')
     VpcEndpointAssociationSet = Shapes::ListShape.new(name: 'VpcEndpointAssociationSet')
@@ -16555,6 +16562,7 @@ module Aws::EC2
     Vpc.add_member(:ipv_6_cidr_block_association_set, Shapes::ShapeRef.new(shape: VpcIpv6CidrBlockAssociationSet, location_name: "ipv6CidrBlockAssociationSet"))
     Vpc.add_member(:cidr_block_association_set, Shapes::ShapeRef.new(shape: VpcCidrBlockAssociationSet, location_name: "cidrBlockAssociationSet"))
     Vpc.add_member(:is_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "isDefault"))
+    Vpc.add_member(:encryption_control, Shapes::ShapeRef.new(shape: VpcEncryptionControl, location_name: "encryptionControl"))
     Vpc.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     Vpc.add_member(:block_public_access_states, Shapes::ShapeRef.new(shape: BlockPublicAccessStates, location_name: "blockPublicAccessStates"))
     Vpc.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
@@ -16613,6 +16621,26 @@ module Aws::EC2
     VpcClassicLinkIdList.member = Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId")
 
     VpcClassicLinkList.member = Shapes::ShapeRef.new(shape: VpcClassicLink, location_name: "item")
+
+    VpcEncryptionControl.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "vpcId"))
+    VpcEncryptionControl.add_member(:vpc_encryption_control_id, Shapes::ShapeRef.new(shape: VpcEncryptionControlId, location_name: "vpcEncryptionControlId"))
+    VpcEncryptionControl.add_member(:mode, Shapes::ShapeRef.new(shape: VpcEncryptionControlMode, location_name: "mode"))
+    VpcEncryptionControl.add_member(:state, Shapes::ShapeRef.new(shape: VpcEncryptionControlState, location_name: "state"))
+    VpcEncryptionControl.add_member(:state_message, Shapes::ShapeRef.new(shape: String, location_name: "stateMessage"))
+    VpcEncryptionControl.add_member(:resource_exclusions, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusions, location_name: "resourceExclusions"))
+    VpcEncryptionControl.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    VpcEncryptionControl.struct_class = Types::VpcEncryptionControl
+
+    VpcEncryptionControlExclusion.add_member(:state, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionState, location_name: "state"))
+    VpcEncryptionControlExclusion.add_member(:state_message, Shapes::ShapeRef.new(shape: String, location_name: "stateMessage"))
+    VpcEncryptionControlExclusion.struct_class = Types::VpcEncryptionControlExclusion
+
+    VpcEncryptionControlExclusions.add_member(:internet_gateway, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusion, location_name: "internetGateway"))
+    VpcEncryptionControlExclusions.add_member(:egress_only_internet_gateway, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusion, location_name: "egressOnlyInternetGateway"))
+    VpcEncryptionControlExclusions.add_member(:nat_gateway, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusion, location_name: "natGateway"))
+    VpcEncryptionControlExclusions.add_member(:virtual_private_gateway, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusion, location_name: "virtualPrivateGateway"))
+    VpcEncryptionControlExclusions.add_member(:vpc_peering, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusion, location_name: "vpcPeering"))
+    VpcEncryptionControlExclusions.struct_class = Types::VpcEncryptionControlExclusions
 
     VpcEndpoint.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcEndpointId"))
     VpcEndpoint.add_member(:vpc_endpoint_type, Shapes::ShapeRef.new(shape: VpcEndpointType, location_name: "vpcEndpointType"))

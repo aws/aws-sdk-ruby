@@ -50,8 +50,8 @@ module Aws::BedrockDataAutomationRuntime
 
     # Data automation configuration.
     #
-    # @!attribute [rw] data_automation_arn
-    #   Data automation arn.
+    # @!attribute [rw] data_automation_project_arn
+    #   Data automation project arn.
     #   @return [String]
     #
     # @!attribute [rw] stage
@@ -61,7 +61,7 @@ module Aws::BedrockDataAutomationRuntime
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-runtime-2024-06-13/DataAutomationConfiguration AWS API Documentation
     #
     class DataAutomationConfiguration < Struct.new(
-      :data_automation_arn,
+      :data_automation_project_arn,
       :stage)
       SENSITIVE = []
       include Aws::Structure
@@ -70,7 +70,7 @@ module Aws::BedrockDataAutomationRuntime
     # Encryption configuration.
     #
     # @!attribute [rw] kms_key_id
-    #   KMS key id.
+    #   Customer KMS key used for encryption
     #   @return [String]
     #
     # @!attribute [rw] kms_encryption_context
@@ -203,6 +203,14 @@ module Aws::BedrockDataAutomationRuntime
     #   Blueprint list.
     #   @return [Array<Types::Blueprint>]
     #
+    # @!attribute [rw] data_automation_profile_arn
+    #   Data automation profile ARN
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   List of tags.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-runtime-2024-06-13/InvokeDataAutomationAsyncRequest AWS API Documentation
     #
     class InvokeDataAutomationAsyncRequest < Struct.new(
@@ -212,7 +220,9 @@ module Aws::BedrockDataAutomationRuntime
       :data_automation_configuration,
       :encryption_configuration,
       :notification_configuration,
-      :blueprints)
+      :blueprints,
+      :data_automation_profile_arn,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -227,6 +237,30 @@ module Aws::BedrockDataAutomationRuntime
     #
     class InvokeDataAutomationAsyncResponse < Struct.new(
       :invocation_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   ARN of a taggable resource
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-runtime-2024-06-13/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   List of tags
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-runtime-2024-06-13/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -286,6 +320,47 @@ module Aws::BedrockDataAutomationRuntime
       include Aws::Structure
     end
 
+    # Key value pair of a tag
+    #
+    # @!attribute [rw] key
+    #   Defines the context of the tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Defines the value within the context. e.g. &lt;key=reason,
+    #   value=training&gt;.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-runtime-2024-06-13/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   ARN of a taggable resource
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   List of tags
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-runtime-2024-06-13/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-runtime-2024-06-13/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # This exception will be thrown when customer reached API TPS limit.
     #
     # @!attribute [rw] message
@@ -298,6 +373,27 @@ module Aws::BedrockDataAutomationRuntime
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] resource_arn
+    #   ARN of a taggable resource
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   List of tag keys
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-runtime-2024-06-13/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-runtime-2024-06-13/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # This exception will be thrown when customer provided invalid
     # parameters.

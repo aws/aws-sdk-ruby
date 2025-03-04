@@ -978,15 +978,27 @@ module Aws::SSM
     # @option params [Boolean] :apply_only_at_cron_interval
     #   By default, when you create a new association, the system runs it
     #   immediately after it is created and then according to the schedule you
-    #   specified. Specify this option if you don't want an association to
-    #   run immediately after you create it. This parameter isn't supported
-    #   for rate expressions.
+    #   specified and when target changes are detected. Specify `true` for
+    #   `ApplyOnlyAtCronInterval`if you want the association to run only
+    #   according to the schedule you specified.
+    #
+    #   For more information, see [Understanding when associations are applied
+    #   to resources][1] and [&gt;About target updates with Automation
+    #   runbooks][2] in the *Amazon Web Services Systems Manager User Guide*.
+    #
+    #   This parameter isn't supported for rate expressions.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/state-manager-about.html#state-manager-about-scheduling
+    #   [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/state-manager-about.html#runbook-target-updates
     #
     # @option params [Array<String>] :calendar_names
-    #   The names or Amazon Resource Names (ARNs) of the Change Calendar type
+    #   The names of Amazon Resource Names (ARNs) of the Change Calendar type
     #   documents you want to gate your associations under. The associations
     #   only run when that change calendar is open. For more information, see
-    #   [Amazon Web Services Systems Manager Change Calendar][1].
+    #   [Amazon Web Services Systems Manager Change Calendar][1] in the
+    #   *Amazon Web Services Systems Manager User Guide*.
     #
     #
     #
@@ -2821,9 +2833,20 @@ module Aws::SSM
     end
 
     # Removes the server or virtual machine from the list of registered
-    # servers. You can reregister the node again at any time. If you don't
-    # plan to use Run Command on the server, we suggest uninstalling SSM
-    # Agent first.
+    # servers.
+    #
+    # If you want to reregister an on-premises server, edge device, or VM,
+    # you must use a different Activation Code and Activation ID than used
+    # to register the machine previously. The Activation Code and Activation
+    # ID must not have already been used on the maximum number of
+    # activations specified when they were created. For more information,
+    # see [Deregistering managed nodes in a hybrid and multicloud
+    # environment][1] in the *Amazon Web Services Systems Manager User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/fleet-manager-deregister-hybrid-nodes.html
     #
     # @option params [required, String] :instance_id
     #   The ID assigned to the managed node when you registered it using the
@@ -5920,7 +5943,7 @@ module Aws::SSM
     # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar.html
     #
     # @option params [required, Array<String>] :calendar_names
-    #   The names or Amazon Resource Names (ARNs) of the Systems Manager
+    #   The names of Amazon Resource Names (ARNs) of the Systems Manager
     #   documents (SSM documents) that represent the calendar entries for
     #   which you want to get the state.
     #
@@ -8500,9 +8523,15 @@ module Aws::SSM
     # filter criteria.
     #
     # @option params [String] :sync_name
-    #   The name of the resource data sync to retrieve information about.
-    #   Required for cross-account/cross-Region configurations. Optional for
-    #   single account/single-Region configurations.
+    #   The name of the Amazon Web Services managed resource data sync to
+    #   retrieve information about.
+    #
+    #   For cross-account/cross-Region configurations, this parameter is
+    #   required, and the name of the supported resource data sync is
+    #   `AWS-QuickSetup-ManagedNode`.
+    #
+    #   For single account/single-Region configurations, the parameter is not
+    #   required.
     #
     # @option params [Array<Types::NodeFilter>] :filters
     #   One or more filters. Use a filter to return a more specific list of
@@ -8624,9 +8653,15 @@ module Aws::SSM
     # aggregator you specify.
     #
     # @option params [String] :sync_name
-    #   The name of the resource data sync to retrieve information about.
-    #   Required for cross-account/cross-Region configuration. Optional for
-    #   single account/single-Region configurations.
+    #   The name of the Amazon Web Services managed resource data sync to
+    #   retrieve information about.
+    #
+    #   For cross-account/cross-Region configurations, this parameter is
+    #   required, and the name of the supported resource data sync is
+    #   `AWS-QuickSetup-ManagedNode`.
+    #
+    #   For single account/single-Region configurations, the parameter is not
+    #   required.
     #
     # @option params [Array<Types::NodeFilter>] :filters
     #   One or more filters. Use a filter to generate a summary that matches
@@ -9333,11 +9368,11 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Add a parameter to the system.
+    # Create or update a parameter in Parameter Store.
     #
     # @option params [required, String] :name
-    #   The fully qualified name of the parameter that you want to add to the
-    #   system.
+    #   The fully qualified name of the parameter that you want to create or
+    #   update.
     #
     #   <note markdown="1"> You can't enter the Amazon Resource Name (ARN) for a parameter, only
     #   the parameter name itself.
@@ -9405,7 +9440,7 @@ module Aws::SSM
     #    </note>
     #
     # @option params [String] :type
-    #   The type of parameter that you want to add to the system.
+    #   The type of parameter that you want to create.
     #
     #   <note markdown="1"> `SecureString` isn't currently supported for CloudFormation
     #   templates.
@@ -9426,7 +9461,7 @@ module Aws::SSM
     #   parameters that use the `SecureString` data type.
     #
     #   If you don't specify a key ID, the system uses the default key
-    #   associated with your Amazon Web Services account which is not as
+    #   associated with your Amazon Web Services account, which is not as
     #   secure as using a custom key.
     #
     #   * To use a custom KMS key, choose the `SecureString` data type with
@@ -11487,32 +11522,43 @@ module Aws::SSM
     # @option params [Boolean] :apply_only_at_cron_interval
     #   By default, when you update an association, the system runs it
     #   immediately after it is updated and then according to the schedule you
-    #   specified. Specify this option if you don't want an association to
-    #   run immediately after you update it. This parameter isn't supported
-    #   for rate expressions.
+    #   specified. Specify `true` for `ApplyOnlyAtCronInterval` if you want
+    #   the association to run only according to the schedule you specified.
     #
     #   If you chose this option when you created an association and later you
-    #   edit that association or you make changes to the SSM document on which
-    #   that association is based (by using the Documents page in the
-    #   console), State Manager applies the association at the next specified
-    #   cron interval. For example, if you chose the `Latest` version of an
-    #   SSM document when you created an association and you edit the
-    #   association by choosing a different document version on the Documents
-    #   page, State Manager applies the association at the next specified cron
-    #   interval if you previously selected this option. If this option
-    #   wasn't selected, State Manager immediately runs the association.
+    #   edit that association or you make changes to the Automation runbook or
+    #   SSM document on which that association is based, State Manager applies
+    #   the association at the next specified cron interval. For example, if
+    #   you chose the `Latest` version of an SSM document when you created an
+    #   association and you edit the association by choosing a different
+    #   document version on the Documents page, State Manager applies the
+    #   association at the next specified cron interval if you previously set
+    #   `ApplyOnlyAtCronInterval` to `true`. If this option wasn't selected,
+    #   State Manager immediately runs the association.
     #
-    #   You can reset this option. To do so, specify the
+    #   For more information, see [Understanding when associations are applied
+    #   to resources][1] and [About target updates with Automation
+    #   runbooks][2] in the *Amazon Web Services Systems Manager User Guide*.
+    #
+    #   This parameter isn't supported for rate expressions.
+    #
+    #   You can reset this parameter. To do so, specify the
     #   `no-apply-only-at-cron-interval` parameter when you update the
     #   association from the command line. This parameter forces the
     #   association to run immediately after updating it and according to the
     #   interval specified.
     #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/state-manager-about.html#state-manager-about-scheduling
+    #   [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/state-manager-about.html#runbook-target-updates
+    #
     # @option params [Array<String>] :calendar_names
     #   The names or Amazon Resource Names (ARNs) of the Change Calendar type
     #   documents you want to gate your associations under. The associations
     #   only run when that change calendar is open. For more information, see
-    #   [Amazon Web Services Systems Manager Change Calendar][1].
+    #   [Amazon Web Services Systems Manager Change Calendar][1] in the
+    #   *Amazon Web Services Systems Manager User Guide*.
     #
     #
     #
@@ -13278,7 +13324,7 @@ module Aws::SSM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.190.0'
+      context[:gem_version] = '1.191.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

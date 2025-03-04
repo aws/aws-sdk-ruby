@@ -15,7 +15,7 @@ module Aws::BedrockDataAutomation
 
     class AudioExtractionCategory
       attr_accessor state: ("ENABLED" | "DISABLED")
-      attr_accessor types: ::Array[("AUDIO_CONTENT_MODERATION" | "CHAPTER_CONTENT_MODERATION" | "TRANSCRIPT")]
+      attr_accessor types: ::Array[("AUDIO_CONTENT_MODERATION" | "TRANSCRIPT" | "TOPIC_CONTENT_MODERATION")]
       SENSITIVE: []
     end
 
@@ -26,7 +26,7 @@ module Aws::BedrockDataAutomation
 
     class AudioStandardGenerativeField
       attr_accessor state: ("ENABLED" | "DISABLED")
-      attr_accessor types: ::Array[("AUDIO_SUMMARY" | "CHAPTER_SUMMARY" | "IAB")]
+      attr_accessor types: ::Array[("AUDIO_SUMMARY" | "IAB" | "TOPIC_SUMMARY")]
       SENSITIVE: []
     end
 
@@ -86,6 +86,7 @@ module Aws::BedrockDataAutomation
       attr_accessor schema: ::String
       attr_accessor client_token: ::String
       attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: [:blueprint_name, :schema]
     end
 
@@ -114,6 +115,7 @@ module Aws::BedrockDataAutomation
       attr_accessor override_configuration: Types::OverrideConfiguration
       attr_accessor client_token: ::String
       attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: [:project_name, :project_description]
     end
 
@@ -264,7 +266,7 @@ module Aws::BedrockDataAutomation
 
     class ImageExtractionCategory
       attr_accessor state: ("ENABLED" | "DISABLED")
-      attr_accessor types: ::Array[("CONTENT_MODERATION" | "TEXT_DETECTION")]
+      attr_accessor types: ::Array[("CONTENT_MODERATION" | "TEXT_DETECTION" | "LOGOS")]
       SENSITIVE: []
     end
 
@@ -322,6 +324,16 @@ module Aws::BedrockDataAutomation
       SENSITIVE: []
     end
 
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
     class OverrideConfiguration
       attr_accessor document: Types::DocumentOverrideConfiguration
       SENSITIVE: []
@@ -350,15 +362,40 @@ module Aws::BedrockDataAutomation
       SENSITIVE: []
     end
 
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
     class ThrottlingException
       attr_accessor message: ::String
       SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
     end
 
     class UpdateBlueprintRequest
       attr_accessor blueprint_arn: ::String
       attr_accessor schema: ::String
       attr_accessor blueprint_stage: ("DEVELOPMENT" | "LIVE")
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
       SENSITIVE: [:schema]
     end
 
@@ -374,6 +411,7 @@ module Aws::BedrockDataAutomation
       attr_accessor standard_output_configuration: Types::StandardOutputConfiguration
       attr_accessor custom_output_configuration: Types::CustomOutputConfiguration
       attr_accessor override_configuration: Types::OverrideConfiguration
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
       SENSITIVE: [:project_description]
     end
 
@@ -403,7 +441,7 @@ module Aws::BedrockDataAutomation
 
     class VideoExtractionCategory
       attr_accessor state: ("ENABLED" | "DISABLED")
-      attr_accessor types: ::Array[("CONTENT_MODERATION" | "TEXT_DETECTION" | "TRANSCRIPT")]
+      attr_accessor types: ::Array[("CONTENT_MODERATION" | "TEXT_DETECTION" | "TRANSCRIPT" | "LOGOS")]
       SENSITIVE: []
     end
 
@@ -415,7 +453,7 @@ module Aws::BedrockDataAutomation
 
     class VideoStandardGenerativeField
       attr_accessor state: ("ENABLED" | "DISABLED")
-      attr_accessor types: ::Array[("VIDEO_SUMMARY" | "SCENE_SUMMARY" | "IAB")]
+      attr_accessor types: ::Array[("VIDEO_SUMMARY" | "IAB" | "CHAPTER_SUMMARY")]
       SENSITIVE: []
     end
 

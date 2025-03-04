@@ -863,6 +863,17 @@ module Aws::StorageGateway
       SENSITIVE: []
     end
 
+    class EvictFilesFailingUploadInput
+      attr_accessor file_share_arn: ::String
+      attr_accessor force_remove: bool
+      SENSITIVE: []
+    end
+
+    class EvictFilesFailingUploadOutput
+      attr_accessor notification_id: ::String
+      SENSITIVE: []
+    end
+
     class FileShareInfo
       attr_accessor file_share_type: ("NFS" | "SMB")
       attr_accessor file_share_arn: ::String

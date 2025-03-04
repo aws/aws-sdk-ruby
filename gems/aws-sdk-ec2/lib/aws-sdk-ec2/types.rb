@@ -73487,6 +73487,9 @@ module Aws::EC2
     #   Indicates whether the VPC is the default VPC.
     #   @return [Boolean]
     #
+    # @!attribute [rw] encryption_control
+    #   @return [Types::VpcEncryptionControl]
+    #
     # @!attribute [rw] tags
     #   Any tags assigned to the VPC.
     #   @return [Array<Types::Tag>]
@@ -73519,6 +73522,7 @@ module Aws::EC2
       :ipv_6_cidr_block_association_set,
       :cidr_block_association_set,
       :is_default,
+      :encryption_control,
       :tags,
       :block_public_access_states,
       :vpc_id,
@@ -73774,6 +73778,83 @@ module Aws::EC2
       :classic_link_enabled,
       :tags,
       :vpc_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpc_id
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_encryption_control_id
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   @return [String]
+    #
+    # @!attribute [rw] state_message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_exclusions
+    #   @return [Types::VpcEncryptionControlExclusions]
+    #
+    # @!attribute [rw] tags
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcEncryptionControl AWS API Documentation
+    #
+    class VpcEncryptionControl < Struct.new(
+      :vpc_id,
+      :vpc_encryption_control_id,
+      :mode,
+      :state,
+      :state_message,
+      :resource_exclusions,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] state
+    #   @return [String]
+    #
+    # @!attribute [rw] state_message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcEncryptionControlExclusion AWS API Documentation
+    #
+    class VpcEncryptionControlExclusion < Struct.new(
+      :state,
+      :state_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] internet_gateway
+    #   @return [Types::VpcEncryptionControlExclusion]
+    #
+    # @!attribute [rw] egress_only_internet_gateway
+    #   @return [Types::VpcEncryptionControlExclusion]
+    #
+    # @!attribute [rw] nat_gateway
+    #   @return [Types::VpcEncryptionControlExclusion]
+    #
+    # @!attribute [rw] virtual_private_gateway
+    #   @return [Types::VpcEncryptionControlExclusion]
+    #
+    # @!attribute [rw] vpc_peering
+    #   @return [Types::VpcEncryptionControlExclusion]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcEncryptionControlExclusions AWS API Documentation
+    #
+    class VpcEncryptionControlExclusions < Struct.new(
+      :internet_gateway,
+      :egress_only_internet_gateway,
+      :nat_gateway,
+      :virtual_private_gateway,
+      :vpc_peering)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2025-02-27)
+------------------
+
+* Feature - Add track support for Redshift Serverless workgroup.
+
 1.46.0 (2025-02-18)
 ------------------
 

@@ -679,6 +679,45 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Properties specific to audio tracks.
+    #
+    # @!attribute [rw] bit_depth
+    #   The bit depth of the audio track.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] bit_rate
+    #   The bit rate of the audio track in bits per second.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] channels
+    #   The number of audio channels.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] frame_rate
+    #   the calculated frame rate of the asset.
+    #   @return [Types::FrameRate]
+    #
+    # @!attribute [rw] language_code
+    #   the language code of the track
+    #   @return [String]
+    #
+    # @!attribute [rw] sample_rate
+    #   The sample rate of the audio track.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AudioProperties AWS API Documentation
+    #
+    class AudioProperties < Struct.new(
+      :bit_depth,
+      :bit_rate,
+      :channels,
+      :frame_rate,
+      :language_code,
+      :sample_rate)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Use Audio selectors to specify a track or set of tracks from the input
     # that you will use in your outputs. You can use multiple Audio
     # selectors per input.
@@ -2879,6 +2918,30 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Information about the container format of the media file.
+    #
+    # @!attribute [rw] duration
+    #   The duration of the media file in seconds.
+    #   @return [Float]
+    #
+    # @!attribute [rw] format
+    #   The format of the container
+    #   @return [String]
+    #
+    # @!attribute [rw] tracks
+    #   List of Track objects.
+    #   @return [Array<Types::Track>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Container AWS API Documentation
+    #
+    class Container < Struct.new(
+      :duration,
+      :format,
+      :tracks)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Container specific settings.
     #
     # @!attribute [rw] cmfc_settings
@@ -3655,6 +3718,20 @@ module Aws::MediaConvert
       :thumbnail_width,
       :tile_height,
       :tile_width)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Properties specific to data tracks.
+    #
+    # @!attribute [rw] language_code
+    #   the language code of the track
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DataProperties AWS API Documentation
+    #
+    class DataProperties < Struct.new(
+      :language_code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5261,6 +5338,25 @@ module Aws::MediaConvert
       :framerate_numerator,
       :max_captures,
       :quality)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # the calculated frame rate of the asset.
+    #
+    # @!attribute [rw] denominator
+    #   the denominator of the frame rate of the asset.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] numerator
+    #   the numerator of the frame rate of the asset.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/FrameRate AWS API Documentation
+    #
+    class FrameRate < Struct.new(
+      :denominator,
+      :numerator)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9742,6 +9838,35 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Metadata about the file.
+    #
+    # @!attribute [rw] etag
+    #   The ETag of the file.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_size
+    #   The size of the file in bytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_modified
+    #   The last modification time of the file.
+    #   @return [Time]
+    #
+    # @!attribute [rw] mime_type
+    #   The MIME type of the file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Metadata AWS API Documentation
+    #
+    class Metadata < Struct.new(
+      :etag,
+      :file_size,
+      :last_modified,
+      :mime_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Use Min bottom rendition size to specify a minimum size for the lowest
     # resolution in your ABR stack. * The lowest resolution in your ABR
     # stack will be equal to or greater than the value that you enter. For
@@ -11497,6 +11622,76 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # The input file that needs to be analyzed.
+    #
+    # @!attribute [rw] file_url
+    #   The URI to your input file(s) that is stored in Amazon S3 or on an
+    #   HTTP(S) server.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ProbeInputFile AWS API Documentation
+    #
+    class ProbeInputFile < Struct.new(
+      :file_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request to probe one or more media files and retrieve metadata
+    # about them.
+    #
+    # @!attribute [rw] input_files
+    #   The list of input media files to be probed.
+    #   @return [Array<Types::ProbeInputFile>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ProbeRequest AWS API Documentation
+    #
+    class ProbeRequest < Struct.new(
+      :input_files)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response from a media file probe operation, providing
+    # comprehensive metadata about the file, including its container format,
+    # tracks (video, audio, data).
+    #
+    # @!attribute [rw] probe_results
+    #   List of probe results for the input media file(s).
+    #   @return [Array<Types::ProbeResult>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ProbeResponse AWS API Documentation
+    #
+    class ProbeResponse < Struct.new(
+      :probe_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The metadata and analysis results for a media file.
+    #
+    # @!attribute [rw] container
+    #   Information about the container format of the media file.
+    #   @return [Types::Container]
+    #
+    # @!attribute [rw] metadata
+    #   Metadata about the file.
+    #   @return [Types::Metadata]
+    #
+    # @!attribute [rw] track_mappings
+    #   List of Track mapping objects.
+    #   @return [Array<Types::TrackMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ProbeResult AWS API Documentation
+    #
+    class ProbeResult < Struct.new(
+      :container,
+      :metadata,
+      :track_mappings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Required when you set Codec to the value PRORES.
     #
     # @!attribute [rw] chroma_sampling
@@ -12637,6 +12832,74 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # The track information such as codec, duration, etc.
+    #
+    # @!attribute [rw] audio_properties
+    #   Properties specific to audio tracks.
+    #   @return [Types::AudioProperties]
+    #
+    # @!attribute [rw] codec
+    #   The codec used for the track.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_properties
+    #   Properties specific to data tracks.
+    #   @return [Types::DataProperties]
+    #
+    # @!attribute [rw] duration
+    #   The duration of the track in seconds.
+    #   @return [Float]
+    #
+    # @!attribute [rw] index
+    #   The index of the track.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] track_type
+    #   The type of the track (video, audio, or data).
+    #   @return [String]
+    #
+    # @!attribute [rw] video_properties
+    #   Properties specific to video tracks.
+    #   @return [Types::VideoProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Track AWS API Documentation
+    #
+    class Track < Struct.new(
+      :audio_properties,
+      :codec,
+      :data_properties,
+      :duration,
+      :index,
+      :track_type,
+      :video_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Track mapping information.
+    #
+    # @!attribute [rw] audio_track_indexes
+    #   The indexes of the audio tracks.
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] data_track_indexes
+    #   The indexes of the data tracks.
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] video_track_indexes
+    #   The indexes of the video tracks.
+    #   @return [Array<Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/TrackMapping AWS API Documentation
+    #
+    class TrackMapping < Struct.new(
+      :audio_track_indexes,
+      :data_track_indexes,
+      :video_track_indexes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Settings specific to caption sources that are specified by track
     # number. Currently, this is only IMSC captions in an IMF package. If
     # your caption source is IMSC 1.1 in a separate xml file, use
@@ -13744,6 +14007,55 @@ module Aws::MediaConvert
       :noise_reducer,
       :partner_watermarking,
       :timecode_burnin)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Properties specific to video tracks.
+    #
+    # @!attribute [rw] bit_depth
+    #   The bit depth of the video track.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] bit_rate
+    #   The bit rate of the video track in bits per second.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] color_primaries
+    #   the color primaries.
+    #   @return [String]
+    #
+    # @!attribute [rw] frame_rate
+    #   the calculated frame rate of the asset.
+    #   @return [Types::FrameRate]
+    #
+    # @!attribute [rw] height
+    #   The height of the video track in pixels.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] matrix_coefficients
+    #   the matrix coefficients.
+    #   @return [String]
+    #
+    # @!attribute [rw] transfer_characteristics
+    #   the transfer characteristics.
+    #   @return [String]
+    #
+    # @!attribute [rw] width
+    #   The width of the video track in pixels.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/VideoProperties AWS API Documentation
+    #
+    class VideoProperties < Struct.new(
+      :bit_depth,
+      :bit_rate,
+      :color_primaries,
+      :frame_rate,
+      :height,
+      :matrix_coefficients,
+      :transfer_characteristics,
+      :width)
       SENSITIVE = []
       include Aws::Structure
     end

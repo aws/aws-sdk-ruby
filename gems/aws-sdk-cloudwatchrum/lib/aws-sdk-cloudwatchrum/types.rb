@@ -708,6 +708,39 @@ module Aws::CloudWatchRUM
     #
     class DeleteAppMonitorResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] name
+    #   The app monitor that you want to remove the resource policy from.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_revision_id
+    #   Specifies a specific policy revision to delete. Provide a
+    #   `PolicyRevisionId` to ensure an atomic delete operation. If the
+    #   revision ID that you provide doesn't match the latest policy
+    #   revision ID, the request will be rejected with an
+    #   `InvalidPolicyRevisionIdException` error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/DeleteResourcePolicyRequest AWS API Documentation
+    #
+    class DeleteResourcePolicyRequest < Struct.new(
+      :name,
+      :policy_revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_revision_id
+    #   The revision ID of the policy that was removed, if it had one.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/DeleteResourcePolicyResponse AWS API Documentation
+    #
+    class DeleteResourcePolicyResponse < Struct.new(
+      :policy_revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] app_monitor_name
     #   The name of the app monitor that is sending metrics to the
     #   destination that you want to delete.
@@ -819,6 +852,37 @@ module Aws::CloudWatchRUM
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   The name of the app monitor that is associated with the
+    #   resource-based policy that you want to view.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/GetResourcePolicyRequest AWS API Documentation
+    #
+    class GetResourcePolicyRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_document
+    #   The JSON policy document that you requested.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_revision_id
+    #   The revision ID information for this version of the policy document
+    #   that you requested.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/GetResourcePolicyResponse AWS API Documentation
+    #
+    class GetResourcePolicyResponse < Struct.new(
+      :policy_document,
+      :policy_revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Internal service exception.
     #
     # @!attribute [rw] message
@@ -833,6 +897,20 @@ module Aws::CloudWatchRUM
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The policy revision ID that you provided doeesn't match the latest
+    # policy revision ID.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/InvalidPolicyRevisionIdException AWS API Documentation
+    #
+    class InvalidPolicyRevisionIdException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -948,6 +1026,19 @@ module Aws::CloudWatchRUM
     class ListTagsForResourceResponse < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The policy document that you specified is not formatted correctly.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/MalformedPolicyDocumentException AWS API Documentation
+    #
+    class MalformedPolicyDocumentException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1311,6 +1402,102 @@ module Aws::CloudWatchRUM
       include Aws::Structure
     end
 
+    # The resource-based policy doesn't exist on this app monitor.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/PolicyNotFoundException AWS API Documentation
+    #
+    class PolicyNotFoundException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The policy document is too large. The limit is 4 KB.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/PolicySizeLimitExceededException AWS API Documentation
+    #
+    class PolicySizeLimitExceededException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the app monitor that you want to apply this
+    #   resource-based policy to. To find the names of your app monitors,
+    #   you can use the [ListAppMonitors][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_ListAppMonitors.html
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_document
+    #   The JSON to use as the resource policy. The document can be up to 4
+    #   KB in size. For more information about the contents and syntax for
+    #   this policy, see [Using resource-based policies with CloudWatch
+    #   RUM][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-resource-policies.html
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_revision_id
+    #   A string value that you can use to conditionally update your policy.
+    #   You can provide the revision ID of your existing policy to make
+    #   mutating requests against that policy.
+    #
+    #   When you assign a policy revision ID, then later requests about that
+    #   policy will be rejected with an `InvalidPolicyRevisionIdException`
+    #   error if they don't provide the correct current revision ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/PutResourcePolicyRequest AWS API Documentation
+    #
+    class PutResourcePolicyRequest < Struct.new(
+      :name,
+      :policy_document,
+      :policy_revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_document
+    #   The JSON policy document that you specified.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_revision_id
+    #   The policy revision ID information that you specified.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/PutResourcePolicyResponse AWS API Documentation
+    #
+    class PutResourcePolicyResponse < Struct.new(
+      :policy_document,
+      :policy_revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] alias
+    #   If the app monitor uses a resource-based policy that requires
+    #   `PutRumEvents` requests to specify a certain alias, specify that
+    #   alias here. This alias will be compared to the `rum:alias` context
+    #   key in the resource-based policy. For more information, see [Using
+    #   resource-based policies with CloudWatch RUM][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-resource-policies.html
+    #   @return [String]
+    #
     # @!attribute [rw] app_monitor_details
     #   A structure that contains information about the app monitor that
     #   collected this telemetry information.
@@ -1336,6 +1523,7 @@ module Aws::CloudWatchRUM
     # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/PutRumEventsRequest AWS API Documentation
     #
     class PutRumEventsRequest < Struct.new(
+      :alias,
       :app_monitor_details,
       :batch_id,
       :id,

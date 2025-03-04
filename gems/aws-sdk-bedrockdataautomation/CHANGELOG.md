@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2025-02-28)
+------------------
+
+* Feature - Renamed and added new StandardConfiguration enums. Added support to update EncryptionConfiguration in UpdateBlueprint and UpdateDataAutomation APIs. Changed HttpStatus code for DeleteBlueprint and DeleteDataAutomationProject APIs to 200 from 204. Added APIs to support tagging.
+
 1.4.0 (2025-02-18)
 ------------------
 

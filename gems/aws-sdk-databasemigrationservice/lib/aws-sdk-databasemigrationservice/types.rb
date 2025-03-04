@@ -11960,7 +11960,8 @@ module Aws::DatabaseMigrationService
     #     not yet being provisioned for individual assessments.
     #
     #   * `"warning"` – At least one individual assessment completed with a
-    #     `warning` status.
+    #     `warning` status or all individual assessments were skipped
+    #     (completed with a `skipped` status).
     #   @return [String]
     #
     # @!attribute [rw] replication_task_assessment_run_creation_date
@@ -12087,6 +12088,11 @@ module Aws::DatabaseMigrationService
     #   assessment run.
     #   @return [Integer]
     #
+    # @!attribute [rw] skipped
+    #   The number of individual assessments that were skipped during the
+    #   assessment run.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationTaskAssessmentRunResultStatistic AWS API Documentation
     #
     class ReplicationTaskAssessmentRunResultStatistic < Struct.new(
@@ -12094,7 +12100,8 @@ module Aws::DatabaseMigrationService
       :failed,
       :error,
       :warning,
-      :cancelled)
+      :cancelled,
+      :skipped)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12129,6 +12136,8 @@ module Aws::DatabaseMigrationService
     #   * `"passed"`
     #
     #   * `"pending"`
+    #
+    #   * `"skipped"`
     #
     #   * `"running"`
     #   @return [String]
@@ -13501,14 +13510,13 @@ module Aws::DatabaseMigrationService
     #   User-defined settings for the premigration assessment. The possible
     #   values are:
     #
-    #   * `ResultLocationFinder`: The folder within an Amazon Amazon S3
-    #     bucket where you want DMS to store the results of this assessment
-    #     run.
+    #   * `ResultLocationFolder`: The folder within an Amazon S3 bucket
+    #     where you want DMS to store the results of this assessment run.
     #
     #   * `ResultEncryptionMode`: The supported values are `SSE_KMS` and
     #     `SSE_S3`. If these values are not provided, then the files are not
     #     encrypted at rest. For more information, see [Creating Amazon Web
-    #     Services KMS keys to encrypt Amazon Amazon S3 target objects][1].
+    #     Services KMS keys to encrypt Amazon S3 target objects][1].
     #
     #   * `ResultKmsKeyArn`: The ARN of a customer KMS encryption key that
     #     you specify when you set `ResultEncryptionMode` to `SSE_KMS`.
