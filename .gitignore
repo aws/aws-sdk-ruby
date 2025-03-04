@@ -11,6 +11,7 @@
 *.gem
 benchmark_report.json
 results.json
+test.sh
 
 /scratchpad
 .idea
