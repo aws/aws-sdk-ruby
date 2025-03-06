@@ -6,7 +6,6 @@ gem 'rake', require: false
 # SDK feature dependencies
 gem 'aws-crt' if ENV['CRT']
 gem 'base64'
-gem 'byebug', platforms: :ruby
 gem 'bigdecimal'
 gem 'http-2'
 gem 'jmespath'
@@ -43,6 +42,7 @@ group :build do
 end
 
 group :development do
+  gem 'byebug', platforms: :ruby
   gem 'rubocop', '1.28.0'
 end
 
