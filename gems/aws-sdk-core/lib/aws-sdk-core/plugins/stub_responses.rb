@@ -37,7 +37,7 @@ requests are made, and retries are disabled.
       def add_handlers(handlers, config)
         return unless config.stub_responses
 
-        handlers.add(ApiRequestsHandler, step: :sign, priority: 5)
+        handlers.add(ApiRequestsHandler)
         handlers.add(StubbingHandler, step: :send)
       end
 
