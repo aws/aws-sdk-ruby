@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Add back event stream max payload size and headers length checks with a 24MB limit.
+
 1.3.1 (2025-02-13)
 ------------------
 
