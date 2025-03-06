@@ -389,7 +389,11 @@ module Aws::IoTFleetWise
     #   @return [Boolean]
     #
     # @!attribute [rw] is_signed
-    #   Whether the message data is specified as a signed value.
+    #   Determines whether the message is signed (`true`) or not (`false`).
+    #   If it's signed, the message can represent both positive and
+    #   negative numbers. The `isSigned` parameter only applies to the
+    #   `INTEGER` raw signal type, and it doesn't affect the
+    #   `FLOATING_POINT` raw signal type.
     #   @return [Boolean]
     #
     # @!attribute [rw] start_bit
@@ -420,6 +424,10 @@ module Aws::IoTFleetWise
     #   The name of the signal.
     #   @return [String]
     #
+    # @!attribute [rw] signal_value_type
+    #   The value type of the signal. The default value is `INTEGER`.
+    #   @return [String]
+    #
     class CanSignal < Struct.new(
       :message_id,
       :is_big_endian,
@@ -428,7 +436,8 @@ module Aws::IoTFleetWise
       :offset,
       :factor,
       :length,
-      :name)
+      :name,
+      :signal_value_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3699,6 +3708,18 @@ module Aws::IoTFleetWise
     #   The number of bits to mask in a message.
     #   @return [Integer]
     #
+    # @!attribute [rw] is_signed
+    #   Determines whether the message is signed (`true`) or not (`false`).
+    #   If it's signed, the message can represent both positive and
+    #   negative numbers. The `isSigned` parameter only applies to the
+    #   `INTEGER` raw signal type, and it doesn't affect the
+    #   `FLOATING_POINT` raw signal type. The default value is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] signal_value_type
+    #   The value type of the signal. The default value is `INTEGER`.
+    #   @return [String]
+    #
     class ObdSignal < Struct.new(
       :pid_response_length,
       :service_mode,
@@ -3708,7 +3729,9 @@ module Aws::IoTFleetWise
       :start_byte,
       :byte_length,
       :bit_right_shift,
-      :bit_mask_length)
+      :bit_mask_length,
+      :is_signed,
+      :signal_value_type)
       SENSITIVE = []
       include Aws::Structure
     end

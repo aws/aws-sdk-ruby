@@ -211,6 +211,7 @@ module Aws::CognitoIdentityProvider
     DescribeUserPoolResponse = Shapes::StructureShape.new(name: 'DescribeUserPoolResponse')
     DescriptionType = Shapes::StringShape.new(name: 'DescriptionType')
     DeviceConfigurationType = Shapes::StructureShape.new(name: 'DeviceConfigurationType')
+    DeviceKeyExistsException = Shapes::StructureShape.new(name: 'DeviceKeyExistsException')
     DeviceKeyType = Shapes::StringShape.new(name: 'DeviceKeyType')
     DeviceListType = Shapes::ListShape.new(name: 'DeviceListType')
     DeviceNameType = Shapes::StringShape.new(name: 'DeviceNameType')
@@ -686,6 +687,7 @@ module Aws::CognitoIdentityProvider
     AdminInitiateAuthResponse.add_member(:session, Shapes::ShapeRef.new(shape: SessionType, location_name: "Session"))
     AdminInitiateAuthResponse.add_member(:challenge_parameters, Shapes::ShapeRef.new(shape: ChallengeParametersType, location_name: "ChallengeParameters"))
     AdminInitiateAuthResponse.add_member(:authentication_result, Shapes::ShapeRef.new(shape: AuthenticationResultType, location_name: "AuthenticationResult"))
+    AdminInitiateAuthResponse.add_member(:available_challenges, Shapes::ShapeRef.new(shape: AvailableChallengeListType, location_name: "AvailableChallenges"))
     AdminInitiateAuthResponse.struct_class = Types::AdminInitiateAuthResponse
 
     AdminLinkProviderForUserRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: StringType, required: true, location_name: "UserPoolId"))
@@ -1225,6 +1227,9 @@ module Aws::CognitoIdentityProvider
     DeviceConfigurationType.add_member(:challenge_required_on_new_device, Shapes::ShapeRef.new(shape: BooleanType, location_name: "ChallengeRequiredOnNewDevice"))
     DeviceConfigurationType.add_member(:device_only_remembered_on_user_prompt, Shapes::ShapeRef.new(shape: BooleanType, location_name: "DeviceOnlyRememberedOnUserPrompt"))
     DeviceConfigurationType.struct_class = Types::DeviceConfigurationType
+
+    DeviceKeyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    DeviceKeyExistsException.struct_class = Types::DeviceKeyExistsException
 
     DeviceListType.member = Shapes::ShapeRef.new(shape: DeviceType)
 
@@ -2876,6 +2881,7 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: UserNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UserNotConfirmedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: DeviceKeyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
       end)
 

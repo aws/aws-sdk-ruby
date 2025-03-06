@@ -967,6 +967,7 @@ module Aws::IoTFleetWise
     #           factor: 1.0, # required
     #           length: 1, # required
     #           name: "CanSignalName",
+    #           signal_value_type: "INTEGER", # accepts INTEGER, FLOATING_POINT
     #         },
     #         obd_signal: {
     #           pid_response_length: 1, # required
@@ -978,6 +979,8 @@ module Aws::IoTFleetWise
     #           byte_length: 1, # required
     #           bit_right_shift: 1,
     #           bit_mask_length: 1,
+    #           is_signed: false,
+    #           signal_value_type: "INTEGER", # accepts INTEGER, FLOATING_POINT
     #         },
     #         message_signal: {
     #           topic_name: "TopicName", # required
@@ -2494,6 +2497,7 @@ module Aws::IoTFleetWise
     #   resp.signal_decoders[0].can_signal.factor #=> Float
     #   resp.signal_decoders[0].can_signal.length #=> Integer
     #   resp.signal_decoders[0].can_signal.name #=> String
+    #   resp.signal_decoders[0].can_signal.signal_value_type #=> String, one of "INTEGER", "FLOATING_POINT"
     #   resp.signal_decoders[0].obd_signal.pid_response_length #=> Integer
     #   resp.signal_decoders[0].obd_signal.service_mode #=> Integer
     #   resp.signal_decoders[0].obd_signal.pid #=> Integer
@@ -2503,6 +2507,8 @@ module Aws::IoTFleetWise
     #   resp.signal_decoders[0].obd_signal.byte_length #=> Integer
     #   resp.signal_decoders[0].obd_signal.bit_right_shift #=> Integer
     #   resp.signal_decoders[0].obd_signal.bit_mask_length #=> Integer
+    #   resp.signal_decoders[0].obd_signal.is_signed #=> Boolean
+    #   resp.signal_decoders[0].obd_signal.signal_value_type #=> String, one of "INTEGER", "FLOATING_POINT"
     #   resp.signal_decoders[0].message_signal.topic_name #=> String
     #   resp.signal_decoders[0].message_signal.structured_message.primitive_message_definition.ros2_primitive_message_definition.primitive_type #=> String, one of "BOOL", "BYTE", "CHAR", "FLOAT32", "FLOAT64", "INT8", "UINT8", "INT16", "UINT16", "INT32", "UINT32", "INT64", "UINT64", "STRING", "WSTRING"
     #   resp.signal_decoders[0].message_signal.structured_message.primitive_message_definition.ros2_primitive_message_definition.offset #=> Float
@@ -3589,6 +3595,7 @@ module Aws::IoTFleetWise
     #           factor: 1.0, # required
     #           length: 1, # required
     #           name: "CanSignalName",
+    #           signal_value_type: "INTEGER", # accepts INTEGER, FLOATING_POINT
     #         },
     #         obd_signal: {
     #           pid_response_length: 1, # required
@@ -3600,6 +3607,8 @@ module Aws::IoTFleetWise
     #           byte_length: 1, # required
     #           bit_right_shift: 1,
     #           bit_mask_length: 1,
+    #           is_signed: false,
+    #           signal_value_type: "INTEGER", # accepts INTEGER, FLOATING_POINT
     #         },
     #         message_signal: {
     #           topic_name: "TopicName", # required
@@ -3649,6 +3658,7 @@ module Aws::IoTFleetWise
     #           factor: 1.0, # required
     #           length: 1, # required
     #           name: "CanSignalName",
+    #           signal_value_type: "INTEGER", # accepts INTEGER, FLOATING_POINT
     #         },
     #         obd_signal: {
     #           pid_response_length: 1, # required
@@ -3660,6 +3670,8 @@ module Aws::IoTFleetWise
     #           byte_length: 1, # required
     #           bit_right_shift: 1,
     #           bit_mask_length: 1,
+    #           is_signed: false,
+    #           signal_value_type: "INTEGER", # accepts INTEGER, FLOATING_POINT
     #         },
     #         message_signal: {
     #           topic_name: "TopicName", # required
@@ -4193,7 +4205,7 @@ module Aws::IoTFleetWise
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iotfleetwise'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

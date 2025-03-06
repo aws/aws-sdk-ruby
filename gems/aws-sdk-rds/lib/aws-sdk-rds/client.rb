@@ -3085,13 +3085,14 @@ module Aws::RDS
     #
     #   The following values are valid for each DB engine:
     #
-    #   * Aurora MySQL - `audit | error | general | instance | slowquery`
+    #   * Aurora MySQL - `audit | error | general | instance | slowquery |
+    #     iam-db-auth-error`
     #
-    #   * Aurora PostgreSQL - `instance | postgresql`
+    #   * Aurora PostgreSQL - `instance | postgresql | iam-db-auth-error`
     #
-    #   * RDS for MySQL - `error | general | slowquery`
+    #   * RDS for MySQL - `error | general | slowquery | iam-db-auth-error`
     #
-    #   * RDS for PostgreSQL - `postgresql | upgrade`
+    #   * RDS for PostgreSQL - `postgresql | upgrade | iam-db-auth-error`
     #
     #   For more information about exporting CloudWatch Logs for Amazon RDS,
     #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the
@@ -5177,7 +5178,7 @@ module Aws::RDS
     #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
     #   Default: `io1`, if the `Iops` parameter is specified. Otherwise,
-    #   `gp2`.
+    #   `gp3`.
     #
     # @option params [String] :tde_credential_arn
     #   The ARN from the key store with which to associate the instance for
@@ -5448,17 +5449,19 @@ module Aws::RDS
     #
     #   The following values are valid for each DB engine:
     #
-    #   * RDS for Db2 - `diag.log | notify.log`
+    #   * RDS for Db2 - `diag.log | notify.log | iam-db-auth-error`
     #
-    #   * RDS for MariaDB - `audit | error | general | slowquery`
+    #   * RDS for MariaDB - `audit | error | general | slowquery |
+    #     iam-db-auth-error`
     #
     #   * RDS for Microsoft SQL Server - `agent | error`
     #
-    #   * RDS for MySQL - `audit | error | general | slowquery`
+    #   * RDS for MySQL - `audit | error | general | slowquery |
+    #     iam-db-auth-error`
     #
     #   * RDS for Oracle - `alert | audit | listener | trace | oemagent`
     #
-    #   * RDS for PostgreSQL - `postgresql | upgrade`
+    #   * RDS for PostgreSQL - `postgresql | upgrade | iam-db-auth-error`
     #
     #
     #
@@ -6302,7 +6305,7 @@ module Aws::RDS
     #
     #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
-    #   Default: `io1` if the `Iops` parameter is specified. Otherwise, `gp2`.
+    #   Default: `io1` if the `Iops` parameter is specified. Otherwise, `gp3`.
     #
     # @option params [Boolean] :copy_tags_to_snapshot
     #   Specifies whether to copy all tags from the read replica to snapshots
@@ -19004,13 +19007,14 @@ module Aws::RDS
     #
     #   The following values are valid for each DB engine:
     #
-    #   * Aurora MySQL - `audit | error | general | instance | slowquery`
+    #   * Aurora MySQL - `audit | error | general | instance | slowquery |
+    #     iam-db-auth-error`
     #
-    #   * Aurora PostgreSQL - `instance | postgresql`
+    #   * Aurora PostgreSQL - `instance | postgresql | iam-db-auth-error`
     #
-    #   * RDS for MySQL - `error | general | slowquery`
+    #   * RDS for MySQL - `error | general | slowquery | iam-db-auth-error`
     #
-    #   * RDS for PostgreSQL - `postgresql | upgrade`
+    #   * RDS for PostgreSQL - `postgresql | upgrade | iam-db-auth-error`
     #
     #   For more information about exporting CloudWatch Logs for Amazon RDS,
     #   see [ Publishing Database Logs to Amazon CloudWatch Logs][1] in the
@@ -20976,13 +20980,14 @@ module Aws::RDS
     #
     #   The following values are valid for each DB engine:
     #
-    #   * Aurora MySQL - `audit | error | general | slowquery`
+    #   * Aurora MySQL - `audit | error | general | slowquery |
+    #     iam-db-auth-error`
     #
-    #   * Aurora PostgreSQL - `postgresql`
+    #   * Aurora PostgreSQL - `postgresql | iam-db-auth-error`
     #
-    #   * RDS for MySQL - `error | general | slowquery`
+    #   * RDS for MySQL - `error | general | slowquery | iam-db-auth-error`
     #
-    #   * RDS for PostgreSQL - `postgresql | upgrade`
+    #   * RDS for PostgreSQL - `postgresql | upgrade | iam-db-auth-error`
     #
     #   For more information about exporting CloudWatch Logs for Amazon RDS,
     #   see [ Publishing Database Logs to Amazon CloudWatch Logs][1] in the
@@ -25052,12 +25057,12 @@ module Aws::RDS
     #
     #   **Aurora MySQL**
     #
-    #   Possible values are `audit`, `error`, `general`, `instance`, and
-    #   `slowquery`.
+    #   Possible values are `audit`, `error`, `general`, `instance`,
+    #   `slowquery`, and `iam-db-auth-error`.
     #
     #   **Aurora PostgreSQL**
     #
-    #   Possible value are `instance` and `postgresql`.
+    #   Possible value are `instance`, `postgresql`, and `iam-db-auth-error`.
     #
     #   For more information about exporting CloudWatch Logs for Amazon RDS,
     #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the
@@ -25728,20 +25733,21 @@ module Aws::RDS
     #
     #   **RDS for MySQL**
     #
-    #   Possible values are `error`, `general`, and `slowquery`.
+    #   Possible values are `error`, `general`, `slowquery`, and
+    #   `iam-db-auth-error`.
     #
     #   **RDS for PostgreSQL**
     #
-    #   Possible values are `postgresql` and `upgrade`.
+    #   Possible values are `postgresql`, `upgrade`, and `iam-db-auth-error`.
     #
     #   **Aurora MySQL**
     #
-    #   Possible values are `audit`, `error`, `general`, `instance`, and
-    #   `slowquery`.
+    #   Possible values are `audit`, `error`, `general`, `instance`,
+    #   `slowquery`, and `iam-db-auth-error`.
     #
     #   **Aurora PostgreSQL**
     #
-    #   Possible value are `instance` and `postgresql`.
+    #   Possible value are `instance`, `postgresql`, and `iam-db-auth-error`.
     #
     #   For more information about exporting CloudWatch Logs for Amazon RDS,
     #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the
@@ -26527,20 +26533,21 @@ module Aws::RDS
     #
     #   **RDS for MySQL**
     #
-    #   Possible values are `error`, `general`, and `slowquery`.
+    #   Possible values are `error`, `general`, `slowquery`, and
+    #   `iam-db-auth-error`.
     #
     #   **RDS for PostgreSQL**
     #
-    #   Possible values are `postgresql` and `upgrade`.
+    #   Possible values are `postgresql`, `upgrade`, and `iam-db-auth-error`.
     #
     #   **Aurora MySQL**
     #
-    #   Possible values are `audit`, `error`, `general`, `instance`, and
-    #   `slowquery`.
+    #   Possible values are `audit`, `error`, `general`, `instance`,
+    #   `slowquery`, and `iam-db-auth-error`.
     #
     #   **Aurora PostgreSQL**
     #
-    #   Possible value are `instance` and `postgresql`.
+    #   Possible value are `instance`, `postgresql`, and `iam-db-auth-error`.
     #
     #   For more information about exporting CloudWatch Logs for Amazon RDS,
     #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the
@@ -27392,7 +27399,7 @@ module Aws::RDS
     #   If you specify `io1`, `io2`, or `gp3`, you must also include a value
     #   for the `Iops` parameter.
     #
-    #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
+    #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp3`
     #
     # @option params [String] :tde_credential_arn
     #   The ARN from the key store with which to associate the instance for
@@ -29106,7 +29113,7 @@ module Aws::RDS
     #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
     #   Default: `io1`, if the `Iops` parameter is specified. Otherwise,
-    #   `gp2`.
+    #   `gp3`.
     #
     #   Constraints:
     #
@@ -30569,21 +30576,24 @@ module Aws::RDS
     # Starts an export of DB snapshot or DB cluster data to Amazon S3. The
     # provided IAM role must have access to the S3 bucket.
     #
-    # You can't export snapshot data from Db2 or RDS Custom DB instances.
+    # You can't export snapshot data from RDS Custom DB instances. For more
+    # information, see [ Supported Regions and DB engines for exporting
+    # snapshots to S3 in Amazon RDS][1].
     #
     # For more information on exporting DB snapshot data, see [Exporting DB
-    # snapshot data to Amazon S3][1] in the *Amazon RDS User Guide* or
-    # [Exporting DB cluster snapshot data to Amazon S3][2] in the *Amazon
+    # snapshot data to Amazon S3][2] in the *Amazon RDS User Guide* or
+    # [Exporting DB cluster snapshot data to Amazon S3][3] in the *Amazon
     # Aurora User Guide*.
     #
     # For more information on exporting DB cluster data, see [Exporting DB
-    # cluster data to Amazon S3][3] in the *Amazon Aurora User Guide*.
+    # cluster data to Amazon S3][4] in the *Amazon Aurora User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ExportSnapshot.html
-    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-export-snapshot.html
-    # [3]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/export-cluster-data.html
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RDS_Fea_Regions_DB-eng.Feature.ExportSnapshotToS3.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ExportSnapshot.html
+    # [3]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-export-snapshot.html
+    # [4]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/export-cluster-data.html
     #
     # @option params [required, String] :export_task_identifier
     #   A unique identifier for the export task. This ID isn't an identifier
@@ -31886,7 +31896,7 @@ module Aws::RDS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.271.0'
+      context[:gem_version] = '1.272.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

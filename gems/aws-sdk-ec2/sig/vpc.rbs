@@ -33,6 +33,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Vpc.html#is_default-instance_method
       def is_default: () -> bool
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Vpc.html#encryption_control-instance_method
+      def encryption_control: () -> Types::VpcEncryptionControl
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Vpc.html#tags-instance_method
       def tags: () -> ::Array[Types::Tag]
 

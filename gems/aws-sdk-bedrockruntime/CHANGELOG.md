@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2025-03-05)
+------------------
+
+* Feature - This releases adds support for Custom Prompt Router ARN
+
 1.39.0 (2025-02-24)
 ------------------
 

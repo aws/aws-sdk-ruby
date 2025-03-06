@@ -29,20 +29,29 @@ module Aws::CloudWatch
   # ## Error Classes
   # * {ConcurrentModificationException}
   # * {DashboardInvalidInputError}
+  #    * This error class is not used. `InvalidParameterInput` is used during parsing instead.
   # * {DashboardNotFoundError}
+  #    * This error class is not used. `ResourceNotFound` is used during parsing instead.
   # * {InternalServiceFault}
+  #    * This error class is not used. `InternalServiceError` is used during parsing instead.
   # * {InvalidFormatFault}
+  #    * This error class is not used. `InvalidFormat` is used during parsing instead.
   # * {InvalidNextToken}
   # * {InvalidParameterCombinationException}
+  #    * This error class is not used. `InvalidParameterCombination` is used during parsing instead.
   # * {InvalidParameterValueException}
+  #    * This error class is not used. `InvalidParameterValue` is used during parsing instead.
   # * {LimitExceededException}
   # * {LimitExceededFault}
+  #    * This error class is not used. `LimitExceeded` is used during parsing instead.
   # * {MissingRequiredParameterException}
+  #    * This error class is not used. `MissingParameter` is used during parsing instead.
   # * {ResourceNotFound}
   # * {ResourceNotFoundException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
+  # Some existing error classes may use a different class name than the one documented.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -57,6 +66,8 @@ module Aws::CloudWatch
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidParameterInput` instead.
     class DashboardInvalidInputError < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -77,6 +88,8 @@ module Aws::CloudWatch
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ResourceNotFound` instead.
     class DashboardNotFoundError < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -92,6 +105,8 @@ module Aws::CloudWatch
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InternalServiceError` instead.
     class InternalServiceFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -107,6 +122,8 @@ module Aws::CloudWatch
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidFormat` instead.
     class InvalidFormatFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -137,6 +154,8 @@ module Aws::CloudWatch
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidParameterCombination` instead.
     class InvalidParameterCombinationException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -152,6 +171,8 @@ module Aws::CloudWatch
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidParameterValue` instead.
     class InvalidParameterValueException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -177,6 +198,8 @@ module Aws::CloudWatch
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `LimitExceeded` instead.
     class LimitExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -192,6 +215,8 @@ module Aws::CloudWatch
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `MissingParameter` instead.
     class MissingRequiredParameterException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context

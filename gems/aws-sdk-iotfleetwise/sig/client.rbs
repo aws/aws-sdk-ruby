@@ -287,7 +287,8 @@ module Aws
                                            offset: ::Float,
                                            factor: ::Float,
                                            length: ::Integer,
-                                           name: ::String?
+                                           name: ::String?,
+                                           signal_value_type: ("INTEGER" | "FLOATING_POINT")?
                                          }?,
                                          obd_signal: {
                                            pid_response_length: ::Integer,
@@ -298,7 +299,9 @@ module Aws
                                            start_byte: ::Integer,
                                            byte_length: ::Integer,
                                            bit_right_shift: ::Integer?,
-                                           bit_mask_length: ::Integer?
+                                           bit_mask_length: ::Integer?,
+                                           is_signed: bool?,
+                                           signal_value_type: ("INTEGER" | "FLOATING_POINT")?
                                          }?,
                                          message_signal: {
                                            topic_name: ::String,
@@ -1147,7 +1150,8 @@ module Aws
                                            offset: ::Float,
                                            factor: ::Float,
                                            length: ::Integer,
-                                           name: ::String?
+                                           name: ::String?,
+                                           signal_value_type: ("INTEGER" | "FLOATING_POINT")?
                                          }?,
                                          obd_signal: {
                                            pid_response_length: ::Integer,
@@ -1158,7 +1162,9 @@ module Aws
                                            start_byte: ::Integer,
                                            byte_length: ::Integer,
                                            bit_right_shift: ::Integer?,
-                                           bit_mask_length: ::Integer?
+                                           bit_mask_length: ::Integer?,
+                                           is_signed: bool?,
+                                           signal_value_type: ("INTEGER" | "FLOATING_POINT")?
                                          }?,
                                          message_signal: {
                                            topic_name: ::String,
@@ -1203,7 +1209,8 @@ module Aws
                                            offset: ::Float,
                                            factor: ::Float,
                                            length: ::Integer,
-                                           name: ::String?
+                                           name: ::String?,
+                                           signal_value_type: ("INTEGER" | "FLOATING_POINT")?
                                          }?,
                                          obd_signal: {
                                            pid_response_length: ::Integer,
@@ -1214,7 +1221,9 @@ module Aws
                                            start_byte: ::Integer,
                                            byte_length: ::Integer,
                                            bit_right_shift: ::Integer?,
-                                           bit_mask_length: ::Integer?
+                                           bit_mask_length: ::Integer?,
+                                           is_signed: bool?,
+                                           signal_value_type: ("INTEGER" | "FLOATING_POINT")?
                                          }?,
                                          message_signal: {
                                            topic_name: ::String,

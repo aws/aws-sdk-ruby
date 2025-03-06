@@ -1999,6 +1999,21 @@ module Aws::IoTSiteWise
     #   The gateway's platform. You can only specify one platform in a
     #   gateway.
     #
+    # @option params [String] :gateway_version
+    #   The version of the gateway to create. Specify `3` to create an
+    #   MQTT-enabled, V3 gateway and `2` To create a Classic streams, V2
+    #   gateway. If the version isn't specified, a Classic streams, V2
+    #   gateway is created by default.
+    #
+    #   We recommend creating an MQTT-enabled, V3 gateway for self-hosted
+    #   gateways. SiteWise Edge gateways on Siemens Industrial Edge should use
+    #   gateway version `2`. For more information on gateway versions, see [
+    #   Self-host a SiteWise Edge gateway with IoT Greengrass V2][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/gw-self-host-gg2.html
+    #
     # @option params [Hash<String,String>] :tags
     #   A list of key-value pairs that contain metadata for the gateway. For
     #   more information, see [Tagging your IoT SiteWise resources][1] in the
@@ -2023,11 +2038,13 @@ module Aws::IoTSiteWise
     #       },
     #       greengrass_v2: {
     #         core_device_thing_name: "CoreDeviceThingName", # required
+    #         core_device_operating_system: "LINUX_AARCH64", # accepts LINUX_AARCH64, LINUX_AMD64, WINDOWS_AMD64
     #       },
     #       siemens_ie: {
     #         iot_core_thing_name: "IotCoreThingName", # required
     #       },
     #     },
+    #     gateway_version: "GatewayVersion",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -3645,6 +3662,7 @@ module Aws::IoTSiteWise
     #   * {Types::DescribeGatewayResponse#gateway_name #gateway_name} => String
     #   * {Types::DescribeGatewayResponse#gateway_arn #gateway_arn} => String
     #   * {Types::DescribeGatewayResponse#gateway_platform #gateway_platform} => Types::GatewayPlatform
+    #   * {Types::DescribeGatewayResponse#gateway_version #gateway_version} => String
     #   * {Types::DescribeGatewayResponse#gateway_capability_summaries #gateway_capability_summaries} => Array&lt;Types::GatewayCapabilitySummary&gt;
     #   * {Types::DescribeGatewayResponse#creation_date #creation_date} => Time
     #   * {Types::DescribeGatewayResponse#last_update_date #last_update_date} => Time
@@ -3662,7 +3680,9 @@ module Aws::IoTSiteWise
     #   resp.gateway_arn #=> String
     #   resp.gateway_platform.greengrass.group_arn #=> String
     #   resp.gateway_platform.greengrass_v2.core_device_thing_name #=> String
+    #   resp.gateway_platform.greengrass_v2.core_device_operating_system #=> String, one of "LINUX_AARCH64", "LINUX_AMD64", "WINDOWS_AMD64"
     #   resp.gateway_platform.siemens_ie.iot_core_thing_name #=> String
+    #   resp.gateway_version #=> String
     #   resp.gateway_capability_summaries #=> Array
     #   resp.gateway_capability_summaries[0].capability_namespace #=> String
     #   resp.gateway_capability_summaries[0].capability_sync_status #=> String, one of "IN_SYNC", "OUT_OF_SYNC", "SYNC_FAILED", "UNKNOWN", "NOT_APPLICABLE"
@@ -5809,7 +5829,9 @@ module Aws::IoTSiteWise
     #   resp.gateway_summaries[0].gateway_name #=> String
     #   resp.gateway_summaries[0].gateway_platform.greengrass.group_arn #=> String
     #   resp.gateway_summaries[0].gateway_platform.greengrass_v2.core_device_thing_name #=> String
+    #   resp.gateway_summaries[0].gateway_platform.greengrass_v2.core_device_operating_system #=> String, one of "LINUX_AARCH64", "LINUX_AMD64", "WINDOWS_AMD64"
     #   resp.gateway_summaries[0].gateway_platform.siemens_ie.iot_core_thing_name #=> String
+    #   resp.gateway_summaries[0].gateway_version #=> String
     #   resp.gateway_summaries[0].gateway_capability_summaries #=> Array
     #   resp.gateway_summaries[0].gateway_capability_summaries[0].capability_namespace #=> String
     #   resp.gateway_summaries[0].gateway_capability_summaries[0].capability_sync_status #=> String, one of "IN_SYNC", "OUT_OF_SYNC", "SYNC_FAILED", "UNKNOWN", "NOT_APPLICABLE"
@@ -7431,7 +7453,7 @@ module Aws::IoTSiteWise
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.83.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

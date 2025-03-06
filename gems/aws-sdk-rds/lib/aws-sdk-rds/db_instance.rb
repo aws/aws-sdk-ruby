@@ -1755,7 +1755,7 @@ module Aws::RDS
     #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
     #   Default: `io1`, if the `Iops` parameter is specified. Otherwise,
-    #   `gp2`.
+    #   `gp3`.
     # @option options [String] :tde_credential_arn
     #   The ARN from the key store with which to associate the instance for
     #   TDE encryption.
@@ -2005,17 +2005,19 @@ module Aws::RDS
     #
     #   The following values are valid for each DB engine:
     #
-    #   * RDS for Db2 - `diag.log | notify.log`
+    #   * RDS for Db2 - `diag.log | notify.log | iam-db-auth-error`
     #
-    #   * RDS for MariaDB - `audit | error | general | slowquery`
+    #   * RDS for MariaDB - `audit | error | general | slowquery |
+    #     iam-db-auth-error`
     #
     #   * RDS for Microsoft SQL Server - `agent | error`
     #
-    #   * RDS for MySQL - `audit | error | general | slowquery`
+    #   * RDS for MySQL - `audit | error | general | slowquery |
+    #     iam-db-auth-error`
     #
     #   * RDS for Oracle - `alert | audit | listener | trace | oemagent`
     #
-    #   * RDS for PostgreSQL - `postgresql | upgrade`
+    #   * RDS for PostgreSQL - `postgresql | upgrade | iam-db-auth-error`
     #
     #
     #
@@ -2475,7 +2477,7 @@ module Aws::RDS
     #
     #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
-    #   Default: `io1` if the `Iops` parameter is specified. Otherwise, `gp2`.
+    #   Default: `io1` if the `Iops` parameter is specified. Otherwise, `gp3`.
     # @option options [Boolean] :copy_tags_to_snapshot
     #   Specifies whether to copy all tags from the read replica to snapshots
     #   of the read replica. By default, tags aren't copied.
@@ -3861,13 +3863,14 @@ module Aws::RDS
     #
     #   The following values are valid for each DB engine:
     #
-    #   * Aurora MySQL - `audit | error | general | slowquery`
+    #   * Aurora MySQL - `audit | error | general | slowquery |
+    #     iam-db-auth-error`
     #
-    #   * Aurora PostgreSQL - `postgresql`
+    #   * Aurora PostgreSQL - `postgresql | iam-db-auth-error`
     #
-    #   * RDS for MySQL - `error | general | slowquery`
+    #   * RDS for MySQL - `error | general | slowquery | iam-db-auth-error`
     #
-    #   * RDS for PostgreSQL - `postgresql | upgrade`
+    #   * RDS for PostgreSQL - `postgresql | upgrade | iam-db-auth-error`
     #
     #   For more information about exporting CloudWatch Logs for Amazon RDS,
     #   see [ Publishing Database Logs to Amazon CloudWatch Logs][1] in the
@@ -4548,7 +4551,7 @@ module Aws::RDS
     #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
     #   Default: `io1`, if the `Iops` parameter is specified. Otherwise,
-    #   `gp2`.
+    #   `gp3`.
     #
     #   Constraints:
     #

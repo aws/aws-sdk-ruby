@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.1061.0 (2025-03-05)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::GameLiftStreams`.
+
+1.1060.0 (2025-03-04)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::IoTManagedIntegrations`.
+
+1.1059.0 (2025-03-03)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1058.0 (2025-02-28)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1057.0 (2025-02-27)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.1056.0 (2025-02-26)
 ------------------
 

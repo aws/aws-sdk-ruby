@@ -634,6 +634,47 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
+    # A block of content that you pass to, or receive from, a Amazon Bedrock
+    # session in an invocation step. You pass the content to a session in
+    # the `payLoad` of the [PutInvocationStep][1] API operation. You
+    # retrieve the content with the [GetInvocationStep][2] API operation.
+    #
+    # For more information about sessions, see [Store and retrieve
+    # conversation history and context with Amazon Bedrock sessions][3].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_PutInvocationStep.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_GetInvocationStep.html
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html
+    #
+    # @note BedrockSessionContentBlock is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note BedrockSessionContentBlock is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of BedrockSessionContentBlock corresponding to the set member.
+    #
+    # @!attribute [rw] image
+    #   The image in the invocation step.
+    #   @return [Types::ImageBlock]
+    #
+    # @!attribute [rw] text
+    #   The text in the invocation step.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/BedrockSessionContentBlock AWS API Documentation
+    #
+    class BedrockSessionContentBlock < Struct.new(
+      :image,
+      :text,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Image < BedrockSessionContentBlock; end
+      class Text < BedrockSessionContentBlock; end
+      class Unknown < BedrockSessionContentBlock; end
+    end
+
     # This property contains the document to chat with, along with its
     # attributes.
     #
@@ -883,6 +924,113 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
+    # @!attribute [rw] description
+    #   A description for the interactions in the invocation. For example,
+    #   "User asking about weather in Seattle".
+    #   @return [String]
+    #
+    # @!attribute [rw] invocation_id
+    #   A unique identifier for the invocation in UUID format.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_identifier
+    #   The unique identifier for the associated session for the invocation.
+    #   You can specify either the session's `sessionId` or its Amazon
+    #   Resource Name (ARN).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/CreateInvocationRequest AWS API Documentation
+    #
+    class CreateInvocationRequest < Struct.new(
+      :description,
+      :invocation_id,
+      :session_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] created_at
+    #   The timestamp for when the invocation was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] invocation_id
+    #   The unique identifier for the invocation.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The unique identifier for the session associated with the
+    #   invocation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/CreateInvocationResponse AWS API Documentation
+    #
+    class CreateInvocationResponse < Struct.new(
+      :created_at,
+      :invocation_id,
+      :session_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] encryption_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key to use to encrypt the
+    #   session data. The user or role creating the session must have
+    #   permission to use the key. For more information, see [Amazon Bedrock
+    #   session encryption][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/session-encryption.html
+    #   @return [String]
+    #
+    # @!attribute [rw] session_metadata
+    #   A map of key-value pairs containing attributes to be persisted
+    #   across the session. For example, the user's ID, their language
+    #   preference, and the type of device they are using.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] tags
+    #   Specify the key-value pairs for the tags that you want to attach to
+    #   the session.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/CreateSessionRequest AWS API Documentation
+    #
+    class CreateSessionRequest < Struct.new(
+      :encryption_key_arn,
+      :session_metadata,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] created_at
+    #   The timestamp for when the session was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] session_arn
+    #   The Amazon Resource Name (ARN) of the created session.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The unique identifier for the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_status
+    #   The current status of the session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/CreateSessionResponse AWS API Documentation
+    #
+    class CreateSessionResponse < Struct.new(
+      :created_at,
+      :session_arn,
+      :session_id,
+      :session_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The trace behavior for the custom orchestration.
     #
     # @!attribute [rw] event
@@ -949,6 +1097,23 @@ module Aws::BedrockAgentRuntime
     #
     class DeleteAgentMemoryResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] session_identifier
+    #   The unique identifier for the session to be deleted. You can specify
+    #   either the session's `sessionId` or its Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/DeleteSessionRequest AWS API Documentation
+    #
+    class DeleteSessionRequest < Struct.new(
+      :session_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/DeleteSessionResponse AWS API Documentation
+    #
+    class DeleteSessionResponse < Aws::EmptyStructure; end
+
     # There was an issue with a dependency. Check the resource
     # configurations and retry the request.
     #
@@ -966,6 +1131,41 @@ module Aws::BedrockAgentRuntime
       :message,
       :resource_name,
       :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] session_identifier
+    #   The unique identifier for the session to end. You can specify either
+    #   the session's `sessionId` or its Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/EndSessionRequest AWS API Documentation
+    #
+    class EndSessionRequest < Struct.new(
+      :session_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] session_arn
+    #   The Amazon Resource Name (ARN) of the session you ended.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The unique identifier of the session you ended.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_status
+    #   The current status of the session you ended.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/EndSessionResponse AWS API Documentation
+    #
+    class EndSessionResponse < Struct.new(
+      :session_arn,
+      :session_id,
+      :session_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2022,6 +2222,105 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
+    # @!attribute [rw] invocation_identifier
+    #   The unique identifier for the invocation in UUID format.
+    #   @return [String]
+    #
+    # @!attribute [rw] invocation_step_id
+    #   The unique identifier (in UUID format) for the specific invocation
+    #   step to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_identifier
+    #   The unique identifier for the invocation step's associated session.
+    #   You can specify either the session's `sessionId` or its Amazon
+    #   Resource Name (ARN).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GetInvocationStepRequest AWS API Documentation
+    #
+    class GetInvocationStepRequest < Struct.new(
+      :invocation_identifier,
+      :invocation_step_id,
+      :session_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] invocation_step
+    #   The complete details of the requested invocation step.
+    #   @return [Types::InvocationStep]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GetInvocationStepResponse AWS API Documentation
+    #
+    class GetInvocationStepResponse < Struct.new(
+      :invocation_step)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] session_identifier
+    #   A unique identifier for the session to retrieve. You can specify
+    #   either the session's `sessionId` or its Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GetSessionRequest AWS API Documentation
+    #
+    class GetSessionRequest < Struct.new(
+      :session_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] created_at
+    #   The timestamp for when the session was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] encryption_key_arn
+    #   The Amazon Resource Name (ARN) of the Key Management Service key
+    #   used to encrypt the session data. For more information, see [Amazon
+    #   Bedrock session encryption][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/session-encryption.html
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp for when the session was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] session_arn
+    #   The Amazon Resource Name (ARN) of the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The unique identifier for the session in UUID format.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_metadata
+    #   A map of key-value pairs containing attributes persisted across the
+    #   session.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] session_status
+    #   The current status of the session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GetSessionResponse AWS API Documentation
+    #
+    class GetSessionResponse < Struct.new(
+      :created_at,
+      :encryption_key_arn,
+      :last_updated_at,
+      :session_arn,
+      :session_id,
+      :session_metadata,
+      :session_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Assessment details of the content analyzed by Guardrails.
     #
     # @!attribute [rw] content_policy
@@ -2347,6 +2646,55 @@ module Aws::BedrockAgentRuntime
       :managed_word_lists)
       SENSITIVE = [:custom_words, :managed_word_lists]
       include Aws::Structure
+    end
+
+    # Image content for an invocation step.
+    #
+    # @!attribute [rw] format
+    #   The format of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source for the image.
+    #   @return [Types::ImageSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ImageBlock AWS API Documentation
+    #
+    class ImageBlock < Struct.new(
+      :format,
+      :source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The source for an image.
+    #
+    # @note ImageSource is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ImageSource is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ImageSource corresponding to the set member.
+    #
+    # @!attribute [rw] bytes
+    #   The raw image bytes for the image. If you use an Amazon Web Services
+    #   SDK, you don't need to encode the image bytes in base64.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_location
+    #   The path to the Amazon S3 bucket where the image is stored.
+    #   @return [Types::S3Location]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ImageSource AWS API Documentation
+    #
+    class ImageSource < Struct.new(
+      :bytes,
+      :s3_location,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Bytes < ImageSource; end
+      class S3Location < ImageSource; end
+      class Unknown < ImageSource; end
     end
 
     # Settings for implicit filtering, where a model generates a metadata
@@ -2812,6 +3160,138 @@ module Aws::BedrockAgentRuntime
       class ApiResult < InvocationResultMember; end
       class FunctionResult < InvocationResultMember; end
       class Unknown < InvocationResultMember; end
+    end
+
+    # Stores fine-grained state checkpoints, including text and images, for
+    # each interaction in an invocation in a session. For more information
+    # about sessions, see [Store and retrieve conversation history and
+    # context with Amazon Bedrock sessions][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html
+    #
+    # @!attribute [rw] invocation_id
+    #   The unique identifier (in UUID format) for the invocation that
+    #   includes the invocation step.
+    #   @return [String]
+    #
+    # @!attribute [rw] invocation_step_id
+    #   The unique identifier (in UUID format) for the invocation step.
+    #   @return [String]
+    #
+    # @!attribute [rw] invocation_step_time
+    #   The timestamp for when the invocation step was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] payload
+    #   Payload content, such as text and images, for the invocation step.
+    #   @return [Types::InvocationStepPayload]
+    #
+    # @!attribute [rw] session_id
+    #   The unique identifier of the session containing the invocation step.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/InvocationStep AWS API Documentation
+    #
+    class InvocationStep < Struct.new(
+      :invocation_id,
+      :invocation_step_id,
+      :invocation_step_time,
+      :payload,
+      :session_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Payload content, such as text and images, for the invocation step.
+    #
+    # @note InvocationStepPayload is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note InvocationStepPayload is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of InvocationStepPayload corresponding to the set member.
+    #
+    # @!attribute [rw] content_blocks
+    #   The content for the invocation step.
+    #   @return [Array<Types::BedrockSessionContentBlock>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/InvocationStepPayload AWS API Documentation
+    #
+    class InvocationStepPayload < Struct.new(
+      :content_blocks,
+      :unknown)
+      SENSITIVE = [:content_blocks]
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ContentBlocks < InvocationStepPayload; end
+      class Unknown < InvocationStepPayload; end
+    end
+
+    # Contains details about an invocation step within an invocation in a
+    # session. For more information about sessions, see [Store and retrieve
+    # conversation history and context with Amazon Bedrock sessions][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html
+    #
+    # @!attribute [rw] invocation_id
+    #   A unique identifier for the invocation in UUID format.
+    #   @return [String]
+    #
+    # @!attribute [rw] invocation_step_id
+    #   The unique identifier (in UUID format) for the invocation step.
+    #   @return [String]
+    #
+    # @!attribute [rw] invocation_step_time
+    #   The timestamp for when the invocation step was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] session_id
+    #   The unique identifier for the session associated with the invocation
+    #   step.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/InvocationStepSummary AWS API Documentation
+    #
+    class InvocationStepSummary < Struct.new(
+      :invocation_id,
+      :invocation_step_id,
+      :invocation_step_time,
+      :session_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about an invocation in a session. For more
+    # information about sessions, see [Store and retrieve conversation
+    # history and context with Amazon Bedrock sessions][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp for when the invocation was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] invocation_id
+    #   A unique identifier for the invocation in UUID format.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The unique identifier for the session associated with the
+    #   invocation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/InvocationSummary AWS API Documentation
+    #
+    class InvocationSummary < Struct.new(
+      :created_at,
+      :invocation_id,
+      :session_id)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # @!attribute [rw] agent_alias_id
@@ -3467,6 +3947,182 @@ module Aws::BedrockAgentRuntime
       :override_search_type,
       :reranking_configuration)
       SENSITIVE = [:filter]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] invocation_identifier
+    #   The unique identifier (in UUID format) for the invocation to list
+    #   invocation steps for.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response. If the
+    #   total number of results is greater than this value, use the token
+    #   returned in the response in the `nextToken` field when making
+    #   another request to return the next batch of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, enter the token returned in the
+    #   `nextToken` field in the response in this field to return the next
+    #   batch of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_identifier
+    #   The unique identifier for the session associated with the invocation
+    #   steps. You can specify either the session's `sessionId` or its
+    #   Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ListInvocationStepsRequest AWS API Documentation
+    #
+    class ListInvocationStepsRequest < Struct.new(
+      :invocation_identifier,
+      :max_results,
+      :next_token,
+      :session_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] invocation_step_summaries
+    #   A list of summaries for each invocation step associated with a
+    #   session and if you specified it, an invocation within the session.
+    #   @return [Array<Types::InvocationStepSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, use this token when making another
+    #   request in the `nextToken` field to return the next batch of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ListInvocationStepsResponse AWS API Documentation
+    #
+    class ListInvocationStepsResponse < Struct.new(
+      :invocation_step_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response. If the
+    #   total number of results is greater than this value, use the token
+    #   returned in the response in the `nextToken` field when making
+    #   another request to return the next batch of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, enter the token returned in the
+    #   `nextToken` field in the response in this field to return the next
+    #   batch of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_identifier
+    #   The unique identifier for the session to list invocations for. You
+    #   can specify either the session's `sessionId` or its Amazon Resource
+    #   Name (ARN).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ListInvocationsRequest AWS API Documentation
+    #
+    class ListInvocationsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :session_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] invocation_summaries
+    #   A list of invocation summaries associated with the session.
+    #   @return [Array<Types::InvocationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, use this token when making another
+    #   request in the `nextToken` field to return the next batch of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ListInvocationsResponse AWS API Documentation
+    #
+    class ListInvocationsResponse < Struct.new(
+      :invocation_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response. If the
+    #   total number of results is greater than this value, use the token
+    #   returned in the response in the `nextToken` field when making
+    #   another request to return the next batch of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, enter the token returned in the
+    #   `nextToken` field in the response in this field to return the next
+    #   batch of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ListSessionsRequest AWS API Documentation
+    #
+    class ListSessionsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, use this token when making another
+    #   request in the `nextToken` field to return the next batch of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_summaries
+    #   A list of summaries for each session in your Amazon Web Services
+    #   account.
+    #   @return [Array<Types::SessionSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ListSessionsResponse AWS API Documentation
+    #
+    class ListSessionsResponse < Struct.new(
+      :next_token,
+      :session_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource for which to list
+    #   tags.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The key-value pairs for the tags associated with the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4487,6 +5143,54 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
+    # @!attribute [rw] invocation_identifier
+    #   The unique identifier (in UUID format) of the invocation to add the
+    #   invocation step to.
+    #   @return [String]
+    #
+    # @!attribute [rw] invocation_step_id
+    #   The unique identifier of the invocation step in UUID format.
+    #   @return [String]
+    #
+    # @!attribute [rw] invocation_step_time
+    #   The timestamp for when the invocation step occurred.
+    #   @return [Time]
+    #
+    # @!attribute [rw] payload
+    #   The payload for the invocation step, including text and images for
+    #   the interaction.
+    #   @return [Types::InvocationStepPayload]
+    #
+    # @!attribute [rw] session_identifier
+    #   The unique identifier for the session to add the invocation step to.
+    #   You can specify either the session's `sessionId` or its Amazon
+    #   Resource Name (ARN).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/PutInvocationStepRequest AWS API Documentation
+    #
+    class PutInvocationStepRequest < Struct.new(
+      :invocation_identifier,
+      :invocation_step_id,
+      :invocation_step_time,
+      :payload,
+      :session_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] invocation_step_id
+    #   The unique identifier of the invocation step in UUID format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/PutInvocationStepResponse AWS API Documentation
+    #
+    class PutInvocationStepResponse < Struct.new(
+      :invocation_step_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about a natural language query to transform into
     # SQL.
     #
@@ -5363,8 +6067,8 @@ module Aws::BedrockAgentRuntime
     #   The type of resource that contains your data for retrieving
     #   information and generating responses.
     #
-    #   If you choose ot use `EXTERNAL_SOURCES`, then currently only Claude
-    #   3 Sonnet models for knowledge bases are supported.
+    #   If you choose to use `EXTERNAL_SOURCES`, then currently only
+    #   Anthropic Claude 3 Sonnet models for knowledge bases are supported.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/RetrieveAndGenerateConfiguration AWS API Documentation
@@ -5828,6 +6532,20 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
+    # Information about the Amazon S3 bucket where the image is stored.
+    #
+    # @!attribute [rw] uri
+    #   The path to the Amazon S3 bucket where the image is stored.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/S3Location AWS API Documentation
+    #
+    class S3Location < Struct.new(
+      :uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The unique wrapper object of the document from the S3 location.
     #
     # @!attribute [rw] uri
@@ -5958,6 +6676,46 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
+    # Contains details about a session. For more information about sessions,
+    # see [Store and retrieve conversation history and context with Amazon
+    # Bedrock sessions][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/sessions.html
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp for when the session was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp for when the session was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] session_arn
+    #   The Amazon Resource Name (ARN) of the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The unique identifier for the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_status
+    #   The current status of the session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/SessionSummary AWS API Documentation
+    #
+    class SessionSummary < Struct.new(
+      :created_at,
+      :last_updated_at,
+      :session_arn,
+      :session_id,
+      :session_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about where the text with a citation begins and
     # ends in the generated output.
     #
@@ -6008,6 +6766,28 @@ module Aws::BedrockAgentRuntime
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   An object containing key-value pairs that define the tags to attach
+    #   to the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
 
     # Configuration settings for text generation using a language model via
     # the RetrieveAndGenerate operation. Includes parameters like
@@ -6305,6 +7085,80 @@ module Aws::BedrockAgentRuntime
     class TransformationConfiguration < Struct.new(
       :mode,
       :text_to_sql_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource from which to remove
+    #   tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of keys of the tags to remove from the resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] session_identifier
+    #   The unique identifier of the session to modify. You can specify
+    #   either the session's `sessionId` or its Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] session_metadata
+    #   A map of key-value pairs containing attributes to be persisted
+    #   across the session. For example the user's ID, their language
+    #   preference, and the type of device they are using.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/UpdateSessionRequest AWS API Documentation
+    #
+    class UpdateSessionRequest < Struct.new(
+      :session_identifier,
+      :session_metadata)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] created_at
+    #   The timestamp for when the session was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp for when the session was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] session_arn
+    #   The Amazon Resource Name (ARN) of the session that was updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The unique identifier of the session you updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_status
+    #   The status of the session you updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/UpdateSessionResponse AWS API Documentation
+    #
+    class UpdateSessionResponse < Struct.new(
+      :created_at,
+      :last_updated_at,
+      :session_arn,
+      :session_id,
+      :session_status)
       SENSITIVE = []
       include Aws::Structure
     end

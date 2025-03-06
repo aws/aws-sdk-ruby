@@ -1787,9 +1787,9 @@ module Aws::ElastiCache
     #   The name of the cache parameter group family that the cache parameter
     #   group can be used with.
     #
-    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
-    #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0`
-    #   \| `redis6.x` \| `redis7`
+    #   Valid values are: `valkey8` \| `valkey7` \| `memcached1.4` \|
+    #   `memcached1.5` \| `memcached1.6` \| `redis2.6` \| `redis2.8` \|
+    #   `redis3.2` \| `redis4.0` \| `redis5.0` \| `redis6.x` \| `redis7`
     #
     # @option params [required, String] :description
     #   A user-specified description for the cache parameter group.
@@ -3619,9 +3619,9 @@ module Aws::ElastiCache
     #
     # @option params [Array<Types::ConfigureShard>] :replica_configuration
     #   A list of `ConfigureShard` objects that can be used to configure each
-    #   shard in a Valkey or Redis OSS (cluster mode enabled) replication
-    #   group. The `ConfigureShard` has three members: `NewReplicaCount`,
-    #   `NodeGroupId`, and `PreferredAvailabilityZones`.
+    #   shard in a Valkey or Redis OSS replication group. The `ConfigureShard`
+    #   has three members: `NewReplicaCount`, `NodeGroupId`, and
+    #   `PreferredAvailabilityZones`.
     #
     # @option params [Array<String>] :replicas_to_remove
     #   A list of the node ids to remove from the replication group or node
@@ -11469,7 +11469,7 @@ module Aws::ElastiCache
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.123.0'
+      context[:gem_version] = '1.124.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

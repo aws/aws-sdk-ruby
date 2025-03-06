@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.124.0 (2025-03-04)
+------------------
+
+* Feature - Doc only update, listing 'valkey7' and 'valkey8' as engine options for parameter groups.
+
 1.123.0 (2025-02-24)
 ------------------
 

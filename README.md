@@ -557,6 +557,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Forecast Service                               | Aws::ForecastService                     | aws-sdk-forecastservice                     | 2018-06-26  |
 | Amazon Fraud Detector                                 | Aws::FraudDetector                       | aws-sdk-frauddetector                       | 2019-11-15  |
 | Amazon GameLift                                       | Aws::GameLift                            | aws-sdk-gamelift                            | 2015-10-01  |
+| Amazon GameLift Streams                               | Aws::GameLiftStreams                     | aws-sdk-gameliftstreams                     | 2018-05-10  |
 | Amazon Glacier                                        | Aws::Glacier                             | aws-sdk-glacier                             | 2012-06-01  |
 | Amazon GuardDuty                                      | Aws::GuardDuty                           | aws-sdk-guardduty                           | 2017-11-28  |
 | Amazon HealthLake                                     | Aws::HealthLake                          | aws-sdk-healthlake                          | 2017-07-01  |
@@ -685,6 +686,7 @@ RubyGems.org page under "LINKS" section.
 | MailManager                                           | Aws::MailManager                         | aws-sdk-mailmanager                         | 2023-10-17  |
 | Managed Streaming for Kafka                           | Aws::Kafka                               | aws-sdk-kafka                               | 2018-11-14  |
 | Managed Streaming for Kafka Connect                   | Aws::KafkaConnect                        | aws-sdk-kafkaconnect                        | 2021-09-14  |
+| Managed integrations for AWS IoT Device Management    | Aws::IoTManagedIntegrations              | aws-sdk-iotmanagedintegrations              | 2025-03-03  |
 | Migration Hub Strategy Recommendations                | Aws::MigrationHubStrategyRecommendations | aws-sdk-migrationhubstrategyrecommendations | 2020-02-19  |
 | Network Flow Monitor                                  | Aws::NetworkFlowMonitor                  | aws-sdk-networkflowmonitor                  | 2023-04-19  |
 | OpenSearch Service Serverless                         | Aws::OpenSearchServerless                | aws-sdk-opensearchserverless                | 2021-11-01  |

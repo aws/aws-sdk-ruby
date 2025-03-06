@@ -1338,13 +1338,14 @@ module Aws::RDS
     #
     #   The following values are valid for each DB engine:
     #
-    #   * Aurora MySQL - `audit | error | general | instance | slowquery`
+    #   * Aurora MySQL - `audit | error | general | instance | slowquery |
+    #     iam-db-auth-error`
     #
-    #   * Aurora PostgreSQL - `instance | postgresql`
+    #   * Aurora PostgreSQL - `instance | postgresql | iam-db-auth-error`
     #
-    #   * RDS for MySQL - `error | general | slowquery`
+    #   * RDS for MySQL - `error | general | slowquery | iam-db-auth-error`
     #
-    #   * RDS for PostgreSQL - `postgresql | upgrade`
+    #   * RDS for PostgreSQL - `postgresql | upgrade | iam-db-auth-error`
     #
     #   For more information about exporting CloudWatch Logs for Amazon RDS,
     #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the
@@ -2175,13 +2176,14 @@ module Aws::RDS
     #
     #   The following values are valid for each DB engine:
     #
-    #   * Aurora MySQL - `audit | error | general | instance | slowquery`
+    #   * Aurora MySQL - `audit | error | general | instance | slowquery |
+    #     iam-db-auth-error`
     #
-    #   * Aurora PostgreSQL - `instance | postgresql`
+    #   * Aurora PostgreSQL - `instance | postgresql | iam-db-auth-error`
     #
-    #   * RDS for MySQL - `error | general | slowquery`
+    #   * RDS for MySQL - `error | general | slowquery | iam-db-auth-error`
     #
-    #   * RDS for PostgreSQL - `postgresql | upgrade`
+    #   * RDS for PostgreSQL - `postgresql | upgrade | iam-db-auth-error`
     #
     #   For more information about exporting CloudWatch Logs for Amazon RDS,
     #   see [ Publishing Database Logs to Amazon CloudWatch Logs][1] in the
@@ -2899,20 +2901,21 @@ module Aws::RDS
     #
     #   **RDS for MySQL**
     #
-    #   Possible values are `error`, `general`, and `slowquery`.
+    #   Possible values are `error`, `general`, `slowquery`, and
+    #   `iam-db-auth-error`.
     #
     #   **RDS for PostgreSQL**
     #
-    #   Possible values are `postgresql` and `upgrade`.
+    #   Possible values are `postgresql`, `upgrade`, and `iam-db-auth-error`.
     #
     #   **Aurora MySQL**
     #
-    #   Possible values are `audit`, `error`, `general`, `instance`, and
-    #   `slowquery`.
+    #   Possible values are `audit`, `error`, `general`, `instance`,
+    #   `slowquery`, and `iam-db-auth-error`.
     #
     #   **Aurora PostgreSQL**
     #
-    #   Possible value are `instance` and `postgresql`.
+    #   Possible value are `instance`, `postgresql`, and `iam-db-auth-error`.
     #
     #   For more information about exporting CloudWatch Logs for Amazon RDS,
     #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the

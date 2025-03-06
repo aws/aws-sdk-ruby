@@ -174,6 +174,7 @@ module Aws::IoTSiteWise
     ConflictingOperationException = Shapes::StructureShape.new(name: 'ConflictingOperationException')
     Content = Shapes::StructureShape.new(name: 'Content')
     ConversationId = Shapes::StringShape.new(name: 'ConversationId')
+    CoreDeviceOperatingSystem = Shapes::StringShape.new(name: 'CoreDeviceOperatingSystem')
     CoreDeviceThingName = Shapes::StringShape.new(name: 'CoreDeviceThingName')
     CreateAccessPolicyRequest = Shapes::StructureShape.new(name: 'CreateAccessPolicyRequest')
     CreateAccessPolicyResponse = Shapes::StructureShape.new(name: 'CreateAccessPolicyResponse')
@@ -307,6 +308,7 @@ module Aws::IoTSiteWise
     GatewayPlatform = Shapes::StructureShape.new(name: 'GatewayPlatform')
     GatewaySummaries = Shapes::ListShape.new(name: 'GatewaySummaries')
     GatewaySummary = Shapes::StructureShape.new(name: 'GatewaySummary')
+    GatewayVersion = Shapes::StringShape.new(name: 'GatewayVersion')
     GetAssetPropertyAggregatesRequest = Shapes::StructureShape.new(name: 'GetAssetPropertyAggregatesRequest')
     GetAssetPropertyAggregatesResponse = Shapes::StructureShape.new(name: 'GetAssetPropertyAggregatesResponse')
     GetAssetPropertyValueAggregatesMaxResults = Shapes::IntegerShape.new(name: 'GetAssetPropertyValueAggregatesMaxResults')
@@ -1179,6 +1181,7 @@ module Aws::IoTSiteWise
 
     CreateGatewayRequest.add_member(:gateway_name, Shapes::ShapeRef.new(shape: GatewayName, required: true, location_name: "gatewayName"))
     CreateGatewayRequest.add_member(:gateway_platform, Shapes::ShapeRef.new(shape: GatewayPlatform, required: true, location_name: "gatewayPlatform"))
+    CreateGatewayRequest.add_member(:gateway_version, Shapes::ShapeRef.new(shape: GatewayVersion, location_name: "gatewayVersion"))
     CreateGatewayRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateGatewayRequest.struct_class = Types::CreateGatewayRequest
 
@@ -1511,6 +1514,7 @@ module Aws::IoTSiteWise
     DescribeGatewayResponse.add_member(:gateway_name, Shapes::ShapeRef.new(shape: GatewayName, required: true, location_name: "gatewayName"))
     DescribeGatewayResponse.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "gatewayArn"))
     DescribeGatewayResponse.add_member(:gateway_platform, Shapes::ShapeRef.new(shape: GatewayPlatform, location_name: "gatewayPlatform"))
+    DescribeGatewayResponse.add_member(:gateway_version, Shapes::ShapeRef.new(shape: GatewayVersion, location_name: "gatewayVersion"))
     DescribeGatewayResponse.add_member(:gateway_capability_summaries, Shapes::ShapeRef.new(shape: GatewayCapabilitySummaries, required: true, location_name: "gatewayCapabilitySummaries"))
     DescribeGatewayResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDate"))
     DescribeGatewayResponse.add_member(:last_update_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastUpdateDate"))
@@ -1667,6 +1671,7 @@ module Aws::IoTSiteWise
     GatewaySummary.add_member(:gateway_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "gatewayId"))
     GatewaySummary.add_member(:gateway_name, Shapes::ShapeRef.new(shape: GatewayName, required: true, location_name: "gatewayName"))
     GatewaySummary.add_member(:gateway_platform, Shapes::ShapeRef.new(shape: GatewayPlatform, location_name: "gatewayPlatform"))
+    GatewaySummary.add_member(:gateway_version, Shapes::ShapeRef.new(shape: GatewayVersion, location_name: "gatewayVersion"))
     GatewaySummary.add_member(:gateway_capability_summaries, Shapes::ShapeRef.new(shape: GatewayCapabilitySummaries, location_name: "gatewayCapabilitySummaries"))
     GatewaySummary.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDate"))
     GatewaySummary.add_member(:last_update_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastUpdateDate"))
@@ -1735,6 +1740,7 @@ module Aws::IoTSiteWise
     Greengrass.struct_class = Types::Greengrass
 
     GreengrassV2.add_member(:core_device_thing_name, Shapes::ShapeRef.new(shape: CoreDeviceThingName, required: true, location_name: "coreDeviceThingName"))
+    GreengrassV2.add_member(:core_device_operating_system, Shapes::ShapeRef.new(shape: CoreDeviceOperatingSystem, location_name: "coreDeviceOperatingSystem"))
     GreengrassV2.struct_class = Types::GreengrassV2
 
     GroupIdentity.add_member(:id, Shapes::ShapeRef.new(shape: IdentityId, required: true, location_name: "id"))

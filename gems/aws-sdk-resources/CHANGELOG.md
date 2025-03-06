@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+3.225.0 (2025-03-05)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-gameliftstreams` gem.
+
+3.224.0 (2025-03-04)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-iotmanagedintegrations` gem.
+
 3.223.0 (2025-02-24)
 ------------------
 

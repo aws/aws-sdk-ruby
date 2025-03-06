@@ -29,15 +29,21 @@ module Aws::CloudSearch
   # ## Error Classes
   # * {BaseException}
   # * {DisabledOperationException}
+  #    * This error class is not used. `DisabledAction` is used during parsing instead.
   # * {InternalException}
   # * {InvalidTypeException}
+  #    * This error class is not used. `InvalidType` is used during parsing instead.
   # * {LimitExceededException}
+  #    * This error class is not used. `LimitExceeded` is used during parsing instead.
   # * {ResourceAlreadyExistsException}
+  #    * This error class is not used. `ResourceAlreadyExists` is used during parsing instead.
   # * {ResourceNotFoundException}
+  #    * This error class is not used. `ResourceNotFound` is used during parsing instead.
   # * {ValidationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
+  # Some existing error classes may use a different class name than the one documented.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -62,6 +68,8 @@ module Aws::CloudSearch
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `DisabledAction` instead.
     class DisabledOperationException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -82,6 +90,8 @@ module Aws::CloudSearch
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidType` instead.
     class InvalidTypeException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -92,6 +102,8 @@ module Aws::CloudSearch
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `LimitExceeded` instead.
     class LimitExceededException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -102,6 +114,8 @@ module Aws::CloudSearch
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ResourceAlreadyExists` instead.
     class ResourceAlreadyExistsException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -112,6 +126,8 @@ module Aws::CloudSearch
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ResourceNotFound` instead.
     class ResourceNotFoundException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context

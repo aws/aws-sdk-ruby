@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Issue - Convert stubs at request time.
 
+3.220.0 (2025-03-04)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
 3.219.0 (2025-02-18)
 ------------------
 

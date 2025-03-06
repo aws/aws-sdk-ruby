@@ -1,0 +1,64 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module GameLiftStreams
+    module Waiters
+
+      class ApplicationDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    identifier: ::String
+                  ) -> Client::_GetApplicationResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetApplicationResponseSuccess
+      end
+
+      class ApplicationReady
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    identifier: ::String
+                  ) -> Client::_GetApplicationResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetApplicationResponseSuccess
+      end
+
+      class StreamGroupActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    identifier: ::String
+                  ) -> Client::_GetStreamGroupResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetStreamGroupResponseSuccess
+      end
+
+      class StreamGroupDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    identifier: ::String
+                  ) -> Client::_GetStreamGroupResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetStreamGroupResponseSuccess
+      end
+
+      class StreamSessionActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    identifier: ::String,
+                    stream_session_identifier: ::String
+                  ) -> Client::_GetStreamSessionResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetStreamSessionResponseSuccess
+      end
+    end
+  end
+end

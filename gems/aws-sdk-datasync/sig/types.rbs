@@ -1297,6 +1297,7 @@ module Aws::DataSync
     class UpdateLocationNfsRequest
       attr_accessor location_arn: ::String
       attr_accessor subdirectory: ::String
+      attr_accessor server_hostname: ::String
       attr_accessor on_prem_config: Types::OnPremConfig
       attr_accessor mount_options: Types::NfsMountOptions
       SENSITIVE: []
@@ -1310,6 +1311,7 @@ module Aws::DataSync
       attr_accessor server_port: ::Integer
       attr_accessor server_protocol: ("HTTPS" | "HTTP")
       attr_accessor subdirectory: ::String
+      attr_accessor server_hostname: ::String
       attr_accessor access_key: ::String
       attr_accessor secret_key: ::String
       attr_accessor agent_arns: ::Array[::String]
@@ -1334,6 +1336,7 @@ module Aws::DataSync
     class UpdateLocationSmbRequest
       attr_accessor location_arn: ::String
       attr_accessor subdirectory: ::String
+      attr_accessor server_hostname: ::String
       attr_accessor user: ::String
       attr_accessor domain: ::String
       attr_accessor password: ::String

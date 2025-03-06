@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.132.0 (2025-03-05)
+------------------
+
+* Feature - Added DeviceTypeWorkSpacesThinClient type to allow users to access their WorkSpaces through a WorkSpaces Thin Client.
+
 1.131.0 (2025-02-18)
 ------------------
 

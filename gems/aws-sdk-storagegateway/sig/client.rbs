@@ -903,6 +903,17 @@ module Aws
                                     ) -> _DisassociateFileSystemResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateFileSystemResponseSuccess
 
+      interface _EvictFilesFailingUploadResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EvictFilesFailingUploadOutput]
+        def notification_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#evict_files_failing_upload-instance_method
+      def evict_files_failing_upload: (
+                                        file_share_arn: ::String,
+                                        ?force_remove: bool
+                                      ) -> _EvictFilesFailingUploadResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EvictFilesFailingUploadResponseSuccess
+
       interface _JoinDomainResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::JoinDomainOutput]
         def gateway_arn: () -> ::String

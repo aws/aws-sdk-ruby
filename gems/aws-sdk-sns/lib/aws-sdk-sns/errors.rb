@@ -28,46 +28,80 @@ module Aws::SNS
   #
   # ## Error Classes
   # * {AuthorizationErrorException}
+  #    * This error class is not used. `AuthorizationError` is used during parsing instead.
   # * {BatchEntryIdsNotDistinctException}
+  #    * This error class is not used. `BatchEntryIdsNotDistinct` is used during parsing instead.
   # * {BatchRequestTooLongException}
+  #    * This error class is not used. `BatchRequestTooLong` is used during parsing instead.
   # * {ConcurrentAccessException}
+  #    * This error class is not used. `ConcurrentAccess` is used during parsing instead.
   # * {EmptyBatchRequestException}
+  #    * This error class is not used. `EmptyBatchRequest` is used during parsing instead.
   # * {EndpointDisabledException}
+  #    * This error class is not used. `EndpointDisabled` is used during parsing instead.
   # * {FilterPolicyLimitExceededException}
+  #    * This error class is not used. `FilterPolicyLimitExceeded` is used during parsing instead.
   # * {InternalErrorException}
+  #    * This error class is not used. `InternalError` is used during parsing instead.
   # * {InvalidBatchEntryIdException}
+  #    * This error class is not used. `InvalidBatchEntryId` is used during parsing instead.
   # * {InvalidParameterException}
+  #    * This error class is not used. `InvalidParameter` is used during parsing instead.
   # * {InvalidParameterValueException}
+  #    * This error class is not used. `ParameterValueInvalid` is used during parsing instead.
   # * {InvalidSecurityException}
+  #    * This error class is not used. `InvalidSecurity` is used during parsing instead.
   # * {InvalidStateException}
+  #    * This error class is not used. `InvalidState` is used during parsing instead.
   # * {KMSAccessDeniedException}
+  #    * This error class is not used. `KMSAccessDenied` is used during parsing instead.
   # * {KMSDisabledException}
+  #    * This error class is not used. `KMSDisabled` is used during parsing instead.
   # * {KMSInvalidStateException}
+  #    * This error class is not used. `KMSInvalidState` is used during parsing instead.
   # * {KMSNotFoundException}
+  #    * This error class is not used. `KMSNotFound` is used during parsing instead.
   # * {KMSOptInRequired}
   # * {KMSThrottlingException}
+  #    * This error class is not used. `KMSThrottling` is used during parsing instead.
   # * {NotFoundException}
+  #    * This error class is not used. `NotFound` is used during parsing instead.
   # * {OptedOutException}
+  #    * This error class is not used. `OptedOut` is used during parsing instead.
   # * {PlatformApplicationDisabledException}
+  #    * This error class is not used. `PlatformApplicationDisabled` is used during parsing instead.
   # * {ReplayLimitExceededException}
+  #    * This error class is not used. `ReplayLimitExceeded` is used during parsing instead.
   # * {ResourceNotFoundException}
+  #    * This error class is not used. `ResourceNotFound` is used during parsing instead.
   # * {StaleTagException}
+  #    * This error class is not used. `StaleTag` is used during parsing instead.
   # * {SubscriptionLimitExceededException}
+  #    * This error class is not used. `SubscriptionLimitExceeded` is used during parsing instead.
   # * {TagLimitExceededException}
+  #    * This error class is not used. `TagLimitExceeded` is used during parsing instead.
   # * {TagPolicyException}
+  #    * This error class is not used. `TagPolicy` is used during parsing instead.
   # * {ThrottledException}
+  #    * This error class is not used. `Throttled` is used during parsing instead.
   # * {TooManyEntriesInBatchRequestException}
+  #    * This error class is not used. `TooManyEntriesInBatchRequest` is used during parsing instead.
   # * {TopicLimitExceededException}
+  #    * This error class is not used. `TopicLimitExceeded` is used during parsing instead.
   # * {UserErrorException}
+  #    * This error class is not used. `UserError` is used during parsing instead.
   # * {ValidationException}
   # * {VerificationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
+  # Some existing error classes may use a different class name than the one documented.
   module Errors
 
     extend Aws::Errors::DynamicErrors
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `AuthorizationError` instead.
     class AuthorizationErrorException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -83,6 +117,8 @@ module Aws::SNS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `BatchEntryIdsNotDistinct` instead.
     class BatchEntryIdsNotDistinctException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -98,6 +134,8 @@ module Aws::SNS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `BatchRequestTooLong` instead.
     class BatchRequestTooLongException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -113,6 +151,8 @@ module Aws::SNS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ConcurrentAccess` instead.
     class ConcurrentAccessException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -128,6 +168,8 @@ module Aws::SNS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `EmptyBatchRequest` instead.
     class EmptyBatchRequestException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -143,6 +185,8 @@ module Aws::SNS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `EndpointDisabled` instead.
     class EndpointDisabledException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -158,6 +202,8 @@ module Aws::SNS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `FilterPolicyLimitExceeded` instead.
     class FilterPolicyLimitExceededException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -173,6 +219,8 @@ module Aws::SNS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InternalError` instead.
     class InternalErrorException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -188,6 +236,8 @@ module Aws::SNS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidBatchEntryId` instead.
     class InvalidBatchEntryIdException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -203,6 +253,8 @@ module Aws::SNS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidParameter` instead.
     class InvalidParameterException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -218,6 +270,8 @@ module Aws::SNS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ParameterValueInvalid` instead.
     class InvalidParameterValueException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -233,6 +287,8 @@ module Aws::SNS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidSecurity` instead.
     class InvalidSecurityException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -248,6 +304,8 @@ module Aws::SNS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidState` instead.
     class InvalidStateException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -263,6 +321,8 @@ module Aws::SNS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `KMSAccessDenied` instead.
     class KMSAccessDeniedException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -278,6 +338,8 @@ module Aws::SNS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `KMSDisabled` instead.
     class KMSDisabledException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -293,6 +355,8 @@ module Aws::SNS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `KMSInvalidState` instead.
     class KMSInvalidStateException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -308,6 +372,8 @@ module Aws::SNS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `KMSNotFound` instead.
     class KMSNotFoundException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -338,6 +404,8 @@ module Aws::SNS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `KMSThrottling` instead.
     class KMSThrottlingException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -353,6 +421,8 @@ module Aws::SNS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `NotFound` instead.
     class NotFoundException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -368,6 +438,8 @@ module Aws::SNS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `OptedOut` instead.
     class OptedOutException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -383,6 +455,8 @@ module Aws::SNS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `PlatformApplicationDisabled` instead.
     class PlatformApplicationDisabledException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -398,6 +472,8 @@ module Aws::SNS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ReplayLimitExceeded` instead.
     class ReplayLimitExceededException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -413,6 +489,8 @@ module Aws::SNS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ResourceNotFound` instead.
     class ResourceNotFoundException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -428,6 +506,8 @@ module Aws::SNS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `StaleTag` instead.
     class StaleTagException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -443,6 +523,8 @@ module Aws::SNS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `SubscriptionLimitExceeded` instead.
     class SubscriptionLimitExceededException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -458,6 +540,8 @@ module Aws::SNS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `TagLimitExceeded` instead.
     class TagLimitExceededException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -473,6 +557,8 @@ module Aws::SNS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `TagPolicy` instead.
     class TagPolicyException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -488,6 +574,8 @@ module Aws::SNS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `Throttled` instead.
     class ThrottledException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -503,6 +591,8 @@ module Aws::SNS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `TooManyEntriesInBatchRequest` instead.
     class TooManyEntriesInBatchRequestException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -518,6 +608,8 @@ module Aws::SNS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `TopicLimitExceeded` instead.
     class TopicLimitExceededException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -533,6 +625,8 @@ module Aws::SNS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `UserError` instead.
     class UserErrorException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context

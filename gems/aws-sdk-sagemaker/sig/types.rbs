@@ -1270,6 +1270,7 @@ module Aws::SageMaker
 
     class CreateDomainResponse
       attr_accessor domain_arn: ::String
+      attr_accessor domain_id: ::String
       attr_accessor url: ::String
       SENSITIVE: []
     end
@@ -3263,12 +3264,13 @@ module Aws::SageMaker
       attr_accessor hub_content_document: ::String
       attr_accessor sage_maker_public_hub_content_arn: ::String
       attr_accessor reference_min_version: ::String
-      attr_accessor support_status: ("Supported" | "Deprecated")
+      attr_accessor support_status: ("Supported" | "Deprecated" | "Restricted")
       attr_accessor hub_content_search_keywords: ::Array[::String]
       attr_accessor hub_content_dependencies: ::Array[Types::HubContentDependency]
       attr_accessor hub_content_status: ("Available" | "Importing" | "Deleting" | "ImportFailed" | "DeleteFailed")
       attr_accessor failure_reason: ::String
       attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
       SENSITIVE: []
     end
 
@@ -4845,6 +4847,11 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class HubAccessConfig
+      attr_accessor hub_content_arn: ::String
+      SENSITIVE: []
+    end
+
     class HubContentDependency
       attr_accessor dependency_origin_path: ::String
       attr_accessor dependency_copy_path: ::String
@@ -4860,7 +4867,7 @@ module Aws::SageMaker
       attr_accessor document_schema_version: ::String
       attr_accessor hub_content_display_name: ::String
       attr_accessor hub_content_description: ::String
-      attr_accessor support_status: ("Supported" | "Deprecated")
+      attr_accessor support_status: ("Supported" | "Deprecated" | "Restricted")
       attr_accessor hub_content_search_keywords: ::Array[::String]
       attr_accessor hub_content_status: ("Available" | "Importing" | "Deleting" | "ImportFailed" | "DeleteFailed")
       attr_accessor creation_time: ::Time
@@ -5164,6 +5171,7 @@ module Aws::SageMaker
       attr_accessor hub_content_description: ::String
       attr_accessor hub_content_markdown: ::String
       attr_accessor hub_content_document: ::String
+      attr_accessor support_status: ("Supported" | "Deprecated" | "Restricted")
       attr_accessor hub_content_search_keywords: ::Array[::String]
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
@@ -8799,6 +8807,8 @@ module Aws::SageMaker
       attr_accessor s3_data_distribution_type: ("FullyReplicated" | "ShardedByS3Key")
       attr_accessor attribute_names: ::Array[::String]
       attr_accessor instance_group_names: ::Array[::String]
+      attr_accessor model_access_config: Types::ModelAccessConfig
+      attr_accessor hub_access_config: Types::HubAccessConfig
       SENSITIVE: []
     end
 
@@ -10052,6 +10062,39 @@ module Aws::SageMaker
       attr_accessor description: ::String
       attr_accessor parameter_additions: ::Array[Types::FeatureParameter]
       attr_accessor parameter_removals: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateHubContentReferenceRequest
+      attr_accessor hub_name: ::String
+      attr_accessor hub_content_name: ::String
+      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference")
+      attr_accessor min_version: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateHubContentReferenceResponse
+      attr_accessor hub_arn: ::String
+      attr_accessor hub_content_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateHubContentRequest
+      attr_accessor hub_name: ::String
+      attr_accessor hub_content_name: ::String
+      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference")
+      attr_accessor hub_content_version: ::String
+      attr_accessor hub_content_display_name: ::String
+      attr_accessor hub_content_description: ::String
+      attr_accessor hub_content_markdown: ::String
+      attr_accessor hub_content_search_keywords: ::Array[::String]
+      attr_accessor support_status: ("Supported" | "Deprecated" | "Restricted")
+      SENSITIVE: []
+    end
+
+    class UpdateHubContentResponse
+      attr_accessor hub_arn: ::String
+      attr_accessor hub_content_arn: ::String
       SENSITIVE: []
     end
 

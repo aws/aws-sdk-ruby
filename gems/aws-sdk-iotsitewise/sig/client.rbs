@@ -653,12 +653,14 @@ module Aws
                                 group_arn: ::String
                               }?,
                               greengrass_v2: {
-                                core_device_thing_name: ::String
+                                core_device_thing_name: ::String,
+                                core_device_operating_system: ("LINUX_AARCH64" | "LINUX_AMD64" | "WINDOWS_AMD64")?
                               }?,
                               siemens_ie: {
                                 iot_core_thing_name: ::String
                               }?
                             },
+                            ?gateway_version: ::String,
                             ?tags: Hash[::String, ::String]
                           ) -> _CreateGatewayResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGatewayResponseSuccess
@@ -1027,6 +1029,7 @@ module Aws
         def gateway_name: () -> ::String
         def gateway_arn: () -> ::String
         def gateway_platform: () -> Types::GatewayPlatform
+        def gateway_version: () -> ::String
         def gateway_capability_summaries: () -> ::Array[Types::GatewayCapabilitySummary]
         def creation_date: () -> ::Time
         def last_update_date: () -> ::Time

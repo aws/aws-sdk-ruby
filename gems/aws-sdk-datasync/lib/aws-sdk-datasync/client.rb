@@ -1425,8 +1425,8 @@ module Aws::DataSync
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#accessing-nfs
     #
     # @option params [required, String] :server_hostname
-    #   Specifies the Domain Name System (DNS) name or IP version 4 address of
-    #   the NFS file server that your DataSync agent connects to.
+    #   Specifies the DNS name or IP version 4 address of the NFS file server
+    #   that your DataSync agent connects to.
     #
     # @option params [required, Types::OnPremConfig] :on_prem_config
     #   Specifies the Amazon Resource Name (ARN) of the DataSync agent that
@@ -1496,9 +1496,8 @@ module Aws::DataSync
     # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html#create-object-location-prerequisites
     #
     # @option params [required, String] :server_hostname
-    #   Specifies the domain name or IP address of the object storage server.
-    #   A DataSync agent uses this hostname to mount the object storage server
-    #   in a network.
+    #   Specifies the domain name or IP version 4 (IPv4) address of the object
+    #   storage server that your DataSync agent connects to.
     #
     # @option params [Integer] :server_port
     #   Specifies the port that your object storage server accepts inbound
@@ -1749,7 +1748,7 @@ module Aws::DataSync
     #
     # @option params [required, String] :server_hostname
     #   Specifies the domain name or IP address of the SMB file server that
-    #   your DataSync agent will mount.
+    #   your DataSync agent connects to.
     #
     #   Remember the following when configuring this parameter:
     #
@@ -1804,6 +1803,13 @@ module Aws::DataSync
     #   your SMB file server. DataSync supports `NTLM` (default) and
     #   `KERBEROS` authentication.
     #
+    #   For more information, see [Providing DataSync access to SMB file
+    #   servers][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions
+    #
     # @option params [Array<String>] :dns_ip_addresses
     #   Specifies the IPv4 addresses for the DNS servers that your SMB file
     #   server belongs to. This parameter applies only if `AuthenticationType`
@@ -1818,7 +1824,7 @@ module Aws::DataSync
     #   realm that has permission to access the files, folders, and file
     #   metadata in your SMB file server.
     #
-    #   A Kerberos principal might look like `HOST/kerberosuser@EXAMPLE.COM`.
+    #   A Kerberos principal might look like `HOST/kerberosuser@MYDOMAIN.ORG`.
     #
     #   Principal names are case sensitive. Your DataSync task execution will
     #   fail if the principal that you specify for this parameter doesn’t
@@ -4658,6 +4664,10 @@ module Aws::DataSync
     #
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#accessing-nfs
     #
+    # @option params [String] :server_hostname
+    #   Specifies the DNS name or IP version 4 (IPv4) address of the NFS file
+    #   server that your DataSync agent connects to.
+    #
     # @option params [Types::OnPremConfig] :on_prem_config
     #   The DataSync agents that can connect to your Network File System (NFS)
     #   file server.
@@ -4672,6 +4682,7 @@ module Aws::DataSync
     #   resp = client.update_location_nfs({
     #     location_arn: "LocationArn", # required
     #     subdirectory: "NfsSubdirectory",
+    #     server_hostname: "ServerHostname",
     #     on_prem_config: {
     #       agent_arns: ["AgentArn"], # required
     #     },
@@ -4716,6 +4727,10 @@ module Aws::DataSync
     #   a source location, DataSync only copies objects with this prefix. If
     #   this is a destination location, DataSync writes all objects with this
     #   prefix.
+    #
+    # @option params [String] :server_hostname
+    #   Specifies the domain name or IP version 4 (IPv4) address of the object
+    #   storage server that your DataSync agent connects to.
     #
     # @option params [String] :access_key
     #   Specifies the access key (for example, a user name) if credentials are
@@ -4766,6 +4781,7 @@ module Aws::DataSync
     #     server_port: 1,
     #     server_protocol: "HTTPS", # accepts HTTPS, HTTP
     #     subdirectory: "S3Subdirectory",
+    #     server_hostname: "ServerHostname",
     #     access_key: "ObjectStorageAccessKey",
     #     secret_key: "ObjectStorageSecretKey",
     #     agent_arns: ["AgentArn"],
@@ -4892,6 +4908,17 @@ module Aws::DataSync
     #
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions
     #
+    # @option params [String] :server_hostname
+    #   Specifies the domain name or IP address of the SMB file server that
+    #   your DataSync agent connects to.
+    #
+    #   Remember the following when configuring this parameter:
+    #
+    #   * You can't specify an IP version 6 (IPv6) address.
+    #
+    #   * If you're using Kerberos authentication, you must specify a domain
+    #     name.
+    #
     # @option params [String] :user
     #   Specifies the user name that can mount your SMB file server and has
     #   permission to access the files and folders involved in your transfer.
@@ -4933,6 +4960,13 @@ module Aws::DataSync
     #   your SMB file server. DataSync supports `NTLM` (default) and
     #   `KERBEROS` authentication.
     #
+    #   For more information, see [Providing DataSync access to SMB file
+    #   servers][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions
+    #
     # @option params [Array<String>] :dns_ip_addresses
     #   Specifies the IPv4 addresses for the DNS servers that your SMB file
     #   server belongs to. This parameter applies only if `AuthenticationType`
@@ -4947,7 +4981,7 @@ module Aws::DataSync
     #   realm that has permission to access the files, folders, and file
     #   metadata in your SMB file server.
     #
-    #   A Kerberos principal might look like `HOST/kerberosuser@EXAMPLE.COM`.
+    #   A Kerberos principal might look like `HOST/kerberosuser@MYDOMAIN.ORG`.
     #
     #   Principal names are case sensitive. Your DataSync task execution will
     #   fail if the principal that you specify for this parameter doesn’t
@@ -4978,6 +5012,7 @@ module Aws::DataSync
     #   resp = client.update_location_smb({
     #     location_arn: "LocationArn", # required
     #     subdirectory: "SmbSubdirectory",
+    #     server_hostname: "ServerHostname",
     #     user: "SmbUser",
     #     domain: "SmbDomain",
     #     password: "SmbPassword",
@@ -5332,7 +5367,7 @@ module Aws::DataSync
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.99.0'
+      context[:gem_version] = '1.100.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

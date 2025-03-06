@@ -65,6 +65,11 @@ module Aws::EC2
       data[:is_default]
     end
 
+    # @return [Types::VpcEncryptionControl]
+    def encryption_control
+      data[:encryption_control]
+    end
+
     # Any tags assigned to the VPC.
     # @return [Array<Types::Tag>]
     def tags

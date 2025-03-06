@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.272.0 (2025-03-04)
+------------------
+
+* Feature - Note support for Database Insights for Amazon RDS.
+
 1.271.0 (2025-02-20)
 ------------------
 

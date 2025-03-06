@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2025-02-27)
+------------------
+
+* Feature - Introduces Sessions (preview) to enable stateful conversations in GenAI applications.
+
 1.46.0 (2025-02-24)
 ------------------
 

@@ -15,6 +15,7 @@ module Aws::CloudWatchRUM
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    Alias = Shapes::StringShape.new(name: 'Alias')
     AppMonitor = Shapes::StructureShape.new(name: 'AppMonitor')
     AppMonitorConfiguration = Shapes::StructureShape.new(name: 'AppMonitorConfiguration')
     AppMonitorDetails = Shapes::StructureShape.new(name: 'AppMonitorDetails')
@@ -44,6 +45,8 @@ module Aws::CloudWatchRUM
     DataStorage = Shapes::StructureShape.new(name: 'DataStorage')
     DeleteAppMonitorRequest = Shapes::StructureShape.new(name: 'DeleteAppMonitorRequest')
     DeleteAppMonitorResponse = Shapes::StructureShape.new(name: 'DeleteAppMonitorResponse')
+    DeleteResourcePolicyRequest = Shapes::StructureShape.new(name: 'DeleteResourcePolicyRequest')
+    DeleteResourcePolicyResponse = Shapes::StructureShape.new(name: 'DeleteResourcePolicyResponse')
     DeleteRumMetricsDestinationRequest = Shapes::StructureShape.new(name: 'DeleteRumMetricsDestinationRequest')
     DeleteRumMetricsDestinationResponse = Shapes::StructureShape.new(name: 'DeleteRumMetricsDestinationResponse')
     DestinationArn = Shapes::StringShape.new(name: 'DestinationArn')
@@ -58,11 +61,14 @@ module Aws::CloudWatchRUM
     GetAppMonitorDataResponse = Shapes::StructureShape.new(name: 'GetAppMonitorDataResponse')
     GetAppMonitorRequest = Shapes::StructureShape.new(name: 'GetAppMonitorRequest')
     GetAppMonitorResponse = Shapes::StructureShape.new(name: 'GetAppMonitorResponse')
+    GetResourcePolicyRequest = Shapes::StructureShape.new(name: 'GetResourcePolicyRequest')
+    GetResourcePolicyResponse = Shapes::StructureShape.new(name: 'GetResourcePolicyResponse')
     ISOTimestampString = Shapes::StringShape.new(name: 'ISOTimestampString')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
     IdentityPoolId = Shapes::StringShape.new(name: 'IdentityPoolId')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    InvalidPolicyRevisionIdException = Shapes::StructureShape.new(name: 'InvalidPolicyRevisionIdException')
     JsonValue = Shapes::StringShape.new(name: 'JsonValue')
     ListAppMonitorsRequest = Shapes::StructureShape.new(name: 'ListAppMonitorsRequest')
     ListAppMonitorsResponse = Shapes::StructureShape.new(name: 'ListAppMonitorsResponse')
@@ -70,6 +76,7 @@ module Aws::CloudWatchRUM
     ListRumMetricsDestinationsResponse = Shapes::StructureShape.new(name: 'ListRumMetricsDestinationsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    MalformedPolicyDocumentException = Shapes::StructureShape.new(name: 'MalformedPolicyDocumentException')
     MaxQueryResults = Shapes::IntegerShape.new(name: 'MaxQueryResults')
     MaxResultsInteger = Shapes::IntegerShape.new(name: 'MaxResultsInteger')
     MetricDefinition = Shapes::StructureShape.new(name: 'MetricDefinition')
@@ -84,6 +91,11 @@ module Aws::CloudWatchRUM
     MetricName = Shapes::StringShape.new(name: 'MetricName')
     Namespace = Shapes::StringShape.new(name: 'Namespace')
     Pages = Shapes::ListShape.new(name: 'Pages')
+    PolicyNotFoundException = Shapes::StructureShape.new(name: 'PolicyNotFoundException')
+    PolicyRevisionId = Shapes::StringShape.new(name: 'PolicyRevisionId')
+    PolicySizeLimitExceededException = Shapes::StructureShape.new(name: 'PolicySizeLimitExceededException')
+    PutResourcePolicyRequest = Shapes::StructureShape.new(name: 'PutResourcePolicyRequest')
+    PutResourcePolicyResponse = Shapes::StructureShape.new(name: 'PutResourcePolicyResponse')
     PutRumEventsRequest = Shapes::StructureShape.new(name: 'PutRumEventsRequest')
     PutRumEventsRequestBatchIdString = Shapes::StringShape.new(name: 'PutRumEventsRequestBatchIdString')
     PutRumEventsRequestIdString = Shapes::StringShape.new(name: 'PutRumEventsRequestIdString')
@@ -246,6 +258,13 @@ module Aws::CloudWatchRUM
 
     DeleteAppMonitorResponse.struct_class = Types::DeleteAppMonitorResponse
 
+    DeleteResourcePolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: AppMonitorName, required: true, location: "uri", location_name: "Name"))
+    DeleteResourcePolicyRequest.add_member(:policy_revision_id, Shapes::ShapeRef.new(shape: PolicyRevisionId, location: "querystring", location_name: "policyRevisionId"))
+    DeleteResourcePolicyRequest.struct_class = Types::DeleteResourcePolicyRequest
+
+    DeleteResourcePolicyResponse.add_member(:policy_revision_id, Shapes::ShapeRef.new(shape: PolicyRevisionId, location_name: "PolicyRevisionId"))
+    DeleteResourcePolicyResponse.struct_class = Types::DeleteResourcePolicyResponse
+
     DeleteRumMetricsDestinationRequest.add_member(:app_monitor_name, Shapes::ShapeRef.new(shape: AppMonitorName, required: true, location: "uri", location_name: "AppMonitorName"))
     DeleteRumMetricsDestinationRequest.add_member(:destination, Shapes::ShapeRef.new(shape: MetricDestination, required: true, location: "querystring", location_name: "destination"))
     DeleteRumMetricsDestinationRequest.add_member(:destination_arn, Shapes::ShapeRef.new(shape: DestinationArn, location: "querystring", location_name: "destinationArn"))
@@ -277,9 +296,19 @@ module Aws::CloudWatchRUM
     GetAppMonitorResponse.add_member(:app_monitor, Shapes::ShapeRef.new(shape: AppMonitor, location_name: "AppMonitor"))
     GetAppMonitorResponse.struct_class = Types::GetAppMonitorResponse
 
+    GetResourcePolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: AppMonitorName, required: true, location: "uri", location_name: "Name"))
+    GetResourcePolicyRequest.struct_class = Types::GetResourcePolicyRequest
+
+    GetResourcePolicyResponse.add_member(:policy_document, Shapes::ShapeRef.new(shape: String, location_name: "PolicyDocument"))
+    GetResourcePolicyResponse.add_member(:policy_revision_id, Shapes::ShapeRef.new(shape: PolicyRevisionId, location_name: "PolicyRevisionId"))
+    GetResourcePolicyResponse.struct_class = Types::GetResourcePolicyResponse
+
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     InternalServerException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Retry-After"))
     InternalServerException.struct_class = Types::InternalServerException
+
+    InvalidPolicyRevisionIdException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    InvalidPolicyRevisionIdException.struct_class = Types::InvalidPolicyRevisionIdException
 
     ListAppMonitorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListAppMonitorsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
@@ -304,6 +333,9 @@ module Aws::CloudWatchRUM
     ListTagsForResourceResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceArn"))
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "Tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    MalformedPolicyDocumentException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    MalformedPolicyDocumentException.struct_class = Types::MalformedPolicyDocumentException
 
     MetricDefinition.add_member(:dimension_keys, Shapes::ShapeRef.new(shape: DimensionKeysMap, location_name: "DimensionKeys"))
     MetricDefinition.add_member(:event_pattern, Shapes::ShapeRef.new(shape: EventPattern, location_name: "EventPattern"))
@@ -337,6 +369,22 @@ module Aws::CloudWatchRUM
 
     Pages.member = Shapes::ShapeRef.new(shape: Url)
 
+    PolicyNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    PolicyNotFoundException.struct_class = Types::PolicyNotFoundException
+
+    PolicySizeLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    PolicySizeLimitExceededException.struct_class = Types::PolicySizeLimitExceededException
+
+    PutResourcePolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: AppMonitorName, required: true, location: "uri", location_name: "Name"))
+    PutResourcePolicyRequest.add_member(:policy_document, Shapes::ShapeRef.new(shape: String, required: true, location_name: "PolicyDocument"))
+    PutResourcePolicyRequest.add_member(:policy_revision_id, Shapes::ShapeRef.new(shape: PolicyRevisionId, location_name: "PolicyRevisionId"))
+    PutResourcePolicyRequest.struct_class = Types::PutResourcePolicyRequest
+
+    PutResourcePolicyResponse.add_member(:policy_document, Shapes::ShapeRef.new(shape: String, location_name: "PolicyDocument"))
+    PutResourcePolicyResponse.add_member(:policy_revision_id, Shapes::ShapeRef.new(shape: PolicyRevisionId, location_name: "PolicyRevisionId"))
+    PutResourcePolicyResponse.struct_class = Types::PutResourcePolicyResponse
+
+    PutRumEventsRequest.add_member(:alias, Shapes::ShapeRef.new(shape: Alias, location_name: "Alias"))
     PutRumEventsRequest.add_member(:app_monitor_details, Shapes::ShapeRef.new(shape: AppMonitorDetails, required: true, location_name: "AppMonitorDetails"))
     PutRumEventsRequest.add_member(:batch_id, Shapes::ShapeRef.new(shape: PutRumEventsRequestBatchIdString, required: true, location_name: "BatchId"))
     PutRumEventsRequest.add_member(:id, Shapes::ShapeRef.new(shape: PutRumEventsRequestIdString, required: true, location: "uri", location_name: "Id"))
@@ -441,9 +489,11 @@ module Aws::CloudWatchRUM
 
       api.metadata = {
         "apiVersion" => "2018-05-10",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "rum",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "CloudWatch RUM",
         "serviceId" => "RUM",
         "signatureVersion" => "v4",
@@ -527,6 +577,22 @@ module Aws::CloudWatchRUM
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:delete_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteResourcePolicy"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/appmonitor/{Name}/policy"
+        o.input = Shapes::ShapeRef.new(shape: DeleteResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPolicyRevisionIdException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: PolicyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:delete_rum_metrics_destination, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteRumMetricsDestination"
         o.http_method = "DELETE"
@@ -571,6 +637,21 @@ module Aws::CloudWatchRUM
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:get_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetResourcePolicy"
+        o.http_method = "GET"
+        o.http_request_uri = "/appmonitor/{Name}/policy"
+        o.input = Shapes::ShapeRef.new(shape: GetResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: PolicyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:list_app_monitors, Seahorse::Model::Operation.new.tap do |o|
@@ -618,6 +699,23 @@ module Aws::CloudWatchRUM
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:put_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutResourcePolicy"
+        o.http_method = "PUT"
+        o.http_request_uri = "/appmonitor/{Name}/policy"
+        o.input = Shapes::ShapeRef.new(shape: PutResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: PolicySizeLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPolicyRevisionIdException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: MalformedPolicyDocumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:put_rum_events, Seahorse::Model::Operation.new.tap do |o|

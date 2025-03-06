@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.293.0 (2025-03-03)
+------------------
+
+* Feature - Add DomainId to CreateDomainResponse
+
+1.292.0 (2025-02-27)
+------------------
+
+* Feature - SageMaker HubService is introducing support for creating Training Jobs in Curated Hub (Private Hub). Additionally, it is introducing two new APIs: UpdateHubContent and UpdateHubContentReference.
+
 1.291.0 (2025-02-26)
 ------------------
 

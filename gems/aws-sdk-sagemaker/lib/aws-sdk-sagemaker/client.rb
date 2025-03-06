@@ -1082,6 +1082,12 @@ module Aws::SageMaker
     #                     s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
     #                     attribute_names: ["AttributeName"],
     #                     instance_group_names: ["InstanceGroupName"],
+    #                     model_access_config: {
+    #                       accept_eula: false, # required
+    #                     },
+    #                     hub_access_config: {
+    #                       hub_content_arn: "HubContentArn", # required
+    #                     },
     #                   },
     #                   file_system_data_source: {
     #                     file_system_id: "FileSystemId", # required
@@ -2882,6 +2888,7 @@ module Aws::SageMaker
     # @return [Types::CreateDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDomainResponse#domain_arn #domain_arn} => String
+    #   * {Types::CreateDomainResponse#domain_id #domain_id} => String
     #   * {Types::CreateDomainResponse#url #url} => String
     #
     # @example Request syntax with placeholder values
@@ -3225,6 +3232,7 @@ module Aws::SageMaker
     # @example Response structure
     #
     #   resp.domain_arn #=> String
+    #   resp.domain_id #=> String
     #   resp.url #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateDomain AWS API Documentation
@@ -4747,6 +4755,12 @@ module Aws::SageMaker
     #               s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
     #               attribute_names: ["AttributeName"],
     #               instance_group_names: ["InstanceGroupName"],
+    #               model_access_config: {
+    #                 accept_eula: false, # required
+    #               },
+    #               hub_access_config: {
+    #                 hub_content_arn: "HubContentArn", # required
+    #               },
     #             },
     #             file_system_data_source: {
     #               file_system_id: "FileSystemId", # required
@@ -4883,6 +4897,12 @@ module Aws::SageMaker
     #                 s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
     #                 attribute_names: ["AttributeName"],
     #                 instance_group_names: ["InstanceGroupName"],
+    #                 model_access_config: {
+    #                   accept_eula: false, # required
+    #                 },
+    #                 hub_access_config: {
+    #                   hub_content_arn: "HubContentArn", # required
+    #                 },
     #               },
     #               file_system_data_source: {
     #                 file_system_id: "FileSystemId", # required
@@ -9218,6 +9238,12 @@ module Aws::SageMaker
     #             s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
     #             attribute_names: ["AttributeName"],
     #             instance_group_names: ["InstanceGroupName"],
+    #             model_access_config: {
+    #               accept_eula: false, # required
+    #             },
+    #             hub_access_config: {
+    #               hub_content_arn: "HubContentArn", # required
+    #             },
     #           },
     #           file_system_data_source: {
     #             file_system_id: "FileSystemId", # required
@@ -12169,6 +12195,8 @@ module Aws::SageMaker
     #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].data_source.s3_data_source.attribute_names[0] #=> String
     #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].data_source.s3_data_source.instance_group_names #=> Array
     #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].data_source.s3_data_source.instance_group_names[0] #=> String
+    #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].data_source.s3_data_source.model_access_config.accept_eula #=> Boolean
+    #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].data_source.s3_data_source.hub_access_config.hub_content_arn #=> String
     #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].data_source.file_system_data_source.file_system_id #=> String
     #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].data_source.file_system_data_source.file_system_access_mode #=> String, one of "rw", "ro"
     #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].data_source.file_system_data_source.file_system_type #=> String, one of "EFS", "FSxLustre"
@@ -14463,6 +14491,7 @@ module Aws::SageMaker
     #   * {Types::DescribeHubContentResponse#hub_content_status #hub_content_status} => String
     #   * {Types::DescribeHubContentResponse#failure_reason #failure_reason} => String
     #   * {Types::DescribeHubContentResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeHubContentResponse#last_modified_time #last_modified_time} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -14488,7 +14517,7 @@ module Aws::SageMaker
     #   resp.hub_content_document #=> String
     #   resp.sage_maker_public_hub_content_arn #=> String
     #   resp.reference_min_version #=> String
-    #   resp.support_status #=> String, one of "Supported", "Deprecated"
+    #   resp.support_status #=> String, one of "Supported", "Deprecated", "Restricted"
     #   resp.hub_content_search_keywords #=> Array
     #   resp.hub_content_search_keywords[0] #=> String
     #   resp.hub_content_dependencies #=> Array
@@ -14497,6 +14526,7 @@ module Aws::SageMaker
     #   resp.hub_content_status #=> String, one of "Available", "Importing", "Deleting", "ImportFailed", "DeleteFailed"
     #   resp.failure_reason #=> String
     #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeHubContent AWS API Documentation
     #
@@ -14652,6 +14682,8 @@ module Aws::SageMaker
     #   resp.training_job_definition.input_data_config[0].data_source.s3_data_source.attribute_names[0] #=> String
     #   resp.training_job_definition.input_data_config[0].data_source.s3_data_source.instance_group_names #=> Array
     #   resp.training_job_definition.input_data_config[0].data_source.s3_data_source.instance_group_names[0] #=> String
+    #   resp.training_job_definition.input_data_config[0].data_source.s3_data_source.model_access_config.accept_eula #=> Boolean
+    #   resp.training_job_definition.input_data_config[0].data_source.s3_data_source.hub_access_config.hub_content_arn #=> String
     #   resp.training_job_definition.input_data_config[0].data_source.file_system_data_source.file_system_id #=> String
     #   resp.training_job_definition.input_data_config[0].data_source.file_system_data_source.file_system_access_mode #=> String, one of "rw", "ro"
     #   resp.training_job_definition.input_data_config[0].data_source.file_system_data_source.file_system_type #=> String, one of "EFS", "FSxLustre"
@@ -14737,6 +14769,8 @@ module Aws::SageMaker
     #   resp.training_job_definitions[0].input_data_config[0].data_source.s3_data_source.attribute_names[0] #=> String
     #   resp.training_job_definitions[0].input_data_config[0].data_source.s3_data_source.instance_group_names #=> Array
     #   resp.training_job_definitions[0].input_data_config[0].data_source.s3_data_source.instance_group_names[0] #=> String
+    #   resp.training_job_definitions[0].input_data_config[0].data_source.s3_data_source.model_access_config.accept_eula #=> Boolean
+    #   resp.training_job_definitions[0].input_data_config[0].data_source.s3_data_source.hub_access_config.hub_content_arn #=> String
     #   resp.training_job_definitions[0].input_data_config[0].data_source.file_system_data_source.file_system_id #=> String
     #   resp.training_job_definitions[0].input_data_config[0].data_source.file_system_data_source.file_system_access_mode #=> String, one of "rw", "ro"
     #   resp.training_job_definitions[0].input_data_config[0].data_source.file_system_data_source.file_system_type #=> String, one of "EFS", "FSxLustre"
@@ -17263,6 +17297,8 @@ module Aws::SageMaker
     #   resp.input_data_config[0].data_source.s3_data_source.attribute_names[0] #=> String
     #   resp.input_data_config[0].data_source.s3_data_source.instance_group_names #=> Array
     #   resp.input_data_config[0].data_source.s3_data_source.instance_group_names[0] #=> String
+    #   resp.input_data_config[0].data_source.s3_data_source.model_access_config.accept_eula #=> Boolean
+    #   resp.input_data_config[0].data_source.s3_data_source.hub_access_config.hub_content_arn #=> String
     #   resp.input_data_config[0].data_source.file_system_data_source.file_system_id #=> String
     #   resp.input_data_config[0].data_source.file_system_data_source.file_system_access_mode #=> String, one of "rw", "ro"
     #   resp.input_data_config[0].data_source.file_system_data_source.file_system_type #=> String, one of "EFS", "FSxLustre"
@@ -18347,6 +18383,9 @@ module Aws::SageMaker
     #   The hub content document that describes information about the hub
     #   content such as type, associated containers, scripts, and more.
     #
+    # @option params [String] :support_status
+    #   The status of the hub content resource.
+    #
     # @option params [Array<String>] :hub_content_search_keywords
     #   The searchable keywords of the hub content.
     #
@@ -18370,6 +18409,7 @@ module Aws::SageMaker
     #     hub_content_description: "HubContentDescription",
     #     hub_content_markdown: "HubContentMarkdown",
     #     hub_content_document: "HubContentDocument", # required
+    #     support_status: "Supported", # accepts Supported, Deprecated, Restricted
     #     hub_content_search_keywords: ["HubSearchKeyword"],
     #     tags: [
     #       {
@@ -20581,7 +20621,7 @@ module Aws::SageMaker
     #   resp.hub_content_summaries[0].document_schema_version #=> String
     #   resp.hub_content_summaries[0].hub_content_display_name #=> String
     #   resp.hub_content_summaries[0].hub_content_description #=> String
-    #   resp.hub_content_summaries[0].support_status #=> String, one of "Supported", "Deprecated"
+    #   resp.hub_content_summaries[0].support_status #=> String, one of "Supported", "Deprecated", "Restricted"
     #   resp.hub_content_summaries[0].hub_content_search_keywords #=> Array
     #   resp.hub_content_summaries[0].hub_content_search_keywords[0] #=> String
     #   resp.hub_content_summaries[0].hub_content_status #=> String, one of "Available", "Importing", "Deleting", "ImportFailed", "DeleteFailed"
@@ -20663,7 +20703,7 @@ module Aws::SageMaker
     #   resp.hub_content_summaries[0].document_schema_version #=> String
     #   resp.hub_content_summaries[0].hub_content_display_name #=> String
     #   resp.hub_content_summaries[0].hub_content_description #=> String
-    #   resp.hub_content_summaries[0].support_status #=> String, one of "Supported", "Deprecated"
+    #   resp.hub_content_summaries[0].support_status #=> String, one of "Supported", "Deprecated", "Restricted"
     #   resp.hub_content_summaries[0].hub_content_search_keywords #=> Array
     #   resp.hub_content_summaries[0].hub_content_search_keywords[0] #=> String
     #   resp.hub_content_summaries[0].hub_content_status #=> String, one of "Available", "Importing", "Deleting", "ImportFailed", "DeleteFailed"
@@ -27392,6 +27432,168 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Updates SageMaker hub content (either a `Model` or `Notebook`
+    # resource).
+    #
+    # You can update the metadata that describes the resource. In addition
+    # to the required request fields, specify at least one of the following
+    # fields to update:
+    #
+    # * `HubContentDescription`
+    #
+    # * `HubContentDisplayName`
+    #
+    # * `HubContentMarkdown`
+    #
+    # * `HubContentSearchKeywords`
+    #
+    # * `SupportStatus`
+    #
+    # For more information about hubs, see [Private curated hubs for
+    # foundation model access control in JumpStart][1].
+    #
+    # <note markdown="1"> If you want to update a `ModelReference` resource in your hub, use the
+    # `UpdateHubContentResource` API instead.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-curated-hubs.html
+    #
+    # @option params [required, String] :hub_name
+    #   The name of the SageMaker hub that contains the hub content you want
+    #   to update. You can optionally use the hub ARN instead.
+    #
+    # @option params [required, String] :hub_content_name
+    #   The name of the hub content resource that you want to update.
+    #
+    # @option params [required, String] :hub_content_type
+    #   The content type of the resource that you want to update. Only specify
+    #   a `Model` or `Notebook` resource for this API. To update a
+    #   `ModelReference`, use the `UpdateHubContentReference` API instead.
+    #
+    # @option params [required, String] :hub_content_version
+    #   The hub content version that you want to update. For example, if you
+    #   have two versions of a resource in your hub, you can update the second
+    #   version.
+    #
+    # @option params [String] :hub_content_display_name
+    #   The display name of the hub content.
+    #
+    # @option params [String] :hub_content_description
+    #   The description of the hub content.
+    #
+    # @option params [String] :hub_content_markdown
+    #   A string that provides a description of the hub content. This string
+    #   can include links, tables, and standard markdown formatting.
+    #
+    # @option params [Array<String>] :hub_content_search_keywords
+    #   The searchable keywords of the hub content.
+    #
+    # @option params [String] :support_status
+    #   Indicates the current status of the hub content resource.
+    #
+    # @return [Types::UpdateHubContentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateHubContentResponse#hub_arn #hub_arn} => String
+    #   * {Types::UpdateHubContentResponse#hub_content_arn #hub_content_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_hub_content({
+    #     hub_name: "HubNameOrArn", # required
+    #     hub_content_name: "HubContentName", # required
+    #     hub_content_type: "Model", # required, accepts Model, Notebook, ModelReference
+    #     hub_content_version: "HubContentVersion", # required
+    #     hub_content_display_name: "HubContentDisplayName",
+    #     hub_content_description: "HubContentDescription",
+    #     hub_content_markdown: "HubContentMarkdown",
+    #     hub_content_search_keywords: ["HubSearchKeyword"],
+    #     support_status: "Supported", # accepts Supported, Deprecated, Restricted
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.hub_arn #=> String
+    #   resp.hub_content_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateHubContent AWS API Documentation
+    #
+    # @overload update_hub_content(params = {})
+    # @param [Hash] params ({})
+    def update_hub_content(params = {}, options = {})
+      req = build_request(:update_hub_content, params)
+      req.send_request(options)
+    end
+
+    # Updates the contents of a SageMaker hub for a `ModelReference`
+    # resource. A `ModelReference` allows you to access public SageMaker
+    # JumpStart models from within your private hub.
+    #
+    # When using this API, you can update the `MinVersion` field for
+    # additional flexibility in the model version. You shouldn't update any
+    # additional fields when using this API, because the metadata in your
+    # private hub should match the public JumpStart model's metadata.
+    #
+    # <note markdown="1"> If you want to update a `Model` or `Notebook` resource in your hub,
+    # use the `UpdateHubContent` API instead.
+    #
+    #  </note>
+    #
+    # For more information about adding model references to your hub, see [
+    # Add models to a private hub][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-curated-hubs-admin-guide-add-models.html
+    #
+    # @option params [required, String] :hub_name
+    #   The name of the SageMaker hub that contains the hub content you want
+    #   to update. You can optionally use the hub ARN instead.
+    #
+    # @option params [required, String] :hub_content_name
+    #   The name of the hub content resource that you want to update.
+    #
+    # @option params [required, String] :hub_content_type
+    #   The content type of the resource that you want to update. Only specify
+    #   a `ModelReference` resource for this API. To update a `Model` or
+    #   `Notebook` resource, use the `UpdateHubContent` API instead.
+    #
+    # @option params [String] :min_version
+    #   The minimum hub content version of the referenced model that you want
+    #   to use. The minimum version must be older than the latest available
+    #   version of the referenced model. To support all versions of a model,
+    #   set the value to `1.0.0`.
+    #
+    # @return [Types::UpdateHubContentReferenceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateHubContentReferenceResponse#hub_arn #hub_arn} => String
+    #   * {Types::UpdateHubContentReferenceResponse#hub_content_arn #hub_content_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_hub_content_reference({
+    #     hub_name: "HubNameOrArn", # required
+    #     hub_content_name: "HubContentName", # required
+    #     hub_content_type: "Model", # required, accepts Model, Notebook, ModelReference
+    #     min_version: "HubContentVersion",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.hub_arn #=> String
+    #   resp.hub_content_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateHubContentReference AWS API Documentation
+    #
+    # @overload update_hub_content_reference(params = {})
+    # @param [Hash] params ({})
+    def update_hub_content_reference(params = {}, options = {})
+      req = build_request(:update_hub_content_reference, params)
+      req.send_request(options)
+    end
+
     # Updates the properties of a SageMaker AI image. To change the image's
     # tags, use the [AddTags][1] and [DeleteTags][2] APIs.
     #
@@ -29545,7 +29747,7 @@ module Aws::SageMaker
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.291.0'
+      context[:gem_version] = '1.293.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

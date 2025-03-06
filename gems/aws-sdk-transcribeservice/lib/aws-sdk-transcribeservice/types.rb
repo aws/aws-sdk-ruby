@@ -626,13 +626,13 @@ module Aws::TranscribeService
     #   summary. The default is `HISTORY_AND_PHYSICAL`.
     #
     #   * HISTORY\_AND\_PHYSICAL: Provides summaries for key sections of the
-    #     clinical documentation. Sections include Chief Complaint, History
-    #     of Present Illness, Review of Systems, Past Medical History,
-    #     Assessment, and Plan.
+    #     clinical documentation. Examples of sections include Chief
+    #     Complaint, History of Present Illness, Review of Systems, Past
+    #     Medical History, Assessment, and Plan.
     #
     #   * GIRPP: Provides summaries based on the patients progress toward
-    #     goals. Sections include Goal, Intervention, Response, Progress,
-    #     and Plan.
+    #     goals. Examples of sections include Goal, Intervention, Response,
+    #     Progress, and Plan.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ClinicalNoteGenerationSettings AWS API Documentation

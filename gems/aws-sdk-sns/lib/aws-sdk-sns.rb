@@ -58,7 +58,7 @@ module Aws::SNS
   autoload :Subscription, 'aws-sdk-sns/subscription'
   autoload :Topic, 'aws-sdk-sns/topic'
 
-  GEM_VERSION = '1.96.0'
+  GEM_VERSION = '1.97.0'
 
 end
 

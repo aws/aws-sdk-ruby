@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.100.0 (2025-03-05)
+------------------
+
+* Feature - AWS DataSync now supports modifying ServerHostname while updating locations SMB, NFS, and ObjectStorage.
+
 1.99.0 (2025-02-18)
 ------------------
 

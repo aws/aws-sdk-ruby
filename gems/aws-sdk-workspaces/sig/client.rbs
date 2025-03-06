@@ -1074,7 +1074,8 @@ module Aws
                                                   device_type_android: ("ALLOW" | "DENY")?,
                                                   device_type_chrome_os: ("ALLOW" | "DENY")?,
                                                   device_type_zero_client: ("ALLOW" | "DENY")?,
-                                                  device_type_linux: ("ALLOW" | "DENY")?
+                                                  device_type_linux: ("ALLOW" | "DENY")?,
+                                                  device_type_work_spaces_thin_client: ("ALLOW" | "DENY")?
                                                 }
                                               ) -> _ModifyWorkspaceAccessPropertiesResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyWorkspaceAccessPropertiesResponseSuccess

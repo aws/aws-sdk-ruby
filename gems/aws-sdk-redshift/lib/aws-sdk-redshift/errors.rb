@@ -28,48 +28,78 @@ module Aws::Redshift
   #
   # ## Error Classes
   # * {AccessToClusterDeniedFault}
+  #    * This error class is not used. `AccessToClusterDenied` is used during parsing instead.
   # * {AccessToSnapshotDeniedFault}
+  #    * This error class is not used. `AccessToSnapshotDenied` is used during parsing instead.
   # * {AuthenticationProfileAlreadyExistsFault}
   # * {AuthenticationProfileNotFoundFault}
   # * {AuthenticationProfileQuotaExceededFault}
   # * {AuthorizationAlreadyExistsFault}
+  #    * This error class is not used. `AuthorizationAlreadyExists` is used during parsing instead.
   # * {AuthorizationNotFoundFault}
+  #    * This error class is not used. `AuthorizationNotFound` is used during parsing instead.
   # * {AuthorizationQuotaExceededFault}
+  #    * This error class is not used. `AuthorizationQuotaExceeded` is used during parsing instead.
   # * {BatchDeleteRequestSizeExceededFault}
+  #    * This error class is not used. `BatchDeleteRequestSizeExceeded` is used during parsing instead.
   # * {BatchModifyClusterSnapshotsLimitExceededFault}
   # * {BucketNotFoundFault}
   # * {ClusterAlreadyExistsFault}
+  #    * This error class is not used. `ClusterAlreadyExists` is used during parsing instead.
   # * {ClusterNotFoundFault}
+  #    * This error class is not used. `ClusterNotFound` is used during parsing instead.
   # * {ClusterOnLatestRevisionFault}
+  #    * This error class is not used. `ClusterOnLatestRevision` is used during parsing instead.
   # * {ClusterParameterGroupAlreadyExistsFault}
+  #    * This error class is not used. `ClusterParameterGroupAlreadyExists` is used during parsing instead.
   # * {ClusterParameterGroupNotFoundFault}
+  #    * This error class is not used. `ClusterParameterGroupNotFound` is used during parsing instead.
   # * {ClusterParameterGroupQuotaExceededFault}
+  #    * This error class is not used. `ClusterParameterGroupQuotaExceeded` is used during parsing instead.
   # * {ClusterQuotaExceededFault}
+  #    * This error class is not used. `ClusterQuotaExceeded` is used during parsing instead.
   # * {ClusterSecurityGroupAlreadyExistsFault}
+  #    * This error class is not used. `ClusterSecurityGroupAlreadyExists` is used during parsing instead.
   # * {ClusterSecurityGroupNotFoundFault}
+  #    * This error class is not used. `ClusterSecurityGroupNotFound` is used during parsing instead.
   # * {ClusterSecurityGroupQuotaExceededFault}
+  #    * This error class is not used. `QuotaExceeded.ClusterSecurityGroup` is used during parsing instead.
   # * {ClusterSnapshotAlreadyExistsFault}
+  #    * This error class is not used. `ClusterSnapshotAlreadyExists` is used during parsing instead.
   # * {ClusterSnapshotNotFoundFault}
+  #    * This error class is not used. `ClusterSnapshotNotFound` is used during parsing instead.
   # * {ClusterSnapshotQuotaExceededFault}
+  #    * This error class is not used. `ClusterSnapshotQuotaExceeded` is used during parsing instead.
   # * {ClusterSubnetGroupAlreadyExistsFault}
+  #    * This error class is not used. `ClusterSubnetGroupAlreadyExists` is used during parsing instead.
   # * {ClusterSubnetGroupNotFoundFault}
   # * {ClusterSubnetGroupQuotaExceededFault}
+  #    * This error class is not used. `ClusterSubnetGroupQuotaExceeded` is used during parsing instead.
   # * {ClusterSubnetQuotaExceededFault}
   # * {ConflictPolicyUpdateFault}
   # * {CopyToRegionDisabledFault}
   # * {CustomCnameAssociationFault}
   # * {CustomDomainAssociationNotFoundFault}
   # * {DependentServiceAccessDeniedFault}
+  #    * This error class is not used. `DependentServiceAccessDenied` is used during parsing instead.
   # * {DependentServiceRequestThrottlingFault}
   # * {DependentServiceUnavailableFault}
   # * {EndpointAlreadyExistsFault}
+  #    * This error class is not used. `EndpointAlreadyExists` is used during parsing instead.
   # * {EndpointAuthorizationAlreadyExistsFault}
+  #    * This error class is not used. `EndpointAuthorizationAlreadyExists` is used during parsing instead.
   # * {EndpointAuthorizationNotFoundFault}
+  #    * This error class is not used. `EndpointAuthorizationNotFound` is used during parsing instead.
   # * {EndpointAuthorizationsPerClusterLimitExceededFault}
+  #    * This error class is not used. `EndpointAuthorizationsPerClusterLimitExceeded` is used during parsing instead.
   # * {EndpointNotFoundFault}
+  #    * This error class is not used. `EndpointNotFound` is used during parsing instead.
   # * {EndpointsPerAuthorizationLimitExceededFault}
+  #    * This error class is not used. `EndpointsPerAuthorizationLimitExceeded` is used during parsing instead.
   # * {EndpointsPerClusterLimitExceededFault}
+  #    * This error class is not used. `EndpointsPerClusterLimitExceeded` is used during parsing instead.
   # * {EventSubscriptionQuotaExceededFault}
+  #    * This error class is not used. `EventSubscriptionQuotaExceeded` is used during parsing instead.
   # * {HsmClientCertificateAlreadyExistsFault}
   # * {HsmClientCertificateNotFoundFault}
   # * {HsmClientCertificateQuotaExceededFault}
@@ -79,6 +109,7 @@ module Aws::Redshift
   # * {InProgressTableRestoreQuotaExceededFault}
   # * {IncompatibleOrderableOptions}
   # * {InsufficientClusterCapacityFault}
+  #    * This error class is not used. `InsufficientClusterCapacity` is used during parsing instead.
   # * {InsufficientS3BucketPolicyFault}
   # * {IntegrationAlreadyExistsFault}
   # * {IntegrationConflictOperationFault}
@@ -89,59 +120,94 @@ module Aws::Redshift
   # * {IntegrationTargetNotFoundFault}
   # * {InvalidAuthenticationProfileRequestFault}
   # * {InvalidAuthorizationStateFault}
+  #    * This error class is not used. `InvalidAuthorizationState` is used during parsing instead.
   # * {InvalidClusterParameterGroupStateFault}
+  #    * This error class is not used. `InvalidClusterParameterGroupState` is used during parsing instead.
   # * {InvalidClusterSecurityGroupStateFault}
+  #    * This error class is not used. `InvalidClusterSecurityGroupState` is used during parsing instead.
   # * {InvalidClusterSnapshotScheduleStateFault}
+  #    * This error class is not used. `InvalidClusterSnapshotScheduleState` is used during parsing instead.
   # * {InvalidClusterSnapshotStateFault}
+  #    * This error class is not used. `InvalidClusterSnapshotState` is used during parsing instead.
   # * {InvalidClusterStateFault}
+  #    * This error class is not used. `InvalidClusterState` is used during parsing instead.
   # * {InvalidClusterSubnetGroupStateFault}
   # * {InvalidClusterSubnetStateFault}
   # * {InvalidClusterTrackFault}
+  #    * This error class is not used. `InvalidClusterTrack` is used during parsing instead.
   # * {InvalidDataShareFault}
   # * {InvalidElasticIpFault}
   # * {InvalidEndpointStateFault}
+  #    * This error class is not used. `InvalidEndpointState` is used during parsing instead.
   # * {InvalidHsmClientCertificateStateFault}
   # * {InvalidHsmConfigurationStateFault}
   # * {InvalidNamespaceFault}
   # * {InvalidPolicyFault}
   # * {InvalidReservedNodeStateFault}
+  #    * This error class is not used. `InvalidReservedNodeState` is used during parsing instead.
   # * {InvalidRestoreFault}
+  #    * This error class is not used. `InvalidRestore` is used during parsing instead.
   # * {InvalidRetentionPeriodFault}
   # * {InvalidS3BucketNameFault}
   # * {InvalidS3KeyPrefixFault}
   # * {InvalidScheduleFault}
+  #    * This error class is not used. `InvalidSchedule` is used during parsing instead.
   # * {InvalidScheduledActionFault}
+  #    * This error class is not used. `InvalidScheduledAction` is used during parsing instead.
   # * {InvalidSnapshotCopyGrantStateFault}
   # * {InvalidSubnet}
   # * {InvalidSubscriptionStateFault}
   # * {InvalidTableRestoreArgumentFault}
+  #    * This error class is not used. `InvalidTableRestoreArgument` is used during parsing instead.
   # * {InvalidTagFault}
   # * {InvalidUsageLimitFault}
+  #    * This error class is not used. `InvalidUsageLimit` is used during parsing instead.
   # * {InvalidVPCNetworkStateFault}
   # * {Ipv6CidrBlockNotFoundFault}
   # * {LimitExceededFault}
   # * {NumberOfNodesPerClusterLimitExceededFault}
+  #    * This error class is not used. `NumberOfNodesPerClusterLimitExceeded` is used during parsing instead.
   # * {NumberOfNodesQuotaExceededFault}
+  #    * This error class is not used. `NumberOfNodesQuotaExceeded` is used during parsing instead.
   # * {PartnerNotFoundFault}
+  #    * This error class is not used. `PartnerNotFound` is used during parsing instead.
   # * {RedshiftIdcApplicationAlreadyExistsFault}
+  #    * This error class is not used. `RedshiftIdcApplicationAlreadyExists` is used during parsing instead.
   # * {RedshiftIdcApplicationNotExistsFault}
+  #    * This error class is not used. `RedshiftIdcApplicationNotExists` is used during parsing instead.
   # * {RedshiftIdcApplicationQuotaExceededFault}
+  #    * This error class is not used. `RedshiftIdcApplicationQuotaExceeded` is used during parsing instead.
   # * {ReservedNodeAlreadyExistsFault}
+  #    * This error class is not used. `ReservedNodeAlreadyExists` is used during parsing instead.
   # * {ReservedNodeAlreadyMigratedFault}
+  #    * This error class is not used. `ReservedNodeAlreadyMigrated` is used during parsing instead.
   # * {ReservedNodeExchangeNotFoundFault}
+  #    * This error class is not used. `ReservedNodeExchangeNotFond` is used during parsing instead.
   # * {ReservedNodeNotFoundFault}
+  #    * This error class is not used. `ReservedNodeNotFound` is used during parsing instead.
   # * {ReservedNodeOfferingNotFoundFault}
+  #    * This error class is not used. `ReservedNodeOfferingNotFound` is used during parsing instead.
   # * {ReservedNodeQuotaExceededFault}
+  #    * This error class is not used. `ReservedNodeQuotaExceeded` is used during parsing instead.
   # * {ResizeNotFoundFault}
+  #    * This error class is not used. `ResizeNotFound` is used during parsing instead.
   # * {ResourceNotFoundFault}
   # * {SNSInvalidTopicFault}
+  #    * This error class is not used. `SNSInvalidTopic` is used during parsing instead.
   # * {SNSNoAuthorizationFault}
+  #    * This error class is not used. `SNSNoAuthorization` is used during parsing instead.
   # * {SNSTopicArnNotFoundFault}
+  #    * This error class is not used. `SNSTopicArnNotFound` is used during parsing instead.
   # * {ScheduleDefinitionTypeUnsupportedFault}
+  #    * This error class is not used. `ScheduleDefinitionTypeUnsupported` is used during parsing instead.
   # * {ScheduledActionAlreadyExistsFault}
+  #    * This error class is not used. `ScheduledActionAlreadyExists` is used during parsing instead.
   # * {ScheduledActionNotFoundFault}
+  #    * This error class is not used. `ScheduledActionNotFound` is used during parsing instead.
   # * {ScheduledActionQuotaExceededFault}
+  #    * This error class is not used. `ScheduledActionQuotaExceeded` is used during parsing instead.
   # * {ScheduledActionTypeUnsupportedFault}
+  #    * This error class is not used. `ScheduledActionTypeUnsupported` is used during parsing instead.
   # * {SnapshotCopyAlreadyDisabledFault}
   # * {SnapshotCopyAlreadyEnabledFault}
   # * {SnapshotCopyDisabledFault}
@@ -149,33 +215,51 @@ module Aws::Redshift
   # * {SnapshotCopyGrantNotFoundFault}
   # * {SnapshotCopyGrantQuotaExceededFault}
   # * {SnapshotScheduleAlreadyExistsFault}
+  #    * This error class is not used. `SnapshotScheduleAlreadyExists` is used during parsing instead.
   # * {SnapshotScheduleNotFoundFault}
+  #    * This error class is not used. `SnapshotScheduleNotFound` is used during parsing instead.
   # * {SnapshotScheduleQuotaExceededFault}
+  #    * This error class is not used. `SnapshotScheduleQuotaExceeded` is used during parsing instead.
   # * {SnapshotScheduleUpdateInProgressFault}
+  #    * This error class is not used. `SnapshotScheduleUpdateInProgress` is used during parsing instead.
   # * {SourceNotFoundFault}
+  #    * This error class is not used. `SourceNotFound` is used during parsing instead.
   # * {SubnetAlreadyInUse}
   # * {SubscriptionAlreadyExistFault}
+  #    * This error class is not used. `SubscriptionAlreadyExist` is used during parsing instead.
   # * {SubscriptionCategoryNotFoundFault}
+  #    * This error class is not used. `SubscriptionCategoryNotFound` is used during parsing instead.
   # * {SubscriptionEventIdNotFoundFault}
+  #    * This error class is not used. `SubscriptionEventIdNotFound` is used during parsing instead.
   # * {SubscriptionNotFoundFault}
+  #    * This error class is not used. `SubscriptionNotFound` is used during parsing instead.
   # * {SubscriptionSeverityNotFoundFault}
+  #    * This error class is not used. `SubscriptionSeverityNotFound` is used during parsing instead.
   # * {TableLimitExceededFault}
+  #    * This error class is not used. `TableLimitExceeded` is used during parsing instead.
   # * {TableRestoreNotFoundFault}
   # * {TagLimitExceededFault}
   # * {UnauthorizedOperation}
   # * {UnauthorizedPartnerIntegrationFault}
+  #    * This error class is not used. `UnauthorizedPartnerIntegration` is used during parsing instead.
   # * {UnknownSnapshotCopyRegionFault}
   # * {UnsupportedOperationFault}
+  #    * This error class is not used. `UnsupportedOperation` is used during parsing instead.
   # * {UnsupportedOptionFault}
   # * {UsageLimitAlreadyExistsFault}
+  #    * This error class is not used. `UsageLimitAlreadyExists` is used during parsing instead.
   # * {UsageLimitNotFoundFault}
+  #    * This error class is not used. `UsageLimitNotFound` is used during parsing instead.
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
+  # Some existing error classes may use a different class name than the one documented.
   module Errors
 
     extend Aws::Errors::DynamicErrors
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `AccessToClusterDenied` instead.
     class AccessToClusterDeniedFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -186,6 +270,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `AccessToSnapshotDenied` instead.
     class AccessToSnapshotDeniedFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -226,6 +312,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `AuthorizationAlreadyExists` instead.
     class AuthorizationAlreadyExistsFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -236,6 +324,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `AuthorizationNotFound` instead.
     class AuthorizationNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -246,6 +336,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `AuthorizationQuotaExceeded` instead.
     class AuthorizationQuotaExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -256,6 +348,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `BatchDeleteRequestSizeExceeded` instead.
     class BatchDeleteRequestSizeExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -286,6 +380,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ClusterAlreadyExists` instead.
     class ClusterAlreadyExistsFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -296,6 +392,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ClusterNotFound` instead.
     class ClusterNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -306,6 +404,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ClusterOnLatestRevision` instead.
     class ClusterOnLatestRevisionFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -316,6 +416,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ClusterParameterGroupAlreadyExists` instead.
     class ClusterParameterGroupAlreadyExistsFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -326,6 +428,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ClusterParameterGroupNotFound` instead.
     class ClusterParameterGroupNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -336,6 +440,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ClusterParameterGroupQuotaExceeded` instead.
     class ClusterParameterGroupQuotaExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -346,6 +452,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ClusterQuotaExceeded` instead.
     class ClusterQuotaExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -356,6 +464,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ClusterSecurityGroupAlreadyExists` instead.
     class ClusterSecurityGroupAlreadyExistsFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -366,6 +476,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ClusterSecurityGroupNotFound` instead.
     class ClusterSecurityGroupNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -376,6 +488,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `QuotaExceeded.ClusterSecurityGroup` instead.
     class ClusterSecurityGroupQuotaExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -386,6 +500,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ClusterSnapshotAlreadyExists` instead.
     class ClusterSnapshotAlreadyExistsFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -396,6 +512,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ClusterSnapshotNotFound` instead.
     class ClusterSnapshotNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -406,6 +524,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ClusterSnapshotQuotaExceeded` instead.
     class ClusterSnapshotQuotaExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -416,6 +536,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ClusterSubnetGroupAlreadyExists` instead.
     class ClusterSubnetGroupAlreadyExistsFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -436,6 +558,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ClusterSubnetGroupQuotaExceeded` instead.
     class ClusterSubnetGroupQuotaExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -496,6 +620,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `DependentServiceAccessDenied` instead.
     class DependentServiceAccessDeniedFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -526,6 +652,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `EndpointAlreadyExists` instead.
     class EndpointAlreadyExistsFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -536,6 +664,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `EndpointAuthorizationAlreadyExists` instead.
     class EndpointAuthorizationAlreadyExistsFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -546,6 +676,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `EndpointAuthorizationNotFound` instead.
     class EndpointAuthorizationNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -556,6 +688,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `EndpointAuthorizationsPerClusterLimitExceeded` instead.
     class EndpointAuthorizationsPerClusterLimitExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -566,6 +700,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `EndpointNotFound` instead.
     class EndpointNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -576,6 +712,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `EndpointsPerAuthorizationLimitExceeded` instead.
     class EndpointsPerAuthorizationLimitExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -586,6 +724,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `EndpointsPerClusterLimitExceeded` instead.
     class EndpointsPerClusterLimitExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -596,6 +736,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `EventSubscriptionQuotaExceeded` instead.
     class EventSubscriptionQuotaExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -686,6 +828,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InsufficientClusterCapacity` instead.
     class InsufficientClusterCapacityFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -786,6 +930,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidAuthorizationState` instead.
     class InvalidAuthorizationStateFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -796,6 +942,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidClusterParameterGroupState` instead.
     class InvalidClusterParameterGroupStateFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -806,6 +954,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidClusterSecurityGroupState` instead.
     class InvalidClusterSecurityGroupStateFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -816,6 +966,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidClusterSnapshotScheduleState` instead.
     class InvalidClusterSnapshotScheduleStateFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -826,6 +978,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidClusterSnapshotState` instead.
     class InvalidClusterSnapshotStateFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -836,6 +990,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidClusterState` instead.
     class InvalidClusterStateFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -866,6 +1022,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidClusterTrack` instead.
     class InvalidClusterTrackFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -896,6 +1054,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidEndpointState` instead.
     class InvalidEndpointStateFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -946,6 +1106,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidReservedNodeState` instead.
     class InvalidReservedNodeStateFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -956,6 +1118,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidRestore` instead.
     class InvalidRestoreFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -996,6 +1160,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidSchedule` instead.
     class InvalidScheduleFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1006,6 +1172,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidScheduledAction` instead.
     class InvalidScheduledActionFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1046,6 +1214,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidTableRestoreArgument` instead.
     class InvalidTableRestoreArgumentFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1066,6 +1236,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidUsageLimit` instead.
     class InvalidUsageLimitFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1106,6 +1278,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `NumberOfNodesPerClusterLimitExceeded` instead.
     class NumberOfNodesPerClusterLimitExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1116,6 +1290,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `NumberOfNodesQuotaExceeded` instead.
     class NumberOfNodesQuotaExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1126,6 +1302,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `PartnerNotFound` instead.
     class PartnerNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1136,6 +1314,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `RedshiftIdcApplicationAlreadyExists` instead.
     class RedshiftIdcApplicationAlreadyExistsFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1146,6 +1326,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `RedshiftIdcApplicationNotExists` instead.
     class RedshiftIdcApplicationNotExistsFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1156,6 +1338,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `RedshiftIdcApplicationQuotaExceeded` instead.
     class RedshiftIdcApplicationQuotaExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1166,6 +1350,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ReservedNodeAlreadyExists` instead.
     class ReservedNodeAlreadyExistsFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1176,6 +1362,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ReservedNodeAlreadyMigrated` instead.
     class ReservedNodeAlreadyMigratedFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1186,6 +1374,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ReservedNodeExchangeNotFond` instead.
     class ReservedNodeExchangeNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1196,6 +1386,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ReservedNodeNotFound` instead.
     class ReservedNodeNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1206,6 +1398,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ReservedNodeOfferingNotFound` instead.
     class ReservedNodeOfferingNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1216,6 +1410,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ReservedNodeQuotaExceeded` instead.
     class ReservedNodeQuotaExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1226,6 +1422,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ResizeNotFound` instead.
     class ResizeNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1246,6 +1444,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `SNSInvalidTopic` instead.
     class SNSInvalidTopicFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1256,6 +1456,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `SNSNoAuthorization` instead.
     class SNSNoAuthorizationFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1266,6 +1468,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `SNSTopicArnNotFound` instead.
     class SNSTopicArnNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1276,6 +1480,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ScheduleDefinitionTypeUnsupported` instead.
     class ScheduleDefinitionTypeUnsupportedFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1286,6 +1492,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ScheduledActionAlreadyExists` instead.
     class ScheduledActionAlreadyExistsFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1296,6 +1504,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ScheduledActionNotFound` instead.
     class ScheduledActionNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1306,6 +1516,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ScheduledActionQuotaExceeded` instead.
     class ScheduledActionQuotaExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1316,6 +1528,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ScheduledActionTypeUnsupported` instead.
     class ScheduledActionTypeUnsupportedFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1386,6 +1600,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `SnapshotScheduleAlreadyExists` instead.
     class SnapshotScheduleAlreadyExistsFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1396,6 +1612,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `SnapshotScheduleNotFound` instead.
     class SnapshotScheduleNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1406,6 +1624,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `SnapshotScheduleQuotaExceeded` instead.
     class SnapshotScheduleQuotaExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1416,6 +1636,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `SnapshotScheduleUpdateInProgress` instead.
     class SnapshotScheduleUpdateInProgressFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1426,6 +1648,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `SourceNotFound` instead.
     class SourceNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1446,6 +1670,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `SubscriptionAlreadyExist` instead.
     class SubscriptionAlreadyExistFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1456,6 +1682,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `SubscriptionCategoryNotFound` instead.
     class SubscriptionCategoryNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1466,6 +1694,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `SubscriptionEventIdNotFound` instead.
     class SubscriptionEventIdNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1476,6 +1706,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `SubscriptionNotFound` instead.
     class SubscriptionNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1486,6 +1718,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `SubscriptionSeverityNotFound` instead.
     class SubscriptionSeverityNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1496,6 +1730,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `TableLimitExceeded` instead.
     class TableLimitExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1536,6 +1772,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `UnauthorizedPartnerIntegration` instead.
     class UnauthorizedPartnerIntegrationFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1556,6 +1794,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `UnsupportedOperation` instead.
     class UnsupportedOperationFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1576,6 +1816,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `UsageLimitAlreadyExists` instead.
     class UsageLimitAlreadyExistsFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1586,6 +1828,8 @@ module Aws::Redshift
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `UsageLimitNotFound` instead.
     class UsageLimitNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context

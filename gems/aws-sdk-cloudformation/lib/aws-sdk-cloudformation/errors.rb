@@ -30,23 +30,33 @@ module Aws::CloudFormation
   # * {AlreadyExistsException}
   # * {CFNRegistryException}
   # * {ChangeSetNotFoundException}
+  #    * This error class is not used. `ChangeSetNotFound` is used during parsing instead.
   # * {ConcurrentResourcesLimitExceededException}
+  #    * This error class is not used. `ConcurrentResourcesLimitExceeded` is used during parsing instead.
   # * {CreatedButModifiedException}
   # * {GeneratedTemplateNotFoundException}
+  #    * This error class is not used. `GeneratedTemplateNotFound` is used during parsing instead.
   # * {HookResultNotFoundException}
+  #    * This error class is not used. `HookResultNotFound` is used during parsing instead.
   # * {InsufficientCapabilitiesException}
   # * {InvalidChangeSetStatusException}
+  #    * This error class is not used. `InvalidChangeSetStatus` is used during parsing instead.
   # * {InvalidOperationException}
   # * {InvalidStateTransitionException}
+  #    * This error class is not used. `InvalidStateTransition` is used during parsing instead.
   # * {LimitExceededException}
   # * {NameAlreadyExistsException}
   # * {OperationIdAlreadyExistsException}
   # * {OperationInProgressException}
   # * {OperationNotFoundException}
   # * {OperationStatusCheckFailedException}
+  #    * This error class is not used. `ConditionalCheckFailed` is used during parsing instead.
   # * {ResourceScanInProgressException}
+  #    * This error class is not used. `ResourceScanInProgress` is used during parsing instead.
   # * {ResourceScanLimitExceededException}
+  #    * This error class is not used. `ResourceScanLimitExceeded` is used during parsing instead.
   # * {ResourceScanNotFoundException}
+  #    * This error class is not used. `ResourceScanNotFound` is used during parsing instead.
   # * {StackInstanceNotFoundException}
   # * {StackNotFoundException}
   # * {StackRefactorNotFoundException}
@@ -59,6 +69,7 @@ module Aws::CloudFormation
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
+  # Some existing error classes may use a different class name than the one documented.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -88,6 +99,8 @@ module Aws::CloudFormation
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ChangeSetNotFound` instead.
     class ChangeSetNotFoundException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -98,6 +111,8 @@ module Aws::CloudFormation
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ConcurrentResourcesLimitExceeded` instead.
     class ConcurrentResourcesLimitExceededException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -118,6 +133,8 @@ module Aws::CloudFormation
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `GeneratedTemplateNotFound` instead.
     class GeneratedTemplateNotFoundException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -128,6 +145,8 @@ module Aws::CloudFormation
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `HookResultNotFound` instead.
     class HookResultNotFoundException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -148,6 +167,8 @@ module Aws::CloudFormation
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidChangeSetStatus` instead.
     class InvalidChangeSetStatusException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -168,6 +189,8 @@ module Aws::CloudFormation
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidStateTransition` instead.
     class InvalidStateTransitionException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -228,6 +251,8 @@ module Aws::CloudFormation
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ConditionalCheckFailed` instead.
     class OperationStatusCheckFailedException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -238,6 +263,8 @@ module Aws::CloudFormation
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ResourceScanInProgress` instead.
     class ResourceScanInProgressException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -248,6 +275,8 @@ module Aws::CloudFormation
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ResourceScanLimitExceeded` instead.
     class ResourceScanLimitExceededException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -258,6 +287,8 @@ module Aws::CloudFormation
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ResourceScanNotFound` instead.
     class ResourceScanNotFoundException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context

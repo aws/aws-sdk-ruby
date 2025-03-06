@@ -73,6 +73,8 @@ module Aws::BedrockDataAutomation
     DocumentStandardGenerativeField = Shapes::StructureShape.new(name: 'DocumentStandardGenerativeField')
     DocumentStandardOutputConfiguration = Shapes::StructureShape.new(name: 'DocumentStandardOutputConfiguration')
     EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
+    EncryptionContextKey = Shapes::StringShape.new(name: 'EncryptionContextKey')
+    EncryptionContextValue = Shapes::StringShape.new(name: 'EncryptionContextValue')
     GetBlueprintRequest = Shapes::StructureShape.new(name: 'GetBlueprintRequest')
     GetBlueprintResponse = Shapes::StructureShape.new(name: 'GetBlueprintResponse')
     GetDataAutomationProjectRequest = Shapes::StructureShape.new(name: 'GetDataAutomationProjectRequest')
@@ -93,6 +95,8 @@ module Aws::BedrockDataAutomation
     ListBlueprintsResponse = Shapes::StructureShape.new(name: 'ListBlueprintsResponse')
     ListDataAutomationProjectsRequest = Shapes::StructureShape.new(name: 'ListDataAutomationProjectsRequest')
     ListDataAutomationProjectsResponse = Shapes::StructureShape.new(name: 'ListDataAutomationProjectsResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NonBlankString = Shapes::StringShape.new(name: 'NonBlankString')
@@ -103,9 +107,18 @@ module Aws::BedrockDataAutomation
     SplitterConfiguration = Shapes::StructureShape.new(name: 'SplitterConfiguration')
     StandardOutputConfiguration = Shapes::StructureShape.new(name: 'StandardOutputConfiguration')
     State = Shapes::StringShape.new(name: 'State')
-    String = Shapes::StringShape.new(name: 'String')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TaggableResourceArn = Shapes::StringShape.new(name: 'TaggableResourceArn')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Type = Shapes::StringShape.new(name: 'Type')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateBlueprintRequest = Shapes::StructureShape.new(name: 'UpdateBlueprintRequest')
     UpdateBlueprintResponse = Shapes::StructureShape.new(name: 'UpdateBlueprintResponse')
     UpdateDataAutomationProjectRequest = Shapes::StructureShape.new(name: 'UpdateDataAutomationProjectRequest')
@@ -188,6 +201,7 @@ module Aws::BedrockDataAutomation
     CreateBlueprintRequest.add_member(:schema, Shapes::ShapeRef.new(shape: BlueprintSchema, required: true, location_name: "schema"))
     CreateBlueprintRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateBlueprintRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
+    CreateBlueprintRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateBlueprintRequest.struct_class = Types::CreateBlueprintRequest
 
     CreateBlueprintResponse.add_member(:blueprint, Shapes::ShapeRef.new(shape: Blueprint, required: true, location_name: "blueprint"))
@@ -208,6 +222,7 @@ module Aws::BedrockDataAutomation
     CreateDataAutomationProjectRequest.add_member(:override_configuration, Shapes::ShapeRef.new(shape: OverrideConfiguration, location_name: "overrideConfiguration"))
     CreateDataAutomationProjectRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateDataAutomationProjectRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
+    CreateDataAutomationProjectRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateDataAutomationProjectRequest.struct_class = Types::CreateDataAutomationProjectRequest
 
     CreateDataAutomationProjectResponse.add_member(:project_arn, Shapes::ShapeRef.new(shape: DataAutomationProjectArn, required: true, location_name: "projectArn"))
@@ -337,8 +352,8 @@ module Aws::BedrockDataAutomation
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
-    KmsEncryptionContext.key = Shapes::ShapeRef.new(shape: String)
-    KmsEncryptionContext.value = Shapes::ShapeRef.new(shape: String)
+    KmsEncryptionContext.key = Shapes::ShapeRef.new(shape: EncryptionContextKey)
+    KmsEncryptionContext.value = Shapes::ShapeRef.new(shape: EncryptionContextValue)
 
     ListBlueprintsRequest.add_member(:blueprint_arn, Shapes::ShapeRef.new(shape: BlueprintArn, location_name: "blueprintArn"))
     ListBlueprintsRequest.add_member(:resource_owner, Shapes::ShapeRef.new(shape: ResourceOwner, location_name: "resourceOwner"))
@@ -363,6 +378,12 @@ module Aws::BedrockDataAutomation
     ListDataAutomationProjectsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListDataAutomationProjectsResponse.struct_class = Types::ListDataAutomationProjectsResponse
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TaggableResourceArn, required: true, location_name: "resourceARN"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     OverrideConfiguration.add_member(:document, Shapes::ShapeRef.new(shape: DocumentOverrideConfiguration, location_name: "document"))
     OverrideConfiguration.struct_class = Types::OverrideConfiguration
 
@@ -381,12 +402,33 @@ module Aws::BedrockDataAutomation
     StandardOutputConfiguration.add_member(:audio, Shapes::ShapeRef.new(shape: AudioStandardOutputConfiguration, location_name: "audio"))
     StandardOutputConfiguration.struct_class = Types::StandardOutputConfiguration
 
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "value"))
+    Tag.struct_class = Types::Tag
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TaggableResourceArn, required: true, location_name: "resourceARN"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TaggableResourceArn, required: true, location_name: "resourceARN"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "tagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateBlueprintRequest.add_member(:blueprint_arn, Shapes::ShapeRef.new(shape: BlueprintArn, required: true, location: "uri", location_name: "blueprintArn"))
     UpdateBlueprintRequest.add_member(:schema, Shapes::ShapeRef.new(shape: BlueprintSchema, required: true, location_name: "schema"))
     UpdateBlueprintRequest.add_member(:blueprint_stage, Shapes::ShapeRef.new(shape: BlueprintStage, location_name: "blueprintStage"))
+    UpdateBlueprintRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
     UpdateBlueprintRequest.struct_class = Types::UpdateBlueprintRequest
 
     UpdateBlueprintResponse.add_member(:blueprint, Shapes::ShapeRef.new(shape: Blueprint, required: true, location_name: "blueprint"))
@@ -398,6 +440,7 @@ module Aws::BedrockDataAutomation
     UpdateDataAutomationProjectRequest.add_member(:standard_output_configuration, Shapes::ShapeRef.new(shape: StandardOutputConfiguration, required: true, location_name: "standardOutputConfiguration"))
     UpdateDataAutomationProjectRequest.add_member(:custom_output_configuration, Shapes::ShapeRef.new(shape: CustomOutputConfiguration, location_name: "customOutputConfiguration"))
     UpdateDataAutomationProjectRequest.add_member(:override_configuration, Shapes::ShapeRef.new(shape: OverrideConfiguration, location_name: "overrideConfiguration"))
+    UpdateDataAutomationProjectRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
     UpdateDataAutomationProjectRequest.struct_class = Types::UpdateDataAutomationProjectRequest
 
     UpdateDataAutomationProjectResponse.add_member(:project_arn, Shapes::ShapeRef.new(shape: DataAutomationProjectArn, required: true, location_name: "projectArn"))
@@ -589,6 +632,46 @@ module Aws::BedrockDataAutomation
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/listTagsForResource"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/tagResource"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/untagResource"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:update_blueprint, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateBlueprint"
         o.http_method = "PUT"
@@ -609,6 +692,7 @@ module Aws::BedrockDataAutomation
         o.http_request_uri = "/data-automation-projects/{projectArn}/"
         o.input = Shapes::ShapeRef.new(shape: UpdateDataAutomationProjectRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateDataAutomationProjectResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

@@ -1,0 +1,1045 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::IoTManagedIntegrations
+  module Types
+
+    class AbortConfigCriteria
+      attr_accessor action: ("CANCEL")
+      attr_accessor failure_type: ("FAILED" | "REJECTED" | "TIMED_OUT" | "ALL")
+      attr_accessor min_number_of_executed_things: ::Integer
+      attr_accessor threshold_percentage: ::Float
+      SENSITIVE: []
+    end
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CapabilityAction
+      attr_accessor name: ::String
+      attr_accessor ref: ::String
+      attr_accessor action_trace_id: ::String
+      attr_accessor parameters: untyped
+      SENSITIVE: [:parameters]
+    end
+
+    class CapabilityReport
+      attr_accessor version: ::String
+      attr_accessor node_id: ::String
+      attr_accessor endpoints: ::Array[Types::CapabilityReportEndpoint]
+      SENSITIVE: []
+    end
+
+    class CapabilityReportCapability
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      attr_accessor properties: ::Array[::String]
+      attr_accessor actions: ::Array[::String]
+      attr_accessor events: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CapabilityReportEndpoint
+      attr_accessor id: ::String
+      attr_accessor device_types: ::Array[::String]
+      attr_accessor capabilities: ::Array[Types::CapabilityReportCapability]
+      SENSITIVE: []
+    end
+
+    class CommandCapability
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      attr_accessor actions: ::Array[Types::CapabilityAction]
+      SENSITIVE: []
+    end
+
+    class CommandEndpoint
+      attr_accessor endpoint_id: ::String
+      attr_accessor capabilities: ::Array[Types::CommandCapability]
+      SENSITIVE: []
+    end
+
+    class ConfigurationError
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConfigurationStatus
+      attr_accessor error: Types::ConfigurationError
+      attr_accessor state: ("ENABLED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED")
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCredentialLockerRequest
+      attr_accessor name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:name, :tags]
+    end
+
+    class CreateCredentialLockerResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateDestinationRequest
+      attr_accessor delivery_destination_arn: ::String
+      attr_accessor delivery_destination_type: ("KINESIS")
+      attr_accessor name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class CreateDestinationResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateEventLogConfigurationRequest
+      attr_accessor resource_type: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor event_log_level: ("DEBUG" | "ERROR" | "INFO" | "WARN")
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateEventLogConfigurationResponse
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateManagedThingRequest
+      attr_accessor role: ("CONTROLLER" | "DEVICE")
+      attr_accessor owner: ::String
+      attr_accessor credential_locker_id: ::String
+      attr_accessor authentication_material: ::String
+      attr_accessor authentication_material_type: ("WIFI_SETUP_QR_BAR_CODE" | "ZWAVE_QR_BAR_CODE" | "ZIGBEE_QR_BAR_CODE")
+      attr_accessor serial_number: ::String
+      attr_accessor brand: ::String
+      attr_accessor model: ::String
+      attr_accessor name: ::String
+      attr_accessor capability_report: Types::CapabilityReport
+      attr_accessor capabilities: ::String
+      attr_accessor client_token: ::String
+      attr_accessor classification: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor meta_data: ::Hash[::String, ::String]
+      SENSITIVE: [:owner, :authentication_material, :serial_number, :brand, :model, :classification, :tags]
+    end
+
+    class CreateManagedThingResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateNotificationConfigurationRequest
+      attr_accessor event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
+      attr_accessor destination_name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class CreateNotificationConfigurationResponse
+      attr_accessor event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
+      SENSITIVE: []
+    end
+
+    class CreateOtaTaskConfigurationRequest
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor push_config: Types::PushConfig
+      attr_accessor client_token: ::String
+      SENSITIVE: [:name]
+    end
+
+    class CreateOtaTaskConfigurationResponse
+      attr_accessor task_configuration_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateOtaTaskRequest
+      attr_accessor description: ::String
+      attr_accessor s3_url: ::String
+      attr_accessor protocol: ("HTTP")
+      attr_accessor target: ::Array[::String]
+      attr_accessor task_configuration_id: ::String
+      attr_accessor ota_mechanism: ("PUSH")
+      attr_accessor ota_type: ("ONE_TIME" | "CONTINUOUS")
+      attr_accessor ota_target_query_string: ::String
+      attr_accessor client_token: ::String
+      attr_accessor ota_scheduling_config: Types::OtaTaskSchedulingConfig
+      attr_accessor ota_task_execution_retry_config: Types::OtaTaskExecutionRetryConfig
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class CreateOtaTaskResponse
+      attr_accessor task_id: ::String
+      attr_accessor task_arn: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProvisioningProfileRequest
+      attr_accessor provisioning_type: ("FLEET_PROVISIONING" | "JITR")
+      attr_accessor ca_certificate: ::String
+      attr_accessor name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:ca_certificate, :tags]
+    end
+
+    class CreateProvisioningProfileResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor provisioning_type: ("FLEET_PROVISIONING" | "JITR")
+      attr_accessor id: ::String
+      attr_accessor claim_certificate: ::String
+      attr_accessor claim_certificate_private_key: ::String
+      SENSITIVE: [:claim_certificate, :claim_certificate_private_key]
+    end
+
+    class CredentialLockerSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor created_at: ::Time
+      SENSITIVE: [:name]
+    end
+
+    class DeleteCredentialLockerRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDestinationRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEventLogConfigurationRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteManagedThingRequest
+      attr_accessor identifier: ::String
+      attr_accessor force: bool
+      SENSITIVE: []
+    end
+
+    class DeleteNotificationConfigurationRequest
+      attr_accessor event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
+      SENSITIVE: []
+    end
+
+    class DeleteOtaTaskConfigurationRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteOtaTaskRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProvisioningProfileRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DestinationSummary
+      attr_accessor description: ::String
+      attr_accessor delivery_destination_arn: ::String
+      attr_accessor delivery_destination_type: ("KINESIS")
+      attr_accessor name: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class EventLogConfigurationSummary
+      attr_accessor id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor event_log_level: ("DEBUG" | "ERROR" | "INFO" | "WARN")
+      SENSITIVE: []
+    end
+
+    class ExponentialRolloutRate
+      attr_accessor base_rate_per_minute: ::Integer
+      attr_accessor increment_factor: ::Float
+      attr_accessor rate_increase_criteria: Types::RolloutRateIncreaseCriteria
+      SENSITIVE: []
+    end
+
+    class GetCredentialLockerRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetCredentialLockerResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:name, :tags]
+    end
+
+    class GetCustomEndpointRequest < Aws::EmptyStructure
+    end
+
+    class GetCustomEndpointResponse
+      attr_accessor endpoint_address: ::String
+      SENSITIVE: []
+    end
+
+    class GetDefaultEncryptionConfigurationRequest < Aws::EmptyStructure
+    end
+
+    class GetDefaultEncryptionConfigurationResponse
+      attr_accessor configuration_status: Types::ConfigurationStatus
+      attr_accessor encryption_type: ("MANAGED_INTEGRATIONS_DEFAULT_ENCRYPTION" | "CUSTOMER_KEY_ENCRYPTION")
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetDestinationRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDestinationResponse
+      attr_accessor description: ::String
+      attr_accessor delivery_destination_arn: ::String
+      attr_accessor delivery_destination_type: ("KINESIS")
+      attr_accessor name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class GetDeviceDiscoveryRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeviceDiscoveryResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor discovery_type: ("ZWAVE" | "ZIGBEE" | "CLOUD")
+      attr_accessor status: ("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT")
+      attr_accessor started_at: ::Time
+      attr_accessor controller_id: ::String
+      attr_accessor connector_association_id: ::String
+      attr_accessor finished_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class GetEventLogConfigurationRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetEventLogConfigurationResponse
+      attr_accessor id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor event_log_level: ("DEBUG" | "ERROR" | "INFO" | "WARN")
+      SENSITIVE: []
+    end
+
+    class GetHubConfigurationRequest < Aws::EmptyStructure
+    end
+
+    class GetHubConfigurationResponse
+      attr_accessor hub_token_timer_expiry_setting_in_seconds: ::Integer
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetManagedThingCapabilitiesRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetManagedThingCapabilitiesResponse
+      attr_accessor managed_thing_id: ::String
+      attr_accessor capabilities: ::String
+      attr_accessor capability_report: Types::CapabilityReport
+      SENSITIVE: []
+    end
+
+    class GetManagedThingConnectivityDataRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetManagedThingConnectivityDataResponse
+      attr_accessor managed_thing_id: ::String
+      attr_accessor connected: bool
+      attr_accessor timestamp: ::Time
+      attr_accessor disconnect_reason: ("AUTH_ERROR" | "CLIENT_INITIATED_DISCONNECT" | "CLIENT_ERROR" | "CONNECTION_LOST" | "DUPLICATE_CLIENTID" | "FORBIDDEN_ACCESS" | "MQTT_KEEP_ALIVE_TIMEOUT" | "SERVER_ERROR" | "SERVER_INITIATED_DISCONNECT" | "THROTTLED" | "WEBSOCKET_TTL_EXPIRATION" | "CUSTOMAUTH_TTL_EXPIRATION" | "UNKNOWN" | "NONE")
+      SENSITIVE: []
+    end
+
+    class GetManagedThingMetaDataRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetManagedThingMetaDataResponse
+      attr_accessor managed_thing_id: ::String
+      attr_accessor meta_data: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetManagedThingRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetManagedThingResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor owner: ::String
+      attr_accessor credential_locker_id: ::String
+      attr_accessor advertised_product_id: ::String
+      attr_accessor role: ("CONTROLLER" | "DEVICE")
+      attr_accessor provisioning_status: ("UNASSOCIATED" | "PRE_ASSOCIATED" | "DISCOVERED" | "ACTIVATED" | "DELETION_FAILED" | "DELETE_IN_PROGRESS" | "ISOLATED" | "DELETED")
+      attr_accessor name: ::String
+      attr_accessor model: ::String
+      attr_accessor brand: ::String
+      attr_accessor serial_number: ::String
+      attr_accessor universal_product_code: ::String
+      attr_accessor international_article_number: ::String
+      attr_accessor connector_policy_id: ::String
+      attr_accessor connector_device_id: ::String
+      attr_accessor device_specific_key: ::String
+      attr_accessor mac_address: ::String
+      attr_accessor parent_controller_id: ::String
+      attr_accessor classification: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor activated_at: ::Time
+      attr_accessor hub_network_mode: ("STANDARD" | "NETWORK_WIDE_EXCLUSION")
+      attr_accessor meta_data: ::Hash[::String, ::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:owner, :model, :brand, :serial_number, :universal_product_code, :international_article_number, :connector_device_id, :device_specific_key, :mac_address, :classification, :tags]
+    end
+
+    class GetManagedThingStateRequest
+      attr_accessor managed_thing_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetManagedThingStateResponse
+      attr_accessor endpoints: ::Array[Types::StateEndpoint]
+      SENSITIVE: []
+    end
+
+    class GetNotificationConfigurationRequest
+      attr_accessor event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
+      SENSITIVE: []
+    end
+
+    class GetNotificationConfigurationResponse
+      attr_accessor event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
+      attr_accessor destination_name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class GetOtaTaskConfigurationRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetOtaTaskConfigurationResponse
+      attr_accessor task_configuration_id: ::String
+      attr_accessor name: ::String
+      attr_accessor push_config: Types::PushConfig
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      SENSITIVE: [:name]
+    end
+
+    class GetOtaTaskRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetOtaTaskResponse
+      attr_accessor task_id: ::String
+      attr_accessor task_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor s3_url: ::String
+      attr_accessor protocol: ("HTTP")
+      attr_accessor ota_type: ("ONE_TIME" | "CONTINUOUS")
+      attr_accessor ota_target_query_string: ::String
+      attr_accessor ota_mechanism: ("PUSH")
+      attr_accessor target: ::Array[::String]
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor task_configuration_id: ::String
+      attr_accessor task_processing_details: Types::TaskProcessingDetails
+      attr_accessor ota_scheduling_config: Types::OtaTaskSchedulingConfig
+      attr_accessor ota_task_execution_retry_config: Types::OtaTaskExecutionRetryConfig
+      attr_accessor status: ("IN_PROGRESS" | "CANCELED" | "COMPLETED" | "DELETION_IN_PROGRESS" | "SCHEDULED")
+      SENSITIVE: []
+    end
+
+    class GetProvisioningProfileRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetProvisioningProfileResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor provisioning_type: ("FLEET_PROVISIONING" | "JITR")
+      attr_accessor id: ::String
+      attr_accessor claim_certificate: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:claim_certificate, :tags]
+    end
+
+    class GetRuntimeLogConfigurationRequest
+      attr_accessor managed_thing_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRuntimeLogConfigurationResponse
+      attr_accessor managed_thing_id: ::String
+      attr_accessor runtime_log_configurations: Types::RuntimeLogConfigurations
+      SENSITIVE: []
+    end
+
+    class GetSchemaVersionRequest
+      attr_accessor type: ("capability" | "definition")
+      attr_accessor schema_versioned_id: ::String
+      attr_accessor format: ("AWS" | "ZCL" | "CONNECTOR")
+      SENSITIVE: []
+    end
+
+    class GetSchemaVersionResponse
+      attr_accessor schema_id: ::String
+      attr_accessor type: ("capability" | "definition")
+      attr_accessor description: ::String
+      attr_accessor namespace: ::String
+      attr_accessor semantic_version: ::String
+      attr_accessor visibility: ("PUBLIC" | "PRIVATE")
+      attr_accessor schema: untyped
+      SENSITIVE: []
+    end
+
+    class InternalFailureException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListCredentialLockersRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListCredentialLockersResponse
+      attr_accessor items: ::Array[Types::CredentialLockerSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDestinationsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDestinationsResponse
+      attr_accessor destination_list: ::Array[Types::DestinationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEventLogConfigurationsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListEventLogConfigurationsResponse
+      attr_accessor event_log_configuration_list: ::Array[Types::EventLogConfigurationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListManagedThingSchemasRequest
+      attr_accessor identifier: ::String
+      attr_accessor endpoint_id_filter: ::String
+      attr_accessor capability_id_filter: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListManagedThingSchemasResponse
+      attr_accessor items: ::Array[Types::ManagedThingSchemaListItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListManagedThingsRequest
+      attr_accessor owner_filter: ::String
+      attr_accessor credential_locker_filter: ::String
+      attr_accessor role_filter: ("CONTROLLER" | "DEVICE")
+      attr_accessor parent_controller_identifier_filter: ::String
+      attr_accessor connector_policy_id_filter: ::String
+      attr_accessor serial_number_filter: ::String
+      attr_accessor provisioning_status_filter: ("UNASSOCIATED" | "PRE_ASSOCIATED" | "DISCOVERED" | "ACTIVATED" | "DELETION_FAILED" | "DELETE_IN_PROGRESS" | "ISOLATED" | "DELETED")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: [:owner_filter, :serial_number_filter]
+    end
+
+    class ListManagedThingsResponse
+      attr_accessor items: ::Array[Types::ManagedThingSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNotificationConfigurationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNotificationConfigurationsResponse
+      attr_accessor notification_configuration_list: ::Array[Types::NotificationConfigurationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOtaTaskConfigurationsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListOtaTaskConfigurationsResponse
+      attr_accessor items: ::Array[Types::OtaTaskConfigurationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOtaTaskExecutionsRequest
+      attr_accessor identifier: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListOtaTaskExecutionsResponse
+      attr_accessor execution_summaries: ::Array[Types::OtaTaskExecutionSummaries]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOtaTasksRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListOtaTasksResponse
+      attr_accessor tasks: ::Array[Types::OtaTaskSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProvisioningProfilesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListProvisioningProfilesResponse
+      attr_accessor items: ::Array[Types::ProvisioningProfileSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSchemaVersionsRequest
+      attr_accessor type: ("capability" | "definition")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor schema_id: ::String
+      attr_accessor namespace: ::String
+      attr_accessor visibility: ("PUBLIC" | "PRIVATE")
+      attr_accessor semantic_version: ::String
+      SENSITIVE: []
+    end
+
+    class ListSchemaVersionsResponse
+      attr_accessor items: ::Array[Types::SchemaVersionListItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ManagedThingSchemaListItem
+      attr_accessor endpoint_id: ::String
+      attr_accessor capability_id: ::String
+      attr_accessor schema: untyped
+      SENSITIVE: []
+    end
+
+    class ManagedThingSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor advertised_product_id: ::String
+      attr_accessor brand: ::String
+      attr_accessor classification: ::String
+      attr_accessor connector_device_id: ::String
+      attr_accessor connector_policy_id: ::String
+      attr_accessor model: ::String
+      attr_accessor name: ::String
+      attr_accessor owner: ::String
+      attr_accessor credential_locker_id: ::String
+      attr_accessor parent_controller_id: ::String
+      attr_accessor provisioning_status: ("UNASSOCIATED" | "PRE_ASSOCIATED" | "DISCOVERED" | "ACTIVATED" | "DELETION_FAILED" | "DELETE_IN_PROGRESS" | "ISOLATED" | "DELETED")
+      attr_accessor role: ("CONTROLLER" | "DEVICE")
+      attr_accessor serial_number: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor activated_at: ::Time
+      SENSITIVE: [:brand, :classification, :connector_device_id, :model, :owner, :serial_number]
+    end
+
+    class NotificationConfigurationSummary
+      attr_accessor event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
+      attr_accessor destination_name: ::String
+      SENSITIVE: []
+    end
+
+    class OtaTaskAbortConfig
+      attr_accessor abort_config_criteria_list: ::Array[Types::AbortConfigCriteria]
+      SENSITIVE: []
+    end
+
+    class OtaTaskConfigurationSummary
+      attr_accessor task_configuration_id: ::String
+      attr_accessor name: ::String
+      attr_accessor created_at: ::Time
+      SENSITIVE: [:name]
+    end
+
+    class OtaTaskExecutionRetryConfig
+      attr_accessor retry_config_criteria: ::Array[Types::RetryConfigCriteria]
+      SENSITIVE: []
+    end
+
+    class OtaTaskExecutionRolloutConfig
+      attr_accessor exponential_rollout_rate: Types::ExponentialRolloutRate
+      attr_accessor maximum_per_minute: ::Integer
+      SENSITIVE: []
+    end
+
+    class OtaTaskExecutionSummaries
+      attr_accessor task_execution_summary: Types::OtaTaskExecutionSummary
+      attr_accessor managed_thing_id: ::String
+      SENSITIVE: []
+    end
+
+    class OtaTaskExecutionSummary
+      attr_accessor execution_number: ::Integer
+      attr_accessor last_updated_at: ::Time
+      attr_accessor queued_at: ::Time
+      attr_accessor retry_attempt: ::Integer
+      attr_accessor started_at: ::Time
+      attr_accessor status: ("QUEUED" | "IN_PROGRESS" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "REJECTED" | "REMOVED" | "CANCELED")
+      SENSITIVE: []
+    end
+
+    class OtaTaskSchedulingConfig
+      attr_accessor end_behavior: ("STOP_ROLLOUT" | "CANCEL" | "FORCE_CANCEL")
+      attr_accessor end_time: ::String
+      attr_accessor maintenance_windows: ::Array[Types::ScheduleMaintenanceWindow]
+      attr_accessor start_time: ::String
+      SENSITIVE: []
+    end
+
+    class OtaTaskSummary
+      attr_accessor task_id: ::String
+      attr_accessor task_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor task_configuration_id: ::String
+      attr_accessor status: ("IN_PROGRESS" | "CANCELED" | "COMPLETED" | "DELETION_IN_PROGRESS" | "SCHEDULED")
+      SENSITIVE: []
+    end
+
+    class OtaTaskTimeoutConfig
+      attr_accessor in_progress_timeout_in_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class ProvisioningProfileSummary
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor provisioning_type: ("FLEET_PROVISIONING" | "JITR")
+      SENSITIVE: []
+    end
+
+    class PushConfig
+      attr_accessor abort_config: Types::OtaTaskAbortConfig
+      attr_accessor rollout_config: Types::OtaTaskExecutionRolloutConfig
+      attr_accessor timeout_config: Types::OtaTaskTimeoutConfig
+      SENSITIVE: []
+    end
+
+    class PutDefaultEncryptionConfigurationRequest
+      attr_accessor encryption_type: ("MANAGED_INTEGRATIONS_DEFAULT_ENCRYPTION" | "CUSTOMER_KEY_ENCRYPTION")
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutDefaultEncryptionConfigurationResponse
+      attr_accessor configuration_status: Types::ConfigurationStatus
+      attr_accessor encryption_type: ("MANAGED_INTEGRATIONS_DEFAULT_ENCRYPTION" | "CUSTOMER_KEY_ENCRYPTION")
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutHubConfigurationRequest
+      attr_accessor hub_token_timer_expiry_setting_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class PutHubConfigurationResponse
+      attr_accessor hub_token_timer_expiry_setting_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class PutRuntimeLogConfigurationRequest
+      attr_accessor managed_thing_id: ::String
+      attr_accessor runtime_log_configurations: Types::RuntimeLogConfigurations
+      SENSITIVE: []
+    end
+
+    class RegisterCustomEndpointRequest < Aws::EmptyStructure
+    end
+
+    class RegisterCustomEndpointResponse
+      attr_accessor endpoint_address: ::String
+      SENSITIVE: []
+    end
+
+    class ResetRuntimeLogConfigurationRequest
+      attr_accessor managed_thing_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RetryConfigCriteria
+      attr_accessor failure_type: ("FAILED" | "TIMED_OUT" | "ALL")
+      attr_accessor min_number_of_retries: ::Integer
+      SENSITIVE: []
+    end
+
+    class RolloutRateIncreaseCriteria
+      attr_accessor number_of_notified_things: ::Integer
+      attr_accessor number_of_succeeded_things: ::Integer
+      SENSITIVE: []
+    end
+
+    class RuntimeLogConfigurations
+      attr_accessor log_level: ("DEBUG" | "ERROR" | "INFO" | "WARN")
+      attr_accessor log_flush_level: ("DEBUG" | "ERROR" | "INFO" | "WARN")
+      attr_accessor local_store_location: ::String
+      attr_accessor local_store_file_rotation_max_files: ::Integer
+      attr_accessor local_store_file_rotation_max_bytes: ::Integer
+      attr_accessor upload_log: bool
+      attr_accessor upload_period_minutes: ::Integer
+      attr_accessor delete_local_store_after_upload: bool
+      SENSITIVE: []
+    end
+
+    class ScheduleMaintenanceWindow
+      attr_accessor duration_in_minutes: ::Integer
+      attr_accessor start_time: ::String
+      SENSITIVE: []
+    end
+
+    class SchemaVersionListItem
+      attr_accessor schema_id: ::String
+      attr_accessor type: ("capability" | "definition")
+      attr_accessor description: ::String
+      attr_accessor namespace: ::String
+      attr_accessor semantic_version: ::String
+      attr_accessor visibility: ("PUBLIC" | "PRIVATE")
+      SENSITIVE: []
+    end
+
+    class SendManagedThingCommandRequest
+      attr_accessor managed_thing_id: ::String
+      attr_accessor endpoints: ::Array[Types::CommandEndpoint]
+      attr_accessor connector_association_id: ::String
+      SENSITIVE: []
+    end
+
+    class SendManagedThingCommandResponse
+      attr_accessor trace_id: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartDeviceDiscoveryRequest
+      attr_accessor discovery_type: ("ZWAVE" | "ZIGBEE" | "CLOUD")
+      attr_accessor controller_identifier: ::String
+      attr_accessor connector_association_identifier: ::String
+      attr_accessor authentication_material: ::String
+      attr_accessor authentication_material_type: ("ZWAVE_INSTALL_CODE")
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:authentication_material, :tags]
+    end
+
+    class StartDeviceDiscoveryResponse
+      attr_accessor id: ::String
+      attr_accessor started_at: ::Time
+      SENSITIVE: []
+    end
+
+    class StateCapability
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      attr_accessor properties: untyped
+      SENSITIVE: [:properties]
+    end
+
+    class StateEndpoint
+      attr_accessor endpoint_id: ::String
+      attr_accessor capabilities: ::Array[Types::StateCapability]
+      SENSITIVE: []
+    end
+
+    class TaskProcessingDetails
+      attr_accessor number_of_canceled_things: ::Integer
+      attr_accessor number_of_failed_things: ::Integer
+      attr_accessor number_of_in_progress_things: ::Integer
+      attr_accessor number_of_queued_things: ::Integer
+      attr_accessor number_of_rejected_things: ::Integer
+      attr_accessor number_of_removed_things: ::Integer
+      attr_accessor number_of_succeeded_things: ::Integer
+      attr_accessor number_of_timed_out_things: ::Integer
+      attr_accessor processing_targets: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnauthorizedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDestinationRequest
+      attr_accessor name: ::String
+      attr_accessor delivery_destination_arn: ::String
+      attr_accessor delivery_destination_type: ("KINESIS")
+      attr_accessor role_arn: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateEventLogConfigurationRequest
+      attr_accessor id: ::String
+      attr_accessor event_log_level: ("DEBUG" | "ERROR" | "INFO" | "WARN")
+      SENSITIVE: []
+    end
+
+    class UpdateManagedThingRequest
+      attr_accessor identifier: ::String
+      attr_accessor owner: ::String
+      attr_accessor credential_locker_id: ::String
+      attr_accessor serial_number: ::String
+      attr_accessor brand: ::String
+      attr_accessor model: ::String
+      attr_accessor name: ::String
+      attr_accessor capability_report: Types::CapabilityReport
+      attr_accessor capabilities: ::String
+      attr_accessor classification: ::String
+      attr_accessor hub_network_mode: ("STANDARD" | "NETWORK_WIDE_EXCLUSION")
+      attr_accessor meta_data: ::Hash[::String, ::String]
+      SENSITIVE: [:owner, :serial_number, :brand, :model, :classification]
+    end
+
+    class UpdateNotificationConfigurationRequest
+      attr_accessor event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
+      attr_accessor destination_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateOtaTaskRequest
+      attr_accessor identifier: ::String
+      attr_accessor description: ::String
+      attr_accessor task_configuration_id: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

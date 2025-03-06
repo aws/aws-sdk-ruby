@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2025-02-28)
+------------------
+
+* Feature - Added a mandatory parameter DataAutomationProfileArn to support for cross region inference for InvokeDataAutomationAsync API. Renamed DataAutomationArn to DataAutomationProjectArn. Added APIs to support tagging.
+
 1.4.0 (2025-02-18)
 ------------------
 

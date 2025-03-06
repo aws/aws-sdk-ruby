@@ -728,6 +728,7 @@ module Aws::IoTSiteWise
     class CreateGatewayRequest
       attr_accessor gateway_name: ::String
       attr_accessor gateway_platform: Types::GatewayPlatform
+      attr_accessor gateway_version: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -1164,6 +1165,7 @@ module Aws::IoTSiteWise
       attr_accessor gateway_name: ::String
       attr_accessor gateway_arn: ::String
       attr_accessor gateway_platform: Types::GatewayPlatform
+      attr_accessor gateway_version: ::String
       attr_accessor gateway_capability_summaries: ::Array[Types::GatewayCapabilitySummary]
       attr_accessor creation_date: ::Time
       attr_accessor last_update_date: ::Time
@@ -1360,6 +1362,7 @@ module Aws::IoTSiteWise
       attr_accessor gateway_id: ::String
       attr_accessor gateway_name: ::String
       attr_accessor gateway_platform: Types::GatewayPlatform
+      attr_accessor gateway_version: ::String
       attr_accessor gateway_capability_summaries: ::Array[Types::GatewayCapabilitySummary]
       attr_accessor creation_date: ::Time
       attr_accessor last_update_date: ::Time
@@ -1448,6 +1451,7 @@ module Aws::IoTSiteWise
 
     class GreengrassV2
       attr_accessor core_device_thing_name: ::String
+      attr_accessor core_device_operating_system: ("LINUX_AARCH64" | "LINUX_AMD64" | "WINDOWS_AMD64")
       SENSITIVE: []
     end
 

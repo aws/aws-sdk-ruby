@@ -2502,6 +2502,7 @@ module Aws::DatabaseMigrationService
     ReplicationTaskAssessmentRunResultStatistic.add_member(:error, Shapes::ShapeRef.new(shape: Integer, location_name: "Error"))
     ReplicationTaskAssessmentRunResultStatistic.add_member(:warning, Shapes::ShapeRef.new(shape: Integer, location_name: "Warning"))
     ReplicationTaskAssessmentRunResultStatistic.add_member(:cancelled, Shapes::ShapeRef.new(shape: Integer, location_name: "Cancelled"))
+    ReplicationTaskAssessmentRunResultStatistic.add_member(:skipped, Shapes::ShapeRef.new(shape: Integer, location_name: "Skipped"))
     ReplicationTaskAssessmentRunResultStatistic.struct_class = Types::ReplicationTaskAssessmentRunResultStatistic
 
     ReplicationTaskIndividualAssessment.add_member(:replication_task_individual_assessment_arn, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationTaskIndividualAssessmentArn"))

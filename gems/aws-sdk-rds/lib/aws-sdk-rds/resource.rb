@@ -502,13 +502,14 @@ module Aws::RDS
     #
     #   The following values are valid for each DB engine:
     #
-    #   * Aurora MySQL - `audit | error | general | instance | slowquery`
+    #   * Aurora MySQL - `audit | error | general | instance | slowquery |
+    #     iam-db-auth-error`
     #
-    #   * Aurora PostgreSQL - `instance | postgresql`
+    #   * Aurora PostgreSQL - `instance | postgresql | iam-db-auth-error`
     #
-    #   * RDS for MySQL - `error | general | slowquery`
+    #   * RDS for MySQL - `error | general | slowquery | iam-db-auth-error`
     #
-    #   * RDS for PostgreSQL - `postgresql | upgrade`
+    #   * RDS for PostgreSQL - `postgresql | upgrade | iam-db-auth-error`
     #
     #   For more information about exporting CloudWatch Logs for Amazon RDS,
     #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the
@@ -1903,7 +1904,7 @@ module Aws::RDS
     #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
     #   Default: `io1`, if the `Iops` parameter is specified. Otherwise,
-    #   `gp2`.
+    #   `gp3`.
     # @option options [String] :tde_credential_arn
     #   The ARN from the key store with which to associate the instance for
     #   TDE encryption.
@@ -2153,17 +2154,19 @@ module Aws::RDS
     #
     #   The following values are valid for each DB engine:
     #
-    #   * RDS for Db2 - `diag.log | notify.log`
+    #   * RDS for Db2 - `diag.log | notify.log | iam-db-auth-error`
     #
-    #   * RDS for MariaDB - `audit | error | general | slowquery`
+    #   * RDS for MariaDB - `audit | error | general | slowquery |
+    #     iam-db-auth-error`
     #
     #   * RDS for Microsoft SQL Server - `agent | error`
     #
-    #   * RDS for MySQL - `audit | error | general | slowquery`
+    #   * RDS for MySQL - `audit | error | general | slowquery |
+    #     iam-db-auth-error`
     #
     #   * RDS for Oracle - `alert | audit | listener | trace | oemagent`
     #
-    #   * RDS for PostgreSQL - `postgresql | upgrade`
+    #   * RDS for PostgreSQL - `postgresql | upgrade | iam-db-auth-error`
     #
     #
     #

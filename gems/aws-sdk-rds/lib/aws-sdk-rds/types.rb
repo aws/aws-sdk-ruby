@@ -1086,12 +1086,17 @@ module Aws::RDS
     #   @return [Array<String>]
     #
     # @!attribute [rw] init_query
-    #   One or more SQL statements for the proxy to run when opening each
-    #   new database connection. Typically used with `SET` statements to
-    #   make sure that each connection has identical settings such as time
-    #   zone and character set. For multiple statements, use semicolons as
-    #   the separator. You can also include multiple variables in a single
-    #   `SET` statement, such as `SET x=1, y=2`.
+    #   Add an initialization query, or modify the current one. You can
+    #   specify one or more SQL statements for the proxy to run when opening
+    #   each new database connection. The setting is typically used with
+    #   `SET` statements to make sure that each connection has identical
+    #   settings. Make sure that the query you add is valid. To include
+    #   multiple variables in a single `SET` statement, use comma
+    #   separators.
+    #
+    #   For example: `SET variable1=value1, variable2=value2`
+    #
+    #   For multiple statements, use semicolons as the separator.
     #
     #   Default: no initialization query
     #   @return [String]
@@ -2593,13 +2598,14 @@ module Aws::RDS
     #
     #   The following values are valid for each DB engine:
     #
-    #   * Aurora MySQL - `audit | error | general | instance | slowquery`
+    #   * Aurora MySQL - `audit | error | general | instance | slowquery |
+    #     iam-db-auth-error`
     #
-    #   * Aurora PostgreSQL - `instance | postgresql`
+    #   * Aurora PostgreSQL - `instance | postgresql | iam-db-auth-error`
     #
-    #   * RDS for MySQL - `error | general | slowquery`
+    #   * RDS for MySQL - `error | general | slowquery | iam-db-auth-error`
     #
-    #   * RDS for PostgreSQL - `postgresql | upgrade`
+    #   * RDS for PostgreSQL - `postgresql | upgrade | iam-db-auth-error`
     #
     #   For more information about exporting CloudWatch Logs for Amazon RDS,
     #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the
@@ -4204,7 +4210,7 @@ module Aws::RDS
     #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
     #   Default: `io1`, if the `Iops` parameter is specified. Otherwise,
-    #   `gp2`.
+    #   `gp3`.
     #   @return [String]
     #
     # @!attribute [rw] tde_credential_arn
@@ -4500,17 +4506,19 @@ module Aws::RDS
     #
     #   The following values are valid for each DB engine:
     #
-    #   * RDS for Db2 - `diag.log | notify.log`
+    #   * RDS for Db2 - `diag.log | notify.log | iam-db-auth-error`
     #
-    #   * RDS for MariaDB - `audit | error | general | slowquery`
+    #   * RDS for MariaDB - `audit | error | general | slowquery |
+    #     iam-db-auth-error`
     #
     #   * RDS for Microsoft SQL Server - `agent | error`
     #
-    #   * RDS for MySQL - `audit | error | general | slowquery`
+    #   * RDS for MySQL - `audit | error | general | slowquery |
+    #     iam-db-auth-error`
     #
     #   * RDS for Oracle - `alert | audit | listener | trace | oemagent`
     #
-    #   * RDS for PostgreSQL - `postgresql | upgrade`
+    #   * RDS for PostgreSQL - `postgresql | upgrade | iam-db-auth-error`
     #
     #
     #
@@ -5070,7 +5078,7 @@ module Aws::RDS
     #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
     #   Default: `io1` if the `Iops` parameter is specified. Otherwise,
-    #   `gp2`.
+    #   `gp3`.
     #   @return [String]
     #
     # @!attribute [rw] copy_tags_to_snapshot
@@ -17522,13 +17530,14 @@ module Aws::RDS
     #
     #   The following values are valid for each DB engine:
     #
-    #   * Aurora MySQL - `audit | error | general | instance | slowquery`
+    #   * Aurora MySQL - `audit | error | general | instance | slowquery |
+    #     iam-db-auth-error`
     #
-    #   * Aurora PostgreSQL - `instance | postgresql`
+    #   * Aurora PostgreSQL - `instance | postgresql | iam-db-auth-error`
     #
-    #   * RDS for MySQL - `error | general | slowquery`
+    #   * RDS for MySQL - `error | general | slowquery | iam-db-auth-error`
     #
-    #   * RDS for PostgreSQL - `postgresql | upgrade`
+    #   * RDS for PostgreSQL - `postgresql | upgrade | iam-db-auth-error`
     #
     #   For more information about exporting CloudWatch Logs for Amazon RDS,
     #   see [ Publishing Database Logs to Amazon CloudWatch Logs][1] in the
@@ -19135,13 +19144,14 @@ module Aws::RDS
     #
     #   The following values are valid for each DB engine:
     #
-    #   * Aurora MySQL - `audit | error | general | slowquery`
+    #   * Aurora MySQL - `audit | error | general | slowquery |
+    #     iam-db-auth-error`
     #
-    #   * Aurora PostgreSQL - `postgresql`
+    #   * Aurora PostgreSQL - `postgresql | iam-db-auth-error`
     #
-    #   * RDS for MySQL - `error | general | slowquery`
+    #   * RDS for MySQL - `error | general | slowquery | iam-db-auth-error`
     #
-    #   * RDS for PostgreSQL - `postgresql | upgrade`
+    #   * RDS for PostgreSQL - `postgresql | upgrade | iam-db-auth-error`
     #
     #   For more information about exporting CloudWatch Logs for Amazon RDS,
     #   see [ Publishing Database Logs to Amazon CloudWatch Logs][1] in the
@@ -23003,12 +23013,13 @@ module Aws::RDS
     #
     #   **Aurora MySQL**
     #
-    #   Possible values are `audit`, `error`, `general`, `instance`, and
-    #   `slowquery`.
+    #   Possible values are `audit`, `error`, `general`, `instance`,
+    #   `slowquery`, and `iam-db-auth-error`.
     #
     #   **Aurora PostgreSQL**
     #
-    #   Possible value are `instance` and `postgresql`.
+    #   Possible value are `instance`, `postgresql`, and
+    #   `iam-db-auth-error`.
     #
     #   For more information about exporting CloudWatch Logs for Amazon RDS,
     #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the
@@ -23489,20 +23500,23 @@ module Aws::RDS
     #
     #   **RDS for MySQL**
     #
-    #   Possible values are `error`, `general`, and `slowquery`.
+    #   Possible values are `error`, `general`, `slowquery`, and
+    #   `iam-db-auth-error`.
     #
     #   **RDS for PostgreSQL**
     #
-    #   Possible values are `postgresql` and `upgrade`.
+    #   Possible values are `postgresql`, `upgrade`, and
+    #   `iam-db-auth-error`.
     #
     #   **Aurora MySQL**
     #
-    #   Possible values are `audit`, `error`, `general`, `instance`, and
-    #   `slowquery`.
+    #   Possible values are `audit`, `error`, `general`, `instance`,
+    #   `slowquery`, and `iam-db-auth-error`.
     #
     #   **Aurora PostgreSQL**
     #
-    #   Possible value are `instance` and `postgresql`.
+    #   Possible value are `instance`, `postgresql`, and
+    #   `iam-db-auth-error`.
     #
     #   For more information about exporting CloudWatch Logs for Amazon RDS,
     #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the
@@ -24097,20 +24111,23 @@ module Aws::RDS
     #
     #   **RDS for MySQL**
     #
-    #   Possible values are `error`, `general`, and `slowquery`.
+    #   Possible values are `error`, `general`, `slowquery`, and
+    #   `iam-db-auth-error`.
     #
     #   **RDS for PostgreSQL**
     #
-    #   Possible values are `postgresql` and `upgrade`.
+    #   Possible values are `postgresql`, `upgrade`, and
+    #   `iam-db-auth-error`.
     #
     #   **Aurora MySQL**
     #
-    #   Possible values are `audit`, `error`, `general`, `instance`, and
-    #   `slowquery`.
+    #   Possible values are `audit`, `error`, `general`, `instance`,
+    #   `slowquery`, and `iam-db-auth-error`.
     #
     #   **Aurora PostgreSQL**
     #
-    #   Possible value are `instance` and `postgresql`.
+    #   Possible value are `instance`, `postgresql`, and
+    #   `iam-db-auth-error`.
     #
     #   For more information about exporting CloudWatch Logs for Amazon RDS,
     #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the
@@ -24765,7 +24782,7 @@ module Aws::RDS
     #   If you specify `io1`, `io2`, or `gp3`, you must also include a value
     #   for the `Iops` parameter.
     #
-    #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
+    #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp3`
     #   @return [String]
     #
     # @!attribute [rw] tde_credential_arn
@@ -26191,7 +26208,7 @@ module Aws::RDS
     #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
     #   Default: `io1`, if the `Iops` parameter is specified. Otherwise,
-    #   `gp2`.
+    #   `gp3`.
     #
     #   Constraints:
     #
@@ -28341,8 +28358,6 @@ module Aws::RDS
     # @!attribute [rw] iam_auth
     #   Whether to require or disallow Amazon Web Services Identity and
     #   Access Management (IAM) authentication for connections to the proxy.
-    #   The `ENABLED` value is valid only for proxies with RDS for Microsoft
-    #   SQL Server.
     #   @return [String]
     #
     # @!attribute [rw] client_password_auth_type

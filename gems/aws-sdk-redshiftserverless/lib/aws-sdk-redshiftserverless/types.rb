@@ -686,6 +686,12 @@ module Aws::RedshiftServerless
     #   A array of tag instances.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] track_name
+    #   An optional parameter for the name of the track for the workgroup.
+    #   If you don't provide a track name, the workgroup is assigned to the
+    #   `current` track.
+    #   @return [String]
+    #
     # @!attribute [rw] workgroup_name
     #   The name of the created workgroup.
     #   @return [String]
@@ -705,6 +711,7 @@ module Aws::RedshiftServerless
       :security_group_ids,
       :subnet_ids,
       :tags,
+      :track_name,
       :workgroup_name)
       SENSITIVE = []
       include Aws::Structure
@@ -1332,6 +1339,30 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
+    # @!attribute [rw] track_name
+    #   The name of the track of which its version is fetched.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetTrackRequest AWS API Documentation
+    #
+    class GetTrackRequest < Struct.new(
+      :track_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] track
+    #   The version of the specified track.
+    #   @return [Types::ServerlessTrack]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetTrackResponse AWS API Documentation
+    #
+    class GetTrackResponse < Struct.new(
+      :track)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] usage_limit_id
     #   The unique identifier of the usage limit to return information for.
     #   @return [String]
@@ -1934,6 +1965,50 @@ module Aws::RedshiftServerless
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of response records to return in each call. If
+    #   the number of remaining response records exceeds the specified
+    #   MaxRecords value, a value is returned in a marker field of the
+    #   response. You can retrieve the next set of records by retrying the
+    #   command with the returned marker value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If your initial `ListTracksRequest` operation returns a `nextToken`,
+    #   you can include the returned `nextToken` in following
+    #   `ListTracksRequest` operations, which returns results in the next
+    #   page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListTracksRequest AWS API Documentation
+    #
+    class ListTracksRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   When `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page.
+    #   @return [String]
+    #
+    # @!attribute [rw] tracks
+    #   The returned tracks.
+    #   @return [Array<Types::ServerlessTrack>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListTracksResponse AWS API Documentation
+    #
+    class ListTracksResponse < Struct.new(
+      :next_token,
+      :tracks)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2756,6 +2831,34 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
+    # Defines a track that determines which Amazon Redshift version to apply
+    # after a new version is released. If the value for `ServerlessTrack` is
+    # `current`, the workgroup is updated to the most recently certified
+    # release. If the value is `trailing`, the workgroup is updated to the
+    # previously certified release.
+    #
+    # @!attribute [rw] track_name
+    #   The name of the track. Valid values are `current` and `trailing`.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_targets
+    #   An array of `UpdateTarget` objects to update with the track.
+    #   @return [Array<Types::UpdateTarget>]
+    #
+    # @!attribute [rw] workgroup_version
+    #   The workgroup version number for the workgroup release.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ServerlessTrack AWS API Documentation
+    #
+    class ServerlessTrack < Struct.new(
+      :track_name,
+      :update_targets,
+      :workgroup_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The service limit was exceeded.
     #
     # @!attribute [rw] message
@@ -3477,6 +3580,25 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
+    # A track that you can switch the current track to.
+    #
+    # @!attribute [rw] track_name
+    #   The name of the new track.
+    #   @return [String]
+    #
+    # @!attribute [rw] workgroup_version
+    #   The workgroup version for the new track.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateTarget AWS API Documentation
+    #
+    class UpdateTarget < Struct.new(
+      :track_name,
+      :workgroup_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] amount
     #   The new limit amount. If time-based, this amount is in Redshift
     #   Processing Units (RPU) consumed per hour. If data-based, this amount
@@ -3574,6 +3696,12 @@ module Aws::RedshiftServerless
     #   An array of VPC subnet IDs to associate with the workgroup.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] track_name
+    #   An optional parameter for the name of the track for the workgroup.
+    #   If you don't provide a track name, the workgroup is assigned to the
+    #   `current` track.
+    #   @return [String]
+    #
     # @!attribute [rw] workgroup_name
     #   The name of the workgroup to update. You can't update the name of a
     #   workgroup once it is created.
@@ -3592,6 +3720,7 @@ module Aws::RedshiftServerless
       :publicly_accessible,
       :security_group_ids,
       :subnet_ids,
+      :track_name,
       :workgroup_name)
       SENSITIVE = []
       include Aws::Structure
@@ -3798,6 +3927,13 @@ module Aws::RedshiftServerless
     #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/cluster-versions.html
     #   @return [String]
     #
+    # @!attribute [rw] pending_track_name
+    #   The name for the track that you want to assign to the workgroup.
+    #   When the track changes, the workgroup is switched to the latest
+    #   workgroup release available for the track. At this point, the track
+    #   name is applied.
+    #   @return [String]
+    #
     # @!attribute [rw] port
     #   The custom port to use when connecting to a workgroup. Valid port
     #   ranges are 5431-5455 and 8191-8215. The default is 5439.
@@ -3824,6 +3960,10 @@ module Aws::RedshiftServerless
     # @!attribute [rw] subnet_ids
     #   An array of subnet IDs the workgroup is associated with.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] track_name
+    #   The name of the track for the workgroup.
+    #   @return [String]
     #
     # @!attribute [rw] workgroup_arn
     #   The Amazon Resource Name (ARN) that links to the workgroup.
@@ -3863,12 +4003,14 @@ module Aws::RedshiftServerless
       :max_capacity,
       :namespace_name,
       :patch_version,
+      :pending_track_name,
       :port,
       :price_performance_target,
       :publicly_accessible,
       :security_group_ids,
       :status,
       :subnet_ids,
+      :track_name,
       :workgroup_arn,
       :workgroup_id,
       :workgroup_name,

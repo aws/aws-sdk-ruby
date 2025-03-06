@@ -25,7 +25,8 @@ module AwsSdkCodeGenerator
             members: members,
             data_type: "#{@module_name}::Types::#{name}",
             retryable: !!shape['retryable'],
-            throttling: throttling?(shape)
+            throttling: throttling?(shape),
+            custom_error_class: custom_error_class(shape)
           )
         end
         es
@@ -45,6 +46,11 @@ module AwsSdkCodeGenerator
       shape['retryable'] && shape['retryable'].kind_of?(Hash) && shape['retryable']['throttling']
     end
 
+    def custom_error_class(shape)
+      return unless (custom_error_name = shape.dig('error', 'code'))
+
+      custom_error_name
+    end
 
     class Error
 
@@ -54,6 +60,7 @@ module AwsSdkCodeGenerator
         @members = options[:members]
         @retryable = options[:retryable]
         @throttling = options[:throttling]
+        @custom_error_class = options[:custom_error_class]
       end
 
       # @return [String]
@@ -70,6 +77,14 @@ module AwsSdkCodeGenerator
 
       # @return [Boolean]
       attr_reader :throttling
+
+      # @return [String, nil]
+      attr_reader :custom_error_class
+
+      # Covers dynamically created errors by query protocol
+      def custom_error_class?
+        !@custom_error_class.nil? && @name != @custom_error_class
+      end
 
     end
 

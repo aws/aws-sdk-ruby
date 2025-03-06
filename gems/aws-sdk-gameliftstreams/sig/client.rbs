@@ -1,0 +1,511 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module GameLiftStreams
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AddStreamGroupLocationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddStreamGroupLocationsOutput]
+        def identifier: () -> ::String
+        def locations: () -> ::Array[Types::LocationState]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#add_stream_group_locations-instance_method
+      def add_stream_group_locations: (
+                                        identifier: ::String,
+                                        location_configurations: Array[
+                                          {
+                                            always_on_capacity: ::Integer?,
+                                            location_name: ::String,
+                                            on_demand_capacity: ::Integer?
+                                          },
+                                        ]
+                                      ) -> _AddStreamGroupLocationsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddStreamGroupLocationsResponseSuccess
+
+      interface _AssociateApplicationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateApplicationsOutput]
+        def application_arns: () -> ::Array[::String]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#associate_applications-instance_method
+      def associate_applications: (
+                                    application_identifiers: Array[::String],
+                                    identifier: ::String
+                                  ) -> _AssociateApplicationsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateApplicationsResponseSuccess
+
+      interface _CreateApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateApplicationOutput]
+        def application_log_output_uri: () -> ::String
+        def application_log_paths: () -> ::Array[::String]
+        def application_source_uri: () -> ::String
+        def arn: () -> ::String
+        def associated_stream_groups: () -> ::Array[::String]
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def executable_path: () -> ::String
+        def id: () -> ::String
+        def last_updated_at: () -> ::Time
+        def replication_statuses: () -> ::Array[Types::ReplicationStatus]
+        def runtime_environment: () -> Types::RuntimeEnvironment
+        def status: () -> ("INITIALIZED" | "PROCESSING" | "READY" | "DELETING" | "ERROR")
+        def status_reason: () -> ("internalError" | "accessDenied")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#create_application-instance_method
+      def create_application: (
+                                ?application_log_output_uri: ::String,
+                                ?application_log_paths: Array[::String],
+                                application_source_uri: ::String,
+                                ?client_token: ::String,
+                                description: ::String,
+                                executable_path: ::String,
+                                runtime_environment: {
+                                  type: ("PROTON" | "WINDOWS" | "UBUNTU"),
+                                  version: ::String
+                                },
+                                ?tags: Hash[::String, ::String]
+                              ) -> _CreateApplicationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationResponseSuccess
+
+      interface _CreateStreamGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateStreamGroupOutput]
+        def arn: () -> ::String
+        def associated_applications: () -> ::Array[::String]
+        def created_at: () -> ::Time
+        def default_application: () -> Types::DefaultApplication
+        def description: () -> ::String
+        def id: () -> ::String
+        def last_updated_at: () -> ::Time
+        def location_states: () -> ::Array[Types::LocationState]
+        def status: () -> ("ACTIVATING" | "UPDATING_LOCATIONS" | "ACTIVE" | "ACTIVE_WITH_ERRORS" | "ERROR" | "DELETING")
+        def status_reason: () -> ("internalError" | "noAvailableInstances")
+        def stream_class: () -> ("gen4n_high" | "gen4n_ultra" | "gen4n_win2022" | "gen5n_high" | "gen5n_ultra" | "gen5n_win2022")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#create_stream_group-instance_method
+      def create_stream_group: (
+                                 ?client_token: ::String,
+                                 ?default_application_identifier: ::String,
+                                 description: ::String,
+                                 ?location_configurations: Array[
+                                   {
+                                     always_on_capacity: ::Integer?,
+                                     location_name: ::String,
+                                     on_demand_capacity: ::Integer?
+                                   },
+                                 ],
+                                 stream_class: ("gen4n_high" | "gen4n_ultra" | "gen4n_win2022" | "gen5n_high" | "gen5n_ultra" | "gen5n_win2022"),
+                                 ?tags: Hash[::String, ::String]
+                               ) -> _CreateStreamGroupResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStreamGroupResponseSuccess
+
+      interface _CreateStreamSessionConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateStreamSessionConnectionOutput]
+        def signal_response: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#create_stream_session_connection-instance_method
+      def create_stream_session_connection: (
+                                              ?client_token: ::String,
+                                              identifier: ::String,
+                                              signal_request: ::String,
+                                              stream_session_identifier: ::String
+                                            ) -> _CreateStreamSessionConnectionResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStreamSessionConnectionResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#delete_application-instance_method
+      def delete_application: (
+                                identifier: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#delete_stream_group-instance_method
+      def delete_stream_group: (
+                                 identifier: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DisassociateApplicationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateApplicationsOutput]
+        def application_arns: () -> ::Array[::String]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#disassociate_applications-instance_method
+      def disassociate_applications: (
+                                       application_identifiers: Array[::String],
+                                       identifier: ::String
+                                     ) -> _DisassociateApplicationsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateApplicationsResponseSuccess
+
+      interface _ExportStreamSessionFilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExportStreamSessionFilesOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#export_stream_session_files-instance_method
+      def export_stream_session_files: (
+                                         identifier: ::String,
+                                         output_uri: ::String,
+                                         stream_session_identifier: ::String
+                                       ) -> _ExportStreamSessionFilesResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExportStreamSessionFilesResponseSuccess
+
+      interface _GetApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetApplicationOutput]
+        def application_log_output_uri: () -> ::String
+        def application_log_paths: () -> ::Array[::String]
+        def application_source_uri: () -> ::String
+        def arn: () -> ::String
+        def associated_stream_groups: () -> ::Array[::String]
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def executable_path: () -> ::String
+        def id: () -> ::String
+        def last_updated_at: () -> ::Time
+        def replication_statuses: () -> ::Array[Types::ReplicationStatus]
+        def runtime_environment: () -> Types::RuntimeEnvironment
+        def status: () -> ("INITIALIZED" | "PROCESSING" | "READY" | "DELETING" | "ERROR")
+        def status_reason: () -> ("internalError" | "accessDenied")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#get_application-instance_method
+      def get_application: (
+                             identifier: ::String
+                           ) -> _GetApplicationResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetApplicationResponseSuccess
+
+      interface _GetStreamGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetStreamGroupOutput]
+        def arn: () -> ::String
+        def associated_applications: () -> ::Array[::String]
+        def created_at: () -> ::Time
+        def default_application: () -> Types::DefaultApplication
+        def description: () -> ::String
+        def id: () -> ::String
+        def last_updated_at: () -> ::Time
+        def location_states: () -> ::Array[Types::LocationState]
+        def status: () -> ("ACTIVATING" | "UPDATING_LOCATIONS" | "ACTIVE" | "ACTIVE_WITH_ERRORS" | "ERROR" | "DELETING")
+        def status_reason: () -> ("internalError" | "noAvailableInstances")
+        def stream_class: () -> ("gen4n_high" | "gen4n_ultra" | "gen4n_win2022" | "gen5n_high" | "gen5n_ultra" | "gen5n_win2022")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#get_stream_group-instance_method
+      def get_stream_group: (
+                              identifier: ::String
+                            ) -> _GetStreamGroupResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStreamGroupResponseSuccess
+
+      interface _GetStreamSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetStreamSessionOutput]
+        def additional_environment_variables: () -> ::Hash[::String, ::String]
+        def additional_launch_args: () -> ::Array[::String]
+        def application_arn: () -> ::String
+        def arn: () -> ::String
+        def connection_timeout_seconds: () -> ::Integer
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def export_files_metadata: () -> Types::ExportFilesMetadata
+        def last_updated_at: () -> ::Time
+        def location: () -> ::String
+        def log_file_location_uri: () -> ::String
+        def protocol: () -> ("WebRTC")
+        def session_length_seconds: () -> ::Integer
+        def signal_request: () -> ::String
+        def signal_response: () -> ::String
+        def status: () -> ("ACTIVATING" | "ACTIVE" | "CONNECTED" | "PENDING_CLIENT_RECONNECTION" | "RECONNECTING" | "TERMINATING" | "TERMINATED" | "ERROR")
+        def status_reason: () -> ("internalError" | "invalidSignalRequest" | "placementTimeout" | "applicationLogS3DestinationError")
+        def stream_group_id: () -> ::String
+        def user_id: () -> ::String
+        def web_sdk_protocol_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#get_stream_session-instance_method
+      def get_stream_session: (
+                                identifier: ::String,
+                                stream_session_identifier: ::String
+                              ) -> _GetStreamSessionResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStreamSessionResponseSuccess
+
+      interface _ListApplicationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListApplicationsOutput]
+        def items: () -> ::Array[Types::ApplicationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#list_applications-instance_method
+      def list_applications: (
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListApplicationsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationsResponseSuccess
+
+      interface _ListStreamGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStreamGroupsOutput]
+        def items: () -> ::Array[Types::StreamGroupSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#list_stream_groups-instance_method
+      def list_stream_groups: (
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListStreamGroupsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStreamGroupsResponseSuccess
+
+      interface _ListStreamSessionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStreamSessionsOutput]
+        def items: () -> ::Array[Types::StreamSessionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#list_stream_sessions-instance_method
+      def list_stream_sessions: (
+                                  ?export_files_status: ("SUCCEEDED" | "FAILED" | "PENDING"),
+                                  identifier: ::String,
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String,
+                                  ?status: ("ACTIVATING" | "ACTIVE" | "CONNECTED" | "PENDING_CLIENT_RECONNECTION" | "RECONNECTING" | "TERMINATING" | "TERMINATED" | "ERROR")
+                                ) -> _ListStreamSessionsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStreamSessionsResponseSuccess
+
+      interface _ListStreamSessionsByAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStreamSessionsByAccountOutput]
+        def items: () -> ::Array[Types::StreamSessionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#list_stream_sessions_by_account-instance_method
+      def list_stream_sessions_by_account: (
+                                             ?export_files_status: ("SUCCEEDED" | "FAILED" | "PENDING"),
+                                             ?max_results: ::Integer,
+                                             ?next_token: ::String,
+                                             ?status: ("ACTIVATING" | "ACTIVE" | "CONNECTED" | "PENDING_CLIENT_RECONNECTION" | "RECONNECTING" | "TERMINATING" | "TERMINATED" | "ERROR")
+                                           ) -> _ListStreamSessionsByAccountResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStreamSessionsByAccountResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#remove_stream_group_locations-instance_method
+      def remove_stream_group_locations: (
+                                           identifier: ::String,
+                                           locations: Array[::String]
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _StartStreamSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartStreamSessionOutput]
+        def additional_environment_variables: () -> ::Hash[::String, ::String]
+        def additional_launch_args: () -> ::Array[::String]
+        def application_arn: () -> ::String
+        def arn: () -> ::String
+        def connection_timeout_seconds: () -> ::Integer
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def export_files_metadata: () -> Types::ExportFilesMetadata
+        def last_updated_at: () -> ::Time
+        def location: () -> ::String
+        def log_file_location_uri: () -> ::String
+        def protocol: () -> ("WebRTC")
+        def session_length_seconds: () -> ::Integer
+        def signal_request: () -> ::String
+        def signal_response: () -> ::String
+        def status: () -> ("ACTIVATING" | "ACTIVE" | "CONNECTED" | "PENDING_CLIENT_RECONNECTION" | "RECONNECTING" | "TERMINATING" | "TERMINATED" | "ERROR")
+        def status_reason: () -> ("internalError" | "invalidSignalRequest" | "placementTimeout" | "applicationLogS3DestinationError")
+        def stream_group_id: () -> ::String
+        def user_id: () -> ::String
+        def web_sdk_protocol_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#start_stream_session-instance_method
+      def start_stream_session: (
+                                  ?additional_environment_variables: Hash[::String, ::String],
+                                  ?additional_launch_args: Array[::String],
+                                  application_identifier: ::String,
+                                  ?client_token: ::String,
+                                  ?connection_timeout_seconds: ::Integer,
+                                  ?description: ::String,
+                                  identifier: ::String,
+                                  ?locations: Array[::String],
+                                  protocol: ("WebRTC"),
+                                  ?session_length_seconds: ::Integer,
+                                  signal_request: ::String,
+                                  ?user_id: ::String
+                                ) -> _StartStreamSessionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartStreamSessionResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#terminate_stream_session-instance_method
+      def terminate_stream_session: (
+                                      identifier: ::String,
+                                      stream_session_identifier: ::String
+                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateApplicationOutput]
+        def application_log_output_uri: () -> ::String
+        def application_log_paths: () -> ::Array[::String]
+        def application_source_uri: () -> ::String
+        def arn: () -> ::String
+        def associated_stream_groups: () -> ::Array[::String]
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def executable_path: () -> ::String
+        def id: () -> ::String
+        def last_updated_at: () -> ::Time
+        def replication_statuses: () -> ::Array[Types::ReplicationStatus]
+        def runtime_environment: () -> Types::RuntimeEnvironment
+        def status: () -> ("INITIALIZED" | "PROCESSING" | "READY" | "DELETING" | "ERROR")
+        def status_reason: () -> ("internalError" | "accessDenied")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#update_application-instance_method
+      def update_application: (
+                                ?application_log_output_uri: ::String,
+                                ?application_log_paths: Array[::String],
+                                ?description: ::String,
+                                identifier: ::String
+                              ) -> _UpdateApplicationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApplicationResponseSuccess
+
+      interface _UpdateStreamGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateStreamGroupOutput]
+        def arn: () -> ::String
+        def associated_applications: () -> ::Array[::String]
+        def created_at: () -> ::Time
+        def default_application: () -> Types::DefaultApplication
+        def description: () -> ::String
+        def id: () -> ::String
+        def last_updated_at: () -> ::Time
+        def location_states: () -> ::Array[Types::LocationState]
+        def status: () -> ("ACTIVATING" | "UPDATING_LOCATIONS" | "ACTIVE" | "ACTIVE_WITH_ERRORS" | "ERROR" | "DELETING")
+        def status_reason: () -> ("internalError" | "noAvailableInstances")
+        def stream_class: () -> ("gen4n_high" | "gen4n_ultra" | "gen4n_win2022" | "gen5n_high" | "gen5n_ultra" | "gen5n_win2022")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#update_stream_group-instance_method
+      def update_stream_group: (
+                                 ?description: ::String,
+                                 identifier: ::String,
+                                 ?location_configurations: Array[
+                                   {
+                                     always_on_capacity: ::Integer?,
+                                     location_name: ::String,
+                                     on_demand_capacity: ::Integer?
+                                   },
+                                 ]
+                               ) -> _UpdateStreamGroupResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStreamGroupResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#wait_until-instance_method
+      def wait_until: (:application_deleted waiter_name, 
+                    identifier: ::String
+                  ) -> Client::_GetApplicationResponseSuccess
+                    | (:application_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetApplicationResponseSuccess
+                    | (:application_ready waiter_name, 
+                    identifier: ::String
+                  ) -> Client::_GetApplicationResponseSuccess
+                    | (:application_ready waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetApplicationResponseSuccess
+                    | (:stream_group_active waiter_name, 
+                    identifier: ::String
+                  ) -> Client::_GetStreamGroupResponseSuccess
+                    | (:stream_group_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetStreamGroupResponseSuccess
+                    | (:stream_group_deleted waiter_name, 
+                    identifier: ::String
+                  ) -> Client::_GetStreamGroupResponseSuccess
+                    | (:stream_group_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetStreamGroupResponseSuccess
+                    | (:stream_session_active waiter_name, 
+                    identifier: ::String,
+                    stream_session_identifier: ::String
+                  ) -> Client::_GetStreamSessionResponseSuccess
+                    | (:stream_session_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetStreamSessionResponseSuccess
+    end
+  end
+end
+

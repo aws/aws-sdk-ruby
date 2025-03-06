@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.107.0 (2025-02-27)
+------------------
+
+* Feature - Definition update for EbsConfiguration.
+
 1.106.0 (2025-02-18)
 ------------------
 

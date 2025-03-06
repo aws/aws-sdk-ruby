@@ -300,7 +300,13 @@ module Aws
                                               s3_uri: ::String,
                                               s3_data_distribution_type: ("FullyReplicated" | "ShardedByS3Key")?,
                                               attribute_names: Array[::String]?,
-                                              instance_group_names: Array[::String]?
+                                              instance_group_names: Array[::String]?,
+                                              model_access_config: {
+                                                accept_eula: bool
+                                              }?,
+                                              hub_access_config: {
+                                                hub_content_arn: ::String
+                                              }?
                                             }?,
                                             file_system_data_source: {
                                               file_system_id: ::String,
@@ -1043,6 +1049,7 @@ module Aws
       interface _CreateDomainResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateDomainResponse]
         def domain_arn: () -> ::String
+        def domain_id: () -> ::String
         def url: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#create_domain-instance_method
@@ -1977,7 +1984,13 @@ module Aws
                                                          s3_uri: ::String,
                                                          s3_data_distribution_type: ("FullyReplicated" | "ShardedByS3Key")?,
                                                          attribute_names: Array[::String]?,
-                                                         instance_group_names: Array[::String]?
+                                                         instance_group_names: Array[::String]?,
+                                                         model_access_config: {
+                                                           accept_eula: bool
+                                                         }?,
+                                                         hub_access_config: {
+                                                           hub_content_arn: ::String
+                                                         }?
                                                        }?,
                                                        file_system_data_source: {
                                                          file_system_id: ::String,
@@ -2109,7 +2122,13 @@ module Aws
                                                            s3_uri: ::String,
                                                            s3_data_distribution_type: ("FullyReplicated" | "ShardedByS3Key")?,
                                                            attribute_names: Array[::String]?,
-                                                           instance_group_names: Array[::String]?
+                                                           instance_group_names: Array[::String]?,
+                                                           model_access_config: {
+                                                             accept_eula: bool
+                                                           }?,
+                                                           hub_access_config: {
+                                                             hub_content_arn: ::String
+                                                           }?
                                                          }?,
                                                          file_system_data_source: {
                                                            file_system_id: ::String,
@@ -3960,7 +3979,13 @@ module Aws
                                          s3_uri: ::String,
                                          s3_data_distribution_type: ("FullyReplicated" | "ShardedByS3Key")?,
                                          attribute_names: Array[::String]?,
-                                         instance_group_names: Array[::String]?
+                                         instance_group_names: Array[::String]?,
+                                         model_access_config: {
+                                           accept_eula: bool
+                                         }?,
+                                         hub_access_config: {
+                                           hub_content_arn: ::String
+                                         }?
                                        }?,
                                        file_system_data_source: {
                                          file_system_id: ::String,
@@ -5571,12 +5596,13 @@ module Aws
         def hub_content_document: () -> ::String
         def sage_maker_public_hub_content_arn: () -> ::String
         def reference_min_version: () -> ::String
-        def support_status: () -> ("Supported" | "Deprecated")
+        def support_status: () -> ("Supported" | "Deprecated" | "Restricted")
         def hub_content_search_keywords: () -> ::Array[::String]
         def hub_content_dependencies: () -> ::Array[Types::HubContentDependency]
         def hub_content_status: () -> ("Available" | "Importing" | "Deleting" | "ImportFailed" | "DeleteFailed")
         def failure_reason: () -> ::String
         def creation_time: () -> ::Time
+        def last_modified_time: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_hub_content-instance_method
       def describe_hub_content: (
@@ -6571,6 +6597,7 @@ module Aws
                                 ?hub_content_description: ::String,
                                 ?hub_content_markdown: ::String,
                                 hub_content_document: ::String,
+                                ?support_status: ("Supported" | "Deprecated" | "Restricted"),
                                 ?hub_content_search_keywords: Array[::String],
                                 ?tags: Array[
                                   {
@@ -9129,6 +9156,39 @@ module Aws
                         ?hub_search_keywords: Array[::String]
                       ) -> _UpdateHubResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateHubResponseSuccess
+
+      interface _UpdateHubContentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateHubContentResponse]
+        def hub_arn: () -> ::String
+        def hub_content_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#update_hub_content-instance_method
+      def update_hub_content: (
+                                hub_name: ::String,
+                                hub_content_name: ::String,
+                                hub_content_type: ("Model" | "Notebook" | "ModelReference"),
+                                hub_content_version: ::String,
+                                ?hub_content_display_name: ::String,
+                                ?hub_content_description: ::String,
+                                ?hub_content_markdown: ::String,
+                                ?hub_content_search_keywords: Array[::String],
+                                ?support_status: ("Supported" | "Deprecated" | "Restricted")
+                              ) -> _UpdateHubContentResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateHubContentResponseSuccess
+
+      interface _UpdateHubContentReferenceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateHubContentReferenceResponse]
+        def hub_arn: () -> ::String
+        def hub_content_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#update_hub_content_reference-instance_method
+      def update_hub_content_reference: (
+                                          hub_name: ::String,
+                                          hub_content_name: ::String,
+                                          hub_content_type: ("Model" | "Notebook" | "ModelReference"),
+                                          ?min_version: ::String
+                                        ) -> _UpdateHubContentReferenceResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateHubContentReferenceResponseSuccess
 
       interface _UpdateImageResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateImageResponse]

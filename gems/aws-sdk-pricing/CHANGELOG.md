@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2025-02-28)
+------------------
+
+* Feature - Update GetProducts and DescribeServices API request input validations.
+
 1.73.0 (2025-02-18)
 ------------------
 

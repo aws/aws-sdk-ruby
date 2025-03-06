@@ -2009,7 +2009,7 @@
             "apiVersion": "2019-12-16"
         },
         "shapes": {
-            "NestedXmlMapWithXmlNameInputOutput": {
+            "NestedXmlMapWithXmlNameResponse": {
                 "type": "structure",
                 "members": {
                     "nestedXmlMapWithXmlNameMap": {
@@ -2053,7 +2053,7 @@
                         "responseCode": 200
                     },
                     "output": {
-                        "shape": "NestedXmlMapWithXmlNameInputOutput"
+                        "shape": "NestedXmlMapWithXmlNameResponse"
                     },
                     "documentation": "<p>Nested Xml Maps with key/values with @xmlName</p>"
                 },
@@ -2075,7 +2075,7 @@
                     "headers": {
                         "Content-Type": "application/xml"
                     },
-                    "body": "    <NestedXmlMapWithXmlNameInputOutput>\n        <nestedXmlMapWithXmlNameMap>\n            <entry>\n                <OuterKey>foo</OuterKey>\n                <value>\n                    <entry>\n                        <InnerKey>bar</InnerKey>\n                        <InnerValue>Baz</InnerValue>\n                    </entry>\n                    <entry>\n                        <InnerKey>fizz</InnerKey>\n                        <InnerValue>Buzz</InnerValue>\n                    </entry>\n                </value>\n            </entry>\n            <entry>\n                <OuterKey>qux</OuterKey>\n                <value>\n                    <entry>\n                        <InnerKey>foobar</InnerKey>\n                        <InnerValue>Bar</InnerValue>\n                    </entry>\n                    <entry>\n                        <InnerKey>fizzbuzz</InnerKey>\n                        <InnerValue>Buzz</InnerValue>\n                    </entry>\n                </value>\n            </entry>\n        </nestedXmlMapWithXmlNameMap>\n    </NestedXmlMapWithXmlNameInputOutput>\n"
+                    "body": "    <NestedXmlMapWithXmlNameResponse>\n        <nestedXmlMapWithXmlNameMap>\n            <entry>\n                <OuterKey>foo</OuterKey>\n                <value>\n                    <entry>\n                        <InnerKey>bar</InnerKey>\n                        <InnerValue>Baz</InnerValue>\n                    </entry>\n                    <entry>\n                        <InnerKey>fizz</InnerKey>\n                        <InnerValue>Buzz</InnerValue>\n                    </entry>\n                </value>\n            </entry>\n            <entry>\n                <OuterKey>qux</OuterKey>\n                <value>\n                    <entry>\n                        <InnerKey>foobar</InnerKey>\n                        <InnerValue>Bar</InnerValue>\n                    </entry>\n                    <entry>\n                        <InnerKey>fizzbuzz</InnerKey>\n                        <InnerValue>Buzz</InnerValue>\n                    </entry>\n                </value>\n            </entry>\n        </nestedXmlMapWithXmlNameMap>\n    </NestedXmlMapWithXmlNameResponse>\n"
                 }
             }
         ]

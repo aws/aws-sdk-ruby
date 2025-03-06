@@ -33,12 +33,14 @@ module Aws::ElasticBeanstalk
   # * {InvalidRequestException}
   # * {ManagedActionInvalidStateException}
   # * {OperationInProgressException}
+  #    * This error class is not used. `OperationInProgressFailure` is used during parsing instead.
   # * {PlatformVersionStillReferencedException}
   # * {ResourceNotFoundException}
   # * {ResourceTypeNotSupportedException}
   # * {S3LocationNotInServiceRegionException}
   # * {S3SubscriptionRequiredException}
   # * {SourceBundleDeletionException}
+  #    * This error class is not used. `SourceBundleDeletionFailure` is used during parsing instead.
   # * {TooManyApplicationVersionsException}
   # * {TooManyApplicationsException}
   # * {TooManyBucketsException}
@@ -49,6 +51,7 @@ module Aws::ElasticBeanstalk
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
+  # Some existing error classes may use a different class name than the one documented.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -108,6 +111,8 @@ module Aws::ElasticBeanstalk
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `OperationInProgressFailure` instead.
     class OperationInProgressException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -168,6 +173,8 @@ module Aws::ElasticBeanstalk
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `SourceBundleDeletionFailure` instead.
     class SourceBundleDeletionException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context

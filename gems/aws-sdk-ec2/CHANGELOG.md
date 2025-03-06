@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.509.0 (2025-03-03)
+------------------
+
+* Feature - Update the DescribeVpcs response
+
 1.508.0 (2025-02-26)
 ------------------
 

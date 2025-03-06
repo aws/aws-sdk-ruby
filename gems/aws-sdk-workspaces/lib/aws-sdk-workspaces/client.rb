@@ -2588,6 +2588,7 @@ module Aws::WorkSpaces
     #   resp.directories[0].workspace_access_properties.device_type_chrome_os #=> String, one of "ALLOW", "DENY"
     #   resp.directories[0].workspace_access_properties.device_type_zero_client #=> String, one of "ALLOW", "DENY"
     #   resp.directories[0].workspace_access_properties.device_type_linux #=> String, one of "ALLOW", "DENY"
+    #   resp.directories[0].workspace_access_properties.device_type_work_spaces_thin_client #=> String, one of "ALLOW", "DENY"
     #   resp.directories[0].tenancy #=> String, one of "DEDICATED", "SHARED"
     #   resp.directories[0].selfservice_permissions.restart_workspace #=> String, one of "ENABLED", "DISABLED"
     #   resp.directories[0].selfservice_permissions.increase_volume_size #=> String, one of "ENABLED", "DISABLED"
@@ -3842,6 +3843,7 @@ module Aws::WorkSpaces
     #       device_type_chrome_os: "ALLOW", # accepts ALLOW, DENY
     #       device_type_zero_client: "ALLOW", # accepts ALLOW, DENY
     #       device_type_linux: "ALLOW", # accepts ALLOW, DENY
+    #       device_type_work_spaces_thin_client: "ALLOW", # accepts ALLOW, DENY
     #     },
     #   })
     #
@@ -4850,7 +4852,7 @@ module Aws::WorkSpaces
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.131.0'
+      context[:gem_version] = '1.132.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

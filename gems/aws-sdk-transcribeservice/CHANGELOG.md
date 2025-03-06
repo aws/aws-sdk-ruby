@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.116.0 (2025-03-03)
+------------------
+
+* Feature - Updating documentation for post call analytics job queueing.
+
 1.115.0 (2025-02-18)
 ------------------
 

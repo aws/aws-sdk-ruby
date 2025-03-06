@@ -2068,8 +2068,11 @@ module Aws::EKS
     # @!attribute [rw] launch_template
     #   An object representing a node group's launch template
     #   specification. When using this object, don't directly specify
-    #   `instanceTypes`, `diskSize`, or `remoteAccess`. Make sure that the
-    #   launch template meets the requirements in
+    #   `instanceTypes`, `diskSize`, or `remoteAccess`. You cannot later
+    #   specify a different launch template ID or name than what was used to
+    #   create the node group.
+    #
+    #   Make sure that the launch template meets the requirements in
     #   `launchTemplateSpecification`. Also refer to [Customizing managed
     #   nodes with launch templates][1] in the *Amazon EKS User Guide*.
     #
@@ -3169,6 +3172,11 @@ module Aws::EKS
     #   subscription.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] licenses
+    #   Includes all of the claims in the license token necessary to
+    #   validate the license for extended support.
+    #   @return [Array<Types::License>]
+    #
     # @!attribute [rw] tags
     #   The metadata for a subscription to assist with categorization and
     #   organization. Each tag consists of a key and an optional value.
@@ -3190,6 +3198,7 @@ module Aws::EKS
       :status,
       :auto_renew,
       :license_arns,
+      :licenses,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -4026,19 +4035,22 @@ module Aws::EKS
     #   The name of the launch template.
     #
     #   You must specify either the launch template name or the launch
-    #   template ID in the request, but not both.
+    #   template ID in the request, but not both. After node group creation,
+    #   you cannot use a different name.
     #   @return [String]
     #
     # @!attribute [rw] version
     #   The version number of the launch template to use. If no version is
-    #   specified, then the template's default version is used.
+    #   specified, then the template's default version is used. You can use
+    #   a different version for node group updates.
     #   @return [String]
     #
     # @!attribute [rw] id
     #   The ID of the launch template.
     #
     #   You must specify either the launch template ID or the launch
-    #   template name in the request, but not both.
+    #   template name in the request, but not both. After node group
+    #   creation, you cannot use a different ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/LaunchTemplateSpecification AWS API Documentation
@@ -4047,6 +4059,26 @@ module Aws::EKS
       :name,
       :version,
       :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An EKS Anywhere license associated with a subscription.
+    #
+    # @!attribute [rw] id
+    #   An id associated with an EKS Anywhere subscription license.
+    #   @return [String]
+    #
+    # @!attribute [rw] token
+    #   An optional license token that can be used for extended support
+    #   verification.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/License AWS API Documentation
+    #
+    class License < Struct.new(
+      :id,
+      :token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6977,7 +7009,8 @@ module Aws::EKS
     #   An object representing a node group's launch template
     #   specification. You can only update a node group using a launch
     #   template if the node group was originally deployed with a launch
-    #   template.
+    #   template. When updating, you must specify the same launch template
+    #   ID or name that was used to create the node group.
     #   @return [Types::LaunchTemplateSpecification]
     #
     # @!attribute [rw] force

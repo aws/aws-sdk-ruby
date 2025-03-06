@@ -4203,6 +4203,53 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
+    # @!attribute [rw] file_share_arn
+    #   The Amazon Resource Name (ARN) of the file share for which you want
+    #   to start the cache clean operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] force_remove
+    #   Specifies whether cache entries with full or partial file data
+    #   currently stored on the gateway will be forcibly removed by the
+    #   cache clean operation.
+    #
+    #   Valid arguments:
+    #
+    #   * `False` - The cache clean operation skips cache entries failing
+    #     upload if they are associated with data currently stored on the
+    #     gateway. This preserves the cached data.
+    #
+    #   * `True` - The cache clean operation removes cache entries failing
+    #     upload even if they are associated with data currently stored on
+    #     the gateway. This deletes the cached data.
+    #
+    #     If `ForceRemove` is set to `True`, the cache clean operation will
+    #     delete file data from the gateway which might otherwise be
+    #     recoverable.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/EvictFilesFailingUploadInput AWS API Documentation
+    #
+    class EvictFilesFailingUploadInput < Struct.new(
+      :file_share_arn,
+      :force_remove)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] notification_id
+    #   The randomly generated ID of the CloudWatch notification associated
+    #   with the cache clean operation. This ID is in UUID format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/EvictFilesFailingUploadOutput AWS API Documentation
+    #
+    class EvictFilesFailingUploadOutput < Struct.new(
+      :notification_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a file share. Only supported S3 File Gateway.
     #
     # @!attribute [rw] file_share_type

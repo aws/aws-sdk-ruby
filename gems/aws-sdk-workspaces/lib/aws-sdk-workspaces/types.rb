@@ -5373,6 +5373,11 @@ module Aws::WorkSpaces
     #   WorkSpaces.
     #   @return [String]
     #
+    # @!attribute [rw] device_type_work_spaces_thin_client
+    #   Indicates whether users can access their WorkSpaces through a
+    #   WorkSpaces Thin Client.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceAccessProperties AWS API Documentation
     #
     class WorkspaceAccessProperties < Struct.new(
@@ -5383,7 +5388,8 @@ module Aws::WorkSpaces
       :device_type_android,
       :device_type_chrome_os,
       :device_type_zero_client,
-      :device_type_linux)
+      :device_type_linux,
+      :device_type_work_spaces_thin_client)
       SENSITIVE = []
       include Aws::Structure
     end

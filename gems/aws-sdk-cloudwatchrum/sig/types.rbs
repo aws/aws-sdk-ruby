@@ -159,6 +159,17 @@ module Aws::CloudWatchRUM
     class DeleteAppMonitorResponse < Aws::EmptyStructure
     end
 
+    class DeleteResourcePolicyRequest
+      attr_accessor name: ::String
+      attr_accessor policy_revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePolicyResponse
+      attr_accessor policy_revision_id: ::String
+      SENSITIVE: []
+    end
+
     class DeleteRumMetricsDestinationRequest
       attr_accessor app_monitor_name: ::String
       attr_accessor destination: ("CloudWatch" | "Evidently")
@@ -194,9 +205,25 @@ module Aws::CloudWatchRUM
       SENSITIVE: []
     end
 
+    class GetResourcePolicyRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyResponse
+      attr_accessor policy_document: ::String
+      attr_accessor policy_revision_id: ::String
+      SENSITIVE: []
+    end
+
     class InternalServerException
       attr_accessor message: ::String
       attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class InvalidPolicyRevisionIdException
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -236,6 +263,11 @@ module Aws::CloudWatchRUM
       SENSITIVE: []
     end
 
+    class MalformedPolicyDocumentException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class MetricDefinition
       attr_accessor dimension_keys: ::Hash[::String, ::String]
       attr_accessor event_pattern: ::String
@@ -264,7 +296,31 @@ module Aws::CloudWatchRUM
       SENSITIVE: []
     end
 
+    class PolicyNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PolicySizeLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyRequest
+      attr_accessor name: ::String
+      attr_accessor policy_document: ::String
+      attr_accessor policy_revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyResponse
+      attr_accessor policy_document: ::String
+      attr_accessor policy_revision_id: ::String
+      SENSITIVE: []
+    end
+
     class PutRumEventsRequest
+      attr_accessor alias: ::String
       attr_accessor app_monitor_details: Types::AppMonitorDetails
       attr_accessor batch_id: ::String
       attr_accessor id: ::String

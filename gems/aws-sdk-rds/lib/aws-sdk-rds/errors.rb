@@ -28,14 +28,19 @@ module Aws::RDS
   #
   # ## Error Classes
   # * {AuthorizationAlreadyExistsFault}
+  #    * This error class is not used. `AuthorizationAlreadyExists` is used during parsing instead.
   # * {AuthorizationNotFoundFault}
+  #    * This error class is not used. `AuthorizationNotFound` is used during parsing instead.
   # * {AuthorizationQuotaExceededFault}
+  #    * This error class is not used. `AuthorizationQuotaExceeded` is used during parsing instead.
   # * {BackupPolicyNotFoundFault}
   # * {BlueGreenDeploymentAlreadyExistsFault}
   # * {BlueGreenDeploymentNotFoundFault}
   # * {CertificateNotFoundFault}
+  #    * This error class is not used. `CertificateNotFound` is used during parsing instead.
   # * {CreateCustomDBEngineVersionFault}
   # * {CustomAvailabilityZoneNotFoundFault}
+  #    * This error class is not used. `CustomAvailabilityZoneNotFound` is used during parsing instead.
   # * {CustomDBEngineVersionAlreadyExistsFault}
   # * {CustomDBEngineVersionNotFoundFault}
   # * {CustomDBEngineVersionQuotaExceededFault}
@@ -48,24 +53,39 @@ module Aws::RDS
   # * {DBClusterEndpointQuotaExceededFault}
   # * {DBClusterNotFoundFault}
   # * {DBClusterParameterGroupNotFoundFault}
+  #    * This error class is not used. `DBClusterParameterGroupNotFound` is used during parsing instead.
   # * {DBClusterQuotaExceededFault}
   # * {DBClusterRoleAlreadyExistsFault}
+  #    * This error class is not used. `DBClusterRoleAlreadyExists` is used during parsing instead.
   # * {DBClusterRoleNotFoundFault}
+  #    * This error class is not used. `DBClusterRoleNotFound` is used during parsing instead.
   # * {DBClusterRoleQuotaExceededFault}
+  #    * This error class is not used. `DBClusterRoleQuotaExceeded` is used during parsing instead.
   # * {DBClusterSnapshotAlreadyExistsFault}
   # * {DBClusterSnapshotNotFoundFault}
   # * {DBInstanceAlreadyExistsFault}
+  #    * This error class is not used. `DBInstanceAlreadyExists` is used during parsing instead.
   # * {DBInstanceAutomatedBackupNotFoundFault}
+  #    * This error class is not used. `DBInstanceAutomatedBackupNotFound` is used during parsing instead.
   # * {DBInstanceAutomatedBackupQuotaExceededFault}
+  #    * This error class is not used. `DBInstanceAutomatedBackupQuotaExceeded` is used during parsing instead.
   # * {DBInstanceNotFoundFault}
+  #    * This error class is not used. `DBInstanceNotFound` is used during parsing instead.
   # * {DBInstanceNotReadyFault}
+  #    * This error class is not used. `DBInstanceNotReady` is used during parsing instead.
   # * {DBInstanceRoleAlreadyExistsFault}
+  #    * This error class is not used. `DBInstanceRoleAlreadyExists` is used during parsing instead.
   # * {DBInstanceRoleNotFoundFault}
+  #    * This error class is not used. `DBInstanceRoleNotFound` is used during parsing instead.
   # * {DBInstanceRoleQuotaExceededFault}
+  #    * This error class is not used. `DBInstanceRoleQuotaExceeded` is used during parsing instead.
   # * {DBLogFileNotFoundFault}
   # * {DBParameterGroupAlreadyExistsFault}
+  #    * This error class is not used. `DBParameterGroupAlreadyExists` is used during parsing instead.
   # * {DBParameterGroupNotFoundFault}
+  #    * This error class is not used. `DBParameterGroupNotFound` is used during parsing instead.
   # * {DBParameterGroupQuotaExceededFault}
+  #    * This error class is not used. `DBParameterGroupQuotaExceeded` is used during parsing instead.
   # * {DBProxyAlreadyExistsFault}
   # * {DBProxyEndpointAlreadyExistsFault}
   # * {DBProxyEndpointNotFoundFault}
@@ -76,36 +96,55 @@ module Aws::RDS
   # * {DBProxyTargetGroupNotFoundFault}
   # * {DBProxyTargetNotFoundFault}
   # * {DBSecurityGroupAlreadyExistsFault}
+  #    * This error class is not used. `DBSecurityGroupAlreadyExists` is used during parsing instead.
   # * {DBSecurityGroupNotFoundFault}
+  #    * This error class is not used. `DBSecurityGroupNotFound` is used during parsing instead.
   # * {DBSecurityGroupNotSupportedFault}
+  #    * This error class is not used. `DBSecurityGroupNotSupported` is used during parsing instead.
   # * {DBSecurityGroupQuotaExceededFault}
+  #    * This error class is not used. `QuotaExceeded.DBSecurityGroup` is used during parsing instead.
   # * {DBShardGroupAlreadyExistsFault}
+  #    * This error class is not used. `DBShardGroupAlreadyExists` is used during parsing instead.
   # * {DBShardGroupNotFoundFault}
+  #    * This error class is not used. `DBShardGroupNotFound` is used during parsing instead.
   # * {DBSnapshotAlreadyExistsFault}
+  #    * This error class is not used. `DBSnapshotAlreadyExists` is used during parsing instead.
   # * {DBSnapshotNotFoundFault}
+  #    * This error class is not used. `DBSnapshotNotFound` is used during parsing instead.
   # * {DBSnapshotTenantDatabaseNotFoundFault}
   # * {DBSubnetGroupAlreadyExistsFault}
+  #    * This error class is not used. `DBSubnetGroupAlreadyExists` is used during parsing instead.
   # * {DBSubnetGroupDoesNotCoverEnoughAZs}
   # * {DBSubnetGroupNotAllowedFault}
   # * {DBSubnetGroupNotFoundFault}
   # * {DBSubnetGroupQuotaExceededFault}
+  #    * This error class is not used. `DBSubnetGroupQuotaExceeded` is used during parsing instead.
   # * {DBSubnetQuotaExceededFault}
   # * {DBUpgradeDependencyFailureFault}
+  #    * This error class is not used. `DBUpgradeDependencyFailure` is used during parsing instead.
   # * {DomainNotFoundFault}
   # * {Ec2ImagePropertiesNotSupportedFault}
   # * {EventSubscriptionQuotaExceededFault}
+  #    * This error class is not used. `EventSubscriptionQuotaExceeded` is used during parsing instead.
   # * {ExportTaskAlreadyExistsFault}
+  #    * This error class is not used. `ExportTaskAlreadyExists` is used during parsing instead.
   # * {ExportTaskNotFoundFault}
+  #    * This error class is not used. `ExportTaskNotFound` is used during parsing instead.
   # * {GlobalClusterAlreadyExistsFault}
   # * {GlobalClusterNotFoundFault}
   # * {GlobalClusterQuotaExceededFault}
   # * {IamRoleMissingPermissionsFault}
+  #    * This error class is not used. `IamRoleMissingPermissions` is used during parsing instead.
   # * {IamRoleNotFoundFault}
+  #    * This error class is not used. `IamRoleNotFound` is used during parsing instead.
   # * {InstanceQuotaExceededFault}
+  #    * This error class is not used. `InstanceQuotaExceeded` is used during parsing instead.
   # * {InsufficientAvailableIPsInSubnetFault}
   # * {InsufficientDBClusterCapacityFault}
   # * {InsufficientDBInstanceCapacityFault}
+  #    * This error class is not used. `InsufficientDBInstanceCapacity` is used during parsing instead.
   # * {InsufficientStorageClusterCapacityFault}
+  #    * This error class is not used. `InsufficientStorageClusterCapacity` is used during parsing instead.
   # * {IntegrationAlreadyExistsFault}
   # * {IntegrationConflictOperationFault}
   # * {IntegrationNotFoundFault}
@@ -118,19 +157,28 @@ module Aws::RDS
   # * {InvalidDBClusterSnapshotStateFault}
   # * {InvalidDBClusterStateFault}
   # * {InvalidDBInstanceAutomatedBackupStateFault}
+  #    * This error class is not used. `InvalidDBInstanceAutomatedBackupState` is used during parsing instead.
   # * {InvalidDBInstanceStateFault}
+  #    * This error class is not used. `InvalidDBInstanceState` is used during parsing instead.
   # * {InvalidDBParameterGroupStateFault}
+  #    * This error class is not used. `InvalidDBParameterGroupState` is used during parsing instead.
   # * {InvalidDBProxyEndpointStateFault}
   # * {InvalidDBProxyStateFault}
   # * {InvalidDBSecurityGroupStateFault}
+  #    * This error class is not used. `InvalidDBSecurityGroupState` is used during parsing instead.
   # * {InvalidDBShardGroupStateFault}
+  #    * This error class is not used. `InvalidDBShardGroupState` is used during parsing instead.
   # * {InvalidDBSnapshotStateFault}
+  #    * This error class is not used. `InvalidDBSnapshotState` is used during parsing instead.
   # * {InvalidDBSubnetGroupFault}
   # * {InvalidDBSubnetGroupStateFault}
   # * {InvalidDBSubnetStateFault}
   # * {InvalidEventSubscriptionStateFault}
+  #    * This error class is not used. `InvalidEventSubscriptionState` is used during parsing instead.
   # * {InvalidExportOnlyFault}
+  #    * This error class is not used. `InvalidExportOnly` is used during parsing instead.
   # * {InvalidExportSourceStateFault}
+  #    * This error class is not used. `InvalidExportSourceState` is used during parsing instead.
   # * {InvalidExportTaskStateFault}
   # * {InvalidGlobalClusterStateFault}
   # * {InvalidIntegrationStateFault}
@@ -147,38 +195,61 @@ module Aws::RDS
   # * {OptionGroupNotFoundFault}
   # * {OptionGroupQuotaExceededFault}
   # * {PointInTimeRestoreNotEnabledFault}
+  #    * This error class is not used. `PointInTimeRestoreNotEnabled` is used during parsing instead.
   # * {ProvisionedIopsNotAvailableInAZFault}
   # * {ReservedDBInstanceAlreadyExistsFault}
+  #    * This error class is not used. `ReservedDBInstanceAlreadyExists` is used during parsing instead.
   # * {ReservedDBInstanceNotFoundFault}
+  #    * This error class is not used. `ReservedDBInstanceNotFound` is used during parsing instead.
   # * {ReservedDBInstanceQuotaExceededFault}
+  #    * This error class is not used. `ReservedDBInstanceQuotaExceeded` is used during parsing instead.
   # * {ReservedDBInstancesOfferingNotFoundFault}
+  #    * This error class is not used. `ReservedDBInstancesOfferingNotFound` is used during parsing instead.
   # * {ResourceNotFoundFault}
   # * {SNSInvalidTopicFault}
+  #    * This error class is not used. `SNSInvalidTopic` is used during parsing instead.
   # * {SNSNoAuthorizationFault}
+  #    * This error class is not used. `SNSNoAuthorization` is used during parsing instead.
   # * {SNSTopicArnNotFoundFault}
+  #    * This error class is not used. `SNSTopicArnNotFound` is used during parsing instead.
   # * {SharedSnapshotQuotaExceededFault}
+  #    * This error class is not used. `SharedSnapshotQuotaExceeded` is used during parsing instead.
   # * {SnapshotQuotaExceededFault}
+  #    * This error class is not used. `SnapshotQuotaExceeded` is used during parsing instead.
   # * {SourceClusterNotSupportedFault}
   # * {SourceDatabaseNotSupportedFault}
   # * {SourceNotFoundFault}
+  #    * This error class is not used. `SourceNotFound` is used during parsing instead.
   # * {StorageQuotaExceededFault}
+  #    * This error class is not used. `StorageQuotaExceeded` is used during parsing instead.
   # * {StorageTypeNotAvailableFault}
   # * {StorageTypeNotSupportedFault}
+  #    * This error class is not used. `StorageTypeNotSupported` is used during parsing instead.
   # * {SubnetAlreadyInUse}
   # * {SubscriptionAlreadyExistFault}
+  #    * This error class is not used. `SubscriptionAlreadyExist` is used during parsing instead.
   # * {SubscriptionCategoryNotFoundFault}
+  #    * This error class is not used. `SubscriptionCategoryNotFound` is used during parsing instead.
   # * {SubscriptionNotFoundFault}
+  #    * This error class is not used. `SubscriptionNotFound` is used during parsing instead.
   # * {TenantDatabaseAlreadyExistsFault}
+  #    * This error class is not used. `TenantDatabaseAlreadyExists` is used during parsing instead.
   # * {TenantDatabaseNotFoundFault}
+  #    * This error class is not used. `TenantDatabaseNotFound` is used during parsing instead.
   # * {TenantDatabaseQuotaExceededFault}
+  #    * This error class is not used. `TenantDatabaseQuotaExceeded` is used during parsing instead.
   # * {UnsupportedDBEngineVersionFault}
+  #    * This error class is not used. `UnsupportedDBEngineVersion` is used during parsing instead.
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
+  # Some existing error classes may use a different class name than the one documented.
   module Errors
 
     extend Aws::Errors::DynamicErrors
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `AuthorizationAlreadyExists` instead.
     class AuthorizationAlreadyExistsFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -189,6 +260,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `AuthorizationNotFound` instead.
     class AuthorizationNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -199,6 +272,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `AuthorizationQuotaExceeded` instead.
     class AuthorizationQuotaExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -239,6 +314,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `CertificateNotFound` instead.
     class CertificateNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -259,6 +336,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `CustomAvailabilityZoneNotFound` instead.
     class CustomAvailabilityZoneNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -379,6 +458,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `DBClusterParameterGroupNotFound` instead.
     class DBClusterParameterGroupNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -399,6 +480,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `DBClusterRoleAlreadyExists` instead.
     class DBClusterRoleAlreadyExistsFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -409,6 +492,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `DBClusterRoleNotFound` instead.
     class DBClusterRoleNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -419,6 +504,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `DBClusterRoleQuotaExceeded` instead.
     class DBClusterRoleQuotaExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -449,6 +536,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `DBInstanceAlreadyExists` instead.
     class DBInstanceAlreadyExistsFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -459,6 +548,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `DBInstanceAutomatedBackupNotFound` instead.
     class DBInstanceAutomatedBackupNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -469,6 +560,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `DBInstanceAutomatedBackupQuotaExceeded` instead.
     class DBInstanceAutomatedBackupQuotaExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -479,6 +572,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `DBInstanceNotFound` instead.
     class DBInstanceNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -489,6 +584,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `DBInstanceNotReady` instead.
     class DBInstanceNotReadyFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -499,6 +596,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `DBInstanceRoleAlreadyExists` instead.
     class DBInstanceRoleAlreadyExistsFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -509,6 +608,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `DBInstanceRoleNotFound` instead.
     class DBInstanceRoleNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -519,6 +620,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `DBInstanceRoleQuotaExceeded` instead.
     class DBInstanceRoleQuotaExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -539,6 +642,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `DBParameterGroupAlreadyExists` instead.
     class DBParameterGroupAlreadyExistsFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -549,6 +654,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `DBParameterGroupNotFound` instead.
     class DBParameterGroupNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -559,6 +666,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `DBParameterGroupQuotaExceeded` instead.
     class DBParameterGroupQuotaExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -659,6 +768,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `DBSecurityGroupAlreadyExists` instead.
     class DBSecurityGroupAlreadyExistsFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -669,6 +780,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `DBSecurityGroupNotFound` instead.
     class DBSecurityGroupNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -679,6 +792,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `DBSecurityGroupNotSupported` instead.
     class DBSecurityGroupNotSupportedFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -689,6 +804,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `QuotaExceeded.DBSecurityGroup` instead.
     class DBSecurityGroupQuotaExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -699,6 +816,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `DBShardGroupAlreadyExists` instead.
     class DBShardGroupAlreadyExistsFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -709,6 +828,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `DBShardGroupNotFound` instead.
     class DBShardGroupNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -719,6 +840,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `DBSnapshotAlreadyExists` instead.
     class DBSnapshotAlreadyExistsFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -729,6 +852,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `DBSnapshotNotFound` instead.
     class DBSnapshotNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -749,6 +874,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `DBSubnetGroupAlreadyExists` instead.
     class DBSubnetGroupAlreadyExistsFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -789,6 +916,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `DBSubnetGroupQuotaExceeded` instead.
     class DBSubnetGroupQuotaExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -809,6 +938,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `DBUpgradeDependencyFailure` instead.
     class DBUpgradeDependencyFailureFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -839,6 +970,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `EventSubscriptionQuotaExceeded` instead.
     class EventSubscriptionQuotaExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -849,6 +982,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ExportTaskAlreadyExists` instead.
     class ExportTaskAlreadyExistsFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -859,6 +994,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ExportTaskNotFound` instead.
     class ExportTaskNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -899,6 +1036,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `IamRoleMissingPermissions` instead.
     class IamRoleMissingPermissionsFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -909,6 +1048,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `IamRoleNotFound` instead.
     class IamRoleNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -919,6 +1060,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InstanceQuotaExceeded` instead.
     class InstanceQuotaExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -949,6 +1092,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InsufficientDBInstanceCapacity` instead.
     class InsufficientDBInstanceCapacityFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -959,6 +1104,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InsufficientStorageClusterCapacity` instead.
     class InsufficientStorageClusterCapacityFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1079,6 +1226,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidDBInstanceAutomatedBackupState` instead.
     class InvalidDBInstanceAutomatedBackupStateFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1089,6 +1238,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidDBInstanceState` instead.
     class InvalidDBInstanceStateFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1099,6 +1250,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidDBParameterGroupState` instead.
     class InvalidDBParameterGroupStateFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1129,6 +1282,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidDBSecurityGroupState` instead.
     class InvalidDBSecurityGroupStateFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1139,6 +1294,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidDBShardGroupState` instead.
     class InvalidDBShardGroupStateFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1149,6 +1306,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidDBSnapshotState` instead.
     class InvalidDBSnapshotStateFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1189,6 +1348,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidEventSubscriptionState` instead.
     class InvalidEventSubscriptionStateFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1199,6 +1360,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidExportOnly` instead.
     class InvalidExportOnlyFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1209,6 +1372,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidExportSourceState` instead.
     class InvalidExportSourceStateFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1369,6 +1534,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `PointInTimeRestoreNotEnabled` instead.
     class PointInTimeRestoreNotEnabledFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1389,6 +1556,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ReservedDBInstanceAlreadyExists` instead.
     class ReservedDBInstanceAlreadyExistsFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1399,6 +1568,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ReservedDBInstanceNotFound` instead.
     class ReservedDBInstanceNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1409,6 +1580,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ReservedDBInstanceQuotaExceeded` instead.
     class ReservedDBInstanceQuotaExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1419,6 +1592,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ReservedDBInstancesOfferingNotFound` instead.
     class ReservedDBInstancesOfferingNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1439,6 +1614,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `SNSInvalidTopic` instead.
     class SNSInvalidTopicFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1449,6 +1626,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `SNSNoAuthorization` instead.
     class SNSNoAuthorizationFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1459,6 +1638,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `SNSTopicArnNotFound` instead.
     class SNSTopicArnNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1469,6 +1650,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `SharedSnapshotQuotaExceeded` instead.
     class SharedSnapshotQuotaExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1479,6 +1662,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `SnapshotQuotaExceeded` instead.
     class SnapshotQuotaExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1509,6 +1694,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `SourceNotFound` instead.
     class SourceNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1519,6 +1706,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `StorageQuotaExceeded` instead.
     class StorageQuotaExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1539,6 +1728,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `StorageTypeNotSupported` instead.
     class StorageTypeNotSupportedFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1559,6 +1750,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `SubscriptionAlreadyExist` instead.
     class SubscriptionAlreadyExistFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1569,6 +1762,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `SubscriptionCategoryNotFound` instead.
     class SubscriptionCategoryNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1579,6 +1774,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `SubscriptionNotFound` instead.
     class SubscriptionNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1589,6 +1786,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `TenantDatabaseAlreadyExists` instead.
     class TenantDatabaseAlreadyExistsFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1599,6 +1798,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `TenantDatabaseNotFound` instead.
     class TenantDatabaseNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1609,6 +1810,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `TenantDatabaseQuotaExceeded` instead.
     class TenantDatabaseQuotaExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1619,6 +1822,8 @@ module Aws::RDS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `UnsupportedDBEngineVersion` instead.
     class UnsupportedDBEngineVersionFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context

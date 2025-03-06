@@ -232,6 +232,7 @@ module Aws::IoTFleetWise
     SignalInformation = Shapes::StructureShape.new(name: 'SignalInformation')
     SignalInformationList = Shapes::ListShape.new(name: 'SignalInformationList')
     SignalNodeType = Shapes::StringShape.new(name: 'SignalNodeType')
+    SignalValueType = Shapes::StringShape.new(name: 'SignalValueType')
     SpoolingMode = Shapes::StringShape.new(name: 'SpoolingMode')
     StateTemplateAssociation = Shapes::StructureShape.new(name: 'StateTemplateAssociation')
     StateTemplateAssociationIdentifiers = Shapes::ListShape.new(name: 'StateTemplateAssociationIdentifiers')
@@ -444,6 +445,7 @@ module Aws::IoTFleetWise
     CanSignal.add_member(:factor, Shapes::ShapeRef.new(shape: double, required: true, location_name: "factor"))
     CanSignal.add_member(:length, Shapes::ShapeRef.new(shape: nonNegativeInteger, required: true, location_name: "length"))
     CanSignal.add_member(:name, Shapes::ShapeRef.new(shape: CanSignalName, location_name: "name"))
+    CanSignal.add_member(:signal_value_type, Shapes::ShapeRef.new(shape: SignalValueType, location_name: "signalValueType"))
     CanSignal.struct_class = Types::CanSignal
 
     CloudWatchLogDeliveryOptions.add_member(:log_type, Shapes::ShapeRef.new(shape: LogType, required: true, location_name: "logType"))
@@ -1144,6 +1146,8 @@ module Aws::IoTFleetWise
     ObdSignal.add_member(:byte_length, Shapes::ShapeRef.new(shape: ObdByteLength, required: true, location_name: "byteLength"))
     ObdSignal.add_member(:bit_right_shift, Shapes::ShapeRef.new(shape: nonNegativeInteger, location_name: "bitRightShift"))
     ObdSignal.add_member(:bit_mask_length, Shapes::ShapeRef.new(shape: ObdBitmaskLength, location_name: "bitMaskLength"))
+    ObdSignal.add_member(:is_signed, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "isSigned", metadata: {"box"=>true}))
+    ObdSignal.add_member(:signal_value_type, Shapes::ShapeRef.new(shape: SignalValueType, location_name: "signalValueType"))
     ObdSignal.struct_class = Types::ObdSignal
 
     OnChangeStateTemplateUpdateStrategy.struct_class = Types::OnChangeStateTemplateUpdateStrategy

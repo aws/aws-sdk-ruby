@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.119.0 (2025-02-28)
+------------------
+
+* Feature - Add skipped status to the Result Statistics of an Assessment Run
+
 1.118.0 (2025-02-18)
 ------------------
 

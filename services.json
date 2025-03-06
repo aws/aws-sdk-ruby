@@ -512,6 +512,9 @@
   "GameLift": {
     "models": "gamelift/2015-10-01"
   },
+  "GameLiftStreams": {
+    "models": "gameliftstreams/2018-05-10"
+  },
   "GeoMaps": {
     "models": "geo-maps/2020-11-19"
   },
@@ -616,6 +619,9 @@
   },
   "IoTJobsDataPlane": {
     "models": "iot-jobs-data/2017-09-29"
+  },
+  "IoTManagedIntegrations": {
+    "models": "iot-managed-integrations/2025-03-03"
   },
   "IoTSecureTunneling": {
     "models": "iotsecuretunneling/2018-10-05"

@@ -28,22 +28,33 @@ module Aws::AutoScaling
   #
   # ## Error Classes
   # * {ActiveInstanceRefreshNotFoundFault}
+  #    * This error class is not used. `ActiveInstanceRefreshNotFound` is used during parsing instead.
   # * {AlreadyExistsFault}
+  #    * This error class is not used. `AlreadyExists` is used during parsing instead.
   # * {InstanceRefreshInProgressFault}
+  #    * This error class is not used. `InstanceRefreshInProgress` is used during parsing instead.
   # * {InvalidNextToken}
   # * {IrreversibleInstanceRefreshFault}
+  #    * This error class is not used. `IrreversibleInstanceRefresh` is used during parsing instead.
   # * {LimitExceededFault}
+  #    * This error class is not used. `LimitExceeded` is used during parsing instead.
   # * {ResourceContentionFault}
+  #    * This error class is not used. `ResourceContention` is used during parsing instead.
   # * {ResourceInUseFault}
+  #    * This error class is not used. `ResourceInUse` is used during parsing instead.
   # * {ScalingActivityInProgressFault}
+  #    * This error class is not used. `ScalingActivityInProgress` is used during parsing instead.
   # * {ServiceLinkedRoleFailure}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
+  # Some existing error classes may use a different class name than the one documented.
   module Errors
 
     extend Aws::Errors::DynamicErrors
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ActiveInstanceRefreshNotFound` instead.
     class ActiveInstanceRefreshNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -59,6 +70,8 @@ module Aws::AutoScaling
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `AlreadyExists` instead.
     class AlreadyExistsFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -74,6 +87,8 @@ module Aws::AutoScaling
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InstanceRefreshInProgress` instead.
     class InstanceRefreshInProgressFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -104,6 +119,8 @@ module Aws::AutoScaling
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `IrreversibleInstanceRefresh` instead.
     class IrreversibleInstanceRefreshFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -119,6 +136,8 @@ module Aws::AutoScaling
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `LimitExceeded` instead.
     class LimitExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -134,6 +153,8 @@ module Aws::AutoScaling
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ResourceContention` instead.
     class ResourceContentionFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -149,6 +170,8 @@ module Aws::AutoScaling
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ResourceInUse` instead.
     class ResourceInUseFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -164,6 +187,8 @@ module Aws::AutoScaling
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ScalingActivityInProgress` instead.
     class ScalingActivityInProgressFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context

@@ -168,6 +168,20 @@ module Aws::BedrockAgentRuntime
       SENSITIVE: []
     end
 
+    class BedrockSessionContentBlock
+      attr_accessor image: Types::ImageBlock
+      attr_accessor text: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Image < BedrockSessionContentBlock
+      end
+      class Text < BedrockSessionContentBlock
+      end
+      class Unknown < BedrockSessionContentBlock
+      end
+    end
+
     class ByteContentDoc
       attr_accessor content_type: ::String
       attr_accessor data: ::String
@@ -247,6 +261,35 @@ module Aws::BedrockAgentRuntime
       SENSITIVE: []
     end
 
+    class CreateInvocationRequest
+      attr_accessor description: ::String
+      attr_accessor invocation_id: ::String
+      attr_accessor session_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class CreateInvocationResponse
+      attr_accessor created_at: ::Time
+      attr_accessor invocation_id: ::String
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSessionRequest
+      attr_accessor encryption_key_arn: ::String
+      attr_accessor session_metadata: ::Hash[::String, ::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateSessionResponse
+      attr_accessor created_at: ::Time
+      attr_accessor session_arn: ::String
+      attr_accessor session_id: ::String
+      attr_accessor session_status: ("ACTIVE" | "EXPIRED" | "ENDED")
+      SENSITIVE: []
+    end
+
     class CustomOrchestrationTrace
       attr_accessor event: Types::CustomOrchestrationTraceEvent
       attr_accessor trace_id: ::String
@@ -269,10 +312,30 @@ module Aws::BedrockAgentRuntime
     class DeleteAgentMemoryResponse < Aws::EmptyStructure
     end
 
+    class DeleteSessionRequest
+      attr_accessor session_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSessionResponse < Aws::EmptyStructure
+    end
+
     class DependencyFailedException
       attr_accessor message: ::String
       attr_accessor resource_name: ::String
       attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class EndSessionRequest
+      attr_accessor session_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class EndSessionResponse
+      attr_accessor session_arn: ::String
+      attr_accessor session_id: ::String
+      attr_accessor session_status: ("ACTIVE" | "EXPIRED" | "ENDED")
       SENSITIVE: []
     end
 
@@ -573,6 +636,34 @@ module Aws::BedrockAgentRuntime
       SENSITIVE: []
     end
 
+    class GetInvocationStepRequest
+      attr_accessor invocation_identifier: ::String
+      attr_accessor invocation_step_id: ::String
+      attr_accessor session_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetInvocationStepResponse
+      attr_accessor invocation_step: Types::InvocationStep
+      SENSITIVE: []
+    end
+
+    class GetSessionRequest
+      attr_accessor session_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetSessionResponse
+      attr_accessor created_at: ::Time
+      attr_accessor encryption_key_arn: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor session_arn: ::String
+      attr_accessor session_id: ::String
+      attr_accessor session_metadata: ::Hash[::String, ::String]
+      attr_accessor session_status: ("ACTIVE" | "EXPIRED" | "ENDED")
+      SENSITIVE: []
+    end
+
     class GuardrailAssessment
       attr_accessor content_policy: Types::GuardrailContentPolicyAssessment
       attr_accessor sensitive_information_policy: Types::GuardrailSensitiveInformationPolicyAssessment
@@ -669,6 +760,26 @@ module Aws::BedrockAgentRuntime
       attr_accessor custom_words: ::Array[Types::GuardrailCustomWord]
       attr_accessor managed_word_lists: ::Array[Types::GuardrailManagedWord]
       SENSITIVE: [:custom_words, :managed_word_lists]
+    end
+
+    class ImageBlock
+      attr_accessor format: ("png" | "jpeg" | "gif" | "webp")
+      attr_accessor source: Types::ImageSource
+      SENSITIVE: []
+    end
+
+    class ImageSource
+      attr_accessor bytes: ::String
+      attr_accessor s3_location: Types::S3Location
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Bytes < ImageSource
+      end
+      class S3Location < ImageSource
+      end
+      class Unknown < ImageSource
+      end
     end
 
     class ImplicitFilterConfiguration
@@ -795,6 +906,41 @@ module Aws::BedrockAgentRuntime
       end
     end
 
+    class InvocationStep
+      attr_accessor invocation_id: ::String
+      attr_accessor invocation_step_id: ::String
+      attr_accessor invocation_step_time: ::Time
+      attr_accessor payload: Types::InvocationStepPayload
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class InvocationStepPayload
+      attr_accessor content_blocks: ::Array[Types::BedrockSessionContentBlock]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ContentBlocks < InvocationStepPayload
+      end
+      class Unknown < InvocationStepPayload
+      end
+    end
+
+    class InvocationStepSummary
+      attr_accessor invocation_id: ::String
+      attr_accessor invocation_step_id: ::String
+      attr_accessor invocation_step_time: ::Time
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class InvocationSummary
+      attr_accessor created_at: ::Time
+      attr_accessor invocation_id: ::String
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
     class InvokeAgentRequest
       attr_accessor agent_alias_id: ::String
       attr_accessor agent_id: ::String
@@ -918,6 +1064,55 @@ module Aws::BedrockAgentRuntime
       attr_accessor override_search_type: ("HYBRID" | "SEMANTIC")
       attr_accessor reranking_configuration: Types::VectorSearchRerankingConfiguration
       SENSITIVE: [:filter]
+    end
+
+    class ListInvocationStepsRequest
+      attr_accessor invocation_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor session_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ListInvocationStepsResponse
+      attr_accessor invocation_step_summaries: ::Array[Types::InvocationStepSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInvocationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor session_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ListInvocationsResponse
+      attr_accessor invocation_summaries: ::Array[Types::InvocationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSessionsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSessionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor session_summaries: ::Array[Types::SessionSummary]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
     end
 
     class Memory
@@ -1181,6 +1376,20 @@ module Aws::BedrockAgentRuntime
 
     class PropertyParameters
       attr_accessor properties: ::Array[Types::Parameter]
+      SENSITIVE: []
+    end
+
+    class PutInvocationStepRequest
+      attr_accessor invocation_identifier: ::String
+      attr_accessor invocation_step_id: ::String
+      attr_accessor invocation_step_time: ::Time
+      attr_accessor payload: Types::InvocationStepPayload
+      attr_accessor session_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class PutInvocationStepResponse
+      attr_accessor invocation_step_id: ::String
       SENSITIVE: []
     end
 
@@ -1550,6 +1759,11 @@ module Aws::BedrockAgentRuntime
       SENSITIVE: []
     end
 
+    class S3Location
+      attr_accessor uri: ::String
+      SENSITIVE: []
+    end
+
     class S3ObjectDoc
       attr_accessor uri: ::String
       SENSITIVE: []
@@ -1577,6 +1791,15 @@ module Aws::BedrockAgentRuntime
       SENSITIVE: []
     end
 
+    class SessionSummary
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor session_arn: ::String
+      attr_accessor session_id: ::String
+      attr_accessor session_status: ("ACTIVE" | "EXPIRED" | "ENDED")
+      SENSITIVE: []
+    end
+
     class Span
       attr_accessor end: ::Integer
       attr_accessor start: ::Integer
@@ -1587,6 +1810,15 @@ module Aws::BedrockAgentRuntime
       attr_accessor apply_guardrail_interval: ::Integer
       attr_accessor stream_final_response: bool
       SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
     end
 
     class TextInferenceConfig
@@ -1669,6 +1901,30 @@ module Aws::BedrockAgentRuntime
     class TransformationConfiguration
       attr_accessor mode: ("TEXT_TO_SQL")
       attr_accessor text_to_sql_configuration: Types::TextToSqlConfiguration
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateSessionRequest
+      attr_accessor session_identifier: ::String
+      attr_accessor session_metadata: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateSessionResponse
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor session_arn: ::String
+      attr_accessor session_id: ::String
+      attr_accessor session_status: ("ACTIVE" | "EXPIRED" | "ENDED")
       SENSITIVE: []
     end
 

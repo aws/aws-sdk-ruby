@@ -211,6 +211,20 @@ module Aws::QBusiness
       SENSITIVE: []
     end
 
+    class AudioExtractionConfiguration
+      attr_accessor audio_extraction_status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class AudioSourceDetails
+      attr_accessor media_id: ::String
+      attr_accessor media_mime_type: ::String
+      attr_accessor start_time_milliseconds: ::Integer
+      attr_accessor end_time_milliseconds: ::Integer
+      attr_accessor audio_extraction_type: ("TRANSCRIPT" | "SUMMARY")
+      SENSITIVE: []
+    end
+
     class AuthChallengeRequest
       attr_accessor authorization_url: ::String
       SENSITIVE: []
@@ -663,6 +677,17 @@ module Aws::QBusiness
     end
 
     class DeleteApplicationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteAttachmentRequest
+      attr_accessor application_id: ::String
+      attr_accessor conversation_id: ::String
+      attr_accessor attachment_id: ::String
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAttachmentResponse < Aws::EmptyStructure
     end
 
     class DeleteChatControlsConfigurationRequest
@@ -1210,6 +1235,12 @@ module Aws::QBusiness
       SENSITIVE: []
     end
 
+    class ImageSourceDetails
+      attr_accessor media_id: ::String
+      attr_accessor media_mime_type: ::String
+      SENSITIVE: []
+    end
+
     class Index
       attr_accessor display_name: ::String
       attr_accessor index_id: ::String
@@ -1499,6 +1530,8 @@ module Aws::QBusiness
 
     class MediaExtractionConfiguration
       attr_accessor image_extraction_configuration: Types::ImageExtractionConfiguration
+      attr_accessor audio_extraction_configuration: Types::AudioExtractionConfiguration
+      attr_accessor video_extraction_configuration: Types::VideoExtractionConfiguration
       SENSITIVE: []
     end
 
@@ -1823,6 +1856,23 @@ module Aws::QBusiness
       SENSITIVE: []
     end
 
+    class SourceDetails
+      attr_accessor image_source_details: Types::ImageSourceDetails
+      attr_accessor audio_source_details: Types::AudioSourceDetails
+      attr_accessor video_source_details: Types::VideoSourceDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ImageSourceDetails < SourceDetails
+      end
+      class AudioSourceDetails < SourceDetails
+      end
+      class VideoSourceDetails < SourceDetails
+      end
+      class Unknown < SourceDetails
+      end
+    end
+
     class StartDataSourceSyncJobRequest
       attr_accessor data_source_id: ::String
       attr_accessor application_id: ::String
@@ -1926,6 +1976,7 @@ module Aws::QBusiness
       attr_accessor snippet_excerpt: Types::SnippetExcerpt
       attr_accessor media_id: ::String
       attr_accessor media_mime_type: ::String
+      attr_accessor source_details: Types::SourceDetails
       SENSITIVE: []
     end
 
@@ -2121,6 +2172,20 @@ module Aws::QBusiness
     class ValidationExceptionField
       attr_accessor name: ::String
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VideoExtractionConfiguration
+      attr_accessor video_extraction_status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class VideoSourceDetails
+      attr_accessor media_id: ::String
+      attr_accessor media_mime_type: ::String
+      attr_accessor start_time_milliseconds: ::Integer
+      attr_accessor end_time_milliseconds: ::Integer
+      attr_accessor video_extraction_type: ("TRANSCRIPT" | "SUMMARY")
       SENSITIVE: []
     end
 

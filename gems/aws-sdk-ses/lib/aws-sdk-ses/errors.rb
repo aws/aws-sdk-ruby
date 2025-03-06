@@ -29,41 +29,70 @@ module Aws::SES
   # ## Error Classes
   # * {AccountSendingPausedException}
   # * {AlreadyExistsException}
+  #    * This error class is not used. `AlreadyExists` is used during parsing instead.
   # * {CannotDeleteException}
+  #    * This error class is not used. `CannotDelete` is used during parsing instead.
   # * {ConfigurationSetAlreadyExistsException}
+  #    * This error class is not used. `ConfigurationSetAlreadyExists` is used during parsing instead.
   # * {ConfigurationSetDoesNotExistException}
+  #    * This error class is not used. `ConfigurationSetDoesNotExist` is used during parsing instead.
   # * {ConfigurationSetSendingPausedException}
   # * {CustomVerificationEmailInvalidContentException}
+  #    * This error class is not used. `CustomVerificationEmailInvalidContent` is used during parsing instead.
   # * {CustomVerificationEmailTemplateAlreadyExistsException}
+  #    * This error class is not used. `CustomVerificationEmailTemplateAlreadyExists` is used during parsing instead.
   # * {CustomVerificationEmailTemplateDoesNotExistException}
+  #    * This error class is not used. `CustomVerificationEmailTemplateDoesNotExist` is used during parsing instead.
   # * {EventDestinationAlreadyExistsException}
+  #    * This error class is not used. `EventDestinationAlreadyExists` is used during parsing instead.
   # * {EventDestinationDoesNotExistException}
+  #    * This error class is not used. `EventDestinationDoesNotExist` is used during parsing instead.
   # * {FromEmailAddressNotVerifiedException}
+  #    * This error class is not used. `FromEmailAddressNotVerified` is used during parsing instead.
   # * {InvalidCloudWatchDestinationException}
+  #    * This error class is not used. `InvalidCloudWatchDestination` is used during parsing instead.
   # * {InvalidConfigurationSetException}
+  #    * This error class is not used. `InvalidConfigurationSet` is used during parsing instead.
   # * {InvalidDeliveryOptionsException}
+  #    * This error class is not used. `InvalidDeliveryOptions` is used during parsing instead.
   # * {InvalidFirehoseDestinationException}
+  #    * This error class is not used. `InvalidFirehoseDestination` is used during parsing instead.
   # * {InvalidLambdaFunctionException}
+  #    * This error class is not used. `InvalidLambdaFunction` is used during parsing instead.
   # * {InvalidPolicyException}
+  #    * This error class is not used. `InvalidPolicy` is used during parsing instead.
   # * {InvalidRenderingParameterException}
+  #    * This error class is not used. `InvalidRenderingParameter` is used during parsing instead.
   # * {InvalidS3ConfigurationException}
+  #    * This error class is not used. `InvalidS3Configuration` is used during parsing instead.
   # * {InvalidSNSDestinationException}
+  #    * This error class is not used. `InvalidSNSDestination` is used during parsing instead.
   # * {InvalidSnsTopicException}
+  #    * This error class is not used. `InvalidSnsTopic` is used during parsing instead.
   # * {InvalidTemplateException}
+  #    * This error class is not used. `InvalidTemplate` is used during parsing instead.
   # * {InvalidTrackingOptionsException}
+  #    * This error class is not used. `InvalidTrackingOptions` is used during parsing instead.
   # * {LimitExceededException}
+  #    * This error class is not used. `LimitExceeded` is used during parsing instead.
   # * {MailFromDomainNotVerifiedException}
   # * {MessageRejected}
   # * {MissingRenderingAttributeException}
+  #    * This error class is not used. `MissingRenderingAttribute` is used during parsing instead.
   # * {ProductionAccessNotGrantedException}
+  #    * This error class is not used. `ProductionAccessNotGranted` is used during parsing instead.
   # * {RuleDoesNotExistException}
+  #    * This error class is not used. `RuleDoesNotExist` is used during parsing instead.
   # * {RuleSetDoesNotExistException}
+  #    * This error class is not used. `RuleSetDoesNotExist` is used during parsing instead.
   # * {TemplateDoesNotExistException}
+  #    * This error class is not used. `TemplateDoesNotExist` is used during parsing instead.
   # * {TrackingOptionsAlreadyExistsException}
   # * {TrackingOptionsDoesNotExistException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
+  # Some existing error classes may use a different class name than the one documented.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -78,6 +107,8 @@ module Aws::SES
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `AlreadyExists` instead.
     class AlreadyExistsException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -93,6 +124,8 @@ module Aws::SES
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `CannotDelete` instead.
     class CannotDeleteException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -108,6 +141,8 @@ module Aws::SES
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ConfigurationSetAlreadyExists` instead.
     class ConfigurationSetAlreadyExistsException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -123,6 +158,8 @@ module Aws::SES
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ConfigurationSetDoesNotExist` instead.
     class ConfigurationSetDoesNotExistException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -153,6 +190,8 @@ module Aws::SES
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `CustomVerificationEmailInvalidContent` instead.
     class CustomVerificationEmailInvalidContentException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -163,6 +202,8 @@ module Aws::SES
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `CustomVerificationEmailTemplateAlreadyExists` instead.
     class CustomVerificationEmailTemplateAlreadyExistsException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -178,6 +219,8 @@ module Aws::SES
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `CustomVerificationEmailTemplateDoesNotExist` instead.
     class CustomVerificationEmailTemplateDoesNotExistException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -193,6 +236,8 @@ module Aws::SES
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `EventDestinationAlreadyExists` instead.
     class EventDestinationAlreadyExistsException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -213,6 +258,8 @@ module Aws::SES
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `EventDestinationDoesNotExist` instead.
     class EventDestinationDoesNotExistException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -233,6 +280,8 @@ module Aws::SES
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `FromEmailAddressNotVerified` instead.
     class FromEmailAddressNotVerifiedException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -248,6 +297,8 @@ module Aws::SES
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidCloudWatchDestination` instead.
     class InvalidCloudWatchDestinationException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -268,6 +319,8 @@ module Aws::SES
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidConfigurationSet` instead.
     class InvalidConfigurationSetException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -278,6 +331,8 @@ module Aws::SES
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidDeliveryOptions` instead.
     class InvalidDeliveryOptionsException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -288,6 +343,8 @@ module Aws::SES
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidFirehoseDestination` instead.
     class InvalidFirehoseDestinationException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -308,6 +365,8 @@ module Aws::SES
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidLambdaFunction` instead.
     class InvalidLambdaFunctionException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -323,6 +382,8 @@ module Aws::SES
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidPolicy` instead.
     class InvalidPolicyException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -333,6 +394,8 @@ module Aws::SES
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidRenderingParameter` instead.
     class InvalidRenderingParameterException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -348,6 +411,8 @@ module Aws::SES
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidS3Configuration` instead.
     class InvalidS3ConfigurationException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -363,6 +428,8 @@ module Aws::SES
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidSNSDestination` instead.
     class InvalidSNSDestinationException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -383,6 +450,8 @@ module Aws::SES
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidSnsTopic` instead.
     class InvalidSnsTopicException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -398,6 +467,8 @@ module Aws::SES
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidTemplate` instead.
     class InvalidTemplateException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -413,6 +484,8 @@ module Aws::SES
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidTrackingOptions` instead.
     class InvalidTrackingOptionsException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -423,6 +496,8 @@ module Aws::SES
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `LimitExceeded` instead.
     class LimitExceededException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -453,6 +528,8 @@ module Aws::SES
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `MissingRenderingAttribute` instead.
     class MissingRenderingAttributeException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -468,6 +545,8 @@ module Aws::SES
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ProductionAccessNotGranted` instead.
     class ProductionAccessNotGrantedException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -478,6 +557,8 @@ module Aws::SES
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `RuleDoesNotExist` instead.
     class RuleDoesNotExistException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -493,6 +574,8 @@ module Aws::SES
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `RuleSetDoesNotExist` instead.
     class RuleSetDoesNotExistException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -508,6 +591,8 @@ module Aws::SES
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `TemplateDoesNotExist` instead.
     class TemplateDoesNotExistException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context

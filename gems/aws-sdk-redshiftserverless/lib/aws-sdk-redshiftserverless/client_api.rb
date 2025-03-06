@@ -87,6 +87,8 @@ module Aws::RedshiftServerless
     GetSnapshotResponse = Shapes::StructureShape.new(name: 'GetSnapshotResponse')
     GetTableRestoreStatusRequest = Shapes::StructureShape.new(name: 'GetTableRestoreStatusRequest')
     GetTableRestoreStatusResponse = Shapes::StructureShape.new(name: 'GetTableRestoreStatusResponse')
+    GetTrackRequest = Shapes::StructureShape.new(name: 'GetTrackRequest')
+    GetTrackResponse = Shapes::StructureShape.new(name: 'GetTrackResponse')
     GetUsageLimitRequest = Shapes::StructureShape.new(name: 'GetUsageLimitRequest')
     GetUsageLimitResponse = Shapes::StructureShape.new(name: 'GetUsageLimitResponse')
     GetWorkgroupRequest = Shapes::StructureShape.new(name: 'GetWorkgroupRequest')
@@ -129,6 +131,9 @@ module Aws::RedshiftServerless
     ListTableRestoreStatusResponse = Shapes::StructureShape.new(name: 'ListTableRestoreStatusResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    ListTracksRequest = Shapes::StructureShape.new(name: 'ListTracksRequest')
+    ListTracksRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListTracksRequestMaxResultsInteger')
+    ListTracksResponse = Shapes::StructureShape.new(name: 'ListTracksResponse')
     ListUsageLimitsRequest = Shapes::StructureShape.new(name: 'ListUsageLimitsRequest')
     ListUsageLimitsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListUsageLimitsRequestMaxResultsInteger')
     ListUsageLimitsResponse = Shapes::StructureShape.new(name: 'ListUsageLimitsResponse')
@@ -178,6 +183,7 @@ module Aws::RedshiftServerless
     ScheduledActionsList = Shapes::ListShape.new(name: 'ScheduledActionsList')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIdList = Shapes::ListShape.new(name: 'SecurityGroupIdList')
+    ServerlessTrack = Shapes::StructureShape.new(name: 'ServerlessTrack')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     Snapshot = Shapes::StructureShape.new(name: 'Snapshot')
     SnapshotCopyConfiguration = Shapes::StructureShape.new(name: 'SnapshotCopyConfiguration')
@@ -204,6 +210,8 @@ module Aws::RedshiftServerless
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
+    TrackList = Shapes::ListShape.new(name: 'TrackList')
+    TrackName = Shapes::StringShape.new(name: 'TrackName')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateCustomDomainAssociationRequest = Shapes::StructureShape.new(name: 'UpdateCustomDomainAssociationRequest')
@@ -218,6 +226,8 @@ module Aws::RedshiftServerless
     UpdateSnapshotCopyConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateSnapshotCopyConfigurationResponse')
     UpdateSnapshotRequest = Shapes::StructureShape.new(name: 'UpdateSnapshotRequest')
     UpdateSnapshotResponse = Shapes::StructureShape.new(name: 'UpdateSnapshotResponse')
+    UpdateTarget = Shapes::StructureShape.new(name: 'UpdateTarget')
+    UpdateTargetsList = Shapes::ListShape.new(name: 'UpdateTargetsList')
     UpdateUsageLimitRequest = Shapes::StructureShape.new(name: 'UpdateUsageLimitRequest')
     UpdateUsageLimitResponse = Shapes::StructureShape.new(name: 'UpdateUsageLimitResponse')
     UpdateWorkgroupRequest = Shapes::StructureShape.new(name: 'UpdateWorkgroupRequest')
@@ -370,6 +380,7 @@ module Aws::RedshiftServerless
     CreateWorkgroupRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, location_name: "securityGroupIds"))
     CreateWorkgroupRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, location_name: "subnetIds"))
     CreateWorkgroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateWorkgroupRequest.add_member(:track_name, Shapes::ShapeRef.new(shape: TrackName, location_name: "trackName"))
     CreateWorkgroupRequest.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupName, required: true, location_name: "workgroupName"))
     CreateWorkgroupRequest.struct_class = Types::CreateWorkgroupRequest
 
@@ -516,6 +527,12 @@ module Aws::RedshiftServerless
     GetTableRestoreStatusResponse.add_member(:table_restore_status, Shapes::ShapeRef.new(shape: TableRestoreStatus, location_name: "tableRestoreStatus"))
     GetTableRestoreStatusResponse.struct_class = Types::GetTableRestoreStatusResponse
 
+    GetTrackRequest.add_member(:track_name, Shapes::ShapeRef.new(shape: TrackName, required: true, location_name: "trackName"))
+    GetTrackRequest.struct_class = Types::GetTrackRequest
+
+    GetTrackResponse.add_member(:track, Shapes::ShapeRef.new(shape: ServerlessTrack, location_name: "track"))
+    GetTrackResponse.struct_class = Types::GetTrackResponse
+
     GetUsageLimitRequest.add_member(:usage_limit_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "usageLimitId"))
     GetUsageLimitRequest.struct_class = Types::GetUsageLimitRequest
 
@@ -638,6 +655,14 @@ module Aws::RedshiftServerless
 
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    ListTracksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListTracksRequestMaxResultsInteger, location_name: "maxResults"))
+    ListTracksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListTracksRequest.struct_class = Types::ListTracksRequest
+
+    ListTracksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListTracksResponse.add_member(:tracks, Shapes::ShapeRef.new(shape: TrackList, location_name: "tracks"))
+    ListTracksResponse.struct_class = Types::ListTracksResponse
 
     ListUsageLimitsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListUsageLimitsRequestMaxResultsInteger, location_name: "maxResults"))
     ListUsageLimitsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
@@ -808,6 +833,11 @@ module Aws::RedshiftServerless
 
     SecurityGroupIdList.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 
+    ServerlessTrack.add_member(:track_name, Shapes::ShapeRef.new(shape: TrackName, location_name: "trackName"))
+    ServerlessTrack.add_member(:update_targets, Shapes::ShapeRef.new(shape: UpdateTargetsList, location_name: "updateTargets"))
+    ServerlessTrack.add_member(:workgroup_version, Shapes::ShapeRef.new(shape: String, location_name: "workgroupVersion"))
+    ServerlessTrack.struct_class = Types::ServerlessTrack
+
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
@@ -897,6 +927,8 @@ module Aws::RedshiftServerless
     TooManyTagsException.add_member(:resource_name, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "resourceName"))
     TooManyTagsException.struct_class = Types::TooManyTagsException
 
+    TrackList.member = Shapes::ShapeRef.new(shape: ServerlessTrack)
+
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "tagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
@@ -962,6 +994,12 @@ module Aws::RedshiftServerless
     UpdateSnapshotResponse.add_member(:snapshot, Shapes::ShapeRef.new(shape: Snapshot, location_name: "snapshot"))
     UpdateSnapshotResponse.struct_class = Types::UpdateSnapshotResponse
 
+    UpdateTarget.add_member(:track_name, Shapes::ShapeRef.new(shape: TrackName, location_name: "trackName"))
+    UpdateTarget.add_member(:workgroup_version, Shapes::ShapeRef.new(shape: String, location_name: "workgroupVersion"))
+    UpdateTarget.struct_class = Types::UpdateTarget
+
+    UpdateTargetsList.member = Shapes::ShapeRef.new(shape: UpdateTarget)
+
     UpdateUsageLimitRequest.add_member(:amount, Shapes::ShapeRef.new(shape: Long, location_name: "amount"))
     UpdateUsageLimitRequest.add_member(:breach_action, Shapes::ShapeRef.new(shape: UsageLimitBreachAction, location_name: "breachAction"))
     UpdateUsageLimitRequest.add_member(:usage_limit_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "usageLimitId"))
@@ -980,6 +1018,7 @@ module Aws::RedshiftServerless
     UpdateWorkgroupRequest.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: Boolean, location_name: "publiclyAccessible"))
     UpdateWorkgroupRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, location_name: "securityGroupIds"))
     UpdateWorkgroupRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, location_name: "subnetIds"))
+    UpdateWorkgroupRequest.add_member(:track_name, Shapes::ShapeRef.new(shape: TrackName, location_name: "trackName"))
     UpdateWorkgroupRequest.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupName, required: true, location_name: "workgroupName"))
     UpdateWorkgroupRequest.struct_class = Types::UpdateWorkgroupRequest
 
@@ -1030,12 +1069,14 @@ module Aws::RedshiftServerless
     Workgroup.add_member(:max_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "maxCapacity"))
     Workgroup.add_member(:namespace_name, Shapes::ShapeRef.new(shape: String, location_name: "namespaceName"))
     Workgroup.add_member(:patch_version, Shapes::ShapeRef.new(shape: String, location_name: "patchVersion"))
+    Workgroup.add_member(:pending_track_name, Shapes::ShapeRef.new(shape: TrackName, location_name: "pendingTrackName"))
     Workgroup.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "port"))
     Workgroup.add_member(:price_performance_target, Shapes::ShapeRef.new(shape: PerformanceTarget, location_name: "pricePerformanceTarget"))
     Workgroup.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: Boolean, location_name: "publiclyAccessible"))
     Workgroup.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, location_name: "securityGroupIds"))
     Workgroup.add_member(:status, Shapes::ShapeRef.new(shape: WorkgroupStatus, location_name: "status"))
     Workgroup.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, location_name: "subnetIds"))
+    Workgroup.add_member(:track_name, Shapes::ShapeRef.new(shape: TrackName, location_name: "trackName"))
     Workgroup.add_member(:workgroup_arn, Shapes::ShapeRef.new(shape: String, location_name: "workgroupArn"))
     Workgroup.add_member(:workgroup_id, Shapes::ShapeRef.new(shape: String, location_name: "workgroupId"))
     Workgroup.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupName, location_name: "workgroupName"))
@@ -1399,6 +1440,20 @@ module Aws::RedshiftServerless
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:get_track, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTrack"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetTrackRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTrackResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:get_usage_limit, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetUsageLimit"
         o.http_method = "POST"
@@ -1588,6 +1643,25 @@ module Aws::RedshiftServerless
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:list_tracks, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTracks"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTracksRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTracksResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_usage_limits, Seahorse::Model::Operation.new.tap do |o|

@@ -195,6 +195,8 @@ module Aws::EKS
     KubernetesNetworkConfigRequest = Shapes::StructureShape.new(name: 'KubernetesNetworkConfigRequest')
     KubernetesNetworkConfigResponse = Shapes::StructureShape.new(name: 'KubernetesNetworkConfigResponse')
     LaunchTemplateSpecification = Shapes::StructureShape.new(name: 'LaunchTemplateSpecification')
+    License = Shapes::StructureShape.new(name: 'License')
+    LicenseList = Shapes::ListShape.new(name: 'LicenseList')
     ListAccessEntriesRequest = Shapes::StructureShape.new(name: 'ListAccessEntriesRequest')
     ListAccessEntriesRequestMaxResults = Shapes::IntegerShape.new(name: 'ListAccessEntriesRequestMaxResults')
     ListAccessEntriesResponse = Shapes::StructureShape.new(name: 'ListAccessEntriesResponse')
@@ -893,6 +895,7 @@ module Aws::EKS
     EksAnywhereSubscription.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
     EksAnywhereSubscription.add_member(:auto_renew, Shapes::ShapeRef.new(shape: Boolean, location_name: "autoRenew"))
     EksAnywhereSubscription.add_member(:license_arns, Shapes::ShapeRef.new(shape: StringList, location_name: "licenseArns"))
+    EksAnywhereSubscription.add_member(:licenses, Shapes::ShapeRef.new(shape: LicenseList, location_name: "licenses"))
     EksAnywhereSubscription.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     EksAnywhereSubscription.struct_class = Types::EksAnywhereSubscription
 
@@ -1050,6 +1053,12 @@ module Aws::EKS
     LaunchTemplateSpecification.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
     LaunchTemplateSpecification.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
     LaunchTemplateSpecification.struct_class = Types::LaunchTemplateSpecification
+
+    License.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
+    License.add_member(:token, Shapes::ShapeRef.new(shape: String, location_name: "token"))
+    License.struct_class = Types::License
+
+    LicenseList.member = Shapes::ShapeRef.new(shape: License)
 
     ListAccessEntriesRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
     ListAccessEntriesRequest.add_member(:associated_policy_arn, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "associatedPolicyArn"))

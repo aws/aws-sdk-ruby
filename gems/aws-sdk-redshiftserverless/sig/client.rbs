@@ -260,6 +260,7 @@ module Aws
                                   value: ::String
                                 },
                               ],
+                              ?track_name: ::String,
                               workgroup_name: ::String
                             ) -> _CreateWorkgroupResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkgroupResponseSuccess
@@ -457,6 +458,16 @@ module Aws
                                     ) -> _GetTableRestoreStatusResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTableRestoreStatusResponseSuccess
 
+      interface _GetTrackResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTrackResponse]
+        def track: () -> Types::ServerlessTrack
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#get_track-instance_method
+      def get_track: (
+                       track_name: ::String
+                     ) -> _GetTrackResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTrackResponseSuccess
+
       interface _GetUsageLimitResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetUsageLimitResponse]
         def usage_limit: () -> Types::UsageLimit
@@ -613,6 +624,18 @@ module Aws
                                     resource_arn: ::String
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListTracksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTracksResponse]
+        def next_token: () -> ::String
+        def tracks: () -> ::Array[Types::ServerlessTrack]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#list_tracks-instance_method
+      def list_tracks: (
+                         ?max_results: ::Integer,
+                         ?next_token: ::String
+                       ) -> _ListTracksResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTracksResponseSuccess
 
       interface _ListUsageLimitsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListUsageLimitsResponse]
@@ -880,6 +903,7 @@ module Aws
                               ?publicly_accessible: bool,
                               ?security_group_ids: Array[::String],
                               ?subnet_ids: Array[::String],
+                              ?track_name: ::String,
                               workgroup_name: ::String
                             ) -> _UpdateWorkgroupResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkgroupResponseSuccess

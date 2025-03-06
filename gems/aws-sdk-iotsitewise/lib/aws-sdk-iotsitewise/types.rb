@@ -3232,6 +3232,22 @@ module Aws::IoTSiteWise
     #   gateway.
     #   @return [Types::GatewayPlatform]
     #
+    # @!attribute [rw] gateway_version
+    #   The version of the gateway to create. Specify `3` to create an
+    #   MQTT-enabled, V3 gateway and `2` To create a Classic streams, V2
+    #   gateway. If the version isn't specified, a Classic streams, V2
+    #   gateway is created by default.
+    #
+    #   We recommend creating an MQTT-enabled, V3 gateway for self-hosted
+    #   gateways. SiteWise Edge gateways on Siemens Industrial Edge should
+    #   use gateway version `2`. For more information on gateway versions,
+    #   see [ Self-host a SiteWise Edge gateway with IoT Greengrass V2][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/gw-self-host-gg2.html
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   A list of key-value pairs that contain metadata for the gateway. For
     #   more information, see [Tagging your IoT SiteWise resources][1] in
@@ -3245,6 +3261,7 @@ module Aws::IoTSiteWise
     class CreateGatewayRequest < Struct.new(
       :gateway_name,
       :gateway_platform,
+      :gateway_version,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -5060,6 +5077,12 @@ module Aws::IoTSiteWise
     #   The gateway's platform.
     #   @return [Types::GatewayPlatform]
     #
+    # @!attribute [rw] gateway_version
+    #   The version of the gateway. A value of `3` indicates an
+    #   MQTT-enabled, V3 gateway, while `2` indicates a Classic streams, V2
+    #   gateway.
+    #   @return [String]
+    #
     # @!attribute [rw] gateway_capability_summaries
     #   A list of gateway capability summaries that each contain a namespace
     #   and status. Each gateway capability defines data sources for the
@@ -5084,6 +5107,7 @@ module Aws::IoTSiteWise
       :gateway_name,
       :gateway_arn,
       :gateway_platform,
+      :gateway_version,
       :gateway_capability_summaries,
       :creation_date,
       :last_update_date)
@@ -5880,6 +5904,12 @@ module Aws::IoTSiteWise
     #   Contains a gateway's platform information.
     #   @return [Types::GatewayPlatform]
     #
+    # @!attribute [rw] gateway_version
+    #   The version of the gateway. A value of `3` indicates an
+    #   MQTT-enabled, V3 gateway, while `2` indicates a Classic streams, V2
+    #   gateway.
+    #   @return [String]
+    #
     # @!attribute [rw] gateway_capability_summaries
     #   A list of gateway capability summaries that each contain a namespace
     #   and status. Each gateway capability defines data sources for the
@@ -5903,6 +5933,7 @@ module Aws::IoTSiteWise
       :gateway_id,
       :gateway_name,
       :gateway_platform,
+      :gateway_version,
       :gateway_capability_summaries,
       :creation_date,
       :last_update_date)
@@ -6325,8 +6356,13 @@ module Aws::IoTSiteWise
     #   The name of the IoT thing for your IoT Greengrass V2 core device.
     #   @return [String]
     #
+    # @!attribute [rw] core_device_operating_system
+    #   The operating system of the core device in IoT Greengrass V2.
+    #   @return [String]
+    #
     class GreengrassV2 < Struct.new(
-      :core_device_thing_name)
+      :core_device_thing_name,
+      :core_device_operating_system)
       SENSITIVE = []
       include Aws::Structure
     end

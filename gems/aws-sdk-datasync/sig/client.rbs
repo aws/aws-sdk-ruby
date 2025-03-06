@@ -1276,6 +1276,7 @@ module Aws
       def update_location_nfs: (
                                  location_arn: ::String,
                                  ?subdirectory: ::String,
+                                 ?server_hostname: ::String,
                                  ?on_prem_config: {
                                    agent_arns: Array[::String]
                                  },
@@ -1294,6 +1295,7 @@ module Aws
                                             ?server_port: ::Integer,
                                             ?server_protocol: ("HTTPS" | "HTTP"),
                                             ?subdirectory: ::String,
+                                            ?server_hostname: ::String,
                                             ?access_key: ::String,
                                             ?secret_key: ::String,
                                             ?agent_arns: Array[::String],
@@ -1322,6 +1324,7 @@ module Aws
       def update_location_smb: (
                                  location_arn: ::String,
                                  ?subdirectory: ::String,
+                                 ?server_hostname: ::String,
                                  ?user: ::String,
                                  ?domain: ::String,
                                  ?password: ::String,

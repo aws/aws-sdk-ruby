@@ -4067,6 +4067,20 @@ module Aws
                          ) -> _ListVersionsResponseSuccess
                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVersionsResponseSuccess
 
+      interface _ProbeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ProbeResponse]
+        def probe_results: () -> ::Array[Types::ProbeResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConvert/Client.html#probe-instance_method
+      def probe: (
+                   ?input_files: Array[
+                     {
+                       file_url: ::String?
+                     },
+                   ]
+                 ) -> _ProbeResponseSuccess
+               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ProbeResponseSuccess
+
       interface _PutPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutPolicyResponse]
         def policy: () -> Types::Policy

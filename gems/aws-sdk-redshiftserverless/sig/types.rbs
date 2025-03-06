@@ -175,6 +175,7 @@ module Aws::RedshiftServerless
       attr_accessor security_group_ids: ::Array[::String]
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor track_name: ::String
       attr_accessor workgroup_name: ::String
       SENSITIVE: []
     end
@@ -396,6 +397,16 @@ module Aws::RedshiftServerless
       SENSITIVE: []
     end
 
+    class GetTrackRequest
+      attr_accessor track_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetTrackResponse
+      attr_accessor track: Types::ServerlessTrack
+      SENSITIVE: []
+    end
+
     class GetUsageLimitRequest
       attr_accessor usage_limit_id: ::String
       SENSITIVE: []
@@ -570,6 +581,18 @@ module Aws::RedshiftServerless
 
     class ListTagsForResourceResponse
       attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListTracksRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTracksResponse
+      attr_accessor next_token: ::String
+      attr_accessor tracks: ::Array[Types::ServerlessTrack]
       SENSITIVE: []
     end
 
@@ -778,6 +801,13 @@ module Aws::RedshiftServerless
       SENSITIVE: []
     end
 
+    class ServerlessTrack
+      attr_accessor track_name: ::String
+      attr_accessor update_targets: ::Array[Types::UpdateTarget]
+      attr_accessor workgroup_version: ::String
+      SENSITIVE: []
+    end
+
     class ServiceQuotaExceededException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -969,6 +999,12 @@ module Aws::RedshiftServerless
       SENSITIVE: []
     end
 
+    class UpdateTarget
+      attr_accessor track_name: ::String
+      attr_accessor workgroup_version: ::String
+      SENSITIVE: []
+    end
+
     class UpdateUsageLimitRequest
       attr_accessor amount: ::Integer
       attr_accessor breach_action: ("log" | "emit-metric" | "deactivate")
@@ -992,6 +1028,7 @@ module Aws::RedshiftServerless
       attr_accessor publicly_accessible: bool
       attr_accessor security_group_ids: ::Array[::String]
       attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor track_name: ::String
       attr_accessor workgroup_name: ::String
       SENSITIVE: []
     end
@@ -1044,12 +1081,14 @@ module Aws::RedshiftServerless
       attr_accessor max_capacity: ::Integer
       attr_accessor namespace_name: ::String
       attr_accessor patch_version: ::String
+      attr_accessor pending_track_name: ::String
       attr_accessor port: ::Integer
       attr_accessor price_performance_target: Types::PerformanceTarget
       attr_accessor publicly_accessible: bool
       attr_accessor security_group_ids: ::Array[::String]
       attr_accessor status: ("CREATING" | "AVAILABLE" | "MODIFYING" | "DELETING")
       attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor track_name: ::String
       attr_accessor workgroup_arn: ::String
       attr_accessor workgroup_id: ::String
       attr_accessor workgroup_name: ::String

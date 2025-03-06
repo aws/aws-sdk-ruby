@@ -694,6 +694,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task_assessment_run.result_statistic.error #=> Integer
     #   resp.replication_task_assessment_run.result_statistic.warning #=> Integer
     #   resp.replication_task_assessment_run.result_statistic.cancelled #=> Integer
+    #   resp.replication_task_assessment_run.result_statistic.skipped #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CancelReplicationTaskAssessmentRun AWS API Documentation
     #
@@ -4543,6 +4544,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task_assessment_run.result_statistic.error #=> Integer
     #   resp.replication_task_assessment_run.result_statistic.warning #=> Integer
     #   resp.replication_task_assessment_run.result_statistic.cancelled #=> Integer
+    #   resp.replication_task_assessment_run.result_statistic.skipped #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationTaskAssessmentRun AWS API Documentation
     #
@@ -8083,6 +8085,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task_assessment_runs[0].result_statistic.error #=> Integer
     #   resp.replication_task_assessment_runs[0].result_statistic.warning #=> Integer
     #   resp.replication_task_assessment_runs[0].result_statistic.cancelled #=> Integer
+    #   resp.replication_task_assessment_runs[0].result_statistic.skipped #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationTaskAssessmentRuns AWS API Documentation
     #
@@ -8353,6 +8356,7 @@ module Aws::DatabaseMigrationService
     #   resp.replications[0].premigration_assessment_statuses[0].result_statistic.error #=> Integer
     #   resp.replications[0].premigration_assessment_statuses[0].result_statistic.warning #=> Integer
     #   resp.replications[0].premigration_assessment_statuses[0].result_statistic.cancelled #=> Integer
+    #   resp.replications[0].premigration_assessment_statuses[0].result_statistic.skipped #=> Integer
     #   resp.replications[0].stop_reason #=> String
     #   resp.replications[0].failure_messages #=> Array
     #   resp.replications[0].failure_messages[0] #=> String
@@ -11906,13 +11910,13 @@ module Aws::DatabaseMigrationService
     #   User-defined settings for the premigration assessment. The possible
     #   values are:
     #
-    #   * `ResultLocationFinder`: The folder within an Amazon Amazon S3 bucket
-    #     where you want DMS to store the results of this assessment run.
+    #   * `ResultLocationFolder`: The folder within an Amazon S3 bucket where
+    #     you want DMS to store the results of this assessment run.
     #
     #   * `ResultEncryptionMode`: The supported values are `SSE_KMS` and
     #     `SSE_S3`. If these values are not provided, then the files are not
     #     encrypted at rest. For more information, see [Creating Amazon Web
-    #     Services KMS keys to encrypt Amazon Amazon S3 target objects][1].
+    #     Services KMS keys to encrypt Amazon S3 target objects][1].
     #
     #   * `ResultKmsKeyArn`: The ARN of a customer KMS encryption key that you
     #     specify when you set `ResultEncryptionMode` to `SSE_KMS`.
@@ -12001,6 +12005,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication.premigration_assessment_statuses[0].result_statistic.error #=> Integer
     #   resp.replication.premigration_assessment_statuses[0].result_statistic.warning #=> Integer
     #   resp.replication.premigration_assessment_statuses[0].result_statistic.cancelled #=> Integer
+    #   resp.replication.premigration_assessment_statuses[0].result_statistic.skipped #=> Integer
     #   resp.replication.stop_reason #=> String
     #   resp.replication.failure_messages #=> Array
     #   resp.replication.failure_messages[0] #=> String
@@ -12395,6 +12400,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task_assessment_run.result_statistic.error #=> Integer
     #   resp.replication_task_assessment_run.result_statistic.warning #=> Integer
     #   resp.replication_task_assessment_run.result_statistic.cancelled #=> Integer
+    #   resp.replication_task_assessment_run.result_statistic.skipped #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplicationTaskAssessmentRun AWS API Documentation
     #
@@ -12514,6 +12520,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication.premigration_assessment_statuses[0].result_statistic.error #=> Integer
     #   resp.replication.premigration_assessment_statuses[0].result_statistic.warning #=> Integer
     #   resp.replication.premigration_assessment_statuses[0].result_statistic.cancelled #=> Integer
+    #   resp.replication.premigration_assessment_statuses[0].result_statistic.skipped #=> Integer
     #   resp.replication.stop_reason #=> String
     #   resp.replication.failure_messages #=> Array
     #   resp.replication.failure_messages[0] #=> String
@@ -12750,7 +12757,7 @@ module Aws::DatabaseMigrationService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.118.0'
+      context[:gem_version] = '1.119.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

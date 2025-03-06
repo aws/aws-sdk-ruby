@@ -29,15 +29,21 @@ module Aws::STS
   # ## Error Classes
   # * {ExpiredTokenException}
   # * {IDPCommunicationErrorException}
+  #    * This error class is not used. `IDPCommunicationError` is used during parsing instead.
   # * {IDPRejectedClaimException}
+  #    * This error class is not used. `IDPRejectedClaim` is used during parsing instead.
   # * {InvalidAuthorizationMessageException}
   # * {InvalidIdentityTokenException}
+  #    * This error class is not used. `InvalidIdentityToken` is used during parsing instead.
   # * {MalformedPolicyDocumentException}
+  #    * This error class is not used. `MalformedPolicyDocument` is used during parsing instead.
   # * {PackedPolicyTooLargeException}
+  #    * This error class is not used. `PackedPolicyTooLarge` is used during parsing instead.
   # * {RegionDisabledException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
+  # Some existing error classes may use a different class name than the one documented.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -57,6 +63,8 @@ module Aws::STS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `IDPCommunicationError` instead.
     class IDPCommunicationErrorException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -72,6 +80,8 @@ module Aws::STS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `IDPRejectedClaim` instead.
     class IDPRejectedClaimException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -102,6 +112,8 @@ module Aws::STS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidIdentityToken` instead.
     class InvalidIdentityTokenException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -117,6 +129,8 @@ module Aws::STS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `MalformedPolicyDocument` instead.
     class MalformedPolicyDocumentException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -132,6 +146,8 @@ module Aws::STS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `PackedPolicyTooLarge` instead.
     class PackedPolicyTooLargeException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context

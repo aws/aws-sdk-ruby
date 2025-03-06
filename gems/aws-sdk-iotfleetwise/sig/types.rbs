@@ -117,6 +117,7 @@ module Aws::IoTFleetWise
       attr_accessor factor: ::Float
       attr_accessor length: ::Integer
       attr_accessor name: ::String
+      attr_accessor signal_value_type: ("INTEGER" | "FLOATING_POINT")
       SENSITIVE: []
     end
 
@@ -1049,6 +1050,8 @@ module Aws::IoTFleetWise
       attr_accessor byte_length: ::Integer
       attr_accessor bit_right_shift: ::Integer
       attr_accessor bit_mask_length: ::Integer
+      attr_accessor is_signed: bool
+      attr_accessor signal_value_type: ("INTEGER" | "FLOATING_POINT")
       SENSITIVE: []
     end
 

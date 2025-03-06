@@ -80,6 +80,35 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _CreateInvocationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateInvocationResponse]
+        def created_at: () -> ::Time
+        def invocation_id: () -> ::String
+        def session_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentRuntime/Client.html#create_invocation-instance_method
+      def create_invocation: (
+                               ?description: ::String,
+                               ?invocation_id: ::String,
+                               session_identifier: ::String
+                             ) -> _CreateInvocationResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInvocationResponseSuccess
+
+      interface _CreateSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSessionResponse]
+        def created_at: () -> ::Time
+        def session_arn: () -> ::String
+        def session_id: () -> ::String
+        def session_status: () -> ("ACTIVE" | "EXPIRED" | "ENDED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentRuntime/Client.html#create_session-instance_method
+      def create_session: (
+                            ?encryption_key_arn: ::String,
+                            ?session_metadata: Hash[::String, ::String],
+                            ?tags: Hash[::String, ::String]
+                          ) -> _CreateSessionResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSessionResponseSuccess
+
       interface _DeleteAgentMemoryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAgentMemoryResponse]
       end
@@ -91,6 +120,27 @@ module Aws
                                  ?session_id: ::String
                                ) -> _DeleteAgentMemoryResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAgentMemoryResponseSuccess
+
+      interface _DeleteSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSessionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentRuntime/Client.html#delete_session-instance_method
+      def delete_session: (
+                            session_identifier: ::String
+                          ) -> _DeleteSessionResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSessionResponseSuccess
+
+      interface _EndSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EndSessionResponse]
+        def session_arn: () -> ::String
+        def session_id: () -> ::String
+        def session_status: () -> ("ACTIVE" | "EXPIRED" | "ENDED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentRuntime/Client.html#end_session-instance_method
+      def end_session: (
+                         session_identifier: ::String
+                       ) -> _EndSessionResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EndSessionResponseSuccess
 
       interface _GenerateQueryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GenerateQueryResponse]
@@ -129,6 +179,34 @@ module Aws
                               ?next_token: ::String
                             ) -> _GetAgentMemoryResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAgentMemoryResponseSuccess
+
+      interface _GetInvocationStepResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInvocationStepResponse]
+        def invocation_step: () -> Types::InvocationStep
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentRuntime/Client.html#get_invocation_step-instance_method
+      def get_invocation_step: (
+                                 invocation_identifier: ::String,
+                                 invocation_step_id: ::String,
+                                 session_identifier: ::String
+                               ) -> _GetInvocationStepResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInvocationStepResponseSuccess
+
+      interface _GetSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSessionResponse]
+        def created_at: () -> ::Time
+        def encryption_key_arn: () -> ::String
+        def last_updated_at: () -> ::Time
+        def session_arn: () -> ::String
+        def session_id: () -> ::String
+        def session_metadata: () -> ::Hash[::String, ::String]
+        def session_status: () -> ("ACTIVE" | "EXPIRED" | "ENDED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentRuntime/Client.html#get_session-instance_method
+      def get_session: (
+                         session_identifier: ::String
+                       ) -> _GetSessionResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSessionResponseSuccess
 
       interface _InvokeAgentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::InvokeAgentResponse]
@@ -601,6 +679,55 @@ module Aws
                                ) ?{ (*untyped) -> void } -> _InvokeInlineAgentResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _InvokeInlineAgentResponseSuccess
 
+      interface _ListInvocationStepsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInvocationStepsResponse]
+        def invocation_step_summaries: () -> ::Array[Types::InvocationStepSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentRuntime/Client.html#list_invocation_steps-instance_method
+      def list_invocation_steps: (
+                                   ?invocation_identifier: ::String,
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String,
+                                   session_identifier: ::String
+                                 ) -> _ListInvocationStepsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInvocationStepsResponseSuccess
+
+      interface _ListInvocationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInvocationsResponse]
+        def invocation_summaries: () -> ::Array[Types::InvocationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentRuntime/Client.html#list_invocations-instance_method
+      def list_invocations: (
+                              ?max_results: ::Integer,
+                              ?next_token: ::String,
+                              session_identifier: ::String
+                            ) -> _ListInvocationsResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInvocationsResponseSuccess
+
+      interface _ListSessionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSessionsResponse]
+        def next_token: () -> ::String
+        def session_summaries: () -> ::Array[Types::SessionSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentRuntime/Client.html#list_sessions-instance_method
+      def list_sessions: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListSessionsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSessionsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentRuntime/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
       interface _OptimizePromptResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::OptimizePromptResponse]
         def optimized_prompt: () -> Types::OptimizedPromptStream
@@ -615,6 +742,35 @@ module Aws
                              target_model_id: ::String
                            ) ?{ (*untyped) -> void } -> _OptimizePromptResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _OptimizePromptResponseSuccess
+
+      interface _PutInvocationStepResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutInvocationStepResponse]
+        def invocation_step_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentRuntime/Client.html#put_invocation_step-instance_method
+      def put_invocation_step: (
+                                 invocation_identifier: ::String,
+                                 ?invocation_step_id: ::String,
+                                 invocation_step_time: ::Time,
+                                 payload: {
+                                   content_blocks: Array[
+                                     {
+                                       image: {
+                                         format: ("png" | "jpeg" | "gif" | "webp"),
+                                         source: {
+                                           bytes: ::String?,
+                                           s3_location: {
+                                             uri: ::String
+                                           }?
+                                         }
+                                       }?,
+                                       text: ::String?
+                                     },
+                                   ]?
+                                 },
+                                 session_identifier: ::String
+                               ) -> _PutInvocationStepResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutInvocationStepResponseSuccess
 
       interface _RerankResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RerankResponse]
@@ -1205,6 +1361,41 @@ module Aws
                                           ?session_id: ::String
                                         ) ?{ (*untyped) -> void } -> _RetrieveAndGenerateStreamResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _RetrieveAndGenerateStreamResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentRuntime/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentRuntime/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSessionResponse]
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def session_arn: () -> ::String
+        def session_id: () -> ::String
+        def session_status: () -> ("ACTIVE" | "EXPIRED" | "ENDED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentRuntime/Client.html#update_session-instance_method
+      def update_session: (
+                            session_identifier: ::String,
+                            ?session_metadata: Hash[::String, ::String]
+                          ) -> _UpdateSessionResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSessionResponseSuccess
     end
   end
 end

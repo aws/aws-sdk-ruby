@@ -2494,6 +2494,7 @@ module Aws::DatabaseMigrationService
       attr_accessor error: ::Integer
       attr_accessor warning: ::Integer
       attr_accessor cancelled: ::Integer
+      attr_accessor skipped: ::Integer
       SENSITIVE: []
     end
 

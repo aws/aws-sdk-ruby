@@ -835,6 +835,57 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
+    # Configuration settings for audio content extraction and processing.
+    #
+    # @!attribute [rw] audio_extraction_status
+    #   The status of audio extraction (ENABLED or DISABLED) for processing
+    #   audio content from files.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/AudioExtractionConfiguration AWS API Documentation
+    #
+    class AudioExtractionConfiguration < Struct.new(
+      :audio_extraction_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about an audio source, including its identifier, format, and
+    # time information.
+    #
+    # @!attribute [rw] media_id
+    #   Unique identifier for the audio media file.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_mime_type
+    #   The MIME type of the audio file (e.g., audio/mp3, audio/wav).
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time_milliseconds
+    #   The starting timestamp in milliseconds for the relevant audio
+    #   segment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_time_milliseconds
+    #   The ending timestamp in milliseconds for the relevant audio segment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] audio_extraction_type
+    #   The type of audio extraction performed on the content.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/AudioSourceDetails AWS API Documentation
+    #
+    class AudioSourceDetails < Struct.new(
+      :media_id,
+      :media_mime_type,
+      :start_time_milliseconds,
+      :end_time_milliseconds,
+      :audio_extraction_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A request made by Amazon Q Business to a third paty authentication
     # server to authenticate a custom plugin user.
     #
@@ -2731,6 +2782,38 @@ module Aws::QBusiness
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/DeleteApplicationResponse AWS API Documentation
     #
     class DeleteApplicationResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] application_id
+    #   The unique identifier for the Amazon Q Business application
+    #   environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] conversation_id
+    #   The unique identifier of the conversation.
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment_id
+    #   The unique identifier for the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The unique identifier of the user involved in the conversation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/DeleteAttachmentRequest AWS API Documentation
+    #
+    class DeleteAttachmentRequest < Struct.new(
+      :application_id,
+      :conversation_id,
+      :attachment_id,
+      :user_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/DeleteAttachmentResponse AWS API Documentation
+    #
+    class DeleteAttachmentResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] application_id
     #   The identifier of the application the chat controls have been
@@ -4796,6 +4879,25 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
+    # Details about an image source, including its identifier and format.
+    #
+    # @!attribute [rw] media_id
+    #   Unique identifier for the image file.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_mime_type
+    #   The MIME type of the image file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ImageSourceDetails AWS API Documentation
+    #
+    class ImageSourceDetails < Struct.new(
+      :media_id,
+      :media_mime_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Summary information for your Amazon Q Business index.
     #
     # @!attribute [rw] display_name
@@ -5863,10 +5965,22 @@ module Aws::QBusiness
     #   [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/extracting-meaning-from-images.html
     #   @return [Types::ImageExtractionConfiguration]
     #
+    # @!attribute [rw] audio_extraction_configuration
+    #   Configuration settings for extracting and processing audio content
+    #   from media files.
+    #   @return [Types::AudioExtractionConfiguration]
+    #
+    # @!attribute [rw] video_extraction_configuration
+    #   Configuration settings for extracting and processing video content
+    #   from media files.
+    #   @return [Types::VideoExtractionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/MediaExtractionConfiguration AWS API Documentation
     #
     class MediaExtractionConfiguration < Struct.new(
-      :image_extraction_configuration)
+      :image_extraction_configuration,
+      :audio_extraction_configuration,
+      :video_extraction_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7008,6 +7122,40 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
+    # Container for details about different types of media sources (image,
+    # audio, or video).
+    #
+    # @note SourceDetails is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of SourceDetails corresponding to the set member.
+    #
+    # @!attribute [rw] image_source_details
+    #   Details specific to image content within the source.
+    #   @return [Types::ImageSourceDetails]
+    #
+    # @!attribute [rw] audio_source_details
+    #   Details specific to audio content within the source.
+    #   @return [Types::AudioSourceDetails]
+    #
+    # @!attribute [rw] video_source_details
+    #   Details specific to video content within the source.
+    #   @return [Types::VideoSourceDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/SourceDetails AWS API Documentation
+    #
+    class SourceDetails < Struct.new(
+      :image_source_details,
+      :audio_source_details,
+      :video_source_details,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ImageSourceDetails < SourceDetails; end
+      class AudioSourceDetails < SourceDetails; end
+      class VideoSourceDetails < SourceDetails; end
+      class Unknown < SourceDetails; end
+    end
+
     # @!attribute [rw] data_source_id
     #   The identifier of the data source connector.
     #   @return [String]
@@ -7379,6 +7527,11 @@ module Aws::QBusiness
     #   text segment in the source attribution.
     #   @return [String]
     #
+    # @!attribute [rw] source_details
+    #   Source information for a segment of extracted text, including its
+    #   media type.
+    #   @return [Types::SourceDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/TextSegment AWS API Documentation
     #
     class TextSegment < Struct.new(
@@ -7386,7 +7539,8 @@ module Aws::QBusiness
       :end_offset,
       :snippet_excerpt,
       :media_id,
-      :media_mime_type)
+      :media_mime_type,
+      :source_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8117,6 +8271,57 @@ module Aws::QBusiness
     class ValidationExceptionField < Struct.new(
       :name,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration settings for video content extraction and processing.
+    #
+    # @!attribute [rw] video_extraction_status
+    #   The status of video extraction (ENABLED or DISABLED) for processing
+    #   video content from files.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/VideoExtractionConfiguration AWS API Documentation
+    #
+    class VideoExtractionConfiguration < Struct.new(
+      :video_extraction_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about a video source, including its identifier, format, and
+    # time information.
+    #
+    # @!attribute [rw] media_id
+    #   Unique identifier for the video media file.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_mime_type
+    #   The MIME type of the video file (e.g., video/mp4, video/avi).
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time_milliseconds
+    #   The starting timestamp in milliseconds for the relevant video
+    #   segment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_time_milliseconds
+    #   The ending timestamp in milliseconds for the relevant video segment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] video_extraction_type
+    #   The type of video extraction performed on the content.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/VideoSourceDetails AWS API Documentation
+    #
+    class VideoSourceDetails < Struct.new(
+      :media_id,
+      :media_mime_type,
+      :start_time_milliseconds,
+      :end_time_milliseconds,
+      :video_extraction_type)
       SENSITIVE = []
       include Aws::Structure
     end

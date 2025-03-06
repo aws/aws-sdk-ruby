@@ -223,6 +223,12 @@ module Aws
                                     media_extraction_configuration: {
                                       image_extraction_configuration: {
                                         image_extraction_status: ("ENABLED" | "DISABLED")
+                                      }?,
+                                      audio_extraction_configuration: {
+                                        audio_extraction_status: ("ENABLED" | "DISABLED")
+                                      }?,
+                                      video_extraction_configuration: {
+                                        video_extraction_status: ("ENABLED" | "DISABLED")
                                       }?
                                     }?
                                   },
@@ -610,6 +616,12 @@ module Aws
                                 ?media_extraction_configuration: {
                                   image_extraction_configuration: {
                                     image_extraction_status: ("ENABLED" | "DISABLED")
+                                  }?,
+                                  audio_extraction_configuration: {
+                                    audio_extraction_status: ("ENABLED" | "DISABLED")
+                                  }?,
+                                  video_extraction_configuration: {
+                                    video_extraction_status: ("ENABLED" | "DISABLED")
                                   }?
                                 }
                               ) -> _CreateDataSourceResponseSuccess
@@ -823,6 +835,18 @@ module Aws
                                 application_id: ::String
                               ) -> _DeleteApplicationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteApplicationResponseSuccess
+
+      interface _DeleteAttachmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAttachmentResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#delete_attachment-instance_method
+      def delete_attachment: (
+                               application_id: ::String,
+                               conversation_id: ::String,
+                               attachment_id: ::String,
+                               ?user_id: ::String
+                             ) -> _DeleteAttachmentResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAttachmentResponseSuccess
 
       interface _DeleteChatControlsConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteChatControlsConfigurationResponse]
@@ -1882,6 +1906,12 @@ module Aws
                                 ?media_extraction_configuration: {
                                   image_extraction_configuration: {
                                     image_extraction_status: ("ENABLED" | "DISABLED")
+                                  }?,
+                                  audio_extraction_configuration: {
+                                    audio_extraction_status: ("ENABLED" | "DISABLED")
+                                  }?,
+                                  video_extraction_configuration: {
+                                    video_extraction_status: ("ENABLED" | "DISABLED")
                                   }?
                                 }
                               ) -> _UpdateDataSourceResponseSuccess

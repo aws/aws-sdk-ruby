@@ -1579,6 +1579,7 @@ module Aws::WorkSpaces
       attr_accessor device_type_chrome_os: ("ALLOW" | "DENY")
       attr_accessor device_type_zero_client: ("ALLOW" | "DENY")
       attr_accessor device_type_linux: ("ALLOW" | "DENY")
+      attr_accessor device_type_work_spaces_thin_client: ("ALLOW" | "DENY")
       SENSITIVE: []
     end
 

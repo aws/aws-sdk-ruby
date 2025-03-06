@@ -1,0 +1,917 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IoTManagedIntegrations
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateCredentialLockerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCredentialLockerResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#create_credential_locker-instance_method
+      def create_credential_locker: (
+                                      ?name: ::String,
+                                      ?client_token: ::String,
+                                      ?tags: Hash[::String, ::String]
+                                    ) -> _CreateCredentialLockerResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCredentialLockerResponseSuccess
+
+      interface _CreateDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDestinationResponse]
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#create_destination-instance_method
+      def create_destination: (
+                                delivery_destination_arn: ::String,
+                                delivery_destination_type: ("KINESIS"),
+                                name: ::String,
+                                role_arn: ::String,
+                                ?client_token: ::String,
+                                ?description: ::String,
+                                ?tags: Hash[::String, ::String]
+                              ) -> _CreateDestinationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDestinationResponseSuccess
+
+      interface _CreateEventLogConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEventLogConfigurationResponse]
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#create_event_log_configuration-instance_method
+      def create_event_log_configuration: (
+                                            resource_type: ::String,
+                                            ?resource_id: ::String,
+                                            event_log_level: ("DEBUG" | "ERROR" | "INFO" | "WARN"),
+                                            ?client_token: ::String
+                                          ) -> _CreateEventLogConfigurationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEventLogConfigurationResponseSuccess
+
+      interface _CreateManagedThingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateManagedThingResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#create_managed_thing-instance_method
+      def create_managed_thing: (
+                                  role: ("CONTROLLER" | "DEVICE"),
+                                  ?owner: ::String,
+                                  ?credential_locker_id: ::String,
+                                  authentication_material: ::String,
+                                  authentication_material_type: ("WIFI_SETUP_QR_BAR_CODE" | "ZWAVE_QR_BAR_CODE" | "ZIGBEE_QR_BAR_CODE"),
+                                  ?serial_number: ::String,
+                                  ?brand: ::String,
+                                  ?model: ::String,
+                                  ?name: ::String,
+                                  ?capability_report: {
+                                    version: ::String,
+                                    node_id: ::String?,
+                                    endpoints: Array[
+                                      {
+                                        id: ::String,
+                                        device_types: Array[::String],
+                                        capabilities: Array[
+                                          {
+                                            id: ::String,
+                                            name: ::String,
+                                            version: ::String,
+                                            properties: Array[::String],
+                                            actions: Array[::String],
+                                            events: Array[::String]
+                                          },
+                                        ]
+                                      },
+                                    ]
+                                  },
+                                  ?capabilities: ::String,
+                                  ?client_token: ::String,
+                                  ?classification: ::String,
+                                  ?tags: Hash[::String, ::String],
+                                  ?meta_data: Hash[::String, ::String]
+                                ) -> _CreateManagedThingResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateManagedThingResponseSuccess
+
+      interface _CreateNotificationConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateNotificationConfigurationResponse]
+        def event_type: () -> ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#create_notification_configuration-instance_method
+      def create_notification_configuration: (
+                                               event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "CONNECTOR_ERROR_REPORT"),
+                                               destination_name: ::String,
+                                               ?client_token: ::String,
+                                               ?tags: Hash[::String, ::String]
+                                             ) -> _CreateNotificationConfigurationResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateNotificationConfigurationResponseSuccess
+
+      interface _CreateOtaTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateOtaTaskResponse]
+        def task_id: () -> ::String
+        def task_arn: () -> ::String
+        def description: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#create_ota_task-instance_method
+      def create_ota_task: (
+                             ?description: ::String,
+                             s3_url: ::String,
+                             ?protocol: ("HTTP"),
+                             ?target: Array[::String],
+                             ?task_configuration_id: ::String,
+                             ?ota_mechanism: ("PUSH"),
+                             ota_type: ("ONE_TIME" | "CONTINUOUS"),
+                             ?ota_target_query_string: ::String,
+                             ?client_token: ::String,
+                             ?ota_scheduling_config: {
+                               end_behavior: ("STOP_ROLLOUT" | "CANCEL" | "FORCE_CANCEL")?,
+                               end_time: ::String?,
+                               maintenance_windows: Array[
+                                 {
+                                   duration_in_minutes: ::Integer?,
+                                   start_time: ::String?
+                                 },
+                               ]?,
+                               start_time: ::String?
+                             },
+                             ?ota_task_execution_retry_config: {
+                               retry_config_criteria: Array[
+                                 {
+                                   failure_type: ("FAILED" | "TIMED_OUT" | "ALL")?,
+                                   min_number_of_retries: ::Integer?
+                                 },
+                               ]?
+                             },
+                             ?tags: Hash[::String, ::String]
+                           ) -> _CreateOtaTaskResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOtaTaskResponseSuccess
+
+      interface _CreateOtaTaskConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateOtaTaskConfigurationResponse]
+        def task_configuration_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#create_ota_task_configuration-instance_method
+      def create_ota_task_configuration: (
+                                           ?description: ::String,
+                                           ?name: ::String,
+                                           ?push_config: {
+                                             abort_config: {
+                                               abort_config_criteria_list: Array[
+                                                 {
+                                                   action: ("CANCEL")?,
+                                                   failure_type: ("FAILED" | "REJECTED" | "TIMED_OUT" | "ALL")?,
+                                                   min_number_of_executed_things: ::Integer?,
+                                                   threshold_percentage: ::Float?
+                                                 },
+                                               ]?
+                                             }?,
+                                             rollout_config: {
+                                               exponential_rollout_rate: {
+                                                 base_rate_per_minute: ::Integer?,
+                                                 increment_factor: ::Float?,
+                                                 rate_increase_criteria: {
+                                                   number_of_notified_things: ::Integer?,
+                                                   number_of_succeeded_things: ::Integer?
+                                                 }?
+                                               }?,
+                                               maximum_per_minute: ::Integer?
+                                             }?,
+                                             timeout_config: {
+                                               in_progress_timeout_in_minutes: ::Integer?
+                                             }?
+                                           },
+                                           ?client_token: ::String
+                                         ) -> _CreateOtaTaskConfigurationResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOtaTaskConfigurationResponseSuccess
+
+      interface _CreateProvisioningProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProvisioningProfileResponse]
+        def arn: () -> ::String
+        def name: () -> ::String
+        def provisioning_type: () -> ("FLEET_PROVISIONING" | "JITR")
+        def id: () -> ::String
+        def claim_certificate: () -> ::String
+        def claim_certificate_private_key: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#create_provisioning_profile-instance_method
+      def create_provisioning_profile: (
+                                         provisioning_type: ("FLEET_PROVISIONING" | "JITR"),
+                                         ?ca_certificate: ::String,
+                                         ?name: ::String,
+                                         ?client_token: ::String,
+                                         ?tags: Hash[::String, ::String]
+                                       ) -> _CreateProvisioningProfileResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProvisioningProfileResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#delete_credential_locker-instance_method
+      def delete_credential_locker: (
+                                      identifier: ::String
+                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#delete_destination-instance_method
+      def delete_destination: (
+                                name: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#delete_event_log_configuration-instance_method
+      def delete_event_log_configuration: (
+                                            id: ::String
+                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#delete_managed_thing-instance_method
+      def delete_managed_thing: (
+                                  identifier: ::String,
+                                  ?force: bool
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#delete_notification_configuration-instance_method
+      def delete_notification_configuration: (
+                                               event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
+                                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#delete_ota_task-instance_method
+      def delete_ota_task: (
+                             identifier: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#delete_ota_task_configuration-instance_method
+      def delete_ota_task_configuration: (
+                                           identifier: ::String
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#delete_provisioning_profile-instance_method
+      def delete_provisioning_profile: (
+                                         identifier: ::String
+                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GetCredentialLockerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCredentialLockerResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def name: () -> ::String
+        def created_at: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#get_credential_locker-instance_method
+      def get_credential_locker: (
+                                   identifier: ::String
+                                 ) -> _GetCredentialLockerResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCredentialLockerResponseSuccess
+
+      interface _GetCustomEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCustomEndpointResponse]
+        def endpoint_address: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#get_custom_endpoint-instance_method
+      def get_custom_endpoint: (
+                               ) -> _GetCustomEndpointResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCustomEndpointResponseSuccess
+
+      interface _GetDefaultEncryptionConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDefaultEncryptionConfigurationResponse]
+        def configuration_status: () -> Types::ConfigurationStatus
+        def encryption_type: () -> ("MANAGED_INTEGRATIONS_DEFAULT_ENCRYPTION" | "CUSTOMER_KEY_ENCRYPTION")
+        def kms_key_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#get_default_encryption_configuration-instance_method
+      def get_default_encryption_configuration: (
+                                                ) -> _GetDefaultEncryptionConfigurationResponseSuccess
+                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDefaultEncryptionConfigurationResponseSuccess
+
+      interface _GetDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDestinationResponse]
+        def description: () -> ::String
+        def delivery_destination_arn: () -> ::String
+        def delivery_destination_type: () -> ("KINESIS")
+        def name: () -> ::String
+        def role_arn: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#get_destination-instance_method
+      def get_destination: (
+                             name: ::String
+                           ) -> _GetDestinationResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDestinationResponseSuccess
+
+      interface _GetDeviceDiscoveryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDeviceDiscoveryResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def discovery_type: () -> ("ZWAVE" | "ZIGBEE" | "CLOUD")
+        def status: () -> ("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT")
+        def started_at: () -> ::Time
+        def controller_id: () -> ::String
+        def connector_association_id: () -> ::String
+        def finished_at: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#get_device_discovery-instance_method
+      def get_device_discovery: (
+                                  identifier: ::String
+                                ) -> _GetDeviceDiscoveryResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeviceDiscoveryResponseSuccess
+
+      interface _GetEventLogConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEventLogConfigurationResponse]
+        def id: () -> ::String
+        def resource_type: () -> ::String
+        def resource_id: () -> ::String
+        def event_log_level: () -> ("DEBUG" | "ERROR" | "INFO" | "WARN")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#get_event_log_configuration-instance_method
+      def get_event_log_configuration: (
+                                         id: ::String
+                                       ) -> _GetEventLogConfigurationResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEventLogConfigurationResponseSuccess
+
+      interface _GetHubConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetHubConfigurationResponse]
+        def hub_token_timer_expiry_setting_in_seconds: () -> ::Integer
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#get_hub_configuration-instance_method
+      def get_hub_configuration: (
+                                 ) -> _GetHubConfigurationResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetHubConfigurationResponseSuccess
+
+      interface _GetManagedThingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetManagedThingResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def owner: () -> ::String
+        def credential_locker_id: () -> ::String
+        def advertised_product_id: () -> ::String
+        def role: () -> ("CONTROLLER" | "DEVICE")
+        def provisioning_status: () -> ("UNASSOCIATED" | "PRE_ASSOCIATED" | "DISCOVERED" | "ACTIVATED" | "DELETION_FAILED" | "DELETE_IN_PROGRESS" | "ISOLATED" | "DELETED")
+        def name: () -> ::String
+        def model: () -> ::String
+        def brand: () -> ::String
+        def serial_number: () -> ::String
+        def universal_product_code: () -> ::String
+        def international_article_number: () -> ::String
+        def connector_policy_id: () -> ::String
+        def connector_device_id: () -> ::String
+        def device_specific_key: () -> ::String
+        def mac_address: () -> ::String
+        def parent_controller_id: () -> ::String
+        def classification: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def activated_at: () -> ::Time
+        def hub_network_mode: () -> ("STANDARD" | "NETWORK_WIDE_EXCLUSION")
+        def meta_data: () -> ::Hash[::String, ::String]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#get_managed_thing-instance_method
+      def get_managed_thing: (
+                               identifier: ::String
+                             ) -> _GetManagedThingResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetManagedThingResponseSuccess
+
+      interface _GetManagedThingCapabilitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetManagedThingCapabilitiesResponse]
+        def managed_thing_id: () -> ::String
+        def capabilities: () -> ::String
+        def capability_report: () -> Types::CapabilityReport
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#get_managed_thing_capabilities-instance_method
+      def get_managed_thing_capabilities: (
+                                            identifier: ::String
+                                          ) -> _GetManagedThingCapabilitiesResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetManagedThingCapabilitiesResponseSuccess
+
+      interface _GetManagedThingConnectivityDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetManagedThingConnectivityDataResponse]
+        def managed_thing_id: () -> ::String
+        def connected: () -> bool
+        def timestamp: () -> ::Time
+        def disconnect_reason: () -> ("AUTH_ERROR" | "CLIENT_INITIATED_DISCONNECT" | "CLIENT_ERROR" | "CONNECTION_LOST" | "DUPLICATE_CLIENTID" | "FORBIDDEN_ACCESS" | "MQTT_KEEP_ALIVE_TIMEOUT" | "SERVER_ERROR" | "SERVER_INITIATED_DISCONNECT" | "THROTTLED" | "WEBSOCKET_TTL_EXPIRATION" | "CUSTOMAUTH_TTL_EXPIRATION" | "UNKNOWN" | "NONE")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#get_managed_thing_connectivity_data-instance_method
+      def get_managed_thing_connectivity_data: (
+                                                 identifier: ::String
+                                               ) -> _GetManagedThingConnectivityDataResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetManagedThingConnectivityDataResponseSuccess
+
+      interface _GetManagedThingMetaDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetManagedThingMetaDataResponse]
+        def managed_thing_id: () -> ::String
+        def meta_data: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#get_managed_thing_meta_data-instance_method
+      def get_managed_thing_meta_data: (
+                                         identifier: ::String
+                                       ) -> _GetManagedThingMetaDataResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetManagedThingMetaDataResponseSuccess
+
+      interface _GetManagedThingStateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetManagedThingStateResponse]
+        def endpoints: () -> ::Array[Types::StateEndpoint]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#get_managed_thing_state-instance_method
+      def get_managed_thing_state: (
+                                     managed_thing_id: ::String
+                                   ) -> _GetManagedThingStateResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetManagedThingStateResponseSuccess
+
+      interface _GetNotificationConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetNotificationConfigurationResponse]
+        def event_type: () -> ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
+        def destination_name: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#get_notification_configuration-instance_method
+      def get_notification_configuration: (
+                                            event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
+                                          ) -> _GetNotificationConfigurationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetNotificationConfigurationResponseSuccess
+
+      interface _GetOtaTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOtaTaskResponse]
+        def task_id: () -> ::String
+        def task_arn: () -> ::String
+        def description: () -> ::String
+        def s3_url: () -> ::String
+        def protocol: () -> ("HTTP")
+        def ota_type: () -> ("ONE_TIME" | "CONTINUOUS")
+        def ota_target_query_string: () -> ::String
+        def ota_mechanism: () -> ("PUSH")
+        def target: () -> ::Array[::String]
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def task_configuration_id: () -> ::String
+        def task_processing_details: () -> Types::TaskProcessingDetails
+        def ota_scheduling_config: () -> Types::OtaTaskSchedulingConfig
+        def ota_task_execution_retry_config: () -> Types::OtaTaskExecutionRetryConfig
+        def status: () -> ("IN_PROGRESS" | "CANCELED" | "COMPLETED" | "DELETION_IN_PROGRESS" | "SCHEDULED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#get_ota_task-instance_method
+      def get_ota_task: (
+                          identifier: ::String
+                        ) -> _GetOtaTaskResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOtaTaskResponseSuccess
+
+      interface _GetOtaTaskConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOtaTaskConfigurationResponse]
+        def task_configuration_id: () -> ::String
+        def name: () -> ::String
+        def push_config: () -> Types::PushConfig
+        def description: () -> ::String
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#get_ota_task_configuration-instance_method
+      def get_ota_task_configuration: (
+                                        identifier: ::String
+                                      ) -> _GetOtaTaskConfigurationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOtaTaskConfigurationResponseSuccess
+
+      interface _GetProvisioningProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProvisioningProfileResponse]
+        def arn: () -> ::String
+        def name: () -> ::String
+        def provisioning_type: () -> ("FLEET_PROVISIONING" | "JITR")
+        def id: () -> ::String
+        def claim_certificate: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#get_provisioning_profile-instance_method
+      def get_provisioning_profile: (
+                                      identifier: ::String
+                                    ) -> _GetProvisioningProfileResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProvisioningProfileResponseSuccess
+
+      interface _GetRuntimeLogConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRuntimeLogConfigurationResponse]
+        def managed_thing_id: () -> ::String
+        def runtime_log_configurations: () -> Types::RuntimeLogConfigurations
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#get_runtime_log_configuration-instance_method
+      def get_runtime_log_configuration: (
+                                           managed_thing_id: ::String
+                                         ) -> _GetRuntimeLogConfigurationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRuntimeLogConfigurationResponseSuccess
+
+      interface _GetSchemaVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSchemaVersionResponse]
+        def schema_id: () -> ::String
+        def type: () -> ("capability" | "definition")
+        def description: () -> ::String
+        def namespace: () -> ::String
+        def semantic_version: () -> ::String
+        def visibility: () -> ("PUBLIC" | "PRIVATE")
+        def schema: () -> untyped
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#get_schema_version-instance_method
+      def get_schema_version: (
+                                type: ("capability" | "definition"),
+                                schema_versioned_id: ::String,
+                                ?format: ("AWS" | "ZCL" | "CONNECTOR")
+                              ) -> _GetSchemaVersionResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSchemaVersionResponseSuccess
+
+      interface _ListCredentialLockersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCredentialLockersResponse]
+        def items: () -> ::Array[Types::CredentialLockerSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#list_credential_lockers-instance_method
+      def list_credential_lockers: (
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
+                                   ) -> _ListCredentialLockersResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCredentialLockersResponseSuccess
+
+      interface _ListDestinationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDestinationsResponse]
+        def destination_list: () -> ::Array[Types::DestinationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#list_destinations-instance_method
+      def list_destinations: (
+                               ?next_token: ::String,
+                               ?max_results: ::Integer
+                             ) -> _ListDestinationsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDestinationsResponseSuccess
+
+      interface _ListEventLogConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEventLogConfigurationsResponse]
+        def event_log_configuration_list: () -> ::Array[Types::EventLogConfigurationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#list_event_log_configurations-instance_method
+      def list_event_log_configurations: (
+                                           ?next_token: ::String,
+                                           ?max_results: ::Integer
+                                         ) -> _ListEventLogConfigurationsResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEventLogConfigurationsResponseSuccess
+
+      interface _ListManagedThingSchemasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListManagedThingSchemasResponse]
+        def items: () -> ::Array[Types::ManagedThingSchemaListItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#list_managed_thing_schemas-instance_method
+      def list_managed_thing_schemas: (
+                                        identifier: ::String,
+                                        ?endpoint_id_filter: ::String,
+                                        ?capability_id_filter: ::String,
+                                        ?next_token: ::String,
+                                        ?max_results: ::Integer
+                                      ) -> _ListManagedThingSchemasResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListManagedThingSchemasResponseSuccess
+
+      interface _ListManagedThingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListManagedThingsResponse]
+        def items: () -> ::Array[Types::ManagedThingSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#list_managed_things-instance_method
+      def list_managed_things: (
+                                 ?owner_filter: ::String,
+                                 ?credential_locker_filter: ::String,
+                                 ?role_filter: ("CONTROLLER" | "DEVICE"),
+                                 ?parent_controller_identifier_filter: ::String,
+                                 ?connector_policy_id_filter: ::String,
+                                 ?serial_number_filter: ::String,
+                                 ?provisioning_status_filter: ("UNASSOCIATED" | "PRE_ASSOCIATED" | "DISCOVERED" | "ACTIVATED" | "DELETION_FAILED" | "DELETE_IN_PROGRESS" | "ISOLATED" | "DELETED"),
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer
+                               ) -> _ListManagedThingsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListManagedThingsResponseSuccess
+
+      interface _ListNotificationConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNotificationConfigurationsResponse]
+        def notification_configuration_list: () -> ::Array[Types::NotificationConfigurationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#list_notification_configurations-instance_method
+      def list_notification_configurations: (
+                                              ?max_results: ::Integer,
+                                              ?next_token: ::String
+                                            ) -> _ListNotificationConfigurationsResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNotificationConfigurationsResponseSuccess
+
+      interface _ListOtaTaskConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOtaTaskConfigurationsResponse]
+        def items: () -> ::Array[Types::OtaTaskConfigurationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#list_ota_task_configurations-instance_method
+      def list_ota_task_configurations: (
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
+                                        ) -> _ListOtaTaskConfigurationsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOtaTaskConfigurationsResponseSuccess
+
+      interface _ListOtaTaskExecutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOtaTaskExecutionsResponse]
+        def execution_summaries: () -> ::Array[Types::OtaTaskExecutionSummaries]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#list_ota_task_executions-instance_method
+      def list_ota_task_executions: (
+                                      identifier: ::String,
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer
+                                    ) -> _ListOtaTaskExecutionsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOtaTaskExecutionsResponseSuccess
+
+      interface _ListOtaTasksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOtaTasksResponse]
+        def tasks: () -> ::Array[Types::OtaTaskSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#list_ota_tasks-instance_method
+      def list_ota_tasks: (
+                            ?next_token: ::String,
+                            ?max_results: ::Integer
+                          ) -> _ListOtaTasksResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOtaTasksResponseSuccess
+
+      interface _ListProvisioningProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProvisioningProfilesResponse]
+        def items: () -> ::Array[Types::ProvisioningProfileSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#list_provisioning_profiles-instance_method
+      def list_provisioning_profiles: (
+                                        ?next_token: ::String,
+                                        ?max_results: ::Integer
+                                      ) -> _ListProvisioningProfilesResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProvisioningProfilesResponseSuccess
+
+      interface _ListSchemaVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSchemaVersionsResponse]
+        def items: () -> ::Array[Types::SchemaVersionListItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#list_schema_versions-instance_method
+      def list_schema_versions: (
+                                  type: ("capability" | "definition"),
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String,
+                                  ?schema_id: ::String,
+                                  ?namespace: ::String,
+                                  ?visibility: ("PUBLIC" | "PRIVATE"),
+                                  ?semantic_version: ::String
+                                ) -> _ListSchemaVersionsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSchemaVersionsResponseSuccess
+
+      interface _PutDefaultEncryptionConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutDefaultEncryptionConfigurationResponse]
+        def configuration_status: () -> Types::ConfigurationStatus
+        def encryption_type: () -> ("MANAGED_INTEGRATIONS_DEFAULT_ENCRYPTION" | "CUSTOMER_KEY_ENCRYPTION")
+        def kms_key_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#put_default_encryption_configuration-instance_method
+      def put_default_encryption_configuration: (
+                                                  encryption_type: ("MANAGED_INTEGRATIONS_DEFAULT_ENCRYPTION" | "CUSTOMER_KEY_ENCRYPTION"),
+                                                  ?kms_key_arn: ::String
+                                                ) -> _PutDefaultEncryptionConfigurationResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDefaultEncryptionConfigurationResponseSuccess
+
+      interface _PutHubConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutHubConfigurationResponse]
+        def hub_token_timer_expiry_setting_in_seconds: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#put_hub_configuration-instance_method
+      def put_hub_configuration: (
+                                   hub_token_timer_expiry_setting_in_seconds: ::Integer
+                                 ) -> _PutHubConfigurationResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutHubConfigurationResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#put_runtime_log_configuration-instance_method
+      def put_runtime_log_configuration: (
+                                           managed_thing_id: ::String,
+                                           runtime_log_configurations: {
+                                             log_level: ("DEBUG" | "ERROR" | "INFO" | "WARN")?,
+                                             log_flush_level: ("DEBUG" | "ERROR" | "INFO" | "WARN")?,
+                                             local_store_location: ::String?,
+                                             local_store_file_rotation_max_files: ::Integer?,
+                                             local_store_file_rotation_max_bytes: ::Integer?,
+                                             upload_log: bool?,
+                                             upload_period_minutes: ::Integer?,
+                                             delete_local_store_after_upload: bool?
+                                           }
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _RegisterCustomEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterCustomEndpointResponse]
+        def endpoint_address: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#register_custom_endpoint-instance_method
+      def register_custom_endpoint: (
+                                    ) -> _RegisterCustomEndpointResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterCustomEndpointResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#reset_runtime_log_configuration-instance_method
+      def reset_runtime_log_configuration: (
+                                             managed_thing_id: ::String
+                                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _SendManagedThingCommandResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendManagedThingCommandResponse]
+        def trace_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#send_managed_thing_command-instance_method
+      def send_managed_thing_command: (
+                                        managed_thing_id: ::String,
+                                        endpoints: Array[
+                                          {
+                                            endpoint_id: ::String,
+                                            capabilities: Array[
+                                              {
+                                                id: ::String,
+                                                name: ::String,
+                                                version: ::String,
+                                                actions: Array[
+                                                  {
+                                                    name: ::String,
+                                                    ref: ::String?,
+                                                    action_trace_id: ::String?,
+                                                    parameters: {
+                                                    }?
+                                                  },
+                                                ]
+                                              },
+                                            ]
+                                          },
+                                        ],
+                                        ?connector_association_id: ::String
+                                      ) -> _SendManagedThingCommandResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendManagedThingCommandResponseSuccess
+
+      interface _StartDeviceDiscoveryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartDeviceDiscoveryResponse]
+        def id: () -> ::String
+        def started_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#start_device_discovery-instance_method
+      def start_device_discovery: (
+                                    discovery_type: ("ZWAVE" | "ZIGBEE" | "CLOUD"),
+                                    ?controller_identifier: ::String,
+                                    ?connector_association_identifier: ::String,
+                                    ?authentication_material: ::String,
+                                    ?authentication_material_type: ("ZWAVE_INSTALL_CODE"),
+                                    ?client_token: ::String,
+                                    ?tags: Hash[::String, ::String]
+                                  ) -> _StartDeviceDiscoveryResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDeviceDiscoveryResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#update_destination-instance_method
+      def update_destination: (
+                                name: ::String,
+                                ?delivery_destination_arn: ::String,
+                                ?delivery_destination_type: ("KINESIS"),
+                                ?role_arn: ::String,
+                                ?description: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#update_event_log_configuration-instance_method
+      def update_event_log_configuration: (
+                                            id: ::String,
+                                            event_log_level: ("DEBUG" | "ERROR" | "INFO" | "WARN")
+                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#update_managed_thing-instance_method
+      def update_managed_thing: (
+                                  identifier: ::String,
+                                  ?owner: ::String,
+                                  ?credential_locker_id: ::String,
+                                  ?serial_number: ::String,
+                                  ?brand: ::String,
+                                  ?model: ::String,
+                                  ?name: ::String,
+                                  ?capability_report: {
+                                    version: ::String,
+                                    node_id: ::String?,
+                                    endpoints: Array[
+                                      {
+                                        id: ::String,
+                                        device_types: Array[::String],
+                                        capabilities: Array[
+                                          {
+                                            id: ::String,
+                                            name: ::String,
+                                            version: ::String,
+                                            properties: Array[::String],
+                                            actions: Array[::String],
+                                            events: Array[::String]
+                                          },
+                                        ]
+                                      },
+                                    ]
+                                  },
+                                  ?capabilities: ::String,
+                                  ?classification: ::String,
+                                  ?hub_network_mode: ("STANDARD" | "NETWORK_WIDE_EXCLUSION"),
+                                  ?meta_data: Hash[::String, ::String]
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#update_notification_configuration-instance_method
+      def update_notification_configuration: (
+                                               event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "CONNECTOR_ERROR_REPORT"),
+                                               destination_name: ::String
+                                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#update_ota_task-instance_method
+      def update_ota_task: (
+                             identifier: ::String,
+                             ?description: ::String,
+                             ?task_configuration_id: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+    end
+  end
+end
+
