@@ -42,10 +42,10 @@ module Aws
       OVERHEAD_LENGTH = 16
 
       # Maximum header length allowed (after encode) 128kb
-      MAX_HEADERS_LENGTH = 131072
+      MAX_HEADERS_LENGTH = 1024 * 128
 
-      # Maximum payload length allowed (after encode) 16mb
-      MAX_PAYLOAD_LENGTH = 16777216
+      # Maximum payload length allowed (after encode) 24mb
+      MAX_PAYLOAD_LENGTH = 1024 * 1024 * 24
 
       # Encodes Aws::EventStream::Message to output IO when
       #   provided, else return the encoded binary string

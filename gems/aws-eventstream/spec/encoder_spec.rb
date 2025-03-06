@@ -30,7 +30,7 @@ module Aws
       describe '#encode error' do
 
         it 'raises an error when payload exceeds' do
-          payload = double('payload', :length => 16777217)
+          payload = double('payload', :length => 24 * 1024 * 1024 + 1)
           message = Aws::EventStream::Message.new(
             headers: {},
             payload: payload
