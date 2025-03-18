@@ -676,6 +676,9 @@ module Aws::WAFV2
     #               ja4_fingerprint: {
     #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
+    #               uri_fragment: {
+    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -742,6 +745,9 @@ module Aws::WAFV2
     #               },
     #               ja4_fingerprint: {
     #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
+    #               uri_fragment: {
+    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -810,6 +816,9 @@ module Aws::WAFV2
     #               ja4_fingerprint: {
     #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
+    #               uri_fragment: {
+    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -875,6 +884,9 @@ module Aws::WAFV2
     #               },
     #               ja4_fingerprint: {
     #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
+    #               uri_fragment: {
+    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
     #               },
     #             },
     #             comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -1026,6 +1038,9 @@ module Aws::WAFV2
     #               },
     #               ja4_fingerprint: {
     #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
+    #               uri_fragment: {
+    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -1358,6 +1373,9 @@ module Aws::WAFV2
     #               },
     #               ja4_fingerprint: {
     #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
+    #               uri_fragment: {
+    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -1867,6 +1885,9 @@ module Aws::WAFV2
     #               ja4_fingerprint: {
     #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
+    #               uri_fragment: {
+    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -1933,6 +1954,9 @@ module Aws::WAFV2
     #               },
     #               ja4_fingerprint: {
     #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
+    #               uri_fragment: {
+    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -2001,6 +2025,9 @@ module Aws::WAFV2
     #               ja4_fingerprint: {
     #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
+    #               uri_fragment: {
+    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -2066,6 +2093,9 @@ module Aws::WAFV2
     #               },
     #               ja4_fingerprint: {
     #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
+    #               uri_fragment: {
+    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
     #               },
     #             },
     #             comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -2217,6 +2247,9 @@ module Aws::WAFV2
     #               },
     #               ja4_fingerprint: {
     #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
+    #               uri_fragment: {
+    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -2549,6 +2582,9 @@ module Aws::WAFV2
     #               },
     #               ja4_fingerprint: {
     #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
+    #               uri_fragment: {
+    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -2913,6 +2949,9 @@ module Aws::WAFV2
     #               ja4_fingerprint: {
     #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
+    #               uri_fragment: {
+    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -2979,6 +3018,9 @@ module Aws::WAFV2
     #               },
     #               ja4_fingerprint: {
     #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
+    #               uri_fragment: {
+    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -3047,6 +3089,9 @@ module Aws::WAFV2
     #               ja4_fingerprint: {
     #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
+    #               uri_fragment: {
+    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -3112,6 +3157,9 @@ module Aws::WAFV2
     #               },
     #               ja4_fingerprint: {
     #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
+    #               uri_fragment: {
+    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
     #               },
     #             },
     #             comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -3263,6 +3311,9 @@ module Aws::WAFV2
     #               },
     #               ja4_fingerprint: {
     #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
+    #               uri_fragment: {
+    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -3595,6 +3646,9 @@ module Aws::WAFV2
     #               },
     #               ja4_fingerprint: {
     #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
+    #               uri_fragment: {
+    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -4635,6 +4689,7 @@ module Aws::WAFV2
     #   resp.logging_configuration.redacted_fields[0].header_order.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.logging_configuration.redacted_fields[0].ja3_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.logging_configuration.redacted_fields[0].ja4_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
+    #   resp.logging_configuration.redacted_fields[0].uri_fragment.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.logging_configuration.managed_by_firewall_manager #=> Boolean
     #   resp.logging_configuration.logging_filter.filters #=> Array
     #   resp.logging_configuration.logging_filter.filters[0].behavior #=> String, one of "KEEP", "DROP"
@@ -5026,6 +5081,7 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.byte_match_statement.field_to_match.header_order.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.byte_match_statement.field_to_match.ja3_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.byte_match_statement.field_to_match.ja4_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
+    #   resp.rule_group.rules[0].statement.byte_match_statement.field_to_match.uri_fragment.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.byte_match_statement.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.byte_match_statement.text_transformations[0].priority #=> Integer
     #   resp.rule_group.rules[0].statement.byte_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
@@ -5053,6 +5109,7 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.header_order.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.ja3_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.ja4_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
+    #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.uri_fragment.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.sqli_match_statement.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.sqli_match_statement.text_transformations[0].priority #=> Integer
     #   resp.rule_group.rules[0].statement.sqli_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
@@ -5080,6 +5137,7 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.header_order.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.ja3_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.ja4_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
+    #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.uri_fragment.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.xss_match_statement.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.xss_match_statement.text_transformations[0].priority #=> Integer
     #   resp.rule_group.rules[0].statement.xss_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
@@ -5106,6 +5164,7 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.header_order.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.ja3_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.ja4_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
+    #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.uri_fragment.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.size_constraint_statement.comparison_operator #=> String, one of "EQ", "NE", "LE", "LT", "GE", "GT"
     #   resp.rule_group.rules[0].statement.size_constraint_statement.size #=> Integer
     #   resp.rule_group.rules[0].statement.size_constraint_statement.text_transformations #=> Array
@@ -5165,6 +5224,7 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.header_order.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.ja3_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.ja4_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
+    #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.uri_fragment.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].priority #=> Integer
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
@@ -5311,6 +5371,7 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.header_order.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.ja3_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.ja4_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
+    #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.uri_fragment.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.regex_match_statement.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.regex_match_statement.text_transformations[0].priority #=> Integer
     #   resp.rule_group.rules[0].statement.regex_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
@@ -5939,6 +6000,7 @@ module Aws::WAFV2
     #   resp.logging_configurations[0].redacted_fields[0].header_order.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.logging_configurations[0].redacted_fields[0].ja3_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.logging_configurations[0].redacted_fields[0].ja4_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
+    #   resp.logging_configurations[0].redacted_fields[0].uri_fragment.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.logging_configurations[0].managed_by_firewall_manager #=> Boolean
     #   resp.logging_configurations[0].logging_filter.filters #=> Array
     #   resp.logging_configurations[0].logging_filter.filters[0].behavior #=> String, one of "KEEP", "DROP"
@@ -6519,6 +6581,9 @@ module Aws::WAFV2
     #           ja4_fingerprint: {
     #             fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #           },
+    #           uri_fragment: {
+    #             fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
+    #           },
     #         },
     #       ],
     #       managed_by_firewall_manager: false,
@@ -6575,6 +6640,7 @@ module Aws::WAFV2
     #   resp.logging_configuration.redacted_fields[0].header_order.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.logging_configuration.redacted_fields[0].ja3_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.logging_configuration.redacted_fields[0].ja4_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
+    #   resp.logging_configuration.redacted_fields[0].uri_fragment.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.logging_configuration.managed_by_firewall_manager #=> Boolean
     #   resp.logging_configuration.logging_filter.filters #=> Array
     #   resp.logging_configuration.logging_filter.filters[0].behavior #=> String, one of "KEEP", "DROP"
@@ -7368,6 +7434,9 @@ module Aws::WAFV2
     #               ja4_fingerprint: {
     #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
+    #               uri_fragment: {
+    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -7434,6 +7503,9 @@ module Aws::WAFV2
     #               },
     #               ja4_fingerprint: {
     #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
+    #               uri_fragment: {
+    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -7502,6 +7574,9 @@ module Aws::WAFV2
     #               ja4_fingerprint: {
     #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
+    #               uri_fragment: {
+    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -7567,6 +7642,9 @@ module Aws::WAFV2
     #               },
     #               ja4_fingerprint: {
     #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
+    #               uri_fragment: {
+    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
     #               },
     #             },
     #             comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -7718,6 +7796,9 @@ module Aws::WAFV2
     #               },
     #               ja4_fingerprint: {
     #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
+    #               uri_fragment: {
+    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -8050,6 +8131,9 @@ module Aws::WAFV2
     #               },
     #               ja4_fingerprint: {
     #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
+    #               uri_fragment: {
+    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -8459,6 +8543,9 @@ module Aws::WAFV2
     #               ja4_fingerprint: {
     #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
+    #               uri_fragment: {
+    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -8525,6 +8612,9 @@ module Aws::WAFV2
     #               },
     #               ja4_fingerprint: {
     #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
+    #               uri_fragment: {
+    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -8593,6 +8683,9 @@ module Aws::WAFV2
     #               ja4_fingerprint: {
     #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
+    #               uri_fragment: {
+    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -8658,6 +8751,9 @@ module Aws::WAFV2
     #               },
     #               ja4_fingerprint: {
     #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
+    #               uri_fragment: {
+    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
     #               },
     #             },
     #             comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -8809,6 +8905,9 @@ module Aws::WAFV2
     #               },
     #               ja4_fingerprint: {
     #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
+    #               uri_fragment: {
+    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -9142,6 +9241,9 @@ module Aws::WAFV2
     #               ja4_fingerprint: {
     #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
+    #               uri_fragment: {
+    #                 fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -9317,7 +9419,7 @@ module Aws::WAFV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.104.0'
+      context[:gem_version] = '1.105.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

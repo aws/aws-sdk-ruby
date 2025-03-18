@@ -41,6 +41,8 @@ module Aws::CleanRooms
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
       attr_accessor policy: Types::AnalysisRulePolicy
+      attr_accessor collaboration_policy: Types::ConfiguredTableAssociationAnalysisRulePolicy
+      attr_accessor consolidated_policy: Types::ConsolidatedPolicy
       SENSITIVE: []
     end
 
@@ -118,12 +120,26 @@ module Aws::CleanRooms
 
     class AnalysisSource
       attr_accessor text: ::String
+      attr_accessor artifacts: Types::AnalysisTemplateArtifacts
       attr_accessor unknown: untyped
-      SENSITIVE: []
+      SENSITIVE: [:text]
 
       class Text < AnalysisSource
       end
+      class Artifacts < AnalysisSource
+      end
       class Unknown < AnalysisSource
+      end
+    end
+
+    class AnalysisSourceMetadata
+      attr_accessor artifacts: Types::AnalysisTemplateArtifactMetadata
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Artifacts < AnalysisSourceMetadata
+      end
+      class Unknown < AnalysisSourceMetadata
       end
     end
 
@@ -139,11 +155,30 @@ module Aws::CleanRooms
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
       attr_accessor schema: Types::AnalysisSchema
-      attr_accessor format: ("SQL")
+      attr_accessor format: ("SQL" | "PYSPARK_1_0")
       attr_accessor source: Types::AnalysisSource
+      attr_accessor source_metadata: Types::AnalysisSourceMetadata
       attr_accessor analysis_parameters: ::Array[Types::AnalysisParameter]
       attr_accessor validations: ::Array[Types::AnalysisTemplateValidationStatusDetail]
-      SENSITIVE: [:source]
+      SENSITIVE: []
+    end
+
+    class AnalysisTemplateArtifact
+      attr_accessor location: Types::S3Location
+      SENSITIVE: []
+    end
+
+    class AnalysisTemplateArtifactMetadata
+      attr_accessor entry_point_hash: Types::Hash
+      attr_accessor additional_artifact_hashes: ::Array[Types::Hash]
+      SENSITIVE: []
+    end
+
+    class AnalysisTemplateArtifacts
+      attr_accessor entry_point: Types::AnalysisTemplateArtifact
+      attr_accessor additional_artifacts: ::Array[Types::AnalysisTemplateArtifact]
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
     end
 
     class AnalysisTemplateSummary
@@ -238,6 +273,11 @@ module Aws::CleanRooms
       SENSITIVE: []
     end
 
+    class BilledJobResourceUtilization
+      attr_accessor units: ::Float
+      SENSITIVE: []
+    end
+
     class BilledResourceUtilization
       attr_accessor units: ::Float
       SENSITIVE: []
@@ -257,6 +297,7 @@ module Aws::CleanRooms
       attr_accessor membership_arn: ::String
       attr_accessor data_encryption_metadata: Types::DataEncryptionMetadata
       attr_accessor query_log_status: ("ENABLED" | "DISABLED")
+      attr_accessor job_log_status: ("ENABLED" | "DISABLED")
       attr_accessor analytics_engine: ("SPARK" | "CLEAN_ROOMS_SQL")
       SENSITIVE: []
     end
@@ -272,11 +313,12 @@ module Aws::CleanRooms
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
       attr_accessor schema: Types::AnalysisSchema
-      attr_accessor format: ("SQL")
+      attr_accessor format: ("SQL" | "PYSPARK_1_0")
       attr_accessor source: Types::AnalysisSource
+      attr_accessor source_metadata: Types::AnalysisSourceMetadata
       attr_accessor analysis_parameters: ::Array[Types::AnalysisParameter]
       attr_accessor validations: ::Array[Types::AnalysisTemplateValidationStatusDetail]
-      SENSITIVE: [:source]
+      SENSITIVE: []
     end
 
     class CollaborationAnalysisTemplateSummary
@@ -473,8 +515,9 @@ module Aws::CleanRooms
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
       attr_accessor analysis_rule_types: ::Array[("AGGREGATION" | "LIST" | "CUSTOM")]
-      attr_accessor analysis_method: ("DIRECT_QUERY")
+      attr_accessor analysis_method: ("DIRECT_QUERY" | "DIRECT_JOB" | "MULTIPLE")
       attr_accessor allowed_columns: ::Array[::String]
+      attr_accessor selected_analysis_methods: ::Array[("DIRECT_QUERY" | "DIRECT_JOB")]
       SENSITIVE: []
     end
 
@@ -598,6 +641,7 @@ module Aws::CleanRooms
       attr_accessor update_time: ::Time
       attr_accessor id: ::String
       attr_accessor arn: ::String
+      attr_accessor analysis_rule_types: ::Array[("AGGREGATION" | "LIST" | "CUSTOM")]
       SENSITIVE: []
     end
 
@@ -608,7 +652,8 @@ module Aws::CleanRooms
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
       attr_accessor analysis_rule_types: ::Array[("AGGREGATION" | "LIST" | "CUSTOM")]
-      attr_accessor analysis_method: ("DIRECT_QUERY")
+      attr_accessor analysis_method: ("DIRECT_QUERY" | "DIRECT_JOB" | "MULTIPLE")
+      attr_accessor selected_analysis_methods: ::Array[("DIRECT_QUERY" | "DIRECT_JOB")]
       SENSITIVE: []
     end
 
@@ -620,15 +665,79 @@ module Aws::CleanRooms
       SENSITIVE: []
     end
 
+    class ConsolidatedPolicy
+      attr_accessor v1: Types::ConsolidatedPolicyV1
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class V1 < ConsolidatedPolicy
+      end
+      class Unknown < ConsolidatedPolicy
+      end
+    end
+
+    class ConsolidatedPolicyAggregation
+      attr_accessor aggregate_columns: ::Array[Types::AggregateColumn]
+      attr_accessor join_columns: ::Array[::String]
+      attr_accessor join_required: ("QUERY_RUNNER")
+      attr_accessor allowed_join_operators: ::Array[("OR" | "AND")]
+      attr_accessor dimension_columns: ::Array[::String]
+      attr_accessor scalar_functions: ::Array[("ABS" | "CAST" | "CEILING" | "COALESCE" | "CONVERT" | "CURRENT_DATE" | "DATEADD" | "EXTRACT" | "FLOOR" | "GETDATE" | "LN" | "LOG" | "LOWER" | "ROUND" | "RTRIM" | "SQRT" | "SUBSTRING" | "TO_CHAR" | "TO_DATE" | "TO_NUMBER" | "TO_TIMESTAMP" | "TRIM" | "TRUNC" | "UPPER")]
+      attr_accessor output_constraints: ::Array[Types::AggregationConstraint]
+      attr_accessor additional_analyses: ("ALLOWED" | "REQUIRED" | "NOT_ALLOWED")
+      attr_accessor allowed_result_receivers: ::Array[::String]
+      attr_accessor allowed_additional_analyses: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ConsolidatedPolicyCustom
+      attr_accessor allowed_analyses: ::Array[::String]
+      attr_accessor allowed_analysis_providers: ::Array[::String]
+      attr_accessor additional_analyses: ("ALLOWED" | "REQUIRED" | "NOT_ALLOWED")
+      attr_accessor disallowed_output_columns: ::Array[::String]
+      attr_accessor differential_privacy: Types::DifferentialPrivacyConfiguration
+      attr_accessor allowed_result_receivers: ::Array[::String]
+      attr_accessor allowed_additional_analyses: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ConsolidatedPolicyList
+      attr_accessor join_columns: ::Array[::String]
+      attr_accessor allowed_join_operators: ::Array[("OR" | "AND")]
+      attr_accessor list_columns: ::Array[::String]
+      attr_accessor additional_analyses: ("ALLOWED" | "REQUIRED" | "NOT_ALLOWED")
+      attr_accessor allowed_result_receivers: ::Array[::String]
+      attr_accessor allowed_additional_analyses: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ConsolidatedPolicyV1
+      attr_accessor list: Types::ConsolidatedPolicyList
+      attr_accessor aggregation: Types::ConsolidatedPolicyAggregation
+      attr_accessor custom: Types::ConsolidatedPolicyCustom
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class List < ConsolidatedPolicyV1
+      end
+      class Aggregation < ConsolidatedPolicyV1
+      end
+      class Custom < ConsolidatedPolicyV1
+      end
+      class Unknown < ConsolidatedPolicyV1
+      end
+    end
+
     class CreateAnalysisTemplateInput
       attr_accessor description: ::String
       attr_accessor membership_identifier: ::String
       attr_accessor name: ::String
-      attr_accessor format: ("SQL")
+      attr_accessor format: ("SQL" | "PYSPARK_1_0")
       attr_accessor source: Types::AnalysisSource
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor analysis_parameters: ::Array[Types::AnalysisParameter]
-      SENSITIVE: [:source]
+      attr_accessor schema: Types::AnalysisSchema
+      SENSITIVE: []
     end
 
     class CreateAnalysisTemplateOutput
@@ -640,11 +749,12 @@ module Aws::CleanRooms
       attr_accessor members: ::Array[Types::MemberSpecification]
       attr_accessor name: ::String
       attr_accessor description: ::String
-      attr_accessor creator_member_abilities: ::Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS")]
+      attr_accessor creator_member_abilities: ::Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS" | "CAN_RUN_JOB")]
       attr_accessor creator_ml_member_abilities: Types::MLMemberAbilities
       attr_accessor creator_display_name: ::String
       attr_accessor data_encryption_metadata: Types::DataEncryptionMetadata
       attr_accessor query_log_status: ("ENABLED" | "DISABLED")
+      attr_accessor job_log_status: ("ENABLED" | "DISABLED")
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor creator_payment_configuration: Types::PaymentConfiguration
       attr_accessor analytics_engine: ("SPARK" | "CLEAN_ROOMS_SQL")
@@ -716,7 +826,8 @@ module Aws::CleanRooms
       attr_accessor description: ::String
       attr_accessor table_reference: Types::TableReference
       attr_accessor allowed_columns: ::Array[::String]
-      attr_accessor analysis_method: ("DIRECT_QUERY")
+      attr_accessor analysis_method: ("DIRECT_QUERY" | "DIRECT_JOB" | "MULTIPLE")
+      attr_accessor selected_analysis_methods: ::Array[("DIRECT_QUERY" | "DIRECT_JOB")]
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -759,8 +870,10 @@ module Aws::CleanRooms
     class CreateMembershipInput
       attr_accessor collaboration_identifier: ::String
       attr_accessor query_log_status: ("ENABLED" | "DISABLED")
+      attr_accessor job_log_status: ("ENABLED" | "DISABLED")
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor default_result_configuration: Types::MembershipProtectedQueryResultConfiguration
+      attr_accessor default_job_result_configuration: Types::MembershipProtectedJobResultConfiguration
       attr_accessor payment_configuration: Types::MembershipPaymentConfiguration
       SENSITIVE: []
     end
@@ -1138,6 +1251,17 @@ module Aws::CleanRooms
       SENSITIVE: []
     end
 
+    class GetProtectedJobInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor protected_job_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetProtectedJobOutput
+      attr_accessor protected_job: Types::ProtectedJob
+      SENSITIVE: []
+    end
+
     class GetProtectedQueryInput
       attr_accessor membership_identifier: ::String
       attr_accessor protected_query_identifier: ::String
@@ -1175,6 +1299,11 @@ module Aws::CleanRooms
     class GlueTableReference
       attr_accessor table_name: ::String
       attr_accessor database_name: ::String
+      SENSITIVE: []
+    end
+
+    class Hash
+      attr_accessor sha256: ::String
       SENSITIVE: []
     end
 
@@ -1289,6 +1418,11 @@ module Aws::CleanRooms
 
     class InternalServerException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class JobComputePaymentConfig
+      attr_accessor is_responsible: bool
       SENSITIVE: []
     end
 
@@ -1501,6 +1635,20 @@ module Aws::CleanRooms
       SENSITIVE: []
     end
 
+    class ListProtectedJobsInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor status: ("SUBMITTED" | "STARTED" | "CANCELLED" | "CANCELLING" | "FAILED" | "SUCCESS")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListProtectedJobsOutput
+      attr_accessor next_token: ::String
+      attr_accessor protected_jobs: ::Array[Types::ProtectedJobSummary]
+      SENSITIVE: []
+    end
+
     class ListProtectedQueriesInput
       attr_accessor membership_identifier: ::String
       attr_accessor status: ("SUBMITTED" | "STARTED" | "CANCELLED" | "CANCELLING" | "FAILED" | "SUCCESS" | "TIMED_OUT")
@@ -1552,7 +1700,7 @@ module Aws::CleanRooms
 
     class MemberSpecification
       attr_accessor account_id: ::String
-      attr_accessor member_abilities: ::Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS")]
+      attr_accessor member_abilities: ::Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS" | "CAN_RUN_JOB")]
       attr_accessor ml_member_abilities: Types::MLMemberAbilities
       attr_accessor display_name: ::String
       attr_accessor payment_configuration: Types::PaymentConfiguration
@@ -1563,7 +1711,7 @@ module Aws::CleanRooms
       attr_accessor account_id: ::String
       attr_accessor status: ("INVITED" | "ACTIVE" | "LEFT" | "REMOVED")
       attr_accessor display_name: ::String
-      attr_accessor abilities: ::Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS")]
+      attr_accessor abilities: ::Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS" | "CAN_RUN_JOB")]
       attr_accessor ml_abilities: Types::MLMemberAbilities
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
@@ -1584,11 +1732,18 @@ module Aws::CleanRooms
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
       attr_accessor status: ("ACTIVE" | "REMOVED" | "COLLABORATION_DELETED")
-      attr_accessor member_abilities: ::Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS")]
+      attr_accessor member_abilities: ::Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS" | "CAN_RUN_JOB")]
       attr_accessor ml_member_abilities: Types::MLMemberAbilities
       attr_accessor query_log_status: ("ENABLED" | "DISABLED")
+      attr_accessor job_log_status: ("ENABLED" | "DISABLED")
       attr_accessor default_result_configuration: Types::MembershipProtectedQueryResultConfiguration
+      attr_accessor default_job_result_configuration: Types::MembershipProtectedJobResultConfiguration
       attr_accessor payment_configuration: Types::MembershipPaymentConfiguration
+      SENSITIVE: []
+    end
+
+    class MembershipJobComputePaymentConfig
+      attr_accessor is_responsible: bool
       SENSITIVE: []
     end
 
@@ -1611,6 +1766,24 @@ module Aws::CleanRooms
     class MembershipPaymentConfiguration
       attr_accessor query_compute: Types::MembershipQueryComputePaymentConfig
       attr_accessor machine_learning: Types::MembershipMLPaymentConfig
+      attr_accessor job_compute: Types::MembershipJobComputePaymentConfig
+      SENSITIVE: []
+    end
+
+    class MembershipProtectedJobOutputConfiguration
+      attr_accessor s3: Types::ProtectedJobS3OutputConfigurationInput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class S3 < MembershipProtectedJobOutputConfiguration
+      end
+      class Unknown < MembershipProtectedJobOutputConfiguration
+      end
+    end
+
+    class MembershipProtectedJobResultConfiguration
+      attr_accessor output_configuration: Types::MembershipProtectedJobOutputConfiguration
+      attr_accessor role_arn: ::String
       SENSITIVE: []
     end
 
@@ -1647,7 +1820,7 @@ module Aws::CleanRooms
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
       attr_accessor status: ("ACTIVE" | "REMOVED" | "COLLABORATION_DELETED")
-      attr_accessor member_abilities: ::Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS")]
+      attr_accessor member_abilities: ::Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS" | "CAN_RUN_JOB")]
       attr_accessor ml_member_abilities: Types::MLMemberAbilities
       attr_accessor payment_configuration: Types::MembershipPaymentConfiguration
       SENSITIVE: []
@@ -1666,6 +1839,7 @@ module Aws::CleanRooms
     class PaymentConfiguration
       attr_accessor query_compute: Types::QueryComputePaymentConfig
       attr_accessor machine_learning: Types::MLPaymentConfig
+      attr_accessor job_compute: Types::JobComputePaymentConfig
       SENSITIVE: []
     end
 
@@ -1798,6 +1972,155 @@ module Aws::CleanRooms
       end
       class Unknown < PrivacyImpact
       end
+    end
+
+    class ProtectedJob
+      attr_accessor id: ::String
+      attr_accessor membership_id: ::String
+      attr_accessor membership_arn: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor job_parameters: Types::ProtectedJobParameters
+      attr_accessor status: ("SUBMITTED" | "STARTED" | "CANCELLED" | "CANCELLING" | "FAILED" | "SUCCESS")
+      attr_accessor result_configuration: Types::ProtectedJobResultConfigurationOutput
+      attr_accessor statistics: Types::ProtectedJobStatistics
+      attr_accessor result: Types::ProtectedJobResult
+      attr_accessor error: Types::ProtectedJobError
+      SENSITIVE: []
+    end
+
+    class ProtectedJobConfigurationDetails
+      attr_accessor direct_analysis_configuration_details: Types::ProtectedJobDirectAnalysisConfigurationDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class DirectAnalysisConfigurationDetails < ProtectedJobConfigurationDetails
+      end
+      class Unknown < ProtectedJobConfigurationDetails
+      end
+    end
+
+    class ProtectedJobDirectAnalysisConfigurationDetails
+      attr_accessor receiver_account_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ProtectedJobError
+      attr_accessor message: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class ProtectedJobMemberOutputConfigurationInput
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ProtectedJobMemberOutputConfigurationOutput
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ProtectedJobOutput
+      attr_accessor s3: Types::ProtectedJobS3Output
+      attr_accessor member_list: ::Array[Types::ProtectedJobSingleMemberOutput]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class S3 < ProtectedJobOutput
+      end
+      class MemberList < ProtectedJobOutput
+      end
+      class Unknown < ProtectedJobOutput
+      end
+    end
+
+    class ProtectedJobOutputConfigurationInput
+      attr_accessor member: Types::ProtectedJobMemberOutputConfigurationInput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Member < ProtectedJobOutputConfigurationInput
+      end
+      class Unknown < ProtectedJobOutputConfigurationInput
+      end
+    end
+
+    class ProtectedJobOutputConfigurationOutput
+      attr_accessor s3: Types::ProtectedJobS3OutputConfigurationOutput
+      attr_accessor member: Types::ProtectedJobMemberOutputConfigurationOutput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class S3 < ProtectedJobOutputConfigurationOutput
+      end
+      class Member < ProtectedJobOutputConfigurationOutput
+      end
+      class Unknown < ProtectedJobOutputConfigurationOutput
+      end
+    end
+
+    class ProtectedJobParameters
+      attr_accessor analysis_template_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ProtectedJobReceiverConfiguration
+      attr_accessor analysis_type: ("DIRECT_ANALYSIS")
+      attr_accessor configuration_details: Types::ProtectedJobConfigurationDetails
+      SENSITIVE: []
+    end
+
+    class ProtectedJobResult
+      attr_accessor output: Types::ProtectedJobOutput
+      SENSITIVE: []
+    end
+
+    class ProtectedJobResultConfigurationInput
+      attr_accessor output_configuration: Types::ProtectedJobOutputConfigurationInput
+      SENSITIVE: []
+    end
+
+    class ProtectedJobResultConfigurationOutput
+      attr_accessor output_configuration: Types::ProtectedJobOutputConfigurationOutput
+      SENSITIVE: []
+    end
+
+    class ProtectedJobS3Output
+      attr_accessor location: ::String
+      SENSITIVE: []
+    end
+
+    class ProtectedJobS3OutputConfigurationInput
+      attr_accessor bucket: ::String
+      attr_accessor key_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class ProtectedJobS3OutputConfigurationOutput
+      attr_accessor bucket: ::String
+      attr_accessor key_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class ProtectedJobSingleMemberOutput
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ProtectedJobStatistics
+      attr_accessor total_duration_in_millis: ::Integer
+      attr_accessor billed_resource_utilization: Types::BilledJobResourceUtilization
+      SENSITIVE: []
+    end
+
+    class ProtectedJobSummary
+      attr_accessor id: ::String
+      attr_accessor membership_id: ::String
+      attr_accessor membership_arn: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor status: ("SUBMITTED" | "STARTED" | "CANCELLED" | "CANCELLING" | "FAILED" | "SUCCESS")
+      attr_accessor receiver_configurations: ::Array[Types::ProtectedJobReceiverConfiguration]
+      SENSITIVE: []
     end
 
     class ProtectedQuery
@@ -1940,11 +2263,18 @@ module Aws::CleanRooms
       SENSITIVE: []
     end
 
+    class S3Location
+      attr_accessor bucket: ::String
+      attr_accessor key: ::String
+      SENSITIVE: []
+    end
+
     class Schema
       attr_accessor columns: ::Array[Types::Column]
       attr_accessor partition_keys: ::Array[Types::Column]
       attr_accessor analysis_rule_types: ::Array[("AGGREGATION" | "LIST" | "CUSTOM" | "ID_MAPPING_TABLE")]
-      attr_accessor analysis_method: ("DIRECT_QUERY")
+      attr_accessor analysis_method: ("DIRECT_QUERY" | "DIRECT_JOB" | "MULTIPLE")
+      attr_accessor selected_analysis_methods: ::Array[("DIRECT_QUERY" | "DIRECT_JOB")]
       attr_accessor creator_account_id: ::String
       attr_accessor name: ::String
       attr_accessor collaboration_id: ::String
@@ -1988,7 +2318,8 @@ module Aws::CleanRooms
       attr_accessor collaboration_id: ::String
       attr_accessor collaboration_arn: ::String
       attr_accessor analysis_rule_types: ::Array[("AGGREGATION" | "LIST" | "CUSTOM" | "ID_MAPPING_TABLE")]
-      attr_accessor analysis_method: ("DIRECT_QUERY")
+      attr_accessor analysis_method: ("DIRECT_QUERY" | "DIRECT_JOB" | "MULTIPLE")
+      attr_accessor selected_analysis_methods: ::Array[("DIRECT_QUERY" | "DIRECT_JOB")]
       SENSITIVE: []
     end
 
@@ -2034,6 +2365,19 @@ module Aws::CleanRooms
     class SnowflakeTableSchemaV1
       attr_accessor column_name: ::String
       attr_accessor column_type: ::String
+      SENSITIVE: []
+    end
+
+    class StartProtectedJobInput
+      attr_accessor type: ("PYSPARK")
+      attr_accessor membership_identifier: ::String
+      attr_accessor job_parameters: Types::ProtectedJobParameters
+      attr_accessor result_configuration: Types::ProtectedJobResultConfigurationInput
+      SENSITIVE: []
+    end
+
+    class StartProtectedJobOutput
+      attr_accessor protected_job: Types::ProtectedJob
       SENSITIVE: []
     end
 
@@ -2170,6 +2514,8 @@ module Aws::CleanRooms
       attr_accessor configured_table_identifier: ::String
       attr_accessor name: ::String
       attr_accessor description: ::String
+      attr_accessor analysis_method: ("DIRECT_QUERY" | "DIRECT_JOB" | "MULTIPLE")
+      attr_accessor selected_analysis_methods: ::Array[("DIRECT_QUERY" | "DIRECT_JOB")]
       SENSITIVE: []
     end
 
@@ -2208,7 +2554,9 @@ module Aws::CleanRooms
     class UpdateMembershipInput
       attr_accessor membership_identifier: ::String
       attr_accessor query_log_status: ("ENABLED" | "DISABLED")
+      attr_accessor job_log_status: ("ENABLED" | "DISABLED")
       attr_accessor default_result_configuration: Types::MembershipProtectedQueryResultConfiguration
+      attr_accessor default_job_result_configuration: Types::MembershipProtectedJobResultConfiguration
       SENSITIVE: []
     end
 
@@ -2227,6 +2575,18 @@ module Aws::CleanRooms
 
     class UpdatePrivacyBudgetTemplateOutput
       attr_accessor privacy_budget_template: Types::PrivacyBudgetTemplate
+      SENSITIVE: []
+    end
+
+    class UpdateProtectedJobInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor protected_job_identifier: ::String
+      attr_accessor target_status: ("CANCELLED")
+      SENSITIVE: []
+    end
+
+    class UpdateProtectedJobOutput
+      attr_accessor protected_job: Types::ProtectedJob
       SENSITIVE: []
     end
 

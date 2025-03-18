@@ -51,10 +51,15 @@ module Aws::CleanRooms
     AnalysisRuleTypeList = Shapes::ListShape.new(name: 'AnalysisRuleTypeList')
     AnalysisSchema = Shapes::StructureShape.new(name: 'AnalysisSchema')
     AnalysisSource = Shapes::UnionShape.new(name: 'AnalysisSource')
+    AnalysisSourceMetadata = Shapes::UnionShape.new(name: 'AnalysisSourceMetadata')
     AnalysisTemplate = Shapes::StructureShape.new(name: 'AnalysisTemplate')
     AnalysisTemplateArn = Shapes::StringShape.new(name: 'AnalysisTemplateArn')
     AnalysisTemplateArnList = Shapes::ListShape.new(name: 'AnalysisTemplateArnList')
     AnalysisTemplateArnOrQueryWildcard = Shapes::StringShape.new(name: 'AnalysisTemplateArnOrQueryWildcard')
+    AnalysisTemplateArtifact = Shapes::StructureShape.new(name: 'AnalysisTemplateArtifact')
+    AnalysisTemplateArtifactList = Shapes::ListShape.new(name: 'AnalysisTemplateArtifactList')
+    AnalysisTemplateArtifactMetadata = Shapes::StructureShape.new(name: 'AnalysisTemplateArtifactMetadata')
+    AnalysisTemplateArtifacts = Shapes::StructureShape.new(name: 'AnalysisTemplateArtifacts')
     AnalysisTemplateIdentifier = Shapes::StringShape.new(name: 'AnalysisTemplateIdentifier')
     AnalysisTemplateSummary = Shapes::StructureShape.new(name: 'AnalysisTemplateSummary')
     AnalysisTemplateSummaryList = Shapes::ListShape.new(name: 'AnalysisTemplateSummaryList')
@@ -84,6 +89,7 @@ module Aws::CleanRooms
     BatchGetSchemaErrorList = Shapes::ListShape.new(name: 'BatchGetSchemaErrorList')
     BatchGetSchemaInput = Shapes::StructureShape.new(name: 'BatchGetSchemaInput')
     BatchGetSchemaOutput = Shapes::StructureShape.new(name: 'BatchGetSchemaOutput')
+    BilledJobResourceUtilization = Shapes::StructureShape.new(name: 'BilledJobResourceUtilization')
     BilledResourceUtilization = Shapes::StructureShape.new(name: 'BilledResourceUtilization')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CleanroomsArn = Shapes::StringShape.new(name: 'CleanroomsArn')
@@ -101,6 +107,7 @@ module Aws::CleanRooms
     CollaborationIdNamespaceAssociationSummary = Shapes::StructureShape.new(name: 'CollaborationIdNamespaceAssociationSummary')
     CollaborationIdNamespaceAssociationSummaryList = Shapes::ListShape.new(name: 'CollaborationIdNamespaceAssociationSummaryList')
     CollaborationIdentifier = Shapes::StringShape.new(name: 'CollaborationIdentifier')
+    CollaborationJobLogStatus = Shapes::StringShape.new(name: 'CollaborationJobLogStatus')
     CollaborationName = Shapes::StringShape.new(name: 'CollaborationName')
     CollaborationPrivacyBudgetSummary = Shapes::StructureShape.new(name: 'CollaborationPrivacyBudgetSummary')
     CollaborationPrivacyBudgetSummaryList = Shapes::ListShape.new(name: 'CollaborationPrivacyBudgetSummaryList')
@@ -148,6 +155,15 @@ module Aws::CleanRooms
     ConfiguredTableSummaryList = Shapes::ListShape.new(name: 'ConfiguredTableSummaryList')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConflictExceptionReason = Shapes::StringShape.new(name: 'ConflictExceptionReason')
+    ConsolidatedPolicy = Shapes::UnionShape.new(name: 'ConsolidatedPolicy')
+    ConsolidatedPolicyAggregation = Shapes::StructureShape.new(name: 'ConsolidatedPolicyAggregation')
+    ConsolidatedPolicyAggregationAggregateColumnsList = Shapes::ListShape.new(name: 'ConsolidatedPolicyAggregationAggregateColumnsList')
+    ConsolidatedPolicyCustom = Shapes::StructureShape.new(name: 'ConsolidatedPolicyCustom')
+    ConsolidatedPolicyCustomAllowedAnalysesList = Shapes::ListShape.new(name: 'ConsolidatedPolicyCustomAllowedAnalysesList')
+    ConsolidatedPolicyCustomAllowedAnalysisProvidersList = Shapes::ListShape.new(name: 'ConsolidatedPolicyCustomAllowedAnalysisProvidersList')
+    ConsolidatedPolicyList = Shapes::StructureShape.new(name: 'ConsolidatedPolicyList')
+    ConsolidatedPolicyListJoinColumnsList = Shapes::ListShape.new(name: 'ConsolidatedPolicyListJoinColumnsList')
+    ConsolidatedPolicyV1 = Shapes::UnionShape.new(name: 'ConsolidatedPolicyV1')
     CreateAnalysisTemplateInput = Shapes::StructureShape.new(name: 'CreateAnalysisTemplateInput')
     CreateAnalysisTemplateOutput = Shapes::StructureShape.new(name: 'CreateAnalysisTemplateOutput')
     CreateCollaborationInput = Shapes::StructureShape.new(name: 'CreateCollaborationInput')
@@ -257,6 +273,8 @@ module Aws::CleanRooms
     GetMembershipOutput = Shapes::StructureShape.new(name: 'GetMembershipOutput')
     GetPrivacyBudgetTemplateInput = Shapes::StructureShape.new(name: 'GetPrivacyBudgetTemplateInput')
     GetPrivacyBudgetTemplateOutput = Shapes::StructureShape.new(name: 'GetPrivacyBudgetTemplateOutput')
+    GetProtectedJobInput = Shapes::StructureShape.new(name: 'GetProtectedJobInput')
+    GetProtectedJobOutput = Shapes::StructureShape.new(name: 'GetProtectedJobOutput')
     GetProtectedQueryInput = Shapes::StructureShape.new(name: 'GetProtectedQueryInput')
     GetProtectedQueryOutput = Shapes::StructureShape.new(name: 'GetProtectedQueryOutput')
     GetSchemaAnalysisRuleInput = Shapes::StructureShape.new(name: 'GetSchemaAnalysisRuleInput')
@@ -266,6 +284,8 @@ module Aws::CleanRooms
     GlueDatabaseName = Shapes::StringShape.new(name: 'GlueDatabaseName')
     GlueTableName = Shapes::StringShape.new(name: 'GlueTableName')
     GlueTableReference = Shapes::StructureShape.new(name: 'GlueTableReference')
+    Hash = Shapes::StructureShape.new(name: 'Hash')
+    HashList = Shapes::ListShape.new(name: 'HashList')
     IdMappingConfig = Shapes::StructureShape.new(name: 'IdMappingConfig')
     IdMappingTable = Shapes::StructureShape.new(name: 'IdMappingTable')
     IdMappingTableArn = Shapes::StringShape.new(name: 'IdMappingTableArn')
@@ -289,6 +309,7 @@ module Aws::CleanRooms
     IdNamespaceAssociationSummaryList = Shapes::ListShape.new(name: 'IdNamespaceAssociationSummaryList')
     IdNamespaceType = Shapes::StringShape.new(name: 'IdNamespaceType')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    JobComputePaymentConfig = Shapes::StructureShape.new(name: 'JobComputePaymentConfig')
     JoinOperator = Shapes::StringShape.new(name: 'JoinOperator')
     JoinOperatorsList = Shapes::ListShape.new(name: 'JoinOperatorsList')
     JoinRequiredOption = Shapes::StringShape.new(name: 'JoinRequiredOption')
@@ -326,6 +347,8 @@ module Aws::CleanRooms
     ListPrivacyBudgetTemplatesOutput = Shapes::StructureShape.new(name: 'ListPrivacyBudgetTemplatesOutput')
     ListPrivacyBudgetsInput = Shapes::StructureShape.new(name: 'ListPrivacyBudgetsInput')
     ListPrivacyBudgetsOutput = Shapes::StructureShape.new(name: 'ListPrivacyBudgetsOutput')
+    ListProtectedJobsInput = Shapes::StructureShape.new(name: 'ListProtectedJobsInput')
+    ListProtectedJobsOutput = Shapes::StructureShape.new(name: 'ListProtectedJobsOutput')
     ListProtectedQueriesInput = Shapes::StructureShape.new(name: 'ListProtectedQueriesInput')
     ListProtectedQueriesOutput = Shapes::StructureShape.new(name: 'ListProtectedQueriesOutput')
     ListSchemasInput = Shapes::StructureShape.new(name: 'ListSchemasInput')
@@ -346,10 +369,14 @@ module Aws::CleanRooms
     Membership = Shapes::StructureShape.new(name: 'Membership')
     MembershipArn = Shapes::StringShape.new(name: 'MembershipArn')
     MembershipIdentifier = Shapes::StringShape.new(name: 'MembershipIdentifier')
+    MembershipJobComputePaymentConfig = Shapes::StructureShape.new(name: 'MembershipJobComputePaymentConfig')
+    MembershipJobLogStatus = Shapes::StringShape.new(name: 'MembershipJobLogStatus')
     MembershipMLPaymentConfig = Shapes::StructureShape.new(name: 'MembershipMLPaymentConfig')
     MembershipModelInferencePaymentConfig = Shapes::StructureShape.new(name: 'MembershipModelInferencePaymentConfig')
     MembershipModelTrainingPaymentConfig = Shapes::StructureShape.new(name: 'MembershipModelTrainingPaymentConfig')
     MembershipPaymentConfiguration = Shapes::StructureShape.new(name: 'MembershipPaymentConfiguration')
+    MembershipProtectedJobOutputConfiguration = Shapes::UnionShape.new(name: 'MembershipProtectedJobOutputConfiguration')
+    MembershipProtectedJobResultConfiguration = Shapes::StructureShape.new(name: 'MembershipProtectedJobResultConfiguration')
     MembershipProtectedQueryOutputConfiguration = Shapes::UnionShape.new(name: 'MembershipProtectedQueryOutputConfiguration')
     MembershipProtectedQueryResultConfiguration = Shapes::StructureShape.new(name: 'MembershipProtectedQueryResultConfiguration')
     MembershipQueryComputePaymentConfig = Shapes::StructureShape.new(name: 'MembershipQueryComputePaymentConfig')
@@ -384,6 +411,36 @@ module Aws::CleanRooms
     PrivacyBudgetTemplateUpdateParameters = Shapes::UnionShape.new(name: 'PrivacyBudgetTemplateUpdateParameters')
     PrivacyBudgetType = Shapes::StringShape.new(name: 'PrivacyBudgetType')
     PrivacyImpact = Shapes::UnionShape.new(name: 'PrivacyImpact')
+    ProtectedJob = Shapes::StructureShape.new(name: 'ProtectedJob')
+    ProtectedJobAnalysisType = Shapes::StringShape.new(name: 'ProtectedJobAnalysisType')
+    ProtectedJobConfigurationDetails = Shapes::UnionShape.new(name: 'ProtectedJobConfigurationDetails')
+    ProtectedJobDirectAnalysisConfigurationDetails = Shapes::StructureShape.new(name: 'ProtectedJobDirectAnalysisConfigurationDetails')
+    ProtectedJobError = Shapes::StructureShape.new(name: 'ProtectedJobError')
+    ProtectedJobIdentifier = Shapes::StringShape.new(name: 'ProtectedJobIdentifier')
+    ProtectedJobMemberOutputConfigurationInput = Shapes::StructureShape.new(name: 'ProtectedJobMemberOutputConfigurationInput')
+    ProtectedJobMemberOutputConfigurationOutput = Shapes::StructureShape.new(name: 'ProtectedJobMemberOutputConfigurationOutput')
+    ProtectedJobMemberOutputList = Shapes::ListShape.new(name: 'ProtectedJobMemberOutputList')
+    ProtectedJobOutput = Shapes::UnionShape.new(name: 'ProtectedJobOutput')
+    ProtectedJobOutputConfigurationInput = Shapes::UnionShape.new(name: 'ProtectedJobOutputConfigurationInput')
+    ProtectedJobOutputConfigurationOutput = Shapes::UnionShape.new(name: 'ProtectedJobOutputConfigurationOutput')
+    ProtectedJobParameters = Shapes::StructureShape.new(name: 'ProtectedJobParameters')
+    ProtectedJobReceiverAccountIds = Shapes::ListShape.new(name: 'ProtectedJobReceiverAccountIds')
+    ProtectedJobReceiverConfiguration = Shapes::StructureShape.new(name: 'ProtectedJobReceiverConfiguration')
+    ProtectedJobReceiverConfigurations = Shapes::ListShape.new(name: 'ProtectedJobReceiverConfigurations')
+    ProtectedJobResult = Shapes::StructureShape.new(name: 'ProtectedJobResult')
+    ProtectedJobResultConfigurationInput = Shapes::StructureShape.new(name: 'ProtectedJobResultConfigurationInput')
+    ProtectedJobResultConfigurationOutput = Shapes::StructureShape.new(name: 'ProtectedJobResultConfigurationOutput')
+    ProtectedJobS3Output = Shapes::StructureShape.new(name: 'ProtectedJobS3Output')
+    ProtectedJobS3OutputConfigurationInput = Shapes::StructureShape.new(name: 'ProtectedJobS3OutputConfigurationInput')
+    ProtectedJobS3OutputConfigurationInputBucketString = Shapes::StringShape.new(name: 'ProtectedJobS3OutputConfigurationInputBucketString')
+    ProtectedJobS3OutputConfigurationOutput = Shapes::StructureShape.new(name: 'ProtectedJobS3OutputConfigurationOutput')
+    ProtectedJobS3OutputConfigurationOutputBucketString = Shapes::StringShape.new(name: 'ProtectedJobS3OutputConfigurationOutputBucketString')
+    ProtectedJobSingleMemberOutput = Shapes::StructureShape.new(name: 'ProtectedJobSingleMemberOutput')
+    ProtectedJobStatistics = Shapes::StructureShape.new(name: 'ProtectedJobStatistics')
+    ProtectedJobStatus = Shapes::StringShape.new(name: 'ProtectedJobStatus')
+    ProtectedJobSummary = Shapes::StructureShape.new(name: 'ProtectedJobSummary')
+    ProtectedJobSummaryList = Shapes::ListShape.new(name: 'ProtectedJobSummaryList')
+    ProtectedJobType = Shapes::StringShape.new(name: 'ProtectedJobType')
     ProtectedQuery = Shapes::StructureShape.new(name: 'ProtectedQuery')
     ProtectedQueryError = Shapes::StructureShape.new(name: 'ProtectedQueryError')
     ProtectedQueryIdentifier = Shapes::StringShape.new(name: 'ProtectedQueryIdentifier')
@@ -418,6 +475,9 @@ module Aws::CleanRooms
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ResultFormat = Shapes::StringShape.new(name: 'ResultFormat')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    S3Location = Shapes::StructureShape.new(name: 'S3Location')
+    S3LocationBucketString = Shapes::StringShape.new(name: 'S3LocationBucketString')
+    S3LocationKeyString = Shapes::StringShape.new(name: 'S3LocationKeyString')
     ScalarFunctions = Shapes::StringShape.new(name: 'ScalarFunctions')
     ScalarFunctionsList = Shapes::ListShape.new(name: 'ScalarFunctionsList')
     Schema = Shapes::StructureShape.new(name: 'Schema')
@@ -438,6 +498,8 @@ module Aws::CleanRooms
     SchemaType = Shapes::StringShape.new(name: 'SchemaType')
     SchemaTypeProperties = Shapes::UnionShape.new(name: 'SchemaTypeProperties')
     SecretsManagerArn = Shapes::StringShape.new(name: 'SecretsManagerArn')
+    SelectedAnalysisMethod = Shapes::StringShape.new(name: 'SelectedAnalysisMethod')
+    SelectedAnalysisMethods = Shapes::ListShape.new(name: 'SelectedAnalysisMethods')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SnowflakeAccountIdentifier = Shapes::StringShape.new(name: 'SnowflakeAccountIdentifier')
     SnowflakeDatabaseName = Shapes::StringShape.new(name: 'SnowflakeDatabaseName')
@@ -447,6 +509,8 @@ module Aws::CleanRooms
     SnowflakeTableSchema = Shapes::UnionShape.new(name: 'SnowflakeTableSchema')
     SnowflakeTableSchemaList = Shapes::ListShape.new(name: 'SnowflakeTableSchemaList')
     SnowflakeTableSchemaV1 = Shapes::StructureShape.new(name: 'SnowflakeTableSchemaV1')
+    StartProtectedJobInput = Shapes::StructureShape.new(name: 'StartProtectedJobInput')
+    StartProtectedJobOutput = Shapes::StructureShape.new(name: 'StartProtectedJobOutput')
     StartProtectedQueryInput = Shapes::StructureShape.new(name: 'StartProtectedQueryInput')
     StartProtectedQueryOutput = Shapes::StructureShape.new(name: 'StartProtectedQueryOutput')
     String = Shapes::StringShape.new(name: 'String')
@@ -460,6 +524,7 @@ module Aws::CleanRooms
     TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
     TagResourceOutput = Shapes::StructureShape.new(name: 'TagResourceOutput')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TargetProtectedJobStatus = Shapes::StringShape.new(name: 'TargetProtectedJobStatus')
     TargetProtectedQueryStatus = Shapes::StringShape.new(name: 'TargetProtectedQueryStatus')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
@@ -488,6 +553,8 @@ module Aws::CleanRooms
     UpdateMembershipOutput = Shapes::StructureShape.new(name: 'UpdateMembershipOutput')
     UpdatePrivacyBudgetTemplateInput = Shapes::StructureShape.new(name: 'UpdatePrivacyBudgetTemplateInput')
     UpdatePrivacyBudgetTemplateOutput = Shapes::StructureShape.new(name: 'UpdatePrivacyBudgetTemplateOutput')
+    UpdateProtectedJobInput = Shapes::StructureShape.new(name: 'UpdateProtectedJobInput')
+    UpdateProtectedJobOutput = Shapes::StructureShape.new(name: 'UpdateProtectedJobOutput')
     UpdateProtectedQueryInput = Shapes::StructureShape.new(name: 'UpdateProtectedQueryInput')
     UpdateProtectedQueryOutput = Shapes::StructureShape.new(name: 'UpdateProtectedQueryOutput')
     UsersNoisePerQuery = Shapes::IntegerShape.new(name: 'UsersNoisePerQuery')
@@ -535,6 +602,8 @@ module Aws::CleanRooms
     AnalysisRule.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
     AnalysisRule.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
     AnalysisRule.add_member(:policy, Shapes::ShapeRef.new(shape: AnalysisRulePolicy, required: true, location_name: "policy"))
+    AnalysisRule.add_member(:collaboration_policy, Shapes::ShapeRef.new(shape: ConfiguredTableAssociationAnalysisRulePolicy, location_name: "collaborationPolicy"))
+    AnalysisRule.add_member(:consolidated_policy, Shapes::ShapeRef.new(shape: ConsolidatedPolicy, location_name: "consolidatedPolicy"))
     AnalysisRule.struct_class = Types::AnalysisRule
 
     AnalysisRuleAggregation.add_member(:aggregate_columns, Shapes::ShapeRef.new(shape: AnalysisRuleAggregationAggregateColumnsList, required: true, location_name: "aggregateColumns"))
@@ -601,10 +670,18 @@ module Aws::CleanRooms
     AnalysisSchema.struct_class = Types::AnalysisSchema
 
     AnalysisSource.add_member(:text, Shapes::ShapeRef.new(shape: AnalysisTemplateText, location_name: "text"))
+    AnalysisSource.add_member(:artifacts, Shapes::ShapeRef.new(shape: AnalysisTemplateArtifacts, location_name: "artifacts"))
     AnalysisSource.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     AnalysisSource.add_member_subclass(:text, Types::AnalysisSource::Text)
+    AnalysisSource.add_member_subclass(:artifacts, Types::AnalysisSource::Artifacts)
     AnalysisSource.add_member_subclass(:unknown, Types::AnalysisSource::Unknown)
     AnalysisSource.struct_class = Types::AnalysisSource
+
+    AnalysisSourceMetadata.add_member(:artifacts, Shapes::ShapeRef.new(shape: AnalysisTemplateArtifactMetadata, location_name: "artifacts"))
+    AnalysisSourceMetadata.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    AnalysisSourceMetadata.add_member_subclass(:artifacts, Types::AnalysisSourceMetadata::Artifacts)
+    AnalysisSourceMetadata.add_member_subclass(:unknown, Types::AnalysisSourceMetadata::Unknown)
+    AnalysisSourceMetadata.struct_class = Types::AnalysisSourceMetadata
 
     AnalysisTemplate.add_member(:id, Shapes::ShapeRef.new(shape: AnalysisTemplateIdentifier, required: true, location_name: "id"))
     AnalysisTemplate.add_member(:arn, Shapes::ShapeRef.new(shape: AnalysisTemplateArn, required: true, location_name: "arn"))
@@ -619,11 +696,26 @@ module Aws::CleanRooms
     AnalysisTemplate.add_member(:schema, Shapes::ShapeRef.new(shape: AnalysisSchema, required: true, location_name: "schema"))
     AnalysisTemplate.add_member(:format, Shapes::ShapeRef.new(shape: AnalysisFormat, required: true, location_name: "format"))
     AnalysisTemplate.add_member(:source, Shapes::ShapeRef.new(shape: AnalysisSource, required: true, location_name: "source"))
+    AnalysisTemplate.add_member(:source_metadata, Shapes::ShapeRef.new(shape: AnalysisSourceMetadata, location_name: "sourceMetadata"))
     AnalysisTemplate.add_member(:analysis_parameters, Shapes::ShapeRef.new(shape: AnalysisParameterList, location_name: "analysisParameters"))
     AnalysisTemplate.add_member(:validations, Shapes::ShapeRef.new(shape: AnalysisTemplateValidationStatusDetailList, location_name: "validations"))
     AnalysisTemplate.struct_class = Types::AnalysisTemplate
 
     AnalysisTemplateArnList.member = Shapes::ShapeRef.new(shape: AnalysisTemplateArn)
+
+    AnalysisTemplateArtifact.add_member(:location, Shapes::ShapeRef.new(shape: S3Location, required: true, location_name: "location"))
+    AnalysisTemplateArtifact.struct_class = Types::AnalysisTemplateArtifact
+
+    AnalysisTemplateArtifactList.member = Shapes::ShapeRef.new(shape: AnalysisTemplateArtifact)
+
+    AnalysisTemplateArtifactMetadata.add_member(:entry_point_hash, Shapes::ShapeRef.new(shape: Hash, required: true, location_name: "entryPointHash"))
+    AnalysisTemplateArtifactMetadata.add_member(:additional_artifact_hashes, Shapes::ShapeRef.new(shape: HashList, location_name: "additionalArtifactHashes"))
+    AnalysisTemplateArtifactMetadata.struct_class = Types::AnalysisTemplateArtifactMetadata
+
+    AnalysisTemplateArtifacts.add_member(:entry_point, Shapes::ShapeRef.new(shape: AnalysisTemplateArtifact, required: true, location_name: "entryPoint"))
+    AnalysisTemplateArtifacts.add_member(:additional_artifacts, Shapes::ShapeRef.new(shape: AnalysisTemplateArtifactList, location_name: "additionalArtifacts"))
+    AnalysisTemplateArtifacts.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    AnalysisTemplateArtifacts.struct_class = Types::AnalysisTemplateArtifacts
 
     AnalysisTemplateSummary.add_member(:arn, Shapes::ShapeRef.new(shape: AnalysisTemplateArn, required: true, location_name: "arn"))
     AnalysisTemplateSummary.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
@@ -703,6 +795,9 @@ module Aws::CleanRooms
     BatchGetSchemaOutput.add_member(:errors, Shapes::ShapeRef.new(shape: BatchGetSchemaErrorList, required: true, location_name: "errors"))
     BatchGetSchemaOutput.struct_class = Types::BatchGetSchemaOutput
 
+    BilledJobResourceUtilization.add_member(:units, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "units"))
+    BilledJobResourceUtilization.struct_class = Types::BilledJobResourceUtilization
+
     BilledResourceUtilization.add_member(:units, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "units"))
     BilledResourceUtilization.struct_class = Types::BilledResourceUtilization
 
@@ -719,6 +814,7 @@ module Aws::CleanRooms
     Collaboration.add_member(:membership_arn, Shapes::ShapeRef.new(shape: MembershipArn, location_name: "membershipArn"))
     Collaboration.add_member(:data_encryption_metadata, Shapes::ShapeRef.new(shape: DataEncryptionMetadata, location_name: "dataEncryptionMetadata"))
     Collaboration.add_member(:query_log_status, Shapes::ShapeRef.new(shape: CollaborationQueryLogStatus, required: true, location_name: "queryLogStatus"))
+    Collaboration.add_member(:job_log_status, Shapes::ShapeRef.new(shape: CollaborationJobLogStatus, location_name: "jobLogStatus"))
     Collaboration.add_member(:analytics_engine, Shapes::ShapeRef.new(shape: AnalyticsEngine, location_name: "analyticsEngine"))
     Collaboration.struct_class = Types::Collaboration
 
@@ -733,7 +829,8 @@ module Aws::CleanRooms
     CollaborationAnalysisTemplate.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
     CollaborationAnalysisTemplate.add_member(:schema, Shapes::ShapeRef.new(shape: AnalysisSchema, required: true, location_name: "schema"))
     CollaborationAnalysisTemplate.add_member(:format, Shapes::ShapeRef.new(shape: AnalysisFormat, required: true, location_name: "format"))
-    CollaborationAnalysisTemplate.add_member(:source, Shapes::ShapeRef.new(shape: AnalysisSource, required: true, location_name: "source"))
+    CollaborationAnalysisTemplate.add_member(:source, Shapes::ShapeRef.new(shape: AnalysisSource, location_name: "source"))
+    CollaborationAnalysisTemplate.add_member(:source_metadata, Shapes::ShapeRef.new(shape: AnalysisSourceMetadata, location_name: "sourceMetadata"))
     CollaborationAnalysisTemplate.add_member(:analysis_parameters, Shapes::ShapeRef.new(shape: AnalysisParameterList, location_name: "analysisParameters"))
     CollaborationAnalysisTemplate.add_member(:validations, Shapes::ShapeRef.new(shape: AnalysisTemplateValidationStatusDetailList, location_name: "validations"))
     CollaborationAnalysisTemplate.struct_class = Types::CollaborationAnalysisTemplate
@@ -917,6 +1014,7 @@ module Aws::CleanRooms
     ConfiguredTable.add_member(:analysis_rule_types, Shapes::ShapeRef.new(shape: ConfiguredTableAnalysisRuleTypeList, required: true, location_name: "analysisRuleTypes"))
     ConfiguredTable.add_member(:analysis_method, Shapes::ShapeRef.new(shape: AnalysisMethod, required: true, location_name: "analysisMethod"))
     ConfiguredTable.add_member(:allowed_columns, Shapes::ShapeRef.new(shape: AllowedColumnList, required: true, location_name: "allowedColumns"))
+    ConfiguredTable.add_member(:selected_analysis_methods, Shapes::ShapeRef.new(shape: SelectedAnalysisMethods, location_name: "selectedAnalysisMethods"))
     ConfiguredTable.struct_class = Types::ConfiguredTable
 
     ConfiguredTableAnalysisRule.add_member(:configured_table_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "configuredTableId"))
@@ -1006,6 +1104,7 @@ module Aws::CleanRooms
     ConfiguredTableAssociationSummary.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
     ConfiguredTableAssociationSummary.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "id"))
     ConfiguredTableAssociationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ConfiguredTableAssociationArn, required: true, location_name: "arn"))
+    ConfiguredTableAssociationSummary.add_member(:analysis_rule_types, Shapes::ShapeRef.new(shape: ConfiguredTableAssociationAnalysisRuleTypeList, location_name: "analysisRuleTypes"))
     ConfiguredTableAssociationSummary.struct_class = Types::ConfiguredTableAssociationSummary
 
     ConfiguredTableAssociationSummaryList.member = Shapes::ShapeRef.new(shape: ConfiguredTableAssociationSummary)
@@ -1017,6 +1116,7 @@ module Aws::CleanRooms
     ConfiguredTableSummary.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
     ConfiguredTableSummary.add_member(:analysis_rule_types, Shapes::ShapeRef.new(shape: ConfiguredTableAnalysisRuleTypeList, required: true, location_name: "analysisRuleTypes"))
     ConfiguredTableSummary.add_member(:analysis_method, Shapes::ShapeRef.new(shape: AnalysisMethod, required: true, location_name: "analysisMethod"))
+    ConfiguredTableSummary.add_member(:selected_analysis_methods, Shapes::ShapeRef.new(shape: SelectedAnalysisMethods, location_name: "selectedAnalysisMethods"))
     ConfiguredTableSummary.struct_class = Types::ConfiguredTableSummary
 
     ConfiguredTableSummaryList.member = Shapes::ShapeRef.new(shape: ConfiguredTableSummary)
@@ -1027,6 +1127,59 @@ module Aws::CleanRooms
     ConflictException.add_member(:reason, Shapes::ShapeRef.new(shape: ConflictExceptionReason, location_name: "reason"))
     ConflictException.struct_class = Types::ConflictException
 
+    ConsolidatedPolicy.add_member(:v1, Shapes::ShapeRef.new(shape: ConsolidatedPolicyV1, location_name: "v1"))
+    ConsolidatedPolicy.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ConsolidatedPolicy.add_member_subclass(:v1, Types::ConsolidatedPolicy::V1)
+    ConsolidatedPolicy.add_member_subclass(:unknown, Types::ConsolidatedPolicy::Unknown)
+    ConsolidatedPolicy.struct_class = Types::ConsolidatedPolicy
+
+    ConsolidatedPolicyAggregation.add_member(:aggregate_columns, Shapes::ShapeRef.new(shape: ConsolidatedPolicyAggregationAggregateColumnsList, required: true, location_name: "aggregateColumns"))
+    ConsolidatedPolicyAggregation.add_member(:join_columns, Shapes::ShapeRef.new(shape: AnalysisRuleColumnList, required: true, location_name: "joinColumns"))
+    ConsolidatedPolicyAggregation.add_member(:join_required, Shapes::ShapeRef.new(shape: JoinRequiredOption, location_name: "joinRequired"))
+    ConsolidatedPolicyAggregation.add_member(:allowed_join_operators, Shapes::ShapeRef.new(shape: JoinOperatorsList, location_name: "allowedJoinOperators"))
+    ConsolidatedPolicyAggregation.add_member(:dimension_columns, Shapes::ShapeRef.new(shape: AnalysisRuleColumnList, required: true, location_name: "dimensionColumns"))
+    ConsolidatedPolicyAggregation.add_member(:scalar_functions, Shapes::ShapeRef.new(shape: ScalarFunctionsList, required: true, location_name: "scalarFunctions"))
+    ConsolidatedPolicyAggregation.add_member(:output_constraints, Shapes::ShapeRef.new(shape: AggregationConstraints, required: true, location_name: "outputConstraints"))
+    ConsolidatedPolicyAggregation.add_member(:additional_analyses, Shapes::ShapeRef.new(shape: AdditionalAnalyses, location_name: "additionalAnalyses"))
+    ConsolidatedPolicyAggregation.add_member(:allowed_result_receivers, Shapes::ShapeRef.new(shape: AllowedResultReceivers, location_name: "allowedResultReceivers"))
+    ConsolidatedPolicyAggregation.add_member(:allowed_additional_analyses, Shapes::ShapeRef.new(shape: AllowedAdditionalAnalyses, location_name: "allowedAdditionalAnalyses"))
+    ConsolidatedPolicyAggregation.struct_class = Types::ConsolidatedPolicyAggregation
+
+    ConsolidatedPolicyAggregationAggregateColumnsList.member = Shapes::ShapeRef.new(shape: AggregateColumn)
+
+    ConsolidatedPolicyCustom.add_member(:allowed_analyses, Shapes::ShapeRef.new(shape: ConsolidatedPolicyCustomAllowedAnalysesList, required: true, location_name: "allowedAnalyses"))
+    ConsolidatedPolicyCustom.add_member(:allowed_analysis_providers, Shapes::ShapeRef.new(shape: ConsolidatedPolicyCustomAllowedAnalysisProvidersList, location_name: "allowedAnalysisProviders"))
+    ConsolidatedPolicyCustom.add_member(:additional_analyses, Shapes::ShapeRef.new(shape: AdditionalAnalyses, location_name: "additionalAnalyses"))
+    ConsolidatedPolicyCustom.add_member(:disallowed_output_columns, Shapes::ShapeRef.new(shape: AnalysisRuleColumnList, location_name: "disallowedOutputColumns"))
+    ConsolidatedPolicyCustom.add_member(:differential_privacy, Shapes::ShapeRef.new(shape: DifferentialPrivacyConfiguration, location_name: "differentialPrivacy"))
+    ConsolidatedPolicyCustom.add_member(:allowed_result_receivers, Shapes::ShapeRef.new(shape: AllowedResultReceivers, location_name: "allowedResultReceivers"))
+    ConsolidatedPolicyCustom.add_member(:allowed_additional_analyses, Shapes::ShapeRef.new(shape: AllowedAdditionalAnalyses, location_name: "allowedAdditionalAnalyses"))
+    ConsolidatedPolicyCustom.struct_class = Types::ConsolidatedPolicyCustom
+
+    ConsolidatedPolicyCustomAllowedAnalysesList.member = Shapes::ShapeRef.new(shape: AnalysisTemplateArnOrQueryWildcard)
+
+    ConsolidatedPolicyCustomAllowedAnalysisProvidersList.member = Shapes::ShapeRef.new(shape: AccountId)
+
+    ConsolidatedPolicyList.add_member(:join_columns, Shapes::ShapeRef.new(shape: ConsolidatedPolicyListJoinColumnsList, required: true, location_name: "joinColumns"))
+    ConsolidatedPolicyList.add_member(:allowed_join_operators, Shapes::ShapeRef.new(shape: JoinOperatorsList, location_name: "allowedJoinOperators"))
+    ConsolidatedPolicyList.add_member(:list_columns, Shapes::ShapeRef.new(shape: AnalysisRuleColumnList, required: true, location_name: "listColumns"))
+    ConsolidatedPolicyList.add_member(:additional_analyses, Shapes::ShapeRef.new(shape: AdditionalAnalyses, location_name: "additionalAnalyses"))
+    ConsolidatedPolicyList.add_member(:allowed_result_receivers, Shapes::ShapeRef.new(shape: AllowedResultReceivers, location_name: "allowedResultReceivers"))
+    ConsolidatedPolicyList.add_member(:allowed_additional_analyses, Shapes::ShapeRef.new(shape: AllowedAdditionalAnalyses, location_name: "allowedAdditionalAnalyses"))
+    ConsolidatedPolicyList.struct_class = Types::ConsolidatedPolicyList
+
+    ConsolidatedPolicyListJoinColumnsList.member = Shapes::ShapeRef.new(shape: AnalysisRuleColumnName)
+
+    ConsolidatedPolicyV1.add_member(:list, Shapes::ShapeRef.new(shape: ConsolidatedPolicyList, location_name: "list"))
+    ConsolidatedPolicyV1.add_member(:aggregation, Shapes::ShapeRef.new(shape: ConsolidatedPolicyAggregation, location_name: "aggregation"))
+    ConsolidatedPolicyV1.add_member(:custom, Shapes::ShapeRef.new(shape: ConsolidatedPolicyCustom, location_name: "custom"))
+    ConsolidatedPolicyV1.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ConsolidatedPolicyV1.add_member_subclass(:list, Types::ConsolidatedPolicyV1::List)
+    ConsolidatedPolicyV1.add_member_subclass(:aggregation, Types::ConsolidatedPolicyV1::Aggregation)
+    ConsolidatedPolicyV1.add_member_subclass(:custom, Types::ConsolidatedPolicyV1::Custom)
+    ConsolidatedPolicyV1.add_member_subclass(:unknown, Types::ConsolidatedPolicyV1::Unknown)
+    ConsolidatedPolicyV1.struct_class = Types::ConsolidatedPolicyV1
+
     CreateAnalysisTemplateInput.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
     CreateAnalysisTemplateInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
     CreateAnalysisTemplateInput.add_member(:name, Shapes::ShapeRef.new(shape: TableAlias, required: true, location_name: "name"))
@@ -1034,6 +1187,7 @@ module Aws::CleanRooms
     CreateAnalysisTemplateInput.add_member(:source, Shapes::ShapeRef.new(shape: AnalysisSource, required: true, location_name: "source"))
     CreateAnalysisTemplateInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateAnalysisTemplateInput.add_member(:analysis_parameters, Shapes::ShapeRef.new(shape: AnalysisParameterList, location_name: "analysisParameters"))
+    CreateAnalysisTemplateInput.add_member(:schema, Shapes::ShapeRef.new(shape: AnalysisSchema, location_name: "schema"))
     CreateAnalysisTemplateInput.struct_class = Types::CreateAnalysisTemplateInput
 
     CreateAnalysisTemplateOutput.add_member(:analysis_template, Shapes::ShapeRef.new(shape: AnalysisTemplate, required: true, location_name: "analysisTemplate"))
@@ -1047,6 +1201,7 @@ module Aws::CleanRooms
     CreateCollaborationInput.add_member(:creator_display_name, Shapes::ShapeRef.new(shape: DisplayName, required: true, location_name: "creatorDisplayName"))
     CreateCollaborationInput.add_member(:data_encryption_metadata, Shapes::ShapeRef.new(shape: DataEncryptionMetadata, location_name: "dataEncryptionMetadata"))
     CreateCollaborationInput.add_member(:query_log_status, Shapes::ShapeRef.new(shape: CollaborationQueryLogStatus, required: true, location_name: "queryLogStatus"))
+    CreateCollaborationInput.add_member(:job_log_status, Shapes::ShapeRef.new(shape: CollaborationJobLogStatus, location_name: "jobLogStatus"))
     CreateCollaborationInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateCollaborationInput.add_member(:creator_payment_configuration, Shapes::ShapeRef.new(shape: PaymentConfiguration, location_name: "creatorPaymentConfiguration"))
     CreateCollaborationInput.add_member(:analytics_engine, Shapes::ShapeRef.new(shape: AnalyticsEngine, location_name: "analyticsEngine"))
@@ -1099,6 +1254,7 @@ module Aws::CleanRooms
     CreateConfiguredTableInput.add_member(:table_reference, Shapes::ShapeRef.new(shape: TableReference, required: true, location_name: "tableReference"))
     CreateConfiguredTableInput.add_member(:allowed_columns, Shapes::ShapeRef.new(shape: AllowedColumnList, required: true, location_name: "allowedColumns"))
     CreateConfiguredTableInput.add_member(:analysis_method, Shapes::ShapeRef.new(shape: AnalysisMethod, required: true, location_name: "analysisMethod"))
+    CreateConfiguredTableInput.add_member(:selected_analysis_methods, Shapes::ShapeRef.new(shape: SelectedAnalysisMethods, location_name: "selectedAnalysisMethods"))
     CreateConfiguredTableInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateConfiguredTableInput.struct_class = Types::CreateConfiguredTableInput
 
@@ -1129,8 +1285,10 @@ module Aws::CleanRooms
 
     CreateMembershipInput.add_member(:collaboration_identifier, Shapes::ShapeRef.new(shape: CollaborationIdentifier, required: true, location_name: "collaborationIdentifier"))
     CreateMembershipInput.add_member(:query_log_status, Shapes::ShapeRef.new(shape: MembershipQueryLogStatus, required: true, location_name: "queryLogStatus"))
+    CreateMembershipInput.add_member(:job_log_status, Shapes::ShapeRef.new(shape: MembershipJobLogStatus, location_name: "jobLogStatus"))
     CreateMembershipInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateMembershipInput.add_member(:default_result_configuration, Shapes::ShapeRef.new(shape: MembershipProtectedQueryResultConfiguration, location_name: "defaultResultConfiguration"))
+    CreateMembershipInput.add_member(:default_job_result_configuration, Shapes::ShapeRef.new(shape: MembershipProtectedJobResultConfiguration, location_name: "defaultJobResultConfiguration"))
     CreateMembershipInput.add_member(:payment_configuration, Shapes::ShapeRef.new(shape: MembershipPaymentConfiguration, location_name: "paymentConfiguration"))
     CreateMembershipInput.struct_class = Types::CreateMembershipInput
 
@@ -1387,6 +1545,13 @@ module Aws::CleanRooms
     GetPrivacyBudgetTemplateOutput.add_member(:privacy_budget_template, Shapes::ShapeRef.new(shape: PrivacyBudgetTemplate, required: true, location_name: "privacyBudgetTemplate"))
     GetPrivacyBudgetTemplateOutput.struct_class = Types::GetPrivacyBudgetTemplateOutput
 
+    GetProtectedJobInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    GetProtectedJobInput.add_member(:protected_job_identifier, Shapes::ShapeRef.new(shape: ProtectedJobIdentifier, required: true, location: "uri", location_name: "protectedJobIdentifier"))
+    GetProtectedJobInput.struct_class = Types::GetProtectedJobInput
+
+    GetProtectedJobOutput.add_member(:protected_job, Shapes::ShapeRef.new(shape: ProtectedJob, required: true, location_name: "protectedJob"))
+    GetProtectedJobOutput.struct_class = Types::GetProtectedJobOutput
+
     GetProtectedQueryInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
     GetProtectedQueryInput.add_member(:protected_query_identifier, Shapes::ShapeRef.new(shape: ProtectedQueryIdentifier, required: true, location: "uri", location_name: "protectedQueryIdentifier"))
     GetProtectedQueryInput.struct_class = Types::GetProtectedQueryInput
@@ -1412,6 +1577,11 @@ module Aws::CleanRooms
     GlueTableReference.add_member(:table_name, Shapes::ShapeRef.new(shape: GlueTableName, required: true, location_name: "tableName"))
     GlueTableReference.add_member(:database_name, Shapes::ShapeRef.new(shape: GlueDatabaseName, required: true, location_name: "databaseName"))
     GlueTableReference.struct_class = Types::GlueTableReference
+
+    Hash.add_member(:sha256, Shapes::ShapeRef.new(shape: String, location_name: "sha256"))
+    Hash.struct_class = Types::Hash
+
+    HashList.member = Shapes::ShapeRef.new(shape: Hash)
 
     IdMappingConfig.add_member(:allow_use_as_dimension_column, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "allowUseAsDimensionColumn"))
     IdMappingConfig.struct_class = Types::IdMappingConfig
@@ -1508,6 +1678,9 @@ module Aws::CleanRooms
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
+
+    JobComputePaymentConfig.add_member(:is_responsible, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isResponsible"))
+    JobComputePaymentConfig.struct_class = Types::JobComputePaymentConfig
 
     JoinOperatorsList.member = Shapes::ShapeRef.new(shape: JoinOperator)
 
@@ -1656,6 +1829,16 @@ module Aws::CleanRooms
     ListPrivacyBudgetsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListPrivacyBudgetsOutput.struct_class = Types::ListPrivacyBudgetsOutput
 
+    ListProtectedJobsInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    ListProtectedJobsInput.add_member(:status, Shapes::ShapeRef.new(shape: ProtectedJobStatus, location: "querystring", location_name: "status"))
+    ListProtectedJobsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListProtectedJobsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListProtectedJobsInput.struct_class = Types::ListProtectedJobsInput
+
+    ListProtectedJobsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListProtectedJobsOutput.add_member(:protected_jobs, Shapes::ShapeRef.new(shape: ProtectedJobSummaryList, required: true, location_name: "protectedJobs"))
+    ListProtectedJobsOutput.struct_class = Types::ListProtectedJobsOutput
+
     ListProtectedQueriesInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
     ListProtectedQueriesInput.add_member(:status, Shapes::ShapeRef.new(shape: ProtectedQueryStatus, location: "querystring", location_name: "status"))
     ListProtectedQueriesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
@@ -1727,9 +1910,14 @@ module Aws::CleanRooms
     Membership.add_member(:member_abilities, Shapes::ShapeRef.new(shape: MemberAbilities, required: true, location_name: "memberAbilities"))
     Membership.add_member(:ml_member_abilities, Shapes::ShapeRef.new(shape: MLMemberAbilities, location_name: "mlMemberAbilities"))
     Membership.add_member(:query_log_status, Shapes::ShapeRef.new(shape: MembershipQueryLogStatus, required: true, location_name: "queryLogStatus"))
+    Membership.add_member(:job_log_status, Shapes::ShapeRef.new(shape: MembershipJobLogStatus, location_name: "jobLogStatus"))
     Membership.add_member(:default_result_configuration, Shapes::ShapeRef.new(shape: MembershipProtectedQueryResultConfiguration, location_name: "defaultResultConfiguration"))
+    Membership.add_member(:default_job_result_configuration, Shapes::ShapeRef.new(shape: MembershipProtectedJobResultConfiguration, location_name: "defaultJobResultConfiguration"))
     Membership.add_member(:payment_configuration, Shapes::ShapeRef.new(shape: MembershipPaymentConfiguration, required: true, location_name: "paymentConfiguration"))
     Membership.struct_class = Types::Membership
+
+    MembershipJobComputePaymentConfig.add_member(:is_responsible, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isResponsible"))
+    MembershipJobComputePaymentConfig.struct_class = Types::MembershipJobComputePaymentConfig
 
     MembershipMLPaymentConfig.add_member(:model_training, Shapes::ShapeRef.new(shape: MembershipModelTrainingPaymentConfig, location_name: "modelTraining"))
     MembershipMLPaymentConfig.add_member(:model_inference, Shapes::ShapeRef.new(shape: MembershipModelInferencePaymentConfig, location_name: "modelInference"))
@@ -1743,7 +1931,18 @@ module Aws::CleanRooms
 
     MembershipPaymentConfiguration.add_member(:query_compute, Shapes::ShapeRef.new(shape: MembershipQueryComputePaymentConfig, required: true, location_name: "queryCompute"))
     MembershipPaymentConfiguration.add_member(:machine_learning, Shapes::ShapeRef.new(shape: MembershipMLPaymentConfig, location_name: "machineLearning"))
+    MembershipPaymentConfiguration.add_member(:job_compute, Shapes::ShapeRef.new(shape: MembershipJobComputePaymentConfig, location_name: "jobCompute"))
     MembershipPaymentConfiguration.struct_class = Types::MembershipPaymentConfiguration
+
+    MembershipProtectedJobOutputConfiguration.add_member(:s3, Shapes::ShapeRef.new(shape: ProtectedJobS3OutputConfigurationInput, location_name: "s3"))
+    MembershipProtectedJobOutputConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    MembershipProtectedJobOutputConfiguration.add_member_subclass(:s3, Types::MembershipProtectedJobOutputConfiguration::S3)
+    MembershipProtectedJobOutputConfiguration.add_member_subclass(:unknown, Types::MembershipProtectedJobOutputConfiguration::Unknown)
+    MembershipProtectedJobOutputConfiguration.struct_class = Types::MembershipProtectedJobOutputConfiguration
+
+    MembershipProtectedJobResultConfiguration.add_member(:output_configuration, Shapes::ShapeRef.new(shape: MembershipProtectedJobOutputConfiguration, required: true, location_name: "outputConfiguration"))
+    MembershipProtectedJobResultConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    MembershipProtectedJobResultConfiguration.struct_class = Types::MembershipProtectedJobResultConfiguration
 
     MembershipProtectedQueryOutputConfiguration.add_member(:s3, Shapes::ShapeRef.new(shape: ProtectedQueryS3OutputConfiguration, location_name: "s3"))
     MembershipProtectedQueryOutputConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -1786,6 +1985,7 @@ module Aws::CleanRooms
 
     PaymentConfiguration.add_member(:query_compute, Shapes::ShapeRef.new(shape: QueryComputePaymentConfig, required: true, location_name: "queryCompute"))
     PaymentConfiguration.add_member(:machine_learning, Shapes::ShapeRef.new(shape: MLPaymentConfig, location_name: "machineLearning"))
+    PaymentConfiguration.add_member(:job_compute, Shapes::ShapeRef.new(shape: JobComputePaymentConfig, location_name: "jobCompute"))
     PaymentConfiguration.struct_class = Types::PaymentConfiguration
 
     PopulateIdMappingTableInput.add_member(:id_mapping_table_identifier, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "idMappingTableIdentifier"))
@@ -1878,6 +2078,109 @@ module Aws::CleanRooms
     PrivacyImpact.add_member_subclass(:differential_privacy, Types::PrivacyImpact::DifferentialPrivacy)
     PrivacyImpact.add_member_subclass(:unknown, Types::PrivacyImpact::Unknown)
     PrivacyImpact.struct_class = Types::PrivacyImpact
+
+    ProtectedJob.add_member(:id, Shapes::ShapeRef.new(shape: ProtectedJobIdentifier, required: true, location_name: "id"))
+    ProtectedJob.add_member(:membership_id, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location_name: "membershipId"))
+    ProtectedJob.add_member(:membership_arn, Shapes::ShapeRef.new(shape: MembershipArn, required: true, location_name: "membershipArn"))
+    ProtectedJob.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
+    ProtectedJob.add_member(:job_parameters, Shapes::ShapeRef.new(shape: ProtectedJobParameters, location_name: "jobParameters"))
+    ProtectedJob.add_member(:status, Shapes::ShapeRef.new(shape: ProtectedJobStatus, required: true, location_name: "status"))
+    ProtectedJob.add_member(:result_configuration, Shapes::ShapeRef.new(shape: ProtectedJobResultConfigurationOutput, location_name: "resultConfiguration"))
+    ProtectedJob.add_member(:statistics, Shapes::ShapeRef.new(shape: ProtectedJobStatistics, location_name: "statistics"))
+    ProtectedJob.add_member(:result, Shapes::ShapeRef.new(shape: ProtectedJobResult, location_name: "result"))
+    ProtectedJob.add_member(:error, Shapes::ShapeRef.new(shape: ProtectedJobError, location_name: "error"))
+    ProtectedJob.struct_class = Types::ProtectedJob
+
+    ProtectedJobConfigurationDetails.add_member(:direct_analysis_configuration_details, Shapes::ShapeRef.new(shape: ProtectedJobDirectAnalysisConfigurationDetails, location_name: "directAnalysisConfigurationDetails"))
+    ProtectedJobConfigurationDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ProtectedJobConfigurationDetails.add_member_subclass(:direct_analysis_configuration_details, Types::ProtectedJobConfigurationDetails::DirectAnalysisConfigurationDetails)
+    ProtectedJobConfigurationDetails.add_member_subclass(:unknown, Types::ProtectedJobConfigurationDetails::Unknown)
+    ProtectedJobConfigurationDetails.struct_class = Types::ProtectedJobConfigurationDetails
+
+    ProtectedJobDirectAnalysisConfigurationDetails.add_member(:receiver_account_ids, Shapes::ShapeRef.new(shape: ProtectedJobReceiverAccountIds, location_name: "receiverAccountIds"))
+    ProtectedJobDirectAnalysisConfigurationDetails.struct_class = Types::ProtectedJobDirectAnalysisConfigurationDetails
+
+    ProtectedJobError.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ProtectedJobError.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
+    ProtectedJobError.struct_class = Types::ProtectedJobError
+
+    ProtectedJobMemberOutputConfigurationInput.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
+    ProtectedJobMemberOutputConfigurationInput.struct_class = Types::ProtectedJobMemberOutputConfigurationInput
+
+    ProtectedJobMemberOutputConfigurationOutput.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
+    ProtectedJobMemberOutputConfigurationOutput.struct_class = Types::ProtectedJobMemberOutputConfigurationOutput
+
+    ProtectedJobMemberOutputList.member = Shapes::ShapeRef.new(shape: ProtectedJobSingleMemberOutput)
+
+    ProtectedJobOutput.add_member(:s3, Shapes::ShapeRef.new(shape: ProtectedJobS3Output, location_name: "s3"))
+    ProtectedJobOutput.add_member(:member_list, Shapes::ShapeRef.new(shape: ProtectedJobMemberOutputList, location_name: "memberList"))
+    ProtectedJobOutput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ProtectedJobOutput.add_member_subclass(:s3, Types::ProtectedJobOutput::S3)
+    ProtectedJobOutput.add_member_subclass(:member_list, Types::ProtectedJobOutput::MemberList)
+    ProtectedJobOutput.add_member_subclass(:unknown, Types::ProtectedJobOutput::Unknown)
+    ProtectedJobOutput.struct_class = Types::ProtectedJobOutput
+
+    ProtectedJobOutputConfigurationInput.add_member(:member, Shapes::ShapeRef.new(shape: ProtectedJobMemberOutputConfigurationInput, location_name: "member"))
+    ProtectedJobOutputConfigurationInput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ProtectedJobOutputConfigurationInput.add_member_subclass(:member, Types::ProtectedJobOutputConfigurationInput::Member)
+    ProtectedJobOutputConfigurationInput.add_member_subclass(:unknown, Types::ProtectedJobOutputConfigurationInput::Unknown)
+    ProtectedJobOutputConfigurationInput.struct_class = Types::ProtectedJobOutputConfigurationInput
+
+    ProtectedJobOutputConfigurationOutput.add_member(:s3, Shapes::ShapeRef.new(shape: ProtectedJobS3OutputConfigurationOutput, location_name: "s3"))
+    ProtectedJobOutputConfigurationOutput.add_member(:member, Shapes::ShapeRef.new(shape: ProtectedJobMemberOutputConfigurationOutput, location_name: "member"))
+    ProtectedJobOutputConfigurationOutput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ProtectedJobOutputConfigurationOutput.add_member_subclass(:s3, Types::ProtectedJobOutputConfigurationOutput::S3)
+    ProtectedJobOutputConfigurationOutput.add_member_subclass(:member, Types::ProtectedJobOutputConfigurationOutput::Member)
+    ProtectedJobOutputConfigurationOutput.add_member_subclass(:unknown, Types::ProtectedJobOutputConfigurationOutput::Unknown)
+    ProtectedJobOutputConfigurationOutput.struct_class = Types::ProtectedJobOutputConfigurationOutput
+
+    ProtectedJobParameters.add_member(:analysis_template_arn, Shapes::ShapeRef.new(shape: AnalysisTemplateArn, location_name: "analysisTemplateArn"))
+    ProtectedJobParameters.struct_class = Types::ProtectedJobParameters
+
+    ProtectedJobReceiverAccountIds.member = Shapes::ShapeRef.new(shape: AccountId)
+
+    ProtectedJobReceiverConfiguration.add_member(:analysis_type, Shapes::ShapeRef.new(shape: ProtectedJobAnalysisType, required: true, location_name: "analysisType"))
+    ProtectedJobReceiverConfiguration.add_member(:configuration_details, Shapes::ShapeRef.new(shape: ProtectedJobConfigurationDetails, location_name: "configurationDetails"))
+    ProtectedJobReceiverConfiguration.struct_class = Types::ProtectedJobReceiverConfiguration
+
+    ProtectedJobReceiverConfigurations.member = Shapes::ShapeRef.new(shape: ProtectedJobReceiverConfiguration)
+
+    ProtectedJobResult.add_member(:output, Shapes::ShapeRef.new(shape: ProtectedJobOutput, required: true, location_name: "output"))
+    ProtectedJobResult.struct_class = Types::ProtectedJobResult
+
+    ProtectedJobResultConfigurationInput.add_member(:output_configuration, Shapes::ShapeRef.new(shape: ProtectedJobOutputConfigurationInput, required: true, location_name: "outputConfiguration"))
+    ProtectedJobResultConfigurationInput.struct_class = Types::ProtectedJobResultConfigurationInput
+
+    ProtectedJobResultConfigurationOutput.add_member(:output_configuration, Shapes::ShapeRef.new(shape: ProtectedJobOutputConfigurationOutput, required: true, location_name: "outputConfiguration"))
+    ProtectedJobResultConfigurationOutput.struct_class = Types::ProtectedJobResultConfigurationOutput
+
+    ProtectedJobS3Output.add_member(:location, Shapes::ShapeRef.new(shape: String, required: true, location_name: "location"))
+    ProtectedJobS3Output.struct_class = Types::ProtectedJobS3Output
+
+    ProtectedJobS3OutputConfigurationInput.add_member(:bucket, Shapes::ShapeRef.new(shape: ProtectedJobS3OutputConfigurationInputBucketString, required: true, location_name: "bucket"))
+    ProtectedJobS3OutputConfigurationInput.add_member(:key_prefix, Shapes::ShapeRef.new(shape: KeyPrefix, location_name: "keyPrefix"))
+    ProtectedJobS3OutputConfigurationInput.struct_class = Types::ProtectedJobS3OutputConfigurationInput
+
+    ProtectedJobS3OutputConfigurationOutput.add_member(:bucket, Shapes::ShapeRef.new(shape: ProtectedJobS3OutputConfigurationOutputBucketString, required: true, location_name: "bucket"))
+    ProtectedJobS3OutputConfigurationOutput.add_member(:key_prefix, Shapes::ShapeRef.new(shape: KeyPrefix, location_name: "keyPrefix"))
+    ProtectedJobS3OutputConfigurationOutput.struct_class = Types::ProtectedJobS3OutputConfigurationOutput
+
+    ProtectedJobSingleMemberOutput.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
+    ProtectedJobSingleMemberOutput.struct_class = Types::ProtectedJobSingleMemberOutput
+
+    ProtectedJobStatistics.add_member(:total_duration_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "totalDurationInMillis"))
+    ProtectedJobStatistics.add_member(:billed_resource_utilization, Shapes::ShapeRef.new(shape: BilledJobResourceUtilization, location_name: "billedResourceUtilization"))
+    ProtectedJobStatistics.struct_class = Types::ProtectedJobStatistics
+
+    ProtectedJobSummary.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "id"))
+    ProtectedJobSummary.add_member(:membership_id, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location_name: "membershipId"))
+    ProtectedJobSummary.add_member(:membership_arn, Shapes::ShapeRef.new(shape: MembershipArn, required: true, location_name: "membershipArn"))
+    ProtectedJobSummary.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
+    ProtectedJobSummary.add_member(:status, Shapes::ShapeRef.new(shape: ProtectedJobStatus, required: true, location_name: "status"))
+    ProtectedJobSummary.add_member(:receiver_configurations, Shapes::ShapeRef.new(shape: ProtectedJobReceiverConfigurations, required: true, location_name: "receiverConfigurations"))
+    ProtectedJobSummary.struct_class = Types::ProtectedJobSummary
+
+    ProtectedJobSummaryList.member = Shapes::ShapeRef.new(shape: ProtectedJobSummary)
 
     ProtectedQuery.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "id"))
     ProtectedQuery.add_member(:membership_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "membershipId"))
@@ -1984,12 +2287,17 @@ module Aws::CleanRooms
     ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    S3Location.add_member(:bucket, Shapes::ShapeRef.new(shape: S3LocationBucketString, required: true, location_name: "bucket"))
+    S3Location.add_member(:key, Shapes::ShapeRef.new(shape: S3LocationKeyString, required: true, location_name: "key"))
+    S3Location.struct_class = Types::S3Location
+
     ScalarFunctionsList.member = Shapes::ShapeRef.new(shape: ScalarFunctions)
 
     Schema.add_member(:columns, Shapes::ShapeRef.new(shape: ColumnList, required: true, location_name: "columns"))
     Schema.add_member(:partition_keys, Shapes::ShapeRef.new(shape: ColumnList, required: true, location_name: "partitionKeys"))
     Schema.add_member(:analysis_rule_types, Shapes::ShapeRef.new(shape: AnalysisRuleTypeList, required: true, location_name: "analysisRuleTypes"))
     Schema.add_member(:analysis_method, Shapes::ShapeRef.new(shape: AnalysisMethod, location_name: "analysisMethod"))
+    Schema.add_member(:selected_analysis_methods, Shapes::ShapeRef.new(shape: SelectedAnalysisMethods, location_name: "selectedAnalysisMethods"))
     Schema.add_member(:creator_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "creatorAccountId"))
     Schema.add_member(:name, Shapes::ShapeRef.new(shape: TableAlias, required: true, location_name: "name"))
     Schema.add_member(:collaboration_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "collaborationId"))
@@ -2038,6 +2346,7 @@ module Aws::CleanRooms
     SchemaSummary.add_member(:collaboration_arn, Shapes::ShapeRef.new(shape: CollaborationArn, required: true, location_name: "collaborationArn"))
     SchemaSummary.add_member(:analysis_rule_types, Shapes::ShapeRef.new(shape: AnalysisRuleTypeList, required: true, location_name: "analysisRuleTypes"))
     SchemaSummary.add_member(:analysis_method, Shapes::ShapeRef.new(shape: AnalysisMethod, location_name: "analysisMethod"))
+    SchemaSummary.add_member(:selected_analysis_methods, Shapes::ShapeRef.new(shape: SelectedAnalysisMethods, location_name: "selectedAnalysisMethods"))
     SchemaSummary.struct_class = Types::SchemaSummary
 
     SchemaSummaryList.member = Shapes::ShapeRef.new(shape: SchemaSummary)
@@ -2047,6 +2356,8 @@ module Aws::CleanRooms
     SchemaTypeProperties.add_member_subclass(:id_mapping_table, Types::SchemaTypeProperties::IdMappingTable)
     SchemaTypeProperties.add_member_subclass(:unknown, Types::SchemaTypeProperties::Unknown)
     SchemaTypeProperties.struct_class = Types::SchemaTypeProperties
+
+    SelectedAnalysisMethods.member = Shapes::ShapeRef.new(shape: SelectedAnalysisMethod)
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ServiceQuotaExceededException.add_member(:quota_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "quotaName"))
@@ -2072,6 +2383,15 @@ module Aws::CleanRooms
     SnowflakeTableSchemaV1.add_member(:column_name, Shapes::ShapeRef.new(shape: ColumnName, required: true, location_name: "columnName"))
     SnowflakeTableSchemaV1.add_member(:column_type, Shapes::ShapeRef.new(shape: ColumnTypeString, required: true, location_name: "columnType"))
     SnowflakeTableSchemaV1.struct_class = Types::SnowflakeTableSchemaV1
+
+    StartProtectedJobInput.add_member(:type, Shapes::ShapeRef.new(shape: ProtectedJobType, required: true, location_name: "type"))
+    StartProtectedJobInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    StartProtectedJobInput.add_member(:job_parameters, Shapes::ShapeRef.new(shape: ProtectedJobParameters, required: true, location_name: "jobParameters"))
+    StartProtectedJobInput.add_member(:result_configuration, Shapes::ShapeRef.new(shape: ProtectedJobResultConfigurationInput, location_name: "resultConfiguration"))
+    StartProtectedJobInput.struct_class = Types::StartProtectedJobInput
+
+    StartProtectedJobOutput.add_member(:protected_job, Shapes::ShapeRef.new(shape: ProtectedJob, required: true, location_name: "protectedJob"))
+    StartProtectedJobOutput.struct_class = Types::StartProtectedJobOutput
 
     StartProtectedQueryInput.add_member(:type, Shapes::ShapeRef.new(shape: ProtectedQueryType, required: true, location_name: "type"))
     StartProtectedQueryInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
@@ -2169,6 +2489,8 @@ module Aws::CleanRooms
     UpdateConfiguredTableInput.add_member(:configured_table_identifier, Shapes::ShapeRef.new(shape: ConfiguredTableIdentifier, required: true, location: "uri", location_name: "configuredTableIdentifier"))
     UpdateConfiguredTableInput.add_member(:name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "name"))
     UpdateConfiguredTableInput.add_member(:description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "description"))
+    UpdateConfiguredTableInput.add_member(:analysis_method, Shapes::ShapeRef.new(shape: AnalysisMethod, location_name: "analysisMethod"))
+    UpdateConfiguredTableInput.add_member(:selected_analysis_methods, Shapes::ShapeRef.new(shape: SelectedAnalysisMethods, location_name: "selectedAnalysisMethods"))
     UpdateConfiguredTableInput.struct_class = Types::UpdateConfiguredTableInput
 
     UpdateConfiguredTableOutput.add_member(:configured_table, Shapes::ShapeRef.new(shape: ConfiguredTable, required: true, location_name: "configuredTable"))
@@ -2195,7 +2517,9 @@ module Aws::CleanRooms
 
     UpdateMembershipInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
     UpdateMembershipInput.add_member(:query_log_status, Shapes::ShapeRef.new(shape: MembershipQueryLogStatus, location_name: "queryLogStatus"))
+    UpdateMembershipInput.add_member(:job_log_status, Shapes::ShapeRef.new(shape: MembershipJobLogStatus, location_name: "jobLogStatus"))
     UpdateMembershipInput.add_member(:default_result_configuration, Shapes::ShapeRef.new(shape: MembershipProtectedQueryResultConfiguration, location_name: "defaultResultConfiguration"))
+    UpdateMembershipInput.add_member(:default_job_result_configuration, Shapes::ShapeRef.new(shape: MembershipProtectedJobResultConfiguration, location_name: "defaultJobResultConfiguration"))
     UpdateMembershipInput.struct_class = Types::UpdateMembershipInput
 
     UpdateMembershipOutput.add_member(:membership, Shapes::ShapeRef.new(shape: Membership, required: true, location_name: "membership"))
@@ -2209,6 +2533,14 @@ module Aws::CleanRooms
 
     UpdatePrivacyBudgetTemplateOutput.add_member(:privacy_budget_template, Shapes::ShapeRef.new(shape: PrivacyBudgetTemplate, required: true, location_name: "privacyBudgetTemplate"))
     UpdatePrivacyBudgetTemplateOutput.struct_class = Types::UpdatePrivacyBudgetTemplateOutput
+
+    UpdateProtectedJobInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    UpdateProtectedJobInput.add_member(:protected_job_identifier, Shapes::ShapeRef.new(shape: ProtectedJobIdentifier, required: true, location: "uri", location_name: "protectedJobIdentifier"))
+    UpdateProtectedJobInput.add_member(:target_status, Shapes::ShapeRef.new(shape: TargetProtectedJobStatus, required: true, location_name: "targetStatus"))
+    UpdateProtectedJobInput.struct_class = Types::UpdateProtectedJobInput
+
+    UpdateProtectedJobOutput.add_member(:protected_job, Shapes::ShapeRef.new(shape: ProtectedJob, required: true, location_name: "protectedJob"))
+    UpdateProtectedJobOutput.struct_class = Types::UpdateProtectedJobOutput
 
     UpdateProtectedQueryInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
     UpdateProtectedQueryInput.add_member(:protected_query_identifier, Shapes::ShapeRef.new(shape: ProtectedQueryIdentifier, required: true, location: "uri", location_name: "protectedQueryIdentifier"))
@@ -2356,6 +2688,7 @@ module Aws::CleanRooms
         o.input = Shapes::ShapeRef.new(shape: CreateConfiguredTableAnalysisRuleInput)
         o.output = Shapes::ShapeRef.new(shape: CreateConfiguredTableAnalysisRuleOutput)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2806,6 +3139,19 @@ module Aws::CleanRooms
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:get_protected_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetProtectedJob"
+        o.http_method = "GET"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/protectedJobs/{protectedJobIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetProtectedJobInput)
+        o.output = Shapes::ShapeRef.new(shape: GetProtectedJobOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:get_protected_query, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetProtectedQuery"
         o.http_method = "GET"
@@ -3146,6 +3492,25 @@ module Aws::CleanRooms
         )
       end)
 
+      api.add_operation(:list_protected_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListProtectedJobs"
+        o.http_method = "GET"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/protectedJobs"
+        o.input = Shapes::ShapeRef.new(shape: ListProtectedJobsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListProtectedJobsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_protected_queries, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListProtectedQueries"
         o.http_method = "GET"
@@ -3215,6 +3580,20 @@ module Aws::CleanRooms
         o.http_request_uri = "/memberships/{membershipIdentifier}/previewprivacyimpact"
         o.input = Shapes::ShapeRef.new(shape: PreviewPrivacyImpactInput)
         o.output = Shapes::ShapeRef.new(shape: PreviewPrivacyImpactOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:start_protected_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartProtectedJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/protectedJobs"
+        o.input = Shapes::ShapeRef.new(shape: StartProtectedJobInput)
+        o.output = Shapes::ShapeRef.new(shape: StartProtectedJobOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -3396,6 +3775,20 @@ module Aws::CleanRooms
         o.http_request_uri = "/memberships/{membershipIdentifier}/privacybudgettemplates/{privacyBudgetTemplateIdentifier}"
         o.input = Shapes::ShapeRef.new(shape: UpdatePrivacyBudgetTemplateInput)
         o.output = Shapes::ShapeRef.new(shape: UpdatePrivacyBudgetTemplateOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_protected_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateProtectedJob"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/protectedJobs/{protectedJobIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateProtectedJobInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateProtectedJobOutput)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

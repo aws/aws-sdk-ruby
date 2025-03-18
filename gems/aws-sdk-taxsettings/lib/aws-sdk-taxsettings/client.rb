@@ -1347,7 +1347,7 @@ module Aws::TaxSettings
     #   The exemption certificate.
     #
     # @option params [required, String] :exemption_type
-    #   The exemption type.
+    #   The exemption type. Use the supported tax exemption type description.
     #
     # @return [Types::PutTaxExemptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1710,7 +1710,7 @@ module Aws::TaxSettings
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-taxsettings'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

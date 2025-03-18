@@ -470,7 +470,7 @@ module Aws::GeoMaps
 
     # @!group API Operations
 
-    # Returns the map's glyphs.
+    # `GetGlyphs` returns the map's glyphs.
     #
     # @option params [required, String] :font_stack
     #   Name of the `FontStack` to retrieve.
@@ -676,7 +676,7 @@ module Aws::GeoMaps
       req.send_request(options, &block)
     end
 
-    # Returns the map's sprites.
+    # `GetSprites` returns the map's sprites.
     #
     # @option params [required, String] :file_name
     #   `Sprites` API: The name of the sprite ﬁle to retrieve, following
@@ -742,10 +742,10 @@ module Aws::GeoMaps
       req.send_request(options, &block)
     end
 
-    # Provides high-quality static map images with customizable options. You
-    # can modify the map's appearance and overlay additional information.
-    # It's an ideal solution for applications requiring tailored static map
-    # snapshots.
+    # `GetStaticMap` provides high-quality static map images with
+    # customizable options. You can modify the map's appearance and overlay
+    # additional information. It's an ideal solution for applications
+    # requiring tailored static map snapshots.
     #
     # @option params [String] :bounding_box
     #   Takes in two pairs of coordinates, \[Lon, Lat\], denoting
@@ -776,6 +776,18 @@ module Aws::GeoMaps
     #
     #   Example: 49.295,-123.108
     #
+    # @option params [String] :color_scheme
+    #   Sets color tone for map, such as dark and light for specific map
+    #   styles. It only applies to vector map styles, such as Standard.
+    #
+    #   Example: `Light`
+    #
+    #   Default value: `Light`
+    #
+    #   <note markdown="1"> Valid values for `ColorScheme` are case sensitive.
+    #
+    #    </note>
+    #
     # @option params [String] :compact_overlay
     #   Takes in a string to draw geometries on the image. The input is a
     #   comma separated format as follows format: `[Lon, Lat]`
@@ -788,6 +800,10 @@ module Aws::GeoMaps
     #   polygon. It does not support multiPoint , multiLine and multiPolgyon.
     #
     #    </note>
+    #
+    # @option params [Boolean] :crop_labels
+    #   It is a flag that takes in true or false. It prevents the labels that
+    #   are on the edge of the image from being cut or obscured.
     #
     # @option params [String] :geo_json_overlay
     #   Takes in a string to draw geometries on the image. The input is a
@@ -805,6 +821,154 @@ module Aws::GeoMaps
     #   Optional: The API key to be used for authorization. Either an API key
     #   or valid SigV4 signature must be provided when making a request.
     #
+    # @option params [String] :label_size
+    #   Overrides the label size auto-calculated by `FileName`. Takes in one
+    #   of the values - `Small` or `Large`.
+    #
+    # @option params [String] :language
+    #   Specifies the language on the map labels using the BCP 47 language
+    #   tag, limited to ISO 639-1 two-letter language codes. If the specified
+    #   language data isn't available for the map image, the labels will
+    #   default to the regional primary language.
+    #
+    #   Supported codes:
+    #
+    #   * `ar`
+    #
+    #   * `as`
+    #
+    #   * `az`
+    #
+    #   * `be`
+    #
+    #   * `bg`
+    #
+    #   * `bn`
+    #
+    #   * `bs`
+    #
+    #   * `ca`
+    #
+    #   * `cs`
+    #
+    #   * `cy`
+    #
+    #   * `da`
+    #
+    #   * `de`
+    #
+    #   * `el`
+    #
+    #   * `en`
+    #
+    #   * `es`
+    #
+    #   * `et`
+    #
+    #   * `eu`
+    #
+    #   * `fi`
+    #
+    #   * `fo`
+    #
+    #   * `fr`
+    #
+    #   * `ga`
+    #
+    #   * `gl`
+    #
+    #   * `gn`
+    #
+    #   * `gu`
+    #
+    #   * `he`
+    #
+    #   * `hi`
+    #
+    #   * `hr`
+    #
+    #   * `hu`
+    #
+    #   * `hy`
+    #
+    #   * `id`
+    #
+    #   * `is`
+    #
+    #   * `it`
+    #
+    #   * `ja`
+    #
+    #   * `ka`
+    #
+    #   * `kk`
+    #
+    #   * `km`
+    #
+    #   * `kn`
+    #
+    #   * `ko`
+    #
+    #   * `ky`
+    #
+    #   * `lt`
+    #
+    #   * `lv`
+    #
+    #   * `mk`
+    #
+    #   * `ml`
+    #
+    #   * `mr`
+    #
+    #   * `ms`
+    #
+    #   * `mt`
+    #
+    #   * `my`
+    #
+    #   * `nl`
+    #
+    #   * `no`
+    #
+    #   * `or`
+    #
+    #   * `pa`
+    #
+    #   * `pl`
+    #
+    #   * `pt`
+    #
+    #   * `ro`
+    #
+    #   * `ru`
+    #
+    #   * `sk`
+    #
+    #   * `sl`
+    #
+    #   * `sq`
+    #
+    #   * `sr`
+    #
+    #   * `sv`
+    #
+    #   * `ta`
+    #
+    #   * `te`
+    #
+    #   * `th`
+    #
+    #   * `tr`
+    #
+    #   * `uk`
+    #
+    #   * `uz`
+    #
+    #   * `vi`
+    #
+    #   * `zh`
+    #
     # @option params [Integer] :padding
     #   Applies additional space (in pixels) around overlay feature to prevent
     #   them from being cut or obscured.
@@ -818,6 +982,47 @@ module Aws::GeoMaps
     #    </note>
     #
     #   Example: `100`
+    #
+    # @option params [String] :political_view
+    #   Specifies the political view, using ISO 3166-2 or ISO 3166-3 country
+    #   code format.
+    #
+    #   The following political views are currently supported:
+    #
+    #   * `ARG`: Argentina's view on the Southern Patagonian Ice Field and
+    #     Tierra Del Fuego, including the Falkland Islands, South Georgia, and
+    #     South Sandwich Islands
+    #
+    #   * `EGY`: Egypt's view on Bir Tawil
+    #
+    #   * `IND`: India's view on Gilgit-Baltistan
+    #
+    #   * `KEN`: Kenya's view on the Ilemi Triangle
+    #
+    #   * `MAR`: Morocco's view on Western Sahara
+    #
+    #   * `RUS`: Russia's view on Crimea
+    #
+    #   * `SDN`: Sudan's view on the Halaib Triangle
+    #
+    #   * `SRB`: Serbia's view on Kosovo, Vukovar, and Sarengrad Islands
+    #
+    #   * `SUR`: Suriname's view on the Courantyne Headwaters and Lawa
+    #     Headwaters
+    #
+    #   * `SYR`: Syria's view on the Golan Heights
+    #
+    #   * `TUR`: Turkey's view on Cyprus and Northern Cyprus
+    #
+    #   * `TZA`: Tanzania's view on Lake Malawi
+    #
+    #   * `URY`: Uruguay's view on Rincon de Artigas
+    #
+    #   * `VNM`: Vietnam's view on the Paracel Islands and Spratly Islands
+    #
+    # @option params [String] :points_of_interests
+    #   Determines if the result image will display icons representing points
+    #   of interest on the map.
     #
     # @option params [Integer] :radius
     #   Used with center parameter, it specifies the zoom of the image where
@@ -844,7 +1049,7 @@ module Aws::GeoMaps
     #   Example: `KilometersMiles, Miles, Kilometers, MilesKilometers`
     #
     # @option params [String] :style
-    #   Style specifies the desired map style for the `Style` APIs.
+    #   `Style` specifies the desired map style.
     #
     # @option params [required, Integer] :width
     #   Specifies the width of the map image.
@@ -870,15 +1075,21 @@ module Aws::GeoMaps
     #     bounding_box: "PositionListString",
     #     bounded_positions: "PositionListString",
     #     center: "PositionString",
+    #     color_scheme: "Light", # accepts Light, Dark
     #     compact_overlay: "CompactOverlay",
+    #     crop_labels: false,
     #     geo_json_overlay: "GeoJsonOverlay",
     #     height: 1, # required
     #     key: "ApiKey",
+    #     label_size: "Small", # accepts Small, Large
+    #     language: "LanguageTag",
     #     padding: 1,
+    #     political_view: "CountryCode",
+    #     points_of_interests: "Enabled", # accepts Enabled, Disabled
     #     radius: 1,
     #     file_name: "GetStaticMapRequestFileNameString", # required
     #     scale_bar_unit: "Kilometers", # accepts Kilometers, KilometersMiles, Miles, MilesKilometers
-    #     style: "Satellite", # accepts Satellite
+    #     style: "Satellite", # accepts Satellite, Standard
     #     width: 1, # required
     #     zoom: 1.0,
     #   })
@@ -900,7 +1111,7 @@ module Aws::GeoMaps
       req.send_request(options, &block)
     end
 
-    # Returns information about the style.
+    # `GetStyleDescriptor` returns information about the style.
     #
     # @option params [required, String] :style
     #   Style specifies the desired map style.
@@ -935,8 +1146,6 @@ module Aws::GeoMaps
     #   * `KEN`: Kenya's view on the Ilemi Triangle
     #
     #   * `MAR`: Morocco's view on Western Sahara
-    #
-    #   * `PAK`: Pakistan's view on Jammu and Kashmir and the Junagadh Area
     #
     #   * `RUS`: Russia's view on Crimea
     #
@@ -993,9 +1202,9 @@ module Aws::GeoMaps
       req.send_request(options, &block)
     end
 
-    # Returns a tile. Map tiles are used by clients to render a map.
-    # they're addressed using a grid arrangement with an X coordinate, Y
-    # coordinate, and Z (zoom) level.
+    # `GetTile` returns a tile. Map tiles are used by clients to render a
+    # map. they're addressed using a grid arrangement with an X coordinate,
+    # Y coordinate, and Z (zoom) level.
     #
     # @option params [required, String] :tileset
     #   Specifies the desired tile set.
@@ -1068,7 +1277,7 @@ module Aws::GeoMaps
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-geomaps'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

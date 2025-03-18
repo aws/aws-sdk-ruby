@@ -798,9 +798,18 @@ module Aws::CloudWatchRUM
     #
     #   If you omit this parameter, the default is `false`.
     #
-    # @option params [required, String] :domain
+    # @option params [Types::DeobfuscationConfiguration] :deobfuscation_configuration
+    #   A structure that contains the configuration for how an app monitor can
+    #   deobfuscate stack traces.
+    #
+    # @option params [String] :domain
     #   The top-level internet domain name for which your application has
     #   administrative authority.
+    #
+    # @option params [Array<String>] :domain_list
+    #   List the domain names for which your application has administrative
+    #   authority. The `CreateAppMonitor` requires either the domain or the
+    #   domain list.
     #
     # @option params [required, String] :name
     #   A name for the app monitor.
@@ -845,7 +854,14 @@ module Aws::CloudWatchRUM
     #       status: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #     cw_log_enabled: false,
-    #     domain: "AppMonitorDomain", # required
+    #     deobfuscation_configuration: {
+    #       java_script_source_maps: {
+    #         s3_uri: "DeobfuscationS3Uri",
+    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       },
+    #     },
+    #     domain: "AppMonitorDomain",
+    #     domain_list: ["AppMonitorDomain"],
     #     name: "AppMonitorName", # required
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -996,7 +1012,11 @@ module Aws::CloudWatchRUM
     #   resp.app_monitor.custom_events.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.app_monitor.data_storage.cw_log.cw_log_enabled #=> Boolean
     #   resp.app_monitor.data_storage.cw_log.cw_log_group #=> String
+    #   resp.app_monitor.deobfuscation_configuration.java_script_source_maps.s3_uri #=> String
+    #   resp.app_monitor.deobfuscation_configuration.java_script_source_maps.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.app_monitor.domain #=> String
+    #   resp.app_monitor.domain_list #=> Array
+    #   resp.app_monitor.domain_list[0] #=> String
     #   resp.app_monitor.id #=> String
     #   resp.app_monitor.last_modified #=> String
     #   resp.app_monitor.name #=> String
@@ -1570,9 +1590,18 @@ module Aws::CloudWatchRUM
     #   keep the telemetry data for more than 30 days, but it does incur
     #   Amazon CloudWatch Logs charges.
     #
+    # @option params [Types::DeobfuscationConfiguration] :deobfuscation_configuration
+    #   A structure that contains the configuration for how an app monitor can
+    #   deobfuscate stack traces.
+    #
     # @option params [String] :domain
     #   The top-level internet domain name for which your application has
     #   administrative authority.
+    #
+    # @option params [Array<String>] :domain_list
+    #   List the domain names for which your application has administrative
+    #   authority. The `UpdateAppMonitor` allows either the domain or the
+    #   domain list.
     #
     # @option params [required, String] :name
     #   The name of the app monitor to update.
@@ -1597,7 +1626,14 @@ module Aws::CloudWatchRUM
     #       status: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #     cw_log_enabled: false,
+    #     deobfuscation_configuration: {
+    #       java_script_source_maps: {
+    #         s3_uri: "DeobfuscationS3Uri",
+    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       },
+    #     },
     #     domain: "AppMonitorDomain",
+    #     domain_list: ["AppMonitorDomain"],
     #     name: "AppMonitorName", # required
     #   })
     #
@@ -1696,7 +1732,7 @@ module Aws::CloudWatchRUM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchrum'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

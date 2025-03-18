@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.102.0 (2025-03-18)
+------------------
+
+* Feature - Providing Tagging support for DomainName in AppSync
+
 1.101.0 (2025-02-18)
 ------------------
 

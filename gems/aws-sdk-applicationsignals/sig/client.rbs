@@ -90,6 +90,43 @@ module Aws
                                                            ) -> _BatchGetServiceLevelObjectiveBudgetReportResponseSuccess
                                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetServiceLevelObjectiveBudgetReportResponseSuccess
 
+      interface _BatchUpdateExclusionWindowsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchUpdateExclusionWindowsOutput]
+        def slo_ids: () -> ::Array[::String]
+        def errors: () -> ::Array[Types::BatchUpdateExclusionWindowsError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationSignals/Client.html#batch_update_exclusion_windows-instance_method
+      def batch_update_exclusion_windows: (
+                                            slo_ids: Array[::String],
+                                            ?add_exclusion_windows: Array[
+                                              {
+                                                window: {
+                                                  duration_unit: ("MINUTE" | "HOUR" | "DAY" | "MONTH"),
+                                                  duration: ::Integer
+                                                },
+                                                start_time: ::Time?,
+                                                recurrence_rule: {
+                                                  expression: ::String
+                                                }?,
+                                                reason: ::String?
+                                              },
+                                            ],
+                                            ?remove_exclusion_windows: Array[
+                                              {
+                                                window: {
+                                                  duration_unit: ("MINUTE" | "HOUR" | "DAY" | "MONTH"),
+                                                  duration: ::Integer
+                                                },
+                                                start_time: ::Time?,
+                                                recurrence_rule: {
+                                                  expression: ::String
+                                                }?,
+                                                reason: ::String?
+                                              },
+                                            ]
+                                          ) -> _BatchUpdateExclusionWindowsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateExclusionWindowsResponseSuccess
+
       interface _CreateServiceLevelObjectiveResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateServiceLevelObjectiveOutput]
         def slo: () -> Types::ServiceLevelObjective
@@ -316,6 +353,19 @@ module Aws
                                      ?next_token: ::String
                                    ) -> _ListServiceDependentsResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServiceDependentsResponseSuccess
+
+      interface _ListServiceLevelObjectiveExclusionWindowsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServiceLevelObjectiveExclusionWindowsOutput]
+        def exclusion_windows: () -> ::Array[Types::ExclusionWindow]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationSignals/Client.html#list_service_level_objective_exclusion_windows-instance_method
+      def list_service_level_objective_exclusion_windows: (
+                                                            id: ::String,
+                                                            ?max_results: ::Integer,
+                                                            ?next_token: ::String
+                                                          ) -> _ListServiceLevelObjectiveExclusionWindowsResponseSuccess
+                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServiceLevelObjectiveExclusionWindowsResponseSuccess
 
       interface _ListServiceLevelObjectivesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListServiceLevelObjectivesOutput]

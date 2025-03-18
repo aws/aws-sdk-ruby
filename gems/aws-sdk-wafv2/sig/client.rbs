@@ -158,6 +158,9 @@ module Aws
                                       }?,
                                       ja4_fingerprint: {
                                         fallback_behavior: ("MATCH" | "NO_MATCH")
+                                      }?,
+                                      uri_fragment: {
+                                        fallback_behavior: ("MATCH" | "NO_MATCH")?
                                       }?
                                     },
                                     text_transformations: Array[
@@ -225,6 +228,9 @@ module Aws
                                       }?,
                                       ja4_fingerprint: {
                                         fallback_behavior: ("MATCH" | "NO_MATCH")
+                                      }?,
+                                      uri_fragment: {
+                                        fallback_behavior: ("MATCH" | "NO_MATCH")?
                                       }?
                                     },
                                     text_transformations: Array[
@@ -292,6 +298,9 @@ module Aws
                                       }?,
                                       ja4_fingerprint: {
                                         fallback_behavior: ("MATCH" | "NO_MATCH")
+                                      }?,
+                                      uri_fragment: {
+                                        fallback_behavior: ("MATCH" | "NO_MATCH")?
                                       }?
                                     },
                                     text_transformations: Array[
@@ -358,6 +367,9 @@ module Aws
                                       }?,
                                       ja4_fingerprint: {
                                         fallback_behavior: ("MATCH" | "NO_MATCH")
+                                      }?,
+                                      uri_fragment: {
+                                        fallback_behavior: ("MATCH" | "NO_MATCH")?
                                       }?
                                     },
                                     comparison_operator: ("EQ" | "NE" | "LE" | "LT" | "GE" | "GT"),
@@ -509,6 +521,9 @@ module Aws
                                       }?,
                                       ja4_fingerprint: {
                                         fallback_behavior: ("MATCH" | "NO_MATCH")
+                                      }?,
+                                      uri_fragment: {
+                                        fallback_behavior: ("MATCH" | "NO_MATCH")?
                                       }?
                                     },
                                     text_transformations: Array[
@@ -831,6 +846,9 @@ module Aws
                                       }?,
                                       ja4_fingerprint: {
                                         fallback_behavior: ("MATCH" | "NO_MATCH")
+                                      }?,
+                                      uri_fragment: {
+                                        fallback_behavior: ("MATCH" | "NO_MATCH")?
                                       }?
                                     },
                                     text_transformations: Array[
@@ -1061,6 +1079,9 @@ module Aws
                                          }?,
                                          ja4_fingerprint: {
                                            fallback_behavior: ("MATCH" | "NO_MATCH")
+                                         }?,
+                                         uri_fragment: {
+                                           fallback_behavior: ("MATCH" | "NO_MATCH")?
                                          }?
                                        },
                                        text_transformations: Array[
@@ -1128,6 +1149,9 @@ module Aws
                                          }?,
                                          ja4_fingerprint: {
                                            fallback_behavior: ("MATCH" | "NO_MATCH")
+                                         }?,
+                                         uri_fragment: {
+                                           fallback_behavior: ("MATCH" | "NO_MATCH")?
                                          }?
                                        },
                                        text_transformations: Array[
@@ -1195,6 +1219,9 @@ module Aws
                                          }?,
                                          ja4_fingerprint: {
                                            fallback_behavior: ("MATCH" | "NO_MATCH")
+                                         }?,
+                                         uri_fragment: {
+                                           fallback_behavior: ("MATCH" | "NO_MATCH")?
                                          }?
                                        },
                                        text_transformations: Array[
@@ -1261,6 +1288,9 @@ module Aws
                                          }?,
                                          ja4_fingerprint: {
                                            fallback_behavior: ("MATCH" | "NO_MATCH")
+                                         }?,
+                                         uri_fragment: {
+                                           fallback_behavior: ("MATCH" | "NO_MATCH")?
                                          }?
                                        },
                                        comparison_operator: ("EQ" | "NE" | "LE" | "LT" | "GE" | "GT"),
@@ -1412,6 +1442,9 @@ module Aws
                                          }?,
                                          ja4_fingerprint: {
                                            fallback_behavior: ("MATCH" | "NO_MATCH")
+                                         }?,
+                                         uri_fragment: {
+                                           fallback_behavior: ("MATCH" | "NO_MATCH")?
                                          }?
                                        },
                                        text_transformations: Array[
@@ -1734,6 +1767,9 @@ module Aws
                                          }?,
                                          ja4_fingerprint: {
                                            fallback_behavior: ("MATCH" | "NO_MATCH")
+                                         }?,
+                                         uri_fragment: {
+                                           fallback_behavior: ("MATCH" | "NO_MATCH")?
                                          }?
                                        },
                                        text_transformations: Array[
@@ -1948,6 +1984,9 @@ module Aws
                                       }?,
                                       ja4_fingerprint: {
                                         fallback_behavior: ("MATCH" | "NO_MATCH")
+                                      }?,
+                                      uri_fragment: {
+                                        fallback_behavior: ("MATCH" | "NO_MATCH")?
                                       }?
                                     },
                                     text_transformations: Array[
@@ -2015,6 +2054,9 @@ module Aws
                                       }?,
                                       ja4_fingerprint: {
                                         fallback_behavior: ("MATCH" | "NO_MATCH")
+                                      }?,
+                                      uri_fragment: {
+                                        fallback_behavior: ("MATCH" | "NO_MATCH")?
                                       }?
                                     },
                                     text_transformations: Array[
@@ -2082,6 +2124,9 @@ module Aws
                                       }?,
                                       ja4_fingerprint: {
                                         fallback_behavior: ("MATCH" | "NO_MATCH")
+                                      }?,
+                                      uri_fragment: {
+                                        fallback_behavior: ("MATCH" | "NO_MATCH")?
                                       }?
                                     },
                                     text_transformations: Array[
@@ -2148,6 +2193,9 @@ module Aws
                                       }?,
                                       ja4_fingerprint: {
                                         fallback_behavior: ("MATCH" | "NO_MATCH")
+                                      }?,
+                                      uri_fragment: {
+                                        fallback_behavior: ("MATCH" | "NO_MATCH")?
                                       }?
                                     },
                                     comparison_operator: ("EQ" | "NE" | "LE" | "LT" | "GE" | "GT"),
@@ -2299,6 +2347,9 @@ module Aws
                                       }?,
                                       ja4_fingerprint: {
                                         fallback_behavior: ("MATCH" | "NO_MATCH")
+                                      }?,
+                                      uri_fragment: {
+                                        fallback_behavior: ("MATCH" | "NO_MATCH")?
                                       }?
                                     },
                                     text_transformations: Array[
@@ -2621,6 +2672,9 @@ module Aws
                                       }?,
                                       ja4_fingerprint: {
                                         fallback_behavior: ("MATCH" | "NO_MATCH")
+                                      }?,
+                                      uri_fragment: {
+                                        fallback_behavior: ("MATCH" | "NO_MATCH")?
                                       }?
                                     },
                                     text_transformations: Array[
@@ -3298,6 +3352,9 @@ module Aws
                                              }?,
                                              ja4_fingerprint: {
                                                fallback_behavior: ("MATCH" | "NO_MATCH")
+                                             }?,
+                                             uri_fragment: {
+                                               fallback_behavior: ("MATCH" | "NO_MATCH")?
                                              }?
                                            },
                                          ]?,
@@ -3504,6 +3561,9 @@ module Aws
                                          }?,
                                          ja4_fingerprint: {
                                            fallback_behavior: ("MATCH" | "NO_MATCH")
+                                         }?,
+                                         uri_fragment: {
+                                           fallback_behavior: ("MATCH" | "NO_MATCH")?
                                          }?
                                        },
                                        text_transformations: Array[
@@ -3571,6 +3631,9 @@ module Aws
                                          }?,
                                          ja4_fingerprint: {
                                            fallback_behavior: ("MATCH" | "NO_MATCH")
+                                         }?,
+                                         uri_fragment: {
+                                           fallback_behavior: ("MATCH" | "NO_MATCH")?
                                          }?
                                        },
                                        text_transformations: Array[
@@ -3638,6 +3701,9 @@ module Aws
                                          }?,
                                          ja4_fingerprint: {
                                            fallback_behavior: ("MATCH" | "NO_MATCH")
+                                         }?,
+                                         uri_fragment: {
+                                           fallback_behavior: ("MATCH" | "NO_MATCH")?
                                          }?
                                        },
                                        text_transformations: Array[
@@ -3704,6 +3770,9 @@ module Aws
                                          }?,
                                          ja4_fingerprint: {
                                            fallback_behavior: ("MATCH" | "NO_MATCH")
+                                         }?,
+                                         uri_fragment: {
+                                           fallback_behavior: ("MATCH" | "NO_MATCH")?
                                          }?
                                        },
                                        comparison_operator: ("EQ" | "NE" | "LE" | "LT" | "GE" | "GT"),
@@ -3855,6 +3924,9 @@ module Aws
                                          }?,
                                          ja4_fingerprint: {
                                            fallback_behavior: ("MATCH" | "NO_MATCH")
+                                         }?,
+                                         uri_fragment: {
+                                           fallback_behavior: ("MATCH" | "NO_MATCH")?
                                          }?
                                        },
                                        text_transformations: Array[
@@ -4177,6 +4249,9 @@ module Aws
                                          }?,
                                          ja4_fingerprint: {
                                            fallback_behavior: ("MATCH" | "NO_MATCH")
+                                         }?,
+                                         uri_fragment: {
+                                           fallback_behavior: ("MATCH" | "NO_MATCH")?
                                          }?
                                        },
                                        text_transformations: Array[
@@ -4387,6 +4462,9 @@ module Aws
                                       }?,
                                       ja4_fingerprint: {
                                         fallback_behavior: ("MATCH" | "NO_MATCH")
+                                      }?,
+                                      uri_fragment: {
+                                        fallback_behavior: ("MATCH" | "NO_MATCH")?
                                       }?
                                     },
                                     text_transformations: Array[
@@ -4454,6 +4532,9 @@ module Aws
                                       }?,
                                       ja4_fingerprint: {
                                         fallback_behavior: ("MATCH" | "NO_MATCH")
+                                      }?,
+                                      uri_fragment: {
+                                        fallback_behavior: ("MATCH" | "NO_MATCH")?
                                       }?
                                     },
                                     text_transformations: Array[
@@ -4521,6 +4602,9 @@ module Aws
                                       }?,
                                       ja4_fingerprint: {
                                         fallback_behavior: ("MATCH" | "NO_MATCH")
+                                      }?,
+                                      uri_fragment: {
+                                        fallback_behavior: ("MATCH" | "NO_MATCH")?
                                       }?
                                     },
                                     text_transformations: Array[
@@ -4587,6 +4671,9 @@ module Aws
                                       }?,
                                       ja4_fingerprint: {
                                         fallback_behavior: ("MATCH" | "NO_MATCH")
+                                      }?,
+                                      uri_fragment: {
+                                        fallback_behavior: ("MATCH" | "NO_MATCH")?
                                       }?
                                     },
                                     comparison_operator: ("EQ" | "NE" | "LE" | "LT" | "GE" | "GT"),
@@ -4738,6 +4825,9 @@ module Aws
                                       }?,
                                       ja4_fingerprint: {
                                         fallback_behavior: ("MATCH" | "NO_MATCH")
+                                      }?,
+                                      uri_fragment: {
+                                        fallback_behavior: ("MATCH" | "NO_MATCH")?
                                       }?
                                     },
                                     text_transformations: Array[
@@ -5060,6 +5150,9 @@ module Aws
                                       }?,
                                       ja4_fingerprint: {
                                         fallback_behavior: ("MATCH" | "NO_MATCH")
+                                      }?,
+                                      uri_fragment: {
+                                        fallback_behavior: ("MATCH" | "NO_MATCH")?
                                       }?
                                     },
                                     text_transformations: Array[

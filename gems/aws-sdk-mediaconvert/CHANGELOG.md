@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.154.0 (2025-03-18)
+------------------
+
+* Feature - This release adds support for AVC passthrough, the ability to specify PTS offset without padding, and an A/V segment matching feature.
+
 1.153.0 (2025-02-28)
 ------------------
 

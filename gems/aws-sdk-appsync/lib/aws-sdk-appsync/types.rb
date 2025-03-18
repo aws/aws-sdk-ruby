@@ -1268,12 +1268,18 @@ module Aws::AppSync
     #   A description of the `DomainName`.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A map with keys of `TagKey` objects and values of `TagValue`
+    #   objects.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateDomainNameRequest AWS API Documentation
     #
     class CreateDomainNameRequest < Struct.new(
       :domain_name,
       :certificate_arn,
-      :description)
+      :description,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2271,6 +2277,15 @@ module Aws::AppSync
     #   The ID of your Amazon Route 53 hosted zone.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A map with keys of `TagKey` objects and values of `TagValue`
+    #   objects.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] domain_name_arn
+    #   The Amazon Resource Name (ARN) of the domain name.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DomainNameConfig AWS API Documentation
     #
     class DomainNameConfig < Struct.new(
@@ -2278,7 +2293,9 @@ module Aws::AppSync
       :description,
       :certificate_arn,
       :appsync_domain_name,
-      :hosted_zone_id)
+      :hosted_zone_id,
+      :tags,
+      :domain_name_arn)
       SENSITIVE = []
       include Aws::Structure
     end

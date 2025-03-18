@@ -127,9 +127,26 @@ module Aws
                                       ?description: ::String,
                                       membership_identifier: ::String,
                                       name: ::String,
-                                      format: ("SQL"),
+                                      format: ("SQL" | "PYSPARK_1_0"),
                                       source: {
-                                        text: ::String?
+                                        text: ::String?,
+                                        artifacts: {
+                                          entry_point: {
+                                            location: {
+                                              bucket: ::String,
+                                              key: ::String
+                                            }
+                                          },
+                                          additional_artifacts: Array[
+                                            {
+                                              location: {
+                                                bucket: ::String,
+                                                key: ::String
+                                              }
+                                            },
+                                          ]?,
+                                          role_arn: ::String
+                                        }?
                                       },
                                       ?tags: Hash[::String, ::String],
                                       ?analysis_parameters: Array[
@@ -138,7 +155,10 @@ module Aws
                                           type: ("SMALLINT" | "INTEGER" | "BIGINT" | "DECIMAL" | "REAL" | "DOUBLE_PRECISION" | "BOOLEAN" | "CHAR" | "VARCHAR" | "DATE" | "TIMESTAMP" | "TIMESTAMPTZ" | "TIME" | "TIMETZ" | "VARBYTE" | "BINARY" | "BYTE" | "CHARACTER" | "DOUBLE" | "FLOAT" | "INT" | "LONG" | "NUMERIC" | "SHORT" | "STRING" | "TIMESTAMP_LTZ" | "TIMESTAMP_NTZ" | "TINYINT"),
                                           default_value: ::String?
                                         },
-                                      ]
+                                      ],
+                                      ?schema: {
+                                        referenced_tables: Array[::String]?
+                                      }
                                     ) -> _CreateAnalysisTemplateResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAnalysisTemplateResponseSuccess
 
@@ -151,7 +171,7 @@ module Aws
                                   members: Array[
                                     {
                                       account_id: ::String,
-                                      member_abilities: Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS")],
+                                      member_abilities: Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS" | "CAN_RUN_JOB")],
                                       ml_member_abilities: {
                                         custom_ml_member_abilities: Array[("CAN_RECEIVE_MODEL_OUTPUT" | "CAN_RECEIVE_INFERENCE_OUTPUT")]
                                       }?,
@@ -167,13 +187,16 @@ module Aws
                                           model_inference: {
                                             is_responsible: bool
                                           }?
+                                        }?,
+                                        job_compute: {
+                                          is_responsible: bool
                                         }?
                                       }?
                                     },
                                   ],
                                   name: ::String,
                                   description: ::String,
-                                  creator_member_abilities: Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS")],
+                                  creator_member_abilities: Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS" | "CAN_RUN_JOB")],
                                   ?creator_ml_member_abilities: {
                                     custom_ml_member_abilities: Array[("CAN_RECEIVE_MODEL_OUTPUT" | "CAN_RECEIVE_INFERENCE_OUTPUT")]
                                   },
@@ -185,6 +208,7 @@ module Aws
                                     preserve_nulls: bool
                                   },
                                   query_log_status: ("ENABLED" | "DISABLED"),
+                                  ?job_log_status: ("ENABLED" | "DISABLED"),
                                   ?tags: Hash[::String, ::String],
                                   ?creator_payment_configuration: {
                                     query_compute: {
@@ -197,6 +221,9 @@ module Aws
                                       model_inference: {
                                         is_responsible: bool
                                       }?
+                                    }?,
+                                    job_compute: {
+                                      is_responsible: bool
                                     }?
                                   },
                                   ?analytics_engine: ("SPARK" | "CLEAN_ROOMS_SQL")
@@ -254,7 +281,8 @@ module Aws
                                        }?
                                      },
                                      allowed_columns: Array[::String],
-                                     analysis_method: ("DIRECT_QUERY"),
+                                     analysis_method: ("DIRECT_QUERY" | "DIRECT_JOB" | "MULTIPLE"),
+                                     ?selected_analysis_methods: Array[("DIRECT_QUERY" | "DIRECT_JOB")],
                                      ?tags: Hash[::String, ::String]
                                    ) -> _CreateConfiguredTableResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfiguredTableResponseSuccess
@@ -403,6 +431,7 @@ module Aws
       def create_membership: (
                                collaboration_identifier: ::String,
                                query_log_status: ("ENABLED" | "DISABLED"),
+                               ?job_log_status: ("ENABLED" | "DISABLED"),
                                ?tags: Hash[::String, ::String],
                                ?default_result_configuration: {
                                  output_configuration: {
@@ -415,6 +444,15 @@ module Aws
                                  },
                                  role_arn: ::String?
                                },
+                               ?default_job_result_configuration: {
+                                 output_configuration: {
+                                   s3: {
+                                     bucket: ::String,
+                                     key_prefix: ::String?
+                                   }?
+                                 },
+                                 role_arn: ::String
+                               },
                                ?payment_configuration: {
                                  query_compute: {
                                    is_responsible: bool
@@ -426,6 +464,9 @@ module Aws
                                    model_inference: {
                                      is_responsible: bool
                                    }?
+                                 }?,
+                                 job_compute: {
+                                   is_responsible: bool
                                  }?
                                }
                              ) -> _CreateMembershipResponseSuccess
@@ -731,6 +772,17 @@ module Aws
                                        ) -> _GetPrivacyBudgetTemplateResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPrivacyBudgetTemplateResponseSuccess
 
+      interface _GetProtectedJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProtectedJobOutput]
+        def protected_job: () -> Types::ProtectedJob
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#get_protected_job-instance_method
+      def get_protected_job: (
+                               membership_identifier: ::String,
+                               protected_job_identifier: ::String
+                             ) -> _GetProtectedJobResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProtectedJobResponseSuccess
+
       interface _GetProtectedQueryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetProtectedQueryOutput]
         def protected_query: () -> Types::ProtectedQuery
@@ -974,6 +1026,20 @@ module Aws
                                 ) -> _ListPrivacyBudgetsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPrivacyBudgetsResponseSuccess
 
+      interface _ListProtectedJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProtectedJobsOutput]
+        def next_token: () -> ::String
+        def protected_jobs: () -> ::Array[Types::ProtectedJobSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#list_protected_jobs-instance_method
+      def list_protected_jobs: (
+                                 membership_identifier: ::String,
+                                 ?status: ("SUBMITTED" | "STARTED" | "CANCELLED" | "CANCELLING" | "FAILED" | "SUCCESS"),
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer
+                               ) -> _ListProtectedJobsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProtectedJobsResponseSuccess
+
       interface _ListProtectedQueriesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListProtectedQueriesOutput]
         def next_token: () -> ::String
@@ -1038,6 +1104,27 @@ module Aws
                                     }
                                   ) -> _PreviewPrivacyImpactResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PreviewPrivacyImpactResponseSuccess
+
+      interface _StartProtectedJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartProtectedJobOutput]
+        def protected_job: () -> Types::ProtectedJob
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#start_protected_job-instance_method
+      def start_protected_job: (
+                                 type: ("PYSPARK"),
+                                 membership_identifier: ::String,
+                                 job_parameters: {
+                                   analysis_template_arn: ::String?
+                                 },
+                                 ?result_configuration: {
+                                   output_configuration: {
+                                     member: {
+                                       account_id: ::String
+                                     }?
+                                   }
+                                 }
+                               ) -> _StartProtectedJobResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartProtectedJobResponseSuccess
 
       interface _StartProtectedQueryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartProtectedQueryOutput]
@@ -1139,7 +1226,9 @@ module Aws
       def update_configured_table: (
                                      configured_table_identifier: ::String,
                                      ?name: ::String,
-                                     ?description: ::String
+                                     ?description: ::String,
+                                     ?analysis_method: ("DIRECT_QUERY" | "DIRECT_JOB" | "MULTIPLE"),
+                                     ?selected_analysis_methods: Array[("DIRECT_QUERY" | "DIRECT_JOB")]
                                    ) -> _UpdateConfiguredTableResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConfiguredTableResponseSuccess
 
@@ -1276,6 +1365,7 @@ module Aws
       def update_membership: (
                                membership_identifier: ::String,
                                ?query_log_status: ("ENABLED" | "DISABLED"),
+                               ?job_log_status: ("ENABLED" | "DISABLED"),
                                ?default_result_configuration: {
                                  output_configuration: {
                                    s3: {
@@ -1286,6 +1376,15 @@ module Aws
                                    }?
                                  },
                                  role_arn: ::String?
+                               },
+                               ?default_job_result_configuration: {
+                                 output_configuration: {
+                                   s3: {
+                                     bucket: ::String,
+                                     key_prefix: ::String?
+                                   }?
+                                 },
+                                 role_arn: ::String
                                }
                              ) -> _UpdateMembershipResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMembershipResponseSuccess
@@ -1307,6 +1406,18 @@ module Aws
                                             }
                                           ) -> _UpdatePrivacyBudgetTemplateResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePrivacyBudgetTemplateResponseSuccess
+
+      interface _UpdateProtectedJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProtectedJobOutput]
+        def protected_job: () -> Types::ProtectedJob
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#update_protected_job-instance_method
+      def update_protected_job: (
+                                  membership_identifier: ::String,
+                                  protected_job_identifier: ::String,
+                                  target_status: ("CANCELLED")
+                                ) -> _UpdateProtectedJobResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProtectedJobResponseSuccess
 
       interface _UpdateProtectedQueryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProtectedQueryOutput]

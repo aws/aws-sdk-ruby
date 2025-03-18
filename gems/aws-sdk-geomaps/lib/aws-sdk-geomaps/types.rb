@@ -345,6 +345,19 @@ module Aws::GeoMaps
     #   Example: 49.295,-123.108
     #   @return [String]
     #
+    # @!attribute [rw] color_scheme
+    #   Sets color tone for map, such as dark and light for specific map
+    #   styles. It only applies to vector map styles, such as Standard.
+    #
+    #   Example: `Light`
+    #
+    #   Default value: `Light`
+    #
+    #   <note markdown="1"> Valid values for `ColorScheme` are case sensitive.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @!attribute [rw] compact_overlay
     #   Takes in a string to draw geometries on the image. The input is a
     #   comma separated format as follows format: `[Lon, Lat]`
@@ -359,6 +372,11 @@ module Aws::GeoMaps
     #
     #    </note>
     #   @return [String]
+    #
+    # @!attribute [rw] crop_labels
+    #   It is a flag that takes in true or false. It prevents the labels
+    #   that are on the edge of the image from being cut or obscured.
+    #   @return [Boolean]
     #
     # @!attribute [rw] geo_json_overlay
     #   Takes in a string to draw geometries on the image. The input is a
@@ -379,6 +397,156 @@ module Aws::GeoMaps
     #   key or valid SigV4 signature must be provided when making a request.
     #   @return [String]
     #
+    # @!attribute [rw] label_size
+    #   Overrides the label size auto-calculated by `FileName`. Takes in one
+    #   of the values - `Small` or `Large`.
+    #   @return [String]
+    #
+    # @!attribute [rw] language
+    #   Specifies the language on the map labels using the BCP 47 language
+    #   tag, limited to ISO 639-1 two-letter language codes. If the
+    #   specified language data isn't available for the map image, the
+    #   labels will default to the regional primary language.
+    #
+    #   Supported codes:
+    #
+    #   * `ar`
+    #
+    #   * `as`
+    #
+    #   * `az`
+    #
+    #   * `be`
+    #
+    #   * `bg`
+    #
+    #   * `bn`
+    #
+    #   * `bs`
+    #
+    #   * `ca`
+    #
+    #   * `cs`
+    #
+    #   * `cy`
+    #
+    #   * `da`
+    #
+    #   * `de`
+    #
+    #   * `el`
+    #
+    #   * `en`
+    #
+    #   * `es`
+    #
+    #   * `et`
+    #
+    #   * `eu`
+    #
+    #   * `fi`
+    #
+    #   * `fo`
+    #
+    #   * `fr`
+    #
+    #   * `ga`
+    #
+    #   * `gl`
+    #
+    #   * `gn`
+    #
+    #   * `gu`
+    #
+    #   * `he`
+    #
+    #   * `hi`
+    #
+    #   * `hr`
+    #
+    #   * `hu`
+    #
+    #   * `hy`
+    #
+    #   * `id`
+    #
+    #   * `is`
+    #
+    #   * `it`
+    #
+    #   * `ja`
+    #
+    #   * `ka`
+    #
+    #   * `kk`
+    #
+    #   * `km`
+    #
+    #   * `kn`
+    #
+    #   * `ko`
+    #
+    #   * `ky`
+    #
+    #   * `lt`
+    #
+    #   * `lv`
+    #
+    #   * `mk`
+    #
+    #   * `ml`
+    #
+    #   * `mr`
+    #
+    #   * `ms`
+    #
+    #   * `mt`
+    #
+    #   * `my`
+    #
+    #   * `nl`
+    #
+    #   * `no`
+    #
+    #   * `or`
+    #
+    #   * `pa`
+    #
+    #   * `pl`
+    #
+    #   * `pt`
+    #
+    #   * `ro`
+    #
+    #   * `ru`
+    #
+    #   * `sk`
+    #
+    #   * `sl`
+    #
+    #   * `sq`
+    #
+    #   * `sr`
+    #
+    #   * `sv`
+    #
+    #   * `ta`
+    #
+    #   * `te`
+    #
+    #   * `th`
+    #
+    #   * `tr`
+    #
+    #   * `uk`
+    #
+    #   * `uz`
+    #
+    #   * `vi`
+    #
+    #   * `zh`
+    #   @return [String]
+    #
     # @!attribute [rw] padding
     #   Applies additional space (in pixels) around overlay feature to
     #   prevent them from being cut or obscured.
@@ -393,6 +561,49 @@ module Aws::GeoMaps
     #
     #   Example: `100`
     #   @return [Integer]
+    #
+    # @!attribute [rw] political_view
+    #   Specifies the political view, using ISO 3166-2 or ISO 3166-3 country
+    #   code format.
+    #
+    #   The following political views are currently supported:
+    #
+    #   * `ARG`: Argentina's view on the Southern Patagonian Ice Field and
+    #     Tierra Del Fuego, including the Falkland Islands, South Georgia,
+    #     and South Sandwich Islands
+    #
+    #   * `EGY`: Egypt's view on Bir Tawil
+    #
+    #   * `IND`: India's view on Gilgit-Baltistan
+    #
+    #   * `KEN`: Kenya's view on the Ilemi Triangle
+    #
+    #   * `MAR`: Morocco's view on Western Sahara
+    #
+    #   * `RUS`: Russia's view on Crimea
+    #
+    #   * `SDN`: Sudan's view on the Halaib Triangle
+    #
+    #   * `SRB`: Serbia's view on Kosovo, Vukovar, and Sarengrad Islands
+    #
+    #   * `SUR`: Suriname's view on the Courantyne Headwaters and Lawa
+    #     Headwaters
+    #
+    #   * `SYR`: Syria's view on the Golan Heights
+    #
+    #   * `TUR`: Turkey's view on Cyprus and Northern Cyprus
+    #
+    #   * `TZA`: Tanzania's view on Lake Malawi
+    #
+    #   * `URY`: Uruguay's view on Rincon de Artigas
+    #
+    #   * `VNM`: Vietnam's view on the Paracel Islands and Spratly Islands
+    #   @return [String]
+    #
+    # @!attribute [rw] points_of_interests
+    #   Determines if the result image will display icons representing
+    #   points of interest on the map.
+    #   @return [String]
     #
     # @!attribute [rw] radius
     #   Used with center parameter, it specifies the zoom of the image where
@@ -422,7 +633,7 @@ module Aws::GeoMaps
     #   @return [String]
     #
     # @!attribute [rw] style
-    #   Style specifies the desired map style for the `Style` APIs.
+    #   `Style` specifies the desired map style.
     #   @return [String]
     #
     # @!attribute [rw] width
@@ -443,11 +654,17 @@ module Aws::GeoMaps
       :bounding_box,
       :bounded_positions,
       :center,
+      :color_scheme,
       :compact_overlay,
+      :crop_labels,
       :geo_json_overlay,
       :height,
       :key,
+      :label_size,
+      :language,
       :padding,
+      :political_view,
+      :points_of_interests,
       :radius,
       :file_name,
       :scale_bar_unit,
@@ -527,8 +744,6 @@ module Aws::GeoMaps
     #   * `KEN`: Kenya's view on the Ilemi Triangle
     #
     #   * `MAR`: Morocco's view on Western Sahara
-    #
-    #   * `PAK`: Pakistan's view on Jammu and Kashmir and the Junagadh Area
     #
     #   * `RUS`: Russia's view on Crimea
     #
@@ -631,8 +846,8 @@ module Aws::GeoMaps
     end
 
     # @!attribute [rw] blob
-    #   The blob represents a vector tile in `mvt` format for the `GetTile`
-    #   API.
+    #   The blob represents a vector tile in `mvt` or a raster tile in an
+    #   image format.
     #   @return [String]
     #
     # @!attribute [rw] content_type
@@ -698,7 +913,7 @@ module Aws::GeoMaps
     #   @return [String]
     #
     # @!attribute [rw] reason
-    #   The field where thebb invalid entry was detected.
+    #   The field where the invalid entry was detected.
     #   @return [String]
     #
     # @!attribute [rw] field_list

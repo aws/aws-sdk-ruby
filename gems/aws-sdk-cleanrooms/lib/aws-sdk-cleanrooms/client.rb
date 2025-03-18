@@ -507,8 +507,17 @@ module Aws::CleanRooms
     #   resp.collaboration_analysis_templates[0].update_time #=> Time
     #   resp.collaboration_analysis_templates[0].schema.referenced_tables #=> Array
     #   resp.collaboration_analysis_templates[0].schema.referenced_tables[0] #=> String
-    #   resp.collaboration_analysis_templates[0].format #=> String, one of "SQL"
+    #   resp.collaboration_analysis_templates[0].format #=> String, one of "SQL", "PYSPARK_1_0"
     #   resp.collaboration_analysis_templates[0].source.text #=> String
+    #   resp.collaboration_analysis_templates[0].source.artifacts.entry_point.location.bucket #=> String
+    #   resp.collaboration_analysis_templates[0].source.artifacts.entry_point.location.key #=> String
+    #   resp.collaboration_analysis_templates[0].source.artifacts.additional_artifacts #=> Array
+    #   resp.collaboration_analysis_templates[0].source.artifacts.additional_artifacts[0].location.bucket #=> String
+    #   resp.collaboration_analysis_templates[0].source.artifacts.additional_artifacts[0].location.key #=> String
+    #   resp.collaboration_analysis_templates[0].source.artifacts.role_arn #=> String
+    #   resp.collaboration_analysis_templates[0].source_metadata.artifacts.entry_point_hash.sha256 #=> String
+    #   resp.collaboration_analysis_templates[0].source_metadata.artifacts.additional_artifact_hashes #=> Array
+    #   resp.collaboration_analysis_templates[0].source_metadata.artifacts.additional_artifact_hashes[0].sha256 #=> String
     #   resp.collaboration_analysis_templates[0].analysis_parameters #=> Array
     #   resp.collaboration_analysis_templates[0].analysis_parameters[0].name #=> String
     #   resp.collaboration_analysis_templates[0].analysis_parameters[0].type #=> String, one of "SMALLINT", "INTEGER", "BIGINT", "DECIMAL", "REAL", "DOUBLE_PRECISION", "BOOLEAN", "CHAR", "VARCHAR", "DATE", "TIMESTAMP", "TIMESTAMPTZ", "TIME", "TIMETZ", "VARBYTE", "BINARY", "BYTE", "CHARACTER", "DOUBLE", "FLOAT", "INT", "LONG", "NUMERIC", "SHORT", "STRING", "TIMESTAMP_LTZ", "TIMESTAMP_NTZ", "TINYINT"
@@ -564,7 +573,9 @@ module Aws::CleanRooms
     #   resp.schemas[0].partition_keys[0].type #=> String
     #   resp.schemas[0].analysis_rule_types #=> Array
     #   resp.schemas[0].analysis_rule_types[0] #=> String, one of "AGGREGATION", "LIST", "CUSTOM", "ID_MAPPING_TABLE"
-    #   resp.schemas[0].analysis_method #=> String, one of "DIRECT_QUERY"
+    #   resp.schemas[0].analysis_method #=> String, one of "DIRECT_QUERY", "DIRECT_JOB", "MULTIPLE"
+    #   resp.schemas[0].selected_analysis_methods #=> Array
+    #   resp.schemas[0].selected_analysis_methods[0] #=> String, one of "DIRECT_QUERY", "DIRECT_JOB"
     #   resp.schemas[0].creator_account_id #=> String
     #   resp.schemas[0].name #=> String
     #   resp.schemas[0].collaboration_id #=> String
@@ -674,6 +685,64 @@ module Aws::CleanRooms
     #   resp.analysis_rules[0].policy.v1.id_mapping_table.query_constraints[0].require_overlap.columns[0] #=> String
     #   resp.analysis_rules[0].policy.v1.id_mapping_table.dimension_columns #=> Array
     #   resp.analysis_rules[0].policy.v1.id_mapping_table.dimension_columns[0] #=> String
+    #   resp.analysis_rules[0].collaboration_policy.v1.list.allowed_result_receivers #=> Array
+    #   resp.analysis_rules[0].collaboration_policy.v1.list.allowed_result_receivers[0] #=> String
+    #   resp.analysis_rules[0].collaboration_policy.v1.list.allowed_additional_analyses #=> Array
+    #   resp.analysis_rules[0].collaboration_policy.v1.list.allowed_additional_analyses[0] #=> String
+    #   resp.analysis_rules[0].collaboration_policy.v1.aggregation.allowed_result_receivers #=> Array
+    #   resp.analysis_rules[0].collaboration_policy.v1.aggregation.allowed_result_receivers[0] #=> String
+    #   resp.analysis_rules[0].collaboration_policy.v1.aggregation.allowed_additional_analyses #=> Array
+    #   resp.analysis_rules[0].collaboration_policy.v1.aggregation.allowed_additional_analyses[0] #=> String
+    #   resp.analysis_rules[0].collaboration_policy.v1.custom.allowed_result_receivers #=> Array
+    #   resp.analysis_rules[0].collaboration_policy.v1.custom.allowed_result_receivers[0] #=> String
+    #   resp.analysis_rules[0].collaboration_policy.v1.custom.allowed_additional_analyses #=> Array
+    #   resp.analysis_rules[0].collaboration_policy.v1.custom.allowed_additional_analyses[0] #=> String
+    #   resp.analysis_rules[0].consolidated_policy.v1.list.join_columns #=> Array
+    #   resp.analysis_rules[0].consolidated_policy.v1.list.join_columns[0] #=> String
+    #   resp.analysis_rules[0].consolidated_policy.v1.list.allowed_join_operators #=> Array
+    #   resp.analysis_rules[0].consolidated_policy.v1.list.allowed_join_operators[0] #=> String, one of "OR", "AND"
+    #   resp.analysis_rules[0].consolidated_policy.v1.list.list_columns #=> Array
+    #   resp.analysis_rules[0].consolidated_policy.v1.list.list_columns[0] #=> String
+    #   resp.analysis_rules[0].consolidated_policy.v1.list.additional_analyses #=> String, one of "ALLOWED", "REQUIRED", "NOT_ALLOWED"
+    #   resp.analysis_rules[0].consolidated_policy.v1.list.allowed_result_receivers #=> Array
+    #   resp.analysis_rules[0].consolidated_policy.v1.list.allowed_result_receivers[0] #=> String
+    #   resp.analysis_rules[0].consolidated_policy.v1.list.allowed_additional_analyses #=> Array
+    #   resp.analysis_rules[0].consolidated_policy.v1.list.allowed_additional_analyses[0] #=> String
+    #   resp.analysis_rules[0].consolidated_policy.v1.aggregation.aggregate_columns #=> Array
+    #   resp.analysis_rules[0].consolidated_policy.v1.aggregation.aggregate_columns[0].column_names #=> Array
+    #   resp.analysis_rules[0].consolidated_policy.v1.aggregation.aggregate_columns[0].column_names[0] #=> String
+    #   resp.analysis_rules[0].consolidated_policy.v1.aggregation.aggregate_columns[0].function #=> String, one of "SUM", "SUM_DISTINCT", "COUNT", "COUNT_DISTINCT", "AVG"
+    #   resp.analysis_rules[0].consolidated_policy.v1.aggregation.join_columns #=> Array
+    #   resp.analysis_rules[0].consolidated_policy.v1.aggregation.join_columns[0] #=> String
+    #   resp.analysis_rules[0].consolidated_policy.v1.aggregation.join_required #=> String, one of "QUERY_RUNNER"
+    #   resp.analysis_rules[0].consolidated_policy.v1.aggregation.allowed_join_operators #=> Array
+    #   resp.analysis_rules[0].consolidated_policy.v1.aggregation.allowed_join_operators[0] #=> String, one of "OR", "AND"
+    #   resp.analysis_rules[0].consolidated_policy.v1.aggregation.dimension_columns #=> Array
+    #   resp.analysis_rules[0].consolidated_policy.v1.aggregation.dimension_columns[0] #=> String
+    #   resp.analysis_rules[0].consolidated_policy.v1.aggregation.scalar_functions #=> Array
+    #   resp.analysis_rules[0].consolidated_policy.v1.aggregation.scalar_functions[0] #=> String, one of "ABS", "CAST", "CEILING", "COALESCE", "CONVERT", "CURRENT_DATE", "DATEADD", "EXTRACT", "FLOOR", "GETDATE", "LN", "LOG", "LOWER", "ROUND", "RTRIM", "SQRT", "SUBSTRING", "TO_CHAR", "TO_DATE", "TO_NUMBER", "TO_TIMESTAMP", "TRIM", "TRUNC", "UPPER"
+    #   resp.analysis_rules[0].consolidated_policy.v1.aggregation.output_constraints #=> Array
+    #   resp.analysis_rules[0].consolidated_policy.v1.aggregation.output_constraints[0].column_name #=> String
+    #   resp.analysis_rules[0].consolidated_policy.v1.aggregation.output_constraints[0].minimum #=> Integer
+    #   resp.analysis_rules[0].consolidated_policy.v1.aggregation.output_constraints[0].type #=> String, one of "COUNT_DISTINCT"
+    #   resp.analysis_rules[0].consolidated_policy.v1.aggregation.additional_analyses #=> String, one of "ALLOWED", "REQUIRED", "NOT_ALLOWED"
+    #   resp.analysis_rules[0].consolidated_policy.v1.aggregation.allowed_result_receivers #=> Array
+    #   resp.analysis_rules[0].consolidated_policy.v1.aggregation.allowed_result_receivers[0] #=> String
+    #   resp.analysis_rules[0].consolidated_policy.v1.aggregation.allowed_additional_analyses #=> Array
+    #   resp.analysis_rules[0].consolidated_policy.v1.aggregation.allowed_additional_analyses[0] #=> String
+    #   resp.analysis_rules[0].consolidated_policy.v1.custom.allowed_analyses #=> Array
+    #   resp.analysis_rules[0].consolidated_policy.v1.custom.allowed_analyses[0] #=> String
+    #   resp.analysis_rules[0].consolidated_policy.v1.custom.allowed_analysis_providers #=> Array
+    #   resp.analysis_rules[0].consolidated_policy.v1.custom.allowed_analysis_providers[0] #=> String
+    #   resp.analysis_rules[0].consolidated_policy.v1.custom.additional_analyses #=> String, one of "ALLOWED", "REQUIRED", "NOT_ALLOWED"
+    #   resp.analysis_rules[0].consolidated_policy.v1.custom.disallowed_output_columns #=> Array
+    #   resp.analysis_rules[0].consolidated_policy.v1.custom.disallowed_output_columns[0] #=> String
+    #   resp.analysis_rules[0].consolidated_policy.v1.custom.differential_privacy.columns #=> Array
+    #   resp.analysis_rules[0].consolidated_policy.v1.custom.differential_privacy.columns[0].name #=> String
+    #   resp.analysis_rules[0].consolidated_policy.v1.custom.allowed_result_receivers #=> Array
+    #   resp.analysis_rules[0].consolidated_policy.v1.custom.allowed_result_receivers[0] #=> String
+    #   resp.analysis_rules[0].consolidated_policy.v1.custom.allowed_additional_analyses #=> Array
+    #   resp.analysis_rules[0].consolidated_policy.v1.custom.allowed_additional_analyses[0] #=> String
     #   resp.errors #=> Array
     #   resp.errors[0].name #=> String
     #   resp.errors[0].type #=> String, one of "AGGREGATION", "LIST", "CUSTOM", "ID_MAPPING_TABLE"
@@ -716,6 +785,9 @@ module Aws::CleanRooms
     # @option params [Array<Types::AnalysisParameter>] :analysis_parameters
     #   The parameters of the analysis template.
     #
+    # @option params [Types::AnalysisSchema] :schema
+    #   A relation within an analysis.
+    #
     # @return [Types::CreateAnalysisTemplateOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAnalysisTemplateOutput#analysis_template #analysis_template} => Types::AnalysisTemplate
@@ -726,9 +798,26 @@ module Aws::CleanRooms
     #     description: "ResourceDescription",
     #     membership_identifier: "MembershipIdentifier", # required
     #     name: "TableAlias", # required
-    #     format: "SQL", # required, accepts SQL
+    #     format: "SQL", # required, accepts SQL, PYSPARK_1_0
     #     source: { # required
     #       text: "AnalysisTemplateText",
+    #       artifacts: {
+    #         entry_point: { # required
+    #           location: { # required
+    #             bucket: "S3LocationBucketString", # required
+    #             key: "S3LocationKeyString", # required
+    #           },
+    #         },
+    #         additional_artifacts: [
+    #           {
+    #             location: { # required
+    #               bucket: "S3LocationBucketString", # required
+    #               key: "S3LocationKeyString", # required
+    #             },
+    #           },
+    #         ],
+    #         role_arn: "RoleArn", # required
+    #       },
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -740,6 +829,9 @@ module Aws::CleanRooms
     #         default_value: "ParameterValue",
     #       },
     #     ],
+    #     schema: {
+    #       referenced_tables: ["TableAlias"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -756,8 +848,17 @@ module Aws::CleanRooms
     #   resp.analysis_template.update_time #=> Time
     #   resp.analysis_template.schema.referenced_tables #=> Array
     #   resp.analysis_template.schema.referenced_tables[0] #=> String
-    #   resp.analysis_template.format #=> String, one of "SQL"
+    #   resp.analysis_template.format #=> String, one of "SQL", "PYSPARK_1_0"
     #   resp.analysis_template.source.text #=> String
+    #   resp.analysis_template.source.artifacts.entry_point.location.bucket #=> String
+    #   resp.analysis_template.source.artifacts.entry_point.location.key #=> String
+    #   resp.analysis_template.source.artifacts.additional_artifacts #=> Array
+    #   resp.analysis_template.source.artifacts.additional_artifacts[0].location.bucket #=> String
+    #   resp.analysis_template.source.artifacts.additional_artifacts[0].location.key #=> String
+    #   resp.analysis_template.source.artifacts.role_arn #=> String
+    #   resp.analysis_template.source_metadata.artifacts.entry_point_hash.sha256 #=> String
+    #   resp.analysis_template.source_metadata.artifacts.additional_artifact_hashes #=> Array
+    #   resp.analysis_template.source_metadata.artifacts.additional_artifact_hashes[0].sha256 #=> String
     #   resp.analysis_template.analysis_parameters #=> Array
     #   resp.analysis_template.analysis_parameters[0].name #=> String
     #   resp.analysis_template.analysis_parameters[0].type #=> String, one of "SMALLINT", "INTEGER", "BIGINT", "DECIMAL", "REAL", "DOUBLE_PRECISION", "BOOLEAN", "CHAR", "VARCHAR", "DATE", "TIMESTAMP", "TIMESTAMPTZ", "TIME", "TIMETZ", "VARBYTE", "BINARY", "BYTE", "CHARACTER", "DOUBLE", "FLOAT", "INT", "LONG", "NUMERIC", "SHORT", "STRING", "TIMESTAMP_LTZ", "TIMESTAMP_NTZ", "TINYINT"
@@ -796,14 +897,6 @@ module Aws::CleanRooms
     # @option params [Types::MLMemberAbilities] :creator_ml_member_abilities
     #   The ML abilities granted to the collaboration creator.
     #
-    #   Custom ML modeling is in beta release and is subject to change. For
-    #   beta terms and conditions, see *Betas and Previews* in the [Amazon Web
-    #   Services Service Terms][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/service-terms/
-    #
     # @option params [required, String] :creator_display_name
     #   The display name of the collaboration creator.
     #
@@ -814,6 +907,17 @@ module Aws::CleanRooms
     # @option params [required, String] :query_log_status
     #   An indicator as to whether query logging has been enabled or disabled
     #   for the collaboration.
+    #
+    #   When `ENABLED`, Clean Rooms logs details about queries run within this
+    #   collaboration and those logs can be viewed in Amazon CloudWatch Logs.
+    #   The default value is `DISABLED`.
+    #
+    # @option params [String] :job_log_status
+    #   Specifies whether job logs are enabled for this collaboration.
+    #
+    #   When `ENABLED`, Clean Rooms logs details about jobs run within this
+    #   collaboration; those logs can be viewed in Amazon CloudWatch Logs. The
+    #   default value is `DISABLED`.
     #
     # @option params [Hash<String,String>] :tags
     #   An optional label that you can assign to a resource when you create
@@ -842,7 +946,7 @@ module Aws::CleanRooms
     #     members: [ # required
     #       {
     #         account_id: "AccountId", # required
-    #         member_abilities: ["CAN_QUERY"], # required, accepts CAN_QUERY, CAN_RECEIVE_RESULTS
+    #         member_abilities: ["CAN_QUERY"], # required, accepts CAN_QUERY, CAN_RECEIVE_RESULTS, CAN_RUN_JOB
     #         ml_member_abilities: {
     #           custom_ml_member_abilities: ["CAN_RECEIVE_MODEL_OUTPUT"], # required, accepts CAN_RECEIVE_MODEL_OUTPUT, CAN_RECEIVE_INFERENCE_OUTPUT
     #         },
@@ -859,12 +963,15 @@ module Aws::CleanRooms
     #               is_responsible: false, # required
     #             },
     #           },
+    #           job_compute: {
+    #             is_responsible: false, # required
+    #           },
     #         },
     #       },
     #     ],
     #     name: "CollaborationName", # required
     #     description: "CollaborationDescription", # required
-    #     creator_member_abilities: ["CAN_QUERY"], # required, accepts CAN_QUERY, CAN_RECEIVE_RESULTS
+    #     creator_member_abilities: ["CAN_QUERY"], # required, accepts CAN_QUERY, CAN_RECEIVE_RESULTS, CAN_RUN_JOB
     #     creator_ml_member_abilities: {
     #       custom_ml_member_abilities: ["CAN_RECEIVE_MODEL_OUTPUT"], # required, accepts CAN_RECEIVE_MODEL_OUTPUT, CAN_RECEIVE_INFERENCE_OUTPUT
     #     },
@@ -876,6 +983,7 @@ module Aws::CleanRooms
     #       preserve_nulls: false, # required
     #     },
     #     query_log_status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #     job_log_status: "ENABLED", # accepts ENABLED, DISABLED
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -890,6 +998,9 @@ module Aws::CleanRooms
     #         model_inference: {
     #           is_responsible: false, # required
     #         },
+    #       },
+    #       job_compute: {
+    #         is_responsible: false, # required
     #       },
     #     },
     #     analytics_engine: "SPARK", # accepts SPARK, CLEAN_ROOMS_SQL
@@ -913,6 +1024,7 @@ module Aws::CleanRooms
     #   resp.collaboration.data_encryption_metadata.allow_joins_on_columns_with_different_names #=> Boolean
     #   resp.collaboration.data_encryption_metadata.preserve_nulls #=> Boolean
     #   resp.collaboration.query_log_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.collaboration.job_log_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.collaboration.analytics_engine #=> String, one of "SPARK", "CLEAN_ROOMS_SQL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateCollaboration AWS API Documentation
@@ -1019,8 +1131,18 @@ module Aws::CleanRooms
     #   or analysis rules.
     #
     # @option params [required, String] :analysis_method
-    #   The analysis method for the configured tables. The only valid value is
-    #   currently `DIRECT\_QUERY`.
+    #   The analysis method allowed for the configured tables.
+    #
+    #   `DIRECT_QUERY` allows SQL queries to be run directly on this table.
+    #
+    #   `DIRECT_JOB` allows PySpark jobs to be run directly on this table.
+    #
+    #   `MULTIPLE` allows both SQL queries and PySpark jobs to be run directly
+    #   on this table.
+    #
+    # @option params [Array<String>] :selected_analysis_methods
+    #   The analysis methods to enable for the configured table. When
+    #   configured, you must specify at least two analysis methods.
     #
     # @option params [Hash<String,String>] :tags
     #   An optional label that you can assign to a resource when you create
@@ -1065,7 +1187,8 @@ module Aws::CleanRooms
     #       },
     #     },
     #     allowed_columns: ["ColumnName"], # required
-    #     analysis_method: "DIRECT_QUERY", # required, accepts DIRECT_QUERY
+    #     analysis_method: "DIRECT_QUERY", # required, accepts DIRECT_QUERY, DIRECT_JOB, MULTIPLE
+    #     selected_analysis_methods: ["DIRECT_QUERY"], # accepts DIRECT_QUERY, DIRECT_JOB
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -1095,9 +1218,11 @@ module Aws::CleanRooms
     #   resp.configured_table.update_time #=> Time
     #   resp.configured_table.analysis_rule_types #=> Array
     #   resp.configured_table.analysis_rule_types[0] #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
-    #   resp.configured_table.analysis_method #=> String, one of "DIRECT_QUERY"
+    #   resp.configured_table.analysis_method #=> String, one of "DIRECT_QUERY", "DIRECT_JOB", "MULTIPLE"
     #   resp.configured_table.allowed_columns #=> Array
     #   resp.configured_table.allowed_columns[0] #=> String
+    #   resp.configured_table.selected_analysis_methods #=> Array
+    #   resp.configured_table.selected_analysis_methods[0] #=> String, one of "DIRECT_QUERY", "DIRECT_JOB"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateConfiguredTable AWS API Documentation
     #
@@ -1532,6 +1657,18 @@ module Aws::CleanRooms
     #   An indicator as to whether query logging has been enabled or disabled
     #   for the membership.
     #
+    #   When `ENABLED`, Clean Rooms logs details about queries run within this
+    #   collaboration and those logs can be viewed in Amazon CloudWatch Logs.
+    #   The default value is `DISABLED`.
+    #
+    # @option params [String] :job_log_status
+    #   An indicator as to whether job logging has been enabled or disabled
+    #   for the collaboration.
+    #
+    #   When `ENABLED`, Clean Rooms logs details about jobs run within this
+    #   collaboration and those logs can be viewed in Amazon CloudWatch Logs.
+    #   The default value is `DISABLED`.
+    #
     # @option params [Hash<String,String>] :tags
     #   An optional label that you can assign to a resource when you create
     #   it. Each tag consists of a key and an optional value, both of which
@@ -1541,6 +1678,11 @@ module Aws::CleanRooms
     # @option params [Types::MembershipProtectedQueryResultConfiguration] :default_result_configuration
     #   The default protected query result configuration as specified by the
     #   member who can receive results.
+    #
+    # @option params [Types::MembershipProtectedJobResultConfiguration] :default_job_result_configuration
+    #   The default job result configuration that determines how job results
+    #   are protected and managed within this membership. This configuration
+    #   applies to all jobs.
     #
     # @option params [Types::MembershipPaymentConfiguration] :payment_configuration
     #   The payment responsibilities accepted by the collaboration member.
@@ -1561,6 +1703,7 @@ module Aws::CleanRooms
     #   resp = client.create_membership({
     #     collaboration_identifier: "CollaborationIdentifier", # required
     #     query_log_status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #     job_log_status: "ENABLED", # accepts ENABLED, DISABLED
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -1575,6 +1718,15 @@ module Aws::CleanRooms
     #       },
     #       role_arn: "RoleArn",
     #     },
+    #     default_job_result_configuration: {
+    #       output_configuration: { # required
+    #         s3: {
+    #           bucket: "ProtectedJobS3OutputConfigurationInputBucketString", # required
+    #           key_prefix: "KeyPrefix",
+    #         },
+    #       },
+    #       role_arn: "RoleArn", # required
+    #     },
     #     payment_configuration: {
     #       query_compute: { # required
     #         is_responsible: false, # required
@@ -1586,6 +1738,9 @@ module Aws::CleanRooms
     #         model_inference: {
     #           is_responsible: false, # required
     #         },
+    #       },
+    #       job_compute: {
+    #         is_responsible: false, # required
     #       },
     #     },
     #   })
@@ -1603,18 +1758,23 @@ module Aws::CleanRooms
     #   resp.membership.update_time #=> Time
     #   resp.membership.status #=> String, one of "ACTIVE", "REMOVED", "COLLABORATION_DELETED"
     #   resp.membership.member_abilities #=> Array
-    #   resp.membership.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS"
+    #   resp.membership.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"
     #   resp.membership.ml_member_abilities.custom_ml_member_abilities #=> Array
     #   resp.membership.ml_member_abilities.custom_ml_member_abilities[0] #=> String, one of "CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"
     #   resp.membership.query_log_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.membership.job_log_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.membership.default_result_configuration.output_configuration.s3.result_format #=> String, one of "CSV", "PARQUET"
     #   resp.membership.default_result_configuration.output_configuration.s3.bucket #=> String
     #   resp.membership.default_result_configuration.output_configuration.s3.key_prefix #=> String
     #   resp.membership.default_result_configuration.output_configuration.s3.single_file_output #=> Boolean
     #   resp.membership.default_result_configuration.role_arn #=> String
+    #   resp.membership.default_job_result_configuration.output_configuration.s3.bucket #=> String
+    #   resp.membership.default_job_result_configuration.output_configuration.s3.key_prefix #=> String
+    #   resp.membership.default_job_result_configuration.role_arn #=> String
     #   resp.membership.payment_configuration.query_compute.is_responsible #=> Boolean
     #   resp.membership.payment_configuration.machine_learning.model_training.is_responsible #=> Boolean
     #   resp.membership.payment_configuration.machine_learning.model_inference.is_responsible #=> Boolean
+    #   resp.membership.payment_configuration.job_compute.is_responsible #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateMembership AWS API Documentation
     #
@@ -2060,8 +2220,17 @@ module Aws::CleanRooms
     #   resp.analysis_template.update_time #=> Time
     #   resp.analysis_template.schema.referenced_tables #=> Array
     #   resp.analysis_template.schema.referenced_tables[0] #=> String
-    #   resp.analysis_template.format #=> String, one of "SQL"
+    #   resp.analysis_template.format #=> String, one of "SQL", "PYSPARK_1_0"
     #   resp.analysis_template.source.text #=> String
+    #   resp.analysis_template.source.artifacts.entry_point.location.bucket #=> String
+    #   resp.analysis_template.source.artifacts.entry_point.location.key #=> String
+    #   resp.analysis_template.source.artifacts.additional_artifacts #=> Array
+    #   resp.analysis_template.source.artifacts.additional_artifacts[0].location.bucket #=> String
+    #   resp.analysis_template.source.artifacts.additional_artifacts[0].location.key #=> String
+    #   resp.analysis_template.source.artifacts.role_arn #=> String
+    #   resp.analysis_template.source_metadata.artifacts.entry_point_hash.sha256 #=> String
+    #   resp.analysis_template.source_metadata.artifacts.additional_artifact_hashes #=> Array
+    #   resp.analysis_template.source_metadata.artifacts.additional_artifact_hashes[0].sha256 #=> String
     #   resp.analysis_template.analysis_parameters #=> Array
     #   resp.analysis_template.analysis_parameters[0].name #=> String
     #   resp.analysis_template.analysis_parameters[0].type #=> String, one of "SMALLINT", "INTEGER", "BIGINT", "DECIMAL", "REAL", "DOUBLE_PRECISION", "BOOLEAN", "CHAR", "VARCHAR", "DATE", "TIMESTAMP", "TIMESTAMPTZ", "TIME", "TIMETZ", "VARBYTE", "BINARY", "BYTE", "CHARACTER", "DOUBLE", "FLOAT", "INT", "LONG", "NUMERIC", "SHORT", "STRING", "TIMESTAMP_LTZ", "TIMESTAMP_NTZ", "TINYINT"
@@ -2114,6 +2283,7 @@ module Aws::CleanRooms
     #   resp.collaboration.data_encryption_metadata.allow_joins_on_columns_with_different_names #=> Boolean
     #   resp.collaboration.data_encryption_metadata.preserve_nulls #=> Boolean
     #   resp.collaboration.query_log_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.collaboration.job_log_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.collaboration.analytics_engine #=> String, one of "SPARK", "CLEAN_ROOMS_SQL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetCollaboration AWS API Documentation
@@ -2159,8 +2329,17 @@ module Aws::CleanRooms
     #   resp.collaboration_analysis_template.update_time #=> Time
     #   resp.collaboration_analysis_template.schema.referenced_tables #=> Array
     #   resp.collaboration_analysis_template.schema.referenced_tables[0] #=> String
-    #   resp.collaboration_analysis_template.format #=> String, one of "SQL"
+    #   resp.collaboration_analysis_template.format #=> String, one of "SQL", "PYSPARK_1_0"
     #   resp.collaboration_analysis_template.source.text #=> String
+    #   resp.collaboration_analysis_template.source.artifacts.entry_point.location.bucket #=> String
+    #   resp.collaboration_analysis_template.source.artifacts.entry_point.location.key #=> String
+    #   resp.collaboration_analysis_template.source.artifacts.additional_artifacts #=> Array
+    #   resp.collaboration_analysis_template.source.artifacts.additional_artifacts[0].location.bucket #=> String
+    #   resp.collaboration_analysis_template.source.artifacts.additional_artifacts[0].location.key #=> String
+    #   resp.collaboration_analysis_template.source.artifacts.role_arn #=> String
+    #   resp.collaboration_analysis_template.source_metadata.artifacts.entry_point_hash.sha256 #=> String
+    #   resp.collaboration_analysis_template.source_metadata.artifacts.additional_artifact_hashes #=> Array
+    #   resp.collaboration_analysis_template.source_metadata.artifacts.additional_artifact_hashes[0].sha256 #=> String
     #   resp.collaboration_analysis_template.analysis_parameters #=> Array
     #   resp.collaboration_analysis_template.analysis_parameters[0].name #=> String
     #   resp.collaboration_analysis_template.analysis_parameters[0].type #=> String, one of "SMALLINT", "INTEGER", "BIGINT", "DECIMAL", "REAL", "DOUBLE_PRECISION", "BOOLEAN", "CHAR", "VARCHAR", "DATE", "TIMESTAMP", "TIMESTAMPTZ", "TIME", "TIMETZ", "VARBYTE", "BINARY", "BYTE", "CHARACTER", "DOUBLE", "FLOAT", "INT", "LONG", "NUMERIC", "SHORT", "STRING", "TIMESTAMP_LTZ", "TIMESTAMP_NTZ", "TINYINT"
@@ -2397,9 +2576,11 @@ module Aws::CleanRooms
     #   resp.configured_table.update_time #=> Time
     #   resp.configured_table.analysis_rule_types #=> Array
     #   resp.configured_table.analysis_rule_types[0] #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
-    #   resp.configured_table.analysis_method #=> String, one of "DIRECT_QUERY"
+    #   resp.configured_table.analysis_method #=> String, one of "DIRECT_QUERY", "DIRECT_JOB", "MULTIPLE"
     #   resp.configured_table.allowed_columns #=> Array
     #   resp.configured_table.allowed_columns[0] #=> String
+    #   resp.configured_table.selected_analysis_methods #=> Array
+    #   resp.configured_table.selected_analysis_methods[0] #=> String, one of "DIRECT_QUERY", "DIRECT_JOB"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetConfiguredTable AWS API Documentation
     #
@@ -2709,18 +2890,23 @@ module Aws::CleanRooms
     #   resp.membership.update_time #=> Time
     #   resp.membership.status #=> String, one of "ACTIVE", "REMOVED", "COLLABORATION_DELETED"
     #   resp.membership.member_abilities #=> Array
-    #   resp.membership.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS"
+    #   resp.membership.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"
     #   resp.membership.ml_member_abilities.custom_ml_member_abilities #=> Array
     #   resp.membership.ml_member_abilities.custom_ml_member_abilities[0] #=> String, one of "CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"
     #   resp.membership.query_log_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.membership.job_log_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.membership.default_result_configuration.output_configuration.s3.result_format #=> String, one of "CSV", "PARQUET"
     #   resp.membership.default_result_configuration.output_configuration.s3.bucket #=> String
     #   resp.membership.default_result_configuration.output_configuration.s3.key_prefix #=> String
     #   resp.membership.default_result_configuration.output_configuration.s3.single_file_output #=> Boolean
     #   resp.membership.default_result_configuration.role_arn #=> String
+    #   resp.membership.default_job_result_configuration.output_configuration.s3.bucket #=> String
+    #   resp.membership.default_job_result_configuration.output_configuration.s3.key_prefix #=> String
+    #   resp.membership.default_job_result_configuration.role_arn #=> String
     #   resp.membership.payment_configuration.query_compute.is_responsible #=> Boolean
     #   resp.membership.payment_configuration.machine_learning.model_training.is_responsible #=> Boolean
     #   resp.membership.payment_configuration.machine_learning.model_inference.is_responsible #=> Boolean
+    #   resp.membership.payment_configuration.job_compute.is_responsible #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetMembership AWS API Documentation
     #
@@ -2773,6 +2959,53 @@ module Aws::CleanRooms
     # @param [Hash] params ({})
     def get_privacy_budget_template(params = {}, options = {})
       req = build_request(:get_privacy_budget_template, params)
+      req.send_request(options)
+    end
+
+    # Returns job processing metadata.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The identifier for a membership in a protected job instance.
+    #
+    # @option params [required, String] :protected_job_identifier
+    #   The identifier for the protected job instance.
+    #
+    # @return [Types::GetProtectedJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetProtectedJobOutput#protected_job #protected_job} => Types::ProtectedJob
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_protected_job({
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     protected_job_identifier: "ProtectedJobIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.protected_job.id #=> String
+    #   resp.protected_job.membership_id #=> String
+    #   resp.protected_job.membership_arn #=> String
+    #   resp.protected_job.create_time #=> Time
+    #   resp.protected_job.job_parameters.analysis_template_arn #=> String
+    #   resp.protected_job.status #=> String, one of "SUBMITTED", "STARTED", "CANCELLED", "CANCELLING", "FAILED", "SUCCESS"
+    #   resp.protected_job.result_configuration.output_configuration.s3.bucket #=> String
+    #   resp.protected_job.result_configuration.output_configuration.s3.key_prefix #=> String
+    #   resp.protected_job.result_configuration.output_configuration.member.account_id #=> String
+    #   resp.protected_job.statistics.total_duration_in_millis #=> Integer
+    #   resp.protected_job.statistics.billed_resource_utilization.units #=> Float
+    #   resp.protected_job.result.output.s3.location #=> String
+    #   resp.protected_job.result.output.member_list #=> Array
+    #   resp.protected_job.result.output.member_list[0].account_id #=> String
+    #   resp.protected_job.error.message #=> String
+    #   resp.protected_job.error.code #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetProtectedJob AWS API Documentation
+    #
+    # @overload get_protected_job(params = {})
+    # @param [Hash] params ({})
+    def get_protected_job(params = {}, options = {})
+      req = build_request(:get_protected_job, params)
       req.send_request(options)
     end
 
@@ -2866,7 +3099,9 @@ module Aws::CleanRooms
     #   resp.schema.partition_keys[0].type #=> String
     #   resp.schema.analysis_rule_types #=> Array
     #   resp.schema.analysis_rule_types[0] #=> String, one of "AGGREGATION", "LIST", "CUSTOM", "ID_MAPPING_TABLE"
-    #   resp.schema.analysis_method #=> String, one of "DIRECT_QUERY"
+    #   resp.schema.analysis_method #=> String, one of "DIRECT_QUERY", "DIRECT_JOB", "MULTIPLE"
+    #   resp.schema.selected_analysis_methods #=> Array
+    #   resp.schema.selected_analysis_methods[0] #=> String, one of "DIRECT_QUERY", "DIRECT_JOB"
     #   resp.schema.creator_account_id #=> String
     #   resp.schema.name #=> String
     #   resp.schema.collaboration_id #=> String
@@ -2971,6 +3206,64 @@ module Aws::CleanRooms
     #   resp.analysis_rule.policy.v1.id_mapping_table.query_constraints[0].require_overlap.columns[0] #=> String
     #   resp.analysis_rule.policy.v1.id_mapping_table.dimension_columns #=> Array
     #   resp.analysis_rule.policy.v1.id_mapping_table.dimension_columns[0] #=> String
+    #   resp.analysis_rule.collaboration_policy.v1.list.allowed_result_receivers #=> Array
+    #   resp.analysis_rule.collaboration_policy.v1.list.allowed_result_receivers[0] #=> String
+    #   resp.analysis_rule.collaboration_policy.v1.list.allowed_additional_analyses #=> Array
+    #   resp.analysis_rule.collaboration_policy.v1.list.allowed_additional_analyses[0] #=> String
+    #   resp.analysis_rule.collaboration_policy.v1.aggregation.allowed_result_receivers #=> Array
+    #   resp.analysis_rule.collaboration_policy.v1.aggregation.allowed_result_receivers[0] #=> String
+    #   resp.analysis_rule.collaboration_policy.v1.aggregation.allowed_additional_analyses #=> Array
+    #   resp.analysis_rule.collaboration_policy.v1.aggregation.allowed_additional_analyses[0] #=> String
+    #   resp.analysis_rule.collaboration_policy.v1.custom.allowed_result_receivers #=> Array
+    #   resp.analysis_rule.collaboration_policy.v1.custom.allowed_result_receivers[0] #=> String
+    #   resp.analysis_rule.collaboration_policy.v1.custom.allowed_additional_analyses #=> Array
+    #   resp.analysis_rule.collaboration_policy.v1.custom.allowed_additional_analyses[0] #=> String
+    #   resp.analysis_rule.consolidated_policy.v1.list.join_columns #=> Array
+    #   resp.analysis_rule.consolidated_policy.v1.list.join_columns[0] #=> String
+    #   resp.analysis_rule.consolidated_policy.v1.list.allowed_join_operators #=> Array
+    #   resp.analysis_rule.consolidated_policy.v1.list.allowed_join_operators[0] #=> String, one of "OR", "AND"
+    #   resp.analysis_rule.consolidated_policy.v1.list.list_columns #=> Array
+    #   resp.analysis_rule.consolidated_policy.v1.list.list_columns[0] #=> String
+    #   resp.analysis_rule.consolidated_policy.v1.list.additional_analyses #=> String, one of "ALLOWED", "REQUIRED", "NOT_ALLOWED"
+    #   resp.analysis_rule.consolidated_policy.v1.list.allowed_result_receivers #=> Array
+    #   resp.analysis_rule.consolidated_policy.v1.list.allowed_result_receivers[0] #=> String
+    #   resp.analysis_rule.consolidated_policy.v1.list.allowed_additional_analyses #=> Array
+    #   resp.analysis_rule.consolidated_policy.v1.list.allowed_additional_analyses[0] #=> String
+    #   resp.analysis_rule.consolidated_policy.v1.aggregation.aggregate_columns #=> Array
+    #   resp.analysis_rule.consolidated_policy.v1.aggregation.aggregate_columns[0].column_names #=> Array
+    #   resp.analysis_rule.consolidated_policy.v1.aggregation.aggregate_columns[0].column_names[0] #=> String
+    #   resp.analysis_rule.consolidated_policy.v1.aggregation.aggregate_columns[0].function #=> String, one of "SUM", "SUM_DISTINCT", "COUNT", "COUNT_DISTINCT", "AVG"
+    #   resp.analysis_rule.consolidated_policy.v1.aggregation.join_columns #=> Array
+    #   resp.analysis_rule.consolidated_policy.v1.aggregation.join_columns[0] #=> String
+    #   resp.analysis_rule.consolidated_policy.v1.aggregation.join_required #=> String, one of "QUERY_RUNNER"
+    #   resp.analysis_rule.consolidated_policy.v1.aggregation.allowed_join_operators #=> Array
+    #   resp.analysis_rule.consolidated_policy.v1.aggregation.allowed_join_operators[0] #=> String, one of "OR", "AND"
+    #   resp.analysis_rule.consolidated_policy.v1.aggregation.dimension_columns #=> Array
+    #   resp.analysis_rule.consolidated_policy.v1.aggregation.dimension_columns[0] #=> String
+    #   resp.analysis_rule.consolidated_policy.v1.aggregation.scalar_functions #=> Array
+    #   resp.analysis_rule.consolidated_policy.v1.aggregation.scalar_functions[0] #=> String, one of "ABS", "CAST", "CEILING", "COALESCE", "CONVERT", "CURRENT_DATE", "DATEADD", "EXTRACT", "FLOOR", "GETDATE", "LN", "LOG", "LOWER", "ROUND", "RTRIM", "SQRT", "SUBSTRING", "TO_CHAR", "TO_DATE", "TO_NUMBER", "TO_TIMESTAMP", "TRIM", "TRUNC", "UPPER"
+    #   resp.analysis_rule.consolidated_policy.v1.aggregation.output_constraints #=> Array
+    #   resp.analysis_rule.consolidated_policy.v1.aggregation.output_constraints[0].column_name #=> String
+    #   resp.analysis_rule.consolidated_policy.v1.aggregation.output_constraints[0].minimum #=> Integer
+    #   resp.analysis_rule.consolidated_policy.v1.aggregation.output_constraints[0].type #=> String, one of "COUNT_DISTINCT"
+    #   resp.analysis_rule.consolidated_policy.v1.aggregation.additional_analyses #=> String, one of "ALLOWED", "REQUIRED", "NOT_ALLOWED"
+    #   resp.analysis_rule.consolidated_policy.v1.aggregation.allowed_result_receivers #=> Array
+    #   resp.analysis_rule.consolidated_policy.v1.aggregation.allowed_result_receivers[0] #=> String
+    #   resp.analysis_rule.consolidated_policy.v1.aggregation.allowed_additional_analyses #=> Array
+    #   resp.analysis_rule.consolidated_policy.v1.aggregation.allowed_additional_analyses[0] #=> String
+    #   resp.analysis_rule.consolidated_policy.v1.custom.allowed_analyses #=> Array
+    #   resp.analysis_rule.consolidated_policy.v1.custom.allowed_analyses[0] #=> String
+    #   resp.analysis_rule.consolidated_policy.v1.custom.allowed_analysis_providers #=> Array
+    #   resp.analysis_rule.consolidated_policy.v1.custom.allowed_analysis_providers[0] #=> String
+    #   resp.analysis_rule.consolidated_policy.v1.custom.additional_analyses #=> String, one of "ALLOWED", "REQUIRED", "NOT_ALLOWED"
+    #   resp.analysis_rule.consolidated_policy.v1.custom.disallowed_output_columns #=> Array
+    #   resp.analysis_rule.consolidated_policy.v1.custom.disallowed_output_columns[0] #=> String
+    #   resp.analysis_rule.consolidated_policy.v1.custom.differential_privacy.columns #=> Array
+    #   resp.analysis_rule.consolidated_policy.v1.custom.differential_privacy.columns[0].name #=> String
+    #   resp.analysis_rule.consolidated_policy.v1.custom.allowed_result_receivers #=> Array
+    #   resp.analysis_rule.consolidated_policy.v1.custom.allowed_result_receivers[0] #=> String
+    #   resp.analysis_rule.consolidated_policy.v1.custom.allowed_additional_analyses #=> Array
+    #   resp.analysis_rule.consolidated_policy.v1.custom.allowed_additional_analyses[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetSchemaAnalysisRule AWS API Documentation
     #
@@ -3462,6 +3755,8 @@ module Aws::CleanRooms
     #   resp.configured_table_association_summaries[0].update_time #=> Time
     #   resp.configured_table_association_summaries[0].id #=> String
     #   resp.configured_table_association_summaries[0].arn #=> String
+    #   resp.configured_table_association_summaries[0].analysis_rule_types #=> Array
+    #   resp.configured_table_association_summaries[0].analysis_rule_types[0] #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListConfiguredTableAssociations AWS API Documentation
@@ -3508,7 +3803,9 @@ module Aws::CleanRooms
     #   resp.configured_table_summaries[0].update_time #=> Time
     #   resp.configured_table_summaries[0].analysis_rule_types #=> Array
     #   resp.configured_table_summaries[0].analysis_rule_types[0] #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
-    #   resp.configured_table_summaries[0].analysis_method #=> String, one of "DIRECT_QUERY"
+    #   resp.configured_table_summaries[0].analysis_method #=> String, one of "DIRECT_QUERY", "DIRECT_JOB", "MULTIPLE"
+    #   resp.configured_table_summaries[0].selected_analysis_methods #=> Array
+    #   resp.configured_table_summaries[0].selected_analysis_methods[0] #=> String, one of "DIRECT_QUERY", "DIRECT_JOB"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListConfiguredTables AWS API Documentation
@@ -3668,7 +3965,7 @@ module Aws::CleanRooms
     #   resp.member_summaries[0].status #=> String, one of "INVITED", "ACTIVE", "LEFT", "REMOVED"
     #   resp.member_summaries[0].display_name #=> String
     #   resp.member_summaries[0].abilities #=> Array
-    #   resp.member_summaries[0].abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS"
+    #   resp.member_summaries[0].abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"
     #   resp.member_summaries[0].ml_abilities.custom_ml_member_abilities #=> Array
     #   resp.member_summaries[0].ml_abilities.custom_ml_member_abilities[0] #=> String, one of "CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"
     #   resp.member_summaries[0].create_time #=> Time
@@ -3678,6 +3975,7 @@ module Aws::CleanRooms
     #   resp.member_summaries[0].payment_configuration.query_compute.is_responsible #=> Boolean
     #   resp.member_summaries[0].payment_configuration.machine_learning.model_training.is_responsible #=> Boolean
     #   resp.member_summaries[0].payment_configuration.machine_learning.model_inference.is_responsible #=> Boolean
+    #   resp.member_summaries[0].payment_configuration.job_compute.is_responsible #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListMembers AWS API Documentation
     #
@@ -3732,12 +4030,13 @@ module Aws::CleanRooms
     #   resp.membership_summaries[0].update_time #=> Time
     #   resp.membership_summaries[0].status #=> String, one of "ACTIVE", "REMOVED", "COLLABORATION_DELETED"
     #   resp.membership_summaries[0].member_abilities #=> Array
-    #   resp.membership_summaries[0].member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS"
+    #   resp.membership_summaries[0].member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"
     #   resp.membership_summaries[0].ml_member_abilities.custom_ml_member_abilities #=> Array
     #   resp.membership_summaries[0].ml_member_abilities.custom_ml_member_abilities[0] #=> String, one of "CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"
     #   resp.membership_summaries[0].payment_configuration.query_compute.is_responsible #=> Boolean
     #   resp.membership_summaries[0].payment_configuration.machine_learning.model_training.is_responsible #=> Boolean
     #   resp.membership_summaries[0].payment_configuration.machine_learning.model_inference.is_responsible #=> Boolean
+    #   resp.membership_summaries[0].payment_configuration.job_compute.is_responsible #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListMemberships AWS API Documentation
     #
@@ -3868,6 +4167,62 @@ module Aws::CleanRooms
       req.send_request(options)
     end
 
+    # Lists protected jobs, sorted by most recent job.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The identifier for the membership in the collaboration.
+    #
+    # @option params [String] :status
+    #   A filter on the status of the protected job.
+    #
+    # @option params [String] :next_token
+    #   The pagination token that's used to fetch the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one. The
+    #   service might return a `nextToken` even if the `maxResults` value
+    #   has not been met.
+    #
+    # @return [Types::ListProtectedJobsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListProtectedJobsOutput#next_token #next_token} => String
+    #   * {Types::ListProtectedJobsOutput#protected_jobs #protected_jobs} => Array&lt;Types::ProtectedJobSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_protected_jobs({
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     status: "SUBMITTED", # accepts SUBMITTED, STARTED, CANCELLED, CANCELLING, FAILED, SUCCESS
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.protected_jobs #=> Array
+    #   resp.protected_jobs[0].id #=> String
+    #   resp.protected_jobs[0].membership_id #=> String
+    #   resp.protected_jobs[0].membership_arn #=> String
+    #   resp.protected_jobs[0].create_time #=> Time
+    #   resp.protected_jobs[0].status #=> String, one of "SUBMITTED", "STARTED", "CANCELLED", "CANCELLING", "FAILED", "SUCCESS"
+    #   resp.protected_jobs[0].receiver_configurations #=> Array
+    #   resp.protected_jobs[0].receiver_configurations[0].analysis_type #=> String, one of "DIRECT_ANALYSIS"
+    #   resp.protected_jobs[0].receiver_configurations[0].configuration_details.direct_analysis_configuration_details.receiver_account_ids #=> Array
+    #   resp.protected_jobs[0].receiver_configurations[0].configuration_details.direct_analysis_configuration_details.receiver_account_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListProtectedJobs AWS API Documentation
+    #
+    # @overload list_protected_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_protected_jobs(params = {}, options = {})
+      req = build_request(:list_protected_jobs, params)
+      req.send_request(options)
+    end
+
     # Lists protected queries, sorted by the most recent query.
     #
     # @option params [required, String] :membership_identifier
@@ -3970,7 +4325,9 @@ module Aws::CleanRooms
     #   resp.schema_summaries[0].collaboration_arn #=> String
     #   resp.schema_summaries[0].analysis_rule_types #=> Array
     #   resp.schema_summaries[0].analysis_rule_types[0] #=> String, one of "AGGREGATION", "LIST", "CUSTOM", "ID_MAPPING_TABLE"
-    #   resp.schema_summaries[0].analysis_method #=> String, one of "DIRECT_QUERY"
+    #   resp.schema_summaries[0].analysis_method #=> String, one of "DIRECT_QUERY", "DIRECT_JOB", "MULTIPLE"
+    #   resp.schema_summaries[0].selected_analysis_methods #=> Array
+    #   resp.schema_summaries[0].selected_analysis_methods[0] #=> String, one of "DIRECT_QUERY", "DIRECT_JOB"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListSchemas AWS API Documentation
@@ -4085,6 +4442,70 @@ module Aws::CleanRooms
     # @param [Hash] params ({})
     def preview_privacy_impact(params = {}, options = {})
       req = build_request(:preview_privacy_impact, params)
+      req.send_request(options)
+    end
+
+    # Creates a protected job that is started by Clean Rooms.
+    #
+    # @option params [required, String] :type
+    #   The type of protected job to start.
+    #
+    # @option params [required, String] :membership_identifier
+    #   A unique identifier for the membership to run this job against.
+    #   Currently accepts a membership ID.
+    #
+    # @option params [required, Types::ProtectedJobParameters] :job_parameters
+    #   The job parameters.
+    #
+    # @option params [Types::ProtectedJobResultConfigurationInput] :result_configuration
+    #   The details needed to write the job results.
+    #
+    # @return [Types::StartProtectedJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartProtectedJobOutput#protected_job #protected_job} => Types::ProtectedJob
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_protected_job({
+    #     type: "PYSPARK", # required, accepts PYSPARK
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     job_parameters: { # required
+    #       analysis_template_arn: "AnalysisTemplateArn",
+    #     },
+    #     result_configuration: {
+    #       output_configuration: { # required
+    #         member: {
+    #           account_id: "AccountId", # required
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.protected_job.id #=> String
+    #   resp.protected_job.membership_id #=> String
+    #   resp.protected_job.membership_arn #=> String
+    #   resp.protected_job.create_time #=> Time
+    #   resp.protected_job.job_parameters.analysis_template_arn #=> String
+    #   resp.protected_job.status #=> String, one of "SUBMITTED", "STARTED", "CANCELLED", "CANCELLING", "FAILED", "SUCCESS"
+    #   resp.protected_job.result_configuration.output_configuration.s3.bucket #=> String
+    #   resp.protected_job.result_configuration.output_configuration.s3.key_prefix #=> String
+    #   resp.protected_job.result_configuration.output_configuration.member.account_id #=> String
+    #   resp.protected_job.statistics.total_duration_in_millis #=> Integer
+    #   resp.protected_job.statistics.billed_resource_utilization.units #=> Float
+    #   resp.protected_job.result.output.s3.location #=> String
+    #   resp.protected_job.result.output.member_list #=> Array
+    #   resp.protected_job.result.output.member_list[0].account_id #=> String
+    #   resp.protected_job.error.message #=> String
+    #   resp.protected_job.error.code #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/StartProtectedJob AWS API Documentation
+    #
+    # @overload start_protected_job(params = {})
+    # @param [Hash] params ({})
+    def start_protected_job(params = {}, options = {})
+      req = build_request(:start_protected_job, params)
       req.send_request(options)
     end
 
@@ -4277,8 +4698,17 @@ module Aws::CleanRooms
     #   resp.analysis_template.update_time #=> Time
     #   resp.analysis_template.schema.referenced_tables #=> Array
     #   resp.analysis_template.schema.referenced_tables[0] #=> String
-    #   resp.analysis_template.format #=> String, one of "SQL"
+    #   resp.analysis_template.format #=> String, one of "SQL", "PYSPARK_1_0"
     #   resp.analysis_template.source.text #=> String
+    #   resp.analysis_template.source.artifacts.entry_point.location.bucket #=> String
+    #   resp.analysis_template.source.artifacts.entry_point.location.key #=> String
+    #   resp.analysis_template.source.artifacts.additional_artifacts #=> Array
+    #   resp.analysis_template.source.artifacts.additional_artifacts[0].location.bucket #=> String
+    #   resp.analysis_template.source.artifacts.additional_artifacts[0].location.key #=> String
+    #   resp.analysis_template.source.artifacts.role_arn #=> String
+    #   resp.analysis_template.source_metadata.artifacts.entry_point_hash.sha256 #=> String
+    #   resp.analysis_template.source_metadata.artifacts.additional_artifact_hashes #=> Array
+    #   resp.analysis_template.source_metadata.artifacts.additional_artifact_hashes[0].sha256 #=> String
     #   resp.analysis_template.analysis_parameters #=> Array
     #   resp.analysis_template.analysis_parameters[0].name #=> String
     #   resp.analysis_template.analysis_parameters[0].type #=> String, one of "SMALLINT", "INTEGER", "BIGINT", "DECIMAL", "REAL", "DOUBLE_PRECISION", "BOOLEAN", "CHAR", "VARCHAR", "DATE", "TIMESTAMP", "TIMESTAMPTZ", "TIME", "TIMETZ", "VARBYTE", "BINARY", "BYTE", "CHARACTER", "DOUBLE", "FLOAT", "INT", "LONG", "NUMERIC", "SHORT", "STRING", "TIMESTAMP_LTZ", "TIMESTAMP_NTZ", "TINYINT"
@@ -4341,6 +4771,7 @@ module Aws::CleanRooms
     #   resp.collaboration.data_encryption_metadata.allow_joins_on_columns_with_different_names #=> Boolean
     #   resp.collaboration.data_encryption_metadata.preserve_nulls #=> Boolean
     #   resp.collaboration.query_log_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.collaboration.job_log_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.collaboration.analytics_engine #=> String, one of "SPARK", "CLEAN_ROOMS_SQL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateCollaboration AWS API Documentation
@@ -4418,6 +4849,19 @@ module Aws::CleanRooms
     # @option params [String] :description
     #   A new description for the configured table.
     #
+    # @option params [String] :analysis_method
+    #   The analysis method for the configured table.
+    #
+    #   `DIRECT_QUERY` allows SQL queries to be run directly on this table.
+    #
+    #   `DIRECT_JOB` allows PySpark jobs to be run directly on this table.
+    #
+    #   `MULTIPLE` allows both SQL queries and PySpark jobs to be run directly
+    #   on this table.
+    #
+    # @option params [Array<String>] :selected_analysis_methods
+    #   The selected analysis methods for the table configuration update.
+    #
     # @return [Types::UpdateConfiguredTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateConfiguredTableOutput#configured_table #configured_table} => Types::ConfiguredTable
@@ -4428,6 +4872,8 @@ module Aws::CleanRooms
     #     configured_table_identifier: "ConfiguredTableIdentifier", # required
     #     name: "DisplayName",
     #     description: "TableDescription",
+    #     analysis_method: "DIRECT_QUERY", # accepts DIRECT_QUERY, DIRECT_JOB, MULTIPLE
+    #     selected_analysis_methods: ["DIRECT_QUERY"], # accepts DIRECT_QUERY, DIRECT_JOB
     #   })
     #
     # @example Response structure
@@ -4454,9 +4900,11 @@ module Aws::CleanRooms
     #   resp.configured_table.update_time #=> Time
     #   resp.configured_table.analysis_rule_types #=> Array
     #   resp.configured_table.analysis_rule_types[0] #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
-    #   resp.configured_table.analysis_method #=> String, one of "DIRECT_QUERY"
+    #   resp.configured_table.analysis_method #=> String, one of "DIRECT_QUERY", "DIRECT_JOB", "MULTIPLE"
     #   resp.configured_table.allowed_columns #=> Array
     #   resp.configured_table.allowed_columns[0] #=> String
+    #   resp.configured_table.selected_analysis_methods #=> Array
+    #   resp.configured_table.selected_analysis_methods[0] #=> String, one of "DIRECT_QUERY", "DIRECT_JOB"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateConfiguredTable AWS API Documentation
     #
@@ -4843,9 +5291,24 @@ module Aws::CleanRooms
     #   An indicator as to whether query logging has been enabled or disabled
     #   for the membership.
     #
+    #   When `ENABLED`, Clean Rooms logs details about queries run within this
+    #   collaboration and those logs can be viewed in Amazon CloudWatch Logs.
+    #   The default value is `DISABLED`.
+    #
+    # @option params [String] :job_log_status
+    #   An indicator as to whether job logging has been enabled or disabled
+    #   for the collaboration.
+    #
+    #   When `ENABLED`, Clean Rooms logs details about jobs run within this
+    #   collaboration and those logs can be viewed in Amazon CloudWatch Logs.
+    #   The default value is `DISABLED`.
+    #
     # @option params [Types::MembershipProtectedQueryResultConfiguration] :default_result_configuration
     #   The default protected query result configuration as specified by the
     #   member who can receive results.
+    #
+    # @option params [Types::MembershipProtectedJobResultConfiguration] :default_job_result_configuration
+    #   The default job result configuration.
     #
     # @return [Types::UpdateMembershipOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4856,6 +5319,7 @@ module Aws::CleanRooms
     #   resp = client.update_membership({
     #     membership_identifier: "MembershipIdentifier", # required
     #     query_log_status: "ENABLED", # accepts ENABLED, DISABLED
+    #     job_log_status: "ENABLED", # accepts ENABLED, DISABLED
     #     default_result_configuration: {
     #       output_configuration: { # required
     #         s3: {
@@ -4866,6 +5330,15 @@ module Aws::CleanRooms
     #         },
     #       },
     #       role_arn: "RoleArn",
+    #     },
+    #     default_job_result_configuration: {
+    #       output_configuration: { # required
+    #         s3: {
+    #           bucket: "ProtectedJobS3OutputConfigurationInputBucketString", # required
+    #           key_prefix: "KeyPrefix",
+    #         },
+    #       },
+    #       role_arn: "RoleArn", # required
     #     },
     #   })
     #
@@ -4882,18 +5355,23 @@ module Aws::CleanRooms
     #   resp.membership.update_time #=> Time
     #   resp.membership.status #=> String, one of "ACTIVE", "REMOVED", "COLLABORATION_DELETED"
     #   resp.membership.member_abilities #=> Array
-    #   resp.membership.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS"
+    #   resp.membership.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"
     #   resp.membership.ml_member_abilities.custom_ml_member_abilities #=> Array
     #   resp.membership.ml_member_abilities.custom_ml_member_abilities[0] #=> String, one of "CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"
     #   resp.membership.query_log_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.membership.job_log_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.membership.default_result_configuration.output_configuration.s3.result_format #=> String, one of "CSV", "PARQUET"
     #   resp.membership.default_result_configuration.output_configuration.s3.bucket #=> String
     #   resp.membership.default_result_configuration.output_configuration.s3.key_prefix #=> String
     #   resp.membership.default_result_configuration.output_configuration.s3.single_file_output #=> Boolean
     #   resp.membership.default_result_configuration.role_arn #=> String
+    #   resp.membership.default_job_result_configuration.output_configuration.s3.bucket #=> String
+    #   resp.membership.default_job_result_configuration.output_configuration.s3.key_prefix #=> String
+    #   resp.membership.default_job_result_configuration.role_arn #=> String
     #   resp.membership.payment_configuration.query_compute.is_responsible #=> Boolean
     #   resp.membership.payment_configuration.machine_learning.model_training.is_responsible #=> Boolean
     #   resp.membership.payment_configuration.machine_learning.model_inference.is_responsible #=> Boolean
+    #   resp.membership.payment_configuration.job_compute.is_responsible #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateMembership AWS API Documentation
     #
@@ -4961,6 +5439,58 @@ module Aws::CleanRooms
     # @param [Hash] params ({})
     def update_privacy_budget_template(params = {}, options = {})
       req = build_request(:update_privacy_budget_template, params)
+      req.send_request(options)
+    end
+
+    # Updates the processing of a currently running job.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The identifier for a member of a protected job instance.
+    #
+    # @option params [required, String] :protected_job_identifier
+    #   The identifier of the protected job to update.
+    #
+    # @option params [required, String] :target_status
+    #   The target status of a protected job. Used to update the execution
+    #   status of a currently running job.
+    #
+    # @return [Types::UpdateProtectedJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateProtectedJobOutput#protected_job #protected_job} => Types::ProtectedJob
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_protected_job({
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     protected_job_identifier: "ProtectedJobIdentifier", # required
+    #     target_status: "CANCELLED", # required, accepts CANCELLED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.protected_job.id #=> String
+    #   resp.protected_job.membership_id #=> String
+    #   resp.protected_job.membership_arn #=> String
+    #   resp.protected_job.create_time #=> Time
+    #   resp.protected_job.job_parameters.analysis_template_arn #=> String
+    #   resp.protected_job.status #=> String, one of "SUBMITTED", "STARTED", "CANCELLED", "CANCELLING", "FAILED", "SUCCESS"
+    #   resp.protected_job.result_configuration.output_configuration.s3.bucket #=> String
+    #   resp.protected_job.result_configuration.output_configuration.s3.key_prefix #=> String
+    #   resp.protected_job.result_configuration.output_configuration.member.account_id #=> String
+    #   resp.protected_job.statistics.total_duration_in_millis #=> Integer
+    #   resp.protected_job.statistics.billed_resource_utilization.units #=> Float
+    #   resp.protected_job.result.output.s3.location #=> String
+    #   resp.protected_job.result.output.member_list #=> Array
+    #   resp.protected_job.result.output.member_list[0].account_id #=> String
+    #   resp.protected_job.error.message #=> String
+    #   resp.protected_job.error.code #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateProtectedJob AWS API Documentation
+    #
+    # @overload update_protected_job(params = {})
+    # @param [Hash] params ({})
+    def update_protected_job(params = {}, options = {})
+      req = build_request(:update_protected_job, params)
       req.send_request(options)
     end
 
@@ -5047,7 +5577,7 @@ module Aws::CleanRooms
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cleanrooms'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

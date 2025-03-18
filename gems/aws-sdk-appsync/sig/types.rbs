@@ -296,6 +296,7 @@ module Aws::AppSync
       attr_accessor domain_name: ::String
       attr_accessor certificate_arn: ::String
       attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -568,6 +569,8 @@ module Aws::AppSync
       attr_accessor certificate_arn: ::String
       attr_accessor appsync_domain_name: ::String
       attr_accessor hosted_zone_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor domain_name_arn: ::String
       SENSITIVE: []
     end
 

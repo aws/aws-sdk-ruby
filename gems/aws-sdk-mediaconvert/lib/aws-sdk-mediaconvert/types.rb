@@ -2398,11 +2398,25 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] segment_length_control
-    #   Specify how you want MediaConvert to determine the segment length.
-    #   Choose Exact to have the encoder use the exact length that you
-    #   specify with the setting Segment length. This might result in extra
-    #   I-frames. Choose Multiple of GOP to have the encoder round up the
-    #   segment lengths to match the next GOP boundary.
+    #   Specify how you want MediaConvert to determine segment lengths in
+    #   this output group. To use the exact value that you specify under
+    #   Segment length: Choose Exact. Note that this might result in
+    #   additional I-frames in the output GOP. To create segment lengths
+    #   that are a multiple of the GOP: Choose Multiple of GOP. MediaConvert
+    #   will round up the segment lengths to match the next GOP boundary. To
+    #   have MediaConvert automatically determine a segment duration that is
+    #   a multiple of both the audio packets and the frame rates: Choose
+    #   Match. When you do, also specify a target segment duration under
+    #   Segment length. This is useful for some ad-insertion or segment
+    #   replacement workflows. Note that Match has the following
+    #   requirements: - Output containers: Include at least one video output
+    #   and at least one audio output. Audio-only outputs are not supported.
+    #   - Output frame rate: Follow source is not supported. - Multiple
+    #   output frame rates: When you specify multiple outputs, we recommend
+    #   they share a similar frame rate (as in X/3, X/2, X, or 2X). For
+    #   example: 5, 15, 30 and 60. Or: 25 and 50. (Outputs must share an
+    #   integer multiple.) - Output audio codec: Specify Advanced Audio
+    #   Coding (AAC). - Output sample rate: Choose 48kHz.
     #   @return [String]
     #
     # @!attribute [rw] stream_inf_resolution
@@ -3609,11 +3623,25 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] segment_length_control
-    #   Specify how you want MediaConvert to determine the segment length.
-    #   Choose Exact to have the encoder use the exact length that you
-    #   specify with the setting Segment length. This might result in extra
-    #   I-frames. Choose Multiple of GOP to have the encoder round up the
-    #   segment lengths to match the next GOP boundary.
+    #   Specify how you want MediaConvert to determine segment lengths in
+    #   this output group. To use the exact value that you specify under
+    #   Segment length: Choose Exact. Note that this might result in
+    #   additional I-frames in the output GOP. To create segment lengths
+    #   that are a multiple of the GOP: Choose Multiple of GOP. MediaConvert
+    #   will round up the segment lengths to match the next GOP boundary. To
+    #   have MediaConvert automatically determine a segment duration that is
+    #   a multiple of both the audio packets and the frame rates: Choose
+    #   Match. When you do, also specify a target segment duration under
+    #   Segment length. This is useful for some ad-insertion or segment
+    #   replacement workflows. Note that Match has the following
+    #   requirements: - Output containers: Include at least one video output
+    #   and at least one audio output. Audio-only outputs are not supported.
+    #   - Output frame rate: Follow source is not supported. - Multiple
+    #   output frame rates: When you specify multiple outputs, we recommend
+    #   they share a similar frame rate (as in X/3, X/2, X, or 2X). For
+    #   example: 5, 15, 30 and 60. Or: 25 and 50. (Outputs must share an
+    #   integer multiple.) - Output audio codec: Specify Advanced Audio
+    #   Coding (AAC). - Output sample rate: Choose 48kHz.
     #   @return [String]
     #
     # @!attribute [rw] video_composition_offsets
@@ -7120,11 +7148,25 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] segment_length_control
-    #   Specify how you want MediaConvert to determine the segment length.
-    #   Choose Exact to have the encoder use the exact length that you
-    #   specify with the setting Segment length. This might result in extra
-    #   I-frames. Choose Multiple of GOP to have the encoder round up the
-    #   segment lengths to match the next GOP boundary.
+    #   Specify how you want MediaConvert to determine segment lengths in
+    #   this output group. To use the exact value that you specify under
+    #   Segment length: Choose Exact. Note that this might result in
+    #   additional I-frames in the output GOP. To create segment lengths
+    #   that are a multiple of the GOP: Choose Multiple of GOP. MediaConvert
+    #   will round up the segment lengths to match the next GOP boundary. To
+    #   have MediaConvert automatically determine a segment duration that is
+    #   a multiple of both the audio packets and the frame rates: Choose
+    #   Match. When you do, also specify a target segment duration under
+    #   Segment length. This is useful for some ad-insertion or segment
+    #   replacement workflows. Note that Match has the following
+    #   requirements: - Output containers: Include at least one video output
+    #   and at least one audio output. Audio-only outputs are not supported.
+    #   - Output frame rate: Follow source is not supported. - Multiple
+    #   output frame rates: When you specify multiple outputs, we recommend
+    #   they share a similar frame rate (as in X/3, X/2, X, or 2X). For
+    #   example: 5, 15, 30 and 60. Or: 25 and 50. (Outputs must share an
+    #   integer multiple.) - Output audio codec: Specify Advanced Audio
+    #   Coding (AAC). - Output sample rate: Choose 48kHz.
     #   @return [String]
     #
     # @!attribute [rw] segments_per_subdirectory
@@ -9357,6 +9399,13 @@ module Aws::MediaConvert
     #   array. Default is the range 482-492.
     #   @return [Array<Integer>]
     #
+    # @!attribute [rw] audio_pts_offset_delta
+    #   Manually specify the difference in PTS offset that will be applied
+    #   to the audio track, in seconds or milliseconds, when you set PTS
+    #   offset to Seconds or Milliseconds. Enter an integer from -10000 to
+    #   10000. Leave blank to keep the default value 0.
+    #   @return [Integer]
+    #
     # @!attribute [rw] bitrate
     #   Specify the output bitrate of the transport stream in bits per
     #   second. Setting to 0 lets the muxer automatically determine the
@@ -9537,7 +9586,8 @@ module Aws::MediaConvert
     #   initial PTS will be at least two seconds and vary depending on your
     #   output's bitrate, HRD buffer size and HRD buffer initial fill
     #   percentage. To manually specify an initial PTS offset: Choose
-    #   Seconds. Then specify the number of seconds with PTS offset.
+    #   Seconds or Milliseconds. Then specify the number of seconds or
+    #   milliseconds with PTS offset.
     #   @return [String]
     #
     # @!attribute [rw] rate_mode
@@ -9626,6 +9676,7 @@ module Aws::MediaConvert
       :audio_duration,
       :audio_frames_per_pes,
       :audio_pids,
+      :audio_pts_offset_delta,
       :bitrate,
       :buffer_model,
       :data_pts_control,
@@ -9699,6 +9750,13 @@ module Aws::MediaConvert
     #   in ranges and/or by comma separation.
     #   @return [Array<Integer>]
     #
+    # @!attribute [rw] audio_pts_offset_delta
+    #   Manually specify the difference in PTS offset that will be applied
+    #   to the audio track, in seconds or milliseconds, when you set PTS
+    #   offset to Seconds or Milliseconds. Enter an integer from -10000 to
+    #   10000. Leave blank to keep the default value 0.
+    #   @return [Integer]
+    #
     # @!attribute [rw] data_pts_control
     #   If you select ALIGN\_TO\_VIDEO, MediaConvert writes captions and
     #   data packets with Presentation Timestamp (PTS) values greater than
@@ -9769,7 +9827,8 @@ module Aws::MediaConvert
     #   initial PTS will be at least two seconds and vary depending on your
     #   output's bitrate, HRD buffer size and HRD buffer initial fill
     #   percentage. To manually specify an initial PTS offset: Choose
-    #   Seconds. Then specify the number of seconds with PTS offset.
+    #   Seconds or Milliseconds. Then specify the number of seconds or
+    #   milliseconds with PTS offset.
     #   @return [String]
     #
     # @!attribute [rw] scte_35_pid
@@ -9816,6 +9875,7 @@ module Aws::MediaConvert
       :audio_duration,
       :audio_frames_per_pes,
       :audio_pids,
+      :audio_pts_offset_delta,
       :data_pts_control,
       :max_pcr_interval,
       :nielsen_id_3,
@@ -12477,8 +12537,8 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] system_ids
     #   Relates to SPEKE implementation. DRM system identifiers. DASH output
-    #   groups support a max of two system ids. Other group types support
-    #   one system id. See
+    #   groups support a max of two system ids. HLS output groups support a
+    #   max of 3 system ids. Other group types support one system id. See
     #   https://dashif.org/identifiers/content\_protection/ for more
     #   details.
     #   @return [Array<String>]
@@ -12529,10 +12589,9 @@ module Aws::MediaConvert
     #   @return [Types::EncryptionContractConfiguration]
     #
     # @!attribute [rw] hls_signaled_system_ids
-    #   Specify the DRM system ID that you want signaled in the HLS manifest
-    #   that MediaConvert creates as part of this CMAF package. The HLS
-    #   manifest can currently signal only one system ID. For more
-    #   information, see
+    #   Specify up to 3 DRM system IDs that you want signaled in the HLS
+    #   manifest that MediaConvert creates as part of this CMAF package. For
+    #   more information, see
     #   https://dashif.org/identifiers/content\_protection/.
     #   @return [Array<String>]
     #

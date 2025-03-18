@@ -47,15 +47,21 @@ module Aws::GeoMaps
       attr_accessor bounding_box: ::String
       attr_accessor bounded_positions: ::String
       attr_accessor center: ::String
+      attr_accessor color_scheme: ("Light" | "Dark")
       attr_accessor compact_overlay: ::String
+      attr_accessor crop_labels: bool
       attr_accessor geo_json_overlay: ::String
       attr_accessor height: ::Integer
       attr_accessor key: ::String
+      attr_accessor label_size: ("Small" | "Large")
+      attr_accessor language: ::String
       attr_accessor padding: ::Integer
+      attr_accessor political_view: ::String
+      attr_accessor points_of_interests: ("Enabled" | "Disabled")
       attr_accessor radius: ::Integer
       attr_accessor file_name: ::String
       attr_accessor scale_bar_unit: ("Kilometers" | "KilometersMiles" | "Miles" | "MilesKilometers")
-      attr_accessor style: ("Satellite")
+      attr_accessor style: ("Satellite" | "Standard")
       attr_accessor width: ::Integer
       attr_accessor zoom: ::Float
       SENSITIVE: [:key]

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2025-03-18)
+------------------
+
+* Feature - This release adds support for PySpark jobs. Customers can now analyze data by running jobs using approved PySpark analysis templates.
+
 1.40.0 (2025-02-18)
 ------------------
 

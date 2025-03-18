@@ -67,6 +67,72 @@ module Aws::ApplicationSignals
       include Aws::Structure
     end
 
+    # An array of structures, where each structure includes an error
+    # indicating that one of the requests in the array was not valid.
+    #
+    # @!attribute [rw] slo_id
+    #   The SLO ID in the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/BatchUpdateExclusionWindowsError AWS API Documentation
+    #
+    class BatchUpdateExclusionWindowsError < Struct.new(
+      :slo_id,
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] slo_ids
+    #   The list of SLO IDs to add or remove exclusion windows from.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] add_exclusion_windows
+    #   A list of exclusion windows to add to the specified SLOs. You can
+    #   add up to 10 exclusion windows per SLO.
+    #   @return [Array<Types::ExclusionWindow>]
+    #
+    # @!attribute [rw] remove_exclusion_windows
+    #   A list of exclusion windows to remove from the specified SLOs. The
+    #   window configuration must match an existing exclusion window.
+    #   @return [Array<Types::ExclusionWindow>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/BatchUpdateExclusionWindowsInput AWS API Documentation
+    #
+    class BatchUpdateExclusionWindowsInput < Struct.new(
+      :slo_ids,
+      :add_exclusion_windows,
+      :remove_exclusion_windows)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] slo_ids
+    #   The list of SLO IDs that were successfully processed.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] errors
+    #   A list of errors that occurred while processing the request.
+    #   @return [Array<Types::BatchUpdateExclusionWindowsError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/BatchUpdateExclusionWindowsOutput AWS API Documentation
+    #
+    class BatchUpdateExclusionWindowsOutput < Struct.new(
+      :slo_ids,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This object defines the length of the look-back window used to
     # calculate one burn rate metric for this SLO. The burn rate measures
     # how fast the service is consuming the error budget, relative to the
@@ -264,6 +330,39 @@ module Aws::ApplicationSignals
     class Dimension < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The core SLO time window exclusion object that includes Window,
+    # StartTime, RecurrenceRule, and Reason.
+    #
+    # @!attribute [rw] window
+    #   The SLO time window exclusion .
+    #   @return [Types::Window]
+    #
+    # @!attribute [rw] start_time
+    #   The start of the SLO time window exclusion. Defaults to current time
+    #   if not specified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] recurrence_rule
+    #   The recurrence rule for the SLO time window exclusion. Supports both
+    #   cron and rate expressions.
+    #   @return [Types::RecurrenceRule]
+    #
+    # @!attribute [rw] reason
+    #   A description explaining why this time period should be excluded
+    #   from SLO calculations.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/ExclusionWindow AWS API Documentation
+    #
+    class ExclusionWindow < Struct.new(
+      :window,
+      :start_time,
+      :recurrence_rule,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -675,6 +774,48 @@ module Aws::ApplicationSignals
       :start_time,
       :end_time,
       :service_dependents,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the SLO to list exclusion windows for.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in one operation. If you
+    #   omit this parameter, the default of 50 is used.      </p>
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Include this value, if it was returned by the previous operation, to
+    #   get the next set of service level objectives.      </p>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/ListServiceLevelObjectiveExclusionWindowsInput AWS API Documentation
+    #
+    class ListServiceLevelObjectiveExclusionWindowsInput < Struct.new(
+      :id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] exclusion_windows
+    #   A list of exclusion windows configured for the SLO.
+    #   @return [Array<Types::ExclusionWindow>]
+    #
+    # @!attribute [rw] next_token
+    #   Include this value, if it was returned by the previous operation, to
+    #   get the next set of service level objectives.      </p>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/ListServiceLevelObjectiveExclusionWindowsOutput AWS API Documentation
+    #
+    class ListServiceLevelObjectiveExclusionWindowsOutput < Struct.new(
+      :exclusion_windows,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1292,6 +1433,21 @@ module Aws::ApplicationSignals
       class GoodCountMetric < MonitoredRequestCountMetricDataQueries; end
       class BadCountMetric < MonitoredRequestCountMetricDataQueries; end
       class Unknown < MonitoredRequestCountMetricDataQueries; end
+    end
+
+    # The recurrence rule for the SLO time window exclusion .
+    #
+    # @!attribute [rw] expression
+    #   A cron or rate expression that specifies the schedule for the
+    #   exclusion window.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/RecurrenceRule AWS API Documentation
+    #
+    class RecurrenceRule < Struct.new(
+      :expression)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # This structure contains information about the performance metric that
@@ -2520,6 +2676,26 @@ module Aws::ApplicationSignals
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The object that defines the time length of an exclusion window.
+    #
+    # @!attribute [rw] duration_unit
+    #   The unit of time for the exclusion window duration. Valid values:
+    #   MINUTE, HOUR, DAY, MONTH.
+    #   @return [String]
+    #
+    # @!attribute [rw] duration
+    #   The number of time units for the exclusion window length.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/Window AWS API Documentation
+    #
+    class Window < Struct.new(
+      :duration_unit,
+      :duration)
       SENSITIVE = []
       include Aws::Structure
     end

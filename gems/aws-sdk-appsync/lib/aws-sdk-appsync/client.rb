@@ -1153,6 +1153,9 @@ module Aws::AppSync
     # @option params [String] :description
     #   A description of the `DomainName`.
     #
+    # @option params [Hash<String,String>] :tags
+    #   A map with keys of `TagKey` objects and values of `TagValue` objects.
+    #
     # @return [Types::CreateDomainNameResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDomainNameResponse#domain_name_config #domain_name_config} => Types::DomainNameConfig
@@ -1163,6 +1166,9 @@ module Aws::AppSync
     #     domain_name: "DomainName", # required
     #     certificate_arn: "CertificateArn", # required
     #     description: "Description",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1172,6 +1178,9 @@ module Aws::AppSync
     #   resp.domain_name_config.certificate_arn #=> String
     #   resp.domain_name_config.appsync_domain_name #=> String
     #   resp.domain_name_config.hosted_zone_id #=> String
+    #   resp.domain_name_config.tags #=> Hash
+    #   resp.domain_name_config.tags["TagKey"] #=> String
+    #   resp.domain_name_config.domain_name_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateDomainName AWS API Documentation
     #
@@ -2513,6 +2522,9 @@ module Aws::AppSync
     #   resp.domain_name_config.certificate_arn #=> String
     #   resp.domain_name_config.appsync_domain_name #=> String
     #   resp.domain_name_config.hosted_zone_id #=> String
+    #   resp.domain_name_config.tags #=> Hash
+    #   resp.domain_name_config.tags["TagKey"] #=> String
+    #   resp.domain_name_config.domain_name_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetDomainName AWS API Documentation
     #
@@ -3171,6 +3183,9 @@ module Aws::AppSync
     #   resp.domain_name_configs[0].certificate_arn #=> String
     #   resp.domain_name_configs[0].appsync_domain_name #=> String
     #   resp.domain_name_configs[0].hosted_zone_id #=> String
+    #   resp.domain_name_configs[0].tags #=> Hash
+    #   resp.domain_name_configs[0].tags["TagKey"] #=> String
+    #   resp.domain_name_configs[0].domain_name_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListDomainNames AWS API Documentation
@@ -4436,6 +4451,9 @@ module Aws::AppSync
     #   resp.domain_name_config.certificate_arn #=> String
     #   resp.domain_name_config.appsync_domain_name #=> String
     #   resp.domain_name_config.hosted_zone_id #=> String
+    #   resp.domain_name_config.tags #=> Hash
+    #   resp.domain_name_config.tags["TagKey"] #=> String
+    #   resp.domain_name_config.domain_name_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateDomainName AWS API Documentation
     #
@@ -5021,7 +5039,7 @@ module Aws::AppSync
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.101.0'
+      context[:gem_version] = '1.102.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

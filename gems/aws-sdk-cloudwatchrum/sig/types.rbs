@@ -18,7 +18,9 @@ module Aws::CloudWatchRUM
       attr_accessor created: ::String
       attr_accessor custom_events: Types::CustomEvents
       attr_accessor data_storage: Types::DataStorage
+      attr_accessor deobfuscation_configuration: Types::DeobfuscationConfiguration
       attr_accessor domain: ::String
+      attr_accessor domain_list: ::Array[::String]
       attr_accessor id: ::String
       attr_accessor last_modified: ::String
       attr_accessor name: ::String
@@ -124,7 +126,9 @@ module Aws::CloudWatchRUM
       attr_accessor app_monitor_configuration: Types::AppMonitorConfiguration
       attr_accessor custom_events: Types::CustomEvents
       attr_accessor cw_log_enabled: bool
+      attr_accessor deobfuscation_configuration: Types::DeobfuscationConfiguration
       attr_accessor domain: ::String
+      attr_accessor domain_list: ::Array[::String]
       attr_accessor name: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -180,6 +184,11 @@ module Aws::CloudWatchRUM
     class DeleteRumMetricsDestinationResponse < Aws::EmptyStructure
     end
 
+    class DeobfuscationConfiguration
+      attr_accessor java_script_source_maps: Types::JavaScriptSourceMaps
+      SENSITIVE: []
+    end
+
     class GetAppMonitorDataRequest
       attr_accessor filters: ::Array[Types::QueryFilter]
       attr_accessor max_results: ::Integer
@@ -224,6 +233,12 @@ module Aws::CloudWatchRUM
 
     class InvalidPolicyRevisionIdException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class JavaScriptSourceMaps
+      attr_accessor s3_uri: ::String
+      attr_accessor status: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -406,7 +421,9 @@ module Aws::CloudWatchRUM
       attr_accessor app_monitor_configuration: Types::AppMonitorConfiguration
       attr_accessor custom_events: Types::CustomEvents
       attr_accessor cw_log_enabled: bool
+      attr_accessor deobfuscation_configuration: Types::DeobfuscationConfiguration
       attr_accessor domain: ::String
+      attr_accessor domain_list: ::Array[::String]
       attr_accessor name: ::String
       SENSITIVE: []
     end

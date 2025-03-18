@@ -2648,6 +2648,19 @@ module Aws::WAFV2
     #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/logging-fields.html
     #   @return [Types::JA4Fingerprint]
     #
+    # @!attribute [rw] uri_fragment
+    #   Inspect fragments of the request URI. You must configure scope and
+    #   pattern matching filters in the `UriFragment` object, to define the
+    #   fragment of a URI that WAF inspects.
+    #
+    #   Only the first 8 KB (8192 bytes) of a request's URI fragments and
+    #   only the first 200 URI fragments are forwarded to WAF for inspection
+    #   by the underlying host service. You must configure how to handle any
+    #   oversize URI fragment content in the `UriFragment` object. WAF
+    #   applies the pattern matching filters to the cookies that it receives
+    #   from the underlying host service.
+    #   @return [Types::UriFragment]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/FieldToMatch AWS API Documentation
     #
     class FieldToMatch < Struct.new(
@@ -2663,7 +2676,8 @@ module Aws::WAFV2
       :cookies,
       :header_order,
       :ja3_fingerprint,
-      :ja4_fingerprint)
+      :ja4_fingerprint,
+      :uri_fragment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9474,6 +9488,55 @@ module Aws::WAFV2
     #
     class UpdateWebACLResponse < Struct.new(
       :next_lock_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Inspect fragments of the request URI. You can specify the parts of the
+    # URI fragment to inspect and you can narrow the set of URI fragments to
+    # inspect by including or excluding specific keys.
+    #
+    # This is used to indicate the web request component to inspect, in the
+    # FieldToMatch specification.
+    #
+    # Example JSON: `"UriFragment": { "MatchPattern": { "All": {} },
+    # "MatchScope": "KEY", "OversizeHandling": "MATCH" }`
+    #
+    # @!attribute [rw] fallback_behavior
+    #   What WAF should do if it fails to completely parse the JSON body.
+    #   The options are the following:
+    #
+    #   * `EVALUATE_AS_STRING` - Inspect the body as plain text. WAF applies
+    #     the text transformations and inspection criteria that you defined
+    #     for the JSON inspection to the body text string.
+    #
+    #   * `MATCH` - Treat the web request as matching the rule statement.
+    #     WAF applies the rule action to the request.
+    #
+    #   * `NO_MATCH` - Treat the web request as not matching the rule
+    #     statement.
+    #
+    #   If you don't provide this setting, WAF parses and evaluates the
+    #   content only up to the first parsing failure that it encounters.
+    #
+    #   Example JSON: `{ "UriFragment": { "FallbackBehavior": "MATCH"} }`
+    #
+    #   <note markdown="1"> WAF parsing doesn't fully validate the input JSON string, so
+    #   parsing can succeed even for invalid JSON. When parsing succeeds,
+    #   WAF doesn't apply the fallback behavior. For more information, see
+    #   [JSON body][1] in the *WAF Developer Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-statement-fields-list.html#waf-rule-statement-request-component-json-body
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/UriFragment AWS API Documentation
+    #
+    class UriFragment < Struct.new(
+      :fallback_behavior)
       SENSITIVE = []
       include Aws::Structure
     end

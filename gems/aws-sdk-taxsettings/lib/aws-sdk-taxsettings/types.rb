@@ -1250,7 +1250,8 @@ module Aws::TaxSettings
     #   @return [Types::ExemptionCertificate]
     #
     # @!attribute [rw] exemption_type
-    #   The exemption type.
+    #   The exemption type. Use the supported tax exemption type
+    #   description.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/PutTaxExemptionRequest AWS API Documentation
@@ -1666,7 +1667,7 @@ module Aws::TaxSettings
     #   @return [String]
     #
     # @!attribute [rw] registration_type
-    #   Type of your tax registration. This can be either `VAT` or `GST`.
+    #   Type of your tax registration.
     #   @return [String]
     #
     # @!attribute [rw] sector
@@ -2001,18 +2002,22 @@ module Aws::TaxSettings
     #
     # @!attribute [rw] electronic_transaction_code_number
     #   The electronic transaction code number on the tax return document.
+    #   This field must be provided for successful API operation.
     #   @return [String]
     #
     # @!attribute [rw] enterprise_identification_number
-    #   The enterprise identification number for tax registration.
+    #   The enterprise identification number for tax registration. This
+    #   field must be provided for successful API operation.
     #   @return [String]
     #
     # @!attribute [rw] payment_voucher_number
-    #   The payment voucher number on the tax return payment document.
+    #   The payment voucher number on the tax return payment document. This
+    #   field must be provided for successful API operation.
     #   @return [String]
     #
     # @!attribute [rw] payment_voucher_number_date
-    #   The date on the tax return payment document.
+    #   The date on the tax return payment document. This field must be
+    #   provided for successful API operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/VietnamAdditionalInfo AWS API Documentation

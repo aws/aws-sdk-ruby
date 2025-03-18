@@ -26,6 +26,26 @@ module Aws::ApplicationSignals
       SENSITIVE: []
     end
 
+    class BatchUpdateExclusionWindowsError
+      attr_accessor slo_id: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchUpdateExclusionWindowsInput
+      attr_accessor slo_ids: ::Array[::String]
+      attr_accessor add_exclusion_windows: ::Array[Types::ExclusionWindow]
+      attr_accessor remove_exclusion_windows: ::Array[Types::ExclusionWindow]
+      SENSITIVE: []
+    end
+
+    class BatchUpdateExclusionWindowsOutput
+      attr_accessor slo_ids: ::Array[::String]
+      attr_accessor errors: ::Array[Types::BatchUpdateExclusionWindowsError]
+      SENSITIVE: []
+    end
+
     class BurnRateConfiguration
       attr_accessor look_back_window_minutes: ::Integer
       SENSITIVE: []
@@ -70,6 +90,14 @@ module Aws::ApplicationSignals
     class Dimension
       attr_accessor name: ::String
       attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ExclusionWindow
+      attr_accessor window: Types::Window
+      attr_accessor start_time: ::Time
+      attr_accessor recurrence_rule: Types::RecurrenceRule
+      attr_accessor reason: ::String
       SENSITIVE: []
     end
 
@@ -149,6 +177,19 @@ module Aws::ApplicationSignals
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
       attr_accessor service_dependents: ::Array[Types::ServiceDependent]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServiceLevelObjectiveExclusionWindowsInput
+      attr_accessor id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServiceLevelObjectiveExclusionWindowsOutput
+      attr_accessor exclusion_windows: ::Array[Types::ExclusionWindow]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -261,6 +302,11 @@ module Aws::ApplicationSignals
       end
       class Unknown < MonitoredRequestCountMetricDataQueries
       end
+    end
+
+    class RecurrenceRule
+      attr_accessor expression: ::String
+      SENSITIVE: []
     end
 
     class RequestBasedServiceLevelIndicator
@@ -481,6 +527,12 @@ module Aws::ApplicationSignals
 
     class ValidationException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Window
+      attr_accessor duration_unit: ("MINUTE" | "HOUR" | "DAY" | "MONTH")
+      attr_accessor duration: ::Integer
       SENSITIVE: []
     end
   end

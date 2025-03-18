@@ -979,6 +979,7 @@ module Aws::MediaConvert
     #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #           audio_frames_per_pes: 1,
     #           audio_pids: [1],
+    #           audio_pts_offset_delta: 1,
     #           bitrate: 1,
     #           buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
     #           data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
@@ -1017,7 +1018,7 @@ module Aws::MediaConvert
     #           private_metadata_pid: 1,
     #           program_number: 1,
     #           pts_offset: 1,
-    #           pts_offset_mode: "AUTO", # accepts AUTO, SECONDS
+    #           pts_offset_mode: "AUTO", # accepts AUTO, SECONDS, MILLISECONDS
     #           rate_mode: "VBR", # accepts VBR, CBR
     #           scte_35_esam: {
     #             scte_35_esam_pid: 1,
@@ -1035,6 +1036,7 @@ module Aws::MediaConvert
     #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #           audio_frames_per_pes: 1,
     #           audio_pids: [1],
+    #           audio_pts_offset_delta: 1,
     #           data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #           max_pcr_interval: 1,
     #           nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -1046,7 +1048,7 @@ module Aws::MediaConvert
     #           private_metadata_pid: 1,
     #           program_number: 1,
     #           pts_offset: 1,
-    #           pts_offset_mode: "AUTO", # accepts AUTO, SECONDS
+    #           pts_offset_mode: "AUTO", # accepts AUTO, SECONDS, MILLISECONDS
     #           scte_35_pid: 1,
     #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -1736,6 +1738,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.audio_frames_per_pes #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.audio_pids #=> Array
     #   resp.preset.settings.container_settings.m2ts_settings.audio_pids[0] #=> Integer
+    #   resp.preset.settings.container_settings.m2ts_settings.audio_pts_offset_delta #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.bitrate #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.buffer_model #=> String, one of "MULTIPLEX", "NONE"
     #   resp.preset.settings.container_settings.m2ts_settings.data_pts_control #=> String, one of "AUTO", "ALIGN_TO_VIDEO"
@@ -1769,7 +1772,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.private_metadata_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.program_number #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.pts_offset #=> Integer
-    #   resp.preset.settings.container_settings.m2ts_settings.pts_offset_mode #=> String, one of "AUTO", "SECONDS"
+    #   resp.preset.settings.container_settings.m2ts_settings.pts_offset_mode #=> String, one of "AUTO", "SECONDS", "MILLISECONDS"
     #   resp.preset.settings.container_settings.m2ts_settings.rate_mode #=> String, one of "VBR", "CBR"
     #   resp.preset.settings.container_settings.m2ts_settings.scte_35_esam.scte_35_esam_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.scte_35_pid #=> Integer
@@ -1784,6 +1787,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.preset.settings.container_settings.m3u_8_settings.audio_pts_offset_delta #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.data_pts_control #=> String, one of "AUTO", "ALIGN_TO_VIDEO"
     #   resp.preset.settings.container_settings.m3u_8_settings.max_pcr_interval #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
@@ -1795,7 +1799,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m3u_8_settings.private_metadata_pid #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.program_number #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.pts_offset #=> Integer
-    #   resp.preset.settings.container_settings.m3u_8_settings.pts_offset_mode #=> String, one of "AUTO", "SECONDS"
+    #   resp.preset.settings.container_settings.m3u_8_settings.pts_offset_mode #=> String, one of "AUTO", "SECONDS", "MILLISECONDS"
     #   resp.preset.settings.container_settings.m3u_8_settings.scte_35_pid #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.m3u_8_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
@@ -2719,6 +2723,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.audio_frames_per_pes #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.audio_pids #=> Array
     #   resp.preset.settings.container_settings.m2ts_settings.audio_pids[0] #=> Integer
+    #   resp.preset.settings.container_settings.m2ts_settings.audio_pts_offset_delta #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.bitrate #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.buffer_model #=> String, one of "MULTIPLEX", "NONE"
     #   resp.preset.settings.container_settings.m2ts_settings.data_pts_control #=> String, one of "AUTO", "ALIGN_TO_VIDEO"
@@ -2752,7 +2757,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.private_metadata_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.program_number #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.pts_offset #=> Integer
-    #   resp.preset.settings.container_settings.m2ts_settings.pts_offset_mode #=> String, one of "AUTO", "SECONDS"
+    #   resp.preset.settings.container_settings.m2ts_settings.pts_offset_mode #=> String, one of "AUTO", "SECONDS", "MILLISECONDS"
     #   resp.preset.settings.container_settings.m2ts_settings.rate_mode #=> String, one of "VBR", "CBR"
     #   resp.preset.settings.container_settings.m2ts_settings.scte_35_esam.scte_35_esam_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.scte_35_pid #=> Integer
@@ -2767,6 +2772,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.preset.settings.container_settings.m3u_8_settings.audio_pts_offset_delta #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.data_pts_control #=> String, one of "AUTO", "ALIGN_TO_VIDEO"
     #   resp.preset.settings.container_settings.m3u_8_settings.max_pcr_interval #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
@@ -2778,7 +2784,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m3u_8_settings.private_metadata_pid #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.program_number #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.pts_offset #=> Integer
-    #   resp.preset.settings.container_settings.m3u_8_settings.pts_offset_mode #=> String, one of "AUTO", "SECONDS"
+    #   resp.preset.settings.container_settings.m3u_8_settings.pts_offset_mode #=> String, one of "AUTO", "SECONDS", "MILLISECONDS"
     #   resp.preset.settings.container_settings.m3u_8_settings.scte_35_pid #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.m3u_8_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
@@ -3570,6 +3576,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.container_settings.m2ts_settings.audio_frames_per_pes #=> Integer
     #   resp.presets[0].settings.container_settings.m2ts_settings.audio_pids #=> Array
     #   resp.presets[0].settings.container_settings.m2ts_settings.audio_pids[0] #=> Integer
+    #   resp.presets[0].settings.container_settings.m2ts_settings.audio_pts_offset_delta #=> Integer
     #   resp.presets[0].settings.container_settings.m2ts_settings.bitrate #=> Integer
     #   resp.presets[0].settings.container_settings.m2ts_settings.buffer_model #=> String, one of "MULTIPLEX", "NONE"
     #   resp.presets[0].settings.container_settings.m2ts_settings.data_pts_control #=> String, one of "AUTO", "ALIGN_TO_VIDEO"
@@ -3603,7 +3610,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.container_settings.m2ts_settings.private_metadata_pid #=> Integer
     #   resp.presets[0].settings.container_settings.m2ts_settings.program_number #=> Integer
     #   resp.presets[0].settings.container_settings.m2ts_settings.pts_offset #=> Integer
-    #   resp.presets[0].settings.container_settings.m2ts_settings.pts_offset_mode #=> String, one of "AUTO", "SECONDS"
+    #   resp.presets[0].settings.container_settings.m2ts_settings.pts_offset_mode #=> String, one of "AUTO", "SECONDS", "MILLISECONDS"
     #   resp.presets[0].settings.container_settings.m2ts_settings.rate_mode #=> String, one of "VBR", "CBR"
     #   resp.presets[0].settings.container_settings.m2ts_settings.scte_35_esam.scte_35_esam_pid #=> Integer
     #   resp.presets[0].settings.container_settings.m2ts_settings.scte_35_pid #=> Integer
@@ -3618,6 +3625,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.presets[0].settings.container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.presets[0].settings.container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.presets[0].settings.container_settings.m3u_8_settings.audio_pts_offset_delta #=> Integer
     #   resp.presets[0].settings.container_settings.m3u_8_settings.data_pts_control #=> String, one of "AUTO", "ALIGN_TO_VIDEO"
     #   resp.presets[0].settings.container_settings.m3u_8_settings.max_pcr_interval #=> Integer
     #   resp.presets[0].settings.container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
@@ -3629,7 +3637,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.container_settings.m3u_8_settings.private_metadata_pid #=> Integer
     #   resp.presets[0].settings.container_settings.m3u_8_settings.program_number #=> Integer
     #   resp.presets[0].settings.container_settings.m3u_8_settings.pts_offset #=> Integer
-    #   resp.presets[0].settings.container_settings.m3u_8_settings.pts_offset_mode #=> String, one of "AUTO", "SECONDS"
+    #   resp.presets[0].settings.container_settings.m3u_8_settings.pts_offset_mode #=> String, one of "AUTO", "SECONDS", "MILLISECONDS"
     #   resp.presets[0].settings.container_settings.m3u_8_settings.scte_35_pid #=> Integer
     #   resp.presets[0].settings.container_settings.m3u_8_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.presets[0].settings.container_settings.m3u_8_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
@@ -4730,6 +4738,7 @@ module Aws::MediaConvert
     #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #           audio_frames_per_pes: 1,
     #           audio_pids: [1],
+    #           audio_pts_offset_delta: 1,
     #           bitrate: 1,
     #           buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
     #           data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
@@ -4768,7 +4777,7 @@ module Aws::MediaConvert
     #           private_metadata_pid: 1,
     #           program_number: 1,
     #           pts_offset: 1,
-    #           pts_offset_mode: "AUTO", # accepts AUTO, SECONDS
+    #           pts_offset_mode: "AUTO", # accepts AUTO, SECONDS, MILLISECONDS
     #           rate_mode: "VBR", # accepts VBR, CBR
     #           scte_35_esam: {
     #             scte_35_esam_pid: 1,
@@ -4786,6 +4795,7 @@ module Aws::MediaConvert
     #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #           audio_frames_per_pes: 1,
     #           audio_pids: [1],
+    #           audio_pts_offset_delta: 1,
     #           data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #           max_pcr_interval: 1,
     #           nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -4797,7 +4807,7 @@ module Aws::MediaConvert
     #           private_metadata_pid: 1,
     #           program_number: 1,
     #           pts_offset: 1,
-    #           pts_offset_mode: "AUTO", # accepts AUTO, SECONDS
+    #           pts_offset_mode: "AUTO", # accepts AUTO, SECONDS, MILLISECONDS
     #           scte_35_pid: 1,
     #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -5484,6 +5494,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.audio_frames_per_pes #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.audio_pids #=> Array
     #   resp.preset.settings.container_settings.m2ts_settings.audio_pids[0] #=> Integer
+    #   resp.preset.settings.container_settings.m2ts_settings.audio_pts_offset_delta #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.bitrate #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.buffer_model #=> String, one of "MULTIPLEX", "NONE"
     #   resp.preset.settings.container_settings.m2ts_settings.data_pts_control #=> String, one of "AUTO", "ALIGN_TO_VIDEO"
@@ -5517,7 +5528,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.private_metadata_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.program_number #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.pts_offset #=> Integer
-    #   resp.preset.settings.container_settings.m2ts_settings.pts_offset_mode #=> String, one of "AUTO", "SECONDS"
+    #   resp.preset.settings.container_settings.m2ts_settings.pts_offset_mode #=> String, one of "AUTO", "SECONDS", "MILLISECONDS"
     #   resp.preset.settings.container_settings.m2ts_settings.rate_mode #=> String, one of "VBR", "CBR"
     #   resp.preset.settings.container_settings.m2ts_settings.scte_35_esam.scte_35_esam_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.scte_35_pid #=> Integer
@@ -5532,6 +5543,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.preset.settings.container_settings.m3u_8_settings.audio_pts_offset_delta #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.data_pts_control #=> String, one of "AUTO", "ALIGN_TO_VIDEO"
     #   resp.preset.settings.container_settings.m3u_8_settings.max_pcr_interval #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
@@ -5543,7 +5555,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m3u_8_settings.private_metadata_pid #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.program_number #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.pts_offset #=> Integer
-    #   resp.preset.settings.container_settings.m3u_8_settings.pts_offset_mode #=> String, one of "AUTO", "SECONDS"
+    #   resp.preset.settings.container_settings.m3u_8_settings.pts_offset_mode #=> String, one of "AUTO", "SECONDS", "MILLISECONDS"
     #   resp.preset.settings.container_settings.m3u_8_settings.scte_35_pid #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.m3u_8_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
@@ -6023,7 +6035,7 @@ module Aws::MediaConvert
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.153.0'
+      context[:gem_version] = '1.154.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

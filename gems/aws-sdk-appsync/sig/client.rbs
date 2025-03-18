@@ -291,7 +291,8 @@ module Aws
       def create_domain_name: (
                                 domain_name: ::String,
                                 certificate_arn: ::String,
-                                ?description: ::String
+                                ?description: ::String,
+                                ?tags: Hash[::String, ::String]
                               ) -> _CreateDomainNameResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDomainNameResponseSuccess
 

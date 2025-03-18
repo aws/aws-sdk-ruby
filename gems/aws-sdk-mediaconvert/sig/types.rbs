@@ -380,7 +380,7 @@ module Aws::MediaConvert
       attr_accessor pts_offset_handling_for_b_frames: ("ZERO_BASED" | "MATCH_INITIAL_PTS")
       attr_accessor segment_control: ("SINGLE_FILE" | "SEGMENTED_FILES")
       attr_accessor segment_length: ::Integer
-      attr_accessor segment_length_control: ("EXACT" | "GOP_MULTIPLE")
+      attr_accessor segment_length_control: ("EXACT" | "GOP_MULTIPLE" | "MATCH")
       attr_accessor stream_inf_resolution: ("INCLUDE" | "EXCLUDE")
       attr_accessor target_duration_compatibility_mode: ("LEGACY" | "SPEC_COMPLIANT")
       attr_accessor video_composition_offsets: ("SIGNED" | "UNSIGNED")
@@ -571,7 +571,7 @@ module Aws::MediaConvert
       attr_accessor pts_offset_handling_for_b_frames: ("ZERO_BASED" | "MATCH_INITIAL_PTS")
       attr_accessor segment_control: ("SINGLE_FILE" | "SEGMENTED_FILES")
       attr_accessor segment_length: ::Integer
-      attr_accessor segment_length_control: ("EXACT" | "GOP_MULTIPLE")
+      attr_accessor segment_length_control: ("EXACT" | "GOP_MULTIPLE" | "MATCH")
       attr_accessor video_composition_offsets: ("SIGNED" | "UNSIGNED")
       attr_accessor write_segment_timeline_in_representation: ("ENABLED" | "DISABLED")
       SENSITIVE: []
@@ -1131,7 +1131,7 @@ module Aws::MediaConvert
       attr_accessor progressive_write_hls_manifest: ("ENABLED" | "DISABLED")
       attr_accessor segment_control: ("SINGLE_FILE" | "SEGMENTED_FILES")
       attr_accessor segment_length: ::Integer
-      attr_accessor segment_length_control: ("EXACT" | "GOP_MULTIPLE")
+      attr_accessor segment_length_control: ("EXACT" | "GOP_MULTIPLE" | "MATCH")
       attr_accessor segments_per_subdirectory: ::Integer
       attr_accessor stream_inf_resolution: ("INCLUDE" | "EXCLUDE")
       attr_accessor target_duration_compatibility_mode: ("LEGACY" | "SPEC_COMPLIANT")
@@ -1501,6 +1501,7 @@ module Aws::MediaConvert
       attr_accessor audio_duration: ("DEFAULT_CODEC_DURATION" | "MATCH_VIDEO_DURATION")
       attr_accessor audio_frames_per_pes: ::Integer
       attr_accessor audio_pids: ::Array[::Integer]
+      attr_accessor audio_pts_offset_delta: ::Integer
       attr_accessor bitrate: ::Integer
       attr_accessor buffer_model: ("MULTIPLEX" | "NONE")
       attr_accessor data_pts_control: ("AUTO" | "ALIGN_TO_VIDEO")
@@ -1528,7 +1529,7 @@ module Aws::MediaConvert
       attr_accessor private_metadata_pid: ::Integer
       attr_accessor program_number: ::Integer
       attr_accessor pts_offset: ::Integer
-      attr_accessor pts_offset_mode: ("AUTO" | "SECONDS")
+      attr_accessor pts_offset_mode: ("AUTO" | "SECONDS" | "MILLISECONDS")
       attr_accessor rate_mode: ("VBR" | "CBR")
       attr_accessor scte_35_esam: Types::M2tsScte35Esam
       attr_accessor scte_35_pid: ::Integer
@@ -1546,6 +1547,7 @@ module Aws::MediaConvert
       attr_accessor audio_duration: ("DEFAULT_CODEC_DURATION" | "MATCH_VIDEO_DURATION")
       attr_accessor audio_frames_per_pes: ::Integer
       attr_accessor audio_pids: ::Array[::Integer]
+      attr_accessor audio_pts_offset_delta: ::Integer
       attr_accessor data_pts_control: ("AUTO" | "ALIGN_TO_VIDEO")
       attr_accessor max_pcr_interval: ::Integer
       attr_accessor nielsen_id_3: ("INSERT" | "NONE")
@@ -1557,7 +1559,7 @@ module Aws::MediaConvert
       attr_accessor private_metadata_pid: ::Integer
       attr_accessor program_number: ::Integer
       attr_accessor pts_offset: ::Integer
-      attr_accessor pts_offset_mode: ("AUTO" | "SECONDS")
+      attr_accessor pts_offset_mode: ("AUTO" | "SECONDS" | "MILLISECONDS")
       attr_accessor scte_35_pid: ::Integer
       attr_accessor scte_35_source: ("PASSTHROUGH" | "NONE")
       attr_accessor timed_metadata: ("PASSTHROUGH" | "NONE")

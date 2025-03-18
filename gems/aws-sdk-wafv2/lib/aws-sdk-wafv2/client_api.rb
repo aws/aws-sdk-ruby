@@ -404,6 +404,7 @@ module Aws::WAFV2
     UpdateRuleGroupResponse = Shapes::StructureShape.new(name: 'UpdateRuleGroupResponse')
     UpdateWebACLRequest = Shapes::StructureShape.new(name: 'UpdateWebACLRequest')
     UpdateWebACLResponse = Shapes::StructureShape.new(name: 'UpdateWebACLResponse')
+    UriFragment = Shapes::StructureShape.new(name: 'UriFragment')
     UriPath = Shapes::StructureShape.new(name: 'UriPath')
     UsernameField = Shapes::StructureShape.new(name: 'UsernameField')
     VendorName = Shapes::StringShape.new(name: 'VendorName')
@@ -759,6 +760,7 @@ module Aws::WAFV2
     FieldToMatch.add_member(:header_order, Shapes::ShapeRef.new(shape: HeaderOrder, location_name: "HeaderOrder"))
     FieldToMatch.add_member(:ja3_fingerprint, Shapes::ShapeRef.new(shape: JA3Fingerprint, location_name: "JA3Fingerprint"))
     FieldToMatch.add_member(:ja4_fingerprint, Shapes::ShapeRef.new(shape: JA4Fingerprint, location_name: "JA4Fingerprint"))
+    FieldToMatch.add_member(:uri_fragment, Shapes::ShapeRef.new(shape: UriFragment, location_name: "UriFragment"))
     FieldToMatch.struct_class = Types::FieldToMatch
 
     FieldToProtect.add_member(:field_type, Shapes::ShapeRef.new(shape: FieldToProtectType, required: true, location_name: "FieldType"))
@@ -1632,6 +1634,9 @@ module Aws::WAFV2
 
     UpdateWebACLResponse.add_member(:next_lock_token, Shapes::ShapeRef.new(shape: LockToken, location_name: "NextLockToken"))
     UpdateWebACLResponse.struct_class = Types::UpdateWebACLResponse
+
+    UriFragment.add_member(:fallback_behavior, Shapes::ShapeRef.new(shape: FallbackBehavior, location_name: "FallbackBehavior"))
+    UriFragment.struct_class = Types::UriFragment
 
     UriPath.struct_class = Types::UriPath
 

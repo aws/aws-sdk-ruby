@@ -617,6 +617,75 @@ module Aws::ApplicationSignals
       req.send_request(options)
     end
 
+    # Add or remove time window exclusions for one or more Service Level
+    # Objectives (SLOs).
+    #
+    # @option params [required, Array<String>] :slo_ids
+    #   The list of SLO IDs to add or remove exclusion windows from.
+    #
+    # @option params [Array<Types::ExclusionWindow>] :add_exclusion_windows
+    #   A list of exclusion windows to add to the specified SLOs. You can add
+    #   up to 10 exclusion windows per SLO.
+    #
+    # @option params [Array<Types::ExclusionWindow>] :remove_exclusion_windows
+    #   A list of exclusion windows to remove from the specified SLOs. The
+    #   window configuration must match an existing exclusion window.
+    #
+    # @return [Types::BatchUpdateExclusionWindowsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchUpdateExclusionWindowsOutput#slo_ids #slo_ids} => Array&lt;String&gt;
+    #   * {Types::BatchUpdateExclusionWindowsOutput#errors #errors} => Array&lt;Types::BatchUpdateExclusionWindowsError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_update_exclusion_windows({
+    #     slo_ids: ["String"], # required
+    #     add_exclusion_windows: [
+    #       {
+    #         window: { # required
+    #           duration_unit: "MINUTE", # required, accepts MINUTE, HOUR, DAY, MONTH
+    #           duration: 1, # required
+    #         },
+    #         start_time: Time.now,
+    #         recurrence_rule: {
+    #           expression: "Expression", # required
+    #         },
+    #         reason: "ExclusionReason",
+    #       },
+    #     ],
+    #     remove_exclusion_windows: [
+    #       {
+    #         window: { # required
+    #           duration_unit: "MINUTE", # required, accepts MINUTE, HOUR, DAY, MONTH
+    #           duration: 1, # required
+    #         },
+    #         start_time: Time.now,
+    #         recurrence_rule: {
+    #           expression: "Expression", # required
+    #         },
+    #         reason: "ExclusionReason",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.slo_ids #=> Array
+    #   resp.slo_ids[0] #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].slo_id #=> String
+    #   resp.errors[0].error_code #=> String
+    #   resp.errors[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/BatchUpdateExclusionWindows AWS API Documentation
+    #
+    # @overload batch_update_exclusion_windows(params = {})
+    # @param [Hash] params ({})
+    def batch_update_exclusion_windows(params = {}, options = {})
+      req = build_request(:batch_update_exclusion_windows, params)
+      req.send_request(options)
+    end
+
     # Creates a service level objective (SLO), which can help you ensure
     # that your critical business operations are meeting customer
     # expectations. Use SLOs to set and track specific target levels for the
@@ -1444,6 +1513,53 @@ module Aws::ApplicationSignals
       req.send_request(options)
     end
 
+    # Retrieves all exclusion windows configured for a specific SLO.
+    #
+    # @option params [required, String] :id
+    #   The ID of the SLO to list exclusion windows for.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in one operation. If you omit
+    #   this parameter, the default of 50 is used.      </p>
+    #
+    # @option params [String] :next_token
+    #   Include this value, if it was returned by the previous operation, to
+    #   get the next set of service level objectives.      </p>
+    #
+    # @return [Types::ListServiceLevelObjectiveExclusionWindowsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListServiceLevelObjectiveExclusionWindowsOutput#exclusion_windows #exclusion_windows} => Array&lt;Types::ExclusionWindow&gt;
+    #   * {Types::ListServiceLevelObjectiveExclusionWindowsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_service_level_objective_exclusion_windows({
+    #     id: "ServiceLevelObjectiveId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.exclusion_windows #=> Array
+    #   resp.exclusion_windows[0].window.duration_unit #=> String, one of "MINUTE", "HOUR", "DAY", "MONTH"
+    #   resp.exclusion_windows[0].window.duration #=> Integer
+    #   resp.exclusion_windows[0].start_time #=> Time
+    #   resp.exclusion_windows[0].recurrence_rule.expression #=> String
+    #   resp.exclusion_windows[0].reason #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/ListServiceLevelObjectiveExclusionWindows AWS API Documentation
+    #
+    # @overload list_service_level_objective_exclusion_windows(params = {})
+    # @param [Hash] params ({})
+    def list_service_level_objective_exclusion_windows(params = {}, options = {})
+      req = build_request(:list_service_level_objective_exclusion_windows, params)
+      req.send_request(options)
+    end
+
     # Returns a list of SLOs created in this account.
     #
     # @option params [Hash<String,String>] :key_attributes
@@ -2195,7 +2311,7 @@ module Aws::ApplicationSignals
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-applicationsignals'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

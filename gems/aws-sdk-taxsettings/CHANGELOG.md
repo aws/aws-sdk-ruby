@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2025-03-17)
+------------------
+
+* Feature - Adjust Vietnam PaymentVoucherNumber regex and minor API change.
+
 1.19.0 (2025-02-25)
 ------------------
 

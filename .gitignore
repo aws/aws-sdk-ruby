@@ -9,7 +9,8 @@
 /coverage
 /rbs_collection.lock.yaml
 *.gem
-benchmark_report.json
+benchmark-results/
+/test.sh
 
 /scratchpad
 .idea

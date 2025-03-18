@@ -20,6 +20,7 @@ module Aws::CloudWatchRUM
     AppMonitorConfiguration = Shapes::StructureShape.new(name: 'AppMonitorConfiguration')
     AppMonitorDetails = Shapes::StructureShape.new(name: 'AppMonitorDetails')
     AppMonitorDomain = Shapes::StringShape.new(name: 'AppMonitorDomain')
+    AppMonitorDomainList = Shapes::ListShape.new(name: 'AppMonitorDomainList')
     AppMonitorId = Shapes::StringShape.new(name: 'AppMonitorId')
     AppMonitorName = Shapes::StringShape.new(name: 'AppMonitorName')
     AppMonitorSummary = Shapes::StructureShape.new(name: 'AppMonitorSummary')
@@ -49,6 +50,9 @@ module Aws::CloudWatchRUM
     DeleteResourcePolicyResponse = Shapes::StructureShape.new(name: 'DeleteResourcePolicyResponse')
     DeleteRumMetricsDestinationRequest = Shapes::StructureShape.new(name: 'DeleteRumMetricsDestinationRequest')
     DeleteRumMetricsDestinationResponse = Shapes::StructureShape.new(name: 'DeleteRumMetricsDestinationResponse')
+    DeobfuscationConfiguration = Shapes::StructureShape.new(name: 'DeobfuscationConfiguration')
+    DeobfuscationS3Uri = Shapes::StringShape.new(name: 'DeobfuscationS3Uri')
+    DeobfuscationStatus = Shapes::StringShape.new(name: 'DeobfuscationStatus')
     DestinationArn = Shapes::StringShape.new(name: 'DestinationArn')
     DimensionKey = Shapes::StringShape.new(name: 'DimensionKey')
     DimensionKeysMap = Shapes::MapShape.new(name: 'DimensionKeysMap')
@@ -69,6 +73,7 @@ module Aws::CloudWatchRUM
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     InvalidPolicyRevisionIdException = Shapes::StructureShape.new(name: 'InvalidPolicyRevisionIdException')
+    JavaScriptSourceMaps = Shapes::StructureShape.new(name: 'JavaScriptSourceMaps')
     JsonValue = Shapes::StringShape.new(name: 'JsonValue')
     ListAppMonitorsRequest = Shapes::StructureShape.new(name: 'ListAppMonitorsRequest')
     ListAppMonitorsResponse = Shapes::StructureShape.new(name: 'ListAppMonitorsResponse')
@@ -149,7 +154,9 @@ module Aws::CloudWatchRUM
     AppMonitor.add_member(:created, Shapes::ShapeRef.new(shape: ISOTimestampString, location_name: "Created"))
     AppMonitor.add_member(:custom_events, Shapes::ShapeRef.new(shape: CustomEvents, location_name: "CustomEvents"))
     AppMonitor.add_member(:data_storage, Shapes::ShapeRef.new(shape: DataStorage, location_name: "DataStorage"))
+    AppMonitor.add_member(:deobfuscation_configuration, Shapes::ShapeRef.new(shape: DeobfuscationConfiguration, location_name: "DeobfuscationConfiguration"))
     AppMonitor.add_member(:domain, Shapes::ShapeRef.new(shape: AppMonitorDomain, location_name: "Domain"))
+    AppMonitor.add_member(:domain_list, Shapes::ShapeRef.new(shape: AppMonitorDomainList, location_name: "DomainList"))
     AppMonitor.add_member(:id, Shapes::ShapeRef.new(shape: AppMonitorId, location_name: "Id"))
     AppMonitor.add_member(:last_modified, Shapes::ShapeRef.new(shape: ISOTimestampString, location_name: "LastModified"))
     AppMonitor.add_member(:name, Shapes::ShapeRef.new(shape: AppMonitorName, location_name: "Name"))
@@ -172,6 +179,8 @@ module Aws::CloudWatchRUM
     AppMonitorDetails.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     AppMonitorDetails.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
     AppMonitorDetails.struct_class = Types::AppMonitorDetails
+
+    AppMonitorDomainList.member = Shapes::ShapeRef.new(shape: AppMonitorDomain)
 
     AppMonitorSummary.add_member(:created, Shapes::ShapeRef.new(shape: ISOTimestampString, location_name: "Created"))
     AppMonitorSummary.add_member(:id, Shapes::ShapeRef.new(shape: AppMonitorId, location_name: "Id"))
@@ -235,7 +244,9 @@ module Aws::CloudWatchRUM
     CreateAppMonitorRequest.add_member(:app_monitor_configuration, Shapes::ShapeRef.new(shape: AppMonitorConfiguration, location_name: "AppMonitorConfiguration"))
     CreateAppMonitorRequest.add_member(:custom_events, Shapes::ShapeRef.new(shape: CustomEvents, location_name: "CustomEvents"))
     CreateAppMonitorRequest.add_member(:cw_log_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "CwLogEnabled"))
-    CreateAppMonitorRequest.add_member(:domain, Shapes::ShapeRef.new(shape: AppMonitorDomain, required: true, location_name: "Domain"))
+    CreateAppMonitorRequest.add_member(:deobfuscation_configuration, Shapes::ShapeRef.new(shape: DeobfuscationConfiguration, location_name: "DeobfuscationConfiguration"))
+    CreateAppMonitorRequest.add_member(:domain, Shapes::ShapeRef.new(shape: AppMonitorDomain, location_name: "Domain"))
+    CreateAppMonitorRequest.add_member(:domain_list, Shapes::ShapeRef.new(shape: AppMonitorDomainList, location_name: "DomainList"))
     CreateAppMonitorRequest.add_member(:name, Shapes::ShapeRef.new(shape: AppMonitorName, required: true, location_name: "Name"))
     CreateAppMonitorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateAppMonitorRequest.struct_class = Types::CreateAppMonitorRequest
@@ -271,6 +282,9 @@ module Aws::CloudWatchRUM
     DeleteRumMetricsDestinationRequest.struct_class = Types::DeleteRumMetricsDestinationRequest
 
     DeleteRumMetricsDestinationResponse.struct_class = Types::DeleteRumMetricsDestinationResponse
+
+    DeobfuscationConfiguration.add_member(:java_script_source_maps, Shapes::ShapeRef.new(shape: JavaScriptSourceMaps, location_name: "JavaScriptSourceMaps"))
+    DeobfuscationConfiguration.struct_class = Types::DeobfuscationConfiguration
 
     DimensionKeysMap.key = Shapes::ShapeRef.new(shape: DimensionKey)
     DimensionKeysMap.value = Shapes::ShapeRef.new(shape: DimensionName)
@@ -309,6 +323,10 @@ module Aws::CloudWatchRUM
 
     InvalidPolicyRevisionIdException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     InvalidPolicyRevisionIdException.struct_class = Types::InvalidPolicyRevisionIdException
+
+    JavaScriptSourceMaps.add_member(:s3_uri, Shapes::ShapeRef.new(shape: DeobfuscationS3Uri, location_name: "S3Uri"))
+    JavaScriptSourceMaps.add_member(:status, Shapes::ShapeRef.new(shape: DeobfuscationStatus, required: true, location_name: "Status"))
+    JavaScriptSourceMaps.struct_class = Types::JavaScriptSourceMaps
 
     ListAppMonitorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListAppMonitorsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
@@ -459,7 +477,9 @@ module Aws::CloudWatchRUM
     UpdateAppMonitorRequest.add_member(:app_monitor_configuration, Shapes::ShapeRef.new(shape: AppMonitorConfiguration, location_name: "AppMonitorConfiguration"))
     UpdateAppMonitorRequest.add_member(:custom_events, Shapes::ShapeRef.new(shape: CustomEvents, location_name: "CustomEvents"))
     UpdateAppMonitorRequest.add_member(:cw_log_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "CwLogEnabled"))
+    UpdateAppMonitorRequest.add_member(:deobfuscation_configuration, Shapes::ShapeRef.new(shape: DeobfuscationConfiguration, location_name: "DeobfuscationConfiguration"))
     UpdateAppMonitorRequest.add_member(:domain, Shapes::ShapeRef.new(shape: AppMonitorDomain, location_name: "Domain"))
+    UpdateAppMonitorRequest.add_member(:domain_list, Shapes::ShapeRef.new(shape: AppMonitorDomainList, location_name: "DomainList"))
     UpdateAppMonitorRequest.add_member(:name, Shapes::ShapeRef.new(shape: AppMonitorName, required: true, location: "uri", location_name: "Name"))
     UpdateAppMonitorRequest.struct_class = Types::UpdateAppMonitorRequest
 

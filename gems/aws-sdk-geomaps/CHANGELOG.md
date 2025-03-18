@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2025-03-17)
+------------------
+
+* Feature - Provide support for vector map styles in the GetStaticMap operation.
+
 1.4.0 (2025-02-18)
 ------------------
 

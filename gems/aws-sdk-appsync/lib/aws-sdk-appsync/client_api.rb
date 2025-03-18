@@ -549,6 +549,7 @@ module Aws::AppSync
     CreateDomainNameRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "domainName"))
     CreateDomainNameRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: CertificateArn, required: true, location_name: "certificateArn"))
     CreateDomainNameRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CreateDomainNameRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateDomainNameRequest.struct_class = Types::CreateDomainNameRequest
 
     CreateDomainNameResponse.add_member(:domain_name_config, Shapes::ShapeRef.new(shape: DomainNameConfig, location_name: "domainNameConfig"))
@@ -758,6 +759,8 @@ module Aws::AppSync
     DomainNameConfig.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: CertificateArn, location_name: "certificateArn"))
     DomainNameConfig.add_member(:appsync_domain_name, Shapes::ShapeRef.new(shape: String, location_name: "appsyncDomainName"))
     DomainNameConfig.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "hostedZoneId"))
+    DomainNameConfig.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    DomainNameConfig.add_member(:domain_name_arn, Shapes::ShapeRef.new(shape: String, location_name: "domainNameArn"))
     DomainNameConfig.struct_class = Types::DomainNameConfig
 
     DomainNameConfigs.member = Shapes::ShapeRef.new(shape: DomainNameConfig)

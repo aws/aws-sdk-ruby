@@ -443,6 +443,7 @@ module Aws::WAFV2
       attr_accessor header_order: Types::HeaderOrder
       attr_accessor ja3_fingerprint: Types::JA3Fingerprint
       attr_accessor ja4_fingerprint: Types::JA4Fingerprint
+      attr_accessor uri_fragment: Types::UriFragment
       SENSITIVE: []
     end
 
@@ -1532,6 +1533,11 @@ module Aws::WAFV2
 
     class UpdateWebACLResponse
       attr_accessor next_lock_token: ::String
+      SENSITIVE: []
+    end
+
+    class UriFragment
+      attr_accessor fallback_behavior: ("MATCH" | "NO_MATCH")
       SENSITIVE: []
     end
 

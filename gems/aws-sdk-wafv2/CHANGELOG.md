@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.105.0 (2025-03-17)
+------------------
+
+* Feature - AWS WAF now lets you inspect fragments of request URIs. You can specify the scope of the URI to inspect and narrow the set of URI fragments.
+
 1.104.0 (2025-03-06)
 ------------------
 

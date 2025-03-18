@@ -55,10 +55,20 @@ module Aws::CloudWatchRUM
     #   CloudWatch Logs.
     #   @return [Types::DataStorage]
     #
+    # @!attribute [rw] deobfuscation_configuration
+    #   A structure that contains the configuration for how an app monitor
+    #   can deobfuscate stack traces.
+    #   @return [Types::DeobfuscationConfiguration]
+    #
     # @!attribute [rw] domain
     #   The top-level internet domain name for which your application has
     #   administrative authority.
     #   @return [String]
+    #
+    # @!attribute [rw] domain_list
+    #   List the domain names for which your application has administrative
+    #   authority.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] id
     #   The unique ID of this app monitor.
@@ -88,7 +98,9 @@ module Aws::CloudWatchRUM
       :created,
       :custom_events,
       :data_storage,
+      :deobfuscation_configuration,
       :domain,
+      :domain_list,
       :id,
       :last_modified,
       :name,
@@ -578,10 +590,21 @@ module Aws::CloudWatchRUM
     #   If you omit this parameter, the default is `false`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] deobfuscation_configuration
+    #   A structure that contains the configuration for how an app monitor
+    #   can deobfuscate stack traces.
+    #   @return [Types::DeobfuscationConfiguration]
+    #
     # @!attribute [rw] domain
     #   The top-level internet domain name for which your application has
     #   administrative authority.
     #   @return [String]
+    #
+    # @!attribute [rw] domain_list
+    #   List the domain names for which your application has administrative
+    #   authority. The `CreateAppMonitor` requires either the domain or the
+    #   domain list.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] name
     #   A name for the app monitor.
@@ -614,7 +637,9 @@ module Aws::CloudWatchRUM
       :app_monitor_configuration,
       :custom_events,
       :cw_log_enabled,
+      :deobfuscation_configuration,
       :domain,
+      :domain_list,
       :name,
       :tags)
       SENSITIVE = []
@@ -772,6 +797,22 @@ module Aws::CloudWatchRUM
     #
     class DeleteRumMetricsDestinationResponse < Aws::EmptyStructure; end
 
+    # A structure that contains the configuration for how an app monitor can
+    # deobfuscate stack traces.
+    #
+    # @!attribute [rw] java_script_source_maps
+    #   A structure that contains the configuration for how an app monitor
+    #   can unminify JavaScript error stack traces using source maps.
+    #   @return [Types::JavaScriptSourceMaps]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/DeobfuscationConfiguration AWS API Documentation
+    #
+    class DeobfuscationConfiguration < Struct.new(
+      :java_script_source_maps)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] filters
     #   An array of structures that you can use to filter the results to
     #   those that match one or more sets of key-value pairs that you
@@ -911,6 +952,29 @@ module Aws::CloudWatchRUM
     #
     class InvalidPolicyRevisionIdException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains the configuration for how an app monitor can
+    # unminify JavaScript error stack traces using source maps.
+    #
+    # @!attribute [rw] s3_uri
+    #   The S3Uri of the bucket or folder that stores the source map files.
+    #   It is required if status is ENABLED.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Specifies whether JavaScript error stack traces should be unminified
+    #   for this app monitor. The default is for JavaScript error stack
+    #   trace unminification to be `DISABLED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/JavaScriptSourceMaps AWS API Documentation
+    #
+    class JavaScriptSourceMaps < Struct.new(
+      :s3_uri,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1829,10 +1893,21 @@ module Aws::CloudWatchRUM
     #   Amazon CloudWatch Logs charges.
     #   @return [Boolean]
     #
+    # @!attribute [rw] deobfuscation_configuration
+    #   A structure that contains the configuration for how an app monitor
+    #   can deobfuscate stack traces.
+    #   @return [Types::DeobfuscationConfiguration]
+    #
     # @!attribute [rw] domain
     #   The top-level internet domain name for which your application has
     #   administrative authority.
     #   @return [String]
+    #
+    # @!attribute [rw] domain_list
+    #   List the domain names for which your application has administrative
+    #   authority. The `UpdateAppMonitor` allows either the domain or the
+    #   domain list.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] name
     #   The name of the app monitor to update.
@@ -1844,7 +1919,9 @@ module Aws::CloudWatchRUM
       :app_monitor_configuration,
       :custom_events,
       :cw_log_enabled,
+      :deobfuscation_configuration,
       :domain,
+      :domain_list,
       :name)
       SENSITIVE = []
       include Aws::Structure

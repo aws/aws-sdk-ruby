@@ -136,6 +136,15 @@ module Aws::CleanRooms
     #   A policy that describes the associated data usage limitations.
     #   @return [Types::AnalysisRulePolicy]
     #
+    # @!attribute [rw] collaboration_policy
+    #   Controls on the query specifications that can be run on an
+    #   associated configured table.
+    #   @return [Types::ConfiguredTableAssociationAnalysisRulePolicy]
+    #
+    # @!attribute [rw] consolidated_policy
+    #   The consolidated policy for the analysis rule.
+    #   @return [Types::ConsolidatedPolicy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AnalysisRule AWS API Documentation
     #
     class AnalysisRule < Struct.new(
@@ -144,7 +153,9 @@ module Aws::CleanRooms
       :name,
       :create_time,
       :update_time,
-      :policy)
+      :policy,
+      :collaboration_policy,
+      :consolidated_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -401,17 +412,44 @@ module Aws::CleanRooms
     #   The query text.
     #   @return [String]
     #
+    # @!attribute [rw] artifacts
+    #   The artifacts of the analysis source.
+    #   @return [Types::AnalysisTemplateArtifacts]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AnalysisSource AWS API Documentation
     #
     class AnalysisSource < Struct.new(
       :text,
+      :artifacts,
+      :unknown)
+      SENSITIVE = [:text]
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Text < AnalysisSource; end
+      class Artifacts < AnalysisSource; end
+      class Unknown < AnalysisSource; end
+    end
+
+    # The analysis source metadata.
+    #
+    # @note AnalysisSourceMetadata is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AnalysisSourceMetadata corresponding to the set member.
+    #
+    # @!attribute [rw] artifacts
+    #   The artifacts of the analysis source metadata.
+    #   @return [Types::AnalysisTemplateArtifactMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AnalysisSourceMetadata AWS API Documentation
+    #
+    class AnalysisSourceMetadata < Struct.new(
+      :artifacts,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
-      class Text < AnalysisSource; end
-      class Unknown < AnalysisSource; end
+      class Artifacts < AnalysisSourceMetadata; end
+      class Unknown < AnalysisSourceMetadata; end
     end
 
     # The analysis template.
@@ -470,6 +508,10 @@ module Aws::CleanRooms
     #   The source of the analysis template.
     #   @return [Types::AnalysisSource]
     #
+    # @!attribute [rw] source_metadata
+    #   The source metadata for the analysis template.
+    #   @return [Types::AnalysisSourceMetadata]
+    #
     # @!attribute [rw] analysis_parameters
     #   The parameters of the analysis template.
     #   @return [Array<Types::AnalysisParameter>]
@@ -495,9 +537,68 @@ module Aws::CleanRooms
       :schema,
       :format,
       :source,
+      :source_metadata,
       :analysis_parameters,
       :validations)
-      SENSITIVE = [:source, :analysis_parameters]
+      SENSITIVE = [:analysis_parameters]
+      include Aws::Structure
+    end
+
+    # The analysis template artifact.
+    #
+    # @!attribute [rw] location
+    #   The artifact location.
+    #   @return [Types::S3Location]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AnalysisTemplateArtifact AWS API Documentation
+    #
+    class AnalysisTemplateArtifact < Struct.new(
+      :location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The analysis template artifact metadata.
+    #
+    # @!attribute [rw] entry_point_hash
+    #   The hash of the entry point for the analysis template artifact
+    #   metadata.
+    #   @return [Types::Hash]
+    #
+    # @!attribute [rw] additional_artifact_hashes
+    #   Additional artifact hashes for the analysis template.
+    #   @return [Array<Types::Hash>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AnalysisTemplateArtifactMetadata AWS API Documentation
+    #
+    class AnalysisTemplateArtifactMetadata < Struct.new(
+      :entry_point_hash,
+      :additional_artifact_hashes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The analysis template artifacts.
+    #
+    # @!attribute [rw] entry_point
+    #   The entry point for the analysis template artifacts.
+    #   @return [Types::AnalysisTemplateArtifact]
+    #
+    # @!attribute [rw] additional_artifacts
+    #   Additional artifacts for the analysis template.
+    #   @return [Array<Types::AnalysisTemplateArtifact>]
+    #
+    # @!attribute [rw] role_arn
+    #   The role ARN for the analysis template artifacts.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AnalysisTemplateArtifacts AWS API Documentation
+    #
+    class AnalysisTemplateArtifacts < Struct.new(
+      :entry_point,
+      :additional_artifacts,
+      :role_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -834,6 +935,22 @@ module Aws::CleanRooms
     end
 
     # Information related to the utilization of resources that have been
+    # billed or charged for in a given context, such as a protected job.
+    #
+    # @!attribute [rw] units
+    #   The number of Clean Rooms Processing Unit (CRPU) hours that have
+    #   been billed.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/BilledJobResourceUtilization AWS API Documentation
+    #
+    class BilledJobResourceUtilization < Struct.new(
+      :units)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information related to the utilization of resources that have been
     # billed or charged for in a given context, such as a protected query.
     #
     # @!attribute [rw] units
@@ -906,6 +1023,19 @@ module Aws::CleanRooms
     # @!attribute [rw] query_log_status
     #   An indicator as to whether query logging has been enabled or
     #   disabled for the collaboration.
+    #
+    #   When `ENABLED`, Clean Rooms logs details about queries run within
+    #   this collaboration and those logs can be viewed in Amazon CloudWatch
+    #   Logs. The default value is `DISABLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_log_status
+    #   An indicator as to whether job logging has been enabled or disabled
+    #   for the collaboration.
+    #
+    #   When `ENABLED`, Clean Rooms logs details about jobs run within this
+    #   collaboration and those logs can be viewed in Amazon CloudWatch
+    #   Logs. The default value is `DISABLED`.
     #   @return [String]
     #
     # @!attribute [rw] analytics_engine
@@ -928,6 +1058,7 @@ module Aws::CleanRooms
       :membership_arn,
       :data_encryption_metadata,
       :query_log_status,
+      :job_log_status,
       :analytics_engine)
       SENSITIVE = []
       include Aws::Structure
@@ -987,6 +1118,10 @@ module Aws::CleanRooms
     #   The source of the analysis template within a collaboration.
     #   @return [Types::AnalysisSource]
     #
+    # @!attribute [rw] source_metadata
+    #   The source metadata for the collaboration analysis template.
+    #   @return [Types::AnalysisSourceMetadata]
+    #
     # @!attribute [rw] analysis_parameters
     #   The analysis parameters that have been specified in the analysis
     #   template.
@@ -1011,9 +1146,10 @@ module Aws::CleanRooms
       :schema,
       :format,
       :source,
+      :source_metadata,
       :analysis_parameters,
       :validations)
-      SENSITIVE = [:source, :analysis_parameters]
+      SENSITIVE = [:analysis_parameters]
       include Aws::Structure
     end
 
@@ -1864,13 +2000,23 @@ module Aws::CleanRooms
     #   @return [Array<String>]
     #
     # @!attribute [rw] analysis_method
-    #   The analysis method for the configured table. The only valid value
-    #   is currently `DIRECT\_QUERY`.
+    #   The analysis method for the configured table.
+    #
+    #   `DIRECT_QUERY` allows SQL queries to be run directly on this table.
+    #
+    #   `DIRECT_JOB` allows PySpark jobs to be run directly on this table.
+    #
+    #   `MULTIPLE` allows both SQL queries and PySpark jobs to be run
+    #   directly on this table.
     #   @return [String]
     #
     # @!attribute [rw] allowed_columns
     #   The columns within the underlying Glue table that can be utilized
     #   within collaborations.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] selected_analysis_methods
+    #   The selected analysis methods for the configured table.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ConfiguredTable AWS API Documentation
@@ -1885,7 +2031,8 @@ module Aws::CleanRooms
       :update_time,
       :analysis_rule_types,
       :analysis_method,
-      :allowed_columns)
+      :allowed_columns,
+      :selected_analysis_methods)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2295,6 +2442,11 @@ module Aws::CleanRooms
     #   The unique ARN for the configured table association.
     #   @return [String]
     #
+    # @!attribute [rw] analysis_rule_types
+    #   The analysis rule types that are associated with the configured
+    #   table associations in this summary.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ConfiguredTableAssociationSummary AWS API Documentation
     #
     class ConfiguredTableAssociationSummary < Struct.new(
@@ -2305,7 +2457,8 @@ module Aws::CleanRooms
       :create_time,
       :update_time,
       :id,
-      :arn)
+      :arn,
+      :analysis_rule_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2337,9 +2490,19 @@ module Aws::CleanRooms
     #   @return [Array<String>]
     #
     # @!attribute [rw] analysis_method
-    #   The analysis method for the configured tables. The only valid value
-    #   is currently `DIRECT\_QUERY`.
+    #   The analysis method for the configured tables.
+    #
+    #   `DIRECT_QUERY` allows SQL queries to be run directly on this table.
+    #
+    #   `DIRECT_JOB` allows PySpark jobs to be run directly on this table.
+    #
+    #   `MULTIPLE` allows both SQL queries and PySpark jobs to be run
+    #   directly on this table.
     #   @return [String]
+    #
+    # @!attribute [rw] selected_analysis_methods
+    #   The selected analysis methods for the configured table summary.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ConfiguredTableSummary AWS API Documentation
     #
@@ -2350,7 +2513,8 @@ module Aws::CleanRooms
       :create_time,
       :update_time,
       :analysis_rule_types,
-      :analysis_method)
+      :analysis_method,
+      :selected_analysis_methods)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2381,6 +2545,208 @@ module Aws::CleanRooms
       :reason)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Controls on the analysis specifications that can be run on a
+    # configured table.
+    #
+    # @note ConsolidatedPolicy is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ConsolidatedPolicy corresponding to the set member.
+    #
+    # @!attribute [rw] v1
+    #   The consolidated policy version 1.
+    #   @return [Types::ConsolidatedPolicyV1]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ConsolidatedPolicy AWS API Documentation
+    #
+    class ConsolidatedPolicy < Struct.new(
+      :v1,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class V1 < ConsolidatedPolicy; end
+      class Unknown < ConsolidatedPolicy; end
+    end
+
+    # Controls on the analysis specifications that can be run on a
+    # configured table.
+    #
+    # @!attribute [rw] aggregate_columns
+    #   Aggregate columns in consolidated policy aggregation.
+    #   @return [Array<Types::AggregateColumn>]
+    #
+    # @!attribute [rw] join_columns
+    #   The columns to join on.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] join_required
+    #   Join required
+    #   @return [String]
+    #
+    # @!attribute [rw] allowed_join_operators
+    #   The allowed join operators.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dimension_columns
+    #   The dimension columns of the consolidated policy aggregation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] scalar_functions
+    #   The scalar functions.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] output_constraints
+    #   The output constraints of the consolidated policy aggregation.
+    #   @return [Array<Types::AggregationConstraint>]
+    #
+    # @!attribute [rw] additional_analyses
+    #   Additional analyses for the consolidated policy aggregation.
+    #   @return [String]
+    #
+    # @!attribute [rw] allowed_result_receivers
+    #   The allowed result receivers.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allowed_additional_analyses
+    #   The additional analyses allowed by the consolidated policy
+    #   aggregation.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ConsolidatedPolicyAggregation AWS API Documentation
+    #
+    class ConsolidatedPolicyAggregation < Struct.new(
+      :aggregate_columns,
+      :join_columns,
+      :join_required,
+      :allowed_join_operators,
+      :dimension_columns,
+      :scalar_functions,
+      :output_constraints,
+      :additional_analyses,
+      :allowed_result_receivers,
+      :allowed_additional_analyses)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Controls on the analysis specifications that can be run on a
+    # configured table.
+    #
+    # @!attribute [rw] allowed_analyses
+    #   The allowed analyses.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allowed_analysis_providers
+    #   The allowed analysis providers.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] additional_analyses
+    #   Additional analyses for the consolidated policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] disallowed_output_columns
+    #   Disallowed output columns
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] differential_privacy
+    #   Specifies the unique identifier for your users.
+    #   @return [Types::DifferentialPrivacyConfiguration]
+    #
+    # @!attribute [rw] allowed_result_receivers
+    #   The allowed result receivers.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allowed_additional_analyses
+    #   The additional analyses allowed by the consolidated policy.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ConsolidatedPolicyCustom AWS API Documentation
+    #
+    class ConsolidatedPolicyCustom < Struct.new(
+      :allowed_analyses,
+      :allowed_analysis_providers,
+      :additional_analyses,
+      :disallowed_output_columns,
+      :differential_privacy,
+      :allowed_result_receivers,
+      :allowed_additional_analyses)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Controls on the analysis specifications that can be run on a
+    # configured table.
+    #
+    # @!attribute [rw] join_columns
+    #   The columns to join on.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allowed_join_operators
+    #   The allowed join operators in the consolidated policy list.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] list_columns
+    #   The columns in the consolidated policy list.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] additional_analyses
+    #   Additional analyses for the consolidated policy list.
+    #   @return [String]
+    #
+    # @!attribute [rw] allowed_result_receivers
+    #   The allowed result receivers.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allowed_additional_analyses
+    #   The additional analyses allowed by the consolidated policy list.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ConsolidatedPolicyList AWS API Documentation
+    #
+    class ConsolidatedPolicyList < Struct.new(
+      :join_columns,
+      :allowed_join_operators,
+      :list_columns,
+      :additional_analyses,
+      :allowed_result_receivers,
+      :allowed_additional_analyses)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Controls on the analysis specifications that can be run on a
+    # configured table.
+    #
+    # @note ConsolidatedPolicyV1 is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ConsolidatedPolicyV1 corresponding to the set member.
+    #
+    # @!attribute [rw] list
+    #   The list of consolidated policies.
+    #   @return [Types::ConsolidatedPolicyList]
+    #
+    # @!attribute [rw] aggregation
+    #   The aggregation setting for the consolidated policy.
+    #   @return [Types::ConsolidatedPolicyAggregation]
+    #
+    # @!attribute [rw] custom
+    #   Custom policy
+    #   @return [Types::ConsolidatedPolicyCustom]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ConsolidatedPolicyV1 AWS API Documentation
+    #
+    class ConsolidatedPolicyV1 < Struct.new(
+      :list,
+      :aggregation,
+      :custom,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class List < ConsolidatedPolicyV1; end
+      class Aggregation < ConsolidatedPolicyV1; end
+      class Custom < ConsolidatedPolicyV1; end
+      class Unknown < ConsolidatedPolicyV1; end
     end
 
     # @!attribute [rw] description
@@ -2415,6 +2781,10 @@ module Aws::CleanRooms
     #   The parameters of the analysis template.
     #   @return [Array<Types::AnalysisParameter>]
     #
+    # @!attribute [rw] schema
+    #   A relation within an analysis.
+    #   @return [Types::AnalysisSchema]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateAnalysisTemplateInput AWS API Documentation
     #
     class CreateAnalysisTemplateInput < Struct.new(
@@ -2424,8 +2794,9 @@ module Aws::CleanRooms
       :format,
       :source,
       :tags,
-      :analysis_parameters)
-      SENSITIVE = [:source, :analysis_parameters]
+      :analysis_parameters,
+      :schema)
+      SENSITIVE = [:analysis_parameters]
       include Aws::Structure
     end
 
@@ -2461,14 +2832,6 @@ module Aws::CleanRooms
     #
     # @!attribute [rw] creator_ml_member_abilities
     #   The ML abilities granted to the collaboration creator.
-    #
-    #   Custom ML modeling is in beta release and is subject to change. For
-    #   beta terms and conditions, see *Betas and Previews* in the [Amazon
-    #   Web Services Service Terms][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/service-terms/
     #   @return [Types::MLMemberAbilities]
     #
     # @!attribute [rw] creator_display_name
@@ -2483,6 +2846,18 @@ module Aws::CleanRooms
     # @!attribute [rw] query_log_status
     #   An indicator as to whether query logging has been enabled or
     #   disabled for the collaboration.
+    #
+    #   When `ENABLED`, Clean Rooms logs details about queries run within
+    #   this collaboration and those logs can be viewed in Amazon CloudWatch
+    #   Logs. The default value is `DISABLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_log_status
+    #   Specifies whether job logs are enabled for this collaboration.
+    #
+    #   When `ENABLED`, Clean Rooms logs details about jobs run within this
+    #   collaboration; those logs can be viewed in Amazon CloudWatch Logs.
+    #   The default value is `DISABLED`.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2516,6 +2891,7 @@ module Aws::CleanRooms
       :creator_display_name,
       :data_encryption_metadata,
       :query_log_status,
+      :job_log_status,
       :tags,
       :creator_payment_configuration,
       :analytics_engine)
@@ -2755,9 +3131,20 @@ module Aws::CleanRooms
     #   @return [Array<String>]
     #
     # @!attribute [rw] analysis_method
-    #   The analysis method for the configured tables. The only valid value
-    #   is currently `DIRECT\_QUERY`.
+    #   The analysis method allowed for the configured tables.
+    #
+    #   `DIRECT_QUERY` allows SQL queries to be run directly on this table.
+    #
+    #   `DIRECT_JOB` allows PySpark jobs to be run directly on this table.
+    #
+    #   `MULTIPLE` allows both SQL queries and PySpark jobs to be run
+    #   directly on this table.
     #   @return [String]
+    #
+    # @!attribute [rw] selected_analysis_methods
+    #   The analysis methods to enable for the configured table. When
+    #   configured, you must specify at least two analysis methods.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] tags
     #   An optional label that you can assign to a resource when you create
@@ -2774,6 +3161,7 @@ module Aws::CleanRooms
       :table_reference,
       :allowed_columns,
       :analysis_method,
+      :selected_analysis_methods,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -2908,6 +3296,19 @@ module Aws::CleanRooms
     # @!attribute [rw] query_log_status
     #   An indicator as to whether query logging has been enabled or
     #   disabled for the membership.
+    #
+    #   When `ENABLED`, Clean Rooms logs details about queries run within
+    #   this collaboration and those logs can be viewed in Amazon CloudWatch
+    #   Logs. The default value is `DISABLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_log_status
+    #   An indicator as to whether job logging has been enabled or disabled
+    #   for the collaboration.
+    #
+    #   When `ENABLED`, Clean Rooms logs details about jobs run within this
+    #   collaboration and those logs can be viewed in Amazon CloudWatch
+    #   Logs. The default value is `DISABLED`.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2921,6 +3322,12 @@ module Aws::CleanRooms
     #   The default protected query result configuration as specified by the
     #   member who can receive results.
     #   @return [Types::MembershipProtectedQueryResultConfiguration]
+    #
+    # @!attribute [rw] default_job_result_configuration
+    #   The default job result configuration that determines how job results
+    #   are protected and managed within this membership. This configuration
+    #   applies to all jobs.
+    #   @return [Types::MembershipProtectedJobResultConfiguration]
     #
     # @!attribute [rw] payment_configuration
     #   The payment responsibilities accepted by the collaboration member.
@@ -2938,8 +3345,10 @@ module Aws::CleanRooms
     class CreateMembershipInput < Struct.new(
       :collaboration_identifier,
       :query_log_status,
+      :job_log_status,
       :tags,
       :default_result_configuration,
+      :default_job_result_configuration,
       :payment_configuration)
       SENSITIVE = []
       include Aws::Structure
@@ -4034,6 +4443,35 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] membership_identifier
+    #   The identifier for a membership in a protected job instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] protected_job_identifier
+    #   The identifier for the protected job instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetProtectedJobInput AWS API Documentation
+    #
+    class GetProtectedJobInput < Struct.new(
+      :membership_identifier,
+      :protected_job_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] protected_job
+    #   The protected job metadata.
+    #   @return [Types::ProtectedJob]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetProtectedJobOutput AWS API Documentation
+    #
+    class GetProtectedJobOutput < Struct.new(
+      :protected_job)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] membership_identifier
     #   The identifier for a membership in a protected query instance.
     #   @return [String]
     #
@@ -4145,6 +4583,20 @@ module Aws::CleanRooms
     class GlueTableReference < Struct.new(
       :table_name,
       :database_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Hash
+    #
+    # @!attribute [rw] sha256
+    #   The SHA-256 hash value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/Hash AWS API Documentation
+    #
+    class Hash < Struct.new(
+      :sha256)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4610,6 +5062,32 @@ module Aws::CleanRooms
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object representing the collaboration member's payment
+    # responsibilities set by the collaboration creator for query and job
+    # compute costs.
+    #
+    # @!attribute [rw] is_responsible
+    #   Indicates whether the collaboration creator has configured the
+    #   collaboration member to pay for query and job compute costs (`TRUE`)
+    #   or has not configured the collaboration member to pay for query and
+    #   job compute costs (`FALSE`).
+    #
+    #   Exactly one member can be configured to pay for query and job
+    #   compute costs. An error is returned if the collaboration creator
+    #   sets a `TRUE` value for more than one member in the collaboration.
+    #
+    #   An error is returned if the collaboration creator sets a `FALSE`
+    #   value for the member who can run queries and jobs.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/JobComputePaymentConfig AWS API Documentation
+    #
+    class JobComputePaymentConfig < Struct.new(
+      :is_responsible)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5314,6 +5792,53 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] status
+    #   A filter on the status of the protected job.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that's used to fetch the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one.
+    #   The service might return a `nextToken` even if the `maxResults`
+    #   value has not been met.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListProtectedJobsInput AWS API Documentation
+    #
+    class ListProtectedJobsInput < Struct.new(
+      :membership_identifier,
+      :status,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The pagination token that's used to fetch the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] protected_jobs
+    #   A list of protected job summaries.
+    #   @return [Array<Types::ProtectedJobSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListProtectedJobsOutput AWS API Documentation
+    #
+    class ListProtectedJobsOutput < Struct.new(
+      :next_token,
+      :protected_jobs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] membership_identifier
+    #   The identifier for the membership in the collaboration.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
     #   A filter on the status of the protected query.
     #   @return [String]
     #
@@ -5431,25 +5956,8 @@ module Aws::CleanRooms
 
     # The ML member abilities for a collaboration member.
     #
-    # Custom ML modeling is in beta release and is subject to change. For
-    # beta terms and conditions, see *Betas and Previews* in the [Amazon Web
-    # Services Service Terms][1].
-    #
-    #
-    #
-    # [1]: https://aws.amazon.com/service-terms/
-    #
     # @!attribute [rw] custom_ml_member_abilities
-    #   The custom ML member abilities for a collaboration member. The
-    #   inference feature is not available in the custom ML modeling beta.
-    #
-    #   Custom ML modeling is in beta release and is subject to change. For
-    #   beta terms and conditions, see *Betas and Previews* in the [Amazon
-    #   Web Services Service Terms][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/service-terms/
+    #   The custom ML member abilities for a collaboration member.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/MLMemberAbilities AWS API Documentation
@@ -5495,14 +6003,6 @@ module Aws::CleanRooms
     #
     # @!attribute [rw] ml_member_abilities
     #   The ML abilities granted to the collaboration member.
-    #
-    #   Custom ML modeling is in beta release and is subject to change. For
-    #   beta terms and conditions, see *Betas and Previews* in the [Amazon
-    #   Web Services Service Terms][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/service-terms/
     #   @return [Types::MLMemberAbilities]
     #
     # @!attribute [rw] display_name
@@ -5551,14 +6051,6 @@ module Aws::CleanRooms
     #
     # @!attribute [rw] ml_abilities
     #   Provides a summary of the ML abilities for the collaboration member.
-    #
-    #   Custom ML modeling is in beta release and is subject to change. For
-    #   beta terms and conditions, see *Betas and Previews* in the [Amazon
-    #   Web Services Service Terms][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/service-terms/
     #   @return [Types::MLMemberAbilities]
     #
     # @!attribute [rw] create_time
@@ -5649,25 +6141,34 @@ module Aws::CleanRooms
     # @!attribute [rw] ml_member_abilities
     #   Specifies the ML member abilities that are granted to a
     #   collaboration member.
-    #
-    #   Custom ML modeling is in beta release and is subject to change. For
-    #   beta terms and conditions, see *Betas and Previews* in the [Amazon
-    #   Web Services Service Terms][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/service-terms/
     #   @return [Types::MLMemberAbilities]
     #
     # @!attribute [rw] query_log_status
     #   An indicator as to whether query logging has been enabled or
     #   disabled for the membership.
+    #
+    #   When `ENABLED`, Clean Rooms logs details about queries run within
+    #   this collaboration and those logs can be viewed in Amazon CloudWatch
+    #   Logs. The default value is `DISABLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_log_status
+    #   An indicator as to whether job logging has been enabled or disabled
+    #   for the collaboration.
+    #
+    #   When `ENABLED`, Clean Rooms logs details about jobs run within this
+    #   collaboration and those logs can be viewed in Amazon CloudWatch
+    #   Logs. The default value is `DISABLED`.
     #   @return [String]
     #
     # @!attribute [rw] default_result_configuration
     #   The default protected query result configuration as specified by the
     #   member who can receive results.
     #   @return [Types::MembershipProtectedQueryResultConfiguration]
+    #
+    # @!attribute [rw] default_job_result_configuration
+    #   The default job result configuration for the membership.
+    #   @return [Types::MembershipProtectedJobResultConfiguration]
     #
     # @!attribute [rw] payment_configuration
     #   The payment responsibilities accepted by the collaboration member.
@@ -5689,8 +6190,37 @@ module Aws::CleanRooms
       :member_abilities,
       :ml_member_abilities,
       :query_log_status,
+      :job_log_status,
       :default_result_configuration,
+      :default_job_result_configuration,
       :payment_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object representing the payment responsibilities accepted by the
+    # collaboration member for query and job compute costs.
+    #
+    # @!attribute [rw] is_responsible
+    #   Indicates whether the collaboration member has accepted to pay for
+    #   job compute costs (`TRUE`) or has not accepted to pay for query and
+    #   job compute costs (`FALSE`).
+    #
+    #   There is only one member who pays for queries and jobs.
+    #
+    #   An error message is returned for the following reasons:
+    #
+    #   * If you set the value to `FALSE` but you are responsible to pay for
+    #     query and job compute costs.
+    #
+    #   * If you set the value to `TRUE` but you are not responsible to pay
+    #     for query and job compute costs.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/MembershipJobComputePaymentConfig AWS API Documentation
+    #
+    class MembershipJobComputePaymentConfig < Struct.new(
+      :is_responsible)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5788,11 +6318,61 @@ module Aws::CleanRooms
     #   for machine learning costs.
     #   @return [Types::MembershipMLPaymentConfig]
     #
+    # @!attribute [rw] job_compute
+    #   The payment responsibilities accepted by the collaboration member
+    #   for job compute costs.
+    #   @return [Types::MembershipJobComputePaymentConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/MembershipPaymentConfiguration AWS API Documentation
     #
     class MembershipPaymentConfiguration < Struct.new(
       :query_compute,
-      :machine_learning)
+      :machine_learning,
+      :job_compute)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains configurations for protected job results.
+    #
+    # @note MembershipProtectedJobOutputConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note MembershipProtectedJobOutputConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of MembershipProtectedJobOutputConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] s3
+    #   Contains the configuration to write the job results to S3.
+    #   @return [Types::ProtectedJobS3OutputConfigurationInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/MembershipProtectedJobOutputConfiguration AWS API Documentation
+    #
+    class MembershipProtectedJobOutputConfiguration < Struct.new(
+      :s3,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class S3 < MembershipProtectedJobOutputConfiguration; end
+      class Unknown < MembershipProtectedJobOutputConfiguration; end
+    end
+
+    # Contains configurations for protected job results.
+    #
+    # @!attribute [rw] output_configuration
+    #   The output configuration for a protected job result.
+    #   @return [Types::MembershipProtectedJobOutputConfiguration]
+    #
+    # @!attribute [rw] role_arn
+    #   The unique ARN for an IAM role that is used by Clean Rooms to write
+    #   protected job results to the result location, given by the member
+    #   who can receive results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/MembershipProtectedJobResultConfiguration AWS API Documentation
+    #
+    class MembershipProtectedJobResultConfiguration < Struct.new(
+      :output_configuration,
+      :role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5920,14 +6500,6 @@ module Aws::CleanRooms
     #
     # @!attribute [rw] ml_member_abilities
     #   Provides a summary of the ML abilities for the collaboration member.
-    #
-    #   Custom ML modeling is in beta release and is subject to change. For
-    #   beta terms and conditions, see *Betas and Previews* in the [Amazon
-    #   Web Services Service Terms][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/service-terms/
     #   @return [Types::MLMemberAbilities]
     #
     # @!attribute [rw] payment_configuration
@@ -6021,11 +6593,16 @@ module Aws::CleanRooms
     #   payment responsibilities set by the collaboration creator.
     #   @return [Types::MLPaymentConfig]
     #
+    # @!attribute [rw] job_compute
+    #   The compute configuration for the job.
+    #   @return [Types::JobComputePaymentConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/PaymentConfiguration AWS API Documentation
     #
     class PaymentConfiguration < Struct.new(
       :query_compute,
-      :machine_learning)
+      :machine_learning,
+      :job_compute)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6436,6 +7013,426 @@ module Aws::CleanRooms
       class Unknown < PrivacyImpact; end
     end
 
+    # The parameters for an Clean Rooms protected job.
+    #
+    # @!attribute [rw] id
+    #   The identifier for a protected job instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_id
+    #   he identifier for the membership.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_arn
+    #   The ARN of the membership.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The creation time of the protected job.
+    #   @return [Time]
+    #
+    # @!attribute [rw] job_parameters
+    #   The job parameters for the protected job.
+    #   @return [Types::ProtectedJobParameters]
+    #
+    # @!attribute [rw] status
+    #   The status of the protected job.
+    #   @return [String]
+    #
+    # @!attribute [rw] result_configuration
+    #   Contains any details needed to write the job results.
+    #   @return [Types::ProtectedJobResultConfigurationOutput]
+    #
+    # @!attribute [rw] statistics
+    #   The statistics of the protected job.
+    #   @return [Types::ProtectedJobStatistics]
+    #
+    # @!attribute [rw] result
+    #   The result of the protected job.
+    #   @return [Types::ProtectedJobResult]
+    #
+    # @!attribute [rw] error
+    #   The error from the protected job.
+    #   @return [Types::ProtectedJobError]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedJob AWS API Documentation
+    #
+    class ProtectedJob < Struct.new(
+      :id,
+      :membership_id,
+      :membership_arn,
+      :create_time,
+      :job_parameters,
+      :status,
+      :result_configuration,
+      :statistics,
+      :result,
+      :error)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The protected job configuration details.
+    #
+    # @note ProtectedJobConfigurationDetails is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ProtectedJobConfigurationDetails corresponding to the set member.
+    #
+    # @!attribute [rw] direct_analysis_configuration_details
+    #   The details needed to configure the direct analysis.
+    #   @return [Types::ProtectedJobDirectAnalysisConfigurationDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedJobConfigurationDetails AWS API Documentation
+    #
+    class ProtectedJobConfigurationDetails < Struct.new(
+      :direct_analysis_configuration_details,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class DirectAnalysisConfigurationDetails < ProtectedJobConfigurationDetails; end
+      class Unknown < ProtectedJobConfigurationDetails; end
+    end
+
+    # The protected job direct analysis configuration details.
+    #
+    # @!attribute [rw] receiver_account_ids
+    #   The receiver account IDs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedJobDirectAnalysisConfigurationDetails AWS API Documentation
+    #
+    class ProtectedJobDirectAnalysisConfigurationDetails < Struct.new(
+      :receiver_account_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The protected job error.
+    #
+    # @!attribute [rw] message
+    #   The message for the protected job error.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The error code for the protected job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedJobError AWS API Documentation
+    #
+    class ProtectedJobError < Struct.new(
+      :message,
+      :code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The protected job member output configuration input.
+    #
+    # @!attribute [rw] account_id
+    #   The account ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedJobMemberOutputConfigurationInput AWS API Documentation
+    #
+    class ProtectedJobMemberOutputConfigurationInput < Struct.new(
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The protected job member output configuration output.
+    #
+    # @!attribute [rw] account_id
+    #   The account ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedJobMemberOutputConfigurationOutput AWS API Documentation
+    #
+    class ProtectedJobMemberOutputConfigurationOutput < Struct.new(
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about the protected job output.
+    #
+    # @note ProtectedJobOutput is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ProtectedJobOutput corresponding to the set member.
+    #
+    # @!attribute [rw] s3
+    #   If present, the output for a protected job with an `S3` output
+    #   type.
+    #   @return [Types::ProtectedJobS3Output]
+    #
+    # @!attribute [rw] member_list
+    #   The list of member Amazon Web Services account(s) that received the
+    #   results of the job.
+    #   @return [Array<Types::ProtectedJobSingleMemberOutput>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedJobOutput AWS API Documentation
+    #
+    class ProtectedJobOutput < Struct.new(
+      :s3,
+      :member_list,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class S3 < ProtectedJobOutput; end
+      class MemberList < ProtectedJobOutput; end
+      class Unknown < ProtectedJobOutput; end
+    end
+
+    # The protected job output configuration input.
+    #
+    # @note ProtectedJobOutputConfigurationInput is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] member
+    #   The member of the protected job output configuration input.
+    #   @return [Types::ProtectedJobMemberOutputConfigurationInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedJobOutputConfigurationInput AWS API Documentation
+    #
+    class ProtectedJobOutputConfigurationInput < Struct.new(
+      :member,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Member < ProtectedJobOutputConfigurationInput; end
+      class Unknown < ProtectedJobOutputConfigurationInput; end
+    end
+
+    # The protected job output configuration output.
+    #
+    # @note ProtectedJobOutputConfigurationOutput is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ProtectedJobOutputConfigurationOutput corresponding to the set member.
+    #
+    # @!attribute [rw] s3
+    #   If present, the output for a protected job with an `S3` output
+    #   type.
+    #   @return [Types::ProtectedJobS3OutputConfigurationOutput]
+    #
+    # @!attribute [rw] member
+    #   The member output configuration for a protected job.
+    #   @return [Types::ProtectedJobMemberOutputConfigurationOutput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedJobOutputConfigurationOutput AWS API Documentation
+    #
+    class ProtectedJobOutputConfigurationOutput < Struct.new(
+      :s3,
+      :member,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class S3 < ProtectedJobOutputConfigurationOutput; end
+      class Member < ProtectedJobOutputConfigurationOutput; end
+      class Unknown < ProtectedJobOutputConfigurationOutput; end
+    end
+
+    # The parameters for the protected job.
+    #
+    # @!attribute [rw] analysis_template_arn
+    #   The ARN of the analysis template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedJobParameters AWS API Documentation
+    #
+    class ProtectedJobParameters < Struct.new(
+      :analysis_template_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The protected job receiver configuration.
+    #
+    # @!attribute [rw] analysis_type
+    #   The analysis type for the protected job receiver configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_details
+    #   The configuration details for the protected job receiver.
+    #   @return [Types::ProtectedJobConfigurationDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedJobReceiverConfiguration AWS API Documentation
+    #
+    class ProtectedJobReceiverConfiguration < Struct.new(
+      :analysis_type,
+      :configuration_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the job results.
+    #
+    # @!attribute [rw] output
+    #   The output of the protected job.
+    #   @return [Types::ProtectedJobOutput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedJobResult AWS API Documentation
+    #
+    class ProtectedJobResult < Struct.new(
+      :output)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The protected job result configuration input.
+    #
+    # @!attribute [rw] output_configuration
+    #   The output configuration for a protected job result.
+    #   @return [Types::ProtectedJobOutputConfigurationInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedJobResultConfigurationInput AWS API Documentation
+    #
+    class ProtectedJobResultConfigurationInput < Struct.new(
+      :output_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The output configuration for a protected job result.
+    #
+    # @!attribute [rw] output_configuration
+    #   The output configuration.
+    #   @return [Types::ProtectedJobOutputConfigurationOutput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedJobResultConfigurationOutput AWS API Documentation
+    #
+    class ProtectedJobResultConfigurationOutput < Struct.new(
+      :output_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains output information for protected jobs with an S3 output type.
+    #
+    # @!attribute [rw] location
+    #   The S3 location for the protected job output.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedJobS3Output AWS API Documentation
+    #
+    class ProtectedJobS3Output < Struct.new(
+      :location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains input information for protected jobs with an S3 output type.
+    #
+    # @!attribute [rw] bucket
+    #   The S3 bucket for job output.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_prefix
+    #   The S3 prefix to unload the protected job results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedJobS3OutputConfigurationInput AWS API Documentation
+    #
+    class ProtectedJobS3OutputConfigurationInput < Struct.new(
+      :bucket,
+      :key_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The output configuration for a protected job's S3 output.
+    #
+    # @!attribute [rw] bucket
+    #   The S3 bucket for job output.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_prefix
+    #   The S3 prefix to unload the protected job results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedJobS3OutputConfigurationOutput AWS API Documentation
+    #
+    class ProtectedJobS3OutputConfigurationOutput < Struct.new(
+      :bucket,
+      :key_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the member who received the job result.
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID of the member in the
+    #   collaboration who can receive results from analyses.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedJobSingleMemberOutput AWS API Documentation
+    #
+    class ProtectedJobSingleMemberOutput < Struct.new(
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains statistics about the execution of the protected job.
+    #
+    # @!attribute [rw] total_duration_in_millis
+    #   The duration of the protected job, from creation until job
+    #   completion, in milliseconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] billed_resource_utilization
+    #   The billed resource utilization for the protected job.
+    #   @return [Types::BilledJobResourceUtilization]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedJobStatistics AWS API Documentation
+    #
+    class ProtectedJobStatistics < Struct.new(
+      :total_duration_in_millis,
+      :billed_resource_utilization)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The protected job summary for the objects listed by the request.
+    #
+    # @!attribute [rw] id
+    #   The ID of the protected job.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_id
+    #   The unique ID for the membership that initiated the protected job.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_arn
+    #   The unique ARN for the membership that initiated the protected job.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time the protected job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the protected job.
+    #   @return [String]
+    #
+    # @!attribute [rw] receiver_configurations
+    #   The receiver configurations for the protected job.
+    #   @return [Array<Types::ProtectedJobReceiverConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedJobSummary AWS API Documentation
+    #
+    class ProtectedJobSummary < Struct.new(
+      :id,
+      :membership_id,
+      :membership_arn,
+      :create_time,
+      :status,
+      :receiver_configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The parameters for an Clean Rooms protected query.
     #
     # @!attribute [rw] id
@@ -6717,7 +7714,7 @@ module Aws::CleanRooms
     #
     # @!attribute [rw] total_duration_in_millis
     #   The duration of the protected query, from creation until query
-    #   completion.
+    #   completion, in milliseconds.
     #   @return [Integer]
     #
     # @!attribute [rw] billed_resource_utilization
@@ -6882,6 +7879,25 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # The S3 location.
+    #
+    # @!attribute [rw] bucket
+    #   The bucket name.
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   The object key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/S3Location AWS API Documentation
+    #
+    class S3Location < Struct.new(
+      :bucket,
+      :key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A schema is a relation within a collaboration.
     #
     # @!attribute [rw] columns
@@ -6898,9 +7914,19 @@ module Aws::CleanRooms
     #   @return [Array<String>]
     #
     # @!attribute [rw] analysis_method
-    #   The analysis method for the schema. The only valid value is
-    #   currently `DIRECT_QUERY`.
+    #   The analysis method for the schema.
+    #
+    #   `DIRECT_QUERY` allows SQL queries to be run directly on this table.
+    #
+    #   `DIRECT_JOB` allows PySpark jobs to be run directly on this table.
+    #
+    #   `MULTIPLE` allows both SQL queries and PySpark jobs to be run
+    #   directly on this table.
     #   @return [String]
+    #
+    # @!attribute [rw] selected_analysis_methods
+    #   The selected analysis methods for the schema.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] creator_account_id
     #   The unique account ID for the Amazon Web Services account that owns
@@ -6953,6 +7979,7 @@ module Aws::CleanRooms
       :partition_keys,
       :analysis_rule_types,
       :analysis_method,
+      :selected_analysis_methods,
       :creator_account_id,
       :name,
       :collaboration_id,
@@ -7088,9 +8115,19 @@ module Aws::CleanRooms
     #   @return [Array<String>]
     #
     # @!attribute [rw] analysis_method
-    #   The analysis method for the associated schema. The only valid value
-    #   is currently `DIRECT\_QUERY`.
+    #   The analysis method for the associated schema.
+    #
+    #   `DIRECT_QUERY` allows SQL queries to be run directly on this table.
+    #
+    #   `DIRECT_JOB` allows PySpark jobs to be run directly on this table.
+    #
+    #   `MULTIPLE` allows both SQL queries and PySpark jobs to be run
+    #   directly on this table.
     #   @return [String]
+    #
+    # @!attribute [rw] selected_analysis_methods
+    #   The selected analysis methods for the schema.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/SchemaSummary AWS API Documentation
     #
@@ -7103,7 +8140,8 @@ module Aws::CleanRooms
       :collaboration_id,
       :collaboration_arn,
       :analysis_rule_types,
-      :analysis_method)
+      :analysis_method,
+      :selected_analysis_methods)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7234,6 +8272,46 @@ module Aws::CleanRooms
     class SnowflakeTableSchemaV1 < Struct.new(
       :column_name,
       :column_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] type
+    #   The type of protected job to start.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_identifier
+    #   A unique identifier for the membership to run this job against.
+    #   Currently accepts a membership ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_parameters
+    #   The job parameters.
+    #   @return [Types::ProtectedJobParameters]
+    #
+    # @!attribute [rw] result_configuration
+    #   The details needed to write the job results.
+    #   @return [Types::ProtectedJobResultConfigurationInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/StartProtectedJobInput AWS API Documentation
+    #
+    class StartProtectedJobInput < Struct.new(
+      :type,
+      :membership_identifier,
+      :job_parameters,
+      :result_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] protected_job
+    #   The protected job.
+    #   @return [Types::ProtectedJob]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/StartProtectedJobOutput AWS API Documentation
+    #
+    class StartProtectedJobOutput < Struct.new(
+      :protected_job)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7624,12 +8702,29 @@ module Aws::CleanRooms
     #   A new description for the configured table.
     #   @return [String]
     #
+    # @!attribute [rw] analysis_method
+    #   The analysis method for the configured table.
+    #
+    #   `DIRECT_QUERY` allows SQL queries to be run directly on this table.
+    #
+    #   `DIRECT_JOB` allows PySpark jobs to be run directly on this table.
+    #
+    #   `MULTIPLE` allows both SQL queries and PySpark jobs to be run
+    #   directly on this table.
+    #   @return [String]
+    #
+    # @!attribute [rw] selected_analysis_methods
+    #   The selected analysis methods for the table configuration update.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateConfiguredTableInput AWS API Documentation
     #
     class UpdateConfiguredTableInput < Struct.new(
       :configured_table_identifier,
       :name,
-      :description)
+      :description,
+      :analysis_method,
+      :selected_analysis_methods)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7740,6 +8835,19 @@ module Aws::CleanRooms
     # @!attribute [rw] query_log_status
     #   An indicator as to whether query logging has been enabled or
     #   disabled for the membership.
+    #
+    #   When `ENABLED`, Clean Rooms logs details about queries run within
+    #   this collaboration and those logs can be viewed in Amazon CloudWatch
+    #   Logs. The default value is `DISABLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_log_status
+    #   An indicator as to whether job logging has been enabled or disabled
+    #   for the collaboration.
+    #
+    #   When `ENABLED`, Clean Rooms logs details about jobs run within this
+    #   collaboration and those logs can be viewed in Amazon CloudWatch
+    #   Logs. The default value is `DISABLED`.
     #   @return [String]
     #
     # @!attribute [rw] default_result_configuration
@@ -7747,12 +8855,18 @@ module Aws::CleanRooms
     #   member who can receive results.
     #   @return [Types::MembershipProtectedQueryResultConfiguration]
     #
+    # @!attribute [rw] default_job_result_configuration
+    #   The default job result configuration.
+    #   @return [Types::MembershipProtectedJobResultConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateMembershipInput AWS API Documentation
     #
     class UpdateMembershipInput < Struct.new(
       :membership_identifier,
       :query_log_status,
-      :default_result_configuration)
+      :job_log_status,
+      :default_result_configuration,
+      :default_job_result_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7808,6 +8922,41 @@ module Aws::CleanRooms
     #
     class UpdatePrivacyBudgetTemplateOutput < Struct.new(
       :privacy_budget_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] membership_identifier
+    #   The identifier for a member of a protected job instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] protected_job_identifier
+    #   The identifier of the protected job to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_status
+    #   The target status of a protected job. Used to update the execution
+    #   status of a currently running job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateProtectedJobInput AWS API Documentation
+    #
+    class UpdateProtectedJobInput < Struct.new(
+      :membership_identifier,
+      :protected_job_identifier,
+      :target_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] protected_job
+    #   The protected job output.
+    #   @return [Types::ProtectedJob]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateProtectedJobOutput AWS API Documentation
+    #
+    class UpdateProtectedJobOutput < Struct.new(
+      :protected_job)
       SENSITIVE = []
       include Aws::Structure
     end

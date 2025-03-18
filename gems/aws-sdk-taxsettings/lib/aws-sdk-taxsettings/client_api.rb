@@ -35,12 +35,15 @@ module Aws::TaxSettings
     BatchDeleteTaxRegistrationError = Shapes::StructureShape.new(name: 'BatchDeleteTaxRegistrationError')
     BatchDeleteTaxRegistrationErrors = Shapes::ListShape.new(name: 'BatchDeleteTaxRegistrationErrors')
     BatchDeleteTaxRegistrationRequest = Shapes::StructureShape.new(name: 'BatchDeleteTaxRegistrationRequest')
+    BatchDeleteTaxRegistrationRequestAccountIdsList = Shapes::ListShape.new(name: 'BatchDeleteTaxRegistrationRequestAccountIdsList')
     BatchDeleteTaxRegistrationResponse = Shapes::StructureShape.new(name: 'BatchDeleteTaxRegistrationResponse')
     BatchGetTaxExemptionsRequest = Shapes::StructureShape.new(name: 'BatchGetTaxExemptionsRequest')
+    BatchGetTaxExemptionsRequestAccountIdsList = Shapes::ListShape.new(name: 'BatchGetTaxExemptionsRequestAccountIdsList')
     BatchGetTaxExemptionsResponse = Shapes::StructureShape.new(name: 'BatchGetTaxExemptionsResponse')
     BatchPutTaxRegistrationError = Shapes::StructureShape.new(name: 'BatchPutTaxRegistrationError')
     BatchPutTaxRegistrationErrors = Shapes::ListShape.new(name: 'BatchPutTaxRegistrationErrors')
     BatchPutTaxRegistrationRequest = Shapes::StructureShape.new(name: 'BatchPutTaxRegistrationRequest')
+    BatchPutTaxRegistrationRequestAccountIdsList = Shapes::ListShape.new(name: 'BatchPutTaxRegistrationRequestAccountIdsList')
     BatchPutTaxRegistrationResponse = Shapes::StructureShape.new(name: 'BatchPutTaxRegistrationResponse')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BrazilAdditionalInfo = Shapes::StructureShape.new(name: 'BrazilAdditionalInfo')
@@ -128,6 +131,7 @@ module Aws::TaxSettings
     PutSupplementalTaxRegistrationRequest = Shapes::StructureShape.new(name: 'PutSupplementalTaxRegistrationRequest')
     PutSupplementalTaxRegistrationResponse = Shapes::StructureShape.new(name: 'PutSupplementalTaxRegistrationResponse')
     PutTaxExemptionRequest = Shapes::StructureShape.new(name: 'PutTaxExemptionRequest')
+    PutTaxExemptionRequestAccountIdsList = Shapes::ListShape.new(name: 'PutTaxExemptionRequestAccountIdsList')
     PutTaxExemptionResponse = Shapes::StructureShape.new(name: 'PutTaxExemptionResponse')
     PutTaxInheritanceRequest = Shapes::StructureShape.new(name: 'PutTaxInheritanceRequest')
     PutTaxInheritanceResponse = Shapes::StructureShape.new(name: 'PutTaxInheritanceResponse')
@@ -280,14 +284,18 @@ module Aws::TaxSettings
 
     BatchDeleteTaxRegistrationErrors.member = Shapes::ShapeRef.new(shape: BatchDeleteTaxRegistrationError)
 
-    BatchDeleteTaxRegistrationRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, required: true, location_name: "accountIds"))
+    BatchDeleteTaxRegistrationRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: BatchDeleteTaxRegistrationRequestAccountIdsList, required: true, location_name: "accountIds"))
     BatchDeleteTaxRegistrationRequest.struct_class = Types::BatchDeleteTaxRegistrationRequest
+
+    BatchDeleteTaxRegistrationRequestAccountIdsList.member = Shapes::ShapeRef.new(shape: AccountId)
 
     BatchDeleteTaxRegistrationResponse.add_member(:errors, Shapes::ShapeRef.new(shape: BatchDeleteTaxRegistrationErrors, required: true, location_name: "errors"))
     BatchDeleteTaxRegistrationResponse.struct_class = Types::BatchDeleteTaxRegistrationResponse
 
-    BatchGetTaxExemptionsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, required: true, location_name: "accountIds"))
+    BatchGetTaxExemptionsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: BatchGetTaxExemptionsRequestAccountIdsList, required: true, location_name: "accountIds"))
     BatchGetTaxExemptionsRequest.struct_class = Types::BatchGetTaxExemptionsRequest
+
+    BatchGetTaxExemptionsRequestAccountIdsList.member = Shapes::ShapeRef.new(shape: AccountId)
 
     BatchGetTaxExemptionsResponse.add_member(:failed_accounts, Shapes::ShapeRef.new(shape: AccountIds, location_name: "failedAccounts"))
     BatchGetTaxExemptionsResponse.add_member(:tax_exemption_details_map, Shapes::ShapeRef.new(shape: TaxExemptionDetailsMap, location_name: "taxExemptionDetailsMap"))
@@ -300,9 +308,11 @@ module Aws::TaxSettings
 
     BatchPutTaxRegistrationErrors.member = Shapes::ShapeRef.new(shape: BatchPutTaxRegistrationError)
 
-    BatchPutTaxRegistrationRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, required: true, location_name: "accountIds"))
+    BatchPutTaxRegistrationRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: BatchPutTaxRegistrationRequestAccountIdsList, required: true, location_name: "accountIds"))
     BatchPutTaxRegistrationRequest.add_member(:tax_registration_entry, Shapes::ShapeRef.new(shape: TaxRegistrationEntry, required: true, location_name: "taxRegistrationEntry"))
     BatchPutTaxRegistrationRequest.struct_class = Types::BatchPutTaxRegistrationRequest
+
+    BatchPutTaxRegistrationRequestAccountIdsList.member = Shapes::ShapeRef.new(shape: AccountId)
 
     BatchPutTaxRegistrationResponse.add_member(:errors, Shapes::ShapeRef.new(shape: BatchPutTaxRegistrationErrors, required: true, location_name: "errors"))
     BatchPutTaxRegistrationResponse.add_member(:status, Shapes::ShapeRef.new(shape: TaxRegistrationStatus, location_name: "status"))
@@ -446,11 +456,13 @@ module Aws::TaxSettings
     PutSupplementalTaxRegistrationResponse.add_member(:status, Shapes::ShapeRef.new(shape: TaxRegistrationStatus, required: true, location_name: "status"))
     PutSupplementalTaxRegistrationResponse.struct_class = Types::PutSupplementalTaxRegistrationResponse
 
-    PutTaxExemptionRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, required: true, location_name: "accountIds"))
+    PutTaxExemptionRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: PutTaxExemptionRequestAccountIdsList, required: true, location_name: "accountIds"))
     PutTaxExemptionRequest.add_member(:authority, Shapes::ShapeRef.new(shape: Authority, required: true, location_name: "authority"))
     PutTaxExemptionRequest.add_member(:exemption_certificate, Shapes::ShapeRef.new(shape: ExemptionCertificate, required: true, location_name: "exemptionCertificate"))
     PutTaxExemptionRequest.add_member(:exemption_type, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "exemptionType"))
     PutTaxExemptionRequest.struct_class = Types::PutTaxExemptionRequest
+
+    PutTaxExemptionRequestAccountIdsList.member = Shapes::ShapeRef.new(shape: AccountId)
 
     PutTaxExemptionResponse.add_member(:case_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "caseId"))
     PutTaxExemptionResponse.struct_class = Types::PutTaxExemptionResponse

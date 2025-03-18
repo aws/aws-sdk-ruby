@@ -25,6 +25,10 @@ module Aws::ApplicationSignals
     AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
     BatchGetServiceLevelObjectiveBudgetReportInput = Shapes::StructureShape.new(name: 'BatchGetServiceLevelObjectiveBudgetReportInput')
     BatchGetServiceLevelObjectiveBudgetReportOutput = Shapes::StructureShape.new(name: 'BatchGetServiceLevelObjectiveBudgetReportOutput')
+    BatchUpdateExclusionWindowsError = Shapes::StructureShape.new(name: 'BatchUpdateExclusionWindowsError')
+    BatchUpdateExclusionWindowsErrors = Shapes::ListShape.new(name: 'BatchUpdateExclusionWindowsErrors')
+    BatchUpdateExclusionWindowsInput = Shapes::StructureShape.new(name: 'BatchUpdateExclusionWindowsInput')
+    BatchUpdateExclusionWindowsOutput = Shapes::StructureShape.new(name: 'BatchUpdateExclusionWindowsOutput')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BudgetRequestsRemaining = Shapes::IntegerShape.new(name: 'BudgetRequestsRemaining')
     BudgetSecondsRemaining = Shapes::IntegerShape.new(name: 'BudgetSecondsRemaining')
@@ -44,6 +48,13 @@ module Aws::ApplicationSignals
     Dimensions = Shapes::ListShape.new(name: 'Dimensions')
     DurationUnit = Shapes::StringShape.new(name: 'DurationUnit')
     EvaluationType = Shapes::StringShape.new(name: 'EvaluationType')
+    ExclusionDuration = Shapes::IntegerShape.new(name: 'ExclusionDuration')
+    ExclusionReason = Shapes::StringShape.new(name: 'ExclusionReason')
+    ExclusionWindow = Shapes::StructureShape.new(name: 'ExclusionWindow')
+    ExclusionWindowErrorCode = Shapes::StringShape.new(name: 'ExclusionWindowErrorCode')
+    ExclusionWindowErrorMessage = Shapes::StringShape.new(name: 'ExclusionWindowErrorMessage')
+    ExclusionWindows = Shapes::ListShape.new(name: 'ExclusionWindows')
+    Expression = Shapes::StringShape.new(name: 'Expression')
     FaultDescription = Shapes::StringShape.new(name: 'FaultDescription')
     GetServiceInput = Shapes::StructureShape.new(name: 'GetServiceInput')
     GetServiceLevelObjectiveInput = Shapes::StructureShape.new(name: 'GetServiceLevelObjectiveInput')
@@ -59,6 +70,9 @@ module Aws::ApplicationSignals
     ListServiceDependentsInput = Shapes::StructureShape.new(name: 'ListServiceDependentsInput')
     ListServiceDependentsMaxResults = Shapes::IntegerShape.new(name: 'ListServiceDependentsMaxResults')
     ListServiceDependentsOutput = Shapes::StructureShape.new(name: 'ListServiceDependentsOutput')
+    ListServiceLevelObjectiveExclusionWindowsInput = Shapes::StructureShape.new(name: 'ListServiceLevelObjectiveExclusionWindowsInput')
+    ListServiceLevelObjectiveExclusionWindowsMaxResults = Shapes::IntegerShape.new(name: 'ListServiceLevelObjectiveExclusionWindowsMaxResults')
+    ListServiceLevelObjectiveExclusionWindowsOutput = Shapes::StructureShape.new(name: 'ListServiceLevelObjectiveExclusionWindowsOutput')
     ListServiceLevelObjectivesInput = Shapes::StructureShape.new(name: 'ListServiceLevelObjectivesInput')
     ListServiceLevelObjectivesMaxResults = Shapes::IntegerShape.new(name: 'ListServiceLevelObjectivesMaxResults')
     ListServiceLevelObjectivesOutput = Shapes::StructureShape.new(name: 'ListServiceLevelObjectivesOutput')
@@ -87,6 +101,7 @@ module Aws::ApplicationSignals
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OperationName = Shapes::StringShape.new(name: 'OperationName')
     Period = Shapes::IntegerShape.new(name: 'Period')
+    RecurrenceRule = Shapes::StructureShape.new(name: 'RecurrenceRule')
     RequestBasedServiceLevelIndicator = Shapes::StructureShape.new(name: 'RequestBasedServiceLevelIndicator')
     RequestBasedServiceLevelIndicatorConfig = Shapes::StructureShape.new(name: 'RequestBasedServiceLevelIndicatorConfig')
     RequestBasedServiceLevelIndicatorMetric = Shapes::StructureShape.new(name: 'RequestBasedServiceLevelIndicatorMetric')
@@ -155,6 +170,7 @@ module Aws::ApplicationSignals
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionMessage = Shapes::StringShape.new(name: 'ValidationExceptionMessage')
     WarningThreshold = Shapes::FloatShape.new(name: 'WarningThreshold')
+    Window = Shapes::StructureShape.new(name: 'Window')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ServiceErrorMessage, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
@@ -175,6 +191,22 @@ module Aws::ApplicationSignals
     BatchGetServiceLevelObjectiveBudgetReportOutput.add_member(:reports, Shapes::ShapeRef.new(shape: ServiceLevelObjectiveBudgetReports, required: true, location_name: "Reports"))
     BatchGetServiceLevelObjectiveBudgetReportOutput.add_member(:errors, Shapes::ShapeRef.new(shape: ServiceLevelObjectiveBudgetReportErrors, required: true, location_name: "Errors"))
     BatchGetServiceLevelObjectiveBudgetReportOutput.struct_class = Types::BatchGetServiceLevelObjectiveBudgetReportOutput
+
+    BatchUpdateExclusionWindowsError.add_member(:slo_id, Shapes::ShapeRef.new(shape: ServiceLevelObjectiveId, required: true, location_name: "SloId"))
+    BatchUpdateExclusionWindowsError.add_member(:error_code, Shapes::ShapeRef.new(shape: ExclusionWindowErrorCode, required: true, location_name: "ErrorCode"))
+    BatchUpdateExclusionWindowsError.add_member(:error_message, Shapes::ShapeRef.new(shape: ExclusionWindowErrorMessage, required: true, location_name: "ErrorMessage"))
+    BatchUpdateExclusionWindowsError.struct_class = Types::BatchUpdateExclusionWindowsError
+
+    BatchUpdateExclusionWindowsErrors.member = Shapes::ShapeRef.new(shape: BatchUpdateExclusionWindowsError)
+
+    BatchUpdateExclusionWindowsInput.add_member(:slo_ids, Shapes::ShapeRef.new(shape: ServiceLevelObjectiveIds, required: true, location_name: "SloIds"))
+    BatchUpdateExclusionWindowsInput.add_member(:add_exclusion_windows, Shapes::ShapeRef.new(shape: ExclusionWindows, location_name: "AddExclusionWindows"))
+    BatchUpdateExclusionWindowsInput.add_member(:remove_exclusion_windows, Shapes::ShapeRef.new(shape: ExclusionWindows, location_name: "RemoveExclusionWindows"))
+    BatchUpdateExclusionWindowsInput.struct_class = Types::BatchUpdateExclusionWindowsInput
+
+    BatchUpdateExclusionWindowsOutput.add_member(:slo_ids, Shapes::ShapeRef.new(shape: ServiceLevelObjectiveIds, required: true, location_name: "SloIds"))
+    BatchUpdateExclusionWindowsOutput.add_member(:errors, Shapes::ShapeRef.new(shape: BatchUpdateExclusionWindowsErrors, required: true, location_name: "Errors"))
+    BatchUpdateExclusionWindowsOutput.struct_class = Types::BatchUpdateExclusionWindowsOutput
 
     BurnRateConfiguration.add_member(:look_back_window_minutes, Shapes::ShapeRef.new(shape: BurnRateLookBackWindowMinutes, required: true, location_name: "LookBackWindowMinutes"))
     BurnRateConfiguration.struct_class = Types::BurnRateConfiguration
@@ -211,6 +243,14 @@ module Aws::ApplicationSignals
     Dimension.struct_class = Types::Dimension
 
     Dimensions.member = Shapes::ShapeRef.new(shape: Dimension)
+
+    ExclusionWindow.add_member(:window, Shapes::ShapeRef.new(shape: Window, required: true, location_name: "Window"))
+    ExclusionWindow.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
+    ExclusionWindow.add_member(:recurrence_rule, Shapes::ShapeRef.new(shape: RecurrenceRule, location_name: "RecurrenceRule"))
+    ExclusionWindow.add_member(:reason, Shapes::ShapeRef.new(shape: ExclusionReason, location_name: "Reason"))
+    ExclusionWindow.struct_class = Types::ExclusionWindow
+
+    ExclusionWindows.member = Shapes::ShapeRef.new(shape: ExclusionWindow)
 
     GetServiceInput.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location: "querystring", location_name: "StartTime"))
     GetServiceInput.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location: "querystring", location_name: "EndTime"))
@@ -267,6 +307,15 @@ module Aws::ApplicationSignals
     ListServiceDependentsOutput.add_member(:service_dependents, Shapes::ShapeRef.new(shape: ServiceDependents, required: true, location_name: "ServiceDependents"))
     ListServiceDependentsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListServiceDependentsOutput.struct_class = Types::ListServiceDependentsOutput
+
+    ListServiceLevelObjectiveExclusionWindowsInput.add_member(:id, Shapes::ShapeRef.new(shape: ServiceLevelObjectiveId, required: true, location: "uri", location_name: "Id"))
+    ListServiceLevelObjectiveExclusionWindowsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListServiceLevelObjectiveExclusionWindowsMaxResults, location: "querystring", location_name: "MaxResults"))
+    ListServiceLevelObjectiveExclusionWindowsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    ListServiceLevelObjectiveExclusionWindowsInput.struct_class = Types::ListServiceLevelObjectiveExclusionWindowsInput
+
+    ListServiceLevelObjectiveExclusionWindowsOutput.add_member(:exclusion_windows, Shapes::ShapeRef.new(shape: ExclusionWindows, required: true, location_name: "ExclusionWindows"))
+    ListServiceLevelObjectiveExclusionWindowsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListServiceLevelObjectiveExclusionWindowsOutput.struct_class = Types::ListServiceLevelObjectiveExclusionWindowsOutput
 
     ListServiceLevelObjectivesInput.add_member(:key_attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "KeyAttributes"))
     ListServiceLevelObjectivesInput.add_member(:operation_name, Shapes::ShapeRef.new(shape: OperationName, location: "querystring", location_name: "OperationName"))
@@ -353,6 +402,9 @@ module Aws::ApplicationSignals
     MonitoredRequestCountMetricDataQueries.add_member_subclass(:bad_count_metric, Types::MonitoredRequestCountMetricDataQueries::BadCountMetric)
     MonitoredRequestCountMetricDataQueries.add_member_subclass(:unknown, Types::MonitoredRequestCountMetricDataQueries::Unknown)
     MonitoredRequestCountMetricDataQueries.struct_class = Types::MonitoredRequestCountMetricDataQueries
+
+    RecurrenceRule.add_member(:expression, Shapes::ShapeRef.new(shape: Expression, required: true, location_name: "Expression"))
+    RecurrenceRule.struct_class = Types::RecurrenceRule
 
     RequestBasedServiceLevelIndicator.add_member(:request_based_sli_metric, Shapes::ShapeRef.new(shape: RequestBasedServiceLevelIndicatorMetric, required: true, location_name: "RequestBasedSliMetric"))
     RequestBasedServiceLevelIndicator.add_member(:metric_threshold, Shapes::ShapeRef.new(shape: ServiceLevelIndicatorMetricThreshold, location_name: "MetricThreshold"))
@@ -537,6 +589,10 @@ module Aws::ApplicationSignals
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ValidationExceptionMessage, location_name: "message"))
     ValidationException.struct_class = Types::ValidationException
 
+    Window.add_member(:duration_unit, Shapes::ShapeRef.new(shape: DurationUnit, required: true, location_name: "DurationUnit"))
+    Window.add_member(:duration, Shapes::ShapeRef.new(shape: ExclusionDuration, required: true, location_name: "Duration"))
+    Window.struct_class = Types::Window
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -563,6 +619,17 @@ module Aws::ApplicationSignals
         o.input = Shapes::ShapeRef.new(shape: BatchGetServiceLevelObjectiveBudgetReportInput)
         o.output = Shapes::ShapeRef.new(shape: BatchGetServiceLevelObjectiveBudgetReportOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:batch_update_exclusion_windows, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchUpdateExclusionWindows"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/exclusion-windows"
+        o.input = Shapes::ShapeRef.new(shape: BatchUpdateExclusionWindowsInput)
+        o.output = Shapes::ShapeRef.new(shape: BatchUpdateExclusionWindowsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
@@ -634,6 +701,23 @@ module Aws::ApplicationSignals
         o.input = Shapes::ShapeRef.new(shape: ListServiceDependentsInput)
         o.output = Shapes::ShapeRef.new(shape: ListServiceDependentsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_service_level_objective_exclusion_windows, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListServiceLevelObjectiveExclusionWindows"
+        o.http_method = "GET"
+        o.http_request_uri = "/slo/{Id}/exclusion-windows"
+        o.input = Shapes::ShapeRef.new(shape: ListServiceLevelObjectiveExclusionWindowsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListServiceLevelObjectiveExclusionWindowsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",

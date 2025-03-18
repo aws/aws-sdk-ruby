@@ -150,7 +150,14 @@ module Aws
                                   status: ("ENABLED" | "DISABLED")?
                                 },
                                 ?cw_log_enabled: bool,
-                                domain: ::String,
+                                ?deobfuscation_configuration: {
+                                  java_script_source_maps: {
+                                    s3_uri: ::String?,
+                                    status: ("ENABLED" | "DISABLED")
+                                  }?
+                                },
+                                ?domain: ::String,
+                                ?domain_list: Array[::String],
                                 name: ::String,
                                 ?tags: Hash[::String, ::String]
                               ) -> _CreateAppMonitorResponseSuccess
@@ -361,7 +368,14 @@ module Aws
                                   status: ("ENABLED" | "DISABLED")?
                                 },
                                 ?cw_log_enabled: bool,
+                                ?deobfuscation_configuration: {
+                                  java_script_source_maps: {
+                                    s3_uri: ::String?,
+                                    status: ("ENABLED" | "DISABLED")
+                                  }?
+                                },
                                 ?domain: ::String,
+                                ?domain_list: Array[::String],
                                 name: ::String
                               ) -> _UpdateAppMonitorResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAppMonitorResponseSuccess
