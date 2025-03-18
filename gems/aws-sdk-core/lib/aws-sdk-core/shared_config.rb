@@ -254,9 +254,11 @@ module Aws
             'a credential_source. For assume role credentials, must '\
             'provide only source_profile or credential_source, not both.'
         elsif opts[:source_profile]
+          # TODO: CREDENTIALS_PROFILE_SOURCE_PROFILE (o)
           opts[:visited_profiles] ||= Set.new
           opts[:credentials] = resolve_source_profile(opts[:source_profile], opts)
           if opts[:credentials]
+            # TODO: CREDENTIALS_PROFILE (n)
             opts[:role_session_name] ||= prof_cfg['role_session_name']
             opts[:role_session_name] ||= 'default_session'
             opts[:role_arn] ||= prof_cfg['role_arn']

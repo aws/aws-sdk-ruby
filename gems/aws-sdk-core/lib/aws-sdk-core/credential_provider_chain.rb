@@ -91,6 +91,8 @@ module Aws
       nil
     end
 
+
+    # TODO: CREDENTIALS_ENV_VARS (g)??
     def env_credentials(_options)
       key =    %w[AWS_ACCESS_KEY_ID AMAZON_ACCESS_KEY_ID AWS_ACCESS_KEY]
       secret = %w[AWS_SECRET_ACCESS_KEY AMAZON_SECRET_ACCESS_KEY AWS_SECRET_KEY]
@@ -150,6 +152,7 @@ module Aws
     def assume_role_web_identity_credentials(options)
       region = options[:config].region if options[:config]
       if (role_arn = ENV['AWS_ROLE_ARN']) && (token_file = ENV['AWS_WEB_IDENTITY_TOKEN_FILE'])
+        # TODO: CREDENTIALS_ENV_VARS_STS_WEB_ID_TOKEN (h)??
         cfg = {
           role_arn: role_arn,
           web_identity_token_file: token_file,
