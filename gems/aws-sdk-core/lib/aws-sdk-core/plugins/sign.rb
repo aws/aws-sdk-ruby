@@ -41,6 +41,9 @@ module Aws
       class Handler < Seahorse::Client::Handler
         def call(context)
           # Skip signing if using sigv2 signing from s3_signer in S3
+          puts "sign Caller"
+          puts caller
+          credentials = nil
           unless v2_signing?(context.config)
             signer = Sign.signer_for(
               context[:auth_scheme],
@@ -48,12 +51,27 @@ module Aws
               context[:sigv4_region],
               context[:sigv4_credentials]
             )
+            pp "SIGNER HERE"
+            pp signer
+            credentials = signer.signer.credentials_provider
             signer.sign(context)
           end
-          @handler.call(context)
+          puts "With metric now"
+          with_metric(credentials) { @handler.call(context) }
         end
 
         private
+
+        def with_metric(credentials, &block)
+          puts "in with metric"
+          if credentials.is_a? Aws::Credentials
+            puts "Is a credentials"
+            Aws::Plugins::UserAgent.metric('CREDENTIALS_CODE', &block)
+          else
+            puts "Is not a credentials"
+            Aws::Plugins::UserAgent.metric('CREDENTIALS_HTTP', &block)
+          end
+        end
 
         def v2_signing?(config)
           # 's3' is legacy signing, 'v4' is default
@@ -92,6 +110,8 @@ module Aws
 
       # @api private
       class SignatureV4
+        attr_reader :signer
+
         def initialize(auth_scheme, config, sigv4_overrides = {})
           scheme_name = auth_scheme['name']
 
@@ -146,6 +166,17 @@ module Aws
           context[:canonical_request] = signature.canonical_request
           context[:string_to_sign] = signature.string_to_sign
         end
+
+        # def with_metrics(&block)
+        #   puts "Printing signer"
+        #   pp @signer
+        #   credentials = @signer.credentials_provider
+        #   if credentials.is_a? Aws::Credentials
+        #     Aws::Plugins::UserAgent.metric('CREDENTIALS_CODE', &block)
+        #   else
+        #     Aws::Plugins::UserAgent.metric('CREDENTIALS_HTTP', &block)
+        #   end
+        # end
 
         def presign_url(*args)
           @signer.presign_url(*args)

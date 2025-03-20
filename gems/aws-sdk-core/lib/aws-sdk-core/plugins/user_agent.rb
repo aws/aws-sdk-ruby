@@ -92,7 +92,10 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
         Thread.current[:aws_sdk_core_user_agent_metric] ||= []
         metrics = metrics.map { |metric| METRICS[metric] }.compact
         Thread.current[:aws_sdk_core_user_agent_metric].concat(metrics)
+        # puts "METRICS HERE"
+        # pp Thread.current[:aws_sdk_core_user_agent_metric]
         block.call
+        # puts "Block called \n"
       ensure
         Thread.current[:aws_sdk_core_user_agent_metric].pop(metrics.size)
       end
@@ -131,6 +134,8 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
               ua += " #{framework_m}"
             end
             if (metric_m = metric_metadata)
+              puts "Yes metric metadata"
+              puts caller
               ua += " #{metric_m}"
             end
             if @context.config.user_agent_suffix
@@ -213,6 +218,9 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
             end
 
             metrics = Thread.current[:aws_sdk_core_user_agent_metric].join(',')
+
+            puts "Metrics metadata"
+            pp metrics
             # Metric metadata is limited to 1024 bytes
             return "m/#{metrics}" if metrics.bytesize <= 1024
 
@@ -222,7 +230,7 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
         end
       end
 
-      handler(Handler, step: :sign, priority: 97)
+      handler(Handler, step: :sign, priority: 49)
     end
   end
 end
