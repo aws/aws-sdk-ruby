@@ -92,10 +92,9 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
         Thread.current[:aws_sdk_core_user_agent_metric] ||= []
         metrics = metrics.map { |metric| METRICS[metric] }.compact
         Thread.current[:aws_sdk_core_user_agent_metric].concat(metrics)
-        # puts "METRICS HERE"
-        # pp Thread.current[:aws_sdk_core_user_agent_metric]
+        puts "METRICS HERE"
+        pp Thread.current[:aws_sdk_core_user_agent_metric]
         block.call
-        # puts "Block called \n"
       ensure
         Thread.current[:aws_sdk_core_user_agent_metric].pop(metrics.size)
       end

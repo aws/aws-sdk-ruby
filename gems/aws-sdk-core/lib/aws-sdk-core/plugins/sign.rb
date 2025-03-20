@@ -64,12 +64,34 @@ module Aws
 
         def with_metric(credentials, &block)
           puts "in with metric"
+          metrics = []
           if credentials.is_a? Aws::Credentials
             puts "Is a credentials"
-            Aws::Plugins::UserAgent.metric('CREDENTIALS_CODE', &block)
+            Aws::Plugins::UserAgent.metric('CREDENTIALS_ENV_VARS', &block)
+          elsif credentials.is_a? Aws::AssumeRoleWebIdentityCredentials
+            puts "Is a assume role credentials"
+            Aws::Plugins::UserAgent.metric('CREDENTIALS_STS_ASSUME_ROLE_WEB_ID', &block)
+          elsif credentials.is_a? Aws::SSOCredentials
+            puts "Is a sso credentials"
+            Aws::Plugins::UserAgent.metric('CREDENTIALS_PROFILE_SSO', &block)
+          elsif credentials.is_a? Aws::AssumeRoleCredentials
+            puts "Is a assume role credentials"
+            Aws::Plugins::UserAgent.metric('CREDENTIALS_PROFILE_SOURCE_PROFILE', &block)
+          elsif credentials.is_a? Aws::SharedCredentials
+            puts "Is a shared credentials"
+            Aws::Plugins::UserAgent.metric('CREDENTIALS_PROFILE', &block)
+          elsif credentials.is_a? Aws::ProcessCredentials
+            puts "Is a process credentials"
+            Aws::Plugins::UserAgent.metric('CREDENTIALS_PROFILE_PROCESS', &block)
+          elsif credentials.is_a? Aws::ECSCredentials
+            puts "Is a ecs credentials"
+            Aws::Plugins::UserAgent.metric('CREDENTIALS_HTTP', &block)
+          elsif credentials.is_a? Aws::InstanceProfileCredentials
+            puts "Is a instance profile credentials"
+            Aws::Plugins::UserAgent.metric('CREDENTIALS_IMDS', &block)
           else
             puts "Is not a credentials"
-            Aws::Plugins::UserAgent.metric('CREDENTIALS_HTTP', &block)
+            block.call
           end
         end
 
