@@ -40,6 +40,7 @@ module Aws
         )
         @credentials = config.credentials(profile: @profile_name)
       end
+      @metrics = options[:metrics]
     end
 
     # @return [String]
@@ -50,6 +51,8 @@ module Aws
 
     # @return [Credentials]
     attr_reader :credentials
+
+    attr_reader :metrics
 
     # @api private
     def inspect

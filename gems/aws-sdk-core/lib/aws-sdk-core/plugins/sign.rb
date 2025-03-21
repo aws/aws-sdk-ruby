@@ -41,8 +41,6 @@ module Aws
       class Handler < Seahorse::Client::Handler
         def call(context)
           # Skip signing if using sigv2 signing from s3_signer in S3
-          puts "sign Caller"
-          puts caller
           credentials = nil
           unless v2_signing?(context.config)
             signer = Sign.signer_for(
@@ -65,34 +63,39 @@ module Aws
         def with_metric(credentials, &block)
           puts "in with metric"
           metrics = []
-          if credentials.is_a? Aws::Credentials
-            puts "Is a credentials"
-            Aws::Plugins::UserAgent.metric('CREDENTIALS_ENV_VARS', &block)
-          elsif credentials.is_a? Aws::AssumeRoleWebIdentityCredentials
-            puts "Is a assume role credentials"
-            Aws::Plugins::UserAgent.metric('CREDENTIALS_STS_ASSUME_ROLE_WEB_ID', &block)
-          elsif credentials.is_a? Aws::SSOCredentials
-            puts "Is a sso credentials"
-            Aws::Plugins::UserAgent.metric('CREDENTIALS_PROFILE_SSO', &block)
-          elsif credentials.is_a? Aws::AssumeRoleCredentials
-            puts "Is a assume role credentials"
-            Aws::Plugins::UserAgent.metric('CREDENTIALS_PROFILE_SOURCE_PROFILE', &block)
-          elsif credentials.is_a? Aws::SharedCredentials
-            puts "Is a shared credentials"
-            Aws::Plugins::UserAgent.metric('CREDENTIALS_PROFILE', &block)
-          elsif credentials.is_a? Aws::ProcessCredentials
-            puts "Is a process credentials"
-            Aws::Plugins::UserAgent.metric('CREDENTIALS_PROFILE_PROCESS', &block)
-          elsif credentials.is_a? Aws::ECSCredentials
-            puts "Is a ecs credentials"
-            Aws::Plugins::UserAgent.metric('CREDENTIALS_HTTP', &block)
-          elsif credentials.is_a? Aws::InstanceProfileCredentials
-            puts "Is a instance profile credentials"
-            Aws::Plugins::UserAgent.metric('CREDENTIALS_IMDS', &block)
+          # Add check if flag isn't set, then emit Credentials CODE
+          if !credentials.metrics
+            puts "Credentials from code"
+            metrics << 'CREDENTIALS_CODE'
           else
-            puts "Is not a credentials"
-            block.call
+            if credentials.is_a? Aws::Credentials
+              puts "Is a credentials"
+              (metrics << credentials.metrics).flatten!
+            elsif credentials.is_a? Aws::AssumeRoleWebIdentityCredentials
+              puts "Is a assume role credentials"
+              (metrics << credentials.metrics).flatten!
+            elsif credentials.is_a? Aws::SSOCredentials
+              puts "Is a sso credentials"
+              (metrics << credentials.metrics).flatten!
+            elsif credentials.is_a? Aws::AssumeRoleCredentials
+              puts "Is a assume role credentials"
+            elsif credentials.is_a? Aws::SharedCredentials
+              puts "Is a shared credentials"
+              (metrics << credentials.metrics).flatten!
+            elsif credentials.is_a? Aws::ProcessCredentials
+              puts "Is a process credentials"
+              (metrics << credentials.metrics).flatten!
+            elsif credentials.is_a? Aws::ECSCredentials
+              puts "Is a ecs credentials"
+              (metrics << credentials.metrics).flatten!
+            elsif credentials.is_a? Aws::InstanceProfileCredentials
+              puts "Is a instance profile credentials"
+              (metrics << credentials.metrics).flatten!
+            end
           end
+          puts "Sending these new metrics"
+          puts metrics
+          Aws::Plugins::UserAgent.metric(*metrics, &block)
         end
 
         def v2_signing?(config)

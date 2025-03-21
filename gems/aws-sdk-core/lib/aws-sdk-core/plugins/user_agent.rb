@@ -89,8 +89,20 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
       end
 
       def self.metric(*metrics, &block)
+        puts "In metric call"
+        pp metrics
+        puts METRICS[metrics[0]]
         Thread.current[:aws_sdk_core_user_agent_metric] ||= []
-        metrics = metrics.map { |metric| METRICS[metric] }.compact
+        puts METRICS["CREDENTIALS_PROCESS"]
+        metrics = metrics.map do |metric|
+          puts "In metric loop"
+          puts metric
+          puts METRICS[metric]
+          METRICS[metric]
+        end
+        metrics = metrics.compact
+        puts "Metric"
+        puts metrics
         Thread.current[:aws_sdk_core_user_agent_metric].concat(metrics)
         puts "METRICS HERE"
         pp Thread.current[:aws_sdk_core_user_agent_metric]
@@ -133,8 +145,6 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
               ua += " #{framework_m}"
             end
             if (metric_m = metric_metadata)
-              puts "Yes metric metadata"
-              puts caller
               ua += " #{metric_m}"
             end
             if @context.config.user_agent_suffix

@@ -9,6 +9,7 @@ module Aws
 
     # @return [CredentialProvider, nil]
     def resolve
+      puts "RESOLVING CREDENTIALS"
       providers.each do |method_name, options|
         provider = send(method_name, options.merge(config: @config))
         if provider && provider.set?
@@ -117,7 +118,8 @@ module Aws
           options[:config].access_key_id,
           options[:config].secret_access_key,
           options[:config].session_token,
-          account_id: options[:config].account_id
+          account_id: options[:config].account_id,
+          metrics: ['CREDENTIALS_PROFILE']
         )
       end
     end
@@ -151,7 +153,7 @@ module Aws
     def static_profile_credentials(options)
       puts "!! STATIC_PROFILE_CREDENTIALS !!"
       if options[:config] && options[:config].profile
-        SharedCredentials.new(profile_name: options[:config].profile)
+        SharedCredentials.new(profile_name: options[:config].profile, metrics: ['CREDENTIALS_PROFILE'])
       end
     rescue Errors::NoSuchProfileError
       nil
@@ -161,7 +163,11 @@ module Aws
       puts "!! STATIC_PROFILE_PROCESS_CREDENTIALS !!"
       if Aws.shared_config.config_enabled? && options[:config] && options[:config].profile
         process_provider = Aws.shared_config.credential_process(profile: options[:config].profile)
-        ProcessCredentials.new([process_provider]) if process_provider
+        if process_provider
+          credentials = ProcessCredentials.new([process_provider])
+          credentials.metrics = ['CREDENTIALS_PROFILE_PROCESS', 'CREDENTIALS_PROCESS']
+          return credentials
+        end
       end
     rescue Errors::NoSuchProfileError
       nil
@@ -179,7 +185,8 @@ module Aws
         envar(key),
         envar(secret),
         envar(token),
-        account_id: envar(account_id)
+        account_id: envar(account_id),
+        metrics: ['CREDENTIALS_ENV_VARS']
       )
     end
 
@@ -197,7 +204,7 @@ module Aws
     def shared_credentials(options)
       puts "!! SHARED_CREDENTIALS !!"
       profile_name = determine_profile_name(options)
-      SharedCredentials.new(profile_name: profile_name)
+      SharedCredentials.new(profile_name: profile_name, metrics: ['CREDENTIALS_PROFILE'])
     rescue Errors::NoSuchProfileError
       nil
     end
@@ -209,7 +216,11 @@ module Aws
       if Aws.shared_config.config_enabled?
         process_provider = Aws.shared_config.credential_process(profile: profile_name)
         puts process_provider
-        ProcessCredentials.new([process_provider]) if process_provider
+        if process_provider
+          credentials = ProcessCredentials.new([process_provider])
+          credentials.metrics = ['CREDENTIALS_PROFILE_PROCESS', 'CREDENTIALS_PROCESS']
+          return credentials
+        end
       end
     rescue Errors::NoSuchProfileError
       nil
@@ -240,7 +251,8 @@ module Aws
         cfg = {
           role_arn: role_arn,
           web_identity_token_file: token_file,
-          role_session_name: ENV['AWS_ROLE_SESSION_NAME']
+          role_session_name: ENV['AWS_ROLE_SESSION_NAME'],
+          metrics: ['CREDENTIALS_ENV_VARS_STS_WEB_ID_TOKEN']
         }
         cfg[:region] = region if region
         AssumeRoleWebIdentityCredentials.new(cfg)
@@ -259,10 +271,11 @@ module Aws
       if ENV['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] ||
          ENV['AWS_CONTAINER_CREDENTIALS_FULL_URI']
         # TODO: CREDENTIALS_HTTP (z)
-        ECSCredentials.new(options)
+        options[:metrics] = 'CREDENTIALS_HTTP'
+        ECSCredentials.new(options.merge(metrics: ['CREDENTIALS_HTTP']))
       else
         # TODO: CREDENTIALS_IMDS (0)
-        InstanceProfileCredentials.new(options.merge(profile: profile_name))
+        InstanceProfileCredentials.new(options.merge(profile: profile_name, metrics: ['CREDENTIALS_IMDS']))
       end
     end
 

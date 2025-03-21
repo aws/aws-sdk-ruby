@@ -118,7 +118,9 @@ module Aws
       end
 
       @async_refresh = true
+      @metrics = options[:metrics]
       super
+      @legacy ? @metrics << 'CREDENTIALS_SSO_LEGACY' : @metrics << 'CREDENTIALS_SSO' if @metrics
     end
 
     # @return [SSO::Client]

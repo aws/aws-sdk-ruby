@@ -14,6 +14,7 @@ module Aws
       @secret_access_key = secret_access_key
       @session_token = session_token
       @account_id = kwargs[:account_id]
+      @metrics = kwargs[:metrics]
     end
 
     # @return [String]
@@ -27,6 +28,9 @@ module Aws
 
     # @return [String, nil]
     attr_reader :account_id
+
+    # @return [String, nil]
+    attr_reader :metrics
 
     # @return [Credentials]
     def credentials

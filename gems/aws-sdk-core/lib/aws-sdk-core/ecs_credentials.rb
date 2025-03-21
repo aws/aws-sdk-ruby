@@ -77,12 +77,15 @@ module Aws
       @http_debug_output = options[:http_debug_output]
       @backoff = backoff(options[:backoff])
       @async_refresh = false
+      @metrics = options[:metrics]
       super
     end
 
     # @return [Integer] The number of times to retry failed attempts to
     #   fetch credentials from the instance metadata service. Defaults to 0.
     attr_reader :retries
+
+    attr_reader :metrics
 
     private
 

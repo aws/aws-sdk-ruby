@@ -90,6 +90,7 @@ module Aws
       @token = nil
       @no_refresh_until = nil
       @async_refresh = false
+      @metrics = options[:metrics]
       super
     end
 
@@ -97,6 +98,8 @@ module Aws
     #   from the instance metadata service. Defaults to 0 when resolving from
     #   the default credential chain ({Aws::CredentialProviderChain}).
     attr_reader :retries
+
+    attr_reader :metrics
 
     private
 

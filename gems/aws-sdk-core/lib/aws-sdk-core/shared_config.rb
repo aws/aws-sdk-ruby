@@ -136,7 +136,8 @@ module Aws
           cfg = {
             role_arn: entry['role_arn'],
             web_identity_token_file: entry['web_identity_token_file'],
-            role_session_name: entry['role_session_name']
+            role_session_name: entry['role_session_name'],
+            metrics: ['CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN']
           }
           cfg[:region] = opts[:region] if opts[:region]
           AssumeRoleWebIdentityCredentials.new(cfg)
@@ -400,7 +401,8 @@ module Aws
           sso_role_name: prof_config['sso_role_name'],
           sso_session: prof_config['sso_session'],
           sso_region: sso_region,
-          sso_start_url: sso_start_url
+          sso_start_url: sso_start_url,
+          metrics: prof_config['sso_session'].nil? ? ['CREDENTIALS_PROFILE_SSO_LEGACY'] : ['CREDENTIALS_PROFILE_SSO']
           )
       end
     end
