@@ -4661,6 +4661,7 @@ module Aws::DataZone
     end
 
     class SingleSignOn
+      attr_accessor idc_instance_arn: ::String
       attr_accessor type: ("IAM_IDC" | "DISABLED")
       attr_accessor user_assignment: ("AUTOMATIC" | "MANUAL")
       SENSITIVE: []

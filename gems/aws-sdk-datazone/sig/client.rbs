@@ -837,6 +837,7 @@ module Aws
                            name: ::String,
                            ?service_role: ::String,
                            ?single_sign_on: {
+                             idc_instance_arn: ::String?,
                              type: ("IAM_IDC" | "DISABLED")?,
                              user_assignment: ("AUTOMATIC" | "MANUAL")?
                            },
@@ -3599,6 +3600,7 @@ module Aws
                            ?name: ::String,
                            ?service_role: ::String,
                            ?single_sign_on: {
+                             idc_instance_arn: ::String?,
                              type: ("IAM_IDC" | "DISABLED")?,
                              user_assignment: ("AUTOMATIC" | "MANUAL")?
                            }

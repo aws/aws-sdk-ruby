@@ -3,7 +3,6 @@
 module Seahorse
   module Client
     class AsyncBase < Seahorse::Client::Base
-
       # default H2 plugins
       # @api private
       @plugins = PluginList.new([
@@ -11,10 +10,10 @@ module Seahorse
         Plugins::H2,
         Plugins::ResponseTarget
       ])
+
       def initialize(plugins, options)
-        super
-        @connection = H2::Connection.new(options)
-        @options = options
+        super(plugins, options)
+        @connection = H2::Connection.new(@config)
       end
 
       # @return [H2::Connection]
@@ -36,7 +35,7 @@ module Seahorse
       # @return [Seahorse::Client::H2::Connection]
       def new_connection
         if @connection.closed?
-          @connection = H2::Connection.new(@options)
+          @connection = H2::Connection.new(@config)
         else
           @connection
         end

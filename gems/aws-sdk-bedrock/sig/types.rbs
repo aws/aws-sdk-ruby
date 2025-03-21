@@ -269,6 +269,12 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class CustomModelUnits
+      attr_accessor custom_model_units_per_model_copy: ::Integer
+      attr_accessor custom_model_units_version: ::String
+      SENSITIVE: []
+    end
+
     class CustomizationConfig
       attr_accessor distillation_config: Types::DistillationConfig
       attr_accessor unknown: untyped
@@ -687,6 +693,7 @@ module Aws::Bedrock
       attr_accessor model_architecture: ::String
       attr_accessor model_kms_key_arn: ::String
       attr_accessor instruct_supported: bool
+      attr_accessor custom_model_units: Types::CustomModelUnits
       SENSITIVE: []
     end
 

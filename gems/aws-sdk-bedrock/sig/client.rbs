@@ -938,6 +938,7 @@ module Aws
         def model_architecture: () -> ::String
         def model_kms_key_arn: () -> ::String
         def instruct_supported: () -> bool
+        def custom_model_units: () -> Types::CustomModelUnits
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_imported_model-instance_method
       def get_imported_model: (

@@ -1151,6 +1151,35 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # A `CustomModelUnit` (CMU) is an abstract view of the hardware
+    # utilization that Amazon Bedrock needs to host a single copy of your
+    # custom model. A model copy represents a single instance of your
+    # imported model that is ready to serve inference requests. Amazon
+    # Bedrock determines the number of custom model units that a model copy
+    # needs when you import the custom model.
+    #
+    # You can use `CustomModelUnits` to estimate the cost of running your
+    # custom model. For more information, see Calculate the cost of running
+    # a custom model in the Amazon Bedrock user guide.
+    #
+    # @!attribute [rw] custom_model_units_per_model_copy
+    #   The number of custom model units used to host a model copy.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] custom_model_units_version
+    #   The version of the custom model unit. Use to determine the billing
+    #   rate for the custom model unit.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CustomModelUnits AWS API Documentation
+    #
+    class CustomModelUnits < Struct.new(
+      :custom_model_units_per_model_copy,
+      :custom_model_units_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A model customization configuration
     #
     # @note CustomizationConfig is a union - when making an API calls you must set exactly one of the members.
@@ -2548,6 +2577,11 @@ module Aws::Bedrock
     #   Specifies if the imported model supports converse.
     #   @return [Boolean]
     #
+    # @!attribute [rw] custom_model_units
+    #   Information about the hardware utilization for a single copy of the
+    #   model.
+    #   @return [Types::CustomModelUnits]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetImportedModelResponse AWS API Documentation
     #
     class GetImportedModelResponse < Struct.new(
@@ -2559,7 +2593,8 @@ module Aws::Bedrock
       :creation_time,
       :model_architecture,
       :model_kms_key_arn,
-      :instruct_supported)
+      :instruct_supported,
+      :custom_model_units)
       SENSITIVE = []
       include Aws::Structure
     end

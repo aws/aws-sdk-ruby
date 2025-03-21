@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.295.0 (2025-03-21)
+------------------
+
+* Feature - This release does the following: 1.) Adds DurationHours as a required field to the SearchTrainingPlanOfferings action in the SageMaker AI API; 2.) Adds support for G6e instance types for SageMaker AI inference optimization jobs.
+
 1.294.0 (2025-03-19)
 ------------------
 

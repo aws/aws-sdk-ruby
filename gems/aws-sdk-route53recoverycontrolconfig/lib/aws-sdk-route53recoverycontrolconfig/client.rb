@@ -491,6 +491,10 @@ module Aws::Route53RecoveryControlConfig
     # @option params [Hash<String,String>] :tags
     #   The tags associated with the cluster.
     #
+    # @option params [String] :network_type
+    #   The network-type is optional, and can either be IPV4 or DUALSTACK. The
+    #   default is IPV4.
+    #
     # @return [Types::CreateClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClusterResponse#cluster #cluster} => Types::Cluster
@@ -503,6 +507,7 @@ module Aws::Route53RecoveryControlConfig
     #     tags: {
     #       "__string" => "__stringMin0Max256PatternS",
     #     },
+    #     network_type: "IPV4", # accepts IPV4, DUALSTACK
     #   })
     #
     # @example Response structure
@@ -514,6 +519,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.cluster.name #=> String
     #   resp.cluster.status #=> String, one of "PENDING", "DEPLOYED", "PENDING_DELETION"
     #   resp.cluster.owner #=> String
+    #   resp.cluster.network_type #=> String, one of "IPV4", "DUALSTACK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/CreateCluster AWS API Documentation
     #
@@ -866,6 +872,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.cluster.name #=> String
     #   resp.cluster.status #=> String, one of "PENDING", "DEPLOYED", "PENDING_DELETION"
     #   resp.cluster.owner #=> String
+    #   resp.cluster.network_type #=> String, one of "IPV4", "DUALSTACK"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1112,6 +1119,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.clusters[0].name #=> String
     #   resp.clusters[0].status #=> String, one of "PENDING", "DEPLOYED", "PENDING_DELETION"
     #   resp.clusters[0].owner #=> String
+    #   resp.clusters[0].network_type #=> String, one of "IPV4", "DUALSTACK"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/ListClusters AWS API Documentation
@@ -1354,6 +1362,44 @@ module Aws::Route53RecoveryControlConfig
       req.send_request(options)
     end
 
+    # Updates a cluster. You can only update the network-type of a cluster.
+    #
+    # @option params [required, String] :cluster_arn
+    #
+    # @option params [required, String] :network_type
+    #   The network-type is required, and can either be IPV4 or DUALSTACK.
+    #
+    # @return [Types::UpdateClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateClusterResponse#cluster #cluster} => Types::Cluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_cluster({
+    #     cluster_arn: "__stringMin1Max256PatternAZaZ09", # required
+    #     network_type: "IPV4", # required, accepts IPV4, DUALSTACK
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster.cluster_arn #=> String
+    #   resp.cluster.cluster_endpoints #=> Array
+    #   resp.cluster.cluster_endpoints[0].endpoint #=> String
+    #   resp.cluster.cluster_endpoints[0].region #=> String
+    #   resp.cluster.name #=> String
+    #   resp.cluster.status #=> String, one of "PENDING", "DEPLOYED", "PENDING_DELETION"
+    #   resp.cluster.owner #=> String
+    #   resp.cluster.network_type #=> String, one of "IPV4", "DUALSTACK"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/UpdateCluster AWS API Documentation
+    #
+    # @overload update_cluster(params = {})
+    # @param [Hash] params ({})
+    def update_cluster(params = {}, options = {})
+      req = build_request(:update_cluster, params)
+      req.send_request(options)
+    end
+
     # Updates a control panel. The only update you can make to a control
     # panel is to change the name of the control panel.
     #
@@ -1516,7 +1562,7 @@ module Aws::Route53RecoveryControlConfig
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-route53recoverycontrolconfig'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

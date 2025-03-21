@@ -85,7 +85,8 @@ module Aws
       def create_cluster: (
                             ?client_token: ::String,
                             cluster_name: ::String,
-                            ?tags: Hash[::String, ::String]
+                            ?tags: Hash[::String, ::String],
+                            ?network_type: ("IPV4" | "DUALSTACK")
                           ) -> _CreateClusterResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterResponseSuccess
 
@@ -330,6 +331,17 @@ module Aws
                             tag_keys: Array[::String]
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateClusterResponse]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryControlConfig/Client.html#update_cluster-instance_method
+      def update_cluster: (
+                            cluster_arn: ::String,
+                            network_type: ("IPV4" | "DUALSTACK")
+                          ) -> _UpdateClusterResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateClusterResponseSuccess
 
       interface _UpdateControlPanelResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateControlPanelResponse]

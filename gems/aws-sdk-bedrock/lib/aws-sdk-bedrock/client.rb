@@ -2593,6 +2593,7 @@ module Aws::Bedrock
     #   * {Types::GetImportedModelResponse#model_architecture #model_architecture} => String
     #   * {Types::GetImportedModelResponse#model_kms_key_arn #model_kms_key_arn} => String
     #   * {Types::GetImportedModelResponse#instruct_supported #instruct_supported} => Boolean
+    #   * {Types::GetImportedModelResponse#custom_model_units #custom_model_units} => Types::CustomModelUnits
     #
     # @example Request syntax with placeholder values
     #
@@ -2611,6 +2612,8 @@ module Aws::Bedrock
     #   resp.model_architecture #=> String
     #   resp.model_kms_key_arn #=> String
     #   resp.instruct_supported #=> Boolean
+    #   resp.custom_model_units.custom_model_units_per_model_copy #=> Integer
+    #   resp.custom_model_units.custom_model_units_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetImportedModel AWS API Documentation
     #
@@ -4785,7 +4788,7 @@ module Aws::Bedrock
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrock'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

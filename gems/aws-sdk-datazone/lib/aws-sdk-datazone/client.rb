@@ -2268,6 +2268,7 @@ module Aws::DataZone
     #     name: "String", # required
     #     service_role: "RoleArn",
     #     single_sign_on: {
+    #       idc_instance_arn: "SingleSignOnIdcInstanceArnString",
     #       type: "IAM_IDC", # accepts IAM_IDC, DISABLED
     #       user_assignment: "AUTOMATIC", # accepts AUTOMATIC, MANUAL
     #     },
@@ -2288,6 +2289,7 @@ module Aws::DataZone
     #   resp.portal_url #=> String
     #   resp.root_domain_unit_id #=> String
     #   resp.service_role #=> String
+    #   resp.single_sign_on.idc_instance_arn #=> String
     #   resp.single_sign_on.type #=> String, one of "IAM_IDC", "DISABLED"
     #   resp.single_sign_on.user_assignment #=> String, one of "AUTOMATIC", "MANUAL"
     #   resp.status #=> String, one of "CREATING", "AVAILABLE", "CREATION_FAILED", "DELETING", "DELETED", "DELETION_FAILED"
@@ -5330,6 +5332,7 @@ module Aws::DataZone
     #   resp.portal_url #=> String
     #   resp.root_domain_unit_id #=> String
     #   resp.service_role #=> String
+    #   resp.single_sign_on.idc_instance_arn #=> String
     #   resp.single_sign_on.type #=> String, one of "IAM_IDC", "DISABLED"
     #   resp.single_sign_on.user_assignment #=> String, one of "AUTOMATIC", "MANUAL"
     #   resp.status #=> String, one of "CREATING", "AVAILABLE", "CREATION_FAILED", "DELETING", "DELETED", "DELETION_FAILED"
@@ -11426,6 +11429,7 @@ module Aws::DataZone
     #     name: "String",
     #     service_role: "RoleArn",
     #     single_sign_on: {
+    #       idc_instance_arn: "SingleSignOnIdcInstanceArnString",
     #       type: "IAM_IDC", # accepts IAM_IDC, DISABLED
     #       user_assignment: "AUTOMATIC", # accepts AUTOMATIC, MANUAL
     #     },
@@ -11440,6 +11444,7 @@ module Aws::DataZone
     #   resp.name #=> String
     #   resp.root_domain_unit_id #=> String
     #   resp.service_role #=> String
+    #   resp.single_sign_on.idc_instance_arn #=> String
     #   resp.single_sign_on.type #=> String, one of "IAM_IDC", "DISABLED"
     #   resp.single_sign_on.user_assignment #=> String, one of "AUTOMATIC", "MANUAL"
     #
@@ -12695,7 +12700,7 @@ module Aws::DataZone
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

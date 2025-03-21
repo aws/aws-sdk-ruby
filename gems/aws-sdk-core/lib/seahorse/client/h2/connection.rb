@@ -10,13 +10,8 @@ module Seahorse
   module Client
     # @api private
     module H2
-
       # H2 Connection build on top of `http/2` gem
-      # (requires Ruby >= 2.1)
-      # with TLS layer plus ALPN, requires:
-      # Ruby >= 2.3 and OpenSSL >= 1.0.2
       class Connection
-
         OPTIONS = {
           max_concurrent_streams: 100,
           connection_timeout: 60,
@@ -27,7 +22,7 @@ module Seahorse
           ssl_ca_bundle: nil,
           ssl_ca_directory: nil,
           ssl_ca_store: nil,
-          enable_alpn: false
+          enable_alpn: true
         }
 
         # chunk read size at socket
@@ -41,24 +36,22 @@ module Seahorse
             instance_variable_set("@#{opt_name}", value)
           end
           @h2_client = HTTP2::Client.new(
-            settings_max_concurrent_streams: max_concurrent_streams
+            settings_max_concurrent_streams: @max_concurrent_streams
           )
-          @logger = if @http_wire_trace
-            options[:logger] || Logger.new($stdout)
-          end
+          @logger ||= Logger.new($stdout) if @http_wire_trace
           @chunk_size = options[:read_chunk_size] || CHUNKSIZE
+
           @errors = []
           @status = :ready
+
           @mutex = Mutex.new # connection can be shared across requests
           @socket = nil
           @socket_thread = nil
         end
 
         OPTIONS.keys.each do |attr_name|
-          attr_reader(attr_name)
+          attr_reader attr_name
         end
-
-        alias ssl_verify_peer? ssl_verify_peer
 
         attr_reader :errors
 
@@ -112,7 +105,7 @@ module Seahorse
                   @h2_client << data
                 rescue IO::WaitReadable
                   begin
-                    unless IO.select([@socket], nil, nil, connection_read_timeout)
+                    unless IO.select([@socket], nil, nil, @connection_read_timeout)
                       self.debug_output('socket connection read time out')
                       self.close!
                     else
@@ -154,11 +147,11 @@ module Seahorse
         end
 
         def debug_output(msg, type = nil)
-          prefix = case type
+          prefix =
+            case type
             when :send then '-> '
             when :receive then '<- '
-            else
-              ''
+            else ''
             end
           return unless @logger
           _debug_entry(prefix + msg)
@@ -206,7 +199,7 @@ module Seahorse
           begin
             tcp.connect_nonblock(addr)
           rescue IO::WaitWritable
-            unless IO.select(nil, [tcp], nil, connection_timeout)
+            unless IO.select(nil, [tcp], nil, @connection_timeout)
               tcp.close
               raise
             end
@@ -220,15 +213,15 @@ module Seahorse
 
         def _tls_context
           ssl_ctx = OpenSSL::SSL::SSLContext.new(:TLSv1_2)
-          if ssl_verify_peer?
+          if @ssl_verify_peer
             ssl_ctx.verify_mode = OpenSSL::SSL::VERIFY_PEER
-            ssl_ctx.ca_file = ssl_ca_bundle ? ssl_ca_bundle : _default_ca_bundle
-            ssl_ctx.ca_path = ssl_ca_directory ? ssl_ca_directory : _default_ca_directory
-            ssl_ctx.cert_store = ssl_ca_store if ssl_ca_store
+            ssl_ctx.ca_file = @ssl_ca_bundle || _default_ca_bundle
+            ssl_ctx.ca_path = @ssl_ca_directory || _defalt_ca_directory
+            ssl_ctx.cert_store = @ssl_ca_store if @ssl_ca_store
           else
             ssl_ctx.verify_mode = OpenSSL::SSL::VERIFY_NONE
           end
-          if enable_alpn
+          if @enable_alpn
             debug_output('enabling ALPN for TLS ...')
             ssl_ctx.alpn_protocols = ['h2']
           end
@@ -236,15 +229,12 @@ module Seahorse
         end
 
         def _default_ca_bundle
-          File.exist?(OpenSSL::X509::DEFAULT_CERT_FILE) ?
-            OpenSSL::X509::DEFAULT_CERT_FILE : nil
+          OpenSSL::X509::DEFAULT_CERT_FILE if File.exist?(OpenSSL::X509::DEFAULT_CERT_FILE)
         end
 
-        def _default_ca_directory
-          Dir.exist?(OpenSSL::X509::DEFAULT_CERT_DIR) ?
-            OpenSSL::X509::DEFAULT_CERT_DIR : nil
+        def _defalt_ca_directory
+          OpenSSL::X509::DEFAULT_CERT_DIR if Dir.exist?(OpenSSL::X509::DEFAULT_CERT_DIR)
         end
-
       end
     end
   end

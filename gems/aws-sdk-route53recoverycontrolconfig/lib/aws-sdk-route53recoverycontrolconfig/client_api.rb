@@ -63,6 +63,7 @@ module Aws::Route53RecoveryControlConfig
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    NetworkType = Shapes::StringShape.new(name: 'NetworkType')
     NewAssertionRule = Shapes::StructureShape.new(name: 'NewAssertionRule')
     NewGatingRule = Shapes::StructureShape.new(name: 'NewGatingRule')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -77,6 +78,8 @@ module Aws::Route53RecoveryControlConfig
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateClusterRequest = Shapes::StructureShape.new(name: 'UpdateClusterRequest')
+    UpdateClusterResponse = Shapes::StructureShape.new(name: 'UpdateClusterResponse')
     UpdateControlPanelRequest = Shapes::StructureShape.new(name: 'UpdateControlPanelRequest')
     UpdateControlPanelResponse = Shapes::StructureShape.new(name: 'UpdateControlPanelResponse')
     UpdateRoutingControlRequest = Shapes::StructureShape.new(name: 'UpdateRoutingControlRequest')
@@ -133,6 +136,7 @@ module Aws::Route53RecoveryControlConfig
     Cluster.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternS, location_name: "Name"))
     Cluster.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
     Cluster.add_member(:owner, Shapes::ShapeRef.new(shape: __stringMin12Max12PatternD12, location_name: "Owner"))
+    Cluster.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
     Cluster.struct_class = Types::Cluster
 
     ClusterEndpoint.add_member(:endpoint, Shapes::ShapeRef.new(shape: __stringMin1Max128PatternAZaZ09, location_name: "Endpoint"))
@@ -154,6 +158,7 @@ module Aws::Route53RecoveryControlConfig
     CreateClusterRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternS, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateClusterRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternS, required: true, location_name: "ClusterName"))
     CreateClusterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__stringMin0Max256PatternS, location_name: "Tags"))
+    CreateClusterRequest.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
     CreateClusterRequest.struct_class = Types::CreateClusterRequest
 
     CreateClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
@@ -359,6 +364,13 @@ module Aws::Route53RecoveryControlConfig
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
+    UpdateClusterRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternAZaZ09, required: true, location_name: "ClusterArn"))
+    UpdateClusterRequest.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, required: true, location_name: "NetworkType"))
+    UpdateClusterRequest.struct_class = Types::UpdateClusterRequest
+
+    UpdateClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
+    UpdateClusterResponse.struct_class = Types::UpdateClusterResponse
+
     UpdateControlPanelRequest.add_member(:control_panel_arn, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternAZaZ09, required: true, location_name: "ControlPanelArn"))
     UpdateControlPanelRequest.add_member(:control_panel_name, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternS, required: true, location_name: "ControlPanelName"))
     UpdateControlPanelRequest.struct_class = Types::UpdateControlPanelRequest
@@ -411,6 +423,7 @@ module Aws::Route53RecoveryControlConfig
 
       api.metadata = {
         "apiVersion" => "2020-11-02",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "route53-recovery-control-config",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
@@ -715,6 +728,20 @@ module Aws::Route53RecoveryControlConfig
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateCluster"
+        o.http_method = "PUT"
+        o.http_request_uri = "/cluster"
+        o.input = Shapes::ShapeRef.new(shape: UpdateClusterRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateClusterResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:update_control_panel, Seahorse::Model::Operation.new.tap do |o|

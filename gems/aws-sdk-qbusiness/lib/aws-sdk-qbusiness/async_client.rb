@@ -344,10 +344,10 @@ module Aws::QBusiness
     #   @option options [Integer] :connection_timeout (60)
     #     Connection timeout in seconds, defaults to 60 sec.
     #
-    #   @option options [Boolean] :enable_alpn (false)
-    #     Set to `true` to enable ALPN in HTTP2 over TLS. Requires Openssl version >= 1.0.2.
-    #     Defaults to false. Note: not all service HTTP2 operations supports ALPN on server
-    #     side, please refer to service documentation.
+    #   @option options [Boolean] :enable_alpn (true)
+    #     Set to `false` to disable ALPN in HTTP2 over TLS. ALPN requires Openssl version >= 1.0.2.
+    #     Note: RFC7540 requires HTTP2 to use ALPN over TLS but some
+    #     services may not fully support ALPN and require setting this to `false`.
     #
     #   @option options [Boolean] :http_wire_trace (false)
     #     When `true`, HTTP2 debug output will be sent to the `:logger`.
@@ -642,7 +642,7 @@ module Aws::QBusiness
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-qbusiness'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

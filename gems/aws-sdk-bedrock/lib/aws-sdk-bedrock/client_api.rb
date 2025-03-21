@@ -69,6 +69,8 @@ module Aws::Bedrock
     CustomModelName = Shapes::StringShape.new(name: 'CustomModelName')
     CustomModelSummary = Shapes::StructureShape.new(name: 'CustomModelSummary')
     CustomModelSummaryList = Shapes::ListShape.new(name: 'CustomModelSummaryList')
+    CustomModelUnits = Shapes::StructureShape.new(name: 'CustomModelUnits')
+    CustomModelUnitsVersion = Shapes::StringShape.new(name: 'CustomModelUnitsVersion')
     CustomizationConfig = Shapes::UnionShape.new(name: 'CustomizationConfig')
     CustomizationType = Shapes::StringShape.new(name: 'CustomizationType')
     DeleteCustomModelRequest = Shapes::StructureShape.new(name: 'DeleteCustomModelRequest')
@@ -701,6 +703,10 @@ module Aws::Bedrock
 
     CustomModelSummaryList.member = Shapes::ShapeRef.new(shape: CustomModelSummary)
 
+    CustomModelUnits.add_member(:custom_model_units_per_model_copy, Shapes::ShapeRef.new(shape: Integer, location_name: "customModelUnitsPerModelCopy"))
+    CustomModelUnits.add_member(:custom_model_units_version, Shapes::ShapeRef.new(shape: CustomModelUnitsVersion, location_name: "customModelUnitsVersion"))
+    CustomModelUnits.struct_class = Types::CustomModelUnits
+
     CustomizationConfig.add_member(:distillation_config, Shapes::ShapeRef.new(shape: DistillationConfig, location_name: "distillationConfig"))
     CustomizationConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     CustomizationConfig.add_member_subclass(:distillation_config, Types::CustomizationConfig::DistillationConfig)
@@ -1018,6 +1024,7 @@ module Aws::Bedrock
     GetImportedModelResponse.add_member(:model_architecture, Shapes::ShapeRef.new(shape: String, location_name: "modelArchitecture"))
     GetImportedModelResponse.add_member(:model_kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "modelKmsKeyArn"))
     GetImportedModelResponse.add_member(:instruct_supported, Shapes::ShapeRef.new(shape: InstructSupported, location_name: "instructSupported"))
+    GetImportedModelResponse.add_member(:custom_model_units, Shapes::ShapeRef.new(shape: CustomModelUnits, location_name: "customModelUnits"))
     GetImportedModelResponse.struct_class = Types::GetImportedModelResponse
 
     GetInferenceProfileRequest.add_member(:inference_profile_identifier, Shapes::ShapeRef.new(shape: InferenceProfileIdentifier, required: true, location: "uri", location_name: "inferenceProfileIdentifier"))
