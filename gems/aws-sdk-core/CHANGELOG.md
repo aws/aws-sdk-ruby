@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add `logger` as an explicit dependency for Ruby 3.5.
+
 3.220.2 (2025-03-20)
 ------------------
 
