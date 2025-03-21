@@ -2,6 +2,7 @@ Unreleased Changes
 ------------------
 
 * Issue - Enable ALPN over TLS for H2 Connection by default.
+* Issue - Fix HTTP-2 connections to properly use config values configured on the client.
 
 3.220.2 (2025-03-20)
 ------------------
