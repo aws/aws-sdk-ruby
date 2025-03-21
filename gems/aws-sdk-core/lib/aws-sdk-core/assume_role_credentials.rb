@@ -61,6 +61,8 @@ module Aws
     # @return [Hash]
     attr_reader :assume_role_params
 
+    attr_reader :metrics
+
     private
 
     def refresh

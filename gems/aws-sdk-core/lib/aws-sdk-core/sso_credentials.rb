@@ -126,6 +126,8 @@ module Aws
     # @return [SSO::Client]
     attr_reader :client
 
+    attr_reader :metrics
+
     private
 
     def read_cached_token

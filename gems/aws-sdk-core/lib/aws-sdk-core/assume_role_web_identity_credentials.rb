@@ -69,6 +69,8 @@ module Aws
     # @return [STS::Client]
     attr_reader :client
 
+    attr_reader :metrics
+
     private
 
     def refresh
