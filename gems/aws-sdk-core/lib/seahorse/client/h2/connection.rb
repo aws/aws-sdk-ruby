@@ -12,18 +12,18 @@ module Seahorse
     module H2
       # H2 Connection build on top of `http/2` gem
       class Connection
-        OPTIONS = [
-          :max_concurrent_streams,
-          :connection_timeout,
-          :connection_read_timeout,
-          :http_wire_trace,
-          :logger,
-          :ssl_verify_peer,
-          :ssl_ca_bundle,
-          :ssl_ca_directory,
-          :ssl_ca_store,
-          :enable_alpn
-        ]
+        OPTIONS = {
+          max_concurrent_streams: 100,
+          connection_timeout: 60,
+          connection_read_timeout: 60,
+          http_wire_trace: false,
+          logger: nil,
+          ssl_verify_peer: true,
+          ssl_ca_bundle: nil,
+          ssl_ca_directory: nil,
+          ssl_ca_store: nil,
+          enable_alpn: true
+        }
 
         # chunk read size at socket
         CHUNKSIZE = 1024
@@ -31,15 +31,15 @@ module Seahorse
         SOCKET_FAMILY = ::Socket::AF_INET
 
         def initialize(options = {})
-          OPTIONS.each do |opt_name|
-            instance_variable_set("@#{opt_name}", options[opt_name])
+          OPTIONS.each_pair do |opt_name, default_value|
+            value = options[opt_name].nil? ? default_value : options[opt_name]
+            instance_variable_set("@#{opt_name}", value)
           end
-          @logger ||= Logger.new($stdout) if @http_wire_trace
-          @chunk_size = options[:read_chunk_size] || CHUNKSIZE
-
           @h2_client = HTTP2::Client.new(
             settings_max_concurrent_streams: @max_concurrent_streams
           )
+          @logger ||= Logger.new($stdout) if @http_wire_trace
+          @chunk_size = options[:read_chunk_size] || CHUNKSIZE
 
           @errors = []
           @status = :ready
@@ -49,8 +49,8 @@ module Seahorse
           @socket_thread = nil
         end
 
-        OPTIONS.each do |opt_name|
-          attr_reader opt_name
+        OPTIONS.keys.each do |attr_name|
+          attr_reader attr_name
         end
 
         attr_reader :errors
