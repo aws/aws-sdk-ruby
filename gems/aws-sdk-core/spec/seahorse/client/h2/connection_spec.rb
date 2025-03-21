@@ -7,7 +7,7 @@ module Seahorse
     module H2
 
       describe Connection do
-        let(:conn) { Connection.new }
+        let(:conn) { Connection.new(max_concurrent_streams: 1) }
 
         describe '#new_stream' do
 
