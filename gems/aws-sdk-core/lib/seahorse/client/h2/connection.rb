@@ -30,12 +30,12 @@ module Seahorse
 
         SOCKET_FAMILY = ::Socket::AF_INET
 
-        def initialize(config)
+        def initialize(options = {})
           OPTIONS.each do |opt_name|
-            instance_variable_set("@#{opt_name}", config.send(opt_name))
+            instance_variable_set("@#{opt_name}", options[opt_name])
           end
           @logger ||= Logger.new($stdout) if @http_wire_trace
-          @chunk_size = config.read_chunk_size || CHUNKSIZE
+          @chunk_size = options[:read_chunk_size] || CHUNKSIZE
 
           @h2_client = HTTP2::Client.new(
             settings_max_concurrent_streams: @max_concurrent_streams
@@ -89,7 +89,7 @@ module Seahorse
               @status = :active
             elsif @status == :closed
               msg = 'Async Client HTTP2 Connection is closed, you may'\
-                ' use #new_connection to create a new HTTP2 Connection for this client'
+                    ' use #new_connection to create a new HTTP2 Connection for this client'
               raise Http2ConnectionClosedError.new(msg)
             end
           }
@@ -147,12 +147,12 @@ module Seahorse
         end
 
         def debug_output(msg, type = nil)
-          prefix = case type
-                   when :send then '-> '
-                   when :receive then '<- '
-                   else
-                     ''
-                   end
+          prefix =
+            case type
+            when :send then '-> '
+            when :receive then '<- '
+            else ''
+            end
           return unless @logger
           _debug_entry(prefix + msg)
         end
@@ -168,7 +168,7 @@ module Seahorse
           @h2_client.on(:frame) do |bytes|
             if @socket.nil?
               msg = 'Connection is closed due to errors, '\
-                'you can find errors at async_client.connection.errors'
+                    'you can find errors at async_client.connection.errors'
               raise Http2ConnectionClosedError.new(msg)
             else
               @socket.print(bytes)

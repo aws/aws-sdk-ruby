@@ -3,14 +3,14 @@
 module Seahorse
   module Client
     class AsyncBase < Seahorse::Client::Base
-
       # default H2 plugins
       # @api private
       @plugins = PluginList.new([
-                                  Plugins::Endpoint,
-                                  Plugins::H2,
-                                  Plugins::ResponseTarget
-                                ])
+        Plugins::Endpoint,
+        Plugins::H2,
+        Plugins::ResponseTarget
+      ])
+
       def initialize(plugins, options)
         super(plugins, options)
         @connection = H2::Connection.new(@config)
