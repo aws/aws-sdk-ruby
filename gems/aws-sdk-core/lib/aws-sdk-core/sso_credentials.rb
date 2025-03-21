@@ -147,7 +147,7 @@ module Aws
       c = if @legacy
             cached_token = read_cached_token
             # TODO: CREDENTIALS_SSO_LEGACY (u)
-            # Call will include "t" (from #initialize)
+            # Call will include at least "t" (from #initialize)
             @client.get_role_credentials(
               account_id: @sso_account_id,
               role_name: @sso_role_name,
@@ -155,7 +155,7 @@ module Aws
             ).role_credentials
           else
             # TODO: CREDENTIALS_SSO (s)
-            # Call will include "r" (from #initialize)
+            # Call will include at least "r" (from #initialize)
             @client.get_role_credentials(
               account_id: @sso_account_id,
               role_name: @sso_role_name,

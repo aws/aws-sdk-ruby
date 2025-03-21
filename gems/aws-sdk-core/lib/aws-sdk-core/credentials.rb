@@ -29,7 +29,6 @@ module Aws
     # @return [String, nil]
     attr_reader :account_id
 
-    # @return [String, nil]
     attr_reader :metrics
 
     # @return [Credentials]
