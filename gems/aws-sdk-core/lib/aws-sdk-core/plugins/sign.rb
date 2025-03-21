@@ -51,8 +51,6 @@ module Aws
             )
             # TODO: temp added this, double check
             if signer.is_a?(SignatureV4)
-              puts "Signer here"
-              pp signer
               credentials = signer.signer.credentials_provider
             end
             signer.sign(context)

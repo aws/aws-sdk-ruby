@@ -70,7 +70,6 @@ module Aws
       @metrics = options.delete(:metrics)
       options = options.select {|k, v| !v.nil? }
       if (options[:sso_session])
-        puts "New SSO"
         # TODO: CREDENTIALS_PROFILE_SSO (r)
         missing_keys = TOKEN_PROVIDER_REQUIRED_OPTS.select { |k| options[k].nil? }
         unless missing_keys.empty?
@@ -95,7 +94,6 @@ module Aws
           @client = Aws::SSO::Client.new(client_opts)
         end
       else # legacy behavior
-        puts "Legacy SSO"
         # TODO: CREDENTIALS_PROFILE_SSO_LEGACY (t)
         missing_keys = LEGACY_REQUIRED_OPTS.select { |k| options[k].nil? }
         unless missing_keys.empty?
