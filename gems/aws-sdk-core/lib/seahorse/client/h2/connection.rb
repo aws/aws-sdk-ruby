@@ -10,55 +10,48 @@ module Seahorse
   module Client
     # @api private
     module H2
-
       # H2 Connection build on top of `http/2` gem
-      # (requires Ruby >= 2.1)
-      # with TLS layer plus ALPN, requires:
-      # Ruby >= 2.3 and OpenSSL >= 1.0.2
       class Connection
-
-        OPTIONS = {
-          max_concurrent_streams: 100,
-          connection_timeout: 60,
-          connection_read_timeout: 60,
-          http_wire_trace: false,
-          logger: nil,
-          ssl_verify_peer: true,
-          ssl_ca_bundle: nil,
-          ssl_ca_directory: nil,
-          ssl_ca_store: nil,
-          enable_alpn: true
-        }
+        OPTIONS = [
+          :max_concurrent_streams,
+          :connection_timeout,
+          :connection_read_timeout,
+          :http_wire_trace,
+          :logger,
+          :ssl_verify_peer,
+          :ssl_ca_bundle,
+          :ssl_ca_directory,
+          :ssl_ca_store,
+          :enable_alpn
+        ]
 
         # chunk read size at socket
         CHUNKSIZE = 1024
 
         SOCKET_FAMILY = ::Socket::AF_INET
 
-        def initialize(options = {})
-          OPTIONS.each_pair do |opt_name, default_value|
-            value = options[opt_name].nil? ? default_value : options[opt_name]
-            instance_variable_set("@#{opt_name}", value)
+        def initialize(config)
+          OPTIONS.each do |opt_name|
+            instance_variable_set("@#{opt_name}", config.send(opt_name))
           end
+          @logger ||= Logger.new($stdout) if @http_wire_trace
+          @chunk_size = config.read_chunk_size || CHUNKSIZE
+
           @h2_client = HTTP2::Client.new(
-            settings_max_concurrent_streams: max_concurrent_streams
+            settings_max_concurrent_streams: @max_concurrent_streams
           )
-          @logger = if @http_wire_trace
-            options[:logger] || Logger.new($stdout)
-          end
-          @chunk_size = options[:read_chunk_size] || CHUNKSIZE
+
           @errors = []
           @status = :ready
+
           @mutex = Mutex.new # connection can be shared across requests
           @socket = nil
           @socket_thread = nil
         end
 
-        OPTIONS.keys.each do |attr_name|
-          attr_reader(attr_name)
+        OPTIONS.each do |opt_name|
+          attr_reader opt_name
         end
-
-        alias ssl_verify_peer? ssl_verify_peer
 
         attr_reader :errors
 
@@ -96,7 +89,7 @@ module Seahorse
               @status = :active
             elsif @status == :closed
               msg = 'Async Client HTTP2 Connection is closed, you may'\
-                    ' use #new_connection to create a new HTTP2 Connection for this client'
+                ' use #new_connection to create a new HTTP2 Connection for this client'
               raise Http2ConnectionClosedError.new(msg)
             end
           }
@@ -112,7 +105,7 @@ module Seahorse
                   @h2_client << data
                 rescue IO::WaitReadable
                   begin
-                    unless IO.select([@socket], nil, nil, connection_read_timeout)
+                    unless IO.select([@socket], nil, nil, @connection_read_timeout)
                       self.debug_output('socket connection read time out')
                       self.close!
                     else
@@ -155,11 +148,11 @@ module Seahorse
 
         def debug_output(msg, type = nil)
           prefix = case type
-            when :send then '-> '
-            when :receive then '<- '
-            else
-              ''
-            end
+                   when :send then '-> '
+                   when :receive then '<- '
+                   else
+                     ''
+                   end
           return unless @logger
           _debug_entry(prefix + msg)
         end
@@ -175,7 +168,7 @@ module Seahorse
           @h2_client.on(:frame) do |bytes|
             if @socket.nil?
               msg = 'Connection is closed due to errors, '\
-                    'you can find errors at async_client.connection.errors'
+                'you can find errors at async_client.connection.errors'
               raise Http2ConnectionClosedError.new(msg)
             else
               @socket.print(bytes)
@@ -206,7 +199,7 @@ module Seahorse
           begin
             tcp.connect_nonblock(addr)
           rescue IO::WaitWritable
-            unless IO.select(nil, [tcp], nil, connection_timeout)
+            unless IO.select(nil, [tcp], nil, @connection_timeout)
               tcp.close
               raise
             end
@@ -220,15 +213,15 @@ module Seahorse
 
         def _tls_context
           ssl_ctx = OpenSSL::SSL::SSLContext.new(:TLSv1_2)
-          if ssl_verify_peer?
+          if @ssl_verify_peer
             ssl_ctx.verify_mode = OpenSSL::SSL::VERIFY_PEER
-            ssl_ctx.ca_file = ssl_ca_bundle ? ssl_ca_bundle : _default_ca_bundle
-            ssl_ctx.ca_path = ssl_ca_directory ? ssl_ca_directory : _default_ca_directory
-            ssl_ctx.cert_store = ssl_ca_store if ssl_ca_store
+            ssl_ctx.ca_file = @ssl_ca_bundle || _default_ca_bundle
+            ssl_ctx.ca_path = @ssl_ca_directory || _defalt_ca_directory
+            ssl_ctx.cert_store = @ssl_ca_store if @ssl_ca_store
           else
             ssl_ctx.verify_mode = OpenSSL::SSL::VERIFY_NONE
           end
-          if enable_alpn
+          if @enable_alpn
             debug_output('enabling ALPN for TLS ...')
             ssl_ctx.alpn_protocols = ['h2']
           end
@@ -236,15 +229,12 @@ module Seahorse
         end
 
         def _default_ca_bundle
-          File.exist?(OpenSSL::X509::DEFAULT_CERT_FILE) ?
-            OpenSSL::X509::DEFAULT_CERT_FILE : nil
+          OpenSSL::X509::DEFAULT_CERT_FILE if File.exist?(OpenSSL::X509::DEFAULT_CERT_FILE)
         end
 
-        def _default_ca_directory
-          Dir.exist?(OpenSSL::X509::DEFAULT_CERT_DIR) ?
-            OpenSSL::X509::DEFAULT_CERT_DIR : nil
+        def _defalt_ca_directory
+          OpenSSL::X509::DEFAULT_CERT_DIR if Dir.exist?(OpenSSL::X509::DEFAULT_CERT_DIR)
         end
-
       end
     end
   end
