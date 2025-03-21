@@ -49,12 +49,12 @@ module Aws
               context[:sigv4_region],
               context[:sigv4_credentials]
             )
-            pp "SIGNER HERE"
-            pp signer
-            credentials = signer.signer.credentials_provider
+            # TODO: temp added this, double check
+            if signer.is_a?(SignatureV4)
+              credentials = signer.signer.credentials_provider
+            end
             signer.sign(context)
           end
-          puts "With metric now"
           with_metric(credentials) { @handler.call(context) }
         end
 
@@ -62,39 +62,21 @@ module Aws
 
         def with_metric(credentials, &block)
           puts "in with metric"
+          unless credentials && credentials.respond_to?(:metrics)
+            puts "No metrics"
+            return block.call
+          end
+
           metrics = []
           # Add check if flag isn't set, then emit Credentials CODE
           if !credentials.metrics
-            puts "Credentials from code"
+            puts "!!!!! Credentials from code !!!!!"
             metrics << 'CREDENTIALS_CODE'
           else
-            if credentials.is_a? Aws::Credentials
-              puts "Is a credentials"
-              (metrics << credentials.metrics).flatten!
-            elsif credentials.is_a? Aws::AssumeRoleWebIdentityCredentials
-              puts "Is a assume role credentials"
-              (metrics << credentials.metrics).flatten!
-            elsif credentials.is_a? Aws::SSOCredentials
-              puts "Is a sso credentials"
-              (metrics << credentials.metrics).flatten!
-            elsif credentials.is_a? Aws::AssumeRoleCredentials
-              puts "Is a assume role credentials"
-            elsif credentials.is_a? Aws::SharedCredentials
-              puts "Is a shared credentials"
-              (metrics << credentials.metrics).flatten!
-            elsif credentials.is_a? Aws::ProcessCredentials
-              puts "Is a process credentials"
-              (metrics << credentials.metrics).flatten!
-            elsif credentials.is_a? Aws::ECSCredentials
-              puts "Is a ecs credentials"
-              (metrics << credentials.metrics).flatten!
-            elsif credentials.is_a? Aws::InstanceProfileCredentials
-              puts "Is a instance profile credentials"
-              (metrics << credentials.metrics).flatten!
-            end
+            puts "!!!!! Credential type !!!!!"
+            puts credentials.class.name
+            (metrics << credentials.metrics).flatten!
           end
-          puts "Sending these new metrics"
-          puts metrics
           Aws::Plugins::UserAgent.metric(*metrics, &block)
         end
 
@@ -191,17 +173,6 @@ module Aws
           context[:canonical_request] = signature.canonical_request
           context[:string_to_sign] = signature.string_to_sign
         end
-
-        # def with_metrics(&block)
-        #   puts "Printing signer"
-        #   pp @signer
-        #   credentials = @signer.credentials_provider
-        #   if credentials.is_a? Aws::Credentials
-        #     Aws::Plugins::UserAgent.metric('CREDENTIALS_CODE', &block)
-        #   else
-        #     Aws::Plugins::UserAgent.metric('CREDENTIALS_HTTP', &block)
-        #   end
-        # end
 
         def presign_url(*args)
           @signer.presign_url(*args)

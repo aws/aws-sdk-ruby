@@ -65,6 +65,7 @@ module Aws
     #   with an instance of this object when
     #   AWS credentials are required and need to be refreshed.
     def initialize(options = {})
+      @metrics = options.delete(:metrics)
       credential_path = options[:credential_path] ||
                         ENV['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI']
       endpoint = options[:endpoint] ||
@@ -77,7 +78,6 @@ module Aws
       @http_debug_output = options[:http_debug_output]
       @backoff = backoff(options[:backoff])
       @async_refresh = false
-      @metrics = options.delete(:metrics)
       super
     end
 

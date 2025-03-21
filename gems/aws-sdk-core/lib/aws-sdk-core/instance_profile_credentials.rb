@@ -75,6 +75,7 @@ module Aws
     #   with an instance of this object when
     #   AWS credentials are required and need to be refreshed.
     def initialize(options = {})
+      @metrics = options.delete(:metrics)
       @retries = options[:retries] || 1
       endpoint_mode = resolve_endpoint_mode(options)
       @endpoint = resolve_endpoint(options, endpoint_mode)
@@ -90,7 +91,6 @@ module Aws
       @token = nil
       @no_refresh_until = nil
       @async_refresh = false
-      @metrics = options.delete(:metrics)
       super
     end
 

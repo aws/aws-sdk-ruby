@@ -112,7 +112,6 @@ module Aws
 
     # TODO: CREDENTIALS_PROFILE (n)??
     def static_credentials(options)
-      puts "!! STATIC_CREDENTIALS !!"
       if options[:config]
         Credentials.new(
           options[:config].access_key_id,
@@ -125,7 +124,6 @@ module Aws
     end
 
     def static_profile_assume_role_web_identity_credentials(options)
-      puts "!! STATIC_PROFILE_ASSUME_ROLE_WEB_IDENTITY_CREDENTIALS !!"
       if Aws.shared_config.config_enabled? && options[:config] && options[:config].profile
         Aws.shared_config.assume_role_web_identity_credentials_from_config(
           profile: options[:config].profile,
@@ -135,7 +133,6 @@ module Aws
     end
 
     def static_profile_sso_credentials(options)
-      puts "!! STATIC_PROFILE_SSO_CREDENTIALS !!"
       if Aws.shared_config.config_enabled? && options[:config] && options[:config].profile
         Aws.shared_config.sso_credentials_from_config(
           profile: options[:config].profile
@@ -144,14 +141,12 @@ module Aws
     end
 
     def static_profile_assume_role_credentials(options)
-      puts "!! STATIC_PROFILE_ASSUME_ROLE_CREDENTIALS !!"
       if Aws.shared_config.config_enabled? && options[:config] && options[:config].profile
         assume_role_with_profile(options, options[:config].profile)
       end
     end
 
     def static_profile_credentials(options)
-      puts "!! STATIC_PROFILE_CREDENTIALS !!"
       if options[:config] && options[:config].profile
         SharedCredentials.new(profile_name: options[:config].profile, metrics: ['CREDENTIALS_PROFILE'])
       end
@@ -160,7 +155,6 @@ module Aws
     end
 
     def static_profile_process_credentials(options)
-      puts "!! STATIC_PROFILE_PROCESS_CREDENTIALS !!"
       if Aws.shared_config.config_enabled? && options[:config] && options[:config].profile
         process_provider = Aws.shared_config.credential_process(profile: options[:config].profile)
         if process_provider
@@ -176,7 +170,6 @@ module Aws
 
     # TODO: CREDENTIALS_ENV_VARS (g)??
     def env_credentials(_options)
-      puts "!! ENV_CREDENTIALS !!"
       key =    %w[AWS_ACCESS_KEY_ID AMAZON_ACCESS_KEY_ID AWS_ACCESS_KEY]
       secret = %w[AWS_SECRET_ACCESS_KEY AMAZON_SECRET_ACCESS_KEY AWS_SECRET_KEY]
       token =  %w[AWS_SESSION_TOKEN AMAZON_SESSION_TOKEN]
@@ -202,7 +195,6 @@ module Aws
     end
 
     def shared_credentials(options)
-      puts "!! SHARED_CREDENTIALS !!"
       profile_name = determine_profile_name(options)
       SharedCredentials.new(profile_name: profile_name, metrics: ['CREDENTIALS_PROFILE'])
     rescue Errors::NoSuchProfileError
@@ -210,12 +202,9 @@ module Aws
     end
 
     def process_credentials(options)
-      puts "!! PROCESS_CREDENTIALS !!"
       profile_name = determine_profile_name(options)
-      puts profile_name
       if Aws.shared_config.config_enabled?
         process_provider = Aws.shared_config.credential_process(profile: profile_name)
-        puts process_provider
         if process_provider
           credentials = ProcessCredentials.new([process_provider])
           credentials.metrics = ['CREDENTIALS_PROFILE_PROCESS', 'CREDENTIALS_PROCESS']
@@ -227,7 +216,6 @@ module Aws
     end
 
     def sso_credentials(options)
-      puts "!! SSO_CREDENTIALS !!"
       profile_name = determine_profile_name(options)
       if Aws.shared_config.config_enabled?
         Aws.shared_config.sso_credentials_from_config(profile: profile_name)
@@ -237,14 +225,12 @@ module Aws
     end
 
     def assume_role_credentials(options)
-      puts "!! ASSUME_ROLE_CREDENTIALS !!"
       if Aws.shared_config.config_enabled?
         assume_role_with_profile(options, determine_profile_name(options))
       end
     end
 
     def assume_role_web_identity_credentials(options)
-      puts "!! ASSUME_ROLE_WEB_IDENTITY_CREDENTIALS !!"
       region = options[:config].region if options[:config]
       if (role_arn = ENV['AWS_ROLE_ARN']) && (token_file = ENV['AWS_WEB_IDENTITY_TOKEN_FILE'])
         # TODO: CREDENTIALS_ENV_VARS_STS_WEB_ID_TOKEN (h)
@@ -266,7 +252,6 @@ module Aws
     end
 
     def instance_profile_credentials(options)
-      puts "!! INSTANCE_PROFILE_CREDENTIALS !!"
       profile_name = determine_profile_name(options)
       if ENV['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] ||
          ENV['AWS_CONTAINER_CREDENTIALS_FULL_URI']

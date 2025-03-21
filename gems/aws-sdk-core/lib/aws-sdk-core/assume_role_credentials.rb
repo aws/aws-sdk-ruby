@@ -39,6 +39,7 @@ module Aws
     #      end
     #
     def initialize(options = {})
+      @metrics = options.delete(:metrics)
       client_opts = {}
       @assume_role_params = {}
       options.each_pair do |key, value|
@@ -50,7 +51,6 @@ module Aws
       end
       @client = client_opts[:client] || STS::Client.new(client_opts)
       @async_refresh = true
-      @metrics = options.delete(:metrics)
       super
       @metrics << 'CREDENTIALS_STS_ASSUME_ROLE' if @metrics
     end

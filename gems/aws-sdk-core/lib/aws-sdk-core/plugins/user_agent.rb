@@ -89,23 +89,12 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
       end
 
       def self.metric(*metrics, &block)
-        puts "In metric call"
-        pp metrics
-        puts METRICS[metrics[0]]
         Thread.current[:aws_sdk_core_user_agent_metric] ||= []
-        puts METRICS["CREDENTIALS_PROCESS"]
         metrics = metrics.map do |metric|
-          puts "In metric loop"
-          puts metric
-          puts METRICS[metric]
           METRICS[metric]
         end
         metrics = metrics.compact
-        puts "Metric"
-        puts metrics
         Thread.current[:aws_sdk_core_user_agent_metric].concat(metrics)
-        puts "METRICS HERE"
-        pp Thread.current[:aws_sdk_core_user_agent_metric]
         block.call
       ensure
         Thread.current[:aws_sdk_core_user_agent_metric].pop(metrics.size)
@@ -228,8 +217,8 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
 
             metrics = Thread.current[:aws_sdk_core_user_agent_metric].join(',')
 
-            puts "Metrics metadata"
-            pp metrics
+            # puts "Metrics metadata"
+            # pp metrics
             # Metric metadata is limited to 1024 bytes
             return "m/#{metrics}" if metrics.bytesize <= 1024
 

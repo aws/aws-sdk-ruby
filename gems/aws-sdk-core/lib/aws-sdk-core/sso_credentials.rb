@@ -67,6 +67,7 @@ module Aws
     #   with an instance of this object when
     #   AWS credentials are required and need to be refreshed.
     def initialize(options = {})
+      @metrics = options.delete(:metrics)
       options = options.select {|k, v| !v.nil? }
       if (options[:sso_session])
         puts "New SSO"
@@ -118,7 +119,6 @@ module Aws
       end
 
       @async_refresh = true
-      @metrics = options.delete(:metrics)
       super
       @legacy ? @metrics << 'CREDENTIALS_SSO_LEGACY' : @metrics << 'CREDENTIALS_SSO' if @metrics
     end

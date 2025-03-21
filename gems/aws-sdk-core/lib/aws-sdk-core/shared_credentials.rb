@@ -25,6 +25,7 @@ module Aws
     #   `ENV['AWS_PROFILE']`.
     #
     def initialize(options = {})
+      @metrics = options.delete(:metrics)
       shared_config = Aws.shared_config
       @path = options[:path]
       @path ||= shared_config.credentials_path
@@ -40,7 +41,6 @@ module Aws
         )
         @credentials = config.credentials(profile: @profile_name)
       end
-      @metrics = options.delete(:metrics)
     end
 
     # @return [String]
