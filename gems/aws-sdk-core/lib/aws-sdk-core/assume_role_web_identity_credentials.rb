@@ -80,7 +80,7 @@ module Aws
       # TODO: CREDENTIALS_STS_ASSUME_ROLE_WEB_ID (k)
       # Call will include at least "q" (from #assume_role_web_identity_credentials_from_config)
       # OR call will include at least "h" (from #assume_role_web_identity_credentials)
-      resp = @client.assume_role_with_web_identity(@assume_role_web_identity_params)
+      resp = with_metric { client.assume_role_with_web_identity(@assume_role_web_identity_params) }
       creds = resp.credentials
       @credentials = Credentials.new(
         creds.access_key_id,
@@ -89,6 +89,14 @@ module Aws
         account_id: parse_account_id(resp)
       )
       @expiration = creds.expiration
+    end
+
+    def with_metric(&block)
+      if @metrics
+        Aws::Plugins::UserAgent.metric(*@metrics, &block)
+      else
+        block.call
+      end
     end
 
     def _token_from_file(path)

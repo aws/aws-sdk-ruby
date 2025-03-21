@@ -66,7 +66,7 @@ module Aws
     private
 
     def refresh
-      resp = @client.assume_role(@assume_role_params)
+      resp = with_metric { @client.assume_role(@assume_role_params) }
       creds = resp.credentials
       # TODO: CREDENTIALS_STS_ASSUME_ROLE
       # Call will include "o" (from #assume_role_from_profile) and "n"/"qk"/"vw"/"rs"/"tu" (from #resolve_source_profile)
@@ -78,6 +78,14 @@ module Aws
         account_id: parse_account_id(resp)
       )
       @expiration = creds.expiration
+    end
+
+    def with_metric(&block)
+      if @metrics
+        Aws::Plugins::UserAgent.metric(*@metrics, &block)
+      else
+        block.call
+      end
     end
 
     def parse_account_id(resp)

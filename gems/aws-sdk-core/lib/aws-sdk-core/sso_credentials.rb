@@ -150,19 +150,19 @@ module Aws
             cached_token = read_cached_token
             # TODO: CREDENTIALS_SSO_LEGACY (u)
             # Call will include at least "t" (from #initialize)
-            @client.get_role_credentials(
+            with_metric { @client.get_role_credentials(
               account_id: @sso_account_id,
               role_name: @sso_role_name,
               access_token: cached_token['accessToken']
-            ).role_credentials
+            ).role_credentials }
           else
             # TODO: CREDENTIALS_SSO (s)
             # Call will include at least "r" (from #initialize)
-            @client.get_role_credentials(
+            with_metric { @client.get_role_credentials(
               account_id: @sso_account_id,
               role_name: @sso_role_name,
               access_token: @token_provider.token.token
-            ).role_credentials
+            ).role_credentials }
           end
 
       @credentials = Credentials.new(
@@ -172,6 +172,14 @@ module Aws
         account_id: @sso_account_id
       )
       @expiration = Time.at(c.expiration / 1000.0)
+    end
+
+    def with_metric(&block)
+      if @metrics
+        Aws::Plugins::UserAgent.metric(*@metrics, &block)
+      else
+        block.call
+      end
     end
 
     def sso_cache_file
