@@ -7,34 +7,34 @@
 #
 # WARNING ABOUT GENERATED CODE
 
-require 'seahorse/client/plugins/content_length.rb'
-require 'aws-sdk-core/plugins/credentials_configuration.rb'
-require 'aws-sdk-core/plugins/logging.rb'
-require 'aws-sdk-core/plugins/param_converter.rb'
-require 'aws-sdk-core/plugins/param_validator.rb'
-require 'aws-sdk-core/plugins/user_agent.rb'
-require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
-require 'aws-sdk-core/plugins/retry_errors.rb'
-require 'aws-sdk-core/plugins/global_configuration.rb'
-require 'aws-sdk-core/plugins/regional_endpoint.rb'
-require 'aws-sdk-core/plugins/endpoint_discovery.rb'
-require 'aws-sdk-core/plugins/endpoint_pattern.rb'
-require 'aws-sdk-core/plugins/response_paging.rb'
-require 'aws-sdk-core/plugins/stub_responses.rb'
-require 'aws-sdk-core/plugins/idempotency_token.rb'
-require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
-require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
-require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
-require 'aws-sdk-core/plugins/transfer_encoding.rb'
-require 'aws-sdk-core/plugins/http_checksum.rb'
-require 'aws-sdk-core/plugins/checksum_algorithm.rb'
-require 'aws-sdk-core/plugins/request_compression.rb'
-require 'aws-sdk-core/plugins/defaults_mode.rb'
-require 'aws-sdk-core/plugins/recursion_detection.rb'
-require 'aws-sdk-core/plugins/sign.rb'
-require 'aws-sdk-core/plugins/protocols/rest_json.rb'
-
-Aws::Plugins::GlobalConfiguration.add_identifier(:securityhub)
+require 'seahorse/client/plugins/content_length'
+require 'aws-sdk-core/plugins/credentials_configuration'
+require 'aws-sdk-core/plugins/logging'
+require 'aws-sdk-core/plugins/param_converter'
+require 'aws-sdk-core/plugins/param_validator'
+require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/helpful_socket_errors'
+require 'aws-sdk-core/plugins/retry_errors'
+require 'aws-sdk-core/plugins/global_configuration'
+require 'aws-sdk-core/plugins/regional_endpoint'
+require 'aws-sdk-core/plugins/endpoint_discovery'
+require 'aws-sdk-core/plugins/endpoint_pattern'
+require 'aws-sdk-core/plugins/response_paging'
+require 'aws-sdk-core/plugins/stub_responses'
+require 'aws-sdk-core/plugins/idempotency_token'
+require 'aws-sdk-core/plugins/invocation_id'
+require 'aws-sdk-core/plugins/jsonvalue_converter'
+require 'aws-sdk-core/plugins/client_metrics_plugin'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin'
+require 'aws-sdk-core/plugins/transfer_encoding'
+require 'aws-sdk-core/plugins/http_checksum'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/request_compression'
+require 'aws-sdk-core/plugins/defaults_mode'
+require 'aws-sdk-core/plugins/recursion_detection'
+require 'aws-sdk-core/plugins/telemetry'
+require 'aws-sdk-core/plugins/sign'
+require 'aws-sdk-core/plugins/protocols/rest_json'
 
 module Aws::SecurityHub
   # An API client for SecurityHub.  To construct a client, you need to configure a `:region` and `:credentials`.
@@ -72,6 +72,7 @@ module Aws::SecurityHub
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -81,12 +82,18 @@ module Aws::SecurityHub
     add_plugin(Aws::Plugins::RequestCompression)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
+    add_plugin(Aws::Plugins::Telemetry)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::RestJson)
     add_plugin(Aws::SecurityHub::Plugins::Endpoints)
 
     # @overload initialize(options)
     #   @param [Hash] options
+    #
+    #   @option options [Array<Seahorse::Client::Plugin>] :plugins ([]])
+    #     A list of plugins to apply to the client. Each plugin is either a
+    #     class name or an instance of a plugin class.
+    #
     #   @option options [required, Aws::CredentialProvider] :credentials
     #     Your AWS credentials. This can be an instance of any one of the
     #     following classes:
@@ -121,13 +128,15 @@ module Aws::SecurityHub
     #     locations will be searched for credentials:
     #
     #     * `Aws.config[:credentials]`
-    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * The `:access_key_id`, `:secret_access_key`, `:session_token`, and
+    #       `:account_id` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'],
+    #       ENV['AWS_SESSION_TOKEN'], and ENV['AWS_ACCOUNT_ID']
     #     * `~/.aws/credentials`
     #     * `~/.aws/config`
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
-    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
     #       enable retries and extended timeouts. Instance profile credential
     #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
     #       to true.
@@ -145,6 +154,8 @@ module Aws::SecurityHub
     #     * `~/.aws/config`
     #
     #   @option options [String] :access_key_id
+    #
+    #   @option options [String] :account_id
     #
     #   @option options [Boolean] :active_endpoint_cache (false)
     #     When set to `true`, a thread polling for endpoints will be running in
@@ -196,10 +207,16 @@ module Aws::SecurityHub
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -240,10 +257,33 @@ module Aws::SecurityHub
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [String] :request_checksum_calculation ("when_supported")
+    #     Determines when a checksum will be calculated for request payloads. Values are:
+    #
+    #     * `when_supported` - (default) When set, a checksum will be
+    #       calculated for all request payloads of operations modeled with the
+    #       `httpChecksum` trait where `requestChecksumRequired` is `true` and/or a
+    #       `requestAlgorithmMember` is modeled.
+    #     * `when_required` - When set, a checksum will only be calculated for
+    #       request payloads of operations modeled with the  `httpChecksum` trait where
+    #       `requestChecksumRequired` is `true` or where a `requestAlgorithmMember`
+    #       is modeled and supplied.
+    #
     #   @option options [Integer] :request_min_compression_size_bytes (10240)
     #     The minimum size in bytes that triggers compression for request
     #     bodies. The value must be non-negative integer value between 0
     #     and 10485780 bytes inclusive.
+    #
+    #   @option options [String] :response_checksum_validation ("when_supported")
+    #     Determines when checksum validation will be performed on response payloads. Values are:
+    #
+    #     * `when_supported` - (default) When set, checksum validation is performed on all
+    #       response payloads of operations modeled with the `httpChecksum` trait where
+    #       `responseAlgorithms` is modeled, except when no modeled checksum algorithms
+    #       are supported.
+    #     * `when_required` - When set, checksum validation is not performed on
+    #       response payloads of operations unless the checksum algorithm is supported and
+    #       the `requestValidationModeMember` member is set to `ENABLED`.
     #
     #   @option options [Proc] :retry_backoff
     #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
@@ -289,15 +329,24 @@ module Aws::SecurityHub
     #       throttling.  This is a provisional mode that may change behavior
     #       in the future.
     #
-    #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
+    #
+    #   @option options [Array] :sigv4a_signing_region_set
+    #     A list of regions that should be signed with SigV4a signing. When
+    #     not passed, a default `:sigv4a_signing_region_set` is searched for
+    #     in the following locations:
+    #
+    #     * `Aws.config[:sigv4a_signing_region_set]`
+    #     * `ENV['AWS_SIGV4A_SIGNING_REGION_SET']`
+    #     * `~/.aws/config`
     #
     #   @option options [Boolean] :stub_responses (false)
     #     Causes the client to return stubbed responses. By default
@@ -307,6 +356,16 @@ module Aws::SecurityHub
     #
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
+    #
+    #   @option options [Aws::Telemetry::TelemetryProviderBase] :telemetry_provider (Aws::Telemetry::NoOpTelemetryProvider)
+    #     Allows you to provide a telemetry provider, which is used to
+    #     emit telemetry data. By default, uses `NoOpTelemetryProvider` which
+    #     will not record or emit any telemetry data. The SDK supports the
+    #     following telemetry providers:
+    #
+    #     * OpenTelemetry (OTel) - To use the OTel provider, install and require the
+    #     `opentelemetry-sdk` gem and then, pass in an instance of a
+    #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
     #     A Bearer Token Provider. This can be an instance of any one of the
@@ -335,52 +394,75 @@ module Aws::SecurityHub
     #     sending the request.
     #
     #   @option options [Aws::SecurityHub::EndpointProvider] :endpoint_provider
-    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::SecurityHub::EndpointParameters`
+    #     The endpoint provider used to resolve endpoints. Any object that responds to
+    #     `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to
+    #     `Aws::SecurityHub::EndpointParameters`.
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [OpenSSL::X509::Certificate] :ssl_cert
+    #     Sets a client certificate when creating http connections.
+    #
+    #   @option options [OpenSSL::PKey] :ssl_key
+    #     Sets a client key when creating http connections.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -388,6 +470,13 @@ module Aws::SecurityHub
 
     # @!group API Operations
 
+    # <note markdown="1"> We recommend using Organizations instead of Security Hub invitations
+    # to manage your member accounts. For information, see [Managing
+    # Security Hub administrator and member accounts with Organizations][1]
+    # in the *Security Hub User Guide*.
+    #
+    #  </note>
+    #
     # Accepts the invitation to be a member account and be monitored by the
     # Security Hub administrator account that the invitation was sent from.
     #
@@ -397,6 +486,10 @@ module Aws::SecurityHub
     # When the member account accepts the invitation, permission is granted
     # to the administrator account to view findings generated in the member
     # account.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html
     #
     # @option params [required, String] :administrator_id
     #   The account ID of the Security Hub administrator account that sent the
@@ -599,7 +692,8 @@ module Aws::SecurityHub
     #   resp.standards_subscriptions[0].standards_input #=> Hash
     #   resp.standards_subscriptions[0].standards_input["NonEmptyString"] #=> String
     #   resp.standards_subscriptions[0].standards_status #=> String, one of "PENDING", "READY", "FAILED", "DELETING", "INCOMPLETE"
-    #   resp.standards_subscriptions[0].standards_status_reason.status_reason_code #=> String, one of "NO_AVAILABLE_CONFIGURATION_RECORDER", "INTERNAL_ERROR"
+    #   resp.standards_subscriptions[0].standards_controls_updatable #=> String, one of "READY_FOR_UPDATES", "NOT_READY_FOR_UPDATES"
+    #   resp.standards_subscriptions[0].standards_status_reason.status_reason_code #=> String, one of "NO_AVAILABLE_CONFIGURATION_RECORDER", "MAXIMUM_NUMBER_OF_CONFIG_RULES_EXCEEDED", "INTERNAL_ERROR"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchDisableStandards AWS API Documentation
     #
@@ -675,7 +769,8 @@ module Aws::SecurityHub
     #   resp.standards_subscriptions[0].standards_input #=> Hash
     #   resp.standards_subscriptions[0].standards_input["NonEmptyString"] #=> String
     #   resp.standards_subscriptions[0].standards_status #=> String, one of "PENDING", "READY", "FAILED", "DELETING", "INCOMPLETE"
-    #   resp.standards_subscriptions[0].standards_status_reason.status_reason_code #=> String, one of "NO_AVAILABLE_CONFIGURATION_RECORDER", "INTERNAL_ERROR"
+    #   resp.standards_subscriptions[0].standards_controls_updatable #=> String, one of "READY_FOR_UPDATES", "NOT_READY_FOR_UPDATES"
+    #   resp.standards_subscriptions[0].standards_status_reason.status_reason_code #=> String, one of "NO_AVAILABLE_CONFIGURATION_RECORDER", "MAXIMUM_NUMBER_OF_CONFIG_RULES_EXCEEDED", "INTERNAL_ERROR"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchEnableStandards AWS API Documentation
     #
@@ -1055,7 +1150,7 @@ module Aws::SecurityHub
     #   resp.configuration_policy_associations #=> Array
     #   resp.configuration_policy_associations[0].configuration_policy_id #=> String
     #   resp.configuration_policy_associations[0].target_id #=> String
-    #   resp.configuration_policy_associations[0].target_type #=> String, one of "ACCOUNT", "ORGANIZATIONAL_UNIT"
+    #   resp.configuration_policy_associations[0].target_type #=> String, one of "ACCOUNT", "ORGANIZATIONAL_UNIT", "ROOT"
     #   resp.configuration_policy_associations[0].association_type #=> String, one of "INHERITED", "APPLIED"
     #   resp.configuration_policy_associations[0].updated_at #=> Time
     #   resp.configuration_policy_associations[0].association_status #=> String, one of "PENDING", "SUCCESS", "FAILED"
@@ -1192,6 +1287,10 @@ module Aws::SecurityHub
 
     # For a batch of security controls and standards, identifies whether
     # each control is currently enabled or disabled in a standard.
+    #
+    # Calls to this operation return a `RESOURCE_NOT_FOUND_EXCEPTION` error
+    # when the standard subscription for the association has a
+    # `NOT_READY_FOR_UPDATES` value for `StandardsControlsUpdatable`.
     #
     # @option params [required, Array<Types::StandardsControlAssociationId>] :standards_control_association_ids
     #   An array with one or more objects that includes a security control
@@ -1796,7 +1895,7 @@ module Aws::SecurityHub
     # account and their member accounts. Member accounts can update findings
     # for their account.
     #
-    # Updates from `BatchUpdateFindings` do not affect the value of
+    # Updates from `BatchUpdateFindings` don't affect the value of
     # `UpdatedAt` for a finding.
     #
     # Administrator and member accounts can use `BatchUpdateFindings` to
@@ -2028,6 +2127,10 @@ module Aws::SecurityHub
     # @option params [required, Array<Types::StandardsControlAssociationUpdate>] :standards_control_association_updates
     #   Updates the enablement status of a security control in a specified
     #   standard.
+    #
+    #   Calls to this operation return a `RESOURCE_NOT_FOUND_EXCEPTION` error
+    #   when the standard subscription for the control has
+    #   `StandardsControlsUpdatable` value `NOT_READY_FOR_UPDATES`.
     #
     # @return [Types::BatchUpdateStandardsControlAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2599,7 +2702,8 @@ module Aws::SecurityHub
     # from the home Region.
     #
     # @option params [required, String] :name
-    #   The name of the configuration policy.
+    #   The name of the configuration policy. Alphanumeric characters and the
+    #   following ASCII characters are permitted: `-, ., !, *, /`.
     #
     # @option params [String] :description
     #   The description of the configuration policy.
@@ -2788,11 +2892,16 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Used to enable finding aggregation. Must be called from the
-    # aggregation Region.
+    # <note markdown="1"> The *aggregation Region* is now called the *home Region*.
     #
-    # For more details about cross-Region replication, see [Configuring
-    # finding aggregation][1] in the *Security Hub User Guide*.
+    #  </note>
+    #
+    # Used to enable cross-Region aggregation. This operation can be invoked
+    # from the home Region only.
+    #
+    # For information about how cross-Region aggregation works, see
+    # [Understanding cross-Region aggregation in Security Hub][1] in the
+    # *Security Hub User Guide*.
     #
     #
     #
@@ -2809,29 +2918,35 @@ module Aws::SecurityHub
     #
     #   The options are as follows:
     #
-    #   * `ALL_REGIONS` - Indicates to aggregate findings from all of the
-    #     Regions where Security Hub is enabled. When you choose this option,
-    #     Security Hub also automatically aggregates findings from new Regions
-    #     as Security Hub supports them and you opt into them.
+    #   * `ALL_REGIONS` - Aggregates findings from all of the Regions where
+    #     Security Hub is enabled. When you choose this option, Security Hub
+    #     also automatically aggregates findings from new Regions as Security
+    #     Hub supports them and you opt into them.
     #
-    #   * `ALL_REGIONS_EXCEPT_SPECIFIED` - Indicates to aggregate findings
-    #     from all of the Regions where Security Hub is enabled, except for
-    #     the Regions listed in the `Regions` parameter. When you choose this
-    #     option, Security Hub also automatically aggregates findings from new
-    #     Regions as Security Hub supports them and you opt into them.
+    #   * `ALL_REGIONS_EXCEPT_SPECIFIED` - Aggregates findings from all of the
+    #     Regions where Security Hub is enabled, except for the Regions listed
+    #     in the `Regions` parameter. When you choose this option, Security
+    #     Hub also automatically aggregates findings from new Regions as
+    #     Security Hub supports them and you opt into them.
     #
-    #   * `SPECIFIED_REGIONS` - Indicates to aggregate findings only from the
-    #     Regions listed in the `Regions` parameter. Security Hub does not
+    #   * `SPECIFIED_REGIONS` - Aggregates findings only from the Regions
+    #     listed in the `Regions` parameter. Security Hub does not
     #     automatically aggregate findings from new Regions.
+    #
+    #   * `NO_REGIONS` - Aggregates no data because no Regions are selected as
+    #     linked Regions.
     #
     # @option params [Array<String>] :regions
     #   If `RegionLinkingMode` is `ALL_REGIONS_EXCEPT_SPECIFIED`, then this is
-    #   a space-separated list of Regions that do not aggregate findings to
-    #   the aggregation Region.
+    #   a space-separated list of Regions that don't replicate and send
+    #   findings to the home Region.
     #
     #   If `RegionLinkingMode` is `SPECIFIED_REGIONS`, then this is a
-    #   space-separated list of Regions that do aggregate findings to the
-    #   aggregation Region.
+    #   space-separated list of Regions that do replicate and send findings to
+    #   the home Region.
+    #
+    #   An `InvalidInputException` error results if you populate this field
+    #   while `RegionLinkingMode` is `NO_REGIONS`.
     #
     # @return [Types::CreateFindingAggregatorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3686,7 +3801,7 @@ module Aws::SecurityHub
     # owner accepts the invitation, the account becomes a member account in
     # Security Hub.
     #
-    # Accounts that are managed using Organizations do not receive an
+    # Accounts that are managed using Organizations don't receive an
     # invitation. They automatically become a member account in Security
     # Hub.
     #
@@ -3766,13 +3881,25 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Declines invitations to become a member account.
+    # <note markdown="1"> We recommend using Organizations instead of Security Hub invitations
+    # to manage your member accounts. For information, see [Managing
+    # Security Hub administrator and member accounts with Organizations][1]
+    # in the *Security Hub User Guide*.
+    #
+    #  </note>
+    #
+    # Declines invitations to become a Security Hub member account.
     #
     # A prospective member account uses this operation to decline an
     # invitation to become a member.
     #
-    # This operation is only called by member accounts that aren't part of
-    # an organization. Organization accounts don't receive invitations.
+    # Only member accounts that aren't part of an Amazon Web Services
+    # organization should use this operation. Organization accounts don't
+    # receive invitations.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html
     #
     # @option params [required, Array<String>] :account_ids
     #   The list of prospective member account IDs for which to decline an
@@ -3906,13 +4033,18 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Deletes a finding aggregator. When you delete the finding aggregator,
-    # you stop finding aggregation.
+    # <note markdown="1"> The *aggregation Region* is now called the *home Region*.
     #
-    # When you stop finding aggregation, findings that were already
-    # aggregated to the aggregation Region are still visible from the
-    # aggregation Region. New findings and finding updates are not
-    # aggregated.
+    #  </note>
+    #
+    # Deletes a finding aggregator. When you delete the finding aggregator,
+    # you stop cross-Region aggregation. Finding replication stops occurring
+    # from the linked Regions to the home Region.
+    #
+    # When you stop cross-Region aggregation, findings that were already
+    # replicated and sent to the home Region are still visible from the home
+    # Region. However, new findings and finding updates are no longer
+    # replicated and sent to the home Region.
     #
     # @option params [required, String] :finding_aggregator_arn
     #   The ARN of the finding aggregator to delete. To obtain the ARN, use
@@ -3987,15 +4119,26 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Deletes invitations received by the Amazon Web Services account to
-    # become a member account.
+    # <note markdown="1"> We recommend using Organizations instead of Security Hub invitations
+    # to manage your member accounts. For information, see [Managing
+    # Security Hub administrator and member accounts with Organizations][1]
+    # in the *Security Hub User Guide*.
+    #
+    #  </note>
+    #
+    # Deletes invitations to become a Security Hub member account.
     #
     # A Security Hub administrator account can use this operation to delete
-    # invitations sent to one or more member accounts.
+    # invitations sent to one or more prospective member accounts.
     #
     # This operation is only used to delete invitations that are sent to
-    # member accounts that aren't part of an organization. Organization
-    # accounts don't receive invitations.
+    # prospective member accounts that aren't part of an Amazon Web
+    # Services organization. Organization accounts don't receive
+    # invitations.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html
     #
     # @option params [required, Array<String>] :account_ids
     #   The list of member account IDs that received the invitations you want
@@ -4279,7 +4422,7 @@ module Aws::SecurityHub
     # You can optionally provide an integration ARN. If you provide an
     # integration ARN, then the results only include that integration.
     #
-    # If you do not provide an integration ARN, then the results include all
+    # If you don't provide an integration ARN, then the results include all
     # of the available product integrations.
     #
     # @option params [String] :next_token
@@ -4468,6 +4611,9 @@ module Aws::SecurityHub
     # For each control, the results include information about whether it is
     # currently enabled, the severity, and a link to remediation
     # information.
+    #
+    # This operation returns an empty list for standard subscriptions where
+    # `StandardsControlsUpdatable` has value `NOT_READY_FOR_UPDATES`.
     #
     # @option params [required, String] :standards_subscription_arn
     #   The ARN of a resource that represents your subscription to a supported
@@ -4886,7 +5032,7 @@ module Aws::SecurityHub
     #
     # @option params [Boolean] :enable_default_standards
     #   Whether to enable the security standards that Security Hub has
-    #   designated as automatically enabled. If you do not provide a value for
+    #   designated as automatically enabled. If you don't provide a value for
     #   `EnableDefaultStandards`, it is set to `true`. To not enable the
     #   automatically enabled standards, set `EnableDefaultStandards` to
     #   `false`.
@@ -5154,7 +5300,7 @@ module Aws::SecurityHub
     #
     #   resp.configuration_policy_id #=> String
     #   resp.target_id #=> String
-    #   resp.target_type #=> String, one of "ACCOUNT", "ORGANIZATIONAL_UNIT"
+    #   resp.target_type #=> String, one of "ACCOUNT", "ORGANIZATIONAL_UNIT", "ROOT"
     #   resp.association_type #=> String, one of "INHERITED", "APPLIED"
     #   resp.updated_at #=> Time
     #   resp.association_status #=> String, one of "PENDING", "SUCCESS", "FAILED"
@@ -5234,7 +5380,8 @@ module Aws::SecurityHub
     #   resp.standards_subscriptions[0].standards_input #=> Hash
     #   resp.standards_subscriptions[0].standards_input["NonEmptyString"] #=> String
     #   resp.standards_subscriptions[0].standards_status #=> String, one of "PENDING", "READY", "FAILED", "DELETING", "INCOMPLETE"
-    #   resp.standards_subscriptions[0].standards_status_reason.status_reason_code #=> String, one of "NO_AVAILABLE_CONFIGURATION_RECORDER", "INTERNAL_ERROR"
+    #   resp.standards_subscriptions[0].standards_controls_updatable #=> String, one of "READY_FOR_UPDATES", "NOT_READY_FOR_UPDATES"
+    #   resp.standards_subscriptions[0].standards_status_reason.status_reason_code #=> String, one of "NO_AVAILABLE_CONFIGURATION_RECORDER", "MAXIMUM_NUMBER_OF_CONFIG_RULES_EXCEEDED", "INTERNAL_ERROR"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetEnabledStandards AWS API Documentation
@@ -5246,7 +5393,13 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Returns the current finding aggregation configuration.
+    # <note markdown="1"> The *aggregation Region* is now called the *home Region*.
+    #
+    #  </note>
+    #
+    # Returns the current configuration in the calling account for
+    # cross-Region aggregation. A finding aggregator is a resource that
+    # establishes the home Region and any linked Regions.
     #
     # @option params [required, String] :finding_aggregator_arn
     #   The ARN of the finding aggregator to return details for. To obtain the
@@ -5310,52 +5463,52 @@ module Aws::SecurityHub
     #   Identifies which finding to get the finding history for.
     #
     # @option params [Time,DateTime,Date,Integer,String] :start_time
-    #   An ISO 8601-formatted timestamp that indicates the start time of the
-    #   requested finding history. A correctly formatted example is
-    #   `2020-05-21T20:16:34.724Z`. The value cannot contain spaces, and date
-    #   and time should be separated by `T`. For more information, see [RFC
-    #   3339 section 5.6, Internet Date/Time Format][1].
+    #   A timestamp that indicates the start time of the requested finding
+    #   history.
     #
     #   If you provide values for both `StartTime` and `EndTime`, Security Hub
     #   returns finding history for the specified time period. If you provide
     #   a value for `StartTime` but not for `EndTime`, Security Hub returns
     #   finding history from the `StartTime` to the time at which the API is
     #   called. If you provide a value for `EndTime` but not for `StartTime`,
-    #   Security Hub returns finding history from the [CreatedAt][2] timestamp
+    #   Security Hub returns finding history from the [CreatedAt][1] timestamp
     #   of the finding to the `EndTime`. If you provide neither `StartTime`
     #   nor `EndTime`, Security Hub returns finding history from the CreatedAt
     #   timestamp of the finding to the time at which the API is called. In
     #   all of these scenarios, the response is limited to 100 results, and
     #   the maximum time period is limited to 90 days.
     #
+    #   For more information about the validation and formatting of timestamp
+    #   fields in Security Hub, see [Timestamps][2].
     #
     #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
-    #   [2]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt
+    #   [2]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
     #
     # @option params [Time,DateTime,Date,Integer,String] :end_time
     #   An ISO 8601-formatted timestamp that indicates the end time of the
-    #   requested finding history. A correctly formatted example is
-    #   `2020-05-21T20:16:34.724Z`. The value cannot contain spaces, and date
-    #   and time should be separated by `T`. For more information, see [RFC
-    #   3339 section 5.6, Internet Date/Time Format][1].
+    #   requested finding history.
     #
     #   If you provide values for both `StartTime` and `EndTime`, Security Hub
     #   returns finding history for the specified time period. If you provide
     #   a value for `StartTime` but not for `EndTime`, Security Hub returns
     #   finding history from the `StartTime` to the time at which the API is
     #   called. If you provide a value for `EndTime` but not for `StartTime`,
-    #   Security Hub returns finding history from the [CreatedAt][2] timestamp
+    #   Security Hub returns finding history from the [CreatedAt][1] timestamp
     #   of the finding to the `EndTime`. If you provide neither `StartTime`
     #   nor `EndTime`, Security Hub returns finding history from the CreatedAt
     #   timestamp of the finding to the time at which the API is called. In
     #   all of these scenarios, the response is limited to 100 results, and
     #   the maximum time period is limited to 90 days.
     #
+    #   For more information about the validation and formatting of timestamp
+    #   fields in Security Hub, see [Timestamps][2].
     #
     #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
-    #   [2]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt
+    #   [2]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
     #
     # @option params [String] :next_token
     #   A token for pagination purposes. Provide `NULL` as the initial value.
@@ -5456,9 +5609,9 @@ module Aws::SecurityHub
 
     # Returns a list of findings that match the specified criteria.
     #
-    # If finding aggregation is enabled, then when you call `GetFindings`
-    # from the aggregation Region, the results include all of the matching
-    # findings from both the aggregation Region and the linked Regions.
+    # If cross-Region aggregation is enabled, then when you call
+    # `GetFindings` from the home Region, the results include all of the
+    # matching findings from both the home Region and linked Regions.
     #
     # @option params [Types::AwsSecurityFindingFilters] :filters
     #   The finding attributes used to define a condition to filter the
@@ -6382,7 +6535,7 @@ module Aws::SecurityHub
     # Lists and describes insights for the specified insight ARNs.
     #
     # @option params [Array<String>] :insight_arns
-    #   The ARNs of the insights to describe. If you do not provide any
+    #   The ARNs of the insights to describe. If you don't provide any
     #   insight ARNs, then `GetInsights` returns all of your custom insights.
     #   It does not return any managed insights.
     #
@@ -6825,9 +6978,20 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # <note markdown="1"> We recommend using Organizations instead of Security Hub invitations
+    # to manage your member accounts. For information, see [Managing
+    # Security Hub administrator and member accounts with Organizations][1]
+    # in the *Security Hub User Guide*.
+    #
+    #  </note>
+    #
     # Returns the count of all Security Hub membership invitations that were
-    # sent to the current member account, not including the currently
+    # sent to the calling member account, not including the currently
     # accepted invitation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html
     #
     # @return [Types::GetInvitationsCountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7082,12 +7246,20 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # <note markdown="1"> We recommend using Organizations instead of Security Hub invitations
+    # to manage your member accounts. For information, see [Managing
+    # Security Hub administrator and member accounts with Organizations][1]
+    # in the *Security Hub User Guide*.
+    #
+    #  </note>
+    #
     # Invites other Amazon Web Services accounts to become member accounts
     # for the Security Hub administrator account that the invitation is sent
     # from.
     #
-    # This operation is only used to invite accounts that do not belong to
-    # an organization. Organization accounts do not receive invitations.
+    # This operation is only used to invite accounts that don't belong to
+    # an Amazon Web Services organization. Organization accounts don't
+    # receive invitations.
     #
     # Before you can use this action to invite a member, you must first use
     # the `CreateMembers` action to create the member account in Security
@@ -7095,7 +7267,11 @@ module Aws::SecurityHub
     #
     # When the account owner enables Security Hub and accepts the invitation
     # to become a member account, the administrator account can view the
-    # findings generated from the member account.
+    # findings generated in the member account.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html
     #
     # @option params [required, Array<String>] :account_ids
     #   The list of account IDs of the Amazon Web Services accounts to invite
@@ -7393,7 +7569,7 @@ module Aws::SecurityHub
     #   resp.configuration_policy_association_summaries #=> Array
     #   resp.configuration_policy_association_summaries[0].configuration_policy_id #=> String
     #   resp.configuration_policy_association_summaries[0].target_id #=> String
-    #   resp.configuration_policy_association_summaries[0].target_type #=> String, one of "ACCOUNT", "ORGANIZATIONAL_UNIT"
+    #   resp.configuration_policy_association_summaries[0].target_type #=> String, one of "ACCOUNT", "ORGANIZATIONAL_UNIT", "ROOT"
     #   resp.configuration_policy_association_summaries[0].association_type #=> String, one of "INHERITED", "APPLIED"
     #   resp.configuration_policy_association_summaries[0].updated_at #=> Time
     #   resp.configuration_policy_association_summaries[0].association_status #=> String, one of "PENDING", "SUCCESS", "FAILED"
@@ -7470,9 +7646,9 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # If finding aggregation is enabled, then `ListFindingAggregators`
-    # returns the ARN of the finding aggregator. You can run this operation
-    # from any Region.
+    # If cross-Region aggregation is enabled, then `ListFindingAggregators`
+    # returns the Amazon Resource Name (ARN) of the finding aggregator. You
+    # can run this operation from any Amazon Web Services Region.
     #
     # @option params [String] :next_token
     #   The token returned with the previous set of results. Identifies the
@@ -7528,12 +7704,23 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Lists all Security Hub membership invitations that were sent to the
-    # current Amazon Web Services account.
+    # <note markdown="1"> We recommend using Organizations instead of Security Hub invitations
+    # to manage your member accounts. For information, see [Managing
+    # Security Hub administrator and member accounts with Organizations][1]
+    # in the *Security Hub User Guide*.
     #
-    # This operation is only used by accounts that are managed by
-    # invitation. Accounts that are managed using the integration with
-    # Organizations do not receive invitations.
+    #  </note>
+    #
+    # Lists all Security Hub membership invitations that were sent to the
+    # calling account.
+    #
+    # Only accounts that are managed by invitation can use this operation.
+    # Accounts that are managed using the integration with Organizations
+    # don't receive invitations.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return in the response.
@@ -7896,6 +8083,10 @@ module Aws::SecurityHub
     # Specifies whether a control is currently enabled or disabled in each
     # enabled standard in the calling account.
     #
+    # This operation omits standards control associations for standard
+    # subscriptions where `StandardsControlsUpdatable` has value
+    # `NOT_READY_FOR_UPDATES`.
+    #
     # @option params [required, String] :security_control_id
     #   The identifier of the control (identified with `SecurityControlId`,
     #   `SecurityControlArn`, or a mix of both parameters) that you want to
@@ -8050,8 +8241,9 @@ module Aws::SecurityHub
     # Region.
     #
     # @option params [required, String] :configuration_policy_identifier
-    #   The Amazon Resource Name (ARN) or universally unique identifier (UUID)
-    #   of the configuration policy.
+    #   The Amazon Resource Name (ARN) of a configuration policy, the
+    #   universally unique identifier (UUID) of a configuration policy, or a
+    #   value of `SELF_MANAGED_SECURITY_HUB` for a self-managed configuration.
     #
     # @option params [required, Types::Target] :target
     #   The identifier of the target account, organizational unit, or the root
@@ -8106,7 +8298,7 @@ module Aws::SecurityHub
     #
     #   resp.configuration_policy_id #=> String
     #   resp.target_id #=> String
-    #   resp.target_type #=> String, one of "ACCOUNT", "ORGANIZATIONAL_UNIT"
+    #   resp.target_type #=> String, one of "ACCOUNT", "ORGANIZATIONAL_UNIT", "ROOT"
     #   resp.association_type #=> String, one of "INHERITED", "APPLIED"
     #   resp.updated_at #=> Time
     #   resp.association_status #=> String, one of "PENDING", "SUCCESS", "FAILED"
@@ -8135,8 +8327,9 @@ module Aws::SecurityHub
     #   to disassociate from the specified configuration.
     #
     # @option params [required, String] :configuration_policy_identifier
-    #   The Amazon Resource Name (ARN) or universally unique identifier (UUID)
-    #   of the configuration policy.
+    #   The Amazon Resource Name (ARN) of a configuration policy, the
+    #   universally unique identifier (UUID) of a configuration policy, or a
+    #   value of `SELF_MANAGED_SECURITY_HUB` for a self-managed configuration.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -8306,7 +8499,8 @@ module Aws::SecurityHub
     #   of the configuration policy.
     #
     # @option params [String] :name
-    #   The name of the configuration policy.
+    #   The name of the configuration policy. Alphanumeric characters and the
+    #   following ASCII characters are permitted: `-, ., !, *, /`.
     #
     # @option params [String] :description
     #   The description of the configuration policy.
@@ -8497,12 +8691,16 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Updates the finding aggregation configuration. Used to update the
-    # Region linking mode and the list of included or excluded Regions. You
-    # cannot use `UpdateFindingAggregator` to change the aggregation Region.
+    # <note markdown="1"> The *aggregation Region* is now called the *home Region*.
     #
-    # You must run `UpdateFindingAggregator` from the current aggregation
-    # Region.
+    #  </note>
+    #
+    # Updates cross-Region aggregation settings. You can use this operation
+    # to update the Region linking mode and the list of included or excluded
+    # Amazon Web Services Regions. However, you can't use this operation to
+    # change the home Region.
+    #
+    # You can invoke this operation from the current home Region only.
     #
     # @option params [required, String] :finding_aggregator_arn
     #   The ARN of the finding aggregator. To obtain the ARN, use
@@ -8519,29 +8717,35 @@ module Aws::SecurityHub
     #
     #   The options are as follows:
     #
-    #   * `ALL_REGIONS` - Indicates to aggregate findings from all of the
-    #     Regions where Security Hub is enabled. When you choose this option,
-    #     Security Hub also automatically aggregates findings from new Regions
-    #     as Security Hub supports them and you opt into them.
+    #   * `ALL_REGIONS` - Aggregates findings from all of the Regions where
+    #     Security Hub is enabled. When you choose this option, Security Hub
+    #     also automatically aggregates findings from new Regions as Security
+    #     Hub supports them and you opt into them.
     #
-    #   * `ALL_REGIONS_EXCEPT_SPECIFIED` - Indicates to aggregate findings
-    #     from all of the Regions where Security Hub is enabled, except for
-    #     the Regions listed in the `Regions` parameter. When you choose this
-    #     option, Security Hub also automatically aggregates findings from new
-    #     Regions as Security Hub supports them and you opt into them.
+    #   * `ALL_REGIONS_EXCEPT_SPECIFIED` - Aggregates findings from all of the
+    #     Regions where Security Hub is enabled, except for the Regions listed
+    #     in the `Regions` parameter. When you choose this option, Security
+    #     Hub also automatically aggregates findings from new Regions as
+    #     Security Hub supports them and you opt into them.
     #
-    #   * `SPECIFIED_REGIONS` - Indicates to aggregate findings only from the
-    #     Regions listed in the `Regions` parameter. Security Hub does not
+    #   * `SPECIFIED_REGIONS` - Aggregates findings only from the Regions
+    #     listed in the `Regions` parameter. Security Hub does not
     #     automatically aggregate findings from new Regions.
+    #
+    #   * `NO_REGIONS` - Aggregates no data because no Regions are selected as
+    #     linked Regions.
     #
     # @option params [Array<String>] :regions
     #   If `RegionLinkingMode` is `ALL_REGIONS_EXCEPT_SPECIFIED`, then this is
-    #   a space-separated list of Regions that do not aggregate findings to
-    #   the aggregation Region.
+    #   a space-separated list of Regions that don't replicate and send
+    #   findings to the home Region.
     #
     #   If `RegionLinkingMode` is `SPECIFIED_REGIONS`, then this is a
-    #   space-separated list of Regions that do aggregate findings to the
-    #   aggregation Region.
+    #   space-separated list of Regions that do replicate and send findings to
+    #   the home Region.
+    #
+    #   An `InvalidInputException` error results if you populate this field
+    #   while `RegionLinkingMode` is `NO_REGIONS`.
     #
     # @return [Types::UpdateFindingAggregatorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8602,12 +8806,18 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # `UpdateFindings` is deprecated. Instead of `UpdateFindings`, use
-    # `BatchUpdateFindings`.
+    # `UpdateFindings` is a deprecated operation. Instead of
+    # `UpdateFindings`, use the `BatchUpdateFindings` operation.
     #
-    # Updates the `Note` and `RecordState` of the Security Hub-aggregated
-    # findings that the filter attributes specify. Any member account that
-    # can view the finding also sees the update to the finding.
+    # The `UpdateFindings` operation updates the `Note` and `RecordState` of
+    # the Security Hub aggregated findings that the filter attributes
+    # specify. Any member account that can view the finding can also see the
+    # update to the finding.
+    #
+    # Finding updates made with `UpdateFindings` aren't persisted if the
+    # same finding is later updated by the finding provider through the
+    # `BatchImportFindings` operation. In addition, Security Hub doesn't
+    # record updates made with `UpdateFindings` in the finding history.
     #
     # @option params [required, Types::AwsSecurityFindingFilters] :filters
     #   A collection of attributes that specify which findings you want to
@@ -10248,6 +10458,16 @@ module Aws::SecurityHub
     #   automatically. To not automatically enable new controls, set this to
     #   `false`.
     #
+    #   When you automatically enable new controls, you can interact with the
+    #   controls in the console and programmatically immediately after
+    #   release. However, automatically enabled controls have a temporary
+    #   default status of `DISABLED`. It can take up to several days for
+    #   Security Hub to process the control release and designate the control
+    #   as `ENABLED` in your account. During the processing period, you can
+    #   manually enable or disable a control, and Security Hub will maintain
+    #   that designation regardless of whether you have `AutoEnableControls`
+    #   set to `true`.
+    #
     # @option params [String] :control_finding_generator
     #   Updates whether the calling account has consolidated control findings
     #   turned on. If the value for this field is set to `SECURITY_CONTROL`,
@@ -10292,6 +10512,10 @@ module Aws::SecurityHub
 
     # Used to control whether an individual security standard control is
     # enabled or disabled.
+    #
+    # Calls to this operation return a `RESOURCE_NOT_FOUND_EXCEPTION` error
+    # when the standard subscription for the control has
+    # `StandardsControlsUpdatable` value `NOT_READY_FOR_UPDATES`.
     #
     # @option params [required, String] :standards_control_arn
     #   The ARN of the security standard control to enable or disable.
@@ -10339,14 +10563,19 @@ module Aws::SecurityHub
     # @api private
     def build_request(operation_name, params = {})
       handlers = @handlers.for(operation_name)
+      tracer = config.telemetry_provider.tracer_provider.tracer(
+        Aws::Telemetry.module_to_tracer_name('Aws::SecurityHub')
+      )
       context = Seahorse::Client::RequestContext.new(
         operation_name: operation_name,
         operation: config.api.operation(operation_name),
         client: self,
         params: params,
-        config: config)
+        config: config,
+        tracer: tracer
+      )
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.97.0'
+      context[:gem_version] = '1.130.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
