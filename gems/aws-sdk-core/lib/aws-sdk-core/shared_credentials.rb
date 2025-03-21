@@ -40,7 +40,7 @@ module Aws
         )
         @credentials = config.credentials(profile: @profile_name)
       end
-      @metrics = options[:metrics]
+      @metrics = options.delete(:metrics)
     end
 
     # @return [String]

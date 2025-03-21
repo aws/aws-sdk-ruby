@@ -90,7 +90,7 @@ module Aws
       @token = nil
       @no_refresh_until = nil
       @async_refresh = false
-      @metrics = options[:metrics]
+      @metrics = options.delete(:metrics)
       super
     end
 

@@ -14,7 +14,7 @@ module Aws
       @secret_access_key = secret_access_key
       @session_token = session_token
       @account_id = kwargs[:account_id]
-      @metrics = kwargs[:metrics]
+      @metrics = kwargs.delete(:metrics)
     end
 
     # @return [String]

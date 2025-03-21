@@ -77,7 +77,7 @@ module Aws
       @http_debug_output = options[:http_debug_output]
       @backoff = backoff(options[:backoff])
       @async_refresh = false
-      @metrics = options[:metrics]
+      @metrics = options.delete(:metrics)
       super
     end
 
