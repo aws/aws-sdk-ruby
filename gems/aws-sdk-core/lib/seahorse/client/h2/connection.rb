@@ -27,7 +27,7 @@ module Seahorse
           ssl_ca_bundle: nil,
           ssl_ca_directory: nil,
           ssl_ca_store: nil,
-          enable_alpn: false
+          enable_alpn: true
         }
 
         # chunk read size at socket
