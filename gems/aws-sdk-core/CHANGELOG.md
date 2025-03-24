@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add feature id tracking for credentials.
+
 3.220.1 (2025-03-06)
 ------------------
 
