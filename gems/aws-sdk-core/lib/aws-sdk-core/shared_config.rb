@@ -135,7 +135,7 @@ module Aws
           cfg = {
             role_arn: entry['role_arn'],
             web_identity_token_file: entry['web_identity_token_file'],
-            role_session_name: entry['role_session_name'],
+            role_session_name: entry['role_session_name']
           }
           cfg[:region] = opts[:region] if opts[:region]
           with_metrics('CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN') do
@@ -262,6 +262,7 @@ module Aws
           opts[:credentials], metrics = with_metrics('CREDENTIALS_PROFILE_SOURCE_PROFILE') do
             resolve_source_profile(opts[:source_profile], opts)
           end
+          metrics.unshift('CREDENTIALS_PROFILE_SOURCE_PROFILE')
           if opts[:credentials]
             opts[:role_session_name] ||= prof_cfg['role_session_name']
             opts[:role_session_name] ||= 'default_session'
@@ -288,6 +289,7 @@ module Aws
               chain_config
             )
           end
+          metrics.unshift('CREDENTIALS_PROFILE_NAMED_PROVIDER')
           if opts[:credentials]
             opts[:role_session_name] ||= prof_cfg['role_session_name']
             opts[:role_session_name] ||= 'default_session'
@@ -324,7 +326,7 @@ module Aws
       end
 
       if (creds = credentials(profile: profile))
-        [creds, %w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE]] # static credentials
+        [creds, ['CREDENTIALS_PROFILE']] # static credentials
       elsif profile_config && profile_config['source_profile']
         opts.delete(:source_profile)
         assume_role_credentials_from_config(opts.merge(profile: profile))
@@ -345,9 +347,9 @@ module Aws
           http_open_timeout: config ? config.instance_profile_credentials_timeout : 1,
           http_read_timeout: config ? config.instance_profile_credentials_timeout : 1,
         ),
-        %w[CREDENTIALS_PROFILE_NAMED_PROVIDER CREDENTIALS_IMDS]]
+         ['CREDENTIALS_IMDS']]
       when 'EcsContainer'
-        [ECSCredentials.new, %w[CREDENTIALS_PROFILE_NAMED_PROVIDER CREDENTIALS_HTTP]]
+        [ECSCredentials.new, ['CREDENTIALS_HTTP']]
       else
         raise Errors::InvalidCredentialSourceError, "Unsupported credential_source: #{credential_source}"
       end
