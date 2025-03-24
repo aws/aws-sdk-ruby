@@ -332,8 +332,8 @@ module Aws
         [creds, ['CREDENTIALS_PROFILE']] # static credentials
       elsif profile_config && profile_config['source_profile']
         opts.delete(:source_profile)
-        provider = assume_role_credentials_from_config(opts.merge(profile: profile))
-        [provider, provider.metrics]
+        creds = assume_role_credentials_from_config(opts.merge(profile: profile))
+        [creds, creds.metrics]
       elsif (provider = assume_role_web_identity_credentials_from_config(opts.merge(profile: profile)))
         [provider.credentials, provider.metrics] if provider.credentials.set?
       elsif (provider = assume_role_process_credentials_from_config(profile))
