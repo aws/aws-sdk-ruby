@@ -90,10 +90,7 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
 
       def self.metric(*metrics, &block)
         Thread.current[:aws_sdk_core_user_agent_metric] ||= []
-        metrics = metrics.map do |metric|
-          METRICS[metric]
-        end
-        metrics = metrics.compact
+        metrics = metrics.map { |metric| METRICS[metric] }.compact
         Thread.current[:aws_sdk_core_user_agent_metric].concat(metrics)
         block.call
       ensure
@@ -231,7 +228,7 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
         end
       end
 
-      handler(Handler, step: :sign, priority: 49)
+      handler(Handler, step: :sign, priority: 5)
     end
   end
 end
