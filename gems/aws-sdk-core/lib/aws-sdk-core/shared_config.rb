@@ -132,7 +132,6 @@ module Aws
       if @config_enabled && @parsed_config
         entry = @parsed_config.fetch(p, {})
         if entry['web_identity_token_file'] && entry['role_arn']
-          # TODO: CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN (q)
           cfg = {
             role_arn: entry['role_arn'],
             web_identity_token_file: entry['web_identity_token_file'],
@@ -259,7 +258,6 @@ module Aws
             'a credential_source. For assume role credentials, must '\
             'provide only source_profile or credential_source, not both.'
         elsif opts[:source_profile]
-          # TODO: CREDENTIALS_PROFILE_SOURCE_PROFILE (o)
           opts[:visited_profiles] ||= Set.new
           opts[:credentials], metrics = with_metrics('CREDENTIALS_PROFILE_SOURCE_PROFILE') do
             resolve_source_profile(opts[:source_profile], opts)
@@ -284,7 +282,6 @@ module Aws
               ' source_profile does not have credentials.'
           end
         elsif credential_source
-          # TODO: CREDENTIALS_PROFILE_NAMED_PROVIDER (p)
           opts[:credentials], metrics = with_metrics('CREDENTIALS_PROFILE_NAMED_PROVIDER') do
             credentials_from_source(
               credential_source,
@@ -327,19 +324,15 @@ module Aws
       end
 
       if (creds = credentials(profile: profile))
-        # TODO: CREDENTIALS_PROFILE (n)
         [creds, %w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE]] # static credentials
       elsif profile_config && profile_config['source_profile']
         opts.delete(:source_profile)
         assume_role_credentials_from_config(opts.merge(profile: profile))
       elsif (provider = assume_role_web_identity_credentials_from_config(opts.merge(profile: profile)))
-        # TODO: CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN and CREDENTIALS_STS_ASSUME_ROLE_WEB_ID (qk)
         [provider.credentials, provider.metrics] if provider.credentials.set?
       elsif (provider = assume_role_process_credentials_from_config(profile))
-        # TODO: CREDENTIALS_PROFILE_PROCESS and CREDENTIALS_PROCESS (vw)
         [provider.credentials, %w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE_PROCESS CREDENTIALS_PROCESS]] if provider.credentials.set?
       elsif (provider = sso_credentials_from_config(profile: profile))
-        # TODO: CREDENTIALS_PROFILE_SSO and CREDENTIALS_SSO (rs) or CREDENTIALS_PROFILE_SSO_LEGACY and CREDENTIALS_SSO_LEGACY (tu)
         [provider.credentials, provider.metrics] if provider.credentials.set?
       end
     end
@@ -347,7 +340,6 @@ module Aws
     def credentials_from_source(credential_source, config)
       case credential_source
       when 'Ec2InstanceMetadata'
-        # TODO: CREDENTIALS_IMDS (0)
         [InstanceProfileCredentials.new(
           retries: config ? config.instance_profile_credentials_retries : 0,
           http_open_timeout: config ? config.instance_profile_credentials_timeout : 1,
@@ -355,7 +347,6 @@ module Aws
         ),
         %w[CREDENTIALS_PROFILE_NAMED_PROVIDER CREDENTIALS_IMDS]]
       when 'EcsContainer'
-        # TODO: CREDENTIALS_HTTP (z)
         [ECSCredentials.new, %w[CREDENTIALS_PROFILE_NAMED_PROVIDER CREDENTIALS_HTTP]]
       else
         raise Errors::InvalidCredentialSourceError, "Unsupported credential_source: #{credential_source}"

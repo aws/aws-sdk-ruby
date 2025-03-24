@@ -75,9 +75,6 @@ module Aws
       # read from token file everytime it refreshes
       @assume_role_web_identity_params[:web_identity_token] = _token_from_file(@token_file)
 
-      # TODO: CREDENTIALS_STS_ASSUME_ROLE_WEB_ID (k)
-      # Call will include at least "q" (from #assume_role_web_identity_credentials_from_config)
-      # OR call will include at least "h" (from #assume_role_web_identity_credentials)
       resp = client.assume_role_with_web_identity(@assume_role_web_identity_params)
       creds = resp.credentials
       @credentials = Credentials.new(

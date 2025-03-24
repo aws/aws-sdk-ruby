@@ -69,7 +69,6 @@ module Aws
     def initialize(options = {})
       options = options.select {|k, v| !v.nil? }
       if (options[:sso_session])
-        # TODO: CREDENTIALS_PROFILE_SSO (r)
         missing_keys = TOKEN_PROVIDER_REQUIRED_OPTS.select { |k| options[k].nil? }
         unless missing_keys.empty?
           raise ArgumentError, "Missing required keys: #{missing_keys}"
@@ -93,7 +92,6 @@ module Aws
           @client = Aws::SSO::Client.new(client_opts)
         end
       else # legacy behavior
-        # TODO: CREDENTIALS_PROFILE_SSO_LEGACY (t)
         missing_keys = LEGACY_REQUIRED_OPTS.select { |k| options[k].nil? }
         unless missing_keys.empty?
           raise ArgumentError, "Missing required keys: #{missing_keys}"
@@ -144,16 +142,12 @@ module Aws
     def refresh
       c = if @legacy
             cached_token = read_cached_token
-            # TODO: CREDENTIALS_SSO_LEGACY (u)
-            # Call will include at least "t" (from #initialize)
             @client.get_role_credentials(
               account_id: @sso_account_id,
               role_name: @sso_role_name,
               access_token: cached_token['accessToken']
             ).role_credentials
           else
-            # TODO: CREDENTIALS_SSO (s)
-            # Call will include at least "r" (from #initialize)
             @client.get_role_credentials(
               account_id: @sso_account_id,
               role_name: @sso_role_name,

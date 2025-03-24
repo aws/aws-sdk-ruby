@@ -110,7 +110,6 @@ module Aws
       ]
     end
 
-    # TODO: CREDENTIALS_PROFILE (n)??
     def static_credentials(options)
       if options[:config]
         credentials = Credentials.new(
@@ -171,7 +170,6 @@ module Aws
     end
 
 
-    # TODO: CREDENTIALS_ENV_VARS (g)??
     def env_credentials(_options)
       key =    %w[AWS_ACCESS_KEY_ID AMAZON_ACCESS_KEY_ID AWS_ACCESS_KEY]
       secret = %w[AWS_SECRET_ACCESS_KEY AMAZON_SECRET_ACCESS_KEY AWS_SECRET_KEY]
@@ -239,7 +237,6 @@ module Aws
     def assume_role_web_identity_credentials(options)
       region = options[:config].region if options[:config]
       if (role_arn = ENV['AWS_ROLE_ARN']) && (token_file = ENV['AWS_WEB_IDENTITY_TOKEN_FILE'])
-        # TODO: CREDENTIALS_ENV_VARS_STS_WEB_ID_TOKEN (h)
         cfg = {
           role_arn: role_arn,
           web_identity_token_file: token_file,
@@ -264,12 +261,10 @@ module Aws
       profile_name = determine_profile_name(options)
       if ENV['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] ||
          ENV['AWS_CONTAINER_CREDENTIALS_FULL_URI']
-        # TODO: CREDENTIALS_HTTP (z)
         credentials = ECSCredentials.new(options)
         credentials.metrics = ['CREDENTIALS_HTTP']
         credentials
       else
-        # TODO: CREDENTIALS_IMDS (0)
         credentials = InstanceProfileCredentials.new(options.merge(profile: profile_name))
         credentials.metrics = ['CREDENTIALS_IMDS']
         credentials

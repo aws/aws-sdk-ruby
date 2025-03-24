@@ -66,9 +66,6 @@ module Aws
     def refresh
       resp = @client.assume_role(@assume_role_params)
       creds = resp.credentials
-      # TODO: CREDENTIALS_STS_ASSUME_ROLE
-      # Call will include "o" (from #assume_role_from_profile) and "n"/"qk"/"vw"/"rs"/"tu" (from #resolve_source_profile)
-      # OR call will include "p" (from #assume_role_from_profile) and "0"/"z" (from #credentials_from_source)
       @credentials = Credentials.new(
         creds.access_key_id,
         creds.secret_access_key,

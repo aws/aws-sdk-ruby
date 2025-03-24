@@ -68,12 +68,9 @@ module Aws
           end
 
           metrics = []
-          # Add check if flag isn't set, then emit Credentials CODE
           if !credentials.metrics
-            puts "!!!!! Credentials from code !!!!!"
             metrics << 'CREDENTIALS_CODE'
           else
-            puts "!!!!! Credential type !!!!!"
             puts credentials.class.name
             (metrics << credentials.metrics).flatten!
           end

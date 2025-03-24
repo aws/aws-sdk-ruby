@@ -33,7 +33,6 @@ module Aws
         warn('Passing a single string to Aws::ProcessCredentials.new '\
              'is insecure, please use use an array of system arguments instead')
       end
-      # TODO: CREDENTIALS_PROFILE_PROCESS (v)
       @process = process
       @credentials = credentials_from_process
       @async_refresh = false
@@ -59,7 +58,6 @@ module Aws
         )
       end
 
-      # TODO: CREDENTIALS_PROCESS (w)
       begin
         creds_json = Aws::Json.load(raw_out)
       rescue Aws::Json::ParseError
