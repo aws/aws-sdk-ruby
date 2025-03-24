@@ -67,7 +67,6 @@ module Aws
     #   with an instance of this object when
     #   AWS credentials are required and need to be refreshed.
     def initialize(options = {})
-      @metrics = options.delete(:metrics)
       options = options.select {|k, v| !v.nil? }
       if (options[:sso_session])
         # TODO: CREDENTIALS_PROFILE_SSO (r)
@@ -118,13 +117,12 @@ module Aws
 
       @async_refresh = true
       super
-      @legacy ? @metrics << 'CREDENTIALS_SSO_LEGACY' : @metrics << 'CREDENTIALS_SSO' if @metrics
     end
 
     # @return [SSO::Client]
     attr_reader :client
 
-    attr_reader :metrics
+    attr_accessor :metrics
 
     private
 
@@ -148,19 +146,19 @@ module Aws
             cached_token = read_cached_token
             # TODO: CREDENTIALS_SSO_LEGACY (u)
             # Call will include at least "t" (from #initialize)
-            with_metric { @client.get_role_credentials(
+            @client.get_role_credentials(
               account_id: @sso_account_id,
               role_name: @sso_role_name,
               access_token: cached_token['accessToken']
-            ).role_credentials }
+            ).role_credentials
           else
             # TODO: CREDENTIALS_SSO (s)
             # Call will include at least "r" (from #initialize)
-            with_metric { @client.get_role_credentials(
+            @client.get_role_credentials(
               account_id: @sso_account_id,
               role_name: @sso_role_name,
               access_token: @token_provider.token.token
-            ).role_credentials }
+            ).role_credentials
           end
 
       @credentials = Credentials.new(
@@ -170,14 +168,6 @@ module Aws
         account_id: @sso_account_id
       )
       @expiration = Time.at(c.expiration / 1000.0)
-    end
-
-    def with_metric(&block)
-      if @metrics
-        Aws::Plugins::UserAgent.metric(*@metrics, &block)
-      else
-        block.call
-      end
     end
 
     def sso_cache_file

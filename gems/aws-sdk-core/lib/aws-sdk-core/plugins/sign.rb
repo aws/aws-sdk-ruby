@@ -55,12 +55,12 @@ module Aws
             end
             signer.sign(context)
           end
-          with_metric(credentials) { @handler.call(context) }
+          with_metrics(credentials) { @handler.call(context) }
         end
 
         private
 
-        def with_metric(credentials, &block)
+        def with_metrics(credentials, &block)
           puts "in with metric"
           unless credentials && credentials.respond_to?(:metrics)
             puts "No metrics"

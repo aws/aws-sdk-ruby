@@ -65,7 +65,6 @@ module Aws
     #   with an instance of this object when
     #   AWS credentials are required and need to be refreshed.
     def initialize(options = {})
-      @metrics = options.delete(:metrics)
       credential_path = options[:credential_path] ||
                         ENV['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI']
       endpoint = options[:endpoint] ||
@@ -85,7 +84,7 @@ module Aws
     #   fetch credentials from the instance metadata service. Defaults to 0.
     attr_reader :retries
 
-    attr_reader :metrics
+    attr_accessor :metrics
 
     private
 

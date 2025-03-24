@@ -10,7 +10,6 @@ module Aws
     # @option kwargs [String] :credential_scope (nil)
     def initialize(access_key_id, secret_access_key, session_token = nil,
                    **kwargs)
-      @metrics = kwargs.delete(:metrics)
       @access_key_id = access_key_id
       @secret_access_key = secret_access_key
       @session_token = session_token
@@ -29,7 +28,7 @@ module Aws
     # @return [String, nil]
     attr_reader :account_id
 
-    attr_reader :metrics
+    attr_accessor :metrics
 
     # @return [Credentials]
     def credentials

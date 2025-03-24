@@ -133,21 +133,17 @@ module Aws
         entry = @parsed_config.fetch(p, {})
         if entry['web_identity_token_file'] && entry['role_arn']
           # TODO: CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN (q)
-
-          # Needed because of AssumeRole flow
-          if opts[:metrics]
-            opts[:metrics] << 'CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN'
-          else
-            opts[:metrics] = ['CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN']
-          end
           cfg = {
             role_arn: entry['role_arn'],
             web_identity_token_file: entry['web_identity_token_file'],
             role_session_name: entry['role_session_name'],
-            metrics: opts.delete(:metrics)
           }
           cfg[:region] = opts[:region] if opts[:region]
-          AssumeRoleWebIdentityCredentials.new(cfg)
+          with_metrics('CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN') do
+            credentials = AssumeRoleWebIdentityCredentials.new(cfg)
+            credentials.metrics = %w[CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN CREDENTIALS_STS_ASSUME_ROLE_WEB_ID]
+            credentials
+          end
         end
       end
     end
@@ -157,10 +153,9 @@ module Aws
     # file, if present.
     def sso_credentials_from_config(opts = {})
       p = opts[:profile] || @profile_name
-      metrics = opts.delete(:metrics)
-      credentials = sso_credentials_from_profile(@parsed_credentials, p, metrics)
+      credentials = sso_credentials_from_profile(@parsed_credentials, p)
       if @parsed_config
-        credentials ||= sso_credentials_from_profile(@parsed_config, p, metrics)
+        credentials ||= sso_credentials_from_profile(@parsed_config, p)
       end
       credentials
     end
@@ -266,7 +261,9 @@ module Aws
         elsif opts[:source_profile]
           # TODO: CREDENTIALS_PROFILE_SOURCE_PROFILE (o)
           opts[:visited_profiles] ||= Set.new
-          opts[:credentials], metrics = resolve_source_profile(opts[:source_profile], opts)
+          opts[:credentials], metrics = with_metrics('CREDENTIALS_PROFILE_SOURCE_PROFILE') do
+            resolve_source_profile(opts[:source_profile], opts)
+          end
           if opts[:credentials]
             opts[:role_session_name] ||= prof_cfg['role_session_name']
             opts[:role_session_name] ||= 'default_session'
@@ -275,9 +272,12 @@ module Aws
             opts[:external_id] ||= prof_cfg['external_id']
             opts[:serial_number] ||= prof_cfg['mfa_serial']
             opts[:profile] = opts.delete(:source_profile)
-            opts[:metrics] = metrics
             opts.delete(:visited_profiles)
-            AssumeRoleCredentials.new(opts)
+            with_metrics(metrics) do
+              credentials = AssumeRoleCredentials.new(opts)
+              credentials.metrics = metrics << 'CREDENTIALS_STS_ASSUME_ROLE'
+              credentials
+            end
           else
             raise Errors::NoSourceProfileError,
               "Profile #{profile} has a role_arn, and source_profile, but the"\
@@ -285,10 +285,12 @@ module Aws
           end
         elsif credential_source
           # TODO: CREDENTIALS_PROFILE_NAMED_PROVIDER (p)
-          opts[:credentials], metrics = credentials_from_source(
-            credential_source,
-            chain_config
-          )
+          opts[:credentials], metrics = with_metrics('CREDENTIALS_PROFILE_NAMED_PROVIDER') do
+            credentials_from_source(
+              credential_source,
+              chain_config
+            )
+          end
           if opts[:credentials]
             opts[:role_session_name] ||= prof_cfg['role_session_name']
             opts[:role_session_name] ||= 'default_session'
@@ -296,9 +298,12 @@ module Aws
             opts[:duration_seconds] ||= prof_cfg['duration_seconds']
             opts[:external_id] ||= prof_cfg['external_id']
             opts[:serial_number] ||= prof_cfg['mfa_serial']
-            opts[:metrics] = metrics
             opts.delete(:source_profile) # Cleanup
-            AssumeRoleCredentials.new(opts)
+            with_metrics(metrics) do
+              credentials = AssumeRoleCredentials.new(opts)
+              credentials.metrics = metrics << 'CREDENTIALS_STS_ASSUME_ROLE'
+              credentials
+            end
           else
             raise Errors::NoSourceCredentials,
               "Profile #{profile} could not get source credentials from"\
@@ -327,13 +332,13 @@ module Aws
       elsif profile_config && profile_config['source_profile']
         opts.delete(:source_profile)
         assume_role_credentials_from_config(opts.merge(profile: profile))
-      elsif (provider = assume_role_web_identity_credentials_from_config(opts.merge(profile: profile, metrics: ['CREDENTIALS_PROFILE_SOURCE_PROFILE'])))
+      elsif (provider = assume_role_web_identity_credentials_from_config(opts.merge(profile: profile)))
         # TODO: CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN and CREDENTIALS_STS_ASSUME_ROLE_WEB_ID (qk)
         [provider.credentials, provider.metrics] if provider.credentials.set?
       elsif (provider = assume_role_process_credentials_from_config(profile))
         # TODO: CREDENTIALS_PROFILE_PROCESS and CREDENTIALS_PROCESS (vw)
         [provider.credentials, %w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE_PROCESS CREDENTIALS_PROCESS]] if provider.credentials.set?
-      elsif (provider = sso_credentials_from_config(profile: profile, metrics: ['CREDENTIALS_PROFILE_SOURCE_PROFILE']))
+      elsif (provider = sso_credentials_from_config(profile: profile))
         # TODO: CREDENTIALS_PROFILE_SSO and CREDENTIALS_SSO (rs) or CREDENTIALS_PROFILE_SSO_LEGACY and CREDENTIALS_SSO_LEGACY (tu)
         [provider.credentials, provider.metrics] if provider.credentials.set?
       end
@@ -380,7 +385,7 @@ module Aws
 
     # If any of the sso_ profile values are present, attempt to construct
     # SSOCredentials
-    def sso_credentials_from_profile(cfg, profile, metrics)
+    def sso_credentials_from_profile(cfg, profile)
       if @parsed_config &&
          (prof_config = cfg[profile]) &&
          !(prof_config.keys & SSO_CREDENTIAL_PROFILE_KEYS).empty?
@@ -407,21 +412,32 @@ module Aws
           sso_start_url = prof_config['sso_start_url']
         end
 
-        # Needed for AssumeRole
-        if metrics
-          metrics << prof_config['sso_session'].nil? ? 'CREDENTIALS_PROFILE_SSO_LEGACY' : 'CREDENTIALS_PROFILE_SSO'
+        if prof_config['sso_session']
+          with_metrics('CREDENTIALS_PROFILE_SSO') do
+            credentials = SSOCredentials.new(
+              sso_account_id: prof_config['sso_account_id'],
+              sso_role_name: prof_config['sso_role_name'],
+              sso_session: prof_config['sso_session'],
+              sso_region: sso_region,
+              sso_start_url: sso_start_url,
+              )
+            credentials.metrics = %w[CREDENTIALS_PROFILE_SSO CREDENTIALS_SSO]
+            credentials
+          end
         else
-          metrics = prof_config['sso_session'].nil? ? ['CREDENTIALS_PROFILE_SSO_LEGACY'] : ['CREDENTIALS_PROFILE_SSO']
+          with_metrics('CREDENTIALS_PROFILE_SSO_LEGACY') do
+            credentials = SSOCredentials.new(
+              sso_account_id: prof_config['sso_account_id'],
+              sso_role_name: prof_config['sso_role_name'],
+              sso_session: prof_config['sso_session'],
+              sso_region: sso_region,
+              sso_start_url: sso_start_url,
+              )
+            credentials.metrics = %w[CREDENTIALS_PROFILE_SSO_LEGACY CREDENTIALS_SSO_LEGACY]
+            credentials
+          end
         end
 
-        SSOCredentials.new(
-          sso_account_id: prof_config['sso_account_id'],
-          sso_role_name: prof_config['sso_role_name'],
-          sso_session: prof_config['sso_session'],
-          sso_region: sso_region,
-          sso_start_url: sso_start_url,
-          metrics: metrics
-          )
       end
     end
 
@@ -508,6 +524,14 @@ module Aws
       end
 
       sso_session
+    end
+
+    def with_metrics(metrics, &block)
+      if metrics.is_a?(Array)
+        Aws::Plugins::UserAgent.metric(*metrics, &block)
+      else
+        Aws::Plugins::UserAgent.metric(metrics, &block)
+      end
     end
   end
 end

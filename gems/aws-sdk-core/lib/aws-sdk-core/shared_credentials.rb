@@ -25,7 +25,6 @@ module Aws
     #   `ENV['AWS_PROFILE']`.
     #
     def initialize(options = {})
-      @metrics = options.delete(:metrics)
       shared_config = Aws.shared_config
       @path = options[:path]
       @path ||= shared_config.credentials_path
@@ -52,7 +51,7 @@ module Aws
     # @return [Credentials]
     attr_reader :credentials
 
-    attr_reader :metrics
+    attr_accessor :metrics
 
     # @api private
     def inspect

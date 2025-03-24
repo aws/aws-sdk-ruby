@@ -75,7 +75,6 @@ module Aws
     #   with an instance of this object when
     #   AWS credentials are required and need to be refreshed.
     def initialize(options = {})
-      @metrics = options.delete(:metrics)
       @retries = options[:retries] || 1
       endpoint_mode = resolve_endpoint_mode(options)
       @endpoint = resolve_endpoint(options, endpoint_mode)
@@ -99,7 +98,7 @@ module Aws
     #   the default credential chain ({Aws::CredentialProviderChain}).
     attr_reader :retries
 
-    attr_reader :metrics
+    attr_accessor :metrics
 
     private
 

@@ -44,7 +44,6 @@ module Aws
     #   with an instance of this object when
     #   AWS credentials are required and need to be refreshed.
     def initialize(options = {})
-      @metrics = options.delete(:metrics)
       client_opts = {}
       @assume_role_web_identity_params = {}
       @token_file = options.delete(:web_identity_token_file)
@@ -63,13 +62,12 @@ module Aws
       end
       @client = client_opts[:client] || STS::Client.new(client_opts.merge(credentials: nil))
       super
-      @metrics << 'CREDENTIALS_STS_ASSUME_ROLE_WEB_ID' if @metrics
     end
 
     # @return [STS::Client]
     attr_reader :client
 
-    attr_reader :metrics
+    attr_accessor :metrics
 
     private
 
@@ -80,7 +78,7 @@ module Aws
       # TODO: CREDENTIALS_STS_ASSUME_ROLE_WEB_ID (k)
       # Call will include at least "q" (from #assume_role_web_identity_credentials_from_config)
       # OR call will include at least "h" (from #assume_role_web_identity_credentials)
-      resp = with_metric { client.assume_role_with_web_identity(@assume_role_web_identity_params) }
+      resp = client.assume_role_with_web_identity(@assume_role_web_identity_params)
       creds = resp.credentials
       @credentials = Credentials.new(
         creds.access_key_id,
@@ -89,14 +87,6 @@ module Aws
         account_id: parse_account_id(resp)
       )
       @expiration = creds.expiration
-    end
-
-    def with_metric(&block)
-      if @metrics
-        Aws::Plugins::UserAgent.metric(*@metrics, &block)
-      else
-        block.call
-      end
     end
 
     def _token_from_file(path)

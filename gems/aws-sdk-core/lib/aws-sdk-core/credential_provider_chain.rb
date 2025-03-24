@@ -113,13 +113,14 @@ module Aws
     # TODO: CREDENTIALS_PROFILE (n)??
     def static_credentials(options)
       if options[:config]
-        Credentials.new(
+        credentials = Credentials.new(
           options[:config].access_key_id,
           options[:config].secret_access_key,
           options[:config].session_token,
-          account_id: options[:config].account_id,
-          metrics: ['CREDENTIALS_PROFILE']
+          account_id: options[:config].account_id
         )
+        credentials.metrics = ['CREDENTIALS_PROFILE']
+        credentials
       end
     end
 
@@ -148,7 +149,9 @@ module Aws
 
     def static_profile_credentials(options)
       if options[:config] && options[:config].profile
-        SharedCredentials.new(profile_name: options[:config].profile, metrics: ['CREDENTIALS_PROFILE'])
+        credentials = SharedCredentials.new(profile_name: options[:config].profile)
+        credentials.metrics = ['CREDENTIALS_PROFILE']
+        credentials
       end
     rescue Errors::NoSuchProfileError
       nil
@@ -159,7 +162,7 @@ module Aws
         process_provider = Aws.shared_config.credential_process(profile: options[:config].profile)
         if process_provider
           credentials = ProcessCredentials.new([process_provider])
-          credentials.metrics = ['CREDENTIALS_PROFILE_PROCESS', 'CREDENTIALS_PROCESS']
+          credentials.metrics = %w[CREDENTIALS_PROFILE_PROCESS CREDENTIALS_PROCESS]
           return credentials
         end
       end
@@ -174,13 +177,14 @@ module Aws
       secret = %w[AWS_SECRET_ACCESS_KEY AMAZON_SECRET_ACCESS_KEY AWS_SECRET_KEY]
       token =  %w[AWS_SESSION_TOKEN AMAZON_SESSION_TOKEN]
       account_id = %w[AWS_ACCOUNT_ID]
-      Credentials.new(
+      credentials = Credentials.new(
         envar(key),
         envar(secret),
         envar(token),
-        account_id: envar(account_id),
-        metrics: ['CREDENTIALS_ENV_VARS']
+        account_id: envar(account_id)
       )
+      credentials.metrics = ['CREDENTIALS_ENV_VARS']
+      credentials
     end
 
     def envar(keys)
@@ -196,7 +200,9 @@ module Aws
 
     def shared_credentials(options)
       profile_name = determine_profile_name(options)
-      SharedCredentials.new(profile_name: profile_name, metrics: ['CREDENTIALS_PROFILE'])
+      credentials = SharedCredentials.new(profile_name: profile_name)
+      credentials.metrics = ['CREDENTIALS_PROFILE']
+      credentials
     rescue Errors::NoSuchProfileError
       nil
     end
@@ -207,7 +213,7 @@ module Aws
         process_provider = Aws.shared_config.credential_process(profile: profile_name)
         if process_provider
           credentials = ProcessCredentials.new([process_provider])
-          credentials.metrics = ['CREDENTIALS_PROFILE_PROCESS', 'CREDENTIALS_PROCESS']
+          credentials.metrics = %w[CREDENTIALS_PROFILE_PROCESS CREDENTIALS_PROCESS]
           return credentials
         end
       end
@@ -238,10 +244,13 @@ module Aws
           role_arn: role_arn,
           web_identity_token_file: token_file,
           role_session_name: ENV['AWS_ROLE_SESSION_NAME'],
-          metrics: ['CREDENTIALS_ENV_VARS_STS_WEB_ID_TOKEN']
         }
         cfg[:region] = region if region
-        AssumeRoleWebIdentityCredentials.new(cfg)
+        with_metrics('CREDENTIALS_ENV_VARS_STS_WEB_ID_TOKEN') do
+          credentials = AssumeRoleWebIdentityCredentials.new(cfg)
+          credentials.metrics = %w[CREDENTIALS_ENV_VARS_STS_WEB_ID_TOKEN CREDENTIALS_STS_ASSUME_ROLE_WEB_ID]
+          credentials
+        end
       elsif Aws.shared_config.config_enabled?
         profile = options[:config].profile if options[:config]
         Aws.shared_config.assume_role_web_identity_credentials_from_config(
@@ -256,11 +265,14 @@ module Aws
       if ENV['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] ||
          ENV['AWS_CONTAINER_CREDENTIALS_FULL_URI']
         # TODO: CREDENTIALS_HTTP (z)
-        options[:metrics] = 'CREDENTIALS_HTTP'
-        ECSCredentials.new(options.merge(metrics: ['CREDENTIALS_HTTP']))
+        credentials = ECSCredentials.new(options)
+        credentials.metrics = ['CREDENTIALS_HTTP']
+        credentials
       else
         # TODO: CREDENTIALS_IMDS (0)
-        InstanceProfileCredentials.new(options.merge(profile: profile_name, metrics: ['CREDENTIALS_IMDS']))
+        credentials = InstanceProfileCredentials.new(options.merge(profile: profile_name))
+        credentials.metrics = ['CREDENTIALS_IMDS']
+        credentials
       end
     end
 
@@ -273,6 +285,10 @@ module Aws
         assume_opts[:region] = options[:config].region
       end
       Aws.shared_config.assume_role_credentials_from_config(assume_opts)
+    end
+
+    def with_metrics(metric, &block)
+      Aws::Plugins::UserAgent.metric(metric, &block)
     end
   end
 end

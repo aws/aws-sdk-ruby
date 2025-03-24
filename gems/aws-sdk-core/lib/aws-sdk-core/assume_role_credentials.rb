@@ -39,7 +39,6 @@ module Aws
     #      end
     #
     def initialize(options = {})
-      @metrics = options.delete(:metrics)
       client_opts = {}
       @assume_role_params = {}
       options.each_pair do |key, value|
@@ -52,7 +51,6 @@ module Aws
       @client = client_opts[:client] || STS::Client.new(client_opts)
       @async_refresh = true
       super
-      @metrics << 'CREDENTIALS_STS_ASSUME_ROLE' if @metrics
     end
 
     # @return [STS::Client]
@@ -61,12 +59,12 @@ module Aws
     # @return [Hash]
     attr_reader :assume_role_params
 
-    attr_reader :metrics
+    attr_accessor :metrics
 
     private
 
     def refresh
-      resp = with_metric { @client.assume_role(@assume_role_params) }
+      resp = @client.assume_role(@assume_role_params)
       creds = resp.credentials
       # TODO: CREDENTIALS_STS_ASSUME_ROLE
       # Call will include "o" (from #assume_role_from_profile) and "n"/"qk"/"vw"/"rs"/"tu" (from #resolve_source_profile)
@@ -78,14 +76,6 @@ module Aws
         account_id: parse_account_id(resp)
       )
       @expiration = creds.expiration
-    end
-
-    def with_metric(&block)
-      if @metrics
-        Aws::Plugins::UserAgent.metric(*@metrics, &block)
-      else
-        block.call
-      end
     end
 
     def parse_account_id(resp)

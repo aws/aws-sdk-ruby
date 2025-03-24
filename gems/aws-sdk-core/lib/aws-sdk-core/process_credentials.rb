@@ -29,7 +29,6 @@ module Aws
     #  the process name and its arguments to execute, or a single string to be
     #  executed by the shell (deprecated and insecure).
     def initialize(process)
-      @metrics = nil
       if process.is_a?(String)
         warn('Passing a single string to Aws::ProcessCredentials.new '\
              'is insecure, please use use an array of system arguments instead')
