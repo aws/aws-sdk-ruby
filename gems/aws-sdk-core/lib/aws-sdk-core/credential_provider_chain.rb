@@ -162,7 +162,7 @@ module Aws
         if process_provider
           credentials = ProcessCredentials.new([process_provider])
           credentials.metrics = %w[CREDENTIALS_PROFILE_PROCESS CREDENTIALS_PROCESS]
-          return credentials
+          credentials
         end
       end
     rescue Errors::NoSuchProfileError
@@ -212,7 +212,7 @@ module Aws
         if process_provider
           credentials = ProcessCredentials.new([process_provider])
           credentials.metrics = %w[CREDENTIALS_PROFILE_PROCESS CREDENTIALS_PROCESS]
-          return credentials
+          credentials
         end
       end
     rescue Errors::NoSuchProfileError

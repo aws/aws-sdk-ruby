@@ -331,7 +331,7 @@ module Aws
       elsif (provider = assume_role_web_identity_credentials_from_config(opts.merge(profile: profile)))
         [provider.credentials, provider.metrics] if provider.credentials.set?
       elsif (provider = assume_role_process_credentials_from_config(profile))
-        [provider.credentials, %w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE_PROCESS CREDENTIALS_PROCESS]] if provider.credentials.set?
+        [provider.credentials, provider.metrics] if provider.credentials.set?
       elsif (provider = sso_credentials_from_config(profile: profile))
         [provider.credentials, provider.metrics] if provider.credentials.set?
       end
@@ -359,7 +359,11 @@ module Aws
       if @parsed_config
         credential_process ||= @parsed_config.fetch(profile, {})['credential_process']
       end
-      ProcessCredentials.new([credential_process]) if credential_process
+      if credential_process
+        credentials = ProcessCredentials.new([credential_process])
+        credentials.metrics = %w[CREDENTIALS_PROFILE_PROCESS CREDENTIALS_PROCESS]
+        credentials
+      end
     end
 
     def credentials_from_shared(profile, _opts)
