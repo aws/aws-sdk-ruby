@@ -72,6 +72,7 @@ module Aws
             metrics << 'CREDENTIALS_CODE'
           else
             puts credentials.class.name
+            puts credentials.metrics
             (metrics << credentials.metrics).flatten!
           end
           Aws::Plugins::UserAgent.metric(*metrics, &block)

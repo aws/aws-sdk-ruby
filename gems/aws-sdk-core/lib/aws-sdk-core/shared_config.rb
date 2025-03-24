@@ -262,7 +262,6 @@ module Aws
           opts[:credentials], metrics = with_metrics('CREDENTIALS_PROFILE_SOURCE_PROFILE') do
             resolve_source_profile(opts[:source_profile], opts)
           end
-          metrics.unshift('CREDENTIALS_PROFILE_SOURCE_PROFILE')
           if opts[:credentials]
             opts[:role_session_name] ||= prof_cfg['role_session_name']
             opts[:role_session_name] ||= 'default_session'
@@ -272,9 +271,11 @@ module Aws
             opts[:serial_number] ||= prof_cfg['mfa_serial']
             opts[:profile] = opts.delete(:source_profile)
             opts.delete(:visited_profiles)
+            metrics.unshift('CREDENTIALS_PROFILE_SOURCE_PROFILE') if metrics.first != 'CREDENTIALS_PROFILE_SOURCE_PROFILE'
             with_metrics(metrics) do
               credentials = AssumeRoleCredentials.new(opts)
-              credentials.metrics = metrics << 'CREDENTIALS_STS_ASSUME_ROLE'
+              metrics << 'CREDENTIALS_STS_ASSUME_ROLE' if metrics.last != 'CREDENTIALS_STS_ASSUME_ROLE'
+              credentials.metrics = metrics
               credentials
             end
           else
@@ -289,7 +290,6 @@ module Aws
               chain_config
             )
           end
-          metrics.unshift('CREDENTIALS_PROFILE_NAMED_PROVIDER')
           if opts[:credentials]
             opts[:role_session_name] ||= prof_cfg['role_session_name']
             opts[:role_session_name] ||= 'default_session'
@@ -298,9 +298,11 @@ module Aws
             opts[:external_id] ||= prof_cfg['external_id']
             opts[:serial_number] ||= prof_cfg['mfa_serial']
             opts.delete(:source_profile) # Cleanup
+            metrics.unshift('CREDENTIALS_PROFILE_NAMED_PROVIDER') if metrics.first != 'CREDENTIALS_PROFILE_NAMED_PROVIDER'
             with_metrics(metrics) do
               credentials = AssumeRoleCredentials.new(opts)
-              credentials.metrics = metrics << 'CREDENTIALS_STS_ASSUME_ROLE'
+              metrics << 'CREDENTIALS_STS_ASSUME_ROLE' if metrics.last != 'CREDENTIALS_STS_ASSUME_ROLE'
+              credentials.metrics = metrics
               credentials
             end
           else
@@ -326,10 +328,12 @@ module Aws
       end
 
       if (creds = credentials(profile: profile))
+        creds.metrics = ['CREDENTIALS_PROFILE']
         [creds, ['CREDENTIALS_PROFILE']] # static credentials
       elsif profile_config && profile_config['source_profile']
         opts.delete(:source_profile)
-        assume_role_credentials_from_config(opts.merge(profile: profile))
+        provider = assume_role_credentials_from_config(opts.merge(profile: profile))
+        [provider, provider.metrics]
       elsif (provider = assume_role_web_identity_credentials_from_config(opts.merge(profile: profile)))
         [provider.credentials, provider.metrics] if provider.credentials.set?
       elsif (provider = assume_role_process_credentials_from_config(profile))
