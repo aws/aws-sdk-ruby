@@ -58,6 +58,8 @@ module Aws
         ['CREDENTIALS_PROFILE']
       when :env
         ['CREDENTIALS_ENV_VARS']
+      when :assume_role_resolution
+        []
       end
     end
 
