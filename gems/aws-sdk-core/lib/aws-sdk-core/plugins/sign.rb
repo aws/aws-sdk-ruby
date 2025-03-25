@@ -69,6 +69,7 @@ module Aws
 
           metrics = []
           if !credentials.metrics
+            puts "Credentials code"
             metrics << 'CREDENTIALS_CODE'
           else
             puts credentials.class.name

@@ -64,7 +64,6 @@ module Aws
     private
 
     def refresh
-      puts "Refreshing credentials"
       resp = @client.assume_role(@assume_role_params)
       creds = resp.credentials
       @credentials = Credentials.new(
