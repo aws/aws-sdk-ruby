@@ -1,6 +1,5 @@
 Unreleased Changes
 ------------------
-* Issue - Fix typo in method's name in Seahorse::Client::H2::Connection
 
 3.221.0 (2025-03-24)
 ------------------
