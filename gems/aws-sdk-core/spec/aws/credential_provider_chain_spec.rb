@@ -118,6 +118,7 @@ CREDS
     end
 
     it 'hydrates credentials from the instance profile service' do
+      allow(mock_instance_creds).to receive(:metrics=)
       expect(mock_instance_creds).to receive(:set?).and_return(true)
       expect(credentials).to be(mock_instance_creds)
     end
@@ -125,6 +126,7 @@ CREDS
     it 'hydrates credentials from ECS when AWS_CONTAINER_CREDENTIALS_RELATIVE_URI is set' do
       ENV['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = 'test_uri'
       mock_ecs_creds = double('ECSCredentials')
+      allow(mock_ecs_creds).to receive(:metrics=)
       expect(ECSCredentials).to receive(:new).and_return(mock_ecs_creds)
       expect(mock_ecs_creds).to receive(:set?).and_return(true)
       expect(credentials).to be(mock_ecs_creds)
@@ -133,6 +135,7 @@ CREDS
     it 'hydrates credentials from ECS when AWS_CONTAINER_CREDENTIALS_FULL_URI is set' do
       ENV['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'test_uri'
       mock_ecs_creds = double('ECSCredentials')
+      allow(mock_ecs_creds).to receive(:metrics=)
       expect(ECSCredentials).to receive(:new).and_return(mock_ecs_creds)
       expect(mock_ecs_creds).to receive(:set?).and_return(true)
       expect(credentials).to be(mock_ecs_creds)

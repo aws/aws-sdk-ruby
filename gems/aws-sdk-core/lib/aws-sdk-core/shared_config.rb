@@ -274,6 +274,8 @@ module Aws
             metrics.unshift('CREDENTIALS_PROFILE_SOURCE_PROFILE') if metrics.first != 'CREDENTIALS_PROFILE_SOURCE_PROFILE'
             metrics.pop if metrics.last == 'CREDENTIALS_STS_ASSUME_ROLE'
             with_metrics(metrics) do
+              # Necessary to differentiate between CREDENTIALS_CODE
+              opts[:credentials].metrics = [] unless opts[:credentials].metrics
               opts[:credentials].metrics.pop if opts[:credentials].metrics.last == 'CREDENTIALS_STS_ASSUME_ROLE'
               credentials = AssumeRoleCredentials.new(opts)
               metrics << 'CREDENTIALS_STS_ASSUME_ROLE' if metrics.last != 'CREDENTIALS_STS_ASSUME_ROLE'
@@ -303,6 +305,8 @@ module Aws
             metrics.unshift('CREDENTIALS_PROFILE_NAMED_PROVIDER') if metrics.first != 'CREDENTIALS_PROFILE_NAMED_PROVIDER'
             metrics.pop if metrics.last == 'CREDENTIALS_STS_ASSUME_ROLE'
             with_metrics(metrics) do
+              # Necessary to differentiate between CREDENTIALS_CODE
+              opts[:credentials].metrics = [] unless opts[:credentials].metrics
               opts[:credentials].metrics.pop if opts[:credentials].metrics.last == 'CREDENTIALS_STS_ASSUME_ROLE'
               credentials = AssumeRoleCredentials.new(opts)
               metrics << 'CREDENTIALS_STS_ASSUME_ROLE' if metrics.last != 'CREDENTIALS_STS_ASSUME_ROLE'
