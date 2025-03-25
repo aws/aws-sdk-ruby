@@ -51,7 +51,7 @@ module Aws
     # @return [Credentials]
     attr_reader :credentials
 
-    attr_accessor :metrics
+    attr_accessor :source
 
     # @api private
     def inspect
@@ -61,6 +61,12 @@ module Aws
         "path=#{path.inspect}",
       ]
       "#<#{parts.join(' ')}>"
+    end
+
+    def metrics
+      nil unless @source
+
+      ['CREDENTIALS_PROFILE']
     end
 
     # @deprecated This method is no longer used.

@@ -140,7 +140,7 @@ module Aws
           cfg[:region] = opts[:region] if opts[:region]
           with_metrics('CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN') do
             credentials = AssumeRoleWebIdentityCredentials.new(cfg)
-            credentials.metrics = %w[CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN CREDENTIALS_STS_ASSUME_ROLE_WEB_ID]
+            credentials.source = :profile
             credentials
           end
         end
@@ -259,7 +259,7 @@ module Aws
             'provide only source_profile or credential_source, not both.'
         elsif opts[:source_profile]
           opts[:visited_profiles] ||= Set.new
-          opts[:credentials], metrics = with_metrics('CREDENTIALS_PROFILE_SOURCE_PROFILE') do
+          opts[:credentials], provider, source = with_metrics('CREDENTIALS_PROFILE_SOURCE_PROFILE') do
             resolve_source_profile(opts[:source_profile], opts)
           end
           if opts[:credentials]
@@ -271,11 +271,16 @@ module Aws
             opts[:serial_number] ||= prof_cfg['mfa_serial']
             opts[:profile] = opts.delete(:source_profile)
             opts.delete(:visited_profiles)
+            puts opts[:credentials]
+            metrics = provider.metrics
+            puts metrics
+            # Add the AssumeRole metric to the front if it isn't there
             metrics.unshift('CREDENTIALS_PROFILE_SOURCE_PROFILE') if metrics.first != 'CREDENTIALS_PROFILE_SOURCE_PROFILE'
+            # Remove the service call metric if it's already there
+            metrics.pop if metrics.last == 'CREDENTIALS_STS_ASSUME_ROLE'
             with_metrics(metrics) do
               credentials = AssumeRoleCredentials.new(opts)
-              metrics << 'CREDENTIALS_STS_ASSUME_ROLE' if metrics.last != 'CREDENTIALS_STS_ASSUME_ROLE'
-              credentials.metrics = metrics
+              credentials.source = source
               credentials
             end
           else
@@ -284,7 +289,7 @@ module Aws
               ' source_profile does not have credentials.'
           end
         elsif credential_source
-          opts[:credentials], metrics = with_metrics('CREDENTIALS_PROFILE_NAMED_PROVIDER') do
+          opts[:credentials], source = with_metrics('CREDENTIALS_PROFILE_NAMED_PROVIDER') do
             credentials_from_source(
               credential_source,
               chain_config
@@ -298,11 +303,11 @@ module Aws
             opts[:external_id] ||= prof_cfg['external_id']
             opts[:serial_number] ||= prof_cfg['mfa_serial']
             opts.delete(:source_profile) # Cleanup
+            metrics = opts[:credentials].metrics
             metrics.unshift('CREDENTIALS_PROFILE_NAMED_PROVIDER') if metrics.first != 'CREDENTIALS_PROFILE_NAMED_PROVIDER'
             with_metrics(metrics) do
               credentials = AssumeRoleCredentials.new(opts)
-              metrics << 'CREDENTIALS_STS_ASSUME_ROLE' if metrics.last != 'CREDENTIALS_STS_ASSUME_ROLE'
-              credentials.metrics = metrics
+              credentials.source = source
               credentials
             end
           else
@@ -328,18 +333,23 @@ module Aws
       end
 
       if (creds = credentials(profile: profile))
-        creds.metrics = ['CREDENTIALS_PROFILE']
-        [creds, ['CREDENTIALS_PROFILE']] # static credentials
+        puts "Creds"
+        creds.source = :profile
+        [creds, creds, :static] # static credentials
       elsif profile_config && profile_config['source_profile']
+        puts "assume"
         opts.delete(:source_profile)
         creds = assume_role_credentials_from_config(opts.merge(profile: profile))
-        [creds, creds.metrics]
+        [creds, creds, creds.source]
       elsif (provider = assume_role_web_identity_credentials_from_config(opts.merge(profile: profile)))
-        [provider.credentials, provider.metrics] if provider.credentials.set?
+        puts "web"
+        [provider.credentials, provider, :webID] if provider.credentials.set?
       elsif (provider = assume_role_process_credentials_from_config(profile))
-        [provider.credentials, provider.metrics] if provider.credentials.set?
+        puts "process"
+        [provider.credentials, provider, :process] if provider.credentials.set?
       elsif (provider = sso_credentials_from_config(profile: profile))
-        [provider.credentials, provider.metrics] if provider.credentials.set?
+        puts "sso"
+        [provider.credentials, provider, provider.source]
       end
     end
 
@@ -351,9 +361,9 @@ module Aws
           http_open_timeout: config ? config.instance_profile_credentials_timeout : 1,
           http_read_timeout: config ? config.instance_profile_credentials_timeout : 1,
         ),
-         ['CREDENTIALS_IMDS']]
+         :instance]
       when 'EcsContainer'
-        [ECSCredentials.new, ['CREDENTIALS_HTTP']]
+        [ECSCredentials.new, :ecs]
       else
         raise Errors::InvalidCredentialSourceError, "Unsupported credential_source: #{credential_source}"
       end
@@ -367,7 +377,7 @@ module Aws
       end
       if credential_process
         credentials = ProcessCredentials.new([credential_process])
-        credentials.metrics = %w[CREDENTIALS_PROFILE_PROCESS CREDENTIALS_PROCESS]
+        credentials.source = :set
         credentials
       end
     end
@@ -413,32 +423,18 @@ module Aws
           sso_start_url = prof_config['sso_start_url']
         end
 
-        if prof_config['sso_session']
-          with_metrics('CREDENTIALS_PROFILE_SSO') do
-            credentials = SSOCredentials.new(
-              sso_account_id: prof_config['sso_account_id'],
-              sso_role_name: prof_config['sso_role_name'],
-              sso_session: prof_config['sso_session'],
-              sso_region: sso_region,
-              sso_start_url: sso_start_url,
-              )
-            credentials.metrics = %w[CREDENTIALS_PROFILE_SSO CREDENTIALS_SSO]
-            credentials
-          end
-        else
-          with_metrics('CREDENTIALS_PROFILE_SSO_LEGACY') do
-            credentials = SSOCredentials.new(
-              sso_account_id: prof_config['sso_account_id'],
-              sso_role_name: prof_config['sso_role_name'],
-              sso_session: prof_config['sso_session'],
-              sso_region: sso_region,
-              sso_start_url: sso_start_url,
-              )
-            credentials.metrics = %w[CREDENTIALS_PROFILE_SSO_LEGACY CREDENTIALS_SSO_LEGACY]
-            credentials
-          end
+        metric = prof_config['sso_session'] ? 'CREDENTIALS_PROFILE_SSO' : 'CREDENTIALS_PROFILE_SSO_LEGACY'
+        with_metrics(metric) do
+          credentials = SSOCredentials.new(
+            sso_account_id: prof_config['sso_account_id'],
+            sso_role_name: prof_config['sso_role_name'],
+            sso_session: prof_config['sso_session'],
+            sso_region: sso_region,
+            sso_start_url: sso_start_url,
+            )
+          credentials.source = prof_config['sso_session'] ? :new : :legacy
+          credentials
         end
-
       end
     end
 

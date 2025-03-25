@@ -67,7 +67,18 @@ module Aws
     # @return [STS::Client]
     attr_reader :client
 
-    attr_accessor :metrics
+    attr_accessor :source
+
+    def metrics
+      nil unless @source
+
+      case @source
+      when :profile
+        %w[CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN CREDENTIALS_STS_ASSUME_ROLE_WEB_ID]
+      when :env
+        %w[CREDENTIALS_ENV_VARS_STS_WEB_ID_TOKEN CREDENTIALS_STS_ASSUME_ROLE_WEB_ID]
+      end
+    end
 
     private
 

@@ -67,6 +67,8 @@ module Aws
             return block.call
           end
 
+          puts credentials
+
           metrics = []
           if !credentials.metrics
             puts "Credentials code"

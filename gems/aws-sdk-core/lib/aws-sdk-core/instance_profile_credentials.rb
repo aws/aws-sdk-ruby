@@ -98,7 +98,13 @@ module Aws
     #   the default credential chain ({Aws::CredentialProviderChain}).
     attr_reader :retries
 
-    attr_accessor :metrics
+    attr_accessor :source
+
+    def metrics
+      nil unless @source
+
+      ['CREDENTIALS_IMDS']
+    end
 
     private
 

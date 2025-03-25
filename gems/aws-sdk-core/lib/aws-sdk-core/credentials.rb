@@ -28,7 +28,7 @@ module Aws
     # @return [String, nil]
     attr_reader :account_id
 
-    attr_accessor :metrics
+    attr_accessor :source
 
     # @return [Credentials]
     def credentials
@@ -48,6 +48,17 @@ module Aws
     # @api private
     def inspect
       "#<#{self.class.name} access_key_id=#{access_key_id.inspect}>"
+    end
+
+    def metrics
+      nil unless @source
+
+      case @source
+      when :profile
+        ['CREDENTIALS_PROFILE']
+      when :env
+        ['CREDENTIALS_ENV_VARS']
+      end
     end
 
   end

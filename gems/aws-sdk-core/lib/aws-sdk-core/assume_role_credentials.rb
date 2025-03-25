@@ -59,7 +59,31 @@ module Aws
     # @return [Hash]
     attr_reader :assume_role_params
 
-    attr_accessor :metrics
+    attr_accessor :source
+
+    def metrics
+      nil unless @source
+
+      source_profile = %w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_STS_ASSUME_ROLE]
+      credential_source = %w[CREDENTIALS_PROFILE_NAMED_PROVIDER CREDENTIALS_STS_ASSUME_ROLE]
+
+      case @source
+      when :static
+        insert_metric(source_profile, 'CREDENTIALS_PROFILE')
+      when :webID
+        insert_metric(source_profile, %w[CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN CREDENTIALS_STS_ASSUME_ROLE_WEB_ID])
+      when :process
+        insert_metric(source_profile, %w[CREDENTIALS_PROFILE_PROCESS CREDENTIALS_PROCESS])
+      when :new
+        insert_metric(source_profile, %w[CREDENTIALS_PROFILE_SSO CREDENTIALS_SSO])
+      when :legacy
+        insert_metric(source_profile, %w[CREDENTIALS_PROFILE_SSO_LEGACY CREDENTIALS_SSO_LEGACY])
+      when :instance
+        insert_metric(credential_source, 'CREDENTIALS_IMDS')
+      when :ecs
+        insert_metric(credential_source, 'CREDENTIALS_HTTP')
+      end
+    end
 
     private
 
@@ -78,6 +102,10 @@ module Aws
     def parse_account_id(resp)
       arn = resp.assumed_role_user&.arn
       ARNParser.parse(arn).account_id if ARNParser.arn?(arn)
+    end
+
+    def insert_metric(base, metrics)
+      base.insert(1, *metrics)
     end
 
     class << self

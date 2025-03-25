@@ -120,7 +120,7 @@ module Aws
     # @return [SSO::Client]
     attr_reader :client
 
-    attr_accessor :metrics
+    attr_accessor :source
 
     private
 
@@ -170,6 +170,17 @@ module Aws
     rescue ArgumentError
       # Dir.home raises ArgumentError when ENV['home'] is not set
       raise ArgumentError, "Unable to load sso_cache_file: ENV['HOME'] is not set."
+    end
+
+    def metrics
+      nil unless @source
+
+      case @source
+      when :new
+        %w[CREDENTIALS_PROFILE_SSO CREDENTIALS_SSO]
+      when :legacy
+        %w[CREDENTIALS_PROFILE_SSO_LEGACY CREDENTIALS_SSO_LEGACY]
+      end
     end
   end
 end
