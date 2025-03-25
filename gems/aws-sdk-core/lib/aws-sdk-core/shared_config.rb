@@ -272,7 +272,9 @@ module Aws
             opts[:profile] = opts.delete(:source_profile)
             opts.delete(:visited_profiles)
             metrics.unshift('CREDENTIALS_PROFILE_SOURCE_PROFILE') if metrics.first != 'CREDENTIALS_PROFILE_SOURCE_PROFILE'
+            metrics.pop if metrics.last == 'CREDENTIALS_STS_ASSUME_ROLE'
             with_metrics(metrics) do
+              opts[:credentials].metrics.pop if opts[:credentials].metrics.last == 'CREDENTIALS_STS_ASSUME_ROLE'
               credentials = AssumeRoleCredentials.new(opts)
               metrics << 'CREDENTIALS_STS_ASSUME_ROLE' if metrics.last != 'CREDENTIALS_STS_ASSUME_ROLE'
               credentials.metrics = metrics
@@ -299,7 +301,9 @@ module Aws
             opts[:serial_number] ||= prof_cfg['mfa_serial']
             opts.delete(:source_profile) # Cleanup
             metrics.unshift('CREDENTIALS_PROFILE_NAMED_PROVIDER') if metrics.first != 'CREDENTIALS_PROFILE_NAMED_PROVIDER'
+            metrics.pop if metrics.last == 'CREDENTIALS_STS_ASSUME_ROLE'
             with_metrics(metrics) do
+              opts[:credentials].metrics.pop if opts[:credentials].metrics.last == 'CREDENTIALS_STS_ASSUME_ROLE'
               credentials = AssumeRoleCredentials.new(opts)
               metrics << 'CREDENTIALS_STS_ASSUME_ROLE' if metrics.last != 'CREDENTIALS_STS_ASSUME_ROLE'
               credentials.metrics = metrics
