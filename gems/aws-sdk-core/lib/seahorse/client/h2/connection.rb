@@ -216,7 +216,7 @@ module Seahorse
           if @ssl_verify_peer
             ssl_ctx.verify_mode = OpenSSL::SSL::VERIFY_PEER
             ssl_ctx.ca_file = @ssl_ca_bundle || _default_ca_bundle
-            ssl_ctx.ca_path = @ssl_ca_directory || _defalt_ca_directory
+            ssl_ctx.ca_path = @ssl_ca_directory || _default_ca_directory
             ssl_ctx.cert_store = @ssl_ca_store if @ssl_ca_store
           else
             ssl_ctx.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -232,7 +232,7 @@ module Seahorse
           OpenSSL::X509::DEFAULT_CERT_FILE if File.exist?(OpenSSL::X509::DEFAULT_CERT_FILE)
         end
 
-        def _defalt_ca_directory
+        def _default_ca_directory
           OpenSSL::X509::DEFAULT_CERT_DIR if Dir.exist?(OpenSSL::X509::DEFAULT_CERT_DIR)
         end
       end
