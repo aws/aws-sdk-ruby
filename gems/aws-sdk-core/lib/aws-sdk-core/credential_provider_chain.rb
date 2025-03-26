@@ -15,71 +15,6 @@ module Aws
         if provider && provider.set?
           puts method_name
           puts provider
-          case method_name.to_s
-          when "static_credentials"
-            puts "CREDENTIALS_PROFILE: n"
-          when "static_profile_assume_role_web_identity_credentials"
-            puts "CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN and CREDENTIALS_STS_ASSUME_ROLE_WEB_ID: qk"
-          when "static_profile_sso_credentials"
-            puts "CREDENTIALS_PROFILE_SSO and CREDENTIALS_SSO: rs (NEW)"
-            puts "OR"
-            puts "CREDENTIALS_PROFILE_SSO_LEGACY and CREDENTIALS_SSO_LEGACY: tu (LEGACY)"
-          when "static_profile_assume_role_credentials"
-            puts "CREDENTIALS_PROFILE_SOURCE_PROFILE: o and ( \
-                  CREDENTIALS_PROFILE: n or \
-                  CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN and CREDENTIALS_STS_ASSUME_ROLE_WEB_ID: qk or \
-                  CREDENTIALS_PROFILE_PROCESS and CREDENTIALS_PROCESS: vw or \
-                  CREDENTIALS_PROFILE_SSO and CREDENTIALS_SSO: rs (NEW) or \
-                  CREDENTIALS_PROFILE_SSO_LEGACY and CREDENTIALS_SSO_LEGACY: tu (LEGACY) \
-                  ) \
-                  and CREDENTIALS_STS_ASSUME_ROLE: i"
-            puts "OR"
-            puts "CREDENTIALS_PROFILE_NAMED_PROVIDER: p and ( \
-                  CREDENTIALS_IMDS: 0 or \
-                  CREDENTIALS_HTTP: z \
-                  ) \
-                  and CREDENTIALS_STS_ASSUME_ROLE: i"
-          when "static_profile_credentials"
-            puts "CREDENTIALS_PROFILE: n"
-          when "static_profile_process_credentials"
-            puts "CREDENTIALS_PROFILE_PROCESS and CREDENTIALS_PROCESS: vw"
-          when "env_credentials"
-            puts "CREDENTIALS_ENV_VARS: g"
-          when "assume_role_web_identity_credentials"
-            puts "CREDENTIALS_ENV_VARS_STS_WEB_ID_TOKEN and CREDENTIALS_STS_ASSUME_ROLE_WEB_ID: hk"
-            puts "OR"
-            puts "CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN and CREDENTIALS_STS_ASSUME_ROLE_WEB_ID: qk"
-          when "sso_credentials"
-            puts "CREDENTIALS_PROFILE_SSO and CREDENTIALS_SSO: rs (NEW)"
-            puts "OR"
-            puts "CREDENTIALS_PROFILE_SSO_LEGACY and CREDENTIALS_SSO_LEGACY: tu (LEGACY)"
-          when "assume_role_credentials"
-            puts "CREDENTIALS_PROFILE_SOURCE_PROFILE: o and ( \
-                  CREDENTIALS_PROFILE: n or \
-                  CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN and CREDENTIALS_STS_ASSUME_ROLE_WEB_ID: qk or \
-                  CREDENTIALS_PROFILE_PROCESS and CREDENTIALS_PROCESS: vw or \
-                  CREDENTIALS_PROFILE_SSO and CREDENTIALS_SSO: rs (NEW) or \
-                  CREDENTIALS_PROFILE_SSO_LEGACY and CREDENTIALS_SSO_LEGACY: tu (LEGACY) \
-                  ) \
-                  and CREDENTIALS_STS_ASSUME_ROLE: i"
-            puts "OR"
-            puts "CREDENTIALS_PROFILE_NAMED_PROVIDER: p and ( \
-                  CREDENTIALS_IMDS: 0 or \
-                  CREDENTIALS_HTTP: z \
-                  ) \
-                  and CREDENTIALS_STS_ASSUME_ROLE: i"
-          when "shared_credentials"
-            puts "CREDENTIALS_PROFILE: n"
-          when "process_credentials"
-            puts "CREDENTIALS_PROFILE_PROCESS and CREDENTIALS_PROCESS: vw"
-          when "instance_profile_credentials"
-            puts "CREDENTIALS_HTTP (z)"
-            puts "OR"
-            puts "CREDENTIALS_IMDS (0)"
-          else
-            puts method_name
-            puts "!! UNKNOWN !!"
-          end
           return provider
         end
       end
@@ -157,9 +92,7 @@ module Aws
     def static_profile_process_credentials(options)
       if Aws.shared_config.config_enabled? && options[:config] && options[:config].profile
         process_provider = Aws.shared_config.credential_process(profile: options[:config].profile)
-        if process_provider
-          ProcessCredentials.new([process_provider])
-        end
+        ProcessCredentials.new([process_provider]) if process_provider
       end
     rescue Errors::NoSuchProfileError
       nil
@@ -203,9 +136,7 @@ module Aws
       profile_name = determine_profile_name(options)
       if Aws.shared_config.config_enabled?
         process_provider = Aws.shared_config.credential_process(profile: profile_name)
-        if process_provider
-          ProcessCredentials.new([process_provider])
-        end
+        ProcessCredentials.new([process_provider]) if process_provider
       end
     rescue Errors::NoSuchProfileError
       nil

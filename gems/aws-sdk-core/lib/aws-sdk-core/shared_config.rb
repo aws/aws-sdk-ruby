@@ -271,8 +271,6 @@ module Aws
             opts[:serial_number] ||= prof_cfg['mfa_serial']
             opts[:profile] = opts.delete(:source_profile)
             opts.delete(:visited_profiles)
-            puts "In assume role"
-            puts opts[:credentials]
             metrics = provider.metrics
             # Add the AssumeRole metric to the front if it isn't there
             metrics.unshift('CREDENTIALS_PROFILE_SOURCE_PROFILE') if metrics.first != 'CREDENTIALS_PROFILE_SOURCE_PROFILE'
@@ -281,7 +279,6 @@ module Aws
               metrics.pop
               opts[:credentials].resolving = true
             end
-            puts metrics
             with_metrics(metrics) do
               credentials = AssumeRoleCredentials.new(opts)
               credentials.source = source
@@ -337,24 +334,19 @@ module Aws
       end
 
       if (creds = credentials(profile: profile))
-        puts "Creds"
         creds.source = :profile
         [creds, creds, :static] # static credentials
       elsif profile_config && profile_config['source_profile']
-        puts "assume"
         opts.delete(:source_profile)
         creds = assume_role_credentials_from_config(opts.merge(profile: profile))
         [creds, creds, creds.source]
       elsif (provider = assume_role_web_identity_credentials_from_config(opts.merge(profile: profile)))
-        puts "web"
         provider.credentials.source = :assume_role_resolution
         [provider.credentials, provider, :webID] if provider.credentials.set?
       elsif (provider = assume_role_process_credentials_from_config(profile))
-        puts "process"
         provider.credentials.source = :assume_role_resolution
         [provider.credentials, provider, :process] if provider.credentials.set?
       elsif (provider = sso_credentials_from_config(profile: profile))
-        puts "sso"
         provider.credentials.source = :assume_role_resolution
         [provider.credentials, provider, provider.source]
       end
@@ -382,9 +374,7 @@ module Aws
       if @parsed_config
         credential_process ||= @parsed_config.fetch(profile, {})['credential_process']
       end
-      if credential_process
-        ProcessCredentials.new([credential_process])
-      end
+      ProcessCredentials.new([credential_process]) if credential_process
     end
 
     def credentials_from_shared(profile, _opts)
