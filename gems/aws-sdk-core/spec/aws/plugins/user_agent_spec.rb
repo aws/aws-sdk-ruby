@@ -113,28 +113,26 @@ module Aws
         end
       end
 
-      # context 'credential providers' do
-      #   it 'includes the correct metrics for credentials defined in code' do
-      #     stub_const(
-      #       'ENV',
-      #       'AWS_ACCESS_KEY_ID' => 'AKID_ENV_STUB',
-      #       'AWS_SECRET_ACCESS_KEY' => 'SECRET_ENV_STUB'
-      #     )
-      #     client = ApiHelper.sample_service::Client.new(
-      #       access_key_id: 'ACCESS_DIRECT',
-      #       secret_access_key: 'SECRET_DIRECT',
-      #       profile: 'fooprofile',
-      #       region: 'us-east-1'
-      #     )
-      #     puts client.config.credentials
-      #     client.stub_responses(:example_operation, {})
-      #     resp = client.example_operation
-      #     puts resp.context.http_request.headers['User-Agent']
-      #     expect(resp.context.http_request.headers['User-Agent'])
-      #       .to include('md/akid')
-      #   end
-      #
-      # end
+      context 'credential providers' do
+        it 'includes the correct metrics for credentials resolved from env vars' do
+          creds = Credentials.new(
+            'AKID_ENV_STUB',
+            'SECRET_ENV_STUB'
+          )
+          client = ApiHelper.sample_service::Client.new(
+            stub_responses: true,
+            region: 'us-east-1',
+            credentials: creds
+          )
+          puts client.config.credentials
+          client.stub_responses(:example_operation, {})
+          resp = client.example_operation
+          puts resp.context.http_request.headers['User-Agent']
+          expect(resp.context.http_request.headers['User-Agent'])
+            .to include('m/e,Z,b')
+        end
+
+      end
     end
   end
 end
