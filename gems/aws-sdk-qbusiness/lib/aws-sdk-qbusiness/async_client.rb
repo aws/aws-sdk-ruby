@@ -154,15 +154,7 @@ module Aws::QBusiness
     #     for supported operations.
     #
     #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
-    #     Normally you should not configure the `:endpoint` option
-    #     directly. This is normally constructed from the `:region`
-    #     option. Configuring `:endpoint` is normally reserved for
-    #     connecting to test or custom endpoints. The endpoint should
-    #     be a URI formatted like:
-    #
-    #         'http://example.com'
-    #         'https://example.com'
-    #         'http://example.com:123'
+    #     Testing...!
     #
     #   @option options [Proc] :event_stream_handler
     #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.

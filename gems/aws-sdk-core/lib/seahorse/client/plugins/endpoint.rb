@@ -8,15 +8,7 @@ module Seahorse
         option(:endpoint,
           doc_type: 'String, URI::HTTPS, URI::HTTP',
           docstring: <<-DOCS)
-Normally you should not configure the `:endpoint` option
-directly. This is normally constructed from the `:region`
-option. Configuring `:endpoint` is normally reserved for
-connecting to test or custom endpoints. The endpoint should
-be a URI formatted like:
-
-    'http://example.com'
-    'https://example.com'
-    'http://example.com:123'
+Testing...!
           DOCS
 
         def add_handlers(handlers, config)
