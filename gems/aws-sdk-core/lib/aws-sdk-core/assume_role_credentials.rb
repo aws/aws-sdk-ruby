@@ -61,11 +61,18 @@ module Aws
 
     attr_accessor :source
 
+    attr_accessor :resolving
+
     def metrics
       nil unless @source
 
       source_profile = %w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_STS_ASSUME_ROLE]
       credential_source = %w[CREDENTIALS_PROFILE_NAMED_PROVIDER CREDENTIALS_STS_ASSUME_ROLE]
+
+      if @resolving
+        source_profile.pop
+        credential_source.pop
+      end
 
       case @source
       when :static

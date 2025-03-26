@@ -277,7 +277,10 @@ module Aws
             # Add the AssumeRole metric to the front if it isn't there
             metrics.unshift('CREDENTIALS_PROFILE_SOURCE_PROFILE') if metrics.first != 'CREDENTIALS_PROFILE_SOURCE_PROFILE'
             # Remove the service call metric if it's already there
-            metrics.pop if metrics.last == 'CREDENTIALS_STS_ASSUME_ROLE'
+            if metrics.last == 'CREDENTIALS_STS_ASSUME_ROLE'
+              metrics.pop
+              opts[:credentials].resolving = true
+            end
             puts metrics
             with_metrics(metrics) do
               credentials = AssumeRoleCredentials.new(opts)
