@@ -8,7 +8,11 @@ module AwsSdkCodeGenerator
     def initialize(options)
       @aws_sdk_core_lib_path = options.fetch(:aws_sdk_core_lib_path)
       @plugins = compute_plugins(options)
+      @client_plugins = compute_client_plugins(options)
     end
+
+    # @return [Array<Plugin>]
+    attr_reader :client_plugins
 
     # @return [Enumerable<Plugin>]
     def each(&block)
@@ -27,14 +31,44 @@ module AwsSdkCodeGenerator
         plugins.delete(plugin_name)
       end
       plugins.map do |class_name, path|
-        path = File.absolute_path(path)
-        Kernel.require(path)
-
-        Plugin.new(
-          class_name: class_name,
-          options: const_get(class_name).options,
-          path: path)
+        compute_plugin(class_name, path)
       end
+    end
+
+    def compute_client_plugins(options)
+      plugins = options[:async_client] ? async_client_plugins : base_client_plugins
+      plugins.map do |class_name, path|
+        compute_plugin(class_name, path)
+      end
+    end
+
+    def compute_plugin(class_name, path)
+      path = File.absolute_path(path)
+      Kernel.require(path)
+
+      Plugin.new(
+        class_name: class_name,
+        options: const_get(class_name).options,
+        path: path
+      )
+    end
+
+    def async_client_plugins
+      {
+        'Seahorse::Client::Plugins::Endpoint' => "#{seahorse_plugins}/endpoint.rb",
+        'Seahorse::Client::Plugins::H2' => "#{seahorse_plugins}/h2.rb",
+        'Seahorse::Client::Plugins::ResponseTarget' => "#{seahorse_plugins}/response_target.rb",
+      }
+    end
+
+    def base_client_plugins
+      {
+        'Seahorse::Client::Plugins::Endpoint' => "#{seahorse_plugins}/endpoint.rb",
+        'Seahorse::Client::Plugins::NetHttp' => "#{seahorse_plugins}/h2.rb",
+        'Seahorse::Client::Plugins::RaiseResponseErrors' => "#{seahorse_plugins}/raise_response_errors.rb",
+        'Seahorse::Client::Plugins::ResponseTarget' => "#{seahorse_plugins}/response_target.rb",
+        'Seahorse::Client::Plugins::RequestCallback' => "#{seahorse_plugins}/request_callback.rb",
+      }
     end
 
     def default_plugins
@@ -135,17 +169,8 @@ module AwsSdkCodeGenerator
       File.join(@aws_sdk_core_lib_path, 'seahorse/client/plugins')
     end
 
-    def core_lib
-      # TODO : may need to register the default plugins directory rather
-      #        than have the hard-coded here as a relative path
-      File.expand_path('../../../../../gems/aws-sdk-core/lib', __FILE__)
-    end
-
     def const_get(class_name)
-      const_names = class_name.split('::')
-      const_names.inject(Kernel) do |const, const_name|
-        const.const_get(const_name)
-      end
+      Object.const_get(class_name)
     end
 
     class Plugin
