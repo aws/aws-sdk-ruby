@@ -40,11 +40,7 @@ module Aws
       super
     end
 
-    attr_accessor :source
-
     def metrics
-      nil unless @source
-
       %w[CREDENTIALS_PROFILE_PROCESS CREDENTIALS_PROCESS]
     end
 

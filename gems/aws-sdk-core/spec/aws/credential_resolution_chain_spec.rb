@@ -31,7 +31,6 @@ module Aws
 
     before(:each) do
       allow(InstanceProfileCredentials).to receive(:new).and_return(mock_instance_creds)
-      allow(mock_instance_creds).to receive(:source=)
       expect_any_instance_of(ProcessCredentials).not_to receive(:warn)
     end
 

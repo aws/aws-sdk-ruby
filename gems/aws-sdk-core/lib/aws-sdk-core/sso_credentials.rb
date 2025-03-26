@@ -114,7 +114,9 @@ module Aws
       end
 
       @async_refresh = true
-      super
+      @source = :none
+      metric = @legacy ? 'CREDENTIALS_PROFILE_SSO_LEGACY' : 'CREDENTIALS_PROFILE_SSO'
+      with_metric(metric) { super }
     end
 
     # @return [SSO::Client]
@@ -175,14 +177,22 @@ module Aws
     end
 
     def metrics
-      nil unless @source
-
       case @source
       when :new
         %w[CREDENTIALS_PROFILE_SSO CREDENTIALS_SSO]
       when :legacy
         %w[CREDENTIALS_PROFILE_SSO_LEGACY CREDENTIALS_SSO_LEGACY]
+      when :none
+        if @legacy
+          %w[CREDENTIALS_PROFILE_SSO_LEGACY CREDENTIALS_SSO_LEGACY]
+        else
+          %w[CREDENTIALS_PROFILE_SSO CREDENTIALS_SSO]
+        end
       end
+    end
+
+    def with_metric(metric, &block)
+      Aws::Plugins::UserAgent.metric(metric, &block)
     end
   end
 end

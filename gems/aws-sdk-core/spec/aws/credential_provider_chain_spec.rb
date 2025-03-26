@@ -83,7 +83,6 @@ CREDS
 
     before(:each) do
       allow(InstanceProfileCredentials).to receive(:new).and_return(mock_instance_creds)
-      allow(mock_instance_creds).to receive(:source=).with(:set)
       allow(mock_instance_creds).to receive(:metrics).and_return(['CREDENTIALS_IMDS'])
     end
 

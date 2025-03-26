@@ -68,16 +68,10 @@ module Aws
           end
 
           puts credentials
-
           metrics = []
-          if !credentials.metrics
-            puts "Credentials code"
-            metrics << 'CREDENTIALS_CODE'
-          else
-            puts credentials.class.name
-            puts credentials.metrics
-            (metrics << credentials.metrics).flatten!
-          end
+          puts credentials.class.name
+          puts credentials.metrics
+          (metrics << credentials.metrics).flatten!
           Aws::Plugins::UserAgent.metric(*metrics, &block)
         end
 

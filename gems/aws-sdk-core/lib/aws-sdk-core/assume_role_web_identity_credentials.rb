@@ -61,6 +61,7 @@ module Aws
         @assume_role_web_identity_params[:role_session_name] = _session_name
       end
       @client = client_opts[:client] || STS::Client.new(client_opts.merge(credentials: nil))
+      @source = :none
       super
     end
 
@@ -70,9 +71,9 @@ module Aws
     attr_accessor :source
 
     def metrics
-      nil unless @source
-
       case @source
+      when :none
+        ['CREDENTIALS_STS_ASSUME_ROLE_WEB_ID']
       when :profile
         %w[CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN CREDENTIALS_STS_ASSUME_ROLE_WEB_ID]
       when :env

@@ -14,6 +14,7 @@ module Aws
       @secret_access_key = secret_access_key
       @session_token = session_token
       @account_id = kwargs[:account_id]
+      @source = :none
     end
 
     # @return [String]
@@ -51,9 +52,9 @@ module Aws
     end
 
     def metrics
-      nil unless @source
-
       case @source
+      when :none
+        ['CREDENTIALS_CODE']
       when :profile
         ['CREDENTIALS_PROFILE']
       when :env

@@ -84,11 +84,7 @@ module Aws
     #   fetch credentials from the instance metadata service. Defaults to 0.
     attr_reader :retries
 
-    attr_accessor :source
-
     def metrics
-      nil unless @source
-
       ['CREDENTIALS_HTTP']
     end
 

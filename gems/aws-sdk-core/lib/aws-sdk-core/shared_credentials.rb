@@ -51,8 +51,6 @@ module Aws
     # @return [Credentials]
     attr_reader :credentials
 
-    attr_accessor :source
-
     # @api private
     def inspect
       parts = [
@@ -64,8 +62,6 @@ module Aws
     end
 
     def metrics
-      nil unless @source
-
       ['CREDENTIALS_PROFILE']
     end
 

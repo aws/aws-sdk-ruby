@@ -148,9 +148,7 @@ module Aws
 
     def static_profile_credentials(options)
       if options[:config] && options[:config].profile
-        credentials = SharedCredentials.new(profile_name: options[:config].profile)
-        credentials.source = :set
-        credentials
+        SharedCredentials.new(profile_name: options[:config].profile)
       end
     rescue Errors::NoSuchProfileError
       nil
@@ -160,9 +158,7 @@ module Aws
       if Aws.shared_config.config_enabled? && options[:config] && options[:config].profile
         process_provider = Aws.shared_config.credential_process(profile: options[:config].profile)
         if process_provider
-          credentials = ProcessCredentials.new([process_provider])
-          credentials.source = :set
-          credentials
+          ProcessCredentials.new([process_provider])
         end
       end
     rescue Errors::NoSuchProfileError
@@ -198,9 +194,7 @@ module Aws
 
     def shared_credentials(options)
       profile_name = determine_profile_name(options)
-      credentials = SharedCredentials.new(profile_name: profile_name)
-      credentials.source = :set
-      credentials
+      SharedCredentials.new(profile_name: profile_name)
     rescue Errors::NoSuchProfileError
       nil
     end
@@ -210,9 +204,7 @@ module Aws
       if Aws.shared_config.config_enabled?
         process_provider = Aws.shared_config.credential_process(profile: profile_name)
         if process_provider
-          credentials = ProcessCredentials.new([process_provider])
-          credentials.source = :set
-          credentials
+          ProcessCredentials.new([process_provider])
         end
       end
     rescue Errors::NoSuchProfileError
@@ -261,13 +253,9 @@ module Aws
       profile_name = determine_profile_name(options)
       if ENV['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] ||
          ENV['AWS_CONTAINER_CREDENTIALS_FULL_URI']
-        credentials = ECSCredentials.new(options)
-        credentials.source = :set
-        credentials
+        ECSCredentials.new(options)
       else
-        credentials = InstanceProfileCredentials.new(options.merge(profile: profile_name))
-        credentials.source = :set
-        credentials
+        InstanceProfileCredentials.new(options.merge(profile: profile_name))
       end
     end
 

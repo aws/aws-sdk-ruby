@@ -383,9 +383,7 @@ module Aws
         credential_process ||= @parsed_config.fetch(profile, {})['credential_process']
       end
       if credential_process
-        credentials = ProcessCredentials.new([credential_process])
-        credentials.source = :set
-        credentials
+        ProcessCredentials.new([credential_process])
       end
     end
 
@@ -430,18 +428,15 @@ module Aws
           sso_start_url = prof_config['sso_start_url']
         end
 
-        metric = prof_config['sso_session'] ? 'CREDENTIALS_PROFILE_SSO' : 'CREDENTIALS_PROFILE_SSO_LEGACY'
-        with_metrics(metric) do
-          credentials = SSOCredentials.new(
-            sso_account_id: prof_config['sso_account_id'],
-            sso_role_name: prof_config['sso_role_name'],
-            sso_session: prof_config['sso_session'],
-            sso_region: sso_region,
-            sso_start_url: sso_start_url,
-            )
-          credentials.source = prof_config['sso_session'] ? :new : :legacy
-          credentials
-        end
+        credentials = SSOCredentials.new(
+          sso_account_id: prof_config['sso_account_id'],
+          sso_role_name: prof_config['sso_role_name'],
+          sso_session: prof_config['sso_session'],
+          sso_region: sso_region,
+          sso_start_url: sso_start_url,
+        )
+        credentials.source = prof_config['sso_session'] ? :new : :legacy
+        credentials
       end
     end
 

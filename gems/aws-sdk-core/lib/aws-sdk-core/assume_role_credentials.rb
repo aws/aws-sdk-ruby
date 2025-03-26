@@ -50,6 +50,7 @@ module Aws
       end
       @client = client_opts[:client] || STS::Client.new(client_opts)
       @async_refresh = true
+      @source = :none
       super
     end
 
@@ -64,8 +65,6 @@ module Aws
     attr_accessor :resolving
 
     def metrics
-      nil unless @source
-
       source_profile = %w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_STS_ASSUME_ROLE]
       credential_source = %w[CREDENTIALS_PROFILE_NAMED_PROVIDER CREDENTIALS_STS_ASSUME_ROLE]
 
@@ -75,6 +74,8 @@ module Aws
       end
 
       case @source
+      when :none
+        ['CREDENTIALS_STS_ASSUME_ROLE']
       when :static
         insert_metric(source_profile, 'CREDENTIALS_PROFILE')
       when :webID
