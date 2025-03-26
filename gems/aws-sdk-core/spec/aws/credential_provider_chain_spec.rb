@@ -59,6 +59,10 @@ CREDS
       expect(creds.account_id).to eq(expected_creds[:account_id])
     end
 
+    def validate_metrics(expected_metrics)
+      expect(credentials.metrics).to eq(expected_metrics)
+    end
+
     let(:config) do
       double('config',
              access_key_id: nil,
@@ -79,11 +83,14 @@ CREDS
 
     before(:each) do
       allow(InstanceProfileCredentials).to receive(:new).and_return(mock_instance_creds)
+      allow(mock_instance_creds).to receive(:source=).with(:set)
+      allow(mock_instance_creds).to receive(:metrics).and_return(['CREDENTIALS_IMDS'])
     end
 
     it 'hydrates credentials from config options' do
       expected_creds = with_config_credentials
       validate_credentials(expected_creds)
+      validate_metrics(['CREDENTIALS_PROFILE'])
     end
 
     it 'hydrates credentials from ENV with prefix AWS_' do
@@ -93,6 +100,7 @@ CREDS
       ENV['AWS_SESSION_TOKEN'] = expected_creds[:session_token]
       ENV['AWS_ACCOUNT_ID'] = expected_creds[:account_id]
       validate_credentials(expected_creds)
+      validate_metrics(['CREDENTIALS_ENV_VARS'])
     end
 
     it 'hydrates credentials from ENV with prefix AMAZON_' do
@@ -101,6 +109,7 @@ CREDS
       ENV['AMAZON_SECRET_ACCESS_KEY'] = expected_creds[:secret_access_key]
       ENV['AMAZON_SESSION_TOKEN'] = expected_creds[:session_token]
       validate_credentials(expected_creds)
+      validate_metrics(['CREDENTIALS_ENV_VARS'])
     end
 
     it 'hydrates credentials from ENV at AWS_ACCESS_KEY & AWS_SECRET_KEY' do
@@ -108,6 +117,7 @@ CREDS
       ENV['AWS_ACCESS_KEY'] = expected_creds[:access_key_id]
       ENV['AWS_SECRET_KEY'] = expected_creds[:secret_access_key]
       validate_credentials(expected_creds)
+      validate_metrics(['CREDENTIALS_ENV_VARS'])
     end
 
     it 'hydrates credentials from ENV at AWS_ACCESS_KEY_ID & AWS_SECRET_KEY' do
@@ -115,27 +125,35 @@ CREDS
       ENV['AWS_ACCESS_KEY_ID'] = expected_creds[:access_key_id]
       ENV['AWS_SECRET_KEY'] = expected_creds[:secret_access_key]
       validate_credentials(expected_creds)
+      validate_metrics(['CREDENTIALS_ENV_VARS'])
     end
 
     it 'hydrates credentials from the instance profile service' do
       expect(mock_instance_creds).to receive(:set?).and_return(true)
       expect(credentials).to be(mock_instance_creds)
+      validate_metrics(['CREDENTIALS_IMDS'])
     end
 
     it 'hydrates credentials from ECS when AWS_CONTAINER_CREDENTIALS_RELATIVE_URI is set' do
       ENV['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = 'test_uri'
       mock_ecs_creds = double('ECSCredentials')
+      allow(mock_ecs_creds).to receive(:source=).with(:set)
+      allow(mock_ecs_creds).to receive(:metrics).and_return(['CREDENTIALS_HTTP'])
       expect(ECSCredentials).to receive(:new).and_return(mock_ecs_creds)
       expect(mock_ecs_creds).to receive(:set?).and_return(true)
       expect(credentials).to be(mock_ecs_creds)
+      validate_metrics(['CREDENTIALS_HTTP'])
     end
 
     it 'hydrates credentials from ECS when AWS_CONTAINER_CREDENTIALS_FULL_URI is set' do
       ENV['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'test_uri'
       mock_ecs_creds = double('ECSCredentials')
+      allow(mock_ecs_creds).to receive(:source=).with(:set)
+      allow(mock_ecs_creds).to receive(:metrics).and_return(['CREDENTIALS_HTTP'])
       expect(ECSCredentials).to receive(:new).and_return(mock_ecs_creds)
       expect(mock_ecs_creds).to receive(:set?).and_return(true)
       expect(credentials).to be(mock_ecs_creds)
+      validate_metrics(['CREDENTIALS_HTTP'])
     end
 
     describe 'with config set to nil' do
@@ -161,6 +179,7 @@ CREDS
         expected_creds = with_shared_credentials('test')
         ENV['AWS_DEFAULT_PROFILE'] = expected_creds[:profile_name]
         validate_credentials(expected_creds)
+        validate_metrics(['CREDENTIALS_PROFILE'])
       end
 
       it 'returns credentials from proper profile when config is set' do
@@ -168,6 +187,7 @@ CREDS
         allow(config).to receive(:profile).and_return(expected_creds[:profile_name])
         ENV['AWS_DEFAULT_PROFILE'] = 'BAD_PROFILE'
         validate_credentials(expected_creds)
+        validate_metrics(['CREDENTIALS_PROFILE'])
       end
     end
 
@@ -177,12 +197,14 @@ CREDS
         ENV['AWS_DEFAULT_PROFILE'] = shared_creds[:profile_name]
         expected_creds = with_env_credentials
         validate_credentials(expected_creds)
+        validate_metrics(['CREDENTIALS_ENV_VARS'])
       end
 
       it 'hydrates credentials from config over ENV' do
         env_creds = with_env_credentials
         expected_creds = with_config_credentials
         validate_credentials(expected_creds)
+        validate_metrics(['CREDENTIALS_PROFILE'])
       end
 
       it 'hydrates credentials from profile when config set over ENV' do
@@ -190,6 +212,7 @@ CREDS
         allow(config).to receive(:profile).and_return(expected_creds[:profile_name])
         env_creds = with_env_credentials
         validate_credentials(expected_creds)
+        validate_metrics(['CREDENTIALS_PROFILE'])
       end
     end
   end

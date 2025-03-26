@@ -140,6 +140,7 @@ module Aws
     end
 
     def refresh
+      puts "SSO refreshing"
       c = if @legacy
             cached_token = read_cached_token
             @client.get_role_credentials(
@@ -154,6 +155,7 @@ module Aws
               access_token: @token_provider.token.token
             ).role_credentials
           end
+      puts "SSO refreshed"
 
       @credentials = Credentials.new(
         c.access_key_id,
