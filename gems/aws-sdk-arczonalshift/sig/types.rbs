@@ -35,7 +35,7 @@ module Aws::ARCZonalShift
 
     class ConflictException
       attr_accessor message: ::String
-      attr_accessor reason: ("ZonalShiftAlreadyExists" | "ZonalShiftStatusNotActive" | "SimultaneousZonalShiftsConflict" | "PracticeConfigurationAlreadyExists" | "AutoShiftEnabled" | "PracticeConfigurationDoesNotExist")
+      attr_accessor reason: ("ZonalShiftAlreadyExists" | "ZonalShiftStatusNotActive" | "SimultaneousZonalShiftsConflict" | "PracticeConfigurationAlreadyExists" | "AutoShiftEnabled" | "PracticeConfigurationDoesNotExist" | "ZonalAutoshiftActive")
       attr_accessor zonal_shift_id: ::String
       SENSITIVE: []
     end
@@ -229,7 +229,7 @@ module Aws::ARCZonalShift
 
     class ValidationException
       attr_accessor message: ::String
-      attr_accessor reason: ("InvalidExpiresIn" | "InvalidStatus" | "MissingValue" | "InvalidToken" | "InvalidResourceIdentifier" | "InvalidAz" | "UnsupportedAz" | "InvalidAlarmCondition" | "InvalidConditionType" | "InvalidPracticeBlocker")
+      attr_accessor reason: ("InvalidExpiresIn" | "InvalidStatus" | "MissingValue" | "InvalidToken" | "InvalidResourceIdentifier" | "InvalidAz" | "UnsupportedAz" | "InvalidAlarmCondition" | "InvalidConditionType" | "InvalidPracticeBlocker" | "FISExperimentUpdateNotAllowed")
       SENSITIVE: []
     end
 
@@ -251,6 +251,7 @@ module Aws::ARCZonalShift
       attr_accessor expiry_time: ::Time
       attr_accessor practice_run_outcome: ("FAILED" | "INTERRUPTED" | "PENDING" | "SUCCEEDED")
       attr_accessor resource_identifier: ::String
+      attr_accessor shift_type: ("ZONAL_SHIFT" | "PRACTICE_RUN" | "FIS_EXPERIMENT" | "ZONAL_AUTOSHIFT")
       attr_accessor start_time: ::Time
       attr_accessor zonal_shift_id: ::String
       SENSITIVE: []
@@ -262,6 +263,7 @@ module Aws::ARCZonalShift
       attr_accessor expiry_time: ::Time
       attr_accessor practice_run_outcome: ("FAILED" | "INTERRUPTED" | "PENDING" | "SUCCEEDED")
       attr_accessor resource_identifier: ::String
+      attr_accessor shift_type: ("ZONAL_SHIFT" | "PRACTICE_RUN" | "FIS_EXPERIMENT" | "ZONAL_AUTOSHIFT")
       attr_accessor start_time: ::Time
       attr_accessor status: ("ACTIVE" | "EXPIRED" | "CANCELED")
       attr_accessor zonal_shift_id: ::String

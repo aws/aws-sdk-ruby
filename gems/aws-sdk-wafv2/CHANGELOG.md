@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.106.0 (2025-03-26)
+------------------
+
+* Feature - This release adds the ability to associate an AWS WAF v2 web ACL with an AWS Amplify App.
+
 1.105.0 (2025-03-17)
 ------------------
 

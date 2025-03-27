@@ -172,12 +172,12 @@ module Aws::MediaTailor
     #   that MediaTailor must transcode the ads. `NONE` indicates that you
     #   have already transcoded the ads outside of MediaTailor and don't
     #   need them transcoded as part of the ad insertion workflow. For more
-    #   information about ad conditioning see
-    #   [https://docs.aws.amazon.com/precondition-ads.html][1].
+    #   information about ad conditioning see [Using preconditioned ads][1]
+    #   in the Elemental MediaTailor user guide.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/precondition-ads.html
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/precondition-ads.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/AdConditioningConfiguration AWS API Documentation
@@ -205,6 +205,37 @@ module Aws::MediaTailor
     #
     class AdMarkerPassthrough < Struct.new(
       :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings for customizing what events are included in logs for
+    # interactions with the ad decision server (ADS).
+    #
+    # For more information about ADS logs, inlcuding descriptions of the
+    # event types, see [MediaTailor ADS logs description and event types][1]
+    # in Elemental MediaTailor User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/ads-log-format.html
+    #
+    # @!attribute [rw] publish_opt_in_event_types
+    #   Indicates that MediaTailor emits `RAW_ADS_RESPONSE` logs for
+    #   playback sessions that are initialized with this configuration.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclude_event_types
+    #   Indicates that MediaTailor won't emit the selected events in the
+    #   logs for playback sessions that are initialized with this
+    #   configuration.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/AdsInteractionLog AWS API Documentation
+    #
+    class AdsInteractionLog < Struct.new(
+      :publish_opt_in_event_types,
+      :exclude_event_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -668,12 +699,24 @@ module Aws::MediaTailor
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html#AWS-vended-logs-permissions-V2
     #   @return [Array<String>]
     #
+    # @!attribute [rw] ads_interaction_log
+    #   The event types that MediaTailor emits in logs for interactions with
+    #   the ADS.
+    #   @return [Types::AdsInteractionLog]
+    #
+    # @!attribute [rw] manifest_service_interaction_log
+    #   The event types that MediaTailor emits in logs for interactions with
+    #   the origin server.
+    #   @return [Types::ManifestServiceInteractionLog]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ConfigureLogsForPlaybackConfigurationRequest AWS API Documentation
     #
     class ConfigureLogsForPlaybackConfigurationRequest < Struct.new(
       :percent_enabled,
       :playback_configuration_name,
-      :enabled_logging_strategies)
+      :enabled_logging_strategies,
+      :ads_interaction_log,
+      :manifest_service_interaction_log)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -696,12 +739,24 @@ module Aws::MediaTailor
     #   Logs log group, Amazon S3 bucket, and Amazon Data Firehose stream.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] ads_interaction_log
+    #   The event types that MediaTailor emits in logs for interactions with
+    #   the ADS.
+    #   @return [Types::AdsInteractionLog]
+    #
+    # @!attribute [rw] manifest_service_interaction_log
+    #   The event types that MediaTailor emits in logs for interactions with
+    #   the origin server.
+    #   @return [Types::ManifestServiceInteractionLog]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ConfigureLogsForPlaybackConfigurationResponse AWS API Documentation
     #
     class ConfigureLogsForPlaybackConfigurationResponse < Struct.new(
       :percent_enabled,
       :playback_configuration_name,
-      :enabled_logging_strategies)
+      :enabled_logging_strategies,
+      :ads_interaction_log,
+      :manifest_service_interaction_log)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2919,11 +2974,23 @@ module Aws::MediaTailor
     #   Logs log group, Amazon S3 bucket, and Amazon Data Firehose stream.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] ads_interaction_log
+    #   Settings for customizing what events are included in logs for
+    #   interactions with the ad decision server (ADS).
+    #   @return [Types::AdsInteractionLog]
+    #
+    # @!attribute [rw] manifest_service_interaction_log
+    #   Settings for customizing what events are included in logs for
+    #   interactions with the origin server.
+    #   @return [Types::ManifestServiceInteractionLog]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/LogConfiguration AWS API Documentation
     #
     class LogConfiguration < Struct.new(
       :percent_enabled,
-      :enabled_logging_strategies)
+      :enabled_logging_strategies,
+      :ads_interaction_log,
+      :manifest_service_interaction_log)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2961,6 +3028,31 @@ module Aws::MediaTailor
     #
     class ManifestProcessingRules < Struct.new(
       :ad_marker_passthrough)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings for customizing what events are included in logs for
+    # interactions with the origin server.
+    #
+    # For more information about manifest service logs, including
+    # descriptions of the event types, see [MediaTailor manifest logs
+    # description and event types][1] in Elemental MediaTailor User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/log-types.html
+    #
+    # @!attribute [rw] exclude_event_types
+    #   Indicates that MediaTailor won't emit the selected events in the
+    #   logs for playback sessions that are initialized with this
+    #   configuration.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ManifestServiceInteractionLog AWS API Documentation
+    #
+    class ManifestServiceInteractionLog < Struct.new(
+      :exclude_event_types)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -539,6 +539,12 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#create_direct_connect_gateway-instance_method
       def create_direct_connect_gateway: (
                                            direct_connect_gateway_name: ::String,
+                                           ?tags: Array[
+                                             {
+                                               key: ::String,
+                                               value: ::String?
+                                             },
+                                           ],
                                            ?amazon_side_asn: ::Integer
                                          ) -> _CreateDirectConnectGatewayResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDirectConnectGatewayResponseSuccess

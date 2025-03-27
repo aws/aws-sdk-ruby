@@ -3111,11 +3111,12 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAFV2/Client.html#get_web_acl-instance_method
       def get_web_acl: (
-                         name: ::String,
-                         scope: ("CLOUDFRONT" | "REGIONAL"),
-                         id: ::String
+                         ?name: ::String,
+                         ?scope: ("CLOUDFRONT" | "REGIONAL"),
+                         ?id: ::String,
+                         ?arn: ::String
                        ) -> _GetWebACLResponseSuccess
-                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWebACLResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWebACLResponseSuccess
 
       interface _GetWebACLForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetWebACLForResourceResponse]
@@ -3243,7 +3244,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAFV2/Client.html#list_resources_for_web_acl-instance_method
       def list_resources_for_web_acl: (
                                         web_acl_arn: ::String,
-                                        ?resource_type: ("APPLICATION_LOAD_BALANCER" | "API_GATEWAY" | "APPSYNC" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE")
+                                        ?resource_type: ("APPLICATION_LOAD_BALANCER" | "API_GATEWAY" | "APPSYNC" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "AMPLIFY")
                                       ) -> _ListResourcesForWebACLResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourcesForWebACLResponseSuccess
 

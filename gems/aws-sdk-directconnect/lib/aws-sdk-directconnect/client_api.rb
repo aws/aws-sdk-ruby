@@ -462,6 +462,7 @@ module Aws::DirectConnect
     CreateDirectConnectGatewayAssociationResult.struct_class = Types::CreateDirectConnectGatewayAssociationResult
 
     CreateDirectConnectGatewayRequest.add_member(:direct_connect_gateway_name, Shapes::ShapeRef.new(shape: DirectConnectGatewayName, required: true, location_name: "directConnectGatewayName"))
+    CreateDirectConnectGatewayRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateDirectConnectGatewayRequest.add_member(:amazon_side_asn, Shapes::ShapeRef.new(shape: LongAsn, location_name: "amazonSideAsn"))
     CreateDirectConnectGatewayRequest.struct_class = Types::CreateDirectConnectGatewayRequest
 
@@ -664,6 +665,7 @@ module Aws::DirectConnect
     DirectConnectGateway.add_member(:owner_account, Shapes::ShapeRef.new(shape: OwnerAccount, location_name: "ownerAccount"))
     DirectConnectGateway.add_member(:direct_connect_gateway_state, Shapes::ShapeRef.new(shape: DirectConnectGatewayState, location_name: "directConnectGatewayState"))
     DirectConnectGateway.add_member(:state_change_error, Shapes::ShapeRef.new(shape: StateChangeError, location_name: "stateChangeError"))
+    DirectConnectGateway.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     DirectConnectGateway.struct_class = Types::DirectConnectGateway
 
     DirectConnectGatewayAssociation.add_member(:direct_connect_gateway_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayId, location_name: "directConnectGatewayId"))

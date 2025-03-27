@@ -394,6 +394,9 @@ module Aws::WAFV2
     #   * For an Amazon Web Services Verified Access instance:
     #     `arn:partition:ec2:region:account-id:verified-access-instance/instance-id
     #     `
+    #
+    #   * For an Amplify application:
+    #     `arn:partition:amplify:region:account-id:apps/app-id `
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/AssociateWebACLRequest AWS API Documentation
@@ -511,6 +514,8 @@ module Aws::WAFV2
     #     Verified Access, the default limit is 16 KB (16,384 bytes), and
     #     you can increase the limit for each resource type in the web ACL
     #     `AssociationConfig`, for additional processing fees.
+    #
+    #   * For Amplify, use the CloudFront limit.
     #
     #   The options for oversize handling are the following:
     #
@@ -875,7 +880,8 @@ module Aws::WAFV2
 
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -1059,7 +1065,8 @@ module Aws::WAFV2
 
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -1109,7 +1116,8 @@ module Aws::WAFV2
     #
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -1210,7 +1218,8 @@ module Aws::WAFV2
     #
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -1268,7 +1277,8 @@ module Aws::WAFV2
     #
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -1380,7 +1390,8 @@ module Aws::WAFV2
     #
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -1794,7 +1805,8 @@ module Aws::WAFV2
 
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -1874,7 +1886,8 @@ module Aws::WAFV2
     #
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -1988,7 +2001,8 @@ module Aws::WAFV2
     #
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -2039,7 +2053,8 @@ module Aws::WAFV2
     #
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -2090,7 +2105,8 @@ module Aws::WAFV2
     #
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -2136,7 +2152,8 @@ module Aws::WAFV2
 
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -2175,7 +2192,8 @@ module Aws::WAFV2
     #
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -2220,7 +2238,8 @@ module Aws::WAFV2
     #
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -2359,6 +2378,9 @@ module Aws::WAFV2
     #   * For an Amazon Web Services Verified Access instance:
     #     `arn:partition:ec2:region:account-id:verified-access-instance/instance-id
     #     `
+    #
+    #   * For an Amplify application:
+    #     `arn:partition:amplify:region:account-id:apps/app-id `
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DisassociateWebACLRequest AWS API Documentation
@@ -2520,6 +2542,8 @@ module Aws::WAFV2
     #     you can increase the limit for each resource type in the web ACL
     #     `AssociationConfig`, for additional processing fees.
     #
+    #   * For Amplify, use the CloudFront limit.
+    #
     #   For information about how to handle oversized request bodies, see
     #   the `Body` object configuration.
     #   @return [Types::Body]
@@ -2548,6 +2572,8 @@ module Aws::WAFV2
     #     Verified Access, the default limit is 16 KB (16,384 bytes), and
     #     you can increase the limit for each resource type in the web ACL
     #     `AssociationConfig`, for additional processing fees.
+    #
+    #   * For Amplify, use the CloudFront limit.
     #
     #   For information about how to handle oversized request bodies, see
     #   the `JsonBody` object configuration.
@@ -2971,7 +2997,8 @@ module Aws::WAFV2
 
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -3019,7 +3046,8 @@ module Aws::WAFV2
     #
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -3132,7 +3160,8 @@ module Aws::WAFV2
     #
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -3242,7 +3271,8 @@ module Aws::WAFV2
 
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -3313,7 +3343,8 @@ module Aws::WAFV2
     #
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -3371,7 +3402,8 @@ module Aws::WAFV2
     #
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -3439,7 +3471,8 @@ module Aws::WAFV2
     #
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -3539,6 +3572,9 @@ module Aws::WAFV2
     #   * For an Amazon Web Services Verified Access instance:
     #     `arn:partition:ec2:region:account-id:verified-access-instance/instance-id
     #     `
+    #
+    #   * For an Amplify application:
+    #     `arn:partition:amplify:region:account-id:apps/app-id `
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetWebACLForResourceRequest AWS API Documentation
@@ -3569,7 +3605,8 @@ module Aws::WAFV2
     #
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -3586,12 +3623,18 @@ module Aws::WAFV2
     #   like update and delete.
     #   @return [String]
     #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the web ACL that you want to
+    #   retrieve.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetWebACLRequest AWS API Documentation
     #
     class GetWebACLRequest < Struct.new(
       :name,
       :scope,
-      :id)
+      :id,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4299,6 +4342,8 @@ module Aws::WAFV2
     #     you can increase the limit for each resource type in the web ACL
     #     `AssociationConfig`, for additional processing fees.
     #
+    #   * For Amplify, use the CloudFront limit.
+    #
     #   The options for oversize handling are the following:
     #
     #   * `CONTINUE` - Inspect the available body contents normally,
@@ -4472,7 +4517,8 @@ module Aws::WAFV2
 
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -4548,7 +4594,8 @@ module Aws::WAFV2
     #
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -4616,7 +4663,8 @@ module Aws::WAFV2
 
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -4676,7 +4724,8 @@ module Aws::WAFV2
 
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -4736,7 +4785,8 @@ module Aws::WAFV2
 
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -4815,7 +4865,8 @@ module Aws::WAFV2
 
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -4927,7 +4978,8 @@ module Aws::WAFV2
 
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -5033,7 +5085,8 @@ module Aws::WAFV2
 
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -5145,7 +5198,8 @@ module Aws::WAFV2
 
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -6242,7 +6296,8 @@ module Aws::WAFV2
     #
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -8942,7 +8997,8 @@ module Aws::WAFV2
     #
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -9055,7 +9111,8 @@ module Aws::WAFV2
     #
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -9151,7 +9208,8 @@ module Aws::WAFV2
     #
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -9221,7 +9279,8 @@ module Aws::WAFV2
     #
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -9322,7 +9381,8 @@ module Aws::WAFV2
     #
     # @!attribute [rw] scope
     #   Specifies whether this is for a global resource type, such as a
-    #   Amazon CloudFront distribution.
+    #   Amazon CloudFront distribution. For an Amplify application, use
+    #   `CLOUDFRONT`.
     #
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
@@ -10050,8 +10110,8 @@ module Aws::WAFV2
     # one or more Amazon Web Services resources to protect. The resource
     # types include Amazon CloudFront distribution, Amazon API Gateway REST
     # API, Application Load Balancer, AppSync GraphQL API, Amazon Cognito
-    # user pool, App Runner service, and Amazon Web Services Verified Access
-    # instance.
+    # user pool, App Runner service, Amplify application, and Amazon Web
+    # Services Verified Access instance.
     #
     # @!attribute [rw] name
     #   The name of the web ACL. You cannot change the name of a web ACL

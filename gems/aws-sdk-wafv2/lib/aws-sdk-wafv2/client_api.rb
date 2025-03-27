@@ -899,9 +899,10 @@ module Aws::WAFV2
     GetWebACLForResourceResponse.add_member(:web_acl, Shapes::ShapeRef.new(shape: WebACL, location_name: "WebACL"))
     GetWebACLForResourceResponse.struct_class = Types::GetWebACLForResourceResponse
 
-    GetWebACLRequest.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "Name"))
-    GetWebACLRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
-    GetWebACLRequest.add_member(:id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "Id"))
+    GetWebACLRequest.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, location_name: "Name"))
+    GetWebACLRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, location_name: "Scope"))
+    GetWebACLRequest.add_member(:id, Shapes::ShapeRef.new(shape: EntityId, location_name: "Id"))
+    GetWebACLRequest.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ARN"))
     GetWebACLRequest.struct_class = Types::GetWebACLRequest
 
     GetWebACLResponse.add_member(:web_acl, Shapes::ShapeRef.new(shape: WebACL, location_name: "WebACL"))

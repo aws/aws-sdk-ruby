@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2025-03-26)
+------------------
+
+* Feature - Add new shiftType field for ARC zonal shifts.
+
 1.29.0 (2025-02-18)
 ------------------
 

@@ -23,6 +23,9 @@ module Aws::MediaTailor
     AdConditioningConfiguration = Shapes::StructureShape.new(name: 'AdConditioningConfiguration')
     AdMarkerPassthrough = Shapes::StructureShape.new(name: 'AdMarkerPassthrough')
     AdMarkupType = Shapes::StringShape.new(name: 'AdMarkupType')
+    AdsInteractionExcludeEventType = Shapes::StringShape.new(name: 'AdsInteractionExcludeEventType')
+    AdsInteractionLog = Shapes::StructureShape.new(name: 'AdsInteractionLog')
+    AdsInteractionPublishOptInEventType = Shapes::StringShape.new(name: 'AdsInteractionPublishOptInEventType')
     Alert = Shapes::StructureShape.new(name: 'Alert')
     AlertCategory = Shapes::StringShape.new(name: 'AlertCategory')
     AlternateMedia = Shapes::StructureShape.new(name: 'AlternateMedia')
@@ -126,6 +129,8 @@ module Aws::MediaTailor
     LoggingStrategy = Shapes::StringShape.new(name: 'LoggingStrategy')
     Long = Shapes::IntegerShape.new(name: 'Long')
     ManifestProcessingRules = Shapes::StructureShape.new(name: 'ManifestProcessingRules')
+    ManifestServiceExcludeEventType = Shapes::StringShape.new(name: 'ManifestServiceExcludeEventType')
+    ManifestServiceInteractionLog = Shapes::StructureShape.new(name: 'ManifestServiceInteractionLog')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MessageType = Shapes::StringShape.new(name: 'MessageType')
     Mode = Shapes::StringShape.new(name: 'Mode')
@@ -182,6 +187,8 @@ module Aws::MediaTailor
     UpdateVodSourceRequest = Shapes::StructureShape.new(name: 'UpdateVodSourceRequest')
     UpdateVodSourceResponse = Shapes::StructureShape.new(name: 'UpdateVodSourceResponse')
     VodSource = Shapes::StructureShape.new(name: 'VodSource')
+    __adsInteractionExcludeEventTypesList = Shapes::ListShape.new(name: '__adsInteractionExcludeEventTypesList')
+    __adsInteractionPublishOptInEventTypesList = Shapes::ListShape.new(name: '__adsInteractionPublishOptInEventTypesList')
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
     __integer = Shapes::IntegerShape.new(name: '__integer')
     __integerMin1 = Shapes::IntegerShape.new(name: '__integerMin1')
@@ -203,6 +210,7 @@ module Aws::MediaTailor
     __listOfVodSource = Shapes::ListShape.new(name: '__listOfVodSource')
     __listOf__string = Shapes::ListShape.new(name: '__listOf__string')
     __long = Shapes::IntegerShape.new(name: '__long')
+    __manifestServiceExcludeEventTypesList = Shapes::ListShape.new(name: '__manifestServiceExcludeEventTypesList')
     __mapOf__string = Shapes::MapShape.new(name: '__mapOf__string')
     __string = Shapes::StringShape.new(name: '__string')
     __timestampUnix = Shapes::TimestampShape.new(name: '__timestampUnix', timestampFormat: "unixTimestamp")
@@ -232,6 +240,10 @@ module Aws::MediaTailor
 
     AdMarkerPassthrough.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "Enabled"))
     AdMarkerPassthrough.struct_class = Types::AdMarkerPassthrough
+
+    AdsInteractionLog.add_member(:publish_opt_in_event_types, Shapes::ShapeRef.new(shape: __adsInteractionPublishOptInEventTypesList, location_name: "PublishOptInEventTypes"))
+    AdsInteractionLog.add_member(:exclude_event_types, Shapes::ShapeRef.new(shape: __adsInteractionExcludeEventTypesList, location_name: "ExcludeEventTypes"))
+    AdsInteractionLog.struct_class = Types::AdsInteractionLog
 
     Alert.add_member(:alert_code, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "AlertCode"))
     Alert.add_member(:alert_message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "AlertMessage"))
@@ -311,11 +323,15 @@ module Aws::MediaTailor
     ConfigureLogsForPlaybackConfigurationRequest.add_member(:percent_enabled, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "PercentEnabled"))
     ConfigureLogsForPlaybackConfigurationRequest.add_member(:playback_configuration_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "PlaybackConfigurationName"))
     ConfigureLogsForPlaybackConfigurationRequest.add_member(:enabled_logging_strategies, Shapes::ShapeRef.new(shape: __listOfLoggingStrategies, location_name: "EnabledLoggingStrategies"))
+    ConfigureLogsForPlaybackConfigurationRequest.add_member(:ads_interaction_log, Shapes::ShapeRef.new(shape: AdsInteractionLog, location_name: "AdsInteractionLog"))
+    ConfigureLogsForPlaybackConfigurationRequest.add_member(:manifest_service_interaction_log, Shapes::ShapeRef.new(shape: ManifestServiceInteractionLog, location_name: "ManifestServiceInteractionLog"))
     ConfigureLogsForPlaybackConfigurationRequest.struct_class = Types::ConfigureLogsForPlaybackConfigurationRequest
 
     ConfigureLogsForPlaybackConfigurationResponse.add_member(:percent_enabled, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "PercentEnabled"))
     ConfigureLogsForPlaybackConfigurationResponse.add_member(:playback_configuration_name, Shapes::ShapeRef.new(shape: __string, location_name: "PlaybackConfigurationName"))
     ConfigureLogsForPlaybackConfigurationResponse.add_member(:enabled_logging_strategies, Shapes::ShapeRef.new(shape: __listOfLoggingStrategies, location_name: "EnabledLoggingStrategies"))
+    ConfigureLogsForPlaybackConfigurationResponse.add_member(:ads_interaction_log, Shapes::ShapeRef.new(shape: AdsInteractionLog, location_name: "AdsInteractionLog"))
+    ConfigureLogsForPlaybackConfigurationResponse.add_member(:manifest_service_interaction_log, Shapes::ShapeRef.new(shape: ManifestServiceInteractionLog, location_name: "ManifestServiceInteractionLog"))
     ConfigureLogsForPlaybackConfigurationResponse.struct_class = Types::ConfigureLogsForPlaybackConfigurationResponse
 
     CreateChannelRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ChannelName"))
@@ -727,6 +743,8 @@ module Aws::MediaTailor
 
     LogConfiguration.add_member(:percent_enabled, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "PercentEnabled"))
     LogConfiguration.add_member(:enabled_logging_strategies, Shapes::ShapeRef.new(shape: __listOfLoggingStrategies, location_name: "EnabledLoggingStrategies"))
+    LogConfiguration.add_member(:ads_interaction_log, Shapes::ShapeRef.new(shape: AdsInteractionLog, location_name: "AdsInteractionLog"))
+    LogConfiguration.add_member(:manifest_service_interaction_log, Shapes::ShapeRef.new(shape: ManifestServiceInteractionLog, location_name: "ManifestServiceInteractionLog"))
     LogConfiguration.struct_class = Types::LogConfiguration
 
     LogConfigurationForChannel.add_member(:log_types, Shapes::ShapeRef.new(shape: LogTypes, location_name: "LogTypes"))
@@ -736,6 +754,9 @@ module Aws::MediaTailor
 
     ManifestProcessingRules.add_member(:ad_marker_passthrough, Shapes::ShapeRef.new(shape: AdMarkerPassthrough, location_name: "AdMarkerPassthrough"))
     ManifestProcessingRules.struct_class = Types::ManifestProcessingRules
+
+    ManifestServiceInteractionLog.add_member(:exclude_event_types, Shapes::ShapeRef.new(shape: __manifestServiceExcludeEventTypesList, location_name: "ExcludeEventTypes"))
+    ManifestServiceInteractionLog.struct_class = Types::ManifestServiceInteractionLog
 
     PlaybackConfiguration.add_member(:ad_decision_server_url, Shapes::ShapeRef.new(shape: __string, location_name: "AdDecisionServerUrl"))
     PlaybackConfiguration.add_member(:avail_suppression, Shapes::ShapeRef.new(shape: AvailSuppression, location_name: "AvailSuppression"))
@@ -1043,6 +1064,10 @@ module Aws::MediaTailor
     VodSource.add_member(:vod_source_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "VodSourceName"))
     VodSource.struct_class = Types::VodSource
 
+    __adsInteractionExcludeEventTypesList.member = Shapes::ShapeRef.new(shape: AdsInteractionExcludeEventType)
+
+    __adsInteractionPublishOptInEventTypesList.member = Shapes::ShapeRef.new(shape: AdsInteractionPublishOptInEventType)
+
     __listOfAdBreak.member = Shapes::ShapeRef.new(shape: AdBreak)
 
     __listOfAlert.member = Shapes::ShapeRef.new(shape: Alert)
@@ -1074,6 +1099,8 @@ module Aws::MediaTailor
     __listOfVodSource.member = Shapes::ShapeRef.new(shape: VodSource)
 
     __listOf__string.member = Shapes::ShapeRef.new(shape: __string)
+
+    __manifestServiceExcludeEventTypesList.member = Shapes::ShapeRef.new(shape: ManifestServiceExcludeEventType)
 
     __mapOf__string.key = Shapes::ShapeRef.new(shape: __string)
     __mapOf__string.value = Shapes::ShapeRef.new(shape: __string)

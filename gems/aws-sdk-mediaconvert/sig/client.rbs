@@ -416,6 +416,7 @@ module Aws
                               automated_encoding_settings: {
                                 abr_settings: {
                                   max_abr_bitrate: ::Integer?,
+                                  max_quality_level: ::Float?,
                                   max_renditions: ::Integer?,
                                   min_abr_bitrate: ::Integer?,
                                   rules: Array[
@@ -1882,6 +1883,7 @@ module Aws
                                        automated_encoding_settings: {
                                          abr_settings: {
                                            max_abr_bitrate: ::Integer?,
+                                           max_quality_level: ::Float?,
                                            max_renditions: ::Integer?,
                                            min_abr_bitrate: ::Integer?,
                                            rules: Array[
@@ -4441,6 +4443,7 @@ module Aws
                                        automated_encoding_settings: {
                                          abr_settings: {
                                            max_abr_bitrate: ::Integer?,
+                                           max_quality_level: ::Float?,
                                            max_renditions: ::Integer?,
                                            min_abr_bitrate: ::Integer?,
                                            rules: Array[
