@@ -1187,7 +1187,7 @@ module Aws
 
       interface _CreateRuleResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateRuleOutput]
-        def action: () -> ("CREATE_SUBSCRIPTION_REQUEST")
+        def action: () -> ("CREATE_LISTING_CHANGE_SET" | "CREATE_SUBSCRIPTION_REQUEST")
         def created_at: () -> ::Time
         def created_by: () -> ::String
         def description: () -> ::String
@@ -1201,7 +1201,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_rule-instance_method
       def create_rule: (
-                         action: ("CREATE_SUBSCRIPTION_REQUEST"),
+                         action: ("CREATE_LISTING_CHANGE_SET" | "CREATE_SUBSCRIPTION_REQUEST"),
                          ?client_token: ::String,
                          ?description: ::String,
                          detail: {
@@ -2241,7 +2241,7 @@ module Aws
 
       interface _GetRuleResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetRuleOutput]
-        def action: () -> ("CREATE_SUBSCRIPTION_REQUEST")
+        def action: () -> ("CREATE_LISTING_CHANGE_SET" | "CREATE_SUBSCRIPTION_REQUEST")
         def created_at: () -> ::Time
         def created_by: () -> ::String
         def description: () -> ::String
@@ -2779,7 +2779,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#list_rules-instance_method
       def list_rules: (
-                        ?action: ("CREATE_SUBSCRIPTION_REQUEST"),
+                        ?action: ("CREATE_LISTING_CHANGE_SET" | "CREATE_SUBSCRIPTION_REQUEST"),
                         ?asset_types: Array[::String],
                         ?data_product: bool,
                         domain_identifier: ::String,
@@ -3899,7 +3899,7 @@ module Aws
 
       interface _UpdateRuleResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRuleOutput]
-        def action: () -> ("CREATE_SUBSCRIPTION_REQUEST")
+        def action: () -> ("CREATE_LISTING_CHANGE_SET" | "CREATE_SUBSCRIPTION_REQUEST")
         def created_at: () -> ::Time
         def created_by: () -> ::String
         def description: () -> ::String

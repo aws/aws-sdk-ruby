@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.105.0 (2025-03-26)
+------------------
+
+* Feature - Added support for the new voice - Jihye (ko-KR). Jihye is available as a Neural voice only.
+
 1.104.0 (2025-02-18)
 ------------------
 

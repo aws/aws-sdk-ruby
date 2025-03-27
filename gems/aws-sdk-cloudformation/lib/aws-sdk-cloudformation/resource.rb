@@ -387,8 +387,6 @@ module Aws::CloudFormation
     #     unique stack ID.
     #
     #   * Deleted stacks: You must specify the unique stack ID.
-    #
-    #   Default: There is no default value.
     # @return [Stack::Collection]
     def stacks(options = {})
       batches = Enumerator.new do |y|

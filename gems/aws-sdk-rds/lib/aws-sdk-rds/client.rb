@@ -26329,7 +26329,10 @@ module Aws::RDS
     # `BackupRetentionPeriod` days. The target DB cluster is created from
     # the source DB cluster with the same configuration as the original DB
     # cluster, except that the new DB cluster is created with the default DB
-    # security group.
+    # security group. Unless the `RestoreType` is set to `copy-on-write`,
+    # the restore may occur in a different Availability Zone (AZ) from the
+    # original DB cluster. The AZ where RDS restores the DB cluster depends
+    # on the AZs in the specified subnet group.
     #
     # <note markdown="1"> For Aurora, this operation only restores the DB cluster, not the DB
     # instances for that DB cluster. You must invoke the `CreateDBInstance`
@@ -31896,7 +31899,7 @@ module Aws::RDS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.272.0'
+      context[:gem_version] = '1.273.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

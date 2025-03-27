@@ -976,15 +976,6 @@ module Aws::BedrockAgentRuntime
     #   final result it yielded. For more information, see [Trace
     #   enablement][1].
     #
-    # * To stream agent responses, make sure that only orchestration prompt
-    #   is enabled. Agent streaming is not supported for the following
-    #   steps:
-    #
-    #   * `Pre-processing`
-    #
-    #   * `Post-processing`
-    #
-    #   * Agent with 1 Knowledge base and `User Input` not enabled
     # * End a conversation by setting `endSession` to `true`.
     #
     # * In the `sessionState` object, you can include attributes for the
@@ -2295,6 +2286,11 @@ module Aws::BedrockAgentRuntime
     #   event.trace.condition_node_result_trace.satisfied_conditions #=> Array
     #   event.trace.condition_node_result_trace.satisfied_conditions[0].condition_name #=> String
     #   event.trace.condition_node_result_trace.timestamp #=> Time
+    #   event.trace.node_action_trace.node_name #=> String
+    #   event.trace.node_action_trace.operation_name #=> String
+    #   event.trace.node_action_trace.request_id #=> String
+    #   event.trace.node_action_trace.service_name #=> String
+    #   event.trace.node_action_trace.timestamp #=> Time
     #   event.trace.node_input_trace.fields #=> Array
     #   event.trace.node_input_trace.fields[0].node_input_name #=> String
     #   event.trace.node_input_trace.node_name #=> String
@@ -5431,7 +5427,7 @@ module Aws::BedrockAgentRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentruntime'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

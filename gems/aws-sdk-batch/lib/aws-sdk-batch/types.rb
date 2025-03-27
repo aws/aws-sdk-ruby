@@ -704,9 +704,9 @@ module Aws::Batch
     #   Key-value pair tags to be applied to Amazon EC2 resources that are
     #   launched in the compute environment. For Batch, these take the form
     #   of `"String1": "String2"`, where `String1` is the tag key and
-    #   `String2` is the tag value-for example, `{ "Name": "Batch Instance -
-    #   C4OnDemand" }`. This is helpful for recognizing your Batch instances
-    #   in the Amazon EC2 console. Updating these tags requires an
+    #   `String2` is the tag value (for example, `{ "Name": "Batch Instance
+    #   - C4OnDemand" }`). This is helpful for recognizing your Batch
+    #   instances in the Amazon EC2 console. Updating these tags requires an
     #   infrastructure update to the compute environment. For more
     #   information, see [Updating compute environments][1] in the *Batch
     #   User Guide*. These tags aren't seen when using the Batch
@@ -1100,10 +1100,10 @@ module Aws::Batch
     #   Key-value pair tags to be applied to Amazon EC2 resources that are
     #   launched in the compute environment. For Batch, these take the form
     #   of `"String1": "String2"`, where `String1` is the tag key and
-    #   `String2` is the tag value-for example, `{ "Name": "Batch Instance -
-    #   C4OnDemand" }`. This is helpful for recognizing your Batch instances
-    #   in the Amazon EC2 console. These tags aren't seen when using the
-    #   Batch `ListTagsForResource` API operation.
+    #   `String2` is the tag value (for example, `{ "Name": "Batch Instance
+    #   - C4OnDemand" }`). This is helpful for recognizing your Batch
+    #   instances in the Amazon EC2 console. These tags aren't seen when
+    #   using the Batch `ListTagsForResource` API operation.
     #
     #   When updating a compute environment, changing this setting requires
     #   an infrastructure update of the compute environment. For more
@@ -1663,6 +1663,12 @@ module Aws::Batch
     #   The private repository authentication credentials to use.
     #   @return [Types::RepositoryCredentials]
     #
+    # @!attribute [rw] enable_execute_command
+    #   Determines whether execute command functionality is turned on for
+    #   this task. If `true`, execute command functionality is turned on all
+    #   the containers in the task.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerDetail AWS API Documentation
     #
     class ContainerDetail < Struct.new(
@@ -1694,7 +1700,8 @@ module Aws::Batch
       :fargate_platform_configuration,
       :ephemeral_storage,
       :runtime_platform,
-      :repository_credentials)
+      :repository_credentials,
+      :enable_execute_command)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2094,6 +2101,12 @@ module Aws::Batch
     #   specify this parameter.
     #   @return [Types::FargatePlatformConfiguration]
     #
+    # @!attribute [rw] enable_execute_command
+    #   Determines whether execute command functionality is turned on for
+    #   this task. If `true`, execute command functionality is turned on all
+    #   the containers in the task.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] ephemeral_storage
     #   The amount of ephemeral storage to allocate for the task. This
     #   parameter is used to expand the total amount of ephemeral storage
@@ -2132,6 +2145,7 @@ module Aws::Batch
       :secrets,
       :network_configuration,
       :fargate_platform_configuration,
+      :enable_execute_command,
       :ephemeral_storage,
       :runtime_platform,
       :repository_credentials)
@@ -2213,9 +2227,9 @@ module Aws::Batch
     #
     # @!attribute [rw] unmanagedv_cpus
     #   The maximum number of vCPUs for an unmanaged compute environment.
-    #   This parameter is only used for fair share scheduling to reserve
+    #   This parameter is only used for fair-share scheduling to reserve
     #   vCPU capacity for new share identifiers. If this parameter isn't
-    #   provided for a fair share job queue, no vCPU capacity is reserved.
+    #   provided for a fair-share job queue, no vCPU capacity is reserved.
     #
     #   <note markdown="1"> This parameter is only supported when the `type` parameter is set to
     #   `UNMANAGED`.
@@ -2403,10 +2417,11 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] scheduling_policy_arn
-    #   The Amazon Resource Name (ARN) of the fair share scheduling policy.
-    #   Job queues that don't have a scheduling policy are scheduled in a
-    #   first-in, first-out (FIFO) model. After a job queue has a scheduling
-    #   policy, it can be replaced but can't be removed.
+    #   The Amazon Resource Name (ARN) of the fair-share scheduling policy.
+    #   Job queues that don't have a fair-share scheduling policy are
+    #   scheduled in a first-in, first-out (FIFO) model. After a job queue
+    #   has a fair-share scheduling policy, it can be replaced but can't be
+    #   removed.
     #
     #   The format is
     #   `aws:Partition:batch:Region:Account:scheduling-policy/Name `.
@@ -2414,11 +2429,11 @@ module Aws::Batch
     #   An example is
     #   `aws:aws:batch:us-west-2:123456789012:scheduling-policy/MySchedulingPolicy`.
     #
-    #   A job queue without a scheduling policy is scheduled as a FIFO job
-    #   queue and can't have a scheduling policy added. Jobs queues with a
-    #   scheduling policy can have a maximum of 500 active fair share
-    #   identifiers. When the limit has been reached, submissions of any
-    #   jobs that add a new fair share identifier fail.
+    #   A job queue without a fair-share scheduling policy is scheduled as a
+    #   FIFO job queue and can't have a fair-share scheduling policy added.
+    #   Jobs queues with a fair-share scheduling policy can have a maximum
+    #   of 500 active share identifiers. When the limit has been reached,
+    #   submissions of any jobs that add a new share identifier fail.
     #   @return [String]
     #
     # @!attribute [rw] priority
@@ -2504,13 +2519,13 @@ module Aws::Batch
     # Contains the parameters for `CreateSchedulingPolicy`.
     #
     # @!attribute [rw] name
-    #   The name of the scheduling policy. It can be up to 128 letters long.
-    #   It can contain uppercase and lowercase letters, numbers, hyphens
-    #   (-), and underscores (\_).
+    #   The name of the fair-share scheduling policy. It can be up to 128
+    #   letters long. It can contain uppercase and lowercase letters,
+    #   numbers, hyphens (-), and underscores (\_).
     #   @return [String]
     #
     # @!attribute [rw] fairshare_policy
-    #   The fair share policy of the scheduling policy.
+    #   The fair-share scheduling policy details.
     #   @return [Types::FairsharePolicy]
     #
     # @!attribute [rw] tags
@@ -3368,6 +3383,12 @@ module Aws::Batch
     #   A list of data volumes used in a job.
     #   @return [Array<Types::Volume>]
     #
+    # @!attribute [rw] enable_execute_command
+    #   Determines whether execute command functionality is turned on for
+    #   this task. If `true`, execute command functionality is turned on all
+    #   the containers in the task.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/EcsTaskDetails AWS API Documentation
     #
     class EcsTaskDetails < Struct.new(
@@ -3382,7 +3403,8 @@ module Aws::Batch
       :pid_mode,
       :network_configuration,
       :runtime_platform,
-      :volumes)
+      :volumes,
+      :enable_execute_command)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3502,6 +3524,12 @@ module Aws::Batch
     #   A list of volumes that are associated with the job.
     #   @return [Array<Types::Volume>]
     #
+    # @!attribute [rw] enable_execute_command
+    #   Determines whether execute command functionality is turned on for
+    #   this task. If `true`, execute command functionality is turned on all
+    #   the containers in the task.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/EcsTaskProperties AWS API Documentation
     #
     class EcsTaskProperties < Struct.new(
@@ -3514,7 +3542,8 @@ module Aws::Batch
       :pid_mode,
       :network_configuration,
       :runtime_platform,
-      :volumes)
+      :volumes,
+      :enable_execute_command)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4668,7 +4697,7 @@ module Aws::Batch
     #
     # @!attribute [rw] init_containers
     #   The overrides for the `initContainers` defined in the Amazon EKS
-    #   pod. These containers run before application containers, always runs
+    #   pod. These containers run before application containers, always run
     #   to completion, and must complete successfully before the next
     #   container starts. These containers are registered with the Amazon
     #   EKS Connector agent and persists the registration information in the
@@ -4901,45 +4930,45 @@ module Aws::Batch
       include Aws::Structure
     end
 
-    # The fair share policy for a scheduling policy.
+    # The fair-share scheduling policy details.
     #
     # @!attribute [rw] share_decay_seconds
-    #   The amount of time (in seconds) to use to calculate a fair share
-    #   percentage for each fair share identifier in use. A value of zero
-    #   (0) indicates the default minimum time window (600 seconds). The
-    #   maximum supported value is 604800 (1 week).
+    #   The amount of time (in seconds) to use to calculate a fair-share
+    #   percentage for each share identifier in use. A value of zero (0)
+    #   indicates the default minimum time window (600 seconds). The maximum
+    #   supported value is 604800 (1 week).
     #
     #   The decay allows for more recently run jobs to have more weight than
     #   jobs that ran earlier. Consider adjusting this number if you have
     #   jobs that (on average) run longer than ten minutes, or a large
     #   difference in job count or job run times between share identifiers,
-    #   and the allocation of resources doesn’t meet your needs.
+    #   and the allocation of resources doesn't meet your needs.
     #   @return [Integer]
     #
     # @!attribute [rw] compute_reservation
-    #   A value used to reserve some of the available maximum vCPU for fair
-    #   share identifiers that aren't already used.
+    #   A value used to reserve some of the available maximum vCPU for share
+    #   identifiers that aren't already used.
     #
     #   The reserved ratio is `(computeReservation/100)^ActiveFairShares `
-    #   where ` ActiveFairShares ` is the number of active fair share
+    #   where ` ActiveFairShares ` is the number of active share
     #   identifiers.
     #
     #   For example, a `computeReservation` value of 50 indicates that Batch
-    #   reserves 50% of the maximum available vCPU if there's only one fair
-    #   share identifier. It reserves 25% if there are two fair share
-    #   identifiers. It reserves 12.5% if there are three fair share
-    #   identifiers. A `computeReservation` value of 25 indicates that Batch
-    #   should reserve 25% of the maximum available vCPU if there's only
-    #   one fair share identifier, 6.25% if there are two fair share
-    #   identifiers, and 1.56% if there are three fair share identifiers.
+    #   reserves 50% of the maximum available vCPU if there's only one
+    #   share identifier. It reserves 25% if there are two share
+    #   identifiers. It reserves 12.5% if there are three share identifiers.
+    #   A `computeReservation` value of 25 indicates that Batch should
+    #   reserve 25% of the maximum available vCPU if there's only one share
+    #   identifier, 6.25% if there are two fair share identifiers, and 1.56%
+    #   if there are three share identifiers.
     #
     #   The minimum value is 0 and the maximum value is 99.
     #   @return [Integer]
     #
     # @!attribute [rw] share_distribution
     #   An array of `SharedIdentifier` objects that contain the weights for
-    #   the fair share identifiers for the fair share policy. Fair share
-    #   identifiers that aren't included have a default weight of `1.0`.
+    #   the share identifiers for the fair-share policy. Share identifiers
+    #   that aren't included have a default weight of `1.0`.
     #   @return [Array<Types::ShareAttributes>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/FairsharePolicy AWS API Documentation
@@ -4978,13 +5007,52 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # The FireLens configuration for the container. This is used to specify
+    # and configure a log router for container logs. For more information,
+    # see [Custom log][1] routing in the *Amazon Elastic Container Service
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html
+    #
+    # @!attribute [rw] type
+    #   The log router to use. The valid values are `fluentd` or
+    #   `fluentbit`.
+    #   @return [String]
+    #
+    # @!attribute [rw] options
+    #   The options to use when configuring the log router. This field is
+    #   optional and can be used to specify a custom configuration file or
+    #   to add additional metadata, such as the task, task definition,
+    #   cluster, and container instance details to the log event. If
+    #   specified, the syntax to use is
+    #   `"options":{"enable-ecs-log-metadata":"true|false","config-file-type:"s3|file","config-file-value":"arn:aws:s3:::mybucket/fluent.conf|filepath"}`.
+    #   For more information, see [Creating a task definition that uses a
+    #   FireLens configuration][1] in the *Amazon Elastic Container Service
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html#firelens-taskdef
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/FirelensConfiguration AWS API Documentation
+    #
+    class FirelensConfiguration < Struct.new(
+      :type,
+      :options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains a list of the first 100 `RUNNABLE` jobs associated to a
     # single job queue.
     #
     # @!attribute [rw] jobs
     #   The Amazon Resource Names (ARNs) of the first 100 `RUNNABLE` jobs in
     #   a named job queue. For first-in-first-out (FIFO) job queues, jobs
-    #   are ordered based on their submission time. For fair share
+    #   are ordered based on their submission time. For fair-share
     #   scheduling (FSS) job queues, jobs are ordered based on their job
     #   priority and share usage.
     #   @return [Array<Types::FrontOfQueueJobSummary>]
@@ -5039,7 +5107,7 @@ module Aws::Batch
     # @!attribute [rw] front_of_queue
     #   The list of the first 100 `RUNNABLE` jobs in each job queue. For
     #   first-in-first-out (FIFO) job queues, jobs are ordered based on
-    #   their submission time. For fair share scheduling (FSS) job queues,
+    #   their submission time. For fair-share scheduling (FSS) job queues,
     #   jobs are ordered based on their job priority and share usage.
     #   @return [Types::FrontOfQueueDetail]
     #
@@ -5131,7 +5199,7 @@ module Aws::Batch
     #
     # @!attribute [rw] scheduling_priority
     #   The scheduling priority of the job definition. This only affects
-    #   jobs in job queues with a fair share policy. Jobs with a higher
+    #   jobs in job queues with a fair-share policy. Jobs with a higher
     #   scheduling priority are scheduled before jobs with a lower
     #   scheduling priority.
     #   @return [Integer]
@@ -5305,7 +5373,7 @@ module Aws::Batch
     #
     # @!attribute [rw] scheduling_priority
     #   The scheduling policy of the job definition. This only affects jobs
-    #   in job queues with a fair share policy. Jobs with a higher
+    #   in job queues with a fair-share policy. Jobs with a higher
     #   scheduling priority are scheduled before jobs with a lower
     #   scheduling priority.
     #   @return [Integer]
@@ -6052,7 +6120,7 @@ module Aws::Batch
     #   If a `maxSwap` value of `0` is specified, the container doesn't use
     #   swap. Accepted values are `0` or any positive integer. If the
     #   `maxSwap` parameter is omitted, the container doesn't use the swap
-    #   configuration for the container instance that it's running on. A
+    #   configuration for the container instance on which it runs. A
     #   `maxSwap` value must be set for the `swappiness` parameter to be
     #   used.
     #
@@ -6610,52 +6678,59 @@ module Aws::Batch
     #
     #    </note>
     #
+    #   awsfirelens
+    #
+    #   : Specifies the firelens logging driver. For more information on
+    #     configuring Firelens, see [Send Amazon ECS logs to an Amazon Web
+    #     Services service or Amazon Web Services Partner][1] in the *Amazon
+    #     Elastic Container Service Developer Guide*.
+    #
     #   awslogs
     #
     #   : Specifies the Amazon CloudWatch Logs logging driver. For more
-    #     information, see [Using the awslogs log driver][1] in the *Batch
-    #     User Guide* and [Amazon CloudWatch Logs logging driver][2] in the
+    #     information, see [Using the awslogs log driver][2] in the *Batch
+    #     User Guide* and [Amazon CloudWatch Logs logging driver][3] in the
     #     Docker documentation.
     #
     #   fluentd
     #
     #   : Specifies the Fluentd logging driver. For more information
-    #     including usage and options, see [Fluentd logging driver][3] in
+    #     including usage and options, see [Fluentd logging driver][4] in
     #     the *Docker documentation*.
     #
     #   gelf
     #
     #   : Specifies the Graylog Extended Format (GELF) logging driver. For
     #     more information including usage and options, see [Graylog
-    #     Extended Format logging driver][4] in the *Docker documentation*.
+    #     Extended Format logging driver][5] in the *Docker documentation*.
     #
     #   journald
     #
     #   : Specifies the journald logging driver. For more information
-    #     including usage and options, see [Journald logging driver][5] in
+    #     including usage and options, see [Journald logging driver][6] in
     #     the *Docker documentation*.
     #
     #   json-file
     #
     #   : Specifies the JSON file logging driver. For more information
-    #     including usage and options, see [JSON File logging driver][6] in
+    #     including usage and options, see [JSON File logging driver][7] in
     #     the *Docker documentation*.
     #
     #   splunk
     #
     #   : Specifies the Splunk logging driver. For more information
-    #     including usage and options, see [Splunk logging driver][7] in the
+    #     including usage and options, see [Splunk logging driver][8] in the
     #     *Docker documentation*.
     #
     #   syslog
     #
     #   : Specifies the syslog logging driver. For more information
-    #     including usage and options, see [Syslog logging driver][8] in the
+    #     including usage and options, see [Syslog logging driver][9] in the
     #     *Docker documentation*.
     #
     #   <note markdown="1"> If you have a custom driver that's not listed earlier that you want
     #   to work with the Amazon ECS container agent, you can fork the Amazon
-    #   ECS container agent project that's [available on GitHub][9] and
+    #   ECS container agent project that's [available on GitHub][10] and
     #   customize it to work with that driver. We encourage you to submit
     #   pull requests for changes that you want to have included. However,
     #   Amazon Web Services doesn't currently support running modified
@@ -6671,15 +6746,16 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/using_awslogs.html
-    #   [2]: https://docs.docker.com/config/containers/logging/awslogs/
-    #   [3]: https://docs.docker.com/config/containers/logging/fluentd/
-    #   [4]: https://docs.docker.com/config/containers/logging/gelf/
-    #   [5]: https://docs.docker.com/config/containers/logging/journald/
-    #   [6]: https://docs.docker.com/config/containers/logging/json-file/
-    #   [7]: https://docs.docker.com/config/containers/logging/splunk/
-    #   [8]: https://docs.docker.com/config/containers/logging/syslog/
-    #   [9]: https://github.com/aws/amazon-ecs-agent
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html
+    #   [2]: https://docs.aws.amazon.com/batch/latest/userguide/using_awslogs.html
+    #   [3]: https://docs.docker.com/config/containers/logging/awslogs/
+    #   [4]: https://docs.docker.com/config/containers/logging/fluentd/
+    #   [5]: https://docs.docker.com/config/containers/logging/gelf/
+    #   [6]: https://docs.docker.com/config/containers/logging/journald/
+    #   [7]: https://docs.docker.com/config/containers/logging/json-file/
+    #   [8]: https://docs.docker.com/config/containers/logging/splunk/
+    #   [9]: https://docs.docker.com/config/containers/logging/syslog/
+    #   [10]: https://github.com/aws/amazon-ecs-agent
     #   @return [String]
     #
     # @!attribute [rw] options
@@ -7069,7 +7145,7 @@ module Aws::Batch
     #
     # @!attribute [rw] scheduling_priority
     #   The scheduling priority for jobs that are submitted with this job
-    #   definition. This only affects jobs in job queues with a fair share
+    #   definition. This only affects jobs in job queues with a fair-share
     #   policy. Jobs with a higher scheduling priority are scheduled before
     #   jobs with a lower scheduling priority.
     #
@@ -7513,7 +7589,7 @@ module Aws::Batch
     # An object that represents a scheduling policy.
     #
     # @!attribute [rw] name
-    #   The name of the scheduling policy.
+    #   The name of the fair-share scheduling policy.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -7524,14 +7600,14 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] fairshare_policy
-    #   The fair share policy for the scheduling policy.
+    #   The fair-share scheduling policy details.
     #   @return [Types::FairsharePolicy]
     #
     # @!attribute [rw] tags
-    #   The tags that you apply to the scheduling policy to categorize and
-    #   organize your resources. Each tag consists of a key and an optional
-    #   value. For more information, see [Tagging Amazon Web Services
-    #   resources][1] in *Amazon Web Services General Reference*.
+    #   The tags that you apply to the fair-share scheduling policy to
+    #   categorize and organize your resources. Each tag consists of a key
+    #   and an optional value. For more information, see [Tagging Amazon Web
+    #   Services resources][1] in *Amazon Web Services General Reference*.
     #
     #
     #
@@ -7621,20 +7697,19 @@ module Aws::Batch
       include Aws::Structure
     end
 
-    # Specifies the weights for the fair share identifiers for the fair
-    # share policy. Fair share identifiers that aren't included have a
-    # default weight of `1.0`.
+    # Specifies the weights for the share identifiers for the fair-share
+    # policy. Share identifiers that aren't included have a default weight
+    # of `1.0`.
     #
     # @!attribute [rw] share_identifier
-    #   A fair share identifier or fair share identifier prefix. If the
-    #   string ends with an asterisk (*), this entry specifies the weight
-    #   factor to use for fair share identifiers that start with that
-    #   prefix. The list of fair share identifiers in a fair share policy
-    #   can't overlap. For example, you can't have one that specifies a
-    #   `shareIdentifier` of `UserA*` and another that specifies a
-    #   `shareIdentifier` of `UserA-1`.
+    #   A share identifier or share identifier prefix. If the string ends
+    #   with an asterisk (*), this entry specifies the weight factor to use
+    #   for share identifiers that start with that prefix. The list of share
+    #   identifiers in a fair-share policy can't overlap. For example, you
+    #   can't have one that specifies a `shareIdentifier` of `UserA*` and
+    #   another that specifies a `shareIdentifier` of `UserA-1`.
     #
-    #   There can be no more than 500 fair share identifiers active in a job
+    #   There can be no more than 500 share identifiers active in a job
     #   queue.
     #
     #   The string is limited to 255 alphanumeric characters, and can be
@@ -7642,10 +7717,10 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] weight_factor
-    #   The weight factor for the fair share identifier. The default value
-    #   is 1.0. A lower value has a higher priority for compute resources.
-    #   For example, jobs that use a share identifier with a weight factor
-    #   of 0.125 (1/8) get 8 times the compute resources of jobs that use a
+    #   The weight factor for the share identifier. The default value is
+    #   1.0. A lower value has a higher priority for compute resources. For
+    #   example, jobs that use a share identifier with a weight factor of
+    #   0.125 (1/8) get 8 times the compute resources of jobs that use a
     #   share identifier with a weight factor of 1.
     #
     #   The smallest supported value is 0.0001, and the largest supported
@@ -7676,8 +7751,9 @@ module Aws::Batch
     #
     # @!attribute [rw] share_identifier
     #   The share identifier for the job. Don't specify this parameter if
-    #   the job queue doesn't have a scheduling policy. If the job queue
-    #   has a scheduling policy, then this parameter must be specified.
+    #   the job queue doesn't have a fair-share scheduling policy. If the
+    #   job queue has a fair-share scheduling policy, then this parameter
+    #   must be specified.
     #
     #   This string is limited to 255 alphanumeric characters, and can be
     #   followed by an asterisk (*).
@@ -7685,7 +7761,7 @@ module Aws::Batch
     #
     # @!attribute [rw] scheduling_priority_override
     #   The scheduling priority for the job. This only affects jobs in job
-    #   queues with a fair share policy. Jobs with a higher scheduling
+    #   queues with a fair-share policy. Jobs with a higher scheduling
     #   priority are scheduled before jobs with a lower scheduling priority.
     #   This overrides any scheduling priority in the job definition and
     #   works only within a single share identifier.
@@ -7987,6 +8063,17 @@ module Aws::Batch
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/application_architecture.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] firelens_configuration
+    #   The FireLens configuration for the container. This is used to
+    #   specify and configure a log router for container logs. For more
+    #   information, see [Custom log][1] routing in the *Amazon Elastic
+    #   Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html
+    #   @return [Types::FirelensConfiguration]
+    #
     # @!attribute [rw] image
     #   The image used to start a container. This string is passed directly
     #   to the Docker daemon. By default, images in the Docker Hub registry
@@ -8236,6 +8323,7 @@ module Aws::Batch
       :depends_on,
       :environment,
       :essential,
+      :firelens_configuration,
       :image,
       :linux_parameters,
       :log_configuration,
@@ -8370,6 +8458,17 @@ module Aws::Batch
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/application_architecture.html
     #   @return [Boolean]
+    #
+    # @!attribute [rw] firelens_configuration
+    #   The FireLens configuration for the container. This is used to
+    #   specify and configure a log router for container logs. For more
+    #   information, see [Custom log][1] routing in the *Amazon Elastic
+    #   Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html
+    #   @return [Types::FirelensConfiguration]
     #
     # @!attribute [rw] image
     #   The image used to start a container. This string is passed directly
@@ -8595,6 +8694,7 @@ module Aws::Batch
       :depends_on,
       :environment,
       :essential,
+      :firelens_configuration,
       :image,
       :linux_parameters,
       :log_configuration,
@@ -8802,9 +8902,9 @@ module Aws::Batch
     # @!attribute [rw] unmanagedv_cpus
     #   The maximum number of vCPUs expected to be used for an unmanaged
     #   compute environment. Don't specify this parameter for a managed
-    #   compute environment. This parameter is only used for fair share
+    #   compute environment. This parameter is only used for fair-share
     #   scheduling to reserve vCPU capacity for new share identifiers. If
-    #   this parameter isn't provided for a fair share job queue, no vCPU
+    #   this parameter isn't provided for a fair-share job queue, no vCPU
     #   capacity is reserved.
     #   @return [Integer]
     #
@@ -8988,8 +9088,8 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] scheduling_policy_arn
-    #   Amazon Resource Name (ARN) of the fair share scheduling policy. Once
-    #   a job queue is created, the fair share scheduling policy can be
+    #   Amazon Resource Name (ARN) of the fair-share scheduling policy. Once
+    #   a job queue is created, the fair-share scheduling policy can be
     #   replaced but not removed. The format is
     #   `aws:Partition:batch:Region:Account:scheduling-policy/Name `. For
     #   example,
@@ -9063,7 +9163,7 @@ module Aws::Batch
       include Aws::Structure
     end
 
-    # Specifies the infrastructure update policy for the compute
+    # Specifies the infrastructure update policy for the Amazon EC2 compute
     # environment. For more information about infrastructure updates, see
     # [Updating compute environments][1] in the *Batch User Guide*.
     #
@@ -9098,7 +9198,7 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] fairshare_policy
-    #   The fair share policy.
+    #   The fair-share policy scheduling details.
     #   @return [Types::FairsharePolicy]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateSchedulingPolicyRequest AWS API Documentation

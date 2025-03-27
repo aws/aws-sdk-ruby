@@ -727,6 +727,7 @@ module Aws::MediaConvert
     __doubleMin0 = Shapes::FloatShape.new(name: '__doubleMin0')
     __doubleMin0Max1 = Shapes::FloatShape.new(name: '__doubleMin0Max1')
     __doubleMin0Max2147483647 = Shapes::FloatShape.new(name: '__doubleMin0Max2147483647')
+    __doubleMin1Max10 = Shapes::FloatShape.new(name: '__doubleMin1Max10')
     __doubleMinNegative59Max0 = Shapes::FloatShape.new(name: '__doubleMinNegative59Max0')
     __doubleMinNegative60Max3 = Shapes::FloatShape.new(name: '__doubleMinNegative60Max3')
     __doubleMinNegative60Max6 = Shapes::FloatShape.new(name: '__doubleMinNegative60Max6')
@@ -1074,6 +1075,7 @@ module Aws::MediaConvert
     AutomatedAbrRule.struct_class = Types::AutomatedAbrRule
 
     AutomatedAbrSettings.add_member(:max_abr_bitrate, Shapes::ShapeRef.new(shape: __integerMin100000Max100000000, location_name: "maxAbrBitrate"))
+    AutomatedAbrSettings.add_member(:max_quality_level, Shapes::ShapeRef.new(shape: __doubleMin1Max10, location_name: "maxQualityLevel"))
     AutomatedAbrSettings.add_member(:max_renditions, Shapes::ShapeRef.new(shape: __integerMin3Max15, location_name: "maxRenditions"))
     AutomatedAbrSettings.add_member(:min_abr_bitrate, Shapes::ShapeRef.new(shape: __integerMin100000Max100000000, location_name: "minAbrBitrate"))
     AutomatedAbrSettings.add_member(:rules, Shapes::ShapeRef.new(shape: __listOfAutomatedAbrRule, location_name: "rules"))

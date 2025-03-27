@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.273.0 (2025-03-26)
+------------------
+
+* Feature - Add note about the Availability Zone where RDS restores the DB cluster for the RestoreDBClusterToPointInTime operation.
+
 1.272.0 (2025-03-04)
 ------------------
 

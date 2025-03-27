@@ -193,6 +193,7 @@ module Aws::Batch
       attr_accessor ephemeral_storage: Types::EphemeralStorage
       attr_accessor runtime_platform: Types::RuntimePlatform
       attr_accessor repository_credentials: Types::RepositoryCredentials
+      attr_accessor enable_execute_command: bool
       SENSITIVE: []
     end
 
@@ -227,6 +228,7 @@ module Aws::Batch
       attr_accessor secrets: ::Array[Types::Secret]
       attr_accessor network_configuration: Types::NetworkConfiguration
       attr_accessor fargate_platform_configuration: Types::FargatePlatformConfiguration
+      attr_accessor enable_execute_command: bool
       attr_accessor ephemeral_storage: Types::EphemeralStorage
       attr_accessor runtime_platform: Types::RuntimePlatform
       attr_accessor repository_credentials: Types::RepositoryCredentials
@@ -477,6 +479,7 @@ module Aws::Batch
       attr_accessor network_configuration: Types::NetworkConfiguration
       attr_accessor runtime_platform: Types::RuntimePlatform
       attr_accessor volumes: ::Array[Types::Volume]
+      attr_accessor enable_execute_command: bool
       SENSITIVE: []
     end
 
@@ -491,6 +494,7 @@ module Aws::Batch
       attr_accessor network_configuration: Types::NetworkConfiguration
       attr_accessor runtime_platform: Types::RuntimePlatform
       attr_accessor volumes: ::Array[Types::Volume]
+      attr_accessor enable_execute_command: bool
       SENSITIVE: []
     end
 
@@ -700,6 +704,12 @@ module Aws::Batch
 
     class FargatePlatformConfiguration
       attr_accessor platform_version: ::String
+      SENSITIVE: []
+    end
+
+    class FirelensConfiguration
+      attr_accessor type: ("fluentd" | "fluentbit")
+      attr_accessor options: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -960,7 +970,7 @@ module Aws::Batch
     end
 
     class LogConfiguration
-      attr_accessor log_driver: ("json-file" | "syslog" | "journald" | "gelf" | "fluentd" | "awslogs" | "splunk")
+      attr_accessor log_driver: ("json-file" | "syslog" | "journald" | "gelf" | "fluentd" | "awslogs" | "splunk" | "awsfirelens")
       attr_accessor options: ::Hash[::String, ::String]
       attr_accessor secret_options: ::Array[Types::Secret]
       SENSITIVE: []
@@ -1157,6 +1167,7 @@ module Aws::Batch
       attr_accessor depends_on: ::Array[Types::TaskContainerDependency]
       attr_accessor environment: ::Array[Types::KeyValuePair]
       attr_accessor essential: bool
+      attr_accessor firelens_configuration: Types::FirelensConfiguration
       attr_accessor image: ::String
       attr_accessor linux_parameters: Types::LinuxParameters
       attr_accessor log_configuration: Types::LogConfiguration
@@ -1189,6 +1200,7 @@ module Aws::Batch
       attr_accessor depends_on: ::Array[Types::TaskContainerDependency]
       attr_accessor environment: ::Array[Types::KeyValuePair]
       attr_accessor essential: bool
+      attr_accessor firelens_configuration: Types::FirelensConfiguration
       attr_accessor image: ::String
       attr_accessor linux_parameters: Types::LinuxParameters
       attr_accessor log_configuration: Types::LogConfiguration

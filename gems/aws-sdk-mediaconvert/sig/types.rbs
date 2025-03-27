@@ -165,6 +165,7 @@ module Aws::MediaConvert
 
     class AutomatedAbrSettings
       attr_accessor max_abr_bitrate: ::Integer
+      attr_accessor max_quality_level: ::Float
       attr_accessor max_renditions: ::Integer
       attr_accessor min_abr_bitrate: ::Integer
       attr_accessor rules: ::Array[Types::AutomatedAbrRule]

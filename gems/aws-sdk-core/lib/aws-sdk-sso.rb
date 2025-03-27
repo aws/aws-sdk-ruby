@@ -56,7 +56,7 @@ module Aws::SSO
   autoload :EndpointProvider, 'aws-sdk-sso/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-sso/endpoints'
 
-  GEM_VERSION = '3.221.0'
+  GEM_VERSION = '3.222.0'
 
 end
 

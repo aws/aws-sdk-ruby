@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2025-03-27)
+------------------
+
+* Feature - bedrock flow now support node action trace.
+
 1.49.0 (2025-03-10)
 ------------------
 

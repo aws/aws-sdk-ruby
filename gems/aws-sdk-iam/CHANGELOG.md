@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.120.0 (2025-03-27)
+------------------
+
+* Feature - Update IAM dual-stack endpoints for BJS, IAD and PDT partitions
+
 1.119.0 (2025-03-04)
 ------------------
 

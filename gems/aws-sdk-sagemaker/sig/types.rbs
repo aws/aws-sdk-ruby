@@ -1069,6 +1069,7 @@ module Aws::SageMaker
       attr_accessor app_name: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor resource_spec: Types::ResourceSpec
+      attr_accessor recovery_mode: bool
       SENSITIVE: []
     end
 
@@ -2750,6 +2751,7 @@ module Aws::SageMaker
       attr_accessor user_profile_name: ::String
       attr_accessor space_name: ::String
       attr_accessor status: ("Deleted" | "Deleting" | "Failed" | "InService" | "Pending")
+      attr_accessor recovery_mode: bool
       attr_accessor last_health_check_timestamp: ::Time
       attr_accessor last_user_activity_timestamp: ::Time
       attr_accessor creation_time: ::Time

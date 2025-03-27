@@ -148,6 +148,7 @@ module Aws::BedrockAgentRuntime
     FlowTraceConditionNodeResultEvent = Shapes::StructureShape.new(name: 'FlowTraceConditionNodeResultEvent')
     FlowTraceConditions = Shapes::ListShape.new(name: 'FlowTraceConditions')
     FlowTraceEvent = Shapes::StructureShape.new(name: 'FlowTraceEvent')
+    FlowTraceNodeActionEvent = Shapes::StructureShape.new(name: 'FlowTraceNodeActionEvent')
     FlowTraceNodeInputContent = Shapes::UnionShape.new(name: 'FlowTraceNodeInputContent')
     FlowTraceNodeInputEvent = Shapes::StructureShape.new(name: 'FlowTraceNodeInputEvent')
     FlowTraceNodeInputField = Shapes::StructureShape.new(name: 'FlowTraceNodeInputField')
@@ -882,10 +883,12 @@ module Aws::BedrockAgentRuntime
     FlowResponseStream.struct_class = Types::FlowResponseStream
 
     FlowTrace.add_member(:condition_node_result_trace, Shapes::ShapeRef.new(shape: FlowTraceConditionNodeResultEvent, location_name: "conditionNodeResultTrace"))
+    FlowTrace.add_member(:node_action_trace, Shapes::ShapeRef.new(shape: FlowTraceNodeActionEvent, location_name: "nodeActionTrace"))
     FlowTrace.add_member(:node_input_trace, Shapes::ShapeRef.new(shape: FlowTraceNodeInputEvent, location_name: "nodeInputTrace"))
     FlowTrace.add_member(:node_output_trace, Shapes::ShapeRef.new(shape: FlowTraceNodeOutputEvent, location_name: "nodeOutputTrace"))
     FlowTrace.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     FlowTrace.add_member_subclass(:condition_node_result_trace, Types::FlowTrace::ConditionNodeResultTrace)
+    FlowTrace.add_member_subclass(:node_action_trace, Types::FlowTrace::NodeActionTrace)
     FlowTrace.add_member_subclass(:node_input_trace, Types::FlowTrace::NodeInputTrace)
     FlowTrace.add_member_subclass(:node_output_trace, Types::FlowTrace::NodeOutputTrace)
     FlowTrace.add_member_subclass(:unknown, Types::FlowTrace::Unknown)
@@ -903,6 +906,13 @@ module Aws::BedrockAgentRuntime
 
     FlowTraceEvent.add_member(:trace, Shapes::ShapeRef.new(shape: FlowTrace, required: true, location_name: "trace"))
     FlowTraceEvent.struct_class = Types::FlowTraceEvent
+
+    FlowTraceNodeActionEvent.add_member(:node_name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "nodeName"))
+    FlowTraceNodeActionEvent.add_member(:operation_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "operationName"))
+    FlowTraceNodeActionEvent.add_member(:request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "requestId"))
+    FlowTraceNodeActionEvent.add_member(:service_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "serviceName"))
+    FlowTraceNodeActionEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "timestamp"))
+    FlowTraceNodeActionEvent.struct_class = Types::FlowTraceNodeActionEvent
 
     FlowTraceNodeInputContent.add_member(:document, Shapes::ShapeRef.new(shape: Document, location_name: "document"))
     FlowTraceNodeInputContent.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))

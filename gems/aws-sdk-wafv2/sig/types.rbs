@@ -641,6 +641,7 @@ module Aws::WAFV2
       attr_accessor name: ::String
       attr_accessor scope: ("CLOUDFRONT" | "REGIONAL")
       attr_accessor id: ::String
+      attr_accessor arn: ::String
       SENSITIVE: []
     end
 
@@ -879,7 +880,7 @@ module Aws::WAFV2
 
     class ListResourcesForWebACLRequest
       attr_accessor web_acl_arn: ::String
-      attr_accessor resource_type: ("APPLICATION_LOAD_BALANCER" | "API_GATEWAY" | "APPSYNC" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE")
+      attr_accessor resource_type: ("APPLICATION_LOAD_BALANCER" | "API_GATEWAY" | "APPSYNC" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "AMPLIFY")
       SENSITIVE: []
     end
 

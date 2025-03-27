@@ -262,6 +262,7 @@ module Aws::DirectConnect
 
     class CreateDirectConnectGatewayRequest
       attr_accessor direct_connect_gateway_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
       attr_accessor amazon_side_asn: ::Integer
       SENSITIVE: []
     end
@@ -560,6 +561,7 @@ module Aws::DirectConnect
       attr_accessor owner_account: ::String
       attr_accessor direct_connect_gateway_state: ("pending" | "available" | "deleting" | "deleted")
       attr_accessor state_change_error: ::String
+      attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 

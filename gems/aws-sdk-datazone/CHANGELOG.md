@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2025-03-27)
+------------------
+
+* Feature - This release adds new action type of Create Listing Changeset for the Metadata Enforcement Rule feature.
+
 1.34.0 (2025-03-21)
 ------------------
 

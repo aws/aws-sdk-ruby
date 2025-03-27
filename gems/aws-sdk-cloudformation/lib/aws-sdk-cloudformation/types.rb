@@ -1729,12 +1729,14 @@ module Aws::CloudFormation
     #   Specify an IAM role only if you are using customized administrator
     #   roles to control which users or groups can manage specific stack
     #   sets within the same administrator account. For more information,
-    #   see [Prerequisites for using StackSets][1] in the *CloudFormation
-    #   User Guide*.
+    #   see [Grant self-managed permissions][1] in the *CloudFormation User
+    #   Guide*.
+    #
+    #   Valid only if the permissions model is `SELF_MANAGED`.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html
     #   @return [String]
     #
     # @!attribute [rw] execution_role_name
@@ -1746,6 +1748,8 @@ module Aws::CloudFormation
     #   Specify an IAM role only if you are using customized execution roles
     #   to control which stack resources users and groups can include in
     #   their stack sets.
+    #
+    #   Valid only if the permissions model is `SELF_MANAGED`.
     #   @return [String]
     #
     # @!attribute [rw] permission_model
@@ -1770,13 +1774,22 @@ module Aws::CloudFormation
     # @!attribute [rw] auto_deployment
     #   Describes whether StackSets automatically deploys to Organizations
     #   accounts that are added to the target organization or organizational
-    #   unit (OU). Specify only if `PermissionModel` is `SERVICE_MANAGED`.
+    #   unit (OU). For more information, see [Manage automatic deployments
+    #   for CloudFormation StackSets that use service-managed
+    #   permissions][1] in the *CloudFormation User Guide*.
+    #
+    #   Required if the permissions model is `SERVICE_MANAGED`. (Not used
+    #   with self-managed permissions.)
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-manage-auto-deployment.html
     #   @return [Types::AutoDeployment]
     #
     # @!attribute [rw] call_as
-    #   \[Service-managed permissions\] Specifies whether you are acting as
-    #   an account administrator in the organization's management account
-    #   or as a delegated administrator in a member account.
+    #   Specifies whether you are acting as an account administrator in the
+    #   organization's management account or as a delegated administrator
+    #   in a member account.
     #
     #   By default, `SELF` is specified. Use `SELF` for stack sets with
     #   self-managed permissions.
@@ -1796,6 +1809,8 @@ module Aws::CloudFormation
     #   Stack sets with service-managed permissions are created in the
     #   management account, including stack sets that are created by
     #   delegated administrators.
+    #
+    #   Valid only if the permissions model is `SERVICE_MANAGED`.
     #
     #
     #
@@ -2798,7 +2813,7 @@ module Aws::CloudFormation
     # @!attribute [rw] status
     #   Status of the resource scan.
     #
-    #   INPROGRESS
+    #   IN\_PROGRESS
     #
     #   : The resource scan is still in progress.
     #
@@ -2845,13 +2860,17 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] resources_read
     #   The number of resources that were read. This is only available for
-    #   scans with a `Status` set to `COMPLETE`, `EXPIRED`, or `FAILED `.
+    #   scans with a `Status` set to `COMPLETE`, `EXPIRED`, or `FAILED`.
     #
     #   <note markdown="1"> This field may be 0 if the resource scan failed with a
     #   `ResourceScanLimitExceededException`.
     #
     #    </note>
     #   @return [Integer]
+    #
+    # @!attribute [rw] scan_filters
+    #   The scan filters that were used.
+    #   @return [Array<Types::ScanFilter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeResourceScanOutput AWS API Documentation
     #
@@ -2864,7 +2883,8 @@ module Aws::CloudFormation
       :percentage_completed,
       :resource_types,
       :resources_scanned,
-      :resources_read)
+      :resources_read,
+      :scan_filters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2977,8 +2997,6 @@ module Aws::CloudFormation
     #     unique stack ID.
     #
     #   * Deleted stacks: You must specify the unique stack ID.
-    #
-    #   Default: There is no default value.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3223,14 +3241,10 @@ module Aws::CloudFormation
     #     unique stack ID.
     #
     #   * Deleted stacks: You must specify the unique stack ID.
-    #
-    #   Default: There is no default value.
     #   @return [String]
     #
     # @!attribute [rw] logical_resource_id
     #   The logical name of the resource as specified in the template.
-    #
-    #   Default: There is no default value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackResourceInput AWS API Documentation
@@ -3268,16 +3282,12 @@ module Aws::CloudFormation
     #
     #   * Deleted stacks: You must specify the unique stack ID.
     #
-    #   Default: There is no default value.
-    #
     #   Required: Conditional. If you don't specify `StackName`, you must
     #   specify `PhysicalResourceId`.
     #   @return [String]
     #
     # @!attribute [rw] logical_resource_id
     #   The logical name of the resource as specified in the template.
-    #
-    #   Default: There is no default value.
     #   @return [String]
     #
     # @!attribute [rw] physical_resource_id
@@ -3292,8 +3302,6 @@ module Aws::CloudFormation
     #
     #   Required: Conditional. If you don't specify `PhysicalResourceId`,
     #   you must specify `StackName`.
-    #
-    #   Default: There is no default value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackResourcesInput AWS API Documentation
@@ -3450,8 +3458,6 @@ module Aws::CloudFormation
     #     unique stack ID.
     #
     #   * Deleted stacks: You must specify the unique stack ID.
-    #
-    #   Default: There is no default value.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -4342,8 +4348,6 @@ module Aws::CloudFormation
     #     unique stack ID.
     #
     #   * Deleted stacks: You must specify the unique stack ID.
-    #
-    #   Default: There is no default value.
     #   @return [String]
     #
     # @!attribute [rw] change_set_name
@@ -5105,11 +5109,17 @@ module Aws::CloudFormation
     #   value is 10. The maximum value is 100.
     #   @return [Integer]
     #
+    # @!attribute [rw] scan_type_filter
+    #   The scan type that you want to get summary information about. The
+    #   default is `FULL`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListResourceScansInput AWS API Documentation
     #
     class ListResourceScansInput < Struct.new(
       :next_token,
-      :max_results)
+      :max_results,
+      :scan_type_filter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5464,8 +5474,6 @@ module Aws::CloudFormation
     #     unique stack ID.
     #
     #   * Deleted stacks: You must specify the unique stack ID.
-    #
-    #   Default: There is no default value.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -7303,7 +7311,7 @@ module Aws::CloudFormation
     # @!attribute [rw] status
     #   Status of the resource scan.
     #
-    #   INPROGRESS
+    #   IN\_PROGRESS
     #
     #   : The resource scan is still in progress.
     #
@@ -7337,6 +7345,10 @@ module Aws::CloudFormation
     #   The percentage of the resource scan that has been completed.
     #   @return [Float]
     #
+    # @!attribute [rw] scan_type
+    #   The scan type that has been completed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceScanSummary AWS API Documentation
     #
     class ResourceScanSummary < Struct.new(
@@ -7345,7 +7357,8 @@ module Aws::CloudFormation
       :status_reason,
       :start_time,
       :end_time,
-      :percentage_completed)
+      :percentage_completed,
+      :scan_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7596,6 +7609,33 @@ module Aws::CloudFormation
     class RollbackTrigger < Struct.new(
       :arn,
       :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter that is used to specify which resource types to scan.
+    #
+    # @!attribute [rw] types
+    #   An array of strings where each string represents an Amazon Web
+    #   Services resource type you want to scan. Each string defines the
+    #   resource type using the format `AWS::ServiceName::ResourceType`, for
+    #   example, `AWS::DynamoDB::Table`. For the full list of supported
+    #   resource types, see the [Resource type support][1] table in the
+    #   *CloudFormation User Guide*.
+    #
+    #   To scan all resource types within a service, you can use a wildcard,
+    #   represented by an asterisk (`*`). You can place a asterisk at only
+    #   the end of the string, for example, `AWS::S3::*`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import-supported-resources.html
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ScanFilter AWS API Documentation
+    #
+    class ScanFilter < Struct.new(
+      :types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9758,6 +9798,11 @@ module Aws::CloudFormation
     # For more information about maximum concurrent accounts and failure
     # tolerance, see [Stack set operation options][1].
     #
+    # <note markdown="1"> `StackSetOperationPreferences` don't apply to `AutoDeployment`, even
+    # if it's enabled.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html#stackset-ops-options
@@ -9770,10 +9815,6 @@ module Aws::CloudFormation
     # @!attribute [rw] region_order
     #   The order of the Regions where you want to perform the stack
     #   operation.
-    #
-    #   <note markdown="1"> `RegionOrder` isn't followed if `AutoDeployment` is enabled.
-    #
-    #    </note>
     #   @return [Array<String>]
     #
     # @!attribute [rw] failure_tolerance_count
@@ -10261,10 +10302,15 @@ module Aws::CloudFormation
     #   knows that you're not attempting to start a new resource scan.
     #   @return [String]
     #
+    # @!attribute [rw] scan_filters
+    #   The scan filters to use.
+    #   @return [Array<Types::ScanFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StartResourceScanInput AWS API Documentation
     #
     class StartResourceScanInput < Struct.new(
-      :client_request_token)
+      :client_request_token,
+      :scan_filters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11720,14 +11766,14 @@ module Aws::CloudFormation
     #   @return [Types::StackSetOperationPreferences]
     #
     # @!attribute [rw] administration_role_arn
-    #   The Amazon Resource Name (ARN) of the IAM role to use to update this
-    #   stack set.
+    #   \[Self-managed permissions\] The Amazon Resource Name (ARN) of the
+    #   IAM role to use to update this stack set.
     #
     #   Specify an IAM role only if you are using customized administrator
     #   roles to control which users or groups can manage specific stack
     #   sets within the same administrator account. For more information,
-    #   see [Prerequisites for using CloudFormation StackSets][1] in the
-    #   *CloudFormation User Guide*.
+    #   see [Grant self-managed permissions][1] in the *CloudFormation User
+    #   Guide*.
     #
     #   If you specified a customized administrator role when you created
     #   the stack set, you must specify a customized administrator role,
@@ -11736,12 +11782,13 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html
     #   @return [String]
     #
     # @!attribute [rw] execution_role_name
-    #   The name of the IAM execution role to use to update the stack set.
-    #   If you do not specify an execution role, CloudFormation uses the
+    #   \[Self-managed permissions\] The name of the IAM execution role to
+    #   use to update the stack set. If you do not specify an execution
+    #   role, CloudFormation uses the
     #   `AWSCloudFormationStackSetExecutionRole` role for the stack set
     #   operation.
     #
@@ -11797,10 +11844,17 @@ module Aws::CloudFormation
     # @!attribute [rw] auto_deployment
     #   \[Service-managed permissions\] Describes whether StackSets
     #   automatically deploys to Organizations accounts that are added to a
-    #   target organization or organizational unit (OU).
+    #   target organization or organizational unit (OU). For more
+    #   information, see [Manage automatic deployments for CloudFormation
+    #   StackSets that use service-managed permissions][1] in the
+    #   *CloudFormation User Guide*.
     #
     #   If you specify `AutoDeployment`, don't specify `DeploymentTargets`
     #   or `Regions`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-manage-auto-deployment.html
     #   @return [Types::AutoDeployment]
     #
     # @!attribute [rw] operation_id

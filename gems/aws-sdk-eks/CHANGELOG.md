@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.133.0 (2025-03-27)
+------------------
+
+* Feature - Added support for BOTTLEROCKET FIPS AMIs to AMI types in US regions.
+
 1.132.0 (2025-03-25)
 ------------------
 

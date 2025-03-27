@@ -4167,12 +4167,14 @@ module Aws::MediaConvert
       req.send_request(options)
     end
 
-    # The Probe operation analyzes the provided media file and returns
-    # comprehensive metadata about its container format, tracks, and any
-    # encountered errors.
+    # Use Probe to obtain detailed information about your input media files.
+    # Probe returns a JSON that includes container, codec, frame rate,
+    # resolution, track count, audio layout, captions, and more. You can use
+    # this information to learn more about your media files, or to help make
+    # decisions while automating your transcoding workflow.
     #
     # @option params [Array<Types::ProbeInputFile>] :input_files
-    #   The list of input media files to be probed.
+    #   Specify a media file to probe.
     #
     # @return [Types::ProbeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6035,7 +6037,7 @@ module Aws::MediaConvert
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.154.0'
+      context[:gem_version] = '1.155.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

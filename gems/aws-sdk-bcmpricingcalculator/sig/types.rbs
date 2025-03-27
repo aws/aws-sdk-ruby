@@ -398,7 +398,7 @@ module Aws::BCMPricingCalculator
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor bill_interval: Types::BillInterval
-      attr_accessor status: ("READY" | "LOCKED" | "FAILED")
+      attr_accessor status: ("READY" | "LOCKED" | "FAILED" | "STALE")
       attr_accessor created_at: ::Time
       attr_accessor expires_at: ::Time
       attr_accessor failure_message: ::String
@@ -469,7 +469,7 @@ module Aws::BCMPricingCalculator
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor bill_interval: Types::BillInterval
-      attr_accessor status: ("READY" | "LOCKED" | "FAILED")
+      attr_accessor status: ("READY" | "LOCKED" | "FAILED" | "STALE")
       attr_accessor created_at: ::Time
       attr_accessor expires_at: ::Time
       attr_accessor failure_message: ::String
@@ -576,7 +576,7 @@ module Aws::BCMPricingCalculator
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor bill_interval: Types::BillInterval
-      attr_accessor status: ("READY" | "LOCKED" | "FAILED")
+      attr_accessor status: ("READY" | "LOCKED" | "FAILED" | "STALE")
       attr_accessor created_at: ::Time
       attr_accessor expires_at: ::Time
       attr_accessor failure_message: ::String
@@ -589,6 +589,7 @@ module Aws::BCMPricingCalculator
     class GetPreferencesResponse
       attr_accessor management_account_rate_type_selections: ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")]
       attr_accessor member_account_rate_type_selections: ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")]
+      attr_accessor standalone_account_rate_type_selections: ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")]
       SENSITIVE: []
     end
 
@@ -895,7 +896,7 @@ module Aws::BCMPricingCalculator
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor bill_interval: Types::BillInterval
-      attr_accessor status: ("READY" | "LOCKED" | "FAILED")
+      attr_accessor status: ("READY" | "LOCKED" | "FAILED" | "STALE")
       attr_accessor created_at: ::Time
       attr_accessor expires_at: ::Time
       attr_accessor failure_message: ::String
@@ -905,12 +906,14 @@ module Aws::BCMPricingCalculator
     class UpdatePreferencesRequest
       attr_accessor management_account_rate_type_selections: ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")]
       attr_accessor member_account_rate_type_selections: ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")]
+      attr_accessor standalone_account_rate_type_selections: ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")]
       SENSITIVE: []
     end
 
     class UpdatePreferencesResponse
       attr_accessor management_account_rate_type_selections: ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")]
       attr_accessor member_account_rate_type_selections: ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")]
+      attr_accessor standalone_account_rate_type_selections: ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")]
       SENSITIVE: []
     end
 

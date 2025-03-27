@@ -1717,6 +1717,16 @@ module Aws::BedrockAgentRuntime
     #   Contains information about an output from a condition node.
     #   @return [Types::FlowTraceConditionNodeResultEvent]
     #
+    # @!attribute [rw] node_action_trace
+    #   Contains information about an action (operation) called by a node.
+    #   For more information, see [Track each step in your prompt flow by
+    #   viewing its trace in Amazon Bedrock][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html
+    #   @return [Types::FlowTraceNodeActionEvent]
+    #
     # @!attribute [rw] node_input_trace
     #   Contains information about the input into a node.
     #   @return [Types::FlowTraceNodeInputEvent]
@@ -1729,14 +1739,16 @@ module Aws::BedrockAgentRuntime
     #
     class FlowTrace < Struct.new(
       :condition_node_result_trace,
+      :node_action_trace,
       :node_input_trace,
       :node_output_trace,
       :unknown)
-      SENSITIVE = [:condition_node_result_trace, :node_input_trace, :node_output_trace]
+      SENSITIVE = [:condition_node_result_trace, :node_action_trace, :node_input_trace, :node_output_trace]
       include Aws::Structure
       include Aws::Structure::Union
 
       class ConditionNodeResultTrace < FlowTrace; end
+      class NodeActionTrace < FlowTrace; end
       class NodeInputTrace < FlowTrace; end
       class NodeOutputTrace < FlowTrace; end
       class Unknown < FlowTrace; end
@@ -1812,6 +1824,43 @@ module Aws::BedrockAgentRuntime
       :trace,
       :event_type)
       SENSITIVE = [:trace]
+      include Aws::Structure
+    end
+
+    # Contains information about an action (operation) called by a node in
+    # an Amazon Bedrock flow. The service generates action events for calls
+    # made by prompt nodes, agent nodes, and Amazon Web Services Lambda
+    # nodes.
+    #
+    # @!attribute [rw] node_name
+    #   The name of the node that called the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_name
+    #   The name of the operation that the node called.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The ID of the request that the node made to the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   The name of the service that the node called.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   The date and time that the operation was called.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/FlowTraceNodeActionEvent AWS API Documentation
+    #
+    class FlowTraceNodeActionEvent < Struct.new(
+      :node_name,
+      :operation_name,
+      :request_id,
+      :service_name,
+      :timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7012,7 +7061,22 @@ module Aws::BedrockAgentRuntime
     # Configurations for streaming.
     #
     # @!attribute [rw] apply_guardrail_interval
-    #   The guardrail interval to apply as response is generated.
+    #   The guardrail interval to apply as response is generated. By
+    #   default, the guardrail interval is set to 50 characters. If a larger
+    #   interval is specified, the response will be generated in larger
+    #   chunks with fewer `ApplyGuardrail` calls. The following examples
+    #   show the response generated for *Hello, I am an agent* input string.
+    #
+    #   **Example response in chunks: Interval set to 3 characters**
+    #
+    #   `'Hel', 'lo, ','I am', ' an', ' Age', 'nt'`
+    #
+    #   Each chunk has at least 3 characters except for the last chunk
+    #
+    #   **Example response in chunks: Interval set to 20 or more
+    #   characters**
+    #
+    #   `Hello, I am an Agent`
     #   @return [Integer]
     #
     # @!attribute [rw] stream_final_response

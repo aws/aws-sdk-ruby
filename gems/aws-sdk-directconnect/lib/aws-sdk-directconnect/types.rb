@@ -348,10 +348,12 @@ module Aws::DirectConnect
     end
 
     # The Amazon Web Services Cloud WAN core network that the Direct Connect
-    # attachment is associated with.
+    # gateway is associated to. This is only returned when a Direct Connect
+    # gateway is associated to a Cloud WAN core network.
     #
     # @!attribute [rw] id
-    #   The ID of the Cloud WAN core network.
+    #   The ID of the Cloud WAN core network that the Direct Connect gateway
+    #   is associated to.
     #   @return [String]
     #
     # @!attribute [rw] owner_account
@@ -359,7 +361,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] attachment_id
-    #   the ID of the Direct Connect attachment
+    #   the ID of the Direct Connect gateway attachment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociatedCoreNetwork AWS API Documentation
@@ -606,6 +608,10 @@ module Aws::DirectConnect
     #
     #   * `down`: A virtual interface that is BGP down.
     #
+    #   * `testing`: A virtual interface is in this state immediately after
+    #     calling StartBgpFailoverTest and remains in this state during the
+    #     duration of the test.
+    #
     #   * `deleting`: A virtual interface is in this state immediately after
     #     calling DeleteVirtualInterface until it can no longer forward
     #     traffic.
@@ -661,6 +667,10 @@ module Aws::DirectConnect
     #   * `available`: A virtual interface that is able to forward traffic.
     #
     #   * `down`: A virtual interface that is BGP down.
+    #
+    #   * `testing`: A virtual interface is in this state immediately after
+    #     calling StartBgpFailoverTest and remains in this state during the
+    #     duration of the test.
     #
     #   * `deleting`: A virtual interface is in this state immediately after
     #     calling DeleteVirtualInterface until it can no longer forward
@@ -722,6 +732,10 @@ module Aws::DirectConnect
     #   * `available`: A virtual interface that is able to forward traffic.
     #
     #   * `down`: A virtual interface that is BGP down.
+    #
+    #   * `testing`: A virtual interface is in this state immediately after
+    #     calling StartBgpFailoverTest and remains in this state during the
+    #     duration of the test.
     #
     #   * `deleting`: A virtual interface is in this state immediately after
     #     calling DeleteVirtualInterface until it can no longer forward
@@ -1094,6 +1108,10 @@ module Aws::DirectConnect
     #   The name of the Direct Connect gateway.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The key-value pair tags associated with the request.
+    #   @return [Array<Types::Tag>]
+    #
     # @!attribute [rw] amazon_side_asn
     #   The autonomous system number (ASN) for Border Gateway Protocol (BGP)
     #   to be configured on the Amazon side of the connection. The ASN must
@@ -1105,6 +1123,7 @@ module Aws::DirectConnect
     #
     class CreateDirectConnectGatewayRequest < Struct.new(
       :direct_connect_gateway_name,
+      :tags,
       :amazon_side_asn)
       SENSITIVE = []
       include Aws::Structure
@@ -1531,6 +1550,10 @@ module Aws::DirectConnect
     #   * `available`: A virtual interface that is able to forward traffic.
     #
     #   * `down`: A virtual interface that is BGP down.
+    #
+    #   * `testing`: A virtual interface is in this state immediately after
+    #     calling StartBgpFailoverTest and remains in this state during the
+    #     duration of the test.
     #
     #   * `deleting`: A virtual interface is in this state immediately after
     #     calling DeleteVirtualInterface until it can no longer forward
@@ -2095,6 +2118,10 @@ module Aws::DirectConnect
     #   The error message if the state of an object failed to advance.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Information about a tag.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DirectConnectGateway AWS API Documentation
     #
     class DirectConnectGateway < Struct.new(
@@ -2103,7 +2130,8 @@ module Aws::DirectConnect
       :amazon_side_asn,
       :owner_account,
       :direct_connect_gateway_state,
-      :state_change_error)
+      :state_change_error,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2161,7 +2189,7 @@ module Aws::DirectConnect
     #
     # @!attribute [rw] associated_core_network
     #   The ID of the Cloud WAN core network associated with the Direct
-    #   Connect attachment.
+    #   Connect gateway attachment.
     #   @return [Types::AssociatedCoreNetwork]
     #
     # @!attribute [rw] virtual_gateway_id
@@ -3771,6 +3799,10 @@ module Aws::DirectConnect
     #   * `available`: A virtual interface that is able to forward traffic.
     #
     #   * `down`: A virtual interface that is BGP down.
+    #
+    #   * `testing`: A virtual interface is in this state immediately after
+    #     calling StartBgpFailoverTest and remains in this state during the
+    #     duration of the test.
     #
     #   * `deleting`: A virtual interface is in this state immediately after
     #     calling DeleteVirtualInterface until it can no longer forward

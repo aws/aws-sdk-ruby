@@ -2147,11 +2147,16 @@ module Aws::BCMPricingCalculator
     #   The preferred rate types for member accounts.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] standalone_account_rate_type_selections
+    #   The preferred rate types for a standalone account.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/GetPreferencesResponse AWS API Documentation
     #
     class GetPreferencesResponse < Struct.new(
       :management_account_rate_type_selections,
-      :member_account_rate_type_selections)
+      :member_account_rate_type_selections,
+      :standalone_account_rate_type_selections)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3184,11 +3189,16 @@ module Aws::BCMPricingCalculator
     #   The updated preferred rate types for member accounts.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] standalone_account_rate_type_selections
+    #   The updated preferred rate types for a standalone account.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/UpdatePreferencesRequest AWS API Documentation
     #
     class UpdatePreferencesRequest < Struct.new(
       :management_account_rate_type_selections,
-      :member_account_rate_type_selections)
+      :member_account_rate_type_selections,
+      :standalone_account_rate_type_selections)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3201,11 +3211,16 @@ module Aws::BCMPricingCalculator
     #   The updated preferred rate types for member accounts.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] standalone_account_rate_type_selections
+    #   The updated preferred rate types for a standalone account.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/UpdatePreferencesResponse AWS API Documentation
     #
     class UpdatePreferencesResponse < Struct.new(
       :management_account_rate_type_selections,
-      :member_account_rate_type_selections)
+      :member_account_rate_type_selections,
+      :standalone_account_rate_type_selections)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -487,12 +487,15 @@ module Aws::BedrockAgentRuntime
 
     class FlowTrace
       attr_accessor condition_node_result_trace: Types::FlowTraceConditionNodeResultEvent
+      attr_accessor node_action_trace: Types::FlowTraceNodeActionEvent
       attr_accessor node_input_trace: Types::FlowTraceNodeInputEvent
       attr_accessor node_output_trace: Types::FlowTraceNodeOutputEvent
       attr_accessor unknown: untyped
-      SENSITIVE: [:condition_node_result_trace, :node_input_trace, :node_output_trace]
+      SENSITIVE: [:condition_node_result_trace, :node_action_trace, :node_input_trace, :node_output_trace]
 
       class ConditionNodeResultTrace < FlowTrace
+      end
+      class NodeActionTrace < FlowTrace
       end
       class NodeInputTrace < FlowTrace
       end
@@ -518,6 +521,15 @@ module Aws::BedrockAgentRuntime
       attr_accessor trace: Types::FlowTrace
       attr_accessor event_type: untyped
       SENSITIVE: [:trace]
+    end
+
+    class FlowTraceNodeActionEvent
+      attr_accessor node_name: ::String
+      attr_accessor operation_name: ::String
+      attr_accessor request_id: ::String
+      attr_accessor service_name: ::String
+      attr_accessor timestamp: ::Time
+      SENSITIVE: []
     end
 
     class FlowTraceNodeInputContent

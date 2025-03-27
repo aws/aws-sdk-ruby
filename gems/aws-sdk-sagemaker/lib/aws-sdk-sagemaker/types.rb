@@ -5853,6 +5853,10 @@ module Aws::SageMaker
     #    </note>
     #   @return [Types::ResourceSpec]
     #
+    # @!attribute [rw] recovery_mode
+    #   Indicates whether the application is launched in recovery mode.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateAppRequest AWS API Documentation
     #
     class CreateAppRequest < Struct.new(
@@ -5862,7 +5866,8 @@ module Aws::SageMaker
       :app_type,
       :app_name,
       :tags,
-      :resource_spec)
+      :resource_spec,
+      :recovery_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13197,6 +13202,10 @@ module Aws::SageMaker
     #   The status.
     #   @return [String]
     #
+    # @!attribute [rw] recovery_mode
+    #   Indicates whether the application is launched in recovery mode.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] last_health_check_timestamp
     #   The timestamp of the last health check.
     #   @return [Time]
@@ -13245,6 +13254,7 @@ module Aws::SageMaker
       :user_profile_name,
       :space_name,
       :status,
+      :recovery_mode,
       :last_health_check_timestamp,
       :last_user_activity_timestamp,
       :creation_time,

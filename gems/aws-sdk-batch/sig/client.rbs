@@ -512,7 +512,7 @@ module Aws
                                          swappiness: ::Integer?
                                        }?,
                                        log_configuration: {
-                                         log_driver: ("json-file" | "syslog" | "journald" | "gelf" | "fluentd" | "awslogs" | "splunk"),
+                                         log_driver: ("json-file" | "syslog" | "journald" | "gelf" | "fluentd" | "awslogs" | "splunk" | "awsfirelens"),
                                          options: Hash[::String, ::String]?,
                                          secret_options: Array[
                                            {
@@ -533,6 +533,7 @@ module Aws
                                        fargate_platform_configuration: {
                                          platform_version: ::String?
                                        }?,
+                                       enable_execute_command: bool?,
                                        ephemeral_storage: {
                                          size_in_gi_b: ::Integer
                                        }?,
@@ -626,7 +627,7 @@ module Aws
                                                swappiness: ::Integer?
                                              }?,
                                              log_configuration: {
-                                               log_driver: ("json-file" | "syslog" | "journald" | "gelf" | "fluentd" | "awslogs" | "splunk"),
+                                               log_driver: ("json-file" | "syslog" | "journald" | "gelf" | "fluentd" | "awslogs" | "splunk" | "awsfirelens"),
                                                options: Hash[::String, ::String]?,
                                                secret_options: Array[
                                                  {
@@ -647,6 +648,7 @@ module Aws
                                              fargate_platform_configuration: {
                                                platform_version: ::String?
                                              }?,
+                                             enable_execute_command: bool?,
                                              ephemeral_storage: {
                                                size_in_gi_b: ::Integer
                                              }?,
@@ -678,6 +680,10 @@ module Aws
                                                        },
                                                      ]?,
                                                      essential: bool?,
+                                                     firelens_configuration: {
+                                                       type: ("fluentd" | "fluentbit"),
+                                                       options: Hash[::String, ::String]?
+                                                     }?,
                                                      image: ::String,
                                                      linux_parameters: {
                                                        devices: Array[
@@ -700,7 +706,7 @@ module Aws
                                                        swappiness: ::Integer?
                                                      }?,
                                                      log_configuration: {
-                                                       log_driver: ("json-file" | "syslog" | "journald" | "gelf" | "fluentd" | "awslogs" | "splunk"),
+                                                       log_driver: ("json-file" | "syslog" | "journald" | "gelf" | "fluentd" | "awslogs" | "splunk" | "awsfirelens"),
                                                        options: Hash[::String, ::String]?,
                                                        secret_options: Array[
                                                          {
@@ -776,7 +782,8 @@ module Aws
                                                        }?
                                                      }?
                                                    },
-                                                 ]?
+                                                 ]?,
+                                                 enable_execute_command: bool?
                                                },
                                              ]
                                            }?,
@@ -1043,6 +1050,10 @@ module Aws
                                                  },
                                                ]?,
                                                essential: bool?,
+                                               firelens_configuration: {
+                                                 type: ("fluentd" | "fluentbit"),
+                                                 options: Hash[::String, ::String]?
+                                               }?,
                                                image: ::String,
                                                linux_parameters: {
                                                  devices: Array[
@@ -1065,7 +1076,7 @@ module Aws
                                                  swappiness: ::Integer?
                                                }?,
                                                log_configuration: {
-                                                 log_driver: ("json-file" | "syslog" | "journald" | "gelf" | "fluentd" | "awslogs" | "splunk"),
+                                                 log_driver: ("json-file" | "syslog" | "journald" | "gelf" | "fluentd" | "awslogs" | "splunk" | "awsfirelens"),
                                                  options: Hash[::String, ::String]?,
                                                  secret_options: Array[
                                                    {
@@ -1141,7 +1152,8 @@ module Aws
                                                  }?
                                                }?
                                              },
-                                           ]?
+                                           ]?,
+                                           enable_execute_command: bool?
                                          },
                                        ]
                                      },

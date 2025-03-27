@@ -1112,7 +1112,7 @@ module Aws::DataZone
     end
 
     class CreateRuleInput
-      attr_accessor action: ("CREATE_SUBSCRIPTION_REQUEST")
+      attr_accessor action: ("CREATE_LISTING_CHANGE_SET" | "CREATE_SUBSCRIPTION_REQUEST")
       attr_accessor client_token: ::String
       attr_accessor description: ::String
       attr_accessor detail: Types::RuleDetail
@@ -1124,7 +1124,7 @@ module Aws::DataZone
     end
 
     class CreateRuleOutput
-      attr_accessor action: ("CREATE_SUBSCRIPTION_REQUEST")
+      attr_accessor action: ("CREATE_LISTING_CHANGE_SET" | "CREATE_SUBSCRIPTION_REQUEST")
       attr_accessor created_at: ::Time
       attr_accessor created_by: ::String
       attr_accessor description: ::String
@@ -2577,7 +2577,7 @@ module Aws::DataZone
     end
 
     class GetRuleOutput
-      attr_accessor action: ("CREATE_SUBSCRIPTION_REQUEST")
+      attr_accessor action: ("CREATE_LISTING_CHANGE_SET" | "CREATE_SUBSCRIPTION_REQUEST")
       attr_accessor created_at: ::Time
       attr_accessor created_by: ::String
       attr_accessor description: ::String
@@ -3470,7 +3470,7 @@ module Aws::DataZone
     end
 
     class ListRulesInput
-      attr_accessor action: ("CREATE_SUBSCRIPTION_REQUEST")
+      attr_accessor action: ("CREATE_LISTING_CHANGE_SET" | "CREATE_SUBSCRIPTION_REQUEST")
       attr_accessor asset_types: ::Array[::String]
       attr_accessor data_product: bool
       attr_accessor domain_identifier: ::String
@@ -4430,7 +4430,7 @@ module Aws::DataZone
     end
 
     class RuleSummary
-      attr_accessor action: ("CREATE_SUBSCRIPTION_REQUEST")
+      attr_accessor action: ("CREATE_LISTING_CHANGE_SET" | "CREATE_SUBSCRIPTION_REQUEST")
       attr_accessor identifier: ::String
       attr_accessor last_updated_by: ::String
       attr_accessor name: ::String
@@ -5370,7 +5370,7 @@ module Aws::DataZone
     end
 
     class UpdateRuleOutput
-      attr_accessor action: ("CREATE_SUBSCRIPTION_REQUEST")
+      attr_accessor action: ("CREATE_LISTING_CHANGE_SET" | "CREATE_SUBSCRIPTION_REQUEST")
       attr_accessor created_at: ::Time
       attr_accessor created_by: ::String
       attr_accessor description: ::String

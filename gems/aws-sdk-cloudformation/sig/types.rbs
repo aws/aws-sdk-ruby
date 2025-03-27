@@ -479,6 +479,7 @@ module Aws::CloudFormation
       attr_accessor resource_types: ::Array[::String]
       attr_accessor resources_scanned: ::Integer
       attr_accessor resources_read: ::Integer
+      attr_accessor scan_filters: ::Array[Types::ScanFilter]
       SENSITIVE: []
     end
 
@@ -939,6 +940,7 @@ module Aws::CloudFormation
     class ListResourceScansInput
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
+      attr_accessor scan_type_filter: ("FULL" | "PARTIAL")
       SENSITIVE: []
     end
 
@@ -1361,6 +1363,7 @@ module Aws::CloudFormation
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
       attr_accessor percentage_completed: ::Float
+      attr_accessor scan_type: ("FULL" | "PARTIAL")
       SENSITIVE: []
     end
 
@@ -1404,6 +1407,11 @@ module Aws::CloudFormation
     class RollbackTrigger
       attr_accessor arn: ::String
       attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class ScanFilter
+      attr_accessor types: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -1820,6 +1828,7 @@ module Aws::CloudFormation
 
     class StartResourceScanInput
       attr_accessor client_request_token: ::String
+      attr_accessor scan_filters: ::Array[Types::ScanFilter]
       SENSITIVE: []
     end
 

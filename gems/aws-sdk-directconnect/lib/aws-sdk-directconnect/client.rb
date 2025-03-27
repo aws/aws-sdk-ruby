@@ -1932,6 +1932,9 @@ module Aws::DirectConnect
     # @option params [required, String] :direct_connect_gateway_name
     #   The name of the Direct Connect gateway.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The key-value pair tags associated with the request.
+    #
     # @option params [Integer] :amazon_side_asn
     #   The autonomous system number (ASN) for Border Gateway Protocol (BGP)
     #   to be configured on the Amazon side of the connection. The ASN must be
@@ -1946,6 +1949,12 @@ module Aws::DirectConnect
     #
     #   resp = client.create_direct_connect_gateway({
     #     direct_connect_gateway_name: "DirectConnectGatewayName", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #     amazon_side_asn: 1,
     #   })
     #
@@ -1957,6 +1966,9 @@ module Aws::DirectConnect
     #   resp.direct_connect_gateway.owner_account #=> String
     #   resp.direct_connect_gateway.direct_connect_gateway_state #=> String, one of "pending", "available", "deleting", "deleted"
     #   resp.direct_connect_gateway.state_change_error #=> String
+    #   resp.direct_connect_gateway.tags #=> Array
+    #   resp.direct_connect_gateway.tags[0].key #=> String
+    #   resp.direct_connect_gateway.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateDirectConnectGateway AWS API Documentation
     #
@@ -2947,6 +2959,9 @@ module Aws::DirectConnect
     #   resp.direct_connect_gateway.owner_account #=> String
     #   resp.direct_connect_gateway.direct_connect_gateway_state #=> String, one of "pending", "available", "deleting", "deleted"
     #   resp.direct_connect_gateway.state_change_error #=> String
+    #   resp.direct_connect_gateway.tags #=> Array
+    #   resp.direct_connect_gateway.tags[0].key #=> String
+    #   resp.direct_connect_gateway.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteDirectConnectGateway AWS API Documentation
     #
@@ -3512,6 +3527,16 @@ module Aws::DirectConnect
     #   The response contains the association between the Direct Connect
     #   gateway and transit gateway.
     #
+    # * A Direct Connect gateway and a virtual private gateway
+    #
+    #   The response contains the association between the Direct Connect
+    #   gateway and virtual private gateway.
+    #
+    # * A Direct Connect gateway association to a Cloud WAN core network
+    #
+    #   The response contains the Cloud WAN core network ID that the Direct
+    #   Connect gateway is associated to.
+    #
     # @option params [String] :association_id
     #   The ID of the Direct Connect gateway association.
     #
@@ -3682,6 +3707,9 @@ module Aws::DirectConnect
     #   resp.direct_connect_gateways[0].owner_account #=> String
     #   resp.direct_connect_gateways[0].direct_connect_gateway_state #=> String, one of "pending", "available", "deleting", "deleted"
     #   resp.direct_connect_gateways[0].state_change_error #=> String
+    #   resp.direct_connect_gateways[0].tags #=> Array
+    #   resp.direct_connect_gateways[0].tags[0].key #=> String
+    #   resp.direct_connect_gateways[0].tags[0].value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeDirectConnectGateways AWS API Documentation
@@ -4703,6 +4731,9 @@ module Aws::DirectConnect
     #   resp.direct_connect_gateway.owner_account #=> String
     #   resp.direct_connect_gateway.direct_connect_gateway_state #=> String, one of "pending", "available", "deleting", "deleted"
     #   resp.direct_connect_gateway.state_change_error #=> String
+    #   resp.direct_connect_gateway.tags #=> Array
+    #   resp.direct_connect_gateway.tags[0].key #=> String
+    #   resp.direct_connect_gateway.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateDirectConnectGateway AWS API Documentation
     #
@@ -5047,7 +5078,7 @@ module Aws::DirectConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-directconnect'
-      context[:gem_version] = '1.88.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

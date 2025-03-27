@@ -413,6 +413,8 @@ module Aws::CloudFormation
     ResourceToImport = Shapes::StructureShape.new(name: 'ResourceToImport')
     ResourceToSkip = Shapes::StringShape.new(name: 'ResourceToSkip')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    ResourceTypeFilter = Shapes::StringShape.new(name: 'ResourceTypeFilter')
+    ResourceTypeFilters = Shapes::ListShape.new(name: 'ResourceTypeFilters')
     ResourceTypePrefix = Shapes::StringShape.new(name: 'ResourceTypePrefix')
     ResourceTypes = Shapes::ListShape.new(name: 'ResourceTypes')
     ResourcesFailed = Shapes::IntegerShape.new(name: 'ResourcesFailed')
@@ -437,6 +439,9 @@ module Aws::CloudFormation
     RollbackTriggers = Shapes::ListShape.new(name: 'RollbackTriggers')
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
     S3Url = Shapes::StringShape.new(name: 'S3Url')
+    ScanFilter = Shapes::StructureShape.new(name: 'ScanFilter')
+    ScanFilters = Shapes::ListShape.new(name: 'ScanFilters')
+    ScanType = Shapes::StringShape.new(name: 'ScanType')
     ScannedResource = Shapes::StructureShape.new(name: 'ScannedResource')
     ScannedResourceIdentifier = Shapes::StructureShape.new(name: 'ScannedResourceIdentifier')
     ScannedResourceIdentifiers = Shapes::ListShape.new(name: 'ScannedResourceIdentifiers')
@@ -1003,6 +1008,7 @@ module Aws::CloudFormation
     DescribeResourceScanOutput.add_member(:resource_types, Shapes::ShapeRef.new(shape: ResourceTypes, location_name: "ResourceTypes"))
     DescribeResourceScanOutput.add_member(:resources_scanned, Shapes::ShapeRef.new(shape: ResourcesScanned, location_name: "ResourcesScanned"))
     DescribeResourceScanOutput.add_member(:resources_read, Shapes::ShapeRef.new(shape: ResourcesRead, location_name: "ResourcesRead"))
+    DescribeResourceScanOutput.add_member(:scan_filters, Shapes::ShapeRef.new(shape: ScanFilters, location_name: "ScanFilters"))
     DescribeResourceScanOutput.struct_class = Types::DescribeResourceScanOutput
 
     DescribeStackDriftDetectionStatusInput.add_member(:stack_drift_detection_id, Shapes::ShapeRef.new(shape: StackDriftDetectionId, required: true, location_name: "StackDriftDetectionId"))
@@ -1344,6 +1350,7 @@ module Aws::CloudFormation
 
     ListResourceScansInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListResourceScansInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ResourceScannerMaxResults, location_name: "MaxResults"))
+    ListResourceScansInput.add_member(:scan_type_filter, Shapes::ShapeRef.new(shape: ScanType, location_name: "ScanTypeFilter"))
     ListResourceScansInput.struct_class = Types::ListResourceScansInput
 
     ListResourceScansOutput.add_member(:resource_scan_summaries, Shapes::ShapeRef.new(shape: ResourceScanSummaries, location_name: "ResourceScanSummaries"))
@@ -1694,6 +1701,7 @@ module Aws::CloudFormation
     ResourceScanSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
     ResourceScanSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
     ResourceScanSummary.add_member(:percentage_completed, Shapes::ShapeRef.new(shape: PercentageCompleted, location_name: "PercentageCompleted"))
+    ResourceScanSummary.add_member(:scan_type, Shapes::ShapeRef.new(shape: ScanType, location_name: "ScanType"))
     ResourceScanSummary.struct_class = Types::ResourceScanSummary
 
     ResourceTargetDefinition.add_member(:attribute, Shapes::ShapeRef.new(shape: ResourceAttribute, location_name: "Attribute"))
@@ -1709,6 +1717,8 @@ module Aws::CloudFormation
     ResourceToImport.add_member(:logical_resource_id, Shapes::ShapeRef.new(shape: LogicalResourceId, required: true, location_name: "LogicalResourceId"))
     ResourceToImport.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifierProperties, required: true, location_name: "ResourceIdentifier"))
     ResourceToImport.struct_class = Types::ResourceToImport
+
+    ResourceTypeFilters.member = Shapes::ShapeRef.new(shape: ResourceTypeFilter)
 
     ResourceTypes.member = Shapes::ShapeRef.new(shape: ResourceType)
 
@@ -1736,6 +1746,11 @@ module Aws::CloudFormation
     RollbackTrigger.struct_class = Types::RollbackTrigger
 
     RollbackTriggers.member = Shapes::ShapeRef.new(shape: RollbackTrigger)
+
+    ScanFilter.add_member(:types, Shapes::ShapeRef.new(shape: ResourceTypeFilters, location_name: "Types"))
+    ScanFilter.struct_class = Types::ScanFilter
+
+    ScanFilters.member = Shapes::ShapeRef.new(shape: ScanFilter)
 
     ScannedResource.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     ScannedResource.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: JazzResourceIdentifierProperties, location_name: "ResourceIdentifier"))
@@ -2126,6 +2141,7 @@ module Aws::CloudFormation
     StaleRequestException.struct_class = Types::StaleRequestException
 
     StartResourceScanInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
+    StartResourceScanInput.add_member(:scan_filters, Shapes::ShapeRef.new(shape: ScanFilters, location_name: "ScanFilters"))
     StartResourceScanInput.struct_class = Types::StartResourceScanInput
 
     StartResourceScanOutput.add_member(:resource_scan_id, Shapes::ShapeRef.new(shape: ResourceScanId, location_name: "ResourceScanId"))

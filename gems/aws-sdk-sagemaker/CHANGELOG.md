@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.297.0 (2025-03-27)
+------------------
+
+* Feature - add: recovery mode for SageMaker Studio apps
+
 1.296.0 (2025-03-25)
 ------------------
 

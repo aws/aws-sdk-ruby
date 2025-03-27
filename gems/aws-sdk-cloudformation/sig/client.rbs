@@ -592,6 +592,7 @@ module Aws
         def resource_types: () -> ::Array[::String]
         def resources_scanned: () -> ::Integer
         def resources_read: () -> ::Integer
+        def scan_filters: () -> ::Array[Types::ScanFilter]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#describe_resource_scan-instance_method
       def describe_resource_scan: (
@@ -1054,7 +1055,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#list_resource_scans-instance_method
       def list_resource_scans: (
                                  ?next_token: ::String,
-                                 ?max_results: ::Integer
+                                 ?max_results: ::Integer,
+                                 ?scan_type_filter: ("FULL" | "PARTIAL")
                                ) -> _ListResourceScansResponseSuccess
                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourceScansResponseSuccess
 
@@ -1384,7 +1386,12 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#start_resource_scan-instance_method
       def start_resource_scan: (
-                                 ?client_request_token: ::String
+                                 ?client_request_token: ::String,
+                                 ?scan_filters: Array[
+                                   {
+                                     types: Array[::String]?
+                                   },
+                                 ]
                                ) -> _StartResourceScanResponseSuccess
                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartResourceScanResponseSuccess
 

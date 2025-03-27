@@ -351,7 +351,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def bill_interval: () -> Types::BillInterval
-        def status: () -> ("READY" | "LOCKED" | "FAILED")
+        def status: () -> ("READY" | "LOCKED" | "FAILED" | "STALE")
         def created_at: () -> ::Time
         def expires_at: () -> ::Time
         def failure_message: () -> ::String
@@ -435,7 +435,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def bill_interval: () -> Types::BillInterval
-        def status: () -> ("READY" | "LOCKED" | "FAILED")
+        def status: () -> ("READY" | "LOCKED" | "FAILED" | "STALE")
         def created_at: () -> ::Time
         def expires_at: () -> ::Time
         def failure_message: () -> ::String
@@ -450,6 +450,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::GetPreferencesResponse]
         def management_account_rate_type_selections: () -> ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")]
         def member_account_rate_type_selections: () -> ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")]
+        def standalone_account_rate_type_selections: () -> ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BCMPricingCalculator/Client.html#get_preferences-instance_method
       def get_preferences: (
@@ -729,7 +730,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def bill_interval: () -> Types::BillInterval
-        def status: () -> ("READY" | "LOCKED" | "FAILED")
+        def status: () -> ("READY" | "LOCKED" | "FAILED" | "STALE")
         def created_at: () -> ::Time
         def expires_at: () -> ::Time
         def failure_message: () -> ::String
@@ -746,11 +747,13 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePreferencesResponse]
         def management_account_rate_type_selections: () -> ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")]
         def member_account_rate_type_selections: () -> ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")]
+        def standalone_account_rate_type_selections: () -> ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BCMPricingCalculator/Client.html#update_preferences-instance_method
       def update_preferences: (
                                 ?management_account_rate_type_selections: Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")],
-                                ?member_account_rate_type_selections: Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")]
+                                ?member_account_rate_type_selections: Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")],
+                                ?standalone_account_rate_type_selections: Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")]
                               ) -> _UpdatePreferencesResponseSuccess
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePreferencesResponseSuccess
 

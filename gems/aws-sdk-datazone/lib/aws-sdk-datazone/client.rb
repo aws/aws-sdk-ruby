@@ -3301,7 +3301,7 @@ module Aws::DataZone
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_rule({
-    #     action: "CREATE_SUBSCRIPTION_REQUEST", # required, accepts CREATE_SUBSCRIPTION_REQUEST
+    #     action: "CREATE_LISTING_CHANGE_SET", # required, accepts CREATE_LISTING_CHANGE_SET, CREATE_SUBSCRIPTION_REQUEST
     #     client_token: "ClientToken",
     #     description: "Description",
     #     detail: { # required
@@ -3337,7 +3337,7 @@ module Aws::DataZone
     #
     # @example Response structure
     #
-    #   resp.action #=> String, one of "CREATE_SUBSCRIPTION_REQUEST"
+    #   resp.action #=> String, one of "CREATE_LISTING_CHANGE_SET", "CREATE_SUBSCRIPTION_REQUEST"
     #   resp.created_at #=> Time
     #   resp.created_by #=> String
     #   resp.description #=> String
@@ -6501,7 +6501,7 @@ module Aws::DataZone
     #
     # @example Response structure
     #
-    #   resp.action #=> String, one of "CREATE_SUBSCRIPTION_REQUEST"
+    #   resp.action #=> String, one of "CREATE_LISTING_CHANGE_SET", "CREATE_SUBSCRIPTION_REQUEST"
     #   resp.created_at #=> Time
     #   resp.created_by #=> String
     #   resp.description #=> String
@@ -8847,7 +8847,7 @@ module Aws::DataZone
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_rules({
-    #     action: "CREATE_SUBSCRIPTION_REQUEST", # accepts CREATE_SUBSCRIPTION_REQUEST
+    #     action: "CREATE_LISTING_CHANGE_SET", # accepts CREATE_LISTING_CHANGE_SET, CREATE_SUBSCRIPTION_REQUEST
     #     asset_types: ["AssetTypeIdentifier"],
     #     data_product: false,
     #     domain_identifier: "DomainId", # required
@@ -8863,7 +8863,7 @@ module Aws::DataZone
     # @example Response structure
     #
     #   resp.items #=> Array
-    #   resp.items[0].action #=> String, one of "CREATE_SUBSCRIPTION_REQUEST"
+    #   resp.items[0].action #=> String, one of "CREATE_LISTING_CHANGE_SET", "CREATE_SUBSCRIPTION_REQUEST"
     #   resp.items[0].identifier #=> String
     #   resp.items[0].last_updated_by #=> String
     #   resp.items[0].name #=> String
@@ -12305,7 +12305,7 @@ module Aws::DataZone
     #
     # @example Response structure
     #
-    #   resp.action #=> String, one of "CREATE_SUBSCRIPTION_REQUEST"
+    #   resp.action #=> String, one of "CREATE_LISTING_CHANGE_SET", "CREATE_SUBSCRIPTION_REQUEST"
     #   resp.created_at #=> Time
     #   resp.created_by #=> String
     #   resp.description #=> String
@@ -12700,7 +12700,7 @@ module Aws::DataZone
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
