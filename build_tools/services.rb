@@ -4,7 +4,6 @@ require 'json'
 
 module BuildTools
   class ServiceEnumerator
-
     include Enumerable
 
     MANIFEST_PATH = File.expand_path('../../services.json', __FILE__)
@@ -40,6 +39,10 @@ module BuildTools
 
     def each(&block)
       services.values.each(&block)
+    end
+
+    def reset
+      @services = nil
     end
 
     private
@@ -186,5 +189,4 @@ module BuildTools
   end
 
   Services = ServiceEnumerator.new
-
 end
