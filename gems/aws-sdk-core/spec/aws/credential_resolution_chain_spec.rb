@@ -85,7 +85,7 @@ module Aws
         ).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE CREDENTIALS_STS_ASSUME_ROLE])
       end
 
-      it 'prefers assume role web identity over sso' do
+      it 'prefers assume role web identity from profile over sso' do
         assume_role_web_identity_stub(
           'arn:aws:iam::123456789012:role/foo',
           'AR_AKID',
@@ -103,6 +103,31 @@ module Aws
         expect(
           client.config.credentials.metrics
         ).to eq(%w[CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN CREDENTIALS_STS_ASSUME_ROLE_WEB_ID])
+      end
+
+      it 'prefers assume role web identity from ENV over sso' do
+        stub_const(
+          'ENV',
+          'AWS_ROLE_ARN' => 'arn:aws:iam::123456789012:role/foo',
+          'AWS_WEB_IDENTITY_TOKEN_FILE' => 'my-token.jwt'
+        )
+        assume_role_web_identity_stub(
+          'arn:aws:iam::123456789012:role/foo',
+          'AR_AKID',
+          'AR_SECRET',
+          'AR_TOKEN'
+        )
+        client = ApiHelper.sample_rest_xml::Client.new(
+          region: 'us-east-1'
+        )
+        expect(
+          client.config.credentials.credentials.access_key_id
+        ).to eq('AR_AKID')
+
+        expect(client.config.credentials.source).to eq(:env)
+        expect(
+          client.config.credentials.metrics
+        ).to eq(%w[CREDENTIALS_ENV_VARS_STS_WEB_ID_TOKEN CREDENTIALS_STS_ASSUME_ROLE_WEB_ID])
       end
 
       it 'prefers sso credentials over assume role' do
@@ -325,7 +350,7 @@ module Aws
         ).to eq(%w[CREDENTIALS_PROFILE_PROCESS CREDENTIALS_PROCESS])
       end
 
-      it 'attempts to fetch metadata credentials last' do
+      it 'attempts to fetch metadata credentials last IMDS' do
         allow(InstanceProfileCredentials).to receive(:new).and_call_original
 
         stub_request(:put, 'http://169.254.169.254/latest/api/token')
@@ -353,7 +378,7 @@ module Aws
               "Token" : "session-token-md",
               "Expiration" : "#{(Time.now.utc + 3600).strftime('%Y-%m-%dT%H:%M:%SZ')}"
             }
-          JSON
+         JSON
         client = ApiHelper.sample_rest_xml::Client.new(
           profile: 'nonexistant', region: 'us-east-1'
         )
@@ -363,6 +388,30 @@ module Aws
         expect(
           client.config.credentials.metrics
         ).to eq(['CREDENTIALS_IMDS'])
+      end
+
+      it 'attempts to fetch metadata credentials last HTTP' do
+        path = '/latest/credentials?id=foobarbaz'
+        resp = <<-JSON.strip
+          {
+            "RoleArn" : "arn:aws:iam::123456789012:role/BarFooRole",
+            "AccessKeyId" : "ACCESS_KEY_ECS",
+            "SecretAccessKey" : "secret",
+            "Token" : "session-token",
+            "Expiration" : "#{(Time.now.utc + 3600).strftime('%Y-%m-%dT%H:%M:%SZ')}"
+          }
+        JSON
+        stub_const('ENV',
+                   'AWS_CONTAINER_CREDENTIALS_RELATIVE_URI' => path)
+        stub_request(:get, "http://169.254.170.2#{path}")
+          .to_return(status: 200, body: resp)
+        client = ApiHelper.sample_rest_xml::Client.new(
+          profile: 'nonexistent',
+          region: 'us-east-1'
+        )
+        expect(
+          client.config.credentials.metrics
+        ).to eq(['CREDENTIALS_HTTP'])
       end
 
       describe 'Assume Role Resolution' do
@@ -454,7 +503,7 @@ module Aws
           expect(creds).to receive(:source).and_return(:new)
 
           allow(SSOTokenProvider).to receive(:new)
-           .and_return(double('SSOToken', set?: true))
+            .and_return(double('SSOToken', set?: true))
 
           assume_role_stub(
             'arn:aws:iam::123456789012:role/foo',
@@ -476,6 +525,45 @@ module Aws
           expect(
             client.config.credentials.metrics
           ).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE_SSO CREDENTIALS_SSO
+                     CREDENTIALS_STS_ASSUME_ROLE])
+        end
+
+        it 'supports :source_profile from legacy sso credentials' do
+          creds = double('creds', set?: true, credentials: Credentials.new('SSO_AKID', 'sak'))
+          allow(creds).to receive(:metrics).and_return(%w[CREDENTIALS_PROFILE_SSO_LEGACY CREDENTIALS_SSO_LEGACY])
+          expect(SSOCredentials).to receive(:new).with(
+            sso_start_url: 'START_URL',
+            sso_region: 'us-east-1',
+            sso_account_id: 'SSO_ACCOUNT_ID',
+            sso_role_name: 'SSO_ROLE_NAME',
+            sso_session: nil
+          ).and_return(creds)
+          expect(creds).to receive(:source=).with(:legacy)
+          expect(creds).to receive(:source).and_return(:legacy)
+
+          allow(SSOTokenProvider).to receive(:new)
+                                       .and_return(double('SSOToken', set?: true))
+
+          assume_role_stub(
+            'arn:aws:iam::123456789012:role/foo',
+            'SSO_AKID',
+            'AR_AKID',
+            'SECRET_AK',
+            'TOKEN'
+          )
+
+          client = ApiHelper.sample_rest_xml::Client.new(
+            profile: 'ar_sso_legacy_src', region: 'us-east-1'
+          )
+          expect(
+            client.config.credentials.credentials.access_key_id
+          ).to eq('AR_AKID')
+          expect(
+            client.config.credentials.source
+          ).to eq(:legacy)
+          expect(
+            client.config.credentials.metrics
+          ).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE_SSO_LEGACY CREDENTIALS_SSO_LEGACY
                      CREDENTIALS_STS_ASSUME_ROLE])
         end
 
@@ -875,7 +963,7 @@ module Aws
               "Token" : "session-token-md",
               "Expiration" : "#{(Time.now.utc + 3600).strftime('%Y-%m-%dT%H:%M:%SZ')}"
             }
-          JSON
+         JSON
         client = ApiHelper.sample_rest_xml::Client.new(
           profile: 'nonexistant', region: 'us-east-1'
         )
