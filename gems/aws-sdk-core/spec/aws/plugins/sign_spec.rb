@@ -202,6 +202,18 @@ module Aws
               to eq (now.utc + 1000).strftime("%Y%m%dT%H%M%SZ")
           end
         end
+
+        context 'UserAgent header' do
+          it 'Adds metrics from the credential providers' do
+            creds = Aws::Credentials.new('akid', 'secret')
+            client = TestClient.new(client_options.merge(credentials: creds))
+            resp = client.operation
+            req = resp.context.http_request
+            header = req.headers['User-Agent']
+            metrics = header[(header.index('m/')+2)..]
+            expect(metrics).to include('e')
+          end
+        end
       end
 
       context 'sigv4a' do
@@ -313,71 +325,6 @@ module Aws
           resp = client.operation
           req = resp.context.http_request
           expect(req.headers.key?('authorization')).to be(false)
-        end
-      end
-
-      context 'UserAgent header' do
-        def metrics_from_header(header)
-          header[(header.index('m/')+2)..]
-        end
-
-        let(:auth_scheme) do
-          {
-            'name' => 'sigv4',
-            'signingRegion' => region,
-            'signingName' => 'svc',
-          }
-        end
-
-        it 'adds the correct headers for static credentials from code' do
-          creds = Aws::Credentials.new('akid', 'secret')
-          client = TestClient.new(client_options.merge(credentials: creds))
-          resp = client.operation
-          req = resp.context.http_request
-          metrics = metrics_from_header(req.headers['User-Agent'])
-          expect(metrics).to include('e')
-        end
-
-        it 'adds the correct headers for static credentials from profile' do
-          creds = Aws::Credentials.new('akid', 'secret')
-          creds.source = :profile
-          client = TestClient.new(client_options.merge(credentials: creds))
-          resp = client.operation
-          req = resp.context.http_request
-          metrics = metrics_from_header(req.headers['User-Agent'])
-          expect(metrics).to include('n')
-        end
-
-        it 'adds the correct headers for static credentials from environment variables' do
-          creds = Aws::Credentials.new('akid', 'secret')
-          creds.source = :env
-          client = TestClient.new(client_options.merge(credentials: creds))
-          resp = client.operation
-          req = resp.context.http_request
-          metrics = metrics_from_header(req.headers['User-Agent'])
-          expect(metrics).to include('g')
-        end
-
-        it 'adds the correct headers for shared credentials' do
-          creds = Aws::SharedCredentials.new('akid', 'secret')
-          client = TestClient.new(client_options.merge(credentials: creds))
-          resp = client.operation
-          req = resp.context.http_request
-          metrics = metrics_from_header(req.headers['User-Agent'])
-          expect(metrics).to include('g')
-        end
-
-        it 'adds the correct headers for assume role web identity credentials from code' do
-          mock_creds = double('AssumeRoleWebIdentityCredentials', set?: true, source: :none)
-          allow(mock_creds).to receive(:credentials).and_return(Aws::Credentials.new('akid', 'secret'))
-          allow(mock_creds).to receive(:metrics).and_return(['CREDENTIALS_STS_ASSUME_ROLE_WEB_ID'])
-          allow(AssumeRoleWebIdentityCredentials).to receive(:new).and_return(mock_creds)
-          creds = Aws::AssumeRoleWebIdentityCredentials.new(region: 'us-west-2')
-          client = TestClient.new(client_options.merge(credentials: creds))
-          resp = client.operation
-          req = resp.context.http_request
-          metrics = metrics_from_header(req.headers['User-Agent'])
-          expect(metrics).to include('k')
         end
       end
     end

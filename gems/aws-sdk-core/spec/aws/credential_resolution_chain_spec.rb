@@ -58,6 +58,7 @@ module Aws
           region: 'us-east-1'
         )
         expect(client.config.credentials.access_key_id).to eq('ACCESS_DIRECT')
+        expect(client.config.credentials.source).to eq(:profile)
         expect(client.config.credentials.metrics).to eq(['CREDENTIALS_PROFILE'])
       end
 
@@ -78,6 +79,7 @@ module Aws
           profile: 'assumerole_sc', region: 'us-east-1'
         )
         expect(client.config.credentials.credentials.access_key_id).to eq('AR_AKID')
+        expect(client.config.credentials.source).to eq(:static)
         expect(
           client.config.credentials.metrics
         ).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE CREDENTIALS_STS_ASSUME_ROLE])
@@ -96,6 +98,7 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('AR_AKID')
+        expect(client.config.credentials.source).to eq(:profile)
         expect(
           client.config.credentials.metrics
         ).to eq(%w[CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN CREDENTIALS_STS_ASSUME_ROLE_WEB_ID])
@@ -235,7 +238,9 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('AR_AKID')
-
+        expect(
+          client.config.credentials.source
+        ).to eq(:static)
         expect(
           client.config.credentials.metrics
         ).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE CREDENTIALS_STS_ASSUME_ROLE])
@@ -294,6 +299,9 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('AKID_ENV_STUB')
+        expect(
+          client.config.credentials.source
+        ).to eq(:env)
         expect(
           client.config.credentials.metrics
         ).to eq(['CREDENTIALS_ENV_VARS'])
@@ -394,6 +402,9 @@ module Aws
             client.config.credentials.credentials.access_key_id
           ).to eq('AR_AKID')
           expect(
+            client.config.credentials.source
+          ).to eq(:webID)
+          expect(
             client.config.credentials.metrics
           ).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN
                      CREDENTIALS_STS_ASSUME_ROLE_WEB_ID CREDENTIALS_STS_ASSUME_ROLE])
@@ -419,6 +430,9 @@ module Aws
           expect(
             client.config.credentials.credentials.access_key_id
           ).to eq('AK_PROC1')
+          expect(
+            client.config.credentials.source
+          ).to eq(:process)
           expect(
             client.config.credentials.metrics
           ).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE_PROCESS CREDENTIALS_PROCESS
@@ -456,6 +470,9 @@ module Aws
             client.config.credentials.credentials.access_key_id
           ).to eq('AR_AKID')
           expect(
+            client.config.credentials.source
+          ).to eq(:new)
+          expect(
             client.config.credentials.metrics
           ).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE_SSO CREDENTIALS_SSO
                      CREDENTIALS_STS_ASSUME_ROLE])
@@ -485,6 +502,9 @@ module Aws
             client.config.credentials.credentials.access_key_id
           ).to eq('AK_2')
           expect(
+            client.config.credentials.source
+          ).to eq(:static)
+          expect(
             client.config.credentials.metrics
           ).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE CREDENTIALS_STS_ASSUME_ROLE])
         end
@@ -505,6 +525,9 @@ module Aws
             client.config.credentials.credentials.access_key_id
           ).to eq('AK_2')
           expect(
+            client.config.credentials.source
+          ).to eq(:static)
+          expect(
             client.config.credentials.metrics
           ).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE CREDENTIALS_STS_ASSUME_ROLE])
         end
@@ -524,6 +547,9 @@ module Aws
           expect(
             client.config.credentials.credentials.access_key_id
           ).to eq('AK_2')
+          expect(
+            client.config.credentials.source
+          ).to eq(:static)
           expect(
             client.config.credentials.metrics
           ).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE CREDENTIALS_STS_ASSUME_ROLE])
@@ -569,6 +595,9 @@ module Aws
             client.config.credentials.credentials.access_key_id
           ).to eq('AR_AKID')
           expect(
+            client.config.credentials.source
+          ).to eq(:static)
+          expect(
             client.config.credentials.metrics
           ).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE CREDENTIALS_STS_ASSUME_ROLE])
         end
@@ -588,6 +617,9 @@ module Aws
             client.config.credentials.credentials.access_key_id
           ).to eq('AR_AKID')
           expect(
+            client.config.credentials.source
+          ).to eq(:static)
+          expect(
             client.config.credentials.metrics
           ).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE CREDENTIALS_STS_ASSUME_ROLE])
         end
@@ -606,6 +638,9 @@ module Aws
           expect(
             client.config.credentials.credentials.access_key_id
           ).to eq('AR_AKID')
+          expect(
+            client.config.credentials.source
+          ).to eq(:static)
           expect(
             client.config.credentials.metrics
           ).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE CREDENTIALS_STS_ASSUME_ROLE])
@@ -629,6 +664,9 @@ module Aws
           expect(
             credentials.credentials.access_key_id
           ).to eq('AR_AKID')
+          expect(
+            credentials.source
+          ).to eq(:static)
           expect(
             credentials.metrics
           ).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE CREDENTIALS_STS_ASSUME_ROLE])
@@ -677,6 +715,9 @@ module Aws
           client.config.credentials.credentials.access_key_id
         ).to eq('AR_AKID')
         expect(
+          client.config.credentials.source
+        ).to eq(:instance)
+        expect(
           client.config.credentials.metrics
         ).to eq(%w[CREDENTIALS_PROFILE_NAMED_PROVIDER CREDENTIALS_IMDS CREDENTIALS_STS_ASSUME_ROLE])
       end
@@ -712,6 +753,9 @@ module Aws
           client.config.credentials.credentials.access_key_id
         ).to eq('AR_AKID')
         expect(
+          client.config.credentials.source
+        ).to eq(:ecs)
+        expect(
           client.config.credentials.metrics
         ).to eq(%w[CREDENTIALS_PROFILE_NAMED_PROVIDER CREDENTIALS_HTTP CREDENTIALS_STS_ASSUME_ROLE])
       end
@@ -744,6 +788,9 @@ module Aws
           client.config.credentials.credentials.access_key_id
         ).to eq('ACCESS_DIRECT')
         expect(
+          client.config.credentials.source
+        ).to eq(:profile)
+        expect(
           client.config.credentials.metrics
         ).to eq(['CREDENTIALS_PROFILE'])
       end
@@ -760,6 +807,9 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('AKID_ENV_STUB')
+        expect(
+          client.config.credentials.source
+        ).to eq(:env)
         expect(
           client.config.credentials.metrics
         ).to eq(['CREDENTIALS_ENV_VARS'])
