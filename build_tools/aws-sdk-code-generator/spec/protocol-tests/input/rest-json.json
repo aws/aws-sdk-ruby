@@ -1,5 +1,78 @@
 [
     {
+        "description": "Test cases for HttpEmptyPrefixHeaders operation",
+        "metadata": {
+            "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
+            "apiVersion": "2019-12-16"
+        },
+        "shapes": {
+            "HttpEmptyPrefixHeadersInput": {
+                "type": "structure",
+                "members": {
+                    "specificHeader": {
+                        "shape": "String",
+                        "location": "header",
+                        "locationName": "hello"
+                    },
+                    "prefixHeaders": {
+                        "shape": "StringMap",
+                        "location": "headers",
+                        "locationName": ""
+                    }
+                }
+            },
+            "String": {
+                "type": "string"
+            },
+            "StringMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "String"
+                }
+            }
+        },
+        "cases": [
+            {
+                "id": "RestJsonHttpEmptyPrefixHeadersRequestClient",
+                "given": {
+                    "name": "HttpEmptyPrefixHeaders",
+                    "http": {
+                        "method": "GET",
+                        "requestUri": "/HttpEmptyPrefixHeaders",
+                        "responseCode": 200
+                    },
+                    "input": {
+                        "shape": "HttpEmptyPrefixHeadersInput"
+                    },
+                    "documentation": "<p>This examples adds headers to the input of a request and response by prefix.</p>"
+                },
+                "description": "Serializes all request headers, using specific when present",
+                "params": {
+                    "prefixHeaders": {
+                        "x-foo": "Foo",
+                        "hello": "Hello"
+                    },
+                    "specificHeader": "There"
+                },
+                "serialized": {
+                    "method": "GET",
+                    "uri": "/HttpEmptyPrefixHeaders",
+                    "body": "",
+                    "headers": {
+                        "x-foo": "Foo",
+                        "hello": "There"
+                    }
+                }
+            }
+        ]
+    },
+    {
         "description": "Test cases for AllQueryStringTypes operation",
         "metadata": {
             "protocol": "rest-json",

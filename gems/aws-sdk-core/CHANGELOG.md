@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Allow explicit modeled headers to override prefixed headers in `rest-json`. 
+
 3.221.0 (2025-03-24)
 ------------------
 
