@@ -213,5 +213,46 @@ module Aws
       c.credentials
       c.credentials
     end
+
+    it 'defaults the source to none' do
+      c = AssumeRoleWebIdentityCredentials.new(
+        role_arn: 'arn',
+        web_identity_token_file: token_file_path,
+        role_session_name: 'session'
+      )
+      expect(c.source).to eq(:none)
+    end
+
+    describe '#metrics' do
+
+      it 'returns the correct metrics when the source is none' do
+        c = AssumeRoleWebIdentityCredentials.new(
+          role_arn: 'arn',
+          web_identity_token_file: token_file_path,
+          role_session_name: 'session'
+        )
+        expect(c.metrics).to eq(['CREDENTIALS_STS_ASSUME_ROLE_WEB_ID'])
+      end
+
+      it 'returns the correct metrics when the source is profile' do
+        c = AssumeRoleWebIdentityCredentials.new(
+          role_arn: 'arn',
+          web_identity_token_file: token_file_path,
+          role_session_name: 'session'
+        )
+        c.source = :profile
+        expect(c.metrics).to eq(%w[CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN CREDENTIALS_STS_ASSUME_ROLE_WEB_ID])
+      end
+
+      it 'returns the correct metrics when the source is env' do
+        c = AssumeRoleWebIdentityCredentials.new(
+          role_arn: 'arn',
+          web_identity_token_file: token_file_path,
+          role_session_name: 'session'
+        )
+        c.source = :env
+        expect(c.metrics).to eq(%w[CREDENTIALS_ENV_VARS_STS_WEB_ID_TOKEN CREDENTIALS_STS_ASSUME_ROLE_WEB_ID])
+      end
+    end
   end
 end

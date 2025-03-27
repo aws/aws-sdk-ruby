@@ -687,5 +687,10 @@ module Aws
         assert_requested(expected_request, times: 2)
       end
     end
+
+    it 'will return the correct metrics' do
+      c = InstanceProfileCredentials.new
+      expect(c.metrics).to eq(['CREDENTIALS_IMDS'])
+    end
   end
 end

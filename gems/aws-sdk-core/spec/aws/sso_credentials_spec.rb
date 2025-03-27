@@ -148,6 +148,22 @@ module Aws
           expect(sso_creds.expiration).to eq(expiration)
         end
       end
+
+      describe '#metrics' do
+
+        it 'returns the correct metrics when the source is none' do
+          c = SSOCredentials.new(sso_opts)
+          expect(c.metrics).to eq(['CREDENTIALS_SSO'])
+        end
+
+        it 'returns the correct metrics when the source is new' do
+          c = SSOCredentials.new(sso_opts)
+          c.source = :new
+          expect(c.metrics).to eq(%w[CREDENTIALS_PROFILE_SSO CREDENTIALS_SSO])
+        end
+
+      end
+
     end
 
     context 'legacy profile' do
@@ -288,6 +304,30 @@ module Aws
           ).and_call_original
 
           sso_creds.credentials
+        end
+      end
+
+      describe '#metrics' do
+
+        it 'returns the correct metrics when the source is none' do
+          expect(SSO::Client).to receive(:new)
+                                   .with({region: sso_region, credentials: nil})
+                                   .and_return(client)
+
+          mock_token_file(sso_start_url, cached_token)
+          c = SSOCredentials.new(sso_opts)
+          expect(c.metrics).to eq(['CREDENTIALS_SSO_LEGACY'])
+        end
+
+        it 'returns the correct metrics when the source is legacy' do
+          expect(SSO::Client).to receive(:new)
+                                   .with({region: sso_region, credentials: nil})
+                                   .and_return(client)
+
+          mock_token_file(sso_start_url, cached_token)
+          c = SSOCredentials.new(sso_opts)
+          c.source = :legacy
+          expect(c.metrics).to eq(%w[CREDENTIALS_PROFILE_SSO_LEGACY CREDENTIALS_SSO_LEGACY])
         end
       end
     end

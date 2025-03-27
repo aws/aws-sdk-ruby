@@ -174,5 +174,133 @@ module Aws
       expect(before_refresh_called).to be(true)
     end
 
+    it 'defaults the source to none' do
+      c = AssumeRoleCredentials.new(
+        role_arn: 'arn',
+        role_session_name: 'session'
+      )
+      expect(c.source).to eq(:none)
+    end
+
+    describe '#metrics' do
+
+      context 'from code' do
+        it 'returns the correct metrics when the source is none' do
+          c = AssumeRoleCredentials.new(
+            role_arn: 'arn',
+            role_session_name: 'session'
+          )
+          expect(c.metrics).to eq(['CREDENTIALS_STS_ASSUME_ROLE'])
+        end
+      end
+
+      context 'while resolving' do
+        let(:creds) {
+          c = AssumeRoleCredentials.new(
+            role_arn: 'arn',
+            role_session_name: 'session'
+          )
+          c.resolving = true
+          c
+        }
+
+        it 'returns the correct metrics when the source is static' do
+          c = creds
+          c.source = :static
+          expect(c.metrics).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE])
+        end
+
+        it 'returns the correct metrics when the source is webID' do
+          c = creds
+          c.source = :webID
+          expect(c.metrics).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN CREDENTIALS_STS_ASSUME_ROLE_WEB_ID])
+        end
+
+        it 'returns the correct metrics when the source is process' do
+          c = creds
+          c.source = :process
+          expect(c.metrics).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE_PROCESS CREDENTIALS_PROCESS])
+        end
+
+        it 'returns the correct metrics when the source is new SSO' do
+          c = creds
+          c.source = :new
+          expect(c.metrics).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE_SSO CREDENTIALS_SSO])
+        end
+
+        it 'returns the correct metrics when the source is legacy SSO' do
+          c = creds
+          c.source = :legacy
+          expect(c.metrics).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE_SSO_LEGACY CREDENTIALS_SSO_LEGACY])
+        end
+
+        it 'returns the correct metrics when the source is instance' do
+          c = creds
+          c.source = :instance
+          expect(c.metrics).to eq(%w[CREDENTIALS_PROFILE_NAMED_PROVIDER CREDENTIALS_IMDS])
+        end
+
+        it 'returns the correct metrics when the source is ecs' do
+          c = creds
+          c.source = :ecs
+          expect(c.metrics).to eq(%w[CREDENTIALS_PROFILE_NAMED_PROVIDER CREDENTIALS_HTTP])
+        end
+      end
+
+      context 'when resolved' do
+        let(:creds) {
+          c = AssumeRoleCredentials.new(
+            role_arn: 'arn',
+            role_session_name: 'session'
+          )
+          c
+        }
+
+        it 'returns the correct metrics when the source is static' do
+          c = creds
+          c.source = :static
+          expect(c.metrics).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE CREDENTIALS_STS_ASSUME_ROLE])
+        end
+
+        it 'returns the correct metrics when the source is webID' do
+          c = creds
+          c.source = :webID
+          expect(c.metrics).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN CREDENTIALS_STS_ASSUME_ROLE_WEB_ID CREDENTIALS_STS_ASSUME_ROLE])
+        end
+
+        it 'returns the correct metrics when the source is process' do
+          c = creds
+          c.source = :process
+          expect(c.metrics).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE_PROCESS CREDENTIALS_PROCESS CREDENTIALS_STS_ASSUME_ROLE])
+        end
+
+        it 'returns the correct metrics when the source is new SSO' do
+          c = creds
+          c.source = :new
+          expect(c.metrics).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE_SSO CREDENTIALS_SSO CREDENTIALS_STS_ASSUME_ROLE])
+        end
+
+        it 'returns the correct metrics when the source is legacy SSO' do
+          c = creds
+          c.source = :legacy
+          expect(c.metrics).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE_SSO_LEGACY CREDENTIALS_SSO_LEGACY CREDENTIALS_STS_ASSUME_ROLE])
+        end
+
+        it 'returns the correct metrics when the source is instance' do
+          c = creds
+          c.source = :instance
+          expect(c.metrics).to eq(%w[CREDENTIALS_PROFILE_NAMED_PROVIDER CREDENTIALS_IMDS CREDENTIALS_STS_ASSUME_ROLE])
+        end
+
+        it 'returns the correct metrics when the source is ecs' do
+          c = creds
+          c.source = :ecs
+          expect(c.metrics).to eq(%w[CREDENTIALS_PROFILE_NAMED_PROVIDER CREDENTIALS_HTTP CREDENTIALS_STS_ASSUME_ROLE])
+        end
+      end
+
+
+    end
+
   end
 end

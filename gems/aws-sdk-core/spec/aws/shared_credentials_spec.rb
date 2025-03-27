@@ -137,5 +137,10 @@ aws_secret_access_key=commented-secret
       expect(creds).to eq(nil)
     end
 
+    it 'will return the correct metrics' do
+      creds = SharedCredentials.new(path:mock_credential_file)
+      expect(creds.metrics).to eq(['CREDENTIALS_PROFILE'])
+    end
+
   end
 end

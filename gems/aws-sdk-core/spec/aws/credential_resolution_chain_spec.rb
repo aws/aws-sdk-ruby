@@ -98,6 +98,7 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('AR_AKID')
+
         expect(client.config.credentials.source).to eq(:profile)
         expect(
           client.config.credentials.metrics

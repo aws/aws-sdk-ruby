@@ -123,6 +123,22 @@ module Aws
 
     attr_accessor :source
 
+    def metrics
+      case @source
+      when :new
+        %w[CREDENTIALS_PROFILE_SSO CREDENTIALS_SSO]
+      when :legacy
+        %w[CREDENTIALS_PROFILE_SSO_LEGACY CREDENTIALS_SSO_LEGACY]
+        # TODO: Check if Ruby has "source-less" SSO credentials
+      when :none
+        if @legacy
+          ['CREDENTIALS_SSO_LEGACY']
+        else
+          ['CREDENTIALS_SSO']
+        end
+      end
+    end
+
     private
 
     def read_cached_token
@@ -171,22 +187,6 @@ module Aws
     rescue ArgumentError
       # Dir.home raises ArgumentError when ENV['home'] is not set
       raise ArgumentError, "Unable to load sso_cache_file: ENV['HOME'] is not set."
-    end
-
-    def metrics
-      case @source
-      when :new
-        %w[CREDENTIALS_PROFILE_SSO CREDENTIALS_SSO]
-      when :legacy
-        %w[CREDENTIALS_PROFILE_SSO_LEGACY CREDENTIALS_SSO_LEGACY]
-      # TODO: Check if Ruby has "source-less" SSO credentials
-      when :none
-        if @legacy
-          ['CREDENTIALS_SSO_LEGACY']
-        else
-          ['CREDENTIALS_SSO']
-        end
-      end
     end
   end
 end

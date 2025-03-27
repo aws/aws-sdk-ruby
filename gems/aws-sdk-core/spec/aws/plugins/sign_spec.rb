@@ -203,7 +203,7 @@ module Aws
           end
         end
 
-        context 'UserAgent header' do
+        describe 'UserAgent header' do
           it 'Adds metrics from the credential providers' do
             creds = Aws::Credentials.new('akid', 'secret')
             client = TestClient.new(client_options.merge(credentials: creds))

@@ -106,6 +106,7 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
 
         def set_user_agent(context)
           context.http_request.headers['User-Agent'] = UserAgent.new(context).to_s
+          puts context.http_request.headers['User-Agent']
         end
 
         class UserAgent
