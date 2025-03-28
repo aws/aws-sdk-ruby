@@ -1281,8 +1281,8 @@ module Aws::BedrockAgent
     #   @return [Types::EnrichmentStrategyConfiguration]
     #
     # @!attribute [rw] model_arn
-    #   The Amazon Resource Name (ARN) of the foundation model used for
-    #   context enrichment.
+    #   The Amazon Resource Name (ARN) of the model used to create vector
+    #   embeddings for the knowledge base.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/BedrockFoundationModelContextEnrichmentConfiguration AWS API Documentation
@@ -7241,6 +7241,71 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
+    # Contains details about the Managed Cluster configuration of the
+    # knowledge base in Amazon OpenSearch Service. For more information, see
+    # [Create a vector index in OpenSearch Managed Cluster][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-osm.html
+    #
+    # @!attribute [rw] domain_arn
+    #   The Amazon Resource Name (ARN) of the OpenSearch domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_endpoint
+    #   The endpoint URL the OpenSearch domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] field_mapping
+    #   Contains the names of the fields to which to map information about
+    #   the vector store.
+    #   @return [Types::OpenSearchManagedClusterFieldMapping]
+    #
+    # @!attribute [rw] vector_index_name
+    #   The name of the vector store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/OpenSearchManagedClusterConfiguration AWS API Documentation
+    #
+    class OpenSearchManagedClusterConfiguration < Struct.new(
+      :domain_arn,
+      :domain_endpoint,
+      :field_mapping,
+      :vector_index_name)
+      SENSITIVE = [:vector_index_name]
+      include Aws::Structure
+    end
+
+    # Contains the names of the fields to which to map information about the
+    # vector store.
+    #
+    # @!attribute [rw] metadata_field
+    #   The name of the field in which Amazon Bedrock stores metadata about
+    #   the vector store.
+    #   @return [String]
+    #
+    # @!attribute [rw] text_field
+    #   The name of the field in which Amazon Bedrock stores the raw text
+    #   from your data. The text is split according to the chunking strategy
+    #   you choose.
+    #   @return [String]
+    #
+    # @!attribute [rw] vector_field
+    #   The name of the field in which Amazon Bedrock stores the vector
+    #   embeddings for your data sources.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/OpenSearchManagedClusterFieldMapping AWS API Documentation
+    #
+    class OpenSearchManagedClusterFieldMapping < Struct.new(
+      :metadata_field,
+      :text_field,
+      :vector_field)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains details about the storage configuration of the knowledge base
     # in Amazon OpenSearch Service. For more information, see [Create a
     # vector index in Amazon OpenSearch Service][1].
@@ -9213,6 +9278,16 @@ module Aws::BedrockAgent
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-neptune.html
     #   @return [Types::NeptuneAnalyticsConfiguration]
     #
+    # @!attribute [rw] opensearch_managed_cluster_configuration
+    #   Contains details about the storage configuration of the knowledge
+    #   base in OpenSearch Managed Cluster. For more information, see
+    #   [Create a vector index in Amazon OpenSearch Service][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-osm.html
+    #   @return [Types::OpenSearchManagedClusterConfiguration]
+    #
     # @!attribute [rw] opensearch_serverless_configuration
     #   Contains the storage configuration of the knowledge base in Amazon
     #   OpenSearch Service.
@@ -9247,6 +9322,7 @@ module Aws::BedrockAgent
     class StorageConfiguration < Struct.new(
       :mongo_db_atlas_configuration,
       :neptune_analytics_configuration,
+      :opensearch_managed_cluster_configuration,
       :opensearch_serverless_configuration,
       :pinecone_configuration,
       :rds_configuration,
@@ -9962,8 +10038,8 @@ module Aws::BedrockAgent
     #   The configuration settings for a computer use action.
     #
     #   Computer use is a new Anthropic Claude model capability (in beta)
-    #   available with Claude 3.7 and Claude 3.5 Sonnet v2 only. For more
-    #   information, see [Configure an Amazon Bedrock Agent to complete
+    #   available with Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only. For
+    #   more information, see [Configure an Amazon Bedrock Agent to complete
     #   tasks with computer use tools][1].
     #
     #

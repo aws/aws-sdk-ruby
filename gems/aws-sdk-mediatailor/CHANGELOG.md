@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.97.0 (2025-03-26)
+------------------
+
+* Feature - Add support for log filtering which allow customers to filter out selected event types from logs.
+
 1.96.0 (2025-02-18)
 ------------------
 

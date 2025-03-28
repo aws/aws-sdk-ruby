@@ -20,6 +20,7 @@ module Aws::SSOOIDC
     Assertion = Shapes::StringShape.new(name: 'Assertion')
     AuthCode = Shapes::StringShape.new(name: 'AuthCode')
     AuthorizationPendingException = Shapes::StructureShape.new(name: 'AuthorizationPendingException')
+    AwsAdditionalDetails = Shapes::StructureShape.new(name: 'AwsAdditionalDetails')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
     ClientName = Shapes::StringShape.new(name: 'ClientName')
     ClientSecret = Shapes::StringShape.new(name: 'ClientSecret')
@@ -37,6 +38,7 @@ module Aws::SSOOIDC
     GrantType = Shapes::StringShape.new(name: 'GrantType')
     GrantTypes = Shapes::ListShape.new(name: 'GrantTypes')
     IdToken = Shapes::StringShape.new(name: 'IdToken')
+    IdentityContext = Shapes::StringShape.new(name: 'IdentityContext')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     IntervalInSeconds = Shapes::IntegerShape.new(name: 'IntervalInSeconds')
     InvalidClientException = Shapes::StructureShape.new(name: 'InvalidClientException')
@@ -73,6 +75,9 @@ module Aws::SSOOIDC
     AuthorizationPendingException.add_member(:error, Shapes::ShapeRef.new(shape: Error, location_name: "error"))
     AuthorizationPendingException.add_member(:error_description, Shapes::ShapeRef.new(shape: ErrorDescription, location_name: "error_description"))
     AuthorizationPendingException.struct_class = Types::AuthorizationPendingException
+
+    AwsAdditionalDetails.add_member(:identity_context, Shapes::ShapeRef.new(shape: IdentityContext, location_name: "identityContext"))
+    AwsAdditionalDetails.struct_class = Types::AwsAdditionalDetails
 
     CreateTokenRequest.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientId, required: true, location_name: "clientId"))
     CreateTokenRequest.add_member(:client_secret, Shapes::ShapeRef.new(shape: ClientSecret, required: true, location_name: "clientSecret"))
@@ -112,6 +117,7 @@ module Aws::SSOOIDC
     CreateTokenWithIAMResponse.add_member(:id_token, Shapes::ShapeRef.new(shape: IdToken, location_name: "idToken"))
     CreateTokenWithIAMResponse.add_member(:issued_token_type, Shapes::ShapeRef.new(shape: TokenTypeURI, location_name: "issuedTokenType"))
     CreateTokenWithIAMResponse.add_member(:scope, Shapes::ShapeRef.new(shape: Scopes, location_name: "scope"))
+    CreateTokenWithIAMResponse.add_member(:aws_additional_details, Shapes::ShapeRef.new(shape: AwsAdditionalDetails, location_name: "awsAdditionalDetails"))
     CreateTokenWithIAMResponse.struct_class = Types::CreateTokenWithIAMResponse
 
     ExpiredTokenException.add_member(:error, Shapes::ShapeRef.new(shape: Error, location_name: "error"))

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.129.0 (2025-03-27)
+------------------
+
+* Feature - Adding support for the new parameter "ScanFilters" in the CloudFormation StartResourceScan API. When this parameter is included, the StartResourceScan API will initiate a scan limited to the resource types specified by the parameter.
+
 1.128.0 (2025-03-04)
 ------------------
 

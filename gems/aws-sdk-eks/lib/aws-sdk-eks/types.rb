@@ -3798,6 +3798,32 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # Amazon EKS detected upgrade readiness issues. Call the [
+    # `ListInsights` ][1] API to view detected upgrade blocking issues. Pass
+    # the [ `force` ][2] flag when updating to override upgrade readiness
+    # errors.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_ListInsights.html
+    # [2]: https://docs.aws.amazon.com/eks/latest/APIReference/API_UpdateClusterVersion.html#API_UpdateClusterVersion_RequestBody
+    #
+    # @!attribute [rw] cluster_name
+    #   The Amazon EKS cluster associated with the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/InvalidStateException AWS API Documentation
+    #
+    class InvalidStateException < Struct.new(
+      :cluster_name,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object representing an issue with an Amazon EKS resource.
     #
     # @!attribute [rw] code
@@ -6367,6 +6393,25 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # The request or operation couldn't be performed because a service is
+    # throttling requests.
+    #
+    # @!attribute [rw] cluster_name
+    #   The Amazon EKS cluster associated with the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :cluster_name,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # At least one of your specified cluster subnets is in an Availability
     # Zone that does not support Amazon EKS. The exception output specifies
     # the supported Availability Zones for your account, from which you can
@@ -6806,12 +6851,18 @@ module Aws::EKS
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] force
+    #   Set this value to `true` to override upgrade-blocking readiness
+    #   checks when updating a cluster.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateClusterVersionRequest AWS API Documentation
     #
     class UpdateClusterVersionRequest < Struct.new(
       :name,
       :version,
-      :client_request_token)
+      :client_request_token,
+      :force)
       SENSITIVE = []
       include Aws::Structure
     end

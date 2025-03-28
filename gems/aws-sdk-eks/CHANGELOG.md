@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.133.0 (2025-03-27)
+------------------
+
+* Feature - Added support for BOTTLEROCKET FIPS AMIs to AMI types in US regions.
+
+1.132.0 (2025-03-25)
+------------------
+
+* Feature - Added support to override upgrade-blocking readiness checks via force flag when updating a cluster.
+
 1.131.0 (2025-02-28)
 ------------------
 

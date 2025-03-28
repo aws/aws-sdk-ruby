@@ -152,6 +152,10 @@ module Aws::Route53RecoveryControlConfig
     #   The Amazon Web Services account ID of the cluster owner.
     #   @return [String]
     #
+    # @!attribute [rw] network_type
+    #   The network-type can either be IPV4 or DUALSTACK.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -159,7 +163,8 @@ module Aws::Route53RecoveryControlConfig
       :cluster_endpoints,
       :name,
       :status,
-      :owner)
+      :owner,
+      :network_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -274,12 +279,18 @@ module Aws::Route53RecoveryControlConfig
     #   The tags associated with the cluster.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] network_type
+    #   The network-type is optional, and can either be IPV4 or DUALSTACK.
+    #   The default is IPV4.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/CreateClusterRequest AWS API Documentation
     #
     class CreateClusterRequest < Struct.new(
       :client_token,
       :cluster_name,
-      :tags)
+      :tags,
+      :network_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1280,6 +1291,38 @@ module Aws::Route53RecoveryControlConfig
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # Updates an existing cluster.
+    #
+    # @!attribute [rw] cluster_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] network_type
+    #   The network-type is required, and can either be IPV4 or DUALSTACK.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/UpdateClusterRequest AWS API Documentation
+    #
+    class UpdateClusterRequest < Struct.new(
+      :cluster_arn,
+      :network_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a successful UpdateCluster request.
+    #
+    # @!attribute [rw] cluster
+    #   The cluster that was updated.
+    #   @return [Types::Cluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/UpdateClusterResponse AWS API Documentation
+    #
+    class UpdateClusterResponse < Struct.new(
+      :cluster)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Updates an existing control panel.
     #

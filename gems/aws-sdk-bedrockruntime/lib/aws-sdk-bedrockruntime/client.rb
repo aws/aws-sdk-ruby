@@ -541,6 +541,7 @@ module Aws::BedrockRuntime
     #   resp.usage.sensitive_information_policy_units #=> Integer
     #   resp.usage.sensitive_information_policy_free_units #=> Integer
     #   resp.usage.contextual_grounding_policy_units #=> Integer
+    #   resp.usage.content_policy_image_units #=> Integer
     #   resp.action #=> String, one of "NONE", "GUARDRAIL_INTERVENED"
     #   resp.outputs #=> Array
     #   resp.outputs[0].text #=> String
@@ -582,6 +583,7 @@ module Aws::BedrockRuntime
     #   resp.assessments[0].invocation_metrics.usage.sensitive_information_policy_units #=> Integer
     #   resp.assessments[0].invocation_metrics.usage.sensitive_information_policy_free_units #=> Integer
     #   resp.assessments[0].invocation_metrics.usage.contextual_grounding_policy_units #=> Integer
+    #   resp.assessments[0].invocation_metrics.usage.content_policy_image_units #=> Integer
     #   resp.assessments[0].invocation_metrics.guardrail_coverage.text_characters.guarded #=> Integer
     #   resp.assessments[0].invocation_metrics.guardrail_coverage.text_characters.total #=> Integer
     #   resp.assessments[0].invocation_metrics.guardrail_coverage.images.guarded #=> Integer
@@ -1027,6 +1029,7 @@ module Aws::BedrockRuntime
     #   resp.trace.guardrail.input_assessment["String"].invocation_metrics.usage.sensitive_information_policy_units #=> Integer
     #   resp.trace.guardrail.input_assessment["String"].invocation_metrics.usage.sensitive_information_policy_free_units #=> Integer
     #   resp.trace.guardrail.input_assessment["String"].invocation_metrics.usage.contextual_grounding_policy_units #=> Integer
+    #   resp.trace.guardrail.input_assessment["String"].invocation_metrics.usage.content_policy_image_units #=> Integer
     #   resp.trace.guardrail.input_assessment["String"].invocation_metrics.guardrail_coverage.text_characters.guarded #=> Integer
     #   resp.trace.guardrail.input_assessment["String"].invocation_metrics.guardrail_coverage.text_characters.total #=> Integer
     #   resp.trace.guardrail.input_assessment["String"].invocation_metrics.guardrail_coverage.images.guarded #=> Integer
@@ -1070,6 +1073,7 @@ module Aws::BedrockRuntime
     #   resp.trace.guardrail.output_assessments["String"][0].invocation_metrics.usage.sensitive_information_policy_units #=> Integer
     #   resp.trace.guardrail.output_assessments["String"][0].invocation_metrics.usage.sensitive_information_policy_free_units #=> Integer
     #   resp.trace.guardrail.output_assessments["String"][0].invocation_metrics.usage.contextual_grounding_policy_units #=> Integer
+    #   resp.trace.guardrail.output_assessments["String"][0].invocation_metrics.usage.content_policy_image_units #=> Integer
     #   resp.trace.guardrail.output_assessments["String"][0].invocation_metrics.guardrail_coverage.text_characters.guarded #=> Integer
     #   resp.trace.guardrail.output_assessments["String"][0].invocation_metrics.guardrail_coverage.text_characters.total #=> Integer
     #   resp.trace.guardrail.output_assessments["String"][0].invocation_metrics.guardrail_coverage.images.guarded #=> Integer
@@ -1683,6 +1687,7 @@ module Aws::BedrockRuntime
     #   event.trace.guardrail.input_assessment["String"].invocation_metrics.usage.sensitive_information_policy_units #=> Integer
     #   event.trace.guardrail.input_assessment["String"].invocation_metrics.usage.sensitive_information_policy_free_units #=> Integer
     #   event.trace.guardrail.input_assessment["String"].invocation_metrics.usage.contextual_grounding_policy_units #=> Integer
+    #   event.trace.guardrail.input_assessment["String"].invocation_metrics.usage.content_policy_image_units #=> Integer
     #   event.trace.guardrail.input_assessment["String"].invocation_metrics.guardrail_coverage.text_characters.guarded #=> Integer
     #   event.trace.guardrail.input_assessment["String"].invocation_metrics.guardrail_coverage.text_characters.total #=> Integer
     #   event.trace.guardrail.input_assessment["String"].invocation_metrics.guardrail_coverage.images.guarded #=> Integer
@@ -1726,6 +1731,7 @@ module Aws::BedrockRuntime
     #   event.trace.guardrail.output_assessments["String"][0].invocation_metrics.usage.sensitive_information_policy_units #=> Integer
     #   event.trace.guardrail.output_assessments["String"][0].invocation_metrics.usage.sensitive_information_policy_free_units #=> Integer
     #   event.trace.guardrail.output_assessments["String"][0].invocation_metrics.usage.contextual_grounding_policy_units #=> Integer
+    #   event.trace.guardrail.output_assessments["String"][0].invocation_metrics.usage.content_policy_image_units #=> Integer
     #   event.trace.guardrail.output_assessments["String"][0].invocation_metrics.guardrail_coverage.text_characters.guarded #=> Integer
     #   event.trace.guardrail.output_assessments["String"][0].invocation_metrics.guardrail_coverage.text_characters.total #=> Integer
     #   event.trace.guardrail.output_assessments["String"][0].invocation_metrics.guardrail_coverage.images.guarded #=> Integer
@@ -2469,7 +2475,7 @@ module Aws::BedrockRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockruntime'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -406,6 +406,11 @@ module Aws::BedrockAgent
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NumberValue = Shapes::FloatShape.new(name: 'NumberValue')
     NumericalVersion = Shapes::StringShape.new(name: 'NumericalVersion')
+    OpenSearchManagedClusterConfiguration = Shapes::StructureShape.new(name: 'OpenSearchManagedClusterConfiguration')
+    OpenSearchManagedClusterDomainArn = Shapes::StringShape.new(name: 'OpenSearchManagedClusterDomainArn')
+    OpenSearchManagedClusterDomainEndpoint = Shapes::StringShape.new(name: 'OpenSearchManagedClusterDomainEndpoint')
+    OpenSearchManagedClusterFieldMapping = Shapes::StructureShape.new(name: 'OpenSearchManagedClusterFieldMapping')
+    OpenSearchManagedClusterIndexName = Shapes::StringShape.new(name: 'OpenSearchManagedClusterIndexName')
     OpenSearchServerlessCollectionArn = Shapes::StringShape.new(name: 'OpenSearchServerlessCollectionArn')
     OpenSearchServerlessConfiguration = Shapes::StructureShape.new(name: 'OpenSearchServerlessConfiguration')
     OpenSearchServerlessFieldMapping = Shapes::StructureShape.new(name: 'OpenSearchServerlessFieldMapping')
@@ -2044,6 +2049,17 @@ module Aws::BedrockAgent
     NeptuneAnalyticsFieldMapping.add_member(:text_field, Shapes::ShapeRef.new(shape: FieldName, required: true, location_name: "textField"))
     NeptuneAnalyticsFieldMapping.struct_class = Types::NeptuneAnalyticsFieldMapping
 
+    OpenSearchManagedClusterConfiguration.add_member(:domain_arn, Shapes::ShapeRef.new(shape: OpenSearchManagedClusterDomainArn, required: true, location_name: "domainArn"))
+    OpenSearchManagedClusterConfiguration.add_member(:domain_endpoint, Shapes::ShapeRef.new(shape: OpenSearchManagedClusterDomainEndpoint, required: true, location_name: "domainEndpoint"))
+    OpenSearchManagedClusterConfiguration.add_member(:field_mapping, Shapes::ShapeRef.new(shape: OpenSearchManagedClusterFieldMapping, required: true, location_name: "fieldMapping"))
+    OpenSearchManagedClusterConfiguration.add_member(:vector_index_name, Shapes::ShapeRef.new(shape: OpenSearchManagedClusterIndexName, required: true, location_name: "vectorIndexName"))
+    OpenSearchManagedClusterConfiguration.struct_class = Types::OpenSearchManagedClusterConfiguration
+
+    OpenSearchManagedClusterFieldMapping.add_member(:metadata_field, Shapes::ShapeRef.new(shape: FieldName, required: true, location_name: "metadataField"))
+    OpenSearchManagedClusterFieldMapping.add_member(:text_field, Shapes::ShapeRef.new(shape: FieldName, required: true, location_name: "textField"))
+    OpenSearchManagedClusterFieldMapping.add_member(:vector_field, Shapes::ShapeRef.new(shape: FieldName, required: true, location_name: "vectorField"))
+    OpenSearchManagedClusterFieldMapping.struct_class = Types::OpenSearchManagedClusterFieldMapping
+
     OpenSearchServerlessConfiguration.add_member(:collection_arn, Shapes::ShapeRef.new(shape: OpenSearchServerlessCollectionArn, required: true, location_name: "collectionArn"))
     OpenSearchServerlessConfiguration.add_member(:field_mapping, Shapes::ShapeRef.new(shape: OpenSearchServerlessFieldMapping, required: true, location_name: "fieldMapping"))
     OpenSearchServerlessConfiguration.add_member(:vector_index_name, Shapes::ShapeRef.new(shape: OpenSearchServerlessIndexName, required: true, location_name: "vectorIndexName"))
@@ -2412,6 +2428,7 @@ module Aws::BedrockAgent
 
     StorageConfiguration.add_member(:mongo_db_atlas_configuration, Shapes::ShapeRef.new(shape: MongoDbAtlasConfiguration, location_name: "mongoDbAtlasConfiguration"))
     StorageConfiguration.add_member(:neptune_analytics_configuration, Shapes::ShapeRef.new(shape: NeptuneAnalyticsConfiguration, location_name: "neptuneAnalyticsConfiguration"))
+    StorageConfiguration.add_member(:opensearch_managed_cluster_configuration, Shapes::ShapeRef.new(shape: OpenSearchManagedClusterConfiguration, location_name: "opensearchManagedClusterConfiguration"))
     StorageConfiguration.add_member(:opensearch_serverless_configuration, Shapes::ShapeRef.new(shape: OpenSearchServerlessConfiguration, location_name: "opensearchServerlessConfiguration"))
     StorageConfiguration.add_member(:pinecone_configuration, Shapes::ShapeRef.new(shape: PineconeConfiguration, location_name: "pineconeConfiguration"))
     StorageConfiguration.add_member(:rds_configuration, Shapes::ShapeRef.new(shape: RdsConfiguration, location_name: "rdsConfiguration"))

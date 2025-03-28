@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.149.0 (2025-03-28)
+------------------
+
+* Feature - This release adds support for cacheNamespace in ProjectCache
+
 1.148.0 (2025-03-13)
 ------------------
 

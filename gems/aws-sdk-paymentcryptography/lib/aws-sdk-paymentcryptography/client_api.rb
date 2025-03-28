@@ -30,8 +30,11 @@ module Aws::PaymentCryptography
     DeleteKeyInput = Shapes::StructureShape.new(name: 'DeleteKeyInput')
     DeleteKeyInputDeleteKeyInDaysInteger = Shapes::IntegerShape.new(name: 'DeleteKeyInputDeleteKeyInDaysInteger')
     DeleteKeyOutput = Shapes::StructureShape.new(name: 'DeleteKeyOutput')
+    DeriveKeyUsage = Shapes::StringShape.new(name: 'DeriveKeyUsage')
+    DiffieHellmanDerivationData = Shapes::UnionShape.new(name: 'DiffieHellmanDerivationData')
     EvenHexLengthBetween16And32 = Shapes::StringShape.new(name: 'EvenHexLengthBetween16And32')
     ExportAttributes = Shapes::StructureShape.new(name: 'ExportAttributes')
+    ExportDiffieHellmanTr31KeyBlock = Shapes::StructureShape.new(name: 'ExportDiffieHellmanTr31KeyBlock')
     ExportDukptInitialKey = Shapes::StructureShape.new(name: 'ExportDukptInitialKey')
     ExportKeyCryptogram = Shapes::StructureShape.new(name: 'ExportKeyCryptogram')
     ExportKeyInput = Shapes::StructureShape.new(name: 'ExportKeyInput')
@@ -51,6 +54,7 @@ module Aws::PaymentCryptography
     GetPublicKeyCertificateInput = Shapes::StructureShape.new(name: 'GetPublicKeyCertificateInput')
     GetPublicKeyCertificateOutput = Shapes::StructureShape.new(name: 'GetPublicKeyCertificateOutput')
     HexLength20Or24 = Shapes::StringShape.new(name: 'HexLength20Or24')
+    ImportDiffieHellmanTr31KeyBlock = Shapes::StructureShape.new(name: 'ImportDiffieHellmanTr31KeyBlock')
     ImportKeyCryptogram = Shapes::StructureShape.new(name: 'ImportKeyCryptogram')
     ImportKeyInput = Shapes::StructureShape.new(name: 'ImportKeyInput')
     ImportKeyMaterial = Shapes::UnionShape.new(name: 'ImportKeyMaterial')
@@ -68,6 +72,8 @@ module Aws::PaymentCryptography
     KeyCheckValue = Shapes::StringShape.new(name: 'KeyCheckValue')
     KeyCheckValueAlgorithm = Shapes::StringShape.new(name: 'KeyCheckValueAlgorithm')
     KeyClass = Shapes::StringShape.new(name: 'KeyClass')
+    KeyDerivationFunction = Shapes::StringShape.new(name: 'KeyDerivationFunction')
+    KeyDerivationHashAlgorithm = Shapes::StringShape.new(name: 'KeyDerivationHashAlgorithm')
     KeyExportability = Shapes::StringShape.new(name: 'KeyExportability')
     KeyMaterial = Shapes::StringShape.new(name: 'KeyMaterial')
     KeyMaterialType = Shapes::StringShape.new(name: 'KeyMaterialType')
@@ -97,11 +103,13 @@ module Aws::PaymentCryptography
     RootCertificatePublicKey = Shapes::StructureShape.new(name: 'RootCertificatePublicKey')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
+    SharedInformation = Shapes::StringShape.new(name: 'SharedInformation')
     StartKeyUsageInput = Shapes::StructureShape.new(name: 'StartKeyUsageInput')
     StartKeyUsageOutput = Shapes::StructureShape.new(name: 'StartKeyUsageOutput')
     StopKeyUsageInput = Shapes::StructureShape.new(name: 'StopKeyUsageInput')
     StopKeyUsageOutput = Shapes::StructureShape.new(name: 'StopKeyUsageOutput')
     String = Shapes::StringShape.new(name: 'String')
+    SymmetricKeyAlgorithm = Shapes::StringShape.new(name: 'SymmetricKeyAlgorithm')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeys = Shapes::ListShape.new(name: 'TagKeys')
@@ -149,6 +157,7 @@ module Aws::PaymentCryptography
     CreateKeyInput.add_member(:exportable, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Exportable"))
     CreateKeyInput.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
     CreateKeyInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateKeyInput.add_member(:derive_key_usage, Shapes::ShapeRef.new(shape: DeriveKeyUsage, location_name: "DeriveKeyUsage"))
     CreateKeyInput.struct_class = Types::CreateKeyInput
 
     CreateKeyOutput.add_member(:key, Shapes::ShapeRef.new(shape: Key, required: true, location_name: "Key"))
@@ -166,9 +175,25 @@ module Aws::PaymentCryptography
     DeleteKeyOutput.add_member(:key, Shapes::ShapeRef.new(shape: Key, required: true, location_name: "Key"))
     DeleteKeyOutput.struct_class = Types::DeleteKeyOutput
 
+    DiffieHellmanDerivationData.add_member(:shared_information, Shapes::ShapeRef.new(shape: SharedInformation, location_name: "SharedInformation"))
+    DiffieHellmanDerivationData.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    DiffieHellmanDerivationData.add_member_subclass(:shared_information, Types::DiffieHellmanDerivationData::SharedInformation)
+    DiffieHellmanDerivationData.add_member_subclass(:unknown, Types::DiffieHellmanDerivationData::Unknown)
+    DiffieHellmanDerivationData.struct_class = Types::DiffieHellmanDerivationData
+
     ExportAttributes.add_member(:export_dukpt_initial_key, Shapes::ShapeRef.new(shape: ExportDukptInitialKey, location_name: "ExportDukptInitialKey"))
     ExportAttributes.add_member(:key_check_value_algorithm, Shapes::ShapeRef.new(shape: KeyCheckValueAlgorithm, location_name: "KeyCheckValueAlgorithm"))
     ExportAttributes.struct_class = Types::ExportAttributes
+
+    ExportDiffieHellmanTr31KeyBlock.add_member(:private_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "PrivateKeyIdentifier"))
+    ExportDiffieHellmanTr31KeyBlock.add_member(:certificate_authority_public_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "CertificateAuthorityPublicKeyIdentifier"))
+    ExportDiffieHellmanTr31KeyBlock.add_member(:public_key_certificate, Shapes::ShapeRef.new(shape: CertificateType, required: true, location_name: "PublicKeyCertificate"))
+    ExportDiffieHellmanTr31KeyBlock.add_member(:derive_key_algorithm, Shapes::ShapeRef.new(shape: SymmetricKeyAlgorithm, required: true, location_name: "DeriveKeyAlgorithm"))
+    ExportDiffieHellmanTr31KeyBlock.add_member(:key_derivation_function, Shapes::ShapeRef.new(shape: KeyDerivationFunction, required: true, location_name: "KeyDerivationFunction"))
+    ExportDiffieHellmanTr31KeyBlock.add_member(:key_derivation_hash_algorithm, Shapes::ShapeRef.new(shape: KeyDerivationHashAlgorithm, required: true, location_name: "KeyDerivationHashAlgorithm"))
+    ExportDiffieHellmanTr31KeyBlock.add_member(:derivation_data, Shapes::ShapeRef.new(shape: DiffieHellmanDerivationData, required: true, location_name: "DerivationData"))
+    ExportDiffieHellmanTr31KeyBlock.add_member(:key_block_headers, Shapes::ShapeRef.new(shape: KeyBlockHeaders, location_name: "KeyBlockHeaders"))
+    ExportDiffieHellmanTr31KeyBlock.struct_class = Types::ExportDiffieHellmanTr31KeyBlock
 
     ExportDukptInitialKey.add_member(:key_serial_number, Shapes::ShapeRef.new(shape: HexLength20Or24, required: true, location_name: "KeySerialNumber"))
     ExportDukptInitialKey.struct_class = Types::ExportDukptInitialKey
@@ -186,10 +211,12 @@ module Aws::PaymentCryptography
     ExportKeyMaterial.add_member(:tr_31_key_block, Shapes::ShapeRef.new(shape: ExportTr31KeyBlock, location_name: "Tr31KeyBlock"))
     ExportKeyMaterial.add_member(:tr_34_key_block, Shapes::ShapeRef.new(shape: ExportTr34KeyBlock, location_name: "Tr34KeyBlock"))
     ExportKeyMaterial.add_member(:key_cryptogram, Shapes::ShapeRef.new(shape: ExportKeyCryptogram, location_name: "KeyCryptogram"))
+    ExportKeyMaterial.add_member(:diffie_hellman_tr_31_key_block, Shapes::ShapeRef.new(shape: ExportDiffieHellmanTr31KeyBlock, location_name: "DiffieHellmanTr31KeyBlock"))
     ExportKeyMaterial.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ExportKeyMaterial.add_member_subclass(:tr_31_key_block, Types::ExportKeyMaterial::Tr31KeyBlock)
     ExportKeyMaterial.add_member_subclass(:tr_34_key_block, Types::ExportKeyMaterial::Tr34KeyBlock)
     ExportKeyMaterial.add_member_subclass(:key_cryptogram, Types::ExportKeyMaterial::KeyCryptogram)
+    ExportKeyMaterial.add_member_subclass(:diffie_hellman_tr_31_key_block, Types::ExportKeyMaterial::DiffieHellmanTr31KeyBlock)
     ExportKeyMaterial.add_member_subclass(:unknown, Types::ExportKeyMaterial::Unknown)
     ExportKeyMaterial.struct_class = Types::ExportKeyMaterial
 
@@ -249,6 +276,16 @@ module Aws::PaymentCryptography
     GetPublicKeyCertificateOutput.add_member(:key_certificate_chain, Shapes::ShapeRef.new(shape: CertificateType, required: true, location_name: "KeyCertificateChain"))
     GetPublicKeyCertificateOutput.struct_class = Types::GetPublicKeyCertificateOutput
 
+    ImportDiffieHellmanTr31KeyBlock.add_member(:private_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "PrivateKeyIdentifier"))
+    ImportDiffieHellmanTr31KeyBlock.add_member(:certificate_authority_public_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "CertificateAuthorityPublicKeyIdentifier"))
+    ImportDiffieHellmanTr31KeyBlock.add_member(:public_key_certificate, Shapes::ShapeRef.new(shape: CertificateType, required: true, location_name: "PublicKeyCertificate"))
+    ImportDiffieHellmanTr31KeyBlock.add_member(:derive_key_algorithm, Shapes::ShapeRef.new(shape: SymmetricKeyAlgorithm, required: true, location_name: "DeriveKeyAlgorithm"))
+    ImportDiffieHellmanTr31KeyBlock.add_member(:key_derivation_function, Shapes::ShapeRef.new(shape: KeyDerivationFunction, required: true, location_name: "KeyDerivationFunction"))
+    ImportDiffieHellmanTr31KeyBlock.add_member(:key_derivation_hash_algorithm, Shapes::ShapeRef.new(shape: KeyDerivationHashAlgorithm, required: true, location_name: "KeyDerivationHashAlgorithm"))
+    ImportDiffieHellmanTr31KeyBlock.add_member(:derivation_data, Shapes::ShapeRef.new(shape: DiffieHellmanDerivationData, required: true, location_name: "DerivationData"))
+    ImportDiffieHellmanTr31KeyBlock.add_member(:wrapped_key_block, Shapes::ShapeRef.new(shape: Tr31WrappedKeyBlock, required: true, location_name: "WrappedKeyBlock"))
+    ImportDiffieHellmanTr31KeyBlock.struct_class = Types::ImportDiffieHellmanTr31KeyBlock
+
     ImportKeyCryptogram.add_member(:key_attributes, Shapes::ShapeRef.new(shape: KeyAttributes, required: true, location_name: "KeyAttributes"))
     ImportKeyCryptogram.add_member(:exportable, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Exportable"))
     ImportKeyCryptogram.add_member(:wrapped_key_cryptogram, Shapes::ShapeRef.new(shape: WrappedKeyCryptogram, required: true, location_name: "WrappedKeyCryptogram"))
@@ -267,12 +304,14 @@ module Aws::PaymentCryptography
     ImportKeyMaterial.add_member(:tr_31_key_block, Shapes::ShapeRef.new(shape: ImportTr31KeyBlock, location_name: "Tr31KeyBlock"))
     ImportKeyMaterial.add_member(:tr_34_key_block, Shapes::ShapeRef.new(shape: ImportTr34KeyBlock, location_name: "Tr34KeyBlock"))
     ImportKeyMaterial.add_member(:key_cryptogram, Shapes::ShapeRef.new(shape: ImportKeyCryptogram, location_name: "KeyCryptogram"))
+    ImportKeyMaterial.add_member(:diffie_hellman_tr_31_key_block, Shapes::ShapeRef.new(shape: ImportDiffieHellmanTr31KeyBlock, location_name: "DiffieHellmanTr31KeyBlock"))
     ImportKeyMaterial.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ImportKeyMaterial.add_member_subclass(:root_certificate_public_key, Types::ImportKeyMaterial::RootCertificatePublicKey)
     ImportKeyMaterial.add_member_subclass(:trusted_certificate_public_key, Types::ImportKeyMaterial::TrustedCertificatePublicKey)
     ImportKeyMaterial.add_member_subclass(:tr_31_key_block, Types::ImportKeyMaterial::Tr31KeyBlock)
     ImportKeyMaterial.add_member_subclass(:tr_34_key_block, Types::ImportKeyMaterial::Tr34KeyBlock)
     ImportKeyMaterial.add_member_subclass(:key_cryptogram, Types::ImportKeyMaterial::KeyCryptogram)
+    ImportKeyMaterial.add_member_subclass(:diffie_hellman_tr_31_key_block, Types::ImportKeyMaterial::DiffieHellmanTr31KeyBlock)
     ImportKeyMaterial.add_member_subclass(:unknown, Types::ImportKeyMaterial::Unknown)
     ImportKeyMaterial.struct_class = Types::ImportKeyMaterial
 
@@ -307,6 +346,7 @@ module Aws::PaymentCryptography
     Key.add_member(:usage_stop_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UsageStopTimestamp"))
     Key.add_member(:delete_pending_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DeletePendingTimestamp"))
     Key.add_member(:delete_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DeleteTimestamp"))
+    Key.add_member(:derive_key_usage, Shapes::ShapeRef.new(shape: DeriveKeyUsage, location_name: "DeriveKeyUsage"))
     Key.struct_class = Types::Key
 
     KeyAttributes.add_member(:key_usage, Shapes::ShapeRef.new(shape: KeyUsage, required: true, location_name: "KeyUsage"))

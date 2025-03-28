@@ -362,6 +362,56 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # A collection of Amazon Q feature configurations in an embedded Amazon
+    # QuickSight console.
+    #
+    # @!attribute [rw] data_qn_a
+    #   Adds generative Q&amp;A capabilitiees to an embedded Amazon
+    #   QuickSight console.
+    #   @return [Types::DataQnAConfigurations]
+    #
+    # @!attribute [rw] generative_authoring
+    #   Adds the generative BI authoring experience to an embedded Amazon
+    #   QuickSight console.
+    #   @return [Types::GenerativeAuthoringConfigurations]
+    #
+    # @!attribute [rw] executive_summary
+    #   Adds the executive summaries feature to an embedded Amazon
+    #   QuickSight console.
+    #   @return [Types::ExecutiveSummaryConfigurations]
+    #
+    # @!attribute [rw] data_stories
+    #   Adds the data stories feature to an embedded Amazon QuickSight
+    #   console.
+    #   @return [Types::DataStoriesConfigurations]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AmazonQInQuickSightConsoleConfigurations AWS API Documentation
+    #
+    class AmazonQInQuickSightConsoleConfigurations < Struct.new(
+      :data_qn_a,
+      :generative_authoring,
+      :executive_summary,
+      :data_stories)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A collection of Amazon Q feature configurations in an embedded Amazon
+    # QuickSight dashboard.
+    #
+    # @!attribute [rw] executive_summary
+    #   A generated executive summary of an embedded Amazon QuickSight
+    #   dashboard.
+    #   @return [Types::ExecutiveSummaryConfigurations]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AmazonQInQuickSightDashboardConfigurations AWS API Documentation
+    #
+    class AmazonQInQuickSightDashboardConfigurations < Struct.new(
+      :executive_summary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Metadata structure for an analysis in Amazon QuickSight
     #
     # @!attribute [rw] analysis_id
@@ -1508,11 +1558,16 @@ module Aws::QuickSight
     #   A new name for the dataset.
     #   @return [String]
     #
+    # @!attribute [rw] data_set_refresh_properties
+    #   The refresh properties of a dataset.
+    #   @return [Types::DataSetRefreshProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobDataSetOverrideParameters AWS API Documentation
     #
     class AssetBundleImportJobDataSetOverrideParameters < Struct.new(
       :data_set_id,
-      :name)
+      :name,
+      :data_set_refresh_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2300,11 +2355,22 @@ module Aws::QuickSight
     #   Determines the week start day for an analysis.
     #   @return [String]
     #
+    # @!attribute [rw] q_business_insights_status
+    #   Determines whether insight summaries from Amazon Q Business are
+    #   allowed in Dashboard Q&amp;A.
+    #   @return [String]
+    #
+    # @!attribute [rw] excluded_data_set_arns
+    #   A list of dataset ARNS to exclude from Dashboard Q&amp;A.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetOptions AWS API Documentation
     #
     class AssetOptions < Struct.new(
       :timezone,
-      :week_start)
+      :week_start,
+      :q_business_insights_status,
+      :excluded_data_set_arns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6084,6 +6150,11 @@ module Aws::QuickSight
     #   that contains a `UniqueKey` configuration.
     #   @return [Types::PerformanceConfiguration]
     #
+    # @!attribute [rw] use_as
+    #   The usage of the dataset. `RLS_RULES` must be specified for RLS
+    #   permission datasets.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateDataSetRequest AWS API Documentation
     #
     class CreateDataSetRequest < Struct.new(
@@ -6103,7 +6174,8 @@ module Aws::QuickSight
       :data_set_usage_configuration,
       :dataset_parameters,
       :folder_arns,
-      :performance_configuration)
+      :performance_configuration,
+      :use_as)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8045,6 +8117,14 @@ module Aws::QuickSight
     #   The data point tool tip options of a dashboard.
     #   @return [Types::DataPointTooltipOption]
     #
+    # @!attribute [rw] data_qa_enabled_option
+    #   Adds Q&amp;A capabilities to an Amazon QuickSight dashboard. If no
+    #   topic is linked, Dashboard Q&amp;A uses the data values that are
+    #   rendered on the dashboard. End users can use Dashboard Q&amp;A to
+    #   ask for different slices of the data that they see on the dashboard.
+    #   If a topic is linked, Topic Q&amp;A is used.
+    #   @return [Types::DataQAEnabledOption]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DashboardPublishOptions AWS API Documentation
     #
     class DashboardPublishOptions < Struct.new(
@@ -8058,7 +8138,8 @@ module Aws::QuickSight
       :export_with_hidden_fields_option,
       :data_point_drill_up_down_option,
       :data_point_menu_label_option,
-      :data_point_tooltip_option)
+      :data_point_tooltip_option,
+      :data_qa_enabled_option)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8881,6 +8962,40 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # Adds Q&amp;A capabilities to a dashboard. If no topic is linked,
+    # Dashboard Q&amp;A uses the data values that are rendered on the
+    # dashboard. End users can use Dashboard Q&amp;A to ask for different
+    # slices of the data that they see on the dashboard. If a topic is
+    # linked, Topic Q&amp;A is enabled.
+    #
+    # @!attribute [rw] availability_status
+    #   The status of the Data Q&amp;A option on the dashboard.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataQAEnabledOption AWS API Documentation
+    #
+    class DataQAEnabledOption < Struct.new(
+      :availability_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The generative Q&amp;A settings of an embedded Amazon QuickSight
+    # console.
+    #
+    # @!attribute [rw] enabled
+    #   The generative Q&amp;A settings of an embedded Amazon QuickSight
+    #   console.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataQnAConfigurations AWS API Documentation
+    #
+    class DataQnAConfigurations < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Dataset.
     #
     # @!attribute [rw] arn
@@ -8963,6 +9078,10 @@ module Aws::QuickSight
     #   The performance optimization configuration of a dataset.
     #   @return [Types::PerformanceConfiguration]
     #
+    # @!attribute [rw] use_as
+    #   The usage of the dataset.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSet AWS API Documentation
     #
     class DataSet < Struct.new(
@@ -8983,7 +9102,8 @@ module Aws::QuickSight
       :column_level_permission_rules,
       :data_set_usage_configuration,
       :dataset_parameters,
-      :performance_configuration)
+      :performance_configuration,
+      :use_as)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9056,10 +9176,15 @@ module Aws::QuickSight
     #   The refresh configuration for a dataset.
     #   @return [Types::RefreshConfiguration]
     #
+    # @!attribute [rw] failure_configuration
+    #   The failure configuration for a dataset.
+    #   @return [Types::RefreshFailureConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSetRefreshProperties AWS API Documentation
     #
     class DataSetRefreshProperties < Struct.new(
-      :refresh_configuration)
+      :refresh_configuration,
+      :failure_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9190,6 +9315,10 @@ module Aws::QuickSight
     #   configured.
     #   @return [Boolean]
     #
+    # @!attribute [rw] use_as
+    #   The usage of the dataset.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSetSummary AWS API Documentation
     #
     class DataSetSummary < Struct.new(
@@ -9201,7 +9330,8 @@ module Aws::QuickSight
       :import_mode,
       :row_level_permission_data_set,
       :row_level_permission_tag_configuration_applied,
-      :column_level_permission_rules_applied)
+      :column_level_permission_rules_applied,
+      :use_as)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9612,6 +9742,20 @@ module Aws::QuickSight
       :type,
       :created_time,
       :last_updated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The data story settings of an embedded Amazon QuickSight console.
+    #
+    # @!attribute [rw] enabled
+    #   The data story settings of an embedded Amazon QuickSight console.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataStoriesConfigurations AWS API Documentation
+    #
+    class DataStoriesConfigurations < Struct.new(
+      :enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15254,6 +15398,22 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The executive summary settings of an embedded Amazon QuickSight
+    # console or dashboard.
+    #
+    # @!attribute [rw] enabled
+    #   The executive summary settings of an embedded Amazon QuickSight
+    #   console or dashboard.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ExecutiveSummaryConfigurations AWS API Documentation
+    #
+    class ExecutiveSummaryConfigurations < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The option that determines the hierarchy of the fields that are built
     # within a visual's field wells. These fields can't be duplicated to
     # other visuals.
@@ -15346,7 +15506,7 @@ module Aws::QuickSight
     #   the error was caused by user error. If the value of this property is
     #   `False`, the error occurred on the backend. If your job continues
     #   fail and with a `False` `SenderFault` value, contact Amazon Web
-    #   Services Support.
+    #   ServicesSupport.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FailedKeyRegistrationEntry AWS API Documentation
@@ -17739,6 +17899,22 @@ module Aws::QuickSight
       :answer_id,
       :question_url)
       SENSITIVE = [:question_text, :restatement]
+      include Aws::Structure
+    end
+
+    # The generative BI authoring settings of an embedded Amazon QuickSight
+    # console.
+    #
+    # @!attribute [rw] enabled
+    #   The generative BI authoring settings of an embedded Amazon
+    #   QuickSight console.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GenerativeAuthoringConfigurations AWS API Documentation
+    #
+    class GenerativeAuthoringConfigurations < Struct.new(
+      :enabled)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -24579,12 +24755,19 @@ module Aws::QuickSight
     #   The database.
     #   @return [String]
     #
+    # @!attribute [rw] use_service_name
+    #   A Boolean value that indicates whether the `Database` uses a service
+    #   name or an SID. If this value is left blank, the default value is
+    #   `SID`. If this value is set to `false`, the value is `SID`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/OracleParameters AWS API Documentation
     #
     class OracleParameters < Struct.new(
       :host,
       :port,
-      :database)
+      :database,
+      :use_service_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26903,6 +27086,22 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The recent snapshots configuration for an embedded Amazon QuickSight
+    # dashboard.
+    #
+    # @!attribute [rw] enabled
+    #   The recent snapshots configuration for an embedded Amazon QuickSight
+    #   dashboard.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RecentSnapshotsConfigurations AWS API Documentation
+    #
+    class RecentSnapshotsConfigurations < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure that grants Amazon QuickSight access to your cluster and
     # make a call to the `redshift:GetClusterCredentials` API. For more
     # information on the `redshift:GetClusterCredentials` API, see [
@@ -27250,6 +27449,35 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The failure configuration of a dataset.
+    #
+    # @!attribute [rw] email_alert
+    #   The email alert configuration for a dataset refresh failure.
+    #   @return [Types::RefreshFailureEmailAlert]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RefreshFailureConfiguration AWS API Documentation
+    #
+    class RefreshFailureConfiguration < Struct.new(
+      :email_alert)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration settings for the email alerts that are sent when a
+    # dataset refresh fails.
+    #
+    # @!attribute [rw] alert_status
+    #   The status value that determines if email alerts are sent.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RefreshFailureEmailAlert AWS API Documentation
+    #
+    class RefreshFailureEmailAlert < Struct.new(
+      :alert_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the interval between each scheduled refresh of a dataset.
     #
     # @!attribute [rw] interval
@@ -27578,11 +27806,35 @@ module Aws::QuickSight
     #   The shared view settings of an embedded dashboard.
     #   @return [Types::SharedViewConfigurations]
     #
+    # @!attribute [rw] amazon_q_in_quick_sight
+    #   The Amazon Q configurations of an embedded Amazon QuickSight
+    #   console.
+    #   @return [Types::AmazonQInQuickSightConsoleConfigurations]
+    #
+    # @!attribute [rw] schedules
+    #   The schedules configuration for an embedded Amazon QuickSight
+    #   dashboard.
+    #   @return [Types::SchedulesConfigurations]
+    #
+    # @!attribute [rw] recent_snapshots
+    #   The recent snapshots configuration for an embedded Amazon QuickSight
+    #   dashboard.
+    #   @return [Types::RecentSnapshotsConfigurations]
+    #
+    # @!attribute [rw] threshold_alerts
+    #   The threshold alerts configuration for an embedded Amazon QuickSight
+    #   dashboard.
+    #   @return [Types::ThresholdAlertsConfigurations]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RegisteredUserConsoleFeatureConfigurations AWS API Documentation
     #
     class RegisteredUserConsoleFeatureConfigurations < Struct.new(
       :state_persistence,
-      :shared_view)
+      :shared_view,
+      :amazon_q_in_quick_sight,
+      :schedules,
+      :recent_snapshots,
+      :threshold_alerts)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27628,12 +27880,36 @@ module Aws::QuickSight
     #   QuickSight.
     #   @return [Types::BookmarksConfigurations]
     #
+    # @!attribute [rw] amazon_q_in_quick_sight
+    #   The Amazon Q configurations of an embedded Amazon QuickSight
+    #   dashboard.
+    #   @return [Types::AmazonQInQuickSightDashboardConfigurations]
+    #
+    # @!attribute [rw] schedules
+    #   The schedules configuration for an embedded Amazon QuickSight
+    #   dashboard.
+    #   @return [Types::SchedulesConfigurations]
+    #
+    # @!attribute [rw] recent_snapshots
+    #   The recent snapshots configuration for an Amazon QuickSight embedded
+    #   dashboard
+    #   @return [Types::RecentSnapshotsConfigurations]
+    #
+    # @!attribute [rw] threshold_alerts
+    #   The threshold alerts configuration for an Amazon QuickSight embedded
+    #   dashboard.
+    #   @return [Types::ThresholdAlertsConfigurations]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RegisteredUserDashboardFeatureConfigurations AWS API Documentation
     #
     class RegisteredUserDashboardFeatureConfigurations < Struct.new(
       :state_persistence,
       :shared_view,
-      :bookmarks)
+      :bookmarks,
+      :amazon_q_in_quick_sight,
+      :schedules,
+      :recent_snapshots,
+      :threshold_alerts)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -28864,6 +29140,22 @@ module Aws::QuickSight
     class ScheduleRefreshOnEntity < Struct.new(
       :day_of_week,
       :day_of_month)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The schedules configuration for an embedded Amazon QuickSight
+    # dashboard.
+    #
+    # @!attribute [rw] enabled
+    #   The schedules configuration for an embedded Amazon QuickSight
+    #   dashboard.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SchedulesConfigurations AWS API Documentation
+    #
+    class SchedulesConfigurations < Struct.new(
+      :enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31853,12 +32145,17 @@ module Aws::QuickSight
     #   The settings for the pinned columns of a table visual.
     #   @return [Types::TablePinnedFieldOptions]
     #
+    # @!attribute [rw] transposed_table_options
+    #   The `TableOptions` of a transposed table.
+    #   @return [Array<Types::TransposedTableOption>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TableFieldOptions AWS API Documentation
     #
     class TableFieldOptions < Struct.new(
       :selected_field_options,
       :order,
-      :pinned_field_options)
+      :pinned_field_options,
+      :transposed_table_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -32982,6 +33279,22 @@ module Aws::QuickSight
       :symbol,
       :visibility,
       :grouping_style)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The threshold alerts configuration for an embedded Amazon QuickSight
+    # dashboard.
+    #
+    # @!attribute [rw] enabled
+    #   The threshold alerts configuration for an embedded Amazon QuickSight
+    #   dashboard.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ThresholdAlertsConfigurations AWS API Documentation
+    #
+    class ThresholdAlertsConfigurations < Struct.new(
+      :enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34761,6 +35074,38 @@ module Aws::QuickSight
       :tag_column_operation,
       :untag_column_operation,
       :override_dataset_parameter_operation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The column option of the transposed table.
+    #
+    # @!attribute [rw] column_index
+    #   The index of a columns in a transposed table. The index range is
+    #   0-9999.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] column_width
+    #   The width of a column in a transposed table.
+    #   @return [String]
+    #
+    # @!attribute [rw] column_type
+    #   The column type of the column in a transposed table. Choose one of
+    #   the following options:
+    #
+    #   * `ROW_HEADER_COLUMN`: Refers to the leftmost column of the row
+    #     header in the transposed table.
+    #
+    #   * `VALUE_COLUMN`: Refers to all value columns in the transposed
+    #     table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TransposedTableOption AWS API Documentation
+    #
+    class TransposedTableOption < Struct.new(
+      :column_index,
+      :column_width,
+      :column_type)
       SENSITIVE = []
       include Aws::Structure
     end

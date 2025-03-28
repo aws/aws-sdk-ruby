@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2025-03-27)
+------------------
+
+* Feature - Added standaloneAccountRateTypeSelections for GetPreferences and UpdatePreferences APIs. Added STALE enum value to status attribute in GetBillScenario and UpdateBillScenario APIs.
+
 1.6.0 (2025-02-18)
 ------------------
 

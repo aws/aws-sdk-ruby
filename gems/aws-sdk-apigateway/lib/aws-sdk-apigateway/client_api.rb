@@ -157,6 +157,7 @@ module Aws::APIGateway
     Integration = Shapes::StructureShape.new(name: 'Integration')
     IntegrationResponse = Shapes::StructureShape.new(name: 'IntegrationResponse')
     IntegrationType = Shapes::StringShape.new(name: 'IntegrationType')
+    IpAddressType = Shapes::StringShape.new(name: 'IpAddressType')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListOfARNs = Shapes::ListShape.new(name: 'ListOfARNs')
     ListOfApiKey = Shapes::ListShape.new(name: 'ListOfApiKey')
@@ -679,6 +680,7 @@ module Aws::APIGateway
     DomainNames.struct_class = Types::DomainNames
 
     EndpointConfiguration.add_member(:types, Shapes::ShapeRef.new(shape: ListOfEndpointType, location_name: "types"))
+    EndpointConfiguration.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "ipAddressType"))
     EndpointConfiguration.add_member(:vpc_endpoint_ids, Shapes::ShapeRef.new(shape: ListOfString, location_name: "vpcEndpointIds"))
     EndpointConfiguration.struct_class = Types::EndpointConfiguration
 

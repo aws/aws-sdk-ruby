@@ -1126,6 +1126,7 @@ module Aws::Amplify
     #   resp.webhook.webhook_arn #=> String
     #   resp.webhook.webhook_id #=> String
     #   resp.webhook.webhook_url #=> String
+    #   resp.webhook.app_id #=> String
     #   resp.webhook.branch_name #=> String
     #   resp.webhook.description #=> String
     #   resp.webhook.create_time #=> Time
@@ -1440,6 +1441,7 @@ module Aws::Amplify
     #   resp.webhook.webhook_arn #=> String
     #   resp.webhook.webhook_id #=> String
     #   resp.webhook.webhook_url #=> String
+    #   resp.webhook.app_id #=> String
     #   resp.webhook.branch_name #=> String
     #   resp.webhook.description #=> String
     #   resp.webhook.create_time #=> Time
@@ -1841,6 +1843,7 @@ module Aws::Amplify
     #   resp.webhook.webhook_arn #=> String
     #   resp.webhook.webhook_id #=> String
     #   resp.webhook.webhook_url #=> String
+    #   resp.webhook.app_id #=> String
     #   resp.webhook.branch_name #=> String
     #   resp.webhook.description #=> String
     #   resp.webhook.create_time #=> Time
@@ -1942,7 +1945,19 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # Returns a list of artifacts for a specified app, branch, and job.
+    # Returns a list of end-to-end testing artifacts for a specified app,
+    # branch, and job.
+    #
+    # To return the build artifacts, use the [GetJob][1] API.
+    #
+    # For more information about Amplify testing support, see [Setting up
+    # end-to-end Cypress tests for your Amplify application][2] in the
+    # *Amplify Hosting User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amplify/latest/APIReference/API_GetJob.html
+    # [2]: https://docs.aws.amazon.com/amplify/latest/userguide/running-tests.html
     #
     # @option params [required, String] :app_id
     #   The unique ID for an Amplify app.
@@ -2302,6 +2317,7 @@ module Aws::Amplify
     #   resp.webhooks[0].webhook_arn #=> String
     #   resp.webhooks[0].webhook_id #=> String
     #   resp.webhooks[0].webhook_url #=> String
+    #   resp.webhooks[0].app_id #=> String
     #   resp.webhooks[0].branch_name #=> String
     #   resp.webhooks[0].description #=> String
     #   resp.webhooks[0].create_time #=> Time
@@ -3084,6 +3100,7 @@ module Aws::Amplify
     #   resp.webhook.webhook_arn #=> String
     #   resp.webhook.webhook_id #=> String
     #   resp.webhook.webhook_url #=> String
+    #   resp.webhook.app_id #=> String
     #   resp.webhook.branch_name #=> String
     #   resp.webhook.description #=> String
     #   resp.webhook.create_time #=> Time
@@ -3116,7 +3133,7 @@ module Aws::Amplify
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-amplify'
-      context[:gem_version] = '1.81.0'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

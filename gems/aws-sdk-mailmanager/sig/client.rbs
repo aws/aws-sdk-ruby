@@ -272,6 +272,10 @@ module Aws
                                    {
                                      boolean_expression: {
                                        evaluate: {
+                                         analysis: {
+                                           analyzer: ::String,
+                                           result_field: ::String
+                                         }?,
                                          attribute: ("READ_RECEIPT_REQUESTED" | "TLS" | "TLS_WRAPPED")?,
                                          is_in_address_list: {
                                            address_lists: Array[::String],
@@ -300,6 +304,10 @@ module Aws
                                      }?,
                                      string_expression: {
                                        evaluate: {
+                                         analysis: {
+                                           analyzer: ::String,
+                                           result_field: ::String
+                                         }?,
                                          attribute: ("MAIL_FROM" | "HELO" | "RECIPIENT" | "SENDER" | "FROM" | "SUBJECT" | "TO" | "CC")?,
                                          mime_header_attribute: ::String?
                                        },
@@ -324,6 +332,10 @@ module Aws
                                    {
                                      boolean_expression: {
                                        evaluate: {
+                                         analysis: {
+                                           analyzer: ::String,
+                                           result_field: ::String
+                                         }?,
                                          attribute: ("READ_RECEIPT_REQUESTED" | "TLS" | "TLS_WRAPPED")?,
                                          is_in_address_list: {
                                            address_lists: Array[::String],
@@ -352,6 +364,10 @@ module Aws
                                      }?,
                                      string_expression: {
                                        evaluate: {
+                                         analysis: {
+                                           analyzer: ::String,
+                                           result_field: ::String
+                                         }?,
                                          attribute: ("MAIL_FROM" | "HELO" | "RECIPIENT" | "SENDER" | "FROM" | "SUBJECT" | "TO" | "CC")?,
                                          mime_header_attribute: ::String?
                                        },
@@ -418,6 +434,10 @@ module Aws
                                            }?,
                                            string_expression: {
                                              evaluate: {
+                                               analysis: {
+                                                 analyzer: ::String,
+                                                 result_field: ::String
+                                               }?,
                                                attribute: ("RECIPIENT")?
                                              },
                                              operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),
@@ -1186,6 +1206,10 @@ module Aws
                                    {
                                      boolean_expression: {
                                        evaluate: {
+                                         analysis: {
+                                           analyzer: ::String,
+                                           result_field: ::String
+                                         }?,
                                          attribute: ("READ_RECEIPT_REQUESTED" | "TLS" | "TLS_WRAPPED")?,
                                          is_in_address_list: {
                                            address_lists: Array[::String],
@@ -1214,6 +1238,10 @@ module Aws
                                      }?,
                                      string_expression: {
                                        evaluate: {
+                                         analysis: {
+                                           analyzer: ::String,
+                                           result_field: ::String
+                                         }?,
                                          attribute: ("MAIL_FROM" | "HELO" | "RECIPIENT" | "SENDER" | "FROM" | "SUBJECT" | "TO" | "CC")?,
                                          mime_header_attribute: ::String?
                                        },
@@ -1238,6 +1266,10 @@ module Aws
                                    {
                                      boolean_expression: {
                                        evaluate: {
+                                         analysis: {
+                                           analyzer: ::String,
+                                           result_field: ::String
+                                         }?,
                                          attribute: ("READ_RECEIPT_REQUESTED" | "TLS" | "TLS_WRAPPED")?,
                                          is_in_address_list: {
                                            address_lists: Array[::String],
@@ -1266,6 +1298,10 @@ module Aws
                                      }?,
                                      string_expression: {
                                        evaluate: {
+                                         analysis: {
+                                           analyzer: ::String,
+                                           result_field: ::String
+                                         }?,
                                          attribute: ("MAIL_FROM" | "HELO" | "RECIPIENT" | "SENDER" | "FROM" | "SUBJECT" | "TO" | "CC")?,
                                          mime_header_attribute: ::String?
                                        },
@@ -1324,6 +1360,10 @@ module Aws
                                            }?,
                                            string_expression: {
                                              evaluate: {
+                                               analysis: {
+                                                 analyzer: ::String,
+                                                 result_field: ::String
+                                               }?,
                                                attribute: ("RECIPIENT")?
                                              },
                                              operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),

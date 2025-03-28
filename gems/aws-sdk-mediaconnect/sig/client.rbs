@@ -92,7 +92,7 @@ module Aws
                                       name: ::String,
                                       network_name: ::String,
                                       port: ::Integer,
-                                      protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp"),
+                                      protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq"),
                                       ttl: ::Integer
                                     }?
                                   },
@@ -125,7 +125,7 @@ module Aws
                                       name: ::String,
                                       network_name: ::String,
                                       port: ::Integer,
-                                      protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")
+                                      protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")
                                     }?
                                   },
                                 ]
@@ -212,7 +212,7 @@ module Aws
                                   min_latency: ::Integer?,
                                   name: ::String?,
                                   port: ::Integer?,
-                                  protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp"),
+                                  protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq"),
                                   remote_id: ::String?,
                                   sender_control_port: ::Integer?,
                                   smoothing_latency: ::Integer?,
@@ -220,7 +220,9 @@ module Aws
                                   vpc_interface_attachment: {
                                     vpc_interface_name: ::String?
                                   }?,
-                                  output_status: ("ENABLED" | "DISABLED")?
+                                  output_status: ("ENABLED" | "DISABLED")?,
+                                  ndi_speed_hq_quality: ::Integer?,
+                                  ndi_program_name: ::String?
                                 },
                               ]
                             ) -> _AddFlowOutputsResponseSuccess
@@ -269,7 +271,7 @@ module Aws
                                   ]?,
                                   min_latency: ::Integer?,
                                   name: ::String?,
-                                  protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")?,
+                                  protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")?,
                                   sender_control_port: ::Integer?,
                                   sender_ip_address: ::String?,
                                   source_listener_address: ::String?,
@@ -329,7 +331,7 @@ module Aws
                                  name: ::String,
                                  network_name: ::String,
                                  port: ::Integer,
-                                 protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp"),
+                                 protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq"),
                                  ttl: ::Integer
                                }?
                              },
@@ -360,7 +362,7 @@ module Aws
                                  name: ::String,
                                  network_name: ::String,
                                  port: ::Integer,
-                                 protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")
+                                 protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")
                                }?
                              },
                            ]
@@ -456,7 +458,7 @@ module Aws
                              min_latency: ::Integer?,
                              name: ::String?,
                              port: ::Integer?,
-                             protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp"),
+                             protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq"),
                              remote_id: ::String?,
                              sender_control_port: ::Integer?,
                              smoothing_latency: ::Integer?,
@@ -464,7 +466,9 @@ module Aws
                              vpc_interface_attachment: {
                                vpc_interface_name: ::String?
                              }?,
-                             output_status: ("ENABLED" | "DISABLED")?
+                             output_status: ("ENABLED" | "DISABLED")?,
+                             ndi_speed_hq_quality: ::Integer?,
+                             ndi_program_name: ::String?
                            },
                          ],
                          ?source: {
@@ -501,7 +505,7 @@ module Aws
                            ]?,
                            min_latency: ::Integer?,
                            name: ::String?,
-                           protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")?,
+                           protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")?,
                            sender_control_port: ::Integer?,
                            sender_ip_address: ::String?,
                            source_listener_address: ::String?,
@@ -559,7 +563,7 @@ module Aws
                              ]?,
                              min_latency: ::Integer?,
                              name: ::String?,
-                             protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")?,
+                             protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")?,
                              sender_control_port: ::Integer?,
                              sender_ip_address: ::String?,
                              source_listener_address: ::String?,
@@ -609,6 +613,18 @@ module Aws
                                  state: ("ENABLED" | "DISABLED")?,
                                  threshold_seconds: ::Integer?
                                }?
+                             },
+                           ]?
+                         },
+                         ?flow_size: ("MEDIUM" | "LARGE"),
+                         ?ndi_config: {
+                           ndi_state: ("ENABLED" | "DISABLED")?,
+                           machine_name: ::String?,
+                           ndi_discovery_servers: Array[
+                             {
+                               discovery_server_address: ::String,
+                               discovery_server_port: ::Integer?,
+                               vpc_interface_adapter: ::String
                              },
                            ]?
                          }
@@ -1056,7 +1072,7 @@ module Aws
                                     ip_address: ::String?,
                                     network_name: ::String?,
                                     port: ::Integer?,
-                                    protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")?,
+                                    protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")?,
                                     ttl: ::Integer?
                                   },
                                   output_name: ::String
@@ -1084,7 +1100,7 @@ module Aws
                                     }?,
                                     network_name: ::String?,
                                     port: ::Integer?,
-                                    protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")?
+                                    protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")?
                                   },
                                   source_name: ::String
                                 ) -> _UpdateBridgeSourceResponseSuccess
@@ -1143,6 +1159,17 @@ module Aws
                                  state: ("ENABLED" | "DISABLED")?,
                                  threshold_seconds: ::Integer?
                                }?
+                             },
+                           ]?
+                         },
+                         ?ndi_config: {
+                           ndi_state: ("ENABLED" | "DISABLED")?,
+                           machine_name: ::String?,
+                           ndi_discovery_servers: Array[
+                             {
+                               discovery_server_address: ::String,
+                               discovery_server_port: ::Integer?,
+                               vpc_interface_adapter: ::String
                              },
                            ]?
                          }
@@ -1248,7 +1275,7 @@ module Aws
                                 ?min_latency: ::Integer,
                                 output_arn: ::String,
                                 ?port: ::Integer,
-                                ?protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp"),
+                                ?protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq"),
                                 ?remote_id: ::String,
                                 ?sender_control_port: ::Integer,
                                 ?sender_ip_address: ::String,
@@ -1257,7 +1284,9 @@ module Aws
                                 ?vpc_interface_attachment: {
                                   vpc_interface_name: ::String?
                                 },
-                                ?output_status: ("ENABLED" | "DISABLED")
+                                ?output_status: ("ENABLED" | "DISABLED"),
+                                ?ndi_program_name: ::String,
+                                ?ndi_speed_hq_quality: ::Integer
                               ) -> _UpdateFlowOutputResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFlowOutputResponseSuccess
 
@@ -1301,7 +1330,7 @@ module Aws
                                   },
                                 ],
                                 ?min_latency: ::Integer,
-                                ?protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp"),
+                                ?protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq"),
                                 ?sender_control_port: ::Integer,
                                 ?sender_ip_address: ::String,
                                 source_arn: ::String,

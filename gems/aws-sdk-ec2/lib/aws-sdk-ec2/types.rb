@@ -5065,24 +5065,30 @@ module Aws::EC2
     #     constraints, or instance limit constraints. You can view a failed
     #     request for 60 minutes.
     #
-    #   * `scheduled` - (*Future-dated Capacity Reservations only*) The
+    #   * `scheduled` - (*Future-dated Capacity Reservations*) The
     #     future-dated Capacity Reservation request was approved and the
     #     Capacity Reservation is scheduled for delivery on the requested
     #     start date.
     #
-    #   * `assessing` - (*Future-dated Capacity Reservations only*) Amazon
-    #     EC2 is assessing your request for a future-dated Capacity
-    #     Reservation.
+    #   * `payment-pending` - (*Capacity Blocks*) The upfront payment has
+    #     not been processed yet.
     #
-    #   * `delayed` - (*Future-dated Capacity Reservations only*) Amazon EC2
+    #   * `payment-failed` - (*Capacity Blocks*) The upfront payment was not
+    #     processed in the 12-hour time frame. Your Capacity Block was
+    #     released.
+    #
+    #   * `assessing` - (*Future-dated Capacity Reservations*) Amazon EC2 is
+    #     assessing your request for a future-dated Capacity Reservation.
+    #
+    #   * `delayed` - (*Future-dated Capacity Reservations*) Amazon EC2
     #     encountered a delay in provisioning the requested future-dated
     #     Capacity Reservation. Amazon EC2 is unable to deliver the
     #     requested capacity by the requested start date and time.
     #
-    #   * `unsupported` - (*Future-dated Capacity Reservations only*) Amazon
-    #     EC2 can't support the future-dated Capacity Reservation request
-    #     due to capacity constraints. You can view unsupported requests for
-    #     30 days. The Capacity Reservation will not be delivered.
+    #   * `unsupported` - (*Future-dated Capacity Reservations*) Amazon EC2
+    #     can't support the future-dated Capacity Reservation request due
+    #     to capacity constraints. You can view unsupported requests for 30
+    #     days. The Capacity Reservation will not be delivered.
     #   @return [String]
     #
     # @!attribute [rw] start_date
@@ -18142,7 +18148,8 @@ module Aws::EC2
     #     `us-east-1`).
     #
     #   * `state` - The state of the Availability Zone, the Local Zone, or
-    #     the Wavelength Zone (`available`).
+    #     the Wavelength Zone (`available` \| `unavailable` \|
+    #     `constrained`).
     #
     #   * `zone-id` - The ID of the Availability Zone (for example,
     #     `use1-az1`), the Local Zone (for example, `usw2-lax1-az1`), or the
@@ -33185,18 +33192,14 @@ module Aws::EC2
 
     # Deprecated.
     #
-    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
-    # workloads that require graphics acceleration, we recommend that you
-    # use Amazon EC2 G4ad, G4dn, or G5 instances.
+    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024.
     #
     #  </note>
     #
     # @!attribute [rw] type
     #   Deprecated.
     #
-    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
-    #   workloads that require graphics acceleration, we recommend that you
-    #   use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024.
     #
     #    </note>
     #   @return [String]
@@ -36001,14 +36004,14 @@ module Aws::EC2
     #   customer managed KMS key to use for EBS encryption.
     #
     #   This parameter is only supported on `BlockDeviceMapping` objects
-    #   called by [RunInstances][1], [RequestSpotFleet][2], and
-    #   [RequestSpotInstances][3].
+    #   called by [CreateFleet][1], [RequestSpotInstances][2], and
+    #   [RunInstances][3].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotFleet.html
-    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html
+    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
     #   @return [String]
     #
     # @!attribute [rw] snapshot_id
@@ -36236,10 +36239,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] block_device_mappings
-    #   The block device mapping, which defines the EBS volumes and instance
-    #   store volumes to attach to the instance at launch. For more
-    #   information, see [Block device mappings for volumes on Amazon EC2
-    #   instances][1] in the *Amazon EC2 User Guide*.
+    #   The block device mappings, which define the EBS volumes and instance
+    #   store volumes to attach to the instance at launch.
+    #
+    #   Supported only for fleets of type `instant`.
+    #
+    #   For more information, see [Block device mappings for volumes on
+    #   Amazon EC2 instances][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -36345,26 +36351,13 @@ module Aws::EC2
     #   @return [Types::Placement]
     #
     # @!attribute [rw] block_device_mappings
-    #   The block device mapping, which defines the EBS volumes and instance
-    #   store volumes to attach to the instance at launch. For more
-    #   information, see [Block device mappings for volumes on Amazon EC2
-    #   instances][1] in the *Amazon EC2 User Guide*.
+    #   The block device mappings, which define the EBS volumes and instance
+    #   store volumes to attach to the instance at launch.
     #
-    #   To override a block device mapping specified in the launch template:
+    #   Supported only for fleets of type `instant`.
     #
-    #   * Specify the exact same `DeviceName` here as specified in the
-    #     launch template.
-    #
-    #   * Only specify the parameters you want to change.
-    #
-    #   * Any parameters you don't specify here will keep their original
-    #     launch template values.
-    #
-    #   To add a new block device mapping:
-    #
-    #   * Specify a `DeviceName` that doesn't exist in the launch template.
-    #
-    #   * Specify all desired parameters here.
+    #   For more information, see [Block device mappings for volumes on
+    #   Amazon EC2 instances][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -37269,24 +37262,30 @@ module Aws::EC2
     #     constraints, or instance limit constraints. You can view a failed
     #     request for 60 minutes.
     #
-    #   * `scheduled` - (*Future-dated Capacity Reservations only*) The
+    #   * `scheduled` - (*Future-dated Capacity Reservations*) The
     #     future-dated Capacity Reservation request was approved and the
     #     Capacity Reservation is scheduled for delivery on the requested
     #     start date.
     #
-    #   * `assessing` - (*Future-dated Capacity Reservations only*) Amazon
-    #     EC2 is assessing your request for a future-dated Capacity
-    #     Reservation.
+    #   * `payment-pending` - (*Capacity Blocks*) The upfront payment has
+    #     not been processed yet.
     #
-    #   * `delayed` - (*Future-dated Capacity Reservations only*) Amazon EC2
+    #   * `payment-failed` - (*Capacity Blocks*) The upfront payment was not
+    #     processed in the 12-hour time frame. Your Capacity Block was
+    #     released.
+    #
+    #   * `assessing` - (*Future-dated Capacity Reservations*) Amazon EC2 is
+    #     assessing your request for a future-dated Capacity Reservation.
+    #
+    #   * `delayed` - (*Future-dated Capacity Reservations*) Amazon EC2
     #     encountered a delay in provisioning the requested future-dated
     #     Capacity Reservation. Amazon EC2 is unable to deliver the
     #     requested capacity by the requested start date and time.
     #
-    #   * `unsupported` - (*Future-dated Capacity Reservations only*) Amazon
-    #     EC2 can't support the future-dated Capacity Reservation request
-    #     due to capacity constraints. You can view unsupported requests for
-    #     30 days. The Capacity Reservation will not be delivered.
+    #   * `unsupported` - (*Future-dated Capacity Reservations*) Amazon EC2
+    #     can't support the future-dated Capacity Reservation request due
+    #     to capacity constraints. You can view unsupported requests for 30
+    #     days. The Capacity Reservation will not be delivered.
     #   @return [String]
     #
     # @!attribute [rw] instance_usages
@@ -42992,6 +42991,11 @@ module Aws::EC2
     # @!attribute [rw] instance_tags
     #   The instance tags to associate with the event window. Any instances
     #   associated with the tags will be associated with the event window.
+    #
+    #   Note that while you can't create tag keys beginning with `aws:`,
+    #   you can specify existing Amazon Web Services managed tag keys (with
+    #   the `aws:` prefix) when specifying them as targets to associate with
+    #   the event window.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] dedicated_host_ids
@@ -43017,6 +43021,11 @@ module Aws::EC2
     # @!attribute [rw] tags
     #   The instance tags associated with the event window. Any instances
     #   associated with the tags will be associated with the event window.
+    #
+    #   Note that while you can't create tag keys beginning with `aws:`,
+    #   you can specify existing Amazon Web Services managed tag keys (with
+    #   the `aws:` prefix) when specifying them as targets to associate with
+    #   the event window.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] dedicated_host_ids
@@ -44398,12 +44407,6 @@ module Aws::EC2
     #
     #   * For instance types with GPU accelerators, specify `gpu`.
     #
-    #   * For instance types with Inference accelerators, specify
-    #     `inference`.
-    #
-    #   * For instance types with Inference accelerators, specify
-    #     `inference`.
-    #
     #   Default: Any accelerator type
     #   @return [Array<String>]
     #
@@ -44886,9 +44889,6 @@ module Aws::EC2
     #   * For instance types with FPGA accelerators, specify `fpga`.
     #
     #   * For instance types with GPU accelerators, specify `gpu`.
-    #
-    #   * For instance types with Inference accelerators, specify
-    #     `inference`.
     #
     #   Default: Any accelerator type
     #   @return [Array<String>]
@@ -57620,11 +57620,11 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes whether the resource is managed by an service provider and,
+    # Describes whether the resource is managed by a service provider and,
     # if so, describes the service provider that manages it.
     #
     # @!attribute [rw] managed
-    #   If `true`, the resource is managed by an service provider.
+    #   If `true`, the resource is managed by a service provider.
     #   @return [Boolean]
     #
     # @!attribute [rw] principal
@@ -61444,9 +61444,7 @@ module Aws::EC2
     # @!attribute [rw] elastic_gpu_specifications
     #   Deprecated.
     #
-    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
-    #   workloads that require graphics acceleration, we recommend that you
-    #   use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024.
     #
     #    </note>
     #   @return [Array<Types::ElasticGpuSpecification>]
@@ -61463,18 +61461,6 @@ module Aws::EC2
     #
     #   You cannot specify accelerators from different generations in the
     #   same request.
-    #
-    #   <note markdown="1"> Starting April 15, 2023, Amazon Web Services will not onboard new
-    #   customers to Amazon Elastic Inference (EI), and will help current
-    #   customers migrate their workloads to options that offer better price
-    #   and performance. After April 15, 2023, new customers will not be
-    #   able to launch instances with Amazon EI accelerators in Amazon
-    #   SageMaker, Amazon ECS, or Amazon EC2. However, customers who have
-    #   used Amazon EI at least once during the past 30-day period are
-    #   considered current customers and will be able to continue using the
-    #   service.
-    #
-    #    </note>
     #   @return [Array<Types::LaunchTemplateElasticInferenceAccelerator>]
     #
     # @!attribute [rw] security_group_ids
@@ -62918,9 +62904,7 @@ module Aws::EC2
     # @!attribute [rw] elastic_gpu_specifications
     #   Deprecated.
     #
-    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
-    #   workloads that require graphics acceleration, we recommend that you
-    #   use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024.
     #
     #    </note>
     #   @return [Array<Types::ElasticGpuSpecificationResponse>]
@@ -62937,18 +62921,6 @@ module Aws::EC2
     #
     #   You cannot specify accelerators from different generations in the
     #   same request.
-    #
-    #   <note markdown="1"> Starting April 15, 2023, Amazon Web Services will not onboard new
-    #   customers to Amazon Elastic Inference (EI), and will help current
-    #   customers migrate their workloads to options that offer better price
-    #   and performance. After April 15, 2023, new customers will not be
-    #   able to launch instances with Amazon EI accelerators in Amazon
-    #   SageMaker, Amazon ECS, or Amazon EC2. However, customers who have
-    #   used Amazon EI at least once during the past 30-day period are
-    #   considered current customers and will be able to continue using the
-    #   service.
-    #
-    #    </note>
     #   @return [Array<Types::LaunchTemplateElasticInferenceAcceleratorResponse>]
     #
     # @!attribute [rw] security_group_ids

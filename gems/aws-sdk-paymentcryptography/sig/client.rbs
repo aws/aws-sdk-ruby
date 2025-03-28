@@ -98,7 +98,7 @@ module Aws
                         key_attributes: {
                           key_usage: ("TR31_B0_BASE_DERIVATION_KEY" | "TR31_C0_CARD_VERIFICATION_KEY" | "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY" | "TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION" | "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS" | "TR31_E1_EMV_MKEY_CONFIDENTIALITY" | "TR31_E2_EMV_MKEY_INTEGRITY" | "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS" | "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION" | "TR31_E6_EMV_MKEY_OTHER" | "TR31_K0_KEY_ENCRYPTION_KEY" | "TR31_K1_KEY_BLOCK_PROTECTION_KEY" | "TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT" | "TR31_M3_ISO_9797_3_MAC_KEY" | "TR31_M1_ISO_9797_1_MAC_KEY" | "TR31_M6_ISO_9797_5_CMAC_KEY" | "TR31_M7_HMAC_KEY" | "TR31_P0_PIN_ENCRYPTION_KEY" | "TR31_P1_PIN_GENERATION_KEY" | "TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE" | "TR31_V1_IBM3624_PIN_VERIFICATION_KEY" | "TR31_V2_VISA_PIN_VERIFICATION_KEY" | "TR31_K2_TR34_ASYMMETRIC_KEY"),
                           key_class: ("SYMMETRIC_KEY" | "ASYMMETRIC_KEY_PAIR" | "PRIVATE_KEY" | "PUBLIC_KEY"),
-                          key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384"),
+                          key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521"),
                           key_modes_of_use: {
                             encrypt: bool?,
                             decrypt: bool?,
@@ -119,7 +119,8 @@ module Aws
                             key: ::String,
                             value: ::String
                           },
-                        ]
+                        ],
+                        ?derive_key_usage: ("TR31_B0_BASE_DERIVATION_KEY" | "TR31_C0_CARD_VERIFICATION_KEY" | "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY" | "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS" | "TR31_E1_EMV_MKEY_CONFIDENTIALITY" | "TR31_E2_EMV_MKEY_INTEGRITY" | "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS" | "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION" | "TR31_E6_EMV_MKEY_OTHER" | "TR31_K0_KEY_ENCRYPTION_KEY" | "TR31_K1_KEY_BLOCK_PROTECTION_KEY" | "TR31_M3_ISO_9797_3_MAC_KEY" | "TR31_M1_ISO_9797_1_MAC_KEY" | "TR31_M6_ISO_9797_5_CMAC_KEY" | "TR31_M7_HMAC_KEY" | "TR31_P0_PIN_ENCRYPTION_KEY" | "TR31_P1_PIN_GENERATION_KEY" | "TR31_V1_IBM3624_PIN_VERIFICATION_KEY" | "TR31_V2_VISA_PIN_VERIFICATION_KEY")
                       ) -> _CreateKeyResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateKeyResponseSuccess
 
@@ -196,6 +197,33 @@ module Aws
                             certificate_authority_public_key_identifier: ::String,
                             wrapping_key_certificate: ::String,
                             wrapping_spec: ("RSA_OAEP_SHA_256" | "RSA_OAEP_SHA_512")?
+                          }?,
+                          diffie_hellman_tr_31_key_block: {
+                            private_key_identifier: ::String,
+                            certificate_authority_public_key_identifier: ::String,
+                            public_key_certificate: ::String,
+                            derive_key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256"),
+                            key_derivation_function: ("NIST_SP800" | "ANSI_X963"),
+                            key_derivation_hash_algorithm: ("SHA_256" | "SHA_384" | "SHA_512"),
+                            derivation_data: {
+                              shared_information: ::String?
+                            },
+                            key_block_headers: {
+                              key_modes_of_use: {
+                                encrypt: bool?,
+                                decrypt: bool?,
+                                wrap: bool?,
+                                unwrap: bool?,
+                                generate: bool?,
+                                sign: bool?,
+                                verify: bool?,
+                                derive_key: bool?,
+                                no_restrictions: bool?
+                              }?,
+                              key_exportability: ("EXPORTABLE" | "NON_EXPORTABLE" | "SENSITIVE")?,
+                              key_version: ::String?,
+                              optional_blocks: Hash[::String, ::String]?
+                            }?
                           }?
                         },
                         export_key_identifier: ::String,
@@ -232,14 +260,14 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::GetParametersForExportOutput]
         def signing_key_certificate: () -> ::String
         def signing_key_certificate_chain: () -> ::String
-        def signing_key_algorithm: () -> ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384")
+        def signing_key_algorithm: () -> ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521")
         def export_token: () -> ::String
         def parameters_valid_until_timestamp: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PaymentCryptography/Client.html#get_parameters_for_export-instance_method
       def get_parameters_for_export: (
                                        key_material_type: ("TR34_KEY_BLOCK" | "TR31_KEY_BLOCK" | "ROOT_PUBLIC_KEY_CERTIFICATE" | "TRUSTED_PUBLIC_KEY_CERTIFICATE" | "KEY_CRYPTOGRAM"),
-                                       signing_key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384")
+                                       signing_key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521")
                                      ) -> _GetParametersForExportResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetParametersForExportResponseSuccess
 
@@ -247,14 +275,14 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::GetParametersForImportOutput]
         def wrapping_key_certificate: () -> ::String
         def wrapping_key_certificate_chain: () -> ::String
-        def wrapping_key_algorithm: () -> ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384")
+        def wrapping_key_algorithm: () -> ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521")
         def import_token: () -> ::String
         def parameters_valid_until_timestamp: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PaymentCryptography/Client.html#get_parameters_for_import-instance_method
       def get_parameters_for_import: (
                                        key_material_type: ("TR34_KEY_BLOCK" | "TR31_KEY_BLOCK" | "ROOT_PUBLIC_KEY_CERTIFICATE" | "TRUSTED_PUBLIC_KEY_CERTIFICATE" | "KEY_CRYPTOGRAM"),
-                                       wrapping_key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384")
+                                       wrapping_key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521")
                                      ) -> _GetParametersForImportResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetParametersForImportResponseSuccess
 
@@ -280,7 +308,7 @@ module Aws
                             key_attributes: {
                               key_usage: ("TR31_B0_BASE_DERIVATION_KEY" | "TR31_C0_CARD_VERIFICATION_KEY" | "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY" | "TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION" | "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS" | "TR31_E1_EMV_MKEY_CONFIDENTIALITY" | "TR31_E2_EMV_MKEY_INTEGRITY" | "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS" | "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION" | "TR31_E6_EMV_MKEY_OTHER" | "TR31_K0_KEY_ENCRYPTION_KEY" | "TR31_K1_KEY_BLOCK_PROTECTION_KEY" | "TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT" | "TR31_M3_ISO_9797_3_MAC_KEY" | "TR31_M1_ISO_9797_1_MAC_KEY" | "TR31_M6_ISO_9797_5_CMAC_KEY" | "TR31_M7_HMAC_KEY" | "TR31_P0_PIN_ENCRYPTION_KEY" | "TR31_P1_PIN_GENERATION_KEY" | "TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE" | "TR31_V1_IBM3624_PIN_VERIFICATION_KEY" | "TR31_V2_VISA_PIN_VERIFICATION_KEY" | "TR31_K2_TR34_ASYMMETRIC_KEY"),
                               key_class: ("SYMMETRIC_KEY" | "ASYMMETRIC_KEY_PAIR" | "PRIVATE_KEY" | "PUBLIC_KEY"),
-                              key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384"),
+                              key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521"),
                               key_modes_of_use: {
                                 encrypt: bool?,
                                 decrypt: bool?,
@@ -299,7 +327,7 @@ module Aws
                             key_attributes: {
                               key_usage: ("TR31_B0_BASE_DERIVATION_KEY" | "TR31_C0_CARD_VERIFICATION_KEY" | "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY" | "TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION" | "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS" | "TR31_E1_EMV_MKEY_CONFIDENTIALITY" | "TR31_E2_EMV_MKEY_INTEGRITY" | "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS" | "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION" | "TR31_E6_EMV_MKEY_OTHER" | "TR31_K0_KEY_ENCRYPTION_KEY" | "TR31_K1_KEY_BLOCK_PROTECTION_KEY" | "TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT" | "TR31_M3_ISO_9797_3_MAC_KEY" | "TR31_M1_ISO_9797_1_MAC_KEY" | "TR31_M6_ISO_9797_5_CMAC_KEY" | "TR31_M7_HMAC_KEY" | "TR31_P0_PIN_ENCRYPTION_KEY" | "TR31_P1_PIN_GENERATION_KEY" | "TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE" | "TR31_V1_IBM3624_PIN_VERIFICATION_KEY" | "TR31_V2_VISA_PIN_VERIFICATION_KEY" | "TR31_K2_TR34_ASYMMETRIC_KEY"),
                               key_class: ("SYMMETRIC_KEY" | "ASYMMETRIC_KEY_PAIR" | "PRIVATE_KEY" | "PUBLIC_KEY"),
-                              key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384"),
+                              key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521"),
                               key_modes_of_use: {
                                 encrypt: bool?,
                                 decrypt: bool?,
@@ -331,7 +359,7 @@ module Aws
                             key_attributes: {
                               key_usage: ("TR31_B0_BASE_DERIVATION_KEY" | "TR31_C0_CARD_VERIFICATION_KEY" | "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY" | "TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION" | "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS" | "TR31_E1_EMV_MKEY_CONFIDENTIALITY" | "TR31_E2_EMV_MKEY_INTEGRITY" | "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS" | "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION" | "TR31_E6_EMV_MKEY_OTHER" | "TR31_K0_KEY_ENCRYPTION_KEY" | "TR31_K1_KEY_BLOCK_PROTECTION_KEY" | "TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT" | "TR31_M3_ISO_9797_3_MAC_KEY" | "TR31_M1_ISO_9797_1_MAC_KEY" | "TR31_M6_ISO_9797_5_CMAC_KEY" | "TR31_M7_HMAC_KEY" | "TR31_P0_PIN_ENCRYPTION_KEY" | "TR31_P1_PIN_GENERATION_KEY" | "TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE" | "TR31_V1_IBM3624_PIN_VERIFICATION_KEY" | "TR31_V2_VISA_PIN_VERIFICATION_KEY" | "TR31_K2_TR34_ASYMMETRIC_KEY"),
                               key_class: ("SYMMETRIC_KEY" | "ASYMMETRIC_KEY_PAIR" | "PRIVATE_KEY" | "PUBLIC_KEY"),
-                              key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384"),
+                              key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521"),
                               key_modes_of_use: {
                                 encrypt: bool?,
                                 decrypt: bool?,
@@ -348,6 +376,18 @@ module Aws
                             wrapped_key_cryptogram: ::String,
                             import_token: ::String,
                             wrapping_spec: ("RSA_OAEP_SHA_256" | "RSA_OAEP_SHA_512")?
+                          }?,
+                          diffie_hellman_tr_31_key_block: {
+                            private_key_identifier: ::String,
+                            certificate_authority_public_key_identifier: ::String,
+                            public_key_certificate: ::String,
+                            derive_key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256"),
+                            key_derivation_function: ("NIST_SP800" | "ANSI_X963"),
+                            key_derivation_hash_algorithm: ("SHA_256" | "SHA_384" | "SHA_512"),
+                            derivation_data: {
+                              shared_information: ::String?
+                            },
+                            wrapped_key_block: ::String
                           }?
                         },
                         ?key_check_value_algorithm: ("CMAC" | "ANSI_X9_24"),

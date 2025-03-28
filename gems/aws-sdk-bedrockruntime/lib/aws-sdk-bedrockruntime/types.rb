@@ -1713,6 +1713,10 @@ module Aws::BedrockRuntime
     #   The contextual grounding policy units processed by the guardrail.
     #   @return [Integer]
     #
+    # @!attribute [rw] content_policy_image_units
+    #   The content policy image units processed by the guardrail.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/GuardrailUsage AWS API Documentation
     #
     class GuardrailUsage < Struct.new(
@@ -1721,7 +1725,8 @@ module Aws::BedrockRuntime
       :word_policy_units,
       :sensitive_information_policy_units,
       :sensitive_information_policy_free_units,
-      :contextual_grounding_policy_units)
+      :contextual_grounding_policy_units,
+      :content_policy_image_units)
       SENSITIVE = []
       include Aws::Structure
     end

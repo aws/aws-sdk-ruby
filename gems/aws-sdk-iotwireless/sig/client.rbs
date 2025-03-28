@@ -977,7 +977,7 @@ module Aws
                                            {
                                              pci: ::Integer,
                                              earfcn: ::Integer,
-                                             eutran_cid: ::Integer,
+                                             eutran_cid: ::Integer?,
                                              rsrp: ::Integer?,
                                              rsrq: ::Float?
                                            },

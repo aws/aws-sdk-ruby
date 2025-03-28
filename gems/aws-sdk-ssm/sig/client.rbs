@@ -486,6 +486,7 @@ module Aws
                                        configuration: ::String
                                      },
                                    ],
+                                   ?available_security_updates_compliance_status: ("COMPLIANT" | "NON_COMPLIANT"),
                                    ?client_token: ::String,
                                    ?tags: Array[
                                      {
@@ -1245,6 +1246,7 @@ module Aws
         def instances_with_critical_non_compliant_patches: () -> ::Integer
         def instances_with_security_non_compliant_patches: () -> ::Integer
         def instances_with_other_non_compliant_patches: () -> ::Integer
+        def instances_with_available_security_updates: () -> ::Integer
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#describe_patch_group_state-instance_method
       def describe_patch_group_state: (
@@ -1437,7 +1439,8 @@ module Aws
                                                               products: Array[::String],
                                                               configuration: ::String
                                                             },
-                                                          ]?
+                                                          ]?,
+                                                          available_security_updates_compliance_status: ("COMPLIANT" | "NON_COMPLIANT")?
                                                         }
                                                       ) -> _GetDeployablePatchSnapshotForInstanceResponseSuccess
                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeployablePatchSnapshotForInstanceResponseSuccess
@@ -1793,6 +1796,7 @@ module Aws
         def modified_date: () -> ::Time
         def description: () -> ::String
         def sources: () -> ::Array[Types::PatchSource]
+        def available_security_updates_compliance_status: () -> ("COMPLIANT" | "NON_COMPLIANT")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#get_patch_baseline-instance_method
       def get_patch_baseline: (
@@ -3121,6 +3125,7 @@ module Aws
         def modified_date: () -> ::Time
         def description: () -> ::String
         def sources: () -> ::Array[Types::PatchSource]
+        def available_security_updates_compliance_status: () -> ("COMPLIANT" | "NON_COMPLIANT")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#update_patch_baseline-instance_method
       def update_patch_baseline: (
@@ -3165,6 +3170,7 @@ module Aws
                                        configuration: ::String
                                      },
                                    ],
+                                   ?available_security_updates_compliance_status: ("COMPLIANT" | "NON_COMPLIANT"),
                                    ?replace: bool
                                  ) -> _UpdatePatchBaselineResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePatchBaselineResponseSuccess

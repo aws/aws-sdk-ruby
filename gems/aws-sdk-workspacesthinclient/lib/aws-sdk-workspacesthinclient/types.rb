@@ -589,7 +589,7 @@ module Aws::WorkSpacesThinClient
       :kms_key_arn,
       :tags,
       :device_creation_tags)
-      SENSITIVE = [:name, :desktop_endpoint, :tags, :device_creation_tags]
+      SENSITIVE = [:name, :desktop_endpoint, :activation_code, :tags, :device_creation_tags]
       include Aws::Structure
     end
 
@@ -671,7 +671,7 @@ module Aws::WorkSpacesThinClient
       :created_at,
       :updated_at,
       :arn)
-      SENSITIVE = [:name, :desktop_endpoint]
+      SENSITIVE = [:name, :desktop_endpoint, :activation_code]
       include Aws::Structure
     end
 

@@ -133,7 +133,7 @@ module Aws::WorkSpacesThinClient
       attr_accessor kms_key_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor device_creation_tags: ::Hash[::String, ::String]
-      SENSITIVE: [:name, :desktop_endpoint, :tags, :device_creation_tags]
+      SENSITIVE: [:name, :desktop_endpoint, :activation_code, :tags, :device_creation_tags]
     end
 
     class EnvironmentSummary
@@ -151,7 +151,7 @@ module Aws::WorkSpacesThinClient
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor arn: ::String
-      SENSITIVE: [:name, :desktop_endpoint]
+      SENSITIVE: [:name, :desktop_endpoint, :activation_code]
     end
 
     class GetDeviceRequest

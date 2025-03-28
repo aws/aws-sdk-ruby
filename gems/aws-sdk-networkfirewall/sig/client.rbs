@@ -496,6 +496,25 @@ module Aws
                                     ) -> _DescribeFirewallPolicyResponseSuccess
                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFirewallPolicyResponseSuccess
 
+      interface _DescribeFlowOperationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFlowOperationResponse]
+        def firewall_arn: () -> ::String
+        def availability_zone: () -> ::String
+        def flow_operation_id: () -> ::String
+        def flow_operation_type: () -> ("FLOW_FLUSH" | "FLOW_CAPTURE")
+        def flow_operation_status: () -> ("COMPLETED" | "IN_PROGRESS" | "FAILED" | "COMPLETED_WITH_ERRORS")
+        def status_message: () -> ::String
+        def flow_request_timestamp: () -> ::Time
+        def flow_operation: () -> Types::FlowOperation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#describe_flow_operation-instance_method
+      def describe_flow_operation: (
+                                     firewall_arn: ::String,
+                                     ?availability_zone: ::String,
+                                     flow_operation_id: ::String
+                                   ) -> _DescribeFlowOperationResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFlowOperationResponseSuccess
+
       interface _DescribeLoggingConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLoggingConfigurationResponse]
         def firewall_arn: () -> ::String
@@ -639,6 +658,42 @@ module Aws
                           ) -> _ListFirewallsResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFirewallsResponseSuccess
 
+      interface _ListFlowOperationResultsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFlowOperationResultsResponse]
+        def firewall_arn: () -> ::String
+        def availability_zone: () -> ::String
+        def flow_operation_id: () -> ::String
+        def flow_operation_status: () -> ("COMPLETED" | "IN_PROGRESS" | "FAILED" | "COMPLETED_WITH_ERRORS")
+        def status_message: () -> ::String
+        def flow_request_timestamp: () -> ::Time
+        def flows: () -> ::Array[Types::Flow]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#list_flow_operation_results-instance_method
+      def list_flow_operation_results: (
+                                         firewall_arn: ::String,
+                                         flow_operation_id: ::String,
+                                         ?next_token: ::String,
+                                         ?max_results: ::Integer,
+                                         ?availability_zone: ::String
+                                       ) -> _ListFlowOperationResultsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFlowOperationResultsResponseSuccess
+
+      interface _ListFlowOperationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFlowOperationsResponse]
+        def flow_operations: () -> ::Array[Types::FlowOperationMetadata]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#list_flow_operations-instance_method
+      def list_flow_operations: (
+                                  firewall_arn: ::String,
+                                  ?availability_zone: ::String,
+                                  ?flow_operation_type: ("FLOW_FLUSH" | "FLOW_CAPTURE"),
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
+                                ) -> _ListFlowOperationsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFlowOperationsResponseSuccess
+
       interface _ListRuleGroupsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListRuleGroupsResponse]
         def next_token: () -> ::String
@@ -700,6 +755,60 @@ module Aws
                                    analysis_type: ("TLS_SNI" | "HTTP_HOST")
                                  ) -> _StartAnalysisReportResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartAnalysisReportResponseSuccess
+
+      interface _StartFlowCaptureResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartFlowCaptureResponse]
+        def firewall_arn: () -> ::String
+        def flow_operation_id: () -> ::String
+        def flow_operation_status: () -> ("COMPLETED" | "IN_PROGRESS" | "FAILED" | "COMPLETED_WITH_ERRORS")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#start_flow_capture-instance_method
+      def start_flow_capture: (
+                                firewall_arn: ::String,
+                                ?availability_zone: ::String,
+                                ?minimum_flow_age_in_seconds: ::Integer,
+                                flow_filters: Array[
+                                  {
+                                    source_address: {
+                                      address_definition: ::String
+                                    }?,
+                                    destination_address: {
+                                      address_definition: ::String
+                                    }?,
+                                    source_port: ::String?,
+                                    destination_port: ::String?,
+                                    protocols: Array[::String]?
+                                  },
+                                ]
+                              ) -> _StartFlowCaptureResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartFlowCaptureResponseSuccess
+
+      interface _StartFlowFlushResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartFlowFlushResponse]
+        def firewall_arn: () -> ::String
+        def flow_operation_id: () -> ::String
+        def flow_operation_status: () -> ("COMPLETED" | "IN_PROGRESS" | "FAILED" | "COMPLETED_WITH_ERRORS")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#start_flow_flush-instance_method
+      def start_flow_flush: (
+                              firewall_arn: ::String,
+                              ?availability_zone: ::String,
+                              ?minimum_flow_age_in_seconds: ::Integer,
+                              flow_filters: Array[
+                                {
+                                  source_address: {
+                                    address_definition: ::String
+                                  }?,
+                                  destination_address: {
+                                    address_definition: ::String
+                                  }?,
+                                  source_port: ::String?,
+                                  destination_port: ::String?,
+                                  protocols: Array[::String]?
+                                },
+                              ]
+                            ) -> _StartFlowFlushResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartFlowFlushResponseSuccess
 
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]

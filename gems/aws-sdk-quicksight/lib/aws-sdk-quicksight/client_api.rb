@@ -40,6 +40,8 @@ module Aws::QuickSight
     AltText = Shapes::StringShape.new(name: 'AltText')
     AmazonElasticsearchParameters = Shapes::StructureShape.new(name: 'AmazonElasticsearchParameters')
     AmazonOpenSearchParameters = Shapes::StructureShape.new(name: 'AmazonOpenSearchParameters')
+    AmazonQInQuickSightConsoleConfigurations = Shapes::StructureShape.new(name: 'AmazonQInQuickSightConsoleConfigurations')
+    AmazonQInQuickSightDashboardConfigurations = Shapes::StructureShape.new(name: 'AmazonQInQuickSightDashboardConfigurations')
     Analysis = Shapes::StructureShape.new(name: 'Analysis')
     AnalysisDefaults = Shapes::StructureShape.new(name: 'AnalysisDefaults')
     AnalysisDefinition = Shapes::StructureShape.new(name: 'AnalysisDefinition')
@@ -506,6 +508,8 @@ module Aws::QuickSight
     DataPointDrillUpDownOption = Shapes::StructureShape.new(name: 'DataPointDrillUpDownOption')
     DataPointMenuLabelOption = Shapes::StructureShape.new(name: 'DataPointMenuLabelOption')
     DataPointTooltipOption = Shapes::StructureShape.new(name: 'DataPointTooltipOption')
+    DataQAEnabledOption = Shapes::StructureShape.new(name: 'DataQAEnabledOption')
+    DataQnAConfigurations = Shapes::StructureShape.new(name: 'DataQnAConfigurations')
     DataSet = Shapes::StructureShape.new(name: 'DataSet')
     DataSetArnsList = Shapes::ListShape.new(name: 'DataSetArnsList')
     DataSetCalculatedFieldExpression = Shapes::StringShape.new(name: 'DataSetCalculatedFieldExpression')
@@ -527,6 +531,7 @@ module Aws::QuickSight
     DataSetSummary = Shapes::StructureShape.new(name: 'DataSetSummary')
     DataSetSummaryList = Shapes::ListShape.new(name: 'DataSetSummaryList')
     DataSetUsageConfiguration = Shapes::StructureShape.new(name: 'DataSetUsageConfiguration')
+    DataSetUseAs = Shapes::StringShape.new(name: 'DataSetUseAs')
     DataSource = Shapes::StructureShape.new(name: 'DataSource')
     DataSourceCredentials = Shapes::StructureShape.new(name: 'DataSourceCredentials')
     DataSourceErrorInfo = Shapes::StructureShape.new(name: 'DataSourceErrorInfo')
@@ -540,6 +545,7 @@ module Aws::QuickSight
     DataSourceSummary = Shapes::StructureShape.new(name: 'DataSourceSummary')
     DataSourceSummaryList = Shapes::ListShape.new(name: 'DataSourceSummaryList')
     DataSourceType = Shapes::StringShape.new(name: 'DataSourceType')
+    DataStoriesConfigurations = Shapes::StructureShape.new(name: 'DataStoriesConfigurations')
     Database = Shapes::StringShape.new(name: 'Database')
     DatabaseAccessControlRole = Shapes::StringShape.new(name: 'DatabaseAccessControlRole')
     DatabaseGroup = Shapes::StringShape.new(name: 'DatabaseGroup')
@@ -800,6 +806,7 @@ module Aws::QuickSight
     ExasolParameters = Shapes::StructureShape.new(name: 'ExasolParameters')
     ExceptionResourceType = Shapes::StringShape.new(name: 'ExceptionResourceType')
     ExcludePeriodConfiguration = Shapes::StructureShape.new(name: 'ExcludePeriodConfiguration')
+    ExecutiveSummaryConfigurations = Shapes::StructureShape.new(name: 'ExecutiveSummaryConfigurations')
     ExplicitHierarchy = Shapes::StructureShape.new(name: 'ExplicitHierarchy')
     ExplicitHierarchyColumnList = Shapes::ListShape.new(name: 'ExplicitHierarchyColumnList')
     ExportHiddenFieldsOption = Shapes::StructureShape.new(name: 'ExportHiddenFieldsOption')
@@ -924,6 +931,7 @@ module Aws::QuickSight
     GenerateEmbedUrlForRegisteredUserWithIdentityResponse = Shapes::StructureShape.new(name: 'GenerateEmbedUrlForRegisteredUserWithIdentityResponse')
     GeneratedAnswerResult = Shapes::StructureShape.new(name: 'GeneratedAnswerResult')
     GeneratedAnswerStatus = Shapes::StringShape.new(name: 'GeneratedAnswerStatus')
+    GenerativeAuthoringConfigurations = Shapes::StructureShape.new(name: 'GenerativeAuthoringConfigurations')
     GeoSpatialColumnGroup = Shapes::StructureShape.new(name: 'GeoSpatialColumnGroup')
     GeoSpatialCountryCode = Shapes::StringShape.new(name: 'GeoSpatialCountryCode')
     GeoSpatialDataRole = Shapes::StringShape.new(name: 'GeoSpatialDataRole')
@@ -1450,6 +1458,7 @@ module Aws::QuickSight
     QAResultType = Shapes::StringShape.new(name: 'QAResultType')
     QAResults = Shapes::ListShape.new(name: 'QAResults')
     QAUrl = Shapes::StringShape.new(name: 'QAUrl')
+    QBusinessInsightsStatus = Shapes::StringShape.new(name: 'QBusinessInsightsStatus')
     QSearchStatus = Shapes::StringShape.new(name: 'QSearchStatus')
     Query = Shapes::StringShape.new(name: 'Query')
     QueryExecutionMode = Shapes::StringShape.new(name: 'QueryExecutionMode')
@@ -1473,6 +1482,7 @@ module Aws::QuickSight
     RangeConstant = Shapes::StructureShape.new(name: 'RangeConstant')
     RangeEndsLabelType = Shapes::StructureShape.new(name: 'RangeEndsLabelType')
     RdsParameters = Shapes::StructureShape.new(name: 'RdsParameters')
+    RecentSnapshotsConfigurations = Shapes::StructureShape.new(name: 'RecentSnapshotsConfigurations')
     RecoveryWindowInDays = Shapes::IntegerShape.new(name: 'RecoveryWindowInDays')
     RedshiftIAMParameters = Shapes::StructureShape.new(name: 'RedshiftIAMParameters')
     RedshiftParameters = Shapes::StructureShape.new(name: 'RedshiftParameters')
@@ -1491,6 +1501,9 @@ module Aws::QuickSight
     ReferenceLineValueLabelConfiguration = Shapes::StructureShape.new(name: 'ReferenceLineValueLabelConfiguration')
     ReferenceLineValueLabelRelativePosition = Shapes::StringShape.new(name: 'ReferenceLineValueLabelRelativePosition')
     RefreshConfiguration = Shapes::StructureShape.new(name: 'RefreshConfiguration')
+    RefreshFailureAlertStatus = Shapes::StringShape.new(name: 'RefreshFailureAlertStatus')
+    RefreshFailureConfiguration = Shapes::StructureShape.new(name: 'RefreshFailureConfiguration')
+    RefreshFailureEmailAlert = Shapes::StructureShape.new(name: 'RefreshFailureEmailAlert')
     RefreshFrequency = Shapes::StructureShape.new(name: 'RefreshFrequency')
     RefreshInterval = Shapes::StringShape.new(name: 'RefreshInterval')
     RefreshSchedule = Shapes::StructureShape.new(name: 'RefreshSchedule')
@@ -1565,6 +1578,7 @@ module Aws::QuickSight
     ScatterPlotUnaggregatedFieldWells = Shapes::StructureShape.new(name: 'ScatterPlotUnaggregatedFieldWells')
     ScatterPlotVisual = Shapes::StructureShape.new(name: 'ScatterPlotVisual')
     ScheduleRefreshOnEntity = Shapes::StructureShape.new(name: 'ScheduleRefreshOnEntity')
+    SchedulesConfigurations = Shapes::StructureShape.new(name: 'SchedulesConfigurations')
     ScrollBarOptions = Shapes::StructureShape.new(name: 'ScrollBarOptions')
     SearchAnalysesRequest = Shapes::StructureShape.new(name: 'SearchAnalysesRequest')
     SearchAnalysesResponse = Shapes::StructureShape.new(name: 'SearchAnalysesResponse')
@@ -1853,6 +1867,7 @@ module Aws::QuickSight
     ThemeVersionSummary = Shapes::StructureShape.new(name: 'ThemeVersionSummary')
     ThemeVersionSummaryList = Shapes::ListShape.new(name: 'ThemeVersionSummaryList')
     ThousandSeparatorOptions = Shapes::StructureShape.new(name: 'ThousandSeparatorOptions')
+    ThresholdAlertsConfigurations = Shapes::StructureShape.new(name: 'ThresholdAlertsConfigurations')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TileLayoutStyle = Shapes::StructureShape.new(name: 'TileLayoutStyle')
     TileStyle = Shapes::StructureShape.new(name: 'TileStyle')
@@ -1938,6 +1953,10 @@ module Aws::QuickSight
     TotalOptions = Shapes::StructureShape.new(name: 'TotalOptions')
     TransformOperation = Shapes::StructureShape.new(name: 'TransformOperation')
     TransformOperationList = Shapes::ListShape.new(name: 'TransformOperationList')
+    TransposedColumnIndex = Shapes::IntegerShape.new(name: 'TransposedColumnIndex')
+    TransposedColumnType = Shapes::StringShape.new(name: 'TransposedColumnType')
+    TransposedTableOption = Shapes::StructureShape.new(name: 'TransposedTableOption')
+    TransposedTableOptionList = Shapes::ListShape.new(name: 'TransposedTableOptionList')
     TreeMapAggregatedFieldWells = Shapes::StructureShape.new(name: 'TreeMapAggregatedFieldWells')
     TreeMapConfiguration = Shapes::StructureShape.new(name: 'TreeMapConfiguration')
     TreeMapDimensionFieldList = Shapes::ListShape.new(name: 'TreeMapDimensionFieldList')
@@ -2211,6 +2230,15 @@ module Aws::QuickSight
     AmazonOpenSearchParameters.add_member(:domain, Shapes::ShapeRef.new(shape: Domain, required: true, location_name: "Domain"))
     AmazonOpenSearchParameters.struct_class = Types::AmazonOpenSearchParameters
 
+    AmazonQInQuickSightConsoleConfigurations.add_member(:data_qn_a, Shapes::ShapeRef.new(shape: DataQnAConfigurations, location_name: "DataQnA"))
+    AmazonQInQuickSightConsoleConfigurations.add_member(:generative_authoring, Shapes::ShapeRef.new(shape: GenerativeAuthoringConfigurations, location_name: "GenerativeAuthoring"))
+    AmazonQInQuickSightConsoleConfigurations.add_member(:executive_summary, Shapes::ShapeRef.new(shape: ExecutiveSummaryConfigurations, location_name: "ExecutiveSummary"))
+    AmazonQInQuickSightConsoleConfigurations.add_member(:data_stories, Shapes::ShapeRef.new(shape: DataStoriesConfigurations, location_name: "DataStories"))
+    AmazonQInQuickSightConsoleConfigurations.struct_class = Types::AmazonQInQuickSightConsoleConfigurations
+
+    AmazonQInQuickSightDashboardConfigurations.add_member(:executive_summary, Shapes::ShapeRef.new(shape: ExecutiveSummaryConfigurations, location_name: "ExecutiveSummary"))
+    AmazonQInQuickSightDashboardConfigurations.struct_class = Types::AmazonQInQuickSightDashboardConfigurations
+
     Analysis.add_member(:analysis_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, location_name: "AnalysisId"))
     Analysis.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     Analysis.add_member(:name, Shapes::ShapeRef.new(shape: AnalysisName, location_name: "Name"))
@@ -2479,6 +2507,7 @@ module Aws::QuickSight
 
     AssetBundleImportJobDataSetOverrideParameters.add_member(:data_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "DataSetId"))
     AssetBundleImportJobDataSetOverrideParameters.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
+    AssetBundleImportJobDataSetOverrideParameters.add_member(:data_set_refresh_properties, Shapes::ShapeRef.new(shape: DataSetRefreshProperties, location_name: "DataSetRefreshProperties"))
     AssetBundleImportJobDataSetOverrideParameters.struct_class = Types::AssetBundleImportJobDataSetOverrideParameters
 
     AssetBundleImportJobDataSetOverrideParametersList.member = Shapes::ShapeRef.new(shape: AssetBundleImportJobDataSetOverrideParameters)
@@ -2664,6 +2693,8 @@ module Aws::QuickSight
 
     AssetOptions.add_member(:timezone, Shapes::ShapeRef.new(shape: String, location_name: "Timezone"))
     AssetOptions.add_member(:week_start, Shapes::ShapeRef.new(shape: DayOfTheWeek, location_name: "WeekStart"))
+    AssetOptions.add_member(:q_business_insights_status, Shapes::ShapeRef.new(shape: QBusinessInsightsStatus, location_name: "QBusinessInsightsStatus"))
+    AssetOptions.add_member(:excluded_data_set_arns, Shapes::ShapeRef.new(shape: DataSetArnsList, location_name: "ExcludedDataSetArns"))
     AssetOptions.struct_class = Types::AssetOptions
 
     AthenaParameters.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroup, location_name: "WorkGroup"))
@@ -3430,6 +3461,7 @@ module Aws::QuickSight
     CreateDataSetRequest.add_member(:dataset_parameters, Shapes::ShapeRef.new(shape: DatasetParameterList, location_name: "DatasetParameters"))
     CreateDataSetRequest.add_member(:folder_arns, Shapes::ShapeRef.new(shape: FolderArnList, location_name: "FolderArns"))
     CreateDataSetRequest.add_member(:performance_configuration, Shapes::ShapeRef.new(shape: PerformanceConfiguration, location_name: "PerformanceConfiguration"))
+    CreateDataSetRequest.add_member(:use_as, Shapes::ShapeRef.new(shape: DataSetUseAs, location_name: "UseAs"))
     CreateDataSetRequest.struct_class = Types::CreateDataSetRequest
 
     CreateDataSetResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -3814,6 +3846,7 @@ module Aws::QuickSight
     DashboardPublishOptions.add_member(:data_point_drill_up_down_option, Shapes::ShapeRef.new(shape: DataPointDrillUpDownOption, location_name: "DataPointDrillUpDownOption"))
     DashboardPublishOptions.add_member(:data_point_menu_label_option, Shapes::ShapeRef.new(shape: DataPointMenuLabelOption, location_name: "DataPointMenuLabelOption"))
     DashboardPublishOptions.add_member(:data_point_tooltip_option, Shapes::ShapeRef.new(shape: DataPointTooltipOption, location_name: "DataPointTooltipOption"))
+    DashboardPublishOptions.add_member(:data_qa_enabled_option, Shapes::ShapeRef.new(shape: DataQAEnabledOption, location_name: "DataQAEnabledOption"))
     DashboardPublishOptions.struct_class = Types::DashboardPublishOptions
 
     DashboardSearchFilter.add_member(:operator, Shapes::ShapeRef.new(shape: FilterOperator, required: true, location_name: "Operator"))
@@ -3972,6 +4005,12 @@ module Aws::QuickSight
     DataPointTooltipOption.add_member(:availability_status, Shapes::ShapeRef.new(shape: DashboardBehavior, location_name: "AvailabilityStatus"))
     DataPointTooltipOption.struct_class = Types::DataPointTooltipOption
 
+    DataQAEnabledOption.add_member(:availability_status, Shapes::ShapeRef.new(shape: DashboardBehavior, location_name: "AvailabilityStatus"))
+    DataQAEnabledOption.struct_class = Types::DataQAEnabledOption
+
+    DataQnAConfigurations.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
+    DataQnAConfigurations.struct_class = Types::DataQnAConfigurations
+
     DataSet.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     DataSet.add_member(:data_set_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "DataSetId"))
     DataSet.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
@@ -3990,6 +4029,7 @@ module Aws::QuickSight
     DataSet.add_member(:data_set_usage_configuration, Shapes::ShapeRef.new(shape: DataSetUsageConfiguration, location_name: "DataSetUsageConfiguration"))
     DataSet.add_member(:dataset_parameters, Shapes::ShapeRef.new(shape: DatasetParameterList, location_name: "DatasetParameters"))
     DataSet.add_member(:performance_configuration, Shapes::ShapeRef.new(shape: PerformanceConfiguration, location_name: "PerformanceConfiguration"))
+    DataSet.add_member(:use_as, Shapes::ShapeRef.new(shape: DataSetUseAs, location_name: "UseAs"))
     DataSet.struct_class = Types::DataSet
 
     DataSetArnsList.member = Shapes::ShapeRef.new(shape: Arn)
@@ -4013,7 +4053,8 @@ module Aws::QuickSight
 
     DataSetReferenceList.member = Shapes::ShapeRef.new(shape: DataSetReference)
 
-    DataSetRefreshProperties.add_member(:refresh_configuration, Shapes::ShapeRef.new(shape: RefreshConfiguration, required: true, location_name: "RefreshConfiguration"))
+    DataSetRefreshProperties.add_member(:refresh_configuration, Shapes::ShapeRef.new(shape: RefreshConfiguration, location_name: "RefreshConfiguration"))
+    DataSetRefreshProperties.add_member(:failure_configuration, Shapes::ShapeRef.new(shape: RefreshFailureConfiguration, location_name: "FailureConfiguration"))
     DataSetRefreshProperties.struct_class = Types::DataSetRefreshProperties
 
     DataSetSchema.add_member(:column_schema_list, Shapes::ShapeRef.new(shape: ColumnSchemaList, location_name: "ColumnSchemaList"))
@@ -4035,6 +4076,7 @@ module Aws::QuickSight
     DataSetSummary.add_member(:row_level_permission_data_set, Shapes::ShapeRef.new(shape: RowLevelPermissionDataSet, location_name: "RowLevelPermissionDataSet"))
     DataSetSummary.add_member(:row_level_permission_tag_configuration_applied, Shapes::ShapeRef.new(shape: Boolean, location_name: "RowLevelPermissionTagConfigurationApplied"))
     DataSetSummary.add_member(:column_level_permission_rules_applied, Shapes::ShapeRef.new(shape: Boolean, location_name: "ColumnLevelPermissionRulesApplied"))
+    DataSetSummary.add_member(:use_as, Shapes::ShapeRef.new(shape: DataSetUseAs, location_name: "UseAs"))
     DataSetSummary.struct_class = Types::DataSetSummary
 
     DataSetSummaryList.member = Shapes::ShapeRef.new(shape: DataSetSummary)
@@ -4115,6 +4157,9 @@ module Aws::QuickSight
     DataSourceSummary.struct_class = Types::DataSourceSummary
 
     DataSourceSummaryList.member = Shapes::ShapeRef.new(shape: DataSourceSummary)
+
+    DataStoriesConfigurations.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
+    DataStoriesConfigurations.struct_class = Types::DataStoriesConfigurations
 
     DatabaseGroupList.member = Shapes::ShapeRef.new(shape: DatabaseGroup)
 
@@ -5278,6 +5323,9 @@ module Aws::QuickSight
     ExcludePeriodConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: WidgetStatus, location_name: "Status"))
     ExcludePeriodConfiguration.struct_class = Types::ExcludePeriodConfiguration
 
+    ExecutiveSummaryConfigurations.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
+    ExecutiveSummaryConfigurations.struct_class = Types::ExecutiveSummaryConfigurations
+
     ExplicitHierarchy.add_member(:hierarchy_id, Shapes::ShapeRef.new(shape: HierarchyId, required: true, location_name: "HierarchyId"))
     ExplicitHierarchy.add_member(:columns, Shapes::ShapeRef.new(shape: ExplicitHierarchyColumnList, required: true, location_name: "Columns"))
     ExplicitHierarchy.add_member(:drill_down_filters, Shapes::ShapeRef.new(shape: DrillDownFilterList, location_name: "DrillDownFilters"))
@@ -5778,6 +5826,9 @@ module Aws::QuickSight
     GeneratedAnswerResult.add_member(:answer_id, Shapes::ShapeRef.new(shape: AnswerId, location_name: "AnswerId"))
     GeneratedAnswerResult.add_member(:question_url, Shapes::ShapeRef.new(shape: QAUrl, location_name: "QuestionUrl"))
     GeneratedAnswerResult.struct_class = Types::GeneratedAnswerResult
+
+    GenerativeAuthoringConfigurations.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
+    GenerativeAuthoringConfigurations.struct_class = Types::GenerativeAuthoringConfigurations
 
     GeoSpatialColumnGroup.add_member(:name, Shapes::ShapeRef.new(shape: ColumnGroupName, required: true, location_name: "Name"))
     GeoSpatialColumnGroup.add_member(:country_code, Shapes::ShapeRef.new(shape: GeoSpatialCountryCode, location_name: "CountryCode"))
@@ -7209,6 +7260,7 @@ module Aws::QuickSight
     OracleParameters.add_member(:host, Shapes::ShapeRef.new(shape: Host, required: true, location_name: "Host"))
     OracleParameters.add_member(:port, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "Port"))
     OracleParameters.add_member(:database, Shapes::ShapeRef.new(shape: Database, required: true, location_name: "Database"))
+    OracleParameters.add_member(:use_service_name, Shapes::ShapeRef.new(shape: Boolean, location_name: "UseServiceName"))
     OracleParameters.struct_class = Types::OracleParameters
 
     OutputColumn.add_member(:name, Shapes::ShapeRef.new(shape: ColumnName, location_name: "Name"))
@@ -7713,6 +7765,9 @@ module Aws::QuickSight
     RdsParameters.add_member(:database, Shapes::ShapeRef.new(shape: Database, required: true, location_name: "Database"))
     RdsParameters.struct_class = Types::RdsParameters
 
+    RecentSnapshotsConfigurations.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
+    RecentSnapshotsConfigurations.struct_class = Types::RecentSnapshotsConfigurations
+
     RedshiftIAMParameters.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     RedshiftIAMParameters.add_member(:database_user, Shapes::ShapeRef.new(shape: DatabaseUser, location_name: "DatabaseUser"))
     RedshiftIAMParameters.add_member(:database_groups, Shapes::ShapeRef.new(shape: DatabaseGroupList, location_name: "DatabaseGroups"))
@@ -7771,6 +7826,12 @@ module Aws::QuickSight
     RefreshConfiguration.add_member(:incremental_refresh, Shapes::ShapeRef.new(shape: IncrementalRefresh, required: true, location_name: "IncrementalRefresh"))
     RefreshConfiguration.struct_class = Types::RefreshConfiguration
 
+    RefreshFailureConfiguration.add_member(:email_alert, Shapes::ShapeRef.new(shape: RefreshFailureEmailAlert, location_name: "EmailAlert"))
+    RefreshFailureConfiguration.struct_class = Types::RefreshFailureConfiguration
+
+    RefreshFailureEmailAlert.add_member(:alert_status, Shapes::ShapeRef.new(shape: RefreshFailureAlertStatus, location_name: "AlertStatus"))
+    RefreshFailureEmailAlert.struct_class = Types::RefreshFailureEmailAlert
+
     RefreshFrequency.add_member(:interval, Shapes::ShapeRef.new(shape: RefreshInterval, required: true, location_name: "Interval"))
     RefreshFrequency.add_member(:refresh_on_day, Shapes::ShapeRef.new(shape: ScheduleRefreshOnEntity, location_name: "RefreshOnDay"))
     RefreshFrequency.add_member(:timezone, Shapes::ShapeRef.new(shape: String, location_name: "Timezone"))
@@ -7813,6 +7874,10 @@ module Aws::QuickSight
 
     RegisteredUserConsoleFeatureConfigurations.add_member(:state_persistence, Shapes::ShapeRef.new(shape: StatePersistenceConfigurations, location_name: "StatePersistence"))
     RegisteredUserConsoleFeatureConfigurations.add_member(:shared_view, Shapes::ShapeRef.new(shape: SharedViewConfigurations, location_name: "SharedView"))
+    RegisteredUserConsoleFeatureConfigurations.add_member(:amazon_q_in_quick_sight, Shapes::ShapeRef.new(shape: AmazonQInQuickSightConsoleConfigurations, location_name: "AmazonQInQuickSight"))
+    RegisteredUserConsoleFeatureConfigurations.add_member(:schedules, Shapes::ShapeRef.new(shape: SchedulesConfigurations, location_name: "Schedules"))
+    RegisteredUserConsoleFeatureConfigurations.add_member(:recent_snapshots, Shapes::ShapeRef.new(shape: RecentSnapshotsConfigurations, location_name: "RecentSnapshots"))
+    RegisteredUserConsoleFeatureConfigurations.add_member(:threshold_alerts, Shapes::ShapeRef.new(shape: ThresholdAlertsConfigurations, location_name: "ThresholdAlerts"))
     RegisteredUserConsoleFeatureConfigurations.struct_class = Types::RegisteredUserConsoleFeatureConfigurations
 
     RegisteredUserDashboardEmbeddingConfiguration.add_member(:initial_dashboard_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "InitialDashboardId"))
@@ -7822,6 +7887,10 @@ module Aws::QuickSight
     RegisteredUserDashboardFeatureConfigurations.add_member(:state_persistence, Shapes::ShapeRef.new(shape: StatePersistenceConfigurations, location_name: "StatePersistence"))
     RegisteredUserDashboardFeatureConfigurations.add_member(:shared_view, Shapes::ShapeRef.new(shape: SharedViewConfigurations, location_name: "SharedView"))
     RegisteredUserDashboardFeatureConfigurations.add_member(:bookmarks, Shapes::ShapeRef.new(shape: BookmarksConfigurations, location_name: "Bookmarks"))
+    RegisteredUserDashboardFeatureConfigurations.add_member(:amazon_q_in_quick_sight, Shapes::ShapeRef.new(shape: AmazonQInQuickSightDashboardConfigurations, location_name: "AmazonQInQuickSight"))
+    RegisteredUserDashboardFeatureConfigurations.add_member(:schedules, Shapes::ShapeRef.new(shape: SchedulesConfigurations, location_name: "Schedules"))
+    RegisteredUserDashboardFeatureConfigurations.add_member(:recent_snapshots, Shapes::ShapeRef.new(shape: RecentSnapshotsConfigurations, location_name: "RecentSnapshots"))
+    RegisteredUserDashboardFeatureConfigurations.add_member(:threshold_alerts, Shapes::ShapeRef.new(shape: ThresholdAlertsConfigurations, location_name: "ThresholdAlerts"))
     RegisteredUserDashboardFeatureConfigurations.struct_class = Types::RegisteredUserDashboardFeatureConfigurations
 
     RegisteredUserDashboardVisualEmbeddingConfiguration.add_member(:initial_dashboard_visual_id, Shapes::ShapeRef.new(shape: DashboardVisualId, required: true, location_name: "InitialDashboardVisualId"))
@@ -8039,6 +8108,9 @@ module Aws::QuickSight
     ScheduleRefreshOnEntity.add_member(:day_of_week, Shapes::ShapeRef.new(shape: DayOfWeek, location_name: "DayOfWeek"))
     ScheduleRefreshOnEntity.add_member(:day_of_month, Shapes::ShapeRef.new(shape: DayOfMonth, location_name: "DayOfMonth"))
     ScheduleRefreshOnEntity.struct_class = Types::ScheduleRefreshOnEntity
+
+    SchedulesConfigurations.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
+    SchedulesConfigurations.struct_class = Types::SchedulesConfigurations
 
     ScrollBarOptions.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
     ScrollBarOptions.add_member(:visible_range, Shapes::ShapeRef.new(shape: VisibleRangeOptions, location_name: "VisibleRange"))
@@ -8686,6 +8758,7 @@ module Aws::QuickSight
     TableFieldOptions.add_member(:selected_field_options, Shapes::ShapeRef.new(shape: TableFieldOptionList, location_name: "SelectedFieldOptions"))
     TableFieldOptions.add_member(:order, Shapes::ShapeRef.new(shape: FieldOrderList, location_name: "Order"))
     TableFieldOptions.add_member(:pinned_field_options, Shapes::ShapeRef.new(shape: TablePinnedFieldOptions, location_name: "PinnedFieldOptions"))
+    TableFieldOptions.add_member(:transposed_table_options, Shapes::ShapeRef.new(shape: TransposedTableOptionList, location_name: "TransposedTableOptions"))
     TableFieldOptions.struct_class = Types::TableFieldOptions
 
     TableFieldOrderList.member = Shapes::ShapeRef.new(shape: FieldId)
@@ -8932,6 +9005,9 @@ module Aws::QuickSight
     ThousandSeparatorOptions.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
     ThousandSeparatorOptions.add_member(:grouping_style, Shapes::ShapeRef.new(shape: DigitGroupingStyle, location_name: "GroupingStyle"))
     ThousandSeparatorOptions.struct_class = Types::ThousandSeparatorOptions
+
+    ThresholdAlertsConfigurations.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
+    ThresholdAlertsConfigurations.struct_class = Types::ThresholdAlertsConfigurations
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ThrottlingException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
@@ -9304,6 +9380,13 @@ module Aws::QuickSight
     TransformOperation.struct_class = Types::TransformOperation
 
     TransformOperationList.member = Shapes::ShapeRef.new(shape: TransformOperation)
+
+    TransposedTableOption.add_member(:column_index, Shapes::ShapeRef.new(shape: TransposedColumnIndex, location_name: "ColumnIndex"))
+    TransposedTableOption.add_member(:column_width, Shapes::ShapeRef.new(shape: PixelLength, location_name: "ColumnWidth"))
+    TransposedTableOption.add_member(:column_type, Shapes::ShapeRef.new(shape: TransposedColumnType, required: true, location_name: "ColumnType"))
+    TransposedTableOption.struct_class = Types::TransposedTableOption
+
+    TransposedTableOptionList.member = Shapes::ShapeRef.new(shape: TransposedTableOption)
 
     TreeMapAggregatedFieldWells.add_member(:groups, Shapes::ShapeRef.new(shape: TreeMapDimensionFieldList, location_name: "Groups"))
     TreeMapAggregatedFieldWells.add_member(:sizes, Shapes::ShapeRef.new(shape: TreeMapMeasureFieldList, location_name: "Sizes"))

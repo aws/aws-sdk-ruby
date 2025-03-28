@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2025-03-24)
+------------------
+
+* Feature - Mark EutranCid under LteNmr optional.
+
 1.64.0 (2025-02-18)
 ------------------
 

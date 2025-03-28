@@ -1963,12 +1963,14 @@ module Aws::CloudFormation
     #   Specify an IAM role only if you are using customized administrator
     #   roles to control which users or groups can manage specific stack sets
     #   within the same administrator account. For more information, see
-    #   [Prerequisites for using StackSets][1] in the *CloudFormation User
+    #   [Grant self-managed permissions][1] in the *CloudFormation User
     #   Guide*.
     #
+    #   Valid only if the permissions model is `SELF_MANAGED`.
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html
     #
     # @option params [String] :execution_role_name
     #   The name of the IAM execution role to use to create the stack set. If
@@ -1979,6 +1981,8 @@ module Aws::CloudFormation
     #   Specify an IAM role only if you are using customized execution roles
     #   to control which stack resources users and groups can include in their
     #   stack sets.
+    #
+    #   Valid only if the permissions model is `SELF_MANAGED`.
     #
     # @option params [String] :permission_model
     #   Describes how the IAM roles required for stack set operations are
@@ -2001,12 +2005,21 @@ module Aws::CloudFormation
     # @option params [Types::AutoDeployment] :auto_deployment
     #   Describes whether StackSets automatically deploys to Organizations
     #   accounts that are added to the target organization or organizational
-    #   unit (OU). Specify only if `PermissionModel` is `SERVICE_MANAGED`.
+    #   unit (OU). For more information, see [Manage automatic deployments for
+    #   CloudFormation StackSets that use service-managed permissions][1] in
+    #   the *CloudFormation User Guide*.
+    #
+    #   Required if the permissions model is `SERVICE_MANAGED`. (Not used with
+    #   self-managed permissions.)
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-manage-auto-deployment.html
     #
     # @option params [String] :call_as
-    #   \[Service-managed permissions\] Specifies whether you are acting as an
-    #   account administrator in the organization's management account or as
-    #   a delegated administrator in a member account.
+    #   Specifies whether you are acting as an account administrator in the
+    #   organization's management account or as a delegated administrator in
+    #   a member account.
     #
     #   By default, `SELF` is specified. Use `SELF` for stack sets with
     #   self-managed permissions.
@@ -2024,6 +2037,8 @@ module Aws::CloudFormation
     #   Stack sets with service-managed permissions are created in the
     #   management account, including stack sets that are created by delegated
     #   administrators.
+    #
+    #   Valid only if the permissions model is `SERVICE_MANAGED`.
     #
     #
     #
@@ -3003,6 +3018,7 @@ module Aws::CloudFormation
     #   * {Types::DescribeResourceScanOutput#resource_types #resource_types} => Array&lt;String&gt;
     #   * {Types::DescribeResourceScanOutput#resources_scanned #resources_scanned} => Integer
     #   * {Types::DescribeResourceScanOutput#resources_read #resources_read} => Integer
+    #   * {Types::DescribeResourceScanOutput#scan_filters #scan_filters} => Array&lt;Types::ScanFilter&gt;
     #
     #
     # @example Example: To describe a selected resource scan
@@ -3117,6 +3133,9 @@ module Aws::CloudFormation
     #   resp.resource_types[0] #=> String
     #   resp.resources_scanned #=> Integer
     #   resp.resources_read #=> Integer
+    #   resp.scan_filters #=> Array
+    #   resp.scan_filters[0].types #=> Array
+    #   resp.scan_filters[0].types[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeResourceScan AWS API Documentation
     #
@@ -3213,8 +3232,6 @@ module Aws::CloudFormation
     #     unique stack ID.
     #
     #   * Deleted stacks: You must specify the unique stack ID.
-    #
-    #   Default: There is no default value.
     #
     # @option params [String] :next_token
     #   A string that identifies the next page of events that you want to
@@ -3408,12 +3425,8 @@ module Aws::CloudFormation
     #
     #   * Deleted stacks: You must specify the unique stack ID.
     #
-    #   Default: There is no default value.
-    #
     # @option params [required, String] :logical_resource_id
     #   The logical name of the resource as specified in the template.
-    #
-    #   Default: There is no default value.
     #
     # @return [Types::DescribeStackResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3586,15 +3599,11 @@ module Aws::CloudFormation
     #
     #   * Deleted stacks: You must specify the unique stack ID.
     #
-    #   Default: There is no default value.
-    #
     #   Required: Conditional. If you don't specify `StackName`, you must
     #   specify `PhysicalResourceId`.
     #
     # @option params [String] :logical_resource_id
     #   The logical name of the resource as specified in the template.
-    #
-    #   Default: There is no default value.
     #
     # @option params [String] :physical_resource_id
     #   The name or unique identifier that corresponds to a physical instance
@@ -3607,8 +3616,6 @@ module Aws::CloudFormation
     #
     #   Required: Conditional. If you don't specify `PhysicalResourceId`, you
     #   must specify `StackName`.
-    #
-    #   Default: There is no default value.
     #
     # @return [Types::DescribeStackResourcesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3860,8 +3867,6 @@ module Aws::CloudFormation
     #     unique stack ID.
     #
     #   * Deleted stacks: You must specify the unique stack ID.
-    #
-    #   Default: There is no default value.
     #
     # @option params [String] :next_token
     #   A string that identifies the next page of stacks that you want to
@@ -4658,8 +4663,6 @@ module Aws::CloudFormation
     #     unique stack ID.
     #
     #   * Deleted stacks: You must specify the unique stack ID.
-    #
-    #   Default: There is no default value.
     #
     # @option params [String] :change_set_name
     #   The name or Amazon Resource Name (ARN) of a change set for which
@@ -5489,6 +5492,10 @@ module Aws::CloudFormation
     #   parameter to get the next set of results. The default value is 10. The
     #   maximum value is 100.
     #
+    # @option params [String] :scan_type_filter
+    #   The scan type that you want to get summary information about. The
+    #   default is `FULL`.
+    #
     # @return [Types::ListResourceScansOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListResourceScansOutput#resource_scan_summaries #resource_scan_summaries} => Array&lt;Types::ResourceScanSummary&gt;
@@ -5528,6 +5535,7 @@ module Aws::CloudFormation
     #   resp = client.list_resource_scans({
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     scan_type_filter: "FULL", # accepts FULL, PARTIAL
     #   })
     #
     # @example Response structure
@@ -5539,6 +5547,7 @@ module Aws::CloudFormation
     #   resp.resource_scan_summaries[0].start_time #=> Time
     #   resp.resource_scan_summaries[0].end_time #=> Time
     #   resp.resource_scan_summaries[0].percentage_completed #=> Float
+    #   resp.resource_scan_summaries[0].scan_type #=> String, one of "FULL", "PARTIAL"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListResourceScans AWS API Documentation
@@ -5905,8 +5914,6 @@ module Aws::CloudFormation
     #     unique stack ID.
     #
     #   * Deleted stacks: You must specify the unique stack ID.
-    #
-    #   Default: There is no default value.
     #
     # @option params [String] :next_token
     #   A string that identifies the next page of stack resources that you
@@ -6298,11 +6305,11 @@ module Aws::CloudFormation
     end
 
     # Returns the summary information for stacks whose status matches the
-    # specified StackStatusFilter. Summary information for stacks that have
-    # been deleted is kept for 90 days after the stack is deleted. If no
-    # StackStatusFilter is specified, summary information for all stacks is
-    # returned (including existing stacks and stacks that have been
-    # deleted).
+    # specified `StackStatusFilter`. Summary information for stacks that
+    # have been deleted is kept for 90 days after the stack is deleted. If
+    # no `StackStatusFilter` is specified, summary information for all
+    # stacks is returned (including existing stacks and stacks that have
+    # been deleted).
     #
     # @option params [String] :next_token
     #   A string that identifies the next page of stacks that you want to
@@ -7330,6 +7337,9 @@ module Aws::CloudFormation
     #   token if you plan to retry requests so that CloudFormation knows that
     #   you're not attempting to start a new resource scan.
     #
+    # @option params [Array<Types::ScanFilter>] :scan_filters
+    #   The scan filters to use.
+    #
     # @return [Types::StartResourceScanOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartResourceScanOutput#resource_scan_id #resource_scan_id} => String
@@ -7351,6 +7361,11 @@ module Aws::CloudFormation
     #
     #   resp = client.start_resource_scan({
     #     client_request_token: "ClientRequestToken",
+    #     scan_filters: [
+    #       {
+    #         types: ["ResourceTypeFilter"],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -8181,7 +8196,7 @@ module Aws::CloudFormation
       req.send_request(options)
     end
 
-    # Updates the stack set, and associated stack instances in the specified
+    # Updates the stack set and associated stack instances in the specified
     # accounts and Amazon Web Services Regions.
     #
     # Even if the stack set operation created by updating the stack set
@@ -8331,14 +8346,14 @@ module Aws::CloudFormation
     #   Preferences for how CloudFormation performs this stack set operation.
     #
     # @option params [String] :administration_role_arn
-    #   The Amazon Resource Name (ARN) of the IAM role to use to update this
-    #   stack set.
+    #   \[Self-managed permissions\] The Amazon Resource Name (ARN) of the IAM
+    #   role to use to update this stack set.
     #
     #   Specify an IAM role only if you are using customized administrator
     #   roles to control which users or groups can manage specific stack sets
     #   within the same administrator account. For more information, see
-    #   [Prerequisites for using CloudFormation StackSets][1] in the
-    #   *CloudFormation User Guide*.
+    #   [Grant self-managed permissions][1] in the *CloudFormation User
+    #   Guide*.
     #
     #   If you specified a customized administrator role when you created the
     #   stack set, you must specify a customized administrator role, even if
@@ -8347,13 +8362,13 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html
     #
     # @option params [String] :execution_role_name
-    #   The name of the IAM execution role to use to update the stack set. If
-    #   you do not specify an execution role, CloudFormation uses the
-    #   `AWSCloudFormationStackSetExecutionRole` role for the stack set
-    #   operation.
+    #   \[Self-managed permissions\] The name of the IAM execution role to use
+    #   to update the stack set. If you do not specify an execution role,
+    #   CloudFormation uses the `AWSCloudFormationStackSetExecutionRole` role
+    #   for the stack set operation.
     #
     #   Specify an IAM role only if you are using customized execution roles
     #   to control which stack resources users and groups can include in their
@@ -8403,10 +8418,17 @@ module Aws::CloudFormation
     # @option params [Types::AutoDeployment] :auto_deployment
     #   \[Service-managed permissions\] Describes whether StackSets
     #   automatically deploys to Organizations accounts that are added to a
-    #   target organization or organizational unit (OU).
+    #   target organization or organizational unit (OU). For more information,
+    #   see [Manage automatic deployments for CloudFormation StackSets that
+    #   use service-managed permissions][1] in the *CloudFormation User
+    #   Guide*.
     #
     #   If you specify `AutoDeployment`, don't specify `DeploymentTargets` or
     #   `Regions`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-manage-auto-deployment.html
     #
     # @option params [String] :operation_id
     #   The unique ID for this stack set operation.
@@ -8682,7 +8704,7 @@ module Aws::CloudFormation
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.128.0'
+      context[:gem_version] = '1.129.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

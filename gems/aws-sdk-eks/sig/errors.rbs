@@ -39,6 +39,10 @@ module Aws
         def subscription_id: () -> ::String
         def message: () -> ::String
       end
+      class InvalidStateException < ::Aws::Errors::ServiceError
+        def cluster_name: () -> ::String
+        def message: () -> ::String
+      end
       class NotFoundException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
@@ -73,6 +77,10 @@ module Aws
         def message: () -> ::String
       end
       class ServiceUnavailableException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ThrottlingException < ::Aws::Errors::ServiceError
+        def cluster_name: () -> ::String
         def message: () -> ::String
       end
       class UnsupportedAvailabilityZoneException < ::Aws::Errors::ServiceError

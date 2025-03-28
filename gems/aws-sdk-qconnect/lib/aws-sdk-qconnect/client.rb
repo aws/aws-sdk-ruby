@@ -1210,7 +1210,7 @@ module Aws::QConnect
     #
     # @option params [required, String] :model_id
     #   The identifier of the model used for this AI Prompt. Model Ids
-    #   supported are: `CLAUDE_3_HAIKU_20240307_V1`
+    #   supported are: `anthropic.claude-3-haiku-20240307-v1:0`
     #
     # @option params [required, String] :name
     #   The name of the AI Prompt.
@@ -5534,7 +5534,7 @@ module Aws::QConnect
       req.send_request(options)
     end
 
-    # Removes the AI Agent that is set for use by defafult on an Amazon Q in
+    # Removes the AI Agent that is set for use by default on an Amazon Q in
     # Connect Assistant.
     #
     # @option params [required, String] :ai_agent_type
@@ -6853,7 +6853,7 @@ module Aws::QConnect
       req.send_request(options)
     end
 
-    # Updates the AI Agent that is set for use by defafult on an Amazon Q in
+    # Updates the AI Agent that is set for use by default on an Amazon Q in
     # Connect Assistant.
     #
     # @option params [required, String] :ai_agent_type
@@ -7765,7 +7765,7 @@ module Aws::QConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-qconnect'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

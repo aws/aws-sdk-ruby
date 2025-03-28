@@ -944,6 +944,10 @@ module Aws::MailManager
     #           {
     #             boolean_expression: {
     #               evaluate: { # required
+    #                 analysis: {
+    #                   analyzer: "AnalyzerArn", # required
+    #                   result_field: "ResultField", # required
+    #                 },
     #                 attribute: "READ_RECEIPT_REQUESTED", # accepts READ_RECEIPT_REQUESTED, TLS, TLS_WRAPPED
     #                 is_in_address_list: {
     #                   address_lists: ["AddressListArn"], # required
@@ -972,6 +976,10 @@ module Aws::MailManager
     #             },
     #             string_expression: {
     #               evaluate: { # required
+    #                 analysis: {
+    #                   analyzer: "AnalyzerArn", # required
+    #                   result_field: "ResultField", # required
+    #                 },
     #                 attribute: "MAIL_FROM", # accepts MAIL_FROM, HELO, RECIPIENT, SENDER, FROM, SUBJECT, TO, CC
     #                 mime_header_attribute: "MimeHeaderAttribute",
     #               },
@@ -996,6 +1004,10 @@ module Aws::MailManager
     #           {
     #             boolean_expression: {
     #               evaluate: { # required
+    #                 analysis: {
+    #                   analyzer: "AnalyzerArn", # required
+    #                   result_field: "ResultField", # required
+    #                 },
     #                 attribute: "READ_RECEIPT_REQUESTED", # accepts READ_RECEIPT_REQUESTED, TLS, TLS_WRAPPED
     #                 is_in_address_list: {
     #                   address_lists: ["AddressListArn"], # required
@@ -1024,6 +1036,10 @@ module Aws::MailManager
     #             },
     #             string_expression: {
     #               evaluate: { # required
+    #                 analysis: {
+    #                   analyzer: "AnalyzerArn", # required
+    #                   result_field: "ResultField", # required
+    #                 },
     #                 attribute: "MAIL_FROM", # accepts MAIL_FROM, HELO, RECIPIENT, SENDER, FROM, SUBJECT, TO, CC
     #                 mime_header_attribute: "MimeHeaderAttribute",
     #               },
@@ -1132,6 +1148,10 @@ module Aws::MailManager
     #             },
     #             string_expression: {
     #               evaluate: { # required
+    #                 analysis: {
+    #                   analyzer: "AnalyzerArn", # required
+    #                   result_field: "ResultField", # required
+    #                 },
     #                 attribute: "RECIPIENT", # accepts RECIPIENT
     #               },
     #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS
@@ -1996,6 +2016,8 @@ module Aws::MailManager
     #   resp.rules[0].actions[0].write_to_s3.s3_prefix #=> String
     #   resp.rules[0].actions[0].write_to_s3.s3_sse_kms_key_id #=> String
     #   resp.rules[0].conditions #=> Array
+    #   resp.rules[0].conditions[0].boolean_expression.evaluate.analysis.analyzer #=> String
+    #   resp.rules[0].conditions[0].boolean_expression.evaluate.analysis.result_field #=> String
     #   resp.rules[0].conditions[0].boolean_expression.evaluate.attribute #=> String, one of "READ_RECEIPT_REQUESTED", "TLS", "TLS_WRAPPED"
     #   resp.rules[0].conditions[0].boolean_expression.evaluate.is_in_address_list.address_lists #=> Array
     #   resp.rules[0].conditions[0].boolean_expression.evaluate.is_in_address_list.address_lists[0] #=> String
@@ -2011,6 +2033,8 @@ module Aws::MailManager
     #   resp.rules[0].conditions[0].number_expression.evaluate.attribute #=> String, one of "MESSAGE_SIZE"
     #   resp.rules[0].conditions[0].number_expression.operator #=> String, one of "EQUALS", "NOT_EQUALS", "LESS_THAN", "GREATER_THAN", "LESS_THAN_OR_EQUAL", "GREATER_THAN_OR_EQUAL"
     #   resp.rules[0].conditions[0].number_expression.value #=> Float
+    #   resp.rules[0].conditions[0].string_expression.evaluate.analysis.analyzer #=> String
+    #   resp.rules[0].conditions[0].string_expression.evaluate.analysis.result_field #=> String
     #   resp.rules[0].conditions[0].string_expression.evaluate.attribute #=> String, one of "MAIL_FROM", "HELO", "RECIPIENT", "SENDER", "FROM", "SUBJECT", "TO", "CC"
     #   resp.rules[0].conditions[0].string_expression.evaluate.mime_header_attribute #=> String
     #   resp.rules[0].conditions[0].string_expression.operator #=> String, one of "EQUALS", "NOT_EQUALS", "STARTS_WITH", "ENDS_WITH", "CONTAINS"
@@ -2024,6 +2048,8 @@ module Aws::MailManager
     #   resp.rules[0].conditions[0].verdict_expression.values[0] #=> String, one of "PASS", "FAIL", "GRAY", "PROCESSING_FAILED"
     #   resp.rules[0].name #=> String
     #   resp.rules[0].unless #=> Array
+    #   resp.rules[0].unless[0].boolean_expression.evaluate.analysis.analyzer #=> String
+    #   resp.rules[0].unless[0].boolean_expression.evaluate.analysis.result_field #=> String
     #   resp.rules[0].unless[0].boolean_expression.evaluate.attribute #=> String, one of "READ_RECEIPT_REQUESTED", "TLS", "TLS_WRAPPED"
     #   resp.rules[0].unless[0].boolean_expression.evaluate.is_in_address_list.address_lists #=> Array
     #   resp.rules[0].unless[0].boolean_expression.evaluate.is_in_address_list.address_lists[0] #=> String
@@ -2039,6 +2065,8 @@ module Aws::MailManager
     #   resp.rules[0].unless[0].number_expression.evaluate.attribute #=> String, one of "MESSAGE_SIZE"
     #   resp.rules[0].unless[0].number_expression.operator #=> String, one of "EQUALS", "NOT_EQUALS", "LESS_THAN", "GREATER_THAN", "LESS_THAN_OR_EQUAL", "GREATER_THAN_OR_EQUAL"
     #   resp.rules[0].unless[0].number_expression.value #=> Float
+    #   resp.rules[0].unless[0].string_expression.evaluate.analysis.analyzer #=> String
+    #   resp.rules[0].unless[0].string_expression.evaluate.analysis.result_field #=> String
     #   resp.rules[0].unless[0].string_expression.evaluate.attribute #=> String, one of "MAIL_FROM", "HELO", "RECIPIENT", "SENDER", "FROM", "SUBJECT", "TO", "CC"
     #   resp.rules[0].unless[0].string_expression.evaluate.mime_header_attribute #=> String
     #   resp.rules[0].unless[0].string_expression.operator #=> String, one of "EQUALS", "NOT_EQUALS", "STARTS_WITH", "ENDS_WITH", "CONTAINS"
@@ -2101,6 +2129,8 @@ module Aws::MailManager
     #   resp.policy_statements[0].conditions[0].ip_expression.operator #=> String, one of "CIDR_MATCHES", "NOT_CIDR_MATCHES"
     #   resp.policy_statements[0].conditions[0].ip_expression.values #=> Array
     #   resp.policy_statements[0].conditions[0].ip_expression.values[0] #=> String
+    #   resp.policy_statements[0].conditions[0].string_expression.evaluate.analysis.analyzer #=> String
+    #   resp.policy_statements[0].conditions[0].string_expression.evaluate.analysis.result_field #=> String
     #   resp.policy_statements[0].conditions[0].string_expression.evaluate.attribute #=> String, one of "RECIPIENT"
     #   resp.policy_statements[0].conditions[0].string_expression.operator #=> String, one of "EQUALS", "NOT_EQUALS", "STARTS_WITH", "ENDS_WITH", "CONTAINS"
     #   resp.policy_statements[0].conditions[0].string_expression.values #=> Array
@@ -3234,6 +3264,10 @@ module Aws::MailManager
     #           {
     #             boolean_expression: {
     #               evaluate: { # required
+    #                 analysis: {
+    #                   analyzer: "AnalyzerArn", # required
+    #                   result_field: "ResultField", # required
+    #                 },
     #                 attribute: "READ_RECEIPT_REQUESTED", # accepts READ_RECEIPT_REQUESTED, TLS, TLS_WRAPPED
     #                 is_in_address_list: {
     #                   address_lists: ["AddressListArn"], # required
@@ -3262,6 +3296,10 @@ module Aws::MailManager
     #             },
     #             string_expression: {
     #               evaluate: { # required
+    #                 analysis: {
+    #                   analyzer: "AnalyzerArn", # required
+    #                   result_field: "ResultField", # required
+    #                 },
     #                 attribute: "MAIL_FROM", # accepts MAIL_FROM, HELO, RECIPIENT, SENDER, FROM, SUBJECT, TO, CC
     #                 mime_header_attribute: "MimeHeaderAttribute",
     #               },
@@ -3286,6 +3324,10 @@ module Aws::MailManager
     #           {
     #             boolean_expression: {
     #               evaluate: { # required
+    #                 analysis: {
+    #                   analyzer: "AnalyzerArn", # required
+    #                   result_field: "ResultField", # required
+    #                 },
     #                 attribute: "READ_RECEIPT_REQUESTED", # accepts READ_RECEIPT_REQUESTED, TLS, TLS_WRAPPED
     #                 is_in_address_list: {
     #                   address_lists: ["AddressListArn"], # required
@@ -3314,6 +3356,10 @@ module Aws::MailManager
     #             },
     #             string_expression: {
     #               evaluate: { # required
+    #                 analysis: {
+    #                   analyzer: "AnalyzerArn", # required
+    #                   result_field: "ResultField", # required
+    #                 },
     #                 attribute: "MAIL_FROM", # accepts MAIL_FROM, HELO, RECIPIENT, SENDER, FROM, SUBJECT, TO, CC
     #                 mime_header_attribute: "MimeHeaderAttribute",
     #               },
@@ -3400,6 +3446,10 @@ module Aws::MailManager
     #             },
     #             string_expression: {
     #               evaluate: { # required
+    #                 analysis: {
+    #                   analyzer: "AnalyzerArn", # required
+    #                   result_field: "ResultField", # required
+    #                 },
     #                 attribute: "RECIPIENT", # accepts RECIPIENT
     #               },
     #               operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS
@@ -3447,7 +3497,7 @@ module Aws::MailManager
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mailmanager'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

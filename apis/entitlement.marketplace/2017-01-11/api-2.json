@@ -39,6 +39,7 @@
         "ProductCode":{"shape":"ProductCode"},
         "Dimension":{"shape":"NonEmptyString"},
         "CustomerIdentifier":{"shape":"NonEmptyString"},
+        "CustomerAWSAccountId":{"shape":"NonEmptyString"},
         "Value":{"shape":"EntitlementValue"},
         "ExpirationDate":{"shape":"Timestamp"}
       }
@@ -68,7 +69,8 @@
       "type":"string",
       "enum":[
         "CUSTOMER_IDENTIFIER",
-        "DIMENSION"
+        "DIMENSION",
+        "CUSTOMER_AWS_ACCOUNT_ID"
       ]
     },
     "GetEntitlementFilters":{

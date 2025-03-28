@@ -86,7 +86,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceEntitlementService/Client.html#get_entitlements-instance_method
       def get_entitlements: (
                               product_code: ::String,
-                              ?filter: Hash[("CUSTOMER_IDENTIFIER" | "DIMENSION"), Array[::String]],
+                              ?filter: Hash[("CUSTOMER_IDENTIFIER" | "DIMENSION" | "CUSTOMER_AWS_ACCOUNT_ID"), Array[::String]],
                               ?next_token: ::String,
                               ?max_results: ::Integer
                             ) -> _GetEntitlementsResponseSuccess

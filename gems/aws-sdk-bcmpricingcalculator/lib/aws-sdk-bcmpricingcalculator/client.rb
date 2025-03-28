@@ -1413,7 +1413,7 @@ module Aws::BCMPricingCalculator
     #   resp.name #=> String
     #   resp.bill_interval.start #=> Time
     #   resp.bill_interval.end #=> Time
-    #   resp.status #=> String, one of "READY", "LOCKED", "FAILED"
+    #   resp.status #=> String, one of "READY", "LOCKED", "FAILED", "STALE"
     #   resp.created_at #=> Time
     #   resp.expires_at #=> Time
     #   resp.failure_message #=> String
@@ -1636,7 +1636,7 @@ module Aws::BCMPricingCalculator
     #   resp.name #=> String
     #   resp.bill_interval.start #=> Time
     #   resp.bill_interval.end #=> Time
-    #   resp.status #=> String, one of "READY", "LOCKED", "FAILED"
+    #   resp.status #=> String, one of "READY", "LOCKED", "FAILED", "STALE"
     #   resp.created_at #=> Time
     #   resp.expires_at #=> Time
     #   resp.failure_message #=> String
@@ -1650,13 +1650,13 @@ module Aws::BCMPricingCalculator
       req.send_request(options)
     end
 
-    # Retrieves the current preferences for the Amazon Web Services Cost
-    # Explorer service.
+    # Retrieves the current preferences for Pricing Calculator.
     #
     # @return [Types::GetPreferencesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetPreferencesResponse#management_account_rate_type_selections #management_account_rate_type_selections} => Array&lt;String&gt;
     #   * {Types::GetPreferencesResponse#member_account_rate_type_selections #member_account_rate_type_selections} => Array&lt;String&gt;
+    #   * {Types::GetPreferencesResponse#standalone_account_rate_type_selections #standalone_account_rate_type_selections} => Array&lt;String&gt;
     #
     # @example Response structure
     #
@@ -1664,6 +1664,8 @@ module Aws::BCMPricingCalculator
     #   resp.management_account_rate_type_selections[0] #=> String, one of "BEFORE_DISCOUNTS", "AFTER_DISCOUNTS"
     #   resp.member_account_rate_type_selections #=> Array
     #   resp.member_account_rate_type_selections[0] #=> String, one of "BEFORE_DISCOUNTS", "AFTER_DISCOUNTS"
+    #   resp.standalone_account_rate_type_selections #=> Array
+    #   resp.standalone_account_rate_type_selections[0] #=> String, one of "BEFORE_DISCOUNTS", "AFTER_DISCOUNTS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/GetPreferences AWS API Documentation
     #
@@ -2242,7 +2244,7 @@ module Aws::BCMPricingCalculator
     #   resp.items[0].name #=> String
     #   resp.items[0].bill_interval.start #=> Time
     #   resp.items[0].bill_interval.end #=> Time
-    #   resp.items[0].status #=> String, one of "READY", "LOCKED", "FAILED"
+    #   resp.items[0].status #=> String, one of "READY", "LOCKED", "FAILED", "STALE"
     #   resp.items[0].created_at #=> Time
     #   resp.items[0].expires_at #=> Time
     #   resp.items[0].failure_message #=> String
@@ -2593,7 +2595,7 @@ module Aws::BCMPricingCalculator
     #   resp.name #=> String
     #   resp.bill_interval.start #=> Time
     #   resp.bill_interval.end #=> Time
-    #   resp.status #=> String, one of "READY", "LOCKED", "FAILED"
+    #   resp.status #=> String, one of "READY", "LOCKED", "FAILED", "STALE"
     #   resp.created_at #=> Time
     #   resp.expires_at #=> Time
     #   resp.failure_message #=> String
@@ -2607,8 +2609,7 @@ module Aws::BCMPricingCalculator
       req.send_request(options)
     end
 
-    # Updates the preferences for the Amazon Web Services Cost Explorer
-    # service.
+    # Updates the preferences for Pricing Calculator.
     #
     # @option params [Array<String>] :management_account_rate_type_selections
     #   The updated preferred rate types for the management account.
@@ -2616,16 +2617,21 @@ module Aws::BCMPricingCalculator
     # @option params [Array<String>] :member_account_rate_type_selections
     #   The updated preferred rate types for member accounts.
     #
+    # @option params [Array<String>] :standalone_account_rate_type_selections
+    #   The updated preferred rate types for a standalone account.
+    #
     # @return [Types::UpdatePreferencesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdatePreferencesResponse#management_account_rate_type_selections #management_account_rate_type_selections} => Array&lt;String&gt;
     #   * {Types::UpdatePreferencesResponse#member_account_rate_type_selections #member_account_rate_type_selections} => Array&lt;String&gt;
+    #   * {Types::UpdatePreferencesResponse#standalone_account_rate_type_selections #standalone_account_rate_type_selections} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_preferences({
     #     management_account_rate_type_selections: ["BEFORE_DISCOUNTS"], # accepts BEFORE_DISCOUNTS, AFTER_DISCOUNTS
     #     member_account_rate_type_selections: ["BEFORE_DISCOUNTS"], # accepts BEFORE_DISCOUNTS, AFTER_DISCOUNTS
+    #     standalone_account_rate_type_selections: ["BEFORE_DISCOUNTS"], # accepts BEFORE_DISCOUNTS, AFTER_DISCOUNTS
     #   })
     #
     # @example Response structure
@@ -2634,6 +2640,8 @@ module Aws::BCMPricingCalculator
     #   resp.management_account_rate_type_selections[0] #=> String, one of "BEFORE_DISCOUNTS", "AFTER_DISCOUNTS"
     #   resp.member_account_rate_type_selections #=> Array
     #   resp.member_account_rate_type_selections[0] #=> String, one of "BEFORE_DISCOUNTS", "AFTER_DISCOUNTS"
+    #   resp.standalone_account_rate_type_selections #=> Array
+    #   resp.standalone_account_rate_type_selections[0] #=> String, one of "BEFORE_DISCOUNTS", "AFTER_DISCOUNTS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/UpdatePreferences AWS API Documentation
     #
@@ -2716,7 +2724,7 @@ module Aws::BCMPricingCalculator
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bcmpricingcalculator'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

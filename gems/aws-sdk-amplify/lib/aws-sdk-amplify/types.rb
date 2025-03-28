@@ -2596,7 +2596,7 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] artifacts_url
-    #   The URL to the artifact for the execution step.
+    #   The URL to the build artifact for the execution step.
     #   @return [String]
     #
     # @!attribute [rw] test_artifacts_url
@@ -3285,6 +3285,10 @@ module Aws::Amplify
     #   The URL of the webhook.
     #   @return [String]
     #
+    # @!attribute [rw] app_id
+    #   The unique ID of an Amplify app.
+    #   @return [String]
+    #
     # @!attribute [rw] branch_name
     #   The name for a branch that is part of an Amplify app.
     #   @return [String]
@@ -3309,6 +3313,7 @@ module Aws::Amplify
       :webhook_arn,
       :webhook_id,
       :webhook_url,
+      :app_id,
       :branch_name,
       :description,
       :create_time,

@@ -1971,6 +1971,7 @@ module Aws::SageMaker
     ReferenceMinVersion = Shapes::StringShape.new(name: 'ReferenceMinVersion')
     RegisterDevicesRequest = Shapes::StructureShape.new(name: 'RegisterDevicesRequest')
     RegisterModelStepMetadata = Shapes::StructureShape.new(name: 'RegisterModelStepMetadata')
+    Relation = Shapes::StringShape.new(name: 'Relation')
     ReleaseNotes = Shapes::StringShape.new(name: 'ReleaseNotes')
     RemoteDebugConfig = Shapes::StructureShape.new(name: 'RemoteDebugConfig')
     RemoteDebugConfigForUpdate = Shapes::StructureShape.new(name: 'RemoteDebugConfigForUpdate')
@@ -2259,6 +2260,7 @@ module Aws::SageMaker
     TimeSeriesTransformations = Shapes::StructureShape.new(name: 'TimeSeriesTransformations')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TimestampAttributeName = Shapes::StringShape.new(name: 'TimestampAttributeName')
+    TotalHits = Shapes::StructureShape.new(name: 'TotalHits')
     TotalInstanceCount = Shapes::IntegerShape.new(name: 'TotalInstanceCount')
     TrackingServerArn = Shapes::StringShape.new(name: 'TrackingServerArn')
     TrackingServerName = Shapes::StringShape.new(name: 'TrackingServerName')
@@ -2319,6 +2321,7 @@ module Aws::SageMaker
     TrainingRepositoryCredentialsProviderArn = Shapes::StringShape.new(name: 'TrainingRepositoryCredentialsProviderArn')
     TrainingSpecification = Shapes::StructureShape.new(name: 'TrainingSpecification')
     TrainingTimeInSeconds = Shapes::IntegerShape.new(name: 'TrainingTimeInSeconds')
+    TransformAmiVersion = Shapes::StringShape.new(name: 'TransformAmiVersion')
     TransformDataSource = Shapes::StructureShape.new(name: 'TransformDataSource')
     TransformEnvironmentKey = Shapes::StringShape.new(name: 'TransformEnvironmentKey')
     TransformEnvironmentMap = Shapes::MapShape.new(name: 'TransformEnvironmentMap')
@@ -3434,6 +3437,7 @@ module Aws::SageMaker
     CreateAppRequest.add_member(:app_name, Shapes::ShapeRef.new(shape: AppName, required: true, location_name: "AppName"))
     CreateAppRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateAppRequest.add_member(:resource_spec, Shapes::ShapeRef.new(shape: ResourceSpec, location_name: "ResourceSpec"))
+    CreateAppRequest.add_member(:recovery_mode, Shapes::ShapeRef.new(shape: Boolean, location_name: "RecoveryMode"))
     CreateAppRequest.struct_class = Types::CreateAppRequest
 
     CreateAppResponse.add_member(:app_arn, Shapes::ShapeRef.new(shape: AppArn, location_name: "AppArn"))
@@ -3988,6 +3992,7 @@ module Aws::SageMaker
     CreatePartnerAppRequest.add_member(:name, Shapes::ShapeRef.new(shape: PartnerAppName, required: true, location_name: "Name"))
     CreatePartnerAppRequest.add_member(:type, Shapes::ShapeRef.new(shape: PartnerAppType, required: true, location_name: "Type"))
     CreatePartnerAppRequest.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "ExecutionRoleArn"))
+    CreatePartnerAppRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     CreatePartnerAppRequest.add_member(:maintenance_config, Shapes::ShapeRef.new(shape: PartnerAppMaintenanceConfig, location_name: "MaintenanceConfig"))
     CreatePartnerAppRequest.add_member(:tier, Shapes::ShapeRef.new(shape: NonEmptyString64, required: true, location_name: "Tier"))
     CreatePartnerAppRequest.add_member(:application_config, Shapes::ShapeRef.new(shape: PartnerAppConfig, location_name: "ApplicationConfig"))
@@ -4684,6 +4689,7 @@ module Aws::SageMaker
     DescribeAppResponse.add_member(:user_profile_name, Shapes::ShapeRef.new(shape: UserProfileName, location_name: "UserProfileName"))
     DescribeAppResponse.add_member(:space_name, Shapes::ShapeRef.new(shape: SpaceName, location_name: "SpaceName"))
     DescribeAppResponse.add_member(:status, Shapes::ShapeRef.new(shape: AppStatus, location_name: "Status"))
+    DescribeAppResponse.add_member(:recovery_mode, Shapes::ShapeRef.new(shape: Boolean, location_name: "RecoveryMode"))
     DescribeAppResponse.add_member(:last_health_check_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastHealthCheckTimestamp"))
     DescribeAppResponse.add_member(:last_user_activity_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUserActivityTimestamp"))
     DescribeAppResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
@@ -5538,7 +5544,9 @@ module Aws::SageMaker
     DescribePartnerAppResponse.add_member(:type, Shapes::ShapeRef.new(shape: PartnerAppType, location_name: "Type"))
     DescribePartnerAppResponse.add_member(:status, Shapes::ShapeRef.new(shape: PartnerAppStatus, location_name: "Status"))
     DescribePartnerAppResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    DescribePartnerAppResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     DescribePartnerAppResponse.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "ExecutionRoleArn"))
+    DescribePartnerAppResponse.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     DescribePartnerAppResponse.add_member(:base_url, Shapes::ShapeRef.new(shape: String2048, location_name: "BaseUrl"))
     DescribePartnerAppResponse.add_member(:maintenance_config, Shapes::ShapeRef.new(shape: PartnerAppMaintenanceConfig, location_name: "MaintenanceConfig"))
     DescribePartnerAppResponse.add_member(:tier, Shapes::ShapeRef.new(shape: NonEmptyString64, location_name: "Tier"))
@@ -7192,7 +7200,7 @@ module Aws::SageMaker
     ListClusterNodesRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
     ListClusterNodesRequest.struct_class = Types::ListClusterNodesRequest
 
-    ListClusterNodesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, required: true, location_name: "NextToken"))
+    ListClusterNodesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListClusterNodesResponse.add_member(:cluster_node_summaries, Shapes::ShapeRef.new(shape: ClusterNodeSummaries, required: true, location_name: "ClusterNodeSummaries"))
     ListClusterNodesResponse.struct_class = Types::ListClusterNodesResponse
 
@@ -7221,7 +7229,7 @@ module Aws::SageMaker
     ListClustersRequest.add_member(:training_plan_arn, Shapes::ShapeRef.new(shape: TrainingPlanArn, location_name: "TrainingPlanArn"))
     ListClustersRequest.struct_class = Types::ListClustersRequest
 
-    ListClustersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, required: true, location_name: "NextToken"))
+    ListClustersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListClustersResponse.add_member(:cluster_summaries, Shapes::ShapeRef.new(shape: ClusterSummaries, required: true, location_name: "ClusterSummaries"))
     ListClustersResponse.struct_class = Types::ListClustersResponse
 
@@ -9799,6 +9807,7 @@ module Aws::SageMaker
 
     SearchResponse.add_member(:results, Shapes::ShapeRef.new(shape: SearchResultsList, location_name: "Results"))
     SearchResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    SearchResponse.add_member(:total_hits, Shapes::ShapeRef.new(shape: TotalHits, location_name: "TotalHits"))
     SearchResponse.struct_class = Types::SearchResponse
 
     SearchResultsList.member = Shapes::ShapeRef.new(shape: SearchRecord)
@@ -9807,7 +9816,7 @@ module Aws::SageMaker
     SearchTrainingPlanOfferingsRequest.add_member(:instance_count, Shapes::ShapeRef.new(shape: ReservedCapacityInstanceCount, required: true, location_name: "InstanceCount"))
     SearchTrainingPlanOfferingsRequest.add_member(:start_time_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTimeAfter"))
     SearchTrainingPlanOfferingsRequest.add_member(:end_time_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTimeBefore"))
-    SearchTrainingPlanOfferingsRequest.add_member(:duration_hours, Shapes::ShapeRef.new(shape: TrainingPlanDurationHoursInput, location_name: "DurationHours"))
+    SearchTrainingPlanOfferingsRequest.add_member(:duration_hours, Shapes::ShapeRef.new(shape: TrainingPlanDurationHoursInput, required: true, location_name: "DurationHours"))
     SearchTrainingPlanOfferingsRequest.add_member(:target_resources, Shapes::ShapeRef.new(shape: SageMakerResourceNames, required: true, location_name: "TargetResources"))
     SearchTrainingPlanOfferingsRequest.struct_class = Types::SearchTrainingPlanOfferingsRequest
 
@@ -10183,6 +10192,10 @@ module Aws::SageMaker
     TimeSeriesTransformations.add_member(:aggregation, Shapes::ShapeRef.new(shape: AggregationTransformations, location_name: "Aggregation"))
     TimeSeriesTransformations.struct_class = Types::TimeSeriesTransformations
 
+    TotalHits.add_member(:value, Shapes::ShapeRef.new(shape: Long, location_name: "Value"))
+    TotalHits.add_member(:relation, Shapes::ShapeRef.new(shape: Relation, location_name: "Relation"))
+    TotalHits.struct_class = Types::TotalHits
+
     TrackingServerSummary.add_member(:tracking_server_arn, Shapes::ShapeRef.new(shape: TrackingServerArn, location_name: "TrackingServerArn"))
     TrackingServerSummary.add_member(:tracking_server_name, Shapes::ShapeRef.new(shape: TrackingServerName, location_name: "TrackingServerName"))
     TrackingServerSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
@@ -10413,6 +10426,7 @@ module Aws::SageMaker
     TransformResources.add_member(:instance_type, Shapes::ShapeRef.new(shape: TransformInstanceType, required: true, location_name: "InstanceType"))
     TransformResources.add_member(:instance_count, Shapes::ShapeRef.new(shape: TransformInstanceCount, required: true, location_name: "InstanceCount"))
     TransformResources.add_member(:volume_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
+    TransformResources.add_member(:transform_ami_version, Shapes::ShapeRef.new(shape: TransformAmiVersion, location_name: "TransformAmiVersion"))
     TransformResources.struct_class = Types::TransformResources
 
     TransformS3DataSource.add_member(:s3_data_type, Shapes::ShapeRef.new(shape: S3DataType, required: true, location_name: "S3DataType"))

@@ -686,9 +686,9 @@ module Aws::Batch
     #
     # @option params [Integer] :unmanagedv_cpus
     #   The maximum number of vCPUs for an unmanaged compute environment. This
-    #   parameter is only used for fair share scheduling to reserve vCPU
+    #   parameter is only used for fair-share scheduling to reserve vCPU
     #   capacity for new share identifiers. If this parameter isn't provided
-    #   for a fair share job queue, no vCPU capacity is reserved.
+    #   for a fair-share job queue, no vCPU capacity is reserved.
     #
     #   <note markdown="1"> This parameter is only supported when the `type` parameter is set to
     #   `UNMANAGED`.
@@ -1024,10 +1024,11 @@ module Aws::Batch
     #   finish.
     #
     # @option params [String] :scheduling_policy_arn
-    #   The Amazon Resource Name (ARN) of the fair share scheduling policy.
-    #   Job queues that don't have a scheduling policy are scheduled in a
-    #   first-in, first-out (FIFO) model. After a job queue has a scheduling
-    #   policy, it can be replaced but can't be removed.
+    #   The Amazon Resource Name (ARN) of the fair-share scheduling policy.
+    #   Job queues that don't have a fair-share scheduling policy are
+    #   scheduled in a first-in, first-out (FIFO) model. After a job queue has
+    #   a fair-share scheduling policy, it can be replaced but can't be
+    #   removed.
     #
     #   The format is
     #   `aws:Partition:batch:Region:Account:scheduling-policy/Name `.
@@ -1035,11 +1036,11 @@ module Aws::Batch
     #   An example is
     #   `aws:aws:batch:us-west-2:123456789012:scheduling-policy/MySchedulingPolicy`.
     #
-    #   A job queue without a scheduling policy is scheduled as a FIFO job
-    #   queue and can't have a scheduling policy added. Jobs queues with a
-    #   scheduling policy can have a maximum of 500 active fair share
-    #   identifiers. When the limit has been reached, submissions of any jobs
-    #   that add a new fair share identifier fail.
+    #   A job queue without a fair-share scheduling policy is scheduled as a
+    #   FIFO job queue and can't have a fair-share scheduling policy added.
+    #   Jobs queues with a fair-share scheduling policy can have a maximum of
+    #   500 active share identifiers. When the limit has been reached,
+    #   submissions of any jobs that add a new share identifier fail.
     #
     # @option params [required, Integer] :priority
     #   The priority of the job queue. Job queues with a higher priority (or a
@@ -1182,12 +1183,12 @@ module Aws::Batch
     # Creates an Batch scheduling policy.
     #
     # @option params [required, String] :name
-    #   The name of the scheduling policy. It can be up to 128 letters long.
-    #   It can contain uppercase and lowercase letters, numbers, hyphens (-),
-    #   and underscores (\_).
+    #   The name of the fair-share scheduling policy. It can be up to 128
+    #   letters long. It can contain uppercase and lowercase letters, numbers,
+    #   hyphens (-), and underscores (\_).
     #
     # @option params [Types::FairsharePolicy] :fairshare_policy
-    #   The fair share policy of the scheduling policy.
+    #   The fair-share scheduling policy details.
     #
     # @option params [Hash<String,String>] :tags
     #   The tags that you apply to the scheduling policy to help you
@@ -1822,7 +1823,7 @@ module Aws::Batch
     #   resp.job_definitions[0].container_properties.linux_parameters.tmpfs[0].mount_options[0] #=> String
     #   resp.job_definitions[0].container_properties.linux_parameters.max_swap #=> Integer
     #   resp.job_definitions[0].container_properties.linux_parameters.swappiness #=> Integer
-    #   resp.job_definitions[0].container_properties.log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
+    #   resp.job_definitions[0].container_properties.log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk", "awsfirelens"
     #   resp.job_definitions[0].container_properties.log_configuration.options #=> Hash
     #   resp.job_definitions[0].container_properties.log_configuration.options["String"] #=> String
     #   resp.job_definitions[0].container_properties.log_configuration.secret_options #=> Array
@@ -1833,6 +1834,7 @@ module Aws::Batch
     #   resp.job_definitions[0].container_properties.secrets[0].value_from #=> String
     #   resp.job_definitions[0].container_properties.network_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_definitions[0].container_properties.fargate_platform_configuration.platform_version #=> String
+    #   resp.job_definitions[0].container_properties.enable_execute_command #=> Boolean
     #   resp.job_definitions[0].container_properties.ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.job_definitions[0].container_properties.runtime_platform.operating_system_family #=> String
     #   resp.job_definitions[0].container_properties.runtime_platform.cpu_architecture #=> String
@@ -1890,7 +1892,7 @@ module Aws::Batch
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.linux_parameters.tmpfs[0].mount_options[0] #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.linux_parameters.max_swap #=> Integer
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.linux_parameters.swappiness #=> Integer
-    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk", "awsfirelens"
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.log_configuration.options #=> Hash
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.log_configuration.options["String"] #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.log_configuration.secret_options #=> Array
@@ -1901,6 +1903,7 @@ module Aws::Batch
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.secrets[0].value_from #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.network_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.fargate_platform_configuration.platform_version #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.enable_execute_command #=> Boolean
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.runtime_platform.operating_system_family #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.runtime_platform.cpu_architecture #=> String
@@ -1918,6 +1921,9 @@ module Aws::Batch
     #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].environment[0].name #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].environment[0].value #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].essential #=> Boolean
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].firelens_configuration.options #=> Hash
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].firelens_configuration.options["String"] #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].image #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.devices #=> Array
     #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.devices[0].host_path #=> String
@@ -1933,7 +1939,7 @@ module Aws::Batch
     #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.tmpfs[0].mount_options[0] #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.max_swap #=> Integer
     #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.swappiness #=> Integer
-    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk", "awsfirelens"
     #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].log_configuration.options #=> Hash
     #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].log_configuration.options["String"] #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].log_configuration.secret_options #=> Array
@@ -1976,6 +1982,7 @@ module Aws::Batch
     #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.transit_encryption_port #=> Integer
     #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.authorization_config.access_point_id #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.authorization_config.iam #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].enable_execute_command #=> Boolean
     #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.service_account_name #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.host_network #=> Boolean
     #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.dns_policy #=> String
@@ -2067,6 +2074,9 @@ module Aws::Batch
     #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].environment[0].name #=> String
     #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].environment[0].value #=> String
     #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].essential #=> Boolean
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].firelens_configuration.options #=> Hash
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].firelens_configuration.options["String"] #=> String
     #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].image #=> String
     #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].linux_parameters.devices #=> Array
     #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].linux_parameters.devices[0].host_path #=> String
@@ -2082,7 +2092,7 @@ module Aws::Batch
     #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].linux_parameters.tmpfs[0].mount_options[0] #=> String
     #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].linux_parameters.max_swap #=> Integer
     #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].linux_parameters.swappiness #=> Integer
-    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk", "awsfirelens"
     #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].log_configuration.options #=> Hash
     #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].log_configuration.options["String"] #=> String
     #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].log_configuration.secret_options #=> Array
@@ -2125,6 +2135,7 @@ module Aws::Batch
     #   resp.job_definitions[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.transit_encryption_port #=> Integer
     #   resp.job_definitions[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.authorization_config.access_point_id #=> String
     #   resp.job_definitions[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.authorization_config.iam #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].enable_execute_command #=> Boolean
     #   resp.job_definitions[0].eks_properties.pod_properties.service_account_name #=> String
     #   resp.job_definitions[0].eks_properties.pod_properties.host_network #=> Boolean
     #   resp.job_definitions[0].eks_properties.pod_properties.dns_policy #=> String
@@ -2490,7 +2501,7 @@ module Aws::Batch
     #   resp.jobs[0].container.linux_parameters.tmpfs[0].mount_options[0] #=> String
     #   resp.jobs[0].container.linux_parameters.max_swap #=> Integer
     #   resp.jobs[0].container.linux_parameters.swappiness #=> Integer
-    #   resp.jobs[0].container.log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
+    #   resp.jobs[0].container.log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk", "awsfirelens"
     #   resp.jobs[0].container.log_configuration.options #=> Hash
     #   resp.jobs[0].container.log_configuration.options["String"] #=> String
     #   resp.jobs[0].container.log_configuration.secret_options #=> Array
@@ -2505,6 +2516,7 @@ module Aws::Batch
     #   resp.jobs[0].container.runtime_platform.operating_system_family #=> String
     #   resp.jobs[0].container.runtime_platform.cpu_architecture #=> String
     #   resp.jobs[0].container.repository_credentials.credentials_parameter #=> String
+    #   resp.jobs[0].container.enable_execute_command #=> Boolean
     #   resp.jobs[0].node_details.node_index #=> Integer
     #   resp.jobs[0].node_details.is_main_node #=> Boolean
     #   resp.jobs[0].node_properties.num_nodes #=> Integer
@@ -2559,7 +2571,7 @@ module Aws::Batch
     #   resp.jobs[0].node_properties.node_range_properties[0].container.linux_parameters.tmpfs[0].mount_options[0] #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].container.linux_parameters.max_swap #=> Integer
     #   resp.jobs[0].node_properties.node_range_properties[0].container.linux_parameters.swappiness #=> Integer
-    #   resp.jobs[0].node_properties.node_range_properties[0].container.log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk", "awsfirelens"
     #   resp.jobs[0].node_properties.node_range_properties[0].container.log_configuration.options #=> Hash
     #   resp.jobs[0].node_properties.node_range_properties[0].container.log_configuration.options["String"] #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].container.log_configuration.secret_options #=> Array
@@ -2570,6 +2582,7 @@ module Aws::Batch
     #   resp.jobs[0].node_properties.node_range_properties[0].container.secrets[0].value_from #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].container.network_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.jobs[0].node_properties.node_range_properties[0].container.fargate_platform_configuration.platform_version #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.enable_execute_command #=> Boolean
     #   resp.jobs[0].node_properties.node_range_properties[0].container.ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.jobs[0].node_properties.node_range_properties[0].container.runtime_platform.operating_system_family #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].container.runtime_platform.cpu_architecture #=> String
@@ -2587,6 +2600,9 @@ module Aws::Batch
     #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].environment[0].name #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].environment[0].value #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].essential #=> Boolean
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].firelens_configuration.options #=> Hash
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].firelens_configuration.options["String"] #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].image #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.devices #=> Array
     #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.devices[0].host_path #=> String
@@ -2602,7 +2618,7 @@ module Aws::Batch
     #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.tmpfs[0].mount_options[0] #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.max_swap #=> Integer
     #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.swappiness #=> Integer
-    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk", "awsfirelens"
     #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].log_configuration.options #=> Hash
     #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].log_configuration.options["String"] #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].log_configuration.secret_options #=> Array
@@ -2645,6 +2661,7 @@ module Aws::Batch
     #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.transit_encryption_port #=> Integer
     #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.authorization_config.access_point_id #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.authorization_config.iam #=> String, one of "ENABLED", "DISABLED"
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].enable_execute_command #=> Boolean
     #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.service_account_name #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.host_network #=> Boolean
     #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.dns_policy #=> String
@@ -2837,6 +2854,9 @@ module Aws::Batch
     #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].environment[0].name #=> String
     #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].environment[0].value #=> String
     #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].essential #=> Boolean
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].firelens_configuration.options #=> Hash
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].firelens_configuration.options["String"] #=> String
     #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].image #=> String
     #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].linux_parameters.devices #=> Array
     #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].linux_parameters.devices[0].host_path #=> String
@@ -2852,7 +2872,7 @@ module Aws::Batch
     #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].linux_parameters.tmpfs[0].mount_options[0] #=> String
     #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].linux_parameters.max_swap #=> Integer
     #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].linux_parameters.swappiness #=> Integer
-    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk", "awsfirelens"
     #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].log_configuration.options #=> Hash
     #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].log_configuration.options["String"] #=> String
     #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].log_configuration.secret_options #=> Array
@@ -2904,6 +2924,7 @@ module Aws::Batch
     #   resp.jobs[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.transit_encryption_port #=> Integer
     #   resp.jobs[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.authorization_config.access_point_id #=> String
     #   resp.jobs[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.authorization_config.iam #=> String, one of "ENABLED", "DISABLED"
+    #   resp.jobs[0].ecs_properties.task_properties[0].enable_execute_command #=> Boolean
     #   resp.jobs[0].is_cancelled #=> Boolean
     #   resp.jobs[0].is_terminated #=> Boolean
     #   resp.jobs[0].consumable_resource_properties.consumable_resource_list #=> Array
@@ -3577,7 +3598,7 @@ module Aws::Batch
     #
     # @option params [Integer] :scheduling_priority
     #   The scheduling priority for jobs that are submitted with this job
-    #   definition. This only affects jobs in job queues with a fair share
+    #   definition. This only affects jobs in job queues with a fair-share
     #   policy. Jobs with a higher scheduling priority are scheduled before
     #   jobs with a lower scheduling priority.
     #
@@ -3842,7 +3863,7 @@ module Aws::Batch
     #         swappiness: 1,
     #       },
     #       log_configuration: {
-    #         log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk
+    #         log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk, awsfirelens
     #         options: {
     #           "String" => "String",
     #         },
@@ -3865,6 +3886,7 @@ module Aws::Batch
     #       fargate_platform_configuration: {
     #         platform_version: "String",
     #       },
+    #       enable_execute_command: false,
     #       ephemeral_storage: {
     #         size_in_gi_b: 1, # required
     #       },
@@ -3958,7 +3980,7 @@ module Aws::Batch
     #               swappiness: 1,
     #             },
     #             log_configuration: {
-    #               log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk
+    #               log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk, awsfirelens
     #               options: {
     #                 "String" => "String",
     #               },
@@ -3981,6 +4003,7 @@ module Aws::Batch
     #             fargate_platform_configuration: {
     #               platform_version: "String",
     #             },
+    #             enable_execute_command: false,
     #             ephemeral_storage: {
     #               size_in_gi_b: 1, # required
     #             },
@@ -4012,6 +4035,12 @@ module Aws::Batch
     #                       },
     #                     ],
     #                     essential: false,
+    #                     firelens_configuration: {
+    #                       type: "fluentd", # required, accepts fluentd, fluentbit
+    #                       options: {
+    #                         "String" => "String",
+    #                       },
+    #                     },
     #                     image: "String", # required
     #                     linux_parameters: {
     #                       devices: [
@@ -4034,7 +4063,7 @@ module Aws::Batch
     #                       swappiness: 1,
     #                     },
     #                     log_configuration: {
-    #                       log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk
+    #                       log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk, awsfirelens
     #                       options: {
     #                         "String" => "String",
     #                       },
@@ -4113,6 +4142,7 @@ module Aws::Batch
     #                     },
     #                   },
     #                 ],
+    #                 enable_execute_command: false,
     #               },
     #             ],
     #           },
@@ -4405,6 +4435,12 @@ module Aws::Batch
     #                 },
     #               ],
     #               essential: false,
+    #               firelens_configuration: {
+    #                 type: "fluentd", # required, accepts fluentd, fluentbit
+    #                 options: {
+    #                   "String" => "String",
+    #                 },
+    #               },
     #               image: "String", # required
     #               linux_parameters: {
     #                 devices: [
@@ -4427,7 +4463,7 @@ module Aws::Batch
     #                 swappiness: 1,
     #               },
     #               log_configuration: {
-    #                 log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk
+    #                 log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk, awsfirelens
     #                 options: {
     #                   "String" => "String",
     #                 },
@@ -4506,6 +4542,7 @@ module Aws::Batch
     #               },
     #             },
     #           ],
+    #           enable_execute_command: false,
     #         },
     #       ],
     #     },
@@ -4543,8 +4580,8 @@ module Aws::Batch
     # parameters in a `resourceRequirements` object that's included in the
     # `containerOverrides` parameter.
     #
-    # <note markdown="1"> Job queues with a scheduling policy are limited to 500 active fair
-    # share identifiers at a time.
+    # <note markdown="1"> Job queues with a scheduling policy are limited to 500 active share
+    # identifiers at a time.
     #
     #  </note>
     #
@@ -4563,15 +4600,16 @@ module Aws::Batch
     #
     # @option params [String] :share_identifier
     #   The share identifier for the job. Don't specify this parameter if the
-    #   job queue doesn't have a scheduling policy. If the job queue has a
-    #   scheduling policy, then this parameter must be specified.
+    #   job queue doesn't have a fair-share scheduling policy. If the job
+    #   queue has a fair-share scheduling policy, then this parameter must be
+    #   specified.
     #
     #   This string is limited to 255 alphanumeric characters, and can be
     #   followed by an asterisk (*).
     #
     # @option params [Integer] :scheduling_priority_override
     #   The scheduling priority for the job. This only affects jobs in job
-    #   queues with a fair share policy. Jobs with a higher scheduling
+    #   queues with a fair-share policy. Jobs with a higher scheduling
     #   priority are scheduled before jobs with a lower scheduling priority.
     #   This overrides any scheduling priority in the job definition and works
     #   only within a single share identifier.
@@ -5183,9 +5221,9 @@ module Aws::Batch
     # @option params [Integer] :unmanagedv_cpus
     #   The maximum number of vCPUs expected to be used for an unmanaged
     #   compute environment. Don't specify this parameter for a managed
-    #   compute environment. This parameter is only used for fair share
+    #   compute environment. This parameter is only used for fair-share
     #   scheduling to reserve vCPU capacity for new share identifiers. If this
-    #   parameter isn't provided for a fair share job queue, no vCPU capacity
+    #   parameter isn't provided for a fair-share job queue, no vCPU capacity
     #   is reserved.
     #
     # @option params [Types::ComputeResourceUpdate] :compute_resources
@@ -5430,8 +5468,8 @@ module Aws::Batch
     #   the queue can finish.
     #
     # @option params [String] :scheduling_policy_arn
-    #   Amazon Resource Name (ARN) of the fair share scheduling policy. Once a
-    #   job queue is created, the fair share scheduling policy can be replaced
+    #   Amazon Resource Name (ARN) of the fair-share scheduling policy. Once a
+    #   job queue is created, the fair-share scheduling policy can be replaced
     #   but not removed. The format is
     #   `aws:Partition:batch:Region:Account:scheduling-policy/Name `. For
     #   example,
@@ -5534,7 +5572,7 @@ module Aws::Batch
     #   The Amazon Resource Name (ARN) of the scheduling policy to update.
     #
     # @option params [Types::FairsharePolicy] :fairshare_policy
-    #   The fair share policy.
+    #   The fair-share policy scheduling details.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5581,7 +5619,7 @@ module Aws::Batch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.111.0'
+      context[:gem_version] = '1.112.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

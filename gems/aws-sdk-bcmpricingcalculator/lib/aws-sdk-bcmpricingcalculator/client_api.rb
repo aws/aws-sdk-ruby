@@ -734,6 +734,7 @@ module Aws::BCMPricingCalculator
 
     GetPreferencesResponse.add_member(:management_account_rate_type_selections, Shapes::ShapeRef.new(shape: RateTypes, location_name: "managementAccountRateTypeSelections"))
     GetPreferencesResponse.add_member(:member_account_rate_type_selections, Shapes::ShapeRef.new(shape: RateTypes, location_name: "memberAccountRateTypeSelections"))
+    GetPreferencesResponse.add_member(:standalone_account_rate_type_selections, Shapes::ShapeRef.new(shape: RateTypes, location_name: "standaloneAccountRateTypeSelections"))
     GetPreferencesResponse.struct_class = Types::GetPreferencesResponse
 
     GetWorkloadEstimateRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "identifier"))
@@ -996,10 +997,12 @@ module Aws::BCMPricingCalculator
 
     UpdatePreferencesRequest.add_member(:management_account_rate_type_selections, Shapes::ShapeRef.new(shape: RateTypes, location_name: "managementAccountRateTypeSelections"))
     UpdatePreferencesRequest.add_member(:member_account_rate_type_selections, Shapes::ShapeRef.new(shape: RateTypes, location_name: "memberAccountRateTypeSelections"))
+    UpdatePreferencesRequest.add_member(:standalone_account_rate_type_selections, Shapes::ShapeRef.new(shape: RateTypes, location_name: "standaloneAccountRateTypeSelections"))
     UpdatePreferencesRequest.struct_class = Types::UpdatePreferencesRequest
 
     UpdatePreferencesResponse.add_member(:management_account_rate_type_selections, Shapes::ShapeRef.new(shape: RateTypes, location_name: "managementAccountRateTypeSelections"))
     UpdatePreferencesResponse.add_member(:member_account_rate_type_selections, Shapes::ShapeRef.new(shape: RateTypes, location_name: "memberAccountRateTypeSelections"))
+    UpdatePreferencesResponse.add_member(:standalone_account_rate_type_selections, Shapes::ShapeRef.new(shape: RateTypes, location_name: "standaloneAccountRateTypeSelections"))
     UpdatePreferencesResponse.struct_class = Types::UpdatePreferencesResponse
 
     UpdateWorkloadEstimateRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "identifier"))

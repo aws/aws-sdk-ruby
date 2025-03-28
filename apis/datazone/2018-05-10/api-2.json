@@ -12481,7 +12481,10 @@
     },
     "RuleAction":{
       "type":"string",
-      "enum":["CREATE_SUBSCRIPTION_REQUEST"]
+      "enum":[
+        "CREATE_LISTING_CHANGE_SET",
+        "CREATE_SUBSCRIPTION_REQUEST"
+      ]
     },
     "RuleAssetTypeList":{
       "type":"list",
@@ -12924,9 +12927,14 @@
     "SingleSignOn":{
       "type":"structure",
       "members":{
+        "idcInstanceArn":{"shape":"SingleSignOnIdcInstanceArnString"},
         "type":{"shape":"AuthType"},
         "userAssignment":{"shape":"UserAssignment"}
       }
+    },
+    "SingleSignOnIdcInstanceArnString":{
+      "type":"string",
+      "pattern":"arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}"
     },
     "Smithy":{
       "type":"string",

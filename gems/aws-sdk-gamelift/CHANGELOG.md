@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.102.0 (2025-03-27)
+------------------
+
+* Feature - Amazon GameLift Servers add support for additional instance types.
+
 1.101.0 (2025-02-18)
 ------------------
 

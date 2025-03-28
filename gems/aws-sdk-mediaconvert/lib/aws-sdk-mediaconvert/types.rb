@@ -679,26 +679,27 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Properties specific to audio tracks.
+    # Details about the media file's audio track.
     #
     # @!attribute [rw] bit_depth
     #   The bit depth of the audio track.
     #   @return [Integer]
     #
     # @!attribute [rw] bit_rate
-    #   The bit rate of the audio track in bits per second.
+    #   The bit rate of the audio track, in bits per second.
     #   @return [Integer]
     #
     # @!attribute [rw] channels
-    #   The number of audio channels.
+    #   The number of audio channels in the audio track.
     #   @return [Integer]
     #
     # @!attribute [rw] frame_rate
-    #   the calculated frame rate of the asset.
+    #   The frame rate of the video or audio track.
     #   @return [Types::FrameRate]
     #
     # @!attribute [rw] language_code
-    #   the language code of the track
+    #   The language code of the audio track, in three character ISO 639-3
+    #   format.
     #   @return [String]
     #
     # @!attribute [rw] sample_rate
@@ -968,6 +969,16 @@ module Aws::MediaConvert
     #   the value that you specify.
     #   @return [Integer]
     #
+    # @!attribute [rw] max_quality_level
+    #   Optional. Specify the QVBR quality level to use for all renditions
+    #   in your automated ABR stack. To have MediaConvert automatically
+    #   determine the quality level: Leave blank. To manually specify a
+    #   quality level: Enter an integer from 1 to 10. MediaConvert will use
+    #   a quality level up to the value that you specify, depending on your
+    #   source. For more information about QVBR quality levels, see:
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/qvbr-guidelines.html
+    #   @return [Float]
+    #
     # @!attribute [rw] max_renditions
     #   Optional. The maximum number of renditions that MediaConvert will
     #   create in your automated ABR stack. The number of renditions is
@@ -998,6 +1009,7 @@ module Aws::MediaConvert
     #
     class AutomatedAbrSettings < Struct.new(
       :max_abr_bitrate,
+      :max_quality_level,
       :max_renditions,
       :min_abr_bitrate,
       :rules)
@@ -2932,18 +2944,23 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Information about the container format of the media file.
+    # The container of your media file. This information helps you
+    # understand the overall structure and details of your media, including
+    # format, duration, and track layout.
     #
     # @!attribute [rw] duration
-    #   The duration of the media file in seconds.
+    #   The total duration of your media file, in seconds.
     #   @return [Float]
     #
     # @!attribute [rw] format
-    #   The format of the container
+    #   The format of your media file. For example: MP4, QuickTime (MOV),
+    #   Matroska (MKV), or WebM. Note that this will be blank if your media
+    #   file has a format that the MediaConvert Probe operation does not
+    #   recognize.
     #   @return [String]
     #
     # @!attribute [rw] tracks
-    #   List of Track objects.
+    #   Details about each track (video, audio, or data) in the media file.
     #   @return [Array<Types::Track>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Container AWS API Documentation
@@ -3750,10 +3767,11 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Properties specific to data tracks.
+    # Details about the media file's data track.
     #
     # @!attribute [rw] language_code
-    #   the language code of the track
+    #   The language code of the data track, in three character ISO 639-3
+    #   format.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DataProperties AWS API Documentation
@@ -5370,14 +5388,18 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # the calculated frame rate of the asset.
+    # The frame rate of the video or audio track.
     #
     # @!attribute [rw] denominator
-    #   the denominator of the frame rate of the asset.
+    #   The denominator, or bottom number, in the fractional frame rate. For
+    #   example, if your frame rate is 24000 / 1001 (23.976 frames per
+    #   second), then the denominator would be 1001.
     #   @return [Integer]
     #
     # @!attribute [rw] numerator
-    #   the numerator of the frame rate of the asset.
+    #   The numerator, or top number, in the fractional frame rate. For
+    #   example, if your frame rate is 24000 / 1001 (23.976 frames per
+    #   second), then the numerator would be 24000.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/FrameRate AWS API Documentation
@@ -9898,22 +9920,22 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Metadata about the file.
+    # Metadata and other file information.
     #
     # @!attribute [rw] etag
-    #   The ETag of the file.
+    #   The entity tag (ETag) of the file.
     #   @return [String]
     #
     # @!attribute [rw] file_size
-    #   The size of the file in bytes.
+    #   The size of the media file, in bytes.
     #   @return [Integer]
     #
     # @!attribute [rw] last_modified
-    #   The last modification time of the file.
+    #   The last modification timestamp of the media file, in Unix time.
     #   @return [Time]
     #
     # @!attribute [rw] mime_type
-    #   The MIME type of the file.
+    #   The MIME type of the media file.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Metadata AWS API Documentation
@@ -11685,8 +11707,7 @@ module Aws::MediaConvert
     # The input file that needs to be analyzed.
     #
     # @!attribute [rw] file_url
-    #   The URI to your input file(s) that is stored in Amazon S3 or on an
-    #   HTTP(S) server.
+    #   Specify the S3, HTTP, or HTTPS URL for your media file.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ProbeInputFile AWS API Documentation
@@ -11701,7 +11722,7 @@ module Aws::MediaConvert
     # about them.
     #
     # @!attribute [rw] input_files
-    #   The list of input media files to be probed.
+    #   Specify a media file to probe.
     #   @return [Array<Types::ProbeInputFile>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ProbeRequest AWS API Documentation
@@ -11712,12 +11733,11 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # The response from a media file probe operation, providing
-    # comprehensive metadata about the file, including its container format,
-    # tracks (video, audio, data).
+    # The response from a MediaConvert Probe operation, in JSON form, with
+    # detailed information about your input media.
     #
     # @!attribute [rw] probe_results
-    #   List of probe results for the input media file(s).
+    #   Probe results for your media file.
     #   @return [Array<Types::ProbeResult>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ProbeResponse AWS API Documentation
@@ -11728,18 +11748,20 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # The metadata and analysis results for a media file.
+    # Probe results for your media file.
     #
     # @!attribute [rw] container
-    #   Information about the container format of the media file.
+    #   The container of your media file. This information helps you
+    #   understand the overall structure and details of your media,
+    #   including format, duration, and track layout.
     #   @return [Types::Container]
     #
     # @!attribute [rw] metadata
-    #   Metadata about the file.
+    #   Metadata and other file information.
     #   @return [Types::Metadata]
     #
     # @!attribute [rw] track_mappings
-    #   List of Track mapping objects.
+    #   An array containing track mapping information.
     #   @return [Array<Types::TrackMapping>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ProbeResult AWS API Documentation
@@ -12891,34 +12913,35 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # The track information such as codec, duration, etc.
+    # Details about each track (video, audio, or data) in the media file.
     #
     # @!attribute [rw] audio_properties
-    #   Properties specific to audio tracks.
+    #   Details about the media file's audio track.
     #   @return [Types::AudioProperties]
     #
     # @!attribute [rw] codec
-    #   The codec used for the track.
+    #   The codec of the audio or video track, or caption format of the data
+    #   track.
     #   @return [String]
     #
     # @!attribute [rw] data_properties
-    #   Properties specific to data tracks.
+    #   Details about the media file's data track.
     #   @return [Types::DataProperties]
     #
     # @!attribute [rw] duration
-    #   The duration of the track in seconds.
+    #   The duration of the track, in seconds.
     #   @return [Float]
     #
     # @!attribute [rw] index
-    #   The index of the track.
+    #   The unique index number of the track, starting at 1.
     #   @return [Integer]
     #
     # @!attribute [rw] track_type
-    #   The type of the track (video, audio, or data).
+    #   The type of track: video, audio, or data.
     #   @return [String]
     #
     # @!attribute [rw] video_properties
-    #   Properties specific to video tracks.
+    #   Details about the media file's video track.
     #   @return [Types::VideoProperties]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Track AWS API Documentation
@@ -12935,18 +12958,18 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Track mapping information.
+    # An array containing track mapping information.
     #
     # @!attribute [rw] audio_track_indexes
-    #   The indexes of the audio tracks.
+    #   The index numbers of the audio tracks in your media file.
     #   @return [Array<Integer>]
     #
     # @!attribute [rw] data_track_indexes
-    #   The indexes of the data tracks.
+    #   The index numbers of the data tracks in your media file.
     #   @return [Array<Integer>]
     #
     # @!attribute [rw] video_track_indexes
-    #   The indexes of the video tracks.
+    #   The index numbers of the video tracks in your media file.
     #   @return [Array<Integer>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/TrackMapping AWS API Documentation
@@ -14070,38 +14093,38 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Properties specific to video tracks.
+    # Details about the media file's video track.
     #
     # @!attribute [rw] bit_depth
     #   The bit depth of the video track.
     #   @return [Integer]
     #
     # @!attribute [rw] bit_rate
-    #   The bit rate of the video track in bits per second.
+    #   The bit rate of the video track, in bits per second.
     #   @return [Integer]
     #
     # @!attribute [rw] color_primaries
-    #   the color primaries.
+    #   The color space color primaries of the video track.
     #   @return [String]
     #
     # @!attribute [rw] frame_rate
-    #   the calculated frame rate of the asset.
+    #   The frame rate of the video or audio track.
     #   @return [Types::FrameRate]
     #
     # @!attribute [rw] height
-    #   The height of the video track in pixels.
+    #   The height of the video track, in pixels.
     #   @return [Integer]
     #
     # @!attribute [rw] matrix_coefficients
-    #   the matrix coefficients.
+    #   The color space matrix coefficients of the video track.
     #   @return [String]
     #
     # @!attribute [rw] transfer_characteristics
-    #   the transfer characteristics.
+    #   The color space transfer characteristics of the video track.
     #   @return [String]
     #
     # @!attribute [rw] width
-    #   The width of the video track in pixels.
+    #   The width of the video track, in pixels.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/VideoProperties AWS API Documentation

@@ -38,6 +38,7 @@ module Aws::Route53RecoveryControlConfig
       attr_accessor name: ::String
       attr_accessor status: ("PENDING" | "DEPLOYED" | "PENDING_DELETION")
       attr_accessor owner: ::String
+      attr_accessor network_type: ("IPV4" | "DUALSTACK")
       SENSITIVE: []
     end
 
@@ -67,6 +68,7 @@ module Aws::Route53RecoveryControlConfig
       attr_accessor client_token: ::String
       attr_accessor cluster_name: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor network_type: ("IPV4" | "DUALSTACK")
       SENSITIVE: []
     end
 
@@ -369,6 +371,17 @@ module Aws::Route53RecoveryControlConfig
     end
 
     class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateClusterRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor network_type: ("IPV4" | "DUALSTACK")
+      SENSITIVE: []
+    end
+
+    class UpdateClusterResponse
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
     end
 
     class UpdateControlPanelRequest

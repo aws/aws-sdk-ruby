@@ -30,7 +30,7 @@ module Aws::GameLiftStreams
     #   A stream group to add the specified locations to.
     #
     #   This value is a Amazon Resource Name (ARN) that uniquely identifies
-    #   the stream group resource. Format example: `1AB2C3De4`.
+    #   the stream group resource. Format example: `sg-1AB2C3De4`.
     #   @return [String]
     #
     # @!attribute [rw] location_configurations
@@ -49,7 +49,8 @@ module Aws::GameLiftStreams
 
     # @!attribute [rw] identifier
     #   This value is the Amazon Resource Name (ARN) that uniquely
-    #   identifies the stream group resource. Format example: `1AB2C3De4`.
+    #   identifies the stream group resource. Format example:
+    #   `sg-1AB2C3De4`.
     #   @return [String]
     #
     # @!attribute [rw] locations
@@ -86,7 +87,11 @@ module Aws::GameLiftStreams
 
     # Describes an application resource that represents a collection of
     # content for streaming with Amazon GameLift Streams. To retrieve
-    # additional application details, call GetApplication.
+    # additional application details, call [GetApplication][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_GetApplication.html
     #
     # @!attribute [rw] arn
     #   An Amazon Resource Name (ARN) that's assigned to an application
@@ -108,8 +113,8 @@ module Aws::GameLiftStreams
     # @!attribute [rw] id
     #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
     #   the application resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/9ZY8X7Wv6`
-    #   or ID-`9ZY8X7Wv6`.
+    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`
+    #   or ID-`a-9ZY8X7Wv6`.
     #
     #
     #
@@ -123,15 +128,15 @@ module Aws::GameLiftStreams
     #   @return [Time]
     #
     # @!attribute [rw] runtime_environment
-    #   A set of configuration settings to run the application on a stream
-    #   group. This configures the operating system, and can include
-    #   compatibility layers and other drivers.
+    #   Configuration settings that identify the operating system for an
+    #   application resource. This can also include a compatibility layer
+    #   and other drivers.
     #
     #   A runtime environment can be one of the following:
     #
     #   * For Linux applications
     #
-    #     * Ubuntu 22.04 LTS(`Type=UBUNTU, Version=22_04_LTS`)
+    #     * Ubuntu 22.04 LTS (`Type=UBUNTU, Version=22_04_LTS`)
     #
     #     ^
     #   * For Windows applications
@@ -183,8 +188,8 @@ module Aws::GameLiftStreams
     #
     #   This value is a set of either [Amazon Resource Names (ARN)][1] or
     #   IDs that uniquely identify application resources. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/9ZY8X7Wv6`
-    #   or ID-`9ZY8X7Wv6`.
+    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`
+    #   or ID-`a-9ZY8X7Wv6`.
     #
     #
     #
@@ -196,8 +201,8 @@ module Aws::GameLiftStreams
     #
     #   This value is a [Amazon Resource Name (ARN)][1] or ID that uniquely
     #   identifies the stream group resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/1AB2C3De4`
-    #   or ID-`1AB2C3De4`.
+    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4`
+    #   or ID-`sg-1AB2C3De4`.
     #
     #
     #
@@ -218,8 +223,8 @@ module Aws::GameLiftStreams
     #
     #   This value is a set of either [Amazon Resource Names (ARN)][1] or
     #   IDs that uniquely identify application resources. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/9ZY8X7Wv6`
-    #   or ID-`9ZY8X7Wv6`.
+    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`
+    #   or ID-`a-9ZY8X7Wv6`.
     #
     #
     #
@@ -231,8 +236,8 @@ module Aws::GameLiftStreams
     #
     #   This value is a [Amazon Resource Name (ARN)][1] or ID that uniquely
     #   identifies the stream group resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/1AB2C3De4`
-    #   or ID-`1AB2C3De4`.
+    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4`
+    #   or ID-`sg-1AB2C3De4`.
     #
     #
     #
@@ -266,9 +271,8 @@ module Aws::GameLiftStreams
 
     # @!attribute [rw] application_log_output_uri
     #   An Amazon S3 URI to a bucket where you would like Amazon GameLift
-    #   Streams to save application logs. Use the following format for the
-    #   URI: `s3://[bucket name]/[prefix]`. Required if you specify one or
-    #   more `LogPaths`.
+    #   Streams to save application logs. Required if you specify one or
+    #   more `ApplicationLogPaths`.
     #
     #   <note markdown="1"> The log bucket must have permissions that give Amazon GameLift
     #   Streams access to write the log files. For more information, see
@@ -280,27 +284,29 @@ module Aws::GameLiftStreams
     # @!attribute [rw] application_log_paths
     #   Locations of log files that your content generates during a stream
     #   session. Enter path values that are relative to the
-    #   `ApplicationSourceUri` location. You can specify up to 10 log
-    #   locations. Amazon GameLift Streams uploads designated log files to
-    #   the Amazon S3 bucket that you specify in `ApplicationLogOutputUri`
-    #   at the end of a stream session. To retrieve stored log files, call
-    #   GetStreamSession and get the `LogFileLocationUri`.
+    #   `ApplicationSourceUri` location. You can specify up to 10 log paths.
+    #   Amazon GameLift Streams uploads designated log files to the Amazon
+    #   S3 bucket that you specify in `ApplicationLogOutputUri` at the end
+    #   of a stream session. To retrieve stored log files, call
+    #   [GetStreamSession][1] and get the `LogFileLocationUri`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_GetStreamSession.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] application_source_uri
-    #   The location of the content that you want to stream. Enter the URI
-    #   of an Amazon S3 location (bucket name and prefixes) that contains
-    #   your content. Use the following format for the URI: `s3://[bucket
-    #   name]/[prefix]`. The location can have a multi-level prefix
-    #   structure, but it must include all the files needed to run the
-    #   content. Amazon GameLift Streams copies everything under the
-    #   specified location.
+    #   The location of the content that you want to stream. Enter an Amazon
+    #   S3 URI to a bucket that contains your game or other application. The
+    #   location can have a multi-level prefix structure, but it must
+    #   include all the files needed to run the content. Amazon GameLift
+    #   Streams copies everything under the specified location.
     #
     #   This value is immutable. To designate a different content location,
     #   create a new application.
     #
-    #   <note markdown="1"> The S3 bucket and the Amazon GameLift Streams application must be in
-    #   the same Amazon Web Services Region.
+    #   <note markdown="1"> The Amazon S3 bucket and the Amazon GameLift Streams application
+    #   must be in the same Amazon Web Services Region.
     #
     #    </note>
     #   @return [String]
@@ -327,15 +333,15 @@ module Aws::GameLiftStreams
     #   @return [String]
     #
     # @!attribute [rw] runtime_environment
-    #   A set of configuration settings to run the application on a stream
-    #   group. This configures the operating system, and can include
-    #   compatibility layers and other drivers.
+    #   Configuration settings that identify the operating system for an
+    #   application resource. This can also include a compatibility layer
+    #   and other drivers.
     #
     #   A runtime environment can be one of the following:
     #
     #   * For Linux applications
     #
-    #     * Ubuntu 22.04 LTS(`Type=UBUNTU, Version=22_04_LTS`)
+    #     * Ubuntu 22.04 LTS (`Type=UBUNTU, Version=22_04_LTS`)
     #
     #     ^
     #   * For Windows applications
@@ -353,15 +359,16 @@ module Aws::GameLiftStreams
     #   developer-defined key-value pairs. Tagging Amazon Web Services
     #   resources is useful for resource management, access management and
     #   cost allocation. See [ Tagging Amazon Web Services Resources][1] in
-    #   the *Amazon Web Services General Reference*. You can use TagResource
-    #   to add tags, UntagResource to remove tags, and ListTagsForResource
-    #   to view tags on existing resources. The maximum tag limit might be
-    #   lower than stated. See the *Amazon Web Services General Reference*
-    #   for actual tagging limits.
+    #   the *Amazon Web Services General Reference*. You can use
+    #   [TagResource][2] to add tags, [UntagResource][3] to remove tags, and
+    #   [ListTagsForResource][4] to view tags on existing resources.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [2]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_TagResource.html
+    #   [3]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_UntagResource.html
+    #   [4]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_ListTagsForResource.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/CreateApplicationInput AWS API Documentation
@@ -381,17 +388,20 @@ module Aws::GameLiftStreams
 
     # @!attribute [rw] application_log_output_uri
     #   An Amazon S3 URI to a bucket where you would like Amazon GameLift
-    #   Streams to save application logs. Use the following format for the
-    #   URI: `s3://[bucket name]/[prefix]`. Required if you specify one or
-    #   more `LogPaths`.
+    #   Streams to save application logs. Required if you specify one or
+    #   more `ApplicationLogPaths`.
     #   @return [String]
     #
     # @!attribute [rw] application_log_paths
     #   Locations of log files that your content generates during a stream
     #   session. Amazon GameLift Streams uploads log files to the Amazon S3
     #   bucket that you specify in `ApplicationLogOutputUri` at the end of a
-    #   stream session. To retrieve stored log files, call GetStreamSession
-    #   and get the `LogFileLocationUri`.
+    #   stream session. To retrieve stored log files, call
+    #   [GetStreamSession][1] and get the `LogFileLocationUri`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_GetStreamSession.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] application_source_uri
@@ -429,8 +439,8 @@ module Aws::GameLiftStreams
     # @!attribute [rw] id
     #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
     #   the application resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/9ZY8X7Wv6`
-    #   or ID-`9ZY8X7Wv6`.
+    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`
+    #   or ID-`a-9ZY8X7Wv6`.
     #
     #
     #
@@ -448,15 +458,15 @@ module Aws::GameLiftStreams
     #   @return [Array<Types::ReplicationStatus>]
     #
     # @!attribute [rw] runtime_environment
-    #   A set of configuration settings to run the application on a stream
-    #   group. This configures the operating system, and can include
-    #   compatibility layers and other drivers.
+    #   Configuration settings that identify the operating system for an
+    #   application resource. This can also include a compatibility layer
+    #   and other drivers.
     #
     #   A runtime environment can be one of the following:
     #
     #   * For Linux applications
     #
-    #     * Ubuntu 22.04 LTS(`Type=UBUNTU, Version=22_04_LTS`)
+    #     * Ubuntu 22.04 LTS (`Type=UBUNTU, Version=22_04_LTS`)
     #
     #     ^
     #   * For Windows applications
@@ -558,9 +568,9 @@ module Aws::GameLiftStreams
     #   * <b> <code>gen5n_win2022</code> (NVIDIA, ultra)</b> Supports
     #     applications with extremely high 3D scene complexity. Runs
     #     applications on Microsoft Windows Server 2022 Base and supports
-    #     DirectX 12. Compatible with most Unreal Engine 5.x builds, 32-bit
-    #     applications, and anti-cheat technology. Uses NVIDIA A10G Tensor
-    #     GPU.
+    #     DirectX 12. Compatible with Unreal Engine versions up through 5.4,
+    #     32 and 64-bit applications, and anti-cheat technology. Uses NVIDIA
+    #     A10G Tensor GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -594,9 +604,9 @@ module Aws::GameLiftStreams
     #   * <b> <code>gen4n_win2022</code> (NVIDIA, ultra)</b> Supports
     #     applications with extremely high 3D scene complexity. Runs
     #     applications on Microsoft Windows Server 2022 Base and supports
-    #     DirectX 12. Compatible with most Unreal Engine 5.2 and 5.3 builds,
-    #     32-bit applications, and anti-cheat technology. Uses NVIDIA T4
-    #     Tensor GPU.
+    #     DirectX 12. Compatible with Unreal Engine versions up through 5.4,
+    #     32 and 64-bit applications, and anti-cheat technology. Uses NVIDIA
+    #     T4 Tensor GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -631,18 +641,19 @@ module Aws::GameLiftStreams
     #
     # @!attribute [rw] tags
     #   A list of labels to assign to the new stream group resource. Tags
-    #   are developer-defined key-value pairs. It is useful to tag Amazon
-    #   Web Services resources for resource management, access management,
-    #   and cost allocation. See [ Tagging Amazon Web Services Resources][1]
-    #   in the *Amazon Web Services General Reference*. You can use
-    #   TagResource, UntagResource, and ListTagsForResource to add, remove,
-    #   and view tags on existing resources. The maximum tag limit might be
-    #   lower than stated. See the <i>Amazon Web Services </i> for actual
-    #   tagging limits.
+    #   are developer-defined key-value pairs. Tagging Amazon Web Services
+    #   resources is useful for resource management, access management and
+    #   cost allocation. See [ Tagging Amazon Web Services Resources][1] in
+    #   the *Amazon Web Services General Reference*. You can use
+    #   [TagResource][2] to add tags, [UntagResource][3] to remove tags, and
+    #   [ListTagsForResource][4] to view tags on existing resources.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [2]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_TagResource.html
+    #   [3]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_UntagResource.html
+    #   [4]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_ListTagsForResource.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/CreateStreamGroupInput AWS API Documentation
@@ -671,7 +682,7 @@ module Aws::GameLiftStreams
     #
     #   This value is a set of [Amazon Resource Names (ARNs)][1] that
     #   uniquely identify application resources. Format example:
-    #   `arn:aws:gameliftstreams:us-west-2:123456789012:application/9ZY8X7Wv6`.
+    #   `arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`.
     #
     #
     #
@@ -685,8 +696,8 @@ module Aws::GameLiftStreams
     #   @return [Time]
     #
     # @!attribute [rw] default_application
-    #   The Amazon GameLift Streams application that is associated with this
-    #   stream group.
+    #   The default Amazon GameLift Streams application that is associated
+    #   with this stream group.
     #   @return [Types::DefaultApplication]
     #
     # @!attribute [rw] description
@@ -695,7 +706,7 @@ module Aws::GameLiftStreams
     #
     # @!attribute [rw] id
     #   A unique ID value that is assigned to the resource when it's
-    #   created. Format example: `1AB2C3De4`.
+    #   created. Format example: `sg-1AB2C3De4`.
     #   @return [String]
     #
     # @!attribute [rw] last_updated_at
@@ -773,9 +784,9 @@ module Aws::GameLiftStreams
     #   * <b> <code>gen5n_win2022</code> (NVIDIA, ultra)</b> Supports
     #     applications with extremely high 3D scene complexity. Runs
     #     applications on Microsoft Windows Server 2022 Base and supports
-    #     DirectX 12. Compatible with most Unreal Engine 5.x builds, 32-bit
-    #     applications, and anti-cheat technology. Uses NVIDIA A10G Tensor
-    #     GPU.
+    #     DirectX 12. Compatible with Unreal Engine versions up through 5.4,
+    #     32 and 64-bit applications, and anti-cheat technology. Uses NVIDIA
+    #     A10G Tensor GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -809,9 +820,9 @@ module Aws::GameLiftStreams
     #   * <b> <code>gen4n_win2022</code> (NVIDIA, ultra)</b> Supports
     #     applications with extremely high 3D scene complexity. Runs
     #     applications on Microsoft Windows Server 2022 Base and supports
-    #     DirectX 12. Compatible with most Unreal Engine 5.2 and 5.3 builds,
-    #     32-bit applications, and anti-cheat technology. Uses NVIDIA T4
-    #     Tensor GPU.
+    #     DirectX 12. Compatible with Unreal Engine versions up through 5.4,
+    #     32 and 64-bit applications, and anti-cheat technology. Uses NVIDIA
+    #     T4 Tensor GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -875,8 +886,8 @@ module Aws::GameLiftStreams
     # @!attribute [rw] identifier
     #   [Amazon Resource Name (ARN)][1] or ID that uniquely identifies the
     #   stream group resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/1AB2C3De4`
-    #   or ID-`1AB2C3De4`.
+    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4`
+    #   or ID-`sg-1AB2C3De4`.
     #
     #   The stream group that you want to run this stream session with. The
     #   stream group must be in `ACTIVE` status and have idle stream
@@ -928,14 +939,13 @@ module Aws::GameLiftStreams
       include Aws::Structure
     end
 
-    # Represents the Amazon GameLift Streams application that a stream group
-    # hosts.
+    # Represents the default Amazon GameLift Streams application that a
+    # stream group hosts.
     #
     # @!attribute [rw] arn
-    #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
-    #   the stream group resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/1AB2C3De4`
-    #   or ID-`1AB2C3De4`.
+    #   An [Amazon Resource Name (ARN)][1] that uniquely identifies the
+    #   application resource. Format example:
+    #   `arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`.
     #
     #
     #
@@ -943,16 +953,8 @@ module Aws::GameLiftStreams
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The default application of the stream group.
-    #
-    #   This value is an [Amazon Resource Name (ARN)][1] or ID that uniquely
-    #   identifies the application resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/9ZY8X7Wv6`
-    #   or ID-`9ZY8X7Wv6`.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #   An ID that uniquely identifies the application resource. For
+    #   example: `a-9ZY8X7Wv6`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/DefaultApplication AWS API Documentation
@@ -967,8 +969,8 @@ module Aws::GameLiftStreams
     # @!attribute [rw] identifier
     #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
     #   the application resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/9ZY8X7Wv6`
-    #   or ID-`9ZY8X7Wv6`.
+    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`
+    #   or ID-`a-9ZY8X7Wv6`.
     #
     #
     #
@@ -985,7 +987,7 @@ module Aws::GameLiftStreams
 
     # @!attribute [rw] identifier
     #   The unique ID value of the stream group resource to delete. Format
-    #   example: `1AB2C3De4`.
+    #   example: `sg-1AB2C3De4`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/DeleteStreamGroupInput AWS API Documentation
@@ -1002,8 +1004,8 @@ module Aws::GameLiftStreams
     #
     #   This value is a set of either [Amazon Resource Names (ARN)][1] or
     #   IDs that uniquely identify application resources. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/9ZY8X7Wv6`
-    #   or ID-`9ZY8X7Wv6`.
+    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`
+    #   or ID-`a-9ZY8X7Wv6`.
     #
     #
     #
@@ -1015,8 +1017,8 @@ module Aws::GameLiftStreams
     #
     #   This value is an [Amazon Resource Name (ARN)][1] or ID that uniquely
     #   identifies the stream group resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/1AB2C3De4`
-    #   or ID-`1AB2C3De4`.
+    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4`
+    #   or ID-`sg-1AB2C3De4`.
     #
     #
     #
@@ -1037,8 +1039,8 @@ module Aws::GameLiftStreams
     #
     #   This value is a set of either [Amazon Resource Names (ARN)][1] or
     #   IDs that uniquely identify application resources. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/9ZY8X7Wv6`
-    #   or ID-`9ZY8X7Wv6`.
+    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`
+    #   or ID-`a-9ZY8X7Wv6`.
     #
     #
     #
@@ -1048,8 +1050,8 @@ module Aws::GameLiftStreams
     # @!attribute [rw] arn
     #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
     #   the stream group resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/1AB2C3De4`
-    #   or ID-`1AB2C3De4`.
+    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4`
+    #   or ID-`sg-1AB2C3De4`.
     #
     #
     #
@@ -1086,7 +1088,11 @@ module Aws::GameLiftStreams
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The result of the ExportStreamSessionFiles operation.
+    #   The result of the [ExportStreamSessionFiles][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_ExportStreamSessionFiles.html
     #   @return [String]
     #
     # @!attribute [rw] status_reason
@@ -1106,8 +1112,8 @@ module Aws::GameLiftStreams
     # @!attribute [rw] identifier
     #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
     #   the stream group resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/1AB2C3De4`
-    #   or ID-`1AB2C3De4`.
+    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4`
+    #   or ID-`sg-1AB2C3De4`.
     #
     #
     #
@@ -1158,8 +1164,8 @@ module Aws::GameLiftStreams
     # @!attribute [rw] identifier
     #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
     #   the application resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/9ZY8X7Wv6`
-    #   or ID-`9ZY8X7Wv6`.
+    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`
+    #   or ID-`a-9ZY8X7Wv6`.
     #
     #
     #
@@ -1176,17 +1182,20 @@ module Aws::GameLiftStreams
 
     # @!attribute [rw] application_log_output_uri
     #   An Amazon S3 URI to a bucket where you would like Amazon GameLift
-    #   Streams to save application logs. Use the following format for the
-    #   URI: `s3://[bucket name]/[prefix]`. Required if you specify one or
-    #   more `LogPaths`.
+    #   Streams to save application logs. Required if you specify one or
+    #   more `ApplicationLogPaths`.
     #   @return [String]
     #
     # @!attribute [rw] application_log_paths
     #   Locations of log files that your content generates during a stream
     #   session. Amazon GameLift Streams uploads log files to the Amazon S3
     #   bucket that you specify in `ApplicationLogOutputUri` at the end of a
-    #   stream session. To retrieve stored log files, call GetStreamSession
-    #   and get the `LogFileLocationUri`.
+    #   stream session. To retrieve stored log files, call
+    #   [GetStreamSession][1] and get the `LogFileLocationUri`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_GetStreamSession.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] application_source_uri
@@ -1207,7 +1216,7 @@ module Aws::GameLiftStreams
     #
     #   This value is a set of [Amazon Resource Names (ARNs)][1] that
     #   uniquely identify stream group resources. Format example:
-    #   `arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/1AB2C3De4`.
+    #   `arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4`.
     #
     #
     #
@@ -1232,8 +1241,8 @@ module Aws::GameLiftStreams
     # @!attribute [rw] id
     #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
     #   the application resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/9ZY8X7Wv6`
-    #   or ID-`9ZY8X7Wv6`.
+    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`
+    #   or ID-`a-9ZY8X7Wv6`.
     #
     #
     #
@@ -1251,15 +1260,15 @@ module Aws::GameLiftStreams
     #   @return [Array<Types::ReplicationStatus>]
     #
     # @!attribute [rw] runtime_environment
-    #   A set of configuration settings to run the application on a stream
-    #   group. This configures the operating system, and can include
-    #   compatibility layers and other drivers.
+    #   Configuration settings that identify the operating system for an
+    #   application resource. This can also include a compatibility layer
+    #   and other drivers.
     #
     #   A runtime environment can be one of the following:
     #
     #   * For Linux applications
     #
-    #     * Ubuntu 22.04 LTS(`Type=UBUNTU, Version=22_04_LTS`)
+    #     * Ubuntu 22.04 LTS (`Type=UBUNTU, Version=22_04_LTS`)
     #
     #     ^
     #   * For Windows applications
@@ -1320,7 +1329,7 @@ module Aws::GameLiftStreams
 
     # @!attribute [rw] identifier
     #   The unique ID value of the stream group resource to retrieve. Format
-    #   example: `1AB2C3De4`.
+    #   example: `sg-1AB2C3De4`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/GetStreamGroupInput AWS API Documentation
@@ -1344,7 +1353,7 @@ module Aws::GameLiftStreams
     #
     #   This value is a set of [Amazon Resource Names (ARNs)][1] that
     #   uniquely identify application resources. Format example:
-    #   `arn:aws:gameliftstreams:us-west-2:123456789012:application/9ZY8X7Wv6`.
+    #   `arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`.
     #
     #
     #
@@ -1358,8 +1367,8 @@ module Aws::GameLiftStreams
     #   @return [Time]
     #
     # @!attribute [rw] default_application
-    #   The Amazon GameLift Streams application that is associated with this
-    #   stream group.
+    #   The default Amazon GameLift Streams application that is associated
+    #   with this stream group.
     #   @return [Types::DefaultApplication]
     #
     # @!attribute [rw] description
@@ -1368,7 +1377,7 @@ module Aws::GameLiftStreams
     #
     # @!attribute [rw] id
     #   A unique ID value that is assigned to the resource when it's
-    #   created. Format example: `1AB2C3De4`.
+    #   created. Format example: `sg-1AB2C3De4`.
     #   @return [String]
     #
     # @!attribute [rw] last_updated_at
@@ -1446,9 +1455,9 @@ module Aws::GameLiftStreams
     #   * <b> <code>gen5n_win2022</code> (NVIDIA, ultra)</b> Supports
     #     applications with extremely high 3D scene complexity. Runs
     #     applications on Microsoft Windows Server 2022 Base and supports
-    #     DirectX 12. Compatible with most Unreal Engine 5.x builds, 32-bit
-    #     applications, and anti-cheat technology. Uses NVIDIA A10G Tensor
-    #     GPU.
+    #     DirectX 12. Compatible with Unreal Engine versions up through 5.4,
+    #     32 and 64-bit applications, and anti-cheat technology. Uses NVIDIA
+    #     A10G Tensor GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -1482,9 +1491,9 @@ module Aws::GameLiftStreams
     #   * <b> <code>gen4n_win2022</code> (NVIDIA, ultra)</b> Supports
     #     applications with extremely high 3D scene complexity. Runs
     #     applications on Microsoft Windows Server 2022 Base and supports
-    #     DirectX 12. Compatible with most Unreal Engine 5.2 and 5.3 builds,
-    #     32-bit applications, and anti-cheat technology. Uses NVIDIA T4
-    #     Tensor GPU.
+    #     DirectX 12. Compatible with Unreal Engine versions up through 5.4,
+    #     32 and 64-bit applications, and anti-cheat technology. Uses NVIDIA
+    #     T4 Tensor GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -1540,8 +1549,8 @@ module Aws::GameLiftStreams
     #
     #   This value is an [Amazon Resource Name (ARN)][1] or ID that uniquely
     #   identifies the stream group resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/1AB2C3De4`
-    #   or ID-`1AB2C3De4`.
+    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4`
+    #   or ID-`sg-1AB2C3De4`.
     #
     #
     #
@@ -1603,7 +1612,7 @@ module Aws::GameLiftStreams
     #
     #   This value is an [Amazon Resource Name (ARN)][1] that uniquely
     #   identifies the application resource. Format example:
-    #   `arn:aws:gameliftstreams:us-west-2:123456789012:application/9ZY8X7Wv6`.
+    #   `arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`.
     #
     #
     #
@@ -1651,8 +1660,12 @@ module Aws::GameLiftStreams
     #   session.
     #
     #   A location's name. For example, `us-east-1`. For a complete list of
-    #   locations that Amazon GameLift Streams supports, see the Regions and
-    #   quotas section in the Amazon GameLift Streams Developer Guide .
+    #   locations that Amazon GameLift Streams supports, refer to [Regions
+    #   and quotas][1] in the *Amazon GameLift Streams Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
     #   @return [String]
     #
     # @!attribute [rw] log_file_location_uri
@@ -1998,8 +2011,13 @@ module Aws::GameLiftStreams
     # for a location. When configuring a location for the first time, you
     # must specify a numeric value for at least one of the two capacity
     # types. To update the capacity for an existing stream group, call
-    # UpdateStreamGroup. To add a new location and specify its capacity,
-    # call AddStreamGroupLocations.
+    # [UpdateStreamGroup][1]. To add a new location and specify its
+    # capacity, call [AddStreamGroupLocations][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_UpdateStreamGroup.html
+    # [2]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_AddStreamGroupLocations.html
     #
     # @!attribute [rw] always_on_capacity
     #   The streaming capacity that is allocated and ready to handle stream
@@ -2010,8 +2028,12 @@ module Aws::GameLiftStreams
     #
     # @!attribute [rw] location_name
     #   A location's name. For example, `us-east-1`. For a complete list of
-    #   locations that Amazon GameLift Streams supports, see the Regions and
-    #   quotas section in the Amazon GameLift Streams Developer Guide .
+    #   locations that Amazon GameLift Streams supports, refer to [Regions
+    #   and quotas][1] in the *Amazon GameLift Streams Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
     #   @return [String]
     #
     # @!attribute [rw] on_demand_capacity
@@ -2056,8 +2078,12 @@ module Aws::GameLiftStreams
     #
     # @!attribute [rw] location_name
     #   A location's name. For example, `us-east-1`. For a complete list of
-    #   locations that Amazon GameLift Streams supports, see the Regions and
-    #   quotas section in the Amazon GameLift Streams Developer Guide .
+    #   locations that Amazon GameLift Streams supports, refer to [Regions
+    #   and quotas][1] in the *Amazon GameLift Streams Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
     #   @return [String]
     #
     # @!attribute [rw] on_demand_capacity
@@ -2115,16 +2141,20 @@ module Aws::GameLiftStreams
     #   A stream group to remove the specified locations from.
     #
     #   This value is a Amazon Resource Name (ARN) that uniquely identifies
-    #   the stream group resource. Format example: `1AB2C3De4`.      </p>
+    #   the stream group resource. Format example: `sg-1AB2C3De4`.
     #   @return [String]
     #
     # @!attribute [rw] locations
     #   A set of locations to remove this stream group.
     #
     #   A set of location names. For example, `us-east-1`. For a complete
-    #   list of locations that Amazon GameLift Streams supports, see the
-    #   Regions and quotas section in the Amazon GameLift Streams Developer
-    #   Guide .      </p>
+    #   list of locations that Amazon GameLift Streams supports, refer to
+    #   [Regions and quotas][1] in the *Amazon GameLift Streams Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/RemoveStreamGroupLocationsInput AWS API Documentation
@@ -2142,8 +2172,12 @@ module Aws::GameLiftStreams
     #
     # @!attribute [rw] location
     #   A location's name. For example, `us-east-1`. For a complete list of
-    #   locations that Amazon GameLift Streams supports, see the Regions and
-    #   quotas section in the Amazon GameLift Streams Developer Guide .
+    #   locations that Amazon GameLift Streams supports, refer to [Regions
+    #   and quotas][1] in the *Amazon GameLift Streams Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2182,7 +2216,7 @@ module Aws::GameLiftStreams
     #
     # * For Linux applications
     #
-    #   * Ubuntu 22.04 LTS(`Type=UBUNTU, Version=22_04_LTS`)
+    #   * Ubuntu 22.04 LTS (`Type=UBUNTU, Version=22_04_LTS`)
     #
     #   ^
     # * For Windows applications
@@ -2262,8 +2296,8 @@ module Aws::GameLiftStreams
     # @!attribute [rw] application_identifier
     #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
     #   the application resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/9ZY8X7Wv6`
-    #   or ID-`9ZY8X7Wv6`.
+    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`
+    #   or ID-`a-9ZY8X7Wv6`.
     #
     #
     #
@@ -2298,8 +2332,8 @@ module Aws::GameLiftStreams
     #
     #   This value is an [Amazon Resource Name (ARN)][1] or ID that uniquely
     #   identifies the stream group resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/1AB2C3De4`
-    #   or ID-`1AB2C3De4`.
+    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4`
+    #   or ID-`sg-1AB2C3De4`.
     #
     #
     #
@@ -2315,8 +2349,12 @@ module Aws::GameLiftStreams
     #
     #   This value is A set of location names. For example, `us-east-1`. For
     #   a complete list of locations that Amazon GameLift Streams supports,
-    #   see the Regions and quotas section in the Amazon GameLift Streams
-    #   Developer Guide .      </p>
+    #   refer to [Regions and quotas][1] in the *Amazon GameLift Streams
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] protocol
@@ -2395,7 +2433,7 @@ module Aws::GameLiftStreams
     # @!attribute [rw] application_arn
     #   An [Amazon Resource Name (ARN)][1] that uniquely identifies the
     #   application resource. Format example:
-    #   `arn:aws:gameliftstreams:us-west-2:123456789012:application/9ZY8X7Wv6`.
+    #   `arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`.
     #
     #
     #
@@ -2443,8 +2481,12 @@ module Aws::GameLiftStreams
     #   application from.
     #
     #   A location's name. For example, `us-east-1`. For a complete list of
-    #   locations that Amazon GameLift Streams supports, see the Regions and
-    #   quotas section in the Amazon GameLift Streams Developer Guide .
+    #   locations that Amazon GameLift Streams supports, refer to [Regions
+    #   and quotas][1] in the *Amazon GameLift Streams Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
     #   @return [String]
     #
     # @!attribute [rw] log_file_location_uri
@@ -2527,13 +2569,17 @@ module Aws::GameLiftStreams
 
     # Describes a Amazon GameLift Streams stream group resource for hosting
     # content streams. To retrieve additional stream group details, call
-    # GetStreamGroup.
+    # [GetStreamGroup][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_GetStreamGroup.html
     #
     # @!attribute [rw] arn
     #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
     #   the stream group resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/1AB2C3De4`
-    #   or ID-`1AB2C3De4`.
+    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4`
+    #   or ID-`sg-1AB2C3De4`.
     #
     #
     #
@@ -2558,8 +2604,8 @@ module Aws::GameLiftStreams
     # @!attribute [rw] id
     #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
     #   the stream group resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/1AB2C3De4`
-    #   or ID-`1AB2C3De4`.
+    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4`
+    #   or ID-`sg-1AB2C3De4`.
     #
     #
     #
@@ -2603,9 +2649,9 @@ module Aws::GameLiftStreams
     #   * <b> <code>gen5n_win2022</code> (NVIDIA, ultra)</b> Supports
     #     applications with extremely high 3D scene complexity. Runs
     #     applications on Microsoft Windows Server 2022 Base and supports
-    #     DirectX 12. Compatible with most Unreal Engine 5.x builds, 32-bit
-    #     applications, and anti-cheat technology. Uses NVIDIA A10G Tensor
-    #     GPU.
+    #     DirectX 12. Compatible with Unreal Engine versions up through 5.4,
+    #     32 and 64-bit applications, and anti-cheat technology. Uses NVIDIA
+    #     A10G Tensor GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -2639,9 +2685,9 @@ module Aws::GameLiftStreams
     #   * <b> <code>gen4n_win2022</code> (NVIDIA, ultra)</b> Supports
     #     applications with extremely high 3D scene complexity. Runs
     #     applications on Microsoft Windows Server 2022 Base and supports
-    #     DirectX 12. Compatible with most Unreal Engine 5.2 and 5.3 builds,
-    #     32-bit applications, and anti-cheat technology. Uses NVIDIA T4
-    #     Tensor GPU.
+    #     DirectX 12. Compatible with Unreal Engine versions up through 5.4,
+    #     32 and 64-bit applications, and anti-cheat technology. Uses NVIDIA
+    #     T4 Tensor GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -2690,13 +2736,17 @@ module Aws::GameLiftStreams
     end
 
     # Describes a Amazon GameLift Streams stream session. To retrieve
-    # additional details for the stream session, call GetStreamSession.
+    # additional details for the stream session, call [GetStreamSession][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_GetStreamSession.html
     #
     # @!attribute [rw] application_arn
     #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
     #   the application resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/9ZY8X7Wv6`
-    #   or ID-`9ZY8X7Wv6`.
+    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`
+    #   or ID-`a-9ZY8X7Wv6`.
     #
     #
     #
@@ -2733,8 +2783,12 @@ module Aws::GameLiftStreams
     #   session.
     #
     #   A location's name. For example, `us-east-1`. For a complete list of
-    #   locations that Amazon GameLift Streams supports, see the Regions and
-    #   quotas section in the Amazon GameLift Streams Developer Guide .
+    #   locations that Amazon GameLift Streams supports, refer to [Regions
+    #   and quotas][1] in the *Amazon GameLift Streams Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/regions-quotas.html
     #   @return [String]
     #
     # @!attribute [rw] protocol
@@ -2816,8 +2870,8 @@ module Aws::GameLiftStreams
     # @!attribute [rw] identifier
     #   [Amazon Resource Name (ARN)][1] or ID that uniquely identifies the
     #   stream group resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/1AB2C3De4`
-    #   or ID-`1AB2C3De4`.
+    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4`
+    #   or ID-`sg-1AB2C3De4`.
     #
     #   The stream group that runs this stream session.
     #
@@ -2888,9 +2942,8 @@ module Aws::GameLiftStreams
 
     # @!attribute [rw] application_log_output_uri
     #   An Amazon S3 URI to a bucket where you would like Amazon GameLift
-    #   Streams to save application logs. Use the following format for the
-    #   URI: `s3://[bucket name]/[prefix]`. Required if you specify one or
-    #   more `LogPaths`.
+    #   Streams to save application logs. Required if you specify one or
+    #   more `ApplicationLogPaths`.
     #
     #   <note markdown="1"> The log bucket must have permissions that give Amazon GameLift
     #   Streams access to write the log files. For more information, see
@@ -2902,11 +2955,15 @@ module Aws::GameLiftStreams
     # @!attribute [rw] application_log_paths
     #   Locations of log files that your content generates during a stream
     #   session. Enter path values that are relative to the
-    #   `ApplicationSourceUri` location. You can specify up to 10 log
-    #   locations. Amazon GameLift Streams uploads designated log files to
-    #   the Amazon S3 bucket that you specify in `ApplicationLogOutputUri`
-    #   at the end of a stream session. To retrieve stored log files, call
-    #   GetStreamSession and get the `LogFileLocationUri`.
+    #   `ApplicationSourceUri` location. You can specify up to 10 log paths.
+    #   Amazon GameLift Streams uploads designated log files to the Amazon
+    #   S3 bucket that you specify in `ApplicationLogOutputUri` at the end
+    #   of a stream session. To retrieve stored log files, call
+    #   [GetStreamSession][1] and get the `LogFileLocationUri`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_GetStreamSession.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] description
@@ -2916,8 +2973,8 @@ module Aws::GameLiftStreams
     # @!attribute [rw] identifier
     #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
     #   the application resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/9ZY8X7Wv6`
-    #   or ID-`9ZY8X7Wv6`.
+    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`
+    #   or ID-`a-9ZY8X7Wv6`.
     #
     #
     #
@@ -2937,17 +2994,20 @@ module Aws::GameLiftStreams
 
     # @!attribute [rw] application_log_output_uri
     #   An Amazon S3 URI to a bucket where you would like Amazon GameLift
-    #   Streams to save application logs. Use the following format for the
-    #   URI: `s3://[bucket name]/[prefix]`. Required if you specify one or
-    #   more `LogPaths`.
+    #   Streams to save application logs. Required if you specify one or
+    #   more `ApplicationLogPaths`.
     #   @return [String]
     #
     # @!attribute [rw] application_log_paths
     #   Locations of log files that your content generates during a stream
     #   session. Amazon GameLift Streams uploads log files to the Amazon S3
     #   bucket that you specify in `ApplicationLogOutputUri` at the end of a
-    #   stream session. To retrieve stored log files, call GetStreamSession
-    #   and get the `LogFileLocationUri`.
+    #   stream session. To retrieve stored log files, call
+    #   [GetStreamSession][1] and get the `LogFileLocationUri`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_GetStreamSession.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] application_source_uri
@@ -2968,7 +3028,7 @@ module Aws::GameLiftStreams
     #
     #   This value is a set of [Amazon Resource Names (ARNs)][1] that
     #   uniquely identify stream group resources. Format example:
-    #   `arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/1AB2C3De4`.
+    #   `arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4`.
     #
     #
     #
@@ -2993,8 +3053,8 @@ module Aws::GameLiftStreams
     # @!attribute [rw] id
     #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
     #   the application resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/9ZY8X7Wv6`
-    #   or ID-`9ZY8X7Wv6`.
+    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`
+    #   or ID-`a-9ZY8X7Wv6`.
     #
     #
     #
@@ -3012,15 +3072,15 @@ module Aws::GameLiftStreams
     #   @return [Array<Types::ReplicationStatus>]
     #
     # @!attribute [rw] runtime_environment
-    #   A set of configuration settings to run the application on a stream
-    #   group. This configures the operating system, and can include
-    #   compatibility layers and other drivers.
+    #   Configuration settings that identify the operating system for an
+    #   application resource. This can also include a compatibility layer
+    #   and other drivers.
     #
     #   A runtime environment can be one of the following:
     #
     #   * For Linux applications
     #
-    #     * Ubuntu 22.04 LTS(`Type=UBUNTU, Version=22_04_LTS`)
+    #     * Ubuntu 22.04 LTS (`Type=UBUNTU, Version=22_04_LTS`)
     #
     #     ^
     #   * For Windows applications
@@ -3086,8 +3146,8 @@ module Aws::GameLiftStreams
     # @!attribute [rw] identifier
     #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
     #   the stream group resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/1AB2C3De4`
-    #   or ID-`1AB2C3De4`.
+    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4`
+    #   or ID-`sg-1AB2C3De4`.
     #
     #
     #
@@ -3122,7 +3182,7 @@ module Aws::GameLiftStreams
     #
     #   This value is a set of [Amazon Resource Names (ARNs)][1] that
     #   uniquely identify application resources. Format example:
-    #   `arn:aws:gameliftstreams:us-west-2:123456789012:application/9ZY8X7Wv6`.
+    #   `arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`.
     #
     #
     #
@@ -3136,8 +3196,8 @@ module Aws::GameLiftStreams
     #   @return [Time]
     #
     # @!attribute [rw] default_application
-    #   The Amazon GameLift Streams application that is associated with this
-    #   stream group.
+    #   The default Amazon GameLift Streams application that is associated
+    #   with this stream group.
     #   @return [Types::DefaultApplication]
     #
     # @!attribute [rw] description
@@ -3146,7 +3206,7 @@ module Aws::GameLiftStreams
     #
     # @!attribute [rw] id
     #   A unique ID value that is assigned to the resource when it's
-    #   created. Format example: `1AB2C3De4`.
+    #   created. Format example: `sg-1AB2C3De4`.
     #   @return [String]
     #
     # @!attribute [rw] last_updated_at
@@ -3224,9 +3284,9 @@ module Aws::GameLiftStreams
     #   * <b> <code>gen5n_win2022</code> (NVIDIA, ultra)</b> Supports
     #     applications with extremely high 3D scene complexity. Runs
     #     applications on Microsoft Windows Server 2022 Base and supports
-    #     DirectX 12. Compatible with most Unreal Engine 5.x builds, 32-bit
-    #     applications, and anti-cheat technology. Uses NVIDIA A10G Tensor
-    #     GPU.
+    #     DirectX 12. Compatible with Unreal Engine versions up through 5.4,
+    #     32 and 64-bit applications, and anti-cheat technology. Uses NVIDIA
+    #     A10G Tensor GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -3260,9 +3320,9 @@ module Aws::GameLiftStreams
     #   * <b> <code>gen4n_win2022</code> (NVIDIA, ultra)</b> Supports
     #     applications with extremely high 3D scene complexity. Runs
     #     applications on Microsoft Windows Server 2022 Base and supports
-    #     DirectX 12. Compatible with most Unreal Engine 5.2 and 5.3 builds,
-    #     32-bit applications, and anti-cheat technology. Uses NVIDIA T4
-    #     Tensor GPU.
+    #     DirectX 12. Compatible with Unreal Engine versions up through 5.4,
+    #     32 and 64-bit applications, and anti-cheat technology. Uses NVIDIA
+    #     T4 Tensor GPU.
     #
     #     * Reference resolution: 1080p
     #

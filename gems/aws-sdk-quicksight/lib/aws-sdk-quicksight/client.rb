@@ -2279,6 +2279,10 @@ module Aws::QuickSight
     #   The configuration for the performance optimization of the dataset that
     #   contains a `UniqueKey` configuration.
     #
+    # @option params [String] :use_as
+    #   The usage of the dataset. `RLS_RULES` must be specified for RLS
+    #   permission datasets.
+    #
     # @return [Types::CreateDataSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDataSetResponse#arn #arn} => String
@@ -2519,6 +2523,7 @@ module Aws::QuickSight
     #         },
     #       ],
     #     },
+    #     use_as: "RLS_RULES", # accepts RLS_RULES
     #   })
     #
     # @example Response structure
@@ -2638,6 +2643,7 @@ module Aws::QuickSight
     #         host: "Host", # required
     #         port: 1, # required
     #         database: "Database", # required
+    #         use_service_name: false,
     #       },
     #       postgre_sql_parameters: {
     #         host: "Host", # required
@@ -2792,6 +2798,7 @@ module Aws::QuickSight
     #               host: "Host", # required
     #               port: 1, # required
     #               database: "Database", # required
+    #               use_service_name: false,
     #             },
     #             postgre_sql_parameters: {
     #               host: "Host", # required
@@ -3331,7 +3338,7 @@ module Aws::QuickSight
     # subscribed to Amazon QuickSight. The namespace must be unique within
     # the Amazon Web Services account. By default, there is a limit of 100
     # namespaces per Amazon Web Services account. To increase your limit,
-    # create a ticket with Amazon Web Services Support.
+    # create a ticket with Amazon Web ServicesSupport.
     #
     # @option params [required, String] :aws_account_id
     #   The ID for the Amazon Web Services account that you want to create the
@@ -6000,7 +6007,7 @@ module Aws::QuickSight
     #   resp.cloud_formation_override_property_configuration.data_sets #=> Array
     #   resp.cloud_formation_override_property_configuration.data_sets[0].arn #=> String
     #   resp.cloud_formation_override_property_configuration.data_sets[0].properties #=> Array
-    #   resp.cloud_formation_override_property_configuration.data_sets[0].properties[0] #=> String, one of "Name"
+    #   resp.cloud_formation_override_property_configuration.data_sets[0].properties[0] #=> String, one of "Name", "RefreshFailureEmailAlertStatus"
     #   resp.cloud_formation_override_property_configuration.themes #=> Array
     #   resp.cloud_formation_override_property_configuration.themes[0].arn #=> String
     #   resp.cloud_formation_override_property_configuration.themes[0].properties #=> Array
@@ -6132,6 +6139,7 @@ module Aws::QuickSight
     #   resp.override_parameters.data_sources[0].data_source_parameters.oracle_parameters.host #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.oracle_parameters.port #=> Integer
     #   resp.override_parameters.data_sources[0].data_source_parameters.oracle_parameters.database #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.oracle_parameters.use_service_name #=> Boolean
     #   resp.override_parameters.data_sources[0].data_source_parameters.postgre_sql_parameters.host #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.postgre_sql_parameters.port #=> Integer
     #   resp.override_parameters.data_sources[0].data_source_parameters.postgre_sql_parameters.database #=> String
@@ -6202,6 +6210,10 @@ module Aws::QuickSight
     #   resp.override_parameters.data_sets #=> Array
     #   resp.override_parameters.data_sets[0].data_set_id #=> String
     #   resp.override_parameters.data_sets[0].name #=> String
+    #   resp.override_parameters.data_sets[0].data_set_refresh_properties.refresh_configuration.incremental_refresh.lookback_window.column_name #=> String
+    #   resp.override_parameters.data_sets[0].data_set_refresh_properties.refresh_configuration.incremental_refresh.lookback_window.size #=> Integer
+    #   resp.override_parameters.data_sets[0].data_set_refresh_properties.refresh_configuration.incremental_refresh.lookback_window.size_unit #=> String, one of "HOUR", "DAY", "WEEK"
+    #   resp.override_parameters.data_sets[0].data_set_refresh_properties.failure_configuration.email_alert.alert_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.override_parameters.themes #=> Array
     #   resp.override_parameters.themes[0].theme_id #=> String
     #   resp.override_parameters.themes[0].name #=> String
@@ -7161,6 +7173,7 @@ module Aws::QuickSight
     #   resp.data_set.performance_configuration.unique_keys #=> Array
     #   resp.data_set.performance_configuration.unique_keys[0].column_names #=> Array
     #   resp.data_set.performance_configuration.unique_keys[0].column_names[0] #=> String
+    #   resp.data_set.use_as #=> String, one of "RLS_RULES"
     #   resp.request_id #=> String
     #   resp.status #=> Integer
     #
@@ -7248,6 +7261,7 @@ module Aws::QuickSight
     #   resp.data_set_refresh_properties.refresh_configuration.incremental_refresh.lookback_window.column_name #=> String
     #   resp.data_set_refresh_properties.refresh_configuration.incremental_refresh.lookback_window.size #=> Integer
     #   resp.data_set_refresh_properties.refresh_configuration.incremental_refresh.lookback_window.size_unit #=> String, one of "HOUR", "DAY", "WEEK"
+    #   resp.data_set_refresh_properties.failure_configuration.email_alert.alert_status #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeDataSetRefreshProperties AWS API Documentation
     #
@@ -7309,6 +7323,7 @@ module Aws::QuickSight
     #   resp.data_source.data_source_parameters.oracle_parameters.host #=> String
     #   resp.data_source.data_source_parameters.oracle_parameters.port #=> Integer
     #   resp.data_source.data_source_parameters.oracle_parameters.database #=> String
+    #   resp.data_source.data_source_parameters.oracle_parameters.use_service_name #=> Boolean
     #   resp.data_source.data_source_parameters.postgre_sql_parameters.host #=> String
     #   resp.data_source.data_source_parameters.postgre_sql_parameters.port #=> Integer
     #   resp.data_source.data_source_parameters.postgre_sql_parameters.database #=> String
@@ -7392,6 +7407,7 @@ module Aws::QuickSight
     #   resp.data_source.alternate_data_source_parameters[0].oracle_parameters.host #=> String
     #   resp.data_source.alternate_data_source_parameters[0].oracle_parameters.port #=> Integer
     #   resp.data_source.alternate_data_source_parameters[0].oracle_parameters.database #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].oracle_parameters.use_service_name #=> Boolean
     #   resp.data_source.alternate_data_source_parameters[0].postgre_sql_parameters.host #=> String
     #   resp.data_source.alternate_data_source_parameters[0].postgre_sql_parameters.port #=> Integer
     #   resp.data_source.alternate_data_source_parameters[0].postgre_sql_parameters.database #=> String
@@ -9336,6 +9352,20 @@ module Aws::QuickSight
     #           bookmarks: {
     #             enabled: false, # required
     #           },
+    #           amazon_q_in_quick_sight: {
+    #             executive_summary: {
+    #               enabled: false, # required
+    #             },
+    #           },
+    #           schedules: {
+    #             enabled: false, # required
+    #           },
+    #           recent_snapshots: {
+    #             enabled: false, # required
+    #           },
+    #           threshold_alerts: {
+    #             enabled: false, # required
+    #           },
     #         },
     #       },
     #       quick_sight_console: {
@@ -9345,6 +9375,29 @@ module Aws::QuickSight
     #             enabled: false, # required
     #           },
     #           shared_view: {
+    #             enabled: false, # required
+    #           },
+    #           amazon_q_in_quick_sight: {
+    #             data_qn_a: {
+    #               enabled: false, # required
+    #             },
+    #             generative_authoring: {
+    #               enabled: false, # required
+    #             },
+    #             executive_summary: {
+    #               enabled: false, # required
+    #             },
+    #             data_stories: {
+    #               enabled: false, # required
+    #             },
+    #           },
+    #           schedules: {
+    #             enabled: false, # required
+    #           },
+    #           recent_snapshots: {
+    #             enabled: false, # required
+    #           },
+    #           threshold_alerts: {
     #             enabled: false, # required
     #           },
     #         },
@@ -9446,6 +9499,20 @@ module Aws::QuickSight
     #           bookmarks: {
     #             enabled: false, # required
     #           },
+    #           amazon_q_in_quick_sight: {
+    #             executive_summary: {
+    #               enabled: false, # required
+    #             },
+    #           },
+    #           schedules: {
+    #             enabled: false, # required
+    #           },
+    #           recent_snapshots: {
+    #             enabled: false, # required
+    #           },
+    #           threshold_alerts: {
+    #             enabled: false, # required
+    #           },
     #         },
     #       },
     #       quick_sight_console: {
@@ -9455,6 +9522,29 @@ module Aws::QuickSight
     #             enabled: false, # required
     #           },
     #           shared_view: {
+    #             enabled: false, # required
+    #           },
+    #           amazon_q_in_quick_sight: {
+    #             data_qn_a: {
+    #               enabled: false, # required
+    #             },
+    #             generative_authoring: {
+    #               enabled: false, # required
+    #             },
+    #             executive_summary: {
+    #               enabled: false, # required
+    #             },
+    #             data_stories: {
+    #               enabled: false, # required
+    #             },
+    #           },
+    #           schedules: {
+    #             enabled: false, # required
+    #           },
+    #           recent_snapshots: {
+    #             enabled: false, # required
+    #           },
+    #           threshold_alerts: {
     #             enabled: false, # required
     #           },
     #         },
@@ -10156,6 +10246,7 @@ module Aws::QuickSight
     #   resp.data_set_summaries[0].row_level_permission_data_set.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.data_set_summaries[0].row_level_permission_tag_configuration_applied #=> Boolean
     #   resp.data_set_summaries[0].column_level_permission_rules_applied #=> Boolean
+    #   resp.data_set_summaries[0].use_as #=> String, one of "RLS_RULES"
     #   resp.next_token #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
@@ -10229,6 +10320,7 @@ module Aws::QuickSight
     #   resp.data_sources[0].data_source_parameters.oracle_parameters.host #=> String
     #   resp.data_sources[0].data_source_parameters.oracle_parameters.port #=> Integer
     #   resp.data_sources[0].data_source_parameters.oracle_parameters.database #=> String
+    #   resp.data_sources[0].data_source_parameters.oracle_parameters.use_service_name #=> Boolean
     #   resp.data_sources[0].data_source_parameters.postgre_sql_parameters.host #=> String
     #   resp.data_sources[0].data_source_parameters.postgre_sql_parameters.port #=> Integer
     #   resp.data_sources[0].data_source_parameters.postgre_sql_parameters.database #=> String
@@ -10312,6 +10404,7 @@ module Aws::QuickSight
     #   resp.data_sources[0].alternate_data_source_parameters[0].oracle_parameters.host #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].oracle_parameters.port #=> Integer
     #   resp.data_sources[0].alternate_data_source_parameters[0].oracle_parameters.database #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].oracle_parameters.use_service_name #=> Boolean
     #   resp.data_sources[0].alternate_data_source_parameters[0].postgre_sql_parameters.host #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].postgre_sql_parameters.port #=> Integer
     #   resp.data_sources[0].alternate_data_source_parameters[0].postgre_sql_parameters.database #=> String
@@ -12183,6 +12276,27 @@ module Aws::QuickSight
     # Predicts existing visuals or generates new visuals to answer a given
     # query.
     #
+    # This API uses [trusted identity propagation][1] to ensure that an end
+    # user is authenticated and receives the embed URL that is specific to
+    # that user. The IAM Identity Center application that the user has
+    # logged into needs to have [trusted Identity Propagation enabled for
+    # Amazon QuickSight][2] with the scope value set to `quicksight:read`.
+    # Before you use this action, make sure that you have configured the
+    # relevant Amazon QuickSight resource and permissions.
+    #
+    # We recommend enabling the `QSearchStatus` API to unlock the full
+    # potential of `PredictQnA`. When `QSearchStatus` is enabled, it first
+    # checks the specified dashboard for any existing visuals that match the
+    # question. If no matching visuals are found, `PredictQnA` uses
+    # generative Q&amp;A to provide an answer. To update the
+    # `QSearchStatus`, see [UpdateQuickSightQSearchConfiguration][3].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation.html
+    # [2]: https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-using-customermanagedapps-specify-trusted-apps.html
+    # [3]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateQuickSightQSearchConfiguration.html
+    #
     # @option params [required, String] :aws_account_id
     #   The ID of the Amazon Web Services account that the user wants to
     #   execute Predict QA results in.
@@ -12287,13 +12401,18 @@ module Aws::QuickSight
     #     aws_account_id: "AwsAccountId", # required
     #     data_set_id: "ResourceId", # required
     #     data_set_refresh_properties: { # required
-    #       refresh_configuration: { # required
+    #       refresh_configuration: {
     #         incremental_refresh: { # required
     #           lookback_window: { # required
     #             column_name: "String", # required
     #             size: 1, # required
     #             size_unit: "HOUR", # required, accepts HOUR, DAY, WEEK
     #           },
+    #         },
+    #       },
+    #       failure_configuration: {
+    #         email_alert: {
+    #           alert_status: "ENABLED", # accepts ENABLED, DISABLED
     #         },
     #       },
     #     },
@@ -12754,6 +12873,7 @@ module Aws::QuickSight
     #   resp.data_set_summaries[0].row_level_permission_data_set.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.data_set_summaries[0].row_level_permission_tag_configuration_applied #=> Boolean
     #   resp.data_set_summaries[0].column_level_permission_rules_applied #=> Boolean
+    #   resp.data_set_summaries[0].use_as #=> String, one of "RLS_RULES"
     #   resp.next_token #=> String
     #   resp.status #=> Integer
     #   resp.request_id #=> String
@@ -13148,7 +13268,7 @@ module Aws::QuickSight
     #       data_sets: [
     #         {
     #           arn: "Arn", # required
-    #           properties: ["Name"], # required, accepts Name
+    #           properties: ["Name"], # required, accepts Name, RefreshFailureEmailAlertStatus
     #         },
     #       ],
     #       themes: [
@@ -13333,6 +13453,7 @@ module Aws::QuickSight
     #               host: "Host", # required
     #               port: 1, # required
     #               database: "Database", # required
+    #               use_service_name: false,
     #             },
     #             postgre_sql_parameters: {
     #               host: "Host", # required
@@ -13463,6 +13584,22 @@ module Aws::QuickSight
     #         {
     #           data_set_id: "ResourceId", # required
     #           name: "ResourceName",
+    #           data_set_refresh_properties: {
+    #             refresh_configuration: {
+    #               incremental_refresh: { # required
+    #                 lookback_window: { # required
+    #                   column_name: "String", # required
+    #                   size: 1, # required
+    #                   size_unit: "HOUR", # required, accepts HOUR, DAY, WEEK
+    #                 },
+    #               },
+    #             },
+    #             failure_configuration: {
+    #               email_alert: {
+    #                 alert_status: "ENABLED", # accepts ENABLED, DISABLED
+    #               },
+    #             },
+    #           },
     #         },
     #       ],
     #       themes: [
@@ -15365,6 +15502,7 @@ module Aws::QuickSight
     #         host: "Host", # required
     #         port: 1, # required
     #         database: "Database", # required
+    #         use_service_name: false,
     #       },
     #       postgre_sql_parameters: {
     #         host: "Host", # required
@@ -15519,6 +15657,7 @@ module Aws::QuickSight
     #               host: "Host", # required
     #               port: 1, # required
     #               database: "Database", # required
+    #               use_service_name: false,
     #             },
     #             postgre_sql_parameters: {
     #               host: "Host", # required
@@ -17538,7 +17677,7 @@ module Aws::QuickSight
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.144.0'
+      context[:gem_version] = '1.145.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1846,7 +1846,7 @@ module Aws::IoTWireless
 
     LteNmrObj.add_member(:pci, Shapes::ShapeRef.new(shape: PCI, required: true, location_name: "Pci"))
     LteNmrObj.add_member(:earfcn, Shapes::ShapeRef.new(shape: EARFCN, required: true, location_name: "Earfcn"))
-    LteNmrObj.add_member(:eutran_cid, Shapes::ShapeRef.new(shape: EutranCid, required: true, location_name: "EutranCid"))
+    LteNmrObj.add_member(:eutran_cid, Shapes::ShapeRef.new(shape: EutranCid, location_name: "EutranCid"))
     LteNmrObj.add_member(:rsrp, Shapes::ShapeRef.new(shape: RSRP, location_name: "Rsrp"))
     LteNmrObj.add_member(:rsrq, Shapes::ShapeRef.new(shape: RSRQ, location_name: "Rsrq"))
     LteNmrObj.struct_class = Types::LteNmrObj

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.145.0 (2025-03-28)
+------------------
+
+* Feature - RLS permission dataset with userAs: RLS_RULES flag, Q in QuickSight/Threshold Alerts/Schedules/Snapshots in QS embedding, toggle dataset refresh email alerts via API, transposed table with options: column width, type and index, toggle Q&A on dashboards, Oracle Service Name when creating data source.
+
 1.144.0 (2025-02-18)
 ------------------
 

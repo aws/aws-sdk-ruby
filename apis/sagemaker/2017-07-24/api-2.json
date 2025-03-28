@@ -7259,7 +7259,8 @@
         "AppType":{"shape":"AppType"},
         "AppName":{"shape":"AppName"},
         "Tags":{"shape":"TagList"},
-        "ResourceSpec":{"shape":"ResourceSpec"}
+        "ResourceSpec":{"shape":"ResourceSpec"},
+        "RecoveryMode":{"shape":"Boolean"}
       }
     },
     "CreateAppResponse":{
@@ -8348,6 +8349,7 @@
         "Name":{"shape":"PartnerAppName"},
         "Type":{"shape":"PartnerAppType"},
         "ExecutionRoleArn":{"shape":"RoleArn"},
+        "KmsKeyId":{"shape":"KmsKeyId"},
         "MaintenanceConfig":{"shape":"PartnerAppMaintenanceConfig"},
         "Tier":{"shape":"NonEmptyString64"},
         "ApplicationConfig":{"shape":"PartnerAppConfig"},
@@ -9836,6 +9838,7 @@
         "UserProfileName":{"shape":"UserProfileName"},
         "SpaceName":{"shape":"SpaceName"},
         "Status":{"shape":"AppStatus"},
+        "RecoveryMode":{"shape":"Boolean"},
         "LastHealthCheckTimestamp":{"shape":"Timestamp"},
         "LastUserActivityTimestamp":{"shape":"Timestamp"},
         "CreationTime":{"shape":"Timestamp"},
@@ -11334,7 +11337,9 @@
         "Type":{"shape":"PartnerAppType"},
         "Status":{"shape":"PartnerAppStatus"},
         "CreationTime":{"shape":"Timestamp"},
+        "LastModifiedTime":{"shape":"Timestamp"},
         "ExecutionRoleArn":{"shape":"RoleArn"},
+        "KmsKeyId":{"shape":"KmsKeyId"},
         "BaseUrl":{"shape":"String2048"},
         "MaintenanceConfig":{"shape":"PartnerAppMaintenanceConfig"},
         "Tier":{"shape":"NonEmptyString64"},
@@ -15906,10 +15911,7 @@
     },
     "ListClusterNodesResponse":{
       "type":"structure",
-      "required":[
-        "NextToken",
-        "ClusterNodeSummaries"
-      ],
+      "required":["ClusterNodeSummaries"],
       "members":{
         "NextToken":{"shape":"NextToken"},
         "ClusterNodeSummaries":{"shape":"ClusterNodeSummaries"}
@@ -15951,10 +15953,7 @@
     },
     "ListClustersResponse":{
       "type":"structure",
-      "required":[
-        "NextToken",
-        "ClusterSummaries"
-      ],
+      "required":["ClusterSummaries"],
       "members":{
         "NextToken":{"shape":"NextToken"},
         "ClusterSummaries":{"shape":"ClusterSummaries"}
@@ -19669,6 +19668,14 @@
         "ml.g6.16xlarge",
         "ml.g6.24xlarge",
         "ml.g6.48xlarge",
+        "ml.g6e.xlarge",
+        "ml.g6e.2xlarge",
+        "ml.g6e.4xlarge",
+        "ml.g6e.8xlarge",
+        "ml.g6e.12xlarge",
+        "ml.g6e.16xlarge",
+        "ml.g6e.24xlarge",
+        "ml.g6e.48xlarge",
         "ml.inf2.xlarge",
         "ml.inf2.8xlarge",
         "ml.inf2.24xlarge",
@@ -20476,7 +20483,40 @@
         "ml.r5d.8xlarge",
         "ml.r5d.12xlarge",
         "ml.r5d.16xlarge",
-        "ml.r5d.24xlarge"
+        "ml.r5d.24xlarge",
+        "ml.g6.xlarge",
+        "ml.g6.2xlarge",
+        "ml.g6.4xlarge",
+        "ml.g6.8xlarge",
+        "ml.g6.12xlarge",
+        "ml.g6.16xlarge",
+        "ml.g6.24xlarge",
+        "ml.g6.48xlarge",
+        "ml.g6e.xlarge",
+        "ml.g6e.2xlarge",
+        "ml.g6e.4xlarge",
+        "ml.g6e.8xlarge",
+        "ml.g6e.12xlarge",
+        "ml.g6e.16xlarge",
+        "ml.g6e.24xlarge",
+        "ml.g6e.48xlarge",
+        "ml.m6i.large",
+        "ml.m6i.xlarge",
+        "ml.m6i.2xlarge",
+        "ml.m6i.4xlarge",
+        "ml.m6i.8xlarge",
+        "ml.m6i.12xlarge",
+        "ml.m6i.16xlarge",
+        "ml.m6i.24xlarge",
+        "ml.m6i.32xlarge",
+        "ml.c6i.xlarge",
+        "ml.c6i.2xlarge",
+        "ml.c6i.4xlarge",
+        "ml.c6i.8xlarge",
+        "ml.c6i.12xlarge",
+        "ml.c6i.16xlarge",
+        "ml.c6i.24xlarge",
+        "ml.c6i.32xlarge"
       ]
     },
     "ProcessingJob":{
@@ -21773,6 +21813,13 @@
         "Arn":{"shape":"String256"}
       }
     },
+    "Relation":{
+      "type":"string",
+      "enum":[
+        "EqualTo",
+        "GreaterThanOrEqualTo"
+      ]
+    },
     "ReleaseNotes":{
       "type":"string",
       "max":255,
@@ -22501,7 +22548,8 @@
       "type":"structure",
       "members":{
         "Results":{"shape":"SearchResultsList"},
-        "NextToken":{"shape":"NextToken"}
+        "NextToken":{"shape":"NextToken"},
+        "TotalHits":{"shape":"TotalHits"}
       }
     },
     "SearchResultsList":{
@@ -22520,6 +22568,7 @@
       "required":[
         "InstanceType",
         "InstanceCount",
+        "DurationHours",
         "TargetResources"
       ],
       "members":{
@@ -23913,6 +23962,13 @@
       "max":256,
       "min":1
     },
+    "TotalHits":{
+      "type":"structure",
+      "members":{
+        "Value":{"shape":"Long"},
+        "Relation":{"shape":"Relation"}
+      }
+    },
     "TotalInstanceCount":{
       "type":"integer",
       "min":0
@@ -24520,6 +24576,12 @@
       "type":"integer",
       "min":1
     },
+    "TransformAmiVersion":{
+      "type":"string",
+      "max":63,
+      "min":1,
+      "pattern":"^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$"
+    },
     "TransformDataSource":{
       "type":"structure",
       "required":["S3DataSource"],
@@ -24779,7 +24841,8 @@
       "members":{
         "InstanceType":{"shape":"TransformInstanceType"},
         "InstanceCount":{"shape":"TransformInstanceCount"},
-        "VolumeKmsKeyId":{"shape":"KmsKeyId"}
+        "VolumeKmsKeyId":{"shape":"KmsKeyId"},
+        "TransformAmiVersion":{"shape":"TransformAmiVersion"}
       }
     },
     "TransformS3DataSource":{

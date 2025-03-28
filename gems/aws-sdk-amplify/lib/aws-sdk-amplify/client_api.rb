@@ -856,6 +856,7 @@ module Aws::Amplify
     Webhook.add_member(:webhook_arn, Shapes::ShapeRef.new(shape: WebhookArn, required: true, location_name: "webhookArn"))
     Webhook.add_member(:webhook_id, Shapes::ShapeRef.new(shape: WebhookId, required: true, location_name: "webhookId"))
     Webhook.add_member(:webhook_url, Shapes::ShapeRef.new(shape: WebhookUrl, required: true, location_name: "webhookUrl"))
+    Webhook.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, location_name: "appId"))
     Webhook.add_member(:branch_name, Shapes::ShapeRef.new(shape: BranchName, required: true, location_name: "branchName"))
     Webhook.add_member(:description, Shapes::ShapeRef.new(shape: Description, required: true, location_name: "description"))
     Webhook.add_member(:create_time, Shapes::ShapeRef.new(shape: CreateTime, required: true, location_name: "createTime"))

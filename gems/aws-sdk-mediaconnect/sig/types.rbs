@@ -20,7 +20,7 @@ module Aws::MediaConnect
       attr_accessor name: ::String
       attr_accessor network_name: ::String
       attr_accessor port: ::Integer
-      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")
+      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")
       attr_accessor ttl: ::Integer
       SENSITIVE: []
     end
@@ -31,7 +31,7 @@ module Aws::MediaConnect
       attr_accessor name: ::String
       attr_accessor network_name: ::String
       attr_accessor port: ::Integer
-      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")
+      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")
       SENSITIVE: []
     end
 
@@ -161,13 +161,15 @@ module Aws::MediaConnect
       attr_accessor min_latency: ::Integer
       attr_accessor name: ::String
       attr_accessor port: ::Integer
-      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")
+      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")
       attr_accessor remote_id: ::String
       attr_accessor sender_control_port: ::Integer
       attr_accessor smoothing_latency: ::Integer
       attr_accessor stream_id: ::String
       attr_accessor vpc_interface_attachment: Types::VpcInterfaceAttachment
       attr_accessor output_status: ("ENABLED" | "DISABLED")
+      attr_accessor ndi_speed_hq_quality: ::Integer
+      attr_accessor ndi_program_name: ::String
       SENSITIVE: []
     end
 
@@ -221,7 +223,7 @@ module Aws::MediaConnect
       attr_accessor name: ::String
       attr_accessor network_name: ::String
       attr_accessor port: ::Integer
-      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")
+      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")
       attr_accessor ttl: ::Integer
       SENSITIVE: []
     end
@@ -232,7 +234,7 @@ module Aws::MediaConnect
       attr_accessor name: ::String
       attr_accessor network_name: ::String
       attr_accessor port: ::Integer
-      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")
+      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")
       SENSITIVE: []
     end
 
@@ -291,6 +293,8 @@ module Aws::MediaConnect
       attr_accessor vpc_interfaces: ::Array[Types::VpcInterfaceRequest]
       attr_accessor maintenance: Types::AddMaintenance
       attr_accessor source_monitoring_config: Types::MonitoringConfig
+      attr_accessor flow_size: ("MEDIUM" | "LARGE")
+      attr_accessor ndi_config: Types::NdiConfig
       SENSITIVE: []
     end
 
@@ -524,6 +528,8 @@ module Aws::MediaConnect
       attr_accessor vpc_interfaces: ::Array[Types::VpcInterface]
       attr_accessor maintenance: Types::Maintenance
       attr_accessor source_monitoring_config: Types::MonitoringConfig
+      attr_accessor flow_size: ("MEDIUM" | "LARGE")
+      attr_accessor ndi_config: Types::NdiConfig
       SENSITIVE: []
     end
 
@@ -887,6 +893,20 @@ module Aws::MediaConnect
       SENSITIVE: []
     end
 
+    class NdiConfig
+      attr_accessor ndi_state: ("ENABLED" | "DISABLED")
+      attr_accessor machine_name: ::String
+      attr_accessor ndi_discovery_servers: ::Array[Types::NdiDiscoveryServerConfig]
+      SENSITIVE: []
+    end
+
+    class NdiDiscoveryServerConfig
+      attr_accessor discovery_server_address: ::String
+      attr_accessor discovery_server_port: ::Integer
+      attr_accessor vpc_interface_adapter: ::String
+      SENSITIVE: []
+    end
+
     class NotFoundException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1032,11 +1052,6 @@ module Aws::MediaConnect
       SENSITIVE: []
     end
 
-    class ResponseError
-      attr_accessor message: ::String
-      SENSITIVE: []
-    end
-
     class RevokeFlowEntitlementRequest
       attr_accessor entitlement_arn: ::String
       attr_accessor flow_arn: ::String
@@ -1071,7 +1086,7 @@ module Aws::MediaConnect
       attr_accessor media_stream_source_configurations: ::Array[Types::MediaStreamSourceConfigurationRequest]
       attr_accessor min_latency: ::Integer
       attr_accessor name: ::String
-      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")
+      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")
       attr_accessor sender_control_port: ::Integer
       attr_accessor sender_ip_address: ::String
       attr_accessor source_listener_address: ::String
@@ -1161,7 +1176,7 @@ module Aws::MediaConnect
       attr_accessor max_latency: ::Integer
       attr_accessor max_sync_buffer: ::Integer
       attr_accessor min_latency: ::Integer
-      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")
+      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")
       attr_accessor remote_id: ::String
       attr_accessor sender_control_port: ::Integer
       attr_accessor sender_ip_address: ::String
@@ -1169,6 +1184,8 @@ module Aws::MediaConnect
       attr_accessor source_listener_address: ::String
       attr_accessor source_listener_port: ::Integer
       attr_accessor stream_id: ::String
+      attr_accessor ndi_speed_hq_quality: ::Integer
+      attr_accessor ndi_program_name: ::String
       SENSITIVE: []
     end
 
@@ -1214,7 +1231,7 @@ module Aws::MediaConnect
       attr_accessor ip_address: ::String
       attr_accessor network_name: ::String
       attr_accessor port: ::Integer
-      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")
+      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")
       attr_accessor ttl: ::Integer
       SENSITIVE: []
     end
@@ -1224,7 +1241,7 @@ module Aws::MediaConnect
       attr_accessor multicast_source_settings: Types::MulticastSourceSettings
       attr_accessor network_name: ::String
       attr_accessor port: ::Integer
-      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")
+      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")
       SENSITIVE: []
     end
 
@@ -1350,7 +1367,7 @@ module Aws::MediaConnect
       attr_accessor min_latency: ::Integer
       attr_accessor output_arn: ::String
       attr_accessor port: ::Integer
-      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")
+      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")
       attr_accessor remote_id: ::String
       attr_accessor sender_control_port: ::Integer
       attr_accessor sender_ip_address: ::String
@@ -1358,6 +1375,8 @@ module Aws::MediaConnect
       attr_accessor stream_id: ::String
       attr_accessor vpc_interface_attachment: Types::VpcInterfaceAttachment
       attr_accessor output_status: ("ENABLED" | "DISABLED")
+      attr_accessor ndi_program_name: ::String
+      attr_accessor ndi_speed_hq_quality: ::Integer
       SENSITIVE: []
     end
 
@@ -1372,6 +1391,7 @@ module Aws::MediaConnect
       attr_accessor source_failover_config: Types::UpdateFailoverConfig
       attr_accessor maintenance: Types::UpdateMaintenance
       attr_accessor source_monitoring_config: Types::MonitoringConfig
+      attr_accessor ndi_config: Types::NdiConfig
       SENSITIVE: []
     end
 
@@ -1391,7 +1411,7 @@ module Aws::MediaConnect
       attr_accessor max_sync_buffer: ::Integer
       attr_accessor media_stream_source_configurations: ::Array[Types::MediaStreamSourceConfigurationRequest]
       attr_accessor min_latency: ::Integer
-      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")
+      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")
       attr_accessor sender_control_port: ::Integer
       attr_accessor sender_ip_address: ::String
       attr_accessor source_arn: ::String

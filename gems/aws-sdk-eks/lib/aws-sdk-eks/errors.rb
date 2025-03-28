@@ -32,6 +32,7 @@ module Aws::EKS
   # * {ClientException}
   # * {InvalidParameterException}
   # * {InvalidRequestException}
+  # * {InvalidStateException}
   # * {NotFoundException}
   # * {ResourceInUseException}
   # * {ResourceLimitExceededException}
@@ -39,6 +40,7 @@ module Aws::EKS
   # * {ResourcePropagationDelayException}
   # * {ServerException}
   # * {ServiceUnavailableException}
+  # * {ThrottlingException}
   # * {UnsupportedAvailabilityZoneException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -179,6 +181,26 @@ module Aws::EKS
       # @return [String]
       def subscription_id
         @data[:subscription_id]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class InvalidStateException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::EKS::Types::InvalidStateException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def cluster_name
+        @data[:cluster_name]
       end
 
       # @return [String]
@@ -359,6 +381,26 @@ module Aws::EKS
       # @param [Aws::EKS::Types::ServiceUnavailableException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ThrottlingException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::EKS::Types::ThrottlingException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def cluster_name
+        @data[:cluster_name]
       end
 
       # @return [String]

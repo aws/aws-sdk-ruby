@@ -1151,6 +1151,35 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # A `CustomModelUnit` (CMU) is an abstract view of the hardware
+    # utilization that Amazon Bedrock needs to host a single copy of your
+    # custom model. A model copy represents a single instance of your
+    # imported model that is ready to serve inference requests. Amazon
+    # Bedrock determines the number of custom model units that a model copy
+    # needs when you import the custom model.
+    #
+    # You can use `CustomModelUnits` to estimate the cost of running your
+    # custom model. For more information, see Calculate the cost of running
+    # a custom model in the Amazon Bedrock user guide.
+    #
+    # @!attribute [rw] custom_model_units_per_model_copy
+    #   The number of custom model units used to host a model copy.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] custom_model_units_version
+    #   The version of the custom model unit. Use to determine the billing
+    #   rate for the custom model unit.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CustomModelUnits AWS API Documentation
+    #
+    class CustomModelUnits < Struct.new(
+      :custom_model_units_per_model_copy,
+      :custom_model_units_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A model customization configuration
     #
     # @note CustomizationConfig is a union - when making an API calls you must set exactly one of the members.
@@ -1571,6 +1600,32 @@ module Aws::Bedrock
       class Unknown < EvaluationInferenceConfig; end
     end
 
+    # Identifies the models, Knowledge Bases, or other RAG sources evaluated
+    # in a model or Knowledge Base evaluation job.
+    #
+    # @!attribute [rw] model_config_summary
+    #   A summary of the models used in an Amazon Bedrock model evaluation
+    #   job. These resources can be models in Amazon Bedrock or models
+    #   outside of Amazon Bedrock that you use to generate your own
+    #   inference response data.
+    #   @return [Types::EvaluationModelConfigSummary]
+    #
+    # @!attribute [rw] rag_config_summary
+    #   A summary of the RAG resources used in an Amazon Bedrock Knowledge
+    #   Base evaluation job. These resources can be Knowledge Bases in
+    #   Amazon Bedrock or RAG sources outside of Amazon Bedrock that you use
+    #   to generate your own inference response data.
+    #   @return [Types::EvaluationRagConfigSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/EvaluationInferenceConfigSummary AWS API Documentation
+    #
+    class EvaluationInferenceConfigSummary < Struct.new(
+      :model_config_summary,
+      :rag_config_summary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines the models used in the model evaluation job.
     #
     # @note EvaluationModelConfig is a union - when making an API calls you must set exactly one of the members.
@@ -1582,17 +1637,49 @@ module Aws::Bedrock
     #   parameters you want used.
     #   @return [Types::EvaluationBedrockModel]
     #
+    # @!attribute [rw] precomputed_inference_source
+    #   Defines the model used to generate inference response data for a
+    #   model evaluation job where you provide your own inference response
+    #   data.
+    #   @return [Types::EvaluationPrecomputedInferenceSource]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/EvaluationModelConfig AWS API Documentation
     #
     class EvaluationModelConfig < Struct.new(
       :bedrock_model,
+      :precomputed_inference_source,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class BedrockModel < EvaluationModelConfig; end
+      class PrecomputedInferenceSource < EvaluationModelConfig; end
       class Unknown < EvaluationModelConfig; end
+    end
+
+    # A summary of the models used in an Amazon Bedrock model evaluation
+    # job. These resources can be models in Amazon Bedrock or models outside
+    # of Amazon Bedrock that you use to generate your own inference response
+    # data.
+    #
+    # @!attribute [rw] bedrock_model_identifiers
+    #   The Amazon Resource Names (ARNs) of the models used for the
+    #   evaluation job.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] precomputed_inference_source_identifiers
+    #   A label that identifies the models used for a model evaluation job
+    #   where you provide your own inference response data.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/EvaluationModelConfigSummary AWS API Documentation
+    #
+    class EvaluationModelConfigSummary < Struct.new(
+      :bedrock_model_identifiers,
+      :precomputed_inference_source_identifiers)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # The Amazon S3 location where the results of your evaluation job are
@@ -1606,6 +1693,115 @@ module Aws::Bedrock
     #
     class EvaluationOutputDataConfig < Struct.new(
       :s3_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of a model used for a model evaluation job where you provide
+    # your own inference response data.
+    #
+    # @!attribute [rw] inference_source_identifier
+    #   A label that identifies a model used in a model evaluation job where
+    #   you provide your own inference response data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/EvaluationPrecomputedInferenceSource AWS API Documentation
+    #
+    class EvaluationPrecomputedInferenceSource < Struct.new(
+      :inference_source_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of a RAG source used for a Knowledge Base evaluation job
+    # where you provide your own inference response data.
+    #
+    # @note EvaluationPrecomputedRagSourceConfig is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note EvaluationPrecomputedRagSourceConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of EvaluationPrecomputedRagSourceConfig corresponding to the set member.
+    #
+    # @!attribute [rw] retrieve_source_config
+    #   A summary of a RAG source used for a retrieve-only Knowledge Base
+    #   evaluation job where you provide your own inference response data.
+    #   @return [Types::EvaluationPrecomputedRetrieveSourceConfig]
+    #
+    # @!attribute [rw] retrieve_and_generate_source_config
+    #   A summary of a RAG source used for a retrieve-and-generate Knowledge
+    #   Base evaluation job where you provide your own inference response
+    #   data.
+    #   @return [Types::EvaluationPrecomputedRetrieveAndGenerateSourceConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/EvaluationPrecomputedRagSourceConfig AWS API Documentation
+    #
+    class EvaluationPrecomputedRagSourceConfig < Struct.new(
+      :retrieve_source_config,
+      :retrieve_and_generate_source_config,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class RetrieveSourceConfig < EvaluationPrecomputedRagSourceConfig; end
+      class RetrieveAndGenerateSourceConfig < EvaluationPrecomputedRagSourceConfig; end
+      class Unknown < EvaluationPrecomputedRagSourceConfig; end
+    end
+
+    # A summary of a RAG source used for a retrieve-and-generate Knowledge
+    # Base evaluation job where you provide your own inference response
+    # data.
+    #
+    # @!attribute [rw] rag_source_identifier
+    #   A label that identifies the RAG source used for a
+    #   retrieve-and-generate Knowledge Base evaluation job where you
+    #   provide your own inference response data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/EvaluationPrecomputedRetrieveAndGenerateSourceConfig AWS API Documentation
+    #
+    class EvaluationPrecomputedRetrieveAndGenerateSourceConfig < Struct.new(
+      :rag_source_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of a RAG source used for a retrieve-only Knowledge Base
+    # evaluation job where you provide your own inference response data.
+    #
+    # @!attribute [rw] rag_source_identifier
+    #   A label that identifies the RAG source used for a retrieve-only
+    #   Knowledge Base evaluation job where you provide your own inference
+    #   response data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/EvaluationPrecomputedRetrieveSourceConfig AWS API Documentation
+    #
+    class EvaluationPrecomputedRetrieveSourceConfig < Struct.new(
+      :rag_source_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of the RAG resources used in an Amazon Bedrock Knowledge
+    # Base evaluation job. These resources can be Knowledge Bases in Amazon
+    # Bedrock or RAG sources outside of Amazon Bedrock that you use to
+    # generate your own inference response data.
+    #
+    # @!attribute [rw] bedrock_knowledge_base_identifiers
+    #   The Amazon Resource Names (ARNs) of the Knowledge Base resources
+    #   used for a Knowledge Base evaluation job where Amazon Bedrock
+    #   invokes the Knowledge Base for you.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] precomputed_rag_source_identifiers
+    #   A label that identifies the RAG sources used for a Knowledge Base
+    #   evaluation job where you provide your own inference response data.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/EvaluationRagConfigSummary AWS API Documentation
+    #
+    class EvaluationRagConfigSummary < Struct.new(
+      :bedrock_knowledge_base_identifiers,
+      :precomputed_rag_source_identifiers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1651,6 +1847,11 @@ module Aws::Bedrock
     #   metrics for a knowledge base evaluation job.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] inference_config_summary
+    #   Identifies the models, Knowledge Bases, or other RAG sources
+    #   evaluated in a model or Knowledge Base evaluation job.
+    #   @return [Types::EvaluationInferenceConfigSummary]
+    #
     # @!attribute [rw] application_type
     #   Specifies whether the evaluation job is for evaluating a model or
     #   evaluating a knowledge base (retrieval and response generation).
@@ -1668,6 +1869,7 @@ module Aws::Bedrock
       :model_identifiers,
       :rag_identifiers,
       :evaluator_model_identifiers,
+      :inference_config_summary,
       :application_type)
       SENSITIVE = []
       include Aws::Structure
@@ -2375,6 +2577,11 @@ module Aws::Bedrock
     #   Specifies if the imported model supports converse.
     #   @return [Boolean]
     #
+    # @!attribute [rw] custom_model_units
+    #   Information about the hardware utilization for a single copy of the
+    #   model.
+    #   @return [Types::CustomModelUnits]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetImportedModelResponse AWS API Documentation
     #
     class GetImportedModelResponse < Struct.new(
@@ -2386,7 +2593,8 @@ module Aws::Bedrock
       :creation_time,
       :model_architecture,
       :model_kms_key_arn,
-      :instruct_supported)
+      :instruct_supported,
+      :custom_model_units)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6315,16 +6523,23 @@ module Aws::Bedrock
     #   response generation.
     #   @return [Types::KnowledgeBaseConfig]
     #
+    # @!attribute [rw] precomputed_rag_source_config
+    #   Contains configuration details about the RAG source used to generate
+    #   inference response data for a Knowledge Base evaluation job.
+    #   @return [Types::EvaluationPrecomputedRagSourceConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/RAGConfig AWS API Documentation
     #
     class RAGConfig < Struct.new(
       :knowledge_base_config,
+      :precomputed_rag_source_config,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class KnowledgeBaseConfig < RAGConfig; end
+      class PrecomputedRagSourceConfig < RAGConfig; end
       class Unknown < RAGConfig; end
     end
 

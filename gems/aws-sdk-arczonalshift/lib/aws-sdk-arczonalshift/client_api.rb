@@ -56,12 +56,14 @@ module Aws::ARCZonalShift
     ManagedResourceSummaries = Shapes::ListShape.new(name: 'ManagedResourceSummaries')
     ManagedResourceSummary = Shapes::StructureShape.new(name: 'ManagedResourceSummary')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MetricIdentifier = Shapes::StringShape.new(name: 'MetricIdentifier')
     PracticeRunConfiguration = Shapes::StructureShape.new(name: 'PracticeRunConfiguration')
     PracticeRunOutcome = Shapes::StringShape.new(name: 'PracticeRunOutcome')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceIdentifier = Shapes::StringShape.new(name: 'ResourceIdentifier')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ShiftType = Shapes::StringShape.new(name: 'ShiftType')
     StartTime = Shapes::TimestampShape.new(name: 'StartTime')
     StartZonalShiftRequest = Shapes::StructureShape.new(name: 'StartZonalShiftRequest')
     String = Shapes::StringShape.new(name: 'String')
@@ -100,7 +102,7 @@ module Aws::ARCZonalShift
     AutoshiftSummaries.member = Shapes::ShapeRef.new(shape: AutoshiftSummary)
 
     AutoshiftSummary.add_member(:away_from, Shapes::ShapeRef.new(shape: AvailabilityZone, required: true, location_name: "awayFrom"))
-    AutoshiftSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: ExpiryTime, required: true, location_name: "endTime"))
+    AutoshiftSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: ExpiryTime, location_name: "endTime"))
     AutoshiftSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: StartTime, required: true, location_name: "startTime"))
     AutoshiftSummary.add_member(:status, Shapes::ShapeRef.new(shape: AutoshiftExecutionStatus, required: true, location_name: "status"))
     AutoshiftSummary.struct_class = Types::AutoshiftSummary
@@ -121,7 +123,7 @@ module Aws::ARCZonalShift
     ConflictException.add_member(:zonal_shift_id, Shapes::ShapeRef.new(shape: String, location_name: "zonalShiftId"))
     ConflictException.struct_class = Types::ConflictException
 
-    ControlCondition.add_member(:alarm_identifier, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "alarmIdentifier"))
+    ControlCondition.add_member(:alarm_identifier, Shapes::ShapeRef.new(shape: MetricIdentifier, required: true, location_name: "alarmIdentifier"))
     ControlCondition.add_member(:type, Shapes::ShapeRef.new(shape: ControlConditionType, required: true, location_name: "type"))
     ControlCondition.struct_class = Types::ControlCondition
 
@@ -276,6 +278,7 @@ module Aws::ARCZonalShift
     ZonalShiftInResource.add_member(:expiry_time, Shapes::ShapeRef.new(shape: ExpiryTime, required: true, location_name: "expiryTime"))
     ZonalShiftInResource.add_member(:practice_run_outcome, Shapes::ShapeRef.new(shape: PracticeRunOutcome, location_name: "practiceRunOutcome"))
     ZonalShiftInResource.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location_name: "resourceIdentifier"))
+    ZonalShiftInResource.add_member(:shift_type, Shapes::ShapeRef.new(shape: ShiftType, location_name: "shiftType"))
     ZonalShiftInResource.add_member(:start_time, Shapes::ShapeRef.new(shape: StartTime, required: true, location_name: "startTime"))
     ZonalShiftInResource.add_member(:zonal_shift_id, Shapes::ShapeRef.new(shape: ZonalShiftId, required: true, location_name: "zonalShiftId"))
     ZonalShiftInResource.struct_class = Types::ZonalShiftInResource
@@ -287,6 +290,7 @@ module Aws::ARCZonalShift
     ZonalShiftSummary.add_member(:expiry_time, Shapes::ShapeRef.new(shape: ExpiryTime, required: true, location_name: "expiryTime"))
     ZonalShiftSummary.add_member(:practice_run_outcome, Shapes::ShapeRef.new(shape: PracticeRunOutcome, location_name: "practiceRunOutcome"))
     ZonalShiftSummary.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location_name: "resourceIdentifier"))
+    ZonalShiftSummary.add_member(:shift_type, Shapes::ShapeRef.new(shape: ShiftType, location_name: "shiftType"))
     ZonalShiftSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: StartTime, required: true, location_name: "startTime"))
     ZonalShiftSummary.add_member(:status, Shapes::ShapeRef.new(shape: ZonalShiftStatus, required: true, location_name: "status"))
     ZonalShiftSummary.add_member(:zonal_shift_id, Shapes::ShapeRef.new(shape: ZonalShiftId, required: true, location_name: "zonalShiftId"))

@@ -723,10 +723,13 @@ module Aws::MailManager
     end
 
     class IngressStringToEvaluate
+      attr_accessor analysis: Types::IngressAnalysis
       attr_accessor attribute: ("RECIPIENT")
       attr_accessor unknown: untyped
       SENSITIVE: []
 
+      class Analysis < IngressStringToEvaluate
+      end
       class Attribute < IngressStringToEvaluate
       end
       class Unknown < IngressStringToEvaluate
@@ -1083,11 +1086,14 @@ module Aws::MailManager
     end
 
     class RuleBooleanToEvaluate
+      attr_accessor analysis: Types::Analysis
       attr_accessor attribute: ("READ_RECEIPT_REQUESTED" | "TLS" | "TLS_WRAPPED")
       attr_accessor is_in_address_list: Types::RuleIsInAddressList
       attr_accessor unknown: untyped
       SENSITIVE: []
 
+      class Analysis < RuleBooleanToEvaluate
+      end
       class Attribute < RuleBooleanToEvaluate
       end
       class IsInAddressList < RuleBooleanToEvaluate
@@ -1185,11 +1191,14 @@ module Aws::MailManager
     end
 
     class RuleStringToEvaluate
+      attr_accessor analysis: Types::Analysis
       attr_accessor attribute: ("MAIL_FROM" | "HELO" | "RECIPIENT" | "SENDER" | "FROM" | "SUBJECT" | "TO" | "CC")
       attr_accessor mime_header_attribute: ::String
       attr_accessor unknown: untyped
       SENSITIVE: []
 
+      class Analysis < RuleStringToEvaluate
+      end
       class Attribute < RuleStringToEvaluate
       end
       class MimeHeaderAttribute < RuleStringToEvaluate

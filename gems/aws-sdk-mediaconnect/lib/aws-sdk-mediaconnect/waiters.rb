@@ -93,37 +93,43 @@ module Aws::MediaConnect
             operation_name: :describe_flow,
             acceptors: [
               {
-                "state" => "success",
                 "matcher" => "path",
                 "argument" => "flow.status",
+                "state" => "success",
                 "expected" => "ACTIVE"
               },
               {
-                "state" => "retry",
                 "matcher" => "path",
                 "argument" => "flow.status",
+                "state" => "retry",
                 "expected" => "STARTING"
               },
               {
-                "state" => "retry",
                 "matcher" => "path",
                 "argument" => "flow.status",
+                "state" => "retry",
                 "expected" => "UPDATING"
               },
               {
+                "matcher" => "error",
                 "state" => "retry",
-                "matcher" => "status",
-                "expected" => 500
+                "expected" => "InternalServerErrorException"
               },
               {
+                "matcher" => "error",
                 "state" => "retry",
-                "matcher" => "status",
-                "expected" => 503
+                "expected" => "ServiceUnavailableException"
               },
               {
-                "state" => "failure",
                 "matcher" => "path",
                 "argument" => "flow.status",
+                "state" => "failure",
+                "expected" => "STANDBY"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "flow.status",
+                "state" => "failure",
                 "expected" => "ERROR"
               }
             ]
@@ -160,30 +166,30 @@ module Aws::MediaConnect
             operation_name: :describe_flow,
             acceptors: [
               {
+                "matcher" => "error",
                 "state" => "success",
-                "matcher" => "status",
-                "expected" => 404
+                "expected" => "NotFoundException"
               },
               {
-                "state" => "retry",
                 "matcher" => "path",
                 "argument" => "flow.status",
+                "state" => "retry",
                 "expected" => "DELETING"
               },
               {
+                "matcher" => "error",
                 "state" => "retry",
-                "matcher" => "status",
-                "expected" => 500
+                "expected" => "InternalServerErrorException"
               },
               {
+                "matcher" => "error",
                 "state" => "retry",
-                "matcher" => "status",
-                "expected" => 503
+                "expected" => "ServiceUnavailableException"
               },
               {
-                "state" => "failure",
                 "matcher" => "path",
                 "argument" => "flow.status",
+                "state" => "failure",
                 "expected" => "ERROR"
               }
             ]
@@ -220,31 +226,31 @@ module Aws::MediaConnect
             operation_name: :describe_flow,
             acceptors: [
               {
-                "state" => "success",
                 "matcher" => "path",
                 "argument" => "flow.status",
+                "state" => "success",
                 "expected" => "STANDBY"
               },
               {
-                "state" => "retry",
                 "matcher" => "path",
                 "argument" => "flow.status",
+                "state" => "retry",
                 "expected" => "STOPPING"
               },
               {
+                "matcher" => "error",
                 "state" => "retry",
-                "matcher" => "status",
-                "expected" => 500
+                "expected" => "InternalServerErrorException"
               },
               {
+                "matcher" => "error",
                 "state" => "retry",
-                "matcher" => "status",
-                "expected" => 503
+                "expected" => "ServiceUnavailableException"
               },
               {
-                "state" => "failure",
                 "matcher" => "path",
                 "argument" => "flow.status",
+                "state" => "failure",
                 "expected" => "ERROR"
               }
             ]

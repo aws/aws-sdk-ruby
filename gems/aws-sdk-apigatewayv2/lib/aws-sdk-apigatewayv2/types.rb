@@ -97,6 +97,10 @@ module Aws::ApiGatewayV2
     #   during import. Supported only for HTTP APIs.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address types that can invoke the API.
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The name of the API.
     #   @return [String]
@@ -136,6 +140,7 @@ module Aws::ApiGatewayV2
       :disable_schema_validation,
       :disable_execute_api_endpoint,
       :import_info,
+      :ip_address_type,
       :name,
       :protocol_type,
       :route_selection_expression,
@@ -650,6 +655,10 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] disable_execute_api_endpoint
     #   @return [Boolean]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address types that can invoke the API.
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   A string with a length between \[1-128\].
     #   @return [String]
@@ -697,6 +706,7 @@ module Aws::ApiGatewayV2
       :description,
       :disable_schema_validation,
       :disable_execute_api_endpoint,
+      :ip_address_type,
       :name,
       :protocol_type,
       :route_key,
@@ -752,6 +762,10 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] import_info
     #   @return [Array<String>]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address types that can invoke the API.
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   A string with a length between \[1-128\].
     #   @return [String]
@@ -791,6 +805,7 @@ module Aws::ApiGatewayV2
       :disable_schema_validation,
       :disable_execute_api_endpoint,
       :import_info,
+      :ip_address_type,
       :name,
       :protocol_type,
       :route_selection_expression,
@@ -3076,6 +3091,13 @@ module Aws::ApiGatewayV2
     #   The Amazon Route 53 Hosted Zone ID of the endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address types that can invoke the domain name. Use ipv4 to
+    #   allow only IPv4 addresses to invoke your domain name, or use
+    #   dualstack to allow both IPv4 and IPv6 addresses to invoke your
+    #   domain name.
+    #   @return [String]
+    #
     # @!attribute [rw] security_policy
     #   The Transport Layer Security (TLS) version of the security policy
     #   for this domain name. The valid values are TLS\_1\_0 and TLS\_1\_2.
@@ -3097,6 +3119,7 @@ module Aws::ApiGatewayV2
       :domain_name_status_message,
       :endpoint_type,
       :hosted_zone_id,
+      :ip_address_type,
       :security_policy,
       :ownership_verification_certificate_arn)
       SENSITIVE = []
@@ -3305,6 +3328,10 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] import_info
     #   @return [Array<String>]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address types that can invoke the API.
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   A string with a length between \[1-128\].
     #   @return [String]
@@ -3344,6 +3371,7 @@ module Aws::ApiGatewayV2
       :disable_schema_validation,
       :disable_execute_api_endpoint,
       :import_info,
+      :ip_address_type,
       :name,
       :protocol_type,
       :route_selection_expression,
@@ -4612,6 +4640,10 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] import_info
     #   @return [Array<String>]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address types that can invoke the API.
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   A string with a length between \[1-128\].
     #   @return [String]
@@ -4651,6 +4683,7 @@ module Aws::ApiGatewayV2
       :disable_schema_validation,
       :disable_execute_api_endpoint,
       :import_info,
+      :ip_address_type,
       :name,
       :protocol_type,
       :route_selection_expression,
@@ -5291,6 +5324,10 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] import_info
     #   @return [Array<String>]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address types that can invoke the API.
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   A string with a length between \[1-128\].
     #   @return [String]
@@ -5330,6 +5367,7 @@ module Aws::ApiGatewayV2
       :disable_schema_validation,
       :disable_execute_api_endpoint,
       :import_info,
+      :ip_address_type,
       :name,
       :protocol_type,
       :route_selection_expression,
@@ -5787,6 +5825,12 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] disable_execute_api_endpoint
     #   @return [Boolean]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address types that can invoke the API. Use ipv4 to allow only
+    #   IPv4 addresses to invoke your API, or use dualstack to allow both
+    #   IPv4 and IPv6 addresses to invoke your domain name.
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The name of the API.
     #   @return [String]
@@ -5825,6 +5869,7 @@ module Aws::ApiGatewayV2
       :description,
       :disable_schema_validation,
       :disable_execute_api_endpoint,
+      :ip_address_type,
       :name,
       :route_key,
       :route_selection_expression,
@@ -5958,6 +6003,10 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] disable_execute_api_endpoint
     #   @return [Boolean]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address types that can invoke the API.
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   A string with a length between \[1-128\].
     #   @return [String]
@@ -5998,6 +6047,7 @@ module Aws::ApiGatewayV2
       :description,
       :disable_schema_validation,
       :disable_execute_api_endpoint,
+      :ip_address_type,
       :name,
       :route_key,
       :route_selection_expression,
@@ -6051,6 +6101,10 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] import_info
     #   @return [Array<String>]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address types that can invoke the API.
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   A string with a length between \[1-128\].
     #   @return [String]
@@ -6090,6 +6144,7 @@ module Aws::ApiGatewayV2
       :disable_schema_validation,
       :disable_execute_api_endpoint,
       :import_info,
+      :ip_address_type,
       :name,
       :protocol_type,
       :route_selection_expression,

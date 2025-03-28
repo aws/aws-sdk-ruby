@@ -1829,6 +1829,16 @@ module Aws::SSM
     #   to Linux managed nodes only.
     #   @return [Array<Types::PatchSource>]
     #
+    # @!attribute [rw] available_security_updates_compliance_status
+    #   Indicates whether managed nodes for which there are available
+    #   security-related patches that have not been approved by the baseline
+    #   are being defined as `COMPLIANT` or `NON_COMPLIANT`. This option is
+    #   specified when the `CreatePatchBaseline` or `UpdatePatchBaseline`
+    #   commands are run.
+    #
+    #   Applies to Windows Server managed nodes only.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/BaselineOverride AWS API Documentation
     #
     class BaselineOverride < Struct.new(
@@ -1840,7 +1850,8 @@ module Aws::SSM
       :rejected_patches,
       :rejected_patches_action,
       :approved_patches_enable_non_security,
-      :sources)
+      :sources,
+      :available_security_updates_compliance_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4060,6 +4071,22 @@ module Aws::SSM
     #   to Linux managed nodes only.
     #   @return [Array<Types::PatchSource>]
     #
+    # @!attribute [rw] available_security_updates_compliance_status
+    #   Indicates the status you want to assign to security patches that are
+    #   available but not approved because they don't meet the installation
+    #   criteria specified in the patch baseline.
+    #
+    #   Example scenario: Security patches that you might want installed can
+    #   be skipped if you have specified a long period to wait after a patch
+    #   is released before installation. If an update to the patch is
+    #   released during your specified waiting period, the waiting period
+    #   for installing the patch starts over. If the waiting period is too
+    #   long, multiple versions of the patch could be released but never
+    #   installed.
+    #
+    #   Supported for Windows Server managed nodes only.
+    #   @return [String]
+    #
     # @!attribute [rw] client_token
     #   User-provided idempotency token.
     #
@@ -4099,6 +4126,7 @@ module Aws::SSM
       :rejected_patches_action,
       :description,
       :sources,
+      :available_security_updates_compliance_status,
       :client_token,
       :tags)
       SENSITIVE = []
@@ -6411,6 +6439,16 @@ module Aws::SSM
     #   is `NON_COMPLIANT`.
     #   @return [Integer]
     #
+    # @!attribute [rw] instances_with_available_security_updates
+    #   The number of managed nodes for which security-related patches are
+    #   available but not approved because because they didn't meet the
+    #   patch baseline requirements. For example, an updated version of a
+    #   patch might have been released before the specified auto-approval
+    #   period was over.
+    #
+    #   Applies to Windows Server managed nodes only.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribePatchGroupStateResult AWS API Documentation
     #
     class DescribePatchGroupStateResult < Struct.new(
@@ -6425,7 +6463,8 @@ module Aws::SSM
       :instances_with_unreported_not_applicable_patches,
       :instances_with_critical_non_compliant_patches,
       :instances_with_security_non_compliant_patches,
-      :instances_with_other_non_compliant_patches)
+      :instances_with_other_non_compliant_patches,
+      :instances_with_available_security_updates)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9278,6 +9317,15 @@ module Aws::SSM
     #   to Linux managed nodes only.
     #   @return [Array<Types::PatchSource>]
     #
+    # @!attribute [rw] available_security_updates_compliance_status
+    #   Indicates the compliance status of managed nodes for which
+    #   security-related patches are available but were not approved. This
+    #   preference is specified when the `CreatePatchBaseline` or
+    #   `UpdatePatchBaseline` commands are run.
+    #
+    #   Applies to Windows Server managed nodes only.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetPatchBaselineResult AWS API Documentation
     #
     class GetPatchBaselineResult < Struct.new(
@@ -9295,7 +9343,8 @@ module Aws::SSM
       :created_date,
       :modified_date,
       :description,
-      :sources)
+      :sources,
+      :available_security_updates_compliance_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10049,6 +10098,15 @@ module Aws::SSM
     #   `UnreportedNotApplicableCount`.
     #   @return [Integer]
     #
+    # @!attribute [rw] available_security_update_count
+    #   The number of security-related patches that are available but not
+    #   approved because they didn't meet the patch baseline requirements.
+    #   For example, an updated version of a patch might have been released
+    #   before the specified auto-approval period was over.
+    #
+    #   Applies to Windows Server managed nodes only.
+    #   @return [Integer]
+    #
     # @!attribute [rw] operation_start_time
     #   The time the most recent patching operation was started on the
     #   managed node.
@@ -10129,6 +10187,7 @@ module Aws::SSM
       :failed_count,
       :unreported_not_applicable_count,
       :not_applicable_count,
+      :available_security_update_count,
       :operation_start_time,
       :operation_end_time,
       :operation,
@@ -13382,7 +13441,8 @@ module Aws::SSM
     # @!attribute [rw] account_ids_to_add
     #   The Amazon Web Services users that should have access to the
     #   document. The account IDs can either be a group of account IDs or
-    #   *All*.
+    #   *All*. You must specify a value for this parameter or the
+    #   `AccountIdsToRemove` parameter.
     #   @return [Array<String>]
     #
     # @!attribute [rw] account_ids_to_remove
@@ -13390,7 +13450,8 @@ module Aws::SSM
     #   the document. The Amazon Web Services user can either be a group of
     #   account IDs or *All*. This action has a higher priority than
     #   `AccountIdsToAdd`. If you specify an ID to add and the same ID to
-    #   remove, the system removes access to the document.
+    #   remove, the system removes access to the document. You must specify
+    #   a value for this parameter or the `AccountIdsToAdd` parameter.
     #   @return [Array<String>]
     #
     # @!attribute [rw] shared_document_version
@@ -15808,11 +15869,16 @@ module Aws::SSM
     #   see [Creating Systems Manager parameters][1] in the *Amazon Web
     #   Services Systems Manager User Guide*.
     #
-    #   <note markdown="1"> The maximum length constraint of 2048 characters listed below
-    #   includes 1037 characters reserved for internal use by Systems
-    #   Manager. The maximum length for a parameter name that you create is
-    #   1011 characters. This includes the characters in the ARN that
-    #   precede the name you specify, such as
+    #   <note markdown="1"> The reported maximum length of 2048 characters for a parameter name
+    #   includes 1037 characters that are reserved for internal use by
+    #   Systems Manager. The maximum length for a parameter name that you
+    #   specify is 1011 characters.
+    #
+    #    This count of 1011 characters includes the characters in the ARN
+    #   that precede the name you specify. This ARN length will vary
+    #   depending on your partition and Region. For example, the following
+    #   45 characters count toward the 1011 character maximum for a
+    #   parameter created in the US East (Ohio) Region:
     #   `arn:aws:ssm:us-east-2:111122223333:parameter/`.
     #
     #    </note>
@@ -20478,6 +20544,22 @@ module Aws::SSM
     #   to Linux managed nodes only.
     #   @return [Array<Types::PatchSource>]
     #
+    # @!attribute [rw] available_security_updates_compliance_status
+    #   Indicates the status to be assigned to security patches that are
+    #   available but not approved because they don't meet the installation
+    #   criteria specified in the patch baseline.
+    #
+    #   Example scenario: Security patches that you might want installed can
+    #   be skipped if you have specified a long period to wait after a patch
+    #   is released before installation. If an update to the patch is
+    #   released during your specified waiting period, the waiting period
+    #   for installing the patch starts over. If the waiting period is too
+    #   long, multiple versions of the patch could be released but never
+    #   installed.
+    #
+    #   Supported for Windows Server managed nodes only.
+    #   @return [String]
+    #
     # @!attribute [rw] replace
     #   If True, then all fields that are required by the
     #   CreatePatchBaseline operation are also required for this API
@@ -20498,6 +20580,7 @@ module Aws::SSM
       :rejected_patches_action,
       :description,
       :sources,
+      :available_security_updates_compliance_status,
       :replace)
       SENSITIVE = []
       include Aws::Structure
@@ -20567,6 +20650,15 @@ module Aws::SSM
     #   to Linux managed nodes only.
     #   @return [Array<Types::PatchSource>]
     #
+    # @!attribute [rw] available_security_updates_compliance_status
+    #   Indicates the compliance status of managed nodes for which
+    #   security-related patches are available but were not approved. This
+    #   preference is specified when the `CreatePatchBaseline` or
+    #   `UpdatePatchBaseline` commands are run.
+    #
+    #   Applies to Windows Server managed nodes only.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdatePatchBaselineResult AWS API Documentation
     #
     class UpdatePatchBaselineResult < Struct.new(
@@ -20583,7 +20675,8 @@ module Aws::SSM
       :created_date,
       :modified_date,
       :description,
-      :sources)
+      :sources,
+      :available_security_updates_compliance_status)
       SENSITIVE = []
       include Aws::Structure
     end

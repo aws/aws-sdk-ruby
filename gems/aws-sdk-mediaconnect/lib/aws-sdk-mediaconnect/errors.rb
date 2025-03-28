@@ -89,6 +89,10 @@ module Aws::MediaConnect
       def message
         @message || @data[:message]
       end
+
+      def retryable?
+        true
+      end
     end
 
     class CreateBridge420Exception < ServiceError
@@ -179,6 +183,10 @@ module Aws::MediaConnect
       def message
         @message || @data[:message]
       end
+
+      def retryable?
+        true
+      end
     end
 
     class NotFoundException < ServiceError
@@ -209,6 +217,10 @@ module Aws::MediaConnect
       def message
         @message || @data[:message]
       end
+
+      def retryable?
+        true
+      end
     end
 
     class TooManyRequestsException < ServiceError
@@ -223,6 +235,10 @@ module Aws::MediaConnect
       # @return [String]
       def message
         @message || @data[:message]
+      end
+
+      def retryable?
+        true
       end
     end
 

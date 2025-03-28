@@ -124,7 +124,7 @@ module Aws::ControlCatalog
       include Aws::Structure
     end
 
-    # Four types of control parameters are supported.
+    # Five types of control parameters are supported.
     #
     # * **AllowedRegions**: List of Amazon Web Services Regions exempted
     #   from the control. Each string is expected to be an Amazon Web
@@ -152,6 +152,25 @@ module Aws::ControlCatalog
     #   control. Each string is expected to be a resource ARN.
     #
     #   Example: `["arn:aws:s3:::my-bucket-name"]`
+    #
+    # * **ExemptAssumeRoot**: A parameter that lets you choose whether to
+    #   exempt requests made with `AssumeRoot` from this control, for this
+    #   OU. For member accounts, the `AssumeRoot` property is included in
+    #   requests initiated by IAM centralized root access. This parameter
+    #   applies only to the `AWS-GR_RESTRICT_ROOT_USER` control. If you add
+    #   the parameter when enabling the control, the `AssumeRoot` exemption
+    #   is allowed. If you omit the parameter, the `AssumeRoot` exception is
+    #   not permitted. The parameter does not accept `False` as a value.
+    #
+    #   <i>Example: Enabling the control and allowing
+    #   <code>AssumeRoot</code> </i>
+    #
+    #   `{ "controlIdentifier":
+    #   "arn:aws:controlcatalog:::control/5kvme4m5d2b4d7if2fs5yg2ui",
+    #   "parameters": [ { "key": "ExemptAssumeRoot", "value": true } ],
+    #   "targetIdentifier":
+    #   "arn:aws:organizations::8633900XXXXX:ou/o-6jmn81636m/ou-qsah-jtiihcla"
+    #   }`
     #
     # @!attribute [rw] name
     #   The parameter name. This name is the parameter `key` when you call [

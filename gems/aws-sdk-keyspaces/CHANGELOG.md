@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2025-03-25)
+------------------
+
+* Feature - Removing replication region limitation for Amazon Keyspaces Multi-Region Replication APIs.
+
 1.37.0 (2025-02-18)
 ------------------
 

@@ -19,6 +19,7 @@ module Aws::NetworkFirewall
     Address = Shapes::StructureShape.new(name: 'Address')
     AddressDefinition = Shapes::StringShape.new(name: 'AddressDefinition')
     Addresses = Shapes::ListShape.new(name: 'Addresses')
+    Age = Shapes::IntegerShape.new(name: 'Age')
     AnalysisReport = Shapes::StructureShape.new(name: 'AnalysisReport')
     AnalysisReportId = Shapes::StringShape.new(name: 'AnalysisReportId')
     AnalysisReportNextToken = Shapes::StringShape.new(name: 'AnalysisReportNextToken')
@@ -37,6 +38,7 @@ module Aws::NetworkFirewall
     AzSubnet = Shapes::StringShape.new(name: 'AzSubnet')
     AzSubnets = Shapes::ListShape.new(name: 'AzSubnets')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    ByteCount = Shapes::IntegerShape.new(name: 'ByteCount')
     CIDRCount = Shapes::IntegerShape.new(name: 'CIDRCount')
     CIDRSummary = Shapes::StructureShape.new(name: 'CIDRSummary')
     CapacityUsageSummary = Shapes::StructureShape.new(name: 'CapacityUsageSummary')
@@ -69,6 +71,8 @@ module Aws::NetworkFirewall
     DescribeFirewallPolicyResponse = Shapes::StructureShape.new(name: 'DescribeFirewallPolicyResponse')
     DescribeFirewallRequest = Shapes::StructureShape.new(name: 'DescribeFirewallRequest')
     DescribeFirewallResponse = Shapes::StructureShape.new(name: 'DescribeFirewallResponse')
+    DescribeFlowOperationRequest = Shapes::StructureShape.new(name: 'DescribeFlowOperationRequest')
+    DescribeFlowOperationResponse = Shapes::StructureShape.new(name: 'DescribeFlowOperationResponse')
     DescribeLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeLoggingConfigurationRequest')
     DescribeLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeLoggingConfigurationResponse')
     DescribeResourcePolicyRequest = Shapes::StructureShape.new(name: 'DescribeResourcePolicyRequest')
@@ -105,7 +109,18 @@ module Aws::NetworkFirewall
     Firewalls = Shapes::ListShape.new(name: 'Firewalls')
     FirstAccessed = Shapes::TimestampShape.new(name: 'FirstAccessed')
     Flags = Shapes::ListShape.new(name: 'Flags')
+    Flow = Shapes::StructureShape.new(name: 'Flow')
+    FlowFilter = Shapes::StructureShape.new(name: 'FlowFilter')
+    FlowFilters = Shapes::ListShape.new(name: 'FlowFilters')
+    FlowOperation = Shapes::StructureShape.new(name: 'FlowOperation')
+    FlowOperationId = Shapes::StringShape.new(name: 'FlowOperationId')
+    FlowOperationMetadata = Shapes::StructureShape.new(name: 'FlowOperationMetadata')
+    FlowOperationStatus = Shapes::StringShape.new(name: 'FlowOperationStatus')
+    FlowOperationType = Shapes::StringShape.new(name: 'FlowOperationType')
+    FlowOperations = Shapes::ListShape.new(name: 'FlowOperations')
+    FlowRequestTimestamp = Shapes::TimestampShape.new(name: 'FlowRequestTimestamp')
     FlowTimeouts = Shapes::StructureShape.new(name: 'FlowTimeouts')
+    Flows = Shapes::ListShape.new(name: 'Flows')
     GeneratedRulesType = Shapes::StringShape.new(name: 'GeneratedRulesType')
     GetAnalysisReportResultsRequest = Shapes::StructureShape.new(name: 'GetAnalysisReportResultsRequest')
     GetAnalysisReportResultsResponse = Shapes::StructureShape.new(name: 'GetAnalysisReportResultsResponse')
@@ -140,6 +155,10 @@ module Aws::NetworkFirewall
     ListFirewallPoliciesResponse = Shapes::StructureShape.new(name: 'ListFirewallPoliciesResponse')
     ListFirewallsRequest = Shapes::StructureShape.new(name: 'ListFirewallsRequest')
     ListFirewallsResponse = Shapes::StructureShape.new(name: 'ListFirewallsResponse')
+    ListFlowOperationResultsRequest = Shapes::StructureShape.new(name: 'ListFlowOperationResultsRequest')
+    ListFlowOperationResultsResponse = Shapes::StructureShape.new(name: 'ListFlowOperationResultsResponse')
+    ListFlowOperationsRequest = Shapes::StructureShape.new(name: 'ListFlowOperationsRequest')
+    ListFlowOperationsResponse = Shapes::StructureShape.new(name: 'ListFlowOperationsResponse')
     ListRuleGroupsRequest = Shapes::StructureShape.new(name: 'ListRuleGroupsRequest')
     ListRuleGroupsResponse = Shapes::StructureShape.new(name: 'ListRuleGroupsResponse')
     ListTLSInspectionConfigurationsRequest = Shapes::StructureShape.new(name: 'ListTLSInspectionConfigurationsRequest')
@@ -156,6 +175,7 @@ module Aws::NetworkFirewall
     MatchAttributes = Shapes::StructureShape.new(name: 'MatchAttributes')
     NumberOfAssociations = Shapes::IntegerShape.new(name: 'NumberOfAssociations')
     OverrideAction = Shapes::StringShape.new(name: 'OverrideAction')
+    PacketCount = Shapes::IntegerShape.new(name: 'PacketCount')
     PaginationMaxResults = Shapes::IntegerShape.new(name: 'PaginationMaxResults')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PerObjectStatus = Shapes::StructureShape.new(name: 'PerObjectStatus')
@@ -171,6 +191,8 @@ module Aws::NetworkFirewall
     Priority = Shapes::IntegerShape.new(name: 'Priority')
     ProtocolNumber = Shapes::IntegerShape.new(name: 'ProtocolNumber')
     ProtocolNumbers = Shapes::ListShape.new(name: 'ProtocolNumbers')
+    ProtocolString = Shapes::StringShape.new(name: 'ProtocolString')
+    ProtocolStrings = Shapes::ListShape.new(name: 'ProtocolStrings')
     PublishMetricAction = Shapes::StructureShape.new(name: 'PublishMetricAction')
     PutResourcePolicyRequest = Shapes::StructureShape.new(name: 'PutResourcePolicyRequest')
     PutResourcePolicyResponse = Shapes::StructureShape.new(name: 'PutResourcePolicyResponse')
@@ -214,6 +236,10 @@ module Aws::NetworkFirewall
     SourceMetadata = Shapes::StructureShape.new(name: 'SourceMetadata')
     StartAnalysisReportRequest = Shapes::StructureShape.new(name: 'StartAnalysisReportRequest')
     StartAnalysisReportResponse = Shapes::StructureShape.new(name: 'StartAnalysisReportResponse')
+    StartFlowCaptureRequest = Shapes::StructureShape.new(name: 'StartFlowCaptureRequest')
+    StartFlowCaptureResponse = Shapes::StructureShape.new(name: 'StartFlowCaptureResponse')
+    StartFlowFlushRequest = Shapes::StructureShape.new(name: 'StartFlowFlushRequest')
+    StartFlowFlushResponse = Shapes::StructureShape.new(name: 'StartFlowFlushResponse')
     StartTime = Shapes::TimestampShape.new(name: 'StartTime')
     StatefulAction = Shapes::StringShape.new(name: 'StatefulAction')
     StatefulActions = Shapes::ListShape.new(name: 'StatefulActions')
@@ -486,6 +512,21 @@ module Aws::NetworkFirewall
     DescribeFirewallResponse.add_member(:firewall_status, Shapes::ShapeRef.new(shape: FirewallStatus, location_name: "FirewallStatus"))
     DescribeFirewallResponse.struct_class = Types::DescribeFirewallResponse
 
+    DescribeFlowOperationRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "FirewallArn"))
+    DescribeFlowOperationRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone"))
+    DescribeFlowOperationRequest.add_member(:flow_operation_id, Shapes::ShapeRef.new(shape: FlowOperationId, required: true, location_name: "FlowOperationId"))
+    DescribeFlowOperationRequest.struct_class = Types::DescribeFlowOperationRequest
+
+    DescribeFlowOperationResponse.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
+    DescribeFlowOperationResponse.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone"))
+    DescribeFlowOperationResponse.add_member(:flow_operation_id, Shapes::ShapeRef.new(shape: FlowOperationId, location_name: "FlowOperationId"))
+    DescribeFlowOperationResponse.add_member(:flow_operation_type, Shapes::ShapeRef.new(shape: FlowOperationType, location_name: "FlowOperationType"))
+    DescribeFlowOperationResponse.add_member(:flow_operation_status, Shapes::ShapeRef.new(shape: FlowOperationStatus, location_name: "FlowOperationStatus"))
+    DescribeFlowOperationResponse.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusReason, location_name: "StatusMessage"))
+    DescribeFlowOperationResponse.add_member(:flow_request_timestamp, Shapes::ShapeRef.new(shape: FlowRequestTimestamp, location_name: "FlowRequestTimestamp"))
+    DescribeFlowOperationResponse.add_member(:flow_operation, Shapes::ShapeRef.new(shape: FlowOperation, location_name: "FlowOperation"))
+    DescribeFlowOperationResponse.struct_class = Types::DescribeFlowOperationResponse
+
     DescribeLoggingConfigurationRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
     DescribeLoggingConfigurationRequest.add_member(:firewall_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "FirewallName"))
     DescribeLoggingConfigurationRequest.struct_class = Types::DescribeLoggingConfigurationRequest
@@ -616,8 +657,41 @@ module Aws::NetworkFirewall
 
     Flags.member = Shapes::ShapeRef.new(shape: TCPFlag)
 
+    Flow.add_member(:source_address, Shapes::ShapeRef.new(shape: Address, location_name: "SourceAddress"))
+    Flow.add_member(:destination_address, Shapes::ShapeRef.new(shape: Address, location_name: "DestinationAddress"))
+    Flow.add_member(:source_port, Shapes::ShapeRef.new(shape: Port, location_name: "SourcePort"))
+    Flow.add_member(:destination_port, Shapes::ShapeRef.new(shape: Port, location_name: "DestinationPort"))
+    Flow.add_member(:protocol, Shapes::ShapeRef.new(shape: ProtocolString, location_name: "Protocol"))
+    Flow.add_member(:age, Shapes::ShapeRef.new(shape: Age, location_name: "Age"))
+    Flow.add_member(:packet_count, Shapes::ShapeRef.new(shape: PacketCount, location_name: "PacketCount"))
+    Flow.add_member(:byte_count, Shapes::ShapeRef.new(shape: ByteCount, location_name: "ByteCount"))
+    Flow.struct_class = Types::Flow
+
+    FlowFilter.add_member(:source_address, Shapes::ShapeRef.new(shape: Address, location_name: "SourceAddress"))
+    FlowFilter.add_member(:destination_address, Shapes::ShapeRef.new(shape: Address, location_name: "DestinationAddress"))
+    FlowFilter.add_member(:source_port, Shapes::ShapeRef.new(shape: Port, location_name: "SourcePort"))
+    FlowFilter.add_member(:destination_port, Shapes::ShapeRef.new(shape: Port, location_name: "DestinationPort"))
+    FlowFilter.add_member(:protocols, Shapes::ShapeRef.new(shape: ProtocolStrings, location_name: "Protocols"))
+    FlowFilter.struct_class = Types::FlowFilter
+
+    FlowFilters.member = Shapes::ShapeRef.new(shape: FlowFilter)
+
+    FlowOperation.add_member(:minimum_flow_age_in_seconds, Shapes::ShapeRef.new(shape: Age, location_name: "MinimumFlowAgeInSeconds"))
+    FlowOperation.add_member(:flow_filters, Shapes::ShapeRef.new(shape: FlowFilters, location_name: "FlowFilters"))
+    FlowOperation.struct_class = Types::FlowOperation
+
+    FlowOperationMetadata.add_member(:flow_operation_id, Shapes::ShapeRef.new(shape: FlowOperationId, location_name: "FlowOperationId"))
+    FlowOperationMetadata.add_member(:flow_operation_type, Shapes::ShapeRef.new(shape: FlowOperationType, location_name: "FlowOperationType"))
+    FlowOperationMetadata.add_member(:flow_request_timestamp, Shapes::ShapeRef.new(shape: FlowRequestTimestamp, location_name: "FlowRequestTimestamp"))
+    FlowOperationMetadata.add_member(:flow_operation_status, Shapes::ShapeRef.new(shape: FlowOperationStatus, location_name: "FlowOperationStatus"))
+    FlowOperationMetadata.struct_class = Types::FlowOperationMetadata
+
+    FlowOperations.member = Shapes::ShapeRef.new(shape: FlowOperationMetadata)
+
     FlowTimeouts.add_member(:tcp_idle_timeout_seconds, Shapes::ShapeRef.new(shape: TcpIdleTimeoutRangeBound, location_name: "TcpIdleTimeoutSeconds"))
     FlowTimeouts.struct_class = Types::FlowTimeouts
+
+    Flows.member = Shapes::ShapeRef.new(shape: Flow)
 
     GetAnalysisReportResultsRequest.add_member(:firewall_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "FirewallName"))
     GetAnalysisReportResultsRequest.add_member(:analysis_report_id, Shapes::ShapeRef.new(shape: AnalysisReportId, required: true, location_name: "AnalysisReportId"))
@@ -712,6 +786,34 @@ module Aws::NetworkFirewall
     ListFirewallsResponse.add_member(:firewalls, Shapes::ShapeRef.new(shape: Firewalls, location_name: "Firewalls"))
     ListFirewallsResponse.struct_class = Types::ListFirewallsResponse
 
+    ListFlowOperationResultsRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "FirewallArn"))
+    ListFlowOperationResultsRequest.add_member(:flow_operation_id, Shapes::ShapeRef.new(shape: FlowOperationId, required: true, location_name: "FlowOperationId"))
+    ListFlowOperationResultsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListFlowOperationResultsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location_name: "MaxResults"))
+    ListFlowOperationResultsRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone"))
+    ListFlowOperationResultsRequest.struct_class = Types::ListFlowOperationResultsRequest
+
+    ListFlowOperationResultsResponse.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
+    ListFlowOperationResultsResponse.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone"))
+    ListFlowOperationResultsResponse.add_member(:flow_operation_id, Shapes::ShapeRef.new(shape: FlowOperationId, location_name: "FlowOperationId"))
+    ListFlowOperationResultsResponse.add_member(:flow_operation_status, Shapes::ShapeRef.new(shape: FlowOperationStatus, location_name: "FlowOperationStatus"))
+    ListFlowOperationResultsResponse.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusReason, location_name: "StatusMessage"))
+    ListFlowOperationResultsResponse.add_member(:flow_request_timestamp, Shapes::ShapeRef.new(shape: FlowRequestTimestamp, location_name: "FlowRequestTimestamp"))
+    ListFlowOperationResultsResponse.add_member(:flows, Shapes::ShapeRef.new(shape: Flows, location_name: "Flows"))
+    ListFlowOperationResultsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListFlowOperationResultsResponse.struct_class = Types::ListFlowOperationResultsResponse
+
+    ListFlowOperationsRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "FirewallArn"))
+    ListFlowOperationsRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone"))
+    ListFlowOperationsRequest.add_member(:flow_operation_type, Shapes::ShapeRef.new(shape: FlowOperationType, location_name: "FlowOperationType"))
+    ListFlowOperationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListFlowOperationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location_name: "MaxResults"))
+    ListFlowOperationsRequest.struct_class = Types::ListFlowOperationsRequest
+
+    ListFlowOperationsResponse.add_member(:flow_operations, Shapes::ShapeRef.new(shape: FlowOperations, location_name: "FlowOperations"))
+    ListFlowOperationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListFlowOperationsResponse.struct_class = Types::ListFlowOperationsResponse
+
     ListRuleGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListRuleGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location_name: "MaxResults"))
     ListRuleGroupsRequest.add_member(:scope, Shapes::ShapeRef.new(shape: ResourceManagedStatus, location_name: "Scope"))
@@ -784,6 +886,8 @@ module Aws::NetworkFirewall
     PortSets.value = Shapes::ShapeRef.new(shape: PortSet)
 
     ProtocolNumbers.member = Shapes::ShapeRef.new(shape: ProtocolNumber)
+
+    ProtocolStrings.member = Shapes::ShapeRef.new(shape: ProtocolString)
 
     PublishMetricAction.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, required: true, location_name: "Dimensions"))
     PublishMetricAction.struct_class = Types::PublishMetricAction
@@ -896,6 +1000,28 @@ module Aws::NetworkFirewall
 
     StartAnalysisReportResponse.add_member(:analysis_report_id, Shapes::ShapeRef.new(shape: AnalysisReportId, required: true, location_name: "AnalysisReportId"))
     StartAnalysisReportResponse.struct_class = Types::StartAnalysisReportResponse
+
+    StartFlowCaptureRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "FirewallArn"))
+    StartFlowCaptureRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone"))
+    StartFlowCaptureRequest.add_member(:minimum_flow_age_in_seconds, Shapes::ShapeRef.new(shape: Age, location_name: "MinimumFlowAgeInSeconds"))
+    StartFlowCaptureRequest.add_member(:flow_filters, Shapes::ShapeRef.new(shape: FlowFilters, required: true, location_name: "FlowFilters"))
+    StartFlowCaptureRequest.struct_class = Types::StartFlowCaptureRequest
+
+    StartFlowCaptureResponse.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
+    StartFlowCaptureResponse.add_member(:flow_operation_id, Shapes::ShapeRef.new(shape: FlowOperationId, location_name: "FlowOperationId"))
+    StartFlowCaptureResponse.add_member(:flow_operation_status, Shapes::ShapeRef.new(shape: FlowOperationStatus, location_name: "FlowOperationStatus"))
+    StartFlowCaptureResponse.struct_class = Types::StartFlowCaptureResponse
+
+    StartFlowFlushRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "FirewallArn"))
+    StartFlowFlushRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone"))
+    StartFlowFlushRequest.add_member(:minimum_flow_age_in_seconds, Shapes::ShapeRef.new(shape: Age, location_name: "MinimumFlowAgeInSeconds"))
+    StartFlowFlushRequest.add_member(:flow_filters, Shapes::ShapeRef.new(shape: FlowFilters, required: true, location_name: "FlowFilters"))
+    StartFlowFlushRequest.struct_class = Types::StartFlowFlushRequest
+
+    StartFlowFlushResponse.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
+    StartFlowFlushResponse.add_member(:flow_operation_id, Shapes::ShapeRef.new(shape: FlowOperationId, location_name: "FlowOperationId"))
+    StartFlowFlushResponse.add_member(:flow_operation_status, Shapes::ShapeRef.new(shape: FlowOperationStatus, location_name: "FlowOperationStatus"))
+    StartFlowFlushResponse.struct_class = Types::StartFlowFlushResponse
 
     StatefulActions.member = Shapes::ShapeRef.new(shape: CollectionMember_String)
 
@@ -1347,6 +1473,18 @@ module Aws::NetworkFirewall
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:describe_flow_operation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeFlowOperation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeFlowOperationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeFlowOperationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:describe_logging_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeLoggingConfiguration"
         o.http_method = "POST"
@@ -1491,6 +1629,42 @@ module Aws::NetworkFirewall
         )
       end)
 
+      api.add_operation(:list_flow_operation_results, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListFlowOperationResults"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListFlowOperationResultsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListFlowOperationResultsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_flow_operations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListFlowOperations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListFlowOperationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListFlowOperationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_rule_groups, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListRuleGroups"
         o.http_method = "POST"
@@ -1562,6 +1736,30 @@ module Aws::NetworkFirewall
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StartAnalysisReportRequest)
         o.output = Shapes::ShapeRef.new(shape: StartAnalysisReportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:start_flow_capture, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartFlowCapture"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartFlowCaptureRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartFlowCaptureResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:start_flow_flush, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartFlowFlush"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartFlowFlushRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartFlowFlushResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

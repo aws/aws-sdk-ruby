@@ -4562,12 +4562,23 @@ module Aws::CodeBuild
     #       paths in the buildspec file.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] cache_namespace
+    #   Defines the scope of the cache. You can use this namespace to share
+    #   a cache across multiple projects. For more information, see [Cache
+    #   sharing between projects][1] in the *CodeBuild User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/caching-s3.html#caching-s3-sharing
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectCache AWS API Documentation
     #
     class ProjectCache < Struct.new(
       :type,
       :location,
-      :modes)
+      :modes,
+      :cache_namespace)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -33,7 +33,7 @@ module Aws::SageMaker
                 return Aws::Endpoints::Endpoint.new(url: "https://api-fips.sagemaker.#{parameters.region}.amazonaws.com", headers: {}, properties: {})
               end
               if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-us-gov")
-                return Aws::Endpoints::Endpoint.new(url: "https://api.sagemaker.#{parameters.region}.amazonaws.com", headers: {}, properties: {})
+                return Aws::Endpoints::Endpoint.new(url: "https://api-fips.sagemaker.#{parameters.region}.amazonaws.com", headers: {}, properties: {})
               end
               return Aws::Endpoints::Endpoint.new(url: "https://api.sagemaker-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
             end

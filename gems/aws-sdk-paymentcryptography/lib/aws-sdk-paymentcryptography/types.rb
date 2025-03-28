@@ -150,6 +150,11 @@ module Aws::PaymentCryptography
     #   [1]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_TagResource.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] derive_key_usage
+    #   The cryptographic usage of an ECDH derived key as deﬁned in section
+    #   A.5.2 of the TR-31 spec.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/CreateKeyInput AWS API Documentation
     #
     class CreateKeyInput < Struct.new(
@@ -157,7 +162,8 @@ module Aws::PaymentCryptography
       :key_check_value_algorithm,
       :exportable,
       :enabled,
-      :tags)
+      :tags,
+      :derive_key_usage)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -222,6 +228,33 @@ module Aws::PaymentCryptography
       include Aws::Structure
     end
 
+    # Derivation data used to derive an ECDH key.
+    #
+    # @note DiffieHellmanDerivationData is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] shared_information
+    #   A byte string containing information that binds the ECDH derived key
+    #   to the two parties involved or to the context of the key.
+    #
+    #   It may include details like identities of the two parties deriving
+    #   the key, context of the operation, session IDs, and optionally a
+    #   nonce. It must not contain zero bytes, and re-using shared
+    #   information for multiple ECDH key derivations is not recommended.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/DiffieHellmanDerivationData AWS API Documentation
+    #
+    class DiffieHellmanDerivationData < Struct.new(
+      :shared_information,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class SharedInformation < DiffieHellmanDerivationData; end
+      class Unknown < DiffieHellmanDerivationData; end
+    end
+
     # The attributes for IPEK generation during export.
     #
     # @!attribute [rw] export_dukpt_initial_key
@@ -247,6 +280,59 @@ module Aws::PaymentCryptography
       :export_dukpt_initial_key,
       :key_check_value_algorithm)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Parameter information for key material export using the asymmetric
+    # ECDH key exchange method.
+    #
+    # @!attribute [rw] private_key_identifier
+    #   The `keyARN` of the asymmetric ECC key.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_authority_public_key_identifier
+    #   The `keyARN` of the certificate that signed the client's
+    #   `PublicKeyCertificate`.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_key_certificate
+    #   The client's public key certificate in PEM format (base64 encoded)
+    #   to use for ECDH key derivation.
+    #   @return [String]
+    #
+    # @!attribute [rw] derive_key_algorithm
+    #   The key algorithm of the derived ECDH key.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_derivation_function
+    #   The key derivation function to use for deriving a key using ECDH.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_derivation_hash_algorithm
+    #   The hash type to use for deriving a key using ECDH.
+    #   @return [String]
+    #
+    # @!attribute [rw] derivation_data
+    #   Derivation data used to derive an ECDH key.
+    #   @return [Types::DiffieHellmanDerivationData]
+    #
+    # @!attribute [rw] key_block_headers
+    #   Optional metadata for export associated with the key material. This
+    #   data is signed but transmitted in clear text.
+    #   @return [Types::KeyBlockHeaders]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ExportDiffieHellmanTr31KeyBlock AWS API Documentation
+    #
+    class ExportDiffieHellmanTr31KeyBlock < Struct.new(
+      :private_key_identifier,
+      :certificate_authority_public_key_identifier,
+      :public_key_certificate,
+      :derive_key_algorithm,
+      :key_derivation_function,
+      :key_derivation_hash_algorithm,
+      :derivation_data,
+      :key_block_headers)
+      SENSITIVE = [:public_key_certificate]
       include Aws::Structure
     end
 
@@ -341,12 +427,18 @@ module Aws::PaymentCryptography
     #   wrap and unwrap key exchange method
     #   @return [Types::ExportKeyCryptogram]
     #
+    # @!attribute [rw] diffie_hellman_tr_31_key_block
+    #   Parameter information for key material export using the asymmetric
+    #   ECDH key exchange method.
+    #   @return [Types::ExportDiffieHellmanTr31KeyBlock]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ExportKeyMaterial AWS API Documentation
     #
     class ExportKeyMaterial < Struct.new(
       :tr_31_key_block,
       :tr_34_key_block,
       :key_cryptogram,
+      :diffie_hellman_tr_31_key_block,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -355,6 +447,7 @@ module Aws::PaymentCryptography
       class Tr31KeyBlock < ExportKeyMaterial; end
       class Tr34KeyBlock < ExportKeyMaterial; end
       class KeyCryptogram < ExportKeyMaterial; end
+      class DiffieHellmanTr31KeyBlock < ExportKeyMaterial; end
       class Unknown < ExportKeyMaterial; end
     end
 
@@ -661,6 +754,58 @@ module Aws::PaymentCryptography
       include Aws::Structure
     end
 
+    # Parameter information for key material import using the asymmetric
+    # ECDH key exchange method.
+    #
+    # @!attribute [rw] private_key_identifier
+    #   The `keyARN` of the asymmetric ECC key.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_authority_public_key_identifier
+    #   The `keyARN` of the certificate that signed the client's
+    #   `PublicKeyCertificate`.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_key_certificate
+    #   The client's public key certificate in PEM format (base64 encoded)
+    #   to use for ECDH key derivation.
+    #   @return [String]
+    #
+    # @!attribute [rw] derive_key_algorithm
+    #   The key algorithm of the derived ECDH key.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_derivation_function
+    #   The key derivation function to use for deriving a key using ECDH.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_derivation_hash_algorithm
+    #   The hash type to use for deriving a key using ECDH.
+    #   @return [String]
+    #
+    # @!attribute [rw] derivation_data
+    #   Derivation data used to derive an ECDH key.
+    #   @return [Types::DiffieHellmanDerivationData]
+    #
+    # @!attribute [rw] wrapped_key_block
+    #   The ECDH wrapped key block to import.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ImportDiffieHellmanTr31KeyBlock AWS API Documentation
+    #
+    class ImportDiffieHellmanTr31KeyBlock < Struct.new(
+      :private_key_identifier,
+      :certificate_authority_public_key_identifier,
+      :public_key_certificate,
+      :derive_key_algorithm,
+      :key_derivation_function,
+      :key_derivation_hash_algorithm,
+      :derivation_data,
+      :wrapped_key_block)
+      SENSITIVE = [:public_key_certificate, :wrapped_key_block]
+      include Aws::Structure
+    end
+
     # Parameter information for key material import using asymmetric RSA
     # wrap and unwrap key exchange method.
     #
@@ -791,6 +936,11 @@ module Aws::PaymentCryptography
     #   wrap and unwrap key exchange method.
     #   @return [Types::ImportKeyCryptogram]
     #
+    # @!attribute [rw] diffie_hellman_tr_31_key_block
+    #   Parameter information for key material import using the asymmetric
+    #   ECDH key exchange method.
+    #   @return [Types::ImportDiffieHellmanTr31KeyBlock]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ImportKeyMaterial AWS API Documentation
     #
     class ImportKeyMaterial < Struct.new(
@@ -799,6 +949,7 @@ module Aws::PaymentCryptography
       :tr_31_key_block,
       :tr_34_key_block,
       :key_cryptogram,
+      :diffie_hellman_tr_31_key_block,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -809,6 +960,7 @@ module Aws::PaymentCryptography
       class Tr31KeyBlock < ImportKeyMaterial; end
       class Tr34KeyBlock < ImportKeyMaterial; end
       class KeyCryptogram < ImportKeyMaterial; end
+      class DiffieHellmanTr31KeyBlock < ImportKeyMaterial; end
       class Unknown < ImportKeyMaterial; end
     end
 
@@ -988,6 +1140,11 @@ module Aws::PaymentCryptography
     #   Payment Cryptography key is deleted.
     #   @return [Time]
     #
+    # @!attribute [rw] derive_key_usage
+    #   The cryptographic usage of an ECDH derived key as deﬁned in section
+    #   A.5.2 of the TR-31 spec.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/Key AWS API Documentation
     #
     class Key < Struct.new(
@@ -1003,7 +1160,8 @@ module Aws::PaymentCryptography
       :usage_start_timestamp,
       :usage_stop_timestamp,
       :delete_pending_timestamp,
-      :delete_timestamp)
+      :delete_timestamp,
+      :derive_key_usage)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.112.0 (2025-03-27)
+------------------
+
+* Feature - This release will enable two features: Firelens log driver, and Execute Command on Batch jobs on ECS. Both features will be passed through to ECS.
+
 1.111.0 (2025-02-26)
 ------------------
 

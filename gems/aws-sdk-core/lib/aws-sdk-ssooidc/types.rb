@@ -53,6 +53,25 @@ module Aws::SSOOIDC
       include Aws::Structure
     end
 
+    # This structure contains Amazon Web Services-specific parameter
+    # extensions for the token endpoint responses and includes the identity
+    # context.
+    #
+    # @!attribute [rw] identity_context
+    #   STS context assertion that carries a user identifier to the Amazon
+    #   Web Services service that it calls and can be used to obtain an
+    #   identity-enhanced IAM role session. This value corresponds to the
+    #   `sts:identity_context` claim in the ID token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-oidc-2019-06-10/AwsAdditionalDetails AWS API Documentation
+    #
+    class AwsAdditionalDetails < Struct.new(
+      :identity_context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] client_id
     #   The unique identifier string for the client or application. This
     #   value comes from the result of the RegisterClient API.
@@ -356,6 +375,13 @@ module Aws::SSOOIDC
     #   token that is issued is limited to the scopes that are granted.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] aws_additional_details
+    #   A structure containing information from the `idToken`. Only the
+    #   `identityContext` is in it, which is a value extracted from the
+    #   `idToken`. This provides direct access to identity information
+    #   without requiring JWT parsing.
+    #   @return [Types::AwsAdditionalDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-oidc-2019-06-10/CreateTokenWithIAMResponse AWS API Documentation
     #
     class CreateTokenWithIAMResponse < Struct.new(
@@ -365,7 +391,8 @@ module Aws::SSOOIDC
       :refresh_token,
       :id_token,
       :issued_token_type,
-      :scope)
+      :scope,
+      :aws_additional_details)
       SENSITIVE = [:access_token, :refresh_token, :id_token]
       include Aws::Structure
     end

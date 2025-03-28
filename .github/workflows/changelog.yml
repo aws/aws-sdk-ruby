@@ -10,13 +10,13 @@ jobs:
     steps:
       - name: Get changed files
         id: changed-files
-        uses: tj-actions/changed-files@0fee5fb278312d962ff465bb38dc4cae9f446de2
+        uses: tj-actions/changed-files@27ae6b33eaed7bf87272fdeb9f1c54f9facc9d99
         with:
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Comment on PR
         if: ${{!contains(steps.changed-files.outputs.all_changed_files, 'gems/aws-sdk-core/CHANGELOG.md')}}
         uses: thollander/actions-comment-pull-request@main
         with:
           message: 'You have made a change to core without a corresponding change to the CHANGELOG.md. This change will not result in a new version and will not published unless an entry is added to CHANGELOG.md.'
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}

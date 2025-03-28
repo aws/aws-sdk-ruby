@@ -93,6 +93,19 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class AmazonQInQuickSightConsoleConfigurations
+      attr_accessor data_qn_a: Types::DataQnAConfigurations
+      attr_accessor generative_authoring: Types::GenerativeAuthoringConfigurations
+      attr_accessor executive_summary: Types::ExecutiveSummaryConfigurations
+      attr_accessor data_stories: Types::DataStoriesConfigurations
+      SENSITIVE: []
+    end
+
+    class AmazonQInQuickSightDashboardConfigurations
+      attr_accessor executive_summary: Types::ExecutiveSummaryConfigurations
+      SENSITIVE: []
+    end
+
     class Analysis
       attr_accessor analysis_id: ::String
       attr_accessor arn: ::String
@@ -271,7 +284,7 @@ module Aws::QuickSight
 
     class AssetBundleExportJobDataSetOverrideProperties
       attr_accessor arn: ::String
-      attr_accessor properties: ::Array[("Name")]
+      attr_accessor properties: ::Array[("Name" | "RefreshFailureEmailAlertStatus")]
       SENSITIVE: []
     end
 
@@ -380,6 +393,7 @@ module Aws::QuickSight
     class AssetBundleImportJobDataSetOverrideParameters
       attr_accessor data_set_id: ::String
       attr_accessor name: ::String
+      attr_accessor data_set_refresh_properties: Types::DataSetRefreshProperties
       SENSITIVE: []
     end
 
@@ -581,6 +595,8 @@ module Aws::QuickSight
     class AssetOptions
       attr_accessor timezone: ::String
       attr_accessor week_start: ("SUNDAY" | "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY")
+      attr_accessor q_business_insights_status: ("ENABLED" | "DISABLED")
+      attr_accessor excluded_data_set_arns: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -1522,6 +1538,7 @@ module Aws::QuickSight
       attr_accessor dataset_parameters: ::Array[Types::DatasetParameter]
       attr_accessor folder_arns: ::Array[::String]
       attr_accessor performance_configuration: Types::PerformanceConfiguration
+      attr_accessor use_as: ("RLS_RULES")
       SENSITIVE: []
     end
 
@@ -2008,6 +2025,7 @@ module Aws::QuickSight
       attr_accessor data_point_drill_up_down_option: Types::DataPointDrillUpDownOption
       attr_accessor data_point_menu_label_option: Types::DataPointMenuLabelOption
       attr_accessor data_point_tooltip_option: Types::DataPointTooltipOption
+      attr_accessor data_qa_enabled_option: Types::DataQAEnabledOption
       SENSITIVE: []
     end
 
@@ -2205,6 +2223,16 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class DataQAEnabledOption
+      attr_accessor availability_status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class DataQnAConfigurations
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
     class DataSet
       attr_accessor arn: ::String
       attr_accessor data_set_id: ::String
@@ -2224,6 +2252,7 @@ module Aws::QuickSight
       attr_accessor data_set_usage_configuration: Types::DataSetUsageConfiguration
       attr_accessor dataset_parameters: ::Array[Types::DatasetParameter]
       attr_accessor performance_configuration: Types::PerformanceConfiguration
+      attr_accessor use_as: ("RLS_RULES")
       SENSITIVE: []
     end
 
@@ -2248,6 +2277,7 @@ module Aws::QuickSight
 
     class DataSetRefreshProperties
       attr_accessor refresh_configuration: Types::RefreshConfiguration
+      attr_accessor failure_configuration: Types::RefreshFailureConfiguration
       SENSITIVE: []
     end
 
@@ -2273,6 +2303,7 @@ module Aws::QuickSight
       attr_accessor row_level_permission_data_set: Types::RowLevelPermissionDataSet
       attr_accessor row_level_permission_tag_configuration_applied: bool
       attr_accessor column_level_permission_rules_applied: bool
+      attr_accessor use_as: ("RLS_RULES")
       SENSITIVE: []
     end
 
@@ -2356,6 +2387,11 @@ module Aws::QuickSight
       attr_accessor type: ("ADOBE_ANALYTICS" | "AMAZON_ELASTICSEARCH" | "ATHENA" | "AURORA" | "AURORA_POSTGRESQL" | "AWS_IOT_ANALYTICS" | "GITHUB" | "JIRA" | "MARIADB" | "MYSQL" | "ORACLE" | "POSTGRESQL" | "PRESTO" | "REDSHIFT" | "S3" | "SALESFORCE" | "SERVICENOW" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "TWITTER" | "TIMESTREAM" | "AMAZON_OPENSEARCH" | "EXASOL" | "DATABRICKS" | "STARBURST" | "TRINO" | "BIGQUERY")
       attr_accessor created_time: ::Time
       attr_accessor last_updated_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DataStoriesConfigurations
+      attr_accessor enabled: bool
       SENSITIVE: []
     end
 
@@ -3925,6 +3961,11 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class ExecutiveSummaryConfigurations
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
     class ExplicitHierarchy
       attr_accessor hierarchy_id: ::String
       attr_accessor columns: ::Array[Types::ColumnIdentifier]
@@ -4531,6 +4572,11 @@ module Aws::QuickSight
       attr_accessor answer_id: ::String
       attr_accessor question_url: ::String
       SENSITIVE: [:question_text, :restatement]
+    end
+
+    class GenerativeAuthoringConfigurations
+      attr_accessor enabled: bool
+      SENSITIVE: []
     end
 
     class GeoSpatialColumnGroup
@@ -6389,6 +6435,7 @@ module Aws::QuickSight
       attr_accessor host: ::String
       attr_accessor port: ::Integer
       attr_accessor database: ::String
+      attr_accessor use_service_name: bool
       SENSITIVE: []
     end
 
@@ -7009,6 +7056,11 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class RecentSnapshotsConfigurations
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
     class RedshiftIAMParameters
       attr_accessor role_arn: ::String
       attr_accessor database_user: ::String
@@ -7087,6 +7139,16 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class RefreshFailureConfiguration
+      attr_accessor email_alert: Types::RefreshFailureEmailAlert
+      SENSITIVE: []
+    end
+
+    class RefreshFailureEmailAlert
+      attr_accessor alert_status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
     class RefreshFrequency
       attr_accessor interval: ("MINUTE15" | "MINUTE30" | "HOURLY" | "DAILY" | "WEEKLY" | "MONTHLY")
       attr_accessor refresh_on_day: Types::ScheduleRefreshOnEntity
@@ -7138,6 +7200,10 @@ module Aws::QuickSight
     class RegisteredUserConsoleFeatureConfigurations
       attr_accessor state_persistence: Types::StatePersistenceConfigurations
       attr_accessor shared_view: Types::SharedViewConfigurations
+      attr_accessor amazon_q_in_quick_sight: Types::AmazonQInQuickSightConsoleConfigurations
+      attr_accessor schedules: Types::SchedulesConfigurations
+      attr_accessor recent_snapshots: Types::RecentSnapshotsConfigurations
+      attr_accessor threshold_alerts: Types::ThresholdAlertsConfigurations
       SENSITIVE: []
     end
 
@@ -7151,6 +7217,10 @@ module Aws::QuickSight
       attr_accessor state_persistence: Types::StatePersistenceConfigurations
       attr_accessor shared_view: Types::SharedViewConfigurations
       attr_accessor bookmarks: Types::BookmarksConfigurations
+      attr_accessor amazon_q_in_quick_sight: Types::AmazonQInQuickSightDashboardConfigurations
+      attr_accessor schedules: Types::SchedulesConfigurations
+      attr_accessor recent_snapshots: Types::RecentSnapshotsConfigurations
+      attr_accessor threshold_alerts: Types::ThresholdAlertsConfigurations
       SENSITIVE: []
     end
 
@@ -7429,6 +7499,11 @@ module Aws::QuickSight
     class ScheduleRefreshOnEntity
       attr_accessor day_of_week: ("SUNDAY" | "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY")
       attr_accessor day_of_month: ::String
+      SENSITIVE: []
+    end
+
+    class SchedulesConfigurations
+      attr_accessor enabled: bool
       SENSITIVE: []
     end
 
@@ -8235,6 +8310,7 @@ module Aws::QuickSight
       attr_accessor selected_field_options: ::Array[Types::TableFieldOption]
       attr_accessor order: ::Array[::String]
       attr_accessor pinned_field_options: Types::TablePinnedFieldOptions
+      attr_accessor transposed_table_options: ::Array[Types::TransposedTableOption]
       SENSITIVE: []
     end
 
@@ -8528,6 +8604,11 @@ module Aws::QuickSight
       attr_accessor symbol: ("COMMA" | "DOT" | "SPACE")
       attr_accessor visibility: ("HIDDEN" | "VISIBLE")
       attr_accessor grouping_style: ("DEFAULT" | "LAKHS")
+      SENSITIVE: []
+    end
+
+    class ThresholdAlertsConfigurations
+      attr_accessor enabled: bool
       SENSITIVE: []
     end
 
@@ -8964,6 +9045,13 @@ module Aws::QuickSight
       attr_accessor tag_column_operation: Types::TagColumnOperation
       attr_accessor untag_column_operation: Types::UntagColumnOperation
       attr_accessor override_dataset_parameter_operation: Types::OverrideDatasetParameterOperation
+      SENSITIVE: []
+    end
+
+    class TransposedTableOption
+      attr_accessor column_index: ::Integer
+      attr_accessor column_width: ::String
+      attr_accessor column_type: ("ROW_HEADER_COLUMN" | "VALUE_COLUMN")
       SENSITIVE: []
     end
 

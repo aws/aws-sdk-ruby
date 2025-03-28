@@ -514,8 +514,7 @@ module Aws::Keyspaces
     #   * `regionList` - if the `replicationStrategy` is `MULTI_REGION`, the
     #     `regionList` requires the current Region and at least one additional
     #     Amazon Web Services Region where the keyspace is going to be
-    #     replicated in. The maximum number of supported replication Regions
-    #     including the current Region is six.
+    #     replicated in.
     #
     # @return [Types::CreateKeyspaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1925,8 +1924,8 @@ module Aws::Keyspaces
     # @option params [required, Types::ReplicationSpecification] :replication_specification
     #   The replication specification of the keyspace includes:
     #
-    #   * `regionList` - up to six Amazon Web Services Regions where the
-    #     keyspace is replicated in.
+    #   * `regionList` - the Amazon Web Services Regions where the keyspace is
+    #     replicated in.
     #
     #   * `replicationStrategy` - the required value is `SINGLE_REGION` or
     #     `MULTI_REGION`.
@@ -2226,7 +2225,7 @@ module Aws::Keyspaces
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-keyspaces'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -947,6 +947,7 @@ module Aws::SSM
     PatchAdvisoryId = Shapes::StringShape.new(name: 'PatchAdvisoryId')
     PatchAdvisoryIdList = Shapes::ListShape.new(name: 'PatchAdvisoryIdList')
     PatchArch = Shapes::StringShape.new(name: 'PatchArch')
+    PatchAvailableSecurityUpdateCount = Shapes::IntegerShape.new(name: 'PatchAvailableSecurityUpdateCount')
     PatchBaselineIdentity = Shapes::StructureShape.new(name: 'PatchBaselineIdentity')
     PatchBaselineIdentityList = Shapes::ListShape.new(name: 'PatchBaselineIdentityList')
     PatchBaselineMaxResults = Shapes::IntegerShape.new(name: 'PatchBaselineMaxResults')
@@ -961,6 +962,7 @@ module Aws::SSM
     PatchComplianceDataState = Shapes::StringShape.new(name: 'PatchComplianceDataState')
     PatchComplianceLevel = Shapes::StringShape.new(name: 'PatchComplianceLevel')
     PatchComplianceMaxResults = Shapes::IntegerShape.new(name: 'PatchComplianceMaxResults')
+    PatchComplianceStatus = Shapes::StringShape.new(name: 'PatchComplianceStatus')
     PatchContentUrl = Shapes::StringShape.new(name: 'PatchContentUrl')
     PatchCriticalNonCompliantCount = Shapes::IntegerShape.new(name: 'PatchCriticalNonCompliantCount')
     PatchDeploymentStatus = Shapes::StringShape.new(name: 'PatchDeploymentStatus')
@@ -1644,6 +1646,7 @@ module Aws::SSM
     BaselineOverride.add_member(:rejected_patches_action, Shapes::ShapeRef.new(shape: PatchAction, location_name: "RejectedPatchesAction"))
     BaselineOverride.add_member(:approved_patches_enable_non_security, Shapes::ShapeRef.new(shape: Boolean, location_name: "ApprovedPatchesEnableNonSecurity"))
     BaselineOverride.add_member(:sources, Shapes::ShapeRef.new(shape: PatchSourceList, location_name: "Sources"))
+    BaselineOverride.add_member(:available_security_updates_compliance_status, Shapes::ShapeRef.new(shape: PatchComplianceStatus, location_name: "AvailableSecurityUpdatesComplianceStatus"))
     BaselineOverride.struct_class = Types::BaselineOverride
 
     CalendarNameOrARNList.member = Shapes::ShapeRef.new(shape: CalendarNameOrARN)
@@ -1940,6 +1943,7 @@ module Aws::SSM
     CreatePatchBaselineRequest.add_member(:rejected_patches_action, Shapes::ShapeRef.new(shape: PatchAction, location_name: "RejectedPatchesAction"))
     CreatePatchBaselineRequest.add_member(:description, Shapes::ShapeRef.new(shape: BaselineDescription, location_name: "Description"))
     CreatePatchBaselineRequest.add_member(:sources, Shapes::ShapeRef.new(shape: PatchSourceList, location_name: "Sources"))
+    CreatePatchBaselineRequest.add_member(:available_security_updates_compliance_status, Shapes::ShapeRef.new(shape: PatchComplianceStatus, location_name: "AvailableSecurityUpdatesComplianceStatus"))
     CreatePatchBaselineRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreatePatchBaselineRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreatePatchBaselineRequest.struct_class = Types::CreatePatchBaselineRequest
@@ -2370,6 +2374,7 @@ module Aws::SSM
     DescribePatchGroupStateResult.add_member(:instances_with_critical_non_compliant_patches, Shapes::ShapeRef.new(shape: InstancesCount, location_name: "InstancesWithCriticalNonCompliantPatches", metadata: {"box"=>true}))
     DescribePatchGroupStateResult.add_member(:instances_with_security_non_compliant_patches, Shapes::ShapeRef.new(shape: InstancesCount, location_name: "InstancesWithSecurityNonCompliantPatches", metadata: {"box"=>true}))
     DescribePatchGroupStateResult.add_member(:instances_with_other_non_compliant_patches, Shapes::ShapeRef.new(shape: InstancesCount, location_name: "InstancesWithOtherNonCompliantPatches", metadata: {"box"=>true}))
+    DescribePatchGroupStateResult.add_member(:instances_with_available_security_updates, Shapes::ShapeRef.new(shape: Integer, location_name: "InstancesWithAvailableSecurityUpdates", metadata: {"box"=>true}))
     DescribePatchGroupStateResult.struct_class = Types::DescribePatchGroupStateResult
 
     DescribePatchGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PatchBaselineMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
@@ -2891,6 +2896,7 @@ module Aws::SSM
     GetPatchBaselineResult.add_member(:modified_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "ModifiedDate"))
     GetPatchBaselineResult.add_member(:description, Shapes::ShapeRef.new(shape: BaselineDescription, location_name: "Description"))
     GetPatchBaselineResult.add_member(:sources, Shapes::ShapeRef.new(shape: PatchSourceList, location_name: "Sources"))
+    GetPatchBaselineResult.add_member(:available_security_updates_compliance_status, Shapes::ShapeRef.new(shape: PatchComplianceStatus, location_name: "AvailableSecurityUpdatesComplianceStatus"))
     GetPatchBaselineResult.struct_class = Types::GetPatchBaselineResult
 
     GetResourcePoliciesRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "ResourceArn"))
@@ -3031,6 +3037,7 @@ module Aws::SSM
     InstancePatchState.add_member(:failed_count, Shapes::ShapeRef.new(shape: PatchFailedCount, location_name: "FailedCount"))
     InstancePatchState.add_member(:unreported_not_applicable_count, Shapes::ShapeRef.new(shape: PatchUnreportedNotApplicableCount, location_name: "UnreportedNotApplicableCount", metadata: {"box"=>true}))
     InstancePatchState.add_member(:not_applicable_count, Shapes::ShapeRef.new(shape: PatchNotApplicableCount, location_name: "NotApplicableCount"))
+    InstancePatchState.add_member(:available_security_update_count, Shapes::ShapeRef.new(shape: PatchAvailableSecurityUpdateCount, location_name: "AvailableSecurityUpdateCount", metadata: {"box"=>true}))
     InstancePatchState.add_member(:operation_start_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "OperationStartTime"))
     InstancePatchState.add_member(:operation_end_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "OperationEndTime"))
     InstancePatchState.add_member(:operation, Shapes::ShapeRef.new(shape: PatchOperationType, required: true, location_name: "Operation"))
@@ -4986,6 +4993,7 @@ module Aws::SSM
     UpdatePatchBaselineRequest.add_member(:rejected_patches_action, Shapes::ShapeRef.new(shape: PatchAction, location_name: "RejectedPatchesAction"))
     UpdatePatchBaselineRequest.add_member(:description, Shapes::ShapeRef.new(shape: BaselineDescription, location_name: "Description"))
     UpdatePatchBaselineRequest.add_member(:sources, Shapes::ShapeRef.new(shape: PatchSourceList, location_name: "Sources"))
+    UpdatePatchBaselineRequest.add_member(:available_security_updates_compliance_status, Shapes::ShapeRef.new(shape: PatchComplianceStatus, location_name: "AvailableSecurityUpdatesComplianceStatus"))
     UpdatePatchBaselineRequest.add_member(:replace, Shapes::ShapeRef.new(shape: Boolean, location_name: "Replace", metadata: {"box"=>true}))
     UpdatePatchBaselineRequest.struct_class = Types::UpdatePatchBaselineRequest
 
@@ -5003,6 +5011,7 @@ module Aws::SSM
     UpdatePatchBaselineResult.add_member(:modified_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "ModifiedDate"))
     UpdatePatchBaselineResult.add_member(:description, Shapes::ShapeRef.new(shape: BaselineDescription, location_name: "Description"))
     UpdatePatchBaselineResult.add_member(:sources, Shapes::ShapeRef.new(shape: PatchSourceList, location_name: "Sources"))
+    UpdatePatchBaselineResult.add_member(:available_security_updates_compliance_status, Shapes::ShapeRef.new(shape: PatchComplianceStatus, location_name: "AvailableSecurityUpdatesComplianceStatus"))
     UpdatePatchBaselineResult.struct_class = Types::UpdatePatchBaselineResult
 
     UpdateResourceDataSyncRequest.add_member(:sync_name, Shapes::ShapeRef.new(shape: ResourceDataSyncName, required: true, location_name: "SyncName"))

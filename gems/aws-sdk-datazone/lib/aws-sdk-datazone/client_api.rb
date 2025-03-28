@@ -854,6 +854,7 @@ module Aws::DataZone
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     ShortDescription = Shapes::StringShape.new(name: 'ShortDescription')
     SingleSignOn = Shapes::StructureShape.new(name: 'SingleSignOn')
+    SingleSignOnIdcInstanceArnString = Shapes::StringShape.new(name: 'SingleSignOnIdcInstanceArnString')
     Smithy = Shapes::StringShape.new(name: 'Smithy')
     SortFieldConnection = Shapes::StringShape.new(name: 'SortFieldConnection')
     SortFieldProject = Shapes::StringShape.new(name: 'SortFieldProject')
@@ -4750,6 +4751,7 @@ module Aws::DataZone
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
+    SingleSignOn.add_member(:idc_instance_arn, Shapes::ShapeRef.new(shape: SingleSignOnIdcInstanceArnString, location_name: "idcInstanceArn"))
     SingleSignOn.add_member(:type, Shapes::ShapeRef.new(shape: AuthType, location_name: "type"))
     SingleSignOn.add_member(:user_assignment, Shapes::ShapeRef.new(shape: UserAssignment, location_name: "userAssignment"))
     SingleSignOn.struct_class = Types::SingleSignOn

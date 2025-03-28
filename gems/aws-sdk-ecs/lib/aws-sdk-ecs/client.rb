@@ -6711,11 +6711,6 @@ module Aws::ECS
     #     You must turn on this setting to use Amazon ECS features such as
     #     resource tagging.
     #
-    #   * `fargateFIPSMode` - When turned on, you can run Fargate workloads in
-    #     a manner that is compliant with Federal Information Processing
-    #     Standard (FIPS-140). For more information, see [Fargate Federal
-    #     Information Processing Standard (FIPS-140)][1].
-    #
     #   * `containerInstanceLongArnFormat` - When modified, the Amazon
     #     Resource Name (ARN) and resource ID format of the resource type for
     #     a specified user, role, or the root user for an account is affected.
@@ -6730,7 +6725,7 @@ module Aws::ECS
     #     is changed. If `awsvpcTrunking` is turned on, any new container
     #     instances that support the feature are launched have the increased
     #     ENI limits available to them. For more information, see [Elastic
-    #     Network Interface Trunking][2] in the *Amazon Elastic Container
+    #     Network Interface Trunking][1] in the *Amazon Elastic Container
     #     Service Developer Guide*.
     #
     #   * `containerInsights` - Container Insights with enhanced observability
@@ -6751,15 +6746,15 @@ module Aws::ECS
     #     setting to `enabled`.
     #
     #     For more information, see [Monitor Amazon ECS containers using
-    #     Container Insights with enhanced observability][3] in the *Amazon
+    #     Container Insights with enhanced observability][2] in the *Amazon
     #     Elastic Container Service Developer Guide*.
     #
     #   * `dualStackIPv6` - When turned on, when using a VPC in dual stack
     #     mode, your tasks using the `awsvpc` network mode can have an IPv6
     #     address assigned. For more information on using IPv6 with tasks
     #     launched on Amazon EC2 instances, see [Using a VPC in dual-stack
-    #     mode][4]. For more information on using IPv6 with tasks launched on
-    #     Fargate, see [Using a VPC in dual-stack mode][5].
+    #     mode][3]. For more information on using IPv6 with tasks launched on
+    #     Fargate, see [Using a VPC in dual-stack mode][4].
     #
     #   * `fargateTaskRetirementWaitPeriod` - When Amazon Web Services
     #     determines that a security or infrastructure update is needed for an
@@ -6767,7 +6762,7 @@ module Aws::ECS
     #     new tasks launched to replace them. Use
     #     `fargateTaskRetirementWaitPeriod` to configure the wait time to
     #     retire a Fargate task. For information about the Fargate tasks
-    #     maintenance, see [Amazon Web Services Fargate task maintenance][6]
+    #     maintenance, see [Amazon Web Services Fargate task maintenance][5]
     #     in the *Amazon ECS Developer Guide*.
     #
     #   * `tagResourceAuthorization` - Amazon ECS is introducing tagging
@@ -6777,7 +6772,7 @@ module Aws::ECS
     #     performs additional authorization to verify if users or roles have
     #     permissions to create tags. Therefore, you must grant explicit
     #     permissions to use the `ecs:TagResource` action. For more
-    #     information, see [Grant permission to tag resources on creation][7]
+    #     information, see [Grant permission to tag resources on creation][6]
     #     in the *Amazon ECS Developer Guide*.
     #
     #   * `guardDutyActivate` - The `guardDutyActivate` parameter is read-only
@@ -6785,18 +6780,17 @@ module Aws::ECS
     #     enabled or disabled by your security administrator in your Amazon
     #     ECS account. Amazon GuardDuty controls this account setting on your
     #     behalf. For more information, see [Protecting Amazon ECS workloads
-    #     with Amazon ECS Runtime Monitoring][8].
+    #     with Amazon ECS Runtime Monitoring][7].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-fips-compliance.html
-    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-eni.html
-    #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cloudwatch-container-insights.html
-    #   [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking-awsvpc.html#task-networking-vpc-dual-stack
-    #   [5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-task-networking.html#fargate-task-networking-vpc-dual-stack
-    #   [6]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-maintenance.html
-    #   [7]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/supported-iam-actions-tagging.html
-    #   [8]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-guard-duty-integration.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-eni.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cloudwatch-container-insights.html
+    #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking-awsvpc.html#task-networking-vpc-dual-stack
+    #   [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-task-networking.html#fargate-task-networking-vpc-dual-stack
+    #   [5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-maintenance.html
+    #   [6]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/supported-iam-actions-tagging.html
+    #   [7]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-guard-duty-integration.html
     #
     # @option params [required, String] :value
     #   The account setting value for the specified principal ARN. Accepted
@@ -12448,7 +12442,7 @@ module Aws::ECS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.181.0'
+      context[:gem_version] = '1.182.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -72,7 +72,7 @@ module Seahorse
           end
 
           it 'adds a :enable_alpn option with default' do
-            expect(config.enable_alpn).to eq(false)
+            expect(config.enable_alpn).to eq(true)
           end
 
           it 'defaults the :raise_response_errors to true' do

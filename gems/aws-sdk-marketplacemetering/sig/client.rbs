@@ -88,7 +88,7 @@ module Aws
                                usage_records: Array[
                                  {
                                    timestamp: ::Time,
-                                   customer_identifier: ::String,
+                                   customer_identifier: ::String?,
                                    dimension: ::String,
                                    quantity: ::Integer?,
                                    usage_allocations: Array[
@@ -101,7 +101,8 @@ module Aws
                                          },
                                        ]?
                                      },
-                                   ]?
+                                   ]?,
+                                   customer_aws_account_id: ::String?
                                  },
                                ],
                                product_code: ::String

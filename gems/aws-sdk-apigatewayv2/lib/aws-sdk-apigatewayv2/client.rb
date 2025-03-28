@@ -498,6 +498,9 @@ module Aws::ApiGatewayV2
     #
     # @option params [Boolean] :disable_execute_api_endpoint
     #
+    # @option params [String] :ip_address_type
+    #   The IP address types that can invoke the API.
+    #
     # @option params [required, String] :name
     #   A string with a length between \[1-128\].
     #
@@ -543,6 +546,7 @@ module Aws::ApiGatewayV2
     #   * {Types::CreateApiResponse#disable_schema_validation #disable_schema_validation} => Boolean
     #   * {Types::CreateApiResponse#disable_execute_api_endpoint #disable_execute_api_endpoint} => Boolean
     #   * {Types::CreateApiResponse#import_info #import_info} => Array&lt;String&gt;
+    #   * {Types::CreateApiResponse#ip_address_type #ip_address_type} => String
     #   * {Types::CreateApiResponse#name #name} => String
     #   * {Types::CreateApiResponse#protocol_type #protocol_type} => String
     #   * {Types::CreateApiResponse#route_selection_expression #route_selection_expression} => String
@@ -566,6 +570,7 @@ module Aws::ApiGatewayV2
     #     description: "StringWithLengthBetween0And1024",
     #     disable_schema_validation: false,
     #     disable_execute_api_endpoint: false,
+    #     ip_address_type: "ipv4", # accepts ipv4, dualstack
     #     name: "StringWithLengthBetween1And128", # required
     #     protocol_type: "WEBSOCKET", # required, accepts WEBSOCKET, HTTP
     #     route_key: "SelectionKey",
@@ -599,6 +604,7 @@ module Aws::ApiGatewayV2
     #   resp.disable_execute_api_endpoint #=> Boolean
     #   resp.import_info #=> Array
     #   resp.import_info[0] #=> String
+    #   resp.ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.name #=> String
     #   resp.protocol_type #=> String, one of "WEBSOCKET", "HTTP"
     #   resp.route_selection_expression #=> String
@@ -853,6 +859,7 @@ module Aws::ApiGatewayV2
     #         domain_name_status_message: "__string",
     #         endpoint_type: "REGIONAL", # accepts REGIONAL, EDGE
     #         hosted_zone_id: "__string",
+    #         ip_address_type: "ipv4", # accepts ipv4, dualstack
     #         security_policy: "TLS_1_0", # accepts TLS_1_0, TLS_1_2
     #         ownership_verification_certificate_arn: "Arn",
     #       },
@@ -879,6 +886,7 @@ module Aws::ApiGatewayV2
     #   resp.domain_name_configurations[0].domain_name_status_message #=> String
     #   resp.domain_name_configurations[0].endpoint_type #=> String, one of "REGIONAL", "EDGE"
     #   resp.domain_name_configurations[0].hosted_zone_id #=> String
+    #   resp.domain_name_configurations[0].ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.domain_name_configurations[0].security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
     #   resp.domain_name_configurations[0].ownership_verification_certificate_arn #=> String
     #   resp.mutual_tls_authentication.truststore_uri #=> String
@@ -2057,6 +2065,7 @@ module Aws::ApiGatewayV2
     #   * {Types::GetApiResponse#disable_schema_validation #disable_schema_validation} => Boolean
     #   * {Types::GetApiResponse#disable_execute_api_endpoint #disable_execute_api_endpoint} => Boolean
     #   * {Types::GetApiResponse#import_info #import_info} => Array&lt;String&gt;
+    #   * {Types::GetApiResponse#ip_address_type #ip_address_type} => String
     #   * {Types::GetApiResponse#name #name} => String
     #   * {Types::GetApiResponse#protocol_type #protocol_type} => String
     #   * {Types::GetApiResponse#route_selection_expression #route_selection_expression} => String
@@ -2092,6 +2101,7 @@ module Aws::ApiGatewayV2
     #   resp.disable_execute_api_endpoint #=> Boolean
     #   resp.import_info #=> Array
     #   resp.import_info[0] #=> String
+    #   resp.ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.name #=> String
     #   resp.protocol_type #=> String, one of "WEBSOCKET", "HTTP"
     #   resp.route_selection_expression #=> String
@@ -2220,6 +2230,7 @@ module Aws::ApiGatewayV2
     #   resp.items[0].disable_execute_api_endpoint #=> Boolean
     #   resp.items[0].import_info #=> Array
     #   resp.items[0].import_info[0] #=> String
+    #   resp.items[0].ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.items[0].name #=> String
     #   resp.items[0].protocol_type #=> String, one of "WEBSOCKET", "HTTP"
     #   resp.items[0].route_selection_expression #=> String
@@ -2443,6 +2454,7 @@ module Aws::ApiGatewayV2
     #   resp.domain_name_configurations[0].domain_name_status_message #=> String
     #   resp.domain_name_configurations[0].endpoint_type #=> String, one of "REGIONAL", "EDGE"
     #   resp.domain_name_configurations[0].hosted_zone_id #=> String
+    #   resp.domain_name_configurations[0].ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.domain_name_configurations[0].security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
     #   resp.domain_name_configurations[0].ownership_verification_certificate_arn #=> String
     #   resp.mutual_tls_authentication.truststore_uri #=> String
@@ -2491,6 +2503,7 @@ module Aws::ApiGatewayV2
     #   resp.items[0].domain_name_configurations[0].domain_name_status_message #=> String
     #   resp.items[0].domain_name_configurations[0].endpoint_type #=> String, one of "REGIONAL", "EDGE"
     #   resp.items[0].domain_name_configurations[0].hosted_zone_id #=> String
+    #   resp.items[0].domain_name_configurations[0].ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.items[0].domain_name_configurations[0].security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
     #   resp.items[0].domain_name_configurations[0].ownership_verification_certificate_arn #=> String
     #   resp.items[0].mutual_tls_authentication.truststore_uri #=> String
@@ -3269,6 +3282,7 @@ module Aws::ApiGatewayV2
     #   * {Types::ImportApiResponse#disable_schema_validation #disable_schema_validation} => Boolean
     #   * {Types::ImportApiResponse#disable_execute_api_endpoint #disable_execute_api_endpoint} => Boolean
     #   * {Types::ImportApiResponse#import_info #import_info} => Array&lt;String&gt;
+    #   * {Types::ImportApiResponse#ip_address_type #ip_address_type} => String
     #   * {Types::ImportApiResponse#name #name} => String
     #   * {Types::ImportApiResponse#protocol_type #protocol_type} => String
     #   * {Types::ImportApiResponse#route_selection_expression #route_selection_expression} => String
@@ -3306,6 +3320,7 @@ module Aws::ApiGatewayV2
     #   resp.disable_execute_api_endpoint #=> Boolean
     #   resp.import_info #=> Array
     #   resp.import_info[0] #=> String
+    #   resp.ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.name #=> String
     #   resp.protocol_type #=> String, one of "WEBSOCKET", "HTTP"
     #   resp.route_selection_expression #=> String
@@ -3344,6 +3359,7 @@ module Aws::ApiGatewayV2
     #   * {Types::ReimportApiResponse#disable_schema_validation #disable_schema_validation} => Boolean
     #   * {Types::ReimportApiResponse#disable_execute_api_endpoint #disable_execute_api_endpoint} => Boolean
     #   * {Types::ReimportApiResponse#import_info #import_info} => Array&lt;String&gt;
+    #   * {Types::ReimportApiResponse#ip_address_type #ip_address_type} => String
     #   * {Types::ReimportApiResponse#name #name} => String
     #   * {Types::ReimportApiResponse#protocol_type #protocol_type} => String
     #   * {Types::ReimportApiResponse#route_selection_expression #route_selection_expression} => String
@@ -3382,6 +3398,7 @@ module Aws::ApiGatewayV2
     #   resp.disable_execute_api_endpoint #=> Boolean
     #   resp.import_info #=> Array
     #   resp.import_info[0] #=> String
+    #   resp.ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.name #=> String
     #   resp.protocol_type #=> String, one of "WEBSOCKET", "HTTP"
     #   resp.route_selection_expression #=> String
@@ -3475,6 +3492,9 @@ module Aws::ApiGatewayV2
     #
     # @option params [Boolean] :disable_execute_api_endpoint
     #
+    # @option params [String] :ip_address_type
+    #   The IP address types that can invoke the API.
+    #
     # @option params [String] :name
     #   A string with a length between \[1-128\].
     #
@@ -3514,6 +3534,7 @@ module Aws::ApiGatewayV2
     #   * {Types::UpdateApiResponse#disable_schema_validation #disable_schema_validation} => Boolean
     #   * {Types::UpdateApiResponse#disable_execute_api_endpoint #disable_execute_api_endpoint} => Boolean
     #   * {Types::UpdateApiResponse#import_info #import_info} => Array&lt;String&gt;
+    #   * {Types::UpdateApiResponse#ip_address_type #ip_address_type} => String
     #   * {Types::UpdateApiResponse#name #name} => String
     #   * {Types::UpdateApiResponse#protocol_type #protocol_type} => String
     #   * {Types::UpdateApiResponse#route_selection_expression #route_selection_expression} => String
@@ -3538,6 +3559,7 @@ module Aws::ApiGatewayV2
     #     description: "StringWithLengthBetween0And1024",
     #     disable_schema_validation: false,
     #     disable_execute_api_endpoint: false,
+    #     ip_address_type: "ipv4", # accepts ipv4, dualstack
     #     name: "StringWithLengthBetween1And128",
     #     route_key: "SelectionKey",
     #     route_selection_expression: "SelectionExpression",
@@ -3567,6 +3589,7 @@ module Aws::ApiGatewayV2
     #   resp.disable_execute_api_endpoint #=> Boolean
     #   resp.import_info #=> Array
     #   resp.import_info[0] #=> String
+    #   resp.ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.name #=> String
     #   resp.protocol_type #=> String, one of "WEBSOCKET", "HTTP"
     #   resp.route_selection_expression #=> String
@@ -3822,6 +3845,7 @@ module Aws::ApiGatewayV2
     #         domain_name_status_message: "__string",
     #         endpoint_type: "REGIONAL", # accepts REGIONAL, EDGE
     #         hosted_zone_id: "__string",
+    #         ip_address_type: "ipv4", # accepts ipv4, dualstack
     #         security_policy: "TLS_1_0", # accepts TLS_1_0, TLS_1_2
     #         ownership_verification_certificate_arn: "Arn",
     #       },
@@ -3845,6 +3869,7 @@ module Aws::ApiGatewayV2
     #   resp.domain_name_configurations[0].domain_name_status_message #=> String
     #   resp.domain_name_configurations[0].endpoint_type #=> String, one of "REGIONAL", "EDGE"
     #   resp.domain_name_configurations[0].hosted_zone_id #=> String
+    #   resp.domain_name_configurations[0].ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.domain_name_configurations[0].security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
     #   resp.domain_name_configurations[0].ownership_verification_certificate_arn #=> String
     #   resp.mutual_tls_authentication.truststore_uri #=> String
@@ -4605,7 +4630,7 @@ module Aws::ApiGatewayV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-apigatewayv2'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

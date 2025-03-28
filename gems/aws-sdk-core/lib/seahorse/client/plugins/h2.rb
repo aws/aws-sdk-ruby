@@ -53,10 +53,10 @@ When `true`, SSL peer certificates are verified when establishing a connection.
 When `true`, HTTP2 debug output will be sent to the `:logger`.
         DOCS
 
-        option(:enable_alpn, default: false, doc_type: 'Boolean', docstring: <<-DOCS)
-Set to `true` to enable ALPN in HTTP2 over TLS. Requires Openssl version >= 1.0.2.
-Defaults to false. Note: not all service HTTP2 operations supports ALPN on server
-side, please refer to service documentation.
+        option(:enable_alpn, default: true, doc_type: 'Boolean', docstring: <<-DOCS)
+Set to `false` to disable ALPN in HTTP2 over TLS. ALPN requires Openssl version >= 1.0.2.
+Note: RFC7540 requires HTTP2 to use ALPN over TLS but some
+services may not fully support ALPN and require setting this to `false`.
         DOCS
 
         option(:logger)

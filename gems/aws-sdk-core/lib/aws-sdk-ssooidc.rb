@@ -56,7 +56,7 @@ module Aws::SSOOIDC
   autoload :EndpointProvider, 'aws-sdk-ssooidc/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-ssooidc/endpoints'
 
-  GEM_VERSION = '3.220.1'
+  GEM_VERSION = '3.222.1'
 
 end
 

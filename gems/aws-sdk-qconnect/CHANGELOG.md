@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2025-03-24)
+------------------
+
+* Feature - Provides the correct value for supported model ID.
+
 1.29.0 (2025-02-18)
 ------------------
 

@@ -30,6 +30,7 @@ module Aws::ApiGatewayV2
       attr_accessor disable_schema_validation: bool
       attr_accessor disable_execute_api_endpoint: bool
       attr_accessor import_info: ::Array[::String]
+      attr_accessor ip_address_type: ("ipv4" | "dualstack")
       attr_accessor name: ::String
       attr_accessor protocol_type: ("WEBSOCKET" | "HTTP")
       attr_accessor route_selection_expression: ::String
@@ -147,6 +148,7 @@ module Aws::ApiGatewayV2
       attr_accessor description: ::String
       attr_accessor disable_schema_validation: bool
       attr_accessor disable_execute_api_endpoint: bool
+      attr_accessor ip_address_type: ("ipv4" | "dualstack")
       attr_accessor name: ::String
       attr_accessor protocol_type: ("WEBSOCKET" | "HTTP")
       attr_accessor route_key: ::String
@@ -168,6 +170,7 @@ module Aws::ApiGatewayV2
       attr_accessor disable_schema_validation: bool
       attr_accessor disable_execute_api_endpoint: bool
       attr_accessor import_info: ::Array[::String]
+      attr_accessor ip_address_type: ("ipv4" | "dualstack")
       attr_accessor name: ::String
       attr_accessor protocol_type: ("WEBSOCKET" | "HTTP")
       attr_accessor route_selection_expression: ::String
@@ -676,6 +679,7 @@ module Aws::ApiGatewayV2
       attr_accessor domain_name_status_message: ::String
       attr_accessor endpoint_type: ("REGIONAL" | "EDGE")
       attr_accessor hosted_zone_id: ::String
+      attr_accessor ip_address_type: ("ipv4" | "dualstack")
       attr_accessor security_policy: ("TLS_1_0" | "TLS_1_2")
       attr_accessor ownership_verification_certificate_arn: ::String
       SENSITIVE: []
@@ -751,6 +755,7 @@ module Aws::ApiGatewayV2
       attr_accessor disable_schema_validation: bool
       attr_accessor disable_execute_api_endpoint: bool
       attr_accessor import_info: ::Array[::String]
+      attr_accessor ip_address_type: ("ipv4" | "dualstack")
       attr_accessor name: ::String
       attr_accessor protocol_type: ("WEBSOCKET" | "HTTP")
       attr_accessor route_selection_expression: ::String
@@ -1140,6 +1145,7 @@ module Aws::ApiGatewayV2
       attr_accessor disable_schema_validation: bool
       attr_accessor disable_execute_api_endpoint: bool
       attr_accessor import_info: ::Array[::String]
+      attr_accessor ip_address_type: ("ipv4" | "dualstack")
       attr_accessor name: ::String
       attr_accessor protocol_type: ("WEBSOCKET" | "HTTP")
       attr_accessor route_selection_expression: ::String
@@ -1270,6 +1276,7 @@ module Aws::ApiGatewayV2
       attr_accessor disable_schema_validation: bool
       attr_accessor disable_execute_api_endpoint: bool
       attr_accessor import_info: ::Array[::String]
+      attr_accessor ip_address_type: ("ipv4" | "dualstack")
       attr_accessor name: ::String
       attr_accessor protocol_type: ("WEBSOCKET" | "HTTP")
       attr_accessor route_selection_expression: ::String
@@ -1398,6 +1405,7 @@ module Aws::ApiGatewayV2
       attr_accessor description: ::String
       attr_accessor disable_schema_validation: bool
       attr_accessor disable_execute_api_endpoint: bool
+      attr_accessor ip_address_type: ("ipv4" | "dualstack")
       attr_accessor name: ::String
       attr_accessor route_key: ::String
       attr_accessor route_selection_expression: ::String
@@ -1438,6 +1446,7 @@ module Aws::ApiGatewayV2
       attr_accessor description: ::String
       attr_accessor disable_schema_validation: bool
       attr_accessor disable_execute_api_endpoint: bool
+      attr_accessor ip_address_type: ("ipv4" | "dualstack")
       attr_accessor name: ::String
       attr_accessor route_key: ::String
       attr_accessor route_selection_expression: ::String
@@ -1457,6 +1466,7 @@ module Aws::ApiGatewayV2
       attr_accessor disable_schema_validation: bool
       attr_accessor disable_execute_api_endpoint: bool
       attr_accessor import_info: ::Array[::String]
+      attr_accessor ip_address_type: ("ipv4" | "dualstack")
       attr_accessor name: ::String
       attr_accessor protocol_type: ("WEBSOCKET" | "HTTP")
       attr_accessor route_selection_expression: ::String

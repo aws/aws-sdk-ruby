@@ -1,7 +1,31 @@
 Unreleased Changes
 ------------------
 
-Issue - Additional metrics collection for credentials in the User-Agent plugin.
+* Issue - Additional metrics collection for credentials in the User-Agent plugin.
+
+3.222.1 (2025-03-28)
+------------------
+
+* Issue - Allow explicit modeled headers to override prefixed headers for `rest` protocols. 
+
+3.222.0 (2025-03-27)
+------------------
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - This release adds AwsAdditionalDetails in the CreateTokenWithIAM API response.
+
+3.221.0 (2025-03-24)
+------------------
+
+* Feature - Add `logger` as an explicit dependency for Ruby 3.5.
+* Issue - Enable ALPN over TLS for H2 Connection by default.
+* Issue - Fix HTTP-2 connections to properly use config values configured on the client.
+
+3.220.2 (2025-03-20)
+------------------
+
+* Issue - Enable ALPN over TLS for H2 by default.
 
 3.220.1 (2025-03-06)
 ------------------

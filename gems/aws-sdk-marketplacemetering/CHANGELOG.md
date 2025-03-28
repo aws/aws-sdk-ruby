@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2025-03-28)
+------------------
+
+* Feature - Add support for Marketplace Metering Service dual-stack endpoints.
+
+1.76.0 (2025-03-25)
+------------------
+
+* Feature - This release enhances the BatchMeterUsage API to support new field CustomerAWSAccountId in request and response and making CustomerIdentifier optional. CustomerAWSAccountId or CustomerIdentifier must be provided in request but not both.
+
 1.75.0 (2025-02-18)
 ------------------
 

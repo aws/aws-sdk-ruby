@@ -248,6 +248,7 @@ module Aws
                                 ?regional_certificate_arn: ::String,
                                 ?endpoint_configuration: {
                                   types: Array[("REGIONAL" | "EDGE" | "PRIVATE")]?,
+                                  ip_address_type: ("ipv4" | "dualstack")?,
                                   vpc_endpoint_ids: Array[::String]?
                                 },
                                 ?tags: Hash[::String, ::String],
@@ -356,6 +357,7 @@ module Aws
                              ?api_key_source: ("HEADER" | "AUTHORIZER"),
                              ?endpoint_configuration: {
                                types: Array[("REGIONAL" | "EDGE" | "PRIVATE")]?,
+                               ip_address_type: ("ipv4" | "dualstack")?,
                                vpc_endpoint_ids: Array[::String]?
                              },
                              ?policy: ::String,

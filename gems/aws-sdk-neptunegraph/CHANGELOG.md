@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2025-03-19)
+------------------
+
+* Feature - Update IAM Role ARN Validation to Support Role Paths
+
 1.30.0 (2025-03-07)
 ------------------
 

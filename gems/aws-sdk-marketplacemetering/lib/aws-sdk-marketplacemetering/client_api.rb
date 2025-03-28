@@ -164,10 +164,11 @@ module Aws::MarketplaceMetering
     UsageAllocations.member = Shapes::ShapeRef.new(shape: UsageAllocation)
 
     UsageRecord.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "Timestamp"))
-    UsageRecord.add_member(:customer_identifier, Shapes::ShapeRef.new(shape: CustomerIdentifier, required: true, location_name: "CustomerIdentifier"))
+    UsageRecord.add_member(:customer_identifier, Shapes::ShapeRef.new(shape: CustomerIdentifier, location_name: "CustomerIdentifier"))
     UsageRecord.add_member(:dimension, Shapes::ShapeRef.new(shape: UsageDimension, required: true, location_name: "Dimension"))
     UsageRecord.add_member(:quantity, Shapes::ShapeRef.new(shape: UsageQuantity, location_name: "Quantity"))
     UsageRecord.add_member(:usage_allocations, Shapes::ShapeRef.new(shape: UsageAllocations, location_name: "UsageAllocations"))
+    UsageRecord.add_member(:customer_aws_account_id, Shapes::ShapeRef.new(shape: CustomerAWSAccountId, location_name: "CustomerAWSAccountId"))
     UsageRecord.struct_class = Types::UsageRecord
 
     UsageRecordList.member = Shapes::ShapeRef.new(shape: UsageRecord)

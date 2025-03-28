@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2025-03-28)
+------------------
+
+* Feature - Launching Multi-modality Content Filter for Amazon Bedrock Guardrails.
+
 1.40.0 (2025-03-05)
 ------------------
 

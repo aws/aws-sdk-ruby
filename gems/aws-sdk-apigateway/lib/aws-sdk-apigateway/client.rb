@@ -963,7 +963,7 @@ module Aws::APIGateway
     #
     # @option params [Types::EndpointConfiguration] :endpoint_configuration
     #   The endpoint configuration of this DomainName showing the endpoint
-    #   types of the domain name.
+    #   types and IP address types of the domain name.
     #
     # @option params [Hash<String,String>] :tags
     #   The key-value map of strings. The valid character set is
@@ -1028,6 +1028,7 @@ module Aws::APIGateway
     #     regional_certificate_arn: "String",
     #     endpoint_configuration: {
     #       types: ["REGIONAL"], # accepts REGIONAL, EDGE, PRIVATE
+    #       ip_address_type: "ipv4", # accepts ipv4, dualstack
     #       vpc_endpoint_ids: ["String"],
     #     },
     #     tags: {
@@ -1058,6 +1059,7 @@ module Aws::APIGateway
     #   resp.distribution_hosted_zone_id #=> String
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
+    #   resp.endpoint_configuration.ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.endpoint_configuration.vpc_endpoint_ids #=> Array
     #   resp.endpoint_configuration.vpc_endpoint_ids[0] #=> String
     #   resp.domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING", "PENDING_CERTIFICATE_REIMPORT", "PENDING_OWNERSHIP_VERIFICATION"
@@ -1350,7 +1352,7 @@ module Aws::APIGateway
     #
     # @option params [Types::EndpointConfiguration] :endpoint_configuration
     #   The endpoint configuration of this RestApi showing the endpoint types
-    #   of the API.
+    #   and IP address types of the API.
     #
     # @option params [String] :policy
     #   A stringified JSON policy document that applies to this RestApi
@@ -1397,6 +1399,7 @@ module Aws::APIGateway
     #     api_key_source: "HEADER", # accepts HEADER, AUTHORIZER
     #     endpoint_configuration: {
     #       types: ["REGIONAL"], # accepts REGIONAL, EDGE, PRIVATE
+    #       ip_address_type: "ipv4", # accepts ipv4, dualstack
     #       vpc_endpoint_ids: ["String"],
     #     },
     #     policy: "String",
@@ -1421,6 +1424,7 @@ module Aws::APIGateway
     #   resp.api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
+    #   resp.endpoint_configuration.ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.endpoint_configuration.vpc_endpoint_ids #=> Array
     #   resp.endpoint_configuration.vpc_endpoint_ids[0] #=> String
     #   resp.policy #=> String
@@ -3147,6 +3151,7 @@ module Aws::APIGateway
     #   resp.distribution_hosted_zone_id #=> String
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
+    #   resp.endpoint_configuration.ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.endpoint_configuration.vpc_endpoint_ids #=> Array
     #   resp.endpoint_configuration.vpc_endpoint_ids[0] #=> String
     #   resp.domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING", "PENDING_CERTIFICATE_REIMPORT", "PENDING_OWNERSHIP_VERIFICATION"
@@ -3260,6 +3265,7 @@ module Aws::APIGateway
     #   resp.items[0].distribution_hosted_zone_id #=> String
     #   resp.items[0].endpoint_configuration.types #=> Array
     #   resp.items[0].endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
+    #   resp.items[0].endpoint_configuration.ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.items[0].endpoint_configuration.vpc_endpoint_ids #=> Array
     #   resp.items[0].endpoint_configuration.vpc_endpoint_ids[0] #=> String
     #   resp.items[0].domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING", "PENDING_CERTIFICATE_REIMPORT", "PENDING_OWNERSHIP_VERIFICATION"
@@ -4109,6 +4115,7 @@ module Aws::APIGateway
     #   resp.api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
+    #   resp.endpoint_configuration.ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.endpoint_configuration.vpc_endpoint_ids #=> Array
     #   resp.endpoint_configuration.vpc_endpoint_ids[0] #=> String
     #   resp.policy #=> String
@@ -4164,6 +4171,7 @@ module Aws::APIGateway
     #   resp.items[0].api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.items[0].endpoint_configuration.types #=> Array
     #   resp.items[0].endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
+    #   resp.items[0].endpoint_configuration.ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.items[0].endpoint_configuration.vpc_endpoint_ids #=> Array
     #   resp.items[0].endpoint_configuration.vpc_endpoint_ids[0] #=> String
     #   resp.items[0].policy #=> String
@@ -4991,6 +4999,7 @@ module Aws::APIGateway
     #   resp.api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
+    #   resp.endpoint_configuration.ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.endpoint_configuration.vpc_endpoint_ids #=> Array
     #   resp.endpoint_configuration.vpc_endpoint_ids[0] #=> String
     #   resp.policy #=> String
@@ -5630,6 +5639,7 @@ module Aws::APIGateway
     #   resp.api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
+    #   resp.endpoint_configuration.ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.endpoint_configuration.vpc_endpoint_ids #=> Array
     #   resp.endpoint_configuration.vpc_endpoint_ids[0] #=> String
     #   resp.policy #=> String
@@ -6411,6 +6421,7 @@ module Aws::APIGateway
     #   resp.distribution_hosted_zone_id #=> String
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
+    #   resp.endpoint_configuration.ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.endpoint_configuration.vpc_endpoint_ids #=> Array
     #   resp.endpoint_configuration.vpc_endpoint_ids[0] #=> String
     #   resp.domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING", "PENDING_CERTIFICATE_REIMPORT", "PENDING_OWNERSHIP_VERIFICATION"
@@ -7068,6 +7079,7 @@ module Aws::APIGateway
     #   resp.api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
+    #   resp.endpoint_configuration.ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.endpoint_configuration.vpc_endpoint_ids #=> Array
     #   resp.endpoint_configuration.vpc_endpoint_ids[0] #=> String
     #   resp.policy #=> String
@@ -7377,7 +7389,7 @@ module Aws::APIGateway
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.113.0'
+      context[:gem_version] = '1.114.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

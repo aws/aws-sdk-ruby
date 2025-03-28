@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2025-03-25)
+------------------
+
+* Feature - Adding support for Amazon OpenSearch Managed clusters as a vector database in Knowledge Bases for Amazon Bedrock
+
 1.51.0 (2025-03-10)
 ------------------
 

@@ -163,6 +163,9 @@ module Aws
                                            performance_config: {
                                              latency: ("standard" | "optimized")?
                                            }?
+                                         }?,
+                                         precomputed_inference_source: {
+                                           inference_source_identifier: ::String
                                          }?
                                        },
                                      ]?,
@@ -375,6 +378,14 @@ module Aws
                                                    }]?
                                                }?
                                              }?
+                                           }?
+                                         }?,
+                                         precomputed_rag_source_config: {
+                                           retrieve_source_config: {
+                                             rag_source_identifier: ::String
+                                           }?,
+                                           retrieve_and_generate_source_config: {
+                                             rag_source_identifier: ::String
                                            }?
                                          }?
                                        },
@@ -927,6 +938,7 @@ module Aws
         def model_architecture: () -> ::String
         def model_kms_key_arn: () -> ::String
         def instruct_supported: () -> bool
+        def custom_model_units: () -> Types::CustomModelUnits
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_imported_model-instance_method
       def get_imported_model: (

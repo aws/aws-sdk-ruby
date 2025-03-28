@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2025-03-21)
+------------------
+
+* Feature - A CustomModelUnit(CMU) is an abstract view of the hardware utilization that Bedrock needs to host a a single copy of your custom imported model. Bedrock determines the number of CMUs that a model copy needs when you import the custom model. You can use CMUs to estimate the cost of Inference's.
+
+1.39.0 (2025-03-20)
+------------------
+
+* Feature - With this release, Bedrock Evaluation will now support bring your own inference responses.
+
+1.38.0 (2025-03-19)
+------------------
+
+* Feature - Support custom prompt routers for evaluation jobs
+
 1.37.0 (2025-03-06)
 ------------------
 

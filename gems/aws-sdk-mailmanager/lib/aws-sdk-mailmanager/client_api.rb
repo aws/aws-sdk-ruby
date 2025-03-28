@@ -872,8 +872,10 @@ module Aws::MailManager
     IngressStringExpression.add_member(:values, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "Values"))
     IngressStringExpression.struct_class = Types::IngressStringExpression
 
+    IngressStringToEvaluate.add_member(:analysis, Shapes::ShapeRef.new(shape: IngressAnalysis, location_name: "Analysis"))
     IngressStringToEvaluate.add_member(:attribute, Shapes::ShapeRef.new(shape: IngressStringEmailAttribute, location_name: "Attribute"))
     IngressStringToEvaluate.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    IngressStringToEvaluate.add_member_subclass(:analysis, Types::IngressStringToEvaluate::Analysis)
     IngressStringToEvaluate.add_member_subclass(:attribute, Types::IngressStringToEvaluate::Attribute)
     IngressStringToEvaluate.add_member_subclass(:unknown, Types::IngressStringToEvaluate::Unknown)
     IngressStringToEvaluate.struct_class = Types::IngressStringToEvaluate
@@ -1133,9 +1135,11 @@ module Aws::MailManager
     RuleBooleanExpression.add_member(:operator, Shapes::ShapeRef.new(shape: RuleBooleanOperator, required: true, location_name: "Operator"))
     RuleBooleanExpression.struct_class = Types::RuleBooleanExpression
 
+    RuleBooleanToEvaluate.add_member(:analysis, Shapes::ShapeRef.new(shape: Analysis, location_name: "Analysis"))
     RuleBooleanToEvaluate.add_member(:attribute, Shapes::ShapeRef.new(shape: RuleBooleanEmailAttribute, location_name: "Attribute"))
     RuleBooleanToEvaluate.add_member(:is_in_address_list, Shapes::ShapeRef.new(shape: RuleIsInAddressList, location_name: "IsInAddressList"))
     RuleBooleanToEvaluate.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RuleBooleanToEvaluate.add_member_subclass(:analysis, Types::RuleBooleanToEvaluate::Analysis)
     RuleBooleanToEvaluate.add_member_subclass(:attribute, Types::RuleBooleanToEvaluate::Attribute)
     RuleBooleanToEvaluate.add_member_subclass(:is_in_address_list, Types::RuleBooleanToEvaluate::IsInAddressList)
     RuleBooleanToEvaluate.add_member_subclass(:unknown, Types::RuleBooleanToEvaluate::Unknown)
@@ -1207,9 +1211,11 @@ module Aws::MailManager
 
     RuleStringList.member = Shapes::ShapeRef.new(shape: RuleStringValue)
 
+    RuleStringToEvaluate.add_member(:analysis, Shapes::ShapeRef.new(shape: Analysis, location_name: "Analysis"))
     RuleStringToEvaluate.add_member(:attribute, Shapes::ShapeRef.new(shape: RuleStringEmailAttribute, location_name: "Attribute"))
     RuleStringToEvaluate.add_member(:mime_header_attribute, Shapes::ShapeRef.new(shape: MimeHeaderAttribute, location_name: "MimeHeaderAttribute"))
     RuleStringToEvaluate.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RuleStringToEvaluate.add_member_subclass(:analysis, Types::RuleStringToEvaluate::Analysis)
     RuleStringToEvaluate.add_member_subclass(:attribute, Types::RuleStringToEvaluate::Attribute)
     RuleStringToEvaluate.add_member_subclass(:mime_header_attribute, Types::RuleStringToEvaluate::MimeHeaderAttribute)
     RuleStringToEvaluate.add_member_subclass(:unknown, Types::RuleStringToEvaluate::Unknown)

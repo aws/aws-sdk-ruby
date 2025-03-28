@@ -873,9 +873,9 @@ module Aws::Lambda
     #   @return [Types::EventSourceMappingMetricsConfig]
     #
     # @!attribute [rw] provisioned_poller_config
-    #   (Amazon MSK and self-managed Apache Kafka only) The Provisioned Mode
+    #   (Amazon MSK and self-managed Apache Kafka only) The provisioned mode
     #   configuration for the event source. For more information, see
-    #   [Provisioned Mode][1].
+    #   [provisioned mode][1].
     #
     #
     #
@@ -2078,9 +2078,9 @@ module Aws::Lambda
     #   @return [Types::EventSourceMappingMetricsConfig]
     #
     # @!attribute [rw] provisioned_poller_config
-    #   (Amazon MSK and self-managed Apache Kafka only) The Provisioned Mode
+    #   (Amazon MSK and self-managed Apache Kafka only) The provisioned mode
     #   configuration for the event source. For more information, see
-    #   [Provisioned Mode][1].
+    #   [provisioned mode][1].
     #
     #
     #
@@ -3618,7 +3618,9 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # The request body could not be parsed as JSON.
+    # The request body could not be parsed as JSON, or a request header is
+    # invalid. For example, the 'x-amzn-RequestId' header is not a valid
+    # UUID string.
     #
     # @!attribute [rw] type
     #   The exception type.
@@ -5115,7 +5117,7 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # The [ Provisioned Mode][1] configuration for the event source. Use
+    # The [ provisioned mode][1] configuration for the event source. Use
     # Provisioned Mode to customize the minimum and maximum number of event
     # pollers for your event source. An event poller is a compute unit that
     # provides approximately 5 MBps of throughput.
@@ -6619,9 +6621,9 @@ module Aws::Lambda
     #   @return [Types::EventSourceMappingMetricsConfig]
     #
     # @!attribute [rw] provisioned_poller_config
-    #   (Amazon MSK and self-managed Apache Kafka only) The Provisioned Mode
+    #   (Amazon MSK and self-managed Apache Kafka only) The provisioned mode
     #   configuration for the event source. For more information, see
-    #   [Provisioned Mode][1].
+    #   [provisioned mode][1].
     #
     #
     #

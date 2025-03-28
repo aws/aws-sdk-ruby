@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.148.0 (2025-03-19)
+------------------
+
+* Feature - Add Ruby 3.4 (ruby3.4) support to AWS Lambda.
+
 1.147.0 (2025-02-18)
 ------------------
 

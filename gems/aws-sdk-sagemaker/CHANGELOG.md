@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.298.0 (2025-03-28)
+------------------
+
+* Feature - TransformAmiVersion for Batch Transform and SageMaker Search Service Aggregate Search API Extension
+
+1.297.0 (2025-03-27)
+------------------
+
+* Feature - add: recovery mode for SageMaker Studio apps
+
+1.296.0 (2025-03-25)
+------------------
+
+* Feature - This release adds support for customer-managed KMS keys in Amazon SageMaker Partner AI Apps
+
+1.295.0 (2025-03-21)
+------------------
+
+* Feature - This release does the following: 1.) Adds DurationHours as a required field to the SearchTrainingPlanOfferings action in the SageMaker AI API; 2.) Adds support for G6e instance types for SageMaker AI inference optimization jobs.
+
+1.294.0 (2025-03-19)
+------------------
+
+* Feature - Added support for g6, g6e, m6i, c6i instance types in SageMaker Processing Jobs.
+
 1.293.0 (2025-03-03)
 ------------------
 

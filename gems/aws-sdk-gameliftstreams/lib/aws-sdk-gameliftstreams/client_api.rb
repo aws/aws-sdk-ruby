@@ -144,7 +144,7 @@ module Aws::GameLiftStreams
     AddStreamGroupLocationsOutput.add_member(:locations, Shapes::ShapeRef.new(shape: LocationStates, required: true, location_name: "Locations"))
     AddStreamGroupLocationsOutput.struct_class = Types::AddStreamGroupLocationsOutput
 
-    ApplicationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    ApplicationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "Arn"))
     ApplicationSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     ApplicationSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     ApplicationSummary.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
@@ -181,7 +181,7 @@ module Aws::GameLiftStreams
     CreateApplicationOutput.add_member(:application_log_output_uri, Shapes::ShapeRef.new(shape: ApplicationLogOutputUri, location_name: "ApplicationLogOutputUri"))
     CreateApplicationOutput.add_member(:application_log_paths, Shapes::ShapeRef.new(shape: FilePaths, location_name: "ApplicationLogPaths"))
     CreateApplicationOutput.add_member(:application_source_uri, Shapes::ShapeRef.new(shape: ApplicationSourceUri, location_name: "ApplicationSourceUri"))
-    CreateApplicationOutput.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    CreateApplicationOutput.add_member(:arn, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "Arn"))
     CreateApplicationOutput.add_member(:associated_stream_groups, Shapes::ShapeRef.new(shape: ArnList, location_name: "AssociatedStreamGroups"))
     CreateApplicationOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     CreateApplicationOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
@@ -202,7 +202,7 @@ module Aws::GameLiftStreams
     CreateStreamGroupInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateStreamGroupInput.struct_class = Types::CreateStreamGroupInput
 
-    CreateStreamGroupOutput.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    CreateStreamGroupOutput.add_member(:arn, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "Arn"))
     CreateStreamGroupOutput.add_member(:associated_applications, Shapes::ShapeRef.new(shape: ArnList, location_name: "AssociatedApplications"))
     CreateStreamGroupOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     CreateStreamGroupOutput.add_member(:default_application, Shapes::ShapeRef.new(shape: DefaultApplication, location_name: "DefaultApplication"))
@@ -267,7 +267,7 @@ module Aws::GameLiftStreams
     GetApplicationOutput.add_member(:application_log_output_uri, Shapes::ShapeRef.new(shape: ApplicationLogOutputUri, location_name: "ApplicationLogOutputUri"))
     GetApplicationOutput.add_member(:application_log_paths, Shapes::ShapeRef.new(shape: FilePaths, location_name: "ApplicationLogPaths"))
     GetApplicationOutput.add_member(:application_source_uri, Shapes::ShapeRef.new(shape: ApplicationSourceUri, location_name: "ApplicationSourceUri"))
-    GetApplicationOutput.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    GetApplicationOutput.add_member(:arn, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "Arn"))
     GetApplicationOutput.add_member(:associated_stream_groups, Shapes::ShapeRef.new(shape: ArnList, location_name: "AssociatedStreamGroups"))
     GetApplicationOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     GetApplicationOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
@@ -283,7 +283,7 @@ module Aws::GameLiftStreams
     GetStreamGroupInput.add_member(:identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "Identifier"))
     GetStreamGroupInput.struct_class = Types::GetStreamGroupInput
 
-    GetStreamGroupOutput.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    GetStreamGroupOutput.add_member(:arn, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "Arn"))
     GetStreamGroupOutput.add_member(:associated_applications, Shapes::ShapeRef.new(shape: ArnList, location_name: "AssociatedApplications"))
     GetStreamGroupOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     GetStreamGroupOutput.add_member(:default_application, Shapes::ShapeRef.new(shape: DefaultApplication, location_name: "DefaultApplication"))
@@ -448,7 +448,7 @@ module Aws::GameLiftStreams
     StartStreamSessionOutput.add_member(:web_sdk_protocol_url, Shapes::ShapeRef.new(shape: WebSdkProtocolUrl, location_name: "WebSdkProtocolUrl"))
     StartStreamSessionOutput.struct_class = Types::StartStreamSessionOutput
 
-    StreamGroupSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    StreamGroupSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "Arn"))
     StreamGroupSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     StreamGroupSummary.add_member(:default_application, Shapes::ShapeRef.new(shape: DefaultApplication, location_name: "DefaultApplication"))
     StreamGroupSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
@@ -506,7 +506,7 @@ module Aws::GameLiftStreams
     UpdateApplicationOutput.add_member(:application_log_output_uri, Shapes::ShapeRef.new(shape: ApplicationLogOutputUri, location_name: "ApplicationLogOutputUri"))
     UpdateApplicationOutput.add_member(:application_log_paths, Shapes::ShapeRef.new(shape: FilePaths, location_name: "ApplicationLogPaths"))
     UpdateApplicationOutput.add_member(:application_source_uri, Shapes::ShapeRef.new(shape: ApplicationSourceUri, location_name: "ApplicationSourceUri"))
-    UpdateApplicationOutput.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    UpdateApplicationOutput.add_member(:arn, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "Arn"))
     UpdateApplicationOutput.add_member(:associated_stream_groups, Shapes::ShapeRef.new(shape: ArnList, location_name: "AssociatedStreamGroups"))
     UpdateApplicationOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     UpdateApplicationOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
@@ -524,7 +524,7 @@ module Aws::GameLiftStreams
     UpdateStreamGroupInput.add_member(:location_configurations, Shapes::ShapeRef.new(shape: LocationConfigurations, location_name: "LocationConfigurations"))
     UpdateStreamGroupInput.struct_class = Types::UpdateStreamGroupInput
 
-    UpdateStreamGroupOutput.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    UpdateStreamGroupOutput.add_member(:arn, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "Arn"))
     UpdateStreamGroupOutput.add_member(:associated_applications, Shapes::ShapeRef.new(shape: ArnList, location_name: "AssociatedApplications"))
     UpdateStreamGroupOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     UpdateStreamGroupOutput.add_member(:default_application, Shapes::ShapeRef.new(shape: DefaultApplication, location_name: "DefaultApplication"))
@@ -609,6 +609,7 @@ module Aws::GameLiftStreams
         o.input = Shapes::ShapeRef.new(shape: CreateStreamGroupInput)
         o.output = Shapes::ShapeRef.new(shape: CreateStreamGroupOutput)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
@@ -828,6 +829,7 @@ module Aws::GameLiftStreams
         o.input = Shapes::ShapeRef.new(shape: StartStreamSessionInput)
         o.output = Shapes::ShapeRef.new(shape: StartStreamSessionOutput)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)

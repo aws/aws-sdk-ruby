@@ -5853,6 +5853,10 @@ module Aws::SageMaker
     #    </note>
     #   @return [Types::ResourceSpec]
     #
+    # @!attribute [rw] recovery_mode
+    #   Indicates whether the application is launched in recovery mode.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateAppRequest AWS API Documentation
     #
     class CreateAppRequest < Struct.new(
@@ -5862,7 +5866,8 @@ module Aws::SageMaker
       :app_type,
       :app_name,
       :tags,
-      :resource_spec)
+      :resource_spec,
+      :recovery_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9614,6 +9619,12 @@ module Aws::SageMaker
     #   The ARN of the IAM role that the partner application uses.
     #   @return [String]
     #
+    # @!attribute [rw] kms_key_id
+    #   SageMaker Partner AI Apps uses Amazon Web Services KMS to encrypt
+    #   data at rest using an Amazon Web Services managed key by default.
+    #   For more control, specify a customer managed key.
+    #   @return [String]
+    #
     # @!attribute [rw] maintenance_config
     #   Maintenance configuration settings for the SageMaker Partner AI App.
     #   @return [Types::PartnerAppMaintenanceConfig]
@@ -9657,6 +9668,7 @@ module Aws::SageMaker
       :name,
       :type,
       :execution_role_arn,
+      :kms_key_id,
       :maintenance_config,
       :tier,
       :application_config,
@@ -13190,6 +13202,10 @@ module Aws::SageMaker
     #   The status.
     #   @return [String]
     #
+    # @!attribute [rw] recovery_mode
+    #   Indicates whether the application is launched in recovery mode.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] last_health_check_timestamp
     #   The timestamp of the last health check.
     #   @return [Time]
@@ -13238,6 +13254,7 @@ module Aws::SageMaker
       :user_profile_name,
       :space_name,
       :status,
+      :recovery_mode,
       :last_health_check_timestamp,
       :last_user_activity_timestamp,
       :creation_time,
@@ -17905,9 +17922,18 @@ module Aws::SageMaker
     #   The time that the SageMaker Partner AI App was created.
     #   @return [Time]
     #
+    # @!attribute [rw] last_modified_time
+    #   The time that the SageMaker Partner AI App was last modified.
+    #   @return [Time]
+    #
     # @!attribute [rw] execution_role_arn
     #   The ARN of the IAM role associated with the SageMaker Partner AI
     #   App.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Web Services KMS customer managed key used to encrypt the
+    #   data at rest associated with SageMaker Partner AI Apps.
     #   @return [String]
     #
     # @!attribute [rw] base_url
@@ -17956,7 +17982,9 @@ module Aws::SageMaker
       :type,
       :status,
       :creation_time,
+      :last_modified_time,
       :execution_role_arn,
+      :kms_key_id,
       :base_url,
       :maintenance_config,
       :tier,
@@ -39005,9 +39033,8 @@ module Aws::SageMaker
     # @!attribute [rw] kms_key_id
     #   The Amazon Web Services Key Management Service (Amazon Web Services
     #   KMS) key that Amazon SageMaker uses to encrypt the processing job
-    #   output. `KmsKeyId` can be an ID of a KMS key, ARN of a KMS key,
-    #   alias of a KMS key, or alias of a KMS key. The `KmsKeyId` is applied
-    #   to all outputs.
+    #   output. `KmsKeyId` can be an ID of a KMS key, ARN of a KMS key, or
+    #   alias of a KMS key. The `KmsKeyId` is applied to all outputs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProcessingOutputConfig AWS API Documentation
@@ -42685,11 +42712,16 @@ module Aws::SageMaker
     #   use the token in the next request.
     #   @return [String]
     #
+    # @!attribute [rw] total_hits
+    #   The total number of matching results.
+    #   @return [Types::TotalHits]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SearchResponse AWS API Documentation
     #
     class SearchResponse < Struct.new(
       :results,
-      :next_token)
+      :next_token,
+      :total_hits)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -45099,6 +45131,38 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Represents the total number of matching results and indicates how
+    # accurate that count is.
+    #
+    # The `Value` field provides the count, which may be exact or estimated.
+    # The `Relation` field indicates whether it's an exact figure or a
+    # lower bound. This helps understand the full scope of search results,
+    # especially when dealing with large result sets.
+    #
+    # @!attribute [rw] value
+    #   The total number of matching results. This value may be exact or an
+    #   estimate, depending on the `Relation` field.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] relation
+    #   Indicates the relationship between the returned `Value` and the
+    #   actual total number of matching results. Possible values are:
+    #
+    #   * `EqualTo`: The `Value` is the exact count of matching results.
+    #
+    #   * `GreaterThanOrEqualTo`: The `Value` is a lower bound of the actual
+    #     count of matching results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TotalHits AWS API Documentation
+    #
+    class TotalHits < Struct.new(
+      :value,
+      :relation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The summary of the tracking server to list.
     #
     # @!attribute [rw] tracking_server_arn
@@ -46619,12 +46683,29 @@ module Aws::SageMaker
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html
     #   @return [String]
     #
+    # @!attribute [rw] transform_ami_version
+    #   Specifies an option from a collection of preconfigured Amazon
+    #   Machine Image (AMI) images. Each image is configured by Amazon Web
+    #   Services with a set of software and driver versions.
+    #
+    #   al2-ami-sagemaker-batch-gpu-470
+    #   : * Accelerator: GPU
+    #
+    #     * NVIDIA driver version: 470
+    #
+    #   al2-ami-sagemaker-batch-gpu-535
+    #   : * Accelerator: GPU
+    #
+    #     * NVIDIA driver version: 535
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TransformResources AWS API Documentation
     #
     class TransformResources < Struct.new(
       :instance_type,
       :instance_count,
-      :volume_kms_key_id)
+      :volume_kms_key_id,
+      :transform_ami_version)
       SENSITIVE = []
       include Aws::Structure
     end

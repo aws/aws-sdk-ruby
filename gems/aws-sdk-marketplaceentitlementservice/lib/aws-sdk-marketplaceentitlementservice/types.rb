@@ -33,6 +33,11 @@ module Aws::MarketplaceEntitlementService
     #   ResolveCustomer operation in AWS Marketplace Metering Service.
     #   @return [String]
     #
+    # @!attribute [rw] customer_aws_account_id
+    #   The `CustomerAWSAccountID` parameter specifies the AWS account ID of
+    #   the buyer.
+    #   @return [String]
+    #
     # @!attribute [rw] value
     #   The EntitlementValue represents the amount of capacity that the
     #   customer is entitled to for the product.
@@ -53,6 +58,7 @@ module Aws::MarketplaceEntitlementService
       :product_code,
       :dimension,
       :customer_identifier,
+      :customer_aws_account_id,
       :value,
       :expiration_date)
       SENSITIVE = []
@@ -109,6 +115,9 @@ module Aws::MarketplaceEntitlementService
     #   a specific dimension. Filters are described as keys mapped to a
     #   lists of values. Filtered requests are *unioned* for each value in
     #   the value list, and then *intersected* for each filter key.
+    #
+    #   `CustomerIdentifier` and `CustomerAWSAccountID` are mutually
+    #   exclusive. You can't specify both in the same request.
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] next_token

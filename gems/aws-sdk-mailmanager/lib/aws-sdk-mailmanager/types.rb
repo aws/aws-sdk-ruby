@@ -2330,6 +2330,11 @@ module Aws::MailManager
     #
     # @note IngressStringToEvaluate is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of IngressStringToEvaluate corresponding to the set member.
     #
+    # @!attribute [rw] analysis
+    #   The structure type for a string condition stating the Add On ARN and
+    #   its returned value.
+    #   @return [Types::IngressAnalysis]
+    #
     # @!attribute [rw] attribute
     #   The enum type representing the allowed attribute types for a string
     #   condition.
@@ -2338,12 +2343,14 @@ module Aws::MailManager
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/IngressStringToEvaluate AWS API Documentation
     #
     class IngressStringToEvaluate < Struct.new(
+      :analysis,
       :attribute,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
+      class Analysis < IngressStringToEvaluate; end
       class Attribute < IngressStringToEvaluate; end
       class Unknown < IngressStringToEvaluate; end
     end
@@ -3509,6 +3516,11 @@ module Aws::MailManager
     #
     # @note RuleBooleanToEvaluate is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RuleBooleanToEvaluate corresponding to the set member.
     #
+    # @!attribute [rw] analysis
+    #   The Add On ARN and its returned value to evaluate in a boolean
+    #   condition expression.
+    #   @return [Types::Analysis]
+    #
     # @!attribute [rw] attribute
     #   The boolean type representing the allowed attribute types for an
     #   email.
@@ -3522,6 +3534,7 @@ module Aws::MailManager
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/RuleBooleanToEvaluate AWS API Documentation
     #
     class RuleBooleanToEvaluate < Struct.new(
+      :analysis,
       :attribute,
       :is_in_address_list,
       :unknown)
@@ -3529,6 +3542,7 @@ module Aws::MailManager
       include Aws::Structure
       include Aws::Structure::Union
 
+      class Analysis < RuleBooleanToEvaluate; end
       class Attribute < RuleBooleanToEvaluate; end
       class IsInAddressList < RuleBooleanToEvaluate; end
       class Unknown < RuleBooleanToEvaluate; end
@@ -3801,6 +3815,11 @@ module Aws::MailManager
     #
     # @note RuleStringToEvaluate is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RuleStringToEvaluate corresponding to the set member.
     #
+    # @!attribute [rw] analysis
+    #   The Add On ARN and its returned value to evaluate in a string
+    #   condition expression.
+    #   @return [Types::Analysis]
+    #
     # @!attribute [rw] attribute
     #   The email attribute to evaluate in a string condition expression.
     #   @return [String]
@@ -3813,6 +3832,7 @@ module Aws::MailManager
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/RuleStringToEvaluate AWS API Documentation
     #
     class RuleStringToEvaluate < Struct.new(
+      :analysis,
       :attribute,
       :mime_header_attribute,
       :unknown)
@@ -3820,6 +3840,7 @@ module Aws::MailManager
       include Aws::Structure
       include Aws::Structure::Union
 
+      class Analysis < RuleStringToEvaluate; end
       class Attribute < RuleStringToEvaluate; end
       class MimeHeaderAttribute < RuleStringToEvaluate; end
       class Unknown < RuleStringToEvaluate; end

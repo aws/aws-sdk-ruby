@@ -189,6 +189,7 @@ module Aws::EKS
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
+    InvalidStateException = Shapes::StructureShape.new(name: 'InvalidStateException')
     IpFamily = Shapes::StringShape.new(name: 'IpFamily')
     Issue = Shapes::StructureShape.new(name: 'Issue')
     IssueList = Shapes::ListShape.new(name: 'IssueList')
@@ -291,6 +292,7 @@ module Aws::EKS
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Taint = Shapes::StructureShape.new(name: 'Taint')
     TaintEffect = Shapes::StringShape.new(name: 'TaintEffect')
+    ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UnsupportedAvailabilityZoneException = Shapes::StructureShape.new(name: 'UnsupportedAvailabilityZoneException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
@@ -1031,6 +1033,10 @@ module Aws::EKS
     InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InvalidRequestException.struct_class = Types::InvalidRequestException
 
+    InvalidStateException.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
+    InvalidStateException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    InvalidStateException.struct_class = Types::InvalidStateException
+
     Issue.add_member(:code, Shapes::ShapeRef.new(shape: NodegroupIssueCode, location_name: "code"))
     Issue.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     Issue.add_member(:resource_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "resourceIds"))
@@ -1396,6 +1402,10 @@ module Aws::EKS
     Taint.add_member(:effect, Shapes::ShapeRef.new(shape: TaintEffect, location_name: "effect"))
     Taint.struct_class = Types::Taint
 
+    ThrottlingException.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ThrottlingException.struct_class = Types::ThrottlingException
+
     UnsupportedAvailabilityZoneException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     UnsupportedAvailabilityZoneException.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
     UnsupportedAvailabilityZoneException.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, location_name: "nodegroupName"))
@@ -1460,6 +1470,7 @@ module Aws::EKS
     UpdateClusterVersionRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
     UpdateClusterVersionRequest.add_member(:version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "version"))
     UpdateClusterVersionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    UpdateClusterVersionRequest.add_member(:force, Shapes::ShapeRef.new(shape: Boolean, location_name: "force"))
     UpdateClusterVersionRequest.struct_class = Types::UpdateClusterVersionRequest
 
     UpdateClusterVersionResponse.add_member(:update, Shapes::ShapeRef.new(shape: Update, location_name: "update"))
@@ -1604,6 +1615,7 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:associate_identity_provider_config, Seahorse::Model::Operation.new.tap do |o|
@@ -1618,6 +1630,7 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:create_access_entry, Seahorse::Model::Operation.new.tap do |o|
@@ -2010,6 +2023,7 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:list_access_entries, Seahorse::Model::Operation.new.tap do |o|
@@ -2311,6 +2325,7 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_cluster_version, Seahorse::Model::Operation.new.tap do |o|
@@ -2325,6 +2340,8 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
       end)
 
       api.add_operation(:update_eks_anywhere_subscription, Seahorse::Model::Operation.new.tap do |o|

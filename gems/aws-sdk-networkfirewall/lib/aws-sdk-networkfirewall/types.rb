@@ -1364,6 +1364,97 @@ module Aws::NetworkFirewall
 
     # @!attribute [rw] firewall_arn
     #   The Amazon Resource Name (ARN) of the firewall.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The ID of the Availability Zone where the firewall is located. For
+    #   example, `us-east-2a`.
+    #
+    #   Defines the scope a flow operation. You can use up to 20 filters to
+    #   configure a single flow operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] flow_operation_id
+    #   A unique identifier for the flow operation. This ID is returned in
+    #   the responses to start and list commands. You provide to describe
+    #   commands.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeFlowOperationRequest AWS API Documentation
+    #
+    class DescribeFlowOperationRequest < Struct.new(
+      :firewall_arn,
+      :availability_zone,
+      :flow_operation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The ID of the Availability Zone where the firewall is located. For
+    #   example, `us-east-2a`.
+    #
+    #   Defines the scope a flow operation. You can use up to 20 filters to
+    #   configure a single flow operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] flow_operation_id
+    #   A unique identifier for the flow operation. This ID is returned in
+    #   the responses to start and list commands. You provide to describe
+    #   commands.
+    #   @return [String]
+    #
+    # @!attribute [rw] flow_operation_type
+    #   Defines the type of `FlowOperation`.
+    #   @return [String]
+    #
+    # @!attribute [rw] flow_operation_status
+    #   Returns the status of the flow operation. This string is returned in
+    #   the responses to start, list, and describe commands.
+    #
+    #   If the status is `COMPLETED_WITH_ERRORS`, results may be returned
+    #   with any number of `Flows` missing from the response. If the status
+    #   is `FAILED`, `Flows` returned will be empty.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   If the asynchronous operation fails, Network Firewall populates this
+    #   with the reason for the error or failure. Options include `Flow
+    #   operation error` and `Flow timeout`.
+    #   @return [String]
+    #
+    # @!attribute [rw] flow_request_timestamp
+    #   A timestamp indicating when the Suricata engine identified flows
+    #   impacted by an operation.
+    #   @return [Time]
+    #
+    # @!attribute [rw] flow_operation
+    #   Returns key information about a flow operation, such as related
+    #   statuses, unique identifiers, and all filters defined in the
+    #   operation.
+    #   @return [Types::FlowOperation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeFlowOperationResponse AWS API Documentation
+    #
+    class DescribeFlowOperationResponse < Struct.new(
+      :firewall_arn,
+      :availability_zone,
+      :flow_operation_id,
+      :flow_operation_type,
+      :flow_operation_status,
+      :status_message,
+      :flow_request_timestamp,
+      :flow_operation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
     #
     #   You must specify the ARN or the name, and you can specify both.
     #   @return [String]
@@ -2250,6 +2341,179 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
+    # Any number of arrays, where each array is a single flow identified in
+    # the scope of the operation. If multiple flows were in the scope of the
+    # operation, multiple `Flows` arrays are returned.
+    #
+    # @!attribute [rw] source_address
+    #   A single IP address specification. This is used in the
+    #   MatchAttributes source and destination specifications.
+    #   @return [Types::Address]
+    #
+    # @!attribute [rw] destination_address
+    #   A single IP address specification. This is used in the
+    #   MatchAttributes source and destination specifications.
+    #   @return [Types::Address]
+    #
+    # @!attribute [rw] source_port
+    #   The source port to inspect for. You can specify an individual port,
+    #   for example `1994` and you can specify a port range, for example
+    #   `1990:1994`. To match with any port, specify `ANY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_port
+    #   The destination port to inspect for. You can specify an individual
+    #   port, for example `1994` and you can specify a port range, for
+    #   example `1990:1994`. To match with any port, specify `ANY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] protocol
+    #   The protocols to inspect for, specified using the assigned internet
+    #   protocol number (IANA) for each protocol. If not specified, this
+    #   matches with any protocol.
+    #   @return [String]
+    #
+    # @!attribute [rw] age
+    #   Returned as info about age of the flows identified by the flow
+    #   operation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] packet_count
+    #   Returns the total number of data packets received or transmitted in
+    #   a flow.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] byte_count
+    #   Returns the number of bytes received or transmitted in a specific
+    #   flow.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/Flow AWS API Documentation
+    #
+    class Flow < Struct.new(
+      :source_address,
+      :destination_address,
+      :source_port,
+      :destination_port,
+      :protocol,
+      :age,
+      :packet_count,
+      :byte_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the scope a flow operation. You can use up to 20 filters to
+    # configure a single flow operation.
+    #
+    # @!attribute [rw] source_address
+    #   A single IP address specification. This is used in the
+    #   MatchAttributes source and destination specifications.
+    #   @return [Types::Address]
+    #
+    # @!attribute [rw] destination_address
+    #   A single IP address specification. This is used in the
+    #   MatchAttributes source and destination specifications.
+    #   @return [Types::Address]
+    #
+    # @!attribute [rw] source_port
+    #   The source port to inspect for. You can specify an individual port,
+    #   for example `1994` and you can specify a port range, for example
+    #   `1990:1994`. To match with any port, specify `ANY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_port
+    #   The destination port to inspect for. You can specify an individual
+    #   port, for example `1994` and you can specify a port range, for
+    #   example `1990:1994`. To match with any port, specify `ANY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] protocols
+    #   The protocols to inspect for, specified using the assigned internet
+    #   protocol number (IANA) for each protocol. If not specified, this
+    #   matches with any protocol.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/FlowFilter AWS API Documentation
+    #
+    class FlowFilter < Struct.new(
+      :source_address,
+      :destination_address,
+      :source_port,
+      :destination_port,
+      :protocols)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a flow operation, such as related statuses,
+    # unique identifiers, and all filters defined in the operation.
+    #
+    # Flow operations let you manage the flows tracked in the flow table,
+    # also known as the firewall table.
+    #
+    # A flow is network traffic that is monitored by a firewall, either by
+    # stateful or stateless rules. For traffic to be considered part of a
+    # flow, it must share Destination, DestinationPort, Direction, Protocol,
+    # Source, and SourcePort.
+    #
+    # @!attribute [rw] minimum_flow_age_in_seconds
+    #   The reqested `FlowOperation` ignores flows with an age (in seconds)
+    #   lower than `MinimumFlowAgeInSeconds`. You provide this for start
+    #   commands.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] flow_filters
+    #   Defines the scope a flow operation. You can use up to 20 filters to
+    #   configure a single flow operation.
+    #   @return [Array<Types::FlowFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/FlowOperation AWS API Documentation
+    #
+    class FlowOperation < Struct.new(
+      :minimum_flow_age_in_seconds,
+      :flow_filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An array of objects with metadata about the requested `FlowOperation`.
+    #
+    # @!attribute [rw] flow_operation_id
+    #   A unique identifier for the flow operation. This ID is returned in
+    #   the responses to start and list commands. You provide to describe
+    #   commands.
+    #   @return [String]
+    #
+    # @!attribute [rw] flow_operation_type
+    #   Defines the type of `FlowOperation`.
+    #   @return [String]
+    #
+    # @!attribute [rw] flow_request_timestamp
+    #   A timestamp indicating when the Suricata engine identified flows
+    #   impacted by an operation.
+    #   @return [Time]
+    #
+    # @!attribute [rw] flow_operation_status
+    #   Returns the status of the flow operation. This string is returned in
+    #   the responses to start, list, and describe commands.
+    #
+    #   If the status is `COMPLETED_WITH_ERRORS`, results may be returned
+    #   with any number of `Flows` missing from the response. If the status
+    #   is `FAILED`, `Flows` returned will be empty.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/FlowOperationMetadata AWS API Documentation
+    #
+    class FlowOperationMetadata < Struct.new(
+      :flow_operation_id,
+      :flow_operation_type,
+      :flow_request_timestamp,
+      :flow_operation_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the amount of time that can pass without any traffic sent
     # through the firewall before the firewall determines that the
     # connection is idle and Network Firewall removes the flow entry from
@@ -2829,6 +3093,189 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
+    # @!attribute [rw] firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #   @return [String]
+    #
+    # @!attribute [rw] flow_operation_id
+    #   A unique identifier for the flow operation. This ID is returned in
+    #   the responses to start and list commands. You provide to describe
+    #   commands.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   When you request a list of objects with a `MaxResults` setting, if
+    #   the number of objects that are still available for retrieval exceeds
+    #   the maximum you requested, Network Firewall returns a `NextToken`
+    #   value in the response. To retrieve the next batch of objects, use
+    #   the token returned from the prior request in your next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of objects that you want Network Firewall to
+    #   return for this request. If more objects are available, in the
+    #   response, Network Firewall provides a `NextToken` value that you can
+    #   use in a subsequent call to get the next batch of objects.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] availability_zone
+    #   The ID of the Availability Zone where the firewall is located. For
+    #   example, `us-east-2a`.
+    #
+    #   Defines the scope a flow operation. You can use up to 20 filters to
+    #   configure a single flow operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListFlowOperationResultsRequest AWS API Documentation
+    #
+    class ListFlowOperationResultsRequest < Struct.new(
+      :firewall_arn,
+      :flow_operation_id,
+      :next_token,
+      :max_results,
+      :availability_zone)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The ID of the Availability Zone where the firewall is located. For
+    #   example, `us-east-2a`.
+    #
+    #   Defines the scope a flow operation. You can use up to 20 filters to
+    #   configure a single flow operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] flow_operation_id
+    #   A unique identifier for the flow operation. This ID is returned in
+    #   the responses to start and list commands. You provide to describe
+    #   commands.
+    #   @return [String]
+    #
+    # @!attribute [rw] flow_operation_status
+    #   Returns the status of the flow operation. This string is returned in
+    #   the responses to start, list, and describe commands.
+    #
+    #   If the status is `COMPLETED_WITH_ERRORS`, results may be returned
+    #   with any number of `Flows` missing from the response. If the status
+    #   is `FAILED`, `Flows` returned will be empty.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   If the asynchronous operation fails, Network Firewall populates this
+    #   with the reason for the error or failure. Options include `Flow
+    #   operation error` and `Flow timeout`.
+    #   @return [String]
+    #
+    # @!attribute [rw] flow_request_timestamp
+    #   A timestamp indicating when the Suricata engine identified flows
+    #   impacted by an operation.
+    #   @return [Time]
+    #
+    # @!attribute [rw] flows
+    #   Any number of arrays, where each array is a single flow identified
+    #   in the scope of the operation. If multiple flows were in the scope
+    #   of the operation, multiple `Flows` arrays are returned.
+    #   @return [Array<Types::Flow>]
+    #
+    # @!attribute [rw] next_token
+    #   When you request a list of objects with a `MaxResults` setting, if
+    #   the number of objects that are still available for retrieval exceeds
+    #   the maximum you requested, Network Firewall returns a `NextToken`
+    #   value in the response. To retrieve the next batch of objects, use
+    #   the token returned from the prior request in your next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListFlowOperationResultsResponse AWS API Documentation
+    #
+    class ListFlowOperationResultsResponse < Struct.new(
+      :firewall_arn,
+      :availability_zone,
+      :flow_operation_id,
+      :flow_operation_status,
+      :status_message,
+      :flow_request_timestamp,
+      :flows,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The ID of the Availability Zone where the firewall is located. For
+    #   example, `us-east-2a`.
+    #
+    #   Defines the scope a flow operation. You can use up to 20 filters to
+    #   configure a single flow operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] flow_operation_type
+    #   An optional string that defines whether any or all operation types
+    #   are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   When you request a list of objects with a `MaxResults` setting, if
+    #   the number of objects that are still available for retrieval exceeds
+    #   the maximum you requested, Network Firewall returns a `NextToken`
+    #   value in the response. To retrieve the next batch of objects, use
+    #   the token returned from the prior request in your next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of objects that you want Network Firewall to
+    #   return for this request. If more objects are available, in the
+    #   response, Network Firewall provides a `NextToken` value that you can
+    #   use in a subsequent call to get the next batch of objects.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListFlowOperationsRequest AWS API Documentation
+    #
+    class ListFlowOperationsRequest < Struct.new(
+      :firewall_arn,
+      :availability_zone,
+      :flow_operation_type,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] flow_operations
+    #   Flow operations let you manage the flows tracked in the flow table,
+    #   also known as the firewall table.
+    #
+    #   A flow is network traffic that is monitored by a firewall, either by
+    #   stateful or stateless rules. For traffic to be considered part of a
+    #   flow, it must share Destination, DestinationPort, Direction,
+    #   Protocol, Source, and SourcePort.
+    #   @return [Array<Types::FlowOperationMetadata>]
+    #
+    # @!attribute [rw] next_token
+    #   When you request a list of objects with a `MaxResults` setting, if
+    #   the number of objects that are still available for retrieval exceeds
+    #   the maximum you requested, Network Firewall returns a `NextToken`
+    #   value in the response. To retrieve the next batch of objects, use
+    #   the token returned from the prior request in your next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListFlowOperationsResponse AWS API Documentation
+    #
+    class ListFlowOperationsResponse < Struct.new(
+      :flow_operations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] next_token
     #   When you request a list of objects with a `MaxResults` setting, if
     #   the number of objects that are still available for retrieval exceeds
@@ -3112,26 +3559,26 @@ module Aws::NetworkFirewall
     #   @return [Array<Types::Address>]
     #
     # @!attribute [rw] source_ports
-    #   The source ports to inspect for. If not specified, this matches with
-    #   any source port. This setting is only used for protocols 6 (TCP) and
-    #   17 (UDP).
+    #   The source port to inspect for. You can specify an individual port,
+    #   for example `1994` and you can specify a port range, for example
+    #   `1990:1994`. To match with any port, specify `ANY`.
     #
-    #   You can specify individual ports, for example `1994` and you can
-    #   specify port ranges, for example `1990:1994`.
+    #   If not specified, this matches with any source port.
+    #
+    #   This setting is only used for protocols 6 (TCP) and 17 (UDP).
     #   @return [Array<Types::PortRange>]
     #
     # @!attribute [rw] destination_ports
-    #   The destination ports to inspect for. If not specified, this matches
-    #   with any destination port. This setting is only used for protocols 6
-    #   (TCP) and 17 (UDP).
+    #   The destination port to inspect for. You can specify an individual
+    #   port, for example `1994` and you can specify a port range, for
+    #   example `1990:1994`. To match with any port, specify `ANY`.
     #
-    #   You can specify individual ports, for example `1994` and you can
-    #   specify port ranges, for example `1990:1994`.
+    #   This setting is only used for protocols 6 (TCP) and 17 (UDP).
     #   @return [Array<Types::PortRange>]
     #
     # @!attribute [rw] protocols
-    #   The protocols to inspect for, specified using each protocol's
-    #   assigned internet protocol number (IANA). If not specified, this
+    #   The protocols to inspect for, specified using the assigned internet
+    #   protocol number (IANA) for each protocol. If not specified, this
     #   matches with any protocol.
     #   @return [Array<Integer>]
     #
@@ -3886,9 +4333,11 @@ module Aws::NetworkFirewall
     #   @return [Array<Types::PortRange>]
     #
     # @!attribute [rw] protocols
-    #   The protocols to decrypt for inspection, specified using each
-    #   protocol's assigned internet protocol number (IANA). Network
-    #   Firewall currently supports only TCP.
+    #   The protocols to inspect for, specified using the assigned internet
+    #   protocol number (IANA) for each protocol. If not specified, this
+    #   matches with any protocol.
+    #
+    #   Network Firewall currently supports only TCP.
     #   @return [Array<Integer>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ServerCertificateScope AWS API Documentation
@@ -3972,6 +4421,137 @@ module Aws::NetworkFirewall
     #
     class StartAnalysisReportResponse < Struct.new(
       :analysis_report_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The ID of the Availability Zone where the firewall is located. For
+    #   example, `us-east-2a`.
+    #
+    #   Defines the scope a flow operation. You can use up to 20 filters to
+    #   configure a single flow operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] minimum_flow_age_in_seconds
+    #   The reqested `FlowOperation` ignores flows with an age (in seconds)
+    #   lower than `MinimumFlowAgeInSeconds`. You provide this for start
+    #   commands.
+    #
+    #   <note markdown="1"> We recommend setting this value to at least 1 minute (60 seconds) to
+    #   reduce chance of capturing flows that are not yet established.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @!attribute [rw] flow_filters
+    #   Defines the scope a flow operation. You can use up to 20 filters to
+    #   configure a single flow operation.
+    #   @return [Array<Types::FlowFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/StartFlowCaptureRequest AWS API Documentation
+    #
+    class StartFlowCaptureRequest < Struct.new(
+      :firewall_arn,
+      :availability_zone,
+      :minimum_flow_age_in_seconds,
+      :flow_filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #   @return [String]
+    #
+    # @!attribute [rw] flow_operation_id
+    #   A unique identifier for the flow operation. This ID is returned in
+    #   the responses to start and list commands. You provide to describe
+    #   commands.
+    #   @return [String]
+    #
+    # @!attribute [rw] flow_operation_status
+    #   Returns the status of the flow operation. This string is returned in
+    #   the responses to start, list, and describe commands.
+    #
+    #   If the status is `COMPLETED_WITH_ERRORS`, results may be returned
+    #   with any number of `Flows` missing from the response. If the status
+    #   is `FAILED`, `Flows` returned will be empty.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/StartFlowCaptureResponse AWS API Documentation
+    #
+    class StartFlowCaptureResponse < Struct.new(
+      :firewall_arn,
+      :flow_operation_id,
+      :flow_operation_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The ID of the Availability Zone where the firewall is located. For
+    #   example, `us-east-2a`.
+    #
+    #   Defines the scope a flow operation. You can use up to 20 filters to
+    #   configure a single flow operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] minimum_flow_age_in_seconds
+    #   The reqested `FlowOperation` ignores flows with an age (in seconds)
+    #   lower than `MinimumFlowAgeInSeconds`. You provide this for start
+    #   commands.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] flow_filters
+    #   Defines the scope a flow operation. You can use up to 20 filters to
+    #   configure a single flow operation.
+    #   @return [Array<Types::FlowFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/StartFlowFlushRequest AWS API Documentation
+    #
+    class StartFlowFlushRequest < Struct.new(
+      :firewall_arn,
+      :availability_zone,
+      :minimum_flow_age_in_seconds,
+      :flow_filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #   @return [String]
+    #
+    # @!attribute [rw] flow_operation_id
+    #   A unique identifier for the flow operation. This ID is returned in
+    #   the responses to start and list commands. You provide to describe
+    #   commands.
+    #   @return [String]
+    #
+    # @!attribute [rw] flow_operation_status
+    #   Returns the status of the flow operation. This string is returned in
+    #   the responses to start, list, and describe commands.
+    #
+    #   If the status is `COMPLETED_WITH_ERRORS`, results may be returned
+    #   with any number of `Flows` missing from the response. If the status
+    #   is `FAILED`, `Flows` returned will be empty.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/StartFlowFlushResponse AWS API Documentation
+    #
+    class StartFlowFlushResponse < Struct.new(
+      :firewall_arn,
+      :flow_operation_id,
+      :flow_operation_status)
       SENSITIVE = []
       include Aws::Structure
     end

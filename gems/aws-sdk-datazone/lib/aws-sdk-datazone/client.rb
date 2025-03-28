@@ -2268,6 +2268,7 @@ module Aws::DataZone
     #     name: "String", # required
     #     service_role: "RoleArn",
     #     single_sign_on: {
+    #       idc_instance_arn: "SingleSignOnIdcInstanceArnString",
     #       type: "IAM_IDC", # accepts IAM_IDC, DISABLED
     #       user_assignment: "AUTOMATIC", # accepts AUTOMATIC, MANUAL
     #     },
@@ -2288,6 +2289,7 @@ module Aws::DataZone
     #   resp.portal_url #=> String
     #   resp.root_domain_unit_id #=> String
     #   resp.service_role #=> String
+    #   resp.single_sign_on.idc_instance_arn #=> String
     #   resp.single_sign_on.type #=> String, one of "IAM_IDC", "DISABLED"
     #   resp.single_sign_on.user_assignment #=> String, one of "AUTOMATIC", "MANUAL"
     #   resp.status #=> String, one of "CREATING", "AVAILABLE", "CREATION_FAILED", "DELETING", "DELETED", "DELETION_FAILED"
@@ -3299,7 +3301,7 @@ module Aws::DataZone
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_rule({
-    #     action: "CREATE_SUBSCRIPTION_REQUEST", # required, accepts CREATE_SUBSCRIPTION_REQUEST
+    #     action: "CREATE_LISTING_CHANGE_SET", # required, accepts CREATE_LISTING_CHANGE_SET, CREATE_SUBSCRIPTION_REQUEST
     #     client_token: "ClientToken",
     #     description: "Description",
     #     detail: { # required
@@ -3335,7 +3337,7 @@ module Aws::DataZone
     #
     # @example Response structure
     #
-    #   resp.action #=> String, one of "CREATE_SUBSCRIPTION_REQUEST"
+    #   resp.action #=> String, one of "CREATE_LISTING_CHANGE_SET", "CREATE_SUBSCRIPTION_REQUEST"
     #   resp.created_at #=> Time
     #   resp.created_by #=> String
     #   resp.description #=> String
@@ -5330,6 +5332,7 @@ module Aws::DataZone
     #   resp.portal_url #=> String
     #   resp.root_domain_unit_id #=> String
     #   resp.service_role #=> String
+    #   resp.single_sign_on.idc_instance_arn #=> String
     #   resp.single_sign_on.type #=> String, one of "IAM_IDC", "DISABLED"
     #   resp.single_sign_on.user_assignment #=> String, one of "AUTOMATIC", "MANUAL"
     #   resp.status #=> String, one of "CREATING", "AVAILABLE", "CREATION_FAILED", "DELETING", "DELETED", "DELETION_FAILED"
@@ -6498,7 +6501,7 @@ module Aws::DataZone
     #
     # @example Response structure
     #
-    #   resp.action #=> String, one of "CREATE_SUBSCRIPTION_REQUEST"
+    #   resp.action #=> String, one of "CREATE_LISTING_CHANGE_SET", "CREATE_SUBSCRIPTION_REQUEST"
     #   resp.created_at #=> Time
     #   resp.created_by #=> String
     #   resp.description #=> String
@@ -8844,7 +8847,7 @@ module Aws::DataZone
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_rules({
-    #     action: "CREATE_SUBSCRIPTION_REQUEST", # accepts CREATE_SUBSCRIPTION_REQUEST
+    #     action: "CREATE_LISTING_CHANGE_SET", # accepts CREATE_LISTING_CHANGE_SET, CREATE_SUBSCRIPTION_REQUEST
     #     asset_types: ["AssetTypeIdentifier"],
     #     data_product: false,
     #     domain_identifier: "DomainId", # required
@@ -8860,7 +8863,7 @@ module Aws::DataZone
     # @example Response structure
     #
     #   resp.items #=> Array
-    #   resp.items[0].action #=> String, one of "CREATE_SUBSCRIPTION_REQUEST"
+    #   resp.items[0].action #=> String, one of "CREATE_LISTING_CHANGE_SET", "CREATE_SUBSCRIPTION_REQUEST"
     #   resp.items[0].identifier #=> String
     #   resp.items[0].last_updated_by #=> String
     #   resp.items[0].name #=> String
@@ -11426,6 +11429,7 @@ module Aws::DataZone
     #     name: "String",
     #     service_role: "RoleArn",
     #     single_sign_on: {
+    #       idc_instance_arn: "SingleSignOnIdcInstanceArnString",
     #       type: "IAM_IDC", # accepts IAM_IDC, DISABLED
     #       user_assignment: "AUTOMATIC", # accepts AUTOMATIC, MANUAL
     #     },
@@ -11440,6 +11444,7 @@ module Aws::DataZone
     #   resp.name #=> String
     #   resp.root_domain_unit_id #=> String
     #   resp.service_role #=> String
+    #   resp.single_sign_on.idc_instance_arn #=> String
     #   resp.single_sign_on.type #=> String, one of "IAM_IDC", "DISABLED"
     #   resp.single_sign_on.user_assignment #=> String, one of "AUTOMATIC", "MANUAL"
     #
@@ -12300,7 +12305,7 @@ module Aws::DataZone
     #
     # @example Response structure
     #
-    #   resp.action #=> String, one of "CREATE_SUBSCRIPTION_REQUEST"
+    #   resp.action #=> String, one of "CREATE_LISTING_CHANGE_SET", "CREATE_SUBSCRIPTION_REQUEST"
     #   resp.created_at #=> Time
     #   resp.created_by #=> String
     #   resp.description #=> String
@@ -12695,7 +12700,7 @@ module Aws::DataZone
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

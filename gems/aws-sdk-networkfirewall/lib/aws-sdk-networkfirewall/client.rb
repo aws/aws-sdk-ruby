@@ -1839,6 +1839,69 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
+    # Returns key information about a specific flow operation.
+    #
+    # @option params [required, String] :firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #
+    # @option params [String] :availability_zone
+    #   The ID of the Availability Zone where the firewall is located. For
+    #   example, `us-east-2a`.
+    #
+    #   Defines the scope a flow operation. You can use up to 20 filters to
+    #   configure a single flow operation.
+    #
+    # @option params [required, String] :flow_operation_id
+    #   A unique identifier for the flow operation. This ID is returned in the
+    #   responses to start and list commands. You provide to describe
+    #   commands.
+    #
+    # @return [Types::DescribeFlowOperationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeFlowOperationResponse#firewall_arn #firewall_arn} => String
+    #   * {Types::DescribeFlowOperationResponse#availability_zone #availability_zone} => String
+    #   * {Types::DescribeFlowOperationResponse#flow_operation_id #flow_operation_id} => String
+    #   * {Types::DescribeFlowOperationResponse#flow_operation_type #flow_operation_type} => String
+    #   * {Types::DescribeFlowOperationResponse#flow_operation_status #flow_operation_status} => String
+    #   * {Types::DescribeFlowOperationResponse#status_message #status_message} => String
+    #   * {Types::DescribeFlowOperationResponse#flow_request_timestamp #flow_request_timestamp} => Time
+    #   * {Types::DescribeFlowOperationResponse#flow_operation #flow_operation} => Types::FlowOperation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_flow_operation({
+    #     firewall_arn: "ResourceArn", # required
+    #     availability_zone: "AvailabilityZone",
+    #     flow_operation_id: "FlowOperationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.firewall_arn #=> String
+    #   resp.availability_zone #=> String
+    #   resp.flow_operation_id #=> String
+    #   resp.flow_operation_type #=> String, one of "FLOW_FLUSH", "FLOW_CAPTURE"
+    #   resp.flow_operation_status #=> String, one of "COMPLETED", "IN_PROGRESS", "FAILED", "COMPLETED_WITH_ERRORS"
+    #   resp.status_message #=> String
+    #   resp.flow_request_timestamp #=> Time
+    #   resp.flow_operation.minimum_flow_age_in_seconds #=> Integer
+    #   resp.flow_operation.flow_filters #=> Array
+    #   resp.flow_operation.flow_filters[0].source_address.address_definition #=> String
+    #   resp.flow_operation.flow_filters[0].destination_address.address_definition #=> String
+    #   resp.flow_operation.flow_filters[0].source_port #=> String
+    #   resp.flow_operation.flow_filters[0].destination_port #=> String
+    #   resp.flow_operation.flow_filters[0].protocols #=> Array
+    #   resp.flow_operation.flow_filters[0].protocols[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeFlowOperation AWS API Documentation
+    #
+    # @overload describe_flow_operation(params = {})
+    # @param [Hash] params ({})
+    def describe_flow_operation(params = {}, options = {})
+      req = build_request(:describe_flow_operation, params)
+      req.send_request(options)
+    end
+
     # Returns the logging configuration for the specified firewall.
     #
     # @option params [String] :firewall_arn
@@ -2502,6 +2565,170 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
+    # Returns the results of a specific flow operation.
+    #
+    # Flow operations let you manage the flows tracked in the flow table,
+    # also known as the firewall table.
+    #
+    # A flow is network traffic that is monitored by a firewall, either by
+    # stateful or stateless rules. For traffic to be considered part of a
+    # flow, it must share Destination, DestinationPort, Direction, Protocol,
+    # Source, and SourcePort.
+    #
+    # @option params [required, String] :firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #
+    # @option params [required, String] :flow_operation_id
+    #   A unique identifier for the flow operation. This ID is returned in the
+    #   responses to start and list commands. You provide to describe
+    #   commands.
+    #
+    # @option params [String] :next_token
+    #   When you request a list of objects with a `MaxResults` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   maximum you requested, Network Firewall returns a `NextToken` value in
+    #   the response. To retrieve the next batch of objects, use the token
+    #   returned from the prior request in your next request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects that you want Network Firewall to return
+    #   for this request. If more objects are available, in the response,
+    #   Network Firewall provides a `NextToken` value that you can use in a
+    #   subsequent call to get the next batch of objects.
+    #
+    # @option params [String] :availability_zone
+    #   The ID of the Availability Zone where the firewall is located. For
+    #   example, `us-east-2a`.
+    #
+    #   Defines the scope a flow operation. You can use up to 20 filters to
+    #   configure a single flow operation.
+    #
+    # @return [Types::ListFlowOperationResultsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFlowOperationResultsResponse#firewall_arn #firewall_arn} => String
+    #   * {Types::ListFlowOperationResultsResponse#availability_zone #availability_zone} => String
+    #   * {Types::ListFlowOperationResultsResponse#flow_operation_id #flow_operation_id} => String
+    #   * {Types::ListFlowOperationResultsResponse#flow_operation_status #flow_operation_status} => String
+    #   * {Types::ListFlowOperationResultsResponse#status_message #status_message} => String
+    #   * {Types::ListFlowOperationResultsResponse#flow_request_timestamp #flow_request_timestamp} => Time
+    #   * {Types::ListFlowOperationResultsResponse#flows #flows} => Array&lt;Types::Flow&gt;
+    #   * {Types::ListFlowOperationResultsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_flow_operation_results({
+    #     firewall_arn: "ResourceArn", # required
+    #     flow_operation_id: "FlowOperationId", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #     availability_zone: "AvailabilityZone",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.firewall_arn #=> String
+    #   resp.availability_zone #=> String
+    #   resp.flow_operation_id #=> String
+    #   resp.flow_operation_status #=> String, one of "COMPLETED", "IN_PROGRESS", "FAILED", "COMPLETED_WITH_ERRORS"
+    #   resp.status_message #=> String
+    #   resp.flow_request_timestamp #=> Time
+    #   resp.flows #=> Array
+    #   resp.flows[0].source_address.address_definition #=> String
+    #   resp.flows[0].destination_address.address_definition #=> String
+    #   resp.flows[0].source_port #=> String
+    #   resp.flows[0].destination_port #=> String
+    #   resp.flows[0].protocol #=> String
+    #   resp.flows[0].age #=> Integer
+    #   resp.flows[0].packet_count #=> Integer
+    #   resp.flows[0].byte_count #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListFlowOperationResults AWS API Documentation
+    #
+    # @overload list_flow_operation_results(params = {})
+    # @param [Hash] params ({})
+    def list_flow_operation_results(params = {}, options = {})
+      req = build_request(:list_flow_operation_results, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of all flow operations ran in a specific firewall. You
+    # can optionally narrow the request scope by specifying the operation
+    # type or Availability Zone associated with a firewall's flow
+    # operations.
+    #
+    # Flow operations let you manage the flows tracked in the flow table,
+    # also known as the firewall table.
+    #
+    # A flow is network traffic that is monitored by a firewall, either by
+    # stateful or stateless rules. For traffic to be considered part of a
+    # flow, it must share Destination, DestinationPort, Direction, Protocol,
+    # Source, and SourcePort.
+    #
+    # @option params [required, String] :firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #
+    # @option params [String] :availability_zone
+    #   The ID of the Availability Zone where the firewall is located. For
+    #   example, `us-east-2a`.
+    #
+    #   Defines the scope a flow operation. You can use up to 20 filters to
+    #   configure a single flow operation.
+    #
+    # @option params [String] :flow_operation_type
+    #   An optional string that defines whether any or all operation types are
+    #   returned.
+    #
+    # @option params [String] :next_token
+    #   When you request a list of objects with a `MaxResults` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   maximum you requested, Network Firewall returns a `NextToken` value in
+    #   the response. To retrieve the next batch of objects, use the token
+    #   returned from the prior request in your next request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects that you want Network Firewall to return
+    #   for this request. If more objects are available, in the response,
+    #   Network Firewall provides a `NextToken` value that you can use in a
+    #   subsequent call to get the next batch of objects.
+    #
+    # @return [Types::ListFlowOperationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFlowOperationsResponse#flow_operations #flow_operations} => Array&lt;Types::FlowOperationMetadata&gt;
+    #   * {Types::ListFlowOperationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_flow_operations({
+    #     firewall_arn: "ResourceArn", # required
+    #     availability_zone: "AvailabilityZone",
+    #     flow_operation_type: "FLOW_FLUSH", # accepts FLOW_FLUSH, FLOW_CAPTURE
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.flow_operations #=> Array
+    #   resp.flow_operations[0].flow_operation_id #=> String
+    #   resp.flow_operations[0].flow_operation_type #=> String, one of "FLOW_FLUSH", "FLOW_CAPTURE"
+    #   resp.flow_operations[0].flow_request_timestamp #=> Time
+    #   resp.flow_operations[0].flow_operation_status #=> String, one of "COMPLETED", "IN_PROGRESS", "FAILED", "COMPLETED_WITH_ERRORS"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListFlowOperations AWS API Documentation
+    #
+    # @overload list_flow_operations(params = {})
+    # @param [Hash] params ({})
+    def list_flow_operations(params = {}, options = {})
+      req = build_request(:list_flow_operations, params)
+      req.send_request(options)
+    end
+
     # Retrieves the metadata for the rule groups that you have defined.
     # Depending on your setting for max results and the number of rule
     # groups, a single call might not return the full list.
@@ -2790,6 +3017,161 @@ module Aws::NetworkFirewall
     # @param [Hash] params ({})
     def start_analysis_report(params = {}, options = {})
       req = build_request(:start_analysis_report, params)
+      req.send_request(options)
+    end
+
+    # Begins capturing the flows in a firewall, according to the filters you
+    # define. Captures are similar, but not identical to snapshots. Capture
+    # operations provide visibility into flows that are not closed and are
+    # tracked by a firewall's flow table. Unlike snapshots, captures are a
+    # time-boxed view.
+    #
+    # A flow is network traffic that is monitored by a firewall, either by
+    # stateful or stateless rules. For traffic to be considered part of a
+    # flow, it must share Destination, DestinationPort, Direction, Protocol,
+    # Source, and SourcePort.
+    #
+    # <note markdown="1"> To avoid encountering operation limits, you should avoid starting
+    # captures with broad filters, like wide IP ranges. Instead, we
+    # recommend you define more specific criteria with `FlowFilters`, like
+    # narrow IP ranges, ports, or protocols.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #
+    # @option params [String] :availability_zone
+    #   The ID of the Availability Zone where the firewall is located. For
+    #   example, `us-east-2a`.
+    #
+    #   Defines the scope a flow operation. You can use up to 20 filters to
+    #   configure a single flow operation.
+    #
+    # @option params [Integer] :minimum_flow_age_in_seconds
+    #   The reqested `FlowOperation` ignores flows with an age (in seconds)
+    #   lower than `MinimumFlowAgeInSeconds`. You provide this for start
+    #   commands.
+    #
+    #   <note markdown="1"> We recommend setting this value to at least 1 minute (60 seconds) to
+    #   reduce chance of capturing flows that are not yet established.
+    #
+    #    </note>
+    #
+    # @option params [required, Array<Types::FlowFilter>] :flow_filters
+    #   Defines the scope a flow operation. You can use up to 20 filters to
+    #   configure a single flow operation.
+    #
+    # @return [Types::StartFlowCaptureResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartFlowCaptureResponse#firewall_arn #firewall_arn} => String
+    #   * {Types::StartFlowCaptureResponse#flow_operation_id #flow_operation_id} => String
+    #   * {Types::StartFlowCaptureResponse#flow_operation_status #flow_operation_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_flow_capture({
+    #     firewall_arn: "ResourceArn", # required
+    #     availability_zone: "AvailabilityZone",
+    #     minimum_flow_age_in_seconds: 1,
+    #     flow_filters: [ # required
+    #       {
+    #         source_address: {
+    #           address_definition: "AddressDefinition", # required
+    #         },
+    #         destination_address: {
+    #           address_definition: "AddressDefinition", # required
+    #         },
+    #         source_port: "Port",
+    #         destination_port: "Port",
+    #         protocols: ["ProtocolString"],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.firewall_arn #=> String
+    #   resp.flow_operation_id #=> String
+    #   resp.flow_operation_status #=> String, one of "COMPLETED", "IN_PROGRESS", "FAILED", "COMPLETED_WITH_ERRORS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/StartFlowCapture AWS API Documentation
+    #
+    # @overload start_flow_capture(params = {})
+    # @param [Hash] params ({})
+    def start_flow_capture(params = {}, options = {})
+      req = build_request(:start_flow_capture, params)
+      req.send_request(options)
+    end
+
+    # Begins the flushing of traffic from the firewall, according to the
+    # filters you define. When the operation starts, impacted flows are
+    # temporarily marked as timed out before the Suricata engine prunes, or
+    # flushes, the flows from the firewall table.
+    #
+    # While the flush completes, impacted flows are processed as midstream
+    # traffic. This may result in a temporary increase in midstream traffic
+    # metrics. We recommend that you double check your stream exception
+    # policy before you perform a flush operation.
+    #
+    # @option params [required, String] :firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #
+    # @option params [String] :availability_zone
+    #   The ID of the Availability Zone where the firewall is located. For
+    #   example, `us-east-2a`.
+    #
+    #   Defines the scope a flow operation. You can use up to 20 filters to
+    #   configure a single flow operation.
+    #
+    # @option params [Integer] :minimum_flow_age_in_seconds
+    #   The reqested `FlowOperation` ignores flows with an age (in seconds)
+    #   lower than `MinimumFlowAgeInSeconds`. You provide this for start
+    #   commands.
+    #
+    # @option params [required, Array<Types::FlowFilter>] :flow_filters
+    #   Defines the scope a flow operation. You can use up to 20 filters to
+    #   configure a single flow operation.
+    #
+    # @return [Types::StartFlowFlushResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartFlowFlushResponse#firewall_arn #firewall_arn} => String
+    #   * {Types::StartFlowFlushResponse#flow_operation_id #flow_operation_id} => String
+    #   * {Types::StartFlowFlushResponse#flow_operation_status #flow_operation_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_flow_flush({
+    #     firewall_arn: "ResourceArn", # required
+    #     availability_zone: "AvailabilityZone",
+    #     minimum_flow_age_in_seconds: 1,
+    #     flow_filters: [ # required
+    #       {
+    #         source_address: {
+    #           address_definition: "AddressDefinition", # required
+    #         },
+    #         destination_address: {
+    #           address_definition: "AddressDefinition", # required
+    #         },
+    #         source_port: "Port",
+    #         destination_port: "Port",
+    #         protocols: ["ProtocolString"],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.firewall_arn #=> String
+    #   resp.flow_operation_id #=> String
+    #   resp.flow_operation_status #=> String, one of "COMPLETED", "IN_PROGRESS", "FAILED", "COMPLETED_WITH_ERRORS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/StartFlowFlush AWS API Documentation
+    #
+    # @overload start_flow_flush(params = {})
+    # @param [Hash] params ({})
+    def start_flow_flush(params = {}, options = {})
+      req = build_request(:start_flow_flush, params)
       req.send_request(options)
     end
 
@@ -3978,7 +4360,7 @@ module Aws::NetworkFirewall
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-networkfirewall'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

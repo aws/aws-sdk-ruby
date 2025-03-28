@@ -163,6 +163,7 @@ module Aws::MarketplaceMetering
       attr_accessor dimension: ::String
       attr_accessor quantity: ::Integer
       attr_accessor usage_allocations: ::Array[Types::UsageAllocation]
+      attr_accessor customer_aws_account_id: ::String
       SENSITIVE: []
     end
 

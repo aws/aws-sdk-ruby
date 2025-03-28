@@ -391,8 +391,7 @@ module Aws::Keyspaces
     #   * `regionList` - if the `replicationStrategy` is `MULTI_REGION`, the
     #     `regionList` requires the current Region and at least one
     #     additional Amazon Web Services Region where the keyspace is going
-    #     to be replicated in. The maximum number of supported replication
-    #     Regions including the current Region is six.
+    #     to be replicated in.
     #   @return [Types::ReplicationSpecification]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/CreateKeyspaceRequest AWS API Documentation
@@ -1558,8 +1557,8 @@ module Aws::Keyspaces
 
     # The replication specification of the keyspace includes:
     #
-    # * `regionList` - up to six Amazon Web Services Regions where the
-    #   keyspace is replicated in.
+    # * `regionList` - the Amazon Web Services Regions where the keyspace is
+    #   replicated in.
     #
     # * `replicationStrategy` - the required value is `SINGLE_REGION` or
     #   `MULTI_REGION`.
@@ -1570,8 +1569,8 @@ module Aws::Keyspaces
     #   @return [String]
     #
     # @!attribute [rw] region_list
-    #   The `regionList` can contain up to six Amazon Web Services Regions
-    #   where the keyspace is replicated in.
+    #   The `regionList` contains the Amazon Web Services Regions where the
+    #   keyspace is replicated in.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/ReplicationSpecification AWS API Documentation
@@ -1997,8 +1996,8 @@ module Aws::Keyspaces
     # @!attribute [rw] replication_specification
     #   The replication specification of the keyspace includes:
     #
-    #   * `regionList` - up to six Amazon Web Services Regions where the
-    #     keyspace is replicated in.
+    #   * `regionList` - the Amazon Web Services Regions where the keyspace
+    #     is replicated in.
     #
     #   * `replicationStrategy` - the required value is `SINGLE_REGION` or
     #     `MULTI_REGION`.

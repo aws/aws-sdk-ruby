@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2025-03-28)
+------------------
+
+* Feature - The service adds support for transferring AES-256 and other keys between the service and other service providers and HSMs. This feature uses ECDH to derive a one-time key transport key to enable these secure key exchanges.
+
 1.31.0 (2025-02-18)
 ------------------
 

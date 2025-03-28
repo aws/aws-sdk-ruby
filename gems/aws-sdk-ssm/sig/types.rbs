@@ -391,6 +391,7 @@ module Aws::SSM
       attr_accessor rejected_patches_action: ("ALLOW_AS_DEPENDENCY" | "BLOCK")
       attr_accessor approved_patches_enable_non_security: bool
       attr_accessor sources: ::Array[Types::PatchSource]
+      attr_accessor available_security_updates_compliance_status: ("COMPLIANT" | "NON_COMPLIANT")
       SENSITIVE: []
     end
 
@@ -717,6 +718,7 @@ module Aws::SSM
       attr_accessor rejected_patches_action: ("ALLOW_AS_DEPENDENCY" | "BLOCK")
       attr_accessor description: ::String
       attr_accessor sources: ::Array[Types::PatchSource]
+      attr_accessor available_security_updates_compliance_status: ("COMPLIANT" | "NON_COMPLIANT")
       attr_accessor client_token: ::String
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
@@ -1329,6 +1331,7 @@ module Aws::SSM
       attr_accessor instances_with_critical_non_compliant_patches: ::Integer
       attr_accessor instances_with_security_non_compliant_patches: ::Integer
       attr_accessor instances_with_other_non_compliant_patches: ::Integer
+      attr_accessor instances_with_available_security_updates: ::Integer
       SENSITIVE: []
     end
 
@@ -1994,6 +1997,7 @@ module Aws::SSM
       attr_accessor modified_date: ::Time
       attr_accessor description: ::String
       attr_accessor sources: ::Array[Types::PatchSource]
+      attr_accessor available_security_updates_compliance_status: ("COMPLIANT" | "NON_COMPLIANT")
       SENSITIVE: []
     end
 
@@ -2153,6 +2157,7 @@ module Aws::SSM
       attr_accessor failed_count: ::Integer
       attr_accessor unreported_not_applicable_count: ::Integer
       attr_accessor not_applicable_count: ::Integer
+      attr_accessor available_security_update_count: ::Integer
       attr_accessor operation_start_time: ::Time
       attr_accessor operation_end_time: ::Time
       attr_accessor operation: ("Scan" | "Install")
@@ -3448,7 +3453,7 @@ module Aws::SSM
       attr_accessor kb_id: ::String
       attr_accessor classification: ::String
       attr_accessor severity: ::String
-      attr_accessor state: ("INSTALLED" | "INSTALLED_OTHER" | "INSTALLED_PENDING_REBOOT" | "INSTALLED_REJECTED" | "MISSING" | "NOT_APPLICABLE" | "FAILED")
+      attr_accessor state: ("INSTALLED" | "INSTALLED_OTHER" | "INSTALLED_PENDING_REBOOT" | "INSTALLED_REJECTED" | "MISSING" | "NOT_APPLICABLE" | "FAILED" | "AVAILABLE_SECURITY_UPDATE")
       attr_accessor installed_time: ::Time
       attr_accessor cve_ids: ::String
       SENSITIVE: []
@@ -4438,6 +4443,7 @@ module Aws::SSM
       attr_accessor rejected_patches_action: ("ALLOW_AS_DEPENDENCY" | "BLOCK")
       attr_accessor description: ::String
       attr_accessor sources: ::Array[Types::PatchSource]
+      attr_accessor available_security_updates_compliance_status: ("COMPLIANT" | "NON_COMPLIANT")
       attr_accessor replace: bool
       SENSITIVE: []
     end
@@ -4457,6 +4463,7 @@ module Aws::SSM
       attr_accessor modified_date: ::Time
       attr_accessor description: ::String
       attr_accessor sources: ::Array[Types::PatchSource]
+      attr_accessor available_security_updates_compliance_status: ("COMPLIANT" | "NON_COMPLIANT")
       SENSITIVE: []
     end
 

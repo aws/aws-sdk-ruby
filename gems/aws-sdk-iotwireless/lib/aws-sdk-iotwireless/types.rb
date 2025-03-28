@@ -716,9 +716,9 @@ module Aws::IoTWireless
     #   @return [Integer]
     #
     # @!attribute [rw] descriptor
-    #   The Descriptor specifies some metadata about the File being
-    #   transferred using FUOTA e.g. the software version. It is sent
-    #   transparently to the device. It is a binary field encoded in base64
+    #   The descriptor is the metadata about the file that is transferred to
+    #   the device using FUOTA, such as the software version. It is a binary
+    #   field encoded in base64.
     #   @return [String]
     #
     class CreateFuotaTaskRequest < Struct.new(
@@ -1769,13 +1769,13 @@ module Aws::IoTWireless
     end
 
     # The log options for a FUOTA task event and can be used to set log
-    # levels for a specific fuota task event.
+    # levels for a specific FUOTA task event.
     #
-    # For a LoRaWAN FuotaTask type, possible event for a log message is
+    # For a LoRaWAN FUOTA task, the only possible event for a log message is
     # `Fuota`.
     #
     # @!attribute [rw] event
-    #   The event for a log message, if the log message is tied to a fuota
+    #   The event for a log message, if the log message is tied to a FUOTA
     #   task.
     #   @return [String]
     #
@@ -1792,11 +1792,11 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # The log options for fuota tasks and can be used to set log levels for
-    # a specific type of fuota task.
+    # The log options for FUOTA tasks and can be used to set log levels for
+    # a specific type of FUOTA task.
     #
     # @!attribute [rw] type
-    #   The fuota task type.
+    #   The FUOTA task type.
     #   @return [String]
     #
     # @!attribute [rw] log_level
@@ -2031,9 +2031,9 @@ module Aws::IoTWireless
     #   @return [Integer]
     #
     # @!attribute [rw] descriptor
-    #   The Descriptor specifies some metadata about the File being
-    #   transferred using FUOTA e.g. the software version. It is sent
-    #   transparently to the device. It is a binary field encoded in base64
+    #   The descriptor is the metadata about the file that is transferred to
+    #   the device using FUOTA, such as the software version. It is a binary
+    #   field encoded in base64.
     #   @return [String]
     #
     class GetFuotaTaskResponse < Struct.new(
@@ -2073,7 +2073,7 @@ module Aws::IoTWireless
     #   @return [Array<Types::WirelessDeviceLogOption>]
     #
     # @!attribute [rw] fuota_task_log_options
-    #   The list of fuota task log options.
+    #   The list of FUOTA task log options.
     #   @return [Array<Types::FuotaTaskLogOption>]
     #
     class GetLogLevelsByResourceTypesResponse < Struct.new(
@@ -2477,14 +2477,13 @@ module Aws::IoTWireless
     end
 
     # @!attribute [rw] resource_identifier
-    #   The identifier of the resource. For a Wireless Device, it is the
-    #   wireless device ID. For a wireless gateway, it is the wireless
-    #   gateway ID.
+    #   The unique identifier of the resource, which can be the wireless
+    #   gateway ID, the wireless device ID, or the FUOTA task ID.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of the resource, which can be `WirelessDevice`,
-    #   `WirelessGateway` or `FuotaTask`.
+    #   The type of resource, which can be `WirelessDevice`,
+    #   `WirelessGateway`, or `FuotaTask`.
     #   @return [String]
     #
     class GetResourceLogLevelRequest < Struct.new(
@@ -2544,8 +2543,7 @@ module Aws::IoTWireless
     # @!attribute [rw] service_type
     #   The service type for which to get endpoint information about. Can be
     #   `CUPS` for the Configuration and Update Server endpoint, or `LNS`
-    #   for the LoRaWAN Network Server endpoint or `CLAIM` for the global
-    #   endpoint.
+    #   for the LoRaWAN Network Server endpoint.
     #   @return [String]
     #
     class GetServiceEndpointRequest < Struct.new(
@@ -4433,7 +4431,8 @@ module Aws::IoTWireless
     # @!attribute [rw] participating_gateways
     #   Specify the list of gateways to which you want to send the multicast
     #   downlink messages. The multicast message will be sent to each
-    #   gateway in the sequence provided in the list.
+    #   gateway in the list, with the transmission interval as the time
+    #   interval between each message.
     #   @return [Types::ParticipatingGatewaysMulticast]
     #
     class LoRaWANMulticast < Struct.new(
@@ -4467,7 +4466,8 @@ module Aws::IoTWireless
     # @!attribute [rw] participating_gateways
     #   Specify the list of gateways to which you want to send the multicast
     #   downlink messages. The multicast message will be sent to each
-    #   gateway in the sequence provided in the list.
+    #   gateway in the list, with the transmission interval as the time
+    #   interval between each message.
     #   @return [Types::ParticipatingGatewaysMulticast]
     #
     class LoRaWANMulticastGet < Struct.new(
@@ -5039,20 +5039,22 @@ module Aws::IoTWireless
 
     # Specify the list of gateways to which you want to send the multicast
     # downlink messages. The multicast message will be sent to each gateway
-    # in the sequence provided in the list.
+    # in the list, with the transmission interval as the time interval
+    # between each message.
     #
     # @!attribute [rw] gateway_list
     #   The list of gateways that you want to use for sending the multicast
-    #   downlink. Each downlink will be sent to all the gateways in the list
-    #   with transmission interval between them. If list is empty the
-    #   gateway list will be dynamically selected similar to the case of no
-    #   ParticipatingGateways
+    #   downlink message. Each downlink message will be sent to all the
+    #   gateways in the list in the order that you provided. If the gateway
+    #   list is empty, then AWS IoT Core for LoRaWAN chooses the gateways
+    #   that were most recently used by the devices to send an uplink
+    #   message.
     #   @return [Array<String>]
     #
     # @!attribute [rw] transmission_interval
-    #   The duration of time for which AWS IoT Core for LoRaWAN will wait
-    #   before transmitting the multicast payload to the next gateway in the
-    #   list.
+    #   The duration of time in milliseconds for which AWS IoT Core for
+    #   LoRaWAN will wait before transmitting the multicast payload to the
+    #   next gateway in the list.
     #   @return [Integer]
     #
     class ParticipatingGatewaysMulticast < Struct.new(
@@ -5204,13 +5206,12 @@ module Aws::IoTWireless
     class PutPositionConfigurationResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] resource_identifier
-    #   The identifier of the resource. For a Wireless Device, it is the
-    #   wireless device ID. For a wireless gateway, it is the wireless
-    #   gateway ID.
+    #   The unique identifier of the resource, which can be the wireless
+    #   gateway ID, the wireless device ID, or the FUOTA task ID.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of the resource, which can be `WirelessDevice`,
+    #   The type of resource, which can be `WirelessDevice`,
     #   `WirelessGateway`, or `FuotaTask`.
     #   @return [String]
     #
@@ -5237,13 +5238,12 @@ module Aws::IoTWireless
     class ResetAllResourceLogLevelsResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] resource_identifier
-    #   The identifier of the resource. For a Wireless Device, it is the
-    #   wireless device ID. For a wireless gateway, it is the wireless
-    #   gateway ID.
+    #   The unique identifier of the resource, which can be the wireless
+    #   gateway ID, the wireless device ID, or the FUOTA task ID.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of the resource, which can be `WirelessDevice`,
+    #   The type of resource, which can be `WirelessDevice`,
     #   `WirelessGateway`, or `FuotaTask`.
     #   @return [String]
     #
@@ -6492,9 +6492,9 @@ module Aws::IoTWireless
     #   @return [Integer]
     #
     # @!attribute [rw] descriptor
-    #   The Descriptor specifies some metadata about the File being
-    #   transferred using FUOTA e.g. the software version. It is sent
-    #   transparently to the device. It is a binary field encoded in base64
+    #   The descriptor is the metadata about the file that is transferred to
+    #   the device using FUOTA, such as the software version. It is a binary
+    #   field encoded in base64.
     #   @return [String]
     #
     class UpdateFuotaTaskRequest < Struct.new(
@@ -6521,7 +6521,7 @@ module Aws::IoTWireless
     #   @return [String]
     #
     # @!attribute [rw] fuota_task_log_options
-    #   The list of fuota task log options.
+    #   The list of FUOTA task log options.
     #   @return [Array<Types::FuotaTaskLogOption>]
     #
     # @!attribute [rw] wireless_device_log_options

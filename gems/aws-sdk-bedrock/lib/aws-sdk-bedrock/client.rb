@@ -643,11 +643,14 @@ module Aws::Bedrock
     #       models: [
     #         {
     #           bedrock_model: {
-    #             model_identifier: "EvaluationModelIdentifier", # required
+    #             model_identifier: "EvaluationBedrockModelIdentifier", # required
     #             inference_params: "EvaluationModelInferenceParams",
     #             performance_config: {
     #               latency: "standard", # accepts standard, optimized
     #             },
+    #           },
+    #           precomputed_inference_source: {
+    #             inference_source_identifier: "EvaluationPrecomputedInferenceSourceIdentifier", # required
     #           },
     #         },
     #       ],
@@ -872,6 +875,14 @@ module Aws::Bedrock
     #                   },
     #                 },
     #               },
+    #             },
+    #           },
+    #           precomputed_rag_source_config: {
+    #             retrieve_source_config: {
+    #               rag_source_identifier: "EvaluationPrecomputedRagSourceIdentifier", # required
+    #             },
+    #             retrieve_and_generate_source_config: {
+    #               rag_source_identifier: "EvaluationPrecomputedRagSourceIdentifier", # required
     #             },
     #           },
     #         },
@@ -2346,6 +2357,7 @@ module Aws::Bedrock
     #   resp.inference_config.models[0].bedrock_model.model_identifier #=> String
     #   resp.inference_config.models[0].bedrock_model.inference_params #=> String
     #   resp.inference_config.models[0].bedrock_model.performance_config.latency #=> String, one of "standard", "optimized"
+    #   resp.inference_config.models[0].precomputed_inference_source.inference_source_identifier #=> String
     #   resp.inference_config.rag_configs #=> Array
     #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_config.knowledge_base_id #=> String
     #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_config.knowledge_base_retrieval_configuration.vector_search_configuration.number_of_results #=> Integer
@@ -2411,6 +2423,8 @@ module Aws::Bedrock
     #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_and_generate_config.external_sources_configuration.generation_configuration.kb_inference_config.text_inference_config.stop_sequences #=> Array
     #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_and_generate_config.external_sources_configuration.generation_configuration.kb_inference_config.text_inference_config.stop_sequences[0] #=> String
     #   resp.inference_config.rag_configs[0].knowledge_base_config.retrieve_and_generate_config.external_sources_configuration.generation_configuration.additional_model_request_fields #=> Hash
+    #   resp.inference_config.rag_configs[0].precomputed_rag_source_config.retrieve_source_config.rag_source_identifier #=> String
+    #   resp.inference_config.rag_configs[0].precomputed_rag_source_config.retrieve_and_generate_source_config.rag_source_identifier #=> String
     #   resp.output_data_config.s3_uri #=> String
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
@@ -2579,6 +2593,7 @@ module Aws::Bedrock
     #   * {Types::GetImportedModelResponse#model_architecture #model_architecture} => String
     #   * {Types::GetImportedModelResponse#model_kms_key_arn #model_kms_key_arn} => String
     #   * {Types::GetImportedModelResponse#instruct_supported #instruct_supported} => Boolean
+    #   * {Types::GetImportedModelResponse#custom_model_units #custom_model_units} => Types::CustomModelUnits
     #
     # @example Request syntax with placeholder values
     #
@@ -2597,6 +2612,8 @@ module Aws::Bedrock
     #   resp.model_architecture #=> String
     #   resp.model_kms_key_arn #=> String
     #   resp.instruct_supported #=> Boolean
+    #   resp.custom_model_units.custom_model_units_per_model_copy #=> Integer
+    #   resp.custom_model_units.custom_model_units_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetImportedModel AWS API Documentation
     #
@@ -3288,6 +3305,14 @@ module Aws::Bedrock
     #   resp.job_summaries[0].rag_identifiers[0] #=> String
     #   resp.job_summaries[0].evaluator_model_identifiers #=> Array
     #   resp.job_summaries[0].evaluator_model_identifiers[0] #=> String
+    #   resp.job_summaries[0].inference_config_summary.model_config_summary.bedrock_model_identifiers #=> Array
+    #   resp.job_summaries[0].inference_config_summary.model_config_summary.bedrock_model_identifiers[0] #=> String
+    #   resp.job_summaries[0].inference_config_summary.model_config_summary.precomputed_inference_source_identifiers #=> Array
+    #   resp.job_summaries[0].inference_config_summary.model_config_summary.precomputed_inference_source_identifiers[0] #=> String
+    #   resp.job_summaries[0].inference_config_summary.rag_config_summary.bedrock_knowledge_base_identifiers #=> Array
+    #   resp.job_summaries[0].inference_config_summary.rag_config_summary.bedrock_knowledge_base_identifiers[0] #=> String
+    #   resp.job_summaries[0].inference_config_summary.rag_config_summary.precomputed_rag_source_identifiers #=> Array
+    #   resp.job_summaries[0].inference_config_summary.rag_config_summary.precomputed_rag_source_identifiers[0] #=> String
     #   resp.job_summaries[0].application_type #=> String, one of "ModelEvaluation", "RagEvaluation"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListEvaluationJobs AWS API Documentation
@@ -4763,7 +4788,7 @@ module Aws::Bedrock
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrock'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

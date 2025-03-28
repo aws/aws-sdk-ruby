@@ -491,6 +491,7 @@ module Aws::BedrockRuntime
       attr_accessor sensitive_information_policy_units: ::Integer
       attr_accessor sensitive_information_policy_free_units: ::Integer
       attr_accessor contextual_grounding_policy_units: ::Integer
+      attr_accessor content_policy_image_units: ::Integer
       SENSITIVE: []
     end
 

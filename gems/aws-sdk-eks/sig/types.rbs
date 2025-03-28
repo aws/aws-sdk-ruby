@@ -405,7 +405,7 @@ module Aws::EKS
       attr_accessor disk_size: ::Integer
       attr_accessor subnets: ::Array[::String]
       attr_accessor instance_types: ::Array[::String]
-      attr_accessor ami_type: ("AL2_x86_64" | "AL2_x86_64_GPU" | "AL2_ARM_64" | "CUSTOM" | "BOTTLEROCKET_ARM_64" | "BOTTLEROCKET_x86_64" | "BOTTLEROCKET_ARM_64_NVIDIA" | "BOTTLEROCKET_x86_64_NVIDIA" | "WINDOWS_CORE_2019_x86_64" | "WINDOWS_FULL_2019_x86_64" | "WINDOWS_CORE_2022_x86_64" | "WINDOWS_FULL_2022_x86_64" | "AL2023_x86_64_STANDARD" | "AL2023_ARM_64_STANDARD" | "AL2023_x86_64_NEURON" | "AL2023_x86_64_NVIDIA")
+      attr_accessor ami_type: ("AL2_x86_64" | "AL2_x86_64_GPU" | "AL2_ARM_64" | "CUSTOM" | "BOTTLEROCKET_ARM_64" | "BOTTLEROCKET_x86_64" | "BOTTLEROCKET_ARM_64_FIPS" | "BOTTLEROCKET_x86_64_FIPS" | "BOTTLEROCKET_ARM_64_NVIDIA" | "BOTTLEROCKET_x86_64_NVIDIA" | "WINDOWS_CORE_2019_x86_64" | "WINDOWS_FULL_2019_x86_64" | "WINDOWS_CORE_2022_x86_64" | "WINDOWS_FULL_2022_x86_64" | "AL2023_x86_64_STANDARD" | "AL2023_ARM_64_STANDARD" | "AL2023_x86_64_NEURON" | "AL2023_x86_64_NVIDIA")
       attr_accessor remote_access: Types::RemoteAccessConfig
       attr_accessor node_role: ::String
       attr_accessor labels: ::Hash[::String, ::String]
@@ -877,6 +877,12 @@ module Aws::EKS
       SENSITIVE: []
     end
 
+    class InvalidStateException
+      attr_accessor cluster_name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class Issue
       attr_accessor code: ("AutoScalingGroupNotFound" | "AutoScalingGroupInvalidConfiguration" | "Ec2SecurityGroupNotFound" | "Ec2SecurityGroupDeletionFailure" | "Ec2LaunchTemplateNotFound" | "Ec2LaunchTemplateVersionMismatch" | "Ec2SubnetNotFound" | "Ec2SubnetInvalidConfiguration" | "IamInstanceProfileNotFound" | "Ec2SubnetMissingIpv6Assignment" | "IamLimitExceeded" | "IamNodeRoleNotFound" | "NodeCreationFailure" | "AsgInstanceLaunchFailures" | "InstanceLimitExceeded" | "InsufficientFreeAddresses" | "AccessDenied" | "InternalFailure" | "ClusterUnreachable" | "AmiIdNotFound" | "AutoScalingGroupOptInRequired" | "AutoScalingGroupRateLimitExceeded" | "Ec2LaunchTemplateDeletionFailure" | "Ec2LaunchTemplateInvalidConfiguration" | "Ec2LaunchTemplateMaxLimitExceeded" | "Ec2SubnetListTooLong" | "IamThrottling" | "NodeTerminationFailure" | "PodEvictionFailure" | "SourceEc2LaunchTemplateNotFound" | "LimitExceeded" | "Unknown" | "AutoScalingGroupInstanceRefreshActive" | "KubernetesLabelInvalid" | "Ec2LaunchTemplateVersionMaxLimitExceeded" | "Ec2InstanceTypeDoesNotExist")
       attr_accessor message: ::String
@@ -1122,7 +1128,7 @@ module Aws::EKS
       attr_accessor instance_types: ::Array[::String]
       attr_accessor subnets: ::Array[::String]
       attr_accessor remote_access: Types::RemoteAccessConfig
-      attr_accessor ami_type: ("AL2_x86_64" | "AL2_x86_64_GPU" | "AL2_ARM_64" | "CUSTOM" | "BOTTLEROCKET_ARM_64" | "BOTTLEROCKET_x86_64" | "BOTTLEROCKET_ARM_64_NVIDIA" | "BOTTLEROCKET_x86_64_NVIDIA" | "WINDOWS_CORE_2019_x86_64" | "WINDOWS_FULL_2019_x86_64" | "WINDOWS_CORE_2022_x86_64" | "WINDOWS_FULL_2022_x86_64" | "AL2023_x86_64_STANDARD" | "AL2023_ARM_64_STANDARD" | "AL2023_x86_64_NEURON" | "AL2023_x86_64_NVIDIA")
+      attr_accessor ami_type: ("AL2_x86_64" | "AL2_x86_64_GPU" | "AL2_ARM_64" | "CUSTOM" | "BOTTLEROCKET_ARM_64" | "BOTTLEROCKET_x86_64" | "BOTTLEROCKET_ARM_64_FIPS" | "BOTTLEROCKET_x86_64_FIPS" | "BOTTLEROCKET_ARM_64_NVIDIA" | "BOTTLEROCKET_x86_64_NVIDIA" | "WINDOWS_CORE_2019_x86_64" | "WINDOWS_FULL_2019_x86_64" | "WINDOWS_CORE_2022_x86_64" | "WINDOWS_FULL_2022_x86_64" | "AL2023_x86_64_STANDARD" | "AL2023_ARM_64_STANDARD" | "AL2023_x86_64_NEURON" | "AL2023_x86_64_NVIDIA")
       attr_accessor node_role: ::String
       attr_accessor labels: ::Hash[::String, ::String]
       attr_accessor taints: ::Array[Types::Taint]
@@ -1354,6 +1360,12 @@ module Aws::EKS
       SENSITIVE: []
     end
 
+    class ThrottlingException
+      attr_accessor cluster_name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class UnsupportedAvailabilityZoneException
       attr_accessor message: ::String
       attr_accessor cluster_name: ::String
@@ -1440,6 +1452,7 @@ module Aws::EKS
       attr_accessor name: ::String
       attr_accessor version: ::String
       attr_accessor client_request_token: ::String
+      attr_accessor force: bool
       SENSITIVE: []
     end
 

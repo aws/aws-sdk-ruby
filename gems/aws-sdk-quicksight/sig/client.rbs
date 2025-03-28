@@ -2539,7 +2539,14 @@ module Aws
                                              order: Array[::String]?,
                                              pinned_field_options: {
                                                pinned_left_fields: Array[::String]?
-                                             }?
+                                             }?,
+                                             transposed_table_options: Array[
+                                               {
+                                                 column_index: ::Integer?,
+                                                 column_width: ::String?,
+                                                 column_type: ("ROW_HEADER_COLUMN" | "VALUE_COLUMN")
+                                               },
+                                             ]?
                                            }?,
                                            paginated_report_options: {
                                              vertical_overflow_visibility: ("HIDDEN" | "VISIBLE")?,
@@ -38013,7 +38020,9 @@ module Aws
                                }?,
                                options: {
                                  timezone: ::String?,
-                                 week_start: ("SUNDAY" | "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY")?
+                                 week_start: ("SUNDAY" | "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY")?,
+                                 q_business_insights_status: ("ENABLED" | "DISABLED")?,
+                                 excluded_data_set_arns: Array[::String]?
                                }?,
                                query_execution_options: {
                                  query_execution_mode: ("AUTO" | "MANUAL")?
@@ -38288,6 +38297,9 @@ module Aws
                                   availability_status: ("ENABLED" | "DISABLED")?
                                 }?,
                                 data_point_tooltip_option: {
+                                  availability_status: ("ENABLED" | "DISABLED")?
+                                }?,
+                                data_qa_enabled_option: {
                                   availability_status: ("ENABLED" | "DISABLED")?
                                 }?
                               },
@@ -39844,7 +39856,14 @@ module Aws
                                               order: Array[::String]?,
                                               pinned_field_options: {
                                                 pinned_left_fields: Array[::String]?
-                                              }?
+                                              }?,
+                                              transposed_table_options: Array[
+                                                {
+                                                  column_index: ::Integer?,
+                                                  column_width: ::String?,
+                                                  column_type: ("ROW_HEADER_COLUMN" | "VALUE_COLUMN")
+                                                },
+                                              ]?
                                             }?,
                                             paginated_report_options: {
                                               vertical_overflow_visibility: ("HIDDEN" | "VISIBLE")?,
@@ -75318,7 +75337,9 @@ module Aws
                                 }?,
                                 options: {
                                   timezone: ::String?,
-                                  week_start: ("SUNDAY" | "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY")?
+                                  week_start: ("SUNDAY" | "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY")?,
+                                  q_business_insights_status: ("ENABLED" | "DISABLED")?,
+                                  excluded_data_set_arns: Array[::String]?
                                 }?,
                                 static_files: Array[
                                   {
@@ -75599,7 +75620,8 @@ module Aws
                                    column_names: Array[::String]
                                  },
                                ]?
-                             }
+                             },
+                             ?use_as: ("RLS_RULES")
                            ) -> _CreateDataSetResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataSetResponseSuccess
 
@@ -75654,7 +75676,8 @@ module Aws
                                   oracle_parameters: {
                                     host: ::String,
                                     port: ::Integer,
-                                    database: ::String
+                                    database: ::String,
+                                    use_service_name: bool?
                                   }?,
                                   postgre_sql_parameters: {
                                     host: ::String,
@@ -75808,7 +75831,8 @@ module Aws
                                         oracle_parameters: {
                                           host: ::String,
                                           port: ::Integer,
-                                          database: ::String
+                                          database: ::String,
+                                          use_service_name: bool?
                                         }?,
                                         postgre_sql_parameters: {
                                           host: ::String,
@@ -77738,7 +77762,14 @@ module Aws
                                              order: Array[::String]?,
                                              pinned_field_options: {
                                                pinned_left_fields: Array[::String]?
-                                             }?
+                                             }?,
+                                             transposed_table_options: Array[
+                                               {
+                                                 column_index: ::Integer?,
+                                                 column_width: ::String?,
+                                                 column_type: ("ROW_HEADER_COLUMN" | "VALUE_COLUMN")
+                                               },
+                                             ]?
                                            }?,
                                            paginated_report_options: {
                                              vertical_overflow_visibility: ("HIDDEN" | "VISIBLE")?,
@@ -113212,7 +113243,9 @@ module Aws
                                }?,
                                options: {
                                  timezone: ::String?,
-                                 week_start: ("SUNDAY" | "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY")?
+                                 week_start: ("SUNDAY" | "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY")?,
+                                 q_business_insights_status: ("ENABLED" | "DISABLED")?,
+                                 excluded_data_set_arns: Array[::String]?
                                }?,
                                query_execution_options: {
                                  query_execution_mode: ("AUTO" | "MANUAL")?
@@ -114925,6 +114958,20 @@ module Aws
                                                           }?,
                                                           bookmarks: {
                                                             enabled: bool
+                                                          }?,
+                                                          amazon_q_in_quick_sight: {
+                                                            executive_summary: {
+                                                              enabled: bool
+                                                            }?
+                                                          }?,
+                                                          schedules: {
+                                                            enabled: bool
+                                                          }?,
+                                                          recent_snapshots: {
+                                                            enabled: bool
+                                                          }?,
+                                                          threshold_alerts: {
+                                                            enabled: bool
                                                           }?
                                                         }?
                                                       }?,
@@ -114935,6 +114982,29 @@ module Aws
                                                             enabled: bool
                                                           }?,
                                                           shared_view: {
+                                                            enabled: bool
+                                                          }?,
+                                                          amazon_q_in_quick_sight: {
+                                                            data_qn_a: {
+                                                              enabled: bool
+                                                            }?,
+                                                            generative_authoring: {
+                                                              enabled: bool
+                                                            }?,
+                                                            executive_summary: {
+                                                              enabled: bool
+                                                            }?,
+                                                            data_stories: {
+                                                              enabled: bool
+                                                            }?
+                                                          }?,
+                                                          schedules: {
+                                                            enabled: bool
+                                                          }?,
+                                                          recent_snapshots: {
+                                                            enabled: bool
+                                                          }?,
+                                                          threshold_alerts: {
                                                             enabled: bool
                                                           }?
                                                         }?
@@ -114979,6 +115049,20 @@ module Aws
                                                                         }?,
                                                                         bookmarks: {
                                                                           enabled: bool
+                                                                        }?,
+                                                                        amazon_q_in_quick_sight: {
+                                                                          executive_summary: {
+                                                                            enabled: bool
+                                                                          }?
+                                                                        }?,
+                                                                        schedules: {
+                                                                          enabled: bool
+                                                                        }?,
+                                                                        recent_snapshots: {
+                                                                          enabled: bool
+                                                                        }?,
+                                                                        threshold_alerts: {
+                                                                          enabled: bool
                                                                         }?
                                                                       }?
                                                                     }?,
@@ -114989,6 +115073,29 @@ module Aws
                                                                           enabled: bool
                                                                         }?,
                                                                         shared_view: {
+                                                                          enabled: bool
+                                                                        }?,
+                                                                        amazon_q_in_quick_sight: {
+                                                                          data_qn_a: {
+                                                                            enabled: bool
+                                                                          }?,
+                                                                          generative_authoring: {
+                                                                            enabled: bool
+                                                                          }?,
+                                                                          executive_summary: {
+                                                                            enabled: bool
+                                                                          }?,
+                                                                          data_stories: {
+                                                                            enabled: bool
+                                                                          }?
+                                                                        }?,
+                                                                        schedules: {
+                                                                          enabled: bool
+                                                                        }?,
+                                                                        recent_snapshots: {
+                                                                          enabled: bool
+                                                                        }?,
+                                                                        threshold_alerts: {
                                                                           enabled: bool
                                                                         }?
                                                                       }?
@@ -115606,7 +115713,12 @@ module Aws
                                                      size_unit: ("HOUR" | "DAY" | "WEEK")
                                                    }
                                                  }
-                                               }
+                                               }?,
+                                               failure_configuration: {
+                                                 email_alert: {
+                                                   alert_status: ("ENABLED" | "DISABLED")?
+                                                 }?
+                                               }?
                                              }
                                            ) -> _PutDataSetRefreshPropertiesResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDataSetRefreshPropertiesResponseSuccess
@@ -115851,7 +115963,7 @@ module Aws
                                              data_sets: Array[
                                                {
                                                  arn: ::String,
-                                                 properties: Array[("Name")]
+                                                 properties: Array[("Name" | "RefreshFailureEmailAlertStatus")]
                                                },
                                              ]?,
                                              themes: Array[
@@ -115966,7 +116078,8 @@ module Aws
                                                    oracle_parameters: {
                                                      host: ::String,
                                                      port: ::Integer,
-                                                     database: ::String
+                                                     database: ::String,
+                                                     use_service_name: bool?
                                                    }?,
                                                    postgre_sql_parameters: {
                                                      host: ::String,
@@ -116096,7 +116209,23 @@ module Aws
                                              data_sets: Array[
                                                {
                                                  data_set_id: ::String,
-                                                 name: ::String?
+                                                 name: ::String?,
+                                                 data_set_refresh_properties: {
+                                                   refresh_configuration: {
+                                                     incremental_refresh: {
+                                                       lookback_window: {
+                                                         column_name: ::String,
+                                                         size: ::Integer,
+                                                         size_unit: ("HOUR" | "DAY" | "WEEK")
+                                                       }
+                                                     }
+                                                   }?,
+                                                   failure_configuration: {
+                                                     email_alert: {
+                                                       alert_status: ("ENABLED" | "DISABLED")?
+                                                     }?
+                                                   }?
+                                                 }?
                                                },
                                              ]?,
                                              themes: Array[
@@ -118034,7 +118163,14 @@ module Aws
                                              order: Array[::String]?,
                                              pinned_field_options: {
                                                pinned_left_fields: Array[::String]?
-                                             }?
+                                             }?,
+                                             transposed_table_options: Array[
+                                               {
+                                                 column_index: ::Integer?,
+                                                 column_width: ::String?,
+                                                 column_type: ("ROW_HEADER_COLUMN" | "VALUE_COLUMN")
+                                               },
+                                             ]?
                                            }?,
                                            paginated_report_options: {
                                              vertical_overflow_visibility: ("HIDDEN" | "VISIBLE")?,
@@ -153508,7 +153644,9 @@ module Aws
                                }?,
                                options: {
                                  timezone: ::String?,
-                                 week_start: ("SUNDAY" | "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY")?
+                                 week_start: ("SUNDAY" | "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY")?,
+                                 q_business_insights_status: ("ENABLED" | "DISABLED")?,
+                                 excluded_data_set_arns: Array[::String]?
                                }?,
                                query_execution_options: {
                                  query_execution_mode: ("AUTO" | "MANUAL")?
@@ -153822,6 +153960,9 @@ module Aws
                                   availability_status: ("ENABLED" | "DISABLED")?
                                 }?,
                                 data_point_tooltip_option: {
+                                  availability_status: ("ENABLED" | "DISABLED")?
+                                }?,
+                                data_qa_enabled_option: {
                                   availability_status: ("ENABLED" | "DISABLED")?
                                 }?
                               },
@@ -155378,7 +155519,14 @@ module Aws
                                               order: Array[::String]?,
                                               pinned_field_options: {
                                                 pinned_left_fields: Array[::String]?
-                                              }?
+                                              }?,
+                                              transposed_table_options: Array[
+                                                {
+                                                  column_index: ::Integer?,
+                                                  column_width: ::String?,
+                                                  column_type: ("ROW_HEADER_COLUMN" | "VALUE_COLUMN")
+                                                },
+                                              ]?
                                             }?,
                                             paginated_report_options: {
                                               vertical_overflow_visibility: ("HIDDEN" | "VISIBLE")?,
@@ -190852,7 +191000,9 @@ module Aws
                                 }?,
                                 options: {
                                   timezone: ::String?,
-                                  week_start: ("SUNDAY" | "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY")?
+                                  week_start: ("SUNDAY" | "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY")?,
+                                  q_business_insights_status: ("ENABLED" | "DISABLED")?,
+                                  excluded_data_set_arns: Array[::String]?
                                 }?,
                                 static_files: Array[
                                   {
@@ -191273,7 +191423,8 @@ module Aws
                                   oracle_parameters: {
                                     host: ::String,
                                     port: ::Integer,
-                                    database: ::String
+                                    database: ::String,
+                                    use_service_name: bool?
                                   }?,
                                   postgre_sql_parameters: {
                                     host: ::String,
@@ -191427,7 +191578,8 @@ module Aws
                                         oracle_parameters: {
                                           host: ::String,
                                           port: ::Integer,
-                                          database: ::String
+                                          database: ::String,
+                                          use_service_name: bool?
                                         }?,
                                         postgre_sql_parameters: {
                                           host: ::String,
@@ -193409,7 +193561,14 @@ module Aws
                                              order: Array[::String]?,
                                              pinned_field_options: {
                                                pinned_left_fields: Array[::String]?
-                                             }?
+                                             }?,
+                                             transposed_table_options: Array[
+                                               {
+                                                 column_index: ::Integer?,
+                                                 column_width: ::String?,
+                                                 column_type: ("ROW_HEADER_COLUMN" | "VALUE_COLUMN")
+                                               },
+                                             ]?
                                            }?,
                                            paginated_report_options: {
                                              vertical_overflow_visibility: ("HIDDEN" | "VISIBLE")?,
@@ -228883,7 +229042,9 @@ module Aws
                                }?,
                                options: {
                                  timezone: ::String?,
-                                 week_start: ("SUNDAY" | "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY")?
+                                 week_start: ("SUNDAY" | "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY")?,
+                                 q_business_insights_status: ("ENABLED" | "DISABLED")?,
+                                 excluded_data_set_arns: Array[::String]?
                                }?,
                                query_execution_options: {
                                  query_execution_mode: ("AUTO" | "MANUAL")?

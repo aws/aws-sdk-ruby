@@ -13,8 +13,8 @@ module Aws::MediaConnect
     # Add a flow source to an existing bridge.
     #
     # @!attribute [rw] flow_arn
-    #   The Amazon Resource Number (ARN) of the cloud flow to use as a
-    #   source of this bridge.
+    #   The Amazon Resource Number (ARN) of the flow to use as a source of
+    #   this bridge.
     #   @return [String]
     #
     # @!attribute [rw] flow_vpc_interface_attachment
@@ -57,6 +57,11 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] protocol
     #   The network output protocol.
+    #
+    #   <note markdown="1"> Elemental MediaConnect no longer supports the Fujitsu QoS protocol.
+    #   This reference is maintained for legacy purposes only.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] ttl
@@ -83,7 +88,7 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] multicast_source_settings
-    #   The IP address of the source for source-specific multicast (SSM).
+    #   The settings related to the multicast source.
     #   @return [Types::MulticastSourceSettings]
     #
     # @!attribute [rw] name
@@ -101,6 +106,11 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] protocol
     #   The network source protocol.
+    #
+    #   <note markdown="1"> Elemental MediaConnect no longer supports the Fujitsu QoS protocol.
+    #   This reference is maintained for legacy purposes only.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddBridgeNetworkSourceRequest AWS API Documentation
@@ -116,10 +126,11 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Add an output to a bridge.
+    # Add outputs to the specified bridge.
     #
     # @!attribute [rw] network_output
-    #   Add a network output to an existing bridge.
+    #   The network output of the bridge. A network output is delivered to
+    #   your premises.
     #   @return [Types::AddBridgeNetworkOutputRequest]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddBridgeOutputRequest AWS API Documentation
@@ -130,10 +141,9 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Adds outputs to an existing bridge. You can create up to 2 outputs per
-    # bridge.
-    #
     # @!attribute [rw] bridge_arn
+    #   The Amazon Resource Name (ARN) of the bridge that you want to
+    #   update.
     #   @return [String]
     #
     # @!attribute [rw] outputs
@@ -149,10 +159,8 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful AddBridgeOutputs request.
-    #
     # @!attribute [rw] bridge_arn
-    #   The Amazon Resource Number (ARN) of the bridge.
+    #   The ARN of the bridge that you added outputs to.
     #   @return [String]
     #
     # @!attribute [rw] outputs
@@ -168,14 +176,14 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Add a source to an existing bridge.
+    # Add an output to a bridge.
     #
     # @!attribute [rw] flow_source
-    #   Add a flow source to an existing bridge.
+    #   The source of the flow.
     #   @return [Types::AddBridgeFlowSourceRequest]
     #
     # @!attribute [rw] network_source
-    #   Add a network source to an existing bridge.
+    #   The source of the network.
     #   @return [Types::AddBridgeNetworkSourceRequest]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddBridgeSourceRequest AWS API Documentation
@@ -187,10 +195,9 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Add sources to an existing bridge. You can create up to 2 sources per
-    # bridge.
-    #
     # @!attribute [rw] bridge_arn
+    #   The Amazon Resource Name (ARN) of the bridge that you want to
+    #   update.
     #   @return [String]
     #
     # @!attribute [rw] sources
@@ -206,10 +213,8 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful AddBridgeSources request.
-    #
     # @!attribute [rw] bridge_arn
-    #   The Amazon Resource Number (ARN) of the bridge.
+    #   The ARN of the bridge that you added sources to.
     #   @return [String]
     #
     # @!attribute [rw] sources
@@ -225,8 +230,12 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # Create a bridge with the egress bridge type. An egress bridge is a
+    # cloud-to-ground bridge. The content comes from an existing
+    # MediaConnect flow and is delivered to your premises.
+    #
     # @!attribute [rw] max_bitrate
-    #   The maximum expected bitrate (in bps).
+    #   The maximum expected bitrate (in bps) of the egress bridge.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddEgressGatewayBridgeRequest AWS API Documentation
@@ -237,9 +246,8 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Adds media streams to an existing flow.
-    #
     # @!attribute [rw] flow_arn
+    #   The Amazon Resource Name (ARN) of the flow.
     #   @return [String]
     #
     # @!attribute [rw] media_streams
@@ -255,9 +263,6 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful AddFlowMediaStreams request. The response
-    # includes the details of the newly added media streams.
-    #
     # @!attribute [rw] flow_arn
     #   The ARN of the flow that you added media streams to.
     #   @return [String]
@@ -275,9 +280,9 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Exception raised by AWS Elemental MediaConnect. See the error message
-    # and documentation for the operation for more information on the cause
-    # of this exception.
+    # Exception raised by Elemental MediaConnect when adding the flow
+    # output. See the error message for the operation for more information
+    # on the cause of this exception.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -290,14 +295,13 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Adds outputs to an existing flow. You can create up to 50 outputs per
-    # flow.
-    #
     # @!attribute [rw] flow_arn
+    #   The Amazon Resource Name (ARN) of the flow that you want to add
+    #   outputs to.
     #   @return [String]
     #
     # @!attribute [rw] outputs
-    #   A list of outputs that you want to add.
+    #   A list of outputs that you want to add to the flow.
     #   @return [Array<Types::AddOutputRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddFlowOutputsRequest AWS API Documentation
@@ -309,9 +313,6 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful AddOutput request. The response includes
-    # the details of the newly added outputs.
-    #
     # @!attribute [rw] flow_arn
     #   The ARN of the flow that these outputs were added to.
     #   @return [String]
@@ -329,13 +330,12 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Adds sources to an existing flow.
-    #
     # @!attribute [rw] flow_arn
+    #   The Amazon Resource Name (ARN) of the flow that you want to update.
     #   @return [String]
     #
     # @!attribute [rw] sources
-    #   A list of sources that you want to add.
+    #   A list of sources that you want to add to the flow.
     #   @return [Array<Types::SetSourceRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddFlowSourcesRequest AWS API Documentation
@@ -347,9 +347,6 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful AddFlowSources request. The response
-    # includes the details of the newly added sources.
-    #
     # @!attribute [rw] flow_arn
     #   The ARN of the flow that these sources were added to.
     #   @return [String]
@@ -367,13 +364,12 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Adds VPC interfaces to an existing flow.
-    #
     # @!attribute [rw] flow_arn
+    #   The Amazon Resource Name (ARN) of the flow that you want to update.
     #   @return [String]
     #
     # @!attribute [rw] vpc_interfaces
-    #   A list of VPC interfaces that you want to add.
+    #   A list of VPC interfaces that you want to add to the flow.
     #   @return [Array<Types::VpcInterfaceRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddFlowVpcInterfacesRequest AWS API Documentation
@@ -385,9 +381,6 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful AddFlowVpcInterfaces request. The response
-    # includes the details of the newly added VPC interfaces.
-    #
     # @!attribute [rw] flow_arn
     #   The ARN of the flow that these VPC interfaces were added to.
     #   @return [String]
@@ -405,12 +398,16 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # Create a bridge with the ingress bridge type. An ingress bridge is a
+    # ground-to-cloud bridge. The content originates at your premises and is
+    # delivered to the cloud.
+    #
     # @!attribute [rw] max_bitrate
-    #   The maximum expected bitrate (in bps).
+    #   The maximum expected bitrate (in bps) of the ingress bridge.
     #   @return [Integer]
     #
     # @!attribute [rw] max_outputs
-    #   The maximum number of expected outputs.
+    #   The maximum number of expected outputs on the ingress bridge.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddIngressGatewayBridgeRequest AWS API Documentation
@@ -422,16 +419,22 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Create maintenance setting for a flow
+    # Create a maintenance setting for a flow.
     #
     # @!attribute [rw] maintenance_day
-    #   A day of a week when the maintenance will happen. Use
-    #   Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.
+    #   A day of a week when the maintenance will happen.
     #   @return [String]
     #
     # @!attribute [rw] maintenance_start_hour
-    #   UTC time when the maintenance will happen. Use 24-hour HH:MM format.
-    #   Minutes must be 00. Example: 13:00. The default value is 02:00.
+    #   UTC time when the maintenance will happen.
+    #
+    #   Use 24-hour HH:MM format.
+    #
+    #   Minutes must be 00.
+    #
+    #   Example: 13:00.
+    #
+    #   The default value is 02:00.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddMaintenance AWS API Documentation
@@ -490,7 +493,7 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The output that you want to add to this flow.
+    # A request to add an output to a flow.
     #
     # @!attribute [rw] cidr_allow_list
     #   The range of IP addresses that should be allowed to initiate output
@@ -501,8 +504,7 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] description
     #   A description of the output. This description appears only on the
-    #   AWS Elemental MediaConnect console and will not be seen by the end
-    #   user.
+    #   Audit Manager console and will not be seen by the end user.
     #   @return [String]
     #
     # @!attribute [rw] destination
@@ -517,7 +519,7 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] max_latency
     #   The maximum latency in milliseconds. This parameter applies only to
-    #   RIST-based, Zixi-based, and Fujitsu-based streams.
+    #   RIST-based and Zixi-based streams.
     #   @return [Integer]
     #
     # @!attribute [rw] media_stream_output_configurations
@@ -545,6 +547,11 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] protocol
     #   The protocol to use for the output.
+    #
+    #   <note markdown="1"> Elemental MediaConnect no longer supports the Fujitsu QoS protocol.
+    #   This reference is maintained for legacy purposes only.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] remote_id
@@ -576,6 +583,15 @@ module Aws::MediaConnect
     #   outputStatus field in your request, MediaConnect sets it to ENABLED.
     #   @return [String]
     #
+    # @!attribute [rw] ndi_speed_hq_quality
+    #   A quality setting for the NDI Speed HQ encoder.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ndi_program_name
+    #   A suffix for the names of the NDI sources that the flow creates. If
+    #   a custom name isn't specified, MediaConnect uses the output name.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddOutputRequest AWS API Documentation
     #
     class AddOutputRequest < Struct.new(
@@ -594,7 +610,9 @@ module Aws::MediaConnect
       :smoothing_latency,
       :stream_id,
       :vpc_interface_attachment,
-      :output_status)
+      :output_status,
+      :ndi_speed_hq_quality,
+      :ndi_program_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -613,9 +631,9 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Exception raised by AWS Elemental MediaConnect. See the error message
-    # and documentation for the operation for more information on the cause
-    # of this exception.
+    # This exception is thrown if the request contains a semantic error. The
+    # precise meaning depends on the API, and is documented in the error
+    # message.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -628,10 +646,10 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Configures settings for the BlackFrames metric.
+    # Configures settings for the `BlackFrames` metric.
     #
     # @!attribute [rw] state
-    #   Indicates whether the BlackFrames metric is enabled or disabled.
+    #   Indicates whether the `BlackFrames` metric is enabled or disabled..
     #   @return [String]
     #
     # @!attribute [rw] threshold_seconds
@@ -649,23 +667,30 @@ module Aws::MediaConnect
     end
 
     # A Bridge is the connection between your data center's Instances and
-    # the AWS cloud. A bridge can be used to send video from the AWS cloud
-    # to your data center or from your data center to the AWS cloud.
+    # the Amazon Web Services cloud. A bridge can be used to send video from
+    # the Amazon Web Services cloud to your data center or from your data
+    # center to the Amazon Web Services cloud.
     #
     # @!attribute [rw] bridge_arn
     #   The Amazon Resource Number (ARN) of the bridge.
     #   @return [String]
     #
     # @!attribute [rw] bridge_messages
+    #   Messages with details about the bridge.
     #   @return [Array<Types::MessageDetail>]
     #
     # @!attribute [rw] bridge_state
+    #   The state of the bridge.
     #   @return [String]
     #
     # @!attribute [rw] egress_gateway_bridge
+    #   An egress bridge is a cloud-to-ground bridge. The content comes from
+    #   an existing MediaConnect flow and is delivered to your premises.
     #   @return [Types::EgressGatewayBridge]
     #
     # @!attribute [rw] ingress_gateway_bridge
+    #   An ingress bridge is a ground-to-cloud bridge. The content
+    #   originates at your premises and is delivered to the cloud.
     #   @return [Types::IngressGatewayBridge]
     #
     # @!attribute [rw] name
@@ -705,7 +730,8 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The output of the bridge. A flow output is delivered to the AWS cloud.
+    # The output of the bridge. A flow output is delivered to the Amazon Web
+    # Services cloud.
     #
     # @!attribute [rw] flow_arn
     #   The Amazon Resource Number (ARN) of the cloud flow.
@@ -763,7 +789,7 @@ module Aws::MediaConnect
     # premises.
     #
     # @!attribute [rw] ip_address
-    #   The network output IP Address.
+    #   The network output IP address.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -775,11 +801,16 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] port
-    #   The network output port.
+    #   The network output's port.
     #   @return [Integer]
     #
     # @!attribute [rw] protocol
     #   The network output protocol.
+    #
+    #   <note markdown="1"> Elemental MediaConnect no longer supports the Fujitsu QoS protocol.
+    #   This reference is maintained for legacy purposes only.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] ttl
@@ -807,7 +838,7 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] multicast_source_settings
-    #   The IP address of the source for source-specific multicast (SSM).
+    #   The settings related to the multicast source.
     #   @return [Types::MulticastSourceSettings]
     #
     # @!attribute [rw] name
@@ -824,6 +855,11 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] protocol
     #   The network source protocol.
+    #
+    #   <note markdown="1"> Elemental MediaConnect no longer supports the Fujitsu QoS protocol.
+    #   This reference is maintained for legacy purposes only.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/BridgeNetworkSource AWS API Documentation
@@ -842,13 +878,11 @@ module Aws::MediaConnect
     # The output of the bridge.
     #
     # @!attribute [rw] flow_output
-    #   The output of the bridge. A flow output is delivered to the AWS
-    #   cloud.
+    #   The output of the associated flow.
     #   @return [Types::BridgeFlowOutput]
     #
     # @!attribute [rw] network_output
-    #   The output of the bridge. A network output is delivered to your
-    #   premises.
+    #   The network output for the bridge.
     #   @return [Types::BridgeNetworkOutput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/BridgeOutput AWS API Documentation
@@ -863,13 +897,11 @@ module Aws::MediaConnect
     # The bridge's source.
     #
     # @!attribute [rw] flow_source
-    #   The source of the bridge. A flow source originates in MediaConnect
-    #   as an existing cloud flow.
+    #   The source of the associated flow.
     #   @return [Types::BridgeFlowSource]
     #
     # @!attribute [rw] network_source
-    #   The source of the bridge. A network source originates at your
-    #   premises.
+    #   The network source for the bridge.
     #   @return [Types::BridgeNetworkSource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/BridgeSource AWS API Documentation
@@ -881,9 +913,9 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Exception raised by AWS Elemental MediaConnect. See the error message
-    # and documentation for the operation for more information on the cause
-    # of this exception.
+    # The requested operation would cause a conflict with the current state
+    # of a service resource associated with the request. Resolve the
+    # conflict before retrying this request.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -896,9 +928,9 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Exception raised by AWS Elemental MediaConnect. See the error message
-    # and documentation for the operation for more information on the cause
-    # of this exception.
+    # Exception raised by Elemental MediaConnect when creating the bridge.
+    # See the error message for the operation for more information on the
+    # cause of this exception.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -911,18 +943,14 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Creates a new bridge. The request must include one source.
-    #
     # @!attribute [rw] egress_gateway_bridge
-    #   Create a bridge with the egress bridge type. An egress bridge is a
-    #   cloud-to-ground bridge. The content comes from an existing
-    #   MediaConnect flow and is delivered to your premises.
+    #   An egress bridge is a cloud-to-ground bridge. The content comes from
+    #   an existing MediaConnect flow and is delivered to your premises.
     #   @return [Types::AddEgressGatewayBridgeRequest]
     #
     # @!attribute [rw] ingress_gateway_bridge
-    #   Create a bridge with the ingress bridge type. An ingress bridge is a
-    #   ground-to-cloud bridge. The content originates at your premises and
-    #   is delivered to the cloud.
+    #   An ingress bridge is a ground-to-cloud bridge. The content
+    #   originates at your premises and is delivered to the cloud.
     #   @return [Types::AddIngressGatewayBridgeRequest]
     #
     # @!attribute [rw] name
@@ -960,12 +988,8 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful CreateBridge request.
-    #
     # @!attribute [rw] bridge
-    #   A Bridge is the connection between your data center's Instances and
-    #   the AWS cloud. A bridge can be used to send video from the AWS cloud
-    #   to your data center or from your data center to the AWS cloud.
+    #   The name of the bridge that was created.
     #   @return [Types::Bridge]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/CreateBridgeResponse AWS API Documentation
@@ -976,8 +1000,8 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Exception raised by AWS Elemental MediaConnect. See the error message
-    # and documentation for the operation for more information on the cause
+    # Exception raised by Elemental MediaConnect when creating the flow. See
+    # the error message for the operation for more information on the cause
     # of this exception.
     #
     # @!attribute [rw] message
@@ -991,13 +1015,10 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Creates a new flow. The request must include one source. The request
-    # optionally can include outputs (up to 50) and entitlements (up to 50.)
-    #
     # @!attribute [rw] availability_zone
     #   The Availability Zone that you want to create the flow in. These
-    #   options are limited to the Availability Zones within the current AWS
-    #   Region.
+    #   options are limited to the Availability Zones within the current
+    #   Amazon Web Services Region.
     #   @return [String]
     #
     # @!attribute [rw] entitlements
@@ -1018,7 +1039,7 @@ module Aws::MediaConnect
     #   @return [Array<Types::AddOutputRequest>]
     #
     # @!attribute [rw] source
-    #   The settings for the source of the flow.
+    #   The settings for the source that you want to use for the new flow.
     #   @return [Types::SetSourceRequest]
     #
     # @!attribute [rw] source_failover_config
@@ -1026,6 +1047,7 @@ module Aws::MediaConnect
     #   @return [Types::FailoverConfig]
     #
     # @!attribute [rw] sources
+    #   The sources that are assigned to the flow.
     #   @return [Array<Types::SetSourceRequest>]
     #
     # @!attribute [rw] vpc_interfaces
@@ -1033,12 +1055,23 @@ module Aws::MediaConnect
     #   @return [Array<Types::VpcInterfaceRequest>]
     #
     # @!attribute [rw] maintenance
-    #   Create maintenance setting for a flow
+    #   The maintenance settings you want to use for the flow.
     #   @return [Types::AddMaintenance]
     #
     # @!attribute [rw] source_monitoring_config
     #   The settings for source monitoring.
     #   @return [Types::MonitoringConfig]
+    #
+    # @!attribute [rw] flow_size
+    #   Determines the processing capacity and feature set of the flow. Set
+    #   this optional parameter to `LARGE` if you want to enable NDI outputs
+    #   on the flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] ndi_config
+    #   Specifies the configuration settings for NDI outputs. Required when
+    #   the flow includes NDI outputs.
+    #   @return [Types::NdiConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/CreateFlowRequest AWS API Documentation
     #
@@ -1053,16 +1086,15 @@ module Aws::MediaConnect
       :sources,
       :vpc_interfaces,
       :maintenance,
-      :source_monitoring_config)
+      :source_monitoring_config,
+      :flow_size,
+      :ndi_config)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # The result of a successful CreateFlow request.
-    #
     # @!attribute [rw] flow
-    #   The settings for a flow, including its source, outputs, and
-    #   entitlements.
+    #   The flow that you created.
     #   @return [Types::Flow]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/CreateFlowResponse AWS API Documentation
@@ -1073,9 +1105,9 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Exception raised by AWS Elemental MediaConnect. See the error message
-    # and documentation for the operation for more information on the cause
-    # of this exception.
+    # Exception raised by Elemental MediaConnect when creating the gateway.
+    # See the error message for the operation for more information on the
+    # cause of this exception.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1088,8 +1120,6 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Creates a new gateway. The request must include one network (up to 4).
-    #
     # @!attribute [rw] egress_cidr_blocks
     #   The range of IP addresses that are allowed to contribute content or
     #   initiate output requests for flows communicating with this gateway.
@@ -1103,7 +1133,7 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] networks
-    #   The list of networks that you want to add.
+    #   The list of networks that you want to add to the gateway.
     #   @return [Array<Types::GatewayNetwork>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/CreateGatewayRequest AWS API Documentation
@@ -1117,7 +1147,7 @@ module Aws::MediaConnect
     end
 
     # @!attribute [rw] gateway
-    #   The settings for a gateway, including its networks.
+    #   The gateway that you created.
     #   @return [Types::Gateway]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/CreateGatewayResponse AWS API Documentation
@@ -1129,6 +1159,8 @@ module Aws::MediaConnect
     end
 
     # @!attribute [rw] bridge_arn
+    #   The Amazon Resource Name (ARN) of the bridge that you want to
+    #   delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DeleteBridgeRequest AWS API Documentation
@@ -1139,10 +1171,8 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful DeleteBridge request.
-    #
     # @!attribute [rw] bridge_arn
-    #   The Amazon Resource Number (ARN) of the deleted bridge.
+    #   The ARN of the deleted bridge.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DeleteBridgeResponse AWS API Documentation
@@ -1154,6 +1184,7 @@ module Aws::MediaConnect
     end
 
     # @!attribute [rw] flow_arn
+    #   The Amazon Resource Name (ARN) of the flow that you want to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DeleteFlowRequest AWS API Documentation
@@ -1164,14 +1195,12 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful DeleteFlow request.
-    #
     # @!attribute [rw] flow_arn
     #   The ARN of the flow that was deleted.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the flow when the DeleteFlow process begins.
+    #   The status of the flow when the `DeleteFlow` process begins.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DeleteFlowResponse AWS API Documentation
@@ -1184,6 +1213,8 @@ module Aws::MediaConnect
     end
 
     # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway that you want to
+    #   delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DeleteGatewayRequest AWS API Documentation
@@ -1194,10 +1225,8 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful DeleteGateway request.
-    #
     # @!attribute [rw] gateway_arn
-    #   The Amazon Resource Name (ARN) of the gateway that was deleted.
+    #   The ARN of the gateway that was deleted.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DeleteGatewayResponse AWS API Documentation
@@ -1209,9 +1238,13 @@ module Aws::MediaConnect
     end
 
     # @!attribute [rw] force
+    #   Force the deregistration of an instance. Force will deregister an
+    #   instance, even if there are bridges running on it.
     #   @return [Boolean]
     #
     # @!attribute [rw] gateway_instance_arn
+    #   The Amazon Resource Name (ARN) of the gateway that contains the
+    #   instance that you want to deregister.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DeregisterGatewayInstanceRequest AWS API Documentation
@@ -1223,10 +1256,8 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful DeregisterGatewayInstance request.
-    #
     # @!attribute [rw] gateway_instance_arn
-    #   The Amazon Resource Name (ARN) of the instance.
+    #   The ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] instance_state
@@ -1243,6 +1274,8 @@ module Aws::MediaConnect
     end
 
     # @!attribute [rw] bridge_arn
+    #   The Amazon Resource Name (ARN) of the bridge that you want to
+    #   describe.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DescribeBridgeRequest AWS API Documentation
@@ -1253,12 +1286,8 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful DescribeBridge request.
-    #
     # @!attribute [rw] bridge
-    #   A Bridge is the connection between your data center's Instances and
-    #   the AWS cloud. A bridge can be used to send video from the AWS cloud
-    #   to your data center or from your data center to the AWS cloud.
+    #   The bridge that you requested a description of.
     #   @return [Types::Bridge]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DescribeBridgeResponse AWS API Documentation
@@ -1270,6 +1299,7 @@ module Aws::MediaConnect
     end
 
     # @!attribute [rw] flow_arn
+    #   The ARN of the flow that you want to describe.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DescribeFlowRequest AWS API Documentation
@@ -1280,15 +1310,13 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful DescribeFlow request.
-    #
     # @!attribute [rw] flow
-    #   The settings for a flow, including its source, outputs, and
-    #   entitlements.
+    #   The flow that you requested a description of.
     #   @return [Types::Flow]
     #
     # @!attribute [rw] messages
-    #   Messages that provide the state of the flow.
+    #   Any errors that apply currently to the flow. If there are no errors,
+    #   MediaConnect will not include this field in the response.
     #   @return [Types::Messages]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DescribeFlowResponse AWS API Documentation
@@ -1301,6 +1329,7 @@ module Aws::MediaConnect
     end
 
     # @!attribute [rw] flow_arn
+    #   The Amazon Resource Name (ARN) of the flow.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DescribeFlowSourceMetadataRequest AWS API Documentation
@@ -1311,8 +1340,6 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful DescribeFlowSourceMetadata request.
-    #
     # @!attribute [rw] flow_arn
     #   The ARN of the flow that DescribeFlowSourceMetadata was performed
     #   on.
@@ -1329,7 +1356,7 @@ module Aws::MediaConnect
     #   @return [Time]
     #
     # @!attribute [rw] transport_media_info
-    #   The metadata of the transport stream in the current flow's source.
+    #   Information about the flow's transport media.
     #   @return [Types::TransportMediaInfo]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DescribeFlowSourceMetadataResponse AWS API Documentation
@@ -1344,6 +1371,7 @@ module Aws::MediaConnect
     end
 
     # @!attribute [rw] flow_arn
+    #   The Amazon Resource Name (ARN) of the flow.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DescribeFlowSourceThumbnailRequest AWS API Documentation
@@ -1354,8 +1382,6 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful DescribeFlowSourceThumbnail request.
-    #
     # @!attribute [rw] thumbnail_details
     #   The details of the thumbnail, including thumbnail base64 string,
     #   timecode and the time when thumbnail was generated.
@@ -1370,6 +1396,8 @@ module Aws::MediaConnect
     end
 
     # @!attribute [rw] gateway_instance_arn
+    #   The Amazon Resource Name (ARN) of the gateway instance that you want
+    #   to describe.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DescribeGatewayInstanceRequest AWS API Documentation
@@ -1380,10 +1408,8 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful DescribeGatewayInstance request.
-    #
     # @!attribute [rw] gateway_instance
-    #   The settings for an instance in a gateway.
+    #   The gateway instance that you requested a description of.
     #   @return [Types::GatewayInstance]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DescribeGatewayInstanceResponse AWS API Documentation
@@ -1395,6 +1421,7 @@ module Aws::MediaConnect
     end
 
     # @!attribute [rw] gateway_arn
+    #   The ARN of the gateway that you want to describe.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DescribeGatewayRequest AWS API Documentation
@@ -1405,10 +1432,8 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful DescribeGateway request.
-    #
     # @!attribute [rw] gateway
-    #   The settings for a gateway, including its networks.
+    #   The gateway that you wanted to describe.
     #   @return [Types::Gateway]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DescribeGatewayResponse AWS API Documentation
@@ -1420,6 +1445,7 @@ module Aws::MediaConnect
     end
 
     # @!attribute [rw] offering_arn
+    #   The ARN of the offering.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DescribeOfferingRequest AWS API Documentation
@@ -1430,11 +1456,8 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful DescribeOffering request.
-    #
     # @!attribute [rw] offering
-    #   A savings plan that reserves a certain amount of outbound bandwidth
-    #   usage at a discounted rate each month over a period of time.
+    #   The offering that you requested a description of.
     #   @return [Types::Offering]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DescribeOfferingResponse AWS API Documentation
@@ -1446,6 +1469,7 @@ module Aws::MediaConnect
     end
 
     # @!attribute [rw] reservation_arn
+    #   The Amazon Resource Name (ARN) of the offering.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DescribeReservationRequest AWS API Documentation
@@ -1456,8 +1480,6 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful DescribeReservation request.
-    #
     # @!attribute [rw] reservation
     #   A pricing agreement for a discounted rate for a specific outbound
     #   bandwidth that your MediaConnect account will use each month over a
@@ -1476,28 +1498,29 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The transport parameters that are associated with an outbound media
-    # stream.
+    # The transport parameters that you want to associate with an outbound
+    # media stream.
     #
     # @!attribute [rw] destination_ip
-    #   The IP address where contents of the media stream will be sent.
+    #   The IP address where you want MediaConnect to send contents of the
+    #   media stream.
     #   @return [String]
     #
     # @!attribute [rw] destination_port
-    #   The port to use when the content of the media stream is distributed
-    #   to the output.
+    #   The port that you want MediaConnect to use when it distributes the
+    #   media stream to the output.
     #   @return [Integer]
     #
     # @!attribute [rw] interface
-    #   The VPC interface that is used for the media stream associated with
-    #   the output.
+    #   The VPC interface that you want to use for the media stream
+    #   associated with the output.
     #   @return [Types::Interface]
     #
     # @!attribute [rw] outbound_ip
     #   The IP address that the receiver requires in order to establish a
     #   connection with the flow. This value is represented by the elastic
     #   network interface IP address of the VPC. This field applies only to
-    #   outputs that use the CDI or ST 2110 JPEG XS protocol.
+    #   outputs that use the CDI or ST 2110 JPEG XS or protocol.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DestinationConfiguration AWS API Documentation
@@ -1511,8 +1534,8 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The transport parameters that you want to associate with an outbound
-    # media stream.
+    # The definition of a media stream that you want to associate with the
+    # output.
     #
     # @!attribute [rw] destination_ip
     #   The IP address where you want MediaConnect to send contents of the
@@ -1539,6 +1562,10 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # Create a bridge with the egress bridge type. An egress bridge is a
+    # cloud-to-ground bridge. The content comes from an existing
+    # MediaConnect flow and is delivered to your premises.
+    #
     # @!attribute [rw] instance_id
     #   The ID of the instance running this bridge.
     #   @return [String]
@@ -1640,9 +1667,9 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The AWS Region that the API Gateway proxy endpoint was created in.
-    #   This parameter is required for SPEKE encryption and is not valid for
-    #   static key encryption.
+    #   The Amazon Web Services Region that the API Gateway proxy endpoint
+    #   was created in. This parameter is required for SPEKE encryption and
+    #   is not valid for static key encryption.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -1654,12 +1681,12 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] role_arn
     #   The ARN of the role that you created during setup (when you set up
-    #   AWS Elemental MediaConnect as a trusted entity).
+    #   MediaConnect as a trusted entity).
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
-    #   The ARN of the secret that you created in AWS Secrets Manager to
-    #   store the encryption key. This parameter is required for static key
+    #   The ARN of the secret that you created in Secrets Manager to store
+    #   the encryption key. This parameter is required for static key
     #   encryption and is not valid for SPEKE encryption.
     #   @return [String]
     #
@@ -1714,9 +1741,9 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] subscribers
-    #   The AWS account IDs that you want to share your content with. The
-    #   receiving accounts (subscribers) will be allowed to create their own
-    #   flow using your content as the source.
+    #   The Amazon Web Services account IDs that you want to share your
+    #   content with. The receiving accounts (subscribers) will be allowed
+    #   to create their own flow using your content as the source.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Entitlement AWS API Documentation
@@ -1743,7 +1770,7 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] recovery_window
-    #   Search window time to look for dash-7 packets
+    #   Search window time to look for dash-7 packets.
     #   @return [Integer]
     #
     # @!attribute [rw] source_priority
@@ -1752,6 +1779,9 @@ module Aws::MediaConnect
     #   @return [Types::SourcePriority]
     #
     # @!attribute [rw] state
+    #   The state of source failover on the flow. If the state is inactive,
+    #   the flow can have only one source. If the state is active, the flow
+    #   can have one or two sources.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/FailoverConfig AWS API Documentation
@@ -1771,12 +1801,12 @@ module Aws::MediaConnect
     # @!attribute [rw] availability_zone
     #   The Availability Zone that you want to create the flow in. These
     #   options are limited to the Availability Zones within the current
-    #   AWS.
+    #   Amazon Web Services Region.
     #   @return [String]
     #
     # @!attribute [rw] description
     #   A description of the flow. This value is not used or seen outside of
-    #   the current AWS Elemental MediaConnect account.
+    #   the current MediaConnect account.
     #   @return [String]
     #
     # @!attribute [rw] egress_ip
@@ -1806,14 +1836,15 @@ module Aws::MediaConnect
     #   @return [Array<Types::Output>]
     #
     # @!attribute [rw] source
-    #   The settings for the source of the flow.
+    #   The source for the flow.
     #   @return [Types::Source]
     #
     # @!attribute [rw] source_failover_config
-    #   The settings for source failover.
+    #   The settings for the source failover.
     #   @return [Types::FailoverConfig]
     #
     # @!attribute [rw] sources
+    #   The settings for the sources that are assigned to the flow.
     #   @return [Array<Types::Source>]
     #
     # @!attribute [rw] status
@@ -1825,12 +1856,23 @@ module Aws::MediaConnect
     #   @return [Array<Types::VpcInterface>]
     #
     # @!attribute [rw] maintenance
-    #   The maintenance setting of a flow
+    #   The maintenance settings for the flow.
     #   @return [Types::Maintenance]
     #
     # @!attribute [rw] source_monitoring_config
     #   The settings for source monitoring.
     #   @return [Types::MonitoringConfig]
+    #
+    # @!attribute [rw] flow_size
+    #   Determines the processing capacity and feature set of the flow. Set
+    #   this optional parameter to LARGE if you want to enable NDI outputs
+    #   on the flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] ndi_config
+    #   Specifies the configuration settings for NDI outputs. Required when
+    #   the flow includes NDI outputs.
+    #   @return [Types::NdiConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Flow AWS API Documentation
     #
@@ -1849,26 +1891,26 @@ module Aws::MediaConnect
       :status,
       :vpc_interfaces,
       :maintenance,
-      :source_monitoring_config)
+      :source_monitoring_config,
+      :flow_size,
+      :ndi_config)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # FMTP
+    # A set of parameters that define the media stream.
     #
     # @!attribute [rw] channel_order
     #   The format of the audio channel.
     #   @return [String]
     #
     # @!attribute [rw] colorimetry
-    #   The format that is used for the representation of color.
+    #   The format used for the representation of color.
     #   @return [String]
     #
     # @!attribute [rw] exact_framerate
     #   The frame rate for the video stream, in frames/second. For example:
-    #   60000/1001. If you specify a whole number, MediaConnect uses a ratio
-    #   of N/1. For example, if you specify 60, MediaConnect uses 60/1 as
-    #   the exactFramerate.
+    #   60000/1001.
     #   @return [String]
     #
     # @!attribute [rw] par
@@ -1881,7 +1923,7 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] scan_mode
     #   The type of compression that was used to smooth the video’s
-    #   appearance
+    #   appearance.
     #   @return [String]
     #
     # @!attribute [rw] tcs
@@ -1916,7 +1958,7 @@ module Aws::MediaConnect
     #   The frame rate for the video stream, in frames/second. For example:
     #   60000/1001. If you specify a whole number, MediaConnect uses a ratio
     #   of N/1. For example, if you specify 60, MediaConnect uses 60/1 as
-    #   the exactFramerate.
+    #   the `exactFramerate`.
     #   @return [String]
     #
     # @!attribute [rw] par
@@ -1950,9 +1992,7 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Exception raised by AWS Elemental MediaConnect. See the error message
-    # and documentation for the operation for more information on the cause
-    # of this exception.
+    # You do not have sufficient access to perform this action.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1984,10 +2024,10 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Configures settings for the FrozenFrames metric.
+    # Configures settings for the `FrozenFrames` metric.
     #
     # @!attribute [rw] state
-    #   Indicates whether the FrozenFrames metric is enabled or disabled.
+    #   Indicates whether the `FrozenFrames` metric is enabled or disabled.
     #   @return [String]
     #
     # @!attribute [rw] threshold_seconds
@@ -2018,6 +2058,7 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] gateway_messages
+    #   Messages with information about the gateway.
     #   @return [Array<Types::MessageDetail>]
     #
     # @!attribute [rw] gateway_state
@@ -2073,7 +2114,7 @@ module Aws::MediaConnect
     #   The availability of the instance to host new bridges. The
     #   bridgePlacement property can be LOCKED or AVAILABLE. If it is
     #   LOCKED, no new bridges can be deployed to this instance. If it is
-    #   AVAILABLE, new bridges can be added to this instance.
+    #   AVAILABLE, new bridges can be deployed to this instance.
     #   @return [String]
     #
     # @!attribute [rw] connection_status
@@ -2085,15 +2126,16 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] gateway_instance_arn
-    #   The Amazon Resource Name (ARN) of the gateway.
+    #   The ARN of the gateway.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The managed instance ID generated by the SSM install. This will
-    #   begin with "mi-".
+    #   The instance ID generated by the SSM install. This will begin with
+    #   "mi-".
     #   @return [String]
     #
     # @!attribute [rw] instance_messages
+    #   Messages with information about the gateway.
     #   @return [Array<Types::MessageDetail>]
     #
     # @!attribute [rw] instance_state
@@ -2150,8 +2192,8 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] description
     #   A description of the entitlement. This description appears only on
-    #   the AWS Elemental MediaConnect console and will not be seen by the
-    #   subscriber or end user.
+    #   the MediaConnect console and will not be seen by the subscriber or
+    #   end user.
     #   @return [String]
     #
     # @!attribute [rw] encryption
@@ -2173,9 +2215,9 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] subscribers
-    #   The AWS account IDs that you want to share your content with. The
-    #   receiving accounts (subscribers) will be allowed to create their own
-    #   flows using your content as the source.
+    #   The Amazon Web Services account IDs that you want to share your
+    #   content with. The receiving accounts (subscribers) will be allowed
+    #   to create their own flows using your content as the source.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/GrantEntitlementRequest AWS API Documentation
@@ -2191,9 +2233,9 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Exception raised by AWS Elemental MediaConnect. See the error message
-    # and documentation for the operation for more information on the cause
-    # of this exception.
+    # Exception raised by Elemental MediaConnect when granting the
+    # entitlement. See the error message for the operation for more
+    # information on the cause of this exception.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2206,13 +2248,13 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Grants an entitlement on a flow.
-    #
     # @!attribute [rw] entitlements
     #   The list of entitlements that you want to grant.
     #   @return [Array<Types::GrantEntitlementRequest>]
     #
     # @!attribute [rw] flow_arn
+    #   The Amazon Resource Name (ARN) of the flow that you want to grant
+    #   entitlements on.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/GrantFlowEntitlementsRequest AWS API Documentation
@@ -2224,8 +2266,6 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful GrantFlowEntitlements request.
-    #
     # @!attribute [rw] entitlements
     #   The entitlements that were just granted.
     #   @return [Array<Types::Entitlement>]
@@ -2243,6 +2283,10 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # Create a bridge with the ingress bridge type. An ingress bridge is a
+    # ground-to-cloud bridge. The content originates at your premises and is
+    # delivered to the cloud.
+    #
     # @!attribute [rw] instance_id
     #   The ID of the instance running this bridge.
     #   @return [String]
@@ -2343,9 +2387,8 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Exception raised by AWS Elemental MediaConnect. See the error message
-    # and documentation for the operation for more information on the cause
-    # of this exception.
+    # The server encountered an internal error and is unable to complete the
+    # request.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2359,12 +2402,32 @@ module Aws::MediaConnect
     end
 
     # @!attribute [rw] filter_arn
+    #   Filter the list results to display only the bridges associated with
+    #   the selected ARN.
     #   @return [String]
     #
     # @!attribute [rw] max_results
+    #   The maximum number of results to return per API request.
+    #
+    #   For example, you submit a `ListBridges` request with `MaxResults`
+    #   set at 5. Although 20 items match your request, the service returns
+    #   no more than the first 5 items. (The service also returns a
+    #   `NextToken` value that you can use to fetch the next batch of
+    #   results.)
+    #
+    #   The service might return fewer results than the `MaxResults` value.
+    #   If `MaxResults` is not included in the request, the service defaults
+    #   to pagination with a maximum of 10 results per page.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
+    #   The token that identifies the batch of results that you want to see.
+    #
+    #   For example, you submit a `ListBridges` request with `MaxResults`
+    #   set at 5. The service returns the first batch of results (up to 5)
+    #   and a `NextToken` value. To see the next batch of results, you can
+    #   submit the `ListBridges` request a second time and specify the
+    #   `NextToken` value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListBridgesRequest AWS API Documentation
@@ -2377,21 +2440,18 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful ListBridges request. The response includes
-    # bridge summaries and the NextToken to use in a subsequent ListBridges
-    # request.
-    #
     # @!attribute [rw] bridges
     #   A list of bridge summaries.
     #   @return [Array<Types::ListedBridge>]
     #
     # @!attribute [rw] next_token
-    #   The token that identifies which batch of results that you want to
-    #   see. For example, you submit a ListBridges request with MaxResults
+    #   The token that identifies the batch of results that you want to see.
+    #
+    #   For example, you submit a `ListBridges` request with `MaxResults`
     #   set at 5. The service returns the first batch of results (up to 5)
-    #   and a NextToken value. To see the next batch of results, you can
-    #   submit the ListBridges request a second time and specify the
-    #   NextToken value.
+    #   and a `NextToken` value. To see the next batch of results, you can
+    #   submit the `ListBridges` request a second time and specify the
+    #   `NextToken` value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListBridgesResponse AWS API Documentation
@@ -2404,9 +2464,26 @@ module Aws::MediaConnect
     end
 
     # @!attribute [rw] max_results
+    #   The maximum number of results to return per API request.
+    #
+    #   For example, you submit a `ListEntitlements` request with set at 5.
+    #   Although 20 items match your request, the service returns no more
+    #   than the first 5 items. (The service also returns a NextToken value
+    #   that you can use to fetch the next batch of results.)
+    #
+    #   The service might return fewer results than the `MaxResults` value.
+    #   If `MaxResults` is not included in the request, the service defaults
+    #   to pagination with a maximum of 20 results per page.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
+    #   The token that identifies the batch of results that you want to see.
+    #
+    #   For example, you submit a `ListEntitlements` request with
+    #   `MaxResults` set at 5. The service returns the first batch of
+    #   results (up to 5) and a `NextToken` value. To see the next batch of
+    #   results, you can submit the `ListEntitlements` request a second time
+    #   and specify the `NextToken` value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListEntitlementsRequest AWS API Documentation
@@ -2418,22 +2495,19 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful ListEntitlements request. The response
-    # includes the ARN of each entitlement, the name of the associated flow,
-    # and the NextToken to use in a subsequent ListEntitlements request.
-    #
     # @!attribute [rw] entitlements
-    #   A list of entitlements that have been granted to you from other AWS
-    #   accounts.
+    #   A list of entitlements that have been granted to you from other
+    #   Amazon Web Services accounts.
     #   @return [Array<Types::ListedEntitlement>]
     #
     # @!attribute [rw] next_token
-    #   The token that identifies which batch of results that you want to
-    #   see. For example, you submit a ListEntitlements request with
-    #   MaxResults set at 5. The service returns the first batch of results
-    #   (up to 5) and a NextToken value. To see the next batch of results,
-    #   you can submit the ListEntitlements request a second time and
-    #   specify the NextToken value.
+    #   The token that identifies the batch of results that you want to see.
+    #
+    #   For example, you submit a ListEntitlements request with `MaxResults`
+    #   set at 5. The service returns the first batch of results (up to 5)
+    #   and a NextToken value. To see the next batch of results, you can
+    #   submit the `ListEntitlements` request a second time and specify the
+    #   `NextToken` value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListEntitlementsResponse AWS API Documentation
@@ -2446,9 +2520,26 @@ module Aws::MediaConnect
     end
 
     # @!attribute [rw] max_results
+    #   The maximum number of results to return per API request.
+    #
+    #   For example, you submit a `ListFlows` request with MaxResults set at
+    #   5. Although 20 items match your request, the service returns no more
+    #   than the first 5 items. (The service also returns a `NextToken`
+    #   value that you can use to fetch the next batch of results.)
+    #
+    #   The service might return fewer results than the `MaxResults` value.
+    #   If `MaxResults` is not included in the request, the service defaults
+    #   to pagination with a maximum of 10 results per page.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
+    #   The token that identifies the batch of results that you want to see.
+    #
+    #   For example, you submit a `ListFlows` request with MaxResults set at
+    #   5. The service returns the first batch of results (up to 5) and a
+    #   `NextToken` value. To see the next batch of results, you can submit
+    #   the `ListFlows` request a second time and specify the `NextToken`
+    #   value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListFlowsRequest AWS API Documentation
@@ -2460,20 +2551,18 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful ListFlows request. The response includes
-    # flow summaries and the NextToken to use in a subsequent ListFlows
-    # request.
-    #
     # @!attribute [rw] flows
     #   A list of flow summaries.
     #   @return [Array<Types::ListedFlow>]
     #
     # @!attribute [rw] next_token
-    #   The token that identifies which batch of results that you want to
-    #   see. For example, you submit a ListFlows request with MaxResults set
-    #   at 5. The service returns the first batch of results (up to 5) and a
-    #   NextToken value. To see the next batch of results, you can submit
-    #   the ListFlows request a second time and specify the NextToken value.
+    #   The token that identifies the batch of results that you want to see.
+    #
+    #   For example, you submit a `ListFlows` request with MaxResults set at
+    #   5. The service returns the first batch of results (up to 5) and a
+    #   `NextToken` value. To see the next batch of results, you can submit
+    #   the `ListFlows` request a second time and specify the `NextToken`
+    #   value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListFlowsResponse AWS API Documentation
@@ -2486,12 +2575,32 @@ module Aws::MediaConnect
     end
 
     # @!attribute [rw] filter_arn
+    #   Filter the list results to display only the instances associated
+    #   with the selected Gateway ARN.
     #   @return [String]
     #
     # @!attribute [rw] max_results
+    #   The maximum number of results to return per API request.
+    #
+    #   For example, you submit a ListInstances request with `MaxResults`
+    #   set at 5. Although 20 items match your request, the service returns
+    #   no more than the first 5 items. (The service also returns a
+    #   `NextToken` value that you can use to fetch the next batch of
+    #   results.)
+    #
+    #   The service might return fewer results than the `MaxResults` value.
+    #   If `MaxResults` is not included in the request, the service defaults
+    #   to pagination with a maximum of 10 results per page.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
+    #   The token that identifies the batch of results that you want to see.
+    #
+    #   For example, you submit a `ListInstances` request with `MaxResults`
+    #   set at 5. The service returns the first batch of results (up to 5)
+    #   and a `NextToken` value. To see the next batch of results, you can
+    #   submit the `ListInstances` request a second time and specify the
+    #   `NextToken` value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListGatewayInstancesRequest AWS API Documentation
@@ -2504,21 +2613,18 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful ListGatewayInstances request. The response
-    # includes instance summaries and the NextToken to use in a subsequent
-    # ListInstances request.
-    #
     # @!attribute [rw] instances
     #   A list of instance summaries.
     #   @return [Array<Types::ListedGatewayInstance>]
     #
     # @!attribute [rw] next_token
-    #   The token that identifies which batch of results that you want to
-    #   see. For example, you submit a ListInstances request with MaxResults
+    #   The token that identifies the batch of results that you want to see.
+    #
+    #   For example, you submit a `ListInstances` request with MaxResults
     #   set at 5. The service returns the first batch of results (up to 5)
-    #   and a NextToken value. To see the next batch of results, you can
-    #   submit the ListInstances request a second time and specify the
-    #   NextToken value.
+    #   and a `NextToken` value. To see the next batch of results, you can
+    #   submit the `ListInstances` request a second time and specify the
+    #   `NextToken` value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListGatewayInstancesResponse AWS API Documentation
@@ -2531,9 +2637,27 @@ module Aws::MediaConnect
     end
 
     # @!attribute [rw] max_results
+    #   The maximum number of results to return per API request.
+    #
+    #   For example, you submit a `ListGateways` request with `MaxResults`
+    #   set at 5. Although 20 items match your request, the service returns
+    #   no more than the first 5 items. (The service also returns a
+    #   `NextToken` value that you can use to fetch the next batch of
+    #   results.)
+    #
+    #   The service might return fewer results than the `MaxResults` value.
+    #   If `MaxResults` is not included in the request, the service defaults
+    #   to pagination with a maximum of 10 results per page.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
+    #   The token that identifies the batch of results that you want to see.
+    #
+    #   For example, you submit a `ListGateways` request with `MaxResults`
+    #   set at 5. The service returns the first batch of results (up to 5)
+    #   and a `NextToken` value. To see the next batch of results, you can
+    #   submit the `ListGateways` request a second time and specify the
+    #   `NextToken` value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListGatewaysRequest AWS API Documentation
@@ -2545,21 +2669,18 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful ListGateways request. The response includes
-    # gateway summaries and the NextToken to use in a subsequent
-    # ListGateways request.
-    #
     # @!attribute [rw] gateways
     #   A list of gateway summaries.
     #   @return [Array<Types::ListedGateway>]
     #
     # @!attribute [rw] next_token
-    #   The token that identifies which batch of results that you want to
-    #   see. For example, you submit a ListGateways request with MaxResults
+    #   The token that identifies the batch of results that you want to see.
+    #
+    #   For example, you submit a `ListGateways` request with `MaxResults`
     #   set at 5. The service returns the first batch of results (up to 5)
-    #   and a NextToken value. To see the next batch of results, you can
-    #   submit the ListGateways request a second time and specify the
-    #   NextToken value.
+    #   and a `NextToken` value. To see the next batch of results, you can
+    #   submit the `ListGateways` request a second time and specify the
+    #   `NextToken` value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListGatewaysResponse AWS API Documentation
@@ -2572,9 +2693,27 @@ module Aws::MediaConnect
     end
 
     # @!attribute [rw] max_results
+    #   The maximum number of results to return per API request.
+    #
+    #   For example, you submit a `ListOfferings` request with `MaxResults`
+    #   set at 5. Although 20 items match your request, the service returns
+    #   no more than the first 5 items. (The service also returns a
+    #   `NextToken` value that you can use to fetch the next batch of
+    #   results.)
+    #
+    #   The service might return fewer results than the `MaxResults` value.
+    #   If `MaxResults` is not included in the request, the service defaults
+    #   to pagination with a maximum of 10 results per page.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
+    #   The token that identifies the batch of results that you want to see.
+    #
+    #   For example, you submit a `ListOfferings` request with `MaxResults`
+    #   set at 5. The service returns the first batch of results (up to 5)
+    #   and a `NextToken` value. To see the next batch of results, you can
+    #   submit the `ListOfferings` request a second time and specify the
+    #   `NextToken` value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListOfferingsRequest AWS API Documentation
@@ -2586,25 +2725,19 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful ListOfferings request. The response
-    # includes the details of each offering that your account is eligible
-    # for. The response includes the following information for each
-    # offering: description, duration, outbound bandwidth, price, Amazon
-    # Resource Name (ARN), and the NextToken to use in a subsequent
-    # ListOfferings request.
-    #
     # @!attribute [rw] next_token
-    #   The token that identifies which batch of results that you want to
-    #   see. For example, you submit a ListOfferings request with MaxResults
+    #   The token that identifies the batch of results that you want to see.
+    #
+    #   For example, you submit a `ListOfferings` request with `MaxResults`
     #   set at 5. The service returns the first batch of results (up to 5)
-    #   and a NextToken value. To see the next batch of results, you can
-    #   submit the ListOfferings request a second time and specify the
-    #   NextToken value.
+    #   and a `NextToken` value. To see the next batch of results, you can
+    #   submit the `ListOfferings` request a second time and specify the
+    #   `NextToken` value.
     #   @return [String]
     #
     # @!attribute [rw] offerings
     #   A list of offerings that are available to this account in the
-    #   current AWS Region.
+    #   current Amazon Web Services Region.
     #   @return [Array<Types::Offering>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListOfferingsResponse AWS API Documentation
@@ -2617,9 +2750,27 @@ module Aws::MediaConnect
     end
 
     # @!attribute [rw] max_results
+    #   The maximum number of results to return per API request.
+    #
+    #   For example, you submit a `ListReservations` request with
+    #   `MaxResults` set at 5. Although 20 items match your request, the
+    #   service returns no more than the first 5 items. (The service also
+    #   returns a NextToken value that you can use to fetch the next batch
+    #   of results.)
+    #
+    #   The service might return fewer results than the `MaxResults` value.
+    #   If `MaxResults` is not included in the request, the service defaults
+    #   to pagination with a maximum of 10 results per page.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
+    #   The token that identifies the batch of results that you want to see.
+    #
+    #   For example, you submit a `ListReservations` request with
+    #   `MaxResults` set at 5. The service returns the first batch of
+    #   results (up to 5) and a `NextToken` value. To see the next batch of
+    #   results, you can submit the `ListOfferings` request a second time
+    #   and specify the `NextToken` value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListReservationsRequest AWS API Documentation
@@ -2631,25 +2782,19 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful ListReservations request. The response
-    # includes the details of each offering that your account is eligible
-    # for. The response includes the following information for each
-    # offering: description, duration, outbound bandwidth, price, Amazon
-    # Resource Name (ARN), and the NextToken to use in a subsequent
-    # ListOfferings request.
-    #
     # @!attribute [rw] next_token
-    #   The token that identifies which batch of results that you want to
-    #   see. For example, you submit a ListReservations request with
-    #   MaxResults set at 5. The service returns the first batch of results
-    #   (up to 5) and a NextToken value. To see the next batch of results,
-    #   you can submit the ListReservations request a second time and
-    #   specify the NextToken value.
+    #   The token that identifies the batch of results that you want to see.
+    #
+    #   For example, you submit a `ListReservations` request with
+    #   `MaxResults` set at 5. The service returns the first batch of
+    #   results (up to 5) and a `NextToken` value. To see the next batch of
+    #   results, you can submit the `ListReservations` request a second time
+    #   and specify the `NextToken` value.
     #   @return [String]
     #
     # @!attribute [rw] reservations
     #   A list of all reservations that have been purchased by this account
-    #   in the current AWS Region.
+    #   in the current Amazon Web Services Region.
     #   @return [Array<Types::Reservation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListReservationsResponse AWS API Documentation
@@ -2662,6 +2807,8 @@ module Aws::MediaConnect
     end
 
     # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) that identifies the MediaConnect
+    #   resource for which to list the tags.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListTagsForResourceRequest AWS API Documentation
@@ -2672,8 +2819,6 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The tags for the resource.
-    #
     # @!attribute [rw] tags
     #   A map from tag keys to values. Tag keys can have a maximum character
     #   length of 128 characters, and tag values can have a maximum length
@@ -2695,6 +2840,7 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] bridge_state
+    #   The state of the bridge.
     #   @return [String]
     #
     # @!attribute [rw] bridge_type
@@ -2721,7 +2867,8 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # An entitlement that has been granted to you from other AWS accounts.
+    # An entitlement that has been granted to you from other Amazon Web
+    # Services accounts.
     #
     # @!attribute [rw] data_transfer_subscriber_fee_percent
     #   Percentage from 0-100 of the data transfer cost to be billed to the
@@ -2746,8 +2893,8 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Provides a summary of a flow, including its ARN, Availability Zone,
-    # and source type.
+    # A summary of a flow, including its ARN, Availability Zone, and source
+    # type.
     #
     # @!attribute [rw] availability_zone
     #   The Availability Zone that the flow was created in.
@@ -2767,9 +2914,9 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] source_type
     #   The type of source. This value is either owned (originated somewhere
-    #   other than an AWS Elemental MediaConnect flow owned by another AWS
-    #   account) or entitled (originated at an AWS Elemental MediaConnect
-    #   flow owned by another AWS account).
+    #   other than an MediaConnect flow owned by another Amazon Web Services
+    #   account) or entitled (originated at a MediaConnect flow owned by
+    #   another Amazon Web Services account).
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2777,7 +2924,7 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] maintenance
-    #   The maintenance setting of a flow
+    #   The maintenance settings for the flow.
     #   @return [Types::Maintenance]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListedFlow AWS API Documentation
@@ -2794,13 +2941,14 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Provides a summary of a gateway, including its name, ARN, and status.
+    # A summary of a gateway, including its name, ARN, and status.
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway.
     #   @return [String]
     #
     # @!attribute [rw] gateway_state
+    #   The status of the gateway.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2817,7 +2965,7 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Provides a summary of an instance.
+    # A summary of an instance.
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway.
@@ -2847,7 +2995,7 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The maintenance setting of a flow
+    # The maintenance setting of a flow.
     #
     # @!attribute [rw] maintenance_day
     #   A day of a week when the maintenance will happen. Use
@@ -2880,11 +3028,10 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # A single track or stream of media that contains video, audio, or
-    # ancillary data. After you add a media stream to a flow, you can
-    # associate it with sources and outputs on that flow, as long as they
-    # use the CDI protocol or the ST 2110 JPEG XS protocol. Each source or
-    # output can consist of one or many media streams.
+    # A media stream represents one component of your content, such as
+    # video, audio, or ancillary data. After you add a media stream to your
+    # flow, you can associate it with sources and outputs that use the ST
+    # 2110 JPEG XS or CDI protocol.
     #
     # @!attribute [rw] attributes
     #   Attributes that are related to the media stream.
@@ -2940,7 +3087,7 @@ module Aws::MediaConnect
     # Attributes that are related to the media stream.
     #
     # @!attribute [rw] fmtp
-    #   A set of parameters that define the media stream.
+    #   The settings that you want to use to define the media stream.
     #   @return [Types::Fmtp]
     #
     # @!attribute [rw] lang
@@ -2992,7 +3139,9 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] encoding_parameters
-    #   Encoding parameters
+    #   A collection of parameters that determine how MediaConnect will
+    #   convert the content. These fields only apply to outputs on flows
+    #   that have a CDI source.
     #   @return [Types::EncodingParameters]
     #
     # @!attribute [rw] media_stream_name
@@ -3014,8 +3163,7 @@ module Aws::MediaConnect
     # parameters for that association.
     #
     # @!attribute [rw] destination_configurations
-    #   The transport parameters that you want to associate with the media
-    #   stream.
+    #   The media streams that you want to associate with the output.
     #   @return [Array<Types::DestinationConfigurationRequest>]
     #
     # @!attribute [rw] encoding_name
@@ -3059,12 +3207,11 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] input_configurations
-    #   The transport parameters that are associated with an incoming media
-    #   stream.
+    #   The media streams that you want to associate with the source.
     #   @return [Array<Types::InputConfiguration>]
     #
     # @!attribute [rw] media_stream_name
-    #   The name of the media stream.
+    #   A name that helps you distinguish one media stream from another.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/MediaStreamSourceConfiguration AWS API Documentation
@@ -3077,11 +3224,11 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The definition of a media stream that you want to associate with the
-    # source.
+    # The media stream that you want to associate with the source, and the
+    # parameters for that association.
     #
     # @!attribute [rw] encoding_name
-    #   The format you want to use to encode the data. For ancillary data
+    #   The format that was used to encode the data. For ancillary data
     #   streams, set the encoding name to smpte291. For audio streams, set
     #   the encoding name to pcm. For video, 2110 streams, set the encoding
     #   name to raw. For video, JPEG XS streams, set the encoding name to
@@ -3089,8 +3236,7 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] input_configurations
-    #   The transport parameters that you want to associate with the media
-    #   stream.
+    #   The media streams that you want to associate with the source.
     #   @return [Array<Types::InputConfigurationRequest>]
     #
     # @!attribute [rw] media_stream_name
@@ -3107,6 +3253,8 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # The details of an error message.
+    #
     # @!attribute [rw] code
     #   The error code.
     #   @return [String]
@@ -3148,7 +3296,7 @@ module Aws::MediaConnect
     # The settings for source monitoring.
     #
     # @!attribute [rw] thumbnail_state
-    #   The state of thumbnail monitoring.
+    #   Indicates whether thumbnails are enabled or disabled.
     #   @return [String]
     #
     # @!attribute [rw] audio_monitoring_settings
@@ -3177,6 +3325,7 @@ module Aws::MediaConnect
     # The settings related to the multicast source.
     #
     # @!attribute [rw] multicast_source_ip
+    #   The IP address of the source for source-specific multicast (SSM).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/MulticastSourceSettings AWS API Documentation
@@ -3187,9 +3336,65 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Exception raised by AWS Elemental MediaConnect. See the error message
-    # and documentation for the operation for more information on the cause
-    # of this exception.
+    # Specifies the configuration settings for NDI outputs. Required when
+    # the flow includes NDI outputs.
+    #
+    # @!attribute [rw] ndi_state
+    #   A setting that controls whether NDI outputs can be used in the flow.
+    #   Must be ENABLED to add NDI outputs. Default is DISABLED.
+    #   @return [String]
+    #
+    # @!attribute [rw] machine_name
+    #   A prefix for the names of the NDI sources that the flow creates. If
+    #   a custom name isn't specified, MediaConnect generates a unique
+    #   12-character ID as the prefix.
+    #   @return [String]
+    #
+    # @!attribute [rw] ndi_discovery_servers
+    #   A list of up to three NDI discovery server configurations. While not
+    #   required by the API, this configuration is necessary for NDI
+    #   functionality to work properly.
+    #   @return [Array<Types::NdiDiscoveryServerConfig>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/NdiConfig AWS API Documentation
+    #
+    class NdiConfig < Struct.new(
+      :ndi_state,
+      :machine_name,
+      :ndi_discovery_servers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the configuration settings for individual NDI discovery
+    # servers. A maximum of 3 servers is allowed.
+    #
+    # @!attribute [rw] discovery_server_address
+    #   The unique network address of the NDI discovery server.
+    #   @return [String]
+    #
+    # @!attribute [rw] discovery_server_port
+    #   The port for the NDI discovery server. Defaults to 5959 if a custom
+    #   port isn't specified.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] vpc_interface_adapter
+    #   The identifier for the Virtual Private Cloud (VPC) network interface
+    #   used by the flow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/NdiDiscoveryServerConfig AWS API Documentation
+    #
+    class NdiDiscoveryServerConfig < Struct.new(
+      :discovery_server_address,
+      :discovery_server_port,
+      :vpc_interface_adapter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # One or more of the resources in the request does not exist in the
+    # system.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -3292,9 +3497,8 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] media_live_input_arn
-    #   The input ARN of the AWS Elemental MediaLive channel. This parameter
-    #   is relevant only for outputs that were added by creating a MediaLive
-    #   input.
+    #   The input ARN of the MediaLive channel. This parameter is relevant
+    #   only for outputs that were added by creating a MediaLive input.
     #   @return [String]
     #
     # @!attribute [rw] media_stream_output_configurations
@@ -3325,7 +3529,7 @@ module Aws::MediaConnect
     #   @return [Types::VpcInterfaceAttachment]
     #
     # @!attribute [rw] bridge_arn
-    #   The ARN of the bridge that added this output.
+    #   The ARN of the bridge added to this output.
     #   @return [String]
     #
     # @!attribute [rw] bridge_ports
@@ -3359,11 +3563,8 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Submits a request to purchase an offering, which creates a reservation
-    # in your AWS account. If you already have an active reservation, you
-    # can't purchase another offering.
-    #
     # @!attribute [rw] offering_arn
+    #   The Amazon Resource Name (ARN) of the offering.
     #   @return [String]
     #
     # @!attribute [rw] reservation_name
@@ -3372,12 +3573,14 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] start
     #   The date and time that you want the reservation to begin, in
-    #   Coordinated Universal Time (UTC). You can specify any date and time
-    #   between 12:00am on the first day of the current month to the current
-    #   time on today's date, inclusive. Specify the start in a 24-hour
-    #   notation. Use the following format: YYYY-MM-DDTHH:mm:SSZ, where T
-    #   and Z are literal characters. For example, to specify 11:30pm on
-    #   March 5, 2020, enter 2020-03-05T23:30:00Z.
+    #   Coordinated Universal Time (UTC).
+    #
+    #   You can specify any date and time between 12:00am on the first day
+    #   of the current month to the current time on today's date,
+    #   inclusive. Specify the start in a 24-hour notation. Use the
+    #   following format: `YYYY-MM-DDTHH:mm:SSZ`, where `T` and `Z` are
+    #   literal characters. For example, to specify 11:30pm on March 5,
+    #   2020, enter `2020-03-05T23:30:00Z`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/PurchaseOfferingRequest AWS API Documentation
@@ -3390,16 +3593,9 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful PurchaseOffering request.
-    #
     # @!attribute [rw] reservation
-    #   A pricing agreement for a discounted rate for a specific outbound
-    #   bandwidth that your MediaConnect account will use each month over a
-    #   specific time period. The discounted rate in the reservation applies
-    #   to outbound bandwidth for all flows from your account until your
-    #   account reaches the amount of bandwidth in your reservation. If you
-    #   use more outbound bandwidth than the agreed upon amount in a single
-    #   month, the overage is charged at the on-demand rate.
+    #   The details of the reservation that you just created when you
+    #   purchased the offering.
     #   @return [Types::Reservation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/PurchaseOfferingResponse AWS API Documentation
@@ -3411,9 +3607,12 @@ module Aws::MediaConnect
     end
 
     # @!attribute [rw] bridge_arn
+    #   The Amazon Resource Name (ARN) of the bridge that you want to
+    #   update.
     #   @return [String]
     #
     # @!attribute [rw] output_name
+    #   The name of the bridge output that you want to remove.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RemoveBridgeOutputRequest AWS API Documentation
@@ -3425,12 +3624,12 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful RemoveBridgeOutput request.
-    #
     # @!attribute [rw] bridge_arn
+    #   The ARN of the bridge from which the output was removed.
     #   @return [String]
     #
     # @!attribute [rw] output_name
+    #   The name of the bridge output that was removed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RemoveBridgeOutputResponse AWS API Documentation
@@ -3443,9 +3642,12 @@ module Aws::MediaConnect
     end
 
     # @!attribute [rw] bridge_arn
+    #   The Amazon Resource Name (ARN) of the bridge that you want to
+    #   update.
     #   @return [String]
     #
     # @!attribute [rw] source_name
+    #   The name of the bridge source that you want to remove.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RemoveBridgeSourceRequest AWS API Documentation
@@ -3457,12 +3659,12 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful RemoveBridgeSource request.
-    #
     # @!attribute [rw] bridge_arn
+    #   The ARN of the bridge from which the source was removed.
     #   @return [String]
     #
     # @!attribute [rw] source_name
+    #   The name of the bridge source that was removed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RemoveBridgeSourceResponse AWS API Documentation
@@ -3475,9 +3677,11 @@ module Aws::MediaConnect
     end
 
     # @!attribute [rw] flow_arn
+    #   The Amazon Resource Name (ARN) of the flow that you want to update.
     #   @return [String]
     #
     # @!attribute [rw] media_stream_name
+    #   The name of the media stream that you want to remove.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RemoveFlowMediaStreamRequest AWS API Documentation
@@ -3489,10 +3693,8 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful RemoveFlowMediaStream request.
-    #
     # @!attribute [rw] flow_arn
-    #   The Amazon Resource Name (ARN) of the flow.
+    #   The ARN of the flow that was updated.
     #   @return [String]
     #
     # @!attribute [rw] media_stream_name
@@ -3509,9 +3711,12 @@ module Aws::MediaConnect
     end
 
     # @!attribute [rw] flow_arn
+    #   The Amazon Resource Name (ARN) of the flow that you want to remove
+    #   an output from.
     #   @return [String]
     #
     # @!attribute [rw] output_arn
+    #   The ARN of the output that you want to remove.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RemoveFlowOutputRequest AWS API Documentation
@@ -3523,11 +3728,8 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful RemoveFlowOutput request including the flow
-    # ARN and the output ARN that was removed.
-    #
     # @!attribute [rw] flow_arn
-    #   The ARN of the flow that is associated with the output you removed.
+    #   The ARN of the flow that the output was removed from.
     #   @return [String]
     #
     # @!attribute [rw] output_arn
@@ -3544,9 +3746,12 @@ module Aws::MediaConnect
     end
 
     # @!attribute [rw] flow_arn
+    #   The Amazon Resource Name (ARN) of the flow that you want to remove a
+    #   source from.
     #   @return [String]
     #
     # @!attribute [rw] source_arn
+    #   The ARN of the source that you want to remove.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RemoveFlowSourceRequest AWS API Documentation
@@ -3558,11 +3763,8 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful RemoveFlowSource request including the flow
-    # ARN and the source ARN that was removed.
-    #
     # @!attribute [rw] flow_arn
-    #   The ARN of the flow that is associated with the source you removed.
+    #   The ARN of the flow that the source was removed from.
     #   @return [String]
     #
     # @!attribute [rw] source_arn
@@ -3579,9 +3781,12 @@ module Aws::MediaConnect
     end
 
     # @!attribute [rw] flow_arn
+    #   The Amazon Resource Name (ARN) of the flow that you want to remove a
+    #   VPC interface from.
     #   @return [String]
     #
     # @!attribute [rw] vpc_interface_name
+    #   The name of the VPC interface that you want to remove.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RemoveFlowVpcInterfaceRequest AWS API Documentation
@@ -3593,9 +3798,6 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful RemoveFlowVpcInterface request including
-    # the flow ARN and the VPC interface name that was removed.
-    #
     # @!attribute [rw] flow_arn
     #   The ARN of the flow that is associated with the VPC interface you
     #   removed.
@@ -3603,7 +3805,7 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] non_deleted_network_interface_ids
     #   IDs of network interfaces associated with the removed VPC interface
-    #   that Media Connect was unable to remove.
+    #   that MediaConnect was unable to remove.
     #   @return [Array<String>]
     #
     # @!attribute [rw] vpc_interface_name
@@ -3736,26 +3938,13 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Exception raised by AWS Elemental MediaConnect. See the error message
-    # and documentation for the operation for more information on the cause
-    # of this exception.
-    #
-    # @!attribute [rw] message
-    #   The error message returned by AWS Elemental MediaConnect.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ResponseError AWS API Documentation
-    #
-    class ResponseError < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # @!attribute [rw] entitlement_arn
+    #   The Amazon Resource Name (ARN) of the entitlement that you want to
+    #   revoke.
     #   @return [String]
     #
     # @!attribute [rw] flow_arn
+    #   The flow that you want to revoke an entitlement from.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RevokeFlowEntitlementRequest AWS API Documentation
@@ -3767,10 +3956,6 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful RevokeFlowEntitlement request. The response
-    # includes the ARN of the flow that was updated and the ARN of the
-    # entitlement that was revoked.
-    #
     # @!attribute [rw] entitlement_arn
     #   The ARN of the entitlement that was revoked.
     #   @return [String]
@@ -3788,9 +3973,7 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Exception raised by AWS Elemental MediaConnect. See the error message
-    # and documentation for the operation for more information on the cause
-    # of this exception.
+    # The service is currently unavailable or busy.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -3833,7 +4016,7 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] description
     #   A description for the source. This value is not used or seen outside
-    #   of the current AWS Elemental MediaConnect account.
+    #   of the current MediaConnect account.
     #   @return [String]
     #
     # @!attribute [rw] entitlement_arn
@@ -3853,7 +4036,7 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] max_latency
     #   The maximum latency in milliseconds. This parameter applies only to
-    #   RIST-based, Zixi-based, and Fujitsu-based streams.
+    #   RIST-based and Zixi-based streams.
     #   @return [Integer]
     #
     # @!attribute [rw] max_sync_buffer
@@ -3881,6 +4064,11 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] protocol
     #   The protocol that is used by the source.
+    #
+    #   <note markdown="1"> Elemental MediaConnect no longer supports the Fujitsu QoS protocol.
+    #   This reference is maintained for legacy purposes only.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] sender_control_port
@@ -3948,10 +4136,10 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Configures settings for the SilentAudio metric.
+    # Configures settings for the `SilentAudio` metric.
     #
     # @!attribute [rw] state
-    #   Indicates whether the SilentAudio metric is enabled or disabled.
+    #   Indicates whether the `SilentAudio` metric is enabled or disabled.
     #   @return [String]
     #
     # @!attribute [rw] threshold_seconds
@@ -3982,14 +4170,14 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] description
     #   A description for the source. This value is not used or seen outside
-    #   of the current AWS Elemental MediaConnect account.
+    #   of the current MediaConnect account.
     #   @return [String]
     #
     # @!attribute [rw] entitlement_arn
     #   The ARN of the entitlement that allows you to subscribe to content
-    #   that comes from another AWS account. The entitlement is set by the
-    #   content originator and the ARN is generated as part of the
-    #   originator's flow.
+    #   that comes from another Amazon Web Services account. The entitlement
+    #   is set by the content originator and the ARN is generated as part of
+    #   the originator's flow.
     #   @return [String]
     #
     # @!attribute [rw] ingest_ip
@@ -4011,12 +4199,12 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] sender_control_port
-    #   The port that the flow uses to send outbound requests to initiate
+    #   The IP address that the flow communicates with to initiate
     #   connection with the sender.
     #   @return [Integer]
     #
     # @!attribute [rw] sender_ip_address
-    #   The IP address that the flow communicates with to initiate
+    #   The port that the flow uses to send outbound requests to initiate
     #   connection with the sender.
     #   @return [String]
     #
@@ -4084,6 +4272,7 @@ module Aws::MediaConnect
     end
 
     # @!attribute [rw] flow_arn
+    #   The Amazon Resource Name (ARN) of the flow that you want to start.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/StartFlowRequest AWS API Documentation
@@ -4094,14 +4283,12 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful StartFlow request.
-    #
     # @!attribute [rw] flow_arn
     #   The ARN of the flow that you started.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the flow when the StartFlow process begins.
+    #   The status of the flow when the `StartFlow` process begins.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/StartFlowResponse AWS API Documentation
@@ -4114,6 +4301,7 @@ module Aws::MediaConnect
     end
 
     # @!attribute [rw] flow_arn
+    #   The Amazon Resource Name (ARN) of the flow that you want to stop.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/StopFlowRequest AWS API Documentation
@@ -4124,14 +4312,12 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful StopFlow request.
-    #
     # @!attribute [rw] flow_arn
     #   The ARN of the flow that you stopped.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the flow when the StopFlow process begins.
+    #   The status of the flow when the `StopFlow` process begins.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/StopFlowResponse AWS API Documentation
@@ -4143,11 +4329,9 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The tags to add to the resource. Tag keys can have a maximum character
-    # length of 128 characters, and tag values can have a maximum length of
-    # 256 characters.
-    #
     # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) that identifies the MediaConnect
+    #   resource to which to add tags.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -4201,9 +4385,7 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Exception raised by AWS Elemental MediaConnect. See the error message
-    # and documentation for the operation for more information on the cause
-    # of this exception.
+    # The request was denied due to request throttling.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -4223,7 +4405,7 @@ module Aws::MediaConnect
     #   The range of IP addresses that should be allowed to initiate output
     #   requests to this flow. These IP addresses should be in the form of a
     #   Classless Inter-Domain Routing (CIDR) block; for example,
-    #   10.0.0.0/16.
+    #   10.0.0.0/16
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_bitrate
@@ -4233,7 +4415,7 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] max_latency
     #   The maximum latency in milliseconds. This parameter applies only to
-    #   RIST-based, Zixi-based, and Fujitsu-based streams.
+    #   RIST-based and Zixi-based streams.
     #   @return [Integer]
     #
     # @!attribute [rw] max_sync_buffer
@@ -4252,6 +4434,11 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] protocol
     #   The protocol that is used by the source or output.
+    #
+    #   <note markdown="1"> Elemental MediaConnect no longer supports the Fujitsu QoS protocol.
+    #   This reference is maintained for legacy purposes only.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] remote_id
@@ -4286,6 +4473,15 @@ module Aws::MediaConnect
     #   parameter applies only to Zixi and SRT caller-based streams.
     #   @return [String]
     #
+    # @!attribute [rw] ndi_speed_hq_quality
+    #   A quality setting for the NDI Speed HQ encoder.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ndi_program_name
+    #   A suffix for the names of the NDI sources that the flow creates. If
+    #   a custom name isn't specified, MediaConnect uses the output name.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Transport AWS API Documentation
     #
     class Transport < Struct.new(
@@ -4301,7 +4497,9 @@ module Aws::MediaConnect
       :smoothing_latency,
       :source_listener_address,
       :source_listener_port,
-      :stream_id)
+      :stream_id,
+      :ndi_speed_hq_quality,
+      :ndi_program_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4408,9 +4606,12 @@ module Aws::MediaConnect
     end
 
     # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to
+    #   untag.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
+    #   The keys of the tags to be removed.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UntagResourceRequest AWS API Documentation
@@ -4425,7 +4626,8 @@ module Aws::MediaConnect
     # Update the flow source of the bridge.
     #
     # @!attribute [rw] flow_arn
-    #   The ARN of the cloud flow to use as a source of this bridge.
+    #   The Amazon Resource Name (ARN) that identifies the MediaConnect
+    #   resource from which to delete tags.
     #   @return [String]
     #
     # @!attribute [rw] flow_vpc_interface_attachment
@@ -4457,6 +4659,11 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] protocol
     #   The network output protocol.
+    #
+    #   <note markdown="1"> Elemental MediaConnect no longer supports the Fujitsu QoS protocol.
+    #   This reference is maintained for legacy purposes only.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] ttl
@@ -4482,7 +4689,7 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] multicast_source_settings
-    #   The IP address of the source for source-specific multicast (SSM).
+    #   The settings related to the multicast source.
     #   @return [Types::MulticastSourceSettings]
     #
     # @!attribute [rw] network_name
@@ -4495,6 +4702,11 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] protocol
     #   The network source protocol.
+    #
+    #   <note markdown="1"> Elemental MediaConnect no longer supports the Fujitsu QoS protocol.
+    #   This reference is maintained for legacy purposes only.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateBridgeNetworkSourceRequest AWS API Documentation
@@ -4509,16 +4721,17 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Update an existing bridge output.
-    #
     # @!attribute [rw] bridge_arn
+    #   The Amazon Resource Name (ARN) of the bridge that you want to
+    #   update.
     #   @return [String]
     #
     # @!attribute [rw] network_output
-    #   Update an existing network output.
+    #   The network of the bridge output.
     #   @return [Types::UpdateBridgeNetworkOutputRequest]
     #
     # @!attribute [rw] output_name
+    #   Tname of the output that you want to update.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateBridgeOutputRequest AWS API Documentation
@@ -4531,14 +4744,12 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful UpdateBridgeOutput request.
-    #
     # @!attribute [rw] bridge_arn
-    #   The Amazon Resource Number (ARN) of the bridge.
+    #   The ARN of the bridge that was updated.
     #   @return [String]
     #
     # @!attribute [rw] output
-    #   The output that you updated.
+    #   The bridge output that was updated.
     #   @return [Types::BridgeOutput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateBridgeOutputResponse AWS API Documentation
@@ -4550,15 +4761,18 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Update an existing bridge.
-    #
     # @!attribute [rw] bridge_arn
+    #   TheAmazon Resource Name (ARN) of the bridge that you want to update.
     #   @return [String]
     #
     # @!attribute [rw] egress_gateway_bridge
+    #   A cloud-to-ground bridge. The content comes from an existing
+    #   MediaConnect flow and is delivered to your premises.
     #   @return [Types::UpdateEgressGatewayBridgeRequest]
     #
     # @!attribute [rw] ingress_gateway_bridge
+    #   A ground-to-cloud bridge. The content originates at your premises
+    #   and is delivered to the cloud.
     #   @return [Types::UpdateIngressGatewayBridgeRequest]
     #
     # @!attribute [rw] source_failover_config
@@ -4576,12 +4790,8 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The bridge has been successfully updated.
-    #
     # @!attribute [rw] bridge
-    #   A Bridge is the connection between your data center's Instances and
-    #   the AWS cloud. A bridge can be used to send video from the AWS cloud
-    #   to your data center or from your data center to the AWS cloud.
+    #   The bridge that was updated.
     #   @return [Types::Bridge]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateBridgeResponse AWS API Documentation
@@ -4592,20 +4802,21 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Update the bridge source.
-    #
     # @!attribute [rw] bridge_arn
+    #   The Amazon Resource Name (ARN) of the bridge that you want to
+    #   update.
     #   @return [String]
     #
     # @!attribute [rw] flow_source
-    #   Update the flow source of the bridge.
+    #   The name of the flow that you want to update.
     #   @return [Types::UpdateBridgeFlowSourceRequest]
     #
     # @!attribute [rw] network_source
-    #   Update the network source of the bridge.
+    #   The network for the bridge source.
     #   @return [Types::UpdateBridgeNetworkSourceRequest]
     #
     # @!attribute [rw] source_name
+    #   The name of the source that you want to update.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateBridgeSourceRequest AWS API Documentation
@@ -4619,14 +4830,12 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful UpdateBridgeSource request.
-    #
     # @!attribute [rw] bridge_arn
-    #   The Amazon Resource Number (ARN) of the bridge.
+    #   The ARN of the updated bridge source.
     #   @return [String]
     #
     # @!attribute [rw] source
-    #   The bridge's source.
+    #   The updated bridge source.
     #   @return [Types::BridgeSource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateBridgeSourceResponse AWS API Documentation
@@ -4638,12 +4847,13 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Update the state of a bridge. ACTIVE or STANDBY.
-    #
     # @!attribute [rw] bridge_arn
+    #   The Amazon Resource Name (ARN) of the bridge that you want to update
+    #   the state of.
     #   @return [String]
     #
     # @!attribute [rw] desired_state
+    #   The desired state for the bridge.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateBridgeStateRequest AWS API Documentation
@@ -4655,14 +4865,12 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The bridge state has been updated.
-    #
     # @!attribute [rw] bridge_arn
-    #   The Amazon Resource Number (ARN) of the bridge.
+    #   The ARN of the updated bridge.
     #   @return [String]
     #
     # @!attribute [rw] desired_state
-    #   The state of the bridge. ACTIVE or STANDBY.
+    #   The new state of the bridge.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateBridgeStateResponse AWS API Documentation
@@ -4674,8 +4882,10 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # Update an existing egress-type bridge.
+    #
     # @!attribute [rw] max_bitrate
-    #   Update an existing egress-type bridge.
+    #   The maximum expected bitrate (in bps).
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateEgressGatewayBridgeRequest AWS API Documentation
@@ -4712,9 +4922,9 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The AWS Region that the API Gateway proxy endpoint was created in.
-    #   This parameter is required for SPEKE encryption and is not valid for
-    #   static key encryption.
+    #   The Amazon Web Services Region that the API Gateway proxy endpoint
+    #   was created in. This parameter is required for SPEKE encryption and
+    #   is not valid for static key encryption.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -4726,12 +4936,12 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] role_arn
     #   The ARN of the role that you created during setup (when you set up
-    #   AWS Elemental MediaConnect as a trusted entity).
+    #   MediaConnect as a trusted entity).
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
-    #   The ARN of the secret that you created in AWS Secrets Manager to
-    #   store the encryption key. This parameter is required for static key
+    #   The ARN of the secret that you created in Secrets Manager to store
+    #   the encryption key. This parameter is required for static key
     #   encryption and is not valid for SPEKE encryption.
     #   @return [String]
     #
@@ -4767,7 +4977,7 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] recovery_window
-    #   Recovery window time to look for dash-7 packets
+    #   Recovery window time to look for dash-7 packets.
     #   @return [Integer]
     #
     # @!attribute [rw] source_priority
@@ -4776,6 +4986,9 @@ module Aws::MediaConnect
     #   @return [Types::SourcePriority]
     #
     # @!attribute [rw] state
+    #   The state of source failover on the flow. If the state is inactive,
+    #   the flow can have only one source. If the state is active, the flow
+    #   can have one or two sources.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFailoverConfig AWS API Documentation
@@ -4789,12 +5002,10 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The updates that you want to make to a specific entitlement.
-    #
     # @!attribute [rw] description
     #   A description of the entitlement. This description appears only on
-    #   the AWS Elemental MediaConnect console and will not be seen by the
-    #   subscriber or end user.
+    #   the MediaConnect console and will not be seen by the subscriber or
+    #   end user.
     #   @return [String]
     #
     # @!attribute [rw] encryption
@@ -4804,22 +5015,26 @@ module Aws::MediaConnect
     #   @return [Types::UpdateEncryption]
     #
     # @!attribute [rw] entitlement_arn
+    #   The Amazon Resource Name (ARN) of the entitlement that you want to
+    #   update.
     #   @return [String]
     #
     # @!attribute [rw] entitlement_status
     #   An indication of whether you want to enable the entitlement to allow
     #   access, or disable it to stop streaming content to the subscriber’s
-    #   flow temporarily. If you don’t specify the entitlementStatus field
+    #   flow temporarily. If you don’t specify the `entitlementStatus` field
     #   in your request, MediaConnect leaves the value unchanged.
     #   @return [String]
     #
     # @!attribute [rw] flow_arn
+    #   The ARN of the flow that is associated with the entitlement that you
+    #   want to update.
     #   @return [String]
     #
     # @!attribute [rw] subscribers
-    #   The AWS account IDs that you want to share your content with. The
-    #   receiving accounts (subscribers) will be allowed to create their own
-    #   flow using your content as the source.
+    #   The Amazon Web Services account IDs that you want to share your
+    #   content with. The receiving accounts (subscribers) will be allowed
+    #   to create their own flow using your content as the source.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowEntitlementRequest AWS API Documentation
@@ -4835,10 +5050,6 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful UpdateFlowEntitlement request. The response
-    # includes the ARN of the flow that was updated and the updated
-    # entitlement configuration.
-    #
     # @!attribute [rw] entitlement
     #   The new configuration of the entitlement that you updated.
     #   @return [Types::Entitlement]
@@ -4856,26 +5067,26 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Update a media stream on a flow.
-    #
     # @!attribute [rw] attributes
     #   The attributes that you want to assign to the media stream.
     #   @return [Types::MediaStreamAttributesRequest]
     #
     # @!attribute [rw] clock_rate
-    #   The sample rate (in Hz) for the stream. If the media stream type is
-    #   video or ancillary data, set this value to 90000. If the media
-    #   stream type is audio, set this value to either 48000 or 96000.
+    #   The sample rate for the stream. This value in measured in kHz.
     #   @return [Integer]
     #
     # @!attribute [rw] description
-    #   Description
+    #   A description that can help you quickly identify what your media
+    #   stream is used for.
     #   @return [String]
     #
     # @!attribute [rw] flow_arn
+    #   The Amazon Resource Name (ARN) of the flow that is associated with
+    #   the media stream that you updated.
     #   @return [String]
     #
     # @!attribute [rw] media_stream_name
+    #   The media stream that you updated.
     #   @return [String]
     #
     # @!attribute [rw] media_stream_type
@@ -4900,8 +5111,6 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful UpdateFlowMediaStream request.
-    #
     # @!attribute [rw] flow_arn
     #   The ARN of the flow that is associated with the media stream that
     #   you updated.
@@ -4920,9 +5129,6 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The updates that you want to make to an existing output of an existing
-    # flow.
-    #
     # @!attribute [rw] cidr_allow_list
     #   The range of IP addresses that should be allowed to initiate output
     #   requests to this flow. These IP addresses should be in the form of a
@@ -4932,8 +5138,7 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] description
     #   A description of the output. This description appears only on the
-    #   AWS Elemental MediaConnect console and will not be seen by the end
-    #   user.
+    #   MediaConnect console and will not be seen by the end user.
     #   @return [String]
     #
     # @!attribute [rw] destination
@@ -4941,17 +5146,19 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] encryption
-    #   The type of key used for the encryption. If no keyType is provided,
-    #   the service will use the default setting (static-key). Allowable
-    #   encryption types: static-key.
+    #   The type of key used for the encryption. If no `keyType` is
+    #   provided, the service will use the default setting (static-key).
+    #   Allowable encryption types: static-key.
     #   @return [Types::UpdateEncryption]
     #
     # @!attribute [rw] flow_arn
+    #   The Amazon Resource Name (ARN) of the flow that is associated with
+    #   the output that you want to update.
     #   @return [String]
     #
     # @!attribute [rw] max_latency
     #   The maximum latency in milliseconds. This parameter applies only to
-    #   RIST-based, Zixi-based, and Fujitsu-based streams.
+    #   RIST-based and Zixi-based streams.
     #   @return [Integer]
     #
     # @!attribute [rw] media_stream_output_configurations
@@ -4969,6 +5176,7 @@ module Aws::MediaConnect
     #   @return [Integer]
     #
     # @!attribute [rw] output_arn
+    #   The ARN of the output that you want to update.
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -4977,6 +5185,11 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] protocol
     #   The protocol to use for the output.
+    #
+    #   <note markdown="1"> Elemental MediaConnect no longer supports the Fujitsu QoS protocol.
+    #   This reference is maintained for legacy purposes only.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] remote_id
@@ -5009,9 +5222,18 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] output_status
     #   An indication of whether the output should transmit data or not. If
-    #   you don't specify the outputStatus field in your request,
+    #   you don't specify the `outputStatus` field in your request,
     #   MediaConnect leaves the value unchanged.
     #   @return [String]
+    #
+    # @!attribute [rw] ndi_program_name
+    #   A suffix for the names of the NDI sources that the flow creates. If
+    #   a custom name isn't specified, MediaConnect uses the output name.
+    #   @return [String]
+    #
+    # @!attribute [rw] ndi_speed_hq_quality
+    #   A quality setting for the NDI Speed HQ encoder.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowOutputRequest AWS API Documentation
     #
@@ -5033,14 +5255,13 @@ module Aws::MediaConnect
       :smoothing_latency,
       :stream_id,
       :vpc_interface_attachment,
-      :output_status)
+      :output_status,
+      :ndi_program_name,
+      :ndi_speed_hq_quality)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # The result of a successful UpdateFlowOutput request including the flow
-    # ARN and the updated output.
-    #
     # @!attribute [rw] flow_arn
     #   The ARN of the flow that is associated with the updated output.
     #   @return [String]
@@ -5058,9 +5279,8 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Updates an existing flow.
-    #
     # @!attribute [rw] flow_arn
+    #   The Amazon Resource Name (ARN) of the flow that you want to update.
     #   @return [String]
     #
     # @!attribute [rw] source_failover_config
@@ -5068,12 +5288,17 @@ module Aws::MediaConnect
     #   @return [Types::UpdateFailoverConfig]
     #
     # @!attribute [rw] maintenance
-    #   Update maintenance setting for a flow
+    #   The maintenance setting of the flow.
     #   @return [Types::UpdateMaintenance]
     #
     # @!attribute [rw] source_monitoring_config
     #   The settings for source monitoring.
     #   @return [Types::MonitoringConfig]
+    #
+    # @!attribute [rw] ndi_config
+    #   Specifies the configuration settings for NDI outputs. Required when
+    #   the flow includes NDI outputs.
+    #   @return [Types::NdiConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowRequest AWS API Documentation
     #
@@ -5081,17 +5306,14 @@ module Aws::MediaConnect
       :flow_arn,
       :source_failover_config,
       :maintenance,
-      :source_monitoring_config)
+      :source_monitoring_config,
+      :ndi_config)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # The result of a successful UpdateFlow request. Updates an existing
-    # flow.
-    #
     # @!attribute [rw] flow
-    #   The settings for a flow, including its source, outputs, and
-    #   entitlements.
+    #   The updated flow.
     #   @return [Types::Flow]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowResponse AWS API Documentation
@@ -5102,40 +5324,39 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The updates that you want to make to an existing source of an existing
-    # flow.
-    #
     # @!attribute [rw] decryption
-    #   The type of encryption used on the content ingested from this
-    #   source. Allowable encryption types: static-key.
+    #   The type of encryption that is used on the content ingested from the
+    #   source.
     #   @return [Types::UpdateEncryption]
     #
     # @!attribute [rw] description
-    #   A description for the source. This value is not used or seen outside
-    #   of the current AWS Elemental MediaConnect account.
+    #   A description of the source. This description is not visible outside
+    #   of the current Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] entitlement_arn
-    #   The ARN of the entitlement that allows you to subscribe to this
-    #   flow. The entitlement is set by the flow originator, and the ARN is
-    #   generated as part of the originator's flow.
+    #   The Amazon Resource Name (ARN) of the entitlement that allows you to
+    #   subscribe to the flow. The entitlement is set by the content
+    #   originator, and the ARN is generated as part of the originator's
+    #   flow.
     #   @return [String]
     #
     # @!attribute [rw] flow_arn
+    #   The ARN of the flow that you want to update.
     #   @return [String]
     #
     # @!attribute [rw] ingest_port
-    #   The port that the flow will be listening on for incoming content.
+    #   The port that the flow listens on for incoming content. If the
+    #   protocol of the source is Zixi, the port must be set to 2088.
     #   @return [Integer]
     #
     # @!attribute [rw] max_bitrate
-    #   The smoothing max bitrate (in bps) for RIST, RTP, and RTP-FEC
-    #   streams.
+    #   The maximum bitrate for RIST, RTP, and RTP-FEC streams.
     #   @return [Integer]
     #
     # @!attribute [rw] max_latency
     #   The maximum latency in milliseconds. This parameter applies only to
-    #   RIST-based, Zixi-based, and Fujitsu-based streams.
+    #   RIST-based and Zixi-based streams.
     #   @return [Integer]
     #
     # @!attribute [rw] max_sync_buffer
@@ -5144,8 +5365,8 @@ module Aws::MediaConnect
     #   @return [Integer]
     #
     # @!attribute [rw] media_stream_source_configurations
-    #   The media streams that are associated with the source, and the
-    #   parameters for those associations.
+    #   The media stream that is associated with the source, and the
+    #   parameters for that association.
     #   @return [Array<Types::MediaStreamSourceConfigurationRequest>]
     #
     # @!attribute [rw] min_latency
@@ -5158,7 +5379,13 @@ module Aws::MediaConnect
     #   @return [Integer]
     #
     # @!attribute [rw] protocol
-    #   The protocol that is used by the source.
+    #   The protocol that the source uses to deliver the content to
+    #   MediaConnect.
+    #
+    #   <note markdown="1"> Elemental MediaConnect no longer supports the Fujitsu QoS protocol.
+    #   This reference is maintained for legacy purposes only.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] sender_control_port
@@ -5172,10 +5399,11 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] source_arn
+    #   The ARN of the source that you want to update.
     #   @return [String]
     #
     # @!attribute [rw] source_listener_address
-    #   Source IP or domain name for SRT-caller protocol.
+    #   The source IP or domain name for SRT-caller protocol.
     #   @return [String]
     #
     # @!attribute [rw] source_listener_port
@@ -5188,14 +5416,13 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] vpc_interface_name
-    #   The name of the VPC interface to use for this source.
+    #   The name of the VPC interface that you want to send your output to.
     #   @return [String]
     #
     # @!attribute [rw] whitelist_cidr
-    #   The range of IP addresses that should be allowed to contribute
-    #   content to your source. These IP addresses should be in the form of
-    #   a Classless Inter-Domain Routing (CIDR) block; for example,
-    #   10.0.0.0/16.
+    #   The range of IP addresses that are allowed to contribute content to
+    #   your source. Format the IP addresses as a Classless Inter-Domain
+    #   Routing (CIDR) block; for example, 10.0.0.0/16.
     #   @return [String]
     #
     # @!attribute [rw] gateway_bridge_source
@@ -5230,16 +5457,12 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful UpdateFlowSource request. The response
-    # includes the ARN of the flow that was updated and the updated source
-    # configuration.
-    #
     # @!attribute [rw] flow_arn
-    #   The ARN of the flow that you want to update.
+    #   The ARN of the flow that you was updated.
     #   @return [String]
     #
     # @!attribute [rw] source
-    #   The settings for the source of the flow.
+    #   The details of the sources that are assigned to the flow.
     #   @return [Types::Source]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowSourceResponse AWS API Documentation
@@ -5272,17 +5495,13 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The state update that you want to make to an existing gateway
-    # instance.
-    #
     # @!attribute [rw] bridge_placement
-    #   The availability of the instance to host new bridges. The
-    #   bridgePlacement property can be LOCKED or AVAILABLE. If it is
-    #   LOCKED, no new bridges can be deployed to this instance. If it is
-    #   AVAILABLE, new bridges can be added to this instance.
+    #   The state of the instance. `ACTIVE` or `INACTIVE`.
     #   @return [String]
     #
     # @!attribute [rw] gateway_instance_arn
+    #   The Amazon Resource Name (ARN) of the gateway instance that you want
+    #   to update.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateGatewayInstanceRequest AWS API Documentation
@@ -5294,17 +5513,12 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The result of a successful UpdateGatewayInstance request.
-    #
     # @!attribute [rw] bridge_placement
-    #   The availability of the instance to host new bridges. The
-    #   bridgePlacement property can be LOCKED or AVAILABLE. If it is
-    #   LOCKED, no new bridges can be deployed to this instance. If it is
-    #   AVAILABLE, new bridges can be added to this instance.
+    #   The state of the instance. `ACTIVE` or `INACTIVE`.
     #   @return [String]
     #
     # @!attribute [rw] gateway_instance_arn
-    #   The Amazon Resource Name (ARN) of the instance.
+    #   The ARN of the instance that was updated.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateGatewayInstanceResponse AWS API Documentation
@@ -5316,6 +5530,8 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # Update an existing ingress-type bridge.
+    #
     # @!attribute [rw] max_bitrate
     #   The maximum expected bitrate (in bps).
     #   @return [Integer]
@@ -5333,11 +5549,10 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Update maintenance setting for a flow
+    # Update maintenance setting for a flow.
     #
     # @!attribute [rw] maintenance_day
-    #   A day of a week when the maintenance will happen. use
-    #   Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.
+    #   A day of a week when the maintenance will happen.
     #   @return [String]
     #
     # @!attribute [rw] maintenance_scheduled_date
@@ -5379,7 +5594,7 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The settings for a VPC Source.
+    # The settings for a VPC source.
     #
     # @!attribute [rw] name
     #   Immutable and has to be a unique against other VpcInterfaces in this
@@ -5396,8 +5611,7 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   Role Arn MediaConnect can assumes to create ENIs in customer's
-    #   account
+    #   A role Arn MediaConnect can assume to create ENIs in your account.
     #   @return [String]
     #
     # @!attribute [rw] security_group_ids
@@ -5405,7 +5619,7 @@ module Aws::MediaConnect
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_id
-    #   Subnet must be in the AZ of the Flow
+    #   Subnet must be in the AZ of the Flow.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/VpcInterface AWS API Documentation
@@ -5435,29 +5649,36 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Desired VPC Interface for a Flow
+    # The details of the VPC interfaces that you want to add to the flow.
     #
     # @!attribute [rw] name
-    #   The name of the VPC Interface. This value must be unique within the
-    #   current flow.
+    #   The name for the VPC interface. This name must be unique within the
+    #   flow.
     #   @return [String]
     #
     # @!attribute [rw] network_interface_type
-    #   The type of network interface. If this value is not included in the
-    #   request, MediaConnect uses ENA as the networkInterfaceType.
+    #   The type of network interface.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   Role Arn MediaConnect can assumes to create ENIs in customer's
-    #   account
+    #   The Amazon Resource Name (ARN) of the role that you created when you
+    #   set up MediaConnect as a trusted service.
     #   @return [String]
     #
     # @!attribute [rw] security_group_ids
-    #   Security Group IDs to be used on ENI.
+    #   A virtual firewall to control inbound and outbound traffic.
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_id
-    #   Subnet must be in the AZ of the Flow
+    #   The subnet IDs that you want to use for your VPC interface. A range
+    #   of IP addresses in your VPC. When you create your VPC, you specify a
+    #   range of IPv4 addresses for the VPC in the form of a Classless
+    #   Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16. This is
+    #   the primary CIDR block for your VPC. When you create a subnet for
+    #   your VPC, you specify the CIDR block for the subnet, which is a
+    #   subset of the VPC CIDR block. The subnets that you use across all
+    #   VPC interfaces on the flow must be in the same Availability Zone as
+    #   the flow.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/VpcInterfaceRequest AWS API Documentation

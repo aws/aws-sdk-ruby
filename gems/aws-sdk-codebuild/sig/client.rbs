@@ -294,7 +294,8 @@ module Aws
                             ?cache: {
                               type: ("NO_CACHE" | "S3" | "LOCAL"),
                               location: ::String?,
-                              modes: Array[("LOCAL_DOCKER_LAYER_CACHE" | "LOCAL_SOURCE_CACHE" | "LOCAL_CUSTOM_CACHE")]?
+                              modes: Array[("LOCAL_DOCKER_LAYER_CACHE" | "LOCAL_SOURCE_CACHE" | "LOCAL_CUSTOM_CACHE")]?,
+                              cache_namespace: ::String?
                             },
                             environment: {
                               type: ("WINDOWS_CONTAINER" | "LINUX_CONTAINER" | "LINUX_GPU_CONTAINER" | "ARM_CONTAINER" | "WINDOWS_SERVER_2019_CONTAINER" | "LINUX_LAMBDA_CONTAINER" | "ARM_LAMBDA_CONTAINER" | "LINUX_EC2" | "ARM_EC2" | "WINDOWS_EC2" | "MAC_ARM"),
@@ -895,7 +896,8 @@ module Aws
                          ?cache_override: {
                            type: ("NO_CACHE" | "S3" | "LOCAL"),
                            location: ::String?,
-                           modes: Array[("LOCAL_DOCKER_LAYER_CACHE" | "LOCAL_SOURCE_CACHE" | "LOCAL_CUSTOM_CACHE")]?
+                           modes: Array[("LOCAL_DOCKER_LAYER_CACHE" | "LOCAL_SOURCE_CACHE" | "LOCAL_CUSTOM_CACHE")]?,
+                           cache_namespace: ::String?
                          },
                          ?service_role_override: ::String,
                          ?privileged_mode_override: bool,
@@ -1018,7 +1020,8 @@ module Aws
                                ?cache_override: {
                                  type: ("NO_CACHE" | "S3" | "LOCAL"),
                                  location: ::String?,
-                                 modes: Array[("LOCAL_DOCKER_LAYER_CACHE" | "LOCAL_SOURCE_CACHE" | "LOCAL_CUSTOM_CACHE")]?
+                                 modes: Array[("LOCAL_DOCKER_LAYER_CACHE" | "LOCAL_SOURCE_CACHE" | "LOCAL_CUSTOM_CACHE")]?,
+                                 cache_namespace: ::String?
                                },
                                ?service_role_override: ::String,
                                ?privileged_mode_override: bool,
@@ -1218,7 +1221,8 @@ module Aws
                             ?cache: {
                               type: ("NO_CACHE" | "S3" | "LOCAL"),
                               location: ::String?,
-                              modes: Array[("LOCAL_DOCKER_LAYER_CACHE" | "LOCAL_SOURCE_CACHE" | "LOCAL_CUSTOM_CACHE")]?
+                              modes: Array[("LOCAL_DOCKER_LAYER_CACHE" | "LOCAL_SOURCE_CACHE" | "LOCAL_CUSTOM_CACHE")]?,
+                              cache_namespace: ::String?
                             },
                             ?environment: {
                               type: ("WINDOWS_CONTAINER" | "LINUX_CONTAINER" | "LINUX_GPU_CONTAINER" | "ARM_CONTAINER" | "WINDOWS_SERVER_2019_CONTAINER" | "LINUX_LAMBDA_CONTAINER" | "ARM_LAMBDA_CONTAINER" | "LINUX_EC2" | "ARM_EC2" | "WINDOWS_EC2" | "MAC_ARM"),

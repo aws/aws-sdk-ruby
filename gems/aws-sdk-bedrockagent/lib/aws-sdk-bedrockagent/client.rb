@@ -2232,6 +2232,16 @@ module Aws::BedrockAgent
     #         },
     #         graph_arn: "GraphArn", # required
     #       },
+    #       opensearch_managed_cluster_configuration: {
+    #         domain_arn: "OpenSearchManagedClusterDomainArn", # required
+    #         domain_endpoint: "OpenSearchManagedClusterDomainEndpoint", # required
+    #         field_mapping: { # required
+    #           metadata_field: "FieldName", # required
+    #           text_field: "FieldName", # required
+    #           vector_field: "FieldName", # required
+    #         },
+    #         vector_index_name: "OpenSearchManagedClusterIndexName", # required
+    #       },
     #       opensearch_serverless_configuration: {
     #         collection_arn: "OpenSearchServerlessCollectionArn", # required
     #         field_mapping: { # required
@@ -2272,7 +2282,7 @@ module Aws::BedrockAgent
     #         },
     #         vector_index_name: "RedisEnterpriseCloudIndexName", # required
     #       },
-    #       type: "OPENSEARCH_SERVERLESS", # required, accepts OPENSEARCH_SERVERLESS, PINECONE, REDIS_ENTERPRISE_CLOUD, RDS, MONGO_DB_ATLAS, NEPTUNE_ANALYTICS
+    #       type: "OPENSEARCH_SERVERLESS", # required, accepts OPENSEARCH_SERVERLESS, PINECONE, REDIS_ENTERPRISE_CLOUD, RDS, MONGO_DB_ATLAS, NEPTUNE_ANALYTICS, OPENSEARCH_MANAGED_CLUSTER
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -2336,6 +2346,12 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.storage_configuration.neptune_analytics_configuration.field_mapping.metadata_field #=> String
     #   resp.knowledge_base.storage_configuration.neptune_analytics_configuration.field_mapping.text_field #=> String
     #   resp.knowledge_base.storage_configuration.neptune_analytics_configuration.graph_arn #=> String
+    #   resp.knowledge_base.storage_configuration.opensearch_managed_cluster_configuration.domain_arn #=> String
+    #   resp.knowledge_base.storage_configuration.opensearch_managed_cluster_configuration.domain_endpoint #=> String
+    #   resp.knowledge_base.storage_configuration.opensearch_managed_cluster_configuration.field_mapping.metadata_field #=> String
+    #   resp.knowledge_base.storage_configuration.opensearch_managed_cluster_configuration.field_mapping.text_field #=> String
+    #   resp.knowledge_base.storage_configuration.opensearch_managed_cluster_configuration.field_mapping.vector_field #=> String
+    #   resp.knowledge_base.storage_configuration.opensearch_managed_cluster_configuration.vector_index_name #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.collection_arn #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.metadata_field #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.text_field #=> String
@@ -2360,7 +2376,7 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.text_field #=> String
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.vector_field #=> String
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.vector_index_name #=> String
-    #   resp.knowledge_base.storage_configuration.type #=> String, one of "OPENSEARCH_SERVERLESS", "PINECONE", "REDIS_ENTERPRISE_CLOUD", "RDS", "MONGO_DB_ATLAS", "NEPTUNE_ANALYTICS"
+    #   resp.knowledge_base.storage_configuration.type #=> String, one of "OPENSEARCH_SERVERLESS", "PINECONE", "REDIS_ENTERPRISE_CLOUD", "RDS", "MONGO_DB_ATLAS", "NEPTUNE_ANALYTICS", "OPENSEARCH_MANAGED_CLUSTER"
     #   resp.knowledge_base.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateKnowledgeBase AWS API Documentation
@@ -4133,6 +4149,12 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.storage_configuration.neptune_analytics_configuration.field_mapping.metadata_field #=> String
     #   resp.knowledge_base.storage_configuration.neptune_analytics_configuration.field_mapping.text_field #=> String
     #   resp.knowledge_base.storage_configuration.neptune_analytics_configuration.graph_arn #=> String
+    #   resp.knowledge_base.storage_configuration.opensearch_managed_cluster_configuration.domain_arn #=> String
+    #   resp.knowledge_base.storage_configuration.opensearch_managed_cluster_configuration.domain_endpoint #=> String
+    #   resp.knowledge_base.storage_configuration.opensearch_managed_cluster_configuration.field_mapping.metadata_field #=> String
+    #   resp.knowledge_base.storage_configuration.opensearch_managed_cluster_configuration.field_mapping.text_field #=> String
+    #   resp.knowledge_base.storage_configuration.opensearch_managed_cluster_configuration.field_mapping.vector_field #=> String
+    #   resp.knowledge_base.storage_configuration.opensearch_managed_cluster_configuration.vector_index_name #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.collection_arn #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.metadata_field #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.text_field #=> String
@@ -4157,7 +4179,7 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.text_field #=> String
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.vector_field #=> String
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.vector_index_name #=> String
-    #   resp.knowledge_base.storage_configuration.type #=> String, one of "OPENSEARCH_SERVERLESS", "PINECONE", "REDIS_ENTERPRISE_CLOUD", "RDS", "MONGO_DB_ATLAS", "NEPTUNE_ANALYTICS"
+    #   resp.knowledge_base.storage_configuration.type #=> String, one of "OPENSEARCH_SERVERLESS", "PINECONE", "REDIS_ENTERPRISE_CLOUD", "RDS", "MONGO_DB_ATLAS", "NEPTUNE_ANALYTICS", "OPENSEARCH_MANAGED_CLUSTER"
     #   resp.knowledge_base.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetKnowledgeBase AWS API Documentation
@@ -5837,9 +5859,9 @@ module Aws::BedrockAgent
     #   The configuration settings for a computer use action.
     #
     #   Computer use is a new Anthropic Claude model capability (in beta)
-    #   available with Claude 3.7 and Claude 3.5 Sonnet v2 only. For more
-    #   information, see [Configure an Amazon Bedrock Agent to complete tasks
-    #   with computer use tools][1].
+    #   available with Claude 3.7 Sonnet and Claude 3.5 Sonnet v2 only. For
+    #   more information, see [Configure an Amazon Bedrock Agent to complete
+    #   tasks with computer use tools][1].
     #
     #
     #
@@ -6969,6 +6991,16 @@ module Aws::BedrockAgent
     #         },
     #         graph_arn: "GraphArn", # required
     #       },
+    #       opensearch_managed_cluster_configuration: {
+    #         domain_arn: "OpenSearchManagedClusterDomainArn", # required
+    #         domain_endpoint: "OpenSearchManagedClusterDomainEndpoint", # required
+    #         field_mapping: { # required
+    #           metadata_field: "FieldName", # required
+    #           text_field: "FieldName", # required
+    #           vector_field: "FieldName", # required
+    #         },
+    #         vector_index_name: "OpenSearchManagedClusterIndexName", # required
+    #       },
     #       opensearch_serverless_configuration: {
     #         collection_arn: "OpenSearchServerlessCollectionArn", # required
     #         field_mapping: { # required
@@ -7009,7 +7041,7 @@ module Aws::BedrockAgent
     #         },
     #         vector_index_name: "RedisEnterpriseCloudIndexName", # required
     #       },
-    #       type: "OPENSEARCH_SERVERLESS", # required, accepts OPENSEARCH_SERVERLESS, PINECONE, REDIS_ENTERPRISE_CLOUD, RDS, MONGO_DB_ATLAS, NEPTUNE_ANALYTICS
+    #       type: "OPENSEARCH_SERVERLESS", # required, accepts OPENSEARCH_SERVERLESS, PINECONE, REDIS_ENTERPRISE_CLOUD, RDS, MONGO_DB_ATLAS, NEPTUNE_ANALYTICS, OPENSEARCH_MANAGED_CLUSTER
     #     },
     #   })
     #
@@ -7070,6 +7102,12 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.storage_configuration.neptune_analytics_configuration.field_mapping.metadata_field #=> String
     #   resp.knowledge_base.storage_configuration.neptune_analytics_configuration.field_mapping.text_field #=> String
     #   resp.knowledge_base.storage_configuration.neptune_analytics_configuration.graph_arn #=> String
+    #   resp.knowledge_base.storage_configuration.opensearch_managed_cluster_configuration.domain_arn #=> String
+    #   resp.knowledge_base.storage_configuration.opensearch_managed_cluster_configuration.domain_endpoint #=> String
+    #   resp.knowledge_base.storage_configuration.opensearch_managed_cluster_configuration.field_mapping.metadata_field #=> String
+    #   resp.knowledge_base.storage_configuration.opensearch_managed_cluster_configuration.field_mapping.text_field #=> String
+    #   resp.knowledge_base.storage_configuration.opensearch_managed_cluster_configuration.field_mapping.vector_field #=> String
+    #   resp.knowledge_base.storage_configuration.opensearch_managed_cluster_configuration.vector_index_name #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.collection_arn #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.metadata_field #=> String
     #   resp.knowledge_base.storage_configuration.opensearch_serverless_configuration.field_mapping.text_field #=> String
@@ -7094,7 +7132,7 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.text_field #=> String
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.field_mapping.vector_field #=> String
     #   resp.knowledge_base.storage_configuration.redis_enterprise_cloud_configuration.vector_index_name #=> String
-    #   resp.knowledge_base.storage_configuration.type #=> String, one of "OPENSEARCH_SERVERLESS", "PINECONE", "REDIS_ENTERPRISE_CLOUD", "RDS", "MONGO_DB_ATLAS", "NEPTUNE_ANALYTICS"
+    #   resp.knowledge_base.storage_configuration.type #=> String, one of "OPENSEARCH_SERVERLESS", "PINECONE", "REDIS_ENTERPRISE_CLOUD", "RDS", "MONGO_DB_ATLAS", "NEPTUNE_ANALYTICS", "OPENSEARCH_MANAGED_CLUSTER"
     #   resp.knowledge_base.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateKnowledgeBase AWS API Documentation
@@ -7579,7 +7617,7 @@ module Aws::BedrockAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagent'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

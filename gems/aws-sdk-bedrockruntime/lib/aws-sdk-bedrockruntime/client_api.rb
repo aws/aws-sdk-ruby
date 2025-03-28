@@ -79,6 +79,7 @@ module Aws::BedrockRuntime
     GuardrailContentFilterType = Shapes::StringShape.new(name: 'GuardrailContentFilterType')
     GuardrailContentPolicyAction = Shapes::StringShape.new(name: 'GuardrailContentPolicyAction')
     GuardrailContentPolicyAssessment = Shapes::StructureShape.new(name: 'GuardrailContentPolicyAssessment')
+    GuardrailContentPolicyImageUnitsProcessed = Shapes::IntegerShape.new(name: 'GuardrailContentPolicyImageUnitsProcessed')
     GuardrailContentPolicyUnitsProcessed = Shapes::IntegerShape.new(name: 'GuardrailContentPolicyUnitsProcessed')
     GuardrailContentQualifier = Shapes::StringShape.new(name: 'GuardrailContentQualifier')
     GuardrailContentQualifierList = Shapes::ListShape.new(name: 'GuardrailContentQualifierList')
@@ -622,6 +623,7 @@ module Aws::BedrockRuntime
     GuardrailUsage.add_member(:sensitive_information_policy_units, Shapes::ShapeRef.new(shape: GuardrailSensitiveInformationPolicyUnitsProcessed, required: true, location_name: "sensitiveInformationPolicyUnits"))
     GuardrailUsage.add_member(:sensitive_information_policy_free_units, Shapes::ShapeRef.new(shape: GuardrailSensitiveInformationPolicyFreeUnitsProcessed, required: true, location_name: "sensitiveInformationPolicyFreeUnits"))
     GuardrailUsage.add_member(:contextual_grounding_policy_units, Shapes::ShapeRef.new(shape: GuardrailContextualGroundingPolicyUnitsProcessed, required: true, location_name: "contextualGroundingPolicyUnits"))
+    GuardrailUsage.add_member(:content_policy_image_units, Shapes::ShapeRef.new(shape: GuardrailContentPolicyImageUnitsProcessed, location_name: "contentPolicyImageUnits"))
     GuardrailUsage.struct_class = Types::GuardrailUsage
 
     GuardrailWordPolicyAssessment.add_member(:custom_words, Shapes::ShapeRef.new(shape: GuardrailCustomWordList, required: true, location_name: "customWords"))

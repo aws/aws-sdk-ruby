@@ -12,6 +12,7 @@ module Aws::MarketplaceEntitlementService
       attr_accessor product_code: ::String
       attr_accessor dimension: ::String
       attr_accessor customer_identifier: ::String
+      attr_accessor customer_aws_account_id: ::String
       attr_accessor value: Types::EntitlementValue
       attr_accessor expiration_date: ::Time
       SENSITIVE: []
@@ -27,7 +28,7 @@ module Aws::MarketplaceEntitlementService
 
     class GetEntitlementsRequest
       attr_accessor product_code: ::String
-      attr_accessor filter: ::Hash[("CUSTOMER_IDENTIFIER" | "DIMENSION"), ::Array[::String]]
+      attr_accessor filter: ::Hash[("CUSTOMER_IDENTIFIER" | "DIMENSION" | "CUSTOMER_AWS_ACCOUNT_ID"), ::Array[::String]]
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       SENSITIVE: []

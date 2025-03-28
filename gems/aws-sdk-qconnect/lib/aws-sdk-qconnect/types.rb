@@ -533,7 +533,7 @@ module Aws::QConnect
     #
     # @!attribute [rw] model_id
     #   The identifier of the model used for this AI Prompt. Model Ids
-    #   supported are: `CLAUDE_3_HAIKU_20240307_V1`.
+    #   supported are: `anthropic.claude-3-haiku-20240307-v1:0`.
     #   @return [String]
     #
     # @!attribute [rw] modified_time
@@ -627,7 +627,7 @@ module Aws::QConnect
     #
     # @!attribute [rw] model_id
     #   The identifier of the model used for this AI Prompt. Model Ids
-    #   supported are: `CLAUDE_3_HAIKU_20240307_V1`.
+    #   supported are: `anthropic.claude-3-haiku-20240307-v1:0`.
     #   @return [String]
     #
     # @!attribute [rw] modified_time
@@ -857,9 +857,10 @@ module Aws::QConnect
     #   The locale to which specifies the language and region settings that
     #   determine the response language for [QueryAssistant][1].
     #
-    #   <note markdown="1"> Changing this locale to anything other than `en_US` will turn off
-    #   recommendations triggered by contact transcripts for agent
-    #   assistance, as this feature is not supported in multiple languages.
+    #   <note markdown="1"> Changing this locale to anything other than `en_US`, `en_GB`, or
+    #   `en_AU` will turn off recommendations triggered by contact
+    #   transcripts for agent assistance, as this feature is not supported
+    #   in multiple languages.
     #
     #    </note>
     #
@@ -2205,7 +2206,7 @@ module Aws::QConnect
     #
     # @!attribute [rw] model_id
     #   The identifier of the model used for this AI Prompt. Model Ids
-    #   supported are: `CLAUDE_3_HAIKU_20240307_V1`
+    #   supported are: `anthropic.claude-3-haiku-20240307-v1:0`
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -8728,7 +8729,7 @@ module Aws::QConnect
     end
 
     # The conversation history data to included in conversation context data
-    # before the the Amazon Q in Connect session..
+    # before the Amazon Q in Connect session.
     #
     # @!attribute [rw] bot_response
     #   The bot response of the conversation history data.

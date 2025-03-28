@@ -775,6 +775,7 @@ module Aws::Amplify
       attr_accessor webhook_arn: ::String
       attr_accessor webhook_id: ::String
       attr_accessor webhook_url: ::String
+      attr_accessor app_id: ::String
       attr_accessor branch_name: ::String
       attr_accessor description: ::String
       attr_accessor create_time: ::Time

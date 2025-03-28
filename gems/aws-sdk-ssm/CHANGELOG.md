@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.192.0 (2025-03-24)
+------------------
+
+* Feature - This release adds the AvailableSecurityUpdatesComplianceStatus field to patch baseline operations, as well as the AvailableSecurityUpdateCount and InstancesWithAvailableSecurityUpdates to patch state operations. Applies to Windows Server managed nodes only.
+
 1.191.0 (2025-02-28)
 ------------------
 

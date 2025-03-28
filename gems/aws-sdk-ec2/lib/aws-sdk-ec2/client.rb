@@ -21226,7 +21226,7 @@ module Aws::EC2
     #     `us-east-1`).
     #
     #   * `state` - The state of the Availability Zone, the Local Zone, or the
-    #     Wavelength Zone (`available`).
+    #     Wavelength Zone (`available` \| `unavailable` \| `constrained`).
     #
     #   * `zone-id` - The ID of the Availability Zone (for example,
     #     `use1-az1`), the Local Zone (for example, `usw2-lax1-az1`), or the
@@ -63402,7 +63402,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.512.0'
+      context[:gem_version] = '1.513.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

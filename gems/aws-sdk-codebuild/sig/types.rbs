@@ -855,6 +855,7 @@ module Aws::CodeBuild
       attr_accessor type: ("NO_CACHE" | "S3" | "LOCAL")
       attr_accessor location: ::String
       attr_accessor modes: ::Array[("LOCAL_DOCKER_LAYER_CACHE" | "LOCAL_SOURCE_CACHE" | "LOCAL_CUSTOM_CACHE")]
+      attr_accessor cache_namespace: ::String
       SENSITIVE: []
     end
 

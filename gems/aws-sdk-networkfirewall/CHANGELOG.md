@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2025-03-20)
+------------------
+
+* Feature - You can now use flow operations to either flush or capture traffic monitored in your firewall's flow table.
+
 1.62.0 (2025-02-19)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2025-03-28)
+------------------
+
+* Feature - Add support for NetworkManager Dualstack endpoints.
+
 1.60.0 (2025-02-18)
 ------------------
 

@@ -260,6 +260,25 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
+    class DescribeFlowOperationRequest
+      attr_accessor firewall_arn: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor flow_operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFlowOperationResponse
+      attr_accessor firewall_arn: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor flow_operation_id: ::String
+      attr_accessor flow_operation_type: ("FLOW_FLUSH" | "FLOW_CAPTURE")
+      attr_accessor flow_operation_status: ("COMPLETED" | "IN_PROGRESS" | "FAILED" | "COMPLETED_WITH_ERRORS")
+      attr_accessor status_message: ::String
+      attr_accessor flow_request_timestamp: ::Time
+      attr_accessor flow_operation: Types::FlowOperation
+      SENSITIVE: []
+    end
+
     class DescribeLoggingConfigurationRequest
       attr_accessor firewall_arn: ::String
       attr_accessor firewall_name: ::String
@@ -420,6 +439,41 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
+    class Flow
+      attr_accessor source_address: Types::Address
+      attr_accessor destination_address: Types::Address
+      attr_accessor source_port: ::String
+      attr_accessor destination_port: ::String
+      attr_accessor protocol: ::String
+      attr_accessor age: ::Integer
+      attr_accessor packet_count: ::Integer
+      attr_accessor byte_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class FlowFilter
+      attr_accessor source_address: Types::Address
+      attr_accessor destination_address: Types::Address
+      attr_accessor source_port: ::String
+      attr_accessor destination_port: ::String
+      attr_accessor protocols: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class FlowOperation
+      attr_accessor minimum_flow_age_in_seconds: ::Integer
+      attr_accessor flow_filters: ::Array[Types::FlowFilter]
+      SENSITIVE: []
+    end
+
+    class FlowOperationMetadata
+      attr_accessor flow_operation_id: ::String
+      attr_accessor flow_operation_type: ("FLOW_FLUSH" | "FLOW_CAPTURE")
+      attr_accessor flow_request_timestamp: ::Time
+      attr_accessor flow_operation_status: ("COMPLETED" | "IN_PROGRESS" | "FAILED" | "COMPLETED_WITH_ERRORS")
+      SENSITIVE: []
+    end
+
     class FlowTimeouts
       attr_accessor tcp_idle_timeout_seconds: ::Integer
       SENSITIVE: []
@@ -546,6 +600,42 @@ module Aws::NetworkFirewall
     class ListFirewallsResponse
       attr_accessor next_token: ::String
       attr_accessor firewalls: ::Array[Types::FirewallMetadata]
+      SENSITIVE: []
+    end
+
+    class ListFlowOperationResultsRequest
+      attr_accessor firewall_arn: ::String
+      attr_accessor flow_operation_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor availability_zone: ::String
+      SENSITIVE: []
+    end
+
+    class ListFlowOperationResultsResponse
+      attr_accessor firewall_arn: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor flow_operation_id: ::String
+      attr_accessor flow_operation_status: ("COMPLETED" | "IN_PROGRESS" | "FAILED" | "COMPLETED_WITH_ERRORS")
+      attr_accessor status_message: ::String
+      attr_accessor flow_request_timestamp: ::Time
+      attr_accessor flows: ::Array[Types::Flow]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFlowOperationsRequest
+      attr_accessor firewall_arn: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor flow_operation_type: ("FLOW_FLUSH" | "FLOW_CAPTURE")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFlowOperationsResponse
+      attr_accessor flow_operations: ::Array[Types::FlowOperationMetadata]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -770,6 +860,36 @@ module Aws::NetworkFirewall
 
     class StartAnalysisReportResponse
       attr_accessor analysis_report_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartFlowCaptureRequest
+      attr_accessor firewall_arn: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor minimum_flow_age_in_seconds: ::Integer
+      attr_accessor flow_filters: ::Array[Types::FlowFilter]
+      SENSITIVE: []
+    end
+
+    class StartFlowCaptureResponse
+      attr_accessor firewall_arn: ::String
+      attr_accessor flow_operation_id: ::String
+      attr_accessor flow_operation_status: ("COMPLETED" | "IN_PROGRESS" | "FAILED" | "COMPLETED_WITH_ERRORS")
+      SENSITIVE: []
+    end
+
+    class StartFlowFlushRequest
+      attr_accessor firewall_arn: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor minimum_flow_age_in_seconds: ::Integer
+      attr_accessor flow_filters: ::Array[Types::FlowFilter]
+      SENSITIVE: []
+    end
+
+    class StartFlowFlushResponse
+      attr_accessor firewall_arn: ::String
+      attr_accessor flow_operation_id: ::String
+      attr_accessor flow_operation_status: ("COMPLETED" | "IN_PROGRESS" | "FAILED" | "COMPLETED_WITH_ERRORS")
       SENSITIVE: []
     end
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2025-03-27)
+------------------
+
+* Feature - This release adds new action type of Create Listing Changeset for the Metadata Enforcement Rule feature.
+
+1.34.0 (2025-03-21)
+------------------
+
+* Feature - Add support for overriding selection of default AWS IAM Identity Center instance as part of Amazon DataZone domain APIs.
+
 1.33.0 (2025-03-13)
 ------------------
 

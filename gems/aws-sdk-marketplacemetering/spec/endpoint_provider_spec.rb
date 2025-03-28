@@ -14,13 +14,13 @@ module Aws::MarketplaceMetering
   describe EndpointProvider do
     subject { Aws::MarketplaceMetering::EndpointProvider.new }
 
-    context "For region af-south-1 with FIPS disabled and DualStack disabled" do
+    context "For custom endpoint with region not set and fips disabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://metering.marketplace.af-south-1.amazonaws.com"}}
+        {"endpoint"=>{"url"=>"https://example.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"af-south-1", :use_fips=>false, :use_dual_stack=>false})
+        params = EndpointParameters.new(**{:endpoint=>"https://example.com", :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -28,297 +28,29 @@ module Aws::MarketplaceMetering
       end
     end
 
-    context "For region ap-east-1 with FIPS disabled and DualStack disabled" do
+    context "For custom endpoint with fips enabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://metering.marketplace.ap-east-1.amazonaws.com"}}
+        {"error"=>"Invalid Configuration: FIPS and custom endpoint are not supported"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"ap-east-1", :use_fips=>false, :use_dual_stack=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+        params = EndpointParameters.new(**{:endpoint=>"https://example.com", :use_fips=>true})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
       end
     end
 
-    context "For region ap-northeast-1 with FIPS disabled and DualStack disabled" do
+    context "For custom endpoint with fips disabled and dualstack enabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://metering.marketplace.ap-northeast-1.amazonaws.com"}}
+        {"error"=>"Invalid Configuration: Dualstack and custom endpoint are not supported"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"ap-northeast-1", :use_fips=>false, :use_dual_stack=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region ap-northeast-2 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://metering.marketplace.ap-northeast-2.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"ap-northeast-2", :use_fips=>false, :use_dual_stack=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region ap-northeast-3 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://metering.marketplace.ap-northeast-3.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"ap-northeast-3", :use_fips=>false, :use_dual_stack=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region ap-south-1 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://metering.marketplace.ap-south-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"ap-south-1", :use_fips=>false, :use_dual_stack=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region ap-southeast-1 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://metering.marketplace.ap-southeast-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"ap-southeast-1", :use_fips=>false, :use_dual_stack=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region ap-southeast-2 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://metering.marketplace.ap-southeast-2.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"ap-southeast-2", :use_fips=>false, :use_dual_stack=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region ap-southeast-3 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://metering.marketplace.ap-southeast-3.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"ap-southeast-3", :use_fips=>false, :use_dual_stack=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region ca-central-1 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://metering.marketplace.ca-central-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"ca-central-1", :use_fips=>false, :use_dual_stack=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region eu-central-1 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://metering.marketplace.eu-central-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"eu-central-1", :use_fips=>false, :use_dual_stack=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region eu-north-1 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://metering.marketplace.eu-north-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"eu-north-1", :use_fips=>false, :use_dual_stack=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region eu-south-1 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://metering.marketplace.eu-south-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"eu-south-1", :use_fips=>false, :use_dual_stack=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region eu-west-1 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://metering.marketplace.eu-west-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"eu-west-1", :use_fips=>false, :use_dual_stack=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region eu-west-2 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://metering.marketplace.eu-west-2.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"eu-west-2", :use_fips=>false, :use_dual_stack=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region eu-west-3 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://metering.marketplace.eu-west-3.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"eu-west-3", :use_fips=>false, :use_dual_stack=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region me-south-1 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://metering.marketplace.me-south-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"me-south-1", :use_fips=>false, :use_dual_stack=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region sa-east-1 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://metering.marketplace.sa-east-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"sa-east-1", :use_fips=>false, :use_dual_stack=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region us-east-1 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://metering.marketplace.us-east-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region us-east-2 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://metering.marketplace.us-east-2.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-east-2", :use_fips=>false, :use_dual_stack=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region us-west-1 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://metering.marketplace.us-west-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-west-1", :use_fips=>false, :use_dual_stack=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region us-west-2 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://metering.marketplace.us-west-2.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-west-2", :use_fips=>false, :use_dual_stack=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+        params = EndpointParameters.new(**{:endpoint=>"https://example.com", :use_fips=>false, :use_dual_stack=>true})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
       end
     end
 
@@ -352,7 +84,7 @@ module Aws::MarketplaceMetering
 
     context "For region us-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://metering.marketplace.us-east-1.api.aws"}}
+        {"endpoint"=>{"url"=>"https://metering-marketplace.us-east-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -364,13 +96,13 @@ module Aws::MarketplaceMetering
       end
     end
 
-    context "For region cn-north-1 with FIPS enabled and DualStack enabled" do
+    context "For region us-east-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://metering.marketplace-fips.cn-north-1.api.amazonwebservices.com.cn"}}
+        {"endpoint"=>{"url"=>"https://metering.marketplace.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"cn-north-1", :use_fips=>true, :use_dual_stack=>true})
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -378,13 +110,13 @@ module Aws::MarketplaceMetering
       end
     end
 
-    context "For region cn-north-1 with FIPS enabled and DualStack disabled" do
+    context "For region cn-northwest-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://metering.marketplace-fips.cn-north-1.amazonaws.com.cn"}}
+        {"endpoint"=>{"url"=>"https://metering.marketplace-fips.cn-northwest-1.api.amazonwebservices.com.cn"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"cn-north-1", :use_fips=>true, :use_dual_stack=>false})
+        params = EndpointParameters.new(**{:region=>"cn-northwest-1", :use_fips=>true, :use_dual_stack=>true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -392,13 +124,13 @@ module Aws::MarketplaceMetering
       end
     end
 
-    context "For region cn-north-1 with FIPS disabled and DualStack enabled" do
+    context "For region cn-northwest-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://metering.marketplace.cn-north-1.api.amazonwebservices.com.cn"}}
+        {"endpoint"=>{"url"=>"https://metering.marketplace-fips.cn-northwest-1.amazonaws.com.cn"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"cn-north-1", :use_fips=>false, :use_dual_stack=>true})
+        params = EndpointParameters.new(**{:region=>"cn-northwest-1", :use_fips=>true, :use_dual_stack=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -406,13 +138,13 @@ module Aws::MarketplaceMetering
       end
     end
 
-    context "For region cn-north-1 with FIPS disabled and DualStack disabled" do
+    context "For region cn-northwest-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://metering.marketplace.cn-north-1.amazonaws.com.cn"}}
+        {"endpoint"=>{"url"=>"https://metering.marketplace.cn-northwest-1.api.amazonwebservices.com.cn"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"cn-north-1", :use_fips=>false, :use_dual_stack=>false})
+        params = EndpointParameters.new(**{:region=>"cn-northwest-1", :use_fips=>false, :use_dual_stack=>true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -420,13 +152,55 @@ module Aws::MarketplaceMetering
       end
     end
 
-    context "For region us-gov-east-1 with FIPS disabled and DualStack disabled" do
+    context "For region cn-northwest-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://metering.marketplace.us-gov-east-1.amazonaws.com"}}
+        {"endpoint"=>{"url"=>"https://metering.marketplace.cn-northwest-1.amazonaws.com.cn"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-gov-east-1", :use_fips=>false, :use_dual_stack=>false})
+        params = EndpointParameters.new(**{:region=>"cn-northwest-1", :use_fips=>false, :use_dual_stack=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "For region us-gov-west-1 with FIPS enabled and DualStack enabled" do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://metering.marketplace-fips.us-gov-west-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-gov-west-1", :use_fips=>true, :use_dual_stack=>true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "For region us-gov-west-1 with FIPS enabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://metering.marketplace-fips.us-gov-west-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-gov-west-1", :use_fips=>true, :use_dual_stack=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "For region us-gov-west-1 with FIPS disabled and DualStack enabled" do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://metering.marketplace.us-gov-west-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-gov-west-1", :use_fips=>false, :use_dual_stack=>true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -441,48 +215,6 @@ module Aws::MarketplaceMetering
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{:region=>"us-gov-west-1", :use_fips=>false, :use_dual_stack=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region us-gov-east-1 with FIPS enabled and DualStack enabled" do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://metering.marketplace-fips.us-gov-east-1.api.aws"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-gov-east-1", :use_fips=>true, :use_dual_stack=>true})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region us-gov-east-1 with FIPS enabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://metering.marketplace-fips.us-gov-east-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-gov-east-1", :use_fips=>true, :use_dual_stack=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region us-gov-east-1 with FIPS disabled and DualStack enabled" do
-      let(:expected) do
-        {"endpoint"=>{"url"=>"https://metering.marketplace.us-gov-east-1.api.aws"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-gov-east-1", :use_fips=>false, :use_dual_stack=>true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -598,13 +330,26 @@ module Aws::MarketplaceMetering
       end
     end
 
-    context "For custom endpoint with region set and fips disabled and dualstack disabled" do
+    context "For region eu-isoe-west-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://example.com"}}
+        {"error"=>"FIPS and DualStack are enabled, but this partition does not support one or both"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false, :endpoint=>"https://example.com"})
+        params = EndpointParameters.new(**{:region=>"eu-isoe-west-1", :use_fips=>true, :use_dual_stack=>true})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "For region eu-isoe-west-1 with FIPS enabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://metering.marketplace-fips.eu-isoe-west-1.cloud.adc-e.uk"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"eu-isoe-west-1", :use_fips=>true, :use_dual_stack=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -612,13 +357,26 @@ module Aws::MarketplaceMetering
       end
     end
 
-    context "For custom endpoint with region not set and fips disabled and dualstack disabled" do
+    context "For region eu-isoe-west-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://example.com"}}
+        {"error"=>"DualStack is enabled but this partition does not support DualStack"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>false, :endpoint=>"https://example.com"})
+        params = EndpointParameters.new(**{:region=>"eu-isoe-west-1", :use_fips=>false, :use_dual_stack=>true})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "For region eu-isoe-west-1 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://metering.marketplace.eu-isoe-west-1.cloud.adc-e.uk"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"eu-isoe-west-1", :use_fips=>false, :use_dual_stack=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -626,29 +384,57 @@ module Aws::MarketplaceMetering
       end
     end
 
-    context "For custom endpoint with fips enabled and dualstack disabled" do
+    context "For region us-isof-south-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
-        {"error"=>"Invalid Configuration: FIPS and custom endpoint are not supported"}
+        {"error"=>"FIPS and DualStack are enabled, but this partition does not support one or both"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>true, :use_dual_stack=>false, :endpoint=>"https://example.com"})
+        params = EndpointParameters.new(**{:region=>"us-isof-south-1", :use_fips=>true, :use_dual_stack=>true})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
     end
 
-    context "For custom endpoint with fips disabled and dualstack enabled" do
+    context "For region us-isof-south-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
-        {"error"=>"Invalid Configuration: Dualstack and custom endpoint are not supported"}
+        {"endpoint"=>{"url"=>"https://metering.marketplace-fips.us-isof-south-1.csp.hci.ic.gov"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>true, :endpoint=>"https://example.com"})
+        params = EndpointParameters.new(**{:region=>"us-isof-south-1", :use_fips=>true, :use_dual_stack=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "For region us-isof-south-1 with FIPS disabled and DualStack enabled" do
+      let(:expected) do
+        {"error"=>"DualStack is enabled but this partition does not support DualStack"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-isof-south-1", :use_fips=>false, :use_dual_stack=>true})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "For region us-isof-south-1 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://metering.marketplace.us-isof-south-1.csp.hci.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-isof-south-1", :use_fips=>false, :use_dual_stack=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
     end
 

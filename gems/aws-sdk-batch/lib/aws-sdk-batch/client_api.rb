@@ -136,6 +136,9 @@ module Aws::Batch
     EvaluateOnExitList = Shapes::ListShape.new(name: 'EvaluateOnExitList')
     FairsharePolicy = Shapes::StructureShape.new(name: 'FairsharePolicy')
     FargatePlatformConfiguration = Shapes::StructureShape.new(name: 'FargatePlatformConfiguration')
+    FirelensConfiguration = Shapes::StructureShape.new(name: 'FirelensConfiguration')
+    FirelensConfigurationOptionsMap = Shapes::MapShape.new(name: 'FirelensConfigurationOptionsMap')
+    FirelensConfigurationType = Shapes::StringShape.new(name: 'FirelensConfigurationType')
     Float = Shapes::FloatShape.new(name: 'Float')
     FrontOfQueueDetail = Shapes::StructureShape.new(name: 'FrontOfQueueDetail')
     FrontOfQueueJobSummary = Shapes::StructureShape.new(name: 'FrontOfQueueJobSummary')
@@ -439,6 +442,7 @@ module Aws::Batch
     ContainerDetail.add_member(:ephemeral_storage, Shapes::ShapeRef.new(shape: EphemeralStorage, location_name: "ephemeralStorage"))
     ContainerDetail.add_member(:runtime_platform, Shapes::ShapeRef.new(shape: RuntimePlatform, location_name: "runtimePlatform"))
     ContainerDetail.add_member(:repository_credentials, Shapes::ShapeRef.new(shape: RepositoryCredentials, location_name: "repositoryCredentials"))
+    ContainerDetail.add_member(:enable_execute_command, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableExecuteCommand"))
     ContainerDetail.struct_class = Types::ContainerDetail
 
     ContainerOverrides.add_member(:vcpus, Shapes::ShapeRef.new(shape: Integer, deprecated: true, location_name: "vcpus", metadata: {"deprecatedMessage"=>"This field is deprecated, use resourceRequirements instead."}))
@@ -469,6 +473,7 @@ module Aws::Batch
     ContainerProperties.add_member(:secrets, Shapes::ShapeRef.new(shape: SecretList, location_name: "secrets"))
     ContainerProperties.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
     ContainerProperties.add_member(:fargate_platform_configuration, Shapes::ShapeRef.new(shape: FargatePlatformConfiguration, location_name: "fargatePlatformConfiguration"))
+    ContainerProperties.add_member(:enable_execute_command, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableExecuteCommand"))
     ContainerProperties.add_member(:ephemeral_storage, Shapes::ShapeRef.new(shape: EphemeralStorage, location_name: "ephemeralStorage"))
     ContainerProperties.add_member(:runtime_platform, Shapes::ShapeRef.new(shape: RuntimePlatform, location_name: "runtimePlatform"))
     ContainerProperties.add_member(:repository_credentials, Shapes::ShapeRef.new(shape: RepositoryCredentials, location_name: "repositoryCredentials"))
@@ -652,6 +657,7 @@ module Aws::Batch
     EcsTaskDetails.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
     EcsTaskDetails.add_member(:runtime_platform, Shapes::ShapeRef.new(shape: RuntimePlatform, location_name: "runtimePlatform"))
     EcsTaskDetails.add_member(:volumes, Shapes::ShapeRef.new(shape: Volumes, location_name: "volumes"))
+    EcsTaskDetails.add_member(:enable_execute_command, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableExecuteCommand"))
     EcsTaskDetails.struct_class = Types::EcsTaskDetails
 
     EcsTaskProperties.add_member(:containers, Shapes::ShapeRef.new(shape: ListTaskContainerProperties, required: true, location_name: "containers"))
@@ -664,6 +670,7 @@ module Aws::Batch
     EcsTaskProperties.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
     EcsTaskProperties.add_member(:runtime_platform, Shapes::ShapeRef.new(shape: RuntimePlatform, location_name: "runtimePlatform"))
     EcsTaskProperties.add_member(:volumes, Shapes::ShapeRef.new(shape: Volumes, location_name: "volumes"))
+    EcsTaskProperties.add_member(:enable_execute_command, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableExecuteCommand"))
     EcsTaskProperties.struct_class = Types::EcsTaskProperties
 
     EksAnnotationsMap.key = Shapes::ShapeRef.new(shape: String)
@@ -854,6 +861,13 @@ module Aws::Batch
 
     FargatePlatformConfiguration.add_member(:platform_version, Shapes::ShapeRef.new(shape: String, location_name: "platformVersion"))
     FargatePlatformConfiguration.struct_class = Types::FargatePlatformConfiguration
+
+    FirelensConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: FirelensConfigurationType, required: true, location_name: "type"))
+    FirelensConfiguration.add_member(:options, Shapes::ShapeRef.new(shape: FirelensConfigurationOptionsMap, location_name: "options"))
+    FirelensConfiguration.struct_class = Types::FirelensConfiguration
+
+    FirelensConfigurationOptionsMap.key = Shapes::ShapeRef.new(shape: String)
+    FirelensConfigurationOptionsMap.value = Shapes::ShapeRef.new(shape: String)
 
     FrontOfQueueDetail.add_member(:jobs, Shapes::ShapeRef.new(shape: FrontOfQueueJobSummaryList, location_name: "jobs"))
     FrontOfQueueDetail.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Long, location_name: "lastUpdatedAt"))
@@ -1279,6 +1293,7 @@ module Aws::Batch
     TaskContainerDetails.add_member(:depends_on, Shapes::ShapeRef.new(shape: TaskContainerDependencyList, location_name: "dependsOn"))
     TaskContainerDetails.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "environment"))
     TaskContainerDetails.add_member(:essential, Shapes::ShapeRef.new(shape: Boolean, location_name: "essential"))
+    TaskContainerDetails.add_member(:firelens_configuration, Shapes::ShapeRef.new(shape: FirelensConfiguration, location_name: "firelensConfiguration"))
     TaskContainerDetails.add_member(:image, Shapes::ShapeRef.new(shape: String, location_name: "image"))
     TaskContainerDetails.add_member(:linux_parameters, Shapes::ShapeRef.new(shape: LinuxParameters, location_name: "linuxParameters"))
     TaskContainerDetails.add_member(:log_configuration, Shapes::ShapeRef.new(shape: LogConfiguration, location_name: "logConfiguration"))
@@ -1307,6 +1322,7 @@ module Aws::Batch
     TaskContainerProperties.add_member(:depends_on, Shapes::ShapeRef.new(shape: TaskContainerDependencyList, location_name: "dependsOn"))
     TaskContainerProperties.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "environment"))
     TaskContainerProperties.add_member(:essential, Shapes::ShapeRef.new(shape: Boolean, location_name: "essential"))
+    TaskContainerProperties.add_member(:firelens_configuration, Shapes::ShapeRef.new(shape: FirelensConfiguration, location_name: "firelensConfiguration"))
     TaskContainerProperties.add_member(:image, Shapes::ShapeRef.new(shape: String, required: true, location_name: "image"))
     TaskContainerProperties.add_member(:linux_parameters, Shapes::ShapeRef.new(shape: LinuxParameters, location_name: "linuxParameters"))
     TaskContainerProperties.add_member(:log_configuration, Shapes::ShapeRef.new(shape: LogConfiguration, location_name: "logConfiguration"))

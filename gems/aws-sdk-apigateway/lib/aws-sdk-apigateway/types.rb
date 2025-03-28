@@ -862,7 +862,7 @@ module Aws::APIGateway
     #
     # @!attribute [rw] endpoint_configuration
     #   The endpoint configuration of this DomainName showing the endpoint
-    #   types of the domain name.
+    #   types and IP address types of the domain name.
     #   @return [Types::EndpointConfiguration]
     #
     # @!attribute [rw] tags
@@ -1042,7 +1042,7 @@ module Aws::APIGateway
     #
     # @!attribute [rw] endpoint_configuration
     #   The endpoint configuration of this RestApi showing the endpoint
-    #   types of the API.
+    #   types and IP address types of the API.
     #   @return [Types::EndpointConfiguration]
     #
     # @!attribute [rw] policy
@@ -1962,7 +1962,7 @@ module Aws::APIGateway
     #
     # @!attribute [rw] endpoint_configuration
     #   The endpoint configuration of this DomainName showing the endpoint
-    #   types of the domain name.
+    #   types and IP address types of the domain name.
     #   @return [Types::EndpointConfiguration]
     #
     # @!attribute [rw] domain_name_status
@@ -2109,7 +2109,8 @@ module Aws::APIGateway
     end
 
     # The endpoint configuration to indicate the types of endpoints an API
-    # (RestApi) or its custom domain name (DomainName) has.
+    # (RestApi) or its custom domain name (DomainName) has and the IP
+    # address types that can invoke it.
     #
     # @!attribute [rw] types
     #   A list of endpoint types of an API (RestApi) or its custom domain
@@ -2119,6 +2120,14 @@ module Aws::APIGateway
     #   API, the endpoint type is `PRIVATE`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address types that can invoke an API (RestApi) or a
+    #   DomainName. Use `ipv4` to allow only IPv4 addresses to invoke an API
+    #   or DomainName, or use `dualstack` to allow both IPv4 and IPv6
+    #   addresses to invoke an API or a DomainName. For the `PRIVATE`
+    #   endpoint type, only `dualstack` is supported.
+    #   @return [String]
+    #
     # @!attribute [rw] vpc_endpoint_ids
     #   A list of VpcEndpointIds of an API (RestApi) against which to create
     #   Route53 ALIASes. It is only supported for `PRIVATE` endpoint type.
@@ -2126,6 +2135,7 @@ module Aws::APIGateway
     #
     class EndpointConfiguration < Struct.new(
       :types,
+      :ip_address_type,
       :vpc_endpoint_ids)
       SENSITIVE = []
       include Aws::Structure
@@ -4739,7 +4749,7 @@ module Aws::APIGateway
     #
     # @!attribute [rw] endpoint_configuration
     #   The endpoint configuration of this RestApi showing the endpoint
-    #   types of the API.
+    #   types and IP address types of the API.
     #   @return [Types::EndpointConfiguration]
     #
     # @!attribute [rw] policy

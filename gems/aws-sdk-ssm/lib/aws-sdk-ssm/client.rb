@@ -2177,6 +2177,20 @@ module Aws::SSM
     #   including target operating systems and source repositories. Applies to
     #   Linux managed nodes only.
     #
+    # @option params [String] :available_security_updates_compliance_status
+    #   Indicates the status you want to assign to security patches that are
+    #   available but not approved because they don't meet the installation
+    #   criteria specified in the patch baseline.
+    #
+    #   Example scenario: Security patches that you might want installed can
+    #   be skipped if you have specified a long period to wait after a patch
+    #   is released before installation. If an update to the patch is released
+    #   during your specified waiting period, the waiting period for
+    #   installing the patch starts over. If the waiting period is too long,
+    #   multiple versions of the patch could be released but never installed.
+    #
+    #   Supported for Windows Server managed nodes only.
+    #
     # @option params [String] :client_token
     #   User-provided idempotency token.
     #
@@ -2248,6 +2262,7 @@ module Aws::SSM
     #         configuration: "PatchSourceConfiguration", # required
     #       },
     #     ],
+    #     available_security_updates_compliance_status: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT
     #     client_token: "ClientToken",
     #     tags: [
     #       {
@@ -4191,6 +4206,7 @@ module Aws::SSM
     #   resp.instance_patch_states[0].failed_count #=> Integer
     #   resp.instance_patch_states[0].unreported_not_applicable_count #=> Integer
     #   resp.instance_patch_states[0].not_applicable_count #=> Integer
+    #   resp.instance_patch_states[0].available_security_update_count #=> Integer
     #   resp.instance_patch_states[0].operation_start_time #=> Time
     #   resp.instance_patch_states[0].operation_end_time #=> Time
     #   resp.instance_patch_states[0].operation #=> String, one of "Scan", "Install"
@@ -4272,6 +4288,7 @@ module Aws::SSM
     #   resp.instance_patch_states[0].failed_count #=> Integer
     #   resp.instance_patch_states[0].unreported_not_applicable_count #=> Integer
     #   resp.instance_patch_states[0].not_applicable_count #=> Integer
+    #   resp.instance_patch_states[0].available_security_update_count #=> Integer
     #   resp.instance_patch_states[0].operation_start_time #=> Time
     #   resp.instance_patch_states[0].operation_end_time #=> Time
     #   resp.instance_patch_states[0].operation #=> String, one of "Scan", "Install"
@@ -4363,7 +4380,7 @@ module Aws::SSM
     #   resp.patches[0].kb_id #=> String
     #   resp.patches[0].classification #=> String
     #   resp.patches[0].severity #=> String
-    #   resp.patches[0].state #=> String, one of "INSTALLED", "INSTALLED_OTHER", "INSTALLED_PENDING_REBOOT", "INSTALLED_REJECTED", "MISSING", "NOT_APPLICABLE", "FAILED"
+    #   resp.patches[0].state #=> String, one of "INSTALLED", "INSTALLED_OTHER", "INSTALLED_PENDING_REBOOT", "INSTALLED_REJECTED", "MISSING", "NOT_APPLICABLE", "FAILED", "AVAILABLE_SECURITY_UPDATE"
     #   resp.patches[0].installed_time #=> Time
     #   resp.patches[0].cve_ids #=> String
     #   resp.next_token #=> String
@@ -5419,6 +5436,7 @@ module Aws::SSM
     #   * {Types::DescribePatchGroupStateResult#instances_with_critical_non_compliant_patches #instances_with_critical_non_compliant_patches} => Integer
     #   * {Types::DescribePatchGroupStateResult#instances_with_security_non_compliant_patches #instances_with_security_non_compliant_patches} => Integer
     #   * {Types::DescribePatchGroupStateResult#instances_with_other_non_compliant_patches #instances_with_other_non_compliant_patches} => Integer
+    #   * {Types::DescribePatchGroupStateResult#instances_with_available_security_updates #instances_with_available_security_updates} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -5440,6 +5458,7 @@ module Aws::SSM
     #   resp.instances_with_critical_non_compliant_patches #=> Integer
     #   resp.instances_with_security_non_compliant_patches #=> Integer
     #   resp.instances_with_other_non_compliant_patches #=> Integer
+    #   resp.instances_with_available_security_updates #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribePatchGroupState AWS API Documentation
     #
@@ -6231,6 +6250,7 @@ module Aws::SSM
     #           configuration: "PatchSourceConfiguration", # required
     #         },
     #       ],
+    #       available_security_updates_compliance_status: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT
     #     },
     #   })
     #
@@ -7434,6 +7454,7 @@ module Aws::SSM
     #   * {Types::GetPatchBaselineResult#modified_date #modified_date} => Time
     #   * {Types::GetPatchBaselineResult#description #description} => String
     #   * {Types::GetPatchBaselineResult#sources #sources} => Array&lt;Types::PatchSource&gt;
+    #   * {Types::GetPatchBaselineResult#available_security_updates_compliance_status #available_security_updates_compliance_status} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -7476,6 +7497,7 @@ module Aws::SSM
     #   resp.sources[0].products #=> Array
     #   resp.sources[0].products[0] #=> String
     #   resp.sources[0].configuration #=> String
+    #   resp.available_security_updates_compliance_status #=> String, one of "COMPLIANT", "NON_COMPLIANT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetPatchBaseline AWS API Documentation
     #
@@ -9159,14 +9181,17 @@ module Aws::SSM
     #
     # @option params [Array<String>] :account_ids_to_add
     #   The Amazon Web Services users that should have access to the document.
-    #   The account IDs can either be a group of account IDs or *All*.
+    #   The account IDs can either be a group of account IDs or *All*. You
+    #   must specify a value for this parameter or the `AccountIdsToRemove`
+    #   parameter.
     #
     # @option params [Array<String>] :account_ids_to_remove
     #   The Amazon Web Services users that should no longer have access to the
     #   document. The Amazon Web Services user can either be a group of
     #   account IDs or *All*. This action has a higher priority than
     #   `AccountIdsToAdd`. If you specify an ID to add and the same ID to
-    #   remove, the system removes access to the document.
+    #   remove, the system removes access to the document. You must specify a
+    #   value for this parameter or the `AccountIdsToAdd` parameter.
     #
     # @option params [String] :shared_document_version
     #   (Optional) The version of the document to share. If it isn't
@@ -9409,11 +9434,16 @@ module Aws::SSM
     #   [Creating Systems Manager parameters][1] in the *Amazon Web Services
     #   Systems Manager User Guide*.
     #
-    #   <note markdown="1"> The maximum length constraint of 2048 characters listed below includes
-    #   1037 characters reserved for internal use by Systems Manager. The
-    #   maximum length for a parameter name that you create is 1011
-    #   characters. This includes the characters in the ARN that precede the
-    #   name you specify, such as
+    #   <note markdown="1"> The reported maximum length of 2048 characters for a parameter name
+    #   includes 1037 characters that are reserved for internal use by Systems
+    #   Manager. The maximum length for a parameter name that you specify is
+    #   1011 characters.
+    #
+    #    This count of 1011 characters includes the characters in the ARN that
+    #   precede the name you specify. This ARN length will vary depending on
+    #   your partition and Region. For example, the following 45 characters
+    #   count toward the 1011 character maximum for a parameter created in the
+    #   US East (Ohio) Region:
     #   `arn:aws:ssm:us-east-2:111122223333:parameter/`.
     #
     #    </note>
@@ -13039,6 +13069,20 @@ module Aws::SSM
     #   including target operating systems and source repositories. Applies to
     #   Linux managed nodes only.
     #
+    # @option params [String] :available_security_updates_compliance_status
+    #   Indicates the status to be assigned to security patches that are
+    #   available but not approved because they don't meet the installation
+    #   criteria specified in the patch baseline.
+    #
+    #   Example scenario: Security patches that you might want installed can
+    #   be skipped if you have specified a long period to wait after a patch
+    #   is released before installation. If an update to the patch is released
+    #   during your specified waiting period, the waiting period for
+    #   installing the patch starts over. If the waiting period is too long,
+    #   multiple versions of the patch could be released but never installed.
+    #
+    #   Supported for Windows Server managed nodes only.
+    #
     # @option params [Boolean] :replace
     #   If True, then all fields that are required by the CreatePatchBaseline
     #   operation are also required for this API request. Optional fields that
@@ -13060,6 +13104,7 @@ module Aws::SSM
     #   * {Types::UpdatePatchBaselineResult#modified_date #modified_date} => Time
     #   * {Types::UpdatePatchBaselineResult#description #description} => String
     #   * {Types::UpdatePatchBaselineResult#sources #sources} => Array&lt;Types::PatchSource&gt;
+    #   * {Types::UpdatePatchBaselineResult#available_security_updates_compliance_status #available_security_updates_compliance_status} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -13105,6 +13150,7 @@ module Aws::SSM
     #         configuration: "PatchSourceConfiguration", # required
     #       },
     #     ],
+    #     available_security_updates_compliance_status: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT
     #     replace: false,
     #   })
     #
@@ -13141,6 +13187,7 @@ module Aws::SSM
     #   resp.sources[0].products #=> Array
     #   resp.sources[0].products[0] #=> String
     #   resp.sources[0].configuration #=> String
+    #   resp.available_security_updates_compliance_status #=> String, one of "COMPLIANT", "NON_COMPLIANT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdatePatchBaseline AWS API Documentation
     #
@@ -13324,7 +13371,7 @@ module Aws::SSM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.191.0'
+      context[:gem_version] = '1.192.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

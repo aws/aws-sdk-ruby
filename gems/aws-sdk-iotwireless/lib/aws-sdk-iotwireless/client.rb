@@ -924,9 +924,9 @@ module Aws::IoTWireless
     #    </note>
     #
     # @option params [String] :descriptor
-    #   The Descriptor specifies some metadata about the File being
-    #   transferred using FUOTA e.g. the software version. It is sent
-    #   transparently to the device. It is a binary field encoded in base64
+    #   The descriptor is the metadata about the file that is transferred to
+    #   the device using FUOTA, such as the software version. It is a binary
+    #   field encoded in base64.
     #
     # @return [Types::CreateFuotaTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1599,7 +1599,7 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
-    # Deletes a multicast group if it is not in use by a fuota task.
+    # Deletes a multicast group if it is not in use by a FUOTA task.
     #
     # @option params [required, String] :id
     #   The ID of the multicast group.
@@ -1856,7 +1856,7 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
-    # Disassociates a multicast group from a fuota task.
+    # Disassociates a multicast group from a FUOTA task.
     #
     # @option params [required, String] :id
     #   The ID of a FUOTA task.
@@ -2162,8 +2162,8 @@ module Aws::IoTWireless
     end
 
     # Returns current default log levels or log levels by resource types.
-    # Based on resource types, log levels can be for wireless device log
-    # options or wireless gateway log options.
+    # Based on the resource type, log levels can be returned for wireless
+    # device, wireless gateway, or FUOTA task log options.
     #
     # @return [Types::GetLogLevelsByResourceTypesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2658,7 +2658,7 @@ module Aws::IoTWireless
     #             {
     #               pci: 1, # required
     #               earfcn: 1, # required
-    #               eutran_cid: 1, # required
+    #               eutran_cid: 1,
     #               rsrp: 1,
     #               rsrq: 1.0,
     #             },
@@ -2763,18 +2763,16 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
-    # Fetches the log-level override, if any, for a given resource-ID and
-    # resource-type. It can be used for a wireless device, wireless gateway
-    # or fuota task.
+    # Fetches the log-level override, if any, for a given resource ID and
+    # resource type..
     #
     # @option params [required, String] :resource_identifier
-    #   The identifier of the resource. For a Wireless Device, it is the
-    #   wireless device ID. For a wireless gateway, it is the wireless gateway
-    #   ID.
+    #   The unique identifier of the resource, which can be the wireless
+    #   gateway ID, the wireless device ID, or the FUOTA task ID.
     #
     # @option params [required, String] :resource_type
-    #   The type of the resource, which can be `WirelessDevice`,
-    #   `WirelessGateway` or `FuotaTask`.
+    #   The type of resource, which can be `WirelessDevice`,
+    #   `WirelessGateway`, or `FuotaTask`.
     #
     # @return [Types::GetResourceLogLevelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2843,8 +2841,7 @@ module Aws::IoTWireless
     # @option params [String] :service_type
     #   The service type for which to get endpoint information about. Can be
     #   `CUPS` for the Configuration and Update Server endpoint, or `LNS` for
-    #   the LoRaWAN Network Server endpoint or `CLAIM` for the global
-    #   endpoint.
+    #   the LoRaWAN Network Server endpoint.
     #
     # @return [Types::GetServiceEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3593,7 +3590,7 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
-    # List all multicast groups associated with a fuota task.
+    # List all multicast groups associated with a FUOTA task.
     #
     # @option params [required, String] :id
     #   The ID of a FUOTA task.
@@ -4165,17 +4162,15 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
-    # Sets the log-level override for a resource-ID and resource-type. This
-    # option can be specified for a wireless gateway or a wireless device. A
+    # Sets the log-level override for a resource ID and resource type. A
     # limit of 200 log level override can be set per account.
     #
     # @option params [required, String] :resource_identifier
-    #   The identifier of the resource. For a Wireless Device, it is the
-    #   wireless device ID. For a wireless gateway, it is the wireless gateway
-    #   ID.
+    #   The unique identifier of the resource, which can be the wireless
+    #   gateway ID, the wireless device ID, or the FUOTA task ID.
     #
     # @option params [required, String] :resource_type
-    #   The type of the resource, which can be `WirelessDevice`,
+    #   The type of resource, which can be `WirelessDevice`,
     #   `WirelessGateway`, or `FuotaTask`.
     #
     # @option params [required, String] :log_level
@@ -4201,7 +4196,7 @@ module Aws::IoTWireless
     end
 
     # Removes the log-level overrides for all resources; wireless devices,
-    # wireless gateways, and fuota tasks.
+    # wireless gateways, and FUOTA tasks.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4212,17 +4207,16 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
-    # Removes the log-level override, if any, for a specific resource-ID and
-    # resource-type. It can be used for a wireless device, a wireless
-    # gateway, or a fuota task.
+    # Removes the log-level override, if any, for a specific resource ID and
+    # resource type. It can be used for a wireless device, a wireless
+    # gateway, or a FUOTA task.
     #
     # @option params [required, String] :resource_identifier
-    #   The identifier of the resource. For a Wireless Device, it is the
-    #   wireless device ID. For a wireless gateway, it is the wireless gateway
-    #   ID.
+    #   The unique identifier of the resource, which can be the wireless
+    #   gateway ID, the wireless device ID, or the FUOTA task ID.
     #
     # @option params [required, String] :resource_type
-    #   The type of the resource, which can be `WirelessDevice`,
+    #   The type of resource, which can be `WirelessDevice`,
     #   `WirelessGateway`, or `FuotaTask`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -4825,9 +4819,9 @@ module Aws::IoTWireless
     #    </note>
     #
     # @option params [String] :descriptor
-    #   The Descriptor specifies some metadata about the File being
-    #   transferred using FUOTA e.g. the software version. It is sent
-    #   transparently to the device. It is a binary field encoded in base64
+    #   The descriptor is the metadata about the file that is transferred to
+    #   the device using FUOTA, such as the software version. It is a binary
+    #   field encoded in base64.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4856,7 +4850,7 @@ module Aws::IoTWireless
     end
 
     # Set default log level, or log levels by resource types. This can be
-    # for wireless device log options or wireless gateways log options and
+    # for wireless device, wireless gateway, or FUOTA task log options, and
     # is used to control the log messages that'll be displayed in
     # CloudWatch.
     #
@@ -4866,7 +4860,7 @@ module Aws::IoTWireless
     #   information, or to `INFO` for more detailed logs.
     #
     # @option params [Array<Types::FuotaTaskLogOption>] :fuota_task_log_options
-    #   The list of fuota task log options.
+    #   The list of FUOTA task log options.
     #
     # @option params [Array<Types::WirelessDeviceLogOption>] :wireless_device_log_options
     #   The list of wireless device log options.
@@ -5391,7 +5385,7 @@ module Aws::IoTWireless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iotwireless'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

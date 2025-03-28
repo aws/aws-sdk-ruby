@@ -478,8 +478,14 @@ module Aws::MarketplaceEntitlementService
     # @!group API Operations
 
     # GetEntitlements retrieves entitlement values for a given product. The
-    # results can be filtered based on customer identifier or product
-    # dimensions.
+    # results can be filtered based on customer identifier, AWS account ID,
+    # or product dimensions.
+    #
+    # The `CustomerIdentifier` parameter is on path for deprecation. Use
+    # `CustomerAWSAccountID` instead.
+    #
+    #  These parameters are mutually exclusive. You can't specify both
+    # `CustomerIdentifier` and `CustomerAWSAccountID` in the same request.
     #
     # @option params [required, String] :product_code
     #   Product code is used to uniquely identify a product in AWS
@@ -491,6 +497,9 @@ module Aws::MarketplaceEntitlementService
     #   specific dimension. Filters are described as keys mapped to a lists of
     #   values. Filtered requests are *unioned* for each value in the value
     #   list, and then *intersected* for each filter key.
+    #
+    #   `CustomerIdentifier` and `CustomerAWSAccountID` are mutually
+    #   exclusive. You can't specify both in the same request.
     #
     # @option params [String] :next_token
     #   For paginated calls to GetEntitlements, pass the NextToken from the
@@ -525,6 +534,7 @@ module Aws::MarketplaceEntitlementService
     #   resp.entitlements[0].product_code #=> String
     #   resp.entitlements[0].dimension #=> String
     #   resp.entitlements[0].customer_identifier #=> String
+    #   resp.entitlements[0].customer_aws_account_id #=> String
     #   resp.entitlements[0].value.integer_value #=> Integer
     #   resp.entitlements[0].value.double_value #=> Float
     #   resp.entitlements[0].value.boolean_value #=> Boolean
@@ -559,7 +569,7 @@ module Aws::MarketplaceEntitlementService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplaceentitlementservice'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

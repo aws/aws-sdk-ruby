@@ -16951,6 +16951,10 @@ module Aws::DataZone
 
     # The single sign-on details in Amazon DataZone.
     #
+    # @!attribute [rw] idc_instance_arn
+    #   The ARN of the IDC instance.
+    #   @return [String]
+    #
     # @!attribute [rw] type
     #   The type of single sign-on in Amazon DataZone.
     #   @return [String]
@@ -16962,6 +16966,7 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/SingleSignOn AWS API Documentation
     #
     class SingleSignOn < Struct.new(
+      :idc_instance_arn,
       :type,
       :user_assignment)
       SENSITIVE = []

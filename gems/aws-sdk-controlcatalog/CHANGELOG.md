@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2025-03-20)
+------------------
+
+* Feature - Add ExemptAssumeRoot parameter to adapt for new AWS AssumeRoot capability.
+
 1.20.0 (2025-02-18)
 ------------------
 

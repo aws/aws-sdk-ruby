@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.82.0 (2025-03-20)
+------------------
+
+* Feature - Added appId field to Webhook responses
+
 1.81.0 (2025-03-13)
 ------------------
 

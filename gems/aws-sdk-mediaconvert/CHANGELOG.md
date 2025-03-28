@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.155.0 (2025-03-26)
+------------------
+
+* Feature - This release adds a configurable Quality Level setting for the top rendition of Auto ABR jobs
+
 1.154.0 (2025-03-18)
 ------------------
 

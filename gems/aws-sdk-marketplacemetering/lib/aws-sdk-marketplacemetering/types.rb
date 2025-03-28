@@ -19,9 +19,9 @@ module Aws::MarketplaceMetering
     #   @return [Array<Types::UsageRecord>]
     #
     # @!attribute [rw] product_code
-    #   Product code is used to uniquely identify a product in AWS
-    #   Marketplace. The product code should be the same as the one used
-    #   during the publishing of a new product.
+    #   Product code is used to uniquely identify a product in Amazon Web
+    #   Services Marketplace. The product code should be the same as the one
+    #   used during the publishing of a new product.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/BatchMeterUsageRequest AWS API Documentation
@@ -38,9 +38,9 @@ module Aws::MarketplaceMetering
     #
     # @!attribute [rw] results
     #   Contains all `UsageRecords` processed by `BatchMeterUsage`. These
-    #   records were either honored by AWS Marketplace Metering Service or
-    #   were invalid. Invalid records should be fixed before being
-    #   resubmitted.
+    #   records were either honored by Amazon Web Services Marketplace
+    #   Metering Service or were invalid. Invalid records should be fixed
+    #   before being resubmitted.
     #   @return [Array<Types::UsageRecordResult>]
     #
     # @!attribute [rw] unprocessed_records
@@ -120,7 +120,8 @@ module Aws::MarketplaceMetering
     end
 
     # An internal error has occurred. Retry your request. If the problem
-    # persists, post a message with details on the AWS forums.
+    # persists, post a message with details on the Amazon Web Services
+    # forums.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -146,9 +147,10 @@ module Aws::MarketplaceMetering
       include Aws::Structure
     end
 
-    # The endpoint being called is in a AWS Region different from your EC2
-    # instance, ECS task, or EKS pod. The Region of the Metering Service
-    # endpoint and the AWS Region of the resource must match.
+    # The endpoint being called is in a Amazon Web Services Region different
+    # from your EC2 instance, ECS task, or EKS pod. The Region of the
+    # Metering Service endpoint and the Amazon Web Services Region of the
+    # resource must match.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -188,9 +190,10 @@ module Aws::MarketplaceMetering
       include Aws::Structure
     end
 
-    # `RegisterUsage` must be called in the same AWS Region the ECS task was
-    # launched in. This prevents a container from hardcoding a Region (e.g.
-    # withRegion(“us-east-1”) when calling `RegisterUsage`.
+    # `RegisterUsage` must be called in the same Amazon Web Services Region
+    # the ECS task was launched in. This prevents a container from
+    # hardcoding a Region (e.g. withRegion(“us-east-1”) when calling
+    # `RegisterUsage`.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -229,8 +232,7 @@ module Aws::MarketplaceMetering
       include Aws::Structure
     end
 
-    # The usage allocation objects are invalid, or the number of allocations
-    # is greater than 500 for a single usage record.
+    # Sum of allocated usage quantities is not equal to the usage quantity.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -258,14 +260,14 @@ module Aws::MarketplaceMetering
     end
 
     # @!attribute [rw] product_code
-    #   Product code is used to uniquely identify a product in AWS
-    #   Marketplace. The product code should be the same as the one used
-    #   during the publishing of a new product.
+    #   Product code is used to uniquely identify a product in Amazon Web
+    #   Services Marketplace. The product code should be the same as the one
+    #   used during the publishing of a new product.
     #   @return [String]
     #
     # @!attribute [rw] timestamp
     #   Timestamp, in UTC, for which the usage is being reported. Your
-    #   application can meter usage for up to one hour in the past. Make
+    #   application can meter usage for up to six hours in the past. Make
     #   sure the `timestamp` value is not before the start of the software
     #   usage.
     #   @return [Time]
@@ -319,9 +321,9 @@ module Aws::MarketplaceMetering
       include Aws::Structure
     end
 
-    # AWS Marketplace does not support metering usage from the underlying
-    # platform. Currently, Amazon ECS, Amazon EKS, and AWS Fargate are
-    # supported.
+    # Amazon Web Services Marketplace does not support metering usage from
+    # the underlying platform. Currently, Amazon ECS, Amazon EKS, and
+    # Fargate are supported.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -335,13 +337,13 @@ module Aws::MarketplaceMetering
     end
 
     # @!attribute [rw] product_code
-    #   Product code is used to uniquely identify a product in AWS
-    #   Marketplace. The product code should be the same as the one used
-    #   during the publishing of a new product.
+    #   Product code is used to uniquely identify a product in Amazon Web
+    #   Services Marketplace. The product code should be the same as the one
+    #   used during the publishing of a new product.
     #   @return [String]
     #
     # @!attribute [rw] public_key_version
-    #   Public Key Version provided by AWS Marketplace
+    #   Public Key Version provided by Amazon Web Services Marketplace
     #   @return [Integer]
     #
     # @!attribute [rw] nonce
@@ -410,8 +412,9 @@ module Aws::MarketplaceMetering
     #   @return [String]
     #
     # @!attribute [rw] customer_aws_account_id
-    #   The `CustomerAWSAccountId` provides the AWS account ID associated
-    #   with the `CustomerIdentifier` for the individual customer.
+    #   The `CustomerAWSAccountId` provides the Amazon Web Services account
+    #   ID associated with the `CustomerIdentifier` for the individual
+    #   customer.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/ResolveCustomerResult AWS API Documentation
@@ -521,9 +524,9 @@ module Aws::MarketplaceMetering
     #   @return [String]
     #
     # @!attribute [rw] dimension
-    #   During the process of registering a product on AWS Marketplace,
-    #   dimensions are specified. These represent different units of value
-    #   in your application.
+    #   During the process of registering a product on Amazon Web Services
+    #   Marketplace, dimensions are specified. These represent different
+    #   units of value in your application.
     #   @return [String]
     #
     # @!attribute [rw] quantity
@@ -537,6 +540,11 @@ module Aws::MarketplaceMetering
     #   `UsageRecord`.
     #   @return [Array<Types::UsageAllocation>]
     #
+    # @!attribute [rw] customer_aws_account_id
+    #   The `CustomerAWSAccountID` parameter specifies the AWS account ID of
+    #   the buyer.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/UsageRecord AWS API Documentation
     #
     class UsageRecord < Struct.new(
@@ -544,7 +552,8 @@ module Aws::MarketplaceMetering
       :customer_identifier,
       :dimension,
       :quantity,
-      :usage_allocations)
+      :usage_allocations,
+      :customer_aws_account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -579,7 +588,7 @@ module Aws::MarketplaceMetering
     #       Future `UsageRecords` for this customer will fail until the
     #       customer subscribes to your product.
     #
-    #     * The customer's AWS account was suspended.
+    #     * The customer's Amazon Web Services account was suspended.
     #   * *DuplicateRecord*- Indicates that the `UsageRecord` was invalid
     #     and not honored. A previously metered `UsageRecord` had the same
     #     customer, dimension, and time, but a different quantity.

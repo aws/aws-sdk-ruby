@@ -69,6 +69,8 @@ module Aws::Bedrock
     CustomModelName = Shapes::StringShape.new(name: 'CustomModelName')
     CustomModelSummary = Shapes::StructureShape.new(name: 'CustomModelSummary')
     CustomModelSummaryList = Shapes::ListShape.new(name: 'CustomModelSummaryList')
+    CustomModelUnits = Shapes::StructureShape.new(name: 'CustomModelUnits')
+    CustomModelUnitsVersion = Shapes::StringShape.new(name: 'CustomModelUnitsVersion')
     CustomizationConfig = Shapes::UnionShape.new(name: 'CustomizationConfig')
     CustomizationType = Shapes::StringShape.new(name: 'CustomizationType')
     DeleteCustomModelRequest = Shapes::StructureShape.new(name: 'DeleteCustomModelRequest')
@@ -94,7 +96,10 @@ module Aws::Bedrock
     EndpointName = Shapes::StringShape.new(name: 'EndpointName')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ErrorMessages = Shapes::ListShape.new(name: 'ErrorMessages')
+    EvaluationBedrockKnowledgeBaseIdentifiers = Shapes::ListShape.new(name: 'EvaluationBedrockKnowledgeBaseIdentifiers')
     EvaluationBedrockModel = Shapes::StructureShape.new(name: 'EvaluationBedrockModel')
+    EvaluationBedrockModelIdentifier = Shapes::StringShape.new(name: 'EvaluationBedrockModelIdentifier')
+    EvaluationBedrockModelIdentifiers = Shapes::ListShape.new(name: 'EvaluationBedrockModelIdentifiers')
     EvaluationConfig = Shapes::UnionShape.new(name: 'EvaluationConfig')
     EvaluationDataset = Shapes::StructureShape.new(name: 'EvaluationDataset')
     EvaluationDatasetLocation = Shapes::UnionShape.new(name: 'EvaluationDatasetLocation')
@@ -102,6 +107,7 @@ module Aws::Bedrock
     EvaluationDatasetMetricConfigs = Shapes::ListShape.new(name: 'EvaluationDatasetMetricConfigs')
     EvaluationDatasetName = Shapes::StringShape.new(name: 'EvaluationDatasetName')
     EvaluationInferenceConfig = Shapes::UnionShape.new(name: 'EvaluationInferenceConfig')
+    EvaluationInferenceConfigSummary = Shapes::StructureShape.new(name: 'EvaluationInferenceConfigSummary')
     EvaluationJobArn = Shapes::StringShape.new(name: 'EvaluationJobArn')
     EvaluationJobDescription = Shapes::StringShape.new(name: 'EvaluationJobDescription')
     EvaluationJobIdentifier = Shapes::StringShape.new(name: 'EvaluationJobIdentifier')
@@ -113,11 +119,19 @@ module Aws::Bedrock
     EvaluationMetricName = Shapes::StringShape.new(name: 'EvaluationMetricName')
     EvaluationMetricNames = Shapes::ListShape.new(name: 'EvaluationMetricNames')
     EvaluationModelConfig = Shapes::UnionShape.new(name: 'EvaluationModelConfig')
+    EvaluationModelConfigSummary = Shapes::StructureShape.new(name: 'EvaluationModelConfigSummary')
     EvaluationModelConfigs = Shapes::ListShape.new(name: 'EvaluationModelConfigs')
-    EvaluationModelIdentifier = Shapes::StringShape.new(name: 'EvaluationModelIdentifier')
-    EvaluationModelIdentifiers = Shapes::ListShape.new(name: 'EvaluationModelIdentifiers')
     EvaluationModelInferenceParams = Shapes::StringShape.new(name: 'EvaluationModelInferenceParams')
     EvaluationOutputDataConfig = Shapes::StructureShape.new(name: 'EvaluationOutputDataConfig')
+    EvaluationPrecomputedInferenceSource = Shapes::StructureShape.new(name: 'EvaluationPrecomputedInferenceSource')
+    EvaluationPrecomputedInferenceSourceIdentifier = Shapes::StringShape.new(name: 'EvaluationPrecomputedInferenceSourceIdentifier')
+    EvaluationPrecomputedInferenceSourceIdentifiers = Shapes::ListShape.new(name: 'EvaluationPrecomputedInferenceSourceIdentifiers')
+    EvaluationPrecomputedRagSourceConfig = Shapes::UnionShape.new(name: 'EvaluationPrecomputedRagSourceConfig')
+    EvaluationPrecomputedRagSourceIdentifier = Shapes::StringShape.new(name: 'EvaluationPrecomputedRagSourceIdentifier')
+    EvaluationPrecomputedRagSourceIdentifiers = Shapes::ListShape.new(name: 'EvaluationPrecomputedRagSourceIdentifiers')
+    EvaluationPrecomputedRetrieveAndGenerateSourceConfig = Shapes::StructureShape.new(name: 'EvaluationPrecomputedRetrieveAndGenerateSourceConfig')
+    EvaluationPrecomputedRetrieveSourceConfig = Shapes::StructureShape.new(name: 'EvaluationPrecomputedRetrieveSourceConfig')
+    EvaluationRagConfigSummary = Shapes::StructureShape.new(name: 'EvaluationRagConfigSummary')
     EvaluationRatingMethod = Shapes::StringShape.new(name: 'EvaluationRatingMethod')
     EvaluationSummaries = Shapes::ListShape.new(name: 'EvaluationSummaries')
     EvaluationSummary = Shapes::StructureShape.new(name: 'EvaluationSummary')
@@ -400,7 +414,6 @@ module Aws::Bedrock
     QueryTransformationConfiguration = Shapes::StructureShape.new(name: 'QueryTransformationConfiguration')
     QueryTransformationType = Shapes::StringShape.new(name: 'QueryTransformationType')
     RAGConfig = Shapes::UnionShape.new(name: 'RAGConfig')
-    RAGIdentifiers = Shapes::ListShape.new(name: 'RAGIdentifiers')
     RAGStopSequences = Shapes::ListShape.new(name: 'RAGStopSequences')
     RAGStopSequencesMemberString = Shapes::StringShape.new(name: 'RAGStopSequencesMemberString')
     RagConfigs = Shapes::ListShape.new(name: 'RagConfigs')
@@ -690,6 +703,10 @@ module Aws::Bedrock
 
     CustomModelSummaryList.member = Shapes::ShapeRef.new(shape: CustomModelSummary)
 
+    CustomModelUnits.add_member(:custom_model_units_per_model_copy, Shapes::ShapeRef.new(shape: Integer, location_name: "customModelUnitsPerModelCopy"))
+    CustomModelUnits.add_member(:custom_model_units_version, Shapes::ShapeRef.new(shape: CustomModelUnitsVersion, location_name: "customModelUnitsVersion"))
+    CustomModelUnits.struct_class = Types::CustomModelUnits
+
     CustomizationConfig.add_member(:distillation_config, Shapes::ShapeRef.new(shape: DistillationConfig, location_name: "distillationConfig"))
     CustomizationConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     CustomizationConfig.add_member_subclass(:distillation_config, Types::CustomizationConfig::DistillationConfig)
@@ -752,10 +769,14 @@ module Aws::Bedrock
 
     ErrorMessages.member = Shapes::ShapeRef.new(shape: ErrorMessage)
 
-    EvaluationBedrockModel.add_member(:model_identifier, Shapes::ShapeRef.new(shape: EvaluationModelIdentifier, required: true, location_name: "modelIdentifier"))
+    EvaluationBedrockKnowledgeBaseIdentifiers.member = Shapes::ShapeRef.new(shape: KnowledgeBaseId)
+
+    EvaluationBedrockModel.add_member(:model_identifier, Shapes::ShapeRef.new(shape: EvaluationBedrockModelIdentifier, required: true, location_name: "modelIdentifier"))
     EvaluationBedrockModel.add_member(:inference_params, Shapes::ShapeRef.new(shape: EvaluationModelInferenceParams, location_name: "inferenceParams"))
     EvaluationBedrockModel.add_member(:performance_config, Shapes::ShapeRef.new(shape: PerformanceConfiguration, location_name: "performanceConfig"))
     EvaluationBedrockModel.struct_class = Types::EvaluationBedrockModel
+
+    EvaluationBedrockModelIdentifiers.member = Shapes::ShapeRef.new(shape: EvaluationBedrockModelIdentifier)
 
     EvaluationConfig.add_member(:automated, Shapes::ShapeRef.new(shape: AutomatedEvaluationConfig, location_name: "automated"))
     EvaluationConfig.add_member(:human, Shapes::ShapeRef.new(shape: HumanEvaluationConfig, location_name: "human"))
@@ -790,22 +811,55 @@ module Aws::Bedrock
     EvaluationInferenceConfig.add_member_subclass(:unknown, Types::EvaluationInferenceConfig::Unknown)
     EvaluationInferenceConfig.struct_class = Types::EvaluationInferenceConfig
 
+    EvaluationInferenceConfigSummary.add_member(:model_config_summary, Shapes::ShapeRef.new(shape: EvaluationModelConfigSummary, location_name: "modelConfigSummary"))
+    EvaluationInferenceConfigSummary.add_member(:rag_config_summary, Shapes::ShapeRef.new(shape: EvaluationRagConfigSummary, location_name: "ragConfigSummary"))
+    EvaluationInferenceConfigSummary.struct_class = Types::EvaluationInferenceConfigSummary
+
     EvaluationJobIdentifiers.member = Shapes::ShapeRef.new(shape: EvaluationJobIdentifier)
 
     EvaluationMetricNames.member = Shapes::ShapeRef.new(shape: EvaluationMetricName)
 
     EvaluationModelConfig.add_member(:bedrock_model, Shapes::ShapeRef.new(shape: EvaluationBedrockModel, location_name: "bedrockModel"))
+    EvaluationModelConfig.add_member(:precomputed_inference_source, Shapes::ShapeRef.new(shape: EvaluationPrecomputedInferenceSource, location_name: "precomputedInferenceSource"))
     EvaluationModelConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     EvaluationModelConfig.add_member_subclass(:bedrock_model, Types::EvaluationModelConfig::BedrockModel)
+    EvaluationModelConfig.add_member_subclass(:precomputed_inference_source, Types::EvaluationModelConfig::PrecomputedInferenceSource)
     EvaluationModelConfig.add_member_subclass(:unknown, Types::EvaluationModelConfig::Unknown)
     EvaluationModelConfig.struct_class = Types::EvaluationModelConfig
 
-    EvaluationModelConfigs.member = Shapes::ShapeRef.new(shape: EvaluationModelConfig)
+    EvaluationModelConfigSummary.add_member(:bedrock_model_identifiers, Shapes::ShapeRef.new(shape: EvaluationBedrockModelIdentifiers, location_name: "bedrockModelIdentifiers"))
+    EvaluationModelConfigSummary.add_member(:precomputed_inference_source_identifiers, Shapes::ShapeRef.new(shape: EvaluationPrecomputedInferenceSourceIdentifiers, location_name: "precomputedInferenceSourceIdentifiers"))
+    EvaluationModelConfigSummary.struct_class = Types::EvaluationModelConfigSummary
 
-    EvaluationModelIdentifiers.member = Shapes::ShapeRef.new(shape: EvaluationModelIdentifier)
+    EvaluationModelConfigs.member = Shapes::ShapeRef.new(shape: EvaluationModelConfig)
 
     EvaluationOutputDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "s3Uri"))
     EvaluationOutputDataConfig.struct_class = Types::EvaluationOutputDataConfig
+
+    EvaluationPrecomputedInferenceSource.add_member(:inference_source_identifier, Shapes::ShapeRef.new(shape: EvaluationPrecomputedInferenceSourceIdentifier, required: true, location_name: "inferenceSourceIdentifier"))
+    EvaluationPrecomputedInferenceSource.struct_class = Types::EvaluationPrecomputedInferenceSource
+
+    EvaluationPrecomputedInferenceSourceIdentifiers.member = Shapes::ShapeRef.new(shape: EvaluationPrecomputedInferenceSourceIdentifier)
+
+    EvaluationPrecomputedRagSourceConfig.add_member(:retrieve_source_config, Shapes::ShapeRef.new(shape: EvaluationPrecomputedRetrieveSourceConfig, location_name: "retrieveSourceConfig"))
+    EvaluationPrecomputedRagSourceConfig.add_member(:retrieve_and_generate_source_config, Shapes::ShapeRef.new(shape: EvaluationPrecomputedRetrieveAndGenerateSourceConfig, location_name: "retrieveAndGenerateSourceConfig"))
+    EvaluationPrecomputedRagSourceConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    EvaluationPrecomputedRagSourceConfig.add_member_subclass(:retrieve_source_config, Types::EvaluationPrecomputedRagSourceConfig::RetrieveSourceConfig)
+    EvaluationPrecomputedRagSourceConfig.add_member_subclass(:retrieve_and_generate_source_config, Types::EvaluationPrecomputedRagSourceConfig::RetrieveAndGenerateSourceConfig)
+    EvaluationPrecomputedRagSourceConfig.add_member_subclass(:unknown, Types::EvaluationPrecomputedRagSourceConfig::Unknown)
+    EvaluationPrecomputedRagSourceConfig.struct_class = Types::EvaluationPrecomputedRagSourceConfig
+
+    EvaluationPrecomputedRagSourceIdentifiers.member = Shapes::ShapeRef.new(shape: EvaluationPrecomputedRagSourceIdentifier)
+
+    EvaluationPrecomputedRetrieveAndGenerateSourceConfig.add_member(:rag_source_identifier, Shapes::ShapeRef.new(shape: EvaluationPrecomputedRagSourceIdentifier, required: true, location_name: "ragSourceIdentifier"))
+    EvaluationPrecomputedRetrieveAndGenerateSourceConfig.struct_class = Types::EvaluationPrecomputedRetrieveAndGenerateSourceConfig
+
+    EvaluationPrecomputedRetrieveSourceConfig.add_member(:rag_source_identifier, Shapes::ShapeRef.new(shape: EvaluationPrecomputedRagSourceIdentifier, required: true, location_name: "ragSourceIdentifier"))
+    EvaluationPrecomputedRetrieveSourceConfig.struct_class = Types::EvaluationPrecomputedRetrieveSourceConfig
+
+    EvaluationRagConfigSummary.add_member(:bedrock_knowledge_base_identifiers, Shapes::ShapeRef.new(shape: EvaluationBedrockKnowledgeBaseIdentifiers, location_name: "bedrockKnowledgeBaseIdentifiers"))
+    EvaluationRagConfigSummary.add_member(:precomputed_rag_source_identifiers, Shapes::ShapeRef.new(shape: EvaluationPrecomputedRagSourceIdentifiers, location_name: "precomputedRagSourceIdentifiers"))
+    EvaluationRagConfigSummary.struct_class = Types::EvaluationRagConfigSummary
 
     EvaluationSummaries.member = Shapes::ShapeRef.new(shape: EvaluationSummary)
 
@@ -815,9 +869,10 @@ module Aws::Bedrock
     EvaluationSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationTime"))
     EvaluationSummary.add_member(:job_type, Shapes::ShapeRef.new(shape: EvaluationJobType, required: true, location_name: "jobType"))
     EvaluationSummary.add_member(:evaluation_task_types, Shapes::ShapeRef.new(shape: EvaluationTaskTypes, required: true, location_name: "evaluationTaskTypes"))
-    EvaluationSummary.add_member(:model_identifiers, Shapes::ShapeRef.new(shape: EvaluationModelIdentifiers, location_name: "modelIdentifiers"))
-    EvaluationSummary.add_member(:rag_identifiers, Shapes::ShapeRef.new(shape: RAGIdentifiers, location_name: "ragIdentifiers"))
+    EvaluationSummary.add_member(:model_identifiers, Shapes::ShapeRef.new(shape: EvaluationBedrockModelIdentifiers, deprecated: true, location_name: "modelIdentifiers", metadata: {"deprecatedMessage"=>"Inference identifiers should be retrieved from the inferenceConfigSummary"}))
+    EvaluationSummary.add_member(:rag_identifiers, Shapes::ShapeRef.new(shape: EvaluationBedrockKnowledgeBaseIdentifiers, deprecated: true, location_name: "ragIdentifiers", metadata: {"deprecatedMessage"=>"Inference identifiers should be retrieved from the inferenceConfigSummary"}))
     EvaluationSummary.add_member(:evaluator_model_identifiers, Shapes::ShapeRef.new(shape: EvaluatorModelIdentifiers, location_name: "evaluatorModelIdentifiers"))
+    EvaluationSummary.add_member(:inference_config_summary, Shapes::ShapeRef.new(shape: EvaluationInferenceConfigSummary, location_name: "inferenceConfigSummary"))
     EvaluationSummary.add_member(:application_type, Shapes::ShapeRef.new(shape: ApplicationType, location_name: "applicationType"))
     EvaluationSummary.struct_class = Types::EvaluationSummary
 
@@ -969,6 +1024,7 @@ module Aws::Bedrock
     GetImportedModelResponse.add_member(:model_architecture, Shapes::ShapeRef.new(shape: String, location_name: "modelArchitecture"))
     GetImportedModelResponse.add_member(:model_kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "modelKmsKeyArn"))
     GetImportedModelResponse.add_member(:instruct_supported, Shapes::ShapeRef.new(shape: InstructSupported, location_name: "instructSupported"))
+    GetImportedModelResponse.add_member(:custom_model_units, Shapes::ShapeRef.new(shape: CustomModelUnits, location_name: "customModelUnits"))
     GetImportedModelResponse.struct_class = Types::GetImportedModelResponse
 
     GetInferenceProfileRequest.add_member(:inference_profile_identifier, Shapes::ShapeRef.new(shape: InferenceProfileIdentifier, required: true, location: "uri", location_name: "inferenceProfileIdentifier"))
@@ -1701,12 +1757,12 @@ module Aws::Bedrock
     QueryTransformationConfiguration.struct_class = Types::QueryTransformationConfiguration
 
     RAGConfig.add_member(:knowledge_base_config, Shapes::ShapeRef.new(shape: KnowledgeBaseConfig, location_name: "knowledgeBaseConfig"))
+    RAGConfig.add_member(:precomputed_rag_source_config, Shapes::ShapeRef.new(shape: EvaluationPrecomputedRagSourceConfig, location_name: "precomputedRagSourceConfig"))
     RAGConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     RAGConfig.add_member_subclass(:knowledge_base_config, Types::RAGConfig::KnowledgeBaseConfig)
+    RAGConfig.add_member_subclass(:precomputed_rag_source_config, Types::RAGConfig::PrecomputedRagSourceConfig)
     RAGConfig.add_member_subclass(:unknown, Types::RAGConfig::Unknown)
     RAGConfig.struct_class = Types::RAGConfig
-
-    RAGIdentifiers.member = Shapes::ShapeRef.new(shape: KnowledgeBaseId)
 
     RAGStopSequences.member = Shapes::ShapeRef.new(shape: RAGStopSequencesMemberString)
 

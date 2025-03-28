@@ -1001,6 +1001,7 @@ module Aws::CodeBuild
     ProjectCache.add_member(:type, Shapes::ShapeRef.new(shape: CacheType, required: true, location_name: "type"))
     ProjectCache.add_member(:location, Shapes::ShapeRef.new(shape: String, location_name: "location"))
     ProjectCache.add_member(:modes, Shapes::ShapeRef.new(shape: ProjectCacheModes, location_name: "modes"))
+    ProjectCache.add_member(:cache_namespace, Shapes::ShapeRef.new(shape: String, location_name: "cacheNamespace"))
     ProjectCache.struct_class = Types::ProjectCache
 
     ProjectCacheModes.member = Shapes::ShapeRef.new(shape: CacheMode)

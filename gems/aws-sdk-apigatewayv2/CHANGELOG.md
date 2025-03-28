@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2025-03-28)
+------------------
+
+* Feature - Adds support for setting the IP address type to allow dual-stack or IPv4 address types to invoke your APIs or domain names.
+
 1.72.0 (2025-02-18)
 ------------------
 
