@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Feature - Add feature id tracking for credentials.
+Issue - Additional metrics collection for credentials in the User-Agent plugin.
 
 3.220.1 (2025-03-06)
 ------------------

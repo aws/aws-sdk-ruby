@@ -59,7 +59,7 @@ module Aws
       creds = AssumeRoleWebIdentityCredentials.new(
         role_arn: 'arn',
         web_identity_token_file: token_file_path,
-        role_session_name: "session-name"
+        role_session_name: 'session-name'
       )
       expect(creds.client).to be(client)
     end
@@ -70,7 +70,7 @@ module Aws
       creds = AssumeRoleWebIdentityCredentials.new(
         role_arn: 'arn',
         web_identity_token_file: token_file_path,
-        role_session_name: "session-name",
+        role_session_name: 'session-name',
         before_refresh: proc { }
       )
       expect(creds.client).to be(client)
@@ -107,12 +107,12 @@ module Aws
       expect(client).to receive(:assume_role_with_web_identity).with({
         role_arn: 'arn',
         web_identity_token: 'token',
-        role_session_name: "session-name"
+        role_session_name: 'session-name'
       })
       AssumeRoleWebIdentityCredentials.new(
         role_arn: 'arn',
         web_identity_token_file: token_file_path,
-        role_session_name: "session-name"
+        role_session_name: 'session-name'
       )
     end
 
@@ -142,16 +142,16 @@ module Aws
       expect(client).to receive(:assume_role_with_web_identity).with({
         role_arn: 'arn',
         web_identity_token: '',
-        role_session_name: "session-name",
-        provider_id: "urlType",
-        policy: "sessionPolicyDocumentType"
+        role_session_name: 'session-name',
+        provider_id: 'urlType',
+        policy: 'sessionPolicyDocumentType'
       })
       AssumeRoleWebIdentityCredentials.new(
         role_arn: 'arn',
         web_identity_token_file: token_file_path,
-        role_session_name: "session-name",
-        provider_id: "urlType",
-        policy: "sessionPolicyDocumentType"
+        role_session_name: 'session-name',
+        provider_id: 'urlType',
+        policy: 'sessionPolicyDocumentType'
       )
     end
 
@@ -252,6 +252,61 @@ module Aws
         )
         c.source = :env
         expect(c.metrics).to eq(%w[CREDENTIALS_ENV_VARS_STS_WEB_ID_TOKEN CREDENTIALS_STS_ASSUME_ROLE_WEB_ID])
+      end
+    end
+
+    describe '#with_metrics' do
+      it 'is called with the correct metrics when initializing credentials' do
+        expect_any_instance_of(AssumeRoleWebIdentityCredentials).to receive(:with_metrics).with([]).and_return(resp)
+        AssumeRoleWebIdentityCredentials.new(
+          role_arn: 'arn',
+          web_identity_token_file: token_file_path,
+          role_session_name: 'session'
+        )
+      end
+
+      context 'refreshing expired credentials' do
+        it 'is called with the correct metrics when source is none' do
+          allow(credentials).to receive(:expiration).and_return(Time.now)
+          expect(File).to receive(:read).with(token_file_path).exactly(2).times
+          expect_any_instance_of(AssumeRoleWebIdentityCredentials).to receive(:with_metrics).with([]).and_return(resp)
+          expect_any_instance_of(AssumeRoleWebIdentityCredentials).to receive(:with_metrics).with([]).and_return(resp)
+          c = AssumeRoleWebIdentityCredentials.new(
+            role_arn: 'arn',
+            web_identity_token_file: token_file_path,
+            role_session_name: 'session'
+          )
+          c.source = :none
+          c.credentials
+        end
+
+        it 'is called with the correct metrics when source is profile' do
+          allow(credentials).to receive(:expiration).and_return(Time.now)
+          expect(File).to receive(:read).with(token_file_path).exactly(2).times
+          expect_any_instance_of(AssumeRoleWebIdentityCredentials).to receive(:with_metrics).with([]).and_return(resp)
+          expect_any_instance_of(AssumeRoleWebIdentityCredentials).to receive(:with_metrics).with(['CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN']).and_return(resp)
+          c = AssumeRoleWebIdentityCredentials.new(
+            role_arn: 'arn',
+            web_identity_token_file: token_file_path,
+            role_session_name: 'session'
+          )
+          c.source = :profile
+          c.credentials
+        end
+
+        it 'is called with the correct metrics when source is env' do
+          allow(credentials).to receive(:expiration).and_return(Time.now)
+          expect(File).to receive(:read).with(token_file_path).exactly(2).times
+          expect_any_instance_of(AssumeRoleWebIdentityCredentials).to receive(:with_metrics).with([]).and_return(resp)
+          expect_any_instance_of(AssumeRoleWebIdentityCredentials).to receive(:with_metrics).with(['CREDENTIALS_ENV_VARS_STS_WEB_ID_TOKEN']).and_return(resp)
+          c = AssumeRoleWebIdentityCredentials.new(
+            role_arn: 'arn',
+            web_identity_token_file: token_file_path,
+            role_session_name: 'session'
+          )
+          c.source = :env
+          c.credentials
+        end
       end
     end
   end

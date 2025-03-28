@@ -302,5 +302,50 @@ module Aws
 
     end
 
+    describe '#with_metrics' do
+      it 'is called with the correct metrics when initializing credentials' do
+        expect_any_instance_of(AssumeRoleCredentials).to receive(:with_metrics).with([]).and_return(resp)
+        AssumeRoleCredentials.new(
+          role_arn: 'arn',
+          role_session_name: 'session'
+        )
+      end
+
+      context 'refreshing expired credentials' do
+        it 'is called with the correct metrics when source is none' do
+          allow(credentials).to receive(:expiration).and_return(Time.now)
+          expect_any_instance_of(AssumeRoleCredentials).to receive(:with_metrics).with([]).and_return(resp)
+          expect_any_instance_of(AssumeRoleCredentials).to receive(:with_metrics).with([]).and_return(resp)
+          c = AssumeRoleCredentials.new(
+            role_arn: 'arn',
+            role_session_name: 'session')
+          c.source = :none
+          c.credentials
+        end
+
+        it 'is called with the correct metrics when source is static' do
+          allow(credentials).to receive(:expiration).and_return(Time.now)
+          expect_any_instance_of(AssumeRoleCredentials).to receive(:with_metrics).with([]).and_return(resp)
+          expect_any_instance_of(AssumeRoleCredentials).to receive(:with_metrics).with(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE]).and_return(resp)
+          c = AssumeRoleCredentials.new(
+            role_arn: 'arn',
+            role_session_name: 'session')
+          c.source = :static
+          c.credentials
+        end
+
+        it 'is called with the correct metrics when source is webID' do
+          allow(credentials).to receive(:expiration).and_return(Time.now)
+          expect_any_instance_of(AssumeRoleCredentials).to receive(:with_metrics).with([]).and_return(resp)
+          expect_any_instance_of(AssumeRoleCredentials).to receive(:with_metrics).with([]).and_return(resp)
+          c = AssumeRoleCredentials.new(
+            role_arn: 'arn',
+            role_session_name: 'session')
+          c.source = :none
+          c.credentials
+        end
+
+      end
+    end
   end
 end
