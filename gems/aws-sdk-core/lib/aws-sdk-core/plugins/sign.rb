@@ -49,10 +49,7 @@ module Aws
               context[:sigv4_region],
               context[:sigv4_credentials]
             )
-            # TODO: temp added this, double check
-            if signer.is_a?(SignatureV4)
-              credentials = signer.signer.credentials_provider
-            end
+            credentials = signer.signer.credentials_provider if signer.is_a?(SignatureV4)
             signer.sign(context)
           end
           with_metrics(credentials) { @handler.call(context) }
@@ -61,16 +58,11 @@ module Aws
         private
 
         def with_metrics(credentials, &block)
-          puts "in with metric"
           unless credentials && credentials.respond_to?(:metrics)
-            puts "No metrics"
             return block.call
           end
 
-          puts credentials
           metrics = []
-          puts credentials.class.name
-          puts credentials.metrics
           (metrics << credentials.metrics).flatten!
           Aws::Plugins::UserAgent.metric(*metrics, &block)
         end

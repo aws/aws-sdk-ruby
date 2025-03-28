@@ -59,7 +59,7 @@ module Aws
       creds = AssumeRoleWebIdentityCredentials.new(
         role_arn: 'arn',
         web_identity_token_file: token_file_path,
-        role_session_name: 'session-name'
+        role_session_name: "session-name"
       )
       expect(creds.client).to be(client)
     end
@@ -70,7 +70,7 @@ module Aws
       creds = AssumeRoleWebIdentityCredentials.new(
         role_arn: 'arn',
         web_identity_token_file: token_file_path,
-        role_session_name: 'session-name',
+        role_session_name: "session-name",
         before_refresh: proc { }
       )
       expect(creds.client).to be(client)
@@ -107,12 +107,12 @@ module Aws
       expect(client).to receive(:assume_role_with_web_identity).with({
         role_arn: 'arn',
         web_identity_token: 'token',
-        role_session_name: 'session-name'
+        role_session_name: "session-name"
       })
       AssumeRoleWebIdentityCredentials.new(
         role_arn: 'arn',
         web_identity_token_file: token_file_path,
-        role_session_name: 'session-name'
+        role_session_name: "session-name"
       )
     end
 
@@ -142,16 +142,16 @@ module Aws
       expect(client).to receive(:assume_role_with_web_identity).with({
         role_arn: 'arn',
         web_identity_token: '',
-        role_session_name: 'session-name',
-        provider_id: 'urlType',
-        policy: 'sessionPolicyDocumentType'
+        role_session_name: "session-name",
+        provider_id: "urlType",
+        policy: "sessionPolicyDocumentType"
       })
       AssumeRoleWebIdentityCredentials.new(
         role_arn: 'arn',
         web_identity_token_file: token_file_path,
-        role_session_name: 'session-name',
-        provider_id: 'urlType',
-        policy: 'sessionPolicyDocumentType'
+        role_session_name: "session-name",
+        provider_id: "urlType",
+        policy: "sessionPolicyDocumentType"
       )
     end
 

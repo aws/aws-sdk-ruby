@@ -86,6 +86,7 @@ module Aws
     def refresh
       # read from token file everytime it refreshes
       @assume_role_web_identity_params[:web_identity_token] = _token_from_file(@token_file)
+
       resp = @client.assume_role_with_web_identity(@assume_role_web_identity_params)
       creds = resp.credentials
       @credentials = Credentials.new(

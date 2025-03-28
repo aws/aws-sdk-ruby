@@ -9,14 +9,9 @@ module Aws
 
     # @return [CredentialProvider, nil]
     def resolve
-      puts "RESOLVING CREDENTIALS"
       providers.each do |method_name, options|
         provider = send(method_name, options.merge(config: @config))
-        if provider && provider.set?
-          puts method_name
-          puts provider
-          return provider
-        end
+        return provider if provider && provider.set?
       end
       nil
     end
