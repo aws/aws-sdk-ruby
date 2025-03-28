@@ -157,23 +157,20 @@ module Aws
     end
 
     def refresh
-      metric = metrics[0...-1]
-      c = with_metrics(metric) do
-        if @legacy
-          cached_token = read_cached_token
-          @client.get_role_credentials(
-            account_id: @sso_account_id,
-            role_name: @sso_role_name,
-            access_token: cached_token['accessToken']
-          ).role_credentials
-        else
-          @client.get_role_credentials(
-            account_id: @sso_account_id,
-            role_name: @sso_role_name,
-            access_token: @token_provider.token.token
-          ).role_credentials
-        end
-      end
+      c = if @legacy
+            cached_token = read_cached_token
+            @client.get_role_credentials(
+              account_id: @sso_account_id,
+              role_name: @sso_role_name,
+              access_token: cached_token['accessToken']
+            ).role_credentials
+          else
+            @client.get_role_credentials(
+              account_id: @sso_account_id,
+              role_name: @sso_role_name,
+              access_token: @token_provider.token.token
+            ).role_credentials
+          end
 
       @credentials = Credentials.new(
         c.access_key_id,
@@ -190,10 +187,6 @@ module Aws
     rescue ArgumentError
       # Dir.home raises ArgumentError when ENV['home'] is not set
       raise ArgumentError, "Unable to load sso_cache_file: ENV['HOME'] is not set."
-    end
-
-    def with_metrics(metrics, &block)
-      Aws::Plugins::UserAgent.metric(*metrics, &block)
     end
   end
 end

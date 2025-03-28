@@ -86,9 +86,7 @@ module Aws
     def refresh
       # read from token file everytime it refreshes
       @assume_role_web_identity_params[:web_identity_token] = _token_from_file(@token_file)
-      metric = metrics[0...-1]
-      puts "Refreshing with metrics #{metric}"
-      resp = with_metrics(metric) { @client.assume_role_with_web_identity(@assume_role_web_identity_params) }
+      resp = @client.assume_role_with_web_identity(@assume_role_web_identity_params)
       creds = resp.credentials
       @credentials = Credentials.new(
         creds.access_key_id,
@@ -113,10 +111,6 @@ module Aws
     def parse_account_id(resp)
       arn = resp.assumed_role_user&.arn
       ARNParser.parse(arn).account_id if ARNParser.arn?(arn)
-    end
-
-    def with_metrics(metrics, &block)
-      Aws::Plugins::UserAgent.metric(*metrics, &block)
     end
 
     class << self
