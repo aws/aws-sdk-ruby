@@ -96,7 +96,8 @@ module Aws
     private
 
     def refresh
-      resp = @client.assume_role(@assume_role_params)
+      metric = metrics[0...-1]
+      resp = with_metrics(metric) { @client.assume_role(@assume_role_params) }
       creds = resp.credentials
       @credentials = Credentials.new(
         creds.access_key_id,
@@ -114,6 +115,10 @@ module Aws
 
     def insert_metric(base, metrics)
       base.insert(1, *metrics)
+    end
+
+    def with_metrics(metrics, &block)
+      Aws::Plugins::UserAgent.metric(*metrics, &block)
     end
 
     class << self
