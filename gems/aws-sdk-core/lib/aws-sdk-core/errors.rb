@@ -68,7 +68,7 @@ module Aws
       end
     end
 
-    # Rasied when endpoint discovery failed for operations
+    # Raised when endpoint discovery failed for operations
     # that requires endpoints from endpoint discovery
     class EndpointDiscoveryError < RuntimeError
       def initialize(*args)
@@ -78,7 +78,7 @@ module Aws
       end
     end
 
-    # raised when hostLabel member is not provided
+    # Raised when hostLabel member is not provided
     # at operation input when endpoint trait is available
     # with 'hostPrefix' requirement
     class MissingEndpointHostLabelValue < RuntimeError

@@ -39,7 +39,7 @@ module Seahorse
 
     end
 
-    # Rasied when trying to use an closed connection
+    # Raised when trying to use an closed connection
     class Http2ConnectionClosedError < StandardError; end
   end
 end
