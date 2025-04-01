@@ -49,7 +49,7 @@ module Aws
               context[:sigv4_region],
               context[:sigv4_credentials]
             )
-            credentials = signer.signer.credentials_provider if signer.is_a?(SignatureV4)
+            credentials = signer.credentials if signer.is_a?(SignatureV4)
             signer.sign(context)
           end
           with_metrics(credentials) { @handler.call(context) }
@@ -62,9 +62,7 @@ module Aws
             return block.call
           end
 
-          metrics = []
-          (metrics << credentials.metrics).flatten!
-          Aws::Plugins::UserAgent.metric(*metrics, &block)
+          Aws::Plugins::UserAgent.metric(*credentials.metrics, &block)
         end
 
         def v2_signing?(config)
@@ -167,6 +165,10 @@ module Aws
 
         def sign_event(*args)
           @signer.sign_event(*args)
+        end
+
+        def credentials
+          @signer.credentials_provider
         end
 
         private

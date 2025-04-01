@@ -87,7 +87,11 @@ module Aws
     def static_profile_process_credentials(options)
       if Aws.shared_config.config_enabled? && options[:config] && options[:config].profile
         process_provider = Aws.shared_config.credential_process(profile: options[:config].profile)
-        ProcessCredentials.new([process_provider]) if process_provider
+        if process_provider
+          credentials = ProcessCredentials.new([process_provider])
+          credentials.source = :profile
+          credentials
+        end
       end
     rescue Errors::NoSuchProfileError
       nil
@@ -131,7 +135,11 @@ module Aws
       profile_name = determine_profile_name(options)
       if Aws.shared_config.config_enabled?
         process_provider = Aws.shared_config.credential_process(profile: profile_name)
-        ProcessCredentials.new([process_provider]) if process_provider
+        if process_provider
+          credentials = ProcessCredentials.new([process_provider])
+          credentials.source = :profile
+          credentials
+        end
       end
     rescue Errors::NoSuchProfileError
       nil
@@ -161,7 +169,7 @@ module Aws
           role_session_name: ENV['AWS_ROLE_SESSION_NAME']
         }
         cfg[:region] = region if region
-        with_metrics('CREDENTIALS_ENV_VARS_STS_WEB_ID_TOKEN') do
+        Aws::Plugins::UserAgent.metric('CREDENTIALS_ENV_VARS_STS_WEB_ID_TOKEN') do
           credentials = AssumeRoleWebIdentityCredentials.new(cfg)
           credentials.source = :env
           credentials
@@ -194,10 +202,6 @@ module Aws
         assume_opts[:region] = options[:config].region
       end
       Aws.shared_config.assume_role_credentials_from_config(assume_opts)
-    end
-
-    def with_metrics(metric, &block)
-      Aws::Plugins::UserAgent.metric(metric, &block)
     end
   end
 end

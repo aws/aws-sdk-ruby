@@ -114,7 +114,7 @@ module Aws
       end
 
       @async_refresh = true
-      @source = :none
+      @source = :code
       super
     end
 
@@ -130,7 +130,7 @@ module Aws
       when :legacy
         %w[CREDENTIALS_PROFILE_SSO_LEGACY CREDENTIALS_SSO_LEGACY]
         # TODO: Check if Ruby has "source-less" SSO credentials
-      when :none
+      when :code
         if @legacy
           ['CREDENTIALS_SSO_LEGACY']
         else

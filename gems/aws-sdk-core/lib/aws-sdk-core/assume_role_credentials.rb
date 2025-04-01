@@ -50,7 +50,7 @@ module Aws
       end
       @client = client_opts[:client] || STS::Client.new(client_opts)
       @async_refresh = true
-      @source = :none
+      @source = :code
       super
     end
 
@@ -74,11 +74,11 @@ module Aws
       end
 
       case @source
-      when :none
+      when :code
         ['CREDENTIALS_STS_ASSUME_ROLE']
       when :static
         insert_metric(source_profile, 'CREDENTIALS_PROFILE')
-      when :webID
+      when :web_ID
         insert_metric(source_profile, %w[CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN CREDENTIALS_STS_ASSUME_ROLE_WEB_ID])
       when :process
         insert_metric(source_profile, %w[CREDENTIALS_PROFILE_PROCESS CREDENTIALS_PROCESS])

@@ -453,7 +453,7 @@ module Aws
           ).to eq('AR_AKID')
           expect(
             client.config.credentials.source
-          ).to eq(:webID)
+          ).to eq(:web_ID)
           expect(
             client.config.credentials.metrics
           ).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN
