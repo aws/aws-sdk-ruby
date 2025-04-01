@@ -60,8 +60,13 @@ module Aws
     # @return [Hash]
     attr_reader :assume_role_params
 
+    # @return [String] Returns the credentials source. Used for
+    #   tracking credentials related UserAgent metrics.
     attr_accessor :metrics_source
 
+    # @return [Boolean] Returns `true` if instance is created
+    #   during source profile resolution. Used for tracking
+    #   credentials related UserAgent metrics.
     attr_accessor :resolving
 
     def metrics

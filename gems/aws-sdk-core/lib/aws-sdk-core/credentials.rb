@@ -29,6 +29,8 @@ module Aws
     # @return [String, nil]
     attr_reader :account_id
 
+    # @return [String] Returns the credentials source. Used for
+    #   tracking credentials related UserAgent metrics.
     attr_accessor :metrics_source
 
     # @return [Credentials]

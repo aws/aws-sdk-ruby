@@ -41,6 +41,8 @@ module Aws
       super
     end
 
+    # @return [String] Returns the credentials source. Used for
+    #   tracking credentials related UserAgent metrics.
     attr_accessor :metrics_source
 
     def metrics
