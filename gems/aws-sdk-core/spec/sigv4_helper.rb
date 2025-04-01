@@ -20,7 +20,7 @@ module Sigv4Helper
         expect(Aws::Sigv4::Signer).to receive(:new)
           .with(hash_including(signing_algorithm: :sigv4a, region: region))
           .and_return(signer)
-        expect(signer).to receive(:credentials_provider)
+        expect(signer).to receive(:credentials_provider).and_return(credentials)
       end
 
       m.call(*args)

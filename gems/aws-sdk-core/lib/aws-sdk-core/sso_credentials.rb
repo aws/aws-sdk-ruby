@@ -114,17 +114,17 @@ module Aws
       end
 
       @async_refresh = true
-      @source = :code
+      @metrics_source = :code
       super
     end
 
     # @return [SSO::Client]
     attr_reader :client
 
-    attr_accessor :source
+    attr_accessor :metrics_source
 
     def metrics
-      case @source
+      case @metrics_source
       when :new
         %w[CREDENTIALS_PROFILE_SSO CREDENTIALS_SSO]
       when :legacy

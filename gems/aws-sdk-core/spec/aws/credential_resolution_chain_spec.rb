@@ -58,8 +58,7 @@ module Aws
           region: 'us-east-1'
         )
         expect(client.config.credentials.access_key_id).to eq('ACCESS_DIRECT')
-        expect(client.config.credentials.source).to eq(:profile)
-        expect(client.config.credentials.metrics).to eq(['CREDENTIALS_PROFILE'])
+        expect(client.config.credentials.metrics_source).to eq(:profile)
       end
 
       it 'prefers assume role credentials when profile explicitly set over ENV credentials' do
@@ -79,10 +78,7 @@ module Aws
           profile: 'assumerole_sc', region: 'us-east-1'
         )
         expect(client.config.credentials.credentials.access_key_id).to eq('AR_AKID')
-        expect(client.config.credentials.source).to eq(:static)
-        expect(
-          client.config.credentials.metrics
-        ).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE CREDENTIALS_STS_ASSUME_ROLE])
+        expect(client.config.credentials.metrics_source).to eq(:static)
       end
 
       it 'prefers assume role web identity from profile over sso' do
@@ -98,11 +94,7 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('AR_AKID')
-
-        expect(client.config.credentials.source).to eq(:profile)
-        expect(
-          client.config.credentials.metrics
-        ).to eq(%w[CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN CREDENTIALS_STS_ASSUME_ROLE_WEB_ID])
+        expect(client.config.credentials.metrics_source).to eq(:profile)
       end
 
       it 'prefers assume role web identity from ENV over sso' do
@@ -120,14 +112,9 @@ module Aws
         client = ApiHelper.sample_rest_xml::Client.new(
           region: 'us-east-1'
         )
-        expect(
-          client.config.credentials.credentials.access_key_id
-        ).to eq('AR_AKID')
-
-        expect(client.config.credentials.source).to eq(:env)
-        expect(
-          client.config.credentials.metrics
-        ).to eq(%w[CREDENTIALS_ENV_VARS_STS_WEB_ID_TOKEN CREDENTIALS_STS_ASSUME_ROLE_WEB_ID])
+        expect(client.config.credentials.credentials.access_key_id)
+          .to eq('AR_AKID')
+        expect(client.config.credentials.metrics_source).to eq(:env)
       end
 
       it 'prefers sso credentials over assume role' do
@@ -140,7 +127,7 @@ module Aws
           sso_role_name: 'SSO_ROLE_NAME',
           sso_session: 'sso-test-session'
         ).and_return(creds)
-        expect(creds).to receive(:source=).with(:new)
+        expect(creds).to receive(:metrics_source=).with(:new)
         client = ApiHelper.sample_rest_xml::Client.new(
           profile: 'sso_creds',
           token_provider: nil
@@ -148,9 +135,6 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('SSO_AKID')
-        expect(
-          client.config.credentials.metrics
-        ).to eq(%w[CREDENTIALS_PROFILE_SSO CREDENTIALS_SSO])
       end
 
       it 'loads SSO credentials from a legacy profile' do
@@ -163,16 +147,13 @@ module Aws
           sso_role_name: 'SSO_ROLE_NAME',
           sso_session: nil
         ).and_return(creds)
-        expect(creds).to receive(:source=).with(:legacy)
+        expect(creds).to receive(:metrics_source=).with(:legacy)
         client = ApiHelper.sample_rest_xml::Client.new(
           profile: 'sso_creds_legacy'
         )
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('SSO_AKID')
-        expect(
-          client.config.credentials.metrics
-        ).to eq(%w[CREDENTIALS_PROFILE_SSO_LEGACY CREDENTIALS_SSO_LEGACY])
       end
 
       it 'loads SSO credentials from a mixed legacy profile when values match' do
@@ -185,7 +166,7 @@ module Aws
           sso_role_name: 'SSO_ROLE_NAME',
           sso_session: 'sso-test-session'
         ).and_return(creds)
-        expect(creds).to receive(:source=).with(:new)
+        expect(creds).to receive(:metrics_source=).with(:new)
         client = ApiHelper.sample_rest_xml::Client.new(
           profile: 'sso_creds_mixed_legacy',
           token_provider: nil,
@@ -193,9 +174,6 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('SSO_AKID')
-        expect(
-          client.config.credentials.metrics
-        ).to eq(%w[CREDENTIALS_PROFILE_SSO CREDENTIALS_SSO])
       end
 
       it 'loads SSO credentials from when the session name has quotes' do
@@ -208,7 +186,7 @@ module Aws
           sso_role_name: 'SSO_ROLE_NAME',
           sso_session: 'sso test session'
         ).and_return(creds)
-        expect(creds).to receive(:source=).with(:new)
+        expect(creds).to receive(:metrics_source=).with(:new)
         client = ApiHelper.sample_rest_xml::Client.new(
           profile: 'sso_creds_session_with_quotes',
           token_provider: nil
@@ -216,9 +194,6 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('SSO_AKID')
-        expect(
-          client.config.credentials.metrics
-        ).to eq(%w[CREDENTIALS_PROFILE_SSO CREDENTIALS_SSO])
       end
 
       it 'raises when attempting to load an incomplete SSO Profile' do
@@ -264,12 +239,7 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('AR_AKID')
-        expect(
-          client.config.credentials.source
-        ).to eq(:static)
-        expect(
-          client.config.credentials.metrics
-        ).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE CREDENTIALS_STS_ASSUME_ROLE])
+        expect(client.config.credentials.metrics_source).to eq(:static)
 
         sts_client = client.config.credentials.client
         expect(
@@ -284,9 +254,6 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('ACCESS_KEY_CRD')
-        expect(
-          client.config.credentials.metrics
-        ).to eq(['CREDENTIALS_PROFILE'])
       end
 
       it 'will source static credentials from shared config after shared credentials' do
@@ -296,9 +263,6 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('ACCESS_KEY_SC1')
-        expect(
-          client.config.credentials.metrics
-        ).to eq(['CREDENTIALS_PROFILE'])
       end
 
       it 'prefers process credentials over metadata credentials' do
@@ -308,9 +272,6 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('AK_PROC1')
-        expect(
-          client.config.credentials.metrics
-        ).to eq(%w[CREDENTIALS_PROFILE_PROCESS CREDENTIALS_PROCESS])
       end
 
       it 'prefers direct credentials over process credentials when profile not set' do
@@ -325,12 +286,7 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('AKID_ENV_STUB')
-        expect(
-          client.config.credentials.source
-        ).to eq(:env)
-        expect(
-          client.config.credentials.metrics
-        ).to eq(['CREDENTIALS_ENV_VARS'])
+        expect(client.config.credentials.metrics_source).to eq(:env)
       end
 
       it 'prefers process credentials from direct profile over env' do
@@ -345,12 +301,9 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('AK_PROC1')
-        expect(
-          client.config.credentials.metrics
-        ).to eq(%w[CREDENTIALS_PROFILE_PROCESS CREDENTIALS_PROCESS])
       end
 
-      it 'attempts to fetch metadata credentials last IMDS' do
+      it 'attempts to fetch metadata credentials last using IMDS' do
         allow(InstanceProfileCredentials).to receive(:new).and_call_original
 
         stub_request(:put, 'http://169.254.169.254/latest/api/token')
@@ -385,12 +338,9 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('akid-md')
-        expect(
-          client.config.credentials.metrics
-        ).to eq(['CREDENTIALS_IMDS'])
       end
 
-      it 'attempts to fetch metadata credentials last HTTP' do
+      it 'attempts to fetch metadata credentials last using ECS' do
         path = '/latest/credentials?id=foobarbaz'
         resp = <<-JSON.strip
           {
@@ -409,9 +359,7 @@ module Aws
           profile: 'nonexistent',
           region: 'us-east-1'
         )
-        expect(
-          client.config.credentials.metrics
-        ).to eq(['CREDENTIALS_HTTP'])
+        expect(client.config.credentials.credentials.access_key_id).to eq('ACCESS_KEY_ECS')
       end
 
       describe 'Assume Role Resolution' do
@@ -451,13 +399,7 @@ module Aws
           expect(
             client.config.credentials.credentials.access_key_id
           ).to eq('AR_AKID')
-          expect(
-            client.config.credentials.source
-          ).to eq(:web_ID)
-          expect(
-            client.config.credentials.metrics
-          ).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN
-                     CREDENTIALS_STS_ASSUME_ROLE_WEB_ID CREDENTIALS_STS_ASSUME_ROLE])
+          expect(client.config.credentials.metrics_source).to eq(:web_ID)
 
           sts_client = client.config.credentials.client
           expect(
@@ -480,13 +422,7 @@ module Aws
           expect(
             client.config.credentials.credentials.access_key_id
           ).to eq('AK_PROC1')
-          expect(
-            client.config.credentials.source
-          ).to eq(:process)
-          expect(
-            client.config.credentials.metrics
-          ).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE_PROCESS CREDENTIALS_PROCESS
-                     CREDENTIALS_STS_ASSUME_ROLE])
+          expect(client.config.credentials.metrics_source).to eq(:process)
         end
 
         it 'supports :source_profile from sso credentials' do
@@ -499,8 +435,8 @@ module Aws
             sso_role_name: 'SSO_ROLE_NAME',
             sso_session: 'sso-test-session'
           ).and_return(creds)
-          expect(creds).to receive(:source=).with(:new)
-          expect(creds).to receive(:source).and_return(:new)
+          expect(creds).to receive(:metrics_source=).with(:new)
+          expect(creds).to receive(:metrics_source).and_return(:new)
 
           allow(SSOTokenProvider).to receive(:new)
             .and_return(double('SSOToken', set?: true))
@@ -519,13 +455,7 @@ module Aws
           expect(
             client.config.credentials.credentials.access_key_id
           ).to eq('AR_AKID')
-          expect(
-            client.config.credentials.source
-          ).to eq(:new)
-          expect(
-            client.config.credentials.metrics
-          ).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE_SSO CREDENTIALS_SSO
-                     CREDENTIALS_STS_ASSUME_ROLE])
+          expect(client.config.credentials.metrics_source).to eq(:new)
         end
 
         it 'supports :source_profile from legacy sso credentials' do
@@ -538,8 +468,8 @@ module Aws
             sso_role_name: 'SSO_ROLE_NAME',
             sso_session: nil
           ).and_return(creds)
-          expect(creds).to receive(:source=).with(:legacy)
-          expect(creds).to receive(:source).and_return(:legacy)
+          expect(creds).to receive(:metrics_source=).with(:legacy)
+          expect(creds).to receive(:metrics_source).and_return(:legacy)
 
           allow(SSOTokenProvider).to receive(:new)
                                        .and_return(double('SSOToken', set?: true))
@@ -558,13 +488,7 @@ module Aws
           expect(
             client.config.credentials.credentials.access_key_id
           ).to eq('AR_AKID')
-          expect(
-            client.config.credentials.source
-          ).to eq(:legacy)
-          expect(
-            client.config.credentials.metrics
-          ).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE_SSO_LEGACY CREDENTIALS_SSO_LEGACY
-                     CREDENTIALS_STS_ASSUME_ROLE])
+          expect(client.config.credentials.metrics_source).to eq(:legacy)
         end
 
         it 'supports assume role chaining' do
@@ -590,12 +514,7 @@ module Aws
           expect(
             client.config.credentials.credentials.access_key_id
           ).to eq('AK_2')
-          expect(
-            client.config.credentials.source
-          ).to eq(:static)
-          expect(
-            client.config.credentials.metrics
-          ).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE CREDENTIALS_STS_ASSUME_ROLE])
+          expect(client.config.credentials.metrics_source).to eq(:static)
         end
 
         it 'uses source credentials when source and static are both set' do
@@ -613,12 +532,7 @@ module Aws
           expect(
             client.config.credentials.credentials.access_key_id
           ).to eq('AK_2')
-          expect(
-            client.config.credentials.source
-          ).to eq(:static)
-          expect(
-            client.config.credentials.metrics
-          ).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE CREDENTIALS_STS_ASSUME_ROLE])
+          expect(client.config.credentials.metrics_source).to eq(:static)
         end
 
         it 'uses static credentials when the profile self references' do
@@ -636,12 +550,7 @@ module Aws
           expect(
             client.config.credentials.credentials.access_key_id
           ).to eq('AK_2')
-          expect(
-            client.config.credentials.source
-          ).to eq(:static)
-          expect(
-            client.config.credentials.metrics
-          ).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE CREDENTIALS_STS_ASSUME_ROLE])
+          expect(client.config.credentials.metrics_source).to eq(:static)
         end
 
         it 'raises if there is a loop in chained profiles' do
@@ -683,12 +592,7 @@ module Aws
           expect(
             client.config.credentials.credentials.access_key_id
           ).to eq('AR_AKID')
-          expect(
-            client.config.credentials.source
-          ).to eq(:static)
-          expect(
-            client.config.credentials.metrics
-          ).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE CREDENTIALS_STS_ASSUME_ROLE])
+          expect(client.config.credentials.metrics_source).to eq(:static)
         end
 
         it 'will then try to assume a role from shared config' do
@@ -705,12 +609,7 @@ module Aws
           expect(
             client.config.credentials.credentials.access_key_id
           ).to eq('AR_AKID')
-          expect(
-            client.config.credentials.source
-          ).to eq(:static)
-          expect(
-            client.config.credentials.metrics
-          ).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE CREDENTIALS_STS_ASSUME_ROLE])
+          expect(client.config.credentials.metrics_source).to eq(:static)
         end
 
         it 'assumes a role from config using source in shared credentials' do
@@ -727,12 +626,7 @@ module Aws
           expect(
             client.config.credentials.credentials.access_key_id
           ).to eq('AR_AKID')
-          expect(
-            client.config.credentials.source
-          ).to eq(:static)
-          expect(
-            client.config.credentials.metrics
-          ).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE CREDENTIALS_STS_ASSUME_ROLE])
+          expect(client.config.credentials.metrics_source).to eq(:static)
         end
 
         it 'allows region to be resolved when unspecified' do
@@ -753,12 +647,7 @@ module Aws
           expect(
             credentials.credentials.access_key_id
           ).to eq('AR_AKID')
-          expect(
-            credentials.source
-          ).to eq(:static)
-          expect(
-            credentials.metrics
-          ).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE CREDENTIALS_STS_ASSUME_ROLE])
+          expect(credentials.metrics_source).to eq(:static)
         end
       end
 
@@ -803,12 +692,7 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('AR_AKID')
-        expect(
-          client.config.credentials.source
-        ).to eq(:instance)
-        expect(
-          client.config.credentials.metrics
-        ).to eq(%w[CREDENTIALS_PROFILE_NAMED_PROVIDER CREDENTIALS_IMDS CREDENTIALS_STS_ASSUME_ROLE])
+        expect(client.config.credentials.metrics_source).to eq(:instance)
       end
 
       it 'can assume a role with ECS Credentials as a source' do
@@ -841,12 +725,7 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('AR_AKID')
-        expect(
-          client.config.credentials.source
-        ).to eq(:ecs)
-        expect(
-          client.config.credentials.metrics
-        ).to eq(%w[CREDENTIALS_PROFILE_NAMED_PROVIDER CREDENTIALS_HTTP CREDENTIALS_STS_ASSUME_ROLE])
+        expect(client.config.credentials.metrics_source).to eq(:ecs)
       end
     end
 
@@ -876,12 +755,7 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('ACCESS_DIRECT')
-        expect(
-          client.config.credentials.source
-        ).to eq(:profile)
-        expect(
-          client.config.credentials.metrics
-        ).to eq(['CREDENTIALS_PROFILE'])
+        expect(client.config.credentials.metrics_source).to eq(:profile)
       end
 
       it 'prefers ENV credentials over shared config when profile not set' do
@@ -896,12 +770,7 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('AKID_ENV_STUB')
-        expect(
-          client.config.credentials.source
-        ).to eq(:env)
-        expect(
-          client.config.credentials.metrics
-        ).to eq(['CREDENTIALS_ENV_VARS'])
+        expect(client.config.credentials.metrics_source).to eq(:env)
       end
 
       it 'prefers config from profile over ENV credentials when profile is set on client' do
@@ -916,9 +785,6 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('ACCESS_KEY_1')
-        expect(
-          client.config.credentials.metrics
-        ).to eq(['CREDENTIALS_PROFILE'])
       end
 
       it 'will not load credentials from shared config' do
@@ -970,9 +836,6 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('akid-md')
-        expect(
-          client.config.credentials.metrics
-        ).to eq(['CREDENTIALS_IMDS'])
       end
     end
 

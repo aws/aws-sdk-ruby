@@ -50,7 +50,7 @@ module Aws
       end
       @client = client_opts[:client] || STS::Client.new(client_opts)
       @async_refresh = true
-      @source = :code
+      @metrics_source = :code
       super
     end
 
@@ -60,7 +60,7 @@ module Aws
     # @return [Hash]
     attr_reader :assume_role_params
 
-    attr_accessor :source
+    attr_accessor :metrics_source
 
     attr_accessor :resolving
 
@@ -73,7 +73,7 @@ module Aws
         credential_source.pop
       end
 
-      case @source
+      case @metrics_source
       when :code
         ['CREDENTIALS_STS_ASSUME_ROLE']
       when :static

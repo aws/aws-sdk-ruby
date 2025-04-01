@@ -36,17 +36,17 @@ module Aws
       @process = process
       @credentials = credentials_from_process
       @async_refresh = false
-      @source = :code
+      @metrics_source = :code
 
       super
     end
 
-    attr_accessor :source
+    attr_accessor :metrics_source
 
     def metrics
       base = ['CREDENTIALS_PROCESS']
 
-      case @source
+      case @metrics_source
       when :code
         base
       when :profile

@@ -48,7 +48,7 @@ module Aws
           options[:config].session_token,
           account_id: options[:config].account_id
         )
-        credentials.source = :profile
+        credentials.metrics_source = :profile
         credentials
       end
     end
@@ -89,7 +89,7 @@ module Aws
         process_provider = Aws.shared_config.credential_process(profile: options[:config].profile)
         if process_provider
           credentials = ProcessCredentials.new([process_provider])
-          credentials.source = :profile
+          credentials.metrics_source = :profile
           credentials
         end
       end
@@ -109,7 +109,7 @@ module Aws
         envar(token),
         account_id: envar(account_id)
       )
-      credentials.source = :env
+      credentials.metrics_source = :env
       credentials
     end
 
@@ -137,7 +137,7 @@ module Aws
         process_provider = Aws.shared_config.credential_process(profile: profile_name)
         if process_provider
           credentials = ProcessCredentials.new([process_provider])
-          credentials.source = :profile
+          credentials.metrics_source = :profile
           credentials
         end
       end
@@ -171,7 +171,7 @@ module Aws
         cfg[:region] = region if region
         Aws::Plugins::UserAgent.metric('CREDENTIALS_ENV_VARS_STS_WEB_ID_TOKEN') do
           credentials = AssumeRoleWebIdentityCredentials.new(cfg)
-          credentials.source = :env
+          credentials.metrics_source = :env
           credentials
         end
       elsif Aws.shared_config.config_enabled?

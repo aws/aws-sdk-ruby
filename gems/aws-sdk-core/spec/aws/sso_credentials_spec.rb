@@ -151,14 +151,14 @@ module Aws
 
       describe '#metrics' do
 
-        it 'returns the correct metrics when the source is none' do
+        it 'returns the correct metrics when the source is code' do
           c = SSOCredentials.new(sso_opts)
           expect(c.metrics).to eq(['CREDENTIALS_SSO'])
         end
 
         it 'returns the correct metrics when the source is new' do
           c = SSOCredentials.new(sso_opts)
-          c.source = :new
+          c.metrics_source = :new
           expect(c.metrics).to eq(%w[CREDENTIALS_PROFILE_SSO CREDENTIALS_SSO])
         end
 
@@ -309,7 +309,7 @@ module Aws
 
       describe '#metrics' do
 
-        it 'returns the correct metrics when the source is none' do
+        it 'returns the correct metrics when the source is code' do
           expect(SSO::Client).to receive(:new)
                                    .with({region: sso_region, credentials: nil})
                                    .and_return(client)
@@ -326,7 +326,7 @@ module Aws
 
           mock_token_file(sso_start_url, cached_token)
           c = SSOCredentials.new(sso_opts)
-          c.source = :legacy
+          c.metrics_source = :legacy
           expect(c.metrics).to eq(%w[CREDENTIALS_PROFILE_SSO_LEGACY CREDENTIALS_SSO_LEGACY])
         end
       end

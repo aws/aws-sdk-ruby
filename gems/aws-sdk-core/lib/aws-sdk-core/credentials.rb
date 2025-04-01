@@ -14,7 +14,7 @@ module Aws
       @secret_access_key = secret_access_key
       @session_token = session_token
       @account_id = kwargs[:account_id]
-      @source = :code
+      @metrics_source = :code
     end
 
     # @return [String]
@@ -29,7 +29,7 @@ module Aws
     # @return [String, nil]
     attr_reader :account_id
 
-    attr_accessor :source
+    attr_accessor :metrics_source
 
     # @return [Credentials]
     def credentials
@@ -52,7 +52,7 @@ module Aws
     end
 
     def metrics
-      case @source
+      case @metrics_source
       when :code
         ['CREDENTIALS_CODE']
       when :profile

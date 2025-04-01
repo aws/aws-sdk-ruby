@@ -140,7 +140,7 @@ module Aws
           cfg[:region] = opts[:region] if opts[:region]
           with_metrics('CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN') do
             credentials = AssumeRoleWebIdentityCredentials.new(cfg)
-            credentials.source = :profile
+            credentials.metrics_source = :profile
             credentials
           end
         end
@@ -281,7 +281,7 @@ module Aws
             end
             with_metrics(metrics) do
               credentials = AssumeRoleCredentials.new(opts)
-              credentials.source = source
+              credentials.metrics_source = source
               credentials
             end
           else
@@ -308,7 +308,7 @@ module Aws
             metrics.unshift('CREDENTIALS_PROFILE_NAMED_PROVIDER') if metrics.first != 'CREDENTIALS_PROFILE_NAMED_PROVIDER'
             with_metrics(metrics) do
               credentials = AssumeRoleCredentials.new(opts)
-              credentials.source = source
+              credentials.metrics_source = source
               credentials
             end
           else
@@ -334,33 +334,35 @@ module Aws
       end
 
       if (creds = credentials(profile: profile))
-        creds.source = :profile
+        creds.metrics_source = :profile
         [creds, creds, :static] # static credentials
       elsif profile_config && profile_config['source_profile']
         opts.delete(:source_profile)
         creds = assume_role_credentials_from_config(opts.merge(profile: profile))
-        [creds, creds, creds.source]
+        [creds, creds, creds.metrics_source]
       elsif (provider = assume_role_web_identity_credentials_from_config(opts.merge(profile: profile)))
-        provider.credentials.source = :assume_role_resolution
+        provider.credentials.metrics_source = :assume_role_resolution
         [provider.credentials, provider, :web_ID] if provider.credentials.set?
       elsif (provider = assume_role_process_credentials_from_config(profile))
-        provider.credentials.source = :assume_role_resolution
+        provider.credentials.metrics_source = :assume_role_resolution
         [provider.credentials, provider, :process] if provider.credentials.set?
       elsif (provider = sso_credentials_from_config(profile: profile))
-        provider.credentials.source = :assume_role_resolution
-        [provider.credentials, provider, provider.source]
+        provider.credentials.metrics_source = :assume_role_resolution
+        [provider.credentials, provider, provider.metrics_source]
       end
     end
 
     def credentials_from_source(credential_source, config)
       case credential_source
       when 'Ec2InstanceMetadata'
-        [InstanceProfileCredentials.new(
+        [
+          InstanceProfileCredentials.new(
           retries: config ? config.instance_profile_credentials_retries : 0,
           http_open_timeout: config ? config.instance_profile_credentials_timeout : 1,
           http_read_timeout: config ? config.instance_profile_credentials_timeout : 1,
         ),
-         :instance]
+         :instance
+        ]
       when 'EcsContainer'
         [ECSCredentials.new, :ecs]
       else
@@ -376,7 +378,7 @@ module Aws
       end
       if credential_process
         credentials = ProcessCredentials.new([credential_process])
-        credentials.source = :profile
+        credentials.metrics_source = :profile
         credentials
       end
     end
@@ -431,7 +433,7 @@ module Aws
             sso_region: sso_region,
             sso_start_url: sso_start_url,
           )
-          credentials.source = prof_config['sso_session'] ? :new : :legacy
+          credentials.metrics_source = prof_config['sso_session'] ? :new : :legacy
           credentials
         end
       end
@@ -523,11 +525,7 @@ module Aws
     end
 
     def with_metrics(metrics, &block)
-      if metrics.is_a?(Array)
-        Aws::Plugins::UserAgent.metric(*metrics, &block)
-      else
-        Aws::Plugins::UserAgent.metric(metrics, &block)
-      end
+      Aws::Plugins::UserAgent.metric(*metrics, &block)
     end
   end
 end
