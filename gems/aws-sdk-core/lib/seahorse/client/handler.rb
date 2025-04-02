@@ -17,9 +17,7 @@ module Seahorse
       # @param [RequestContext] context
       # @return [Seahorse::Response]
       def call(context)
-        puts "Calling"
         @handler.call(context)
-        puts "Called"
       end
 
       def inspect

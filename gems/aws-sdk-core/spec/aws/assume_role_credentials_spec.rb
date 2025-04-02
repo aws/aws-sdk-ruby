@@ -206,46 +206,10 @@ module Aws
 
       context 'while resolving' do
 
-        it 'returns the correct metrics when the source is static' do
+        it 'returns no metrics' do
           c = resolving_creds
           c.metrics_source = :static
-          expect(c.metrics).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE])
-        end
-
-        it 'returns the correct metrics when the source is webID' do
-          c = resolving_creds
-          c.metrics_source = :web_ID
-          expect(c.metrics).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN CREDENTIALS_STS_ASSUME_ROLE_WEB_ID])
-        end
-
-        it 'returns the correct metrics when the source is process' do
-          c = resolving_creds
-          c.metrics_source = :process
-          expect(c.metrics).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE_PROCESS CREDENTIALS_PROCESS])
-        end
-
-        it 'returns the correct metrics when the source is new SSO' do
-          c = resolving_creds
-          c.metrics_source = :new
-          expect(c.metrics).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE_SSO CREDENTIALS_SSO])
-        end
-
-        it 'returns the correct metrics when the source is legacy SSO' do
-          c = resolving_creds
-          c.metrics_source = :legacy
-          expect(c.metrics).to eq(%w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_PROFILE_SSO_LEGACY CREDENTIALS_SSO_LEGACY])
-        end
-
-        it 'returns the correct metrics when the source is instance' do
-          c = resolving_creds
-          c.metrics_source = :instance
-          expect(c.metrics).to eq(%w[CREDENTIALS_PROFILE_NAMED_PROVIDER CREDENTIALS_IMDS])
-        end
-
-        it 'returns the correct metrics when the source is ecs' do
-          c = resolving_creds
-          c.metrics_source = :ecs
-          expect(c.metrics).to eq(%w[CREDENTIALS_PROFILE_NAMED_PROVIDER CREDENTIALS_HTTP])
+          expect(c.metrics).to eq([])
         end
       end
 

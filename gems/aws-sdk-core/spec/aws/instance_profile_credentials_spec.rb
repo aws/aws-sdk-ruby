@@ -692,5 +692,11 @@ module Aws
       c = InstanceProfileCredentials.new
       expect(c.metrics).to eq(['CREDENTIALS_IMDS'])
     end
+
+    it 'will return no metrics when resolving' do
+      c = InstanceProfileCredentials.new
+      c.resolving = true
+      expect(c.metrics).to eq([])
+    end
   end
 end

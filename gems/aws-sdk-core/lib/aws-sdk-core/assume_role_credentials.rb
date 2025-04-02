@@ -65,18 +65,15 @@ module Aws
     attr_accessor :metrics_source
 
     # @return [Boolean] Returns `true` if instance is created
-    #   during source profile resolution. Used for tracking
-    #   credentials related UserAgent metrics.
+    #   during source profile resolution for AssumeRoleCredentials.
+    #   Used for tracking credentials related UserAgent metrics.
     attr_accessor :resolving
 
     def metrics
+      return [] if @resolving
+
       source_profile = %w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_STS_ASSUME_ROLE]
       credential_source = %w[CREDENTIALS_PROFILE_NAMED_PROVIDER CREDENTIALS_STS_ASSUME_ROLE]
-
-      if @resolving
-        source_profile.pop
-        credential_source.pop
-      end
 
       case @metrics_source
       when :code

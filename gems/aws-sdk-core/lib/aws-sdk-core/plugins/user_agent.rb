@@ -212,12 +212,9 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
               return
             end
 
-            # Needed for AssumeRoleCredentials feature id tracking
-            # Thread.current[:aws_sdk_core_user_agent_metric].uniq!
-
             metrics = Thread.current[:aws_sdk_core_user_agent_metric].join(',')
-            puts "User agent metrics"
-            puts metrics
+            # puts "User agent metrics"
+            # puts metrics
 
             # Metric metadata is limited to 1024 bytes
             return "m/#{metrics}" if metrics.bytesize <= 1024

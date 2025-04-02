@@ -33,6 +33,11 @@ module Aws
     #   tracking credentials related UserAgent metrics.
     attr_accessor :metrics_source
 
+    # @return [Boolean] Returns `true` if instance is created
+    #   during source profile resolution for AssumeRoleCredentials.
+    #   Used for tracking credentials related UserAgent metrics.
+    attr_accessor :resolving
+
     # @return [Credentials]
     def credentials
       self
@@ -54,6 +59,8 @@ module Aws
     end
 
     def metrics
+      return [] if @resolving
+
       case @metrics_source
       when :code
         ['CREDENTIALS_CODE']
@@ -61,8 +68,6 @@ module Aws
         ['CREDENTIALS_PROFILE']
       when :env
         ['CREDENTIALS_ENV_VARS']
-      when :assume_role_resolution
-        []
       end
     end
 

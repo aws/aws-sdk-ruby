@@ -98,7 +98,14 @@ module Aws
     #   the default credential chain ({Aws::CredentialProviderChain}).
     attr_reader :retries
 
+    # @return [Boolean] Returns `true` if instance is created
+    #   during source profile resolution for AssumeRoleCredentials.
+    #   Used for tracking credentials related UserAgent metrics.
+    attr_accessor :resolving
+
     def metrics
+      return [] if @resolving
+
       ['CREDENTIALS_IMDS']
     end
 

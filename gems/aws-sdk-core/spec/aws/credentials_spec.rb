@@ -83,9 +83,9 @@ module Aws
         expect(creds.metrics).to eq(['CREDENTIALS_ENV_VARS'])
       end
 
-      it 'returns no metrics when the source is assume_role_resolution' do
+      it 'returns no metrics when resolving' do
         creds = Credentials.new('akid', 'secret')
-        creds.metrics_source = :assume_role_resolution
+        creds.resolving = true
         expect(creds.metrics).to eq([])
       end
     end
