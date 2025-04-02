@@ -81,6 +81,30 @@ module Aws
         expect(client.config.credentials.metrics_source).to eq(:static)
       end
 
+      it 'emits correct UserAgent metrics during STS call for assume role credentials' do
+        stub_const(
+          'ENV',
+          'AWS_ACCESS_KEY_ID' => 'AKID_ENV_STUB',
+          'AWS_SECRET_ACCESS_KEY' => 'SECRET_ENV_STUB'
+        )
+        assume_role_stub(
+          'arn:aws:iam::123456789012:role/foo',
+          'ACCESS_KEY_1', # from 'fooprofile'
+          'AR_AKID',
+          'AR_SECRET',
+          'AR_TOKEN'
+        )
+        expect_any_instance_of(STS::Client).to receive(:assume_role).and_wrap_original do |m, *args|
+          resp = m.call(*args)
+          metrics = metrics_from_user_agent_header(resp.context.http_request.headers['User-Agent'])
+          expect(metrics).to include('o,n')
+          resp
+        end
+        client = ApiHelper.sample_rest_xml::Client.new(
+          profile: 'assumerole_sc', region: 'us-east-1'
+        )
+      end
+
       it 'prefers assume role web identity from profile over sso' do
         assume_role_web_identity_stub(
           'arn:aws:iam::123456789012:role/foo',
@@ -95,6 +119,24 @@ module Aws
           client.config.credentials.credentials.access_key_id
         ).to eq('AR_AKID')
         expect(client.config.credentials.metrics_source).to eq(:profile)
+      end
+
+      it 'emits correct UserAgent metrics during STS call for assume role web identity from profile' do
+        assume_role_web_identity_stub(
+          'arn:aws:iam::123456789012:role/foo',
+          'AR_AKID',
+          'AR_SECRET',
+          'AR_TOKEN'
+        )
+        expect_any_instance_of(STS::Client).to receive(:assume_role_with_web_identity).and_wrap_original do |m, *args|
+          resp = m.call(*args)
+          metrics = metrics_from_user_agent_header(resp.context.http_request.headers['User-Agent'])
+          expect(metrics).to include('q')
+          resp
+        end
+        client = ApiHelper.sample_rest_xml::Client.new(
+          profile: 'ar_web_identity', region: 'us-east-1'
+        )
       end
 
       it 'prefers assume role web identity from ENV over sso' do
@@ -115,6 +157,29 @@ module Aws
         expect(client.config.credentials.credentials.access_key_id)
           .to eq('AR_AKID')
         expect(client.config.credentials.metrics_source).to eq(:env)
+      end
+
+      it 'emits correct UserAgent metrics during STS call for assume role web identity from env' do
+        stub_const(
+          'ENV',
+          'AWS_ROLE_ARN' => 'arn:aws:iam::123456789012:role/foo',
+          'AWS_WEB_IDENTITY_TOKEN_FILE' => 'my-token.jwt'
+        )
+        assume_role_web_identity_stub(
+          'arn:aws:iam::123456789012:role/foo',
+          'AR_AKID',
+          'AR_SECRET',
+          'AR_TOKEN'
+        )
+        expect_any_instance_of(STS::Client).to receive(:assume_role_with_web_identity).and_wrap_original do |m, *args|
+          resp = m.call(*args)
+          metrics = metrics_from_user_agent_header(resp.context.http_request.headers['User-Agent'])
+          expect(metrics).to include('h')
+          resp
+        end
+        client = ApiHelper.sample_rest_xml::Client.new(
+          region: 'us-east-1'
+        )
       end
 
       it 'prefers sso credentials over assume role' do
@@ -407,6 +472,37 @@ module Aws
           ).to eq('us-east-1')
         end
 
+        it 'emits correct UserAgent metrics during STS calls for :source_profile from assume_role_web_identity' do
+          assume_role_web_identity_stub(
+            'arn:aws:iam::123456789012:role/foo',
+            'AR_AKID_WEB',
+            'AR_SECRET',
+            'AR_TOKEN'
+          )
+          assume_role_stub(
+            'arn:aws:iam::123456789012:role/bar',
+            'AR_AKID_WEB', # from web_only
+            'AR_AKID',
+            'AR_SECRET',
+            'AR_TOKEN'
+          )
+          expect_any_instance_of(STS::Client).to receive(:assume_role_with_web_identity).and_wrap_original do |m, *args|
+            resp = m.call(*args)
+            metrics = metrics_from_user_agent_header(resp.context.http_request.headers['User-Agent'])
+            expect(metrics).to include('o,q')
+            resp
+          end
+          expect_any_instance_of(STS::Client).to receive(:assume_role).and_wrap_original do |m, *args|
+            resp = m.call(*args)
+            metrics = metrics_from_user_agent_header(resp.context.http_request.headers['User-Agent'])
+            expect(metrics).to include('o,q,k')
+            resp
+          end
+          client = ApiHelper.sample_rest_xml::Client.new(
+            profile: 'ar_web_src', region: 'us-east-1'
+          )
+        end
+
         it 'supports :source_profile from process credentials' do
           assume_role_stub(
             'arn:aws:iam::123456789012:role/foo',
@@ -423,6 +519,25 @@ module Aws
             client.config.credentials.credentials.access_key_id
           ).to eq('AK_PROC1')
           expect(client.config.credentials.metrics_source).to eq(:process)
+        end
+
+        it 'emits correct UserAgent metrics during STS calls for :source_profile from process credentials' do
+          assume_role_stub(
+            'arn:aws:iam::123456789012:role/foo',
+            'AK_PROC1',
+            'AK_PROC1',
+            'SECRET_AK_PROC1',
+            'TOKEN_PROC1'
+          )
+          expect_any_instance_of(STS::Client).to receive(:assume_role).and_wrap_original do |m, *args|
+            resp = m.call(*args)
+            metrics = metrics_from_user_agent_header(resp.context.http_request.headers['User-Agent'])
+            expect(metrics).to include('o,v,w')
+            resp
+          end
+          client = ApiHelper.sample_rest_xml::Client.new(
+            profile: 'creds_from_sc_process', region: 'us-east-1'
+          )
         end
 
         it 'supports :source_profile from sso credentials' do
@@ -458,6 +573,40 @@ module Aws
           expect(client.config.credentials.metrics_source).to eq(:new)
         end
 
+        it 'emits correct UserAgent metrics during STS calls for :source_profile from sso credentials' do
+          creds = double('creds', set?: true, credentials: Credentials.new('SSO_AKID', 'sak'))
+          allow(creds).to receive(:metrics).and_return(%w[CREDENTIALS_PROFILE_SSO CREDENTIALS_SSO])
+          expect(SSOCredentials).to receive(:new).with(
+            sso_start_url: 'START_URL',
+            sso_region: 'us-east-1',
+            sso_account_id: 'SSO_ACCOUNT_ID',
+            sso_role_name: 'SSO_ROLE_NAME',
+            sso_session: 'sso-test-session'
+          ).and_return(creds)
+          expect(creds).to receive(:metrics_source=).with(:new)
+          expect(creds).to receive(:metrics_source).and_return(:new)
+
+          allow(SSOTokenProvider).to receive(:new)
+                                       .and_return(double('SSOToken', set?: true))
+
+          assume_role_stub(
+            'arn:aws:iam::123456789012:role/foo',
+            'SSO_AKID',
+            'AR_AKID',
+            'SECRET_AK',
+            'TOKEN'
+          )
+          expect_any_instance_of(STS::Client).to receive(:assume_role).and_wrap_original do |m, *args|
+            resp = m.call(*args)
+            metrics = metrics_from_user_agent_header(resp.context.http_request.headers['User-Agent'])
+            expect(metrics).to include('o,r,s')
+            resp
+          end
+          client = ApiHelper.sample_rest_xml::Client.new(
+            profile: 'ar_sso_src', region: 'us-east-1'
+          )
+        end
+
         it 'supports :source_profile from legacy sso credentials' do
           creds = double('creds', set?: true, credentials: Credentials.new('SSO_AKID', 'sak'))
           allow(creds).to receive(:metrics).and_return(%w[CREDENTIALS_PROFILE_SSO_LEGACY CREDENTIALS_SSO_LEGACY])
@@ -491,6 +640,40 @@ module Aws
           expect(client.config.credentials.metrics_source).to eq(:legacy)
         end
 
+        it 'emits correct UserAgent metrics during STS calls for :source_profile from legacy sso credentials' do
+          creds = double('creds', set?: true, credentials: Credentials.new('SSO_AKID', 'sak'))
+          allow(creds).to receive(:metrics).and_return(%w[CREDENTIALS_PROFILE_SSO_LEGACY CREDENTIALS_SSO_LEGACY])
+          expect(SSOCredentials).to receive(:new).with(
+            sso_start_url: 'START_URL',
+            sso_region: 'us-east-1',
+            sso_account_id: 'SSO_ACCOUNT_ID',
+            sso_role_name: 'SSO_ROLE_NAME',
+            sso_session: nil
+          ).and_return(creds)
+          expect(creds).to receive(:metrics_source=).with(:legacy)
+          expect(creds).to receive(:metrics_source).and_return(:legacy)
+
+          allow(SSOTokenProvider).to receive(:new)
+                                       .and_return(double('SSOToken', set?: true))
+
+          assume_role_stub(
+            'arn:aws:iam::123456789012:role/foo',
+            'SSO_AKID',
+            'AR_AKID',
+            'SECRET_AK',
+            'TOKEN'
+          )
+          expect_any_instance_of(STS::Client).to receive(:assume_role).and_wrap_original do |m, *args|
+            resp = m.call(*args)
+            metrics = metrics_from_user_agent_header(resp.context.http_request.headers['User-Agent'])
+            expect(metrics).to include('o,t,u')
+            resp
+          end
+          client = ApiHelper.sample_rest_xml::Client.new(
+            profile: 'ar_sso_legacy_src', region: 'us-east-1'
+          )
+        end
+
         it 'supports assume role chaining' do
           assume_role_stub(
             'arn:aws:iam::123456789012:role/role_b',
@@ -515,6 +698,33 @@ module Aws
             client.config.credentials.credentials.access_key_id
           ).to eq('AK_2')
           expect(client.config.credentials.metrics_source).to eq(:static)
+        end
+
+        it 'emits correct UserAgent metrics during STS calls for assume role chaining' do
+          assume_role_stub(
+            'arn:aws:iam::123456789012:role/role_b',
+            'ACCESS_KEY_BASE',
+            'AK_1',
+            'SECRET_AK_1',
+            'TOKEN_1'
+          )
+
+          assume_role_stub(
+            'arn:aws:iam::123456789012:role/role_a',
+            'AK_1',
+            'AK_2',
+            'SECRET_AK_2',
+            'TOKEN_2'
+          )
+          allow_any_instance_of(STS::Client).to receive(:assume_role).and_wrap_original do |m, *args|
+            resp = m.call(*args)
+            metrics = metrics_from_user_agent_header(resp.context.http_request.headers['User-Agent'])
+            expect(metrics).to include('o,n')
+            resp
+          end
+          client = ApiHelper.sample_rest_xml::Client.new(
+            profile: 'assume_role_chain_b', region: 'us-east-1'
+          )
         end
 
         it 'uses source credentials when source and static are both set' do
@@ -695,6 +905,52 @@ module Aws
         expect(client.config.credentials.metrics_source).to eq(:instance)
       end
 
+      it 'emits correct UserAgent metrics during STS calls for EC2 Instance Metadata as a source' do
+        allow(InstanceProfileCredentials).to receive(:new).and_call_original
+
+        profile = 'ar_ec2_src'
+        resp = <<-JSON.strip
+          {
+            "Code" : "Success",
+            "LastUpdated" : "2013-11-22T20:03:48Z",
+            "Type" : "AWS-HMAC",
+            "AccessKeyId" : "ACCESS_KEY_EC2",
+            "SecretAccessKey" : "secret",
+            "Token" : "session-token",
+            "Expiration" : "#{(Time.now.utc + 3600).strftime('%Y-%m-%dT%H:%M:%SZ')}"
+          }
+        JSON
+        assume_role_stub(
+          'arn:aws:iam::123456789012:role/foo',
+          'ACCESS_KEY_EC2',
+          'AR_AKID',
+          'AR_SECRET',
+          'AR_TOKEN'
+        )
+        stub_request(:put, 'http://169.254.169.254/latest/api/token')
+          .to_return(
+            status: 200,
+            body: "my-token\n",
+            headers: { 'x-aws-ec2-metadata-token-ttl-seconds' => '21600' }
+          )
+        stub_request(:get, 'http://169.254.169.254/latest/meta-data/iam/security-credentials/')
+          .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
+          .to_return(status: 200, body: "profile-name\n")
+        stub_request(:get, 'http://169.254.169.254/latest/meta-data/iam/security-credentials/profile-name')
+          .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
+          .to_return(status: 200, body: resp)
+        expect_any_instance_of(STS::Client).to receive(:assume_role).and_wrap_original do |m, *args|
+          resp = m.call(*args)
+          metrics = metrics_from_user_agent_header(resp.context.http_request.headers['User-Agent'])
+          expect(metrics).to include('p,0')
+          resp
+        end
+        client = ApiHelper.sample_rest_xml::Client.new(
+          profile: profile,
+          region: 'us-east-1'
+        )
+      end
+
       it 'can assume a role with ECS Credentials as a source' do
         profile = 'ar_ecs_src'
         path = '/latest/credentials?id=foobarbaz'
@@ -726,6 +982,41 @@ module Aws
           client.config.credentials.credentials.access_key_id
         ).to eq('AR_AKID')
         expect(client.config.credentials.metrics_source).to eq(:ecs)
+      end
+
+      it 'emits correct UserAgent metrics during STS calls for ECS Credentials as a source' do
+        profile = 'ar_ecs_src'
+        path = '/latest/credentials?id=foobarbaz'
+        resp = <<-JSON.strip
+          {
+            "RoleArn" : "arn:aws:iam::123456789012:role/BarFooRole",
+            "AccessKeyId" : "ACCESS_KEY_ECS",
+            "SecretAccessKey" : "secret",
+            "Token" : "session-token",
+            "Expiration" : "#{(Time.now.utc + 3600).strftime('%Y-%m-%dT%H:%M:%SZ')}"
+          }
+        JSON
+        stub_const('ENV',
+                   'AWS_CONTAINER_CREDENTIALS_RELATIVE_URI' => path)
+        stub_request(:get, "http://169.254.170.2#{path}")
+          .to_return(status: 200, body: resp)
+        assume_role_stub(
+          'arn:aws:iam::123456789012:role/foo',
+          'ACCESS_KEY_ECS',
+          'AR_AKID',
+          'AR_SECRET',
+          'AR_TOKEN'
+        )
+        expect_any_instance_of(STS::Client).to receive(:assume_role).and_wrap_original do |m, *args|
+          resp = m.call(*args)
+          metrics = metrics_from_user_agent_header(resp.context.http_request.headers['User-Agent'])
+          expect(metrics).to include('p,z')
+          resp
+        end
+        client = ApiHelper.sample_rest_xml::Client.new(
+          profile: profile,
+          region: 'us-east-1'
+        )
       end
     end
 
@@ -896,6 +1187,10 @@ module Aws
       allow(File).to receive(:exist?).with('my-token.jwt').and_return(true)
       allow(File).to receive(:read).and_call_original
       allow(File).to receive(:read).with('my-token.jwt').and_return(token)
+    end
+
+    def metrics_from_user_agent_header(header)
+      header[(header.index('m/')+2)..]
     end
   end
 end
