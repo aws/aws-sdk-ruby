@@ -259,8 +259,17 @@ module Aws
             'provide only source_profile or credential_source, not both.'
         elsif opts[:source_profile]
           opts[:visited_profiles] ||= Set.new
-          opts[:credentials], provider, source = with_metrics('CREDENTIALS_PROFILE_SOURCE_PROFILE') do
+          provider = with_metrics('CREDENTIALS_PROFILE_SOURCE_PROFILE') do
             resolve_source_profile(opts[:source_profile], opts)
+          end
+          metrics = provider ? provider.metrics : nil
+          if provider.is_a? AssumeRoleCredentials
+            opts[:credentials] = provider
+            opts[:credentials].resolving = true
+            metrics.pop
+          else
+            opts[:credentials] = provider ? provider.credentials : nil
+            metrics.unshift('CREDENTIALS_PROFILE_SOURCE_PROFILE') if metrics
           end
           if opts[:credentials]
             opts[:role_session_name] ||= prof_cfg['role_session_name']
@@ -271,17 +280,17 @@ module Aws
             opts[:serial_number] ||= prof_cfg['mfa_serial']
             opts[:profile] = opts.delete(:source_profile)
             opts.delete(:visited_profiles)
-            metrics = provider.metrics
-            # Add the AssumeRole metric to the front if it isn't there
-            metrics.unshift('CREDENTIALS_PROFILE_SOURCE_PROFILE') if metrics.first != 'CREDENTIALS_PROFILE_SOURCE_PROFILE'
-            # Remove the service call metric if it's already there
-            if metrics.last == 'CREDENTIALS_STS_ASSUME_ROLE'
-              metrics.pop
-              opts[:credentials].resolving = true
-            end
             with_metrics(metrics) do
               credentials = AssumeRoleCredentials.new(opts)
-              credentials.metrics_source = source
+              if provider.is_a? Credentials
+                credentials.metrics_source = :static
+              elsif provider.is_a? AssumeRoleWebIdentityCredentials
+                credentials.metrics_source = :web_ID
+              elsif provider.is_a? ProcessCredentials
+                credentials.metrics_source = :process
+              else
+                credentials.metrics_source = provider.metrics_source
+              end
               credentials
             end
           else
@@ -290,12 +299,7 @@ module Aws
               ' source_profile does not have credentials.'
           end
         elsif credential_source
-          opts[:credentials], source = with_metrics('CREDENTIALS_PROFILE_NAMED_PROVIDER') do
-            credentials_from_source(
-              credential_source,
-              chain_config
-            )
-          end
+          opts[:credentials] = credentials_from_source(credential_source, chain_config)
           if opts[:credentials]
             opts[:role_session_name] ||= prof_cfg['role_session_name']
             opts[:role_session_name] ||= 'default_session'
@@ -305,10 +309,14 @@ module Aws
             opts[:serial_number] ||= prof_cfg['mfa_serial']
             opts.delete(:source_profile) # Cleanup
             metrics = opts[:credentials].metrics
-            metrics.unshift('CREDENTIALS_PROFILE_NAMED_PROVIDER') if metrics.first != 'CREDENTIALS_PROFILE_NAMED_PROVIDER'
+            metrics.unshift('CREDENTIALS_PROFILE_NAMED_PROVIDER')
             with_metrics(metrics) do
               credentials = AssumeRoleCredentials.new(opts)
-              credentials.metrics_source = source
+              if opts[:credentials].is_a? InstanceProfileCredentials
+                credentials.metrics_source = :instance
+              elsif opts[:credentials].is_a? ECSCredentials
+                credentials.metrics_source = :ecs
+              end
               credentials
             end
           else
@@ -335,36 +343,32 @@ module Aws
 
       if (creds = credentials(profile: profile))
         creds.metrics_source = :profile
-        [creds, creds, :static] # static credentials
+        creds # static credentials
       elsif profile_config && profile_config['source_profile']
         opts.delete(:source_profile)
-        creds = assume_role_credentials_from_config(opts.merge(profile: profile))
-        [creds, creds, creds.metrics_source]
+        assume_role_credentials_from_config(opts.merge(profile: profile))
       elsif (provider = assume_role_web_identity_credentials_from_config(opts.merge(profile: profile)))
         provider.credentials.metrics_source = :assume_role_resolution
-        [provider.credentials, provider, :web_ID] if provider.credentials.set?
+        provider if provider.credentials.set?
       elsif (provider = assume_role_process_credentials_from_config(profile))
         provider.credentials.metrics_source = :assume_role_resolution
-        [provider.credentials, provider, :process] if provider.credentials.set?
+        provider if provider.credentials.set?
       elsif (provider = sso_credentials_from_config(profile: profile))
         provider.credentials.metrics_source = :assume_role_resolution
-        [provider.credentials, provider, provider.metrics_source]
+        provider if provider.credentials.set?
       end
     end
 
     def credentials_from_source(credential_source, config)
       case credential_source
       when 'Ec2InstanceMetadata'
-        [
-          InstanceProfileCredentials.new(
+        InstanceProfileCredentials.new(
           retries: config ? config.instance_profile_credentials_retries : 0,
           http_open_timeout: config ? config.instance_profile_credentials_timeout : 1,
           http_read_timeout: config ? config.instance_profile_credentials_timeout : 1,
-        ),
-         :instance
-        ]
+        )
       when 'EcsContainer'
-        [ECSCredentials.new, :ecs]
+        ECSCredentials.new
       else
         raise Errors::InvalidCredentialSourceError, "Unsupported credential_source: #{credential_source}"
       end
