@@ -8,13 +8,13 @@ module Aws
     # @param [String] session_token (nil)
     # @param [Hash] kwargs
     # @option kwargs [String] :credential_scope (nil)
-    def initialize(access_key_id, secret_access_key, session_token = nil,
+    def initialize(access_key_id, secret_access_key, session_token = nil, metrics_source = nil,
                    **kwargs)
       @access_key_id = access_key_id
       @secret_access_key = secret_access_key
       @session_token = session_token
       @account_id = kwargs[:account_id]
-      @metrics_source = :code
+      @metrics_source = metrics_source || :code
     end
 
     # @return [String]

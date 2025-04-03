@@ -139,9 +139,7 @@ module Aws
           }
           cfg[:region] = opts[:region] if opts[:region]
           with_metrics('CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN') do
-            credentials = AssumeRoleWebIdentityCredentials.new(cfg)
-            credentials.metrics_source = :profile
-            credentials
+            AssumeRoleWebIdentityCredentials.new(cfg, :profile)
           end
         end
       end
@@ -279,19 +277,18 @@ module Aws
               metrics.unshift('CREDENTIALS_PROFILE_SOURCE_PROFILE')
             end
             opts[:credentials].resolving = true
+            metrics_source = case provider
+                             when Credentials
+                               :static
+                             when AssumeRoleWebIdentityCredentials
+                               :web_ID
+                             when ProcessCredentials
+                               :process
+                             else
+                               provider.metrics_source
+                             end
             with_metrics(metrics) do
-              credentials = AssumeRoleCredentials.new(opts)
-              credentials.metrics_source = case provider
-                                           when Credentials
-                                             :static
-                                           when AssumeRoleWebIdentityCredentials
-                                             :web_ID
-                                           when ProcessCredentials
-                                             :process
-                                           else
-                                             provider.metrics_source
-                                           end
-              credentials
+              AssumeRoleCredentials.new(opts, metrics_source)
             end
           else
             raise Errors::NoSourceProfileError,
@@ -312,15 +309,14 @@ module Aws
             metrics = opts[:credentials].metrics
             metrics.unshift('CREDENTIALS_PROFILE_NAMED_PROVIDER')
             opts[:credentials].resolving = true
+            metrics_source = case opts[:credentials]
+                             when InstanceProfileCredentials
+                               :instance
+                             when ECSCredentials
+                               :ecs
+                             end
             with_metrics(metrics) do
-              credentials = AssumeRoleCredentials.new(opts)
-              credentials.metrics_source = case opts[:credentials]
-                                           when InstanceProfileCredentials
-                                             :instance
-                                           when ECSCredentials
-                                             :ecs
-                                           end
-              credentials
+              AssumeRoleCredentials.new(opts, metrics_source)
             end
           else
             raise Errors::NoSourceCredentials,
@@ -345,7 +341,6 @@ module Aws
       end
 
       if (creds = credentials(profile: profile))
-        creds.metrics_source = :profile
         creds # static credentials
       elsif profile_config && profile_config['source_profile']
         opts.delete(:source_profile)
@@ -384,11 +379,7 @@ module Aws
       if @parsed_config
         credential_process ||= @parsed_config.fetch(profile, {})['credential_process']
       end
-      if credential_process
-        credentials = ProcessCredentials.new([credential_process])
-        credentials.metrics_source = :profile
-        credentials
-      end
+      ProcessCredentials.new([credential_process], :profile) if credential_process
     end
 
     def credentials_from_shared(profile, _opts)
@@ -434,15 +425,14 @@ module Aws
 
         metric = prof_config['sso_session'] ? 'CREDENTIALS_PROFILE_SSO' : 'CREDENTIALS_PROFILE_SSO_LEGACY'
         with_metrics(metric) do
-          credentials = SSOCredentials.new(
+          SSOCredentials.new(
             sso_account_id: prof_config['sso_account_id'],
             sso_role_name: prof_config['sso_role_name'],
             sso_session: prof_config['sso_session'],
             sso_region: sso_region,
             sso_start_url: sso_start_url,
+            metrics_source: prof_config['sso_session'] ? :new : :legacy
           )
-          credentials.metrics_source = prof_config['sso_session'] ? :new : :legacy
-          credentials
         end
       end
     end
@@ -469,6 +459,7 @@ module Aws
         prof_config['aws_access_key_id'],
         prof_config['aws_secret_access_key'],
         prof_config['aws_session_token'],
+        :profile,
         account_id: prof_config['aws_account_id']
       )
       creds if creds.set?

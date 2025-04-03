@@ -28,7 +28,7 @@ module Aws
     # @param [Array<String>, String] process An array of strings including
     #  the process name and its arguments to execute, or a single string to be
     #  executed by the shell (deprecated and insecure).
-    def initialize(process)
+    def initialize(process, metrics_source = nil)
       if process.is_a?(String)
         warn('Passing a single string to Aws::ProcessCredentials.new '\
              'is insecure, please use use an array of system arguments instead')
@@ -36,7 +36,7 @@ module Aws
       @process = process
       @credentials = credentials_from_process
       @async_refresh = false
-      @metrics_source = :code
+      @metrics_source = metrics_source || :code
 
       super
     end

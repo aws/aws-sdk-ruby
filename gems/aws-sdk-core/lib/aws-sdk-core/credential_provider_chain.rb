@@ -42,14 +42,13 @@ module Aws
 
     def static_credentials(options)
       if options[:config]
-        credentials = Credentials.new(
+        Credentials.new(
           options[:config].access_key_id,
           options[:config].secret_access_key,
           options[:config].session_token,
+          :profile,
           account_id: options[:config].account_id
         )
-        credentials.metrics_source = :profile
-        credentials
       end
     end
 
@@ -87,11 +86,7 @@ module Aws
     def static_profile_process_credentials(options)
       if Aws.shared_config.config_enabled? && options[:config] && options[:config].profile
         process_provider = Aws.shared_config.credential_process(profile: options[:config].profile)
-        if process_provider
-          credentials = ProcessCredentials.new([process_provider])
-          credentials.metrics_source = :profile
-          credentials
-        end
+        ProcessCredentials.new([process_provider], :profile) if process_provider
       end
     rescue Errors::NoSuchProfileError
       nil
@@ -103,14 +98,13 @@ module Aws
       secret = %w[AWS_SECRET_ACCESS_KEY AMAZON_SECRET_ACCESS_KEY AWS_SECRET_KEY]
       token =  %w[AWS_SESSION_TOKEN AMAZON_SESSION_TOKEN]
       account_id = %w[AWS_ACCOUNT_ID]
-      credentials = Credentials.new(
+      Credentials.new(
         envar(key),
         envar(secret),
         envar(token),
+        :env,
         account_id: envar(account_id)
       )
-      credentials.metrics_source = :env
-      credentials
     end
 
     def envar(keys)
@@ -135,11 +129,7 @@ module Aws
       profile_name = determine_profile_name(options)
       if Aws.shared_config.config_enabled?
         process_provider = Aws.shared_config.credential_process(profile: profile_name)
-        if process_provider
-          credentials = ProcessCredentials.new([process_provider])
-          credentials.metrics_source = :profile
-          credentials
-        end
+        ProcessCredentials.new([process_provider], :profile) if process_provider
       end
     rescue Errors::NoSuchProfileError
       nil
@@ -170,9 +160,7 @@ module Aws
         }
         cfg[:region] = region if region
         Aws::Plugins::UserAgent.metric('CREDENTIALS_ENV_VARS_STS_WEB_ID_TOKEN') do
-          credentials = AssumeRoleWebIdentityCredentials.new(cfg)
-          credentials.metrics_source = :env
-          credentials
+          AssumeRoleWebIdentityCredentials.new(cfg, :env)
         end
       elsif Aws.shared_config.config_enabled?
         profile = options[:config].profile if options[:config]

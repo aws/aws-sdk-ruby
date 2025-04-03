@@ -66,7 +66,7 @@ module Aws
     #   credentials are refreshed. `before_refresh` is called
     #   with an instance of this object when
     #   AWS credentials are required and need to be refreshed.
-    def initialize(options = {})
+    def initialize(options = {}, metrics_source = nil)
       options = options.select {|k, v| !v.nil? }
       if (options[:sso_session])
         missing_keys = TOKEN_PROVIDER_REQUIRED_OPTS.select { |k| options[k].nil? }
@@ -114,7 +114,7 @@ module Aws
       end
 
       @async_refresh = true
-      @metrics_source = :code
+      @metrics_source = metrics_source || :code
       super
     end
 
