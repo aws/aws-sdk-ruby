@@ -1190,7 +1190,7 @@ module Aws
     end
 
     def metrics_from_user_agent_header(header)
-      header[(header.index('m/')+2)..]
+      header[(header.index('m/') + 2)..-1]
     end
   end
 end

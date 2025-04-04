@@ -209,7 +209,7 @@ module Aws
           resp = client.operation
           req = resp.context.http_request
           header = req.headers['User-Agent']
-          metrics = header[(header.index('m/')+2)..]
+          metrics = header[(header.index('m/') + 2)..-1]
           expect(metrics).to include('e')
         end
       end
