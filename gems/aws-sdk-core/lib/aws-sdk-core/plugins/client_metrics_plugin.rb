@@ -180,7 +180,7 @@ all generated client side metrics. Defaults to an empty string.
             complete_opts = {
               latency: end_time - start_time,
               attempt_count: context.retries + 1,
-              user_agent: context.http_request.headers["user-agent"],
+              # user_agent: context.http_request.headers["user-agent"],
               final_error_retryable: final_error_retryable,
               final_http_status_code: context.http_response.status_code,
               final_aws_exception: final_aws_exception,
