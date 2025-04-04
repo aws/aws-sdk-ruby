@@ -273,7 +273,6 @@ module Aws
               opts[:credentials] = provider
               metrics.pop
             else
-              opts[:credentials] = provider.credentials
               metrics.unshift('CREDENTIALS_PROFILE_SOURCE_PROFILE')
             end
             opts[:credentials].resolving = true
@@ -364,7 +363,7 @@ module Aws
         InstanceProfileCredentials.new(
           retries: config ? config.instance_profile_credentials_retries : 0,
           http_open_timeout: config ? config.instance_profile_credentials_timeout : 1,
-          http_read_timeout: config ? config.instance_profile_credentials_timeout : 1,
+          http_read_timeout: config ? config.instance_profile_credentials_timeout : 1
         )
       when 'EcsContainer'
         ECSCredentials.new
