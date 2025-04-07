@@ -43,7 +43,7 @@ module Aws
     #   credentials are refreshed. `before_refresh` is called
     #   with an instance of this object when
     #   AWS credentials are required and need to be refreshed.
-    def initialize(options = {}, metrics_source = nil)
+    def initialize(options = {})
       client_opts = {}
       @assume_role_web_identity_params = {}
       @token_file = options.delete(:web_identity_token_file)
@@ -61,16 +61,12 @@ module Aws
         @assume_role_web_identity_params[:role_session_name] = _session_name
       end
       @client = client_opts[:client] || STS::Client.new(client_opts.merge(credentials: nil))
-      @metrics_source = metrics_source || :code
+      @metrics_source = :code
       super
     end
 
     # @return [STS::Client]
     attr_reader :client
-
-    # @return [String] Returns the credentials source. Used for
-    #   tracking credentials related UserAgent metrics.
-    attr_accessor :metrics_source
 
     def metrics
       base = ['CREDENTIALS_STS_ASSUME_ROLE_WEB_ID']

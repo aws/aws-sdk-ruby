@@ -9,6 +9,11 @@ module Aws
     # @return [Time]
     attr_reader :expiration
 
+    # @api private
+    # @return [String] Returns the credentials source. Used for
+    #   tracking credentials related UserAgent metrics.
+    attr_accessor :metrics_source
+
     # @return [Boolean]
     def set?
       !!@credentials && @credentials.set?

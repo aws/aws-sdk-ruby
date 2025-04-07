@@ -191,8 +191,8 @@ module Aws
           sso_account_id: 'SSO_ACCOUNT_ID',
           sso_role_name: 'SSO_ROLE_NAME',
           sso_session: 'sso-test-session',
-          metrics_source: :new
         ).and_return(creds)
+        expect(creds).to receive(:metrics_source=).with(:new)
         client = ApiHelper.sample_rest_xml::Client.new(
           profile: 'sso_creds',
           token_provider: nil
@@ -211,8 +211,8 @@ module Aws
           sso_account_id: 'SSO_ACCOUNT_ID',
           sso_role_name: 'SSO_ROLE_NAME',
           sso_session: nil,
-          metrics_source: :legacy
         ).and_return(creds)
+        expect(creds).to receive(:metrics_source=).with(:legacy)
         client = ApiHelper.sample_rest_xml::Client.new(
           profile: 'sso_creds_legacy'
         )
@@ -230,8 +230,8 @@ module Aws
           sso_account_id: 'SSO_ACCOUNT_ID',
           sso_role_name: 'SSO_ROLE_NAME',
           sso_session: 'sso-test-session',
-          metrics_source: :new
         ).and_return(creds)
+        expect(creds).to receive(:metrics_source=).with(:new)
         client = ApiHelper.sample_rest_xml::Client.new(
           profile: 'sso_creds_mixed_legacy',
           token_provider: nil,
@@ -250,8 +250,8 @@ module Aws
           sso_account_id: 'SSO_ACCOUNT_ID',
           sso_role_name: 'SSO_ROLE_NAME',
           sso_session: 'sso test session',
-          metrics_source: :new
         ).and_return(creds)
+        expect(creds).to receive(:metrics_source=).with(:new)
         client = ApiHelper.sample_rest_xml::Client.new(
           profile: 'sso_creds_session_with_quotes',
           token_provider: nil
@@ -549,8 +549,8 @@ module Aws
             sso_account_id: 'SSO_ACCOUNT_ID',
             sso_role_name: 'SSO_ROLE_NAME',
             sso_session: 'sso-test-session',
-            metrics_source: :new
           ).and_return(creds)
+          expect(creds).to receive(:metrics_source=).with(:new)
           expect(creds).to receive(:metrics_source).and_return(:new)
 
           allow(SSOTokenProvider).to receive(:new)
@@ -582,8 +582,8 @@ module Aws
             sso_account_id: 'SSO_ACCOUNT_ID',
             sso_role_name: 'SSO_ROLE_NAME',
             sso_session: 'sso-test-session',
-            metrics_source: :new
           ).and_return(creds)
+          expect(creds).to receive(:metrics_source=).with(:new)
           expect(creds).to receive(:metrics_source).and_return(:new)
 
           allow(SSOTokenProvider).to receive(:new)
@@ -616,8 +616,8 @@ module Aws
             sso_account_id: 'SSO_ACCOUNT_ID',
             sso_role_name: 'SSO_ROLE_NAME',
             sso_session: nil,
-            metrics_source: :legacy
           ).and_return(creds)
+          expect(creds).to receive(:metrics_source=).with(:legacy)
           expect(creds).to receive(:metrics_source).and_return(:legacy)
 
           allow(SSOTokenProvider).to receive(:new)
@@ -649,8 +649,8 @@ module Aws
             sso_account_id: 'SSO_ACCOUNT_ID',
             sso_role_name: 'SSO_ROLE_NAME',
             sso_session: nil,
-            metrics_source: :legacy
           ).and_return(creds)
+          expect(creds).to receive(:metrics_source=).with(:legacy)
           expect(creds).to receive(:metrics_source).and_return(:legacy)
 
           allow(SSOTokenProvider).to receive(:new)

@@ -8,13 +8,13 @@ module Aws
     # @param [String] session_token (nil)
     # @param [Hash] kwargs
     # @option kwargs [String] :credential_scope (nil)
-    def initialize(access_key_id, secret_access_key, session_token = nil, metrics_source = nil,
+    def initialize(access_key_id, secret_access_key, session_token = nil,
                    **kwargs)
       @access_key_id = access_key_id
       @secret_access_key = secret_access_key
       @session_token = session_token
       @account_id = kwargs[:account_id]
-      @metrics_source = metrics_source || :code
+      @metrics_source = :code
     end
 
     # @return [String]
@@ -29,10 +29,12 @@ module Aws
     # @return [String, nil]
     attr_reader :account_id
 
+    # @api private
     # @return [String] Returns the credentials source. Used for
     #   tracking credentials related UserAgent metrics.
     attr_accessor :metrics_source
 
+    # @api private
     # @return [Boolean] Returns `true` if instance is created
     #   during source profile resolution for AssumeRoleCredentials.
     #   Used for tracking credentials related UserAgent metrics.

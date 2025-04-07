@@ -20,7 +20,7 @@ module Aws
 
     CLIENT_EXCLUDE_OPTIONS = Set.new([:before_refresh]).freeze
 
-    def initialize(options = {}, metrics_source = nil)
+    def initialize(options = {})
       @mutex = Mutex.new
       @before_refresh = options.delete(:before_refresh) if Hash === options
 

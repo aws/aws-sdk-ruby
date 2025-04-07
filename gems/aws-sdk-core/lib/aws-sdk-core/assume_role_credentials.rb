@@ -38,7 +38,7 @@ module Aws
     #        assume_role_credentials.assume_role_params['token_code'] = update_token
     #      end
     #
-    def initialize(options = {}, metrics_source = nil)
+    def initialize(options = {})
       client_opts = {}
       @assume_role_params = {}
       options.each_pair do |key, value|
@@ -50,7 +50,7 @@ module Aws
       end
       @client = client_opts[:client] || STS::Client.new(client_opts)
       @async_refresh = true
-      @metrics_source = metrics_source || :code
+      @metrics_source = :code
       super
     end
 
@@ -59,10 +59,6 @@ module Aws
 
     # @return [Hash]
     attr_reader :assume_role_params
-
-    # @return [String] Returns the credentials source. Used for
-    #   tracking credentials related UserAgent metrics.
-    attr_accessor :metrics_source
 
     # @return [Boolean] Returns `true` if instance is created
     #   during source profile resolution for AssumeRoleCredentials.
