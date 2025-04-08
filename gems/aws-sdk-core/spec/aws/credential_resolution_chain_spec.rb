@@ -202,6 +202,20 @@ module Aws
         ).to eq('SSO_AKID')
       end
 
+      it 'emits correct UserAgent metrics during SSO call for SSO' do
+        sso_stub
+        expect_any_instance_of(SSO::Client).to receive(:get_role_credentials).and_wrap_original do |m, *args|
+          resp = m.call(*args)
+          metrics = metrics_from_user_agent_header(resp.context.http_request.headers['User-Agent'])
+          expect(metrics).to include('r')
+          resp
+        end
+        client = ApiHelper.sample_rest_xml::Client.new(
+          profile: 'sso_creds',
+          token_provider: nil
+        )
+      end
+
       it 'loads SSO credentials from a legacy profile' do
         creds = double('creds', set?: true, credentials: double(access_key_id: 'SSO_AKID'))
         allow(creds).to receive(:metrics).and_return(%w[CREDENTIALS_PROFILE_SSO_LEGACY CREDENTIALS_SSO_LEGACY])
@@ -219,6 +233,19 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('SSO_AKID')
+      end
+
+      it 'emits correct UserAgent metrics during SSO call for legacy SSO' do
+        legacy_sso_stub
+        expect_any_instance_of(SSO::Client).to receive(:get_role_credentials).and_wrap_original do |m, *args|
+          resp = m.call(*args)
+          metrics = metrics_from_user_agent_header(resp.context.http_request.headers['User-Agent'])
+          expect(metrics).to include('t')
+          resp
+        end
+        client = ApiHelper.sample_rest_xml::Client.new(
+          profile: 'sso_creds_legacy'
+        )
       end
 
       it 'loads SSO credentials from a mixed legacy profile when values match' do
@@ -396,7 +423,7 @@ module Aws
               "Token" : "session-token-md",
               "Expiration" : "#{(Time.now.utc + 3600).strftime('%Y-%m-%dT%H:%M:%SZ')}"
             }
-         JSON
+          JSON
         client = ApiHelper.sample_rest_xml::Client.new(
           profile: 'nonexistant', region: 'us-east-1'
         )
@@ -1120,7 +1147,7 @@ module Aws
               "Token" : "session-token-md",
               "Expiration" : "#{(Time.now.utc + 3600).strftime('%Y-%m-%dT%H:%M:%SZ')}"
             }
-         JSON
+          JSON
         client = ApiHelper.sample_rest_xml::Client.new(
           profile: 'nonexistant', region: 'us-east-1'
         )
@@ -1181,6 +1208,45 @@ module Aws
             </ResponseMetadata>
           </AssumeRoleWithWebIdentityResponse>
         RESP
+    end
+
+    def sso_stub
+      token = double('token')
+      allow(token).to receive(:token).and_return('token')
+      token_provider = double('token_provider', token: token)
+      allow(Aws::SSOTokenProvider).to receive(:new).and_return(token_provider)
+      allow(token_provider).to receive(:set?).and_return(true)
+      stub_request(:get, 'https://portal.sso.us-east-1.amazonaws.com/federation/credentials?account_id=SSO_ACCOUNT_ID&role_name=SSO_ROLE_NAME')
+        .to_return(body: <<-RESP)
+          {
+            "roleCredentials": {
+              "accessKeyId": "SSO_AKID",
+              "secretAccessKey": "secret_key",
+              "sessionToken": "token",
+              "expiration": #{(Time.now + 3600).to_i}
+            }
+          }
+        RESP
+    end
+
+    def mock_sso_cached_token
+      cached_token = {
+        'accessToken' => 'legacy_token',
+        'expiresAt' => Time.now + 3600
+      }
+      start_url_sha1 = OpenSSL::Digest::SHA1.hexdigest('START_URL'.encode('utf-8'))
+      allow(Dir).to receive(:home).and_return('HOME')
+      path = File.join(Dir.home, '.aws', 'sso', 'cache', "#{start_url_sha1}.json")
+
+      allow(File).to receive(:read).and_call_original
+      allow(File).to receive(:read).with(path).and_return(
+        JSON.dump(cached_token)
+      )
+    end
+
+    def legacy_sso_stub
+      mock_sso_cached_token
+      sso_stub
     end
 
     def stub_token_file(token)

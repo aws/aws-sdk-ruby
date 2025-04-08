@@ -470,7 +470,7 @@ module Aws
         account_id: prof_config['aws_account_id']
       )
       creds.metrics_source = :profile
-        creds if creds.set?
+      creds if creds.set?
     end
 
     def load_credentials_file
