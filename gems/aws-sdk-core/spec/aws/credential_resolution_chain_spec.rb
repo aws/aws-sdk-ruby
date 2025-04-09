@@ -1279,11 +1279,9 @@ module Aws
     end
 
     def sso_stub
-      token = double('token')
-      allow(token).to receive(:token).and_return('token')
-      token_provider = double('token_provider', token: token)
+      token = double('token', token: 'token')
+      token_provider = double('token_provider', token: token, set?: true)
       allow(Aws::SSOTokenProvider).to receive(:new).and_return(token_provider)
-      allow(token_provider).to receive(:set?).and_return(true)
       stub_request(:get, 'https://portal.sso.us-east-1.amazonaws.com/federation/credentials?account_id=SSO_ACCOUNT_ID&role_name=SSO_ROLE_NAME')
         .to_return(body: <<-RESP)
           {
