@@ -203,14 +203,11 @@ module Aws
           end
         end
 
-        it 'Adds metrics from the credential providers' do
+        it 'retrieves the credential provider metrics' do
           creds = Aws::Credentials.new('akid', 'secret')
           client = TestClient.new(client_options.merge(credentials: creds))
-          resp = client.operation
-          req = resp.context.http_request
-          header = req.headers['User-Agent']
-          metrics = header[(header.index('m/') + 2)..-1]
-          expect(metrics).to include('e')
+          expect(creds).to receive(:metrics)
+          client.operation
         end
       end
 

@@ -40,6 +40,7 @@ module Aws
         )
         @credentials = config.credentials(profile: @profile_name)
       end
+      @metrics = ['CREDENTIALS_CODE']
     end
 
     # @return [String]
@@ -59,10 +60,6 @@ module Aws
         "path=#{path.inspect}",
       ]
       "#<#{parts.join(' ')}>"
-    end
-
-    def metrics
-      ['CREDENTIALS_PROFILE']
     end
 
     # @deprecated This method is no longer used.

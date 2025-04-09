@@ -50,7 +50,7 @@ module Aws
       end
       @client = client_opts[:client] || STS::Client.new(client_opts)
       @async_refresh = true
-      @metrics_source = :code
+      @metrics = ['CREDENTIALS_STS_ASSUME_ROLE']
       super
     end
 
@@ -59,37 +59,6 @@ module Aws
 
     # @return [Hash]
     attr_reader :assume_role_params
-
-    # @return [Boolean] Returns `true` if instance is created
-    #   during source profile resolution for AssumeRoleCredentials.
-    #   Used for tracking credentials related UserAgent metrics.
-    attr_accessor :resolving
-
-    def metrics
-      return [] if @resolving
-
-      source_profile = %w[CREDENTIALS_PROFILE_SOURCE_PROFILE CREDENTIALS_STS_ASSUME_ROLE]
-      credential_source = %w[CREDENTIALS_PROFILE_NAMED_PROVIDER CREDENTIALS_STS_ASSUME_ROLE]
-
-      case @metrics_source
-      when :code
-        ['CREDENTIALS_STS_ASSUME_ROLE']
-      when :static
-        insert_metric(source_profile, 'CREDENTIALS_PROFILE')
-      when :web_ID
-        insert_metric(source_profile, %w[CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN CREDENTIALS_STS_ASSUME_ROLE_WEB_ID])
-      when :process
-        insert_metric(source_profile, %w[CREDENTIALS_PROFILE_PROCESS CREDENTIALS_PROCESS])
-      when :new
-        insert_metric(source_profile, %w[CREDENTIALS_PROFILE_SSO CREDENTIALS_SSO])
-      when :legacy
-        insert_metric(source_profile, %w[CREDENTIALS_PROFILE_SSO_LEGACY CREDENTIALS_SSO_LEGACY])
-      when :instance
-        insert_metric(credential_source, 'CREDENTIALS_IMDS')
-      when :ecs
-        insert_metric(credential_source, 'CREDENTIALS_HTTP')
-      end
-    end
 
     private
 

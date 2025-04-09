@@ -14,7 +14,7 @@ module Aws
       @secret_access_key = secret_access_key
       @session_token = session_token
       @account_id = kwargs[:account_id]
-      @metrics_source = :code
+      @metrics = ['CREDENTIALS_CODE']
     end
 
     # @return [String]
@@ -30,15 +30,9 @@ module Aws
     attr_reader :account_id
 
     # @api private
-    # @return [String] Returns the credentials source. Used for
-    #   tracking credentials related UserAgent metrics.
-    attr_accessor :metrics_source
-
-    # @api private
-    # @return [Boolean] Returns `true` if instance is created
-    #   during source profile resolution for AssumeRoleCredentials.
-    #   Used for tracking credentials related UserAgent metrics.
-    attr_accessor :resolving
+    # Returns the credentials source. Used for tracking credentials
+    # related UserAgent metrics.
+    attr_accessor :metrics
 
     # @return [Credentials]
     def credentials
@@ -58,19 +52,6 @@ module Aws
     # @api private
     def inspect
       "#<#{self.class.name} access_key_id=#{access_key_id.inspect}>"
-    end
-
-    def metrics
-      return [] if @resolving
-
-      case @metrics_source
-      when :code
-        ['CREDENTIALS_CODE']
-      when :profile
-        ['CREDENTIALS_PROFILE']
-      when :env
-        ['CREDENTIALS_ENV_VARS']
-      end
     end
 
   end

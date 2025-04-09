@@ -61,24 +61,12 @@ module Aws
         @assume_role_web_identity_params[:role_session_name] = _session_name
       end
       @client = client_opts[:client] || STS::Client.new(client_opts.merge(credentials: nil))
-      @metrics_source = :code
+      @metrics = ['CREDENTIALS_STS_ASSUME_ROLE_WEB_ID']
       super
     end
 
     # @return [STS::Client]
     attr_reader :client
-
-    def metrics
-      base = ['CREDENTIALS_STS_ASSUME_ROLE_WEB_ID']
-      case @metrics_source
-      when :code
-        base
-      when :profile
-        base.unshift('CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN')
-      when :env
-        base.unshift('CREDENTIALS_ENV_VARS_STS_WEB_ID_TOKEN')
-      end
-    end
 
     private
 

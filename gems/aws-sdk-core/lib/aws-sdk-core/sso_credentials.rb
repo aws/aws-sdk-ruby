@@ -91,6 +91,7 @@ module Aws
           client_opts[:credentials] = nil
           @client = Aws::SSO::Client.new(client_opts)
         end
+        @metrics = ['CREDENTIALS_SSO']
       else # legacy behavior
         missing_keys = LEGACY_REQUIRED_OPTS.select { |k| options[k].nil? }
         unless missing_keys.empty?
@@ -111,31 +112,15 @@ module Aws
         client_opts[:credentials] = nil
 
         @client = options[:client] || Aws::SSO::Client.new(client_opts)
+        @metrics = ['CREDENTIALS_SSO_LEGACY']
       end
 
       @async_refresh = true
-      @metrics_source = :code
       super
     end
 
     # @return [SSO::Client]
     attr_reader :client
-
-    def metrics
-      case @metrics_source
-      when :new
-        %w[CREDENTIALS_PROFILE_SSO CREDENTIALS_SSO]
-      when :legacy
-        %w[CREDENTIALS_PROFILE_SSO_LEGACY CREDENTIALS_SSO_LEGACY]
-        # TODO: Check if Ruby has "source-less" SSO credentials
-      when :code
-        if @legacy
-          ['CREDENTIALS_SSO_LEGACY']
-        else
-          ['CREDENTIALS_SSO']
-        end
-      end
-    end
 
     private
 

@@ -174,7 +174,6 @@ module Aws
           expect(api_call.latency).to be_a_kind_of(Integer)
           expect(api_call.client_id).to eq('')
           expect(api_call.region).to eq('us-stubbed-1')
-          # expect(api_call.user_agent).to match(/^aws-sdk-ruby3/)
           expect(api_call.final_http_status_code).to eq(200)
         end
       end
@@ -194,7 +193,6 @@ module Aws
           expect(attempt.version).to be_a_kind_of(Integer)
           expect(attempt.fqdn).to eq('s3.us-stubbed-1.amazonaws.com')
           expect(attempt.region).to eq('us-stubbed-1')
-          # expect(attempt.user_agent).to match(/^aws-sdk-ruby3/)
           expect(attempt.access_key).to eq('stubbed-akid')
           expect(attempt.http_status_code).to eq(200)
           expect(attempt.request_latency).to be_a_kind_of(Integer)

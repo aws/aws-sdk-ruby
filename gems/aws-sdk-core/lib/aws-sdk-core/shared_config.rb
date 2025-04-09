@@ -140,7 +140,7 @@ module Aws
           cfg[:region] = opts[:region] if opts[:region]
           with_metrics('CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN') do
             creds = AssumeRoleWebIdentityCredentials.new(cfg)
-            creds.metrics_source = :profile
+            creds.metrics << 'CREDENTIALS_PROFILE_STS_WEB_ID_TOKEN'
             creds
           end
         end
@@ -270,26 +270,17 @@ module Aws
             opts[:profile] = opts.delete(:source_profile)
             opts.delete(:visited_profiles)
 
-            metrics = provider.metrics
+            metrics = provider.metrics.dup
             if provider.is_a? AssumeRoleCredentials
               opts[:credentials] = provider
-              metrics.pop
+              metrics.delete('CREDENTIALS_STS_ASSUME_ROLE')
             else
-              metrics.unshift('CREDENTIALS_PROFILE_SOURCE_PROFILE')
+              metrics << 'CREDENTIALS_PROFILE_SOURCE_PROFILE'
             end
-            opts[:credentials].resolving = true
+            opts[:credentials].metrics = []
             with_metrics(metrics) do
               creds = AssumeRoleCredentials.new(opts)
-              creds.metrics_source = case provider
-                                     when Credentials
-                                       :static
-                                     when AssumeRoleWebIdentityCredentials
-                                       :web_ID
-                                     when ProcessCredentials
-                                       :process
-                                     else
-                                       provider.metrics_source
-                                     end
+              creds.metrics.push(*metrics)
               creds
             end
           else
@@ -308,17 +299,12 @@ module Aws
             opts[:serial_number] ||= prof_cfg['mfa_serial']
             opts.delete(:source_profile) # Cleanup
 
-            metrics = opts[:credentials].metrics
-            metrics.unshift('CREDENTIALS_PROFILE_NAMED_PROVIDER')
-            opts[:credentials].resolving = true
+            metrics = Marshal.load(Marshal.dump(opts[:credentials].metrics))
+            metrics << ('CREDENTIALS_PROFILE_NAMED_PROVIDER')
+            opts[:credentials].metrics = []
             with_metrics(metrics) do
               creds = AssumeRoleCredentials.new(opts)
-              creds.metrics_source = case opts[:credentials]
-                                     when InstanceProfileCredentials
-                                       :instance
-                                     when ECSCredentials
-                                       :ecs
-                                     end
+              creds.metrics.push(*metrics)
               creds
             end
           else
@@ -384,7 +370,7 @@ module Aws
       end
       if credential_process
         creds = ProcessCredentials.new([credential_process])
-        creds.metrics_source = :profile
+        creds.metrics << 'CREDENTIALS_PROFILE_PROCESS'
         creds
       end
     end
@@ -437,9 +423,9 @@ module Aws
             sso_role_name: prof_config['sso_role_name'],
             sso_session: prof_config['sso_session'],
             sso_region: sso_region,
-            sso_start_url: sso_start_url,
+            sso_start_url: sso_start_url
           )
-          creds.metrics_source = prof_config['sso_session'] ? :new : :legacy
+          creds.metrics << metric
           creds
         end
       end
@@ -469,7 +455,7 @@ module Aws
         prof_config['aws_session_token'],
         account_id: prof_config['aws_account_id']
       )
-      creds.metrics_source = :profile
+      creds.metrics = ['CREDENTIALS_PROFILE']
       creds if creds.set?
     end
 

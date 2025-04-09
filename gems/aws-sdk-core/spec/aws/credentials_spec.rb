@@ -37,10 +37,6 @@ module Aws
       expect(Credentials.new('akid', 'secret').account_id).to be(nil)
     end
 
-    it 'defaults the source to code' do
-      expect(Credentials.new('akid', 'secret').metrics_source).to eq(:code)
-    end
-
     describe '#set?' do
 
       it 'returns true when the key and secret are both non nil values' do
@@ -63,31 +59,6 @@ module Aws
         expect(Credentials.new('akid', '').set?).to be(false)
       end
 
-    end
-
-    describe '#metrics' do
-
-      it 'returns the correct metrics when the source is none' do
-        expect(Credentials.new('akid', 'secret').metrics).to eq(['CREDENTIALS_CODE'])
-      end
-
-      it 'returns the correct metrics when the source is profile' do
-        creds = Credentials.new('akid', 'secret')
-        creds.metrics_source = :profile
-        expect(creds.metrics).to eq(['CREDENTIALS_PROFILE'])
-      end
-
-      it 'returns the correct metrics when the source is env' do
-        creds = Credentials.new('akid', 'secret')
-        creds.metrics_source = :env
-        expect(creds.metrics).to eq(['CREDENTIALS_ENV_VARS'])
-      end
-
-      it 'returns no metrics when resolving' do
-        creds = Credentials.new('akid', 'secret')
-        creds.resolving = true
-        expect(creds.metrics).to eq([])
-      end
     end
   end
 end

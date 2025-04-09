@@ -87,17 +87,6 @@ module Aws
         expect(c.expiration.to_s).to eq(expiration.to_s)
       end
 
-      it 'will return the correct metrics' do
-        c = ECSCredentials.new(backoff: 0, retries: 0)
-        expect(c.metrics).to eq(['CREDENTIALS_HTTP'])
-      end
-
-      it 'will return no metrics when resolving' do
-        c = ECSCredentials.new(backoff: 0, retries: 0)
-        c.resolving = true
-        expect(c.metrics).to eq([])
-      end
-
       context 'auto refreshing' do
         # expire in 4 minutes
         let(:expiration) { Time.now.utc + 299 }

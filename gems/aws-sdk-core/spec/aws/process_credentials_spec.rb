@@ -46,19 +46,6 @@ module Aws
       }.to raise_error(Errors::InvalidProcessCredentialsPayload)
     end
 
-    it 'will return the correct metrics when source is code' do
-      process = %w[echo {"Version":1,"AccessKeyId":"AK_PROC1","SecretAccessKey":"SECRET_AK_PROC1","SessionToken":"TOKEN_PROC1","AccountId":"ACCOUNT_ID_PROC1"}]
-      c = ProcessCredentials.new(process)
-      expect(c.metrics).to eq(['CREDENTIALS_PROCESS'])
-    end
-
-    it 'will return the correct metrics when source is profile' do
-      process = %w[echo {"Version":1,"AccessKeyId":"AK_PROC1","SecretAccessKey":"SECRET_AK_PROC1","SessionToken":"TOKEN_PROC1","AccountId":"ACCOUNT_ID_PROC1"}]
-      c = ProcessCredentials.new(process)
-      c.metrics_source = :profile
-      expect(c.metrics).to eq(%w[CREDENTIALS_PROFILE_PROCESS CREDENTIALS_PROCESS])
-    end
-
     context 'legacy process string' do
       before do
         expect_any_instance_of(ProcessCredentials)
