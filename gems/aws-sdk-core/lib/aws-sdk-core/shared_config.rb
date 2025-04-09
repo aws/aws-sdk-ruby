@@ -270,7 +270,7 @@ module Aws
             opts[:profile] = opts.delete(:source_profile)
             opts.delete(:visited_profiles)
 
-            metrics = provider.metrics.dup
+            metrics = provider.metrics
             if provider.is_a? AssumeRoleCredentials
               opts[:credentials] = provider
               metrics.delete('CREDENTIALS_STS_ASSUME_ROLE')
@@ -300,8 +300,8 @@ module Aws
             opts[:serial_number] ||= prof_cfg['mfa_serial']
             opts.delete(:source_profile) # Cleanup
 
-            metrics = opts[:credentials].metrics.dup
-            metrics << ('CREDENTIALS_PROFILE_NAMED_PROVIDER')
+            metrics = opts[:credentials].metrics
+            metrics << 'CREDENTIALS_PROFILE_NAMED_PROVIDER'
             opts[:credentials].metrics = []
             with_metrics(metrics) do
               creds = AssumeRoleCredentials.new(opts)
