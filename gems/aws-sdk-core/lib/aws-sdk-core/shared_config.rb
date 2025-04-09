@@ -277,6 +277,7 @@ module Aws
             else
               metrics << 'CREDENTIALS_PROFILE_SOURCE_PROFILE'
             end
+            # Set the original credentials metrics to [] to prevent duplicate metrics during sign plugin
             opts[:credentials].metrics = []
             with_metrics(metrics) do
               creds = AssumeRoleCredentials.new(opts)
@@ -299,7 +300,7 @@ module Aws
             opts[:serial_number] ||= prof_cfg['mfa_serial']
             opts.delete(:source_profile) # Cleanup
 
-            metrics = Marshal.load(Marshal.dump(opts[:credentials].metrics))
+            metrics = opts[:credentials].metrics.dup
             metrics << ('CREDENTIALS_PROFILE_NAMED_PROVIDER')
             opts[:credentials].metrics = []
             with_metrics(metrics) do

@@ -79,10 +79,6 @@ module Aws
       ARNParser.parse(arn).account_id if ARNParser.arn?(arn)
     end
 
-    def insert_metric(base, metrics)
-      base.insert(1, *metrics)
-    end
-
     class << self
 
       # @api private
