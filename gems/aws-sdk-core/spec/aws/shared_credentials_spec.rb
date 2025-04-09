@@ -136,5 +136,6 @@ aws_secret_access_key=commented-secret
       creds = SharedCredentials.new.credentials
       expect(creds).to eq(nil)
     end
+
   end
 end

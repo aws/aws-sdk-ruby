@@ -173,5 +173,6 @@ module Aws
 
       expect(before_refresh_called).to be(true)
     end
+
   end
 end
