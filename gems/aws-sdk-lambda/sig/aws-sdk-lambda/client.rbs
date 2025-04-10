@@ -3,10 +3,13 @@ module Aws::Lambda
     include Smithy::Client::Stubs
 
     def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
       ?adaptive_retry_wait_to_fill: bool,
       ?auth_resolver: Aws::Lambda::AuthResolver,
       ?auth_schemes: Hash[String, Smithy::Client::AuthScheme],
       ?convert_params: bool,
+      ?credentials_provider: identity(properties),
       ?endpoint: String,
       ?endpoint_provider: Aws::Lambda::EndpointProvider,
       ?http_ca_file: String,
@@ -31,6 +34,8 @@ module Aws::Lambda
       ?retry_backoff: lambda,
       ?retry_max_attempts: Integer,
       ?retry_strategy: String | Class,
+      ?secret_access_key: String,
+      ?session_token: String,
       ?stub_responses: bool,
       ?use_dual_stack_endpoint: bool,
       ?use_fips_endpoint: bool,

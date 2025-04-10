@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 
 gem 'rake', require: false
 
+gem 'aws-sigv4'
 gem 'base64'
 gem 'logger'
 

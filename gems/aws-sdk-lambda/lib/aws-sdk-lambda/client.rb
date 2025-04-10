@@ -4,6 +4,7 @@
 
 require_relative 'plugins/auth'
 require_relative 'plugins/endpoint'
+require 'aws-sdk-core/plugins/sigv4'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/logging'
 require 'smithy-client/plugins/net_http'
@@ -29,6 +30,7 @@ module Aws
 
       add_plugin(Aws::Lambda::Plugins::Auth)
       add_plugin(Aws::Lambda::Plugins::Endpoint)
+      add_plugin(Aws::Core::Plugins::SigV4)
       add_plugin(Smithy::Client::Plugins::ContentLength)
       add_plugin(Smithy::Client::Plugins::Logging)
       add_plugin(Smithy::Client::Plugins::NetHTTP)
@@ -44,6 +46,8 @@ module Aws
       add_plugin(Smithy::Client::Plugins::AnonymousAuth)
 
       # @param options [Hash] Client options
+      # @option options [String] :access_key_id
+      # @option options [String] :account_id
       # @option options [Boolean] :adaptive_retry_wait_to_fill (true)
       #  When true, the request will sleep until there is sufficient client side capacity to retry
       #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
@@ -55,6 +59,9 @@ module Aws
       #  and the value is an initialized auth scheme class.
       # @option options [Boolean] :convert_params (true)
       #  When `true`, request parameters are coerced into the required types.
+      # @option options [identity(properties)] :credentials_provider
+      #  The credentials provider used to resolve credentials. Any object that responds to `#identity(properties)`
+      #  and returns a {Aws::Core::Credentials}.
       # @option options [String] :endpoint
       #  Custom Endpoint
       # @option options [Aws::Lambda::EndpointProvider] :endpoint_provider
@@ -145,6 +152,8 @@ module Aws
       #    - `acquire_initial_retry_token(token_scope)`
       #    - `refresh_retry_token(retry_token, error_info)`
       #    - `record_success(retry_token)`
+      # @option options [String] :secret_access_key
+      # @option options [String] :session_token
       # @option options [Boolean] :stub_responses
       #  When true, the client will return stubbed responses instead of networking requests.
       #  By default fake responses are generated and returned. You can specify the response data
@@ -4078,7 +4087,7 @@ module Aws
           params: params,
           config: config
         )
-        context[:gem_name] = 'aws-lambda'
+        context[:gem_name] = 'aws-sdk-lambda'
         context[:gem_version] = '2.0.0.pre0'
         Smithy::Client::Input.new(handlers: handlers, context: context)
       end

@@ -12,6 +12,7 @@ module AwsSdkCodeGenerator
     model = JSON.load_file('apis/lambda/model.json')
     plan_options = {
       module_name: 'Aws::Lambda',
+      gem_name: 'aws-sdk-lambda',
       gem_version: '2.0.0.pre0',
       destination_root: 'gems/aws-sdk-lambda'
     }

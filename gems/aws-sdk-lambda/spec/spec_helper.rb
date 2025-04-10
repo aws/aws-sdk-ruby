@@ -4,5 +4,5 @@
 
 $LOAD_PATH.unshift(File.expand_path('../lib', __dir__))
 
-require 'aws-lambda'
+require 'aws-sdk-lambda'
 require 'rspec'
