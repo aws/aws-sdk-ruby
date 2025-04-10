@@ -1,0 +1,26 @@
+{
+  "version": "1.0",
+  "maven": {
+    "dependencies": [
+      "software.amazon.smithy:smithy-aws-protocol-tests:1.54.0"
+    ]
+  },
+  "projections": {
+    "restJson": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["aws.protocoltests.restjson#RestJson"]
+          }
+        },
+        {
+          "name": "removeUnusedShapes"
+        },
+        {
+          "name": "removeTraitDefinitions"
+        }
+      ]
+    }
+  }
+}
