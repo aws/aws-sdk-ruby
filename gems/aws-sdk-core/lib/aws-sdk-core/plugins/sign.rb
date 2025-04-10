@@ -58,9 +58,7 @@ module Aws
         private
 
         def with_metrics(credentials, &block)
-          unless credentials && credentials.respond_to?(:metrics)
-            return block.call
-          end
+          return block.call unless credentials&.respond_to?(:metrics)
 
           Aws::Plugins::UserAgent.metric(*credentials.metrics, &block)
         end

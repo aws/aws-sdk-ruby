@@ -99,7 +99,6 @@ module Aws
       nil
     end
 
-
     def env_credentials(_options)
       key =    %w[AWS_ACCESS_KEY_ID AMAZON_ACCESS_KEY_ID AWS_ACCESS_KEY]
       secret = %w[AWS_SECRET_ACCESS_KEY AMAZON_SECRET_ACCESS_KEY AWS_SECRET_KEY]

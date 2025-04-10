@@ -231,7 +231,7 @@ module Aws
         sso_stub
         client = ApiHelper.sample_rest_xml::Client.new(
           profile: 'sso_creds_mixed_legacy',
-          token_provider: nil,
+          token_provider: nil
         )
         expect(
           client.config.credentials.credentials.access_key_id
@@ -411,8 +411,7 @@ module Aws
             "Expiration" : "#{(Time.now.utc + 3600).strftime('%Y-%m-%dT%H:%M:%SZ')}"
           }
         JSON
-        stub_const('ENV',
-                   'AWS_CONTAINER_CREDENTIALS_RELATIVE_URI' => path)
+        stub_const('ENV', 'AWS_CONTAINER_CREDENTIALS_RELATIVE_URI' => path)
         stub_request(:get, "http://169.254.170.2#{path}")
           .to_return(status: 200, body: resp)
         client = ApiHelper.sample_rest_xml::Client.new(
@@ -719,7 +718,6 @@ module Aws
           end.to raise_error(Errors::SourceProfileCircularReferenceError)
         end
 
-
         it 'raises if credential_source is present but invalid' do
           expect do
             ApiHelper.sample_rest_xml::Client.new(
@@ -910,8 +908,7 @@ module Aws
             "Expiration" : "#{(Time.now.utc + 3600).strftime('%Y-%m-%dT%H:%M:%SZ')}"
           }
         JSON
-        stub_const('ENV',
-                   'AWS_CONTAINER_CREDENTIALS_RELATIVE_URI' => path)
+        stub_const('ENV', 'AWS_CONTAINER_CREDENTIALS_RELATIVE_URI' => path)
         stub_request(:get, "http://169.254.170.2#{path}")
           .to_return(status: 200, body: resp)
         assume_role_stub(
@@ -943,8 +940,7 @@ module Aws
             "Expiration" : "#{(Time.now.utc + 3600).strftime('%Y-%m-%dT%H:%M:%SZ')}"
           }
         JSON
-        stub_const('ENV',
-                   'AWS_CONTAINER_CREDENTIALS_RELATIVE_URI' => path)
+        stub_const('ENV', 'AWS_CONTAINER_CREDENTIALS_RELATIVE_URI' => path)
         stub_request(:get, "http://169.254.170.2#{path}")
           .to_return(status: 200, body: resp)
         assume_role_stub(
