@@ -259,7 +259,9 @@ module Aws
             'provide only source_profile or credential_source, not both.'
         elsif opts[:source_profile]
           opts[:visited_profiles] ||= Set.new
-          provider = resolve_source_profile(opts[:source_profile], opts)
+          provider = with_metrics('CREDENTIALS_PROFILE_SOURCE_PROFILE') do
+            resolve_source_profile(opts[:source_profile], opts)
+          end
           if provider && (opts[:credentials] = provider.credentials)
             opts[:role_session_name] ||= prof_cfg['role_session_name']
             opts[:role_session_name] ||= 'default_session'
@@ -271,7 +273,7 @@ module Aws
             opts.delete(:visited_profiles)
 
             metrics = provider.metrics
-            if provider.is_a? AssumeRoleCredentials
+            if provider.is_a?(AssumeRoleCredentials)
               opts[:credentials] = provider
               metrics.delete('CREDENTIALS_STS_ASSUME_ROLE')
             else
@@ -335,15 +337,11 @@ module Aws
       elsif profile_config && profile_config['source_profile']
         opts.delete(:source_profile)
         assume_role_credentials_from_config(opts.merge(profile: profile))
-      elsif (provider = with_metrics('CREDENTIALS_PROFILE_SOURCE_PROFILE') do
-               assume_role_web_identity_credentials_from_config(opts.merge(profile: profile))
-             end)
+      elsif (provider = assume_role_web_identity_credentials_from_config(opts.merge(profile: profile)))
         provider if provider.credentials.set?
       elsif (provider = assume_role_process_credentials_from_config(profile))
         provider if provider.credentials.set?
-      elsif (provider = with_metrics('CREDENTIALS_PROFILE_SOURCE_PROFILE') do
-               sso_credentials_from_config(profile: profile)
-             end)
+      elsif (provider = sso_credentials_from_config(profile: profile))
         provider if provider.credentials.set?
       end
     end

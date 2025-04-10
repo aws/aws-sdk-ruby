@@ -222,7 +222,7 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
         end
       end
 
-      # Priority set to 5 in order to add credentials related metrics from Sign plugin
+      # Priority set to 5 in order to add user agent as late as possible after signing
       handler(Handler, step: :sign, priority: 5)
     end
   end
