@@ -1,0 +1,48 @@
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.3
+  SuggestExtensions: false
+
+Gemspec/RequireMFA:
+  Enabled: false
+
+Metrics/AbcSize:
+  Exclude:
+    - '**/spec/**/*.rb'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'Rakefile'
+    - 'tasks/**/*.rake'
+    - '**/spec/**/*.rb'
+
+Metrics/ClassLength:
+  Max: 200
+
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - '**/spec/**/*.rb'
+
+Metrics/MethodLength:
+  Max: 20
+  Exclude:
+    - '**/spec/**/*.rb'
+
+Metrics/ModuleLength:
+  Max: 200
+  Exclude:
+    - '**/spec/**/*.rb'
+
+Naming/FileName:
+  Exclude:
+    - 'tasks/**/*.rake'
+    - '**/spec/**/*.rb'
+    - 'gems/aws-sdk-core/lib/aws-sdk-core.rb'
+
+Style/BlockComments:
+  Exclude:
+    - '**/spec/spec_helper.rb'
+
+Style/Documentation:
+  Exclude:
+    - '**/spec/**/*.rb'

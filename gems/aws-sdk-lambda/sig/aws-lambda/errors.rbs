@@ -1,0 +1,159 @@
+module Aws::Lambda
+  module Errors
+    class CodeSigningConfigNotFoundException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class CodeStorageExceededException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class CodeVerificationFailedException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class EC2AccessDeniedException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class EC2ThrottledException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class EC2UnexpectedException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+      def ec2_error_code: () -> String?
+    end
+    class EFSIOException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class EFSMountConnectivityException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class EFSMountFailureException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class EFSMountTimeoutException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class ENILimitReachedException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class InvalidCodeSignatureException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class InvalidParameterValueException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class InvalidRequestContentException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class InvalidRuntimeException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class InvalidSecurityGroupIDException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class InvalidSubnetIDException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class InvalidZipFileException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class KMSAccessDeniedException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class KMSDisabledException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class KMSInvalidStateException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class KMSNotFoundException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class PolicyLengthExceededException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class PreconditionFailedException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class ProvisionedConcurrencyConfigNotFoundException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class RecursiveInvocationException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class RequestTooLargeException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class ResourceConflictException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class ResourceInUseException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class ResourceNotReadyException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class ServiceException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class SnapStartException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class SnapStartNotReadyException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class SnapStartTimeoutException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class SubnetIPAddressLimitReachedException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class TooManyRequestsException < Smithy::Client::Errors::ServiceError
+      def retry_after_seconds: () -> String?
+      def type: () -> String?
+      def message: () -> String?
+      def reason: () -> String?
+    end
+    class UnsupportedMediaTypeException < Smithy::Client::Errors::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+  end
+end

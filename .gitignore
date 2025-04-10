@@ -1,0 +1,5 @@
+.ruby-version
+.idea/
+.bundle/
+.byebug_history
+Gemfile.lock

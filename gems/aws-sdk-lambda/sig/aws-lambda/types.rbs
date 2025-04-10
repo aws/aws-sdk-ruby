@@ -1,0 +1,3208 @@
+module Aws::Lambda
+  module Types
+
+    class AccountLimit
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?total_code_size: Integer,
+        ?code_size_unzipped: Integer,
+        ?code_size_zipped: Integer,
+        ?concurrent_executions: Integer,
+        ?unreserved_concurrent_executions: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor total_code_size: Integer?
+      attr_accessor code_size_unzipped: Integer?
+      attr_accessor code_size_zipped: Integer?
+      attr_accessor concurrent_executions: Integer?
+      attr_accessor unreserved_concurrent_executions: Integer?
+    end
+
+    class AccountUsage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?total_code_size: Integer,
+        ?function_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor total_code_size: Integer?
+      attr_accessor function_count: Integer?
+    end
+
+    class AddLayerVersionPermissionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?layer_name: String,
+        ?version_number: Integer,
+        ?statement_id: String,
+        ?action: String,
+        ?principal: String,
+        ?organization_id: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor layer_name: String?
+      attr_accessor version_number: Integer?
+      attr_accessor statement_id: String?
+      attr_accessor action: String?
+      attr_accessor principal: String?
+      attr_accessor organization_id: String?
+      attr_accessor revision_id: String?
+    end
+
+    class AddLayerVersionPermissionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?statement: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor statement: String?
+      attr_accessor revision_id: String?
+    end
+
+    class AddPermissionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?statement_id: String,
+        ?action: String,
+        ?principal: String,
+        ?source_arn: String,
+        ?source_account: String,
+        ?event_source_token: String,
+        ?qualifier: String,
+        ?revision_id: String,
+        ?principal_org_id: String,
+        ?function_url_auth_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor statement_id: String?
+      attr_accessor action: String?
+      attr_accessor principal: String?
+      attr_accessor source_arn: String?
+      attr_accessor source_account: String?
+      attr_accessor event_source_token: String?
+      attr_accessor qualifier: String?
+      attr_accessor revision_id: String?
+      attr_accessor principal_org_id: String?
+      attr_accessor function_url_auth_type: String?
+    end
+
+    class AddPermissionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?statement: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor statement: String?
+    end
+
+    class AliasConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias_arn: String,
+        ?name: String,
+        ?function_version: String,
+        ?description: String,
+        ?routing_config: Types::AliasRoutingConfiguration,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias_arn: String?
+      attr_accessor name: String?
+      attr_accessor function_version: String?
+      attr_accessor description: String?
+      attr_accessor routing_config: Types::AliasRoutingConfiguration?
+      attr_accessor revision_id: String?
+    end
+
+    class AliasRoutingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?additional_version_weights: Hash[String, Float],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor additional_version_weights: Hash[String, Float]?
+    end
+
+    class AllowedPublishers
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?signing_profile_version_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor signing_profile_version_arns: Array[String]?
+    end
+
+    class AmazonManagedKafkaEventSourceConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?consumer_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor consumer_group_id: String?
+    end
+
+    class CodeSigningConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_signing_config_id: String,
+        ?code_signing_config_arn: String,
+        ?description: String,
+        ?allowed_publishers: Types::AllowedPublishers,
+        ?code_signing_policies: Types::CodeSigningPolicies,
+        ?last_modified: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_signing_config_id: String?
+      attr_accessor code_signing_config_arn: String?
+      attr_accessor description: String?
+      attr_accessor allowed_publishers: Types::AllowedPublishers?
+      attr_accessor code_signing_policies: Types::CodeSigningPolicies?
+      attr_accessor last_modified: String?
+    end
+
+    class CodeSigningConfigNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class CodeSigningPolicies
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?untrusted_artifact_on_deployment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor untrusted_artifact_on_deployment: String?
+    end
+
+    class CodeStorageExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class CodeVerificationFailedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class Concurrency
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reserved_concurrent_executions: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reserved_concurrent_executions: Integer?
+    end
+
+    class Cors
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allow_credentials: bool,
+        ?allow_headers: Array[String],
+        ?allow_methods: Array[String],
+        ?allow_origins: Array[String],
+        ?expose_headers: Array[String],
+        ?max_age: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allow_credentials: bool?
+      attr_accessor allow_headers: Array[String]?
+      attr_accessor allow_methods: Array[String]?
+      attr_accessor allow_origins: Array[String]?
+      attr_accessor expose_headers: Array[String]?
+      attr_accessor max_age: Integer?
+    end
+
+    class CreateAliasRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?name: String,
+        ?function_version: String,
+        ?description: String,
+        ?routing_config: Types::AliasRoutingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor name: String?
+      attr_accessor function_version: String?
+      attr_accessor description: String?
+      attr_accessor routing_config: Types::AliasRoutingConfiguration?
+    end
+
+    class CreateCodeSigningConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?allowed_publishers: Types::AllowedPublishers,
+        ?code_signing_policies: Types::CodeSigningPolicies,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor allowed_publishers: Types::AllowedPublishers?
+      attr_accessor code_signing_policies: Types::CodeSigningPolicies?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateCodeSigningConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_signing_config: Types::CodeSigningConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_signing_config: Types::CodeSigningConfig?
+    end
+
+    class CreateEventSourceMappingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_source_arn: String,
+        ?function_name: String,
+        ?enabled: bool,
+        ?batch_size: Integer,
+        ?filter_criteria: Types::FilterCriteria,
+        ?maximum_batching_window_in_seconds: Integer,
+        ?parallelization_factor: Integer,
+        ?starting_position: String,
+        ?starting_position_timestamp: Time,
+        ?destination_config: Types::DestinationConfig,
+        ?maximum_record_age_in_seconds: Integer,
+        ?bisect_batch_on_function_error: bool,
+        ?maximum_retry_attempts: Integer,
+        ?tags: Hash[String, String],
+        ?tumbling_window_in_seconds: Integer,
+        ?topics: Array[String],
+        ?queues: Array[String],
+        ?source_access_configurations: Array[Types::SourceAccessConfiguration],
+        ?self_managed_event_source: Types::SelfManagedEventSource,
+        ?function_response_types: Array[String],
+        ?amazon_managed_kafka_event_source_config: Types::AmazonManagedKafkaEventSourceConfig,
+        ?self_managed_kafka_event_source_config: Types::SelfManagedKafkaEventSourceConfig,
+        ?scaling_config: Types::ScalingConfig,
+        ?document_db_event_source_config: Types::DocumentDBEventSourceConfig,
+        ?kms_key_arn: String,
+        ?metrics_config: Types::EventSourceMappingMetricsConfig,
+        ?provisioned_poller_config: Types::ProvisionedPollerConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_source_arn: String?
+      attr_accessor function_name: String?
+      attr_accessor enabled: bool?
+      attr_accessor batch_size: Integer?
+      attr_accessor filter_criteria: Types::FilterCriteria?
+      attr_accessor maximum_batching_window_in_seconds: Integer?
+      attr_accessor parallelization_factor: Integer?
+      attr_accessor starting_position: String?
+      attr_accessor starting_position_timestamp: Time?
+      attr_accessor destination_config: Types::DestinationConfig?
+      attr_accessor maximum_record_age_in_seconds: Integer?
+      attr_accessor bisect_batch_on_function_error: bool?
+      attr_accessor maximum_retry_attempts: Integer?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor tumbling_window_in_seconds: Integer?
+      attr_accessor topics: Array[String]?
+      attr_accessor queues: Array[String]?
+      attr_accessor source_access_configurations: Array[Types::SourceAccessConfiguration]?
+      attr_accessor self_managed_event_source: Types::SelfManagedEventSource?
+      attr_accessor function_response_types: Array[String]?
+      attr_accessor amazon_managed_kafka_event_source_config: Types::AmazonManagedKafkaEventSourceConfig?
+      attr_accessor self_managed_kafka_event_source_config: Types::SelfManagedKafkaEventSourceConfig?
+      attr_accessor scaling_config: Types::ScalingConfig?
+      attr_accessor document_db_event_source_config: Types::DocumentDBEventSourceConfig?
+      attr_accessor kms_key_arn: String?
+      attr_accessor metrics_config: Types::EventSourceMappingMetricsConfig?
+      attr_accessor provisioned_poller_config: Types::ProvisionedPollerConfig?
+    end
+
+    class CreateFunctionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?runtime: String,
+        ?role: String,
+        ?handler: String,
+        ?code: Types::FunctionCode,
+        ?description: String,
+        ?timeout: Integer,
+        ?memory_size: Integer,
+        ?publish: bool,
+        ?vpc_config: Types::VpcConfig,
+        ?package_type: String,
+        ?dead_letter_config: Types::DeadLetterConfig,
+        ?environment: Types::Environment,
+        ?kms_key_arn: String,
+        ?tracing_config: Types::TracingConfig,
+        ?tags: Hash[String, String],
+        ?layers: Array[String],
+        ?file_system_configs: Array[Types::FileSystemConfig],
+        ?image_config: Types::ImageConfig,
+        ?code_signing_config_arn: String,
+        ?architectures: Array[String],
+        ?ephemeral_storage: Types::EphemeralStorage,
+        ?snap_start: Types::SnapStart,
+        ?logging_config: Types::LoggingConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor runtime: String?
+      attr_accessor role: String?
+      attr_accessor handler: String?
+      attr_accessor code: Types::FunctionCode?
+      attr_accessor description: String?
+      attr_accessor timeout: Integer?
+      attr_accessor memory_size: Integer?
+      attr_accessor publish: bool?
+      attr_accessor vpc_config: Types::VpcConfig?
+      attr_accessor package_type: String?
+      attr_accessor dead_letter_config: Types::DeadLetterConfig?
+      attr_accessor environment: Types::Environment?
+      attr_accessor kms_key_arn: String?
+      attr_accessor tracing_config: Types::TracingConfig?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor layers: Array[String]?
+      attr_accessor file_system_configs: Array[Types::FileSystemConfig]?
+      attr_accessor image_config: Types::ImageConfig?
+      attr_accessor code_signing_config_arn: String?
+      attr_accessor architectures: Array[String]?
+      attr_accessor ephemeral_storage: Types::EphemeralStorage?
+      attr_accessor snap_start: Types::SnapStart?
+      attr_accessor logging_config: Types::LoggingConfig?
+    end
+
+    class CreateFunctionUrlConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?qualifier: String,
+        ?auth_type: String,
+        ?cors: Types::Cors,
+        ?invoke_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor qualifier: String?
+      attr_accessor auth_type: String?
+      attr_accessor cors: Types::Cors?
+      attr_accessor invoke_mode: String?
+    end
+
+    class CreateFunctionUrlConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_url: String,
+        ?function_arn: String,
+        ?auth_type: String,
+        ?cors: Types::Cors,
+        ?creation_time: String,
+        ?invoke_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_url: String?
+      attr_accessor function_arn: String?
+      attr_accessor auth_type: String?
+      attr_accessor cors: Types::Cors?
+      attr_accessor creation_time: String?
+      attr_accessor invoke_mode: String?
+    end
+
+    class DeadLetterConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_arn: String?
+    end
+
+    class DeleteAliasRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor name: String?
+    end
+
+    class DeleteCodeSigningConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_signing_config_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_signing_config_arn: String?
+    end
+
+    class DeleteCodeSigningConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteEventSourceMappingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?uuid: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor uuid: String?
+    end
+
+    class DeleteFunctionCodeSigningConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+    end
+
+    class DeleteFunctionConcurrencyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+    end
+
+    class DeleteFunctionEventInvokeConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?qualifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor qualifier: String?
+    end
+
+    class DeleteFunctionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?qualifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor qualifier: String?
+    end
+
+    class DeleteFunctionUrlConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?qualifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor qualifier: String?
+    end
+
+    class DeleteLayerVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?layer_name: String,
+        ?version_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor layer_name: String?
+      attr_accessor version_number: Integer?
+    end
+
+    class DeleteProvisionedConcurrencyConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?qualifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor qualifier: String?
+    end
+
+    class DestinationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?on_success: Types::OnSuccess,
+        ?on_failure: Types::OnFailure,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor on_success: Types::OnSuccess?
+      attr_accessor on_failure: Types::OnFailure?
+    end
+
+    class DocumentDBEventSourceConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?database_name: String,
+        ?collection_name: String,
+        ?full_document: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor database_name: String?
+      attr_accessor collection_name: String?
+      attr_accessor full_document: String?
+    end
+
+    class EC2AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class EC2ThrottledException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class EC2UnexpectedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+        ?ec2_error_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+      attr_accessor ec2_error_code: String?
+    end
+
+    class EFSIOException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class EFSMountConnectivityException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class EFSMountFailureException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class EFSMountTimeoutException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class ENILimitReachedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class Environment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?variables: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor variables: Hash[String, String]?
+    end
+
+    class EnvironmentError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+    end
+
+    class EnvironmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?variables: Hash[String, String],
+        ?error: Types::EnvironmentError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor variables: Hash[String, String]?
+      attr_accessor error: Types::EnvironmentError?
+    end
+
+    class EphemeralStorage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor size: Integer?
+    end
+
+    class EventSourceMappingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?uuid: String,
+        ?starting_position: String,
+        ?starting_position_timestamp: Time,
+        ?batch_size: Integer,
+        ?maximum_batching_window_in_seconds: Integer,
+        ?parallelization_factor: Integer,
+        ?event_source_arn: String,
+        ?filter_criteria: Types::FilterCriteria,
+        ?function_arn: String,
+        ?last_modified: Time,
+        ?last_processing_result: String,
+        ?state: String,
+        ?state_transition_reason: String,
+        ?destination_config: Types::DestinationConfig,
+        ?topics: Array[String],
+        ?queues: Array[String],
+        ?source_access_configurations: Array[Types::SourceAccessConfiguration],
+        ?self_managed_event_source: Types::SelfManagedEventSource,
+        ?maximum_record_age_in_seconds: Integer,
+        ?bisect_batch_on_function_error: bool,
+        ?maximum_retry_attempts: Integer,
+        ?tumbling_window_in_seconds: Integer,
+        ?function_response_types: Array[String],
+        ?amazon_managed_kafka_event_source_config: Types::AmazonManagedKafkaEventSourceConfig,
+        ?self_managed_kafka_event_source_config: Types::SelfManagedKafkaEventSourceConfig,
+        ?scaling_config: Types::ScalingConfig,
+        ?document_db_event_source_config: Types::DocumentDBEventSourceConfig,
+        ?kms_key_arn: String,
+        ?filter_criteria_error: Types::FilterCriteriaError,
+        ?event_source_mapping_arn: String,
+        ?metrics_config: Types::EventSourceMappingMetricsConfig,
+        ?provisioned_poller_config: Types::ProvisionedPollerConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor uuid: String?
+      attr_accessor starting_position: String?
+      attr_accessor starting_position_timestamp: Time?
+      attr_accessor batch_size: Integer?
+      attr_accessor maximum_batching_window_in_seconds: Integer?
+      attr_accessor parallelization_factor: Integer?
+      attr_accessor event_source_arn: String?
+      attr_accessor filter_criteria: Types::FilterCriteria?
+      attr_accessor function_arn: String?
+      attr_accessor last_modified: Time?
+      attr_accessor last_processing_result: String?
+      attr_accessor state: String?
+      attr_accessor state_transition_reason: String?
+      attr_accessor destination_config: Types::DestinationConfig?
+      attr_accessor topics: Array[String]?
+      attr_accessor queues: Array[String]?
+      attr_accessor source_access_configurations: Array[Types::SourceAccessConfiguration]?
+      attr_accessor self_managed_event_source: Types::SelfManagedEventSource?
+      attr_accessor maximum_record_age_in_seconds: Integer?
+      attr_accessor bisect_batch_on_function_error: bool?
+      attr_accessor maximum_retry_attempts: Integer?
+      attr_accessor tumbling_window_in_seconds: Integer?
+      attr_accessor function_response_types: Array[String]?
+      attr_accessor amazon_managed_kafka_event_source_config: Types::AmazonManagedKafkaEventSourceConfig?
+      attr_accessor self_managed_kafka_event_source_config: Types::SelfManagedKafkaEventSourceConfig?
+      attr_accessor scaling_config: Types::ScalingConfig?
+      attr_accessor document_db_event_source_config: Types::DocumentDBEventSourceConfig?
+      attr_accessor kms_key_arn: String?
+      attr_accessor filter_criteria_error: Types::FilterCriteriaError?
+      attr_accessor event_source_mapping_arn: String?
+      attr_accessor metrics_config: Types::EventSourceMappingMetricsConfig?
+      attr_accessor provisioned_poller_config: Types::ProvisionedPollerConfig?
+    end
+
+    class EventSourceMappingMetricsConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metrics: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metrics: Array[String]?
+    end
+
+    class FileSystemConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?local_mount_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor local_mount_path: String?
+    end
+
+    class Filter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pattern: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pattern: String?
+    end
+
+    class FilterCriteria
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::Filter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::Filter]?
+    end
+
+    class FilterCriteriaError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+    end
+
+    class FunctionCode
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?zip_file: String,
+        ?s3_bucket: String,
+        ?s3_key: String,
+        ?s3_object_version: String,
+        ?image_uri: String,
+        ?source_kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor zip_file: String?
+      attr_accessor s3_bucket: String?
+      attr_accessor s3_key: String?
+      attr_accessor s3_object_version: String?
+      attr_accessor image_uri: String?
+      attr_accessor source_kms_key_arn: String?
+    end
+
+    class FunctionCodeLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_type: String,
+        ?location: String,
+        ?image_uri: String,
+        ?resolved_image_uri: String,
+        ?source_kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_type: String?
+      attr_accessor location: String?
+      attr_accessor image_uri: String?
+      attr_accessor resolved_image_uri: String?
+      attr_accessor source_kms_key_arn: String?
+    end
+
+    class FunctionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?function_arn: String,
+        ?runtime: String,
+        ?role: String,
+        ?handler: String,
+        ?code_size: Integer,
+        ?description: String,
+        ?timeout: Integer,
+        ?memory_size: Integer,
+        ?last_modified: String,
+        ?code_sha256: String,
+        ?version: String,
+        ?vpc_config: Types::VpcConfigResponse,
+        ?dead_letter_config: Types::DeadLetterConfig,
+        ?environment: Types::EnvironmentResponse,
+        ?kms_key_arn: String,
+        ?tracing_config: Types::TracingConfigResponse,
+        ?master_arn: String,
+        ?revision_id: String,
+        ?layers: Array[Types::Layer],
+        ?state: String,
+        ?state_reason: String,
+        ?state_reason_code: String,
+        ?last_update_status: String,
+        ?last_update_status_reason: String,
+        ?last_update_status_reason_code: String,
+        ?file_system_configs: Array[Types::FileSystemConfig],
+        ?package_type: String,
+        ?image_config_response: Types::ImageConfigResponse,
+        ?signing_profile_version_arn: String,
+        ?signing_job_arn: String,
+        ?architectures: Array[String],
+        ?ephemeral_storage: Types::EphemeralStorage,
+        ?snap_start: Types::SnapStartResponse,
+        ?runtime_version_config: Types::RuntimeVersionConfig,
+        ?logging_config: Types::LoggingConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor function_arn: String?
+      attr_accessor runtime: String?
+      attr_accessor role: String?
+      attr_accessor handler: String?
+      attr_accessor code_size: Integer?
+      attr_accessor description: String?
+      attr_accessor timeout: Integer?
+      attr_accessor memory_size: Integer?
+      attr_accessor last_modified: String?
+      attr_accessor code_sha256: String?
+      attr_accessor version: String?
+      attr_accessor vpc_config: Types::VpcConfigResponse?
+      attr_accessor dead_letter_config: Types::DeadLetterConfig?
+      attr_accessor environment: Types::EnvironmentResponse?
+      attr_accessor kms_key_arn: String?
+      attr_accessor tracing_config: Types::TracingConfigResponse?
+      attr_accessor master_arn: String?
+      attr_accessor revision_id: String?
+      attr_accessor layers: Array[Types::Layer]?
+      attr_accessor state: String?
+      attr_accessor state_reason: String?
+      attr_accessor state_reason_code: String?
+      attr_accessor last_update_status: String?
+      attr_accessor last_update_status_reason: String?
+      attr_accessor last_update_status_reason_code: String?
+      attr_accessor file_system_configs: Array[Types::FileSystemConfig]?
+      attr_accessor package_type: String?
+      attr_accessor image_config_response: Types::ImageConfigResponse?
+      attr_accessor signing_profile_version_arn: String?
+      attr_accessor signing_job_arn: String?
+      attr_accessor architectures: Array[String]?
+      attr_accessor ephemeral_storage: Types::EphemeralStorage?
+      attr_accessor snap_start: Types::SnapStartResponse?
+      attr_accessor runtime_version_config: Types::RuntimeVersionConfig?
+      attr_accessor logging_config: Types::LoggingConfig?
+    end
+
+    class FunctionEventInvokeConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?last_modified: Time,
+        ?function_arn: String,
+        ?maximum_retry_attempts: Integer,
+        ?maximum_event_age_in_seconds: Integer,
+        ?destination_config: Types::DestinationConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor last_modified: Time?
+      attr_accessor function_arn: String?
+      attr_accessor maximum_retry_attempts: Integer?
+      attr_accessor maximum_event_age_in_seconds: Integer?
+      attr_accessor destination_config: Types::DestinationConfig?
+    end
+
+    class FunctionUrlConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_url: String,
+        ?function_arn: String,
+        ?creation_time: String,
+        ?last_modified_time: String,
+        ?cors: Types::Cors,
+        ?auth_type: String,
+        ?invoke_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_url: String?
+      attr_accessor function_arn: String?
+      attr_accessor creation_time: String?
+      attr_accessor last_modified_time: String?
+      attr_accessor cors: Types::Cors?
+      attr_accessor auth_type: String?
+      attr_accessor invoke_mode: String?
+    end
+
+    class GetAccountSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetAccountSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_limit: Types::AccountLimit,
+        ?account_usage: Types::AccountUsage,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_limit: Types::AccountLimit?
+      attr_accessor account_usage: Types::AccountUsage?
+    end
+
+    class GetAliasRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor name: String?
+    end
+
+    class GetCodeSigningConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_signing_config_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_signing_config_arn: String?
+    end
+
+    class GetCodeSigningConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_signing_config: Types::CodeSigningConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_signing_config: Types::CodeSigningConfig?
+    end
+
+    class GetEventSourceMappingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?uuid: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor uuid: String?
+    end
+
+    class GetFunctionCodeSigningConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+    end
+
+    class GetFunctionCodeSigningConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_signing_config_arn: String,
+        ?function_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_signing_config_arn: String?
+      attr_accessor function_name: String?
+    end
+
+    class GetFunctionConcurrencyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+    end
+
+    class GetFunctionConcurrencyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reserved_concurrent_executions: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reserved_concurrent_executions: Integer?
+    end
+
+    class GetFunctionConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?qualifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor qualifier: String?
+    end
+
+    class GetFunctionEventInvokeConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?qualifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor qualifier: String?
+    end
+
+    class GetFunctionRecursionConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+    end
+
+    class GetFunctionRecursionConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recursive_loop: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recursive_loop: String?
+    end
+
+    class GetFunctionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?qualifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor qualifier: String?
+    end
+
+    class GetFunctionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Types::FunctionConfiguration,
+        ?code: Types::FunctionCodeLocation,
+        ?tags: Hash[String, String],
+        ?tags_error: Types::TagsError,
+        ?concurrency: Types::Concurrency,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Types::FunctionConfiguration?
+      attr_accessor code: Types::FunctionCodeLocation?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor tags_error: Types::TagsError?
+      attr_accessor concurrency: Types::Concurrency?
+    end
+
+    class GetFunctionUrlConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?qualifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor qualifier: String?
+    end
+
+    class GetFunctionUrlConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_url: String,
+        ?function_arn: String,
+        ?auth_type: String,
+        ?cors: Types::Cors,
+        ?creation_time: String,
+        ?last_modified_time: String,
+        ?invoke_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_url: String?
+      attr_accessor function_arn: String?
+      attr_accessor auth_type: String?
+      attr_accessor cors: Types::Cors?
+      attr_accessor creation_time: String?
+      attr_accessor last_modified_time: String?
+      attr_accessor invoke_mode: String?
+    end
+
+    class GetLayerVersionByArnRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetLayerVersionPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?layer_name: String,
+        ?version_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor layer_name: String?
+      attr_accessor version_number: Integer?
+    end
+
+    class GetLayerVersionPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+      attr_accessor revision_id: String?
+    end
+
+    class GetLayerVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?layer_name: String,
+        ?version_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor layer_name: String?
+      attr_accessor version_number: Integer?
+    end
+
+    class GetLayerVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content: Types::LayerVersionContentOutput,
+        ?layer_arn: String,
+        ?layer_version_arn: String,
+        ?description: String,
+        ?created_date: String,
+        ?version: Integer,
+        ?compatible_runtimes: Array[String],
+        ?license_info: String,
+        ?compatible_architectures: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content: Types::LayerVersionContentOutput?
+      attr_accessor layer_arn: String?
+      attr_accessor layer_version_arn: String?
+      attr_accessor description: String?
+      attr_accessor created_date: String?
+      attr_accessor version: Integer?
+      attr_accessor compatible_runtimes: Array[String]?
+      attr_accessor license_info: String?
+      attr_accessor compatible_architectures: Array[String]?
+    end
+
+    class GetPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?qualifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor qualifier: String?
+    end
+
+    class GetPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+      attr_accessor revision_id: String?
+    end
+
+    class GetProvisionedConcurrencyConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?qualifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor qualifier: String?
+    end
+
+    class GetProvisionedConcurrencyConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?requested_provisioned_concurrent_executions: Integer,
+        ?available_provisioned_concurrent_executions: Integer,
+        ?allocated_provisioned_concurrent_executions: Integer,
+        ?status: String,
+        ?status_reason: String,
+        ?last_modified: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor requested_provisioned_concurrent_executions: Integer?
+      attr_accessor available_provisioned_concurrent_executions: Integer?
+      attr_accessor allocated_provisioned_concurrent_executions: Integer?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor last_modified: String?
+    end
+
+    class GetRuntimeManagementConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?qualifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor qualifier: String?
+    end
+
+    class GetRuntimeManagementConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_runtime_on: String,
+        ?runtime_version_arn: String,
+        ?function_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_runtime_on: String?
+      attr_accessor runtime_version_arn: String?
+      attr_accessor function_arn: String?
+    end
+
+    class ImageConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entry_point: Array[String],
+        ?command: Array[String],
+        ?working_directory: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entry_point: Array[String]?
+      attr_accessor command: Array[String]?
+      attr_accessor working_directory: String?
+    end
+
+    class ImageConfigError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+    end
+
+    class ImageConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_config: Types::ImageConfig,
+        ?error: Types::ImageConfigError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_config: Types::ImageConfig?
+      attr_accessor error: Types::ImageConfigError?
+    end
+
+    class InvalidCodeSignatureException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class InvalidParameterValueException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class InvalidRequestContentException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class InvalidRuntimeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class InvalidSecurityGroupIDException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class InvalidSubnetIDException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class InvalidZipFileException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class InvocationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?invocation_type: String,
+        ?log_type: String,
+        ?client_context: String,
+        ?payload: String,
+        ?qualifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor invocation_type: String?
+      attr_accessor log_type: String?
+      attr_accessor client_context: String?
+      attr_accessor payload: String?
+      attr_accessor qualifier: String?
+    end
+
+    class InvocationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_code: Integer,
+        ?function_error: String,
+        ?log_result: String,
+        ?payload: String,
+        ?executed_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_code: Integer?
+      attr_accessor function_error: String?
+      attr_accessor log_result: String?
+      attr_accessor payload: String?
+      attr_accessor executed_version: String?
+    end
+
+    class InvokeAsyncRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?invoke_args: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor invoke_args: String?
+    end
+
+    class InvokeAsyncResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: Integer?
+    end
+
+    class InvokeResponseStreamUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payload: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payload: String?
+    end
+
+    class InvokeWithResponseStreamCompleteEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?error_details: String,
+        ?log_result: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor error_details: String?
+      attr_accessor log_result: String?
+    end
+
+    class InvokeWithResponseStreamRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?invocation_type: String,
+        ?log_type: String,
+        ?client_context: String,
+        ?qualifier: String,
+        ?payload: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor invocation_type: String?
+      attr_accessor log_type: String?
+      attr_accessor client_context: String?
+      attr_accessor qualifier: String?
+      attr_accessor payload: String?
+    end
+
+    class InvokeWithResponseStreamResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_code: Integer,
+        ?executed_version: String,
+        ?event_stream: Types::InvokeWithResponseStreamResponseEvent,
+        ?response_stream_content_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_code: Integer?
+      attr_accessor executed_version: String?
+      attr_accessor event_stream: Types::InvokeWithResponseStreamResponseEvent?
+      attr_accessor response_stream_content_type: String?
+    end
+
+    class InvokeWithResponseStreamResponseEvent < Smithy::Schema::Union
+
+      class PayloadChunk < InvokeWithResponseStreamResponseEvent
+      end
+
+      class InvokeComplete < InvokeWithResponseStreamResponseEvent
+      end
+
+      class Unknown < InvokeWithResponseStreamResponseEvent
+        def initialize: (name: String?, value: untyped?) -> void
+      end
+    end
+
+    class KMSAccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class KMSDisabledException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class KMSInvalidStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class KMSNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class Layer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?code_size: Integer,
+        ?signing_profile_version_arn: String,
+        ?signing_job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor code_size: Integer?
+      attr_accessor signing_profile_version_arn: String?
+      attr_accessor signing_job_arn: String?
+    end
+
+    class LayerVersionContentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_bucket: String,
+        ?s3_key: String,
+        ?s3_object_version: String,
+        ?zip_file: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_bucket: String?
+      attr_accessor s3_key: String?
+      attr_accessor s3_object_version: String?
+      attr_accessor zip_file: String?
+    end
+
+    class LayerVersionContentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location: String,
+        ?code_sha256: String,
+        ?code_size: Integer,
+        ?signing_profile_version_arn: String,
+        ?signing_job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location: String?
+      attr_accessor code_sha256: String?
+      attr_accessor code_size: Integer?
+      attr_accessor signing_profile_version_arn: String?
+      attr_accessor signing_job_arn: String?
+    end
+
+    class LayerVersionsListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?layer_version_arn: String,
+        ?version: Integer,
+        ?description: String,
+        ?created_date: String,
+        ?compatible_runtimes: Array[String],
+        ?license_info: String,
+        ?compatible_architectures: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor layer_version_arn: String?
+      attr_accessor version: Integer?
+      attr_accessor description: String?
+      attr_accessor created_date: String?
+      attr_accessor compatible_runtimes: Array[String]?
+      attr_accessor license_info: String?
+      attr_accessor compatible_architectures: Array[String]?
+    end
+
+    class LayersListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?layer_name: String,
+        ?layer_arn: String,
+        ?latest_matching_version: Types::LayerVersionsListItem,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor layer_name: String?
+      attr_accessor layer_arn: String?
+      attr_accessor latest_matching_version: Types::LayerVersionsListItem?
+    end
+
+    class ListAliasesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?function_version: String,
+        ?marker: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor function_version: String?
+      attr_accessor marker: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListAliasesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_marker: String,
+        ?aliases: Array[Types::AliasConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_marker: String?
+      attr_accessor aliases: Array[Types::AliasConfiguration]?
+    end
+
+    class ListCodeSigningConfigsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListCodeSigningConfigsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_marker: String,
+        ?code_signing_configs: Array[Types::CodeSigningConfig],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_marker: String?
+      attr_accessor code_signing_configs: Array[Types::CodeSigningConfig]?
+    end
+
+    class ListEventSourceMappingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_source_arn: String,
+        ?function_name: String,
+        ?marker: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_source_arn: String?
+      attr_accessor function_name: String?
+      attr_accessor marker: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListEventSourceMappingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_marker: String,
+        ?event_source_mappings: Array[Types::EventSourceMappingConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_marker: String?
+      attr_accessor event_source_mappings: Array[Types::EventSourceMappingConfiguration]?
+    end
+
+    class ListFunctionEventInvokeConfigsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?marker: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor marker: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListFunctionEventInvokeConfigsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_event_invoke_configs: Array[Types::FunctionEventInvokeConfig],
+        ?next_marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_event_invoke_configs: Array[Types::FunctionEventInvokeConfig]?
+      attr_accessor next_marker: String?
+    end
+
+    class ListFunctionUrlConfigsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?marker: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor marker: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListFunctionUrlConfigsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_url_configs: Array[Types::FunctionUrlConfig],
+        ?next_marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_url_configs: Array[Types::FunctionUrlConfig]?
+      attr_accessor next_marker: String?
+    end
+
+    class ListFunctionsByCodeSigningConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_signing_config_arn: String,
+        ?marker: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_signing_config_arn: String?
+      attr_accessor marker: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListFunctionsByCodeSigningConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_marker: String,
+        ?function_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_marker: String?
+      attr_accessor function_arns: Array[String]?
+    end
+
+    class ListFunctionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?master_region: String,
+        ?function_version: String,
+        ?marker: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor master_region: String?
+      attr_accessor function_version: String?
+      attr_accessor marker: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListFunctionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_marker: String,
+        ?functions: Array[Types::FunctionConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_marker: String?
+      attr_accessor functions: Array[Types::FunctionConfiguration]?
+    end
+
+    class ListLayerVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compatible_runtime: String,
+        ?layer_name: String,
+        ?marker: String,
+        ?max_items: Integer,
+        ?compatible_architecture: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compatible_runtime: String?
+      attr_accessor layer_name: String?
+      attr_accessor marker: String?
+      attr_accessor max_items: Integer?
+      attr_accessor compatible_architecture: String?
+    end
+
+    class ListLayerVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_marker: String,
+        ?layer_versions: Array[Types::LayerVersionsListItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_marker: String?
+      attr_accessor layer_versions: Array[Types::LayerVersionsListItem]?
+    end
+
+    class ListLayersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compatible_runtime: String,
+        ?marker: String,
+        ?max_items: Integer,
+        ?compatible_architecture: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compatible_runtime: String?
+      attr_accessor marker: String?
+      attr_accessor max_items: Integer?
+      attr_accessor compatible_architecture: String?
+    end
+
+    class ListLayersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_marker: String,
+        ?layers: Array[Types::LayersListItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_marker: String?
+      attr_accessor layers: Array[Types::LayersListItem]?
+    end
+
+    class ListProvisionedConcurrencyConfigsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?marker: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor marker: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListProvisionedConcurrencyConfigsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provisioned_concurrency_configs: Array[Types::ProvisionedConcurrencyConfigListItem],
+        ?next_marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provisioned_concurrency_configs: Array[Types::ProvisionedConcurrencyConfigListItem]?
+      attr_accessor next_marker: String?
+    end
+
+    class ListTagsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource: String?
+    end
+
+    class ListTagsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListVersionsByFunctionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?marker: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor marker: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListVersionsByFunctionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_marker: String,
+        ?versions: Array[Types::FunctionConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_marker: String?
+      attr_accessor versions: Array[Types::FunctionConfiguration]?
+    end
+
+    class LoggingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_format: String,
+        ?application_log_level: String,
+        ?system_log_level: String,
+        ?log_group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_format: String?
+      attr_accessor application_log_level: String?
+      attr_accessor system_log_level: String?
+      attr_accessor log_group: String?
+    end
+
+    class OnFailure
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination: String?
+    end
+
+    class OnSuccess
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination: String?
+    end
+
+    class PolicyLengthExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class PreconditionFailedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class ProvisionedConcurrencyConfigListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_arn: String,
+        ?requested_provisioned_concurrent_executions: Integer,
+        ?available_provisioned_concurrent_executions: Integer,
+        ?allocated_provisioned_concurrent_executions: Integer,
+        ?status: String,
+        ?status_reason: String,
+        ?last_modified: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_arn: String?
+      attr_accessor requested_provisioned_concurrent_executions: Integer?
+      attr_accessor available_provisioned_concurrent_executions: Integer?
+      attr_accessor allocated_provisioned_concurrent_executions: Integer?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor last_modified: String?
+    end
+
+    class ProvisionedConcurrencyConfigNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class ProvisionedPollerConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?minimum_pollers: Integer,
+        ?maximum_pollers: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor minimum_pollers: Integer?
+      attr_accessor maximum_pollers: Integer?
+    end
+
+    class PublishLayerVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?layer_name: String,
+        ?description: String,
+        ?content: Types::LayerVersionContentInput,
+        ?compatible_runtimes: Array[String],
+        ?license_info: String,
+        ?compatible_architectures: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor layer_name: String?
+      attr_accessor description: String?
+      attr_accessor content: Types::LayerVersionContentInput?
+      attr_accessor compatible_runtimes: Array[String]?
+      attr_accessor license_info: String?
+      attr_accessor compatible_architectures: Array[String]?
+    end
+
+    class PublishLayerVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content: Types::LayerVersionContentOutput,
+        ?layer_arn: String,
+        ?layer_version_arn: String,
+        ?description: String,
+        ?created_date: String,
+        ?version: Integer,
+        ?compatible_runtimes: Array[String],
+        ?license_info: String,
+        ?compatible_architectures: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content: Types::LayerVersionContentOutput?
+      attr_accessor layer_arn: String?
+      attr_accessor layer_version_arn: String?
+      attr_accessor description: String?
+      attr_accessor created_date: String?
+      attr_accessor version: Integer?
+      attr_accessor compatible_runtimes: Array[String]?
+      attr_accessor license_info: String?
+      attr_accessor compatible_architectures: Array[String]?
+    end
+
+    class PublishVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?code_sha256: String,
+        ?description: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor code_sha256: String?
+      attr_accessor description: String?
+      attr_accessor revision_id: String?
+    end
+
+    class PutFunctionCodeSigningConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_signing_config_arn: String,
+        ?function_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_signing_config_arn: String?
+      attr_accessor function_name: String?
+    end
+
+    class PutFunctionCodeSigningConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_signing_config_arn: String,
+        ?function_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_signing_config_arn: String?
+      attr_accessor function_name: String?
+    end
+
+    class PutFunctionConcurrencyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?reserved_concurrent_executions: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor reserved_concurrent_executions: Integer?
+    end
+
+    class PutFunctionEventInvokeConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?qualifier: String,
+        ?maximum_retry_attempts: Integer,
+        ?maximum_event_age_in_seconds: Integer,
+        ?destination_config: Types::DestinationConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor qualifier: String?
+      attr_accessor maximum_retry_attempts: Integer?
+      attr_accessor maximum_event_age_in_seconds: Integer?
+      attr_accessor destination_config: Types::DestinationConfig?
+    end
+
+    class PutFunctionRecursionConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?recursive_loop: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor recursive_loop: String?
+    end
+
+    class PutFunctionRecursionConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recursive_loop: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recursive_loop: String?
+    end
+
+    class PutProvisionedConcurrencyConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?qualifier: String,
+        ?provisioned_concurrent_executions: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor qualifier: String?
+      attr_accessor provisioned_concurrent_executions: Integer?
+    end
+
+    class PutProvisionedConcurrencyConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?requested_provisioned_concurrent_executions: Integer,
+        ?available_provisioned_concurrent_executions: Integer,
+        ?allocated_provisioned_concurrent_executions: Integer,
+        ?status: String,
+        ?status_reason: String,
+        ?last_modified: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor requested_provisioned_concurrent_executions: Integer?
+      attr_accessor available_provisioned_concurrent_executions: Integer?
+      attr_accessor allocated_provisioned_concurrent_executions: Integer?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor last_modified: String?
+    end
+
+    class PutRuntimeManagementConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?qualifier: String,
+        ?update_runtime_on: String,
+        ?runtime_version_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor qualifier: String?
+      attr_accessor update_runtime_on: String?
+      attr_accessor runtime_version_arn: String?
+    end
+
+    class PutRuntimeManagementConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_runtime_on: String,
+        ?function_arn: String,
+        ?runtime_version_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_runtime_on: String?
+      attr_accessor function_arn: String?
+      attr_accessor runtime_version_arn: String?
+    end
+
+    class RecursiveInvocationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class RemoveLayerVersionPermissionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?layer_name: String,
+        ?version_number: Integer,
+        ?statement_id: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor layer_name: String?
+      attr_accessor version_number: Integer?
+      attr_accessor statement_id: String?
+      attr_accessor revision_id: String?
+    end
+
+    class RemovePermissionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?statement_id: String,
+        ?qualifier: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor statement_id: String?
+      attr_accessor qualifier: String?
+      attr_accessor revision_id: String?
+    end
+
+    class RequestTooLargeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class ResourceConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class ResourceInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class ResourceNotReadyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class RuntimeVersionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?runtime_version_arn: String,
+        ?error: Types::RuntimeVersionError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor runtime_version_arn: String?
+      attr_accessor error: Types::RuntimeVersionError?
+    end
+
+    class RuntimeVersionError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+    end
+
+    class ScalingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?maximum_concurrency: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor maximum_concurrency: Integer?
+    end
+
+    class SelfManagedEventSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoints: Hash[String, Array[String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoints: Hash[String, Array[String]]?
+    end
+
+    class SelfManagedKafkaEventSourceConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?consumer_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor consumer_group_id: String?
+    end
+
+    class ServiceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class SnapStart
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?apply_on: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor apply_on: String?
+    end
+
+    class SnapStartException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class SnapStartNotReadyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class SnapStartResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?apply_on: String,
+        ?optimization_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor apply_on: String?
+      attr_accessor optimization_status: String?
+    end
+
+    class SnapStartTimeoutException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class SourceAccessConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor uri: String?
+    end
+
+    class SubnetIPAddressLimitReachedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagsError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+    end
+
+    class TooManyRequestsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retry_after_seconds: String,
+        ?type: String,
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retry_after_seconds: String?
+      attr_accessor type: String?
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    class TracingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
+    end
+
+    class TracingConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
+    end
+
+    class UnsupportedMediaTypeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdateAliasRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?name: String,
+        ?function_version: String,
+        ?description: String,
+        ?routing_config: Types::AliasRoutingConfiguration,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor name: String?
+      attr_accessor function_version: String?
+      attr_accessor description: String?
+      attr_accessor routing_config: Types::AliasRoutingConfiguration?
+      attr_accessor revision_id: String?
+    end
+
+    class UpdateCodeSigningConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_signing_config_arn: String,
+        ?description: String,
+        ?allowed_publishers: Types::AllowedPublishers,
+        ?code_signing_policies: Types::CodeSigningPolicies,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_signing_config_arn: String?
+      attr_accessor description: String?
+      attr_accessor allowed_publishers: Types::AllowedPublishers?
+      attr_accessor code_signing_policies: Types::CodeSigningPolicies?
+    end
+
+    class UpdateCodeSigningConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_signing_config: Types::CodeSigningConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_signing_config: Types::CodeSigningConfig?
+    end
+
+    class UpdateEventSourceMappingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?uuid: String,
+        ?function_name: String,
+        ?enabled: bool,
+        ?batch_size: Integer,
+        ?filter_criteria: Types::FilterCriteria,
+        ?maximum_batching_window_in_seconds: Integer,
+        ?destination_config: Types::DestinationConfig,
+        ?maximum_record_age_in_seconds: Integer,
+        ?bisect_batch_on_function_error: bool,
+        ?maximum_retry_attempts: Integer,
+        ?parallelization_factor: Integer,
+        ?source_access_configurations: Array[Types::SourceAccessConfiguration],
+        ?tumbling_window_in_seconds: Integer,
+        ?function_response_types: Array[String],
+        ?scaling_config: Types::ScalingConfig,
+        ?document_db_event_source_config: Types::DocumentDBEventSourceConfig,
+        ?kms_key_arn: String,
+        ?metrics_config: Types::EventSourceMappingMetricsConfig,
+        ?provisioned_poller_config: Types::ProvisionedPollerConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor uuid: String?
+      attr_accessor function_name: String?
+      attr_accessor enabled: bool?
+      attr_accessor batch_size: Integer?
+      attr_accessor filter_criteria: Types::FilterCriteria?
+      attr_accessor maximum_batching_window_in_seconds: Integer?
+      attr_accessor destination_config: Types::DestinationConfig?
+      attr_accessor maximum_record_age_in_seconds: Integer?
+      attr_accessor bisect_batch_on_function_error: bool?
+      attr_accessor maximum_retry_attempts: Integer?
+      attr_accessor parallelization_factor: Integer?
+      attr_accessor source_access_configurations: Array[Types::SourceAccessConfiguration]?
+      attr_accessor tumbling_window_in_seconds: Integer?
+      attr_accessor function_response_types: Array[String]?
+      attr_accessor scaling_config: Types::ScalingConfig?
+      attr_accessor document_db_event_source_config: Types::DocumentDBEventSourceConfig?
+      attr_accessor kms_key_arn: String?
+      attr_accessor metrics_config: Types::EventSourceMappingMetricsConfig?
+      attr_accessor provisioned_poller_config: Types::ProvisionedPollerConfig?
+    end
+
+    class UpdateFunctionCodeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?zip_file: String,
+        ?s3_bucket: String,
+        ?s3_key: String,
+        ?s3_object_version: String,
+        ?image_uri: String,
+        ?publish: bool,
+        ?dry_run: bool,
+        ?revision_id: String,
+        ?architectures: Array[String],
+        ?source_kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor zip_file: String?
+      attr_accessor s3_bucket: String?
+      attr_accessor s3_key: String?
+      attr_accessor s3_object_version: String?
+      attr_accessor image_uri: String?
+      attr_accessor publish: bool?
+      attr_accessor dry_run: bool?
+      attr_accessor revision_id: String?
+      attr_accessor architectures: Array[String]?
+      attr_accessor source_kms_key_arn: String?
+    end
+
+    class UpdateFunctionConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?role: String,
+        ?handler: String,
+        ?description: String,
+        ?timeout: Integer,
+        ?memory_size: Integer,
+        ?vpc_config: Types::VpcConfig,
+        ?environment: Types::Environment,
+        ?runtime: String,
+        ?dead_letter_config: Types::DeadLetterConfig,
+        ?kms_key_arn: String,
+        ?tracing_config: Types::TracingConfig,
+        ?revision_id: String,
+        ?layers: Array[String],
+        ?file_system_configs: Array[Types::FileSystemConfig],
+        ?image_config: Types::ImageConfig,
+        ?ephemeral_storage: Types::EphemeralStorage,
+        ?snap_start: Types::SnapStart,
+        ?logging_config: Types::LoggingConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor role: String?
+      attr_accessor handler: String?
+      attr_accessor description: String?
+      attr_accessor timeout: Integer?
+      attr_accessor memory_size: Integer?
+      attr_accessor vpc_config: Types::VpcConfig?
+      attr_accessor environment: Types::Environment?
+      attr_accessor runtime: String?
+      attr_accessor dead_letter_config: Types::DeadLetterConfig?
+      attr_accessor kms_key_arn: String?
+      attr_accessor tracing_config: Types::TracingConfig?
+      attr_accessor revision_id: String?
+      attr_accessor layers: Array[String]?
+      attr_accessor file_system_configs: Array[Types::FileSystemConfig]?
+      attr_accessor image_config: Types::ImageConfig?
+      attr_accessor ephemeral_storage: Types::EphemeralStorage?
+      attr_accessor snap_start: Types::SnapStart?
+      attr_accessor logging_config: Types::LoggingConfig?
+    end
+
+    class UpdateFunctionEventInvokeConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?qualifier: String,
+        ?maximum_retry_attempts: Integer,
+        ?maximum_event_age_in_seconds: Integer,
+        ?destination_config: Types::DestinationConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor qualifier: String?
+      attr_accessor maximum_retry_attempts: Integer?
+      attr_accessor maximum_event_age_in_seconds: Integer?
+      attr_accessor destination_config: Types::DestinationConfig?
+    end
+
+    class UpdateFunctionUrlConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?qualifier: String,
+        ?auth_type: String,
+        ?cors: Types::Cors,
+        ?invoke_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor qualifier: String?
+      attr_accessor auth_type: String?
+      attr_accessor cors: Types::Cors?
+      attr_accessor invoke_mode: String?
+    end
+
+    class UpdateFunctionUrlConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_url: String,
+        ?function_arn: String,
+        ?auth_type: String,
+        ?cors: Types::Cors,
+        ?creation_time: String,
+        ?last_modified_time: String,
+        ?invoke_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_url: String?
+      attr_accessor function_arn: String?
+      attr_accessor auth_type: String?
+      attr_accessor cors: Types::Cors?
+      attr_accessor creation_time: String?
+      attr_accessor last_modified_time: String?
+      attr_accessor invoke_mode: String?
+    end
+
+    class VpcConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+        ?ipv6_allowed_for_dual_stack: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor ipv6_allowed_for_dual_stack: bool?
+    end
+
+    class VpcConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+        ?vpc_id: String,
+        ?ipv6_allowed_for_dual_stack: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor vpc_id: String?
+      attr_accessor ipv6_allowed_for_dual_stack: bool?
+    end
+  end
+end

@@ -1,0 +1,1372 @@
+module Aws::Lambda
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: Aws::Lambda::AuthResolver,
+      ?auth_schemes: Hash[String, Smithy::Client::AuthScheme],
+      ?convert_params: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Lambda::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?protocol: String | Class,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AddLayerVersionPermissionResponse
+      include Smithy::Client::_Output[Types::AddLayerVersionPermissionResponse]
+      def statement: () -> String?
+      def revision_id: () -> String?
+    end
+    def add_layer_version_permission: (
+      ?layer_name: String,
+      ?version_number: Integer,
+      ?statement_id: String,
+      ?action: String,
+      ?principal: String,
+      ?organization_id: String,
+      ?revision_id: String
+    ) -> _AddLayerVersionPermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddLayerVersionPermissionResponse
+
+    interface _AddPermissionResponse
+      include Smithy::Client::_Output[Types::AddPermissionResponse]
+      def statement: () -> String?
+    end
+    def add_permission: (
+      ?function_name: String,
+      ?statement_id: String,
+      ?action: String,
+      ?principal: String,
+      ?source_arn: String,
+      ?source_account: String,
+      ?event_source_token: String,
+      ?qualifier: String,
+      ?revision_id: String,
+      ?principal_org_id: String,
+      ?function_url_auth_type: String
+    ) -> _AddPermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddPermissionResponse
+
+    interface _CreateAliasResponse
+      include Smithy::Client::_Output[Types::AliasConfiguration]
+      def alias_arn: () -> String?
+      def name: () -> String?
+      def function_version: () -> String?
+      def description: () -> String?
+      def routing_config: () -> Types::AliasRoutingConfiguration?
+      def revision_id: () -> String?
+    end
+    def create_alias: (
+      ?function_name: String,
+      ?name: String,
+      ?function_version: String,
+      ?description: String,
+      ?routing_config: {
+        additional_version_weights: Hash[String, Float]
+      }
+    ) -> _CreateAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAliasResponse
+
+    interface _CreateCodeSigningConfigResponse
+      include Smithy::Client::_Output[Types::CreateCodeSigningConfigResponse]
+      def code_signing_config: () -> Types::CodeSigningConfig?
+    end
+    def create_code_signing_config: (
+      ?description: String,
+      ?allowed_publishers: {
+        signing_profile_version_arns: Array[String]
+      },
+      ?code_signing_policies: {
+        untrusted_artifact_on_deployment: String
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateCodeSigningConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCodeSigningConfigResponse
+
+    interface _CreateEventSourceMappingResponse
+      include Smithy::Client::_Output[Types::EventSourceMappingConfiguration]
+      def uuid: () -> String?
+      def starting_position: () -> String?
+      def starting_position_timestamp: () -> Time?
+      def batch_size: () -> Integer?
+      def maximum_batching_window_in_seconds: () -> Integer?
+      def parallelization_factor: () -> Integer?
+      def event_source_arn: () -> String?
+      def filter_criteria: () -> Types::FilterCriteria?
+      def function_arn: () -> String?
+      def last_modified: () -> Time?
+      def last_processing_result: () -> String?
+      def state: () -> String?
+      def state_transition_reason: () -> String?
+      def destination_config: () -> Types::DestinationConfig?
+      def topics: () -> Array[String]?
+      def queues: () -> Array[String]?
+      def source_access_configurations: () -> Array[Types::SourceAccessConfiguration]?
+      def self_managed_event_source: () -> Types::SelfManagedEventSource?
+      def maximum_record_age_in_seconds: () -> Integer?
+      def bisect_batch_on_function_error: () -> bool?
+      def maximum_retry_attempts: () -> Integer?
+      def tumbling_window_in_seconds: () -> Integer?
+      def function_response_types: () -> Array[String]?
+      def amazon_managed_kafka_event_source_config: () -> Types::AmazonManagedKafkaEventSourceConfig?
+      def self_managed_kafka_event_source_config: () -> Types::SelfManagedKafkaEventSourceConfig?
+      def scaling_config: () -> Types::ScalingConfig?
+      def document_db_event_source_config: () -> Types::DocumentDBEventSourceConfig?
+      def kms_key_arn: () -> String?
+      def filter_criteria_error: () -> Types::FilterCriteriaError?
+      def event_source_mapping_arn: () -> String?
+      def metrics_config: () -> Types::EventSourceMappingMetricsConfig?
+      def provisioned_poller_config: () -> Types::ProvisionedPollerConfig?
+    end
+    def create_event_source_mapping: (
+      ?event_source_arn: String,
+      ?function_name: String,
+      ?enabled: bool,
+      ?batch_size: Integer,
+      ?filter_criteria: {
+        filters: Array[
+          {
+            pattern: String
+          }
+        ]
+      },
+      ?maximum_batching_window_in_seconds: Integer,
+      ?parallelization_factor: Integer,
+      ?starting_position: String,
+      ?starting_position_timestamp: Time,
+      ?destination_config: {
+        on_success: {
+          destination: String
+        },
+        on_failure: {
+          destination: untyped
+        }
+      },
+      ?maximum_record_age_in_seconds: Integer,
+      ?bisect_batch_on_function_error: bool,
+      ?maximum_retry_attempts: Integer,
+      ?tags: Hash[String, String],
+      ?tumbling_window_in_seconds: Integer,
+      ?topics: Array[String],
+      ?queues: Array[String],
+      ?source_access_configurations: Array[
+        {
+          type: String,
+          uri: String
+        }
+      ],
+      ?self_managed_event_source: {
+        endpoints: Hash[String,
+          Array[String]
+        ]
+      },
+      ?function_response_types: Array[String],
+      ?amazon_managed_kafka_event_source_config: {
+        consumer_group_id: String
+      },
+      ?self_managed_kafka_event_source_config: {
+        consumer_group_id: String
+      },
+      ?scaling_config: {
+        maximum_concurrency: Integer
+      },
+      ?document_db_event_source_config: {
+        database_name: String,
+        collection_name: String,
+        full_document: String
+      },
+      ?kms_key_arn: String,
+      ?metrics_config: {
+        metrics: Array[String]
+      },
+      ?provisioned_poller_config: {
+        minimum_pollers: Integer,
+        maximum_pollers: Integer
+      }
+    ) -> _CreateEventSourceMappingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEventSourceMappingResponse
+
+    interface _CreateFunctionResponse
+      include Smithy::Client::_Output[Types::FunctionConfiguration]
+      def function_name: () -> String?
+      def function_arn: () -> String?
+      def runtime: () -> String?
+      def role: () -> String?
+      def handler: () -> String?
+      def code_size: () -> Integer?
+      def description: () -> String?
+      def timeout: () -> Integer?
+      def memory_size: () -> Integer?
+      def last_modified: () -> String?
+      def code_sha256: () -> String?
+      def version: () -> String?
+      def vpc_config: () -> Types::VpcConfigResponse?
+      def dead_letter_config: () -> Types::DeadLetterConfig?
+      def environment: () -> Types::EnvironmentResponse?
+      def kms_key_arn: () -> String?
+      def tracing_config: () -> Types::TracingConfigResponse?
+      def master_arn: () -> String?
+      def revision_id: () -> String?
+      def layers: () -> Array[Types::Layer]?
+      def state: () -> String?
+      def state_reason: () -> String?
+      def state_reason_code: () -> String?
+      def last_update_status: () -> String?
+      def last_update_status_reason: () -> String?
+      def last_update_status_reason_code: () -> String?
+      def file_system_configs: () -> Array[Types::FileSystemConfig]?
+      def package_type: () -> String?
+      def image_config_response: () -> Types::ImageConfigResponse?
+      def signing_profile_version_arn: () -> String?
+      def signing_job_arn: () -> String?
+      def architectures: () -> Array[String]?
+      def ephemeral_storage: () -> Types::EphemeralStorage?
+      def snap_start: () -> Types::SnapStartResponse?
+      def runtime_version_config: () -> Types::RuntimeVersionConfig?
+      def logging_config: () -> Types::LoggingConfig?
+    end
+    def create_function: (
+      ?function_name: String,
+      ?runtime: String,
+      ?role: String,
+      ?handler: String,
+      ?code: {
+        zip_file: String,
+        s3_bucket: String,
+        s3_key: String,
+        s3_object_version: String,
+        image_uri: String,
+        source_kms_key_arn: String
+      },
+      ?description: String,
+      ?timeout: Integer,
+      ?memory_size: Integer,
+      ?publish: bool,
+      ?vpc_config: {
+        subnet_ids: Array[String],
+        security_group_ids: Array[String],
+        ipv6_allowed_for_dual_stack: bool
+      },
+      ?package_type: String,
+      ?dead_letter_config: {
+        target_arn: String
+      },
+      ?environment: {
+        variables: Hash[String, String]
+      },
+      ?kms_key_arn: String,
+      ?tracing_config: {
+        mode: String
+      },
+      ?tags: Hash[String, String],
+      ?layers: Array[String],
+      ?file_system_configs: Array[
+        {
+          arn: String,
+          local_mount_path: String
+        }
+      ],
+      ?image_config: {
+        entry_point: Array[String],
+        command: untyped,
+        working_directory: String
+      },
+      ?code_signing_config_arn: String,
+      ?architectures: Array[String],
+      ?ephemeral_storage: {
+        size: Integer
+      },
+      ?snap_start: {
+        apply_on: String
+      },
+      ?logging_config: {
+        log_format: String,
+        application_log_level: String,
+        system_log_level: String,
+        log_group: String
+      }
+    ) -> _CreateFunctionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFunctionResponse
+
+    interface _CreateFunctionUrlConfigResponse
+      include Smithy::Client::_Output[Types::CreateFunctionUrlConfigResponse]
+      def function_url: () -> String?
+      def function_arn: () -> String?
+      def auth_type: () -> String?
+      def cors: () -> Types::Cors?
+      def creation_time: () -> String?
+      def invoke_mode: () -> String?
+    end
+    def create_function_url_config: (
+      ?function_name: String,
+      ?qualifier: String,
+      ?auth_type: String,
+      ?cors: {
+        allow_credentials: bool,
+        allow_headers: Array[String],
+        allow_methods: Array[String],
+        allow_origins: Array[String],
+        expose_headers: untyped,
+        max_age: Integer
+      },
+      ?invoke_mode: String
+    ) -> _CreateFunctionUrlConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFunctionUrlConfigResponse
+
+    interface _DeleteAliasResponse
+      include Smithy::Client::_Output[Smithy::Schema::EmptyStructure]
+    end
+    def delete_alias: (
+      ?function_name: String,
+      ?name: String
+    ) -> _DeleteAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAliasResponse
+
+    interface _DeleteCodeSigningConfigResponse
+      include Smithy::Client::_Output[Types::DeleteCodeSigningConfigResponse]
+    end
+    def delete_code_signing_config: (
+      ?code_signing_config_arn: String
+    ) -> _DeleteCodeSigningConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCodeSigningConfigResponse
+
+    interface _DeleteEventSourceMappingResponse
+      include Smithy::Client::_Output[Types::EventSourceMappingConfiguration]
+      def uuid: () -> String?
+      def starting_position: () -> String?
+      def starting_position_timestamp: () -> Time?
+      def batch_size: () -> Integer?
+      def maximum_batching_window_in_seconds: () -> Integer?
+      def parallelization_factor: () -> Integer?
+      def event_source_arn: () -> String?
+      def filter_criteria: () -> Types::FilterCriteria?
+      def function_arn: () -> String?
+      def last_modified: () -> Time?
+      def last_processing_result: () -> String?
+      def state: () -> String?
+      def state_transition_reason: () -> String?
+      def destination_config: () -> Types::DestinationConfig?
+      def topics: () -> Array[String]?
+      def queues: () -> Array[String]?
+      def source_access_configurations: () -> Array[Types::SourceAccessConfiguration]?
+      def self_managed_event_source: () -> Types::SelfManagedEventSource?
+      def maximum_record_age_in_seconds: () -> Integer?
+      def bisect_batch_on_function_error: () -> bool?
+      def maximum_retry_attempts: () -> Integer?
+      def tumbling_window_in_seconds: () -> Integer?
+      def function_response_types: () -> Array[String]?
+      def amazon_managed_kafka_event_source_config: () -> Types::AmazonManagedKafkaEventSourceConfig?
+      def self_managed_kafka_event_source_config: () -> Types::SelfManagedKafkaEventSourceConfig?
+      def scaling_config: () -> Types::ScalingConfig?
+      def document_db_event_source_config: () -> Types::DocumentDBEventSourceConfig?
+      def kms_key_arn: () -> String?
+      def filter_criteria_error: () -> Types::FilterCriteriaError?
+      def event_source_mapping_arn: () -> String?
+      def metrics_config: () -> Types::EventSourceMappingMetricsConfig?
+      def provisioned_poller_config: () -> Types::ProvisionedPollerConfig?
+    end
+    def delete_event_source_mapping: (
+      ?uuid: String
+    ) -> _DeleteEventSourceMappingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEventSourceMappingResponse
+
+    interface _DeleteFunctionResponse
+      include Smithy::Client::_Output[Smithy::Schema::EmptyStructure]
+    end
+    def delete_function: (
+      ?function_name: String,
+      ?qualifier: String
+    ) -> _DeleteFunctionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFunctionResponse
+
+    interface _DeleteFunctionCodeSigningConfigResponse
+      include Smithy::Client::_Output[Smithy::Schema::EmptyStructure]
+    end
+    def delete_function_code_signing_config: (
+      ?function_name: String
+    ) -> _DeleteFunctionCodeSigningConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFunctionCodeSigningConfigResponse
+
+    interface _DeleteFunctionConcurrencyResponse
+      include Smithy::Client::_Output[Smithy::Schema::EmptyStructure]
+    end
+    def delete_function_concurrency: (
+      ?function_name: String
+    ) -> _DeleteFunctionConcurrencyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFunctionConcurrencyResponse
+
+    interface _DeleteFunctionEventInvokeConfigResponse
+      include Smithy::Client::_Output[Smithy::Schema::EmptyStructure]
+    end
+    def delete_function_event_invoke_config: (
+      ?function_name: String,
+      ?qualifier: String
+    ) -> _DeleteFunctionEventInvokeConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFunctionEventInvokeConfigResponse
+
+    interface _DeleteFunctionUrlConfigResponse
+      include Smithy::Client::_Output[Smithy::Schema::EmptyStructure]
+    end
+    def delete_function_url_config: (
+      ?function_name: String,
+      ?qualifier: String
+    ) -> _DeleteFunctionUrlConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFunctionUrlConfigResponse
+
+    interface _DeleteLayerVersionResponse
+      include Smithy::Client::_Output[Smithy::Schema::EmptyStructure]
+    end
+    def delete_layer_version: (
+      ?layer_name: String,
+      ?version_number: Integer
+    ) -> _DeleteLayerVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLayerVersionResponse
+
+    interface _DeleteProvisionedConcurrencyConfigResponse
+      include Smithy::Client::_Output[Smithy::Schema::EmptyStructure]
+    end
+    def delete_provisioned_concurrency_config: (
+      ?function_name: String,
+      ?qualifier: String
+    ) -> _DeleteProvisionedConcurrencyConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProvisionedConcurrencyConfigResponse
+
+    interface _GetAccountSettingsResponse
+      include Smithy::Client::_Output[Types::GetAccountSettingsResponse]
+      def account_limit: () -> Types::AccountLimit?
+      def account_usage: () -> Types::AccountUsage?
+    end
+    def get_account_settings: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccountSettingsResponse
+
+    interface _GetAliasResponse
+      include Smithy::Client::_Output[Types::AliasConfiguration]
+      def alias_arn: () -> String?
+      def name: () -> String?
+      def function_version: () -> String?
+      def description: () -> String?
+      def routing_config: () -> Types::AliasRoutingConfiguration?
+      def revision_id: () -> String?
+    end
+    def get_alias: (
+      ?function_name: String,
+      ?name: String
+    ) -> _GetAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAliasResponse
+
+    interface _GetCodeSigningConfigResponse
+      include Smithy::Client::_Output[Types::GetCodeSigningConfigResponse]
+      def code_signing_config: () -> Types::CodeSigningConfig?
+    end
+    def get_code_signing_config: (
+      ?code_signing_config_arn: String
+    ) -> _GetCodeSigningConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCodeSigningConfigResponse
+
+    interface _GetEventSourceMappingResponse
+      include Smithy::Client::_Output[Types::EventSourceMappingConfiguration]
+      def uuid: () -> String?
+      def starting_position: () -> String?
+      def starting_position_timestamp: () -> Time?
+      def batch_size: () -> Integer?
+      def maximum_batching_window_in_seconds: () -> Integer?
+      def parallelization_factor: () -> Integer?
+      def event_source_arn: () -> String?
+      def filter_criteria: () -> Types::FilterCriteria?
+      def function_arn: () -> String?
+      def last_modified: () -> Time?
+      def last_processing_result: () -> String?
+      def state: () -> String?
+      def state_transition_reason: () -> String?
+      def destination_config: () -> Types::DestinationConfig?
+      def topics: () -> Array[String]?
+      def queues: () -> Array[String]?
+      def source_access_configurations: () -> Array[Types::SourceAccessConfiguration]?
+      def self_managed_event_source: () -> Types::SelfManagedEventSource?
+      def maximum_record_age_in_seconds: () -> Integer?
+      def bisect_batch_on_function_error: () -> bool?
+      def maximum_retry_attempts: () -> Integer?
+      def tumbling_window_in_seconds: () -> Integer?
+      def function_response_types: () -> Array[String]?
+      def amazon_managed_kafka_event_source_config: () -> Types::AmazonManagedKafkaEventSourceConfig?
+      def self_managed_kafka_event_source_config: () -> Types::SelfManagedKafkaEventSourceConfig?
+      def scaling_config: () -> Types::ScalingConfig?
+      def document_db_event_source_config: () -> Types::DocumentDBEventSourceConfig?
+      def kms_key_arn: () -> String?
+      def filter_criteria_error: () -> Types::FilterCriteriaError?
+      def event_source_mapping_arn: () -> String?
+      def metrics_config: () -> Types::EventSourceMappingMetricsConfig?
+      def provisioned_poller_config: () -> Types::ProvisionedPollerConfig?
+    end
+    def get_event_source_mapping: (
+      ?uuid: String
+    ) -> _GetEventSourceMappingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEventSourceMappingResponse
+
+    interface _GetFunctionResponse
+      include Smithy::Client::_Output[Types::GetFunctionResponse]
+      def configuration: () -> Types::FunctionConfiguration?
+      def code: () -> Types::FunctionCodeLocation?
+      def tags: () -> Hash[String, String]?
+      def tags_error: () -> Types::TagsError?
+      def concurrency: () -> Types::Concurrency?
+    end
+    def get_function: (
+      ?function_name: String,
+      ?qualifier: String
+    ) -> _GetFunctionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFunctionResponse
+
+    interface _GetFunctionCodeSigningConfigResponse
+      include Smithy::Client::_Output[Types::GetFunctionCodeSigningConfigResponse]
+      def code_signing_config_arn: () -> String?
+      def function_name: () -> String?
+    end
+    def get_function_code_signing_config: (
+      ?function_name: String
+    ) -> _GetFunctionCodeSigningConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFunctionCodeSigningConfigResponse
+
+    interface _GetFunctionConcurrencyResponse
+      include Smithy::Client::_Output[Types::GetFunctionConcurrencyResponse]
+      def reserved_concurrent_executions: () -> Integer?
+    end
+    def get_function_concurrency: (
+      ?function_name: String
+    ) -> _GetFunctionConcurrencyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFunctionConcurrencyResponse
+
+    interface _GetFunctionConfigurationResponse
+      include Smithy::Client::_Output[Types::FunctionConfiguration]
+      def function_name: () -> String?
+      def function_arn: () -> String?
+      def runtime: () -> String?
+      def role: () -> String?
+      def handler: () -> String?
+      def code_size: () -> Integer?
+      def description: () -> String?
+      def timeout: () -> Integer?
+      def memory_size: () -> Integer?
+      def last_modified: () -> String?
+      def code_sha256: () -> String?
+      def version: () -> String?
+      def vpc_config: () -> Types::VpcConfigResponse?
+      def dead_letter_config: () -> Types::DeadLetterConfig?
+      def environment: () -> Types::EnvironmentResponse?
+      def kms_key_arn: () -> String?
+      def tracing_config: () -> Types::TracingConfigResponse?
+      def master_arn: () -> String?
+      def revision_id: () -> String?
+      def layers: () -> Array[Types::Layer]?
+      def state: () -> String?
+      def state_reason: () -> String?
+      def state_reason_code: () -> String?
+      def last_update_status: () -> String?
+      def last_update_status_reason: () -> String?
+      def last_update_status_reason_code: () -> String?
+      def file_system_configs: () -> Array[Types::FileSystemConfig]?
+      def package_type: () -> String?
+      def image_config_response: () -> Types::ImageConfigResponse?
+      def signing_profile_version_arn: () -> String?
+      def signing_job_arn: () -> String?
+      def architectures: () -> Array[String]?
+      def ephemeral_storage: () -> Types::EphemeralStorage?
+      def snap_start: () -> Types::SnapStartResponse?
+      def runtime_version_config: () -> Types::RuntimeVersionConfig?
+      def logging_config: () -> Types::LoggingConfig?
+    end
+    def get_function_configuration: (
+      ?function_name: String,
+      ?qualifier: String
+    ) -> _GetFunctionConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFunctionConfigurationResponse
+
+    interface _GetFunctionEventInvokeConfigResponse
+      include Smithy::Client::_Output[Types::FunctionEventInvokeConfig]
+      def last_modified: () -> Time?
+      def function_arn: () -> String?
+      def maximum_retry_attempts: () -> Integer?
+      def maximum_event_age_in_seconds: () -> Integer?
+      def destination_config: () -> Types::DestinationConfig?
+    end
+    def get_function_event_invoke_config: (
+      ?function_name: String,
+      ?qualifier: String
+    ) -> _GetFunctionEventInvokeConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFunctionEventInvokeConfigResponse
+
+    interface _GetFunctionRecursionConfigResponse
+      include Smithy::Client::_Output[Types::GetFunctionRecursionConfigResponse]
+      def recursive_loop: () -> String?
+    end
+    def get_function_recursion_config: (
+      ?function_name: String
+    ) -> _GetFunctionRecursionConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFunctionRecursionConfigResponse
+
+    interface _GetFunctionUrlConfigResponse
+      include Smithy::Client::_Output[Types::GetFunctionUrlConfigResponse]
+      def function_url: () -> String?
+      def function_arn: () -> String?
+      def auth_type: () -> String?
+      def cors: () -> Types::Cors?
+      def creation_time: () -> String?
+      def last_modified_time: () -> String?
+      def invoke_mode: () -> String?
+    end
+    def get_function_url_config: (
+      ?function_name: String,
+      ?qualifier: String
+    ) -> _GetFunctionUrlConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFunctionUrlConfigResponse
+
+    interface _GetLayerVersionResponse
+      include Smithy::Client::_Output[Types::GetLayerVersionResponse]
+      def content: () -> Types::LayerVersionContentOutput?
+      def layer_arn: () -> String?
+      def layer_version_arn: () -> String?
+      def description: () -> String?
+      def created_date: () -> String?
+      def version: () -> Integer?
+      def compatible_runtimes: () -> Array[String]?
+      def license_info: () -> String?
+      def compatible_architectures: () -> Array[String]?
+    end
+    def get_layer_version: (
+      ?layer_name: String,
+      ?version_number: Integer
+    ) -> _GetLayerVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLayerVersionResponse
+
+    interface _GetLayerVersionByArnResponse
+      include Smithy::Client::_Output[Types::GetLayerVersionResponse]
+      def content: () -> Types::LayerVersionContentOutput?
+      def layer_arn: () -> String?
+      def layer_version_arn: () -> String?
+      def description: () -> String?
+      def created_date: () -> String?
+      def version: () -> Integer?
+      def compatible_runtimes: () -> Array[String]?
+      def license_info: () -> String?
+      def compatible_architectures: () -> Array[String]?
+    end
+    def get_layer_version_by_arn: (
+      ?arn: String
+    ) -> _GetLayerVersionByArnResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLayerVersionByArnResponse
+
+    interface _GetLayerVersionPolicyResponse
+      include Smithy::Client::_Output[Types::GetLayerVersionPolicyResponse]
+      def policy: () -> String?
+      def revision_id: () -> String?
+    end
+    def get_layer_version_policy: (
+      ?layer_name: String,
+      ?version_number: Integer
+    ) -> _GetLayerVersionPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLayerVersionPolicyResponse
+
+    interface _GetPolicyResponse
+      include Smithy::Client::_Output[Types::GetPolicyResponse]
+      def policy: () -> String?
+      def revision_id: () -> String?
+    end
+    def get_policy: (
+      ?function_name: String,
+      ?qualifier: String
+    ) -> _GetPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPolicyResponse
+
+    interface _GetProvisionedConcurrencyConfigResponse
+      include Smithy::Client::_Output[Types::GetProvisionedConcurrencyConfigResponse]
+      def requested_provisioned_concurrent_executions: () -> Integer?
+      def available_provisioned_concurrent_executions: () -> Integer?
+      def allocated_provisioned_concurrent_executions: () -> Integer?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def last_modified: () -> String?
+    end
+    def get_provisioned_concurrency_config: (
+      ?function_name: String,
+      ?qualifier: String
+    ) -> _GetProvisionedConcurrencyConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProvisionedConcurrencyConfigResponse
+
+    interface _GetRuntimeManagementConfigResponse
+      include Smithy::Client::_Output[Types::GetRuntimeManagementConfigResponse]
+      def update_runtime_on: () -> String?
+      def runtime_version_arn: () -> String?
+      def function_arn: () -> String?
+    end
+    def get_runtime_management_config: (
+      ?function_name: String,
+      ?qualifier: String
+    ) -> _GetRuntimeManagementConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRuntimeManagementConfigResponse
+
+    interface _InvokeResponse
+      include Smithy::Client::_Output[Types::InvocationResponse]
+      def status_code: () -> Integer?
+      def function_error: () -> String?
+      def log_result: () -> String?
+      def payload: () -> String?
+      def executed_version: () -> String?
+    end
+    def invoke: (
+      ?function_name: String,
+      ?invocation_type: String,
+      ?log_type: String,
+      ?client_context: String,
+      ?payload: String,
+      ?qualifier: String
+    ) -> _InvokeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InvokeResponse
+
+    interface _InvokeAsyncResponse
+      include Smithy::Client::_Output[Types::InvokeAsyncResponse]
+      def status: () -> Integer?
+    end
+    def invoke_async: (
+      ?function_name: String,
+      ?invoke_args: String
+    ) -> _InvokeAsyncResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InvokeAsyncResponse
+
+    interface _InvokeWithResponseStreamResponse
+      include Smithy::Client::_Output[Types::InvokeWithResponseStreamResponse]
+      def status_code: () -> Integer?
+      def executed_version: () -> String?
+      def event_stream: () -> Types::InvokeWithResponseStreamResponseEvent?
+      def response_stream_content_type: () -> String?
+    end
+    def invoke_with_response_stream: (
+      ?function_name: String,
+      ?invocation_type: String,
+      ?log_type: String,
+      ?client_context: String,
+      ?qualifier: String,
+      ?payload: String
+    ) -> _InvokeWithResponseStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InvokeWithResponseStreamResponse
+
+    interface _ListAliasesResponse
+      include Smithy::Client::_Output[Types::ListAliasesResponse]
+      def next_marker: () -> String?
+      def aliases: () -> Array[Types::AliasConfiguration]?
+    end
+    def list_aliases: (
+      ?function_name: String,
+      ?function_version: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListAliasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAliasesResponse
+
+    interface _ListCodeSigningConfigsResponse
+      include Smithy::Client::_Output[Types::ListCodeSigningConfigsResponse]
+      def next_marker: () -> String?
+      def code_signing_configs: () -> Array[Types::CodeSigningConfig]?
+    end
+    def list_code_signing_configs: (
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListCodeSigningConfigsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCodeSigningConfigsResponse
+
+    interface _ListEventSourceMappingsResponse
+      include Smithy::Client::_Output[Types::ListEventSourceMappingsResponse]
+      def next_marker: () -> String?
+      def event_source_mappings: () -> Array[Types::EventSourceMappingConfiguration]?
+    end
+    def list_event_source_mappings: (
+      ?event_source_arn: String,
+      ?function_name: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListEventSourceMappingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEventSourceMappingsResponse
+
+    interface _ListFunctionEventInvokeConfigsResponse
+      include Smithy::Client::_Output[Types::ListFunctionEventInvokeConfigsResponse]
+      def function_event_invoke_configs: () -> Array[Types::FunctionEventInvokeConfig]?
+      def next_marker: () -> String?
+    end
+    def list_function_event_invoke_configs: (
+      ?function_name: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListFunctionEventInvokeConfigsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFunctionEventInvokeConfigsResponse
+
+    interface _ListFunctionUrlConfigsResponse
+      include Smithy::Client::_Output[Types::ListFunctionUrlConfigsResponse]
+      def function_url_configs: () -> Array[Types::FunctionUrlConfig]?
+      def next_marker: () -> String?
+    end
+    def list_function_url_configs: (
+      ?function_name: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListFunctionUrlConfigsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFunctionUrlConfigsResponse
+
+    interface _ListFunctionsResponse
+      include Smithy::Client::_Output[Types::ListFunctionsResponse]
+      def next_marker: () -> String?
+      def functions: () -> Array[Types::FunctionConfiguration]?
+    end
+    def list_functions: (
+      ?master_region: String,
+      ?function_version: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListFunctionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFunctionsResponse
+
+    interface _ListFunctionsByCodeSigningConfigResponse
+      include Smithy::Client::_Output[Types::ListFunctionsByCodeSigningConfigResponse]
+      def next_marker: () -> String?
+      def function_arns: () -> Array[String]?
+    end
+    def list_functions_by_code_signing_config: (
+      ?code_signing_config_arn: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListFunctionsByCodeSigningConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFunctionsByCodeSigningConfigResponse
+
+    interface _ListLayerVersionsResponse
+      include Smithy::Client::_Output[Types::ListLayerVersionsResponse]
+      def next_marker: () -> String?
+      def layer_versions: () -> Array[Types::LayerVersionsListItem]?
+    end
+    def list_layer_versions: (
+      ?compatible_runtime: String,
+      ?layer_name: String,
+      ?marker: String,
+      ?max_items: Integer,
+      ?compatible_architecture: String
+    ) -> _ListLayerVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLayerVersionsResponse
+
+    interface _ListLayersResponse
+      include Smithy::Client::_Output[Types::ListLayersResponse]
+      def next_marker: () -> String?
+      def layers: () -> Array[Types::LayersListItem]?
+    end
+    def list_layers: (
+      ?compatible_runtime: String,
+      ?marker: String,
+      ?max_items: Integer,
+      ?compatible_architecture: String
+    ) -> _ListLayersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLayersResponse
+
+    interface _ListProvisionedConcurrencyConfigsResponse
+      include Smithy::Client::_Output[Types::ListProvisionedConcurrencyConfigsResponse]
+      def provisioned_concurrency_configs: () -> Array[Types::ProvisionedConcurrencyConfigListItem]?
+      def next_marker: () -> String?
+    end
+    def list_provisioned_concurrency_configs: (
+      ?function_name: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListProvisionedConcurrencyConfigsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProvisionedConcurrencyConfigsResponse
+
+    interface _ListTagsResponse
+      include Smithy::Client::_Output[Types::ListTagsResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags: (
+      ?resource: String
+    ) -> _ListTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsResponse
+
+    interface _ListVersionsByFunctionResponse
+      include Smithy::Client::_Output[Types::ListVersionsByFunctionResponse]
+      def next_marker: () -> String?
+      def versions: () -> Array[Types::FunctionConfiguration]?
+    end
+    def list_versions_by_function: (
+      ?function_name: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListVersionsByFunctionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVersionsByFunctionResponse
+
+    interface _PublishLayerVersionResponse
+      include Smithy::Client::_Output[Types::PublishLayerVersionResponse]
+      def content: () -> Types::LayerVersionContentOutput?
+      def layer_arn: () -> String?
+      def layer_version_arn: () -> String?
+      def description: () -> String?
+      def created_date: () -> String?
+      def version: () -> Integer?
+      def compatible_runtimes: () -> Array[String]?
+      def license_info: () -> String?
+      def compatible_architectures: () -> Array[String]?
+    end
+    def publish_layer_version: (
+      ?layer_name: String,
+      ?description: String,
+      ?content: {
+        s3_bucket: String,
+        s3_key: String,
+        s3_object_version: String,
+        zip_file: String
+      },
+      ?compatible_runtimes: Array[String],
+      ?license_info: String,
+      ?compatible_architectures: Array[String]
+    ) -> _PublishLayerVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PublishLayerVersionResponse
+
+    interface _PublishVersionResponse
+      include Smithy::Client::_Output[Types::FunctionConfiguration]
+      def function_name: () -> String?
+      def function_arn: () -> String?
+      def runtime: () -> String?
+      def role: () -> String?
+      def handler: () -> String?
+      def code_size: () -> Integer?
+      def description: () -> String?
+      def timeout: () -> Integer?
+      def memory_size: () -> Integer?
+      def last_modified: () -> String?
+      def code_sha256: () -> String?
+      def version: () -> String?
+      def vpc_config: () -> Types::VpcConfigResponse?
+      def dead_letter_config: () -> Types::DeadLetterConfig?
+      def environment: () -> Types::EnvironmentResponse?
+      def kms_key_arn: () -> String?
+      def tracing_config: () -> Types::TracingConfigResponse?
+      def master_arn: () -> String?
+      def revision_id: () -> String?
+      def layers: () -> Array[Types::Layer]?
+      def state: () -> String?
+      def state_reason: () -> String?
+      def state_reason_code: () -> String?
+      def last_update_status: () -> String?
+      def last_update_status_reason: () -> String?
+      def last_update_status_reason_code: () -> String?
+      def file_system_configs: () -> Array[Types::FileSystemConfig]?
+      def package_type: () -> String?
+      def image_config_response: () -> Types::ImageConfigResponse?
+      def signing_profile_version_arn: () -> String?
+      def signing_job_arn: () -> String?
+      def architectures: () -> Array[String]?
+      def ephemeral_storage: () -> Types::EphemeralStorage?
+      def snap_start: () -> Types::SnapStartResponse?
+      def runtime_version_config: () -> Types::RuntimeVersionConfig?
+      def logging_config: () -> Types::LoggingConfig?
+    end
+    def publish_version: (
+      ?function_name: String,
+      ?code_sha256: String,
+      ?description: String,
+      ?revision_id: String
+    ) -> _PublishVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PublishVersionResponse
+
+    interface _PutFunctionCodeSigningConfigResponse
+      include Smithy::Client::_Output[Types::PutFunctionCodeSigningConfigResponse]
+      def code_signing_config_arn: () -> String?
+      def function_name: () -> String?
+    end
+    def put_function_code_signing_config: (
+      ?code_signing_config_arn: String,
+      ?function_name: String
+    ) -> _PutFunctionCodeSigningConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutFunctionCodeSigningConfigResponse
+
+    interface _PutFunctionConcurrencyResponse
+      include Smithy::Client::_Output[Types::Concurrency]
+      def reserved_concurrent_executions: () -> Integer?
+    end
+    def put_function_concurrency: (
+      ?function_name: String,
+      ?reserved_concurrent_executions: Integer
+    ) -> _PutFunctionConcurrencyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutFunctionConcurrencyResponse
+
+    interface _PutFunctionEventInvokeConfigResponse
+      include Smithy::Client::_Output[Types::FunctionEventInvokeConfig]
+      def last_modified: () -> Time?
+      def function_arn: () -> String?
+      def maximum_retry_attempts: () -> Integer?
+      def maximum_event_age_in_seconds: () -> Integer?
+      def destination_config: () -> Types::DestinationConfig?
+    end
+    def put_function_event_invoke_config: (
+      ?function_name: String,
+      ?qualifier: String,
+      ?maximum_retry_attempts: Integer,
+      ?maximum_event_age_in_seconds: Integer,
+      ?destination_config: {
+        on_success: {
+          destination: String
+        },
+        on_failure: {
+          destination: untyped
+        }
+      }
+    ) -> _PutFunctionEventInvokeConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutFunctionEventInvokeConfigResponse
+
+    interface _PutFunctionRecursionConfigResponse
+      include Smithy::Client::_Output[Types::PutFunctionRecursionConfigResponse]
+      def recursive_loop: () -> String?
+    end
+    def put_function_recursion_config: (
+      ?function_name: String,
+      ?recursive_loop: String
+    ) -> _PutFunctionRecursionConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutFunctionRecursionConfigResponse
+
+    interface _PutProvisionedConcurrencyConfigResponse
+      include Smithy::Client::_Output[Types::PutProvisionedConcurrencyConfigResponse]
+      def requested_provisioned_concurrent_executions: () -> Integer?
+      def available_provisioned_concurrent_executions: () -> Integer?
+      def allocated_provisioned_concurrent_executions: () -> Integer?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def last_modified: () -> String?
+    end
+    def put_provisioned_concurrency_config: (
+      ?function_name: String,
+      ?qualifier: String,
+      ?provisioned_concurrent_executions: Integer
+    ) -> _PutProvisionedConcurrencyConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutProvisionedConcurrencyConfigResponse
+
+    interface _PutRuntimeManagementConfigResponse
+      include Smithy::Client::_Output[Types::PutRuntimeManagementConfigResponse]
+      def update_runtime_on: () -> String?
+      def function_arn: () -> String?
+      def runtime_version_arn: () -> String?
+    end
+    def put_runtime_management_config: (
+      ?function_name: String,
+      ?qualifier: String,
+      ?update_runtime_on: String,
+      ?runtime_version_arn: String
+    ) -> _PutRuntimeManagementConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutRuntimeManagementConfigResponse
+
+    interface _RemoveLayerVersionPermissionResponse
+      include Smithy::Client::_Output[Smithy::Schema::EmptyStructure]
+    end
+    def remove_layer_version_permission: (
+      ?layer_name: String,
+      ?version_number: Integer,
+      ?statement_id: String,
+      ?revision_id: String
+    ) -> _RemoveLayerVersionPermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveLayerVersionPermissionResponse
+
+    interface _RemovePermissionResponse
+      include Smithy::Client::_Output[Smithy::Schema::EmptyStructure]
+    end
+    def remove_permission: (
+      ?function_name: String,
+      ?statement_id: String,
+      ?qualifier: String,
+      ?revision_id: String
+    ) -> _RemovePermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemovePermissionResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Output[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Output[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAliasResponse
+      include Smithy::Client::_Output[Types::AliasConfiguration]
+      def alias_arn: () -> String?
+      def name: () -> String?
+      def function_version: () -> String?
+      def description: () -> String?
+      def routing_config: () -> Types::AliasRoutingConfiguration?
+      def revision_id: () -> String?
+    end
+    def update_alias: (
+      ?function_name: String,
+      ?name: String,
+      ?function_version: String,
+      ?description: String,
+      ?routing_config: {
+        additional_version_weights: Hash[String, Float]
+      },
+      ?revision_id: String
+    ) -> _UpdateAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAliasResponse
+
+    interface _UpdateCodeSigningConfigResponse
+      include Smithy::Client::_Output[Types::UpdateCodeSigningConfigResponse]
+      def code_signing_config: () -> Types::CodeSigningConfig?
+    end
+    def update_code_signing_config: (
+      ?code_signing_config_arn: String,
+      ?description: String,
+      ?allowed_publishers: {
+        signing_profile_version_arns: Array[String]
+      },
+      ?code_signing_policies: {
+        untrusted_artifact_on_deployment: String
+      }
+    ) -> _UpdateCodeSigningConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCodeSigningConfigResponse
+
+    interface _UpdateEventSourceMappingResponse
+      include Smithy::Client::_Output[Types::EventSourceMappingConfiguration]
+      def uuid: () -> String?
+      def starting_position: () -> String?
+      def starting_position_timestamp: () -> Time?
+      def batch_size: () -> Integer?
+      def maximum_batching_window_in_seconds: () -> Integer?
+      def parallelization_factor: () -> Integer?
+      def event_source_arn: () -> String?
+      def filter_criteria: () -> Types::FilterCriteria?
+      def function_arn: () -> String?
+      def last_modified: () -> Time?
+      def last_processing_result: () -> String?
+      def state: () -> String?
+      def state_transition_reason: () -> String?
+      def destination_config: () -> Types::DestinationConfig?
+      def topics: () -> Array[String]?
+      def queues: () -> Array[String]?
+      def source_access_configurations: () -> Array[Types::SourceAccessConfiguration]?
+      def self_managed_event_source: () -> Types::SelfManagedEventSource?
+      def maximum_record_age_in_seconds: () -> Integer?
+      def bisect_batch_on_function_error: () -> bool?
+      def maximum_retry_attempts: () -> Integer?
+      def tumbling_window_in_seconds: () -> Integer?
+      def function_response_types: () -> Array[String]?
+      def amazon_managed_kafka_event_source_config: () -> Types::AmazonManagedKafkaEventSourceConfig?
+      def self_managed_kafka_event_source_config: () -> Types::SelfManagedKafkaEventSourceConfig?
+      def scaling_config: () -> Types::ScalingConfig?
+      def document_db_event_source_config: () -> Types::DocumentDBEventSourceConfig?
+      def kms_key_arn: () -> String?
+      def filter_criteria_error: () -> Types::FilterCriteriaError?
+      def event_source_mapping_arn: () -> String?
+      def metrics_config: () -> Types::EventSourceMappingMetricsConfig?
+      def provisioned_poller_config: () -> Types::ProvisionedPollerConfig?
+    end
+    def update_event_source_mapping: (
+      ?uuid: String,
+      ?function_name: String,
+      ?enabled: bool,
+      ?batch_size: Integer,
+      ?filter_criteria: {
+        filters: Array[
+          {
+            pattern: String
+          }
+        ]
+      },
+      ?maximum_batching_window_in_seconds: Integer,
+      ?destination_config: {
+        on_success: {
+          destination: String
+        },
+        on_failure: {
+          destination: untyped
+        }
+      },
+      ?maximum_record_age_in_seconds: Integer,
+      ?bisect_batch_on_function_error: bool,
+      ?maximum_retry_attempts: Integer,
+      ?parallelization_factor: Integer,
+      ?source_access_configurations: Array[
+        {
+          type: String,
+          uri: String
+        }
+      ],
+      ?tumbling_window_in_seconds: Integer,
+      ?function_response_types: Array[String],
+      ?scaling_config: {
+        maximum_concurrency: Integer
+      },
+      ?document_db_event_source_config: {
+        database_name: String,
+        collection_name: String,
+        full_document: String
+      },
+      ?kms_key_arn: String,
+      ?metrics_config: {
+        metrics: Array[String]
+      },
+      ?provisioned_poller_config: {
+        minimum_pollers: Integer,
+        maximum_pollers: Integer
+      }
+    ) -> _UpdateEventSourceMappingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEventSourceMappingResponse
+
+    interface _UpdateFunctionCodeResponse
+      include Smithy::Client::_Output[Types::FunctionConfiguration]
+      def function_name: () -> String?
+      def function_arn: () -> String?
+      def runtime: () -> String?
+      def role: () -> String?
+      def handler: () -> String?
+      def code_size: () -> Integer?
+      def description: () -> String?
+      def timeout: () -> Integer?
+      def memory_size: () -> Integer?
+      def last_modified: () -> String?
+      def code_sha256: () -> String?
+      def version: () -> String?
+      def vpc_config: () -> Types::VpcConfigResponse?
+      def dead_letter_config: () -> Types::DeadLetterConfig?
+      def environment: () -> Types::EnvironmentResponse?
+      def kms_key_arn: () -> String?
+      def tracing_config: () -> Types::TracingConfigResponse?
+      def master_arn: () -> String?
+      def revision_id: () -> String?
+      def layers: () -> Array[Types::Layer]?
+      def state: () -> String?
+      def state_reason: () -> String?
+      def state_reason_code: () -> String?
+      def last_update_status: () -> String?
+      def last_update_status_reason: () -> String?
+      def last_update_status_reason_code: () -> String?
+      def file_system_configs: () -> Array[Types::FileSystemConfig]?
+      def package_type: () -> String?
+      def image_config_response: () -> Types::ImageConfigResponse?
+      def signing_profile_version_arn: () -> String?
+      def signing_job_arn: () -> String?
+      def architectures: () -> Array[String]?
+      def ephemeral_storage: () -> Types::EphemeralStorage?
+      def snap_start: () -> Types::SnapStartResponse?
+      def runtime_version_config: () -> Types::RuntimeVersionConfig?
+      def logging_config: () -> Types::LoggingConfig?
+    end
+    def update_function_code: (
+      ?function_name: String,
+      ?zip_file: String,
+      ?s3_bucket: String,
+      ?s3_key: String,
+      ?s3_object_version: String,
+      ?image_uri: String,
+      ?publish: bool,
+      ?dry_run: bool,
+      ?revision_id: String,
+      ?architectures: Array[String],
+      ?source_kms_key_arn: String
+    ) -> _UpdateFunctionCodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFunctionCodeResponse
+
+    interface _UpdateFunctionConfigurationResponse
+      include Smithy::Client::_Output[Types::FunctionConfiguration]
+      def function_name: () -> String?
+      def function_arn: () -> String?
+      def runtime: () -> String?
+      def role: () -> String?
+      def handler: () -> String?
+      def code_size: () -> Integer?
+      def description: () -> String?
+      def timeout: () -> Integer?
+      def memory_size: () -> Integer?
+      def last_modified: () -> String?
+      def code_sha256: () -> String?
+      def version: () -> String?
+      def vpc_config: () -> Types::VpcConfigResponse?
+      def dead_letter_config: () -> Types::DeadLetterConfig?
+      def environment: () -> Types::EnvironmentResponse?
+      def kms_key_arn: () -> String?
+      def tracing_config: () -> Types::TracingConfigResponse?
+      def master_arn: () -> String?
+      def revision_id: () -> String?
+      def layers: () -> Array[Types::Layer]?
+      def state: () -> String?
+      def state_reason: () -> String?
+      def state_reason_code: () -> String?
+      def last_update_status: () -> String?
+      def last_update_status_reason: () -> String?
+      def last_update_status_reason_code: () -> String?
+      def file_system_configs: () -> Array[Types::FileSystemConfig]?
+      def package_type: () -> String?
+      def image_config_response: () -> Types::ImageConfigResponse?
+      def signing_profile_version_arn: () -> String?
+      def signing_job_arn: () -> String?
+      def architectures: () -> Array[String]?
+      def ephemeral_storage: () -> Types::EphemeralStorage?
+      def snap_start: () -> Types::SnapStartResponse?
+      def runtime_version_config: () -> Types::RuntimeVersionConfig?
+      def logging_config: () -> Types::LoggingConfig?
+    end
+    def update_function_configuration: (
+      ?function_name: String,
+      ?role: String,
+      ?handler: String,
+      ?description: String,
+      ?timeout: Integer,
+      ?memory_size: Integer,
+      ?vpc_config: {
+        subnet_ids: Array[String],
+        security_group_ids: Array[String],
+        ipv6_allowed_for_dual_stack: bool
+      },
+      ?environment: {
+        variables: Hash[String, String]
+      },
+      ?runtime: String,
+      ?dead_letter_config: {
+        target_arn: String
+      },
+      ?kms_key_arn: String,
+      ?tracing_config: {
+        mode: String
+      },
+      ?revision_id: String,
+      ?layers: Array[String],
+      ?file_system_configs: Array[
+        {
+          arn: String,
+          local_mount_path: String
+        }
+      ],
+      ?image_config: {
+        entry_point: Array[String],
+        command: untyped,
+        working_directory: String
+      },
+      ?ephemeral_storage: {
+        size: Integer
+      },
+      ?snap_start: {
+        apply_on: String
+      },
+      ?logging_config: {
+        log_format: String,
+        application_log_level: String,
+        system_log_level: String,
+        log_group: String
+      }
+    ) -> _UpdateFunctionConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFunctionConfigurationResponse
+
+    interface _UpdateFunctionEventInvokeConfigResponse
+      include Smithy::Client::_Output[Types::FunctionEventInvokeConfig]
+      def last_modified: () -> Time?
+      def function_arn: () -> String?
+      def maximum_retry_attempts: () -> Integer?
+      def maximum_event_age_in_seconds: () -> Integer?
+      def destination_config: () -> Types::DestinationConfig?
+    end
+    def update_function_event_invoke_config: (
+      ?function_name: String,
+      ?qualifier: String,
+      ?maximum_retry_attempts: Integer,
+      ?maximum_event_age_in_seconds: Integer,
+      ?destination_config: {
+        on_success: {
+          destination: String
+        },
+        on_failure: {
+          destination: untyped
+        }
+      }
+    ) -> _UpdateFunctionEventInvokeConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFunctionEventInvokeConfigResponse
+
+    interface _UpdateFunctionUrlConfigResponse
+      include Smithy::Client::_Output[Types::UpdateFunctionUrlConfigResponse]
+      def function_url: () -> String?
+      def function_arn: () -> String?
+      def auth_type: () -> String?
+      def cors: () -> Types::Cors?
+      def creation_time: () -> String?
+      def last_modified_time: () -> String?
+      def invoke_mode: () -> String?
+    end
+    def update_function_url_config: (
+      ?function_name: String,
+      ?qualifier: String,
+      ?auth_type: String,
+      ?cors: {
+        allow_credentials: bool,
+        allow_headers: Array[String],
+        allow_methods: Array[String],
+        allow_origins: Array[String],
+        expose_headers: untyped,
+        max_age: Integer
+      },
+      ?invoke_mode: String
+    ) -> _UpdateFunctionUrlConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFunctionUrlConfigResponse
+  end
+end
