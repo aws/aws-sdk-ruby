@@ -302,6 +302,7 @@ module Aws
 
             metrics = opts[:credentials].metrics
             metrics << 'CREDENTIALS_PROFILE_NAMED_PROVIDER'
+            # Set the original credentials metrics to [] to prevent duplicate metrics during sign plugin
             opts[:credentials].metrics = []
             with_metrics(metrics) do
               creds = AssumeRoleCredentials.new(opts)
