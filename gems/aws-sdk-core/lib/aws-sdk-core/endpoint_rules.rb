@@ -10,7 +10,7 @@ module Aws
       def self.aws_partition(region)
         # TODO: aws-partitions gem or aws-sdk-core gem
         path = File.expand_path('partitions.json', __dir__)
-        partitions = JSON.load_file(path)['partitions']
+        partitions = ::JSON.load_file(path)['partitions']
 
         partition =
           partitions.find { |p| p['regions']&.fetch(region, nil) } ||

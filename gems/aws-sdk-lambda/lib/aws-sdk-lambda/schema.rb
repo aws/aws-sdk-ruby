@@ -1025,6 +1025,8 @@ module Aws::Lambda
     InvocationRequest.add_member(:client_context, 'ClientContext', String, traits: {"smithy.api#httpHeader" => "X-Amz-Client-Context"})
     InvocationRequest.add_member(:payload, 'Payload', Blob, traits: {"smithy.api#httpPayload" => {}})
     InvocationRequest.add_member(:qualifier, 'Qualifier', Qualifier, traits: {"smithy.api#httpQuery" => "Qualifier"})
+    InvocationRequest[:http_payload] = :payload
+    InvocationRequest[:http_payload_member] = InvocationRequest.member(:payload)
     InvocationRequest.type = Types::InvocationRequest
 
     InvocationResponse.add_member(:status_code, 'StatusCode', Integer, traits: {"smithy.api#default" => 0, "smithy.api#httpResponseCode" => {}})
@@ -1032,6 +1034,8 @@ module Aws::Lambda
     InvocationResponse.add_member(:log_result, 'LogResult', String, traits: {"smithy.api#httpHeader" => "X-Amz-Log-Result"})
     InvocationResponse.add_member(:payload, 'Payload', Blob, traits: {"smithy.api#httpPayload" => {}})
     InvocationResponse.add_member(:executed_version, 'ExecutedVersion', Version, traits: {"smithy.api#httpHeader" => "X-Amz-Executed-Version"})
+    InvocationResponse[:http_payload] = :payload
+    InvocationResponse[:http_payload_member] = InvocationResponse.member(:payload)
     InvocationResponse.type = Types::InvocationResponse
 
     InvocationType.add_member(:event, 'Event', Prelude::Unit, traits: {"smithy.api#enumValue" => "Event"})
@@ -1040,6 +1044,8 @@ module Aws::Lambda
 
     InvokeAsyncRequest.add_member(:function_name, 'FunctionName', NamespacedFunctionName, traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}})
     InvokeAsyncRequest.add_member(:invoke_args, 'InvokeArgs', BlobStream, traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}})
+    InvokeAsyncRequest[:http_payload] = :invoke_args
+    InvokeAsyncRequest[:http_payload_member] = InvokeAsyncRequest.member(:invoke_args)
     InvokeAsyncRequest.type = Types::InvokeAsyncRequest
 
     InvokeAsyncResponse.add_member(:status, 'Status', HttpStatus, traits: {"smithy.api#default" => 0, "smithy.api#httpResponseCode" => {}})
@@ -1062,12 +1068,16 @@ module Aws::Lambda
     InvokeWithResponseStreamRequest.add_member(:client_context, 'ClientContext', String, traits: {"smithy.api#httpHeader" => "X-Amz-Client-Context"})
     InvokeWithResponseStreamRequest.add_member(:qualifier, 'Qualifier', Qualifier, traits: {"smithy.api#httpQuery" => "Qualifier"})
     InvokeWithResponseStreamRequest.add_member(:payload, 'Payload', Blob, traits: {"smithy.api#httpPayload" => {}})
+    InvokeWithResponseStreamRequest[:http_payload] = :payload
+    InvokeWithResponseStreamRequest[:http_payload_member] = InvokeWithResponseStreamRequest.member(:payload)
     InvokeWithResponseStreamRequest.type = Types::InvokeWithResponseStreamRequest
 
     InvokeWithResponseStreamResponse.add_member(:status_code, 'StatusCode', Integer, traits: {"smithy.api#default" => 0, "smithy.api#httpResponseCode" => {}})
     InvokeWithResponseStreamResponse.add_member(:executed_version, 'ExecutedVersion', Version, traits: {"smithy.api#httpHeader" => "X-Amz-Executed-Version"})
     InvokeWithResponseStreamResponse.add_member(:event_stream, 'EventStream', InvokeWithResponseStreamResponseEvent, traits: {"smithy.api#httpPayload" => {}})
     InvokeWithResponseStreamResponse.add_member(:response_stream_content_type, 'ResponseStreamContentType', String, traits: {"smithy.api#httpHeader" => "Content-Type"})
+    InvokeWithResponseStreamResponse[:http_payload] = :event_stream
+    InvokeWithResponseStreamResponse[:http_payload_member] = InvokeWithResponseStreamResponse.member(:event_stream)
     InvokeWithResponseStreamResponse.type = Types::InvokeWithResponseStreamResponse
 
     InvokeWithResponseStreamResponseEvent.add_member(:payload_chunk, 'PayloadChunk', InvokeResponseStreamUpdate, Types::InvokeWithResponseStreamResponseEvent::PayloadChunk)
@@ -1841,7 +1851,7 @@ module Aws::Lambda
         operation.id = "com.amazonaws.lambda#DeleteAlias"
         operation.name = "DeleteAlias"
         operation.input = DeleteAliasRequest
-        operation.output = Prelude::Unit
+        operation.output = StructureShape.new(type: Smithy::Schema::EmptyStructure)
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/2015-03-31/functions/{FunctionName}/aliases/{Name}", "code" => 204}}
         operation.errors << InvalidParameterValueException
         operation.errors << ResourceConflictException
@@ -1876,7 +1886,7 @@ module Aws::Lambda
         operation.id = "com.amazonaws.lambda#DeleteFunction"
         operation.name = "DeleteFunction"
         operation.input = DeleteFunctionRequest
-        operation.output = Prelude::Unit
+        operation.output = StructureShape.new(type: Smithy::Schema::EmptyStructure)
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/2015-03-31/functions/{FunctionName}", "code" => 204}}
         operation.errors << InvalidParameterValueException
         operation.errors << ResourceConflictException
@@ -1888,7 +1898,7 @@ module Aws::Lambda
         operation.id = "com.amazonaws.lambda#DeleteFunctionCodeSigningConfig"
         operation.name = "DeleteFunctionCodeSigningConfig"
         operation.input = DeleteFunctionCodeSigningConfigRequest
-        operation.output = Prelude::Unit
+        operation.output = StructureShape.new(type: Smithy::Schema::EmptyStructure)
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/2020-06-30/functions/{FunctionName}/code-signing-config", "code" => 204}}
         operation.errors << CodeSigningConfigNotFoundException
         operation.errors << InvalidParameterValueException
@@ -1901,7 +1911,7 @@ module Aws::Lambda
         operation.id = "com.amazonaws.lambda#DeleteFunctionConcurrency"
         operation.name = "DeleteFunctionConcurrency"
         operation.input = DeleteFunctionConcurrencyRequest
-        operation.output = Prelude::Unit
+        operation.output = StructureShape.new(type: Smithy::Schema::EmptyStructure)
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/2017-10-31/functions/{FunctionName}/concurrency", "code" => 204}}
         operation.errors << InvalidParameterValueException
         operation.errors << ResourceConflictException
@@ -1913,7 +1923,7 @@ module Aws::Lambda
         operation.id = "com.amazonaws.lambda#DeleteFunctionEventInvokeConfig"
         operation.name = "DeleteFunctionEventInvokeConfig"
         operation.input = DeleteFunctionEventInvokeConfigRequest
-        operation.output = Prelude::Unit
+        operation.output = StructureShape.new(type: Smithy::Schema::EmptyStructure)
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/2019-09-25/functions/{FunctionName}/event-invoke-config", "code" => 204}}
         operation.errors << InvalidParameterValueException
         operation.errors << ResourceConflictException
@@ -1925,7 +1935,7 @@ module Aws::Lambda
         operation.id = "com.amazonaws.lambda#DeleteFunctionUrlConfig"
         operation.name = "DeleteFunctionUrlConfig"
         operation.input = DeleteFunctionUrlConfigRequest
-        operation.output = Prelude::Unit
+        operation.output = StructureShape.new(type: Smithy::Schema::EmptyStructure)
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/2021-10-31/functions/{FunctionName}/url", "code" => 204}}
         operation.errors << ResourceConflictException
         operation.errors << ResourceNotFoundException
@@ -1936,7 +1946,7 @@ module Aws::Lambda
         operation.id = "com.amazonaws.lambda#DeleteLayerVersion"
         operation.name = "DeleteLayerVersion"
         operation.input = DeleteLayerVersionRequest
-        operation.output = Prelude::Unit
+        operation.output = StructureShape.new(type: Smithy::Schema::EmptyStructure)
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/2018-10-31/layers/{LayerName}/versions/{VersionNumber}", "code" => 204}}
         operation.errors << ServiceException
         operation.errors << TooManyRequestsException
@@ -1945,7 +1955,7 @@ module Aws::Lambda
         operation.id = "com.amazonaws.lambda#DeleteProvisionedConcurrencyConfig"
         operation.name = "DeleteProvisionedConcurrencyConfig"
         operation.input = DeleteProvisionedConcurrencyConfigRequest
-        operation.output = Prelude::Unit
+        operation.output = StructureShape.new(type: Smithy::Schema::EmptyStructure)
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/2019-09-30/functions/{FunctionName}/provisioned-concurrency", "code" => 204}}
         operation.errors << InvalidParameterValueException
         operation.errors << ResourceConflictException
@@ -2229,7 +2239,7 @@ module Aws::Lambda
         operation.name = "ListAliases"
         operation.input = ListAliasesRequest
         operation.output = ListAliasesResponse
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2015-03-31/functions/{FunctionName}/aliases", "code" => 200}}
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2015-03-31/functions/{FunctionName}/aliases", "code" => 200}, "smithy.api#paginated" => {"inputToken" => "Marker", "outputToken" => "NextMarker", "items" => "Aliases", "pageSize" => "MaxItems"}}
         operation.errors << InvalidParameterValueException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceException
@@ -2241,7 +2251,7 @@ module Aws::Lambda
         operation.name = "ListCodeSigningConfigs"
         operation.input = ListCodeSigningConfigsRequest
         operation.output = ListCodeSigningConfigsResponse
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2020-04-22/code-signing-configs", "code" => 200}}
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2020-04-22/code-signing-configs", "code" => 200}, "smithy.api#paginated" => {"inputToken" => "Marker", "outputToken" => "NextMarker", "items" => "CodeSigningConfigs", "pageSize" => "MaxItems"}}
         operation.errors << InvalidParameterValueException
         operation.errors << ServiceException
         operation[:paginator] = Paginators::ListCodeSigningConfigs.new
@@ -2251,7 +2261,7 @@ module Aws::Lambda
         operation.name = "ListEventSourceMappings"
         operation.input = ListEventSourceMappingsRequest
         operation.output = ListEventSourceMappingsResponse
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2015-03-31/event-source-mappings", "code" => 200}}
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2015-03-31/event-source-mappings", "code" => 200}, "smithy.api#paginated" => {"inputToken" => "Marker", "outputToken" => "NextMarker", "items" => "EventSourceMappings", "pageSize" => "MaxItems"}}
         operation.errors << InvalidParameterValueException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceException
@@ -2263,7 +2273,7 @@ module Aws::Lambda
         operation.name = "ListFunctionEventInvokeConfigs"
         operation.input = ListFunctionEventInvokeConfigsRequest
         operation.output = ListFunctionEventInvokeConfigsResponse
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2019-09-25/functions/{FunctionName}/event-invoke-config/list", "code" => 200}}
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2019-09-25/functions/{FunctionName}/event-invoke-config/list", "code" => 200}, "smithy.api#paginated" => {"inputToken" => "Marker", "outputToken" => "NextMarker", "items" => "FunctionEventInvokeConfigs", "pageSize" => "MaxItems"}}
         operation.errors << InvalidParameterValueException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceException
@@ -2275,7 +2285,7 @@ module Aws::Lambda
         operation.name = "ListFunctionUrlConfigs"
         operation.input = ListFunctionUrlConfigsRequest
         operation.output = ListFunctionUrlConfigsResponse
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2021-10-31/functions/{FunctionName}/urls", "code" => 200}}
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2021-10-31/functions/{FunctionName}/urls", "code" => 200}, "smithy.api#paginated" => {"inputToken" => "Marker", "outputToken" => "NextMarker", "items" => "FunctionUrlConfigs", "pageSize" => "MaxItems"}}
         operation.errors << InvalidParameterValueException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceException
@@ -2287,7 +2297,7 @@ module Aws::Lambda
         operation.name = "ListFunctions"
         operation.input = ListFunctionsRequest
         operation.output = ListFunctionsResponse
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2015-03-31/functions", "code" => 200}}
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2015-03-31/functions", "code" => 200}, "smithy.api#paginated" => {"inputToken" => "Marker", "outputToken" => "NextMarker", "items" => "Functions", "pageSize" => "MaxItems"}}
         operation.errors << InvalidParameterValueException
         operation.errors << ServiceException
         operation.errors << TooManyRequestsException
@@ -2298,7 +2308,7 @@ module Aws::Lambda
         operation.name = "ListFunctionsByCodeSigningConfig"
         operation.input = ListFunctionsByCodeSigningConfigRequest
         operation.output = ListFunctionsByCodeSigningConfigResponse
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2020-04-22/code-signing-configs/{CodeSigningConfigArn}/functions", "code" => 200}}
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2020-04-22/code-signing-configs/{CodeSigningConfigArn}/functions", "code" => 200}, "smithy.api#paginated" => {"inputToken" => "Marker", "outputToken" => "NextMarker", "items" => "FunctionArns", "pageSize" => "MaxItems"}}
         operation.errors << InvalidParameterValueException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceException
@@ -2309,7 +2319,7 @@ module Aws::Lambda
         operation.name = "ListLayerVersions"
         operation.input = ListLayerVersionsRequest
         operation.output = ListLayerVersionsResponse
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2018-10-31/layers/{LayerName}/versions", "code" => 200}}
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2018-10-31/layers/{LayerName}/versions", "code" => 200}, "smithy.api#paginated" => {"inputToken" => "Marker", "outputToken" => "NextMarker", "items" => "LayerVersions", "pageSize" => "MaxItems"}}
         operation.errors << InvalidParameterValueException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceException
@@ -2321,7 +2331,7 @@ module Aws::Lambda
         operation.name = "ListLayers"
         operation.input = ListLayersRequest
         operation.output = ListLayersResponse
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2018-10-31/layers", "code" => 200}}
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2018-10-31/layers", "code" => 200}, "smithy.api#paginated" => {"inputToken" => "Marker", "outputToken" => "NextMarker", "items" => "Layers", "pageSize" => "MaxItems"}}
         operation.errors << InvalidParameterValueException
         operation.errors << ServiceException
         operation.errors << TooManyRequestsException
@@ -2332,7 +2342,7 @@ module Aws::Lambda
         operation.name = "ListProvisionedConcurrencyConfigs"
         operation.input = ListProvisionedConcurrencyConfigsRequest
         operation.output = ListProvisionedConcurrencyConfigsResponse
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2019-09-30/functions/{FunctionName}/provisioned-concurrency?List=ALL", "code" => 200}}
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2019-09-30/functions/{FunctionName}/provisioned-concurrency?List=ALL", "code" => 200}, "smithy.api#paginated" => {"inputToken" => "Marker", "outputToken" => "NextMarker", "items" => "ProvisionedConcurrencyConfigs", "pageSize" => "MaxItems"}}
         operation.errors << InvalidParameterValueException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceException
@@ -2355,7 +2365,7 @@ module Aws::Lambda
         operation.name = "ListVersionsByFunction"
         operation.input = ListVersionsByFunctionRequest
         operation.output = ListVersionsByFunctionResponse
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2015-03-31/functions/{FunctionName}/versions", "code" => 200}}
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2015-03-31/functions/{FunctionName}/versions", "code" => 200}, "smithy.api#paginated" => {"inputToken" => "Marker", "outputToken" => "NextMarker", "items" => "Versions", "pageSize" => "MaxItems"}}
         operation.errors << InvalidParameterValueException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceException
@@ -2465,7 +2475,7 @@ module Aws::Lambda
         operation.id = "com.amazonaws.lambda#RemoveLayerVersionPermission"
         operation.name = "RemoveLayerVersionPermission"
         operation.input = RemoveLayerVersionPermissionRequest
-        operation.output = Prelude::Unit
+        operation.output = StructureShape.new(type: Smithy::Schema::EmptyStructure)
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/2018-10-31/layers/{LayerName}/versions/{VersionNumber}/policy/{StatementId}", "code" => 204}}
         operation.errors << InvalidParameterValueException
         operation.errors << PreconditionFailedException
@@ -2477,7 +2487,7 @@ module Aws::Lambda
         operation.id = "com.amazonaws.lambda#RemovePermission"
         operation.name = "RemovePermission"
         operation.input = RemovePermissionRequest
-        operation.output = Prelude::Unit
+        operation.output = StructureShape.new(type: Smithy::Schema::EmptyStructure)
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/2015-03-31/functions/{FunctionName}/policy/{StatementId}", "code" => 204}}
         operation.errors << InvalidParameterValueException
         operation.errors << PreconditionFailedException
@@ -2489,7 +2499,7 @@ module Aws::Lambda
         operation.id = "com.amazonaws.lambda#TagResource"
         operation.name = "TagResource"
         operation.input = TagResourceRequest
-        operation.output = Prelude::Unit
+        operation.output = StructureShape.new(type: Smithy::Schema::EmptyStructure)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2017-03-31/tags/{Resource}", "code" => 204}}
         operation.errors << InvalidParameterValueException
         operation.errors << ResourceConflictException
@@ -2501,7 +2511,7 @@ module Aws::Lambda
         operation.id = "com.amazonaws.lambda#UntagResource"
         operation.name = "UntagResource"
         operation.input = UntagResourceRequest
-        operation.output = Prelude::Unit
+        operation.output = StructureShape.new(type: Smithy::Schema::EmptyStructure)
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/2017-03-31/tags/{Resource}", "code" => 204}}
         operation.errors << InvalidParameterValueException
         operation.errors << ResourceConflictException

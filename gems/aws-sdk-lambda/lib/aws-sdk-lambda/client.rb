@@ -4,6 +4,10 @@
 
 require_relative 'plugins/auth'
 require_relative 'plugins/endpoint'
+require 'aws-sdk-core/plugins/checksum_required'
+require 'aws-sdk-core/plugins/host_prefix'
+require 'aws-sdk-core/plugins/idempotency_token'
+require 'aws-sdk-core/plugins/request_compression'
 require 'aws-sdk-core/plugins/sigv4'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/logging'
@@ -29,6 +33,10 @@ module Aws::Lambda
 
     add_plugin(Aws::Lambda::Plugins::Auth)
     add_plugin(Aws::Lambda::Plugins::Endpoint)
+    add_plugin(Aws::Core::Plugins::ChecksumRequired)
+    add_plugin(Aws::Core::Plugins::HostPrefix)
+    add_plugin(Aws::Core::Plugins::IdempotencyToken)
+    add_plugin(Aws::Core::Plugins::RequestCompression)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::Logging)
@@ -61,6 +69,10 @@ module Aws::Lambda
     # @option options [identity(properties)] :credentials_provider
     #  The credentials provider used to resolve credentials. Any object that responds to `#identity(properties)`
     #  and returns a {Aws::Core::Credentials}.
+    # @option options [Boolean] :disable_host_prefix_injection
+    #  When true, the SDK will not prepend the modeled host prefix to the endpoint.
+    # @option options [Boolean] :disable_request_compression
+    #  When set to 'true' the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
     # @option options [Aws::Lambda::EndpointProvider] :endpoint_provider
@@ -133,6 +145,9 @@ module Aws::Lambda
     #  output in the {Smithy::Client::Output#error error accessor}.
     # @option options [String] :region
     #  TODO
+    # @option options [Integer] :request_min_compression_size_bytes (10240)
+    #  The minimum size in bytes that triggers compression for request bodies.
+    #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [lambda] :retry_backoff (Smithy::Client::Retry::EXPONENTIAL_BACKOFF)
     #  A callable object that calculates a backoff delay for a retry attempt. The callable
     #  should accept a single argument, `attempts`, that represents the number of attempts
