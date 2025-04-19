@@ -4,11 +4,11 @@
 
 require_relative 'plugins/auth'
 require_relative 'plugins/endpoint'
+require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/checksum_required'
 require 'aws-sdk-core/plugins/host_prefix'
 require 'aws-sdk-core/plugins/idempotency_token'
 require 'aws-sdk-core/plugins/request_compression'
-require 'aws-sdk-core/plugins/sigv4'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/logging'
 require 'smithy-client/plugins/net_http'
@@ -33,11 +33,11 @@ module Aws::Lambda
 
     add_plugin(Aws::Lambda::Plugins::Auth)
     add_plugin(Aws::Lambda::Plugins::Endpoint)
+    add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::ChecksumRequired)
     add_plugin(Aws::Core::Plugins::HostPrefix)
     add_plugin(Aws::Core::Plugins::IdempotencyToken)
     add_plugin(Aws::Core::Plugins::RequestCompression)
-    add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::Logging)
     add_plugin(Smithy::Client::Plugins::NetHTTP)

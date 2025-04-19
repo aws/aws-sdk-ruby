@@ -1,14 +1,16 @@
 # frozen_string_literal: true
 
+require 'aws-sigv4'
+
 module Aws
   module Core
     module Signers
       # Auth scheme for SigV4.
       class SigV4 < Smithy::Client::Signer
-        def sign(request:, identity:, **options)
+        def sign(request:, identity:, properties:)
           signer = Aws::Sigv4::Signer.new(
-            service: options[:name],
-            region: options[:region],
+            service: properties['name'],
+            region: properties['region'],
             credentials: identity
           )
           signature = signer.sign_request(

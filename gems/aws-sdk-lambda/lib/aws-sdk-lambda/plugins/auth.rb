@@ -24,6 +24,7 @@ module Aws::Lambda
           and the value is an initialized auth scheme class.
         DOCS
         {
+          'aws.auth#sigv4' => config.sigv4_auth_scheme,
           'smithy.api#noAuth' => config.anonymous_auth_scheme,
         }
       end
@@ -46,6 +47,7 @@ module Aws::Lambda
           raise 'No auth options were resolved' if auth_options.empty?
 
           identity_providers = {
+            Aws::Core::Identities::Credentials => context.config.credentials_provider,
             Smithy::Client::Identities::Anonymous => context.config.anonymous_provider,
           }
 

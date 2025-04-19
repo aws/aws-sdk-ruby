@@ -1,0 +1,36 @@
+# frozen_string_literal: true
+
+# TODO: consider whether this is awful or not
+require_relative '../../../../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/sigv4'
+
+module AwsSdkCodeGenerator
+  module Welds
+    # Provides default plugins.
+    class SigV4 < Smithy::Weld
+      def for?(service)
+        _id, service = service.first
+        return false unless service.fetch('traits', {}).include?('aws.auth#sigv4')
+
+        say_status :insert, 'Adding the SigV4 plugin', @plan.quiet
+        true
+      end
+
+      def add_plugins
+        base_path = 'aws-sdk-core/plugins'
+        {
+          Aws::Core::Plugins::SigV4 => { require_path: "#{base_path}/sigv4" }
+        }
+      end
+
+      def add_auth_schemes
+        {
+          'aws.auth#sigv4' => {
+            auth_scheme_config_option: :sigv4_auth_scheme,
+            identity_provider_config_option: :credentials_provider,
+            identity_type: Aws::Core::Identities::Credentials
+          }
+        }
+      end
+    end
+  end
+end
