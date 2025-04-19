@@ -4,7 +4,7 @@ module AwsSdkCodeGenerator
   module Welds
     # @api private
     class Endpoints < Smithy::Weld
-      def endpoint_built_in_bindings
+      def endpoint_built_in_bindings # rubocop:disable Metrics/MethodLength
         {
           'AWS::Region' => {
             render_config: proc do |_plan|

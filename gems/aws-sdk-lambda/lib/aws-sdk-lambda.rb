@@ -5,6 +5,7 @@
 require 'aws-sdk-core'
 require 'smithy-client'
 
+
 module Aws
   module Lambda
     VERSION = '2.0.0.pre0'

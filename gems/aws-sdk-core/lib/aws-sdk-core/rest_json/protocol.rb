@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'smithy-schema'
+require_relative '../json/codec'
+
 require_relative 'request_builder'
 require_relative 'response_parser'
 require_relative 'response_stubber'
@@ -17,12 +20,12 @@ module Aws
           RequestBuilder.new(@options).build(context)
         end
 
-        def parse_error(context)
-          ResponseParser.new(@options).parse_error(context)
+        def parse_error(output)
+          ResponseParser.new(@options).parse_error(output)
         end
 
-        def parse_data(context)
-          ResponseParser.new(@options).parse_data(context)
+        def parse_data(output)
+          ResponseParser.new(@options).parse_data(output)
         end
 
         def stub_data(service, operation, data)

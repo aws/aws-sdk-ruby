@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'aws-sdk-core/endpoint_rules'
+require_relative 'aws-sdk-core/rest_json/protocol'
 
 module Aws
   # The root namespace for the AWS SDK for Ruby core modules and classes.
