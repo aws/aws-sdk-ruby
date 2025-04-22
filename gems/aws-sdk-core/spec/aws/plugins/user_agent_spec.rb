@@ -5,8 +5,8 @@ require_relative '../../spec_helper'
 module Aws
   module Plugins
     describe UserAgent do
-      let(:svc) { ApiHelper.sample_service }
-      let(:client) { svc::Client.new(stub_responses: true) }
+      let(:client_class) { ApiHelper.sample_client }
+      let(:client) { client_class.new(stub_responses: true) }
 
       def setup(given)
         metric_callable = nil

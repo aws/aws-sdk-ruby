@@ -135,6 +135,7 @@ module Seahorse
           expect(client.operation_names).to eq([:operation_name])
         end
 
+        # TODO: team discussion
         it 'responds to each operation name' do
           client.operation_names.each do |operation_name|
             expect(client).to respond_to(operation_name)
@@ -142,9 +143,9 @@ module Seahorse
         end
 
         it 'builds and sends a request when it receives a request method' do
-          expect(client).to receive(:build_request).
-            with(:operation_name, { foo: 'bar' }).
-            and_return(request)
+          expect(client).to receive(:build_request)
+            .with(:operation_name, { foo: 'bar' })
+            .and_return(request)
           expect(request).to receive(:send_request)
           client.operation_name(foo: 'bar')
         end

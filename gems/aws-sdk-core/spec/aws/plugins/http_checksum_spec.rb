@@ -6,7 +6,7 @@ require 'stringio'
 module Aws
   module Plugins
     describe HttpChecksum do
-      let(:http_checksum_client) do
+      let(:service) do
         ApiHelper.sample_service(
           metadata: { 'protocol' => 'rest-xml' },
           operations: {
@@ -28,12 +28,11 @@ module Aws
               'httpChecksumRequired' => { 'required' => 'true' }
             }
           }
-        ).const_get(:Client)
+        )
       end
 
-      let(:client) do
-        http_checksum_client.new(stub_responses: true)
-      end
+      let(:client_class) { ApiHelper.sample_client(service: service) }
+      let(:client) { client_class.new(stub_responses: true) }
 
       context 'checksum not required' do
         it 'does not compute MD5 and does not send the content-md5 header' do

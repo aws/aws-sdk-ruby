@@ -5,12 +5,16 @@ require_relative '../../spec_helper'
 module Aws
   module Plugins
     describe SignatureV4 do
+      let(:service) do
+        ApiHelper.sample_service(
+          metadata: {
+            'signatureVersion' => 'v4',
+            'endpointPrefix' => 'svc-name'
+          }
+        )
+      end
 
-      Sigv4Client = ApiHelper.sample_service(metadata: {
-        'signatureVersion' => 'v4',
-        'endpointPrefix' => 'svc-name',
-      }).const_get(:Client)
-
+      let(:client_class) { ApiHelper.sample_client(service: service) }
       let(:plugin) { SignatureV4.new }
 
       let(:options) {{
@@ -20,18 +24,15 @@ module Aws
       }}
 
       it 'raises an error when attempting to sign a request w/out credentials' do
-        client = Sigv4Client.new(region: 'us-west-1')
+        client = client_class.new(region: 'us-west-1')
         expect {
           client.example_operation
         }.to raise_error(Errors::MissingCredentialsError)
       end
 
       describe 'sigv4 signing name' do
-
         it 'accepts a sigv4 signing name configuration option' do
-          client = Sigv4Client.new(options.merge(
-            sigv4_name: 'name',
-          ))
+          client = client_class.new(options.merge(sigv4_name: 'name'))
           expect(client.config.sigv4_name).to eq('name')
         end
 
@@ -41,86 +42,97 @@ module Aws
                   .with('other-region', 'svc-name')
                   .and_return('override-service')
 
-          client = Sigv4Client.new(options.merge(
-            region: 'other-region',
-            endpoint: 'https://svc-name.amazonaws.com'
-          ))
+          client = client_class.new(options.merge(
+                                      region: 'other-region',
+                                      endpoint: 'https://svc-name.amazonaws.com'
+                                    ))
           expect(client.config.sigv4_name).to eq('override-service')
         end
 
         it 'defaults the sigv4 name to the endpoint prefix' do
-          svc = ApiHelper.sample_service(metadata: {
-            'signatureVersion' => 'v4',
-            'endpointPrefix' => 'endpoint-prefix',
-          })
-          client = svc::Client.new(options)
+          svc = ApiHelper.sample_service(
+            metadata: {
+              'signatureVersion' => 'v4',
+              'endpointPrefix' => 'endpoint-prefix'
+            }
+          )
+          client = ApiHelper.sample_client(service: svc).new(options)
           expect(client.config.sigv4_name).to eq('endpoint-prefix')
         end
 
         it 'prefers the signingName over endpointPrefix' do
-          svc = ApiHelper.sample_service(metadata: {
-            'signatureVersion' => 'v4',
-            'endpointPrefix' => 'endpoint-prefix',
-            'signingName' => 'signing-name',
-          })
-          client = svc::Client.new(options)
+          svc = ApiHelper.sample_service(
+            metadata: {
+              'signatureVersion' => 'v4',
+              'endpointPrefix' => 'endpoint-prefix',
+              'signingName' => 'signing-name'
+            }
+          )
+          client = ApiHelper.sample_client(service: svc).new(options)
           expect(client.config.sigv4_name).to eq('signing-name')
         end
 
       end
 
       describe 'sigv4 signing region' do
-
         it 'uses the endpoint provider for global endpoints' do
           expect(Aws::Partitions::EndpointProvider)
             .to receive(:signing_region)
                   .with('other-region', 'svc-name', nil)
                   .and_return('us-east-1')
 
-          client = Sigv4Client.new(options.merge(
-            region: 'other-region',
-            endpoint: 'https://svc-name.amazonaws.com'
-          ))
+          client = client_class.new(
+            options.merge(
+              region: 'other-region',
+              endpoint: 'https://svc-name.amazonaws.com'
+            )
+          )
           expect(client.config.sigv4_region).to eq('us-east-1')
         end
 
         it 'defaults to configured region if it can not be extracted' do
-          client = Sigv4Client.new(options.merge(
-            region: 'other-region',
-            endpoint: 'https://localhost:3000'
-          ))
+          client = client_class.new(
+            options.merge(
+              region: 'other-region',
+              endpoint: 'https://localhost:3000'
+            )
+          )
           expect(client.config.sigv4_region).to eq('other-region')
         end
 
         it 'uses the specified region when no endpointPrefix is present' do
-          svc = ApiHelper.sample_service(metadata: {
-            'signatureVersion' => 'v4',
-            'signingName' => 'signing-name',
-            'endpointPrefix' => nil,
-          })
-          client = svc::Client.new(options.merge(
+          svc = ApiHelper.sample_service(
+            metadata: {
+              'signatureVersion' => 'v4',
+              'signingName' => 'signing-name',
+              'endpointPrefix' => nil
+            }
+          )
+          client_opts = {
             region: 'eu-west-1',
-            endpoint: 'http://uniqueness.svc.us-west-2.amazonaws.com',
-          ))
+            endpoint: 'http://uniqueness.svc.us-west-2.amazonaws.com'
+          }
+          client = ApiHelper.sample_client(service: svc).new(options.merge(client_opts))
           expect(client.config.sigv4_name).to eq('signing-name')
           expect(client.config.sigv4_region).to eq('eu-west-1')
         end
 
         it 'uses the endpointPrefix to find the signing_region' do
-          svc = ApiHelper.sample_service(metadata: {
-            'signatureVersion' => 'v4',
-            'signingName' => 'signing-name',
-            'endpointPrefix' => 'api.service',
-          })
+          svc = ApiHelper.sample_service(
+            metadata: {
+              'signatureVersion' => 'v4',
+              'signingName' => 'signing-name',
+              'endpointPrefix' => 'api.service',
+            }
+          )
           allow(Aws::Plugins::RegionalEndpoint).to receive(:warn)
           expect(Aws::Partitions::EndpointProvider)
             .to receive(:signing_region)
             .with('us-east-1', 'api.service', nil)
             .and_return('us-east-1')
 
-          client = svc::Client.new(options.merge(
-            region: 'fips-us-east-1',
-            ))
+          client = ApiHelper.sample_client(service: svc)
+                            .new(options.merge(region: 'fips-us-east-1'))
           expect(client.config.sigv4_name).to eq('signing-name')
           expect(client.config.sigv4_region).to eq('us-east-1')
         end
@@ -128,7 +140,6 @@ module Aws
       end
 
       describe 'apply authtype trait' do
-
         let(:api) {{
           'metadata' => {
             'protocol' => 'rest-xml',
@@ -215,13 +226,16 @@ module Aws
           }
         }}
         let(:svc) { ApiHelper.sample_service(api: api) }
-        let(:client) {
-          svc::Client.new(options.merge(
-            region: 'region',
-            endpoint: 'https://domain.region.amazonaws.com',
-            stub_responses: true
-          ))
-        }
+        let(:client_class) { ApiHelper.sample_client(service: svc) }
+        let(:client) do
+          client_class.new(
+            options.merge(
+              region: 'region',
+              endpoint: 'https://domain.region.amazonaws.com',
+              stub_responses: true
+            )
+          )
+        end
 
         let(:datetime) { '20120101T10:11:12Z' }
         let(:now) { Time.parse(datetime) }
@@ -247,7 +261,7 @@ module Aws
         end
 
         it "signs payload for HTTP request even when 'v4-unsigned-payload' is set" do
-          client = svc::Client.new(options.merge(
+          client = client_class.new(options.merge(
             region: 'region',
             endpoint: 'http://domain.region.amazonaws.com',
             stub_responses: true
@@ -270,7 +284,7 @@ module Aws
         end
 
         it 'skips clock skew correction when clock_skew is not available on the configuration' do
-          client = Sigv4Client.new(options.merge(
+          client = client_class.new(options.merge(
             clock_skew: nil,
             stub_responses: true
           ))
@@ -280,7 +294,7 @@ module Aws
         end
 
         it 'skips clock skew correction when correct_clock_skew is false' do
-          client = Sigv4Client.new(options.merge(
+          client = client_class.new(options.merge(
             clock_skew: clock_skew,
             correct_clock_skew: false,
             stub_responses: true
@@ -292,7 +306,7 @@ module Aws
         end
 
         it 'skips clock skew correction when clock skew is 0' do
-          client = Sigv4Client.new(options.merge(
+          client = client_class.new(options.merge(
             clock_skew: clock_skew,
             correct_clock_skew: true,
             stub_responses: true
@@ -305,7 +319,7 @@ module Aws
         end
 
         it 'applies clock skew correction when clock skew is non zero' do
-          client = Sigv4Client.new(options.merge(
+          client = client_class.new(options.merge(
             clock_skew: clock_skew,
             correct_clock_skew: true,
             stub_responses: true

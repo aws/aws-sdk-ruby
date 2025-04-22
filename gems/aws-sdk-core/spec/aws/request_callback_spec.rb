@@ -9,7 +9,7 @@ module Seahorse
     module Plugins
       describe RequestCallback do
         let(:client_class) do
-          ApiHelper.sample_service.const_get(:Client)
+          ApiHelper.sample_client
         end
 
         let(:callback) { Proc.new {|chunk, read, total| @call_count += 1} }

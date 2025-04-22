@@ -9,7 +9,7 @@ module Aws
       # Instead of using Response.new, create an example client and set the
       # response to be a real one (with types) for sensitive param filtering
       let(:client) do
-        ApiHelper.sample_service.const_get(:Client).new(stub_responses: true)
+        ApiHelper.sample_client.new(stub_responses: true)
       end
       let(:response) { client.example_operation }
 

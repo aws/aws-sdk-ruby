@@ -6,8 +6,6 @@ module Aws
   describe 'Client' do
     describe 'response stubbing' do
 
-      ResponseStubbingExample = ApiHelper.sample_service
-
       let(:options) {{
         stub_responses: true,
         region: 'us-east-1',
@@ -15,7 +13,7 @@ module Aws
         secret_access_key: 'secret',
       }}
 
-      let(:client_class) { ResponseStubbingExample.const_get(:Client) }
+      let(:client_class) { ApiHelper.sample_client }
 
       let(:client) { client_class.new(options) }
 
@@ -27,10 +25,12 @@ module Aws
 
       context 'when requests are signed' do
 
+        let(:sample_service) do
+          ApiHelper.sample_service(metadata: { 'signatureVersion' => 'v4' })
+        end
+
         let(:client_class) do
-          ApiHelper
-            .sample_service(metadata: {'signatureVersion' => 'v4'})
-            .const_get(:Client)
+          ApiHelper.sample_client(service: sample_service)
         end
 
         it 'raises an error when credentials are nil' do
@@ -179,8 +179,7 @@ Known AWS regions include (not specific to this service):
       end
 
       context 'api requests' do
-        ApiRequestsStubbingExample = ApiHelper.sample_rest_xml
-        let(:client_class) { ApiRequestsStubbingExample.const_get(:Client) }
+        let(:client_class) { ApiHelper.sample_client(service: ApiHelper.sample_rest_xml) }
         let(:client) { client_class.new(options) }
 
         it 'allows api requests to be logged when stubbed' do
@@ -193,7 +192,7 @@ Known AWS regions include (not specific to this service):
           expect(log_obj[:params]).to eq({:bucket=>"aws-sdk"})
           expect(log_obj[:context].metadata).to eq(
             {
-              :gem_name=>"aws-sdk-sampleapi2",
+              :gem_name=>"aws-sdk-sampleapi14",
               :gem_version=>"1.0.0",
               :response_target=>nil,
               :original_params=>{:bucket=>"aws-sdk"},

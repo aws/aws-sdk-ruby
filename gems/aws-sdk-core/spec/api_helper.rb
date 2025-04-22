@@ -165,6 +165,12 @@ module ApiHelper
       Object.const_get(module_name)
     end
 
+    def sample_client(options = {})
+      service = options[:service] || sample_service
+      client_class = service.const_get(:Client)
+      define_operation_methods(client_class)
+    end
+
     def sample_rest_service(options)
       sample_service(options)
     end
@@ -182,6 +188,20 @@ module ApiHelper
         'shapes' => shapes(options),
       }
     end
+
+    def define_operation_methods(client_class)
+      operations_module = Module.new
+      client_class.api.operation_names.each do |method_name|
+        operations_module.send(:define_method, method_name) do |*args, &block|
+          params = args[0] || {}
+          options = args[1] || {}
+          build_request(method_name, params).send_request(options, &block)
+        end
+      end
+      client_class.include(operations_module)
+      client_class
+    end
+
 
     def metadata(options)
       {
