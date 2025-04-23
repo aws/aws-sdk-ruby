@@ -1,0 +1,26 @@
+{{generated_src_warning}}
+module Aws
+  module {{service_name}}
+    class AsyncClient < ::Seahorse::Client::AsyncBase
+      include ::Aws::AsyncClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/{{service_name}}/AsyncClient.html#initialize-instance_method
+      def self.new: ({{{client_option}}}) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+      {{#operations}}
+
+      {{^empty_structure}}
+      interface {{interface}}
+        include ::Seahorse::Client::_ResponseSuccess[{{data}}]
+        {{#returns_members}}
+        def {{method_name}}: () -> {{{returns}}}
+        {{/returns_members}}
+      end
+      {{/empty_structure}}
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/{{service_name}}/AsyncClient.html#{{method_name}}-instance_method
+      {{{signature}}}
+      {{/operations}}
+    end
+  end
+end

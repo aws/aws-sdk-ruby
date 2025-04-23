@@ -114,19 +114,11 @@ module AwsSdkCodeGenerator
       Enumerator.new do |y|
         prefix = options.fetch(:prefix, '')
         codegenerated_plugins = codegen_plugins(prefix)
-        client_class = Views::RBS::ClientClass.new(
-          service_name: @service.name,
-          codegenerated_plugins: codegenerated_plugins,
-          aws_sdk_core_lib_path: @aws_sdk_core_lib_path,
-          legacy_endpoints: @service.legacy_endpoints?,
-          signature_version: @service.signature_version,
-          api: @service.api,
-          waiters: @service.waiters,
-          protocol: @service.protocol,
-          add_plugins: @service.add_plugins,
-          remove_plugins: @service.remove_plugins,
-        )
-        y.yield("#{prefix}/client.rbs", client_class.render)
+        client_class = client_class_rbs(codegenerated_plugins)
+        y.yield("#{prefix}/client.rbs", client_class)
+        if @service.protocol_settings['h2']
+          y.yield("#{prefix}/async_client.rbs", async_client_class(codegenerated_plugins))
+        end
         y.yield("#{prefix}/errors.rbs", Views::RBS::ErrorsModule.new(
           service: @service
         ).render)
@@ -135,7 +127,7 @@ module AwsSdkCodeGenerator
           client_class: client_class,
           api: @service.api,
           resources: @service.resources,
-          paginators: @service.paginators,
+          paginators: @service.paginators
         ).render)
         y.yield("#{prefix}/waiters.rbs", Views::RBS::WaitersModule.new(
           service_name: @service.name,
@@ -206,6 +198,22 @@ module AwsSdkCodeGenerator
       ).render
     end
 
+    def client_class_rbs(codegenerated_plugins)
+      Views::RBS::ClientClass.new(
+        service_name: @service.name,
+        codegenerated_plugins: codegenerated_plugins,
+        aws_sdk_core_lib_path: @aws_sdk_core_lib_path,
+        legacy_endpoints: @service.legacy_endpoints?,
+        signature_version: @service.signature_version,
+        api: @service.api,
+        waiters: @service.waiters,
+        protocol: @service.protocol,
+        add_plugins: @service.add_plugins,
+        remove_plugins: @service.remove_plugins,
+        protocol_settings: @service.protocol_settings
+      ).render
+    end
+
     def async_client_class(codegenerated_plugins)
       Views::AsyncClientClass.new(
         service_identifier: @service.identifier,
@@ -222,6 +230,22 @@ module AwsSdkCodeGenerator
         api: @service.api,
         legacy_endpoints: @service.legacy_endpoints?,
         codegenerated_plugins: codegenerated_plugins,
+        async_client: true
+      ).render
+    end
+
+    def async_client_class_rbs(codegenerated_plugins)
+      Views::RBS::AsyncClientClass.new(
+        service_name: @service.name,
+        codegenerated_plugins: codegenerated_plugins,
+        aws_sdk_core_lib_path: @aws_sdk_core_lib_path,
+        legacy_endpoints: @service.legacy_endpoints?,
+        signature_version: @service.signature_version,
+        api: @service.api,
+        protocol: @service.protocol,
+        add_plugins: @service.add_plugins,
+        remove_plugins: @service.remove_plugins,
+        protocol_settings: @service.protocol_settings,
         async_client: true
       ).render
     end
