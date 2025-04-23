@@ -115,9 +115,12 @@ module AwsSdkCodeGenerator
         prefix = options.fetch(:prefix, '')
         codegenerated_plugins = codegen_plugins(prefix)
         client_class = client_class_rbs(codegenerated_plugins)
-        y.yield("#{prefix}/client.rbs", client_class)
+        y.yield("#{prefix}/client.rbs", client_class.render)
         if @service.protocol_settings['h2']
-          y.yield("#{prefix}/async_client.rbs", async_client_class(codegenerated_plugins))
+          y.yield(
+            "#{prefix}/async_client.rbs",
+            async_client_class(codegenerated_plugins).render
+          )
         end
         y.yield("#{prefix}/errors.rbs", Views::RBS::ErrorsModule.new(
           service: @service
@@ -211,7 +214,7 @@ module AwsSdkCodeGenerator
         add_plugins: @service.add_plugins,
         remove_plugins: @service.remove_plugins,
         protocol_settings: @service.protocol_settings
-      ).render
+      )
     end
 
     def async_client_class(codegenerated_plugins)
@@ -247,7 +250,7 @@ module AwsSdkCodeGenerator
         remove_plugins: @service.remove_plugins,
         protocol_settings: @service.protocol_settings,
         async_client: true
-      ).render
+      )
     end
 
     def errors_module
