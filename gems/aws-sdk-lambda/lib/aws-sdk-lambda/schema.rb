@@ -1851,7 +1851,7 @@ module Aws::Lambda
         operation.id = "com.amazonaws.lambda#DeleteAlias"
         operation.name = "DeleteAlias"
         operation.input = DeleteAliasRequest
-        operation.output = StructureShape.new(type: Smithy::Schema::EmptyStructure)
+        operation.output = Prelude::Unit
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/2015-03-31/functions/{FunctionName}/aliases/{Name}", "code" => 204}}
         operation.errors << InvalidParameterValueException
         operation.errors << ResourceConflictException
@@ -1886,7 +1886,7 @@ module Aws::Lambda
         operation.id = "com.amazonaws.lambda#DeleteFunction"
         operation.name = "DeleteFunction"
         operation.input = DeleteFunctionRequest
-        operation.output = StructureShape.new(type: Smithy::Schema::EmptyStructure)
+        operation.output = Prelude::Unit
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/2015-03-31/functions/{FunctionName}", "code" => 204}}
         operation.errors << InvalidParameterValueException
         operation.errors << ResourceConflictException
@@ -1898,7 +1898,7 @@ module Aws::Lambda
         operation.id = "com.amazonaws.lambda#DeleteFunctionCodeSigningConfig"
         operation.name = "DeleteFunctionCodeSigningConfig"
         operation.input = DeleteFunctionCodeSigningConfigRequest
-        operation.output = StructureShape.new(type: Smithy::Schema::EmptyStructure)
+        operation.output = Prelude::Unit
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/2020-06-30/functions/{FunctionName}/code-signing-config", "code" => 204}}
         operation.errors << CodeSigningConfigNotFoundException
         operation.errors << InvalidParameterValueException
@@ -1911,7 +1911,7 @@ module Aws::Lambda
         operation.id = "com.amazonaws.lambda#DeleteFunctionConcurrency"
         operation.name = "DeleteFunctionConcurrency"
         operation.input = DeleteFunctionConcurrencyRequest
-        operation.output = StructureShape.new(type: Smithy::Schema::EmptyStructure)
+        operation.output = Prelude::Unit
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/2017-10-31/functions/{FunctionName}/concurrency", "code" => 204}}
         operation.errors << InvalidParameterValueException
         operation.errors << ResourceConflictException
@@ -1923,7 +1923,7 @@ module Aws::Lambda
         operation.id = "com.amazonaws.lambda#DeleteFunctionEventInvokeConfig"
         operation.name = "DeleteFunctionEventInvokeConfig"
         operation.input = DeleteFunctionEventInvokeConfigRequest
-        operation.output = StructureShape.new(type: Smithy::Schema::EmptyStructure)
+        operation.output = Prelude::Unit
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/2019-09-25/functions/{FunctionName}/event-invoke-config", "code" => 204}}
         operation.errors << InvalidParameterValueException
         operation.errors << ResourceConflictException
@@ -1935,7 +1935,7 @@ module Aws::Lambda
         operation.id = "com.amazonaws.lambda#DeleteFunctionUrlConfig"
         operation.name = "DeleteFunctionUrlConfig"
         operation.input = DeleteFunctionUrlConfigRequest
-        operation.output = StructureShape.new(type: Smithy::Schema::EmptyStructure)
+        operation.output = Prelude::Unit
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/2021-10-31/functions/{FunctionName}/url", "code" => 204}}
         operation.errors << ResourceConflictException
         operation.errors << ResourceNotFoundException
@@ -1946,7 +1946,7 @@ module Aws::Lambda
         operation.id = "com.amazonaws.lambda#DeleteLayerVersion"
         operation.name = "DeleteLayerVersion"
         operation.input = DeleteLayerVersionRequest
-        operation.output = StructureShape.new(type: Smithy::Schema::EmptyStructure)
+        operation.output = Prelude::Unit
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/2018-10-31/layers/{LayerName}/versions/{VersionNumber}", "code" => 204}}
         operation.errors << ServiceException
         operation.errors << TooManyRequestsException
@@ -1955,7 +1955,7 @@ module Aws::Lambda
         operation.id = "com.amazonaws.lambda#DeleteProvisionedConcurrencyConfig"
         operation.name = "DeleteProvisionedConcurrencyConfig"
         operation.input = DeleteProvisionedConcurrencyConfigRequest
-        operation.output = StructureShape.new(type: Smithy::Schema::EmptyStructure)
+        operation.output = Prelude::Unit
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/2019-09-30/functions/{FunctionName}/provisioned-concurrency", "code" => 204}}
         operation.errors << InvalidParameterValueException
         operation.errors << ResourceConflictException
@@ -2475,7 +2475,7 @@ module Aws::Lambda
         operation.id = "com.amazonaws.lambda#RemoveLayerVersionPermission"
         operation.name = "RemoveLayerVersionPermission"
         operation.input = RemoveLayerVersionPermissionRequest
-        operation.output = StructureShape.new(type: Smithy::Schema::EmptyStructure)
+        operation.output = Prelude::Unit
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/2018-10-31/layers/{LayerName}/versions/{VersionNumber}/policy/{StatementId}", "code" => 204}}
         operation.errors << InvalidParameterValueException
         operation.errors << PreconditionFailedException
@@ -2487,7 +2487,7 @@ module Aws::Lambda
         operation.id = "com.amazonaws.lambda#RemovePermission"
         operation.name = "RemovePermission"
         operation.input = RemovePermissionRequest
-        operation.output = StructureShape.new(type: Smithy::Schema::EmptyStructure)
+        operation.output = Prelude::Unit
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/2015-03-31/functions/{FunctionName}/policy/{StatementId}", "code" => 204}}
         operation.errors << InvalidParameterValueException
         operation.errors << PreconditionFailedException
@@ -2499,7 +2499,7 @@ module Aws::Lambda
         operation.id = "com.amazonaws.lambda#TagResource"
         operation.name = "TagResource"
         operation.input = TagResourceRequest
-        operation.output = StructureShape.new(type: Smithy::Schema::EmptyStructure)
+        operation.output = Prelude::Unit
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2017-03-31/tags/{Resource}", "code" => 204}}
         operation.errors << InvalidParameterValueException
         operation.errors << ResourceConflictException
@@ -2511,7 +2511,7 @@ module Aws::Lambda
         operation.id = "com.amazonaws.lambda#UntagResource"
         operation.name = "UntagResource"
         operation.input = UntagResourceRequest
-        operation.output = StructureShape.new(type: Smithy::Schema::EmptyStructure)
+        operation.output = Prelude::Unit
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/2017-03-31/tags/{Resource}", "code" => 204}}
         operation.errors << InvalidParameterValueException
         operation.errors << ResourceConflictException
