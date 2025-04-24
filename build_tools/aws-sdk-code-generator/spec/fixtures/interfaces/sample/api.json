@@ -244,8 +244,12 @@
     "GetBandResponse": {
       "type": "structure",
       "members": {
-        "Band" : { "shape": "Band" }
-      }
+        "Band" : {
+          "shape": "Band",
+          "streaming": true
+        }
+      },
+      "payload": "Band"
     },
     "GetTicketRequest": {
       "type": "structure",
