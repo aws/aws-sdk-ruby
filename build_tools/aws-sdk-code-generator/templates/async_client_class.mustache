@@ -13,6 +13,18 @@ require '{{.}}'
 Aws::Plugins::GlobalConfiguration.add_identifier(:{{service_identifier}})
 
 module {{module_name}}
+  # An API async client for {{service_name}}.  To construct an async client, you need to configure a `:region` and `:credentials`.
+  #
+  #     async_client = {{module_name}}::AsyncClient.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class AsyncClient < Seahorse::Client::AsyncBase
 
     include Aws::AsyncClientStubs
@@ -26,6 +38,13 @@ module {{module_name}}
     {{/plugin_class_names}}
 
     {{#client_constructor}}
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #
+    #   @option options [Array<Seahorse::Client::Plugin>] :plugins ([]])
+    #     A list of plugins to apply to the client. Each plugin is either a
+    #     class name or an instance of a plugin class.
+    #
     {{>documentation}}
     {{/client_constructor}}
     def initialize(*args)
