@@ -112,7 +112,7 @@ module Aws
           )
           client_opts = {
             region: 'eu-west-1',
-            endpoint: 'http://uniqueness.svc.us-west-2.amazonaws.com'
+            endpoint: 'http://uniqueness.svc.us-west-2.amazonaws.com',
           }
           client = ApiHelper.sample_client(service: svc).new(options.merge(client_opts))
           expect(client.config.sigv4_name).to eq('signing-name')
@@ -133,8 +133,7 @@ module Aws
             .with('us-east-1', 'api.service', nil)
             .and_return('us-east-1')
 
-          client = ApiHelper.sample_client(service: svc)
-                            .new(options.merge(region: 'fips-us-east-1'))
+          client = ApiHelper.sample_client(service: svc).new(options.merge(region: 'fips-us-east-1'))
           expect(client.config.sigv4_name).to eq('signing-name')
           expect(client.config.sigv4_region).to eq('us-east-1')
         end

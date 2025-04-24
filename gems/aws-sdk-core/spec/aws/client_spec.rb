@@ -19,19 +19,14 @@ module Aws
 
       it 'requires a region' do
         expect {
-          client_class.new(access_key_id:'akid', secret_access_key:'secret')
+          client_class.new(access_key_id:'akid', secret_access_key: 'secret')
         }.to raise_error(Aws::Errors::MissingRegionError)
       end
 
       context 'when requests are signed' do
 
-        let(:sample_service) do
-          ApiHelper.sample_service(metadata: { 'signatureVersion' => 'v4' })
-        end
-
-        let(:client_class) do
-          ApiHelper.sample_client(service: sample_service)
-        end
+        let(:sample_service) { ApiHelper.sample_service(metadata: { 'signatureVersion' => 'v4' }) }
+        let(:client_class) { ApiHelper.sample_client(service: sample_service) }
 
         it 'raises an error when credentials are nil' do
           creds = Credentials.new(nil, nil)
@@ -186,7 +181,6 @@ Known AWS regions include (not specific to this service):
             )
           client = client_class.new(options.merge(validate_params: false))
           expect(client.api_requests.empty?).to be(true)
-
           client.example_operation(foo: 'bar')
           expect(client.api_requests.length).to eq(1)
 
