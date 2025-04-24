@@ -111,7 +111,7 @@ module AwsSdkCodeGenerator
           when 'optional'
             es_input && es_output
           else
-            raise 'Unsupported'
+            raise 'Unsupported protocol setting'
           end
         end
 

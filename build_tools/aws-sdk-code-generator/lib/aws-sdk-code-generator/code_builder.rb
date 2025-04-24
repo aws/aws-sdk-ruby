@@ -119,7 +119,7 @@ module AwsSdkCodeGenerator
         if @service.protocol_settings['h2']
           y.yield(
             "#{prefix}/async_client.rbs",
-            async_client_class(codegenerated_plugins).render
+            async_client_class_rbs(codegenerated_plugins).render
           )
         end
         y.yield("#{prefix}/errors.rbs", Views::RBS::ErrorsModule.new(
