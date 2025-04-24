@@ -77,7 +77,6 @@ module ApiHelper
             'StringWithConsecutiveSpaces' => { 'shape' => 'StringShape' },
             'StringWithLF' => { 'shape' => 'StringShape' },
             'Timestamp' => { 'shape' => 'TimestampShape' },
-            'EventStream' => { 'shape' => 'EventStream' },
             'DocumentType' => { 'shape' => 'DocumentShape' }
           }
         },
@@ -87,22 +86,6 @@ module ApiHelper
           'members' => {
             'StreamingBlob' => { 'shape' => 'BlobShape', 'streaming' => 'true' }
           }
-        },
-        'EventStream' => {
-          'type' => 'structure',
-          'members' => {
-            'EventA' => {
-              'shape' => 'EventA'
-            }
-          },
-          'eventstream' => true
-        },
-        'EventA' => {
-          'type' => 'structure',
-          'members' => {
-            'MemberA' => { 'shape' => 'StringShape' }
-          },
-          'event' => true
         },
         'StructureList' => {
           'type' => 'list',
@@ -167,8 +150,7 @@ module ApiHelper
 
     def sample_client(options = {})
       service = options[:service] || sample_service
-      client_class = service.const_get(:Client)
-      define_operation_methods(client_class)
+      service.const_get(:Client)
     end
 
     def sample_rest_service(options)
@@ -188,20 +170,6 @@ module ApiHelper
         'shapes' => shapes(options),
       }
     end
-
-    def define_operation_methods(client_class)
-      operations_module = Module.new
-      client_class.api.operation_names.each do |method_name|
-        operations_module.send(:define_method, method_name) do |*args, &block|
-          params = args[0] || {}
-          options = args[1] || {}
-          build_request(method_name, params).send_request(options, &block)
-        end
-      end
-      client_class.include(operations_module)
-      client_class
-    end
-
 
     def metadata(options)
       {

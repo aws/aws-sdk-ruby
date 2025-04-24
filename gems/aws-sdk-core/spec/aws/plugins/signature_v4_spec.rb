@@ -42,10 +42,12 @@ module Aws
                   .with('other-region', 'svc-name')
                   .and_return('override-service')
 
-          client = client_class.new(options.merge(
-                                      region: 'other-region',
-                                      endpoint: 'https://svc-name.amazonaws.com'
-                                    ))
+          client = client_class.new(
+            options.merge(
+              region: 'other-region',
+              endpoint: 'https://svc-name.amazonaws.com'
+            )
+          )
           expect(client.config.sigv4_name).to eq('override-service')
         end
 
@@ -284,10 +286,7 @@ module Aws
         end
 
         it 'skips clock skew correction when clock_skew is not available on the configuration' do
-          client = client_class.new(options.merge(
-            clock_skew: nil,
-            stub_responses: true
-          ))
+          client = client_class.new(options.merge(clock_skew: nil, stub_responses: true))
           resp = client.example_operation
           expect(resp.context.http_request.headers['X-Amz-Date']).
             to eq now.utc.strftime("%Y%m%dT%H%M%SZ")

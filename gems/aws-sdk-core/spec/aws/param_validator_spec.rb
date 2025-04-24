@@ -82,7 +82,22 @@ module Aws
       end
 
       it 'raises an error when providing eventstream at input' do
-        validate({ event_stream: [].each }, 'instead of providing value directly for eventstreams at input, expected to use #signal events per stream')
+        shapes['StructureShape']['members'] = { 'EventStream' => { 'shape' => 'EventStream' } }
+        shapes['EventStream'] = {
+          'type' => 'structure',
+          'members' => { 'EventA' => { 'shape' => 'EventA' } },
+          'eventstream' => true
+        }
+        shapes['EventA'] = {
+          'type' => 'structure',
+          'members' => { 'MemberA' => { 'shape' => 'StringShape' } },
+          'event' => true
+        }
+        validate(
+          { event_stream: [].each },
+          'instead of providing value directly for eventstreams at input, ' \
+            'expected to use #signal events per stream'
+        )
       end
 
       it 'accepts no eventstream input even when marked required' do
