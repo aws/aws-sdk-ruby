@@ -55,7 +55,7 @@ module Aws
                       ?secret_access_key: String,
                       ?session_token: String,
                       ?sigv4a_signing_region_set: Array[String],
-                      ?stub_responses: untyped,
+                      ?stub_responses: bool,
                       ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
                       ?token_provider: untyped,
                       ?use_dualstack_endpoint: bool,
@@ -499,17 +499,6 @@ module Aws
                           ?performance_config_latency: ("standard" | "optimized")
                         ) -> _InvokeModelResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InvokeModelResponseSuccess
-
-      interface _InvokeModelWithBidirectionalStreamResponseSuccess
-        include ::Seahorse::Client::_ResponseSuccess[Types::InvokeModelWithBidirectionalStreamResponse]
-        def body: () -> Types::InvokeModelWithBidirectionalStreamOutput
-      end
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockRuntime/Client.html#invoke_model_with_bidirectional_stream-instance_method
-      def invoke_model_with_bidirectional_stream: (
-                                                    model_id: ::String,
-                                                    input_event_stream_hander: untyped
-                                                  ) ?{ (*untyped) -> void } -> _InvokeModelWithBidirectionalStreamResponseSuccess
-                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _InvokeModelWithBidirectionalStreamResponseSuccess
 
       interface _InvokeModelWithResponseStreamResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::InvokeModelWithResponseStreamResponse]
