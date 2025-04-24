@@ -5,11 +5,10 @@
 require_relative 'plugins/auth'
 require_relative 'plugins/endpoint'
 require 'aws-sdk-core/plugins/sigv4'
-require 'aws-sdk-core/plugins/checksum_required'
-require 'aws-sdk-core/plugins/host_prefix'
-require 'aws-sdk-core/plugins/idempotency_token'
-require 'aws-sdk-core/plugins/request_compression'
+require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
+require 'smithy-client/plugins/host_prefix'
+require 'smithy-client/plugins/idempotency_token'
 require 'smithy-client/plugins/logging'
 require 'smithy-client/plugins/net_http'
 require 'smithy-client/plugins/pageable_output'
@@ -17,6 +16,7 @@ require 'smithy-client/plugins/param_converter'
 require 'smithy-client/plugins/param_validator'
 require 'smithy-client/plugins/protocol'
 require 'smithy-client/plugins/raise_response_errors'
+require 'smithy-client/plugins/request_compression'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
 require 'smithy-client/plugins/sign_requests'
@@ -34,11 +34,10 @@ module Aws::Lambda
     add_plugin(Aws::Lambda::Plugins::Auth)
     add_plugin(Aws::Lambda::Plugins::Endpoint)
     add_plugin(Aws::Core::Plugins::SigV4)
-    add_plugin(Aws::Core::Plugins::ChecksumRequired)
-    add_plugin(Aws::Core::Plugins::HostPrefix)
-    add_plugin(Aws::Core::Plugins::IdempotencyToken)
-    add_plugin(Aws::Core::Plugins::RequestCompression)
+    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
+    add_plugin(Smithy::Client::Plugins::HostPrefix)
+    add_plugin(Smithy::Client::Plugins::IdempotencyToken)
     add_plugin(Smithy::Client::Plugins::Logging)
     add_plugin(Smithy::Client::Plugins::NetHTTP)
     add_plugin(Smithy::Client::Plugins::PageableOutput)
@@ -46,6 +45,7 @@ module Aws::Lambda
     add_plugin(Smithy::Client::Plugins::ParamValidator)
     add_plugin(Smithy::Client::Plugins::Protocol)
     add_plugin(Smithy::Client::Plugins::RaiseResponseErrors)
+    add_plugin(Smithy::Client::Plugins::RequestCompression)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
     add_plugin(Smithy::Client::Plugins::SignRequests)
@@ -72,7 +72,7 @@ module Aws::Lambda
     # @option options [Boolean] :disable_host_prefix_injection
     #  When true, the SDK will not prepend the modeled host prefix to the endpoint.
     # @option options [Boolean] :disable_request_compression
-    #  When set to 'true' the request body will not be compressed for supported operations.
+    #  When true, the request body will not be compressed for supported operations.
     # @option options [String] :endpoint
     #  Custom Endpoint
     # @option options [Aws::Lambda::EndpointProvider] :endpoint_provider

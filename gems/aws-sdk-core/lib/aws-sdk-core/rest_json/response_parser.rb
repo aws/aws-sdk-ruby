@@ -10,7 +10,7 @@ module Aws
       # @api private
       class ResponseParser
         def initialize(options = {})
-          @codec = Aws::Core::JSON::Codec.new(options)
+          @codec = JSON::Codec.new(options)
         end
 
         def parse_error(output)
@@ -24,7 +24,12 @@ module Aws
 
         def parse_data(output)
           output_shape = output.context.operation.output
-          output.data = output_shape.type.new
+          output.data =
+            if output_shape == Smithy::Schema::Shapes::Prelude::Unit
+              Smithy::Schema::EmptyStructure.new
+            else
+              output_shape.type.new
+            end
           Rest::Response::StatusCode.new(output_shape).apply(output.context.response, output.data)
           Rest::Response::Headers.new(output_shape).apply(output.context.response, output.data)
           Rest::Response::Body.new(@codec, output_shape).apply(output.context.response.body, output.data)
@@ -116,7 +121,7 @@ module Aws
         end
 
         def apply_error_headers(rule, context, data)
-          headers = Aws::Core::Rest::Response::Headers.new(rule)
+          headers = Rest::Response::Headers.new(rule)
           headers.apply(context.response, data)
         end
       end
