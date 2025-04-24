@@ -30,7 +30,7 @@ module AwsSdkCodeGenerator
         event_ctx = shape['members'].each.inject([]) do |ctx, (member_name, member_ref)|
           event_type = Underscore.underscore(member_name).to_sym
           event_types << event_type
-          ctx << "For #{event_type.inspect} event available at #on_#{event_type}_event callback"\
+          ctx << "# For #{event_type.inspect} event available at #on_#{event_type}_event callback"\
                  ' and response eventstream enumerator:'
           event_entry = entry(member_ref, 'event', Set.new).join("\n  ")
           ctx << (event_entry.empty? ? ' #=> EmptyStruct' : event_entry + "\n")
@@ -38,7 +38,7 @@ module AwsSdkCodeGenerator
         # Add eventstream entry
         event_ctx.unshift("#{context}.event_types #=> #{event_types.inspect}\n")
         event_ctx.unshift("#{context} #=> Enumerator")
-        event_ctx.unshift("All events are available at #{context}:")
+        event_ctx.unshift("# All events are available at #{context}:")
         return event_ctx
       elsif shape['members']
         shape['members'].each_pair do |member_name, member_ref|
