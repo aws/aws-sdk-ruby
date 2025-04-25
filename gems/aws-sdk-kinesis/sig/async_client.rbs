@@ -6,11 +6,11 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws
-  module BedrockRuntime
+  module Kinesis
     class AsyncClient < ::Seahorse::Client::AsyncBase
       include ::Aws::AsyncClientStubs
 
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockRuntime/AsyncClient.html#initialize-instance_method
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kinesis/AsyncClient.html#initialize-instance_method
       def self.new: (
                       ?credentials: untyped,
                       ?region: String,
@@ -44,6 +44,7 @@ module Aws
                       ?secret_access_key: String,
                       ?session_token: String,
                       ?sigv4a_signing_region_set: Array[String],
+                      ?simple_json: bool,
                       ?stub_responses: untyped,
                       ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
                       ?token_provider: untyped,
@@ -66,16 +67,21 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
-      interface _InvokeModelWithBidirectionalStreamResponseSuccess
-        include ::Seahorse::Client::_ResponseSuccess[Types::InvokeModelWithBidirectionalStreamResponse]
-        def body: () -> Types::InvokeModelWithBidirectionalStreamOutput
+      interface _SubscribeToShardResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SubscribeToShardOutput]
+        def event_stream: () -> Types::SubscribeToShardEventStream
       end
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockRuntime/AsyncClient.html#invoke_model_with_bidirectional_stream-instance_method
-      def invoke_model_with_bidirectional_stream: (
-                                                    model_id: ::String,
-                                                    input_event_stream_hander: untyped
-                                                  ) ?{ (*untyped) -> void } -> _InvokeModelWithBidirectionalStreamResponseSuccess
-                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _InvokeModelWithBidirectionalStreamResponseSuccess
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kinesis/AsyncClient.html#subscribe_to_shard-instance_method
+      def subscribe_to_shard: (
+                                consumer_arn: ::String,
+                                shard_id: ::String,
+                                starting_position: {
+                                  type: ("AT_SEQUENCE_NUMBER" | "AFTER_SEQUENCE_NUMBER" | "TRIM_HORIZON" | "LATEST" | "AT_TIMESTAMP"),
+                                  sequence_number: ::String?,
+                                  timestamp: ::Time?
+                                }
+                              ) -> _SubscribeToShardResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SubscribeToShardResponseSuccess
     end
   end
 end

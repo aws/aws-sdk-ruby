@@ -6,11 +6,11 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws
-  module BedrockRuntime
+  module QBusiness
     class AsyncClient < ::Seahorse::Client::AsyncBase
       include ::Aws::AsyncClientStubs
 
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockRuntime/AsyncClient.html#initialize-instance_method
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/AsyncClient.html#initialize-instance_method
       def self.new: (
                       ?credentials: untyped,
                       ?region: String,
@@ -66,16 +66,21 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
-      interface _InvokeModelWithBidirectionalStreamResponseSuccess
-        include ::Seahorse::Client::_ResponseSuccess[Types::InvokeModelWithBidirectionalStreamResponse]
-        def body: () -> Types::InvokeModelWithBidirectionalStreamOutput
+      interface _ChatResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ChatOutput]
+        def output_stream: () -> Types::ChatOutputStream
       end
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockRuntime/AsyncClient.html#invoke_model_with_bidirectional_stream-instance_method
-      def invoke_model_with_bidirectional_stream: (
-                                                    model_id: ::String,
-                                                    input_event_stream_hander: untyped
-                                                  ) ?{ (*untyped) -> void } -> _InvokeModelWithBidirectionalStreamResponseSuccess
-                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _InvokeModelWithBidirectionalStreamResponseSuccess
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/AsyncClient.html#chat-instance_method
+      def chat: (
+                  application_id: ::String,
+                  ?user_id: ::String,
+                  ?user_groups: Array[::String],
+                  ?conversation_id: ::String,
+                  ?parent_message_id: ::String,
+                  ?client_token: ::String,
+                  input_event_stream_hander: untyped
+                ) ?{ (*untyped) -> void } -> _ChatResponseSuccess
+              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _ChatResponseSuccess
     end
   end
 end
