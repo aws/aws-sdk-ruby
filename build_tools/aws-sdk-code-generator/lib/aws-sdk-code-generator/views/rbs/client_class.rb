@@ -115,11 +115,10 @@ module AwsSdkCodeGenerator
         private
 
         def async_operation?(operation)
-          es_output = AwsSdkCodeGenerator::Helper.eventstream_output?(operation, @api)
-          es_input = AwsSdkCodeGenerator::Helper.eventstream_input?(operation, @api)
           # ensure that bidirectional eventstreaming operations are not added to client rbs
-          true if es_input && es_output || @protocol_settings['h2'] == 'eventstream'
-
+          AwsSdkCodeGenerator::Helper.operation_bidirectional_eventstreaming?(operation, @api) ||
+            (@protocol_settings['h2'] == 'eventstream' &&
+              AwsSdkCodeGenerator::Helper.operation_eventstreaming?(operation, @api))
         end
 
         def documented_plugin_options(plugins)

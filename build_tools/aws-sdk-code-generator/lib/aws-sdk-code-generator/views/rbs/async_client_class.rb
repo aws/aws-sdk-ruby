@@ -101,15 +101,13 @@ module AwsSdkCodeGenerator
         private
 
         def async_operation?(operation)
-          es_output = AwsSdkCodeGenerator::Helper.eventstream_output?(operation, @api)
-          es_input = AwsSdkCodeGenerator::Helper.eventstream_input?(operation, @api)
-          return unless (es_input || es_output) && (h2 = @protocol_settings['h2'])
+          return unless (h2 = @protocol_settings['h2'])
 
           case h2
           when 'eventstream'
-            es_input || es_output
+            AwsSdkCodeGenerator::Helper.operation_eventstreaming?(operation, @api)
           when 'optional'
-            es_input && es_output
+            AwsSdkCodeGenerator::Helper.operation_bidirectional_eventstreaming?(operation, @api)
           else
             raise 'Unsupported protocol setting'
           end
