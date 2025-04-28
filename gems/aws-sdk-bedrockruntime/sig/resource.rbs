@@ -55,7 +55,7 @@ module Aws
                         ?secret_access_key: String,
                         ?session_token: String,
                         ?sigv4a_signing_region_set: Array[String],
-                        ?stub_responses: bool,
+                        ?stub_responses: untyped,
                         ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
                         ?token_provider: untyped,
                         ?use_dualstack_endpoint: bool,
