@@ -8,6 +8,10 @@ module Aws
     describe RetryErrors do
       let(:client) { RetryErrorsSvc::Client.new(stub_responses: true) }
 
+      it 'defaults config.retry_mode to standard' do
+        expect(client.config.retry_mode).to eq('standard')
+      end
+
       it 'can configure retry_mode with shared config' do
         allow_any_instance_of(Aws::SharedConfig)
           .to receive(:retry_mode).and_return('standard')

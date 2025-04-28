@@ -64,6 +64,20 @@ module Aws
           DOCS
           resolve_max_attempts(cfg)
         end
+
+        def self.resolve_max_attempts(cfg)
+          value = (ENV['AWS_MAX_ATTEMPTS']) ||
+                  Aws.shared_config.max_attempts(profile: cfg.profile) ||
+                  '10'
+          value = value.to_i
+          # Raise if provided value is not a positive integer
+          if value <= 0
+            raise ArgumentError,
+                  'Must provide a positive integer for max_attempts profile '\
+                    'option or for ENV[\'AWS_MAX_ATTEMPTS\']'
+          end
+          value
+        end
       end
     end
   end
