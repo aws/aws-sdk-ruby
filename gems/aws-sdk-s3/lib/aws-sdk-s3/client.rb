@@ -18980,122 +18980,128 @@ module Aws::S3
     #
     # @example EventStream Operation Example
     #
-    #   You can process the event once it arrives immediately, or wait until the
-    #   full response is complete and iterate through the eventstream enumerator.
+    #   # You can process the event once it arrives immediately, or wait until the
+    #   # full response is complete and iterate through the eventstream enumerator.
     #
-    #   To interact with event immediately, you need to register #select_object_content
-    #   with callbacks. Callbacks can be registered for specific events or for all
-    #   events, including error events.
+    #   # To interact with event immediately, you need to register select_object_content
+    #   # with callbacks. Callbacks can be registered for specific events or for all
+    #   # events, including error events.
     #
-    #   Callbacks can be passed into the `:event_stream_handler` option or within a
-    #   block statement attached to the #select_object_content call directly. Hybrid
-    #   pattern of both is also supported.
+    #   # Callbacks can be passed into the `:event_stream_handler` option or within a
+    #   # block statement attached to the #select_object_content call directly. Hybrid
+    #   # pattern of both is also supported.
     #
-    #   `:event_stream_handler` option takes in either a Proc object or
-    #   Aws::S3::EventStreams::SelectObjectContentEventStream object.
+    #   # `:event_stream_handler` option takes in either a Proc object or
+    #   # Aws::S3::EventStreams::SelectObjectContentEventStream object.
     #
-    #   Usage pattern a): Callbacks with a block attached to #select_object_content
-    #     Example for registering callbacks for all event types and an error event
-    #
-    #     client.select_object_content( # params input# ) do |stream|
-    #       stream.on_error_event do |event|
-    #         # catch unmodeled error event in the stream
-    #         raise event
-    #         # => Aws::Errors::EventError
-    #         # event.event_type => :error
-    #         # event.error_code => String
-    #         # event.error_message => String
-    #       end
-    #
-    #       stream.on_event do |event|
-    #         # process all events arrive
-    #         puts event.event_type
-    #         ...
-    #       end
-    #
+    #   # Usage pattern a): Callbacks with a block attached to #select_object_content
+    #   # Example for registering callbacks for all event types and an error event
+    #   client.select_object_content(
+    #     # params input
+    #   ) do |stream|
+    #     stream.on_error_event do |event|
+    #       # catch unmodeled error event in the stream
+    #       raise event
+    #       # => Aws::Errors::EventError
+    #       # event.event_type => :error
+    #       # event.error_code => String
+    #       # event.error_message => String
     #     end
     #
-    #   Usage pattern b): Pass in `:event_stream_handler` for #select_object_content
-    #
-    #     1) Create a Aws::S3::EventStreams::SelectObjectContentEventStream object
-    #     Example for registering callbacks with specific events
-    #
-    #       handler = Aws::S3::EventStreams::SelectObjectContentEventStream.new
-    #       handler.on_records_event do |event|
-    #         event # => Aws::S3::Types::Records
-    #       end
-    #       handler.on_stats_event do |event|
-    #         event # => Aws::S3::Types::Stats
-    #       end
-    #       handler.on_progress_event do |event|
-    #         event # => Aws::S3::Types::Progress
-    #       end
-    #       handler.on_cont_event do |event|
-    #         event # => Aws::S3::Types::Cont
-    #       end
-    #       handler.on_end_event do |event|
-    #         event # => Aws::S3::Types::End
-    #       end
-    #
-    #     client.select_object_content( # params input #, event_stream_handler: handler)
-    #
-    #     2) Use a Ruby Proc object
-    #     Example for registering callbacks with specific events
-    #
-    #     handler = Proc.new do |stream|
-    #       stream.on_records_event do |event|
-    #         event # => Aws::S3::Types::Records
-    #       end
-    #       stream.on_stats_event do |event|
-    #         event # => Aws::S3::Types::Stats
-    #       end
-    #       stream.on_progress_event do |event|
-    #         event # => Aws::S3::Types::Progress
-    #       end
-    #       stream.on_cont_event do |event|
-    #         event # => Aws::S3::Types::Cont
-    #       end
-    #       stream.on_end_event do |event|
-    #         event # => Aws::S3::Types::End
-    #       end
+    #     stream.on_event do |event|
+    #       # process all events arrive
+    #       puts event.event_type
+    #       # ...
     #     end
+    #   end
     #
-    #     client.select_object_content( # params input #, event_stream_handler: handler)
+    #   # Usage pattern b): Pass in `:event_stream_handler` for #select_object_content
+    #   #  1) Create a Aws::S3::EventStreams::SelectObjectContentEventStream object
+    #   #  Example for registering callbacks with specific events
     #
-    #   Usage pattern c): Hybrid pattern of a) and b)
+    #   handler = Aws::S3::EventStreams::SelectObjectContentEventStream.new
+    #   handler.on_records_event do |event|
+    #     event # => Aws::S3::Types::Records
+    #   end
+    #   handler.on_stats_event do |event|
+    #     event # => Aws::S3::Types::Stats
+    #   end
+    #   handler.on_progress_event do |event|
+    #     event # => Aws::S3::Types::Progress
+    #   end
+    #   handler.on_cont_event do |event|
+    #     event # => Aws::S3::Types::Cont
+    #   end
+    #   handler.on_end_event do |event|
+    #     event # => Aws::S3::Types::End
+    #   end
     #
-    #       handler = Aws::S3::EventStreams::SelectObjectContentEventStream.new
-    #       handler.on_records_event do |event|
-    #         event # => Aws::S3::Types::Records
-    #       end
-    #       handler.on_stats_event do |event|
-    #         event # => Aws::S3::Types::Stats
-    #       end
-    #       handler.on_progress_event do |event|
-    #         event # => Aws::S3::Types::Progress
-    #       end
-    #       handler.on_cont_event do |event|
-    #         event # => Aws::S3::Types::Cont
-    #       end
-    #       handler.on_end_event do |event|
-    #         event # => Aws::S3::Types::End
-    #       end
+    #   client.select_object_content(
+    #     # params inputs
+    #     event_stream_handler: handler
+    #   )
     #
-    #     client.select_object_content( # params input #, event_stream_handler: handler) do |stream|
-    #       stream.on_error_event do |event|
-    #         # catch unmodeled error event in the stream
-    #         raise event
-    #         # => Aws::Errors::EventError
-    #         # event.event_type => :error
-    #         # event.error_code => String
-    #         # event.error_message => String
-    #       end
+    #   #  2) Use a Ruby Proc object
+    #   #  Example for registering callbacks with specific events
+    #   handler = Proc.new do |stream|
+    #     stream.on_records_event do |event|
+    #       event # => Aws::S3::Types::Records
     #     end
+    #     stream.on_stats_event do |event|
+    #       event # => Aws::S3::Types::Stats
+    #     end
+    #     stream.on_progress_event do |event|
+    #       event # => Aws::S3::Types::Progress
+    #     end
+    #     stream.on_cont_event do |event|
+    #       event # => Aws::S3::Types::Cont
+    #     end
+    #     stream.on_end_event do |event|
+    #       event # => Aws::S3::Types::End
+    #     end
+    #   end
     #
-    #   You can also iterate through events after the response complete.
+    #   client.select_object_content(
+    #     # params inputs
+    #     event_stream_handler: handler
+    #   )
     #
-    #   Events are available at resp.payload # => Enumerator
-    #   For parameter input example, please refer to following request syntax
+    #   #  Usage pattern c): Hybrid pattern of a) and b)
+    #   handler = Aws::S3::EventStreams::SelectObjectContentEventStream.new
+    #   handler.on_records_event do |event|
+    #     event # => Aws::S3::Types::Records
+    #   end
+    #   handler.on_stats_event do |event|
+    #     event # => Aws::S3::Types::Stats
+    #   end
+    #   handler.on_progress_event do |event|
+    #     event # => Aws::S3::Types::Progress
+    #   end
+    #   handler.on_cont_event do |event|
+    #     event # => Aws::S3::Types::Cont
+    #   end
+    #   handler.on_end_event do |event|
+    #     event # => Aws::S3::Types::End
+    #   end
+    #
+    #   client.select_object_content(
+    #     # params input
+    #     event_stream_handler: handler
+    #   ) do |stream|
+    #     stream.on_error_event do |event|
+    #       # catch unmodeled error event in the stream
+    #       raise event
+    #       # => Aws::Errors::EventError
+    #       # event.event_type => :error
+    #       # event.error_code => String
+    #       # event.error_message => String
+    #     end
+    #   end
+    #
+    #   # You can also iterate through events after the response complete.
+    #   # Events are available at
+    #   resp.payload # => Enumerator
+    #   # For parameter input example, please refer to following request syntax.
     #
     # @example Request syntax with placeholder values
     #
@@ -19148,26 +19154,26 @@ module Aws::S3
     #
     # @example Response structure
     #
-    #   All events are available at resp.payload:
+    #   # All events are available at resp.payload:
     #   resp.payload #=> Enumerator
     #   resp.payload.event_types #=> [:records, :stats, :progress, :cont, :end]
     #
-    #   For :records event available at #on_records_event callback and response eventstream enumerator:
+    #   # For :records event available at #on_records_event callback and response eventstream enumerator:
     #   event.payload #=> IO
     #
-    #   For :stats event available at #on_stats_event callback and response eventstream enumerator:
+    #   # For :stats event available at #on_stats_event callback and response eventstream enumerator:
     #   event.details.bytes_scanned #=> Integer
     #   event.details.bytes_processed #=> Integer
     #   event.details.bytes_returned #=> Integer
     #
-    #   For :progress event available at #on_progress_event callback and response eventstream enumerator:
+    #   # For :progress event available at #on_progress_event callback and response eventstream enumerator:
     #   event.details.bytes_scanned #=> Integer
     #   event.details.bytes_processed #=> Integer
     #   event.details.bytes_returned #=> Integer
     #
-    #   For :cont event available at #on_cont_event callback and response eventstream enumerator:
+    #   # For :cont event available at #on_cont_event callback and response eventstream enumerator:
     #    #=> EmptyStruct
-    #   For :end event available at #on_end_event callback and response eventstream enumerator:
+    #   # For :end event available at #on_end_event callback and response eventstream enumerator:
     #    #=> EmptyStruct
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SelectObjectContent AWS API Documentation
@@ -20675,7 +20681,7 @@ module Aws::S3
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.183.0'
+      context[:gem_version] = '1.184.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

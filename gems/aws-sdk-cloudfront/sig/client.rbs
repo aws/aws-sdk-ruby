@@ -84,6 +84,34 @@ module Aws
                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _AssociateDistributionTenantWebACLResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateDistributionTenantWebACLResult]
+        def id: () -> ::String
+        def web_acl_arn: () -> ::String
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#associate_distribution_tenant_web_acl-instance_method
+      def associate_distribution_tenant_web_acl: (
+                                                   id: ::String,
+                                                   web_acl_arn: ::String,
+                                                   ?if_match: ::String
+                                                 ) -> _AssociateDistributionTenantWebACLResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateDistributionTenantWebACLResponseSuccess
+
+      interface _AssociateDistributionWebACLResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateDistributionWebACLResult]
+        def id: () -> ::String
+        def web_acl_arn: () -> ::String
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#associate_distribution_web_acl-instance_method
+      def associate_distribution_web_acl: (
+                                            id: ::String,
+                                            web_acl_arn: ::String,
+                                            ?if_match: ::String
+                                          ) -> _AssociateDistributionWebACLResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateDistributionWebACLResponseSuccess
+
       interface _CopyDistributionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CopyDistributionResult]
         def distribution: () -> Types::Distribution
@@ -177,6 +205,28 @@ module Aws
                                                        }
                                                      ) -> _CreateCloudFrontOriginAccessIdentityResponseSuccess
                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCloudFrontOriginAccessIdentityResponseSuccess
+
+      interface _CreateConnectionGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConnectionGroupResult]
+        def connection_group: () -> Types::ConnectionGroup
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#create_connection_group-instance_method
+      def create_connection_group: (
+                                     name: ::String,
+                                     ?ipv_6_enabled: bool,
+                                     ?tags: {
+                                       items: Array[
+                                         {
+                                           key: ::String,
+                                           value: ::String?
+                                         },
+                                       ]?
+                                     },
+                                     ?anycast_ip_list_id: ::String,
+                                     ?enabled: bool
+                                   ) -> _CreateConnectionGroupResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConnectionGroupResponseSuccess
 
       interface _CreateContinuousDeploymentPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateContinuousDeploymentPolicyResult]
@@ -461,7 +511,7 @@ module Aws
                                      bucket: ::String?,
                                      prefix: ::String?
                                    }?,
-                                   price_class: ("PriceClass_100" | "PriceClass_200" | "PriceClass_All")?,
+                                   price_class: ("PriceClass_100" | "PriceClass_200" | "PriceClass_All" | "None")?,
                                    enabled: bool,
                                    viewer_certificate: {
                                      cloud_front_default_certificate: bool?,
@@ -484,10 +534,76 @@ module Aws
                                    is_ipv6_enabled: bool?,
                                    continuous_deployment_policy_id: ::String?,
                                    staging: bool?,
-                                   anycast_ip_list_id: ::String?
+                                   anycast_ip_list_id: ::String?,
+                                   tenant_config: {
+                                     parameter_definitions: Array[
+                                       {
+                                         name: ::String,
+                                         definition: {
+                                           string_schema: {
+                                             comment: ::String?,
+                                             default_value: ::String?,
+                                             required: bool
+                                           }?
+                                         }
+                                       },
+                                     ]?
+                                   }?,
+                                   connection_mode: ("direct" | "tenant-only")?
                                  }
                                ) -> _CreateDistributionResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDistributionResponseSuccess
+
+      interface _CreateDistributionTenantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDistributionTenantResult]
+        def distribution_tenant: () -> Types::DistributionTenant
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#create_distribution_tenant-instance_method
+      def create_distribution_tenant: (
+                                        distribution_id: ::String,
+                                        name: ::String,
+                                        domains: Array[
+                                          {
+                                            domain: ::String
+                                          },
+                                        ],
+                                        ?tags: {
+                                          items: Array[
+                                            {
+                                              key: ::String,
+                                              value: ::String?
+                                            },
+                                          ]?
+                                        },
+                                        ?customizations: {
+                                          web_acl: {
+                                            action: ("override" | "disable"),
+                                            arn: ::String?
+                                          }?,
+                                          certificate: {
+                                            arn: ::String
+                                          }?,
+                                          geo_restrictions: {
+                                            restriction_type: ("blacklist" | "whitelist" | "none"),
+                                            locations: Array[::String]?
+                                          }?
+                                        },
+                                        ?parameters: Array[
+                                          {
+                                            name: ::String,
+                                            value: ::String
+                                          },
+                                        ],
+                                        ?connection_group_id: ::String,
+                                        ?managed_certificate_request: {
+                                          validation_token_host: ("cloudfront" | "self-hosted"),
+                                          primary_domain_name: ::String?,
+                                          certificate_transparency_logging_preference: ("enabled" | "disabled")?
+                                        },
+                                        ?enabled: bool
+                                      ) -> _CreateDistributionTenantResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDistributionTenantResponseSuccess
 
       interface _CreateDistributionWithTagsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateDistributionWithTagsResult]
@@ -741,7 +857,7 @@ module Aws
                                                  bucket: ::String?,
                                                  prefix: ::String?
                                                }?,
-                                               price_class: ("PriceClass_100" | "PriceClass_200" | "PriceClass_All")?,
+                                               price_class: ("PriceClass_100" | "PriceClass_200" | "PriceClass_All" | "None")?,
                                                enabled: bool,
                                                viewer_certificate: {
                                                  cloud_front_default_certificate: bool?,
@@ -764,7 +880,22 @@ module Aws
                                                is_ipv6_enabled: bool?,
                                                continuous_deployment_policy_id: ::String?,
                                                staging: bool?,
-                                               anycast_ip_list_id: ::String?
+                                               anycast_ip_list_id: ::String?,
+                                               tenant_config: {
+                                                 parameter_definitions: Array[
+                                                   {
+                                                     name: ::String,
+                                                     definition: {
+                                                       string_schema: {
+                                                         comment: ::String?,
+                                                         default_value: ::String?,
+                                                         required: bool
+                                                       }?
+                                                     }
+                                                   },
+                                                 ]?
+                                               }?,
+                                               connection_mode: ("direct" | "tenant-only")?
                                              },
                                              tags: {
                                                items: Array[
@@ -889,6 +1020,24 @@ module Aws
                                  }
                                ) -> _CreateInvalidationResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInvalidationResponseSuccess
+
+      interface _CreateInvalidationForDistributionTenantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateInvalidationForDistributionTenantResult]
+        def location: () -> ::String
+        def invalidation: () -> Types::Invalidation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#create_invalidation_for_distribution_tenant-instance_method
+      def create_invalidation_for_distribution_tenant: (
+                                                         id: ::String,
+                                                         invalidation_batch: {
+                                                           paths: {
+                                                             quantity: ::Integer,
+                                                             items: Array[::String]?
+                                                           },
+                                                           caller_reference: ::String
+                                                         }
+                                                       ) -> _CreateInvalidationForDistributionTenantResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInvalidationForDistributionTenantResponseSuccess
 
       interface _CreateKeyGroupResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateKeyGroupResult]
@@ -1146,7 +1295,7 @@ module Aws
                                                quantity: ::Integer,
                                                items: Array[::String]?
                                              },
-                                             price_class: ("PriceClass_100" | "PriceClass_200" | "PriceClass_All")?,
+                                             price_class: ("PriceClass_100" | "PriceClass_200" | "PriceClass_All" | "None")?,
                                              enabled: bool
                                            }
                                          ) -> _CreateStreamingDistributionResponseSuccess
@@ -1182,7 +1331,7 @@ module Aws
                                                            quantity: ::Integer,
                                                            items: Array[::String]?
                                                          },
-                                                         price_class: ("PriceClass_100" | "PriceClass_200" | "PriceClass_All")?,
+                                                         price_class: ("PriceClass_100" | "PriceClass_200" | "PriceClass_All" | "None")?,
                                                          enabled: bool
                                                        },
                                                        tags: {
@@ -1248,6 +1397,13 @@ module Aws
                                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#delete_connection_group-instance_method
+      def delete_connection_group: (
+                                     id: ::String,
+                                     if_match: ::String
+                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#delete_continuous_deployment_policy-instance_method
       def delete_continuous_deployment_policy: (
                                                  id: ::String,
@@ -1261,6 +1417,13 @@ module Aws
                                  ?if_match: ::String
                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#delete_distribution_tenant-instance_method
+      def delete_distribution_tenant: (
+                                        id: ::String,
+                                        if_match: ::String
+                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#delete_field_level_encryption_config-instance_method
       def delete_field_level_encryption_config: (
@@ -1383,6 +1546,30 @@ module Aws
                                     ) -> _DescribeKeyValueStoreResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeKeyValueStoreResponseSuccess
 
+      interface _DisassociateDistributionTenantWebACLResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateDistributionTenantWebACLResult]
+        def id: () -> ::String
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#disassociate_distribution_tenant_web_acl-instance_method
+      def disassociate_distribution_tenant_web_acl: (
+                                                      id: ::String,
+                                                      ?if_match: ::String
+                                                    ) -> _DisassociateDistributionTenantWebACLResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateDistributionTenantWebACLResponseSuccess
+
+      interface _DisassociateDistributionWebACLResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateDistributionWebACLResult]
+        def id: () -> ::String
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#disassociate_distribution_web_acl-instance_method
+      def disassociate_distribution_web_acl: (
+                                               id: ::String,
+                                               ?if_match: ::String
+                                             ) -> _DisassociateDistributionWebACLResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateDistributionWebACLResponseSuccess
+
       interface _GetAnycastIpListResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAnycastIpListResult]
         def anycast_ip_list: () -> Types::AnycastIpList
@@ -1438,6 +1625,28 @@ module Aws
                                                          ) -> _GetCloudFrontOriginAccessIdentityConfigResponseSuccess
                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCloudFrontOriginAccessIdentityConfigResponseSuccess
 
+      interface _GetConnectionGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConnectionGroupResult]
+        def connection_group: () -> Types::ConnectionGroup
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_connection_group-instance_method
+      def get_connection_group: (
+                                  identifier: ::String
+                                ) -> _GetConnectionGroupResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConnectionGroupResponseSuccess
+
+      interface _GetConnectionGroupByRoutingEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConnectionGroupByRoutingEndpointResult]
+        def connection_group: () -> Types::ConnectionGroup
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_connection_group_by_routing_endpoint-instance_method
+      def get_connection_group_by_routing_endpoint: (
+                                                      routing_endpoint: ::String
+                                                    ) -> _GetConnectionGroupByRoutingEndpointResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConnectionGroupByRoutingEndpointResponseSuccess
+
       interface _GetContinuousDeploymentPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetContinuousDeploymentPolicyResult]
         def continuous_deployment_policy: () -> Types::ContinuousDeploymentPolicy
@@ -1481,6 +1690,28 @@ module Aws
                                      id: ::String
                                    ) -> _GetDistributionConfigResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDistributionConfigResponseSuccess
+
+      interface _GetDistributionTenantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDistributionTenantResult]
+        def distribution_tenant: () -> Types::DistributionTenant
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_distribution_tenant-instance_method
+      def get_distribution_tenant: (
+                                     identifier: ::String
+                                   ) -> _GetDistributionTenantResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDistributionTenantResponseSuccess
+
+      interface _GetDistributionTenantByDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDistributionTenantByDomainResult]
+        def distribution_tenant: () -> Types::DistributionTenant
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_distribution_tenant_by_domain-instance_method
+      def get_distribution_tenant_by_domain: (
+                                               domain: ::String
+                                             ) -> _GetDistributionTenantByDomainResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDistributionTenantByDomainResponseSuccess
 
       interface _GetFieldLevelEncryptionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetFieldLevelEncryptionResult]
@@ -1550,6 +1781,17 @@ module Aws
                             ) -> _GetInvalidationResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInvalidationResponseSuccess
 
+      interface _GetInvalidationForDistributionTenantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInvalidationForDistributionTenantResult]
+        def invalidation: () -> Types::Invalidation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_invalidation_for_distribution_tenant-instance_method
+      def get_invalidation_for_distribution_tenant: (
+                                                      distribution_tenant_id: ::String,
+                                                      id: ::String
+                                                    ) -> _GetInvalidationForDistributionTenantResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInvalidationForDistributionTenantResponseSuccess
+
       interface _GetKeyGroupResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetKeyGroupResult]
         def key_group: () -> Types::KeyGroup
@@ -1571,6 +1813,16 @@ module Aws
                                   id: ::String
                                 ) -> _GetKeyGroupConfigResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetKeyGroupConfigResponseSuccess
+
+      interface _GetManagedCertificateDetailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetManagedCertificateDetailsResult]
+        def managed_certificate_details: () -> Types::ManagedCertificateDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_managed_certificate_details-instance_method
+      def get_managed_certificate_details: (
+                                             identifier: ::String
+                                           ) -> _GetManagedCertificateDetailsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetManagedCertificateDetailsResponseSuccess
 
       interface _GetMonitoringSubscriptionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetMonitoringSubscriptionResult]
@@ -1761,6 +2013,21 @@ module Aws
                                     ) -> _ListConflictingAliasesResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConflictingAliasesResponseSuccess
 
+      interface _ListConnectionGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConnectionGroupsResult]
+        def next_marker: () -> ::String
+        def connection_groups: () -> ::Array[Types::ConnectionGroupSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#list_connection_groups-instance_method
+      def list_connection_groups: (
+                                    ?association_filter: {
+                                      anycast_ip_list_id: ::String?
+                                    },
+                                    ?marker: ::String,
+                                    ?max_items: ::Integer
+                                  ) -> _ListConnectionGroupsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConnectionGroupsResponseSuccess
+
       interface _ListContinuousDeploymentPoliciesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListContinuousDeploymentPoliciesResult]
         def continuous_deployment_policy_list: () -> Types::ContinuousDeploymentPolicyList
@@ -1771,6 +2038,36 @@ module Aws
                                                  ?max_items: ::Integer
                                                ) -> _ListContinuousDeploymentPoliciesResponseSuccess
                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListContinuousDeploymentPoliciesResponseSuccess
+
+      interface _ListDistributionTenantsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDistributionTenantsResult]
+        def next_marker: () -> ::String
+        def distribution_tenant_list: () -> ::Array[Types::DistributionTenantSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#list_distribution_tenants-instance_method
+      def list_distribution_tenants: (
+                                       ?association_filter: {
+                                         distribution_id: ::String?,
+                                         connection_group_id: ::String?
+                                       },
+                                       ?marker: ::String,
+                                       ?max_items: ::Integer
+                                     ) -> _ListDistributionTenantsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDistributionTenantsResponseSuccess
+
+      interface _ListDistributionTenantsByCustomizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDistributionTenantsByCustomizationResult]
+        def next_marker: () -> ::String
+        def distribution_tenant_list: () -> ::Array[Types::DistributionTenantSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#list_distribution_tenants_by_customization-instance_method
+      def list_distribution_tenants_by_customization: (
+                                                        ?web_acl_arn: ::String,
+                                                        ?certificate_arn: ::String,
+                                                        ?marker: ::String,
+                                                        ?max_items: ::Integer
+                                                      ) -> _ListDistributionTenantsByCustomizationResponseSuccess
+                                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDistributionTenantsByCustomizationResponseSuccess
 
       interface _ListDistributionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDistributionsResult]
@@ -1806,6 +2103,18 @@ module Aws
                                                    cache_policy_id: ::String
                                                  ) -> _ListDistributionsByCachePolicyIdResponseSuccess
                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDistributionsByCachePolicyIdResponseSuccess
+
+      interface _ListDistributionsByConnectionModeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDistributionsByConnectionModeResult]
+        def distribution_list: () -> Types::DistributionList
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#list_distributions_by_connection_mode-instance_method
+      def list_distributions_by_connection_mode: (
+                                                   ?marker: ::String,
+                                                   ?max_items: ::Integer,
+                                                   connection_mode: ("direct" | "tenant-only")
+                                                 ) -> _ListDistributionsByConnectionModeResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDistributionsByConnectionModeResponseSuccess
 
       interface _ListDistributionsByKeyGroupResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDistributionsByKeyGroupResult]
@@ -1880,6 +2189,23 @@ module Aws
                                             ) -> _ListDistributionsByWebACLIdResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDistributionsByWebACLIdResponseSuccess
 
+      interface _ListDomainConflictsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDomainConflictsResult]
+        def domain_conflicts: () -> ::Array[Types::DomainConflict]
+        def next_marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#list_domain_conflicts-instance_method
+      def list_domain_conflicts: (
+                                   domain: ::String,
+                                   domain_control_validation_resource: {
+                                     distribution_id: ::String?,
+                                     distribution_tenant_id: ::String?
+                                   },
+                                   ?max_items: ::Integer,
+                                   ?marker: ::String
+                                 ) -> _ListDomainConflictsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDomainConflictsResponseSuccess
+
       interface _ListFieldLevelEncryptionConfigsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListFieldLevelEncryptionConfigsResult]
         def field_level_encryption_list: () -> Types::FieldLevelEncryptionList
@@ -1925,6 +2251,18 @@ module Aws
                                 ?max_items: ::Integer
                               ) -> _ListInvalidationsResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInvalidationsResponseSuccess
+
+      interface _ListInvalidationsForDistributionTenantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInvalidationsForDistributionTenantResult]
+        def invalidation_list: () -> Types::InvalidationList
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#list_invalidations_for_distribution_tenant-instance_method
+      def list_invalidations_for_distribution_tenant: (
+                                                        id: ::String,
+                                                        ?marker: ::String,
+                                                        ?max_items: ::Integer
+                                                      ) -> _ListInvalidationsForDistributionTenantResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInvalidationsForDistributionTenantResponseSuccess
 
       interface _ListKeyGroupsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListKeyGroupsResult]
@@ -2144,6 +2482,21 @@ module Aws
                                                        ?if_match: ::String
                                                      ) -> _UpdateCloudFrontOriginAccessIdentityResponseSuccess
                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCloudFrontOriginAccessIdentityResponseSuccess
+
+      interface _UpdateConnectionGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConnectionGroupResult]
+        def connection_group: () -> Types::ConnectionGroup
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#update_connection_group-instance_method
+      def update_connection_group: (
+                                     id: ::String,
+                                     ?ipv_6_enabled: bool,
+                                     if_match: ::String,
+                                     ?anycast_ip_list_id: ::String,
+                                     ?enabled: bool
+                                   ) -> _UpdateConnectionGroupResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConnectionGroupResponseSuccess
 
       interface _UpdateContinuousDeploymentPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateContinuousDeploymentPolicyResult]
@@ -2428,7 +2781,7 @@ module Aws
                                      bucket: ::String?,
                                      prefix: ::String?
                                    }?,
-                                   price_class: ("PriceClass_100" | "PriceClass_200" | "PriceClass_All")?,
+                                   price_class: ("PriceClass_100" | "PriceClass_200" | "PriceClass_All" | "None")?,
                                    enabled: bool,
                                    viewer_certificate: {
                                      cloud_front_default_certificate: bool?,
@@ -2451,12 +2804,71 @@ module Aws
                                    is_ipv6_enabled: bool?,
                                    continuous_deployment_policy_id: ::String?,
                                    staging: bool?,
-                                   anycast_ip_list_id: ::String?
+                                   anycast_ip_list_id: ::String?,
+                                   tenant_config: {
+                                     parameter_definitions: Array[
+                                       {
+                                         name: ::String,
+                                         definition: {
+                                           string_schema: {
+                                             comment: ::String?,
+                                             default_value: ::String?,
+                                             required: bool
+                                           }?
+                                         }
+                                       },
+                                     ]?
+                                   }?,
+                                   connection_mode: ("direct" | "tenant-only")?
                                  },
                                  id: ::String,
                                  ?if_match: ::String
                                ) -> _UpdateDistributionResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDistributionResponseSuccess
+
+      interface _UpdateDistributionTenantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDistributionTenantResult]
+        def distribution_tenant: () -> Types::DistributionTenant
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#update_distribution_tenant-instance_method
+      def update_distribution_tenant: (
+                                        id: ::String,
+                                        ?distribution_id: ::String,
+                                        ?domains: Array[
+                                          {
+                                            domain: ::String
+                                          },
+                                        ],
+                                        ?customizations: {
+                                          web_acl: {
+                                            action: ("override" | "disable"),
+                                            arn: ::String?
+                                          }?,
+                                          certificate: {
+                                            arn: ::String
+                                          }?,
+                                          geo_restrictions: {
+                                            restriction_type: ("blacklist" | "whitelist" | "none"),
+                                            locations: Array[::String]?
+                                          }?
+                                        },
+                                        ?parameters: Array[
+                                          {
+                                            name: ::String,
+                                            value: ::String
+                                          },
+                                        ],
+                                        ?connection_group_id: ::String,
+                                        if_match: ::String,
+                                        ?managed_certificate_request: {
+                                          validation_token_host: ("cloudfront" | "self-hosted"),
+                                          primary_domain_name: ::String?,
+                                          certificate_transparency_logging_preference: ("enabled" | "disabled")?
+                                        },
+                                        ?enabled: bool
+                                      ) -> _UpdateDistributionTenantResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDistributionTenantResponseSuccess
 
       interface _UpdateDistributionWithStagingConfigResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDistributionWithStagingConfigResult]
@@ -2470,6 +2882,23 @@ module Aws
                                                      ?if_match: ::String
                                                    ) -> _UpdateDistributionWithStagingConfigResponseSuccess
                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDistributionWithStagingConfigResponseSuccess
+
+      interface _UpdateDomainAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDomainAssociationResult]
+        def domain: () -> ::String
+        def resource_id: () -> ::String
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#update_domain_association-instance_method
+      def update_domain_association: (
+                                       domain: ::String,
+                                       target_resource: {
+                                         distribution_id: ::String?,
+                                         distribution_tenant_id: ::String?
+                                       },
+                                       ?if_match: ::String
+                                     ) -> _UpdateDomainAssociationResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDomainAssociationResponseSuccess
 
       interface _UpdateFieldLevelEncryptionConfigResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFieldLevelEncryptionConfigResult]
@@ -2809,7 +3238,7 @@ module Aws
                                                quantity: ::Integer,
                                                items: Array[::String]?
                                              },
-                                             price_class: ("PriceClass_100" | "PriceClass_200" | "PriceClass_All")?,
+                                             price_class: ("PriceClass_100" | "PriceClass_200" | "PriceClass_All" | "None")?,
                                              enabled: bool
                                            },
                                            id: ::String,
@@ -2840,6 +3269,17 @@ module Aws
                              ) -> _UpdateVpcOriginResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateVpcOriginResponseSuccess
 
+      interface _VerifyDnsConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::VerifyDnsConfigurationResult]
+        def dns_configuration_list: () -> ::Array[Types::DnsConfiguration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#verify_dns_configuration-instance_method
+      def verify_dns_configuration: (
+                                      ?domain: ::String,
+                                      identifier: ::String
+                                    ) -> _VerifyDnsConfigurationResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _VerifyDnsConfigurationResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#wait_until-instance_method
       def wait_until: (:distribution_deployed waiter_name, 
                     id: ::String
@@ -2850,6 +3290,11 @@ module Aws
                     id: ::String
                   ) -> Client::_GetInvalidationResponseSuccess
                     | (:invalidation_completed waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetInvalidationResponseSuccess
+                    | (:invalidation_for_distribution_tenant_completed waiter_name, 
+                    distribution_tenant_id: ::String,
+                    id: ::String
+                  ) -> Client::_GetInvalidationForDistributionTenantResponseSuccess
+                    | (:invalidation_for_distribution_tenant_completed waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetInvalidationForDistributionTenantResponseSuccess
                     | (:streaming_distribution_deployed waiter_name, 
                     id: ::String
                   ) -> Client::_GetStreamingDistributionResponseSuccess

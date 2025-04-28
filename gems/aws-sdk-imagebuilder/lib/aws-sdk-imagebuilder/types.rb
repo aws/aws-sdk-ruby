@@ -821,7 +821,9 @@ module Aws::Imagebuilder
     #   @return [Boolean]
     #
     # @!attribute [rw] parent_image
-    #   The base image for the container recipe.
+    #   The base image for customizations specified in the container recipe.
+    #   This can contain an Image Builder image resource ARN or a container
+    #   image URI, for example `amazonlinux:latest`.
     #   @return [String]
     #
     # @!attribute [rw] date_created
@@ -2314,6 +2316,12 @@ module Aws::Imagebuilder
     #   distribution.
     #   @return [Array<Types::FastLaunchConfiguration>]
     #
+    # @!attribute [rw] ssm_parameter_configurations
+    #   Contains settings to update Amazon Web Services Systems Manager
+    #   (SSM) Parameter Store Parameters with output AMI IDs from the build
+    #   by target Region.
+    #   @return [Array<Types::SsmParameterConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/Distribution AWS API Documentation
     #
     class Distribution < Struct.new(
@@ -2323,7 +2331,8 @@ module Aws::Imagebuilder
       :license_configuration_arns,
       :launch_template_configurations,
       :s3_export_configuration,
-      :fast_launch_configurations)
+      :fast_launch_configurations,
+      :ssm_parameter_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3745,7 +3754,18 @@ module Aws::Imagebuilder
     #   @return [Array<Types::ComponentConfiguration>]
     #
     # @!attribute [rw] parent_image
-    #   The base image of the image recipe.
+    #   The base image for customizations specified in the image recipe. You
+    #   can specify the parent image using one of the following options:
+    #
+    #   * AMI ID
+    #
+    #   * Image Builder image Amazon Resource Name (ARN)
+    #
+    #   * Amazon Web Services Systems Manager (SSM) Parameter Store
+    #     Parameter, prefixed by `ssm:`, followed by the parameter name or
+    #     ARN.
+    #
+    #   * Amazon Web Services Marketplace product ID
     #   @return [String]
     #
     # @!attribute [rw] block_device_mappings
@@ -4814,9 +4834,13 @@ module Aws::Imagebuilder
     # an instance used for building and testing container images.
     #
     # @!attribute [rw] image
-    #   The AMI ID to use as the base image for a container build and test
-    #   instance. If not specified, Image Builder will use the appropriate
-    #   ECS-optimized AMI as a base image.
+    #   The base image for a container build and test instance. This can
+    #   contain an AMI ID or it can specify an Amazon Web Services Systems
+    #   Manager (SSM) Parameter Store Parameter, prefixed by `ssm:`,
+    #   followed by the parameter name or ARN.
+    #
+    #   If not specified, Image Builder uses the appropriate ECS-optimized
+    #   AMI as a base image.
     #   @return [String]
     #
     # @!attribute [rw] block_device_mappings
@@ -7600,6 +7624,36 @@ module Aws::Imagebuilder
       :critical,
       :high,
       :medium)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for a single Parameter in the Amazon Web Services
+    # Systems Manager (SSM) Parameter Store in a given Region.
+    #
+    # @!attribute [rw] ami_account_id
+    #   Specify the account that will own the Parameter in a given Region.
+    #   During distribution, this account must be specified in distribution
+    #   settings as a target account for the Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameter_name
+    #   This is the name of the Parameter in the target Region or account.
+    #   The image distribution creates the Parameter if it doesn't already
+    #   exist. Otherwise, it updates the parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_type
+    #   The data type specifies what type of value the Parameter contains.
+    #   We recommend that you use data type `aws:ec2:image`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/SsmParameterConfiguration AWS API Documentation
+    #
+    class SsmParameterConfiguration < Struct.new(
+      :ami_account_id,
+      :parameter_name,
+      :data_type)
       SENSITIVE = []
       include Aws::Structure
     end

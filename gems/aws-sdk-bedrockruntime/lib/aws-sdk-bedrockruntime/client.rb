@@ -1350,176 +1350,182 @@ module Aws::BedrockRuntime
     #
     # @example EventStream Operation Example
     #
-    #   You can process the event once it arrives immediately, or wait until the
-    #   full response is complete and iterate through the eventstream enumerator.
+    #   # You can process the event once it arrives immediately, or wait until the
+    #   # full response is complete and iterate through the eventstream enumerator.
     #
-    #   To interact with event immediately, you need to register #converse_stream
-    #   with callbacks. Callbacks can be registered for specific events or for all
-    #   events, including error events.
+    #   # To interact with event immediately, you need to register converse_stream
+    #   # with callbacks. Callbacks can be registered for specific events or for all
+    #   # events, including error events.
     #
-    #   Callbacks can be passed into the `:event_stream_handler` option or within a
-    #   block statement attached to the #converse_stream call directly. Hybrid
-    #   pattern of both is also supported.
+    #   # Callbacks can be passed into the `:event_stream_handler` option or within a
+    #   # block statement attached to the #converse_stream call directly. Hybrid
+    #   # pattern of both is also supported.
     #
-    #   `:event_stream_handler` option takes in either a Proc object or
-    #   Aws::BedrockRuntime::EventStreams::ConverseStreamOutput object.
+    #   # `:event_stream_handler` option takes in either a Proc object or
+    #   # Aws::BedrockRuntime::EventStreams::ConverseStreamOutput object.
     #
-    #   Usage pattern a): Callbacks with a block attached to #converse_stream
-    #     Example for registering callbacks for all event types and an error event
-    #
-    #     client.converse_stream( # params input# ) do |stream|
-    #       stream.on_error_event do |event|
-    #         # catch unmodeled error event in the stream
-    #         raise event
-    #         # => Aws::Errors::EventError
-    #         # event.event_type => :error
-    #         # event.error_code => String
-    #         # event.error_message => String
-    #       end
-    #
-    #       stream.on_event do |event|
-    #         # process all events arrive
-    #         puts event.event_type
-    #         ...
-    #       end
-    #
+    #   # Usage pattern a): Callbacks with a block attached to #converse_stream
+    #   # Example for registering callbacks for all event types and an error event
+    #   client.converse_stream(
+    #     # params input
+    #   ) do |stream|
+    #     stream.on_error_event do |event|
+    #       # catch unmodeled error event in the stream
+    #       raise event
+    #       # => Aws::Errors::EventError
+    #       # event.event_type => :error
+    #       # event.error_code => String
+    #       # event.error_message => String
     #     end
     #
-    #   Usage pattern b): Pass in `:event_stream_handler` for #converse_stream
-    #
-    #     1) Create a Aws::BedrockRuntime::EventStreams::ConverseStreamOutput object
-    #     Example for registering callbacks with specific events
-    #
-    #       handler = Aws::BedrockRuntime::EventStreams::ConverseStreamOutput.new
-    #       handler.on_message_start_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::messageStart
-    #       end
-    #       handler.on_content_block_start_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::contentBlockStart
-    #       end
-    #       handler.on_content_block_delta_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::contentBlockDelta
-    #       end
-    #       handler.on_content_block_stop_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::contentBlockStop
-    #       end
-    #       handler.on_message_stop_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::messageStop
-    #       end
-    #       handler.on_metadata_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::metadata
-    #       end
-    #       handler.on_internal_server_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::internalServerException
-    #       end
-    #       handler.on_model_stream_error_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::modelStreamErrorException
-    #       end
-    #       handler.on_validation_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::validationException
-    #       end
-    #       handler.on_throttling_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::throttlingException
-    #       end
-    #       handler.on_service_unavailable_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::serviceUnavailableException
-    #       end
-    #
-    #     client.converse_stream( # params input #, event_stream_handler: handler)
-    #
-    #     2) Use a Ruby Proc object
-    #     Example for registering callbacks with specific events
-    #
-    #     handler = Proc.new do |stream|
-    #       stream.on_message_start_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::messageStart
-    #       end
-    #       stream.on_content_block_start_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::contentBlockStart
-    #       end
-    #       stream.on_content_block_delta_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::contentBlockDelta
-    #       end
-    #       stream.on_content_block_stop_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::contentBlockStop
-    #       end
-    #       stream.on_message_stop_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::messageStop
-    #       end
-    #       stream.on_metadata_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::metadata
-    #       end
-    #       stream.on_internal_server_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::internalServerException
-    #       end
-    #       stream.on_model_stream_error_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::modelStreamErrorException
-    #       end
-    #       stream.on_validation_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::validationException
-    #       end
-    #       stream.on_throttling_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::throttlingException
-    #       end
-    #       stream.on_service_unavailable_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::serviceUnavailableException
-    #       end
+    #     stream.on_event do |event|
+    #       # process all events arrive
+    #       puts event.event_type
+    #       # ...
     #     end
+    #   end
     #
-    #     client.converse_stream( # params input #, event_stream_handler: handler)
+    #   # Usage pattern b): Pass in `:event_stream_handler` for #converse_stream
+    #   #  1) Create a Aws::BedrockRuntime::EventStreams::ConverseStreamOutput object
+    #   #  Example for registering callbacks with specific events
     #
-    #   Usage pattern c): Hybrid pattern of a) and b)
+    #   handler = Aws::BedrockRuntime::EventStreams::ConverseStreamOutput.new
+    #   handler.on_message_start_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::messageStart
+    #   end
+    #   handler.on_content_block_start_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::contentBlockStart
+    #   end
+    #   handler.on_content_block_delta_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::contentBlockDelta
+    #   end
+    #   handler.on_content_block_stop_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::contentBlockStop
+    #   end
+    #   handler.on_message_stop_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::messageStop
+    #   end
+    #   handler.on_metadata_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::metadata
+    #   end
+    #   handler.on_internal_server_exception_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::internalServerException
+    #   end
+    #   handler.on_model_stream_error_exception_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::modelStreamErrorException
+    #   end
+    #   handler.on_validation_exception_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::validationException
+    #   end
+    #   handler.on_throttling_exception_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::throttlingException
+    #   end
+    #   handler.on_service_unavailable_exception_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::serviceUnavailableException
+    #   end
     #
-    #       handler = Aws::BedrockRuntime::EventStreams::ConverseStreamOutput.new
-    #       handler.on_message_start_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::messageStart
-    #       end
-    #       handler.on_content_block_start_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::contentBlockStart
-    #       end
-    #       handler.on_content_block_delta_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::contentBlockDelta
-    #       end
-    #       handler.on_content_block_stop_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::contentBlockStop
-    #       end
-    #       handler.on_message_stop_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::messageStop
-    #       end
-    #       handler.on_metadata_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::metadata
-    #       end
-    #       handler.on_internal_server_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::internalServerException
-    #       end
-    #       handler.on_model_stream_error_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::modelStreamErrorException
-    #       end
-    #       handler.on_validation_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::validationException
-    #       end
-    #       handler.on_throttling_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::throttlingException
-    #       end
-    #       handler.on_service_unavailable_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::serviceUnavailableException
-    #       end
+    #   client.converse_stream(
+    #     # params inputs
+    #     event_stream_handler: handler
+    #   )
     #
-    #     client.converse_stream( # params input #, event_stream_handler: handler) do |stream|
-    #       stream.on_error_event do |event|
-    #         # catch unmodeled error event in the stream
-    #         raise event
-    #         # => Aws::Errors::EventError
-    #         # event.event_type => :error
-    #         # event.error_code => String
-    #         # event.error_message => String
-    #       end
+    #   #  2) Use a Ruby Proc object
+    #   #  Example for registering callbacks with specific events
+    #   handler = Proc.new do |stream|
+    #     stream.on_message_start_event do |event|
+    #       event # => Aws::BedrockRuntime::Types::messageStart
     #     end
+    #     stream.on_content_block_start_event do |event|
+    #       event # => Aws::BedrockRuntime::Types::contentBlockStart
+    #     end
+    #     stream.on_content_block_delta_event do |event|
+    #       event # => Aws::BedrockRuntime::Types::contentBlockDelta
+    #     end
+    #     stream.on_content_block_stop_event do |event|
+    #       event # => Aws::BedrockRuntime::Types::contentBlockStop
+    #     end
+    #     stream.on_message_stop_event do |event|
+    #       event # => Aws::BedrockRuntime::Types::messageStop
+    #     end
+    #     stream.on_metadata_event do |event|
+    #       event # => Aws::BedrockRuntime::Types::metadata
+    #     end
+    #     stream.on_internal_server_exception_event do |event|
+    #       event # => Aws::BedrockRuntime::Types::internalServerException
+    #     end
+    #     stream.on_model_stream_error_exception_event do |event|
+    #       event # => Aws::BedrockRuntime::Types::modelStreamErrorException
+    #     end
+    #     stream.on_validation_exception_event do |event|
+    #       event # => Aws::BedrockRuntime::Types::validationException
+    #     end
+    #     stream.on_throttling_exception_event do |event|
+    #       event # => Aws::BedrockRuntime::Types::throttlingException
+    #     end
+    #     stream.on_service_unavailable_exception_event do |event|
+    #       event # => Aws::BedrockRuntime::Types::serviceUnavailableException
+    #     end
+    #   end
     #
-    #   You can also iterate through events after the response complete.
+    #   client.converse_stream(
+    #     # params inputs
+    #     event_stream_handler: handler
+    #   )
     #
-    #   Events are available at resp.stream # => Enumerator
-    #   For parameter input example, please refer to following request syntax
+    #   #  Usage pattern c): Hybrid pattern of a) and b)
+    #   handler = Aws::BedrockRuntime::EventStreams::ConverseStreamOutput.new
+    #   handler.on_message_start_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::messageStart
+    #   end
+    #   handler.on_content_block_start_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::contentBlockStart
+    #   end
+    #   handler.on_content_block_delta_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::contentBlockDelta
+    #   end
+    #   handler.on_content_block_stop_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::contentBlockStop
+    #   end
+    #   handler.on_message_stop_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::messageStop
+    #   end
+    #   handler.on_metadata_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::metadata
+    #   end
+    #   handler.on_internal_server_exception_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::internalServerException
+    #   end
+    #   handler.on_model_stream_error_exception_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::modelStreamErrorException
+    #   end
+    #   handler.on_validation_exception_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::validationException
+    #   end
+    #   handler.on_throttling_exception_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::throttlingException
+    #   end
+    #   handler.on_service_unavailable_exception_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::serviceUnavailableException
+    #   end
+    #
+    #   client.converse_stream(
+    #     # params input
+    #     event_stream_handler: handler
+    #   ) do |stream|
+    #     stream.on_error_event do |event|
+    #       # catch unmodeled error event in the stream
+    #       raise event
+    #       # => Aws::Errors::EventError
+    #       # event.event_type => :error
+    #       # event.error_code => String
+    #       # event.error_message => String
+    #     end
+    #   end
+    #
+    #   # You can also iterate through events after the response complete.
+    #   # Events are available at
+    #   resp.stream # => Enumerator
+    #   # For parameter input example, please refer to following request syntax.
     #
     # @example Request syntax with placeholder values
     #
@@ -1712,19 +1718,19 @@ module Aws::BedrockRuntime
     #
     # @example Response structure
     #
-    #   All events are available at resp.stream:
+    #   # All events are available at resp.stream:
     #   resp.stream #=> Enumerator
     #   resp.stream.event_types #=> [:message_start, :content_block_start, :content_block_delta, :content_block_stop, :message_stop, :metadata, :internal_server_exception, :model_stream_error_exception, :validation_exception, :throttling_exception, :service_unavailable_exception]
     #
-    #   For :message_start event available at #on_message_start_event callback and response eventstream enumerator:
+    #   # For :message_start event available at #on_message_start_event callback and response eventstream enumerator:
     #   event.role #=> String, one of "user", "assistant"
     #
-    #   For :content_block_start event available at #on_content_block_start_event callback and response eventstream enumerator:
+    #   # For :content_block_start event available at #on_content_block_start_event callback and response eventstream enumerator:
     #   event.start.tool_use.tool_use_id #=> String
     #   event.start.tool_use.name #=> String
     #   event.content_block_index #=> Integer
     #
-    #   For :content_block_delta event available at #on_content_block_delta_event callback and response eventstream enumerator:
+    #   # For :content_block_delta event available at #on_content_block_delta_event callback and response eventstream enumerator:
     #   event.delta.text #=> String
     #   event.delta.tool_use.input #=> String
     #   event.delta.reasoning_content.text #=> String
@@ -1732,13 +1738,13 @@ module Aws::BedrockRuntime
     #   event.delta.reasoning_content.signature #=> String
     #   event.content_block_index #=> Integer
     #
-    #   For :content_block_stop event available at #on_content_block_stop_event callback and response eventstream enumerator:
+    #   # For :content_block_stop event available at #on_content_block_stop_event callback and response eventstream enumerator:
     #   event.content_block_index #=> Integer
     #
-    #   For :message_stop event available at #on_message_stop_event callback and response eventstream enumerator:
+    #   # For :message_stop event available at #on_message_stop_event callback and response eventstream enumerator:
     #   event.stop_reason #=> String, one of "end_turn", "tool_use", "max_tokens", "stop_sequence", "guardrail_intervened", "content_filtered"
     #
-    #   For :metadata event available at #on_metadata_event callback and response eventstream enumerator:
+    #   # For :metadata event available at #on_metadata_event callback and response eventstream enumerator:
     #   event.usage.input_tokens #=> Integer
     #   event.usage.output_tokens #=> Integer
     #   event.usage.total_tokens #=> Integer
@@ -1852,21 +1858,21 @@ module Aws::BedrockRuntime
     #   event.trace.prompt_router.invoked_model_id #=> String
     #   event.performance_config.latency #=> String, one of "standard", "optimized"
     #
-    #   For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
+    #   # For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :model_stream_error_exception event available at #on_model_stream_error_exception_event callback and response eventstream enumerator:
+    #   # For :model_stream_error_exception event available at #on_model_stream_error_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #   event.original_status_code #=> Integer
     #   event.original_message #=> String
     #
-    #   For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
+    #   # For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :throttling_exception event available at #on_throttling_exception_event callback and response eventstream enumerator:
+    #   # For :throttling_exception event available at #on_throttling_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :service_unavailable_exception event available at #on_service_unavailable_exception_event callback and response eventstream enumerator:
+    #   # For :service_unavailable_exception event available at #on_service_unavailable_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ConverseStream AWS API Documentation
@@ -2215,140 +2221,146 @@ module Aws::BedrockRuntime
     #
     # @example EventStream Operation Example
     #
-    #   You can process the event once it arrives immediately, or wait until the
-    #   full response is complete and iterate through the eventstream enumerator.
+    #   # You can process the event once it arrives immediately, or wait until the
+    #   # full response is complete and iterate through the eventstream enumerator.
     #
-    #   To interact with event immediately, you need to register #invoke_model_with_response_stream
-    #   with callbacks. Callbacks can be registered for specific events or for all
-    #   events, including error events.
+    #   # To interact with event immediately, you need to register invoke_model_with_response_stream
+    #   # with callbacks. Callbacks can be registered for specific events or for all
+    #   # events, including error events.
     #
-    #   Callbacks can be passed into the `:event_stream_handler` option or within a
-    #   block statement attached to the #invoke_model_with_response_stream call directly. Hybrid
-    #   pattern of both is also supported.
+    #   # Callbacks can be passed into the `:event_stream_handler` option or within a
+    #   # block statement attached to the #invoke_model_with_response_stream call directly. Hybrid
+    #   # pattern of both is also supported.
     #
-    #   `:event_stream_handler` option takes in either a Proc object or
-    #   Aws::BedrockRuntime::EventStreams::ResponseStream object.
+    #   # `:event_stream_handler` option takes in either a Proc object or
+    #   # Aws::BedrockRuntime::EventStreams::ResponseStream object.
     #
-    #   Usage pattern a): Callbacks with a block attached to #invoke_model_with_response_stream
-    #     Example for registering callbacks for all event types and an error event
-    #
-    #     client.invoke_model_with_response_stream( # params input# ) do |stream|
-    #       stream.on_error_event do |event|
-    #         # catch unmodeled error event in the stream
-    #         raise event
-    #         # => Aws::Errors::EventError
-    #         # event.event_type => :error
-    #         # event.error_code => String
-    #         # event.error_message => String
-    #       end
-    #
-    #       stream.on_event do |event|
-    #         # process all events arrive
-    #         puts event.event_type
-    #         ...
-    #       end
-    #
+    #   # Usage pattern a): Callbacks with a block attached to #invoke_model_with_response_stream
+    #   # Example for registering callbacks for all event types and an error event
+    #   client.invoke_model_with_response_stream(
+    #     # params input
+    #   ) do |stream|
+    #     stream.on_error_event do |event|
+    #       # catch unmodeled error event in the stream
+    #       raise event
+    #       # => Aws::Errors::EventError
+    #       # event.event_type => :error
+    #       # event.error_code => String
+    #       # event.error_message => String
     #     end
     #
-    #   Usage pattern b): Pass in `:event_stream_handler` for #invoke_model_with_response_stream
-    #
-    #     1) Create a Aws::BedrockRuntime::EventStreams::ResponseStream object
-    #     Example for registering callbacks with specific events
-    #
-    #       handler = Aws::BedrockRuntime::EventStreams::ResponseStream.new
-    #       handler.on_chunk_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::chunk
-    #       end
-    #       handler.on_internal_server_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::internalServerException
-    #       end
-    #       handler.on_model_stream_error_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::modelStreamErrorException
-    #       end
-    #       handler.on_validation_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::validationException
-    #       end
-    #       handler.on_throttling_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::throttlingException
-    #       end
-    #       handler.on_model_timeout_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::modelTimeoutException
-    #       end
-    #       handler.on_service_unavailable_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::serviceUnavailableException
-    #       end
-    #
-    #     client.invoke_model_with_response_stream( # params input #, event_stream_handler: handler)
-    #
-    #     2) Use a Ruby Proc object
-    #     Example for registering callbacks with specific events
-    #
-    #     handler = Proc.new do |stream|
-    #       stream.on_chunk_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::chunk
-    #       end
-    #       stream.on_internal_server_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::internalServerException
-    #       end
-    #       stream.on_model_stream_error_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::modelStreamErrorException
-    #       end
-    #       stream.on_validation_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::validationException
-    #       end
-    #       stream.on_throttling_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::throttlingException
-    #       end
-    #       stream.on_model_timeout_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::modelTimeoutException
-    #       end
-    #       stream.on_service_unavailable_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::serviceUnavailableException
-    #       end
+    #     stream.on_event do |event|
+    #       # process all events arrive
+    #       puts event.event_type
+    #       # ...
     #     end
+    #   end
     #
-    #     client.invoke_model_with_response_stream( # params input #, event_stream_handler: handler)
+    #   # Usage pattern b): Pass in `:event_stream_handler` for #invoke_model_with_response_stream
+    #   #  1) Create a Aws::BedrockRuntime::EventStreams::ResponseStream object
+    #   #  Example for registering callbacks with specific events
     #
-    #   Usage pattern c): Hybrid pattern of a) and b)
+    #   handler = Aws::BedrockRuntime::EventStreams::ResponseStream.new
+    #   handler.on_chunk_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::chunk
+    #   end
+    #   handler.on_internal_server_exception_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::internalServerException
+    #   end
+    #   handler.on_model_stream_error_exception_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::modelStreamErrorException
+    #   end
+    #   handler.on_validation_exception_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::validationException
+    #   end
+    #   handler.on_throttling_exception_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::throttlingException
+    #   end
+    #   handler.on_model_timeout_exception_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::modelTimeoutException
+    #   end
+    #   handler.on_service_unavailable_exception_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::serviceUnavailableException
+    #   end
     #
-    #       handler = Aws::BedrockRuntime::EventStreams::ResponseStream.new
-    #       handler.on_chunk_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::chunk
-    #       end
-    #       handler.on_internal_server_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::internalServerException
-    #       end
-    #       handler.on_model_stream_error_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::modelStreamErrorException
-    #       end
-    #       handler.on_validation_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::validationException
-    #       end
-    #       handler.on_throttling_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::throttlingException
-    #       end
-    #       handler.on_model_timeout_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::modelTimeoutException
-    #       end
-    #       handler.on_service_unavailable_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::serviceUnavailableException
-    #       end
+    #   client.invoke_model_with_response_stream(
+    #     # params inputs
+    #     event_stream_handler: handler
+    #   )
     #
-    #     client.invoke_model_with_response_stream( # params input #, event_stream_handler: handler) do |stream|
-    #       stream.on_error_event do |event|
-    #         # catch unmodeled error event in the stream
-    #         raise event
-    #         # => Aws::Errors::EventError
-    #         # event.event_type => :error
-    #         # event.error_code => String
-    #         # event.error_message => String
-    #       end
+    #   #  2) Use a Ruby Proc object
+    #   #  Example for registering callbacks with specific events
+    #   handler = Proc.new do |stream|
+    #     stream.on_chunk_event do |event|
+    #       event # => Aws::BedrockRuntime::Types::chunk
     #     end
+    #     stream.on_internal_server_exception_event do |event|
+    #       event # => Aws::BedrockRuntime::Types::internalServerException
+    #     end
+    #     stream.on_model_stream_error_exception_event do |event|
+    #       event # => Aws::BedrockRuntime::Types::modelStreamErrorException
+    #     end
+    #     stream.on_validation_exception_event do |event|
+    #       event # => Aws::BedrockRuntime::Types::validationException
+    #     end
+    #     stream.on_throttling_exception_event do |event|
+    #       event # => Aws::BedrockRuntime::Types::throttlingException
+    #     end
+    #     stream.on_model_timeout_exception_event do |event|
+    #       event # => Aws::BedrockRuntime::Types::modelTimeoutException
+    #     end
+    #     stream.on_service_unavailable_exception_event do |event|
+    #       event # => Aws::BedrockRuntime::Types::serviceUnavailableException
+    #     end
+    #   end
     #
-    #   You can also iterate through events after the response complete.
+    #   client.invoke_model_with_response_stream(
+    #     # params inputs
+    #     event_stream_handler: handler
+    #   )
     #
-    #   Events are available at resp.body # => Enumerator
-    #   For parameter input example, please refer to following request syntax
+    #   #  Usage pattern c): Hybrid pattern of a) and b)
+    #   handler = Aws::BedrockRuntime::EventStreams::ResponseStream.new
+    #   handler.on_chunk_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::chunk
+    #   end
+    #   handler.on_internal_server_exception_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::internalServerException
+    #   end
+    #   handler.on_model_stream_error_exception_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::modelStreamErrorException
+    #   end
+    #   handler.on_validation_exception_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::validationException
+    #   end
+    #   handler.on_throttling_exception_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::throttlingException
+    #   end
+    #   handler.on_model_timeout_exception_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::modelTimeoutException
+    #   end
+    #   handler.on_service_unavailable_exception_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::serviceUnavailableException
+    #   end
+    #
+    #   client.invoke_model_with_response_stream(
+    #     # params input
+    #     event_stream_handler: handler
+    #   ) do |stream|
+    #     stream.on_error_event do |event|
+    #       # catch unmodeled error event in the stream
+    #       raise event
+    #       # => Aws::Errors::EventError
+    #       # event.event_type => :error
+    #       # event.error_code => String
+    #       # event.error_message => String
+    #     end
+    #   end
+    #
+    #   # You can also iterate through events after the response complete.
+    #   # Events are available at
+    #   resp.body # => Enumerator
+    #   # For parameter input example, please refer to following request syntax.
     #
     # @example Request syntax with placeholder values
     #
@@ -2365,31 +2377,31 @@ module Aws::BedrockRuntime
     #
     # @example Response structure
     #
-    #   All events are available at resp.body:
+    #   # All events are available at resp.body:
     #   resp.body #=> Enumerator
     #   resp.body.event_types #=> [:chunk, :internal_server_exception, :model_stream_error_exception, :validation_exception, :throttling_exception, :model_timeout_exception, :service_unavailable_exception]
     #
-    #   For :chunk event available at #on_chunk_event callback and response eventstream enumerator:
+    #   # For :chunk event available at #on_chunk_event callback and response eventstream enumerator:
     #   event.bytes #=> String
     #
-    #   For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
+    #   # For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :model_stream_error_exception event available at #on_model_stream_error_exception_event callback and response eventstream enumerator:
+    #   # For :model_stream_error_exception event available at #on_model_stream_error_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #   event.original_status_code #=> Integer
     #   event.original_message #=> String
     #
-    #   For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
+    #   # For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :throttling_exception event available at #on_throttling_exception_event callback and response eventstream enumerator:
+    #   # For :throttling_exception event available at #on_throttling_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :model_timeout_exception event available at #on_model_timeout_exception_event callback and response eventstream enumerator:
+    #   # For :model_timeout_exception event available at #on_model_timeout_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :service_unavailable_exception event available at #on_service_unavailable_exception_event callback and response eventstream enumerator:
+    #   # For :service_unavailable_exception event available at #on_service_unavailable_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
     #   resp.content_type #=> String
@@ -2588,7 +2600,7 @@ module Aws::BedrockRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockruntime'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

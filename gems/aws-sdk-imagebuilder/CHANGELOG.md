@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2025-04-28)
+------------------
+
+* Feature - Add integration with SSM Parameter Store to Image Builder.
+
 1.78.0 (2025-02-18)
 ------------------
 

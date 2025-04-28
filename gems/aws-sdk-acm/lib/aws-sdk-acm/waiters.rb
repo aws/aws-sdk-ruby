@@ -69,7 +69,7 @@ module Aws::ACM
   #
   # | waiter_name           | params                        | :delay   | :max_attempts |
   # | --------------------- | ----------------------------- | -------- | ------------- |
-  # | certificate_validated | {Client#describe_certificate} | 60       | 40            |
+  # | certificate_validated | {Client#describe_certificate} | 60       | 5             |
   #
   module Waiters
 
@@ -77,40 +77,40 @@ module Aws::ACM
 
       # @param [Hash] options
       # @option options [required, Client] :client
-      # @option options [Integer] :max_attempts (40)
+      # @option options [Integer] :max_attempts (5)
       # @option options [Integer] :delay (60)
       # @option options [Proc] :before_attempt
       # @option options [Proc] :before_wait
       def initialize(options)
         @client = options.fetch(:client)
         @waiter = Aws::Waiters::Waiter.new({
-          max_attempts: 40,
+          max_attempts: 5,
           delay: 60,
           poller: Aws::Waiters::Poller.new(
             operation_name: :describe_certificate,
             acceptors: [
               {
                 "matcher" => "pathAll",
-                "expected" => "SUCCESS",
                 "argument" => "certificate.domain_validation_options[].validation_status",
-                "state" => "success"
+                "state" => "success",
+                "expected" => "SUCCESS"
               },
               {
                 "matcher" => "pathAny",
-                "expected" => "PENDING_VALIDATION",
                 "argument" => "certificate.domain_validation_options[].validation_status",
-                "state" => "retry"
+                "state" => "retry",
+                "expected" => "PENDING_VALIDATION"
               },
               {
                 "matcher" => "path",
-                "expected" => "FAILED",
                 "argument" => "certificate.status",
-                "state" => "failure"
+                "state" => "failure",
+                "expected" => "FAILED"
               },
               {
                 "matcher" => "error",
-                "expected" => "ResourceNotFoundException",
-                "state" => "failure"
+                "state" => "failure",
+                "expected" => "ResourceNotFoundException"
               }
             ]
           )

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.85.0 (2025-04-28)
+------------------
+
+* Feature - Add support for file-based HTTP domain control validation, available through Amazon CloudFront.
+
 1.84.0 (2025-02-18)
 ------------------
 

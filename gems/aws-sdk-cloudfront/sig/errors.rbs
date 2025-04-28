@@ -107,6 +107,9 @@ module Aws
       class InvalidArgument < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class InvalidAssociation < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class InvalidDefaultRootObject < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
@@ -276,6 +279,9 @@ module Aws
         def message: () -> ::String
       end
       class ResourceInUse < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceNotDisabled < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
       class ResponseHeadersPolicyAlreadyExists < ::Aws::Errors::ServiceError

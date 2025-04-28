@@ -6098,113 +6098,119 @@ module Aws::CloudWatchLogs
     #
     # @example EventStream Operation Example
     #
-    #   You can process the event once it arrives immediately, or wait until the
-    #   full response is complete and iterate through the eventstream enumerator.
+    #   # You can process the event once it arrives immediately, or wait until the
+    #   # full response is complete and iterate through the eventstream enumerator.
     #
-    #   To interact with event immediately, you need to register #start_live_tail
-    #   with callbacks. Callbacks can be registered for specific events or for all
-    #   events, including error events.
+    #   # To interact with event immediately, you need to register start_live_tail
+    #   # with callbacks. Callbacks can be registered for specific events or for all
+    #   # events, including error events.
     #
-    #   Callbacks can be passed into the `:event_stream_handler` option or within a
-    #   block statement attached to the #start_live_tail call directly. Hybrid
-    #   pattern of both is also supported.
+    #   # Callbacks can be passed into the `:event_stream_handler` option or within a
+    #   # block statement attached to the #start_live_tail call directly. Hybrid
+    #   # pattern of both is also supported.
     #
-    #   `:event_stream_handler` option takes in either a Proc object or
-    #   Aws::CloudWatchLogs::EventStreams::StartLiveTailResponseStream object.
+    #   # `:event_stream_handler` option takes in either a Proc object or
+    #   # Aws::CloudWatchLogs::EventStreams::StartLiveTailResponseStream object.
     #
-    #   Usage pattern a): Callbacks with a block attached to #start_live_tail
-    #     Example for registering callbacks for all event types and an error event
-    #
-    #     client.start_live_tail( # params input# ) do |stream|
-    #       stream.on_error_event do |event|
-    #         # catch unmodeled error event in the stream
-    #         raise event
-    #         # => Aws::Errors::EventError
-    #         # event.event_type => :error
-    #         # event.error_code => String
-    #         # event.error_message => String
-    #       end
-    #
-    #       stream.on_event do |event|
-    #         # process all events arrive
-    #         puts event.event_type
-    #         ...
-    #       end
-    #
+    #   # Usage pattern a): Callbacks with a block attached to #start_live_tail
+    #   # Example for registering callbacks for all event types and an error event
+    #   client.start_live_tail(
+    #     # params input
+    #   ) do |stream|
+    #     stream.on_error_event do |event|
+    #       # catch unmodeled error event in the stream
+    #       raise event
+    #       # => Aws::Errors::EventError
+    #       # event.event_type => :error
+    #       # event.error_code => String
+    #       # event.error_message => String
     #     end
     #
-    #   Usage pattern b): Pass in `:event_stream_handler` for #start_live_tail
-    #
-    #     1) Create a Aws::CloudWatchLogs::EventStreams::StartLiveTailResponseStream object
-    #     Example for registering callbacks with specific events
-    #
-    #       handler = Aws::CloudWatchLogs::EventStreams::StartLiveTailResponseStream.new
-    #       handler.on_session_start_event do |event|
-    #         event # => Aws::CloudWatchLogs::Types::sessionStart
-    #       end
-    #       handler.on_session_update_event do |event|
-    #         event # => Aws::CloudWatchLogs::Types::sessionUpdate
-    #       end
-    #       handler.on_session_timeout_exception_event do |event|
-    #         event # => Aws::CloudWatchLogs::Types::SessionTimeoutException
-    #       end
-    #       handler.on_session_streaming_exception_event do |event|
-    #         event # => Aws::CloudWatchLogs::Types::SessionStreamingException
-    #       end
-    #
-    #     client.start_live_tail( # params input #, event_stream_handler: handler)
-    #
-    #     2) Use a Ruby Proc object
-    #     Example for registering callbacks with specific events
-    #
-    #     handler = Proc.new do |stream|
-    #       stream.on_session_start_event do |event|
-    #         event # => Aws::CloudWatchLogs::Types::sessionStart
-    #       end
-    #       stream.on_session_update_event do |event|
-    #         event # => Aws::CloudWatchLogs::Types::sessionUpdate
-    #       end
-    #       stream.on_session_timeout_exception_event do |event|
-    #         event # => Aws::CloudWatchLogs::Types::SessionTimeoutException
-    #       end
-    #       stream.on_session_streaming_exception_event do |event|
-    #         event # => Aws::CloudWatchLogs::Types::SessionStreamingException
-    #       end
+    #     stream.on_event do |event|
+    #       # process all events arrive
+    #       puts event.event_type
+    #       # ...
     #     end
+    #   end
     #
-    #     client.start_live_tail( # params input #, event_stream_handler: handler)
+    #   # Usage pattern b): Pass in `:event_stream_handler` for #start_live_tail
+    #   #  1) Create a Aws::CloudWatchLogs::EventStreams::StartLiveTailResponseStream object
+    #   #  Example for registering callbacks with specific events
     #
-    #   Usage pattern c): Hybrid pattern of a) and b)
+    #   handler = Aws::CloudWatchLogs::EventStreams::StartLiveTailResponseStream.new
+    #   handler.on_session_start_event do |event|
+    #     event # => Aws::CloudWatchLogs::Types::sessionStart
+    #   end
+    #   handler.on_session_update_event do |event|
+    #     event # => Aws::CloudWatchLogs::Types::sessionUpdate
+    #   end
+    #   handler.on_session_timeout_exception_event do |event|
+    #     event # => Aws::CloudWatchLogs::Types::SessionTimeoutException
+    #   end
+    #   handler.on_session_streaming_exception_event do |event|
+    #     event # => Aws::CloudWatchLogs::Types::SessionStreamingException
+    #   end
     #
-    #       handler = Aws::CloudWatchLogs::EventStreams::StartLiveTailResponseStream.new
-    #       handler.on_session_start_event do |event|
-    #         event # => Aws::CloudWatchLogs::Types::sessionStart
-    #       end
-    #       handler.on_session_update_event do |event|
-    #         event # => Aws::CloudWatchLogs::Types::sessionUpdate
-    #       end
-    #       handler.on_session_timeout_exception_event do |event|
-    #         event # => Aws::CloudWatchLogs::Types::SessionTimeoutException
-    #       end
-    #       handler.on_session_streaming_exception_event do |event|
-    #         event # => Aws::CloudWatchLogs::Types::SessionStreamingException
-    #       end
+    #   client.start_live_tail(
+    #     # params inputs
+    #     event_stream_handler: handler
+    #   )
     #
-    #     client.start_live_tail( # params input #, event_stream_handler: handler) do |stream|
-    #       stream.on_error_event do |event|
-    #         # catch unmodeled error event in the stream
-    #         raise event
-    #         # => Aws::Errors::EventError
-    #         # event.event_type => :error
-    #         # event.error_code => String
-    #         # event.error_message => String
-    #       end
+    #   #  2) Use a Ruby Proc object
+    #   #  Example for registering callbacks with specific events
+    #   handler = Proc.new do |stream|
+    #     stream.on_session_start_event do |event|
+    #       event # => Aws::CloudWatchLogs::Types::sessionStart
     #     end
+    #     stream.on_session_update_event do |event|
+    #       event # => Aws::CloudWatchLogs::Types::sessionUpdate
+    #     end
+    #     stream.on_session_timeout_exception_event do |event|
+    #       event # => Aws::CloudWatchLogs::Types::SessionTimeoutException
+    #     end
+    #     stream.on_session_streaming_exception_event do |event|
+    #       event # => Aws::CloudWatchLogs::Types::SessionStreamingException
+    #     end
+    #   end
     #
-    #   You can also iterate through events after the response complete.
+    #   client.start_live_tail(
+    #     # params inputs
+    #     event_stream_handler: handler
+    #   )
     #
-    #   Events are available at resp.response_stream # => Enumerator
-    #   For parameter input example, please refer to following request syntax
+    #   #  Usage pattern c): Hybrid pattern of a) and b)
+    #   handler = Aws::CloudWatchLogs::EventStreams::StartLiveTailResponseStream.new
+    #   handler.on_session_start_event do |event|
+    #     event # => Aws::CloudWatchLogs::Types::sessionStart
+    #   end
+    #   handler.on_session_update_event do |event|
+    #     event # => Aws::CloudWatchLogs::Types::sessionUpdate
+    #   end
+    #   handler.on_session_timeout_exception_event do |event|
+    #     event # => Aws::CloudWatchLogs::Types::SessionTimeoutException
+    #   end
+    #   handler.on_session_streaming_exception_event do |event|
+    #     event # => Aws::CloudWatchLogs::Types::SessionStreamingException
+    #   end
+    #
+    #   client.start_live_tail(
+    #     # params input
+    #     event_stream_handler: handler
+    #   ) do |stream|
+    #     stream.on_error_event do |event|
+    #       # catch unmodeled error event in the stream
+    #       raise event
+    #       # => Aws::Errors::EventError
+    #       # event.event_type => :error
+    #       # event.error_code => String
+    #       # event.error_message => String
+    #     end
+    #   end
+    #
+    #   # You can also iterate through events after the response complete.
+    #   # Events are available at
+    #   resp.response_stream # => Enumerator
+    #   # For parameter input example, please refer to following request syntax.
     #
     # @example Request syntax with placeholder values
     #
@@ -6217,11 +6223,11 @@ module Aws::CloudWatchLogs
     #
     # @example Response structure
     #
-    #   All events are available at resp.response_stream:
+    #   # All events are available at resp.response_stream:
     #   resp.response_stream #=> Enumerator
     #   resp.response_stream.event_types #=> [:session_start, :session_update, :session_timeout_exception, :session_streaming_exception]
     #
-    #   For :session_start event available at #on_session_start_event callback and response eventstream enumerator:
+    #   # For :session_start event available at #on_session_start_event callback and response eventstream enumerator:
     #   event.request_id #=> String
     #   event.session_id #=> String
     #   event.log_group_identifiers #=> Array
@@ -6232,7 +6238,7 @@ module Aws::CloudWatchLogs
     #   event.log_stream_name_prefixes[0] #=> String
     #   event.log_event_filter_pattern #=> String
     #
-    #   For :session_update event available at #on_session_update_event callback and response eventstream enumerator:
+    #   # For :session_update event available at #on_session_update_event callback and response eventstream enumerator:
     #   event.session_metadata.sampled #=> Boolean
     #   event.session_results #=> Array
     #   event.session_results[0].log_stream_name #=> String
@@ -6241,10 +6247,10 @@ module Aws::CloudWatchLogs
     #   event.session_results[0].timestamp #=> Integer
     #   event.session_results[0].ingestion_time #=> Integer
     #
-    #   For :session_timeout_exception event available at #on_session_timeout_exception_event callback and response eventstream enumerator:
+    #   # For :session_timeout_exception event available at #on_session_timeout_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :session_streaming_exception event available at #on_session_streaming_exception_event callback and response eventstream enumerator:
+    #   # For :session_streaming_exception event available at #on_session_streaming_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/StartLiveTail AWS API Documentation
@@ -7061,7 +7067,7 @@ module Aws::CloudWatchLogs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.110.0'
+      context[:gem_version] = '1.111.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

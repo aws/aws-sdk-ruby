@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.115.0 (2025-04-28)
+------------------
+
+* Feature - Add distribution tenant, connection group, and multi-tenant distribution APIs to the CloudFront SDK.
+
 1.114.0 (2025-03-07)
 ------------------
 

@@ -6,33 +6,22 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws
-  module TranscribeStreamingService
-    class Client < ::Seahorse::Client::Base
-      include ::Aws::ClientStubs
+  module LexRuntimeV2
+    class AsyncClient < ::Seahorse::Client::AsyncBase
+      include ::Aws::AsyncClientStubs
 
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeStreamingService/Client.html#initialize-instance_method
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexRuntimeV2/AsyncClient.html#initialize-instance_method
       def self.new: (
                       ?credentials: untyped,
                       ?region: String,
                       ?access_key_id: String,
                       ?account_id: String,
-                      ?active_endpoint_cache: bool,
                       ?adaptive_retry_wait_to_fill: bool,
-                      ?client_side_monitoring: bool,
-                      ?client_side_monitoring_client_id: String,
-                      ?client_side_monitoring_host: String,
-                      ?client_side_monitoring_port: Integer,
-                      ?client_side_monitoring_publisher: untyped,
                       ?convert_params: bool,
                       ?correct_clock_skew: bool,
                       ?defaults_mode: String,
-                      ?disable_host_prefix_injection: bool,
                       ?disable_request_compression: bool,
                       ?endpoint: String,
-                      ?endpoint_cache_max_entries: Integer,
-                      ?endpoint_cache_max_threads: Integer,
-                      ?endpoint_cache_poll_interval: Integer,
-                      ?endpoint_discovery: bool,
                       ?event_stream_handler: Proc,
                       ?ignore_configured_endpoint_urls: bool,
                       ?input_event_stream_handler: Proc,
@@ -62,34 +51,36 @@ module Aws
                       ?use_fips_endpoint: bool,
                       ?validate_params: bool,
                       ?endpoint_provider: untyped,
-                      ?http_proxy: String,
-                      ?http_open_timeout: (Float | Integer),
-                      ?http_read_timeout: (Float | Integer),
-                      ?http_idle_timeout: (Float | Integer),
-                      ?http_continue_timeout: (Float | Integer),
-                      ?ssl_timeout: (Float | Integer | nil),
+                      ?connection_read_timeout: (Float | Integer),
+                      ?connection_timeout: (Float | Integer),
+                      ?enable_alpn: bool,
+                      ?max_concurrent_streams: (Float | Integer),
+                      ?read_chunk_size: (Float | Integer),
                       ?http_wire_trace: bool,
                       ?ssl_verify_peer: bool,
                       ?ssl_ca_bundle: String,
                       ?ssl_ca_directory: String,
                       ?ssl_ca_store: String,
-                      ?on_chunk_received: Proc,
-                      ?on_chunk_sent: Proc,
                       ?raise_response_errors: bool
                     ) -> instance
                   | (?Hash[Symbol, untyped]) -> instance
 
 
-      interface _GetMedicalScribeStreamResponseSuccess
-        include ::Seahorse::Client::_ResponseSuccess[Types::GetMedicalScribeStreamResponse]
-        def medical_scribe_stream_details: () -> Types::MedicalScribeStreamDetails
+      interface _StartConversationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartConversationResponse]
+        def response_event_stream: () -> Types::StartConversationResponseEventStream
       end
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeStreamingService/Client.html#get_medical_scribe_stream-instance_method
-      def get_medical_scribe_stream: (
-                                       session_id: ::String
-                                     ) -> _GetMedicalScribeStreamResponseSuccess
-                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMedicalScribeStreamResponseSuccess
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexRuntimeV2/AsyncClient.html#start_conversation-instance_method
+      def start_conversation: (
+                                bot_id: ::String,
+                                bot_alias_id: ::String,
+                                locale_id: ::String,
+                                session_id: ::String,
+                                ?conversation_mode: ("AUDIO" | "TEXT"),
+                                input_event_stream_handler: untyped,
+                                output_event_stream_handler: untyped
+                              ) ?{ (*untyped) -> void } -> _StartConversationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _StartConversationResponseSuccess
     end
   end
 end
-

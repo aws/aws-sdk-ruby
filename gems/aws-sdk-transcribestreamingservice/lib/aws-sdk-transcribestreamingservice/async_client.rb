@@ -10,32 +10,44 @@
 begin
   require 'http/2'
 rescue LoadError; end
-require 'aws-sdk-core/plugins/credentials_configuration.rb'
-require 'aws-sdk-core/plugins/logging.rb'
-require 'aws-sdk-core/plugins/param_converter.rb'
-require 'aws-sdk-core/plugins/param_validator.rb'
-require 'aws-sdk-core/plugins/user_agent.rb'
-require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
-require 'aws-sdk-core/plugins/retry_errors.rb'
-require 'aws-sdk-core/plugins/global_configuration.rb'
-require 'aws-sdk-core/plugins/regional_endpoint.rb'
-require 'aws-sdk-core/plugins/stub_responses.rb'
-require 'aws-sdk-core/plugins/idempotency_token.rb'
-require 'aws-sdk-core/plugins/invocation_id.rb'
-require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
-require 'aws-sdk-core/plugins/http_checksum.rb'
-require 'aws-sdk-core/plugins/checksum_algorithm.rb'
-require 'aws-sdk-core/plugins/request_compression.rb'
-require 'aws-sdk-core/plugins/defaults_mode.rb'
-require 'aws-sdk-core/plugins/recursion_detection.rb'
-require 'aws-sdk-core/plugins/telemetry.rb'
-require 'aws-sdk-core/plugins/sign.rb'
-require 'aws-sdk-core/plugins/protocols/rest_json.rb'
-require 'aws-sdk-core/plugins/event_stream_configuration.rb'
+require 'aws-sdk-core/plugins/credentials_configuration'
+require 'aws-sdk-core/plugins/logging'
+require 'aws-sdk-core/plugins/param_converter'
+require 'aws-sdk-core/plugins/param_validator'
+require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/helpful_socket_errors'
+require 'aws-sdk-core/plugins/retry_errors'
+require 'aws-sdk-core/plugins/global_configuration'
+require 'aws-sdk-core/plugins/regional_endpoint'
+require 'aws-sdk-core/plugins/stub_responses'
+require 'aws-sdk-core/plugins/idempotency_token'
+require 'aws-sdk-core/plugins/invocation_id'
+require 'aws-sdk-core/plugins/jsonvalue_converter'
+require 'aws-sdk-core/plugins/http_checksum'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/request_compression'
+require 'aws-sdk-core/plugins/defaults_mode'
+require 'aws-sdk-core/plugins/recursion_detection'
+require 'aws-sdk-core/plugins/telemetry'
+require 'aws-sdk-core/plugins/sign'
+require 'aws-sdk-core/plugins/protocols/rest_json'
+require 'aws-sdk-core/plugins/event_stream_configuration'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:transcribestreamingservice)
 
 module Aws::TranscribeStreamingService
+  # An API async client for TranscribeStreamingService.  To construct an async client, you need to configure a `:region` and `:credentials`.
+  #
+  #     async_client = Aws::TranscribeStreamingService::AsyncClient.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class AsyncClient < Seahorse::Client::AsyncBase
 
     include Aws::AsyncClientStubs
@@ -68,6 +80,13 @@ module Aws::TranscribeStreamingService
     add_plugin(Aws::Plugins::EventStreamConfiguration)
     add_plugin(Aws::TranscribeStreamingService::Plugins::Endpoints)
 
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #
+    #   @option options [Array<Seahorse::Client::Plugin>] :plugins ([]])
+    #     A list of plugins to apply to the client. Each plugin is either a
+    #     class name or an instance of a plugin class.
+    #
     #   @option options [required, Aws::CredentialProvider] :credentials
     #     Your AWS credentials. This can be an instance of any one of the
     #     following classes:
@@ -599,104 +618,107 @@ module Aws::TranscribeStreamingService
     #   * {Types::StartCallAnalyticsStreamTranscriptionResponse#pii_entity_types #pii_entity_types} => String
     #
     # @example Bi-directional EventStream Operation Example
+    #   # You can signal input events after the initial request is established. Events
+    #   # will be sent to the stream immediately once the stream connection is
+    #   # established successfully.
     #
-    #   You can signal input events after the initial request is established. Events
-    #   will be sent to the stream immediately once the stream connection is
-    #   established successfully.
+    #   # To signal events, you can call the #signal methods from an
+    #   # Aws::TranscribeStreamingService::EventStreams::AudioStream object.
+    #   # You must signal events before calling #wait or #join! on the async response.
+    #   input_stream = Aws::TranscribeStreamingService::EventStreams::AudioStream.new
     #
-    #   To signal events, you can call the #signal methods from an Aws::TranscribeStreamingService::EventStreams::AudioStream
-    #   object. You must signal events before calling #wait or #join! on the async response.
-    #
-    #     input_stream = Aws::TranscribeStreamingService::EventStreams::AudioStream.new
-    #
-    #     async_resp = client.start_call_analytics_stream_transcription(
-    #       # params input
-    #       input_event_stream_handler: input_stream) do |out_stream|
-    #
-    #       # register callbacks for events
-    #       out_stream.on_utterance_event_event do |event|
-    #         event # => Aws::TranscribeStreamingService::Types::UtteranceEvent
-    #       end
-    #       out_stream.on_category_event_event do |event|
-    #         event # => Aws::TranscribeStreamingService::Types::CategoryEvent
-    #       end
-    #       out_stream.on_bad_request_exception_event do |event|
-    #         event # => Aws::TranscribeStreamingService::Types::BadRequestException
-    #       end
-    #       out_stream.on_limit_exceeded_exception_event do |event|
-    #         event # => Aws::TranscribeStreamingService::Types::LimitExceededException
-    #       end
-    #       out_stream.on_internal_failure_exception_event do |event|
-    #         event # => Aws::TranscribeStreamingService::Types::InternalFailureException
-    #       end
-    #       out_stream.on_conflict_exception_event do |event|
-    #         event # => Aws::TranscribeStreamingService::Types::ConflictException
-    #       end
-    #       out_stream.on_service_unavailable_exception_event do |event|
-    #         event # => Aws::TranscribeStreamingService::Types::ServiceUnavailableException
-    #       end
-    #
-    #     end
-    #     # => Aws::Seahorse::Client::AsyncResponse
-    #
-    #     # signal events
-    #     input_stream.signal_audio_event_event( ... )
-    #     input_stream.signal_configuration_event_event( ... )
-    #
-    #     # make sure to signal :end_stream at the end
-    #     input_stream.signal_end_stream
-    #
-    #     # wait until stream is closed before finalizing the sync response
-    #     resp = async_resp.wait
-    #     # Or close the stream and finalize sync response immediately
-    #     # resp = async_resp.join!
-    #
-    #   You can also provide an Aws::TranscribeStreamingService::EventStreams::CallAnalyticsTranscriptResultStream object to register callbacks
-    #   before initializing the request instead of processing from the request block.
-    #
-    #     output_stream = Aws::TranscribeStreamingService::EventStreams::CallAnalyticsTranscriptResultStream.new
-    #     # register callbacks for output events
-    #     output_stream.on_utterance_event_event do |event|
+    #   async_resp = client.start_call_analytics_stream_transcription(
+    #     # params input
+    #     input_event_stream_handler: input_stream
+    #   ) do |out_stream|
+    #     # register callbacks for events
+    #     out_stream.on_utterance_event_event do |event|
     #       event # => Aws::TranscribeStreamingService::Types::UtteranceEvent
     #     end
-    #     output_stream.on_category_event_event do |event|
+    #     out_stream.on_category_event_event do |event|
     #       event # => Aws::TranscribeStreamingService::Types::CategoryEvent
     #     end
-    #     output_stream.on_bad_request_exception_event do |event|
+    #     out_stream.on_bad_request_exception_event do |event|
     #       event # => Aws::TranscribeStreamingService::Types::BadRequestException
     #     end
-    #     output_stream.on_limit_exceeded_exception_event do |event|
+    #     out_stream.on_limit_exceeded_exception_event do |event|
     #       event # => Aws::TranscribeStreamingService::Types::LimitExceededException
     #     end
-    #     output_stream.on_internal_failure_exception_event do |event|
+    #     out_stream.on_internal_failure_exception_event do |event|
     #       event # => Aws::TranscribeStreamingService::Types::InternalFailureException
     #     end
-    #     output_stream.on_conflict_exception_event do |event|
+    #     out_stream.on_conflict_exception_event do |event|
     #       event # => Aws::TranscribeStreamingService::Types::ConflictException
     #     end
-    #     output_stream.on_service_unavailable_exception_event do |event|
+    #     out_stream.on_service_unavailable_exception_event do |event|
     #       event # => Aws::TranscribeStreamingService::Types::ServiceUnavailableException
     #     end
-    #     output_stream.on_error_event do |event|
-    #       # catch unmodeled error event in the stream
-    #       raise event
-    #       # => Aws::Errors::EventError
-    #       # event.event_type => :error
-    #       # event.error_code => String
-    #       # event.error_message => String
-    #     end
+    #   end
+    #   # => Aws::Seahorse::Client::AsyncResponse
     #
-    #     async_resp = client.start_call_analytics_stream_transcription (
-    #       # params input
-    #       input_event_stream_handler: input_stream
-    #       output_event_stream_handler: output_stream
-    #     )
+    #   # signal events
+    #   input_stream.signal_audio_event_event(
+    #     # ...
+    #   )
+    #   input_stream.signal_configuration_event_event(
+    #     # ...
+    #   )
     #
-    #     resp = async_resp.join!
+    #   # make sure to signal :end_stream at the end
+    #   input_stream.signal_end_stream
     #
-    #   You can also iterate through events after the response is complete.
+    #   # wait until stream is closed before finalizing the sync response
+    #   resp = async_resp.wait
     #
-    #   Events are available at resp.call_analytics_transcript_result_stream # => Enumerator
+    #   # Or close the stream and finalize sync response immediately
+    #   resp = async_resp.join!
+    #
+    #   # You can also provide an Aws::TranscribeStreamingService::EventStreams::CallAnalyticsTranscriptResultStream object
+    #   # to register callbacks before initializing the request instead of processing
+    #   # from the request block.
+    #   output_stream = Aws::TranscribeStreamingService::EventStreams::CallAnalyticsTranscriptResultStream.new
+    #
+    #   # register callbacks for output events
+    #   output_stream.on_utterance_event_event do |event|
+    #     event # => Aws::TranscribeStreamingService::Types::UtteranceEvent
+    #   end
+    #   output_stream.on_category_event_event do |event|
+    #     event # => Aws::TranscribeStreamingService::Types::CategoryEvent
+    #   end
+    #   output_stream.on_bad_request_exception_event do |event|
+    #     event # => Aws::TranscribeStreamingService::Types::BadRequestException
+    #   end
+    #   output_stream.on_limit_exceeded_exception_event do |event|
+    #     event # => Aws::TranscribeStreamingService::Types::LimitExceededException
+    #   end
+    #   output_stream.on_internal_failure_exception_event do |event|
+    #     event # => Aws::TranscribeStreamingService::Types::InternalFailureException
+    #   end
+    #   output_stream.on_conflict_exception_event do |event|
+    #     event # => Aws::TranscribeStreamingService::Types::ConflictException
+    #   end
+    #   output_stream.on_service_unavailable_exception_event do |event|
+    #     event # => Aws::TranscribeStreamingService::Types::ServiceUnavailableException
+    #   end
+    #   output_stream.on_error_event do |event|
+    #     # catch unmodeled error event in the stream
+    #     raise event
+    #     # => Aws::Errors::EventError
+    #     # event.event_type => :error
+    #     # event.error_code => String
+    #     # event.error_message => String
+    #   end
+    #
+    #   async_resp = client.start_call_analytics_stream_transcription(
+    #     # params input
+    #     input_event_stream_handler: input_stream,
+    #     output_event_stream_handler: output_stream
+    #   )
+    #   resp = async_resp.join!
+    #
+    #   # You can also iterate through events after the response is complete.
+    #   # Events are available at
+    #   resp.call_analytics_transcript_result_stream # => Enumerator
     #
     # @example Request syntax with placeholder values
     #
@@ -729,11 +751,11 @@ module Aws::TranscribeStreamingService
     #   resp.media_encoding #=> String, one of "pcm", "ogg-opus", "flac"
     #   resp.vocabulary_name #=> String
     #   resp.session_id #=> String
-    #   All events are available at resp.call_analytics_transcript_result_stream:
+    #   # All events are available at resp.call_analytics_transcript_result_stream:
     #   resp.call_analytics_transcript_result_stream #=> Enumerator
     #   resp.call_analytics_transcript_result_stream.event_types #=> [:utterance_event, :category_event, :bad_request_exception, :limit_exceeded_exception, :internal_failure_exception, :conflict_exception, :service_unavailable_exception]
     #
-    #   For :utterance_event event available at #on_utterance_event_event callback and response eventstream enumerator:
+    #   # For :utterance_event event available at #on_utterance_event_event callback and response eventstream enumerator:
     #   event.utterance_id #=> String
     #   event.is_partial #=> Boolean
     #   event.participant_role #=> String, one of "AGENT", "CUSTOMER"
@@ -760,7 +782,7 @@ module Aws::TranscribeStreamingService
     #   event.issues_detected[0].character_offsets.begin #=> Integer
     #   event.issues_detected[0].character_offsets.end #=> Integer
     #
-    #   For :category_event event available at #on_category_event_event callback and response eventstream enumerator:
+    #   # For :category_event event available at #on_category_event_event callback and response eventstream enumerator:
     #   event.matched_categories #=> Array
     #   event.matched_categories[0] #=> String
     #   event.matched_details #=> Hash
@@ -768,19 +790,19 @@ module Aws::TranscribeStreamingService
     #   event.matched_details["String"].timestamp_ranges[0].begin_offset_millis #=> Integer
     #   event.matched_details["String"].timestamp_ranges[0].end_offset_millis #=> Integer
     #
-    #   For :bad_request_exception event available at #on_bad_request_exception_event callback and response eventstream enumerator:
+    #   # For :bad_request_exception event available at #on_bad_request_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :limit_exceeded_exception event available at #on_limit_exceeded_exception_event callback and response eventstream enumerator:
+    #   # For :limit_exceeded_exception event available at #on_limit_exceeded_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :internal_failure_exception event available at #on_internal_failure_exception_event callback and response eventstream enumerator:
+    #   # For :internal_failure_exception event available at #on_internal_failure_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :conflict_exception event available at #on_conflict_exception_event callback and response eventstream enumerator:
+    #   # For :conflict_exception event available at #on_conflict_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :service_unavailable_exception event available at #on_service_unavailable_exception_event callback and response eventstream enumerator:
+    #   # For :service_unavailable_exception event available at #on_service_unavailable_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
     #   resp.vocabulary_filter_name #=> String
@@ -905,99 +927,104 @@ module Aws::TranscribeStreamingService
     #   * {Types::StartMedicalScribeStreamResponse#result_stream #result_stream} => Types::MedicalScribeResultStream
     #
     # @example Bi-directional EventStream Operation Example
+    #   # You can signal input events after the initial request is established. Events
+    #   # will be sent to the stream immediately once the stream connection is
+    #   # established successfully.
     #
-    #   You can signal input events after the initial request is established. Events
-    #   will be sent to the stream immediately once the stream connection is
-    #   established successfully.
+    #   # To signal events, you can call the #signal methods from an
+    #   # Aws::TranscribeStreamingService::EventStreams::MedicalScribeInputStream object.
+    #   # You must signal events before calling #wait or #join! on the async response.
+    #   input_stream = Aws::TranscribeStreamingService::EventStreams::MedicalScribeInputStream.new
     #
-    #   To signal events, you can call the #signal methods from an Aws::TranscribeStreamingService::EventStreams::MedicalScribeInputStream
-    #   object. You must signal events before calling #wait or #join! on the async response.
-    #
-    #     input_stream = Aws::TranscribeStreamingService::EventStreams::MedicalScribeInputStream.new
-    #
-    #     async_resp = client.start_medical_scribe_stream(
-    #       # params input
-    #       input_event_stream_handler: input_stream) do |out_stream|
-    #
-    #       # register callbacks for events
-    #       out_stream.on_transcript_event_event do |event|
-    #         event # => Aws::TranscribeStreamingService::Types::TranscriptEvent
-    #       end
-    #       out_stream.on_bad_request_exception_event do |event|
-    #         event # => Aws::TranscribeStreamingService::Types::BadRequestException
-    #       end
-    #       out_stream.on_limit_exceeded_exception_event do |event|
-    #         event # => Aws::TranscribeStreamingService::Types::LimitExceededException
-    #       end
-    #       out_stream.on_internal_failure_exception_event do |event|
-    #         event # => Aws::TranscribeStreamingService::Types::InternalFailureException
-    #       end
-    #       out_stream.on_conflict_exception_event do |event|
-    #         event # => Aws::TranscribeStreamingService::Types::ConflictException
-    #       end
-    #       out_stream.on_service_unavailable_exception_event do |event|
-    #         event # => Aws::TranscribeStreamingService::Types::ServiceUnavailableException
-    #       end
-    #
-    #     end
-    #     # => Aws::Seahorse::Client::AsyncResponse
-    #
-    #     # signal events
-    #     input_stream.signal_audio_event_event( ... )
-    #     input_stream.signal_session_control_event_event( ... )
-    #     input_stream.signal_configuration_event_event( ... )
-    #
-    #     # make sure to signal :end_stream at the end
-    #     input_stream.signal_end_stream
-    #
-    #     # wait until stream is closed before finalizing the sync response
-    #     resp = async_resp.wait
-    #     # Or close the stream and finalize sync response immediately
-    #     # resp = async_resp.join!
-    #
-    #   You can also provide an Aws::TranscribeStreamingService::EventStreams::MedicalScribeResultStream object to register callbacks
-    #   before initializing the request instead of processing from the request block.
-    #
-    #     output_stream = Aws::TranscribeStreamingService::EventStreams::MedicalScribeResultStream.new
-    #     # register callbacks for output events
-    #     output_stream.on_transcript_event_event do |event|
+    #   async_resp = client.start_medical_scribe_stream(
+    #     # params input
+    #     input_event_stream_handler: input_stream
+    #   ) do |out_stream|
+    #     # register callbacks for events
+    #     out_stream.on_transcript_event_event do |event|
     #       event # => Aws::TranscribeStreamingService::Types::TranscriptEvent
     #     end
-    #     output_stream.on_bad_request_exception_event do |event|
+    #     out_stream.on_bad_request_exception_event do |event|
     #       event # => Aws::TranscribeStreamingService::Types::BadRequestException
     #     end
-    #     output_stream.on_limit_exceeded_exception_event do |event|
+    #     out_stream.on_limit_exceeded_exception_event do |event|
     #       event # => Aws::TranscribeStreamingService::Types::LimitExceededException
     #     end
-    #     output_stream.on_internal_failure_exception_event do |event|
+    #     out_stream.on_internal_failure_exception_event do |event|
     #       event # => Aws::TranscribeStreamingService::Types::InternalFailureException
     #     end
-    #     output_stream.on_conflict_exception_event do |event|
+    #     out_stream.on_conflict_exception_event do |event|
     #       event # => Aws::TranscribeStreamingService::Types::ConflictException
     #     end
-    #     output_stream.on_service_unavailable_exception_event do |event|
+    #     out_stream.on_service_unavailable_exception_event do |event|
     #       event # => Aws::TranscribeStreamingService::Types::ServiceUnavailableException
     #     end
-    #     output_stream.on_error_event do |event|
-    #       # catch unmodeled error event in the stream
-    #       raise event
-    #       # => Aws::Errors::EventError
-    #       # event.event_type => :error
-    #       # event.error_code => String
-    #       # event.error_message => String
-    #     end
+    #   end
+    #   # => Aws::Seahorse::Client::AsyncResponse
     #
-    #     async_resp = client.start_medical_scribe_stream (
-    #       # params input
-    #       input_event_stream_handler: input_stream
-    #       output_event_stream_handler: output_stream
-    #     )
+    #   # signal events
+    #   input_stream.signal_audio_event_event(
+    #     # ...
+    #   )
+    #   input_stream.signal_session_control_event_event(
+    #     # ...
+    #   )
+    #   input_stream.signal_configuration_event_event(
+    #     # ...
+    #   )
     #
-    #     resp = async_resp.join!
+    #   # make sure to signal :end_stream at the end
+    #   input_stream.signal_end_stream
     #
-    #   You can also iterate through events after the response is complete.
+    #   # wait until stream is closed before finalizing the sync response
+    #   resp = async_resp.wait
     #
-    #   Events are available at resp.result_stream # => Enumerator
+    #   # Or close the stream and finalize sync response immediately
+    #   resp = async_resp.join!
+    #
+    #   # You can also provide an Aws::TranscribeStreamingService::EventStreams::MedicalScribeResultStream object
+    #   # to register callbacks before initializing the request instead of processing
+    #   # from the request block.
+    #   output_stream = Aws::TranscribeStreamingService::EventStreams::MedicalScribeResultStream.new
+    #
+    #   # register callbacks for output events
+    #   output_stream.on_transcript_event_event do |event|
+    #     event # => Aws::TranscribeStreamingService::Types::TranscriptEvent
+    #   end
+    #   output_stream.on_bad_request_exception_event do |event|
+    #     event # => Aws::TranscribeStreamingService::Types::BadRequestException
+    #   end
+    #   output_stream.on_limit_exceeded_exception_event do |event|
+    #     event # => Aws::TranscribeStreamingService::Types::LimitExceededException
+    #   end
+    #   output_stream.on_internal_failure_exception_event do |event|
+    #     event # => Aws::TranscribeStreamingService::Types::InternalFailureException
+    #   end
+    #   output_stream.on_conflict_exception_event do |event|
+    #     event # => Aws::TranscribeStreamingService::Types::ConflictException
+    #   end
+    #   output_stream.on_service_unavailable_exception_event do |event|
+    #     event # => Aws::TranscribeStreamingService::Types::ServiceUnavailableException
+    #   end
+    #   output_stream.on_error_event do |event|
+    #     # catch unmodeled error event in the stream
+    #     raise event
+    #     # => Aws::Errors::EventError
+    #     # event.event_type => :error
+    #     # event.error_code => String
+    #     # event.error_message => String
+    #   end
+    #
+    #   async_resp = client.start_medical_scribe_stream(
+    #     # params input
+    #     input_event_stream_handler: input_stream,
+    #     output_event_stream_handler: output_stream
+    #   )
+    #   resp = async_resp.join!
+    #
+    #   # You can also iterate through events after the response is complete.
+    #   # Events are available at
+    #   resp.result_stream # => Enumerator
     #
     # @example Request syntax with placeholder values
     #
@@ -1020,11 +1047,11 @@ module Aws::TranscribeStreamingService
     #   resp.language_code #=> String, one of "en-US"
     #   resp.media_sample_rate_hertz #=> Integer
     #   resp.media_encoding #=> String, one of "pcm", "ogg-opus", "flac"
-    #   All events are available at resp.result_stream:
+    #   # All events are available at resp.result_stream:
     #   resp.result_stream #=> Enumerator
     #   resp.result_stream.event_types #=> [:transcript_event, :bad_request_exception, :limit_exceeded_exception, :internal_failure_exception, :conflict_exception, :service_unavailable_exception]
     #
-    #   For :transcript_event event available at #on_transcript_event_event callback and response eventstream enumerator:
+    #   # For :transcript_event event available at #on_transcript_event_event callback and response eventstream enumerator:
     #   event.transcript_segment.segment_id #=> String
     #   event.transcript_segment.begin_audio_time #=> Float
     #   event.transcript_segment.end_audio_time #=> Float
@@ -1039,19 +1066,19 @@ module Aws::TranscribeStreamingService
     #   event.transcript_segment.is_partial #=> Boolean
     #   event.transcript_segment.channel_id #=> String
     #
-    #   For :bad_request_exception event available at #on_bad_request_exception_event callback and response eventstream enumerator:
+    #   # For :bad_request_exception event available at #on_bad_request_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :limit_exceeded_exception event available at #on_limit_exceeded_exception_event callback and response eventstream enumerator:
+    #   # For :limit_exceeded_exception event available at #on_limit_exceeded_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :internal_failure_exception event available at #on_internal_failure_exception_event callback and response eventstream enumerator:
+    #   # For :internal_failure_exception event available at #on_internal_failure_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :conflict_exception event available at #on_conflict_exception_event callback and response eventstream enumerator:
+    #   # For :conflict_exception event available at #on_conflict_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :service_unavailable_exception event available at #on_service_unavailable_exception_event callback and response eventstream enumerator:
+    #   # For :service_unavailable_exception event available at #on_service_unavailable_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartMedicalScribeStream AWS API Documentation
@@ -1218,98 +1245,101 @@ module Aws::TranscribeStreamingService
     #   * {Types::StartMedicalStreamTranscriptionResponse#content_identification_type #content_identification_type} => String
     #
     # @example Bi-directional EventStream Operation Example
+    #   # You can signal input events after the initial request is established. Events
+    #   # will be sent to the stream immediately once the stream connection is
+    #   # established successfully.
     #
-    #   You can signal input events after the initial request is established. Events
-    #   will be sent to the stream immediately once the stream connection is
-    #   established successfully.
+    #   # To signal events, you can call the #signal methods from an
+    #   # Aws::TranscribeStreamingService::EventStreams::AudioStream object.
+    #   # You must signal events before calling #wait or #join! on the async response.
+    #   input_stream = Aws::TranscribeStreamingService::EventStreams::AudioStream.new
     #
-    #   To signal events, you can call the #signal methods from an Aws::TranscribeStreamingService::EventStreams::AudioStream
-    #   object. You must signal events before calling #wait or #join! on the async response.
-    #
-    #     input_stream = Aws::TranscribeStreamingService::EventStreams::AudioStream.new
-    #
-    #     async_resp = client.start_medical_stream_transcription(
-    #       # params input
-    #       input_event_stream_handler: input_stream) do |out_stream|
-    #
-    #       # register callbacks for events
-    #       out_stream.on_transcript_event_event do |event|
-    #         event # => Aws::TranscribeStreamingService::Types::TranscriptEvent
-    #       end
-    #       out_stream.on_bad_request_exception_event do |event|
-    #         event # => Aws::TranscribeStreamingService::Types::BadRequestException
-    #       end
-    #       out_stream.on_limit_exceeded_exception_event do |event|
-    #         event # => Aws::TranscribeStreamingService::Types::LimitExceededException
-    #       end
-    #       out_stream.on_internal_failure_exception_event do |event|
-    #         event # => Aws::TranscribeStreamingService::Types::InternalFailureException
-    #       end
-    #       out_stream.on_conflict_exception_event do |event|
-    #         event # => Aws::TranscribeStreamingService::Types::ConflictException
-    #       end
-    #       out_stream.on_service_unavailable_exception_event do |event|
-    #         event # => Aws::TranscribeStreamingService::Types::ServiceUnavailableException
-    #       end
-    #
-    #     end
-    #     # => Aws::Seahorse::Client::AsyncResponse
-    #
-    #     # signal events
-    #     input_stream.signal_audio_event_event( ... )
-    #     input_stream.signal_configuration_event_event( ... )
-    #
-    #     # make sure to signal :end_stream at the end
-    #     input_stream.signal_end_stream
-    #
-    #     # wait until stream is closed before finalizing the sync response
-    #     resp = async_resp.wait
-    #     # Or close the stream and finalize sync response immediately
-    #     # resp = async_resp.join!
-    #
-    #   You can also provide an Aws::TranscribeStreamingService::EventStreams::MedicalTranscriptResultStream object to register callbacks
-    #   before initializing the request instead of processing from the request block.
-    #
-    #     output_stream = Aws::TranscribeStreamingService::EventStreams::MedicalTranscriptResultStream.new
-    #     # register callbacks for output events
-    #     output_stream.on_transcript_event_event do |event|
+    #   async_resp = client.start_medical_stream_transcription(
+    #     # params input
+    #     input_event_stream_handler: input_stream
+    #   ) do |out_stream|
+    #     # register callbacks for events
+    #     out_stream.on_transcript_event_event do |event|
     #       event # => Aws::TranscribeStreamingService::Types::TranscriptEvent
     #     end
-    #     output_stream.on_bad_request_exception_event do |event|
+    #     out_stream.on_bad_request_exception_event do |event|
     #       event # => Aws::TranscribeStreamingService::Types::BadRequestException
     #     end
-    #     output_stream.on_limit_exceeded_exception_event do |event|
+    #     out_stream.on_limit_exceeded_exception_event do |event|
     #       event # => Aws::TranscribeStreamingService::Types::LimitExceededException
     #     end
-    #     output_stream.on_internal_failure_exception_event do |event|
+    #     out_stream.on_internal_failure_exception_event do |event|
     #       event # => Aws::TranscribeStreamingService::Types::InternalFailureException
     #     end
-    #     output_stream.on_conflict_exception_event do |event|
+    #     out_stream.on_conflict_exception_event do |event|
     #       event # => Aws::TranscribeStreamingService::Types::ConflictException
     #     end
-    #     output_stream.on_service_unavailable_exception_event do |event|
+    #     out_stream.on_service_unavailable_exception_event do |event|
     #       event # => Aws::TranscribeStreamingService::Types::ServiceUnavailableException
     #     end
-    #     output_stream.on_error_event do |event|
-    #       # catch unmodeled error event in the stream
-    #       raise event
-    #       # => Aws::Errors::EventError
-    #       # event.event_type => :error
-    #       # event.error_code => String
-    #       # event.error_message => String
-    #     end
+    #   end
+    #   # => Aws::Seahorse::Client::AsyncResponse
     #
-    #     async_resp = client.start_medical_stream_transcription (
-    #       # params input
-    #       input_event_stream_handler: input_stream
-    #       output_event_stream_handler: output_stream
-    #     )
+    #   # signal events
+    #   input_stream.signal_audio_event_event(
+    #     # ...
+    #   )
+    #   input_stream.signal_configuration_event_event(
+    #     # ...
+    #   )
     #
-    #     resp = async_resp.join!
+    #   # make sure to signal :end_stream at the end
+    #   input_stream.signal_end_stream
     #
-    #   You can also iterate through events after the response is complete.
+    #   # wait until stream is closed before finalizing the sync response
+    #   resp = async_resp.wait
     #
-    #   Events are available at resp.transcript_result_stream # => Enumerator
+    #   # Or close the stream and finalize sync response immediately
+    #   resp = async_resp.join!
+    #
+    #   # You can also provide an Aws::TranscribeStreamingService::EventStreams::MedicalTranscriptResultStream object
+    #   # to register callbacks before initializing the request instead of processing
+    #   # from the request block.
+    #   output_stream = Aws::TranscribeStreamingService::EventStreams::MedicalTranscriptResultStream.new
+    #
+    #   # register callbacks for output events
+    #   output_stream.on_transcript_event_event do |event|
+    #     event # => Aws::TranscribeStreamingService::Types::TranscriptEvent
+    #   end
+    #   output_stream.on_bad_request_exception_event do |event|
+    #     event # => Aws::TranscribeStreamingService::Types::BadRequestException
+    #   end
+    #   output_stream.on_limit_exceeded_exception_event do |event|
+    #     event # => Aws::TranscribeStreamingService::Types::LimitExceededException
+    #   end
+    #   output_stream.on_internal_failure_exception_event do |event|
+    #     event # => Aws::TranscribeStreamingService::Types::InternalFailureException
+    #   end
+    #   output_stream.on_conflict_exception_event do |event|
+    #     event # => Aws::TranscribeStreamingService::Types::ConflictException
+    #   end
+    #   output_stream.on_service_unavailable_exception_event do |event|
+    #     event # => Aws::TranscribeStreamingService::Types::ServiceUnavailableException
+    #   end
+    #   output_stream.on_error_event do |event|
+    #     # catch unmodeled error event in the stream
+    #     raise event
+    #     # => Aws::Errors::EventError
+    #     # event.event_type => :error
+    #     # event.error_code => String
+    #     # event.error_message => String
+    #   end
+    #
+    #   async_resp = client.start_medical_stream_transcription(
+    #     # params input
+    #     input_event_stream_handler: input_stream,
+    #     output_event_stream_handler: output_stream
+    #   )
+    #   resp = async_resp.join!
+    #
+    #   # You can also iterate through events after the response is complete.
+    #   # Events are available at
+    #   resp.transcript_result_stream # => Enumerator
     #
     # @example Request syntax with placeholder values
     #
@@ -1343,11 +1373,11 @@ module Aws::TranscribeStreamingService
     #   resp.type #=> String, one of "CONVERSATION", "DICTATION"
     #   resp.show_speaker_label #=> Boolean
     #   resp.session_id #=> String
-    #   All events are available at resp.transcript_result_stream:
+    #   # All events are available at resp.transcript_result_stream:
     #   resp.transcript_result_stream #=> Enumerator
     #   resp.transcript_result_stream.event_types #=> [:transcript_event, :bad_request_exception, :limit_exceeded_exception, :internal_failure_exception, :conflict_exception, :service_unavailable_exception]
     #
-    #   For :transcript_event event available at #on_transcript_event_event callback and response eventstream enumerator:
+    #   # For :transcript_event event available at #on_transcript_event_event callback and response eventstream enumerator:
     #   event.transcript.results #=> Array
     #   event.transcript.results[0].result_id #=> String
     #   event.transcript.results[0].start_time #=> Float
@@ -1370,19 +1400,19 @@ module Aws::TranscribeStreamingService
     #   event.transcript.results[0].alternatives[0].entities[0].confidence #=> Float
     #   event.transcript.results[0].channel_id #=> String
     #
-    #   For :bad_request_exception event available at #on_bad_request_exception_event callback and response eventstream enumerator:
+    #   # For :bad_request_exception event available at #on_bad_request_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :limit_exceeded_exception event available at #on_limit_exceeded_exception_event callback and response eventstream enumerator:
+    #   # For :limit_exceeded_exception event available at #on_limit_exceeded_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :internal_failure_exception event available at #on_internal_failure_exception_event callback and response eventstream enumerator:
+    #   # For :internal_failure_exception event available at #on_internal_failure_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :conflict_exception event available at #on_conflict_exception_event callback and response eventstream enumerator:
+    #   # For :conflict_exception event available at #on_conflict_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :service_unavailable_exception event available at #on_service_unavailable_exception_event callback and response eventstream enumerator:
+    #   # For :service_unavailable_exception event available at #on_service_unavailable_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
     #   resp.enable_channel_identification #=> Boolean
@@ -1802,98 +1832,101 @@ module Aws::TranscribeStreamingService
     #   * {Types::StartStreamTranscriptionResponse#vocabulary_filter_names #vocabulary_filter_names} => String
     #
     # @example Bi-directional EventStream Operation Example
+    #   # You can signal input events after the initial request is established. Events
+    #   # will be sent to the stream immediately once the stream connection is
+    #   # established successfully.
     #
-    #   You can signal input events after the initial request is established. Events
-    #   will be sent to the stream immediately once the stream connection is
-    #   established successfully.
+    #   # To signal events, you can call the #signal methods from an
+    #   # Aws::TranscribeStreamingService::EventStreams::AudioStream object.
+    #   # You must signal events before calling #wait or #join! on the async response.
+    #   input_stream = Aws::TranscribeStreamingService::EventStreams::AudioStream.new
     #
-    #   To signal events, you can call the #signal methods from an Aws::TranscribeStreamingService::EventStreams::AudioStream
-    #   object. You must signal events before calling #wait or #join! on the async response.
-    #
-    #     input_stream = Aws::TranscribeStreamingService::EventStreams::AudioStream.new
-    #
-    #     async_resp = client.start_stream_transcription(
-    #       # params input
-    #       input_event_stream_handler: input_stream) do |out_stream|
-    #
-    #       # register callbacks for events
-    #       out_stream.on_transcript_event_event do |event|
-    #         event # => Aws::TranscribeStreamingService::Types::TranscriptEvent
-    #       end
-    #       out_stream.on_bad_request_exception_event do |event|
-    #         event # => Aws::TranscribeStreamingService::Types::BadRequestException
-    #       end
-    #       out_stream.on_limit_exceeded_exception_event do |event|
-    #         event # => Aws::TranscribeStreamingService::Types::LimitExceededException
-    #       end
-    #       out_stream.on_internal_failure_exception_event do |event|
-    #         event # => Aws::TranscribeStreamingService::Types::InternalFailureException
-    #       end
-    #       out_stream.on_conflict_exception_event do |event|
-    #         event # => Aws::TranscribeStreamingService::Types::ConflictException
-    #       end
-    #       out_stream.on_service_unavailable_exception_event do |event|
-    #         event # => Aws::TranscribeStreamingService::Types::ServiceUnavailableException
-    #       end
-    #
-    #     end
-    #     # => Aws::Seahorse::Client::AsyncResponse
-    #
-    #     # signal events
-    #     input_stream.signal_audio_event_event( ... )
-    #     input_stream.signal_configuration_event_event( ... )
-    #
-    #     # make sure to signal :end_stream at the end
-    #     input_stream.signal_end_stream
-    #
-    #     # wait until stream is closed before finalizing the sync response
-    #     resp = async_resp.wait
-    #     # Or close the stream and finalize sync response immediately
-    #     # resp = async_resp.join!
-    #
-    #   You can also provide an Aws::TranscribeStreamingService::EventStreams::TranscriptResultStream object to register callbacks
-    #   before initializing the request instead of processing from the request block.
-    #
-    #     output_stream = Aws::TranscribeStreamingService::EventStreams::TranscriptResultStream.new
-    #     # register callbacks for output events
-    #     output_stream.on_transcript_event_event do |event|
+    #   async_resp = client.start_stream_transcription(
+    #     # params input
+    #     input_event_stream_handler: input_stream
+    #   ) do |out_stream|
+    #     # register callbacks for events
+    #     out_stream.on_transcript_event_event do |event|
     #       event # => Aws::TranscribeStreamingService::Types::TranscriptEvent
     #     end
-    #     output_stream.on_bad_request_exception_event do |event|
+    #     out_stream.on_bad_request_exception_event do |event|
     #       event # => Aws::TranscribeStreamingService::Types::BadRequestException
     #     end
-    #     output_stream.on_limit_exceeded_exception_event do |event|
+    #     out_stream.on_limit_exceeded_exception_event do |event|
     #       event # => Aws::TranscribeStreamingService::Types::LimitExceededException
     #     end
-    #     output_stream.on_internal_failure_exception_event do |event|
+    #     out_stream.on_internal_failure_exception_event do |event|
     #       event # => Aws::TranscribeStreamingService::Types::InternalFailureException
     #     end
-    #     output_stream.on_conflict_exception_event do |event|
+    #     out_stream.on_conflict_exception_event do |event|
     #       event # => Aws::TranscribeStreamingService::Types::ConflictException
     #     end
-    #     output_stream.on_service_unavailable_exception_event do |event|
+    #     out_stream.on_service_unavailable_exception_event do |event|
     #       event # => Aws::TranscribeStreamingService::Types::ServiceUnavailableException
     #     end
-    #     output_stream.on_error_event do |event|
-    #       # catch unmodeled error event in the stream
-    #       raise event
-    #       # => Aws::Errors::EventError
-    #       # event.event_type => :error
-    #       # event.error_code => String
-    #       # event.error_message => String
-    #     end
+    #   end
+    #   # => Aws::Seahorse::Client::AsyncResponse
     #
-    #     async_resp = client.start_stream_transcription (
-    #       # params input
-    #       input_event_stream_handler: input_stream
-    #       output_event_stream_handler: output_stream
-    #     )
+    #   # signal events
+    #   input_stream.signal_audio_event_event(
+    #     # ...
+    #   )
+    #   input_stream.signal_configuration_event_event(
+    #     # ...
+    #   )
     #
-    #     resp = async_resp.join!
+    #   # make sure to signal :end_stream at the end
+    #   input_stream.signal_end_stream
     #
-    #   You can also iterate through events after the response is complete.
+    #   # wait until stream is closed before finalizing the sync response
+    #   resp = async_resp.wait
     #
-    #   Events are available at resp.transcript_result_stream # => Enumerator
+    #   # Or close the stream and finalize sync response immediately
+    #   resp = async_resp.join!
+    #
+    #   # You can also provide an Aws::TranscribeStreamingService::EventStreams::TranscriptResultStream object
+    #   # to register callbacks before initializing the request instead of processing
+    #   # from the request block.
+    #   output_stream = Aws::TranscribeStreamingService::EventStreams::TranscriptResultStream.new
+    #
+    #   # register callbacks for output events
+    #   output_stream.on_transcript_event_event do |event|
+    #     event # => Aws::TranscribeStreamingService::Types::TranscriptEvent
+    #   end
+    #   output_stream.on_bad_request_exception_event do |event|
+    #     event # => Aws::TranscribeStreamingService::Types::BadRequestException
+    #   end
+    #   output_stream.on_limit_exceeded_exception_event do |event|
+    #     event # => Aws::TranscribeStreamingService::Types::LimitExceededException
+    #   end
+    #   output_stream.on_internal_failure_exception_event do |event|
+    #     event # => Aws::TranscribeStreamingService::Types::InternalFailureException
+    #   end
+    #   output_stream.on_conflict_exception_event do |event|
+    #     event # => Aws::TranscribeStreamingService::Types::ConflictException
+    #   end
+    #   output_stream.on_service_unavailable_exception_event do |event|
+    #     event # => Aws::TranscribeStreamingService::Types::ServiceUnavailableException
+    #   end
+    #   output_stream.on_error_event do |event|
+    #     # catch unmodeled error event in the stream
+    #     raise event
+    #     # => Aws::Errors::EventError
+    #     # event.event_type => :error
+    #     # event.error_code => String
+    #     # event.error_message => String
+    #   end
+    #
+    #   async_resp = client.start_stream_transcription(
+    #     # params input
+    #     input_event_stream_handler: input_stream,
+    #     output_event_stream_handler: output_stream
+    #   )
+    #   resp = async_resp.join!
+    #
+    #   # You can also iterate through events after the response is complete.
+    #   # Events are available at
+    #   resp.transcript_result_stream # => Enumerator
     #
     # @example Request syntax with placeholder values
     #
@@ -1935,11 +1968,11 @@ module Aws::TranscribeStreamingService
     #   resp.media_encoding #=> String, one of "pcm", "ogg-opus", "flac"
     #   resp.vocabulary_name #=> String
     #   resp.session_id #=> String
-    #   All events are available at resp.transcript_result_stream:
+    #   # All events are available at resp.transcript_result_stream:
     #   resp.transcript_result_stream #=> Enumerator
     #   resp.transcript_result_stream.event_types #=> [:transcript_event, :bad_request_exception, :limit_exceeded_exception, :internal_failure_exception, :conflict_exception, :service_unavailable_exception]
     #
-    #   For :transcript_event event available at #on_transcript_event_event callback and response eventstream enumerator:
+    #   # For :transcript_event event available at #on_transcript_event_event callback and response eventstream enumerator:
     #   event.transcript.results #=> Array
     #   event.transcript.results[0].result_id #=> String
     #   event.transcript.results[0].start_time #=> Float
@@ -1969,19 +2002,19 @@ module Aws::TranscribeStreamingService
     #   event.transcript.results[0].language_identification[0].language_code #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "th-TH", "es-ES", "ar-SA", "pt-PT", "ca-ES", "ar-AE", "hi-IN", "zh-HK", "nl-NL", "no-NO", "sv-SE", "pl-PL", "fi-FI", "zh-TW", "en-IN", "en-IE", "en-NZ", "en-AB", "en-ZA", "en-WL", "de-CH", "af-ZA", "eu-ES", "hr-HR", "cs-CZ", "da-DK", "fa-IR", "gl-ES", "el-GR", "he-IL", "id-ID", "lv-LV", "ms-MY", "ro-RO", "ru-RU", "sr-RS", "sk-SK", "so-SO", "tl-PH", "uk-UA", "vi-VN", "zu-ZA"
     #   event.transcript.results[0].language_identification[0].score #=> Float
     #
-    #   For :bad_request_exception event available at #on_bad_request_exception_event callback and response eventstream enumerator:
+    #   # For :bad_request_exception event available at #on_bad_request_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :limit_exceeded_exception event available at #on_limit_exceeded_exception_event callback and response eventstream enumerator:
+    #   # For :limit_exceeded_exception event available at #on_limit_exceeded_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :internal_failure_exception event available at #on_internal_failure_exception_event callback and response eventstream enumerator:
+    #   # For :internal_failure_exception event available at #on_internal_failure_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :conflict_exception event available at #on_conflict_exception_event callback and response eventstream enumerator:
+    #   # For :conflict_exception event available at #on_conflict_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :service_unavailable_exception event available at #on_service_unavailable_exception_event callback and response eventstream enumerator:
+    #   # For :service_unavailable_exception event available at #on_service_unavailable_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
     #   resp.vocabulary_filter_name #=> String
@@ -2050,7 +2083,7 @@ module Aws::TranscribeStreamingService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-transcribestreamingservice'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.79.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -59,6 +59,7 @@ module Aws::CloudFront
   # * {IllegalUpdate}
   # * {InconsistentQuantities}
   # * {InvalidArgument}
+  # * {InvalidAssociation}
   # * {InvalidDefaultRootObject}
   # * {InvalidDomainNameForOriginAccessControl}
   # * {InvalidErrorCode}
@@ -116,6 +117,7 @@ module Aws::CloudFront
   # * {RealtimeLogConfigInUse}
   # * {RealtimeLogConfigOwnerMismatch}
   # * {ResourceInUse}
+  # * {ResourceNotDisabled}
   # * {ResponseHeadersPolicyAlreadyExists}
   # * {ResponseHeadersPolicyInUse}
   # * {StagingDistributionInUse}
@@ -654,6 +656,21 @@ module Aws::CloudFront
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudFront::Types::InvalidArgument] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class InvalidAssociation < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::InvalidAssociation] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -1509,6 +1526,21 @@ module Aws::CloudFront
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudFront::Types::ResourceInUse] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ResourceNotDisabled < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::ResourceNotDisabled] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

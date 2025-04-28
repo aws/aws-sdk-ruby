@@ -11,7 +11,7 @@ Feature: Smoke tests for ACM
   Scenario: ListCertificatesSuccess
     Given I create a 'Aws::ACM' client with config:
       """
-{"region":"us-west-2"}
+{"region":"us-west-2","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
     When I call the operation 'list_certificates' with params:
       """
@@ -23,7 +23,7 @@ Feature: Smoke tests for ACM
   Scenario: GetCertificateFailure
     Given I create a 'Aws::ACM' client with config:
       """
-{"region":"us-west-2"}
+{"region":"us-west-2","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
     When I call the operation 'get_certificate' with params:
       """

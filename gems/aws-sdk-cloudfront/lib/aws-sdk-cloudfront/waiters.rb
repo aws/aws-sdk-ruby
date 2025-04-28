@@ -67,11 +67,12 @@ module Aws::CloudFront
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name                     | params                              | :delay   | :max_attempts |
-  # | ------------------------------- | ----------------------------------- | -------- | ------------- |
-  # | distribution_deployed           | {Client#get_distribution}           | 60       | 35            |
-  # | invalidation_completed          | {Client#get_invalidation}           | 20       | 30            |
-  # | streaming_distribution_deployed | {Client#get_streaming_distribution} | 60       | 25            |
+  # | waiter_name                                    | params                                            | :delay   | :max_attempts |
+  # | ---------------------------------------------- | ------------------------------------------------- | -------- | ------------- |
+  # | distribution_deployed                          | {Client#get_distribution}                         | 60       | 35            |
+  # | invalidation_completed                         | {Client#get_invalidation}                         | 20       | 30            |
+  # | invalidation_for_distribution_tenant_completed | {Client#get_invalidation_for_distribution_tenant} | 20       | 30            |
+  # | streaming_distribution_deployed                | {Client#get_streaming_distribution}               | 60       | 25            |
   #
   module Waiters
 
@@ -140,6 +141,43 @@ module Aws::CloudFront
 
       # @option (see Client#get_invalidation)
       # @return (see Client#get_invalidation)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until an invalidation for distribution tenant has completed.
+    class InvalidationForDistributionTenantCompleted
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (30)
+      # @option options [Integer] :delay (20)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 30,
+          delay: 20,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_invalidation_for_distribution_tenant,
+            acceptors: [{
+              "matcher" => "path",
+              "argument" => "invalidation.status",
+              "state" => "success",
+              "expected" => "Completed"
+            }]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_invalidation_for_distribution_tenant)
+      # @return (see Client#get_invalidation_for_distribution_tenant)
       def wait(params = {})
         @waiter.wait(client: @client, params: params)
       end

@@ -23,6 +23,7 @@ module Aws::ACM
       attr_accessor certificate_arn: ::String
       attr_accessor domain_name: ::String
       attr_accessor subject_alternative_names: ::Array[::String]
+      attr_accessor managed_by: ("CLOUDFRONT")
       attr_accessor domain_validation_options: ::Array[Types::DomainValidation]
       attr_accessor serial: ::String
       attr_accessor subject: ::String
@@ -32,7 +33,7 @@ module Aws::ACM
       attr_accessor imported_at: ::Time
       attr_accessor status: ("PENDING_VALIDATION" | "ISSUED" | "INACTIVE" | "EXPIRED" | "VALIDATION_TIMED_OUT" | "REVOKED" | "FAILED")
       attr_accessor revoked_at: ::Time
-      attr_accessor revocation_reason: ("UNSPECIFIED" | "KEY_COMPROMISE" | "CA_COMPROMISE" | "AFFILIATION_CHANGED" | "SUPERCEDED" | "CESSATION_OF_OPERATION" | "CERTIFICATE_HOLD" | "REMOVE_FROM_CRL" | "PRIVILEGE_WITHDRAWN" | "A_A_COMPROMISE")
+      attr_accessor revocation_reason: ("UNSPECIFIED" | "KEY_COMPROMISE" | "CA_COMPROMISE" | "AFFILIATION_CHANGED" | "SUPERCEDED" | "SUPERSEDED" | "CESSATION_OF_OPERATION" | "CERTIFICATE_HOLD" | "REMOVE_FROM_CRL" | "PRIVILEGE_WITHDRAWN" | "A_A_COMPROMISE")
       attr_accessor not_before: ::Time
       attr_accessor not_after: ::Time
       attr_accessor key_algorithm: ("RSA_1024" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "EC_prime256v1" | "EC_secp384r1" | "EC_secp521r1")
@@ -73,6 +74,7 @@ module Aws::ACM
       attr_accessor issued_at: ::Time
       attr_accessor imported_at: ::Time
       attr_accessor revoked_at: ::Time
+      attr_accessor managed_by: ("CLOUDFRONT")
       SENSITIVE: []
     end
 
@@ -102,7 +104,8 @@ module Aws::ACM
       attr_accessor validation_domain: ::String
       attr_accessor validation_status: ("PENDING_VALIDATION" | "SUCCESS" | "FAILED")
       attr_accessor resource_record: Types::ResourceRecord
-      attr_accessor validation_method: ("EMAIL" | "DNS")
+      attr_accessor http_redirect: Types::HttpRedirect
+      attr_accessor validation_method: ("EMAIL" | "DNS" | "HTTP")
       SENSITIVE: []
     end
 
@@ -140,6 +143,7 @@ module Aws::ACM
       attr_accessor extended_key_usage: ::Array[("TLS_WEB_SERVER_AUTHENTICATION" | "TLS_WEB_CLIENT_AUTHENTICATION" | "CODE_SIGNING" | "EMAIL_PROTECTION" | "TIME_STAMPING" | "OCSP_SIGNING" | "IPSEC_END_SYSTEM" | "IPSEC_TUNNEL" | "IPSEC_USER" | "ANY" | "NONE" | "CUSTOM")]
       attr_accessor key_usage: ::Array[("DIGITAL_SIGNATURE" | "NON_REPUDIATION" | "KEY_ENCIPHERMENT" | "DATA_ENCIPHERMENT" | "KEY_AGREEMENT" | "CERTIFICATE_SIGNING" | "CRL_SIGNING" | "ENCIPHER_ONLY" | "DECIPHER_ONLY" | "ANY" | "CUSTOM")]
       attr_accessor key_types: ::Array[("RSA_1024" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "EC_prime256v1" | "EC_secp384r1" | "EC_secp521r1")]
+      attr_accessor managed_by: ("CLOUDFRONT")
       SENSITIVE: []
     end
 
@@ -156,6 +160,12 @@ module Aws::ACM
     class GetCertificateResponse
       attr_accessor certificate: ::String
       attr_accessor certificate_chain: ::String
+      SENSITIVE: []
+    end
+
+    class HttpRedirect
+      attr_accessor redirect_from: ::String
+      attr_accessor redirect_to: ::String
       SENSITIVE: []
     end
 
@@ -266,7 +276,7 @@ module Aws::ACM
 
     class RequestCertificateRequest
       attr_accessor domain_name: ::String
-      attr_accessor validation_method: ("EMAIL" | "DNS")
+      attr_accessor validation_method: ("EMAIL" | "DNS" | "HTTP")
       attr_accessor subject_alternative_names: ::Array[::String]
       attr_accessor idempotency_token: ::String
       attr_accessor domain_validation_options: ::Array[Types::DomainValidationOption]
@@ -274,6 +284,7 @@ module Aws::ACM
       attr_accessor certificate_authority_arn: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor key_algorithm: ("RSA_1024" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "EC_prime256v1" | "EC_secp384r1" | "EC_secp521r1")
+      attr_accessor managed_by: ("CLOUDFRONT")
       SENSITIVE: []
     end
 

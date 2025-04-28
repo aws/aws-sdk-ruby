@@ -4229,95 +4229,101 @@ module Aws::Lambda
     #
     # @example EventStream Operation Example
     #
-    #   You can process the event once it arrives immediately, or wait until the
-    #   full response is complete and iterate through the eventstream enumerator.
+    #   # You can process the event once it arrives immediately, or wait until the
+    #   # full response is complete and iterate through the eventstream enumerator.
     #
-    #   To interact with event immediately, you need to register #invoke_with_response_stream
-    #   with callbacks. Callbacks can be registered for specific events or for all
-    #   events, including error events.
+    #   # To interact with event immediately, you need to register invoke_with_response_stream
+    #   # with callbacks. Callbacks can be registered for specific events or for all
+    #   # events, including error events.
     #
-    #   Callbacks can be passed into the `:event_stream_handler` option or within a
-    #   block statement attached to the #invoke_with_response_stream call directly. Hybrid
-    #   pattern of both is also supported.
+    #   # Callbacks can be passed into the `:event_stream_handler` option or within a
+    #   # block statement attached to the #invoke_with_response_stream call directly. Hybrid
+    #   # pattern of both is also supported.
     #
-    #   `:event_stream_handler` option takes in either a Proc object or
-    #   Aws::Lambda::EventStreams::InvokeWithResponseStreamResponseEvent object.
+    #   # `:event_stream_handler` option takes in either a Proc object or
+    #   # Aws::Lambda::EventStreams::InvokeWithResponseStreamResponseEvent object.
     #
-    #   Usage pattern a): Callbacks with a block attached to #invoke_with_response_stream
-    #     Example for registering callbacks for all event types and an error event
-    #
-    #     client.invoke_with_response_stream( # params input# ) do |stream|
-    #       stream.on_error_event do |event|
-    #         # catch unmodeled error event in the stream
-    #         raise event
-    #         # => Aws::Errors::EventError
-    #         # event.event_type => :error
-    #         # event.error_code => String
-    #         # event.error_message => String
-    #       end
-    #
-    #       stream.on_event do |event|
-    #         # process all events arrive
-    #         puts event.event_type
-    #         ...
-    #       end
-    #
+    #   # Usage pattern a): Callbacks with a block attached to #invoke_with_response_stream
+    #   # Example for registering callbacks for all event types and an error event
+    #   client.invoke_with_response_stream(
+    #     # params input
+    #   ) do |stream|
+    #     stream.on_error_event do |event|
+    #       # catch unmodeled error event in the stream
+    #       raise event
+    #       # => Aws::Errors::EventError
+    #       # event.event_type => :error
+    #       # event.error_code => String
+    #       # event.error_message => String
     #     end
     #
-    #   Usage pattern b): Pass in `:event_stream_handler` for #invoke_with_response_stream
-    #
-    #     1) Create a Aws::Lambda::EventStreams::InvokeWithResponseStreamResponseEvent object
-    #     Example for registering callbacks with specific events
-    #
-    #       handler = Aws::Lambda::EventStreams::InvokeWithResponseStreamResponseEvent.new
-    #       handler.on_payload_chunk_event do |event|
-    #         event # => Aws::Lambda::Types::PayloadChunk
-    #       end
-    #       handler.on_invoke_complete_event do |event|
-    #         event # => Aws::Lambda::Types::InvokeComplete
-    #       end
-    #
-    #     client.invoke_with_response_stream( # params input #, event_stream_handler: handler)
-    #
-    #     2) Use a Ruby Proc object
-    #     Example for registering callbacks with specific events
-    #
-    #     handler = Proc.new do |stream|
-    #       stream.on_payload_chunk_event do |event|
-    #         event # => Aws::Lambda::Types::PayloadChunk
-    #       end
-    #       stream.on_invoke_complete_event do |event|
-    #         event # => Aws::Lambda::Types::InvokeComplete
-    #       end
+    #     stream.on_event do |event|
+    #       # process all events arrive
+    #       puts event.event_type
+    #       # ...
     #     end
+    #   end
     #
-    #     client.invoke_with_response_stream( # params input #, event_stream_handler: handler)
+    #   # Usage pattern b): Pass in `:event_stream_handler` for #invoke_with_response_stream
+    #   #  1) Create a Aws::Lambda::EventStreams::InvokeWithResponseStreamResponseEvent object
+    #   #  Example for registering callbacks with specific events
     #
-    #   Usage pattern c): Hybrid pattern of a) and b)
+    #   handler = Aws::Lambda::EventStreams::InvokeWithResponseStreamResponseEvent.new
+    #   handler.on_payload_chunk_event do |event|
+    #     event # => Aws::Lambda::Types::PayloadChunk
+    #   end
+    #   handler.on_invoke_complete_event do |event|
+    #     event # => Aws::Lambda::Types::InvokeComplete
+    #   end
     #
-    #       handler = Aws::Lambda::EventStreams::InvokeWithResponseStreamResponseEvent.new
-    #       handler.on_payload_chunk_event do |event|
-    #         event # => Aws::Lambda::Types::PayloadChunk
-    #       end
-    #       handler.on_invoke_complete_event do |event|
-    #         event # => Aws::Lambda::Types::InvokeComplete
-    #       end
+    #   client.invoke_with_response_stream(
+    #     # params inputs
+    #     event_stream_handler: handler
+    #   )
     #
-    #     client.invoke_with_response_stream( # params input #, event_stream_handler: handler) do |stream|
-    #       stream.on_error_event do |event|
-    #         # catch unmodeled error event in the stream
-    #         raise event
-    #         # => Aws::Errors::EventError
-    #         # event.event_type => :error
-    #         # event.error_code => String
-    #         # event.error_message => String
-    #       end
+    #   #  2) Use a Ruby Proc object
+    #   #  Example for registering callbacks with specific events
+    #   handler = Proc.new do |stream|
+    #     stream.on_payload_chunk_event do |event|
+    #       event # => Aws::Lambda::Types::PayloadChunk
     #     end
+    #     stream.on_invoke_complete_event do |event|
+    #       event # => Aws::Lambda::Types::InvokeComplete
+    #     end
+    #   end
     #
-    #   You can also iterate through events after the response complete.
+    #   client.invoke_with_response_stream(
+    #     # params inputs
+    #     event_stream_handler: handler
+    #   )
     #
-    #   Events are available at resp.event_stream # => Enumerator
-    #   For parameter input example, please refer to following request syntax
+    #   #  Usage pattern c): Hybrid pattern of a) and b)
+    #   handler = Aws::Lambda::EventStreams::InvokeWithResponseStreamResponseEvent.new
+    #   handler.on_payload_chunk_event do |event|
+    #     event # => Aws::Lambda::Types::PayloadChunk
+    #   end
+    #   handler.on_invoke_complete_event do |event|
+    #     event # => Aws::Lambda::Types::InvokeComplete
+    #   end
+    #
+    #   client.invoke_with_response_stream(
+    #     # params input
+    #     event_stream_handler: handler
+    #   ) do |stream|
+    #     stream.on_error_event do |event|
+    #       # catch unmodeled error event in the stream
+    #       raise event
+    #       # => Aws::Errors::EventError
+    #       # event.event_type => :error
+    #       # event.error_code => String
+    #       # event.error_message => String
+    #     end
+    #   end
+    #
+    #   # You can also iterate through events after the response complete.
+    #   # Events are available at
+    #   resp.event_stream # => Enumerator
+    #   # For parameter input example, please refer to following request syntax.
     #
     # @example Request syntax with placeholder values
     #
@@ -4334,14 +4340,14 @@ module Aws::Lambda
     #
     #   resp.status_code #=> Integer
     #   resp.executed_version #=> String
-    #   All events are available at resp.event_stream:
+    #   # All events are available at resp.event_stream:
     #   resp.event_stream #=> Enumerator
     #   resp.event_stream.event_types #=> [:payload_chunk, :invoke_complete]
     #
-    #   For :payload_chunk event available at #on_payload_chunk_event callback and response eventstream enumerator:
+    #   # For :payload_chunk event available at #on_payload_chunk_event callback and response eventstream enumerator:
     #   event.payload #=> String
     #
-    #   For :invoke_complete event available at #on_invoke_complete_event callback and response eventstream enumerator:
+    #   # For :invoke_complete event available at #on_invoke_complete_event callback and response eventstream enumerator:
     #   event.error_code #=> String
     #   event.error_details #=> String
     #   event.log_result #=> String
@@ -8199,7 +8205,7 @@ module Aws::Lambda
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.148.0'
+      context[:gem_version] = '1.149.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

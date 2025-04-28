@@ -930,6 +930,13 @@ module Aws::Imagebuilder
     #             account_id: "AccountId",
     #           },
     #         ],
+    #         ssm_parameter_configurations: [
+    #           {
+    #             ami_account_id: "AccountId",
+    #             parameter_name: "SsmParameterName", # required
+    #             data_type: "text", # accepts text, aws:ec2:image
+    #           },
+    #         ],
     #       },
     #     ],
     #     tags: {
@@ -2241,6 +2248,10 @@ module Aws::Imagebuilder
     #   resp.distribution_configuration.distributions[0].fast_launch_configurations[0].launch_template.launch_template_name #=> String
     #   resp.distribution_configuration.distributions[0].fast_launch_configurations[0].launch_template.launch_template_version #=> String
     #   resp.distribution_configuration.distributions[0].fast_launch_configurations[0].account_id #=> String
+    #   resp.distribution_configuration.distributions[0].ssm_parameter_configurations #=> Array
+    #   resp.distribution_configuration.distributions[0].ssm_parameter_configurations[0].ami_account_id #=> String
+    #   resp.distribution_configuration.distributions[0].ssm_parameter_configurations[0].parameter_name #=> String
+    #   resp.distribution_configuration.distributions[0].ssm_parameter_configurations[0].data_type #=> String, one of "text", "aws:ec2:image"
     #   resp.distribution_configuration.timeout_minutes #=> Integer
     #   resp.distribution_configuration.date_created #=> String
     #   resp.distribution_configuration.date_updated #=> String
@@ -2423,6 +2434,10 @@ module Aws::Imagebuilder
     #   resp.image.distribution_configuration.distributions[0].fast_launch_configurations[0].launch_template.launch_template_name #=> String
     #   resp.image.distribution_configuration.distributions[0].fast_launch_configurations[0].launch_template.launch_template_version #=> String
     #   resp.image.distribution_configuration.distributions[0].fast_launch_configurations[0].account_id #=> String
+    #   resp.image.distribution_configuration.distributions[0].ssm_parameter_configurations #=> Array
+    #   resp.image.distribution_configuration.distributions[0].ssm_parameter_configurations[0].ami_account_id #=> String
+    #   resp.image.distribution_configuration.distributions[0].ssm_parameter_configurations[0].parameter_name #=> String
+    #   resp.image.distribution_configuration.distributions[0].ssm_parameter_configurations[0].data_type #=> String, one of "text", "aws:ec2:image"
     #   resp.image.distribution_configuration.timeout_minutes #=> Integer
     #   resp.image.distribution_configuration.date_created #=> String
     #   resp.image.distribution_configuration.date_updated #=> String
@@ -5364,6 +5379,13 @@ module Aws::Imagebuilder
     #             account_id: "AccountId",
     #           },
     #         ],
+    #         ssm_parameter_configurations: [
+    #           {
+    #             ami_account_id: "AccountId",
+    #             parameter_name: "SsmParameterName", # required
+    #             data_type: "text", # accepts text, aws:ec2:image
+    #           },
+    #         ],
     #       },
     #     ],
     #     client_token: "ClientToken", # required
@@ -5792,7 +5814,7 @@ module Aws::Imagebuilder
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.79.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1072,203 +1072,209 @@ module Aws::BedrockAgentRuntime
     #
     # @example EventStream Operation Example
     #
-    #   You can process the event once it arrives immediately, or wait until the
-    #   full response is complete and iterate through the eventstream enumerator.
+    #   # You can process the event once it arrives immediately, or wait until the
+    #   # full response is complete and iterate through the eventstream enumerator.
     #
-    #   To interact with event immediately, you need to register #invoke_agent
-    #   with callbacks. Callbacks can be registered for specific events or for all
-    #   events, including error events.
+    #   # To interact with event immediately, you need to register invoke_agent
+    #   # with callbacks. Callbacks can be registered for specific events or for all
+    #   # events, including error events.
     #
-    #   Callbacks can be passed into the `:event_stream_handler` option or within a
-    #   block statement attached to the #invoke_agent call directly. Hybrid
-    #   pattern of both is also supported.
+    #   # Callbacks can be passed into the `:event_stream_handler` option or within a
+    #   # block statement attached to the #invoke_agent call directly. Hybrid
+    #   # pattern of both is also supported.
     #
-    #   `:event_stream_handler` option takes in either a Proc object or
-    #   Aws::BedrockAgentRuntime::EventStreams::ResponseStream object.
+    #   # `:event_stream_handler` option takes in either a Proc object or
+    #   # Aws::BedrockAgentRuntime::EventStreams::ResponseStream object.
     #
-    #   Usage pattern a): Callbacks with a block attached to #invoke_agent
-    #     Example for registering callbacks for all event types and an error event
-    #
-    #     client.invoke_agent( # params input# ) do |stream|
-    #       stream.on_error_event do |event|
-    #         # catch unmodeled error event in the stream
-    #         raise event
-    #         # => Aws::Errors::EventError
-    #         # event.event_type => :error
-    #         # event.error_code => String
-    #         # event.error_message => String
-    #       end
-    #
-    #       stream.on_event do |event|
-    #         # process all events arrive
-    #         puts event.event_type
-    #         ...
-    #       end
-    #
+    #   # Usage pattern a): Callbacks with a block attached to #invoke_agent
+    #   # Example for registering callbacks for all event types and an error event
+    #   client.invoke_agent(
+    #     # params input
+    #   ) do |stream|
+    #     stream.on_error_event do |event|
+    #       # catch unmodeled error event in the stream
+    #       raise event
+    #       # => Aws::Errors::EventError
+    #       # event.event_type => :error
+    #       # event.error_code => String
+    #       # event.error_message => String
     #     end
     #
-    #   Usage pattern b): Pass in `:event_stream_handler` for #invoke_agent
-    #
-    #     1) Create a Aws::BedrockAgentRuntime::EventStreams::ResponseStream object
-    #     Example for registering callbacks with specific events
-    #
-    #       handler = Aws::BedrockAgentRuntime::EventStreams::ResponseStream.new
-    #       handler.on_access_denied_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
-    #       end
-    #       handler.on_bad_gateway_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::badGatewayException
-    #       end
-    #       handler.on_chunk_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::chunk
-    #       end
-    #       handler.on_conflict_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::conflictException
-    #       end
-    #       handler.on_dependency_failed_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
-    #       end
-    #       handler.on_files_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::files
-    #       end
-    #       handler.on_internal_server_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::internalServerException
-    #       end
-    #       handler.on_model_not_ready_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::modelNotReadyException
-    #       end
-    #       handler.on_resource_not_found_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
-    #       end
-    #       handler.on_return_control_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::returnControl
-    #       end
-    #       handler.on_service_quota_exceeded_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
-    #       end
-    #       handler.on_throttling_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::throttlingException
-    #       end
-    #       handler.on_trace_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::trace
-    #       end
-    #       handler.on_validation_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::validationException
-    #       end
-    #
-    #     client.invoke_agent( # params input #, event_stream_handler: handler)
-    #
-    #     2) Use a Ruby Proc object
-    #     Example for registering callbacks with specific events
-    #
-    #     handler = Proc.new do |stream|
-    #       stream.on_access_denied_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
-    #       end
-    #       stream.on_bad_gateway_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::badGatewayException
-    #       end
-    #       stream.on_chunk_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::chunk
-    #       end
-    #       stream.on_conflict_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::conflictException
-    #       end
-    #       stream.on_dependency_failed_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
-    #       end
-    #       stream.on_files_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::files
-    #       end
-    #       stream.on_internal_server_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::internalServerException
-    #       end
-    #       stream.on_model_not_ready_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::modelNotReadyException
-    #       end
-    #       stream.on_resource_not_found_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
-    #       end
-    #       stream.on_return_control_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::returnControl
-    #       end
-    #       stream.on_service_quota_exceeded_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
-    #       end
-    #       stream.on_throttling_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::throttlingException
-    #       end
-    #       stream.on_trace_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::trace
-    #       end
-    #       stream.on_validation_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::validationException
-    #       end
+    #     stream.on_event do |event|
+    #       # process all events arrive
+    #       puts event.event_type
+    #       # ...
     #     end
+    #   end
     #
-    #     client.invoke_agent( # params input #, event_stream_handler: handler)
+    #   # Usage pattern b): Pass in `:event_stream_handler` for #invoke_agent
+    #   #  1) Create a Aws::BedrockAgentRuntime::EventStreams::ResponseStream object
+    #   #  Example for registering callbacks with specific events
     #
-    #   Usage pattern c): Hybrid pattern of a) and b)
+    #   handler = Aws::BedrockAgentRuntime::EventStreams::ResponseStream.new
+    #   handler.on_access_denied_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
+    #   end
+    #   handler.on_bad_gateway_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #   end
+    #   handler.on_chunk_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::chunk
+    #   end
+    #   handler.on_conflict_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::conflictException
+    #   end
+    #   handler.on_dependency_failed_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
+    #   end
+    #   handler.on_files_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::files
+    #   end
+    #   handler.on_internal_server_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::internalServerException
+    #   end
+    #   handler.on_model_not_ready_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::modelNotReadyException
+    #   end
+    #   handler.on_resource_not_found_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
+    #   end
+    #   handler.on_return_control_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::returnControl
+    #   end
+    #   handler.on_service_quota_exceeded_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
+    #   end
+    #   handler.on_throttling_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::throttlingException
+    #   end
+    #   handler.on_trace_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::trace
+    #   end
+    #   handler.on_validation_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::validationException
+    #   end
     #
-    #       handler = Aws::BedrockAgentRuntime::EventStreams::ResponseStream.new
-    #       handler.on_access_denied_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
-    #       end
-    #       handler.on_bad_gateway_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::badGatewayException
-    #       end
-    #       handler.on_chunk_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::chunk
-    #       end
-    #       handler.on_conflict_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::conflictException
-    #       end
-    #       handler.on_dependency_failed_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
-    #       end
-    #       handler.on_files_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::files
-    #       end
-    #       handler.on_internal_server_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::internalServerException
-    #       end
-    #       handler.on_model_not_ready_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::modelNotReadyException
-    #       end
-    #       handler.on_resource_not_found_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
-    #       end
-    #       handler.on_return_control_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::returnControl
-    #       end
-    #       handler.on_service_quota_exceeded_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
-    #       end
-    #       handler.on_throttling_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::throttlingException
-    #       end
-    #       handler.on_trace_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::trace
-    #       end
-    #       handler.on_validation_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::validationException
-    #       end
+    #   client.invoke_agent(
+    #     # params inputs
+    #     event_stream_handler: handler
+    #   )
     #
-    #     client.invoke_agent( # params input #, event_stream_handler: handler) do |stream|
-    #       stream.on_error_event do |event|
-    #         # catch unmodeled error event in the stream
-    #         raise event
-    #         # => Aws::Errors::EventError
-    #         # event.event_type => :error
-    #         # event.error_code => String
-    #         # event.error_message => String
-    #       end
+    #   #  2) Use a Ruby Proc object
+    #   #  Example for registering callbacks with specific events
+    #   handler = Proc.new do |stream|
+    #     stream.on_access_denied_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
     #     end
+    #     stream.on_bad_gateway_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #     end
+    #     stream.on_chunk_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::chunk
+    #     end
+    #     stream.on_conflict_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::conflictException
+    #     end
+    #     stream.on_dependency_failed_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
+    #     end
+    #     stream.on_files_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::files
+    #     end
+    #     stream.on_internal_server_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::internalServerException
+    #     end
+    #     stream.on_model_not_ready_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::modelNotReadyException
+    #     end
+    #     stream.on_resource_not_found_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
+    #     end
+    #     stream.on_return_control_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::returnControl
+    #     end
+    #     stream.on_service_quota_exceeded_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
+    #     end
+    #     stream.on_throttling_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::throttlingException
+    #     end
+    #     stream.on_trace_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::trace
+    #     end
+    #     stream.on_validation_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::validationException
+    #     end
+    #   end
     #
-    #   You can also iterate through events after the response complete.
+    #   client.invoke_agent(
+    #     # params inputs
+    #     event_stream_handler: handler
+    #   )
     #
-    #   Events are available at resp.completion # => Enumerator
-    #   For parameter input example, please refer to following request syntax
+    #   #  Usage pattern c): Hybrid pattern of a) and b)
+    #   handler = Aws::BedrockAgentRuntime::EventStreams::ResponseStream.new
+    #   handler.on_access_denied_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
+    #   end
+    #   handler.on_bad_gateway_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #   end
+    #   handler.on_chunk_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::chunk
+    #   end
+    #   handler.on_conflict_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::conflictException
+    #   end
+    #   handler.on_dependency_failed_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
+    #   end
+    #   handler.on_files_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::files
+    #   end
+    #   handler.on_internal_server_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::internalServerException
+    #   end
+    #   handler.on_model_not_ready_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::modelNotReadyException
+    #   end
+    #   handler.on_resource_not_found_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
+    #   end
+    #   handler.on_return_control_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::returnControl
+    #   end
+    #   handler.on_service_quota_exceeded_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
+    #   end
+    #   handler.on_throttling_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::throttlingException
+    #   end
+    #   handler.on_trace_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::trace
+    #   end
+    #   handler.on_validation_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::validationException
+    #   end
+    #
+    #   client.invoke_agent(
+    #     # params input
+    #     event_stream_handler: handler
+    #   ) do |stream|
+    #     stream.on_error_event do |event|
+    #       # catch unmodeled error event in the stream
+    #       raise event
+    #       # => Aws::Errors::EventError
+    #       # event.event_type => :error
+    #       # event.error_code => String
+    #       # event.error_message => String
+    #     end
+    #   end
+    #
+    #   # You can also iterate through events after the response complete.
+    #   # Events are available at
+    #   resp.completion # => Enumerator
+    #   # For parameter input example, please refer to following request syntax.
     #
     # @example Request syntax with placeholder values
     #
@@ -1493,18 +1499,18 @@ module Aws::BedrockAgentRuntime
     #
     # @example Response structure
     #
-    #   All events are available at resp.completion:
+    #   # All events are available at resp.completion:
     #   resp.completion #=> Enumerator
     #   resp.completion.event_types #=> [:access_denied_exception, :bad_gateway_exception, :chunk, :conflict_exception, :dependency_failed_exception, :files, :internal_server_exception, :model_not_ready_exception, :resource_not_found_exception, :return_control, :service_quota_exceeded_exception, :throttling_exception, :trace, :validation_exception]
     #
-    #   For :access_denied_exception event available at #on_access_denied_exception_event callback and response eventstream enumerator:
+    #   # For :access_denied_exception event available at #on_access_denied_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :bad_gateway_exception event available at #on_bad_gateway_exception_event callback and response eventstream enumerator:
+    #   # For :bad_gateway_exception event available at #on_bad_gateway_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #   event.resource_name #=> String
     #
-    #   For :chunk event available at #on_chunk_event callback and response eventstream enumerator:
+    #   # For :chunk event available at #on_chunk_event callback and response eventstream enumerator:
     #   event.attribution.citations #=> Array
     #   event.attribution.citations[0].generated_response_part.text_response_part.span.end #=> Integer
     #   event.attribution.citations[0].generated_response_part.text_response_part.span.start #=> Integer
@@ -1529,30 +1535,30 @@ module Aws::BedrockAgentRuntime
     #   event.attribution.citations[0].retrieved_references[0].metadata #=> Hash
     #   event.bytes #=> String
     #
-    #   For :conflict_exception event available at #on_conflict_exception_event callback and response eventstream enumerator:
+    #   # For :conflict_exception event available at #on_conflict_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :dependency_failed_exception event available at #on_dependency_failed_exception_event callback and response eventstream enumerator:
+    #   # For :dependency_failed_exception event available at #on_dependency_failed_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #   event.resource_name #=> String
     #
-    #   For :files event available at #on_files_event callback and response eventstream enumerator:
+    #   # For :files event available at #on_files_event callback and response eventstream enumerator:
     #   event.files #=> Array
     #   event.files[0].bytes #=> String
     #   event.files[0].name #=> String
     #   event.files[0].type #=> String
     #
-    #   For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
+    #   # For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #   event.reason #=> String
     #
-    #   For :model_not_ready_exception event available at #on_model_not_ready_exception_event callback and response eventstream enumerator:
+    #   # For :model_not_ready_exception event available at #on_model_not_ready_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :resource_not_found_exception event available at #on_resource_not_found_exception_event callback and response eventstream enumerator:
+    #   # For :resource_not_found_exception event available at #on_resource_not_found_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :return_control event available at #on_return_control_event callback and response eventstream enumerator:
+    #   # For :return_control event available at #on_return_control_event callback and response eventstream enumerator:
     #   event.invocation_id #=> String
     #   event.invocation_inputs #=> Array
     #   event.invocation_inputs[0].api_invocation_input.action_group #=> String
@@ -1580,13 +1586,13 @@ module Aws::BedrockAgentRuntime
     #   event.invocation_inputs[0].function_invocation_input.parameters[0].type #=> String
     #   event.invocation_inputs[0].function_invocation_input.parameters[0].value #=> String
     #
-    #   For :service_quota_exceeded_exception event available at #on_service_quota_exceeded_exception_event callback and response eventstream enumerator:
+    #   # For :service_quota_exceeded_exception event available at #on_service_quota_exceeded_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :throttling_exception event available at #on_throttling_exception_event callback and response eventstream enumerator:
+    #   # For :throttling_exception event available at #on_throttling_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :trace event available at #on_trace_event callback and response eventstream enumerator:
+    #   # For :trace event available at #on_trace_event callback and response eventstream enumerator:
     #   event.agent_alias_id #=> String
     #   event.agent_id #=> String
     #   event.agent_version #=> String
@@ -1952,7 +1958,7 @@ module Aws::BedrockAgentRuntime
     #   event.trace.routing_classifier_trace.observation.trace_id #=> String
     #   event.trace.routing_classifier_trace.observation.type #=> String, one of "ACTION_GROUP", "AGENT_COLLABORATOR", "KNOWLEDGE_BASE", "FINISH", "ASK_USER", "REPROMPT"
     #
-    #   For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
+    #   # For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
     #   resp.content_type #=> String
@@ -2035,194 +2041,200 @@ module Aws::BedrockAgentRuntime
     #
     # @example EventStream Operation Example
     #
-    #   You can process the event once it arrives immediately, or wait until the
-    #   full response is complete and iterate through the eventstream enumerator.
+    #   # You can process the event once it arrives immediately, or wait until the
+    #   # full response is complete and iterate through the eventstream enumerator.
     #
-    #   To interact with event immediately, you need to register #invoke_flow
-    #   with callbacks. Callbacks can be registered for specific events or for all
-    #   events, including error events.
+    #   # To interact with event immediately, you need to register invoke_flow
+    #   # with callbacks. Callbacks can be registered for specific events or for all
+    #   # events, including error events.
     #
-    #   Callbacks can be passed into the `:event_stream_handler` option or within a
-    #   block statement attached to the #invoke_flow call directly. Hybrid
-    #   pattern of both is also supported.
+    #   # Callbacks can be passed into the `:event_stream_handler` option or within a
+    #   # block statement attached to the #invoke_flow call directly. Hybrid
+    #   # pattern of both is also supported.
     #
-    #   `:event_stream_handler` option takes in either a Proc object or
-    #   Aws::BedrockAgentRuntime::EventStreams::FlowResponseStream object.
+    #   # `:event_stream_handler` option takes in either a Proc object or
+    #   # Aws::BedrockAgentRuntime::EventStreams::FlowResponseStream object.
     #
-    #   Usage pattern a): Callbacks with a block attached to #invoke_flow
-    #     Example for registering callbacks for all event types and an error event
-    #
-    #     client.invoke_flow( # params input# ) do |stream|
-    #       stream.on_error_event do |event|
-    #         # catch unmodeled error event in the stream
-    #         raise event
-    #         # => Aws::Errors::EventError
-    #         # event.event_type => :error
-    #         # event.error_code => String
-    #         # event.error_message => String
-    #       end
-    #
-    #       stream.on_event do |event|
-    #         # process all events arrive
-    #         puts event.event_type
-    #         ...
-    #       end
-    #
+    #   # Usage pattern a): Callbacks with a block attached to #invoke_flow
+    #   # Example for registering callbacks for all event types and an error event
+    #   client.invoke_flow(
+    #     # params input
+    #   ) do |stream|
+    #     stream.on_error_event do |event|
+    #       # catch unmodeled error event in the stream
+    #       raise event
+    #       # => Aws::Errors::EventError
+    #       # event.event_type => :error
+    #       # event.error_code => String
+    #       # event.error_message => String
     #     end
     #
-    #   Usage pattern b): Pass in `:event_stream_handler` for #invoke_flow
-    #
-    #     1) Create a Aws::BedrockAgentRuntime::EventStreams::FlowResponseStream object
-    #     Example for registering callbacks with specific events
-    #
-    #       handler = Aws::BedrockAgentRuntime::EventStreams::FlowResponseStream.new
-    #       handler.on_access_denied_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
-    #       end
-    #       handler.on_bad_gateway_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::badGatewayException
-    #       end
-    #       handler.on_conflict_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::conflictException
-    #       end
-    #       handler.on_dependency_failed_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
-    #       end
-    #       handler.on_flow_completion_event_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::flowCompletionEvent
-    #       end
-    #       handler.on_flow_multi_turn_input_request_event_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::flowMultiTurnInputRequestEvent
-    #       end
-    #       handler.on_flow_output_event_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::flowOutputEvent
-    #       end
-    #       handler.on_flow_trace_event_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::flowTraceEvent
-    #       end
-    #       handler.on_internal_server_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::internalServerException
-    #       end
-    #       handler.on_resource_not_found_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
-    #       end
-    #       handler.on_service_quota_exceeded_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
-    #       end
-    #       handler.on_throttling_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::throttlingException
-    #       end
-    #       handler.on_validation_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::validationException
-    #       end
-    #
-    #     client.invoke_flow( # params input #, event_stream_handler: handler)
-    #
-    #     2) Use a Ruby Proc object
-    #     Example for registering callbacks with specific events
-    #
-    #     handler = Proc.new do |stream|
-    #       stream.on_access_denied_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
-    #       end
-    #       stream.on_bad_gateway_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::badGatewayException
-    #       end
-    #       stream.on_conflict_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::conflictException
-    #       end
-    #       stream.on_dependency_failed_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
-    #       end
-    #       stream.on_flow_completion_event_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::flowCompletionEvent
-    #       end
-    #       stream.on_flow_multi_turn_input_request_event_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::flowMultiTurnInputRequestEvent
-    #       end
-    #       stream.on_flow_output_event_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::flowOutputEvent
-    #       end
-    #       stream.on_flow_trace_event_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::flowTraceEvent
-    #       end
-    #       stream.on_internal_server_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::internalServerException
-    #       end
-    #       stream.on_resource_not_found_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
-    #       end
-    #       stream.on_service_quota_exceeded_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
-    #       end
-    #       stream.on_throttling_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::throttlingException
-    #       end
-    #       stream.on_validation_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::validationException
-    #       end
+    #     stream.on_event do |event|
+    #       # process all events arrive
+    #       puts event.event_type
+    #       # ...
     #     end
+    #   end
     #
-    #     client.invoke_flow( # params input #, event_stream_handler: handler)
+    #   # Usage pattern b): Pass in `:event_stream_handler` for #invoke_flow
+    #   #  1) Create a Aws::BedrockAgentRuntime::EventStreams::FlowResponseStream object
+    #   #  Example for registering callbacks with specific events
     #
-    #   Usage pattern c): Hybrid pattern of a) and b)
+    #   handler = Aws::BedrockAgentRuntime::EventStreams::FlowResponseStream.new
+    #   handler.on_access_denied_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
+    #   end
+    #   handler.on_bad_gateway_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #   end
+    #   handler.on_conflict_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::conflictException
+    #   end
+    #   handler.on_dependency_failed_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
+    #   end
+    #   handler.on_flow_completion_event_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::flowCompletionEvent
+    #   end
+    #   handler.on_flow_multi_turn_input_request_event_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::flowMultiTurnInputRequestEvent
+    #   end
+    #   handler.on_flow_output_event_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::flowOutputEvent
+    #   end
+    #   handler.on_flow_trace_event_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::flowTraceEvent
+    #   end
+    #   handler.on_internal_server_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::internalServerException
+    #   end
+    #   handler.on_resource_not_found_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
+    #   end
+    #   handler.on_service_quota_exceeded_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
+    #   end
+    #   handler.on_throttling_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::throttlingException
+    #   end
+    #   handler.on_validation_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::validationException
+    #   end
     #
-    #       handler = Aws::BedrockAgentRuntime::EventStreams::FlowResponseStream.new
-    #       handler.on_access_denied_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
-    #       end
-    #       handler.on_bad_gateway_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::badGatewayException
-    #       end
-    #       handler.on_conflict_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::conflictException
-    #       end
-    #       handler.on_dependency_failed_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
-    #       end
-    #       handler.on_flow_completion_event_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::flowCompletionEvent
-    #       end
-    #       handler.on_flow_multi_turn_input_request_event_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::flowMultiTurnInputRequestEvent
-    #       end
-    #       handler.on_flow_output_event_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::flowOutputEvent
-    #       end
-    #       handler.on_flow_trace_event_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::flowTraceEvent
-    #       end
-    #       handler.on_internal_server_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::internalServerException
-    #       end
-    #       handler.on_resource_not_found_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
-    #       end
-    #       handler.on_service_quota_exceeded_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
-    #       end
-    #       handler.on_throttling_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::throttlingException
-    #       end
-    #       handler.on_validation_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::validationException
-    #       end
+    #   client.invoke_flow(
+    #     # params inputs
+    #     event_stream_handler: handler
+    #   )
     #
-    #     client.invoke_flow( # params input #, event_stream_handler: handler) do |stream|
-    #       stream.on_error_event do |event|
-    #         # catch unmodeled error event in the stream
-    #         raise event
-    #         # => Aws::Errors::EventError
-    #         # event.event_type => :error
-    #         # event.error_code => String
-    #         # event.error_message => String
-    #       end
+    #   #  2) Use a Ruby Proc object
+    #   #  Example for registering callbacks with specific events
+    #   handler = Proc.new do |stream|
+    #     stream.on_access_denied_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
     #     end
+    #     stream.on_bad_gateway_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #     end
+    #     stream.on_conflict_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::conflictException
+    #     end
+    #     stream.on_dependency_failed_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
+    #     end
+    #     stream.on_flow_completion_event_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::flowCompletionEvent
+    #     end
+    #     stream.on_flow_multi_turn_input_request_event_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::flowMultiTurnInputRequestEvent
+    #     end
+    #     stream.on_flow_output_event_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::flowOutputEvent
+    #     end
+    #     stream.on_flow_trace_event_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::flowTraceEvent
+    #     end
+    #     stream.on_internal_server_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::internalServerException
+    #     end
+    #     stream.on_resource_not_found_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
+    #     end
+    #     stream.on_service_quota_exceeded_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
+    #     end
+    #     stream.on_throttling_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::throttlingException
+    #     end
+    #     stream.on_validation_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::validationException
+    #     end
+    #   end
     #
-    #   You can also iterate through events after the response complete.
+    #   client.invoke_flow(
+    #     # params inputs
+    #     event_stream_handler: handler
+    #   )
     #
-    #   Events are available at resp.response_stream # => Enumerator
-    #   For parameter input example, please refer to following request syntax
+    #   #  Usage pattern c): Hybrid pattern of a) and b)
+    #   handler = Aws::BedrockAgentRuntime::EventStreams::FlowResponseStream.new
+    #   handler.on_access_denied_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
+    #   end
+    #   handler.on_bad_gateway_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #   end
+    #   handler.on_conflict_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::conflictException
+    #   end
+    #   handler.on_dependency_failed_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
+    #   end
+    #   handler.on_flow_completion_event_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::flowCompletionEvent
+    #   end
+    #   handler.on_flow_multi_turn_input_request_event_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::flowMultiTurnInputRequestEvent
+    #   end
+    #   handler.on_flow_output_event_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::flowOutputEvent
+    #   end
+    #   handler.on_flow_trace_event_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::flowTraceEvent
+    #   end
+    #   handler.on_internal_server_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::internalServerException
+    #   end
+    #   handler.on_resource_not_found_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
+    #   end
+    #   handler.on_service_quota_exceeded_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
+    #   end
+    #   handler.on_throttling_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::throttlingException
+    #   end
+    #   handler.on_validation_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::validationException
+    #   end
+    #
+    #   client.invoke_flow(
+    #     # params input
+    #     event_stream_handler: handler
+    #   ) do |stream|
+    #     stream.on_error_event do |event|
+    #       # catch unmodeled error event in the stream
+    #       raise event
+    #       # => Aws::Errors::EventError
+    #       # event.event_type => :error
+    #       # event.error_code => String
+    #       # event.error_message => String
+    #     end
+    #   end
+    #
+    #   # You can also iterate through events after the response complete.
+    #   # Events are available at
+    #   resp.response_stream # => Enumerator
+    #   # For parameter input example, please refer to following request syntax.
     #
     # @example Request syntax with placeholder values
     #
@@ -2252,36 +2264,36 @@ module Aws::BedrockAgentRuntime
     # @example Response structure
     #
     #   resp.execution_id #=> String
-    #   All events are available at resp.response_stream:
+    #   # All events are available at resp.response_stream:
     #   resp.response_stream #=> Enumerator
     #   resp.response_stream.event_types #=> [:access_denied_exception, :bad_gateway_exception, :conflict_exception, :dependency_failed_exception, :flow_completion_event, :flow_multi_turn_input_request_event, :flow_output_event, :flow_trace_event, :internal_server_exception, :resource_not_found_exception, :service_quota_exceeded_exception, :throttling_exception, :validation_exception]
     #
-    #   For :access_denied_exception event available at #on_access_denied_exception_event callback and response eventstream enumerator:
+    #   # For :access_denied_exception event available at #on_access_denied_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :bad_gateway_exception event available at #on_bad_gateway_exception_event callback and response eventstream enumerator:
-    #   event.message #=> String
-    #   event.resource_name #=> String
-    #
-    #   For :conflict_exception event available at #on_conflict_exception_event callback and response eventstream enumerator:
-    #   event.message #=> String
-    #
-    #   For :dependency_failed_exception event available at #on_dependency_failed_exception_event callback and response eventstream enumerator:
+    #   # For :bad_gateway_exception event available at #on_bad_gateway_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #   event.resource_name #=> String
     #
-    #   For :flow_completion_event event available at #on_flow_completion_event_event callback and response eventstream enumerator:
+    #   # For :conflict_exception event available at #on_conflict_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   # For :dependency_failed_exception event available at #on_dependency_failed_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #   event.resource_name #=> String
+    #
+    #   # For :flow_completion_event event available at #on_flow_completion_event_event callback and response eventstream enumerator:
     #   event.completion_reason #=> String, one of "SUCCESS", "INPUT_REQUIRED"
     #
-    #   For :flow_multi_turn_input_request_event event available at #on_flow_multi_turn_input_request_event_event callback and response eventstream enumerator:
+    #   # For :flow_multi_turn_input_request_event event available at #on_flow_multi_turn_input_request_event_event callback and response eventstream enumerator:
     #   event.node_name #=> String
     #   event.node_type #=> String, one of "FlowInputNode", "FlowOutputNode", "LambdaFunctionNode", "KnowledgeBaseNode", "PromptNode", "ConditionNode", "LexNode"
     #
-    #   For :flow_output_event event available at #on_flow_output_event_event callback and response eventstream enumerator:
+    #   # For :flow_output_event event available at #on_flow_output_event_event callback and response eventstream enumerator:
     #   event.node_name #=> String
     #   event.node_type #=> String, one of "FlowInputNode", "FlowOutputNode", "LambdaFunctionNode", "KnowledgeBaseNode", "PromptNode", "ConditionNode", "LexNode"
     #
-    #   For :flow_trace_event event available at #on_flow_trace_event_event callback and response eventstream enumerator:
+    #   # For :flow_trace_event event available at #on_flow_trace_event_event callback and response eventstream enumerator:
     #   event.trace.condition_node_result_trace.node_name #=> String
     #   event.trace.condition_node_result_trace.satisfied_conditions #=> Array
     #   event.trace.condition_node_result_trace.satisfied_conditions[0].condition_name #=> String
@@ -2300,20 +2312,20 @@ module Aws::BedrockAgentRuntime
     #   event.trace.node_output_trace.node_name #=> String
     #   event.trace.node_output_trace.timestamp #=> Time
     #
-    #   For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
+    #   # For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #   event.reason #=> String
     #
-    #   For :resource_not_found_exception event available at #on_resource_not_found_exception_event callback and response eventstream enumerator:
+    #   # For :resource_not_found_exception event available at #on_resource_not_found_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :service_quota_exceeded_exception event available at #on_service_quota_exceeded_exception_event callback and response eventstream enumerator:
+    #   # For :service_quota_exceeded_exception event available at #on_service_quota_exceeded_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :throttling_exception event available at #on_throttling_exception_event callback and response eventstream enumerator:
+    #   # For :throttling_exception event available at #on_throttling_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
+    #   # For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/InvokeFlow AWS API Documentation
@@ -2486,194 +2498,200 @@ module Aws::BedrockAgentRuntime
     #
     # @example EventStream Operation Example
     #
-    #   You can process the event once it arrives immediately, or wait until the
-    #   full response is complete and iterate through the eventstream enumerator.
+    #   # You can process the event once it arrives immediately, or wait until the
+    #   # full response is complete and iterate through the eventstream enumerator.
     #
-    #   To interact with event immediately, you need to register #invoke_inline_agent
-    #   with callbacks. Callbacks can be registered for specific events or for all
-    #   events, including error events.
+    #   # To interact with event immediately, you need to register invoke_inline_agent
+    #   # with callbacks. Callbacks can be registered for specific events or for all
+    #   # events, including error events.
     #
-    #   Callbacks can be passed into the `:event_stream_handler` option or within a
-    #   block statement attached to the #invoke_inline_agent call directly. Hybrid
-    #   pattern of both is also supported.
+    #   # Callbacks can be passed into the `:event_stream_handler` option or within a
+    #   # block statement attached to the #invoke_inline_agent call directly. Hybrid
+    #   # pattern of both is also supported.
     #
-    #   `:event_stream_handler` option takes in either a Proc object or
-    #   Aws::BedrockAgentRuntime::EventStreams::InlineAgentResponseStream object.
+    #   # `:event_stream_handler` option takes in either a Proc object or
+    #   # Aws::BedrockAgentRuntime::EventStreams::InlineAgentResponseStream object.
     #
-    #   Usage pattern a): Callbacks with a block attached to #invoke_inline_agent
-    #     Example for registering callbacks for all event types and an error event
-    #
-    #     client.invoke_inline_agent( # params input# ) do |stream|
-    #       stream.on_error_event do |event|
-    #         # catch unmodeled error event in the stream
-    #         raise event
-    #         # => Aws::Errors::EventError
-    #         # event.event_type => :error
-    #         # event.error_code => String
-    #         # event.error_message => String
-    #       end
-    #
-    #       stream.on_event do |event|
-    #         # process all events arrive
-    #         puts event.event_type
-    #         ...
-    #       end
-    #
+    #   # Usage pattern a): Callbacks with a block attached to #invoke_inline_agent
+    #   # Example for registering callbacks for all event types and an error event
+    #   client.invoke_inline_agent(
+    #     # params input
+    #   ) do |stream|
+    #     stream.on_error_event do |event|
+    #       # catch unmodeled error event in the stream
+    #       raise event
+    #       # => Aws::Errors::EventError
+    #       # event.event_type => :error
+    #       # event.error_code => String
+    #       # event.error_message => String
     #     end
     #
-    #   Usage pattern b): Pass in `:event_stream_handler` for #invoke_inline_agent
-    #
-    #     1) Create a Aws::BedrockAgentRuntime::EventStreams::InlineAgentResponseStream object
-    #     Example for registering callbacks with specific events
-    #
-    #       handler = Aws::BedrockAgentRuntime::EventStreams::InlineAgentResponseStream.new
-    #       handler.on_access_denied_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
-    #       end
-    #       handler.on_bad_gateway_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::badGatewayException
-    #       end
-    #       handler.on_chunk_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::chunk
-    #       end
-    #       handler.on_conflict_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::conflictException
-    #       end
-    #       handler.on_dependency_failed_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
-    #       end
-    #       handler.on_files_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::files
-    #       end
-    #       handler.on_internal_server_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::internalServerException
-    #       end
-    #       handler.on_resource_not_found_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
-    #       end
-    #       handler.on_return_control_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::returnControl
-    #       end
-    #       handler.on_service_quota_exceeded_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
-    #       end
-    #       handler.on_throttling_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::throttlingException
-    #       end
-    #       handler.on_trace_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::trace
-    #       end
-    #       handler.on_validation_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::validationException
-    #       end
-    #
-    #     client.invoke_inline_agent( # params input #, event_stream_handler: handler)
-    #
-    #     2) Use a Ruby Proc object
-    #     Example for registering callbacks with specific events
-    #
-    #     handler = Proc.new do |stream|
-    #       stream.on_access_denied_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
-    #       end
-    #       stream.on_bad_gateway_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::badGatewayException
-    #       end
-    #       stream.on_chunk_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::chunk
-    #       end
-    #       stream.on_conflict_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::conflictException
-    #       end
-    #       stream.on_dependency_failed_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
-    #       end
-    #       stream.on_files_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::files
-    #       end
-    #       stream.on_internal_server_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::internalServerException
-    #       end
-    #       stream.on_resource_not_found_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
-    #       end
-    #       stream.on_return_control_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::returnControl
-    #       end
-    #       stream.on_service_quota_exceeded_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
-    #       end
-    #       stream.on_throttling_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::throttlingException
-    #       end
-    #       stream.on_trace_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::trace
-    #       end
-    #       stream.on_validation_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::validationException
-    #       end
+    #     stream.on_event do |event|
+    #       # process all events arrive
+    #       puts event.event_type
+    #       # ...
     #     end
+    #   end
     #
-    #     client.invoke_inline_agent( # params input #, event_stream_handler: handler)
+    #   # Usage pattern b): Pass in `:event_stream_handler` for #invoke_inline_agent
+    #   #  1) Create a Aws::BedrockAgentRuntime::EventStreams::InlineAgentResponseStream object
+    #   #  Example for registering callbacks with specific events
     #
-    #   Usage pattern c): Hybrid pattern of a) and b)
+    #   handler = Aws::BedrockAgentRuntime::EventStreams::InlineAgentResponseStream.new
+    #   handler.on_access_denied_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
+    #   end
+    #   handler.on_bad_gateway_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #   end
+    #   handler.on_chunk_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::chunk
+    #   end
+    #   handler.on_conflict_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::conflictException
+    #   end
+    #   handler.on_dependency_failed_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
+    #   end
+    #   handler.on_files_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::files
+    #   end
+    #   handler.on_internal_server_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::internalServerException
+    #   end
+    #   handler.on_resource_not_found_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
+    #   end
+    #   handler.on_return_control_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::returnControl
+    #   end
+    #   handler.on_service_quota_exceeded_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
+    #   end
+    #   handler.on_throttling_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::throttlingException
+    #   end
+    #   handler.on_trace_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::trace
+    #   end
+    #   handler.on_validation_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::validationException
+    #   end
     #
-    #       handler = Aws::BedrockAgentRuntime::EventStreams::InlineAgentResponseStream.new
-    #       handler.on_access_denied_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
-    #       end
-    #       handler.on_bad_gateway_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::badGatewayException
-    #       end
-    #       handler.on_chunk_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::chunk
-    #       end
-    #       handler.on_conflict_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::conflictException
-    #       end
-    #       handler.on_dependency_failed_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
-    #       end
-    #       handler.on_files_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::files
-    #       end
-    #       handler.on_internal_server_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::internalServerException
-    #       end
-    #       handler.on_resource_not_found_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
-    #       end
-    #       handler.on_return_control_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::returnControl
-    #       end
-    #       handler.on_service_quota_exceeded_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
-    #       end
-    #       handler.on_throttling_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::throttlingException
-    #       end
-    #       handler.on_trace_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::trace
-    #       end
-    #       handler.on_validation_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::validationException
-    #       end
+    #   client.invoke_inline_agent(
+    #     # params inputs
+    #     event_stream_handler: handler
+    #   )
     #
-    #     client.invoke_inline_agent( # params input #, event_stream_handler: handler) do |stream|
-    #       stream.on_error_event do |event|
-    #         # catch unmodeled error event in the stream
-    #         raise event
-    #         # => Aws::Errors::EventError
-    #         # event.event_type => :error
-    #         # event.error_code => String
-    #         # event.error_message => String
-    #       end
+    #   #  2) Use a Ruby Proc object
+    #   #  Example for registering callbacks with specific events
+    #   handler = Proc.new do |stream|
+    #     stream.on_access_denied_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
     #     end
+    #     stream.on_bad_gateway_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #     end
+    #     stream.on_chunk_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::chunk
+    #     end
+    #     stream.on_conflict_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::conflictException
+    #     end
+    #     stream.on_dependency_failed_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
+    #     end
+    #     stream.on_files_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::files
+    #     end
+    #     stream.on_internal_server_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::internalServerException
+    #     end
+    #     stream.on_resource_not_found_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
+    #     end
+    #     stream.on_return_control_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::returnControl
+    #     end
+    #     stream.on_service_quota_exceeded_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
+    #     end
+    #     stream.on_throttling_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::throttlingException
+    #     end
+    #     stream.on_trace_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::trace
+    #     end
+    #     stream.on_validation_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::validationException
+    #     end
+    #   end
     #
-    #   You can also iterate through events after the response complete.
+    #   client.invoke_inline_agent(
+    #     # params inputs
+    #     event_stream_handler: handler
+    #   )
     #
-    #   Events are available at resp.completion # => Enumerator
-    #   For parameter input example, please refer to following request syntax
+    #   #  Usage pattern c): Hybrid pattern of a) and b)
+    #   handler = Aws::BedrockAgentRuntime::EventStreams::InlineAgentResponseStream.new
+    #   handler.on_access_denied_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
+    #   end
+    #   handler.on_bad_gateway_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #   end
+    #   handler.on_chunk_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::chunk
+    #   end
+    #   handler.on_conflict_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::conflictException
+    #   end
+    #   handler.on_dependency_failed_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
+    #   end
+    #   handler.on_files_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::files
+    #   end
+    #   handler.on_internal_server_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::internalServerException
+    #   end
+    #   handler.on_resource_not_found_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
+    #   end
+    #   handler.on_return_control_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::returnControl
+    #   end
+    #   handler.on_service_quota_exceeded_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
+    #   end
+    #   handler.on_throttling_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::throttlingException
+    #   end
+    #   handler.on_trace_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::trace
+    #   end
+    #   handler.on_validation_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::validationException
+    #   end
+    #
+    #   client.invoke_inline_agent(
+    #     # params input
+    #     event_stream_handler: handler
+    #   ) do |stream|
+    #     stream.on_error_event do |event|
+    #       # catch unmodeled error event in the stream
+    #       raise event
+    #       # => Aws::Errors::EventError
+    #       # event.event_type => :error
+    #       # event.error_code => String
+    #       # event.error_message => String
+    #     end
+    #   end
+    #
+    #   # You can also iterate through events after the response complete.
+    #   # Events are available at
+    #   resp.completion # => Enumerator
+    #   # For parameter input example, please refer to following request syntax.
     #
     # @example Request syntax with placeholder values
     #
@@ -3169,18 +3187,18 @@ module Aws::BedrockAgentRuntime
     #
     # @example Response structure
     #
-    #   All events are available at resp.completion:
+    #   # All events are available at resp.completion:
     #   resp.completion #=> Enumerator
     #   resp.completion.event_types #=> [:access_denied_exception, :bad_gateway_exception, :chunk, :conflict_exception, :dependency_failed_exception, :files, :internal_server_exception, :resource_not_found_exception, :return_control, :service_quota_exceeded_exception, :throttling_exception, :trace, :validation_exception]
     #
-    #   For :access_denied_exception event available at #on_access_denied_exception_event callback and response eventstream enumerator:
+    #   # For :access_denied_exception event available at #on_access_denied_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :bad_gateway_exception event available at #on_bad_gateway_exception_event callback and response eventstream enumerator:
+    #   # For :bad_gateway_exception event available at #on_bad_gateway_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #   event.resource_name #=> String
     #
-    #   For :chunk event available at #on_chunk_event callback and response eventstream enumerator:
+    #   # For :chunk event available at #on_chunk_event callback and response eventstream enumerator:
     #   event.attribution.citations #=> Array
     #   event.attribution.citations[0].generated_response_part.text_response_part.span.end #=> Integer
     #   event.attribution.citations[0].generated_response_part.text_response_part.span.start #=> Integer
@@ -3205,27 +3223,27 @@ module Aws::BedrockAgentRuntime
     #   event.attribution.citations[0].retrieved_references[0].metadata #=> Hash
     #   event.bytes #=> String
     #
-    #   For :conflict_exception event available at #on_conflict_exception_event callback and response eventstream enumerator:
+    #   # For :conflict_exception event available at #on_conflict_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :dependency_failed_exception event available at #on_dependency_failed_exception_event callback and response eventstream enumerator:
+    #   # For :dependency_failed_exception event available at #on_dependency_failed_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #   event.resource_name #=> String
     #
-    #   For :files event available at #on_files_event callback and response eventstream enumerator:
+    #   # For :files event available at #on_files_event callback and response eventstream enumerator:
     #   event.files #=> Array
     #   event.files[0].bytes #=> String
     #   event.files[0].name #=> String
     #   event.files[0].type #=> String
     #
-    #   For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
+    #   # For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #   event.reason #=> String
     #
-    #   For :resource_not_found_exception event available at #on_resource_not_found_exception_event callback and response eventstream enumerator:
+    #   # For :resource_not_found_exception event available at #on_resource_not_found_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :return_control event available at #on_return_control_event callback and response eventstream enumerator:
+    #   # For :return_control event available at #on_return_control_event callback and response eventstream enumerator:
     #   event.invocation_id #=> String
     #   event.invocation_inputs #=> Array
     #   event.invocation_inputs[0].api_invocation_input.action_group #=> String
@@ -3253,13 +3271,13 @@ module Aws::BedrockAgentRuntime
     #   event.invocation_inputs[0].function_invocation_input.parameters[0].type #=> String
     #   event.invocation_inputs[0].function_invocation_input.parameters[0].value #=> String
     #
-    #   For :service_quota_exceeded_exception event available at #on_service_quota_exceeded_exception_event callback and response eventstream enumerator:
+    #   # For :service_quota_exceeded_exception event available at #on_service_quota_exceeded_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :throttling_exception event available at #on_throttling_exception_event callback and response eventstream enumerator:
+    #   # For :throttling_exception event available at #on_throttling_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :trace event available at #on_trace_event callback and response eventstream enumerator:
+    #   # For :trace event available at #on_trace_event callback and response eventstream enumerator:
     #   event.session_id #=> String
     #   event.trace.custom_orchestration_trace.event.text #=> String
     #   event.trace.custom_orchestration_trace.trace_id #=> String
@@ -3618,7 +3636,7 @@ module Aws::BedrockAgentRuntime
     #   event.trace.routing_classifier_trace.observation.trace_id #=> String
     #   event.trace.routing_classifier_trace.observation.type #=> String, one of "ACTION_GROUP", "AGENT_COLLABORATOR", "KNOWLEDGE_BASE", "FINISH", "ASK_USER", "REPROMPT"
     #
-    #   For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
+    #   # For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
     #   resp.content_type #=> String
@@ -3876,149 +3894,155 @@ module Aws::BedrockAgentRuntime
     #
     # @example EventStream Operation Example
     #
-    #   You can process the event once it arrives immediately, or wait until the
-    #   full response is complete and iterate through the eventstream enumerator.
+    #   # You can process the event once it arrives immediately, or wait until the
+    #   # full response is complete and iterate through the eventstream enumerator.
     #
-    #   To interact with event immediately, you need to register #optimize_prompt
-    #   with callbacks. Callbacks can be registered for specific events or for all
-    #   events, including error events.
+    #   # To interact with event immediately, you need to register optimize_prompt
+    #   # with callbacks. Callbacks can be registered for specific events or for all
+    #   # events, including error events.
     #
-    #   Callbacks can be passed into the `:event_stream_handler` option or within a
-    #   block statement attached to the #optimize_prompt call directly. Hybrid
-    #   pattern of both is also supported.
+    #   # Callbacks can be passed into the `:event_stream_handler` option or within a
+    #   # block statement attached to the #optimize_prompt call directly. Hybrid
+    #   # pattern of both is also supported.
     #
-    #   `:event_stream_handler` option takes in either a Proc object or
-    #   Aws::BedrockAgentRuntime::EventStreams::OptimizedPromptStream object.
+    #   # `:event_stream_handler` option takes in either a Proc object or
+    #   # Aws::BedrockAgentRuntime::EventStreams::OptimizedPromptStream object.
     #
-    #   Usage pattern a): Callbacks with a block attached to #optimize_prompt
-    #     Example for registering callbacks for all event types and an error event
-    #
-    #     client.optimize_prompt( # params input# ) do |stream|
-    #       stream.on_error_event do |event|
-    #         # catch unmodeled error event in the stream
-    #         raise event
-    #         # => Aws::Errors::EventError
-    #         # event.event_type => :error
-    #         # event.error_code => String
-    #         # event.error_message => String
-    #       end
-    #
-    #       stream.on_event do |event|
-    #         # process all events arrive
-    #         puts event.event_type
-    #         ...
-    #       end
-    #
+    #   # Usage pattern a): Callbacks with a block attached to #optimize_prompt
+    #   # Example for registering callbacks for all event types and an error event
+    #   client.optimize_prompt(
+    #     # params input
+    #   ) do |stream|
+    #     stream.on_error_event do |event|
+    #       # catch unmodeled error event in the stream
+    #       raise event
+    #       # => Aws::Errors::EventError
+    #       # event.event_type => :error
+    #       # event.error_code => String
+    #       # event.error_message => String
     #     end
     #
-    #   Usage pattern b): Pass in `:event_stream_handler` for #optimize_prompt
-    #
-    #     1) Create a Aws::BedrockAgentRuntime::EventStreams::OptimizedPromptStream object
-    #     Example for registering callbacks with specific events
-    #
-    #       handler = Aws::BedrockAgentRuntime::EventStreams::OptimizedPromptStream.new
-    #       handler.on_access_denied_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
-    #       end
-    #       handler.on_analyze_prompt_event_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::analyzePromptEvent
-    #       end
-    #       handler.on_bad_gateway_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::badGatewayException
-    #       end
-    #       handler.on_dependency_failed_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
-    #       end
-    #       handler.on_internal_server_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::internalServerException
-    #       end
-    #       handler.on_optimized_prompt_event_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::optimizedPromptEvent
-    #       end
-    #       handler.on_throttling_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::throttlingException
-    #       end
-    #       handler.on_validation_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::validationException
-    #       end
-    #
-    #     client.optimize_prompt( # params input #, event_stream_handler: handler)
-    #
-    #     2) Use a Ruby Proc object
-    #     Example for registering callbacks with specific events
-    #
-    #     handler = Proc.new do |stream|
-    #       stream.on_access_denied_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
-    #       end
-    #       stream.on_analyze_prompt_event_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::analyzePromptEvent
-    #       end
-    #       stream.on_bad_gateway_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::badGatewayException
-    #       end
-    #       stream.on_dependency_failed_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
-    #       end
-    #       stream.on_internal_server_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::internalServerException
-    #       end
-    #       stream.on_optimized_prompt_event_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::optimizedPromptEvent
-    #       end
-    #       stream.on_throttling_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::throttlingException
-    #       end
-    #       stream.on_validation_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::validationException
-    #       end
+    #     stream.on_event do |event|
+    #       # process all events arrive
+    #       puts event.event_type
+    #       # ...
     #     end
+    #   end
     #
-    #     client.optimize_prompt( # params input #, event_stream_handler: handler)
+    #   # Usage pattern b): Pass in `:event_stream_handler` for #optimize_prompt
+    #   #  1) Create a Aws::BedrockAgentRuntime::EventStreams::OptimizedPromptStream object
+    #   #  Example for registering callbacks with specific events
     #
-    #   Usage pattern c): Hybrid pattern of a) and b)
+    #   handler = Aws::BedrockAgentRuntime::EventStreams::OptimizedPromptStream.new
+    #   handler.on_access_denied_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
+    #   end
+    #   handler.on_analyze_prompt_event_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::analyzePromptEvent
+    #   end
+    #   handler.on_bad_gateway_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #   end
+    #   handler.on_dependency_failed_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
+    #   end
+    #   handler.on_internal_server_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::internalServerException
+    #   end
+    #   handler.on_optimized_prompt_event_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::optimizedPromptEvent
+    #   end
+    #   handler.on_throttling_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::throttlingException
+    #   end
+    #   handler.on_validation_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::validationException
+    #   end
     #
-    #       handler = Aws::BedrockAgentRuntime::EventStreams::OptimizedPromptStream.new
-    #       handler.on_access_denied_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
-    #       end
-    #       handler.on_analyze_prompt_event_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::analyzePromptEvent
-    #       end
-    #       handler.on_bad_gateway_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::badGatewayException
-    #       end
-    #       handler.on_dependency_failed_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
-    #       end
-    #       handler.on_internal_server_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::internalServerException
-    #       end
-    #       handler.on_optimized_prompt_event_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::optimizedPromptEvent
-    #       end
-    #       handler.on_throttling_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::throttlingException
-    #       end
-    #       handler.on_validation_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::validationException
-    #       end
+    #   client.optimize_prompt(
+    #     # params inputs
+    #     event_stream_handler: handler
+    #   )
     #
-    #     client.optimize_prompt( # params input #, event_stream_handler: handler) do |stream|
-    #       stream.on_error_event do |event|
-    #         # catch unmodeled error event in the stream
-    #         raise event
-    #         # => Aws::Errors::EventError
-    #         # event.event_type => :error
-    #         # event.error_code => String
-    #         # event.error_message => String
-    #       end
+    #   #  2) Use a Ruby Proc object
+    #   #  Example for registering callbacks with specific events
+    #   handler = Proc.new do |stream|
+    #     stream.on_access_denied_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
     #     end
+    #     stream.on_analyze_prompt_event_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::analyzePromptEvent
+    #     end
+    #     stream.on_bad_gateway_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #     end
+    #     stream.on_dependency_failed_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
+    #     end
+    #     stream.on_internal_server_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::internalServerException
+    #     end
+    #     stream.on_optimized_prompt_event_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::optimizedPromptEvent
+    #     end
+    #     stream.on_throttling_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::throttlingException
+    #     end
+    #     stream.on_validation_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::validationException
+    #     end
+    #   end
     #
-    #   You can also iterate through events after the response complete.
+    #   client.optimize_prompt(
+    #     # params inputs
+    #     event_stream_handler: handler
+    #   )
     #
-    #   Events are available at resp.optimized_prompt # => Enumerator
-    #   For parameter input example, please refer to following request syntax
+    #   #  Usage pattern c): Hybrid pattern of a) and b)
+    #   handler = Aws::BedrockAgentRuntime::EventStreams::OptimizedPromptStream.new
+    #   handler.on_access_denied_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
+    #   end
+    #   handler.on_analyze_prompt_event_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::analyzePromptEvent
+    #   end
+    #   handler.on_bad_gateway_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #   end
+    #   handler.on_dependency_failed_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
+    #   end
+    #   handler.on_internal_server_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::internalServerException
+    #   end
+    #   handler.on_optimized_prompt_event_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::optimizedPromptEvent
+    #   end
+    #   handler.on_throttling_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::throttlingException
+    #   end
+    #   handler.on_validation_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::validationException
+    #   end
+    #
+    #   client.optimize_prompt(
+    #     # params input
+    #     event_stream_handler: handler
+    #   ) do |stream|
+    #     stream.on_error_event do |event|
+    #       # catch unmodeled error event in the stream
+    #       raise event
+    #       # => Aws::Errors::EventError
+    #       # event.event_type => :error
+    #       # event.error_code => String
+    #       # event.error_message => String
+    #     end
+    #   end
+    #
+    #   # You can also iterate through events after the response complete.
+    #   # Events are available at
+    #   resp.optimized_prompt # => Enumerator
+    #   # For parameter input example, please refer to following request syntax.
     #
     # @example Request syntax with placeholder values
     #
@@ -4033,35 +4057,35 @@ module Aws::BedrockAgentRuntime
     #
     # @example Response structure
     #
-    #   All events are available at resp.optimized_prompt:
+    #   # All events are available at resp.optimized_prompt:
     #   resp.optimized_prompt #=> Enumerator
     #   resp.optimized_prompt.event_types #=> [:access_denied_exception, :analyze_prompt_event, :bad_gateway_exception, :dependency_failed_exception, :internal_server_exception, :optimized_prompt_event, :throttling_exception, :validation_exception]
     #
-    #   For :access_denied_exception event available at #on_access_denied_exception_event callback and response eventstream enumerator:
+    #   # For :access_denied_exception event available at #on_access_denied_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :analyze_prompt_event event available at #on_analyze_prompt_event_event callback and response eventstream enumerator:
+    #   # For :analyze_prompt_event event available at #on_analyze_prompt_event_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :bad_gateway_exception event available at #on_bad_gateway_exception_event callback and response eventstream enumerator:
-    #   event.message #=> String
-    #   event.resource_name #=> String
-    #
-    #   For :dependency_failed_exception event available at #on_dependency_failed_exception_event callback and response eventstream enumerator:
+    #   # For :bad_gateway_exception event available at #on_bad_gateway_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #   event.resource_name #=> String
     #
-    #   For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
+    #   # For :dependency_failed_exception event available at #on_dependency_failed_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #   event.resource_name #=> String
+    #
+    #   # For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #   event.reason #=> String
     #
-    #   For :optimized_prompt_event event available at #on_optimized_prompt_event_event callback and response eventstream enumerator:
+    #   # For :optimized_prompt_event event available at #on_optimized_prompt_event_event callback and response eventstream enumerator:
     #   event.optimized_prompt.text_prompt.text #=> String
     #
-    #   For :throttling_exception event available at #on_throttling_exception_event callback and response eventstream enumerator:
+    #   # For :throttling_exception event available at #on_throttling_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
+    #   # For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/OptimizePrompt AWS API Documentation
@@ -4786,185 +4810,191 @@ module Aws::BedrockAgentRuntime
     #
     # @example EventStream Operation Example
     #
-    #   You can process the event once it arrives immediately, or wait until the
-    #   full response is complete and iterate through the eventstream enumerator.
+    #   # You can process the event once it arrives immediately, or wait until the
+    #   # full response is complete and iterate through the eventstream enumerator.
     #
-    #   To interact with event immediately, you need to register #retrieve_and_generate_stream
-    #   with callbacks. Callbacks can be registered for specific events or for all
-    #   events, including error events.
+    #   # To interact with event immediately, you need to register retrieve_and_generate_stream
+    #   # with callbacks. Callbacks can be registered for specific events or for all
+    #   # events, including error events.
     #
-    #   Callbacks can be passed into the `:event_stream_handler` option or within a
-    #   block statement attached to the #retrieve_and_generate_stream call directly. Hybrid
-    #   pattern of both is also supported.
+    #   # Callbacks can be passed into the `:event_stream_handler` option or within a
+    #   # block statement attached to the #retrieve_and_generate_stream call directly. Hybrid
+    #   # pattern of both is also supported.
     #
-    #   `:event_stream_handler` option takes in either a Proc object or
-    #   Aws::BedrockAgentRuntime::EventStreams::RetrieveAndGenerateStreamResponseOutput object.
+    #   # `:event_stream_handler` option takes in either a Proc object or
+    #   # Aws::BedrockAgentRuntime::EventStreams::RetrieveAndGenerateStreamResponseOutput object.
     #
-    #   Usage pattern a): Callbacks with a block attached to #retrieve_and_generate_stream
-    #     Example for registering callbacks for all event types and an error event
-    #
-    #     client.retrieve_and_generate_stream( # params input# ) do |stream|
-    #       stream.on_error_event do |event|
-    #         # catch unmodeled error event in the stream
-    #         raise event
-    #         # => Aws::Errors::EventError
-    #         # event.event_type => :error
-    #         # event.error_code => String
-    #         # event.error_message => String
-    #       end
-    #
-    #       stream.on_event do |event|
-    #         # process all events arrive
-    #         puts event.event_type
-    #         ...
-    #       end
-    #
+    #   # Usage pattern a): Callbacks with a block attached to #retrieve_and_generate_stream
+    #   # Example for registering callbacks for all event types and an error event
+    #   client.retrieve_and_generate_stream(
+    #     # params input
+    #   ) do |stream|
+    #     stream.on_error_event do |event|
+    #       # catch unmodeled error event in the stream
+    #       raise event
+    #       # => Aws::Errors::EventError
+    #       # event.event_type => :error
+    #       # event.error_code => String
+    #       # event.error_message => String
     #     end
     #
-    #   Usage pattern b): Pass in `:event_stream_handler` for #retrieve_and_generate_stream
-    #
-    #     1) Create a Aws::BedrockAgentRuntime::EventStreams::RetrieveAndGenerateStreamResponseOutput object
-    #     Example for registering callbacks with specific events
-    #
-    #       handler = Aws::BedrockAgentRuntime::EventStreams::RetrieveAndGenerateStreamResponseOutput.new
-    #       handler.on_access_denied_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
-    #       end
-    #       handler.on_bad_gateway_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::badGatewayException
-    #       end
-    #       handler.on_citation_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::citation
-    #       end
-    #       handler.on_conflict_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::conflictException
-    #       end
-    #       handler.on_dependency_failed_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
-    #       end
-    #       handler.on_guardrail_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::guardrail
-    #       end
-    #       handler.on_internal_server_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::internalServerException
-    #       end
-    #       handler.on_output_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::output
-    #       end
-    #       handler.on_resource_not_found_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
-    #       end
-    #       handler.on_service_quota_exceeded_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
-    #       end
-    #       handler.on_throttling_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::throttlingException
-    #       end
-    #       handler.on_validation_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::validationException
-    #       end
-    #
-    #     client.retrieve_and_generate_stream( # params input #, event_stream_handler: handler)
-    #
-    #     2) Use a Ruby Proc object
-    #     Example for registering callbacks with specific events
-    #
-    #     handler = Proc.new do |stream|
-    #       stream.on_access_denied_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
-    #       end
-    #       stream.on_bad_gateway_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::badGatewayException
-    #       end
-    #       stream.on_citation_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::citation
-    #       end
-    #       stream.on_conflict_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::conflictException
-    #       end
-    #       stream.on_dependency_failed_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
-    #       end
-    #       stream.on_guardrail_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::guardrail
-    #       end
-    #       stream.on_internal_server_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::internalServerException
-    #       end
-    #       stream.on_output_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::output
-    #       end
-    #       stream.on_resource_not_found_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
-    #       end
-    #       stream.on_service_quota_exceeded_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
-    #       end
-    #       stream.on_throttling_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::throttlingException
-    #       end
-    #       stream.on_validation_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::validationException
-    #       end
+    #     stream.on_event do |event|
+    #       # process all events arrive
+    #       puts event.event_type
+    #       # ...
     #     end
+    #   end
     #
-    #     client.retrieve_and_generate_stream( # params input #, event_stream_handler: handler)
+    #   # Usage pattern b): Pass in `:event_stream_handler` for #retrieve_and_generate_stream
+    #   #  1) Create a Aws::BedrockAgentRuntime::EventStreams::RetrieveAndGenerateStreamResponseOutput object
+    #   #  Example for registering callbacks with specific events
     #
-    #   Usage pattern c): Hybrid pattern of a) and b)
+    #   handler = Aws::BedrockAgentRuntime::EventStreams::RetrieveAndGenerateStreamResponseOutput.new
+    #   handler.on_access_denied_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
+    #   end
+    #   handler.on_bad_gateway_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #   end
+    #   handler.on_citation_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::citation
+    #   end
+    #   handler.on_conflict_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::conflictException
+    #   end
+    #   handler.on_dependency_failed_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
+    #   end
+    #   handler.on_guardrail_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::guardrail
+    #   end
+    #   handler.on_internal_server_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::internalServerException
+    #   end
+    #   handler.on_output_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::output
+    #   end
+    #   handler.on_resource_not_found_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
+    #   end
+    #   handler.on_service_quota_exceeded_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
+    #   end
+    #   handler.on_throttling_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::throttlingException
+    #   end
+    #   handler.on_validation_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::validationException
+    #   end
     #
-    #       handler = Aws::BedrockAgentRuntime::EventStreams::RetrieveAndGenerateStreamResponseOutput.new
-    #       handler.on_access_denied_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
-    #       end
-    #       handler.on_bad_gateway_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::badGatewayException
-    #       end
-    #       handler.on_citation_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::citation
-    #       end
-    #       handler.on_conflict_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::conflictException
-    #       end
-    #       handler.on_dependency_failed_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
-    #       end
-    #       handler.on_guardrail_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::guardrail
-    #       end
-    #       handler.on_internal_server_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::internalServerException
-    #       end
-    #       handler.on_output_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::output
-    #       end
-    #       handler.on_resource_not_found_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
-    #       end
-    #       handler.on_service_quota_exceeded_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
-    #       end
-    #       handler.on_throttling_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::throttlingException
-    #       end
-    #       handler.on_validation_exception_event do |event|
-    #         event # => Aws::BedrockAgentRuntime::Types::validationException
-    #       end
+    #   client.retrieve_and_generate_stream(
+    #     # params inputs
+    #     event_stream_handler: handler
+    #   )
     #
-    #     client.retrieve_and_generate_stream( # params input #, event_stream_handler: handler) do |stream|
-    #       stream.on_error_event do |event|
-    #         # catch unmodeled error event in the stream
-    #         raise event
-    #         # => Aws::Errors::EventError
-    #         # event.event_type => :error
-    #         # event.error_code => String
-    #         # event.error_message => String
-    #       end
+    #   #  2) Use a Ruby Proc object
+    #   #  Example for registering callbacks with specific events
+    #   handler = Proc.new do |stream|
+    #     stream.on_access_denied_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
     #     end
+    #     stream.on_bad_gateway_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #     end
+    #     stream.on_citation_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::citation
+    #     end
+    #     stream.on_conflict_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::conflictException
+    #     end
+    #     stream.on_dependency_failed_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
+    #     end
+    #     stream.on_guardrail_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::guardrail
+    #     end
+    #     stream.on_internal_server_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::internalServerException
+    #     end
+    #     stream.on_output_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::output
+    #     end
+    #     stream.on_resource_not_found_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
+    #     end
+    #     stream.on_service_quota_exceeded_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
+    #     end
+    #     stream.on_throttling_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::throttlingException
+    #     end
+    #     stream.on_validation_exception_event do |event|
+    #       event # => Aws::BedrockAgentRuntime::Types::validationException
+    #     end
+    #   end
     #
-    #   You can also iterate through events after the response complete.
+    #   client.retrieve_and_generate_stream(
+    #     # params inputs
+    #     event_stream_handler: handler
+    #   )
     #
-    #   Events are available at resp.stream # => Enumerator
-    #   For parameter input example, please refer to following request syntax
+    #   #  Usage pattern c): Hybrid pattern of a) and b)
+    #   handler = Aws::BedrockAgentRuntime::EventStreams::RetrieveAndGenerateStreamResponseOutput.new
+    #   handler.on_access_denied_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
+    #   end
+    #   handler.on_bad_gateway_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #   end
+    #   handler.on_citation_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::citation
+    #   end
+    #   handler.on_conflict_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::conflictException
+    #   end
+    #   handler.on_dependency_failed_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
+    #   end
+    #   handler.on_guardrail_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::guardrail
+    #   end
+    #   handler.on_internal_server_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::internalServerException
+    #   end
+    #   handler.on_output_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::output
+    #   end
+    #   handler.on_resource_not_found_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
+    #   end
+    #   handler.on_service_quota_exceeded_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
+    #   end
+    #   handler.on_throttling_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::throttlingException
+    #   end
+    #   handler.on_validation_exception_event do |event|
+    #     event # => Aws::BedrockAgentRuntime::Types::validationException
+    #   end
+    #
+    #   client.retrieve_and_generate_stream(
+    #     # params input
+    #     event_stream_handler: handler
+    #   ) do |stream|
+    #     stream.on_error_event do |event|
+    #       # catch unmodeled error event in the stream
+    #       raise event
+    #       # => Aws::Errors::EventError
+    #       # event.event_type => :error
+    #       # event.error_code => String
+    #       # event.error_message => String
+    #     end
+    #   end
+    #
+    #   # You can also iterate through events after the response complete.
+    #   # Events are available at
+    #   resp.stream # => Enumerator
+    #   # For parameter input example, please refer to following request syntax.
     #
     # @example Request syntax with placeholder values
     #
@@ -5186,18 +5216,18 @@ module Aws::BedrockAgentRuntime
     # @example Response structure
     #
     #   resp.session_id #=> String
-    #   All events are available at resp.stream:
+    #   # All events are available at resp.stream:
     #   resp.stream #=> Enumerator
     #   resp.stream.event_types #=> [:access_denied_exception, :bad_gateway_exception, :citation, :conflict_exception, :dependency_failed_exception, :guardrail, :internal_server_exception, :output, :resource_not_found_exception, :service_quota_exceeded_exception, :throttling_exception, :validation_exception]
     #
-    #   For :access_denied_exception event available at #on_access_denied_exception_event callback and response eventstream enumerator:
+    #   # For :access_denied_exception event available at #on_access_denied_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :bad_gateway_exception event available at #on_bad_gateway_exception_event callback and response eventstream enumerator:
+    #   # For :bad_gateway_exception event available at #on_bad_gateway_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #   event.resource_name #=> String
     #
-    #   For :citation event available at #on_citation_event callback and response eventstream enumerator:
+    #   # For :citation event available at #on_citation_event callback and response eventstream enumerator:
     #   event.citation.generated_response_part.text_response_part.span.end #=> Integer
     #   event.citation.generated_response_part.text_response_part.span.start #=> Integer
     #   event.citation.generated_response_part.text_response_part.text #=> String
@@ -5241,33 +5271,33 @@ module Aws::BedrockAgentRuntime
     #   event.retrieved_references[0].location.web_location.url #=> String
     #   event.retrieved_references[0].metadata #=> Hash
     #
-    #   For :conflict_exception event available at #on_conflict_exception_event callback and response eventstream enumerator:
+    #   # For :conflict_exception event available at #on_conflict_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :dependency_failed_exception event available at #on_dependency_failed_exception_event callback and response eventstream enumerator:
+    #   # For :dependency_failed_exception event available at #on_dependency_failed_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #   event.resource_name #=> String
     #
-    #   For :guardrail event available at #on_guardrail_event callback and response eventstream enumerator:
+    #   # For :guardrail event available at #on_guardrail_event callback and response eventstream enumerator:
     #   event.action #=> String, one of "INTERVENED", "NONE"
     #
-    #   For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
+    #   # For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #   event.reason #=> String
     #
-    #   For :output event available at #on_output_event callback and response eventstream enumerator:
+    #   # For :output event available at #on_output_event callback and response eventstream enumerator:
     #   event.text #=> String
     #
-    #   For :resource_not_found_exception event available at #on_resource_not_found_exception_event callback and response eventstream enumerator:
+    #   # For :resource_not_found_exception event available at #on_resource_not_found_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :service_quota_exceeded_exception event available at #on_service_quota_exceeded_exception_event callback and response eventstream enumerator:
+    #   # For :service_quota_exceeded_exception event available at #on_service_quota_exceeded_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :throttling_exception event available at #on_throttling_exception_event callback and response eventstream enumerator:
+    #   # For :throttling_exception event available at #on_throttling_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
+    #   # For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/RetrieveAndGenerateStream AWS API Documentation
@@ -5427,7 +5457,7 @@ module Aws::BedrockAgentRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentruntime'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

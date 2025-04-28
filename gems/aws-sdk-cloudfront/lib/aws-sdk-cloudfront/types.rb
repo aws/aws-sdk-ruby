@@ -369,6 +369,99 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @!attribute [rw] id
+    #   The ID of the distribution tenant.
+    #   @return [String]
+    #
+    # @!attribute [rw] web_acl_arn
+    #   The Amazon Resource Name (ARN) of the WAF web ACL to associate.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The current `ETag` of the distribution tenant. This value is
+    #   returned in the response of the `GetDistributionTenant` API
+    #   operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/AssociateDistributionTenantWebACLRequest AWS API Documentation
+    #
+    class AssociateDistributionTenantWebACLRequest < Struct.new(
+      :id,
+      :web_acl_arn,
+      :if_match)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the distribution tenant.
+    #   @return [String]
+    #
+    # @!attribute [rw] web_acl_arn
+    #   The ARN of the WAF web ACL that you associated with the distribution
+    #   tenant.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the distribution tenant.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/AssociateDistributionTenantWebACLResult AWS API Documentation
+    #
+    class AssociateDistributionTenantWebACLResult < Struct.new(
+      :id,
+      :web_acl_arn,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the distribution.
+    #   @return [String]
+    #
+    # @!attribute [rw] web_acl_arn
+    #   The Amazon Resource Name (ARN) of the WAF web ACL to associate.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The value of the `ETag` header that you received when retrieving the
+    #   distribution that you're associating with the WAF web ACL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/AssociateDistributionWebACLRequest AWS API Documentation
+    #
+    class AssociateDistributionWebACLRequest < Struct.new(
+      :id,
+      :web_acl_arn,
+      :if_match)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the distribution.
+    #   @return [String]
+    #
+    # @!attribute [rw] web_acl_arn
+    #   The ARN of the WAF web ACL that you associated with the
+    #   distribution.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the distribution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/AssociateDistributionWebACLResult AWS API Documentation
+    #
+    class AssociateDistributionWebACLResult < Struct.new(
+      :id,
+      :web_acl_arn,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Invalidation batch specified is too large.
     #
     # @!attribute [rw] message
@@ -1197,6 +1290,21 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # The Certificate Manager (ACM) certificate associated with your
+    # distribution.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the ACM certificate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/Certificate AWS API Documentation
+    #
+    class Certificate < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # CloudFront origin access identity.
     #
     # @!attribute [rw] id
@@ -1443,6 +1551,163 @@ module Aws::CloudFront
       :max_items,
       :quantity,
       :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The connection group for your distribution tenants. When you first
+    # create a distribution tenant and you don't specify a connection
+    # group, CloudFront will automatically create a default connection group
+    # for you. When you create a new distribution tenant and don't specify
+    # a connection group, the default one will be associated with your
+    # distribution tenant.
+    #
+    # @!attribute [rw] id
+    #   The ID of the connection group.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the connection group.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the connection group.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The date and time when the connection group was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time when the connection group was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   A complex type that contains zero or more `Tag` elements.
+    #   @return [Types::Tags]
+    #
+    # @!attribute [rw] ipv_6_enabled
+    #   IPv6 is enabled for the connection group.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] routing_endpoint
+    #   The routing endpoint (also known as the DNS name) that is assigned
+    #   to the connection group, such as d111111abcdef8.cloudfront.net.
+    #   @return [String]
+    #
+    # @!attribute [rw] anycast_ip_list_id
+    #   The ID of the Anycast static IP list.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the connection group.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Whether the connection group is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] is_default
+    #   Whether the connection group is the default connection group for the
+    #   distribution tenants.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ConnectionGroup AWS API Documentation
+    #
+    class ConnectionGroup < Struct.new(
+      :id,
+      :name,
+      :arn,
+      :created_time,
+      :last_modified_time,
+      :tags,
+      :ipv_6_enabled,
+      :routing_endpoint,
+      :anycast_ip_list_id,
+      :status,
+      :enabled,
+      :is_default)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about what CloudFront resources your connection
+    # groups are associated with.
+    #
+    # @!attribute [rw] anycast_ip_list_id
+    #   The ID of the Anycast static IP list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ConnectionGroupAssociationFilter AWS API Documentation
+    #
+    class ConnectionGroupAssociationFilter < Struct.new(
+      :anycast_ip_list_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary that contains details about your connection groups.
+    #
+    # @!attribute [rw] id
+    #   The ID of the connection group.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the connection group.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the connection group.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_endpoint
+    #   The routing endpoint (also known as the DNS name) that is assigned
+    #   to the connection group, such as d111111abcdef8.cloudfront.net.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The date and time when the connection group was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time when the connection group was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the connection group.
+    #   @return [String]
+    #
+    # @!attribute [rw] anycast_ip_list_id
+    #   The ID of the Anycast static IP list.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Whether the connection group is enabled
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] status
+    #   The status of the connection group.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_default
+    #   Whether the connection group is the default connection group for the
+    #   distribution tenants.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ConnectionGroupSummary AWS API Documentation
+    #
+    class ConnectionGroupSummary < Struct.new(
+      :id,
+      :name,
+      :arn,
+      :routing_endpoint,
+      :created_time,
+      :last_modified_time,
+      :etag,
+      :anycast_ip_list_id,
+      :enabled,
+      :status,
+      :is_default)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1882,7 +2147,7 @@ module Aws::CloudFront
     #
     # @!attribute [rw] ip_count
     #   The number of static IP addresses that are allocated to the Anycast
-    #   static IP list.
+    #   static IP list. Valid values: 21 or 3.
     #   @return [Integer]
     #
     # @!attribute [rw] tags
@@ -2000,6 +2265,63 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   The name of the connection group. Enter a friendly identifier that
+    #   is unique within your Amazon Web Services account. This name can't
+    #   be updated after you create the connection group.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv_6_enabled
+    #   Enable IPv6 for the connection group. The default is `true`. For
+    #   more information, see [Enable IPv6][1] in the *Amazon CloudFront
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesEnableIPv6
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tags
+    #   A complex type that contains zero or more `Tag` elements.
+    #   @return [Types::Tags]
+    #
+    # @!attribute [rw] anycast_ip_list_id
+    #   The ID of the Anycast static IP list.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Enable the connection group.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateConnectionGroupRequest AWS API Documentation
+    #
+    class CreateConnectionGroupRequest < Struct.new(
+      :name,
+      :ipv_6_enabled,
+      :tags,
+      :anycast_ip_list_id,
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connection_group
+    #   The connection group that you created.
+    #   @return [Types::ConnectionGroup]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the connection group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateConnectionGroupResult AWS API Documentation
+    #
+    class CreateConnectionGroupResult < Struct.new(
+      :connection_group,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] continuous_deployment_policy_config
     #   Contains the configuration for a continuous deployment policy.
     #   @return [Types::ContinuousDeploymentPolicyConfig]
@@ -2069,6 +2391,91 @@ module Aws::CloudFront
     class CreateDistributionResult < Struct.new(
       :distribution,
       :location,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] distribution_id
+    #   The ID of the multi-tenant distribution to use for creating the
+    #   distribution tenant.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the distribution tenant. Enter a friendly identifier
+    #   that is unique within your Amazon Web Services account. This name
+    #   can't be updated after you create the distribution tenant.
+    #   @return [String]
+    #
+    # @!attribute [rw] domains
+    #   The domains associated with the distribution tenant. You must
+    #   specify at least one domain in the request.
+    #   @return [Array<Types::DomainItem>]
+    #
+    # @!attribute [rw] tags
+    #   A complex type that contains zero or more `Tag` elements.
+    #   @return [Types::Tags]
+    #
+    # @!attribute [rw] customizations
+    #   Customizations for the distribution tenant. For each distribution
+    #   tenant, you can specify the geographic restrictions, and the Amazon
+    #   Resource Names (ARNs) for the ACM certificate and WAF web ACL. These
+    #   are specific values that you can override or disable from the
+    #   multi-tenant distribution that was used to create the distribution
+    #   tenant.
+    #   @return [Types::Customizations]
+    #
+    # @!attribute [rw] parameters
+    #   A list of parameter values to add to the resource. A parameter is
+    #   specified as a key-value pair. A valid parameter value must exist
+    #   for any parameter that is marked as required in the multi-tenant
+    #   distribution.
+    #   @return [Array<Types::Parameter>]
+    #
+    # @!attribute [rw] connection_group_id
+    #   The ID of the connection group to associate with the distribution
+    #   tenant.
+    #   @return [String]
+    #
+    # @!attribute [rw] managed_certificate_request
+    #   The configuration for the CloudFront managed ACM certificate
+    #   request.
+    #   @return [Types::ManagedCertificateRequest]
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether the distribution tenant should be enabled when
+    #   created. If the distribution tenant is disabled, the distribution
+    #   tenant won't serve traffic.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateDistributionTenantRequest AWS API Documentation
+    #
+    class CreateDistributionTenantRequest < Struct.new(
+      :distribution_id,
+      :name,
+      :domains,
+      :tags,
+      :customizations,
+      :parameters,
+      :connection_group_id,
+      :managed_certificate_request,
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] distribution_tenant
+    #   The distribution tenant that you created.
+    #   @return [Types::DistributionTenant]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the distribution tenant.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateDistributionTenantResult AWS API Documentation
+    #
+    class CreateDistributionTenantResult < Struct.new(
+      :distribution_tenant,
       :etag)
       SENSITIVE = []
       include Aws::Structure
@@ -2234,6 +2641,40 @@ module Aws::CloudFront
       :function_summary,
       :location,
       :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the distribution tenant.
+    #   @return [String]
+    #
+    # @!attribute [rw] invalidation_batch
+    #   An invalidation batch.
+    #   @return [Types::InvalidationBatch]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateInvalidationForDistributionTenantRequest AWS API Documentation
+    #
+    class CreateInvalidationForDistributionTenantRequest < Struct.new(
+      :id,
+      :invalidation_batch)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] location
+    #   The location for the invalidation.
+    #   @return [String]
+    #
+    # @!attribute [rw] invalidation
+    #   An invalidation.
+    #   @return [Types::Invalidation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateInvalidationForDistributionTenantResult AWS API Documentation
+    #
+    class CreateInvalidationForDistributionTenantResult < Struct.new(
+      :location,
+      :invalidation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2939,6 +3380,35 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # Customizations for the distribution tenant. For each distribution
+    # tenant, you can specify the geographic restrictions, and the Amazon
+    # Resource Names (ARNs) for the ACM certificate and WAF web ACL. These
+    # are specific values that you can override or disable from the
+    # multi-tenant distribution that was used to create the distribution
+    # tenant.
+    #
+    # @!attribute [rw] web_acl
+    #   The WAF web ACL.
+    #   @return [Types::WebAclCustomization]
+    #
+    # @!attribute [rw] certificate
+    #   The Certificate Manager (ACM) certificate.
+    #   @return [Types::Certificate]
+    #
+    # @!attribute [rw] geo_restrictions
+    #   The geographic restrictions.
+    #   @return [Types::GeoRestrictionCustomization]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/Customizations AWS API Documentation
+    #
+    class Customizations < Struct.new(
+      :web_acl,
+      :certificate,
+      :geo_restrictions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A complex type that describes the default cache behavior if you don't
     # specify a `CacheBehavior` element or if request URLs don't match any
     # of the values of `PathPattern` in `CacheBehavior` elements. You must
@@ -3308,6 +3778,24 @@ module Aws::CloudFront
     end
 
     # @!attribute [rw] id
+    #   The ID of the connection group to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The value of the `ETag` header that you received when retrieving the
+    #   connection group to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteConnectionGroupRequest AWS API Documentation
+    #
+    class DeleteConnectionGroupRequest < Struct.new(
+      :id,
+      :if_match)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
     #   The identifier of the continuous deployment policy that you are
     #   deleting.
     #   @return [String]
@@ -3382,6 +3870,25 @@ module Aws::CloudFront
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteDistributionRequest AWS API Documentation
     #
     class DeleteDistributionRequest < Struct.new(
+      :id,
+      :if_match)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the distribution tenant to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The value of the `ETag` header that you received when retrieving the
+    #   distribution tenant. This value is returned in the response of the
+    #   `GetDistributionTenant` API operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteDistributionTenantRequest AWS API Documentation
+    #
+    class DeleteDistributionTenantRequest < Struct.new(
       :id,
       :if_match)
       SENSITIVE = []
@@ -3711,6 +4218,78 @@ module Aws::CloudFront
     #
     class DescribeKeyValueStoreResult < Struct.new(
       :key_value_store,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the distribution tenant.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The current version of the distribution tenant that you're
+    #   disassociating from the WAF web ACL. This is the `ETag` value
+    #   returned in the response to the `GetDistributionTenant` API
+    #   operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DisassociateDistributionTenantWebACLRequest AWS API Documentation
+    #
+    class DisassociateDistributionTenantWebACLRequest < Struct.new(
+      :id,
+      :if_match)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the distribution tenant.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the distribution tenant.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DisassociateDistributionTenantWebACLResult AWS API Documentation
+    #
+    class DisassociateDistributionTenantWebACLResult < Struct.new(
+      :id,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the distribution.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The value of the `ETag` header that you received when retrieving the
+    #   distribution that you're disassociating from the WAF web ACL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DisassociateDistributionWebACLRequest AWS API Documentation
+    #
+    class DisassociateDistributionWebACLRequest < Struct.new(
+      :id,
+      :if_match)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the distribution.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the distribution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DisassociateDistributionWebACLResult AWS API Documentation
+    #
+    class DisassociateDistributionWebACLResult < Struct.new(
+      :id,
       :etag)
       SENSITIVE = []
       include Aws::Structure
@@ -4066,6 +4645,14 @@ module Aws::CloudFront
     #   distribution.
     #   @return [String]
     #
+    # @!attribute [rw] tenant_config
+    #   A distribution tenant configuration.
+    #   @return [Types::TenantConfig]
+    #
+    # @!attribute [rw] connection_mode
+    #   The connection mode to filter distributions by.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DistributionConfig AWS API Documentation
     #
     class DistributionConfig < Struct.new(
@@ -4088,7 +4675,9 @@ module Aws::CloudFront
       :is_ipv6_enabled,
       :continuous_deployment_policy_id,
       :staging,
-      :anycast_ip_list_id)
+      :anycast_ip_list_id,
+      :tenant_config,
+      :connection_mode)
       SENSITIVE = [:comment]
       include Aws::Structure
     end
@@ -4218,6 +4807,25 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # The IDs for the distribution resources.
+    #
+    # @!attribute [rw] distribution_id
+    #   The ID of the multi-tenant distribution.
+    #   @return [String]
+    #
+    # @!attribute [rw] distribution_tenant_id
+    #   The ID of the distribution tenant.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DistributionResourceId AWS API Documentation
+    #
+    class DistributionResourceId < Struct.new(
+      :distribution_id,
+      :distribution_tenant_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A summary of the information about a CloudFront distribution.
     #
     # @!attribute [rw] id
@@ -4228,6 +4836,10 @@ module Aws::CloudFront
     #   The ARN (Amazon Resource Name) for the distribution. For example:
     #   `arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5`,
     #   where `123456789012` is your Amazon Web Services account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the distribution.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -4338,6 +4950,10 @@ module Aws::CloudFront
     #   value is `false`, this is not a staging distribution.
     #   @return [Boolean]
     #
+    # @!attribute [rw] connection_mode
+    #   The connection mode to filter distributions by.
+    #   @return [String]
+    #
     # @!attribute [rw] anycast_ip_list_id
     #   ID of the Anycast static IP list that is associated with the
     #   distribution.
@@ -4348,6 +4964,7 @@ module Aws::CloudFront
     class DistributionSummary < Struct.new(
       :id,
       :arn,
+      :etag,
       :status,
       :last_modified_time,
       :domain_name,
@@ -4367,7 +4984,293 @@ module Aws::CloudFront
       :is_ipv6_enabled,
       :alias_icp_recordals,
       :staging,
+      :connection_mode,
       :anycast_ip_list_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The distribution tenant.
+    #
+    # @!attribute [rw] id
+    #   The ID of the distribution tenant.
+    #   @return [String]
+    #
+    # @!attribute [rw] distribution_id
+    #   The ID of the multi-tenant distribution.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the distribution tenant.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the distribution tenant.
+    #   @return [String]
+    #
+    # @!attribute [rw] domains
+    #   The domains associated with the distribution tenant.
+    #   @return [Array<Types::DomainResult>]
+    #
+    # @!attribute [rw] tags
+    #   A complex type that contains zero or more `Tag` elements.
+    #   @return [Types::Tags]
+    #
+    # @!attribute [rw] customizations
+    #   Customizations for the distribution tenant. For each distribution
+    #   tenant, you can specify the geographic restrictions, and the Amazon
+    #   Resource Names (ARNs) for the ACM certificate and WAF web ACL. These
+    #   are specific values that you can override or disable from the
+    #   multi-tenant distribution that was used to create the distribution
+    #   tenant.
+    #   @return [Types::Customizations]
+    #
+    # @!attribute [rw] parameters
+    #   A list of parameter values to add to the resource. A parameter is
+    #   specified as a key-value pair. A valid parameter value must exist
+    #   for any parameter that is marked as required in the multi-tenant
+    #   distribution.
+    #   @return [Array<Types::Parameter>]
+    #
+    # @!attribute [rw] connection_group_id
+    #   The ID of the connection group for the distribution tenant. If you
+    #   don't specify a connection group, CloudFront uses the default
+    #   connection group.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The date and time when the distribution tenant was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time when the distribution tenant was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether the distribution tenant is in an enabled state. If
+    #   disabled, the distribution tenant won't serve traffic.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] status
+    #   The status of the distribution tenant.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DistributionTenant AWS API Documentation
+    #
+    class DistributionTenant < Struct.new(
+      :id,
+      :distribution_id,
+      :name,
+      :arn,
+      :domains,
+      :tags,
+      :customizations,
+      :parameters,
+      :connection_group_id,
+      :created_time,
+      :last_modified_time,
+      :enabled,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filter by the associated distribution ID or connection group ID.
+    #
+    # @!attribute [rw] distribution_id
+    #   The distribution ID to filter by. You can find distribution tenants
+    #   associated with a specific distribution.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_group_id
+    #   The ID of the connection group to filter by. You can find
+    #   distribution tenants associated with a specific connection group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DistributionTenantAssociationFilter AWS API Documentation
+    #
+    class DistributionTenantAssociationFilter < Struct.new(
+      :distribution_id,
+      :connection_group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of the information about a distribution tenant.
+    #
+    # @!attribute [rw] id
+    #   The ID of the distribution tenant.
+    #   @return [String]
+    #
+    # @!attribute [rw] distribution_id
+    #   The identifier for the multi-tenant distribution. For example:
+    #   `EDFDVBD632BHDS5`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the distribution tenant.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the distribution tenant.
+    #   @return [String]
+    #
+    # @!attribute [rw] domains
+    #   The domains associated with the distribution tenant.
+    #   @return [Array<Types::DomainResult>]
+    #
+    # @!attribute [rw] connection_group_id
+    #   The ID of the connection group ID for the distribution tenant. If
+    #   you don't specify a connection group, CloudFront uses the default
+    #   connection group.
+    #   @return [String]
+    #
+    # @!attribute [rw] customizations
+    #   Customizations for the distribution tenant. For each distribution
+    #   tenant, you can specify the geographic restrictions, and the Amazon
+    #   Resource Names (ARNs) for the ACM certificate and WAF web ACL. These
+    #   are specific values that you can override or disable from the
+    #   multi-tenant distribution that was used to create the distribution
+    #   tenant.
+    #   @return [Types::Customizations]
+    #
+    # @!attribute [rw] created_time
+    #   The date and time when the distribution tenant was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time when the distribution tenant was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the distribution tenant.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether the distribution tenants are in an enabled state.
+    #   If disabled, the distribution tenant won't service traffic.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] status
+    #   The status of the distribution tenant.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DistributionTenantSummary AWS API Documentation
+    #
+    class DistributionTenantSummary < Struct.new(
+      :id,
+      :distribution_id,
+      :name,
+      :arn,
+      :domains,
+      :connection_group_id,
+      :customizations,
+      :created_time,
+      :last_modified_time,
+      :etag,
+      :enabled,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The DNS configuration for your domain names.
+    #
+    # @!attribute [rw] domain
+    #   The domain name that you're verifying.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of your domain name.
+    #
+    #   * `valid-configuration`: The domain name is correctly configured and
+    #     points to the correct routing endpoint of the connection group.
+    #
+    #   * `invalid-configuration`: There is either a missing DNS record or
+    #     the DNS record exists but it's using an incorrect routing
+    #     endpoint. Update the DNS record to point to the correct routing
+    #     endpoint.
+    #
+    #   * `unknown-configuration`: CloudFront can't validate your DNS
+    #     configuration. This status can appear if CloudFront can't verify
+    #     the DNS record, or the DNS lookup request failed or timed out.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   Explains the status of the DNS configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DnsConfiguration AWS API Documentation
+    #
+    class DnsConfiguration < Struct.new(
+      :domain,
+      :status,
+      :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the domain conflict. Use this information
+    # to determine the affected domain, the related resource, and the
+    # affected Amazon Web Services account.
+    #
+    # @!attribute [rw] domain
+    #   The domain used to find existing conflicts for domain
+    #   configurations.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The CloudFront resource type that has a domain conflict.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource that has a domain conflict.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account for the domain conflict.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DomainConflict AWS API Documentation
+    #
+    class DomainConflict < Struct.new(
+      :domain,
+      :resource_type,
+      :resource_id,
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The domain for the specified distribution tenant.
+    #
+    # @!attribute [rw] domain
+    #   The domain name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DomainItem AWS API Documentation
+    #
+    class DomainItem < Struct.new(
+      :domain)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details about the domain result.
+    #
+    # @!attribute [rw] domain
+    #   The specified domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Whether the domain is active or inactive.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DomainResult AWS API Documentation
+    #
+    class DomainResult < Struct.new(
+      :domain,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4428,8 +5331,8 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # Contains information about the Amazon Kinesis data stream where you
-    # are sending real-time log data in a real-time log configuration.
+    # Contains information about the Amazon Kinesis data stream where
+    # you're sending real-time log data in a real-time log configuration.
     #
     # @!attribute [rw] stream_type
     #   The type of data stream where you are sending real-time log data.
@@ -4438,7 +5341,7 @@ module Aws::CloudFront
     #
     # @!attribute [rw] kinesis_stream_config
     #   Contains information about the Amazon Kinesis data stream where you
-    #   are sending real-time log data.
+    #   are sending real-time log data in a real-time log configuration.
     #   @return [Types::KinesisStreamConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/EndPoint AWS API Documentation
@@ -5266,6 +6169,36 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # The customizations that you specified for the distribution tenant for
+    # geographic restrictions.
+    #
+    # @!attribute [rw] restriction_type
+    #   The method that you want to use to restrict distribution of your
+    #   content by country:
+    #
+    #   * `none`: No geographic restriction is enabled, meaning access to
+    #     content is not restricted by client geo location.
+    #
+    #   * `blacklist`: The `Location` elements specify the countries in
+    #     which you don't want CloudFront to distribute your content.
+    #
+    #   * `whitelist`: The `Location` elements specify the countries in
+    #     which you want CloudFront to distribute your content.
+    #   @return [String]
+    #
+    # @!attribute [rw] locations
+    #   The locations for geographic restrictions.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GeoRestrictionCustomization AWS API Documentation
+    #
+    class GeoRestrictionCustomization < Struct.new(
+      :restriction_type,
+      :locations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] id
     #   The ID of the Anycast static IP list.
     #   @return [String]
@@ -5435,6 +6368,70 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @!attribute [rw] routing_endpoint
+    #   The routing endpoint for the target connection group, such as
+    #   d111111abcdef8.cloudfront.net.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetConnectionGroupByRoutingEndpointRequest AWS API Documentation
+    #
+    class GetConnectionGroupByRoutingEndpointRequest < Struct.new(
+      :routing_endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connection_group
+    #   The connection group for your distribution tenants. When you first
+    #   create a distribution tenant and you don't specify a connection
+    #   group, CloudFront will automatically create a default connection
+    #   group for you. When you create a new distribution tenant and don't
+    #   specify a connection group, the default one will be associated with
+    #   your distribution tenant.
+    #   @return [Types::ConnectionGroup]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the connection group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetConnectionGroupByRoutingEndpointResult AWS API Documentation
+    #
+    class GetConnectionGroupByRoutingEndpointResult < Struct.new(
+      :connection_group,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The ID, name, or Amazon Resource Name (ARN) of the connection group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetConnectionGroupRequest AWS API Documentation
+    #
+    class GetConnectionGroupRequest < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connection_group
+    #   The connection group that you retrieved.
+    #   @return [Types::ConnectionGroup]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the connection group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetConnectionGroupResult AWS API Documentation
+    #
+    class GetConnectionGroupResult < Struct.new(
+      :connection_group,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] id
     #   The identifier of the continuous deployment policy whose
     #   configuration you are getting.
@@ -5562,6 +6559,65 @@ module Aws::CloudFront
     #
     class GetDistributionResult < Struct.new(
       :distribution,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain
+    #   A domain name associated with the target distribution tenant.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetDistributionTenantByDomainRequest AWS API Documentation
+    #
+    class GetDistributionTenantByDomainRequest < Struct.new(
+      :domain)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] distribution_tenant
+    #   The distribution tenant.
+    #   @return [Types::DistributionTenant]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the distribution tenant.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetDistributionTenantByDomainResult AWS API Documentation
+    #
+    class GetDistributionTenantByDomainResult < Struct.new(
+      :distribution_tenant,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The ID of the distribution tenant. You can specify the ARN ID, or
+    #   name of the distribution tenant.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetDistributionTenantRequest AWS API Documentation
+    #
+    class GetDistributionTenantRequest < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] distribution_tenant
+    #   The distribution tenant that you retrieved.
+    #   @return [Types::DistributionTenant]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the distribution tenant.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetDistributionTenantResult AWS API Documentation
+    #
+    class GetDistributionTenantResult < Struct.new(
+      :distribution_tenant,
       :etag)
       SENSITIVE = []
       include Aws::Structure
@@ -5730,6 +6786,35 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @!attribute [rw] distribution_tenant_id
+    #   The ID of the distribution tenant.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the invalidation to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetInvalidationForDistributionTenantRequest AWS API Documentation
+    #
+    class GetInvalidationForDistributionTenantRequest < Struct.new(
+      :distribution_tenant_id,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] invalidation
+    #   An invalidation.
+    #   @return [Types::Invalidation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetInvalidationForDistributionTenantResult AWS API Documentation
+    #
+    class GetInvalidationForDistributionTenantResult < Struct.new(
+      :invalidation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request to get an invalidation's information.
     #
     # @!attribute [rw] distribution_id
@@ -5825,6 +6910,30 @@ module Aws::CloudFront
     class GetKeyGroupResult < Struct.new(
       :key_group,
       :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The identifier of the multi-tenant distribution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetManagedCertificateDetailsRequest AWS API Documentation
+    #
+    class GetManagedCertificateDetailsRequest < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] managed_certificate_details
+    #   Contains details about the CloudFront managed ACM certificate.
+    #   @return [Types::ManagedCertificateDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetManagedCertificateDetailsResult AWS API Documentation
+    #
+    class GetManagedCertificateDetailsResult < Struct.new(
+      :managed_certificate_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6385,6 +7494,19 @@ module Aws::CloudFront
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InvalidArgument AWS API Documentation
     #
     class InvalidArgument < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified CloudFront resource can't be associated.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InvalidAssociation AWS API Documentation
+    #
+    class InvalidAssociation < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -7428,6 +8550,47 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @!attribute [rw] association_filter
+    #   Filter by associated Anycast IP list ID.
+    #   @return [Types::ConnectionGroupAssociationFilter]
+    #
+    # @!attribute [rw] marker
+    #   The marker for the next set of connection groups to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of connection groups to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListConnectionGroupsRequest AWS API Documentation
+    #
+    class ListConnectionGroupsRequest < Struct.new(
+      :association_filter,
+      :marker,
+      :max_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_marker
+    #   A token used for pagination of results returned in the response. You
+    #   can use the token from the previous request to define where the
+    #   current request should begin.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_groups
+    #   The list of connection groups that you retrieved.
+    #   @return [Array<Types::ConnectionGroupSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListConnectionGroupsResult AWS API Documentation
+    #
+    class ListConnectionGroupsResult < Struct.new(
+      :next_marker,
+      :connection_groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] marker
     #   Use this field when paginating results to indicate where to begin in
     #   your list of continuous deployment policies. The response includes
@@ -7458,6 +8621,94 @@ module Aws::CloudFront
     #
     class ListContinuousDeploymentPoliciesResult < Struct.new(
       :continuous_deployment_policy_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] web_acl_arn
+    #   Filter by the ARN of the associated WAF web ACL.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_arn
+    #   Filter by the ARN of the associated ACM certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   The marker for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of distribution tenants to return by the
+    #   specified customization.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionTenantsByCustomizationRequest AWS API Documentation
+    #
+    class ListDistributionTenantsByCustomizationRequest < Struct.new(
+      :web_acl_arn,
+      :certificate_arn,
+      :marker,
+      :max_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_marker
+    #   A token used for pagination of results returned in the response. You
+    #   can use the token from the previous request to define where the
+    #   current request should begin.
+    #   @return [String]
+    #
+    # @!attribute [rw] distribution_tenant_list
+    #   A list of distribution tenants with the specified customization.
+    #   @return [Array<Types::DistributionTenantSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionTenantsByCustomizationResult AWS API Documentation
+    #
+    class ListDistributionTenantsByCustomizationResult < Struct.new(
+      :next_marker,
+      :distribution_tenant_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] association_filter
+    #   Filter by the associated distribution ID or connection group ID.
+    #   @return [Types::DistributionTenantAssociationFilter]
+    #
+    # @!attribute [rw] marker
+    #   The marker for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of distribution tenants to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionTenantsRequest AWS API Documentation
+    #
+    class ListDistributionTenantsRequest < Struct.new(
+      :association_filter,
+      :marker,
+      :max_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_marker
+    #   A token used for pagination of results returned in the response. You
+    #   can use the token from the previous request to define where the
+    #   current request should begin.
+    #   @return [String]
+    #
+    # @!attribute [rw] distribution_tenant_list
+    #   The list of distribution tenants that you retrieved.
+    #   @return [Array<Types::DistributionTenantSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionTenantsResult AWS API Documentation
+    #
+    class ListDistributionTenantsResult < Struct.new(
+      :next_marker,
+      :distribution_tenant_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7537,6 +8788,40 @@ module Aws::CloudFront
     #
     class ListDistributionsByCachePolicyIdResult < Struct.new(
       :distribution_id_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] marker
+    #   The marker for the next set of distributions to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of distributions to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] connection_mode
+    #   The connection mode to filter distributions by.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByConnectionModeRequest AWS API Documentation
+    #
+    class ListDistributionsByConnectionModeRequest < Struct.new(
+      :marker,
+      :max_items,
+      :connection_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] distribution_list
+    #   A distribution list.
+    #   @return [Types::DistributionList]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByConnectionModeResult AWS API Documentation
+    #
+    class ListDistributionsByConnectionModeResult < Struct.new(
+      :distribution_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7834,6 +9119,54 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @!attribute [rw] domain
+    #   The domain to check for conflicts.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_control_validation_resource
+    #   The distribution resource identifier. This can be the distribution
+    #   or distribution tenant that has a valid certificate, which covers
+    #   the domain that you specify.
+    #   @return [Types::DistributionResourceId]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of domain conflicts to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   The marker for the next set of domain conflicts.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDomainConflictsRequest AWS API Documentation
+    #
+    class ListDomainConflictsRequest < Struct.new(
+      :domain,
+      :domain_control_validation_resource,
+      :max_items,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_conflicts
+    #   Contains details about the domain conflicts.
+    #   @return [Array<Types::DomainConflict>]
+    #
+    # @!attribute [rw] next_marker
+    #   A token used for pagination of results returned in the response. You
+    #   can use the token from the previous request to define where the
+    #   current request should begin.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDomainConflictsResult AWS API Documentation
+    #
+    class ListDomainConflictsResult < Struct.new(
+      :domain_conflicts,
+      :next_marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] marker
     #   Use this when paginating results to indicate where to begin in your
     #   list of configurations. The results include configurations in the
@@ -7940,6 +9273,55 @@ module Aws::CloudFront
     #
     class ListFunctionsResult < Struct.new(
       :function_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the distribution tenant.
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   Use this parameter when paginating results to indicate where to
+    #   begin in your list of invalidation batches. Because the results are
+    #   returned in decreasing order from most recent to oldest, the most
+    #   recent results are on the first page, the second page will contain
+    #   earlier results, and so on. To get the next page of results, set
+    #   `Marker` to the value of the `NextMarker` from the current page's
+    #   response. This value is the same as the ID of the last invalidation
+    #   batch on that page.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of invalidations to return for the distribution
+    #   tenant.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListInvalidationsForDistributionTenantRequest AWS API Documentation
+    #
+    class ListInvalidationsForDistributionTenantRequest < Struct.new(
+      :id,
+      :marker,
+      :max_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] invalidation_list
+    #   The `InvalidationList` complex type describes the list of
+    #   invalidation objects. For more information about invalidation, see
+    #   [Invalidating Objects (Web Distributions Only)][1] in the *Amazon
+    #   CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html
+    #   @return [Types::InvalidationList]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListInvalidationsForDistributionTenantResult AWS API Documentation
+    #
+    class ListInvalidationsForDistributionTenantResult < Struct.new(
+      :invalidation_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8400,6 +9782,109 @@ module Aws::CloudFront
       :include_cookies,
       :bucket,
       :prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about the CloudFront managed ACM certificate.
+    #
+    # @!attribute [rw] certificate_arn
+    #   The ARN of the CloudFront managed ACM certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_status
+    #   The status of the CloudFront managed ACM certificate.
+    #
+    #   <note markdown="1"> Your distribution tenant will be updated with the latest certificate
+    #   status. When calling the [UpdateDistributionTenant][1] operation,
+    #   use the latest value for the `ETag`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistributionTenant.html
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_token_host
+    #   Contains details about the validation token host of the specified
+    #   CloudFront managed ACM certificate.
+    #
+    #   * For `cloudfront`, CloudFront will automatically serve the
+    #     validation token. Choose this mode if you can point the domain's
+    #     DNS to CloudFront immediately.
+    #
+    #   * For `self-hosted`, you serve the validation token from your
+    #     existing infrastructure. Choose this mode when you need to
+    #     maintain current traffic flow while your certificate is being
+    #     issued. You can place the validation token at the well-known path
+    #     on your existing web server, wait for ACM to validate and issue
+    #     the certificate, and then update your DNS to point to CloudFront.
+    #
+    #   <note markdown="1"> This setting only affects the initial certificate request. Once the
+    #   DNS points to CloudFront, all future certificate renewals are
+    #   automatically handled through CloudFront.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_token_details
+    #   Contains details about the validation token of the specified
+    #   CloudFront managed ACM certificate.
+    #   @return [Array<Types::ValidationTokenDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ManagedCertificateDetails AWS API Documentation
+    #
+    class ManagedCertificateDetails < Struct.new(
+      :certificate_arn,
+      :certificate_status,
+      :validation_token_host,
+      :validation_token_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents the request for the Amazon CloudFront
+    # managed ACM certificate.
+    #
+    # @!attribute [rw] validation_token_host
+    #   Specify how the HTTP validation token will be served when requesting
+    #   the CloudFront managed ACM certificate.
+    #
+    #   * For `cloudfront`, CloudFront will automatically serve the
+    #     validation token. Choose this mode if you can point the domain's
+    #     DNS to CloudFront immediately.
+    #
+    #   * For `self-hosted`, you serve the validation token from your
+    #     existing infrastructure. Choose this mode when you need to
+    #     maintain current traffic flow while your certificate is being
+    #     issued. You can place the validation token at the well-known path
+    #     on your existing web server, wait for ACM to validate and issue
+    #     the certificate, and then update your DNS to point to CloudFront.
+    #   @return [String]
+    #
+    # @!attribute [rw] primary_domain_name
+    #   The primary domain name associated with the CloudFront managed ACM
+    #   certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_transparency_logging_preference
+    #   You can opt out of certificate transparency logging by specifying
+    #   the `disabled` option. Opt in by specifying `enabled`. For more
+    #   information, see [Certificate Transparency Logging ][1] in the
+    #   *Certificate Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ManagedCertificateRequest AWS API Documentation
+    #
+    class ManagedCertificateRequest < Struct.new(
+      :validation_token_host,
+      :primary_domain_name,
+      :certificate_transparency_logging_preference)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9593,6 +11078,64 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # A list of parameter values to add to the resource. A parameter is
+    # specified as a key-value pair. A valid parameter value must exist for
+    # any parameter that is marked as required in the multi-tenant
+    # distribution.
+    #
+    # @!attribute [rw] name
+    #   The parameter name.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The parameter value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/Parameter AWS API Documentation
+    #
+    class Parameter < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of parameter values to add to the resource. A parameter is
+    # specified as a key-value pair. A valid parameter value must exist for
+    # any parameter that is marked as required in the multi-tenant
+    # distribution.
+    #
+    # @!attribute [rw] name
+    #   The name of the parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] definition
+    #   The value that you assigned to the parameter.
+    #   @return [Types::ParameterDefinitionSchema]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ParameterDefinition AWS API Documentation
+    #
+    class ParameterDefinition < Struct.new(
+      :name,
+      :definition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains information about the parameter definition.
+    #
+    # @!attribute [rw] string_schema
+    #   An object that contains information about the string schema.
+    #   @return [Types::StringSchemaConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ParameterDefinitionSchema AWS API Documentation
+    #
+    class ParameterDefinitionSchema < Struct.new(
+      :string_schema)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This object determines the values that CloudFront includes in the
     # cache key. These values can include HTTP headers, cookies, and URL
     # query strings. CloudFront uses the cache key to find an object in its
@@ -10248,6 +11791,19 @@ module Aws::CloudFront
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ResourceInUse AWS API Documentation
     #
     class ResourceInUse < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified CloudFront resource hasn't been disabled yet.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ResourceNotDisabled AWS API Documentation
+    #
+    class ResourceNotDisabled < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -11750,6 +13306,30 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # The configuration for a string schema.
+    #
+    # @!attribute [rw] comment
+    #   A comment to describe the parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_value
+    #   The default value of the parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] required
+    #   Whether the defined parameter is required.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/StringSchemaConfig AWS API Documentation
+    #
+    class StringSchemaConfig < Struct.new(
+      :comment,
+      :default_value,
+      :required)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A complex type that contains `Tag` key and `Tag` value.
     #
     # @!attribute [rw] key
@@ -11820,6 +13400,20 @@ module Aws::CloudFront
     #
     class Tags < Struct.new(
       :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for a distribution tenant.
+    #
+    # @!attribute [rw] parameter_definitions
+    #   The parameters that you specify for a distribution tenant.
+    #   @return [Array<Types::ParameterDefinition>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TenantConfig AWS API Documentation
+    #
+    class TenantConfig < Struct.new(
+      :parameter_definitions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13021,6 +14615,61 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @!attribute [rw] id
+    #   The ID of the connection group.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv_6_enabled
+    #   Enable IPv6 for the connection group. For more information, see
+    #   [Enable IPv6][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesEnableIPv6
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] if_match
+    #   The value of the `ETag` header that you received when retrieving the
+    #   connection group that you're updating.
+    #   @return [String]
+    #
+    # @!attribute [rw] anycast_ip_list_id
+    #   The ID of the Anycast static IP list.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Whether the connection group is enabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateConnectionGroupRequest AWS API Documentation
+    #
+    class UpdateConnectionGroupRequest < Struct.new(
+      :id,
+      :ipv_6_enabled,
+      :if_match,
+      :anycast_ip_list_id,
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connection_group
+    #   The connection group that you updated.
+    #   @return [Types::ConnectionGroup]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the connection group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateConnectionGroupResult AWS API Documentation
+    #
+    class UpdateConnectionGroupResult < Struct.new(
+      :connection_group,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] continuous_deployment_policy_config
     #   The continuous deployment policy configuration.
     #   @return [Types::ContinuousDeploymentPolicyConfig]
@@ -13109,6 +14758,90 @@ module Aws::CloudFront
     end
 
     # @!attribute [rw] id
+    #   The ID of the distribution tenant.
+    #   @return [String]
+    #
+    # @!attribute [rw] distribution_id
+    #   The ID for the multi-tenant distribution.
+    #   @return [String]
+    #
+    # @!attribute [rw] domains
+    #   The domains to update for the distribution tenant. A domain object
+    #   can contain only a domain property. You must specify at least one
+    #   domain. Each distribution tenant can have up to 5 domains.
+    #   @return [Array<Types::DomainItem>]
+    #
+    # @!attribute [rw] customizations
+    #   Customizations for the distribution tenant. For each distribution
+    #   tenant, you can specify the geographic restrictions, and the Amazon
+    #   Resource Names (ARNs) for the ACM certificate and WAF web ACL. These
+    #   are specific values that you can override or disable from the
+    #   multi-tenant distribution that was used to create the distribution
+    #   tenant.
+    #   @return [Types::Customizations]
+    #
+    # @!attribute [rw] parameters
+    #   A list of parameter values to add to the resource. A parameter is
+    #   specified as a key-value pair. A valid parameter value must exist
+    #   for any parameter that is marked as required in the multi-tenant
+    #   distribution.
+    #   @return [Array<Types::Parameter>]
+    #
+    # @!attribute [rw] connection_group_id
+    #   The ID of the target connection group.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The value of the `ETag` header that you received when retrieving the
+    #   distribution tenant to update. This value is returned in the
+    #   response of the `GetDistributionTenant` API operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] managed_certificate_request
+    #   An object that contains the CloudFront managed ACM certificate
+    #   request.
+    #   @return [Types::ManagedCertificateRequest]
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether the distribution tenant should be updated to an
+    #   enabled state. If you update the distribution tenant and it's not
+    #   enabled, the distribution tenant won't serve traffic.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateDistributionTenantRequest AWS API Documentation
+    #
+    class UpdateDistributionTenantRequest < Struct.new(
+      :id,
+      :distribution_id,
+      :domains,
+      :customizations,
+      :parameters,
+      :connection_group_id,
+      :if_match,
+      :managed_certificate_request,
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] distribution_tenant
+    #   The distribution tenant that you're updating.
+    #   @return [Types::DistributionTenant]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the distribution tenant.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateDistributionTenantResult AWS API Documentation
+    #
+    class UpdateDistributionTenantResult < Struct.new(
+      :distribution_tenant,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
     #   The identifier of the primary distribution to which you are copying
     #   a staging distribution's configuration.
     #   @return [String]
@@ -13150,6 +14883,53 @@ module Aws::CloudFront
     #
     class UpdateDistributionWithStagingConfigResult < Struct.new(
       :distribution,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain
+    #   The domain to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_resource
+    #   The target distribution resource for the domain. You can specify
+    #   either `DistributionId` or `DistributionTenantId`, but not both.
+    #   @return [Types::DistributionResourceId]
+    #
+    # @!attribute [rw] if_match
+    #   The value of the `ETag` identifier for the distribution or
+    #   distribution tenant that will be associated with the domain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateDomainAssociationRequest AWS API Documentation
+    #
+    class UpdateDomainAssociationRequest < Struct.new(
+      :domain,
+      :target_resource,
+      :if_match)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain
+    #   The domain that you're moving.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The intended destination for the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the target distribution or distribution
+    #   tenant that was associated with the domain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateDomainAssociationResult AWS API Documentation
+    #
+    class UpdateDomainAssociationResult < Struct.new(
+      :domain,
+      :resource_id,
       :etag)
       SENSITIVE = []
       include Aws::Structure
@@ -13677,6 +15457,60 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # Contains details about the validation token.
+    #
+    # @!attribute [rw] domain
+    #   The domain name.
+    #   @return [String]
+    #
+    # @!attribute [rw] redirect_to
+    #   The domain to redirect to.
+    #   @return [String]
+    #
+    # @!attribute [rw] redirect_from
+    #   The domain to redirect from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ValidationTokenDetail AWS API Documentation
+    #
+    class ValidationTokenDetail < Struct.new(
+      :domain,
+      :redirect_to,
+      :redirect_from)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain
+    #   The domain name that you're verifying.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The ID of the distribution tenant.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/VerifyDnsConfigurationRequest AWS API Documentation
+    #
+    class VerifyDnsConfigurationRequest < Struct.new(
+      :domain,
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dns_configuration_list
+    #   The list of domain names, their statuses, and a description of each
+    #   status.
+    #   @return [Array<Types::DnsConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/VerifyDnsConfigurationResult AWS API Documentation
+    #
+    class VerifyDnsConfigurationResult < Struct.new(
+      :dns_configuration_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A complex type that determines the distribution's SSL/TLS
     # configuration for communicating with viewers.
     #
@@ -13796,8 +15630,8 @@ module Aws::CloudFront
     #   * `static-ip` - Do not specify this value unless your distribution
     #     has been enabled for this feature by the CloudFront team. If you
     #     have a use case that requires static IP addresses for a
-    #     distribution, contact CloudFront through the [Amazon Web
-    #     ServicesSupport Center][2].
+    #     distribution, contact CloudFront through the [Amazon Web Services
+    #     Support Center][2].
     #
     #   If the distribution uses the CloudFront domain name such as
     #   `d111111abcdef8.cloudfront.net`, don't set a value for this field.
@@ -14087,6 +15921,29 @@ module Aws::CloudFront
       :last_modified_time,
       :arn,
       :origin_endpoint_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The WAF web ACL customization specified for the distribution tenant.
+    #
+    # @!attribute [rw] action
+    #   The action for the WAF web ACL customization. You can specify
+    #   `override` to specify a separate WAF web ACL for the distribution
+    #   tenant. If you specify `disable`, the distribution tenant won't
+    #   have WAF web ACL protections and won't inherit from the
+    #   multi-tenant distribution.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the WAF web ACL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/WebAclCustomization AWS API Documentation
+    #
+    class WebAclCustomization < Struct.new(
+      :action,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end

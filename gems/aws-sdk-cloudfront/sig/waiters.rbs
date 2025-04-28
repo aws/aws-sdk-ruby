@@ -30,6 +30,17 @@ module Aws
                 | (Hash[Symbol, untyped]) -> Client::_GetInvalidationResponseSuccess
       end
 
+      class InvalidationForDistributionTenantCompleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    distribution_tenant_id: ::String,
+                    id: ::String
+                  ) -> Client::_GetInvalidationForDistributionTenantResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetInvalidationForDistributionTenantResponseSuccess
+      end
+
       class StreamingDistributionDeployed
         def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
                       | (?Hash[Symbol, untyped]) -> void

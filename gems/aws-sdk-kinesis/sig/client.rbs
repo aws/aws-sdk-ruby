@@ -419,22 +419,6 @@ module Aws
                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
-      interface _SubscribeToShardResponseSuccess
-        include ::Seahorse::Client::_ResponseSuccess[Types::SubscribeToShardOutput]
-        def event_stream: () -> Types::SubscribeToShardEventStream
-      end
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kinesis/Client.html#subscribe_to_shard-instance_method
-      def subscribe_to_shard: (
-                                consumer_arn: ::String,
-                                shard_id: ::String,
-                                starting_position: {
-                                  type: ("AT_SEQUENCE_NUMBER" | "AFTER_SEQUENCE_NUMBER" | "TRIM_HORIZON" | "LATEST" | "AT_TIMESTAMP"),
-                                  sequence_number: ::String?,
-                                  timestamp: ::Time?
-                                }
-                              ) -> _SubscribeToShardResponseSuccess
-                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SubscribeToShardResponseSuccess
-
       interface _UpdateShardCountResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateShardCountOutput]
         def stream_name: () -> ::String
