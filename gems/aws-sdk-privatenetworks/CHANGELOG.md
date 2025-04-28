@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - PrivateNetworks has been removed from the SDK because it has been discontinued.
+
 1.30.0 (2025-02-18)
 ------------------
 
