@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Increase the retry limit for the `standard` retry mode to 10 retries.
+
 1.141.0 (2025-04-24)
 ------------------
 
