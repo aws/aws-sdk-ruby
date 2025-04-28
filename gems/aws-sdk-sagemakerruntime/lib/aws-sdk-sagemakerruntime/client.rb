@@ -917,110 +917,104 @@ module Aws::SageMakerRuntime
     #
     # @example EventStream Operation Example
     #
-    #   # You can process the event once it arrives immediately, or wait until the
-    #   # full response is complete and iterate through the eventstream enumerator.
+    #   You can process the event once it arrives immediately, or wait until the
+    #   full response is complete and iterate through the eventstream enumerator.
     #
-    #   # To interact with event immediately, you need to register invoke_endpoint_with_response_stream
-    #   # with callbacks. Callbacks can be registered for specific events or for all
-    #   # events, including error events.
+    #   To interact with event immediately, you need to register #invoke_endpoint_with_response_stream
+    #   with callbacks. Callbacks can be registered for specific events or for all
+    #   events, including error events.
     #
-    #   # Callbacks can be passed into the `:event_stream_handler` option or within a
-    #   # block statement attached to the #invoke_endpoint_with_response_stream call directly. Hybrid
-    #   # pattern of both is also supported.
+    #   Callbacks can be passed into the `:event_stream_handler` option or within a
+    #   block statement attached to the #invoke_endpoint_with_response_stream call directly. Hybrid
+    #   pattern of both is also supported.
     #
-    #   # `:event_stream_handler` option takes in either a Proc object or
-    #   # Aws::SageMakerRuntime::EventStreams::ResponseStream object.
+    #   `:event_stream_handler` option takes in either a Proc object or
+    #   Aws::SageMakerRuntime::EventStreams::ResponseStream object.
     #
-    #   # Usage pattern a): Callbacks with a block attached to #invoke_endpoint_with_response_stream
-    #   # Example for registering callbacks for all event types and an error event
-    #   client.invoke_endpoint_with_response_stream(
-    #     # params input
-    #   ) do |stream|
-    #     stream.on_error_event do |event|
-    #       # catch unmodeled error event in the stream
-    #       raise event
-    #       # => Aws::Errors::EventError
-    #       # event.event_type => :error
-    #       # event.error_code => String
-    #       # event.error_message => String
+    #   Usage pattern a): Callbacks with a block attached to #invoke_endpoint_with_response_stream
+    #     Example for registering callbacks for all event types and an error event
+    #
+    #     client.invoke_endpoint_with_response_stream( # params input# ) do |stream|
+    #       stream.on_error_event do |event|
+    #         # catch unmodeled error event in the stream
+    #         raise event
+    #         # => Aws::Errors::EventError
+    #         # event.event_type => :error
+    #         # event.error_code => String
+    #         # event.error_message => String
+    #       end
+    #
+    #       stream.on_event do |event|
+    #         # process all events arrive
+    #         puts event.event_type
+    #         ...
+    #       end
+    #
     #     end
     #
-    #     stream.on_event do |event|
-    #       # process all events arrive
-    #       puts event.event_type
-    #       # ...
+    #   Usage pattern b): Pass in `:event_stream_handler` for #invoke_endpoint_with_response_stream
+    #
+    #     1) Create a Aws::SageMakerRuntime::EventStreams::ResponseStream object
+    #     Example for registering callbacks with specific events
+    #
+    #       handler = Aws::SageMakerRuntime::EventStreams::ResponseStream.new
+    #       handler.on_payload_part_event do |event|
+    #         event # => Aws::SageMakerRuntime::Types::PayloadPart
+    #       end
+    #       handler.on_model_stream_error_event do |event|
+    #         event # => Aws::SageMakerRuntime::Types::ModelStreamError
+    #       end
+    #       handler.on_internal_stream_failure_event do |event|
+    #         event # => Aws::SageMakerRuntime::Types::InternalStreamFailure
+    #       end
+    #
+    #     client.invoke_endpoint_with_response_stream( # params input #, event_stream_handler: handler)
+    #
+    #     2) Use a Ruby Proc object
+    #     Example for registering callbacks with specific events
+    #
+    #     handler = Proc.new do |stream|
+    #       stream.on_payload_part_event do |event|
+    #         event # => Aws::SageMakerRuntime::Types::PayloadPart
+    #       end
+    #       stream.on_model_stream_error_event do |event|
+    #         event # => Aws::SageMakerRuntime::Types::ModelStreamError
+    #       end
+    #       stream.on_internal_stream_failure_event do |event|
+    #         event # => Aws::SageMakerRuntime::Types::InternalStreamFailure
+    #       end
     #     end
-    #   end
     #
-    #   # Usage pattern b): Pass in `:event_stream_handler` for #invoke_endpoint_with_response_stream
-    #   #  1) Create a Aws::SageMakerRuntime::EventStreams::ResponseStream object
-    #   #  Example for registering callbacks with specific events
+    #     client.invoke_endpoint_with_response_stream( # params input #, event_stream_handler: handler)
     #
-    #   handler = Aws::SageMakerRuntime::EventStreams::ResponseStream.new
-    #   handler.on_payload_part_event do |event|
-    #     event # => Aws::SageMakerRuntime::Types::PayloadPart
-    #   end
-    #   handler.on_model_stream_error_event do |event|
-    #     event # => Aws::SageMakerRuntime::Types::ModelStreamError
-    #   end
-    #   handler.on_internal_stream_failure_event do |event|
-    #     event # => Aws::SageMakerRuntime::Types::InternalStreamFailure
-    #   end
+    #   Usage pattern c): Hybrid pattern of a) and b)
     #
-    #   client.invoke_endpoint_with_response_stream(
-    #     # params inputs
-    #     event_stream_handler: handler
-    #   )
+    #       handler = Aws::SageMakerRuntime::EventStreams::ResponseStream.new
+    #       handler.on_payload_part_event do |event|
+    #         event # => Aws::SageMakerRuntime::Types::PayloadPart
+    #       end
+    #       handler.on_model_stream_error_event do |event|
+    #         event # => Aws::SageMakerRuntime::Types::ModelStreamError
+    #       end
+    #       handler.on_internal_stream_failure_event do |event|
+    #         event # => Aws::SageMakerRuntime::Types::InternalStreamFailure
+    #       end
     #
-    #   #  2) Use a Ruby Proc object
-    #   #  Example for registering callbacks with specific events
-    #   handler = Proc.new do |stream|
-    #     stream.on_payload_part_event do |event|
-    #       event # => Aws::SageMakerRuntime::Types::PayloadPart
+    #     client.invoke_endpoint_with_response_stream( # params input #, event_stream_handler: handler) do |stream|
+    #       stream.on_error_event do |event|
+    #         # catch unmodeled error event in the stream
+    #         raise event
+    #         # => Aws::Errors::EventError
+    #         # event.event_type => :error
+    #         # event.error_code => String
+    #         # event.error_message => String
+    #       end
     #     end
-    #     stream.on_model_stream_error_event do |event|
-    #       event # => Aws::SageMakerRuntime::Types::ModelStreamError
-    #     end
-    #     stream.on_internal_stream_failure_event do |event|
-    #       event # => Aws::SageMakerRuntime::Types::InternalStreamFailure
-    #     end
-    #   end
     #
-    #   client.invoke_endpoint_with_response_stream(
-    #     # params inputs
-    #     event_stream_handler: handler
-    #   )
+    #   You can also iterate through events after the response complete.
     #
-    #   #  Usage pattern c): Hybrid pattern of a) and b)
-    #   handler = Aws::SageMakerRuntime::EventStreams::ResponseStream.new
-    #   handler.on_payload_part_event do |event|
-    #     event # => Aws::SageMakerRuntime::Types::PayloadPart
-    #   end
-    #   handler.on_model_stream_error_event do |event|
-    #     event # => Aws::SageMakerRuntime::Types::ModelStreamError
-    #   end
-    #   handler.on_internal_stream_failure_event do |event|
-    #     event # => Aws::SageMakerRuntime::Types::InternalStreamFailure
-    #   end
-    #
-    #   client.invoke_endpoint_with_response_stream(
-    #     # params input
-    #     event_stream_handler: handler
-    #   ) do |stream|
-    #     stream.on_error_event do |event|
-    #       # catch unmodeled error event in the stream
-    #       raise event
-    #       # => Aws::Errors::EventError
-    #       # event.event_type => :error
-    #       # event.error_code => String
-    #       # event.error_message => String
-    #     end
-    #   end
-    #
-    #   # You can also iterate through events after the response complete.
-    #   # Events are available at
-    #   resp.body # => Enumerator
-    #   # For parameter input example, please refer to following request syntax.
+    #   Events are available at resp.body # => Enumerator
+    #   For parameter input example, please refer to following request syntax
     #
     # @example Request syntax with placeholder values
     #
@@ -1039,18 +1033,18 @@ module Aws::SageMakerRuntime
     #
     # @example Response structure
     #
-    #   # All events are available at resp.body:
+    #   All events are available at resp.body:
     #   resp.body #=> Enumerator
     #   resp.body.event_types #=> [:payload_part, :model_stream_error, :internal_stream_failure]
     #
-    #   # For :payload_part event available at #on_payload_part_event callback and response eventstream enumerator:
+    #   For :payload_part event available at #on_payload_part_event callback and response eventstream enumerator:
     #   event.bytes #=> String
     #
-    #   # For :model_stream_error event available at #on_model_stream_error_event callback and response eventstream enumerator:
+    #   For :model_stream_error event available at #on_model_stream_error_event callback and response eventstream enumerator:
     #   event.message #=> String
     #   event.error_code #=> String
     #
-    #   # For :internal_stream_failure event available at #on_internal_stream_failure_event callback and response eventstream enumerator:
+    #   For :internal_stream_failure event available at #on_internal_stream_failure_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
     #   resp.content_type #=> String
