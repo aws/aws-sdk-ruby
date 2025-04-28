@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2025-04-28)
+------------------
+
+* Feature - This release adds native h2 support for the bedrock runtime API, the support is only limited to SDKs that support h2 requests natively.
+
 1.45.0 (2025-04-25)
 ------------------
 

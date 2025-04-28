@@ -532,17 +532,6 @@ module Aws
                         ) -> _InvokeModelResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InvokeModelResponseSuccess
 
-      interface _InvokeModelWithBidirectionalStreamResponseSuccess
-        include ::Seahorse::Client::_ResponseSuccess[Types::InvokeModelWithBidirectionalStreamResponse]
-        def body: () -> Types::InvokeModelWithBidirectionalStreamOutput
-      end
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockRuntime/Client.html#invoke_model_with_bidirectional_stream-instance_method
-      def invoke_model_with_bidirectional_stream: (
-                                                    model_id: ::String,
-                                                    input_event_stream_hander: untyped
-                                                  ) ?{ (*untyped) -> void } -> _InvokeModelWithBidirectionalStreamResponseSuccess
-                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _InvokeModelWithBidirectionalStreamResponseSuccess
-
       interface _InvokeModelWithResponseStreamResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::InvokeModelWithResponseStreamResponse]
         def body: () -> Types::ResponseStream

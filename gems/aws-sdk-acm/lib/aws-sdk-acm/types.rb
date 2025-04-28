@@ -77,6 +77,11 @@ module Aws::ACM
     #   to the website.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] managed_by
+    #   Identifies the Amazon Web Services service that manages the
+    #   certificate issued by ACM.
+    #   @return [String]
+    #
     # @!attribute [rw] domain_validation_options
     #   Contains information about the initial validation of each domain
     #   name that occurs as a result of the RequestCertificate request. This
@@ -239,6 +244,7 @@ module Aws::ACM
       :certificate_arn,
       :domain_name,
       :subject_alternative_names,
+      :managed_by,
       :domain_validation_options,
       :serial,
       :subject,
@@ -321,20 +327,30 @@ module Aws::ACM
     #   certificate and additional domain names that can be used to connect
     #   to the website.
     #
-    #   When called by ListCertificates, this parameter will only return the
-    #   first 100 subject alternative names included in the certificate. To
-    #   display the full list of subject alternative names, use
-    #   DescribeCertificate.
+    #   When called by [ListCertificates][1], this parameter will only
+    #   return the first 100 subject alternative names included in the
+    #   certificate. To display the full list of subject alternative names,
+    #   use [DescribeCertificate][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm/latestAPIReference/API_ListCertificates.html
+    #   [2]: https://docs.aws.amazon.com/acm/latestAPIReference/API_DescribeCertificate.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] has_additional_subject_alternative_names
-    #   When called by ListCertificates, indicates whether the full list of
-    #   subject alternative names has been included in the response. If
-    #   false, the response includes all of the subject alternative names
+    #   When called by [ListCertificates][1], indicates whether the full
+    #   list of subject alternative names has been included in the response.
+    #   If false, the response includes all of the subject alternative names
     #   included in the certificate. If true, the response only includes the
     #   first 100 subject alternative names included in the certificate. To
     #   display the full list of subject alternative names, use
-    #   DescribeCertificate.
+    #   [DescribeCertificate][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm/latestAPIReference/API_ListCertificates.html
+    #   [2]: https://docs.aws.amazon.com/acm/latestAPIReference/API_DescribeCertificate.html
     #   @return [Boolean]
     #
     # @!attribute [rw] status
@@ -431,6 +447,11 @@ module Aws::ACM
     #   only when the certificate status is `REVOKED`.
     #   @return [Time]
     #
+    # @!attribute [rw] managed_by
+    #   Identifies the Amazon Web Services service that manages the
+    #   certificate issued by ACM.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CertificateSummary AWS API Documentation
     #
     class CertificateSummary < Struct.new(
@@ -451,7 +472,8 @@ module Aws::ACM
       :created_at,
       :issued_at,
       :imported_at,
-      :revoked_at)
+      :revoked_at,
+      :managed_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -550,9 +572,9 @@ module Aws::ACM
     #
     #   * `PENDING_VALIDATION`
     #
-    #   * `SUCCESS`
+    #   * ``SUCCESS
     #
-    #   * `FAILED`
+    #   * ``FAILED
     #   @return [String]
     #
     # @!attribute [rw] resource_record
@@ -561,8 +583,8 @@ module Aws::ACM
     #   Domain Ownership][1].
     #
     #   Note: The CNAME information that you need does not include the name
-    #   of your domain. If you include  your domain name in the DNS database
-    #   CNAME record, validation fails.  For example, if the name is
+    #   of your domain. If you include your domain name in the DNS database
+    #   CNAME record, validation fails. For example, if the name is
     #   "\_a79865eb4cd1a6ab990a45779b4e0b96.yourdomain.com", only
     #   "\_a79865eb4cd1a6ab990a45779b4e0b96" must be used.
     #
@@ -570,6 +592,13 @@ module Aws::ACM
     #
     #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html
     #   @return [Types::ResourceRecord]
+    #
+    # @!attribute [rw] http_redirect
+    #   Contains information for HTTP-based domain validation of
+    #   certificates requested through CloudFront and issued by ACM. This
+    #   field exists only when the certificate type is `AMAZON_ISSUED` and
+    #   the validation method is `HTTP`.
+    #   @return [Types::HttpRedirect]
     #
     # @!attribute [rw] validation_method
     #   Specifies the domain validation method.
@@ -583,6 +612,7 @@ module Aws::ACM
       :validation_domain,
       :validation_status,
       :resource_record,
+      :http_redirect,
       :validation_method)
       SENSITIVE = []
       include Aws::Structure
@@ -764,12 +794,18 @@ module Aws::ACM
     #   certificates.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] managed_by
+    #   Identifies the Amazon Web Services service that manages the
+    #   certificate issued by ACM.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/Filters AWS API Documentation
     #
     class Filters < Struct.new(
       :extended_key_usage,
       :key_usage,
-      :key_types)
+      :key_types,
+      :managed_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -824,6 +860,30 @@ module Aws::ACM
     class GetCertificateResponse < Struct.new(
       :certificate,
       :certificate_chain)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information for HTTP-based domain validation of certificates
+    # requested through CloudFront and issued by ACM. This field exists only
+    # when the certificate type is `AMAZON_ISSUED` and the validation method
+    # is `HTTP`.
+    #
+    # @!attribute [rw] redirect_from
+    #   The URL including the domain to be validated. The certificate
+    #   authority sends `GET` requests here during validation.
+    #   @return [String]
+    #
+    # @!attribute [rw] redirect_to
+    #   The URL hosting the validation token. `RedirectFrom` must return
+    #   this content or redirect here.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/HttpRedirect AWS API Documentation
+    #
+    class HttpRedirect < Struct.new(
+      :redirect_from,
+      :redirect_to)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1361,6 +1421,11 @@ module Aws::ACM
     #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-certificate.html#algorithms
     #   @return [String]
     #
+    # @!attribute [rw] managed_by
+    #   Identifies the Amazon Web Services service that manages the
+    #   certificate issued by ACM.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RequestCertificateRequest AWS API Documentation
     #
     class RequestCertificateRequest < Struct.new(
@@ -1372,7 +1437,8 @@ module Aws::ACM
       :options,
       :certificate_authority_arn,
       :tags,
-      :key_algorithm)
+      :key_algorithm,
+      :managed_by)
       SENSITIVE = []
       include Aws::Structure
     end

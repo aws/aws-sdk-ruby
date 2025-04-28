@@ -617,6 +617,7 @@ module Aws::ACM
     #   resp.certificate.domain_name #=> String
     #   resp.certificate.subject_alternative_names #=> Array
     #   resp.certificate.subject_alternative_names[0] #=> String
+    #   resp.certificate.managed_by #=> String, one of "CLOUDFRONT"
     #   resp.certificate.domain_validation_options #=> Array
     #   resp.certificate.domain_validation_options[0].domain_name #=> String
     #   resp.certificate.domain_validation_options[0].validation_emails #=> Array
@@ -626,7 +627,9 @@ module Aws::ACM
     #   resp.certificate.domain_validation_options[0].resource_record.name #=> String
     #   resp.certificate.domain_validation_options[0].resource_record.type #=> String, one of "CNAME"
     #   resp.certificate.domain_validation_options[0].resource_record.value #=> String
-    #   resp.certificate.domain_validation_options[0].validation_method #=> String, one of "EMAIL", "DNS"
+    #   resp.certificate.domain_validation_options[0].http_redirect.redirect_from #=> String
+    #   resp.certificate.domain_validation_options[0].http_redirect.redirect_to #=> String
+    #   resp.certificate.domain_validation_options[0].validation_method #=> String, one of "EMAIL", "DNS", "HTTP"
     #   resp.certificate.serial #=> String
     #   resp.certificate.subject #=> String
     #   resp.certificate.issuer #=> String
@@ -635,7 +638,7 @@ module Aws::ACM
     #   resp.certificate.imported_at #=> Time
     #   resp.certificate.status #=> String, one of "PENDING_VALIDATION", "ISSUED", "INACTIVE", "EXPIRED", "VALIDATION_TIMED_OUT", "REVOKED", "FAILED"
     #   resp.certificate.revoked_at #=> Time
-    #   resp.certificate.revocation_reason #=> String, one of "UNSPECIFIED", "KEY_COMPROMISE", "CA_COMPROMISE", "AFFILIATION_CHANGED", "SUPERCEDED", "CESSATION_OF_OPERATION", "CERTIFICATE_HOLD", "REMOVE_FROM_CRL", "PRIVILEGE_WITHDRAWN", "A_A_COMPROMISE"
+    #   resp.certificate.revocation_reason #=> String, one of "UNSPECIFIED", "KEY_COMPROMISE", "CA_COMPROMISE", "AFFILIATION_CHANGED", "SUPERCEDED", "SUPERSEDED", "CESSATION_OF_OPERATION", "CERTIFICATE_HOLD", "REMOVE_FROM_CRL", "PRIVILEGE_WITHDRAWN", "A_A_COMPROMISE"
     #   resp.certificate.not_before #=> Time
     #   resp.certificate.not_after #=> Time
     #   resp.certificate.key_algorithm #=> String, one of "RSA_1024", "RSA_2048", "RSA_3072", "RSA_4096", "EC_prime256v1", "EC_secp384r1", "EC_secp521r1"
@@ -654,7 +657,9 @@ module Aws::ACM
     #   resp.certificate.renewal_summary.domain_validation_options[0].resource_record.name #=> String
     #   resp.certificate.renewal_summary.domain_validation_options[0].resource_record.type #=> String, one of "CNAME"
     #   resp.certificate.renewal_summary.domain_validation_options[0].resource_record.value #=> String
-    #   resp.certificate.renewal_summary.domain_validation_options[0].validation_method #=> String, one of "EMAIL", "DNS"
+    #   resp.certificate.renewal_summary.domain_validation_options[0].http_redirect.redirect_from #=> String
+    #   resp.certificate.renewal_summary.domain_validation_options[0].http_redirect.redirect_to #=> String
+    #   resp.certificate.renewal_summary.domain_validation_options[0].validation_method #=> String, one of "EMAIL", "DNS", "HTTP"
     #   resp.certificate.renewal_summary.renewal_status_reason #=> String, one of "NO_AVAILABLE_CONTACTS", "ADDITIONAL_VERIFICATION_REQUIRED", "DOMAIN_NOT_ALLOWED", "INVALID_PUBLIC_DOMAIN", "DOMAIN_VALIDATION_DENIED", "CAA_ERROR", "PCA_LIMIT_EXCEEDED", "PCA_INVALID_ARN", "PCA_INVALID_STATE", "PCA_REQUEST_FAILED", "PCA_NAME_CONSTRAINTS_VALIDATION", "PCA_RESOURCE_NOT_FOUND", "PCA_INVALID_ARGS", "PCA_INVALID_DURATION", "PCA_ACCESS_DENIED", "SLR_NOT_FOUND", "OTHER"
     #   resp.certificate.renewal_summary.updated_at #=> Time
     #   resp.certificate.key_usages #=> Array
@@ -930,15 +935,11 @@ module Aws::ACM
       req.send_request(options)
     end
 
-    # Retrieves a list of certificate ARNs and domain names. By default, the
-    # API returns RSA\_2048 certificates. To return all certificates in the
-    # account, include the `keyType` filter with the values `[RSA_1024,
-    # RSA_2048, RSA_3072, RSA_4096, EC_prime256v1, EC_secp384r1,
-    # EC_secp521r1]`.
-    #
-    # In addition to `keyType`, you can also filter by the
-    # `CertificateStatuses`, `keyUsage`, and `extendedKeyUsage` attributes
-    # on the certificate. For more information, see Filters.
+    # Retrieves a list of certificate ARNs and domain names. You can request
+    # that only certificates that match a specific status be listed. You can
+    # also filter by specific attributes of the certificate. Default
+    # filtering returns only `RSA_2048` certificates. For more information,
+    # see Filters.
     #
     # @option params [Array<String>] :certificate_statuses
     #   Filter the certificate list by status value.
@@ -983,6 +984,7 @@ module Aws::ACM
     #       extended_key_usage: ["TLS_WEB_SERVER_AUTHENTICATION"], # accepts TLS_WEB_SERVER_AUTHENTICATION, TLS_WEB_CLIENT_AUTHENTICATION, CODE_SIGNING, EMAIL_PROTECTION, TIME_STAMPING, OCSP_SIGNING, IPSEC_END_SYSTEM, IPSEC_TUNNEL, IPSEC_USER, ANY, NONE, CUSTOM
     #       key_usage: ["DIGITAL_SIGNATURE"], # accepts DIGITAL_SIGNATURE, NON_REPUDIATION, KEY_ENCIPHERMENT, DATA_ENCIPHERMENT, KEY_AGREEMENT, CERTIFICATE_SIGNING, CRL_SIGNING, ENCIPHER_ONLY, DECIPHER_ONLY, ANY, CUSTOM
     #       key_types: ["RSA_1024"], # accepts RSA_1024, RSA_2048, RSA_3072, RSA_4096, EC_prime256v1, EC_secp384r1, EC_secp521r1
+    #       managed_by: "CLOUDFRONT", # accepts CLOUDFRONT
     #     },
     #     next_token: "NextToken",
     #     max_items: 1,
@@ -1015,6 +1017,7 @@ module Aws::ACM
     #   resp.certificate_summary_list[0].issued_at #=> Time
     #   resp.certificate_summary_list[0].imported_at #=> Time
     #   resp.certificate_summary_list[0].revoked_at #=> Time
+    #   resp.certificate_summary_list[0].managed_by #=> String, one of "CLOUDFRONT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListCertificates AWS API Documentation
     #
@@ -1364,6 +1367,10 @@ module Aws::ACM
     #
     #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-certificate.html#algorithms
     #
+    # @option params [String] :managed_by
+    #   Identifies the Amazon Web Services service that manages the
+    #   certificate issued by ACM.
+    #
     # @return [Types::RequestCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RequestCertificateResponse#certificate_arn #certificate_arn} => String
@@ -1372,7 +1379,7 @@ module Aws::ACM
     #
     #   resp = client.request_certificate({
     #     domain_name: "DomainNameString", # required
-    #     validation_method: "EMAIL", # accepts EMAIL, DNS
+    #     validation_method: "EMAIL", # accepts EMAIL, DNS, HTTP
     #     subject_alternative_names: ["DomainNameString"],
     #     idempotency_token: "IdempotencyToken",
     #     domain_validation_options: [
@@ -1392,6 +1399,7 @@ module Aws::ACM
     #       },
     #     ],
     #     key_algorithm: "RSA_1024", # accepts RSA_1024, RSA_2048, RSA_3072, RSA_4096, EC_prime256v1, EC_secp384r1, EC_secp521r1
+    #     managed_by: "CLOUDFRONT", # accepts CLOUDFRONT
     #   })
     #
     # @example Response structure
@@ -1537,7 +1545,7 @@ module Aws::ACM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-acm'
-      context[:gem_version] = '1.84.0'
+      context[:gem_version] = '1.85.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -1605,7 +1613,7 @@ module Aws::ACM
     #
     # | waiter_name           | params                        | :delay   | :max_attempts |
     # | --------------------- | ----------------------------- | -------- | ------------- |
-    # | certificate_validated | {Client#describe_certificate} | 60       | 40            |
+    # | certificate_validated | {Client#describe_certificate} | 60       | 5             |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

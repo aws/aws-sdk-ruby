@@ -295,21 +295,6 @@ module Aws
                                  ?input_stream: ::String
                                ) ?{ (*untyped) -> void } -> _RecognizeUtteranceResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _RecognizeUtteranceResponseSuccess
-
-      interface _StartConversationResponseSuccess
-        include ::Seahorse::Client::_ResponseSuccess[Types::StartConversationResponse]
-        def response_event_stream: () -> Types::StartConversationResponseEventStream
-      end
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexRuntimeV2/Client.html#start_conversation-instance_method
-      def start_conversation: (
-                                bot_id: ::String,
-                                bot_alias_id: ::String,
-                                locale_id: ::String,
-                                session_id: ::String,
-                                ?conversation_mode: ("AUDIO" | "TEXT"),
-                                input_event_stream_hander: untyped
-                              ) ?{ (*untyped) -> void } -> _StartConversationResponseSuccess
-                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _StartConversationResponseSuccess
     end
   end
 end

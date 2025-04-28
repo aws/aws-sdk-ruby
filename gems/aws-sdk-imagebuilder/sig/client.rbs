@@ -244,6 +244,13 @@ module Aws
                                                        }?,
                                                        account_id: ::String?
                                                      },
+                                                   ]?,
+                                                   ssm_parameter_configurations: Array[
+                                                     {
+                                                       ami_account_id: ::String?,
+                                                       parameter_name: ::String,
+                                                       data_type: ("text" | "aws:ec2:image")?
+                                                     },
                                                    ]?
                                                  },
                                                ],
@@ -1458,6 +1465,13 @@ module Aws
                                                          launch_template_version: ::String?
                                                        }?,
                                                        account_id: ::String?
+                                                     },
+                                                   ]?,
+                                                   ssm_parameter_configurations: Array[
+                                                     {
+                                                       ami_account_id: ::String?,
+                                                       parameter_name: ::String,
+                                                       data_type: ("text" | "aws:ec2:image")?
                                                      },
                                                    ]?
                                                  },

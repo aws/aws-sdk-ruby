@@ -10,32 +10,44 @@
 begin
   require 'http/2'
 rescue LoadError; end
-require 'aws-sdk-core/plugins/credentials_configuration.rb'
-require 'aws-sdk-core/plugins/logging.rb'
-require 'aws-sdk-core/plugins/param_converter.rb'
-require 'aws-sdk-core/plugins/param_validator.rb'
-require 'aws-sdk-core/plugins/user_agent.rb'
-require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
-require 'aws-sdk-core/plugins/retry_errors.rb'
-require 'aws-sdk-core/plugins/global_configuration.rb'
-require 'aws-sdk-core/plugins/regional_endpoint.rb'
-require 'aws-sdk-core/plugins/stub_responses.rb'
-require 'aws-sdk-core/plugins/idempotency_token.rb'
-require 'aws-sdk-core/plugins/invocation_id.rb'
-require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
-require 'aws-sdk-core/plugins/http_checksum.rb'
-require 'aws-sdk-core/plugins/checksum_algorithm.rb'
-require 'aws-sdk-core/plugins/request_compression.rb'
-require 'aws-sdk-core/plugins/defaults_mode.rb'
-require 'aws-sdk-core/plugins/recursion_detection.rb'
-require 'aws-sdk-core/plugins/telemetry.rb'
-require 'aws-sdk-core/plugins/sign.rb'
-require 'aws-sdk-core/plugins/protocols/rest_json.rb'
-require 'aws-sdk-core/plugins/event_stream_configuration.rb'
+require 'aws-sdk-core/plugins/credentials_configuration'
+require 'aws-sdk-core/plugins/logging'
+require 'aws-sdk-core/plugins/param_converter'
+require 'aws-sdk-core/plugins/param_validator'
+require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/helpful_socket_errors'
+require 'aws-sdk-core/plugins/retry_errors'
+require 'aws-sdk-core/plugins/global_configuration'
+require 'aws-sdk-core/plugins/regional_endpoint'
+require 'aws-sdk-core/plugins/stub_responses'
+require 'aws-sdk-core/plugins/idempotency_token'
+require 'aws-sdk-core/plugins/invocation_id'
+require 'aws-sdk-core/plugins/jsonvalue_converter'
+require 'aws-sdk-core/plugins/http_checksum'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/request_compression'
+require 'aws-sdk-core/plugins/defaults_mode'
+require 'aws-sdk-core/plugins/recursion_detection'
+require 'aws-sdk-core/plugins/telemetry'
+require 'aws-sdk-core/plugins/sign'
+require 'aws-sdk-core/plugins/protocols/rest_json'
+require 'aws-sdk-core/plugins/event_stream_configuration'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:bedrockruntime)
 
 module Aws::BedrockRuntime
+  # An API async client for BedrockRuntime.  To construct an async client, you need to configure a `:region` and `:credentials`.
+  #
+  #     async_client = Aws::BedrockRuntime::AsyncClient.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class AsyncClient < Seahorse::Client::AsyncBase
 
     include Aws::AsyncClientStubs
@@ -68,6 +80,13 @@ module Aws::BedrockRuntime
     add_plugin(Aws::Plugins::EventStreamConfiguration)
     add_plugin(Aws::BedrockRuntime::Plugins::Endpoints)
 
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #
+    #   @option options [Array<Seahorse::Client::Plugin>] :plugins ([]])
+    #     A list of plugins to apply to the client. Each plugin is either a
+    #     class name or an instance of a plugin class.
+    #
     #   @option options [required, Aws::CredentialProvider] :credentials
     #     Your AWS credentials. This can be an instance of any one of the
     #     following classes:
@@ -406,103 +425,104 @@ module Aws::BedrockRuntime
     #   * {Types::InvokeModelWithBidirectionalStreamResponse#body #body} => Types::InvokeModelWithBidirectionalStreamOutput
     #
     # @example Bi-directional EventStream Operation Example
+    #   # You can signal input events after the initial request is established. Events
+    #   # will be sent to the stream immediately once the stream connection is
+    #   # established successfully.
     #
-    #   You can signal input events after the initial request is established. Events
-    #   will be sent to the stream immediately once the stream connection is
-    #   established successfully.
+    #   # To signal events, you can call the #signal methods from an
+    #   # Aws::BedrockRuntime::EventStreams::InvokeModelWithBidirectionalStreamInput object.
+    #   # You must signal events before calling #wait or #join! on the async response.
+    #   input_stream = Aws::BedrockRuntime::EventStreams::InvokeModelWithBidirectionalStreamInput.new
     #
-    #   To signal events, you can call the #signal methods from an Aws::BedrockRuntime::EventStreams::InvokeModelWithBidirectionalStreamInput
-    #   object. You must signal events before calling #wait or #join! on the async response.
-    #
-    #     input_stream = Aws::BedrockRuntime::EventStreams::InvokeModelWithBidirectionalStreamInput.new
-    #
-    #     async_resp = client.invoke_model_with_bidirectional_stream(
-    #       # params input
-    #       input_event_stream_handler: input_stream) do |out_stream|
-    #
-    #       # register callbacks for events
-    #       out_stream.on_chunk_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::chunk
-    #       end
-    #       out_stream.on_internal_server_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::internalServerException
-    #       end
-    #       out_stream.on_model_stream_error_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::modelStreamErrorException
-    #       end
-    #       out_stream.on_validation_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::validationException
-    #       end
-    #       out_stream.on_throttling_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::throttlingException
-    #       end
-    #       out_stream.on_model_timeout_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::modelTimeoutException
-    #       end
-    #       out_stream.on_service_unavailable_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::serviceUnavailableException
-    #       end
-    #
-    #     end
-    #     # => Aws::Seahorse::Client::AsyncResponse
-    #
-    #     # signal events
-    #     input_stream.signal_chunk_event( ... )
-    #
-    #     # make sure to signal :end_stream at the end
-    #     input_stream.signal_end_stream
-    #
-    #     # wait until stream is closed before finalizing the sync response
-    #     resp = async_resp.wait
-    #     # Or close the stream and finalize sync response immediately
-    #     # resp = async_resp.join!
-    #
-    #   You can also provide an Aws::BedrockRuntime::EventStreams::InvokeModelWithBidirectionalStreamOutput object to register callbacks
-    #   before initializing the request instead of processing from the request block.
-    #
-    #     output_stream = Aws::BedrockRuntime::EventStreams::InvokeModelWithBidirectionalStreamOutput.new
-    #     # register callbacks for output events
-    #     output_stream.on_chunk_event do |event|
+    #   async_resp = client.invoke_model_with_bidirectional_stream(
+    #     # params input
+    #     input_event_stream_handler: input_stream
+    #   ) do |out_stream|
+    #     # register callbacks for events
+    #     out_stream.on_chunk_event do |event|
     #       event # => Aws::BedrockRuntime::Types::chunk
     #     end
-    #     output_stream.on_internal_server_exception_event do |event|
+    #     out_stream.on_internal_server_exception_event do |event|
     #       event # => Aws::BedrockRuntime::Types::internalServerException
     #     end
-    #     output_stream.on_model_stream_error_exception_event do |event|
+    #     out_stream.on_model_stream_error_exception_event do |event|
     #       event # => Aws::BedrockRuntime::Types::modelStreamErrorException
     #     end
-    #     output_stream.on_validation_exception_event do |event|
+    #     out_stream.on_validation_exception_event do |event|
     #       event # => Aws::BedrockRuntime::Types::validationException
     #     end
-    #     output_stream.on_throttling_exception_event do |event|
+    #     out_stream.on_throttling_exception_event do |event|
     #       event # => Aws::BedrockRuntime::Types::throttlingException
     #     end
-    #     output_stream.on_model_timeout_exception_event do |event|
+    #     out_stream.on_model_timeout_exception_event do |event|
     #       event # => Aws::BedrockRuntime::Types::modelTimeoutException
     #     end
-    #     output_stream.on_service_unavailable_exception_event do |event|
+    #     out_stream.on_service_unavailable_exception_event do |event|
     #       event # => Aws::BedrockRuntime::Types::serviceUnavailableException
     #     end
-    #     output_stream.on_error_event do |event|
-    #       # catch unmodeled error event in the stream
-    #       raise event
-    #       # => Aws::Errors::EventError
-    #       # event.event_type => :error
-    #       # event.error_code => String
-    #       # event.error_message => String
-    #     end
+    #   end
+    #   # => Aws::Seahorse::Client::AsyncResponse
     #
-    #     async_resp = client.invoke_model_with_bidirectional_stream (
-    #       # params input
-    #       input_event_stream_handler: input_stream
-    #       output_event_stream_handler: output_stream
-    #     )
+    #   # signal events
+    #   input_stream.signal_chunk_event(
+    #     # ...
+    #   )
     #
-    #     resp = async_resp.join!
+    #   # make sure to signal :end_stream at the end
+    #   input_stream.signal_end_stream
     #
-    #   You can also iterate through events after the response is complete.
+    #   # wait until stream is closed before finalizing the sync response
+    #   resp = async_resp.wait
     #
-    #   Events are available at resp.body # => Enumerator
+    #   # Or close the stream and finalize sync response immediately
+    #   resp = async_resp.join!
+    #
+    #   # You can also provide an Aws::BedrockRuntime::EventStreams::InvokeModelWithBidirectionalStreamOutput object
+    #   # to register callbacks before initializing the request instead of processing
+    #   # from the request block.
+    #   output_stream = Aws::BedrockRuntime::EventStreams::InvokeModelWithBidirectionalStreamOutput.new
+    #
+    #   # register callbacks for output events
+    #   output_stream.on_chunk_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::chunk
+    #   end
+    #   output_stream.on_internal_server_exception_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::internalServerException
+    #   end
+    #   output_stream.on_model_stream_error_exception_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::modelStreamErrorException
+    #   end
+    #   output_stream.on_validation_exception_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::validationException
+    #   end
+    #   output_stream.on_throttling_exception_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::throttlingException
+    #   end
+    #   output_stream.on_model_timeout_exception_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::modelTimeoutException
+    #   end
+    #   output_stream.on_service_unavailable_exception_event do |event|
+    #     event # => Aws::BedrockRuntime::Types::serviceUnavailableException
+    #   end
+    #   output_stream.on_error_event do |event|
+    #     # catch unmodeled error event in the stream
+    #     raise event
+    #     # => Aws::Errors::EventError
+    #     # event.event_type => :error
+    #     # event.error_code => String
+    #     # event.error_message => String
+    #   end
+    #
+    #   async_resp = client.invoke_model_with_bidirectional_stream(
+    #     # params input
+    #     input_event_stream_handler: input_stream,
+    #     output_event_stream_handler: output_stream
+    #   )
+    #   resp = async_resp.join!
+    #
+    #   # You can also iterate through events after the response is complete.
+    #   # Events are available at
+    #   resp.body # => Enumerator
     #
     # @example Request syntax with placeholder values
     #
@@ -517,31 +537,31 @@ module Aws::BedrockRuntime
     #
     # @example Response structure
     #
-    #   All events are available at resp.body:
+    #   # All events are available at resp.body:
     #   resp.body #=> Enumerator
     #   resp.body.event_types #=> [:chunk, :internal_server_exception, :model_stream_error_exception, :validation_exception, :throttling_exception, :model_timeout_exception, :service_unavailable_exception]
     #
-    #   For :chunk event available at #on_chunk_event callback and response eventstream enumerator:
+    #   # For :chunk event available at #on_chunk_event callback and response eventstream enumerator:
     #   event.bytes #=> String
     #
-    #   For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
+    #   # For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :model_stream_error_exception event available at #on_model_stream_error_exception_event callback and response eventstream enumerator:
+    #   # For :model_stream_error_exception event available at #on_model_stream_error_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #   event.original_status_code #=> Integer
     #   event.original_message #=> String
     #
-    #   For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
+    #   # For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :throttling_exception event available at #on_throttling_exception_event callback and response eventstream enumerator:
+    #   # For :throttling_exception event available at #on_throttling_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :model_timeout_exception event available at #on_model_timeout_exception_event callback and response eventstream enumerator:
+    #   # For :model_timeout_exception event available at #on_model_timeout_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :service_unavailable_exception event available at #on_service_unavailable_exception_event callback and response eventstream enumerator:
+    #   # For :service_unavailable_exception event available at #on_service_unavailable_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/InvokeModelWithBidirectionalStream AWS API Documentation
@@ -592,7 +612,7 @@ module Aws::BedrockRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockruntime'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

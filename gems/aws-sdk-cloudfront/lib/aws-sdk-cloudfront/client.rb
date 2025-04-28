@@ -514,6 +514,88 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
+    # Associates the WAF web ACL with a distribution tenant.
+    #
+    # @option params [required, String] :id
+    #   The ID of the distribution tenant.
+    #
+    # @option params [required, String] :web_acl_arn
+    #   The Amazon Resource Name (ARN) of the WAF web ACL to associate.
+    #
+    # @option params [String] :if_match
+    #   The current `ETag` of the distribution tenant. This value is returned
+    #   in the response of the `GetDistributionTenant` API operation.
+    #
+    # @return [Types::AssociateDistributionTenantWebACLResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateDistributionTenantWebACLResult#id #id} => String
+    #   * {Types::AssociateDistributionTenantWebACLResult#web_acl_arn #web_acl_arn} => String
+    #   * {Types::AssociateDistributionTenantWebACLResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_distribution_tenant_web_acl({
+    #     id: "string", # required
+    #     web_acl_arn: "string", # required
+    #     if_match: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.web_acl_arn #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/AssociateDistributionTenantWebACL AWS API Documentation
+    #
+    # @overload associate_distribution_tenant_web_acl(params = {})
+    # @param [Hash] params ({})
+    def associate_distribution_tenant_web_acl(params = {}, options = {})
+      req = build_request(:associate_distribution_tenant_web_acl, params)
+      req.send_request(options)
+    end
+
+    # Associates the WAF web ACL with a distribution.
+    #
+    # @option params [required, String] :id
+    #   The ID of the distribution.
+    #
+    # @option params [required, String] :web_acl_arn
+    #   The Amazon Resource Name (ARN) of the WAF web ACL to associate.
+    #
+    # @option params [String] :if_match
+    #   The value of the `ETag` header that you received when retrieving the
+    #   distribution that you're associating with the WAF web ACL.
+    #
+    # @return [Types::AssociateDistributionWebACLResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateDistributionWebACLResult#id #id} => String
+    #   * {Types::AssociateDistributionWebACLResult#web_acl_arn #web_acl_arn} => String
+    #   * {Types::AssociateDistributionWebACLResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_distribution_web_acl({
+    #     id: "string", # required
+    #     web_acl_arn: "string", # required
+    #     if_match: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.web_acl_arn #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/AssociateDistributionWebACL AWS API Documentation
+    #
+    # @overload associate_distribution_web_acl(params = {})
+    # @param [Hash] params ({})
+    def associate_distribution_web_acl(params = {}, options = {})
+      req = build_request(:associate_distribution_web_acl, params)
+      req.send_request(options)
+    end
+
     # Creates a staging distribution using the configuration of the provided
     # primary distribution. A staging distribution is a copy of an existing
     # distribution (called the primary distribution) that you can use in a
@@ -752,7 +834,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.logging.include_cookies #=> Boolean
     #   resp.distribution.distribution_config.logging.bucket #=> String
     #   resp.distribution.distribution_config.logging.prefix #=> String
-    #   resp.distribution.distribution_config.price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All"
+    #   resp.distribution.distribution_config.price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All", "None"
     #   resp.distribution.distribution_config.enabled #=> Boolean
     #   resp.distribution.distribution_config.viewer_certificate.cloud_front_default_certificate #=> Boolean
     #   resp.distribution.distribution_config.viewer_certificate.iam_certificate_id #=> String
@@ -771,6 +853,12 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.continuous_deployment_policy_id #=> String
     #   resp.distribution.distribution_config.staging #=> Boolean
     #   resp.distribution.distribution_config.anycast_ip_list_id #=> String
+    #   resp.distribution.distribution_config.tenant_config.parameter_definitions #=> Array
+    #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].name #=> String
+    #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].definition.string_schema.comment #=> String
+    #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].definition.string_schema.default_value #=> String
+    #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].definition.string_schema.required #=> Boolean
+    #   resp.distribution.distribution_config.connection_mode #=> String, one of "direct", "tenant-only"
     #   resp.distribution.alias_icp_recordals #=> Array
     #   resp.distribution.alias_icp_recordals[0].cname #=> String
     #   resp.distribution.alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
@@ -793,7 +881,7 @@ module Aws::CloudFront
     #
     # @option params [required, Integer] :ip_count
     #   The number of static IP addresses that are allocated to the Anycast
-    #   static IP list.
+    #   static IP list. Valid values: 21 or 3.
     #
     # @option params [Types::Tags] :tags
     #   A complex type that contains zero or more `Tag` elements.
@@ -992,6 +1080,80 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def create_cloud_front_origin_access_identity(params = {}, options = {})
       req = build_request(:create_cloud_front_origin_access_identity, params)
+      req.send_request(options)
+    end
+
+    # Creates a connection group.
+    #
+    # @option params [required, String] :name
+    #   The name of the connection group. Enter a friendly identifier that is
+    #   unique within your Amazon Web Services account. This name can't be
+    #   updated after you create the connection group.
+    #
+    # @option params [Boolean] :ipv_6_enabled
+    #   Enable IPv6 for the connection group. The default is `true`. For more
+    #   information, see [Enable IPv6][1] in the *Amazon CloudFront Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesEnableIPv6
+    #
+    # @option params [Types::Tags] :tags
+    #   A complex type that contains zero or more `Tag` elements.
+    #
+    # @option params [String] :anycast_ip_list_id
+    #   The ID of the Anycast static IP list.
+    #
+    # @option params [Boolean] :enabled
+    #   Enable the connection group.
+    #
+    # @return [Types::CreateConnectionGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateConnectionGroupResult#connection_group #connection_group} => Types::ConnectionGroup
+    #   * {Types::CreateConnectionGroupResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_connection_group({
+    #     name: "string", # required
+    #     ipv_6_enabled: false,
+    #     tags: {
+    #       items: [
+    #         {
+    #           key: "TagKey", # required
+    #           value: "TagValue",
+    #         },
+    #       ],
+    #     },
+    #     anycast_ip_list_id: "string",
+    #     enabled: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connection_group.id #=> String
+    #   resp.connection_group.name #=> String
+    #   resp.connection_group.arn #=> String
+    #   resp.connection_group.created_time #=> Time
+    #   resp.connection_group.last_modified_time #=> Time
+    #   resp.connection_group.tags.items #=> Array
+    #   resp.connection_group.tags.items[0].key #=> String
+    #   resp.connection_group.tags.items[0].value #=> String
+    #   resp.connection_group.ipv_6_enabled #=> Boolean
+    #   resp.connection_group.routing_endpoint #=> String
+    #   resp.connection_group.anycast_ip_list_id #=> String
+    #   resp.connection_group.status #=> String
+    #   resp.connection_group.enabled #=> Boolean
+    #   resp.connection_group.is_default #=> Boolean
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateConnectionGroup AWS API Documentation
+    #
+    # @overload create_connection_group(params = {})
+    # @param [Hash] params ({})
+    def create_connection_group(params = {}, options = {})
+      req = build_request(:create_connection_group, params)
       req.send_request(options)
     end
 
@@ -1326,7 +1488,7 @@ module Aws::CloudFront
     #         bucket: "string",
     #         prefix: "string",
     #       },
-    #       price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All
+    #       price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All, None
     #       enabled: false, # required
     #       viewer_certificate: {
     #         cloud_front_default_certificate: false,
@@ -1350,6 +1512,21 @@ module Aws::CloudFront
     #       continuous_deployment_policy_id: "string",
     #       staging: false,
     #       anycast_ip_list_id: "string",
+    #       tenant_config: {
+    #         parameter_definitions: [
+    #           {
+    #             name: "ParameterName", # required
+    #             definition: { # required
+    #               string_schema: {
+    #                 comment: "string",
+    #                 default_value: "ParameterValue",
+    #                 required: false, # required
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       },
+    #       connection_mode: "direct", # accepts direct, tenant-only
     #     },
     #   })
     #
@@ -1524,7 +1701,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.logging.include_cookies #=> Boolean
     #   resp.distribution.distribution_config.logging.bucket #=> String
     #   resp.distribution.distribution_config.logging.prefix #=> String
-    #   resp.distribution.distribution_config.price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All"
+    #   resp.distribution.distribution_config.price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All", "None"
     #   resp.distribution.distribution_config.enabled #=> Boolean
     #   resp.distribution.distribution_config.viewer_certificate.cloud_front_default_certificate #=> Boolean
     #   resp.distribution.distribution_config.viewer_certificate.iam_certificate_id #=> String
@@ -1543,6 +1720,12 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.continuous_deployment_policy_id #=> String
     #   resp.distribution.distribution_config.staging #=> Boolean
     #   resp.distribution.distribution_config.anycast_ip_list_id #=> String
+    #   resp.distribution.distribution_config.tenant_config.parameter_definitions #=> Array
+    #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].name #=> String
+    #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].definition.string_schema.comment #=> String
+    #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].definition.string_schema.default_value #=> String
+    #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].definition.string_schema.required #=> Boolean
+    #   resp.distribution.distribution_config.connection_mode #=> String, one of "direct", "tenant-only"
     #   resp.distribution.alias_icp_recordals #=> Array
     #   resp.distribution.alias_icp_recordals[0].cname #=> String
     #   resp.distribution.alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
@@ -1555,6 +1738,138 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def create_distribution(params = {}, options = {})
       req = build_request(:create_distribution, params)
+      req.send_request(options)
+    end
+
+    # Creates a distribution tenant.
+    #
+    # @option params [required, String] :distribution_id
+    #   The ID of the multi-tenant distribution to use for creating the
+    #   distribution tenant.
+    #
+    # @option params [required, String] :name
+    #   The name of the distribution tenant. Enter a friendly identifier that
+    #   is unique within your Amazon Web Services account. This name can't be
+    #   updated after you create the distribution tenant.
+    #
+    # @option params [required, Array<Types::DomainItem>] :domains
+    #   The domains associated with the distribution tenant. You must specify
+    #   at least one domain in the request.
+    #
+    # @option params [Types::Tags] :tags
+    #   A complex type that contains zero or more `Tag` elements.
+    #
+    # @option params [Types::Customizations] :customizations
+    #   Customizations for the distribution tenant. For each distribution
+    #   tenant, you can specify the geographic restrictions, and the Amazon
+    #   Resource Names (ARNs) for the ACM certificate and WAF web ACL. These
+    #   are specific values that you can override or disable from the
+    #   multi-tenant distribution that was used to create the distribution
+    #   tenant.
+    #
+    # @option params [Array<Types::Parameter>] :parameters
+    #   A list of parameter values to add to the resource. A parameter is
+    #   specified as a key-value pair. A valid parameter value must exist for
+    #   any parameter that is marked as required in the multi-tenant
+    #   distribution.
+    #
+    # @option params [String] :connection_group_id
+    #   The ID of the connection group to associate with the distribution
+    #   tenant.
+    #
+    # @option params [Types::ManagedCertificateRequest] :managed_certificate_request
+    #   The configuration for the CloudFront managed ACM certificate request.
+    #
+    # @option params [Boolean] :enabled
+    #   Indicates whether the distribution tenant should be enabled when
+    #   created. If the distribution tenant is disabled, the distribution
+    #   tenant won't serve traffic.
+    #
+    # @return [Types::CreateDistributionTenantResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDistributionTenantResult#distribution_tenant #distribution_tenant} => Types::DistributionTenant
+    #   * {Types::CreateDistributionTenantResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_distribution_tenant({
+    #     distribution_id: "string", # required
+    #     name: "CreateDistributionTenantRequestNameString", # required
+    #     domains: [ # required
+    #       {
+    #         domain: "string", # required
+    #       },
+    #     ],
+    #     tags: {
+    #       items: [
+    #         {
+    #           key: "TagKey", # required
+    #           value: "TagValue",
+    #         },
+    #       ],
+    #     },
+    #     customizations: {
+    #       web_acl: {
+    #         action: "override", # required, accepts override, disable
+    #         arn: "string",
+    #       },
+    #       certificate: {
+    #         arn: "string", # required
+    #       },
+    #       geo_restrictions: {
+    #         restriction_type: "blacklist", # required, accepts blacklist, whitelist, none
+    #         locations: ["string"],
+    #       },
+    #     },
+    #     parameters: [
+    #       {
+    #         name: "ParameterName", # required
+    #         value: "ParameterValue", # required
+    #       },
+    #     ],
+    #     connection_group_id: "string",
+    #     managed_certificate_request: {
+    #       validation_token_host: "cloudfront", # required, accepts cloudfront, self-hosted
+    #       primary_domain_name: "string",
+    #       certificate_transparency_logging_preference: "enabled", # accepts enabled, disabled
+    #     },
+    #     enabled: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.distribution_tenant.id #=> String
+    #   resp.distribution_tenant.distribution_id #=> String
+    #   resp.distribution_tenant.name #=> String
+    #   resp.distribution_tenant.arn #=> String
+    #   resp.distribution_tenant.domains #=> Array
+    #   resp.distribution_tenant.domains[0].domain #=> String
+    #   resp.distribution_tenant.domains[0].status #=> String, one of "active", "inactive"
+    #   resp.distribution_tenant.tags.items #=> Array
+    #   resp.distribution_tenant.tags.items[0].key #=> String
+    #   resp.distribution_tenant.tags.items[0].value #=> String
+    #   resp.distribution_tenant.customizations.web_acl.action #=> String, one of "override", "disable"
+    #   resp.distribution_tenant.customizations.web_acl.arn #=> String
+    #   resp.distribution_tenant.customizations.certificate.arn #=> String
+    #   resp.distribution_tenant.customizations.geo_restrictions.restriction_type #=> String, one of "blacklist", "whitelist", "none"
+    #   resp.distribution_tenant.customizations.geo_restrictions.locations #=> Array
+    #   resp.distribution_tenant.customizations.geo_restrictions.locations[0] #=> String
+    #   resp.distribution_tenant.parameters #=> Array
+    #   resp.distribution_tenant.parameters[0].name #=> String
+    #   resp.distribution_tenant.parameters[0].value #=> String
+    #   resp.distribution_tenant.connection_group_id #=> String
+    #   resp.distribution_tenant.created_time #=> Time
+    #   resp.distribution_tenant.last_modified_time #=> Time
+    #   resp.distribution_tenant.enabled #=> Boolean
+    #   resp.distribution_tenant.status #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateDistributionTenant AWS API Documentation
+    #
+    # @overload create_distribution_tenant(params = {})
+    # @param [Hash] params ({})
+    def create_distribution_tenant(params = {}, options = {})
+      req = build_request(:create_distribution_tenant, params)
       req.send_request(options)
     end
 
@@ -1826,7 +2141,7 @@ module Aws::CloudFront
     #           bucket: "string",
     #           prefix: "string",
     #         },
-    #         price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All
+    #         price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All, None
     #         enabled: false, # required
     #         viewer_certificate: {
     #           cloud_front_default_certificate: false,
@@ -1850,6 +2165,21 @@ module Aws::CloudFront
     #         continuous_deployment_policy_id: "string",
     #         staging: false,
     #         anycast_ip_list_id: "string",
+    #         tenant_config: {
+    #           parameter_definitions: [
+    #             {
+    #               name: "ParameterName", # required
+    #               definition: { # required
+    #                 string_schema: {
+    #                   comment: "string",
+    #                   default_value: "ParameterValue",
+    #                   required: false, # required
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         connection_mode: "direct", # accepts direct, tenant-only
     #       },
     #       tags: { # required
     #         items: [
@@ -2033,7 +2363,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.logging.include_cookies #=> Boolean
     #   resp.distribution.distribution_config.logging.bucket #=> String
     #   resp.distribution.distribution_config.logging.prefix #=> String
-    #   resp.distribution.distribution_config.price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All"
+    #   resp.distribution.distribution_config.price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All", "None"
     #   resp.distribution.distribution_config.enabled #=> Boolean
     #   resp.distribution.distribution_config.viewer_certificate.cloud_front_default_certificate #=> Boolean
     #   resp.distribution.distribution_config.viewer_certificate.iam_certificate_id #=> String
@@ -2052,6 +2382,12 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.continuous_deployment_policy_id #=> String
     #   resp.distribution.distribution_config.staging #=> Boolean
     #   resp.distribution.distribution_config.anycast_ip_list_id #=> String
+    #   resp.distribution.distribution_config.tenant_config.parameter_definitions #=> Array
+    #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].name #=> String
+    #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].definition.string_schema.comment #=> String
+    #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].definition.string_schema.default_value #=> String
+    #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].definition.string_schema.required #=> Boolean
+    #   resp.distribution.distribution_config.connection_mode #=> String, one of "direct", "tenant-only"
     #   resp.distribution.alias_icp_recordals #=> Array
     #   resp.distribution.alias_icp_recordals[0].cname #=> String
     #   resp.distribution.alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
@@ -2381,6 +2717,58 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def create_invalidation(params = {}, options = {})
       req = build_request(:create_invalidation, params)
+      req.send_request(options)
+    end
+
+    # Creates an invalidation for a distribution tenant. For more
+    # information, see [Invalidating files][1] in the *Amazon CloudFront
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html
+    #
+    # @option params [required, String] :id
+    #   The ID of the distribution tenant.
+    #
+    # @option params [required, Types::InvalidationBatch] :invalidation_batch
+    #   An invalidation batch.
+    #
+    # @return [Types::CreateInvalidationForDistributionTenantResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateInvalidationForDistributionTenantResult#location #location} => String
+    #   * {Types::CreateInvalidationForDistributionTenantResult#invalidation #invalidation} => Types::Invalidation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_invalidation_for_distribution_tenant({
+    #     id: "string", # required
+    #     invalidation_batch: { # required
+    #       paths: { # required
+    #         quantity: 1, # required
+    #         items: ["string"],
+    #       },
+    #       caller_reference: "string", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.location #=> String
+    #   resp.invalidation.id #=> String
+    #   resp.invalidation.status #=> String
+    #   resp.invalidation.create_time #=> Time
+    #   resp.invalidation.invalidation_batch.paths.quantity #=> Integer
+    #   resp.invalidation.invalidation_batch.paths.items #=> Array
+    #   resp.invalidation.invalidation_batch.paths.items[0] #=> String
+    #   resp.invalidation.invalidation_batch.caller_reference #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateInvalidationForDistributionTenant AWS API Documentation
+    #
+    # @overload create_invalidation_for_distribution_tenant(params = {})
+    # @param [Hash] params ({})
+    def create_invalidation_for_distribution_tenant(params = {}, options = {})
+      req = build_request(:create_invalidation_for_distribution_tenant, params)
       req.send_request(options)
     end
 
@@ -3065,7 +3453,7 @@ module Aws::CloudFront
     #         quantity: 1, # required
     #         items: ["string"],
     #       },
-    #       price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All
+    #       price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All, None
     #       enabled: false, # required
     #     },
     #   })
@@ -3098,7 +3486,7 @@ module Aws::CloudFront
     #   resp.streaming_distribution.streaming_distribution_config.trusted_signers.quantity #=> Integer
     #   resp.streaming_distribution.streaming_distribution_config.trusted_signers.items #=> Array
     #   resp.streaming_distribution.streaming_distribution_config.trusted_signers.items[0] #=> String
-    #   resp.streaming_distribution.streaming_distribution_config.price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All"
+    #   resp.streaming_distribution.streaming_distribution_config.price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All", "None"
     #   resp.streaming_distribution.streaming_distribution_config.enabled #=> Boolean
     #   resp.location #=> String
     #   resp.etag #=> String
@@ -3155,7 +3543,7 @@ module Aws::CloudFront
     #           quantity: 1, # required
     #           items: ["string"],
     #         },
-    #         price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All
+    #         price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All, None
     #         enabled: false, # required
     #       },
     #       tags: { # required
@@ -3197,7 +3585,7 @@ module Aws::CloudFront
     #   resp.streaming_distribution.streaming_distribution_config.trusted_signers.quantity #=> Integer
     #   resp.streaming_distribution.streaming_distribution_config.trusted_signers.items #=> Array
     #   resp.streaming_distribution.streaming_distribution_config.trusted_signers.items[0] #=> String
-    #   resp.streaming_distribution.streaming_distribution_config.price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All"
+    #   resp.streaming_distribution.streaming_distribution_config.price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All", "None"
     #   resp.streaming_distribution.streaming_distribution_config.enabled #=> Boolean
     #   resp.location #=> String
     #   resp.etag #=> String
@@ -3416,6 +3804,33 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
+    # Deletes a connection group.
+    #
+    # @option params [required, String] :id
+    #   The ID of the connection group to delete.
+    #
+    # @option params [required, String] :if_match
+    #   The value of the `ETag` header that you received when retrieving the
+    #   connection group to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_connection_group({
+    #     id: "string", # required
+    #     if_match: "string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteConnectionGroup AWS API Documentation
+    #
+    # @overload delete_connection_group(params = {})
+    # @param [Hash] params ({})
+    def delete_connection_group(params = {}, options = {})
+      req = build_request(:delete_connection_group, params)
+      req.send_request(options)
+    end
+
     # Deletes a continuous deployment policy.
     #
     # You cannot delete a continuous deployment policy that's attached to a
@@ -3472,6 +3887,40 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def delete_distribution(params = {}, options = {})
       req = build_request(:delete_distribution, params)
+      req.send_request(options)
+    end
+
+    # Deletes a distribution tenant. If you use this API operation to delete
+    # a distribution tenant that is currently enabled, the request will
+    # fail.
+    #
+    # To delete a distribution tenant, you must first disable the
+    # distribution tenant by using the `UpdateDistributionTenant` API
+    # operation.
+    #
+    # @option params [required, String] :id
+    #   The ID of the distribution tenant to delete.
+    #
+    # @option params [required, String] :if_match
+    #   The value of the `ETag` header that you received when retrieving the
+    #   distribution tenant. This value is returned in the response of the
+    #   `GetDistributionTenant` API operation.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_distribution_tenant({
+    #     id: "string", # required
+    #     if_match: "string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteDistributionTenant AWS API Documentation
+    #
+    # @overload delete_distribution_tenant(params = {})
+    # @param [Hash] params ({})
+    def delete_distribution_tenant(params = {}, options = {})
+      req = build_request(:delete_distribution_tenant, params)
       req.send_request(options)
     end
 
@@ -4097,6 +4546,77 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
+    # Disassociates a distribution tenant from the WAF web ACL.
+    #
+    # @option params [required, String] :id
+    #   The ID of the distribution tenant.
+    #
+    # @option params [String] :if_match
+    #   The current version of the distribution tenant that you're
+    #   disassociating from the WAF web ACL. This is the `ETag` value returned
+    #   in the response to the `GetDistributionTenant` API operation.
+    #
+    # @return [Types::DisassociateDistributionTenantWebACLResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateDistributionTenantWebACLResult#id #id} => String
+    #   * {Types::DisassociateDistributionTenantWebACLResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_distribution_tenant_web_acl({
+    #     id: "string", # required
+    #     if_match: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DisassociateDistributionTenantWebACL AWS API Documentation
+    #
+    # @overload disassociate_distribution_tenant_web_acl(params = {})
+    # @param [Hash] params ({})
+    def disassociate_distribution_tenant_web_acl(params = {}, options = {})
+      req = build_request(:disassociate_distribution_tenant_web_acl, params)
+      req.send_request(options)
+    end
+
+    # Disassociates a distribution from the WAF web ACL.
+    #
+    # @option params [required, String] :id
+    #   The ID of the distribution.
+    #
+    # @option params [String] :if_match
+    #   The value of the `ETag` header that you received when retrieving the
+    #   distribution that you're disassociating from the WAF web ACL.
+    #
+    # @return [Types::DisassociateDistributionWebACLResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateDistributionWebACLResult#id #id} => String
+    #   * {Types::DisassociateDistributionWebACLResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_distribution_web_acl({
+    #     id: "string", # required
+    #     if_match: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DisassociateDistributionWebACL AWS API Documentation
+    #
+    # @overload disassociate_distribution_web_acl(params = {})
+    # @param [Hash] params ({})
+    def disassociate_distribution_web_acl(params = {}, options = {})
+      req = build_request(:disassociate_distribution_web_acl, params)
+      req.send_request(options)
+    end
+
     # Gets an Anycast static IP list.
     #
     # @option params [required, String] :id
@@ -4318,6 +4838,94 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def get_cloud_front_origin_access_identity_config(params = {}, options = {})
       req = build_request(:get_cloud_front_origin_access_identity_config, params)
+      req.send_request(options)
+    end
+
+    # Gets information about a connection group.
+    #
+    # @option params [required, String] :identifier
+    #   The ID, name, or Amazon Resource Name (ARN) of the connection group.
+    #
+    # @return [Types::GetConnectionGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetConnectionGroupResult#connection_group #connection_group} => Types::ConnectionGroup
+    #   * {Types::GetConnectionGroupResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_connection_group({
+    #     identifier: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connection_group.id #=> String
+    #   resp.connection_group.name #=> String
+    #   resp.connection_group.arn #=> String
+    #   resp.connection_group.created_time #=> Time
+    #   resp.connection_group.last_modified_time #=> Time
+    #   resp.connection_group.tags.items #=> Array
+    #   resp.connection_group.tags.items[0].key #=> String
+    #   resp.connection_group.tags.items[0].value #=> String
+    #   resp.connection_group.ipv_6_enabled #=> Boolean
+    #   resp.connection_group.routing_endpoint #=> String
+    #   resp.connection_group.anycast_ip_list_id #=> String
+    #   resp.connection_group.status #=> String
+    #   resp.connection_group.enabled #=> Boolean
+    #   resp.connection_group.is_default #=> Boolean
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetConnectionGroup AWS API Documentation
+    #
+    # @overload get_connection_group(params = {})
+    # @param [Hash] params ({})
+    def get_connection_group(params = {}, options = {})
+      req = build_request(:get_connection_group, params)
+      req.send_request(options)
+    end
+
+    # Gets information about a connection group by using the endpoint that
+    # you specify.
+    #
+    # @option params [required, String] :routing_endpoint
+    #   The routing endpoint for the target connection group, such as
+    #   d111111abcdef8.cloudfront.net.
+    #
+    # @return [Types::GetConnectionGroupByRoutingEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetConnectionGroupByRoutingEndpointResult#connection_group #connection_group} => Types::ConnectionGroup
+    #   * {Types::GetConnectionGroupByRoutingEndpointResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_connection_group_by_routing_endpoint({
+    #     routing_endpoint: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connection_group.id #=> String
+    #   resp.connection_group.name #=> String
+    #   resp.connection_group.arn #=> String
+    #   resp.connection_group.created_time #=> Time
+    #   resp.connection_group.last_modified_time #=> Time
+    #   resp.connection_group.tags.items #=> Array
+    #   resp.connection_group.tags.items[0].key #=> String
+    #   resp.connection_group.tags.items[0].value #=> String
+    #   resp.connection_group.ipv_6_enabled #=> Boolean
+    #   resp.connection_group.routing_endpoint #=> String
+    #   resp.connection_group.anycast_ip_list_id #=> String
+    #   resp.connection_group.status #=> String
+    #   resp.connection_group.enabled #=> Boolean
+    #   resp.connection_group.is_default #=> Boolean
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetConnectionGroupByRoutingEndpoint AWS API Documentation
+    #
+    # @overload get_connection_group_by_routing_endpoint(params = {})
+    # @param [Hash] params ({})
+    def get_connection_group_by_routing_endpoint(params = {}, options = {})
+      req = build_request(:get_connection_group_by_routing_endpoint, params)
       req.send_request(options)
     end
 
@@ -4592,7 +5200,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.logging.include_cookies #=> Boolean
     #   resp.distribution.distribution_config.logging.bucket #=> String
     #   resp.distribution.distribution_config.logging.prefix #=> String
-    #   resp.distribution.distribution_config.price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All"
+    #   resp.distribution.distribution_config.price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All", "None"
     #   resp.distribution.distribution_config.enabled #=> Boolean
     #   resp.distribution.distribution_config.viewer_certificate.cloud_front_default_certificate #=> Boolean
     #   resp.distribution.distribution_config.viewer_certificate.iam_certificate_id #=> String
@@ -4611,6 +5219,12 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.continuous_deployment_policy_id #=> String
     #   resp.distribution.distribution_config.staging #=> Boolean
     #   resp.distribution.distribution_config.anycast_ip_list_id #=> String
+    #   resp.distribution.distribution_config.tenant_config.parameter_definitions #=> Array
+    #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].name #=> String
+    #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].definition.string_schema.comment #=> String
+    #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].definition.string_schema.default_value #=> String
+    #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].definition.string_schema.required #=> Boolean
+    #   resp.distribution.distribution_config.connection_mode #=> String, one of "direct", "tenant-only"
     #   resp.distribution.alias_icp_recordals #=> Array
     #   resp.distribution.alias_icp_recordals[0].cname #=> String
     #   resp.distribution.alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
@@ -4798,7 +5412,7 @@ module Aws::CloudFront
     #   resp.distribution_config.logging.include_cookies #=> Boolean
     #   resp.distribution_config.logging.bucket #=> String
     #   resp.distribution_config.logging.prefix #=> String
-    #   resp.distribution_config.price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All"
+    #   resp.distribution_config.price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All", "None"
     #   resp.distribution_config.enabled #=> Boolean
     #   resp.distribution_config.viewer_certificate.cloud_front_default_certificate #=> Boolean
     #   resp.distribution_config.viewer_certificate.iam_certificate_id #=> String
@@ -4817,6 +5431,12 @@ module Aws::CloudFront
     #   resp.distribution_config.continuous_deployment_policy_id #=> String
     #   resp.distribution_config.staging #=> Boolean
     #   resp.distribution_config.anycast_ip_list_id #=> String
+    #   resp.distribution_config.tenant_config.parameter_definitions #=> Array
+    #   resp.distribution_config.tenant_config.parameter_definitions[0].name #=> String
+    #   resp.distribution_config.tenant_config.parameter_definitions[0].definition.string_schema.comment #=> String
+    #   resp.distribution_config.tenant_config.parameter_definitions[0].definition.string_schema.default_value #=> String
+    #   resp.distribution_config.tenant_config.parameter_definitions[0].definition.string_schema.required #=> Boolean
+    #   resp.distribution_config.connection_mode #=> String, one of "direct", "tenant-only"
     #   resp.etag #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetDistributionConfig AWS API Documentation
@@ -4825,6 +5445,113 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def get_distribution_config(params = {}, options = {})
       req = build_request(:get_distribution_config, params)
+      req.send_request(options)
+    end
+
+    # Gets information about a distribution tenant.
+    #
+    # @option params [required, String] :identifier
+    #   The ID of the distribution tenant. You can specify the ARN ID, or name
+    #   of the distribution tenant.
+    #
+    # @return [Types::GetDistributionTenantResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDistributionTenantResult#distribution_tenant #distribution_tenant} => Types::DistributionTenant
+    #   * {Types::GetDistributionTenantResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_distribution_tenant({
+    #     identifier: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.distribution_tenant.id #=> String
+    #   resp.distribution_tenant.distribution_id #=> String
+    #   resp.distribution_tenant.name #=> String
+    #   resp.distribution_tenant.arn #=> String
+    #   resp.distribution_tenant.domains #=> Array
+    #   resp.distribution_tenant.domains[0].domain #=> String
+    #   resp.distribution_tenant.domains[0].status #=> String, one of "active", "inactive"
+    #   resp.distribution_tenant.tags.items #=> Array
+    #   resp.distribution_tenant.tags.items[0].key #=> String
+    #   resp.distribution_tenant.tags.items[0].value #=> String
+    #   resp.distribution_tenant.customizations.web_acl.action #=> String, one of "override", "disable"
+    #   resp.distribution_tenant.customizations.web_acl.arn #=> String
+    #   resp.distribution_tenant.customizations.certificate.arn #=> String
+    #   resp.distribution_tenant.customizations.geo_restrictions.restriction_type #=> String, one of "blacklist", "whitelist", "none"
+    #   resp.distribution_tenant.customizations.geo_restrictions.locations #=> Array
+    #   resp.distribution_tenant.customizations.geo_restrictions.locations[0] #=> String
+    #   resp.distribution_tenant.parameters #=> Array
+    #   resp.distribution_tenant.parameters[0].name #=> String
+    #   resp.distribution_tenant.parameters[0].value #=> String
+    #   resp.distribution_tenant.connection_group_id #=> String
+    #   resp.distribution_tenant.created_time #=> Time
+    #   resp.distribution_tenant.last_modified_time #=> Time
+    #   resp.distribution_tenant.enabled #=> Boolean
+    #   resp.distribution_tenant.status #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetDistributionTenant AWS API Documentation
+    #
+    # @overload get_distribution_tenant(params = {})
+    # @param [Hash] params ({})
+    def get_distribution_tenant(params = {}, options = {})
+      req = build_request(:get_distribution_tenant, params)
+      req.send_request(options)
+    end
+
+    # Gets information about a distribution tenant by the associated domain.
+    #
+    # @option params [required, String] :domain
+    #   A domain name associated with the target distribution tenant.
+    #
+    # @return [Types::GetDistributionTenantByDomainResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDistributionTenantByDomainResult#distribution_tenant #distribution_tenant} => Types::DistributionTenant
+    #   * {Types::GetDistributionTenantByDomainResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_distribution_tenant_by_domain({
+    #     domain: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.distribution_tenant.id #=> String
+    #   resp.distribution_tenant.distribution_id #=> String
+    #   resp.distribution_tenant.name #=> String
+    #   resp.distribution_tenant.arn #=> String
+    #   resp.distribution_tenant.domains #=> Array
+    #   resp.distribution_tenant.domains[0].domain #=> String
+    #   resp.distribution_tenant.domains[0].status #=> String, one of "active", "inactive"
+    #   resp.distribution_tenant.tags.items #=> Array
+    #   resp.distribution_tenant.tags.items[0].key #=> String
+    #   resp.distribution_tenant.tags.items[0].value #=> String
+    #   resp.distribution_tenant.customizations.web_acl.action #=> String, one of "override", "disable"
+    #   resp.distribution_tenant.customizations.web_acl.arn #=> String
+    #   resp.distribution_tenant.customizations.certificate.arn #=> String
+    #   resp.distribution_tenant.customizations.geo_restrictions.restriction_type #=> String, one of "blacklist", "whitelist", "none"
+    #   resp.distribution_tenant.customizations.geo_restrictions.locations #=> Array
+    #   resp.distribution_tenant.customizations.geo_restrictions.locations[0] #=> String
+    #   resp.distribution_tenant.parameters #=> Array
+    #   resp.distribution_tenant.parameters[0].name #=> String
+    #   resp.distribution_tenant.parameters[0].value #=> String
+    #   resp.distribution_tenant.connection_group_id #=> String
+    #   resp.distribution_tenant.created_time #=> Time
+    #   resp.distribution_tenant.last_modified_time #=> Time
+    #   resp.distribution_tenant.enabled #=> Boolean
+    #   resp.distribution_tenant.status #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetDistributionTenantByDomain AWS API Documentation
+    #
+    # @overload get_distribution_tenant_by_domain(params = {})
+    # @param [Hash] params ({})
+    def get_distribution_tenant_by_domain(params = {}, options = {})
+      req = build_request(:get_distribution_tenant_by_domain, params)
       req.send_request(options)
     end
 
@@ -5081,6 +5808,50 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
+    # Gets information about a specific invalidation for a distribution
+    # tenant.
+    #
+    # @option params [required, String] :distribution_tenant_id
+    #   The ID of the distribution tenant.
+    #
+    # @option params [required, String] :id
+    #   The ID of the invalidation to retrieve.
+    #
+    # @return [Types::GetInvalidationForDistributionTenantResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetInvalidationForDistributionTenantResult#invalidation #invalidation} => Types::Invalidation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_invalidation_for_distribution_tenant({
+    #     distribution_tenant_id: "string", # required
+    #     id: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.invalidation.id #=> String
+    #   resp.invalidation.status #=> String
+    #   resp.invalidation.create_time #=> Time
+    #   resp.invalidation.invalidation_batch.paths.quantity #=> Integer
+    #   resp.invalidation.invalidation_batch.paths.items #=> Array
+    #   resp.invalidation.invalidation_batch.paths.items[0] #=> String
+    #   resp.invalidation.invalidation_batch.caller_reference #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * invalidation_for_distribution_tenant_completed
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetInvalidationForDistributionTenant AWS API Documentation
+    #
+    # @overload get_invalidation_for_distribution_tenant(params = {})
+    # @param [Hash] params ({})
+    def get_invalidation_for_distribution_tenant(params = {}, options = {})
+      req = build_request(:get_invalidation_for_distribution_tenant, params)
+      req.send_request(options)
+    end
+
     # Gets a key group, including the date and time when the key group was
     # last modified.
     #
@@ -5162,6 +5933,40 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def get_key_group_config(params = {}, options = {})
       req = build_request(:get_key_group_config, params)
+      req.send_request(options)
+    end
+
+    # Gets details about the CloudFront managed ACM certificate.
+    #
+    # @option params [required, String] :identifier
+    #   The identifier of the multi-tenant distribution.
+    #
+    # @return [Types::GetManagedCertificateDetailsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetManagedCertificateDetailsResult#managed_certificate_details #managed_certificate_details} => Types::ManagedCertificateDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_managed_certificate_details({
+    #     identifier: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.managed_certificate_details.certificate_arn #=> String
+    #   resp.managed_certificate_details.certificate_status #=> String, one of "pending-validation", "issued", "inactive", "expired", "validation-timed-out", "revoked", "failed"
+    #   resp.managed_certificate_details.validation_token_host #=> String, one of "cloudfront", "self-hosted"
+    #   resp.managed_certificate_details.validation_token_details #=> Array
+    #   resp.managed_certificate_details.validation_token_details[0].domain #=> String
+    #   resp.managed_certificate_details.validation_token_details[0].redirect_to #=> String
+    #   resp.managed_certificate_details.validation_token_details[0].redirect_from #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetManagedCertificateDetails AWS API Documentation
+    #
+    # @overload get_managed_certificate_details(params = {})
+    # @param [Hash] params ({})
+    def get_managed_certificate_details(params = {}, options = {})
+      req = build_request(:get_managed_certificate_details, params)
       req.send_request(options)
     end
 
@@ -5711,7 +6516,7 @@ module Aws::CloudFront
     #   resp.streaming_distribution.streaming_distribution_config.trusted_signers.quantity #=> Integer
     #   resp.streaming_distribution.streaming_distribution_config.trusted_signers.items #=> Array
     #   resp.streaming_distribution.streaming_distribution_config.trusted_signers.items[0] #=> String
-    #   resp.streaming_distribution.streaming_distribution_config.price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All"
+    #   resp.streaming_distribution.streaming_distribution_config.price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All", "None"
     #   resp.streaming_distribution.streaming_distribution_config.enabled #=> Boolean
     #   resp.etag #=> String
     #
@@ -5761,7 +6566,7 @@ module Aws::CloudFront
     #   resp.streaming_distribution_config.trusted_signers.quantity #=> Integer
     #   resp.streaming_distribution_config.trusted_signers.items #=> Array
     #   resp.streaming_distribution_config.trusted_signers.items[0] #=> String
-    #   resp.streaming_distribution_config.price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All"
+    #   resp.streaming_distribution_config.price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All", "None"
     #   resp.streaming_distribution_config.enabled #=> Boolean
     #   resp.etag #=> String
     #
@@ -6114,6 +6919,59 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
+    # Lists the connection groups in your Amazon Web Services account.
+    #
+    # @option params [Types::ConnectionGroupAssociationFilter] :association_filter
+    #   Filter by associated Anycast IP list ID.
+    #
+    # @option params [String] :marker
+    #   The marker for the next set of connection groups to retrieve.
+    #
+    # @option params [Integer] :max_items
+    #   The maximum number of connection groups to return.
+    #
+    # @return [Types::ListConnectionGroupsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListConnectionGroupsResult#next_marker #next_marker} => String
+    #   * {Types::ListConnectionGroupsResult#connection_groups #connection_groups} => Array&lt;Types::ConnectionGroupSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_connection_groups({
+    #     association_filter: {
+    #       anycast_ip_list_id: "string",
+    #     },
+    #     marker: "string",
+    #     max_items: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_marker #=> String
+    #   resp.connection_groups #=> Array
+    #   resp.connection_groups[0].id #=> String
+    #   resp.connection_groups[0].name #=> String
+    #   resp.connection_groups[0].arn #=> String
+    #   resp.connection_groups[0].routing_endpoint #=> String
+    #   resp.connection_groups[0].created_time #=> Time
+    #   resp.connection_groups[0].last_modified_time #=> Time
+    #   resp.connection_groups[0].etag #=> String
+    #   resp.connection_groups[0].anycast_ip_list_id #=> String
+    #   resp.connection_groups[0].enabled #=> Boolean
+    #   resp.connection_groups[0].status #=> String
+    #   resp.connection_groups[0].is_default #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListConnectionGroups AWS API Documentation
+    #
+    # @overload list_connection_groups(params = {})
+    # @param [Hash] params ({})
+    def list_connection_groups(params = {}, options = {})
+      req = build_request(:list_connection_groups, params)
+      req.send_request(options)
+    end
+
     # Gets a list of the continuous deployment policies in your Amazon Web
     # Services account.
     #
@@ -6174,6 +7032,135 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
+    # Lists the distribution tenants in your Amazon Web Services account.
+    #
+    # @option params [Types::DistributionTenantAssociationFilter] :association_filter
+    #   Filter by the associated distribution ID or connection group ID.
+    #
+    # @option params [String] :marker
+    #   The marker for the next set of results.
+    #
+    # @option params [Integer] :max_items
+    #   The maximum number of distribution tenants to return.
+    #
+    # @return [Types::ListDistributionTenantsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDistributionTenantsResult#next_marker #next_marker} => String
+    #   * {Types::ListDistributionTenantsResult#distribution_tenant_list #distribution_tenant_list} => Array&lt;Types::DistributionTenantSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_distribution_tenants({
+    #     association_filter: {
+    #       distribution_id: "string",
+    #       connection_group_id: "string",
+    #     },
+    #     marker: "string",
+    #     max_items: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_marker #=> String
+    #   resp.distribution_tenant_list #=> Array
+    #   resp.distribution_tenant_list[0].id #=> String
+    #   resp.distribution_tenant_list[0].distribution_id #=> String
+    #   resp.distribution_tenant_list[0].name #=> String
+    #   resp.distribution_tenant_list[0].arn #=> String
+    #   resp.distribution_tenant_list[0].domains #=> Array
+    #   resp.distribution_tenant_list[0].domains[0].domain #=> String
+    #   resp.distribution_tenant_list[0].domains[0].status #=> String, one of "active", "inactive"
+    #   resp.distribution_tenant_list[0].connection_group_id #=> String
+    #   resp.distribution_tenant_list[0].customizations.web_acl.action #=> String, one of "override", "disable"
+    #   resp.distribution_tenant_list[0].customizations.web_acl.arn #=> String
+    #   resp.distribution_tenant_list[0].customizations.certificate.arn #=> String
+    #   resp.distribution_tenant_list[0].customizations.geo_restrictions.restriction_type #=> String, one of "blacklist", "whitelist", "none"
+    #   resp.distribution_tenant_list[0].customizations.geo_restrictions.locations #=> Array
+    #   resp.distribution_tenant_list[0].customizations.geo_restrictions.locations[0] #=> String
+    #   resp.distribution_tenant_list[0].created_time #=> Time
+    #   resp.distribution_tenant_list[0].last_modified_time #=> Time
+    #   resp.distribution_tenant_list[0].etag #=> String
+    #   resp.distribution_tenant_list[0].enabled #=> Boolean
+    #   resp.distribution_tenant_list[0].status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionTenants AWS API Documentation
+    #
+    # @overload list_distribution_tenants(params = {})
+    # @param [Hash] params ({})
+    def list_distribution_tenants(params = {}, options = {})
+      req = build_request(:list_distribution_tenants, params)
+      req.send_request(options)
+    end
+
+    # Lists distribution tenants by the customization that you specify.
+    #
+    # You must specify either the `CertificateArn` parameter or `WebACLArn`
+    # parameter, but not both in the same request.
+    #
+    # @option params [String] :web_acl_arn
+    #   Filter by the ARN of the associated WAF web ACL.
+    #
+    # @option params [String] :certificate_arn
+    #   Filter by the ARN of the associated ACM certificate.
+    #
+    # @option params [String] :marker
+    #   The marker for the next set of results.
+    #
+    # @option params [Integer] :max_items
+    #   The maximum number of distribution tenants to return by the specified
+    #   customization.
+    #
+    # @return [Types::ListDistributionTenantsByCustomizationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDistributionTenantsByCustomizationResult#next_marker #next_marker} => String
+    #   * {Types::ListDistributionTenantsByCustomizationResult#distribution_tenant_list #distribution_tenant_list} => Array&lt;Types::DistributionTenantSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_distribution_tenants_by_customization({
+    #     web_acl_arn: "string",
+    #     certificate_arn: "string",
+    #     marker: "string",
+    #     max_items: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_marker #=> String
+    #   resp.distribution_tenant_list #=> Array
+    #   resp.distribution_tenant_list[0].id #=> String
+    #   resp.distribution_tenant_list[0].distribution_id #=> String
+    #   resp.distribution_tenant_list[0].name #=> String
+    #   resp.distribution_tenant_list[0].arn #=> String
+    #   resp.distribution_tenant_list[0].domains #=> Array
+    #   resp.distribution_tenant_list[0].domains[0].domain #=> String
+    #   resp.distribution_tenant_list[0].domains[0].status #=> String, one of "active", "inactive"
+    #   resp.distribution_tenant_list[0].connection_group_id #=> String
+    #   resp.distribution_tenant_list[0].customizations.web_acl.action #=> String, one of "override", "disable"
+    #   resp.distribution_tenant_list[0].customizations.web_acl.arn #=> String
+    #   resp.distribution_tenant_list[0].customizations.certificate.arn #=> String
+    #   resp.distribution_tenant_list[0].customizations.geo_restrictions.restriction_type #=> String, one of "blacklist", "whitelist", "none"
+    #   resp.distribution_tenant_list[0].customizations.geo_restrictions.locations #=> Array
+    #   resp.distribution_tenant_list[0].customizations.geo_restrictions.locations[0] #=> String
+    #   resp.distribution_tenant_list[0].created_time #=> Time
+    #   resp.distribution_tenant_list[0].last_modified_time #=> Time
+    #   resp.distribution_tenant_list[0].etag #=> String
+    #   resp.distribution_tenant_list[0].enabled #=> Boolean
+    #   resp.distribution_tenant_list[0].status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionTenantsByCustomization AWS API Documentation
+    #
+    # @overload list_distribution_tenants_by_customization(params = {})
+    # @param [Hash] params ({})
+    def list_distribution_tenants_by_customization(params = {}, options = {})
+      req = build_request(:list_distribution_tenants_by_customization, params)
+      req.send_request(options)
+    end
+
     # List CloudFront distributions.
     #
     # @option params [String] :marker
@@ -6209,6 +7196,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items #=> Array
     #   resp.distribution_list.items[0].id #=> String
     #   resp.distribution_list.items[0].arn #=> String
+    #   resp.distribution_list.items[0].etag #=> String
     #   resp.distribution_list.items[0].status #=> String
     #   resp.distribution_list.items[0].last_modified_time #=> Time
     #   resp.distribution_list.items[0].domain_name #=> String
@@ -6355,7 +7343,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].custom_error_responses.items[0].response_code #=> String
     #   resp.distribution_list.items[0].custom_error_responses.items[0].error_caching_min_ttl #=> Integer
     #   resp.distribution_list.items[0].comment #=> String
-    #   resp.distribution_list.items[0].price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All"
+    #   resp.distribution_list.items[0].price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All", "None"
     #   resp.distribution_list.items[0].enabled #=> Boolean
     #   resp.distribution_list.items[0].viewer_certificate.cloud_front_default_certificate #=> Boolean
     #   resp.distribution_list.items[0].viewer_certificate.iam_certificate_id #=> String
@@ -6375,6 +7363,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].alias_icp_recordals[0].cname #=> String
     #   resp.distribution_list.items[0].alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
     #   resp.distribution_list.items[0].staging #=> Boolean
+    #   resp.distribution_list.items[0].connection_mode #=> String, one of "direct", "tenant-only"
     #   resp.distribution_list.items[0].anycast_ip_list_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributions AWS API Documentation
@@ -6424,6 +7413,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items #=> Array
     #   resp.distribution_list.items[0].id #=> String
     #   resp.distribution_list.items[0].arn #=> String
+    #   resp.distribution_list.items[0].etag #=> String
     #   resp.distribution_list.items[0].status #=> String
     #   resp.distribution_list.items[0].last_modified_time #=> Time
     #   resp.distribution_list.items[0].domain_name #=> String
@@ -6570,7 +7560,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].custom_error_responses.items[0].response_code #=> String
     #   resp.distribution_list.items[0].custom_error_responses.items[0].error_caching_min_ttl #=> Integer
     #   resp.distribution_list.items[0].comment #=> String
-    #   resp.distribution_list.items[0].price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All"
+    #   resp.distribution_list.items[0].price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All", "None"
     #   resp.distribution_list.items[0].enabled #=> Boolean
     #   resp.distribution_list.items[0].viewer_certificate.cloud_front_default_certificate #=> Boolean
     #   resp.distribution_list.items[0].viewer_certificate.iam_certificate_id #=> String
@@ -6590,6 +7580,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].alias_icp_recordals[0].cname #=> String
     #   resp.distribution_list.items[0].alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
     #   resp.distribution_list.items[0].staging #=> Boolean
+    #   resp.distribution_list.items[0].connection_mode #=> String, one of "direct", "tenant-only"
     #   resp.distribution_list.items[0].anycast_ip_list_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByAnycastIpListId AWS API Documentation
@@ -6653,6 +7644,220 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def list_distributions_by_cache_policy_id(params = {}, options = {})
       req = build_request(:list_distributions_by_cache_policy_id, params)
+      req.send_request(options)
+    end
+
+    # Lists the distributions by the connection mode that you specify.
+    #
+    # @option params [String] :marker
+    #   The marker for the next set of distributions to retrieve.
+    #
+    # @option params [Integer] :max_items
+    #   The maximum number of distributions to return.
+    #
+    # @option params [required, String] :connection_mode
+    #   The connection mode to filter distributions by.
+    #
+    # @return [Types::ListDistributionsByConnectionModeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDistributionsByConnectionModeResult#distribution_list #distribution_list} => Types::DistributionList
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_distributions_by_connection_mode({
+    #     marker: "string",
+    #     max_items: 1,
+    #     connection_mode: "direct", # required, accepts direct, tenant-only
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.distribution_list.marker #=> String
+    #   resp.distribution_list.next_marker #=> String
+    #   resp.distribution_list.max_items #=> Integer
+    #   resp.distribution_list.is_truncated #=> Boolean
+    #   resp.distribution_list.quantity #=> Integer
+    #   resp.distribution_list.items #=> Array
+    #   resp.distribution_list.items[0].id #=> String
+    #   resp.distribution_list.items[0].arn #=> String
+    #   resp.distribution_list.items[0].etag #=> String
+    #   resp.distribution_list.items[0].status #=> String
+    #   resp.distribution_list.items[0].last_modified_time #=> Time
+    #   resp.distribution_list.items[0].domain_name #=> String
+    #   resp.distribution_list.items[0].aliases.quantity #=> Integer
+    #   resp.distribution_list.items[0].aliases.items #=> Array
+    #   resp.distribution_list.items[0].aliases.items[0] #=> String
+    #   resp.distribution_list.items[0].origins.quantity #=> Integer
+    #   resp.distribution_list.items[0].origins.items #=> Array
+    #   resp.distribution_list.items[0].origins.items[0].id #=> String
+    #   resp.distribution_list.items[0].origins.items[0].domain_name #=> String
+    #   resp.distribution_list.items[0].origins.items[0].origin_path #=> String
+    #   resp.distribution_list.items[0].origins.items[0].custom_headers.quantity #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].custom_headers.items #=> Array
+    #   resp.distribution_list.items[0].origins.items[0].custom_headers.items[0].header_name #=> String
+    #   resp.distribution_list.items[0].origins.items[0].custom_headers.items[0].header_value #=> String
+    #   resp.distribution_list.items[0].origins.items[0].s3_origin_config.origin_access_identity #=> String
+    #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.http_port #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.https_port #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_protocol_policy #=> String, one of "http-only", "match-viewer", "https-only"
+    #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_ssl_protocols.quantity #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_ssl_protocols.items #=> Array
+    #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_ssl_protocols.items[0] #=> String, one of "SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"
+    #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_read_timeout #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.vpc_origin_id #=> String
+    #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.origin_read_timeout #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].vpc_origin_config.origin_keepalive_timeout #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].connection_attempts #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].connection_timeout #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].origin_shield.enabled #=> Boolean
+    #   resp.distribution_list.items[0].origins.items[0].origin_shield.origin_shield_region #=> String
+    #   resp.distribution_list.items[0].origins.items[0].origin_access_control_id #=> String
+    #   resp.distribution_list.items[0].origin_groups.quantity #=> Integer
+    #   resp.distribution_list.items[0].origin_groups.items #=> Array
+    #   resp.distribution_list.items[0].origin_groups.items[0].id #=> String
+    #   resp.distribution_list.items[0].origin_groups.items[0].failover_criteria.status_codes.quantity #=> Integer
+    #   resp.distribution_list.items[0].origin_groups.items[0].failover_criteria.status_codes.items #=> Array
+    #   resp.distribution_list.items[0].origin_groups.items[0].failover_criteria.status_codes.items[0] #=> Integer
+    #   resp.distribution_list.items[0].origin_groups.items[0].members.quantity #=> Integer
+    #   resp.distribution_list.items[0].origin_groups.items[0].members.items #=> Array
+    #   resp.distribution_list.items[0].origin_groups.items[0].members.items[0].origin_id #=> String
+    #   resp.distribution_list.items[0].origin_groups.items[0].selection_criteria #=> String, one of "default", "media-quality-based"
+    #   resp.distribution_list.items[0].default_cache_behavior.target_origin_id #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.enabled #=> Boolean
+    #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.quantity #=> Integer
+    #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.items #=> Array
+    #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.items[0] #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.trusted_key_groups.enabled #=> Boolean
+    #   resp.distribution_list.items[0].default_cache_behavior.trusted_key_groups.quantity #=> Integer
+    #   resp.distribution_list.items[0].default_cache_behavior.trusted_key_groups.items #=> Array
+    #   resp.distribution_list.items[0].default_cache_behavior.trusted_key_groups.items[0] #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
+    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.quantity #=> Integer
+    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.items #=> Array
+    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.cached_methods.quantity #=> Integer
+    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.cached_methods.items #=> Array
+    #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution_list.items[0].default_cache_behavior.smooth_streaming #=> Boolean
+    #   resp.distribution_list.items[0].default_cache_behavior.compress #=> Boolean
+    #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.quantity #=> Integer
+    #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items #=> Array
+    #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution_list.items[0].default_cache_behavior.function_associations.quantity #=> Integer
+    #   resp.distribution_list.items[0].default_cache_behavior.function_associations.items #=> Array
+    #   resp.distribution_list.items[0].default_cache_behavior.function_associations.items[0].function_arn #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution_list.items[0].default_cache_behavior.field_level_encryption_id #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.realtime_log_config_arn #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.cache_policy_id #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.origin_request_policy_id #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.response_headers_policy_id #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.grpc_config.enabled #=> Boolean
+    #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.query_string #=> Boolean
+    #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
+    #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.cookies.whitelisted_names.quantity #=> Integer
+    #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.cookies.whitelisted_names.items #=> Array
+    #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.cookies.whitelisted_names.items[0] #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.headers.quantity #=> Integer
+    #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.headers.items #=> Array
+    #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.headers.items[0] #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.query_string_cache_keys.quantity #=> Integer
+    #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.query_string_cache_keys.items #=> Array
+    #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.query_string_cache_keys.items[0] #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.min_ttl #=> Integer
+    #   resp.distribution_list.items[0].default_cache_behavior.default_ttl #=> Integer
+    #   resp.distribution_list.items[0].default_cache_behavior.max_ttl #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.quantity #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items #=> Array
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].path_pattern #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].target_origin_id #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.enabled #=> Boolean
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.quantity #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.items #=> Array
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.items[0] #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_key_groups.enabled #=> Boolean
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_key_groups.quantity #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_key_groups.items #=> Array
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_key_groups.items[0] #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.quantity #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.items #=> Array
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.cached_methods.quantity #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.cached_methods.items #=> Array
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].smooth_streaming #=> Boolean
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].compress #=> Boolean
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.quantity #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items #=> Array
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].function_associations.quantity #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].function_associations.items #=> Array
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].function_associations.items[0].function_arn #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].field_level_encryption_id #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].realtime_log_config_arn #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].cache_policy_id #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].origin_request_policy_id #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].response_headers_policy_id #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].grpc_config.enabled #=> Boolean
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.query_string #=> Boolean
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.cookies.whitelisted_names.quantity #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.cookies.whitelisted_names.items #=> Array
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.cookies.whitelisted_names.items[0] #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.headers.quantity #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.headers.items #=> Array
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.headers.items[0] #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.query_string_cache_keys.quantity #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items #=> Array
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items[0] #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].min_ttl #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].default_ttl #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].max_ttl #=> Integer
+    #   resp.distribution_list.items[0].custom_error_responses.quantity #=> Integer
+    #   resp.distribution_list.items[0].custom_error_responses.items #=> Array
+    #   resp.distribution_list.items[0].custom_error_responses.items[0].error_code #=> Integer
+    #   resp.distribution_list.items[0].custom_error_responses.items[0].response_page_path #=> String
+    #   resp.distribution_list.items[0].custom_error_responses.items[0].response_code #=> String
+    #   resp.distribution_list.items[0].custom_error_responses.items[0].error_caching_min_ttl #=> Integer
+    #   resp.distribution_list.items[0].comment #=> String
+    #   resp.distribution_list.items[0].price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All", "None"
+    #   resp.distribution_list.items[0].enabled #=> Boolean
+    #   resp.distribution_list.items[0].viewer_certificate.cloud_front_default_certificate #=> Boolean
+    #   resp.distribution_list.items[0].viewer_certificate.iam_certificate_id #=> String
+    #   resp.distribution_list.items[0].viewer_certificate.acm_certificate_arn #=> String
+    #   resp.distribution_list.items[0].viewer_certificate.ssl_support_method #=> String, one of "sni-only", "vip", "static-ip"
+    #   resp.distribution_list.items[0].viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021"
+    #   resp.distribution_list.items[0].viewer_certificate.certificate #=> String
+    #   resp.distribution_list.items[0].viewer_certificate.certificate_source #=> String, one of "cloudfront", "iam", "acm"
+    #   resp.distribution_list.items[0].restrictions.geo_restriction.restriction_type #=> String, one of "blacklist", "whitelist", "none"
+    #   resp.distribution_list.items[0].restrictions.geo_restriction.quantity #=> Integer
+    #   resp.distribution_list.items[0].restrictions.geo_restriction.items #=> Array
+    #   resp.distribution_list.items[0].restrictions.geo_restriction.items[0] #=> String
+    #   resp.distribution_list.items[0].web_acl_id #=> String
+    #   resp.distribution_list.items[0].http_version #=> String, one of "http1.1", "http2", "http3", "http2and3"
+    #   resp.distribution_list.items[0].is_ipv6_enabled #=> Boolean
+    #   resp.distribution_list.items[0].alias_icp_recordals #=> Array
+    #   resp.distribution_list.items[0].alias_icp_recordals[0].cname #=> String
+    #   resp.distribution_list.items[0].alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
+    #   resp.distribution_list.items[0].staging #=> Boolean
+    #   resp.distribution_list.items[0].connection_mode #=> String, one of "direct", "tenant-only"
+    #   resp.distribution_list.items[0].anycast_ip_list_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByConnectionMode AWS API Documentation
+    #
+    # @overload list_distributions_by_connection_mode(params = {})
+    # @param [Hash] params ({})
+    def list_distributions_by_connection_mode(params = {}, options = {})
+      req = build_request(:list_distributions_by_connection_mode, params)
       req.send_request(options)
     end
 
@@ -6822,6 +8027,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items #=> Array
     #   resp.distribution_list.items[0].id #=> String
     #   resp.distribution_list.items[0].arn #=> String
+    #   resp.distribution_list.items[0].etag #=> String
     #   resp.distribution_list.items[0].status #=> String
     #   resp.distribution_list.items[0].last_modified_time #=> Time
     #   resp.distribution_list.items[0].domain_name #=> String
@@ -6968,7 +8174,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].custom_error_responses.items[0].response_code #=> String
     #   resp.distribution_list.items[0].custom_error_responses.items[0].error_caching_min_ttl #=> Integer
     #   resp.distribution_list.items[0].comment #=> String
-    #   resp.distribution_list.items[0].price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All"
+    #   resp.distribution_list.items[0].price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All", "None"
     #   resp.distribution_list.items[0].enabled #=> Boolean
     #   resp.distribution_list.items[0].viewer_certificate.cloud_front_default_certificate #=> Boolean
     #   resp.distribution_list.items[0].viewer_certificate.iam_certificate_id #=> String
@@ -6988,6 +8194,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].alias_icp_recordals[0].cname #=> String
     #   resp.distribution_list.items[0].alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
     #   resp.distribution_list.items[0].staging #=> Boolean
+    #   resp.distribution_list.items[0].connection_mode #=> String, one of "direct", "tenant-only"
     #   resp.distribution_list.items[0].anycast_ip_list_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByRealtimeLogConfig AWS API Documentation
@@ -7167,6 +8374,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items #=> Array
     #   resp.distribution_list.items[0].id #=> String
     #   resp.distribution_list.items[0].arn #=> String
+    #   resp.distribution_list.items[0].etag #=> String
     #   resp.distribution_list.items[0].status #=> String
     #   resp.distribution_list.items[0].last_modified_time #=> Time
     #   resp.distribution_list.items[0].domain_name #=> String
@@ -7313,7 +8521,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].custom_error_responses.items[0].response_code #=> String
     #   resp.distribution_list.items[0].custom_error_responses.items[0].error_caching_min_ttl #=> Integer
     #   resp.distribution_list.items[0].comment #=> String
-    #   resp.distribution_list.items[0].price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All"
+    #   resp.distribution_list.items[0].price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All", "None"
     #   resp.distribution_list.items[0].enabled #=> Boolean
     #   resp.distribution_list.items[0].viewer_certificate.cloud_front_default_certificate #=> Boolean
     #   resp.distribution_list.items[0].viewer_certificate.iam_certificate_id #=> String
@@ -7333,6 +8541,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].alias_icp_recordals[0].cname #=> String
     #   resp.distribution_list.items[0].alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
     #   resp.distribution_list.items[0].staging #=> Boolean
+    #   resp.distribution_list.items[0].connection_mode #=> String, one of "direct", "tenant-only"
     #   resp.distribution_list.items[0].anycast_ip_list_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByWebACLId AWS API Documentation
@@ -7341,6 +8550,64 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def list_distributions_by_web_acl_id(params = {}, options = {})
       req = build_request(:list_distributions_by_web_acl_id, params)
+      req.send_request(options)
+    end
+
+    # Lists existing domain associations that conflict with the domain that
+    # you specify.
+    #
+    # You can use this API operation when transferring domains to identify
+    # potential domain conflicts. Domain conflicts must be resolved first
+    # before they can be moved.
+    #
+    # @option params [required, String] :domain
+    #   The domain to check for conflicts.
+    #
+    # @option params [required, Types::DistributionResourceId] :domain_control_validation_resource
+    #   The distribution resource identifier. This can be the distribution or
+    #   distribution tenant that has a valid certificate, which covers the
+    #   domain that you specify.
+    #
+    # @option params [Integer] :max_items
+    #   The maximum number of domain conflicts to return.
+    #
+    # @option params [String] :marker
+    #   The marker for the next set of domain conflicts.
+    #
+    # @return [Types::ListDomainConflictsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDomainConflictsResult#domain_conflicts #domain_conflicts} => Array&lt;Types::DomainConflict&gt;
+    #   * {Types::ListDomainConflictsResult#next_marker #next_marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_domain_conflicts({
+    #     domain: "string", # required
+    #     domain_control_validation_resource: { # required
+    #       distribution_id: "string",
+    #       distribution_tenant_id: "string",
+    #     },
+    #     max_items: 1,
+    #     marker: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_conflicts #=> Array
+    #   resp.domain_conflicts[0].domain #=> String
+    #   resp.domain_conflicts[0].resource_type #=> String, one of "distribution", "distribution-tenant"
+    #   resp.domain_conflicts[0].resource_id #=> String
+    #   resp.domain_conflicts[0].account_id #=> String
+    #   resp.next_marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDomainConflicts AWS API Documentation
+    #
+    # @overload list_domain_conflicts(params = {})
+    # @param [Hash] params ({})
+    def list_domain_conflicts(params = {}, options = {})
+      req = build_request(:list_domain_conflicts, params)
       req.send_request(options)
     end
 
@@ -7569,6 +8836,60 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def list_invalidations(params = {}, options = {})
       req = build_request(:list_invalidations, params)
+      req.send_request(options)
+    end
+
+    # Lists the invalidations for a distribution tenant.
+    #
+    # @option params [required, String] :id
+    #   The ID of the distribution tenant.
+    #
+    # @option params [String] :marker
+    #   Use this parameter when paginating results to indicate where to begin
+    #   in your list of invalidation batches. Because the results are returned
+    #   in decreasing order from most recent to oldest, the most recent
+    #   results are on the first page, the second page will contain earlier
+    #   results, and so on. To get the next page of results, set `Marker` to
+    #   the value of the `NextMarker` from the current page's response. This
+    #   value is the same as the ID of the last invalidation batch on that
+    #   page.
+    #
+    # @option params [Integer] :max_items
+    #   The maximum number of invalidations to return for the distribution
+    #   tenant.
+    #
+    # @return [Types::ListInvalidationsForDistributionTenantResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListInvalidationsForDistributionTenantResult#invalidation_list #invalidation_list} => Types::InvalidationList
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_invalidations_for_distribution_tenant({
+    #     id: "string", # required
+    #     marker: "string",
+    #     max_items: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.invalidation_list.marker #=> String
+    #   resp.invalidation_list.next_marker #=> String
+    #   resp.invalidation_list.max_items #=> Integer
+    #   resp.invalidation_list.is_truncated #=> Boolean
+    #   resp.invalidation_list.quantity #=> Integer
+    #   resp.invalidation_list.items #=> Array
+    #   resp.invalidation_list.items[0].id #=> String
+    #   resp.invalidation_list.items[0].create_time #=> Time
+    #   resp.invalidation_list.items[0].status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListInvalidationsForDistributionTenant AWS API Documentation
+    #
+    # @overload list_invalidations_for_distribution_tenant(params = {})
+    # @param [Hash] params ({})
+    def list_invalidations_for_distribution_tenant(params = {}, options = {})
+      req = build_request(:list_invalidations_for_distribution_tenant, params)
       req.send_request(options)
     end
 
@@ -8095,7 +9416,7 @@ module Aws::CloudFront
     #   resp.streaming_distribution_list.items[0].trusted_signers.items #=> Array
     #   resp.streaming_distribution_list.items[0].trusted_signers.items[0] #=> String
     #   resp.streaming_distribution_list.items[0].comment #=> String
-    #   resp.streaming_distribution_list.items[0].price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All"
+    #   resp.streaming_distribution_list.items[0].price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All", "None"
     #   resp.streaming_distribution_list.items[0].enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListStreamingDistributions AWS API Documentation
@@ -8574,6 +9895,71 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
+    # Updates a connection group.
+    #
+    # @option params [required, String] :id
+    #   The ID of the connection group.
+    #
+    # @option params [Boolean] :ipv_6_enabled
+    #   Enable IPv6 for the connection group. For more information, see
+    #   [Enable IPv6][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesEnableIPv6
+    #
+    # @option params [required, String] :if_match
+    #   The value of the `ETag` header that you received when retrieving the
+    #   connection group that you're updating.
+    #
+    # @option params [String] :anycast_ip_list_id
+    #   The ID of the Anycast static IP list.
+    #
+    # @option params [Boolean] :enabled
+    #   Whether the connection group is enabled.
+    #
+    # @return [Types::UpdateConnectionGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateConnectionGroupResult#connection_group #connection_group} => Types::ConnectionGroup
+    #   * {Types::UpdateConnectionGroupResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_connection_group({
+    #     id: "string", # required
+    #     ipv_6_enabled: false,
+    #     if_match: "string", # required
+    #     anycast_ip_list_id: "string",
+    #     enabled: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connection_group.id #=> String
+    #   resp.connection_group.name #=> String
+    #   resp.connection_group.arn #=> String
+    #   resp.connection_group.created_time #=> Time
+    #   resp.connection_group.last_modified_time #=> Time
+    #   resp.connection_group.tags.items #=> Array
+    #   resp.connection_group.tags.items[0].key #=> String
+    #   resp.connection_group.tags.items[0].value #=> String
+    #   resp.connection_group.ipv_6_enabled #=> Boolean
+    #   resp.connection_group.routing_endpoint #=> String
+    #   resp.connection_group.anycast_ip_list_id #=> String
+    #   resp.connection_group.status #=> String
+    #   resp.connection_group.enabled #=> Boolean
+    #   resp.connection_group.is_default #=> Boolean
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateConnectionGroup AWS API Documentation
+    #
+    # @overload update_connection_group(params = {})
+    # @param [Hash] params ({})
+    def update_connection_group(params = {}, options = {})
+      req = build_request(:update_connection_group, params)
+      req.send_request(options)
+    end
+
     # Updates a continuous deployment policy. You can update a continuous
     # deployment policy to enable or disable it, to change the percentage of
     # traffic that it sends to the staging distribution, or to change the
@@ -8951,7 +10337,7 @@ module Aws::CloudFront
     #         bucket: "string",
     #         prefix: "string",
     #       },
-    #       price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All
+    #       price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All, None
     #       enabled: false, # required
     #       viewer_certificate: {
     #         cloud_front_default_certificate: false,
@@ -8975,6 +10361,21 @@ module Aws::CloudFront
     #       continuous_deployment_policy_id: "string",
     #       staging: false,
     #       anycast_ip_list_id: "string",
+    #       tenant_config: {
+    #         parameter_definitions: [
+    #           {
+    #             name: "ParameterName", # required
+    #             definition: { # required
+    #               string_schema: {
+    #                 comment: "string",
+    #                 default_value: "ParameterValue",
+    #                 required: false, # required
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       },
+    #       connection_mode: "direct", # accepts direct, tenant-only
     #     },
     #     id: "string", # required
     #     if_match: "string",
@@ -9151,7 +10552,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.logging.include_cookies #=> Boolean
     #   resp.distribution.distribution_config.logging.bucket #=> String
     #   resp.distribution.distribution_config.logging.prefix #=> String
-    #   resp.distribution.distribution_config.price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All"
+    #   resp.distribution.distribution_config.price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All", "None"
     #   resp.distribution.distribution_config.enabled #=> Boolean
     #   resp.distribution.distribution_config.viewer_certificate.cloud_front_default_certificate #=> Boolean
     #   resp.distribution.distribution_config.viewer_certificate.iam_certificate_id #=> String
@@ -9170,6 +10571,12 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.continuous_deployment_policy_id #=> String
     #   resp.distribution.distribution_config.staging #=> Boolean
     #   resp.distribution.distribution_config.anycast_ip_list_id #=> String
+    #   resp.distribution.distribution_config.tenant_config.parameter_definitions #=> Array
+    #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].name #=> String
+    #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].definition.string_schema.comment #=> String
+    #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].definition.string_schema.default_value #=> String
+    #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].definition.string_schema.required #=> Boolean
+    #   resp.distribution.distribution_config.connection_mode #=> String, one of "direct", "tenant-only"
     #   resp.distribution.alias_icp_recordals #=> Array
     #   resp.distribution.alias_icp_recordals[0].cname #=> String
     #   resp.distribution.alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
@@ -9181,6 +10588,131 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def update_distribution(params = {}, options = {})
       req = build_request(:update_distribution, params)
+      req.send_request(options)
+    end
+
+    # Updates a distribution tenant.
+    #
+    # @option params [required, String] :id
+    #   The ID of the distribution tenant.
+    #
+    # @option params [String] :distribution_id
+    #   The ID for the multi-tenant distribution.
+    #
+    # @option params [Array<Types::DomainItem>] :domains
+    #   The domains to update for the distribution tenant. A domain object can
+    #   contain only a domain property. You must specify at least one domain.
+    #   Each distribution tenant can have up to 5 domains.
+    #
+    # @option params [Types::Customizations] :customizations
+    #   Customizations for the distribution tenant. For each distribution
+    #   tenant, you can specify the geographic restrictions, and the Amazon
+    #   Resource Names (ARNs) for the ACM certificate and WAF web ACL. These
+    #   are specific values that you can override or disable from the
+    #   multi-tenant distribution that was used to create the distribution
+    #   tenant.
+    #
+    # @option params [Array<Types::Parameter>] :parameters
+    #   A list of parameter values to add to the resource. A parameter is
+    #   specified as a key-value pair. A valid parameter value must exist for
+    #   any parameter that is marked as required in the multi-tenant
+    #   distribution.
+    #
+    # @option params [String] :connection_group_id
+    #   The ID of the target connection group.
+    #
+    # @option params [required, String] :if_match
+    #   The value of the `ETag` header that you received when retrieving the
+    #   distribution tenant to update. This value is returned in the response
+    #   of the `GetDistributionTenant` API operation.
+    #
+    # @option params [Types::ManagedCertificateRequest] :managed_certificate_request
+    #   An object that contains the CloudFront managed ACM certificate
+    #   request.
+    #
+    # @option params [Boolean] :enabled
+    #   Indicates whether the distribution tenant should be updated to an
+    #   enabled state. If you update the distribution tenant and it's not
+    #   enabled, the distribution tenant won't serve traffic.
+    #
+    # @return [Types::UpdateDistributionTenantResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDistributionTenantResult#distribution_tenant #distribution_tenant} => Types::DistributionTenant
+    #   * {Types::UpdateDistributionTenantResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_distribution_tenant({
+    #     id: "string", # required
+    #     distribution_id: "string",
+    #     domains: [
+    #       {
+    #         domain: "string", # required
+    #       },
+    #     ],
+    #     customizations: {
+    #       web_acl: {
+    #         action: "override", # required, accepts override, disable
+    #         arn: "string",
+    #       },
+    #       certificate: {
+    #         arn: "string", # required
+    #       },
+    #       geo_restrictions: {
+    #         restriction_type: "blacklist", # required, accepts blacklist, whitelist, none
+    #         locations: ["string"],
+    #       },
+    #     },
+    #     parameters: [
+    #       {
+    #         name: "ParameterName", # required
+    #         value: "ParameterValue", # required
+    #       },
+    #     ],
+    #     connection_group_id: "string",
+    #     if_match: "string", # required
+    #     managed_certificate_request: {
+    #       validation_token_host: "cloudfront", # required, accepts cloudfront, self-hosted
+    #       primary_domain_name: "string",
+    #       certificate_transparency_logging_preference: "enabled", # accepts enabled, disabled
+    #     },
+    #     enabled: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.distribution_tenant.id #=> String
+    #   resp.distribution_tenant.distribution_id #=> String
+    #   resp.distribution_tenant.name #=> String
+    #   resp.distribution_tenant.arn #=> String
+    #   resp.distribution_tenant.domains #=> Array
+    #   resp.distribution_tenant.domains[0].domain #=> String
+    #   resp.distribution_tenant.domains[0].status #=> String, one of "active", "inactive"
+    #   resp.distribution_tenant.tags.items #=> Array
+    #   resp.distribution_tenant.tags.items[0].key #=> String
+    #   resp.distribution_tenant.tags.items[0].value #=> String
+    #   resp.distribution_tenant.customizations.web_acl.action #=> String, one of "override", "disable"
+    #   resp.distribution_tenant.customizations.web_acl.arn #=> String
+    #   resp.distribution_tenant.customizations.certificate.arn #=> String
+    #   resp.distribution_tenant.customizations.geo_restrictions.restriction_type #=> String, one of "blacklist", "whitelist", "none"
+    #   resp.distribution_tenant.customizations.geo_restrictions.locations #=> Array
+    #   resp.distribution_tenant.customizations.geo_restrictions.locations[0] #=> String
+    #   resp.distribution_tenant.parameters #=> Array
+    #   resp.distribution_tenant.parameters[0].name #=> String
+    #   resp.distribution_tenant.parameters[0].value #=> String
+    #   resp.distribution_tenant.connection_group_id #=> String
+    #   resp.distribution_tenant.created_time #=> Time
+    #   resp.distribution_tenant.last_modified_time #=> Time
+    #   resp.distribution_tenant.enabled #=> Boolean
+    #   resp.distribution_tenant.status #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateDistributionTenant AWS API Documentation
+    #
+    # @overload update_distribution_tenant(params = {})
+    # @param [Hash] params ({})
+    def update_distribution_tenant(params = {}, options = {})
+      req = build_request(:update_distribution_tenant, params)
       req.send_request(options)
     end
 
@@ -9408,7 +10940,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.logging.include_cookies #=> Boolean
     #   resp.distribution.distribution_config.logging.bucket #=> String
     #   resp.distribution.distribution_config.logging.prefix #=> String
-    #   resp.distribution.distribution_config.price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All"
+    #   resp.distribution.distribution_config.price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All", "None"
     #   resp.distribution.distribution_config.enabled #=> Boolean
     #   resp.distribution.distribution_config.viewer_certificate.cloud_front_default_certificate #=> Boolean
     #   resp.distribution.distribution_config.viewer_certificate.iam_certificate_id #=> String
@@ -9427,6 +10959,12 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.continuous_deployment_policy_id #=> String
     #   resp.distribution.distribution_config.staging #=> Boolean
     #   resp.distribution.distribution_config.anycast_ip_list_id #=> String
+    #   resp.distribution.distribution_config.tenant_config.parameter_definitions #=> Array
+    #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].name #=> String
+    #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].definition.string_schema.comment #=> String
+    #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].definition.string_schema.default_value #=> String
+    #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].definition.string_schema.required #=> Boolean
+    #   resp.distribution.distribution_config.connection_mode #=> String, one of "direct", "tenant-only"
     #   resp.distribution.alias_icp_recordals #=> Array
     #   resp.distribution.alias_icp_recordals[0].cname #=> String
     #   resp.distribution.alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
@@ -9438,6 +10976,52 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def update_distribution_with_staging_config(params = {}, options = {})
       req = build_request(:update_distribution_with_staging_config, params)
+      req.send_request(options)
+    end
+
+    # Moves a domain from its current distribution or distribution tenant to
+    # another one.
+    #
+    # @option params [required, String] :domain
+    #   The domain to update.
+    #
+    # @option params [required, Types::DistributionResourceId] :target_resource
+    #   The target distribution resource for the domain. You can specify
+    #   either `DistributionId` or `DistributionTenantId`, but not both.
+    #
+    # @option params [String] :if_match
+    #   The value of the `ETag` identifier for the distribution or
+    #   distribution tenant that will be associated with the domain.
+    #
+    # @return [Types::UpdateDomainAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDomainAssociationResult#domain #domain} => String
+    #   * {Types::UpdateDomainAssociationResult#resource_id #resource_id} => String
+    #   * {Types::UpdateDomainAssociationResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_domain_association({
+    #     domain: "string", # required
+    #     target_resource: { # required
+    #       distribution_id: "string",
+    #       distribution_tenant_id: "string",
+    #     },
+    #     if_match: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain #=> String
+    #   resp.resource_id #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateDomainAssociation AWS API Documentation
+    #
+    # @overload update_domain_association(params = {})
+    # @param [Hash] params ({})
+    def update_domain_association(params = {}, options = {})
+      req = build_request(:update_domain_association, params)
       req.send_request(options)
     end
 
@@ -10345,7 +11929,7 @@ module Aws::CloudFront
     #         quantity: 1, # required
     #         items: ["string"],
     #       },
-    #       price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All
+    #       price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All, None
     #       enabled: false, # required
     #     },
     #     id: "string", # required
@@ -10380,7 +11964,7 @@ module Aws::CloudFront
     #   resp.streaming_distribution.streaming_distribution_config.trusted_signers.quantity #=> Integer
     #   resp.streaming_distribution.streaming_distribution_config.trusted_signers.items #=> Array
     #   resp.streaming_distribution.streaming_distribution_config.trusted_signers.items[0] #=> String
-    #   resp.streaming_distribution.streaming_distribution_config.price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All"
+    #   resp.streaming_distribution.streaming_distribution_config.price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All", "None"
     #   resp.streaming_distribution.streaming_distribution_config.enabled #=> Boolean
     #   resp.etag #=> String
     #
@@ -10503,6 +12087,45 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
+    # Verify the DNS configuration for your domain names. This API operation
+    # checks whether your domain name points to the correct routing endpoint
+    # of the connection group, such as d111111abcdef8.cloudfront.net. You
+    # can use this API operation to troubleshoot and resolve DNS
+    # configuration issues.
+    #
+    # @option params [String] :domain
+    #   The domain name that you're verifying.
+    #
+    # @option params [required, String] :identifier
+    #   The ID of the distribution tenant.
+    #
+    # @return [Types::VerifyDnsConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::VerifyDnsConfigurationResult#dns_configuration_list #dns_configuration_list} => Array&lt;Types::DnsConfiguration&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.verify_dns_configuration({
+    #     domain: "string",
+    #     identifier: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dns_configuration_list #=> Array
+    #   resp.dns_configuration_list[0].domain #=> String
+    #   resp.dns_configuration_list[0].status #=> String, one of "valid-configuration", "invalid-configuration", "unknown-configuration"
+    #   resp.dns_configuration_list[0].reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/VerifyDnsConfiguration AWS API Documentation
+    #
+    # @overload verify_dns_configuration(params = {})
+    # @param [Hash] params ({})
+    def verify_dns_configuration(params = {}, options = {})
+      req = build_request(:verify_dns_configuration, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -10521,7 +12144,7 @@ module Aws::CloudFront
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.114.0'
+      context[:gem_version] = '1.115.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -10587,11 +12210,12 @@ module Aws::CloudFront
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name                     | params                              | :delay   | :max_attempts |
-    # | ------------------------------- | ----------------------------------- | -------- | ------------- |
-    # | distribution_deployed           | {Client#get_distribution}           | 60       | 35            |
-    # | invalidation_completed          | {Client#get_invalidation}           | 20       | 30            |
-    # | streaming_distribution_deployed | {Client#get_streaming_distribution} | 60       | 25            |
+    # | waiter_name                                    | params                                            | :delay   | :max_attempts |
+    # | ---------------------------------------------- | ------------------------------------------------- | -------- | ------------- |
+    # | distribution_deployed                          | {Client#get_distribution}                         | 60       | 35            |
+    # | invalidation_completed                         | {Client#get_invalidation}                         | 20       | 30            |
+    # | invalidation_for_distribution_tenant_completed | {Client#get_invalidation_for_distribution_tenant} | 20       | 30            |
+    # | streaming_distribution_deployed                | {Client#get_streaming_distribution}               | 60       | 25            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -10644,6 +12268,7 @@ module Aws::CloudFront
       {
         distribution_deployed: Waiters::DistributionDeployed,
         invalidation_completed: Waiters::InvalidationCompleted,
+        invalidation_for_distribution_tenant_completed: Waiters::InvalidationForDistributionTenantCompleted,
         streaming_distribution_deployed: Waiters::StreamingDistributionDeployed
       }
     end

@@ -390,6 +390,10 @@ module Aws::Imagebuilder
     SeverityCounts = Shapes::StructureShape.new(name: 'SeverityCounts')
     SnsTopicArn = Shapes::StringShape.new(name: 'SnsTopicArn')
     SourceLayerHash = Shapes::StringShape.new(name: 'SourceLayerHash')
+    SsmParameterConfiguration = Shapes::StructureShape.new(name: 'SsmParameterConfiguration')
+    SsmParameterConfigurationList = Shapes::ListShape.new(name: 'SsmParameterConfigurationList')
+    SsmParameterDataType = Shapes::StringShape.new(name: 'SsmParameterDataType')
+    SsmParameterName = Shapes::StringShape.new(name: 'SsmParameterName')
     StartImagePipelineExecutionRequest = Shapes::StructureShape.new(name: 'StartImagePipelineExecutionRequest')
     StartImagePipelineExecutionResponse = Shapes::StructureShape.new(name: 'StartImagePipelineExecutionResponse')
     StartResourceStateUpdateRequest = Shapes::StructureShape.new(name: 'StartResourceStateUpdateRequest')
@@ -896,6 +900,7 @@ module Aws::Imagebuilder
     Distribution.add_member(:launch_template_configurations, Shapes::ShapeRef.new(shape: LaunchTemplateConfigurationList, location_name: "launchTemplateConfigurations"))
     Distribution.add_member(:s3_export_configuration, Shapes::ShapeRef.new(shape: S3ExportConfiguration, location_name: "s3ExportConfiguration"))
     Distribution.add_member(:fast_launch_configurations, Shapes::ShapeRef.new(shape: FastLaunchConfigurationList, location_name: "fastLaunchConfigurations"))
+    Distribution.add_member(:ssm_parameter_configurations, Shapes::ShapeRef.new(shape: SsmParameterConfigurationList, location_name: "ssmParameterConfigurations"))
     Distribution.struct_class = Types::Distribution
 
     DistributionConfiguration.add_member(:arn, Shapes::ShapeRef.new(shape: ImageBuilderArn, location_name: "arn"))
@@ -1922,6 +1927,13 @@ module Aws::Imagebuilder
     SeverityCounts.add_member(:high, Shapes::ShapeRef.new(shape: SeverityCountNumber, location_name: "high"))
     SeverityCounts.add_member(:medium, Shapes::ShapeRef.new(shape: SeverityCountNumber, location_name: "medium"))
     SeverityCounts.struct_class = Types::SeverityCounts
+
+    SsmParameterConfiguration.add_member(:ami_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "amiAccountId"))
+    SsmParameterConfiguration.add_member(:parameter_name, Shapes::ShapeRef.new(shape: SsmParameterName, required: true, location_name: "parameterName"))
+    SsmParameterConfiguration.add_member(:data_type, Shapes::ShapeRef.new(shape: SsmParameterDataType, location_name: "dataType"))
+    SsmParameterConfiguration.struct_class = Types::SsmParameterConfiguration
+
+    SsmParameterConfigurationList.member = Shapes::ShapeRef.new(shape: SsmParameterConfiguration)
 
     StartImagePipelineExecutionRequest.add_member(:image_pipeline_arn, Shapes::ShapeRef.new(shape: ImagePipelineArn, required: true, location_name: "imagePipelineArn"))
     StartImagePipelineExecutionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))

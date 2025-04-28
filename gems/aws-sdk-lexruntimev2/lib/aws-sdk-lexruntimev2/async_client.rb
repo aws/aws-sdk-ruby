@@ -10,32 +10,44 @@
 begin
   require 'http/2'
 rescue LoadError; end
-require 'aws-sdk-core/plugins/credentials_configuration.rb'
-require 'aws-sdk-core/plugins/logging.rb'
-require 'aws-sdk-core/plugins/param_converter.rb'
-require 'aws-sdk-core/plugins/param_validator.rb'
-require 'aws-sdk-core/plugins/user_agent.rb'
-require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
-require 'aws-sdk-core/plugins/retry_errors.rb'
-require 'aws-sdk-core/plugins/global_configuration.rb'
-require 'aws-sdk-core/plugins/regional_endpoint.rb'
-require 'aws-sdk-core/plugins/stub_responses.rb'
-require 'aws-sdk-core/plugins/idempotency_token.rb'
-require 'aws-sdk-core/plugins/invocation_id.rb'
-require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
-require 'aws-sdk-core/plugins/http_checksum.rb'
-require 'aws-sdk-core/plugins/checksum_algorithm.rb'
-require 'aws-sdk-core/plugins/request_compression.rb'
-require 'aws-sdk-core/plugins/defaults_mode.rb'
-require 'aws-sdk-core/plugins/recursion_detection.rb'
-require 'aws-sdk-core/plugins/telemetry.rb'
-require 'aws-sdk-core/plugins/sign.rb'
-require 'aws-sdk-core/plugins/protocols/rest_json.rb'
-require 'aws-sdk-core/plugins/event_stream_configuration.rb'
+require 'aws-sdk-core/plugins/credentials_configuration'
+require 'aws-sdk-core/plugins/logging'
+require 'aws-sdk-core/plugins/param_converter'
+require 'aws-sdk-core/plugins/param_validator'
+require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/helpful_socket_errors'
+require 'aws-sdk-core/plugins/retry_errors'
+require 'aws-sdk-core/plugins/global_configuration'
+require 'aws-sdk-core/plugins/regional_endpoint'
+require 'aws-sdk-core/plugins/stub_responses'
+require 'aws-sdk-core/plugins/idempotency_token'
+require 'aws-sdk-core/plugins/invocation_id'
+require 'aws-sdk-core/plugins/jsonvalue_converter'
+require 'aws-sdk-core/plugins/http_checksum'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/request_compression'
+require 'aws-sdk-core/plugins/defaults_mode'
+require 'aws-sdk-core/plugins/recursion_detection'
+require 'aws-sdk-core/plugins/telemetry'
+require 'aws-sdk-core/plugins/sign'
+require 'aws-sdk-core/plugins/protocols/rest_json'
+require 'aws-sdk-core/plugins/event_stream_configuration'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:lexruntimev2)
 
 module Aws::LexRuntimeV2
+  # An API async client for LexRuntimeV2.  To construct an async client, you need to configure a `:region` and `:credentials`.
+  #
+  #     async_client = Aws::LexRuntimeV2::AsyncClient.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class AsyncClient < Seahorse::Client::AsyncBase
 
     include Aws::AsyncClientStubs
@@ -68,6 +80,13 @@ module Aws::LexRuntimeV2
     add_plugin(Aws::Plugins::EventStreamConfiguration)
     add_plugin(Aws::LexRuntimeV2::Plugins::Endpoints)
 
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #
+    #   @option options [Array<Seahorse::Client::Plugin>] :plugins ([]])
+    #     A list of plugins to apply to the client. Each plugin is either a
+    #     class name or an instance of a plugin class.
+    #
     #   @option options [required, Aws::CredentialProvider] :credentials
     #     Your AWS credentials. This can be an instance of any one of the
     #     following classes:
@@ -461,150 +480,161 @@ module Aws::LexRuntimeV2
     #   * {Types::StartConversationResponse#response_event_stream #response_event_stream} => Types::StartConversationResponseEventStream
     #
     # @example Bi-directional EventStream Operation Example
+    #   # You can signal input events after the initial request is established. Events
+    #   # will be sent to the stream immediately once the stream connection is
+    #   # established successfully.
     #
-    #   You can signal input events after the initial request is established. Events
-    #   will be sent to the stream immediately once the stream connection is
-    #   established successfully.
+    #   # To signal events, you can call the #signal methods from an
+    #   # Aws::LexRuntimeV2::EventStreams::StartConversationRequestEventStream object.
+    #   # You must signal events before calling #wait or #join! on the async response.
+    #   input_stream = Aws::LexRuntimeV2::EventStreams::StartConversationRequestEventStream.new
     #
-    #   To signal events, you can call the #signal methods from an Aws::LexRuntimeV2::EventStreams::StartConversationRequestEventStream
-    #   object. You must signal events before calling #wait or #join! on the async response.
-    #
-    #     input_stream = Aws::LexRuntimeV2::EventStreams::StartConversationRequestEventStream.new
-    #
-    #     async_resp = client.start_conversation(
-    #       # params input
-    #       input_event_stream_handler: input_stream) do |out_stream|
-    #
-    #       # register callbacks for events
-    #       out_stream.on_playback_interruption_event_event do |event|
-    #         event # => Aws::LexRuntimeV2::Types::PlaybackInterruptionEvent
-    #       end
-    #       out_stream.on_transcript_event_event do |event|
-    #         event # => Aws::LexRuntimeV2::Types::TranscriptEvent
-    #       end
-    #       out_stream.on_intent_result_event_event do |event|
-    #         event # => Aws::LexRuntimeV2::Types::IntentResultEvent
-    #       end
-    #       out_stream.on_text_response_event_event do |event|
-    #         event # => Aws::LexRuntimeV2::Types::TextResponseEvent
-    #       end
-    #       out_stream.on_audio_response_event_event do |event|
-    #         event # => Aws::LexRuntimeV2::Types::AudioResponseEvent
-    #       end
-    #       out_stream.on_heartbeat_event_event do |event|
-    #         event # => Aws::LexRuntimeV2::Types::HeartbeatEvent
-    #       end
-    #       out_stream.on_access_denied_exception_event do |event|
-    #         event # => Aws::LexRuntimeV2::Types::AccessDeniedException
-    #       end
-    #       out_stream.on_resource_not_found_exception_event do |event|
-    #         event # => Aws::LexRuntimeV2::Types::ResourceNotFoundException
-    #       end
-    #       out_stream.on_validation_exception_event do |event|
-    #         event # => Aws::LexRuntimeV2::Types::ValidationException
-    #       end
-    #       out_stream.on_throttling_exception_event do |event|
-    #         event # => Aws::LexRuntimeV2::Types::ThrottlingException
-    #       end
-    #       out_stream.on_internal_server_exception_event do |event|
-    #         event # => Aws::LexRuntimeV2::Types::InternalServerException
-    #       end
-    #       out_stream.on_conflict_exception_event do |event|
-    #         event # => Aws::LexRuntimeV2::Types::ConflictException
-    #       end
-    #       out_stream.on_dependency_failed_exception_event do |event|
-    #         event # => Aws::LexRuntimeV2::Types::DependencyFailedException
-    #       end
-    #       out_stream.on_bad_gateway_exception_event do |event|
-    #         event # => Aws::LexRuntimeV2::Types::BadGatewayException
-    #       end
-    #
-    #     end
-    #     # => Aws::Seahorse::Client::AsyncResponse
-    #
-    #     # signal events
-    #     input_stream.signal_configuration_event_event( ... )
-    #     input_stream.signal_audio_input_event_event( ... )
-    #     input_stream.signal_dtmf_input_event_event( ... )
-    #     input_stream.signal_text_input_event_event( ... )
-    #     input_stream.signal_playback_completion_event_event( ... )
-    #     input_stream.signal_disconnection_event_event( ... )
-    #
-    #     # make sure to signal :end_stream at the end
-    #     input_stream.signal_end_stream
-    #
-    #     # wait until stream is closed before finalizing the sync response
-    #     resp = async_resp.wait
-    #     # Or close the stream and finalize sync response immediately
-    #     # resp = async_resp.join!
-    #
-    #   You can also provide an Aws::LexRuntimeV2::EventStreams::StartConversationResponseEventStream object to register callbacks
-    #   before initializing the request instead of processing from the request block.
-    #
-    #     output_stream = Aws::LexRuntimeV2::EventStreams::StartConversationResponseEventStream.new
-    #     # register callbacks for output events
-    #     output_stream.on_playback_interruption_event_event do |event|
+    #   async_resp = client.start_conversation(
+    #     # params input
+    #     input_event_stream_handler: input_stream
+    #   ) do |out_stream|
+    #     # register callbacks for events
+    #     out_stream.on_playback_interruption_event_event do |event|
     #       event # => Aws::LexRuntimeV2::Types::PlaybackInterruptionEvent
     #     end
-    #     output_stream.on_transcript_event_event do |event|
+    #     out_stream.on_transcript_event_event do |event|
     #       event # => Aws::LexRuntimeV2::Types::TranscriptEvent
     #     end
-    #     output_stream.on_intent_result_event_event do |event|
+    #     out_stream.on_intent_result_event_event do |event|
     #       event # => Aws::LexRuntimeV2::Types::IntentResultEvent
     #     end
-    #     output_stream.on_text_response_event_event do |event|
+    #     out_stream.on_text_response_event_event do |event|
     #       event # => Aws::LexRuntimeV2::Types::TextResponseEvent
     #     end
-    #     output_stream.on_audio_response_event_event do |event|
+    #     out_stream.on_audio_response_event_event do |event|
     #       event # => Aws::LexRuntimeV2::Types::AudioResponseEvent
     #     end
-    #     output_stream.on_heartbeat_event_event do |event|
+    #     out_stream.on_heartbeat_event_event do |event|
     #       event # => Aws::LexRuntimeV2::Types::HeartbeatEvent
     #     end
-    #     output_stream.on_access_denied_exception_event do |event|
+    #     out_stream.on_access_denied_exception_event do |event|
     #       event # => Aws::LexRuntimeV2::Types::AccessDeniedException
     #     end
-    #     output_stream.on_resource_not_found_exception_event do |event|
+    #     out_stream.on_resource_not_found_exception_event do |event|
     #       event # => Aws::LexRuntimeV2::Types::ResourceNotFoundException
     #     end
-    #     output_stream.on_validation_exception_event do |event|
+    #     out_stream.on_validation_exception_event do |event|
     #       event # => Aws::LexRuntimeV2::Types::ValidationException
     #     end
-    #     output_stream.on_throttling_exception_event do |event|
+    #     out_stream.on_throttling_exception_event do |event|
     #       event # => Aws::LexRuntimeV2::Types::ThrottlingException
     #     end
-    #     output_stream.on_internal_server_exception_event do |event|
+    #     out_stream.on_internal_server_exception_event do |event|
     #       event # => Aws::LexRuntimeV2::Types::InternalServerException
     #     end
-    #     output_stream.on_conflict_exception_event do |event|
+    #     out_stream.on_conflict_exception_event do |event|
     #       event # => Aws::LexRuntimeV2::Types::ConflictException
     #     end
-    #     output_stream.on_dependency_failed_exception_event do |event|
+    #     out_stream.on_dependency_failed_exception_event do |event|
     #       event # => Aws::LexRuntimeV2::Types::DependencyFailedException
     #     end
-    #     output_stream.on_bad_gateway_exception_event do |event|
+    #     out_stream.on_bad_gateway_exception_event do |event|
     #       event # => Aws::LexRuntimeV2::Types::BadGatewayException
     #     end
-    #     output_stream.on_error_event do |event|
-    #       # catch unmodeled error event in the stream
-    #       raise event
-    #       # => Aws::Errors::EventError
-    #       # event.event_type => :error
-    #       # event.error_code => String
-    #       # event.error_message => String
-    #     end
+    #   end
+    #   # => Aws::Seahorse::Client::AsyncResponse
     #
-    #     async_resp = client.start_conversation (
-    #       # params input
-    #       input_event_stream_handler: input_stream
-    #       output_event_stream_handler: output_stream
-    #     )
+    #   # signal events
+    #   input_stream.signal_configuration_event_event(
+    #     # ...
+    #   )
+    #   input_stream.signal_audio_input_event_event(
+    #     # ...
+    #   )
+    #   input_stream.signal_dtmf_input_event_event(
+    #     # ...
+    #   )
+    #   input_stream.signal_text_input_event_event(
+    #     # ...
+    #   )
+    #   input_stream.signal_playback_completion_event_event(
+    #     # ...
+    #   )
+    #   input_stream.signal_disconnection_event_event(
+    #     # ...
+    #   )
     #
-    #     resp = async_resp.join!
+    #   # make sure to signal :end_stream at the end
+    #   input_stream.signal_end_stream
     #
-    #   You can also iterate through events after the response is complete.
+    #   # wait until stream is closed before finalizing the sync response
+    #   resp = async_resp.wait
     #
-    #   Events are available at resp.response_event_stream # => Enumerator
+    #   # Or close the stream and finalize sync response immediately
+    #   resp = async_resp.join!
+    #
+    #   # You can also provide an Aws::LexRuntimeV2::EventStreams::StartConversationResponseEventStream object
+    #   # to register callbacks before initializing the request instead of processing
+    #   # from the request block.
+    #   output_stream = Aws::LexRuntimeV2::EventStreams::StartConversationResponseEventStream.new
+    #
+    #   # register callbacks for output events
+    #   output_stream.on_playback_interruption_event_event do |event|
+    #     event # => Aws::LexRuntimeV2::Types::PlaybackInterruptionEvent
+    #   end
+    #   output_stream.on_transcript_event_event do |event|
+    #     event # => Aws::LexRuntimeV2::Types::TranscriptEvent
+    #   end
+    #   output_stream.on_intent_result_event_event do |event|
+    #     event # => Aws::LexRuntimeV2::Types::IntentResultEvent
+    #   end
+    #   output_stream.on_text_response_event_event do |event|
+    #     event # => Aws::LexRuntimeV2::Types::TextResponseEvent
+    #   end
+    #   output_stream.on_audio_response_event_event do |event|
+    #     event # => Aws::LexRuntimeV2::Types::AudioResponseEvent
+    #   end
+    #   output_stream.on_heartbeat_event_event do |event|
+    #     event # => Aws::LexRuntimeV2::Types::HeartbeatEvent
+    #   end
+    #   output_stream.on_access_denied_exception_event do |event|
+    #     event # => Aws::LexRuntimeV2::Types::AccessDeniedException
+    #   end
+    #   output_stream.on_resource_not_found_exception_event do |event|
+    #     event # => Aws::LexRuntimeV2::Types::ResourceNotFoundException
+    #   end
+    #   output_stream.on_validation_exception_event do |event|
+    #     event # => Aws::LexRuntimeV2::Types::ValidationException
+    #   end
+    #   output_stream.on_throttling_exception_event do |event|
+    #     event # => Aws::LexRuntimeV2::Types::ThrottlingException
+    #   end
+    #   output_stream.on_internal_server_exception_event do |event|
+    #     event # => Aws::LexRuntimeV2::Types::InternalServerException
+    #   end
+    #   output_stream.on_conflict_exception_event do |event|
+    #     event # => Aws::LexRuntimeV2::Types::ConflictException
+    #   end
+    #   output_stream.on_dependency_failed_exception_event do |event|
+    #     event # => Aws::LexRuntimeV2::Types::DependencyFailedException
+    #   end
+    #   output_stream.on_bad_gateway_exception_event do |event|
+    #     event # => Aws::LexRuntimeV2::Types::BadGatewayException
+    #   end
+    #   output_stream.on_error_event do |event|
+    #     # catch unmodeled error event in the stream
+    #     raise event
+    #     # => Aws::Errors::EventError
+    #     # event.event_type => :error
+    #     # event.error_code => String
+    #     # event.error_message => String
+    #   end
+    #
+    #   async_resp = client.start_conversation(
+    #     # params input
+    #     input_event_stream_handler: input_stream,
+    #     output_event_stream_handler: output_stream
+    #   )
+    #   resp = async_resp.join!
+    #
+    #   # You can also iterate through events after the response is complete.
+    #   # Events are available at
+    #   resp.response_event_stream # => Enumerator
     #
     # @example Request syntax with placeholder values
     #
@@ -623,20 +653,20 @@ module Aws::LexRuntimeV2
     #
     # @example Response structure
     #
-    #   All events are available at resp.response_event_stream:
+    #   # All events are available at resp.response_event_stream:
     #   resp.response_event_stream #=> Enumerator
     #   resp.response_event_stream.event_types #=> [:playback_interruption_event, :transcript_event, :intent_result_event, :text_response_event, :audio_response_event, :heartbeat_event, :access_denied_exception, :resource_not_found_exception, :validation_exception, :throttling_exception, :internal_server_exception, :conflict_exception, :dependency_failed_exception, :bad_gateway_exception]
     #
-    #   For :playback_interruption_event event available at #on_playback_interruption_event_event callback and response eventstream enumerator:
+    #   # For :playback_interruption_event event available at #on_playback_interruption_event_event callback and response eventstream enumerator:
     #   event.event_reason #=> String, one of "DTMF_START_DETECTED", "TEXT_DETECTED", "VOICE_START_DETECTED"
     #   event.caused_by_event_id #=> String
     #   event.event_id #=> String
     #
-    #   For :transcript_event event available at #on_transcript_event_event callback and response eventstream enumerator:
+    #   # For :transcript_event event available at #on_transcript_event_event callback and response eventstream enumerator:
     #   event.transcript #=> String
     #   event.event_id #=> String
     #
-    #   For :intent_result_event event available at #on_intent_result_event_event callback and response eventstream enumerator:
+    #   # For :intent_result_event event available at #on_intent_result_event_event callback and response eventstream enumerator:
     #   event.input_mode #=> String, one of "Text", "Speech", "DTMF"
     #   event.interpretations #=> Array
     #   event.interpretations[0].nlu_confidence.score #=> Float
@@ -696,7 +726,7 @@ module Aws::LexRuntimeV2
     #   event.recognized_bot_member.bot_id #=> String
     #   event.recognized_bot_member.bot_name #=> String
     #
-    #   For :text_response_event event available at #on_text_response_event_event callback and response eventstream enumerator:
+    #   # For :text_response_event event available at #on_text_response_event_event callback and response eventstream enumerator:
     #   event.messages #=> Array
     #   event.messages[0].content #=> String
     #   event.messages[0].content_type #=> String, one of "CustomPayload", "ImageResponseCard", "PlainText", "SSML"
@@ -708,36 +738,36 @@ module Aws::LexRuntimeV2
     #   event.messages[0].image_response_card.buttons[0].value #=> String
     #   event.event_id #=> String
     #
-    #   For :audio_response_event event available at #on_audio_response_event_event callback and response eventstream enumerator:
+    #   # For :audio_response_event event available at #on_audio_response_event_event callback and response eventstream enumerator:
     #   event.audio_chunk #=> String
     #   event.content_type #=> String
     #   event.event_id #=> String
     #
-    #   For :heartbeat_event event available at #on_heartbeat_event_event callback and response eventstream enumerator:
+    #   # For :heartbeat_event event available at #on_heartbeat_event_event callback and response eventstream enumerator:
     #   event.event_id #=> String
     #
-    #   For :access_denied_exception event available at #on_access_denied_exception_event callback and response eventstream enumerator:
+    #   # For :access_denied_exception event available at #on_access_denied_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :resource_not_found_exception event available at #on_resource_not_found_exception_event callback and response eventstream enumerator:
+    #   # For :resource_not_found_exception event available at #on_resource_not_found_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
+    #   # For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :throttling_exception event available at #on_throttling_exception_event callback and response eventstream enumerator:
+    #   # For :throttling_exception event available at #on_throttling_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
+    #   # For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :conflict_exception event available at #on_conflict_exception_event callback and response eventstream enumerator:
+    #   # For :conflict_exception event available at #on_conflict_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :dependency_failed_exception event available at #on_dependency_failed_exception_event callback and response eventstream enumerator:
+    #   # For :dependency_failed_exception event available at #on_dependency_failed_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :bad_gateway_exception event available at #on_bad_gateway_exception_event callback and response eventstream enumerator:
+    #   # For :bad_gateway_exception event available at #on_bad_gateway_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/StartConversation AWS API Documentation
@@ -788,7 +818,7 @@ module Aws::LexRuntimeV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lexruntimev2'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

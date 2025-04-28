@@ -530,6 +530,7 @@ module Aws::Imagebuilder
       attr_accessor launch_template_configurations: ::Array[Types::LaunchTemplateConfiguration]
       attr_accessor s3_export_configuration: Types::S3ExportConfiguration
       attr_accessor fast_launch_configurations: ::Array[Types::FastLaunchConfiguration]
+      attr_accessor ssm_parameter_configurations: ::Array[Types::SsmParameterConfiguration]
       SENSITIVE: []
     end
 
@@ -1834,6 +1835,13 @@ module Aws::Imagebuilder
       attr_accessor critical: ::Integer
       attr_accessor high: ::Integer
       attr_accessor medium: ::Integer
+      SENSITIVE: []
+    end
+
+    class SsmParameterConfiguration
+      attr_accessor ami_account_id: ::String
+      attr_accessor parameter_name: ::String
+      attr_accessor data_type: ("text" | "aws:ec2:image")
       SENSITIVE: []
     end
 

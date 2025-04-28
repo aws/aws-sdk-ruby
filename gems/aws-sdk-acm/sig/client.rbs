@@ -168,7 +168,8 @@ module Aws
                                ?includes: {
                                  extended_key_usage: Array[("TLS_WEB_SERVER_AUTHENTICATION" | "TLS_WEB_CLIENT_AUTHENTICATION" | "CODE_SIGNING" | "EMAIL_PROTECTION" | "TIME_STAMPING" | "OCSP_SIGNING" | "IPSEC_END_SYSTEM" | "IPSEC_TUNNEL" | "IPSEC_USER" | "ANY" | "NONE" | "CUSTOM")]?,
                                  key_usage: Array[("DIGITAL_SIGNATURE" | "NON_REPUDIATION" | "KEY_ENCIPHERMENT" | "DATA_ENCIPHERMENT" | "KEY_AGREEMENT" | "CERTIFICATE_SIGNING" | "CRL_SIGNING" | "ENCIPHER_ONLY" | "DECIPHER_ONLY" | "ANY" | "CUSTOM")]?,
-                                 key_types: Array[("RSA_1024" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "EC_prime256v1" | "EC_secp384r1" | "EC_secp521r1")]?
+                                 key_types: Array[("RSA_1024" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "EC_prime256v1" | "EC_secp384r1" | "EC_secp521r1")]?,
+                                 managed_by: ("CLOUDFRONT")?
                                },
                                ?next_token: ::String,
                                ?max_items: ::Integer,
@@ -221,7 +222,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACM/Client.html#request_certificate-instance_method
       def request_certificate: (
                                  domain_name: ::String,
-                                 ?validation_method: ("EMAIL" | "DNS"),
+                                 ?validation_method: ("EMAIL" | "DNS" | "HTTP"),
                                  ?subject_alternative_names: Array[::String],
                                  ?idempotency_token: ::String,
                                  ?domain_validation_options: Array[
@@ -240,7 +241,8 @@ module Aws
                                      value: ::String?
                                    },
                                  ],
-                                 ?key_algorithm: ("RSA_1024" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "EC_prime256v1" | "EC_secp384r1" | "EC_secp521r1")
+                                 ?key_algorithm: ("RSA_1024" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "EC_prime256v1" | "EC_secp384r1" | "EC_secp521r1"),
+                                 ?managed_by: ("CLOUDFRONT")
                                ) -> _RequestCertificateResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RequestCertificateResponseSuccess
 

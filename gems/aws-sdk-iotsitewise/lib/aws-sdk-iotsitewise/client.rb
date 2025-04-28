@@ -4675,158 +4675,164 @@ module Aws::IoTSiteWise
     #
     # @example EventStream Operation Example
     #
-    #   You can process the event once it arrives immediately, or wait until the
-    #   full response is complete and iterate through the eventstream enumerator.
+    #   # You can process the event once it arrives immediately, or wait until the
+    #   # full response is complete and iterate through the eventstream enumerator.
     #
-    #   To interact with event immediately, you need to register #invoke_assistant
-    #   with callbacks. Callbacks can be registered for specific events or for all
-    #   events, including error events.
+    #   # To interact with event immediately, you need to register invoke_assistant
+    #   # with callbacks. Callbacks can be registered for specific events or for all
+    #   # events, including error events.
     #
-    #   Callbacks can be passed into the `:event_stream_handler` option or within a
-    #   block statement attached to the #invoke_assistant call directly. Hybrid
-    #   pattern of both is also supported.
+    #   # Callbacks can be passed into the `:event_stream_handler` option or within a
+    #   # block statement attached to the #invoke_assistant call directly. Hybrid
+    #   # pattern of both is also supported.
     #
-    #   `:event_stream_handler` option takes in either a Proc object or
-    #   Aws::IoTSiteWise::EventStreams::ResponseStream object.
+    #   # `:event_stream_handler` option takes in either a Proc object or
+    #   # Aws::IoTSiteWise::EventStreams::ResponseStream object.
     #
-    #   Usage pattern a): Callbacks with a block attached to #invoke_assistant
-    #     Example for registering callbacks for all event types and an error event
-    #
-    #     client.invoke_assistant( # params input# ) do |stream|
-    #       stream.on_error_event do |event|
-    #         # catch unmodeled error event in the stream
-    #         raise event
-    #         # => Aws::Errors::EventError
-    #         # event.event_type => :error
-    #         # event.error_code => String
-    #         # event.error_message => String
-    #       end
-    #
-    #       stream.on_event do |event|
-    #         # process all events arrive
-    #         puts event.event_type
-    #         ...
-    #       end
-    #
+    #   # Usage pattern a): Callbacks with a block attached to #invoke_assistant
+    #   # Example for registering callbacks for all event types and an error event
+    #   client.invoke_assistant(
+    #     # params input
+    #   ) do |stream|
+    #     stream.on_error_event do |event|
+    #       # catch unmodeled error event in the stream
+    #       raise event
+    #       # => Aws::Errors::EventError
+    #       # event.event_type => :error
+    #       # event.error_code => String
+    #       # event.error_message => String
     #     end
     #
-    #   Usage pattern b): Pass in `:event_stream_handler` for #invoke_assistant
-    #
-    #     1) Create a Aws::IoTSiteWise::EventStreams::ResponseStream object
-    #     Example for registering callbacks with specific events
-    #
-    #       handler = Aws::IoTSiteWise::EventStreams::ResponseStream.new
-    #       handler.on_trace_event do |event|
-    #         event # => Aws::IoTSiteWise::Types::trace
-    #       end
-    #       handler.on_output_event do |event|
-    #         event # => Aws::IoTSiteWise::Types::output
-    #       end
-    #       handler.on_access_denied_exception_event do |event|
-    #         event # => Aws::IoTSiteWise::Types::accessDeniedException
-    #       end
-    #       handler.on_conflicting_operation_exception_event do |event|
-    #         event # => Aws::IoTSiteWise::Types::conflictingOperationException
-    #       end
-    #       handler.on_internal_failure_exception_event do |event|
-    #         event # => Aws::IoTSiteWise::Types::internalFailureException
-    #       end
-    #       handler.on_invalid_request_exception_event do |event|
-    #         event # => Aws::IoTSiteWise::Types::invalidRequestException
-    #       end
-    #       handler.on_limit_exceeded_exception_event do |event|
-    #         event # => Aws::IoTSiteWise::Types::limitExceededException
-    #       end
-    #       handler.on_resource_not_found_exception_event do |event|
-    #         event # => Aws::IoTSiteWise::Types::resourceNotFoundException
-    #       end
-    #       handler.on_throttling_exception_event do |event|
-    #         event # => Aws::IoTSiteWise::Types::throttlingException
-    #       end
-    #
-    #     client.invoke_assistant( # params input #, event_stream_handler: handler)
-    #
-    #     2) Use a Ruby Proc object
-    #     Example for registering callbacks with specific events
-    #
-    #     handler = Proc.new do |stream|
-    #       stream.on_trace_event do |event|
-    #         event # => Aws::IoTSiteWise::Types::trace
-    #       end
-    #       stream.on_output_event do |event|
-    #         event # => Aws::IoTSiteWise::Types::output
-    #       end
-    #       stream.on_access_denied_exception_event do |event|
-    #         event # => Aws::IoTSiteWise::Types::accessDeniedException
-    #       end
-    #       stream.on_conflicting_operation_exception_event do |event|
-    #         event # => Aws::IoTSiteWise::Types::conflictingOperationException
-    #       end
-    #       stream.on_internal_failure_exception_event do |event|
-    #         event # => Aws::IoTSiteWise::Types::internalFailureException
-    #       end
-    #       stream.on_invalid_request_exception_event do |event|
-    #         event # => Aws::IoTSiteWise::Types::invalidRequestException
-    #       end
-    #       stream.on_limit_exceeded_exception_event do |event|
-    #         event # => Aws::IoTSiteWise::Types::limitExceededException
-    #       end
-    #       stream.on_resource_not_found_exception_event do |event|
-    #         event # => Aws::IoTSiteWise::Types::resourceNotFoundException
-    #       end
-    #       stream.on_throttling_exception_event do |event|
-    #         event # => Aws::IoTSiteWise::Types::throttlingException
-    #       end
+    #     stream.on_event do |event|
+    #       # process all events arrive
+    #       puts event.event_type
+    #       # ...
     #     end
+    #   end
     #
-    #     client.invoke_assistant( # params input #, event_stream_handler: handler)
+    #   # Usage pattern b): Pass in `:event_stream_handler` for #invoke_assistant
+    #   #  1) Create a Aws::IoTSiteWise::EventStreams::ResponseStream object
+    #   #  Example for registering callbacks with specific events
     #
-    #   Usage pattern c): Hybrid pattern of a) and b)
+    #   handler = Aws::IoTSiteWise::EventStreams::ResponseStream.new
+    #   handler.on_trace_event do |event|
+    #     event # => Aws::IoTSiteWise::Types::trace
+    #   end
+    #   handler.on_output_event do |event|
+    #     event # => Aws::IoTSiteWise::Types::output
+    #   end
+    #   handler.on_access_denied_exception_event do |event|
+    #     event # => Aws::IoTSiteWise::Types::accessDeniedException
+    #   end
+    #   handler.on_conflicting_operation_exception_event do |event|
+    #     event # => Aws::IoTSiteWise::Types::conflictingOperationException
+    #   end
+    #   handler.on_internal_failure_exception_event do |event|
+    #     event # => Aws::IoTSiteWise::Types::internalFailureException
+    #   end
+    #   handler.on_invalid_request_exception_event do |event|
+    #     event # => Aws::IoTSiteWise::Types::invalidRequestException
+    #   end
+    #   handler.on_limit_exceeded_exception_event do |event|
+    #     event # => Aws::IoTSiteWise::Types::limitExceededException
+    #   end
+    #   handler.on_resource_not_found_exception_event do |event|
+    #     event # => Aws::IoTSiteWise::Types::resourceNotFoundException
+    #   end
+    #   handler.on_throttling_exception_event do |event|
+    #     event # => Aws::IoTSiteWise::Types::throttlingException
+    #   end
     #
-    #       handler = Aws::IoTSiteWise::EventStreams::ResponseStream.new
-    #       handler.on_trace_event do |event|
-    #         event # => Aws::IoTSiteWise::Types::trace
-    #       end
-    #       handler.on_output_event do |event|
-    #         event # => Aws::IoTSiteWise::Types::output
-    #       end
-    #       handler.on_access_denied_exception_event do |event|
-    #         event # => Aws::IoTSiteWise::Types::accessDeniedException
-    #       end
-    #       handler.on_conflicting_operation_exception_event do |event|
-    #         event # => Aws::IoTSiteWise::Types::conflictingOperationException
-    #       end
-    #       handler.on_internal_failure_exception_event do |event|
-    #         event # => Aws::IoTSiteWise::Types::internalFailureException
-    #       end
-    #       handler.on_invalid_request_exception_event do |event|
-    #         event # => Aws::IoTSiteWise::Types::invalidRequestException
-    #       end
-    #       handler.on_limit_exceeded_exception_event do |event|
-    #         event # => Aws::IoTSiteWise::Types::limitExceededException
-    #       end
-    #       handler.on_resource_not_found_exception_event do |event|
-    #         event # => Aws::IoTSiteWise::Types::resourceNotFoundException
-    #       end
-    #       handler.on_throttling_exception_event do |event|
-    #         event # => Aws::IoTSiteWise::Types::throttlingException
-    #       end
+    #   client.invoke_assistant(
+    #     # params inputs
+    #     event_stream_handler: handler
+    #   )
     #
-    #     client.invoke_assistant( # params input #, event_stream_handler: handler) do |stream|
-    #       stream.on_error_event do |event|
-    #         # catch unmodeled error event in the stream
-    #         raise event
-    #         # => Aws::Errors::EventError
-    #         # event.event_type => :error
-    #         # event.error_code => String
-    #         # event.error_message => String
-    #       end
+    #   #  2) Use a Ruby Proc object
+    #   #  Example for registering callbacks with specific events
+    #   handler = Proc.new do |stream|
+    #     stream.on_trace_event do |event|
+    #       event # => Aws::IoTSiteWise::Types::trace
     #     end
+    #     stream.on_output_event do |event|
+    #       event # => Aws::IoTSiteWise::Types::output
+    #     end
+    #     stream.on_access_denied_exception_event do |event|
+    #       event # => Aws::IoTSiteWise::Types::accessDeniedException
+    #     end
+    #     stream.on_conflicting_operation_exception_event do |event|
+    #       event # => Aws::IoTSiteWise::Types::conflictingOperationException
+    #     end
+    #     stream.on_internal_failure_exception_event do |event|
+    #       event # => Aws::IoTSiteWise::Types::internalFailureException
+    #     end
+    #     stream.on_invalid_request_exception_event do |event|
+    #       event # => Aws::IoTSiteWise::Types::invalidRequestException
+    #     end
+    #     stream.on_limit_exceeded_exception_event do |event|
+    #       event # => Aws::IoTSiteWise::Types::limitExceededException
+    #     end
+    #     stream.on_resource_not_found_exception_event do |event|
+    #       event # => Aws::IoTSiteWise::Types::resourceNotFoundException
+    #     end
+    #     stream.on_throttling_exception_event do |event|
+    #       event # => Aws::IoTSiteWise::Types::throttlingException
+    #     end
+    #   end
     #
-    #   You can also iterate through events after the response complete.
+    #   client.invoke_assistant(
+    #     # params inputs
+    #     event_stream_handler: handler
+    #   )
     #
-    #   Events are available at resp.body # => Enumerator
-    #   For parameter input example, please refer to following request syntax
+    #   #  Usage pattern c): Hybrid pattern of a) and b)
+    #   handler = Aws::IoTSiteWise::EventStreams::ResponseStream.new
+    #   handler.on_trace_event do |event|
+    #     event # => Aws::IoTSiteWise::Types::trace
+    #   end
+    #   handler.on_output_event do |event|
+    #     event # => Aws::IoTSiteWise::Types::output
+    #   end
+    #   handler.on_access_denied_exception_event do |event|
+    #     event # => Aws::IoTSiteWise::Types::accessDeniedException
+    #   end
+    #   handler.on_conflicting_operation_exception_event do |event|
+    #     event # => Aws::IoTSiteWise::Types::conflictingOperationException
+    #   end
+    #   handler.on_internal_failure_exception_event do |event|
+    #     event # => Aws::IoTSiteWise::Types::internalFailureException
+    #   end
+    #   handler.on_invalid_request_exception_event do |event|
+    #     event # => Aws::IoTSiteWise::Types::invalidRequestException
+    #   end
+    #   handler.on_limit_exceeded_exception_event do |event|
+    #     event # => Aws::IoTSiteWise::Types::limitExceededException
+    #   end
+    #   handler.on_resource_not_found_exception_event do |event|
+    #     event # => Aws::IoTSiteWise::Types::resourceNotFoundException
+    #   end
+    #   handler.on_throttling_exception_event do |event|
+    #     event # => Aws::IoTSiteWise::Types::throttlingException
+    #   end
+    #
+    #   client.invoke_assistant(
+    #     # params input
+    #     event_stream_handler: handler
+    #   ) do |stream|
+    #     stream.on_error_event do |event|
+    #       # catch unmodeled error event in the stream
+    #       raise event
+    #       # => Aws::Errors::EventError
+    #       # event.event_type => :error
+    #       # event.error_code => String
+    #       # event.error_message => String
+    #     end
+    #   end
+    #
+    #   # You can also iterate through events after the response complete.
+    #   # Events are available at
+    #   resp.body # => Enumerator
+    #   # For parameter input example, please refer to following request syntax.
     #
     # @example Request syntax with placeholder values
     #
@@ -4838,14 +4844,14 @@ module Aws::IoTSiteWise
     #
     # @example Response structure
     #
-    #   All events are available at resp.body:
+    #   # All events are available at resp.body:
     #   resp.body #=> Enumerator
     #   resp.body.event_types #=> [:trace, :output, :access_denied_exception, :conflicting_operation_exception, :internal_failure_exception, :invalid_request_exception, :limit_exceeded_exception, :resource_not_found_exception, :throttling_exception]
     #
-    #   For :trace event available at #on_trace_event callback and response eventstream enumerator:
+    #   # For :trace event available at #on_trace_event callback and response eventstream enumerator:
     #   event.text #=> String
     #
-    #   For :output event available at #on_output_event callback and response eventstream enumerator:
+    #   # For :output event available at #on_output_event callback and response eventstream enumerator:
     #   event.message #=> String
     #   event.citations #=> Array
     #   event.citations[0].reference.dataset.dataset_arn #=> String
@@ -4853,27 +4859,27 @@ module Aws::IoTSiteWise
     #   event.citations[0].reference.dataset.source.location.uri #=> String
     #   event.citations[0].content.text #=> String
     #
-    #   For :access_denied_exception event available at #on_access_denied_exception_event callback and response eventstream enumerator:
+    #   # For :access_denied_exception event available at #on_access_denied_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :conflicting_operation_exception event available at #on_conflicting_operation_exception_event callback and response eventstream enumerator:
+    #   # For :conflicting_operation_exception event available at #on_conflicting_operation_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #   event.resource_id #=> String
     #   event.resource_arn #=> String
     #
-    #   For :internal_failure_exception event available at #on_internal_failure_exception_event callback and response eventstream enumerator:
+    #   # For :internal_failure_exception event available at #on_internal_failure_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :invalid_request_exception event available at #on_invalid_request_exception_event callback and response eventstream enumerator:
+    #   # For :invalid_request_exception event available at #on_invalid_request_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :limit_exceeded_exception event available at #on_limit_exceeded_exception_event callback and response eventstream enumerator:
+    #   # For :limit_exceeded_exception event available at #on_limit_exceeded_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :resource_not_found_exception event available at #on_resource_not_found_exception_event callback and response eventstream enumerator:
+    #   # For :resource_not_found_exception event available at #on_resource_not_found_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :throttling_exception event available at #on_throttling_exception_event callback and response eventstream enumerator:
+    #   # For :throttling_exception event available at #on_throttling_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
     #   resp.conversation_id #=> String
@@ -7453,7 +7459,7 @@ module Aws::IoTSiteWise
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
