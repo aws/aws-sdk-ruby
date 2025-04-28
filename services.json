@@ -947,10 +947,6 @@
   "Pricing": {
     "models": "pricing/2017-10-15"
   },
-  "PrivateNetworks": {
-    "models": "privatenetworks/2021-12-03",
-    "deprecated": true
-  },
   "PrometheusService": {
     "models": "amp/2020-08-01"
   },
