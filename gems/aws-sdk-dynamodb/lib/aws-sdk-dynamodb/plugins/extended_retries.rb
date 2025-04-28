@@ -4,6 +4,8 @@ module Aws
   module DynamoDB
     module Plugins
       class ExtendedRetries < Seahorse::Client::Plugin
+        # BEGIN LEGACY OPTIONS
+
         DEFAULT_BACKOFF = lambda do |c|
           return unless c.retries > 1
 
@@ -21,32 +23,47 @@ module Aws
           :retry_limit,
           default: 10,
           doc_type: Integer,
-          docstring: <<-DOCS)
-The maximum number of times to retry failed requests.  Only
-~ 500 level server errors and certain ~ 400 level client errors
-are retried.  Generally, these are throttling errors, data
-checksum errors, networking errors, timeout errors, auth errors,
-endpoint discovery, and errors from expired credentials.
-This option is only used in the `legacy` retry mode.
-        DOCS
+          docstring: <<~DOCS)
+            The maximum number of times to retry failed requests.  Only
+            ~ 500 level server errors and certain ~ 400 level client errors
+            are retried.  Generally, these are throttling errors, data
+            checksum errors, networking errors, timeout errors, auth errors,
+            endpoint discovery, and errors from expired credentials.
+            This option is only used in the `legacy` retry mode.
+          DOCS
 
         option(
           :retry_base_delay,
           default: 0.05,
           doc_type: Float,
-          docstring: <<-DOCS)
-The base delay in seconds used by the default backoff function. This option
-is only used in the `legacy` retry mode.
-        DOCS
+          docstring: <<~DOCS)
+            The base delay in seconds used by the default backoff function. This option
+            is only used in the `legacy` retry mode.
+          DOCS
 
         option(
           :retry_backoff,
           default: DEFAULT_BACKOFF,
           doc_type: Proc,
-          docstring: <<-DOCS)
-A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
-This option is only used in the `legacy` retry mode.
-        DOCS
+          docstring: <<~DOCS)
+            A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+            This option is only used in the `legacy` retry mode.
+          DOCS
+
+        # END LEGACY OPTIONS
+
+        option(
+          :max_attempts,
+          default: 10,
+          doc_type: Integer,
+          docstring: <<~DOCS) do |cfg|
+            An integer representing the maximum number attempts that will be made for
+            a single request, including the initial attempt.  For example,
+            setting this value to 5 will result in a request being retried up to
+            4 times. Used in `standard` and `adaptive` retry modes.
+          DOCS
+          resolve_max_attempts(cfg)
+        end
       end
     end
   end

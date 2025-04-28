@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Set the default `retry_mode` to `standard` for all clients.
+
 * Issue - Do not dynamically create operation methods from the API. (#3234)
 
 3.222.2 (2025-04-16)
