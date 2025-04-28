@@ -4,6 +4,8 @@ module AwsSdkCodeGenerator
   module Views
     module RBS
       class ClientClass < View
+        # Delegated methods on response/output
+        # so would not be included in the rbs
         SKIP_MEMBERS = Set.new(%w[
           context
           data

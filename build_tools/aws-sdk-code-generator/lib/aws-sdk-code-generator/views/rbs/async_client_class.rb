@@ -4,14 +4,18 @@ module AwsSdkCodeGenerator
   module Views
     module RBS
       class AsyncClientClass < View
-        SKIP_MEMBERS = Set.new(%w[
-          context
-          data
-          error
-          checksum_validated
-          on
-          on_success
-        ])
+        # Delegated methods on response/output
+        # so would not be included in the rbs
+        SKIP_MEMBERS = Set.new(
+          %w[
+            context
+            data
+            error
+            checksum_validated
+            on
+            on_success
+          ]
+        )
 
         def initialize(options)
           @options = options
@@ -96,6 +100,20 @@ module AwsSdkCodeGenerator
               empty_structure: output_shape.nil?
             }
           end.compact
+        end
+
+        def label_value(input, label, params)
+          name = nil
+          input.members.each do |member_name, member_shape|
+            next unless member_shape.traits.include?('smithy.api#hostLabel')
+            next unless member_shape.name == label
+
+            name = member_name
+          end
+          raise ArgumentError, "#{label} is not a valid host label" if name.nil?
+          raise ArgumentError, "params[#{name}] must not be nil or blank" if params[name].nil? || params[name].empty?
+
+          params[name]
         end
 
         private
