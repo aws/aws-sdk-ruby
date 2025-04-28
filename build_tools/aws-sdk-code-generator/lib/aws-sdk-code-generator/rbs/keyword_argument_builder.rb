@@ -8,10 +8,11 @@ module AwsSdkCodeGenerator
 
       attr_reader :newline
 
-      def initialize(api:, shape:, newline:)
+      def initialize(api:, shape:, newline:, options: {})
         @api = api
         @shape = shape
         @newline = newline
+        @options = options
       end
 
       def format(indent: '')
@@ -39,8 +40,11 @@ module AwsSdkCodeGenerator
             next if member_ref['documented'] === false
             more_indent = newline ? "  " : ""
             if @api['shapes'][member_ref['shape']]['eventstream'] === true
-              # FIXME: "input_event_stream_hander: EventStreams::#{member_ref['shape']}.new"
-              lines << "#{i}#{more_indent}input_event_stream_hander: untyped,"
+               # FIXME: "input_event_stream_hander: EventStreams::#{member_ref['shape']}.new"
+              lines << "#{i}#{more_indent}input_event_stream_handler: untyped,"
+              if @options[:bidirectional_eventstreaming]
+                lines << "#{i}#{more_indent}output_event_stream_handler: untyped,"
+              end
             else
               lines << "#{i}#{more_indent}#{struct_member(struct_shape, member_name, member_ref, i, visited, keyword: keyword)}"
             end
@@ -143,7 +147,7 @@ module AwsSdkCodeGenerator
         if string_shape['enum']
           "(#{string_shape['enum'].map { |s| "\"#{s}\"" }.join(" | ")})"
         else ref['shape']
-          "::String"
+             "::String"
         end
       end
 

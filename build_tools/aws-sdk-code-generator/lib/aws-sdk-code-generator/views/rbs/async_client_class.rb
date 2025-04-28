@@ -50,6 +50,8 @@ module AwsSdkCodeGenerator
           @api['operations'].map do |name, body|
             next unless async_operation?(body)
 
+
+
             method_name = Underscore.underscore(name)
             indent = ' ' * (12 + method_name.length)
             input_shape_name = body.dig('input', 'shape')
@@ -57,10 +59,18 @@ module AwsSdkCodeGenerator
             include_required = false
             if input_shape_name
               input_shape = shapes[input_shape_name]
+              options =
+                if AwsSdkCodeGenerator::Helper.operation_bidirectional_eventstreaming?(body, @api)
+                  { bidirectional_eventstreaming: true }
+                else
+                  {}
+                end
+
               builder = AwsSdkCodeGenerator::RBS::KeywordArgumentBuilder.new(
                 api: @api,
                 shape: input_shape,
-                newline: true
+                newline: true,
+                options: options
               )
               arguments = builder.format(indent: indent)
               include_required = input_shape['required']&.empty?&.!
