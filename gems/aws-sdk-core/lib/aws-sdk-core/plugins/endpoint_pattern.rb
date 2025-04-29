@@ -8,7 +8,7 @@ module Aws
         :disable_host_prefix_injection,
         default: false,
         doc_type: 'Boolean',
-        docstring: 'When true, the SDK will not prepend the modeled host prefix to the endpoint.'
+        docstring: 'When `true`, the SDK will not prepend the modeled host prefix to the endpoint.'
       ) do |cfg|
         resolve_disable_host_prefix_injection(cfg)
       end
