@@ -145,7 +145,7 @@ module Aws
         default: true,
         doc_type: 'Boolean',
         docstring: <<~DOCS) do |cfg|
-          Used only in `standard` and adaptive retry modes. Specifies whether to apply
+          Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
           a clock skew correction and retry requests with skewed client clocks.
         DOCS
         resolve_correct_clock_skew(cfg)
