@@ -28,8 +28,8 @@ module Aws
           if value != 'true' && value != 'false'
             raise ArgumentError,
                   'Must provide either `true` or `false` for '\
-                    'adaptive_retry_wait_to_fill profile option or for '\
-                    'ENV[\'AWS_ADAPTIVE_RETRY_WAIT_TO_FILL\']'
+                    'disable_host_prefix_injection profile option or for '\
+                    'ENV[\'AWS_DISABLE_HOST_PREFIX_INJECTION\']'
           end
           value == 'true'
         end
