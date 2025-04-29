@@ -24,14 +24,14 @@ module Aws
           value = ENV['AWS_DISABLE_HOST_PREFIX_INJECTION'] ||
                   Aws.shared_config.disable_host_prefix_injection(profile: cfg.profile) ||
                   'false'
-          # Raise if provided value is not true or false
-          if value != 'true' && value != 'false'
+          value = Aws::Util.str_2_bool(value)
+          unless [true, false].include?(value)
             raise ArgumentError,
                   'Must provide either `true` or `false` for '\
                     'disable_host_prefix_injection profile option or for '\
                     'ENV[\'AWS_DISABLE_HOST_PREFIX_INJECTION\']'
           end
-          value == 'true'
+          value
         end
       end
 
@@ -40,25 +40,25 @@ module Aws
         def call(context)
           unless context.config.disable_host_prefix_injection
             endpoint_trait = context.operation.endpoint_pattern
-            _apply_endpoint_trait(context, endpoint_trait) if endpoint_trait && !endpoint_trait.empty?
+            apply_endpoint_trait(context, endpoint_trait) if endpoint_trait && !endpoint_trait.empty?
           end
           @handler.call(context)
         end
 
         private
 
-        def _apply_endpoint_trait(context, trait)
+        def apply_endpoint_trait(context, trait)
           pattern = trait['hostPrefix']
           return unless pattern
 
           host_prefix = pattern.gsub(/\{.+?}/) do |label|
             label = label.delete('{}')
-            _replace_label_value(label, context.operation.input, context.params)
+            replace_label_value(label, context.operation.input, context.params)
           end
           context.http_request.endpoint.host = host_prefix + context.http_request.endpoint.host
         end
 
-        def _replace_label_value(label, input_ref, params)
+        def replace_label_value(label, input_ref, params)
           name = nil
           input_ref.shape.members.each do |m_name, ref|
             name = m_name if ref['hostLabel'] && ref['hostLabelName'] == label
