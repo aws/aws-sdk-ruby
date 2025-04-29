@@ -12,7 +12,7 @@ module Aws
         end
 
         def deserialize(shape, bytes, target)
-          return {} if bytes.empty? || shape == Prelude::Unit
+          return {} if bytes.empty?
 
           shape(shape, ::JSON.parse(bytes), target)
         end
