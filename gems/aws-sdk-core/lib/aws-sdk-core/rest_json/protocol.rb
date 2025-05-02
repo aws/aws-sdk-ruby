@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-require 'smithy-schema'
-require_relative '../json/codec'
+require 'smithy-json'
 
 require_relative 'request_builder'
 require_relative 'response_parser'

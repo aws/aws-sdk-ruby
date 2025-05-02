@@ -6,7 +6,7 @@ module Aws
       # @api private
       class ResponseStubber
         def initialize(options = {})
-          @codec = Aws::Core::JSON::Codec.new(options)
+          @codec = Smithy::JSON::Codec.new(options)
         end
 
         def stub_data(_service, operation, data)

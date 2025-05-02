@@ -10,7 +10,7 @@ module Aws
       # @api private
       class ResponseParser
         def initialize(options = {})
-          @codec = JSON::Codec.new(options)
+          @codec = Smithy::JSON::Codec.new(options)
         end
 
         def parse_error(output)

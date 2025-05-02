@@ -10,7 +10,7 @@ module Aws
       # @api private
       class RequestBuilder
         def initialize(options = {})
-          @codec = Aws::Core::JSON::Codec.new(options)
+          @codec = Smithy::JSON::Codec.new(options)
         end
 
         def build(context)
