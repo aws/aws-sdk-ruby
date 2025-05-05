@@ -27,7 +27,8 @@
       "type":"structure",
       "members":{
         "Table":{"shape":"TableDescription"},
-        "TableList":{"shape":"TableList"}
+        "TableList":{"shape":"TableList"},
+        "List":{"shape": "List"}
       }
     },
     "TableDescription":{
@@ -49,6 +50,11 @@
       "type":"list",
       "member":{"shape":"TableDescription"}
     },
+    "List": {
+      "type":"list",
+      "member":{"shape":"ListMember"}
+    },
+    "ListMember":{"type":"integer"},
     "ResourceNotFoundException":{
       "type":"structure",
       "members":{

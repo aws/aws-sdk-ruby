@@ -276,6 +276,37 @@ module Aws
               expect { client.wait_until(:path_matcher) }
                 .to raise_error(Errors::FailureStateError)
             end
+
+            it 'can match for objects' do
+              client.stub_responses(:waiter_operation, table: { table_status: 'ACTIVE' })
+              expect { client.wait_until(:path_matcher_object) }
+                .to_not raise_error
+            end
+
+            it 'can match for numbers' do
+              resp = {
+                table_list: [
+                  {
+                    table_status: 'ACTIVE'
+                  },
+                  {
+                    table_status: 'ACTIVE'
+                  },
+                  {
+                    table_status: 'ACTIVE'
+                  }
+                ]
+              }
+              client.stub_responses(:waiter_operation, resp)
+              expect { client.wait_until(:path_matcher_number) }
+                .to_not raise_error
+            end
+
+            it 'can match for arrays' do
+              client.stub_responses(:waiter_operation, list: [1, 2, 3])
+              expect { client.wait_until(:path_matcher_array) }
+                .to_not raise_error
+            end
           end
 
           context 'pathAll' do

@@ -126,6 +126,45 @@
         }
       ]
     },
+    "PathMatcherObject": {
+      "delay": 0,
+      "operation": "WaiterOperation",
+      "maxAttempts": 25,
+      "acceptors": [
+        {
+          "matcher": "path",
+          "expected": {"TableStatus": "ACTIVE"},
+          "state": "success",
+          "argument": "Table"
+        }
+      ]
+    },
+    "PathMatcherNumber": {
+      "delay": 0,
+      "operation": "WaiterOperation",
+      "maxAttempts": 25,
+      "acceptors": [
+        {
+          "matcher": "path",
+          "expected": "3",
+          "state": "success",
+          "argument": "length(TableList[])"
+        }
+      ]
+    },
+    "PathMatcherArray": {
+      "delay": 0,
+      "operation": "WaiterOperation",
+      "maxAttempts": 25,
+      "acceptors": [
+        {
+          "matcher": "path",
+          "expected": "[1, 2, 3]",
+          "state": "success",
+          "argument": "List[]"
+        }
+      ]
+    },
     "PathAllMatcher": {
       "delay": 0,
       "operation": "WaiterOperation",

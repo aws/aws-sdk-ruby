@@ -73,7 +73,11 @@ module Aws
 
       def matches_path?(acceptor, response)
         if response.data
-          JMESPath.search(path(acceptor), response.data) == acceptor['expected']
+          result = JMESPath.search(path(acceptor), response.data)
+          puts result
+          puts 'vs'
+          puts acceptor['expected']
+          result == acceptor['expected']
         else
           false
         end
