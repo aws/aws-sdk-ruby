@@ -28,7 +28,10 @@
       "members":{
         "Table":{"shape":"TableDescription"},
         "TableList":{"shape":"TableList"},
-        "List":{"shape": "List"}
+        "NumberList":{"shape":"NumberList"},
+        "BooleanList":{"shape":"BooleanList"},
+        "NestedList":{"shape":"NestedList"},
+        "Boolean":{"shape":"Boolean"}
       }
     },
     "TableDescription":{
@@ -50,11 +53,20 @@
       "type":"list",
       "member":{"shape":"TableDescription"}
     },
-    "List": {
+    "NumberList": {
       "type":"list",
-      "member":{"shape":"ListMember"}
+      "member":{"shape":"NumberListMember"}
     },
-    "ListMember":{"type":"integer"},
+    "NumberListMember":{"type":"integer"},
+    "BooleanList": {
+      "type":"list",
+      "member":{"shape":"Boolean"}
+    },
+    "NestedList": {
+      "type":"list",
+      "member":{"shape":"NumberList"}
+    },
+    "Boolean":{"type":"boolean"},
     "ResourceNotFoundException":{
       "type":"structure",
       "members":{

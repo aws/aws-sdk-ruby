@@ -277,13 +277,13 @@ module Aws
                 .to raise_error(Errors::FailureStateError)
             end
 
-            it 'can match for objects' do
+            it 'can match objects' do
               client.stub_responses(:waiter_operation, table: { table_status: 'ACTIVE' })
               expect { client.wait_until(:path_matcher_object) }
                 .to_not raise_error
             end
 
-            it 'can match for numbers' do
+            it 'can match numbers' do
               resp = {
                 table_list: [
                   {
@@ -302,9 +302,15 @@ module Aws
                 .to_not raise_error
             end
 
-            it 'can match for arrays' do
-              client.stub_responses(:waiter_operation, list: [1, 2, 3])
+            it 'can match arrays' do
+              client.stub_responses(:waiter_operation, number_list: [1, 2, 3])
               expect { client.wait_until(:path_matcher_array) }
+                .to_not raise_error
+            end
+
+            it 'can match booleans' do
+              client.stub_responses(:waiter_operation, boolean: false)
+              expect { client.wait_until(:path_matcher_boolean) }
                 .to_not raise_error
             end
           end
@@ -321,6 +327,31 @@ module Aws
                 client.wait_until(:path_all_matcher) { retries += 1 }
               end.not_to raise_error
               expect(retries).to be(1)
+            end
+
+            it 'can match array of objects' do
+              client.stub_responses(:waiter_operation,
+                                    table_list: [{ table_status: 'ACTIVE' }, { table_status: 'ACTIVE' }])
+              expect { client.wait_until(:path_all_matcher_object) }
+                .to_not raise_error
+            end
+
+            it 'can match array of numbers' do
+              client.stub_responses(:waiter_operation, number_list: [123, 123, 123])
+              expect { client.wait_until(:path_all_matcher_number) }
+                .to_not raise_error
+            end
+
+            it 'can match array of arrays' do
+              client.stub_responses(:waiter_operation, nested_list: [[1, 2, 3], [1, 2, 3], [1, 2, 3]])
+              expect { client.wait_until(:path_all_matcher_array) }
+                .to_not raise_error
+            end
+
+            it 'can match array of booleans' do
+              client.stub_responses(:waiter_operation, boolean_list: [false, false, false])
+              expect { client.wait_until(:path_all_matcher_boolean) }
+                .to_not raise_error
             end
 
             it 'fails when matched' do
@@ -350,6 +381,26 @@ module Aws
                 client.wait_until(:path_all_matcher) { |w| w.max_attempts = 1 }
               end.to raise_error(Errors::TooManyAttemptsError)
             end
+
+            it 'fails when array is empty' do
+              client.stub_responses(
+                :waiter_operation,
+                table_list: []
+              )
+              expect do
+                client.wait_until(:path_all_matcher) { |w| w.max_attempts = 1 }
+              end.to raise_error(Errors::TooManyAttemptsError)
+            end
+
+            it 'fails when array is nil' do
+              client.stub_responses(
+                :waiter_operation,
+                table_list: nil
+              )
+              expect do
+                client.wait_until(:path_all_matcher) { |w| w.max_attempts = 1 }
+              end.to raise_error(Errors::TooManyAttemptsError)
+            end
           end
 
           context 'pathAny' do
@@ -364,6 +415,31 @@ module Aws
                 client.wait_until(:path_any_matcher) { retries += 1 }
               end.not_to raise_error
               expect(retries).to be(1)
+            end
+
+            it 'can match array of objects' do
+              client.stub_responses(:waiter_operation,
+                                    table_list: [{ table_status: 'FAILED' }, { table_status: 'ACTIVE' }])
+              expect { client.wait_until(:path_any_matcher_object) }
+                .to_not raise_error
+            end
+
+            it 'can match array of numbers' do
+              client.stub_responses(:waiter_operation, number_list: [456, 789, 123])
+              expect { client.wait_until(:path_any_matcher_number) }
+                .to_not raise_error
+            end
+
+            it 'can match array of arrays' do
+              client.stub_responses(:waiter_operation, nested_list: [[4, 5, 6], [1, 2, 3], [7, 8, 9]])
+              expect { client.wait_until(:path_any_matcher_array) }
+                .to_not raise_error
+            end
+
+            it 'can match array of booleans' do
+              client.stub_responses(:waiter_operation, boolean_list: [true, false, true])
+              expect { client.wait_until(:path_any_matcher_boolean) }
+                .to_not raise_error
             end
 
             it 'fails when matched' do
@@ -382,6 +458,26 @@ module Aws
               )
               expect { client.wait_until(:path_any_matcher) }
                 .to raise_error(Errors::TooManyAttemptsError)
+            end
+
+            it 'fails when array is empty' do
+              client.stub_responses(
+                :waiter_operation,
+                table_list: []
+              )
+              expect do
+                client.wait_until(:path_any_matcher) { |w| w.max_attempts = 1 }
+              end.to raise_error(Errors::TooManyAttemptsError)
+            end
+
+            it 'fails when array is nil' do
+              client.stub_responses(
+                :waiter_operation,
+                table_list: nil
+              )
+              expect do
+                client.wait_until(:path_any_matcher) { |w| w.max_attempts = 1 }
+              end.to raise_error(Errors::TooManyAttemptsError)
             end
           end
         end
