@@ -6,13 +6,13 @@ module Aws
       module Response
         # @api private
         class StatusCode
-          def initialize(output_shape)
-            @output_shape = output_shape
+          def initialize(ref)
+            @ref = ref
           end
 
           def apply(response, data)
-            @output_shape.members.each do |member_name, member_shape|
-              status_code = member_shape.traits['smithy.api#httpResponseCode']
+            @ref.shape.members.each do |member_name, member_ref|
+              status_code = member_ref.traits['smithy.api#httpResponseCode']
               next unless status_code
 
               data[member_name] = response.status_code

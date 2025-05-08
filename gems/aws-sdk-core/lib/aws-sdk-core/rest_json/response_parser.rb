@@ -25,10 +25,10 @@ module Aws
         def parse_data(output)
           output_shape = output.context.operation.output
           output.data =
-            if output_shape == Smithy::Schema::Shapes::Prelude::Unit
+            if output_shape.shape == Smithy::Schema::Shapes::Prelude::Unit
               Smithy::Schema::EmptyStructure.new
             else
-              output_shape.type.new
+              output_shape.shape.type.new
             end
           Rest::Response::StatusCode.new(output_shape).apply(output.context.response, output.data)
           Rest::Response::Headers.new(output_shape).apply(output.context.response, output.data)
@@ -111,17 +111,17 @@ module Aws
 
         def parse_error_data(context, body, code)
           data = Smithy::Schema::EmptyStructure.new
-          context.operation.errors.each do |error|
-            next unless error.id.split('#').last == code # TODO: add name to shapes :(
+          context.operation.errors.each do |ref|
+            next unless ref.shape.id.split('#').last == code # TODO: add name to shapes :(
 
-            data = @codec.deserialize(error, body, error.type.new)
-            apply_error_headers(error, context, data)
+            data = @codec.deserialize(ref.shape, body, ref.shape.type.new)
+            apply_error_headers(ref, context, data)
           end
           data
         end
 
-        def apply_error_headers(rule, context, data)
-          headers = Rest::Response::Headers.new(rule)
+        def apply_error_headers(ref, context, data)
+          headers = Rest::Response::Headers.new(ref)
           headers.apply(context.response, data)
         end
       end

@@ -39,8 +39,8 @@ module Aws
         private
 
         def apply_status_code(resp, operation, data)
-          operation.output.members.each do |member_name, member_shape|
-            code = member_shape.traits.dig('smithy.api#http', 'code')
+          operation.output.shape.members.each do |member_name, member_ref|
+            code = member_ref.traits.dig('smithy.api#http', 'code')
             next unless code
 
             resp.status_code = data[member_name] if data.key?(member_name)

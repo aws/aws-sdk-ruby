@@ -12,9 +12,9 @@ module Aws
         class Endpoint
           include Smithy::Schema::Shapes
 
-          def initialize(uri, input)
+          def initialize(uri, ref)
             @uri, @query = uri.split('?')
-            @input = input
+            @ref = ref
           end
 
           def apply(request, params)
@@ -32,12 +32,12 @@ module Aws
 
           def param_value_for_placeholder(placeholder, params)
             name = param_name(placeholder)
-            member_shape = @input.member(name)
-            param_shape = member_shape.shape
+            member_ref = @ref.shape.member(name)
+            param_shape = member_ref.shape
             value =
               case param_shape
               when TimestampShape
-                timestamp(member_shape, param_shape, params[name]).to_s
+                timestamp(member_ref, param_shape, params[name]).to_s
               else
                 params[name].to_s
               end
@@ -52,14 +52,15 @@ module Aws
           end
 
           def param_name(placeholder)
-            location_name = placeholder.gsub(/[{}+]/, '')
-            param_name, _ = @input.name_by_member_name(location_name)
+            member_name = placeholder.gsub(/[{}+]/, '')
+            # TODO: optimize
+            param_name, _ = @ref.shape.members.find { |_, shape| shape.member_name == member_name }
             param_name
           end
 
-          def timestamp(member_shape, shape, value)
+          def timestamp(member_ref, shape, value)
             trait = 'smithy.api#timestampFormat'
-            case member_shape.traits[trait] || shape.traits[trait]
+            case member_ref.traits[trait] || shape.traits[trait]
             when 'http-date' then value.utc.httpdate
             when 'epoch-seconds' then value.to_i
             else
@@ -70,12 +71,12 @@ module Aws
 
           def apply_querystring_params(uri, params)
             # collect params that are supposed to be part of the query string
-            parts = @input.members.each_with_object([]) do |(member_name, member_shape), parts|
-              next unless member_shape.traits.include?('smithy.api#httpQuery') ||
-                          member_shape.traits.include?('smithy.api#httpQueryParams')
+            parts = @ref.shape.members.each_with_object([]) do |(member_name, member_ref), parts|
+              next unless member_ref.traits.include?('smithy.api#httpQuery') ||
+                          member_ref.traits.include?('smithy.api#httpQueryParams')
               next unless params[member_name]
 
-              parts << [member_shape, params[member_name]]
+              parts << [member_ref, params[member_name]]
             end
             querystring = QuerystringBuilder.new.build(parts)
             querystring = [@query, querystring == '' ? nil : querystring].compact.join('&')

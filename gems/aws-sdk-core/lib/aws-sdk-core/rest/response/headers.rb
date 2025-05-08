@@ -10,13 +10,13 @@ module Aws
         class Headers
           include Smithy::Schema::Shapes
 
-          def initialize(shape)
-            @shape = shape
+          def initialize(ref)
+            @ref = ref
           end
 
           def apply(response, target)
             headers = response.headers
-            @shape.members.each do |name, member|
+            @ref.shape.members.each do |name, member|
               member_traits = member.traits
               if member_traits.key?('smithy.api#httpHeader')
                 header = member_traits['smithy.api#httpHeader']

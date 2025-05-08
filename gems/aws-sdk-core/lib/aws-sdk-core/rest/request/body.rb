@@ -16,9 +16,9 @@ module Aws
             smithy.api#httpQueryParams
           ].freeze
 
-          def initialize(codec, input_output_shape)
+          def initialize(codec, ref)
             @codec = codec
-            @input_output_shape = input_output_shape
+            @ref = ref
           end
 
           def apply(request_or_response, params)
@@ -35,27 +35,27 @@ module Aws
           def build_body(params)
             # When string, blob, or enum as a payload, use value directly
             if string_or_blob_payload?
-              params[@input_output_shape[:http_payload]]
+              params[@ref.shape[:http_payload]]
             # Otherwise, serialize the payload member
-            elsif @input_output_shape[:http_payload_member]
-              params = params[@input_output_shape[:http_payload]]
-              @codec.serialize(@input_output_shape[:http_payload_member].shape, params) if params
+            elsif @ref.shape[:http_payload_member]
+              params = params[@ref.shape[:http_payload]]
+              @codec.serialize(@ref.shape[:http_payload_member].shape, params) if params
             else
               params = body_params(params)
-              @codec.serialize(@input_output_shape, params) unless params.empty?
+              @codec.serialize(@ref, params) unless params.empty?
             end
           end
 
           def string_or_blob_payload?
-            return false unless @input_output_shape[:http_payload_member]
-            payload = @input_output_shape[:http_payload_member].shape
+            return false unless @ref.shape[:http_payload_member]
 
+            payload = @ref.shape[:http_payload_member].shape
             payload.is_a?(StringShape) || payload.is_a?(BlobShape) || payload.is_a?(EnumShape)
           end
 
           def body_params(params)
-            @input_output_shape.members.each_with_object({}) do |(member_name, member_shape), hash|
-              next if NON_BODY_TRAITS.any? { |trait| member_shape.traits.include?(trait) }
+            @ref.shape.members.each_with_object({}) do |(member_name, member_ref), hash|
+              next if NON_BODY_TRAITS.any? { |trait| member_ref.traits.include?(trait) }
               next unless params.key?(member_name)
 
               hash[member_name] = params[member_name]
@@ -63,17 +63,16 @@ module Aws
           end
 
           def modeled_body_member?
-            return true if @input_output_shape[:http_payload_member]
+            return true if @ref.shape[:http_payload_member]
 
-            @input_output_shape.members.each_value do |member_shape|
-              return true unless NON_BODY_TRAITS.any? { |trait| member_shape.traits.include?(trait) }
+            @ref.shape.members.each_value do |member_ref|
+              return true unless NON_BODY_TRAITS.any? { |trait| member_ref.traits.include?(trait) }
             end
             false
           end
 
           def union_payload?
-            @input_output_shape[:http_payload_member] &&
-              @input_output_shape[:http_payload_member].shape.is_a?(UnionShape)
+            @ref.shape[:http_payload_member] && @ref.shape[:http_payload_member].shape.is_a?(UnionShape)
           end
         end
       end

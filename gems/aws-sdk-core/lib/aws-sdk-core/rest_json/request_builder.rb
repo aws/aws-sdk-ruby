@@ -41,7 +41,7 @@ module Aws
         end
 
         def apply_content_type_header(context)
-          if (payload_member = context.operation.input[:http_payload_member])
+          if (payload_member = context.operation.input.shape[:http_payload_member])
             payload = payload_member.shape
             if (media_type = payload.traits['smithy.api#mediaType'])
               context.request.headers['Content-Type'] ||= media_type

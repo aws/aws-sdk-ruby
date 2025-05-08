@@ -23,8 +23,8 @@ module Aws
           # Provide member shapes and param values:
           #
           #     [
-          #       [member_shape1, 123],
-          #       [member_shape2, "text"]
+          #       [member_ref1, 123],
+          #       [member_ref2, "text"]
           #     ]
           #
           # Returns a querystring:
@@ -38,8 +38,8 @@ module Aws
           def build(params)
             # keys in query maps must NOT override other keys
             query_keys = query_keys(params)
-            t = params.map do |(member_shape, param_value)|
-              build_part(member_shape, param_value, query_keys)
+            params.map do |(member_ref, param_value)|
+              build_part(member_ref, param_value, query_keys)
             end.reject { |p| p.nil? || p.empty? }.join('&')
           end
 
@@ -47,31 +47,31 @@ module Aws
 
           def query_keys(params)
             keys = Set.new
-            params.each do |(member_shape, _)|
-              name = member_shape.traits['smithy.api#httpQuery'] || member_shape.name
-              keys << name unless member_shape.shape.is_a?(MapShape)
+            params.each do |(member_ref, _)|
+              name = member_ref.traits['smithy.api#httpQuery'] || member_ref.member_name
+              keys << name unless member_ref.shape.is_a?(MapShape)
             end
             keys
           end
 
-          def build_part(member_shape, param_value, query_keys)
-            name = member_shape.traits['smithy.api#httpQuery'] || member_shape.name
-            case member_shape.shape
+          def build_part(member_ref, param_value, query_keys)
+            name = member_ref.traits['smithy.api#httpQuery'] || member_ref.member_name
+            case member_ref.shape
             # supported scalar types
             when *SUPPORTED_TYPES
-              "#{name}=#{query_value(member_shape, param_value)}"
+              "#{name}=#{query_value(member_ref, param_value)}"
             when ListShape
-              generate_query_list(name, member_shape, param_value)
+              generate_query_list(name, member_ref, param_value)
             when MapShape
-              generate_query_map(member_shape, param_value, query_keys)
+              generate_query_map(member_ref, param_value, query_keys)
             else
               raise NotImplementedError
             end
           end
 
-          def timestamp(member_shape, shape, value)
+          def timestamp(member_ref, shape, value)
             trait = 'smithy.api#timestampFormat'
-            case member_shape.traits[trait] || shape.traits[trait]
+            case member_ref.traits[trait] || shape.traits[trait]
             when 'http-date' then value.utc.httpdate
             when 'epoch-seconds' then value.to_i
             else
@@ -80,10 +80,10 @@ module Aws
             end
           end
 
-          def query_value(member_shape, value)
-            case member_shape.shape
+          def query_value(member_ref, value)
+            case member_ref.shape
             when TimestampShape
-              escape(timestamp(member_shape, member_shape.shape, value))
+              escape(timestamp(member_ref, member_ref.shape, value))
             when *SUPPORTED_TYPES
               escape(value.to_s)
             else
@@ -91,14 +91,14 @@ module Aws
             end
           end
 
-          def generate_query_list(name, member_shape, values)
+          def generate_query_list(name, member_ref, values)
             values.map do |value|
-              "#{name}=#{query_value(member_shape.shape.member, value)}"
+              "#{name}=#{query_value(member_ref.shape.member, value)}"
             end
           end
 
-          def generate_query_map(member_shape, value, query_keys)
-            case member_shape.shape.value.shape
+          def generate_query_map(member_ref, value, query_keys)
+            case member_ref.shape.value.shape
             when StringShape
               query_map_of_string(value, query_keys)
             when ListShape

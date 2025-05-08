@@ -8,30 +8,30 @@ module Aws
         class Body
           include Smithy::Schema::Shapes
 
-          def initialize(codec, output_shape)
+          def initialize(codec, ref)
             @codec = codec
-            @output_shape = output_shape
+            @ref = ref
           end
 
           def apply(body, data)
             # When string, blob, or enum as a payload, use value directly
             if string_or_blob_payload?
               # Empty blob payloads are omitted
-              data[@output_shape[:http_payload]] = body unless empty_blob_payload?(body)
+              data[@ref.shape[:http_payload]] = body unless empty_blob_payload?(body)
             # Otherwise, deserialize the payload member
-            elsif @output_shape[:http_payload_member]
-              data[@output_shape[:http_payload]] = parse(@output_shape[:http_payload_member].shape, body.read)
-            elsif !@output_shape.members.empty?
-              parse(@output_shape, body.read, data)
+            elsif @ref.shape[:http_payload_member]
+              data[@ref.shape[:http_payload]] = parse(@ref.shape[:http_payload_member].shape, body.read)
+            elsif !@ref.shape.members.empty?
+              parse(@ref, body.read, data)
             end
           end
 
           private
 
           def string_or_blob_payload?
-            return false unless @output_shape[:http_payload_member]
-            payload_member = @output_shape[:http_payload_member].shape
+            return false unless @ref.shape[:http_payload_member]
 
+            payload_member = @ref.shape[:http_payload_member].shape
             payload_member.is_a?(StringShape) ||
               payload_member.is_a?(BlobShape) ||
               payload_member.is_a?(EnumShape)
@@ -42,9 +42,9 @@ module Aws
           end
 
           def non_streaming_blob_payload?
-            return false unless @output_shape[:http_payload_member]
-            payload = @output_shape[:http_payload_member].shape
+            return false unless @ref.shape[:http_payload_member]
 
+            payload = @ref.shape[:http_payload_member].shape
             payload.is_a?(BlobShape) && !payload.traits.include?('smithy.api#streaming')
           end
 
