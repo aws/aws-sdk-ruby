@@ -9926,18 +9926,6 @@
           "uri": "/OperationWithDefaults",
           "method": "POST"
         },
-        "smithy.ruby#skipTests": [
-          {
-            "id": "RestJsonClientPopulatesDefaultValuesInInput",
-            "reason": "Defaults not Implemented yet.",
-            "type": "request"
-          },
-          {
-            "id": "RestJsonClientPopulatesDefaultsValuesWhenMissingInResponse",
-            "reason": "Defaults not Implemented yet.",
-            "type": "response"
-          }
-        ],
         "smithy.test#httpRequestTests": [
           {
             "id": "RestJsonClientPopulatesDefaultValuesInInput",
@@ -10288,18 +10276,6 @@
           "uri": "/OperationWithNestedStructure",
           "method": "POST"
         },
-        "smithy.ruby#skipTests": [
-          {
-            "id": "RestJsonClientPopulatesNestedDefaultValuesWhenMissing",
-            "reason": "Defaults not Implemented yet.",
-            "type": "request"
-          },
-          {
-            "id": "RestJsonClientPopulatesNestedDefaultsWhenMissingInResponseBody",
-            "reason": "Defaults not Implemented yet.",
-            "type": "response"
-          }
-        ],
         "smithy.test#httpRequestTests": [
           {
             "id": "RestJsonClientPopulatesNestedDefaultValuesWhenMissing",

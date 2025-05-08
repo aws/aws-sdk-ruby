@@ -10,10 +10,10 @@ end
 
 desc 'run protocol tests'
 task 'spec:protocol_tests' do
-  model = JSON.load_file('gems/aws-sdk-core/spec/fixtures/protocol_tests/rest_json/model.json')
+  model = JSON.load_file('gems/aws-sdk-core/spec/fixtures/protocol_tests/restJson1/model.json')
   plan_options = {
     module_name: 'RestJson',
-    gem_name: 'restjson1',
+    gem_name: 'restJson1',
     gem_version: '0.1.0',
     destination_root: Dir.mktmpdir
   }
