@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Issue - Fix waiter matchers to cover more expected value types.
+* Issue - Fix waiter matchers to cover object expected value type.
 
 3.223.0 (2025-05-01)
 ------------------
