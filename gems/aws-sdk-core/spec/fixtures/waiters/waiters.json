@@ -133,9 +133,25 @@
       "acceptors": [
         {
           "matcher": "path",
-          "expected": {"TableStatus": "ACTIVE"},
+          "expected": {
+            "ObjectMember": {
+              "StringMember": "string"
+            },
+            "StringMember": "string",
+            "NumberMember": 1,
+            "BooleanMember": true,
+            "ArrayMember": [1, 2, 3],
+            "ObjectArrayMember": [
+              {
+                "ObjectMember": {
+                  "StringMember": "string"
+                },
+                "StringMember": "string"
+              }
+            ]
+          },
           "state": "success",
-          "argument": "Table"
+          "argument": "ComplexObject"
         }
       ]
     },
@@ -162,6 +178,42 @@
           "expected": [1, 2, 3],
           "state": "success",
           "argument": "NumberList"
+        }
+      ]
+    },
+    "PathMatcherObjectArray": {
+      "delay": 0,
+      "operation": "WaiterOperation",
+      "maxAttempts": 25,
+      "acceptors": [
+        {
+          "matcher": "path",
+          "expected": [
+            {
+              "ObjectMember": {
+                "StringMember": "string"
+              },
+              "StringMember": "string",
+              "NumberMember": 1,
+              "BooleanMember": true,
+              "ArrayMember": [1, 2, 3],
+              "ObjectArrayMember": [
+                {
+                  "ObjectMember": {
+                    "StringMember": "string"
+                  },
+                  "StringMember": "string"
+                }
+              ]
+            },
+            {
+              "ObjectMember": {
+                "StringMember": "string"
+              }
+            }
+          ],
+          "state": "success",
+          "argument": "ObjectList"
         }
       ]
     },

@@ -278,7 +278,24 @@ module Aws
             end
 
             it 'can match objects' do
-              client.stub_responses(:waiter_operation, table: { table_status: 'ACTIVE' })
+              object = {
+                object_member: {
+                  string_member: 'string'
+                },
+                string_member: 'string',
+                number_member: 1,
+                boolean_member: true,
+                array_member: [1, 2, 3],
+                object_array_member: [
+                  {
+                    object_member: {
+                      string_member: 'string'
+                    },
+                    string_member: 'string'
+                  }
+                ]
+              }
+              client.stub_responses(:waiter_operation, complex_object: object)
               expect { client.wait_until(:path_matcher_object) }
                 .to_not raise_error
             end
@@ -305,6 +322,36 @@ module Aws
             it 'can match arrays' do
               client.stub_responses(:waiter_operation, number_list: [1, 2, 3])
               expect { client.wait_until(:path_matcher_array) }
+                .to_not raise_error
+            end
+
+            it 'can match array of objects' do
+              list = [
+                {
+                  object_member: {
+                    string_member: 'string'
+                  },
+                  string_member: 'string',
+                  number_member: 1,
+                  boolean_member: true,
+                  array_member: [1, 2, 3],
+                  object_array_member: [
+                    {
+                      object_member: {
+                        string_member: 'string'
+                      },
+                      string_member: 'string',
+                    }
+                  ]
+                },
+                {
+                  object_member: {
+                    string_member: 'string'
+                  }
+                }
+              ]
+              client.stub_responses(:waiter_operation, object_list: list)
+              expect { client.wait_until(:path_matcher_object_array) }
                 .to_not raise_error
             end
 

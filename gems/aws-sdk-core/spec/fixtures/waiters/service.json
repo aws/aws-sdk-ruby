@@ -28,10 +28,12 @@
       "members":{
         "Table":{"shape":"TableDescription"},
         "TableList":{"shape":"TableList"},
+        "ComplexObject":{"shape":"ComplexObject"},
         "NumberList":{"shape":"NumberList"},
         "BooleanList":{"shape":"BooleanList"},
+        "ObjectList":{"shape":"ObjectList"},
         "NestedList":{"shape":"NestedList"},
-        "Boolean":{"shape":"Boolean"}
+        "Boolean":{"shape":"BooleanMember"}
       }
     },
     "TableDescription":{
@@ -53,20 +55,37 @@
       "type":"list",
       "member":{"shape":"TableDescription"}
     },
+    "ComplexObject":{
+      "type":"structure",
+      "members":{
+        "ObjectMember":{"shape":"ComplexObject"},
+        "StringMember":{"shape":"StringMember"},
+        "NumberMember":{"shape":"NumberMember"},
+        "BooleanMember":{"shape":"BooleanMember"},
+        "ArrayMember":{"shape":"NumberList"},
+        "ObjectArrayMember":{"shape":"ObjectList"}
+      }
+    },
+    "StringMember": {"type":"string"},
+    "NumberMember":{"type":"integer"},
+    "BooleanMember":{"type":"boolean"},
     "NumberList": {
       "type":"list",
       "member":{"shape":"NumberListMember"}
     },
     "NumberListMember":{"type":"integer"},
+    "ObjectList": {
+      "type":"list",
+      "member":{"shape":"ComplexObject"}
+    },
     "BooleanList": {
       "type":"list",
-      "member":{"shape":"Boolean"}
+      "member":{"shape":"BooleanMember"}
     },
     "NestedList": {
       "type":"list",
       "member":{"shape":"NumberList"}
     },
-    "Boolean":{"type":"boolean"},
     "ResourceNotFoundException":{
       "type":"structure",
       "members":{
