@@ -98,15 +98,21 @@ module AwsSdkCodeGenerator
 
       # Underscore and symbolize all keys in hash
       def convert_keys(hash)
-        hash.transform_keys! do |key|
-          value = hash[key]
-          case value
-          when Hash
-            hash[key] = convert_keys(value)
-          when Array
-            hash[key] = convert_array(value)
-          end
-          key.is_a?(String) ? Underscore.underscore(key).to_sym : key
+        hash.each_with_object({}) do |(key, value), result|
+          converted_key = convert_key(key)
+          result[converted_key] = convert_value(value)
+        end
+      end
+
+      def convert_key(key)
+        key.is_a?(String) ? Underscore.underscore(key).to_sym : key
+      end
+
+      def convert_value(value)
+        case value
+        when Hash  then convert_keys(value)
+        when Array then convert_array(value)
+        else value
         end
       end
 
