@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Feature - Support `ENV['AWS_DISABLE_HOST_PREFIX_INJECTION']` and `disable_host_prefix_injection` shared config to disable host prefix injection for all services.
 
+3.223.0 (2025-05-01)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
 3.222.3 (2025-04-28)
 ------------------
 

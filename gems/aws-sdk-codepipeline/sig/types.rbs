@@ -443,6 +443,7 @@ module Aws::CodePipeline
     class EnvironmentVariable
       attr_accessor name: ::String
       attr_accessor value: ::String
+      attr_accessor type: ("PLAINTEXT" | "SECRETS_MANAGER")
       SENSITIVE: []
     end
 

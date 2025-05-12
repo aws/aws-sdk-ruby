@@ -54,7 +54,7 @@ module Aws::ConnectCampaignService
   autoload :EndpointProvider, 'aws-sdk-connectcampaignservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-connectcampaignservice/endpoints'
 
-  GEM_VERSION = '1.31.0'
+  GEM_VERSION = '1.32.0'
 
 end
 

@@ -1081,7 +1081,7 @@ module Aws::EBS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ebs'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

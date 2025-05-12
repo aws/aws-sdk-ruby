@@ -181,13 +181,13 @@ module Aws::TimestreamWrite
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
 
-    CreateBatchLoadTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateBatchLoadTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateBatchLoadTaskRequest.add_member(:data_model_configuration, Shapes::ShapeRef.new(shape: DataModelConfiguration, location_name: "DataModelConfiguration"))
     CreateBatchLoadTaskRequest.add_member(:data_source_configuration, Shapes::ShapeRef.new(shape: DataSourceConfiguration, required: true, location_name: "DataSourceConfiguration"))
     CreateBatchLoadTaskRequest.add_member(:report_configuration, Shapes::ShapeRef.new(shape: ReportConfiguration, required: true, location_name: "ReportConfiguration"))
     CreateBatchLoadTaskRequest.add_member(:target_database_name, Shapes::ShapeRef.new(shape: ResourceCreateAPIName, required: true, location_name: "TargetDatabaseName"))
     CreateBatchLoadTaskRequest.add_member(:target_table_name, Shapes::ShapeRef.new(shape: ResourceCreateAPIName, required: true, location_name: "TargetTableName"))
-    CreateBatchLoadTaskRequest.add_member(:record_version, Shapes::ShapeRef.new(shape: RecordVersion, location_name: "RecordVersion", metadata: {"box"=>true}))
+    CreateBatchLoadTaskRequest.add_member(:record_version, Shapes::ShapeRef.new(shape: RecordVersion, location_name: "RecordVersion", metadata: {"box" => true}))
     CreateBatchLoadTaskRequest.struct_class = Types::CreateBatchLoadTaskRequest
 
     CreateBatchLoadTaskResponse.add_member(:task_id, Shapes::ShapeRef.new(shape: BatchLoadTaskId, required: true, location_name: "TaskId"))
@@ -389,7 +389,7 @@ module Aws::TimestreamWrite
     Record.add_member(:measure_value_type, Shapes::ShapeRef.new(shape: MeasureValueType, location_name: "MeasureValueType"))
     Record.add_member(:time, Shapes::ShapeRef.new(shape: StringValue256, location_name: "Time"))
     Record.add_member(:time_unit, Shapes::ShapeRef.new(shape: TimeUnit, location_name: "TimeUnit"))
-    Record.add_member(:version, Shapes::ShapeRef.new(shape: RecordVersion, location_name: "Version", metadata: {"box"=>true}))
+    Record.add_member(:version, Shapes::ShapeRef.new(shape: RecordVersion, location_name: "Version", metadata: {"box" => true}))
     Record.add_member(:measure_values, Shapes::ShapeRef.new(shape: MeasureValues, location_name: "MeasureValues"))
     Record.struct_class = Types::Record
 
@@ -402,7 +402,7 @@ module Aws::TimestreamWrite
 
     RejectedRecord.add_member(:record_index, Shapes::ShapeRef.new(shape: RecordIndex, location_name: "RecordIndex"))
     RejectedRecord.add_member(:reason, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Reason"))
-    RejectedRecord.add_member(:existing_version, Shapes::ShapeRef.new(shape: RecordVersion, location_name: "ExistingVersion", metadata: {"box"=>true}))
+    RejectedRecord.add_member(:existing_version, Shapes::ShapeRef.new(shape: RecordVersion, location_name: "ExistingVersion", metadata: {"box" => true}))
     RejectedRecord.struct_class = Types::RejectedRecord
 
     RejectedRecords.member = Shapes::ShapeRef.new(shape: RejectedRecord)
@@ -517,9 +517,11 @@ module Aws::TimestreamWrite
 
       api.metadata = {
         "apiVersion" => "2018-11-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "ingest.timestream",
         "jsonVersion" => "1.0",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "Timestream Write",
         "serviceFullName" => "Amazon Timestream Write",
         "serviceId" => "Timestream Write",

@@ -669,7 +669,7 @@ module Aws::ApplicationDiscoveryService
     StartExportTaskResponse.add_member(:export_id, Shapes::ShapeRef.new(shape: ConfigurationsExportId, location_name: "exportId"))
     StartExportTaskResponse.struct_class = Types::StartExportTaskResponse
 
-    StartImportTaskRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    StartImportTaskRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     StartImportTaskRequest.add_member(:name, Shapes::ShapeRef.new(shape: ImportTaskName, required: true, location_name: "name"))
     StartImportTaskRequest.add_member(:import_url, Shapes::ShapeRef.new(shape: ImportURL, required: true, location_name: "importUrl"))
     StartImportTaskRequest.struct_class = Types::StartImportTaskRequest

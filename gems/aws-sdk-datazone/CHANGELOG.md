@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2025-05-05)
+------------------
+
+* Feature - This release adds a new authorization policy to control the usage of custom AssetType when creating an Asset. Customer can now add new grant(s) of policyType USE_ASSET_TYPE for custom AssetTypes to apply authorization policy to projects members and domain unit owners.
+
+1.37.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.36.0 (2025-04-11)
 ------------------
 

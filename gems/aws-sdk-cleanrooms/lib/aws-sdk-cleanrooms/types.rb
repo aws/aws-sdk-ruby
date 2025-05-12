@@ -7503,6 +7503,90 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # Contains the output information for a protected query with a
+    # distribute output configuration.
+    #
+    # This output type allows query results to be distributed to multiple
+    # receivers, including S3 and collaboration members. It is only
+    # available for queries using the Spark analytics engine.
+    #
+    # @!attribute [rw] s3
+    #   Contains output information for protected queries with an S3 output
+    #   type.
+    #   @return [Types::ProtectedQueryS3Output]
+    #
+    # @!attribute [rw] member_list
+    #   Contains the output results for each member location specified in
+    #   the distribute output configuration. Each entry provides details
+    #   about the result distribution to a specific collaboration member.
+    #   @return [Array<Types::ProtectedQuerySingleMemberOutput>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedQueryDistributeOutput AWS API Documentation
+    #
+    class ProtectedQueryDistributeOutput < Struct.new(
+      :s3,
+      :member_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the configuration for distributing protected query results
+    # to multiple receivers, including S3 and collaboration members.
+    #
+    # @!attribute [rw] locations
+    #   A list of locations where you want to distribute the protected query
+    #   results. Each location must specify either an S3 destination or a
+    #   collaboration member destination.
+    #
+    #   You can't specify more than one S3 location.
+    #
+    #    You can't specify the query runner's account as a member
+    #   location.
+    #
+    #    You must include either an S3 or member output configuration for
+    #   each location, but not both.
+    #   @return [Array<Types::ProtectedQueryDistributeOutputConfigurationLocation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedQueryDistributeOutputConfiguration AWS API Documentation
+    #
+    class ProtectedQueryDistributeOutputConfiguration < Struct.new(
+      :locations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies where you'll distribute the results of your protected
+    # query. You must configure either an S3 destination or a collaboration
+    # member destination.
+    #
+    # @note ProtectedQueryDistributeOutputConfigurationLocation is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ProtectedQueryDistributeOutputConfigurationLocation is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ProtectedQueryDistributeOutputConfigurationLocation corresponding to the set member.
+    #
+    # @!attribute [rw] s3
+    #   Contains the configuration to write the query results to S3.
+    #   @return [Types::ProtectedQueryS3OutputConfiguration]
+    #
+    # @!attribute [rw] member
+    #   Contains configuration details for the protected query member
+    #   output.
+    #   @return [Types::ProtectedQueryMemberOutputConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedQueryDistributeOutputConfigurationLocation AWS API Documentation
+    #
+    class ProtectedQueryDistributeOutputConfigurationLocation < Struct.new(
+      :s3,
+      :member,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class S3 < ProtectedQueryDistributeOutputConfigurationLocation; end
+      class Member < ProtectedQueryDistributeOutputConfigurationLocation; end
+      class Unknown < ProtectedQueryDistributeOutputConfigurationLocation; end
+    end
+
     # Details of errors thrown by the protected query.
     #
     # @!attribute [rw] message
@@ -7550,11 +7634,24 @@ module Aws::CleanRooms
     #   results of the query.
     #   @return [Array<Types::ProtectedQuerySingleMemberOutput>]
     #
+    # @!attribute [rw] distribute
+    #   Contains output information for protected queries that use a
+    #   `distribute` output type. This output type lets you send query
+    #   results to multiple locations - either to S3 or to collaboration
+    #   members.
+    #
+    #   <note markdown="1"> You can only use the `distribute` output type with the Spark
+    #   analytics engine.
+    #
+    #    </note>
+    #   @return [Types::ProtectedQueryDistributeOutput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedQueryOutput AWS API Documentation
     #
     class ProtectedQueryOutput < Struct.new(
       :s3,
       :member_list,
+      :distribute,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -7562,6 +7659,7 @@ module Aws::CleanRooms
 
       class S3 < ProtectedQueryOutput; end
       class MemberList < ProtectedQueryOutput; end
+      class Distribute < ProtectedQueryOutput; end
       class Unknown < ProtectedQueryOutput; end
     end
 
@@ -7581,11 +7679,17 @@ module Aws::CleanRooms
     #   type.
     #   @return [Types::ProtectedQueryMemberOutputConfiguration]
     #
+    # @!attribute [rw] distribute
+    #   Required configuration for a protected query with a `distribute`
+    #   output type.
+    #   @return [Types::ProtectedQueryDistributeOutputConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedQueryOutputConfiguration AWS API Documentation
     #
     class ProtectedQueryOutputConfiguration < Struct.new(
       :s3,
       :member,
+      :distribute,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -7593,6 +7697,7 @@ module Aws::CleanRooms
 
       class S3 < ProtectedQueryOutputConfiguration; end
       class Member < ProtectedQueryOutputConfiguration; end
+      class Distribute < ProtectedQueryOutputConfiguration; end
       class Unknown < ProtectedQueryOutputConfiguration; end
     end
 

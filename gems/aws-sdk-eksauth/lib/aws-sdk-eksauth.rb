@@ -55,7 +55,7 @@ module Aws::EKSAuth
   autoload :EndpointProvider, 'aws-sdk-eksauth/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-eksauth/endpoints'
 
-  GEM_VERSION = '1.18.0'
+  GEM_VERSION = '1.19.0'
 
 end
 

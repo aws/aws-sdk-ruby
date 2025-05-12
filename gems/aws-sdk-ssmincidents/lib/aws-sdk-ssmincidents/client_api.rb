@@ -295,7 +295,7 @@ module Aws::SSMIncidents
     ConflictException.add_member(:retry_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "retryAfter"))
     ConflictException.struct_class = Types::ConflictException
 
-    CreateReplicationSetInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateReplicationSetInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateReplicationSetInput.add_member(:regions, Shapes::ShapeRef.new(shape: RegionMapInput, required: true, location_name: "regions"))
     CreateReplicationSetInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateReplicationSetInput.struct_class = Types::CreateReplicationSetInput
@@ -305,7 +305,7 @@ module Aws::SSMIncidents
 
     CreateResponsePlanInput.add_member(:actions, Shapes::ShapeRef.new(shape: ActionsList, location_name: "actions"))
     CreateResponsePlanInput.add_member(:chat_channel, Shapes::ShapeRef.new(shape: ChatChannel, location_name: "chatChannel"))
-    CreateResponsePlanInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateResponsePlanInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateResponsePlanInput.add_member(:display_name, Shapes::ShapeRef.new(shape: ResponsePlanDisplayName, location_name: "displayName"))
     CreateResponsePlanInput.add_member(:engagements, Shapes::ShapeRef.new(shape: EngagementSet, location_name: "engagements"))
     CreateResponsePlanInput.add_member(:incident_template, Shapes::ShapeRef.new(shape: IncidentTemplate, required: true, location_name: "incidentTemplate"))
@@ -317,7 +317,7 @@ module Aws::SSMIncidents
     CreateResponsePlanOutput.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
     CreateResponsePlanOutput.struct_class = Types::CreateResponsePlanOutput
 
-    CreateTimelineEventInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateTimelineEventInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateTimelineEventInput.add_member(:event_data, Shapes::ShapeRef.new(shape: EventData, required: true, location_name: "eventData"))
     CreateTimelineEventInput.add_member(:event_references, Shapes::ShapeRef.new(shape: EventReferenceList, location_name: "eventReferences"))
     CreateTimelineEventInput.add_member(:event_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "eventTime"))
@@ -703,7 +703,7 @@ module Aws::SSMIncidents
     SsmParameters.key = Shapes::ShapeRef.new(shape: SsmParametersKeyString)
     SsmParameters.value = Shapes::ShapeRef.new(shape: SsmParameterValues)
 
-    StartIncidentInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    StartIncidentInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     StartIncidentInput.add_member(:impact, Shapes::ShapeRef.new(shape: Impact, location_name: "impact"))
     StartIncidentInput.add_member(:related_items, Shapes::ShapeRef.new(shape: RelatedItemList, location_name: "relatedItems"))
     StartIncidentInput.add_member(:response_plan_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "responsePlanArn"))
@@ -757,7 +757,7 @@ module Aws::SSMIncidents
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateDeletionProtectionInput.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
-    UpdateDeletionProtectionInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateDeletionProtectionInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateDeletionProtectionInput.add_member(:deletion_protected, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "deletionProtected"))
     UpdateDeletionProtectionInput.struct_class = Types::UpdateDeletionProtectionInput
 
@@ -765,7 +765,7 @@ module Aws::SSMIncidents
 
     UpdateIncidentRecordInput.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
     UpdateIncidentRecordInput.add_member(:chat_channel, Shapes::ShapeRef.new(shape: ChatChannel, location_name: "chatChannel"))
-    UpdateIncidentRecordInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateIncidentRecordInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateIncidentRecordInput.add_member(:impact, Shapes::ShapeRef.new(shape: Impact, location_name: "impact"))
     UpdateIncidentRecordInput.add_member(:notification_targets, Shapes::ShapeRef.new(shape: NotificationTargetSet, location_name: "notificationTargets"))
     UpdateIncidentRecordInput.add_member(:status, Shapes::ShapeRef.new(shape: IncidentRecordStatus, location_name: "status"))
@@ -775,7 +775,7 @@ module Aws::SSMIncidents
 
     UpdateIncidentRecordOutput.struct_class = Types::UpdateIncidentRecordOutput
 
-    UpdateRelatedItemsInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateRelatedItemsInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateRelatedItemsInput.add_member(:incident_record_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "incidentRecordArn"))
     UpdateRelatedItemsInput.add_member(:related_items_update, Shapes::ShapeRef.new(shape: RelatedItemsUpdate, required: true, location_name: "relatedItemsUpdate"))
     UpdateRelatedItemsInput.struct_class = Types::UpdateRelatedItemsInput
@@ -792,7 +792,7 @@ module Aws::SSMIncidents
 
     UpdateReplicationSetInput.add_member(:actions, Shapes::ShapeRef.new(shape: UpdateReplicationSetInputActionsList, required: true, location_name: "actions"))
     UpdateReplicationSetInput.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
-    UpdateReplicationSetInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateReplicationSetInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateReplicationSetInput.struct_class = Types::UpdateReplicationSetInput
 
     UpdateReplicationSetInputActionsList.member = Shapes::ShapeRef.new(shape: UpdateReplicationSetAction)
@@ -802,7 +802,7 @@ module Aws::SSMIncidents
     UpdateResponsePlanInput.add_member(:actions, Shapes::ShapeRef.new(shape: ActionsList, location_name: "actions"))
     UpdateResponsePlanInput.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
     UpdateResponsePlanInput.add_member(:chat_channel, Shapes::ShapeRef.new(shape: ChatChannel, location_name: "chatChannel"))
-    UpdateResponsePlanInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateResponsePlanInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateResponsePlanInput.add_member(:display_name, Shapes::ShapeRef.new(shape: ResponsePlanDisplayName, location_name: "displayName"))
     UpdateResponsePlanInput.add_member(:engagements, Shapes::ShapeRef.new(shape: EngagementSet, location_name: "engagements"))
     UpdateResponsePlanInput.add_member(:incident_template_dedupe_string, Shapes::ShapeRef.new(shape: DedupeString, location_name: "incidentTemplateDedupeString"))
@@ -816,7 +816,7 @@ module Aws::SSMIncidents
 
     UpdateResponsePlanOutput.struct_class = Types::UpdateResponsePlanOutput
 
-    UpdateTimelineEventInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateTimelineEventInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateTimelineEventInput.add_member(:event_data, Shapes::ShapeRef.new(shape: EventData, location_name: "eventData"))
     UpdateTimelineEventInput.add_member(:event_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "eventId"))
     UpdateTimelineEventInput.add_member(:event_references, Shapes::ShapeRef.new(shape: EventReferenceList, location_name: "eventReferences"))

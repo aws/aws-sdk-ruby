@@ -528,12 +528,10 @@ module Aws::MediaConvert
     #   AWS Elemental MediaConvert User Guide.
     #
     # @option params [String] :billing_tags_source
-    #   Optional. Choose a tag type that AWS Billing and Cost Management will
-    #   use to sort your AWS Elemental MediaConvert costs on any billing
-    #   report that you set up. Any transcoding outputs that don't have an
-    #   associated tag will appear in your billing report unsorted. If you
-    #   don't choose a valid value for this field, your job outputs will
-    #   appear on the billing report unsorted.
+    #   Optionally choose a Billing tags source that AWS Billing and Cost
+    #   Management will use to display tags for individual output costs on any
+    #   billing report that you set up. Leave blank to use the default value,
+    #   Job.
     #
     # @option params [String] :client_request_token
     #   Prevent duplicate jobs from being created and ensure idempotency for your requests. A client request token can be any string that includes up to 64 ASCII characters. If you reuse a client request token within one minute of a successful request, the API returns the job details of the original request instead. For more information see https://docs.aws.amazon.com/mediaconvert/latest/apireference/idempotency.html.**A suitable default value is auto-generated.** You should normally
@@ -1109,6 +1107,7 @@ module Aws::MediaConvert
     #             gop_size: 1.0,
     #             max_bitrate: 1,
     #             number_b_frames_between_reference_frames: 1,
+    #             per_frame_metrics: ["PSNR"], # accepts PSNR, SSIM, MS_SSIM, PSNR_HVS, VMAF, QVBR
     #             qvbr_settings: {
     #               qvbr_quality_level: 1,
     #               qvbr_quality_level_fine_tune: 1.0,
@@ -1127,6 +1126,7 @@ module Aws::MediaConvert
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
     #             interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #             per_frame_metrics: ["PSNR"], # accepts PSNR, SSIM, MS_SSIM, PSNR_HVS, VMAF, QVBR
     #             scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #             slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #             telecine: "NONE", # accepts NONE, HARD
@@ -1177,6 +1177,7 @@ module Aws::MediaConvert
     #             par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #             par_denominator: 1,
     #             par_numerator: 1,
+    #             per_frame_metrics: ["PSNR"], # accepts PSNR, SSIM, MS_SSIM, PSNR_HVS, VMAF, QVBR
     #             quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
     #             qvbr_settings: {
     #               max_average_bitrate: 1,
@@ -1231,6 +1232,7 @@ module Aws::MediaConvert
     #             par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #             par_denominator: 1,
     #             par_numerator: 1,
+    #             per_frame_metrics: ["PSNR"], # accepts PSNR, SSIM, MS_SSIM, PSNR_HVS, VMAF, QVBR
     #             quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
     #             qvbr_settings: {
     #               max_average_bitrate: 1,
@@ -1275,6 +1277,7 @@ module Aws::MediaConvert
     #             par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #             par_denominator: 1,
     #             par_numerator: 1,
+    #             per_frame_metrics: ["PSNR"], # accepts PSNR, SSIM, MS_SSIM, PSNR_HVS, VMAF, QVBR
     #             quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, MULTI_PASS
     #             rate_control_mode: "VBR", # accepts VBR, CBR
     #             scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
@@ -1297,6 +1300,7 @@ module Aws::MediaConvert
     #             par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #             par_denominator: 1,
     #             par_numerator: 1,
+    #             per_frame_metrics: ["PSNR"], # accepts PSNR, SSIM, MS_SSIM, PSNR_HVS, VMAF, QVBR
     #             scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #             slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #             telecine: "NONE", # accepts NONE, HARD
@@ -1360,6 +1364,7 @@ module Aws::MediaConvert
     #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER, MAINTAIN_FRAME_COUNT
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
+    #             per_frame_metrics: ["PSNR"], # accepts PSNR, SSIM, MS_SSIM, PSNR_HVS, VMAF, QVBR
     #             profile: "XAVC_HD_INTRA_CBG", # accepts XAVC_HD_INTRA_CBG, XAVC_4K_INTRA_CBG, XAVC_4K_INTRA_VBR, XAVC_HD, XAVC_4K
     #             slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #             softness: 1,
@@ -1845,6 +1850,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.gop_size #=> Float
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.per_frame_metrics #=> Array
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.per_frame_metrics[0] #=> String, one of "PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
@@ -1857,6 +1864,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.framerate_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.framerate_numerator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.interlace_mode #=> String, one of "PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"
+    #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.per_frame_metrics #=> Array
+    #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.per_frame_metrics[0] #=> String, one of "PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.scan_type_conversion_mode #=> String, one of "INTERLACED", "INTERLACED_OPTIMIZE"
     #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.telecine #=> String, one of "NONE", "HARD"
@@ -1899,6 +1908,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.par_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.par_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.per_frame_metrics #=> Array
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.per_frame_metrics[0] #=> String, one of "PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
@@ -1947,6 +1958,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h265_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.par_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.par_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.per_frame_metrics #=> Array
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.per_frame_metrics[0] #=> String, one of "PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
@@ -1987,6 +2000,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.par_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.par_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.per_frame_metrics #=> Array
+    #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.per_frame_metrics[0] #=> String, one of "PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "MULTI_PASS"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.rate_control_mode #=> String, one of "VBR", "CBR"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.scan_type_conversion_mode #=> String, one of "INTERLACED", "INTERLACED_OPTIMIZE"
@@ -2007,6 +2022,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.prores_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.preset.settings.video_description.codec_settings.prores_settings.par_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.prores_settings.par_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.prores_settings.per_frame_metrics #=> Array
+    #   resp.preset.settings.video_description.codec_settings.prores_settings.per_frame_metrics[0] #=> String, one of "PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.prores_settings.scan_type_conversion_mode #=> String, one of "INTERLACED", "INTERLACED_OPTIMIZE"
     #   resp.preset.settings.video_description.codec_settings.prores_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.prores_settings.telecine #=> String, one of "NONE", "HARD"
@@ -2060,6 +2077,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.framerate_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.framerate_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.xavc_settings.per_frame_metrics #=> Array
+    #   resp.preset.settings.video_description.codec_settings.xavc_settings.per_frame_metrics[0] #=> String, one of "PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.profile #=> String, one of "XAVC_HD_INTRA_CBG", "XAVC_4K_INTRA_CBG", "XAVC_4K_INTRA_VBR", "XAVC_HD", "XAVC_4K"
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.softness #=> Integer
@@ -2830,6 +2849,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.gop_size #=> Float
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.per_frame_metrics #=> Array
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.per_frame_metrics[0] #=> String, one of "PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
@@ -2842,6 +2863,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.framerate_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.framerate_numerator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.interlace_mode #=> String, one of "PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"
+    #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.per_frame_metrics #=> Array
+    #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.per_frame_metrics[0] #=> String, one of "PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.scan_type_conversion_mode #=> String, one of "INTERLACED", "INTERLACED_OPTIMIZE"
     #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.telecine #=> String, one of "NONE", "HARD"
@@ -2884,6 +2907,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.par_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.par_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.per_frame_metrics #=> Array
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.per_frame_metrics[0] #=> String, one of "PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
@@ -2932,6 +2957,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h265_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.par_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.par_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.per_frame_metrics #=> Array
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.per_frame_metrics[0] #=> String, one of "PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
@@ -2972,6 +2999,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.par_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.par_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.per_frame_metrics #=> Array
+    #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.per_frame_metrics[0] #=> String, one of "PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "MULTI_PASS"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.rate_control_mode #=> String, one of "VBR", "CBR"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.scan_type_conversion_mode #=> String, one of "INTERLACED", "INTERLACED_OPTIMIZE"
@@ -2992,6 +3021,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.prores_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.preset.settings.video_description.codec_settings.prores_settings.par_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.prores_settings.par_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.prores_settings.per_frame_metrics #=> Array
+    #   resp.preset.settings.video_description.codec_settings.prores_settings.per_frame_metrics[0] #=> String, one of "PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.prores_settings.scan_type_conversion_mode #=> String, one of "INTERLACED", "INTERLACED_OPTIMIZE"
     #   resp.preset.settings.video_description.codec_settings.prores_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.prores_settings.telecine #=> String, one of "NONE", "HARD"
@@ -3045,6 +3076,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.framerate_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.framerate_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.xavc_settings.per_frame_metrics #=> Array
+    #   resp.preset.settings.video_description.codec_settings.xavc_settings.per_frame_metrics[0] #=> String, one of "PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.profile #=> String, one of "XAVC_HD_INTRA_CBG", "XAVC_4K_INTRA_CBG", "XAVC_4K_INTRA_VBR", "XAVC_HD", "XAVC_4K"
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.softness #=> Integer
@@ -3683,6 +3716,8 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.gop_size #=> Float
     #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.per_frame_metrics #=> Array
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.per_frame_metrics[0] #=> String, one of "PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"
     #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
@@ -3695,6 +3730,8 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.avc_intra_settings.framerate_denominator #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.avc_intra_settings.framerate_numerator #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.avc_intra_settings.interlace_mode #=> String, one of "PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"
+    #   resp.presets[0].settings.video_description.codec_settings.avc_intra_settings.per_frame_metrics #=> Array
+    #   resp.presets[0].settings.video_description.codec_settings.avc_intra_settings.per_frame_metrics[0] #=> String, one of "PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"
     #   resp.presets[0].settings.video_description.codec_settings.avc_intra_settings.scan_type_conversion_mode #=> String, one of "INTERLACED", "INTERLACED_OPTIMIZE"
     #   resp.presets[0].settings.video_description.codec_settings.avc_intra_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.presets[0].settings.video_description.codec_settings.avc_intra_settings.telecine #=> String, one of "NONE", "HARD"
@@ -3737,6 +3774,8 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.par_denominator #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.par_numerator #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.h264_settings.per_frame_metrics #=> Array
+    #   resp.presets[0].settings.video_description.codec_settings.h264_settings.per_frame_metrics[0] #=> String, one of "PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
@@ -3785,6 +3824,8 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.par_denominator #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.par_numerator #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.h265_settings.per_frame_metrics #=> Array
+    #   resp.presets[0].settings.video_description.codec_settings.h265_settings.per_frame_metrics[0] #=> String, one of "PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
@@ -3825,6 +3866,8 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.mpeg_2_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.presets[0].settings.video_description.codec_settings.mpeg_2_settings.par_denominator #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.mpeg_2_settings.par_numerator #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.mpeg_2_settings.per_frame_metrics #=> Array
+    #   resp.presets[0].settings.video_description.codec_settings.mpeg_2_settings.per_frame_metrics[0] #=> String, one of "PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"
     #   resp.presets[0].settings.video_description.codec_settings.mpeg_2_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "MULTI_PASS"
     #   resp.presets[0].settings.video_description.codec_settings.mpeg_2_settings.rate_control_mode #=> String, one of "VBR", "CBR"
     #   resp.presets[0].settings.video_description.codec_settings.mpeg_2_settings.scan_type_conversion_mode #=> String, one of "INTERLACED", "INTERLACED_OPTIMIZE"
@@ -3845,6 +3888,8 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.prores_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.presets[0].settings.video_description.codec_settings.prores_settings.par_denominator #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.prores_settings.par_numerator #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.prores_settings.per_frame_metrics #=> Array
+    #   resp.presets[0].settings.video_description.codec_settings.prores_settings.per_frame_metrics[0] #=> String, one of "PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"
     #   resp.presets[0].settings.video_description.codec_settings.prores_settings.scan_type_conversion_mode #=> String, one of "INTERLACED", "INTERLACED_OPTIMIZE"
     #   resp.presets[0].settings.video_description.codec_settings.prores_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.presets[0].settings.video_description.codec_settings.prores_settings.telecine #=> String, one of "NONE", "HARD"
@@ -3898,6 +3943,8 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.xavc_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"
     #   resp.presets[0].settings.video_description.codec_settings.xavc_settings.framerate_denominator #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.xavc_settings.framerate_numerator #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.xavc_settings.per_frame_metrics #=> Array
+    #   resp.presets[0].settings.video_description.codec_settings.xavc_settings.per_frame_metrics[0] #=> String, one of "PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"
     #   resp.presets[0].settings.video_description.codec_settings.xavc_settings.profile #=> String, one of "XAVC_HD_INTRA_CBG", "XAVC_4K_INTRA_CBG", "XAVC_4K_INTRA_VBR", "XAVC_HD", "XAVC_4K"
     #   resp.presets[0].settings.video_description.codec_settings.xavc_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.presets[0].settings.video_description.codec_settings.xavc_settings.softness #=> Integer
@@ -4870,6 +4917,7 @@ module Aws::MediaConvert
     #             gop_size: 1.0,
     #             max_bitrate: 1,
     #             number_b_frames_between_reference_frames: 1,
+    #             per_frame_metrics: ["PSNR"], # accepts PSNR, SSIM, MS_SSIM, PSNR_HVS, VMAF, QVBR
     #             qvbr_settings: {
     #               qvbr_quality_level: 1,
     #               qvbr_quality_level_fine_tune: 1.0,
@@ -4888,6 +4936,7 @@ module Aws::MediaConvert
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
     #             interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #             per_frame_metrics: ["PSNR"], # accepts PSNR, SSIM, MS_SSIM, PSNR_HVS, VMAF, QVBR
     #             scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #             slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #             telecine: "NONE", # accepts NONE, HARD
@@ -4938,6 +4987,7 @@ module Aws::MediaConvert
     #             par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #             par_denominator: 1,
     #             par_numerator: 1,
+    #             per_frame_metrics: ["PSNR"], # accepts PSNR, SSIM, MS_SSIM, PSNR_HVS, VMAF, QVBR
     #             quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
     #             qvbr_settings: {
     #               max_average_bitrate: 1,
@@ -4992,6 +5042,7 @@ module Aws::MediaConvert
     #             par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #             par_denominator: 1,
     #             par_numerator: 1,
+    #             per_frame_metrics: ["PSNR"], # accepts PSNR, SSIM, MS_SSIM, PSNR_HVS, VMAF, QVBR
     #             quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, SINGLE_PASS_HQ, MULTI_PASS_HQ
     #             qvbr_settings: {
     #               max_average_bitrate: 1,
@@ -5036,6 +5087,7 @@ module Aws::MediaConvert
     #             par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #             par_denominator: 1,
     #             par_numerator: 1,
+    #             per_frame_metrics: ["PSNR"], # accepts PSNR, SSIM, MS_SSIM, PSNR_HVS, VMAF, QVBR
     #             quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, MULTI_PASS
     #             rate_control_mode: "VBR", # accepts VBR, CBR
     #             scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
@@ -5058,6 +5110,7 @@ module Aws::MediaConvert
     #             par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #             par_denominator: 1,
     #             par_numerator: 1,
+    #             per_frame_metrics: ["PSNR"], # accepts PSNR, SSIM, MS_SSIM, PSNR_HVS, VMAF, QVBR
     #             scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #             slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #             telecine: "NONE", # accepts NONE, HARD
@@ -5121,6 +5174,7 @@ module Aws::MediaConvert
     #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER, MAINTAIN_FRAME_COUNT
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
+    #             per_frame_metrics: ["PSNR"], # accepts PSNR, SSIM, MS_SSIM, PSNR_HVS, VMAF, QVBR
     #             profile: "XAVC_HD_INTRA_CBG", # accepts XAVC_HD_INTRA_CBG, XAVC_4K_INTRA_CBG, XAVC_4K_INTRA_VBR, XAVC_HD, XAVC_4K
     #             slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #             softness: 1,
@@ -5603,6 +5657,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.gop_size #=> Float
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.per_frame_metrics #=> Array
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.per_frame_metrics[0] #=> String, one of "PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
@@ -5615,6 +5671,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.framerate_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.framerate_numerator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.interlace_mode #=> String, one of "PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"
+    #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.per_frame_metrics #=> Array
+    #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.per_frame_metrics[0] #=> String, one of "PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.scan_type_conversion_mode #=> String, one of "INTERLACED", "INTERLACED_OPTIMIZE"
     #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.telecine #=> String, one of "NONE", "HARD"
@@ -5657,6 +5715,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.par_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.par_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.per_frame_metrics #=> Array
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.per_frame_metrics[0] #=> String, one of "PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
@@ -5705,6 +5765,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h265_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.par_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.par_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.per_frame_metrics #=> Array
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.per_frame_metrics[0] #=> String, one of "PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
@@ -5745,6 +5807,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.par_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.par_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.per_frame_metrics #=> Array
+    #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.per_frame_metrics[0] #=> String, one of "PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "MULTI_PASS"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.rate_control_mode #=> String, one of "VBR", "CBR"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.scan_type_conversion_mode #=> String, one of "INTERLACED", "INTERLACED_OPTIMIZE"
@@ -5765,6 +5829,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.prores_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.preset.settings.video_description.codec_settings.prores_settings.par_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.prores_settings.par_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.prores_settings.per_frame_metrics #=> Array
+    #   resp.preset.settings.video_description.codec_settings.prores_settings.per_frame_metrics[0] #=> String, one of "PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.prores_settings.scan_type_conversion_mode #=> String, one of "INTERLACED", "INTERLACED_OPTIMIZE"
     #   resp.preset.settings.video_description.codec_settings.prores_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.prores_settings.telecine #=> String, one of "NONE", "HARD"
@@ -5818,6 +5884,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.framerate_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.framerate_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.xavc_settings.per_frame_metrics #=> Array
+    #   resp.preset.settings.video_description.codec_settings.xavc_settings.per_frame_metrics[0] #=> String, one of "PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.profile #=> String, one of "XAVC_HD_INTRA_CBG", "XAVC_4K_INTRA_CBG", "XAVC_4K_INTRA_VBR", "XAVC_HD", "XAVC_4K"
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.softness #=> Integer
@@ -6037,7 +6105,7 @@ module Aws::MediaConvert
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.155.0'
+      context[:gem_version] = '1.157.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

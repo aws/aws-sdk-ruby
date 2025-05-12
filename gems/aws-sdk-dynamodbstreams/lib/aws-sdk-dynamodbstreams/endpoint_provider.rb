@@ -43,7 +43,7 @@ module Aws::DynamoDBStreams
             raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
           end
           if Aws::Endpoints::Matchers.string_equals?(parameters.region, "local")
-            return Aws::Endpoints::Endpoint.new(url: "http://localhost:8000", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"dynamodb", "signingRegion"=>"us-east-1"}]})
+            return Aws::Endpoints::Endpoint.new(url: "http://localhost:8000", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]})
           end
           if Aws::Endpoints::Matchers.string_equals?("aws", Aws::Endpoints::Matchers.attr(partition_result, "name"))
             return Aws::Endpoints::Endpoint.new(url: "https://streams.dynamodb.#{parameters.region}.amazonaws.com", headers: {}, properties: {})

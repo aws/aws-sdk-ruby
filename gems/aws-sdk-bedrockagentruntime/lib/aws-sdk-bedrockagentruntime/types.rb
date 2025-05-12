@@ -1185,6 +1185,21 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
+    # Contains details of the custom orchestration configured for the agent.
+    #
+    # @!attribute [rw] executor
+    #   The structure of the executor invoking the actions in custom
+    #   orchestration.
+    #   @return [Types::OrchestrationExecutor]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/CustomOrchestration AWS API Documentation
+    #
+    class CustomOrchestration < Struct.new(
+      :executor)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The trace behavior for the custom orchestration.
     #
     # @!attribute [rw] event
@@ -3127,6 +3142,18 @@ module Aws::BedrockAgentRuntime
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-enablement
     #
+    # @!attribute [rw] caller_chain
+    #   The caller chain for the trace part.
+    #   @return [Array<Types::Caller>]
+    #
+    # @!attribute [rw] collaborator_name
+    #   The collaborator name for the trace part.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_time
+    #   The time that trace occurred.
+    #   @return [Time]
+    #
     # @!attribute [rw] session_id
     #   The unique identifier of the session with the agent.
     #   @return [String]
@@ -3146,10 +3173,13 @@ module Aws::BedrockAgentRuntime
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/InlineAgentTracePart AWS API Documentation
     #
     class InlineAgentTracePart < Struct.new(
+      :caller_chain,
+      :collaborator_name,
+      :event_time,
       :session_id,
       :trace,
       :event_type)
-      SENSITIVE = [:trace]
+      SENSITIVE = [:collaborator_name, :trace]
       include Aws::Structure
     end
 
@@ -3752,6 +3782,10 @@ module Aws::BedrockAgentRuntime
     #   inline collaborator agent can also be the supervisor.
     #   @return [String]
     #
+    # @!attribute [rw] agent_name
+    #   The name for the agent.
+    #   @return [String]
+    #
     # @!attribute [rw] bedrock_model_configurations
     #   Model settings for the request.
     #   @return [Types::InlineBedrockModelConfigurations]
@@ -3769,6 +3803,11 @@ module Aws::BedrockAgentRuntime
     #   List of collaborator inline agents.
     #   @return [Array<Types::Collaborator>]
     #
+    # @!attribute [rw] custom_orchestration
+    #   Contains details of the custom orchestration configured for the
+    #   agent.
+    #   @return [Types::CustomOrchestration]
+    #
     # @!attribute [rw] customer_encryption_key_arn
     #   The Amazon Resource Name (ARN) of the Amazon Web Services KMS key to
     #   use to encrypt your inline agent.
@@ -3777,7 +3816,6 @@ module Aws::BedrockAgentRuntime
     # @!attribute [rw] enable_trace
     #   Specifies whether to turn on the trace or not to track the agent's
     #   reasoning process. For more information, see [Using trace][1].
-    #   </p>
     #
     #
     #
@@ -3850,6 +3888,11 @@ module Aws::BedrockAgentRuntime
     #   Contains information of the knowledge bases to associate with.
     #   @return [Array<Types::KnowledgeBase>]
     #
+    # @!attribute [rw] orchestration_type
+    #   Specifies the type of orchestration strategy for the agent. This is
+    #   set to DEFAULT orchestration type, by default.
+    #   @return [String]
+    #
     # @!attribute [rw] prompt_override_configuration
     #   Configurations for advanced prompts used to override the default
     #   prompts to enhance the accuracy of the inline agent.
@@ -3874,9 +3917,11 @@ module Aws::BedrockAgentRuntime
     class InvokeInlineAgentRequest < Struct.new(
       :action_groups,
       :agent_collaboration,
+      :agent_name,
       :bedrock_model_configurations,
       :collaborator_configurations,
       :collaborators,
+      :custom_orchestration,
       :customer_encryption_key_arn,
       :enable_trace,
       :end_session,
@@ -3887,15 +3932,16 @@ module Aws::BedrockAgentRuntime
       :input_text,
       :instruction,
       :knowledge_bases,
+      :orchestration_type,
       :prompt_override_configuration,
       :session_id,
       :streaming_configurations)
-      SENSITIVE = [:input_text, :instruction, :prompt_override_configuration]
+      SENSITIVE = [:agent_name, :input_text, :instruction, :prompt_override_configuration]
       include Aws::Structure
     end
 
     # @!attribute [rw] completion
-    #   </p>
+    #   The inline agent's response to the user prompt.
     #   @return [Types::InlineAgentResponseStream]
     #
     # @!attribute [rw] content_type
@@ -4844,6 +4890,29 @@ module Aws::BedrockAgentRuntime
       :query_transformation_configuration)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The structure of the executor invoking the actions in custom
+    # orchestration.
+    #
+    # @note OrchestrationExecutor is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] lambda
+    #   The Amazon Resource Name (ARN) of the Lambda function containing the
+    #   business logic that is carried out upon invoking the action.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/OrchestrationExecutor AWS API Documentation
+    #
+    class OrchestrationExecutor < Struct.new(
+      :lambda,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Lambda < OrchestrationExecutor; end
+      class Unknown < OrchestrationExecutor; end
     end
 
     # The foundation model output from the orchestration step.

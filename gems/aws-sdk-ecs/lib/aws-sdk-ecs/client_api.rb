@@ -1497,7 +1497,7 @@ module Aws::ECS
     RunTaskRequest.add_member(:started_by, Shapes::ShapeRef.new(shape: String, location_name: "startedBy"))
     RunTaskRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     RunTaskRequest.add_member(:task_definition, Shapes::ShapeRef.new(shape: String, required: true, location_name: "taskDefinition"))
-    RunTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    RunTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     RunTaskRequest.add_member(:volume_configurations, Shapes::ShapeRef.new(shape: TaskVolumeConfigurations, location_name: "volumeConfigurations"))
     RunTaskRequest.struct_class = Types::RunTaskRequest
 

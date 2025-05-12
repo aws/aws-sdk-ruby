@@ -54,7 +54,7 @@ module Aws::LicenseManager
   autoload :EndpointProvider, 'aws-sdk-licensemanager/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-licensemanager/endpoints'
 
-  GEM_VERSION = '1.70.0'
+  GEM_VERSION = '1.71.0'
 
 end
 

@@ -861,7 +861,7 @@ module Aws::BedrockRuntime
     SpecificToolChoice.add_member(:name, Shapes::ShapeRef.new(shape: ToolName, required: true, location_name: "name"))
     SpecificToolChoice.struct_class = Types::SpecificToolChoice
 
-    StartAsyncInvokeRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: AsyncInvokeIdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    StartAsyncInvokeRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: AsyncInvokeIdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     StartAsyncInvokeRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: AsyncInvokeIdentifier, required: true, location_name: "modelId"))
     StartAsyncInvokeRequest.add_member(:model_input, Shapes::ShapeRef.new(shape: ModelInputPayload, required: true, location_name: "modelInput"))
     StartAsyncInvokeRequest.add_member(:output_data_config, Shapes::ShapeRef.new(shape: AsyncInvokeOutputDataConfig, required: true, location_name: "outputDataConfig"))
@@ -993,7 +993,7 @@ module Aws::BedrockRuntime
         "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "bedrock-runtime",
         "protocol" => "rest-json",
-        "protocolSettings" => {"h2"=>"optional"},
+        "protocolSettings" => {"h2" => "optional"},
         "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon Bedrock Runtime",
         "serviceId" => "Bedrock Runtime",

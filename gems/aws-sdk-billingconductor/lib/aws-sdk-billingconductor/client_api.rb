@@ -348,7 +348,7 @@ module Aws::BillingConductor
     ConflictException.add_member(:reason, Shapes::ShapeRef.new(shape: ConflictExceptionReason, location_name: "Reason"))
     ConflictException.struct_class = Types::ConflictException
 
-    CreateBillingGroupInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amzn-Client-Token", metadata: {"idempotencyToken"=>true}))
+    CreateBillingGroupInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amzn-Client-Token", metadata: {"idempotencyToken" => true}))
     CreateBillingGroupInput.add_member(:name, Shapes::ShapeRef.new(shape: BillingGroupName, required: true, location_name: "Name"))
     CreateBillingGroupInput.add_member(:account_grouping, Shapes::ShapeRef.new(shape: AccountGrouping, required: true, location_name: "AccountGrouping"))
     CreateBillingGroupInput.add_member(:computation_preference, Shapes::ShapeRef.new(shape: ComputationPreference, required: true, location_name: "ComputationPreference"))
@@ -360,7 +360,7 @@ module Aws::BillingConductor
     CreateBillingGroupOutput.add_member(:arn, Shapes::ShapeRef.new(shape: BillingGroupArn, location_name: "Arn"))
     CreateBillingGroupOutput.struct_class = Types::CreateBillingGroupOutput
 
-    CreateCustomLineItemInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amzn-Client-Token", metadata: {"idempotencyToken"=>true}))
+    CreateCustomLineItemInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amzn-Client-Token", metadata: {"idempotencyToken" => true}))
     CreateCustomLineItemInput.add_member(:name, Shapes::ShapeRef.new(shape: CustomLineItemName, required: true, location_name: "Name"))
     CreateCustomLineItemInput.add_member(:description, Shapes::ShapeRef.new(shape: CustomLineItemDescription, required: true, location_name: "Description"))
     CreateCustomLineItemInput.add_member(:billing_group_arn, Shapes::ShapeRef.new(shape: BillingGroupArn, required: true, location_name: "BillingGroupArn"))
@@ -376,7 +376,7 @@ module Aws::BillingConductor
     CreateFreeTierConfig.add_member(:activated, Shapes::ShapeRef.new(shape: TieringActivated, required: true, location_name: "Activated"))
     CreateFreeTierConfig.struct_class = Types::CreateFreeTierConfig
 
-    CreatePricingPlanInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amzn-Client-Token", metadata: {"idempotencyToken"=>true}))
+    CreatePricingPlanInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amzn-Client-Token", metadata: {"idempotencyToken" => true}))
     CreatePricingPlanInput.add_member(:name, Shapes::ShapeRef.new(shape: PricingPlanName, required: true, location_name: "Name"))
     CreatePricingPlanInput.add_member(:description, Shapes::ShapeRef.new(shape: PricingPlanDescription, location_name: "Description"))
     CreatePricingPlanInput.add_member(:pricing_rule_arns, Shapes::ShapeRef.new(shape: PricingRuleArnsInput, location_name: "PricingRuleArns"))
@@ -386,7 +386,7 @@ module Aws::BillingConductor
     CreatePricingPlanOutput.add_member(:arn, Shapes::ShapeRef.new(shape: PricingPlanArn, location_name: "Arn"))
     CreatePricingPlanOutput.struct_class = Types::CreatePricingPlanOutput
 
-    CreatePricingRuleInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amzn-Client-Token", metadata: {"idempotencyToken"=>true}))
+    CreatePricingRuleInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amzn-Client-Token", metadata: {"idempotencyToken" => true}))
     CreatePricingRuleInput.add_member(:name, Shapes::ShapeRef.new(shape: PricingRuleName, required: true, location_name: "Name"))
     CreatePricingRuleInput.add_member(:description, Shapes::ShapeRef.new(shape: PricingRuleDescription, location_name: "Description"))
     CreatePricingRuleInput.add_member(:scope, Shapes::ShapeRef.new(shape: PricingRuleScope, required: true, location_name: "Scope"))

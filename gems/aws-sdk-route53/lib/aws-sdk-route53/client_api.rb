@@ -1584,7 +1584,7 @@ module Aws::Route53
         o.input = Shapes::ShapeRef.new(shape: AssociateVPCWithHostedZoneRequest,
           location_name: "AssociateVPCWithHostedZoneRequest",
           metadata: {
-            "xmlNamespace" => {"uri"=>"https://route53.amazonaws.com/doc/2013-04-01/"}
+            "xmlNamespace" => {"uri" => "https://route53.amazonaws.com/doc/2013-04-01/"}
           }
         )
         o.output = Shapes::ShapeRef.new(shape: AssociateVPCWithHostedZoneResponse)
@@ -1605,7 +1605,7 @@ module Aws::Route53
         o.input = Shapes::ShapeRef.new(shape: ChangeCidrCollectionRequest,
           location_name: "ChangeCidrCollectionRequest",
           metadata: {
-            "xmlNamespace" => {"uri"=>"https://route53.amazonaws.com/doc/2013-04-01/"}
+            "xmlNamespace" => {"uri" => "https://route53.amazonaws.com/doc/2013-04-01/"}
           }
         )
         o.output = Shapes::ShapeRef.new(shape: ChangeCidrCollectionResponse)
@@ -1624,7 +1624,7 @@ module Aws::Route53
         o.input = Shapes::ShapeRef.new(shape: ChangeResourceRecordSetsRequest,
           location_name: "ChangeResourceRecordSetsRequest",
           metadata: {
-            "xmlNamespace" => {"uri"=>"https://route53.amazonaws.com/doc/2013-04-01/"}
+            "xmlNamespace" => {"uri" => "https://route53.amazonaws.com/doc/2013-04-01/"}
           }
         )
         o.output = Shapes::ShapeRef.new(shape: ChangeResourceRecordSetsResponse)
@@ -1642,7 +1642,7 @@ module Aws::Route53
         o.input = Shapes::ShapeRef.new(shape: ChangeTagsForResourceRequest,
           location_name: "ChangeTagsForResourceRequest",
           metadata: {
-            "xmlNamespace" => {"uri"=>"https://route53.amazonaws.com/doc/2013-04-01/"}
+            "xmlNamespace" => {"uri" => "https://route53.amazonaws.com/doc/2013-04-01/"}
           }
         )
         o.output = Shapes::ShapeRef.new(shape: ChangeTagsForResourceResponse)
@@ -1660,7 +1660,7 @@ module Aws::Route53
         o.input = Shapes::ShapeRef.new(shape: CreateCidrCollectionRequest,
           location_name: "CreateCidrCollectionRequest",
           metadata: {
-            "xmlNamespace" => {"uri"=>"https://route53.amazonaws.com/doc/2013-04-01/"}
+            "xmlNamespace" => {"uri" => "https://route53.amazonaws.com/doc/2013-04-01/"}
           }
         )
         o.output = Shapes::ShapeRef.new(shape: CreateCidrCollectionResponse)
@@ -1677,7 +1677,7 @@ module Aws::Route53
         o.input = Shapes::ShapeRef.new(shape: CreateHealthCheckRequest,
           location_name: "CreateHealthCheckRequest",
           metadata: {
-            "xmlNamespace" => {"uri"=>"https://route53.amazonaws.com/doc/2013-04-01/"}
+            "xmlNamespace" => {"uri" => "https://route53.amazonaws.com/doc/2013-04-01/"}
           }
         )
         o.output = Shapes::ShapeRef.new(shape: CreateHealthCheckResponse)
@@ -1693,7 +1693,7 @@ module Aws::Route53
         o.input = Shapes::ShapeRef.new(shape: CreateHostedZoneRequest,
           location_name: "CreateHostedZoneRequest",
           metadata: {
-            "xmlNamespace" => {"uri"=>"https://route53.amazonaws.com/doc/2013-04-01/"}
+            "xmlNamespace" => {"uri" => "https://route53.amazonaws.com/doc/2013-04-01/"}
           }
         )
         o.output = Shapes::ShapeRef.new(shape: CreateHostedZoneResponse)
@@ -1715,7 +1715,7 @@ module Aws::Route53
         o.input = Shapes::ShapeRef.new(shape: CreateKeySigningKeyRequest,
           location_name: "CreateKeySigningKeyRequest",
           metadata: {
-            "xmlNamespace" => {"uri"=>"https://route53.amazonaws.com/doc/2013-04-01/"}
+            "xmlNamespace" => {"uri" => "https://route53.amazonaws.com/doc/2013-04-01/"}
           }
         )
         o.output = Shapes::ShapeRef.new(shape: CreateKeySigningKeyResponse)
@@ -1738,7 +1738,7 @@ module Aws::Route53
         o.input = Shapes::ShapeRef.new(shape: CreateQueryLoggingConfigRequest,
           location_name: "CreateQueryLoggingConfigRequest",
           metadata: {
-            "xmlNamespace" => {"uri"=>"https://route53.amazonaws.com/doc/2013-04-01/"}
+            "xmlNamespace" => {"uri" => "https://route53.amazonaws.com/doc/2013-04-01/"}
           }
         )
         o.output = Shapes::ShapeRef.new(shape: CreateQueryLoggingConfigResponse)
@@ -1757,7 +1757,7 @@ module Aws::Route53
         o.input = Shapes::ShapeRef.new(shape: CreateReusableDelegationSetRequest,
           location_name: "CreateReusableDelegationSetRequest",
           metadata: {
-            "xmlNamespace" => {"uri"=>"https://route53.amazonaws.com/doc/2013-04-01/"}
+            "xmlNamespace" => {"uri" => "https://route53.amazonaws.com/doc/2013-04-01/"}
           }
         )
         o.output = Shapes::ShapeRef.new(shape: CreateReusableDelegationSetResponse)
@@ -1777,7 +1777,7 @@ module Aws::Route53
         o.input = Shapes::ShapeRef.new(shape: CreateTrafficPolicyRequest,
           location_name: "CreateTrafficPolicyRequest",
           metadata: {
-            "xmlNamespace" => {"uri"=>"https://route53.amazonaws.com/doc/2013-04-01/"}
+            "xmlNamespace" => {"uri" => "https://route53.amazonaws.com/doc/2013-04-01/"}
           }
         )
         o.output = Shapes::ShapeRef.new(shape: CreateTrafficPolicyResponse)
@@ -1794,7 +1794,7 @@ module Aws::Route53
         o.input = Shapes::ShapeRef.new(shape: CreateTrafficPolicyInstanceRequest,
           location_name: "CreateTrafficPolicyInstanceRequest",
           metadata: {
-            "xmlNamespace" => {"uri"=>"https://route53.amazonaws.com/doc/2013-04-01/"}
+            "xmlNamespace" => {"uri" => "https://route53.amazonaws.com/doc/2013-04-01/"}
           }
         )
         o.output = Shapes::ShapeRef.new(shape: CreateTrafficPolicyInstanceResponse)
@@ -1812,7 +1812,7 @@ module Aws::Route53
         o.input = Shapes::ShapeRef.new(shape: CreateTrafficPolicyVersionRequest,
           location_name: "CreateTrafficPolicyVersionRequest",
           metadata: {
-            "xmlNamespace" => {"uri"=>"https://route53.amazonaws.com/doc/2013-04-01/"}
+            "xmlNamespace" => {"uri" => "https://route53.amazonaws.com/doc/2013-04-01/"}
           }
         )
         o.output = Shapes::ShapeRef.new(shape: CreateTrafficPolicyVersionResponse)
@@ -1830,7 +1830,7 @@ module Aws::Route53
         o.input = Shapes::ShapeRef.new(shape: CreateVPCAssociationAuthorizationRequest,
           location_name: "CreateVPCAssociationAuthorizationRequest",
           metadata: {
-            "xmlNamespace" => {"uri"=>"https://route53.amazonaws.com/doc/2013-04-01/"}
+            "xmlNamespace" => {"uri" => "https://route53.amazonaws.com/doc/2013-04-01/"}
           }
         )
         o.output = Shapes::ShapeRef.new(shape: CreateVPCAssociationAuthorizationResponse)
@@ -1959,7 +1959,7 @@ module Aws::Route53
         o.input = Shapes::ShapeRef.new(shape: DeleteVPCAssociationAuthorizationRequest,
           location_name: "DeleteVPCAssociationAuthorizationRequest",
           metadata: {
-            "xmlNamespace" => {"uri"=>"https://route53.amazonaws.com/doc/2013-04-01/"}
+            "xmlNamespace" => {"uri" => "https://route53.amazonaws.com/doc/2013-04-01/"}
           }
         )
         o.output = Shapes::ShapeRef.new(shape: DeleteVPCAssociationAuthorizationResponse)
@@ -1993,7 +1993,7 @@ module Aws::Route53
         o.input = Shapes::ShapeRef.new(shape: DisassociateVPCFromHostedZoneRequest,
           location_name: "DisassociateVPCFromHostedZoneRequest",
           metadata: {
-            "xmlNamespace" => {"uri"=>"https://route53.amazonaws.com/doc/2013-04-01/"}
+            "xmlNamespace" => {"uri" => "https://route53.amazonaws.com/doc/2013-04-01/"}
           }
         )
         o.output = Shapes::ShapeRef.new(shape: DisassociateVPCFromHostedZoneResponse)
@@ -2374,7 +2374,7 @@ module Aws::Route53
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourcesRequest,
           location_name: "ListTagsForResourcesRequest",
           metadata: {
-            "xmlNamespace" => {"uri"=>"https://route53.amazonaws.com/doc/2013-04-01/"}
+            "xmlNamespace" => {"uri" => "https://route53.amazonaws.com/doc/2013-04-01/"}
           }
         )
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourcesResponse)
@@ -2464,7 +2464,7 @@ module Aws::Route53
         o.input = Shapes::ShapeRef.new(shape: UpdateHealthCheckRequest,
           location_name: "UpdateHealthCheckRequest",
           metadata: {
-            "xmlNamespace" => {"uri"=>"https://route53.amazonaws.com/doc/2013-04-01/"}
+            "xmlNamespace" => {"uri" => "https://route53.amazonaws.com/doc/2013-04-01/"}
           }
         )
         o.output = Shapes::ShapeRef.new(shape: UpdateHealthCheckResponse)
@@ -2480,7 +2480,7 @@ module Aws::Route53
         o.input = Shapes::ShapeRef.new(shape: UpdateHostedZoneCommentRequest,
           location_name: "UpdateHostedZoneCommentRequest",
           metadata: {
-            "xmlNamespace" => {"uri"=>"https://route53.amazonaws.com/doc/2013-04-01/"}
+            "xmlNamespace" => {"uri" => "https://route53.amazonaws.com/doc/2013-04-01/"}
           }
         )
         o.output = Shapes::ShapeRef.new(shape: UpdateHostedZoneCommentResponse)
@@ -2496,7 +2496,7 @@ module Aws::Route53
         o.input = Shapes::ShapeRef.new(shape: UpdateTrafficPolicyCommentRequest,
           location_name: "UpdateTrafficPolicyCommentRequest",
           metadata: {
-            "xmlNamespace" => {"uri"=>"https://route53.amazonaws.com/doc/2013-04-01/"}
+            "xmlNamespace" => {"uri" => "https://route53.amazonaws.com/doc/2013-04-01/"}
           }
         )
         o.output = Shapes::ShapeRef.new(shape: UpdateTrafficPolicyCommentResponse)
@@ -2512,7 +2512,7 @@ module Aws::Route53
         o.input = Shapes::ShapeRef.new(shape: UpdateTrafficPolicyInstanceRequest,
           location_name: "UpdateTrafficPolicyInstanceRequest",
           metadata: {
-            "xmlNamespace" => {"uri"=>"https://route53.amazonaws.com/doc/2013-04-01/"}
+            "xmlNamespace" => {"uri" => "https://route53.amazonaws.com/doc/2013-04-01/"}
           }
         )
         o.output = Shapes::ShapeRef.new(shape: UpdateTrafficPolicyInstanceResponse)

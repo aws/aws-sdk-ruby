@@ -1230,6 +1230,7 @@ module Aws::Deadline
     #           ],
     #         },
     #         storage_profile_id: "StorageProfileId",
+    #         tag_propagation_mode: "NO_PROPAGATION", # accepts NO_PROPAGATION, PROPAGATE_TAGS_TO_WORKERS_AT_LAUNCH
     #       },
     #       service_managed_ec2: {
     #         instance_capabilities: { # required
@@ -1913,6 +1914,10 @@ module Aws::Deadline
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Hash<String,String>] :tags
+    #   Each tag consists of a tag key and a tag value. Tag keys and values
+    #   are both required, but tag values can be empty strings.
+    #
     # @return [Types::CreateWorkerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWorkerResponse#worker_id #worker_id} => String
@@ -1930,6 +1935,9 @@ module Aws::Deadline
     #       host_name: "HostName",
     #     },
     #     client_token: "ClientToken",
+    #     tags: {
+    #       "String" => "String",
+    #     },
     #   })
     #
     # @example Response structure
@@ -2605,6 +2613,7 @@ module Aws::Deadline
     #   resp.configuration.customer_managed.worker_capabilities.custom_attributes[0].values #=> Array
     #   resp.configuration.customer_managed.worker_capabilities.custom_attributes[0].values[0] #=> String
     #   resp.configuration.customer_managed.storage_profile_id #=> String
+    #   resp.configuration.customer_managed.tag_propagation_mode #=> String, one of "NO_PROPAGATION", "PROPAGATE_TAGS_TO_WORKERS_AT_LAUNCH"
     #   resp.configuration.service_managed_ec2.instance_capabilities.v_cpu_count.min #=> Integer
     #   resp.configuration.service_managed_ec2.instance_capabilities.v_cpu_count.max #=> Integer
     #   resp.configuration.service_managed_ec2.instance_capabilities.memory_mi_b.min #=> Integer
@@ -4008,6 +4017,7 @@ module Aws::Deadline
     #   resp.fleets[0].configuration.customer_managed.worker_capabilities.custom_attributes[0].values #=> Array
     #   resp.fleets[0].configuration.customer_managed.worker_capabilities.custom_attributes[0].values[0] #=> String
     #   resp.fleets[0].configuration.customer_managed.storage_profile_id #=> String
+    #   resp.fleets[0].configuration.customer_managed.tag_propagation_mode #=> String, one of "NO_PROPAGATION", "PROPAGATE_TAGS_TO_WORKERS_AT_LAUNCH"
     #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.v_cpu_count.min #=> Integer
     #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.v_cpu_count.max #=> Integer
     #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.memory_mi_b.min #=> Integer
@@ -6164,6 +6174,7 @@ module Aws::Deadline
     #           ],
     #         },
     #         storage_profile_id: "StorageProfileId",
+    #         tag_propagation_mode: "NO_PROPAGATION", # accepts NO_PROPAGATION, PROPAGATE_TAGS_TO_WORKERS_AT_LAUNCH
     #       },
     #       service_managed_ec2: {
     #         instance_capabilities: { # required
@@ -6999,7 +7010,7 @@ module Aws::Deadline
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-deadline'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

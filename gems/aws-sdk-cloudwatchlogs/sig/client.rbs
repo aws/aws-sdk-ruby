@@ -150,7 +150,7 @@ module Aws
                               log_group_name: ::String,
                               ?kms_key_id: ::String,
                               ?tags: Hash[::String, ::String],
-                              ?log_group_class: ("STANDARD" | "INFREQUENT_ACCESS")
+                              ?log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY")
                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -414,7 +414,7 @@ module Aws
                                  ?next_token: ::String,
                                  ?limit: ::Integer,
                                  ?include_linked_accounts: bool,
-                                 ?log_group_class: ("STANDARD" | "INFREQUENT_ACCESS")
+                                 ?log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY")
                                ) -> _DescribeLogGroupsResponseSuccess
                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLogGroupsResponseSuccess
 

@@ -54,7 +54,7 @@ module Aws::Braket
   autoload :EndpointProvider, 'aws-sdk-braket/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-braket/endpoints'
 
-  GEM_VERSION = '1.50.0'
+  GEM_VERSION = '1.51.0'
 
 end
 

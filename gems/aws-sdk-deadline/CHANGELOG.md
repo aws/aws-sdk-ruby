@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.23.0 (2025-04-30)
+------------------
+
+* Feature - Adds support for tag management on workers and tag inheritance from fleets to their associated workers.
+
 1.22.0 (2025-03-31)
 ------------------
 

@@ -8,6 +8,11 @@
 module Aws::SSM
   module Types
 
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class AccountSharingInfo
       attr_accessor account_id: ::String
       attr_accessor shared_document_version: ::String
@@ -297,7 +302,7 @@ module Aws::SSM
       attr_accessor alarm_configuration: Types::AlarmConfiguration
       attr_accessor triggered_alarms: ::Array[Types::AlarmStateInformation]
       attr_accessor target_locations_url: ::String
-      attr_accessor automation_subtype: ("ChangeRequest")
+      attr_accessor automation_subtype: ("ChangeRequest" | "AccessRequest")
       attr_accessor scheduled_time: ::Time
       attr_accessor runbooks: ::Array[Types::Runbook]
       attr_accessor ops_item_id: ::String
@@ -354,7 +359,7 @@ module Aws::SSM
       attr_accessor alarm_configuration: Types::AlarmConfiguration
       attr_accessor triggered_alarms: ::Array[Types::AlarmStateInformation]
       attr_accessor target_locations_url: ::String
-      attr_accessor automation_subtype: ("ChangeRequest")
+      attr_accessor automation_subtype: ("ChangeRequest" | "AccessRequest")
       attr_accessor scheduled_time: ::Time
       attr_accessor runbooks: ::Array[Types::Runbook]
       attr_accessor ops_item_id: ::String
@@ -635,7 +640,7 @@ module Aws::SSM
       attr_accessor name: ::String
       attr_accessor display_name: ::String
       attr_accessor version_name: ::String
-      attr_accessor document_type: ("Command" | "Policy" | "Automation" | "Session" | "Package" | "ApplicationConfiguration" | "ApplicationConfigurationSchema" | "DeploymentStrategy" | "ChangeCalendar" | "Automation.ChangeTemplate" | "ProblemAnalysis" | "ProblemAnalysisTemplate" | "CloudFormation" | "ConformancePackTemplate" | "QuickSetup")
+      attr_accessor document_type: ("Command" | "Policy" | "Automation" | "Session" | "Package" | "ApplicationConfiguration" | "ApplicationConfigurationSchema" | "DeploymentStrategy" | "ChangeCalendar" | "Automation.ChangeTemplate" | "ProblemAnalysis" | "ProblemAnalysisTemplate" | "CloudFormation" | "ConformancePackTemplate" | "QuickSetup" | "ManualApprovalPolicy" | "AutoApprovalPolicy")
       attr_accessor document_format: ("YAML" | "JSON" | "TEXT")
       attr_accessor target_type: ::String
       attr_accessor tags: ::Array[Types::Tag]
@@ -738,6 +743,14 @@ module Aws::SSM
     end
 
     class CreateResourceDataSyncResult < Aws::EmptyStructure
+    end
+
+    class Credentials
+      attr_accessor access_key_id: ::String
+      attr_accessor secret_access_key: ::String
+      attr_accessor session_token: ::String
+      attr_accessor expiration_time: ::Time
+      SENSITIVE: [:secret_access_key, :session_token]
     end
 
     class CustomSchemaCountLimitExceededException
@@ -1413,7 +1426,7 @@ module Aws::SSM
       attr_accessor description: ::String
       attr_accessor parameters: ::Array[Types::DocumentParameter]
       attr_accessor platform_types: ::Array[("Windows" | "Linux" | "MacOS")]
-      attr_accessor document_type: ("Command" | "Policy" | "Automation" | "Session" | "Package" | "ApplicationConfiguration" | "ApplicationConfigurationSchema" | "DeploymentStrategy" | "ChangeCalendar" | "Automation.ChangeTemplate" | "ProblemAnalysis" | "ProblemAnalysisTemplate" | "CloudFormation" | "ConformancePackTemplate" | "QuickSetup")
+      attr_accessor document_type: ("Command" | "Policy" | "Automation" | "Session" | "Package" | "ApplicationConfiguration" | "ApplicationConfigurationSchema" | "DeploymentStrategy" | "ChangeCalendar" | "Automation.ChangeTemplate" | "ProblemAnalysis" | "ProblemAnalysisTemplate" | "CloudFormation" | "ConformancePackTemplate" | "QuickSetup" | "ManualApprovalPolicy" | "AutoApprovalPolicy")
       attr_accessor schema_version: ::String
       attr_accessor latest_version: ::String
       attr_accessor default_version: ::String
@@ -1446,7 +1459,7 @@ module Aws::SSM
       attr_accessor version_name: ::String
       attr_accessor platform_types: ::Array[("Windows" | "Linux" | "MacOS")]
       attr_accessor document_version: ::String
-      attr_accessor document_type: ("Command" | "Policy" | "Automation" | "Session" | "Package" | "ApplicationConfiguration" | "ApplicationConfigurationSchema" | "DeploymentStrategy" | "ChangeCalendar" | "Automation.ChangeTemplate" | "ProblemAnalysis" | "ProblemAnalysisTemplate" | "CloudFormation" | "ConformancePackTemplate" | "QuickSetup")
+      attr_accessor document_type: ("Command" | "Policy" | "Automation" | "Session" | "Package" | "ApplicationConfiguration" | "ApplicationConfigurationSchema" | "DeploymentStrategy" | "ChangeCalendar" | "Automation.ChangeTemplate" | "ProblemAnalysis" | "ProblemAnalysisTemplate" | "CloudFormation" | "ConformancePackTemplate" | "QuickSetup" | "ManualApprovalPolicy" | "AutoApprovalPolicy")
       attr_accessor schema_version: ::String
       attr_accessor document_format: ("YAML" | "JSON" | "TEXT")
       attr_accessor target_type: ::String
@@ -1599,6 +1612,17 @@ module Aws::SSM
       SENSITIVE: []
     end
 
+    class GetAccessTokenRequest
+      attr_accessor access_request_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccessTokenResponse
+      attr_accessor credentials: Types::Credentials
+      attr_accessor access_request_status: ("Approved" | "Rejected" | "Revoked" | "Expired" | "Pending")
+      SENSITIVE: []
+    end
+
     class GetAutomationExecutionRequest
       attr_accessor automation_execution_id: ::String
       SENSITIVE: []
@@ -1704,7 +1728,7 @@ module Aws::SSM
       attr_accessor status: ("Creating" | "Active" | "Updating" | "Deleting" | "Failed")
       attr_accessor status_information: ::String
       attr_accessor content: ::String
-      attr_accessor document_type: ("Command" | "Policy" | "Automation" | "Session" | "Package" | "ApplicationConfiguration" | "ApplicationConfigurationSchema" | "DeploymentStrategy" | "ChangeCalendar" | "Automation.ChangeTemplate" | "ProblemAnalysis" | "ProblemAnalysisTemplate" | "CloudFormation" | "ConformancePackTemplate" | "QuickSetup")
+      attr_accessor document_type: ("Command" | "Policy" | "Automation" | "Session" | "Package" | "ApplicationConfiguration" | "ApplicationConfigurationSchema" | "DeploymentStrategy" | "ChangeCalendar" | "Automation.ChangeTemplate" | "ProblemAnalysis" | "ProblemAnalysisTemplate" | "CloudFormation" | "ConformancePackTemplate" | "QuickSetup" | "ManualApprovalPolicy" | "AutoApprovalPolicy")
       attr_accessor document_format: ("YAML" | "JSON" | "TEXT")
       attr_accessor requires: ::Array[Types::DocumentRequires]
       attr_accessor attachments_content: ::Array[Types::AttachmentContent]
@@ -3101,7 +3125,7 @@ module Aws::SSM
       attr_accessor notifications: ::Array[Types::OpsItemNotification]
       attr_accessor priority: ::Integer
       attr_accessor related_ops_items: ::Array[Types::RelatedOpsItem]
-      attr_accessor status: ("Open" | "InProgress" | "Resolved" | "Pending" | "TimedOut" | "Cancelling" | "Cancelled" | "Failed" | "CompletedWithSuccess" | "CompletedWithFailure" | "Scheduled" | "RunbookInProgress" | "PendingChangeCalendarOverride" | "ChangeCalendarOverrideApproved" | "ChangeCalendarOverrideRejected" | "PendingApproval" | "Approved" | "Rejected" | "Closed")
+      attr_accessor status: ("Open" | "InProgress" | "Resolved" | "Pending" | "TimedOut" | "Cancelling" | "Cancelled" | "Failed" | "CompletedWithSuccess" | "CompletedWithFailure" | "Scheduled" | "RunbookInProgress" | "PendingChangeCalendarOverride" | "ChangeCalendarOverrideApproved" | "ChangeCalendarOverrideRejected" | "PendingApproval" | "Approved" | "Revoked" | "Rejected" | "Closed")
       attr_accessor ops_item_id: ::String
       attr_accessor version: ::String
       attr_accessor title: ::String
@@ -3158,7 +3182,7 @@ module Aws::SSM
     end
 
     class OpsItemFilter
-      attr_accessor key: ("Status" | "CreatedBy" | "Source" | "Priority" | "Title" | "OpsItemId" | "CreatedTime" | "LastModifiedTime" | "ActualStartTime" | "ActualEndTime" | "PlannedStartTime" | "PlannedEndTime" | "OperationalData" | "OperationalDataKey" | "OperationalDataValue" | "ResourceId" | "AutomationId" | "Category" | "Severity" | "OpsItemType" | "ChangeRequestByRequesterArn" | "ChangeRequestByRequesterName" | "ChangeRequestByApproverArn" | "ChangeRequestByApproverName" | "ChangeRequestByTemplate" | "ChangeRequestByTargetsResourceGroup" | "InsightByType" | "AccountId")
+      attr_accessor key: ("Status" | "CreatedBy" | "Source" | "Priority" | "Title" | "OpsItemId" | "CreatedTime" | "LastModifiedTime" | "ActualStartTime" | "ActualEndTime" | "PlannedStartTime" | "PlannedEndTime" | "OperationalData" | "OperationalDataKey" | "OperationalDataValue" | "ResourceId" | "AutomationId" | "Category" | "Severity" | "OpsItemType" | "AccessRequestByRequesterArn" | "AccessRequestByRequesterId" | "AccessRequestByApproverArn" | "AccessRequestByApproverId" | "AccessRequestBySourceAccountId" | "AccessRequestBySourceOpsItemId" | "AccessRequestBySourceRegion" | "AccessRequestByIsReplica" | "AccessRequestByTargetResourceId" | "ChangeRequestByRequesterArn" | "ChangeRequestByRequesterName" | "ChangeRequestByApproverArn" | "ChangeRequestByApproverName" | "ChangeRequestByTemplate" | "ChangeRequestByTargetsResourceGroup" | "InsightByType" | "AccountId")
       attr_accessor values: ::Array[::String]
       attr_accessor operator: ("Equal" | "Contains" | "GreaterThan" | "LessThan")
       SENSITIVE: []
@@ -3232,7 +3256,7 @@ module Aws::SSM
       attr_accessor last_modified_time: ::Time
       attr_accessor priority: ::Integer
       attr_accessor source: ::String
-      attr_accessor status: ("Open" | "InProgress" | "Resolved" | "Pending" | "TimedOut" | "Cancelling" | "Cancelled" | "Failed" | "CompletedWithSuccess" | "CompletedWithFailure" | "Scheduled" | "RunbookInProgress" | "PendingChangeCalendarOverride" | "ChangeCalendarOverrideApproved" | "ChangeCalendarOverrideRejected" | "PendingApproval" | "Approved" | "Rejected" | "Closed")
+      attr_accessor status: ("Open" | "InProgress" | "Resolved" | "Pending" | "TimedOut" | "Cancelling" | "Cancelled" | "Failed" | "CompletedWithSuccess" | "CompletedWithFailure" | "Scheduled" | "RunbookInProgress" | "PendingChangeCalendarOverride" | "ChangeCalendarOverrideApproved" | "ChangeCalendarOverrideRejected" | "PendingApproval" | "Approved" | "Revoked" | "Rejected" | "Closed")
       attr_accessor ops_item_id: ::String
       attr_accessor title: ::String
       attr_accessor operational_data: ::Hash[::String, Types::OpsItemDataValue]
@@ -3878,7 +3902,7 @@ module Aws::SSM
 
     class SendAutomationSignalRequest
       attr_accessor automation_execution_id: ::String
-      attr_accessor signal_type: ("Approve" | "Reject" | "StartStep" | "StopStep" | "Resume")
+      attr_accessor signal_type: ("Approve" | "Reject" | "StartStep" | "StopStep" | "Resume" | "Revoke")
       attr_accessor payload: ::Hash[::String, ::Array[::String]]
       SENSITIVE: []
     end
@@ -3910,6 +3934,15 @@ module Aws::SSM
 
     class SendCommandResult
       attr_accessor command: Types::Command
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor service_code: ::String
       SENSITIVE: []
     end
 
@@ -3962,6 +3995,18 @@ module Aws::SSM
       attr_accessor low_count: ::Integer
       attr_accessor informational_count: ::Integer
       attr_accessor unspecified_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class StartAccessRequestRequest
+      attr_accessor reason: ::String
+      attr_accessor targets: ::Array[Types::Target]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class StartAccessRequestResponse
+      attr_accessor access_request_id: ::String
       SENSITIVE: []
     end
 
@@ -4144,6 +4189,13 @@ module Aws::SSM
 
     class TerminateSessionResponse
       attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor service_code: ::String
       SENSITIVE: []
     end
 
@@ -4403,7 +4455,7 @@ module Aws::SSM
       attr_accessor notifications: ::Array[Types::OpsItemNotification]
       attr_accessor priority: ::Integer
       attr_accessor related_ops_items: ::Array[Types::RelatedOpsItem]
-      attr_accessor status: ("Open" | "InProgress" | "Resolved" | "Pending" | "TimedOut" | "Cancelling" | "Cancelled" | "Failed" | "CompletedWithSuccess" | "CompletedWithFailure" | "Scheduled" | "RunbookInProgress" | "PendingChangeCalendarOverride" | "ChangeCalendarOverrideApproved" | "ChangeCalendarOverrideRejected" | "PendingApproval" | "Approved" | "Rejected" | "Closed")
+      attr_accessor status: ("Open" | "InProgress" | "Resolved" | "Pending" | "TimedOut" | "Cancelling" | "Cancelled" | "Failed" | "CompletedWithSuccess" | "CompletedWithFailure" | "Scheduled" | "RunbookInProgress" | "PendingChangeCalendarOverride" | "ChangeCalendarOverrideApproved" | "ChangeCalendarOverrideRejected" | "PendingApproval" | "Approved" | "Revoked" | "Rejected" | "Closed")
       attr_accessor ops_item_id: ::String
       attr_accessor title: ::String
       attr_accessor category: ::String

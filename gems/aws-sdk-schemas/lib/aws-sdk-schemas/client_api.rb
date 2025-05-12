@@ -367,14 +367,14 @@ module Aws::Schemas
     GetDiscoveredSchemaResponse.add_member(:content, Shapes::ShapeRef.new(shape: __string, location_name: "Content"))
     GetDiscoveredSchemaResponse.struct_class = Types::GetDiscoveredSchemaResponse
 
-    GetResourcePolicyOutput.add_member(:policy, Shapes::ShapeRef.new(shape: __string, location_name: "Policy", metadata: {"jsonvalue"=>true}))
+    GetResourcePolicyOutput.add_member(:policy, Shapes::ShapeRef.new(shape: __string, location_name: "Policy", metadata: {"jsonvalue" => true}))
     GetResourcePolicyOutput.add_member(:revision_id, Shapes::ShapeRef.new(shape: __string, location_name: "RevisionId"))
     GetResourcePolicyOutput.struct_class = Types::GetResourcePolicyOutput
 
     GetResourcePolicyRequest.add_member(:registry_name, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "registryName"))
     GetResourcePolicyRequest.struct_class = Types::GetResourcePolicyRequest
 
-    GetResourcePolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: __string, location_name: "Policy", metadata: {"jsonvalue"=>true}))
+    GetResourcePolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: __string, location_name: "Policy", metadata: {"jsonvalue" => true}))
     GetResourcePolicyResponse.add_member(:revision_id, Shapes::ShapeRef.new(shape: __string, location_name: "RevisionId"))
     GetResourcePolicyResponse.struct_class = Types::GetResourcePolicyResponse
 
@@ -471,20 +471,20 @@ module Aws::Schemas
     PutCodeBindingResponse.add_member(:status, Shapes::ShapeRef.new(shape: CodeGenerationStatus, location_name: "Status"))
     PutCodeBindingResponse.struct_class = Types::PutCodeBindingResponse
 
-    PutResourcePolicyInput.add_member(:policy, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Policy", metadata: {"jsonvalue"=>true}))
+    PutResourcePolicyInput.add_member(:policy, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Policy", metadata: {"jsonvalue" => true}))
     PutResourcePolicyInput.add_member(:revision_id, Shapes::ShapeRef.new(shape: __string, location_name: "RevisionId"))
     PutResourcePolicyInput.struct_class = Types::PutResourcePolicyInput
 
-    PutResourcePolicyOutput.add_member(:policy, Shapes::ShapeRef.new(shape: __string, location_name: "Policy", metadata: {"jsonvalue"=>true}))
+    PutResourcePolicyOutput.add_member(:policy, Shapes::ShapeRef.new(shape: __string, location_name: "Policy", metadata: {"jsonvalue" => true}))
     PutResourcePolicyOutput.add_member(:revision_id, Shapes::ShapeRef.new(shape: __string, location_name: "RevisionId"))
     PutResourcePolicyOutput.struct_class = Types::PutResourcePolicyOutput
 
-    PutResourcePolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Policy", metadata: {"jsonvalue"=>true}))
+    PutResourcePolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Policy", metadata: {"jsonvalue" => true}))
     PutResourcePolicyRequest.add_member(:registry_name, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "registryName"))
     PutResourcePolicyRequest.add_member(:revision_id, Shapes::ShapeRef.new(shape: __string, location_name: "RevisionId"))
     PutResourcePolicyRequest.struct_class = Types::PutResourcePolicyRequest
 
-    PutResourcePolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: __string, location_name: "Policy", metadata: {"jsonvalue"=>true}))
+    PutResourcePolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: __string, location_name: "Policy", metadata: {"jsonvalue" => true}))
     PutResourcePolicyResponse.add_member(:revision_id, Shapes::ShapeRef.new(shape: __string, location_name: "RevisionId"))
     PutResourcePolicyResponse.struct_class = Types::PutResourcePolicyResponse
 
@@ -618,13 +618,13 @@ module Aws::Schemas
     UpdateRegistryResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     UpdateRegistryResponse.struct_class = Types::UpdateRegistryResponse
 
-    UpdateSchemaInput.add_member(:client_token_id, Shapes::ShapeRef.new(shape: __stringMin0Max36, location_name: "ClientTokenId", metadata: {"idempotencyToken"=>true}))
+    UpdateSchemaInput.add_member(:client_token_id, Shapes::ShapeRef.new(shape: __stringMin0Max36, location_name: "ClientTokenId", metadata: {"idempotencyToken" => true}))
     UpdateSchemaInput.add_member(:content, Shapes::ShapeRef.new(shape: __stringMin1Max100000, location_name: "Content"))
     UpdateSchemaInput.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max256, location_name: "Description"))
     UpdateSchemaInput.add_member(:type, Shapes::ShapeRef.new(shape: Type, location_name: "Type"))
     UpdateSchemaInput.struct_class = Types::UpdateSchemaInput
 
-    UpdateSchemaRequest.add_member(:client_token_id, Shapes::ShapeRef.new(shape: __stringMin0Max36, location_name: "ClientTokenId", metadata: {"idempotencyToken"=>true}))
+    UpdateSchemaRequest.add_member(:client_token_id, Shapes::ShapeRef.new(shape: __stringMin0Max36, location_name: "ClientTokenId", metadata: {"idempotencyToken" => true}))
     UpdateSchemaRequest.add_member(:content, Shapes::ShapeRef.new(shape: __stringMin1Max100000, location_name: "Content"))
     UpdateSchemaRequest.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max256, location_name: "Description"))
     UpdateSchemaRequest.add_member(:registry_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "registryName"))

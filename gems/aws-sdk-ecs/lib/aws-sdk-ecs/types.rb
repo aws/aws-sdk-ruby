@@ -477,19 +477,6 @@ module Aws::ECS
     # have permissions to use the action or resource. Or, it might be
     # specifying an identifier that isn't valid.
     #
-    # The following list includes additional causes for the error:
-    #
-    # * The `RunTask` could not be processed because you use managed scaling
-    #   and there is a capacity error because the quota of tasks in the
-    #   `PROVISIONING` per cluster has been reached. For information about
-    #   the service quotas, see [Amazon ECS service quotas][1].
-    #
-    # ^
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-quotas.html
-    #
     # @!attribute [rw] message
     #   Message that describes the cause of the exception.
     #   @return [String]
@@ -3286,12 +3273,15 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] principal_arn
-    #   The Amazon Resource Name (ARN) of the principal. It can be an user,
+    #   The Amazon Resource Name (ARN) of the principal. It can be a user,
     #   role, or the root user. If you specify the root user, it disables
     #   the account setting for all users, roles, and the root user of the
     #   account unless a user or role explicitly overrides these settings.
     #   If this field is omitted, the setting is changed only for the
     #   authenticated user.
+    #
+    #   In order to use this parameter, you must be the root user, or the
+    #   principal.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteAccountSettingRequest AWS API Documentation
@@ -5888,6 +5878,9 @@ module Aws::ECS
     #   user. If this field is omitted, the account settings are listed only
     #   for the authenticated user.
     #
+    #   In order to use this parameter, you must be the root user, or the
+    #   principal.
+    #
     #   <note markdown="1"> Federated users assume the account setting of the root user and
     #   can't have explicit account settings set for them.
     #
@@ -8197,6 +8190,9 @@ module Aws::ECS
     #   for all users, roles, and the root user of the account unless a user
     #   or role explicitly overrides these settings. If this field is
     #   omitted, the setting is changed only for the authenticated user.
+    #
+    #   In order to use this parameter, you must be the root user, or the
+    #   principal.
     #
     #   <note markdown="1"> You must use the root user when you set the Fargate wait time
     #   (`fargateTaskRetirementWaitPeriod`).
@@ -11038,7 +11034,7 @@ module Aws::ECS
     # @!attribute [rw] stop_type
     #   How you want Amazon ECS to stop the service.
     #
-    #   The ROLLBACK and ABORT stopType aren't supported.
+    #   The valid values are `ROLLBACK`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StopServiceDeploymentRequest AWS API Documentation

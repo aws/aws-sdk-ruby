@@ -129,7 +129,7 @@ module Aws::PcaConnectorScep
     ConnectorSummary.struct_class = Types::ConnectorSummary
 
     CreateChallengeRequest.add_member(:connector_arn, Shapes::ShapeRef.new(shape: ConnectorArn, required: true, location_name: "ConnectorArn"))
-    CreateChallengeRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateChallengeRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateChallengeRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateChallengeRequest.struct_class = Types::CreateChallengeRequest
 
@@ -138,7 +138,7 @@ module Aws::PcaConnectorScep
 
     CreateConnectorRequest.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: CertificateAuthorityArn, required: true, location_name: "CertificateAuthorityArn"))
     CreateConnectorRequest.add_member(:mobile_device_management, Shapes::ShapeRef.new(shape: MobileDeviceManagement, location_name: "MobileDeviceManagement"))
-    CreateConnectorRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateConnectorRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateConnectorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateConnectorRequest.struct_class = Types::CreateConnectorRequest
 

@@ -365,7 +365,7 @@ module Aws::RoboMaker
     ConcurrentDeploymentException.struct_class = Types::ConcurrentDeploymentException
 
     CreateDeploymentJobRequest.add_member(:deployment_config, Shapes::ShapeRef.new(shape: DeploymentConfig, location_name: "deploymentConfig"))
-    CreateDeploymentJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateDeploymentJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateDeploymentJobRequest.add_member(:fleet, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "fleet"))
     CreateDeploymentJobRequest.add_member(:deployment_application_configs, Shapes::ShapeRef.new(shape: DeploymentApplicationConfigs, required: true, location_name: "deploymentApplicationConfigs"))
     CreateDeploymentJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
@@ -480,7 +480,7 @@ module Aws::RoboMaker
     CreateSimulationApplicationVersionResponse.add_member(:environment, Shapes::ShapeRef.new(shape: Environment, location_name: "environment"))
     CreateSimulationApplicationVersionResponse.struct_class = Types::CreateSimulationApplicationVersionResponse
 
-    CreateSimulationJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateSimulationJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateSimulationJobRequest.add_member(:output_location, Shapes::ShapeRef.new(shape: OutputLocation, location_name: "outputLocation"))
     CreateSimulationJobRequest.add_member(:logging_config, Shapes::ShapeRef.new(shape: LoggingConfig, location_name: "loggingConfig"))
     CreateSimulationJobRequest.add_member(:max_job_duration_in_seconds, Shapes::ShapeRef.new(shape: JobDuration, required: true, location_name: "maxJobDurationInSeconds"))
@@ -516,7 +516,7 @@ module Aws::RoboMaker
     CreateSimulationJobResponse.add_member(:compute, Shapes::ShapeRef.new(shape: ComputeResponse, location_name: "compute"))
     CreateSimulationJobResponse.struct_class = Types::CreateSimulationJobResponse
 
-    CreateWorldExportJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateWorldExportJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateWorldExportJobRequest.add_member(:worlds, Shapes::ShapeRef.new(shape: Arns, required: true, location_name: "worlds"))
     CreateWorldExportJobRequest.add_member(:output_location, Shapes::ShapeRef.new(shape: OutputLocation, required: true, location_name: "outputLocation"))
     CreateWorldExportJobRequest.add_member(:iam_role, Shapes::ShapeRef.new(shape: IamRole, required: true, location_name: "iamRole"))
@@ -533,7 +533,7 @@ module Aws::RoboMaker
     CreateWorldExportJobResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateWorldExportJobResponse.struct_class = Types::CreateWorldExportJobResponse
 
-    CreateWorldGenerationJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateWorldGenerationJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateWorldGenerationJobRequest.add_member(:template, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "template"))
     CreateWorldGenerationJobRequest.add_member(:world_count, Shapes::ShapeRef.new(shape: WorldCount, required: true, location_name: "worldCount"))
     CreateWorldGenerationJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
@@ -1000,7 +1000,7 @@ module Aws::RoboMaker
     ListWorldsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListWorldsResponse.struct_class = Types::ListWorldsResponse
 
-    LoggingConfig.add_member(:record_all_ros_topics, Shapes::ShapeRef.new(shape: BoxedBoolean, deprecated: true, location_name: "recordAllRosTopics", metadata: {"deprecatedMessage"=>"AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html."}))
+    LoggingConfig.add_member(:record_all_ros_topics, Shapes::ShapeRef.new(shape: BoxedBoolean, deprecated: true, location_name: "recordAllRosTopics", metadata: {"deprecatedMessage" => "AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html."}))
     LoggingConfig.struct_class = Types::LoggingConfig
 
     NetworkInterface.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "networkInterfaceId"))
@@ -1066,9 +1066,9 @@ module Aws::RoboMaker
     RobotApplicationConfig.add_member(:application_version, Shapes::ShapeRef.new(shape: Version, location_name: "applicationVersion"))
     RobotApplicationConfig.add_member(:launch_config, Shapes::ShapeRef.new(shape: LaunchConfig, required: true, location_name: "launchConfig"))
     RobotApplicationConfig.add_member(:upload_configurations, Shapes::ShapeRef.new(shape: UploadConfigurations, location_name: "uploadConfigurations"))
-    RobotApplicationConfig.add_member(:use_default_upload_configurations, Shapes::ShapeRef.new(shape: BoxedBoolean, deprecated: true, location_name: "useDefaultUploadConfigurations", metadata: {"deprecatedMessage"=>"AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html."}))
+    RobotApplicationConfig.add_member(:use_default_upload_configurations, Shapes::ShapeRef.new(shape: BoxedBoolean, deprecated: true, location_name: "useDefaultUploadConfigurations", metadata: {"deprecatedMessage" => "AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html."}))
     RobotApplicationConfig.add_member(:tools, Shapes::ShapeRef.new(shape: Tools, location_name: "tools"))
-    RobotApplicationConfig.add_member(:use_default_tools, Shapes::ShapeRef.new(shape: BoxedBoolean, deprecated: true, location_name: "useDefaultTools", metadata: {"deprecatedMessage"=>"AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html."}))
+    RobotApplicationConfig.add_member(:use_default_tools, Shapes::ShapeRef.new(shape: BoxedBoolean, deprecated: true, location_name: "useDefaultTools", metadata: {"deprecatedMessage" => "AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html."}))
     RobotApplicationConfig.struct_class = Types::RobotApplicationConfig
 
     RobotApplicationConfigs.member = Shapes::ShapeRef.new(shape: RobotApplicationConfig)
@@ -1126,9 +1126,9 @@ module Aws::RoboMaker
     SimulationApplicationConfig.add_member(:launch_config, Shapes::ShapeRef.new(shape: LaunchConfig, required: true, location_name: "launchConfig"))
     SimulationApplicationConfig.add_member(:upload_configurations, Shapes::ShapeRef.new(shape: UploadConfigurations, location_name: "uploadConfigurations"))
     SimulationApplicationConfig.add_member(:world_configs, Shapes::ShapeRef.new(shape: WorldConfigs, location_name: "worldConfigs"))
-    SimulationApplicationConfig.add_member(:use_default_upload_configurations, Shapes::ShapeRef.new(shape: BoxedBoolean, deprecated: true, location_name: "useDefaultUploadConfigurations", metadata: {"deprecatedMessage"=>"AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html."}))
+    SimulationApplicationConfig.add_member(:use_default_upload_configurations, Shapes::ShapeRef.new(shape: BoxedBoolean, deprecated: true, location_name: "useDefaultUploadConfigurations", metadata: {"deprecatedMessage" => "AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html."}))
     SimulationApplicationConfig.add_member(:tools, Shapes::ShapeRef.new(shape: Tools, location_name: "tools"))
-    SimulationApplicationConfig.add_member(:use_default_tools, Shapes::ShapeRef.new(shape: BoxedBoolean, deprecated: true, location_name: "useDefaultTools", metadata: {"deprecatedMessage"=>"AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html."}))
+    SimulationApplicationConfig.add_member(:use_default_tools, Shapes::ShapeRef.new(shape: BoxedBoolean, deprecated: true, location_name: "useDefaultTools", metadata: {"deprecatedMessage" => "AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html."}))
     SimulationApplicationConfig.struct_class = Types::SimulationApplicationConfig
 
     SimulationApplicationConfigs.member = Shapes::ShapeRef.new(shape: SimulationApplicationConfig)
@@ -1226,7 +1226,7 @@ module Aws::RoboMaker
 
     Sources.member = Shapes::ShapeRef.new(shape: Source)
 
-    StartSimulationJobBatchRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    StartSimulationJobBatchRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     StartSimulationJobBatchRequest.add_member(:batch_policy, Shapes::ShapeRef.new(shape: BatchPolicy, location_name: "batchPolicy"))
     StartSimulationJobBatchRequest.add_member(:create_simulation_job_requests, Shapes::ShapeRef.new(shape: CreateSimulationJobRequests, required: true, location_name: "createSimulationJobRequests"))
     StartSimulationJobBatchRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
@@ -1247,7 +1247,7 @@ module Aws::RoboMaker
 
     Subnets.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
-    SyncDeploymentJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    SyncDeploymentJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     SyncDeploymentJobRequest.add_member(:fleet, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "fleet"))
     SyncDeploymentJobRequest.struct_class = Types::SyncDeploymentJobRequest
 

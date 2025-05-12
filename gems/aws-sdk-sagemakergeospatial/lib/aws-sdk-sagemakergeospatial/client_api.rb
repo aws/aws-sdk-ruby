@@ -252,7 +252,7 @@ module Aws::SageMakerGeospatial
     EoCloudCoverInput.struct_class = Types::EoCloudCoverInput
 
     ExportEarthObservationJobInput.add_member(:arn, Shapes::ShapeRef.new(shape: EarthObservationJobArn, required: true, location_name: "Arn"))
-    ExportEarthObservationJobInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ExportEarthObservationJobInputClientTokenString, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    ExportEarthObservationJobInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ExportEarthObservationJobInputClientTokenString, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     ExportEarthObservationJobInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ExecutionRoleArn, required: true, location_name: "ExecutionRoleArn"))
     ExportEarthObservationJobInput.add_member(:export_source_images, Shapes::ShapeRef.new(shape: Boolean, location_name: "ExportSourceImages"))
     ExportEarthObservationJobInput.add_member(:output_config, Shapes::ShapeRef.new(shape: OutputConfigInput, required: true, location_name: "OutputConfig"))
@@ -279,7 +279,7 @@ module Aws::SageMakerGeospatial
     ExportS3DataInput.struct_class = Types::ExportS3DataInput
 
     ExportVectorEnrichmentJobInput.add_member(:arn, Shapes::ShapeRef.new(shape: VectorEnrichmentJobArn, required: true, location_name: "Arn"))
-    ExportVectorEnrichmentJobInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ExportVectorEnrichmentJobInputClientTokenString, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    ExportVectorEnrichmentJobInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ExportVectorEnrichmentJobInputClientTokenString, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     ExportVectorEnrichmentJobInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ExecutionRoleArn, required: true, location_name: "ExecutionRoleArn"))
     ExportVectorEnrichmentJobInput.add_member(:output_config, Shapes::ShapeRef.new(shape: ExportVectorEnrichmentJobOutputConfig, required: true, location_name: "OutputConfig"))
     ExportVectorEnrichmentJobInput.struct_class = Types::ExportVectorEnrichmentJobInput
@@ -622,7 +622,7 @@ module Aws::SageMakerGeospatial
     StackConfigInput.add_member(:target_bands, Shapes::ShapeRef.new(shape: StringListInput, location_name: "TargetBands"))
     StackConfigInput.struct_class = Types::StackConfigInput
 
-    StartEarthObservationJobInput.add_member(:client_token, Shapes::ShapeRef.new(shape: StartEarthObservationJobInputClientTokenString, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    StartEarthObservationJobInput.add_member(:client_token, Shapes::ShapeRef.new(shape: StartEarthObservationJobInputClientTokenString, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     StartEarthObservationJobInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ExecutionRoleArn, required: true, location_name: "ExecutionRoleArn"))
     StartEarthObservationJobInput.add_member(:input_config, Shapes::ShapeRef.new(shape: InputConfigInput, required: true, location_name: "InputConfig"))
     StartEarthObservationJobInput.add_member(:job_config, Shapes::ShapeRef.new(shape: JobConfigInput, required: true, location_name: "JobConfig"))
@@ -643,7 +643,7 @@ module Aws::SageMakerGeospatial
     StartEarthObservationJobOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     StartEarthObservationJobOutput.struct_class = Types::StartEarthObservationJobOutput
 
-    StartVectorEnrichmentJobInput.add_member(:client_token, Shapes::ShapeRef.new(shape: StartVectorEnrichmentJobInputClientTokenString, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    StartVectorEnrichmentJobInput.add_member(:client_token, Shapes::ShapeRef.new(shape: StartVectorEnrichmentJobInputClientTokenString, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     StartVectorEnrichmentJobInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ExecutionRoleArn, required: true, location_name: "ExecutionRoleArn"))
     StartVectorEnrichmentJobInput.add_member(:input_config, Shapes::ShapeRef.new(shape: VectorEnrichmentJobInputConfig, required: true, location_name: "InputConfig"))
     StartVectorEnrichmentJobInput.add_member(:job_config, Shapes::ShapeRef.new(shape: VectorEnrichmentJobConfig, required: true, location_name: "JobConfig"))

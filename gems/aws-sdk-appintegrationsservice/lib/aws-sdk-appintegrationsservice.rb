@@ -54,7 +54,7 @@ module Aws::AppIntegrationsService
   autoload :EndpointProvider, 'aws-sdk-appintegrationsservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-appintegrationsservice/endpoints'
 
-  GEM_VERSION = '1.48.0'
+  GEM_VERSION = '1.49.0'
 
 end
 

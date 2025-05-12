@@ -95,6 +95,7 @@ module Aws::BedrockAgentRuntime
     CreateSessionResponse = Shapes::StructureShape.new(name: 'CreateSessionResponse')
     CreationMode = Shapes::StringShape.new(name: 'CreationMode')
     CustomControlMethod = Shapes::StringShape.new(name: 'CustomControlMethod')
+    CustomOrchestration = Shapes::StructureShape.new(name: 'CustomOrchestration')
     CustomOrchestrationTrace = Shapes::StructureShape.new(name: 'CustomOrchestrationTrace')
     CustomOrchestrationTraceEvent = Shapes::StructureShape.new(name: 'CustomOrchestrationTraceEvent')
     DateTimestamp = Shapes::TimestampShape.new(name: 'DateTimestamp', timestampFormat: "iso8601")
@@ -327,8 +328,10 @@ module Aws::BedrockAgentRuntime
     OptimizedPromptEvent = Shapes::StructureShape.new(name: 'OptimizedPromptEvent')
     OptimizedPromptStream = Shapes::StructureShape.new(name: 'OptimizedPromptStream')
     OrchestrationConfiguration = Shapes::StructureShape.new(name: 'OrchestrationConfiguration')
+    OrchestrationExecutor = Shapes::UnionShape.new(name: 'OrchestrationExecutor')
     OrchestrationModelInvocationOutput = Shapes::StructureShape.new(name: 'OrchestrationModelInvocationOutput')
     OrchestrationTrace = Shapes::UnionShape.new(name: 'OrchestrationTrace')
+    OrchestrationType = Shapes::StringShape.new(name: 'OrchestrationType')
     OutputFile = Shapes::StructureShape.new(name: 'OutputFile')
     OutputFiles = Shapes::ListShape.new(name: 'OutputFiles')
     OutputString = Shapes::StringShape.new(name: 'OutputString')
@@ -669,7 +672,7 @@ module Aws::BedrockAgentRuntime
     Citation.add_member(:retrieved_references, Shapes::ShapeRef.new(shape: RetrievedReferences, location_name: "retrievedReferences"))
     Citation.struct_class = Types::Citation
 
-    CitationEvent.add_member(:citation, Shapes::ShapeRef.new(shape: Citation, deprecated: true, location_name: "citation", metadata: {"deprecatedMessage"=>"Citation is deprecated. Please use GeneratedResponsePart and RetrievedReferences for citation event."}))
+    CitationEvent.add_member(:citation, Shapes::ShapeRef.new(shape: Citation, deprecated: true, location_name: "citation", metadata: {"deprecatedMessage" => "Citation is deprecated. Please use GeneratedResponsePart and RetrievedReferences for citation event."}))
     CitationEvent.add_member(:generated_response_part, Shapes::ShapeRef.new(shape: GeneratedResponsePart, location_name: "generatedResponsePart"))
     CitationEvent.add_member(:retrieved_references, Shapes::ShapeRef.new(shape: RetrievedReferences, location_name: "retrievedReferences"))
     CitationEvent.struct_class = Types::CitationEvent
@@ -750,6 +753,9 @@ module Aws::BedrockAgentRuntime
     CreateSessionResponse.add_member(:session_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "sessionId"))
     CreateSessionResponse.add_member(:session_status, Shapes::ShapeRef.new(shape: SessionStatus, required: true, location_name: "sessionStatus"))
     CreateSessionResponse.struct_class = Types::CreateSessionResponse
+
+    CustomOrchestration.add_member(:executor, Shapes::ShapeRef.new(shape: OrchestrationExecutor, location_name: "executor"))
+    CustomOrchestration.struct_class = Types::CustomOrchestration
 
     CustomOrchestrationTrace.add_member(:event, Shapes::ShapeRef.new(shape: CustomOrchestrationTraceEvent, location_name: "event"))
     CustomOrchestrationTrace.add_member(:trace_id, Shapes::ShapeRef.new(shape: TraceId, location_name: "traceId"))
@@ -1185,6 +1191,9 @@ module Aws::BedrockAgentRuntime
     InlineAgentReturnControlPayload.add_member(:invocation_inputs, Shapes::ShapeRef.new(shape: InvocationInputs, location_name: "invocationInputs"))
     InlineAgentReturnControlPayload.struct_class = Types::InlineAgentReturnControlPayload
 
+    InlineAgentTracePart.add_member(:caller_chain, Shapes::ShapeRef.new(shape: CallerChain, location_name: "callerChain"))
+    InlineAgentTracePart.add_member(:collaborator_name, Shapes::ShapeRef.new(shape: Name, location_name: "collaboratorName"))
+    InlineAgentTracePart.add_member(:event_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "eventTime"))
     InlineAgentTracePart.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, location_name: "sessionId"))
     InlineAgentTracePart.add_member(:trace, Shapes::ShapeRef.new(shape: Trace, location_name: "trace"))
     InlineAgentTracePart.struct_class = Types::InlineAgentTracePart
@@ -1308,9 +1317,11 @@ module Aws::BedrockAgentRuntime
 
     InvokeInlineAgentRequest.add_member(:action_groups, Shapes::ShapeRef.new(shape: AgentActionGroups, location_name: "actionGroups"))
     InvokeInlineAgentRequest.add_member(:agent_collaboration, Shapes::ShapeRef.new(shape: AgentCollaboration, location_name: "agentCollaboration"))
+    InvokeInlineAgentRequest.add_member(:agent_name, Shapes::ShapeRef.new(shape: Name, location_name: "agentName"))
     InvokeInlineAgentRequest.add_member(:bedrock_model_configurations, Shapes::ShapeRef.new(shape: InlineBedrockModelConfigurations, location_name: "bedrockModelConfigurations"))
     InvokeInlineAgentRequest.add_member(:collaborator_configurations, Shapes::ShapeRef.new(shape: CollaboratorConfigurations, location_name: "collaboratorConfigurations"))
     InvokeInlineAgentRequest.add_member(:collaborators, Shapes::ShapeRef.new(shape: Collaborators, location_name: "collaborators"))
+    InvokeInlineAgentRequest.add_member(:custom_orchestration, Shapes::ShapeRef.new(shape: CustomOrchestration, location_name: "customOrchestration"))
     InvokeInlineAgentRequest.add_member(:customer_encryption_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "customerEncryptionKeyArn"))
     InvokeInlineAgentRequest.add_member(:enable_trace, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableTrace"))
     InvokeInlineAgentRequest.add_member(:end_session, Shapes::ShapeRef.new(shape: Boolean, location_name: "endSession"))
@@ -1321,6 +1332,7 @@ module Aws::BedrockAgentRuntime
     InvokeInlineAgentRequest.add_member(:input_text, Shapes::ShapeRef.new(shape: InputText, location_name: "inputText"))
     InvokeInlineAgentRequest.add_member(:instruction, Shapes::ShapeRef.new(shape: Instruction, required: true, location_name: "instruction"))
     InvokeInlineAgentRequest.add_member(:knowledge_bases, Shapes::ShapeRef.new(shape: KnowledgeBases, location_name: "knowledgeBases"))
+    InvokeInlineAgentRequest.add_member(:orchestration_type, Shapes::ShapeRef.new(shape: OrchestrationType, location_name: "orchestrationType"))
     InvokeInlineAgentRequest.add_member(:prompt_override_configuration, Shapes::ShapeRef.new(shape: PromptOverrideConfiguration, location_name: "promptOverrideConfiguration"))
     InvokeInlineAgentRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, required: true, location: "uri", location_name: "sessionId"))
     InvokeInlineAgentRequest.add_member(:streaming_configurations, Shapes::ShapeRef.new(shape: StreamingConfigurations, location_name: "streamingConfigurations"))
@@ -1374,7 +1386,7 @@ module Aws::BedrockAgentRuntime
 
     KnowledgeBaseVectorSearchConfiguration.add_member(:filter, Shapes::ShapeRef.new(shape: RetrievalFilter, location_name: "filter"))
     KnowledgeBaseVectorSearchConfiguration.add_member(:implicit_filter_configuration, Shapes::ShapeRef.new(shape: ImplicitFilterConfiguration, location_name: "implicitFilterConfiguration"))
-    KnowledgeBaseVectorSearchConfiguration.add_member(:number_of_results, Shapes::ShapeRef.new(shape: KnowledgeBaseVectorSearchConfigurationNumberOfResultsInteger, location_name: "numberOfResults", metadata: {"box"=>true}))
+    KnowledgeBaseVectorSearchConfiguration.add_member(:number_of_results, Shapes::ShapeRef.new(shape: KnowledgeBaseVectorSearchConfigurationNumberOfResultsInteger, location_name: "numberOfResults", metadata: {"box" => true}))
     KnowledgeBaseVectorSearchConfiguration.add_member(:override_search_type, Shapes::ShapeRef.new(shape: SearchType, location_name: "overrideSearchType"))
     KnowledgeBaseVectorSearchConfiguration.add_member(:reranking_configuration, Shapes::ShapeRef.new(shape: VectorSearchRerankingConfiguration, location_name: "rerankingConfiguration"))
     KnowledgeBaseVectorSearchConfiguration.struct_class = Types::KnowledgeBaseVectorSearchConfiguration
@@ -1509,6 +1521,12 @@ module Aws::BedrockAgentRuntime
     OrchestrationConfiguration.add_member(:prompt_template, Shapes::ShapeRef.new(shape: PromptTemplate, location_name: "promptTemplate"))
     OrchestrationConfiguration.add_member(:query_transformation_configuration, Shapes::ShapeRef.new(shape: QueryTransformationConfiguration, location_name: "queryTransformationConfiguration"))
     OrchestrationConfiguration.struct_class = Types::OrchestrationConfiguration
+
+    OrchestrationExecutor.add_member(:lambda, Shapes::ShapeRef.new(shape: LambdaArn, location_name: "lambda"))
+    OrchestrationExecutor.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    OrchestrationExecutor.add_member_subclass(:lambda, Types::OrchestrationExecutor::Lambda)
+    OrchestrationExecutor.add_member_subclass(:unknown, Types::OrchestrationExecutor::Unknown)
+    OrchestrationExecutor.struct_class = Types::OrchestrationExecutor
 
     OrchestrationModelInvocationOutput.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "metadata"))
     OrchestrationModelInvocationOutput.add_member(:raw_response, Shapes::ShapeRef.new(shape: RawResponse, location_name: "rawResponse"))
@@ -2131,8 +2149,8 @@ module Aws::BedrockAgentRuntime
         o.http_request_uri = "/agents/{agentId}/agentAliases/{agentAliasId}/memories"
         o.input = Shapes::ShapeRef.new(shape: DeleteAgentMemoryRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteAgentMemoryResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: DependencyFailedException)
@@ -2148,8 +2166,8 @@ module Aws::BedrockAgentRuntime
         o.http_request_uri = "/sessions/{sessionIdentifier}/"
         o.input = Shapes::ShapeRef.new(shape: DeleteSessionRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteSessionResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -2162,8 +2180,8 @@ module Aws::BedrockAgentRuntime
         o.http_request_uri = "/sessions/{sessionIdentifier}"
         o.input = Shapes::ShapeRef.new(shape: EndSessionRequest)
         o.output = Shapes::ShapeRef.new(shape: EndSessionResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -2176,8 +2194,8 @@ module Aws::BedrockAgentRuntime
         o.http_request_uri = "/generateQuery"
         o.input = Shapes::ShapeRef.new(shape: GenerateQueryRequest)
         o.output = Shapes::ShapeRef.new(shape: GenerateQueryResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: DependencyFailedException)
@@ -2193,8 +2211,8 @@ module Aws::BedrockAgentRuntime
         o.http_request_uri = "/agents/{agentId}/agentAliases/{agentAliasId}/memories"
         o.input = Shapes::ShapeRef.new(shape: GetAgentMemoryRequest)
         o.output = Shapes::ShapeRef.new(shape: GetAgentMemoryResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: DependencyFailedException)
@@ -2243,8 +2261,8 @@ module Aws::BedrockAgentRuntime
         o.input = Shapes::ShapeRef.new(shape: InvokeAgentRequest)
         o.output = Shapes::ShapeRef.new(shape: InvokeAgentResponse)
         o.errors << Shapes::ShapeRef.new(shape: ModelNotReadyException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: DependencyFailedException)
@@ -2260,8 +2278,8 @@ module Aws::BedrockAgentRuntime
         o.http_request_uri = "/flows/{flowIdentifier}/aliases/{flowAliasIdentifier}"
         o.input = Shapes::ShapeRef.new(shape: InvokeFlowRequest)
         o.output = Shapes::ShapeRef.new(shape: InvokeFlowResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: DependencyFailedException)
@@ -2277,8 +2295,8 @@ module Aws::BedrockAgentRuntime
         o.http_request_uri = "/agents/{sessionId}"
         o.input = Shapes::ShapeRef.new(shape: InvokeInlineAgentRequest)
         o.output = Shapes::ShapeRef.new(shape: InvokeInlineAgentResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: DependencyFailedException)
@@ -2377,8 +2395,8 @@ module Aws::BedrockAgentRuntime
         o.http_request_uri = "/sessions/{sessionIdentifier}/invocationSteps/"
         o.input = Shapes::ShapeRef.new(shape: PutInvocationStepRequest)
         o.output = Shapes::ShapeRef.new(shape: PutInvocationStepResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -2392,8 +2410,8 @@ module Aws::BedrockAgentRuntime
         o.http_request_uri = "/rerank"
         o.input = Shapes::ShapeRef.new(shape: RerankRequest)
         o.output = Shapes::ShapeRef.new(shape: RerankResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: DependencyFailedException)
@@ -2414,8 +2432,8 @@ module Aws::BedrockAgentRuntime
         o.http_request_uri = "/knowledgebases/{knowledgeBaseId}/retrieve"
         o.input = Shapes::ShapeRef.new(shape: RetrieveRequest)
         o.output = Shapes::ShapeRef.new(shape: RetrieveResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: DependencyFailedException)
@@ -2436,8 +2454,8 @@ module Aws::BedrockAgentRuntime
         o.http_request_uri = "/retrieveAndGenerate"
         o.input = Shapes::ShapeRef.new(shape: RetrieveAndGenerateRequest)
         o.output = Shapes::ShapeRef.new(shape: RetrieveAndGenerateResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: DependencyFailedException)
@@ -2453,8 +2471,8 @@ module Aws::BedrockAgentRuntime
         o.http_request_uri = "/retrieveAndGenerateStream"
         o.input = Shapes::ShapeRef.new(shape: RetrieveAndGenerateStreamRequest)
         o.output = Shapes::ShapeRef.new(shape: RetrieveAndGenerateStreamResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: DependencyFailedException)

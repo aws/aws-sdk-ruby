@@ -54,7 +54,7 @@ module Aws::Detective
   autoload :EndpointProvider, 'aws-sdk-detective/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-detective/endpoints'
 
-  GEM_VERSION = '1.65.0'
+  GEM_VERSION = '1.66.0'
 
 end
 

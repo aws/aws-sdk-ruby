@@ -55,7 +55,7 @@ module Aws::MediaConnect
   autoload :EndpointProvider, 'aws-sdk-mediaconnect/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-mediaconnect/endpoints'
 
-  GEM_VERSION = '1.78.0'
+  GEM_VERSION = '1.79.0'
 
 end
 

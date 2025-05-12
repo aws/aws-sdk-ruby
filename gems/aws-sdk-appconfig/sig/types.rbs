@@ -583,7 +583,7 @@ module Aws::AppConfig
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor kms_key_identifier: ::String
       attr_accessor dynamic_extension_parameters: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:dynamic_extension_parameters]
     end
 
     class StopDeploymentRequest

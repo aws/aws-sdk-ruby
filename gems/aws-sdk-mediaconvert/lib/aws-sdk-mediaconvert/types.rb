@@ -973,8 +973,8 @@ module Aws::MediaConvert
     #   Optional. Specify the QVBR quality level to use for all renditions
     #   in your automated ABR stack. To have MediaConvert automatically
     #   determine the quality level: Leave blank. To manually specify a
-    #   quality level: Enter an integer from 1 to 10. MediaConvert will use
-    #   a quality level up to the value that you specify, depending on your
+    #   quality level: Enter a value from 1 to 10. MediaConvert will use a
+    #   quality level up to the value that you specify, depending on your
     #   source. For more information about QVBR quality levels, see:
     #   https://docs.aws.amazon.com/mediaconvert/latest/ug/qvbr-guidelines.html
     #   @return [Float]
@@ -1168,6 +1168,29 @@ module Aws::MediaConvert
     #   better video quality.
     #   @return [Integer]
     #
+    # @!attribute [rw] per_frame_metrics
+    #   Optionally choose one or more per frame metric reports to generate
+    #   along with your output. You can use these metrics to analyze your
+    #   video output according to one or more commonly used image quality
+    #   metrics. You can specify per frame metrics for output groups or for
+    #   individual outputs. When you do, MediaConvert writes a CSV
+    #   (Comma-Separated Values) file to your S3 output destination, named
+    #   after the video, video codec, and metric type. For example:
+    #   video\_h264\_PSNR.csv Jobs that generate per frame metrics will take
+    #   longer to complete, depending on the resolution and complexity of
+    #   your output. For example, some 4K jobs might take up to twice as
+    #   long to complete. Note that when analyzing the video quality of your
+    #   output, or when comparing the video quality of multiple different
+    #   outputs, we generally also recommend a detailed visual review in a
+    #   controlled environment. You can choose from the following per frame
+    #   metrics: * PSNR: Peak Signal-to-Noise Ratio * SSIM: Structural
+    #   Similarity Index Measure * MS\_SSIM: Multi-Scale Similarity Index
+    #   Measure * PSNR\_HVS: Peak Signal-to-Noise Ratio, Human Visual
+    #   System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
+    #   Quality-Defined Variable Bitrate. This option is only available when
+    #   your output uses the QVBR rate control mode.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] qvbr_settings
     #   Settings for quality-defined variable bitrate encoding with the
     #   H.265 codec. Use these settings only when you set QVBR for Rate
@@ -1221,6 +1244,7 @@ module Aws::MediaConvert
       :gop_size,
       :max_bitrate,
       :number_b_frames_between_reference_frames,
+      :per_frame_metrics,
       :qvbr_settings,
       :rate_control_mode,
       :slices,
@@ -1334,6 +1358,29 @@ module Aws::MediaConvert
     #   field first, depending on which of the Follow options you choose.
     #   @return [String]
     #
+    # @!attribute [rw] per_frame_metrics
+    #   Optionally choose one or more per frame metric reports to generate
+    #   along with your output. You can use these metrics to analyze your
+    #   video output according to one or more commonly used image quality
+    #   metrics. You can specify per frame metrics for output groups or for
+    #   individual outputs. When you do, MediaConvert writes a CSV
+    #   (Comma-Separated Values) file to your S3 output destination, named
+    #   after the video, video codec, and metric type. For example:
+    #   video\_h264\_PSNR.csv Jobs that generate per frame metrics will take
+    #   longer to complete, depending on the resolution and complexity of
+    #   your output. For example, some 4K jobs might take up to twice as
+    #   long to complete. Note that when analyzing the video quality of your
+    #   output, or when comparing the video quality of multiple different
+    #   outputs, we generally also recommend a detailed visual review in a
+    #   controlled environment. You can choose from the following per frame
+    #   metrics: * PSNR: Peak Signal-to-Noise Ratio * SSIM: Structural
+    #   Similarity Index Measure * MS\_SSIM: Multi-Scale Similarity Index
+    #   Measure * PSNR\_HVS: Peak Signal-to-Noise Ratio, Human Visual
+    #   System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
+    #   Quality-Defined Variable Bitrate. This option is only available when
+    #   your output uses the QVBR rate control mode.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] scan_type_conversion_mode
     #   Use this setting for interlaced outputs, when your output frame rate
     #   is half of your input frame rate. In this situation, choose
@@ -1380,6 +1427,7 @@ module Aws::MediaConvert
       :framerate_denominator,
       :framerate_numerator,
       :interlace_mode,
+      :per_frame_metrics,
       :scan_type_conversion_mode,
       :slow_pal,
       :telecine)
@@ -3055,12 +3103,10 @@ module Aws::MediaConvert
     #   @return [Types::AccelerationSettings]
     #
     # @!attribute [rw] billing_tags_source
-    #   Optional. Choose a tag type that AWS Billing and Cost Management
-    #   will use to sort your AWS Elemental MediaConvert costs on any
-    #   billing report that you set up. Any transcoding outputs that don't
-    #   have an associated tag will appear in your billing report unsorted.
-    #   If you don't choose a valid value for this field, your job outputs
-    #   will appear on the billing report unsorted.
+    #   Optionally choose a Billing tags source that AWS Billing and Cost
+    #   Management will use to display tags for individual output costs on
+    #   any billing report that you set up. Leave blank to use the default
+    #   value, Job.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -4481,10 +4527,10 @@ module Aws::MediaConvert
     # your source when you submit your job, but want to select multiple
     # audio tracks. When you include an audio track in your output and
     # specify this Dynamic audio selector as the Audio source, MediaConvert
-    # creates an output audio track for each dynamically selected track.
-    # Note that when you include a Dynamic audio selector for two or more
-    # inputs, each input must have the same number of audio tracks and audio
-    # channels.
+    # creates an audio track within that output for each dynamically
+    # selected track. Note that when you include a Dynamic audio selector
+    # for two or more inputs, each input must have the same number of audio
+    # tracks and audio channels.
     #
     # @!attribute [rw] audio_duration_correction
     #   Apply audio timing corrections to help synchronize audio and video
@@ -5962,6 +6008,29 @@ module Aws::MediaConvert
     #   ratio 40:33. In this example, the value for parNumerator is 40.
     #   @return [Integer]
     #
+    # @!attribute [rw] per_frame_metrics
+    #   Optionally choose one or more per frame metric reports to generate
+    #   along with your output. You can use these metrics to analyze your
+    #   video output according to one or more commonly used image quality
+    #   metrics. You can specify per frame metrics for output groups or for
+    #   individual outputs. When you do, MediaConvert writes a CSV
+    #   (Comma-Separated Values) file to your S3 output destination, named
+    #   after the video, video codec, and metric type. For example:
+    #   video\_h264\_PSNR.csv Jobs that generate per frame metrics will take
+    #   longer to complete, depending on the resolution and complexity of
+    #   your output. For example, some 4K jobs might take up to twice as
+    #   long to complete. Note that when analyzing the video quality of your
+    #   output, or when comparing the video quality of multiple different
+    #   outputs, we generally also recommend a detailed visual review in a
+    #   controlled environment. You can choose from the following per frame
+    #   metrics: * PSNR: Peak Signal-to-Noise Ratio * SSIM: Structural
+    #   Similarity Index Measure * MS\_SSIM: Multi-Scale Similarity Index
+    #   Measure * PSNR\_HVS: Peak Signal-to-Noise Ratio, Human Visual
+    #   System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
+    #   Quality-Defined Variable Bitrate. This option is only available when
+    #   your output uses the QVBR rate control mode.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] quality_tuning_level
     #   The Quality tuning level you choose represents a trade-off between
     #   the encoding speed of your job and the output video quality. For the
@@ -6179,6 +6248,7 @@ module Aws::MediaConvert
       :par_control,
       :par_denominator,
       :par_numerator,
+      :per_frame_metrics,
       :quality_tuning_level,
       :qvbr_settings,
       :rate_control_mode,
@@ -6535,6 +6605,29 @@ module Aws::MediaConvert
     #   ratio 40:33. In this example, the value for parNumerator is 40.
     #   @return [Integer]
     #
+    # @!attribute [rw] per_frame_metrics
+    #   Optionally choose one or more per frame metric reports to generate
+    #   along with your output. You can use these metrics to analyze your
+    #   video output according to one or more commonly used image quality
+    #   metrics. You can specify per frame metrics for output groups or for
+    #   individual outputs. When you do, MediaConvert writes a CSV
+    #   (Comma-Separated Values) file to your S3 output destination, named
+    #   after the video, video codec, and metric type. For example:
+    #   video\_h264\_PSNR.csv Jobs that generate per frame metrics will take
+    #   longer to complete, depending on the resolution and complexity of
+    #   your output. For example, some 4K jobs might take up to twice as
+    #   long to complete. Note that when analyzing the video quality of your
+    #   output, or when comparing the video quality of multiple different
+    #   outputs, we generally also recommend a detailed visual review in a
+    #   controlled environment. You can choose from the following per frame
+    #   metrics: * PSNR: Peak Signal-to-Noise Ratio * SSIM: Structural
+    #   Similarity Index Measure * MS\_SSIM: Multi-Scale Similarity Index
+    #   Measure * PSNR\_HVS: Peak Signal-to-Noise Ratio, Human Visual
+    #   System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
+    #   Quality-Defined Variable Bitrate. This option is only available when
+    #   your output uses the QVBR rate control mode.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] quality_tuning_level
     #   Optional. Use Quality tuning level to choose how you want to trade
     #   off encoding speed for output video quality. The default behavior is
@@ -6716,6 +6809,7 @@ module Aws::MediaConvert
       :par_control,
       :par_denominator,
       :par_numerator,
+      :per_frame_metrics,
       :quality_tuning_level,
       :qvbr_settings,
       :rate_control_mode,
@@ -10631,6 +10725,29 @@ module Aws::MediaConvert
     #   ratio 40:33. In this example, the value for parNumerator is 40.
     #   @return [Integer]
     #
+    # @!attribute [rw] per_frame_metrics
+    #   Optionally choose one or more per frame metric reports to generate
+    #   along with your output. You can use these metrics to analyze your
+    #   video output according to one or more commonly used image quality
+    #   metrics. You can specify per frame metrics for output groups or for
+    #   individual outputs. When you do, MediaConvert writes a CSV
+    #   (Comma-Separated Values) file to your S3 output destination, named
+    #   after the video, video codec, and metric type. For example:
+    #   video\_h264\_PSNR.csv Jobs that generate per frame metrics will take
+    #   longer to complete, depending on the resolution and complexity of
+    #   your output. For example, some 4K jobs might take up to twice as
+    #   long to complete. Note that when analyzing the video quality of your
+    #   output, or when comparing the video quality of multiple different
+    #   outputs, we generally also recommend a detailed visual review in a
+    #   controlled environment. You can choose from the following per frame
+    #   metrics: * PSNR: Peak Signal-to-Noise Ratio * SSIM: Structural
+    #   Similarity Index Measure * MS\_SSIM: Multi-Scale Similarity Index
+    #   Measure * PSNR\_HVS: Peak Signal-to-Noise Ratio, Human Visual
+    #   System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
+    #   Quality-Defined Variable Bitrate. This option is only available when
+    #   your output uses the QVBR rate control mode.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] quality_tuning_level
     #   Optional. Use Quality tuning level to choose how you want to trade
     #   off encoding speed for output video quality. The default behavior is
@@ -10770,6 +10887,7 @@ module Aws::MediaConvert
       :par_control,
       :par_denominator,
       :par_numerator,
+      :per_frame_metrics,
       :quality_tuning_level,
       :rate_control_mode,
       :scan_type_conversion_mode,
@@ -11538,6 +11656,29 @@ module Aws::MediaConvert
     #   https://docs.aws.amazon.com/mediaconvert/latest/ug/outputs-file-ABR.html.
     #   @return [Types::MsSmoothGroupSettings]
     #
+    # @!attribute [rw] per_frame_metrics
+    #   Optionally choose one or more per frame metric reports to generate
+    #   along with your output. You can use these metrics to analyze your
+    #   video output according to one or more commonly used image quality
+    #   metrics. You can specify per frame metrics for output groups or for
+    #   individual outputs. When you do, MediaConvert writes a CSV
+    #   (Comma-Separated Values) file to your S3 output destination, named
+    #   after the video, video codec, and metric type. For example:
+    #   video\_h264\_PSNR.csv Jobs that generate per frame metrics will take
+    #   longer to complete, depending on the resolution and complexity of
+    #   your output. For example, some 4K jobs might take up to twice as
+    #   long to complete. Note that when analyzing the video quality of your
+    #   output, or when comparing the video quality of multiple different
+    #   outputs, we generally also recommend a detailed visual review in a
+    #   controlled environment. You can choose from the following per frame
+    #   metrics: * PSNR: Peak Signal-to-Noise Ratio * SSIM: Structural
+    #   Similarity Index Measure * MS\_SSIM: Multi-Scale Similarity Index
+    #   Measure * PSNR\_HVS: Peak Signal-to-Noise Ratio, Human Visual
+    #   System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
+    #   Quality-Defined Variable Bitrate. This option is only available when
+    #   your output uses the QVBR rate control mode.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] type
     #   Type of output group (File group, Apple HLS, DASH ISO, Microsoft
     #   Smooth Streaming, CMAF)
@@ -11551,6 +11692,7 @@ module Aws::MediaConvert
       :file_group_settings,
       :hls_group_settings,
       :ms_smooth_group_settings,
+      :per_frame_metrics,
       :type)
       SENSITIVE = []
       include Aws::Structure
@@ -11887,6 +12029,29 @@ module Aws::MediaConvert
     #   ratio 40:33. In this example, the value for parNumerator is 40.
     #   @return [Integer]
     #
+    # @!attribute [rw] per_frame_metrics
+    #   Optionally choose one or more per frame metric reports to generate
+    #   along with your output. You can use these metrics to analyze your
+    #   video output according to one or more commonly used image quality
+    #   metrics. You can specify per frame metrics for output groups or for
+    #   individual outputs. When you do, MediaConvert writes a CSV
+    #   (Comma-Separated Values) file to your S3 output destination, named
+    #   after the video, video codec, and metric type. For example:
+    #   video\_h264\_PSNR.csv Jobs that generate per frame metrics will take
+    #   longer to complete, depending on the resolution and complexity of
+    #   your output. For example, some 4K jobs might take up to twice as
+    #   long to complete. Note that when analyzing the video quality of your
+    #   output, or when comparing the video quality of multiple different
+    #   outputs, we generally also recommend a detailed visual review in a
+    #   controlled environment. You can choose from the following per frame
+    #   metrics: * PSNR: Peak Signal-to-Noise Ratio * SSIM: Structural
+    #   Similarity Index Measure * MS\_SSIM: Multi-Scale Similarity Index
+    #   Measure * PSNR\_HVS: Peak Signal-to-Noise Ratio, Human Visual
+    #   System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
+    #   Quality-Defined Variable Bitrate. This option is only available when
+    #   your output uses the QVBR rate control mode.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] scan_type_conversion_mode
     #   Use this setting for interlaced outputs, when your output frame rate
     #   is half of your input frame rate. In this situation, choose
@@ -11936,6 +12101,7 @@ module Aws::MediaConvert
       :par_control,
       :par_denominator,
       :par_numerator,
+      :per_frame_metrics,
       :scan_type_conversion_mode,
       :slow_pal,
       :telecine)
@@ -15024,6 +15190,29 @@ module Aws::MediaConvert
     #   Framerate. In this example, specify 23.976.
     #   @return [Integer]
     #
+    # @!attribute [rw] per_frame_metrics
+    #   Optionally choose one or more per frame metric reports to generate
+    #   along with your output. You can use these metrics to analyze your
+    #   video output according to one or more commonly used image quality
+    #   metrics. You can specify per frame metrics for output groups or for
+    #   individual outputs. When you do, MediaConvert writes a CSV
+    #   (Comma-Separated Values) file to your S3 output destination, named
+    #   after the video, video codec, and metric type. For example:
+    #   video\_h264\_PSNR.csv Jobs that generate per frame metrics will take
+    #   longer to complete, depending on the resolution and complexity of
+    #   your output. For example, some 4K jobs might take up to twice as
+    #   long to complete. Note that when analyzing the video quality of your
+    #   output, or when comparing the video quality of multiple different
+    #   outputs, we generally also recommend a detailed visual review in a
+    #   controlled environment. You can choose from the following per frame
+    #   metrics: * PSNR: Peak Signal-to-Noise Ratio * SSIM: Structural
+    #   Similarity Index Measure * MS\_SSIM: Multi-Scale Similarity Index
+    #   Measure * PSNR\_HVS: Peak Signal-to-Noise Ratio, Human Visual
+    #   System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
+    #   Quality-Defined Variable Bitrate. This option is only available when
+    #   your output uses the QVBR rate control mode.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] profile
     #   Specify the XAVC profile for this output. For more information, see
     #   the Sony documentation at https://www.xavc-info.org/. Note that
@@ -15131,6 +15320,7 @@ module Aws::MediaConvert
       :framerate_conversion_algorithm,
       :framerate_denominator,
       :framerate_numerator,
+      :per_frame_metrics,
       :profile,
       :slow_pal,
       :softness,

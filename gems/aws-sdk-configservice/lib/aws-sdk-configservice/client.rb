@@ -6486,7 +6486,7 @@ module Aws::ConfigService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-configservice'
-      context[:gem_version] = '1.126.0'
+      context[:gem_version] = '1.127.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

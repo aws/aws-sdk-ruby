@@ -404,7 +404,7 @@ module Aws::CloudTrail
 
     AdvancedFieldSelectors.member = Shapes::ShapeRef.new(shape: AdvancedFieldSelector)
 
-    CancelQueryRequest.add_member(:event_data_store, Shapes::ShapeRef.new(shape: EventDataStoreArn, deprecated: true, location_name: "EventDataStore", metadata: {"deprecatedMessage"=>"EventDataStore is no longer required by CancelQueryRequest"}))
+    CancelQueryRequest.add_member(:event_data_store, Shapes::ShapeRef.new(shape: EventDataStoreArn, deprecated: true, location_name: "EventDataStore", metadata: {"deprecatedMessage" => "EventDataStore is no longer required by CancelQueryRequest"}))
     CancelQueryRequest.add_member(:query_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "QueryId"))
     CancelQueryRequest.add_member(:event_data_store_owner_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "EventDataStoreOwnerAccountId"))
     CancelQueryRequest.struct_class = Types::CancelQueryRequest
@@ -575,7 +575,7 @@ module Aws::CloudTrail
 
     DeregisterOrganizationDelegatedAdminResponse.struct_class = Types::DeregisterOrganizationDelegatedAdminResponse
 
-    DescribeQueryRequest.add_member(:event_data_store, Shapes::ShapeRef.new(shape: EventDataStoreArn, deprecated: true, location_name: "EventDataStore", metadata: {"deprecatedMessage"=>"EventDataStore is no longer required by DescribeQueryRequest"}))
+    DescribeQueryRequest.add_member(:event_data_store, Shapes::ShapeRef.new(shape: EventDataStoreArn, deprecated: true, location_name: "EventDataStore", metadata: {"deprecatedMessage" => "EventDataStore is no longer required by DescribeQueryRequest"}))
     DescribeQueryRequest.add_member(:query_id, Shapes::ShapeRef.new(shape: UUID, location_name: "QueryId"))
     DescribeQueryRequest.add_member(:query_alias, Shapes::ShapeRef.new(shape: QueryAlias, location_name: "QueryAlias"))
     DescribeQueryRequest.add_member(:refresh_id, Shapes::ShapeRef.new(shape: RefreshId, location_name: "RefreshId"))
@@ -635,14 +635,14 @@ module Aws::CloudTrail
 
     EventDataStore.add_member(:event_data_store_arn, Shapes::ShapeRef.new(shape: EventDataStoreArn, location_name: "EventDataStoreArn"))
     EventDataStore.add_member(:name, Shapes::ShapeRef.new(shape: EventDataStoreName, location_name: "Name"))
-    EventDataStore.add_member(:termination_protection_enabled, Shapes::ShapeRef.new(shape: TerminationProtectionEnabled, deprecated: true, location_name: "TerminationProtectionEnabled", metadata: {"deprecatedMessage"=>"TerminationProtectionEnabled is no longer returned by ListEventDataStores"}))
-    EventDataStore.add_member(:status, Shapes::ShapeRef.new(shape: EventDataStoreStatus, deprecated: true, location_name: "Status", metadata: {"deprecatedMessage"=>"Status is no longer returned by ListEventDataStores"}))
-    EventDataStore.add_member(:advanced_event_selectors, Shapes::ShapeRef.new(shape: AdvancedEventSelectors, deprecated: true, location_name: "AdvancedEventSelectors", metadata: {"deprecatedMessage"=>"AdvancedEventSelectors is no longer returned by ListEventDataStores"}))
-    EventDataStore.add_member(:multi_region_enabled, Shapes::ShapeRef.new(shape: Boolean, deprecated: true, location_name: "MultiRegionEnabled", metadata: {"deprecatedMessage"=>"MultiRegionEnabled is no longer returned by ListEventDataStores"}))
-    EventDataStore.add_member(:organization_enabled, Shapes::ShapeRef.new(shape: Boolean, deprecated: true, location_name: "OrganizationEnabled", metadata: {"deprecatedMessage"=>"OrganizationEnabled is no longer returned by ListEventDataStores"}))
-    EventDataStore.add_member(:retention_period, Shapes::ShapeRef.new(shape: RetentionPeriod, deprecated: true, location_name: "RetentionPeriod", metadata: {"deprecatedMessage"=>"RetentionPeriod is no longer returned by ListEventDataStores"}))
-    EventDataStore.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Date, deprecated: true, location_name: "CreatedTimestamp", metadata: {"deprecatedMessage"=>"CreatedTimestamp is no longer returned by ListEventDataStores"}))
-    EventDataStore.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Date, deprecated: true, location_name: "UpdatedTimestamp", metadata: {"deprecatedMessage"=>"UpdatedTimestamp is no longer returned by ListEventDataStores"}))
+    EventDataStore.add_member(:termination_protection_enabled, Shapes::ShapeRef.new(shape: TerminationProtectionEnabled, deprecated: true, location_name: "TerminationProtectionEnabled", metadata: {"deprecatedMessage" => "TerminationProtectionEnabled is no longer returned by ListEventDataStores"}))
+    EventDataStore.add_member(:status, Shapes::ShapeRef.new(shape: EventDataStoreStatus, deprecated: true, location_name: "Status", metadata: {"deprecatedMessage" => "Status is no longer returned by ListEventDataStores"}))
+    EventDataStore.add_member(:advanced_event_selectors, Shapes::ShapeRef.new(shape: AdvancedEventSelectors, deprecated: true, location_name: "AdvancedEventSelectors", metadata: {"deprecatedMessage" => "AdvancedEventSelectors is no longer returned by ListEventDataStores"}))
+    EventDataStore.add_member(:multi_region_enabled, Shapes::ShapeRef.new(shape: Boolean, deprecated: true, location_name: "MultiRegionEnabled", metadata: {"deprecatedMessage" => "MultiRegionEnabled is no longer returned by ListEventDataStores"}))
+    EventDataStore.add_member(:organization_enabled, Shapes::ShapeRef.new(shape: Boolean, deprecated: true, location_name: "OrganizationEnabled", metadata: {"deprecatedMessage" => "OrganizationEnabled is no longer returned by ListEventDataStores"}))
+    EventDataStore.add_member(:retention_period, Shapes::ShapeRef.new(shape: RetentionPeriod, deprecated: true, location_name: "RetentionPeriod", metadata: {"deprecatedMessage" => "RetentionPeriod is no longer returned by ListEventDataStores"}))
+    EventDataStore.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Date, deprecated: true, location_name: "CreatedTimestamp", metadata: {"deprecatedMessage" => "CreatedTimestamp is no longer returned by ListEventDataStores"}))
+    EventDataStore.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Date, deprecated: true, location_name: "UpdatedTimestamp", metadata: {"deprecatedMessage" => "UpdatedTimestamp is no longer returned by ListEventDataStores"}))
     EventDataStore.struct_class = Types::EventDataStore
 
     EventDataStoreARNInvalidException.struct_class = Types::EventDataStoreARNInvalidException
@@ -764,7 +764,7 @@ module Aws::CloudTrail
     GetInsightSelectorsResponse.add_member(:insights_destination, Shapes::ShapeRef.new(shape: EventDataStoreArn, location_name: "InsightsDestination"))
     GetInsightSelectorsResponse.struct_class = Types::GetInsightSelectorsResponse
 
-    GetQueryResultsRequest.add_member(:event_data_store, Shapes::ShapeRef.new(shape: EventDataStoreArn, deprecated: true, location_name: "EventDataStore", metadata: {"deprecatedMessage"=>"EventDataStore is no longer required by GetQueryResultsRequest"}))
+    GetQueryResultsRequest.add_member(:event_data_store, Shapes::ShapeRef.new(shape: EventDataStoreArn, deprecated: true, location_name: "EventDataStore", metadata: {"deprecatedMessage" => "EventDataStore is no longer required by GetQueryResultsRequest"}))
     GetQueryResultsRequest.add_member(:query_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "QueryId"))
     GetQueryResultsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     GetQueryResultsRequest.add_member(:max_query_results, Shapes::ShapeRef.new(shape: MaxQueryResults, location_name: "MaxQueryResults"))

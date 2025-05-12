@@ -54,7 +54,7 @@ module Aws::PersonalizeEvents
   autoload :EndpointProvider, 'aws-sdk-personalizeevents/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-personalizeevents/endpoints'
 
-  GEM_VERSION = '1.60.0'
+  GEM_VERSION = '1.61.0'
 
 end
 

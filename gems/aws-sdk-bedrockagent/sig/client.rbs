@@ -456,6 +456,10 @@ module Aws
                                      },
                                    ]
                                  }?,
+                                 inline_code: {
+                                   code: ::String,
+                                   language: ("Python_3")
+                                 }?,
                                  input: {
                                  }?,
                                  iterator: {
@@ -598,7 +602,7 @@ module Aws
                                    type: ("String" | "Number" | "Boolean" | "Object" | "Array")
                                  },
                                ]?,
-                               type: ("Input" | "Output" | "KnowledgeBase" | "Condition" | "Lex" | "Prompt" | "LambdaFunction" | "Storage" | "Agent" | "Retrieval" | "Iterator" | "Collector")
+                               type: ("Input" | "Output" | "KnowledgeBase" | "Condition" | "Lex" | "Prompt" | "LambdaFunction" | "Storage" | "Agent" | "Retrieval" | "Iterator" | "Collector" | "InlineCode")
                              },
                            ]?
                          },
@@ -2053,6 +2057,10 @@ module Aws
                                      },
                                    ]
                                  }?,
+                                 inline_code: {
+                                   code: ::String,
+                                   language: ("Python_3")
+                                 }?,
                                  input: {
                                  }?,
                                  iterator: {
@@ -2195,7 +2203,7 @@ module Aws
                                    type: ("String" | "Number" | "Boolean" | "Object" | "Array")
                                  },
                                ]?,
-                               type: ("Input" | "Output" | "KnowledgeBase" | "Condition" | "Lex" | "Prompt" | "LambdaFunction" | "Storage" | "Agent" | "Retrieval" | "Iterator" | "Collector")
+                               type: ("Input" | "Output" | "KnowledgeBase" | "Condition" | "Lex" | "Prompt" | "LambdaFunction" | "Storage" | "Agent" | "Retrieval" | "Iterator" | "Collector" | "InlineCode")
                              },
                            ]?
                          },
@@ -2561,6 +2569,10 @@ module Aws
                                                   },
                                                 ]
                                               }?,
+                                              inline_code: {
+                                                code: ::String,
+                                                language: ("Python_3")
+                                              }?,
                                               input: {
                                               }?,
                                               iterator: {
@@ -2703,7 +2715,7 @@ module Aws
                                                 type: ("String" | "Number" | "Boolean" | "Object" | "Array")
                                               },
                                             ]?,
-                                            type: ("Input" | "Output" | "KnowledgeBase" | "Condition" | "Lex" | "Prompt" | "LambdaFunction" | "Storage" | "Agent" | "Retrieval" | "Iterator" | "Collector")
+                                            type: ("Input" | "Output" | "KnowledgeBase" | "Condition" | "Lex" | "Prompt" | "LambdaFunction" | "Storage" | "Agent" | "Retrieval" | "Iterator" | "Collector" | "InlineCode")
                                           },
                                         ]?
                                       }

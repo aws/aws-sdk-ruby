@@ -480,11 +480,6 @@ module Aws::SSOAdmin
     # Attaches the specified customer managed policy to the specified
     # PermissionSet.
     #
-    # @option params [required, Types::CustomerManagedPolicyReference] :customer_managed_policy_reference
-    #   Specifies the name and path of a customer managed policy. You must
-    #   have an IAM policy that matches the name and path in each Amazon Web
-    #   Services account where you want to deploy your permission set.
-    #
     # @option params [required, String] :instance_arn
     #   The ARN of the IAM Identity Center instance under which the operation
     #   will be executed.
@@ -492,17 +487,22 @@ module Aws::SSOAdmin
     # @option params [required, String] :permission_set_arn
     #   The ARN of the `PermissionSet`.
     #
+    # @option params [required, Types::CustomerManagedPolicyReference] :customer_managed_policy_reference
+    #   Specifies the name and path of a customer managed policy. You must
+    #   have an IAM policy that matches the name and path in each Amazon Web
+    #   Services account where you want to deploy your permission set.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.attach_customer_managed_policy_reference_to_permission_set({
+    #     instance_arn: "InstanceArn", # required
+    #     permission_set_arn: "PermissionSetArn", # required
     #     customer_managed_policy_reference: { # required
     #       name: "ManagedPolicyName", # required
     #       path: "ManagedPolicyPath",
     #     },
-    #     instance_arn: "InstanceArn", # required
-    #     permission_set_arn: "PermissionSetArn", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/AttachCustomerManagedPolicyReferenceToPermissionSet AWS API Documentation
@@ -531,13 +531,13 @@ module Aws::SSOAdmin
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #
-    # @option params [required, String] :managed_policy_arn
-    #   The Amazon Web Services managed policy ARN to be attached to a
-    #   permission set.
-    #
     # @option params [required, String] :permission_set_arn
     #   The ARN of the PermissionSet that the managed policy should be
     #   attached to.
+    #
+    # @option params [required, String] :managed_policy_arn
+    #   The Amazon Web Services managed policy ARN to be attached to a
+    #   permission set.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -545,8 +545,8 @@ module Aws::SSOAdmin
     #
     #   resp = client.attach_managed_policy_to_permission_set({
     #     instance_arn: "InstanceArn", # required
-    #     managed_policy_arn: "ManagedPolicyArn", # required
     #     permission_set_arn: "PermissionSetArn", # required
+    #     managed_policy_arn: "ManagedPolicyArn", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/AttachManagedPolicyToPermissionSet AWS API Documentation
@@ -589,9 +589,19 @@ module Aws::SSOAdmin
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #
+    # @option params [required, String] :target_id
+    #   TargetID is an Amazon Web Services account identifier, (For example,
+    #   123456789012).
+    #
+    # @option params [required, String] :target_type
+    #   The entity type for which the assignment will be created.
+    #
     # @option params [required, String] :permission_set_arn
     #   The ARN of the permission set that the admin wants to grant the
     #   principal access to.
+    #
+    # @option params [required, String] :principal_type
+    #   The entity type for which the assignment will be created.
     #
     # @option params [required, String] :principal_id
     #   An identifier for an object in IAM Identity Center, such as a user or
@@ -601,16 +611,6 @@ module Aws::SSOAdmin
     #   Identity Store API
     #   Reference](/singlesignon/latest/IdentityStoreAPIReference/welcome.html).
     #
-    # @option params [required, String] :principal_type
-    #   The entity type for which the assignment will be created.
-    #
-    # @option params [required, String] :target_id
-    #   TargetID is an Amazon Web Services account identifier, (For example,
-    #   123456789012).
-    #
-    # @option params [required, String] :target_type
-    #   The entity type for which the assignment will be created.
-    #
     # @return [Types::CreateAccountAssignmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAccountAssignmentResponse#account_assignment_creation_status #account_assignment_creation_status} => Types::AccountAssignmentOperationStatus
@@ -619,24 +619,24 @@ module Aws::SSOAdmin
     #
     #   resp = client.create_account_assignment({
     #     instance_arn: "InstanceArn", # required
-    #     permission_set_arn: "PermissionSetArn", # required
-    #     principal_id: "PrincipalId", # required
-    #     principal_type: "USER", # required, accepts USER, GROUP
     #     target_id: "TargetId", # required
     #     target_type: "AWS_ACCOUNT", # required, accepts AWS_ACCOUNT
+    #     permission_set_arn: "PermissionSetArn", # required
+    #     principal_type: "USER", # required, accepts USER, GROUP
+    #     principal_id: "PrincipalId", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.account_assignment_creation_status.created_date #=> Time
-    #   resp.account_assignment_creation_status.failure_reason #=> String
-    #   resp.account_assignment_creation_status.permission_set_arn #=> String
-    #   resp.account_assignment_creation_status.principal_id #=> String
-    #   resp.account_assignment_creation_status.principal_type #=> String, one of "USER", "GROUP"
-    #   resp.account_assignment_creation_status.request_id #=> String
     #   resp.account_assignment_creation_status.status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED"
+    #   resp.account_assignment_creation_status.request_id #=> String
+    #   resp.account_assignment_creation_status.failure_reason #=> String
     #   resp.account_assignment_creation_status.target_id #=> String
     #   resp.account_assignment_creation_status.target_type #=> String, one of "AWS_ACCOUNT"
+    #   resp.account_assignment_creation_status.permission_set_arn #=> String
+    #   resp.account_assignment_creation_status.principal_type #=> String, one of "USER", "GROUP"
+    #   resp.account_assignment_creation_status.principal_id #=> String
+    #   resp.account_assignment_creation_status.created_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/CreateAccountAssignment AWS API Documentation
     #
@@ -647,12 +647,51 @@ module Aws::SSOAdmin
       req.send_request(options)
     end
 
-    # Creates an application in IAM Identity Center for the given
-    # application provider.
+    # Creates an OAuth 2.0 customer managed application in IAM Identity
+    # Center for the given application provider.
+    #
+    # <note markdown="1"> This API does not support creating SAML 2.0 customer managed
+    # applications or Amazon Web Services managed applications. To learn how
+    # to create an Amazon Web Services managed application, see the
+    # application user guide. You can create a SAML 2.0 customer managed
+    # application in the Amazon Web Services Management Console only. See
+    # [Setting up customer managed SAML 2.0 applications][1]. For more
+    # information on these application types, see [Amazon Web Services
+    # managed applications][2].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/singlesignon/latest/userguide/customermanagedapps-saml2-setup.html
+    # [2]: https://docs.aws.amazon.com/singlesignon/latest/userguide/awsapps.html
+    #
+    # @option params [required, String] :instance_arn
+    #   The ARN of the instance of IAM Identity Center under which the
+    #   operation will run. For more information about ARNs, see [Amazon
+    #   Resource Names (ARNs) and Amazon Web Services Service
+    #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
+    #   *Amazon Web Services General Reference*.
     #
     # @option params [required, String] :application_provider_arn
     #   The ARN of the application provider under which the operation will
     #   run.
+    #
+    # @option params [required, String] :name
+    #   The name of the .
+    #
+    # @option params [String] :description
+    #   The description of the .
+    #
+    # @option params [Types::PortalOptions] :portal_options
+    #   A structure that describes the options for the portal associated with
+    #   an application.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Specifies tags to be attached to the application.
+    #
+    # @option params [String] :status
+    #   Specifies whether the application is enabled or disabled.
     #
     # @option params [String] :client_token
     #   Specifies a unique, case-sensitive ID that you provide to ensure the
@@ -676,29 +715,6 @@ module Aws::SSOAdmin
     #
     #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #
-    # @option params [String] :description
-    #   The description of the .
-    #
-    # @option params [required, String] :instance_arn
-    #   The ARN of the instance of IAM Identity Center under which the
-    #   operation will run. For more information about ARNs, see [Amazon
-    #   Resource Names (ARNs) and Amazon Web Services Service
-    #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
-    #
-    # @option params [required, String] :name
-    #   The name of the .
-    #
-    # @option params [Types::PortalOptions] :portal_options
-    #   A structure that describes the options for the portal associated with
-    #   an application.
-    #
-    # @option params [String] :status
-    #   Specifies whether the application is enabled or disabled.
-    #
-    # @option params [Array<Types::Tag>] :tags
-    #   Specifies tags to be attached to the application.
-    #
     # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateApplicationResponse#application_arn #application_arn} => String
@@ -706,25 +722,25 @@ module Aws::SSOAdmin
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_application({
-    #     application_provider_arn: "ApplicationProviderArn", # required
-    #     client_token: "ClientToken",
-    #     description: "Description",
     #     instance_arn: "InstanceArn", # required
-    #     name: "NameType", # required
+    #     application_provider_arn: "ApplicationProviderArn", # required
+    #     name: "ApplicationNameType", # required
+    #     description: "Description",
     #     portal_options: {
     #       sign_in_options: {
-    #         application_url: "ApplicationUrl",
     #         origin: "IDENTITY_CENTER", # required, accepts IDENTITY_CENTER, APPLICATION
+    #         application_url: "ApplicationUrl",
     #       },
     #       visibility: "ENABLED", # accepts ENABLED, DISABLED
     #     },
-    #     status: "ENABLED", # accepts ENABLED, DISABLED
     #     tags: [
     #       {
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     status: "ENABLED", # accepts ENABLED, DISABLED
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
@@ -743,16 +759,18 @@ module Aws::SSOAdmin
     # Grant application access to a user or group.
     #
     # @option params [required, String] :application_arn
-    #   The ARN of the application provider under which the operation will
-    #   run.
+    #   The ARN of the application for which the assignment is created.
     #
     # @option params [required, String] :principal_id
     #   An identifier for an object in IAM Identity Center, such as a user or
     #   group. PrincipalIds are GUIDs (For example,
     #   f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about
     #   PrincipalIds in IAM Identity Center, see the [IAM Identity Center
-    #   Identity Store API
-    #   Reference](/singlesignon/latest/IdentityStoreAPIReference/welcome.html).
+    #   Identity Store API Reference][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/welcome.html
     #
     # @option params [required, String] :principal_type
     #   The entity type for which the assignment will be created.
@@ -787,6 +805,9 @@ module Aws::SSOAdmin
     #
     # * An instance already exists in the same account.
     #
+    # @option params [String] :name
+    #   The name of the instance of IAM Identity Center.
+    #
     # @option params [String] :client_token
     #   Specifies a unique, case-sensitive ID that you provide to ensure the
     #   idempotency of the request. This lets you safely retry the request
@@ -809,9 +830,6 @@ module Aws::SSOAdmin
     #
     #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #
-    # @option params [String] :name
-    #   The name of the instance of IAM Identity Center.
-    #
     # @option params [Array<Types::Tag>] :tags
     #   Specifies tags to be attached to the instance of IAM Identity Center.
     #
@@ -822,8 +840,8 @@ module Aws::SSOAdmin
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_instance({
-    #     client_token: "ClientToken",
     #     name: "NameType",
+    #     client_token: "ClientToken",
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -858,6 +876,10 @@ module Aws::SSOAdmin
     #
     #  </note>
     #
+    # @option params [required, String] :instance_arn
+    #   The ARN of the IAM Identity Center instance under which the operation
+    #   will be executed.
+    #
     # @option params [required, Types::InstanceAccessControlAttributeConfiguration] :instance_access_control_attribute_configuration
     #   Specifies the IAM Identity Center identity store attributes to add to
     #   your ABAC configuration. When using an external identity provider as
@@ -868,15 +890,12 @@ module Aws::SSOAdmin
     #   attribute value with the value from the IAM Identity Center identity
     #   store.
     #
-    # @option params [required, String] :instance_arn
-    #   The ARN of the IAM Identity Center instance under which the operation
-    #   will be executed.
-    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_instance_access_control_attribute_configuration({
+    #     instance_arn: "InstanceArn", # required
     #     instance_access_control_attribute_configuration: { # required
     #       access_control_attributes: [ # required
     #         {
@@ -887,7 +906,6 @@ module Aws::SSOAdmin
     #         },
     #       ],
     #     },
-    #     instance_arn: "InstanceArn", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/CreateInstanceAccessControlAttributeConfiguration AWS API Documentation
@@ -907,6 +925,9 @@ module Aws::SSOAdmin
     #
     #  </note>
     #
+    # @option params [required, String] :name
+    #   The name of the PermissionSet.
+    #
     # @option params [String] :description
     #   The description of the PermissionSet.
     #
@@ -917,16 +938,13 @@ module Aws::SSOAdmin
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #
-    # @option params [required, String] :name
-    #   The name of the PermissionSet.
+    # @option params [String] :session_duration
+    #   The length of time that the application user sessions are valid in the
+    #   ISO-8601 standard.
     #
     # @option params [String] :relay_state
     #   Used to redirect users within the application during the federation
     #   authentication process.
-    #
-    # @option params [String] :session_duration
-    #   The length of time that the application user sessions are valid in the
-    #   ISO-8601 standard.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags to attach to the new PermissionSet.
@@ -938,11 +956,11 @@ module Aws::SSOAdmin
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_permission_set({
+    #     name: "PermissionSetName", # required
     #     description: "PermissionSetDescription",
     #     instance_arn: "InstanceArn", # required
-    #     name: "PermissionSetName", # required
-    #     relay_state: "RelayState",
     #     session_duration: "Duration",
+    #     relay_state: "RelayState",
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -953,12 +971,12 @@ module Aws::SSOAdmin
     #
     # @example Response structure
     #
-    #   resp.permission_set.created_date #=> Time
-    #   resp.permission_set.description #=> String
     #   resp.permission_set.name #=> String
     #   resp.permission_set.permission_set_arn #=> String
-    #   resp.permission_set.relay_state #=> String
+    #   resp.permission_set.description #=> String
+    #   resp.permission_set.created_date #=> Time
     #   resp.permission_set.session_duration #=> String
+    #   resp.permission_set.relay_state #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/CreatePermissionSet AWS API Documentation
     #
@@ -978,6 +996,21 @@ module Aws::SSOAdmin
     # (IdP) that can generate claims or assertions in the form of access
     # tokens for a user. Applications enabled for IAM Identity Center can
     # use these tokens for authentication.
+    #
+    # @option params [required, String] :instance_arn
+    #   Specifies the ARN of the instance of IAM Identity Center to contain
+    #   the new trusted token issuer configuration.
+    #
+    # @option params [required, String] :name
+    #   Specifies the name of the new trusted token issuer configuration.
+    #
+    # @option params [required, String] :trusted_token_issuer_type
+    #   Specifies the type of the new trusted token issuer.
+    #
+    # @option params [required, Types::TrustedTokenIssuerConfiguration] :trusted_token_issuer_configuration
+    #   Specifies settings that apply to the new trusted token issuer
+    #   configuration. The settings that are available depend on what
+    #   `TrustedTokenIssuerType` you specify.
     #
     # @option params [String] :client_token
     #   Specifies a unique, case-sensitive ID that you provide to ensure the
@@ -1001,24 +1034,9 @@ module Aws::SSOAdmin
     #
     #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #
-    # @option params [required, String] :instance_arn
-    #   Specifies the ARN of the instance of IAM Identity Center to contain
-    #   the new trusted token issuer configuration.
-    #
-    # @option params [required, String] :name
-    #   Specifies the name of the new trusted token issuer configuration.
-    #
     # @option params [Array<Types::Tag>] :tags
     #   Specifies tags to be attached to the new trusted token issuer
     #   configuration.
-    #
-    # @option params [required, Types::TrustedTokenIssuerConfiguration] :trusted_token_issuer_configuration
-    #   Specifies settings that apply to the new trusted token issuer
-    #   configuration. The settings that are available depend on what
-    #   `TrustedTokenIssuerType` you specify.
-    #
-    # @option params [required, String] :trusted_token_issuer_type
-    #   Specifies the type of the new trusted token issuer.
     #
     # @return [Types::CreateTrustedTokenIssuerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1027,24 +1045,24 @@ module Aws::SSOAdmin
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_trusted_token_issuer({
-    #     client_token: "ClientToken",
     #     instance_arn: "InstanceArn", # required
     #     name: "TrustedTokenIssuerName", # required
+    #     trusted_token_issuer_type: "OIDC_JWT", # required, accepts OIDC_JWT
+    #     trusted_token_issuer_configuration: { # required
+    #       oidc_jwt_configuration: {
+    #         issuer_url: "TrustedTokenIssuerUrl", # required
+    #         claim_attribute_path: "ClaimAttributePath", # required
+    #         identity_store_attribute_path: "JMESPath", # required
+    #         jwks_retrieval_option: "OPEN_ID_DISCOVERY", # required, accepts OPEN_ID_DISCOVERY
+    #       },
+    #     },
+    #     client_token: "ClientToken",
     #     tags: [
     #       {
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       },
     #     ],
-    #     trusted_token_issuer_configuration: { # required
-    #       oidc_jwt_configuration: {
-    #         claim_attribute_path: "ClaimAttributePath", # required
-    #         identity_store_attribute_path: "JMESPath", # required
-    #         issuer_url: "TrustedTokenIssuerUrl", # required
-    #         jwks_retrieval_option: "OPEN_ID_DISCOVERY", # required, accepts OPEN_ID_DISCOVERY
-    #       },
-    #     },
-    #     trusted_token_issuer_type: "OIDC_JWT", # required, accepts OIDC_JWT
     #   })
     #
     # @example Response structure
@@ -1076,8 +1094,18 @@ module Aws::SSOAdmin
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #
+    # @option params [required, String] :target_id
+    #   TargetID is an Amazon Web Services account identifier, (For example,
+    #   123456789012).
+    #
+    # @option params [required, String] :target_type
+    #   The entity type for which the assignment will be deleted.
+    #
     # @option params [required, String] :permission_set_arn
     #   The ARN of the permission set that will be used to remove access.
+    #
+    # @option params [required, String] :principal_type
+    #   The entity type for which the assignment will be deleted.
     #
     # @option params [required, String] :principal_id
     #   An identifier for an object in IAM Identity Center, such as a user or
@@ -1087,16 +1115,6 @@ module Aws::SSOAdmin
     #   Identity Store API
     #   Reference](/singlesignon/latest/IdentityStoreAPIReference/welcome.html).
     #
-    # @option params [required, String] :principal_type
-    #   The entity type for which the assignment will be deleted.
-    #
-    # @option params [required, String] :target_id
-    #   TargetID is an Amazon Web Services account identifier, (For example,
-    #   123456789012).
-    #
-    # @option params [required, String] :target_type
-    #   The entity type for which the assignment will be deleted.
-    #
     # @return [Types::DeleteAccountAssignmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteAccountAssignmentResponse#account_assignment_deletion_status #account_assignment_deletion_status} => Types::AccountAssignmentOperationStatus
@@ -1105,24 +1123,24 @@ module Aws::SSOAdmin
     #
     #   resp = client.delete_account_assignment({
     #     instance_arn: "InstanceArn", # required
-    #     permission_set_arn: "PermissionSetArn", # required
-    #     principal_id: "PrincipalId", # required
-    #     principal_type: "USER", # required, accepts USER, GROUP
     #     target_id: "TargetId", # required
     #     target_type: "AWS_ACCOUNT", # required, accepts AWS_ACCOUNT
+    #     permission_set_arn: "PermissionSetArn", # required
+    #     principal_type: "USER", # required, accepts USER, GROUP
+    #     principal_id: "PrincipalId", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.account_assignment_deletion_status.created_date #=> Time
-    #   resp.account_assignment_deletion_status.failure_reason #=> String
-    #   resp.account_assignment_deletion_status.permission_set_arn #=> String
-    #   resp.account_assignment_deletion_status.principal_id #=> String
-    #   resp.account_assignment_deletion_status.principal_type #=> String, one of "USER", "GROUP"
-    #   resp.account_assignment_deletion_status.request_id #=> String
     #   resp.account_assignment_deletion_status.status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED"
+    #   resp.account_assignment_deletion_status.request_id #=> String
+    #   resp.account_assignment_deletion_status.failure_reason #=> String
     #   resp.account_assignment_deletion_status.target_id #=> String
     #   resp.account_assignment_deletion_status.target_type #=> String, one of "AWS_ACCOUNT"
+    #   resp.account_assignment_deletion_status.permission_set_arn #=> String
+    #   resp.account_assignment_deletion_status.principal_type #=> String, one of "USER", "GROUP"
+    #   resp.account_assignment_deletion_status.principal_id #=> String
+    #   resp.account_assignment_deletion_status.created_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DeleteAccountAssignment AWS API Documentation
     #
@@ -1196,8 +1214,11 @@ module Aws::SSOAdmin
     #   group. PrincipalIds are GUIDs (For example,
     #   f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about
     #   PrincipalIds in IAM Identity Center, see the [IAM Identity Center
-    #   Identity Store API
-    #   Reference](/singlesignon/latest/IdentityStoreAPIReference/welcome.html).
+    #   Identity Store API Reference][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/welcome.html
     #
     # @option params [required, String] :principal_type
     #   The entity type for which the assignment will be deleted.
@@ -1449,15 +1470,15 @@ module Aws::SSOAdmin
 
     # Describes the status of the assignment creation request.
     #
-    # @option params [required, String] :account_assignment_creation_request_id
-    #   The identifier that is used to track the request operation progress.
-    #
     # @option params [required, String] :instance_arn
     #   The ARN of the IAM Identity Center instance under which the operation
     #   will be executed. For more information about ARNs, see [Amazon
     #   Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
+    #
+    # @option params [required, String] :account_assignment_creation_request_id
+    #   The identifier that is used to track the request operation progress.
     #
     # @return [Types::DescribeAccountAssignmentCreationStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1466,21 +1487,21 @@ module Aws::SSOAdmin
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_account_assignment_creation_status({
-    #     account_assignment_creation_request_id: "UUId", # required
     #     instance_arn: "InstanceArn", # required
+    #     account_assignment_creation_request_id: "UUId", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.account_assignment_creation_status.created_date #=> Time
-    #   resp.account_assignment_creation_status.failure_reason #=> String
-    #   resp.account_assignment_creation_status.permission_set_arn #=> String
-    #   resp.account_assignment_creation_status.principal_id #=> String
-    #   resp.account_assignment_creation_status.principal_type #=> String, one of "USER", "GROUP"
-    #   resp.account_assignment_creation_status.request_id #=> String
     #   resp.account_assignment_creation_status.status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED"
+    #   resp.account_assignment_creation_status.request_id #=> String
+    #   resp.account_assignment_creation_status.failure_reason #=> String
     #   resp.account_assignment_creation_status.target_id #=> String
     #   resp.account_assignment_creation_status.target_type #=> String, one of "AWS_ACCOUNT"
+    #   resp.account_assignment_creation_status.permission_set_arn #=> String
+    #   resp.account_assignment_creation_status.principal_type #=> String, one of "USER", "GROUP"
+    #   resp.account_assignment_creation_status.principal_id #=> String
+    #   resp.account_assignment_creation_status.created_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribeAccountAssignmentCreationStatus AWS API Documentation
     #
@@ -1493,15 +1514,15 @@ module Aws::SSOAdmin
 
     # Describes the status of the assignment deletion request.
     #
-    # @option params [required, String] :account_assignment_deletion_request_id
-    #   The identifier that is used to track the request operation progress.
-    #
     # @option params [required, String] :instance_arn
     #   The ARN of the IAM Identity Center instance under which the operation
     #   will be executed. For more information about ARNs, see [Amazon
     #   Resource Names (ARNs) and Amazon Web Services Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
+    #
+    # @option params [required, String] :account_assignment_deletion_request_id
+    #   The identifier that is used to track the request operation progress.
     #
     # @return [Types::DescribeAccountAssignmentDeletionStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1510,21 +1531,21 @@ module Aws::SSOAdmin
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_account_assignment_deletion_status({
-    #     account_assignment_deletion_request_id: "UUId", # required
     #     instance_arn: "InstanceArn", # required
+    #     account_assignment_deletion_request_id: "UUId", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.account_assignment_deletion_status.created_date #=> Time
-    #   resp.account_assignment_deletion_status.failure_reason #=> String
-    #   resp.account_assignment_deletion_status.permission_set_arn #=> String
-    #   resp.account_assignment_deletion_status.principal_id #=> String
-    #   resp.account_assignment_deletion_status.principal_type #=> String, one of "USER", "GROUP"
-    #   resp.account_assignment_deletion_status.request_id #=> String
     #   resp.account_assignment_deletion_status.status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED"
+    #   resp.account_assignment_deletion_status.request_id #=> String
+    #   resp.account_assignment_deletion_status.failure_reason #=> String
     #   resp.account_assignment_deletion_status.target_id #=> String
     #   resp.account_assignment_deletion_status.target_type #=> String, one of "AWS_ACCOUNT"
+    #   resp.account_assignment_deletion_status.permission_set_arn #=> String
+    #   resp.account_assignment_deletion_status.principal_type #=> String, one of "USER", "GROUP"
+    #   resp.account_assignment_deletion_status.principal_id #=> String
+    #   resp.account_assignment_deletion_status.created_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribeAccountAssignmentDeletionStatus AWS API Documentation
     #
@@ -1546,15 +1567,15 @@ module Aws::SSOAdmin
     #
     # @return [Types::DescribeApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DescribeApplicationResponse#application_account #application_account} => String
     #   * {Types::DescribeApplicationResponse#application_arn #application_arn} => String
     #   * {Types::DescribeApplicationResponse#application_provider_arn #application_provider_arn} => String
-    #   * {Types::DescribeApplicationResponse#created_date #created_date} => Time
-    #   * {Types::DescribeApplicationResponse#description #description} => String
-    #   * {Types::DescribeApplicationResponse#instance_arn #instance_arn} => String
     #   * {Types::DescribeApplicationResponse#name #name} => String
-    #   * {Types::DescribeApplicationResponse#portal_options #portal_options} => Types::PortalOptions
+    #   * {Types::DescribeApplicationResponse#application_account #application_account} => String
+    #   * {Types::DescribeApplicationResponse#instance_arn #instance_arn} => String
     #   * {Types::DescribeApplicationResponse#status #status} => String
+    #   * {Types::DescribeApplicationResponse#portal_options #portal_options} => Types::PortalOptions
+    #   * {Types::DescribeApplicationResponse#description #description} => String
+    #   * {Types::DescribeApplicationResponse#created_date #created_date} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -1564,17 +1585,17 @@ module Aws::SSOAdmin
     #
     # @example Response structure
     #
-    #   resp.application_account #=> String
     #   resp.application_arn #=> String
     #   resp.application_provider_arn #=> String
-    #   resp.created_date #=> Time
-    #   resp.description #=> String
-    #   resp.instance_arn #=> String
     #   resp.name #=> String
-    #   resp.portal_options.sign_in_options.application_url #=> String
-    #   resp.portal_options.sign_in_options.origin #=> String, one of "IDENTITY_CENTER", "APPLICATION"
-    #   resp.portal_options.visibility #=> String, one of "ENABLED", "DISABLED"
+    #   resp.application_account #=> String
+    #   resp.instance_arn #=> String
     #   resp.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.portal_options.sign_in_options.origin #=> String, one of "IDENTITY_CENTER", "APPLICATION"
+    #   resp.portal_options.sign_in_options.application_url #=> String
+    #   resp.portal_options.visibility #=> String, one of "ENABLED", "DISABLED"
+    #   resp.description #=> String
+    #   resp.created_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribeApplication AWS API Documentation
     #
@@ -1602,17 +1623,20 @@ module Aws::SSOAdmin
     #   group. PrincipalIds are GUIDs (For example,
     #   f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about
     #   PrincipalIds in IAM Identity Center, see the [IAM Identity Center
-    #   Identity Store API
-    #   Reference](/singlesignon/latest/IdentityStoreAPIReference/welcome.html).
+    #   Identity Store API Reference][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/welcome.html
     #
     # @option params [required, String] :principal_type
     #   The entity type for which the assignment will be created.
     #
     # @return [Types::DescribeApplicationAssignmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DescribeApplicationAssignmentResponse#application_arn #application_arn} => String
-    #   * {Types::DescribeApplicationAssignmentResponse#principal_id #principal_id} => String
     #   * {Types::DescribeApplicationAssignmentResponse#principal_type #principal_type} => String
+    #   * {Types::DescribeApplicationAssignmentResponse#principal_id #principal_id} => String
+    #   * {Types::DescribeApplicationAssignmentResponse#application_arn #application_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1624,9 +1648,9 @@ module Aws::SSOAdmin
     #
     # @example Response structure
     #
-    #   resp.application_arn #=> String
-    #   resp.principal_id #=> String
     #   resp.principal_type #=> String, one of "USER", "GROUP"
+    #   resp.principal_id #=> String
+    #   resp.application_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribeApplicationAssignment AWS API Documentation
     #
@@ -1648,8 +1672,8 @@ module Aws::SSOAdmin
     # @return [Types::DescribeApplicationProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeApplicationProviderResponse#application_provider_arn #application_provider_arn} => String
-    #   * {Types::DescribeApplicationProviderResponse#display_data #display_data} => Types::DisplayData
     #   * {Types::DescribeApplicationProviderResponse#federation_protocol #federation_protocol} => String
+    #   * {Types::DescribeApplicationProviderResponse#display_data #display_data} => Types::DisplayData
     #   * {Types::DescribeApplicationProviderResponse#resource_server_config #resource_server_config} => Types::ResourceServerConfig
     #
     # @example Request syntax with placeholder values
@@ -1661,13 +1685,13 @@ module Aws::SSOAdmin
     # @example Response structure
     #
     #   resp.application_provider_arn #=> String
-    #   resp.display_data.description #=> String
+    #   resp.federation_protocol #=> String, one of "SAML", "OAUTH"
     #   resp.display_data.display_name #=> String
     #   resp.display_data.icon_url #=> String
-    #   resp.federation_protocol #=> String, one of "SAML", "OAUTH"
+    #   resp.display_data.description #=> String
     #   resp.resource_server_config.scopes #=> Hash
-    #   resp.resource_server_config.scopes["ResourceServerScope"].detailed_title #=> String
     #   resp.resource_server_config.scopes["ResourceServerScope"].long_description #=> String
+    #   resp.resource_server_config.scopes["ResourceServerScope"].detailed_title #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribeApplicationProvider AWS API Documentation
     #
@@ -1698,11 +1722,11 @@ module Aws::SSOAdmin
     #
     # @return [Types::DescribeInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DescribeInstanceResponse#created_date #created_date} => Time
-    #   * {Types::DescribeInstanceResponse#identity_store_id #identity_store_id} => String
     #   * {Types::DescribeInstanceResponse#instance_arn #instance_arn} => String
-    #   * {Types::DescribeInstanceResponse#name #name} => String
+    #   * {Types::DescribeInstanceResponse#identity_store_id #identity_store_id} => String
     #   * {Types::DescribeInstanceResponse#owner_account_id #owner_account_id} => String
+    #   * {Types::DescribeInstanceResponse#name #name} => String
+    #   * {Types::DescribeInstanceResponse#created_date #created_date} => Time
     #   * {Types::DescribeInstanceResponse#status #status} => String
     #
     # @example Request syntax with placeholder values
@@ -1713,11 +1737,11 @@ module Aws::SSOAdmin
     #
     # @example Response structure
     #
-    #   resp.created_date #=> Time
-    #   resp.identity_store_id #=> String
     #   resp.instance_arn #=> String
-    #   resp.name #=> String
+    #   resp.identity_store_id #=> String
     #   resp.owner_account_id #=> String
+    #   resp.name #=> String
+    #   resp.created_date #=> Time
     #   resp.status #=> String, one of "CREATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "ACTIVE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribeInstance AWS API Documentation
@@ -1743,9 +1767,9 @@ module Aws::SSOAdmin
     #
     # @return [Types::DescribeInstanceAccessControlAttributeConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DescribeInstanceAccessControlAttributeConfigurationResponse#instance_access_control_attribute_configuration #instance_access_control_attribute_configuration} => Types::InstanceAccessControlAttributeConfiguration
     #   * {Types::DescribeInstanceAccessControlAttributeConfigurationResponse#status #status} => String
     #   * {Types::DescribeInstanceAccessControlAttributeConfigurationResponse#status_reason #status_reason} => String
+    #   * {Types::DescribeInstanceAccessControlAttributeConfigurationResponse#instance_access_control_attribute_configuration #instance_access_control_attribute_configuration} => Types::InstanceAccessControlAttributeConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -1755,12 +1779,12 @@ module Aws::SSOAdmin
     #
     # @example Response structure
     #
+    #   resp.status #=> String, one of "ENABLED", "CREATION_IN_PROGRESS", "CREATION_FAILED"
+    #   resp.status_reason #=> String
     #   resp.instance_access_control_attribute_configuration.access_control_attributes #=> Array
     #   resp.instance_access_control_attribute_configuration.access_control_attributes[0].key #=> String
     #   resp.instance_access_control_attribute_configuration.access_control_attributes[0].value.source #=> Array
     #   resp.instance_access_control_attribute_configuration.access_control_attributes[0].value.source[0] #=> String
-    #   resp.status #=> String, one of "ENABLED", "CREATION_IN_PROGRESS", "CREATION_FAILED"
-    #   resp.status_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribeInstanceAccessControlAttributeConfiguration AWS API Documentation
     #
@@ -1796,12 +1820,12 @@ module Aws::SSOAdmin
     #
     # @example Response structure
     #
-    #   resp.permission_set.created_date #=> Time
-    #   resp.permission_set.description #=> String
     #   resp.permission_set.name #=> String
     #   resp.permission_set.permission_set_arn #=> String
-    #   resp.permission_set.relay_state #=> String
+    #   resp.permission_set.description #=> String
+    #   resp.permission_set.created_date #=> Time
     #   resp.permission_set.session_duration #=> String
+    #   resp.permission_set.relay_state #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribePermissionSet AWS API Documentation
     #
@@ -1839,12 +1863,12 @@ module Aws::SSOAdmin
     #
     # @example Response structure
     #
-    #   resp.permission_set_provisioning_status.account_id #=> String
-    #   resp.permission_set_provisioning_status.created_date #=> Time
-    #   resp.permission_set_provisioning_status.failure_reason #=> String
-    #   resp.permission_set_provisioning_status.permission_set_arn #=> String
-    #   resp.permission_set_provisioning_status.request_id #=> String
     #   resp.permission_set_provisioning_status.status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED"
+    #   resp.permission_set_provisioning_status.request_id #=> String
+    #   resp.permission_set_provisioning_status.account_id #=> String
+    #   resp.permission_set_provisioning_status.permission_set_arn #=> String
+    #   resp.permission_set_provisioning_status.failure_reason #=> String
+    #   resp.permission_set_provisioning_status.created_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribePermissionSetProvisioningStatus AWS API Documentation
     #
@@ -1867,10 +1891,10 @@ module Aws::SSOAdmin
     #
     # @return [Types::DescribeTrustedTokenIssuerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DescribeTrustedTokenIssuerResponse#name #name} => String
     #   * {Types::DescribeTrustedTokenIssuerResponse#trusted_token_issuer_arn #trusted_token_issuer_arn} => String
-    #   * {Types::DescribeTrustedTokenIssuerResponse#trusted_token_issuer_configuration #trusted_token_issuer_configuration} => Types::TrustedTokenIssuerConfiguration
+    #   * {Types::DescribeTrustedTokenIssuerResponse#name #name} => String
     #   * {Types::DescribeTrustedTokenIssuerResponse#trusted_token_issuer_type #trusted_token_issuer_type} => String
+    #   * {Types::DescribeTrustedTokenIssuerResponse#trusted_token_issuer_configuration #trusted_token_issuer_configuration} => Types::TrustedTokenIssuerConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -1880,13 +1904,13 @@ module Aws::SSOAdmin
     #
     # @example Response structure
     #
-    #   resp.name #=> String
     #   resp.trusted_token_issuer_arn #=> String
+    #   resp.name #=> String
+    #   resp.trusted_token_issuer_type #=> String, one of "OIDC_JWT"
+    #   resp.trusted_token_issuer_configuration.oidc_jwt_configuration.issuer_url #=> String
     #   resp.trusted_token_issuer_configuration.oidc_jwt_configuration.claim_attribute_path #=> String
     #   resp.trusted_token_issuer_configuration.oidc_jwt_configuration.identity_store_attribute_path #=> String
-    #   resp.trusted_token_issuer_configuration.oidc_jwt_configuration.issuer_url #=> String
     #   resp.trusted_token_issuer_configuration.oidc_jwt_configuration.jwks_retrieval_option #=> String, one of "OPEN_ID_DISCOVERY"
-    #   resp.trusted_token_issuer_type #=> String, one of "OIDC_JWT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribeTrustedTokenIssuer AWS API Documentation
     #
@@ -1900,11 +1924,6 @@ module Aws::SSOAdmin
     # Detaches the specified customer managed policy from the specified
     # PermissionSet.
     #
-    # @option params [required, Types::CustomerManagedPolicyReference] :customer_managed_policy_reference
-    #   Specifies the name and path of a customer managed policy. You must
-    #   have an IAM policy that matches the name and path in each Amazon Web
-    #   Services account where you want to deploy your permission set.
-    #
     # @option params [required, String] :instance_arn
     #   The ARN of the IAM Identity Center instance under which the operation
     #   will be executed.
@@ -1912,17 +1931,22 @@ module Aws::SSOAdmin
     # @option params [required, String] :permission_set_arn
     #   The ARN of the `PermissionSet`.
     #
+    # @option params [required, Types::CustomerManagedPolicyReference] :customer_managed_policy_reference
+    #   Specifies the name and path of a customer managed policy. You must
+    #   have an IAM policy that matches the name and path in each Amazon Web
+    #   Services account where you want to deploy your permission set.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.detach_customer_managed_policy_reference_from_permission_set({
+    #     instance_arn: "InstanceArn", # required
+    #     permission_set_arn: "PermissionSetArn", # required
     #     customer_managed_policy_reference: { # required
     #       name: "ManagedPolicyName", # required
     #       path: "ManagedPolicyPath",
     #     },
-    #     instance_arn: "InstanceArn", # required
-    #     permission_set_arn: "PermissionSetArn", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DetachCustomerManagedPolicyReferenceFromPermissionSet AWS API Documentation
@@ -1944,12 +1968,12 @@ module Aws::SSOAdmin
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #
+    # @option params [required, String] :permission_set_arn
+    #   The ARN of the PermissionSet from which the policy should be detached.
+    #
     # @option params [required, String] :managed_policy_arn
     #   The Amazon Web Services managed policy ARN to be detached from a
     #   permission set.
-    #
-    # @option params [required, String] :permission_set_arn
-    #   The ARN of the PermissionSet from which the policy should be detached.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1957,8 +1981,8 @@ module Aws::SSOAdmin
     #
     #   resp = client.detach_managed_policy_from_permission_set({
     #     instance_arn: "InstanceArn", # required
-    #     managed_policy_arn: "ManagedPolicyArn", # required
     #     permission_set_arn: "PermissionSetArn", # required
+    #     managed_policy_arn: "ManagedPolicyArn", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DetachManagedPolicyFromPermissionSet AWS API Documentation
@@ -1983,8 +2007,8 @@ module Aws::SSOAdmin
     #
     # @return [Types::GetApplicationAccessScopeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetApplicationAccessScopeResponse#authorized_targets #authorized_targets} => Array&lt;String&gt;
     #   * {Types::GetApplicationAccessScopeResponse#scope #scope} => String
+    #   * {Types::GetApplicationAccessScopeResponse#authorized_targets #authorized_targets} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1995,9 +2019,9 @@ module Aws::SSOAdmin
     #
     # @example Response structure
     #
+    #   resp.scope #=> String
     #   resp.authorized_targets #=> Array
     #   resp.authorized_targets[0] #=> String
-    #   resp.scope #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/GetApplicationAccessScope AWS API Documentation
     #
@@ -2097,9 +2121,9 @@ module Aws::SSOAdmin
     #   resp.grant.authorization_code.redirect_uris #=> Array
     #   resp.grant.authorization_code.redirect_uris[0] #=> String
     #   resp.grant.jwt_bearer.authorized_token_issuers #=> Array
+    #   resp.grant.jwt_bearer.authorized_token_issuers[0].trusted_token_issuer_arn #=> String
     #   resp.grant.jwt_bearer.authorized_token_issuers[0].authorized_audiences #=> Array
     #   resp.grant.jwt_bearer.authorized_token_issuers[0].authorized_audiences[0] #=> String
-    #   resp.grant.jwt_bearer.authorized_token_issuers[0].trusted_token_issuer_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/GetApplicationGrant AWS API Documentation
     #
@@ -2184,9 +2208,6 @@ module Aws::SSOAdmin
     # Lists the status of the Amazon Web Services account assignment
     # creation requests for a specified IAM Identity Center instance.
     #
-    # @option params [Types::OperationStatusFilter] :filter
-    #   Filters results based on the passed attribute value.
-    #
     # @option params [required, String] :instance_arn
     #   The ARN of the IAM Identity Center instance under which the operation
     #   will be executed. For more information about ARNs, see [Amazon
@@ -2201,6 +2222,9 @@ module Aws::SSOAdmin
     #   The pagination token for the list API. Initially the value is null.
     #   Use the output of previous API calls to make subsequent calls.
     #
+    # @option params [Types::OperationStatusFilter] :filter
+    #   Filters results based on the passed attribute value.
+    #
     # @return [Types::ListAccountAssignmentCreationStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListAccountAssignmentCreationStatusResponse#account_assignments_creation_status #account_assignments_creation_status} => Array&lt;Types::AccountAssignmentOperationStatusMetadata&gt;
@@ -2211,20 +2235,20 @@ module Aws::SSOAdmin
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_account_assignment_creation_status({
-    #     filter: {
-    #       status: "IN_PROGRESS", # accepts IN_PROGRESS, FAILED, SUCCEEDED
-    #     },
     #     instance_arn: "InstanceArn", # required
     #     max_results: 1,
     #     next_token: "Token",
+    #     filter: {
+    #       status: "IN_PROGRESS", # accepts IN_PROGRESS, FAILED, SUCCEEDED
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.account_assignments_creation_status #=> Array
-    #   resp.account_assignments_creation_status[0].created_date #=> Time
-    #   resp.account_assignments_creation_status[0].request_id #=> String
     #   resp.account_assignments_creation_status[0].status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED"
+    #   resp.account_assignments_creation_status[0].request_id #=> String
+    #   resp.account_assignments_creation_status[0].created_date #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListAccountAssignmentCreationStatus AWS API Documentation
@@ -2239,9 +2263,6 @@ module Aws::SSOAdmin
     # Lists the status of the Amazon Web Services account assignment
     # deletion requests for a specified IAM Identity Center instance.
     #
-    # @option params [Types::OperationStatusFilter] :filter
-    #   Filters results based on the passed attribute value.
-    #
     # @option params [required, String] :instance_arn
     #   The ARN of the IAM Identity Center instance under which the operation
     #   will be executed. For more information about ARNs, see [Amazon
@@ -2256,6 +2277,9 @@ module Aws::SSOAdmin
     #   The pagination token for the list API. Initially the value is null.
     #   Use the output of previous API calls to make subsequent calls.
     #
+    # @option params [Types::OperationStatusFilter] :filter
+    #   Filters results based on the passed attribute value.
+    #
     # @return [Types::ListAccountAssignmentDeletionStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListAccountAssignmentDeletionStatusResponse#account_assignments_deletion_status #account_assignments_deletion_status} => Array&lt;Types::AccountAssignmentOperationStatusMetadata&gt;
@@ -2266,20 +2290,20 @@ module Aws::SSOAdmin
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_account_assignment_deletion_status({
-    #     filter: {
-    #       status: "IN_PROGRESS", # accepts IN_PROGRESS, FAILED, SUCCEEDED
-    #     },
     #     instance_arn: "InstanceArn", # required
     #     max_results: 1,
     #     next_token: "Token",
+    #     filter: {
+    #       status: "IN_PROGRESS", # accepts IN_PROGRESS, FAILED, SUCCEEDED
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.account_assignments_deletion_status #=> Array
-    #   resp.account_assignments_deletion_status[0].created_date #=> Time
-    #   resp.account_assignments_deletion_status[0].request_id #=> String
     #   resp.account_assignments_deletion_status[0].status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED"
+    #   resp.account_assignments_deletion_status[0].request_id #=> String
+    #   resp.account_assignments_deletion_status[0].created_date #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListAccountAssignmentDeletionStatus AWS API Documentation
@@ -2294,10 +2318,6 @@ module Aws::SSOAdmin
     # Lists the assignee of the specified Amazon Web Services account with
     # the specified permission set.
     #
-    # @option params [required, String] :account_id
-    #   The identifier of the Amazon Web Services account from which to list
-    #   the assignments.
-    #
     # @option params [required, String] :instance_arn
     #   The ARN of the IAM Identity Center instance under which the operation
     #   will be executed. For more information about ARNs, see [Amazon
@@ -2305,15 +2325,19 @@ module Aws::SSOAdmin
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #
+    # @option params [required, String] :account_id
+    #   The identifier of the Amazon Web Services account from which to list
+    #   the assignments.
+    #
+    # @option params [required, String] :permission_set_arn
+    #   The ARN of the permission set from which to list assignments.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results to display for the assignment.
     #
     # @option params [String] :next_token
     #   The pagination token for the list API. Initially the value is null.
     #   Use the output of previous API calls to make subsequent calls.
-    #
-    # @option params [required, String] :permission_set_arn
-    #   The ARN of the permission set from which to list assignments.
     #
     # @return [Types::ListAccountAssignmentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2325,11 +2349,11 @@ module Aws::SSOAdmin
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_account_assignments({
-    #     account_id: "TargetId", # required
     #     instance_arn: "InstanceArn", # required
+    #     account_id: "TargetId", # required
+    #     permission_set_arn: "PermissionSetArn", # required
     #     max_results: 1,
     #     next_token: "Token",
-    #     permission_set_arn: "PermissionSetArn", # required
     #   })
     #
     # @example Response structure
@@ -2337,8 +2361,8 @@ module Aws::SSOAdmin
     #   resp.account_assignments #=> Array
     #   resp.account_assignments[0].account_id #=> String
     #   resp.account_assignments[0].permission_set_arn #=> String
-    #   resp.account_assignments[0].principal_id #=> String
     #   resp.account_assignments[0].principal_type #=> String, one of "USER", "GROUP"
+    #   resp.account_assignments[0].principal_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListAccountAssignments AWS API Documentation
@@ -2351,15 +2375,32 @@ module Aws::SSOAdmin
     end
 
     # Retrieves a list of the IAM Identity Center associated Amazon Web
-    # Services accounts that the principal has access to.
+    # Services accounts that the principal has access to. This action must
+    # be called from the management account containing your organization
+    # instance of IAM Identity Center. This action is not valid for account
+    # instances of IAM Identity Center.
+    #
+    # @option params [required, String] :instance_arn
+    #   Specifies the ARN of the instance of IAM Identity Center that contains
+    #   the principal.
+    #
+    # @option params [required, String] :principal_id
+    #   Specifies the principal for which you want to retrieve the list of
+    #   account assignments.
+    #
+    # @option params [required, String] :principal_type
+    #   Specifies the type of the principal.
     #
     # @option params [Types::ListAccountAssignmentsFilter] :filter
     #   Specifies an Amazon Web Services account ID number. Results are
     #   filtered to only those that match this ID number.
     #
-    # @option params [required, String] :instance_arn
-    #   Specifies the ARN of the instance of IAM Identity Center that contains
-    #   the principal.
+    # @option params [String] :next_token
+    #   Specifies that you want to receive the next page of results. Valid
+    #   only if you received a `NextToken` response in the previous request.
+    #   If you did, it indicates that more output is available. Set this
+    #   parameter to the value provided by the previous call's `NextToken`
+    #   response to request the next page of results.
     #
     # @option params [Integer] :max_results
     #   Specifies the total number of results that you want included in each
@@ -2371,20 +2412,6 @@ module Aws::SSOAdmin
     #   there are more results available. You should check `NextToken` after
     #   every operation to ensure that you receive all of the results.
     #
-    # @option params [String] :next_token
-    #   Specifies that you want to receive the next page of results. Valid
-    #   only if you received a `NextToken` response in the previous request.
-    #   If you did, it indicates that more output is available. Set this
-    #   parameter to the value provided by the previous call's `NextToken`
-    #   response to request the next page of results.
-    #
-    # @option params [required, String] :principal_id
-    #   Specifies the principal for which you want to retrieve the list of
-    #   account assignments.
-    #
-    # @option params [required, String] :principal_type
-    #   Specifies the type of the principal.
-    #
     # @return [Types::ListAccountAssignmentsForPrincipalResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListAccountAssignmentsForPrincipalResponse#account_assignments #account_assignments} => Array&lt;Types::AccountAssignmentForPrincipal&gt;
@@ -2395,14 +2422,14 @@ module Aws::SSOAdmin
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_account_assignments_for_principal({
+    #     instance_arn: "InstanceArn", # required
+    #     principal_id: "PrincipalId", # required
+    #     principal_type: "USER", # required, accepts USER, GROUP
     #     filter: {
     #       account_id: "AccountId",
     #     },
-    #     instance_arn: "InstanceArn", # required
-    #     max_results: 1,
     #     next_token: "Token",
-    #     principal_id: "PrincipalId", # required
-    #     principal_type: "USER", # required, accepts USER, GROUP
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -2433,13 +2460,6 @@ module Aws::SSOAdmin
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of results to display for the PermissionSet.
-    #
-    # @option params [String] :next_token
-    #   The pagination token for the list API. Initially the value is null.
-    #   Use the output of previous API calls to make subsequent calls.
-    #
     # @option params [required, String] :permission_set_arn
     #   The ARN of the PermissionSet from which the associated Amazon Web
     #   Services accounts will be listed.
@@ -2447,6 +2467,13 @@ module Aws::SSOAdmin
     # @option params [String] :provisioning_status
     #   The permission set provisioning status for an Amazon Web Services
     #   account.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to display for the PermissionSet.
+    #
+    # @option params [String] :next_token
+    #   The pagination token for the list API. Initially the value is null.
+    #   Use the output of previous API calls to make subsequent calls.
     #
     # @return [Types::ListAccountsForProvisionedPermissionSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2459,10 +2486,10 @@ module Aws::SSOAdmin
     #
     #   resp = client.list_accounts_for_provisioned_permission_set({
     #     instance_arn: "InstanceArn", # required
-    #     max_results: 1,
-    #     next_token: "Token",
     #     permission_set_arn: "PermissionSetArn", # required
     #     provisioning_status: "LATEST_PERMISSION_SET_PROVISIONED", # accepts LATEST_PERMISSION_SET_PROVISIONED, LATEST_PERMISSION_SET_NOT_PROVISIONED
+    #     max_results: 1,
+    #     next_token: "Token",
     #   })
     #
     # @example Response structure
@@ -2505,8 +2532,8 @@ module Aws::SSOAdmin
     #
     # @return [Types::ListApplicationAccessScopesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListApplicationAccessScopesResponse#next_token #next_token} => String
     #   * {Types::ListApplicationAccessScopesResponse#scopes #scopes} => Array&lt;Types::ScopeDetails&gt;
+    #   * {Types::ListApplicationAccessScopesResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -2520,11 +2547,11 @@ module Aws::SSOAdmin
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.scopes #=> Array
+    #   resp.scopes[0].scope #=> String
     #   resp.scopes[0].authorized_targets #=> Array
     #   resp.scopes[0].authorized_targets[0] #=> String
-    #   resp.scopes[0].scope #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListApplicationAccessScopes AWS API Documentation
     #
@@ -2590,15 +2617,36 @@ module Aws::SSOAdmin
       req.send_request(options)
     end
 
-    # Lists the applications to which a specified principal is assigned.
+    # Lists the applications to which a specified principal is assigned. You
+    # must provide a filter when calling this action from a member account
+    # against your organization instance of IAM Identity Center. A filter is
+    # not required when called from the management account against an
+    # organization instance of IAM Identity Center, or from a member account
+    # against an account instance of IAM Identity Center in the same
+    # account.
+    #
+    # @option params [required, String] :instance_arn
+    #   Specifies the instance of IAM Identity Center that contains principal
+    #   and applications.
+    #
+    # @option params [required, String] :principal_id
+    #   Specifies the unique identifier of the principal for which you want to
+    #   retrieve its assignments.
+    #
+    # @option params [required, String] :principal_type
+    #   Specifies the type of the principal for which you want to retrieve its
+    #   assignments.
     #
     # @option params [Types::ListApplicationAssignmentsFilter] :filter
     #   Filters the output to include only assignments associated with the
     #   application that has the specified ARN.
     #
-    # @option params [required, String] :instance_arn
-    #   Specifies the instance of IAM Identity Center that contains principal
-    #   and applications.
+    # @option params [String] :next_token
+    #   Specifies that you want to receive the next page of results. Valid
+    #   only if you received a `NextToken` response in the previous request.
+    #   If you did, it indicates that more output is available. Set this
+    #   parameter to the value provided by the previous call's `NextToken`
+    #   response to request the next page of results.
     #
     # @option params [Integer] :max_results
     #   Specifies the total number of results that you want included in each
@@ -2610,21 +2658,6 @@ module Aws::SSOAdmin
     #   there are more results available. You should check `NextToken` after
     #   every operation to ensure that you receive all of the results.
     #
-    # @option params [String] :next_token
-    #   Specifies that you want to receive the next page of results. Valid
-    #   only if you received a `NextToken` response in the previous request.
-    #   If you did, it indicates that more output is available. Set this
-    #   parameter to the value provided by the previous call's `NextToken`
-    #   response to request the next page of results.
-    #
-    # @option params [required, String] :principal_id
-    #   Specifies the unique identifier of the principal for which you want to
-    #   retrieve its assignments.
-    #
-    # @option params [required, String] :principal_type
-    #   Specifies the type of the principal for which you want to retrieve its
-    #   assignments.
-    #
     # @return [Types::ListApplicationAssignmentsForPrincipalResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListApplicationAssignmentsForPrincipalResponse#application_assignments #application_assignments} => Array&lt;Types::ApplicationAssignmentForPrincipal&gt;
@@ -2635,14 +2668,14 @@ module Aws::SSOAdmin
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_application_assignments_for_principal({
+    #     instance_arn: "InstanceArn", # required
+    #     principal_id: "PrincipalId", # required
+    #     principal_type: "USER", # required, accepts USER, GROUP
     #     filter: {
     #       application_arn: "ApplicationArn",
     #     },
-    #     instance_arn: "InstanceArn", # required
-    #     max_results: 1,
     #     next_token: "Token",
-    #     principal_id: "PrincipalId", # required
-    #     principal_type: "USER", # required, accepts USER, GROUP
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -2734,13 +2767,13 @@ module Aws::SSOAdmin
     # @example Response structure
     #
     #   resp.grants #=> Array
+    #   resp.grants[0].grant_type #=> String, one of "authorization_code", "refresh_token", "urn:ietf:params:oauth:grant-type:jwt-bearer", "urn:ietf:params:oauth:grant-type:token-exchange"
     #   resp.grants[0].grant.authorization_code.redirect_uris #=> Array
     #   resp.grants[0].grant.authorization_code.redirect_uris[0] #=> String
     #   resp.grants[0].grant.jwt_bearer.authorized_token_issuers #=> Array
+    #   resp.grants[0].grant.jwt_bearer.authorized_token_issuers[0].trusted_token_issuer_arn #=> String
     #   resp.grants[0].grant.jwt_bearer.authorized_token_issuers[0].authorized_audiences #=> Array
     #   resp.grants[0].grant.jwt_bearer.authorized_token_issuers[0].authorized_audiences[0] #=> String
-    #   resp.grants[0].grant.jwt_bearer.authorized_token_issuers[0].trusted_token_issuer_arn #=> String
-    #   resp.grants[0].grant_type #=> String, one of "authorization_code", "refresh_token", "urn:ietf:params:oauth:grant-type:jwt-bearer", "urn:ietf:params:oauth:grant-type:token-exchange"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListApplicationGrants AWS API Documentation
@@ -2790,13 +2823,13 @@ module Aws::SSOAdmin
     #
     #   resp.application_providers #=> Array
     #   resp.application_providers[0].application_provider_arn #=> String
-    #   resp.application_providers[0].display_data.description #=> String
+    #   resp.application_providers[0].federation_protocol #=> String, one of "SAML", "OAUTH"
     #   resp.application_providers[0].display_data.display_name #=> String
     #   resp.application_providers[0].display_data.icon_url #=> String
-    #   resp.application_providers[0].federation_protocol #=> String, one of "SAML", "OAUTH"
+    #   resp.application_providers[0].display_data.description #=> String
     #   resp.application_providers[0].resource_server_config.scopes #=> Hash
-    #   resp.application_providers[0].resource_server_config.scopes["ResourceServerScope"].detailed_title #=> String
     #   resp.application_providers[0].resource_server_config.scopes["ResourceServerScope"].long_description #=> String
+    #   resp.application_providers[0].resource_server_config.scopes["ResourceServerScope"].detailed_title #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListApplicationProviders AWS API Documentation
@@ -2809,12 +2842,11 @@ module Aws::SSOAdmin
     end
 
     # Lists all applications associated with the instance of IAM Identity
-    # Center. When listing applications for an instance in the management
-    # account, member accounts must use the `applicationAccount` parameter
-    # to filter the list to only applications created from that account.
-    #
-    # @option params [Types::ListApplicationsFilter] :filter
-    #   Filters response results.
+    # Center. When listing applications for an organization instance in the
+    # management account, member accounts must use the `applicationAccount`
+    # parameter to filter the list to only applications created from that
+    # account. When listing applications for an account instance in the same
+    # member account, a filter is not required.
     #
     # @option params [required, String] :instance_arn
     #   The ARN of the IAM Identity Center application under which the
@@ -2840,6 +2872,9 @@ module Aws::SSOAdmin
     #   parameter to the value provided by the previous call's `NextToken`
     #   response to request the next page of results.
     #
+    # @option params [Types::ListApplicationsFilter] :filter
+    #   Filters response results.
+    #
     # @return [Types::ListApplicationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListApplicationsResponse#applications #applications} => Array&lt;Types::Application&gt;
@@ -2850,29 +2885,29 @@ module Aws::SSOAdmin
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_applications({
+    #     instance_arn: "InstanceArn", # required
+    #     max_results: 1,
+    #     next_token: "Token",
     #     filter: {
     #       application_account: "AccountId",
     #       application_provider: "ApplicationProviderArn",
     #     },
-    #     instance_arn: "InstanceArn", # required
-    #     max_results: 1,
-    #     next_token: "Token",
     #   })
     #
     # @example Response structure
     #
     #   resp.applications #=> Array
-    #   resp.applications[0].application_account #=> String
     #   resp.applications[0].application_arn #=> String
     #   resp.applications[0].application_provider_arn #=> String
-    #   resp.applications[0].created_date #=> Time
-    #   resp.applications[0].description #=> String
-    #   resp.applications[0].instance_arn #=> String
     #   resp.applications[0].name #=> String
-    #   resp.applications[0].portal_options.sign_in_options.application_url #=> String
-    #   resp.applications[0].portal_options.sign_in_options.origin #=> String, one of "IDENTITY_CENTER", "APPLICATION"
-    #   resp.applications[0].portal_options.visibility #=> String, one of "ENABLED", "DISABLED"
+    #   resp.applications[0].application_account #=> String
+    #   resp.applications[0].instance_arn #=> String
     #   resp.applications[0].status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.applications[0].portal_options.sign_in_options.origin #=> String, one of "IDENTITY_CENTER", "APPLICATION"
+    #   resp.applications[0].portal_options.sign_in_options.application_url #=> String
+    #   resp.applications[0].portal_options.visibility #=> String, one of "ENABLED", "DISABLED"
+    #   resp.applications[0].description #=> String
+    #   resp.applications[0].created_date #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListApplications AWS API Documentation
@@ -2891,15 +2926,15 @@ module Aws::SSOAdmin
     #   The ARN of the IAM Identity Center instance under which the operation
     #   will be executed.
     #
+    # @option params [required, String] :permission_set_arn
+    #   The ARN of the `PermissionSet`.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results to display for the list call.
     #
     # @option params [String] :next_token
     #   The pagination token for the list API. Initially the value is null.
     #   Use the output of previous API calls to make subsequent calls.
-    #
-    # @option params [required, String] :permission_set_arn
-    #   The ARN of the `PermissionSet`.
     #
     # @return [Types::ListCustomerManagedPolicyReferencesInPermissionSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2912,9 +2947,9 @@ module Aws::SSOAdmin
     #
     #   resp = client.list_customer_managed_policy_references_in_permission_set({
     #     instance_arn: "InstanceArn", # required
+    #     permission_set_arn: "PermissionSetArn", # required
     #     max_results: 1,
     #     next_token: "Token",
-    #     permission_set_arn: "PermissionSetArn", # required
     #   })
     #
     # @example Response structure
@@ -2961,11 +2996,11 @@ module Aws::SSOAdmin
     # @example Response structure
     #
     #   resp.instances #=> Array
-    #   resp.instances[0].created_date #=> Time
-    #   resp.instances[0].identity_store_id #=> String
     #   resp.instances[0].instance_arn #=> String
-    #   resp.instances[0].name #=> String
+    #   resp.instances[0].identity_store_id #=> String
     #   resp.instances[0].owner_account_id #=> String
+    #   resp.instances[0].name #=> String
+    #   resp.instances[0].created_date #=> Time
     #   resp.instances[0].status #=> String, one of "CREATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "ACTIVE"
     #   resp.next_token #=> String
     #
@@ -2988,15 +3023,15 @@ module Aws::SSOAdmin
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #
+    # @option params [required, String] :permission_set_arn
+    #   The ARN of the PermissionSet whose managed policies will be listed.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results to display for the PermissionSet.
     #
     # @option params [String] :next_token
     #   The pagination token for the list API. Initially the value is null.
     #   Use the output of previous API calls to make subsequent calls.
-    #
-    # @option params [required, String] :permission_set_arn
-    #   The ARN of the PermissionSet whose managed policies will be listed.
     #
     # @return [Types::ListManagedPoliciesInPermissionSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3009,16 +3044,16 @@ module Aws::SSOAdmin
     #
     #   resp = client.list_managed_policies_in_permission_set({
     #     instance_arn: "InstanceArn", # required
+    #     permission_set_arn: "PermissionSetArn", # required
     #     max_results: 1,
     #     next_token: "Token",
-    #     permission_set_arn: "PermissionSetArn", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.attached_managed_policies #=> Array
-    #   resp.attached_managed_policies[0].arn #=> String
     #   resp.attached_managed_policies[0].name #=> String
+    #   resp.attached_managed_policies[0].arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListManagedPoliciesInPermissionSet AWS API Documentation
@@ -3032,9 +3067,6 @@ module Aws::SSOAdmin
 
     # Lists the status of the permission set provisioning requests for a
     # specified IAM Identity Center instance.
-    #
-    # @option params [Types::OperationStatusFilter] :filter
-    #   Filters results based on the passed attribute value.
     #
     # @option params [required, String] :instance_arn
     #   The ARN of the IAM Identity Center instance under which the operation
@@ -3050,31 +3082,34 @@ module Aws::SSOAdmin
     #   The pagination token for the list API. Initially the value is null.
     #   Use the output of previous API calls to make subsequent calls.
     #
+    # @option params [Types::OperationStatusFilter] :filter
+    #   Filters results based on the passed attribute value.
+    #
     # @return [Types::ListPermissionSetProvisioningStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListPermissionSetProvisioningStatusResponse#next_token #next_token} => String
     #   * {Types::ListPermissionSetProvisioningStatusResponse#permission_sets_provisioning_status #permission_sets_provisioning_status} => Array&lt;Types::PermissionSetProvisioningStatusMetadata&gt;
+    #   * {Types::ListPermissionSetProvisioningStatusResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_permission_set_provisioning_status({
-    #     filter: {
-    #       status: "IN_PROGRESS", # accepts IN_PROGRESS, FAILED, SUCCEEDED
-    #     },
     #     instance_arn: "InstanceArn", # required
     #     max_results: 1,
     #     next_token: "Token",
+    #     filter: {
+    #       status: "IN_PROGRESS", # accepts IN_PROGRESS, FAILED, SUCCEEDED
+    #     },
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.permission_sets_provisioning_status #=> Array
-    #   resp.permission_sets_provisioning_status[0].created_date #=> Time
-    #   resp.permission_sets_provisioning_status[0].request_id #=> String
     #   resp.permission_sets_provisioning_status[0].status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED"
+    #   resp.permission_sets_provisioning_status[0].request_id #=> String
+    #   resp.permission_sets_provisioning_status[0].created_date #=> Time
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListPermissionSetProvisioningStatus AWS API Documentation
     #
@@ -3094,17 +3129,17 @@ module Aws::SSOAdmin
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of results to display for the assignment.
-    #
     # @option params [String] :next_token
     #   The pagination token for the list API. Initially the value is null.
     #   Use the output of previous API calls to make subsequent calls.
     #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to display for the assignment.
+    #
     # @return [Types::ListPermissionSetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListPermissionSetsResponse#next_token #next_token} => String
     #   * {Types::ListPermissionSetsResponse#permission_sets #permission_sets} => Array&lt;String&gt;
+    #   * {Types::ListPermissionSetsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -3112,15 +3147,15 @@ module Aws::SSOAdmin
     #
     #   resp = client.list_permission_sets({
     #     instance_arn: "InstanceArn", # required
-    #     max_results: 1,
     #     next_token: "Token",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.permission_sets #=> Array
     #   resp.permission_sets[0] #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListPermissionSets AWS API Documentation
     #
@@ -3134,10 +3169,6 @@ module Aws::SSOAdmin
     # Lists all the permission sets that are provisioned to a specified
     # Amazon Web Services account.
     #
-    # @option params [required, String] :account_id
-    #   The identifier of the Amazon Web Services account from which to list
-    #   the assignments.
-    #
     # @option params [required, String] :instance_arn
     #   The ARN of the IAM Identity Center instance under which the operation
     #   will be executed. For more information about ARNs, see [Amazon
@@ -3145,15 +3176,19 @@ module Aws::SSOAdmin
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #
+    # @option params [required, String] :account_id
+    #   The identifier of the Amazon Web Services account from which to list
+    #   the assignments.
+    #
+    # @option params [String] :provisioning_status
+    #   The status object for the permission set provisioning operation.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results to display for the assignment.
     #
     # @option params [String] :next_token
     #   The pagination token for the list API. Initially the value is null.
     #   Use the output of previous API calls to make subsequent calls.
-    #
-    # @option params [String] :provisioning_status
-    #   The status object for the permission set provisioning operation.
     #
     # @return [Types::ListPermissionSetsProvisionedToAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3165,11 +3200,11 @@ module Aws::SSOAdmin
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_permission_sets_provisioned_to_account({
-    #     account_id: "AccountId", # required
     #     instance_arn: "InstanceArn", # required
+    #     account_id: "AccountId", # required
+    #     provisioning_status: "LATEST_PERMISSION_SET_PROVISIONED", # accepts LATEST_PERMISSION_SET_PROVISIONED, LATEST_PERMISSION_SET_NOT_PROVISIONED
     #     max_results: 1,
     #     next_token: "Token",
-    #     provisioning_status: "LATEST_PERMISSION_SET_PROVISIONED", # accepts LATEST_PERMISSION_SET_PROVISIONED, LATEST_PERMISSION_SET_NOT_PROVISIONED
     #   })
     #
     # @example Response structure
@@ -3196,17 +3231,17 @@ module Aws::SSOAdmin
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource with the tags to be listed.
+    #
     # @option params [String] :next_token
     #   The pagination token for the list API. Initially the value is null.
     #   Use the output of previous API calls to make subsequent calls.
     #
-    # @option params [required, String] :resource_arn
-    #   The ARN of the resource with the tags to be listed.
-    #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListTagsForResourceResponse#next_token #next_token} => String
     #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::ListTagsForResourceResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -3214,16 +3249,16 @@ module Aws::SSOAdmin
     #
     #   resp = client.list_tags_for_resource({
     #     instance_arn: "InstanceArn",
-    #     next_token: "Token",
     #     resource_arn: "TaggableResourceArn", # required
+    #     next_token: "Token",
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListTagsForResource AWS API Documentation
     #
@@ -3260,8 +3295,8 @@ module Aws::SSOAdmin
     #
     # @return [Types::ListTrustedTokenIssuersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListTrustedTokenIssuersResponse#next_token #next_token} => String
     #   * {Types::ListTrustedTokenIssuersResponse#trusted_token_issuers #trusted_token_issuers} => Array&lt;Types::TrustedTokenIssuerMetadata&gt;
+    #   * {Types::ListTrustedTokenIssuersResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -3275,11 +3310,11 @@ module Aws::SSOAdmin
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.trusted_token_issuers #=> Array
-    #   resp.trusted_token_issuers[0].name #=> String
     #   resp.trusted_token_issuers[0].trusted_token_issuer_arn #=> String
+    #   resp.trusted_token_issuers[0].name #=> String
     #   resp.trusted_token_issuers[0].trusted_token_issuer_type #=> String, one of "OIDC_JWT"
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListTrustedTokenIssuers AWS API Documentation
     #
@@ -3325,12 +3360,12 @@ module Aws::SSOAdmin
     #
     # @example Response structure
     #
-    #   resp.permission_set_provisioning_status.account_id #=> String
-    #   resp.permission_set_provisioning_status.created_date #=> Time
-    #   resp.permission_set_provisioning_status.failure_reason #=> String
-    #   resp.permission_set_provisioning_status.permission_set_arn #=> String
-    #   resp.permission_set_provisioning_status.request_id #=> String
     #   resp.permission_set_provisioning_status.status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED"
+    #   resp.permission_set_provisioning_status.request_id #=> String
+    #   resp.permission_set_provisioning_status.account_id #=> String
+    #   resp.permission_set_provisioning_status.permission_set_arn #=> String
+    #   resp.permission_set_provisioning_status.failure_reason #=> String
+    #   resp.permission_set_provisioning_status.created_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ProvisionPermissionSet AWS API Documentation
     #
@@ -3344,26 +3379,26 @@ module Aws::SSOAdmin
     # Adds or updates the list of authorized targets for an IAM Identity
     # Center access scope for an application.
     #
-    # @option params [required, String] :application_arn
-    #   Specifies the ARN of the application with the access scope with the
-    #   targets to add or update.
+    # @option params [required, String] :scope
+    #   Specifies the name of the access scope to be associated with the
+    #   specified targets.
     #
     # @option params [Array<String>] :authorized_targets
     #   Specifies an array list of ARNs that represent the authorized targets
     #   for this access scope.
     #
-    # @option params [required, String] :scope
-    #   Specifies the name of the access scope to be associated with the
-    #   specified targets.
+    # @option params [required, String] :application_arn
+    #   Specifies the ARN of the application with the access scope with the
+    #   targets to add or update.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_application_access_scope({
-    #     application_arn: "ApplicationArn", # required
-    #     authorized_targets: ["ScopeTarget"],
     #     scope: "Scope", # required
+    #     authorized_targets: ["ScopeTarget"],
+    #     application_arn: "ApplicationArn", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/PutApplicationAccessScope AWS API Documentation
@@ -3427,14 +3462,14 @@ module Aws::SSOAdmin
     #   Specifies the ARN of the application with the authentication method to
     #   add or update.
     #
+    # @option params [required, String] :authentication_method_type
+    #   Specifies the type of the authentication method that you want to add
+    #   or update.
+    #
     # @option params [required, Types::AuthenticationMethod] :authentication_method
     #   Specifies a structure that describes the authentication method to add
     #   or update. The structure type you provide is determined by the
     #   `AuthenticationMethodType` parameter.
-    #
-    # @option params [required, String] :authentication_method_type
-    #   Specifies the type of the authentication method that you want to add
-    #   or update.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3442,13 +3477,13 @@ module Aws::SSOAdmin
     #
     #   resp = client.put_application_authentication_method({
     #     application_arn: "ApplicationArn", # required
+    #     authentication_method_type: "IAM", # required, accepts IAM
     #     authentication_method: { # required
     #       iam: {
     #         actor_policy: { # required
     #         },
     #       },
     #     },
-    #     authentication_method_type: "IAM", # required, accepts IAM
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/PutApplicationAuthenticationMethod AWS API Documentation
@@ -3460,16 +3495,71 @@ module Aws::SSOAdmin
       req.send_request(options)
     end
 
-    # Adds a grant to an application.
+    # Creates a configuration for an application to use grants. Conceptually
+    # grants are authorization to request actions related to tokens. This
+    # configuration will be used when parties are requesting and receiving
+    # tokens during the trusted identity propagation process. For more
+    # information on the IAM Identity Center supported grant workflows, see
+    # [SAML 2.0 and OAuth 2.0][1].
+    #
+    # A grant is created between your applications and Identity Center
+    # instance which enables an application to use specified mechanisms to
+    # obtain tokens. These tokens are used by your applications to gain
+    # access to Amazon Web Services resources on behalf of users. The
+    # following elements are within these exchanges:
+    #
+    # * **Requester** - The application requesting access to Amazon Web
+    #   Services resources.
+    #
+    # * **Subject** - Typically the user that is requesting access to Amazon
+    #   Web Services resources.
+    #
+    # * **Grant** - Conceptually, a grant is authorization to access Amazon
+    #   Web Services resources. These grants authorize token generation for
+    #   authenticating access to the requester and for the request to make
+    #   requests on behalf of the subjects. There are four types of grants:
+    #
+    #   * **AuthorizationCode** - Allows an application to request
+    #     authorization through a series of user-agent redirects.
+    #
+    #   * <b>JWT bearer </b> - Authorizes an application to exchange a JSON
+    #     Web Token that came from an external identity provider. To learn
+    #     more, see [RFC 6479][2].
+    #
+    #   * **Refresh token** - Enables application to request new access
+    #     tokens to replace expiring or expired access tokens.
+    #
+    #   * **Exchange token** - A grant that requests tokens from the
+    #     authorization server by providing a ‘subject’ token with access
+    #     scope authorizing trusted identity propagation to this
+    #     application. To learn more, see [RFC 8693][3].
+    # * **Authorization server** - IAM Identity Center requests tokens.
+    #
+    # User credentials are never shared directly within these exchanges.
+    # Instead, applications use grants to request access tokens from IAM
+    # Identity Center. For more information, see [RFC 6479][2].
+    #
+    # **Use cases**
+    #
+    # * Connecting to custom applications.
+    #
+    # * Configuring an Amazon Web Services service to make calls to another
+    #   Amazon Web Services services using JWT tokens.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/singlesignon/latest/userguide/customermanagedapps-saml2-oauth2.html
+    # [2]: https://datatracker.ietf.org/doc/html/rfc6749
+    # [3]: https://datatracker.ietf.org/doc/html/rfc8693
     #
     # @option params [required, String] :application_arn
     #   Specifies the ARN of the application to update.
     #
-    # @option params [required, Types::Grant] :grant
-    #   Specifies a structure that describes the grant to update.
-    #
     # @option params [required, String] :grant_type
     #   Specifies the type of grant to update.
+    #
+    # @option params [required, Types::Grant] :grant
+    #   Specifies a structure that describes the grant to update.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3477,6 +3567,7 @@ module Aws::SSOAdmin
     #
     #   resp = client.put_application_grant({
     #     application_arn: "ApplicationArn", # required
+    #     grant_type: "authorization_code", # required, accepts authorization_code, refresh_token, urn:ietf:params:oauth:grant-type:jwt-bearer, urn:ietf:params:oauth:grant-type:token-exchange
     #     grant: { # required
     #       authorization_code: {
     #         redirect_uris: ["URI"],
@@ -3484,8 +3575,8 @@ module Aws::SSOAdmin
     #       jwt_bearer: {
     #         authorized_token_issuers: [
     #           {
-    #             authorized_audiences: ["TokenIssuerAudience"],
     #             trusted_token_issuer_arn: "TrustedTokenIssuerArn",
+    #             authorized_audiences: ["TokenIssuerAudience"],
     #           },
     #         ],
     #       },
@@ -3494,7 +3585,6 @@ module Aws::SSOAdmin
     #       token_exchange: {
     #       },
     #     },
-    #     grant_type: "authorization_code", # required, accepts authorization_code, refresh_token, urn:ietf:params:oauth:grant-type:jwt-bearer, urn:ietf:params:oauth:grant-type:token-exchange
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/PutApplicationGrant AWS API Documentation
@@ -3515,9 +3605,6 @@ module Aws::SSOAdmin
     #
     #  </note>
     #
-    # @option params [required, String] :inline_policy
-    #   The inline policy to attach to a PermissionSet.
-    #
     # @option params [required, String] :instance_arn
     #   The ARN of the IAM Identity Center instance under which the operation
     #   will be executed. For more information about ARNs, see [Amazon
@@ -3528,14 +3615,17 @@ module Aws::SSOAdmin
     # @option params [required, String] :permission_set_arn
     #   The ARN of the permission set.
     #
+    # @option params [required, String] :inline_policy
+    #   The inline policy to attach to a PermissionSet.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_inline_policy_to_permission_set({
-    #     inline_policy: "PermissionSetPolicyDocument", # required
     #     instance_arn: "InstanceArn", # required
     #     permission_set_arn: "PermissionSetArn", # required
+    #     inline_policy: "PermissionSetPolicyDocument", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/PutInlinePolicyToPermissionSet AWS API Documentation
@@ -3666,18 +3756,18 @@ module Aws::SSOAdmin
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #
+    # @option params [String] :name
+    #   Specifies the updated name for the application.
+    #
     # @option params [String] :description
     #   The description of the .
     #
-    # @option params [String] :name
-    #   Specifies the updated name for the application.
+    # @option params [String] :status
+    #   Specifies whether the application is enabled or disabled.
     #
     # @option params [Types::UpdateApplicationPortalOptions] :portal_options
     #   A structure that describes the options for the portal associated with
     #   an application.
-    #
-    # @option params [String] :status
-    #   Specifies whether the application is enabled or disabled.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3685,15 +3775,15 @@ module Aws::SSOAdmin
     #
     #   resp = client.update_application({
     #     application_arn: "ApplicationArn", # required
+    #     name: "ApplicationNameType",
     #     description: "Description",
-    #     name: "NameType",
+    #     status: "ENABLED", # accepts ENABLED, DISABLED
     #     portal_options: {
     #       sign_in_options: {
-    #         application_url: "ApplicationUrl",
     #         origin: "IDENTITY_CENTER", # required, accepts IDENTITY_CENTER, APPLICATION
+    #         application_url: "ApplicationUrl",
     #       },
     #     },
-    #     status: "ENABLED", # accepts ENABLED, DISABLED
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/UpdateApplication AWS API Documentation
@@ -3708,6 +3798,9 @@ module Aws::SSOAdmin
     # Update the details for the instance of IAM Identity Center that is
     # owned by the Amazon Web Services account.
     #
+    # @option params [required, String] :name
+    #   Updates the instance name.
+    #
     # @option params [required, String] :instance_arn
     #   The ARN of the instance of IAM Identity Center under which the
     #   operation will run. For more information about ARNs, see [Amazon
@@ -3715,16 +3808,13 @@ module Aws::SSOAdmin
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
     #   *Amazon Web Services General Reference*.
     #
-    # @option params [required, String] :name
-    #   Updates the instance name.
-    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_instance({
-    #     instance_arn: "InstanceArn", # required
     #     name: "NameType", # required
+    #     instance_arn: "InstanceArn", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/UpdateInstance AWS API Documentation
@@ -3748,18 +3838,19 @@ module Aws::SSOAdmin
     # Control](/singlesignon/latest/userguide/abac.html) in the *IAM
     # Identity Center User Guide*.
     #
-    # @option params [required, Types::InstanceAccessControlAttributeConfiguration] :instance_access_control_attribute_configuration
-    #   Updates the attributes for your ABAC configuration.
-    #
     # @option params [required, String] :instance_arn
     #   The ARN of the IAM Identity Center instance under which the operation
     #   will be executed.
+    #
+    # @option params [required, Types::InstanceAccessControlAttributeConfiguration] :instance_access_control_attribute_configuration
+    #   Updates the attributes for your ABAC configuration.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_instance_access_control_attribute_configuration({
+    #     instance_arn: "InstanceArn", # required
     #     instance_access_control_attribute_configuration: { # required
     #       access_control_attributes: [ # required
     #         {
@@ -3770,7 +3861,6 @@ module Aws::SSOAdmin
     #         },
     #       ],
     #     },
-    #     instance_arn: "InstanceArn", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/UpdateInstanceAccessControlAttributeConfiguration AWS API Documentation
@@ -3784,9 +3874,6 @@ module Aws::SSOAdmin
 
     # Updates an existing permission set.
     #
-    # @option params [String] :description
-    #   The description of the PermissionSet.
-    #
     # @option params [required, String] :instance_arn
     #   The ARN of the IAM Identity Center instance under which the operation
     #   will be executed. For more information about ARNs, see [Amazon
@@ -3797,24 +3884,27 @@ module Aws::SSOAdmin
     # @option params [required, String] :permission_set_arn
     #   The ARN of the permission set.
     #
-    # @option params [String] :relay_state
-    #   Used to redirect users within the application during the federation
-    #   authentication process.
+    # @option params [String] :description
+    #   The description of the PermissionSet.
     #
     # @option params [String] :session_duration
     #   The length of time that the application user sessions are valid for in
     #   the ISO-8601 standard.
+    #
+    # @option params [String] :relay_state
+    #   Used to redirect users within the application during the federation
+    #   authentication process.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_permission_set({
-    #     description: "PermissionSetDescription",
     #     instance_arn: "InstanceArn", # required
     #     permission_set_arn: "PermissionSetArn", # required
-    #     relay_state: "RelayState",
+    #     description: "PermissionSetDescription",
     #     session_duration: "Duration",
+    #     relay_state: "RelayState",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/UpdatePermissionSet AWS API Documentation
@@ -3836,13 +3926,13 @@ module Aws::SSOAdmin
     #
     #  </note>
     #
-    # @option params [String] :name
-    #   Specifies the updated name to be applied to the trusted token issuer
-    #   configuration.
-    #
     # @option params [required, String] :trusted_token_issuer_arn
     #   Specifies the ARN of the trusted token issuer configuration that you
     #   want to update.
+    #
+    # @option params [String] :name
+    #   Specifies the updated name to be applied to the trusted token issuer
+    #   configuration.
     #
     # @option params [Types::TrustedTokenIssuerUpdateConfiguration] :trusted_token_issuer_configuration
     #   Specifies a structure with settings to apply to the specified trusted
@@ -3854,8 +3944,8 @@ module Aws::SSOAdmin
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_trusted_token_issuer({
-    #     name: "TrustedTokenIssuerName",
     #     trusted_token_issuer_arn: "TrustedTokenIssuerArn", # required
+    #     name: "TrustedTokenIssuerName",
     #     trusted_token_issuer_configuration: {
     #       oidc_jwt_configuration: {
     #         claim_attribute_path: "ClaimAttributePath",
@@ -3892,7 +3982,7 @@ module Aws::SSOAdmin
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ssoadmin'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

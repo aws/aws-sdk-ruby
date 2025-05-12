@@ -14481,6 +14481,11 @@ module Aws::DataZone
     #   Specifies whether to override project owners.
     #   @return [Types::OverrideProjectOwnersPolicyGrantDetail]
     #
+    # @!attribute [rw] use_asset_type
+    #   Specifies the domain unit(s) whose projects can use this asset type
+    #   while creating asset or asset revisions.
+    #   @return [Types::UseAssetTypePolicyGrantDetail]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/PolicyGrantDetail AWS API Documentation
     #
     class PolicyGrantDetail < Struct.new(
@@ -14497,6 +14502,7 @@ module Aws::DataZone
       :delegate_create_environment_profile,
       :override_domain_unit_owners,
       :override_project_owners,
+      :use_asset_type,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -14515,6 +14521,7 @@ module Aws::DataZone
       class DelegateCreateEnvironmentProfile < PolicyGrantDetail; end
       class OverrideDomainUnitOwners < PolicyGrantDetail; end
       class OverrideProjectOwners < PolicyGrantDetail; end
+      class UseAssetType < PolicyGrantDetail; end
       class Unknown < PolicyGrantDetail; end
     end
 
@@ -20116,7 +20123,8 @@ module Aws::DataZone
     #
     # @!attribute [rw] authorized_principals
     #   The authorized principals to be updated as part of the
-    #   `UpdateSubscriptionTarget` action.
+    #   `UpdateSubscriptionTarget` action. Updates are supported in batches
+    #   of 5 at a time.
     #   @return [Array<String>]
     #
     # @!attribute [rw] created_at
@@ -20258,6 +20266,21 @@ module Aws::DataZone
       :id,
       :status,
       :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the domain unit(s) whose projects can use this asset type
+    # while creating asset or asset revisions.
+    #
+    # @!attribute [rw] domain_unit_id
+    #   The ID of the domain unit.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UseAssetTypePolicyGrantDetail AWS API Documentation
+    #
+    class UseAssetTypePolicyGrantDetail < Struct.new(
+      :domain_unit_id)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -963,7 +963,7 @@ module Aws::QConnect
     ConversationState.add_member(:reason, Shapes::ShapeRef.new(shape: ConversationStatusReason, location_name: "reason"))
     ConversationState.struct_class = Types::ConversationState
 
-    CreateAIAgentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAIAgentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAIAgentRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
     CreateAIAgentRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateAIAgentRequest.add_member(:type, Shapes::ShapeRef.new(shape: AIAgentType, required: true, location_name: "type"))
@@ -979,14 +979,14 @@ module Aws::QConnect
     CreateAIAgentVersionRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
     CreateAIAgentVersionRequest.add_member(:ai_agent_id, Shapes::ShapeRef.new(shape: UuidOrArnOrEitherWithQualifier, required: true, location: "uri", location_name: "aiAgentId"))
     CreateAIAgentVersionRequest.add_member(:modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "modifiedTime"))
-    CreateAIAgentVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAIAgentVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAIAgentVersionRequest.struct_class = Types::CreateAIAgentVersionRequest
 
     CreateAIAgentVersionResponse.add_member(:ai_agent, Shapes::ShapeRef.new(shape: AIAgentData, location_name: "aiAgent"))
     CreateAIAgentVersionResponse.add_member(:version_number, Shapes::ShapeRef.new(shape: Version, location_name: "versionNumber"))
     CreateAIAgentVersionResponse.struct_class = Types::CreateAIAgentVersionResponse
 
-    CreateAIGuardrailRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAIGuardrailRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAIGuardrailRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
     CreateAIGuardrailRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateAIGuardrailRequest.add_member(:blocked_input_messaging, Shapes::ShapeRef.new(shape: AIGuardrailBlockedMessaging, required: true, location_name: "blockedInputMessaging"))
@@ -1007,14 +1007,14 @@ module Aws::QConnect
     CreateAIGuardrailVersionRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
     CreateAIGuardrailVersionRequest.add_member(:ai_guardrail_id, Shapes::ShapeRef.new(shape: UuidOrArnOrEitherWithQualifier, required: true, location: "uri", location_name: "aiGuardrailId"))
     CreateAIGuardrailVersionRequest.add_member(:modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "modifiedTime"))
-    CreateAIGuardrailVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAIGuardrailVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAIGuardrailVersionRequest.struct_class = Types::CreateAIGuardrailVersionRequest
 
     CreateAIGuardrailVersionResponse.add_member(:ai_guardrail, Shapes::ShapeRef.new(shape: AIGuardrailData, location_name: "aiGuardrail"))
     CreateAIGuardrailVersionResponse.add_member(:version_number, Shapes::ShapeRef.new(shape: Version, location_name: "versionNumber"))
     CreateAIGuardrailVersionResponse.struct_class = Types::CreateAIGuardrailVersionResponse
 
-    CreateAIPromptRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAIPromptRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAIPromptRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
     CreateAIPromptRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateAIPromptRequest.add_member(:type, Shapes::ShapeRef.new(shape: AIPromptType, required: true, location_name: "type"))
@@ -1033,7 +1033,7 @@ module Aws::QConnect
     CreateAIPromptVersionRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
     CreateAIPromptVersionRequest.add_member(:ai_prompt_id, Shapes::ShapeRef.new(shape: UuidOrArnOrEitherWithQualifier, required: true, location: "uri", location_name: "aiPromptId"))
     CreateAIPromptVersionRequest.add_member(:modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "modifiedTime"))
-    CreateAIPromptVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAIPromptVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAIPromptVersionRequest.struct_class = Types::CreateAIPromptVersionRequest
 
     CreateAIPromptVersionResponse.add_member(:ai_prompt, Shapes::ShapeRef.new(shape: AIPromptData, location_name: "aiPrompt"))
@@ -1043,14 +1043,14 @@ module Aws::QConnect
     CreateAssistantAssociationRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
     CreateAssistantAssociationRequest.add_member(:association_type, Shapes::ShapeRef.new(shape: AssociationType, required: true, location_name: "associationType"))
     CreateAssistantAssociationRequest.add_member(:association, Shapes::ShapeRef.new(shape: AssistantAssociationInputData, required: true, location_name: "association"))
-    CreateAssistantAssociationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAssistantAssociationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAssistantAssociationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateAssistantAssociationRequest.struct_class = Types::CreateAssistantAssociationRequest
 
     CreateAssistantAssociationResponse.add_member(:assistant_association, Shapes::ShapeRef.new(shape: AssistantAssociationData, location_name: "assistantAssociation"))
     CreateAssistantAssociationResponse.struct_class = Types::CreateAssistantAssociationResponse
 
-    CreateAssistantRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAssistantRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAssistantRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateAssistantRequest.add_member(:type, Shapes::ShapeRef.new(shape: AssistantType, required: true, location_name: "type"))
     CreateAssistantRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
@@ -1061,7 +1061,7 @@ module Aws::QConnect
     CreateAssistantResponse.add_member(:assistant, Shapes::ShapeRef.new(shape: AssistantData, location_name: "assistant"))
     CreateAssistantResponse.struct_class = Types::CreateAssistantResponse
 
-    CreateContentAssociationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateContentAssociationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateContentAssociationRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
     CreateContentAssociationRequest.add_member(:content_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "contentId"))
     CreateContentAssociationRequest.add_member(:association_type, Shapes::ShapeRef.new(shape: ContentAssociationType, required: true, location_name: "associationType"))
@@ -1078,14 +1078,14 @@ module Aws::QConnect
     CreateContentRequest.add_member(:override_link_out_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "overrideLinkOutUri"))
     CreateContentRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: ContentMetadata, location_name: "metadata"))
     CreateContentRequest.add_member(:upload_id, Shapes::ShapeRef.new(shape: UploadId, required: true, location_name: "uploadId"))
-    CreateContentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateContentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateContentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateContentRequest.struct_class = Types::CreateContentRequest
 
     CreateContentResponse.add_member(:content, Shapes::ShapeRef.new(shape: ContentData, location_name: "content"))
     CreateContentResponse.struct_class = Types::CreateContentResponse
 
-    CreateKnowledgeBaseRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateKnowledgeBaseRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateKnowledgeBaseRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateKnowledgeBaseRequest.add_member(:knowledge_base_type, Shapes::ShapeRef.new(shape: KnowledgeBaseType, required: true, location_name: "knowledgeBaseType"))
     CreateKnowledgeBaseRequest.add_member(:source_configuration, Shapes::ShapeRef.new(shape: SourceConfiguration, location_name: "sourceConfiguration"))
@@ -1118,7 +1118,7 @@ module Aws::QConnect
     CreateMessageTemplateRequest.add_member(:language, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "language"))
     CreateMessageTemplateRequest.add_member(:default_attributes, Shapes::ShapeRef.new(shape: MessageTemplateAttributes, location_name: "defaultAttributes"))
     CreateMessageTemplateRequest.add_member(:grouping_configuration, Shapes::ShapeRef.new(shape: GroupingConfiguration, location_name: "groupingConfiguration"))
-    CreateMessageTemplateRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateMessageTemplateRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateMessageTemplateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateMessageTemplateRequest.struct_class = Types::CreateMessageTemplateRequest
 
@@ -1143,14 +1143,14 @@ module Aws::QConnect
     CreateQuickResponseRequest.add_member(:is_active, Shapes::ShapeRef.new(shape: Boolean, location_name: "isActive"))
     CreateQuickResponseRequest.add_member(:channels, Shapes::ShapeRef.new(shape: Channels, location_name: "channels"))
     CreateQuickResponseRequest.add_member(:language, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "language"))
-    CreateQuickResponseRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateQuickResponseRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateQuickResponseRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateQuickResponseRequest.struct_class = Types::CreateQuickResponseRequest
 
     CreateQuickResponseResponse.add_member(:quick_response, Shapes::ShapeRef.new(shape: QuickResponseData, location_name: "quickResponse"))
     CreateQuickResponseResponse.struct_class = Types::CreateQuickResponseResponse
 
-    CreateSessionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateSessionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateSessionRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
     CreateSessionRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateSessionRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
@@ -2381,7 +2381,7 @@ module Aws::QConnect
     SendMessageRequest.add_member(:message, Shapes::ShapeRef.new(shape: MessageInput, required: true, location_name: "message"))
     SendMessageRequest.add_member(:conversation_context, Shapes::ShapeRef.new(shape: ConversationContext, location_name: "conversationContext"))
     SendMessageRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: MessageConfiguration, location_name: "configuration"))
-    SendMessageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    SendMessageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     SendMessageRequest.struct_class = Types::SendMessageRequest
 
     SendMessageResponse.add_member(:request_message_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "requestMessageId"))
@@ -2446,7 +2446,7 @@ module Aws::QConnect
     StartImportJobRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
     StartImportJobRequest.add_member(:import_job_type, Shapes::ShapeRef.new(shape: ImportJobType, required: true, location_name: "importJobType"))
     StartImportJobRequest.add_member(:upload_id, Shapes::ShapeRef.new(shape: UploadId, required: true, location_name: "uploadId"))
-    StartImportJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    StartImportJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     StartImportJobRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: ContentMetadata, location_name: "metadata"))
     StartImportJobRequest.add_member(:external_source_configuration, Shapes::ShapeRef.new(shape: ExternalSourceConfiguration, location_name: "externalSourceConfiguration"))
     StartImportJobRequest.struct_class = Types::StartImportJobRequest
@@ -2510,7 +2510,7 @@ module Aws::QConnect
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
-    UpdateAIAgentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateAIAgentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateAIAgentRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
     UpdateAIAgentRequest.add_member(:ai_agent_id, Shapes::ShapeRef.new(shape: UuidOrArnOrEitherWithQualifier, required: true, location: "uri", location_name: "aiAgentId"))
     UpdateAIAgentRequest.add_member(:visibility_status, Shapes::ShapeRef.new(shape: VisibilityStatus, required: true, location_name: "visibilityStatus"))
@@ -2521,7 +2521,7 @@ module Aws::QConnect
     UpdateAIAgentResponse.add_member(:ai_agent, Shapes::ShapeRef.new(shape: AIAgentData, location_name: "aiAgent"))
     UpdateAIAgentResponse.struct_class = Types::UpdateAIAgentResponse
 
-    UpdateAIGuardrailRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateAIGuardrailRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateAIGuardrailRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
     UpdateAIGuardrailRequest.add_member(:ai_guardrail_id, Shapes::ShapeRef.new(shape: UuidOrArnOrEitherWithQualifier, required: true, location: "uri", location_name: "aiGuardrailId"))
     UpdateAIGuardrailRequest.add_member(:visibility_status, Shapes::ShapeRef.new(shape: VisibilityStatus, required: true, location_name: "visibilityStatus"))
@@ -2538,7 +2538,7 @@ module Aws::QConnect
     UpdateAIGuardrailResponse.add_member(:ai_guardrail, Shapes::ShapeRef.new(shape: AIGuardrailData, location_name: "aiGuardrail"))
     UpdateAIGuardrailResponse.struct_class = Types::UpdateAIGuardrailResponse
 
-    UpdateAIPromptRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateAIPromptRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateAIPromptRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
     UpdateAIPromptRequest.add_member(:ai_prompt_id, Shapes::ShapeRef.new(shape: UuidOrArnOrEitherWithQualifier, required: true, location: "uri", location_name: "aiPromptId"))
     UpdateAIPromptRequest.add_member(:visibility_status, Shapes::ShapeRef.new(shape: VisibilityStatus, required: true, location_name: "visibilityStatus"))

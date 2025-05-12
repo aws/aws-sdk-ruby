@@ -1328,8 +1328,7 @@
   "shapes":{
     "AccessDeniedException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "AccessPolicy":{
@@ -1577,8 +1576,7 @@
     },
     "ConflictException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "CopyValue":{
@@ -1794,8 +1792,7 @@
     },
     "DeleteIndexPolicyResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DeleteIntegrationRequest":{
       "type":"structure",
@@ -1807,8 +1804,7 @@
     },
     "DeleteIntegrationResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DeleteKeys":{
       "type":"structure",
@@ -1905,7 +1901,7 @@
     },
     "Delimiter":{
       "type":"string",
-      "max":1,
+      "max":2,
       "min":1
     },
     "Deliveries":{
@@ -2808,7 +2804,7 @@
     },
     "GrokMatch":{
       "type":"string",
-      "max":128,
+      "max":512,
       "min":1
     },
     "Histogram":{
@@ -2924,14 +2920,12 @@
     "Interleaved":{"type":"boolean"},
     "InvalidOperationException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "InvalidParameterException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "InvalidSequenceTokenException":{
@@ -2963,8 +2957,7 @@
     },
     "LimitExceededException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "ListAnomaliesLimit":{
@@ -3170,7 +3163,8 @@
       "type":"string",
       "enum":[
         "STANDARD",
-        "INFREQUENT_ACCESS"
+        "INFREQUENT_ACCESS",
+        "DELIVERY"
       ]
     },
     "LogGroupField":{
@@ -3532,8 +3526,7 @@
     },
     "OperationAbortedException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "OrderBy":{
@@ -4170,8 +4163,7 @@
     },
     "ResourceAlreadyExistsException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "ResourceArns":{
@@ -4193,8 +4185,7 @@
     },
     "ResourceNotFoundException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "ResourcePolicies":{
@@ -4274,14 +4265,12 @@
     },
     "ServiceQuotaExceededException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "ServiceUnavailableException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true,
       "fault":true
     },
@@ -4320,6 +4309,11 @@
         "entries":{"shape":"SplitStringEntries"}
       }
     },
+    "SplitStringDelimiter":{
+      "type":"string",
+      "max":128,
+      "min":1
+    },
     "SplitStringEntries":{
       "type":"list",
       "member":{"shape":"SplitStringEntry"},
@@ -4334,7 +4328,7 @@
       ],
       "members":{
         "source":{"shape":"Source"},
-        "delimiter":{"shape":"Delimiter"}
+        "delimiter":{"shape":"SplitStringDelimiter"}
       }
     },
     "StandardUnit":{
@@ -4638,8 +4632,7 @@
     },
     "ThrottlingException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "Time":{
@@ -4734,8 +4727,7 @@
     "Unmask":{"type":"boolean"},
     "UnrecognizedClientException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "UntagLogGroupRequest":{
@@ -4786,8 +4778,7 @@
     },
     "UpdateDeliveryConfigurationResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "UpdateLogAnomalyDetectorRequest":{
       "type":"structure",
@@ -4818,8 +4809,7 @@
     },
     "ValidationException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "Value":{"type":"string"},

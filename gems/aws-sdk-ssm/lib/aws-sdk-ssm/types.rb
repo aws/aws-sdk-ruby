@@ -10,6 +10,20 @@
 module Aws::SSM
   module Types
 
+    # The requester doesn't have permissions to perform the requested
+    # operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information includes the Amazon Web Services account ID where the
     # current document is shared and the version shared with that account.
     #
@@ -4185,6 +4199,38 @@ module Aws::SSM
     #
     class CreateResourceDataSyncResult < Aws::EmptyStructure; end
 
+    # The temporary security credentials, which include an access key ID, a
+    # secret access key, and a security (or session) token.
+    #
+    # @!attribute [rw] access_key_id
+    #   The access key ID that identifies the temporary security
+    #   credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_access_key
+    #   The secret access key that can be used to sign requests.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_token
+    #   The token that users must pass to the service API to use the
+    #   temporary credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration_time
+    #   The datetime on which the current credentials expire.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Credentials AWS API Documentation
+    #
+    class Credentials < Struct.new(
+      :access_key_id,
+      :secret_access_key,
+      :session_token,
+      :expiration_time)
+      SENSITIVE = [:secret_access_key, :session_token]
+      include Aws::Structure
+    end
+
     # You have exceeded the limit for custom schemas. Delete one or more
     # custom schemas and try again.
     #
@@ -7564,6 +7610,36 @@ module Aws::SSM
     #
     class FeatureNotAvailableException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] access_request_id
+    #   The ID of a just-in-time node access request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetAccessTokenRequest AWS API Documentation
+    #
+    class GetAccessTokenRequest < Struct.new(
+      :access_request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] credentials
+    #   The temporary security credentials which can be used to start
+    #   just-in-time node access sessions.
+    #   @return [Types::Credentials]
+    #
+    # @!attribute [rw] access_request_status
+    #   The status of the access request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetAccessTokenResponse AWS API Documentation
+    #
+    class GetAccessTokenResponse < Struct.new(
+      :credentials,
+      :access_request_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17783,6 +17859,42 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # The request exceeds the service quota. Service quotas, also referred
+    # to as limits, are the maximum number of service resources or
+    # operations for your Amazon Web Services account.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The unique ID of the resource referenced in the failed request.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type of the resource referenced in the failed request.
+    #   @return [String]
+    #
+    # @!attribute [rw] quota_code
+    #   The quota code recognized by the Amazon Web Services Service Quotas
+    #   service.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_code
+    #   The code for the Amazon Web Services service that owns the quota.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ServiceQuotaExceededException AWS API Documentation
+    #
+    class ServiceQuotaExceededException < Struct.new(
+      :message,
+      :resource_id,
+      :resource_type,
+      :quota_code,
+      :service_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The service setting data structure.
     #
     # `ServiceSetting` is an account-level setting for an Amazon Web
@@ -18052,6 +18164,42 @@ module Aws::SSM
       :low_count,
       :informational_count,
       :unspecified_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] reason
+    #   A brief description explaining why you are requesting access to the
+    #   node.
+    #   @return [String]
+    #
+    # @!attribute [rw] targets
+    #   The node you are requesting access to.
+    #   @return [Array<Types::Target>]
+    #
+    # @!attribute [rw] tags
+    #   Key-value pairs of metadata you want to assign to the access
+    #   request.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartAccessRequestRequest AWS API Documentation
+    #
+    class StartAccessRequestRequest < Struct.new(
+      :reason,
+      :targets,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] access_request_id
+    #   The ID of the access request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartAccessRequestResponse AWS API Documentation
+    #
+    class StartAccessRequestResponse < Struct.new(
+      :access_request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18972,6 +19120,31 @@ module Aws::SSM
     #
     class TerminateSessionResponse < Struct.new(
       :session_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request or operation couldn't be performed because the service is
+    # throttling requests.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] quota_code
+    #   The quota code recognized by the Amazon Web Services Service Quotas
+    #   service.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_code
+    #   The code for the Amazon Web Services service that owns the quota.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :message,
+      :quota_code,
+      :service_code)
       SENSITIVE = []
       include Aws::Structure
     end

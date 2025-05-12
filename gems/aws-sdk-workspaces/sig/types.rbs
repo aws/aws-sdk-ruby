@@ -391,7 +391,6 @@ module Aws::WorkSpaces
     end
 
     class DefaultWorkspaceCreationProperties
-      attr_accessor enable_work_docs: bool
       attr_accessor enable_internet_access: bool
       attr_accessor default_ou: ::String
       attr_accessor custom_security_group_id: ::String
@@ -1201,7 +1200,6 @@ module Aws::WorkSpaces
     class RegisterWorkspaceDirectoryRequest
       attr_accessor directory_id: ::String
       attr_accessor subnet_ids: ::Array[::String]
-      attr_accessor enable_work_docs: bool
       attr_accessor enable_self_service: bool
       attr_accessor tenancy: ("DEDICATED" | "SHARED")
       attr_accessor tags: ::Array[Types::Tag]
@@ -1617,7 +1615,6 @@ module Aws::WorkSpaces
     end
 
     class WorkspaceCreationProperties
-      attr_accessor enable_work_docs: bool
       attr_accessor enable_internet_access: bool
       attr_accessor default_ou: ::String
       attr_accessor custom_security_group_id: ::String

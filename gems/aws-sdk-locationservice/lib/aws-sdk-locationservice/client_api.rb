@@ -585,8 +585,8 @@ module Aws::LocationService
     CountryCodeList.member = Shapes::ShapeRef.new(shape: CountryCode3)
 
     CreateGeofenceCollectionRequest.add_member(:collection_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "CollectionName"))
-    CreateGeofenceCollectionRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage"=>"Deprecated. If included, the only allowed value is RequestBasedUsage.", "deprecatedSince"=>"2022-02-01"}))
-    CreateGeofenceCollectionRequest.add_member(:pricing_plan_data_source, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "PricingPlanDataSource", metadata: {"deprecatedMessage"=>"Deprecated. No longer allowed.", "deprecatedSince"=>"2022-02-01"}))
+    CreateGeofenceCollectionRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage" => "Deprecated. If included, the only allowed value is RequestBasedUsage.", "deprecatedSince" => "2022-02-01"}))
+    CreateGeofenceCollectionRequest.add_member(:pricing_plan_data_source, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "PricingPlanDataSource", metadata: {"deprecatedMessage" => "Deprecated. No longer allowed.", "deprecatedSince" => "2022-02-01"}))
     CreateGeofenceCollectionRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     CreateGeofenceCollectionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateGeofenceCollectionRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
@@ -613,7 +613,7 @@ module Aws::LocationService
 
     CreateMapRequest.add_member(:map_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "MapName"))
     CreateMapRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: MapConfiguration, required: true, location_name: "Configuration"))
-    CreateMapRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage"=>"Deprecated. If included, the only allowed value is RequestBasedUsage.", "deprecatedSince"=>"2022-02-01"}))
+    CreateMapRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage" => "Deprecated. If included, the only allowed value is RequestBasedUsage.", "deprecatedSince" => "2022-02-01"}))
     CreateMapRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     CreateMapRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateMapRequest.struct_class = Types::CreateMapRequest
@@ -625,7 +625,7 @@ module Aws::LocationService
 
     CreatePlaceIndexRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "IndexName"))
     CreatePlaceIndexRequest.add_member(:data_source, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataSource"))
-    CreatePlaceIndexRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage"=>"Deprecated. If included, the only allowed value is RequestBasedUsage.", "deprecatedSince"=>"2022-02-01"}))
+    CreatePlaceIndexRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage" => "Deprecated. If included, the only allowed value is RequestBasedUsage.", "deprecatedSince" => "2022-02-01"}))
     CreatePlaceIndexRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     CreatePlaceIndexRequest.add_member(:data_source_configuration, Shapes::ShapeRef.new(shape: DataSourceConfiguration, location_name: "DataSourceConfiguration"))
     CreatePlaceIndexRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
@@ -638,7 +638,7 @@ module Aws::LocationService
 
     CreateRouteCalculatorRequest.add_member(:calculator_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "CalculatorName"))
     CreateRouteCalculatorRequest.add_member(:data_source, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataSource"))
-    CreateRouteCalculatorRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage"=>"Deprecated. If included, the only allowed value is RequestBasedUsage.", "deprecatedSince"=>"2022-02-01"}))
+    CreateRouteCalculatorRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage" => "Deprecated. If included, the only allowed value is RequestBasedUsage.", "deprecatedSince" => "2022-02-01"}))
     CreateRouteCalculatorRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     CreateRouteCalculatorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateRouteCalculatorRequest.struct_class = Types::CreateRouteCalculatorRequest
@@ -649,9 +649,9 @@ module Aws::LocationService
     CreateRouteCalculatorResponse.struct_class = Types::CreateRouteCalculatorResponse
 
     CreateTrackerRequest.add_member(:tracker_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "TrackerName"))
-    CreateTrackerRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage"=>"Deprecated. If included, the only allowed value is RequestBasedUsage.", "deprecatedSince"=>"2022-02-01"}))
+    CreateTrackerRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage" => "Deprecated. If included, the only allowed value is RequestBasedUsage.", "deprecatedSince" => "2022-02-01"}))
     CreateTrackerRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
-    CreateTrackerRequest.add_member(:pricing_plan_data_source, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "PricingPlanDataSource", metadata: {"deprecatedMessage"=>"Deprecated. No longer allowed.", "deprecatedSince"=>"2022-02-01"}))
+    CreateTrackerRequest.add_member(:pricing_plan_data_source, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "PricingPlanDataSource", metadata: {"deprecatedMessage" => "Deprecated. No longer allowed.", "deprecatedSince" => "2022-02-01"}))
     CreateTrackerRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     CreateTrackerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateTrackerRequest.add_member(:position_filtering, Shapes::ShapeRef.new(shape: PositionFiltering, location_name: "PositionFiltering"))
@@ -706,8 +706,8 @@ module Aws::LocationService
     DescribeGeofenceCollectionResponse.add_member(:collection_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "CollectionName"))
     DescribeGeofenceCollectionResponse.add_member(:collection_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CollectionArn"))
     DescribeGeofenceCollectionResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, required: true, location_name: "Description"))
-    DescribeGeofenceCollectionResponse.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage"=>"Deprecated. Always returns RequestBasedUsage.", "deprecatedSince"=>"2022-02-01"}))
-    DescribeGeofenceCollectionResponse.add_member(:pricing_plan_data_source, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "PricingPlanDataSource", metadata: {"deprecatedMessage"=>"Deprecated. Unused.", "deprecatedSince"=>"2022-02-01"}))
+    DescribeGeofenceCollectionResponse.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage" => "Deprecated. Always returns RequestBasedUsage.", "deprecatedSince" => "2022-02-01"}))
+    DescribeGeofenceCollectionResponse.add_member(:pricing_plan_data_source, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "PricingPlanDataSource", metadata: {"deprecatedMessage" => "Deprecated. Unused.", "deprecatedSince" => "2022-02-01"}))
     DescribeGeofenceCollectionResponse.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     DescribeGeofenceCollectionResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     DescribeGeofenceCollectionResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreateTime"))
@@ -734,7 +734,7 @@ module Aws::LocationService
 
     DescribeMapResponse.add_member(:map_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "MapName"))
     DescribeMapResponse.add_member(:map_arn, Shapes::ShapeRef.new(shape: GeoArn, required: true, location_name: "MapArn"))
-    DescribeMapResponse.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage"=>"Deprecated. Always returns RequestBasedUsage.", "deprecatedSince"=>"2022-02-01"}))
+    DescribeMapResponse.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage" => "Deprecated. Always returns RequestBasedUsage.", "deprecatedSince" => "2022-02-01"}))
     DescribeMapResponse.add_member(:data_source, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataSource"))
     DescribeMapResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: MapConfiguration, required: true, location_name: "Configuration"))
     DescribeMapResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, required: true, location_name: "Description"))
@@ -748,7 +748,7 @@ module Aws::LocationService
 
     DescribePlaceIndexResponse.add_member(:index_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "IndexName"))
     DescribePlaceIndexResponse.add_member(:index_arn, Shapes::ShapeRef.new(shape: GeoArn, required: true, location_name: "IndexArn"))
-    DescribePlaceIndexResponse.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage"=>"Deprecated. Always returns RequestBasedUsage.", "deprecatedSince"=>"2022-02-01"}))
+    DescribePlaceIndexResponse.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage" => "Deprecated. Always returns RequestBasedUsage.", "deprecatedSince" => "2022-02-01"}))
     DescribePlaceIndexResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, required: true, location_name: "Description"))
     DescribePlaceIndexResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreateTime"))
     DescribePlaceIndexResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdateTime"))
@@ -762,7 +762,7 @@ module Aws::LocationService
 
     DescribeRouteCalculatorResponse.add_member(:calculator_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "CalculatorName"))
     DescribeRouteCalculatorResponse.add_member(:calculator_arn, Shapes::ShapeRef.new(shape: GeoArn, required: true, location_name: "CalculatorArn"))
-    DescribeRouteCalculatorResponse.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage"=>"Deprecated. Always returns RequestBasedUsage.", "deprecatedSince"=>"2022-02-01"}))
+    DescribeRouteCalculatorResponse.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage" => "Deprecated. Always returns RequestBasedUsage.", "deprecatedSince" => "2022-02-01"}))
     DescribeRouteCalculatorResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, required: true, location_name: "Description"))
     DescribeRouteCalculatorResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreateTime"))
     DescribeRouteCalculatorResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdateTime"))
@@ -776,8 +776,8 @@ module Aws::LocationService
     DescribeTrackerResponse.add_member(:tracker_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "TrackerName"))
     DescribeTrackerResponse.add_member(:tracker_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "TrackerArn"))
     DescribeTrackerResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, required: true, location_name: "Description"))
-    DescribeTrackerResponse.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage"=>"Deprecated. Always returns RequestBasedUsage.", "deprecatedSince"=>"2022-02-01"}))
-    DescribeTrackerResponse.add_member(:pricing_plan_data_source, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "PricingPlanDataSource", metadata: {"deprecatedMessage"=>"Deprecated. Unused.", "deprecatedSince"=>"2022-02-01"}))
+    DescribeTrackerResponse.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage" => "Deprecated. Always returns RequestBasedUsage.", "deprecatedSince" => "2022-02-01"}))
+    DescribeTrackerResponse.add_member(:pricing_plan_data_source, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "PricingPlanDataSource", metadata: {"deprecatedMessage" => "Deprecated. Unused.", "deprecatedSince" => "2022-02-01"}))
     DescribeTrackerResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     DescribeTrackerResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreateTime"))
     DescribeTrackerResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdateTime"))
@@ -1008,8 +1008,8 @@ module Aws::LocationService
 
     ListGeofenceCollectionsResponseEntry.add_member(:collection_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "CollectionName"))
     ListGeofenceCollectionsResponseEntry.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, required: true, location_name: "Description"))
-    ListGeofenceCollectionsResponseEntry.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage"=>"Deprecated. Always returns RequestBasedUsage.", "deprecatedSince"=>"2022-02-01"}))
-    ListGeofenceCollectionsResponseEntry.add_member(:pricing_plan_data_source, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "PricingPlanDataSource", metadata: {"deprecatedMessage"=>"Deprecated. Unused.", "deprecatedSince"=>"2022-02-01"}))
+    ListGeofenceCollectionsResponseEntry.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage" => "Deprecated. Always returns RequestBasedUsage.", "deprecatedSince" => "2022-02-01"}))
+    ListGeofenceCollectionsResponseEntry.add_member(:pricing_plan_data_source, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "PricingPlanDataSource", metadata: {"deprecatedMessage" => "Deprecated. Unused.", "deprecatedSince" => "2022-02-01"}))
     ListGeofenceCollectionsResponseEntry.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreateTime"))
     ListGeofenceCollectionsResponseEntry.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdateTime"))
     ListGeofenceCollectionsResponseEntry.struct_class = Types::ListGeofenceCollectionsResponseEntry
@@ -1065,7 +1065,7 @@ module Aws::LocationService
     ListMapsResponseEntry.add_member(:map_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "MapName"))
     ListMapsResponseEntry.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, required: true, location_name: "Description"))
     ListMapsResponseEntry.add_member(:data_source, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataSource"))
-    ListMapsResponseEntry.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage"=>"Deprecated. Always returns RequestBasedUsage.", "deprecatedSince"=>"2022-02-01"}))
+    ListMapsResponseEntry.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage" => "Deprecated. Always returns RequestBasedUsage.", "deprecatedSince" => "2022-02-01"}))
     ListMapsResponseEntry.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreateTime"))
     ListMapsResponseEntry.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdateTime"))
     ListMapsResponseEntry.struct_class = Types::ListMapsResponseEntry
@@ -1083,7 +1083,7 @@ module Aws::LocationService
     ListPlaceIndexesResponseEntry.add_member(:index_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "IndexName"))
     ListPlaceIndexesResponseEntry.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, required: true, location_name: "Description"))
     ListPlaceIndexesResponseEntry.add_member(:data_source, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataSource"))
-    ListPlaceIndexesResponseEntry.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage"=>"Deprecated. Always returns RequestBasedUsage.", "deprecatedSince"=>"2022-02-01"}))
+    ListPlaceIndexesResponseEntry.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage" => "Deprecated. Always returns RequestBasedUsage.", "deprecatedSince" => "2022-02-01"}))
     ListPlaceIndexesResponseEntry.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreateTime"))
     ListPlaceIndexesResponseEntry.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdateTime"))
     ListPlaceIndexesResponseEntry.struct_class = Types::ListPlaceIndexesResponseEntry
@@ -1101,7 +1101,7 @@ module Aws::LocationService
     ListRouteCalculatorsResponseEntry.add_member(:calculator_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "CalculatorName"))
     ListRouteCalculatorsResponseEntry.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, required: true, location_name: "Description"))
     ListRouteCalculatorsResponseEntry.add_member(:data_source, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataSource"))
-    ListRouteCalculatorsResponseEntry.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage"=>"Deprecated. Always returns RequestBasedUsage.", "deprecatedSince"=>"2022-02-01"}))
+    ListRouteCalculatorsResponseEntry.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage" => "Deprecated. Always returns RequestBasedUsage.", "deprecatedSince" => "2022-02-01"}))
     ListRouteCalculatorsResponseEntry.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreateTime"))
     ListRouteCalculatorsResponseEntry.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdateTime"))
     ListRouteCalculatorsResponseEntry.struct_class = Types::ListRouteCalculatorsResponseEntry
@@ -1133,8 +1133,8 @@ module Aws::LocationService
 
     ListTrackersResponseEntry.add_member(:tracker_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "TrackerName"))
     ListTrackersResponseEntry.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, required: true, location_name: "Description"))
-    ListTrackersResponseEntry.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage"=>"Deprecated. Always returns RequestBasedUsage.", "deprecatedSince"=>"2022-02-01"}))
-    ListTrackersResponseEntry.add_member(:pricing_plan_data_source, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "PricingPlanDataSource", metadata: {"deprecatedMessage"=>"Deprecated. Unused.", "deprecatedSince"=>"2022-02-01"}))
+    ListTrackersResponseEntry.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage" => "Deprecated. Always returns RequestBasedUsage.", "deprecatedSince" => "2022-02-01"}))
+    ListTrackersResponseEntry.add_member(:pricing_plan_data_source, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "PricingPlanDataSource", metadata: {"deprecatedMessage" => "Deprecated. Unused.", "deprecatedSince" => "2022-02-01"}))
     ListTrackersResponseEntry.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreateTime"))
     ListTrackersResponseEntry.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdateTime"))
     ListTrackersResponseEntry.struct_class = Types::ListTrackersResponseEntry
@@ -1380,8 +1380,8 @@ module Aws::LocationService
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateGeofenceCollectionRequest.add_member(:collection_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "CollectionName"))
-    UpdateGeofenceCollectionRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage"=>"Deprecated. If included, the only allowed value is RequestBasedUsage.", "deprecatedSince"=>"2022-02-01"}))
-    UpdateGeofenceCollectionRequest.add_member(:pricing_plan_data_source, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "PricingPlanDataSource", metadata: {"deprecatedMessage"=>"Deprecated. No longer allowed.", "deprecatedSince"=>"2022-02-01"}))
+    UpdateGeofenceCollectionRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage" => "Deprecated. If included, the only allowed value is RequestBasedUsage.", "deprecatedSince" => "2022-02-01"}))
+    UpdateGeofenceCollectionRequest.add_member(:pricing_plan_data_source, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "PricingPlanDataSource", metadata: {"deprecatedMessage" => "Deprecated. No longer allowed.", "deprecatedSince" => "2022-02-01"}))
     UpdateGeofenceCollectionRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     UpdateGeofenceCollectionRequest.struct_class = Types::UpdateGeofenceCollectionRequest
 
@@ -1404,7 +1404,7 @@ module Aws::LocationService
     UpdateKeyResponse.struct_class = Types::UpdateKeyResponse
 
     UpdateMapRequest.add_member(:map_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "MapName"))
-    UpdateMapRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage"=>"Deprecated. If included, the only allowed value is RequestBasedUsage.", "deprecatedSince"=>"2022-02-01"}))
+    UpdateMapRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage" => "Deprecated. If included, the only allowed value is RequestBasedUsage.", "deprecatedSince" => "2022-02-01"}))
     UpdateMapRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     UpdateMapRequest.add_member(:configuration_update, Shapes::ShapeRef.new(shape: MapConfigurationUpdate, location_name: "ConfigurationUpdate"))
     UpdateMapRequest.struct_class = Types::UpdateMapRequest
@@ -1415,7 +1415,7 @@ module Aws::LocationService
     UpdateMapResponse.struct_class = Types::UpdateMapResponse
 
     UpdatePlaceIndexRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "IndexName"))
-    UpdatePlaceIndexRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage"=>"Deprecated. If included, the only allowed value is RequestBasedUsage.", "deprecatedSince"=>"2022-02-01"}))
+    UpdatePlaceIndexRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage" => "Deprecated. If included, the only allowed value is RequestBasedUsage.", "deprecatedSince" => "2022-02-01"}))
     UpdatePlaceIndexRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     UpdatePlaceIndexRequest.add_member(:data_source_configuration, Shapes::ShapeRef.new(shape: DataSourceConfiguration, location_name: "DataSourceConfiguration"))
     UpdatePlaceIndexRequest.struct_class = Types::UpdatePlaceIndexRequest
@@ -1426,7 +1426,7 @@ module Aws::LocationService
     UpdatePlaceIndexResponse.struct_class = Types::UpdatePlaceIndexResponse
 
     UpdateRouteCalculatorRequest.add_member(:calculator_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "CalculatorName"))
-    UpdateRouteCalculatorRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage"=>"Deprecated. If included, the only allowed value is RequestBasedUsage.", "deprecatedSince"=>"2022-02-01"}))
+    UpdateRouteCalculatorRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage" => "Deprecated. If included, the only allowed value is RequestBasedUsage.", "deprecatedSince" => "2022-02-01"}))
     UpdateRouteCalculatorRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     UpdateRouteCalculatorRequest.struct_class = Types::UpdateRouteCalculatorRequest
 
@@ -1436,8 +1436,8 @@ module Aws::LocationService
     UpdateRouteCalculatorResponse.struct_class = Types::UpdateRouteCalculatorResponse
 
     UpdateTrackerRequest.add_member(:tracker_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "TrackerName"))
-    UpdateTrackerRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage"=>"Deprecated. If included, the only allowed value is RequestBasedUsage.", "deprecatedSince"=>"2022-02-01"}))
-    UpdateTrackerRequest.add_member(:pricing_plan_data_source, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "PricingPlanDataSource", metadata: {"deprecatedMessage"=>"Deprecated. No longer allowed.", "deprecatedSince"=>"2022-02-01"}))
+    UpdateTrackerRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage" => "Deprecated. If included, the only allowed value is RequestBasedUsage.", "deprecatedSince" => "2022-02-01"}))
+    UpdateTrackerRequest.add_member(:pricing_plan_data_source, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "PricingPlanDataSource", metadata: {"deprecatedMessage" => "Deprecated. No longer allowed.", "deprecatedSince" => "2022-02-01"}))
     UpdateTrackerRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     UpdateTrackerRequest.add_member(:position_filtering, Shapes::ShapeRef.new(shape: PositionFiltering, location_name: "PositionFiltering"))
     UpdateTrackerRequest.add_member(:event_bridge_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "EventBridgeEnabled"))

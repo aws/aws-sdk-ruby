@@ -340,7 +340,7 @@ module Aws
                              name: ::String,
                              ?display_name: ::String,
                              ?version_name: ::String,
-                             ?document_type: ("Command" | "Policy" | "Automation" | "Session" | "Package" | "ApplicationConfiguration" | "ApplicationConfigurationSchema" | "DeploymentStrategy" | "ChangeCalendar" | "Automation.ChangeTemplate" | "ProblemAnalysis" | "ProblemAnalysisTemplate" | "CloudFormation" | "ConformancePackTemplate" | "QuickSetup"),
+                             ?document_type: ("Command" | "Policy" | "Automation" | "Session" | "Package" | "ApplicationConfiguration" | "ApplicationConfigurationSchema" | "DeploymentStrategy" | "ChangeCalendar" | "Automation.ChangeTemplate" | "ProblemAnalysis" | "ProblemAnalysisTemplate" | "CloudFormation" | "ConformancePackTemplate" | "QuickSetup" | "ManualApprovalPolicy" | "AutoApprovalPolicy"),
                              ?document_format: ("YAML" | "JSON" | "TEXT"),
                              ?target_type: ::String,
                              ?tags: Array[
@@ -1178,7 +1178,7 @@ module Aws
       def describe_ops_items: (
                                 ?ops_item_filters: Array[
                                   {
-                                    key: ("Status" | "CreatedBy" | "Source" | "Priority" | "Title" | "OpsItemId" | "CreatedTime" | "LastModifiedTime" | "ActualStartTime" | "ActualEndTime" | "PlannedStartTime" | "PlannedEndTime" | "OperationalData" | "OperationalDataKey" | "OperationalDataValue" | "ResourceId" | "AutomationId" | "Category" | "Severity" | "OpsItemType" | "ChangeRequestByRequesterArn" | "ChangeRequestByRequesterName" | "ChangeRequestByApproverArn" | "ChangeRequestByApproverName" | "ChangeRequestByTemplate" | "ChangeRequestByTargetsResourceGroup" | "InsightByType" | "AccountId"),
+                                    key: ("Status" | "CreatedBy" | "Source" | "Priority" | "Title" | "OpsItemId" | "CreatedTime" | "LastModifiedTime" | "ActualStartTime" | "ActualEndTime" | "PlannedStartTime" | "PlannedEndTime" | "OperationalData" | "OperationalDataKey" | "OperationalDataValue" | "ResourceId" | "AutomationId" | "Category" | "Severity" | "OpsItemType" | "AccessRequestByRequesterArn" | "AccessRequestByRequesterId" | "AccessRequestByApproverArn" | "AccessRequestByApproverId" | "AccessRequestBySourceAccountId" | "AccessRequestBySourceOpsItemId" | "AccessRequestBySourceRegion" | "AccessRequestByIsReplica" | "AccessRequestByTargetResourceId" | "ChangeRequestByRequesterArn" | "ChangeRequestByRequesterName" | "ChangeRequestByApproverArn" | "ChangeRequestByApproverName" | "ChangeRequestByTemplate" | "ChangeRequestByTargetsResourceGroup" | "InsightByType" | "AccountId"),
                                     values: Array[::String],
                                     operator: ("Equal" | "Contains" | "GreaterThan" | "LessThan")
                                   },
@@ -1315,6 +1315,17 @@ module Aws
                                                 association_id: ::String
                                               ) -> _DisassociateOpsItemRelatedItemResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateOpsItemRelatedItemResponseSuccess
+
+      interface _GetAccessTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccessTokenResponse]
+        def credentials: () -> Types::Credentials
+        def access_request_status: () -> ("Approved" | "Rejected" | "Revoked" | "Expired" | "Pending")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#get_access_token-instance_method
+      def get_access_token: (
+                              access_request_id: ::String
+                            ) -> _GetAccessTokenResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccessTokenResponseSuccess
 
       interface _GetAutomationExecutionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAutomationExecutionResult]
@@ -1455,7 +1466,7 @@ module Aws
         def status: () -> ("Creating" | "Active" | "Updating" | "Deleting" | "Failed")
         def status_information: () -> ::String
         def content: () -> ::String
-        def document_type: () -> ("Command" | "Policy" | "Automation" | "Session" | "Package" | "ApplicationConfiguration" | "ApplicationConfigurationSchema" | "DeploymentStrategy" | "ChangeCalendar" | "Automation.ChangeTemplate" | "ProblemAnalysis" | "ProblemAnalysisTemplate" | "CloudFormation" | "ConformancePackTemplate" | "QuickSetup")
+        def document_type: () -> ("Command" | "Policy" | "Automation" | "Session" | "Package" | "ApplicationConfiguration" | "ApplicationConfigurationSchema" | "DeploymentStrategy" | "ChangeCalendar" | "Automation.ChangeTemplate" | "ProblemAnalysis" | "ProblemAnalysisTemplate" | "CloudFormation" | "ConformancePackTemplate" | "QuickSetup" | "ManualApprovalPolicy" | "AutoApprovalPolicy")
         def document_format: () -> ("YAML" | "JSON" | "TEXT")
         def requires: () -> ::Array[Types::DocumentRequires]
         def attachments_content: () -> ::Array[Types::AttachmentContent]
@@ -2454,7 +2465,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#send_automation_signal-instance_method
       def send_automation_signal: (
                                     automation_execution_id: ::String,
-                                    signal_type: ("Approve" | "Reject" | "StartStep" | "StopStep" | "Resume"),
+                                    signal_type: ("Approve" | "Reject" | "StartStep" | "StopStep" | "Resume" | "Revoke"),
                                     ?payload: Hash[::String, Array[::String]]
                                   ) -> _SendAutomationSignalResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendAutomationSignalResponseSuccess
@@ -2504,6 +2515,28 @@ module Aws
                           }
                         ) -> _SendCommandResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendCommandResponseSuccess
+
+      interface _StartAccessRequestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartAccessRequestResponse]
+        def access_request_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#start_access_request-instance_method
+      def start_access_request: (
+                                  reason: ::String,
+                                  targets: Array[
+                                    {
+                                      key: ::String?,
+                                      values: Array[::String]?
+                                    },
+                                  ],
+                                  ?tags: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String
+                                    },
+                                  ]
+                                ) -> _StartAccessRequestResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartAccessRequestResponseSuccess
 
       interface _StartAssociationsOnceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartAssociationsOnceResult]
@@ -3082,7 +3115,7 @@ module Aws
                                  ops_item_id: ::String
                                },
                              ],
-                             ?status: ("Open" | "InProgress" | "Resolved" | "Pending" | "TimedOut" | "Cancelling" | "Cancelled" | "Failed" | "CompletedWithSuccess" | "CompletedWithFailure" | "Scheduled" | "RunbookInProgress" | "PendingChangeCalendarOverride" | "ChangeCalendarOverrideApproved" | "ChangeCalendarOverrideRejected" | "PendingApproval" | "Approved" | "Rejected" | "Closed"),
+                             ?status: ("Open" | "InProgress" | "Resolved" | "Pending" | "TimedOut" | "Cancelling" | "Cancelled" | "Failed" | "CompletedWithSuccess" | "CompletedWithFailure" | "Scheduled" | "RunbookInProgress" | "PendingChangeCalendarOverride" | "ChangeCalendarOverrideApproved" | "ChangeCalendarOverrideRejected" | "PendingApproval" | "Approved" | "Revoked" | "Rejected" | "Closed"),
                              ops_item_id: ::String,
                              ?title: ::String,
                              ?category: ::String,

@@ -2139,6 +2139,31 @@ module Aws::CleanRooms
       SENSITIVE: [:sql_parameters]
     end
 
+    class ProtectedQueryDistributeOutput
+      attr_accessor s3: Types::ProtectedQueryS3Output
+      attr_accessor member_list: ::Array[Types::ProtectedQuerySingleMemberOutput]
+      SENSITIVE: []
+    end
+
+    class ProtectedQueryDistributeOutputConfiguration
+      attr_accessor locations: ::Array[Types::ProtectedQueryDistributeOutputConfigurationLocation]
+      SENSITIVE: []
+    end
+
+    class ProtectedQueryDistributeOutputConfigurationLocation
+      attr_accessor s3: Types::ProtectedQueryS3OutputConfiguration
+      attr_accessor member: Types::ProtectedQueryMemberOutputConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class S3 < ProtectedQueryDistributeOutputConfigurationLocation
+      end
+      class Member < ProtectedQueryDistributeOutputConfigurationLocation
+      end
+      class Unknown < ProtectedQueryDistributeOutputConfigurationLocation
+      end
+    end
+
     class ProtectedQueryError
       attr_accessor message: ::String
       attr_accessor code: ::String
@@ -2153,12 +2178,15 @@ module Aws::CleanRooms
     class ProtectedQueryOutput
       attr_accessor s3: Types::ProtectedQueryS3Output
       attr_accessor member_list: ::Array[Types::ProtectedQuerySingleMemberOutput]
+      attr_accessor distribute: Types::ProtectedQueryDistributeOutput
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class S3 < ProtectedQueryOutput
       end
       class MemberList < ProtectedQueryOutput
+      end
+      class Distribute < ProtectedQueryOutput
       end
       class Unknown < ProtectedQueryOutput
       end
@@ -2167,12 +2195,15 @@ module Aws::CleanRooms
     class ProtectedQueryOutputConfiguration
       attr_accessor s3: Types::ProtectedQueryS3OutputConfiguration
       attr_accessor member: Types::ProtectedQueryMemberOutputConfiguration
+      attr_accessor distribute: Types::ProtectedQueryDistributeOutputConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class S3 < ProtectedQueryOutputConfiguration
       end
       class Member < ProtectedQueryOutputConfiguration
+      end
+      class Distribute < ProtectedQueryOutputConfiguration
       end
       class Unknown < ProtectedQueryOutputConfiguration
       end

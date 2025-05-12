@@ -186,7 +186,7 @@ module Aws::ChimeSDKMeetings
     CreateAttendeeResponse.add_member(:attendee, Shapes::ShapeRef.new(shape: Attendee, location_name: "Attendee"))
     CreateAttendeeResponse.struct_class = Types::CreateAttendeeResponse
 
-    CreateMeetingRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateMeetingRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateMeetingRequest.add_member(:media_region, Shapes::ShapeRef.new(shape: MediaRegion, required: true, location_name: "MediaRegion"))
     CreateMeetingRequest.add_member(:meeting_host_id, Shapes::ShapeRef.new(shape: ExternalUserId, location_name: "MeetingHostId"))
     CreateMeetingRequest.add_member(:external_meeting_id, Shapes::ShapeRef.new(shape: ExternalMeetingId, required: true, location_name: "ExternalMeetingId"))
@@ -200,7 +200,7 @@ module Aws::ChimeSDKMeetings
     CreateMeetingResponse.add_member(:meeting, Shapes::ShapeRef.new(shape: Meeting, location_name: "Meeting"))
     CreateMeetingResponse.struct_class = Types::CreateMeetingResponse
 
-    CreateMeetingWithAttendeesRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateMeetingWithAttendeesRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateMeetingWithAttendeesRequest.add_member(:media_region, Shapes::ShapeRef.new(shape: MediaRegion, required: true, location_name: "MediaRegion"))
     CreateMeetingWithAttendeesRequest.add_member(:meeting_host_id, Shapes::ShapeRef.new(shape: ExternalUserId, location_name: "MeetingHostId"))
     CreateMeetingWithAttendeesRequest.add_member(:external_meeting_id, Shapes::ShapeRef.new(shape: ExternalMeetingId, required: true, location_name: "ExternalMeetingId"))

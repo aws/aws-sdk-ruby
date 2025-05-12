@@ -54,7 +54,7 @@ module Aws::AppRegistry
   autoload :EndpointProvider, 'aws-sdk-appregistry/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-appregistry/endpoints'
 
-  GEM_VERSION = '1.49.0'
+  GEM_VERSION = '1.50.0'
 
 end
 

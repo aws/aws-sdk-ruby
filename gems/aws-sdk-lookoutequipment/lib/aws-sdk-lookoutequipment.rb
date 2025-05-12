@@ -54,7 +54,7 @@ module Aws::LookoutEquipment
   autoload :EndpointProvider, 'aws-sdk-lookoutequipment/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-lookoutequipment/endpoints'
 
-  GEM_VERSION = '1.47.0'
+  GEM_VERSION = '1.48.0'
 
 end
 

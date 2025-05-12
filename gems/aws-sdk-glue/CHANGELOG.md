@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.215.0 (2025-05-08)
+------------------
+
+* Feature - This new release supports customizable RefreshInterval for all Saas ZETL integrations from 15 minutes to 6 days.
+
+1.214.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.213.0 (2025-04-09)
 ------------------
 

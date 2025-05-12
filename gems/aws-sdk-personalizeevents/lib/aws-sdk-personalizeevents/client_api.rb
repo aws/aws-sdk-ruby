@@ -52,7 +52,7 @@ module Aws::PersonalizeEvents
     UserProperties = Shapes::StringShape.new(name: 'UserProperties')
 
     Action.add_member(:action_id, Shapes::ShapeRef.new(shape: StringType, required: true, location_name: "actionId"))
-    Action.add_member(:properties, Shapes::ShapeRef.new(shape: ActionProperties, location_name: "properties", metadata: {"jsonvalue"=>true}))
+    Action.add_member(:properties, Shapes::ShapeRef.new(shape: ActionProperties, location_name: "properties", metadata: {"jsonvalue" => true}))
     Action.struct_class = Types::Action
 
     ActionImpression.member = Shapes::ShapeRef.new(shape: ActionId)
@@ -65,7 +65,7 @@ module Aws::PersonalizeEvents
     ActionInteraction.add_member(:event_id, Shapes::ShapeRef.new(shape: StringType, location_name: "eventId"))
     ActionInteraction.add_member(:recommendation_id, Shapes::ShapeRef.new(shape: RecommendationId, location_name: "recommendationId"))
     ActionInteraction.add_member(:impression, Shapes::ShapeRef.new(shape: ActionImpression, location_name: "impression"))
-    ActionInteraction.add_member(:properties, Shapes::ShapeRef.new(shape: ActionInteractionProperties, location_name: "properties", metadata: {"jsonvalue"=>true}))
+    ActionInteraction.add_member(:properties, Shapes::ShapeRef.new(shape: ActionInteractionProperties, location_name: "properties", metadata: {"jsonvalue" => true}))
     ActionInteraction.struct_class = Types::ActionInteraction
 
     ActionInteractionsList.member = Shapes::ShapeRef.new(shape: ActionInteraction)
@@ -76,7 +76,7 @@ module Aws::PersonalizeEvents
     Event.add_member(:event_type, Shapes::ShapeRef.new(shape: StringType, required: true, location_name: "eventType"))
     Event.add_member(:event_value, Shapes::ShapeRef.new(shape: FloatType, location_name: "eventValue"))
     Event.add_member(:item_id, Shapes::ShapeRef.new(shape: ItemId, location_name: "itemId"))
-    Event.add_member(:properties, Shapes::ShapeRef.new(shape: EventPropertiesJSON, location_name: "properties", metadata: {"jsonvalue"=>true}))
+    Event.add_member(:properties, Shapes::ShapeRef.new(shape: EventPropertiesJSON, location_name: "properties", metadata: {"jsonvalue" => true}))
     Event.add_member(:sent_at, Shapes::ShapeRef.new(shape: Date, required: true, location_name: "sentAt"))
     Event.add_member(:recommendation_id, Shapes::ShapeRef.new(shape: RecommendationId, location_name: "recommendationId"))
     Event.add_member(:impression, Shapes::ShapeRef.new(shape: Impression, location_name: "impression"))
@@ -91,7 +91,7 @@ module Aws::PersonalizeEvents
     InvalidInputException.struct_class = Types::InvalidInputException
 
     Item.add_member(:item_id, Shapes::ShapeRef.new(shape: StringType, required: true, location_name: "itemId"))
-    Item.add_member(:properties, Shapes::ShapeRef.new(shape: ItemProperties, location_name: "properties", metadata: {"jsonvalue"=>true}))
+    Item.add_member(:properties, Shapes::ShapeRef.new(shape: ItemProperties, location_name: "properties", metadata: {"jsonvalue" => true}))
     Item.struct_class = Types::Item
 
     ItemList.member = Shapes::ShapeRef.new(shape: Item)
@@ -128,7 +128,7 @@ module Aws::PersonalizeEvents
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     User.add_member(:user_id, Shapes::ShapeRef.new(shape: StringType, required: true, location_name: "userId"))
-    User.add_member(:properties, Shapes::ShapeRef.new(shape: UserProperties, location_name: "properties", metadata: {"jsonvalue"=>true}))
+    User.add_member(:properties, Shapes::ShapeRef.new(shape: UserProperties, location_name: "properties", metadata: {"jsonvalue" => true}))
     User.struct_class = Types::User
 
     UserList.member = Shapes::ShapeRef.new(shape: User)

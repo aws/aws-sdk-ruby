@@ -904,12 +904,18 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] log_group_class
     #   Use this parameter to specify the log group class for this log
-    #   group. There are two classes:
+    #   group. There are three classes:
     #
     #   * The `Standard` log class supports all CloudWatch Logs features.
     #
     #   * The `Infrequent Access` log class supports a subset of CloudWatch
     #     Logs features and incurs lower costs.
+    #
+    #   * Use the `Delivery` log class only for delivering Lambda logs to
+    #     store in Amazon S3 or Amazon Data Firehose. Log events in log
+    #     groups in the Delivery class are kept in CloudWatch Logs for only
+    #     one day. This log class doesn't offer rich CloudWatch Logs
+    #     capabilities such as CloudWatch Logs Insights queries.
     #
     #   If you omit this parameter, the default of `STANDARD` is used.
     #
@@ -2055,13 +2061,19 @@ module Aws::CloudWatchLogs
     #   @return [Boolean]
     #
     # @!attribute [rw] log_group_class
-    #   Specifies the log group class for this log group. There are two
+    #   Specifies the log group class for this log group. There are three
     #   classes:
     #
     #   * The `Standard` log class supports all CloudWatch Logs features.
     #
     #   * The `Infrequent Access` log class supports a subset of CloudWatch
     #     Logs features and incurs lower costs.
+    #
+    #   * Use the `Delivery` log class only for delivering Lambda logs to
+    #     store in Amazon S3 or Amazon Data Firehose. Log events in log
+    #     groups in the Delivery class are kept in CloudWatch Logs for only
+    #     one day. This log class doesn't offer rich CloudWatch Logs
+    #     capabilities such as CloudWatch Logs Insights queries.
     #
     #   For details about the features supported by each class, see [Log
     #   classes][1]
@@ -3501,7 +3513,7 @@ module Aws::CloudWatchLogs
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#Grok-Patterns
+    #   [1]: https://docs.aws.amazon.com/mazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation-Processors.html#Grok-Patterns
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/Grok AWS API Documentation
@@ -3560,7 +3572,7 @@ module Aws::CloudWatchLogs
     #   @return [Integer]
     #
     # @!attribute [rw] message
-    #   The raw event message. Each log event can be no larger than 256 KB.
+    #   The raw event message. Each log event can be no larger than 1 MB.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/InputLogEvent AWS API Documentation
@@ -3920,7 +3932,7 @@ module Aws::CloudWatchLogs
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-listToMap
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation-Processors.html#CloudWatch-Logs-Transformation-listToMap
     #
     # @!attribute [rw] source
     #   The key in the log event that has a list of objects that will be
@@ -4205,16 +4217,22 @@ module Aws::CloudWatchLogs
     #   @return [Array<String>]
     #
     # @!attribute [rw] log_group_class
-    #   This specifies the log group class for this log group. There are two
-    #   classes:
+    #   This specifies the log group class for this log group. There are
+    #   three classes:
     #
     #   * The `Standard` log class supports all CloudWatch Logs features.
     #
     #   * The `Infrequent Access` log class supports a subset of CloudWatch
     #     Logs features and incurs lower costs.
     #
-    #   For details about the features supported by each class, see [Log
-    #   classes][1]
+    #   * Use the `Delivery` log class only for delivering Lambda logs to
+    #     store in Amazon S3 or Amazon Data Firehose. Log events in log
+    #     groups in the Delivery class are kept in CloudWatch Logs for only
+    #     one day. This log class doesn't offer rich CloudWatch Logs
+    #     capabilities such as CloudWatch Logs Insights queries.
+    #
+    #   For details about the features supported by the Standard and
+    #   Infrequent Access classes, see [Log classes][1]
     #
     #
     #

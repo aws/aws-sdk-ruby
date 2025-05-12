@@ -451,7 +451,7 @@ module Aws::EKS
 
     AssociateEncryptionConfigRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
     AssociateEncryptionConfigRequest.add_member(:encryption_config, Shapes::ShapeRef.new(shape: EncryptionConfigList, required: true, location_name: "encryptionConfig"))
-    AssociateEncryptionConfigRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    AssociateEncryptionConfigRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     AssociateEncryptionConfigRequest.struct_class = Types::AssociateEncryptionConfigRequest
 
     AssociateEncryptionConfigResponse.add_member(:update, Shapes::ShapeRef.new(shape: Update, location_name: "update"))
@@ -460,7 +460,7 @@ module Aws::EKS
     AssociateIdentityProviderConfigRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
     AssociateIdentityProviderConfigRequest.add_member(:oidc, Shapes::ShapeRef.new(shape: OidcIdentityProviderConfigRequest, required: true, location_name: "oidc"))
     AssociateIdentityProviderConfigRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    AssociateIdentityProviderConfigRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    AssociateIdentityProviderConfigRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     AssociateIdentityProviderConfigRequest.struct_class = Types::AssociateIdentityProviderConfigRequest
 
     AssociateIdentityProviderConfigResponse.add_member(:update, Shapes::ShapeRef.new(shape: Update, location_name: "update"))
@@ -599,7 +599,7 @@ module Aws::EKS
     CreateAccessEntryRequest.add_member(:principal_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "principalArn"))
     CreateAccessEntryRequest.add_member(:kubernetes_groups, Shapes::ShapeRef.new(shape: StringList, location_name: "kubernetesGroups"))
     CreateAccessEntryRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateAccessEntryRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateAccessEntryRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateAccessEntryRequest.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "username"))
     CreateAccessEntryRequest.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
     CreateAccessEntryRequest.struct_class = Types::CreateAccessEntryRequest
@@ -612,7 +612,7 @@ module Aws::EKS
     CreateAddonRequest.add_member(:addon_version, Shapes::ShapeRef.new(shape: String, location_name: "addonVersion"))
     CreateAddonRequest.add_member(:service_account_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "serviceAccountRoleArn"))
     CreateAddonRequest.add_member(:resolve_conflicts, Shapes::ShapeRef.new(shape: ResolveConflicts, location_name: "resolveConflicts"))
-    CreateAddonRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateAddonRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateAddonRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateAddonRequest.add_member(:configuration_values, Shapes::ShapeRef.new(shape: String, location_name: "configurationValues"))
     CreateAddonRequest.add_member(:pod_identity_associations, Shapes::ShapeRef.new(shape: AddonPodIdentityAssociationsList, location_name: "podIdentityAssociations"))
@@ -627,7 +627,7 @@ module Aws::EKS
     CreateClusterRequest.add_member(:resources_vpc_config, Shapes::ShapeRef.new(shape: VpcConfigRequest, required: true, location_name: "resourcesVpcConfig"))
     CreateClusterRequest.add_member(:kubernetes_network_config, Shapes::ShapeRef.new(shape: KubernetesNetworkConfigRequest, location_name: "kubernetesNetworkConfig"))
     CreateClusterRequest.add_member(:logging, Shapes::ShapeRef.new(shape: Logging, location_name: "logging"))
-    CreateClusterRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateClusterRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateClusterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateClusterRequest.add_member(:encryption_config, Shapes::ShapeRef.new(shape: EncryptionConfigList, location_name: "encryptionConfig"))
     CreateClusterRequest.add_member(:outpost_config, Shapes::ShapeRef.new(shape: OutpostConfigRequest, location_name: "outpostConfig"))
@@ -648,7 +648,7 @@ module Aws::EKS
     CreateEksAnywhereSubscriptionRequest.add_member(:license_quantity, Shapes::ShapeRef.new(shape: Integer, location_name: "licenseQuantity"))
     CreateEksAnywhereSubscriptionRequest.add_member(:license_type, Shapes::ShapeRef.new(shape: EksAnywhereSubscriptionLicenseType, location_name: "licenseType"))
     CreateEksAnywhereSubscriptionRequest.add_member(:auto_renew, Shapes::ShapeRef.new(shape: Boolean, location_name: "autoRenew"))
-    CreateEksAnywhereSubscriptionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateEksAnywhereSubscriptionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateEksAnywhereSubscriptionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateEksAnywhereSubscriptionRequest.struct_class = Types::CreateEksAnywhereSubscriptionRequest
 
@@ -660,7 +660,7 @@ module Aws::EKS
     CreateFargateProfileRequest.add_member(:pod_execution_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "podExecutionRoleArn"))
     CreateFargateProfileRequest.add_member(:subnets, Shapes::ShapeRef.new(shape: StringList, location_name: "subnets"))
     CreateFargateProfileRequest.add_member(:selectors, Shapes::ShapeRef.new(shape: FargateProfileSelectors, location_name: "selectors"))
-    CreateFargateProfileRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateFargateProfileRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateFargateProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateFargateProfileRequest.struct_class = Types::CreateFargateProfileRequest
 
@@ -679,7 +679,7 @@ module Aws::EKS
     CreateNodegroupRequest.add_member(:labels, Shapes::ShapeRef.new(shape: labelsMap, location_name: "labels"))
     CreateNodegroupRequest.add_member(:taints, Shapes::ShapeRef.new(shape: taintsList, location_name: "taints"))
     CreateNodegroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateNodegroupRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateNodegroupRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateNodegroupRequest.add_member(:launch_template, Shapes::ShapeRef.new(shape: LaunchTemplateSpecification, location_name: "launchTemplate"))
     CreateNodegroupRequest.add_member(:update_config, Shapes::ShapeRef.new(shape: NodegroupUpdateConfig, location_name: "updateConfig"))
     CreateNodegroupRequest.add_member(:node_repair_config, Shapes::ShapeRef.new(shape: NodeRepairConfig, location_name: "nodeRepairConfig"))
@@ -695,7 +695,7 @@ module Aws::EKS
     CreatePodIdentityAssociationRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: String, required: true, location_name: "namespace"))
     CreatePodIdentityAssociationRequest.add_member(:service_account, Shapes::ShapeRef.new(shape: String, required: true, location_name: "serviceAccount"))
     CreatePodIdentityAssociationRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "roleArn"))
-    CreatePodIdentityAssociationRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreatePodIdentityAssociationRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     CreatePodIdentityAssociationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreatePodIdentityAssociationRequest.struct_class = Types::CreatePodIdentityAssociationRequest
 
@@ -813,7 +813,7 @@ module Aws::EKS
     DescribeClusterVersionsRequest.add_member(:default_only, Shapes::ShapeRef.new(shape: BoxedBoolean, location: "querystring", location_name: "defaultOnly"))
     DescribeClusterVersionsRequest.add_member(:include_all, Shapes::ShapeRef.new(shape: BoxedBoolean, location: "querystring", location_name: "includeAll"))
     DescribeClusterVersionsRequest.add_member(:cluster_versions, Shapes::ShapeRef.new(shape: StringList, location: "querystring", location_name: "clusterVersions"))
-    DescribeClusterVersionsRequest.add_member(:status, Shapes::ShapeRef.new(shape: ClusterVersionStatus, deprecated: true, location: "querystring", location_name: "status", metadata: {"deprecatedMessage"=>"status has been replaced by versionStatus", "deprecatedSince"=>"2025-02-15"}))
+    DescribeClusterVersionsRequest.add_member(:status, Shapes::ShapeRef.new(shape: ClusterVersionStatus, deprecated: true, location: "querystring", location_name: "status", metadata: {"deprecatedMessage" => "status has been replaced by versionStatus", "deprecatedSince" => "2025-02-15"}))
     DescribeClusterVersionsRequest.add_member(:version_status, Shapes::ShapeRef.new(shape: VersionStatus, location: "querystring", location_name: "versionStatus"))
     DescribeClusterVersionsRequest.struct_class = Types::DescribeClusterVersionsRequest
 
@@ -880,7 +880,7 @@ module Aws::EKS
 
     DisassociateIdentityProviderConfigRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
     DisassociateIdentityProviderConfigRequest.add_member(:identity_provider_config, Shapes::ShapeRef.new(shape: IdentityProviderConfig, required: true, location_name: "identityProviderConfig"))
-    DisassociateIdentityProviderConfigRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    DisassociateIdentityProviderConfigRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     DisassociateIdentityProviderConfigRequest.struct_class = Types::DisassociateIdentityProviderConfigRequest
 
     DisassociateIdentityProviderConfigResponse.add_member(:update, Shapes::ShapeRef.new(shape: Update, location_name: "update"))
@@ -1316,7 +1316,7 @@ module Aws::EKS
 
     RegisterClusterRequest.add_member(:name, Shapes::ShapeRef.new(shape: ClusterName, required: true, location_name: "name"))
     RegisterClusterRequest.add_member(:connector_config, Shapes::ShapeRef.new(shape: ConnectorConfigRequest, required: true, location_name: "connectorConfig"))
-    RegisterClusterRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    RegisterClusterRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     RegisterClusterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     RegisterClusterRequest.struct_class = Types::RegisterClusterRequest
 
@@ -1432,7 +1432,7 @@ module Aws::EKS
     UpdateAccessEntryRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
     UpdateAccessEntryRequest.add_member(:principal_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "principalArn"))
     UpdateAccessEntryRequest.add_member(:kubernetes_groups, Shapes::ShapeRef.new(shape: StringList, location_name: "kubernetesGroups"))
-    UpdateAccessEntryRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    UpdateAccessEntryRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     UpdateAccessEntryRequest.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "username"))
     UpdateAccessEntryRequest.struct_class = Types::UpdateAccessEntryRequest
 
@@ -1444,7 +1444,7 @@ module Aws::EKS
     UpdateAddonRequest.add_member(:addon_version, Shapes::ShapeRef.new(shape: String, location_name: "addonVersion"))
     UpdateAddonRequest.add_member(:service_account_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "serviceAccountRoleArn"))
     UpdateAddonRequest.add_member(:resolve_conflicts, Shapes::ShapeRef.new(shape: ResolveConflicts, location_name: "resolveConflicts"))
-    UpdateAddonRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    UpdateAddonRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     UpdateAddonRequest.add_member(:configuration_values, Shapes::ShapeRef.new(shape: String, location_name: "configurationValues"))
     UpdateAddonRequest.add_member(:pod_identity_associations, Shapes::ShapeRef.new(shape: AddonPodIdentityAssociationsList, location_name: "podIdentityAssociations"))
     UpdateAddonRequest.struct_class = Types::UpdateAddonRequest
@@ -1455,7 +1455,7 @@ module Aws::EKS
     UpdateClusterConfigRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
     UpdateClusterConfigRequest.add_member(:resources_vpc_config, Shapes::ShapeRef.new(shape: VpcConfigRequest, location_name: "resourcesVpcConfig"))
     UpdateClusterConfigRequest.add_member(:logging, Shapes::ShapeRef.new(shape: Logging, location_name: "logging"))
-    UpdateClusterConfigRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    UpdateClusterConfigRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     UpdateClusterConfigRequest.add_member(:access_config, Shapes::ShapeRef.new(shape: UpdateAccessConfigRequest, location_name: "accessConfig"))
     UpdateClusterConfigRequest.add_member(:upgrade_policy, Shapes::ShapeRef.new(shape: UpgradePolicyRequest, location_name: "upgradePolicy"))
     UpdateClusterConfigRequest.add_member(:zonal_shift_config, Shapes::ShapeRef.new(shape: ZonalShiftConfigRequest, location_name: "zonalShiftConfig"))
@@ -1470,7 +1470,7 @@ module Aws::EKS
 
     UpdateClusterVersionRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
     UpdateClusterVersionRequest.add_member(:version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "version"))
-    UpdateClusterVersionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    UpdateClusterVersionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     UpdateClusterVersionRequest.add_member(:force, Shapes::ShapeRef.new(shape: Boolean, location_name: "force"))
     UpdateClusterVersionRequest.struct_class = Types::UpdateClusterVersionRequest
 
@@ -1479,7 +1479,7 @@ module Aws::EKS
 
     UpdateEksAnywhereSubscriptionRequest.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "id"))
     UpdateEksAnywhereSubscriptionRequest.add_member(:auto_renew, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "autoRenew"))
-    UpdateEksAnywhereSubscriptionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    UpdateEksAnywhereSubscriptionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     UpdateEksAnywhereSubscriptionRequest.struct_class = Types::UpdateEksAnywhereSubscriptionRequest
 
     UpdateEksAnywhereSubscriptionResponse.add_member(:subscription, Shapes::ShapeRef.new(shape: EksAnywhereSubscription, location_name: "subscription"))
@@ -1496,7 +1496,7 @@ module Aws::EKS
     UpdateNodegroupConfigRequest.add_member(:scaling_config, Shapes::ShapeRef.new(shape: NodegroupScalingConfig, location_name: "scalingConfig"))
     UpdateNodegroupConfigRequest.add_member(:update_config, Shapes::ShapeRef.new(shape: NodegroupUpdateConfig, location_name: "updateConfig"))
     UpdateNodegroupConfigRequest.add_member(:node_repair_config, Shapes::ShapeRef.new(shape: NodeRepairConfig, location_name: "nodeRepairConfig"))
-    UpdateNodegroupConfigRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    UpdateNodegroupConfigRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     UpdateNodegroupConfigRequest.struct_class = Types::UpdateNodegroupConfigRequest
 
     UpdateNodegroupConfigResponse.add_member(:update, Shapes::ShapeRef.new(shape: Update, location_name: "update"))
@@ -1508,7 +1508,7 @@ module Aws::EKS
     UpdateNodegroupVersionRequest.add_member(:release_version, Shapes::ShapeRef.new(shape: String, location_name: "releaseVersion"))
     UpdateNodegroupVersionRequest.add_member(:launch_template, Shapes::ShapeRef.new(shape: LaunchTemplateSpecification, location_name: "launchTemplate"))
     UpdateNodegroupVersionRequest.add_member(:force, Shapes::ShapeRef.new(shape: Boolean, location_name: "force"))
-    UpdateNodegroupVersionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    UpdateNodegroupVersionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     UpdateNodegroupVersionRequest.struct_class = Types::UpdateNodegroupVersionRequest
 
     UpdateNodegroupVersionResponse.add_member(:update, Shapes::ShapeRef.new(shape: Update, location_name: "update"))
@@ -1523,7 +1523,7 @@ module Aws::EKS
     UpdatePodIdentityAssociationRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
     UpdatePodIdentityAssociationRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "associationId"))
     UpdatePodIdentityAssociationRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, location_name: "roleArn"))
-    UpdatePodIdentityAssociationRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    UpdatePodIdentityAssociationRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     UpdatePodIdentityAssociationRequest.struct_class = Types::UpdatePodIdentityAssociationRequest
 
     UpdatePodIdentityAssociationResponse.add_member(:association, Shapes::ShapeRef.new(shape: PodIdentityAssociation, location_name: "association"))

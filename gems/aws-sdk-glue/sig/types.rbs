@@ -1323,6 +1323,7 @@ module Aws::Glue
       attr_accessor kms_key_id: ::String
       attr_accessor additional_encryption_context: ::Hash[::String, ::String]
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor integration_config: Types::IntegrationConfig
       SENSITIVE: []
     end
 
@@ -1353,6 +1354,7 @@ module Aws::Glue
       attr_accessor create_time: ::Time
       attr_accessor errors: ::Array[Types::IntegrationError]
       attr_accessor data_filter: ::String
+      attr_accessor integration_config: Types::IntegrationConfig
       SENSITIVE: []
     end
 
@@ -3910,6 +3912,7 @@ module Aws::Glue
       attr_accessor integration_arn: ::String
       attr_accessor status: ("CREATING" | "ACTIVE" | "MODIFYING" | "FAILED" | "DELETING" | "SYNCING" | "NEEDS_ATTENTION")
       attr_accessor create_time: ::Time
+      attr_accessor integration_config: Types::IntegrationConfig
       attr_accessor errors: ::Array[Types::IntegrationError]
       SENSITIVE: []
     end
@@ -3925,8 +3928,14 @@ module Aws::Glue
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor status: ("CREATING" | "ACTIVE" | "MODIFYING" | "FAILED" | "DELETING" | "SYNCING" | "NEEDS_ATTENTION")
       attr_accessor create_time: ::Time
+      attr_accessor integration_config: Types::IntegrationConfig
       attr_accessor errors: ::Array[Types::IntegrationError]
       attr_accessor data_filter: ::String
+      SENSITIVE: []
+    end
+
+    class IntegrationConfig
+      attr_accessor refresh_interval: ::String
       SENSITIVE: []
     end
 

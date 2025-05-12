@@ -315,6 +315,11 @@ module Aws::BedrockAgentRuntime
       SENSITIVE: []
     end
 
+    class CustomOrchestration
+      attr_accessor executor: Types::OrchestrationExecutor
+      SENSITIVE: []
+    end
+
     class CustomOrchestrationTrace
       attr_accessor event: Types::CustomOrchestrationTraceEvent
       attr_accessor trace_id: ::String
@@ -877,10 +882,13 @@ module Aws::BedrockAgentRuntime
     end
 
     class InlineAgentTracePart
+      attr_accessor caller_chain: ::Array[Types::Caller]
+      attr_accessor collaborator_name: ::String
+      attr_accessor event_time: ::Time
       attr_accessor session_id: ::String
       attr_accessor trace: Types::Trace
       attr_accessor event_type: untyped
-      SENSITIVE: [:trace]
+      SENSITIVE: [:collaborator_name, :trace]
     end
 
     class InlineBedrockModelConfigurations
@@ -1038,9 +1046,11 @@ module Aws::BedrockAgentRuntime
     class InvokeInlineAgentRequest
       attr_accessor action_groups: ::Array[Types::AgentActionGroup]
       attr_accessor agent_collaboration: ("SUPERVISOR" | "SUPERVISOR_ROUTER" | "DISABLED")
+      attr_accessor agent_name: ::String
       attr_accessor bedrock_model_configurations: Types::InlineBedrockModelConfigurations
       attr_accessor collaborator_configurations: ::Array[Types::CollaboratorConfiguration]
       attr_accessor collaborators: ::Array[Types::Collaborator]
+      attr_accessor custom_orchestration: Types::CustomOrchestration
       attr_accessor customer_encryption_key_arn: ::String
       attr_accessor enable_trace: bool
       attr_accessor end_session: bool
@@ -1051,10 +1061,11 @@ module Aws::BedrockAgentRuntime
       attr_accessor input_text: ::String
       attr_accessor instruction: ::String
       attr_accessor knowledge_bases: ::Array[Types::KnowledgeBase]
+      attr_accessor orchestration_type: ("DEFAULT" | "CUSTOM_ORCHESTRATION")
       attr_accessor prompt_override_configuration: Types::PromptOverrideConfiguration
       attr_accessor session_id: ::String
       attr_accessor streaming_configurations: Types::StreamingConfigurations
-      SENSITIVE: [:input_text, :instruction, :prompt_override_configuration]
+      SENSITIVE: [:agent_name, :input_text, :instruction, :prompt_override_configuration]
     end
 
     class InvokeInlineAgentResponse
@@ -1287,6 +1298,17 @@ module Aws::BedrockAgentRuntime
       attr_accessor prompt_template: Types::PromptTemplate
       attr_accessor query_transformation_configuration: Types::QueryTransformationConfiguration
       SENSITIVE: []
+    end
+
+    class OrchestrationExecutor
+      attr_accessor lambda: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Lambda < OrchestrationExecutor
+      end
+      class Unknown < OrchestrationExecutor
+      end
     end
 
     class OrchestrationModelInvocationOutput

@@ -54,7 +54,7 @@ module Aws::IoTDeviceAdvisor
   autoload :EndpointProvider, 'aws-sdk-iotdeviceadvisor/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-iotdeviceadvisor/endpoints'
 
-  GEM_VERSION = '1.47.0'
+  GEM_VERSION = '1.48.0'
 
 end
 

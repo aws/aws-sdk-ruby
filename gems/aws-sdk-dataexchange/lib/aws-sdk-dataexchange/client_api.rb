@@ -762,7 +762,7 @@ module Aws::DataExchange
     LakeFormationTagPolicyDetails.add_member(:table, Shapes::ShapeRef.new(shape: __string, location_name: "Table"))
     LakeFormationTagPolicyDetails.struct_class = Types::LakeFormationTagPolicyDetails
 
-    ListDataGrantsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListDataGrantsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
     ListDataGrantsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
     ListDataGrantsRequest.struct_class = Types::ListDataGrantsRequest
 
@@ -853,7 +853,7 @@ module Aws::DataExchange
 
     ListOf__string.member = Shapes::ShapeRef.new(shape: __string)
 
-    ListReceivedDataGrantsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListReceivedDataGrantsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
     ListReceivedDataGrantsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
     ListReceivedDataGrantsRequest.add_member(:acceptance_state, Shapes::ShapeRef.new(shape: AcceptanceStateFilterValues, location: "querystring", location_name: "acceptanceState"))
     ListReceivedDataGrantsRequest.struct_class = Types::ListReceivedDataGrantsRequest
@@ -1037,7 +1037,7 @@ module Aws::DataExchange
     SendApiAssetResponse[:payload_member] = SendApiAssetResponse.member(:body)
 
     SendDataSetNotificationRequest.add_member(:scope, Shapes::ShapeRef.new(shape: ScopeDetails, location_name: "Scope"))
-    SendDataSetNotificationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    SendDataSetNotificationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     SendDataSetNotificationRequest.add_member(:comment, Shapes::ShapeRef.new(shape: __stringMin0Max4096, location_name: "Comment"))
     SendDataSetNotificationRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "DataSetId"))
     SendDataSetNotificationRequest.add_member(:details, Shapes::ShapeRef.new(shape: NotificationDetails, location_name: "Details"))

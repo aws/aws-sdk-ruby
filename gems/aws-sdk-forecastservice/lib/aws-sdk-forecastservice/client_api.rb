@@ -1108,7 +1108,7 @@ module Aws::ForecastService
 
     MetricResults.member = Shapes::ShapeRef.new(shape: MetricResult)
 
-    Metrics.add_member(:rmse, Shapes::ShapeRef.new(shape: Double, deprecated: true, location_name: "RMSE", metadata: {"deprecatedMessage"=>"This property is deprecated, please refer to ErrorMetrics for both RMSE and WAPE"}))
+    Metrics.add_member(:rmse, Shapes::ShapeRef.new(shape: Double, deprecated: true, location_name: "RMSE", metadata: {"deprecatedMessage" => "This property is deprecated, please refer to ErrorMetrics for both RMSE and WAPE"}))
     Metrics.add_member(:weighted_quantile_losses, Shapes::ShapeRef.new(shape: WeightedQuantileLosses, location_name: "WeightedQuantileLosses"))
     Metrics.add_member(:error_metrics, Shapes::ShapeRef.new(shape: ErrorMetrics, location_name: "ErrorMetrics"))
     Metrics.add_member(:average_weighted_quantile_loss, Shapes::ShapeRef.new(shape: Double, location_name: "AverageWeightedQuantileLoss"))

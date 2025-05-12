@@ -386,7 +386,7 @@ module Aws::BedrockAgent
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] parent_action_signature
@@ -1774,7 +1774,7 @@ module Aws::BedrockAgent
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html
     #   @return [String]
     #
     # @!attribute [rw] parent_action_group_signature_params
@@ -1787,7 +1787,7 @@ module Aws::BedrockAgent
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateAgentActionGroupRequest AWS API Documentation
@@ -4017,9 +4017,16 @@ module Aws::BedrockAgent
     #   @return [Types::CollectorFlowNodeConfiguration]
     #
     # @!attribute [rw] condition
-    #   Contains configurations for a Condition node in your flow. Defines
+    #   Contains configurations for a condition node in your flow. Defines
     #   conditions that lead to different branches of the flow.
     #   @return [Types::ConditionFlowNodeConfiguration]
+    #
+    # @!attribute [rw] inline_code
+    #   Contains configurations for an inline code node in your flow. Inline
+    #   code nodes let you write and execute code directly within your flow,
+    #   enabling data transformations, custom logic, and integrations
+    #   without needing an external Lambda function.
+    #   @return [Types::InlineCodeFlowNodeConfiguration]
     #
     # @!attribute [rw] input
     #   Contains configurations for an input flow node in your flow. The
@@ -4066,12 +4073,12 @@ module Aws::BedrockAgent
     #   @return [Types::PromptFlowNodeConfiguration]
     #
     # @!attribute [rw] retrieval
-    #   Contains configurations for a Retrieval node in your flow. Retrieves
+    #   Contains configurations for a retrieval node in your flow. Retrieves
     #   data from an Amazon S3 location and returns it as the output.
     #   @return [Types::RetrievalFlowNodeConfiguration]
     #
     # @!attribute [rw] storage
-    #   Contains configurations for a Storage node in your flow. Stores an
+    #   Contains configurations for a storage node in your flow. Stores an
     #   input in an Amazon S3 location.
     #   @return [Types::StorageFlowNodeConfiguration]
     #
@@ -4081,6 +4088,7 @@ module Aws::BedrockAgent
       :agent,
       :collector,
       :condition,
+      :inline_code,
       :input,
       :iterator,
       :knowledge_base,
@@ -4098,6 +4106,7 @@ module Aws::BedrockAgent
       class Agent < FlowNodeConfiguration; end
       class Collector < FlowNodeConfiguration; end
       class Condition < FlowNodeConfiguration; end
+      class InlineCode < FlowNodeConfiguration; end
       class Input < FlowNodeConfiguration; end
       class Iterator < FlowNodeConfiguration; end
       class KnowledgeBase < FlowNodeConfiguration; end
@@ -5363,7 +5372,7 @@ module Aws::BedrockAgent
     #   the following token at each point of generation. The value that you
     #   set for `Top P` determines the number of most-likely candidates from
     #   which the model chooses the next token in the sequence. For example,
-    #   if you set `topP` to 80, the model only selects the next token from
+    #   if you set `topP` to 0.8, the model only selects the next token from
     #   the top 80% of the probability distribution of next tokens.
     #   @return [Float]
     #
@@ -5646,6 +5655,37 @@ module Aws::BedrockAgent
       :status,
       :updated_at)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains configurations for an inline code node in your flow. Inline
+    # code nodes let you write and execute code directly within your flow,
+    # enabling data transformations, custom logic, and integrations without
+    # needing an external Lambda function.
+    #
+    # @!attribute [rw] code
+    #   The code that's executed in your inline code node. The code can
+    #   access input data from previous nodes in the flow, perform
+    #   operations on that data, and produce output that can be used by
+    #   other nodes in your flow.
+    #
+    #   The code must be valid in the programming `language` that you
+    #   specify.
+    #   @return [String]
+    #
+    # @!attribute [rw] language
+    #   The programming language used by your inline code node.
+    #
+    #   The code must be valid in the programming `language` that you
+    #   specify. Currently, only Python 3 (`Python_3`) is supported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/InlineCodeFlowNodeConfiguration AWS API Documentation
+    #
+    class InlineCodeFlowNodeConfiguration < Struct.new(
+      :code,
+      :language)
+      SENSITIVE = [:code]
       include Aws::Structure
     end
 
@@ -7788,7 +7828,7 @@ module Aws::BedrockAgent
     #   skips that step. The default state for each `promptType` is as
     #   follows.
     #
-    #   * `PRE_PROCESSING` – `ENABLED`
+    #   * `PRE_PROCESSING` – `DISABLED`
     #
     #   * `ORCHESTRATION` – `ENABLED`
     #
@@ -10042,7 +10082,7 @@ module Aws::BedrockAgent
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html
     #   [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html
     #   @return [String]
     #
@@ -10056,7 +10096,7 @@ module Aws::BedrockAgent
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateAgentActionGroupRequest AWS API Documentation

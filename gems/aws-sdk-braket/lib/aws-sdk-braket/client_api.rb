@@ -162,7 +162,7 @@ module Aws::Braket
     CancelJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: JobArn, required: true, location_name: "jobArn"))
     CancelJobResponse.struct_class = Types::CancelJobResponse
 
-    CancelQuantumTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String64, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CancelQuantumTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String64, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CancelQuantumTaskRequest.add_member(:quantum_task_arn, Shapes::ShapeRef.new(shape: QuantumTaskArn, required: true, location: "uri", location_name: "quantumTaskArn"))
     CancelQuantumTaskRequest.struct_class = Types::CancelQuantumTaskRequest
 
@@ -179,7 +179,7 @@ module Aws::Braket
     CreateJobRequest.add_member(:algorithm_specification, Shapes::ShapeRef.new(shape: AlgorithmSpecification, required: true, location_name: "algorithmSpecification"))
     CreateJobRequest.add_member(:associations, Shapes::ShapeRef.new(shape: CreateJobRequestAssociationsList, location_name: "associations"))
     CreateJobRequest.add_member(:checkpoint_config, Shapes::ShapeRef.new(shape: JobCheckpointConfig, location_name: "checkpointConfig"))
-    CreateJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String64, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String64, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateJobRequest.add_member(:device_config, Shapes::ShapeRef.new(shape: DeviceConfig, required: true, location_name: "deviceConfig"))
     CreateJobRequest.add_member(:hyper_parameters, Shapes::ShapeRef.new(shape: HyperParameters, location_name: "hyperParameters"))
     CreateJobRequest.add_member(:input_data_config, Shapes::ShapeRef.new(shape: CreateJobRequestInputDataConfigList, location_name: "inputDataConfig"))
@@ -198,11 +198,11 @@ module Aws::Braket
     CreateJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: JobArn, required: true, location_name: "jobArn"))
     CreateJobResponse.struct_class = Types::CreateJobResponse
 
-    CreateQuantumTaskRequest.add_member(:action, Shapes::ShapeRef.new(shape: JsonValue, required: true, location_name: "action", metadata: {"jsonvalue"=>true}))
+    CreateQuantumTaskRequest.add_member(:action, Shapes::ShapeRef.new(shape: JsonValue, required: true, location_name: "action", metadata: {"jsonvalue" => true}))
     CreateQuantumTaskRequest.add_member(:associations, Shapes::ShapeRef.new(shape: CreateQuantumTaskRequestAssociationsList, location_name: "associations"))
-    CreateQuantumTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String64, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateQuantumTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String64, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateQuantumTaskRequest.add_member(:device_arn, Shapes::ShapeRef.new(shape: DeviceArn, required: true, location_name: "deviceArn"))
-    CreateQuantumTaskRequest.add_member(:device_parameters, Shapes::ShapeRef.new(shape: CreateQuantumTaskRequestDeviceParametersString, location_name: "deviceParameters", metadata: {"jsonvalue"=>true}))
+    CreateQuantumTaskRequest.add_member(:device_parameters, Shapes::ShapeRef.new(shape: CreateQuantumTaskRequestDeviceParametersString, location_name: "deviceParameters", metadata: {"jsonvalue" => true}))
     CreateQuantumTaskRequest.add_member(:job_token, Shapes::ShapeRef.new(shape: JobToken, location_name: "jobToken"))
     CreateQuantumTaskRequest.add_member(:output_s3_bucket, Shapes::ShapeRef.new(shape: CreateQuantumTaskRequestOutputS3BucketString, required: true, location_name: "outputS3Bucket"))
     CreateQuantumTaskRequest.add_member(:output_s3_key_prefix, Shapes::ShapeRef.new(shape: CreateQuantumTaskRequestOutputS3KeyPrefixString, required: true, location_name: "outputS3KeyPrefix"))
@@ -247,7 +247,7 @@ module Aws::Braket
     GetDeviceRequest.struct_class = Types::GetDeviceRequest
 
     GetDeviceResponse.add_member(:device_arn, Shapes::ShapeRef.new(shape: DeviceArn, required: true, location_name: "deviceArn"))
-    GetDeviceResponse.add_member(:device_capabilities, Shapes::ShapeRef.new(shape: JsonValue, required: true, location_name: "deviceCapabilities", metadata: {"jsonvalue"=>true}))
+    GetDeviceResponse.add_member(:device_capabilities, Shapes::ShapeRef.new(shape: JsonValue, required: true, location_name: "deviceCapabilities", metadata: {"jsonvalue" => true}))
     GetDeviceResponse.add_member(:device_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "deviceName"))
     GetDeviceResponse.add_member(:device_queue_info, Shapes::ShapeRef.new(shape: DeviceQueueInfoList, location_name: "deviceQueueInfo"))
     GetDeviceResponse.add_member(:device_status, Shapes::ShapeRef.new(shape: DeviceStatus, required: true, location_name: "deviceStatus"))
@@ -289,7 +289,7 @@ module Aws::Braket
     GetQuantumTaskResponse.add_member(:associations, Shapes::ShapeRef.new(shape: Associations, location_name: "associations"))
     GetQuantumTaskResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
     GetQuantumTaskResponse.add_member(:device_arn, Shapes::ShapeRef.new(shape: DeviceArn, required: true, location_name: "deviceArn"))
-    GetQuantumTaskResponse.add_member(:device_parameters, Shapes::ShapeRef.new(shape: JsonValue, required: true, location_name: "deviceParameters", metadata: {"jsonvalue"=>true}))
+    GetQuantumTaskResponse.add_member(:device_parameters, Shapes::ShapeRef.new(shape: JsonValue, required: true, location_name: "deviceParameters", metadata: {"jsonvalue" => true}))
     GetQuantumTaskResponse.add_member(:ended_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "endedAt"))
     GetQuantumTaskResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "failureReason"))
     GetQuantumTaskResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: JobArn, location_name: "jobArn"))

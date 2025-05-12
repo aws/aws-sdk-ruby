@@ -452,6 +452,7 @@ module Aws::CloudWatchLogs
     Source = Shapes::StringShape.new(name: 'Source')
     SourceTimezone = Shapes::StringShape.new(name: 'SourceTimezone')
     SplitString = Shapes::StructureShape.new(name: 'SplitString')
+    SplitStringDelimiter = Shapes::StringShape.new(name: 'SplitStringDelimiter')
     SplitStringEntries = Shapes::ListShape.new(name: 'SplitStringEntries')
     SplitStringEntry = Shapes::StructureShape.new(name: 'SplitStringEntry')
     StandardUnit = Shapes::StringShape.new(name: 'StandardUnit')
@@ -1040,7 +1041,7 @@ module Aws::CloudWatchLogs
     FilterLogEventsRequest.add_member(:filter_pattern, Shapes::ShapeRef.new(shape: FilterPattern, location_name: "filterPattern"))
     FilterLogEventsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     FilterLogEventsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: EventsLimit, location_name: "limit"))
-    FilterLogEventsRequest.add_member(:interleaved, Shapes::ShapeRef.new(shape: Interleaved, deprecated: true, location_name: "interleaved", metadata: {"deprecatedMessage"=>"Starting on June 17, 2019, this parameter will be ignored and the value will be assumed to be true. The response from this operation will always interleave events from multiple log streams within a log group."}))
+    FilterLogEventsRequest.add_member(:interleaved, Shapes::ShapeRef.new(shape: Interleaved, deprecated: true, location_name: "interleaved", metadata: {"deprecatedMessage" => "Starting on June 17, 2019, this parameter will be ignored and the value will be assumed to be true. The response from this operation will always interleave events from multiple log streams within a log group."}))
     FilterLogEventsRequest.add_member(:unmask, Shapes::ShapeRef.new(shape: Unmask, location_name: "unmask"))
     FilterLogEventsRequest.struct_class = Types::FilterLogEventsRequest
 
@@ -1334,7 +1335,7 @@ module Aws::CloudWatchLogs
     LogStream.add_member(:last_ingestion_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastIngestionTime"))
     LogStream.add_member(:upload_sequence_token, Shapes::ShapeRef.new(shape: SequenceToken, location_name: "uploadSequenceToken"))
     LogStream.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
-    LogStream.add_member(:stored_bytes, Shapes::ShapeRef.new(shape: StoredBytes, deprecated: true, location_name: "storedBytes", metadata: {"deprecatedMessage"=>"Starting on June 17, 2019, this parameter will be deprecated for log streams, and will be reported as zero. This change applies only to log streams. The storedBytes parameter for log groups is not affected."}))
+    LogStream.add_member(:stored_bytes, Shapes::ShapeRef.new(shape: StoredBytes, deprecated: true, location_name: "storedBytes", metadata: {"deprecatedMessage" => "Starting on June 17, 2019, this parameter will be deprecated for log streams, and will be reported as zero. This change applies only to log streams. The storedBytes parameter for log groups is not affected."}))
     LogStream.struct_class = Types::LogStream
 
     LogStreams.member = Shapes::ShapeRef.new(shape: LogStream)
@@ -1619,7 +1620,7 @@ module Aws::CloudWatchLogs
     PutQueryDefinitionRequest.add_member(:query_definition_id, Shapes::ShapeRef.new(shape: QueryId, location_name: "queryDefinitionId"))
     PutQueryDefinitionRequest.add_member(:log_group_names, Shapes::ShapeRef.new(shape: LogGroupNames, location_name: "logGroupNames"))
     PutQueryDefinitionRequest.add_member(:query_string, Shapes::ShapeRef.new(shape: QueryDefinitionString, required: true, location_name: "queryString"))
-    PutQueryDefinitionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    PutQueryDefinitionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     PutQueryDefinitionRequest.struct_class = Types::PutQueryDefinitionRequest
 
     PutQueryDefinitionResponse.add_member(:query_definition_id, Shapes::ShapeRef.new(shape: QueryId, location_name: "queryDefinitionId"))
@@ -1739,7 +1740,7 @@ module Aws::CloudWatchLogs
     ResultRows.member = Shapes::ShapeRef.new(shape: ResultField)
 
     S3DeliveryConfiguration.add_member(:suffix_path, Shapes::ShapeRef.new(shape: DeliverySuffixPath, location_name: "suffixPath"))
-    S3DeliveryConfiguration.add_member(:enable_hive_compatible_path, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableHiveCompatiblePath", metadata: {"box"=>true}))
+    S3DeliveryConfiguration.add_member(:enable_hive_compatible_path, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableHiveCompatiblePath", metadata: {"box" => true}))
     S3DeliveryConfiguration.struct_class = Types::S3DeliveryConfiguration
 
     SearchedLogStream.add_member(:log_stream_name, Shapes::ShapeRef.new(shape: LogStreamName, location_name: "logStreamName"))
@@ -1764,7 +1765,7 @@ module Aws::CloudWatchLogs
     SplitStringEntries.member = Shapes::ShapeRef.new(shape: SplitStringEntry)
 
     SplitStringEntry.add_member(:source, Shapes::ShapeRef.new(shape: Source, required: true, location_name: "source"))
-    SplitStringEntry.add_member(:delimiter, Shapes::ShapeRef.new(shape: Delimiter, required: true, location_name: "delimiter"))
+    SplitStringEntry.add_member(:delimiter, Shapes::ShapeRef.new(shape: SplitStringDelimiter, required: true, location_name: "delimiter"))
     SplitStringEntry.struct_class = Types::SplitStringEntry
 
     StartLiveTailLogGroupIdentifiers.member = Shapes::ShapeRef.new(shape: LogGroupIdentifier)

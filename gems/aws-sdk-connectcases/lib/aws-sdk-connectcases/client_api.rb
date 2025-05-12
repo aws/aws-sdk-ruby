@@ -91,6 +91,7 @@ module Aws::ConnectCases
     CreateTemplateRequest = Shapes::StructureShape.new(name: 'CreateTemplateRequest')
     CreateTemplateResponse = Shapes::StructureShape.new(name: 'CreateTemplateResponse')
     CreatedTime = Shapes::TimestampShape.new(name: 'CreatedTime', timestampFormat: "iso8601")
+    CustomEntity = Shapes::StringShape.new(name: 'CustomEntity')
     DeleteCaseRuleRequest = Shapes::StructureShape.new(name: 'DeleteCaseRuleRequest')
     DeleteCaseRuleResponse = Shapes::StructureShape.new(name: 'DeleteCaseRuleResponse')
     DeleteDomainRequest = Shapes::StructureShape.new(name: 'DeleteDomainRequest')
@@ -438,7 +439,7 @@ module Aws::ConnectCases
 
     ContactFilterChannelList.member = Shapes::ShapeRef.new(shape: Channel)
 
-    CreateCaseRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateCaseRequestClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateCaseRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateCaseRequestClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateCaseRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
     CreateCaseRequest.add_member(:fields, Shapes::ShapeRef.new(shape: CreateCaseRequestFieldsList, required: true, location_name: "fields"))
     CreateCaseRequest.add_member(:performed_by, Shapes::ShapeRef.new(shape: UserUnion, location_name: "performedBy"))
@@ -1089,8 +1090,10 @@ module Aws::ConnectCases
 
     UpdateTemplateResponse.struct_class = Types::UpdateTemplateResponse
 
+    UserUnion.add_member(:custom_entity, Shapes::ShapeRef.new(shape: CustomEntity, location_name: "customEntity"))
     UserUnion.add_member(:user_arn, Shapes::ShapeRef.new(shape: UserArn, location_name: "userArn"))
     UserUnion.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    UserUnion.add_member_subclass(:custom_entity, Types::UserUnion::CustomEntity)
     UserUnion.add_member_subclass(:user_arn, Types::UserUnion::UserArn)
     UserUnion.add_member_subclass(:unknown, Types::UserUnion::Unknown)
     UserUnion.struct_class = Types::UserUnion

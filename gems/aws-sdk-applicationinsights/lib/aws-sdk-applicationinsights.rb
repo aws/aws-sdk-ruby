@@ -54,7 +54,7 @@ module Aws::ApplicationInsights
   autoload :EndpointProvider, 'aws-sdk-applicationinsights/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-applicationinsights/endpoints'
 
-  GEM_VERSION = '1.62.0'
+  GEM_VERSION = '1.63.0'
 
 end
 

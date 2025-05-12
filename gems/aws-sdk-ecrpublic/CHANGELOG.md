@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.48.0 (2025-04-30)
+------------------
+
+* Feature - Adds dualstack support for Amazon Elastic Container Registry Public (Amazon ECR Public).
+
 1.47.0 (2025-02-18)
 ------------------
 

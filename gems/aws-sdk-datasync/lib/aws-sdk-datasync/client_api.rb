@@ -378,7 +378,7 @@ module Aws::DataSync
     AddStorageSystemRequest.add_member(:cloud_watch_log_group_arn, Shapes::ShapeRef.new(shape: LogGroupArn, location_name: "CloudWatchLogGroupArn"))
     AddStorageSystemRequest.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
     AddStorageSystemRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
-    AddStorageSystemRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: PtolemyUUID, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    AddStorageSystemRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: PtolemyUUID, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     AddStorageSystemRequest.add_member(:credentials, Shapes::ShapeRef.new(shape: Credentials, required: true, location_name: "Credentials"))
     AddStorageSystemRequest.struct_class = Types::AddStorageSystemRequest
 
@@ -1203,7 +1203,7 @@ module Aws::DataSync
 
     StartDiscoveryJobRequest.add_member(:storage_system_arn, Shapes::ShapeRef.new(shape: StorageSystemArn, required: true, location_name: "StorageSystemArn"))
     StartDiscoveryJobRequest.add_member(:collection_duration_minutes, Shapes::ShapeRef.new(shape: CollectionDurationMinutes, required: true, location_name: "CollectionDurationMinutes"))
-    StartDiscoveryJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: PtolemyUUID, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    StartDiscoveryJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: PtolemyUUID, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     StartDiscoveryJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
     StartDiscoveryJobRequest.struct_class = Types::StartDiscoveryJobRequest
 

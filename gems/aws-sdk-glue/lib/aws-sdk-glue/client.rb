@@ -3771,6 +3771,9 @@ module Aws::Glue
     #   Metadata assigned to the resource consisting of a list of key-value
     #   pairs.
     #
+    # @option params [Types::IntegrationConfig] :integration_config
+    #   The configuration settings.
+    #
     # @return [Types::CreateIntegrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateIntegrationResponse#source_arn #source_arn} => String
@@ -3785,6 +3788,7 @@ module Aws::Glue
     #   * {Types::CreateIntegrationResponse#create_time #create_time} => Time
     #   * {Types::CreateIntegrationResponse#errors #errors} => Array&lt;Types::IntegrationError&gt;
     #   * {Types::CreateIntegrationResponse#data_filter #data_filter} => String
+    #   * {Types::CreateIntegrationResponse#integration_config #integration_config} => Types::IntegrationConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -3804,6 +3808,9 @@ module Aws::Glue
     #         value: "TagValue",
     #       },
     #     ],
+    #     integration_config: {
+    #       refresh_interval: "String128",
+    #     },
     #   })
     #
     # @example Response structure
@@ -3825,6 +3832,7 @@ module Aws::Glue
     #   resp.errors[0].error_code #=> String
     #   resp.errors[0].error_message #=> String
     #   resp.data_filter #=> String
+    #   resp.integration_config.refresh_interval #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateIntegration AWS API Documentation
     #
@@ -3906,7 +3914,9 @@ module Aws::Glue
     #   The name of the table to be replicated.
     #
     # @option params [Types::SourceTableConfig] :source_table_config
-    #   A structure for the source table configuration.
+    #   A structure for the source table configuration. See the
+    #   `SourceTableConfig` structure to see list of supported source
+    #   properties.
     #
     # @option params [Types::TargetTableConfig] :target_table_config
     #   A structure for the target table configuration.
@@ -6891,6 +6901,7 @@ module Aws::Glue
     #   resp.inbound_integrations[0].integration_arn #=> String
     #   resp.inbound_integrations[0].status #=> String, one of "CREATING", "ACTIVE", "MODIFYING", "FAILED", "DELETING", "SYNCING", "NEEDS_ATTENTION"
     #   resp.inbound_integrations[0].create_time #=> Time
+    #   resp.inbound_integrations[0].integration_config.refresh_interval #=> String
     #   resp.inbound_integrations[0].errors #=> Array
     #   resp.inbound_integrations[0].errors[0].error_code #=> String
     #   resp.inbound_integrations[0].errors[0].error_message #=> String
@@ -6957,6 +6968,7 @@ module Aws::Glue
     #   resp.integrations[0].tags[0].value #=> String
     #   resp.integrations[0].status #=> String, one of "CREATING", "ACTIVE", "MODIFYING", "FAILED", "DELETING", "SYNCING", "NEEDS_ATTENTION"
     #   resp.integrations[0].create_time #=> Time
+    #   resp.integrations[0].integration_config.refresh_interval #=> String
     #   resp.integrations[0].errors #=> Array
     #   resp.integrations[0].errors[0].error_code #=> String
     #   resp.integrations[0].errors[0].error_message #=> String
@@ -20094,7 +20106,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.213.0'
+      context[:gem_version] = '1.215.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

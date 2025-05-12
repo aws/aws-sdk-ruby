@@ -352,7 +352,7 @@ module Aws::ECR
     #   source for the pull through cache rule. The following is the syntax
     #   to use for each supported upstream registry.
     #
-    #   * Amazon ECR (`ecr`) – `<accountId>.dkr.ecr.<region>.amazonaws.com`
+    #   * Amazon ECR (`ecr`) – `dkr.ecr.<region>.amazonaws.com`
     #
     #   * Amazon ECR Public (`ecr-public`) – `public.ecr.aws`
     #
@@ -1707,12 +1707,6 @@ module Aws::ECR
     # @!attribute [rw] authorization_data
     #   A list of authorization token data objects that correspond to the
     #   `registryIds` values in the request.
-    #
-    #   <note markdown="1"> The size of the authorization token returned by Amazon ECR is not
-    #   fixed. We recommend that you don't make assumptions about the
-    #   maximum size.
-    #
-    #    </note>
     #   @return [Array<Types::AuthorizationData>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetAuthorizationTokenResponse AWS API Documentation
@@ -2080,8 +2074,8 @@ module Aws::ECR
     #   <note markdown="1"> Starting with Docker version 1.9, the Docker client compresses image
     #   layers before pushing them to a V2 Docker registry. The output of
     #   the `docker images` command shows the uncompressed image size.
-    #   Therefore, Docker might return a larger image than the image shown
-    #   in the Amazon Web Services Management Console.
+    #   Therefore, Docker might return a larger image than the image sizes
+    #   returned by DescribeImages.
     #
     #    </note>
     #   @return [Integer]

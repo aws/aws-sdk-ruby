@@ -54,7 +54,7 @@ module Aws::Lightsail
   autoload :EndpointProvider, 'aws-sdk-lightsail/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-lightsail/endpoints'
 
-  GEM_VERSION = '1.108.0'
+  GEM_VERSION = '1.109.0'
 
 end
 

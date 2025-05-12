@@ -1097,7 +1097,6 @@ module Aws
       def modify_workspace_creation_properties: (
                                                   resource_id: ::String,
                                                   workspace_creation_properties: {
-                                                    enable_work_docs: bool?,
                                                     enable_internet_access: bool?,
                                                     default_ou: ::String?,
                                                     custom_security_group_id: ::String?,
@@ -1178,7 +1177,6 @@ module Aws
       def register_workspace_directory: (
                                           ?directory_id: ::String,
                                           ?subnet_ids: Array[::String],
-                                          ?enable_work_docs: bool,
                                           ?enable_self_service: bool,
                                           ?tenancy: ("DEDICATED" | "SHARED"),
                                           ?tags: Array[

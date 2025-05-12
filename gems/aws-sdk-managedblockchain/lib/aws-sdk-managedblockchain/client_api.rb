@@ -198,7 +198,7 @@ module Aws::ManagedBlockchain
     ApprovalThresholdPolicy.add_member(:threshold_comparator, Shapes::ShapeRef.new(shape: ThresholdComparator, location_name: "ThresholdComparator"))
     ApprovalThresholdPolicy.struct_class = Types::ApprovalThresholdPolicy
 
-    CreateAccessorInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestTokenString, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateAccessorInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestTokenString, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateAccessorInput.add_member(:accessor_type, Shapes::ShapeRef.new(shape: AccessorType, required: true, location_name: "AccessorType"))
     CreateAccessorInput.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagMap, location_name: "Tags"))
     CreateAccessorInput.add_member(:network_type, Shapes::ShapeRef.new(shape: AccessorNetworkType, location_name: "NetworkType"))
@@ -209,7 +209,7 @@ module Aws::ManagedBlockchain
     CreateAccessorOutput.add_member(:network_type, Shapes::ShapeRef.new(shape: AccessorNetworkType, location_name: "NetworkType"))
     CreateAccessorOutput.struct_class = Types::CreateAccessorOutput
 
-    CreateMemberInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestTokenString, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateMemberInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestTokenString, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateMemberInput.add_member(:invitation_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location_name: "InvitationId"))
     CreateMemberInput.add_member(:network_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "networkId"))
     CreateMemberInput.add_member(:member_configuration, Shapes::ShapeRef.new(shape: MemberConfiguration, required: true, location_name: "MemberConfiguration"))
@@ -218,7 +218,7 @@ module Aws::ManagedBlockchain
     CreateMemberOutput.add_member(:member_id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "MemberId"))
     CreateMemberOutput.struct_class = Types::CreateMemberOutput
 
-    CreateNetworkInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestTokenString, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateNetworkInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestTokenString, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateNetworkInput.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     CreateNetworkInput.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
     CreateNetworkInput.add_member(:framework, Shapes::ShapeRef.new(shape: Framework, required: true, location_name: "Framework"))
@@ -233,7 +233,7 @@ module Aws::ManagedBlockchain
     CreateNetworkOutput.add_member(:member_id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "MemberId"))
     CreateNetworkOutput.struct_class = Types::CreateNetworkOutput
 
-    CreateNodeInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestTokenString, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateNodeInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestTokenString, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateNodeInput.add_member(:network_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "networkId"))
     CreateNodeInput.add_member(:member_id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "MemberId"))
     CreateNodeInput.add_member(:node_configuration, Shapes::ShapeRef.new(shape: NodeConfiguration, required: true, location_name: "NodeConfiguration"))
@@ -243,7 +243,7 @@ module Aws::ManagedBlockchain
     CreateNodeOutput.add_member(:node_id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "NodeId"))
     CreateNodeOutput.struct_class = Types::CreateNodeOutput
 
-    CreateProposalInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestTokenString, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateProposalInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestTokenString, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateProposalInput.add_member(:network_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "networkId"))
     CreateProposalInput.add_member(:member_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location_name: "MemberId"))
     CreateProposalInput.add_member(:actions, Shapes::ShapeRef.new(shape: ProposalActions, required: true, location_name: "Actions"))

@@ -444,7 +444,7 @@ module Aws::WorkMail
     BookingOptions.add_member(:auto_decline_conflicting_requests, Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoDeclineConflictingRequests"))
     BookingOptions.struct_class = Types::BookingOptions
 
-    CancelMailboxExportJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CancelMailboxExportJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CancelMailboxExportJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: MailboxExportJobId, required: true, location_name: "JobId"))
     CancelMailboxExportJobRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     CancelMailboxExportJobRequest.struct_class = Types::CancelMailboxExportJobRequest
@@ -458,7 +458,7 @@ module Aws::WorkMail
 
     CreateAliasResponse.struct_class = Types::CreateAliasResponse
 
-    CreateAvailabilityConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAvailabilityConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateAvailabilityConfigurationRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     CreateAvailabilityConfigurationRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     CreateAvailabilityConfigurationRequest.add_member(:ews_provider, Shapes::ShapeRef.new(shape: EwsAvailabilityProvider, location_name: "EwsProvider"))
@@ -477,13 +477,13 @@ module Aws::WorkMail
 
     CreateIdentityCenterApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: IdentityCenterApplicationName, required: true, location_name: "Name"))
     CreateIdentityCenterApplicationRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
-    CreateIdentityCenterApplicationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateIdentityCenterApplicationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateIdentityCenterApplicationRequest.struct_class = Types::CreateIdentityCenterApplicationRequest
 
     CreateIdentityCenterApplicationResponse.add_member(:application_arn, Shapes::ShapeRef.new(shape: ApplicationArn, location_name: "ApplicationArn"))
     CreateIdentityCenterApplicationResponse.struct_class = Types::CreateIdentityCenterApplicationResponse
 
-    CreateImpersonationRoleRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateImpersonationRoleRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateImpersonationRoleRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     CreateImpersonationRoleRequest.add_member(:name, Shapes::ShapeRef.new(shape: ImpersonationRoleName, required: true, location_name: "Name"))
     CreateImpersonationRoleRequest.add_member(:type, Shapes::ShapeRef.new(shape: ImpersonationRoleType, required: true, location_name: "Type"))
@@ -495,7 +495,7 @@ module Aws::WorkMail
     CreateImpersonationRoleResponse.struct_class = Types::CreateImpersonationRoleResponse
 
     CreateMobileDeviceAccessRuleRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
-    CreateMobileDeviceAccessRuleRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateMobileDeviceAccessRuleRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateMobileDeviceAccessRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleName, required: true, location_name: "Name"))
     CreateMobileDeviceAccessRuleRequest.add_member(:description, Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleDescription, location_name: "Description"))
     CreateMobileDeviceAccessRuleRequest.add_member(:effect, Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleEffect, required: true, location_name: "Effect"))
@@ -514,7 +514,7 @@ module Aws::WorkMail
 
     CreateOrganizationRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
     CreateOrganizationRequest.add_member(:alias, Shapes::ShapeRef.new(shape: OrganizationName, required: true, location_name: "Alias"))
-    CreateOrganizationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateOrganizationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateOrganizationRequest.add_member(:domains, Shapes::ShapeRef.new(shape: Domains, location_name: "Domains"))
     CreateOrganizationRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
     CreateOrganizationRequest.add_member(:enable_interoperability, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableInteroperability"))
@@ -617,7 +617,7 @@ module Aws::WorkMail
 
     DeleteMobileDeviceAccessRuleResponse.struct_class = Types::DeleteMobileDeviceAccessRuleResponse
 
-    DeleteOrganizationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteOrganizationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     DeleteOrganizationRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     DeleteOrganizationRequest.add_member(:delete_directory, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "DeleteDirectory"))
     DeleteOrganizationRequest.add_member(:force_delete, Shapes::ShapeRef.new(shape: Boolean, location_name: "ForceDelete"))
@@ -1389,7 +1389,7 @@ module Aws::WorkMail
     RedactedEwsAvailabilityProvider.add_member(:ews_username, Shapes::ShapeRef.new(shape: ExternalUserName, location_name: "EwsUsername"))
     RedactedEwsAvailabilityProvider.struct_class = Types::RedactedEwsAvailabilityProvider
 
-    RegisterMailDomainRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    RegisterMailDomainRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     RegisterMailDomainRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     RegisterMailDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: WorkMailDomainName, required: true, location_name: "DomainName"))
     RegisterMailDomainRequest.struct_class = Types::RegisterMailDomainRequest
@@ -1430,7 +1430,7 @@ module Aws::WorkMail
 
     Resources.member = Shapes::ShapeRef.new(shape: Resource)
 
-    StartMailboxExportJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    StartMailboxExportJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     StartMailboxExportJobRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     StartMailboxExportJobRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: EntityIdentifier, required: true, location_name: "EntityId"))
     StartMailboxExportJobRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))

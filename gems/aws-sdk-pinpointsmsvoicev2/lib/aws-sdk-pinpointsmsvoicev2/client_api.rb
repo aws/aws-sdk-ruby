@@ -461,7 +461,7 @@ module Aws::PinpointSMSVoiceV2
     AssociateOriginationIdentityRequest.add_member(:pool_id, Shapes::ShapeRef.new(shape: PoolIdOrArn, required: true, location_name: "PoolId"))
     AssociateOriginationIdentityRequest.add_member(:origination_identity, Shapes::ShapeRef.new(shape: PhoneOrSenderIdOrArn, required: true, location_name: "OriginationIdentity"))
     AssociateOriginationIdentityRequest.add_member(:iso_country_code, Shapes::ShapeRef.new(shape: IsoCountryCode, required: true, location_name: "IsoCountryCode"))
-    AssociateOriginationIdentityRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    AssociateOriginationIdentityRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     AssociateOriginationIdentityRequest.struct_class = Types::AssociateOriginationIdentityRequest
 
     AssociateOriginationIdentityResult.add_member(:pool_arn, Shapes::ShapeRef.new(shape: String, location_name: "PoolArn"))
@@ -516,7 +516,7 @@ module Aws::PinpointSMSVoiceV2
 
     CreateConfigurationSetRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, required: true, location_name: "ConfigurationSetName"))
     CreateConfigurationSetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateConfigurationSetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateConfigurationSetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateConfigurationSetRequest.struct_class = Types::CreateConfigurationSetRequest
 
     CreateConfigurationSetResult.add_member(:configuration_set_arn, Shapes::ShapeRef.new(shape: String, location_name: "ConfigurationSetArn"))
@@ -531,7 +531,7 @@ module Aws::PinpointSMSVoiceV2
     CreateEventDestinationRequest.add_member(:cloud_watch_logs_destination, Shapes::ShapeRef.new(shape: CloudWatchLogsDestination, location_name: "CloudWatchLogsDestination"))
     CreateEventDestinationRequest.add_member(:kinesis_firehose_destination, Shapes::ShapeRef.new(shape: KinesisFirehoseDestination, location_name: "KinesisFirehoseDestination"))
     CreateEventDestinationRequest.add_member(:sns_destination, Shapes::ShapeRef.new(shape: SnsDestination, location_name: "SnsDestination"))
-    CreateEventDestinationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateEventDestinationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateEventDestinationRequest.struct_class = Types::CreateEventDestinationRequest
 
     CreateEventDestinationResult.add_member(:configuration_set_arn, Shapes::ShapeRef.new(shape: String, location_name: "ConfigurationSetArn"))
@@ -541,7 +541,7 @@ module Aws::PinpointSMSVoiceV2
 
     CreateOptOutListRequest.add_member(:opt_out_list_name, Shapes::ShapeRef.new(shape: OptOutListName, required: true, location_name: "OptOutListName"))
     CreateOptOutListRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateOptOutListRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateOptOutListRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateOptOutListRequest.struct_class = Types::CreateOptOutListRequest
 
     CreateOptOutListResult.add_member(:opt_out_list_arn, Shapes::ShapeRef.new(shape: String, location_name: "OptOutListArn"))
@@ -555,7 +555,7 @@ module Aws::PinpointSMSVoiceV2
     CreatePoolRequest.add_member(:message_type, Shapes::ShapeRef.new(shape: MessageType, required: true, location_name: "MessageType"))
     CreatePoolRequest.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeletionProtectionEnabled"))
     CreatePoolRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreatePoolRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreatePoolRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreatePoolRequest.struct_class = Types::CreatePoolRequest
 
     CreatePoolResult.add_member(:pool_arn, Shapes::ShapeRef.new(shape: String, location_name: "PoolArn"))
@@ -573,7 +573,7 @@ module Aws::PinpointSMSVoiceV2
     CreatePoolResult.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
     CreatePoolResult.struct_class = Types::CreatePoolResult
 
-    CreateProtectConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateProtectConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateProtectConfigurationRequest.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeletionProtectionEnabled"))
     CreateProtectConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateProtectConfigurationRequest.struct_class = Types::CreateProtectConfigurationRequest
@@ -603,7 +603,7 @@ module Aws::PinpointSMSVoiceV2
     CreateRegistrationAttachmentRequest.add_member(:attachment_body, Shapes::ShapeRef.new(shape: AttachmentBody, location_name: "AttachmentBody"))
     CreateRegistrationAttachmentRequest.add_member(:attachment_url, Shapes::ShapeRef.new(shape: AttachmentUrl, location_name: "AttachmentUrl"))
     CreateRegistrationAttachmentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateRegistrationAttachmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateRegistrationAttachmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateRegistrationAttachmentRequest.struct_class = Types::CreateRegistrationAttachmentRequest
 
     CreateRegistrationAttachmentResult.add_member(:registration_attachment_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RegistrationAttachmentArn"))
@@ -615,7 +615,7 @@ module Aws::PinpointSMSVoiceV2
 
     CreateRegistrationRequest.add_member(:registration_type, Shapes::ShapeRef.new(shape: RegistrationType, required: true, location_name: "RegistrationType"))
     CreateRegistrationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateRegistrationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateRegistrationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateRegistrationRequest.struct_class = Types::CreateRegistrationRequest
 
     CreateRegistrationResult.add_member(:registration_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RegistrationArn"))
@@ -640,7 +640,7 @@ module Aws::PinpointSMSVoiceV2
 
     CreateVerifiedDestinationNumberRequest.add_member(:destination_phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, required: true, location_name: "DestinationPhoneNumber"))
     CreateVerifiedDestinationNumberRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateVerifiedDestinationNumberRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateVerifiedDestinationNumberRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateVerifiedDestinationNumberRequest.struct_class = Types::CreateVerifiedDestinationNumberRequest
 
     CreateVerifiedDestinationNumberResult.add_member(:verified_destination_number_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "VerifiedDestinationNumberArn"))
@@ -1045,7 +1045,7 @@ module Aws::PinpointSMSVoiceV2
     DisassociateOriginationIdentityRequest.add_member(:pool_id, Shapes::ShapeRef.new(shape: PoolIdOrArn, required: true, location_name: "PoolId"))
     DisassociateOriginationIdentityRequest.add_member(:origination_identity, Shapes::ShapeRef.new(shape: PhoneOrSenderIdOrArn, required: true, location_name: "OriginationIdentity"))
     DisassociateOriginationIdentityRequest.add_member(:iso_country_code, Shapes::ShapeRef.new(shape: IsoCountryCode, required: true, location_name: "IsoCountryCode"))
-    DisassociateOriginationIdentityRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    DisassociateOriginationIdentityRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     DisassociateOriginationIdentityRequest.struct_class = Types::DisassociateOriginationIdentityRequest
 
     DisassociateOriginationIdentityResult.add_member(:pool_arn, Shapes::ShapeRef.new(shape: String, location_name: "PoolArn"))
@@ -1347,7 +1347,7 @@ module Aws::PinpointSMSVoiceV2
     PutOptedOutNumberResult.add_member(:end_user_opted_out, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "EndUserOptedOut"))
     PutOptedOutNumberResult.struct_class = Types::PutOptedOutNumberResult
 
-    PutProtectConfigurationRuleSetNumberOverrideRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    PutProtectConfigurationRuleSetNumberOverrideRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     PutProtectConfigurationRuleSetNumberOverrideRequest.add_member(:protect_configuration_id, Shapes::ShapeRef.new(shape: ProtectConfigurationIdOrArn, required: true, location_name: "ProtectConfigurationId"))
     PutProtectConfigurationRuleSetNumberOverrideRequest.add_member(:destination_phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, required: true, location_name: "DestinationPhoneNumber"))
     PutProtectConfigurationRuleSetNumberOverrideRequest.add_member(:action, Shapes::ShapeRef.new(shape: ProtectConfigurationRuleOverrideAction, required: true, location_name: "Action"))
@@ -1585,7 +1585,7 @@ module Aws::PinpointSMSVoiceV2
     RequestPhoneNumberRequest.add_member(:registration_id, Shapes::ShapeRef.new(shape: RegistrationIdOrArn, location_name: "RegistrationId"))
     RequestPhoneNumberRequest.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeletionProtectionEnabled"))
     RequestPhoneNumberRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    RequestPhoneNumberRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    RequestPhoneNumberRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     RequestPhoneNumberRequest.struct_class = Types::RequestPhoneNumberRequest
 
     RequestPhoneNumberResult.add_member(:phone_number_arn, Shapes::ShapeRef.new(shape: String, location_name: "PhoneNumberArn"))
@@ -1614,7 +1614,7 @@ module Aws::PinpointSMSVoiceV2
     RequestSenderIdRequest.add_member(:message_types, Shapes::ShapeRef.new(shape: MessageTypeList, location_name: "MessageTypes"))
     RequestSenderIdRequest.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeletionProtectionEnabled"))
     RequestSenderIdRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    RequestSenderIdRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    RequestSenderIdRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     RequestSenderIdRequest.struct_class = Types::RequestSenderIdRequest
 
     RequestSenderIdResult.add_member(:sender_id_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SenderIdArn"))
@@ -2040,8 +2040,8 @@ module Aws::PinpointSMSVoiceV2
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -2113,6 +2113,7 @@ module Aws::PinpointSMSVoiceV2
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -2330,8 +2331,8 @@ module Aws::PinpointSMSVoiceV2
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -2819,8 +2820,8 @@ module Aws::PinpointSMSVoiceV2
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 

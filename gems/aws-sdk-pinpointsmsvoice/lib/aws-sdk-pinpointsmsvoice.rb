@@ -54,7 +54,7 @@ module Aws::PinpointSMSVoice
   autoload :EndpointProvider, 'aws-sdk-pinpointsmsvoice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-pinpointsmsvoice/endpoints'
 
-  GEM_VERSION = '1.60.0'
+  GEM_VERSION = '1.61.0'
 
 end
 

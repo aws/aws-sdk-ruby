@@ -61,7 +61,7 @@ module Aws::Glacier
   autoload :Notification, 'aws-sdk-glacier/notification'
   autoload :Vault, 'aws-sdk-glacier/vault'
 
-  GEM_VERSION = '1.76.0'
+  GEM_VERSION = '1.77.0'
 
 end
 

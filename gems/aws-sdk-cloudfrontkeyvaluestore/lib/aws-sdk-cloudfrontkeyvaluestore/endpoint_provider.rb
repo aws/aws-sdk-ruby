@@ -24,22 +24,22 @@ module Aws::CloudFrontKeyValueStore
                             if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "#{parsed_arn['partition']}")
                               if Aws::Endpoints::Matchers.set?(parameters.endpoint)
                                 if (url = Aws::Endpoints::Matchers.parse_url(parameters.endpoint))
-                                  return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{parsed_arn['accountId']}.#{url['authority']}#{url['path']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4a", "signingName"=>"cloudfront-keyvaluestore", "signingRegionSet"=>["*"]}]})
+                                  return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{parsed_arn['accountId']}.#{url['authority']}#{url['path']}", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4a", "signingName" => "cloudfront-keyvaluestore", "signingRegionSet" => ["*"]}]})
                                 end
                                 raise ArgumentError, "Provided endpoint is not a valid URL"
                               end
-                              return Aws::Endpoints::Endpoint.new(url: "https://#{parsed_arn['accountId']}.cloudfront-kvs.global.api.aws", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4a", "signingName"=>"cloudfront-keyvaluestore", "signingRegionSet"=>["*"]}]})
+                              return Aws::Endpoints::Endpoint.new(url: "https://#{parsed_arn['accountId']}.cloudfront-kvs.global.api.aws", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4a", "signingName" => "cloudfront-keyvaluestore", "signingRegionSet" => ["*"]}]})
                             end
                             raise ArgumentError, "Client was configured for partition `#{partition_result['name']}` but Kvs ARN has `#{parsed_arn['partition']}`"
                           end
                         end
                         if Aws::Endpoints::Matchers.set?(parameters.endpoint)
                           if (url = Aws::Endpoints::Matchers.parse_url(parameters.endpoint))
-                            return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{parsed_arn['accountId']}.#{url['authority']}#{url['path']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4a", "signingName"=>"cloudfront-keyvaluestore", "signingRegionSet"=>["*"]}]})
+                            return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{parsed_arn['accountId']}.#{url['authority']}#{url['path']}", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4a", "signingName" => "cloudfront-keyvaluestore", "signingRegionSet" => ["*"]}]})
                           end
                           raise ArgumentError, "Provided endpoint is not a valid URL"
                         end
-                        return Aws::Endpoints::Endpoint.new(url: "https://#{parsed_arn['accountId']}.cloudfront-kvs.global.api.aws", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4a", "signingName"=>"cloudfront-keyvaluestore", "signingRegionSet"=>["*"]}]})
+                        return Aws::Endpoints::Endpoint.new(url: "https://#{parsed_arn['accountId']}.cloudfront-kvs.global.api.aws", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4a", "signingName" => "cloudfront-keyvaluestore", "signingRegionSet" => ["*"]}]})
                       end
                       raise ArgumentError, "CloudFront-KeyValueStore is not supported in partition `#{parsed_arn['partition']}`"
                     end

@@ -151,7 +151,7 @@ module Aws::Pricing
     PriceList.add_member(:file_formats, Shapes::ShapeRef.new(shape: FileFormats, location_name: "FileFormats"))
     PriceList.struct_class = Types::PriceList
 
-    PriceListJsonItems.member = Shapes::ShapeRef.new(shape: SynthesizedJsonPriceListJsonItem, metadata: {"jsonvalue"=>true})
+    PriceListJsonItems.member = Shapes::ShapeRef.new(shape: SynthesizedJsonPriceListJsonItem, metadata: {"jsonvalue" => true})
 
     PriceLists.member = Shapes::ShapeRef.new(shape: PriceList)
 

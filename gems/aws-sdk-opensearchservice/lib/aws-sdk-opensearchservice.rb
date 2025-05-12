@@ -54,7 +54,7 @@ module Aws::OpenSearchService
   autoload :EndpointProvider, 'aws-sdk-opensearchservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-opensearchservice/endpoints'
 
-  GEM_VERSION = '1.66.0'
+  GEM_VERSION = '1.67.0'
 
 end
 

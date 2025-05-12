@@ -831,7 +831,7 @@ module Aws::OpenSearchService
     ConnectionProperties.add_member(:cross_cluster_search, Shapes::ShapeRef.new(shape: CrossClusterSearchConnectionProperties, location_name: "CrossClusterSearch"))
     ConnectionProperties.struct_class = Types::ConnectionProperties
 
-    CreateApplicationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateApplicationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "name"))
     CreateApplicationRequest.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSources, location_name: "dataSources"))
     CreateApplicationRequest.add_member(:iam_identity_center_options, Shapes::ShapeRef.new(shape: IamIdentityCenterOptionsInput, location_name: "iamIdentityCenterOptions"))

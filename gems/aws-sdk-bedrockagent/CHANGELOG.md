@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.54.0 (2025-04-30)
+------------------
+
+* Feature - Features:    Add inline code node to prompt flow
+
 1.53.0 (2025-04-03)
 ------------------
 

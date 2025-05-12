@@ -219,7 +219,7 @@ module Aws::PCS
     CreateClusterRequest.add_member(:size, Shapes::ShapeRef.new(shape: Size, required: true, location_name: "size"))
     CreateClusterRequest.add_member(:networking, Shapes::ShapeRef.new(shape: NetworkingRequest, required: true, location_name: "networking"))
     CreateClusterRequest.add_member(:slurm_configuration, Shapes::ShapeRef.new(shape: ClusterSlurmConfigurationRequest, location_name: "slurmConfiguration"))
-    CreateClusterRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: SBClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateClusterRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: SBClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateClusterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: RequestTagMap, location_name: "tags"))
     CreateClusterRequest.struct_class = Types::CreateClusterRequest
 
@@ -237,7 +237,7 @@ module Aws::PCS
     CreateComputeNodeGroupRequest.add_member(:instance_configs, Shapes::ShapeRef.new(shape: InstanceList, required: true, location_name: "instanceConfigs"))
     CreateComputeNodeGroupRequest.add_member(:spot_options, Shapes::ShapeRef.new(shape: SpotOptions, location_name: "spotOptions"))
     CreateComputeNodeGroupRequest.add_member(:slurm_configuration, Shapes::ShapeRef.new(shape: ComputeNodeGroupSlurmConfigurationRequest, location_name: "slurmConfiguration"))
-    CreateComputeNodeGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: SBClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateComputeNodeGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: SBClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateComputeNodeGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: RequestTagMap, location_name: "tags"))
     CreateComputeNodeGroupRequest.struct_class = Types::CreateComputeNodeGroupRequest
 
@@ -247,7 +247,7 @@ module Aws::PCS
     CreateQueueRequest.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: ClusterIdentifier, required: true, location_name: "clusterIdentifier"))
     CreateQueueRequest.add_member(:queue_name, Shapes::ShapeRef.new(shape: QueueName, required: true, location_name: "queueName"))
     CreateQueueRequest.add_member(:compute_node_group_configurations, Shapes::ShapeRef.new(shape: ComputeNodeGroupConfigurationList, location_name: "computeNodeGroupConfigurations"))
-    CreateQueueRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: SBClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateQueueRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: SBClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateQueueRequest.add_member(:tags, Shapes::ShapeRef.new(shape: RequestTagMap, location_name: "tags"))
     CreateQueueRequest.struct_class = Types::CreateQueueRequest
 
@@ -259,21 +259,21 @@ module Aws::PCS
     CustomLaunchTemplate.struct_class = Types::CustomLaunchTemplate
 
     DeleteClusterRequest.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: ClusterIdentifier, required: true, location_name: "clusterIdentifier"))
-    DeleteClusterRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: SBClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteClusterRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: SBClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteClusterRequest.struct_class = Types::DeleteClusterRequest
 
     DeleteClusterResponse.struct_class = Types::DeleteClusterResponse
 
     DeleteComputeNodeGroupRequest.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: ClusterIdentifier, required: true, location_name: "clusterIdentifier"))
     DeleteComputeNodeGroupRequest.add_member(:compute_node_group_identifier, Shapes::ShapeRef.new(shape: ComputeNodeGroupIdentifier, required: true, location_name: "computeNodeGroupIdentifier"))
-    DeleteComputeNodeGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: SBClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteComputeNodeGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: SBClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteComputeNodeGroupRequest.struct_class = Types::DeleteComputeNodeGroupRequest
 
     DeleteComputeNodeGroupResponse.struct_class = Types::DeleteComputeNodeGroupResponse
 
     DeleteQueueRequest.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: ClusterIdentifier, required: true, location_name: "clusterIdentifier"))
     DeleteQueueRequest.add_member(:queue_identifier, Shapes::ShapeRef.new(shape: QueueIdentifier, required: true, location_name: "queueIdentifier"))
-    DeleteQueueRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: SBClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteQueueRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: SBClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteQueueRequest.struct_class = Types::DeleteQueueRequest
 
     DeleteQueueResponse.struct_class = Types::DeleteQueueResponse
@@ -468,7 +468,7 @@ module Aws::PCS
     UpdateComputeNodeGroupRequest.add_member(:scaling_configuration, Shapes::ShapeRef.new(shape: ScalingConfigurationRequest, location_name: "scalingConfiguration"))
     UpdateComputeNodeGroupRequest.add_member(:iam_instance_profile_arn, Shapes::ShapeRef.new(shape: InstanceProfileArn, location_name: "iamInstanceProfileArn"))
     UpdateComputeNodeGroupRequest.add_member(:slurm_configuration, Shapes::ShapeRef.new(shape: UpdateComputeNodeGroupSlurmConfigurationRequest, location_name: "slurmConfiguration"))
-    UpdateComputeNodeGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: SBClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateComputeNodeGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: SBClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateComputeNodeGroupRequest.struct_class = Types::UpdateComputeNodeGroupRequest
 
     UpdateComputeNodeGroupResponse.add_member(:compute_node_group, Shapes::ShapeRef.new(shape: ComputeNodeGroup, location_name: "computeNodeGroup"))
@@ -480,7 +480,7 @@ module Aws::PCS
     UpdateQueueRequest.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: ClusterIdentifier, required: true, location_name: "clusterIdentifier"))
     UpdateQueueRequest.add_member(:queue_identifier, Shapes::ShapeRef.new(shape: QueueIdentifier, required: true, location_name: "queueIdentifier"))
     UpdateQueueRequest.add_member(:compute_node_group_configurations, Shapes::ShapeRef.new(shape: ComputeNodeGroupConfigurationList, location_name: "computeNodeGroupConfigurations"))
-    UpdateQueueRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: SBClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateQueueRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: SBClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateQueueRequest.struct_class = Types::UpdateQueueRequest
 
     UpdateQueueResponse.add_member(:queue, Shapes::ShapeRef.new(shape: Queue, location_name: "queue"))

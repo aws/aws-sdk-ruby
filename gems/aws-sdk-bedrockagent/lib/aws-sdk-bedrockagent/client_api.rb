@@ -301,6 +301,8 @@ module Aws::BedrockAgent
     IngestionJobStatus = Shapes::StringShape.new(name: 'IngestionJobStatus')
     IngestionJobSummaries = Shapes::ListShape.new(name: 'IngestionJobSummaries')
     IngestionJobSummary = Shapes::StructureShape.new(name: 'IngestionJobSummary')
+    InlineCode = Shapes::StringShape.new(name: 'InlineCode')
+    InlineCodeFlowNodeConfiguration = Shapes::StructureShape.new(name: 'InlineCodeFlowNodeConfiguration')
     InlineContent = Shapes::StructureShape.new(name: 'InlineContent')
     InlineContentType = Shapes::StringShape.new(name: 'InlineContentType')
     InputFlowNodeConfiguration = Shapes::StructureShape.new(name: 'InputFlowNodeConfiguration')
@@ -570,6 +572,7 @@ module Aws::BedrockAgent
     SupplementalDataStorageLocation = Shapes::StructureShape.new(name: 'SupplementalDataStorageLocation')
     SupplementalDataStorageLocationType = Shapes::StringShape.new(name: 'SupplementalDataStorageLocationType')
     SupplementalDataStorageLocations = Shapes::ListShape.new(name: 'SupplementalDataStorageLocations')
+    SupportedLanguages = Shapes::StringShape.new(name: 'SupportedLanguages')
     SystemContentBlock = Shapes::UnionShape.new(name: 'SystemContentBlock')
     SystemContentBlocks = Shapes::ListShape.new(name: 'SystemContentBlocks')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -858,7 +861,7 @@ module Aws::BedrockAgent
     AssociateAgentCollaboratorRequest.add_member(:agent_descriptor, Shapes::ShapeRef.new(shape: AgentDescriptor, required: true, location_name: "agentDescriptor"))
     AssociateAgentCollaboratorRequest.add_member(:agent_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "agentId"))
     AssociateAgentCollaboratorRequest.add_member(:agent_version, Shapes::ShapeRef.new(shape: DraftVersion, required: true, location: "uri", location_name: "agentVersion"))
-    AssociateAgentCollaboratorRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    AssociateAgentCollaboratorRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     AssociateAgentCollaboratorRequest.add_member(:collaboration_instruction, Shapes::ShapeRef.new(shape: CollaborationInstruction, required: true, location_name: "collaborationInstruction"))
     AssociateAgentCollaboratorRequest.add_member(:collaborator_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "collaboratorName"))
     AssociateAgentCollaboratorRequest.add_member(:relay_conversation_history, Shapes::ShapeRef.new(shape: RelayConversationHistory, location_name: "relayConversationHistory"))
@@ -961,7 +964,7 @@ module Aws::BedrockAgent
     CreateAgentActionGroupRequest.add_member(:agent_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "agentId"))
     CreateAgentActionGroupRequest.add_member(:agent_version, Shapes::ShapeRef.new(shape: DraftVersion, required: true, location: "uri", location_name: "agentVersion"))
     CreateAgentActionGroupRequest.add_member(:api_schema, Shapes::ShapeRef.new(shape: APISchema, location_name: "apiSchema"))
-    CreateAgentActionGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAgentActionGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAgentActionGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateAgentActionGroupRequest.add_member(:function_schema, Shapes::ShapeRef.new(shape: FunctionSchema, location_name: "functionSchema"))
     CreateAgentActionGroupRequest.add_member(:parent_action_group_signature, Shapes::ShapeRef.new(shape: ActionGroupSignature, location_name: "parentActionGroupSignature"))
@@ -973,7 +976,7 @@ module Aws::BedrockAgent
 
     CreateAgentAliasRequest.add_member(:agent_alias_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "agentAliasName"))
     CreateAgentAliasRequest.add_member(:agent_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "agentId"))
-    CreateAgentAliasRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAgentAliasRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAgentAliasRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateAgentAliasRequest.add_member(:routing_configuration, Shapes::ShapeRef.new(shape: AgentAliasRoutingConfiguration, location_name: "routingConfiguration"))
     CreateAgentAliasRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
@@ -985,7 +988,7 @@ module Aws::BedrockAgent
     CreateAgentRequest.add_member(:agent_collaboration, Shapes::ShapeRef.new(shape: AgentCollaboration, location_name: "agentCollaboration"))
     CreateAgentRequest.add_member(:agent_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "agentName"))
     CreateAgentRequest.add_member(:agent_resource_role_arn, Shapes::ShapeRef.new(shape: AgentRoleArn, location_name: "agentResourceRoleArn"))
-    CreateAgentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAgentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAgentRequest.add_member(:custom_orchestration, Shapes::ShapeRef.new(shape: CustomOrchestration, location_name: "customOrchestration"))
     CreateAgentRequest.add_member(:customer_encryption_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "customerEncryptionKeyArn"))
     CreateAgentRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
@@ -1002,7 +1005,7 @@ module Aws::BedrockAgent
     CreateAgentResponse.add_member(:agent, Shapes::ShapeRef.new(shape: Agent, required: true, location_name: "agent"))
     CreateAgentResponse.struct_class = Types::CreateAgentResponse
 
-    CreateDataSourceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateDataSourceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateDataSourceRequest.add_member(:data_deletion_policy, Shapes::ShapeRef.new(shape: DataDeletionPolicy, location_name: "dataDeletionPolicy"))
     CreateDataSourceRequest.add_member(:data_source_configuration, Shapes::ShapeRef.new(shape: DataSourceConfiguration, required: true, location_name: "dataSourceConfiguration"))
     CreateDataSourceRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
@@ -1015,7 +1018,7 @@ module Aws::BedrockAgent
     CreateDataSourceResponse.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, required: true, location_name: "dataSource"))
     CreateDataSourceResponse.struct_class = Types::CreateDataSourceResponse
 
-    CreateFlowAliasRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateFlowAliasRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateFlowAliasRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateFlowAliasRequest.add_member(:flow_identifier, Shapes::ShapeRef.new(shape: FlowIdentifier, required: true, location: "uri", location_name: "flowIdentifier"))
     CreateFlowAliasRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
@@ -1033,7 +1036,7 @@ module Aws::BedrockAgent
     CreateFlowAliasResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     CreateFlowAliasResponse.struct_class = Types::CreateFlowAliasResponse
 
-    CreateFlowRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateFlowRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateFlowRequest.add_member(:customer_encryption_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "customerEncryptionKeyArn"))
     CreateFlowRequest.add_member(:definition, Shapes::ShapeRef.new(shape: FlowDefinition, location_name: "definition"))
     CreateFlowRequest.add_member(:description, Shapes::ShapeRef.new(shape: FlowDescription, location_name: "description"))
@@ -1055,7 +1058,7 @@ module Aws::BedrockAgent
     CreateFlowResponse.add_member(:version, Shapes::ShapeRef.new(shape: DraftVersion, required: true, location_name: "version"))
     CreateFlowResponse.struct_class = Types::CreateFlowResponse
 
-    CreateFlowVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateFlowVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateFlowVersionRequest.add_member(:description, Shapes::ShapeRef.new(shape: FlowDescription, location_name: "description"))
     CreateFlowVersionRequest.add_member(:flow_identifier, Shapes::ShapeRef.new(shape: FlowIdentifier, required: true, location: "uri", location_name: "flowIdentifier"))
     CreateFlowVersionRequest.struct_class = Types::CreateFlowVersionRequest
@@ -1072,7 +1075,7 @@ module Aws::BedrockAgent
     CreateFlowVersionResponse.add_member(:version, Shapes::ShapeRef.new(shape: NumericalVersion, required: true, location_name: "version"))
     CreateFlowVersionResponse.struct_class = Types::CreateFlowVersionResponse
 
-    CreateKnowledgeBaseRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateKnowledgeBaseRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateKnowledgeBaseRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateKnowledgeBaseRequest.add_member(:knowledge_base_configuration, Shapes::ShapeRef.new(shape: KnowledgeBaseConfiguration, required: true, location_name: "knowledgeBaseConfiguration"))
     CreateKnowledgeBaseRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
@@ -1084,7 +1087,7 @@ module Aws::BedrockAgent
     CreateKnowledgeBaseResponse.add_member(:knowledge_base, Shapes::ShapeRef.new(shape: KnowledgeBase, required: true, location_name: "knowledgeBase"))
     CreateKnowledgeBaseResponse.struct_class = Types::CreateKnowledgeBaseResponse
 
-    CreatePromptRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreatePromptRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreatePromptRequest.add_member(:customer_encryption_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "customerEncryptionKeyArn"))
     CreatePromptRequest.add_member(:default_variant, Shapes::ShapeRef.new(shape: PromptVariantName, location_name: "defaultVariant"))
     CreatePromptRequest.add_member(:description, Shapes::ShapeRef.new(shape: PromptDescription, location_name: "description"))
@@ -1105,7 +1108,7 @@ module Aws::BedrockAgent
     CreatePromptResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "version"))
     CreatePromptResponse.struct_class = Types::CreatePromptResponse
 
-    CreatePromptVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreatePromptVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreatePromptVersionRequest.add_member(:description, Shapes::ShapeRef.new(shape: PromptDescription, location_name: "description"))
     CreatePromptVersionRequest.add_member(:prompt_identifier, Shapes::ShapeRef.new(shape: PromptIdentifier, required: true, location: "uri", location_name: "promptIdentifier"))
     CreatePromptVersionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
@@ -1252,7 +1255,7 @@ module Aws::BedrockAgent
     DeleteFlowVersionResponse.add_member(:version, Shapes::ShapeRef.new(shape: NumericalVersion, required: true, location_name: "version"))
     DeleteFlowVersionResponse.struct_class = Types::DeleteFlowVersionResponse
 
-    DeleteKnowledgeBaseDocumentsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteKnowledgeBaseDocumentsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteKnowledgeBaseDocumentsRequest.add_member(:data_source_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "dataSourceId"))
     DeleteKnowledgeBaseDocumentsRequest.add_member(:document_identifiers, Shapes::ShapeRef.new(shape: DocumentIdentifiers, required: true, location_name: "documentIdentifiers"))
     DeleteKnowledgeBaseDocumentsRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "knowledgeBaseId"))
@@ -1394,6 +1397,7 @@ module Aws::BedrockAgent
     FlowNodeConfiguration.add_member(:agent, Shapes::ShapeRef.new(shape: AgentFlowNodeConfiguration, location_name: "agent"))
     FlowNodeConfiguration.add_member(:collector, Shapes::ShapeRef.new(shape: CollectorFlowNodeConfiguration, location_name: "collector"))
     FlowNodeConfiguration.add_member(:condition, Shapes::ShapeRef.new(shape: ConditionFlowNodeConfiguration, location_name: "condition"))
+    FlowNodeConfiguration.add_member(:inline_code, Shapes::ShapeRef.new(shape: InlineCodeFlowNodeConfiguration, location_name: "inlineCode"))
     FlowNodeConfiguration.add_member(:input, Shapes::ShapeRef.new(shape: InputFlowNodeConfiguration, location_name: "input"))
     FlowNodeConfiguration.add_member(:iterator, Shapes::ShapeRef.new(shape: IteratorFlowNodeConfiguration, location_name: "iterator"))
     FlowNodeConfiguration.add_member(:knowledge_base, Shapes::ShapeRef.new(shape: KnowledgeBaseFlowNodeConfiguration, location_name: "knowledgeBase"))
@@ -1407,6 +1411,7 @@ module Aws::BedrockAgent
     FlowNodeConfiguration.add_member_subclass(:agent, Types::FlowNodeConfiguration::Agent)
     FlowNodeConfiguration.add_member_subclass(:collector, Types::FlowNodeConfiguration::Collector)
     FlowNodeConfiguration.add_member_subclass(:condition, Types::FlowNodeConfiguration::Condition)
+    FlowNodeConfiguration.add_member_subclass(:inline_code, Types::FlowNodeConfiguration::InlineCode)
     FlowNodeConfiguration.add_member_subclass(:input, Types::FlowNodeConfiguration::Input)
     FlowNodeConfiguration.add_member_subclass(:iterator, Types::FlowNodeConfiguration::Iterator)
     FlowNodeConfiguration.add_member_subclass(:knowledge_base, Types::FlowNodeConfiguration::KnowledgeBase)
@@ -1694,7 +1699,7 @@ module Aws::BedrockAgent
     InferenceConfiguration.add_member(:top_p, Shapes::ShapeRef.new(shape: TopP, location_name: "topP"))
     InferenceConfiguration.struct_class = Types::InferenceConfiguration
 
-    IngestKnowledgeBaseDocumentsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    IngestKnowledgeBaseDocumentsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     IngestKnowledgeBaseDocumentsRequest.add_member(:data_source_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "dataSourceId"))
     IngestKnowledgeBaseDocumentsRequest.add_member(:documents, Shapes::ShapeRef.new(shape: KnowledgeBaseDocuments, required: true, location_name: "documents"))
     IngestKnowledgeBaseDocumentsRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "knowledgeBaseId"))
@@ -1747,6 +1752,10 @@ module Aws::BedrockAgent
     IngestionJobSummary.add_member(:status, Shapes::ShapeRef.new(shape: IngestionJobStatus, required: true, location_name: "status"))
     IngestionJobSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     IngestionJobSummary.struct_class = Types::IngestionJobSummary
+
+    InlineCodeFlowNodeConfiguration.add_member(:code, Shapes::ShapeRef.new(shape: InlineCode, required: true, location_name: "code"))
+    InlineCodeFlowNodeConfiguration.add_member(:language, Shapes::ShapeRef.new(shape: SupportedLanguages, required: true, location_name: "language"))
+    InlineCodeFlowNodeConfiguration.struct_class = Types::InlineCodeFlowNodeConfiguration
 
     InlineContent.add_member(:byte_content, Shapes::ShapeRef.new(shape: ByteContentDoc, location_name: "byteContent"))
     InlineContent.add_member(:text_content, Shapes::ShapeRef.new(shape: TextContentDoc, location_name: "textContent"))
@@ -2409,7 +2418,7 @@ module Aws::BedrockAgent
     SqlKnowledgeBaseConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: QueryEngineType, required: true, location_name: "type"))
     SqlKnowledgeBaseConfiguration.struct_class = Types::SqlKnowledgeBaseConfiguration
 
-    StartIngestionJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    StartIngestionJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     StartIngestionJobRequest.add_member(:data_source_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "dataSourceId"))
     StartIngestionJobRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     StartIngestionJobRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "knowledgeBaseId"))

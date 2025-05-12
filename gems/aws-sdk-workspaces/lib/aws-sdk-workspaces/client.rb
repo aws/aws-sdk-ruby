@@ -2571,7 +2571,6 @@ module Aws::WorkSpaces
     #   resp.directories[0].directory_type #=> String, one of "SIMPLE_AD", "AD_CONNECTOR", "CUSTOMER_MANAGED", "AWS_IAM_IDENTITY_CENTER"
     #   resp.directories[0].workspace_security_group_id #=> String
     #   resp.directories[0].state #=> String, one of "REGISTERING", "REGISTERED", "DEREGISTERING", "DEREGISTERED", "ERROR"
-    #   resp.directories[0].workspace_creation_properties.enable_work_docs #=> Boolean
     #   resp.directories[0].workspace_creation_properties.enable_internet_access #=> Boolean
     #   resp.directories[0].workspace_creation_properties.default_ou #=> String
     #   resp.directories[0].workspace_creation_properties.custom_security_group_id #=> String
@@ -3902,7 +3901,6 @@ module Aws::WorkSpaces
     #   resp = client.modify_workspace_creation_properties({
     #     resource_id: "DirectoryId", # required
     #     workspace_creation_properties: { # required
-    #       enable_work_docs: false,
     #       enable_internet_access: false,
     #       default_ou: "DefaultOu",
     #       custom_security_group_id: "SecurityGroupId",
@@ -4127,12 +4125,6 @@ module Aws::WorkSpaces
     #   conditions are not met, you will receive an
     #   OperationNotSupportedException error.
     #
-    # @option params [Boolean] :enable_work_docs
-    #   Indicates whether Amazon WorkDocs is enabled or disabled. If you have
-    #   enabled this parameter and WorkDocs is not available in the Region,
-    #   you will receive an OperationNotSupportedException error. Set
-    #   `EnableWorkDocs` to disabled, and try again.
-    #
     # @option params [Boolean] :enable_self_service
     #   Indicates whether self-service capabilities are enabled or disabled.
     #
@@ -4183,7 +4175,6 @@ module Aws::WorkSpaces
     #   resp = client.register_workspace_directory({
     #     directory_id: "DirectoryId",
     #     subnet_ids: ["SubnetId"],
-    #     enable_work_docs: false,
     #     enable_self_service: false,
     #     tenancy: "DEDICATED", # accepts DEDICATED, SHARED
     #     tags: [
@@ -4883,7 +4874,7 @@ module Aws::WorkSpaces
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.133.0'
+      context[:gem_version] = '1.135.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

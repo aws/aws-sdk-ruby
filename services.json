@@ -1114,6 +1114,9 @@
   "SSMContacts": {
     "models": "ssm-contacts/2021-05-03"
   },
+  "SSMGuiConnect": {
+    "models": "ssm-guiconnect/2021-05-01"
+  },
   "SSMIncidents": {
     "models": "ssm-incidents/2018-05-10"
   },

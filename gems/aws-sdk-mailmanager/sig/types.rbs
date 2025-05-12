@@ -1097,6 +1097,7 @@ module Aws::MailManager
       attr_accessor deliver_to_mailbox: Types::DeliverToMailboxAction
       attr_accessor deliver_to_q_business: Types::DeliverToQBusinessAction
       attr_accessor drop: Types::DropAction
+      attr_accessor publish_to_sns: Types::SnsAction
       attr_accessor relay: Types::RelayAction
       attr_accessor replace_recipient: Types::ReplaceRecipientAction
       attr_accessor send: Types::SendAction
@@ -1113,6 +1114,8 @@ module Aws::MailManager
       class DeliverToQBusiness < RuleAction
       end
       class Drop < RuleAction
+      end
+      class PublishToSns < RuleAction
       end
       class Relay < RuleAction
       end
@@ -1317,6 +1320,15 @@ module Aws::MailManager
 
     class ServiceQuotaExceededException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SnsAction
+      attr_accessor action_failure_policy: ("CONTINUE" | "DROP")
+      attr_accessor encoding: ("UTF-8" | "BASE64")
+      attr_accessor payload_type: ("HEADERS" | "CONTENT")
+      attr_accessor role_arn: ::String
+      attr_accessor topic_arn: ::String
       SENSITIVE: []
     end
 

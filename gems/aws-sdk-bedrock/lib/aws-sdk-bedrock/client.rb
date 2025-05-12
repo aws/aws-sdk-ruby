@@ -2915,6 +2915,7 @@ module Aws::Bedrock
     #   * {Types::GetModelCustomizationJobResponse#role_arn #role_arn} => String
     #   * {Types::GetModelCustomizationJobResponse#status #status} => String
     #   * {Types::GetModelCustomizationJobResponse#failure_message #failure_message} => String
+    #   * {Types::GetModelCustomizationJobResponse#status_details #status_details} => Types::StatusDetails
     #   * {Types::GetModelCustomizationJobResponse#creation_time #creation_time} => Time
     #   * {Types::GetModelCustomizationJobResponse#last_modified_time #last_modified_time} => Time
     #   * {Types::GetModelCustomizationJobResponse#end_time #end_time} => Time
@@ -2946,6 +2947,15 @@ module Aws::Bedrock
     #   resp.role_arn #=> String
     #   resp.status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
     #   resp.failure_message #=> String
+    #   resp.status_details.validation_details.status #=> String, one of "InProgress", "Completed", "Stopping", "Stopped", "Failed", "NotStarted"
+    #   resp.status_details.validation_details.creation_time #=> Time
+    #   resp.status_details.validation_details.last_modified_time #=> Time
+    #   resp.status_details.data_processing_details.status #=> String, one of "InProgress", "Completed", "Stopping", "Stopped", "Failed", "NotStarted"
+    #   resp.status_details.data_processing_details.creation_time #=> Time
+    #   resp.status_details.data_processing_details.last_modified_time #=> Time
+    #   resp.status_details.training_details.status #=> String, one of "InProgress", "Completed", "Stopping", "Stopped", "Failed", "NotStarted"
+    #   resp.status_details.training_details.creation_time #=> Time
+    #   resp.status_details.training_details.last_modified_time #=> Time
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
     #   resp.end_time #=> Time
@@ -3943,6 +3953,15 @@ module Aws::Bedrock
     #   resp.model_customization_job_summaries[0].job_name #=> String
     #   resp.model_customization_job_summaries[0].status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
     #   resp.model_customization_job_summaries[0].last_modified_time #=> Time
+    #   resp.model_customization_job_summaries[0].status_details.validation_details.status #=> String, one of "InProgress", "Completed", "Stopping", "Stopped", "Failed", "NotStarted"
+    #   resp.model_customization_job_summaries[0].status_details.validation_details.creation_time #=> Time
+    #   resp.model_customization_job_summaries[0].status_details.validation_details.last_modified_time #=> Time
+    #   resp.model_customization_job_summaries[0].status_details.data_processing_details.status #=> String, one of "InProgress", "Completed", "Stopping", "Stopped", "Failed", "NotStarted"
+    #   resp.model_customization_job_summaries[0].status_details.data_processing_details.creation_time #=> Time
+    #   resp.model_customization_job_summaries[0].status_details.data_processing_details.last_modified_time #=> Time
+    #   resp.model_customization_job_summaries[0].status_details.training_details.status #=> String, one of "InProgress", "Completed", "Stopping", "Stopped", "Failed", "NotStarted"
+    #   resp.model_customization_job_summaries[0].status_details.training_details.creation_time #=> Time
+    #   resp.model_customization_job_summaries[0].status_details.training_details.last_modified_time #=> Time
     #   resp.model_customization_job_summaries[0].creation_time #=> Time
     #   resp.model_customization_job_summaries[0].end_time #=> Time
     #   resp.model_customization_job_summaries[0].custom_model_arn #=> String
@@ -4932,7 +4951,7 @@ module Aws::Bedrock
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrock'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

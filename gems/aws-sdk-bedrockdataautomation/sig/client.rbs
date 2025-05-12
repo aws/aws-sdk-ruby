@@ -84,7 +84,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockDataAutomation/Client.html#create_blueprint-instance_method
       def create_blueprint: (
                               blueprint_name: ::String,
-                              type: ("DOCUMENT" | "IMAGE"),
+                              type: ("DOCUMENT" | "IMAGE" | "AUDIO"),
                               ?blueprint_stage: ("DEVELOPMENT" | "LIVE"),
                               schema: ::String,
                               ?client_token: ::String,

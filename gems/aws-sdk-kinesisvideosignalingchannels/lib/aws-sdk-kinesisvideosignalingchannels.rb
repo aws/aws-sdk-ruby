@@ -54,7 +54,7 @@ module Aws::KinesisVideoSignalingChannels
   autoload :EndpointProvider, 'aws-sdk-kinesisvideosignalingchannels/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-kinesisvideosignalingchannels/endpoints'
 
-  GEM_VERSION = '1.48.0'
+  GEM_VERSION = '1.49.0'
 
 end
 

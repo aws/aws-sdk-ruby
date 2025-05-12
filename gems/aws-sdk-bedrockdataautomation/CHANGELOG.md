@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2025-05-02)
+------------------
+
+* Feature - Added support for Custom output and blueprints for AUDIO data types.
+
+1.7.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.6.0 (2025-04-24)
 ------------------
 

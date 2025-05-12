@@ -1056,6 +1056,7 @@ module Aws
         def role_arn: () -> ::String
         def status: () -> ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped")
         def failure_message: () -> ::String
+        def status_details: () -> Types::StatusDetails
         def creation_time: () -> ::Time
         def last_modified_time: () -> ::Time
         def end_time: () -> ::Time

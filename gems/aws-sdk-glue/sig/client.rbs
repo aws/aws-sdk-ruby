@@ -863,6 +863,7 @@ module Aws
         def create_time: () -> ::Time
         def errors: () -> ::Array[Types::IntegrationError]
         def data_filter: () -> ::String
+        def integration_config: () -> Types::IntegrationConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#create_integration-instance_method
       def create_integration: (
@@ -878,7 +879,10 @@ module Aws
                                     key: ::String?,
                                     value: ::String?
                                   },
-                                ]
+                                ],
+                                ?integration_config: {
+                                  refresh_interval: ::String?
+                                }
                               ) -> _CreateIntegrationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIntegrationResponseSuccess
 

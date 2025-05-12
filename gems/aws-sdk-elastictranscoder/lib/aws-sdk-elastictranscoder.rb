@@ -55,7 +55,7 @@ module Aws::ElasticTranscoder
   autoload :EndpointProvider, 'aws-sdk-elastictranscoder/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-elastictranscoder/endpoints'
 
-  GEM_VERSION = '1.69.0'
+  GEM_VERSION = '1.70.0'
 
 end
 

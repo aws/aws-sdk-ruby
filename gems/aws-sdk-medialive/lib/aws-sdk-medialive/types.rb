@@ -12736,6 +12736,10 @@ module Aws::MediaLive
     # @!attribute [rw] dry_run
     #   @return [Boolean]
     #
+    # @!attribute [rw] anywhere_settings
+    #   The Elemental Anywhere settings for this channel.
+    #   @return [Types::AnywhereSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateChannel AWS API Documentation
     #
     class UpdateChannel < Struct.new(
@@ -12749,7 +12753,8 @@ module Aws::MediaLive
       :name,
       :role_arn,
       :channel_engine_version,
-      :dry_run)
+      :dry_run,
+      :anywhere_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12841,6 +12846,10 @@ module Aws::MediaLive
     # @!attribute [rw] dry_run
     #   @return [Boolean]
     #
+    # @!attribute [rw] anywhere_settings
+    #   Elemental anywhere settings
+    #   @return [Types::AnywhereSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateChannelRequest AWS API Documentation
     #
     class UpdateChannelRequest < Struct.new(
@@ -12855,7 +12864,8 @@ module Aws::MediaLive
       :name,
       :role_arn,
       :channel_engine_version,
-      :dry_run)
+      :dry_run,
+      :anywhere_settings)
       SENSITIVE = []
       include Aws::Structure
     end

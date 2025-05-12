@@ -3060,6 +3060,10 @@ module Aws::EC2
     #   attaches to the instance.
     #   @return [Types::EnaSrdSpecification]
     #
+    # @!attribute [rw] ena_queue_count
+    #   The number of ENA queues to be created with the instance.
+    #   @return [Integer]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -3084,6 +3088,7 @@ module Aws::EC2
     class AttachNetworkInterfaceRequest < Struct.new(
       :network_card_index,
       :ena_srd_specification,
+      :ena_queue_count,
       :dry_run,
       :network_interface_id,
       :instance_id,
@@ -6092,20 +6097,21 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Client route enforcement is a feature of the Client VPN service that
-    # helps enforce administrator defined routes on devices connected
-    # through the VPN. T his feature helps improve your security posture by
-    # ensuring that network traffic originating from a connected client is
-    # not inadvertently sent outside the VPN tunnel.
+    # Client Route Enforcement is a feature of Client VPN that helps enforce
+    # administrator defined routes on devices connected through the VPN.
+    # This feature helps improve your security posture by ensuring that
+    # network traffic originating from a connected client is not
+    # inadvertently sent outside the VPN tunnel.
     #
-    # Client route enforcement works by monitoring the route table of a
+    # Client Route Enforcement works by monitoring the route table of a
     # connected device for routing policy changes to the VPN connection. If
     # the feature detects any VPN routing policy modifications, it will
     # automatically force an update to the route table, reverting it back to
     # the expected route configurations.
     #
     # @!attribute [rw] enforced
-    #   Enable or disable the client route enforcement feature.
+    #   Enable or disable Client Route Enforcement. The state can either be
+    #   `true` (enabled) or `false` (disabled). The default is `false`.
     #
     #   Valid values: `true | false`
     #
@@ -6120,11 +6126,11 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # The current status of client route enforcement. The state will either
-    # be `true` (enabled) or `false` (disabled).
+    # The current status of Client Route Enforcement.
     #
     # @!attribute [rw] enforced
-    #   Status of the client route enforcement feature.
+    #   Status of the client route enforcement feature, indicating whether
+    #   Client Route Enforcement is `true` (enabled) or `false` (disabled).
     #
     #   Valid values: `true | false`
     #
@@ -6469,7 +6475,7 @@ module Aws::EC2
     #   Indicates whether the client VPN session is disconnected after the
     #   maximum `sessionTimeoutHours` is reached. If `true`, users are
     #   prompted to reconnect client VPN. If `false`, client VPN attempts to
-    #   reconnect automatically. The default value is `false`.
+    #   reconnect automatically. The default value is `true`.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnEndpoint AWS API Documentation
@@ -8334,7 +8340,7 @@ module Aws::EC2
     #   maximum timeout specified in `SessionTimeoutHours` is reached. If
     #   `true`, users are prompted to reconnect client VPN. If `false`,
     #   client VPN attempts to reconnect automatically. The default value is
-    #   `false`.
+    #   `true`.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateClientVpnEndpointRequest AWS API Documentation
@@ -9908,6 +9914,24 @@ module Aws::EC2
     #   addresses. This option is disabled by default.
     #   @return [Boolean]
     #
+    # @!attribute [rw] metered_account
+    #   A metered account is an Amazon Web Services account that is charged
+    #   for active IP addresses managed in IPAM. For more information, see
+    #   [Enable cost distribution][1] in the *Amazon VPC IPAM User Guide*.
+    #
+    #   Possible values:
+    #
+    #   * `ipam-owner` (default): The Amazon Web Services account which owns
+    #     the IPAM is charged for all active IP addresses managed in IPAM.
+    #
+    #   * `resource-owner`: The Amazon Web Services account that owns the IP
+    #     address is charged for the active IP address.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/ipam-enable-cost-distro.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateIpamRequest AWS API Documentation
     #
     class CreateIpamRequest < Struct.new(
@@ -9917,7 +9941,8 @@ module Aws::EC2
       :tag_specifications,
       :client_token,
       :tier,
-      :enable_private_gua)
+      :enable_private_gua,
+      :metered_account)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10464,6 +10489,129 @@ module Aws::EC2
     #
     class CreateLocalGatewayRouteTableVpcAssociationResult < Struct.new(
       :local_gateway_route_table_vpc_association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] local_gateway_id
+    #   The ID of the local gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] local_bgp_asn
+    #   The Autonomous System Number(ASN) for the local Border Gateway
+    #   Protocol (BGP).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] local_bgp_asn_extended
+    #   The extended 32-bit ASN for the local BGP configuration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the local gateway virtual interface group when
+    #   the resource is being created.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLocalGatewayVirtualInterfaceGroupRequest AWS API Documentation
+    #
+    class CreateLocalGatewayVirtualInterfaceGroupRequest < Struct.new(
+      :local_gateway_id,
+      :local_bgp_asn,
+      :local_bgp_asn_extended,
+      :tag_specifications,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] local_gateway_virtual_interface_group
+    #   Information about the created local gateway virtual interface group.
+    #   @return [Types::LocalGatewayVirtualInterfaceGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLocalGatewayVirtualInterfaceGroupResult AWS API Documentation
+    #
+    class CreateLocalGatewayVirtualInterfaceGroupResult < Struct.new(
+      :local_gateway_virtual_interface_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] local_gateway_virtual_interface_group_id
+    #   The ID of the local gateway virtual interface group.
+    #   @return [String]
+    #
+    # @!attribute [rw] outpost_lag_id
+    #   References the Link Aggregation Group (LAG) that connects the
+    #   Outpost to on-premises network devices.
+    #   @return [String]
+    #
+    # @!attribute [rw] vlan
+    #   The virtual local area network (VLAN) used for the local gateway
+    #   virtual interface.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] local_address
+    #   The IP address assigned to the local gateway virtual interface on
+    #   the Outpost side. Only IPv4 is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] peer_address
+    #   The peer IP address for the local gateway virtual interface. Only
+    #   IPv4 is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] peer_bgp_asn
+    #   The Autonomous System Number (ASN) of the Border Gateway Protocol
+    #   (BGP) peer.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to a resource when the local gateway virtual
+    #   interface is being created.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] peer_bgp_asn_extended
+    #   The extended 32-bit ASN of the BGP peer for use with larger ASN
+    #   values.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLocalGatewayVirtualInterfaceRequest AWS API Documentation
+    #
+    class CreateLocalGatewayVirtualInterfaceRequest < Struct.new(
+      :local_gateway_virtual_interface_group_id,
+      :outpost_lag_id,
+      :vlan,
+      :local_address,
+      :peer_address,
+      :peer_bgp_asn,
+      :tag_specifications,
+      :dry_run,
+      :peer_bgp_asn_extended)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] local_gateway_virtual_interface
+    #   Information about the local gateway virtual interface.
+    #   @return [Types::LocalGatewayVirtualInterface]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLocalGatewayVirtualInterfaceResult AWS API Documentation
+    #
+    class CreateLocalGatewayVirtualInterfaceResult < Struct.new(
+      :local_gateway_virtual_interface)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11365,6 +11513,40 @@ module Aws::EC2
     #   manually delete it when you no longer need it.
     #   @return [Boolean]
     #
+    # @!attribute [rw] volume_initialization_rate
+    #   Specifies the Amazon EBS Provisioned Rate for Volume Initialization
+    #   (volume initialization rate), in MiB/s, at which to download the
+    #   snapshot blocks from Amazon S3 to the replacement root volume. This
+    #   is also known as *volume initialization*. Specifying a volume
+    #   initialization rate ensures that the volume is initialized at a
+    #   predictable and consistent rate after creation.
+    #
+    #   Omit this parameter if:
+    #
+    #   * You want to create the volume using fast snapshot restore. You
+    #     must specify a snapshot that is enabled for fast snapshot restore.
+    #     In this case, the volume is fully initialized at creation.
+    #
+    #     <note markdown="1"> If you specify a snapshot that is enabled for fast snapshot
+    #     restore and a volume initialization rate, the volume will be
+    #     initialized at the specified rate instead of fast snapshot
+    #     restore.
+    #
+    #      </note>
+    #
+    #   * You want to create a volume that is initialized at the default
+    #     rate.
+    #
+    #   For more information, see [ Initialize Amazon EBS volumes][1] in the
+    #   *Amazon EC2 User Guide*.
+    #
+    #   Valid range: 100 - 300 MiB/s
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateReplaceRootVolumeTaskRequest AWS API Documentation
     #
     class CreateReplaceRootVolumeTaskRequest < Struct.new(
@@ -11374,7 +11556,8 @@ module Aws::EC2
       :dry_run,
       :tag_specifications,
       :image_id,
-      :delete_replaced_root_volume)
+      :delete_replaced_root_volume,
+      :volume_initialization_rate)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14199,6 +14382,41 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
+    # @!attribute [rw] volume_initialization_rate
+    #   Specifies the Amazon EBS Provisioned Rate for Volume Initialization
+    #   (volume initialization rate), in MiB/s, at which to download the
+    #   snapshot blocks from Amazon S3 to the volume. This is also known as
+    #   *volume initialization*. Specifying a volume initialization rate
+    #   ensures that the volume is initialized at a predictable and
+    #   consistent rate after creation.
+    #
+    #   This parameter is supported only for volumes created from snapshots.
+    #   Omit this parameter if:
+    #
+    #   * You want to create the volume using fast snapshot restore. You
+    #     must specify a snapshot that is enabled for fast snapshot restore.
+    #     In this case, the volume is fully initialized at creation.
+    #
+    #     <note markdown="1"> If you specify a snapshot that is enabled for fast snapshot
+    #     restore and a volume initialization rate, the volume will be
+    #     initialized at the specified rate instead of fast snapshot
+    #     restore.
+    #
+    #      </note>
+    #
+    #   * You want to create a volume that is initialized at the default
+    #     rate.
+    #
+    #   For more information, see [ Initialize Amazon EBS volumes][1] in the
+    #   *Amazon EC2 User Guide*.
+    #
+    #   Valid range: 100 - 300 MiB/s
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html
+    #   @return [Integer]
+    #
     # @!attribute [rw] operator
     #   Reserved for internal use.
     #   @return [Types::OperatorRequest]
@@ -14225,6 +14443,7 @@ module Aws::EC2
       :multi_attach_enabled,
       :throughput,
       :client_token,
+      :volume_initialization_rate,
       :operator,
       :dry_run)
       SENSITIVE = []
@@ -14430,8 +14649,6 @@ module Aws::EC2
     #   To use a private hosted zone, you must set the following VPC
     #   attributes to `true`: `enableDnsHostnames` and `enableDnsSupport`.
     #   Use ModifyVpcAttribute to set the VPC attributes.
-    #
-    #   Default: `true`
     #   @return [Boolean]
     #
     # @!attribute [rw] tag_specifications
@@ -16217,6 +16434,70 @@ module Aws::EC2
     #
     class DeleteLocalGatewayRouteTableVpcAssociationResult < Struct.new(
       :local_gateway_route_table_vpc_association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] local_gateway_virtual_interface_group_id
+    #   The ID of the local gateway virtual interface group to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteLocalGatewayVirtualInterfaceGroupRequest AWS API Documentation
+    #
+    class DeleteLocalGatewayVirtualInterfaceGroupRequest < Struct.new(
+      :local_gateway_virtual_interface_group_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] local_gateway_virtual_interface_group
+    #   Information about the deleted local gateway virtual interface group.
+    #   @return [Types::LocalGatewayVirtualInterfaceGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteLocalGatewayVirtualInterfaceGroupResult AWS API Documentation
+    #
+    class DeleteLocalGatewayVirtualInterfaceGroupResult < Struct.new(
+      :local_gateway_virtual_interface_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] local_gateway_virtual_interface_id
+    #   The ID of the local virtual interface to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteLocalGatewayVirtualInterfaceRequest AWS API Documentation
+    #
+    class DeleteLocalGatewayVirtualInterfaceRequest < Struct.new(
+      :local_gateway_virtual_interface_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] local_gateway_virtual_interface
+    #   Information about the deleted local gateway virtual interface.
+    #   @return [Types::LocalGatewayVirtualInterface]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteLocalGatewayVirtualInterfaceResult AWS API Documentation
+    #
+    class DeleteLocalGatewayVirtualInterfaceResult < Struct.new(
+      :local_gateway_virtual_interface)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18887,7 +19168,9 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] instance_count
-    #   The number of instances for which to reserve capacity.
+    #   The number of instances for which to reserve capacity. Each Capacity
+    #   Block can have up to 64 instances, and you can have up to 256
+    #   instances across Capacity Blocks.
     #   @return [Integer]
     #
     # @!attribute [rw] start_date_range
@@ -18899,7 +19182,9 @@ module Aws::EC2
     #   @return [Time]
     #
     # @!attribute [rw] capacity_duration_hours
-    #   The number of hours for which to reserve Capacity Block.
+    #   The reservation duration for the Capacity Block, in hours. You must
+    #   specify the duration in 1-day increments up 14 days, and in 7-day
+    #   increments up to 182 days.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -22614,6 +22899,10 @@ module Aws::EC2
     #     Adapter (ENA) is supported or required (`required` \| `supported`
     #     \| `unsupported`).
     #
+    #   * `network-info.flexible-ena-queues-support` - Indicates whether an
+    #     instance supports flexible ENA queues (`supported` \|
+    #     `unsupported`).
+    #
     #   * `network-info.encryption-in-transit-supported` - Indicates whether
     #     the instance type automatically encrypts in-transit traffic
     #     between instances (`true` \| `false`).
@@ -25577,6 +25866,88 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] outpost_lag_ids
+    #   The IDs of the Outpost LAGs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   The filters to use for narrowing down the request. The following
+    #   filters are supported:
+    #
+    #   * `service-link-virtual-interface-id` - The ID of the service link
+    #     virtual interface.
+    #
+    #   * `service-link-virtual-interface-arn` - The ARN of the service link
+    #     virtual interface.
+    #
+    #   * `outpost-id` - The Outpost ID.
+    #
+    #   * `outpost-arn` - The Outpost ARN.
+    #
+    #   * `owner-id` - The ID of the Amazon Web Services account that owns
+    #     the service link virtual interface.
+    #
+    #   * `vlan` - The ID of the address pool.
+    #
+    #   * `local-address` - The local address.
+    #
+    #   * `peer-address` - The peer address.
+    #
+    #   * `peer-bgp-asn` - The peer BGP ASN.
+    #
+    #   * `outpost-lag-id` - The Outpost LAG ID.
+    #
+    #   * `configuration-state` - The configuration state of the service
+    #     link virtual interface.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeOutpostLagsRequest AWS API Documentation
+    #
+    class DescribeOutpostLagsRequest < Struct.new(
+      :outpost_lag_ids,
+      :filters,
+      :max_results,
+      :next_token,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] outpost_lags
+    #   The Outpost LAGs.
+    #   @return [Array<Types::OutpostLag>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeOutpostLagsResult AWS API Documentation
+    #
+    class DescribeOutpostLagsResult < Struct.new(
+      :outpost_lags,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] group_ids
     #   The IDs of the placement groups.
     #   @return [Array<String>]
@@ -27132,6 +27503,79 @@ module Aws::EC2
     class DescribeSecurityGroupsResult < Struct.new(
       :next_token,
       :security_groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_link_virtual_interface_ids
+    #   The IDs of the service link virtual interfaces.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   The filters to use for narrowing down the request. The following
+    #   filters are supported:
+    #
+    #   * `outpost-lag-id` - The ID of the Outpost LAG.
+    #
+    #   * `outpost-arn` - The Outpost ARN.
+    #
+    #   * `owner-id` - The ID of the Amazon Web Services account that owns
+    #     the service link virtual interface.
+    #
+    #   * `state` - The state of the Outpost LAG.
+    #
+    #   * `vlan` - The ID of the address pool.
+    #
+    #   * `service-link-virtual-interface-id` - The ID of the service link
+    #     virtual interface.
+    #
+    #   * `local-gateway-virtual-interface-id` - The ID of the local gateway
+    #     virtual interface.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeServiceLinkVirtualInterfacesRequest AWS API Documentation
+    #
+    class DescribeServiceLinkVirtualInterfacesRequest < Struct.new(
+      :service_link_virtual_interface_ids,
+      :filters,
+      :max_results,
+      :next_token,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_link_virtual_interfaces
+    #   Describes the service link virtual interfaces.
+    #   @return [Array<Types::ServiceLinkVirtualInterface>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeServiceLinkVirtualInterfacesResult AWS API Documentation
+    #
+    class DescribeServiceLinkVirtualInterfacesResult < Struct.new(
+      :service_link_virtual_interfaces,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33339,6 +33783,44 @@ module Aws::EC2
     #   [2]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption-requirements.html#ebs-encryption_supported_instances
     #   @return [Boolean]
     #
+    # @!attribute [rw] volume_initialization_rate
+    #   Specifies the Amazon EBS Provisioned Rate for Volume Initialization
+    #   (volume initialization rate), in MiB/s, at which to download the
+    #   snapshot blocks from Amazon S3 to the volume. This is also known as
+    #   *volume initialization*. Specifying a volume initialization rate
+    #   ensures that the volume is initialized at a predictable and
+    #   consistent rate after creation.
+    #
+    #   This parameter is supported only for volumes created from snapshots.
+    #   Omit this parameter if:
+    #
+    #   * You want to create the volume using fast snapshot restore. You
+    #     must specify a snapshot that is enabled for fast snapshot restore.
+    #     In this case, the volume is fully initialized at creation.
+    #
+    #     <note markdown="1"> If you specify a snapshot that is enabled for fast snapshot
+    #     restore and a volume initialization rate, the volume will be
+    #     initialized at the specified rate instead of fast snapshot
+    #     restore.
+    #
+    #      </note>
+    #
+    #   * You want to create a volume that is initialized at the default
+    #     rate.
+    #
+    #   For more information, see [ Initialize Amazon EBS volumes][1] in the
+    #   *Amazon EC2 User Guide*.
+    #
+    #   This parameter is not supported when using [CreateImage][2].
+    #
+    #   Valid range: 100 - 300 MiB/s
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EbsBlockDevice AWS API Documentation
     #
     class EbsBlockDevice < Struct.new(
@@ -33350,7 +33832,8 @@ module Aws::EC2
       :kms_key_id,
       :throughput,
       :outpost_arn,
-      :encrypted)
+      :encrypted,
+      :volume_initialization_rate)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -36586,11 +37069,11 @@ module Aws::EC2
     #   Amazon EBS encryption. For more information, see [Supported instance
     #   types][2].
     #
-    #   This parameter is not returned by .
+    #   This parameter is not returned by [DescribeImageAttribute][3].
     #
-    #   For and , whether you can include this parameter, and the allowed
-    #   values differ depending on the type of block device mapping you are
-    #   creating.
+    #   For [CreateImage][4] and [RegisterImage][5], whether you can include
+    #   this parameter, and the allowed values differ depending on the type
+    #   of block device mapping you are creating.
     #
     #   * If you are creating a block device mapping for a **new (empty)
     #     volume**, you can include this parameter, and specify either
@@ -36618,6 +37101,9 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html
     #   [2]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption-requirements.html#ebs-encryption_supported_instances
+    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImageAttribute
+    #   [4]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage
+    #   [5]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RegisterImage
     #   @return [Boolean]
     #
     # @!attribute [rw] delete_on_termination
@@ -44580,6 +45066,10 @@ module Aws::EC2
     #   attached to the instance.
     #   @return [Types::InstanceAttachmentEnaSrdSpecification]
     #
+    # @!attribute [rw] ena_queue_count
+    #   The number of ENA queues created with the instance.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceNetworkInterfaceAttachment AWS API Documentation
     #
     class InstanceNetworkInterfaceAttachment < Struct.new(
@@ -44589,7 +45079,8 @@ module Aws::EC2
       :device_index,
       :status,
       :network_card_index,
-      :ena_srd_specification)
+      :ena_srd_specification,
+      :ena_queue_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -44783,6 +45274,10 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts
     #   @return [Types::ConnectionTrackingSpecificationRequest]
     #
+    # @!attribute [rw] ena_queue_count
+    #   The number of ENA queues to be created with the instance.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceNetworkInterfaceSpecification AWS API Documentation
     #
     class InstanceNetworkInterfaceSpecification < Struct.new(
@@ -44807,7 +45302,8 @@ module Aws::EC2
       :ipv_6_prefix_count,
       :primary_ipv_6,
       :ena_srd_specification,
-      :connection_tracking_specification)
+      :connection_tracking_specification,
+      :ena_queue_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -45202,6 +45698,9 @@ module Aws::EC2
     #   * For instance types with FPGA accelerators, specify `fpga`.
     #
     #   * For instance types with GPU accelerators, specify `gpu`.
+    #
+    #   * For instance types with Inference accelerators, specify
+    #     `inference`.
     #
     #   Default: Any accelerator type
     #   @return [Array<String>]
@@ -45685,6 +46184,9 @@ module Aws::EC2
     #   * For instance types with FPGA accelerators, specify `fpga`.
     #
     #   * For instance types with GPU accelerators, specify `gpu`.
+    #
+    #   * For instance types with Inference accelerators, specify
+    #     `inference`.
     #
     #   Default: Any accelerator type
     #   @return [Array<String>]
@@ -46757,6 +47259,24 @@ module Aws::EC2
     #   addresses. This option is disabled by default.
     #   @return [Boolean]
     #
+    # @!attribute [rw] metered_account
+    #   A metered account is an Amazon Web Services account that is charged
+    #   for active IP addresses managed in IPAM. For more information, see
+    #   [Enable cost distribution][1] in the *Amazon VPC IPAM User Guide*.
+    #
+    #   Possible values:
+    #
+    #   * `ipam-owner` (default): The Amazon Web Services account which owns
+    #     the IPAM is charged for all active IP addresses managed in IPAM.
+    #
+    #   * `resource-owner`: The Amazon Web Services account that owns the IP
+    #     address is charged for the active IP address.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/ipam-enable-cost-distro.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Ipam AWS API Documentation
     #
     class Ipam < Struct.new(
@@ -46776,7 +47296,8 @@ module Aws::EC2
       :resource_discovery_association_count,
       :state_message,
       :tier,
-      :enable_private_gua)
+      :enable_private_gua,
+      :metered_account)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -48969,6 +49490,12 @@ module Aws::EC2
     #   The throughput that the volume supports, in MiB/s.
     #   @return [Integer]
     #
+    # @!attribute [rw] volume_initialization_rate
+    #   The Amazon EBS Provisioned Rate for Volume Initialization (volume
+    #   initialization rate) specified for the volume, in MiB/s. If no
+    #   volume initialization rate was specified, the value is `null`.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateEbsBlockDevice AWS API Documentation
     #
     class LaunchTemplateEbsBlockDevice < Struct.new(
@@ -48979,7 +49506,8 @@ module Aws::EC2
       :snapshot_id,
       :volume_size,
       :volume_type,
-      :throughput)
+      :throughput,
+      :volume_initialization_rate)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -49065,6 +49593,41 @@ module Aws::EC2
     #   Valid Range: Minimum value of 125. Maximum value of 1000.
     #   @return [Integer]
     #
+    # @!attribute [rw] volume_initialization_rate
+    #   Specifies the Amazon EBS Provisioned Rate for Volume Initialization
+    #   (volume initialization rate), in MiB/s, at which to download the
+    #   snapshot blocks from Amazon S3 to the volume. This is also known as
+    #   *volume initialization*. Specifying a volume initialization rate
+    #   ensures that the volume is initialized at a predictable and
+    #   consistent rate after creation.
+    #
+    #   This parameter is supported only for volumes created from snapshots.
+    #   Omit this parameter if:
+    #
+    #   * You want to create the volume using fast snapshot restore. You
+    #     must specify a snapshot that is enabled for fast snapshot restore.
+    #     In this case, the volume is fully initialized at creation.
+    #
+    #     <note markdown="1"> If you specify a snapshot that is enabled for fast snapshot
+    #     restore and a volume initialization rate, the volume will be
+    #     initialized at the specified rate instead of fast snapshot
+    #     restore.
+    #
+    #      </note>
+    #
+    #   * You want to create a volume that is initialized at the default
+    #     rate.
+    #
+    #   For more information, see [ Initialize Amazon EBS volumes][1] in the
+    #   *Amazon EC2 User Guide*.
+    #
+    #   Valid range: 100 - 300 MiB/s
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateEbsBlockDeviceRequest AWS API Documentation
     #
     class LaunchTemplateEbsBlockDeviceRequest < Struct.new(
@@ -49075,7 +49638,8 @@ module Aws::EC2
       :snapshot_id,
       :volume_size,
       :volume_type,
-      :throughput)
+      :throughput,
+      :volume_initialization_rate)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -49669,6 +50233,10 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts
     #   @return [Types::ConnectionTrackingSpecification]
     #
+    # @!attribute [rw] ena_queue_count
+    #   The number of ENA queues created with the instance.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateInstanceNetworkInterfaceSpecification AWS API Documentation
     #
     class LaunchTemplateInstanceNetworkInterfaceSpecification < Struct.new(
@@ -49693,7 +50261,8 @@ module Aws::EC2
       :ipv_6_prefix_count,
       :primary_ipv_6,
       :ena_srd_specification,
-      :connection_tracking_specification)
+      :connection_tracking_specification,
+      :ena_queue_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -49860,6 +50429,10 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts
     #   @return [Types::ConnectionTrackingSpecificationRequest]
     #
+    # @!attribute [rw] ena_queue_count
+    #   The number of ENA queues to be created with the instance.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateInstanceNetworkInterfaceSpecificationRequest AWS API Documentation
     #
     class LaunchTemplateInstanceNetworkInterfaceSpecificationRequest < Struct.new(
@@ -49884,7 +50457,8 @@ module Aws::EC2
       :ipv_6_prefix_count,
       :primary_ipv_6,
       :ena_srd_specification,
-      :connection_tracking_specification)
+      :connection_tracking_specification,
+      :ena_queue_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -50997,6 +51571,19 @@ module Aws::EC2
     #   The ID of the local gateway.
     #   @return [String]
     #
+    # @!attribute [rw] local_gateway_virtual_interface_group_id
+    #   The ID of the local gateway virtual interface group.
+    #   @return [String]
+    #
+    # @!attribute [rw] local_gateway_virtual_interface_arn
+    #   The Amazon Resource Number (ARN) of the local gateway virtual
+    #   interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] outpost_lag_id
+    #   The Outpost LAG ID.
+    #   @return [String]
+    #
     # @!attribute [rw] vlan
     #   The ID of the VLAN.
     #   @return [Integer]
@@ -51018,6 +51605,11 @@ module Aws::EC2
     #   The peer BGP ASN.
     #   @return [Integer]
     #
+    # @!attribute [rw] peer_bgp_asn_extended
+    #   The extended 32-bit ASN of the BGP peer for use with larger ASN
+    #   values.
+    #   @return [Integer]
+    #
     # @!attribute [rw] owner_id
     #   The ID of the Amazon Web Services account that owns the local
     #   gateway virtual interface.
@@ -51027,18 +51619,27 @@ module Aws::EC2
     #   The tags assigned to the virtual interface.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] configuration_state
+    #   The current state of the local gateway virtual interface.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LocalGatewayVirtualInterface AWS API Documentation
     #
     class LocalGatewayVirtualInterface < Struct.new(
       :local_gateway_virtual_interface_id,
       :local_gateway_id,
+      :local_gateway_virtual_interface_group_id,
+      :local_gateway_virtual_interface_arn,
+      :outpost_lag_id,
       :vlan,
       :local_address,
       :peer_address,
       :local_bgp_asn,
       :peer_bgp_asn,
+      :peer_bgp_asn_extended,
       :owner_id,
-      :tags)
+      :tags,
+      :configuration_state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -51062,9 +51663,27 @@ module Aws::EC2
     #   gateway virtual interface group.
     #   @return [String]
     #
+    # @!attribute [rw] local_bgp_asn
+    #   The Autonomous System Number(ASN) for the local Border Gateway
+    #   Protocol (BGP).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] local_bgp_asn_extended
+    #   The extended 32-bit ASN for the local BGP configuration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] local_gateway_virtual_interface_group_arn
+    #   The Amazon Resource Number (ARN) of the local gateway virtual
+    #   interface group.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The tags assigned to the virtual interface group.
     #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] configuration_state
+    #   The current state of the local gateway virtual interface group.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LocalGatewayVirtualInterfaceGroup AWS API Documentation
     #
@@ -51073,7 +51692,11 @@ module Aws::EC2
       :local_gateway_virtual_interface_ids,
       :local_gateway_id,
       :owner_id,
-      :tags)
+      :local_bgp_asn,
+      :local_bgp_asn_extended,
+      :local_gateway_virtual_interface_group_arn,
+      :tags,
+      :configuration_state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -51981,7 +52604,7 @@ module Aws::EC2
     #   maximum timeout specified in `sessionTimeoutHours` is reached. If
     #   `true`, users are prompted to reconnect client VPN. If `false`,
     #   client VPN attempts to reconnect automatically. The default value is
-    #   `false`.
+    #   `true`.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyClientVpnEndpointRequest AWS API Documentation
@@ -53451,6 +54074,24 @@ module Aws::EC2
     #   addresses. This option is disabled by default.
     #   @return [Boolean]
     #
+    # @!attribute [rw] metered_account
+    #   A metered account is an Amazon Web Services account that is charged
+    #   for active IP addresses managed in IPAM. For more information, see
+    #   [Enable cost distribution][1] in the *Amazon VPC IPAM User Guide*.
+    #
+    #   Possible values:
+    #
+    #   * `ipam-owner` (default): The Amazon Web Services account which owns
+    #     the IPAM is charged for all active IP addresses managed in IPAM.
+    #
+    #   * `resource-owner`: The Amazon Web Services account that owns the IP
+    #     address is charged for the active IP address.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/ipam-enable-cost-distro.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyIpamRequest AWS API Documentation
     #
     class ModifyIpamRequest < Struct.new(
@@ -53460,7 +54101,8 @@ module Aws::EC2
       :add_operating_regions,
       :remove_operating_regions,
       :tier,
-      :enable_private_gua)
+      :enable_private_gua,
+      :metered_account)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -57332,6 +57974,18 @@ module Aws::EC2
     #   The peak (burst) network performance of the network card, in Gbps.
     #   @return [Float]
     #
+    # @!attribute [rw] default_ena_queue_count_per_interface
+    #   The default number of the ENA queues for each interface.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_ena_queue_count
+    #   The maximum number of the ENA queues.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_ena_queue_count_per_interface
+    #   The maximum number of the ENA queues for each interface.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkCardInfo AWS API Documentation
     #
     class NetworkCardInfo < Struct.new(
@@ -57339,7 +57993,10 @@ module Aws::EC2
       :network_performance,
       :maximum_network_interfaces,
       :baseline_bandwidth_in_gbps,
-      :peak_bandwidth_in_gbps)
+      :peak_bandwidth_in_gbps,
+      :default_ena_queue_count_per_interface,
+      :maximum_ena_queue_count,
+      :maximum_ena_queue_count_per_interface)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -57408,6 +58065,10 @@ module Aws::EC2
     #   the instance type, if supported.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] flexible_ena_queues_support
+    #   Indicates whether changing the number of ENA queues is supported.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInfo AWS API Documentation
     #
     class NetworkInfo < Struct.new(
@@ -57424,7 +58085,8 @@ module Aws::EC2
       :efa_info,
       :encryption_in_transit_supported,
       :ena_srd_supported,
-      :bandwidth_weightings)
+      :bandwidth_weightings,
+      :flexible_ena_queues_support)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -57575,6 +58237,11 @@ module Aws::EC2
     #   traverse.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] filter_out_arns
+    #   The Amazon Resource Names (ARN) of the resources that the path must
+    #   ignore.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] start_date
     #   The time the analysis started.
     #   @return [Time]
@@ -57632,6 +58299,7 @@ module Aws::EC2
       :network_insights_path_id,
       :additional_accounts,
       :filter_in_arns,
+      :filter_out_arns,
       :start_date,
       :status,
       :status_message,
@@ -57985,6 +58653,10 @@ module Aws::EC2
     #   attaches to the instance.
     #   @return [Types::AttachmentEnaSrdSpecification]
     #
+    # @!attribute [rw] ena_queue_count
+    #   The number of ENA queues created with the instance.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInterfaceAttachment AWS API Documentation
     #
     class NetworkInterfaceAttachment < Struct.new(
@@ -57996,12 +58668,21 @@ module Aws::EC2
       :instance_id,
       :instance_owner_id,
       :status,
-      :ena_srd_specification)
+      :ena_srd_specification,
+      :ena_queue_count)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Describes an attachment change.
+    #
+    # @!attribute [rw] default_ena_queue_count
+    #   The default number of the ENA queues.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ena_queue_count
+    #   The number of ENA queues to be created with the instance.
+    #   @return [Integer]
     #
     # @!attribute [rw] attachment_id
     #   The ID of the network interface attachment.
@@ -58015,6 +58696,8 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInterfaceAttachmentChanges AWS API Documentation
     #
     class NetworkInterfaceAttachmentChanges < Struct.new(
+      :default_ena_queue_count,
+      :ena_queue_count,
       :attachment_id,
       :delete_on_termination)
       SENSITIVE = []
@@ -58533,6 +59216,52 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes an Outpost link aggregation group (LAG).
+    #
+    # @!attribute [rw] outpost_arn
+    #   The Amazon Resource Number (ARN) of the Outpost LAG.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The ID of the Outpost LAG owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the Outpost LAG.
+    #   @return [String]
+    #
+    # @!attribute [rw] outpost_lag_id
+    #   The ID of the Outpost LAG.
+    #   @return [String]
+    #
+    # @!attribute [rw] local_gateway_virtual_interface_ids
+    #   The IDs of the local gateway virtual interfaces associated with the
+    #   Outpost LAG.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] service_link_virtual_interface_ids
+    #   The service link virtual interface IDs associated with the Outpost
+    #   LAG.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the Outpost LAG.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/OutpostLag AWS API Documentation
+    #
+    class OutpostLag < Struct.new(
+      :outpost_arn,
+      :owner_id,
+      :state,
+      :outpost_lag_id,
+      :local_gateway_virtual_interface_ids,
+      :service_link_virtual_interface_ids,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a packet header statement.
     #
     # @!attribute [rw] source_addresses
@@ -59006,12 +59735,19 @@ module Aws::EC2
     #   unsupported instance families.
     #
     #   If you specify an unsupported instance family as a value for
-    #   baseline performance, the API returns an empty response for and an
-    #   exception for , , , and .
+    #   baseline performance, the API returns an empty response for
+    #   [GetInstanceTypesFromInstanceRequirements][2] and an exception for
+    #   [CreateFleet][3], [RequestSpotFleet][4], [ModifyFleet][5], and
+    #   [ModifySpotFleetRequest][6].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/ec2/latest/instancetypes/instance-type-names.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceTypesFromInstanceRequirements
+    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet
+    #   [4]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotFleet
+    #   [5]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyFleet
+    #   [6]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifySpotFleetRequest
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PerformanceFactorReference AWS API Documentation
@@ -59069,12 +59805,19 @@ module Aws::EC2
     #   unsupported instance families.
     #
     #   If you specify an unsupported instance family as a value for
-    #   baseline performance, the API returns an empty response for and an
-    #   exception for , , , and .
+    #   baseline performance, the API returns an empty response for
+    #   [GetInstanceTypesFromInstanceRequirements][2] and an exception for
+    #   [CreateFleet][3], [RequestSpotFleet][4], [ModifyFleet][5], and
+    #   [ModifySpotFleetRequest][6].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/ec2/latest/instancetypes/instance-type-names.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceTypesFromInstanceRequirements
+    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet
+    #   [4]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotFleet
+    #   [5]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyFleet
+    #   [6]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifySpotFleetRequest
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PerformanceFactorReferenceRequest AWS API Documentation
@@ -67387,6 +68130,84 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes the service link virtual interfaces that establish
+    # connectivity between Amazon Web Services Outpost and on-premises
+    # networks.
+    #
+    # @!attribute [rw] service_link_virtual_interface_id
+    #   The ID of the service link virtual interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_link_virtual_interface_arn
+    #   The Amazon Resource Number (ARN) for the service link virtual
+    #   interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] outpost_id
+    #   The Outpost ID for the service link virtual interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] outpost_arn
+    #   The Outpost Amazon Resource Number (ARN) for the service link
+    #   virtual interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The ID of the Amazon Web Services account that owns the service link
+    #   virtual interface..
+    #   @return [String]
+    #
+    # @!attribute [rw] local_address
+    #   The IPv4 address assigned to the local gateway virtual interface on
+    #   the Outpost side.
+    #   @return [String]
+    #
+    # @!attribute [rw] peer_address
+    #   The IPv4 peer address for the service link virtual interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] peer_bgp_asn
+    #   The ASN for the Border Gateway Protocol (BGP) associated with the
+    #   service link virtual interface.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] vlan
+    #   The virtual local area network for the service link virtual
+    #   interface.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] outpost_lag_id
+    #   The link aggregation group (LAG) ID for the service link virtual
+    #   interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the service link virtual interface.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] configuration_state
+    #   The current state of the service link virtual interface.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ServiceLinkVirtualInterface AWS API Documentation
+    #
+    class ServiceLinkVirtualInterface < Struct.new(
+      :service_link_virtual_interface_id,
+      :service_link_virtual_interface_arn,
+      :outpost_id,
+      :outpost_arn,
+      :owner_id,
+      :local_address,
+      :peer_address,
+      :peer_bgp_asn,
+      :vlan,
+      :outpost_lag_id,
+      :tags,
+      :configuration_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the type of service for a VPC endpoint.
     #
     # @!attribute [rw] service_type
@@ -69625,6 +70446,11 @@ module Aws::EC2
     #   traverse.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] filter_out_arns
+    #   The Amazon Resource Names (ARN) of the resources that the path will
+    #   ignore.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -69655,6 +70481,7 @@ module Aws::EC2
       :network_insights_path_id,
       :additional_accounts,
       :filter_in_arns,
+      :filter_out_arns,
       :dry_run,
       :tag_specifications,
       :client_token)
@@ -69792,12 +70619,22 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] force
-    #   Forces the instances to stop. The instances do not have an
-    #   opportunity to flush file system caches or file system metadata. If
-    #   you use this option, you must perform file system check and repair
-    #   procedures. This option is not recommended for Windows instances.
+    #   Forces the instance to stop. The instance will first attempt a
+    #   graceful shutdown, which includes flushing file system caches and
+    #   metadata. If the graceful shutdown fails to complete within the
+    #   timeout period, the instance shuts down forcibly without flushing
+    #   the file system caches and metadata.
+    #
+    #   After using this option, you must perform file system check and
+    #   repair procedures. This option is not recommended for Windows
+    #   instances. For more information, see [Troubleshoot Amazon EC2
+    #   instance stop issues][1] in the *Amazon EC2 User Guide*.
     #
     #   Default: `false`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesStopping.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StopInstancesRequest AWS API Documentation
@@ -74484,6 +75321,13 @@ module Aws::EC2
     #   The service provider that manages the volume.
     #   @return [Types::OperatorResponse]
     #
+    # @!attribute [rw] volume_initialization_rate
+    #   The Amazon EBS Provisioned Rate for Volume Initialization (volume
+    #   initialization rate) specified for the volume during creation, in
+    #   MiB/s. If no volume initialization rate was specified, the value is
+    #   `null`.
+    #   @return [Integer]
+    #
     # @!attribute [rw] volume_id
     #   The ID of the volume.
     #   @return [String]
@@ -74537,6 +75381,7 @@ module Aws::EC2
       :throughput,
       :sse_type,
       :operator,
+      :volume_initialization_rate,
       :volume_id,
       :size,
       :snapshot_id,

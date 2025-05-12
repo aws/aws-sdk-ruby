@@ -1337,7 +1337,7 @@ module Aws::Bedrock
     # @note CustomizationConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of CustomizationConfig corresponding to the set member.
     #
     # @!attribute [rw] distillation_config
-    #   The distillation configuration for the custom model.
+    #   The Distillation configuration for the custom model.
     #   @return [Types::DistillationConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CustomizationConfig AWS API Documentation
@@ -1351,6 +1351,31 @@ module Aws::Bedrock
 
       class DistillationConfig < CustomizationConfig; end
       class Unknown < CustomizationConfig; end
+    end
+
+    # For a Distillation job, the status details for the data processing
+    # sub-task of the job.
+    #
+    # @!attribute [rw] status
+    #   The status of the data processing sub-task of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The start time of the data processing sub-task of the job.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The latest update to the data processing sub-task of the job.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DataProcessingDetails AWS API Documentation
+    #
+    class DataProcessingDetails < Struct.new(
+      :status,
+      :creation_time,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # @!attribute [rw] model_identifier
@@ -2978,6 +3003,11 @@ module Aws::Bedrock
     #   Information about why the job failed.
     #   @return [String]
     #
+    # @!attribute [rw] status_details
+    #   For a Distillation job, the details about the statuses of the
+    #   sub-tasks of the customization job.
+    #   @return [Types::StatusDetails]
+    #
     # @!attribute [rw] creation_time
     #   Time that the resource was created.
     #   @return [Time]
@@ -3051,6 +3081,7 @@ module Aws::Bedrock
       :role_arn,
       :status,
       :failure_message,
+      :status_details,
       :creation_time,
       :last_modified_time,
       :end_time,
@@ -6518,6 +6549,10 @@ module Aws::Bedrock
     #   Time that the customization job was last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] status_details
+    #   Details about the status of the data processing sub-task of the job.
+    #   @return [Types::StatusDetails]
+    #
     # @!attribute [rw] creation_time
     #   Creation time of the custom model.
     #   @return [Time]
@@ -6552,6 +6587,7 @@ module Aws::Bedrock
       :job_name,
       :status,
       :last_modified_time,
+      :status_details,
       :creation_time,
       :end_time,
       :custom_model_arn,
@@ -7693,6 +7729,43 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # For a Distillation job, the status details for sub-tasks of the job.
+    # Possible statuses for each sub-task include the following:
+    #
+    # * NotStarted
+    #
+    # * InProgress
+    #
+    # * Completed
+    #
+    # * Stopping
+    #
+    # * Stopped
+    #
+    # * Failed
+    #
+    # @!attribute [rw] validation_details
+    #   The status details for the validation sub-task of the job.
+    #   @return [Types::ValidationDetails]
+    #
+    # @!attribute [rw] data_processing_details
+    #   The status details for the data processing sub-task of the job.
+    #   @return [Types::DataProcessingDetails]
+    #
+    # @!attribute [rw] training_details
+    #   The status details for the training sub-task of the job.
+    #   @return [Types::TrainingDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/StatusDetails AWS API Documentation
+    #
+    class StatusDetails < Struct.new(
+      :validation_details,
+      :data_processing_details,
+      :training_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] job_identifier
     #   The Amazon Resource Name (ARN) of the evaluation job you want to
     #   stop.
@@ -7895,6 +7968,31 @@ module Aws::Bedrock
     class TrainingDataConfig < Struct.new(
       :s3_uri,
       :invocation_logs_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # For a Distillation job, the status details for the training sub-task
+    # of the job.
+    #
+    # @!attribute [rw] status
+    #   The status of the training sub-task of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The start time of the training sub-task of the job.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The latest update to the training sub-task of the job.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/TrainingDetails AWS API Documentation
+    #
+    class TrainingDetails < Struct.new(
+      :status,
+      :creation_time,
+      :last_modified_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8114,6 +8212,31 @@ module Aws::Bedrock
     #
     class ValidationDataConfig < Struct.new(
       :validators)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # For a Distillation job, the status details for the validation sub-task
+    # of the job.
+    #
+    # @!attribute [rw] status
+    #   The status of the validation sub-task of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The start time of the validation sub-task of the job.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The latest update to the validation sub-task of the job.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ValidationDetails AWS API Documentation
+    #
+    class ValidationDetails < Struct.new(
+      :status,
+      :creation_time,
+      :last_modified_time)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -833,7 +833,6 @@ module Aws::WorkSpaces
     DefaultImportClientBrandingAttributes.add_member(:login_message, Shapes::ShapeRef.new(shape: LoginMessage, location_name: "LoginMessage"))
     DefaultImportClientBrandingAttributes.struct_class = Types::DefaultImportClientBrandingAttributes
 
-    DefaultWorkspaceCreationProperties.add_member(:enable_work_docs, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnableWorkDocs"))
     DefaultWorkspaceCreationProperties.add_member(:enable_internet_access, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnableInternetAccess"))
     DefaultWorkspaceCreationProperties.add_member(:default_ou, Shapes::ShapeRef.new(shape: DefaultOu, location_name: "DefaultOu"))
     DefaultWorkspaceCreationProperties.add_member(:custom_security_group_id, Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "CustomSecurityGroupId"))
@@ -1452,7 +1451,6 @@ module Aws::WorkSpaces
 
     RegisterWorkspaceDirectoryRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
     RegisterWorkspaceDirectoryRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds"))
-    RegisterWorkspaceDirectoryRequest.add_member(:enable_work_docs, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnableWorkDocs"))
     RegisterWorkspaceDirectoryRequest.add_member(:enable_self_service, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnableSelfService"))
     RegisterWorkspaceDirectoryRequest.add_member(:tenancy, Shapes::ShapeRef.new(shape: Tenancy, location_name: "Tenancy"))
     RegisterWorkspaceDirectoryRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
@@ -1779,7 +1777,6 @@ module Aws::WorkSpaces
 
     WorkspaceConnectionStatusList.member = Shapes::ShapeRef.new(shape: WorkspaceConnectionStatus)
 
-    WorkspaceCreationProperties.add_member(:enable_work_docs, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnableWorkDocs"))
     WorkspaceCreationProperties.add_member(:enable_internet_access, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnableInternetAccess"))
     WorkspaceCreationProperties.add_member(:default_ou, Shapes::ShapeRef.new(shape: DefaultOu, location_name: "DefaultOu"))
     WorkspaceCreationProperties.add_member(:custom_security_group_id, Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "CustomSecurityGroupId"))

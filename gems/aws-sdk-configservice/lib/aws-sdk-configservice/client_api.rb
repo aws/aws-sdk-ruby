@@ -1665,7 +1665,7 @@ module Aws::ConfigService
     ListAggregateDiscoveredResourcesResponse.struct_class = Types::ListAggregateDiscoveredResourcesResponse
 
     ListConfigurationRecordersRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ConfigurationRecorderFilterList, location_name: "Filters"))
-    ListConfigurationRecordersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListConfigurationRecordersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     ListConfigurationRecordersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListConfigurationRecordersRequest.struct_class = Types::ListConfigurationRecordersRequest
 
@@ -1705,8 +1705,8 @@ module Aws::ConfigService
     ListResourceEvaluationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListResourceEvaluationsResponse.struct_class = Types::ListResourceEvaluationsResponse
 
-    ListStoredQueriesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken", metadata: {"box"=>true}))
-    ListStoredQueriesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Limit, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListStoredQueriesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken", metadata: {"box" => true}))
+    ListStoredQueriesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Limit, location_name: "MaxResults", metadata: {"box" => true}))
     ListStoredQueriesRequest.struct_class = Types::ListStoredQueriesRequest
 
     ListStoredQueriesResponse.add_member(:stored_query_metadata, Shapes::ShapeRef.new(shape: StoredQueryMetadataList, location_name: "StoredQueryMetadata"))
@@ -2292,11 +2292,11 @@ module Aws::ConfigService
     StopConfigurationRecorderRequest.add_member(:configuration_recorder_name, Shapes::ShapeRef.new(shape: RecorderName, required: true, location_name: "ConfigurationRecorderName"))
     StopConfigurationRecorderRequest.struct_class = Types::StopConfigurationRecorderRequest
 
-    StoredQuery.add_member(:query_id, Shapes::ShapeRef.new(shape: QueryId, location_name: "QueryId", metadata: {"box"=>true}))
-    StoredQuery.add_member(:query_arn, Shapes::ShapeRef.new(shape: QueryArn, location_name: "QueryArn", metadata: {"box"=>true}))
+    StoredQuery.add_member(:query_id, Shapes::ShapeRef.new(shape: QueryId, location_name: "QueryId", metadata: {"box" => true}))
+    StoredQuery.add_member(:query_arn, Shapes::ShapeRef.new(shape: QueryArn, location_name: "QueryArn", metadata: {"box" => true}))
     StoredQuery.add_member(:query_name, Shapes::ShapeRef.new(shape: QueryName, required: true, location_name: "QueryName"))
-    StoredQuery.add_member(:description, Shapes::ShapeRef.new(shape: QueryDescription, location_name: "Description", metadata: {"box"=>true}))
-    StoredQuery.add_member(:expression, Shapes::ShapeRef.new(shape: QueryExpression, location_name: "Expression", metadata: {"box"=>true}))
+    StoredQuery.add_member(:description, Shapes::ShapeRef.new(shape: QueryDescription, location_name: "Description", metadata: {"box" => true}))
+    StoredQuery.add_member(:expression, Shapes::ShapeRef.new(shape: QueryExpression, location_name: "Expression", metadata: {"box" => true}))
     StoredQuery.struct_class = Types::StoredQuery
 
     StoredQueryMetadata.add_member(:query_id, Shapes::ShapeRef.new(shape: QueryId, required: true, location_name: "QueryId"))

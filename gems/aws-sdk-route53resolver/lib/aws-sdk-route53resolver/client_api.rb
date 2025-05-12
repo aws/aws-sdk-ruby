@@ -296,13 +296,13 @@ module Aws::Route53Resolver
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
-    AssociateFirewallRuleGroupRequest.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: CreatorRequestId, required: true, location_name: "CreatorRequestId", metadata: {"idempotencyToken"=>true}))
+    AssociateFirewallRuleGroupRequest.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: CreatorRequestId, required: true, location_name: "CreatorRequestId", metadata: {"idempotencyToken" => true}))
     AssociateFirewallRuleGroupRequest.add_member(:firewall_rule_group_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "FirewallRuleGroupId"))
     AssociateFirewallRuleGroupRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "VpcId"))
     AssociateFirewallRuleGroupRequest.add_member(:priority, Shapes::ShapeRef.new(shape: Priority, required: true, location_name: "Priority"))
     AssociateFirewallRuleGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
-    AssociateFirewallRuleGroupRequest.add_member(:mutation_protection, Shapes::ShapeRef.new(shape: MutationProtectionStatus, location_name: "MutationProtection", metadata: {"box"=>true}))
-    AssociateFirewallRuleGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", metadata: {"box"=>true}))
+    AssociateFirewallRuleGroupRequest.add_member(:mutation_protection, Shapes::ShapeRef.new(shape: MutationProtectionStatus, location_name: "MutationProtection", metadata: {"box" => true}))
+    AssociateFirewallRuleGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", metadata: {"box" => true}))
     AssociateFirewallRuleGroupRequest.struct_class = Types::AssociateFirewallRuleGroupRequest
 
     AssociateFirewallRuleGroupResponse.add_member(:firewall_rule_group_association, Shapes::ShapeRef.new(shape: FirewallRuleGroupAssociation, location_name: "FirewallRuleGroupAssociation"))
@@ -333,36 +333,36 @@ module Aws::Route53Resolver
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
 
-    CreateFirewallDomainListRequest.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: CreatorRequestId, required: true, location_name: "CreatorRequestId", metadata: {"idempotencyToken"=>true}))
+    CreateFirewallDomainListRequest.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: CreatorRequestId, required: true, location_name: "CreatorRequestId", metadata: {"idempotencyToken" => true}))
     CreateFirewallDomainListRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
-    CreateFirewallDomainListRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", metadata: {"box"=>true}))
+    CreateFirewallDomainListRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", metadata: {"box" => true}))
     CreateFirewallDomainListRequest.struct_class = Types::CreateFirewallDomainListRequest
 
     CreateFirewallDomainListResponse.add_member(:firewall_domain_list, Shapes::ShapeRef.new(shape: FirewallDomainList, location_name: "FirewallDomainList"))
     CreateFirewallDomainListResponse.struct_class = Types::CreateFirewallDomainListResponse
 
-    CreateFirewallRuleGroupRequest.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: CreatorRequestId, required: true, location_name: "CreatorRequestId", metadata: {"idempotencyToken"=>true}))
+    CreateFirewallRuleGroupRequest.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: CreatorRequestId, required: true, location_name: "CreatorRequestId", metadata: {"idempotencyToken" => true}))
     CreateFirewallRuleGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
-    CreateFirewallRuleGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", metadata: {"box"=>true}))
+    CreateFirewallRuleGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", metadata: {"box" => true}))
     CreateFirewallRuleGroupRequest.struct_class = Types::CreateFirewallRuleGroupRequest
 
     CreateFirewallRuleGroupResponse.add_member(:firewall_rule_group, Shapes::ShapeRef.new(shape: FirewallRuleGroup, location_name: "FirewallRuleGroup"))
     CreateFirewallRuleGroupResponse.struct_class = Types::CreateFirewallRuleGroupResponse
 
-    CreateFirewallRuleRequest.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: CreatorRequestId, required: true, location_name: "CreatorRequestId", metadata: {"idempotencyToken"=>true}))
+    CreateFirewallRuleRequest.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: CreatorRequestId, required: true, location_name: "CreatorRequestId", metadata: {"idempotencyToken" => true}))
     CreateFirewallRuleRequest.add_member(:firewall_rule_group_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "FirewallRuleGroupId"))
-    CreateFirewallRuleRequest.add_member(:firewall_domain_list_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "FirewallDomainListId", metadata: {"box"=>true}))
+    CreateFirewallRuleRequest.add_member(:firewall_domain_list_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "FirewallDomainListId", metadata: {"box" => true}))
     CreateFirewallRuleRequest.add_member(:priority, Shapes::ShapeRef.new(shape: Priority, required: true, location_name: "Priority"))
     CreateFirewallRuleRequest.add_member(:action, Shapes::ShapeRef.new(shape: Action, required: true, location_name: "Action"))
-    CreateFirewallRuleRequest.add_member(:block_response, Shapes::ShapeRef.new(shape: BlockResponse, location_name: "BlockResponse", metadata: {"box"=>true}))
-    CreateFirewallRuleRequest.add_member(:block_override_domain, Shapes::ShapeRef.new(shape: BlockOverrideDomain, location_name: "BlockOverrideDomain", metadata: {"box"=>true}))
-    CreateFirewallRuleRequest.add_member(:block_override_dns_type, Shapes::ShapeRef.new(shape: BlockOverrideDnsType, location_name: "BlockOverrideDnsType", metadata: {"box"=>true}))
-    CreateFirewallRuleRequest.add_member(:block_override_ttl, Shapes::ShapeRef.new(shape: BlockOverrideTtl, location_name: "BlockOverrideTtl", metadata: {"box"=>true}))
+    CreateFirewallRuleRequest.add_member(:block_response, Shapes::ShapeRef.new(shape: BlockResponse, location_name: "BlockResponse", metadata: {"box" => true}))
+    CreateFirewallRuleRequest.add_member(:block_override_domain, Shapes::ShapeRef.new(shape: BlockOverrideDomain, location_name: "BlockOverrideDomain", metadata: {"box" => true}))
+    CreateFirewallRuleRequest.add_member(:block_override_dns_type, Shapes::ShapeRef.new(shape: BlockOverrideDnsType, location_name: "BlockOverrideDnsType", metadata: {"box" => true}))
+    CreateFirewallRuleRequest.add_member(:block_override_ttl, Shapes::ShapeRef.new(shape: BlockOverrideTtl, location_name: "BlockOverrideTtl", metadata: {"box" => true}))
     CreateFirewallRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
-    CreateFirewallRuleRequest.add_member(:firewall_domain_redirection_action, Shapes::ShapeRef.new(shape: FirewallDomainRedirectionAction, location_name: "FirewallDomainRedirectionAction", metadata: {"box"=>true}))
-    CreateFirewallRuleRequest.add_member(:qtype, Shapes::ShapeRef.new(shape: Qtype, location_name: "Qtype", metadata: {"box"=>true}))
-    CreateFirewallRuleRequest.add_member(:dns_threat_protection, Shapes::ShapeRef.new(shape: DnsThreatProtection, location_name: "DnsThreatProtection", metadata: {"box"=>true}))
-    CreateFirewallRuleRequest.add_member(:confidence_threshold, Shapes::ShapeRef.new(shape: ConfidenceThreshold, location_name: "ConfidenceThreshold", metadata: {"box"=>true}))
+    CreateFirewallRuleRequest.add_member(:firewall_domain_redirection_action, Shapes::ShapeRef.new(shape: FirewallDomainRedirectionAction, location_name: "FirewallDomainRedirectionAction", metadata: {"box" => true}))
+    CreateFirewallRuleRequest.add_member(:qtype, Shapes::ShapeRef.new(shape: Qtype, location_name: "Qtype", metadata: {"box" => true}))
+    CreateFirewallRuleRequest.add_member(:dns_threat_protection, Shapes::ShapeRef.new(shape: DnsThreatProtection, location_name: "DnsThreatProtection", metadata: {"box" => true}))
+    CreateFirewallRuleRequest.add_member(:confidence_threshold, Shapes::ShapeRef.new(shape: ConfidenceThreshold, location_name: "ConfidenceThreshold", metadata: {"box" => true}))
     CreateFirewallRuleRequest.struct_class = Types::CreateFirewallRuleRequest
 
     CreateFirewallRuleResponse.add_member(:firewall_rule, Shapes::ShapeRef.new(shape: FirewallRule, location_name: "FirewallRule"))
@@ -370,10 +370,10 @@ module Aws::Route53Resolver
 
     CreateOutpostResolverRequest.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: CreatorRequestId, required: true, location_name: "CreatorRequestId"))
     CreateOutpostResolverRequest.add_member(:name, Shapes::ShapeRef.new(shape: OutpostResolverName, required: true, location_name: "Name"))
-    CreateOutpostResolverRequest.add_member(:instance_count, Shapes::ShapeRef.new(shape: InstanceCount, location_name: "InstanceCount", metadata: {"box"=>true}))
+    CreateOutpostResolverRequest.add_member(:instance_count, Shapes::ShapeRef.new(shape: InstanceCount, location_name: "InstanceCount", metadata: {"box" => true}))
     CreateOutpostResolverRequest.add_member(:preferred_instance_type, Shapes::ShapeRef.new(shape: OutpostInstanceType, required: true, location_name: "PreferredInstanceType"))
     CreateOutpostResolverRequest.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: OutpostArn, required: true, location_name: "OutpostArn"))
-    CreateOutpostResolverRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", metadata: {"box"=>true}))
+    CreateOutpostResolverRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", metadata: {"box" => true}))
     CreateOutpostResolverRequest.struct_class = Types::CreateOutpostResolverRequest
 
     CreateOutpostResolverResponse.add_member(:outpost_resolver, Shapes::ShapeRef.new(shape: OutpostResolver, location_name: "OutpostResolver"))
@@ -381,14 +381,14 @@ module Aws::Route53Resolver
 
     CreateResolverEndpointRequest.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: CreatorRequestId, required: true, location_name: "CreatorRequestId"))
     CreateResolverEndpointRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
-    CreateResolverEndpointRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, required: true, location_name: "SecurityGroupIds", metadata: {"box"=>true}))
+    CreateResolverEndpointRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, required: true, location_name: "SecurityGroupIds", metadata: {"box" => true}))
     CreateResolverEndpointRequest.add_member(:direction, Shapes::ShapeRef.new(shape: ResolverEndpointDirection, required: true, location_name: "Direction"))
     CreateResolverEndpointRequest.add_member(:ip_addresses, Shapes::ShapeRef.new(shape: IpAddressesRequest, required: true, location_name: "IpAddresses"))
-    CreateResolverEndpointRequest.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: OutpostArn, location_name: "OutpostArn", metadata: {"box"=>true}))
-    CreateResolverEndpointRequest.add_member(:preferred_instance_type, Shapes::ShapeRef.new(shape: OutpostInstanceType, location_name: "PreferredInstanceType", metadata: {"box"=>true}))
-    CreateResolverEndpointRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", metadata: {"box"=>true}))
-    CreateResolverEndpointRequest.add_member(:resolver_endpoint_type, Shapes::ShapeRef.new(shape: ResolverEndpointType, location_name: "ResolverEndpointType", metadata: {"box"=>true}))
-    CreateResolverEndpointRequest.add_member(:protocols, Shapes::ShapeRef.new(shape: ProtocolList, location_name: "Protocols", metadata: {"box"=>true}))
+    CreateResolverEndpointRequest.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: OutpostArn, location_name: "OutpostArn", metadata: {"box" => true}))
+    CreateResolverEndpointRequest.add_member(:preferred_instance_type, Shapes::ShapeRef.new(shape: OutpostInstanceType, location_name: "PreferredInstanceType", metadata: {"box" => true}))
+    CreateResolverEndpointRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", metadata: {"box" => true}))
+    CreateResolverEndpointRequest.add_member(:resolver_endpoint_type, Shapes::ShapeRef.new(shape: ResolverEndpointType, location_name: "ResolverEndpointType", metadata: {"box" => true}))
+    CreateResolverEndpointRequest.add_member(:protocols, Shapes::ShapeRef.new(shape: ProtocolList, location_name: "Protocols", metadata: {"box" => true}))
     CreateResolverEndpointRequest.struct_class = Types::CreateResolverEndpointRequest
 
     CreateResolverEndpointResponse.add_member(:resolver_endpoint, Shapes::ShapeRef.new(shape: ResolverEndpoint, location_name: "ResolverEndpoint"))
@@ -396,8 +396,8 @@ module Aws::Route53Resolver
 
     CreateResolverQueryLogConfigRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResolverQueryLogConfigName, required: true, location_name: "Name"))
     CreateResolverQueryLogConfigRequest.add_member(:destination_arn, Shapes::ShapeRef.new(shape: DestinationArn, required: true, location_name: "DestinationArn"))
-    CreateResolverQueryLogConfigRequest.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: CreatorRequestId, required: true, location_name: "CreatorRequestId", metadata: {"idempotencyToken"=>true}))
-    CreateResolverQueryLogConfigRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", metadata: {"box"=>true}))
+    CreateResolverQueryLogConfigRequest.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: CreatorRequestId, required: true, location_name: "CreatorRequestId", metadata: {"idempotencyToken" => true}))
+    CreateResolverQueryLogConfigRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", metadata: {"box" => true}))
     CreateResolverQueryLogConfigRequest.struct_class = Types::CreateResolverQueryLogConfigRequest
 
     CreateResolverQueryLogConfigResponse.add_member(:resolver_query_log_config, Shapes::ShapeRef.new(shape: ResolverQueryLogConfig, location_name: "ResolverQueryLogConfig"))
@@ -406,10 +406,10 @@ module Aws::Route53Resolver
     CreateResolverRuleRequest.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: CreatorRequestId, required: true, location_name: "CreatorRequestId"))
     CreateResolverRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     CreateResolverRuleRequest.add_member(:rule_type, Shapes::ShapeRef.new(shape: RuleTypeOption, required: true, location_name: "RuleType"))
-    CreateResolverRuleRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName", metadata: {"box"=>true}))
-    CreateResolverRuleRequest.add_member(:target_ips, Shapes::ShapeRef.new(shape: TargetList, location_name: "TargetIps", metadata: {"box"=>true}))
-    CreateResolverRuleRequest.add_member(:resolver_endpoint_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ResolverEndpointId", metadata: {"box"=>true}))
-    CreateResolverRuleRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", metadata: {"box"=>true}))
+    CreateResolverRuleRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName", metadata: {"box" => true}))
+    CreateResolverRuleRequest.add_member(:target_ips, Shapes::ShapeRef.new(shape: TargetList, location_name: "TargetIps", metadata: {"box" => true}))
+    CreateResolverRuleRequest.add_member(:resolver_endpoint_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ResolverEndpointId", metadata: {"box" => true}))
+    CreateResolverRuleRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", metadata: {"box" => true}))
     CreateResolverRuleRequest.struct_class = Types::CreateResolverRuleRequest
 
     CreateResolverRuleResponse.add_member(:resolver_rule, Shapes::ShapeRef.new(shape: ResolverRule, location_name: "ResolverRule"))
@@ -428,8 +428,8 @@ module Aws::Route53Resolver
     DeleteFirewallRuleGroupResponse.struct_class = Types::DeleteFirewallRuleGroupResponse
 
     DeleteFirewallRuleRequest.add_member(:firewall_rule_group_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "FirewallRuleGroupId"))
-    DeleteFirewallRuleRequest.add_member(:firewall_domain_list_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "FirewallDomainListId", metadata: {"box"=>true}))
-    DeleteFirewallRuleRequest.add_member(:firewall_threat_protection_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "FirewallThreatProtectionId", metadata: {"box"=>true}))
+    DeleteFirewallRuleRequest.add_member(:firewall_domain_list_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "FirewallDomainListId", metadata: {"box" => true}))
+    DeleteFirewallRuleRequest.add_member(:firewall_threat_protection_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "FirewallThreatProtectionId", metadata: {"box" => true}))
     DeleteFirewallRuleRequest.add_member(:qtype, Shapes::ShapeRef.new(shape: Qtype, location_name: "Qtype"))
     DeleteFirewallRuleRequest.struct_class = Types::DeleteFirewallRuleRequest
 
@@ -708,8 +708,8 @@ module Aws::Route53Resolver
     InvalidTagException.struct_class = Types::InvalidTagException
 
     IpAddressRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, required: true, location_name: "SubnetId"))
-    IpAddressRequest.add_member(:ip, Shapes::ShapeRef.new(shape: Ip, location_name: "Ip", metadata: {"box"=>true}))
-    IpAddressRequest.add_member(:ipv_6, Shapes::ShapeRef.new(shape: Ipv6, location_name: "Ipv6", metadata: {"box"=>true}))
+    IpAddressRequest.add_member(:ip, Shapes::ShapeRef.new(shape: Ip, location_name: "Ip", metadata: {"box" => true}))
+    IpAddressRequest.add_member(:ipv_6, Shapes::ShapeRef.new(shape: Ipv6, location_name: "Ipv6", metadata: {"box" => true}))
     IpAddressRequest.struct_class = Types::IpAddressRequest
 
     IpAddressResponse.add_member(:ip_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "IpId"))
@@ -722,10 +722,10 @@ module Aws::Route53Resolver
     IpAddressResponse.add_member(:modification_time, Shapes::ShapeRef.new(shape: Rfc3339TimeString, location_name: "ModificationTime"))
     IpAddressResponse.struct_class = Types::IpAddressResponse
 
-    IpAddressUpdate.add_member(:ip_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "IpId", metadata: {"box"=>true}))
-    IpAddressUpdate.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "SubnetId", metadata: {"box"=>true}))
-    IpAddressUpdate.add_member(:ip, Shapes::ShapeRef.new(shape: Ip, location_name: "Ip", metadata: {"box"=>true}))
-    IpAddressUpdate.add_member(:ipv_6, Shapes::ShapeRef.new(shape: Ipv6, location_name: "Ipv6", metadata: {"box"=>true}))
+    IpAddressUpdate.add_member(:ip_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "IpId", metadata: {"box" => true}))
+    IpAddressUpdate.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "SubnetId", metadata: {"box" => true}))
+    IpAddressUpdate.add_member(:ip, Shapes::ShapeRef.new(shape: Ip, location_name: "Ip", metadata: {"box" => true}))
+    IpAddressUpdate.add_member(:ipv_6, Shapes::ShapeRef.new(shape: Ipv6, location_name: "Ipv6", metadata: {"box" => true}))
     IpAddressUpdate.struct_class = Types::IpAddressUpdate
 
     IpAddressesRequest.member = Shapes::ShapeRef.new(shape: IpAddressRequest)
@@ -736,16 +736,16 @@ module Aws::Route53Resolver
     LimitExceededException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
     LimitExceededException.struct_class = Types::LimitExceededException
 
-    ListFirewallConfigsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListFirewallConfigsMaxResult, location_name: "MaxResults", metadata: {"box"=>true}))
-    ListFirewallConfigsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", metadata: {"box"=>true}))
+    ListFirewallConfigsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListFirewallConfigsMaxResult, location_name: "MaxResults", metadata: {"box" => true}))
+    ListFirewallConfigsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", metadata: {"box" => true}))
     ListFirewallConfigsRequest.struct_class = Types::ListFirewallConfigsRequest
 
     ListFirewallConfigsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListFirewallConfigsResponse.add_member(:firewall_configs, Shapes::ShapeRef.new(shape: FirewallConfigList, location_name: "FirewallConfigs"))
     ListFirewallConfigsResponse.struct_class = Types::ListFirewallConfigsResponse
 
-    ListFirewallDomainListsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
-    ListFirewallDomainListsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", metadata: {"box"=>true}))
+    ListFirewallDomainListsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
+    ListFirewallDomainListsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", metadata: {"box" => true}))
     ListFirewallDomainListsRequest.struct_class = Types::ListFirewallDomainListsRequest
 
     ListFirewallDomainListsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -753,28 +753,28 @@ module Aws::Route53Resolver
     ListFirewallDomainListsResponse.struct_class = Types::ListFirewallDomainListsResponse
 
     ListFirewallDomainsRequest.add_member(:firewall_domain_list_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "FirewallDomainListId"))
-    ListFirewallDomainsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListDomainMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
-    ListFirewallDomainsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", metadata: {"box"=>true}))
+    ListFirewallDomainsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListDomainMaxResults, location_name: "MaxResults", metadata: {"box" => true}))
+    ListFirewallDomainsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", metadata: {"box" => true}))
     ListFirewallDomainsRequest.struct_class = Types::ListFirewallDomainsRequest
 
     ListFirewallDomainsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListFirewallDomainsResponse.add_member(:domains, Shapes::ShapeRef.new(shape: FirewallDomains, location_name: "Domains"))
     ListFirewallDomainsResponse.struct_class = Types::ListFirewallDomainsResponse
 
-    ListFirewallRuleGroupAssociationsRequest.add_member(:firewall_rule_group_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "FirewallRuleGroupId", metadata: {"box"=>true}))
-    ListFirewallRuleGroupAssociationsRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "VpcId", metadata: {"box"=>true}))
-    ListFirewallRuleGroupAssociationsRequest.add_member(:priority, Shapes::ShapeRef.new(shape: Priority, location_name: "Priority", metadata: {"box"=>true}))
-    ListFirewallRuleGroupAssociationsRequest.add_member(:status, Shapes::ShapeRef.new(shape: FirewallRuleGroupAssociationStatus, location_name: "Status", metadata: {"box"=>true}))
-    ListFirewallRuleGroupAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
-    ListFirewallRuleGroupAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", metadata: {"box"=>true}))
+    ListFirewallRuleGroupAssociationsRequest.add_member(:firewall_rule_group_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "FirewallRuleGroupId", metadata: {"box" => true}))
+    ListFirewallRuleGroupAssociationsRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "VpcId", metadata: {"box" => true}))
+    ListFirewallRuleGroupAssociationsRequest.add_member(:priority, Shapes::ShapeRef.new(shape: Priority, location_name: "Priority", metadata: {"box" => true}))
+    ListFirewallRuleGroupAssociationsRequest.add_member(:status, Shapes::ShapeRef.new(shape: FirewallRuleGroupAssociationStatus, location_name: "Status", metadata: {"box" => true}))
+    ListFirewallRuleGroupAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
+    ListFirewallRuleGroupAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", metadata: {"box" => true}))
     ListFirewallRuleGroupAssociationsRequest.struct_class = Types::ListFirewallRuleGroupAssociationsRequest
 
     ListFirewallRuleGroupAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListFirewallRuleGroupAssociationsResponse.add_member(:firewall_rule_group_associations, Shapes::ShapeRef.new(shape: FirewallRuleGroupAssociations, location_name: "FirewallRuleGroupAssociations"))
     ListFirewallRuleGroupAssociationsResponse.struct_class = Types::ListFirewallRuleGroupAssociationsResponse
 
-    ListFirewallRuleGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
-    ListFirewallRuleGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", metadata: {"box"=>true}))
+    ListFirewallRuleGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
+    ListFirewallRuleGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", metadata: {"box" => true}))
     ListFirewallRuleGroupsRequest.struct_class = Types::ListFirewallRuleGroupsRequest
 
     ListFirewallRuleGroupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -782,36 +782,36 @@ module Aws::Route53Resolver
     ListFirewallRuleGroupsResponse.struct_class = Types::ListFirewallRuleGroupsResponse
 
     ListFirewallRulesRequest.add_member(:firewall_rule_group_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "FirewallRuleGroupId"))
-    ListFirewallRulesRequest.add_member(:priority, Shapes::ShapeRef.new(shape: Priority, location_name: "Priority", metadata: {"box"=>true}))
-    ListFirewallRulesRequest.add_member(:action, Shapes::ShapeRef.new(shape: Action, location_name: "Action", metadata: {"box"=>true}))
-    ListFirewallRulesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
-    ListFirewallRulesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", metadata: {"box"=>true}))
+    ListFirewallRulesRequest.add_member(:priority, Shapes::ShapeRef.new(shape: Priority, location_name: "Priority", metadata: {"box" => true}))
+    ListFirewallRulesRequest.add_member(:action, Shapes::ShapeRef.new(shape: Action, location_name: "Action", metadata: {"box" => true}))
+    ListFirewallRulesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
+    ListFirewallRulesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", metadata: {"box" => true}))
     ListFirewallRulesRequest.struct_class = Types::ListFirewallRulesRequest
 
     ListFirewallRulesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListFirewallRulesResponse.add_member(:firewall_rules, Shapes::ShapeRef.new(shape: FirewallRules, location_name: "FirewallRules"))
     ListFirewallRulesResponse.struct_class = Types::ListFirewallRulesResponse
 
-    ListOutpostResolversRequest.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: OutpostArn, location_name: "OutpostArn", metadata: {"box"=>true}))
-    ListOutpostResolversRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
-    ListOutpostResolversRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", metadata: {"box"=>true}))
+    ListOutpostResolversRequest.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: OutpostArn, location_name: "OutpostArn", metadata: {"box" => true}))
+    ListOutpostResolversRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
+    ListOutpostResolversRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", metadata: {"box" => true}))
     ListOutpostResolversRequest.struct_class = Types::ListOutpostResolversRequest
 
     ListOutpostResolversResponse.add_member(:outpost_resolvers, Shapes::ShapeRef.new(shape: OutpostResolverList, location_name: "OutpostResolvers"))
     ListOutpostResolversResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListOutpostResolversResponse.struct_class = Types::ListOutpostResolversResponse
 
-    ListResolverConfigsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListResolverConfigsMaxResult, location_name: "MaxResults", metadata: {"box"=>true}))
-    ListResolverConfigsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", metadata: {"box"=>true}))
+    ListResolverConfigsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListResolverConfigsMaxResult, location_name: "MaxResults", metadata: {"box" => true}))
+    ListResolverConfigsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", metadata: {"box" => true}))
     ListResolverConfigsRequest.struct_class = Types::ListResolverConfigsRequest
 
     ListResolverConfigsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListResolverConfigsResponse.add_member(:resolver_configs, Shapes::ShapeRef.new(shape: ResolverConfigList, location_name: "ResolverConfigs"))
     ListResolverConfigsResponse.struct_class = Types::ListResolverConfigsResponse
 
-    ListResolverDnssecConfigsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
-    ListResolverDnssecConfigsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", metadata: {"box"=>true}))
-    ListResolverDnssecConfigsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters", metadata: {"box"=>true}))
+    ListResolverDnssecConfigsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
+    ListResolverDnssecConfigsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", metadata: {"box" => true}))
+    ListResolverDnssecConfigsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters", metadata: {"box" => true}))
     ListResolverDnssecConfigsRequest.struct_class = Types::ListResolverDnssecConfigsRequest
 
     ListResolverDnssecConfigsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -819,8 +819,8 @@ module Aws::Route53Resolver
     ListResolverDnssecConfigsResponse.struct_class = Types::ListResolverDnssecConfigsResponse
 
     ListResolverEndpointIpAddressesRequest.add_member(:resolver_endpoint_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResolverEndpointId"))
-    ListResolverEndpointIpAddressesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
-    ListResolverEndpointIpAddressesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", metadata: {"box"=>true}))
+    ListResolverEndpointIpAddressesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
+    ListResolverEndpointIpAddressesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", metadata: {"box" => true}))
     ListResolverEndpointIpAddressesRequest.struct_class = Types::ListResolverEndpointIpAddressesRequest
 
     ListResolverEndpointIpAddressesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -828,9 +828,9 @@ module Aws::Route53Resolver
     ListResolverEndpointIpAddressesResponse.add_member(:ip_addresses, Shapes::ShapeRef.new(shape: IpAddressesResponse, location_name: "IpAddresses"))
     ListResolverEndpointIpAddressesResponse.struct_class = Types::ListResolverEndpointIpAddressesResponse
 
-    ListResolverEndpointsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
-    ListResolverEndpointsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", metadata: {"box"=>true}))
-    ListResolverEndpointsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters", metadata: {"box"=>true}))
+    ListResolverEndpointsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
+    ListResolverEndpointsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", metadata: {"box" => true}))
+    ListResolverEndpointsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters", metadata: {"box" => true}))
     ListResolverEndpointsRequest.struct_class = Types::ListResolverEndpointsRequest
 
     ListResolverEndpointsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -851,9 +851,9 @@ module Aws::Route53Resolver
     ListResolverQueryLogConfigAssociationsResponse.add_member(:resolver_query_log_config_associations, Shapes::ShapeRef.new(shape: ResolverQueryLogConfigAssociationList, location_name: "ResolverQueryLogConfigAssociations"))
     ListResolverQueryLogConfigAssociationsResponse.struct_class = Types::ListResolverQueryLogConfigAssociationsResponse
 
-    ListResolverQueryLogConfigsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
-    ListResolverQueryLogConfigsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", metadata: {"box"=>true}))
-    ListResolverQueryLogConfigsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters", metadata: {"box"=>true}))
+    ListResolverQueryLogConfigsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
+    ListResolverQueryLogConfigsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", metadata: {"box" => true}))
+    ListResolverQueryLogConfigsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters", metadata: {"box" => true}))
     ListResolverQueryLogConfigsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortByKey, location_name: "SortBy"))
     ListResolverQueryLogConfigsRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
     ListResolverQueryLogConfigsRequest.struct_class = Types::ListResolverQueryLogConfigsRequest
@@ -864,9 +864,9 @@ module Aws::Route53Resolver
     ListResolverQueryLogConfigsResponse.add_member(:resolver_query_log_configs, Shapes::ShapeRef.new(shape: ResolverQueryLogConfigList, location_name: "ResolverQueryLogConfigs"))
     ListResolverQueryLogConfigsResponse.struct_class = Types::ListResolverQueryLogConfigsResponse
 
-    ListResolverRuleAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
-    ListResolverRuleAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", metadata: {"box"=>true}))
-    ListResolverRuleAssociationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters", metadata: {"box"=>true}))
+    ListResolverRuleAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
+    ListResolverRuleAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", metadata: {"box" => true}))
+    ListResolverRuleAssociationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters", metadata: {"box" => true}))
     ListResolverRuleAssociationsRequest.struct_class = Types::ListResolverRuleAssociationsRequest
 
     ListResolverRuleAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -874,9 +874,9 @@ module Aws::Route53Resolver
     ListResolverRuleAssociationsResponse.add_member(:resolver_rule_associations, Shapes::ShapeRef.new(shape: ResolverRuleAssociations, location_name: "ResolverRuleAssociations"))
     ListResolverRuleAssociationsResponse.struct_class = Types::ListResolverRuleAssociationsResponse
 
-    ListResolverRulesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
-    ListResolverRulesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", metadata: {"box"=>true}))
-    ListResolverRulesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters", metadata: {"box"=>true}))
+    ListResolverRulesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
+    ListResolverRulesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", metadata: {"box" => true}))
+    ListResolverRulesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters", metadata: {"box" => true}))
     ListResolverRulesRequest.struct_class = Types::ListResolverRulesRequest
 
     ListResolverRulesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -885,8 +885,8 @@ module Aws::Route53Resolver
     ListResolverRulesResponse.struct_class = Types::ListResolverRulesResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceArn"))
-    ListTagsForResourceRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
-    ListTagsForResourceRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", metadata: {"box"=>true}))
+    ListTagsForResourceRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
+    ListTagsForResourceRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", metadata: {"box" => true}))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
@@ -1060,11 +1060,11 @@ module Aws::Route53Resolver
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
-    TargetAddress.add_member(:ip, Shapes::ShapeRef.new(shape: Ip, location_name: "Ip", metadata: {"box"=>true}))
-    TargetAddress.add_member(:port, Shapes::ShapeRef.new(shape: Port, location_name: "Port", metadata: {"box"=>true}))
-    TargetAddress.add_member(:ipv_6, Shapes::ShapeRef.new(shape: Ipv6, location_name: "Ipv6", metadata: {"box"=>true}))
-    TargetAddress.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, location_name: "Protocol", metadata: {"box"=>true}))
-    TargetAddress.add_member(:server_name_indication, Shapes::ShapeRef.new(shape: ServerNameIndication, location_name: "ServerNameIndication", metadata: {"box"=>true}))
+    TargetAddress.add_member(:ip, Shapes::ShapeRef.new(shape: Ip, location_name: "Ip", metadata: {"box" => true}))
+    TargetAddress.add_member(:port, Shapes::ShapeRef.new(shape: Port, location_name: "Port", metadata: {"box" => true}))
+    TargetAddress.add_member(:ipv_6, Shapes::ShapeRef.new(shape: Ipv6, location_name: "Ipv6", metadata: {"box" => true}))
+    TargetAddress.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, location_name: "Protocol", metadata: {"box" => true}))
+    TargetAddress.add_member(:server_name_indication, Shapes::ShapeRef.new(shape: ServerNameIndication, location_name: "ServerNameIndication", metadata: {"box" => true}))
     TargetAddress.struct_class = Types::TargetAddress
 
     TargetList.member = Shapes::ShapeRef.new(shape: TargetAddress)
@@ -1100,28 +1100,28 @@ module Aws::Route53Resolver
     UpdateFirewallDomainsResponse.struct_class = Types::UpdateFirewallDomainsResponse
 
     UpdateFirewallRuleGroupAssociationRequest.add_member(:firewall_rule_group_association_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "FirewallRuleGroupAssociationId"))
-    UpdateFirewallRuleGroupAssociationRequest.add_member(:priority, Shapes::ShapeRef.new(shape: Priority, location_name: "Priority", metadata: {"box"=>true}))
-    UpdateFirewallRuleGroupAssociationRequest.add_member(:mutation_protection, Shapes::ShapeRef.new(shape: MutationProtectionStatus, location_name: "MutationProtection", metadata: {"box"=>true}))
-    UpdateFirewallRuleGroupAssociationRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name", metadata: {"box"=>true}))
+    UpdateFirewallRuleGroupAssociationRequest.add_member(:priority, Shapes::ShapeRef.new(shape: Priority, location_name: "Priority", metadata: {"box" => true}))
+    UpdateFirewallRuleGroupAssociationRequest.add_member(:mutation_protection, Shapes::ShapeRef.new(shape: MutationProtectionStatus, location_name: "MutationProtection", metadata: {"box" => true}))
+    UpdateFirewallRuleGroupAssociationRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name", metadata: {"box" => true}))
     UpdateFirewallRuleGroupAssociationRequest.struct_class = Types::UpdateFirewallRuleGroupAssociationRequest
 
     UpdateFirewallRuleGroupAssociationResponse.add_member(:firewall_rule_group_association, Shapes::ShapeRef.new(shape: FirewallRuleGroupAssociation, location_name: "FirewallRuleGroupAssociation"))
     UpdateFirewallRuleGroupAssociationResponse.struct_class = Types::UpdateFirewallRuleGroupAssociationResponse
 
     UpdateFirewallRuleRequest.add_member(:firewall_rule_group_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "FirewallRuleGroupId"))
-    UpdateFirewallRuleRequest.add_member(:firewall_domain_list_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "FirewallDomainListId", metadata: {"box"=>true}))
-    UpdateFirewallRuleRequest.add_member(:firewall_threat_protection_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "FirewallThreatProtectionId", metadata: {"box"=>true}))
-    UpdateFirewallRuleRequest.add_member(:priority, Shapes::ShapeRef.new(shape: Priority, location_name: "Priority", metadata: {"box"=>true}))
-    UpdateFirewallRuleRequest.add_member(:action, Shapes::ShapeRef.new(shape: Action, location_name: "Action", metadata: {"box"=>true}))
-    UpdateFirewallRuleRequest.add_member(:block_response, Shapes::ShapeRef.new(shape: BlockResponse, location_name: "BlockResponse", metadata: {"box"=>true}))
-    UpdateFirewallRuleRequest.add_member(:block_override_domain, Shapes::ShapeRef.new(shape: BlockOverrideDomain, location_name: "BlockOverrideDomain", metadata: {"box"=>true}))
-    UpdateFirewallRuleRequest.add_member(:block_override_dns_type, Shapes::ShapeRef.new(shape: BlockOverrideDnsType, location_name: "BlockOverrideDnsType", metadata: {"box"=>true}))
-    UpdateFirewallRuleRequest.add_member(:block_override_ttl, Shapes::ShapeRef.new(shape: BlockOverrideTtl, location_name: "BlockOverrideTtl", metadata: {"box"=>true}))
-    UpdateFirewallRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name", metadata: {"box"=>true}))
-    UpdateFirewallRuleRequest.add_member(:firewall_domain_redirection_action, Shapes::ShapeRef.new(shape: FirewallDomainRedirectionAction, location_name: "FirewallDomainRedirectionAction", metadata: {"box"=>true}))
+    UpdateFirewallRuleRequest.add_member(:firewall_domain_list_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "FirewallDomainListId", metadata: {"box" => true}))
+    UpdateFirewallRuleRequest.add_member(:firewall_threat_protection_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "FirewallThreatProtectionId", metadata: {"box" => true}))
+    UpdateFirewallRuleRequest.add_member(:priority, Shapes::ShapeRef.new(shape: Priority, location_name: "Priority", metadata: {"box" => true}))
+    UpdateFirewallRuleRequest.add_member(:action, Shapes::ShapeRef.new(shape: Action, location_name: "Action", metadata: {"box" => true}))
+    UpdateFirewallRuleRequest.add_member(:block_response, Shapes::ShapeRef.new(shape: BlockResponse, location_name: "BlockResponse", metadata: {"box" => true}))
+    UpdateFirewallRuleRequest.add_member(:block_override_domain, Shapes::ShapeRef.new(shape: BlockOverrideDomain, location_name: "BlockOverrideDomain", metadata: {"box" => true}))
+    UpdateFirewallRuleRequest.add_member(:block_override_dns_type, Shapes::ShapeRef.new(shape: BlockOverrideDnsType, location_name: "BlockOverrideDnsType", metadata: {"box" => true}))
+    UpdateFirewallRuleRequest.add_member(:block_override_ttl, Shapes::ShapeRef.new(shape: BlockOverrideTtl, location_name: "BlockOverrideTtl", metadata: {"box" => true}))
+    UpdateFirewallRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name", metadata: {"box" => true}))
+    UpdateFirewallRuleRequest.add_member(:firewall_domain_redirection_action, Shapes::ShapeRef.new(shape: FirewallDomainRedirectionAction, location_name: "FirewallDomainRedirectionAction", metadata: {"box" => true}))
     UpdateFirewallRuleRequest.add_member(:qtype, Shapes::ShapeRef.new(shape: Qtype, location_name: "Qtype"))
-    UpdateFirewallRuleRequest.add_member(:dns_threat_protection, Shapes::ShapeRef.new(shape: DnsThreatProtection, location_name: "DnsThreatProtection", metadata: {"box"=>true}))
-    UpdateFirewallRuleRequest.add_member(:confidence_threshold, Shapes::ShapeRef.new(shape: ConfidenceThreshold, location_name: "ConfidenceThreshold", metadata: {"box"=>true}))
+    UpdateFirewallRuleRequest.add_member(:dns_threat_protection, Shapes::ShapeRef.new(shape: DnsThreatProtection, location_name: "DnsThreatProtection", metadata: {"box" => true}))
+    UpdateFirewallRuleRequest.add_member(:confidence_threshold, Shapes::ShapeRef.new(shape: ConfidenceThreshold, location_name: "ConfidenceThreshold", metadata: {"box" => true}))
     UpdateFirewallRuleRequest.struct_class = Types::UpdateFirewallRuleRequest
 
     UpdateFirewallRuleResponse.add_member(:firewall_rule, Shapes::ShapeRef.new(shape: FirewallRule, location_name: "FirewallRule"))
@@ -1134,9 +1134,9 @@ module Aws::Route53Resolver
     UpdateIpAddresses.member = Shapes::ShapeRef.new(shape: UpdateIpAddress)
 
     UpdateOutpostResolverRequest.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "Id"))
-    UpdateOutpostResolverRequest.add_member(:name, Shapes::ShapeRef.new(shape: OutpostResolverName, location_name: "Name", metadata: {"box"=>true}))
-    UpdateOutpostResolverRequest.add_member(:instance_count, Shapes::ShapeRef.new(shape: InstanceCount, location_name: "InstanceCount", metadata: {"box"=>true}))
-    UpdateOutpostResolverRequest.add_member(:preferred_instance_type, Shapes::ShapeRef.new(shape: OutpostInstanceType, location_name: "PreferredInstanceType", metadata: {"box"=>true}))
+    UpdateOutpostResolverRequest.add_member(:name, Shapes::ShapeRef.new(shape: OutpostResolverName, location_name: "Name", metadata: {"box" => true}))
+    UpdateOutpostResolverRequest.add_member(:instance_count, Shapes::ShapeRef.new(shape: InstanceCount, location_name: "InstanceCount", metadata: {"box" => true}))
+    UpdateOutpostResolverRequest.add_member(:preferred_instance_type, Shapes::ShapeRef.new(shape: OutpostInstanceType, location_name: "PreferredInstanceType", metadata: {"box" => true}))
     UpdateOutpostResolverRequest.struct_class = Types::UpdateOutpostResolverRequest
 
     UpdateOutpostResolverResponse.add_member(:outpost_resolver, Shapes::ShapeRef.new(shape: OutpostResolver, location_name: "OutpostResolver"))
@@ -1157,10 +1157,10 @@ module Aws::Route53Resolver
     UpdateResolverDnssecConfigResponse.struct_class = Types::UpdateResolverDnssecConfigResponse
 
     UpdateResolverEndpointRequest.add_member(:resolver_endpoint_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResolverEndpointId"))
-    UpdateResolverEndpointRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name", metadata: {"box"=>true}))
-    UpdateResolverEndpointRequest.add_member(:resolver_endpoint_type, Shapes::ShapeRef.new(shape: ResolverEndpointType, location_name: "ResolverEndpointType", metadata: {"box"=>true}))
-    UpdateResolverEndpointRequest.add_member(:update_ip_addresses, Shapes::ShapeRef.new(shape: UpdateIpAddresses, location_name: "UpdateIpAddresses", metadata: {"box"=>true}))
-    UpdateResolverEndpointRequest.add_member(:protocols, Shapes::ShapeRef.new(shape: ProtocolList, location_name: "Protocols", metadata: {"box"=>true}))
+    UpdateResolverEndpointRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name", metadata: {"box" => true}))
+    UpdateResolverEndpointRequest.add_member(:resolver_endpoint_type, Shapes::ShapeRef.new(shape: ResolverEndpointType, location_name: "ResolverEndpointType", metadata: {"box" => true}))
+    UpdateResolverEndpointRequest.add_member(:update_ip_addresses, Shapes::ShapeRef.new(shape: UpdateIpAddresses, location_name: "UpdateIpAddresses", metadata: {"box" => true}))
+    UpdateResolverEndpointRequest.add_member(:protocols, Shapes::ShapeRef.new(shape: ProtocolList, location_name: "Protocols", metadata: {"box" => true}))
     UpdateResolverEndpointRequest.struct_class = Types::UpdateResolverEndpointRequest
 
     UpdateResolverEndpointResponse.add_member(:resolver_endpoint, Shapes::ShapeRef.new(shape: ResolverEndpoint, location_name: "ResolverEndpoint"))

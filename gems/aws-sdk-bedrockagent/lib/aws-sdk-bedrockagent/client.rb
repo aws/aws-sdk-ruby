@@ -966,7 +966,7 @@ module Aws::BedrockAgent
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html
     #
     # @option params [Hash<String,String>] :parent_action_group_signature_params
     #   The configuration settings for a computer use action.
@@ -978,7 +978,7 @@ module Aws::BedrockAgent
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html
     #
     # @return [Types::CreateAgentActionGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1579,6 +1579,10 @@ module Aws::BedrockAgent
     #                 },
     #               ],
     #             },
+    #             inline_code: {
+    #               code: "InlineCode", # required
+    #               language: "Python_3", # required, accepts Python_3
+    #             },
     #             input: {
     #             },
     #             iterator: {
@@ -1721,7 +1725,7 @@ module Aws::BedrockAgent
     #               type: "String", # required, accepts String, Number, Boolean, Object, Array
     #             },
     #           ],
-    #           type: "Input", # required, accepts Input, Output, KnowledgeBase, Condition, Lex, Prompt, LambdaFunction, Storage, Agent, Retrieval, Iterator, Collector
+    #           type: "Input", # required, accepts Input, Output, KnowledgeBase, Condition, Lex, Prompt, LambdaFunction, Storage, Agent, Retrieval, Iterator, Collector, InlineCode
     #         },
     #       ],
     #     },
@@ -1751,6 +1755,8 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.condition.conditions #=> Array
     #   resp.definition.nodes[0].configuration.condition.conditions[0].expression #=> String
     #   resp.definition.nodes[0].configuration.condition.conditions[0].name #=> String
+    #   resp.definition.nodes[0].configuration.inline_code.code #=> String
+    #   resp.definition.nodes[0].configuration.inline_code.language #=> String, one of "Python_3"
     #   resp.definition.nodes[0].configuration.knowledge_base.guardrail_configuration.guardrail_identifier #=> String
     #   resp.definition.nodes[0].configuration.knowledge_base.guardrail_configuration.guardrail_version #=> String
     #   resp.definition.nodes[0].configuration.knowledge_base.knowledge_base_id #=> String
@@ -1797,7 +1803,7 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].outputs #=> Array
     #   resp.definition.nodes[0].outputs[0].name #=> String
     #   resp.definition.nodes[0].outputs[0].type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
-    #   resp.definition.nodes[0].type #=> String, one of "Input", "Output", "KnowledgeBase", "Condition", "Lex", "Prompt", "LambdaFunction", "Storage", "Agent", "Retrieval", "Iterator", "Collector"
+    #   resp.definition.nodes[0].type #=> String, one of "Input", "Output", "KnowledgeBase", "Condition", "Lex", "Prompt", "LambdaFunction", "Storage", "Agent", "Retrieval", "Iterator", "Collector", "InlineCode"
     #   resp.description #=> String
     #   resp.execution_role_arn #=> String
     #   resp.id #=> String
@@ -1971,6 +1977,8 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.condition.conditions #=> Array
     #   resp.definition.nodes[0].configuration.condition.conditions[0].expression #=> String
     #   resp.definition.nodes[0].configuration.condition.conditions[0].name #=> String
+    #   resp.definition.nodes[0].configuration.inline_code.code #=> String
+    #   resp.definition.nodes[0].configuration.inline_code.language #=> String, one of "Python_3"
     #   resp.definition.nodes[0].configuration.knowledge_base.guardrail_configuration.guardrail_identifier #=> String
     #   resp.definition.nodes[0].configuration.knowledge_base.guardrail_configuration.guardrail_version #=> String
     #   resp.definition.nodes[0].configuration.knowledge_base.knowledge_base_id #=> String
@@ -2017,7 +2025,7 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].outputs #=> Array
     #   resp.definition.nodes[0].outputs[0].name #=> String
     #   resp.definition.nodes[0].outputs[0].type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
-    #   resp.definition.nodes[0].type #=> String, one of "Input", "Output", "KnowledgeBase", "Condition", "Lex", "Prompt", "LambdaFunction", "Storage", "Agent", "Retrieval", "Iterator", "Collector"
+    #   resp.definition.nodes[0].type #=> String, one of "Input", "Output", "KnowledgeBase", "Condition", "Lex", "Prompt", "LambdaFunction", "Storage", "Agent", "Retrieval", "Iterator", "Collector", "InlineCode"
     #   resp.description #=> String
     #   resp.execution_role_arn #=> String
     #   resp.id #=> String
@@ -3749,6 +3757,8 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.condition.conditions #=> Array
     #   resp.definition.nodes[0].configuration.condition.conditions[0].expression #=> String
     #   resp.definition.nodes[0].configuration.condition.conditions[0].name #=> String
+    #   resp.definition.nodes[0].configuration.inline_code.code #=> String
+    #   resp.definition.nodes[0].configuration.inline_code.language #=> String, one of "Python_3"
     #   resp.definition.nodes[0].configuration.knowledge_base.guardrail_configuration.guardrail_identifier #=> String
     #   resp.definition.nodes[0].configuration.knowledge_base.guardrail_configuration.guardrail_version #=> String
     #   resp.definition.nodes[0].configuration.knowledge_base.knowledge_base_id #=> String
@@ -3795,7 +3805,7 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].outputs #=> Array
     #   resp.definition.nodes[0].outputs[0].name #=> String
     #   resp.definition.nodes[0].outputs[0].type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
-    #   resp.definition.nodes[0].type #=> String, one of "Input", "Output", "KnowledgeBase", "Condition", "Lex", "Prompt", "LambdaFunction", "Storage", "Agent", "Retrieval", "Iterator", "Collector"
+    #   resp.definition.nodes[0].type #=> String, one of "Input", "Output", "KnowledgeBase", "Condition", "Lex", "Prompt", "LambdaFunction", "Storage", "Agent", "Retrieval", "Iterator", "Collector", "InlineCode"
     #   resp.description #=> String
     #   resp.execution_role_arn #=> String
     #   resp.id #=> String
@@ -3961,6 +3971,8 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.condition.conditions #=> Array
     #   resp.definition.nodes[0].configuration.condition.conditions[0].expression #=> String
     #   resp.definition.nodes[0].configuration.condition.conditions[0].name #=> String
+    #   resp.definition.nodes[0].configuration.inline_code.code #=> String
+    #   resp.definition.nodes[0].configuration.inline_code.language #=> String, one of "Python_3"
     #   resp.definition.nodes[0].configuration.knowledge_base.guardrail_configuration.guardrail_identifier #=> String
     #   resp.definition.nodes[0].configuration.knowledge_base.guardrail_configuration.guardrail_version #=> String
     #   resp.definition.nodes[0].configuration.knowledge_base.knowledge_base_id #=> String
@@ -4007,7 +4019,7 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].outputs #=> Array
     #   resp.definition.nodes[0].outputs[0].name #=> String
     #   resp.definition.nodes[0].outputs[0].type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
-    #   resp.definition.nodes[0].type #=> String, one of "Input", "Output", "KnowledgeBase", "Condition", "Lex", "Prompt", "LambdaFunction", "Storage", "Agent", "Retrieval", "Iterator", "Collector"
+    #   resp.definition.nodes[0].type #=> String, one of "Input", "Output", "KnowledgeBase", "Condition", "Lex", "Prompt", "LambdaFunction", "Storage", "Agent", "Retrieval", "Iterator", "Collector", "InlineCode"
     #   resp.description #=> String
     #   resp.execution_role_arn #=> String
     #   resp.id #=> String
@@ -5858,7 +5870,7 @@ module Aws::BedrockAgent
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html
     #   [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html
     #
     # @option params [Hash<String,String>] :parent_action_group_signature_params
@@ -5871,7 +5883,7 @@ module Aws::BedrockAgent
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html
     #
     # @return [Types::UpdateAgentActionGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6534,6 +6546,10 @@ module Aws::BedrockAgent
     #                 },
     #               ],
     #             },
+    #             inline_code: {
+    #               code: "InlineCode", # required
+    #               language: "Python_3", # required, accepts Python_3
+    #             },
     #             input: {
     #             },
     #             iterator: {
@@ -6676,7 +6692,7 @@ module Aws::BedrockAgent
     #               type: "String", # required, accepts String, Number, Boolean, Object, Array
     #             },
     #           ],
-    #           type: "Input", # required, accepts Input, Output, KnowledgeBase, Condition, Lex, Prompt, LambdaFunction, Storage, Agent, Retrieval, Iterator, Collector
+    #           type: "Input", # required, accepts Input, Output, KnowledgeBase, Condition, Lex, Prompt, LambdaFunction, Storage, Agent, Retrieval, Iterator, Collector, InlineCode
     #         },
     #       ],
     #     },
@@ -6704,6 +6720,8 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].configuration.condition.conditions #=> Array
     #   resp.definition.nodes[0].configuration.condition.conditions[0].expression #=> String
     #   resp.definition.nodes[0].configuration.condition.conditions[0].name #=> String
+    #   resp.definition.nodes[0].configuration.inline_code.code #=> String
+    #   resp.definition.nodes[0].configuration.inline_code.language #=> String, one of "Python_3"
     #   resp.definition.nodes[0].configuration.knowledge_base.guardrail_configuration.guardrail_identifier #=> String
     #   resp.definition.nodes[0].configuration.knowledge_base.guardrail_configuration.guardrail_version #=> String
     #   resp.definition.nodes[0].configuration.knowledge_base.knowledge_base_id #=> String
@@ -6750,7 +6768,7 @@ module Aws::BedrockAgent
     #   resp.definition.nodes[0].outputs #=> Array
     #   resp.definition.nodes[0].outputs[0].name #=> String
     #   resp.definition.nodes[0].outputs[0].type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
-    #   resp.definition.nodes[0].type #=> String, one of "Input", "Output", "KnowledgeBase", "Condition", "Lex", "Prompt", "LambdaFunction", "Storage", "Agent", "Retrieval", "Iterator", "Collector"
+    #   resp.definition.nodes[0].type #=> String, one of "Input", "Output", "KnowledgeBase", "Condition", "Lex", "Prompt", "LambdaFunction", "Storage", "Agent", "Retrieval", "Iterator", "Collector", "InlineCode"
     #   resp.description #=> String
     #   resp.execution_role_arn #=> String
     #   resp.id #=> String
@@ -7405,6 +7423,10 @@ module Aws::BedrockAgent
     #                 },
     #               ],
     #             },
+    #             inline_code: {
+    #               code: "InlineCode", # required
+    #               language: "Python_3", # required, accepts Python_3
+    #             },
     #             input: {
     #             },
     #             iterator: {
@@ -7547,7 +7569,7 @@ module Aws::BedrockAgent
     #               type: "String", # required, accepts String, Number, Boolean, Object, Array
     #             },
     #           ],
-    #           type: "Input", # required, accepts Input, Output, KnowledgeBase, Condition, Lex, Prompt, LambdaFunction, Storage, Agent, Retrieval, Iterator, Collector
+    #           type: "Input", # required, accepts Input, Output, KnowledgeBase, Condition, Lex, Prompt, LambdaFunction, Storage, Agent, Retrieval, Iterator, Collector, InlineCode
     #         },
     #       ],
     #     },
@@ -7627,7 +7649,7 @@ module Aws::BedrockAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagent'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

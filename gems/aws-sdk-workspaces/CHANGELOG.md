@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.135.0 (2025-05-09)
+------------------
+
+* Feature - Remove parameter EnableWorkDocs from WorkSpacesServiceModel due to end of support of Amazon WorkDocs service.
+
+1.134.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.133.0 (2025-03-06)
 ------------------
 

@@ -54,7 +54,7 @@ module Aws::ServiceQuotas
   autoload :EndpointProvider, 'aws-sdk-servicequotas/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-servicequotas/endpoints'
 
-  GEM_VERSION = '1.53.0'
+  GEM_VERSION = '1.54.0'
 
 end
 

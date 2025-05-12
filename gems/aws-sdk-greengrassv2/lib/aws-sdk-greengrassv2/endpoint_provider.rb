@@ -46,10 +46,10 @@ module Aws::GreengrassV2
             raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
           end
           if Aws::Endpoints::Matchers.string_equals?(parameters.region, "dataplane-us-gov-east-1")
-            return Aws::Endpoints::Endpoint.new(url: "https://greengrass-ats.iot.us-gov-east-1.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"greengrass", "signingRegion"=>"us-gov-east-1"}]})
+            return Aws::Endpoints::Endpoint.new(url: "https://greengrass-ats.iot.us-gov-east-1.amazonaws.com", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "greengrass", "signingRegion" => "us-gov-east-1"}]})
           end
           if Aws::Endpoints::Matchers.string_equals?(parameters.region, "dataplane-us-gov-west-1")
-            return Aws::Endpoints::Endpoint.new(url: "https://greengrass-ats.iot.us-gov-west-1.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"greengrass", "signingRegion"=>"us-gov-west-1"}]})
+            return Aws::Endpoints::Endpoint.new(url: "https://greengrass-ats.iot.us-gov-west-1.amazonaws.com", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "greengrass", "signingRegion" => "us-gov-west-1"}]})
           end
           return Aws::Endpoints::Endpoint.new(url: "https://greengrass.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
         end

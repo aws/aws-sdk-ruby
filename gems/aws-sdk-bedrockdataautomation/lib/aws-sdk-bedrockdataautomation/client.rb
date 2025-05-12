@@ -504,7 +504,7 @@ module Aws::BedrockDataAutomation
     #
     #   resp = client.create_blueprint({
     #     blueprint_name: "BlueprintName", # required
-    #     type: "DOCUMENT", # required, accepts DOCUMENT, IMAGE
+    #     type: "DOCUMENT", # required, accepts DOCUMENT, IMAGE, AUDIO
     #     blueprint_stage: "DEVELOPMENT", # accepts DEVELOPMENT, LIVE
     #     schema: "BlueprintSchema", # required
     #     client_token: "ClientToken",
@@ -526,7 +526,7 @@ module Aws::BedrockDataAutomation
     #
     #   resp.blueprint.blueprint_arn #=> String
     #   resp.blueprint.schema #=> String
-    #   resp.blueprint.type #=> String, one of "DOCUMENT", "IMAGE"
+    #   resp.blueprint.type #=> String, one of "DOCUMENT", "IMAGE", "AUDIO"
     #   resp.blueprint.creation_time #=> Time
     #   resp.blueprint.last_modified_time #=> Time
     #   resp.blueprint.blueprint_name #=> String
@@ -572,7 +572,7 @@ module Aws::BedrockDataAutomation
     #
     #   resp.blueprint.blueprint_arn #=> String
     #   resp.blueprint.schema #=> String
-    #   resp.blueprint.type #=> String, one of "DOCUMENT", "IMAGE"
+    #   resp.blueprint.type #=> String, one of "DOCUMENT", "IMAGE", "AUDIO"
     #   resp.blueprint.creation_time #=> Time
     #   resp.blueprint.last_modified_time #=> Time
     #   resp.blueprint.blueprint_name #=> String
@@ -854,7 +854,7 @@ module Aws::BedrockDataAutomation
     #
     #   resp.blueprint.blueprint_arn #=> String
     #   resp.blueprint.schema #=> String
-    #   resp.blueprint.type #=> String, one of "DOCUMENT", "IMAGE"
+    #   resp.blueprint.type #=> String, one of "DOCUMENT", "IMAGE", "AUDIO"
     #   resp.blueprint.creation_time #=> Time
     #   resp.blueprint.last_modified_time #=> Time
     #   resp.blueprint.blueprint_name #=> String
@@ -1195,7 +1195,7 @@ module Aws::BedrockDataAutomation
     #
     #   resp.blueprint.blueprint_arn #=> String
     #   resp.blueprint.schema #=> String
-    #   resp.blueprint.type #=> String, one of "DOCUMENT", "IMAGE"
+    #   resp.blueprint.type #=> String, one of "DOCUMENT", "IMAGE", "AUDIO"
     #   resp.blueprint.creation_time #=> Time
     #   resp.blueprint.last_modified_time #=> Time
     #   resp.blueprint.blueprint_name #=> String
@@ -1396,7 +1396,7 @@ module Aws::BedrockDataAutomation
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockdataautomation'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

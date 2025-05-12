@@ -585,7 +585,7 @@ module Aws::KinesisVideoMedia
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kinesisvideomedia'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

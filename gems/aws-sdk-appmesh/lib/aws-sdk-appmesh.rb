@@ -54,7 +54,7 @@ module Aws::AppMesh
   autoload :EndpointProvider, 'aws-sdk-appmesh/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-appmesh/endpoints'
 
-  GEM_VERSION = '1.76.0'
+  GEM_VERSION = '1.77.0'
 
 end
 

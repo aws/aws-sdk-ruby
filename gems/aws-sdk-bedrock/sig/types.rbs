@@ -321,6 +321,13 @@ module Aws::Bedrock
       end
     end
 
+    class DataProcessingDetails
+      attr_accessor status: ("InProgress" | "Completed" | "Stopping" | "Stopped" | "Failed" | "NotStarted")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
     class DeleteCustomModelRequest
       attr_accessor model_identifier: ::String
       SENSITIVE: []
@@ -795,6 +802,7 @@ module Aws::Bedrock
       attr_accessor role_arn: ::String
       attr_accessor status: ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped")
       attr_accessor failure_message: ::String
+      attr_accessor status_details: Types::StatusDetails
       attr_accessor creation_time: ::Time
       attr_accessor last_modified_time: ::Time
       attr_accessor end_time: ::Time
@@ -1524,6 +1532,7 @@ module Aws::Bedrock
       attr_accessor job_name: ::String
       attr_accessor status: ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped")
       attr_accessor last_modified_time: ::Time
+      attr_accessor status_details: Types::StatusDetails
       attr_accessor creation_time: ::Time
       attr_accessor end_time: ::Time
       attr_accessor custom_model_arn: ::String
@@ -1854,6 +1863,13 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class StatusDetails
+      attr_accessor validation_details: Types::ValidationDetails
+      attr_accessor data_processing_details: Types::DataProcessingDetails
+      attr_accessor training_details: Types::TrainingDetails
+      SENSITIVE: []
+    end
+
     class StopEvaluationJobRequest
       attr_accessor job_identifier: ::String
       SENSITIVE: [:job_identifier]
@@ -1924,6 +1940,13 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class TrainingDetails
+      attr_accessor status: ("InProgress" | "Completed" | "Stopping" | "Stopped" | "Failed" | "NotStarted")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
     class TrainingMetrics
       attr_accessor training_loss: ::Float
       SENSITIVE: []
@@ -1985,6 +2008,13 @@ module Aws::Bedrock
 
     class ValidationDataConfig
       attr_accessor validators: ::Array[Types::Validator]
+      SENSITIVE: []
+    end
+
+    class ValidationDetails
+      attr_accessor status: ("InProgress" | "Completed" | "Stopping" | "Stopped" | "Failed" | "NotStarted")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
       SENSITIVE: []
     end
 

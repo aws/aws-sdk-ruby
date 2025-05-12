@@ -54,7 +54,7 @@ module Aws::CodeStarNotifications
   autoload :EndpointProvider, 'aws-sdk-codestarnotifications/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-codestarnotifications/endpoints'
 
-  GEM_VERSION = '1.49.0'
+  GEM_VERSION = '1.50.0'
 
 end
 

@@ -19,9 +19,9 @@ module Aws::Billing
       if Aws::Endpoints::Matchers.set?(parameters.region)
         if (partition_result = Aws::Endpoints::Matchers.aws_partition(parameters.region))
           if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true)
-            return Aws::Endpoints::Endpoint.new(url: "https://billing-fips.#{partition_result['implicitGlobalRegion']}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"#{partition_result['implicitGlobalRegion']}"}]})
+            return Aws::Endpoints::Endpoint.new(url: "https://billing-fips.#{partition_result['implicitGlobalRegion']}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "#{partition_result['implicitGlobalRegion']}"}]})
           end
-          return Aws::Endpoints::Endpoint.new(url: "https://billing.#{partition_result['implicitGlobalRegion']}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"#{partition_result['implicitGlobalRegion']}"}]})
+          return Aws::Endpoints::Endpoint.new(url: "https://billing.#{partition_result['implicitGlobalRegion']}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "#{partition_result['implicitGlobalRegion']}"}]})
         end
       end
       raise ArgumentError, "Invalid Configuration: Missing Region"

@@ -54,7 +54,7 @@ module Aws::ApplicationCostProfiler
   autoload :EndpointProvider, 'aws-sdk-applicationcostprofiler/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-applicationcostprofiler/endpoints'
 
-  GEM_VERSION = '1.38.0'
+  GEM_VERSION = '1.39.0'
 
 end
 

@@ -218,7 +218,7 @@ module Aws::EMRContainers
     ContainerProvider.struct_class = Types::ContainerProvider
 
     CreateJobTemplateRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceNameString, required: true, location_name: "name"))
-    CreateJobTemplateRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateJobTemplateRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateJobTemplateRequest.add_member(:job_template_data, Shapes::ShapeRef.new(shape: JobTemplateData, required: true, location_name: "jobTemplateData"))
     CreateJobTemplateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateJobTemplateRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
@@ -235,9 +235,9 @@ module Aws::EMRContainers
     CreateManagedEndpointRequest.add_member(:type, Shapes::ShapeRef.new(shape: EndpointType, required: true, location_name: "type"))
     CreateManagedEndpointRequest.add_member(:release_label, Shapes::ShapeRef.new(shape: ReleaseLabel, required: true, location_name: "releaseLabel"))
     CreateManagedEndpointRequest.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "executionRoleArn"))
-    CreateManagedEndpointRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: ACMCertArn, deprecated: true, location_name: "certificateArn", metadata: {"deprecatedMessage"=>"Customer provided certificate-arn is deprecated and would be removed in future."}))
+    CreateManagedEndpointRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: ACMCertArn, deprecated: true, location_name: "certificateArn", metadata: {"deprecatedMessage" => "Customer provided certificate-arn is deprecated and would be removed in future."}))
     CreateManagedEndpointRequest.add_member(:configuration_overrides, Shapes::ShapeRef.new(shape: ConfigurationOverrides, location_name: "configurationOverrides"))
-    CreateManagedEndpointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateManagedEndpointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateManagedEndpointRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateManagedEndpointRequest.struct_class = Types::CreateManagedEndpointRequest
 
@@ -247,7 +247,7 @@ module Aws::EMRContainers
     CreateManagedEndpointResponse.add_member(:virtual_cluster_id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "virtualClusterId"))
     CreateManagedEndpointResponse.struct_class = Types::CreateManagedEndpointResponse
 
-    CreateSecurityConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateSecurityConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateSecurityConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceNameString, required: true, location_name: "name"))
     CreateSecurityConfigurationRequest.add_member(:security_configuration_data, Shapes::ShapeRef.new(shape: SecurityConfigurationData, required: true, location_name: "securityConfigurationData"))
     CreateSecurityConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
@@ -260,7 +260,7 @@ module Aws::EMRContainers
 
     CreateVirtualClusterRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceNameString, required: true, location_name: "name"))
     CreateVirtualClusterRequest.add_member(:container_provider, Shapes::ShapeRef.new(shape: ContainerProvider, required: true, location_name: "containerProvider"))
-    CreateVirtualClusterRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateVirtualClusterRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateVirtualClusterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateVirtualClusterRequest.add_member(:security_configuration_id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "securityConfigurationId"))
     CreateVirtualClusterRequest.struct_class = Types::CreateVirtualClusterRequest
@@ -345,7 +345,7 @@ module Aws::EMRContainers
     Endpoint.add_member(:state, Shapes::ShapeRef.new(shape: EndpointState, location_name: "state"))
     Endpoint.add_member(:release_label, Shapes::ShapeRef.new(shape: ReleaseLabel, location_name: "releaseLabel"))
     Endpoint.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "executionRoleArn"))
-    Endpoint.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: ACMCertArn, deprecated: true, location_name: "certificateArn", metadata: {"deprecatedMessage"=>"Customer provided certificate-arn is deprecated and would be removed in future."}))
+    Endpoint.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: ACMCertArn, deprecated: true, location_name: "certificateArn", metadata: {"deprecatedMessage" => "Customer provided certificate-arn is deprecated and would be removed in future."}))
     Endpoint.add_member(:certificate_authority, Shapes::ShapeRef.new(shape: Certificate, location_name: "certificateAuthority"))
     Endpoint.add_member(:configuration_overrides, Shapes::ShapeRef.new(shape: ConfigurationOverrides, location_name: "configurationOverrides"))
     Endpoint.add_member(:server_url, Shapes::ShapeRef.new(shape: UriString, location_name: "serverUrl"))
@@ -371,7 +371,7 @@ module Aws::EMRContainers
     GetManagedEndpointSessionCredentialsRequest.add_member(:credential_type, Shapes::ShapeRef.new(shape: CredentialType, required: true, location_name: "credentialType"))
     GetManagedEndpointSessionCredentialsRequest.add_member(:duration_in_seconds, Shapes::ShapeRef.new(shape: JavaInteger, location_name: "durationInSeconds"))
     GetManagedEndpointSessionCredentialsRequest.add_member(:log_context, Shapes::ShapeRef.new(shape: LogContext, location_name: "logContext"))
-    GetManagedEndpointSessionCredentialsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    GetManagedEndpointSessionCredentialsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     GetManagedEndpointSessionCredentialsRequest.struct_class = Types::GetManagedEndpointSessionCredentialsRequest
 
     GetManagedEndpointSessionCredentialsResponse.add_member(:id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id"))
@@ -579,7 +579,7 @@ module Aws::EMRContainers
 
     StartJobRunRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceNameString, location_name: "name"))
     StartJobRunRequest.add_member(:virtual_cluster_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "virtualClusterId"))
-    StartJobRunRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    StartJobRunRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     StartJobRunRequest.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "executionRoleArn"))
     StartJobRunRequest.add_member(:release_label, Shapes::ShapeRef.new(shape: ReleaseLabel, location_name: "releaseLabel"))
     StartJobRunRequest.add_member(:job_driver, Shapes::ShapeRef.new(shape: JobDriver, location_name: "jobDriver"))

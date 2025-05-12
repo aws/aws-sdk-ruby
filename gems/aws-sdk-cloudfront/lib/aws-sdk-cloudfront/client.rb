@@ -5451,8 +5451,8 @@ module Aws::CloudFront
     # Gets information about a distribution tenant.
     #
     # @option params [required, String] :identifier
-    #   The ID of the distribution tenant. You can specify the ARN ID, or name
-    #   of the distribution tenant.
+    #   The identifier of the distribution tenant. You can specify the ARN,
+    #   ID, or name of the distribution tenant.
     #
     # @return [Types::GetDistributionTenantResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5939,7 +5939,8 @@ module Aws::CloudFront
     # Gets details about the CloudFront managed ACM certificate.
     #
     # @option params [required, String] :identifier
-    #   The identifier of the multi-tenant distribution.
+    #   The identifier of the distribution tenant. You can specify the ARN,
+    #   ID, or name of the distribution tenant.
     #
     # @return [Types::GetManagedCertificateDetailsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -12097,7 +12098,8 @@ module Aws::CloudFront
     #   The domain name that you're verifying.
     #
     # @option params [required, String] :identifier
-    #   The ID of the distribution tenant.
+    #   The identifier of the distribution tenant. You can specify the ARN,
+    #   ID, or name of the distribution tenant.
     #
     # @return [Types::VerifyDnsConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -12144,7 +12146,7 @@ module Aws::CloudFront
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.115.0'
+      context[:gem_version] = '1.117.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

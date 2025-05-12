@@ -1343,7 +1343,7 @@ module Aws::DirectoryService
     UpdateDirectorySetupRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     UpdateDirectorySetupRequest.add_member(:update_type, Shapes::ShapeRef.new(shape: UpdateType, required: true, location_name: "UpdateType"))
     UpdateDirectorySetupRequest.add_member(:os_update_settings, Shapes::ShapeRef.new(shape: OSUpdateSettings, location_name: "OSUpdateSettings"))
-    UpdateDirectorySetupRequest.add_member(:create_snapshot_before_update, Shapes::ShapeRef.new(shape: CreateSnapshotBeforeUpdate, location_name: "CreateSnapshotBeforeUpdate", metadata: {"box"=>true}))
+    UpdateDirectorySetupRequest.add_member(:create_snapshot_before_update, Shapes::ShapeRef.new(shape: CreateSnapshotBeforeUpdate, location_name: "CreateSnapshotBeforeUpdate", metadata: {"box" => true}))
     UpdateDirectorySetupRequest.struct_class = Types::UpdateDirectorySetupRequest
 
     UpdateDirectorySetupResult.struct_class = Types::UpdateDirectorySetupResult

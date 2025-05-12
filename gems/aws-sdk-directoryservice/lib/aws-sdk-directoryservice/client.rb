@@ -612,6 +612,25 @@ module Aws::DirectoryService
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To add a CIDR address block that routes traffic for Microsoft AD
+    #
+    #   # The following example adds a CIDR address block to correctly route traffic to and from your Microsoft AD on AWS.
+    #
+    #   resp = client.add_ip_routes({
+    #     directory_id: "d-92654abfed", 
+    #     ip_routes: [
+    #       {
+    #         cidr_ip: "12.12.12.12/32", 
+    #         description: "my IpRoute", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.add_ip_routes({
@@ -683,6 +702,25 @@ module Aws::DirectoryService
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To add tags to a directory
+    #
+    #   # The following example adds or overwrites one or more tags for the specified directory.
+    #
+    #   resp = client.add_tags_to_resource({
+    #     resource_id: "d-92654abfed", 
+    #     tags: [
+    #       {
+    #         key: "environment", 
+    #         value: "production", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.add_tags_to_resource({
@@ -718,6 +756,20 @@ module Aws::DirectoryService
     #   The identifier of the schema extension that will be canceled.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To cancel a Microsoft AD schema extension that is in progress
+    #
+    #   # The following example cancels an in-progress schema extension to a Microsoft AD directory.
+    #
+    #   resp = client.cancel_schema_extension({
+    #     directory_id: "d-92654abfed", 
+    #     schema_extension_id: "e-926731d2a0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -773,6 +825,35 @@ module Aws::DirectoryService
     # @return [Types::ConnectDirectoryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ConnectDirectoryResult#directory_id #directory_id} => String
+    #
+    #
+    # @example Example: To connect to an on-premises directory
+    #
+    #   # The following example creates an AD Connector to connect to an on-premises directory.
+    #
+    #   resp = client.connect_directory({
+    #     connect_settings: {
+    #       customer_dns_ips: [
+    #         "172.30.21.228", 
+    #       ], 
+    #       customer_user_name: "Administrator", 
+    #       subnet_ids: [
+    #         "subnet-ba0146de", 
+    #         "subnet-bef46bc8", 
+    #       ], 
+    #       vpc_id: "vpc-45025421", 
+    #     }, 
+    #     description: "Connector to corp", 
+    #     name: "corp.example.com", 
+    #     password: "Str0ngP@ssw0rd", 
+    #     short_name: "corp", 
+    #     size: "Small", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     directory_id: "d-92654abfed", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -831,6 +912,22 @@ module Aws::DirectoryService
     #   * {Types::CreateAliasResult#directory_id #directory_id} => String
     #   * {Types::CreateAliasResult#alias #alias} => String
     #
+    #
+    # @example Example: To create an alias for a directory
+    #
+    #   # The following example creates an alias for a directory.
+    #
+    #   resp = client.create_alias({
+    #     alias: "salesorg", 
+    #     directory_id: "d-92654abfed", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     alias: "salesorg", 
+    #     directory_id: "d-92654abfed", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_alias({
@@ -878,6 +975,42 @@ module Aws::DirectoryService
     # @return [Types::CreateComputerResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateComputerResult#computer #computer} => Types::Computer
+    #
+    #
+    # @example Example: To create a computer account
+    #
+    #   # The following example creates a computer account in the specified directory, and joins the computer to the directory.
+    #
+    #   resp = client.create_computer({
+    #     computer_attributes: [
+    #       {
+    #         name: "ip", 
+    #         value: "192.168.101.100", 
+    #       }, 
+    #     ], 
+    #     computer_name: "labcomputer", 
+    #     directory_id: "d-92654abfed", 
+    #     organizational_unit_distinguished_name: "OU=Computers,OU=example,DC=corp,DC=example,DC=com", 
+    #     password: "Str0ngP@ssw0rd", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     computer: {
+    #       computer_attributes: [
+    #         {
+    #           name: "DistinguishedName", 
+    #           value: "CN=labcomputer,OU=Computers,OU=nickcorp,DC=seattle,DC=nickcorp,DC=com", 
+    #         }, 
+    #         {
+    #           name: "WindowsSamName", 
+    #           value: "labcomputer$", 
+    #         }, 
+    #       ], 
+    #       computer_id: "S-1-5-21-1932691875-1648176379-1176097576-1124", 
+    #       computer_name: "labcomputer", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -929,6 +1062,23 @@ module Aws::DirectoryService
     #   RemoteDomainName.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To create a conditional forwarder
+    #
+    #   # The following example creates a conditional forwarder associated with your AWS directory.
+    #
+    #   resp = client.create_conditional_forwarder({
+    #     directory_id: "d-92654abfed", 
+    #     dns_ip_addrs: [
+    #       "172.30.21.228", 
+    #     ], 
+    #     remote_domain_name: "sales.example.com", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1022,6 +1172,31 @@ module Aws::DirectoryService
     # @return [Types::CreateDirectoryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDirectoryResult#directory_id #directory_id} => String
+    #
+    #
+    # @example Example: To create a Simple AD directory
+    #
+    #   # The following example creates a Simple AD directory.
+    #
+    #   resp = client.create_directory({
+    #     description: "Regional directory for example.com", 
+    #     name: "seattle.example.com", 
+    #     password: "Str0ngP@ssw0rd", 
+    #     short_name: "seattle", 
+    #     size: "Small", 
+    #     vpc_settings: {
+    #       subnet_ids: [
+    #         "subnet-ba0146de", 
+    #         "subnet-bef46bc8", 
+    #       ], 
+    #       vpc_id: "vpc-45025421", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     directory_id: "d-92654abfed", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1138,6 +1313,30 @@ module Aws::DirectoryService
     #
     #   * {Types::CreateMicrosoftADResult#directory_id #directory_id} => String
     #
+    #
+    # @example Example: To create a Microsoft AD directory
+    #
+    #   # The following example creates a Microsoft AD directory in the AWS cloud.
+    #
+    #   resp = client.create_microsoft_ad({
+    #     description: "Corporate AD directory", 
+    #     name: "ad.example.com", 
+    #     password: "Str0ngP@ssw0rd", 
+    #     short_name: "ad", 
+    #     vpc_settings: {
+    #       subnet_ids: [
+    #         "subnet-ba0146de", 
+    #         "subnet-bef46bc8", 
+    #       ], 
+    #       vpc_id: "vpc-45025421", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     directory_id: "d-92654abfed", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_microsoft_ad({
@@ -1187,6 +1386,21 @@ module Aws::DirectoryService
     # @return [Types::CreateSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSnapshotResult#snapshot_id #snapshot_id} => String
+    #
+    #
+    # @example Example: To create a snapshot of a directory
+    #
+    #   # The following example creates a snapshot of a Simple AD or Microsoft AD directory in the AWS cloud.
+    #
+    #   resp = client.create_snapshot({
+    #     directory_id: "d-92654abfed", 
+    #     name: "ad.example.com", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     snapshot_id: "s-9267f8d3f0", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1249,6 +1463,27 @@ module Aws::DirectoryService
     #
     #   * {Types::CreateTrustResult#trust_id #trust_id} => String
     #
+    #
+    # @example Example: To create a trust
+    #
+    #   # The following example creates a trust between Microsoft AD in the AWS cloud and an external domain.
+    #
+    #   resp = client.create_trust({
+    #     conditional_forwarder_ip_addrs: [
+    #       "172.30.21.228", 
+    #     ], 
+    #     directory_id: "d-92654abfed", 
+    #     remote_domain_name: "europe.example.com", 
+    #     trust_direction: "One-Way: Outgoing", 
+    #     trust_password: "Str0ngP@ssw0rd", 
+    #     trust_type: "Forest", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     trust_id: "t-9267353743", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_trust({
@@ -1286,6 +1521,20 @@ module Aws::DirectoryService
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a conditional forwarder
+    #
+    #   # The following example deletes a conditional forwarder. 
+    #
+    #   resp = client.delete_conditional_forwarder({
+    #     directory_id: "d-92654abfed", 
+    #     remote_domain_name: "sales.example.com", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_conditional_forwarder({
@@ -1320,6 +1569,20 @@ module Aws::DirectoryService
     # @return [Types::DeleteDirectoryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteDirectoryResult#directory_id #directory_id} => String
+    #
+    #
+    # @example Example: To delete a directory
+    #
+    #   # The following example deletes a directory from your AWS account.
+    #
+    #   resp = client.delete_directory({
+    #     directory_id: "d-92654abfed", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     directory_id: "d-92654abfed", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1371,6 +1634,20 @@ module Aws::DirectoryService
     #
     #   * {Types::DeleteSnapshotResult#snapshot_id #snapshot_id} => String
     #
+    #
+    # @example Example: To delete a snapshot
+    #
+    #   # The following example deletes a directory snapshot.
+    #
+    #   resp = client.delete_snapshot({
+    #     snapshot_id: "s-9267f8d3f0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     snapshot_id: "s-9267f8d3f0", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_snapshot({
@@ -1402,6 +1679,21 @@ module Aws::DirectoryService
     # @return [Types::DeleteTrustResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteTrustResult#trust_id #trust_id} => String
+    #
+    #
+    # @example Example: To delete a trust
+    #
+    #   # The following example deletes an existing trust between your Microsoft AD in the AWS cloud and an external domain.
+    #
+    #   resp = client.delete_trust({
+    #     delete_associated_conditional_forwarder: true, 
+    #     trust_id: "t-9267353743", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     trust_id: "t-9267353743", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1462,6 +1754,20 @@ module Aws::DirectoryService
     #   a publisher.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To remove an event topic
+    #
+    #   # The following example removes the specified directory as a publisher to the specified SNS topic.
+    #
+    #   resp = client.deregister_event_topic({
+    #     directory_id: "d-92654abfed", 
+    #     topic_name: "snstopicexample", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1595,6 +1901,24 @@ module Aws::DirectoryService
     #
     #   * {Types::DescribeConditionalForwardersResult#conditional_forwarders #conditional_forwarders} => Array&lt;Types::ConditionalForwarder&gt;
     #
+    #
+    # @example Example: To describe conditional forwarders
+    #
+    #   # The following example obtains information about the conditional forwarders for a specified directory.
+    #
+    #   resp = client.describe_conditional_forwarders({
+    #     directory_id: "d-92654abfed", 
+    #     remote_domain_names: [
+    #       "sales.example.com", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     conditional_forwarders: [
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_conditional_forwarders({
@@ -1656,6 +1980,51 @@ module Aws::DirectoryService
     #   * {Types::DescribeDirectoriesResult#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To describe one or more directories
+    #
+    #   # The following example obtains information about a specified directory.
+    #
+    #   resp = client.describe_directories({
+    #     directory_ids: [
+    #       "d-92654abfed", 
+    #     ], 
+    #     limit: 0, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     directory_descriptions: [
+    #       {
+    #         access_url: "myaccess.awsapps.com", 
+    #         alias: "myaccess", 
+    #         directory_id: "d-92654abfed", 
+    #         dns_ip_addrs: [
+    #           "172.30.21.228", 
+    #           "172.30.9.82", 
+    #         ], 
+    #         launch_time: Time.parse(1469737584.772), 
+    #         name: "corp.example.com", 
+    #         short_name: "example", 
+    #         sso_enabled: true, 
+    #         stage: "Active", 
+    #         stage_last_updated_date_time: Time.parse(1469739131.71), 
+    #         type: "MicrosoftAD", 
+    #         vpc_settings: {
+    #           availability_zones: [
+    #             "us-west-2a", 
+    #             "us-west-2b", 
+    #           ], 
+    #           subnet_ids: [
+    #             "subnet-ba0146de", 
+    #             "subnet-bef46bc8", 
+    #           ], 
+    #           vpc_id: "vpc-45025421", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1855,6 +2224,30 @@ module Aws::DirectoryService
     # @return [Types::DescribeEventTopicsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeEventTopicsResult#event_topics #event_topics} => Array&lt;Types::EventTopic&gt;
+    #
+    #
+    # @example Example: To describe event topics
+    #
+    #   # The following example obtains information about which SNS topics receive status messages from the specified directory.
+    #
+    #   resp = client.describe_event_topics({
+    #     directory_id: "d-92654abfed", 
+    #     topic_names: [
+    #       "snstopicexample", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     event_topics: [
+    #       {
+    #         directory_id: "d-92654abfed", 
+    #         status: "Registered", 
+    #         topic_arn: "arn:aws:sns:us-east-2:123456789012:snstopicexample", 
+    #         topic_name: "snstopicexample", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2127,6 +2520,32 @@ module Aws::DirectoryService
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: To describe snapshots
+    #
+    #   # The following example obtains information about a specified directory snapshot.
+    #
+    #   resp = client.describe_snapshots({
+    #     directory_id: "d-92654abfed", 
+    #     limit: 0, 
+    #     snapshot_ids: [
+    #       "s-9267f6da4e", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     snapshots: [
+    #       {
+    #         directory_id: "d-92673c8a8f", 
+    #         snapshot_id: "s-9267f6da4e", 
+    #         start_time: Time.parse(1481289211.615), 
+    #         status: "Completed", 
+    #         type: "Auto", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_snapshots({
@@ -2186,6 +2605,37 @@ module Aws::DirectoryService
     #   * {Types::DescribeTrustsResult#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To describe a trust 
+    #
+    #   # The following example obtains information about the trust relationship for a specified directory.
+    #
+    #   resp = client.describe_trusts({
+    #     directory_id: "d-92654abfed", 
+    #     limit: 0, 
+    #     trust_ids: [
+    #       "t-9267353df0", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     trusts: [
+    #       {
+    #         created_date_time: Time.parse(1481749250.657), 
+    #         directory_id: "d-92654abfed", 
+    #         last_updated_date_time: Time.parse(1481749260.156), 
+    #         remote_domain_name: "sales.example.com", 
+    #         state_last_updated_date_time: Time.parse(1481749260.156), 
+    #         trust_direction: "One-Way: Outgoing", 
+    #         trust_id: "t-9267353df0", 
+    #         trust_state: "Failed", 
+    #         trust_state_reason: "The specified domain either does not exist or could not be contacted. Name: sales.example.com", 
+    #         trust_type: "Forest", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2303,7 +2753,12 @@ module Aws::DirectoryService
     end
 
     # Deactivates access to directory data via the Directory Service Data
-    # API for the specified directory.
+    # API for the specified directory. For more information, see [Directory
+    # Service Data API Reference][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/directoryservicedata/latest/DirectoryServiceDataAPIReference/Welcome.html
     #
     # @option params [required, String] :directory_id
     #   The directory identifier.
@@ -2361,6 +2816,20 @@ module Aws::DirectoryService
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To disable radius
+    #
+    #   # The following example disables multi-factor authentication (MFA) with the Remote Authentication Dial In User Service
+    #   # (RADIUS) server for an AD Connector directory.
+    #
+    #   resp = client.disable_radius({
+    #     directory_id: "d-92654abfed", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.disable_radius({
@@ -2398,6 +2867,21 @@ module Aws::DirectoryService
     #   see the *UserName* parameter.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To disable SSO
+    #
+    #   # The following example disables single sign-on for a specified directory.
+    #
+    #   resp = client.disable_sso({
+    #     directory_id: "d-92654abfed", 
+    #     password: "Str0ngP@ssw0rd", 
+    #     user_name: "Admin", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2447,7 +2931,12 @@ module Aws::DirectoryService
     end
 
     # Enables access to directory data via the Directory Service Data API
-    # for the specified directory.
+    # for the specified directory. For more information, see [Directory
+    # Service Data API Reference][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/directoryservicedata/latest/DirectoryServiceDataAPIReference/Welcome.html
     #
     # @option params [required, String] :directory_id
     #   The directory identifier.
@@ -2510,6 +2999,32 @@ module Aws::DirectoryService
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To enable radius
+    #
+    #   # The following example enables multi-factor authentication (MFA) with the Remote Authentication Dial In User Service
+    #   # (RADIUS) server for an AD Connector directory.
+    #
+    #   resp = client.enable_radius({
+    #     directory_id: "d-92654abfed", 
+    #     radius_settings: {
+    #       authentication_protocol: "PAP", 
+    #       display_label: "MyRadius", 
+    #       radius_port: 1200, 
+    #       radius_retries: 2, 
+    #       radius_servers: [
+    #         "172.168.111.12", 
+    #       ], 
+    #       radius_timeout: 1, 
+    #       shared_secret: "123456789", 
+    #       use_same_username: true, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.enable_radius({
@@ -2561,6 +3076,21 @@ module Aws::DirectoryService
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To enable SSO
+    #
+    #   # To enable single sign-on for a specified directory.
+    #
+    #   resp = client.enable_sso({
+    #     directory_id: "d-92654abfed", 
+    #     password: "Str0ngP@ssw0rd", 
+    #     user_name: "Admin", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.enable_sso({
@@ -2583,6 +3113,29 @@ module Aws::DirectoryService
     # @return [Types::GetDirectoryLimitsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDirectoryLimitsResult#directory_limits #directory_limits} => Types::DirectoryLimits
+    #
+    #
+    # @example Example: To get directory limits
+    #
+    #   # The following example obtains directory limit information for the current region.
+    #
+    #   resp = client.get_directory_limits({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     directory_limits: {
+    #       cloud_only_directories_current_count: 2, 
+    #       cloud_only_directories_limit: 10, 
+    #       cloud_only_directories_limit_reached: false, 
+    #       cloud_only_microsoft_ad_current_count: 2, 
+    #       cloud_only_microsoft_ad_limit: 10, 
+    #       cloud_only_microsoft_ad_limit_reached: false, 
+    #       connected_directories_current_count: 1, 
+    #       connected_directories_limit: 10, 
+    #       connected_directories_limit_reached: false, 
+    #     }, 
+    #   }
     #
     # @example Response structure
     #
@@ -2613,6 +3166,24 @@ module Aws::DirectoryService
     # @return [Types::GetSnapshotLimitsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetSnapshotLimitsResult#snapshot_limits #snapshot_limits} => Types::SnapshotLimits
+    #
+    #
+    # @example Example: To get snapshot limits
+    #
+    #   # The following example obtains the manual snapshot limits for a specified directory.
+    #
+    #   resp = client.get_snapshot_limits({
+    #     directory_id: "d-92654abfed", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     snapshot_limits: {
+    #       manual_snapshots_current_count: 1, 
+    #       manual_snapshots_limit: 5, 
+    #       manual_snapshots_limit_reached: false, 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2704,6 +3275,29 @@ module Aws::DirectoryService
     #   * {Types::ListIpRoutesResult#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list IP routes
+    #
+    #   # The following example lists the address blocks that have been added to a specified directory.
+    #
+    #   resp = client.list_ip_routes({
+    #     directory_id: "d-92654abfed", 
+    #     limit: 0, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     ip_routes_info: [
+    #       {
+    #         added_date_time: Time.parse(1481577631.63), 
+    #         cidr_ip: "12.12.12.12/32", 
+    #         description: "example", 
+    #         directory_id: "d-92654abfed", 
+    #         ip_route_status_msg: "Added", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2801,6 +3395,31 @@ module Aws::DirectoryService
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: To list schema extensions
+    #
+    #   # The following example lists all schema extensions applied to a specified Microsoft AD Directory.
+    #
+    #   resp = client.list_schema_extensions({
+    #     directory_id: "d-92654abfed", 
+    #     limit: 0, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     schema_extensions_info: [
+    #       {
+    #         description: "example text", 
+    #         directory_id: "d-92654abfed", 
+    #         end_date_time: Time.parse(1481586088.301), 
+    #         schema_extension_id: "e-926731d2a0", 
+    #         schema_extension_status: "Cancelled", 
+    #         schema_extension_status_reason: "Cancellation is complete. No schema updates were applied to your directory.", 
+    #         start_date_time: Time.parse(1481584463.548), 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_schema_extensions({
@@ -2847,6 +3466,26 @@ module Aws::DirectoryService
     #   * {Types::ListTagsForResourceResult#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list tags for a directory
+    #
+    #   # The following example lists all tags associated with a specified directory.
+    #
+    #   resp = client.list_tags_for_resource({
+    #     limit: 0, 
+    #     resource_id: "d-92654abfed", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tags: [
+    #       {
+    #         key: "environment", 
+    #         value: "production", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2936,6 +3575,20 @@ module Aws::DirectoryService
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To register an event topic
+    #
+    #   # The following example associates a directory with an SNS topic.
+    #
+    #   resp = client.register_event_topic({
+    #     directory_id: "d-92654abfed", 
+    #     topic_name: "snstopicexample", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.register_event_topic({
@@ -2993,6 +3646,22 @@ module Aws::DirectoryService
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To remove IP routes
+    #
+    #   # The following example removes IP address blocks from a specified directory.
+    #
+    #   resp = client.remove_ip_routes({
+    #     cidr_ips: [
+    #       "12.12.12.12/32", 
+    #     ], 
+    #     directory_id: "d-92654abfed", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.remove_ip_routes({
@@ -3043,6 +3712,22 @@ module Aws::DirectoryService
     #   The tag key (name) of the tag to be removed.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To remove tags from a directory
+    #
+    #   # The following example removes a tag from a specified directory.
+    #
+    #   resp = client.remove_tags_from_resource({
+    #     resource_id: "d-92654abfed", 
+    #     tag_keys: [
+    #       "environment", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3127,6 +3812,19 @@ module Aws::DirectoryService
     #   The identifier of the snapshot to restore from.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To restore a snapshot
+    #
+    #   # The following example restores a directory using an existing directory snapshot.
+    #
+    #   resp = client.restore_from_snapshot({
+    #     snapshot_id: "s-9267f6da4e", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3236,6 +3934,23 @@ module Aws::DirectoryService
     #
     #   * {Types::StartSchemaExtensionResult#schema_extension_id #schema_extension_id} => String
     #
+    #
+    # @example Example: To start a schema extension
+    #
+    #   # The following example applies a schema extension to a specified Microsoft AD directory.
+    #
+    #   resp = client.start_schema_extension({
+    #     create_snapshot_before_schema_extension: true, 
+    #     description: "Adds maycontain attribute to user class. Precede each line as it would be formatted in an ldif file.", 
+    #     directory_id: "d-92654abfed", 
+    #     ldif_content: "dn: CN=User,CN=Schema,CN=Configuration,DC=sales,DC=example,DC=com\nchangetype: modify\nadd: mayContain\nmayContain: drink\n-\n\nDN:\nchangetype: modify\nreplace: schemaupdatenow\nschemaupdatenow: 1\n-", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     schema_extension_id: "e-926731dc50", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_schema_extension({
@@ -3312,6 +4027,23 @@ module Aws::DirectoryService
     #   conditional forwarder.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To update a conditional forwarder
+    #
+    #   # The following example updates a conditional forwarder for a specified directory.
+    #
+    #   resp = client.update_conditional_forwarder({
+    #     directory_id: "d-92654abfed", 
+    #     dns_ip_addrs: [
+    #       "172.168.101.11", 
+    #     ], 
+    #     remote_domain_name: "sales.example.com", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3414,6 +4146,32 @@ module Aws::DirectoryService
     #   server.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To update Radius
+    #
+    #   # The following example updates the Remote Authentication Dial In User Service (RADIUS) server settings for an AD
+    #   # Connector directory.
+    #
+    #   resp = client.update_radius({
+    #     directory_id: "d-92654abfed", 
+    #     radius_settings: {
+    #       authentication_protocol: "PAP", 
+    #       display_label: "MyRadius", 
+    #       radius_port: 1027, 
+    #       radius_retries: 1, 
+    #       radius_servers: [
+    #         "172.168.101.113", 
+    #       ], 
+    #       radius_timeout: 1, 
+    #       shared_secret: "12345678", 
+    #       use_same_username: true, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3525,6 +4283,20 @@ module Aws::DirectoryService
     #
     #   * {Types::VerifyTrustResult#trust_id #trust_id} => String
     #
+    #
+    # @example Example: To verify a trust
+    #
+    #   # The following example verifies a trust relationship between your Microsoft AD in the AWS cloud and an external domain.
+    #
+    #   resp = client.verify_trust({
+    #     trust_id: "t-9267353df0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     trust_id: "t-9267353df0", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.verify_trust({
@@ -3562,7 +4334,7 @@ module Aws::DirectoryService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-directoryservice'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

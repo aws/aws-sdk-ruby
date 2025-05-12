@@ -286,7 +286,7 @@ module Aws::FIS
     Action.struct_class = Types::Action
 
     ActionParameter.add_member(:description, Shapes::ShapeRef.new(shape: ActionParameterDescription, location_name: "description"))
-    ActionParameter.add_member(:required, Shapes::ShapeRef.new(shape: ActionParameterRequired, location_name: "required", metadata: {"box"=>true}))
+    ActionParameter.add_member(:required, Shapes::ShapeRef.new(shape: ActionParameterRequired, location_name: "required", metadata: {"box" => true}))
     ActionParameter.struct_class = Types::ActionParameter
 
     ActionParameterMap.key = Shapes::ShapeRef.new(shape: ActionParameterName)
@@ -335,7 +335,7 @@ module Aws::FIS
     CreateExperimentTemplateReportConfigurationInput.add_member(:post_experiment_duration, Shapes::ShapeRef.new(shape: ReportConfigurationDuration, location_name: "postExperimentDuration"))
     CreateExperimentTemplateReportConfigurationInput.struct_class = Types::CreateExperimentTemplateReportConfigurationInput
 
-    CreateExperimentTemplateRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateExperimentTemplateRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateExperimentTemplateRequest.add_member(:description, Shapes::ShapeRef.new(shape: ExperimentTemplateDescription, required: true, location_name: "description"))
     CreateExperimentTemplateRequest.add_member(:stop_conditions, Shapes::ShapeRef.new(shape: CreateExperimentTemplateStopConditionInputList, required: true, location_name: "stopConditions"))
     CreateExperimentTemplateRequest.add_member(:targets, Shapes::ShapeRef.new(shape: CreateExperimentTemplateTargetInputMap, location_name: "targets"))
@@ -367,7 +367,7 @@ module Aws::FIS
     CreateExperimentTemplateTargetInputMap.key = Shapes::ShapeRef.new(shape: ExperimentTemplateTargetName)
     CreateExperimentTemplateTargetInputMap.value = Shapes::ShapeRef.new(shape: CreateExperimentTemplateTargetInput)
 
-    CreateTargetAccountConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateTargetAccountConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateTargetAccountConfigurationRequest.add_member(:experiment_template_id, Shapes::ShapeRef.new(shape: ExperimentTemplateId, required: true, location: "uri", location_name: "id"))
     CreateTargetAccountConfigurationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: TargetAccountId, required: true, location: "uri", location_name: "accountId"))
     CreateTargetAccountConfigurationRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
@@ -719,7 +719,7 @@ module Aws::FIS
     GetTargetResourceTypeResponse.add_member(:target_resource_type, Shapes::ShapeRef.new(shape: TargetResourceType, location_name: "targetResourceType"))
     GetTargetResourceTypeResponse.struct_class = Types::GetTargetResourceTypeResponse
 
-    ListActionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListActionsMaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListActionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListActionsMaxResults, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
     ListActionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListActionsRequest.struct_class = Types::ListActionsRequest
 
@@ -745,7 +745,7 @@ module Aws::FIS
     ListExperimentTargetAccountConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListExperimentTargetAccountConfigurationsResponse.struct_class = Types::ListExperimentTargetAccountConfigurationsResponse
 
-    ListExperimentTemplatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListExperimentTemplatesMaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListExperimentTemplatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListExperimentTemplatesMaxResults, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
     ListExperimentTemplatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListExperimentTemplatesRequest.struct_class = Types::ListExperimentTemplatesRequest
 
@@ -753,7 +753,7 @@ module Aws::FIS
     ListExperimentTemplatesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListExperimentTemplatesResponse.struct_class = Types::ListExperimentTemplatesResponse
 
-    ListExperimentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListExperimentsMaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListExperimentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListExperimentsMaxResults, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
     ListExperimentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListExperimentsRequest.add_member(:experiment_template_id, Shapes::ShapeRef.new(shape: ExperimentTemplateId, location: "querystring", location_name: "experimentTemplateId"))
     ListExperimentsRequest.struct_class = Types::ListExperimentsRequest
@@ -777,7 +777,7 @@ module Aws::FIS
     ListTargetAccountConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListTargetAccountConfigurationsResponse.struct_class = Types::ListTargetAccountConfigurationsResponse
 
-    ListTargetResourceTypesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListTargetResourceTypesMaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListTargetResourceTypesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListTargetResourceTypesMaxResults, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
     ListTargetResourceTypesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListTargetResourceTypesRequest.struct_class = Types::ListTargetResourceTypesRequest
 
@@ -825,7 +825,7 @@ module Aws::FIS
     StartExperimentExperimentOptionsInput.add_member(:actions_mode, Shapes::ShapeRef.new(shape: ActionsMode, location_name: "actionsMode"))
     StartExperimentExperimentOptionsInput.struct_class = Types::StartExperimentExperimentOptionsInput
 
-    StartExperimentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    StartExperimentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     StartExperimentRequest.add_member(:experiment_template_id, Shapes::ShapeRef.new(shape: ExperimentTemplateId, required: true, location_name: "experimentTemplateId"))
     StartExperimentRequest.add_member(:experiment_options, Shapes::ShapeRef.new(shape: StartExperimentExperimentOptionsInput, location_name: "experimentOptions"))
     StartExperimentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
@@ -872,7 +872,7 @@ module Aws::FIS
     TargetResourceType.struct_class = Types::TargetResourceType
 
     TargetResourceTypeParameter.add_member(:description, Shapes::ShapeRef.new(shape: TargetResourceTypeParameterDescription, location_name: "description"))
-    TargetResourceTypeParameter.add_member(:required, Shapes::ShapeRef.new(shape: TargetResourceTypeParameterRequired, location_name: "required", metadata: {"box"=>true}))
+    TargetResourceTypeParameter.add_member(:required, Shapes::ShapeRef.new(shape: TargetResourceTypeParameterRequired, location_name: "required", metadata: {"box" => true}))
     TargetResourceTypeParameter.struct_class = Types::TargetResourceTypeParameter
 
     TargetResourceTypeParameterMap.key = Shapes::ShapeRef.new(shape: TargetResourceTypeParameterName)

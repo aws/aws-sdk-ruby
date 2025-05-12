@@ -54,7 +54,7 @@ module Aws::PartnerCentralSelling
   autoload :EndpointProvider, 'aws-sdk-partnercentralselling/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-partnercentralselling/endpoints'
 
-  GEM_VERSION = '1.6.0'
+  GEM_VERSION = '1.7.0'
 
 end
 

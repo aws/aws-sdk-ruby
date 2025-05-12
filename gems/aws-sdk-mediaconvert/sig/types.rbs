@@ -144,7 +144,7 @@ module Aws::MediaConvert
       attr_accessor pids: ::Array[::Integer]
       attr_accessor program_selection: ::Integer
       attr_accessor remix_settings: Types::RemixSettings
-      attr_accessor selector_type: ("PID" | "TRACK" | "LANGUAGE_CODE" | "HLS_RENDITION_GROUP")
+      attr_accessor selector_type: ("PID" | "TRACK" | "LANGUAGE_CODE" | "HLS_RENDITION_GROUP" | "ALL_PCM")
       attr_accessor tracks: ::Array[::Integer]
       SENSITIVE: []
     end
@@ -194,6 +194,7 @@ module Aws::MediaConvert
       attr_accessor gop_size: ::Float
       attr_accessor max_bitrate: ::Integer
       attr_accessor number_b_frames_between_reference_frames: ::Integer
+      attr_accessor per_frame_metrics: ::Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]
       attr_accessor qvbr_settings: Types::Av1QvbrSettings
       attr_accessor rate_control_mode: ("QVBR")
       attr_accessor slices: ::Integer
@@ -214,6 +215,7 @@ module Aws::MediaConvert
       attr_accessor framerate_denominator: ::Integer
       attr_accessor framerate_numerator: ::Integer
       attr_accessor interlace_mode: ("PROGRESSIVE" | "TOP_FIELD" | "BOTTOM_FIELD" | "FOLLOW_TOP_FIELD" | "FOLLOW_BOTTOM_FIELD")
+      attr_accessor per_frame_metrics: ::Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]
       attr_accessor scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")
       attr_accessor slow_pal: ("DISABLED" | "ENABLED")
       attr_accessor telecine: ("NONE" | "HARD")
@@ -985,6 +987,7 @@ module Aws::MediaConvert
       attr_accessor par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")
       attr_accessor par_denominator: ::Integer
       attr_accessor par_numerator: ::Integer
+      attr_accessor per_frame_metrics: ::Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]
       attr_accessor quality_tuning_level: ("SINGLE_PASS" | "SINGLE_PASS_HQ" | "MULTI_PASS_HQ")
       attr_accessor qvbr_settings: Types::H264QvbrSettings
       attr_accessor rate_control_mode: ("VBR" | "CBR" | "QVBR")
@@ -1041,6 +1044,7 @@ module Aws::MediaConvert
       attr_accessor par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")
       attr_accessor par_denominator: ::Integer
       attr_accessor par_numerator: ::Integer
+      attr_accessor per_frame_metrics: ::Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]
       attr_accessor quality_tuning_level: ("SINGLE_PASS" | "SINGLE_PASS_HQ" | "MULTI_PASS_HQ")
       attr_accessor qvbr_settings: Types::H265QvbrSettings
       attr_accessor rate_control_mode: ("VBR" | "CBR" | "QVBR")
@@ -1686,6 +1690,7 @@ module Aws::MediaConvert
       attr_accessor par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")
       attr_accessor par_denominator: ::Integer
       attr_accessor par_numerator: ::Integer
+      attr_accessor per_frame_metrics: ::Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]
       attr_accessor quality_tuning_level: ("SINGLE_PASS" | "MULTI_PASS")
       attr_accessor rate_control_mode: ("VBR" | "CBR")
       attr_accessor scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")
@@ -1849,6 +1854,7 @@ module Aws::MediaConvert
       attr_accessor file_group_settings: Types::FileGroupSettings
       attr_accessor hls_group_settings: Types::HlsGroupSettings
       attr_accessor ms_smooth_group_settings: Types::MsSmoothGroupSettings
+      attr_accessor per_frame_metrics: ::Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]
       attr_accessor type: ("HLS_GROUP_SETTINGS" | "DASH_ISO_GROUP_SETTINGS" | "FILE_GROUP_SETTINGS" | "MS_SMOOTH_GROUP_SETTINGS" | "CMAF_GROUP_SETTINGS")
       SENSITIVE: []
     end
@@ -1923,6 +1929,7 @@ module Aws::MediaConvert
       attr_accessor par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")
       attr_accessor par_denominator: ::Integer
       attr_accessor par_numerator: ::Integer
+      attr_accessor per_frame_metrics: ::Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]
       attr_accessor scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")
       attr_accessor slow_pal: ("DISABLED" | "ENABLED")
       attr_accessor telecine: ("NONE" | "HARD")
@@ -2482,6 +2489,7 @@ module Aws::MediaConvert
       attr_accessor framerate_conversion_algorithm: ("DUPLICATE_DROP" | "INTERPOLATE" | "FRAMEFORMER" | "MAINTAIN_FRAME_COUNT")
       attr_accessor framerate_denominator: ::Integer
       attr_accessor framerate_numerator: ::Integer
+      attr_accessor per_frame_metrics: ::Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]
       attr_accessor profile: ("XAVC_HD_INTRA_CBG" | "XAVC_4K_INTRA_CBG" | "XAVC_4K_INTRA_VBR" | "XAVC_HD" | "XAVC_4K")
       attr_accessor slow_pal: ("DISABLED" | "ENABLED")
       attr_accessor softness: ::Integer

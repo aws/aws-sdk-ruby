@@ -964,10 +964,10 @@ module Aws::BedrockAgentRuntime
 
     # <note> </note>
     #
-    # Sends a prompt for the agent to process and respond to. Note the
+    #  Sends a prompt for the agent to process and respond to. Note the
     # following fields for the request:
     #
-    # * To continue the same conversation with an agent, use the same
+    #  * To continue the same conversation with an agent, use the same
     #   `sessionId` value in the request.
     #
     # * To activate trace enablement, turn `enableTrace` to `true`. Trace
@@ -982,13 +982,13 @@ module Aws::BedrockAgentRuntime
     #   session or prompt or, if you configured an action group to return
     #   control, results from invocation of the action group.
     #
-    # The response contains both **chunk** and **trace** attributes.
+    #  The response contains both **chunk** and **trace** attributes.
     #
-    # The final response is returned in the `bytes` field of the `chunk`
+    #  The final response is returned in the `bytes` field of the `chunk`
     # object. The `InvokeAgent` returns one chunk for the entire
     # interaction.
     #
-    # * The `attribution` object contains citations for parts of the
+    #  * The `attribution` object contains citations for parts of the
     #   response.
     #
     # * If you set `enableTrace` to `true` in the request, you can trace the
@@ -2390,6 +2390,9 @@ module Aws::BedrockAgentRuntime
     #   multiple collaborator agents to coordinate a final response. The
     #   inline collaborator agent can also be the supervisor.
     #
+    # @option params [String] :agent_name
+    #   The name for the agent.
+    #
     # @option params [Types::InlineBedrockModelConfigurations] :bedrock_model_configurations
     #   Model settings for the request.
     #
@@ -2404,6 +2407,9 @@ module Aws::BedrockAgentRuntime
     # @option params [Array<Types::Collaborator>] :collaborators
     #   List of collaborator inline agents.
     #
+    # @option params [Types::CustomOrchestration] :custom_orchestration
+    #   Contains details of the custom orchestration configured for the agent.
+    #
     # @option params [String] :customer_encryption_key_arn
     #   The Amazon Resource Name (ARN) of the Amazon Web Services KMS key to
     #   use to encrypt your inline agent.
@@ -2411,7 +2417,6 @@ module Aws::BedrockAgentRuntime
     # @option params [Boolean] :enable_trace
     #   Specifies whether to turn on the trace or not to track the agent's
     #   reasoning process. For more information, see [Using trace][1].
-    #   </p>
     #
     #
     #
@@ -2473,6 +2478,10 @@ module Aws::BedrockAgentRuntime
     #
     # @option params [Array<Types::KnowledgeBase>] :knowledge_bases
     #   Contains information of the knowledge bases to associate with.
+    #
+    # @option params [String] :orchestration_type
+    #   Specifies the type of orchestration strategy for the agent. This is
+    #   set to DEFAULT orchestration type, by default.
     #
     # @option params [Types::PromptOverrideConfiguration] :prompt_override_configuration
     #   Configurations for advanced prompts used to override the default
@@ -2734,6 +2743,7 @@ module Aws::BedrockAgentRuntime
     #       },
     #     ],
     #     agent_collaboration: "SUPERVISOR", # accepts SUPERVISOR, SUPERVISOR_ROUTER, DISABLED
+    #     agent_name: "Name",
     #     bedrock_model_configurations: {
     #       performance_config: {
     #         latency: "standard", # accepts standard, optimized
@@ -2945,6 +2955,11 @@ module Aws::BedrockAgentRuntime
     #         },
     #       },
     #     ],
+    #     custom_orchestration: {
+    #       executor: {
+    #         lambda: "LambdaArn",
+    #       },
+    #     },
     #     customer_encryption_key_arn: "KmsKeyArn",
     #     enable_trace: false,
     #     end_session: false,
@@ -3156,6 +3171,7 @@ module Aws::BedrockAgentRuntime
     #         },
     #       },
     #     ],
+    #     orchestration_type: "DEFAULT", # accepts DEFAULT, CUSTOM_ORCHESTRATION
     #     prompt_override_configuration: {
     #       override_lambda: "LambdaResourceArn",
     #       prompt_configurations: [ # required
@@ -3278,6 +3294,10 @@ module Aws::BedrockAgentRuntime
     #   event.message #=> String
     #
     #   # For :trace event available at #on_trace_event callback and response eventstream enumerator:
+    #   event.caller_chain #=> Array
+    #   event.caller_chain[0].agent_alias_arn #=> String
+    #   event.collaborator_name #=> String
+    #   event.event_time #=> Time
     #   event.session_id #=> String
     #   event.trace.custom_orchestration_trace.event.text #=> String
     #   event.trace.custom_orchestration_trace.trace_id #=> String
@@ -5457,7 +5477,7 @@ module Aws::BedrockAgentRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentruntime'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

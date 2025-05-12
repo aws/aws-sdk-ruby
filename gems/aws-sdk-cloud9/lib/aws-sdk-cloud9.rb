@@ -54,7 +54,7 @@ module Aws::Cloud9
   autoload :EndpointProvider, 'aws-sdk-cloud9/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-cloud9/endpoints'
 
-  GEM_VERSION = '1.85.0'
+  GEM_VERSION = '1.86.0'
 
 end
 

@@ -16,11 +16,11 @@ module Aws::QBusiness
 
     context "For region us-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://qbusiness-fips.us-east-1.api.aws"}}
+        {"endpoint" => {"url" => "https://qbusiness-fips.us-east-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>true})
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -30,11 +30,11 @@ module Aws::QBusiness
 
     context "For region us-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://qbusiness.us-east-1.api.aws"}}
+        {"endpoint" => {"url" => "https://qbusiness.us-east-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false})
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -44,11 +44,11 @@ module Aws::QBusiness
 
     context "For region cn-north-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://qbusiness-fips.cn-north-1.api.amazonwebservices.com.cn"}}
+        {"endpoint" => {"url" => "https://qbusiness-fips.cn-north-1.api.amazonwebservices.com.cn"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"cn-north-1", :use_fips=>true})
+        params = EndpointParameters.new(**{region: "cn-north-1", use_fips: true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -58,11 +58,11 @@ module Aws::QBusiness
 
     context "For region cn-north-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://qbusiness.cn-north-1.api.amazonwebservices.com.cn"}}
+        {"endpoint" => {"url" => "https://qbusiness.cn-north-1.api.amazonwebservices.com.cn"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"cn-north-1", :use_fips=>false})
+        params = EndpointParameters.new(**{region: "cn-north-1", use_fips: false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -72,11 +72,11 @@ module Aws::QBusiness
 
     context "For region us-gov-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://qbusiness-fips.us-gov-east-1.api.aws"}}
+        {"endpoint" => {"url" => "https://qbusiness-fips.us-gov-east-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-gov-east-1", :use_fips=>true})
+        params = EndpointParameters.new(**{region: "us-gov-east-1", use_fips: true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -86,11 +86,11 @@ module Aws::QBusiness
 
     context "For region us-gov-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://qbusiness.us-gov-east-1.api.aws"}}
+        {"endpoint" => {"url" => "https://qbusiness.us-gov-east-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-gov-east-1", :use_fips=>false})
+        params = EndpointParameters.new(**{region: "us-gov-east-1", use_fips: false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -100,11 +100,11 @@ module Aws::QBusiness
 
     context "For custom endpoint with region set and fips disabled and dualstack disabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://example.com"}}
+        {"endpoint" => {"url" => "https://example.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :endpoint=>"https://example.com"})
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, endpoint: "https://example.com"})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -114,11 +114,11 @@ module Aws::QBusiness
 
     context "For custom endpoint with region not set and fips disabled and dualstack disabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://example.com"}}
+        {"endpoint" => {"url" => "https://example.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>false, :endpoint=>"https://example.com"})
+        params = EndpointParameters.new(**{use_fips: false, endpoint: "https://example.com"})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -128,11 +128,11 @@ module Aws::QBusiness
 
     context "For custom endpoint with fips enabled and dualstack disabled" do
       let(:expected) do
-        {"error"=>"Invalid Configuration: FIPS and custom endpoint are not supported"}
+        {"error" => "Invalid Configuration: FIPS and custom endpoint are not supported"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>true, :endpoint=>"https://example.com"})
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, endpoint: "https://example.com"})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -141,7 +141,7 @@ module Aws::QBusiness
 
     context "Missing region" do
       let(:expected) do
-        {"error"=>"Invalid Configuration: Missing Region"}
+        {"error" => "Invalid Configuration: Missing Region"}
       end
 
       it 'produces the expected output from the EndpointProvider' do

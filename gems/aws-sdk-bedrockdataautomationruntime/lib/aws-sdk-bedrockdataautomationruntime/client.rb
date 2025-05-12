@@ -706,7 +706,7 @@ module Aws::BedrockDataAutomationRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockdataautomationruntime'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

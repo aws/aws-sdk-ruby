@@ -715,7 +715,8 @@ module Aws::Athena
     # properties. Catalogs created are visible to all users of the same
     # Amazon Web Services account.
     #
-    # This API operation creates the following resources.
+    # For a `FEDERATED` catalog, this API operation creates the following
+    # resources.
     #
     # * CFN Stack Name with a maximum length of 128 characters and prefix
     #   `athenafederatedcatalog-CATALOG_NAME_SANITIZED` with length 23
@@ -755,6 +756,8 @@ module Aws::Athena
     #   Hive metastore. `FEDERATED` is a federated catalog for which Athena
     #   creates the connection and the Lambda function for you based on the
     #   parameters that you pass.
+    #
+    #   For `FEDERATED` type, we do not support IAM identity center.
     #
     # @option params [String] :description
     #   A description of the data catalog to be created.
@@ -3832,7 +3835,7 @@ module Aws::Athena
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.101.0'
+      context[:gem_version] = '1.103.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

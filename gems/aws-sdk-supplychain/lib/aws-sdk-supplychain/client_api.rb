@@ -148,7 +148,7 @@ module Aws::SupplyChain
 
     CreateBillOfMaterialsImportJobRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "instanceId"))
     CreateBillOfMaterialsImportJobRequest.add_member(:s3uri, Shapes::ShapeRef.new(shape: ConfigurationS3Uri, required: true, location_name: "s3uri"))
-    CreateBillOfMaterialsImportJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateBillOfMaterialsImportJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateBillOfMaterialsImportJobRequest.struct_class = Types::CreateBillOfMaterialsImportJobRequest
 
     CreateBillOfMaterialsImportJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "jobId"))
@@ -182,7 +182,7 @@ module Aws::SupplyChain
     CreateInstanceRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     CreateInstanceRequest.add_member(:web_app_dns_domain, Shapes::ShapeRef.new(shape: InstanceWebAppDnsDomain, location_name: "webAppDnsDomain"))
     CreateInstanceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateInstanceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateInstanceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateInstanceRequest.struct_class = Types::CreateInstanceRequest
 
     CreateInstanceResponse.add_member(:instance, Shapes::ShapeRef.new(shape: Instance, required: true, location_name: "instance"))
@@ -384,7 +384,7 @@ module Aws::SupplyChain
     SendDataIntegrationEventRequest.add_member(:data, Shapes::ShapeRef.new(shape: DataIntegrationEventData, required: true, location_name: "data"))
     SendDataIntegrationEventRequest.add_member(:event_group_id, Shapes::ShapeRef.new(shape: DataIntegrationEventGroupId, required: true, location_name: "eventGroupId"))
     SendDataIntegrationEventRequest.add_member(:event_timestamp, Shapes::ShapeRef.new(shape: SyntheticTimestamp_epoch_seconds, location_name: "eventTimestamp"))
-    SendDataIntegrationEventRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    SendDataIntegrationEventRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     SendDataIntegrationEventRequest.struct_class = Types::SendDataIntegrationEventRequest
 
     SendDataIntegrationEventResponse.add_member(:event_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "eventId"))

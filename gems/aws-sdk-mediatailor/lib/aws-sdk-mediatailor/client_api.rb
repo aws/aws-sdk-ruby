@@ -309,7 +309,7 @@ module Aws::MediaTailor
     Channel.add_member(:audiences, Shapes::ShapeRef.new(shape: Audiences, location_name: "Audiences"))
     Channel.struct_class = Types::Channel
 
-    ClipRange.add_member(:end_offset_millis, Shapes::ShapeRef.new(shape: __long, location_name: "EndOffsetMillis", metadata: {"box"=>true}))
+    ClipRange.add_member(:end_offset_millis, Shapes::ShapeRef.new(shape: __long, location_name: "EndOffsetMillis", metadata: {"box" => true}))
     ClipRange.add_member(:start_offset_millis, Shapes::ShapeRef.new(shape: __long, location_name: "StartOffsetMillis"))
     ClipRange.struct_class = Types::ClipRange
 

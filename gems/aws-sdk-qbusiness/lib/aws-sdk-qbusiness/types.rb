@@ -1785,6 +1785,45 @@ module Aws::QBusiness
       class Unknown < CopyFromSource; end
     end
 
+    # @!attribute [rw] application_id
+    #   The identifier of the Amazon Q Business application environment
+    #   attached to the web experience.
+    #   @return [String]
+    #
+    # @!attribute [rw] web_experience_id
+    #   The identifier of the web experience.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_duration_in_minutes
+    #   The duration of the session associated with the unique URL for the
+    #   web experience.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/CreateAnonymousWebExperienceUrlRequest AWS API Documentation
+    #
+    class CreateAnonymousWebExperienceUrlRequest < Struct.new(
+      :application_id,
+      :web_experience_id,
+      :session_duration_in_minutes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] anonymous_url
+    #   The unique URL for accessing the web experience.
+    #
+    #   This URL can only be used once and must be used within 5 minutes
+    #   after it's generated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/CreateAnonymousWebExperienceUrlResponse AWS API Documentation
+    #
+    class CreateAnonymousWebExperienceUrlResponse < Struct.new(
+      :anonymous_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] display_name
     #   A name for the Amazon Q Business application.
     #   @return [String]
@@ -4978,13 +5017,16 @@ module Aws::QBusiness
     end
 
     # Configuration information required to setup hallucination reduction.
-    # For more information, see [hallucination
-    # reduction](amazonq/latest/qbusiness-ug/hallucination-reduction.html).
+    # For more information, see [ hallucination reduction][1].
     #
     # <note markdown="1"> The hallucination reduction feature won't work if chat orchestration
     # controls are enabled for your application.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/hallucination-reduction.html
     #
     # @!attribute [rw] hallucination_reduction_control
     #   Controls whether hallucination reduction has been enabled or

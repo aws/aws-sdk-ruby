@@ -2173,12 +2173,15 @@ module Aws::ECS
     #   container instances is affected.
     #
     # @option params [String] :principal_arn
-    #   The Amazon Resource Name (ARN) of the principal. It can be an user,
+    #   The Amazon Resource Name (ARN) of the principal. It can be a user,
     #   role, or the root user. If you specify the root user, it disables the
     #   account setting for all users, roles, and the root user of the account
     #   unless a user or role explicitly overrides these settings. If this
     #   field is omitted, the setting is changed only for the authenticated
     #   user.
+    #
+    #   In order to use this parameter, you must be the root user, or the
+    #   principal.
     #
     # @return [Types::DeleteAccountSettingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5552,6 +5555,9 @@ module Aws::ECS
     #   If this field is omitted, the account settings are listed only for the
     #   authenticated user.
     #
+    #   In order to use this parameter, you must be the root user, or the
+    #   principal.
+    #
     #   <note markdown="1"> Federated users assume the account setting of the root user and can't
     #   have explicit account settings set for them.
     #
@@ -6826,6 +6832,9 @@ module Aws::ECS
     #   users, roles, and the root user of the account unless a user or role
     #   explicitly overrides these settings. If this field is omitted, the
     #   setting is changed only for the authenticated user.
+    #
+    #   In order to use this parameter, you must be the root user, or the
+    #   principal.
     #
     #   <note markdown="1"> You must use the root user when you set the Fargate wait time
     #   (`fargateTaskRetirementWaitPeriod`).
@@ -8647,10 +8656,17 @@ module Aws::ECS
     # * Run `RunTask` with the `clientToken` and the original set of
     #   parameters
     #
+    # If you get a `ClientException`error, the `RunTask` could not be
+    # processed because you use managed scaling and there is a capacity
+    # error because the quota of tasks in the `PROVISIONING` per cluster has
+    # been reached. For information about the service quotas, see [Amazon
+    # ECS service quotas][3].
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html
     # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types
+    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-quotas.html
     #
     # @option params [Array<Types::CapacityProviderStrategyItem>] :capacity_provider_strategy
     #   The capacity provider strategy to use for the task.
@@ -9614,9 +9630,20 @@ module Aws::ECS
 
     # Stops an ongoing service deployment.
     #
-    # <note markdown="1"> StopServiceDeployment isn't currently supported.
+    # The following stop types are avaiable:
     #
-    #  </note>
+    # * ROLLBACK - This option rolls back the service deployment to the
+    #   previous service revision.
+    #
+    #   You can use this option even if you didn't configure the service
+    #   deployment for the rollback option.
+    #
+    # For more information, see [Stopping Amazon ECS service deployments][1]
+    # in the *Amazon Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/stop-service-deployment.html
     #
     # @option params [required, String] :service_deployment_arn
     #   The ARN of the service deployment that you want to stop.
@@ -9624,7 +9651,7 @@ module Aws::ECS
     # @option params [String] :stop_type
     #   How you want Amazon ECS to stop the service.
     #
-    #   The ROLLBACK and ABORT stopType aren't supported.
+    #   The valid values are `ROLLBACK`.
     #
     # @return [Types::StopServiceDeploymentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -12511,7 +12538,7 @@ module Aws::ECS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.187.0'
+      context[:gem_version] = '1.189.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

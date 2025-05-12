@@ -3646,7 +3646,9 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Contains information about the location of the remote IP address.
+    # Contains information about the location of the remote IP address. By
+    # default, GuardDuty returns `Geolocation` with `Lat` and `Lon` as
+    # `0.0`.
     #
     # @!attribute [rw] lat
     #   The latitude information of the remote IP address.

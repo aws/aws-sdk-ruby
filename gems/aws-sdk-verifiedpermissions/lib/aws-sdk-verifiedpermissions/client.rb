@@ -636,9 +636,11 @@ module Aws::VerifiedPermissions
     #   will be used to make the authorization decisions for the input.
     #
     # @option params [Types::EntitiesDefinition] :entities
-    #   Specifies the list of resources and principals and their associated
-    #   attributes that Verified Permissions can examine when evaluating the
-    #   policies.
+    #   (Optional) Specifies the list of resources and principals and their
+    #   associated attributes that Verified Permissions can examine when
+    #   evaluating the policies. These additional entities and their
+    #   attributes can be referenced and checked by conditional elements in
+    #   the policies in the specified policy store.
     #
     #   <note markdown="1"> You can include only principal and resource entities in this
     #   parameter; you can't include actions. You must specify actions in the
@@ -947,8 +949,11 @@ module Aws::VerifiedPermissions
     #   `token_use` claim in the submitted token isn't `access`.
     #
     # @option params [Types::EntitiesDefinition] :entities
-    #   Specifies the list of resources and their associated attributes that
-    #   Verified Permissions can examine when evaluating the policies.
+    #   (Optional) Specifies the list of resources and their associated
+    #   attributes that Verified Permissions can examine when evaluating the
+    #   policies. These additional entities and their attributes can be
+    #   referenced and checked by conditional elements in the policies in the
+    #   specified policy store.
     #
     #   You can't include principals in this parameter, only resource and
     #   action entities. This parameter can't include any entities of a type
@@ -1655,6 +1660,9 @@ module Aws::VerifiedPermissions
     #
     #   The default state is `DISABLED`.
     #
+    # @option params [Hash<String,String>] :tags
+    #   The list of key-value pairs to associate with the policy store.
+    #
     # @return [Types::CreatePolicyStoreOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePolicyStoreOutput#policy_store_id #policy_store_id} => String
@@ -1691,6 +1699,9 @@ module Aws::VerifiedPermissions
     #     },
     #     description: "PolicyStoreDescription",
     #     deletion_protection: "ENABLED", # accepts ENABLED, DISABLED
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -2181,6 +2192,17 @@ module Aws::VerifiedPermissions
     # @option params [required, String] :policy_store_id
     #   Specifies the ID of the policy store that you want information about.
     #
+    # @option params [Boolean] :tags
+    #   Specifies whether to return the tags that are attached to the policy
+    #   store. If this parameter is included in the API call, the tags are
+    #   returned, otherwise they are not returned.
+    #
+    #   <note markdown="1"> If this parameter is included in the API call but there are no tags
+    #   attached to the policy store, the `tags` response parameter is omitted
+    #   from the response.
+    #
+    #    </note>
+    #
     # @return [Types::GetPolicyStoreOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetPolicyStoreOutput#policy_store_id #policy_store_id} => String
@@ -2190,6 +2212,8 @@ module Aws::VerifiedPermissions
     #   * {Types::GetPolicyStoreOutput#last_updated_date #last_updated_date} => Time
     #   * {Types::GetPolicyStoreOutput#description #description} => String
     #   * {Types::GetPolicyStoreOutput#deletion_protection #deletion_protection} => String
+    #   * {Types::GetPolicyStoreOutput#cedar_version #cedar_version} => String
+    #   * {Types::GetPolicyStoreOutput#tags #tags} => Hash&lt;String,String&gt;
     #
     #
     # @example Example: GetPolicyStore
@@ -2215,6 +2239,7 @@ module Aws::VerifiedPermissions
     #
     #   resp = client.get_policy_store({
     #     policy_store_id: "PolicyStoreId", # required
+    #     tags: false,
     #   })
     #
     # @example Response structure
@@ -2226,6 +2251,9 @@ module Aws::VerifiedPermissions
     #   resp.last_updated_date #=> Time
     #   resp.description #=> String
     #   resp.deletion_protection #=> String, one of "ENABLED", "DISABLED"
+    #   resp.cedar_version #=> String, one of "CEDAR_2", "CEDAR_4"
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/GetPolicyStore AWS API Documentation
     #
@@ -2391,9 +2419,11 @@ module Aws::VerifiedPermissions
     #   authorization decisions.
     #
     # @option params [Types::EntitiesDefinition] :entities
-    #   Specifies the list of resources and principals and their associated
-    #   attributes that Verified Permissions can examine when evaluating the
-    #   policies.
+    #   (Optional) Specifies the list of resources and principals and their
+    #   associated attributes that Verified Permissions can examine when
+    #   evaluating the policies. These additional entities and their
+    #   attributes can be referenced and checked by conditional elements in
+    #   the policies in the specified policy store.
     #
     #   <note markdown="1"> You can include only principal and resource entities in this
     #   parameter; you can't include actions. You must specify actions in the
@@ -2591,8 +2621,11 @@ module Aws::VerifiedPermissions
     #   authorization decisions.
     #
     # @option params [Types::EntitiesDefinition] :entities
-    #   Specifies the list of resources and their associated attributes that
-    #   Verified Permissions can examine when evaluating the policies.
+    #   (Optional) Specifies the list of resources and their associated
+    #   attributes that Verified Permissions can examine when evaluating the
+    #   policies. These additional entities and their attributes can be
+    #   referenced and checked by conditional elements in the policies in the
+    #   specified policy store.
     #
     #   You can't include principals in this parameter, only resource and
     #   action entities. This parameter can't include any entities of a type
@@ -3260,6 +3293,54 @@ module Aws::VerifiedPermissions
       req.send_request(options)
     end
 
+    # Returns the tags associated with the specified Amazon Verified
+    # Permissions resource. In Verified Permissions, policy stores can be
+    # tagged.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource for which you want to view tags.
+    #
+    # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceOutput#tags #tags} => Hash&lt;String,String&gt;
+    #
+    #
+    # @example Example: ListTagsForResource
+    #
+    #   # The following example lists all the tags for the resource named in the API call.
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tags: {
+    #       "key1" => "value1", 
+    #       "key2" => "value2", 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Creates or updates the policy schema in the specified policy store.
     # The schema is used to validate any Cedar policies and policy templates
     # submitted to the policy store. Any changes to the schema validate only
@@ -3342,6 +3423,112 @@ module Aws::VerifiedPermissions
     # @param [Hash] params ({})
     def put_schema(params = {}, options = {})
       req = build_request(:put_schema, params)
+      req.send_request(options)
+    end
+
+    # Assigns one or more tags (key-value pairs) to the specified Amazon
+    # Verified Permissions resource. Tags can help you organize and
+    # categorize your resources. You can also use them to scope user
+    # permissions by granting a user permission to access or change only
+    # resources with certain tag values. In Verified Permissions, policy
+    # stores can be tagged.
+    #
+    # Tags don't have any semantic meaning to Amazon Web Services and are
+    # interpreted strictly as strings of characters.
+    #
+    # You can use the TagResource action with a resource that already has
+    # tags. If you specify a new tag key, this tag is appended to the list
+    # of tags associated with the resource. If you specify a tag key that is
+    # already associated with the resource, the new tag value that you
+    # specify replaces the previous value for that tag.
+    #
+    # You can associate as many as 50 tags with a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource that you're adding tags to.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The list of key-value pairs to associate with the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: TagResource
+    #
+    #   # The following example tags the resource.
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #     tags: {
+    #       "key1" => "value1", 
+    #       "key2" => "value2", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes one or more tags from the specified Amazon Verified
+    # Permissions resource. In Verified Permissions, policy stores can be
+    # tagged.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource from which you are removing tags.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The list of tag keys to remove from the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: UntagResource
+    #
+    #   # The following example removes the listed tags from the resource.
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "C7v5xMplfFH3i3e4Jrzb1a", 
+    #     tag_keys: [
+    #       "key1", 
+    #       "key2", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -3821,7 +4008,7 @@ module Aws::VerifiedPermissions
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-verifiedpermissions'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

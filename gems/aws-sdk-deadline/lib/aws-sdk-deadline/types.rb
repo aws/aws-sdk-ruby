@@ -1751,13 +1751,19 @@ module Aws::Deadline
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Each tag consists of a tag key and a tag value. Tag keys and values
+    #   are both required, but tag values can be empty strings.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/CreateWorkerRequest AWS API Documentation
     #
     class CreateWorkerRequest < Struct.new(
       :farm_id,
       :fleet_id,
       :host_properties,
-      :client_token)
+      :client_token,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1788,12 +1794,27 @@ module Aws::Deadline
     #   The storage profile ID.
     #   @return [String]
     #
+    # @!attribute [rw] tag_propagation_mode
+    #   Specifies whether tags associated with a fleet are attached to
+    #   workers when the worker is launched.
+    #
+    #   When the `tagPropagationMode` is set to
+    #   `PROPAGATE_TAGS_TO_WORKERS_AT_LAUNCH` any tag associated with a
+    #   fleet is attached to workers when they launch. If the tags for a
+    #   fleet change, the tags associated with running workers **do not**
+    #   change.
+    #
+    #   If you don't specify `tagPropagationMode`, the default is
+    #   `NO_PROPAGATION`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/CustomerManagedFleetConfiguration AWS API Documentation
     #
     class CustomerManagedFleetConfiguration < Struct.new(
       :mode,
       :worker_capabilities,
-      :storage_profile_id)
+      :storage_profile_id,
+      :tag_propagation_mode)
       SENSITIVE = []
       include Aws::Structure
     end

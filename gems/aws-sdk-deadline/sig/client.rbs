@@ -332,7 +332,8 @@ module Aws
                                   },
                                 ]?
                               },
-                              storage_profile_id: ::String?
+                              storage_profile_id: ::String?,
+                              tag_propagation_mode: ("NO_PROPAGATION" | "PROPAGATE_TAGS_TO_WORKERS_AT_LAUNCH")?
                             }?,
                             service_managed_ec2: {
                               instance_capabilities: {
@@ -577,7 +578,8 @@ module Aws
                              }?,
                              host_name: ::String?
                            },
-                           ?client_token: ::String
+                           ?client_token: ::String,
+                           ?tags: Hash[::String, ::String]
                          ) -> _CreateWorkerResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkerResponseSuccess
 
@@ -1954,7 +1956,8 @@ module Aws
                                   },
                                 ]?
                               },
-                              storage_profile_id: ::String?
+                              storage_profile_id: ::String?,
+                              tag_propagation_mode: ("NO_PROPAGATION" | "PROPAGATE_TAGS_TO_WORKERS_AT_LAUNCH")?
                             }?,
                             service_managed_ec2: {
                               instance_capabilities: {

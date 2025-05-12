@@ -88,7 +88,7 @@ module Aws::DSQL
 
     CreateClusterInput.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: DeletionProtectionEnabled, location_name: "deletionProtectionEnabled"))
     CreateClusterInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateClusterInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateClusterInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateClusterInput.struct_class = Types::CreateClusterInput
 
     CreateClusterOutput.add_member(:identifier, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "identifier"))
@@ -101,14 +101,14 @@ module Aws::DSQL
     CreateMultiRegionClustersInput.add_member(:linked_region_list, Shapes::ShapeRef.new(shape: RegionList, required: true, location_name: "linkedRegionList"))
     CreateMultiRegionClustersInput.add_member(:cluster_properties, Shapes::ShapeRef.new(shape: ClusterPropertyMap, location_name: "clusterProperties"))
     CreateMultiRegionClustersInput.add_member(:witness_region, Shapes::ShapeRef.new(shape: Region, required: true, location_name: "witnessRegion"))
-    CreateMultiRegionClustersInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateMultiRegionClustersInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateMultiRegionClustersInput.struct_class = Types::CreateMultiRegionClustersInput
 
     CreateMultiRegionClustersOutput.add_member(:linked_cluster_arns, Shapes::ShapeRef.new(shape: ClusterArnList, required: true, location_name: "linkedClusterArns"))
     CreateMultiRegionClustersOutput.struct_class = Types::CreateMultiRegionClustersOutput
 
     DeleteClusterInput.add_member(:identifier, Shapes::ShapeRef.new(shape: ClusterId, required: true, location: "uri", location_name: "identifier"))
-    DeleteClusterInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "client-token", metadata: {"idempotencyToken"=>true}))
+    DeleteClusterInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "client-token", metadata: {"idempotencyToken" => true}))
     DeleteClusterInput.struct_class = Types::DeleteClusterInput
 
     DeleteClusterOutput.add_member(:identifier, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "identifier"))
@@ -119,7 +119,7 @@ module Aws::DSQL
     DeleteClusterOutput.struct_class = Types::DeleteClusterOutput
 
     DeleteMultiRegionClustersInput.add_member(:linked_cluster_arns, Shapes::ShapeRef.new(shape: ClusterArnList, required: true, location: "querystring", location_name: "linked-cluster-arns"))
-    DeleteMultiRegionClustersInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "client-token", metadata: {"idempotencyToken"=>true}))
+    DeleteMultiRegionClustersInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "client-token", metadata: {"idempotencyToken" => true}))
     DeleteMultiRegionClustersInput.struct_class = Types::DeleteMultiRegionClustersInput
 
     GetClusterInput.add_member(:identifier, Shapes::ShapeRef.new(shape: ClusterId, required: true, location: "uri", location_name: "identifier"))
@@ -197,7 +197,7 @@ module Aws::DSQL
 
     UpdateClusterInput.add_member(:identifier, Shapes::ShapeRef.new(shape: ClusterId, required: true, location: "uri", location_name: "identifier"))
     UpdateClusterInput.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: DeletionProtectionEnabled, location_name: "deletionProtectionEnabled"))
-    UpdateClusterInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateClusterInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateClusterInput.struct_class = Types::UpdateClusterInput
 
     UpdateClusterOutput.add_member(:identifier, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "identifier"))

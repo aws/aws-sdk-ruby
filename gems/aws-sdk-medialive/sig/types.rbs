@@ -3247,6 +3247,7 @@ module Aws::MediaLive
       attr_accessor role_arn: ::String
       attr_accessor channel_engine_version: Types::ChannelEngineVersionRequest
       attr_accessor dry_run: bool
+      attr_accessor anywhere_settings: Types::AnywhereSettings
       SENSITIVE: []
     end
 
@@ -3281,6 +3282,7 @@ module Aws::MediaLive
       attr_accessor role_arn: ::String
       attr_accessor channel_engine_version: Types::ChannelEngineVersionRequest
       attr_accessor dry_run: bool
+      attr_accessor anywhere_settings: Types::AnywhereSettings
       SENSITIVE: []
     end
 

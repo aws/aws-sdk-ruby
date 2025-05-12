@@ -103,7 +103,7 @@ module Aws::DirectoryServiceData
     AccessDeniedException.add_member(:reason, Shapes::ShapeRef.new(shape: AccessDeniedReason, location_name: "Reason"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
-    AddGroupMemberRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    AddGroupMemberRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     AddGroupMemberRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location: "querystring", location_name: "DirectoryId"))
     AddGroupMemberRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, required: true, location_name: "GroupName"))
     AddGroupMemberRequest.add_member(:member_name, Shapes::ShapeRef.new(shape: MemberName, required: true, location_name: "MemberName"))
@@ -130,7 +130,7 @@ module Aws::DirectoryServiceData
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
 
-    CreateGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateGroupRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location: "querystring", location_name: "DirectoryId"))
     CreateGroupRequest.add_member(:group_scope, Shapes::ShapeRef.new(shape: GroupScope, location_name: "GroupScope"))
     CreateGroupRequest.add_member(:group_type, Shapes::ShapeRef.new(shape: GroupType, location_name: "GroupType"))
@@ -143,7 +143,7 @@ module Aws::DirectoryServiceData
     CreateGroupResult.add_member(:sid, Shapes::ShapeRef.new(shape: SID, location_name: "SID"))
     CreateGroupResult.struct_class = Types::CreateGroupResult
 
-    CreateUserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateUserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateUserRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location: "querystring", location_name: "DirectoryId"))
     CreateUserRequest.add_member(:email_address, Shapes::ShapeRef.new(shape: EmailAddress, location_name: "EmailAddress"))
     CreateUserRequest.add_member(:given_name, Shapes::ShapeRef.new(shape: GivenName, location_name: "GivenName"))
@@ -157,14 +157,14 @@ module Aws::DirectoryServiceData
     CreateUserResult.add_member(:sid, Shapes::ShapeRef.new(shape: SID, location_name: "SID"))
     CreateUserResult.struct_class = Types::CreateUserResult
 
-    DeleteGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     DeleteGroupRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location: "querystring", location_name: "DirectoryId"))
     DeleteGroupRequest.add_member(:sam_account_name, Shapes::ShapeRef.new(shape: GroupName, required: true, location_name: "SAMAccountName"))
     DeleteGroupRequest.struct_class = Types::DeleteGroupRequest
 
     DeleteGroupResult.struct_class = Types::DeleteGroupResult
 
-    DeleteUserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteUserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     DeleteUserRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location: "querystring", location_name: "DirectoryId"))
     DeleteUserRequest.add_member(:sam_account_name, Shapes::ShapeRef.new(shape: UserName, required: true, location_name: "SAMAccountName"))
     DeleteUserRequest.struct_class = Types::DeleteUserRequest
@@ -210,7 +210,7 @@ module Aws::DirectoryServiceData
     DirectoryUnavailableException.add_member(:reason, Shapes::ShapeRef.new(shape: DirectoryUnavailableReason, location_name: "Reason"))
     DirectoryUnavailableException.struct_class = Types::DirectoryUnavailableException
 
-    DisableUserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    DisableUserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     DisableUserRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location: "querystring", location_name: "DirectoryId"))
     DisableUserRequest.add_member(:sam_account_name, Shapes::ShapeRef.new(shape: UserName, required: true, location_name: "SAMAccountName"))
     DisableUserRequest.struct_class = Types::DisableUserRequest
@@ -301,7 +301,7 @@ module Aws::DirectoryServiceData
 
     MemberList.member = Shapes::ShapeRef.new(shape: Member)
 
-    RemoveGroupMemberRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    RemoveGroupMemberRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     RemoveGroupMemberRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location: "querystring", location_name: "DirectoryId"))
     RemoveGroupMemberRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, required: true, location_name: "GroupName"))
     RemoveGroupMemberRequest.add_member(:member_name, Shapes::ShapeRef.new(shape: MemberName, required: true, location_name: "MemberName"))
@@ -347,7 +347,7 @@ module Aws::DirectoryServiceData
     ThrottlingException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Retry-After"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
-    UpdateGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     UpdateGroupRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location: "querystring", location_name: "DirectoryId"))
     UpdateGroupRequest.add_member(:group_scope, Shapes::ShapeRef.new(shape: GroupScope, location_name: "GroupScope"))
     UpdateGroupRequest.add_member(:group_type, Shapes::ShapeRef.new(shape: GroupType, location_name: "GroupType"))
@@ -358,7 +358,7 @@ module Aws::DirectoryServiceData
 
     UpdateGroupResult.struct_class = Types::UpdateGroupResult
 
-    UpdateUserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateUserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     UpdateUserRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location: "querystring", location_name: "DirectoryId"))
     UpdateUserRequest.add_member(:email_address, Shapes::ShapeRef.new(shape: EmailAddress, location_name: "EmailAddress"))
     UpdateUserRequest.add_member(:given_name, Shapes::ShapeRef.new(shape: GivenName, location_name: "GivenName"))

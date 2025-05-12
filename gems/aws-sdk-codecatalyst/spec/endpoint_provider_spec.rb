@@ -16,11 +16,11 @@ module Aws::CodeCatalyst
 
     context "Override endpoint" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://test.codecatalyst.global.api.aws"}}
+        {"endpoint" => {"url" => "https://test.codecatalyst.global.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:endpoint=>"https://test.codecatalyst.global.api.aws"})
+        params = EndpointParameters.new(**{endpoint: "https://test.codecatalyst.global.api.aws"})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -30,7 +30,7 @@ module Aws::CodeCatalyst
 
     context "Default endpoint (region not set)" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://codecatalyst.global.api.aws"}}
+        {"endpoint" => {"url" => "https://codecatalyst.global.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -44,11 +44,11 @@ module Aws::CodeCatalyst
 
     context "Default FIPS endpoint (region not set)" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://codecatalyst-fips.global.api.aws"}}
+        {"endpoint" => {"url" => "https://codecatalyst-fips.global.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>true})
+        params = EndpointParameters.new(**{use_fips: true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -58,11 +58,11 @@ module Aws::CodeCatalyst
 
     context "Default endpoint (region: aws-global)" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://codecatalyst.global.api.aws"}}
+        {"endpoint" => {"url" => "https://codecatalyst.global.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"aws-global"})
+        params = EndpointParameters.new(**{region: "aws-global"})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -72,11 +72,11 @@ module Aws::CodeCatalyst
 
     context "Default FIPS endpoint (region: aws-global)" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://codecatalyst-fips.global.api.aws"}}
+        {"endpoint" => {"url" => "https://codecatalyst-fips.global.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"aws-global", :use_fips=>true})
+        params = EndpointParameters.new(**{region: "aws-global", use_fips: true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -86,11 +86,11 @@ module Aws::CodeCatalyst
 
     context "Default endpoint for a valid home region (region: us-west-2)" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://codecatalyst.global.api.aws"}}
+        {"endpoint" => {"url" => "https://codecatalyst.global.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-west-2"})
+        params = EndpointParameters.new(**{region: "us-west-2"})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -100,11 +100,11 @@ module Aws::CodeCatalyst
 
     context "Default FIPS endpoint for a valid home region (region: us-west-2)" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://codecatalyst-fips.global.api.aws"}}
+        {"endpoint" => {"url" => "https://codecatalyst-fips.global.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-west-2", :use_fips=>true})
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -114,11 +114,11 @@ module Aws::CodeCatalyst
 
     context "Default endpoint for an unavailable home region (region: us-east-1)" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://codecatalyst.global.api.aws"}}
+        {"endpoint" => {"url" => "https://codecatalyst.global.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-east-1"})
+        params = EndpointParameters.new(**{region: "us-east-1"})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -128,11 +128,11 @@ module Aws::CodeCatalyst
 
     context "Default FIPS endpoint for an unavailable home region (region: us-east-1)" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://codecatalyst-fips.global.api.aws"}}
+        {"endpoint" => {"url" => "https://codecatalyst-fips.global.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>true})
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})

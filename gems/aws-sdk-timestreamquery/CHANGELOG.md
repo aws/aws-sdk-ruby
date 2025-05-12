@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2025-05-06)
+------------------
+
+* Feature - Add dualstack endpoints support and correct us-gov-west-1 FIPS endpoint.
+
+1.51.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.50.0 (2025-02-18)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.201.0 (2025-05-01)
+------------------
+
+* Feature - This release adds the following fields to DescribeContact: DisconnectReason, AgentInitiatedHoldDuration, AfterContactWorkStartTimestamp, AfterContactWorkEndTimestamp, AfterContactWorkDuration, StateTransitions, Recordings, ContactDetails, ContactEvaluations, Attributes
+
 1.200.0 (2025-04-17)
 ------------------
 

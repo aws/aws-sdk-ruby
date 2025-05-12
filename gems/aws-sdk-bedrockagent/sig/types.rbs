@@ -938,7 +938,7 @@ module Aws::BedrockAgent
       attr_accessor inputs: ::Array[Types::FlowNodeInput]
       attr_accessor name: ::String
       attr_accessor outputs: ::Array[Types::FlowNodeOutput]
-      attr_accessor type: ("Input" | "Output" | "KnowledgeBase" | "Condition" | "Lex" | "Prompt" | "LambdaFunction" | "Storage" | "Agent" | "Retrieval" | "Iterator" | "Collector")
+      attr_accessor type: ("Input" | "Output" | "KnowledgeBase" | "Condition" | "Lex" | "Prompt" | "LambdaFunction" | "Storage" | "Agent" | "Retrieval" | "Iterator" | "Collector" | "InlineCode")
       SENSITIVE: []
     end
 
@@ -946,6 +946,7 @@ module Aws::BedrockAgent
       attr_accessor agent: Types::AgentFlowNodeConfiguration
       attr_accessor collector: Types::CollectorFlowNodeConfiguration
       attr_accessor condition: Types::ConditionFlowNodeConfiguration
+      attr_accessor inline_code: Types::InlineCodeFlowNodeConfiguration
       attr_accessor input: Types::InputFlowNodeConfiguration
       attr_accessor iterator: Types::IteratorFlowNodeConfiguration
       attr_accessor knowledge_base: Types::KnowledgeBaseFlowNodeConfiguration
@@ -963,6 +964,8 @@ module Aws::BedrockAgent
       class Collector < FlowNodeConfiguration
       end
       class Condition < FlowNodeConfiguration
+      end
+      class InlineCode < FlowNodeConfiguration
       end
       class Input < FlowNodeConfiguration
       end
@@ -1419,6 +1422,12 @@ module Aws::BedrockAgent
       attr_accessor status: ("STARTING" | "IN_PROGRESS" | "COMPLETE" | "FAILED" | "STOPPING" | "STOPPED")
       attr_accessor updated_at: ::Time
       SENSITIVE: []
+    end
+
+    class InlineCodeFlowNodeConfiguration
+      attr_accessor code: ::String
+      attr_accessor language: ("Python_3")
+      SENSITIVE: [:code]
     end
 
     class InlineContent

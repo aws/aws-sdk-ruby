@@ -128,7 +128,7 @@ module Aws::CognitoIdentity
 
     CognitoIdentityProvider.add_member(:provider_name, Shapes::ShapeRef.new(shape: CognitoIdentityProviderName, location_name: "ProviderName"))
     CognitoIdentityProvider.add_member(:client_id, Shapes::ShapeRef.new(shape: CognitoIdentityProviderClientId, location_name: "ClientId"))
-    CognitoIdentityProvider.add_member(:server_side_token_check, Shapes::ShapeRef.new(shape: CognitoIdentityProviderTokenCheck, location_name: "ServerSideTokenCheck", metadata: {"box"=>true}))
+    CognitoIdentityProvider.add_member(:server_side_token_check, Shapes::ShapeRef.new(shape: CognitoIdentityProviderTokenCheck, location_name: "ServerSideTokenCheck", metadata: {"box" => true}))
     CognitoIdentityProvider.struct_class = Types::CognitoIdentityProvider
 
     CognitoIdentityProviderList.member = Shapes::ShapeRef.new(shape: CognitoIdentityProvider)

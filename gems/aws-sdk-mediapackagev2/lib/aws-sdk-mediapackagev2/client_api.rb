@@ -234,7 +234,7 @@ module Aws::MediaPackageV2
     ConflictException.struct_class = Types::ConflictException
 
     CreateChannelGroupRequest.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ChannelGroupName"))
-    CreateChannelGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "header", location_name: "x-amzn-client-token", metadata: {"idempotencyToken"=>true}))
+    CreateChannelGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "header", location_name: "x-amzn-client-token", metadata: {"idempotencyToken" => true}))
     CreateChannelGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     CreateChannelGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateChannelGroupRequest.struct_class = Types::CreateChannelGroupRequest
@@ -251,7 +251,7 @@ module Aws::MediaPackageV2
 
     CreateChannelRequest.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "ChannelGroupName"))
     CreateChannelRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ChannelName"))
-    CreateChannelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "header", location_name: "x-amzn-client-token", metadata: {"idempotencyToken"=>true}))
+    CreateChannelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "header", location_name: "x-amzn-client-token", metadata: {"idempotencyToken" => true}))
     CreateChannelRequest.add_member(:input_type, Shapes::ShapeRef.new(shape: InputType, location_name: "InputType"))
     CreateChannelRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     CreateChannelRequest.add_member(:input_switch_configuration, Shapes::ShapeRef.new(shape: InputSwitchConfiguration, location_name: "InputSwitchConfiguration"))
@@ -295,7 +295,7 @@ module Aws::MediaPackageV2
     CreateHarvestJobRequest.add_member(:harvested_manifests, Shapes::ShapeRef.new(shape: HarvestedManifests, required: true, location_name: "HarvestedManifests"))
     CreateHarvestJobRequest.add_member(:schedule_configuration, Shapes::ShapeRef.new(shape: HarvesterScheduleConfiguration, required: true, location_name: "ScheduleConfiguration"))
     CreateHarvestJobRequest.add_member(:destination, Shapes::ShapeRef.new(shape: Destination, required: true, location_name: "Destination"))
-    CreateHarvestJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "header", location_name: "x-amzn-client-token", metadata: {"idempotencyToken"=>true}))
+    CreateHarvestJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "header", location_name: "x-amzn-client-token", metadata: {"idempotencyToken" => true}))
     CreateHarvestJobRequest.add_member(:harvest_job_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "HarvestJobName"))
     CreateHarvestJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateHarvestJobRequest.struct_class = Types::CreateHarvestJobRequest
@@ -346,7 +346,7 @@ module Aws::MediaPackageV2
     CreateOriginEndpointRequest.add_member(:origin_endpoint_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "OriginEndpointName"))
     CreateOriginEndpointRequest.add_member(:container_type, Shapes::ShapeRef.new(shape: ContainerType, required: true, location_name: "ContainerType"))
     CreateOriginEndpointRequest.add_member(:segment, Shapes::ShapeRef.new(shape: Segment, location_name: "Segment"))
-    CreateOriginEndpointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "header", location_name: "x-amzn-client-token", metadata: {"idempotencyToken"=>true}))
+    CreateOriginEndpointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "header", location_name: "x-amzn-client-token", metadata: {"idempotencyToken" => true}))
     CreateOriginEndpointRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     CreateOriginEndpointRequest.add_member(:startover_window_seconds, Shapes::ShapeRef.new(shape: CreateOriginEndpointRequestStartoverWindowSecondsInteger, location_name: "StartoverWindowSeconds"))
     CreateOriginEndpointRequest.add_member(:hls_manifests, Shapes::ShapeRef.new(shape: CreateHlsManifests, location_name: "HlsManifests"))

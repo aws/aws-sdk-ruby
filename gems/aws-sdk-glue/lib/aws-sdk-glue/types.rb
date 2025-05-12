@@ -5639,6 +5639,10 @@ module Aws::Glue
     #   pairs.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] integration_config
+    #   The configuration settings.
+    #   @return [Types::IntegrationConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateIntegrationRequest AWS API Documentation
     #
     class CreateIntegrationRequest < Struct.new(
@@ -5649,7 +5653,8 @@ module Aws::Glue
       :data_filter,
       :kms_key_id,
       :additional_encryption_context,
-      :tags)
+      :tags,
+      :integration_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5766,6 +5771,10 @@ module Aws::Glue
     #   syntax.
     #   @return [String]
     #
+    # @!attribute [rw] integration_config
+    #   The configuration settings.
+    #   @return [Types::IntegrationConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateIntegrationResponse AWS API Documentation
     #
     class CreateIntegrationResponse < Struct.new(
@@ -5780,7 +5789,8 @@ module Aws::Glue
       :status,
       :create_time,
       :errors,
-      :data_filter)
+      :data_filter,
+      :integration_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5794,7 +5804,9 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] source_table_config
-    #   A structure for the source table configuration.
+    #   A structure for the source table configuration. See the
+    #   `SourceTableConfig` structure to see list of supported source
+    #   properties.
     #   @return [Types::SourceTableConfig]
     #
     # @!attribute [rw] target_table_config
@@ -15609,6 +15621,10 @@ module Aws::Glue
     #   The time that the integration was created, in UTC.
     #   @return [Time]
     #
+    # @!attribute [rw] integration_config
+    #   Properties associated with the integration.
+    #   @return [Types::IntegrationConfig]
+    #
     # @!attribute [rw] errors
     #   A list of errors associated with the integration.
     #   @return [Array<Types::IntegrationError>]
@@ -15621,6 +15637,7 @@ module Aws::Glue
       :integration_arn,
       :status,
       :create_time,
+      :integration_config,
       :errors)
       SENSITIVE = []
       include Aws::Structure
@@ -15686,6 +15703,10 @@ module Aws::Glue
     #   The time that the integration was created, in UTC.
     #   @return [Time]
     #
+    # @!attribute [rw] integration_config
+    #   Properties associated with the integration.
+    #   @return [Types::IntegrationConfig]
+    #
     # @!attribute [rw] errors
     #   A list of errors associated with the integration.
     #   @return [Array<Types::IntegrationError>]
@@ -15708,8 +15729,28 @@ module Aws::Glue
       :tags,
       :status,
       :create_time,
+      :integration_config,
       :errors,
       :data_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Properties associated with the integration.
+    #
+    # @!attribute [rw] refresh_interval
+    #   Specifies the frequency at which CDC (Change Data Capture) pulls or
+    #   incremental loads should occur. This parameter provides flexibility
+    #   to align the refresh rate with your specific data update patterns,
+    #   system load considerations, and performance optimization goals. Time
+    #   increment can be set from 15 minutes to 8640 minutes (six days).
+    #   Currently supports creation of `RefreshInterval` only.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IntegrationConfig AWS API Documentation
+    #
+    class IntegrationConfig < Struct.new(
+      :refresh_interval)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15784,11 +15825,21 @@ module Aws::Glue
     # A structure that describes how data is partitioned on the target.
     #
     # @!attribute [rw] field_name
-    #   The field name used to partition data on the target.
+    #   The field name used to partition data on the target. Avoid using
+    #   columns that have unique values for each row (for example,
+    #   `LastModifiedTimestamp`, `SystemModTimeStamp`) as the partition
+    #   column. These columns are not suitable for partitioning because they
+    #   create a large number of small partitions, which can lead to
+    #   performance issues.
     #   @return [String]
     #
     # @!attribute [rw] function_spec
-    #   Specifies a function used to partition data on the target.
+    #   Specifies the function used to partition data on the target. The
+    #   only accepted value for this parameter is `'identity'` (string).
+    #   The `'identity'` function ensures that the data partitioning on
+    #   the target follows the same scheme as the source. In other words,
+    #   the partitioning structure of the source data is preserved in the
+    #   target destination.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IntegrationPartition AWS API Documentation
@@ -23423,19 +23474,23 @@ module Aws::Glue
     # Properties used by the source leg to process data from the source.
     #
     # @!attribute [rw] fields
-    #   A list of fields used for column-level filtering.
+    #   A list of fields used for column-level filtering. Currently
+    #   unsupported.
     #   @return [Array<String>]
     #
     # @!attribute [rw] filter_predicate
-    #   A condition clause used for row-level filtering.
+    #   A condition clause used for row-level filtering. Currently
+    #   unsupported.
     #   @return [String]
     #
     # @!attribute [rw] primary_key
-    #   Unique identifier of a record.
+    #   Provide the primary key set for this table. Currently supported
+    #   specifically for SAP `EntityOf` entities upon request. Contact
+    #   Amazon Web Services Support to make this feature available.
     #   @return [Array<String>]
     #
     # @!attribute [rw] record_update_field
-    #   Incremental pull timestamp-based field.
+    #   Incremental pull timestamp-based field. Currently unsupported.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SourceTableConfig AWS API Documentation

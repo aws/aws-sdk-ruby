@@ -1611,7 +1611,7 @@ module Aws::SSM
     #     name: "DocumentName", # required
     #     display_name: "DocumentDisplayName",
     #     version_name: "DocumentVersionName",
-    #     document_type: "Command", # accepts Command, Policy, Automation, Session, Package, ApplicationConfiguration, ApplicationConfigurationSchema, DeploymentStrategy, ChangeCalendar, Automation.ChangeTemplate, ProblemAnalysis, ProblemAnalysisTemplate, CloudFormation, ConformancePackTemplate, QuickSetup
+    #     document_type: "Command", # accepts Command, Policy, Automation, Session, Package, ApplicationConfiguration, ApplicationConfigurationSchema, DeploymentStrategy, ChangeCalendar, Automation.ChangeTemplate, ProblemAnalysis, ProblemAnalysisTemplate, CloudFormation, ConformancePackTemplate, QuickSetup, ManualApprovalPolicy, AutoApprovalPolicy
     #     document_format: "YAML", # accepts YAML, JSON, TEXT
     #     target_type: "TargetType",
     #     tags: [
@@ -1643,7 +1643,7 @@ module Aws::SSM
     #   resp.document_description.parameters[0].default_value #=> String
     #   resp.document_description.platform_types #=> Array
     #   resp.document_description.platform_types[0] #=> String, one of "Windows", "Linux", "MacOS"
-    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate", "CloudFormation", "ConformancePackTemplate", "QuickSetup"
+    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate", "CloudFormation", "ConformancePackTemplate", "QuickSetup", "ManualApprovalPolicy", "AutoApprovalPolicy"
     #   resp.document_description.schema_version #=> String
     #   resp.document_description.latest_version #=> String
     #   resp.document_description.default_version #=> String
@@ -3397,7 +3397,7 @@ module Aws::SSM
     #   resp.automation_execution_metadata_list[0].triggered_alarms[0].name #=> String
     #   resp.automation_execution_metadata_list[0].triggered_alarms[0].state #=> String, one of "UNKNOWN", "ALARM"
     #   resp.automation_execution_metadata_list[0].target_locations_url #=> String
-    #   resp.automation_execution_metadata_list[0].automation_subtype #=> String, one of "ChangeRequest"
+    #   resp.automation_execution_metadata_list[0].automation_subtype #=> String, one of "ChangeRequest", "AccessRequest"
     #   resp.automation_execution_metadata_list[0].scheduled_time #=> Time
     #   resp.automation_execution_metadata_list[0].runbooks #=> Array
     #   resp.automation_execution_metadata_list[0].runbooks[0].document_name #=> String
@@ -3787,7 +3787,7 @@ module Aws::SSM
     #   resp.document.parameters[0].default_value #=> String
     #   resp.document.platform_types #=> Array
     #   resp.document.platform_types[0] #=> String, one of "Windows", "Linux", "MacOS"
-    #   resp.document.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate", "CloudFormation", "ConformancePackTemplate", "QuickSetup"
+    #   resp.document.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate", "CloudFormation", "ConformancePackTemplate", "QuickSetup", "ManualApprovalPolicy", "AutoApprovalPolicy"
     #   resp.document.schema_version #=> String
     #   resp.document.latest_version #=> String
     #   resp.document.default_version #=> String
@@ -5194,7 +5194,7 @@ module Aws::SSM
     #   resp = client.describe_ops_items({
     #     ops_item_filters: [
     #       {
-    #         key: "Status", # required, accepts Status, CreatedBy, Source, Priority, Title, OpsItemId, CreatedTime, LastModifiedTime, ActualStartTime, ActualEndTime, PlannedStartTime, PlannedEndTime, OperationalData, OperationalDataKey, OperationalDataValue, ResourceId, AutomationId, Category, Severity, OpsItemType, ChangeRequestByRequesterArn, ChangeRequestByRequesterName, ChangeRequestByApproverArn, ChangeRequestByApproverName, ChangeRequestByTemplate, ChangeRequestByTargetsResourceGroup, InsightByType, AccountId
+    #         key: "Status", # required, accepts Status, CreatedBy, Source, Priority, Title, OpsItemId, CreatedTime, LastModifiedTime, ActualStartTime, ActualEndTime, PlannedStartTime, PlannedEndTime, OperationalData, OperationalDataKey, OperationalDataValue, ResourceId, AutomationId, Category, Severity, OpsItemType, AccessRequestByRequesterArn, AccessRequestByRequesterId, AccessRequestByApproverArn, AccessRequestByApproverId, AccessRequestBySourceAccountId, AccessRequestBySourceOpsItemId, AccessRequestBySourceRegion, AccessRequestByIsReplica, AccessRequestByTargetResourceId, ChangeRequestByRequesterArn, ChangeRequestByRequesterName, ChangeRequestByApproverArn, ChangeRequestByApproverName, ChangeRequestByTemplate, ChangeRequestByTargetsResourceGroup, InsightByType, AccountId
     #         values: ["OpsItemFilterValue"], # required
     #         operator: "Equal", # required, accepts Equal, Contains, GreaterThan, LessThan
     #       },
@@ -5213,7 +5213,7 @@ module Aws::SSM
     #   resp.ops_item_summaries[0].last_modified_time #=> Time
     #   resp.ops_item_summaries[0].priority #=> Integer
     #   resp.ops_item_summaries[0].source #=> String
-    #   resp.ops_item_summaries[0].status #=> String, one of "Open", "InProgress", "Resolved", "Pending", "TimedOut", "Cancelling", "Cancelled", "Failed", "CompletedWithSuccess", "CompletedWithFailure", "Scheduled", "RunbookInProgress", "PendingChangeCalendarOverride", "ChangeCalendarOverrideApproved", "ChangeCalendarOverrideRejected", "PendingApproval", "Approved", "Rejected", "Closed"
+    #   resp.ops_item_summaries[0].status #=> String, one of "Open", "InProgress", "Resolved", "Pending", "TimedOut", "Cancelling", "Cancelled", "Failed", "CompletedWithSuccess", "CompletedWithFailure", "Scheduled", "RunbookInProgress", "PendingChangeCalendarOverride", "ChangeCalendarOverrideApproved", "ChangeCalendarOverrideRejected", "PendingApproval", "Approved", "Revoked", "Rejected", "Closed"
     #   resp.ops_item_summaries[0].ops_item_id #=> String
     #   resp.ops_item_summaries[0].title #=> String
     #   resp.ops_item_summaries[0].operational_data #=> Hash
@@ -5737,6 +5737,39 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Returns a credentials set to be used with just-in-time node access.
+    #
+    # @option params [required, String] :access_request_id
+    #   The ID of a just-in-time node access request.
+    #
+    # @return [Types::GetAccessTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAccessTokenResponse#credentials #credentials} => Types::Credentials
+    #   * {Types::GetAccessTokenResponse#access_request_status #access_request_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_access_token({
+    #     access_request_id: "AccessRequestId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.credentials.access_key_id #=> String
+    #   resp.credentials.secret_access_key #=> String
+    #   resp.credentials.session_token #=> String
+    #   resp.credentials.expiration_time #=> Time
+    #   resp.access_request_status #=> String, one of "Approved", "Rejected", "Revoked", "Expired", "Pending"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetAccessToken AWS API Documentation
+    #
+    # @overload get_access_token(params = {})
+    # @param [Hash] params ({})
+    def get_access_token(params = {}, options = {})
+      req = build_request(:get_access_token, params)
+      req.send_request(options)
+    end
+
     # Get detailed information about a particular Automation execution.
     #
     # @option params [required, String] :automation_execution_id
@@ -5884,7 +5917,7 @@ module Aws::SSM
     #   resp.automation_execution.triggered_alarms[0].name #=> String
     #   resp.automation_execution.triggered_alarms[0].state #=> String, one of "UNKNOWN", "ALARM"
     #   resp.automation_execution.target_locations_url #=> String
-    #   resp.automation_execution.automation_subtype #=> String, one of "ChangeRequest"
+    #   resp.automation_execution.automation_subtype #=> String, one of "ChangeRequest", "AccessRequest"
     #   resp.automation_execution.scheduled_time #=> Time
     #   resp.automation_execution.runbooks #=> Array
     #   resp.automation_execution.runbooks[0].document_name #=> String
@@ -6323,7 +6356,7 @@ module Aws::SSM
     #   resp.status #=> String, one of "Creating", "Active", "Updating", "Deleting", "Failed"
     #   resp.status_information #=> String
     #   resp.content #=> String
-    #   resp.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate", "CloudFormation", "ConformancePackTemplate", "QuickSetup"
+    #   resp.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate", "CloudFormation", "ConformancePackTemplate", "QuickSetup", "ManualApprovalPolicy", "AutoApprovalPolicy"
     #   resp.document_format #=> String, one of "YAML", "JSON", "TEXT"
     #   resp.requires #=> Array
     #   resp.requires[0].name #=> String
@@ -6955,7 +6988,7 @@ module Aws::SSM
     #   resp.ops_item.priority #=> Integer
     #   resp.ops_item.related_ops_items #=> Array
     #   resp.ops_item.related_ops_items[0].ops_item_id #=> String
-    #   resp.ops_item.status #=> String, one of "Open", "InProgress", "Resolved", "Pending", "TimedOut", "Cancelling", "Cancelled", "Failed", "CompletedWithSuccess", "CompletedWithFailure", "Scheduled", "RunbookInProgress", "PendingChangeCalendarOverride", "ChangeCalendarOverrideApproved", "ChangeCalendarOverrideRejected", "PendingApproval", "Approved", "Rejected", "Closed"
+    #   resp.ops_item.status #=> String, one of "Open", "InProgress", "Resolved", "Pending", "TimedOut", "Cancelling", "Cancelled", "Failed", "CompletedWithSuccess", "CompletedWithFailure", "Scheduled", "RunbookInProgress", "PendingChangeCalendarOverride", "ChangeCalendarOverrideApproved", "ChangeCalendarOverrideRejected", "PendingApproval", "Approved", "Revoked", "Rejected", "Closed"
     #   resp.ops_item.ops_item_id #=> String
     #   resp.ops_item.version #=> String
     #   resp.ops_item.title #=> String
@@ -8450,7 +8483,7 @@ module Aws::SSM
     #   resp.document_identifiers[0].platform_types #=> Array
     #   resp.document_identifiers[0].platform_types[0] #=> String, one of "Windows", "Linux", "MacOS"
     #   resp.document_identifiers[0].document_version #=> String
-    #   resp.document_identifiers[0].document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate", "CloudFormation", "ConformancePackTemplate", "QuickSetup"
+    #   resp.document_identifiers[0].document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate", "CloudFormation", "ConformancePackTemplate", "QuickSetup", "ManualApprovalPolicy", "AutoApprovalPolicy"
     #   resp.document_identifiers[0].schema_version #=> String
     #   resp.document_identifiers[0].document_format #=> String, one of "YAML", "JSON", "TEXT"
     #   resp.document_identifiers[0].target_type #=> String
@@ -10447,7 +10480,7 @@ module Aws::SSM
     #
     #   resp = client.send_automation_signal({
     #     automation_execution_id: "AutomationExecutionId", # required
-    #     signal_type: "Approve", # required, accepts Approve, Reject, StartStep, StopStep, Resume
+    #     signal_type: "Approve", # required, accepts Approve, Reject, StartStep, StopStep, Resume, Revoke
     #     payload: {
     #       "AutomationParameterKey" => ["AutomationParameterValue"],
     #     },
@@ -10718,6 +10751,53 @@ module Aws::SSM
     # @param [Hash] params ({})
     def send_command(params = {}, options = {})
       req = build_request(:send_command, params)
+      req.send_request(options)
+    end
+
+    # Starts the workflow for just-in-time node access sessions.
+    #
+    # @option params [required, String] :reason
+    #   A brief description explaining why you are requesting access to the
+    #   node.
+    #
+    # @option params [required, Array<Types::Target>] :targets
+    #   The node you are requesting access to.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Key-value pairs of metadata you want to assign to the access request.
+    #
+    # @return [Types::StartAccessRequestResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartAccessRequestResponse#access_request_id #access_request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_access_request({
+    #     reason: "String1to256", # required
+    #     targets: [ # required
+    #       {
+    #         key: "TargetKey",
+    #         values: ["TargetValue"],
+    #       },
+    #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.access_request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartAccessRequest AWS API Documentation
+    #
+    # @overload start_access_request(params = {})
+    # @param [Hash] params ({})
+    def start_access_request(params = {}, options = {})
+      req = build_request(:start_access_request, params)
       req.send_request(options)
     end
 
@@ -12007,7 +12087,7 @@ module Aws::SSM
     #   resp.document_description.parameters[0].default_value #=> String
     #   resp.document_description.platform_types #=> Array
     #   resp.document_description.platform_types[0] #=> String, one of "Windows", "Linux", "MacOS"
-    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate", "CloudFormation", "ConformancePackTemplate", "QuickSetup"
+    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate", "CloudFormation", "ConformancePackTemplate", "QuickSetup", "ManualApprovalPolicy", "AutoApprovalPolicy"
     #   resp.document_description.schema_version #=> String
     #   resp.document_description.latest_version #=> String
     #   resp.document_description.default_version #=> String
@@ -12916,7 +12996,7 @@ module Aws::SSM
     #         ops_item_id: "String", # required
     #       },
     #     ],
-    #     status: "Open", # accepts Open, InProgress, Resolved, Pending, TimedOut, Cancelling, Cancelled, Failed, CompletedWithSuccess, CompletedWithFailure, Scheduled, RunbookInProgress, PendingChangeCalendarOverride, ChangeCalendarOverrideApproved, ChangeCalendarOverrideRejected, PendingApproval, Approved, Rejected, Closed
+    #     status: "Open", # accepts Open, InProgress, Resolved, Pending, TimedOut, Cancelling, Cancelled, Failed, CompletedWithSuccess, CompletedWithFailure, Scheduled, RunbookInProgress, PendingChangeCalendarOverride, ChangeCalendarOverrideApproved, ChangeCalendarOverrideRejected, PendingApproval, Approved, Revoked, Rejected, Closed
     #     ops_item_id: "OpsItemId", # required
     #     title: "OpsItemTitle",
     #     category: "OpsItemCategory",
@@ -13371,7 +13451,7 @@ module Aws::SSM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.192.0'
+      context[:gem_version] = '1.194.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

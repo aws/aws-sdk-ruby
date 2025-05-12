@@ -791,7 +791,7 @@ module Aws::IoTFleetHub
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iotfleethub'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

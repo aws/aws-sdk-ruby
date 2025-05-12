@@ -266,7 +266,7 @@ module Aws::SSMContacts
     CreateContactChannelRequest.add_member(:type, Shapes::ShapeRef.new(shape: ChannelType, required: true, location_name: "Type"))
     CreateContactChannelRequest.add_member(:delivery_address, Shapes::ShapeRef.new(shape: ContactChannelAddress, required: true, location_name: "DeliveryAddress"))
     CreateContactChannelRequest.add_member(:defer_activation, Shapes::ShapeRef.new(shape: DeferActivation, location_name: "DeferActivation"))
-    CreateContactChannelRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    CreateContactChannelRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
     CreateContactChannelRequest.struct_class = Types::CreateContactChannelRequest
 
     CreateContactChannelResult.add_member(:contact_channel_arn, Shapes::ShapeRef.new(shape: SsmContactsArn, required: true, location_name: "ContactChannelArn"))
@@ -277,7 +277,7 @@ module Aws::SSMContacts
     CreateContactRequest.add_member(:type, Shapes::ShapeRef.new(shape: ContactType, required: true, location_name: "Type"))
     CreateContactRequest.add_member(:plan, Shapes::ShapeRef.new(shape: Plan, required: true, location_name: "Plan"))
     CreateContactRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsList, location_name: "Tags"))
-    CreateContactRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    CreateContactRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
     CreateContactRequest.struct_class = Types::CreateContactRequest
 
     CreateContactResult.add_member(:contact_arn, Shapes::ShapeRef.new(shape: SsmContactsArn, required: true, location_name: "ContactArn"))
@@ -445,7 +445,7 @@ module Aws::SSMContacts
 
     ListContactChannelsRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: SsmContactsArn, required: true, location_name: "ContactId"))
     ListContactChannelsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListContactChannelsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListContactChannelsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     ListContactChannelsRequest.struct_class = Types::ListContactChannelsRequest
 
     ListContactChannelsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
@@ -453,7 +453,7 @@ module Aws::SSMContacts
     ListContactChannelsResult.struct_class = Types::ListContactChannelsResult
 
     ListContactsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListContactsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListContactsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     ListContactsRequest.add_member(:alias_prefix, Shapes::ShapeRef.new(shape: ContactAlias, location_name: "AliasPrefix"))
     ListContactsRequest.add_member(:type, Shapes::ShapeRef.new(shape: ContactType, location_name: "Type"))
     ListContactsRequest.struct_class = Types::ListContactsRequest
@@ -463,7 +463,7 @@ module Aws::SSMContacts
     ListContactsResult.struct_class = Types::ListContactsResult
 
     ListEngagementsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListEngagementsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListEngagementsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     ListEngagementsRequest.add_member(:incident_id, Shapes::ShapeRef.new(shape: IncidentId, location_name: "IncidentId"))
     ListEngagementsRequest.add_member(:time_range_value, Shapes::ShapeRef.new(shape: TimeRange, location_name: "TimeRangeValue"))
     ListEngagementsRequest.struct_class = Types::ListEngagementsRequest
@@ -474,7 +474,7 @@ module Aws::SSMContacts
 
     ListPageReceiptsRequest.add_member(:page_id, Shapes::ShapeRef.new(shape: SsmContactsArn, required: true, location_name: "PageId"))
     ListPageReceiptsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListPageReceiptsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListPageReceiptsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     ListPageReceiptsRequest.struct_class = Types::ListPageReceiptsRequest
 
     ListPageReceiptsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
@@ -491,7 +491,7 @@ module Aws::SSMContacts
 
     ListPagesByContactRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: SsmContactsArn, required: true, location_name: "ContactId"))
     ListPagesByContactRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListPagesByContactRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListPagesByContactRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     ListPagesByContactRequest.struct_class = Types::ListPagesByContactRequest
 
     ListPagesByContactResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
@@ -500,7 +500,7 @@ module Aws::SSMContacts
 
     ListPagesByEngagementRequest.add_member(:engagement_id, Shapes::ShapeRef.new(shape: SsmContactsArn, required: true, location_name: "EngagementId"))
     ListPagesByEngagementRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListPagesByEngagementRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListPagesByEngagementRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     ListPagesByEngagementRequest.struct_class = Types::ListPagesByEngagementRequest
 
     ListPagesByEngagementResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
@@ -515,7 +515,7 @@ module Aws::SSMContacts
     ListPreviewRotationShiftsRequest.add_member(:recurrence, Shapes::ShapeRef.new(shape: RecurrenceSettings, required: true, location_name: "Recurrence"))
     ListPreviewRotationShiftsRequest.add_member(:overrides, Shapes::ShapeRef.new(shape: OverrideList, location_name: "Overrides"))
     ListPreviewRotationShiftsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListPreviewRotationShiftsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListPreviewRotationShiftsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     ListPreviewRotationShiftsRequest.struct_class = Types::ListPreviewRotationShiftsRequest
 
     ListPreviewRotationShiftsResult.add_member(:rotation_shifts, Shapes::ShapeRef.new(shape: RotationShifts, location_name: "RotationShifts"))
@@ -526,7 +526,7 @@ module Aws::SSMContacts
     ListRotationOverridesRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "StartTime"))
     ListRotationOverridesRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "EndTime"))
     ListRotationOverridesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListRotationOverridesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListRotationOverridesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     ListRotationOverridesRequest.struct_class = Types::ListRotationOverridesRequest
 
     ListRotationOverridesResult.add_member(:rotation_overrides, Shapes::ShapeRef.new(shape: RotationOverrides, location_name: "RotationOverrides"))
@@ -537,7 +537,7 @@ module Aws::SSMContacts
     ListRotationShiftsRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
     ListRotationShiftsRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "EndTime"))
     ListRotationShiftsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListRotationShiftsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListRotationShiftsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     ListRotationShiftsRequest.struct_class = Types::ListRotationShiftsRequest
 
     ListRotationShiftsResult.add_member(:rotation_shifts, Shapes::ShapeRef.new(shape: RotationShifts, location_name: "RotationShifts"))
@@ -546,7 +546,7 @@ module Aws::SSMContacts
 
     ListRotationsRequest.add_member(:rotation_name_prefix, Shapes::ShapeRef.new(shape: RotationName, location_name: "RotationNamePrefix"))
     ListRotationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListRotationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListRotationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     ListRotationsRequest.struct_class = Types::ListRotationsRequest
 
     ListRotationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
@@ -605,14 +605,14 @@ module Aws::SSMContacts
     RecurrenceSettings.add_member(:monthly_settings, Shapes::ShapeRef.new(shape: MonthlySettings, location_name: "MonthlySettings"))
     RecurrenceSettings.add_member(:weekly_settings, Shapes::ShapeRef.new(shape: WeeklySettings, location_name: "WeeklySettings"))
     RecurrenceSettings.add_member(:daily_settings, Shapes::ShapeRef.new(shape: DailySettings, location_name: "DailySettings"))
-    RecurrenceSettings.add_member(:number_of_on_calls, Shapes::ShapeRef.new(shape: NumberOfOnCalls, required: true, location_name: "NumberOfOnCalls", metadata: {"box"=>true}))
+    RecurrenceSettings.add_member(:number_of_on_calls, Shapes::ShapeRef.new(shape: NumberOfOnCalls, required: true, location_name: "NumberOfOnCalls", metadata: {"box" => true}))
     RecurrenceSettings.add_member(:shift_coverages, Shapes::ShapeRef.new(shape: ShiftCoveragesMap, location_name: "ShiftCoverages"))
-    RecurrenceSettings.add_member(:recurrence_multiplier, Shapes::ShapeRef.new(shape: RecurrenceMultiplier, required: true, location_name: "RecurrenceMultiplier", metadata: {"box"=>true}))
+    RecurrenceSettings.add_member(:recurrence_multiplier, Shapes::ShapeRef.new(shape: RecurrenceMultiplier, required: true, location_name: "RecurrenceMultiplier", metadata: {"box" => true}))
     RecurrenceSettings.struct_class = Types::RecurrenceSettings
 
     ResolutionContact.add_member(:contact_arn, Shapes::ShapeRef.new(shape: SsmContactsArn, required: true, location_name: "ContactArn"))
     ResolutionContact.add_member(:type, Shapes::ShapeRef.new(shape: ContactType, required: true, location_name: "Type"))
-    ResolutionContact.add_member(:stage_index, Shapes::ShapeRef.new(shape: StageIndex, location_name: "StageIndex", metadata: {"box"=>true}))
+    ResolutionContact.add_member(:stage_index, Shapes::ShapeRef.new(shape: StageIndex, location_name: "StageIndex", metadata: {"box" => true}))
     ResolutionContact.struct_class = Types::ResolutionContact
 
     ResolutionList.member = Shapes::ShapeRef.new(shape: ResolutionContact)
@@ -691,7 +691,7 @@ module Aws::SSMContacts
     StartEngagementRequest.add_member(:public_subject, Shapes::ShapeRef.new(shape: PublicSubject, location_name: "PublicSubject"))
     StartEngagementRequest.add_member(:public_content, Shapes::ShapeRef.new(shape: PublicContent, location_name: "PublicContent"))
     StartEngagementRequest.add_member(:incident_id, Shapes::ShapeRef.new(shape: IncidentId, location_name: "IncidentId"))
-    StartEngagementRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    StartEngagementRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
     StartEngagementRequest.struct_class = Types::StartEngagementRequest
 
     StartEngagementResult.add_member(:engagement_arn, Shapes::ShapeRef.new(shape: SsmContactsArn, required: true, location_name: "EngagementArn"))

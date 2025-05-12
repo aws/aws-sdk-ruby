@@ -847,7 +847,7 @@ module Aws::ECR
     #   for the pull through cache rule. The following is the syntax to use
     #   for each supported upstream registry.
     #
-    #   * Amazon ECR (`ecr`) – `<accountId>.dkr.ecr.<region>.amazonaws.com`
+    #   * Amazon ECR (`ecr`) – `dkr.ecr.<region>.amazonaws.com`
     #
     #   * Amazon ECR Public (`ecr-public`) – `public.ecr.aws`
     #
@@ -1729,11 +1729,11 @@ module Aws::ECR
 
     # Returns metadata about the images in a repository.
     #
-    # <note markdown="1"> Starting with Docker version 1.9, the Docker client compresses image
+    # <note markdown="1"> Beginning with Docker version 1.9, the Docker client compresses image
     # layers before pushing them to a V2 Docker registry. The output of the
-    # `docker images` command shows the uncompressed image size. Therefore,
-    # Docker might return a larger image than the image shown in the Amazon
-    # Web Services Management Console.
+    # `docker images` command shows the uncompressed image size, so it may
+    # return a larger image size than the image sizes returned by
+    # DescribeImages.
     #
     #  </note>
     #
@@ -3749,7 +3749,7 @@ module Aws::ECR
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.99.0'
+      context[:gem_version] = '1.101.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

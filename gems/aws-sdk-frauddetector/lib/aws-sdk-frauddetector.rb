@@ -54,7 +54,7 @@ module Aws::FraudDetector
   autoload :EndpointProvider, 'aws-sdk-frauddetector/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-frauddetector/endpoints'
 
-  GEM_VERSION = '1.68.0'
+  GEM_VERSION = '1.69.0'
 
 end
 

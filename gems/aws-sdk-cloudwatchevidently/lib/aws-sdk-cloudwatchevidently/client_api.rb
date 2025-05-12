@@ -285,7 +285,7 @@ module Aws::CloudWatchEvidently
     CreateExperimentRequest.add_member(:online_ab_config, Shapes::ShapeRef.new(shape: OnlineAbConfig, location_name: "onlineAbConfig"))
     CreateExperimentRequest.add_member(:project, Shapes::ShapeRef.new(shape: ProjectRef, required: true, location: "uri", location_name: "project"))
     CreateExperimentRequest.add_member(:randomization_salt, Shapes::ShapeRef.new(shape: RandomizationSalt, location_name: "randomizationSalt"))
-    CreateExperimentRequest.add_member(:sampling_rate, Shapes::ShapeRef.new(shape: SplitWeight, location_name: "samplingRate", metadata: {"box"=>true}))
+    CreateExperimentRequest.add_member(:sampling_rate, Shapes::ShapeRef.new(shape: SplitWeight, location_name: "samplingRate", metadata: {"box" => true}))
     CreateExperimentRequest.add_member(:segment, Shapes::ShapeRef.new(shape: SegmentRef, location_name: "segment"))
     CreateExperimentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateExperimentRequest.add_member(:treatments, Shapes::ShapeRef.new(shape: TreatmentConfigList, required: true, location_name: "treatments"))
@@ -332,7 +332,7 @@ module Aws::CloudWatchEvidently
 
     CreateSegmentRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateSegmentRequest.add_member(:name, Shapes::ShapeRef.new(shape: SegmentName, required: true, location_name: "name"))
-    CreateSegmentRequest.add_member(:pattern, Shapes::ShapeRef.new(shape: SegmentPattern, required: true, location_name: "pattern", metadata: {"jsonvalue"=>true}))
+    CreateSegmentRequest.add_member(:pattern, Shapes::ShapeRef.new(shape: SegmentPattern, required: true, location_name: "pattern", metadata: {"jsonvalue" => true}))
     CreateSegmentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateSegmentRequest.struct_class = Types::CreateSegmentRequest
 
@@ -373,25 +373,25 @@ module Aws::CloudWatchEvidently
     EntityOverrideMap.value = Shapes::ShapeRef.new(shape: VariationName)
 
     EvaluateFeatureRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "entityId"))
-    EvaluateFeatureRequest.add_member(:evaluation_context, Shapes::ShapeRef.new(shape: JsonValue, location_name: "evaluationContext", metadata: {"jsonvalue"=>true}))
+    EvaluateFeatureRequest.add_member(:evaluation_context, Shapes::ShapeRef.new(shape: JsonValue, location_name: "evaluationContext", metadata: {"jsonvalue" => true}))
     EvaluateFeatureRequest.add_member(:feature, Shapes::ShapeRef.new(shape: FeatureName, required: true, location: "uri", location_name: "feature"))
     EvaluateFeatureRequest.add_member(:project, Shapes::ShapeRef.new(shape: ProjectRef, required: true, location: "uri", location_name: "project"))
     EvaluateFeatureRequest.struct_class = Types::EvaluateFeatureRequest
 
-    EvaluateFeatureResponse.add_member(:details, Shapes::ShapeRef.new(shape: JsonValue, location_name: "details", metadata: {"jsonvalue"=>true}))
+    EvaluateFeatureResponse.add_member(:details, Shapes::ShapeRef.new(shape: JsonValue, location_name: "details", metadata: {"jsonvalue" => true}))
     EvaluateFeatureResponse.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "reason"))
     EvaluateFeatureResponse.add_member(:value, Shapes::ShapeRef.new(shape: VariableValue, location_name: "value"))
     EvaluateFeatureResponse.add_member(:variation, Shapes::ShapeRef.new(shape: String, location_name: "variation"))
     EvaluateFeatureResponse.struct_class = Types::EvaluateFeatureResponse
 
     EvaluationRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "entityId"))
-    EvaluationRequest.add_member(:evaluation_context, Shapes::ShapeRef.new(shape: JsonValue, location_name: "evaluationContext", metadata: {"jsonvalue"=>true}))
+    EvaluationRequest.add_member(:evaluation_context, Shapes::ShapeRef.new(shape: JsonValue, location_name: "evaluationContext", metadata: {"jsonvalue" => true}))
     EvaluationRequest.add_member(:feature, Shapes::ShapeRef.new(shape: FeatureName, required: true, location_name: "feature"))
     EvaluationRequest.struct_class = Types::EvaluationRequest
 
     EvaluationRequestsList.member = Shapes::ShapeRef.new(shape: EvaluationRequest)
 
-    EvaluationResult.add_member(:details, Shapes::ShapeRef.new(shape: JsonValue, location_name: "details", metadata: {"jsonvalue"=>true}))
+    EvaluationResult.add_member(:details, Shapes::ShapeRef.new(shape: JsonValue, location_name: "details", metadata: {"jsonvalue" => true}))
     EvaluationResult.add_member(:entity_id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "entityId"))
     EvaluationResult.add_member(:feature, Shapes::ShapeRef.new(shape: FeatureName, required: true, location_name: "feature"))
     EvaluationResult.add_member(:project, Shapes::ShapeRef.new(shape: Arn, location_name: "project"))
@@ -408,7 +408,7 @@ module Aws::CloudWatchEvidently
 
     EvaluationRulesList.member = Shapes::ShapeRef.new(shape: EvaluationRule)
 
-    Event.add_member(:data, Shapes::ShapeRef.new(shape: JsonValue, required: true, location_name: "data", metadata: {"jsonvalue"=>true}))
+    Event.add_member(:data, Shapes::ShapeRef.new(shape: JsonValue, required: true, location_name: "data", metadata: {"jsonvalue" => true}))
     Event.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "timestamp"))
     Event.add_member(:type, Shapes::ShapeRef.new(shape: EventType, required: true, location_name: "type"))
     Event.struct_class = Types::Event
@@ -441,7 +441,7 @@ module Aws::CloudWatchEvidently
 
     ExperimentList.member = Shapes::ShapeRef.new(shape: Experiment)
 
-    ExperimentReport.add_member(:content, Shapes::ShapeRef.new(shape: JsonValue, location_name: "content", metadata: {"jsonvalue"=>true}))
+    ExperimentReport.add_member(:content, Shapes::ShapeRef.new(shape: JsonValue, location_name: "content", metadata: {"jsonvalue" => true}))
     ExperimentReport.add_member(:metric_name, Shapes::ShapeRef.new(shape: CwDimensionSafeName, location_name: "metricName"))
     ExperimentReport.add_member(:report_name, Shapes::ShapeRef.new(shape: ExperimentReportName, location_name: "reportName"))
     ExperimentReport.add_member(:treatment_name, Shapes::ShapeRef.new(shape: TreatmentName, location_name: "treatmentName"))
@@ -654,14 +654,14 @@ module Aws::CloudWatchEvidently
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
     MetricDefinition.add_member(:entity_id_key, Shapes::ShapeRef.new(shape: JsonPath, location_name: "entityIdKey"))
-    MetricDefinition.add_member(:event_pattern, Shapes::ShapeRef.new(shape: JsonValue, location_name: "eventPattern", metadata: {"jsonvalue"=>true}))
+    MetricDefinition.add_member(:event_pattern, Shapes::ShapeRef.new(shape: JsonValue, location_name: "eventPattern", metadata: {"jsonvalue" => true}))
     MetricDefinition.add_member(:name, Shapes::ShapeRef.new(shape: CwDimensionSafeName, location_name: "name"))
     MetricDefinition.add_member(:unit_label, Shapes::ShapeRef.new(shape: MetricUnitLabel, location_name: "unitLabel"))
     MetricDefinition.add_member(:value_key, Shapes::ShapeRef.new(shape: JsonPath, location_name: "valueKey"))
     MetricDefinition.struct_class = Types::MetricDefinition
 
     MetricDefinitionConfig.add_member(:entity_id_key, Shapes::ShapeRef.new(shape: JsonPath, required: true, location_name: "entityIdKey"))
-    MetricDefinitionConfig.add_member(:event_pattern, Shapes::ShapeRef.new(shape: MetricDefinitionConfigEventPatternString, location_name: "eventPattern", metadata: {"jsonvalue"=>true}))
+    MetricDefinitionConfig.add_member(:event_pattern, Shapes::ShapeRef.new(shape: MetricDefinitionConfigEventPatternString, location_name: "eventPattern", metadata: {"jsonvalue" => true}))
     MetricDefinitionConfig.add_member(:name, Shapes::ShapeRef.new(shape: CwDimensionSafeName, required: true, location_name: "name"))
     MetricDefinitionConfig.add_member(:unit_label, Shapes::ShapeRef.new(shape: MetricUnitLabel, location_name: "unitLabel"))
     MetricDefinitionConfig.add_member(:value_key, Shapes::ShapeRef.new(shape: JsonPath, required: true, location_name: "valueKey"))
@@ -814,7 +814,7 @@ module Aws::CloudWatchEvidently
     Segment.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastUpdatedTime"))
     Segment.add_member(:launch_count, Shapes::ShapeRef.new(shape: Long, location_name: "launchCount"))
     Segment.add_member(:name, Shapes::ShapeRef.new(shape: SegmentName, required: true, location_name: "name"))
-    Segment.add_member(:pattern, Shapes::ShapeRef.new(shape: SegmentPattern, required: true, location_name: "pattern", metadata: {"jsonvalue"=>true}))
+    Segment.add_member(:pattern, Shapes::ShapeRef.new(shape: SegmentPattern, required: true, location_name: "pattern", metadata: {"jsonvalue" => true}))
     Segment.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     Segment.struct_class = Types::Segment
 
@@ -881,8 +881,8 @@ module Aws::CloudWatchEvidently
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
-    TestSegmentPatternRequest.add_member(:pattern, Shapes::ShapeRef.new(shape: SegmentPattern, required: true, location_name: "pattern", metadata: {"jsonvalue"=>true}))
-    TestSegmentPatternRequest.add_member(:payload, Shapes::ShapeRef.new(shape: JsonValue, required: true, location_name: "payload", metadata: {"jsonvalue"=>true}))
+    TestSegmentPatternRequest.add_member(:pattern, Shapes::ShapeRef.new(shape: SegmentPattern, required: true, location_name: "pattern", metadata: {"jsonvalue" => true}))
+    TestSegmentPatternRequest.add_member(:payload, Shapes::ShapeRef.new(shape: JsonValue, required: true, location_name: "payload", metadata: {"jsonvalue" => true}))
     TestSegmentPatternRequest.struct_class = Types::TestSegmentPatternRequest
 
     TestSegmentPatternResponse.add_member(:match, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "match"))
@@ -928,7 +928,7 @@ module Aws::CloudWatchEvidently
     UpdateExperimentRequest.add_member(:project, Shapes::ShapeRef.new(shape: ProjectRef, required: true, location: "uri", location_name: "project"))
     UpdateExperimentRequest.add_member(:randomization_salt, Shapes::ShapeRef.new(shape: RandomizationSalt, location_name: "randomizationSalt"))
     UpdateExperimentRequest.add_member(:remove_segment, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "removeSegment"))
-    UpdateExperimentRequest.add_member(:sampling_rate, Shapes::ShapeRef.new(shape: SplitWeight, location_name: "samplingRate", metadata: {"box"=>true}))
+    UpdateExperimentRequest.add_member(:sampling_rate, Shapes::ShapeRef.new(shape: SplitWeight, location_name: "samplingRate", metadata: {"box" => true}))
     UpdateExperimentRequest.add_member(:segment, Shapes::ShapeRef.new(shape: SegmentRef, location_name: "segment"))
     UpdateExperimentRequest.add_member(:treatments, Shapes::ShapeRef.new(shape: TreatmentConfigList, location_name: "treatments"))
     UpdateExperimentRequest.struct_class = Types::UpdateExperimentRequest

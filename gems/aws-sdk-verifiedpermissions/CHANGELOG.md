@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2025-05-01)
+------------------
+
+* Feature - Amazon Verified Permissions / Features : Adds support for tagging policy stores.
+
 1.43.0 (2025-04-11)
 ------------------
 

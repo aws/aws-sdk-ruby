@@ -150,6 +150,7 @@ module Aws
                            },
                          ],
                          ?performed_by: {
+                           custom_entity: ::String?,
                            user_arn: ::String?
                          },
                          template_id: ::String
@@ -314,6 +315,7 @@ module Aws
                                  },
                                  domain_id: ::String,
                                  ?performed_by: {
+                                   custom_entity: ::String?,
                                    user_arn: ::String?
                                  },
                                  type: ("Contact" | "Comment" | "File" | "Sla")
@@ -792,6 +794,7 @@ module Aws
                            },
                          ],
                          ?performed_by: {
+                           custom_entity: ::String?,
                            user_arn: ::String?
                          }
                        ) -> _UpdateCaseResponseSuccess

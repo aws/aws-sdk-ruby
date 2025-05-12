@@ -765,6 +765,7 @@ module Aws::CodePipeline
     #                 {
     #                   name: "EnvironmentVariableName", # required
     #                   value: "EnvironmentVariableValue", # required
+    #                   type: "PLAINTEXT", # accepts PLAINTEXT, SECRETS_MANAGER
     #                 },
     #               ],
     #             },
@@ -965,6 +966,7 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].environment_variables #=> Array
     #   resp.pipeline.stages[0].actions[0].environment_variables[0].name #=> String
     #   resp.pipeline.stages[0].actions[0].environment_variables[0].value #=> String
+    #   resp.pipeline.stages[0].actions[0].environment_variables[0].type #=> String, one of "PLAINTEXT", "SECRETS_MANAGER"
     #   resp.pipeline.stages[0].on_failure.result #=> String, one of "ROLLBACK", "FAIL", "RETRY", "SKIP"
     #   resp.pipeline.stages[0].on_failure.retry_configuration.retry_mode #=> String, one of "FAILED_ACTIONS", "ALL_ACTIONS"
     #   resp.pipeline.stages[0].on_failure.conditions #=> Array
@@ -1480,6 +1482,7 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].environment_variables #=> Array
     #   resp.pipeline.stages[0].actions[0].environment_variables[0].name #=> String
     #   resp.pipeline.stages[0].actions[0].environment_variables[0].value #=> String
+    #   resp.pipeline.stages[0].actions[0].environment_variables[0].type #=> String, one of "PLAINTEXT", "SECRETS_MANAGER"
     #   resp.pipeline.stages[0].on_failure.result #=> String, one of "ROLLBACK", "FAIL", "RETRY", "SKIP"
     #   resp.pipeline.stages[0].on_failure.retry_configuration.retry_mode #=> String, one of "FAILED_ACTIONS", "ALL_ACTIONS"
     #   resp.pipeline.stages[0].on_failure.conditions #=> Array
@@ -3385,6 +3388,7 @@ module Aws::CodePipeline
     #                 {
     #                   name: "EnvironmentVariableName", # required
     #                   value: "EnvironmentVariableValue", # required
+    #                   type: "PLAINTEXT", # accepts PLAINTEXT, SECRETS_MANAGER
     #                 },
     #               ],
     #             },
@@ -3579,6 +3583,7 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].environment_variables #=> Array
     #   resp.pipeline.stages[0].actions[0].environment_variables[0].name #=> String
     #   resp.pipeline.stages[0].actions[0].environment_variables[0].value #=> String
+    #   resp.pipeline.stages[0].actions[0].environment_variables[0].type #=> String, one of "PLAINTEXT", "SECRETS_MANAGER"
     #   resp.pipeline.stages[0].on_failure.result #=> String, one of "ROLLBACK", "FAIL", "RETRY", "SKIP"
     #   resp.pipeline.stages[0].on_failure.retry_configuration.retry_mode #=> String, one of "FAILED_ACTIONS", "ALL_ACTIONS"
     #   resp.pipeline.stages[0].on_failure.conditions #=> Array
@@ -3694,7 +3699,7 @@ module Aws::CodePipeline
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.96.0'
+      context[:gem_version] = '1.98.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1152,7 +1152,7 @@ module Aws::DevOpsGuru
     StackNames.member = Shapes::ShapeRef.new(shape: StackName)
 
     StartCostEstimationRequest.add_member(:resource_collection, Shapes::ShapeRef.new(shape: CostEstimationResourceCollectionFilter, required: true, location_name: "ResourceCollection"))
-    StartCostEstimationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    StartCostEstimationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     StartCostEstimationRequest.struct_class = Types::StartCostEstimationRequest
 
     StartCostEstimationResponse.struct_class = Types::StartCostEstimationResponse

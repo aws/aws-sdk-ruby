@@ -49,12 +49,13 @@ module Aws::AppConfig
   end
   autoload :Client, 'aws-sdk-appconfig/client'
   autoload :Errors, 'aws-sdk-appconfig/errors'
+  autoload :Waiters, 'aws-sdk-appconfig/waiters'
   autoload :Resource, 'aws-sdk-appconfig/resource'
   autoload :EndpointParameters, 'aws-sdk-appconfig/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-appconfig/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-appconfig/endpoints'
 
-  GEM_VERSION = '1.64.0'
+  GEM_VERSION = '1.65.0'
 
 end
 

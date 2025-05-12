@@ -319,9 +319,11 @@ module Aws::VerifiedPermissions
     #   @return [String]
     #
     # @!attribute [rw] entities
-    #   Specifies the list of resources and principals and their associated
-    #   attributes that Verified Permissions can examine when evaluating the
-    #   policies.
+    #   (Optional) Specifies the list of resources and principals and their
+    #   associated attributes that Verified Permissions can examine when
+    #   evaluating the policies. These additional entities and their
+    #   attributes can be referenced and checked by conditional elements in
+    #   the policies in the specified policy store.
     #
     #   <note markdown="1"> You can include only principal and resource entities in this
     #   parameter; you can't include actions. You must specify actions in
@@ -460,8 +462,11 @@ module Aws::VerifiedPermissions
     #   @return [String]
     #
     # @!attribute [rw] entities
-    #   Specifies the list of resources and their associated attributes that
-    #   Verified Permissions can examine when evaluating the policies.
+    #   (Optional) Specifies the list of resources and their associated
+    #   attributes that Verified Permissions can examine when evaluating the
+    #   policies. These additional entities and their attributes can be
+    #   referenced and checked by conditional elements in the policies in
+    #   the specified policy store.
     #
     #   You can't include principals in this parameter, only resource and
     #   action entities. This parameter can't include any entities of a
@@ -1307,13 +1312,18 @@ module Aws::VerifiedPermissions
     #   The default state is `DISABLED`.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The list of key-value pairs to associate with the policy store.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/CreatePolicyStoreInput AWS API Documentation
     #
     class CreatePolicyStoreInput < Struct.new(
       :client_token,
       :validation_settings,
       :description,
-      :deletion_protection)
+      :deletion_protection,
+      :tags)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -1878,10 +1888,23 @@ module Aws::VerifiedPermissions
     #   about.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Specifies whether to return the tags that are attached to the policy
+    #   store. If this parameter is included in the API call, the tags are
+    #   returned, otherwise they are not returned.
+    #
+    #   <note markdown="1"> If this parameter is included in the API call but there are no tags
+    #   attached to the policy store, the `tags` response parameter is
+    #   omitted from the response.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/GetPolicyStoreInput AWS API Documentation
     #
     class GetPolicyStoreInput < Struct.new(
-      :policy_store_id)
+      :policy_store_id,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1918,6 +1941,20 @@ module Aws::VerifiedPermissions
     #   The default state is `DISABLED`.
     #   @return [String]
     #
+    # @!attribute [rw] cedar_version
+    #   The version of the Cedar language used with policies, policy
+    #   templates, and schemas in this policy store. For more information,
+    #   see [Amazon Verified Permissions upgrade to Cedar v4 FAQ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/userguide/cedar4-faq.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of tags associated with the policy store.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/GetPolicyStoreOutput AWS API Documentation
     #
     class GetPolicyStoreOutput < Struct.new(
@@ -1927,7 +1964,9 @@ module Aws::VerifiedPermissions
       :created_date,
       :last_updated_date,
       :description,
-      :deletion_protection)
+      :deletion_protection,
+      :cedar_version,
+      :tags)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -2267,9 +2306,11 @@ module Aws::VerifiedPermissions
     #   @return [Types::ContextDefinition]
     #
     # @!attribute [rw] entities
-    #   Specifies the list of resources and principals and their associated
-    #   attributes that Verified Permissions can examine when evaluating the
-    #   policies.
+    #   (Optional) Specifies the list of resources and principals and their
+    #   associated attributes that Verified Permissions can examine when
+    #   evaluating the policies. These additional entities and their
+    #   attributes can be referenced and checked by conditional elements in
+    #   the policies in the specified policy store.
     #
     #   <note markdown="1"> You can include only principal and resource entities in this
     #   parameter; you can't include actions. You must specify actions in
@@ -2365,8 +2406,11 @@ module Aws::VerifiedPermissions
     #   @return [Types::ContextDefinition]
     #
     # @!attribute [rw] entities
-    #   Specifies the list of resources and their associated attributes that
-    #   Verified Permissions can examine when evaluating the policies.
+    #   (Optional) Specifies the list of resources and their associated
+    #   attributes that Verified Permissions can examine when evaluating the
+    #   policies. These additional entities and their attributes can be
+    #   referenced and checked by conditional elements in the policies in
+    #   the specified policy store.
     #
     #   You can't include principals in this parameter, only resource and
     #   action entities. This parameter can't include any entities of a
@@ -2677,6 +2721,30 @@ module Aws::VerifiedPermissions
     class ListPolicyTemplatesOutput < Struct.new(
       :next_token,
       :policy_templates)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource for which you want to view tags.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/ListTagsForResourceInput AWS API Documentation
+    #
+    class ListTagsForResourceInput < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The list of tags associated with the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/ListTagsForResourceOutput AWS API Documentation
+    #
+    class ListTagsForResourceOutput < Struct.new(
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3814,6 +3882,27 @@ module Aws::VerifiedPermissions
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource that you're adding tags to.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of key-value pairs to associate with the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/TagResourceInput AWS API Documentation
+    #
+    class TagResourceInput < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/TagResourceOutput AWS API Documentation
+    #
+    class TagResourceOutput < Aws::EmptyStructure; end
+
     # Contains information about a policy created by instantiating a policy
     # template.
     #
@@ -3935,6 +4024,46 @@ module Aws::VerifiedPermissions
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # No more tags be added because the limit (50) has been reached. To add
+    # new tags, use `UntagResource` to remove existing tags.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   An Amazon Resource Name (ARN) uniquely identifies an AWS resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Struct.new(
+      :message,
+      :resource_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource from which you are removing tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The list of tag keys to remove from the resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/UntagResourceInput AWS API Documentation
+    #
+    class UntagResourceInput < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/UntagResourceOutput AWS API Documentation
+    #
+    class UntagResourceOutput < Aws::EmptyStructure; end
 
     # The user group entities from an Amazon Cognito user pool identity
     # source.

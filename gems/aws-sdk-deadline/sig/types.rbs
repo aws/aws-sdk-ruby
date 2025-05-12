@@ -494,6 +494,7 @@ module Aws::Deadline
       attr_accessor fleet_id: ::String
       attr_accessor host_properties: Types::HostPropertiesRequest
       attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -506,6 +507,7 @@ module Aws::Deadline
       attr_accessor mode: ("NO_SCALING" | "EVENT_BASED_AUTO_SCALING")
       attr_accessor worker_capabilities: Types::CustomerManagedWorkerCapabilities
       attr_accessor storage_profile_id: ::String
+      attr_accessor tag_propagation_mode: ("NO_PROPAGATION" | "PROPAGATE_TAGS_TO_WORKERS_AT_LAUNCH")
       SENSITIVE: []
     end
 

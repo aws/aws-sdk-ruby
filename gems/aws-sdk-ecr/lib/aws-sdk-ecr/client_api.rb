@@ -665,7 +665,7 @@ module Aws::ECR
 
     GetAuthorizationTokenRegistryIdList.member = Shapes::ShapeRef.new(shape: RegistryId)
 
-    GetAuthorizationTokenRequest.add_member(:registry_ids, Shapes::ShapeRef.new(shape: GetAuthorizationTokenRegistryIdList, deprecated: true, location_name: "registryIds", metadata: {"deprecatedMessage"=>"This field is deprecated. The returned authorization token can be used to access any Amazon ECR registry that the IAM principal has access to, specifying a registry ID doesn't change the permissions scope of the authorization token."}))
+    GetAuthorizationTokenRequest.add_member(:registry_ids, Shapes::ShapeRef.new(shape: GetAuthorizationTokenRegistryIdList, deprecated: true, location_name: "registryIds", metadata: {"deprecatedMessage" => "This field is deprecated. The returned authorization token can be used to access any Amazon ECR registry that the IAM principal has access to, specifying a registry ID doesn't change the permissions scope of the authorization token."}))
     GetAuthorizationTokenRequest.struct_class = Types::GetAuthorizationTokenRequest
 
     GetAuthorizationTokenResponse.add_member(:authorization_data, Shapes::ShapeRef.new(shape: AuthorizationDataList, location_name: "authorizationData"))

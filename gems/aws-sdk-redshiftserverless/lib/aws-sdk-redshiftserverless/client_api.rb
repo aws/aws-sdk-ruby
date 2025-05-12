@@ -349,7 +349,7 @@ module Aws::RedshiftServerless
     CreateNamespaceResponse.struct_class = Types::CreateNamespaceResponse
 
     CreateReservationRequest.add_member(:capacity, Shapes::ShapeRef.new(shape: Capacity, required: true, location_name: "capacity"))
-    CreateReservationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateReservationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateReservationRequest.add_member(:offering_id, Shapes::ShapeRef.new(shape: CreateReservationRequestOfferingIdString, required: true, location_name: "offeringId"))
     CreateReservationRequest.struct_class = Types::CreateReservationRequest
 

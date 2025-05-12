@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.226.0 (2025-04-29)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-ssmguiconnect` gem.
+
 3.225.0 (2025-03-05)
 ------------------
 

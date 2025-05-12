@@ -663,6 +663,12 @@ module Aws::PinpointSMSVoiceV2
     # send information about that event to an event destination, or send
     # notifications to endpoints that are subscribed to an Amazon SNS topic.
     #
+    # You can only create one event destination at a time. You must provide
+    # a value for a single event destination using either
+    # `CloudWatchLogsDestination`, `KinesisFirehoseDestination` or
+    # `SnsDestination`. If an event destination isn't provided then an
+    # exception is returned.
+    #
     # Each configuration set can contain between 0 and 5 event destinations.
     # Each event destination can contain a reference to a single
     # destination, such as a CloudWatch or Firehose destination.
@@ -3539,7 +3545,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.protect_configuration_id #=> String
     #   resp.number_capability #=> String, one of "SMS", "VOICE", "MMS"
     #   resp.country_rule_set #=> Hash
-    #   resp.country_rule_set["IsoCountryCode"].protect_status #=> String, one of "ALLOW", "BLOCK"
+    #   resp.country_rule_set["IsoCountryCode"].protect_status #=> String, one of "ALLOW", "BLOCK", "MONITOR", "FILTER"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/GetProtectConfigurationCountryRuleSet AWS API Documentation
     #
@@ -3967,7 +3973,7 @@ module Aws::PinpointSMSVoiceV2
       req.send_request(options)
     end
 
-    # Create or update a RuleSetNumberOverride and associate it with a
+    # Create or update a phone number rule override and associate it with a
     # protect configuration.
     #
     # @option params [String] :client_token
@@ -4263,9 +4269,9 @@ module Aws::PinpointSMSVoiceV2
     #   or region.
     #
     # @option params [required, String] :message_type
-    #   The type of message. Valid values are TRANSACTIONAL for messages that
-    #   are critical or time-sensitive and PROMOTIONAL for messages that
-    #   aren't critical or time-sensitive.
+    #   The type of message. Valid values are `TRANSACTIONAL` for messages
+    #   that are critical or time-sensitive and `PROMOTIONAL` for messages
+    #   that aren't critical or time-sensitive.
     #
     # @option params [required, Array<String>] :number_capabilities
     #   Indicates if the phone number will be used for text messages, voice
@@ -4273,6 +4279,9 @@ module Aws::PinpointSMSVoiceV2
     #
     # @option params [required, String] :number_type
     #   The type of phone number to request.
+    #
+    #   When you request a `SIMULATOR` phone number, you must set
+    #   **MessageType** as `TRANSACTIONAL`.
     #
     # @option params [String] :opt_out_list_name
     #   The name of the OptOutList to associate with the phone number. You can
@@ -4562,17 +4571,20 @@ module Aws::PinpointSMSVoiceV2
     # @option params [Array<String>] :media_urls
     #   An array of URLs to each media file to send.
     #
-    #   The media files have to be stored in a publicly available S3 bucket.
-    #   Supported media file formats are listed in [MMS file types, size and
-    #   character limits][1]. For more information on creating an S3 bucket
-    #   and managing objects, see [Creating a bucket][2] and [Uploading
-    #   objects][3] in the S3 user guide.
+    #   The media files have to be stored in an S3 bucket. Supported media
+    #   file formats are listed in [MMS file types, size and character
+    #   limits][1]. For more information on creating an S3 bucket and managing
+    #   objects, see [Creating a bucket][2], [Uploading objects][3] in the
+    #   *Amazon S3 User Guide*, and [Setting up an Amazon S3 bucket for MMS
+    #   files][4] in the *Amazon Web Services End User Messaging SMS User
+    #   Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sms-voice/latest/userguide/mms-limitations-character.html
     #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html
     #   [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html
+    #   [4]: https://docs.aws.amazon.com/sms-voice/latest/userguide/send-mms-message.html#send-mms-message-bucket
     #
     # @option params [String] :configuration_set_name
     #   The name of the configuration set to use. This can be either the
@@ -5181,10 +5193,9 @@ module Aws::PinpointSMSVoiceV2
 
     # Adds or overwrites only the specified tags for the specified resource.
     # When you specify an existing tag key, the value is overwritten with
-    # the new value. Each resource can have a maximum of 50 tags. Each tag
-    # consists of a key and an optional value. Tag keys must be unique per
-    # resource. For more information about tags, see [Tags ][1] in the *AWS
-    # End User Messaging SMS User Guide*.
+    # the new value. Each tag consists of a key and an optional value. Tag
+    # keys must be unique per resource. For more information about tags, see
+    # [Tags ][1] in the *AWS End User Messaging SMS User Guide*.
     #
     #
     #
@@ -5583,10 +5594,10 @@ module Aws::PinpointSMSVoiceV2
       req.send_request(options)
     end
 
-    # Update a country rule set to `ALLOW` or `BLOCK` messages to be sent to
-    # the specified destination counties. You can update one or multiple
-    # countries at a time. The updates are only applied to the specified
-    # NumberCapability type.
+    # Update a country rule set to `ALLOW`, `BLOCK`, `MONITOR`, or `FILTER`
+    # messages to be sent to the specified destination counties. You can
+    # update one or multiple countries at a time. The updates are only
+    # applied to the specified NumberCapability type.
     #
     # @option params [required, String] :protect_configuration_id
     #   The unique identifier for the protect configuration.
@@ -5600,6 +5611,11 @@ module Aws::PinpointSMSVoiceV2
     #   two-letter ISO country code. For a list of supported ISO country
     #   codes, see [Supported countries and regions (SMS channel)][1] in the
     #   AWS End User Messaging SMS User Guide.
+    #
+    #   For example, to set the United States as allowed and Canada as
+    #   blocked, the `CountryRuleSetUpdates` would be formatted as:
+    #   `"CountryRuleSetUpdates": { "US" : { "ProtectStatus": "ALLOW" } "CA" :
+    #   { "ProtectStatus": "BLOCK" } }`
     #
     #
     #
@@ -5619,7 +5635,7 @@ module Aws::PinpointSMSVoiceV2
     #     number_capability: "SMS", # required, accepts SMS, VOICE, MMS
     #     country_rule_set_updates: { # required
     #       "IsoCountryCode" => {
-    #         protect_status: "ALLOW", # required, accepts ALLOW, BLOCK
+    #         protect_status: "ALLOW", # required, accepts ALLOW, BLOCK, MONITOR, FILTER
     #       },
     #     },
     #   })
@@ -5630,7 +5646,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.protect_configuration_id #=> String
     #   resp.number_capability #=> String, one of "SMS", "VOICE", "MMS"
     #   resp.country_rule_set #=> Hash
-    #   resp.country_rule_set["IsoCountryCode"].protect_status #=> String, one of "ALLOW", "BLOCK"
+    #   resp.country_rule_set["IsoCountryCode"].protect_status #=> String, one of "ALLOW", "BLOCK", "MONITOR", "FILTER"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/UpdateProtectConfigurationCountryRuleSet AWS API Documentation
     #
@@ -5755,7 +5771,7 @@ module Aws::PinpointSMSVoiceV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pinpointsmsvoicev2'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

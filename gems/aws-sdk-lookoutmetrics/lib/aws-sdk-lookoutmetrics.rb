@@ -54,7 +54,7 @@ module Aws::LookoutMetrics
   autoload :EndpointProvider, 'aws-sdk-lookoutmetrics/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-lookoutmetrics/endpoints'
 
-  GEM_VERSION = '1.51.0'
+  GEM_VERSION = '1.52.0'
 
 end
 

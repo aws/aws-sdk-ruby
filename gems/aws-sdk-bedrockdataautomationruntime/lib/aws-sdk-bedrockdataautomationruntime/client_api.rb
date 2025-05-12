@@ -101,7 +101,7 @@ module Aws::BedrockDataAutomationRuntime
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
-    InvokeDataAutomationAsyncRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    InvokeDataAutomationAsyncRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     InvokeDataAutomationAsyncRequest.add_member(:input_configuration, Shapes::ShapeRef.new(shape: InputConfiguration, required: true, location_name: "inputConfiguration"))
     InvokeDataAutomationAsyncRequest.add_member(:output_configuration, Shapes::ShapeRef.new(shape: OutputConfiguration, required: true, location_name: "outputConfiguration"))
     InvokeDataAutomationAsyncRequest.add_member(:data_automation_configuration, Shapes::ShapeRef.new(shape: DataAutomationConfiguration, location_name: "dataAutomationConfiguration"))

@@ -807,7 +807,7 @@ module Aws::IVSRealTime
     StageSummaryList.member = Shapes::ShapeRef.new(shape: StageSummary)
 
     StartCompositionRequest.add_member(:stage_arn, Shapes::ShapeRef.new(shape: StageArn, required: true, location_name: "stageArn"))
-    StartCompositionRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: CompositionClientToken, location_name: "idempotencyToken", metadata: {"idempotencyToken"=>true}))
+    StartCompositionRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: CompositionClientToken, location_name: "idempotencyToken", metadata: {"idempotencyToken" => true}))
     StartCompositionRequest.add_member(:layout, Shapes::ShapeRef.new(shape: LayoutConfiguration, location_name: "layout"))
     StartCompositionRequest.add_member(:destinations, Shapes::ShapeRef.new(shape: DestinationConfigurationList, required: true, location_name: "destinations"))
     StartCompositionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))

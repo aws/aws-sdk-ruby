@@ -178,7 +178,7 @@ module Aws::CloudWatchLogs
       attr_accessor log_group_name: ::String
       attr_accessor kms_key_id: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS")
+      attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY")
       SENSITIVE: []
     end
 
@@ -477,7 +477,7 @@ module Aws::CloudWatchLogs
       attr_accessor next_token: ::String
       attr_accessor limit: ::Integer
       attr_accessor include_linked_accounts: bool
-      attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS")
+      attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY")
       SENSITIVE: []
     end
 
@@ -998,7 +998,7 @@ module Aws::CloudWatchLogs
       attr_accessor kms_key_id: ::String
       attr_accessor data_protection_status: ("ACTIVATED" | "DELETED" | "ARCHIVED" | "DISABLED")
       attr_accessor inherited_properties: ::Array[("ACCOUNT_DATA_PROTECTION")]
-      attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS")
+      attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY")
       attr_accessor log_group_arn: ::String
       SENSITIVE: []
     end

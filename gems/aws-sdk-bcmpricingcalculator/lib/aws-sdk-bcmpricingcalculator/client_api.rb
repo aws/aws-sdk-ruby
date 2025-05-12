@@ -281,7 +281,7 @@ module Aws::BCMPricingCalculator
 
     BatchCreateBillScenarioCommitmentModificationRequest.add_member(:bill_scenario_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "billScenarioId"))
     BatchCreateBillScenarioCommitmentModificationRequest.add_member(:commitment_modifications, Shapes::ShapeRef.new(shape: BatchCreateBillScenarioCommitmentModificationEntries, required: true, location_name: "commitmentModifications"))
-    BatchCreateBillScenarioCommitmentModificationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    BatchCreateBillScenarioCommitmentModificationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     BatchCreateBillScenarioCommitmentModificationRequest.struct_class = Types::BatchCreateBillScenarioCommitmentModificationRequest
 
     BatchCreateBillScenarioCommitmentModificationResponse.add_member(:items, Shapes::ShapeRef.new(shape: BatchCreateBillScenarioCommitmentModificationItems, location_name: "items"))
@@ -325,7 +325,7 @@ module Aws::BCMPricingCalculator
 
     BatchCreateBillScenarioUsageModificationRequest.add_member(:bill_scenario_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "billScenarioId"))
     BatchCreateBillScenarioUsageModificationRequest.add_member(:usage_modifications, Shapes::ShapeRef.new(shape: BatchCreateBillScenarioUsageModificationEntries, required: true, location_name: "usageModifications"))
-    BatchCreateBillScenarioUsageModificationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    BatchCreateBillScenarioUsageModificationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     BatchCreateBillScenarioUsageModificationRequest.struct_class = Types::BatchCreateBillScenarioUsageModificationRequest
 
     BatchCreateBillScenarioUsageModificationResponse.add_member(:items, Shapes::ShapeRef.new(shape: BatchCreateBillScenarioUsageModificationItems, location_name: "items"))
@@ -370,7 +370,7 @@ module Aws::BCMPricingCalculator
 
     BatchCreateWorkloadEstimateUsageRequest.add_member(:workload_estimate_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "workloadEstimateId"))
     BatchCreateWorkloadEstimateUsageRequest.add_member(:usage, Shapes::ShapeRef.new(shape: BatchCreateWorkloadEstimateUsageEntries, required: true, location_name: "usage"))
-    BatchCreateWorkloadEstimateUsageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    BatchCreateWorkloadEstimateUsageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     BatchCreateWorkloadEstimateUsageRequest.struct_class = Types::BatchCreateWorkloadEstimateUsageRequest
 
     BatchCreateWorkloadEstimateUsageResponse.add_member(:items, Shapes::ShapeRef.new(shape: BatchCreateWorkloadEstimateUsageItems, location_name: "items"))
@@ -622,7 +622,7 @@ module Aws::BCMPricingCalculator
 
     CreateBillEstimateRequest.add_member(:bill_scenario_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "billScenarioId"))
     CreateBillEstimateRequest.add_member(:name, Shapes::ShapeRef.new(shape: BillEstimateName, required: true, location_name: "name"))
-    CreateBillEstimateRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateBillEstimateRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateBillEstimateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateBillEstimateRequest.struct_class = Types::CreateBillEstimateRequest
 
@@ -637,7 +637,7 @@ module Aws::BCMPricingCalculator
     CreateBillEstimateResponse.struct_class = Types::CreateBillEstimateResponse
 
     CreateBillScenarioRequest.add_member(:name, Shapes::ShapeRef.new(shape: BillScenarioName, required: true, location_name: "name"))
-    CreateBillScenarioRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateBillScenarioRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateBillScenarioRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateBillScenarioRequest.struct_class = Types::CreateBillScenarioRequest
 
@@ -651,7 +651,7 @@ module Aws::BCMPricingCalculator
     CreateBillScenarioResponse.struct_class = Types::CreateBillScenarioResponse
 
     CreateWorkloadEstimateRequest.add_member(:name, Shapes::ShapeRef.new(shape: WorkloadEstimateName, required: true, location_name: "name"))
-    CreateWorkloadEstimateRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateWorkloadEstimateRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateWorkloadEstimateRequest.add_member(:rate_type, Shapes::ShapeRef.new(shape: WorkloadEstimateRateType, location_name: "rateType"))
     CreateWorkloadEstimateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateWorkloadEstimateRequest.struct_class = Types::CreateWorkloadEstimateRequest

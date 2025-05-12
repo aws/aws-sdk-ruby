@@ -3637,7 +3637,11 @@ module Aws
                             ?channel_engine_version: {
                               version: ::String?
                             },
-                            ?dry_run: bool
+                            ?dry_run: bool,
+                            ?anywhere_settings: {
+                              channel_placement_group_id: ::String?,
+                              cluster_id: ::String?
+                            }
                           ) -> _UpdateChannelResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChannelResponseSuccess
 

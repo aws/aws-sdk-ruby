@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2025-05-01)
+------------------
+
+* Feature - Adding waiter support for deployments and environments; documentation updates
+
 1.64.0 (2025-02-18)
 ------------------
 

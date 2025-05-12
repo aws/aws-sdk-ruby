@@ -55,7 +55,7 @@ module Aws::Transfer
   autoload :EndpointProvider, 'aws-sdk-transfer/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-transfer/endpoints'
 
-  GEM_VERSION = '1.116.0'
+  GEM_VERSION = '1.117.0'
 
 end
 

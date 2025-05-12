@@ -211,7 +211,8 @@ module Aws
                                        environment_variables: Array[
                                          {
                                            name: ::String,
-                                           value: ::String
+                                           value: ::String,
+                                           type: ("PLAINTEXT" | "SECRETS_MANAGER")?
                                          },
                                        ]?
                                      },
@@ -987,7 +988,8 @@ module Aws
                                        environment_variables: Array[
                                          {
                                            name: ::String,
-                                           value: ::String
+                                           value: ::String,
+                                           type: ("PLAINTEXT" | "SECRETS_MANAGER")?
                                          },
                                        ]?
                                      },

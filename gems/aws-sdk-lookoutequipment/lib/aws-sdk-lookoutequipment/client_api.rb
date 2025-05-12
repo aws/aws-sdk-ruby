@@ -251,7 +251,7 @@ module Aws::LookoutEquipment
     CreateDatasetRequest.add_member(:dataset_name, Shapes::ShapeRef.new(shape: DatasetName, required: true, location_name: "DatasetName"))
     CreateDatasetRequest.add_member(:dataset_schema, Shapes::ShapeRef.new(shape: DatasetSchema, location_name: "DatasetSchema"))
     CreateDatasetRequest.add_member(:server_side_kms_key_id, Shapes::ShapeRef.new(shape: NameOrArn, location_name: "ServerSideKmsKeyId"))
-    CreateDatasetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotenceToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateDatasetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotenceToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateDatasetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateDatasetRequest.struct_class = Types::CreateDatasetRequest
 
@@ -268,7 +268,7 @@ module Aws::LookoutEquipment
     CreateInferenceSchedulerRequest.add_member(:data_output_configuration, Shapes::ShapeRef.new(shape: InferenceOutputConfiguration, required: true, location_name: "DataOutputConfiguration"))
     CreateInferenceSchedulerRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "RoleArn"))
     CreateInferenceSchedulerRequest.add_member(:server_side_kms_key_id, Shapes::ShapeRef.new(shape: NameOrArn, location_name: "ServerSideKmsKeyId"))
-    CreateInferenceSchedulerRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotenceToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateInferenceSchedulerRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotenceToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateInferenceSchedulerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateInferenceSchedulerRequest.struct_class = Types::CreateInferenceSchedulerRequest
 
@@ -280,7 +280,7 @@ module Aws::LookoutEquipment
 
     CreateLabelGroupRequest.add_member(:label_group_name, Shapes::ShapeRef.new(shape: LabelGroupName, required: true, location_name: "LabelGroupName"))
     CreateLabelGroupRequest.add_member(:fault_codes, Shapes::ShapeRef.new(shape: FaultCodes, location_name: "FaultCodes"))
-    CreateLabelGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotenceToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateLabelGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotenceToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateLabelGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateLabelGroupRequest.struct_class = Types::CreateLabelGroupRequest
 
@@ -295,7 +295,7 @@ module Aws::LookoutEquipment
     CreateLabelRequest.add_member(:fault_code, Shapes::ShapeRef.new(shape: FaultCode, location_name: "FaultCode"))
     CreateLabelRequest.add_member(:notes, Shapes::ShapeRef.new(shape: Comments, location_name: "Notes"))
     CreateLabelRequest.add_member(:equipment, Shapes::ShapeRef.new(shape: Equipment, location_name: "Equipment"))
-    CreateLabelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotenceToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateLabelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotenceToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateLabelRequest.struct_class = Types::CreateLabelRequest
 
     CreateLabelResponse.add_member(:label_id, Shapes::ShapeRef.new(shape: LabelId, location_name: "LabelId"))
@@ -305,7 +305,7 @@ module Aws::LookoutEquipment
     CreateModelRequest.add_member(:dataset_name, Shapes::ShapeRef.new(shape: DatasetIdentifier, required: true, location_name: "DatasetName"))
     CreateModelRequest.add_member(:dataset_schema, Shapes::ShapeRef.new(shape: DatasetSchema, location_name: "DatasetSchema"))
     CreateModelRequest.add_member(:labels_input_configuration, Shapes::ShapeRef.new(shape: LabelsInputConfiguration, location_name: "LabelsInputConfiguration"))
-    CreateModelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotenceToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateModelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotenceToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateModelRequest.add_member(:training_data_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TrainingDataStartTime"))
     CreateModelRequest.add_member(:training_data_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TrainingDataEndTime"))
     CreateModelRequest.add_member(:evaluation_data_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EvaluationDataStartTime"))
@@ -327,7 +327,7 @@ module Aws::LookoutEquipment
     CreateRetrainingSchedulerRequest.add_member(:retraining_frequency, Shapes::ShapeRef.new(shape: RetrainingFrequency, required: true, location_name: "RetrainingFrequency"))
     CreateRetrainingSchedulerRequest.add_member(:lookback_window, Shapes::ShapeRef.new(shape: LookbackWindow, required: true, location_name: "LookbackWindow"))
     CreateRetrainingSchedulerRequest.add_member(:promote_mode, Shapes::ShapeRef.new(shape: ModelPromoteMode, location_name: "PromoteMode"))
-    CreateRetrainingSchedulerRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotenceToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateRetrainingSchedulerRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotenceToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateRetrainingSchedulerRequest.struct_class = Types::CreateRetrainingSchedulerRequest
 
     CreateRetrainingSchedulerResponse.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, location_name: "ModelName"))
@@ -354,7 +354,7 @@ module Aws::LookoutEquipment
     DataQualitySummary.add_member(:duplicate_timestamps, Shapes::ShapeRef.new(shape: DuplicateTimestamps, required: true, location_name: "DuplicateTimestamps"))
     DataQualitySummary.struct_class = Types::DataQualitySummary
 
-    DatasetSchema.add_member(:inline_data_schema, Shapes::ShapeRef.new(shape: InlineDataSchema, location_name: "InlineDataSchema", metadata: {"jsonvalue"=>true}))
+    DatasetSchema.add_member(:inline_data_schema, Shapes::ShapeRef.new(shape: InlineDataSchema, location_name: "InlineDataSchema", metadata: {"jsonvalue" => true}))
     DatasetSchema.struct_class = Types::DatasetSchema
 
     DatasetSummaries.member = Shapes::ShapeRef.new(shape: DatasetSummary)
@@ -414,7 +414,7 @@ module Aws::LookoutEquipment
     DescribeDatasetResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     DescribeDatasetResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedAt"))
     DescribeDatasetResponse.add_member(:status, Shapes::ShapeRef.new(shape: DatasetStatus, location_name: "Status"))
-    DescribeDatasetResponse.add_member(:schema, Shapes::ShapeRef.new(shape: InlineDataSchema, location_name: "Schema", metadata: {"jsonvalue"=>true}))
+    DescribeDatasetResponse.add_member(:schema, Shapes::ShapeRef.new(shape: InlineDataSchema, location_name: "Schema", metadata: {"jsonvalue" => true}))
     DescribeDatasetResponse.add_member(:server_side_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "ServerSideKmsKeyId"))
     DescribeDatasetResponse.add_member(:ingestion_input_configuration, Shapes::ShapeRef.new(shape: IngestionInputConfiguration, location_name: "IngestionInputConfiguration"))
     DescribeDatasetResponse.add_member(:data_quality_summary, Shapes::ShapeRef.new(shape: DataQualitySummary, location_name: "DataQualitySummary"))
@@ -477,7 +477,7 @@ module Aws::LookoutEquipment
     DescribeModelResponse.add_member(:model_arn, Shapes::ShapeRef.new(shape: ModelArn, location_name: "ModelArn"))
     DescribeModelResponse.add_member(:dataset_name, Shapes::ShapeRef.new(shape: DatasetName, location_name: "DatasetName"))
     DescribeModelResponse.add_member(:dataset_arn, Shapes::ShapeRef.new(shape: DatasetArn, location_name: "DatasetArn"))
-    DescribeModelResponse.add_member(:schema, Shapes::ShapeRef.new(shape: InlineDataSchema, location_name: "Schema", metadata: {"jsonvalue"=>true}))
+    DescribeModelResponse.add_member(:schema, Shapes::ShapeRef.new(shape: InlineDataSchema, location_name: "Schema", metadata: {"jsonvalue" => true}))
     DescribeModelResponse.add_member(:labels_input_configuration, Shapes::ShapeRef.new(shape: LabelsInputConfiguration, location_name: "LabelsInputConfiguration"))
     DescribeModelResponse.add_member(:training_data_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TrainingDataStartTime"))
     DescribeModelResponse.add_member(:training_data_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TrainingDataEndTime"))
@@ -489,7 +489,7 @@ module Aws::LookoutEquipment
     DescribeModelResponse.add_member(:training_execution_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TrainingExecutionStartTime"))
     DescribeModelResponse.add_member(:training_execution_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TrainingExecutionEndTime"))
     DescribeModelResponse.add_member(:failed_reason, Shapes::ShapeRef.new(shape: BoundedLengthString, location_name: "FailedReason"))
-    DescribeModelResponse.add_member(:model_metrics, Shapes::ShapeRef.new(shape: ModelMetrics, location_name: "ModelMetrics", metadata: {"jsonvalue"=>true}))
+    DescribeModelResponse.add_member(:model_metrics, Shapes::ShapeRef.new(shape: ModelMetrics, location_name: "ModelMetrics", metadata: {"jsonvalue" => true}))
     DescribeModelResponse.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTime"))
     DescribeModelResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     DescribeModelResponse.add_member(:server_side_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "ServerSideKmsKeyId"))
@@ -503,7 +503,7 @@ module Aws::LookoutEquipment
     DescribeModelResponse.add_member(:previous_active_model_version, Shapes::ShapeRef.new(shape: ModelVersion, location_name: "PreviousActiveModelVersion"))
     DescribeModelResponse.add_member(:previous_active_model_version_arn, Shapes::ShapeRef.new(shape: ModelVersionArn, location_name: "PreviousActiveModelVersionArn"))
     DescribeModelResponse.add_member(:previous_model_version_activated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "PreviousModelVersionActivatedAt"))
-    DescribeModelResponse.add_member(:prior_model_metrics, Shapes::ShapeRef.new(shape: ModelMetrics, location_name: "PriorModelMetrics", metadata: {"jsonvalue"=>true}))
+    DescribeModelResponse.add_member(:prior_model_metrics, Shapes::ShapeRef.new(shape: ModelMetrics, location_name: "PriorModelMetrics", metadata: {"jsonvalue" => true}))
     DescribeModelResponse.add_member(:latest_scheduled_retraining_failed_reason, Shapes::ShapeRef.new(shape: BoundedLengthString, location_name: "LatestScheduledRetrainingFailedReason"))
     DescribeModelResponse.add_member(:latest_scheduled_retraining_status, Shapes::ShapeRef.new(shape: ModelVersionStatus, location_name: "LatestScheduledRetrainingStatus"))
     DescribeModelResponse.add_member(:latest_scheduled_retraining_model_version, Shapes::ShapeRef.new(shape: ModelVersion, location_name: "LatestScheduledRetrainingModelVersion"))
@@ -588,7 +588,7 @@ module Aws::LookoutEquipment
 
     ImportDatasetRequest.add_member(:source_dataset_arn, Shapes::ShapeRef.new(shape: DatasetArn, required: true, location_name: "SourceDatasetArn"))
     ImportDatasetRequest.add_member(:dataset_name, Shapes::ShapeRef.new(shape: DatasetName, location_name: "DatasetName"))
-    ImportDatasetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotenceToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    ImportDatasetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotenceToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     ImportDatasetRequest.add_member(:server_side_kms_key_id, Shapes::ShapeRef.new(shape: NameOrArn, location_name: "ServerSideKmsKeyId"))
     ImportDatasetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ImportDatasetRequest.struct_class = Types::ImportDatasetRequest
@@ -603,7 +603,7 @@ module Aws::LookoutEquipment
     ImportModelVersionRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, location_name: "ModelName"))
     ImportModelVersionRequest.add_member(:dataset_name, Shapes::ShapeRef.new(shape: DatasetIdentifier, required: true, location_name: "DatasetName"))
     ImportModelVersionRequest.add_member(:labels_input_configuration, Shapes::ShapeRef.new(shape: LabelsInputConfiguration, location_name: "LabelsInputConfiguration"))
-    ImportModelVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotenceToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    ImportModelVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotenceToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     ImportModelVersionRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "RoleArn"))
     ImportModelVersionRequest.add_member(:server_side_kms_key_id, Shapes::ShapeRef.new(shape: NameOrArn, location_name: "ServerSideKmsKeyId"))
     ImportModelVersionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
@@ -921,7 +921,7 @@ module Aws::LookoutEquipment
     PutResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
     PutResourcePolicyRequest.add_member(:resource_policy, Shapes::ShapeRef.new(shape: Policy, required: true, location_name: "ResourcePolicy"))
     PutResourcePolicyRequest.add_member(:policy_revision_id, Shapes::ShapeRef.new(shape: PolicyRevisionId, location_name: "PolicyRevisionId"))
-    PutResourcePolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotenceToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    PutResourcePolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotenceToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     PutResourcePolicyRequest.struct_class = Types::PutResourcePolicyRequest
 
     PutResourcePolicyResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn"))
@@ -971,7 +971,7 @@ module Aws::LookoutEquipment
     StartDataIngestionJobRequest.add_member(:dataset_name, Shapes::ShapeRef.new(shape: DatasetIdentifier, required: true, location_name: "DatasetName"))
     StartDataIngestionJobRequest.add_member(:ingestion_input_configuration, Shapes::ShapeRef.new(shape: IngestionInputConfiguration, required: true, location_name: "IngestionInputConfiguration"))
     StartDataIngestionJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "RoleArn"))
-    StartDataIngestionJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotenceToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    StartDataIngestionJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotenceToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     StartDataIngestionJobRequest.struct_class = Types::StartDataIngestionJobRequest
 
     StartDataIngestionJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: IngestionJobId, location_name: "JobId"))

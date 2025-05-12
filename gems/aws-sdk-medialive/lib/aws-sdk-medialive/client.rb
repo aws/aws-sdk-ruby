@@ -7914,6 +7914,9 @@ module Aws::MediaLive
     #
     # @option params [Boolean] :dry_run
     #
+    # @option params [Types::AnywhereSettings] :anywhere_settings
+    #   Elemental anywhere settings
+    #
     # @return [Types::UpdateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateChannelResponse#channel #channel} => Types::Channel
@@ -14246,7 +14249,7 @@ module Aws::MediaLive
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.151.0'
+      context[:gem_version] = '1.153.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

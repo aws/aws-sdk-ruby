@@ -585,6 +585,7 @@ module Aws
             'SQS' => 'sqs',
             'SSM' => 'ssm',
             'SSMContacts' => 'ssm-contacts',
+            'SSMGuiConnect' => 'ssm-guiconnect',
             'SSMIncidents' => 'ssm-incidents',
             'SSMQuickSetup' => 'ssm-quicksetup',
             'SSO' => 'portal.sso',
