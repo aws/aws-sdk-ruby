@@ -39,7 +39,7 @@ module Aws
 
 
 
-          expect(CGI.parse(actual_url)).to eq(CGI.parse(expected_url))
+          expect(URI.decode_www_form(actual_url)).to eq(URI.decode_www_form(expected_url))
         end
 
         it 'can presign with legacy sts endpoint' do
@@ -64,7 +64,7 @@ module Aws
             headers: { 'X-K8s-Aws-Id' => 'my-eks-cluster' }
           )
 
-          expect(CGI.parse(actual_url)).to eq(CGI.parse(expected_url))
+          expect(URI.decode_www_form(actual_url)).to eq(URI.decode_www_form(expected_url))
         end
       end
     end

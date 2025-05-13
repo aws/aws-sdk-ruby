@@ -97,19 +97,19 @@ module Aws
             .to eq(destination_region)
 
           presigned_url = resp.context.params[:presigned_url]
-          presigned_url_params = CGI.parse(presigned_url.split('?').last)
+          presigned_url_params = URI.decode_www_form(presigned_url.split('?').last).to_h
 
           expect(presigned_url)
             .to match(/^https:\/\/ec2\.#{source_region}.amazonaws.com/)
 
-          expect(presigned_url_params['Action']).to eq(['CopySnapshot'])
-          expect(presigned_url_params['Version']).to eq(['2016-11-15'])
-          expect(presigned_url_params['DestinationRegion']).to eq([destination_region])
-          expect(presigned_url_params['SourceRegion']).to eq([source_region])
-          expect(presigned_url_params['SourceSnapshotId']).to eq([source_snapshot_id])
+          expect(presigned_url_params['Action']).to eq('CopySnapshot')
+          expect(presigned_url_params['Version']).to eq('2016-11-15')
+          expect(presigned_url_params['DestinationRegion']).to eq(destination_region)
+          expect(presigned_url_params['SourceRegion']).to eq(source_region)
+          expect(presigned_url_params['SourceSnapshotId']).to eq(source_snapshot_id)
 
           expect(presigned_url_params['X-Amz-Signature'])
-            .to eq(['c34b30736cc5cd6a10af02c1edb50aed3d7424577644fb912f676846a65311cf'])
+            .to eq('c34b30736cc5cd6a10af02c1edb50aed3d7424577644fb912f676846a65311cf')
         end
       end
 
