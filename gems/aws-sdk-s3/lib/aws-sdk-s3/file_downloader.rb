@@ -134,7 +134,7 @@ module Aws
           chunks << Part.new(
             part_number: part_number,
             size: (progress-offset),
-            params: @params.merge(range: range, is_match: etag)
+            params: @params.merge(range: range, if_match: etag)
           )
           part_number += 1
           offset = progress
