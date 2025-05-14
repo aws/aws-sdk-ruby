@@ -221,6 +221,42 @@ module Aws
           end.to raise_error(Aws::Errors::ChecksumError)
         end
 
+        it 'does not download object when ETAG does not match during multipart get by ranges' do
+          expect(client).to receive(:get_object).with({
+            bucket: 'bucket',
+            key: 'single',
+            range: "bytes=0-5242879",
+            if_match: 'ETag'
+          }).and_raise(Aws::S3::Errors::PreconditionFailed.new(nil, nil))
+
+          expect(client).to_not receive(:write)
+
+          thread = double(value: nil)
+          expect(Thread).to receive(:new).and_yield.and_return(thread)
+
+          expect do
+            single_obj.download_file(path)
+          end.to raise_error(Aws::S3::Errors::PreconditionFailed)
+        end
+
+        it 'does not download object when ETAG does not match during multipart get by parts' do
+          expect(client).to receive(:get_object).with({
+            bucket: 'bucket',
+            key: 'large',
+            part_number: 1,
+            if_match: 'ETag'
+          }).and_raise(Aws::S3::Errors::PreconditionFailed.new(nil, nil))
+
+          expect(client).to_not receive(:write)
+
+          thread = double(value: nil)
+          expect(Thread).to receive(:new).and_yield.and_return(thread)
+
+          expect do
+            large_obj.download_file(path)
+          end.to raise_error(Aws::S3::Errors::PreconditionFailed)
+        end
+
         it 'calls on_checksum_validated on single part' do
           callback_data = {called: 0}
           mutex = Mutex.new
