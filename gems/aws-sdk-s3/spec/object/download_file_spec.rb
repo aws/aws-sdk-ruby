@@ -237,7 +237,7 @@ module Aws
 
           client.stub_responses(:get_object, -> (ctx) {
             expect(ctx.params[:if_match]).to eq('test-etag')
-            Aws::S3::Errors::PreconditionFailed.new(nil, nil)
+            'PreconditionFailed'
           })
 
           thread = double(value: nil)
@@ -262,7 +262,7 @@ module Aws
 
           client.stub_responses(:get_object, -> (ctx) {
             expect(ctx.params[:if_match]).to eq('test-etag')
-            Aws::S3::Errors::PreconditionFailed.new(nil, nil)
+            'PreconditionFailed'
           })
 
           thread = double(value: nil)
