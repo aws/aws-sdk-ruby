@@ -222,14 +222,23 @@ module Aws
         end
 
         it 'does not download object when ETAG does not match during multipart get by ranges' do
-          expect(client).to receive(:get_object).with({
+          allow(client).to receive(:head_object).with({
             bucket: 'bucket',
             key: 'single',
-            range: "bytes=0-5242879",
-            if_match: 'ETag'
-          }).and_raise(Aws::S3::Errors::PreconditionFailed.new(nil, nil))
+            part_number: 1,
+          }).and_return(
+            client.stub_data(
+              :head_object,
+              content_length: 15 * one_meg,
+              parts_count: nil,
+              etag: 'test-etag'
+            )
+          )
 
-          expect(client).to_not receive(:write)
+          client.stub_responses(:get_object, -> (ctx) {
+            expect(ctx.params[:if_match]).to eq('test-etag')
+            Aws::S3::Errors::PreconditionFailed.new(nil, nil)
+          })
 
           thread = double(value: nil)
           expect(Thread).to receive(:new).and_yield.and_return(thread)
@@ -240,14 +249,21 @@ module Aws
         end
 
         it 'does not download object when ETAG does not match during multipart get by parts' do
-          expect(client).to receive(:get_object).with({
+          allow(client).to receive(:head_object).with({
             bucket: 'bucket',
-            key: 'large',
-            part_number: 1,
-            if_match: 'ETag'
-          }).and_raise(Aws::S3::Errors::PreconditionFailed.new(nil, nil))
+            key: 'large'
+          }).and_return(
+            client.stub_data(
+              :head_object,
+              content_length: 20 * one_meg,
+              etag: 'test-etag'
+            )
+          )
 
-          expect(client).to_not receive(:write)
+          client.stub_responses(:get_object, -> (ctx) {
+            expect(ctx.params[:if_match]).to eq('test-etag')
+            Aws::S3::Errors::PreconditionFailed.new(nil, nil)
+          })
 
           thread = double(value: nil)
           expect(Thread).to receive(:new).and_yield.and_return(thread)
