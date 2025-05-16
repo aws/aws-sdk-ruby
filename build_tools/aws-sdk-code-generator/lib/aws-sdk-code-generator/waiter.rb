@@ -82,30 +82,13 @@ module AwsSdkCodeGenerator
               acceptor['argument']
             )
           end
-          case acceptor['expected']
-          when Hash
-            acceptor['expected'] = convert_keys(acceptor['expected'])
-          when Array
-            acceptor['expected'] = convert_array(acceptor['expected'])
-          end
+          acceptor['expected'] = convert_value(acceptor['expected'])
         end
         HashFormatter.new(
           wrap: false,
           inline: false,
           quote_strings: true
         ).format(acceptors: acceptors)
-      end
-
-      # Underscore and symbolize all keys in hash
-      def convert_keys(hash)
-        hash.each_with_object({}) do |(key, value), result|
-          converted_key = convert_key(key)
-          result[converted_key] = convert_value(value)
-        end
-      end
-
-      def convert_key(key)
-        key.is_a?(String) ? Underscore.underscore(key).to_sym : key
       end
 
       def convert_value(value)
@@ -116,11 +99,20 @@ module AwsSdkCodeGenerator
         end
       end
 
+      # Underscore and symbolize all keys in hash
+      def convert_keys(hash)
+        hash.each_with_object({}) do |(key, value), result|
+          result[convert_key(key)] = convert_value(value)
+        end
+      end
+
+      def convert_key(key)
+        key.is_a?(String) ? Underscore.underscore(key).to_sym : key
+      end
+
       # Convert keys for every object in array
       def convert_array(array)
-        array.map do |elem|
-          elem.is_a?(Hash) ? convert_keys(elem) : elem
-        end
+        array.collect { |elem| convert_value(elem) }
       end
     end
   end
