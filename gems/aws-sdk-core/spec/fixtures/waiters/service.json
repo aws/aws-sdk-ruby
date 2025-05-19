@@ -11,23 +11,21 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{"shape":"DescribeTableInput"},
-      "output":{"shape":"DescribeTableOutput"},
+      "input":{"shape":"OperationInput"},
+      "output":{"shape":"OperationOutput"},
       "errors":[
         {"shape":"ResourceNotFoundException"}
       ]
     }
   },
   "shapes": {
-    "DescribeTableInput":{
+    "OperationInput":{
       "type":"structure",
       "members":{}
     },
-    "DescribeTableOutput":{
+    "OperationOutput":{
       "type":"structure",
       "members":{
-        "Table":{"shape":"TableDescription"},
-        "TableList":{"shape":"TableList"},
         "ComplexObject":{"shape":"ComplexObject"},
         "NumberList":{"shape":"NumberList"},
         "BooleanList":{"shape":"BooleanList"},
@@ -35,25 +33,6 @@
         "NestedList":{"shape":"NestedList"},
         "Boolean":{"shape":"BooleanMember"}
       }
-    },
-    "TableDescription":{
-      "type":"structure",
-      "members":{
-        "TableStatus":{"shape":"TableStatus"}
-      }
-    },
-    "TableStatus":{
-      "type":"string",
-      "enum":[
-        "CREATING",
-        "UPDATING",
-        "ACTIVE",
-        "FAILED"
-      ]
-    },
-    "TableList":{
-      "type":"list",
-      "member":{"shape":"TableDescription"}
     },
     "ComplexObject":{
       "type":"structure",
