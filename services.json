@@ -1109,7 +1109,7 @@
     "models": "ssm/2014-11-06"
   },
   "SSMContacts": {
-    "models": "ssm-contacts/2021-05-03",
+    "models": "ssm-contacts/2021-05-03"
   },
   "SSMGuiConnect": {
     "models": "ssm-guiconnect/2021-05-01"
